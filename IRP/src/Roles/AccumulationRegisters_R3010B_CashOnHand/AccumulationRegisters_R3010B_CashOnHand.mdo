@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b9e29d90-4784-4d79-b752-d55af8135950">
-  <name>AccumulationRegisters_R3010B_CashOnHand</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3010B CashOnHand</value>
-  </synonym>
+ <name>AccumulationRegisters_R3010B_CashOnHand</name>
+ <synonym>
+  <key>en</key>
+  <value>D58BAAE9-FDA0-4541-111F-F373227B7A29___</value>
+ </synonym>
 </mdclass:Role>

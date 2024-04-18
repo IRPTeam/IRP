@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8e1cb4f5-b061-4b20-bb2d-1566514c37bf">
-  <name>Document_ChequeBondTransaction</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Cheque bond transaction&quot;</value>
-  </synonym>
+ <name>Document_ChequeBondTransaction</name>
+ <synonym>
+  <key>en</key>
+  <value>25ED038E-CDF6-33D6-6010-02EEB91A84B5</value>
+ </synonym>
 </mdclass:Role>

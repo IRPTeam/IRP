@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8ca0f55d-30a2-49e8-b39c-81c9d1d78f30">
-  <name>UseContactInformation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use contact information</value>
-  </synonym>
-  <location>Constant.UseContactInformation</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.IDInfoSets</content>
-  <content>Catalog.IDInfoAddresses</content>
-  <content>CommonForm.EditIDInfo</content>
-  <content>CommonCommand.IDInfo</content>
-  <content>InformationRegister.IDInfo</content>
-  <content>ChartOfCharacteristicTypes.IDInfoTypes</content>
+ <name>UseContactInformation</name>
+ <synonym>
+  <key>en</key>
+  <value>81010556-A6F8-BEC2-2569-9AC120F2A9DE</value>
+ </synonym>
+ <location>Constant.UseContactInformation</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.IDInfoSets</content>
+ <content>Catalog.IDInfoAddresses</content>
+ <content>CommonForm.EditIDInfo</content>
+ <content>CommonCommand.IDInfo</content>
+ <content>InformationRegister.IDInfo</content>
+ <content>ChartOfCharacteristicTypes.IDInfoTypes</content>
 </mdclass:FunctionalOption>

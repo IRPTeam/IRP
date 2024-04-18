@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b6f6007a-f02b-4b04-a000-bc1528345239">
-  <producedTypes>
-    <objectType typeId="7ccb1ab6-0067-47d6-87ef-1d190b1cdedc" valueTypeId="701e47b1-b004-4018-ab45-a06bd13d5a89"/>
-    <managerType typeId="9c1442e2-8802-4ad2-afbf-f2324d484521" valueTypeId="50e5b7fb-92ac-4ba5-802c-a8a61f49dd0b"/>
-  </producedTypes>
-  <name>R3010_CashOnHand</name>
+ <producedTypes>
+  <objectType typeId="7ccb1ab6-0067-47d6-87ef-1d190b1cdedc" valueTypeId="701e47b1-b004-4018-ab45-a06bd13d5a89"/>
+  <managerType typeId="9c1442e2-8802-4ad2-afbf-f2324d484521" valueTypeId="50e5b7fb-92ac-4ba5-802c-a8a61f49dd0b"/>
+ </producedTypes>
+ <name>R3010_CashOnHand</name>
+ <synonym>
+  <key>en</key>
+  <value>D66E0F69-892D-7CFA-A8BD-DC175191871A</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R3010_CashOnHand.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="c1d5c34c-17b7-4de6-97ee-756cdf0984ff">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R3010 Cash on hand</value>
+   <key>en</key>
+   <value>BD100DBF-991A-9E90-0612-25C43E9CCBD1</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R3010_CashOnHand.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="c1d5c34c-17b7-4de6-97ee-756cdf0984ff">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

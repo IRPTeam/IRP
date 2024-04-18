@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f440eb6a-9aed-4f1b-8680-17d5fd8102c7">
-  <name>UniversalPrintServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Universal print server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>UniversalPrintServer</name>
+ <synonym>
+  <key>en</key>
+  <value>69F0D90E-6ADE-A97B-B0F0-08721DEC80AF</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

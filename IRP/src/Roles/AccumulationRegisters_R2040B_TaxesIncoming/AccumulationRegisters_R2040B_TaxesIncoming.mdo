@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="37df6424-2477-4a4d-b4d7-a16285e81c5b">
-  <name>AccumulationRegisters_R2040B_TaxesIncoming</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R2040B TaxesIncoming</value>
-  </synonym>
+ <name>AccumulationRegisters_R2040B_TaxesIncoming</name>
+ <synonym>
+  <key>en</key>
+  <value>CD8EB667-8B5C-5463-313A-AE1BE7E880E4______</value>
+ </synonym>
 </mdclass:Role>

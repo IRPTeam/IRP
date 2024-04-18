@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4b7e2761-4ff2-4f90-a78f-398fa6a606eb">
-  <name>AccumulationRegisters_R4016B_InternalSupplyRequestOrdering</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4016B InternalSupplyRequestOrdering</value>
-  </synonym>
+ <name>AccumulationRegisters_R4016B_InternalSupplyRequestOrdering</name>
+ <synonym>
+  <key>en</key>
+  <value>62D110DF-121E-19BA-AB0B-B1A35314B96A______________________</value>
+ </synonym>
 </mdclass:Role>

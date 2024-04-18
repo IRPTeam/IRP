@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="200cc065-2567-42dd-96d6-0c23354bb268">
-  <producedTypes>
-    <refType typeId="f16d5028-b411-49d8-a18b-46a67785b2ba" valueTypeId="6a4cb081-0d43-4c70-b1b4-29e7e7d139b6"/>
-    <listType typeId="33259485-bd0f-4177-84fd-c7baf676ff11" valueTypeId="96fa2036-2ab1-4505-b641-45ca28edac9f"/>
-    <managerType typeId="356c8f6b-f434-4fdc-a05c-74226d68018b" valueTypeId="528e8290-2699-4864-99e3-df3577b808eb"/>
-  </producedTypes>
-  <name>MaterialsCostWriteOff</name>
+ <producedTypes>
+  <refType typeId="f16d5028-b411-49d8-a18b-46a67785b2ba" valueTypeId="6a4cb081-0d43-4c70-b1b4-29e7e7d139b6"/>
+  <listType typeId="33259485-bd0f-4177-84fd-c7baf676ff11" valueTypeId="96fa2036-2ab1-4505-b641-45ca28edac9f"/>
+  <managerType typeId="356c8f6b-f434-4fdc-a05c-74226d68018b" valueTypeId="528e8290-2699-4864-99e3-df3577b808eb"/>
+ </producedTypes>
+ <name>MaterialsCostWriteOff</name>
+ <synonym>
+  <key>en</key>
+  <value>A164687D-EBF0-C6BE-E26F-FD36CEE130C7</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="4a500dc8-1967-4cf1-8312-f0ff58baf356">
+  <name>IncludeToWorkCost</name>
   <synonym>
-    <key>en</key>
-    <value>Materials cost write off</value>
+   <key>en</key>
+   <value>61CD81AE-FB13-B131-1A4F-F543BF117A67</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="4a500dc8-1967-4cf1-8312-f0ff58baf356">
-    <name>IncludeToWorkCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Include to work cost</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="180e21e7-5b29-4ac6-a4d5-996f9ef022b8">
-    <name>NotInclude</name>
-    <synonym>
-      <key>en</key>
-      <value>Not include</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="180e21e7-5b29-4ac6-a4d5-996f9ef022b8">
+  <name>NotInclude</name>
+  <synonym>
+   <key>en</key>
+   <value>7B627730-EC51-FB51-10C3-351445328DE6</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

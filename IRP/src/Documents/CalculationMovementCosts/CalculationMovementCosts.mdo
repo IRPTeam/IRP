@@ -1,166 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="42ccfda9-7dab-478f-af99-b042ab7f0479">
-  <producedTypes>
-    <objectType typeId="1d56b970-0fbf-48a2-95ca-5bc99d45f012" valueTypeId="a8e86db8-8b0b-432b-972e-11a05a6879f1"/>
-    <refType typeId="831a5e83-d12e-4dd8-a715-b8a1571d3aa0" valueTypeId="ae74cfc6-eb24-4cef-ac57-4deb947e42b6"/>
-    <selectionType typeId="2da5ffbd-06ed-487d-a845-75bc8b5c2fea" valueTypeId="87041da0-0a53-429f-8a77-24c4ed1e195f"/>
-    <listType typeId="64ee6f71-4fea-486b-b534-b0cfd2665678" valueTypeId="fec6b280-b823-4bd1-9a63-52620869e4f6"/>
-    <managerType typeId="abfa6e4b-96ac-40b3-8a2a-ee10a6a2a294" valueTypeId="e9984db2-3c5f-4a38-84b6-a21ed5949b79"/>
-  </producedTypes>
-  <name>CalculationMovementCosts</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="42ccfda9-7dab-478f-af99-b042ab7f0479">
+ <producedTypes>
+  <objectType typeId="1d56b970-0fbf-48a2-95ca-5bc99d45f012" valueTypeId="a8e86db8-8b0b-432b-972e-11a05a6879f1"/>
+  <refType typeId="831a5e83-d12e-4dd8-a715-b8a1571d3aa0" valueTypeId="ae74cfc6-eb24-4cef-ac57-4deb947e42b6"/>
+  <selectionType typeId="2da5ffbd-06ed-487d-a845-75bc8b5c2fea" valueTypeId="87041da0-0a53-429f-8a77-24c4ed1e195f"/>
+  <listType typeId="64ee6f71-4fea-486b-b534-b0cfd2665678" valueTypeId="fec6b280-b823-4bd1-9a63-52620869e4f6"/>
+  <managerType typeId="abfa6e4b-96ac-40b3-8a2a-ee10a6a2a294" valueTypeId="e9984db2-3c5f-4a38-84b6-a21ed5949b79"/>
+ </producedTypes>
+ <name>CalculationMovementCosts</name>
+ <synonym>
+  <key>en</key>
+  <value>CCB3CEBC-D9EC-CD07-7D85-570DBA93C916</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.CalculationMovementCosts.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>AB959FC1-067F-442C-C7A3-301D97FC6CBB</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>F86DE0AE-57FF-9541-1AA6-63C1E283BA1B</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.CalculationMovementCosts.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.CalculationMovementCosts.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.CalculationMovementCosts.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
+ <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
+ <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
+ <registerRecords>InformationRegister.T6080S_ReallocatedBatchesAmountValues</registerRecords>
+ <registerRecords>InformationRegister.T8510S_FixedAssetsInfo</registerRecords>
+ <registerRecords>InformationRegister.T6090S_CompositeBatchesAmountValues</registerRecords>
+ <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>
+ <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
+ <registerRecords>InformationRegister.T6095S_WriteOffBatchesInfo</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="500ee3cd-8578-42cf-b4c4-4ba12cc07a58">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Calculation movement costs</value>
+   <key>en</key>
+   <value>D9081E1D-9F8A-F9D8-8B1A-A7C95BF912BB</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.CalculationMovementCosts.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Calculation movement costs</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Calculations movement costs</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.CalculationMovementCosts.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.CalculationMovementCosts.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.CalculationMovementCosts.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
-  <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
-  <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
-  <registerRecords>InformationRegister.T6080S_ReallocatedBatchesAmountValues</registerRecords>
-  <registerRecords>InformationRegister.T8510S_FixedAssetsInfo</registerRecords>
-  <registerRecords>InformationRegister.T6090S_CompositeBatchesAmountValues</registerRecords>
-  <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>
-  <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
-  <registerRecords>InformationRegister.T6095S_WriteOffBatchesInfo</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="500ee3cd-8578-42cf-b4c4-4ba12cc07a58">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="5d3c6903-58cb-498b-9ae4-69b8803f7a25">
-    <name>BeginDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ec7eb616-a6ad-4b42-9b8f-d5ca4bd1f64a">
-    <name>EndDate</name>
-    <synonym>
-      <key>en</key>
-      <value>End date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="0b3cf8e2-b6de-47ab-82e1-f174a59aaf95">
-    <name>CalculationMode</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation mode</value>
-    </synonym>
-    <type>
-      <types>EnumRef.CalculationMode</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="04c7b321-5fdc-436d-979a-9039fd3584f8">
-    <name>RaiseOnCalculationError</name>
-    <synonym>
-      <key>en</key>
-      <value>Raise on calculation error</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="bafc5961-e562-4d12-a3eb-28a27363e500">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="490d6e07-cbe8-4dfa-917d-fb11cd9289ac">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5204773a-a9b0-4681-b771-273f339e2e36">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5d3c6903-58cb-498b-9ae4-69b8803f7a25">
+  <name>BeginDate</name>
+  <synonym>
+   <key>en</key>
+   <value>FE87B8CF-E68B-38E5-5304-422D01A38EC8</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ec7eb616-a6ad-4b42-9b8f-d5ca4bd1f64a">
+  <name>EndDate</name>
+  <synonym>
+   <key>en</key>
+   <value>84638F82-0E49-8028-8C42-2350DDF24DED</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0b3cf8e2-b6de-47ab-82e1-f174a59aaf95">
+  <name>CalculationMode</name>
+  <synonym>
+   <key>en</key>
+   <value>D14C473F-BA16-AB44-411D-DB09568BA974</value>
+  </synonym>
+  <type>
+   <types>EnumRef.CalculationMode</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="04c7b321-5fdc-436d-979a-9039fd3584f8">
+  <name>RaiseOnCalculationError</name>
+  <synonym>
+   <key>en</key>
+   <value>FEA8E46F-9402-F597-794E-ED8C3F784389</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="bafc5961-e562-4d12-a3eb-28a27363e500">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>91265603-E98D-416A-AC9B-B846B9A8FA8E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="490d6e07-cbe8-4dfa-917d-fb11cd9289ac">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>B966395D-47A5-C0BA-A94F-F11D8FE82CA2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5204773a-a9b0-4681-b771-273f339e2e36">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>32612BD4-7C0C-C0B7-70EB-B10EA6EC324B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Document>

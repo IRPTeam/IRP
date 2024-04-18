@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68142b0d-7725-4dea-8b2f-fa1dae71df80">
-  <name>KeysCatalogs</name>
-  <synonym>
-    <key>en</key>
-    <value>Keys catalogs</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.AdvancesKeys</content>
-  <content>Catalog.Batches</content>
-  <content>Catalog.BatchKeys</content>
-  <content>Catalog.PriceKeys</content>
-  <content>Catalog.RowIDs</content>
-  <content>Catalog.TransactionsKeys</content>
-  <content>Catalog.Files</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>KeysCatalogs</name>
+ <synonym>
+  <key>en</key>
+  <value>D3B19BAF-E964-67B6-6B2D-DABDD4FD738C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.AdvancesKeys</content>
+ <content>Catalog.Batches</content>
+ <content>Catalog.BatchKeys</content>
+ <content>Catalog.PriceKeys</content>
+ <content>Catalog.RowIDs</content>
+ <content>Catalog.TransactionsKeys</content>
+ <content>Catalog.Files</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

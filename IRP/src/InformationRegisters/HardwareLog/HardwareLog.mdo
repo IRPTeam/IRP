@@ -1,188 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="36a5d296-28dd-4083-8fc1-d3f6e78d5291">
-  <producedTypes>
-    <selectionType typeId="ec77c7df-c3f7-4cca-8f64-05ca5f085981" valueTypeId="12134d7a-0c94-43f3-add0-d15a22156673"/>
-    <listType typeId="9fd2d550-06ad-47da-ba02-06acdedca90c" valueTypeId="aee8e252-4308-462e-b8ec-38fa9beb04f6"/>
-    <managerType typeId="1ae0c4c3-a545-4ec3-ae1e-a7a21fdf8e64" valueTypeId="ba2c9c9f-1410-4fba-a55a-9afe87339400"/>
-    <recordSetType typeId="74cd871b-d812-44df-8006-3407705e57c1" valueTypeId="8dad6b28-67e5-41b2-8a0b-fa2dea2354e6"/>
-    <recordKeyType typeId="734d16a3-34dc-4653-8c70-003e54fa8d60" valueTypeId="e8648f92-1af9-4493-a0ea-cc3302cd2412"/>
-    <recordType typeId="1952f0e5-e975-4e7d-928e-9de8919a7d44" valueTypeId="4aa84c0f-b136-424e-a280-9dcdff8f67a0"/>
-    <recordManagerType typeId="f453d5be-9838-4686-b3a1-0854e40d75f7" valueTypeId="4d658433-d0a9-43d2-bb75-db128ea1ce43"/>
-  </producedTypes>
-  <name>HardwareLog</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="36a5d296-28dd-4083-8fc1-d3f6e78d5291">
+ <producedTypes>
+  <selectionType typeId="ec77c7df-c3f7-4cca-8f64-05ca5f085981" valueTypeId="12134d7a-0c94-43f3-add0-d15a22156673"/>
+  <listType typeId="9fd2d550-06ad-47da-ba02-06acdedca90c" valueTypeId="aee8e252-4308-462e-b8ec-38fa9beb04f6"/>
+  <managerType typeId="1ae0c4c3-a545-4ec3-ae1e-a7a21fdf8e64" valueTypeId="ba2c9c9f-1410-4fba-a55a-9afe87339400"/>
+  <recordSetType typeId="74cd871b-d812-44df-8006-3407705e57c1" valueTypeId="8dad6b28-67e5-41b2-8a0b-fa2dea2354e6"/>
+  <recordKeyType typeId="734d16a3-34dc-4653-8c70-003e54fa8d60" valueTypeId="e8648f92-1af9-4493-a0ea-cc3302cd2412"/>
+  <recordType typeId="1952f0e5-e975-4e7d-928e-9de8919a7d44" valueTypeId="4aa84c0f-b136-424e-a280-9dcdff8f67a0"/>
+  <recordManagerType typeId="f453d5be-9838-4686-b3a1-0854e40d75f7" valueTypeId="4d658433-d0a9-43d2-bb75-db128ea1ce43"/>
+ </producedTypes>
+ <name>HardwareLog</name>
+ <synonym>
+  <key>en</key>
+  <value>99FD46BE-82F8-FCDA-A00D-D46B78BBB080</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.HardwareLog.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.HardwareLog.Form.ListForm</defaultListForm>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>0B01D8FD-095D-BCD3-3075-5CE2C9C69D1A</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>29C7480A-12BE-8F24-44FB-BDC71F035BF8</value>
+ </listPresentation>
+ <resources uuid="e69f1b2a-96ba-43d6-a86b-9bead233c059">
+  <name>Method</name>
   <synonym>
-    <key>en</key>
-    <value>Hardware log</value>
+   <key>en</key>
+   <value>528470FD-7ABE-29B0-0B30-0273CA65FFF9</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.HardwareLog.Form.RecordForm</defaultRecordForm>
-  <defaultListForm>InformationRegister.HardwareLog.Form.ListForm</defaultListForm>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Hardware log</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Hardware logs</value>
-  </listPresentation>
-  <resources uuid="e69f1b2a-96ba-43d6-a86b-9bead233c059">
-    <name>Method</name>
-    <synonym>
-      <key>en</key>
-      <value>Method</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="79feccdb-7e0c-40b2-bea8-20c880539dbb">
-    <name>Request</name>
-    <synonym>
-      <key>en</key>
-      <value>Request</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="6a70f7e7-df04-404c-a752-ad86c83151ad">
-    <name>Data</name>
-    <synonym>
-      <key>en</key>
-      <value>Data</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="78e2874f-7e61-47f7-a99c-d1f01263f753">
-    <name>Result</name>
-    <synonym>
-      <key>en</key>
-      <value>Result</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="08be0c27-f6ba-4fd9-ad3b-b17d813e8e48">
-    <name>Hardware</name>
-    <synonym>
-      <key>en</key>
-      <value>Hardware</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Hardware</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="7945b88b-3c6c-49dd-bae0-073f7b49761a">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>15</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="aaf89ea4-cf1f-46cb-a1c2-2ed28a1b7848">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c11face1-72f0-4f2e-a014-741707416bb3">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2ae02893-140c-4074-b87d-db379d9b78d9">
-    <name>LogAnalyze</name>
-    <synonym>
-      <key>en</key>
-      <value>Log analyze</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="3c0d1b37-bfbb-400c-98fc-a190a12c339b">
-    <name>AnalyzeLog</name>
-    <synonym>
-      <key>en</key>
-      <value>Analyze log</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>CatalogRef.Hardware</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="79feccdb-7e0c-40b2-bea8-20c880539dbb">
+  <name>Request</name>
+  <synonym>
+   <key>en</key>
+   <value>148316B2-D808-8276-6E41-1CC5CE857BED</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="6a70f7e7-df04-404c-a752-ad86c83151ad">
+  <name>Data</name>
+  <synonym>
+   <key>en</key>
+   <value>EB66E8F4-C9BB-E3A2-277A-ADF71B6BD3C7</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="78e2874f-7e61-47f7-a99c-d1f01263f753">
+  <name>Result</name>
+  <synonym>
+   <key>en</key>
+   <value>1A36CD1F-286F-C1B5-59CB-B929C4C0A0C4</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="a5738c5a-4006-4a59-9c26-4552a2c83cf3">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>07838CD7-F6F4-F9F0-0ACE-EED9DE96081D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="08be0c27-f6ba-4fd9-ad3b-b17d813e8e48">
+  <name>Hardware</name>
+  <synonym>
+   <key>en</key>
+   <value>D02956D3-23B2-DD83-37A2-27DDE37AE207</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Hardware</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="7945b88b-3c6c-49dd-bae0-073f7b49761a">
+  <name>Date</name>
+  <synonym>
+   <key>en</key>
+   <value>2F25B50A-3A9A-A62F-F7FF-F6B8917C39D6</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>15</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="aaf89ea4-cf1f-46cb-a1c2-2ed28a1b7848">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6EE2CC36-BA11-6324-48CC-C02D1F261262</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c11face1-72f0-4f2e-a014-741707416bb3">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5FBA08BE-F913-D37C-C9F4-406346952975</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2ae02893-140c-4074-b87d-db379d9b78d9">
+  <name>LogAnalyze</name>
+  <synonym>
+   <key>en</key>
+   <value>CCB5CECD-C584-C567-7B4F-FEEDAC538DE2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="3c0d1b37-bfbb-400c-98fc-a190a12c339b">
+  <name>AnalyzeLog</name>
+  <synonym>
+   <key>en</key>
+   <value>74131543-A649-E237-7C99-9B520440B674</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>CatalogRef.Hardware</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:InformationRegister>

@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e319bf6f-c225-4a0d-9fd9-549e13b1dbe0">
-  <producedTypes>
-    <refType typeId="41897b99-4b59-4d1b-8ca5-aed6c136776c" valueTypeId="b58b55ea-cad6-49f1-af78-18a40d1b59a6"/>
-    <listType typeId="46737127-bd64-4eea-b92a-cef876ef7ef6" valueTypeId="dc6e9244-3527-4bb8-bb51-f60731d0faf5"/>
-    <managerType typeId="2bfafd0c-2ad4-4938-8a4f-15cc98464f03" valueTypeId="08035db0-ac55-48b6-bd79-569fdbc4fd33"/>
-  </producedTypes>
-  <name>AgreementTypes</name>
+ <producedTypes>
+  <refType typeId="41897b99-4b59-4d1b-8ca5-aed6c136776c" valueTypeId="b58b55ea-cad6-49f1-af78-18a40d1b59a6"/>
+  <listType typeId="46737127-bd64-4eea-b92a-cef876ef7ef6" valueTypeId="dc6e9244-3527-4bb8-bb51-f60731d0faf5"/>
+  <managerType typeId="2bfafd0c-2ad4-4938-8a4f-15cc98464f03" valueTypeId="08035db0-ac55-48b6-bd79-569fdbc4fd33"/>
+ </producedTypes>
+ <name>AgreementTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>B14C7C15-5A99-7015-5F50-0C46B59A1694</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="578a44a6-4ba2-449e-9053-6b7fbe143f91">
+  <name>Customer</name>
   <synonym>
-    <key>en</key>
-    <value>Partner term types</value>
+   <key>en</key>
+   <value>C1B481CE-C8E8-8C77-7896-672D48115D61</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="578a44a6-4ba2-449e-9053-6b7fbe143f91">
-    <name>Customer</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="01eff728-d491-46eb-8a1c-a99c70c7e375">
-    <name>Vendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Vendor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="614b37ec-88bc-4496-966a-7c4aad559e56">
-    <name>Consignor</name>
-    <synonym>
-      <key>en</key>
-      <value>Consignor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5a4ae7b2-20b2-4b04-acf9-c19f12688457">
-    <name>TradeAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Trade agent</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="863030c4-f313-4613-8f13-f466e1a238d8">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="01eff728-d491-46eb-8a1c-a99c70c7e375">
+  <name>Vendor</name>
+  <synonym>
+   <key>en</key>
+   <value>A2FEDF53-32E7-982D-DFF2-21427A445D72</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="614b37ec-88bc-4496-966a-7c4aad559e56">
+  <name>Consignor</name>
+  <synonym>
+   <key>en</key>
+   <value>470F1072-645E-26BE-E81C-CBA33EBA4AA7</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5a4ae7b2-20b2-4b04-acf9-c19f12688457">
+  <name>TradeAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>7C2B71DD-2D87-361F-FF43-368B34C2D39A</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="863030c4-f313-4613-8f13-f466e1a238d8">
+  <name>Other</name>
+  <synonym>
+   <key>en</key>
+   <value>2D71E747-3FCF-DE85-537D-D4EACD0CDAC2</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

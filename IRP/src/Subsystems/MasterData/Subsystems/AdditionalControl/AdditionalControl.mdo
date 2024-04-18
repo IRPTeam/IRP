@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc52172b-19a1-4645-97a7-aa10016cbb70">
-  <name>AdditionalControl</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional control</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>CommonModule.AdditionalDocumentTableControl</content>
-  <content>Report.D0012_AdditionalDocumentTablesCheck</content>
-  <content>DataProcessor.FixDocumentProblems</content>
-  <content>CommonModule.AdditionalDocumentTableControlReuse</content>
-  <content>FunctionalOption.UseAdditionalTableControlDocument</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>AdditionalControl</name>
+ <synonym>
+  <key>en</key>
+  <value>575BB4D0-8BD1-39A2-2B34-44940786A616</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>CommonModule.AdditionalDocumentTableControl</content>
+ <content>Report.D0012_AdditionalDocumentTablesCheck</content>
+ <content>DataProcessor.FixDocumentProblems</content>
+ <content>CommonModule.AdditionalDocumentTableControlReuse</content>
+ <content>FunctionalOption.UseAdditionalTableControlDocument</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

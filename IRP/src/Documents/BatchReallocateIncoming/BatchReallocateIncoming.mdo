@@ -1,201 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38e8fc21-55d5-400f-a497-d611ed847b64">
-  <producedTypes>
-    <objectType typeId="f04d6717-7695-4678-932c-4e082ca2d29d" valueTypeId="d0cc3bd9-23c6-4cad-920d-bcddb7dee4df"/>
-    <refType typeId="ddd39994-17ec-4e45-8583-53f1b2c8f7c0" valueTypeId="42dcc6fe-4890-4ef9-b020-15c22c35362b"/>
-    <selectionType typeId="39c50d38-1b97-4c38-958b-efd818e423f8" valueTypeId="db710b52-e350-41e5-bffa-abbeb9043788"/>
-    <listType typeId="21008f29-7209-413c-8393-363f42edefc6" valueTypeId="f763fdec-0e8f-4721-b82a-21afa20dbbc5"/>
-    <managerType typeId="58ef5954-d919-436c-9b98-a3ebc0ae9ce1" valueTypeId="77fc5283-ecb3-4860-b755-582aea31ea6a"/>
-  </producedTypes>
-  <name>BatchReallocateIncoming</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="38e8fc21-55d5-400f-a497-d611ed847b64">
+ <producedTypes>
+  <objectType typeId="f04d6717-7695-4678-932c-4e082ca2d29d" valueTypeId="d0cc3bd9-23c6-4cad-920d-bcddb7dee4df"/>
+  <refType typeId="ddd39994-17ec-4e45-8583-53f1b2c8f7c0" valueTypeId="42dcc6fe-4890-4ef9-b020-15c22c35362b"/>
+  <selectionType typeId="39c50d38-1b97-4c38-958b-efd818e423f8" valueTypeId="db710b52-e350-41e5-bffa-abbeb9043788"/>
+  <listType typeId="21008f29-7209-413c-8393-363f42edefc6" valueTypeId="f763fdec-0e8f-4721-b82a-21afa20dbbc5"/>
+  <managerType typeId="58ef5954-d919-436c-9b98-a3ebc0ae9ce1" valueTypeId="77fc5283-ecb3-4860-b755-582aea31ea6a"/>
+ </producedTypes>
+ <name>BatchReallocateIncoming</name>
+ <synonym>
+  <key>en</key>
+  <value>C6E745BA-3759-338D-D9C3-38165F4C29EF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.BatchReallocateIncoming.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>65FFDAAC-2E8F-7405-5A61-1CC44BDD979D</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>E0BCC642-01F5-F469-9F0C-C93A2937E484</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.BatchReallocateIncoming.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.BatchReallocateIncoming.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.BatchReallocateIncoming.Form.ChoiceForm</defaultChoiceForm>
+ <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+ <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="cb94110f-4e19-47a9-96fd-97c003afdbd9">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Batch reallocate incoming</value>
+   <key>en</key>
+   <value>73ADDFB9-7164-DB70-0500-06C9DAC08766</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.BatchReallocateIncoming.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1a895331-f624-421c-8ed1-6ecdcc816e4a">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>DD3E47CD-BAD7-6A93-3BB4-49F0CAFDA123</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.Unbundling</types>
+   <types>DocumentRef.OpeningEntry</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.StockAdjustmentAsSurplus</types>
+   <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+   <types>DocumentRef.Bundling</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="59f20340-3eba-485f-96e6-44a23fa859ab">
+  <name>BatchReallocate</name>
+  <synonym>
+   <key>en</key>
+   <value>F06E39FC-790B-1094-4DFA-A3579B6CA04A</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f6357b88-2412-4b28-9942-9da94027d5a3">
+  <name>Outgoing</name>
+  <synonym>
+   <key>en</key>
+   <value>E821783F-7C35-CE21-1133-3556D43B2479</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.BatchReallocateOutgoing</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="ba1da1e5-da19-4067-88ba-258ed626c473">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>381338F8-262E-11A5-5454-4EC817521B69</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4ee1e274-a088-4fb4-a8fd-56eac88f4804">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>4001932A-A47D-C07A-A52C-CE1D78DE18A7</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="66cf1854-fdc9-444d-aaf6-dd205d487121">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>D94A00CF-A9B6-451B-B3C4-4905746427BD</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="af20100f-1e42-4e23-bb61-c6807fa1ea9c">
+  <producedTypes>
+   <objectType typeId="c3e9f239-c97c-404d-8b5d-207c43cac006" valueTypeId="eb5bc380-f338-4ff5-bcd9-7c292f3b6941"/>
+   <rowType typeId="db3fd1f3-3edb-4798-83e9-d7d4e67abbdb" valueTypeId="f302a870-5235-410d-b3e2-0e354dfd4500"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>en</key>
+   <value>905364C4-CA23-17D5-5B63-3F4725969650</value>
+  </synonym>
+  <attributes uuid="96b322e8-a637-468b-82aa-aa00c543a850">
+   <name>ItemKey</name>
+   <synonym>
     <key>en</key>
-    <value>Batch reallocate incoming</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>42D76C48-06F7-75A0-0163-3BC6E22ED801</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="25194771-e9fe-47d9-a6a0-1578a27b1bcd">
+   <name>Store</name>
+   <synonym>
     <key>en</key>
-    <value>Batch reallocate incomings</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.BatchReallocateIncoming.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.BatchReallocateIncoming.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.BatchReallocateIncoming.Form.ChoiceForm</defaultChoiceForm>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="cb94110f-4e19-47a9-96fd-97c003afdbd9">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>AC9C1F5D-E27D-E799-9028-8C78BEBE43E7</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Stores</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.BatchReallocateIncoming.Attribute.Company</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="1a895331-f624-421c-8ed1-6ecdcc816e4a">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.StockAdjustmentAsSurplus</types>
-      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-      <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9398e525-a9a0-4e3f-9bd3-1c25118c2080">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>5A30A813-CA7E-4F22-2AAA-A2355A9A3B27</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="59f20340-3eba-485f-96e6-44a23fa859ab">
-    <name>BatchReallocate</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch reallocate</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CalculationMovementCosts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f6357b88-2412-4b28-9942-9da94027d5a3">
-    <name>Outgoing</name>
-    <synonym>
-      <key>en</key>
-      <value>Outgoing</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.BatchReallocateOutgoing</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="ba1da1e5-da19-4067-88ba-258ed626c473">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4ee1e274-a088-4fb4-a8fd-56eac88f4804">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="66cf1854-fdc9-444d-aaf6-dd205d487121">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="af20100f-1e42-4e23-bb61-c6807fa1ea9c">
-    <producedTypes>
-      <objectType typeId="c3e9f239-c97c-404d-8b5d-207c43cac006" valueTypeId="eb5bc380-f338-4ff5-bcd9-7c292f3b6941"/>
-      <rowType typeId="db3fd1f3-3edb-4798-83e9-d7d4e67abbdb" valueTypeId="f302a870-5235-410d-b3e2-0e354dfd4500"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="96b322e8-a637-468b-82aa-aa00c543a850">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="25194771-e9fe-47d9-a6a0-1578a27b1bcd">
-      <name>Store</name>
-      <synonym>
-        <key>en</key>
-        <value>Store</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Stores</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.BatchReallocateIncoming.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9398e525-a9a0-4e3f-9bd3-1c25118c2080">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+ </tabularSections>
 </mdclass:Document>

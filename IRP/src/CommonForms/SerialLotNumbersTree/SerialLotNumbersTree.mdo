@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="409cbb90-70ab-4ef3-ab5f-f549aeab4f57">
-  <name>SerialLotNumbersTree</name>
-  <synonym>
-    <key>en</key>
-    <value>Serial lot numbers tree</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>SerialLotNumbersTree</name>
+ <synonym>
+  <key>en</key>
+  <value>3EB7248F-6EB3-5535-543F-F5E991D28168</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

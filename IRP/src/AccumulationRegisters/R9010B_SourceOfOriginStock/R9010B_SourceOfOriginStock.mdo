@@ -1,116 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6d83a5e0-6356-4f25-8fdd-08c15039d258">
-  <producedTypes>
-    <selectionType typeId="533c94d1-0e05-48c3-8cb3-18d1ba8a7f32" valueTypeId="7d79be7a-a181-45d3-9972-92faed393fe5"/>
-    <listType typeId="19e42278-c05b-448d-93fb-561e1d880b48" valueTypeId="2a0581ce-9ac1-4a8a-878c-eecb2a41db4e"/>
-    <managerType typeId="80267a80-4d2d-409c-afa2-3b8ac5c7293e" valueTypeId="6c66f82f-298a-42b3-b1e4-ed33723edb4e"/>
-    <recordSetType typeId="72787921-6b51-46a1-81e3-feb602476d93" valueTypeId="944a1553-2a36-4b30-ac3e-2961b89b4daa"/>
-    <recordKeyType typeId="4158703e-eb49-41fd-87b0-d47f5a280cfe" valueTypeId="dd3c5b17-a796-4f6d-aec1-a7c3fb9472b3"/>
-    <recordType typeId="6d2bd507-2d2c-4cdb-b491-ba7ea99eab4e" valueTypeId="f16ef89d-c795-4991-9ae3-a4299972896c"/>
-  </producedTypes>
-  <name>R9010B_SourceOfOriginStock</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6d83a5e0-6356-4f25-8fdd-08c15039d258">
+ <producedTypes>
+  <selectionType typeId="533c94d1-0e05-48c3-8cb3-18d1ba8a7f32" valueTypeId="7d79be7a-a181-45d3-9972-92faed393fe5"/>
+  <listType typeId="19e42278-c05b-448d-93fb-561e1d880b48" valueTypeId="2a0581ce-9ac1-4a8a-878c-eecb2a41db4e"/>
+  <managerType typeId="80267a80-4d2d-409c-afa2-3b8ac5c7293e" valueTypeId="6c66f82f-298a-42b3-b1e4-ed33723edb4e"/>
+  <recordSetType typeId="72787921-6b51-46a1-81e3-feb602476d93" valueTypeId="944a1553-2a36-4b30-ac3e-2961b89b4daa"/>
+  <recordKeyType typeId="4158703e-eb49-41fd-87b0-d47f5a280cfe" valueTypeId="dd3c5b17-a796-4f6d-aec1-a7c3fb9472b3"/>
+  <recordType typeId="6d2bd507-2d2c-4cdb-b491-ba7ea99eab4e" valueTypeId="f16ef89d-c795-4991-9ae3-a4299972896c"/>
+ </producedTypes>
+ <name>R9010B_SourceOfOriginStock</name>
+ <synonym>
+  <key>en</key>
+  <value>0C71F50B-C01E-8C8C-C2F8-8616C8FF9D77</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="edacc098-dac6-46cf-842a-847442e28deb">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R9010 Source of origin stock</value>
+   <key>en</key>
+   <value>51839B50-BAB0-47DC-CFBE-EEACE9B036B2</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="edacc098-dac6-46cf-842a-847442e28deb">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="a91e54e0-10f1-4b0e-ab0d-f7cd6159f1b8">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="08f6ea0b-7aaa-4640-999f-d85c17609fa8">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="f4d6bcf8-263a-43d3-bf23-2f54777ea929">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="fa147c56-c8f9-4c2c-bb7d-2a739afc40ef">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="02fd05c8-1b2b-44d8-9767-ef8ff200e399">
-    <name>SourceOfOrigin</name>
-    <synonym>
-      <key>en</key>
-      <value>Source of origin</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SourceOfOrigins</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b3fcb49a-d481-485d-9400-d43dae5e6c28">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="a91e54e0-10f1-4b0e-ab0d-f7cd6159f1b8">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>B11179A8-2E39-74F8-865B-BA83B45E4339</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="08f6ea0b-7aaa-4640-999f-d85c17609fa8">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>FF2D0AC1-CD8F-691E-E4FF-FAD88776E2D3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="f4d6bcf8-263a-43d3-bf23-2f54777ea929">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>B5B7A7E6-695A-DB34-47E6-65FAD966EDD1</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="fa147c56-c8f9-4c2c-bb7d-2a739afc40ef">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>DD6E881F-3419-E985-5800-07454D56285D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="02fd05c8-1b2b-44d8-9767-ef8ff200e399">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>D256E62C-5F7A-6100-03A9-90B240335A3C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b3fcb49a-d481-485d-9400-d43dae5e6c28">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>B0C0D3D8-8256-8FB0-00B8-86BD205291D4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

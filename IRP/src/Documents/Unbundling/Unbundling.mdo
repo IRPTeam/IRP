@@ -1,399 +1,399 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a2b50c1f-6168-40f0-80d6-9a5e433cd1b7">
-  <producedTypes>
-    <objectType typeId="e2e1b0ab-e86d-4648-be6b-ac9566954203" valueTypeId="66a64016-2f72-4591-984e-bd82d8d9887b"/>
-    <refType typeId="545bc3b0-9b58-433d-8648-912e3d06f780" valueTypeId="d63c286d-dae2-4b69-8db1-02c4212809bd"/>
-    <selectionType typeId="ffbd7664-06a2-497b-a76f-dac60aeeb141" valueTypeId="c96ce49f-708a-4b26-9dd2-2622954c5b00"/>
-    <listType typeId="142f2e04-9d90-4adf-bcc7-cd826f355752" valueTypeId="b8c43bd8-35ab-46c7-be7e-196e817afd9f"/>
-    <managerType typeId="55fcfca5-87c4-4c0b-bd18-b611264b8c45" valueTypeId="13998be1-e1ee-44c0-b58b-4f39562e0f56"/>
-  </producedTypes>
-  <name>Unbundling</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a2b50c1f-6168-40f0-80d6-9a5e433cd1b7">
+ <producedTypes>
+  <objectType typeId="e2e1b0ab-e86d-4648-be6b-ac9566954203" valueTypeId="66a64016-2f72-4591-984e-bd82d8d9887b"/>
+  <refType typeId="545bc3b0-9b58-433d-8648-912e3d06f780" valueTypeId="d63c286d-dae2-4b69-8db1-02c4212809bd"/>
+  <selectionType typeId="ffbd7664-06a2-497b-a76f-dac60aeeb141" valueTypeId="c96ce49f-708a-4b26-9dd2-2622954c5b00"/>
+  <listType typeId="142f2e04-9d90-4adf-bcc7-cd826f355752" valueTypeId="b8c43bd8-35ab-46c7-be7e-196e817afd9f"/>
+  <managerType typeId="55fcfca5-87c4-4c0b-bd18-b611264b8c45" valueTypeId="13998be1-e1ee-44c0-b58b-4f39562e0f56"/>
+ </producedTypes>
+ <name>Unbundling</name>
+ <synonym>
+  <key>en</key>
+  <value>E19F87F0-3D86-191B-BD56-66530F06F4E9</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.Unbundling.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Unbundling</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Unbundling</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.Unbundling.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>871F4F9C-75B5-68DF-FC94-4C2CE219813B</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>990804F5-8374-EECD-DB06-6983E9D84F27</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.Unbundling.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.Unbundling.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.Unbundling.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+ <registerRecords>InformationRegister.T6050S_ManualBundleAmountValues</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="52f32705-a380-4e87-8e35-1ac5b31f6963">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Unbundling</value>
+   <key>en</key>
+   <value>FB01DEC1-D2C0-7DAB-B49C-C1D61526DE45</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.Unbundling.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Unbundling</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Unbundling</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.Unbundling.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d694041e-1d49-4fe9-a028-e87f681f7939">
+  <name>ItemKeyBundle</name>
+  <synonym>
+   <key>en</key>
+   <value>63BBDFA9-3172-B685-5E3B-BB05BEF55AC4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2bf43524-0188-40d5-a4cf-af4d98f42021">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>410A1379-38DF-A029-9067-7DD5BD74831B</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a0234e03-0328-4a06-a0b2-db9c856e31fb">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>E2784726-AC5E-34AE-EFEA-A825BE29FB75</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <changeMode>DontChange</changeMode>
+   <field>Document.Unbundling.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="29d1cf3a-4d32-49c7-8907-4cf0be70d5a0">
+  <name>Unit</name>
+  <synonym>
+   <key>en</key>
+   <value>686F8054-20D2-A8CB-B04D-D6E7889CA518</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="628107b0-c742-4e91-8310-25b271ae7171">
+  <name>QuantityInBaseUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>A5930D26-1CDA-E283-3179-9134A80A0FC3</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="91259c78-536b-47a5-bce9-d1487e9a53a8">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>029224BC-AC21-013E-E23D-DD295DA41B85</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c5e88bdf-668f-4122-84a2-0b5bc2d68122">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>12666594-548B-F788-8B1C-C12DB1CD7BD3</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="98eb47eb-7083-4b7d-aa79-51500379142d">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>473D2DFD-E361-3508-84C9-9286D4B4AB98</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="da56be85-a3e7-4dc9-b2c6-3d59a6d8561a">
+  <producedTypes>
+   <objectType typeId="3a0e8dee-3d26-4619-8289-43c9645793f9" valueTypeId="95fc3117-20e9-436c-86f6-95afc6d6d3ce"/>
+   <rowType typeId="72acacd7-4600-4b16-afa5-7b2c1166bb2b" valueTypeId="9e2425c2-4c4a-422d-b7e2-638a5bc092f7"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>en</key>
+   <value>32BE0586-BA77-94E1-100B-BBB8F99E6DAB</value>
+  </synonym>
+  <attributes uuid="0a86d53c-11a0-4ed3-b2be-06402445a05d">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Unbundling</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>424A8243-7FE0-EBCB-B822-29879D3273CE</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="468678ea-4403-44e3-838d-7420442503f2">
+   <name>Item</name>
+   <synonym>
     <key>en</key>
-    <value>Unbundling list</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.Unbundling.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.Unbundling.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.Unbundling.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>InformationRegister.T6050S_ManualBundleAmountValues</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="52f32705-a380-4e87-8e35-1ac5b31f6963">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>E6F1CF5A-4CCE-B6EA-A354-42FB81361F53</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="d694041e-1d49-4fe9-a028-e87f681f7939">
-    <name>ItemKeyBundle</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key bundle</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="33532bf0-7e77-43ef-9361-de7c48d57210">
+   <name>ItemKey</name>
+   <synonym>
+    <key>en</key>
+    <value>86227210-0F94-FA77-77D4-4D4DE92C022D</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.Unbundling.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="2bf43524-0188-40d5-a4cf-af4d98f42021">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="a670f10d-988d-4b4a-9677-c8326cf93181">
+   <name>Unit</name>
+   <synonym>
+    <key>en</key>
+    <value>0F7AE9A8-FB3C-0B5D-D989-9F9F5EFCFF81</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.Unbundling.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="a0234e03-0328-4a06-a0b2-db9c856e31fb">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Company</name>
-      <changeMode>DontChange</changeMode>
-      <field>Document.Unbundling.Attribute.Company</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="c2fbcb8a-c8bc-4088-a993-2eb4b4ddf37f">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>E4C37DDB-129C-C1F6-61AF-F3862C3E349B</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="29d1cf3a-4d32-49c7-8907-4cf0be70d5a0">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="819471d1-a143-4654-83b2-a0fa6518ec83">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>en</key>
+    <value>4F7A077F-EBB4-9ED8-8919-9FA817314C84</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="628107b0-c742-4e91-8310-25b271ae7171">
-    <name>QuantityInBaseUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Stock quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="2b084995-9608-4199-a218-052c6232a44e">
+   <name>AmountValue</name>
+   <synonym>
+    <key>en</key>
+    <value>26130198-04B8-BBC7-71AA-A02EBF2C7DAC</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="91259c78-536b-47a5-bce9-d1487e9a53a8">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c5e88bdf-668f-4122-84a2-0b5bc2d68122">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="98eb47eb-7083-4b7d-aa79-51500379142d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="da56be85-a3e7-4dc9-b2c6-3d59a6d8561a">
-    <producedTypes>
-      <objectType typeId="3a0e8dee-3d26-4619-8289-43c9645793f9" valueTypeId="95fc3117-20e9-436c-86f6-95afc6d6d3ce"/>
-      <rowType typeId="72acacd7-4600-4b16-afa5-7b2c1166bb2b" valueTypeId="9e2425c2-4c4a-422d-b7e2-638a5bc092f7"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="0a86d53c-11a0-4ed3-b2be-06402445a05d">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="468678ea-4403-44e3-838d-7420442503f2">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="33532bf0-7e77-43ef-9361-de7c48d57210">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.Unbundling.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a670f10d-988d-4b4a-9677-c8326cf93181">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.Unbundling.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c2fbcb8a-c8bc-4088-a993-2eb4b4ddf37f">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="819471d1-a143-4654-83b2-a0fa6518ec83">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Stock quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="2b084995-9608-4199-a218-052c6232a44e">
-      <name>AmountValue</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount value</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0e1259a8-1937-423c-a007-b49f9cb99f83">
-      <name>QuantityIsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="97a1a944-634f-4e99-8524-040cba2e4b0d">
-    <producedTypes>
-      <objectType typeId="c430d4e6-9fbc-4e85-8fbb-6f3e1492a567" valueTypeId="9963be81-fbcf-4ddd-81ba-35f0b2889ea6"/>
-      <rowType typeId="94ac2874-36bc-4b30-9281-85857eccf59a" valueTypeId="2765e169-facf-4388-84a0-3cfcd0db29b3"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="6c4c0e36-dafc-44a4-969a-38489178034a">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="f26e8ba7-76d7-4844-816d-3667d75d9821">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <templates uuid="f4050711-865d-4623-9d81-57d14ee65980">
-    <name>UnbundlingPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Unbundling</value>
-    </synonym>
-  </templates>
-  <commands uuid="74e89620-f670-4425-b3b2-969171a2684d">
-    <name>UnbundlingPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Unbundling</value>
-    </synonym>
-    <group>CommandGroup.Print</group>
-    <commandParameterType>
-      <types>DocumentRef.Unbundling</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <attributes uuid="0e1259a8-1937-423c-a007-b49f9cb99f83">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>FB803500-E67E-9580-0029-95E2F0BFC3FE</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="97a1a944-634f-4e99-8524-040cba2e4b0d">
+  <producedTypes>
+   <objectType typeId="c430d4e6-9fbc-4e85-8fbb-6f3e1492a567" valueTypeId="9963be81-fbcf-4ddd-81ba-35f0b2889ea6"/>
+   <rowType typeId="94ac2874-36bc-4b30-9281-85857eccf59a" valueTypeId="2765e169-facf-4388-84a0-3cfcd0db29b3"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>A73744D6-76FB-159E-EE02-245FC3B46E3A</value>
+  </synonym>
+  <attributes uuid="6c4c0e36-dafc-44a4-969a-38489178034a">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>EF41E46A-54E4-288B-B686-6672B630BFA9</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f26e8ba7-76d7-4844-816d-3667d75d9821">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>85E91936-006A-396E-E312-2C4CF32FAD6F</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <templates uuid="f4050711-865d-4623-9d81-57d14ee65980">
+  <name>UnbundlingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>79E05D11-417B-4E86-69DC-C6830DDBF67D</value>
+  </synonym>
+ </templates>
+ <commands uuid="74e89620-f670-4425-b3b2-969171a2684d">
+  <name>UnbundlingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>4A9FF228-5374-4223-3260-0BBDBAE1FC18</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.Unbundling</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

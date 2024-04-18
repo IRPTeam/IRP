@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09f44229-459b-48f7-a882-d0e8f7d8cf70">
-  <name>AccumulationRegisters_TM1030B_TransactionsKey</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters TM1030B TransactionsKey</value>
-  </synonym>
+ <name>AccumulationRegisters_TM1030B_TransactionsKey</name>
+ <synonym>
+  <key>en</key>
+  <value>A70C8088-966B-3C42-28D1-13B2F604820F_________</value>
+ </synonym>
 </mdclass:Role>

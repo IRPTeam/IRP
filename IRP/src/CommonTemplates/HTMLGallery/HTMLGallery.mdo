@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc607c02-c6f8-478a-a736-ccc070be9126">
-  <name>HTMLGallery</name>
-  <synonym>
-    <key>en</key>
-    <value>HTML gallery</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLGallery</name>
+ <synonym>
+  <key>en</key>
+  <value>D53C51FA-813C-9B71-18B2-2FCD0E0B83D4</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

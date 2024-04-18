@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b52c67bf-b946-421a-b3cb-67cd3d2f4e87">
-  <producedTypes>
-    <objectType typeId="076961c9-9bd3-468c-a5c2-89a44b4c0fd0" valueTypeId="1c063ccb-bfa2-4432-81ad-f9705a35956e"/>
-    <managerType typeId="9ce01035-85de-4a7c-9620-eeffb25569e2" valueTypeId="1d5277cf-0e74-4691-9e71-9c185f541280"/>
-  </producedTypes>
-  <name>R2001_Sales</name>
+ <producedTypes>
+  <objectType typeId="076961c9-9bd3-468c-a5c2-89a44b4c0fd0" valueTypeId="1c063ccb-bfa2-4432-81ad-f9705a35956e"/>
+  <managerType typeId="9ce01035-85de-4a7c-9620-eeffb25569e2" valueTypeId="1d5277cf-0e74-4691-9e71-9c185f541280"/>
+ </producedTypes>
+ <name>R2001_Sales</name>
+ <synonym>
+  <key>en</key>
+  <value>42B5163B-7ECB-D050-0100-05814C3AC7DA</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R2001_Sales.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="d916ed77-b37f-4819-be62-074ddf4de540">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R2001 Sales</value>
+   <key>en</key>
+   <value>EAF55A0A-D3ED-713B-BA14-4F344F225160</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R2001_Sales.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="d916ed77-b37f-4819-be62-074ddf4de540">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

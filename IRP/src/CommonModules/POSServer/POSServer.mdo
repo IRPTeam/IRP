@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8705505-5566-4860-a528-79e80444f7a9">
-  <name>POSServer</name>
-  <synonym>
-    <key>en</key>
-    <value>POS Server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>POSServer</name>
+ <synonym>
+  <key>en</key>
+  <value>1CD94E4F-5972-C9B7-7B56-6F1609F4EFCD</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

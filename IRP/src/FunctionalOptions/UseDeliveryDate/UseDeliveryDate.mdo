@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="39153ba1-128f-4989-97f6-b96056571019">
-  <name>UseDeliveryDate</name>
-  <synonym>
-    <key>en</key>
-    <value>Use delivery date</value>
-  </synonym>
-  <location>Constant.UseDeliveryDate</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
-  <content>Document.SalesInvoice.Attribute.DateOfShipment</content>
-  <content>Document.SalesReturn.Attribute.DateOfShipment</content>
-  <content>Document.PurchaseReturn.Attribute.DateOfShipment</content>
-  <content>Document.RetailSalesReceipt.Attribute.DateOfShipment</content>
-  <content>Document.SalesOrder.Attribute.DateOfShipment</content>
-  <content>Document.PurchaseReturnOrder.Attribute.DateOfShipment</content>
+ <name>UseDeliveryDate</name>
+ <synonym>
+  <key>en</key>
+  <value>70474EB8-2844-086C-CA17-781706C4882E</value>
+ </synonym>
+ <location>Constant.UseDeliveryDate</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.PurchaseOrderClosing.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.DeliveryDate</content>
+ <content>Document.SalesInvoice.Attribute.DateOfShipment</content>
+ <content>Document.SalesReturn.Attribute.DateOfShipment</content>
+ <content>Document.PurchaseReturn.Attribute.DateOfShipment</content>
+ <content>Document.RetailSalesReceipt.Attribute.DateOfShipment</content>
+ <content>Document.SalesOrder.Attribute.DateOfShipment</content>
+ <content>Document.PurchaseReturnOrder.Attribute.DateOfShipment</content>
 </mdclass:FunctionalOption>

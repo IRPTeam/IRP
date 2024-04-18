@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="52a35a6b-6049-4575-8605-500c93550566">
-  <name>PictureViewerClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Picture viewer client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>PictureViewerClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>D34ADFB5-04F2-E1EE-E91D-DE19A815E35D</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

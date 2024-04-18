@@ -16,7 +16,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Document type</v8:content>
+					<v8:content>0BB8FE72-8822-6938-84CC-C7F911BB95F2</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -26,7 +26,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Date</v8:content>
+					<v8:content>F34AB066-BD89-111C-CAFA-A8A945AC0270</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -238,7 +238,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Status</v8:content>
+				<v8:content>FBB7E388-F3B0-8080-05B8-8DEA3381075B</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -247,7 +247,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Error list</v8:content>
+				<v8:content>570B781D-12F9-322C-C664-41E1D777CB5C</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -351,7 +351,7 @@ FROM
 									<dcscor:value xsi:type="v8:LocalStringType">
 										<v8:item>
 											<v8:lang>en</v8:lang>
-											<v8:content>OK</v8:content>
+											<v8:content>E15BD69D-025F-5B35-5FBF-FDA9C4753E23</v8:content>
 										</v8:item>
 									</dcscor:value>
 								</dcscor:item>

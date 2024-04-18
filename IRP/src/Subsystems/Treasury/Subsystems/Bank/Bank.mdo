@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9c6238b0-f007-406e-b243-5654545c3e98">
-  <name>Bank</name>
-  <synonym>
-    <key>en</key>
-    <value>Bank</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.BankReceipt</content>
-  <content>Document.BankPayment</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>Bank</name>
+ <synonym>
+  <key>en</key>
+  <value>EB91DF0C-1285-B3F8-8485-51786F1ECA9C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.BankReceipt</content>
+ <content>Document.BankPayment</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

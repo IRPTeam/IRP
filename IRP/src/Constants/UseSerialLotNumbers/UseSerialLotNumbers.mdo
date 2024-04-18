@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="14ee163b-fe6a-4e68-9520-f1845561ae62">
-  <producedTypes>
-    <managerType typeId="92ad10f8-f598-48ba-ba73-7eaec2d01244" valueTypeId="4f53a2b1-fd38-4548-be15-ef835eee2ea1"/>
-    <valueManagerType typeId="12f35f63-0e11-482b-9a7c-4a96b74afd00" valueTypeId="0a3126ab-b254-4b9e-89d1-cbcb4d4d31b3"/>
-    <valueKeyType typeId="82143656-4af4-4c63-b5c0-eb5720d64b33" valueTypeId="166e8482-d0c9-47ed-97e9-5c8e96d9b84d"/>
-  </producedTypes>
-  <name>UseSerialLotNumbers</name>
-  <synonym>
-    <key>en</key>
-    <value>Use serial lot numbers</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="14ee163b-fe6a-4e68-9520-f1845561ae62">
+ <producedTypes>
+  <managerType typeId="92ad10f8-f598-48ba-ba73-7eaec2d01244" valueTypeId="4f53a2b1-fd38-4548-be15-ef835eee2ea1"/>
+  <valueManagerType typeId="12f35f63-0e11-482b-9a7c-4a96b74afd00" valueTypeId="0a3126ab-b254-4b9e-89d1-cbcb4d4d31b3"/>
+  <valueKeyType typeId="82143656-4af4-4c63-b5c0-eb5720d64b33" valueTypeId="166e8482-d0c9-47ed-97e9-5c8e96d9b84d"/>
+ </producedTypes>
+ <name>UseSerialLotNumbers</name>
+ <synonym>
+  <key>en</key>
+  <value>43905E63-320A-C8C2-2BCF-F2738DFE56BB</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

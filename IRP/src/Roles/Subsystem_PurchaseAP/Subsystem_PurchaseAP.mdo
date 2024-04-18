@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c2b36f4d-c746-4409-8769-582b55aeccc8">
-  <name>Subsystem_PurchaseAP</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Purchase AP</value>
-  </synonym>
+ <name>Subsystem_PurchaseAP</name>
+ <synonym>
+  <key>en</key>
+  <value>26E29389-80F4-5B07-7D56-679AA62627B6</value>
+ </synonym>
 </mdclass:Role>

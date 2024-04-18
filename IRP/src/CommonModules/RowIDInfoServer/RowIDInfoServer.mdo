@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4138aa7e-af6f-481d-96ed-71d8e09038b2">
-  <name>RowIDInfoServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Row ID Info</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>RowIDInfoServer</name>
+ <synonym>
+  <key>en</key>
+  <value>EFAFAB5B-0932-1544-49BC-CEBA923B4006</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

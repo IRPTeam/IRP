@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb2b504e-73e3-44cd-9bae-a7dd6b0aa373">
-  <name>ShareToUsers</name>
-  <synonym>
-    <key>en</key>
-    <value>Share to users</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>ShareToUsers</name>
+ <synonym>
+  <key>en</key>
+  <value>EDEA6B77-3033-CD7A-ABFB-B3452070002B</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

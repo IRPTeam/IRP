@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5079aacb-9cf7-4d53-beed-2378076b642f">
-  <name>EquipmentAcquiringServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Equipment acquiring server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>EquipmentAcquiringServer</name>
+ <synonym>
+  <key>en</key>
+  <value>6E9855CE-554F-2BCB-BA67-7AFDEED93686</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

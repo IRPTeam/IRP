@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="69d595c3-cf2e-40d4-8286-c996810a92fa">
-  <name>DocEmployeeTransferClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee transfer client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocEmployeeTransferClient</name>
+ <synonym>
+  <key>en</key>
+  <value>017281FF-154C-0BAD-D585-57BEE3B213EA</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

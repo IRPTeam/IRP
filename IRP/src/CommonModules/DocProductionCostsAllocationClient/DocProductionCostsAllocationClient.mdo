@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2fc80193-bf6f-408f-9b9a-ad6ebd0a9ec5">
-  <name>DocProductionCostsAllocationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc production costs allocation client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocProductionCostsAllocationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>E96C95A1-2BDA-F13E-E352-233E79A9AFEB__</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

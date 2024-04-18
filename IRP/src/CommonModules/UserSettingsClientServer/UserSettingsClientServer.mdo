@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c5edfca3-3b8d-40cb-965b-f57c34c9ab9c">
-  <name>UserSettingsClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>User settings client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>UserSettingsClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>3F40879B-663E-3794-436F-F5DB10ACBFF5</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

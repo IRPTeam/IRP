@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="23ff5bb6-4a1c-49e3-8e4b-d2292acf4ae3">
-  <name>DocAdditionalDeductionServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional deduction server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocAdditionalDeductionServer</name>
+ <synonym>
+  <key>en</key>
+  <value>9547A91B-4F7F-7AEB-B4B8-87E4111D990C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

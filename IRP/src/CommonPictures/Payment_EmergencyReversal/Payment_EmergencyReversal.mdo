@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94f6dd1a-464d-40ac-ad84-0cc9f2c145e0">
-  <name>Payment_EmergencyReversal</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment emergency reversal</value>
-  </synonym>
+ <name>Payment_EmergencyReversal</name>
+ <synonym>
+  <key>en</key>
+  <value>21C833A7-DFAA-F653-31DE-E8C6B6440FE7</value>
+ </synonym>
 </mdclass:CommonPicture>

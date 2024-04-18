@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef6c559a-8feb-4eb7-8b07-39dadc07fd75">
-  <name>AccumulationRegisters_R7010T_DetailingSupplies</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R7010T DetailingSupplies</value>
-  </synonym>
+ <name>AccumulationRegisters_R7010T_DetailingSupplies</name>
+ <synonym>
+  <key>en</key>
+  <value>360510F7-BB42-C9CC-CCFF-F8D7BE31EF27__________</value>
+ </synonym>
 </mdclass:Role>

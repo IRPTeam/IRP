@@ -1,737 +1,737 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8be757c4-4a2e-4af2-b64a-5a7e306af68d">
-  <producedTypes>
-    <objectType typeId="d9c53e89-4224-481c-b726-3dcf5343dbd6" valueTypeId="70046d74-55ce-45a2-9066-d2069e2225f5"/>
-    <refType typeId="b18d30ec-4cab-402e-866b-7c157866d6c6" valueTypeId="d02fee09-fd8c-49ed-8f4c-e6d381ad0f79"/>
-    <selectionType typeId="e893943a-e19b-4a3e-b76d-a17ae13b4419" valueTypeId="8979436e-2592-4b29-8aa8-b35acca7a1e6"/>
-    <listType typeId="7a1d8da9-3835-49c8-ab36-a2d9c5867c2f" valueTypeId="6e5df0a4-0973-4a25-942f-f966e4b8eafc"/>
-    <managerType typeId="ac10da48-6910-42d6-9f7a-fcd13d83f5f6" valueTypeId="a6fb4e3b-8873-4d14-b9fc-b23001092c07"/>
-  </producedTypes>
-  <name>Production</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8be757c4-4a2e-4af2-b64a-5a7e306af68d">
+ <producedTypes>
+  <objectType typeId="d9c53e89-4224-481c-b726-3dcf5343dbd6" valueTypeId="70046d74-55ce-45a2-9066-d2069e2225f5"/>
+  <refType typeId="b18d30ec-4cab-402e-866b-7c157866d6c6" valueTypeId="d02fee09-fd8c-49ed-8f4c-e6d381ad0f79"/>
+  <selectionType typeId="e893943a-e19b-4a3e-b76d-a17ae13b4419" valueTypeId="8979436e-2592-4b29-8aa8-b35acca7a1e6"/>
+  <listType typeId="7a1d8da9-3835-49c8-ab36-a2d9c5867c2f" valueTypeId="6e5df0a4-0973-4a25-942f-f966e4b8eafc"/>
+  <managerType typeId="ac10da48-6910-42d6-9f7a-fcd13d83f5f6" valueTypeId="a6fb4e3b-8873-4d14-b9fc-b23001092c07"/>
+ </producedTypes>
+ <name>Production</name>
+ <synonym>
+  <key>en</key>
+  <value>9D4DCD7C-BAF7-B9B8-8526-687E6A4A4252</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.Production.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Production</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.Production.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.Production.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.Production.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.Production.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_Production</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>A23FBC70-D82B-DBC9-95E6-6261DCEA3DA6</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>26D22D5F-DB20-EC3F-FC43-30F5C358125C</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.Production.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.Production.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.Production.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+ <registerRecords>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</registerRecords>
+ <registerRecords>InformationRegister.T7051S_ProductionDurationDetails</registerRecords>
+ <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+ <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
+ <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="9568b73c-fe75-4a7c-a09f-d62b9eb4e538">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Production</value>
+   <key>en</key>
+   <value>D1E5B0BD-7EF5-9C2E-E2B4-4C0E8BED39A8</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.Production.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Production</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.Production.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.Production.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.Production.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.Production.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_Production</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e0b4910c-cfd5-4ed2-a02c-d76acb2ce4b2">
+  <name>BusinessUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>89A4C942-D846-69EE-E34B-BD94F13CDAA0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Workshop</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2e15c358-b84d-4b64-8744-e942131f4325">
+  <name>StoreProduction</name>
+  <synonym>
+   <key>en</key>
+   <value>46307A8D-2BED-77FC-CCD8-829083768044</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <changeMode>DontChange</changeMode>
+   <field>Document.Production.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="eb6d61e1-83c5-4b52-a988-1042cef1a60c">
+  <name>Item</name>
+  <synonym>
+   <key>en</key>
+   <value>F2F6D90B-70D2-564C-C253-3C8EE19CEF01</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="26d7d31e-01e0-483c-a96e-4b09837b3859">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>8275C658-3761-6D82-2648-82AF130E295B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7a9ee074-2c6d-4e71-851f-9d4e0ee3a516">
+  <name>Unit</name>
+  <synonym>
+   <key>en</key>
+   <value>A780FC87-C6A8-0867-73D1-133EA13DC7A0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1afbdbd2-e4f6-41b1-976b-e2324276219c">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>AD349FDB-33DC-A73B-BA74-48A9FD410575</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:NumberValue">
+   <value>1</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2e6fe22f-f08d-4e3f-9fbe-7e3a12ac8693">
+  <name>BillOfMaterials</name>
+  <synonym>
+   <key>en</key>
+   <value>514CE5BC-9DA7-C202-2D59-903430798BED</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BillOfMaterials</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Item</name>
+   <field>Document.Production.Attribute.Item</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.ItemKey</name>
+   <field>Document.Production.Attribute.ItemKey</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.BusinessUnit</name>
+   <field>Document.Production.Attribute.BusinessUnit</field>
+  </choiceParameterLinks>
+  <choiceParameters>
+   <name>Filter.Active</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.Type</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.BillOfMaterialsTypes.EnumValue.Product</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="73c407b4-ebe6-4e59-838d-fc31ca2be5da">
+  <name>ProductionPlanning</name>
+  <synonym>
+   <key>en</key>
+   <value>20703295-CEFE-864B-BA83-38828824F9D2</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ProductionPlanning</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="13fbcd42-304b-493f-a9bb-89d2faeae27b">
+  <name>Finished</name>
+  <synonym>
+   <key>en</key>
+   <value>DD63890A-EFA0-A137-79B6-6A38709B108A</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="eb7aca87-587d-42c0-9524-53f28cacc1a3">
+  <name>ProductionType</name>
+  <synonym>
+   <key>en</key>
+   <value>21503CDC-E0AD-9C3F-F099-93D009DB69F4</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ProductionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="98a82fd7-8b04-44fe-8ce8-9c8eaa341313">
+  <name>PlanningPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>5CBAAB7B-43B8-32F4-47B0-0FD6B05CE0BB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PlanningPeriods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.BusinessUnit</name>
+   <changeMode>DontChange</changeMode>
+   <field>Document.Production.Attribute.BusinessUnit</field>
+  </choiceParameterLinks>
+  <choiceParameters>
+   <name>Filter.IsManufacturing</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="149a81ae-7a01-4dca-91f6-2f51e85bd25e">
+  <name>ExtraCostAmountByRatio</name>
+  <synonym>
+   <key>en</key>
+   <value>E15919CF-3F2F-7F6F-F017-74BFD2E5C44E</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePercent</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="479dec26-fe5f-4c36-af79-6a6aeba63426">
+  <name>ExtraCostTaxAmountByRatio</name>
+  <synonym>
+   <key>en</key>
+   <value>4C3F086E-D145-45FB-BFBD-D44D0C03E720</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePercent</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="178c7cb1-ead1-4886-8490-ce5fdc66105b">
+  <name>DurationOfProduction</name>
+  <synonym>
+   <key>en</key>
+   <value>EE6A4BC2-A72D-2254-4C21-1E8ADFCF7C58</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+    <scale>2</scale>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e718b6d9-0350-4e25-b470-4f4ed354bb7a">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>32BA39EF-80D2-8659-92B8-8E5FAEAA2671</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ProductionTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5495c450-50ba-48e4-bc56-66aec29477a9">
+  <name>ExtraDirectCostAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>A3A815AE-D237-8E7D-D81C-CA1F64C4E7E6</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5adffab3-fca7-4b6e-b30a-013fa9a1f8f8">
+  <name>ExtraDirectCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>E5D3647C-5608-19DD-DD38-8078614007E0</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="57e36e1f-f225-489b-8685-a9656b958641">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>C1593C6B-99F3-324B-B9DA-A553509B7265</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e9c6fc94-2b06-4cb8-9264-f88d4e5aaf6c">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>181E533C-727A-2491-123D-DCB3846FC048</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1a30ff08-84e4-4dfd-8f95-16c733505a64">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8C6E26E8-A50B-1424-4ECA-A1DBDA47A37F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6b265e1f-d916-40fe-98f1-6a09cd6be5af">
+  <name>ChoiceProductionForm</name>
+  <synonym>
+   <key>en</key>
+   <value>44260162-3C17-DE17-7074-4765EEDEEBF8</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="5d5b2515-4f50-4029-b0f3-140cb4dfaabe">
+  <producedTypes>
+   <objectType typeId="1a95ef7f-08f6-4ad8-8668-8287a1c3aa85" valueTypeId="ee766c73-649c-4739-be37-54c16a469357"/>
+   <rowType typeId="2143aa1a-2817-4243-9148-fdca9970c03a" valueTypeId="86fa01dd-aabc-4fc3-8982-93e2b5112847"/>
+  </producedTypes>
+  <name>Materials</name>
+  <synonym>
+   <key>en</key>
+   <value>2901DA23-AB36-E045-554A-ACDD63C07FF8</value>
+  </synonym>
+  <attributes uuid="48a038c4-20a3-4e37-aa71-3e9c19067d9a">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Production</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>E0A699EA-A282-8E75-5844-44C0E40E37FE</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="33c7bd76-06a2-4280-beb8-df238c50aaaa">
+   <name>Item</name>
+   <synonym>
     <key>en</key>
-    <value>Productions</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.Production.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.Production.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.Production.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R7040T_ManualMaterialsCorretionInProduction</registerRecords>
-  <registerRecords>InformationRegister.T7051S_ProductionDurationDetails</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
-  <registerRecords>AccumulationRegister.R7050T_ProductionDurations</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="9568b73c-fe75-4a7c-a09f-d62b9eb4e538">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>D137325D-3C13-3F07-7991-140B26C77293</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e0b4910c-cfd5-4ed2-a02c-d76acb2ce4b2">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Workshop</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="239e3026-2644-407f-8a10-fb210c8efc9d">
+   <name>ItemKey</name>
+   <synonym>
+    <key>en</key>
+    <value>BEA6B3DA-A598-8F93-3851-1144DB13C133</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <field>Document.Production.TabularSection.Materials.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="2e15c358-b84d-4b64-8744-e942131f4325">
-    <name>StoreProduction</name>
-    <synonym>
-      <key>en</key>
-      <value>Store production</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Company</name>
-      <changeMode>DontChange</changeMode>
-      <field>Document.Production.Attribute.Company</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="da8a1a22-10e5-432e-b2b0-c7aa56fb5068">
+   <name>Unit</name>
+   <synonym>
+    <key>en</key>
+    <value>2376FCBA-F7FF-7AE4-4BE9-9DBB692894CF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <field>Document.Production.TabularSection.Materials.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="eb6d61e1-83c5-4b52-a988-1042cef1a60c">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="97872395-b65b-4bb9-b48e-69df1a2bcaa6">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>34CCA5EC-E80B-D6D4-4039-901A460114A8</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="26d7d31e-01e0-483c-a96e-4b09837b3859">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="1c0e9a4c-4d8f-40d0-bd0d-4d635cf285a3">
+   <name>UniqueID</name>
+   <synonym>
+    <key>en</key>
+    <value>92E98C1D-F0B2-BE2B-BBAE-E80E5D311BC4</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="7a9ee074-2c6d-4e71-851f-9d4e0ee3a516">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="01e02ad3-dd21-4e20-9f77-1e65a44d6856">
+   <name>ItemBOM</name>
+   <synonym>
+    <key>en</key>
+    <value>73B03DDE-5DEA-430D-D225-50174C1CC8CE</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="1afbdbd2-e4f6-41b1-976b-e2324276219c">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Q</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:NumberValue">
-      <value>1</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6df4c414-c477-42d6-819f-c0269d1e05ec">
+   <name>ItemKeyBOM</name>
+   <synonym>
+    <key>en</key>
+    <value>1ADB1405-C788-4324-438E-E1A69230765E</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="2e6fe22f-f08d-4e3f-9fbe-7e3a12ac8693">
-    <name>BillOfMaterials</name>
-    <synonym>
-      <key>en</key>
-      <value>Bill of materials</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BillOfMaterials</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Item</name>
-      <field>Document.Production.Attribute.Item</field>
-    </choiceParameterLinks>
-    <choiceParameterLinks>
-      <name>Filter.ItemKey</name>
-      <field>Document.Production.Attribute.ItemKey</field>
-    </choiceParameterLinks>
-    <choiceParameterLinks>
-      <name>Filter.BusinessUnit</name>
-      <field>Document.Production.Attribute.BusinessUnit</field>
-    </choiceParameterLinks>
-    <choiceParameters>
-      <name>Filter.Active</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <choiceParameters>
-      <name>Filter.Type</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.BillOfMaterialsTypes.EnumValue.Product</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="a2821b86-f37b-44ee-9074-da7d7def0ce8">
+   <name>UnitBOM</name>
+   <synonym>
+    <key>en</key>
+    <value>1CDBC5CA-F0A8-5E64-45AC-C9176DEAB021</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="73c407b4-ebe6-4e59-838d-fc31ca2be5da">
-    <name>ProductionPlanning</name>
-    <synonym>
-      <key>en</key>
-      <value>Production planning</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ProductionPlanning</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="c154e93a-a0be-42f6-9008-9bc623a51b47">
+   <name>QuantityBOM</name>
+   <synonym>
+    <key>en</key>
+    <value>E3C95C9A-E02E-FFBD-DF9A-A0A59DDE3B1F</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="13fbcd42-304b-493f-a9bb-89d2faeae27b">
-    <name>Finished</name>
-    <synonym>
-      <key>en</key>
-      <value>Finished</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="08b4b27b-0747-448e-b44a-9ac2d3ff2225">
+   <name>IsManualChanged</name>
+   <synonym>
+    <key>en</key>
+    <value>80C4DC05-962D-827E-ED5B-B62FE1AEC01A</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="eb7aca87-587d-42c0-9524-53f28cacc1a3">
-    <name>ProductionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Production type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ProductionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="18b559cc-3e46-4e7e-88d1-d45dc714440a">
+   <name>MaterialType</name>
+   <synonym>
+    <key>en</key>
+    <value>378B8571-8040-EDF4-4381-1AC04FC4DCA7</value>
+   </synonym>
+   <type>
+    <types>EnumRef.MaterialTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="98a82fd7-8b04-44fe-8ce8-9c8eaa341313">
-    <name>PlanningPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Planning period</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PlanningPeriods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.BusinessUnit</name>
-      <changeMode>DontChange</changeMode>
-      <field>Document.Production.Attribute.BusinessUnit</field>
-    </choiceParameterLinks>
-    <choiceParameters>
-      <name>Filter.IsManufacturing</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="121a9c8f-eb99-4706-a7e9-99e7a76c93d5">
+   <name>WriteoffStore</name>
+   <synonym>
+    <key>en</key>
+    <value>67AB0BEC-00BD-C276-6252-281EC6228FEB</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Stores</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.Production.Attribute.Company</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="149a81ae-7a01-4dca-91f6-2f51e85bd25e">
-    <name>ExtraCostAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="17b1a807-7a70-49d6-8272-be722a32d5ee">
+  <producedTypes>
+   <objectType typeId="0fcd5dfb-6c54-4d95-89df-e83b142fad75" valueTypeId="02d07a67-136f-4266-86fc-dcedce52bccc"/>
+   <rowType typeId="817e31a3-ea69-4c23-bd94-2158495175ee" valueTypeId="14f66728-1a1c-4f2e-a49c-5e35bd9266d4"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>60E18B01-359B-D57F-F8F2-2772BC3CA960</value>
+  </synonym>
+  <attributes uuid="db0a9f43-b154-4a70-bb50-087915a2b60d">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>81846238-8577-71E4-4D6E-EDCB9897919E</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="479dec26-fe5f-4c36-af79-6a6aeba63426">
-    <name>ExtraCostTaxAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost tax amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="472395a7-fa7a-4a53-857c-fd92bc0afef2">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>002EB35B-CD1D-0EA9-97E9-9DA588DDE012</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.Production.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="178c7cb1-ead1-4886-8490-ce5fdc66105b">
-    <name>DurationOfProduction</name>
-    <synonym>
-      <key>en</key>
-      <value>Duration of production</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>5</precision>
-        <scale>2</scale>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e718b6d9-0350-4e25-b470-4f4ed354bb7a">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ProductionTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="5495c450-50ba-48e4-bc56-66aec29477a9">
-    <name>ExtraDirectCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="5adffab3-fca7-4b6e-b30a-013fa9a1f8f8">
-    <name>ExtraDirectCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="57e36e1f-f225-489b-8685-a9656b958641">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e9c6fc94-2b06-4cb8-9264-f88d4e5aaf6c">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1a30ff08-84e4-4dfd-8f95-16c733505a64">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6b265e1f-d916-40fe-98f1-6a09cd6be5af">
-    <name>ChoiceProductionForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice production</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="5d5b2515-4f50-4029-b0f3-140cb4dfaabe">
-    <producedTypes>
-      <objectType typeId="1a95ef7f-08f6-4ad8-8668-8287a1c3aa85" valueTypeId="ee766c73-649c-4739-be37-54c16a469357"/>
-      <rowType typeId="2143aa1a-2817-4243-9148-fdca9970c03a" valueTypeId="86fa01dd-aabc-4fc3-8982-93e2b5112847"/>
-    </producedTypes>
-    <name>Materials</name>
-    <synonym>
-      <key>en</key>
-      <value>Materials</value>
-    </synonym>
-    <attributes uuid="48a038c4-20a3-4e37-aa71-3e9c19067d9a">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="33c7bd76-06a2-4280-beb8-df238c50aaaa">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="239e3026-2644-407f-8a10-fb210c8efc9d">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <field>Document.Production.TabularSection.Materials.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="da8a1a22-10e5-432e-b2b0-c7aa56fb5068">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <field>Document.Production.TabularSection.Materials.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="97872395-b65b-4bb9-b48e-69df1a2bcaa6">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1c0e9a4c-4d8f-40d0-bd0d-4d635cf285a3">
-      <name>UniqueID</name>
-      <synonym>
-        <key>en</key>
-        <value>Unique ID</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="01e02ad3-dd21-4e20-9f77-1e65a44d6856">
-      <name>ItemBOM</name>
-      <synonym>
-        <key>en</key>
-        <value>(BOM) Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6df4c414-c477-42d6-819f-c0269d1e05ec">
-      <name>ItemKeyBOM</name>
-      <synonym>
-        <key>en</key>
-        <value>(BOM) Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a2821b86-f37b-44ee-9074-da7d7def0ce8">
-      <name>UnitBOM</name>
-      <synonym>
-        <key>en</key>
-        <value>(BOM) Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c154e93a-a0be-42f6-9008-9bc623a51b47">
-      <name>QuantityBOM</name>
-      <synonym>
-        <key>en</key>
-        <value>(BOM) Q</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="08b4b27b-0747-448e-b44a-9ac2d3ff2225">
-      <name>IsManualChanged</name>
-      <synonym>
-        <key>en</key>
-        <value>Is manual changed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="18b559cc-3e46-4e7e-88d1-d45dc714440a">
-      <name>MaterialType</name>
-      <synonym>
-        <key>en</key>
-        <value>Material type</value>
-      </synonym>
-      <type>
-        <types>EnumRef.MaterialTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="121a9c8f-eb99-4706-a7e9-99e7a76c93d5">
-      <name>WriteoffStore</name>
-      <synonym>
-        <key>en</key>
-        <value>Writeoff store</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Stores</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.Production.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="17b1a807-7a70-49d6-8272-be722a32d5ee">
-    <producedTypes>
-      <objectType typeId="0fcd5dfb-6c54-4d95-89df-e83b142fad75" valueTypeId="02d07a67-136f-4266-86fc-dcedce52bccc"/>
-      <rowType typeId="817e31a3-ea69-4c23-bd94-2158495175ee" valueTypeId="14f66728-1a1c-4f2e-a49c-5e35bd9266d4"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="db0a9f43-b154-4a70-bb50-087915a2b60d">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="472395a7-fa7a-4a53-857c-fd92bc0afef2">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.Production.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <templates uuid="5c638ebd-4059-4767-965d-a0f7a4d2f4ef">
-    <name>ProductionPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Production</value>
-    </synonym>
-  </templates>
-  <commands uuid="09865ee1-96a5-4f9c-a83f-4d12d47b414a">
-    <name>Generate</name>
-    <synonym>
-      <key>en</key>
-      <value>Production</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.ProductionPlanning</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
-  <commands uuid="44270fd8-5ca7-483d-a01d-50808b8901e0">
-    <name>ProductionPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Production</value>
-    </synonym>
-    <group>CommandGroup.Print</group>
-    <commandParameterType>
-      <types>DocumentRef.Production</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <templates uuid="5c638ebd-4059-4767-965d-a0f7a4d2f4ef">
+  <name>ProductionPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>FAC4FF08-E340-C50B-B26C-C258A1B99428</value>
+  </synonym>
+ </templates>
+ <commands uuid="09865ee1-96a5-4f9c-a83f-4d12d47b414a">
+  <name>Generate</name>
+  <synonym>
+   <key>en</key>
+   <value>16BB2237-9F4D-19EB-B59E-E60718AA4421</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.ProductionPlanning</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="44270fd8-5ca7-483d-a01d-50808b8901e0">
+  <name>ProductionPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>08144310-88AA-C002-2777-7EDC65D58660</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.Production</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

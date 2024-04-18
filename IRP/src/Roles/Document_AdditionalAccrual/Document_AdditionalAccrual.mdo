@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="04365828-660a-41fb-8843-8878c0df5153">
-  <name>Document_AdditionalAccrual</name>
-  <synonym>
-    <key>en</key>
-    <value>Document additional accrual</value>
-  </synonym>
+ <name>Document_AdditionalAccrual</name>
+ <synonym>
+  <key>en</key>
+  <value>4B5C4B40-2343-001A-A2CB-B05A8A24DD46</value>
+ </synonym>
 </mdclass:Role>

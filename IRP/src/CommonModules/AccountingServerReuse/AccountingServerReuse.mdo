@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6121da77-73b9-4ae2-9473-ac039374ba71">
-  <name>AccountingServerReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting server reuse</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>AccountingServerReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>5E5CE5DD-25BC-C17A-A138-814BF1CB7F8B</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

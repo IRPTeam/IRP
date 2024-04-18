@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c705efc3-4057-4aac-8189-7526bbdd9002">
-  <name>DocConsolidatedRetailSalesClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc consolidated retail sales client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocConsolidatedRetailSalesClient</name>
+ <synonym>
+  <key>en</key>
+  <value>3E17D13C-51FF-CF97-78A9-9B93C8D61C89</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

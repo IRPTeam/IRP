@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0eadc637-d9d1-4a9f-9aa7-5cb7485863d4">
-  <producedTypes>
-    <refType typeId="3ab47498-4265-498f-8019-646e1c920c34" valueTypeId="8d78a59a-e4f9-4475-a5e5-1f7eed025128"/>
-    <listType typeId="a22b9660-5460-42db-8783-fad0ea59581d" valueTypeId="3e02163f-16cd-4c75-9b3c-7551ca8bda34"/>
-    <managerType typeId="986036c2-d79b-47ad-a9e6-50d0c452b474" valueTypeId="2c29c057-330d-4a04-a3de-4295a6e11c35"/>
-  </producedTypes>
-  <name>SerialNumberTypes</name>
+ <producedTypes>
+  <refType typeId="3ab47498-4265-498f-8019-646e1c920c34" valueTypeId="8d78a59a-e4f9-4475-a5e5-1f7eed025128"/>
+  <listType typeId="a22b9660-5460-42db-8783-fad0ea59581d" valueTypeId="3e02163f-16cd-4c75-9b3c-7551ca8bda34"/>
+  <managerType typeId="986036c2-d79b-47ad-a9e6-50d0c452b474" valueTypeId="2c29c057-330d-4a04-a3de-4295a6e11c35"/>
+ </producedTypes>
+ <name>SerialNumberTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>D9390CCF-4A75-3D7D-D2B5-5042FD6AA8D7</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="cc06c36d-55ea-4fac-8209-03edcdd62c19">
+  <name>DontUse</name>
   <synonym>
-    <key>en</key>
-    <value>Serial number types</value>
+   <key>en</key>
+   <value>A05DFB98-4BF2-E7C2-2873-3137FDAA4B48</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="cc06c36d-55ea-4fac-8209-03edcdd62c19">
-    <name>DontUse</name>
-    <synonym>
-      <key>en</key>
-      <value>Do not use</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="55476d57-5ff5-4f8b-9caa-f2c5f2eeba02">
-    <name>UseAsDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Use as date</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f533e9d4-8547-4455-96ee-e0091171a317">
-    <name>UseAsNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Use as number</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6334dbdf-b278-4985-b7a4-eebb6bd62247">
-    <name>UseAsNumbersList</name>
-    <synonym>
-      <key>en</key>
-      <value>Use as numbers list</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="55476d57-5ff5-4f8b-9caa-f2c5f2eeba02">
+  <name>UseAsDate</name>
+  <synonym>
+   <key>en</key>
+   <value>6C581245-E8D8-DEA8-8AA3-3CFFCC66278A</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f533e9d4-8547-4455-96ee-e0091171a317">
+  <name>UseAsNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>9F4E46EA-5D4D-4A4D-D43B-BCDF7DC18063</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6334dbdf-b278-4985-b7a4-eebb6bd62247">
+  <name>UseAsNumbersList</name>
+  <synonym>
+   <key>en</key>
+   <value>9349D24D-E82B-7934-422D-D3E23B09ECFA</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

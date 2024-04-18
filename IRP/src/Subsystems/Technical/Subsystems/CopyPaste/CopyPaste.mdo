@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="792e5f55-e955-460b-a534-518f2738fb16">
-  <name>CopyPaste</name>
-  <synonym>
-    <key>en</key>
-    <value>Copy paste</value>
-  </synonym>
-  <content>SessionParameter.Buffer</content>
-  <content>CommonForm.CopyToClipboardSettings</content>
-  <content>CommonForm.PasteFromClipboardSettings</content>
-  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+ <name>CopyPaste</name>
+ <synonym>
+  <key>en</key>
+  <value>68BA1811-6657-E5C4-4B5C-C2A15CB402FE</value>
+ </synonym>
+ <content>SessionParameter.Buffer</content>
+ <content>CommonForm.CopyToClipboardSettings</content>
+ <content>CommonForm.PasteFromClipboardSettings</content>
+ <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

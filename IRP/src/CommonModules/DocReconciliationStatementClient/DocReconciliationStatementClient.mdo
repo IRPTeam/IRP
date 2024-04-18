@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9ccc7c56-8f66-4241-b1ea-b5b6f9a8dd78">
-  <name>DocReconciliationStatementClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc reconciliation statement client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocReconciliationStatementClient</name>
+ <synonym>
+  <key>en</key>
+  <value>62F9B42C-D5C5-C6BB-B628-8184ECE4A513</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

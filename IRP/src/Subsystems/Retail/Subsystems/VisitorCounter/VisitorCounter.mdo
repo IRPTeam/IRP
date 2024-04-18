@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d815a659-cbb5-462f-af20-5eede1b79463">
-  <name>VisitorCounter</name>
-  <synonym>
-    <key>en</key>
-    <value>Visitor counter</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.VisitorCounter</content>
-  <parentSubsystem>Subsystem.Retail</parentSubsystem>
+ <name>VisitorCounter</name>
+ <synonym>
+  <key>en</key>
+  <value>E91A88A2-6288-381B-BAF5-5B25E5E2526D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.VisitorCounter</content>
+ <parentSubsystem>Subsystem.Retail</parentSubsystem>
 </mdclass:Subsystem>

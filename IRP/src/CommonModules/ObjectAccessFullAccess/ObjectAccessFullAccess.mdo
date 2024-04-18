@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fde134f2-06b9-411f-adfc-7a9b256b1ce5">
-  <name>ObjectAccessFullAccess</name>
-  <synonym>
-    <key>en</key>
-    <value>Object access full access</value>
-  </synonym>
-  <server>true</server>
-  <privileged>true</privileged>
+ <name>ObjectAccessFullAccess</name>
+ <synonym>
+  <key>en</key>
+  <value>2AA6BA16-1434-D1B7-7758-8C289908F53C</value>
+ </synonym>
+ <server>true</server>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

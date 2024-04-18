@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eac5310f-9a00-40b3-a85f-f9dadf511367">
-  <producedTypes>
-    <containerType typeId="408e78fd-e4c5-429f-bedb-3fb85beff40f" valueTypeId="e7b0c54d-1a4c-4080-ac1a-e0840c393b34"/>
-  </producedTypes>
-  <name>typeSpecialOfferAddInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Type special offer add info</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-    <types>String</types>
-    <types>Date</types>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>15</precision>
-      <scale>5</scale>
-    </numberQualifiers>
-    <stringQualifiers>
-      <length>1024</length>
-    </stringQualifiers>
-    <dateQualifiers/>
-  </type>
+ <producedTypes>
+  <containerType typeId="408e78fd-e4c5-429f-bedb-3fb85beff40f" valueTypeId="e7b0c54d-1a4c-4080-ac1a-e0840c393b34"/>
+ </producedTypes>
+ <name>typeSpecialOfferAddInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>08469DCB-7F13-31D6-67E4-43C9FA0D53EA</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+  <types>String</types>
+  <types>Date</types>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>15</precision>
+   <scale>5</scale>
+  </numberQualifiers>
+  <stringQualifiers>
+   <length>1024</length>
+  </stringQualifiers>
+  <dateQualifiers/>
+ </type>
 </mdclass:DefinedType>

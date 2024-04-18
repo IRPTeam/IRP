@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccountingRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0e4e7667-4177-428e-a1ba-6a1f2e04f976">
-  <producedTypes>
-    <selectionType typeId="2a7b0d8f-a437-453f-9929-4dc3d8e48ba3" valueTypeId="4b87f7d4-119c-42cb-838c-5d47356a140c"/>
-    <listType typeId="29466a2b-1fd2-4389-939a-bcc3a2aa124e" valueTypeId="cbd8c6f1-c6db-4491-b557-782f0f043781"/>
-    <managerType typeId="ff0dfd33-0934-4be3-8d30-fa519051661e" valueTypeId="0a7748f1-806b-4830-be3e-325389d96dcc"/>
-    <recordSetType typeId="b1947a61-ba8f-48f5-bb63-8711a2c7108c" valueTypeId="f5e7436c-abb8-480a-bea3-4cdfc54c5625"/>
-    <recordKeyType typeId="1066511e-ebc8-4b8e-993b-063274c66b0a" valueTypeId="9d19de03-d494-4f72-9bdd-860293457748"/>
-    <recordType typeId="5fe9d158-5dcd-4c6e-8881-ce72cb643be5" valueTypeId="e2b05953-d72b-4126-9218-5448440b7e16"/>
-    <extDimensionsType typeId="ed7787bf-0cb2-44da-9687-f4695995f843" valueTypeId="38efffe7-b813-4698-a785-e20d3f0b03f2"/>
-  </producedTypes>
-  <name>Basic</name>
+<mdclass:AccountingRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0e4e7667-4177-428e-a1ba-6a1f2e04f976">
+ <producedTypes>
+  <selectionType typeId="2a7b0d8f-a437-453f-9929-4dc3d8e48ba3" valueTypeId="4b87f7d4-119c-42cb-838c-5d47356a140c"/>
+  <listType typeId="29466a2b-1fd2-4389-939a-bcc3a2aa124e" valueTypeId="cbd8c6f1-c6db-4491-b557-782f0f043781"/>
+  <managerType typeId="ff0dfd33-0934-4be3-8d30-fa519051661e" valueTypeId="0a7748f1-806b-4830-be3e-325389d96dcc"/>
+  <recordSetType typeId="b1947a61-ba8f-48f5-bb63-8711a2c7108c" valueTypeId="f5e7436c-abb8-480a-bea3-4cdfc54c5625"/>
+  <recordKeyType typeId="1066511e-ebc8-4b8e-993b-063274c66b0a" valueTypeId="9d19de03-d494-4f72-9bdd-860293457748"/>
+  <recordType typeId="5fe9d158-5dcd-4c6e-8881-ce72cb643be5" valueTypeId="e2b05953-d72b-4126-9218-5448440b7e16"/>
+  <extDimensionsType typeId="ed7787bf-0cb2-44da-9687-f4695995f843" valueTypeId="38efffe7-b813-4698-a785-e20d3f0b03f2"/>
+ </producedTypes>
+ <name>Basic</name>
+ <synonym>
+  <key>en</key>
+  <value>E35D1875-7102-8D17-7EF8-88EFF7A021AC</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <chartOfAccounts>ChartOfAccounts.Basic</chartOfAccounts>
+ <correspondence>true</correspondence>
+ <defaultListForm>AccountingRegister.Basic.Form.ListForm</defaultListForm>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <listPresentation>
+  <key>en</key>
+  <value>56B82B6D-F1B4-5E4C-CB55-5B6DAE5AE9D4</value>
+ </listPresentation>
+ <dimensions uuid="fca6aa4f-a583-4809-91a5-3a19ae6774d5">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Accounting records (Basic)</value>
+   <key>en</key>
+   <value>9C2A08EF-B871-050A-A880-0912CF3B97B3</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <chartOfAccounts>ChartOfAccounts.Basic</chartOfAccounts>
-  <correspondence>true</correspondence>
-  <defaultListForm>AccountingRegister.Basic.Form.ListForm</defaultListForm>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <listPresentation>
-    <key>en</key>
-    <value>Accounting records (Basic)</value>
-  </listPresentation>
-  <dimensions uuid="fca6aa4f-a583-4809-91a5-3a19ae6774d5">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <balance>true</balance>
-  </dimensions>
-  <dimensions uuid="b57d4a42-dd22-4236-8cb9-d382312ae872">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <balance>true</balance>
-  </dimensions>
-  <dimensions uuid="bdc1372a-07f5-4f5f-8f1b-36fa37491274">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </dimensions>
-  <resources uuid="cc6fef8c-2038-416a-ba26-1a62c4829671">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <markNegatives>true</markNegatives>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <balance>true</balance>
-    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Amount</extDimensionAccountingFlag>
-  </resources>
-  <resources uuid="80879adc-1e5f-4637-982a-f2545c9ab7c5">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <markNegatives>true</markNegatives>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Quantity</accountingFlag>
-    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Quantity</extDimensionAccountingFlag>
-  </resources>
-  <resources uuid="96bd6da8-59c8-40e4-a8ef-0469a92072de">
-    <name>CurrencyAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <markNegatives>true</markNegatives>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Currency</accountingFlag>
-    <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Currency</extDimensionAccountingFlag>
-  </resources>
-  <attributes uuid="5e3041b8-351b-428e-a794-d324e2603055">
-    <name>Operation</name>
-    <synonym>
-      <key>en</key>
-      <value>Operation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.AccountingOperations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="2f638cba-33d0-44ba-9fb4-98eafa93ec89">
-    <name>IsFixed</name>
-    <synonym>
-      <key>en</key>
-      <value>Is fixed</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="4ccfaae5-59a6-4a65-9a0f-2fcc9e587d68">
-    <name>IsByRow</name>
-    <synonym>
-      <key>en</key>
-      <value>Is by row</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="028264f0-a8d5-42b6-b7cd-69ad7738888d">
-    <name>Key</name>
-    <synonym>
-      <key>en</key>
-      <value>Key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <forms uuid="ba8e9fb6-4643-4aa6-82c4-b7cb66965ce4">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <balance>true</balance>
+ </dimensions>
+ <dimensions uuid="b57d4a42-dd22-4236-8cb9-d382312ae872">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>9A924045-41D1-672E-EA0C-CB27CFF451F8</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <balance>true</balance>
+ </dimensions>
+ <dimensions uuid="bdc1372a-07f5-4f5f-8f1b-36fa37491274">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>F3C72B24-91C1-0344-4ACC-C79FF7951222</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </dimensions>
+ <resources uuid="cc6fef8c-2038-416a-ba26-1a62c4829671">
+  <name>Amount</name>
+  <synonym>
+   <key>en</key>
+   <value>0625B58B-86D8-B98C-C170-08CC1E335EF3</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <markNegatives>true</markNegatives>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <balance>true</balance>
+  <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Amount</extDimensionAccountingFlag>
+ </resources>
+ <resources uuid="80879adc-1e5f-4637-982a-f2545c9ab7c5">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>FCCF9CCA-E6C6-CA56-63B4-409F52708657</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <markNegatives>true</markNegatives>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Quantity</accountingFlag>
+  <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Quantity</extDimensionAccountingFlag>
+ </resources>
+ <resources uuid="96bd6da8-59c8-40e4-a8ef-0469a92072de">
+  <name>CurrencyAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>A76C87CE-95DF-AA8F-F0E2-2EE6AF52DC8F</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <markNegatives>true</markNegatives>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <accountingFlag>ChartOfAccounts.Basic.AccountingFlag.Currency</accountingFlag>
+  <extDimensionAccountingFlag>ChartOfAccounts.Basic.ExtDimensionAccountingFlag.Currency</extDimensionAccountingFlag>
+ </resources>
+ <attributes uuid="5e3041b8-351b-428e-a794-d324e2603055">
+  <name>Operation</name>
+  <synonym>
+   <key>en</key>
+   <value>536D8730-5967-76BF-FE7F-F610D9FD750B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccountingOperations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="2f638cba-33d0-44ba-9fb4-98eafa93ec89">
+  <name>IsFixed</name>
+  <synonym>
+   <key>en</key>
+   <value>26FD3CF6-BFDA-61DE-E275-5E961445EA96</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="4ccfaae5-59a6-4a65-9a0f-2fcc9e587d68">
+  <name>IsByRow</name>
+  <synonym>
+   <key>en</key>
+   <value>89572F0B-85C4-833B-BF07-7E193DC055CD</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="028264f0-a8d5-42b6-b7cd-69ad7738888d">
+  <name>Key</name>
+  <synonym>
+   <key>en</key>
+   <value>9B8D54D2-A2A3-E37E-E1B6-61CA975DDBCB</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <forms uuid="ba8e9fb6-4643-4aa6-82c4-b7cb66965ce4">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>CE8C714F-062F-BCB2-2E33-341D0FFBC77F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:AccountingRegister>

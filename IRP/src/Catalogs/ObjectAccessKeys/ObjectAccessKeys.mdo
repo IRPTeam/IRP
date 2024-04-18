@@ -1,136 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7213d6c-6118-47a6-98e2-bb3ae2895bda">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e7213d6c-6118-47a6-98e2-bb3ae2895bda">
+ <producedTypes>
+  <objectType typeId="c9b3108f-171f-449a-9bfe-2461bdb60706" valueTypeId="dc115ddd-2f88-425b-be93-507e88368c56"/>
+  <refType typeId="2f34925a-5814-4539-b4f4-a45039a58169" valueTypeId="cdcf435c-4e6b-4808-95a0-9595167b3c55"/>
+  <selectionType typeId="c96efb81-6cec-48a8-80da-a366522134d1" valueTypeId="1b0f66eb-ea23-4c4b-a877-c286033521e9"/>
+  <listType typeId="6cb06268-18b7-470b-a304-004c33b84aa7" valueTypeId="ee8dc73c-2579-4d31-ab62-458e6876b7cb"/>
+  <managerType typeId="ecf8dd56-d8b4-4308-89df-619a319f8436" valueTypeId="1ba30d81-7e2d-4752-a8cb-43425b50b237"/>
+ </producedTypes>
+ <name>ObjectAccessKeys</name>
+ <synonym>
+  <key>en</key>
+  <value>467E94C7-D4EA-4A00-08F0-01833E61AA6C</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.ObjectAccessKeys.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>C97301EB-3E17-998B-B5DE-E28080718731</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>A922FC29-E7DE-784F-F9F6-652A3EF1C3DD</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>36</codeLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <tabularSections uuid="1ba18cd3-e84a-42aa-8d41-6e8d2d892292">
   <producedTypes>
-    <objectType typeId="c9b3108f-171f-449a-9bfe-2461bdb60706" valueTypeId="dc115ddd-2f88-425b-be93-507e88368c56"/>
-    <refType typeId="2f34925a-5814-4539-b4f4-a45039a58169" valueTypeId="cdcf435c-4e6b-4808-95a0-9595167b3c55"/>
-    <selectionType typeId="c96efb81-6cec-48a8-80da-a366522134d1" valueTypeId="1b0f66eb-ea23-4c4b-a877-c286033521e9"/>
-    <listType typeId="6cb06268-18b7-470b-a304-004c33b84aa7" valueTypeId="ee8dc73c-2579-4d31-ab62-458e6876b7cb"/>
-    <managerType typeId="ecf8dd56-d8b4-4308-89df-619a319f8436" valueTypeId="1ba30d81-7e2d-4752-a8cb-43425b50b237"/>
+   <objectType typeId="1dab0afb-c767-449a-a857-6aedcde6bdb3" valueTypeId="ec28c47d-0635-4be3-9e2d-3e7bd865aa98"/>
+   <rowType typeId="244262b0-191c-479a-a72e-002208a9d7d9" valueTypeId="ded05aaf-4f1d-46c2-8caf-c17734d5b714"/>
   </producedTypes>
-  <name>ObjectAccessKeys</name>
+  <name>FilterDataList</name>
   <synonym>
-    <key>en</key>
-    <value>Object access keys</value>
+   <key>en</key>
+   <value>973693EF-7038-AFA5-541D-D5338A9389CF</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.ObjectAccessKeys.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <attributes uuid="7998b236-a965-4beb-9d6c-f8d0f53a5453">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Object access key</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>8E30BC50-09F7-22E3-3740-0B20487247EA</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>200</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d562323b-c574-4332-b72b-5291514718b8">
+   <name>ValueRef1</name>
+   <synonym>
     <key>en</key>
-    <value>Object access keys</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>36</codeLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <tabularSections uuid="1ba18cd3-e84a-42aa-8d41-6e8d2d892292">
-    <producedTypes>
-      <objectType typeId="1dab0afb-c767-449a-a857-6aedcde6bdb3" valueTypeId="ec28c47d-0635-4be3-9e2d-3e7bd865aa98"/>
-      <rowType typeId="244262b0-191c-479a-a72e-002208a9d7d9" valueTypeId="ded05aaf-4f1d-46c2-8caf-c17734d5b714"/>
-    </producedTypes>
-    <name>FilterDataList</name>
-    <synonym>
-      <key>en</key>
-      <value>Filter data list</value>
-    </synonym>
-    <attributes uuid="7998b236-a965-4beb-9d6c-f8d0f53a5453">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>200</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d562323b-c574-4332-b72b-5291514718b8">
-      <name>ValueRef1</name>
-      <synonym>
-        <key>en</key>
-        <value>Value ref1</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ae0e6a93-ed2d-40ba-b35f-00ae7ded1c1c">
-      <name>ValueRef2</name>
-      <synonym>
-        <key>en</key>
-        <value>Value ref2</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="51a70dc0-472c-4067-8cff-9207e75ef6e8">
-      <name>ValueRef3</name>
-      <synonym>
-        <key>en</key>
-        <value>Value ref3</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d817fc47-9961-467b-91fa-e2604fbfbe55">
-      <name>ValueRef4</name>
-      <synonym>
-        <key>en</key>
-        <value>Value ref4</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fa4f00a5-6c80-48e4-862e-1cb882988ceb">
-      <name>ValueRef5</name>
-      <synonym>
-        <key>en</key>
-        <value>Value ref5</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <value>7F66AE15-A52D-E19A-A3AC-CA908ADD72AC</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ae0e6a93-ed2d-40ba-b35f-00ae7ded1c1c">
+   <name>ValueRef2</name>
+   <synonym>
+    <key>en</key>
+    <value>BBF056EA-00A0-2B33-3228-82FE2F6E70A2</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="51a70dc0-472c-4067-8cff-9207e75ef6e8">
+   <name>ValueRef3</name>
+   <synonym>
+    <key>en</key>
+    <value>65ED399D-9744-CB7D-DA9E-E5C4462F8669</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d817fc47-9961-467b-91fa-e2604fbfbe55">
+   <name>ValueRef4</name>
+   <synonym>
+    <key>en</key>
+    <value>0842AA93-6704-3B34-4191-1B1E5136F3D3</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fa4f00a5-6c80-48e4-862e-1cb882988ceb">
+   <name>ValueRef5</name>
+   <synonym>
+    <key>en</key>
+    <value>3338886F-299C-A463-3B42-23AF046ADDAD</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
 </mdclass:Catalog>

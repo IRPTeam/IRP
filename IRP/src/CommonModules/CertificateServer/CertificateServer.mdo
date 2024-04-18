@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a180765c-86ad-49f8-8b3d-2ba62f22de8b">
-  <name>CertificateServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Certificate server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CertificateServer</name>
+ <synonym>
+  <key>en</key>
+  <value>FD6FE878-588D-97FD-DED2-238B2DF546D7</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

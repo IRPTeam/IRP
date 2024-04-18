@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7209766-8e19-4f64-8fc0-433677dae6ef">
-  <name>PaymentStatuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment statuses</value>
-  </synonym>
+ <name>PaymentStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>416FD474-06A2-2B50-079B-BD5B8A106DB5</value>
+ </synonym>
 </mdclass:CommonPicture>

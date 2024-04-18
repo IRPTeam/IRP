@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8d58f69b-2e5e-4dc1-a492-4a9af861a163">
-  <name>AdditionalTableControlSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional table control settings</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
-  <useStandardCommands>true</useStandardCommands>
+ <name>AdditionalTableControlSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>E942EEF3-130D-8EF0-0745-511C44620EBE</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
+ <useStandardCommands>true</useStandardCommands>
 </mdclass:CommonForm>

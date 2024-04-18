@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb74ecea-9507-4258-b105-35f229f3ff5a">
-  <producedTypes>
-    <objectType typeId="1876b23b-555a-451d-9da2-7e12a1923d39" valueTypeId="39666d59-3520-4976-a29e-8bcaa12bc01f"/>
-    <managerType typeId="554ea4c0-d254-415e-bfdf-c54e42adefdd" valueTypeId="7241d4d9-5250-43d4-8547-314762504768"/>
-  </producedTypes>
-  <name>ObjectPropertyEditor</name>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fb74ecea-9507-4258-b105-35f229f3ff5a">
+ <producedTypes>
+  <objectType typeId="1876b23b-555a-451d-9da2-7e12a1923d39" valueTypeId="39666d59-3520-4976-a29e-8bcaa12bc01f"/>
+  <managerType typeId="554ea4c0-d254-415e-bfdf-c54e42adefdd" valueTypeId="7241d4d9-5250-43d4-8547-314762504768"/>
+ </producedTypes>
+ <name>ObjectPropertyEditor</name>
+ <synonym>
+  <key>en</key>
+  <value>00DB3817-4ADE-312B-B4C1-18FA02B1262D</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
+ <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Object property editor</value>
+   <key>en</key>
+   <value>E73F681E-5E25-120A-AE21-1AD1AC5550E6</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
-  <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
-    <name>EditMultilineText</name>
-    <synonym>
-      <key>en</key>
-      <value>Edit multiline text</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3a8545c6-abee-442b-b6cc-f4653659d1e7">
-    <name>EditValueList</name>
-    <synonym>
-      <key>en</key>
-      <value>Edit value list</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c26ffce1-9a8d-4ed1-8b5f-b2779d553898">
-    <name>PropertyPackEditor</name>
-    <synonym>
-      <key>en</key>
-      <value>Property pack editor</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="45342813-29ea-423e-a1a6-14db9e160002">
-    <name>FieldSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>Field settings</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c37d6fdd-3a9d-4301-8a7c-50ca000d36b6">
-    <name>RunCodeForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Run code form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="5aa0f109-bc0b-438a-8a02-796a931feed9">
-    <name>GroupEditingProperties</name>
-    <synonym>
-      <key>en</key>
-      <value>Group editing of properties</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType/>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <modifiesData>true</modifiesData>
-    <representation>Picture</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.SpreadsheetReadOnly</picture>
-    </picture>
-  </commands>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
+  <name>EditMultilineText</name>
+  <synonym>
+   <key>en</key>
+   <value>A27361D2-969A-51BF-F8ED-D1D84909BE1C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3a8545c6-abee-442b-b6cc-f4653659d1e7">
+  <name>EditValueList</name>
+  <synonym>
+   <key>en</key>
+   <value>42BBB551-6346-CC06-6AAF-F120294FA694</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c26ffce1-9a8d-4ed1-8b5f-b2779d553898">
+  <name>PropertyPackEditor</name>
+  <synonym>
+   <key>en</key>
+   <value>9556A2A8-05BF-5C89-9C73-3140B0E09A6C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="45342813-29ea-423e-a1a6-14db9e160002">
+  <name>FieldSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>41148209-3BF3-C955-5FA9-9C5503F9F88D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c37d6fdd-3a9d-4301-8a7c-50ca000d36b6">
+  <name>RunCodeForm</name>
+  <synonym>
+   <key>en</key>
+   <value>FCD81A75-B196-5A44-4552-2442FC9DEED2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="5aa0f109-bc0b-438a-8a02-796a931feed9">
+  <name>GroupEditingProperties</name>
+  <synonym>
+   <key>en</key>
+   <value>F98D892E-2CD3-D42E-E6D3-316CDE2771FC</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType/>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <modifiesData>true</modifiesData>
+  <representation>Picture</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.SpreadsheetReadOnly</picture>
+  </picture>
+ </commands>
 </mdclass:DataProcessor>

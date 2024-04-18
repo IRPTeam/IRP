@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d4af758b-5702-4f57-b427-17611e342e2b">
-  <name>ServerReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Server reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringRequest</returnValuesReuse>
+ <name>ServerReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>483761D2-814A-EC26-6C3E-E34A3DDD4D8C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringRequest</returnValuesReuse>
 </mdclass:CommonModule>

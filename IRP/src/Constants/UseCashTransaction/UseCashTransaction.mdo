@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="71c28684-ce0b-42f9-b127-36e13e64950a">
-  <producedTypes>
-    <managerType typeId="98e017b3-5819-4a82-a802-1167ead2e8b6" valueTypeId="fd01cd01-ed97-4bb2-a990-8db9725c27b1"/>
-    <valueManagerType typeId="9884922b-5dd0-4742-bdfd-8a35b81bdc8b" valueTypeId="3a7aca98-cead-4f89-b579-650fd05d5ef0"/>
-    <valueKeyType typeId="df21ef48-bd5f-48e8-897e-6774c8d56377" valueTypeId="0d08c65e-55be-415f-9be9-458f1136afb7"/>
-  </producedTypes>
-  <name>UseCashTransaction</name>
-  <synonym>
-    <key>en</key>
-    <value>Use cash transaction</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="71c28684-ce0b-42f9-b127-36e13e64950a">
+ <producedTypes>
+  <managerType typeId="98e017b3-5819-4a82-a802-1167ead2e8b6" valueTypeId="fd01cd01-ed97-4bb2-a990-8db9725c27b1"/>
+  <valueManagerType typeId="9884922b-5dd0-4742-bdfd-8a35b81bdc8b" valueTypeId="3a7aca98-cead-4f89-b579-650fd05d5ef0"/>
+  <valueKeyType typeId="df21ef48-bd5f-48e8-897e-6774c8d56377" valueTypeId="0d08c65e-55be-415f-9be9-458f1136afb7"/>
+ </producedTypes>
+ <name>UseCashTransaction</name>
+ <synonym>
+  <key>en</key>
+  <value>E0D9F87C-2BAE-AE3D-D9B8-8F6134C4D4C2</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

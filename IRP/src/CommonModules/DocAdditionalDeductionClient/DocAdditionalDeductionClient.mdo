@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b291afbb-6946-41da-833e-eea4de86671c">
-  <name>DocAdditionalDeductionClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional deduction client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocAdditionalDeductionClient</name>
+ <synonym>
+  <key>en</key>
+  <value>2A6F3C43-D3EB-5B85-5A83-346AE60E5356</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

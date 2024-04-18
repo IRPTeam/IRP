@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1900937c-1c11-4755-b269-0c49ee172ba6">
-  <name>AuditLockUnset</name>
-  <synonym>
-    <key>en</key>
-    <value>Audit lock (unset lock)</value>
-  </synonym>
+ <name>AuditLockUnset</name>
+ <synonym>
+  <key>en</key>
+  <value>6F541584-5CFD-89A7-7F2E-EFC0185DA880</value>
+ </synonym>
 </mdclass:Role>

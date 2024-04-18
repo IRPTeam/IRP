@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5945fd3-b846-4609-bc7c-28a014003de3">
-  <name>AccumulationRegisters_R8510B_BookValueOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R8510B BookValueOfFixedAsset</value>
-  </synonym>
+ <name>AccumulationRegisters_R8510B_BookValueOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>B2148C9E-27FB-64D9-9F9E-E6AE944B5210______________</value>
+ </synonym>
 </mdclass:Role>

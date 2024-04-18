@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="58b903ab-795c-4a51-ab2d-c712251cc21b">
-  <name>OnWrite_UpdateUsersRoleOnWrite</name>
-  <synonym>
-    <key>en</key>
-    <value>On write update users role on write</value>
-  </synonym>
-  <source>
-    <types>CatalogObject.AccessProfiles</types>
-    <types>CatalogObject.AccessGroups</types>
-  </source>
-  <event>OnWrite</event>
-  <handler>CommonModule.UsersEvent.UpdateUsersRoleOnWrite</handler>
+ <name>OnWrite_UpdateUsersRoleOnWrite</name>
+ <synonym>
+  <key>en</key>
+  <value>DA560B83-F5D9-CD83-325D-DB8BAB8397FA</value>
+ </synonym>
+ <source>
+  <types>CatalogObject.AccessProfiles</types>
+  <types>CatalogObject.AccessGroups</types>
+ </source>
+ <event>OnWrite</event>
+ <handler>CommonModule.UsersEvent.UpdateUsersRoleOnWrite</handler>
 </mdclass:EventSubscription>

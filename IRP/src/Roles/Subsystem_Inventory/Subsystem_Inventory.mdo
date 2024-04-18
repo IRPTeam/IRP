@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="81d23cc3-1524-4d2d-87da-d4a7e8d5dcc5">
-  <name>Subsystem_Inventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Inventory</value>
-  </synonym>
+ <name>Subsystem_Inventory</name>
+ <synonym>
+  <key>en</key>
+  <value>8ECBA97F-7746-A17B-B98D-D3558FEF0BEC</value>
+ </synonym>
 </mdclass:Role>

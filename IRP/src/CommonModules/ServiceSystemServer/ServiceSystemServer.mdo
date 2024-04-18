@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fdac35e5-69bf-4528-8969-438b2bca7a72">
-  <name>ServiceSystemServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Service system server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>ServiceSystemServer</name>
+ <synonym>
+  <key>en</key>
+  <value>A3C931AC-ECE1-B89E-E913-334D44767B17</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

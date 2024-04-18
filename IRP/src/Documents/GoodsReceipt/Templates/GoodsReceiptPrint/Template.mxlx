@@ -115,7 +115,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Goods receipt [Number] [Date]</v8:content>
+							<v8:content>A82EA2C8-80DF-2A9A-ADA4-43F3A1E80C1A[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -153,7 +153,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>16D67AE6-D36F-E0FE-EBD6-68882BFC579A</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -177,7 +177,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>0E4819D1-0236-DE79-95DE-E4711BE6FBFA</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -208,7 +208,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>FE9F4AE4-8C9A-77C6-6813-31E5728A75A7</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -219,7 +219,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>BFBE6F0F-BA05-72EB-B15B-BAD0ECFE9E46</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -230,7 +230,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>A7BB5111-1DA9-033D-DEC8-8E67E28D23CE</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -241,7 +241,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>25E14DEA-618F-5897-7AF8-8786A604ED01</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -252,7 +252,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>BCED7EF7-B149-A313-31B2-2358D12A5FBC</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -312,7 +312,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>722C6F8A-F79E-9489-9FD4-49C379756753</v8:content>
 						</v8:item>
 					</tl>
 				</c>

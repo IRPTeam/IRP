@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cf766665-880a-4cfe-bf8a-ff9d836ef1ef">
-  <name>AddDataProc</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional dataproc</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.AddDataProc</picture>
-  </picture>
-  <content>SessionParameter.ConnectedAddDataProc</content>
-  <content>CommonModule.AddDataProcClient</content>
-  <content>CommonModule.AddDataProcServer</content>
-  <content>Catalog.ExternalDataProc</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="cf766665-880a-4cfe-bf8a-ff9d836ef1ef">
+ <name>AddDataProc</name>
+ <synonym>
+  <key>en</key>
+  <value>58BDA245-B610-D3BF-FE98-8F069EFDA5B9</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.AddDataProc</picture>
+ </picture>
+ <content>SessionParameter.ConnectedAddDataProc</content>
+ <content>CommonModule.AddDataProcClient</content>
+ <content>CommonModule.AddDataProcServer</content>
+ <content>Catalog.ExternalDataProc</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

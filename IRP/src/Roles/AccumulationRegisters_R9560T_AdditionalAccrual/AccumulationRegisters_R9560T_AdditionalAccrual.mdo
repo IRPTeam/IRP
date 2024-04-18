@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6ff11b5d-8b36-484b-8084-118c51a76e97">
-  <name>AccumulationRegisters_R9560T_AdditionalAccrual</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R9560T AdditionalAccrual</value>
-  </synonym>
+ <name>AccumulationRegisters_R9560T_AdditionalAccrual</name>
+ <synonym>
+  <key>en</key>
+  <value>A448DAEE-AEFA-1E07-7D26-6C23D5C92DC7__________</value>
+ </synonym>
 </mdclass:Role>

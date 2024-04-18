@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7418fcce-affe-4756-8727-f5251ae5dd62">
-  <name>BeforeWrite_CheckFillingRowKey</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write check filling row key</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.DocumentsServer.BeforeWrite_CheckFillingRowKeyBeforeWrite</handler>
+ <name>BeforeWrite_CheckFillingRowKey</name>
+ <synonym>
+  <key>en</key>
+  <value>9158A8A6-56E5-C683-3F78-807E3C744DAD</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.DocumentsServer.BeforeWrite_CheckFillingRowKeyBeforeWrite</handler>
 </mdclass:EventSubscription>

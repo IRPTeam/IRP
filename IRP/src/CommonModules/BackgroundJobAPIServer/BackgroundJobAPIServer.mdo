@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff7f8ddd-3eed-4a7a-bd8f-8c06239802c6">
-  <name>BackgroundJobAPIServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Background job API Server</value>
-  </synonym>
-  <server>true</server>
+ <name>BackgroundJobAPIServer</name>
+ <synonym>
+  <key>en</key>
+  <value>75536905-4DCF-EC30-03E5-58E533CF2770</value>
+ </synonym>
+ <server>true</server>
 </mdclass:CommonModule>

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6127953e-774b-4413-8c48-2f56b6d75a07">
-  <producedTypes>
-    <refType typeId="8abb0575-f98d-4402-8db4-5f460f7b5bc7" valueTypeId="778aa5c3-8a2c-464b-b4d8-d725167467ae"/>
-    <listType typeId="f3fd2080-ae51-4087-990c-d893d3ea0131" valueTypeId="df261c46-2e72-40eb-b50c-51c964bda4b9"/>
-    <managerType typeId="e8a18ec3-d7ac-461d-b972-65b9a2ee8c94" valueTypeId="c382f5bd-b1de-40c4-a966-9dea50ae7927"/>
-  </producedTypes>
-  <name>TypeEquipment</name>
+ <producedTypes>
+  <refType typeId="8abb0575-f98d-4402-8db4-5f460f7b5bc7" valueTypeId="778aa5c3-8a2c-464b-b4d8-d725167467ae"/>
+  <listType typeId="f3fd2080-ae51-4087-990c-d893d3ea0131" valueTypeId="df261c46-2e72-40eb-b50c-51c964bda4b9"/>
+  <managerType typeId="e8a18ec3-d7ac-461d-b972-65b9a2ee8c94" valueTypeId="c382f5bd-b1de-40c4-a966-9dea50ae7927"/>
+ </producedTypes>
+ <name>TypeEquipment</name>
+ <synonym>
+  <key>en</key>
+  <value>BE47A4A8-736D-99EE-E4A7-7C6372CB8EA1</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="b55052e6-bac8-4642-aca9-2b563fde894f">
+  <name>BankTerminal</name>
   <synonym>
-    <key>en</key>
-    <value>Type equipment</value>
+   <key>en</key>
+   <value>5D5932F5-FAD0-5E63-3757-7875C64761AB</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="b55052e6-bac8-4642-aca9-2b563fde894f">
-    <name>BankTerminal</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank terminal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="93331c36-34de-457d-ae04-66f664429268">
-    <name>Display</name>
-    <synonym>
-      <key>en</key>
-      <value>Display</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="da26fb28-a4dc-4c61-ab68-1f5c8b3375c2">
-    <name>FiscalPrinter</name>
-    <synonym>
-      <key>en</key>
-      <value>Fiscal printer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bda90896-6092-4344-8de2-f24591d094d7">
-    <name>ReceiptPrinter</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt printer</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="93331c36-34de-457d-ae04-66f664429268">
+  <name>Display</name>
+  <synonym>
+   <key>en</key>
+   <value>5EF6A59C-394F-A361-1281-1C83F10EACEB</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="da26fb28-a4dc-4c61-ab68-1f5c8b3375c2">
+  <name>FiscalPrinter</name>
+  <synonym>
+   <key>en</key>
+   <value>EDEE75A5-F6B0-84C8-83A9-95241239416A</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bda90896-6092-4344-8de2-f24591d094d7">
+  <name>ReceiptPrinter</name>
+  <synonym>
+   <key>en</key>
+   <value>B3A04949-2FB0-0EA5-5A75-53F79135F5EF</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

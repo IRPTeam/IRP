@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b5338155-118a-41ca-b933-ac98c3b6e1fa">
-  <name>Document_CashStatement</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Cash statement&quot;</value>
-  </synonym>
+ <name>Document_CashStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>424F2C64-B6F6-3E69-9E77-771DECC908C8</value>
+ </synonym>
 </mdclass:Role>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8c8b610b-9440-42a2-b83a-0058ac4e3db6">
-  <producedTypes>
-    <containerType typeId="0e3f2b29-8a08-49a3-bad7-277bc5e83153" valueTypeId="558d9739-cc10-4f10-b60e-3c18256bf5a0"/>
-  </producedTypes>
-  <name>typeOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Type orders</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.SalesReturnOrder</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.PurchaseReturnOrder</types>
-    <types>DocumentRef.InternalSupplyRequest</types>
-    <types>DocumentRef.PurchaseOrder</types>
-    <types>DocumentRef.SalesOrder</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="0e3f2b29-8a08-49a3-bad7-277bc5e83153" valueTypeId="558d9739-cc10-4f10-b60e-3c18256bf5a0"/>
+ </producedTypes>
+ <name>typeOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>59FAF51C-4CEA-2AAE-E5A4-45CF588A22B1</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.SalesReturnOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.PurchaseReturnOrder</types>
+  <types>DocumentRef.InternalSupplyRequest</types>
+  <types>DocumentRef.PurchaseOrder</types>
+  <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

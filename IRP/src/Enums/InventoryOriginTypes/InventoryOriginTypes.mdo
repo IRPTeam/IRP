@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cb126698-a4b6-4ff0-9327-c4574c960cae">
-  <producedTypes>
-    <refType typeId="d7e385c3-bc8e-4434-9460-426ecf1b89bc" valueTypeId="e0e3b7cc-c3f1-4be3-8ab2-ac3d4160ab1b"/>
-    <listType typeId="c4895461-8815-4b34-a701-9afc7adad8ca" valueTypeId="cc8585d7-1cc2-4b80-87cd-fefe8b2c185d"/>
-    <managerType typeId="c7bec0fa-4d62-48f4-b23c-70edb403ba50" valueTypeId="0f7d8b6d-46b1-4d31-9f60-4b87fce6ad0d"/>
-  </producedTypes>
-  <name>InventoryOriginTypes</name>
+ <producedTypes>
+  <refType typeId="d7e385c3-bc8e-4434-9460-426ecf1b89bc" valueTypeId="e0e3b7cc-c3f1-4be3-8ab2-ac3d4160ab1b"/>
+  <listType typeId="c4895461-8815-4b34-a701-9afc7adad8ca" valueTypeId="cc8585d7-1cc2-4b80-87cd-fefe8b2c185d"/>
+  <managerType typeId="c7bec0fa-4d62-48f4-b23c-70edb403ba50" valueTypeId="0f7d8b6d-46b1-4d31-9f60-4b87fce6ad0d"/>
+ </producedTypes>
+ <name>InventoryOriginTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>7870BE89-4455-1931-1438-8C0C0C944958</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="8b770027-4040-430b-bd60-a033ee4ee9fe">
+  <name>OwnStocks</name>
   <synonym>
-    <key>en</key>
-    <value>Inventory origin types</value>
+   <key>en</key>
+   <value>D483D862-FB3A-5450-0CBF-F1C11B6ED712</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="8b770027-4040-430b-bd60-a033ee4ee9fe">
-    <name>OwnStocks</name>
-    <synonym>
-      <key>en</key>
-      <value>Own stocks</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="10251ca8-1774-461c-b5ca-cb919cfa3357">
-    <name>ConsignorStocks</name>
-    <synonym>
-      <key>en</key>
-      <value>Consignor stocks</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="10251ca8-1774-461c-b5ca-cb919cfa3357">
+  <name>ConsignorStocks</name>
+  <synonym>
+   <key>en</key>
+   <value>E691E9AD-9D3E-49DB-B6BC-C4A268D00A4A</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

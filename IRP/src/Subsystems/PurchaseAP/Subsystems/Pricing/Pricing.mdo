@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="34fdc2d4-0ef3-477b-a5c0-ae478ca4f9cc">
-  <name>Pricing</name>
-  <synonym>
-    <key>en</key>
-    <value>Pricing</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.PriceList</content>
-  <content>Catalog.PriceTypes</content>
-  <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
-  <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
+ <name>Pricing</name>
+ <synonym>
+  <key>en</key>
+  <value>815B3EC3-3B33-A2EC-C22E-EC8E27374498</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.PriceList</content>
+ <content>Catalog.PriceTypes</content>
+ <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
+ <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

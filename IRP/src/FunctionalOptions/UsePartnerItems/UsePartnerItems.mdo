@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f905c3a-e211-4439-aaec-e1d4469a915a">
-  <name>UsePartnerItems</name>
-  <synonym>
-    <key>en</key>
-    <value>Use partner items</value>
-  </synonym>
-  <location>Constant.UsePartnerItems</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.PartnerItems</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.PartnerItem</content>
-  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.PartnerItem</content>
+ <name>UsePartnerItems</name>
+ <synonym>
+  <key>en</key>
+  <value>AC139FCD-C93C-6348-8BCB-BA6B0156498E</value>
+ </synonym>
+ <location>Constant.UsePartnerItems</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.PartnerItems</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.PartnerItem</content>
+ <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.PartnerItem</content>
 </mdclass:FunctionalOption>

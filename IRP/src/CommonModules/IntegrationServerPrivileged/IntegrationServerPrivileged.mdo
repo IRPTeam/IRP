@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7eadd0fb-8b81-4c7c-b067-7a2348820294">
-  <name>IntegrationServerPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Integration server privileged</value>
-  </synonym>
-  <server>true</server>
-  <privileged>true</privileged>
+ <name>IntegrationServerPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>E0C856A3-9849-78BC-C536-6F41207D41B0</value>
+ </synonym>
+ <server>true</server>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

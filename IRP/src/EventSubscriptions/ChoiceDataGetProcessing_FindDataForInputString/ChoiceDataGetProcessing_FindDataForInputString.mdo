@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4a42279-681b-48da-910f-cb1d995b63f5">
-  <name>ChoiceDataGetProcessing_FindDataForInputString</name>
-  <synonym>
-    <key>en</key>
-    <value>Choice data get processing find data for input string</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesManager</types>
-    <types>CatalogManager</types>
-    <types>ChartOfAccountsManager.Basic</types>
-  </source>
-  <event>ChoiceDataGetProcessing</event>
-  <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>
+ <name>ChoiceDataGetProcessing_FindDataForInputString</name>
+ <synonym>
+  <key>en</key>
+  <value>AF3AA8B9-7352-9437-7F26-6F3D00F64604_________________</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesManager</types>
+  <types>CatalogManager</types>
+  <types>ChartOfAccountsManager.Basic</types>
+ </source>
+ <event>ChoiceDataGetProcessing</event>
+ <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>
 </mdclass:EventSubscription>

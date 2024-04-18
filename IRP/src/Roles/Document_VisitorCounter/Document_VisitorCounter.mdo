@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50a73c52-0cfe-4b14-af19-bdfe867e3945">
-  <name>Document_VisitorCounter</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Visitor counter&quot;</value>
-  </synonym>
+ <name>Document_VisitorCounter</name>
+ <synonym>
+  <key>en</key>
+  <value>FE823A65-B71B-1243-3A3B-BEE7B0C9D29A</value>
+ </synonym>
 </mdclass:Role>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ce639f5-04a5-4c35-a419-542e84b51722">
-  <name>EditAccounting</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit accounting</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditAccounting</name>
+ <synonym>
+  <key>en</key>
+  <value>5EFB80E2-B59C-CF9B-B70E-E8E851ED5A99</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

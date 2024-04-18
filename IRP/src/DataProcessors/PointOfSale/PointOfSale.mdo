@@ -1,176 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="58b1a23d-3bfc-4775-8360-b12d1bda6e1c">
-  <producedTypes>
-    <objectType typeId="e5fcad66-7768-4d3a-b385-a8ce6b4a3cdf" valueTypeId="62f03e06-dc7f-4016-b845-5f6b80514249"/>
-    <managerType typeId="5faa6790-23fb-4cfc-81ab-8c8d144a6281" valueTypeId="71dd6469-cde5-477c-a415-303a6b104b1b"/>
-  </producedTypes>
-  <name>PointOfSale</name>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="58b1a23d-3bfc-4775-8360-b12d1bda6e1c">
+ <producedTypes>
+  <objectType typeId="e5fcad66-7768-4d3a-b385-a8ce6b4a3cdf" valueTypeId="62f03e06-dc7f-4016-b845-5f6b80514249"/>
+  <managerType typeId="5faa6790-23fb-4cfc-81ab-8c8d144a6281" valueTypeId="71dd6469-cde5-477c-a415-303a6b104b1b"/>
+ </producedTypes>
+ <name>PointOfSale</name>
+ <synonym>
+  <key>en</key>
+  <value>BC68CD6D-C838-3FDF-F400-06F56DDCF1FD</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
+ <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>Point of sale</value>
+   <key>en</key>
+   <value>9ABA86E9-9DDB-E5E4-411C-C9AA12303B7E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.PointOfSale.Form.Form</defaultForm>
-  <attributes uuid="a569aba7-c821-4877-8f3a-6b44d7cae57f">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="691cb651-dbb4-492f-8417-9655a1705d0d">
-    <name>Discount</name>
-    <synonym>
-      <key>en</key>
-      <value>Discount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="819cdf46-4204-4684-bbf4-58f53d95f194">
-    <name>Cashback</name>
-    <synonym>
-      <key>en</key>
-      <value>Cashback</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="a9f12336-8a92-4eee-9b66-29ee982bd135">
-    <name>CustomerCash</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer cash</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
-    <name>Workstation</name>
-    <synonym>
-      <key>en</key>
-      <value>Workstation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Workstations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="757bb849-077b-44b3-a4de-7853e891ca13">
-    <name>Payment</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e0163b39-c31e-4412-8c14-58fdd43c4cc4">
-    <name>PaymentTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment types</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="7d563f30-7545-4d8c-9bd2-d1e63038bde6">
-    <name>SessionClosing</name>
-    <synonym>
-      <key>en</key>
-      <value>Session closing</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4885bd97-2e9d-4295-abe0-7776837890ae">
-    <name>CashOut</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash out</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="d37d69d3-2cdb-425d-bf0b-061752ef7871">
-    <name>ChangeRight</name>
-    <synonym>
-      <key>en</key>
-      <value>Change right</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f5db3c2b-ca24-41a0-94a5-d1f8843aab20">
-    <name>SelectBasisDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Select basis document</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2aeb999f-b8c7-41bc-8beb-d218d80662bc">
-    <name>GetSettlement</name>
-    <synonym>
-      <key>en</key>
-      <value>Get settlement</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3c9fcf58-7924-4e6f-afba-0db5708c8823">
-    <name>SelectPostponedReceipt</name>
-    <synonym>
-      <key>en</key>
-      <value>Select postponed receipt</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="24f15b61-9328-41d6-85d0-35e1cc0faa0c">
-    <name>CancellationConfirmation</name>
-    <synonym>
-      <key>en</key>
-      <value>Cancellation confirmation</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="691cb651-dbb4-492f-8417-9655a1705d0d">
+  <name>Discount</name>
+  <synonym>
+   <key>en</key>
+   <value>EE1FEFDE-7138-5A7D-D536-68F81D84A957</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="819cdf46-4204-4684-bbf4-58f53d95f194">
+  <name>Cashback</name>
+  <synonym>
+   <key>en</key>
+   <value>54BCACA6-3C33-A002-291A-A0A182A23FF5</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="a9f12336-8a92-4eee-9b66-29ee982bd135">
+  <name>CustomerCash</name>
+  <synonym>
+   <key>en</key>
+   <value>F70E084E-768F-D82B-B669-9D4BC1BF5CB6</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="7fd5393a-ed15-4de7-955c-be5d3715b311">
+  <name>Workstation</name>
+  <synonym>
+   <key>en</key>
+   <value>9CD8C2F9-A7F0-FEF7-7704-48CA37BF117D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Workstations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>429BB004-0050-2F2A-AF33-311608A5A619</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <forms uuid="6e29de76-f7b4-42c8-a2b7-9df2359eb2f3">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>396D9792-0DF9-87F1-157A-AADE32258E4D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="757bb849-077b-44b3-a4de-7853e891ca13">
+  <name>Payment</name>
+  <synonym>
+   <key>en</key>
+   <value>2555AA6E-0511-D89C-C543-3F2F152FFCD7</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e0163b39-c31e-4412-8c14-58fdd43c4cc4">
+  <name>PaymentTypes</name>
+  <synonym>
+   <key>en</key>
+   <value>9DCB3F16-5E26-D728-8D5E-EC0946CEE43D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7d563f30-7545-4d8c-9bd2-d1e63038bde6">
+  <name>SessionClosing</name>
+  <synonym>
+   <key>en</key>
+   <value>D7E4E4CE-458E-7B8C-CA73-37DB6E607006</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4885bd97-2e9d-4295-abe0-7776837890ae">
+  <name>CashOut</name>
+  <synonym>
+   <key>en</key>
+   <value>B6252981-274A-ECC4-465C-CCD2A972BE3D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d37d69d3-2cdb-425d-bf0b-061752ef7871">
+  <name>ChangeRight</name>
+  <synonym>
+   <key>en</key>
+   <value>C96CFF8D-D23F-ECEA-A846-6005B49C6879</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f5db3c2b-ca24-41a0-94a5-d1f8843aab20">
+  <name>SelectBasisDocument</name>
+  <synonym>
+   <key>en</key>
+   <value>433625D7-AFBF-4F51-1E9F-F74C26AD121D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2aeb999f-b8c7-41bc-8beb-d218d80662bc">
+  <name>GetSettlement</name>
+  <synonym>
+   <key>en</key>
+   <value>EDAD260B-9464-C5A2-27C7-78FA70A6D00F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3c9fcf58-7924-4e6f-afba-0db5708c8823">
+  <name>SelectPostponedReceipt</name>
+  <synonym>
+   <key>en</key>
+   <value>71B3E6E8-1CC6-479A-A308-84B44CCDFF90</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="24f15b61-9328-41d6-85d0-35e1cc0faa0c">
+  <name>CancellationConfirmation</name>
+  <synonym>
+   <key>en</key>
+   <value>F936CE18-D9C4-AC16-6D32-2E510F552031</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2110d1d3-885a-4016-b4da-e537c129ddb0">
-  <name>Document_OpeningEntry</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Opening entry&quot;</value>
-  </synonym>
+ <name>Document_OpeningEntry</name>
+ <synonym>
+  <key>en</key>
+  <value>65F6D2AA-9018-460F-FEE8-81CB4CABDFD2</value>
+ </synonym>
 </mdclass:Role>

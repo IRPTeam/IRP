@@ -1,293 +1,293 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a55bb039-dfc2-461e-aeb0-e3ac81c1adb3">
-  <producedTypes>
-    <selectionType typeId="bd7a3b6d-4581-41de-898a-43cf12a54528" valueTypeId="c49c1be6-da6a-4363-b1e0-f2966b1afb8f"/>
-    <listType typeId="47d0fc04-ba04-44a4-970b-d8c84285d3ef" valueTypeId="ae63b5a0-4a9d-4a6b-8be0-937125f12808"/>
-    <managerType typeId="8a1205b2-7ff9-4142-9f20-7d9da71d3305" valueTypeId="591a253c-78aa-4cd4-8c12-43f2f6bcf9e5"/>
-    <recordSetType typeId="1d766b90-6686-4e68-a586-bd42efb65bf5" valueTypeId="57a9d304-10a7-482d-bdef-9ca7e4a3c5bc"/>
-    <recordKeyType typeId="15de69a0-d8ed-4a2a-aa62-d498fc305396" valueTypeId="7679b2c3-e59b-4640-a2a1-cfb454edd36e"/>
-    <recordType typeId="d824eeb6-ae76-4b47-9fff-802864a60d83" valueTypeId="ce0acdd6-3ea3-4de5-97b6-1ccdab233826"/>
-  </producedTypes>
-  <name>R8014T_ConsignorSales</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a55bb039-dfc2-461e-aeb0-e3ac81c1adb3">
+ <producedTypes>
+  <selectionType typeId="bd7a3b6d-4581-41de-898a-43cf12a54528" valueTypeId="c49c1be6-da6a-4363-b1e0-f2966b1afb8f"/>
+  <listType typeId="47d0fc04-ba04-44a4-970b-d8c84285d3ef" valueTypeId="ae63b5a0-4a9d-4a6b-8be0-937125f12808"/>
+  <managerType typeId="8a1205b2-7ff9-4142-9f20-7d9da71d3305" valueTypeId="591a253c-78aa-4cd4-8c12-43f2f6bcf9e5"/>
+  <recordSetType typeId="1d766b90-6686-4e68-a586-bd42efb65bf5" valueTypeId="57a9d304-10a7-482d-bdef-9ca7e4a3c5bc"/>
+  <recordKeyType typeId="15de69a0-d8ed-4a2a-aa62-d498fc305396" valueTypeId="7679b2c3-e59b-4640-a2a1-cfb454edd36e"/>
+  <recordType typeId="d824eeb6-ae76-4b47-9fff-802864a60d83" valueTypeId="ce0acdd6-3ea3-4de5-97b6-1ccdab233826"/>
+ </producedTypes>
+ <name>R8014T_ConsignorSales</name>
+ <synonym>
+  <key>en</key>
+  <value>73753015-3E2B-5A74-4047-76F9D328D777</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="f64be95b-9bef-4f8f-b964-bbb5f3c830e8">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R8014 Consignor sales</value>
+   <key>en</key>
+   <value>B46B7D39-F976-D724-413B-BBEB1F8E6A23</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="f64be95b-9bef-4f8f-b964-bbb5f3c830e8">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="d2968fbb-5c04-4a76-aecd-c2af5ab2775f">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="002d2bb6-d6e4-4488-9d73-2f0bf12bd7bc">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="26864409-ac72-4801-abf2-d914600cb272">
-    <name>DELETE_RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="7fc2832e-c2c1-474d-a732-b75d8cbeae5a">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="51f7e1a2-7d67-4b84-901f-472b3ec50e43">
-    <name>DELETE_Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3a614bbc-d100-4af6-8655-9fc760ebc365">
-    <name>DELETE_Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="159b4060-99b7-455c-ba66-11b8f2155b16">
-    <name>SalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="ead31481-b7bd-43e7-af4c-5d3520c4b182">
-    <name>DELETE_PurchaseInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE purchase invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.OpeningEntry</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="17c77120-f654-4527-b2b1-87d0ebff4dbe">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="807db871-dfb1-4c7c-b104-da4ccecd30c7">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="58e40db4-56c0-4218-a427-8d52fc9cff40">
-    <name>SourceOfOrigin</name>
-    <synonym>
-      <key>en</key>
-      <value>Source of origin</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SourceOfOrigins</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="037e474a-bbc9-45ba-8859-951efed221f6">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="ff0cffce-9416-4f42-bdcc-78560ff1880d">
-    <name>PriceType</name>
-    <synonym>
-      <key>en</key>
-      <value>Price type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PriceTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="fef065f6-26c0-42e7-9dd9-33ce06afc188">
-    <name>DELETE_DontCalculateRow</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE dont calculate row</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3c655e5d-ab9e-4f64-bcd7-a6087e32f018">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="51735a47-d291-4235-acd4-56a2ac3da83e">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c0e369ab-6361-4f3b-8a70-e8a7f3312434">
-    <name>PriceIncludeTax</name>
-    <synonym>
-      <key>en</key>
-      <value>Price include tax</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="51d89aa3-a27f-40ad-8f73-21321be24ba3">
-    <name>DELETE_ConsignorPrice</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE consignor price</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePrice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="46a218d4-96a2-4443-a7eb-abab9c96ec9a">
-    <name>Price</name>
-    <synonym>
-      <key>en</key>
-      <value>Price</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePrice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="d2968fbb-5c04-4a76-aecd-c2af5ab2775f">
+  <name>NetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>771C7926-0F7C-1677-7245-58C84C1DFFEA</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="002d2bb6-d6e4-4488-9d73-2f0bf12bd7bc">
+  <name>Amount</name>
+  <synonym>
+   <key>en</key>
+   <value>173A7BBB-8DE6-5F2D-DDD5-5DB9C2605214</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="26864409-ac72-4801-abf2-d914600cb272">
+  <name>DELETE_RowKey</name>
+  <synonym>
+   <key>en</key>
+   <value>2B24933A-6034-BCF3-3F03-3173929935A4</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7fc2832e-c2c1-474d-a732-b75d8cbeae5a">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>3BBAE18E-E432-3038-8344-4A398E4FA5D3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="51f7e1a2-7d67-4b84-901f-472b3ec50e43">
+  <name>DELETE_Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>AC17009C-F742-420C-C7B3-3E13975AF776</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3a614bbc-d100-4af6-8655-9fc760ebc365">
+  <name>DELETE_Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>F262E2E3-A8A6-6EA7-75B1-1B090EE00C22</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="159b4060-99b7-455c-ba66-11b8f2155b16">
+  <name>SalesInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>7B7DC0BF-B5B4-0BD0-02A4-45D79A5F42D7</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="ead31481-b7bd-43e7-af4c-5d3520c4b182">
+  <name>DELETE_PurchaseInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>28DC7B94-4067-89D4-41B6-6DAC93194B5E</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.OpeningEntry</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="17c77120-f654-4527-b2b1-87d0ebff4dbe">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>B63ED95C-F37A-6F51-1C9D-DB9F6DC67D33</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="807db871-dfb1-4c7c-b104-da4ccecd30c7">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>2136A5E4-7537-5E47-763C-C4624BEF65AD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="58e40db4-56c0-4218-a427-8d52fc9cff40">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>B955BBFE-B56A-DEE1-16C6-685942F4CF9A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="037e474a-bbc9-45ba-8859-951efed221f6">
+  <name>Unit</name>
+  <synonym>
+   <key>en</key>
+   <value>E3B8C03D-3E53-52C6-65B2-2497F9576C3C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="ff0cffce-9416-4f42-bdcc-78560ff1880d">
+  <name>PriceType</name>
+  <synonym>
+   <key>en</key>
+   <value>2541A96D-F3B6-D8F8-8470-0530F8C4E4E5</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PriceTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="fef065f6-26c0-42e7-9dd9-33ce06afc188">
+  <name>DELETE_DontCalculateRow</name>
+  <synonym>
+   <key>en</key>
+   <value>FC8F1FF1-6BBB-1ADF-FCC2-213E9C8108AC</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3c655e5d-ab9e-4f64-bcd7-a6087e32f018">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>2F4DDD8C-6057-A5A4-4C02-2D0A6E8F6A8F</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="51735a47-d291-4235-acd4-56a2ac3da83e">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>81B24917-E3FC-33EC-C0E7-7190993DF96A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c0e369ab-6361-4f3b-8a70-e8a7f3312434">
+  <name>PriceIncludeTax</name>
+  <synonym>
+   <key>en</key>
+   <value>60619940-9D3C-2EA7-7DFB-BCFECF9AF73F</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="51d89aa3-a27f-40ad-8f73-21321be24ba3">
+  <name>DELETE_ConsignorPrice</name>
+  <synonym>
+   <key>en</key>
+   <value>71E41AA2-28A5-FDB7-7AC8-8F2ED23D8B15</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePrice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="46a218d4-96a2-4443-a7eb-abab9c96ec9a">
+  <name>Price</name>
+  <synonym>
+   <key>en</key>
+   <value>ABF93F0E-C262-EF24-4B1F-F06C01B18AFE</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePrice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

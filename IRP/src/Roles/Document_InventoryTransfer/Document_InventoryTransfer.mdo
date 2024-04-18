@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3fa3a9a2-6df5-4c08-9f33-29d52dcb9836">
-  <name>Document_InventoryTransfer</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Inventory transfer&quot;</value>
-  </synonym>
+ <name>Document_InventoryTransfer</name>
+ <synonym>
+  <key>en</key>
+  <value>A4EB02A3-E7D2-E3BD-D3EF-F4B996F2BEA1</value>
+ </synonym>
 </mdclass:Role>

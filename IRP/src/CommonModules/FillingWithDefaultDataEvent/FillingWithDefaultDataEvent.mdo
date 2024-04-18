@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="367734c8-eff6-4b0d-8e6e-ceb3aae93139">
-  <name>FillingWithDefaultDataEvent</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling with default data event</value>
-  </synonym>
-  <server>true</server>
+ <name>FillingWithDefaultDataEvent</name>
+ <synonym>
+  <key>en</key>
+  <value>3730663B-E9FD-3BE5-56C6-678344D3753C</value>
+ </synonym>
+ <server>true</server>
 </mdclass:CommonModule>

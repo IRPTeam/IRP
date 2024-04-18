@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45ceff17-2d87-4115-8629-fe4687f92442">
-  <producedTypes>
-    <selectionType typeId="5ca9e4fb-e50e-4071-8906-863124014a11" valueTypeId="2bc9f9b7-9d76-4bb5-b0ae-c36678705003"/>
-    <listType typeId="4d9ce755-311f-4f40-aeba-4842392f5bc8" valueTypeId="def9fd54-6394-4c30-8ab6-6139f30a07de"/>
-    <managerType typeId="6129aee8-8c67-4166-8f62-242ec7076ce9" valueTypeId="3da03e89-1fd5-4b65-ba8c-70b0e14fd60b"/>
-    <recordSetType typeId="f5503f44-e32d-426f-9770-d8a79676c465" valueTypeId="a9140d6b-d78d-444e-9ae0-c033690651d8"/>
-    <recordKeyType typeId="d6b90e93-82f1-4f53-8365-a1727a33f605" valueTypeId="0a84d934-39e3-4a36-8709-a09601b61cd8"/>
-    <recordType typeId="c094b5a0-e200-4846-98db-6bb0caa01802" valueTypeId="6b288f73-b543-43e3-a101-bd8cc3ad3927"/>
-  </producedTypes>
-  <name>R4010B_ActualStocks</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="45ceff17-2d87-4115-8629-fe4687f92442">
+ <producedTypes>
+  <selectionType typeId="5ca9e4fb-e50e-4071-8906-863124014a11" valueTypeId="2bc9f9b7-9d76-4bb5-b0ae-c36678705003"/>
+  <listType typeId="4d9ce755-311f-4f40-aeba-4842392f5bc8" valueTypeId="def9fd54-6394-4c30-8ab6-6139f30a07de"/>
+  <managerType typeId="6129aee8-8c67-4166-8f62-242ec7076ce9" valueTypeId="3da03e89-1fd5-4b65-ba8c-70b0e14fd60b"/>
+  <recordSetType typeId="f5503f44-e32d-426f-9770-d8a79676c465" valueTypeId="a9140d6b-d78d-444e-9ae0-c033690651d8"/>
+  <recordKeyType typeId="d6b90e93-82f1-4f53-8365-a1727a33f605" valueTypeId="0a84d934-39e3-4a36-8709-a09601b61cd8"/>
+  <recordType typeId="c094b5a0-e200-4846-98db-6bb0caa01802" valueTypeId="6b288f73-b543-43e3-a101-bd8cc3ad3927"/>
+ </producedTypes>
+ <name>R4010B_ActualStocks</name>
+ <synonym>
+  <key>en</key>
+  <value>11DF9699-9EB8-7F1E-E2DF-F675BE41647E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="bf2c289b-2076-456f-b9a0-d697b5419ebd">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4010 Actual stocks</value>
+   <key>en</key>
+   <value>A7494779-655C-9E38-8172-2CDC7FE56A5C</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="bf2c289b-2076-456f-b9a0-d697b5419ebd">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="65f03981-ec78-46d7-93b2-48b3da6e3b3f">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="28880d1d-33d7-4425-9b4d-4c9521f76429">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="5778f4d2-d025-4297-b157-105fdc57ff33">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="65f03981-ec78-46d7-93b2-48b3da6e3b3f">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>45C99D4C-4019-0773-3D06-63DE28123D3E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="28880d1d-33d7-4425-9b4d-4c9521f76429">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>675B1E66-07D8-B328-8B54-42F15EDF9D4D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5778f4d2-d025-4297-b157-105fdc57ff33">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>C740CEFD-DC1D-435F-FDCD-DE5483EE6186</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

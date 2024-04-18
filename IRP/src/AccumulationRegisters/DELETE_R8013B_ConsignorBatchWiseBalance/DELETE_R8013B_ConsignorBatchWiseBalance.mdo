@@ -1,117 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c2f61fa0-a054-45f0-9469-3a8168335712">
-  <producedTypes>
-    <selectionType typeId="7e30c7b9-2c3a-4621-abb2-f3d294c64d9d" valueTypeId="c8883568-cfd2-44a4-8388-0669143a6feb"/>
-    <listType typeId="5c8d19b7-7496-4ced-b826-5dcefb115087" valueTypeId="bfbbaad1-a4f2-401a-890b-3846b2674d97"/>
-    <managerType typeId="e10dc4c4-e24c-44da-b49b-05c6542dbf4d" valueTypeId="83a98da9-59fa-45e1-b6f0-8c372dc3beda"/>
-    <recordSetType typeId="d8c8103e-b861-4dd0-8ecb-03b8f56a943e" valueTypeId="5fb42bba-e2db-4162-9ce5-053b6cb055a2"/>
-    <recordKeyType typeId="c88a9a14-7d1c-44ff-8c89-42786c3833bf" valueTypeId="4feef495-f3d2-43bb-85ea-eb63cfe44eab"/>
-    <recordType typeId="0a4e9d0a-59d3-44ce-b3c9-d477f26a16ea" valueTypeId="479ca79a-ae97-4732-816b-f7a2e9797885"/>
-  </producedTypes>
-  <name>DELETE_R8013B_ConsignorBatchWiseBalance</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c2f61fa0-a054-45f0-9469-3a8168335712">
+ <producedTypes>
+  <selectionType typeId="7e30c7b9-2c3a-4621-abb2-f3d294c64d9d" valueTypeId="c8883568-cfd2-44a4-8388-0669143a6feb"/>
+  <listType typeId="5c8d19b7-7496-4ced-b826-5dcefb115087" valueTypeId="bfbbaad1-a4f2-401a-890b-3846b2674d97"/>
+  <managerType typeId="e10dc4c4-e24c-44da-b49b-05c6542dbf4d" valueTypeId="83a98da9-59fa-45e1-b6f0-8c372dc3beda"/>
+  <recordSetType typeId="d8c8103e-b861-4dd0-8ecb-03b8f56a943e" valueTypeId="5fb42bba-e2db-4162-9ce5-053b6cb055a2"/>
+  <recordKeyType typeId="c88a9a14-7d1c-44ff-8c89-42786c3833bf" valueTypeId="4feef495-f3d2-43bb-85ea-eb63cfe44eab"/>
+  <recordType typeId="0a4e9d0a-59d3-44ce-b3c9-d477f26a16ea" valueTypeId="479ca79a-ae97-4732-816b-f7a2e9797885"/>
+ </producedTypes>
+ <name>DELETE_R8013B_ConsignorBatchWiseBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>9BF2C590-E677-B037-701C-C356C7A1FEF3</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="991ac407-cb13-41ac-99c1-4efba4ce29ef">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R8013 Consignor batch wise balance</value>
+   <key>en</key>
+   <value>666B87E0-8146-356F-F9FF-F6A02C537B32</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="991ac407-cb13-41ac-99c1-4efba4ce29ef">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="4c12b9b9-32ad-401d-b4cb-452d38cc0488">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3cf724c8-2959-420c-af7b-eff1eb8c1668">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b1f75247-9225-4a9f-8824-ba526c446a2e">
-    <name>Batch</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.OpeningEntry</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c89878fc-2d28-46ae-8cbc-7b22d97f0dc9">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="320e46ce-a39b-4fc7-bb72-8dacb60ee22c">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8a5a804b-40bc-4bc8-aab5-30de2fc4fb4a">
-    <name>SourceOfOrigin</name>
-    <synonym>
-      <key>en</key>
-      <value>Source of origin</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SourceOfOrigins</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="4c12b9b9-32ad-401d-b4cb-452d38cc0488">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>FE912AF5-8706-71FC-C83B-BE97876D9F56</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3cf724c8-2959-420c-af7b-eff1eb8c1668">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>5A1CAF0F-23CF-A712-2F38-8304C29EA7A7</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b1f75247-9225-4a9f-8824-ba526c446a2e">
+  <name>Batch</name>
+  <synonym>
+   <key>en</key>
+   <value>FC302692-FF90-98D2-28DA-A4D7B4E7D9CE</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.OpeningEntry</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c89878fc-2d28-46ae-8cbc-7b22d97f0dc9">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>1AF5E5F5-D368-3874-485A-AC7646AEF8E9</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="320e46ce-a39b-4fc7-bb72-8dacb60ee22c">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>14A410E9-E62E-7EB8-89F8-899402359BCD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8a5a804b-40bc-4bc8-aab5-30de2fc4fb4a">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>DC14CBAB-684E-C75E-E264-4A86DA5016EB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

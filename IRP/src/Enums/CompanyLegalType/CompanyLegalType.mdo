@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96cfc3af-cd50-48e0-840d-b273fb56aaf8">
-  <producedTypes>
-    <refType typeId="069c162a-60ba-42de-96af-c0f6116c0293" valueTypeId="e39e7bad-e92e-4d2c-b211-c4d2912276ae"/>
-    <listType typeId="4db527ec-f5e9-4c74-966d-c93c14c6e10f" valueTypeId="355cc7e6-abda-42bd-ba54-58f4fe80faf0"/>
-    <managerType typeId="69a1fdb3-4d42-4f92-8439-a6c325c9c4ba" valueTypeId="418d5483-7040-4dd2-9656-ca29db00d4ab"/>
-  </producedTypes>
-  <name>CompanyLegalType</name>
+ <producedTypes>
+  <refType typeId="069c162a-60ba-42de-96af-c0f6116c0293" valueTypeId="e39e7bad-e92e-4d2c-b211-c4d2912276ae"/>
+  <listType typeId="4db527ec-f5e9-4c74-966d-c93c14c6e10f" valueTypeId="355cc7e6-abda-42bd-ba54-58f4fe80faf0"/>
+  <managerType typeId="69a1fdb3-4d42-4f92-8439-a6c325c9c4ba" valueTypeId="418d5483-7040-4dd2-9656-ca29db00d4ab"/>
+ </producedTypes>
+ <name>CompanyLegalType</name>
+ <synonym>
+  <key>en</key>
+  <value>6D1578B7-2509-C527-7AA0-06E62B9B994B</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="495fad05-6fbb-43b3-815a-7d60d29c7870">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Company legal type</value>
+   <key>en</key>
+   <value>9F2D6965-6FA9-03BA-AB05-594C14078320</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="495fad05-6fbb-43b3-815a-7d60d29c7870">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8cca21da-031e-4ecf-a9fd-8f5630ffc98b">
-    <name>Individual</name>
-    <synonym>
-      <key>en</key>
-      <value>Individual</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e326ec9c-7517-468b-bded-0f757c32e3f8">
-    <name>IndividualCompany</name>
-    <synonym>
-      <key>en</key>
-      <value>Individual company</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4516c1c8-6d2a-4f04-a695-05a17072ad1f">
-    <name>NonResident</name>
-    <synonym>
-      <key>en</key>
-      <value>Non resident</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="8cca21da-031e-4ecf-a9fd-8f5630ffc98b">
+  <name>Individual</name>
+  <synonym>
+   <key>en</key>
+   <value>C03B2CE3-B966-BEF5-5176-6BCD61850B2E</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="e326ec9c-7517-468b-bded-0f757c32e3f8">
+  <name>IndividualCompany</name>
+  <synonym>
+   <key>en</key>
+   <value>AE328F61-7BA8-594D-DE3C-CC45DBC4E25E</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4516c1c8-6d2a-4f04-a695-05a17072ad1f">
+  <name>NonResident</name>
+  <synonym>
+   <key>en</key>
+   <value>A58769CD-B660-13F3-3F3D-DDC3D8052D1D</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="20ef94e1-ba85-4ca3-a0b2-7acd8810afe3">
-  <producedTypes>
-    <refType typeId="2818e8b2-b3bc-481d-a59f-71a264fbe2b7" valueTypeId="0c1cd349-06d3-43ae-b04d-7bcb4654fa07"/>
-    <listType typeId="4247250d-5cea-482a-9b15-30f3af6bc2c4" valueTypeId="a7b031bb-7948-4d94-89af-79856e743e41"/>
-    <managerType typeId="7a562d98-0932-43ef-9671-4e6c4560f55d" valueTypeId="d564c423-c579-4df4-aa7b-da82c451a266"/>
-  </producedTypes>
-  <name>ModernizationTypes</name>
+ <producedTypes>
+  <refType typeId="2818e8b2-b3bc-481d-a59f-71a264fbe2b7" valueTypeId="0c1cd349-06d3-43ae-b04d-7bcb4654fa07"/>
+  <listType typeId="4247250d-5cea-482a-9b15-30f3af6bc2c4" valueTypeId="a7b031bb-7948-4d94-89af-79856e743e41"/>
+  <managerType typeId="7a562d98-0932-43ef-9671-4e6c4560f55d" valueTypeId="d564c423-c579-4df4-aa7b-da82c451a266"/>
+ </producedTypes>
+ <name>ModernizationTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>80D9FB44-72E0-1964-45DD-DA316795BB65</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="555e1377-9381-4f6b-b11e-e6afa0c08aef">
+  <name>Mount</name>
   <synonym>
-    <key>en</key>
-    <value>Modernization types</value>
+   <key>en</key>
+   <value>01C3FA8D-AB0D-BA30-0746-620CBCBD3DC0</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="555e1377-9381-4f6b-b11e-e6afa0c08aef">
-    <name>Mount</name>
-    <synonym>
-      <key>en</key>
-      <value>Mount</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="70e2ca7d-a3bb-4a6f-baf9-53d86f057785">
-    <name>Unmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Unmount</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="70e2ca7d-a3bb-4a6f-baf9-53d86f057785">
+  <name>Unmount</name>
+  <synonym>
+   <key>en</key>
+   <value>F1F5F365-8FCC-928B-BB31-1A61A3F7F9A1</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7c56fb65-ed71-4101-8ddb-dc8921019697">
-  <name>AccumulationRegisters_R6050T_SalesBatches</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R6050T SalesBatches</value>
-  </synonym>
+ <name>AccumulationRegisters_R6050T_SalesBatches</name>
+ <synonym>
+  <key>en</key>
+  <value>D8463429-DFB8-7B82-27FF-FCE4FC127037_____</value>
+ </synonym>
 </mdclass:Role>

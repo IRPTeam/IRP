@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>CF353C2E-4744-22BC-C649-92EBA7AC99F3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Branch</v8:content>
+					<v8:content>A8E3C261-D73E-606E-EFF9-96AB4900DFDB</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -38,7 +38,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Multi currency movement type</v8:content>
+					<v8:content>B3F0588C-A877-4991-100C-C8E8F7B785C8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -51,7 +51,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>D1D78083-24CB-E3E8-8DE0-0B6F80A7E49B</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>C51801EA-007E-716A-ACC4-409F22004380</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -74,7 +74,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>E19FC5FE-6812-5DB2-29E0-09F1A6AEC89C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -87,7 +87,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice</v8:content>
+					<v8:content>0ED8C8AA-6BF3-94CD-DC14-4B53408DDF2D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -100,7 +100,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>5510237B-8674-0B5A-A956-60B04DDBD039</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -113,7 +113,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount</v8:content>
+					<v8:content>72A5EAEC-59FE-8B77-7406-6A5A611E2A50</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -123,7 +123,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Net amount</v8:content>
+					<v8:content>864BD1CE-5952-A8AF-F072-2A27B0DDFFF1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -133,7 +133,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Offers amount</v8:content>
+					<v8:content>FEA96B64-4F05-AFF8-8913-300867A311B4</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -150,7 +150,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Partner</v8:content>
+					<v8:content>DF09B55F-F310-3A0E-E844-426B43294BD1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -163,7 +163,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Legal name</v8:content>
+					<v8:content>1239CBD4-F7CC-0207-7CEA-AF9EB6E0260A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -176,7 +176,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Partner terms</v8:content>
+					<v8:content>B8DFB6AC-07D1-3B69-9F71-1E6AC6DC879F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -189,7 +189,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Record document</v8:content>
+					<v8:content>B7178CB1-D285-96BE-EAB7-73D508A3636C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -203,7 +203,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, second</v8:content>
+					<v8:content>39D2950C-DC90-EA93-3B47-76524C2B873D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -217,7 +217,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Is transaciton currency</v8:content>
+					<v8:content>A8D57A2A-CFAD-4426-6F98-88D55057D20B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -266,7 +266,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>42DB8D4F-C9BB-B3FB-BBB3-33A080A41101</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -284,7 +284,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>183B4D53-E7A4-EEAC-C824-4FD920CBD81F</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -302,7 +302,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Report period</v8:content>
+				<v8:content>11907062-88D2-30AC-C817-70A6C4FCC84C</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -320,7 +320,7 @@ FROM
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>A01. Default</v8:content>
+				<v8:content>5D4B1F3F-3F13-E013-394E-E72D9607A961</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -485,7 +485,7 @@ FROM
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>C01. Currency</v8:content>
+				<v8:content>D41838BD-D6D2-FCE4-40A2-218C41546D97</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">

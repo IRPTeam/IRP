@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6b7da07c-97e1-402c-9585-6c25867c62a8">
-  <producedTypes>
-    <managerType typeId="c169e6cd-5e05-4577-96c1-d1e45305af24" valueTypeId="91653f54-1c2a-42db-9ca5-bd2c861600b7"/>
-    <valueManagerType typeId="06cff674-2533-416f-9e30-3bcac2dba684" valueTypeId="48b6f8c4-0128-4ce2-adfb-005d7cd5efe1"/>
-    <valueKeyType typeId="48816194-0224-4365-b9b4-f747e1dc7ae1" valueTypeId="9029d2df-9645-42b5-abf4-ff1dd92f0348"/>
-  </producedTypes>
-  <name>UseContactInformation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use contact information</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6b7da07c-97e1-402c-9585-6c25867c62a8">
+ <producedTypes>
+  <managerType typeId="c169e6cd-5e05-4577-96c1-d1e45305af24" valueTypeId="91653f54-1c2a-42db-9ca5-bd2c861600b7"/>
+  <valueManagerType typeId="06cff674-2533-416f-9e30-3bcac2dba684" valueTypeId="48b6f8c4-0128-4ce2-adfb-005d7cd5efe1"/>
+  <valueKeyType typeId="48816194-0224-4365-b9b4-f747e1dc7ae1" valueTypeId="9029d2df-9645-42b5-abf4-ff1dd92f0348"/>
+ </producedTypes>
+ <name>UseContactInformation</name>
+ <synonym>
+  <key>en</key>
+  <value>D91113FA-9C0C-BCE4-4D35-5D4B2E150FA1</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

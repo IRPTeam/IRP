@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a3725f8b-f87a-46f6-a5ce-fc50acc28144">
-  <name>AdditionalDocumentTableControl</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional document table control</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>AdditionalDocumentTableControl</name>
+ <synonym>
+  <key>en</key>
+  <value>92EDF4CD-8A64-9372-2A8F-F0430BCEDCFB</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

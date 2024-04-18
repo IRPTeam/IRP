@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8298b807-8f14-43e0-a587-0fa1bf2bf20b">
-  <name>FillingWithDefaultDataReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling with default data reuse</value>
-  </synonym>
-  <server>true</server>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>FillingWithDefaultDataReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>87350367-FB57-A60D-D5A1-14A9FA107939</value>
+ </synonym>
+ <server>true</server>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

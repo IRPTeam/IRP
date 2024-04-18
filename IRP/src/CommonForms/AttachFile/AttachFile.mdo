@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3b0efa8-f2f7-4328-ae72-61bdb22d58e0">
-  <name>AttachFile</name>
-  <synonym>
-    <key>en</key>
-    <value>Attach file</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>AttachFile</name>
+ <synonym>
+  <key>en</key>
+  <value>F2C1B057-F53B-0060-0E2D-D26353A2DC7E</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

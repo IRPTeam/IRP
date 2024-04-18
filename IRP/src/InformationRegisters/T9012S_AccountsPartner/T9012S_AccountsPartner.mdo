@@ -1,285 +1,285 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c3870d67-9fdd-410d-9996-0b205ecc1ed6">
-  <producedTypes>
-    <selectionType typeId="ae198c29-3900-4c69-9bd2-cd1e5d98684c" valueTypeId="f132dcd1-6a6a-45fb-b8d7-a8eb5eaa5727"/>
-    <listType typeId="25a15d34-3cf3-4e89-ba4b-879435763a3a" valueTypeId="29a87db1-4232-4162-9d74-df8382d78bc4"/>
-    <managerType typeId="e46e9153-f77d-4dc9-ad9f-cf8cbb3fb9a2" valueTypeId="5bb3957a-e3fd-4be7-82e6-d1e39b9fc073"/>
-    <recordSetType typeId="2095a6e0-3157-44ca-9e98-fcb35f2d141c" valueTypeId="936fe5ca-0936-49b6-acf9-bc87cba23cce"/>
-    <recordKeyType typeId="13c1fa48-df52-4e72-8101-0d9c7ef536f1" valueTypeId="5b4bc6dd-bef6-48bf-b664-e37e2186d573"/>
-    <recordType typeId="7303eee9-9c29-46c6-9e65-7bbe72b85248" valueTypeId="2f69b8e5-e539-43f5-9732-647315fcdb03"/>
-    <recordManagerType typeId="8b159153-000e-456f-a4c1-6b638cdeb830" valueTypeId="d4f9019f-d227-4581-a34b-96821c072275"/>
-  </producedTypes>
-  <name>T9012S_AccountsPartner</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c3870d67-9fdd-410d-9996-0b205ecc1ed6">
+ <producedTypes>
+  <selectionType typeId="ae198c29-3900-4c69-9bd2-cd1e5d98684c" valueTypeId="f132dcd1-6a6a-45fb-b8d7-a8eb5eaa5727"/>
+  <listType typeId="25a15d34-3cf3-4e89-ba4b-879435763a3a" valueTypeId="29a87db1-4232-4162-9d74-df8382d78bc4"/>
+  <managerType typeId="e46e9153-f77d-4dc9-ad9f-cf8cbb3fb9a2" valueTypeId="5bb3957a-e3fd-4be7-82e6-d1e39b9fc073"/>
+  <recordSetType typeId="2095a6e0-3157-44ca-9e98-fcb35f2d141c" valueTypeId="936fe5ca-0936-49b6-acf9-bc87cba23cce"/>
+  <recordKeyType typeId="13c1fa48-df52-4e72-8101-0d9c7ef536f1" valueTypeId="5b4bc6dd-bef6-48bf-b664-e37e2186d573"/>
+  <recordType typeId="7303eee9-9c29-46c6-9e65-7bbe72b85248" valueTypeId="2f69b8e5-e539-43f5-9732-647315fcdb03"/>
+  <recordManagerType typeId="8b159153-000e-456f-a4c1-6b638cdeb830" valueTypeId="d4f9019f-d227-4581-a34b-96821c072275"/>
+ </producedTypes>
+ <name>T9012S_AccountsPartner</name>
+ <synonym>
+  <key>en</key>
+  <value>7A78FE08-85E0-277F-FD2B-BCB9C172D39E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9012S_AccountsPartner.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>735DCFE9-1B2E-E253-3058-84FA6AC20411</value>
+ </recordPresentation>
+ <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
+  <name>AccountAdvancesVendor</name>
   <synonym>
-    <key>en</key>
-    <value>Accounts (Partner)</value>
+   <key>en</key>
+   <value>8A7718BB-3074-4037-733D-D48B1609126E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T9012S_AccountsPartner.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Accounts (Partner)</value>
-  </recordPresentation>
-  <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
-    <name>AccountAdvancesVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="b8166b89-b113-4e0b-acf0-16ca3d5e746e">
-    <name>AccountTransactionsVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Transactions</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="fde676d3-c449-48be-9611-9dab970a1523">
-    <name>AccountAdvancesCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="bdba5000-f6ce-4fd1-8db0-35bc4dda9c60">
-    <name>AccountTransactionsCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Transactions</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="3f968698-c565-4815-9422-c5eee9ab1957">
-    <name>AccountAdvancesOther</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="f424f156-54b2-4efe-9fe5-e0e236c1ccab">
-    <name>AccountTransactionsOther</name>
-    <synonym>
-      <key>en</key>
-      <value>Transactions</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="63f9c712-8432-4ec8-afb1-5ab2166541b0">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="2eca7011-c535-459c-92cc-b873b122e050">
-    <name>LedgerTypeVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type variant</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypeVariants</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="14d18982-1bd5-40ce-be9c-d7608d17540c">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="b67f39e4-62be-4753-84e9-207e67a7a831">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Agreement</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="af5de709-22d8-48d0-bc0d-cb4dfdd90f27">
-    <name>Vendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Vendor</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f8141b9a-bc0d-4606-8f08-e521551963ad">
-    <name>Customer</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="fcf36173-677f-40fe-bf10-405a41c008a8">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="b97a3c39-cde2-4613-8ed8-cb492a34f131">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="f4d9c850-72e5-46e2-86fc-207034084f82">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="b8166b89-b113-4e0b-acf0-16ca3d5e746e">
+  <name>AccountTransactionsVendor</name>
+  <synonym>
+   <key>en</key>
+   <value>22EE1418-716F-0D7E-EF77-71C82FB1E0B3</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="fde676d3-c449-48be-9611-9dab970a1523">
+  <name>AccountAdvancesCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>8DFC152E-CF4F-A2CE-E413-3719E74E0C1A</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="bdba5000-f6ce-4fd1-8db0-35bc4dda9c60">
+  <name>AccountTransactionsCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>0675A972-70F5-9AFC-CDCC-C493B3E39530</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="3f968698-c565-4815-9422-c5eee9ab1957">
+  <name>AccountAdvancesOther</name>
+  <synonym>
+   <key>en</key>
+   <value>582D0BF1-2B07-EA78-880A-A862C377BDA8</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="f424f156-54b2-4efe-9fe5-e0e236c1ccab">
+  <name>AccountTransactionsOther</name>
+  <synonym>
+   <key>en</key>
+   <value>AEF0E78F-57E8-654D-D73E-EC6CA153887A</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="63f9c712-8432-4ec8-afb1-5ab2166541b0">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>990DBE4C-80CF-D859-90D3-32630506E2E2</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="2eca7011-c535-459c-92cc-b873b122e050">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>2C7B7C6A-7D27-C318-8979-9C572904050E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="14d18982-1bd5-40ce-be9c-d7608d17540c">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>BCD20B36-DC17-A863-39AF-FE4D5C91F337</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b67f39e4-62be-4753-84e9-207e67a7a831">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>A3156723-84BB-45CC-CB27-72AA01262B6C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="af5de709-22d8-48d0-bc0d-cb4dfdd90f27">
+  <name>Vendor</name>
+  <synonym>
+   <key>en</key>
+   <value>3CD0472C-C382-1783-30C4-49EAFDFB21C8</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f8141b9a-bc0d-4606-8f08-e521551963ad">
+  <name>Customer</name>
+  <synonym>
+   <key>en</key>
+   <value>EB34554B-CD45-7AAE-E40B-B9D70EEF2524</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="fcf36173-677f-40fe-bf10-405a41c008a8">
+  <name>Other</name>
+  <synonym>
+   <key>en</key>
+   <value>0F01ED63-904F-E3A1-1F29-9210E8ECBDA6</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b97a3c39-cde2-4613-8ed8-cb492a34f131">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>6AFC11B8-46BB-6F43-339D-D35D0DF859DD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="f4d9c850-72e5-46e2-86fc-207034084f82">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>C01C06EC-D2EF-E6DA-AB32-2C8FEF14DFC2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

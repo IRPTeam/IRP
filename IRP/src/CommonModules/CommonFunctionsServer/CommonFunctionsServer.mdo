@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ca9b9b0-d6d7-4448-b41c-baff71ae05c3">
-  <name>CommonFunctionsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Common functions server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CommonFunctionsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>E0904CF7-1011-ABE7-72D6-6AD8C793B568</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

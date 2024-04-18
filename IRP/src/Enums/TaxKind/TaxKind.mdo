@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7fb9180f-31c0-47af-9b43-be21bdf6207f">
-  <producedTypes>
-    <refType typeId="f242eb4d-eb74-466e-942f-131a01b42301" valueTypeId="e0d630b3-9933-489e-8f5d-5445bbcd6730"/>
-    <listType typeId="42415650-b772-40dd-8d44-82aa17025e3f" valueTypeId="bec7db80-9a01-48d1-8f3b-d2bb8c2ae1f4"/>
-    <managerType typeId="b12bfe00-f10f-430a-a21c-46a490b8e913" valueTypeId="a0199083-9be4-4779-826a-2d0024a702a0"/>
-  </producedTypes>
-  <name>TaxKind</name>
+ <producedTypes>
+  <refType typeId="f242eb4d-eb74-466e-942f-131a01b42301" valueTypeId="e0d630b3-9933-489e-8f5d-5445bbcd6730"/>
+  <listType typeId="42415650-b772-40dd-8d44-82aa17025e3f" valueTypeId="bec7db80-9a01-48d1-8f3b-d2bb8c2ae1f4"/>
+  <managerType typeId="b12bfe00-f10f-430a-a21c-46a490b8e913" valueTypeId="a0199083-9be4-4779-826a-2d0024a702a0"/>
+ </producedTypes>
+ <name>TaxKind</name>
+ <synonym>
+  <key>en</key>
+  <value>DDA4FCC3-4599-EBA7-7E68-8C9D673A2B82</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="835d8115-280b-4e3b-b7ac-aa22a9e8ba77">
+  <name>VAT</name>
   <synonym>
-    <key>en</key>
-    <value>Tax kind</value>
+   <key>en</key>
+   <value>DEA67625-772B-5E82-25E3-3C2F0925771D</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="835d8115-280b-4e3b-b7ac-aa22a9e8ba77">
-    <name>VAT</name>
-    <synonym>
-      <key>en</key>
-      <value>VAT</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="856964ff-a841-4648-84bc-65f5dcd0a756">
-    <name>Salary</name>
-    <synonym>
-      <key>en</key>
-      <value>Salary</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="856964ff-a841-4648-84bc-65f5dcd0a756">
+  <name>Salary</name>
+  <synonym>
+   <key>en</key>
+   <value>BD97AF0B-5147-5346-6122-2F5FCBC0974E</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

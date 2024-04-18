@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0718434a-3d35-4673-8dc4-4e7461412ac7">
-  <name>DocPhysicalCountByLocationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc physical count by location client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocPhysicalCountByLocationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>29C429B2-02FF-CEFE-E49D-DEFB94A51CD6_</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abb30954-e6c1-4116-b105-f78758e2db01">
-  <name>OpeningEntry</name>
-  <synonym>
-    <key>en</key>
-    <value>Opening entry</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.OpeningEntry</content>
-  <content>Document.ManualRegisterEntry</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>OpeningEntry</name>
+ <synonym>
+  <key>en</key>
+  <value>AF26FA6B-9379-622C-C779-9674AA127A01</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.OpeningEntry</content>
+ <content>Document.ManualRegisterEntry</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

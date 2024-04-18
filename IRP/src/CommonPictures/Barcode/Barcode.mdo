@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6bcfc07e-fbd0-478b-8e7e-b695525ac0a1">
-  <name>Barcode</name>
-  <synonym>
-    <key>en</key>
-    <value>Barcode</value>
-  </synonym>
+ <name>Barcode</name>
+ <synonym>
+  <key>en</key>
+  <value>381097A5-1E60-324D-D052-207977462D7E</value>
+ </synonym>
 </mdclass:CommonPicture>

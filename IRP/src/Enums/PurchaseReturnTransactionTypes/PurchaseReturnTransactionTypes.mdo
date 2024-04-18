@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c1917fa-7e6f-4aeb-b118-573d9225f6bc">
-  <producedTypes>
-    <refType typeId="d9b9457a-ff6e-4b62-a815-7edc57a7b1d8" valueTypeId="053f41c1-7031-407b-aa05-9b742c59529e"/>
-    <listType typeId="3b267569-b66e-4a45-afaf-dc4aa8584e05" valueTypeId="ee01fe7d-d5e9-4729-b3f6-5efe0a189625"/>
-    <managerType typeId="e860f4a6-aea5-4df8-bbc1-06a5c0220a3f" valueTypeId="ef03f100-33be-4985-b677-a43d6a8ef8cb"/>
-  </producedTypes>
-  <name>PurchaseReturnTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="d9b9457a-ff6e-4b62-a815-7edc57a7b1d8" valueTypeId="053f41c1-7031-407b-aa05-9b742c59529e"/>
+  <listType typeId="3b267569-b66e-4a45-afaf-dc4aa8584e05" valueTypeId="ee01fe7d-d5e9-4729-b3f6-5efe0a189625"/>
+  <managerType typeId="e860f4a6-aea5-4df8-bbc1-06a5c0220a3f" valueTypeId="ef03f100-33be-4985-b677-a43d6a8ef8cb"/>
+ </producedTypes>
+ <name>PurchaseReturnTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>471EAD32-78E7-2F52-20C5-56C791C3F676</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="a6fac584-07aa-47d9-a9d5-57424c2b836b">
+  <name>ReturnToVendor</name>
   <synonym>
-    <key>en</key>
-    <value>Purchase return transaction types</value>
+   <key>en</key>
+   <value>5464F74C-1255-77B7-7D90-06DE45AF672A</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="a6fac584-07aa-47d9-a9d5-57424c2b836b">
-    <name>ReturnToVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Return to vendor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4a69a6bc-8c36-4e3f-a91b-c5b855974093">
-    <name>ReturnToConsignor</name>
-    <synonym>
-      <key>en</key>
-      <value>Return to consignor</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="4a69a6bc-8c36-4e3f-a91b-c5b855974093">
+  <name>ReturnToConsignor</name>
+  <synonym>
+   <key>en</key>
+   <value>18447312-F986-32C4-4AE1-18DB55989D86</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

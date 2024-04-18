@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11fc302b-cb3f-4ce1-a0de-6cd4603282c6">
-  <name>AccumulationRegisters_R4037B_PlannedReceiptReservationRequests</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4037B PlannedReceiptReservationRequests</value>
-  </synonym>
+ <name>AccumulationRegisters_R4037B_PlannedReceiptReservationRequests</name>
+ <synonym>
+  <key>en</key>
+  <value>A54D7CD0-7647-C55B-BC96-6F42E419DEEC__________________________</value>
+ </synonym>
 </mdclass:Role>

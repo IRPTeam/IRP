@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d4915bf-5fa0-4182-86c5-247a0b21ec73">
-  <name>AccumulationRegisters_R4020T_StockTransferOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4020T StockTransferOrders</value>
-  </synonym>
+ <name>AccumulationRegisters_R4020T_StockTransferOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>FF470762-2F3D-B673-3A46-6B8A9CCBE934____________</value>
+ </synonym>
 </mdclass:Role>

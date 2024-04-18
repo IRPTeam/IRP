@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6ade4b61-fa27-4756-a943-0db5f870bba0">
-  <producedTypes>
-    <refType typeId="98578c43-07f1-4861-bdfb-0f58f6899158" valueTypeId="0b050908-0a27-48c1-ba14-ac30e12fe0c0"/>
-    <listType typeId="b4e6389b-0f7b-4900-b42a-33c221f4017c" valueTypeId="799edafc-812c-459f-9930-2549f68ba5ad"/>
-    <managerType typeId="8b16eab2-811f-4fb8-aa21-995db0cded69" valueTypeId="b3779dd2-2a9c-490c-a0b2-007c0d12aa61"/>
-  </producedTypes>
-  <name>EquipmentAPIModule</name>
+ <producedTypes>
+  <refType typeId="98578c43-07f1-4861-bdfb-0f58f6899158" valueTypeId="0b050908-0a27-48c1-ba14-ac30e12fe0c0"/>
+  <listType typeId="b4e6389b-0f7b-4900-b42a-33c221f4017c" valueTypeId="799edafc-812c-459f-9930-2549f68ba5ad"/>
+  <managerType typeId="8b16eab2-811f-4fb8-aa21-995db0cded69" valueTypeId="b3779dd2-2a9c-490c-a0b2-007c0d12aa61"/>
+ </producedTypes>
+ <name>EquipmentAPIModule</name>
+ <synonym>
+  <key>en</key>
+  <value>EC538837-EEB9-AB5C-CE2B-BB5F9142E996</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>QuickChoice</choiceMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <enumValues uuid="adee1199-8ec8-4751-aa8f-b0acd0bc5154">
+  <name>FiscalPrinter_CommonAPI</name>
   <synonym>
-    <key>en</key>
-    <value>Equipment APIModule</value>
+   <key>en</key>
+   <value>34C36369-DFD1-B57D-D410-04DD4AB478EC</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>QuickChoice</choiceMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <enumValues uuid="adee1199-8ec8-4751-aa8f-b0acd0bc5154">
-    <name>FiscalPrinter_CommonAPI</name>
-    <synonym>
-      <key>en</key>
-      <value>Fiscal printer Common API</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7da43a3c-38c2-40b6-bcac-9a906f5b4774">
-    <name>Acquiring_CommonAPI</name>
-    <synonym>
-      <key>en</key>
-      <value>Acquiring Common API</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="7da43a3c-38c2-40b6-bcac-9a906f5b4774">
+  <name>Acquiring_CommonAPI</name>
+  <synonym>
+   <key>en</key>
+   <value>439980F1-E68D-E3C7-7311-1F763BCD8340</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

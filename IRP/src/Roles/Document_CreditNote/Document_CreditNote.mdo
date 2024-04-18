@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f63bbd9c-aa02-4f5e-91ab-71122e1c542d">
-  <name>Document_CreditNote</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Credit note&quot;</value>
-  </synonym>
+ <name>Document_CreditNote</name>
+ <synonym>
+  <key>en</key>
+  <value>23AFCDF4-BE6F-725E-EE43-36DBCA64ED66</value>
+ </synonym>
 </mdclass:Role>

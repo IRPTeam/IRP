@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3858f299-9d07-425e-bbb3-f8b98d093d17">
-  <name>RunMobileClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Run mobile client</value>
-  </synonym>
+ <name>RunMobileClient</name>
+ <synonym>
+  <key>en</key>
+  <value>79F381F2-6CDE-7B45-595E-EFAEE78E1293</value>
+ </synonym>
 </mdclass:Role>

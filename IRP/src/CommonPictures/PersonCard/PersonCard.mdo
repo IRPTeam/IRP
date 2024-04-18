@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="be916165-356f-44ea-9753-e8ae3afd9681">
-  <name>PersonCard</name>
-  <synonym>
-    <key>en</key>
-    <value>Person card</value>
-  </synonym>
+ <name>PersonCard</name>
+ <synonym>
+  <key>en</key>
+  <value>47FC0181-0737-F451-1D40-0D6BECEAB291</value>
+ </synonym>
 </mdclass:CommonPicture>

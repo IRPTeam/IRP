@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8a9e6129-1f88-493a-bc95-9c9bbbfbf886">
-  <name>Document_Bundling</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Bundling&quot;</value>
-  </synonym>
+ <name>Document_Bundling</name>
+ <synonym>
+  <key>en</key>
+  <value>826165B1-40AF-B047-7C59-9ADA56A1B89C</value>
+ </synonym>
 </mdclass:Role>

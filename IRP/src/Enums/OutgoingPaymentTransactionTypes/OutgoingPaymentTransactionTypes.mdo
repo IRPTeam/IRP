@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5df36860-85a6-46e6-b021-e0508a7a376d">
-  <producedTypes>
-    <refType typeId="67a33bd2-08cc-4d91-92b2-9147fa047093" valueTypeId="3a829c61-1591-4cec-af6f-69e66673c825"/>
-    <listType typeId="b5c3b86b-9dc0-4656-b31f-2f3f967ea097" valueTypeId="52eb569f-ea9e-4d7a-a2cb-5c9aa16b9e6f"/>
-    <managerType typeId="88dfef9a-3e94-4fd4-9f6d-2099ed2fb246" valueTypeId="11aee804-c1d2-4d50-9471-6c532ace7a87"/>
-  </producedTypes>
-  <name>OutgoingPaymentTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="67a33bd2-08cc-4d91-92b2-9147fa047093" valueTypeId="3a829c61-1591-4cec-af6f-69e66673c825"/>
+  <listType typeId="b5c3b86b-9dc0-4656-b31f-2f3f967ea097" valueTypeId="52eb569f-ea9e-4d7a-a2cb-5c9aa16b9e6f"/>
+  <managerType typeId="88dfef9a-3e94-4fd4-9f6d-2099ed2fb246" valueTypeId="11aee804-c1d2-4d50-9471-6c532ace7a87"/>
+ </producedTypes>
+ <name>OutgoingPaymentTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>F7FDF133-F9DA-31E8-824F-F6E13A792708</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="97c590b5-8c4f-4aab-b28e-ea60540349ef">
+  <name>PaymentToVendor</name>
   <synonym>
-    <key>en</key>
-    <value>Outgoing payment transaction types</value>
+   <key>en</key>
+   <value>AE5B674E-D4E0-E86C-CF92-2078A9ACBEA6</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="97c590b5-8c4f-4aab-b28e-ea60540349ef">
-    <name>PaymentToVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment to the vendor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f0018eae-a5fc-4fdd-9f90-b6a4015d8ed3">
-    <name>CurrencyExchange</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency exchange</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="3f9ed411-84eb-4147-8cee-d5768e8378c3">
-    <name>CashTransferOrder</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash transfer order</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="cbad643a-3483-4601-a5cf-32596d724f30">
-    <name>ReturnToCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Return to customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="149af390-b2c5-497b-87ef-c4a5e3f6067d">
-    <name>ReturnToCustomerByPOS</name>
-    <synonym>
-      <key>en</key>
-      <value>Return to customer by POS</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b10102b8-896f-469a-bbe6-4737963807f6">
-    <name>PaymentByCheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment by cheque</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bfbf9552-7b10-44f1-9926-1bcfe31da944">
-    <name>RetailCustomerAdvance</name>
-    <synonym>
-      <key>en</key>
-      <value>Retail customer advance</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="3c391634-bcbf-4cdf-8e25-86fcef266bf3">
-    <name>EmployeeCashAdvance</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee cash advance</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="fd967bf1-f15a-470a-b9d2-375b845d2a65">
-    <name>SalaryPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Salary payment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="749c6dd9-b795-4f52-82dd-467c8cc2e4b8">
-    <name>OtherExpense</name>
-    <synonym>
-      <key>en</key>
-      <value>Other expense</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a4c3d1f9-c8f9-4734-9cde-409178642eca">
-    <name>OtherPartner</name>
-    <synonym>
-      <key>en</key>
-      <value>Other partner</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="f0018eae-a5fc-4fdd-9f90-b6a4015d8ed3">
+  <name>CurrencyExchange</name>
+  <synonym>
+   <key>en</key>
+   <value>189F2FA2-D620-3A26-6F86-633F8D5E2783</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="3f9ed411-84eb-4147-8cee-d5768e8378c3">
+  <name>CashTransferOrder</name>
+  <synonym>
+   <key>en</key>
+   <value>6DC2E70F-0FD8-219B-B309-9D52E7D98E65</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="cbad643a-3483-4601-a5cf-32596d724f30">
+  <name>ReturnToCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>B384CAAE-0D59-5DC3-3F14-49474DB9CAD2</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="149af390-b2c5-497b-87ef-c4a5e3f6067d">
+  <name>ReturnToCustomerByPOS</name>
+  <synonym>
+   <key>en</key>
+   <value>3A5C35D5-8892-F511-15E6-648B3A837382</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b10102b8-896f-469a-bbe6-4737963807f6">
+  <name>PaymentByCheque</name>
+  <synonym>
+   <key>en</key>
+   <value>310EB296-6FE2-C2C6-6DB9-9E13209588EF</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bfbf9552-7b10-44f1-9926-1bcfe31da944">
+  <name>RetailCustomerAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>FC1FE526-58FE-2074-4422-20705382ED2B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="3c391634-bcbf-4cdf-8e25-86fcef266bf3">
+  <name>EmployeeCashAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>BC0E3082-4A9C-B63D-DE1A-A7C4BE557ACC</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="fd967bf1-f15a-470a-b9d2-375b845d2a65">
+  <name>SalaryPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>C76FFE7C-BFF7-9283-3F16-66F10962494B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="749c6dd9-b795-4f52-82dd-467c8cc2e4b8">
+  <name>OtherExpense</name>
+  <synonym>
+   <key>en</key>
+   <value>F73E962D-B46B-994C-C550-0C264008EEB9</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a4c3d1f9-c8f9-4734-9cde-409178642eca">
+  <name>OtherPartner</name>
+  <synonym>
+   <key>en</key>
+   <value>BCB1BE34-0A9F-4883-3A1C-C3F6598A400B</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

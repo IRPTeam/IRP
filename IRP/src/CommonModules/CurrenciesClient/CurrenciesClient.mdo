@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2eac94bf-87ec-4266-b22b-7b227b9440e0">
-  <name>CurrenciesClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Currencies client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CurrenciesClient</name>
+ <synonym>
+  <key>en</key>
+  <value>4446015C-3DC9-E428-8D3C-CD6657F86999</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

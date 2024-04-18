@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2cb99c20-2068-4fd3-a6f0-be1dde45fd3b">
-  <name>UseBundling</name>
-  <synonym>
-    <key>en</key>
-    <value>Use bundling</value>
-  </synonym>
-  <location>Constant.UseBundling</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.Bundling</content>
-  <content>Document.Unbundling</content>
-  <content>Catalog.Specifications</content>
+ <name>UseBundling</name>
+ <synonym>
+  <key>en</key>
+  <value>AEB7475E-6E22-3B24-4CE2-2D054557625E</value>
+ </synonym>
+ <location>Constant.UseBundling</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.Bundling</content>
+ <content>Document.Unbundling</content>
+ <content>Catalog.Specifications</content>
 </mdclass:FunctionalOption>

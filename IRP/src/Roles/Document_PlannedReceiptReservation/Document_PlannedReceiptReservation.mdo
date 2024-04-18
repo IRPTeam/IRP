@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7759acf1-084b-41a2-be03-3e951e54b45c">
-  <name>Document_PlannedReceiptReservation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Planned receipt reservation&quot;</value>
-  </synonym>
+ <name>Document_PlannedReceiptReservation</name>
+ <synonym>
+  <key>en</key>
+  <value>79F74F09-237F-075F-F33B-BF1ED68DC563__</value>
+ </synonym>
 </mdclass:Role>

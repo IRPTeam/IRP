@@ -1,174 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9a727ff8-9dab-4c9f-a4c5-db3581420467">
-  <producedTypes>
-    <objectType typeId="50efad29-077d-41dc-88a8-815ee0b1d0cc" valueTypeId="738b079f-6ce7-423a-a987-fca9e989df9a"/>
-    <refType typeId="819aa28e-965f-4fb8-a9fb-286a1a0c5e52" valueTypeId="4bcd278e-d37c-4e97-9690-253a673ae52e"/>
-    <selectionType typeId="400849c1-e218-4be2-b3e9-70c644539973" valueTypeId="86dbdfd8-9d08-4a32-9381-ebce9bba3515"/>
-    <listType typeId="cb243af6-e543-4071-b14e-c05e4a6cb248" valueTypeId="88ab4f38-aaae-4c08-83ab-ba21da1724bb"/>
-    <managerType typeId="b94e0c2a-75c8-4f90-b796-8bbbd6a1e6b0" valueTypeId="c83a83aa-2d2b-464d-98df-ed31c80c30a7"/>
-  </producedTypes>
-  <name>EmployeeSchedule</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9a727ff8-9dab-4c9f-a4c5-db3581420467">
+ <producedTypes>
+  <objectType typeId="50efad29-077d-41dc-88a8-815ee0b1d0cc" valueTypeId="738b079f-6ce7-423a-a987-fca9e989df9a"/>
+  <refType typeId="819aa28e-965f-4fb8-a9fb-286a1a0c5e52" valueTypeId="4bcd278e-d37c-4e97-9690-253a673ae52e"/>
+  <selectionType typeId="400849c1-e218-4be2-b3e9-70c644539973" valueTypeId="86dbdfd8-9d08-4a32-9381-ebce9bba3515"/>
+  <listType typeId="cb243af6-e543-4071-b14e-c05e4a6cb248" valueTypeId="88ab4f38-aaae-4c08-83ab-ba21da1724bb"/>
+  <managerType typeId="b94e0c2a-75c8-4f90-b796-8bbbd6a1e6b0" valueTypeId="c83a83aa-2d2b-464d-98df-ed31c80c30a7"/>
+ </producedTypes>
+ <name>EmployeeSchedule</name>
+ <synonym>
+  <key>en</key>
+  <value>05B59B3C-AEB9-446A-A077-78A6C2AD7015</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeeSchedule</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeeSchedule</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.EmployeeSchedule.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>2F6B82DF-7820-86EE-E298-8840DBEFD767</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>23827CA7-7B56-EF71-1C52-22E8341366D0</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.EmployeeSchedule.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.EmployeeSchedule.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.EmployeeSchedule.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="9ae18f21-794a-4062-9885-0b16d04b4b20">
+  <name>Type</name>
   <synonym>
-    <key>en</key>
-    <value>Employee schedule</value>
+   <key>en</key>
+   <value>E2A0FCA7-408B-58C2-24C0-049EDA483A16</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeeSchedule</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_EmployeeSchedule</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.EmployeeSchedule.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.EmployeeSchedule.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>EnumRef.EmployeeScheduleTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="b3942f05-41da-494d-8819-ec22d6e491e5">
+  <producedTypes>
+   <objectType typeId="804993c3-9735-40f2-8ef0-108895094e7a" valueTypeId="87d87627-0db2-4ae0-98fb-357e003a53e4"/>
+   <rowType typeId="ebd0d9d7-20be-44e6-a8f6-964131d9992b" valueTypeId="2cafecf9-3da7-4e71-ac8b-33f0f096b0a6"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>1FF72112-26C0-8EC5-5AD5-5FF1D16138A0</value>
+  </synonym>
+  <attributes uuid="a86cd0c8-36b1-484b-b379-4354368e63f6">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Employee schedule</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Employee schedule</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.EmployeeSchedule.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.EmployeeSchedule.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.EmployeeSchedule.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="9ae18f21-794a-4062-9885-0b16d04b4b20">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.EmployeeScheduleTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>E9D4C770-E5B6-3DE1-18E6-6E1D2C788CD2</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="b3942f05-41da-494d-8819-ec22d6e491e5">
-    <producedTypes>
-      <objectType typeId="804993c3-9735-40f2-8ef0-108895094e7a" valueTypeId="87d87627-0db2-4ae0-98fb-357e003a53e4"/>
-      <rowType typeId="ebd0d9d7-20be-44e6-a8f6-964131d9992b" valueTypeId="2cafecf9-3da7-4e71-ac8b-33f0f096b0a6"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="a86cd0c8-36b1-484b-b379-4354368e63f6">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d8309e53-93bf-41e2-816e-d1d78c02a1b4">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7c74b6b8-6f93-4a15-9f5e-9ba4f3698457">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="ee1cf538-4847-43da-82fa-8c51390e5771">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2a6b8f22-cdf7-4cbe-9019-f2a3462e7558">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0aa84d05-4d99-46e5-9eb8-2eda9a3ac5b8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="d8309e53-93bf-41e2-816e-d1d78c02a1b4">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>3F186F23-7B6A-60BB-B8AE-E2F868415193</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.EmployeeSchedule.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7c74b6b8-6f93-4a15-9f5e-9ba4f3698457">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>D322A335-A040-3649-9F48-8046BFAE96E7</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="ee1cf538-4847-43da-82fa-8c51390e5771">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>2467C468-FD2C-E72F-F359-9B5EE062041F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2a6b8f22-cdf7-4cbe-9019-f2a3462e7558">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>BEA02699-07AA-C06F-F330-010ABBDD6BF9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0aa84d05-4d99-46e5-9eb8-2eda9a3ac5b8">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8874979A-2146-8DBB-BA60-095B79B41731</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

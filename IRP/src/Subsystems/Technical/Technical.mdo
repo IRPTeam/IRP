@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a66d9645-1cc9-4162-a2c8-ac670130642e">
-  <name>Technical</name>
-  <synonym>
-    <key>en</key>
-    <value>Technical</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <subsystems>Localization</subsystems>
-  <subsystems>Marketing</subsystems>
-  <subsystems>Mobile</subsystems>
-  <subsystems>UniqueID</subsystems>
-  <subsystems>CopyPaste</subsystems>
-  <subsystems>InternalCommands</subsystems>
+ <name>Technical</name>
+ <synonym>
+  <key>en</key>
+  <value>DA931974-9BA9-34A5-5249-98B56D307105</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <subsystems>Localization</subsystems>
+ <subsystems>Marketing</subsystems>
+ <subsystems>Mobile</subsystems>
+ <subsystems>UniqueID</subsystems>
+ <subsystems>CopyPaste</subsystems>
+ <subsystems>InternalCommands</subsystems>
 </mdclass:Subsystem>

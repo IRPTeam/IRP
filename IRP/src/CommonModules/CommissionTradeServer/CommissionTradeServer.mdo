@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdafdf76-57f5-4699-bfa7-6265a78ce3e2">
-  <name>CommissionTradeServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Commission trade server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CommissionTradeServer</name>
+ <synonym>
+  <key>en</key>
+  <value>CEFEA4D4-817A-C38D-D86B-BC47B454D197</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

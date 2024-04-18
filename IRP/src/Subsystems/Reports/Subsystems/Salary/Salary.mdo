@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="56194cd3-ca6b-4be1-a62a-2bc94c0a546c">
-  <name>Salary</name>
-  <synonym>
-    <key>en</key>
-    <value>Salary</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Salary</name>
+ <synonym>
+  <key>en</key>
+  <value>7A34A63F-DC40-DC98-8E0B-B16830380BE1</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

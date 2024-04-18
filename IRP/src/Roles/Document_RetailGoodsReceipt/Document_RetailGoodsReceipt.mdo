@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="361612a8-0ffa-43a9-a5a1-b51eb2bbe19b">
-  <name>Document_RetailGoodsReceipt</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Retail goods receipt&quot;</value>
-  </synonym>
+ <name>Document_RetailGoodsReceipt</name>
+ <synonym>
+  <key>en</key>
+  <value>21A01AAE-CC0D-DFEC-C247-74FE8E20359D</value>
+ </synonym>
 </mdclass:Role>

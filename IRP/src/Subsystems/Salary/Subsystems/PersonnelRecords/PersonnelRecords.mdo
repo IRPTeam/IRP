@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fa336e11-5a2d-4dd6-9989-a857a1ef5a73">
-  <name>PersonnelRecords</name>
-  <synonym>
-    <key>en</key>
-    <value>Personnel records</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.EmployeeHiring</content>
-  <content>Document.EmployeeTransfer</content>
-  <content>Document.EmployeeFiring</content>
-  <content>Document.EmployeeVacation</content>
-  <content>Document.EmployeeSickLeave</content>
-  <parentSubsystem>Subsystem.Salary</parentSubsystem>
+ <name>PersonnelRecords</name>
+ <synonym>
+  <key>en</key>
+  <value>93BFF879-83F3-AD7B-BD3A-A6C5C2BDAEB7</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.EmployeeHiring</content>
+ <content>Document.EmployeeTransfer</content>
+ <content>Document.EmployeeFiring</content>
+ <content>Document.EmployeeVacation</content>
+ <content>Document.EmployeeSickLeave</content>
+ <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

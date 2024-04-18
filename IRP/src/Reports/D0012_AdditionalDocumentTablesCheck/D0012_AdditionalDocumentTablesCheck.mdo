@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0759e429-c097-4a19-ae80-36110702b6d8">
-  <producedTypes>
-    <objectType typeId="65c0cac3-d20e-4df5-8fb5-998649182d36" valueTypeId="0da26f21-1042-4f47-8920-598191be42c4"/>
-    <managerType typeId="e6ddef8a-916d-4f15-8c13-010a4062c53b" valueTypeId="3698b580-36cd-4015-810f-af5016423b93"/>
-  </producedTypes>
-  <name>D0012_AdditionalDocumentTablesCheck</name>
+ <producedTypes>
+  <objectType typeId="65c0cac3-d20e-4df5-8fb5-998649182d36" valueTypeId="0da26f21-1042-4f47-8920-598191be42c4"/>
+  <managerType typeId="e6ddef8a-916d-4f15-8c13-010a4062c53b" valueTypeId="3698b580-36cd-4015-810f-af5016423b93"/>
+ </producedTypes>
+ <name>D0012_AdditionalDocumentTablesCheck</name>
+ <synonym>
+  <key>en</key>
+  <value>2CBBEEB9-DCBE-1601-1DE9-9095B161F681__</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.D0012_AdditionalDocumentTablesCheck.Template.Template</mainDataCompositionSchema>
+ <templates uuid="09f46506-854c-46ed-b3d7-131fa4456e11">
+  <name>Template</name>
   <synonym>
-    <key>en</key>
-    <value>D0012 Additional document tables check</value>
+   <key>en</key>
+   <value>9B814C87-0A99-B08A-A0B9-95508E6630C6</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.D0012_AdditionalDocumentTablesCheck.Template.Template</mainDataCompositionSchema>
-  <templates uuid="09f46506-854c-46ed-b3d7-131fa4456e11">
-    <name>Template</name>
-    <synonym>
-      <key>en</key>
-      <value>Template</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

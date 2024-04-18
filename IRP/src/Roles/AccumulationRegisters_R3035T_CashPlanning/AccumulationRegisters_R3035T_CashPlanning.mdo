@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d1d54915-8928-41a8-bdc3-8444f9e49103">
-  <name>AccumulationRegisters_R3035T_CashPlanning</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3035T CashPlanning</value>
-  </synonym>
+ <name>AccumulationRegisters_R3035T_CashPlanning</name>
+ <synonym>
+  <key>en</key>
+  <value>5AAE16A9-E134-C99E-E67B-B3FBC24B2C6A_____</value>
+ </synonym>
 </mdclass:Role>

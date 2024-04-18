@@ -1,209 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5b12a72-a0bc-490b-bd40-8d623c453245">
-  <producedTypes>
-    <objectType typeId="ae1544e0-205a-4a84-9428-e6606e07e3c9" valueTypeId="6d2bc587-6224-4128-b896-fa1f5ec78456"/>
-    <refType typeId="0fad6657-4159-4b59-b341-31b01839c634" valueTypeId="e18f7d73-908c-4e92-94d9-1fe7b78f4dae"/>
-    <selectionType typeId="65e67537-615b-4ca1-8263-8c007e3fbd21" valueTypeId="72607c4d-551d-41bb-884d-7ad3143c185b"/>
-    <listType typeId="8e3618e2-b254-4b1e-a665-ffe56c4a6962" valueTypeId="5c5e9e45-14ec-41d7-b118-4fd91b7b26c2"/>
-    <managerType typeId="59a42a76-5c21-4cac-9e45-a219ddc16781" valueTypeId="c7507bf1-a3c2-4646-bb74-6c75eb33c3d1"/>
-  </producedTypes>
-  <name>PaymentTypes</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e5b12a72-a0bc-490b-bd40-8d623c453245">
+ <producedTypes>
+  <objectType typeId="ae1544e0-205a-4a84-9428-e6606e07e3c9" valueTypeId="6d2bc587-6224-4128-b896-fa1f5ec78456"/>
+  <refType typeId="0fad6657-4159-4b59-b341-31b01839c634" valueTypeId="e18f7d73-908c-4e92-94d9-1fe7b78f4dae"/>
+  <selectionType typeId="65e67537-615b-4ca1-8263-8c007e3fbd21" valueTypeId="72607c4d-551d-41bb-884d-7ad3143c185b"/>
+  <listType typeId="8e3618e2-b254-4b1e-a665-ffe56c4a6962" valueTypeId="5c5e9e45-14ec-41d7-b118-4fd91b7b26c2"/>
+  <managerType typeId="59a42a76-5c21-4cac-9e45-a219ddc16781" valueTypeId="c7507bf1-a3c2-4646-bb74-6c75eb33c3d1"/>
+ </producedTypes>
+ <name>PaymentTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>BFAD000F-9CCE-C494-45F6-6FEB2B8F77EA</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTypes</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTypes</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.PaymentTypes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PaymentTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.PaymentTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>en</key>
+  <value>F5BA69AA-0360-F77E-E22B-B3BA6EBD11EB</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PaymentTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PaymentTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PaymentTypes.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="8e4bc5b0-9652-4c7f-9cc9-16ba8c661548">
+  <name>Type</name>
   <synonym>
-    <key>en</key>
-    <value>Payment types</value>
+   <key>en</key>
+   <value>EC1CCD02-8180-B158-8713-31CD4FD29B00</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTypes</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentTypes</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.PaymentTypes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PaymentTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.PaymentTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <type>
+   <types>EnumRef.PaymentTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="252c4285-2a08-4947-bc74-cfebb19f9dd1">
+  <name>Icon</name>
+  <synonym>
+   <key>en</key>
+   <value>B1554D94-832D-903C-C244-4561B051EF0A</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="43d9f2fa-b9ba-4d65-bd4c-eb566d2f13a7">
+  <name>isIconSet</name>
+  <synonym>
+   <key>en</key>
+   <value>BC95D8D3-56F1-44DB-B82A-ADD0C66BA83D</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="431569fd-dde1-4e61-95e5-ed98f09988c9">
+  <name>FinancialMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>239973FE-02F1-C3AF-FB1D-DCDEF1F539AF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsFinancialMovementType</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="a5dcefe8-e456-4d84-8df3-c135d0762863">
+  <producedTypes>
+   <objectType typeId="b0f43e36-7c8a-4ed3-994d-30250d4960dc" valueTypeId="c4c4958d-f3f1-4fbb-8562-3481507c86a9"/>
+   <rowType typeId="600252fc-4827-4989-b506-a5167c271071" valueTypeId="1c6b6353-e626-4904-ba26-fe645a9c0084"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>BF058700-A30B-2C7C-C7AF-F0F8F379830A</value>
+  </synonym>
+  <attributes uuid="8b5ddc8c-7ece-4839-a4dd-ee651ae5861c">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Payment type</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PaymentTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PaymentTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PaymentTypes.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="8e4bc5b0-9652-4c7f-9cc9-16ba8c661548">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.PaymentTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>C1A940C5-F394-D230-0878-8E5595ADD603</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="252c4285-2a08-4947-bc74-cfebb19f9dd1">
-    <name>Icon</name>
-    <synonym>
-      <key>en</key>
-      <value>Icon</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="fe0817ba-ea51-4a3c-84d2-8ae31bd88a16">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>985AFA9E-F08A-E513-3C83-35BA8A6A2BC8</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="43d9f2fa-b9ba-4d65-bd4c-eb566d2f13a7">
-    <name>isIconSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Is icon set</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="431569fd-dde1-4e61-95e5-ed98f09988c9">
-    <name>FinancialMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Financial movement type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsFinancialMovementType</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="a5dcefe8-e456-4d84-8df3-c135d0762863">
-    <producedTypes>
-      <objectType typeId="b0f43e36-7c8a-4ed3-994d-30250d4960dc" valueTypeId="c4c4958d-f3f1-4fbb-8562-3481507c86a9"/>
-      <rowType typeId="600252fc-4827-4989-b506-a5167c271071" valueTypeId="1c6b6353-e626-4904-ba26-fe645a9c0084"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="8b5ddc8c-7ece-4839-a4dd-ee651ae5861c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fe0817ba-ea51-4a3c-84d2-8ae31bd88a16">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PaymentTypes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <use>ForFolderAndItem</use>
-  </tabularSections>
-  <forms uuid="22902463-20cf-4b29-b85a-4d889c8828df">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="7b9b7854-d459-4fed-bf38-2699fe17d012">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="939d68ea-338f-4fc8-a067-9cbf0d09e10f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <use>ForFolderAndItem</use>
+ </tabularSections>
+ <forms uuid="22902463-20cf-4b29-b85a-4d889c8828df">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>DDF32E4A-1F66-3C6B-B37F-FAA489E54F57</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7b9b7854-d459-4fed-bf38-2699fe17d012">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>3AB3FCEE-F6D4-1E78-82FE-E494206DC5CE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="939d68ea-338f-4fc8-a067-9cbf0d09e10f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>273220E7-4037-4790-06A6-6A01BAC7E0F0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

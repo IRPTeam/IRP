@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a5a16476-e362-4e2c-9975-4d7f7e3e5925">
-  <producedTypes>
-    <managerType typeId="518f9ca1-5071-4086-9eff-09c90795d29f" valueTypeId="91487005-0920-4b1f-9e1d-c6e3d56cb108"/>
-    <valueManagerType typeId="3d34a6c5-9ec8-4918-9079-3d86bc086817" valueTypeId="d954b08a-d5d8-4b3b-b060-d62d55df3368"/>
-    <valueKeyType typeId="a74dd945-33ed-4762-9a5e-0fce1c4953c4" valueTypeId="2fdcf4e4-a458-45e8-9af0-1423b7d2afea"/>
-  </producedTypes>
-  <name>UseChequeBonds</name>
-  <synonym>
-    <key>en</key>
-    <value>Use cheque bonds</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a5a16476-e362-4e2c-9975-4d7f7e3e5925">
+ <producedTypes>
+  <managerType typeId="518f9ca1-5071-4086-9eff-09c90795d29f" valueTypeId="91487005-0920-4b1f-9e1d-c6e3d56cb108"/>
+  <valueManagerType typeId="3d34a6c5-9ec8-4918-9079-3d86bc086817" valueTypeId="d954b08a-d5d8-4b3b-b060-d62d55df3368"/>
+  <valueKeyType typeId="a74dd945-33ed-4762-9a5e-0fce1c4953c4" valueTypeId="2fdcf4e4-a458-45e8-9af0-1423b7d2afea"/>
+ </producedTypes>
+ <name>UseChequeBonds</name>
+ <synonym>
+  <key>en</key>
+  <value>A78138B1-923F-FB96-6ABF-F00B108E7B47</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

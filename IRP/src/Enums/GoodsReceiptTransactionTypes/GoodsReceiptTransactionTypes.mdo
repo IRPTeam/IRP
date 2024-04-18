@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ad6e4da1-ccd7-4deb-9e7d-6b02c2dfded2">
-  <producedTypes>
-    <refType typeId="0441a901-d491-446c-a741-43e2df55e2a9" valueTypeId="24b33444-0b03-4449-9f7a-da7324626234"/>
-    <listType typeId="8c55e446-0d58-4dcd-a4f2-c5ed07e5c93e" valueTypeId="fa85ee7f-e9a4-4447-b7e4-fd38f6c6b38f"/>
-    <managerType typeId="0f1d5659-b0c9-4fb8-a974-9d6747c0583f" valueTypeId="6bd4fa0c-c8f5-4a82-a6a3-32c67104d7bf"/>
-  </producedTypes>
-  <name>GoodsReceiptTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="0441a901-d491-446c-a741-43e2df55e2a9" valueTypeId="24b33444-0b03-4449-9f7a-da7324626234"/>
+  <listType typeId="8c55e446-0d58-4dcd-a4f2-c5ed07e5c93e" valueTypeId="fa85ee7f-e9a4-4447-b7e4-fd38f6c6b38f"/>
+  <managerType typeId="0f1d5659-b0c9-4fb8-a974-9d6747c0583f" valueTypeId="6bd4fa0c-c8f5-4a82-a6a3-32c67104d7bf"/>
+ </producedTypes>
+ <name>GoodsReceiptTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>5953A338-A840-941D-DEE7-7576F1504C0F</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="92719e3c-e09b-4495-b985-8839ed4c6244">
+  <name>InventoryTransfer</name>
   <synonym>
-    <key>en</key>
-    <value>Goods receipt transaction types</value>
+   <key>en</key>
+   <value>7FDD4989-A25A-513F-FF1F-F0FC8D8ED6B3</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="92719e3c-e09b-4495-b985-8839ed4c6244">
-    <name>InventoryTransfer</name>
-    <synonym>
-      <key>en</key>
-      <value>Inventory transfer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2706b4ed-b7d9-44d7-8c14-f5dc4f3dda97">
-    <name>Purchase</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="68c878be-c77b-48c3-80df-878110430bf3">
-    <name>ReturnFromCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="82f356e4-55be-4b1b-a7c2-019851911a1d">
-    <name>ReceiptFromConsignor</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt from consignor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="30bdec1c-11d9-477d-9ad8-2b6ecad7de2c">
-    <name>ReturnFromTradeAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from trade agent</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="2706b4ed-b7d9-44d7-8c14-f5dc4f3dda97">
+  <name>Purchase</name>
+  <synonym>
+   <key>en</key>
+   <value>C7B64533-E87E-26B6-6FAE-E465E8266890</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="68c878be-c77b-48c3-80df-878110430bf3">
+  <name>ReturnFromCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>08F1F9E3-97C4-980C-CBD8-85D13EE3570D</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="82f356e4-55be-4b1b-a7c2-019851911a1d">
+  <name>ReceiptFromConsignor</name>
+  <synonym>
+   <key>en</key>
+   <value>58AC92E0-3625-F9F2-2F66-6B70CEEEFB70</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="30bdec1c-11d9-477d-9ad8-2b6ecad7de2c">
+  <name>ReturnFromTradeAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>4AC06505-546F-C6C2-2DB9-9BE59031FDE3</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8282affe-c139-4434-aa5c-cc3e5df611f9">
-  <name>Salary</name>
-  <synonym>
-    <key>en</key>
-    <value>Salary</value>
-  </synonym>
+ <name>Salary</name>
+ <synonym>
+  <key>en</key>
+  <value>ACF7408C-F2A9-A0E7-7200-0A2544436409</value>
+ </synonym>
 </mdclass:CommonPicture>

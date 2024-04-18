@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f958b3f-b11d-4542-9548-d7ad6c1a801f">
-  <name>PurchaseReturn</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase return</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.PurchaseReturnOrder</content>
-  <content>Document.PurchaseReturn</content>
-  <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
+ <name>PurchaseReturn</name>
+ <synonym>
+  <key>en</key>
+  <value>4DADC025-0FBD-B842-2FB5-505D2110B0AC</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.PurchaseReturnOrder</content>
+ <content>Document.PurchaseReturn</content>
+ <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4821f1a5-d329-44be-92e1-e76f928ae0db">
-  <name>SourceOfOriginServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Source of origin server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>SourceOfOriginServer</name>
+ <synonym>
+  <key>en</key>
+  <value>30878B74-2C59-011D-DA6B-BDED59B9867D</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

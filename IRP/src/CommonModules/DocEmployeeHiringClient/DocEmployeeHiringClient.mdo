@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79646b62-2255-4ee7-a50d-f8a4a397b07d">
-  <name>DocEmployeeHiringClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee hiring client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocEmployeeHiringClient</name>
+ <synonym>
+  <key>en</key>
+  <value>F8E44FD1-FF95-54F6-633B-B97FF8E90BF8</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

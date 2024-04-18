@@ -1,88 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8fe30f78-1b3f-4c79-9d83-ed583cb2a51f">
-  <producedTypes>
-    <selectionType typeId="90e2fc28-7164-4bed-9f9b-94ae5548b983" valueTypeId="2caa483a-ea9a-4450-b45a-f933cf4cbeec"/>
-    <listType typeId="7a2055cf-4e3e-4ac0-93f1-19be6e5408a9" valueTypeId="fca45751-0577-4074-b98e-1e8d33d66560"/>
-    <managerType typeId="2ed09563-6525-4532-aa5a-139f1b0af908" valueTypeId="910ab1c3-d5d8-43e0-b9ff-54e8237a9e9d"/>
-    <recordSetType typeId="a843af26-8740-4fc1-b380-c7571549bc46" valueTypeId="198a97f2-f329-460d-ac18-eabac83c5583"/>
-    <recordKeyType typeId="1392f4b3-7c54-458b-bd16-f30876d12af5" valueTypeId="389d5783-4c04-4fa3-9e60-3e6bfac6c6be"/>
-    <recordType typeId="b2f9936f-bdce-4e1c-a007-9b179047d894" valueTypeId="b5687dd6-a28c-4ea2-a074-c3a631f6e51f"/>
-    <recordManagerType typeId="0e692e1d-ed4f-45b6-a15d-5e7c7d275379" valueTypeId="33df8afe-57e7-4e6f-bd27-feb219e5dda9"/>
-  </producedTypes>
-  <name>T9540S_EmployeeVacations</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8fe30f78-1b3f-4c79-9d83-ed583cb2a51f">
+ <producedTypes>
+  <selectionType typeId="90e2fc28-7164-4bed-9f9b-94ae5548b983" valueTypeId="2caa483a-ea9a-4450-b45a-f933cf4cbeec"/>
+  <listType typeId="7a2055cf-4e3e-4ac0-93f1-19be6e5408a9" valueTypeId="fca45751-0577-4074-b98e-1e8d33d66560"/>
+  <managerType typeId="2ed09563-6525-4532-aa5a-139f1b0af908" valueTypeId="910ab1c3-d5d8-43e0-b9ff-54e8237a9e9d"/>
+  <recordSetType typeId="a843af26-8740-4fc1-b380-c7571549bc46" valueTypeId="198a97f2-f329-460d-ac18-eabac83c5583"/>
+  <recordKeyType typeId="1392f4b3-7c54-458b-bd16-f30876d12af5" valueTypeId="389d5783-4c04-4fa3-9e60-3e6bfac6c6be"/>
+  <recordType typeId="b2f9936f-bdce-4e1c-a007-9b179047d894" valueTypeId="b5687dd6-a28c-4ea2-a074-c3a631f6e51f"/>
+  <recordManagerType typeId="0e692e1d-ed4f-45b6-a15d-5e7c7d275379" valueTypeId="33df8afe-57e7-4e6f-bd27-feb219e5dda9"/>
+ </producedTypes>
+ <name>T9540S_EmployeeVacations</name>
+ <synonym>
+  <key>en</key>
+  <value>34D92C83-44B9-DAC3-3BFB-B0A876232B72</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <dimensions uuid="52a2e95f-dd8f-442e-9bbd-ea0501a2bbbf">
+  <name>Date</name>
   <synonym>
-    <key>en</key>
-    <value>T9540 Employee vacations</value>
+   <key>en</key>
+   <value>5DFD1AEA-22E6-0740-033C-CF65F4C7643F</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <dimensions uuid="52a2e95f-dd8f-442e-9bbd-ea0501a2bbbf">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="20a75bd3-d6f9-40c2-ba51-7820d8cb3b04">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="33e441c4-15ea-41b5-a544-243d2a53aa90">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="da3eb95e-b639-48bd-a2f0-30d5a338ab98">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="20a75bd3-d6f9-40c2-ba51-7820d8cb3b04">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>1C85A1BA-6638-89E5-5681-1450E4487A5B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="33e441c4-15ea-41b5-a544-243d2a53aa90">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>A8714321-05F3-C701-17D5-511B54938309</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="da3eb95e-b639-48bd-a2f0-30d5a338ab98">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>FD2ECC0C-A72D-0F27-7AA2-20AA3B5706AB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

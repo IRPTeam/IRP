@@ -1,154 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a706203a-67a6-4170-8221-6512f5a88a80">
-  <producedTypes>
-    <selectionType typeId="a7cb8331-13f9-4463-b96a-1eaff78650be" valueTypeId="da24e09a-b528-4702-b9e3-dc17c9b8f081"/>
-    <listType typeId="04a439f0-4506-462d-bbc5-ec98bb4097c1" valueTypeId="76e3865f-d8cd-464b-94ed-3d43c1620c22"/>
-    <managerType typeId="44aa8290-1afb-4144-8bd1-95b330b2650e" valueTypeId="a19c0376-bd4f-49ba-ab24-57e03c190e90"/>
-    <recordSetType typeId="73fcff63-de28-434f-9222-e73cd547a12e" valueTypeId="8b98aaba-788e-473e-ac5b-cdc800f60984"/>
-    <recordKeyType typeId="69c94dcf-70fc-48b0-a8e4-df1b95792b35" valueTypeId="ce1c6722-d262-43b3-8e35-771905481ac5"/>
-    <recordType typeId="26c17f22-ce9f-46c3-88fe-1df0238026ca" valueTypeId="13eacc3a-1df9-4664-826d-92ff13a522ed"/>
-    <recordManagerType typeId="be711926-8843-4669-9bfd-4aad084608db" valueTypeId="e1b47fa4-99e5-46ed-9bf1-b7f40159314c"/>
-  </producedTypes>
-  <name>T9051S_AccountingExtDimensions</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a706203a-67a6-4170-8221-6512f5a88a80">
+ <producedTypes>
+  <selectionType typeId="a7cb8331-13f9-4463-b96a-1eaff78650be" valueTypeId="da24e09a-b528-4702-b9e3-dc17c9b8f081"/>
+  <listType typeId="04a439f0-4506-462d-bbc5-ec98bb4097c1" valueTypeId="76e3865f-d8cd-464b-94ed-3d43c1620c22"/>
+  <managerType typeId="44aa8290-1afb-4144-8bd1-95b330b2650e" valueTypeId="a19c0376-bd4f-49ba-ab24-57e03c190e90"/>
+  <recordSetType typeId="73fcff63-de28-434f-9222-e73cd547a12e" valueTypeId="8b98aaba-788e-473e-ac5b-cdc800f60984"/>
+  <recordKeyType typeId="69c94dcf-70fc-48b0-a8e4-df1b95792b35" valueTypeId="ce1c6722-d262-43b3-8e35-771905481ac5"/>
+  <recordType typeId="26c17f22-ce9f-46c3-88fe-1df0238026ca" valueTypeId="13eacc3a-1df9-4664-826d-92ff13a522ed"/>
+  <recordManagerType typeId="be711926-8843-4669-9bfd-4aad084608db" valueTypeId="e1b47fa4-99e5-46ed-9bf1-b7f40159314c"/>
+ </producedTypes>
+ <name>T9051S_AccountingExtDimensions</name>
+ <synonym>
+  <key>en</key>
+  <value>5ADAEE07-DFAD-4818-8B4D-D473E60A5375</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>E467834D-4287-40BB-B5D8-808BE7BD9EC5</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>297F10A2-75CF-F6CC-CAB2-2A03CB5BA2F4</value>
+ </listPresentation>
+ <dimensions uuid="c5ed342b-b856-4b42-a710-f4ca4d89a3fe">
+  <name>Document</name>
   <synonym>
-    <key>en</key>
-    <value>T9051 Accounting ext dimensions</value>
+   <key>en</key>
+   <value>EB51632A-1130-BE51-1190-05B50BE08A38</value>
   </synonym>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>T9051 Accounting ext dimensions</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>T9051 Accounting ext dimensions</value>
-  </listPresentation>
-  <dimensions uuid="c5ed342b-b856-4b42-a710-f4ca4d89a3fe">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAccountingDocuments</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="3d4cfdc0-45d9-44fb-b562-f90319e0f9d1">
-    <name>Key</name>
-    <synonym>
-      <key>en</key>
-      <value>Key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </dimensions>
-  <dimensions uuid="e411fa44-d986-4097-953b-0f41b6747474">
-    <name>Operation</name>
-    <synonym>
-      <key>en</key>
-      <value>Operation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.AccountingOperations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="e0d5ca55-dac0-4d3c-8bf9-a7e952234d15">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="c3e7e17b-e415-444c-b0e0-823b067d668c">
-    <name>AnalyticType</name>
-    <synonym>
-      <key>en</key>
-      <value>Analytic type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.AccountingAnalyticTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="d2184163-8a7f-4f00-b608-63a3414c0568">
-    <name>ExtDimensionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ext. dim. type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="9e7f5eda-ec7d-4a0a-8ccf-273a25b77dda">
-    <name>ExtDimension</name>
-    <synonym>
-      <key>en</key>
-      <value>Ext dimension</value>
-    </synonym>
-    <type>
-      <types>Characteristic.AccountingExtraDimensionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="784a3bdd-24c3-415c-9a6e-f457c8a740e8">
-    <name>UUID</name>
-    <synonym>
-      <key>en</key>
-      <value>UUID</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAccountingDocuments</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3d4cfdc0-45d9-44fb-b562-f90319e0f9d1">
+  <name>Key</name>
+  <synonym>
+   <key>en</key>
+   <value>9FB8041D-CD97-BDAF-F368-8903C69ACF8B</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+ </dimensions>
+ <dimensions uuid="e411fa44-d986-4097-953b-0f41b6747474">
+  <name>Operation</name>
+  <synonym>
+   <key>en</key>
+   <value>0A836666-DFAB-ACFA-ACEC-C24A61F1CC6B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccountingOperations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="e0d5ca55-dac0-4d3c-8bf9-a7e952234d15">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>674B9207-F159-66A7-718B-B937CB981D82</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="c3e7e17b-e415-444c-b0e0-823b067d668c">
+  <name>AnalyticType</name>
+  <synonym>
+   <key>en</key>
+   <value>CB0F56DD-3BE5-DE7F-F826-63689FA54AFE</value>
+  </synonym>
+  <type>
+   <types>EnumRef.AccountingAnalyticTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="d2184163-8a7f-4f00-b608-63a3414c0568">
+  <name>ExtDimensionType</name>
+  <synonym>
+   <key>en</key>
+   <value>E08303AE-4B62-2ACE-EB18-8B6B476E5178</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="9e7f5eda-ec7d-4a0a-8ccf-273a25b77dda">
+  <name>ExtDimension</name>
+  <synonym>
+   <key>en</key>
+   <value>A9E4C7B5-7DE2-89DF-F0C7-7104A6584E7D</value>
+  </synonym>
+  <type>
+   <types>Characteristic.AccountingExtraDimensionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="784a3bdd-24c3-415c-9a6e-f457c8a740e8">
+  <name>UUID</name>
+  <synonym>
+   <key>en</key>
+   <value>8CD56D02-A49A-051D-D735-530E490AB92B</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

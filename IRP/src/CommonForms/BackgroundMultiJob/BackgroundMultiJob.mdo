@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="589345f2-9efa-4b24-9ebc-4d13ab5915b0">
-  <name>BackgroundMultiJob</name>
-  <synonym>
-    <key>en</key>
-    <value>Background multi job</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>BackgroundMultiJob</name>
+ <synonym>
+  <key>en</key>
+  <value>3E9B37F8-87E5-860C-CA7F-F417D04F0B85</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="09a8739f-db9e-4a4a-82ed-53a3efc61dcb">
-  <name>Document_WorkOrder</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Work order&quot;</value>
-  </synonym>
+ <name>Document_WorkOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>042CB0C0-57E5-673C-C826-65908E9CAC46</value>
+ </synonym>
 </mdclass:Role>

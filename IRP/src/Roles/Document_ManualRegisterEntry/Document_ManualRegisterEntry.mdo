@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b1c862e3-3015-4986-a0b9-c45acd4ead92">
-  <name>Document_ManualRegisterEntry</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Manual register entry&quot;</value>
-  </synonym>
+ <name>Document_ManualRegisterEntry</name>
+ <synonym>
+  <key>en</key>
+  <value>9E9B1EC4-1E6F-5341-165A-A5C7FBB80F64</value>
+ </synonym>
 </mdclass:Role>

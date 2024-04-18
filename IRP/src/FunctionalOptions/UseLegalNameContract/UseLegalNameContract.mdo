@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="19ac0698-17ca-495a-813c-b169f2650bdd">
-  <name>UseLegalNameContract</name>
-  <synonym>
-    <key>en</key>
-    <value>Use legal name contract</value>
-  </synonym>
-  <location>Constant.UseLegalNameContract</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.LegalNameContracts</content>
+ <name>UseLegalNameContract</name>
+ <synonym>
+  <key>en</key>
+  <value>E012BCFC-CC98-038E-E201-1ECEF8CB4AB4</value>
+ </synonym>
+ <location>Constant.UseLegalNameContract</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.LegalNameContracts</content>
 </mdclass:FunctionalOption>

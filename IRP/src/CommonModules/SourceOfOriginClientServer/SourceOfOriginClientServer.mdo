@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="02a48525-b195-4c59-ad9d-fb39d0e3ad56">
-  <name>SourceOfOriginClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Source of origin client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>SourceOfOriginClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>458D4A68-B2C8-A3CB-B841-1F4D4C545200</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="defe69d5-9cf2-4f7a-80f8-449511b1dad1">
-  <producedTypes>
-    <refType typeId="a11ffa51-4cb9-44c7-a4e8-85d6d87835bc" valueTypeId="e513e97e-8535-4db4-8ca1-a4a146741f2b"/>
-    <listType typeId="6bb53cad-4537-4ad2-a1fe-10e31b7221c1" valueTypeId="90c24133-4b90-43a4-ad84-53ba015548b1"/>
-    <managerType typeId="d83a84fd-c898-4476-9953-f51322a125ce" valueTypeId="421b1b27-16e6-41da-865e-a236ac6f5897"/>
-  </producedTypes>
-  <name>CashRevenueTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="a11ffa51-4cb9-44c7-a4e8-85d6d87835bc" valueTypeId="e513e97e-8535-4db4-8ca1-a4a146741f2b"/>
+  <listType typeId="6bb53cad-4537-4ad2-a1fe-10e31b7221c1" valueTypeId="90c24133-4b90-43a4-ad84-53ba015548b1"/>
+  <managerType typeId="d83a84fd-c898-4476-9953-f51322a125ce" valueTypeId="421b1b27-16e6-41da-865e-a236ac6f5897"/>
+ </producedTypes>
+ <name>CashRevenueTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>7A95BD16-FF0E-70F7-7508-826FCCBA5C99</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="fb3a9311-4137-456e-ab8a-c2b30ba76555">
+  <name>CurrentCompanyRevenue</name>
   <synonym>
-    <key>en</key>
-    <value>Cash revenue transaction types</value>
+   <key>en</key>
+   <value>3B63E9E7-F6B1-4FC4-4178-829C82D611D7</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="fb3a9311-4137-456e-ab8a-c2b30ba76555">
-    <name>CurrentCompanyRevenue</name>
-    <synonym>
-      <key>en</key>
-      <value>Current company revenue</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b37f8a54-8d3c-487d-a756-41c2056ebe59">
-    <name>OtherCompanyRevenue</name>
-    <synonym>
-      <key>en</key>
-      <value>Other company revenue</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="b37f8a54-8d3c-487d-a756-41c2056ebe59">
+  <name>OtherCompanyRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>85F6A91E-3DC8-FF28-8246-6FC3159E65F1</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

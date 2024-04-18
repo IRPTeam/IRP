@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="93763ddc-d1eb-4840-ba47-d4f81cdda978">
-  <name>AccumulationRegisters_R3021B_CashInTransitIncoming</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3021B CashInTransitIncoming</value>
-  </synonym>
+ <name>AccumulationRegisters_R3021B_CashInTransitIncoming</name>
+ <synonym>
+  <key>en</key>
+  <value>0C05094B-B746-37F0-0D1D-D33C1377B84C______________</value>
+ </synonym>
 </mdclass:Role>

@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c673fe50-d302-402c-a3f7-3bf293ff32b2">
-  <producedTypes>
-    <selectionType typeId="78527708-8e79-47a5-9d19-6c492760a8e8" valueTypeId="8cd8ae17-ed45-4df8-a44f-1eeb4d662863"/>
-    <listType typeId="372d6e73-08e9-4f6b-986e-7c6db5e1f889" valueTypeId="05550383-adb6-41f4-bed4-43d26ce5ccbf"/>
-    <managerType typeId="5f0da73b-8389-4d64-b6ba-ed26387049b5" valueTypeId="28b4e206-aabc-4ef7-8901-eabe758f3272"/>
-    <recordSetType typeId="4ac610d9-f07a-42ab-a8de-1c69fe8870a1" valueTypeId="d7444c5c-8d3b-4802-8f97-e1026abf38cd"/>
-    <recordKeyType typeId="ded1bb3e-d6e7-4098-a0f4-042d5cbde9a2" valueTypeId="bb707c62-9fee-41f0-9005-594fdbec6437"/>
-    <recordType typeId="0f40da91-4a11-456e-af95-9cfcf1d32c8c" valueTypeId="1e338b4e-3430-4e8f-ba75-0ce32616509a"/>
-    <recordManagerType typeId="37052fbb-3e7d-40ff-917f-c83e53d0bdcd" valueTypeId="00fdf764-696a-4444-aa1f-a8674cb7d367"/>
-  </producedTypes>
-  <name>ObjectStatuses</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c673fe50-d302-402c-a3f7-3bf293ff32b2">
+ <producedTypes>
+  <selectionType typeId="78527708-8e79-47a5-9d19-6c492760a8e8" valueTypeId="8cd8ae17-ed45-4df8-a44f-1eeb4d662863"/>
+  <listType typeId="372d6e73-08e9-4f6b-986e-7c6db5e1f889" valueTypeId="05550383-adb6-41f4-bed4-43d26ce5ccbf"/>
+  <managerType typeId="5f0da73b-8389-4d64-b6ba-ed26387049b5" valueTypeId="28b4e206-aabc-4ef7-8901-eabe758f3272"/>
+  <recordSetType typeId="4ac610d9-f07a-42ab-a8de-1c69fe8870a1" valueTypeId="d7444c5c-8d3b-4802-8f97-e1026abf38cd"/>
+  <recordKeyType typeId="ded1bb3e-d6e7-4098-a0f4-042d5cbde9a2" valueTypeId="bb707c62-9fee-41f0-9005-594fdbec6437"/>
+  <recordType typeId="0f40da91-4a11-456e-af95-9cfcf1d32c8c" valueTypeId="1e338b4e-3430-4e8f-ba75-0ce32616509a"/>
+  <recordManagerType typeId="37052fbb-3e7d-40ff-917f-c83e53d0bdcd" valueTypeId="00fdf764-696a-4444-aa1f-a8674cb7d367"/>
+ </producedTypes>
+ <name>ObjectStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>9EA81AD9-4EAD-732A-AA61-1998262E5B68</value>
+ </synonym>
+ <defaultRecordForm>InformationRegister.ObjectStatuses.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.ObjectStatuses.Form.ListForm</defaultListForm>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>F9B42E78-D5C3-5418-879E-E7D5820CF281</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>9CBC02E8-9F01-EFCB-B4C0-00525E6A4EA5</value>
+ </listPresentation>
+ <resources uuid="e902f15c-866c-4f74-8871-6f7ea3e87ccd">
+  <name>Status</name>
   <synonym>
-    <key>en</key>
-    <value>Objects status history</value>
+   <key>en</key>
+   <value>55339BE1-1316-90C0-0ECD-D184974293CD</value>
   </synonym>
-  <defaultRecordForm>InformationRegister.ObjectStatuses.Form.RecordForm</defaultRecordForm>
-  <defaultListForm>InformationRegister.ObjectStatuses.Form.ListForm</defaultListForm>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Object status history</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Objects status history</value>
-  </listPresentation>
-  <resources uuid="e902f15c-866c-4f74-8871-6f7ea3e87ccd">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="b0b04f06-66df-4f71-bba5-a17ff18cc21a">
-    <name>Author</name>
-    <synonym>
-      <key>en</key>
-      <value>Author</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="662ca3bf-5bce-43cf-a979-8686eacbfd12">
-    <name>Object</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeObjectWithStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="62ec0934-10d4-4319-95fd-753e9c8da8dc">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="433e0d02-4b09-45d6-b170-191a2c9b6374">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="b0b04f06-66df-4f71-bba5-a17ff18cc21a">
+  <name>Author</name>
+  <synonym>
+   <key>en</key>
+   <value>4F12B147-DBB6-F13C-C7C4-4C418EFB308E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="662ca3bf-5bce-43cf-a979-8686eacbfd12">
+  <name>Object</name>
+  <synonym>
+   <key>en</key>
+   <value>3AA2A114-F4D1-D957-7B0C-C82B76386CDE</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeObjectWithStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="62ec0934-10d4-4319-95fd-753e9c8da8dc">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>64DFB250-A32A-2687-7F64-48824AE3F522</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="433e0d02-4b09-45d6-b170-191a2c9b6374">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E429A059-F397-FBA3-3864-49EE69162831</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

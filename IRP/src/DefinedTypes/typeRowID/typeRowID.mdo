@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dc3d4dd6-c190-4f93-a26f-b74d05375b24">
-  <producedTypes>
-    <containerType typeId="1c60b416-b282-4a89-af14-2ce6d0c54cf0" valueTypeId="42b0df46-cf72-481b-905d-6c5c005cff4e"/>
-  </producedTypes>
-  <name>typeRowID</name>
-  <synonym>
-    <key>en</key>
-    <value>Type row ID</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers>
-      <length>36</length>
-      <fixed>true</fixed>
-    </stringQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="1c60b416-b282-4a89-af14-2ce6d0c54cf0" valueTypeId="42b0df46-cf72-481b-905d-6c5c005cff4e"/>
+ </producedTypes>
+ <name>typeRowID</name>
+ <synonym>
+  <key>en</key>
+  <value>DC9FFE54-26CC-78FB-B4AA-ADF81E7452E3</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers>
+   <length>36</length>
+   <fixed>true</fixed>
+  </stringQualifiers>
+ </type>
 </mdclass:DefinedType>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a48c866b-3ac7-48b1-9b85-084eb035ba55">
-  <producedTypes>
-    <objectType typeId="af124d57-2b1b-4de9-a237-91bd5678dfa1" valueTypeId="b77ed425-08bc-4835-a373-b4c87490d9b6"/>
-    <managerType typeId="8857758b-e894-4dd6-a50e-89b4d9481056" valueTypeId="aab731e8-2523-4096-bf67-5509bede4474"/>
-  </producedTypes>
-  <name>R1100_CustomersAging</name>
+ <producedTypes>
+  <objectType typeId="af124d57-2b1b-4de9-a237-91bd5678dfa1" valueTypeId="b77ed425-08bc-4835-a373-b4c87490d9b6"/>
+  <managerType typeId="8857758b-e894-4dd6-a50e-89b4d9481056" valueTypeId="aab731e8-2523-4096-bf67-5509bede4474"/>
+ </producedTypes>
+ <name>R1100_CustomersAging</name>
+ <synonym>
+  <key>en</key>
+  <value>507BE60F-40DA-4E7E-E2BB-BAB1452D56EF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1100_CustomersAging.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a13ac961-f0f3-4c58-bacf-c68491c97f06">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1100 Customers aging</value>
+   <key>en</key>
+   <value>0D4D6A80-5F22-8A49-90FF-F0DD8CDD10C4</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1100_CustomersAging.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="a13ac961-f0f3-4c58-bacf-c68491c97f06">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

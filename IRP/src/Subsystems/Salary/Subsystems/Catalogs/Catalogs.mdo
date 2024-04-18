@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="baa88ad4-138d-41ba-b709-3ef4d69728c7">
-  <name>Catalogs</name>
-  <synonym>
-    <key>en</key>
-    <value>Catalogs</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.AccrualAndDeductionTypes</content>
-  <content>Catalog.EmployeePositions</content>
-  <content>Catalog.EmployeeSchedule</content>
-  <content>Catalog.SalaryCalculationType</content>
-  <parentSubsystem>Subsystem.Salary</parentSubsystem>
+ <name>Catalogs</name>
+ <synonym>
+  <key>en</key>
+  <value>32505AD7-D2EC-7531-154F-F64E52F27B75</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.AccrualAndDeductionTypes</content>
+ <content>Catalog.EmployeePositions</content>
+ <content>Catalog.EmployeeSchedule</content>
+ <content>Catalog.SalaryCalculationType</content>
+ <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

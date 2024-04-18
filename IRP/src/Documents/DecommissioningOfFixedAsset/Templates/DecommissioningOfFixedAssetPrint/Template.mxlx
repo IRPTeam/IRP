@@ -122,7 +122,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Decommissioning of fixed asset [Number] [Date]</v8:content>
+							<v8:content>CF5F931D-8213-C971-14BC-C50511BAC009__________[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -160,7 +160,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>38EE53FC-09A3-F904-428E-EFB23EC2EFD9</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -191,7 +191,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>951DAD1B-6DEA-6BAC-CB18-8F6975DEAF8C</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -202,7 +202,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>E7573757-EE62-7AAF-F6B1-18FDC4F75F84</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -213,7 +213,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>ED4BCD51-A15B-EEF4-4D81-1BDD2ACB2850</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -224,7 +224,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>4C159DD2-CD72-618A-A4EB-BEDAE928D007</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -235,7 +235,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>DA96EAA2-82D8-A701-14E1-10A92E102067</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -295,7 +295,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>42F3832C-5CA3-1932-27E4-4A35768A9D52</v8:content>
 						</v8:item>
 					</tl>
 				</c>

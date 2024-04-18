@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2a1187ae-91a3-49b2-af75-ba12d11d5559">
-  <name>Document_ProductionPlanningClosing</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Production planning closing&quot;</value>
-  </synonym>
+ <name>Document_ProductionPlanningClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>084AA7CA-527E-2FEA-A70E-EBD16EC36A75__</value>
+ </synonym>
 </mdclass:Role>

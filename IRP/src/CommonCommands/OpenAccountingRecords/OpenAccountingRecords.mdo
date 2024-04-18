@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c99a6167-ea2f-4b22-a8ed-7aaeac5cd19b">
-  <name>OpenAccountingRecords</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting records</value>
-  </synonym>
-  <group>NavigationPanelImportant</group>
-  <commandParameterType/>
-  <representation>Auto</representation>
+ <name>OpenAccountingRecords</name>
+ <synonym>
+  <key>en</key>
+  <value>412BD1B4-FF5F-0EF3-317F-F9AEFE72C1B8</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <commandParameterType/>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

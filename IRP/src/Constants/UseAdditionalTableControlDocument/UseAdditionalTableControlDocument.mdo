@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2617ab98-41a3-4cbc-a746-9b74489fe52c">
-  <producedTypes>
-    <managerType typeId="22dfffbb-fd8d-451a-b844-af7e831092c3" valueTypeId="59f43db9-42bc-4c42-a328-1e6abb488614"/>
-    <valueManagerType typeId="5cb20c67-684a-4372-9d94-fa705f3881ba" valueTypeId="e7bbb09f-8516-4c4e-ba58-357c7a0cc835"/>
-    <valueKeyType typeId="1114d8e9-22a4-4e04-aecd-740f26842163" valueTypeId="9f36a2d2-03f2-4364-9ab8-2c15eba9440b"/>
-  </producedTypes>
-  <name>UseAdditionalTableControlDocument</name>
-  <synonym>
-    <key>en</key>
-    <value>Use additional document table control</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2617ab98-41a3-4cbc-a746-9b74489fe52c">
+ <producedTypes>
+  <managerType typeId="22dfffbb-fd8d-451a-b844-af7e831092c3" valueTypeId="59f43db9-42bc-4c42-a328-1e6abb488614"/>
+  <valueManagerType typeId="5cb20c67-684a-4372-9d94-fa705f3881ba" valueTypeId="e7bbb09f-8516-4c4e-ba58-357c7a0cc835"/>
+  <valueKeyType typeId="1114d8e9-22a4-4e04-aecd-740f26842163" valueTypeId="9f36a2d2-03f2-4364-9ab8-2c15eba9440b"/>
+ </producedTypes>
+ <name>UseAdditionalTableControlDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>7C9A508F-9144-20F2-2232-2B046D87D5C9_</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

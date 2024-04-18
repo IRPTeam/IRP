@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="451d348c-05b1-4c27-9983-3c2a71875ce0">
-  <name>ControlCodeStringServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Control code string server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>ControlCodeStringServer</name>
+ <synonym>
+  <key>en</key>
+  <value>7BF71F2D-7261-715B-B4B8-82A961A0B849</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ae28c02-bd70-49e7-92d4-5eb5a6ef8a37">
-  <producedTypes>
-    <objectType typeId="16e92f75-420c-416f-9c7d-cd2a87a0b14b" valueTypeId="e857999f-2bf2-4a1f-9bcd-c2224428b23a"/>
-    <managerType typeId="b79b1c35-5f8b-456b-811c-97d53ca8c1e8" valueTypeId="075eb8e4-bc85-4363-8edf-d386a8461154"/>
-  </producedTypes>
-  <name>R7010_DetailingSupplies</name>
+ <producedTypes>
+  <objectType typeId="16e92f75-420c-416f-9c7d-cd2a87a0b14b" valueTypeId="e857999f-2bf2-4a1f-9bcd-c2224428b23a"/>
+  <managerType typeId="b79b1c35-5f8b-456b-811c-97d53ca8c1e8" valueTypeId="075eb8e4-bc85-4363-8edf-d386a8461154"/>
+ </producedTypes>
+ <name>R7010_DetailingSupplies</name>
+ <synonym>
+  <key>en</key>
+  <value>16BE8100-4051-2B46-6656-6016AC4DBA9B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R7010_DetailingSupplies.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="89cce7b1-8ca0-4326-9b33-200d7e381e1f">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R7010 Detailing supplies</value>
+   <key>en</key>
+   <value>C75A44AE-46FD-C2BF-F710-0DC1EA711FDC</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R7010_DetailingSupplies.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="89cce7b1-8ca0-4326-9b33-200d7e381e1f">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

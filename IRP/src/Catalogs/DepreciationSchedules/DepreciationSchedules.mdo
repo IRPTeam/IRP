@@ -1,209 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0df682ee-81fd-41fa-bb17-0c463a51fd60">
-  <producedTypes>
-    <objectType typeId="7a2e0346-0cde-4f73-9ff9-8c4102f4ba4c" valueTypeId="c164add6-c824-4840-9b52-22c6c4d57e86"/>
-    <refType typeId="4dade966-37f0-47f7-af7f-5c2f309ea945" valueTypeId="e1bc0862-413b-4692-b598-7de744d50864"/>
-    <selectionType typeId="c465c6a1-1d02-4644-b532-a2098a111dbb" valueTypeId="6081fa4b-a64b-4e4f-bff4-a8708780de18"/>
-    <listType typeId="aeef8d51-ba69-46b3-b901-a4f04f411574" valueTypeId="97f77768-6f00-454e-9f78-5b0dbd47cd47"/>
-    <managerType typeId="b39a00b0-4411-4ef9-84f1-6bbcefa03256" valueTypeId="8a07fc9d-23ef-4d2a-b60b-735cc118f24c"/>
-  </producedTypes>
-  <name>DepreciationSchedules</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0df682ee-81fd-41fa-bb17-0c463a51fd60">
+ <producedTypes>
+  <objectType typeId="7a2e0346-0cde-4f73-9ff9-8c4102f4ba4c" valueTypeId="c164add6-c824-4840-9b52-22c6c4d57e86"/>
+  <refType typeId="4dade966-37f0-47f7-af7f-5c2f309ea945" valueTypeId="e1bc0862-413b-4692-b598-7de744d50864"/>
+  <selectionType typeId="c465c6a1-1d02-4644-b532-a2098a111dbb" valueTypeId="6081fa4b-a64b-4e4f-bff4-a8708780de18"/>
+  <listType typeId="aeef8d51-ba69-46b3-b901-a4f04f411574" valueTypeId="97f77768-6f00-454e-9f78-5b0dbd47cd47"/>
+  <managerType typeId="b39a00b0-4411-4ef9-84f1-6bbcefa03256" valueTypeId="8a07fc9d-23ef-4d2a-b60b-735cc118f24c"/>
+ </producedTypes>
+ <name>DepreciationSchedules</name>
+ <synonym>
+  <key>en</key>
+  <value>3A9C03F6-D06D-9845-5775-58FDD7682C10</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.DepreciationSchedules.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>2587A4BF-002C-E6D4-427C-CE75CCBAD557</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>8D1DE91C-F475-88B2-26E7-7A8DBFE8393A</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.DepreciationSchedules.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.DepreciationSchedules.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.DepreciationSchedules.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="ce799226-50ed-45cd-8a7a-7a2780a2c1e6">
+  <name>CalculationMethod</name>
   <synonym>
-    <key>en</key>
-    <value>Depreciation schedules</value>
+   <key>en</key>
+   <value>E8B490AE-6ABD-DEA5-5407-7803336FDD45</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_DepreciationSchedules</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.DepreciationSchedules.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.DepreciationSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>EnumRef.DepreciationMethods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6f623c8a-78e8-4fc9-a344-f20151a0c364">
+  <name>UsefulLife</name>
+  <synonym>
+   <key>en</key>
+   <value>7227CD23-22EB-5409-957D-D7CE90E0811A</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="317dffe6-f016-4571-ae46-56cbce1f3b44">
+  <name>Rate</name>
+  <synonym>
+   <key>en</key>
+   <value>E8C47A58-6509-7739-9971-1C513C6E9F7C</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typePercent</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="8b9642f0-6558-4ddf-931f-07710d254fad">
+  <producedTypes>
+   <objectType typeId="9ca2e7c8-f57c-422c-8d2f-273b784d2631" valueTypeId="cc6496ac-62d4-455e-a87f-e011eadb840a"/>
+   <rowType typeId="d28d8d9a-4dc4-47ac-9b17-6d537e85900d" valueTypeId="a8466127-65ac-4062-96c2-f914dfb19a05"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>14190DCD-D821-FE2D-DE00-0F160A63B2D0</value>
+  </synonym>
+  <attributes uuid="9c32d4b7-fa5a-481f-899d-c6406852774c">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Depreciation schedule</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>A462ED5A-8389-D958-8A44-42C9C67819AF</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="6d43f73e-00fa-4cce-b3b9-40321aa34fcd">
+   <name>Value</name>
+   <synonym>
     <key>en</key>
-    <value>Depreciation schedules</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.DepreciationSchedules.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.DepreciationSchedules.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.DepreciationSchedules.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="ce799226-50ed-45cd-8a7a-7a2780a2c1e6">
-    <name>CalculationMethod</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation method</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DepreciationMethods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>8827CF54-8709-F8FA-A808-8E653BD54FD2</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="6f623c8a-78e8-4fc9-a344-f20151a0c364">
-    <name>UsefulLife</name>
-    <synonym>
-      <key>en</key>
-      <value>Useful life (Months)</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>5</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="2df24dd8-31e1-4ee0-8bd1-c506060776f2">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>8B3CD811-9D0E-C793-30EA-A29676284AAA</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="317dffe6-f016-4571-ae46-56cbce1f3b44">
-    <name>Rate</name>
-    <synonym>
-      <key>en</key>
-      <value>Rate</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typePercent</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="8b9642f0-6558-4ddf-931f-07710d254fad">
-    <producedTypes>
-      <objectType typeId="9ca2e7c8-f57c-422c-8d2f-273b784d2631" valueTypeId="cc6496ac-62d4-455e-a87f-e011eadb840a"/>
-      <rowType typeId="d28d8d9a-4dc4-47ac-9b17-6d537e85900d" valueTypeId="a8466127-65ac-4062-96c2-f914dfb19a05"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="9c32d4b7-fa5a-481f-899d-c6406852774c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6d43f73e-00fa-4cce-b3b9-40321aa34fcd">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.DepreciationSchedules.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2df24dd8-31e1-4ee0-8bd1-c506060776f2">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="62fbc1d2-fa74-405b-804d-def5362182e4">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="cafb7a4b-2171-41e5-bc52-a627ddee8b02">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4ed6dba0-3a60-4b4c-86e9-7c872395a22a">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="62fbc1d2-fa74-405b-804d-def5362182e4">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>57C35DCF-0A87-E9B1-1E1F-F600901B4F7B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="cafb7a4b-2171-41e5-bc52-a627ddee8b02">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>4C31CF85-274B-0768-87EB-BEF8B746B58C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4ed6dba0-3a60-4b4c-86e9-7c872395a22a">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>53F063F8-CE68-F8A4-4D03-39BAF6DA9609</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

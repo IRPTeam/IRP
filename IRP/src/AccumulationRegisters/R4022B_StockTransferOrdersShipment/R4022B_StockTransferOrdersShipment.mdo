@@ -1,88 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="633aeab1-1315-4c8b-8d87-fc30577f17c7">
-  <producedTypes>
-    <selectionType typeId="ee9015cc-239c-4647-a001-d5a714b16012" valueTypeId="a54041a6-670d-42c4-a372-f59e8c30a299"/>
-    <listType typeId="88a956ac-4e5e-4592-a946-3889a8a97fd9" valueTypeId="18e9e00a-f325-43b3-b922-cf8d527a6f05"/>
-    <managerType typeId="959c7875-5e65-45b3-9e34-613655fca0cd" valueTypeId="7bdd0a66-bb7d-42a6-a0eb-43ee579f7f0b"/>
-    <recordSetType typeId="b011e39f-5e4d-44c3-b124-a5ba53f8dde6" valueTypeId="36d4849a-daeb-4544-a23b-811548a38fd1"/>
-    <recordKeyType typeId="74092a9c-41c9-4170-9475-500973e15e50" valueTypeId="f40ad338-3b28-4d1f-ae60-3a12b3d2ec17"/>
-    <recordType typeId="c566f685-eb6c-489c-adbb-b56fc08d5901" valueTypeId="bb3dc2ae-234a-4246-902e-f8c9f0f46918"/>
-  </producedTypes>
-  <name>R4022B_StockTransferOrdersShipment</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="633aeab1-1315-4c8b-8d87-fc30577f17c7">
+ <producedTypes>
+  <selectionType typeId="ee9015cc-239c-4647-a001-d5a714b16012" valueTypeId="a54041a6-670d-42c4-a372-f59e8c30a299"/>
+  <listType typeId="88a956ac-4e5e-4592-a946-3889a8a97fd9" valueTypeId="18e9e00a-f325-43b3-b922-cf8d527a6f05"/>
+  <managerType typeId="959c7875-5e65-45b3-9e34-613655fca0cd" valueTypeId="7bdd0a66-bb7d-42a6-a0eb-43ee579f7f0b"/>
+  <recordSetType typeId="b011e39f-5e4d-44c3-b124-a5ba53f8dde6" valueTypeId="36d4849a-daeb-4544-a23b-811548a38fd1"/>
+  <recordKeyType typeId="74092a9c-41c9-4170-9475-500973e15e50" valueTypeId="f40ad338-3b28-4d1f-ae60-3a12b3d2ec17"/>
+  <recordType typeId="c566f685-eb6c-489c-adbb-b56fc08d5901" valueTypeId="bb3dc2ae-234a-4246-902e-f8c9f0f46918"/>
+ </producedTypes>
+ <name>R4022B_StockTransferOrdersShipment</name>
+ <synonym>
+  <key>en</key>
+  <value>03BE0CD3-E772-53DC-C71D-DB9633E2D3C9___</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="049cc4a2-c4dd-414c-92df-258cabcf9862">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4022 Shipment of stock transfer orders</value>
+   <key>en</key>
+   <value>43AD57C4-1DC3-224F-FE63-32D0CDA820B6</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="049cc4a2-c4dd-414c-92df-258cabcf9862">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="d0c9d343-9370-46c9-b5f8-2ce0bcf3831f">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b0fd1aa7-2606-4a74-912e-7e86f55fe487">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.InventoryTransferOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="09ffd1ad-2413-440c-a6ce-fb74fc0b61d5">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="adb898cc-e72f-42cc-b43a-0380c25a12b1">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="d0c9d343-9370-46c9-b5f8-2ce0bcf3831f">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>60407753-28AC-B0BC-CCAA-A6B8CBD27A6A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b0fd1aa7-2606-4a74-912e-7e86f55fe487">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>122AE53E-610E-8118-8CF7-7D1357E5DFA2</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.InventoryTransferOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="09ffd1ad-2413-440c-a6ce-fb74fc0b61d5">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>CA111FD0-1BA5-ABAF-FDFF-F9D5CF93237B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="adb898cc-e72f-42cc-b43a-0380c25a12b1">
+  <name>RowKey</name>
+  <synonym>
+   <key>en</key>
+   <value>EF2215DB-4A5E-F507-72B6-6F238960232C</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

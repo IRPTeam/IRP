@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d692d70d-0cf7-4b5c-a431-bfa99fe9468f">
-  <producedTypes>
-    <selectionType typeId="4d49f438-036d-45f0-b603-714bccbb54d2" valueTypeId="72a6860c-dbaa-4700-94d8-e060cf336b6f"/>
-    <listType typeId="2c380b91-df20-447d-ac93-d8c68d38ff09" valueTypeId="48de60a4-d515-404a-8561-314ec6a3fdf5"/>
-    <managerType typeId="a71a4f9a-de6c-4793-b310-5ebf129ceb5e" valueTypeId="7806cab1-bc86-4f56-8035-217dd50f0344"/>
-    <recordSetType typeId="e5e87e75-ae85-4c08-b819-f8e97e7e450c" valueTypeId="d0e88a2a-bbc0-4418-8fe3-9763cecaee7f"/>
-    <recordKeyType typeId="6f3644f0-e044-4f84-b7c5-afb2751eb800" valueTypeId="2948d567-0ad8-4dce-b75d-ebea0bc3d299"/>
-    <recordType typeId="fc853307-b65b-4340-aaf8-b6e30a17febd" valueTypeId="d06edf5a-2ce4-4b90-9c9b-15ec70704ec2"/>
-    <recordManagerType typeId="d67ebb59-de62-43bd-89e5-6e72746543cc" valueTypeId="9abe177f-1c28-427f-b9bf-f8854bd14a70"/>
-  </producedTypes>
-  <name>LedgerTypeOperations</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d692d70d-0cf7-4b5c-a431-bfa99fe9468f">
+ <producedTypes>
+  <selectionType typeId="4d49f438-036d-45f0-b603-714bccbb54d2" valueTypeId="72a6860c-dbaa-4700-94d8-e060cf336b6f"/>
+  <listType typeId="2c380b91-df20-447d-ac93-d8c68d38ff09" valueTypeId="48de60a4-d515-404a-8561-314ec6a3fdf5"/>
+  <managerType typeId="a71a4f9a-de6c-4793-b310-5ebf129ceb5e" valueTypeId="7806cab1-bc86-4f56-8035-217dd50f0344"/>
+  <recordSetType typeId="e5e87e75-ae85-4c08-b819-f8e97e7e450c" valueTypeId="d0e88a2a-bbc0-4418-8fe3-9763cecaee7f"/>
+  <recordKeyType typeId="6f3644f0-e044-4f84-b7c5-afb2751eb800" valueTypeId="2948d567-0ad8-4dce-b75d-ebea0bc3d299"/>
+  <recordType typeId="fc853307-b65b-4340-aaf8-b6e30a17febd" valueTypeId="d06edf5a-2ce4-4b90-9c9b-15ec70704ec2"/>
+  <recordManagerType typeId="d67ebb59-de62-43bd-89e5-6e72746543cc" valueTypeId="9abe177f-1c28-427f-b9bf-f8854bd14a70"/>
+ </producedTypes>
+ <name>LedgerTypeOperations</name>
+ <synonym>
+  <key>en</key>
+  <value>30289D00-0271-F946-64A3-35CBF0D2ADA9</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>2C504046-1CD9-C07D-D2AD-D6773B3740E7</value>
+ </recordPresentation>
+ <resources uuid="49e792be-7405-4eab-88ed-f90b600fa138">
+  <name>Use</name>
   <synonym>
-    <key>en</key>
-    <value>Ledger type operations</value>
+   <key>en</key>
+   <value>63061760-136B-24F5-5DCB-B13B6370E5CD</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Ledger type operation</value>
-  </recordPresentation>
-  <resources uuid="49e792be-7405-4eab-88ed-f90b600fa138">
-    <name>Use</name>
-    <synonym>
-      <key>en</key>
-      <value>Use</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="788df50a-6c4e-40c6-ab42-74b029ce5acc">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="6e3a13aa-d7e1-4178-96be-8a62ad004b63">
-    <name>AccountingOperation</name>
-    <synonym>
-      <key>en</key>
-      <value>Accounting operation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.AccountingOperations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="788df50a-6c4e-40c6-ab42-74b029ce5acc">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>BD97D63D-8324-E6E9-9EC5-5D2A1BA8EF05</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="6e3a13aa-d7e1-4178-96be-8a62ad004b63">
+  <name>AccountingOperation</name>
+  <synonym>
+   <key>en</key>
+   <value>3F1B56E5-08CF-016D-DD52-2E5E1CD2DCEC</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccountingOperations</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

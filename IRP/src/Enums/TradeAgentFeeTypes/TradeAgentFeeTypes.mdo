@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50192d6e-e17b-464e-b30a-b4fa26a0a9c1">
-  <producedTypes>
-    <refType typeId="8434190d-7336-4119-9b21-3b160ec6f21f" valueTypeId="442562df-9a3e-4be4-855c-09c8b2f7c955"/>
-    <listType typeId="f239d85a-a7e0-4f35-a635-735d235b1f98" valueTypeId="3f1fcaba-df73-4c94-9ef4-583490e2f5fc"/>
-    <managerType typeId="fbab0bd3-03bb-41ef-ad81-65872a5547bd" valueTypeId="eca5e843-9986-4151-898f-81b36b3b1818"/>
-  </producedTypes>
-  <name>TradeAgentFeeTypes</name>
+ <producedTypes>
+  <refType typeId="8434190d-7336-4119-9b21-3b160ec6f21f" valueTypeId="442562df-9a3e-4be4-855c-09c8b2f7c955"/>
+  <listType typeId="f239d85a-a7e0-4f35-a635-735d235b1f98" valueTypeId="3f1fcaba-df73-4c94-9ef4-583490e2f5fc"/>
+  <managerType typeId="fbab0bd3-03bb-41ef-ad81-65872a5547bd" valueTypeId="eca5e843-9986-4151-898f-81b36b3b1818"/>
+ </producedTypes>
+ <name>TradeAgentFeeTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>42F9757C-5BBA-4BF8-83DB-BB64F34EACF7</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="249cfbb3-f0b7-4cb8-98b4-d8abae4f8352">
+  <name>Percent</name>
   <synonym>
-    <key>en</key>
-    <value>Trade agent fee types</value>
+   <key>en</key>
+   <value>CF9BC782-A863-7993-328A-A50B82F8C4F9</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="249cfbb3-f0b7-4cb8-98b4-d8abae4f8352">
-    <name>Percent</name>
-    <synonym>
-      <key>en</key>
-      <value>Percent</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f950dee3-7ed0-4f66-bc8c-3617a578bda5">
-    <name>DifferencePriceConsignorPrice</name>
-    <synonym>
-      <key>en</key>
-      <value>Difference price consignor price</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="f950dee3-7ed0-4f66-bc8c-3617a578bda5">
+  <name>DifferencePriceConsignorPrice</name>
+  <synonym>
+   <key>en</key>
+   <value>AFFFB0B8-F81C-8D48-8420-0036EF753EB4</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

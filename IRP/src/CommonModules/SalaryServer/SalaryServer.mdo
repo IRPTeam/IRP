@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3e11eda3-6245-403e-afe4-9add5a95ef0b">
-  <name>SalaryServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Salary server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>SalaryServer</name>
+ <synonym>
+  <key>en</key>
+  <value>32BB1842-0113-EF79-96A0-058C821331DB</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

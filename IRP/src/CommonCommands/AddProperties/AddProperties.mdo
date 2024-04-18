@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonCommand xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45ac205a-8237-408c-bca9-e0e49554d29b">
-  <name>AddProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Add properties</value>
-  </synonym>
-  <group>FormCommandBarImportant</group>
-  <commandParameterType>
-    <types>DefinedType.typeAddPropertyOwners</types>
-  </commandParameterType>
-  <representation>Picture</representation>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.AddProperties</picture>
-  </picture>
+<mdclass:CommonCommand xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="45ac205a-8237-408c-bca9-e0e49554d29b">
+ <name>AddProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>F7A8F46E-055A-79CF-F4DA-A655969BF408</value>
+ </synonym>
+ <group>FormCommandBarImportant</group>
+ <commandParameterType>
+  <types>DefinedType.typeAddPropertyOwners</types>
+ </commandParameterType>
+ <representation>Picture</representation>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.AddProperties</picture>
+ </picture>
 </mdclass:CommonCommand>

@@ -133,7 +133,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Physical inventory [Number] [Date]</v8:content>
+							<v8:content>9DE1E280-B768-6C10-0073-360AAF6DAB75[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -171,7 +171,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Store:</v8:content>
+							<v8:content>BC8EEAC0-66DA-23C1-154A-AEDB5A164E02</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -214,7 +214,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>89959728-81B1-DD99-9472-27E0084151B8</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -225,7 +225,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>D947BC2D-2CF7-EB23-392B-BA2A48B178FE</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -236,7 +236,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>43598632-9DE4-4888-82D8-85D75CE83C2F</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -247,7 +247,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>6D6610A6-74C5-0F4A-ABC3-38DC176C49CC</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -258,7 +258,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Exp. count</v8:content>
+							<v8:content>C6D0CDC5-474C-9590-0442-26B7646568C4</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -269,7 +269,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Phys. Count</v8:content>
+							<v8:content>3ED908F8-18C8-428E-E801-1924ED515681</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -280,7 +280,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manual fixed count</v8:content>
+							<v8:content>055B1F23-F05C-8F92-2832-2D149471D618</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -291,7 +291,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Difference</v8:content>
+							<v8:content>2DA283FE-D505-B8A5-5AAF-F782FFE63FD6</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -381,7 +381,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>60BF42E8-A5C3-32A2-283A-A75253032E84</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -666,7 +666,7 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NZ=' '</v8:content>
+				<v8:content>D85F023A-ED3B-5977-7E43-38BC529B004E</v8:content>
 			</v8:item>
 		</format>
 	</format>

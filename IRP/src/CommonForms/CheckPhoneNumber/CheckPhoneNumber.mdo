@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e3e2d994-34b6-4620-a00a-0ed7d12c0fb5">
-  <name>CheckPhoneNumber</name>
-  <synonym>
-    <key>en</key>
-    <value>Check phone number</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>CheckPhoneNumber</name>
+ <synonym>
+  <key>en</key>
+  <value>47FEAE2A-555D-5170-0550-046FAAB960F3</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

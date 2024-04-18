@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price type</v8:content>
+					<v8:content>25F5451A-830E-1C67-77F7-744BF8D5B80D</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price</v8:content>
+					<v8:content>74A9297E-8660-4207-7982-20A087A52988</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -38,7 +38,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>B5D7D6C9-AD41-0086-6940-06F220719D25</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -51,7 +51,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item Key</v8:content>
+					<v8:content>FD135A14-0E8D-13C8-8996-6792A9B86434</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price definition type</v8:content>
+					<v8:content>92DB9057-0966-78CB-B371-190A56D17B3E</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -81,7 +81,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price definition reason</v8:content>
+					<v8:content>2FDAB178-2A56-D8F4-44AD-DDB47DC4D467</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -96,7 +96,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Is priority</v8:content>
+					<v8:content>79905AA6-900A-F4CB-BCA3-3E88843F694F</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -109,7 +109,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price definition reason string</v8:content>
+					<v8:content>A027A315-2A5D-6841-1B72-2C0161D17B37</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -141,7 +141,7 @@
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Price period</v8:content>
+				<v8:content>C7D89265-6286-A792-2688-8887FDFD5B4F</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -336,7 +336,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Price</v8:content>
+								<v8:content>A97B9817-3AB6-3658-8ADF-FF3A66FA7C94</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -406,7 +406,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Reason</v8:content>
+								<v8:content>0E80DC3B-201B-48A0-0073-33CC3C404999</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -837,7 +837,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Item</v8:content>
+								<v8:content>09B29E3A-7DA2-827E-E51A-A20C7D039DBA</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -881,7 +881,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Item Key</v8:content>
+								<v8:content>A23B1A13-8A61-1AB2-256A-ABFB3FF82339</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -969,7 +969,7 @@
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Prices on </v8:content>
+								<v8:content>CCDEEB37-83D2-109F-FD91-19C5DE976DFB</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1186,7 +1186,7 @@
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Price info</v8:content>
+				<v8:content>68C2AC03-AFCC-697F-F58A-A5FB5DF4F280</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
@@ -1331,7 +1331,7 @@
 						<dcscor:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Actual prices</v8:content>
+								<v8:content>1331B00B-7502-AC0D-DDA8-8C44FD094C43</v8:content>
 							</v8:item>
 						</dcscor:value>
 					</dcscor:item>
@@ -1466,7 +1466,7 @@
 						<dcscor:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>All prices</v8:content>
+								<v8:content>91B66210-8D31-42E5-5FBF-FDB7ACB0FCB4</v8:content>
 							</v8:item>
 						</dcscor:value>
 					</dcscor:item>

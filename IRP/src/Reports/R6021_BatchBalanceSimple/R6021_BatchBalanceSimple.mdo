@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c2c9e59-3780-48db-af04-bcd3c038e9bb">
-  <producedTypes>
-    <objectType typeId="9c08e041-5db1-4361-80eb-061a120fad3f" valueTypeId="5a5b4c76-b142-40b6-8c5a-bcc00b02dc96"/>
-    <managerType typeId="e6993694-8e7c-41a5-8140-1484cdf816d0" valueTypeId="23824d8e-3664-46c2-b616-ff2d4d61b979"/>
-  </producedTypes>
-  <name>R6021_BatchBalanceSimple</name>
+ <producedTypes>
+  <objectType typeId="9c08e041-5db1-4361-80eb-061a120fad3f" valueTypeId="5a5b4c76-b142-40b6-8c5a-bcc00b02dc96"/>
+  <managerType typeId="e6993694-8e7c-41a5-8140-1484cdf816d0" valueTypeId="23824d8e-3664-46c2-b616-ff2d4d61b979"/>
+ </producedTypes>
+ <name>R6021_BatchBalanceSimple</name>
+ <synonym>
+  <key>en</key>
+  <value>32A535B9-72BB-03B3-337A-A6A4F743771F</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R6021_BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R6021 Batch balance (simple)</value>
+   <key>en</key>
+   <value>59E65875-0F0F-C00E-E4D1-19BC979571C7</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R6021_BatchBalanceSimple.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="0c06b934-435b-4fca-959a-c33c07349d8f">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

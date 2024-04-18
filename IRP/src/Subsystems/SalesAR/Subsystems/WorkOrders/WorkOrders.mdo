@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a10a3e43-c933-44d3-ad9a-6e97b448b791">
-  <name>WorkOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Work orders</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Work</picture>
-  </picture>
-  <content>Document.WorkOrder</content>
-  <content>Document.WorkOrderClosing</content>
-  <content>Document.WorkSheet</content>
-  <content>Catalog.BillOfMaterials</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a10a3e43-c933-44d3-ad9a-6e97b448b791">
+ <name>WorkOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>B7F5C437-192E-B044-4710-0FE047B4C1C3</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Work</picture>
+ </picture>
+ <content>Document.WorkOrder</content>
+ <content>Document.WorkOrderClosing</content>
+ <content>Document.WorkSheet</content>
+ <content>Catalog.BillOfMaterials</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

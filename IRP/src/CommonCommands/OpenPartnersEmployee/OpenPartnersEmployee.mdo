@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9a371506-338b-4b65-bc39-6c7d91865db4">
-  <name>OpenPartnersEmployee</name>
-  <synonym>
-    <key>en</key>
-    <value>Employee</value>
-  </synonym>
-  <group>NavigationPanelImportant</group>
-  <commandParameterType/>
-  <representation>Auto</representation>
+ <name>OpenPartnersEmployee</name>
+ <synonym>
+  <key>en</key>
+  <value>0CA7299A-BE0C-D9BC-CB30-0F51FDA5962F</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <commandParameterType/>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

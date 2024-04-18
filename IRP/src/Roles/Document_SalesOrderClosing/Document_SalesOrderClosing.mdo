@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e86c41ee-bc10-4352-8f45-6be291e12bac">
-  <name>Document_SalesOrderClosing</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Sales order closing&quot;</value>
-  </synonym>
+ <name>Document_SalesOrderClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>46D7BFD6-5BA8-C14A-A20E-E3FEAC344720</value>
+ </synonym>
 </mdclass:Role>

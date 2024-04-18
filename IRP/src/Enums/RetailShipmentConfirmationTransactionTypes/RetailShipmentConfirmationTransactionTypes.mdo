@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3d7bccd3-d526-46eb-bccb-c3d5d5fa2da1">
-  <producedTypes>
-    <refType typeId="8d8cdc41-f910-4112-84c2-479beb398cd8" valueTypeId="47957b78-314b-4c2d-8c0a-7c08ca2b8efc"/>
-    <listType typeId="898e9221-6ca8-428e-845f-069d434c3f81" valueTypeId="ea622f67-c1ab-4282-8030-fb4dae44d0db"/>
-    <managerType typeId="72472ec6-7030-4adf-9430-9720d4519e37" valueTypeId="b244e6ab-f599-4e8d-842e-5754d04cead3"/>
-  </producedTypes>
-  <name>RetailShipmentConfirmationTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="8d8cdc41-f910-4112-84c2-479beb398cd8" valueTypeId="47957b78-314b-4c2d-8c0a-7c08ca2b8efc"/>
+  <listType typeId="898e9221-6ca8-428e-845f-069d434c3f81" valueTypeId="ea622f67-c1ab-4282-8030-fb4dae44d0db"/>
+  <managerType typeId="72472ec6-7030-4adf-9430-9720d4519e37" valueTypeId="b244e6ab-f599-4e8d-842e-5754d04cead3"/>
+ </producedTypes>
+ <name>RetailShipmentConfirmationTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>24409C18-D90A-7AA9-968C-CBCA774DC67A__________</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="b5d8a8a7-864e-49a1-a9ca-0640cf9e5c06">
+  <name>CourierDelivery</name>
   <synonym>
-    <key>en</key>
-    <value>Retail shipment confirmation transaction types</value>
+   <key>en</key>
+   <value>9810F72B-9038-4195-5C6C-CC1CB461700A</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="b5d8a8a7-864e-49a1-a9ca-0640cf9e5c06">
-    <name>CourierDelivery</name>
-    <synonym>
-      <key>en</key>
-      <value>Courier delivery</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a83bfc5b-bb69-4feb-aa1a-443f4afc6a42">
-    <name>Pickup</name>
-    <synonym>
-      <key>en</key>
-      <value>Pickup</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="a83bfc5b-bb69-4feb-aa1a-443f4afc6a42">
+  <name>Pickup</name>
+  <synonym>
+   <key>en</key>
+   <value>F266F094-6BB2-F2EC-CA66-6A61BE72A2B9</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

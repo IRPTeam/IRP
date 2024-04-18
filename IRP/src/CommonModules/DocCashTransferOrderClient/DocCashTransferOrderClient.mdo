@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="545e04a4-87fb-4429-b9f8-1a15665daad6">
-  <name>DocCashTransferOrderClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash transfer order client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocCashTransferOrderClient</name>
+ <synonym>
+  <key>en</key>
+  <value>4CF9C324-149F-5D44-4A5F-FA518F1DAC11</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

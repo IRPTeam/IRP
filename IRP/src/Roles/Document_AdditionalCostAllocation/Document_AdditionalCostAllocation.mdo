@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a1919031-3870-42e7-a809-0a82dd396e46">
-  <name>Document_AdditionalCostAllocation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Additional cost allocation&quot;</value>
-  </synonym>
+ <name>Document_AdditionalCostAllocation</name>
+ <synonym>
+  <key>en</key>
+  <value>59D6FE6D-D80A-FAC7-7410-036387E29FB7_</value>
+ </synonym>
 </mdclass:Role>

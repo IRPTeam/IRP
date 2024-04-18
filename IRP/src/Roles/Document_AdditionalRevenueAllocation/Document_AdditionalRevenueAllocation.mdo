@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="566ce682-d40e-4523-b9c9-163d8718c701">
-  <name>Document_AdditionalRevenueAllocation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Additional revenue allocation&quot;</value>
-  </synonym>
+ <name>Document_AdditionalRevenueAllocation</name>
+ <synonym>
+  <key>en</key>
+  <value>98E97FDB-C0D9-3CD9-9739-9275834AEE61____</value>
+ </synonym>
 </mdclass:Role>

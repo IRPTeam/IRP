@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="97f0894c-5669-4659-ad2d-9d1ce86de60b">
-  <name>Purchase</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.D1001_Purchases</content>
-  <content>Report.R1001_Purchases</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Purchase</name>
+ <synonym>
+  <key>en</key>
+  <value>F553061B-137C-A83E-EBF4-433218BC7EA7</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.D1001_Purchases</content>
+ <content>Report.R1001_Purchases</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

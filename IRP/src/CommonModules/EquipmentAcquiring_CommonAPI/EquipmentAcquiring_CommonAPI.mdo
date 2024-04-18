@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f816082-0fb9-4191-9c3d-65d63a57662b">
-  <name>EquipmentAcquiring_CommonAPI</name>
-  <synonym>
-    <key>en</key>
-    <value>Equipment acquiring Common API</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>EquipmentAcquiring_CommonAPI</name>
+ <synonym>
+  <key>en</key>
+  <value>35DF4FF7-719D-9585-5124-4DD98E0D0113</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

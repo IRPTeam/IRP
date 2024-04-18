@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="27988788-18ec-40ad-bc57-f2bf50cf19ec">
-  <producedTypes>
-    <selectionType typeId="6edcf040-f693-40fe-b8aa-ab8330252f5a" valueTypeId="20d8c4be-1fa7-4321-adf3-07a7a4ccad01"/>
-    <listType typeId="56905de3-d7bf-4883-9556-aef49b41b2ed" valueTypeId="3c0e8483-e751-47fd-9e35-e696fff55fc3"/>
-    <managerType typeId="9daa458b-a05a-49df-9510-b6c83c49c193" valueTypeId="e3c76370-ebed-488e-bacb-d96a04ced907"/>
-    <recordSetType typeId="65af7864-5c8b-4149-963d-1bb4b67a0038" valueTypeId="d6b9f9de-aa00-4d5b-bc46-52b24925b12d"/>
-    <recordKeyType typeId="c9b2f8c7-c237-41c4-b20b-e1f6ad5d33f5" valueTypeId="94512eb5-8cc6-48a1-8a9a-3ac26f9ca4a3"/>
-    <recordType typeId="e25eeb85-cb61-49e2-91b4-f35b67f33331" valueTypeId="b4a2f26a-ca50-4613-b279-49782fc5367e"/>
-    <recordManagerType typeId="0025cda0-ecbf-4cb3-8bc2-e6a6d14781c4" valueTypeId="d1d6324a-b186-423c-a636-135bc9cbb30e"/>
-  </producedTypes>
-  <name>T9510S_Staffing</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="27988788-18ec-40ad-bc57-f2bf50cf19ec">
+ <producedTypes>
+  <selectionType typeId="6edcf040-f693-40fe-b8aa-ab8330252f5a" valueTypeId="20d8c4be-1fa7-4321-adf3-07a7a4ccad01"/>
+  <listType typeId="56905de3-d7bf-4883-9556-aef49b41b2ed" valueTypeId="3c0e8483-e751-47fd-9e35-e696fff55fc3"/>
+  <managerType typeId="9daa458b-a05a-49df-9510-b6c83c49c193" valueTypeId="e3c76370-ebed-488e-bacb-d96a04ced907"/>
+  <recordSetType typeId="65af7864-5c8b-4149-963d-1bb4b67a0038" valueTypeId="d6b9f9de-aa00-4d5b-bc46-52b24925b12d"/>
+  <recordKeyType typeId="c9b2f8c7-c237-41c4-b20b-e1f6ad5d33f5" valueTypeId="94512eb5-8cc6-48a1-8a9a-3ac26f9ca4a3"/>
+  <recordType typeId="e25eeb85-cb61-49e2-91b4-f35b67f33331" valueTypeId="b4a2f26a-ca50-4613-b279-49782fc5367e"/>
+  <recordManagerType typeId="0025cda0-ecbf-4cb3-8bc2-e6a6d14781c4" valueTypeId="d1d6324a-b186-423c-a636-135bc9cbb30e"/>
+ </producedTypes>
+ <name>T9510S_Staffing</name>
+ <synonym>
+  <key>en</key>
+  <value>E4B2D05B-998D-1891-1C85-5C390EBACB26</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>2446617E-C8C9-0A69-9E4D-DE514A9F1940</value>
+ </recordPresentation>
+ <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
+  <name>Fired</name>
   <synonym>
-    <key>en</key>
-    <value>T9510 Staffing</value>
+   <key>en</key>
+   <value>0C968C24-F353-0C7B-BE14-449BD1B601ED</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>T9510 Staffing</value>
-  </recordPresentation>
-  <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
-    <name>Fired</name>
-    <synonym>
-      <key>en</key>
-      <value>Fired</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="95ea41d9-90e9-4cb1-944b-92fab3f71fdd">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="08cf0f3d-9c8f-4400-b832-1ed4370c50e5">
-    <name>Position</name>
-    <synonym>
-      <key>en</key>
-      <value>Position</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.EmployeePositions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="7932025f-cf57-4902-a0d9-4970756e669a">
-    <name>EmployeeSchedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee schedule</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.EmployeeSchedule</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="d602b2d2-0f89-4119-a8b3-dd93f977d11a">
-    <name>ProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="2e192fcd-665c-480f-b747-f730bbad1bff">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Employee</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="2e48b39e-efcf-4d15-b911-2f4ccc60e020">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="95ea41d9-90e9-4cb1-944b-92fab3f71fdd">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>4C437CF2-9636-0952-26DF-F3D9C842F744</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="08cf0f3d-9c8f-4400-b832-1ed4370c50e5">
+  <name>Position</name>
+  <synonym>
+   <key>en</key>
+   <value>D5C5A325-B644-7456-6057-798B0AA1669A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeePositions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="7932025f-cf57-4902-a0d9-4970756e669a">
+  <name>EmployeeSchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>24F8BEEF-60F1-CA0C-CB20-0286EBCFA358</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeeSchedule</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="d602b2d2-0f89-4119-a8b3-dd93f977d11a">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>5DA04FFA-B2AA-B480-00E0-0B371F104224</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="2e192fcd-665c-480f-b747-f730bbad1bff">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>28E7EF5D-BC8F-3E30-01BC-C056E95D06A3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Employee</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="2e48b39e-efcf-4d15-b911-2f4ccc60e020">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>BF26C3C5-53DC-80CD-DE96-627AAE964C19</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

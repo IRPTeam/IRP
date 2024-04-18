@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b76c3215-90eb-47c4-88db-45bc7af604f1">
-  <name>DocEmployeeFiringServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee firing server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocEmployeeFiringServer</name>
+ <synonym>
+  <key>en</key>
+  <value>6CF68052-F5E4-E8F1-16AC-C77FBF979449</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

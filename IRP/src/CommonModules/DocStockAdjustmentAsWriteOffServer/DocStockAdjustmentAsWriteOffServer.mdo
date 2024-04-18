@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="11669246-3176-4cb4-bb2f-2e196182d38a">
-  <name>DocStockAdjustmentAsWriteOffServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc stock adjustment as write off server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocStockAdjustmentAsWriteOffServer</name>
+ <synonym>
+  <key>en</key>
+  <value>C0577518-15CC-228A-AD11-143ED84314DC____</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

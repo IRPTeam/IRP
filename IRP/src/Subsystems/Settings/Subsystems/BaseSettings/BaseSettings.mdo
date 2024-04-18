@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab10cc2d-30be-4ba4-9c64-1d65b3b00efb">
-  <name>BaseSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Base settings</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ConfigurationMetadata</content>
-  <content>CommonCommand.EditConstants</content>
-  <content>DataProcessor.SystemSettings</content>
-  <content>DataProcessor.FunctionalOptionSettings</content>
-  <content>Catalog.CashStatementStatuses</content>
-  <content>Catalog.CurrencyMovementSets</content>
-  <content>Catalog.FileStoragesInfo</content>
-  <content>Catalog.FileStorageVolumes</content>
-  <content>Catalog.DataBaseStatus</content>
-  <content>Catalog.InterfaceGroups</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>BaseSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>C536787F-256D-D1EE-E16F-F3B0F536D883</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ConfigurationMetadata</content>
+ <content>CommonCommand.EditConstants</content>
+ <content>DataProcessor.SystemSettings</content>
+ <content>DataProcessor.FunctionalOptionSettings</content>
+ <content>Catalog.CashStatementStatuses</content>
+ <content>Catalog.CurrencyMovementSets</content>
+ <content>Catalog.FileStoragesInfo</content>
+ <content>Catalog.FileStorageVolumes</content>
+ <content>Catalog.DataBaseStatus</content>
+ <content>Catalog.InterfaceGroups</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

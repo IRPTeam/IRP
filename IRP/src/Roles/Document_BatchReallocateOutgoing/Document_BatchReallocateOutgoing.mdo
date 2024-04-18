@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e4d7f5d-2427-4643-8996-d247ab1b0d82">
-  <name>Document_BatchReallocateOutgoing</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Batch reallocate outgoing&quot;</value>
-  </synonym>
+ <name>Document_BatchReallocateOutgoing</name>
+ <synonym>
+  <key>en</key>
+  <value>9A3F2DB0-04B9-3DB7-7E4F-F9EDFAE48BAB</value>
+ </synonym>
 </mdclass:Role>

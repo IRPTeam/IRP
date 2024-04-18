@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d1bfd100-4e58-4a3c-baf7-a4ce1a249cdf">
-  <name>DocDepreciationCalculationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc depreciation calculation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocDepreciationCalculationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>13378CDF-F91E-D7B9-9D0A-AC0CB5EFD55D</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

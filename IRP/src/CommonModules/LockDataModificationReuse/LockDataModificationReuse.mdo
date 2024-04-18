@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="be9be6ba-ce99-426b-8cee-a6d9d274034a">
-  <name>LockDataModificationReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Lock data modification reuse</value>
-  </synonym>
-  <server>true</server>
-  <returnValuesReuse>DuringRequest</returnValuesReuse>
+ <name>LockDataModificationReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>4B31ADD1-181F-D931-1F3F-F3D3D790C6CB</value>
+ </synonym>
+ <server>true</server>
+ <returnValuesReuse>DuringRequest</returnValuesReuse>
 </mdclass:CommonModule>

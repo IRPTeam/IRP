@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6df72b9b-069c-43a4-ba60-a4d59ac00785">
-  <name>PasteRowsFromClipboard</name>
-  <synonym>
-    <key>en</key>
-    <value>Paste rows from clipboard</value>
-  </synonym>
+ <name>PasteRowsFromClipboard</name>
+ <synonym>
+  <key>en</key>
+  <value>E5D83803-421A-A4B1-13BA-A37B6E7FA3BB</value>
+ </synonym>
 </mdclass:CommonPicture>

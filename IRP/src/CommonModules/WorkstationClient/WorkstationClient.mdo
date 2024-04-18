@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bddca9e7-6b4e-4539-a542-054c92f79a27">
-  <name>WorkstationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Workstation client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>WorkstationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>E47CF1E5-337D-13D1-165D-DF1F3B084B82</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

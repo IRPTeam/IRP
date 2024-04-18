@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3051de86-f8da-4d85-a362-dbd24e290255">
-  <name>Document_StockAdjustmentAsWriteOff</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Stock adjustment as write off&quot;</value>
-  </synonym>
+ <name>Document_StockAdjustmentAsWriteOff</name>
+ <synonym>
+  <key>en</key>
+  <value>1967E3B0-D6FD-AB4B-BC8E-E6BEC08319F5____</value>
+ </synonym>
 </mdclass:Role>

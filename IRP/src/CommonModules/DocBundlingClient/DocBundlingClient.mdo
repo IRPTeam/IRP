@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d66bec7-d9c9-4721-a36b-48cbafd4af40">
-  <name>DocBundlingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc bundling client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocBundlingClient</name>
+ <synonym>
+  <key>en</key>
+  <value>F60AD1B7-FC35-C42B-B995-554EAFD57313</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

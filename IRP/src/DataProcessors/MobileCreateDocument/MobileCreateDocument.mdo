@@ -1,142 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8fe76231-68d6-49f1-adf1-3c96c4b4aebd">
-  <producedTypes>
-    <objectType typeId="f44381f9-657c-4ebd-a3bf-98464d1cbc54" valueTypeId="941f9da2-dfc5-4e53-926f-38bd82dbb181"/>
-    <managerType typeId="0b51884c-6c56-40f6-bc77-f32d07022971" valueTypeId="b7ee0c6e-0aef-498d-858a-e941c9bf8ae2"/>
-  </producedTypes>
-  <name>MobileCreateDocument</name>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8fe76231-68d6-49f1-adf1-3c96c4b4aebd">
+ <producedTypes>
+  <objectType typeId="f44381f9-657c-4ebd-a3bf-98464d1cbc54" valueTypeId="941f9da2-dfc5-4e53-926f-38bd82dbb181"/>
+  <managerType typeId="0b51884c-6c56-40f6-bc77-f32d07022971" valueTypeId="b7ee0c6e-0aef-498d-858a-e941c9bf8ae2"/>
+ </producedTypes>
+ <name>MobileCreateDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>2D45743A-4EAA-736C-C6A8-8EC6102BFCC8</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.MobileCreateDocument.Form.Form</defaultForm>
+ <attributes uuid="5a900abb-f7cf-44fd-981d-25fda62663d5">
+  <name>StoreReceiver</name>
   <synonym>
-    <key>en</key>
-    <value>Mobile create document</value>
+   <key>en</key>
+   <value>3D3BE468-BA68-DD03-3CB4-45DB26CF68C1</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.MobileCreateDocument.Form.Form</defaultForm>
-  <attributes uuid="5a900abb-f7cf-44fd-981d-25fda62663d5">
-    <name>StoreReceiver</name>
-    <synonym>
-      <key>en</key>
-      <value>Store receiver</value>
-    </synonym>
-    <synonym>
-      <key>tr</key>
-      <value>Giriş depo</value>
-    </synonym>
-    <synonym>
-      <key>ru</key>
-      <value>Склад-получатель</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <tabularSections uuid="93f4e987-5940-46dd-ae9c-803310c3f45f">
+  <producedTypes>
+   <objectType typeId="66903b5f-dc1e-4aa1-8acb-877bf1bd7e0b" valueTypeId="cccdbd96-ba61-45fa-afef-e80d9e29bcfb"/>
+   <rowType typeId="1ab5c65b-1191-462b-ae94-c56eba7ab92c" valueTypeId="6d962870-a781-4254-86eb-34eb9d3b1b38"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>en</key>
+   <value>9079D5D4-4844-BA73-35CB-B55F7A3DDA73</value>
+  </synonym>
+  <attributes uuid="6cfa6e73-ee14-452f-87d3-5832f6e58b81">
+   <name>Item</name>
+   <synonym>
+    <key>en</key>
+    <value>656BCD89-BC30-199F-F0DD-DD80A987BD51</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <tabularSections uuid="93f4e987-5940-46dd-ae9c-803310c3f45f">
-    <producedTypes>
-      <objectType typeId="66903b5f-dc1e-4aa1-8acb-877bf1bd7e0b" valueTypeId="cccdbd96-ba61-45fa-afef-e80d9e29bcfb"/>
-      <rowType typeId="1ab5c65b-1191-462b-ae94-c56eba7ab92c" valueTypeId="6d962870-a781-4254-86eb-34eb9d3b1b38"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="6cfa6e73-ee14-452f-87d3-5832f6e58b81">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="3a1959ba-d48b-4d25-9132-318bd7f4a5d0">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="c642f680-0ee9-430c-8b0f-943027a581aa">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="ef628a41-56a2-4f7c-8bc0-f03278563846">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="c36e4a9e-1f32-4dee-bebd-a9febb2744da">
-      <name>UseSerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Use serial lot number</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="d065aec7-6eff-438e-8aca-c874ffdd14b6">
-      <name>SerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Serial lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="802cb1dc-c428-48fa-8391-2675bc29e7a0">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="258ede99-d917-4531-bde4-8459b2101734">
-    <name>RowForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Row form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="3a1959ba-d48b-4d25-9132-318bd7f4a5d0">
+   <name>ItemKey</name>
+   <synonym>
+    <key>en</key>
+    <value>79840945-463B-4E87-7603-3A39250CFE7A</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="c642f680-0ee9-430c-8b0f-943027a581aa">
+   <name>Unit</name>
+   <synonym>
+    <key>en</key>
+    <value>877F6697-4B93-116F-FBBB-B0AD44A10F93</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="ef628a41-56a2-4f7c-8bc0-f03278563846">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>D2ACCAEC-31A0-DBEA-A40D-D8ED6725D2EC</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="c36e4a9e-1f32-4dee-bebd-a9febb2744da">
+   <name>UseSerialLotNumber</name>
+   <synonym>
+    <key>en</key>
+    <value>9E3E7A1B-5F17-B46A-AAE2-21C456A85788</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="d065aec7-6eff-438e-8aca-c874ffdd14b6">
+   <name>SerialLotNumber</name>
+   <synonym>
+    <key>en</key>
+    <value>85BDAE93-7F5A-39B1-165B-BB538AEF902B</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+ </tabularSections>
+ <forms uuid="802cb1dc-c428-48fa-8391-2675bc29e7a0">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>744E6408-D647-A79E-EB88-8677EA6416AF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="258ede99-d917-4531-bde4-8459b2101734">
+  <name>RowForm</name>
+  <synonym>
+   <key>en</key>
+   <value>93B3BBCE-C72C-E4D6-6131-18CEBB41739B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

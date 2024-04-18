@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a737106c-a509-48bd-b207-a3535e2da661">
-  <name>EquipmentFiscalPrinterServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Equipment fiscal printer</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>EquipmentFiscalPrinterServer</name>
+ <synonym>
+  <key>en</key>
+  <value>163D3EB3-10FE-BAB2-2039-974D3CE96AAF</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

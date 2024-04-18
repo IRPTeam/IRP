@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51e485a9-c091-4cf5-9c26-8f5079d7ac0e">
-  <producedTypes>
-    <objectType typeId="92f2115b-5d6b-43e3-af2f-20fb13b48dc5" valueTypeId="cbb7ff90-73d1-42d7-a330-327ff407818d"/>
-    <managerType typeId="06da5f72-b9b6-4379-9ae6-80cf00b88318" valueTypeId="d7d2d718-b1c0-4ea4-9d9a-c2e20953d725"/>
-  </producedTypes>
-  <name>A0011_TrialBalanceByAccount</name>
+ <producedTypes>
+  <objectType typeId="92f2115b-5d6b-43e3-af2f-20fb13b48dc5" valueTypeId="cbb7ff90-73d1-42d7-a330-327ff407818d"/>
+  <managerType typeId="06da5f72-b9b6-4379-9ae6-80cf00b88318" valueTypeId="d7d2d718-b1c0-4ea4-9d9a-c2e20953d725"/>
+ </producedTypes>
+ <name>A0011_TrialBalanceByAccount</name>
+ <synonym>
+  <key>en</key>
+  <value>2384793F-6169-439E-E87D-DAD9A21365BD</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.A0011_TrialBalanceByAccount.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="b0e03291-b83f-4613-b9d0-9d58b32a0b8d">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>A0011 Trial balance (by account)</value>
+   <key>en</key>
+   <value>AA9CBD63-D20A-FE51-1952-2F522B817E4B</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.A0011_TrialBalanceByAccount.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="b0e03291-b83f-4613-b9d0-9d58b32a0b8d">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

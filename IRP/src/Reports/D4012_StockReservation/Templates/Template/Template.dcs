@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>8D12F51E-5F2E-4FAC-C633-343692C55995</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Turnover</v8:content>
+					<v8:content>4873323D-E8EA-673B-BEA8-8124D23C8F3D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -35,7 +35,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>E6636266-C51C-255B-BD72-2349E58F0C82</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -48,7 +48,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Store</v8:content>
+					<v8:content>CF8D7FF7-D756-5DAF-F338-88EF69B718E1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -61,7 +61,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Ending balance</v8:content>
+					<v8:content>3DDFC35A-FF26-6DA8-8906-6ED1A092E01F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -76,7 +76,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Expense</v8:content>
+					<v8:content>160D248B-C979-46B0-02FB-B59B878B6573</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -86,7 +86,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Starting balance</v8:content>
+					<v8:content>7FB428D6-A5DC-CE70-0579-9C04F75D15FC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -101,7 +101,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Receipt</v8:content>
+					<v8:content>DBBA5043-7553-51CC-C1AA-A52CD0FCDDF1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -111,7 +111,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Day</v8:content>
+					<v8:content>994A27C2-6AB1-715B-BA04-4E3FEFDC99F1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -124,7 +124,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>EFF73F44-ED2F-F24E-EB31-11B4C73D8699</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -136,7 +136,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>C9AFC97A-E7F9-5BDA-A7DF-F041DD4492AE</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -150,7 +150,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Month</v8:content>
+					<v8:content>B8FED082-E858-53AB-B977-7B56C6224D28</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -163,7 +163,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF='MMMM yyyy'</v8:content>
+							<v8:content>DD9ECD61-D3D4-FC21-1AB7-76BCA2644EC1</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -175,7 +175,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Second</v8:content>
+					<v8:content>54A0E681-DC31-38BD-D628-83382BEA4FD2</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -189,7 +189,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Week</v8:content>
+					<v8:content>E9A6A2D6-5FE0-AF4B-B58C-C4C8B63B6E54</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -202,7 +202,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=dd.MM.yyyy</v8:content>
+							<v8:content>EFF73F44-ED2F-F24E-EB31-11B4C73D8699</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -219,7 +219,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Period, Year</v8:content>
+					<v8:content>DB5C9417-1F31-6F00-0CC0-0A57987C442A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -232,7 +232,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>DF=yyyy</v8:content>
+							<v8:content>C9F72203-2E16-72B6-6758-89903EDA81C7</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -243,7 +243,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Periods</v8:content>
+					<v8:content>23102B40-D040-9710-03AB-BE436921FAF1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -252,7 +252,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>9D349677-748B-777C-C112-27E011E1B4D5</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -308,7 +308,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>562917EA-A741-15B0-06DC-C54D5050610B</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -327,7 +327,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>9F662B9E-3225-57FC-C2FA-AC88491285AB</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -346,7 +346,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>FD1CF412-21AF-C069-9578-852DDE8513BC</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -403,7 +403,7 @@ FROM
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>5184333B-9379-FB4E-EDCC-C19BB92F08EA</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="678dfb1a-2683-43d0-becc-0a65dc27e659">
-  <name>EditUserSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit user settings</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditUserSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>E058D9E9-910F-9517-720F-FA1060CA728F</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

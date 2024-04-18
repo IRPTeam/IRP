@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83afca57-8f5f-49f8-85c9-eb07aa0c68fe">
-  <name>OtherGroup</name>
-  <synonym>
-    <key>en</key>
-    <value>Other group</value>
-  </synonym>
+ <name>OtherGroup</name>
+ <synonym>
+  <key>en</key>
+  <value>8D678267-5B4C-0AEB-BC85-5F3F63BC0BEC</value>
+ </synonym>
 </mdclass:CommonPicture>

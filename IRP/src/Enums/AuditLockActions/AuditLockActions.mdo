@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f48af750-f27b-473f-8c46-b41918b6d796">
-  <producedTypes>
-    <refType typeId="1d0091cc-afa9-42e5-8ee2-2e774f5c1acb" valueTypeId="82e57a08-5321-4a05-9e0d-4ccc531eb168"/>
-    <listType typeId="fa5f5078-0d88-4468-b5e3-d960189876b6" valueTypeId="b05152de-54bb-44a4-a085-8c56749f03ba"/>
-    <managerType typeId="a115a92e-760e-407c-b6b0-ba7b43003e55" valueTypeId="43a1f78a-8c7f-4bed-b6f2-de711f0a7e96"/>
-  </producedTypes>
-  <name>AuditLockActions</name>
+ <producedTypes>
+  <refType typeId="1d0091cc-afa9-42e5-8ee2-2e774f5c1acb" valueTypeId="82e57a08-5321-4a05-9e0d-4ccc531eb168"/>
+  <listType typeId="fa5f5078-0d88-4468-b5e3-d960189876b6" valueTypeId="b05152de-54bb-44a4-a085-8c56749f03ba"/>
+  <managerType typeId="a115a92e-760e-407c-b6b0-ba7b43003e55" valueTypeId="43a1f78a-8c7f-4bed-b6f2-de711f0a7e96"/>
+ </producedTypes>
+ <name>AuditLockActions</name>
+ <synonym>
+  <key>en</key>
+  <value>420C1766-BAC7-929B-B65D-D92311F8E40B</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="e8022f40-8087-41e6-8985-aad7b56b41da">
+  <name>Lock</name>
   <synonym>
-    <key>en</key>
-    <value>Audit lock actions</value>
+   <key>en</key>
+   <value>9B19FE7A-64E5-AB91-1E2A-AF0F50647B7A</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="e8022f40-8087-41e6-8985-aad7b56b41da">
-    <name>Lock</name>
-    <synonym>
-      <key>en</key>
-      <value>Lock</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="73a2ff79-ae65-4e72-8a18-f9f91fb1fcc5">
-    <name>Unlock</name>
-    <synonym>
-      <key>en</key>
-      <value>Unlock</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="73a2ff79-ae65-4e72-8a18-f9f91fb1fcc5">
+  <name>Unlock</name>
+  <synonym>
+   <key>en</key>
+   <value>7CF3EB8A-0E88-A71F-F899-9480FDDF41D6</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

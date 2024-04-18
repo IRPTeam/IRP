@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57da61f8-ab69-4b10-b8d7-0777350fe07e">
-  <producedTypes>
-    <containerType typeId="f21859e0-410e-493b-8752-e4e5b27ff53b" valueTypeId="17c359aa-4fbf-451f-b211-e169013d8b95"/>
-  </producedTypes>
-  <name>typeIDInfoOwners</name>
-  <synonym>
-    <key>en</key>
-    <value>Type contact info owners</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.Companies</types>
-    <types>CatalogRef.Partners</types>
-    <types>CatalogRef.Stores</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="f21859e0-410e-493b-8752-e4e5b27ff53b" valueTypeId="17c359aa-4fbf-451f-b211-e169013d8b95"/>
+ </producedTypes>
+ <name>typeIDInfoOwners</name>
+ <synonym>
+  <key>en</key>
+  <value>27921392-7623-2613-358D-D7DC3BF7D68F</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.Companies</types>
+  <types>CatalogRef.Partners</types>
+  <types>CatalogRef.Stores</types>
+ </type>
 </mdclass:DefinedType>

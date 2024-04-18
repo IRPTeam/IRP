@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0d16c913-398b-4e2f-96bf-50e7b2a72e33">
-  <name>ManufacturingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Manufacturing server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>ManufacturingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>57CC5759-78CB-15F7-7E63-3D9A97A24235</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

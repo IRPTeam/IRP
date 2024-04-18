@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c109f339-842d-4835-95d9-307166224b49">
-  <name>SpecialOffers</name>
-  <synonym>
-    <key>en</key>
-    <value>Special offers</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.SpecialOffer</picture>
-  </picture>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.SpecialOfferTypes</content>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.ExternalDataProc</content>
-  <content>CommonModule.OffersServer</content>
-  <content>Enum.OfferGroupType</content>
-  <content>Enum.SpecialOfferTypes</content>
-  <content>Enum.OffersDocumentTypes</content>
-  <content>CommonForm.PickupSpecialOffers</content>
-  <content>CommonPicture.SpecialOffer</content>
-  <content>DefinedType.typeObjectWithSpecialOffers</content>
-  <content>DefinedType.typeSpecialOfferAddInfo</content>
-  <content>DefinedType.typeSpecialOfferBonus</content>
-  <content>FunctionalOption.UseSpecialOffers</content>
-  <content>CommonModule.OffersClientServer</content>
-  <content>CommonModule.OffersClient</content>
-  <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c109f339-842d-4835-95d9-307166224b49">
+ <name>SpecialOffers</name>
+ <synonym>
+  <key>en</key>
+  <value>211604E4-86C1-D017-7FB7-77522AD170BA</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.SpecialOffer</picture>
+ </picture>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.ExternalDataProc</content>
+ <content>CommonModule.OffersServer</content>
+ <content>Enum.OfferGroupType</content>
+ <content>Enum.SpecialOfferTypes</content>
+ <content>Enum.OffersDocumentTypes</content>
+ <content>CommonForm.PickupSpecialOffers</content>
+ <content>CommonPicture.SpecialOffer</content>
+ <content>DefinedType.typeObjectWithSpecialOffers</content>
+ <content>DefinedType.typeSpecialOfferAddInfo</content>
+ <content>DefinedType.typeSpecialOfferBonus</content>
+ <content>FunctionalOption.UseSpecialOffers</content>
+ <content>CommonModule.OffersClientServer</content>
+ <content>CommonModule.OffersClient</content>
+ <content>AccumulationRegister.R2005T_SalesSpecialOffers</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

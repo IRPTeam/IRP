@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="583b0762-f7b9-4df5-adbd-80cb0ca1f1f1">
-  <name>DocStockAdjustmentAsWriteOffClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc stock adjustment as write off client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocStockAdjustmentAsWriteOffClient</name>
+ <synonym>
+  <key>en</key>
+  <value>8F65D25B-D6E0-DE36-6EB0-0B74ED59454C____</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

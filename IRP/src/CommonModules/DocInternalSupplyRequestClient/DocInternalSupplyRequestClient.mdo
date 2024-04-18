@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc279064-dabf-424e-bfc0-44f23f686a24">
-  <name>DocInternalSupplyRequestClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc internal supply request client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocInternalSupplyRequestClient</name>
+ <synonym>
+  <key>en</key>
+  <value>656B8A59-89DE-8DE7-7B74-4FA5C33B3741</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Account</v8:content>
+					<v8:content>912C9A15-99BB-0678-84AB-B444A8EB2FF3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -30,7 +30,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>AF82143C-314E-3C44-4A3E-EFEBDA4DD373</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -54,7 +54,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency</v8:content>
+					<v8:content>249C61F8-C84A-033C-CCD4-4D61FE763303</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -67,7 +67,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.1</v8:content>
+					<v8:content>9F85BD1F-6E4B-6BD3-3C65-515DDF431190</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -81,7 +81,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.2</v8:content>
+					<v8:content>E02DAFAA-C475-E552-2CE8-8F67C36332B0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -95,7 +95,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ext dim.3</v8:content>
+					<v8:content>7011733D-2494-F4EE-E9ED-DEDF3905A852</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -109,7 +109,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>0E6835D2-1543-6907-7AE1-114B158B875F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -139,7 +139,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (opening balance)</v8:content>
+					<v8:content>C7204D9B-4207-0D51-16E5-5B1C97ACAB31</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -153,7 +153,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -169,7 +169,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (opening balance)</v8:content>
+					<v8:content>FB6A9739-B842-76D3-3BDA-AD12E6871B99</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -183,7 +183,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -199,7 +199,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (closing balance</v8:content>
+					<v8:content>61268046-9233-5501-1937-7300969C80C4</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -213,7 +213,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -229,7 +229,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (closing balance)</v8:content>
+					<v8:content>4944E095-4C29-9423-3B1E-E603905F1754</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -243,7 +243,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -259,7 +259,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (opening balance)</v8:content>
+					<v8:content>72BC1ED1-D778-A575-5771-1CAE23EC327C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -273,7 +273,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -289,7 +289,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (opening balance)</v8:content>
+					<v8:content>7EDA1406-1470-28F9-935B-B249DE69ADA0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -303,7 +303,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -319,7 +319,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (closing balance)</v8:content>
+					<v8:content>32690620-D97B-4681-15C9-998815E0AEA0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -333,7 +333,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -349,7 +349,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (closing balance)</v8:content>
+					<v8:content>FC7A9AA0-1398-B640-07A7-7E4ADA7516D7</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -363,7 +363,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -379,7 +379,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (closing balance)</v8:content>
+					<v8:content>8ECC78CA-39D2-B7DB-B7D9-92573D03F651</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -393,7 +393,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -409,7 +409,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (closing balance)</v8:content>
+					<v8:content>D8637518-2FA1-00B3-3192-224895CCCB7A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -423,7 +423,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -439,7 +439,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (opening balance)</v8:content>
+					<v8:content>7C06AE87-A6AC-1B43-3A99-910C53469FD8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -453,7 +453,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -469,7 +469,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (opening balance)</v8:content>
+					<v8:content>5F41A5D1-399F-EA3A-A7D9-931A064F9729</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -483,7 +483,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -499,7 +499,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Cr (turnover)</v8:content>
+					<v8:content>9BF05858-741A-87DE-ECEB-B604EA5B1558</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -508,7 +508,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -524,7 +524,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Amount Dr (turnover)</v8:content>
+					<v8:content>94243AB1-0D85-86F9-9DD2-2913F51A439B</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -533,7 +533,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -548,7 +548,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>B326187A-E4D9-2CD6-6D64-44AC7E343B70</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -557,7 +557,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>359C0F84-9DD9-A969-9F84-453464900061</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -566,7 +566,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Turnovers</v8:content>
+					<v8:content>EF3518BF-1425-D6BC-CE18-8DCE1FDDDC6F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -576,7 +576,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Dr (turnover)</v8:content>
+					<v8:content>843BFDDE-DD29-6331-1CAB-B78700048197</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -585,7 +585,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -601,7 +601,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity Cr (turnover)</v8:content>
+					<v8:content>97C40835-2C2C-A201-1E41-142AE3A75046</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -610,7 +610,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=3</v8:content>
+							<v8:content>4415893E-E64D-B2AD-DC0D-DC8134134686</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -626,7 +626,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Dr (turnover)</v8:content>
+					<v8:content>3807ECC3-9AE4-C3DE-E934-43474795FDEB</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -635,7 +635,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -651,7 +651,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Currency amt. Cr (turnover)</v8:content>
+					<v8:content>A98662F5-0BBD-2037-7979-9D3DD806B6DB</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -660,7 +660,7 @@
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>NFD=2</v8:content>
+							<v8:content>A4FC2062-9D9B-C035-5D60-088D6C411A4D</v8:content>
 						</v8:item>
 					</dcscor:value>
 				</dcscor:item>
@@ -675,7 +675,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indicators</v8:content>
+					<v8:content>85C4DCE4-AE73-7019-90C0-02AB01BE6DD7</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -728,7 +728,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>IndicatorAmt</v8:content>
+				<v8:content>4C3C202F-506C-0313-372D-D3F6F26A61D6</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -738,7 +738,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>IndicatorCurr</v8:content>
+				<v8:content>3EEA1126-148E-EAF9-9CB7-7C9CDA6B4633</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -748,7 +748,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>IndicatorQty</v8:content>
+				<v8:content>8561C584-A1B7-3E7B-B791-120E69CAF5C2</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -853,7 +853,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>EFB78ACC-3305-5DDE-EB62-2E45CBB4D02F</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -867,7 +867,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>9F66E8F3-6108-580F-FDBE-ED9F565E8485</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -886,7 +886,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>61FEE043-18DC-6707-7A7D-D78AB8E33DA1</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -909,7 +909,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>42BC3D6B-F7AF-FEC7-7E35-501A05A93341</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -926,7 +926,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>CF3B7258-899B-07C7-7F09-98CB95CBF394</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -943,7 +943,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>PC</v8:content>
+								<v8:content>6FC1A6F8-2BBC-04FA-A006-690914983BDD</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -960,7 +960,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Dr</v8:content>
+								<v8:content>E61BB6B2-6399-6E40-0862-278FAD3E8B00</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -983,7 +983,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Dr turnovers</v8:content>
+								<v8:content>39D76F89-4A0F-191C-C44D-D4A6973628FE</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1006,7 +1006,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Cr turnovers</v8:content>
+								<v8:content>D13836D5-1BCC-8ED6-6DE2-207A39B1A9F8</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1029,7 +1029,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Dr</v8:content>
+								<v8:content>FE6F267B-992C-5E4D-D07F-FF2E7EBEB9A0</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1052,7 +1052,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Closing balance Cr</v8:content>
+								<v8:content>EE78137B-7A27-AD4C-CE6D-DC7E500E3585</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1075,7 +1075,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Indicators</v8:content>
+								<v8:content>40C4E97C-00AF-CBD4-436C-C968256A65C7</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1118,7 +1118,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Opening balance Cr</v8:content>
+								<v8:content>46D1C3A0-D7D9-EDA5-5B4D-DDF4D349C632</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1157,7 +1157,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty</v8:content>
+								<v8:content>58FE5368-15F2-C714-42DA-A860934CB534</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1182,7 +1182,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Amt.</v8:content>
+								<v8:content>073DC01A-8835-9689-99E5-54E07763FACB</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1207,7 +1207,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Curr.</v8:content>
+								<v8:content>6FB449B9-0D80-9AA2-272C-CD65E3AFBD24</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1224,7 +1224,7 @@ FROM
 						<dcsat:value xsi:type="v8:LocalStringType">
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Qty.</v8:content>
+								<v8:content>44D030C4-6606-144C-CB6C-CA5C70A513DF</v8:content>
 							</v8:item>
 						</dcsat:value>
 					</dcsat:item>
@@ -1253,25 +1253,25 @@ FROM
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Trial balance by account</v8:content>
+				<v8:content>0AB5FA18-7881-7FEF-FCFC-C7F7A89735B0</v8:content>
 			</v8:item>
 		</dcsset:presentation>
 		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows">
 			<dcsset:selection>
 				<dcsset:item xsi:type="dcsset:SelectedItemFolder">
 					<dcsset:field>Indicators</dcsset:field>
-					<dcsset:title>   </dcsset:title>
+					<dcsset:title/>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Indicators.IndicatorAmount</dcsset:field>
-						<dcsset:title> </dcsset:title>
+						<dcsset:title/>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Indicators.IndicatorCurrencyAmount</dcsset:field>
-						<dcsset:title> </dcsset:title>
+						<dcsset:title/>
 					</dcsset:item>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
 						<dcsset:field>Indicators.IndicatorQuantity</dcsset:field>
-						<dcsset:title> </dcsset:title>
+						<dcsset:title/>
 					</dcsset:item>
 					<dcsset:placement>Vertically</dcsset:placement>
 				</dcsset:item>
@@ -1281,15 +1281,15 @@ FROM
 						<dcsset:title>Debit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.AmountOpeningBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.CurrencyAmountOpeningBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.QuantityOpeningBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1297,15 +1297,15 @@ FROM
 						<dcsset:title>Credit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.AmountOpeningBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.CurrencyAmountOpeningBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>OpeningBalance.QuantityOpeningBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1317,15 +1317,15 @@ FROM
 						<dcsset:title>Debit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.AmountTurnoverDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.CurrencyAmountTurnoverDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.QuantityTurnoverDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1333,15 +1333,15 @@ FROM
 						<dcsset:title>Credit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.AmountTurnoverCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.CurrencyAmountTurnoverCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>Turnovers.QuantityTurnoverCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1353,15 +1353,15 @@ FROM
 						<dcsset:title>Debit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.AmountClosingBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.CurrencyAmountClosingBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.QuantityClosingBalanceDr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1369,15 +1369,15 @@ FROM
 						<dcsset:title>Credit</dcsset:title>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.AmountClosingBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.CurrencyAmountClosingBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:item xsi:type="dcsset:SelectedItemField">
 							<dcsset:field>ClosingBalance.QuantityClosingBalanceCr</dcsset:field>
-							<dcsset:title> </dcsset:title>
+							<dcsset:title/>
 						</dcsset:item>
 						<dcsset:placement>Vertically</dcsset:placement>
 					</dcsset:item>
@@ -1411,7 +1411,7 @@ FROM
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>22A4B5A6-EE93-BBED-D469-9A4706E83383</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

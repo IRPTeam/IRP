@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abb05e80-3650-40ee-92cc-c50c9bb0a57c">
-  <producedTypes>
-    <refType typeId="14bc7127-60ac-4370-8b50-a457b647670c" valueTypeId="d595eb6b-76d7-4ad9-99f1-ee1dbb4fef30"/>
-    <listType typeId="2d8f6999-2d24-4ac7-b0c0-8db9a8fa7156" valueTypeId="6dfc3f71-012c-4f7c-9037-c13fc61bd85f"/>
-    <managerType typeId="565ee5b0-341a-4b91-9575-a0dd67647dc4" valueTypeId="6020926f-15cd-4c27-95e8-05b8653c87ae"/>
-  </producedTypes>
-  <name>ExternalFunctionType</name>
+ <producedTypes>
+  <refType typeId="14bc7127-60ac-4370-8b50-a457b647670c" valueTypeId="d595eb6b-76d7-4ad9-99f1-ee1dbb4fef30"/>
+  <listType typeId="2d8f6999-2d24-4ac7-b0c0-8db9a8fa7156" valueTypeId="6dfc3f71-012c-4f7c-9037-c13fc61bd85f"/>
+  <managerType typeId="565ee5b0-341a-4b91-9575-a0dd67647dc4" valueTypeId="6020926f-15cd-4c27-95e8-05b8653c87ae"/>
+ </producedTypes>
+ <name>ExternalFunctionType</name>
+ <synonym>
+  <key>en</key>
+  <value>43F704B0-DC67-75E1-1505-554D71FD3DD3</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="c499e7b4-ff9e-4de8-8703-b76cc226b606">
+  <name>Eval</name>
   <synonym>
-    <key>en</key>
-    <value>External function type</value>
+   <key>en</key>
+   <value>0A01C5FB-FD60-DC10-0F21-1E24639C7693</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="c499e7b4-ff9e-4de8-8703-b76cc226b606">
-    <name>Eval</name>
-    <synonym>
-      <key>en</key>
-      <value>Eval</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="94dbb95f-6d1b-48cc-8b9b-b97808d23472">
-    <name>RegExp</name>
-    <synonym>
-      <key>en</key>
-      <value>Reg exp</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="251a7a5c-963d-4838-a444-68415369d7f3">
-    <name>Execute</name>
-    <synonym>
-      <key>en</key>
-      <value>Execute</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b3d16ef0-4733-4912-ab40-d7a4e85f54ed">
-    <name>ReturnResultByRegExpMatch</name>
-    <synonym>
-      <key>en</key>
-      <value>Return result by reg exp match</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="94dbb95f-6d1b-48cc-8b9b-b97808d23472">
+  <name>RegExp</name>
+  <synonym>
+   <key>en</key>
+   <value>BF5E9DE1-A272-F081-15BF-F955F0905953</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="251a7a5c-963d-4838-a444-68415369d7f3">
+  <name>Execute</name>
+  <synonym>
+   <key>en</key>
+   <value>20D06732-B63B-60A1-1813-320DB9B57FE2</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b3d16ef0-4733-4912-ab40-d7a4e85f54ed">
+  <name>ReturnResultByRegExpMatch</name>
+  <synonym>
+   <key>en</key>
+   <value>307CD9AC-5662-41A1-140A-A5C9C03CD5C5</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3823ac5f-ee86-4d3f-bd47-c794223813bf">
-  <name>Document_Labeling</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Labeling&quot;</value>
-  </synonym>
+ <name>Document_Labeling</name>
+ <synonym>
+  <key>en</key>
+  <value>F9B20AA8-2D92-EF47-7748-842D55009461</value>
+ </synonym>
 </mdclass:Role>

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="85fc740a-0bba-4bcd-8ca3-447d426c14ed">
-  <producedTypes>
-    <refType typeId="04b8c2e2-510e-4973-a771-f4fc806b1f33" valueTypeId="6d38738e-0a06-470f-bcf2-e7a418995058"/>
-    <listType typeId="c0858e6f-c523-4190-852a-0a0937a341ed" valueTypeId="b53d81af-f89e-4acc-b0ee-981ef6ee3961"/>
-    <managerType typeId="df6180f3-7b40-49e0-add5-ff3d85eb810e" valueTypeId="f9b5587e-b3f0-4525-92a6-4844a61b5be8"/>
-  </producedTypes>
-  <name>ItemTypes</name>
+ <producedTypes>
+  <refType typeId="04b8c2e2-510e-4973-a771-f4fc806b1f33" valueTypeId="6d38738e-0a06-470f-bcf2-e7a418995058"/>
+  <listType typeId="c0858e6f-c523-4190-852a-0a0937a341ed" valueTypeId="b53d81af-f89e-4acc-b0ee-981ef6ee3961"/>
+  <managerType typeId="df6180f3-7b40-49e0-add5-ff3d85eb810e" valueTypeId="f9b5587e-b3f0-4525-92a6-4844a61b5be8"/>
+ </producedTypes>
+ <name>ItemTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>AB57E0B5-BCD9-D765-528A-A5B011A824BA</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
+  <name>Service</name>
   <synonym>
-    <key>en</key>
-    <value>Item types</value>
+   <key>en</key>
+   <value>A7DAA372-24CA-CB14-43B6-64CD6A78B58E</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="4be789f8-2d36-4169-9f2d-4c825c8d712c">
-    <name>Service</name>
-    <synonym>
-      <key>en</key>
-      <value>Service</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
-    <name>Product</name>
-    <synonym>
-      <key>en</key>
-      <value>Product</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="53b457bc-5d47-4e8b-858f-a43c58bf269f">
-    <name>Certificate</name>
-    <synonym>
-      <key>en</key>
-      <value>Certificate</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="7bbe3a49-8365-4785-a38c-abee4d666e13">
+  <name>Product</name>
+  <synonym>
+   <key>en</key>
+   <value>CF93B13A-6D72-419B-BF85-5B469FA4F065</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="53b457bc-5d47-4e8b-858f-a43c58bf269f">
+  <name>Certificate</name>
+  <synonym>
+   <key>en</key>
+   <value>7A7D1A4E-6013-A73A-A120-0F549120847B</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

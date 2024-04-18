@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="324fb19e-d38d-4707-b369-7437a88622a0">
-  <name>DocOpeningEntryClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc opening entry client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocOpeningEntryClient</name>
+ <synonym>
+  <key>en</key>
+  <value>911EEA2D-4961-5A2F-FC76-6D849E09355E</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

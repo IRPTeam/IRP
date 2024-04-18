@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18b8858e-930d-4ede-9524-7af8941252fd">
-  <producedTypes>
-    <refType typeId="cb1a91d2-0b21-4bc3-9120-92e691c12754" valueTypeId="53d5807b-bdb1-4f8a-bdf9-b988c20ebd52"/>
-    <listType typeId="32eb0be6-6222-4068-b672-f88cd94e002e" valueTypeId="1f8ac7da-36f6-4f00-9d6a-62697790b27f"/>
-    <managerType typeId="bfa51ca5-6c82-439a-8bef-4e0b08ab7cd1" valueTypeId="a561e65a-7a6d-4cd3-929b-1f070a14fed0"/>
-  </producedTypes>
-  <name>BankTermTypes</name>
+ <producedTypes>
+  <refType typeId="cb1a91d2-0b21-4bc3-9120-92e691c12754" valueTypeId="53d5807b-bdb1-4f8a-bdf9-b988c20ebd52"/>
+  <listType typeId="32eb0be6-6222-4068-b672-f88cd94e002e" valueTypeId="1f8ac7da-36f6-4f00-9d6a-62697790b27f"/>
+  <managerType typeId="bfa51ca5-6c82-439a-8bef-4e0b08ab7cd1" valueTypeId="a561e65a-7a6d-4cd3-929b-1f070a14fed0"/>
+ </producedTypes>
+ <name>BankTermTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>F1E2876C-08B1-9B20-0EF0-051034062A63</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="258182db-8308-426d-8a2f-8359d8287335">
+  <name>PaymentTerminal</name>
   <synonym>
-    <key>en</key>
-    <value>Bank term types</value>
+   <key>en</key>
+   <value>A456CACB-FC1F-2E76-6B10-0AD00F76B64E</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="258182db-8308-426d-8a2f-8359d8287335">
-    <name>PaymentTerminal</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment terminal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d1187abb-7983-49e4-87da-8861dc5fc24f">
-    <name>PaymentAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment agent</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="d1187abb-7983-49e4-87da-8861dc5fc24f">
+  <name>PaymentAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>46290AE8-CD26-7751-1298-86A3D79A56AA</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

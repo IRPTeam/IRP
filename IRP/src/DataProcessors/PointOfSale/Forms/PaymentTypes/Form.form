@@ -1,419 +1,419 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
-  <title>
-    <key>en</key>
-    <value>Payment types</value>
-  </title>
-  <items xsi:type="form:FormGroup">
-    <name>GroupTitle</name>
-    <id>1</id>
-    <items xsi:type="form:Button">
-      <name>BackToSelectGroup</name>
-      <id>24</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>BackToSelectGroupExtendedTooltip</name>
-        <id>25</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>UsualButton</type>
-      <commandName>Form.Command.BackToSelectGroup</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <font xsi:type="core:FontRef">
-        <font>Style.ExtraLargeTextFont</font>
-      </font>
-      <representationInContextMenu>Auto</representationInContextMenu>
-    </items>
-    <items xsi:type="form:Decoration">
-      <name>DecorationSpace</name>
-      <id>26</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>DecorationSpaceExtendedTooltip</name>
-        <id>28</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>DecorationSpaceContextMenu</name>
-        <id>27</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </items>
-    <items xsi:type="form:Button">
-      <name>FormCloseButton</name>
-      <id>8</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>FormCloseButtonExtendedTooltip</name>
-        <id>9</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>UsualButton</type>
-      <commandName>Form.Command.CloseButton</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <font xsi:type="core:FontRef">
-        <font>Style.ExtraLargeTextFont</font>
-      </font>
-      <representationInContextMenu>Auto</representationInContextMenu>
-    </items>
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <title>
+  <key>en</key>
+  <value>7727D11D-1DA7-B4B4-469C-CDF0FCF86933</value>
+ </title>
+ <items xsi:type="form:FormGroup">
+  <name>GroupTitle</name>
+  <id>1</id>
+  <items xsi:type="form:Button">
+   <name>BackToSelectGroup</name>
+   <id>24</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>BackToSelectGroupExtendedTooltip</name>
+    <id>25</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
-    <toolTip>
-      <key>en</key>
-      <value>Group title</value>
-    </toolTip>
-    <horizontalStretch>true</horizontalStretch>
-    <extendedTooltip>
-      <name>GroupTitleExtendedTooltip</name>
-      <id>2</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>UsualGroup</type>
-    <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>HorizontalIfPossible</group>
-      <horizontalAlign>Right</horizontalAlign>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
     </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.Command.BackToSelectGroup</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <font xsi:type="core:FontRef">
+    <font>Style.ExtraLargeTextFont</font>
+   </font>
+   <representationInContextMenu>Auto</representationInContextMenu>
   </items>
-  <items xsi:type="form:FormGroup">
-    <name>PaymentPages</name>
-    <id>18</id>
-    <items xsi:type="form:FormGroup">
-      <name>PaymentGroup</name>
-      <id>20</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <title>
-        <key>en</key>
-        <value>Payment group</value>
-      </title>
-      <extendedTooltip>
-        <name>PaymentGroupExtendedTooltip</name>
-        <id>21</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>Page</type>
-      <extInfo xsi:type="form:PageGroupExtInfo">
-        <group>Vertical</group>
-        <showTitle>true</showTitle>
-      </extInfo>
-    </items>
+  <items xsi:type="form:Decoration">
+   <name>DecorationSpace</name>
+   <id>26</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>DecorationSpaceExtendedTooltip</name>
+    <id>28</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
-    <title>
-      <key>en</key>
-      <value>Payment pages</value>
-    </title>
-    <extendedTooltip>
-      <name>PaymentPagesExtendedTooltip</name>
-      <id>19</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <type>Pages</type>
-    <extInfo xsi:type="form:PagesGroupExtInfo">
-      <currentRowUse>Auto</currentRowUse>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
     </extInfo>
-  </items>
-  <autoCommandBar>
-    <name>FormCommandBar</name>
-    <id>-1</id>
+   </extendedTooltip>
+   <contextMenu>
+    <name>DecorationSpaceContextMenu</name>
+    <id>27</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
-      <common>true</common>
+     <common>true</common>
     </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <horizontalStretch>true</horizontalStretch>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
     <horizontalAlign>Left</horizontalAlign>
-  </autoCommandBar>
-  <handlers>
-    <event>OnOpen</event>
-    <name>OnOpen</name>
-  </handlers>
-  <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <autoUrl>true</autoUrl>
-  <group>Vertical</group>
-  <autoFillCheck>true</autoFillCheck>
-  <allowFormCustomize>true</allowFormCustomize>
+   </extInfo>
+  </items>
+  <items xsi:type="form:Button">
+   <name>FormCloseButton</name>
+   <id>8</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <extendedTooltip>
+    <name>FormCloseButtonExtendedTooltip</name>
+    <id>9</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualButton</type>
+   <commandName>Form.Command.CloseButton</commandName>
+   <representation>Auto</representation>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <placementArea>UserCmds</placementArea>
+   <font xsi:type="core:FontRef">
+    <font>Style.ExtraLargeTextFont</font>
+   </font>
+   <representationInContextMenu>Auto</representationInContextMenu>
+  </items>
+  <visible>true</visible>
   <enabled>true</enabled>
-  <showTitle>true</showTitle>
-  <showCloseButton>true</showCloseButton>
-  <attributes>
-    <name>LinkedPayButtons</name>
-    <title>
-      <key>en</key>
-      <value>Linked pay buttons</value>
-    </title>
-    <id>2</id>
-    <valueType>
-      <types>ValueTable</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <columns>
-      <name>ButtonName</name>
-      <title>
-        <key>en</key>
-        <value>Button name</value>
-      </title>
-      <id>3</id>
-      <valueType>
-        <types>String</types>
-        <stringQualifiers/>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>PaymentType</name>
-      <title>
-        <key>en</key>
-        <value>Payment type</value>
-      </title>
-      <id>5</id>
-      <valueType>
-        <types>CatalogRef.PaymentTypes</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>BankTerm</name>
-      <title>
-        <key>en</key>
-        <value>Bank term</value>
-      </title>
-      <id>6</id>
-      <valueType>
-        <types>CatalogRef.BankTerms</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>PaymentTypeEnum</name>
-      <title>
-        <key>en</key>
-        <value>Payment type enum</value>
-      </title>
-      <id>7</id>
-      <valueType>
-        <types>EnumRef.PaymentTypes</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-  </attributes>
-  <formCommands>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <toolTip>
+   <key>en</key>
+   <value>CD146FD3-844C-2238-89EC-C55261853A7E</value>
+  </toolTip>
+  <horizontalStretch>true</horizontalStretch>
+  <extendedTooltip>
+   <name>GroupTitleExtendedTooltip</name>
+   <id>2</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>HorizontalIfPossible</group>
+   <horizontalAlign>Right</horizontalAlign>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormGroup">
+  <name>PaymentPages</name>
+  <id>18</id>
+  <items xsi:type="form:FormGroup">
+   <name>PaymentGroup</name>
+   <id>20</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>en</key>
+    <value>0DEF1FB5-7CAB-9D7A-AE71-196EC2073F0C</value>
+   </title>
+   <extendedTooltip>
+    <name>PaymentGroupExtendedTooltip</name>
+    <id>21</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>Page</type>
+   <extInfo xsi:type="form:PageGroupExtInfo">
+    <group>Vertical</group>
+    <showTitle>true</showTitle>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>en</key>
+   <value>E54C96CB-7C23-CD46-613D-D91294D477FD</value>
+  </title>
+  <extendedTooltip>
+   <name>PaymentPagesExtendedTooltip</name>
+   <id>19</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>Pages</type>
+  <extInfo xsi:type="form:PagesGroupExtInfo">
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
+ <autoCommandBar>
+  <name>FormCommandBar</name>
+  <id>-1</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <horizontalAlign>Left</horizontalAlign>
+ </autoCommandBar>
+ <handlers>
+  <event>OnOpen</event>
+  <name>OnOpen</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
+ </handlers>
+ <autoUrl>true</autoUrl>
+ <group>Vertical</group>
+ <autoFillCheck>true</autoFillCheck>
+ <allowFormCustomize>true</allowFormCustomize>
+ <enabled>true</enabled>
+ <showTitle>true</showTitle>
+ <showCloseButton>true</showCloseButton>
+ <attributes>
+  <name>LinkedPayButtons</name>
+  <title>
+   <key>en</key>
+   <value>E196DB03-DA0E-2F79-959D-DF68D0C83F26</value>
+  </title>
+  <id>2</id>
+  <valueType>
+   <types>ValueTable</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <columns>
+   <name>ButtonName</name>
+   <title>
+    <key>en</key>
+    <value>EE911826-242A-D734-466B-BE104BE77257</value>
+   </title>
+   <id>3</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>PaymentType</name>
+   <title>
+    <key>en</key>
+    <value>E9B169FD-3602-7F1D-DDD2-2DA5DB11FE83</value>
+   </title>
+   <id>5</id>
+   <valueType>
+    <types>CatalogRef.PaymentTypes</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>BankTerm</name>
+   <title>
+    <key>en</key>
+    <value>CC01B8F7-C932-7F44-4A03-3F3EB128E705</value>
+   </title>
+   <id>6</id>
+   <valueType>
+    <types>CatalogRef.BankTerms</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>PaymentTypeEnum</name>
+   <title>
+    <key>en</key>
+    <value>733820B4-95BA-4E8F-FF0D-DE4B6785D419</value>
+   </title>
+   <id>7</id>
+   <valueType>
+    <types>EnumRef.PaymentTypes</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+ </attributes>
+ <formCommands>
+  <name>CloseButton</name>
+  <title>
+   <key>en</key>
+   <value>C3A67982-DCF4-0617-73FC-CDE3A9077840[Esc]</value>
+  </title>
+  <id>1</id>
+  <toolTip>
+   <key>en</key>
+   <value>386F2088-5662-FCD7-7C2D-DADF243BE883</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Close</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
     <name>CloseButton</name>
-    <title>
-      <key>en</key>
-      <value>[Esc]</value>
-    </title>
-    <id>1</id>
-    <toolTip>
-      <key>en</key>
-      <value>Close button</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.Close</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>CloseButton</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>PayButtonPress</name>
+  <title>
+   <key>en</key>
+   <value>F7D2F38D-2CF4-4665-58F9-972514D32B4F</value>
+  </title>
+  <id>3</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
     <name>PayButtonPress</name>
-    <title>
-      <key>en</key>
-      <value>Service command</value>
-    </title>
-    <id>3</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>PayButtonPress</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>BackToSelectGroup</name>
+  <title>
+   <key>en</key>
+   <value>1CAFC423-C4B4-72DB-B37C-C2A491299921[0]</value>
+  </title>
+  <id>4</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.MoveLeft</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
     <name>BackToSelectGroup</name>
-    <title>
-      <key>en</key>
-      <value>[0]</value>
-    </title>
-    <id>4</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.MoveLeft</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>BackToSelectGroup</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>PayButtonGroup</name>
+  <title>
+   <key>en</key>
+   <value>BE58969F-10F0-69F6-6F26-691E8206D922</value>
+  </title>
+  <id>5</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
     <name>PayButtonGroup</name>
-    <title>
-      <key>en</key>
-      <value>Pay button group</value>
-    </title>
-    <id>5</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>PayButtonGroup</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <parameters>
-    <name>PayButtons</name>
-    <valueType/>
-    <keyParameter>true</keyParameter>
-  </parameters>
-  <commandInterface>
-    <navigationPanel/>
-    <commandBar/>
-  </commandInterface>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <parameters>
+  <name>PayButtons</name>
+  <valueType/>
+  <keyParameter>true</keyParameter>
+ </parameters>
+ <commandInterface>
+  <navigationPanel/>
+  <commandBar/>
+ </commandInterface>
 </form:Form>

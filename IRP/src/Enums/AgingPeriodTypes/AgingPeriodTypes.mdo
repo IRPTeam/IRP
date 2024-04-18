@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3e6d1e00-1f1a-435b-a4e5-8feb9fe74bc1">
-  <producedTypes>
-    <refType typeId="07856953-3a4a-4894-b831-54da653b7395" valueTypeId="f2f1fb1a-8ea8-468d-837e-98d688f435af"/>
-    <listType typeId="0c91aa5e-df7f-442c-ad11-4a0457627d32" valueTypeId="3156de2f-383d-4410-8790-4fa0ca2efe45"/>
-    <managerType typeId="d6deac5a-5c79-4b6c-983f-7b6828c88eba" valueTypeId="8a178564-e193-415a-b30d-9cc904eec0ea"/>
-  </producedTypes>
-  <name>AgingPeriodTypes</name>
+ <producedTypes>
+  <refType typeId="07856953-3a4a-4894-b831-54da653b7395" valueTypeId="f2f1fb1a-8ea8-468d-837e-98d688f435af"/>
+  <listType typeId="0c91aa5e-df7f-442c-ad11-4a0457627d32" valueTypeId="3156de2f-383d-4410-8790-4fa0ca2efe45"/>
+  <managerType typeId="d6deac5a-5c79-4b6c-983f-7b6828c88eba" valueTypeId="8a178564-e193-415a-b30d-9cc904eec0ea"/>
+ </producedTypes>
+ <name>AgingPeriodTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>793983CC-EC94-24D6-6F4C-CBA387328D43</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="e5d9dcb9-ad80-40ca-a048-0dd356cf8a3f">
+  <name>Overdue</name>
   <synonym>
-    <key>en</key>
-    <value>Aging period types</value>
+   <key>en</key>
+   <value>070CEC35-A3E1-EC6D-DAA3-3AFDCE72CFBE</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="e5d9dcb9-ad80-40ca-a048-0dd356cf8a3f">
-    <name>Overdue</name>
-    <synonym>
-      <key>en</key>
-      <value>Overdue</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1ab988ae-0f72-4d42-b355-a4f025e860c2">
-    <name>Future</name>
-    <synonym>
-      <key>en</key>
-      <value>Future</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="1ab988ae-0f72-4d42-b355-a4f025e860c2">
+  <name>Future</name>
+  <synonym>
+   <key>en</key>
+   <value>FCA82846-D2AD-BAF2-22D6-67A05083C5C1</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

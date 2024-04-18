@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d7875bd6-33a5-49fc-8550-75e8cc9628fa">
-  <name>DocAdditionalCostAllocationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional cost allocation client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocAdditionalCostAllocationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>DEAF2C3C-DF51-BE94-4546-6868A593C3F2_</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

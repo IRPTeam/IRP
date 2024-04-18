@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5d9bd2d-c683-4981-9d67-2235fcd97109">
-  <name>AccumulationRegisters_R1012B_PurchaseOrdersInvoiceClosing</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R1012B PurchaseOrdersInvoiceClosing</value>
-  </synonym>
+ <name>AccumulationRegisters_R1012B_PurchaseOrdersInvoiceClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>2ED590BF-9B43-9724-4C33-38DF7651BB92_____________________</value>
+ </synonym>
 </mdclass:Role>

@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="02e1e523-f763-405d-b33b-14449fb1f05b">
-  <producedTypes>
-    <objectType typeId="0be16170-9972-4151-b36d-edbbdb86e6b9" valueTypeId="bab42bf6-8cc0-4393-80f6-5b4441c971aa"/>
-    <refType typeId="2d65652a-2387-4cf8-9ead-25429f1416d5" valueTypeId="1370fca7-77d8-4e9e-bd3b-e7c34c9a0dc8"/>
-    <selectionType typeId="a1e92c9f-b0df-4268-820a-da5210e307d9" valueTypeId="81459705-acc8-4f1f-8f46-935c07d4984e"/>
-    <listType typeId="9a772905-315b-4dca-bbae-30e301edfac9" valueTypeId="850d8d9a-57e9-4bc5-9cf7-6d295790b705"/>
-    <managerType typeId="fcde4267-d56a-485e-9bba-843012abe2bd" valueTypeId="0a3b988d-f5a8-4008-ad30-f5e49d40c62f"/>
-  </producedTypes>
-  <name>AccessKey</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="02e1e523-f763-405d-b33b-14449fb1f05b">
+ <producedTypes>
+  <objectType typeId="0be16170-9972-4151-b36d-edbbdb86e6b9" valueTypeId="bab42bf6-8cc0-4393-80f6-5b4441c971aa"/>
+  <refType typeId="2d65652a-2387-4cf8-9ead-25429f1416d5" valueTypeId="1370fca7-77d8-4e9e-bd3b-e7c34c9a0dc8"/>
+  <selectionType typeId="a1e92c9f-b0df-4268-820a-da5210e307d9" valueTypeId="81459705-acc8-4f1f-8f46-935c07d4984e"/>
+  <listType typeId="9a772905-315b-4dca-bbae-30e301edfac9" valueTypeId="850d8d9a-57e9-4bc5-9cf7-6d295790b705"/>
+  <managerType typeId="fcde4267-d56a-485e-9bba-843012abe2bd" valueTypeId="0a3b988d-f5a8-4008-ad30-f5e49d40c62f"/>
+ </producedTypes>
+ <name>AccessKey</name>
+ <synonym>
+  <key>en</key>
+  <value>545F7289-DAD3-F9CA-AA7B-B62D34C12423</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.AccessKey.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>B52C1A8D-01B6-9E61-14E1-142FFD39ADB9</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>23C85C0D-8548-711E-EF76-66C9CC1C83FC</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <descriptionLength>50</descriptionLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="d338becf-ee89-4dad-a583-80168e4e6d42">
+   <name>Company</name>
+   <description>Company</description>
+   <code xsi:type="core:StringValue">
+    <value/>
+   </code>
+  </items>
+  <items id="42b0feeb-8400-4c4f-a9aa-624da1e02211">
+   <name>Branch</name>
+   <description>Branch</description>
+   <code xsi:type="core:StringValue">
+    <value/>
+   </code>
+  </items>
+  <items id="611dec5c-84e3-4baf-9e7b-0b835baa29c9">
+   <name>Store</name>
+   <description>Store</description>
+   <code xsi:type="core:StringValue">
+    <value/>
+   </code>
+  </items>
+  <items id="55379d69-7d0f-471b-b147-3bec3a39adb5">
+   <name>PriceType</name>
+   <description>PriceType</description>
+   <code xsi:type="core:StringValue">
+    <value/>
+   </code>
+  </items>
+  <items id="ddb4b0fe-3091-4590-b566-9ab81b6b073f">
+   <name>Account</name>
+   <description>Account</description>
+   <code xsi:type="core:StringValue">
+    <value/>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.AccessKey.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="b70e4deb-fb56-479e-a1d8-957445bc774d">
+  <name>Info</name>
   <synonym>
-    <key>en</key>
-    <value>Access key</value>
+   <key>en</key>
+   <value>FC061868-B9C4-6D9A-A319-9B75A6F34B63</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.AccessKey.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Access key</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Access key</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <descriptionLength>50</descriptionLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="d338becf-ee89-4dad-a583-80168e4e6d42">
-      <name>Company</name>
-      <description>Company</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-    <items id="42b0feeb-8400-4c4f-a9aa-624da1e02211">
-      <name>Branch</name>
-      <description>Branch</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-    <items id="611dec5c-84e3-4baf-9e7b-0b835baa29c9">
-      <name>Store</name>
-      <description>Store</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-    <items id="55379d69-7d0f-471b-b147-3bec3a39adb5">
-      <name>PriceType</name>
-      <description>PriceType</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-    <items id="ddb4b0fe-3091-4590-b566-9ab81b6b073f">
-      <name>Account</name>
-      <description>Account</description>
-      <code xsi:type="core:StringValue">
-        <value></value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.AccessKey.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="b70e4deb-fb56-479e-a1d8-957445bc774d">
-    <name>Info</name>
-    <synonym>
-      <key>en</key>
-      <value>Info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="1f436b20-7c4c-4e7c-877d-59e4ef005d55">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>1024</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="51d01da3-f3d3-41f8-81ca-8736ba4eabc8">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1f436b20-7c4c-4e7c-877d-59e4ef005d55">
+  <name>Type</name>
+  <synonym>
+   <key>en</key>
+   <value>CFE52387-988F-F728-8609-9C7FD82D8A10</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="51d01da3-f3d3-41f8-81ca-8736ba4eabc8">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>DC27CF9B-C13A-EDC3-31E4-46220D1DEC5E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

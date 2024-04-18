@@ -1,252 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="60846e6d-fcfa-4f40-bb38-f2ff5c8be528">
-  <producedTypes>
-    <objectType typeId="29db5ca5-4ec3-440b-9515-76b0b8039459" valueTypeId="dd06eede-f1ec-4621-a8e3-8eceef527ce9"/>
-    <refType typeId="481265e3-be0d-4b40-8d1f-e7a51995deb4" valueTypeId="cc9eb750-3966-402a-a4d5-315e0dd5094b"/>
-    <selectionType typeId="4800ea16-a6cb-4d29-892a-903c884f18b9" valueTypeId="cfe4a2cd-523c-42f7-b518-34b7a29505a6"/>
-    <listType typeId="5b0df9c1-4310-4acb-b18f-7e4ea1042536" valueTypeId="4ffded18-9649-4ede-b16e-b85ed6d290cd"/>
-    <managerType typeId="239e2a80-7b55-4e5a-9d6b-461a0d73fda0" valueTypeId="64301550-4655-4809-83c3-3aef0b764194"/>
-  </producedTypes>
-  <name>PlanningPeriods</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="60846e6d-fcfa-4f40-bb38-f2ff5c8be528">
+ <producedTypes>
+  <objectType typeId="29db5ca5-4ec3-440b-9515-76b0b8039459" valueTypeId="dd06eede-f1ec-4621-a8e3-8eceef527ce9"/>
+  <refType typeId="481265e3-be0d-4b40-8d1f-e7a51995deb4" valueTypeId="cc9eb750-3966-402a-a4d5-315e0dd5094b"/>
+  <selectionType typeId="4800ea16-a6cb-4d29-892a-903c884f18b9" valueTypeId="cfe4a2cd-523c-42f7-b518-34b7a29505a6"/>
+  <listType typeId="5b0df9c1-4310-4acb-b18f-7e4ea1042536" valueTypeId="4ffded18-9649-4ede-b16e-b85ed6d290cd"/>
+  <managerType typeId="239e2a80-7b55-4e5a-9d6b-461a0d73fda0" valueTypeId="64301550-4655-4809-83c3-3aef0b764194"/>
+ </producedTypes>
+ <name>PlanningPeriods</name>
+ <synonym>
+  <key>en</key>
+  <value>2250E189-8689-D0CC-CE7B-BE439F5F6FBB</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.PlanningPeriods.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.PlanningPeriods.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>FFFFFB08-F91E-717B-BC8F-FED2EFCE9458</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>50</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
+  <name>BeginDate</name>
   <synonym>
-    <key>en</key>
-    <value>Planning periods</value>
+   <key>en</key>
+   <value>22719E1E-5649-05FD-D63F-F94C36F2F3BE</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PlanningPeriods.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.PlanningPeriods.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PlanningPeriods</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.PlanningPeriods.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.PlanningPeriods.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c3b271fa-56af-48c8-8dcb-6bef1ee113d2">
+  <name>EndDate</name>
+  <synonym>
+   <key>en</key>
+   <value>3D022361-7112-8CF1-18DB-BEB5BD44D39E</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="092a4abc-ad4e-45b6-9fc8-4dfd2c40f2f6">
+  <name>IsFinancial</name>
+  <synonym>
+   <key>en</key>
+   <value>F0B5D310-6169-55F6-653D-DBBF2C1B2FDF</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7cc75b98-af62-4284-a095-10a25d6aa741">
+  <name>IsManufacturing</name>
+  <synonym>
+   <key>en</key>
+   <value>CBA98716-8791-6DFA-A1EE-E2D3D0ABD0FC</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a8447cce-d4db-4f12-99c1-fbe5115a62be">
+  <name>IsSalary</name>
+  <synonym>
+   <key>en</key>
+   <value>50D708D8-0FFF-39B0-01BC-CE0351B90513</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="984b5575-28eb-4080-bfff-97c565271753">
+  <producedTypes>
+   <objectType typeId="0ba57d68-b94f-4f6f-b6be-c1bd19710512" valueTypeId="b093870f-6785-4c8d-9ed1-b320fcf930b4"/>
+   <rowType typeId="0592f971-7739-427e-b6f2-17c6665edd52" valueTypeId="14c8c2c0-15a1-42aa-871d-71ff2e0a0ba7"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>53F08853-7217-5F2D-D68D-D84F2C892C12</value>
+  </synonym>
+  <attributes uuid="33cc600a-0761-4898-8e0a-fff142eaf9f0">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Planning period</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>50</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="91cc0df3-c756-4573-8f0c-4f9f844fb721">
-    <name>BeginDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>F3D04C1F-256B-193C-C5D9-9374C34013FD</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c3b271fa-56af-48c8-8dcb-6bef1ee113d2">
-    <name>EndDate</name>
-    <synonym>
-      <key>en</key>
-      <value>End date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="5d65d604-f8e9-41af-9e9f-1cea97100aea">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>E5CCDE4F-2FA0-CA94-4110-02240B8B6B07</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="092a4abc-ad4e-45b6-9fc8-4dfd2c40f2f6">
-    <name>IsFinancial</name>
-    <synonym>
-      <key>en</key>
-      <value>Is financial</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="b8e99662-0fe3-43cd-bcd7-5ba9737fb45b">
+  <producedTypes>
+   <objectType typeId="191ea7cb-89fa-47e0-92e3-1f25722576d9" valueTypeId="21377b0d-ea2c-48d0-b6ef-2b09538fd671"/>
+   <rowType typeId="f0774b84-b40f-484a-92f2-0f1a79af067b" valueTypeId="74472744-eebd-421a-b67f-98371f74c316"/>
+  </producedTypes>
+  <name>BusinessUnits</name>
+  <synonym>
+   <key>en</key>
+   <value>53773739-4BC9-C452-24F8-8E5AC48DDAAB</value>
+  </synonym>
+  <attributes uuid="f54d04c5-d1f9-4473-99c0-2cfd955ac4a2">
+   <name>BusinessUnit</name>
+   <synonym>
+    <key>en</key>
+    <value>1673439D-8942-0DAC-C1C9-9F3186EFD28A</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="7cc75b98-af62-4284-a095-10a25d6aa741">
-    <name>IsManufacturing</name>
-    <synonym>
-      <key>en</key>
-      <value>Is manufacturing</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a8447cce-d4db-4f12-99c1-fbe5115a62be">
-    <name>IsSalary</name>
-    <synonym>
-      <key>en</key>
-      <value>Is salary</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="984b5575-28eb-4080-bfff-97c565271753">
-    <producedTypes>
-      <objectType typeId="0ba57d68-b94f-4f6f-b6be-c1bd19710512" valueTypeId="b093870f-6785-4c8d-9ed1-b320fcf930b4"/>
-      <rowType typeId="0592f971-7739-427e-b6f2-17c6665edd52" valueTypeId="14c8c2c0-15a1-42aa-871d-71ff2e0a0ba7"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="33cc600a-0761-4898-8e0a-fff142eaf9f0">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5d65d604-f8e9-41af-9e9f-1cea97100aea">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PlanningPeriods.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="b8e99662-0fe3-43cd-bcd7-5ba9737fb45b">
-    <producedTypes>
-      <objectType typeId="191ea7cb-89fa-47e0-92e3-1f25722576d9" valueTypeId="21377b0d-ea2c-48d0-b6ef-2b09538fd671"/>
-      <rowType typeId="f0774b84-b40f-484a-92f2-0f1a79af067b" valueTypeId="74472744-eebd-421a-b67f-98371f74c316"/>
-    </producedTypes>
-    <name>BusinessUnits</name>
-    <synonym>
-      <key>en</key>
-      <value>Business units</value>
-    </synonym>
-    <attributes uuid="f54d04c5-d1f9-4473-99c0-2cfd955ac4a2">
-      <name>BusinessUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Business unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e652e5d2-dad9-4ca4-bdd8-e113b3626128">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ce6092d3-c988-4407-971c-2ff205a9aaa8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="e893d468-79d6-4537-8695-257b2a028b67">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8A14C439-5482-587D-DBAC-CECB2BE60509</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e652e5d2-dad9-4ca4-bdd8-e113b3626128">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>BD53FBB5-0144-3ED7-7AF7-7EE059AD1F80</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ce6092d3-c988-4407-971c-2ff205a9aaa8">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>61413EAC-E97C-8776-652C-CA91D947B190</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

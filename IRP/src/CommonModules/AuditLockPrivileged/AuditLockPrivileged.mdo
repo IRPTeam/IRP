@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="401d9111-7220-45cd-882b-c8e4e3def9ff">
-  <name>AuditLockPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Audit lock privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>AuditLockPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>AE929F18-0B0D-2538-8E49-9D8CB8C51F0C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

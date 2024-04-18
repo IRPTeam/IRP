@@ -1,769 +1,769 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9ced7ea9-724a-4361-8dc8-3dac77dce4a2">
-  <producedTypes>
-    <objectType typeId="e4486bbc-b07c-4a73-94b0-95e0973bd693" valueTypeId="265761b4-6753-4398-a657-d2a49e2ca676"/>
-    <refType typeId="2191b905-344d-4d15-8862-ac3b9d4641e4" valueTypeId="bcf1b703-64d7-4fce-91fc-2024aae54a4b"/>
-    <selectionType typeId="d3f53430-3ec7-4ef4-b3f3-7d454038a07c" valueTypeId="f0a54ec2-5a00-4102-b388-cfc9e97178d7"/>
-    <listType typeId="5f6aff7c-59d9-4ca7-a239-db2fb4b2f467" valueTypeId="2641b3e6-0622-4707-bb61-b49d4a16dc8e"/>
-    <managerType typeId="30bfe911-532e-462d-9b61-317dcecfd6a9" valueTypeId="f2847bfd-49b7-4fdb-81ea-1a27db30979a"/>
-  </producedTypes>
-  <name>AccountingOperations</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting operations</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.AccountingOperations.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_AccountingOperations</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_AccountingOperations</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.AccountingOperations.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="9ced7ea9-724a-4361-8dc8-3dac77dce4a2">
+ <producedTypes>
+  <objectType typeId="e4486bbc-b07c-4a73-94b0-95e0973bd693" valueTypeId="265761b4-6753-4398-a657-d2a49e2ca676"/>
+  <refType typeId="2191b905-344d-4d15-8862-ac3b9d4641e4" valueTypeId="bcf1b703-64d7-4fce-91fc-2024aae54a4b"/>
+  <selectionType typeId="d3f53430-3ec7-4ef4-b3f3-7d454038a07c" valueTypeId="f0a54ec2-5a00-4102-b388-cfc9e97178d7"/>
+  <listType typeId="5f6aff7c-59d9-4ca7-a239-db2fb4b2f467" valueTypeId="2641b3e6-0622-4707-bb61-b49d4a16dc8e"/>
+  <managerType typeId="30bfe911-532e-462d-9b61-317dcecfd6a9" valueTypeId="f2847bfd-49b7-4fdb-81ea-1a27db30979a"/>
+ </producedTypes>
+ <name>AccountingOperations</name>
+ <synonym>
+  <key>en</key>
+  <value>B15971B6-CDE5-0F8B-B2CA-A84D524C5536</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.AccountingOperations.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <synonym>
+   <key>en</key>
+   <value>F354C69A-AA9B-CF7E-EEA1-13921F97D4FA</value>
+  </synonym>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_AccountingOperations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_AccountingOperations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.AccountingOperations.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.AccountingOperations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>3A260B86-6088-041D-DE74-4F39E84C4448</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="bb863899-549b-4f65-a7fd-4c1f4e53062b">
+   <name>Document_BankPayment</name>
+   <code xsi:type="core:NumberValue">
+    <value>1</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
+    <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
+    <code xsi:type="core:NumberValue">
+     <value>3</value>
+    </code>
+   </content>
+   <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
+    <name>BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+    <code xsi:type="core:NumberValue">
+     <value>10</value>
+    </code>
+   </content>
+   <content id="457b2655-1ac4-4443-9d2f-d5b97b218b81">
+    <name>BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>62</value>
+    </code>
+   </content>
+   <content id="846d9a22-1946-4b22-a831-e5055950c36e">
+    <name>BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>63</value>
+    </code>
+   </content>
+   <content id="fd556c44-372a-43f5-877a-101ca36e8ab4">
+    <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>70</value>
+    </code>
+   </content>
+   <content id="f9d0e384-1f43-4213-adbe-06a404f4f679">
+    <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>74</value>
+    </code>
+   </content>
+  </items>
+  <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
+   <name>Document_BankReceipt</name>
+   <code xsi:type="core:NumberValue">
+    <value>2</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>4</value>
+    </code>
+   </content>
+   <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
+    <name>BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>14</value>
+    </code>
+   </content>
+   <content id="75a21bc0-af5b-4d26-8313-ad8281d4c473">
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>66</value>
+    </code>
+   </content>
+   <content id="111f2066-7855-40c6-bf54-228e5ae44756">
+    <name>BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>67</value>
+    </code>
+   </content>
+   <content id="5852dccb-2a40-47d5-9665-4513840fc9f8">
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>72</value>
+    </code>
+   </content>
+   <content id="139e87e1-68ee-4541-9b4b-bde8b1809b45">
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>75</value>
+    </code>
+   </content>
+   <content id="005882d8-a501-4fb4-98dd-60bf331ad902">
+    <name>BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>76</value>
+    </code>
+   </content>
+   <content id="31d74fe2-210a-4709-b934-5b62df10368a">
+    <name>BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>77</value>
+    </code>
+   </content>
+  </items>
+  <items id="5780092e-ac78-48e0-8f40-6a3fb575aeb2">
+   <name>Document_PurchaseInvoice</name>
+   <code xsi:type="core:NumberValue">
+    <value>5</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
+    <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>6</value>
+    </code>
+   </content>
+   <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
+    <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+    <code xsi:type="core:NumberValue">
+     <value>7</value>
+    </code>
+   </content>
+   <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
+    <name>PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>8</value>
+    </code>
+   </content>
+   <content id="3139d27d-f017-4cd2-9371-581a24328085">
+    <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
+    <code xsi:type="core:NumberValue">
+     <value>24</value>
+    </code>
+   </content>
+   <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
+    <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
+    <code xsi:type="core:NumberValue">
+     <value>25</value>
+    </code>
+   </content>
+  </items>
+  <items id="2629786b-a1c8-4e5f-819b-76ffc472e4eb">
+   <name>Document_RetailSalesReceipt</name>
+   <code xsi:type="core:NumberValue">
+    <value>11</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="f2fd559e-6f20-450c-9dcc-5585777939b7">
+    <name>RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
+    <code xsi:type="core:NumberValue">
+     <value>12</value>
+    </code>
+   </content>
+  </items>
+  <items id="ac174994-2762-4d95-8dc9-154a578a14a2">
+   <name>Document_SalesInvoice</name>
+   <code xsi:type="core:NumberValue">
+    <value>13</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="13cc96b1-55aa-4a8f-9ffa-84fd9cd02e1c">
+    <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>15</value>
+    </code>
+   </content>
+   <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
+    <name>SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming</name>
+    <code xsi:type="core:NumberValue">
+     <value>16</value>
+    </code>
+   </content>
+   <content id="0e27f185-a673-4288-a461-e63f85ec7165">
+    <name>SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
+    <code xsi:type="core:NumberValue">
+     <value>17</value>
+    </code>
+   </content>
+   <content id="3070b93b-5d84-4762-a76a-9a4a2167f2ee">
+    <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>18</value>
+    </code>
+   </content>
+   <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
+    <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
+    <code xsi:type="core:NumberValue">
+     <value>22</value>
+    </code>
+   </content>
+   <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
+    <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
+    <code xsi:type="core:NumberValue">
+     <value>23</value>
+    </code>
+   </content>
+  </items>
+  <items id="75cbb6bf-1e5f-4185-b83d-648393a21e9c">
+   <name>Document_ForeignCurrencyRevaluation</name>
+   <code xsi:type="core:NumberValue">
+    <value>19</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="dfa58a7e-3be1-4264-80cd-080643a5604e">
+    <name>ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>20</value>
+    </code>
+   </content>
+   <content id="38c3d013-996a-417f-8c24-447320fbd054">
+    <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers</name>
+    <code xsi:type="core:NumberValue">
+     <value>21</value>
+    </code>
+   </content>
+  </items>
+  <items id="dbb6f24e-0162-41b1-969f-af92a96b2508">
+   <name>Document_CashPayment</name>
+   <code xsi:type="core:NumberValue">
+    <value>26</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="408a2f66-656c-4320-b6f7-a013e1c63556">
+    <name>CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
+    <code xsi:type="core:NumberValue">
+     <value>34</value>
+    </code>
+   </content>
+   <content id="dc68413a-90b1-4758-996e-0c35004f64e9">
+    <name>CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+    <code xsi:type="core:NumberValue">
+     <value>35</value>
+    </code>
+   </content>
+   <content id="f7106390-3987-4720-aeee-dacaa0f2a3b3">
+    <name>CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>64</value>
+    </code>
+   </content>
+   <content id="06d24c46-557b-4e20-a5a0-6b707047e40f">
+    <name>CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>65</value>
+    </code>
+   </content>
+   <content id="f5e035f2-dbde-448b-9d6c-600a07679776">
+    <name>CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>71</value>
+    </code>
+   </content>
+  </items>
+  <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
+   <name>Document_CashReceipt</name>
+   <code xsi:type="core:NumberValue">
+    <value>27</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="6d9b584a-afc8-42d4-9875-bc7a50dd5580">
+    <name>CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>36</value>
+    </code>
+   </content>
+   <content id="e67d6131-1aea-4ae7-99d2-e8025d13fd1d">
+    <name>CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+    <code xsi:type="core:NumberValue">
+     <value>37</value>
+    </code>
+   </content>
+   <content id="c992cd20-6d49-4b01-935b-3e21fdced2fa">
+    <name>CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>68</value>
+    </code>
+   </content>
+   <content id="92cc20b7-780f-419b-84e1-bf4c3e7a54ec">
+    <name>CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>69</value>
+    </code>
+   </content>
+   <content id="f8a2280a-433a-4d02-8d1a-668abd4a705d">
+    <name>CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>73</value>
+    </code>
+   </content>
+  </items>
+  <items id="f42da89c-a0fb-4df4-bb09-3de02be76354">
+   <name>Document_CashExpense</name>
+   <code xsi:type="core:NumberValue">
+    <value>28</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="9bc6340d-7f54-458e-a572-2d42e1a36fc0">
+    <name>CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
+    <code xsi:type="core:NumberValue">
+     <value>32</value>
+    </code>
+   </content>
+  </items>
+  <items id="957e4a8b-1d80-420f-9d5f-03de818b080c">
+   <name>Document_CashRevenue</name>
+   <code xsi:type="core:NumberValue">
+    <value>29</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="d98857dd-e6f4-456b-9086-e241a4a00844">
+    <name>CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>33</value>
+    </code>
+   </content>
+  </items>
+  <items id="5f7860bf-8a96-4d16-984b-4fb514e994c4">
+   <name>Document_DebitNote</name>
+   <code xsi:type="core:NumberValue">
+    <value>30</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="321ab1a7-d2a3-494b-a559-f947721faf7f">
+    <name>DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>38</value>
+    </code>
+   </content>
+   <content id="046c2b44-08d5-491e-b98c-f546e920cd02">
+    <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+    <code xsi:type="core:NumberValue">
+     <value>39</value>
+    </code>
+   </content>
+   <content id="022ae9ba-8e6d-486f-a173-4ef454cd1370">
+    <name>DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>40</value>
+    </code>
+   </content>
+  </items>
+  <items id="0dc9eae5-05d2-463e-89ce-6840f9a6a934">
+   <name>Document_CreditNote</name>
+   <code xsi:type="core:NumberValue">
+    <value>31</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="e3f8e94f-99a5-4617-93cd-076015ad42ba">
+    <name>CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses</name>
+    <code xsi:type="core:NumberValue">
+     <value>41</value>
+    </code>
+   </content>
+   <content id="f28b8356-42f7-45bb-a471-518f0f2f310e">
+    <name>CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+    <code xsi:type="core:NumberValue">
+     <value>42</value>
+    </code>
+   </content>
+   <content id="ede515d2-6be7-4e3e-8805-1e61c552167a">
+    <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses</name>
+    <code xsi:type="core:NumberValue">
+     <value>43</value>
+    </code>
+   </content>
+  </items>
+  <items id="249b66fa-33bd-4d0a-b148-66d6d90ce904">
+   <name>Document_MoneyTransfer</name>
+   <code xsi:type="core:NumberValue">
+    <value>44</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="369606fc-a9d6-42e2-abea-d3d5d0d98153">
+    <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand</name>
+    <code xsi:type="core:NumberValue">
+     <value>45</value>
+    </code>
+   </content>
+   <content id="d3d817dc-b0c3-4f52-a7b3-d175127786fd">
+    <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand</name>
+    <code xsi:type="core:NumberValue">
+     <value>46</value>
+    </code>
+   </content>
+   <content id="e9a428bb-a932-4286-a180-50ba528ae89b">
+    <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit</name>
+    <code xsi:type="core:NumberValue">
+     <value>47</value>
+    </code>
+   </content>
+   <content id="fa0f40e8-32f5-48b5-b9ce-cd0485dc715f">
+    <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
+    <code xsi:type="core:NumberValue">
+     <value>48</value>
+    </code>
+   </content>
+   <content id="64a3ab9e-e061-40f5-9ffe-973ee1f3408f">
+    <name>MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
+    <code xsi:type="core:NumberValue">
+     <value>49</value>
+    </code>
+   </content>
+  </items>
+  <items id="d6dda5c8-2319-4196-8da6-f299137dcb0b">
+   <name>Document_CommissioningOfFixedAsset</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>50</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="1da3da7d-dfd9-41e4-961b-d313cbde7d23">
+    <name>CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>54</value>
+    </code>
+   </content>
+  </items>
+  <items id="e9a75965-1fa6-4738-ad40-19f9b3edceed">
+   <name>Document_ModernizationOfFixedAsset</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>51</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="7d1f4663-2901-4049-8255-add0457c7654">
+    <name>ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>56</value>
+    </code>
+   </content>
+   <content id="54333f77-3f41-4e24-91fe-0799c1119831">
+    <name>ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>57</value>
+    </code>
+   </content>
+  </items>
+  <items id="90bd03f3-a90b-4e8c-835d-acbbc7338e5f">
+   <name>Document_DecommissioningOfFixedAsset</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>52</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="9f91bf98-f604-4fb7-b411-e670a3714169">
+    <name>DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>55</value>
+    </code>
+   </content>
+  </items>
+  <items id="3ce38b7f-d089-41cf-bb68-1b59233374ae">
+   <name>Document_FixedAssetTransfer</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>53</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="fdf17dc2-596d-41b2-8a08-b9a0377c2657">
+    <name>FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>58</value>
+    </code>
+   </content>
+  </items>
+  <items id="408073ab-5900-48d6-a691-735f8c53b524">
+   <name>Document_DepreciationCalculation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>59</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="9f33fd36-eb45-49ff-8eec-364efd39872e">
+    <name>DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>60</value>
+    </code>
+   </content>
+   <content id="fe69b40a-efd7-47f5-95ea-df8f185a3ed5">
+    <name>DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>61</value>
+    </code>
+   </content>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.AccountingOperations.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.AccountingOperations.Form.GroupForm</defaultFolderForm>
+ <defaultListForm>Catalog.AccountingOperations.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.AccountingOperations.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.AccountingOperations.Form.GroupChoiceForm</defaultFolderChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="327cc162-7389-4392-bd17-275963a184c7">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>A775F0FB-5159-24FF-FC9E-EA2C6FF7F52E</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="db94b5ed-6b06-4386-9205-2138ec300de0">
+  <producedTypes>
+   <objectType typeId="6eb8c6db-371e-4722-a345-a86d34a9c373" valueTypeId="7134c39c-b6a0-498b-b5fa-ca07cc153389"/>
+   <rowType typeId="05bbb485-2336-433d-8513-ee16c8847e33" valueTypeId="7b6ba968-0368-4b3a-b23e-f89086e0fb08"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>CFD06523-7C1C-C3F5-5D1A-A73413BD0302</value>
+  </synonym>
+  <attributes uuid="3a6aabb0-0b1e-4a08-a2f9-ab4b553e5792">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Accounting operation</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="bb863899-549b-4f65-a7fd-4c1f4e53062b">
-      <name>Document_BankPayment</name>
-      <code xsi:type="core:NumberValue">
-        <value>1</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-        <name>BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
-        <code xsi:type="core:NumberValue">
-          <value>3</value>
-        </code>
-      </content>
-      <content id="74335ed0-2922-43c2-85c5-27c87eb943ba">
-        <name>BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <code xsi:type="core:NumberValue">
-          <value>10</value>
-        </code>
-      </content>
-      <content id="457b2655-1ac4-4443-9d2f-d5b97b218b81">
-        <name>BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>62</value>
-        </code>
-      </content>
-      <content id="846d9a22-1946-4b22-a831-e5055950c36e">
-        <name>BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>63</value>
-        </code>
-      </content>
-      <content id="fd556c44-372a-43f5-877a-101ca36e8ab4">
-        <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>70</value>
-        </code>
-      </content>
-      <content id="f9d0e384-1f43-4213-adbe-06a404f4f679">
-        <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>74</value>
-        </code>
-      </content>
-    </items>
-    <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
-      <name>Document_BankReceipt</name>
-      <code xsi:type="core:NumberValue">
-        <value>2</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>4</value>
-        </code>
-      </content>
-      <content id="e6f92cc0-3065-4c8d-b902-aee4c0468291">
-        <name>BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>14</value>
-        </code>
-      </content>
-      <content id="75a21bc0-af5b-4d26-8313-ad8281d4c473">
-        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>66</value>
-        </code>
-      </content>
-      <content id="111f2066-7855-40c6-bf54-228e5ae44756">
-        <name>BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>67</value>
-        </code>
-      </content>
-      <content id="5852dccb-2a40-47d5-9665-4513840fc9f8">
-        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>72</value>
-        </code>
-      </content>
-      <content id="139e87e1-68ee-4541-9b4b-bde8b1809b45">
-        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>75</value>
-        </code>
-      </content>
-      <content id="005882d8-a501-4fb4-98dd-60bf331ad902">
-        <name>BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>76</value>
-        </code>
-      </content>
-      <content id="31d74fe2-210a-4709-b934-5b62df10368a">
-        <name>BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>77</value>
-        </code>
-      </content>
-    </items>
-    <items id="5780092e-ac78-48e0-8f40-6a3fb575aeb2">
-      <name>Document_PurchaseInvoice</name>
-      <code xsi:type="core:NumberValue">
-        <value>5</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
-        <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>6</value>
-        </code>
-      </content>
-      <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
-        <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <code xsi:type="core:NumberValue">
-          <value>7</value>
-        </code>
-      </content>
-      <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
-        <name>PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>8</value>
-        </code>
-      </content>
-      <content id="3139d27d-f017-4cd2-9371-581a24328085">
-        <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>24</value>
-        </code>
-      </content>
-      <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
-        <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>25</value>
-        </code>
-      </content>
-    </items>
-    <items id="2629786b-a1c8-4e5f-819b-76ffc472e4eb">
-      <name>Document_RetailSalesReceipt</name>
-      <code xsi:type="core:NumberValue">
-        <value>11</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="f2fd559e-6f20-450c-9dcc-5585777939b7">
-        <name>RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
-        <code xsi:type="core:NumberValue">
-          <value>12</value>
-        </code>
-      </content>
-    </items>
-    <items id="ac174994-2762-4d95-8dc9-154a578a14a2">
-      <name>Document_SalesInvoice</name>
-      <code xsi:type="core:NumberValue">
-        <value>13</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="13cc96b1-55aa-4a8f-9ffa-84fd9cd02e1c">
-        <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>15</value>
-        </code>
-      </content>
-      <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
-        <name>SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming</name>
-        <code xsi:type="core:NumberValue">
-          <value>16</value>
-        </code>
-      </content>
-      <content id="0e27f185-a673-4288-a461-e63f85ec7165">
-        <name>SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
-        <code xsi:type="core:NumberValue">
-          <value>17</value>
-        </code>
-      </content>
-      <content id="3070b93b-5d84-4762-a76a-9a4a2167f2ee">
-        <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>18</value>
-        </code>
-      </content>
-      <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
-        <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>22</value>
-        </code>
-      </content>
-      <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
-        <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>23</value>
-        </code>
-      </content>
-    </items>
-    <items id="75cbb6bf-1e5f-4185-b83d-648393a21e9c">
-      <name>Document_ForeignCurrencyRevaluation</name>
-      <code xsi:type="core:NumberValue">
-        <value>19</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="dfa58a7e-3be1-4264-80cd-080643a5604e">
-        <name>ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>20</value>
-        </code>
-      </content>
-      <content id="38c3d013-996a-417f-8c24-447320fbd054">
-        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers</name>
-        <code xsi:type="core:NumberValue">
-          <value>21</value>
-        </code>
-      </content>
-    </items>
-    <items id="dbb6f24e-0162-41b1-969f-af92a96b2508">
-      <name>Document_CashPayment</name>
-      <code xsi:type="core:NumberValue">
-        <value>26</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="408a2f66-656c-4320-b6f7-a013e1c63556">
-        <name>CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand</name>
-        <code xsi:type="core:NumberValue">
-          <value>34</value>
-        </code>
-      </content>
-      <content id="dc68413a-90b1-4758-996e-0c35004f64e9">
-        <name>CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <code xsi:type="core:NumberValue">
-          <value>35</value>
-        </code>
-      </content>
-      <content id="f7106390-3987-4720-aeee-dacaa0f2a3b3">
-        <name>CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>64</value>
-        </code>
-      </content>
-      <content id="06d24c46-557b-4e20-a5a0-6b707047e40f">
-        <name>CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>65</value>
-        </code>
-      </content>
-      <content id="f5e035f2-dbde-448b-9d6c-600a07679776">
-        <name>CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>71</value>
-        </code>
-      </content>
-    </items>
-    <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
-      <name>Document_CashReceipt</name>
-      <code xsi:type="core:NumberValue">
-        <value>27</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="6d9b584a-afc8-42d4-9875-bc7a50dd5580">
-        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>36</value>
-        </code>
-      </content>
-      <content id="e67d6131-1aea-4ae7-99d2-e8025d13fd1d">
-        <name>CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
-        <code xsi:type="core:NumberValue">
-          <value>37</value>
-        </code>
-      </content>
-      <content id="c992cd20-6d49-4b01-935b-3e21fdced2fa">
-        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>68</value>
-        </code>
-      </content>
-      <content id="92cc20b7-780f-419b-84e1-bf4c3e7a54ec">
-        <name>CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>69</value>
-        </code>
-      </content>
-      <content id="f8a2280a-433a-4d02-8d1a-668abd4a705d">
-        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>73</value>
-        </code>
-      </content>
-    </items>
-    <items id="f42da89c-a0fb-4df4-bb09-3de02be76354">
-      <name>Document_CashExpense</name>
-      <code xsi:type="core:NumberValue">
-        <value>28</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="9bc6340d-7f54-458e-a572-2d42e1a36fc0">
-        <name>CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
-        <code xsi:type="core:NumberValue">
-          <value>32</value>
-        </code>
-      </content>
-    </items>
-    <items id="957e4a8b-1d80-420f-9d5f-03de818b080c">
-      <name>Document_CashRevenue</name>
-      <code xsi:type="core:NumberValue">
-        <value>29</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="d98857dd-e6f4-456b-9086-e241a4a00844">
-        <name>CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>33</value>
-        </code>
-      </content>
-    </items>
-    <items id="5f7860bf-8a96-4d16-984b-4fb514e994c4">
-      <name>Document_DebitNote</name>
-      <code xsi:type="core:NumberValue">
-        <value>30</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="321ab1a7-d2a3-494b-a559-f947721faf7f">
-        <name>DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>38</value>
-        </code>
-      </content>
-      <content id="046c2b44-08d5-491e-b98c-f546e920cd02">
-        <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-        <code xsi:type="core:NumberValue">
-          <value>39</value>
-        </code>
-      </content>
-      <content id="022ae9ba-8e6d-486f-a173-4ef454cd1370">
-        <name>DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>40</value>
-        </code>
-      </content>
-    </items>
-    <items id="0dc9eae5-05d2-463e-89ce-6840f9a6a934">
-      <name>Document_CreditNote</name>
-      <code xsi:type="core:NumberValue">
-        <value>31</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="e3f8e94f-99a5-4617-93cd-076015ad42ba">
-        <name>CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses</name>
-        <code xsi:type="core:NumberValue">
-          <value>41</value>
-        </code>
-      </content>
-      <content id="f28b8356-42f7-45bb-a471-518f0f2f310e">
-        <name>CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-        <code xsi:type="core:NumberValue">
-          <value>42</value>
-        </code>
-      </content>
-      <content id="ede515d2-6be7-4e3e-8805-1e61c552167a">
-        <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses</name>
-        <code xsi:type="core:NumberValue">
-          <value>43</value>
-        </code>
-      </content>
-    </items>
-    <items id="249b66fa-33bd-4d0a-b148-66d6d90ce904">
-      <name>Document_MoneyTransfer</name>
-      <code xsi:type="core:NumberValue">
-        <value>44</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="369606fc-a9d6-42e2-abea-d3d5d0d98153">
-        <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand</name>
-        <code xsi:type="core:NumberValue">
-          <value>45</value>
-        </code>
-      </content>
-      <content id="d3d817dc-b0c3-4f52-a7b3-d175127786fd">
-        <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand</name>
-        <code xsi:type="core:NumberValue">
-          <value>46</value>
-        </code>
-      </content>
-      <content id="e9a428bb-a932-4286-a180-50ba528ae89b">
-        <name>MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit</name>
-        <code xsi:type="core:NumberValue">
-          <value>47</value>
-        </code>
-      </content>
-      <content id="fa0f40e8-32f5-48b5-b9ce-cd0485dc715f">
-        <name>MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
-        <code xsi:type="core:NumberValue">
-          <value>48</value>
-        </code>
-      </content>
-      <content id="64a3ab9e-e061-40f5-9ffe-973ee1f3408f">
-        <name>MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
-        <code xsi:type="core:NumberValue">
-          <value>49</value>
-        </code>
-      </content>
-    </items>
-    <items id="d6dda5c8-2319-4196-8da6-f299137dcb0b">
-      <name>Document_CommissioningOfFixedAsset</name>
-      <description></description>
-      <code xsi:type="core:NumberValue">
-        <value>50</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="1da3da7d-dfd9-41e4-961b-d313cbde7d23">
-        <name>CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>54</value>
-        </code>
-      </content>
-    </items>
-    <items id="e9a75965-1fa6-4738-ad40-19f9b3edceed">
-      <name>Document_ModernizationOfFixedAsset</name>
-      <description></description>
-      <code xsi:type="core:NumberValue">
-        <value>51</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="7d1f4663-2901-4049-8255-add0457c7654">
-        <name>ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>56</value>
-        </code>
-      </content>
-      <content id="54333f77-3f41-4e24-91fe-0799c1119831">
-        <name>ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>57</value>
-        </code>
-      </content>
-    </items>
-    <items id="90bd03f3-a90b-4e8c-835d-acbbc7338e5f">
-      <name>Document_DecommissioningOfFixedAsset</name>
-      <description></description>
-      <code xsi:type="core:NumberValue">
-        <value>52</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="9f91bf98-f604-4fb7-b411-e670a3714169">
-        <name>DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>55</value>
-        </code>
-      </content>
-    </items>
-    <items id="3ce38b7f-d089-41cf-bb68-1b59233374ae">
-      <name>Document_FixedAssetTransfer</name>
-      <description></description>
-      <code xsi:type="core:NumberValue">
-        <value>53</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="fdf17dc2-596d-41b2-8a08-b9a0377c2657">
-        <name>FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>58</value>
-        </code>
-      </content>
-    </items>
-    <items id="408073ab-5900-48d6-a691-735f8c53b524">
-      <name>Document_DepreciationCalculation</name>
-      <description></description>
-      <code xsi:type="core:NumberValue">
-        <value>59</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="9f33fd36-eb45-49ff-8eec-364efd39872e">
-        <name>DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>60</value>
-        </code>
-      </content>
-      <content id="fe69b40a-efd7-47f5-95ea-df8f185a3ed5">
-        <name>DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset</name>
-        <description></description>
-        <code xsi:type="core:NumberValue">
-          <value>61</value>
-        </code>
-      </content>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.AccountingOperations.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>Catalog.AccountingOperations.Form.GroupForm</defaultFolderForm>
-  <defaultListForm>Catalog.AccountingOperations.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.AccountingOperations.Form.ChoiceForm</defaultChoiceForm>
-  <defaultFolderChoiceForm>Catalog.AccountingOperations.Form.GroupChoiceForm</defaultFolderChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="327cc162-7389-4392-bd17-275963a184c7">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>3</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>B29468FB-9BA7-7A8E-E104-40F1E3B1EF25</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="db94b5ed-6b06-4386-9205-2138ec300de0">
-    <producedTypes>
-      <objectType typeId="6eb8c6db-371e-4722-a345-a86d34a9c373" valueTypeId="7134c39c-b6a0-498b-b5fa-ca07cc153389"/>
-      <rowType typeId="05bbb485-2336-433d-8513-ee16c8847e33" valueTypeId="7b6ba968-0368-4b3a-b23e-f89086e0fb08"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="3a6aabb0-0b1e-4a08-a2f9-ab4b553e5792">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7128a0e7-cda7-4b6a-a9a4-5cc105165d94">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="246f6fca-52db-4e34-8f5c-f33d4b2fec75">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="8c969c2b-d43e-427f-b435-5597b3a4c92d">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="350e9d14-ae04-4329-b8ca-107fe4614d22">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="aa13437d-1884-404b-a68e-b12d5e00c862">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <help>
-      <pages>
-        <lang>en</lang>
-      </pages>
-    </help>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4b45f1d9-ea85-4349-8e60-aff66d983189">
-    <name>GroupChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="7128a0e7-cda7-4b6a-a9a4-5cc105165d94">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>FF97F25B-3A7D-54A8-8A7D-DAC8C4B26089</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.AccountingOperations.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="246f6fca-52db-4e34-8f5c-f33d4b2fec75">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5710B2F1-C5DF-41F1-1F6E-E39FA51EBEE2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="8c969c2b-d43e-427f-b435-5597b3a4c92d">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>F53A82BD-64CA-A377-77AD-D408987F0436</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="350e9d14-ae04-4329-b8ca-107fe4614d22">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5B1B4FD6-22D6-1068-85D0-0A00C0571126</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="aa13437d-1884-404b-a68e-b12d5e00c862">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>53158C77-D0F4-BFAC-CC60-029441E91ACD</value>
+  </synonym>
+  <help>
+   <pages>
+    <lang>en</lang>
+   </pages>
+  </help>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4b45f1d9-ea85-4349-8e60-aff66d983189">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>65D7536C-D2C1-D687-7E07-74C95B57DB14</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

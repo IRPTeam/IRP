@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22dff310-ac6b-489f-ab81-5f47e9804a81">
-  <name>UseAddAttributesAndProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use add attributes and properties</value>
-  </synonym>
-  <location>Constant.UseAddAttributesAndProperties</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.AddAttributeAndPropertySets</content>
-  <content>Catalog.AddAttributeAndPropertyValues</content>
-  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
-  <content>CommonCommand.AddProperties</content>
-  <content>DataProcessor.ObjectPropertyEditor</content>
+ <name>UseAddAttributesAndProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>AE2BCD71-62CE-842E-E3FA-A27197E3A737</value>
+ </synonym>
+ <location>Constant.UseAddAttributesAndProperties</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.AddAttributeAndPropertySets</content>
+ <content>Catalog.AddAttributeAndPropertyValues</content>
+ <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
+ <content>CommonCommand.AddProperties</content>
+ <content>DataProcessor.ObjectPropertyEditor</content>
 </mdclass:FunctionalOption>

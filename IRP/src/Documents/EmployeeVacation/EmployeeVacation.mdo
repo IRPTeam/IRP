@@ -1,235 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bde56744-ba88-40af-bdb4-f8c09277ce76">
-  <producedTypes>
-    <objectType typeId="4d474e82-c29b-4136-ae9f-7ac029d059d1" valueTypeId="e59a19a8-b877-47bd-93e9-0f474b386e4a"/>
-    <refType typeId="6b0c2f3c-b1ce-4494-a44f-50be8c1ffc4f" valueTypeId="a8ed1748-0800-4a94-af7a-6e0ba6f5bc1d"/>
-    <selectionType typeId="b2a2266c-f8f9-4592-9c54-d9ece8f5c114" valueTypeId="44331d07-ea81-49e2-a9de-ede24e8cbc16"/>
-    <listType typeId="619b2bb9-404f-48f8-8802-c3c0877bfca2" valueTypeId="5b234414-a450-4a18-89a9-b0d5c983cc9e"/>
-    <managerType typeId="791dc25c-bfad-4933-986b-5cfdd26b774c" valueTypeId="7dc54a9a-36b5-45d9-bd82-8b1287494bac"/>
-  </producedTypes>
-  <name>EmployeeVacation</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bde56744-ba88-40af-bdb4-f8c09277ce76">
+ <producedTypes>
+  <objectType typeId="4d474e82-c29b-4136-ae9f-7ac029d059d1" valueTypeId="e59a19a8-b877-47bd-93e9-0f474b386e4a"/>
+  <refType typeId="6b0c2f3c-b1ce-4494-a44f-50be8c1ffc4f" valueTypeId="a8ed1748-0800-4a94-af7a-6e0ba6f5bc1d"/>
+  <selectionType typeId="b2a2266c-f8f9-4592-9c54-d9ece8f5c114" valueTypeId="44331d07-ea81-49e2-a9de-ede24e8cbc16"/>
+  <listType typeId="619b2bb9-404f-48f8-8802-c3c0877bfca2" valueTypeId="5b234414-a450-4a18-89a9-b0d5c983cc9e"/>
+  <managerType typeId="791dc25c-bfad-4933-986b-5cfdd26b774c" valueTypeId="7dc54a9a-36b5-45d9-bd82-8b1287494bac"/>
+ </producedTypes>
+ <name>EmployeeVacation</name>
+ <synonym>
+  <key>en</key>
+  <value>F135311A-D95B-E6B1-1856-6E6095C59FFA</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.EmployeeVacation.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeVacation</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeVacation</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.EmployeeVacation.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>665BA766-C532-4826-6E02-21B2244E556A</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>29C3B452-1AE2-473F-FE61-1C94C560E7B5</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.EmployeeVacation.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.EmployeeVacation.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.EmployeeVacation.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="67e4dbac-b0db-4667-8c54-da6636691824">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Employee vacation</value>
+   <key>en</key>
+   <value>A147C7D4-4615-270E-E4BF-F93502C40C91</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.EmployeeVacation.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeVacation</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_EmployeeVacation</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.EmployeeVacation.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.EmployeeVacation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <choiceParameters>
+   <name>Filter.DeletionMark</name>
+   <value xsi:type="core:BooleanValue"/>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="51d03d85-863a-4fc8-af2c-b26e97df29cb">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>F3FD58C5-67CD-B084-422E-E0F2B5AC4B71</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3c73d2bc-de4f-44cc-81f2-5f20148bd188">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A727918D-F8F9-D37F-F862-22C9C39CF5AA</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="8f680144-fcb8-43cd-816f-3ce4d1a608d6">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6ADEB42D-932D-CBD7-78E7-7A9E1AD1543F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="6ff5e981-4062-4489-8214-b22d0536c6a1">
+  <producedTypes>
+   <objectType typeId="f298265b-a7b6-474d-8a8c-70a0e70ec1b6" valueTypeId="bd8e31ac-5e11-4917-9fe6-0b16f0e71fe9"/>
+   <rowType typeId="23cf870f-c167-4e4d-9ba5-5bdad39a6f6d" valueTypeId="f549bab6-f613-46cd-84dd-897d86962338"/>
+  </producedTypes>
+  <name>EmployeeList</name>
+  <synonym>
+   <key>en</key>
+   <value>1841E9AB-CB17-21D5-5288-8ABA1C4353E7</value>
+  </synonym>
+  <attributes uuid="6c55f633-4877-4220-a91c-aa0b80af52a1">
+   <name>Employee</name>
+   <synonym>
     <key>en</key>
-    <value>Employee vacation</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Employee vacations</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.EmployeeVacation.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.EmployeeVacation.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.EmployeeVacation.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="67e4dbac-b0db-4667-8c54-da6636691824">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <choiceParameters>
-      <name>Filter.DeletionMark</name>
-      <value xsi:type="core:BooleanValue"/>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>2309A17C-51FB-399D-DA4D-DE995746070E</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="51d03d85-863a-4fc8-af2c-b26e97df29cb">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3c73d2bc-de4f-44cc-81f2-5f20148bd188">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="8f680144-fcb8-43cd-816f-3ce4d1a608d6">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="6ff5e981-4062-4489-8214-b22d0536c6a1">
-    <producedTypes>
-      <objectType typeId="f298265b-a7b6-474d-8a8c-70a0e70ec1b6" valueTypeId="bd8e31ac-5e11-4917-9fe6-0b16f0e71fe9"/>
-      <rowType typeId="23cf870f-c167-4e4d-9ba5-5bdad39a6f6d" valueTypeId="f549bab6-f613-46cd-84dd-897d86962338"/>
-    </producedTypes>
-    <name>EmployeeList</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee list</value>
-    </synonym>
-    <attributes uuid="6c55f633-4877-4220-a91c-aa0b80af52a1">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0f06a6e6-8b6e-4123-b42e-da7778c26367">
-      <name>BeginDate</name>
-      <synonym>
-        <key>en</key>
-        <value>Begin date</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="162804eb-e5bb-48d8-8e69-9daef05b421b">
-      <name>EndDate</name>
-      <synonym>
-        <key>en</key>
-        <value>End date</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="0ec660d1-4fc2-41e2-908f-27df1ad30bcb">
-    <producedTypes>
-      <objectType typeId="e20c9e11-aaa9-41dd-a838-93c15eadc7de" valueTypeId="5fc04893-7041-465f-8641-e39efbce3ecd"/>
-      <rowType typeId="b443f554-5a62-417c-9672-3880fde35ee9" valueTypeId="754f861a-0b15-4a86-a3ba-904f9ac01657"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="07ede44b-47f2-4bcb-9aa9-ccc917dafcd3">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="4d79b9e8-eb4e-4db4-9b63-27b0fb2c9c1c">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="0f06a6e6-8b6e-4123-b42e-da7778c26367">
+   <name>BeginDate</name>
+   <synonym>
+    <key>en</key>
+    <value>80C3C072-C604-CA99-9808-81EB5CCF251C</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="162804eb-e5bb-48d8-8e69-9daef05b421b">
+   <name>EndDate</name>
+   <synonym>
+    <key>en</key>
+    <value>6DB919B2-064E-978D-D782-262C2006845E</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="0ec660d1-4fc2-41e2-908f-27df1ad30bcb">
+  <producedTypes>
+   <objectType typeId="e20c9e11-aaa9-41dd-a838-93c15eadc7de" valueTypeId="5fc04893-7041-465f-8641-e39efbce3ecd"/>
+   <rowType typeId="b443f554-5a62-417c-9672-3880fde35ee9" valueTypeId="754f861a-0b15-4a86-a3ba-904f9ac01657"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>48031060-7402-D999-962D-D89293ACEF54</value>
+  </synonym>
+  <attributes uuid="07ede44b-47f2-4bcb-9aa9-ccc917dafcd3">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>65731E06-A93A-6645-5E4A-ADF9B1280B2D</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4d79b9e8-eb4e-4db4-9b63-27b0fb2c9c1c">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>F80D9EF5-0572-8C96-6DAC-C9A3872C9C3F</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.EmployeeVacation.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

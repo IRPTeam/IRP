@@ -1,143 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe1720bb-646b-4d95-a712-2e37d3e55ca2">
-  <producedTypes>
-    <selectionType typeId="94549d3e-3c18-4ea5-b54c-92e0c041e7a4" valueTypeId="6bb90cb0-9c59-4f9e-8b81-5ead620f5182"/>
-    <listType typeId="5edcfeba-7f59-49e6-872b-3adfad58cf83" valueTypeId="15d57533-91f2-467b-9dbe-699a5919d59d"/>
-    <managerType typeId="b9d78e48-b99c-4711-9619-7fdd726cadb2" valueTypeId="58e479d4-ae0a-47d6-81ba-f7bd0a48a3c8"/>
-    <recordSetType typeId="be5e1935-95a0-4ac8-b563-4b8262d712fd" valueTypeId="1456d16f-852a-47d8-a81d-54695419d8f5"/>
-    <recordKeyType typeId="2d1a18e6-a6a2-4a9e-b1ce-0a323ade93ea" valueTypeId="d1e9e400-9eed-4b7c-a99a-957be3afcdfb"/>
-    <recordType typeId="5effd4ee-5a84-4fa8-9b9d-256350d6d8fe" valueTypeId="bd6026cd-7b8b-42be-b1da-dba588ecd999"/>
-    <recordManagerType typeId="19a92486-38e1-4f51-aa5e-12fe82e6d802" valueTypeId="8e822aa4-5d5f-4fb3-9ded-c0a8a7bba9cb"/>
-  </producedTypes>
-  <name>T9013S_AccountsTax</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fe1720bb-646b-4d95-a712-2e37d3e55ca2">
+ <producedTypes>
+  <selectionType typeId="94549d3e-3c18-4ea5-b54c-92e0c041e7a4" valueTypeId="6bb90cb0-9c59-4f9e-8b81-5ead620f5182"/>
+  <listType typeId="5edcfeba-7f59-49e6-872b-3adfad58cf83" valueTypeId="15d57533-91f2-467b-9dbe-699a5919d59d"/>
+  <managerType typeId="b9d78e48-b99c-4711-9619-7fdd726cadb2" valueTypeId="58e479d4-ae0a-47d6-81ba-f7bd0a48a3c8"/>
+  <recordSetType typeId="be5e1935-95a0-4ac8-b563-4b8262d712fd" valueTypeId="1456d16f-852a-47d8-a81d-54695419d8f5"/>
+  <recordKeyType typeId="2d1a18e6-a6a2-4a9e-b1ce-0a323ade93ea" valueTypeId="d1e9e400-9eed-4b7c-a99a-957be3afcdfb"/>
+  <recordType typeId="5effd4ee-5a84-4fa8-9b9d-256350d6d8fe" valueTypeId="bd6026cd-7b8b-42be-b1da-dba588ecd999"/>
+  <recordManagerType typeId="19a92486-38e1-4f51-aa5e-12fe82e6d802" valueTypeId="8e822aa4-5d5f-4fb3-9ded-c0a8a7bba9cb"/>
+ </producedTypes>
+ <name>T9013S_AccountsTax</name>
+ <synonym>
+  <key>en</key>
+  <value>F0AE7F86-F796-5395-5BEB-BC81905A2AA9</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9013S_AccountsTax.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>9F98B71A-A16A-D034-47BD-D0E3277F263E</value>
+ </recordPresentation>
+ <resources uuid="79e4eb7b-a808-4175-9b3a-699bac85e512">
+  <name>IncomingAccount</name>
   <synonym>
-    <key>en</key>
-    <value>Accounts (Tax)</value>
+   <key>en</key>
+   <value>B5B86916-FC98-1E46-6609-9E611D62FAA6</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T9013S_AccountsTax.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Accounts (Tax)</value>
-  </recordPresentation>
-  <resources uuid="79e4eb7b-a808-4175-9b3a-699bac85e512">
-    <name>IncomingAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Incoming account</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="276c5b42-2ab6-4ec2-87a4-ab4abfaacfd1">
-    <name>OutgoingAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Outgoing account</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="055d2b93-7a3a-4f88-a0f8-1309a66b26ef">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="d9250323-9eba-48f9-9110-1e2690728d65">
-    <name>LedgerTypeVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type variant</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypeVariants</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="1fc84d18-ad29-4a35-b55f-ed8196a21e9f">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="5f027ab6-56a6-4d00-aaae-0e27a2699b7c">
-    <name>VatRate</name>
-    <synonym>
-      <key>en</key>
-      <value>Vat rate</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxRates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="58556965-0cbb-4b51-ac27-78ad96f4a6a4">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="276c5b42-2ab6-4ec2-87a4-ab4abfaacfd1">
+  <name>OutgoingAccount</name>
+  <synonym>
+   <key>en</key>
+   <value>8A5A8C55-3CDD-CE69-917D-DEBEBBA8D942</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="055d2b93-7a3a-4f88-a0f8-1309a66b26ef">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>819BA057-1C18-C579-9031-11D7D8A62268</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="d9250323-9eba-48f9-9110-1e2690728d65">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>B5A3D53E-078D-AFF8-86A8-89D877DE2050</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="1fc84d18-ad29-4a35-b55f-ed8196a21e9f">
+  <name>Tax</name>
+  <synonym>
+   <key>en</key>
+   <value>C3730C51-23A0-6355-567E-E32F446C48D6</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="5f027ab6-56a6-4d00-aaae-0e27a2699b7c">
+  <name>VatRate</name>
+  <synonym>
+   <key>en</key>
+   <value>491F8069-21FA-F221-1CD5-5FC6D88B6216</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxRates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="58556965-0cbb-4b51-ac27-78ad96f4a6a4">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>76A8C8A6-C256-4EE5-5F22-2DC896F37E85</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

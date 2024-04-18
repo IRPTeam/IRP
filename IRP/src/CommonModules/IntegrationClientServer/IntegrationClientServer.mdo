@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ea56c68-6888-4cc6-a12d-10db4e476fbc">
-  <name>IntegrationClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Integration client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>IntegrationClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>4F1CD4AC-05C2-CF72-2082-26D9286BD16C</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

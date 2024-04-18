@@ -1,446 +1,446 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6e2582b-1b05-422e-97cc-b02053319b0d">
-  <producedTypes>
-    <objectType typeId="43a7ec09-04a5-4912-9e94-9397eb0e499d" valueTypeId="2a367e5b-0753-4534-87bc-c14f0815d5b9"/>
-    <refType typeId="55f2f3d4-ddc9-4f46-8e1d-6ad73bceeffc" valueTypeId="1cfce221-38bc-41ba-8810-a33096f8d940"/>
-    <selectionType typeId="33b4bbf4-645d-471c-ad2f-38eb76f329db" valueTypeId="5a594af8-4f45-49ba-bcc7-5e6d32fccacd"/>
-    <listType typeId="4b24df2a-1d03-4ad0-be10-e2bbea18694f" valueTypeId="68eb0ae5-193d-4ea7-bf2d-91130fb87035"/>
-    <managerType typeId="c0625493-6c66-4c71-9916-dad9085cba92" valueTypeId="bc38ac4a-988f-4b9d-9cc8-6e04e9e14b63"/>
-  </producedTypes>
-  <name>ChequeBondTransactionItem</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f6e2582b-1b05-422e-97cc-b02053319b0d">
+ <producedTypes>
+  <objectType typeId="43a7ec09-04a5-4912-9e94-9397eb0e499d" valueTypeId="2a367e5b-0753-4534-87bc-c14f0815d5b9"/>
+  <refType typeId="55f2f3d4-ddc9-4f46-8e1d-6ad73bceeffc" valueTypeId="1cfce221-38bc-41ba-8810-a33096f8d940"/>
+  <selectionType typeId="33b4bbf4-645d-471c-ad2f-38eb76f329db" valueTypeId="5a594af8-4f45-49ba-bcc7-5e6d32fccacd"/>
+  <listType typeId="4b24df2a-1d03-4ad0-be10-e2bbea18694f" valueTypeId="68eb0ae5-193d-4ea7-bf2d-91130fb87035"/>
+  <managerType typeId="c0625493-6c66-4c71-9916-dad9085cba92" valueTypeId="bc38ac4a-988f-4b9d-9cc8-6e04e9e14b63"/>
+ </producedTypes>
+ <name>ChequeBondTransactionItem</name>
+ <synonym>
+  <key>en</key>
+  <value>7455B830-A3A6-C55A-A984-4F41CC036C73</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ChequeBondTransactionItem.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>D1CFECF7-936D-874F-F4CF-F99542B3396F</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>CCC26295-996D-2F4B-BCD8-899C1BF3800A</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ChequeBondTransactionItem.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ChequeBondTransactionItem.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ChequeBondTransactionItem.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+ <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="da8acded-b807-4f2b-a5c4-befb6c5c88c4">
+  <name>ChequeBondTransaction</name>
   <synonym>
-    <key>en</key>
-    <value>Cheque bond transaction item</value>
+   <key>en</key>
+   <value>36999E1E-C1AC-F7C0-07D1-1BE6B923E401</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.ChequeBondTransactionItem.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>DocumentRef.ChequeBondTransaction</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="801b8038-eefe-45ff-9a8b-66965a7b4123">
+  <name>Cheque</name>
+  <synonym>
+   <key>en</key>
+   <value>45589EA6-83A0-38C2-2126-68D4226116A2</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ChequeBonds</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fcbd6a35-2203-44f9-9915-c1033347444d">
+  <name>Status</name>
+  <synonym>
+   <key>en</key>
+   <value>E2C728CC-1164-C63D-DC53-3271C27313C2</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="123dde45-47a5-4205-8fa3-9f1e21a0df9f">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>92885238-0612-9A2A-AB9C-C7A6E1343AAC</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ecd01f10-b919-4b33-aaa2-ef165a5bbef3">
+  <name>Account</name>
+  <synonym>
+   <key>en</key>
+   <value>7DF15981-2090-03D0-00EE-E72D45FDC81F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="858f7ba3-1ad5-4131-ac4b-1c5ca8f2473f">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>523541F4-C021-36D5-50E2-27B3F579E1CC</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c42bf31e-c0fc-4080-bf83-ad248304f43d">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>CAE36F2A-CE3F-E95E-EAB1-11409EAA8788</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c2931749-f545-4e7f-91b0-32ab6e8070eb">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>E0992815-F540-B867-7A06-677137DC575D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e1da2258-69c6-46bc-958f-e532008dd053">
+  <name>LegalNameContract</name>
+  <synonym>
+   <key>en</key>
+   <value>B856F611-8786-6215-56D8-8F5E1A2EBF68</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LegalNameContracts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LegalName</name>
+   <field>Document.ChequeBondTransactionItem.Attribute.LegalName</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2ed6f4f0-9b40-4171-ad00-44da871a1988">
+  <name>BasisDocument</name>
+  <synonym>
+   <key>en</key>
+   <value>78E03F36-D839-D6E3-351A-AD7ABDCC4B93</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CashTransferOrder</types>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.DebitNote</types>
+   <types>DocumentRef.CreditNote</types>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.OpeningEntry</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ebc9a9af-f677-426b-b82a-42ffc0a0eb97">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>24B7E965-D2FD-1756-6CE7-7F2C31E03DD4</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ef72f26f-1c8e-4116-a3b7-47d75fa7b3af">
+  <name>FinancialMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>4DC97A9B-1963-5385-51F0-077BFA0387AD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="99c56bda-d5bd-44e4-8d05-07f821b52d0f">
+  <name>PlanningPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>8A6EB10B-93BF-C8BC-CA0F-F3FC8598C19C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PlanningPeriods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsFinancial</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3990158e-6463-467f-a973-cfdff1fe8d30">
+  <name>Project</name>
+  <synonym>
+   <key>en</key>
+   <value>9695EEDE-F875-2D6C-C68C-CC47D2CF972F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="a387281e-aa1c-4a48-a879-fbbaeca3f3d2">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>BB0FE1FC-6CD8-8D37-7EE3-3FE35D266520</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d48c04a8-8fb8-4fe0-a074-cedb63c2cc72">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>2216AD0F-70B5-FC54-413D-D914B874BCF6</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="26dc536f-a886-47f3-a214-07aca4704e75">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>23BA267D-BC17-C8E6-67AD-DE03989AD6B7</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="99fab998-4277-4ee5-8286-4f4bdcefc76d">
+  <producedTypes>
+   <objectType typeId="a3796163-1066-4221-a6d7-3e577e1fd40a" valueTypeId="5cad6cf8-9c11-4229-9d09-4d756e50ed10"/>
+   <rowType typeId="e0f7710e-2720-4953-8e85-e4d870e2c071" valueTypeId="6e3adce1-891f-4141-a849-1cddd6e799ef"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>en</key>
+   <value>1B12B852-4428-77D0-0AE0-02E8CCB4D0FF</value>
+  </synonym>
+  <attributes uuid="39b69019-04fb-426f-9df6-ded6bac1cc90">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Cheque bond transaction item</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>23B6F81B-7F34-E7CF-F165-5A4B5B3B38CF</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5cd33432-fb66-4632-8bc6-04c1111ee85f">
+   <name>CurrencyFrom</name>
+   <synonym>
     <key>en</key>
-    <value>Cheque bond transaction items</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.ChequeBondTransactionItem.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.ChequeBondTransactionItem.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.ChequeBondTransactionItem.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
-  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="da8acded-b807-4f2b-a5c4-befb6c5c88c4">
-    <name>ChequeBondTransaction</name>
-    <synonym>
-      <key>en</key>
-      <value>Cheque bond transaction</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ChequeBondTransaction</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>AAC1F94E-3C1C-C1C3-3C26-6D5ABDB431E2</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="801b8038-eefe-45ff-9a8b-66965a7b4123">
-    <name>Cheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Cheque</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ChequeBonds</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="51e81bd4-8585-4c63-86ef-51607be23c9e">
+   <name>Rate</name>
+   <synonym>
+    <key>en</key>
+    <value>95517329-8B17-DD7A-A726-6DF3FC82FDD7</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="fcbd6a35-2203-44f9-9915-c1033347444d">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8573cb68-e1f6-4467-8375-38133d692b7d">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>52E0B504-D36F-B5A3-3902-282A8D9928A1</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="123dde45-47a5-4205-8fa3-9f1e21a0df9f">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="32909b0e-1b76-450e-9960-a265ad1f8a3c">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>DE58FF9E-3331-A613-3CA3-39BC14CB17E6</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ecd01f10-b919-4b33-aaa2-ef165a5bbef3">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="b332a51b-953f-403e-a5eb-2b9718cbe868">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>en</key>
+    <value>EB819587-8264-F192-2C38-85783CD01AB7</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="858f7ba3-1ad5-4131-ac4b-1c5ca8f2473f">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="3d47ba70-4b0c-4415-8c7c-e9e565296590">
+   <name>MovementType</name>
+   <synonym>
+    <key>en</key>
+    <value>DFC891B5-DCBE-020A-A9D4-42FC153F8C40</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c42bf31e-c0fc-4080-bf83-ad248304f43d">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9d5628f4-2100-4fb4-8389-7175b3dd6b41">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>5B416EE0-9B49-15C1-1A8F-F83BF2FCC786</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c2931749-f545-4e7f-91b0-32ab6e8070eb">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Agreement</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="ca5c88fe-51b5-4cb4-ac2f-367652ac2627">
+   <name>IsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>6037EB42-A4B9-8B27-7071-10FD23299271</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e1da2258-69c6-46bc-958f-e532008dd053">
-    <name>LegalNameContract</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name contract</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LegalNameContracts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LegalName</name>
-      <field>Document.ChequeBondTransactionItem.Attribute.LegalName</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2ed6f4f0-9b40-4171-ad00-44da871a1988">
-    <name>BasisDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ebc9a9af-f677-426b-b82a-42ffc0a0eb97">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ef72f26f-1c8e-4116-a3b7-47d75fa7b3af">
-    <name>FinancialMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Financial movement type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="99c56bda-d5bd-44e4-8d05-07f821b52d0f">
-    <name>PlanningPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Planning period</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PlanningPeriods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsFinancial</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="3990158e-6463-467f-a973-cfdff1fe8d30">
-    <name>Project</name>
-    <synonym>
-      <key>en</key>
-      <value>Project</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Projects</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="a387281e-aa1c-4a48-a879-fbbaeca3f3d2">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="d48c04a8-8fb8-4fe0-a074-cedb63c2cc72">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="26dc536f-a886-47f3-a214-07aca4704e75">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="99fab998-4277-4ee5-8286-4f4bdcefc76d">
-    <producedTypes>
-      <objectType typeId="a3796163-1066-4221-a6d7-3e577e1fd40a" valueTypeId="5cad6cf8-9c11-4229-9d09-4d756e50ed10"/>
-      <rowType typeId="e0f7710e-2720-4953-8e85-e4d870e2c071" valueTypeId="6e3adce1-891f-4141-a849-1cddd6e799ef"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="39b69019-04fb-426f-9df6-ded6bac1cc90">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5cd33432-fb66-4632-8bc6-04c1111ee85f">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="51e81bd4-8585-4c63-86ef-51607be23c9e">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8573cb68-e1f6-4467-8375-38133d692b7d">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="32909b0e-1b76-450e-9960-a265ad1f8a3c">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b332a51b-953f-403e-a5eb-2b9718cbe868">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3d47ba70-4b0c-4415-8c7c-e9e565296590">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9d5628f4-2100-4fb4-8389-7175b3dd6b41">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ca5c88fe-51b5-4cb4-ac2f-367652ac2627">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+ </tabularSections>
 </mdclass:Document>

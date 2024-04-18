@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="120dd619-7786-477f-95cf-b25625c25f74">
-  <producedTypes>
-    <selectionType typeId="ceecc9c0-693b-4718-b005-df184ecd2522" valueTypeId="cdbb482d-22df-4204-864f-effea58f0739"/>
-    <listType typeId="08102043-590e-4702-9169-a79076830084" valueTypeId="daf06921-d1a3-429e-825a-2a638e1d6654"/>
-    <managerType typeId="d7f4be53-4db1-493c-acf5-ce35f6cf6524" valueTypeId="06bcfb44-0369-4ac0-97c5-721715cb5dd2"/>
-    <recordSetType typeId="1833f57e-ed19-43fb-8d2e-30cc646f9504" valueTypeId="d382b4d3-23a9-4564-861e-70ba7ddd1356"/>
-    <recordKeyType typeId="3557d466-9a5d-42a5-9a53-1c97b1be69c5" valueTypeId="1b0be1c1-f88c-40e8-ab3f-8a23f7a7005d"/>
-    <recordType typeId="4925578f-48aa-46d2-87d3-3c7cbdcc8822" valueTypeId="ea85dfa7-8430-4b7a-8e52-1cfe1c972b57"/>
-  </producedTypes>
-  <name>R9555T_PaidSickLeaves</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="120dd619-7786-477f-95cf-b25625c25f74">
+ <producedTypes>
+  <selectionType typeId="ceecc9c0-693b-4718-b005-df184ecd2522" valueTypeId="cdbb482d-22df-4204-864f-effea58f0739"/>
+  <listType typeId="08102043-590e-4702-9169-a79076830084" valueTypeId="daf06921-d1a3-429e-825a-2a638e1d6654"/>
+  <managerType typeId="d7f4be53-4db1-493c-acf5-ce35f6cf6524" valueTypeId="06bcfb44-0369-4ac0-97c5-721715cb5dd2"/>
+  <recordSetType typeId="1833f57e-ed19-43fb-8d2e-30cc646f9504" valueTypeId="d382b4d3-23a9-4564-861e-70ba7ddd1356"/>
+  <recordKeyType typeId="3557d466-9a5d-42a5-9a53-1c97b1be69c5" valueTypeId="1b0be1c1-f88c-40e8-ab3f-8a23f7a7005d"/>
+  <recordType typeId="4925578f-48aa-46d2-87d3-3c7cbdcc8822" valueTypeId="ea85dfa7-8430-4b7a-8e52-1cfe1c972b57"/>
+ </producedTypes>
+ <name>R9555T_PaidSickLeaves</name>
+ <synonym>
+  <key>en</key>
+  <value>C11717A2-8ABD-4560-0B03-3AB3068C8419</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="79138303-6f91-40e7-b8dd-6f93c4fd1d26">
+  <name>Paid</name>
   <synonym>
-    <key>en</key>
-    <value>R9555 Paid sick leaves</value>
+   <key>en</key>
+   <value>BB854E29-027E-7E6B-BDFB-B7FD1C3C57A3</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="79138303-6f91-40e7-b8dd-6f93c4fd1d26">
-    <name>Paid</name>
-    <synonym>
-      <key>en</key>
-      <value>Paid</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="08f73d3b-e0ae-4ccc-8d7f-801f7d3667c9">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4da671fc-b404-463a-a670-f1b5c632d29e">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="08f73d3b-e0ae-4ccc-8d7f-801f7d3667c9">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>6EAE1303-806D-A904-44C3-396DAE04B621</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4da671fc-b404-463a-a670-f1b5c632d29e">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>C2C44C25-42E0-6F45-536D-D94A5B598475</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

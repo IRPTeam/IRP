@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4f2a4e50-d69a-4b1c-95bd-86af9e41d06b">
-  <name>Document_ProductionPlanningCorrection</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Production planning correction&quot;</value>
-  </synonym>
+ <name>Document_ProductionPlanningCorrection</name>
+ <synonym>
+  <key>en</key>
+  <value>04862573-9F0A-A000-0A8B-BC9FB1CC423B_____</value>
+ </synonym>
 </mdclass:Role>

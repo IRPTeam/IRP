@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="df064a2d-1970-4158-b528-2e4ea302eb8e">
-  <name>AccumulationRegisters_R4052T_StockAdjustmentAsSurplus</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4052T StockAdjustmentAsSurplus</value>
-  </synonym>
+ <name>AccumulationRegisters_R4052T_StockAdjustmentAsSurplus</name>
+ <synonym>
+  <key>en</key>
+  <value>3374576D-9403-DAB0-07A2-229083F09D92_________________</value>
+ </synonym>
 </mdclass:Role>

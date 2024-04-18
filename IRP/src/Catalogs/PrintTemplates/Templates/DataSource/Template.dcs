@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode</v8:content>
+					<v8:content>5C299530-9061-FB35-5919-91B8798AB268</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -22,7 +22,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>0370AAB2-7B55-2F69-929E-ECB4A3ED7173</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -32,7 +32,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>39F30E9D-4AB5-CD0A-A34D-D7EE183E49D9</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -42,7 +42,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price</v8:content>
+					<v8:content>4FA5D4B8-58C9-9F79-91B7-7E7690BCA528</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -52,7 +52,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode picture</v8:content>
+					<v8:content>B693D0EF-AB90-8C90-0A2C-C7017ADACCC1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -62,7 +62,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>QR picture</v8:content>
+					<v8:content>DBE8855A-FC96-841C-CAF5-5B5504355F9A</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -72,7 +72,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Picture</v8:content>
+					<v8:content>9BC3F9DF-3FB0-EA6B-BC93-300CA54B5974</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -82,7 +82,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key picture</v8:content>
+					<v8:content>8F1715DF-70E3-F305-51C4-4CC0EC6A4F67</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -92,7 +92,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item picture</v8:content>
+					<v8:content>5463EC04-B942-E796-6085-56C3146176FB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -102,7 +102,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price type</v8:content>
+					<v8:content>1AE05DB9-8E63-21DB-BFD5-5DDBA4303A96</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -160,7 +160,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>7DE33AB9-31F1-1B58-8E68-855137DD4E00</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

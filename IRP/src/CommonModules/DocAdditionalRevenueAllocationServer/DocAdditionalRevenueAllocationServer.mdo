@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="48d4d3de-e1fd-4dd1-9c00-7d0ccb03822a">
-  <name>DocAdditionalRevenueAllocationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional revenue allocation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocAdditionalRevenueAllocationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>7BCC9B5A-3526-5B04-4EA3-3564D2ABAD21____</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

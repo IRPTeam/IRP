@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="93e2b21b-e054-4269-831e-e095898bf4e2">
-  <name>Manufacturing</name>
-  <synonym>
-    <key>en</key>
-    <value>Manufacturing</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.R7030_ProductionPlanning</content>
-  <content>Report.R7010_DetailingSupplies</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Manufacturing</name>
+ <synonym>
+  <key>en</key>
+  <value>384A25DC-A12E-8F9D-D3DD-D54D2E820F4B</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.R7030_ProductionPlanning</content>
+ <content>Report.R7010_DetailingSupplies</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,160 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="deaee0b4-59da-463f-8e8b-c1b580699b5b">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="deaee0b4-59da-463f-8e8b-c1b580699b5b">
+ <producedTypes>
+  <objectType typeId="82d6108c-d4bb-44df-8e77-8df03f9272cc" valueTypeId="4623e9da-2cad-4672-a98b-244d324795f4"/>
+  <refType typeId="af0a193b-d2fb-4bb4-873a-16fde18dc555" valueTypeId="c5d662d1-7407-47e1-b614-4f4a4b4acdec"/>
+  <selectionType typeId="21ebbd4c-22f7-4da1-b221-9b35a925ecf9" valueTypeId="6993a787-9539-4eee-aff5-9412bb1ac149"/>
+  <listType typeId="7e68f8f1-5a72-457d-bb54-be480d26ac49" valueTypeId="97bc48b1-180b-46c2-be2a-7fd0205919ee"/>
+  <managerType typeId="a8512af9-07a8-48cf-8599-25c73ba241d8" valueTypeId="28b216cb-e980-4230-a262-78965d3352ee"/>
+ </producedTypes>
+ <name>Projects</name>
+ <synonym>
+  <key>en</key>
+  <value>865A8FAA-003C-51C8-8D94-4C07E0BDCD45</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Projects</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Projects</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.Projects.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Projects.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Projects.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Projects.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.Projects.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>2A1496C3-F2C2-4798-87B5-5A01142E219C</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>F3A44C31-5274-B0EE-EE8A-AF1AEA12E968</value>
+ </listPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Projects.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Projects.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Projects.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="fffef6e6-8f8f-402f-99aa-dd9395079161">
   <producedTypes>
-    <objectType typeId="82d6108c-d4bb-44df-8e77-8df03f9272cc" valueTypeId="4623e9da-2cad-4672-a98b-244d324795f4"/>
-    <refType typeId="af0a193b-d2fb-4bb4-873a-16fde18dc555" valueTypeId="c5d662d1-7407-47e1-b614-4f4a4b4acdec"/>
-    <selectionType typeId="21ebbd4c-22f7-4da1-b221-9b35a925ecf9" valueTypeId="6993a787-9539-4eee-aff5-9412bb1ac149"/>
-    <listType typeId="7e68f8f1-5a72-457d-bb54-be480d26ac49" valueTypeId="97bc48b1-180b-46c2-be2a-7fd0205919ee"/>
-    <managerType typeId="a8512af9-07a8-48cf-8599-25c73ba241d8" valueTypeId="28b216cb-e980-4230-a262-78965d3352ee"/>
+   <objectType typeId="a83fbf75-5573-47b1-b6d3-b0c0b480d735" valueTypeId="ea2a41f7-423e-4753-98e0-ef56cb4a9bd3"/>
+   <rowType typeId="21f26755-dc37-4fa5-affa-dadf6c945b79" valueTypeId="265a08f3-6468-4307-b5ad-9d5250d0badd"/>
   </producedTypes>
-  <name>Projects</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Projects</value>
+   <key>en</key>
+   <value>D159BD0E-E0F3-B320-0C0C-CEA8291DE198</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Projects</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Projects</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.Projects.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Projects.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Projects.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Projects.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.Projects.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <attributes uuid="88b428a9-8fa7-4d25-b515-be8c1ca3d089">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Project</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>8181280A-9E19-EFC7-7777-7870DB1940D1</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b1e66598-a170-4869-bd10-6a8f57e33265">
+   <name>Value</name>
+   <synonym>
     <key>en</key>
-    <value>Projects</value>
-  </listPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Projects.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Projects.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Projects.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="fffef6e6-8f8f-402f-99aa-dd9395079161">
-    <producedTypes>
-      <objectType typeId="a83fbf75-5573-47b1-b6d3-b0c0b480d735" valueTypeId="ea2a41f7-423e-4753-98e0-ef56cb4a9bd3"/>
-      <rowType typeId="21f26755-dc37-4fa5-affa-dadf6c945b79" valueTypeId="265a08f3-6468-4307-b5ad-9d5250d0badd"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="88b428a9-8fa7-4d25-b515-be8c1ca3d089">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b1e66598-a170-4869-bd10-6a8f57e33265">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Projects.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d5118ef0-3fb0-470b-90e7-7e72a42e48a9">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="01ecd162-f79a-4dba-b217-6d61645fb4c0">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="16af5201-d539-4c19-a156-c132172b878f">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="307a9dab-f034-4e30-b97f-52ea857f9072">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>E0EE816D-90B6-989E-E7A8-83BA0ADA81CD</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Projects.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d5118ef0-3fb0-470b-90e7-7e72a42e48a9">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>A682B2C5-9A8C-C4BE-E21A-A44A78C2E015</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="01ecd162-f79a-4dba-b217-6d61645fb4c0">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>58036E9D-DE22-FB3E-E41F-FAEB872A1648</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="16af5201-d539-4c19-a156-c132172b878f">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>44F5C484-3E64-068E-E37A-ABB5E16A00B9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="307a9dab-f034-4e30-b97f-52ea857f9072">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>75A2193E-90BA-A6F6-6D85-5318283A5C4B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

@@ -1,271 +1,271 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d28317e2-d548-4dac-a988-ba5b8423725d">
-  <producedTypes>
-    <selectionType typeId="46fffa32-98fd-4ba0-9e4a-83a5b4fdc433" valueTypeId="643034bb-1947-4a40-8188-73ece2af2905"/>
-    <listType typeId="1b282b42-78f1-4d8b-8d21-3c59ec148061" valueTypeId="7897555e-3770-4b97-acf1-d16d9e2830fb"/>
-    <managerType typeId="7119d6a6-efb3-4a2c-b0f4-98d3054608a4" valueTypeId="cc032036-73c6-4b0d-a11e-a7973e457caf"/>
-    <recordSetType typeId="3f3b468e-fc50-4566-a6ea-0860e7ca7e95" valueTypeId="e09056c8-42a8-4924-8033-b50c045f85f6"/>
-    <recordKeyType typeId="9ed8cec2-edee-4a8d-938d-3d88c79a406b" valueTypeId="51775964-8a08-455c-ac6d-565cc1d5d32e"/>
-    <recordType typeId="2b7b7721-1523-468f-8e02-cf08f6591aae" valueTypeId="e9f00d33-bd9e-41b4-b444-210420a6e1c2"/>
-  </producedTypes>
-  <name>R6050T_SalesBatches</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d28317e2-d548-4dac-a988-ba5b8423725d">
+ <producedTypes>
+  <selectionType typeId="46fffa32-98fd-4ba0-9e4a-83a5b4fdc433" valueTypeId="643034bb-1947-4a40-8188-73ece2af2905"/>
+  <listType typeId="1b282b42-78f1-4d8b-8d21-3c59ec148061" valueTypeId="7897555e-3770-4b97-acf1-d16d9e2830fb"/>
+  <managerType typeId="7119d6a6-efb3-4a2c-b0f4-98d3054608a4" valueTypeId="cc032036-73c6-4b0d-a11e-a7973e457caf"/>
+  <recordSetType typeId="3f3b468e-fc50-4566-a6ea-0860e7ca7e95" valueTypeId="e09056c8-42a8-4924-8033-b50c045f85f6"/>
+  <recordKeyType typeId="9ed8cec2-edee-4a8d-938d-3d88c79a406b" valueTypeId="51775964-8a08-455c-ac6d-565cc1d5d32e"/>
+  <recordType typeId="2b7b7721-1523-468f-8e02-cf08f6591aae" valueTypeId="e9f00d33-bd9e-41b4-b444-210420a6e1c2"/>
+ </producedTypes>
+ <name>R6050T_SalesBatches</name>
+ <synonym>
+  <key>en</key>
+  <value>A602BB49-B5EB-7811-13CA-A9A4AF88E96E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="5a8ea705-89d3-48f4-9445-9c80e6d7cd01">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R6050 Sales batches</value>
+   <key>en</key>
+   <value>E409ABC7-DB5C-BE1D-D057-726567EF2264</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="5a8ea705-89d3-48f4-9445-9c80e6d7cd01">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="d8c2d5a9-08b4-4d3e-928f-5c70e2eab723">
-    <name>InvoiceAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoice amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="18194789-6916-4a1f-85be-7461ab12894f">
-    <name>InvoiceTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Invoice tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="830ddb87-0c0d-4aef-a0ab-978ae7bba040">
-    <name>IndirectCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Indirect cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="b12b259b-95ea-4955-a3e1-ae11b73c1c08">
-    <name>IndirectCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Indirect cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="04d74dfd-457a-47c1-b808-72a1e73ba8dd">
-    <name>ExtraCostAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="60e48ad8-1b02-44b2-91c5-19513fd76df8">
-    <name>ExtraCostTaxAmountByRatio</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra cost tax amount by ratio</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="4df89424-458c-4f48-b46d-46654ee3be96">
-    <name>ExtraDirectCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="7da3659f-d385-4ee2-8ba7-54a58955f830">
-    <name>ExtraDirectCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra direct cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="5323e40f-dd4f-4799-bafa-5aeb608cc35c">
-    <name>AllocatedCostAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated cost amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="b3d25239-c51d-4546-9768-7b1e6167e502">
-    <name>AllocatedCostTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated cost tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="43980561-4c23-4d01-8fba-322788dd36c3">
-    <name>AllocatedRevenueAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated revenue amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="7953db63-9ffb-4d35-a1d7-fc2bdd7c2df4">
-    <name>AllocatedRevenueTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Allocated revenue tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="ed2cd482-1d4d-4069-b087-a176f25e3e18">
-    <name>TotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="15e6709c-5b05-4500-97c9-c246b9935733">
-    <name>TotalNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="bb958b81-0d3c-4f03-9e01-71a88595b760">
-    <name>TotalTaxAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Total tax amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
-    <name>Batch</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Batches</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="ccccafb9-c919-4131-9812-96cf6a1e0af5">
-    <name>BatchKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Batch key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BatchKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="12eb986b-0b6c-44ef-96b1-a47c4f96d93b">
-    <name>SalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="d8c2d5a9-08b4-4d3e-928f-5c70e2eab723">
+  <name>InvoiceAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>B1E12C2D-6E6C-52A7-7340-0C9C31BBD5FF</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="18194789-6916-4a1f-85be-7461ab12894f">
+  <name>InvoiceTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>85C92B7D-AEFB-48FB-BA9A-ADD183A12C67</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="830ddb87-0c0d-4aef-a0ab-978ae7bba040">
+  <name>IndirectCostAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>FCAEC261-9AA2-CA14-47E4-49EA6BA676DB</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="b12b259b-95ea-4955-a3e1-ae11b73c1c08">
+  <name>IndirectCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>41F4F911-C132-4023-3FD2-21595DCFE609</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="04d74dfd-457a-47c1-b808-72a1e73ba8dd">
+  <name>ExtraCostAmountByRatio</name>
+  <synonym>
+   <key>en</key>
+   <value>D8407FC1-1518-7E51-108E-E17FC1F50813</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="60e48ad8-1b02-44b2-91c5-19513fd76df8">
+  <name>ExtraCostTaxAmountByRatio</name>
+  <synonym>
+   <key>en</key>
+   <value>4421B19E-E968-D894-41C1-19F498614347</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="4df89424-458c-4f48-b46d-46654ee3be96">
+  <name>ExtraDirectCostAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>3A7BB94F-DCA2-4FCB-B43C-C28F2C99B303</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="7da3659f-d385-4ee2-8ba7-54a58955f830">
+  <name>ExtraDirectCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>984E922F-B829-F0AE-E9A8-85378B8F5740</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="5323e40f-dd4f-4799-bafa-5aeb608cc35c">
+  <name>AllocatedCostAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>BE5341B4-8060-291E-E511-14DE8EEDAA8A</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="b3d25239-c51d-4546-9768-7b1e6167e502">
+  <name>AllocatedCostTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>E4BBF96D-C9F7-D7A5-5A2F-F96EA2D9C96D</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="43980561-4c23-4d01-8fba-322788dd36c3">
+  <name>AllocatedRevenueAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>63F3358B-CAEF-3F39-99FE-EE04B282F267</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="7953db63-9ffb-4d35-a1d7-fc2bdd7c2df4">
+  <name>AllocatedRevenueTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>D05486A8-40D4-B5BC-C400-06C9AC1D20B8</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="ed2cd482-1d4d-4069-b087-a176f25e3e18">
+  <name>TotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>241D076A-B387-BE3F-F664-4AFC4E8BEA73</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="15e6709c-5b05-4500-97c9-c246b9935733">
+  <name>TotalNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>DF14AD02-D843-6246-6E84-4C4348EB9ED5</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="bb958b81-0d3c-4f03-9e01-71a88595b760">
+  <name>TotalTaxAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>128B2B10-54C6-986C-C097-7037D82E0F58</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="c728c832-7cdd-417e-b575-31112913b75b">
+  <name>Batch</name>
+  <synonym>
+   <key>en</key>
+   <value>BCE6DABE-F13D-48C4-4A6E-E0F3DB84F184</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Batches</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="ccccafb9-c919-4131-9812-96cf6a1e0af5">
+  <name>BatchKey</name>
+  <synonym>
+   <key>en</key>
+   <value>9E9CBDAA-4D7B-52C3-3495-544C69805766</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BatchKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="12eb986b-0b6c-44ef-96b1-a47c4f96d93b">
+  <name>SalesInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>80052257-D328-FD1B-B3B5-5D2F1CE73793</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

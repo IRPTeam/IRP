@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a702d851-b306-497c-86af-74188ce56880">
-  <producedTypes>
-    <objectType typeId="2046b025-bf1f-4cd7-a113-c1dce31790da" valueTypeId="2e37a1e0-c05b-4093-9dc3-1167fda9fb1e"/>
-    <refType typeId="ee701ee1-d839-42a2-b618-d605254b3dc3" valueTypeId="1c4a86d3-de31-40ec-b08e-ba463ecd597b"/>
-    <selectionType typeId="68706791-9f2b-44f7-8645-c28c7bae8597" valueTypeId="bfe7c8f6-11f1-475f-b1c4-1fc9f33ecf88"/>
-    <listType typeId="0c563a73-9560-465f-8eba-8a670ea3376f" valueTypeId="f389b9d5-bd1c-4a8e-a97b-2aebed82d9aa"/>
-    <managerType typeId="a8bbf7fa-ee07-4e53-bc25-87ff70a80e54" valueTypeId="ccf5168a-52cb-4064-9e28-d2c6df605883"/>
-  </producedTypes>
-  <name>ProductionPlanningClosing</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a702d851-b306-497c-86af-74188ce56880">
+ <producedTypes>
+  <objectType typeId="2046b025-bf1f-4cd7-a113-c1dce31790da" valueTypeId="2e37a1e0-c05b-4093-9dc3-1167fda9fb1e"/>
+  <refType typeId="ee701ee1-d839-42a2-b618-d605254b3dc3" valueTypeId="1c4a86d3-de31-40ec-b08e-ba463ecd597b"/>
+  <selectionType typeId="68706791-9f2b-44f7-8645-c28c7bae8597" valueTypeId="bfe7c8f6-11f1-475f-b1c4-1fc9f33ecf88"/>
+  <listType typeId="0c563a73-9560-465f-8eba-8a670ea3376f" valueTypeId="f389b9d5-bd1c-4a8e-a97b-2aebed82d9aa"/>
+  <managerType typeId="a8bbf7fa-ee07-4e53-bc25-87ff70a80e54" valueTypeId="ccf5168a-52cb-4064-9e28-d2c6df605883"/>
+ </producedTypes>
+ <name>ProductionPlanningClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>4331A5A0-5862-D518-8ADE-E53D98957E1E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ProductionPlanningClosing.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.ProductionPlanningClosing.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>C9255436-D152-7723-3046-69B56C670042</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>EEF0ADD1-50D5-D601-1E00-0B551AF7E99B</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ProductionPlanningClosing.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ProductionPlanningClosing.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ProductionPlanningClosing.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="b05d0a2c-0877-4ac7-9a98-f24edf1bc6b9">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Production planning closing</value>
+   <key>en</key>
+   <value>83A4EEA2-7015-A113-3DC5-5160B1A2A8E3</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.ProductionPlanningClosing.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.ProductionPlanningClosing.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ProductionPlanningClosing</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8e932d49-a243-4a3f-acbf-225adba31613">
+  <name>BusinessUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>EA069F52-27C5-2ECF-F054-465037C54B1B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Workshop</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="72189a67-a5f0-45a2-b3f7-4895b43f0a37">
+  <name>ProductionPlanning</name>
+  <synonym>
+   <key>en</key>
+   <value>73B24A7E-14D9-10B0-0768-8DB78A5A17CC</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ProductionPlanning</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.ProductionPlanningClosing.Attribute.Company</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.BusinessUnit</name>
+   <field>Document.ProductionPlanningClosing.Attribute.BusinessUnit</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="e8aca585-11d6-4451-8d9e-619e4adaefea">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>4598AB56-2C8D-A7DA-A6D2-278999134D4D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="97afa86d-8140-467f-99df-9b163aa81210">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>EE90DD25-6E5D-F8AB-BD26-6AAC3210A9AA</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c3477a38-04af-4c9e-8b79-e352158a69d8">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1E1E1B00-B254-DB8C-CE16-6142374F397E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="21848652-b6ca-40ad-a376-70cf8fe9c816">
+  <producedTypes>
+   <objectType typeId="69c3281a-e74d-4417-9660-96ee7df69bf4" valueTypeId="e72b6649-0688-4015-9f55-f4531b70ebff"/>
+   <rowType typeId="d7a114c8-d5d2-42aa-8a03-dee5406ac1cc" valueTypeId="082b84ca-ece0-4a45-82a6-b0c3ad8969ce"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>A46DCB6A-F571-215E-E53C-C6893C0AE463</value>
+  </synonym>
+  <attributes uuid="ceb486a9-815b-46f0-acd1-7d70ea6f4a86">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Production planning closing</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>D16951FE-AC3F-D654-41CA-AA3832E289F7</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7e38ce49-34b4-46a6-b76b-da9bb6240acc">
+   <name>Value</name>
+   <synonym>
     <key>en</key>
-    <value>Production planning closings</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.ProductionPlanningClosing.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.ProductionPlanningClosing.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.ProductionPlanningClosing.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="b05d0a2c-0877-4ac7-9a98-f24edf1bc6b9">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>EC5A2931-9FE2-152E-E50B-BB54F2D1DD51</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="8e932d49-a243-4a3f-acbf-225adba31613">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Workshop</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="72189a67-a5f0-45a2-b3f7-4895b43f0a37">
-    <name>ProductionPlanning</name>
-    <synonym>
-      <key>en</key>
-      <value>Production planning</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ProductionPlanning</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Company</name>
-      <field>Document.ProductionPlanningClosing.Attribute.Company</field>
-    </choiceParameterLinks>
-    <choiceParameterLinks>
-      <name>Filter.BusinessUnit</name>
-      <field>Document.ProductionPlanningClosing.Attribute.BusinessUnit</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="e8aca585-11d6-4451-8d9e-619e4adaefea">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="97afa86d-8140-467f-99df-9b163aa81210">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c3477a38-04af-4c9e-8b79-e352158a69d8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="21848652-b6ca-40ad-a376-70cf8fe9c816">
-    <producedTypes>
-      <objectType typeId="69c3281a-e74d-4417-9660-96ee7df69bf4" valueTypeId="e72b6649-0688-4015-9f55-f4531b70ebff"/>
-      <rowType typeId="d7a114c8-d5d2-42aa-8a03-dee5406ac1cc" valueTypeId="082b84ca-ece0-4a45-82a6-b0c3ad8969ce"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="ceb486a9-815b-46f0-acd1-7d70ea6f4a86">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="7e38ce49-34b4-46a6-b76b-da9bb6240acc">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <commands uuid="b75831d1-7613-4b84-b333-553b8a6ace85">
-    <name>Generate</name>
-    <synonym>
-      <key>en</key>
-      <value>Production planning closing</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.ProductionPlanning</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <commands uuid="b75831d1-7613-4b84-b333-553b8a6ace85">
+  <name>Generate</name>
+  <synonym>
+   <key>en</key>
+   <value>AE23A89D-B8A6-B79C-C336-6AEB2A6A6782</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.ProductionPlanning</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

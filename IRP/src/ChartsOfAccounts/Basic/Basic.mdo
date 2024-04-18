@@ -1,328 +1,328 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfAccounts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e9a624f9-5715-402f-adb5-6c7dc8b02dc8">
-  <producedTypes>
-    <objectType typeId="8cdd5235-52c6-445c-9562-afd2fee222c5" valueTypeId="b6d67138-6274-4ae1-a4a8-eabb73ad2ce4"/>
-    <refType typeId="ec975702-6588-4a10-96fb-bbc53d65a26c" valueTypeId="dc4dbc5f-6b37-4cbf-b425-863e54d90227"/>
-    <selectionType typeId="74be38c4-c103-4b56-9d5d-0e57e87bc8e4" valueTypeId="51d1d25d-6a5f-4982-a494-f57792cc1012"/>
-    <listType typeId="8bd525ae-1559-4983-8887-6f6ace39c7b4" valueTypeId="7f852177-ad0d-4f74-913f-033356c45f51"/>
-    <managerType typeId="9783c06d-0812-45b3-aae0-5f062ef6e5c8" valueTypeId="7bb14617-d511-4a35-921a-5c80f6c2faa1"/>
-    <extDimensionTypes typeId="a54459cf-0617-4d56-aebc-488f7d98f646" valueTypeId="c3f13ac5-f48a-4db2-a449-86ca48b30d9c"/>
-    <extDimensionTypesRow typeId="00e99816-2001-414b-8a87-71356c6a9b91" valueTypeId="78316efe-64c1-42ab-8a67-db3e0855d9e8"/>
-  </producedTypes>
-  <name>Basic</name>
-  <synonym>
-    <key>en</key>
-    <value>Account charts (Basic)</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>ChartOfAccounts.Basic.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Order</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>OffBalance</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Type</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>ChartOfAccounts.Basic.Attribute.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>DontUse</createOnInput>
+<mdclass:ChartOfAccounts xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e9a624f9-5715-402f-adb5-6c7dc8b02dc8">
+ <producedTypes>
+  <objectType typeId="8cdd5235-52c6-445c-9562-afd2fee222c5" valueTypeId="b6d67138-6274-4ae1-a4a8-eabb73ad2ce4"/>
+  <refType typeId="ec975702-6588-4a10-96fb-bbc53d65a26c" valueTypeId="dc4dbc5f-6b37-4cbf-b425-863e54d90227"/>
+  <selectionType typeId="74be38c4-c103-4b56-9d5d-0e57e87bc8e4" valueTypeId="51d1d25d-6a5f-4982-a494-f57792cc1012"/>
+  <listType typeId="8bd525ae-1559-4983-8887-6f6ace39c7b4" valueTypeId="7f852177-ad0d-4f74-913f-033356c45f51"/>
+  <managerType typeId="9783c06d-0812-45b3-aae0-5f062ef6e5c8" valueTypeId="7bb14617-d511-4a35-921a-5c80f6c2faa1"/>
+  <extDimensionTypes typeId="a54459cf-0617-4d56-aebc-488f7d98f646" valueTypeId="c3f13ac5-f48a-4db2-a449-86ca48b30d9c"/>
+  <extDimensionTypesRow typeId="00e99816-2001-414b-8a87-71356c6a9b91" valueTypeId="78316efe-64c1-42ab-8a67-db3e0855d9e8"/>
+ </producedTypes>
+ <name>Basic</name>
+ <synonym>
+  <key>en</key>
+  <value>81861363-C81A-FFFF-F189-9579E4724F3C</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>ChartOfAccounts.Basic.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Account chart (Basic)</value>
-  </objectPresentation>
-  <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
-  <maxExtDimensionCount>3</maxExtDimensionCount>
-  <codeLength>12</codeLength>
-  <checkUnique>true</checkUnique>
-  <standardTabularSections>
-    <name>ExtDimensionTypes</name>
-    <synonym>
-      <key>en</key>
-      <value>Extra dimension types</value>
-    </synonym>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>TurnoversOnly</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>Predefined</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>ExtDimensionType</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-    <standardAttributes>
-      <dataHistory>Use</dataHistory>
-      <name>LineNumber</name>
-      <fillValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </standardAttributes>
-  </standardTabularSections>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <defaultObjectForm>ChartOfAccounts.Basic.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfAccounts.Basic.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
-  <orderLength>12</orderLength>
-  <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
-    <name>LedgerTypeVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type variant</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypeVariants</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2ad7938c-03c0-4956-9162-02d1e6897fde">
-    <name>SearchCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Search code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>12</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="9ae11d33-8fe3-4357-955f-bdd7e4d1a3a4">
-    <name>NotUsedForRecords</name>
-    <synonym>
-      <key>en</key>
-      <value>Not used for records</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </accountingFlags>
-  <accountingFlags uuid="14c93e6d-5bd9-4d82-a64e-5bc911816e37">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </accountingFlags>
-  <extDimensionAccountingFlags uuid="40aefe23-4b20-4d5a-b3b8-1ebddaba5cd2">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </extDimensionAccountingFlags>
-  <extDimensionAccountingFlags uuid="d9534319-0d59-4c10-877b-222bf53d7a4f">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </extDimensionAccountingFlags>
-  <extDimensionAccountingFlags uuid="a618412c-8483-4c61-8a45-6972e784ae41">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </extDimensionAccountingFlags>
-  <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="eca16ee5-76ad-4477-8113-51ffa224d6d3">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="058b9e45-620b-4cd6-aab5-385ceba80b3e">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="63de84ca-e180-403b-9c90-267964693080">
-    <name>LoadForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Load chart of accounts</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="77d18a0d-bcd6-43b3-ae0b-ad4cdbfa4fed">
-    <name>LoadTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Load template</value>
-    </synonym>
-  </templates>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Order</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>OffBalance</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Type</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>ChartOfAccounts.Basic.Attribute.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>DontUse</createOnInput>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>B507D0D8-4BA7-941C-CCAA-AEDD620C7221</value>
+ </objectPresentation>
+ <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
+ <maxExtDimensionCount>3</maxExtDimensionCount>
+ <codeLength>12</codeLength>
+ <checkUnique>true</checkUnique>
+ <standardTabularSections>
+  <name>ExtDimensionTypes</name>
+  <synonym>
+   <key>en</key>
+   <value>CB2816B1-1BCC-A9A6-64C9-9EC79BB1F9CB</value>
+  </synonym>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>TurnoversOnly</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>Predefined</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>ExtDimensionType</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+   <dataHistory>Use</dataHistory>
+   <name>LineNumber</name>
+   <fillValue xsi:type="core:UndefinedValue"/>
+   <fullTextSearch>Use</fullTextSearch>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+ </standardTabularSections>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <defaultObjectForm>ChartOfAccounts.Basic.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfAccounts.Basic.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfAccounts.Basic.Form.ChoiceForm</defaultChoiceForm>
+ <orderLength>12</orderLength>
+ <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>1DBBAD1A-59CA-36D6-687A-ABFCBC63D967</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2ad7938c-03c0-4956-9162-02d1e6897fde">
+  <name>SearchCode</name>
+  <synonym>
+   <key>en</key>
+   <value>0F27E500-CCA9-ED69-9982-232732840B12</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>12</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9ae11d33-8fe3-4357-955f-bdd7e4d1a3a4">
+  <name>NotUsedForRecords</name>
+  <synonym>
+   <key>en</key>
+   <value>80AD3437-63D7-5D21-1AE1-1CFAF77E584E</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>1B401466-3AAC-A7A6-6FF9-9832C0AA9305</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </accountingFlags>
+ <accountingFlags uuid="14c93e6d-5bd9-4d82-a64e-5bc911816e37">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>465A62A9-454B-F174-481A-A73D2ED36B4D</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </accountingFlags>
+ <extDimensionAccountingFlags uuid="40aefe23-4b20-4d5a-b3b8-1ebddaba5cd2">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>DAEF32DC-4DE8-EC66-6F6F-FBDC0125BDC9</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </extDimensionAccountingFlags>
+ <extDimensionAccountingFlags uuid="d9534319-0d59-4c10-877b-222bf53d7a4f">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>E758AF7D-4BAB-2352-256D-D1009BACD36E</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </extDimensionAccountingFlags>
+ <extDimensionAccountingFlags uuid="a618412c-8483-4c61-8a45-6972e784ae41">
+  <name>Amount</name>
+  <synonym>
+   <key>en</key>
+   <value>38BFF824-0174-73F5-58F0-058A6FF0F0C5</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </extDimensionAccountingFlags>
+ <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>F54F10C0-934D-E81A-ABFF-FA250DB078A6</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="eca16ee5-76ad-4477-8113-51ffa224d6d3">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E427A020-E462-B1A1-1861-130B5A468D74</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="058b9e45-620b-4cd6-aab5-385ceba80b3e">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>C814F824-2E33-8AF7-7669-93AA67ED32F4</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="63de84ca-e180-403b-9c90-267964693080">
+  <name>LoadForm</name>
+  <synonym>
+   <key>en</key>
+   <value>55C90715-B8B0-2B38-82A7-7B283F228CD8</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="77d18a0d-bcd6-43b3-ae0b-ad4cdbfa4fed">
+  <name>LoadTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>F476991A-F836-DDB3-3795-574EABE98D2E</value>
+  </synonym>
+ </templates>
 </mdclass:ChartOfAccounts>

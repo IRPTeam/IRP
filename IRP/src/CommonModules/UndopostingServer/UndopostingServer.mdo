@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3a347875-7be1-40a0-a647-377ae3f4d970">
-  <name>UndopostingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Undoposting server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>UndopostingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>7C63D3F2-9DB0-23A2-2EE9-991192938DE9</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

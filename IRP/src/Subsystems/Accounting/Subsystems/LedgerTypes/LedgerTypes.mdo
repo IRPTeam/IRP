@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c00b7bac-ee43-49eb-a492-490a62f18d01">
-  <name>LedgerTypes</name>
-  <synonym>
-    <key>en</key>
-    <value>Ledger types</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.LedgerTypes</content>
-  <content>Catalog.LedgerTypeVariants</content>
-  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+ <name>LedgerTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>B6F4EFF4-F56E-018B-BB96-66F27461A51C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.LedgerTypes</content>
+ <content>Catalog.LedgerTypeVariants</content>
+ <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

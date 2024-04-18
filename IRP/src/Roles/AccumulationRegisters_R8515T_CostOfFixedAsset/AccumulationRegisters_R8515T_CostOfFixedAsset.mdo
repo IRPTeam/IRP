@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1220fd1b-5a57-40d7-b50f-7b5655faa341">
-  <name>AccumulationRegisters_R8515T_CostOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R8515T CostOfFixedAsset</value>
-  </synonym>
+ <name>AccumulationRegisters_R8515T_CostOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>18857814-073B-D065-561F-FBBF26ACC6A0_________</value>
+ </synonym>
 </mdclass:Role>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c58374a9-26f2-4d6b-90a4-9b3ef5c9e8e4">
-  <name>AccumulationRegisters_R3025B_PurchaseOrdersToBePaid</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3025B PurchaseOrdersToBePaid</value>
-  </synonym>
+ <name>AccumulationRegisters_R3025B_PurchaseOrdersToBePaid</name>
+ <synonym>
+  <key>en</key>
+  <value>1E80B4C5-C3F0-6BC4-47FF-F9349DC4BDF4_______________</value>
+ </synonym>
 </mdclass:Role>

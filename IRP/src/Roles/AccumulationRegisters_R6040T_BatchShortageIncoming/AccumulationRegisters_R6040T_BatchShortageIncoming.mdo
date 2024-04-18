@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="66344b2f-8b78-41b9-a3bd-f81dee6d951e">
-  <name>AccumulationRegisters_R6040T_BatchShortageIncoming</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R6040T BatchShortageIncoming</value>
-  </synonym>
+ <name>AccumulationRegisters_R6040T_BatchShortageIncoming</name>
+ <synonym>
+  <key>en</key>
+  <value>3AD24616-9645-4142-2FC0-01D700B1908F______________</value>
+ </synonym>
 </mdclass:Role>

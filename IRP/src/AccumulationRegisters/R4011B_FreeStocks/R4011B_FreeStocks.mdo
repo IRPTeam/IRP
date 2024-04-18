@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8abd7ed0-3cdf-414a-9ffb-eeffbddef4e4">
-  <producedTypes>
-    <selectionType typeId="6e990e91-976a-471e-ab6d-dd73512bb125" valueTypeId="460f0ef1-315c-4feb-8e89-ea06ad66fe72"/>
-    <listType typeId="c72b920e-3158-48b0-ad4b-586d1ad29fd8" valueTypeId="a6ce9314-1289-4553-8562-bac31644e663"/>
-    <managerType typeId="10c2858f-87e1-4273-9224-b04fc35fc703" valueTypeId="305f48bf-3d2a-49c2-8a0e-579cdd101453"/>
-    <recordSetType typeId="2c93d3fe-ca98-4358-a092-dc1dbf07b8df" valueTypeId="67f54865-f4f8-40d4-a568-9a984ca75db8"/>
-    <recordKeyType typeId="eb0926b0-b3d8-4e0a-945d-1cbec5116e0e" valueTypeId="65b00b2f-3ee2-4e67-ac6f-51e81f340669"/>
-    <recordType typeId="af55fab8-bd9a-4308-a7a0-65395ec90639" valueTypeId="98ec6886-ce0a-4645-9a6e-ea59b632b797"/>
-  </producedTypes>
-  <name>R4011B_FreeStocks</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8abd7ed0-3cdf-414a-9ffb-eeffbddef4e4">
+ <producedTypes>
+  <selectionType typeId="6e990e91-976a-471e-ab6d-dd73512bb125" valueTypeId="460f0ef1-315c-4feb-8e89-ea06ad66fe72"/>
+  <listType typeId="c72b920e-3158-48b0-ad4b-586d1ad29fd8" valueTypeId="a6ce9314-1289-4553-8562-bac31644e663"/>
+  <managerType typeId="10c2858f-87e1-4273-9224-b04fc35fc703" valueTypeId="305f48bf-3d2a-49c2-8a0e-579cdd101453"/>
+  <recordSetType typeId="2c93d3fe-ca98-4358-a092-dc1dbf07b8df" valueTypeId="67f54865-f4f8-40d4-a568-9a984ca75db8"/>
+  <recordKeyType typeId="eb0926b0-b3d8-4e0a-945d-1cbec5116e0e" valueTypeId="65b00b2f-3ee2-4e67-ac6f-51e81f340669"/>
+  <recordType typeId="af55fab8-bd9a-4308-a7a0-65395ec90639" valueTypeId="98ec6886-ce0a-4645-9a6e-ea59b632b797"/>
+ </producedTypes>
+ <name>R4011B_FreeStocks</name>
+ <synonym>
+  <key>en</key>
+  <value>C7A62678-C7F1-5AF8-8539-9AE359686655</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="262d6816-a1e5-4c69-ad71-0ce72a99c03e">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R4011 Free stocks</value>
+   <key>en</key>
+   <value>DB9E160D-9776-96AF-FA26-63E7872FA28B</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="262d6816-a1e5-4c69-ad71-0ce72a99c03e">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="9125fa15-4ca4-4200-94aa-be06c32fd6f4">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="bc9af516-f04f-433e-bd1b-b5576d311300">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="9125fa15-4ca4-4200-94aa-be06c32fd6f4">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>8ACF2D11-C7C6-A33D-D17A-A60567B69EDD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="bc9af516-f04f-433e-bd1b-b5576d311300">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>C773F01E-6E86-47BB-BD33-3277BF58EB45</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

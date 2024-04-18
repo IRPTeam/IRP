@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0944b9b1-a0f0-4887-87d2-b0f40535da4d">
-  <name>Document_FixedAssetTransfer</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Fixed asset transfer&quot;</value>
-  </synonym>
+ <name>Document_FixedAssetTransfer</name>
+ <synonym>
+  <key>en</key>
+  <value>2DC79DCF-FECE-82C4-4269-965E33635BD8</value>
+ </synonym>
 </mdclass:Role>

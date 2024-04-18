@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4bcf410-81e7-4a64-ac22-dc43b903ddc3">
-  <name>RowIDInfoPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Row IDInfo privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>RowIDInfoPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>880CE11A-5B85-AC9B-BAD7-7569AA87DEE7</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

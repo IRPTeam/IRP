@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="048e7a34-c86e-49ab-9151-8e56ff78a3a9">
-  <producedTypes>
-    <refType typeId="b9d4e94a-12ec-429a-b420-02f5251131a7" valueTypeId="c48ad61b-e6a8-4591-8951-88778078f7b6"/>
-    <listType typeId="db147784-c70a-4c56-a8f5-b2cf8b455a07" valueTypeId="77d3a0f3-9d9e-442b-85f2-0e7b55284ed0"/>
-    <managerType typeId="77b6e945-d6b7-4a67-9dd9-bf6c6f025366" valueTypeId="5553bb83-cfc3-454e-a8da-494227b4f151"/>
-  </producedTypes>
-  <name>OfferGroupType</name>
+ <producedTypes>
+  <refType typeId="b9d4e94a-12ec-429a-b420-02f5251131a7" valueTypeId="c48ad61b-e6a8-4591-8951-88778078f7b6"/>
+  <listType typeId="db147784-c70a-4c56-a8f5-b2cf8b455a07" valueTypeId="77d3a0f3-9d9e-442b-85f2-0e7b55284ed0"/>
+  <managerType typeId="77b6e945-d6b7-4a67-9dd9-bf6c6f025366" valueTypeId="5553bb83-cfc3-454e-a8da-494227b4f151"/>
+ </producedTypes>
+ <name>OfferGroupType</name>
+ <synonym>
+  <key>en</key>
+  <value>A7BF3E5E-EBA9-0C00-0A8E-EEFE3E4A4240</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="4becb251-e756-4c14-b797-708b4f57aef9">
+  <name>Sum</name>
   <synonym>
-    <key>en</key>
-    <value>Offer group type</value>
+   <key>en</key>
+   <value>86CC8E4E-D58F-9A25-5D90-0A93EB2DE8DC</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="4becb251-e756-4c14-b797-708b4f57aef9">
-    <name>Sum</name>
-    <synonym>
-      <key>en</key>
-      <value>Sum</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="105e55d5-5c75-4aea-a369-d5ca83d44fd6">
-    <name>Max</name>
-    <synonym>
-      <key>en</key>
-      <value>Max</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="756868c6-316a-40f4-bef5-821cb32063e7">
-    <name>MaxByRow</name>
-    <synonym>
-      <key>en</key>
-      <value>Max by row</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4d3eea54-cd26-4f95-b5c1-d8485ffd1453">
-    <name>Min</name>
-    <synonym>
-      <key>en</key>
-      <value>Min</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="51b9e396-be57-4795-b092-15aa633dac48">
-    <name>Consequentially</name>
-    <synonym>
-      <key>en</key>
-      <value>Consequentially</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="3cddac61-c134-4b22-b5f7-46ec8856ef76">
-    <name>UseExternalCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Use external calculation</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="105e55d5-5c75-4aea-a369-d5ca83d44fd6">
+  <name>Max</name>
+  <synonym>
+   <key>en</key>
+   <value>FD952003-E90E-C1C9-98BC-CF8BB17F14F6</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="756868c6-316a-40f4-bef5-821cb32063e7">
+  <name>MaxByRow</name>
+  <synonym>
+   <key>en</key>
+   <value>07ADD286-8ED8-5250-07E6-661F1A02D99C</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4d3eea54-cd26-4f95-b5c1-d8485ffd1453">
+  <name>Min</name>
+  <synonym>
+   <key>en</key>
+   <value>87FA56DD-28F9-A291-15F3-304EF4CF361B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="51b9e396-be57-4795-b092-15aa633dac48">
+  <name>Consequentially</name>
+  <synonym>
+   <key>en</key>
+   <value>41D2EA17-1621-6C15-547E-E52C3C2907A3</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="3cddac61-c134-4b22-b5f7-46ec8856ef76">
+  <name>UseExternalCalculation</name>
+  <synonym>
+   <key>en</key>
+   <value>49E18A2D-DE3C-4079-98CC-C6C1B663B43F</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

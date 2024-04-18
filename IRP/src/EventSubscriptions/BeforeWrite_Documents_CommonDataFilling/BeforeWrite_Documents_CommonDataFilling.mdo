@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b6062259-53d0-4516-a184-c5b18abcbc8c">
-  <name>BeforeWrite_Documents_CommonDataFilling</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write documents common data filling</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.AdminFunctionsPrivileged.CommonDataFilling1BeforeWrite_Documents</handler>
+ <name>BeforeWrite_Documents_CommonDataFilling</name>
+ <synonym>
+  <key>en</key>
+  <value>40C255CD-9A11-0177-7896-6EBD7BFA090F______</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.AdminFunctionsPrivileged.CommonDataFilling1BeforeWrite_Documents</handler>
 </mdclass:EventSubscription>

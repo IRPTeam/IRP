@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2b1bea52-d584-4283-b926-aa66ca628842">
-  <name>Subsystem_SalesAR</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Sales AR</value>
-  </synonym>
+ <name>Subsystem_SalesAR</name>
+ <synonym>
+  <key>en</key>
+  <value>1B37241E-84EE-3136-68E9-9E2F9695472E</value>
+ </synonym>
 </mdclass:Role>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bbcfa597-7e3a-4210-8638-8733947a7fdc">
-  <producedTypes>
-    <managerType typeId="dabe24da-2298-4ae3-83ac-ef8e389806c2" valueTypeId="e8c549b5-9cf3-491f-9e84-c192b9e5ff4f"/>
-    <valueManagerType typeId="9a3de91b-a081-410e-9f54-a34e65458937" valueTypeId="cf87b158-b40c-425f-87c2-e7215a605016"/>
-    <valueKeyType typeId="575f5ac9-fe78-4b75-ae94-757943fcbae3" valueTypeId="5ec762e6-f75d-4b11-8df5-aba42d667975"/>
-  </producedTypes>
-  <name>UseManagersAndSalesPersons</name>
-  <synonym>
-    <key>en</key>
-    <value>Use managers and sales persons</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bbcfa597-7e3a-4210-8638-8733947a7fdc">
+ <producedTypes>
+  <managerType typeId="dabe24da-2298-4ae3-83ac-ef8e389806c2" valueTypeId="e8c549b5-9cf3-491f-9e84-c192b9e5ff4f"/>
+  <valueManagerType typeId="9a3de91b-a081-410e-9f54-a34e65458937" valueTypeId="cf87b158-b40c-425f-87c2-e7215a605016"/>
+  <valueKeyType typeId="575f5ac9-fe78-4b75-ae94-757943fcbae3" valueTypeId="5ec762e6-f75d-4b11-8df5-aba42d667975"/>
+ </producedTypes>
+ <name>UseManagersAndSalesPersons</name>
+ <synonym>
+  <key>en</key>
+  <value>F87CA72D-9524-E252-2E5F-F7AF582A1247</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

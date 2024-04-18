@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aca959d5-a509-43ec-b784-a08ec3a148b6">
-  <name>CopyPasteServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Copy paste server</value>
-  </synonym>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>CopyPasteServer</name>
+ <synonym>
+  <key>en</key>
+  <value>A79B99C3-EF0B-D771-122D-D0B917D84CB5</value>
+ </synonym>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="051bd741-93fd-47cd-98d3-052dcd13e4eb">
-  <name>Payment_PayByPaymentCard</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment pay by payment card</value>
-  </synonym>
+ <name>Payment_PayByPaymentCard</name>
+ <synonym>
+  <key>en</key>
+  <value>0EE3BC73-9EF4-96BC-C9B1-1C86C0BF468F</value>
+ </synonym>
 </mdclass:CommonPicture>

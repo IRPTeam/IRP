@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a4bf87b8-f1ac-45cf-ab87-2583eabcadfe">
-  <name>CopyToClipboardSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Copy to clipboard settings</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>CopyToClipboardSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>3CA1D143-0431-5FF0-0915-5812D1F23874</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

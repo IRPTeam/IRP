@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e42a4ba-b9a3-4c50-8978-8cc480d3770c">
-  <name>Document_DecommissioningOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Decommissioning of fixed asset&quot;</value>
-  </synonym>
+ <name>Document_DecommissioningOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>201ADD75-ED93-0443-3A3E-E1A9AF52C82B_____</value>
+ </synonym>
 </mdclass:Role>

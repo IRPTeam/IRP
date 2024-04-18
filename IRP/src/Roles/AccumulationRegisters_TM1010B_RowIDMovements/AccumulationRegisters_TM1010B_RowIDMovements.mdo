@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c3a8672-832d-42e0-a9b9-bdf606edbe1a">
-  <name>AccumulationRegisters_TM1010B_RowIDMovements</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters TM1010B RowIDMovements</value>
-  </synonym>
+ <name>AccumulationRegisters_TM1010B_RowIDMovements</name>
+ <synonym>
+  <key>en</key>
+  <value>8E85F9EE-05D6-1137-7B9F-FDC136A7E524________</value>
+ </synonym>
 </mdclass:Role>

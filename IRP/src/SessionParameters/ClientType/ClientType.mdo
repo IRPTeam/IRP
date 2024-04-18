@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef905ddf-b1f0-45c4-8288-ce4e06e17894">
-  <name>ClientType</name>
-  <synonym>
-    <key>en</key>
-    <value>Client type</value>
-  </synonym>
-  <type>
-    <types>EnumRef.SystemClientType</types>
-  </type>
+ <name>ClientType</name>
+ <synonym>
+  <key>en</key>
+  <value>CAD5C98B-7772-1456-6AA7-73D32D957E1B</value>
+ </synonym>
+ <type>
+  <types>EnumRef.SystemClientType</types>
+ </type>
 </mdclass:SessionParameter>

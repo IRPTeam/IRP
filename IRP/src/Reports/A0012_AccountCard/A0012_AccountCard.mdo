@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3512b34d-9969-4936-b829-a2cb14f0c232">
-  <producedTypes>
-    <objectType typeId="b4a436a3-5791-40f1-964b-956fc42373cf" valueTypeId="b4addf21-b454-4902-b637-fdf77418b18e"/>
-    <managerType typeId="5ffdf3ea-258c-4b7d-ab5c-ac0eed037766" valueTypeId="c1dbc607-bfca-4739-9300-6c36bfe86777"/>
-  </producedTypes>
-  <name>A0012_AccountCard</name>
+ <producedTypes>
+  <objectType typeId="b4a436a3-5791-40f1-964b-956fc42373cf" valueTypeId="b4addf21-b454-4902-b637-fdf77418b18e"/>
+  <managerType typeId="5ffdf3ea-258c-4b7d-ab5c-ac0eed037766" valueTypeId="c1dbc607-bfca-4739-9300-6c36bfe86777"/>
+ </producedTypes>
+ <name>A0012_AccountCard</name>
+ <synonym>
+  <key>en</key>
+  <value>B423132F-B7E4-4033-3196-694B568C3958</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.A0012_AccountCard.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="a0904545-c662-43c3-9302-2e81973f7a62">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>A0012 Account card</value>
+   <key>en</key>
+   <value>02802FC6-5AD0-FF1F-FA93-3C5AAE7A2307</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.A0012_AccountCard.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="a0904545-c662-43c3-9302-2e81973f7a62">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

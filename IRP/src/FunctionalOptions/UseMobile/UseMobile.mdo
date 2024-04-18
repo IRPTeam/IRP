@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96216ed1-af38-4cb7-9e0c-aa3923536ad6">
-  <name>UseMobile</name>
-  <synonym>
-    <key>en</key>
-    <value>Use mobile</value>
-  </synonym>
-  <location>Constant.UseMobile</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>InformationRegister.BarcodeScanInfoCheck</content>
-  <content>DataProcessor.MobileDesktop</content>
-  <content>DataProcessor.MobileInvent</content>
+ <name>UseMobile</name>
+ <synonym>
+  <key>en</key>
+  <value>A23BB877-745E-9703-33BB-B0C3A2EC60D3</value>
+ </synonym>
+ <location>Constant.UseMobile</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.BarcodeScanInfoCheck</content>
+ <content>DataProcessor.MobileDesktop</content>
+ <content>DataProcessor.MobileInvent</content>
 </mdclass:FunctionalOption>

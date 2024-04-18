@@ -1,549 +1,549 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0017526-94f6-4b94-a9c1-f0177585694d">
-  <producedTypes>
-    <objectType typeId="ae7a7995-a92c-4f8e-9ffd-aae7089bc676" valueTypeId="8f37ed9f-2914-4b98-b9a4-659d89e66423"/>
-    <refType typeId="c77ee20d-444b-43b0-b2ba-95b230f8f186" valueTypeId="69a2e5b1-098f-411e-85e1-84fc78ff9e31"/>
-    <selectionType typeId="d45c86ad-0472-47e8-8948-a2323a2cba36" valueTypeId="0b018d1b-3898-4c52-b566-eb60702c1dbf"/>
-    <listType typeId="d7851058-e39f-4c9f-8036-912c9bafcf2c" valueTypeId="6aadf916-9315-4a24-a099-b4d45258090c"/>
-    <managerType typeId="ca5dde85-1c70-40e8-974f-d2df7e165de6" valueTypeId="f63b5d44-aece-4735-860a-51f0b87b7e46"/>
-  </producedTypes>
-  <name>SalesOrderClosing</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b0017526-94f6-4b94-a9c1-f0177585694d">
+ <producedTypes>
+  <objectType typeId="ae7a7995-a92c-4f8e-9ffd-aae7089bc676" valueTypeId="8f37ed9f-2914-4b98-b9a4-659d89e66423"/>
+  <refType typeId="c77ee20d-444b-43b0-b2ba-95b230f8f186" valueTypeId="69a2e5b1-098f-411e-85e1-84fc78ff9e31"/>
+  <selectionType typeId="d45c86ad-0472-47e8-8948-a2323a2cba36" valueTypeId="0b018d1b-3898-4c52-b566-eb60702c1dbf"/>
+  <listType typeId="d7851058-e39f-4c9f-8036-912c9bafcf2c" valueTypeId="6aadf916-9315-4a24-a099-b4d45258090c"/>
+  <managerType typeId="ca5dde85-1c70-40e8-974f-d2df7e165de6" valueTypeId="f63b5d44-aece-4735-860a-51f0b87b7e46"/>
+ </producedTypes>
+ <name>SalesOrderClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>0A2D51A8-19F6-543F-FEE3-3E9D9C49AD8B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.SalesOrderClosing.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.SalesOrderClosing.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>361873F1-9AF0-1A7A-AFB4-4C7FB7F8B09F</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>EAF8B805-7CFC-57E9-9C06-615DF553850B</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.SalesOrderClosing.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.SalesOrderClosing.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.SalesOrderClosing.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+ <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
+ <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
+ <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
+ <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="ef95b516-d08e-4697-a9b9-d293a4642fc4">
+  <name>Agreement</name>
   <synonym>
-    <key>en</key>
-    <value>Sales order closing</value>
+   <key>en</key>
+   <value>8F28405D-AF93-9E2F-FD6B-BE98BE242A7E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.SalesOrderClosing.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_SalesOrderClosing</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.SalesOrderClosing.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="5a982d0f-1a49-4c0c-a075-960b6bd53441">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>4EF6F154-E3F6-44F6-6FAB-B59EC169325D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="306ff20c-19c2-4aed-800c-d1fcb960861f">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>7CCA5872-2729-30B9-9CEF-F956BD33738F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="82de5b8e-9a4c-42b2-bbaf-b32aaf41bd0f">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>0FBE3D82-3FBE-0922-2255-54670B0B8D33</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Customer</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b156e72f-7492-4cd0-80fa-9fc8669102c8">
+  <name>SalesOrder</name>
+  <synonym>
+   <key>en</key>
+   <value>0B8BAEA0-A511-72DF-F69F-F1A05F306FA8</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f9ac8a75-8d97-4a90-ba8d-981792fd252d">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>FA8C7465-BF41-D70B-B1C3-317B2A5A94D4</value>
+  </synonym>
+  <type>
+   <types>EnumRef.SalesTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.SalesOrderClosing.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="09731346-be5a-4b53-9afc-332c33471ccc">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>9CED07F9-0A6E-5381-16E9-912C78C0E9FC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6a2b9fb1-04e7-4e74-84ce-d2b9bb28b633">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1F63E67D-C456-9BCE-E75C-C18F1D862E32</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5c9d0346-2703-4de4-a281-28ee119f271b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1FC3DFEA-0F5F-F100-0C2F-F8009197E7AE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="aedab131-3823-400c-863e-475932ec4905">
+  <producedTypes>
+   <objectType typeId="6407acb6-5d4b-4300-9730-a6f6001c9bb0" valueTypeId="5fa8328c-9648-4bb1-adff-fb9375a9107c"/>
+   <rowType typeId="5e92a68f-3094-4eda-aef3-64f61f586798" valueTypeId="2f431d58-fcc3-44ec-9530-8bc3c652d847"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>en</key>
+   <value>3AA84CCB-D05F-52B6-6534-4D65CC5E8F12</value>
+  </synonym>
+  <attributes uuid="72857a8c-8087-4ab0-914a-4b2244ff54d6">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Sales order closing</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>6FB0C38A-35C4-F0F0-05CC-C7480DEBF09D</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="681ebe86-b94a-4dc1-b83d-a39fff45d29b">
+   <name>Cancel</name>
+   <synonym>
     <key>en</key>
-    <value>Sales orders closings</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.SalesOrderClosing.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.SalesOrderClosing.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.SalesOrderClosing.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
-  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="ef95b516-d08e-4697-a9b9-d293a4642fc4">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner term</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
+    <value>70CCD36D-1BCE-22E0-003C-C2688820273A</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="5a982d0f-1a49-4c0c-a075-960b6bd53441">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="e1356cfa-c5df-4fb0-8b70-f9a119137420">
+   <name>CancelReason</name>
+   <synonym>
+    <key>en</key>
+    <value>545A14EB-CF8B-BA55-5452-2A78B979EC96</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CancelReturnReasons</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="306ff20c-19c2-4aed-800c-d1fcb960861f">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="68d06fec-bcd9-47c5-89b2-5ad18bea0a87">
+   <name>Item</name>
+   <synonym>
+    <key>en</key>
+    <value>A38B918A-F30A-E55E-ED9F-FDF8A449D5E9</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="82de5b8e-9a4c-42b2-bbaf-b32aaf41bd0f">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Customer</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="c031fd04-3530-4d23-af2d-7a528618be44">
+   <name>ItemKey</name>
+   <synonym>
+    <key>en</key>
+    <value>02D6F8C7-138E-071C-C3F4-48BA9677AFFF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b156e72f-7492-4cd0-80fa-9fc8669102c8">
-    <name>SalesOrder</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="48c6516a-c5e0-4011-bce5-85d51804da76">
+   <name>Store</name>
+   <synonym>
+    <key>en</key>
+    <value>F30C39CA-7599-B5C2-27D6-672DE8530EBA</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Stores</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.SalesOrderClosing.Attribute.Company</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="f9ac8a75-8d97-4a90-ba8d-981792fd252d">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.SalesTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Ref</name>
-      <field>Document.SalesOrderClosing.StandardAttribute.Ref</field>
-    </choiceParameterLinks>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="b94dc218-d867-4970-bb22-fe48a7c17481">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>6AFA5B38-3766-F807-7D73-36356D0F493B</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="09731346-be5a-4b53-9afc-332c33471ccc">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6a2b9fb1-04e7-4e74-84ce-d2b9bb28b633">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5c9d0346-2703-4de4-a281-28ee119f271b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="aedab131-3823-400c-863e-475932ec4905">
-    <producedTypes>
-      <objectType typeId="6407acb6-5d4b-4300-9730-a6f6001c9bb0" valueTypeId="5fa8328c-9648-4bb1-adff-fb9375a9107c"/>
-      <rowType typeId="5e92a68f-3094-4eda-aef3-64f61f586798" valueTypeId="2f431d58-fcc3-44ec-9530-8bc3c652d847"/>
-    </producedTypes>
-    <name>ItemList</name>
-    <synonym>
-      <key>en</key>
-      <value>Item list</value>
-    </synonym>
-    <attributes uuid="72857a8c-8087-4ab0-914a-4b2244ff54d6">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="681ebe86-b94a-4dc1-b83d-a39fff45d29b">
-      <name>Cancel</name>
-      <synonym>
-        <key>en</key>
-        <value>Cancel</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="e1356cfa-c5df-4fb0-8b70-f9a119137420">
-      <name>CancelReason</name>
-      <synonym>
-        <key>en</key>
-        <value>Cancel reason</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.CancelReturnReasons</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="68d06fec-bcd9-47c5-89b2-5ad18bea0a87">
-      <name>Item</name>
-      <synonym>
-        <key>en</key>
-        <value>Item</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Items</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c031fd04-3530-4d23-af2d-7a528618be44">
-      <name>ItemKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Item key</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ItemKeys</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="48c6516a-c5e0-4011-bce5-85d51804da76">
-      <name>Store</name>
-      <synonym>
-        <key>en</key>
-        <value>Store</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Stores</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.SalesOrderClosing.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b94dc218-d867-4970-bb22-fe48a7c17481">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="316678ee-a362-43c0-b40e-9f36f26a2891">
-      <name>QuantityInBaseUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Stock quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="e72508df-3b86-4c65-8e3e-f5120170e6b9">
-      <name>Unit</name>
-      <synonym>
-        <key>en</key>
-        <value>Unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Item</name>
-        <changeMode>DontChange</changeMode>
-        <field>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.Item</field>
-      </choiceParameterLinks>
-      <createOnInput>DontUse</createOnInput>
-    </attributes>
-    <attributes uuid="b9afba68-21e8-4aff-993f-ac3e51ab04d2">
-      <name>DeliveryDate</name>
-      <synonym>
-        <key>en</key>
-        <value>Delivery date</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f7785bf0-63bd-491c-bca2-ec7f9b4844d1">
-      <name>ProcurementMethod</name>
-      <synonym>
-        <key>en</key>
-        <value>Procurement method</value>
-      </synonym>
-      <type>
-        <types>EnumRef.ProcurementMethods</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7c12286f-89f1-45fc-83d4-3d111db0ff0c">
-      <name>SalesOrderKey</name>
-      <synonym>
-        <key>en</key>
-        <value>Sales order key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="1f2228dc-3ad1-4980-9d06-811ab25207d2">
-      <name>SalesPerson</name>
-      <synonym>
-        <key>en</key>
-        <value>Sales person</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b0d26aaa-6830-49df-8138-94e2fbd6838b">
-      <name>IsService</name>
-      <synonym>
-        <key>en</key>
-        <value>Is service</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0b1db056-6772-42d9-9e5f-af94b37aa8f0">
-      <name>QuantityIsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="25914e7d-abac-493a-ba1a-8ff7170dff98">
-      <name>Project</name>
-      <synonym>
-        <key>en</key>
-        <value>Project</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Projects</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="4751f90b-9a6c-4d09-9161-4259dec3d393">
-    <producedTypes>
-      <objectType typeId="d8ad0a23-ea7f-462a-a2e4-3fc5e7e54505" valueTypeId="16870976-dae9-4cfa-9297-31389003692b"/>
-      <rowType typeId="0ed756de-7487-4162-90f1-1d739d45fcb4" valueTypeId="33ba5013-1641-4a7f-9ee8-23af6c2a62ab"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="97f6517b-4a82-443a-a249-bc32f55a458c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="ecd6e01b-30e5-4959-95c0-141d23deee39">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <templates uuid="b1dac9a0-84a5-4aee-b121-ac5752f96505">
-    <name>SalesOrderClosingPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales order closing</value>
-    </synonym>
-  </templates>
-  <commands uuid="a8f970bd-1d98-4d02-a232-68d677103235">
-    <name>Generate</name>
-    <synonym>
-      <key>en</key>
-      <value>Close order</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.SalesOrder</types>
-    </commandParameterType>
-    <modifiesData>true</modifiesData>
-    <representation>Auto</representation>
-  </commands>
-  <commands uuid="6766872f-6cc0-4eec-88ce-cfe01ff75c3f">
-    <name>SalesOrderClosingPrint</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales order closing</value>
-    </synonym>
-    <group>CommandGroup.Print</group>
-    <commandParameterType>
-      <types>DocumentRef.SalesOrderClosing</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <attributes uuid="316678ee-a362-43c0-b40e-9f36f26a2891">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>en</key>
+    <value>E9D803FA-E16F-2AFD-D65E-E87EE54105F2</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e72508df-3b86-4c65-8e3e-f5120170e6b9">
+   <name>Unit</name>
+   <synonym>
+    <key>en</key>
+    <value>B26AC557-E0A8-E1A3-3498-8769F8206A57</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Document.SalesOrderClosing.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <createOnInput>DontUse</createOnInput>
+  </attributes>
+  <attributes uuid="b9afba68-21e8-4aff-993f-ac3e51ab04d2">
+   <name>DeliveryDate</name>
+   <synonym>
+    <key>en</key>
+    <value>731369AD-A6CF-8008-8A36-6186858688DB</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f7785bf0-63bd-491c-bca2-ec7f9b4844d1">
+   <name>ProcurementMethod</name>
+   <synonym>
+    <key>en</key>
+    <value>062260D2-2BEB-0B9F-F28B-B84A39CD22AF</value>
+   </synonym>
+   <type>
+    <types>EnumRef.ProcurementMethods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7c12286f-89f1-45fc-83d4-3d111db0ff0c">
+   <name>SalesOrderKey</name>
+   <synonym>
+    <key>en</key>
+    <value>245D2C33-5274-5ED3-32D3-308E6C4E1418</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1f2228dc-3ad1-4980-9d06-811ab25207d2">
+   <name>SalesPerson</name>
+   <synonym>
+    <key>en</key>
+    <value>E59466F9-91EA-7939-98A6-6E745E4C28CF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b0d26aaa-6830-49df-8138-94e2fbd6838b">
+   <name>IsService</name>
+   <synonym>
+    <key>en</key>
+    <value>786D3426-FB89-0CB3-3B87-7486FC3CCBB3</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0b1db056-6772-42d9-9e5f-af94b37aa8f0">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>93A5B4C2-4CCA-E518-8D32-27B11963BC64</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="25914e7d-abac-493a-ba1a-8ff7170dff98">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>FD6560F7-D05F-CBA7-7765-59F830C57A5E</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="4751f90b-9a6c-4d09-9161-4259dec3d393">
+  <producedTypes>
+   <objectType typeId="d8ad0a23-ea7f-462a-a2e4-3fc5e7e54505" valueTypeId="16870976-dae9-4cfa-9297-31389003692b"/>
+   <rowType typeId="0ed756de-7487-4162-90f1-1d739d45fcb4" valueTypeId="33ba5013-1641-4a7f-9ee8-23af6c2a62ab"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>72FE6FAE-3604-A5DB-B0C9-9F718AA5AE8B</value>
+  </synonym>
+  <attributes uuid="97f6517b-4a82-443a-a249-bc32f55a458c">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>92D8715E-3E3B-1C34-4923-35E6E5D1A26C</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="ecd6e01b-30e5-4959-95c0-141d23deee39">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>DE181A78-CB1B-2621-1F29-97425A155D89</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <templates uuid="b1dac9a0-84a5-4aee-b121-ac5752f96505">
+  <name>SalesOrderClosingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>4ED0966D-9CB7-75F6-6809-94555B07DBF3</value>
+  </synonym>
+ </templates>
+ <commands uuid="a8f970bd-1d98-4d02-a232-68d677103235">
+  <name>Generate</name>
+  <synonym>
+   <key>en</key>
+   <value>E0FE2401-DD31-5217-7EB3-33967EC5881D</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesOrder</types>
+  </commandParameterType>
+  <modifiesData>true</modifiesData>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="6766872f-6cc0-4eec-88ce-cfe01ff75c3f">
+  <name>SalesOrderClosingPrint</name>
+  <synonym>
+   <key>en</key>
+   <value>62C2C85D-C0AB-0C11-1EBB-BAC9FB8B14A8</value>
+  </synonym>
+  <group>CommandGroup.Print</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesOrderClosing</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b2764b8e-365c-49cd-8c63-7b8a86c2c51a">
-  <name>CommonAttributes</name>
-  <synonym>
-    <key>en</key>
-    <value>Common attributes</value>
-  </synonym>
+ <name>CommonAttributes</name>
+ <synonym>
+  <key>en</key>
+  <value>CBB8499D-69EE-4C65-53C0-075E1C2BDDF8</value>
+ </synonym>
 </mdclass:CommonPicture>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0fb6c35-214d-4713-96fa-4ecedbd5c7b4">
-  <name>BeforeWrite_ObjectAccessDocument</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write object access document</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.ObjectAccessFullAccess.BeforeWrite_ObjectAccessDocument</handler>
+ <name>BeforeWrite_ObjectAccessDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>E256C242-6A17-D5B3-33D8-8CCF5B29CE35</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.ObjectAccessFullAccess.BeforeWrite_ObjectAccessDocument</handler>
 </mdclass:EventSubscription>

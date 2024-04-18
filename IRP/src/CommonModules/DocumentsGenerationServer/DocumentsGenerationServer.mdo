@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ff1ee353-a5ed-4a31-baad-6e84909914a9">
-  <name>DocumentsGenerationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Documents generation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocumentsGenerationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>CA4769C0-2C9C-88C6-6186-65027A551089</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

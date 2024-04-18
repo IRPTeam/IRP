@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1d20a966-2e28-4ebd-91e2-8f81432721e6">
-  <name>CheckDataPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Check data privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>CheckDataPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>EB9DCFEC-36BA-8BC8-8C6B-B13942EA451C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

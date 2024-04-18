@@ -1,126 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="888fa6a9-8bbf-46f7-b64e-d58e42853797">
-  <producedTypes>
-    <objectType typeId="9e640bc7-2f0e-4ef6-b1ce-7716185b35f5" valueTypeId="96f0300b-6816-4ec0-95b7-c0c13b6cc66f"/>
-    <refType typeId="d5bdc015-19de-4655-948c-a83c4d6a592b" valueTypeId="c90428e5-a140-419b-878b-4e47c3a0ccff"/>
-    <selectionType typeId="5a4ee654-73a3-4ec7-b451-11301dacd780" valueTypeId="853f8ca6-66a8-484b-b1fb-4fc6a263e9ba"/>
-    <listType typeId="7aa062f1-dc43-40c9-b434-2da86b26cedd" valueTypeId="15aff895-b96c-4e59-b308-b9427a1917e0"/>
-    <managerType typeId="afeb6332-61dd-46c3-a42d-8d1d08e7256a" valueTypeId="520da957-db1a-4bc7-b269-e8098bd7f8bc"/>
-  </producedTypes>
-  <name>BatchKeys</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="888fa6a9-8bbf-46f7-b64e-d58e42853797">
+ <producedTypes>
+  <objectType typeId="9e640bc7-2f0e-4ef6-b1ce-7716185b35f5" valueTypeId="96f0300b-6816-4ec0-95b7-c0c13b6cc66f"/>
+  <refType typeId="d5bdc015-19de-4655-948c-a83c4d6a592b" valueTypeId="c90428e5-a140-419b-878b-4e47c3a0ccff"/>
+  <selectionType typeId="5a4ee654-73a3-4ec7-b451-11301dacd780" valueTypeId="853f8ca6-66a8-484b-b1fb-4fc6a263e9ba"/>
+  <listType typeId="7aa062f1-dc43-40c9-b434-2da86b26cedd" valueTypeId="15aff895-b96c-4e59-b308-b9427a1917e0"/>
+  <managerType typeId="afeb6332-61dd-46c3-a42d-8d1d08e7256a" valueTypeId="520da957-db1a-4bc7-b269-e8098bd7f8bc"/>
+ </producedTypes>
+ <name>BatchKeys</name>
+ <synonym>
+  <key>en</key>
+  <value>F3A24F09-A550-F77A-A783-3123F81C6FEC</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.BatchKeys.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>6E60B5B1-63C6-3FEC-CB15-5E7B26F43762</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.BatchKeys.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.BatchKeys.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.BatchKeys.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="1d5f76c6-28cc-40bd-812e-adacad495e2d">
+  <name>ItemKey</name>
   <synonym>
-    <key>en</key>
-    <value>Batch keys</value>
+   <key>en</key>
+   <value>AD33FC89-509E-9F48-8145-5FE87D927188</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.BatchKeys.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Batch key</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.BatchKeys.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.BatchKeys.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.BatchKeys.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="1d5f76c6-28cc-40bd-812e-adacad495e2d">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c1c39689-93e3-492e-ac7a-5894269395c5">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="cd11fb78-7476-4167-af1c-36861c1f8c85">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="78569f5b-449e-44e1-a554-2716838bc390">
-    <name>SourceOfOrigin</name>
-    <synonym>
-      <key>en</key>
-      <value>Source of origin</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SourceOfOrigins</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="3052b13a-65a5-40b0-ab88-0f1cf9096f2f">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="06a775b7-5836-46a4-b378-332c646421be">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="be279b6a-b800-48e0-97ab-e3fb0a846004">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c1c39689-93e3-492e-ac7a-5894269395c5">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>BC0394D8-3558-DCA5-5094-42DEA38C54D4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="cd11fb78-7476-4167-af1c-36861c1f8c85">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>F5FCD03F-118F-71D8-8D83-39B1ADBBA21E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="78569f5b-449e-44e1-a554-2716838bc390">
+  <name>SourceOfOrigin</name>
+  <synonym>
+   <key>en</key>
+   <value>CFB9D82B-54BA-8A91-1D4B-B43856784ACF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SourceOfOrigins</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="3052b13a-65a5-40b0-ab88-0f1cf9096f2f">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>0DD301AC-D8F8-23F7-7DBE-E1CD8683A71F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="06a775b7-5836-46a4-b378-332c646421be">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>427E0DCF-0A87-AADF-F4C0-06031521D1A1</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="be279b6a-b800-48e0-97ab-e3fb0a846004">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>BDDF9CC4-375C-C23B-BB77-797079C8F72A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

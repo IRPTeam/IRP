@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d141f56c-ef38-4323-a1e3-63733623f6d6">
-  <name>Document_DepreciationCalculation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Depreciation calculation&quot;</value>
-  </synonym>
+ <name>Document_DepreciationCalculation</name>
+ <synonym>
+  <key>en</key>
+  <value>35164168-D69E-BBD0-0699-9809AD6C04EB</value>
+ </synonym>
 </mdclass:Role>

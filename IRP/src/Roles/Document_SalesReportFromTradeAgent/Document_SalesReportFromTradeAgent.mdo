@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7317c744-3e9f-4b00-a039-298dee2a8eb6">
-  <name>Document_SalesReportFromTradeAgent</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Sales report from trade agent&quot;</value>
-  </synonym>
+ <name>Document_SalesReportFromTradeAgent</name>
+ <synonym>
+  <key>en</key>
+  <value>58A63504-32A9-A82E-E1BC-C3E70B270F71____</value>
+ </synonym>
 </mdclass:Role>

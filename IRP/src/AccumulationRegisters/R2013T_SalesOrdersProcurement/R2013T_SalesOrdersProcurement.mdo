@@ -1,272 +1,272 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="abc147ee-7882-46dd-9699-4d834d25011c">
-  <producedTypes>
-    <selectionType typeId="53d1fd20-06cb-4473-aec5-bf119b1524ba" valueTypeId="19b3af45-53c0-462e-8fc7-aa6a26b5d702"/>
-    <listType typeId="61206742-1cda-4ff5-b031-43d2be79a12e" valueTypeId="4c7cbc3e-fa95-4207-92e2-2af411747f87"/>
-    <managerType typeId="5e024f85-b499-47b3-bc01-20c0870d293e" valueTypeId="bfb8fbda-bbc0-4a6f-8ebe-bb53da458528"/>
-    <recordSetType typeId="a39024df-dfd8-4271-a85d-24ff12014ecc" valueTypeId="779bff86-dc02-407c-968a-5f4b1ba23a55"/>
-    <recordKeyType typeId="386c2f92-c53f-4151-8e51-d274553b4ece" valueTypeId="34fb9635-e7f2-42cb-bd8c-7134ad124459"/>
-    <recordType typeId="f81e94d8-14f7-4f63-9383-b279f93f3cd8" valueTypeId="10cb53cf-38a2-48c9-b487-769a4a951c29"/>
-  </producedTypes>
-  <name>R2013T_SalesOrdersProcurement</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="abc147ee-7882-46dd-9699-4d834d25011c">
+ <producedTypes>
+  <selectionType typeId="53d1fd20-06cb-4473-aec5-bf119b1524ba" valueTypeId="19b3af45-53c0-462e-8fc7-aa6a26b5d702"/>
+  <listType typeId="61206742-1cda-4ff5-b031-43d2be79a12e" valueTypeId="4c7cbc3e-fa95-4207-92e2-2af411747f87"/>
+  <managerType typeId="5e024f85-b499-47b3-bc01-20c0870d293e" valueTypeId="bfb8fbda-bbc0-4a6f-8ebe-bb53da458528"/>
+  <recordSetType typeId="a39024df-dfd8-4271-a85d-24ff12014ecc" valueTypeId="779bff86-dc02-407c-968a-5f4b1ba23a55"/>
+  <recordKeyType typeId="386c2f92-c53f-4151-8e51-d274553b4ece" valueTypeId="34fb9635-e7f2-42cb-bd8c-7134ad124459"/>
+  <recordType typeId="f81e94d8-14f7-4f63-9383-b279f93f3cd8" valueTypeId="10cb53cf-38a2-48c9-b487-769a4a951c29"/>
+ </producedTypes>
+ <name>R2013T_SalesOrdersProcurement</name>
+ <synonym>
+  <key>en</key>
+  <value>A90616AF-734D-5D3B-B105-5EFF935C5FC0</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="43e70d62-91ef-4a49-a60b-c3fa9728b17f">
+  <name>OrderedQuantity</name>
   <synonym>
-    <key>en</key>
-    <value>R2013 Procurement of sales orders</value>
+   <key>en</key>
+   <value>41CCC7D5-1266-A9AD-D7CA-A6BAB10CDD2F</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="43e70d62-91ef-4a49-a60b-c3fa9728b17f">
-    <name>OrderedQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Ordered quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="f275df05-567c-47e8-af9e-2f28def46b6d">
-    <name>ReOrderedQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Re ordered quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="316fc39a-90d4-4189-8a3a-deaf68a681f4">
-    <name>PurchaseQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="77ffb6c7-ea38-48ff-be82-ea85f0b730e6">
-    <name>ReceiptQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="d62c41fc-0f37-41af-b585-7c952a10e308">
-    <name>ShippedQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipped quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="51034bd2-51a2-4205-8019-2a46f6ce833f">
-    <name>SalesQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="21b98157-0619-4260-b0a5-cdfc6c6458b6">
-    <name>OrderedNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Ordered net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="7145f757-67c7-41a9-a881-e26a065bc24d">
-    <name>OrderedTotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Ordered total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="2628ce02-9128-4ce8-a906-cc27eba15ddf">
-    <name>ReOrderedNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Re ordered net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="716dd383-255c-416c-9e50-2cbec8084589">
-    <name>ReOrderedTotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Re ordered total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="da1d22c6-fd7a-4412-9285-f31abf452468">
-    <name>PurchaseNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="db90e10a-40c6-4dc0-b71c-9635a12fed18">
-    <name>PurchaseTotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="35005212-af4f-48f9-88cb-217f0f4f6af6">
-    <name>SalesNetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="82b0c866-72ca-4960-9bcd-a71d09c0434d">
-    <name>SalesTotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales total amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="9aca8103-0101-4934-adf6-7e3e3717d107">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="cf3450af-4967-48f1-896d-710cc7d3077b">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="0b0531d6-6e3b-4c3e-b270-2805b81c4c31">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="9269171b-3c46-4b69-b2c5-4ea2316c4b6c">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="7810dc60-3019-4c27-970c-6c814b8631c1">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="f275df05-567c-47e8-af9e-2f28def46b6d">
+  <name>ReOrderedQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>3ADD3D0C-B37D-5322-223A-AB164BAD6282</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="316fc39a-90d4-4189-8a3a-deaf68a681f4">
+  <name>PurchaseQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>7A61F58B-4A91-F7FB-B2EE-E2FE0393DE24</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="77ffb6c7-ea38-48ff-be82-ea85f0b730e6">
+  <name>ReceiptQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>09EB7275-D9F2-0BFF-FB94-46C181250A8D</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="d62c41fc-0f37-41af-b585-7c952a10e308">
+  <name>ShippedQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>DDFF94A4-A286-9E29-9F15-5AEF05FC78A9</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="51034bd2-51a2-4205-8019-2a46f6ce833f">
+  <name>SalesQuantity</name>
+  <synonym>
+   <key>en</key>
+   <value>9781FC00-2652-B8BC-C481-14E59FD464A2</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="21b98157-0619-4260-b0a5-cdfc6c6458b6">
+  <name>OrderedNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>B9398374-A822-2A90-0B09-97A5495FD11E</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="7145f757-67c7-41a9-a881-e26a065bc24d">
+  <name>OrderedTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>8039BE19-2E75-265B-B651-1F9D75F36458</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="2628ce02-9128-4ce8-a906-cc27eba15ddf">
+  <name>ReOrderedNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>5B6BAE0F-B707-76ED-DA8E-EA2F5FA8767E</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="716dd383-255c-416c-9e50-2cbec8084589">
+  <name>ReOrderedTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>6AECB763-C07D-C588-81FC-C95986ACFE3D</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="da1d22c6-fd7a-4412-9285-f31abf452468">
+  <name>PurchaseNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>E84063D9-7C7E-F05A-A006-6051344DD7FC</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="db90e10a-40c6-4dc0-b71c-9635a12fed18">
+  <name>PurchaseTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>41E0E821-8E59-6A42-2DC6-6FCBD16AA7FF</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="35005212-af4f-48f9-88cb-217f0f4f6af6">
+  <name>SalesNetAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>466DD22A-714B-AA02-2E9E-E15F892C4CE4</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="82b0c866-72ca-4960-9bcd-a71d09c0434d">
+  <name>SalesTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>23CD49C4-AD8A-542F-F543-388A310E8E31</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="9aca8103-0101-4934-adf6-7e3e3717d107">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>12D67BF9-40B2-8135-5779-916323FB1CF3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="cf3450af-4967-48f1-896d-710cc7d3077b">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>6B935FE8-7508-27B0-0F23-3EFE4B9501DF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="0b0531d6-6e3b-4c3e-b270-2805b81c4c31">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>8B147925-56C1-8881-105F-F0A01D6ECA8E</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="9269171b-3c46-4b69-b2c5-4ea2316c4b6c">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>C0B03A07-7A8D-344D-D77F-FA45492F2F81</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7810dc60-3019-4c27-970c-6c814b8631c1">
+  <name>RowKey</name>
+  <synonym>
+   <key>en</key>
+   <value>9C4F2267-AE08-9EFB-B173-32F7F0AEEBF9</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

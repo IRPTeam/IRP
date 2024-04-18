@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="77719307-c76f-46af-a9a2-1398142e0db3">
-  <producedTypes>
-    <refType typeId="a4088f8b-130f-4232-9514-4f680f7abf85" valueTypeId="a7333dc3-d00b-48cc-ba0d-50731577b4ac"/>
-    <listType typeId="a4b2ca4c-1ee5-4e1b-907c-c6e5f7df375d" valueTypeId="439a2246-d3db-4150-b25a-0306b9e51e96"/>
-    <managerType typeId="86b79281-6d8d-4072-bae0-8a0c07c5432c" valueTypeId="a120f18b-8a78-4eb3-8f2f-c78adf1544f4"/>
-  </producedTypes>
-  <name>PriceListTypes</name>
+ <producedTypes>
+  <refType typeId="a4088f8b-130f-4232-9514-4f680f7abf85" valueTypeId="a7333dc3-d00b-48cc-ba0d-50731577b4ac"/>
+  <listType typeId="a4b2ca4c-1ee5-4e1b-907c-c6e5f7df375d" valueTypeId="439a2246-d3db-4150-b25a-0306b9e51e96"/>
+  <managerType typeId="86b79281-6d8d-4072-bae0-8a0c07c5432c" valueTypeId="a120f18b-8a78-4eb3-8f2f-c78adf1544f4"/>
+ </producedTypes>
+ <name>PriceListTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>5C7184F1-817F-3C36-6529-9F5B08503353</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="dc6d4a77-bb91-480d-819a-5fbc54129be0">
+  <name>PriceByItems</name>
   <synonym>
-    <key>en</key>
-    <value>Price list types</value>
+   <key>en</key>
+   <value>B15B2C6C-642D-228C-C643-369461A984ED</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="dc6d4a77-bb91-480d-819a-5fbc54129be0">
-    <name>PriceByItems</name>
-    <synonym>
-      <key>en</key>
-      <value>Price by items</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="fba7ff04-313c-4d9b-b252-1306e3282285">
-    <name>PriceByItemKeys</name>
-    <synonym>
-      <key>en</key>
-      <value>Price by item keys</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0e4ed812-8c11-443a-8575-f0b307331163">
-    <name>PriceByProperties</name>
-    <synonym>
-      <key>en</key>
-      <value>Price by properties</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="fba7ff04-313c-4d9b-b252-1306e3282285">
+  <name>PriceByItemKeys</name>
+  <synonym>
+   <key>en</key>
+   <value>32985F53-9B9A-50AB-B198-8C23037FC00D</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="0e4ed812-8c11-443a-8575-f0b307331163">
+  <name>PriceByProperties</name>
+  <synonym>
+   <key>en</key>
+   <value>2E57F16F-B911-68DF-F4CD-D88891B6C2A4</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

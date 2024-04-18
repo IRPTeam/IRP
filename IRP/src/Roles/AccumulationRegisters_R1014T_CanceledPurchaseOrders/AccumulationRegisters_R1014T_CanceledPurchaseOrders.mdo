@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="311c4d50-3086-4047-b4e4-321bfdac2b9b">
-  <name>AccumulationRegisters_R1014T_CanceledPurchaseOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R1014T CanceledPurchaseOrders</value>
-  </synonym>
+ <name>AccumulationRegisters_R1014T_CanceledPurchaseOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>6D5A5D50-7A79-F2E8-89CF-FB77AF5B8265_______________</value>
+ </synonym>
 </mdclass:Role>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4828159c-de8f-4415-a985-717b10d48128">
-  <name>UseAging</name>
-  <synonym>
-    <key>en</key>
-    <value>Use aging</value>
-  </synonym>
-  <location>Constant.UseAging</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>AccumulationRegister.R5012B_VendorsAging.Attribute.AgingClosing</content>
-  <content>AccumulationRegister.R5011B_CustomersAging.Attribute.AgingClosing</content>
-  <content>InformationRegister.T2013S_OffsetOfAging</content>
-  <content>Document.PurchaseInvoice.TabularSection.PaymentTerms</content>
-  <content>Document.PurchaseOrder.TabularSection.PaymentTerms</content>
-  <content>Document.OpeningEntry.TabularSection.CustomersPaymentTerms</content>
-  <content>Catalog.Agreements.Attribute.PaymentTerm</content>
-  <content>Document.OpeningEntry.TabularSection.VendorsPaymentTerms</content>
-  <content>Document.SalesOrder.TabularSection.PaymentTerms</content>
-  <content>Document.SalesInvoice.TabularSection.PaymentTerms</content>
+ <name>UseAging</name>
+ <synonym>
+  <key>en</key>
+  <value>83E6E10D-94E1-5E9B-B322-25254BAAECAB</value>
+ </synonym>
+ <location>Constant.UseAging</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>AccumulationRegister.R5012B_VendorsAging.Attribute.AgingClosing</content>
+ <content>AccumulationRegister.R5011B_CustomersAging.Attribute.AgingClosing</content>
+ <content>InformationRegister.T2013S_OffsetOfAging</content>
+ <content>Document.PurchaseInvoice.TabularSection.PaymentTerms</content>
+ <content>Document.PurchaseOrder.TabularSection.PaymentTerms</content>
+ <content>Document.OpeningEntry.TabularSection.CustomersPaymentTerms</content>
+ <content>Catalog.Agreements.Attribute.PaymentTerm</content>
+ <content>Document.OpeningEntry.TabularSection.VendorsPaymentTerms</content>
+ <content>Document.SalesOrder.TabularSection.PaymentTerms</content>
+ <content>Document.SalesInvoice.TabularSection.PaymentTerms</content>
 </mdclass:FunctionalOption>

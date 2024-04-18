@@ -121,7 +121,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sales report from trade agent [Number] [Date]</v8:content>
+							<v8:content>17CC6FDA-6346-2657-7666-6554C386B667_________[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -159,7 +159,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>B68388E2-2B57-B072-280A-A5AA3FFE42EB</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -183,7 +183,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>CBB5FD9A-1051-3DEE-EE21-1E8B082AF6D8</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -214,7 +214,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>05432A90-0E6E-8FD7-71DC-C1C6224E5ADC</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -225,7 +225,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>BEB9BDA9-D7AE-4EBD-D1D3-3B1685F58A8B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -236,7 +236,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>E653DA0F-6ADB-6371-1B16-688B4EF04526</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -247,7 +247,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>BD3F59A3-882F-B127-750E-E6918C493933</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -258,7 +258,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>B4D7C8E8-F594-9C93-3FF6-63F135DE7411</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -269,7 +269,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Price</v8:content>
+							<v8:content>D55C05EC-C377-80AC-CDAB-B7876C1D9ED2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -280,7 +280,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total amount</v8:content>
+							<v8:content>3FBF465B-5C33-313A-A238-8F41EE591E01</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -352,7 +352,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Net amount:</v8:content>
+							<v8:content>600F3200-8518-204C-C743-322E4E4B86CA</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -400,7 +400,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Total amount:</v8:content>
+							<v8:content>7655301B-EA0E-91A1-171E-E8C57D23227F</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -423,7 +423,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency:</v8:content>
+							<v8:content>415DBAA7-3444-CB10-0D04-4ED4A9186A44</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -452,7 +452,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>11B5EBB9-F6FF-28A7-78E9-981447F6C13E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -746,7 +746,7 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NFD=2</v8:content>
+				<v8:content>77AAB50B-A565-AF2C-C11C-C3460675ABEA</v8:content>
 			</v8:item>
 		</format>
 	</format>
@@ -763,7 +763,7 @@
 		<format>
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>NFD=2</v8:content>
+				<v8:content>77AAB50B-A565-AF2C-C11C-C3460675ABEA</v8:content>
 			</v8:item>
 		</format>
 	</format>

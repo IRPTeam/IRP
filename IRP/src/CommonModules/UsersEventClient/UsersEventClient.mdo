@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83321f1b-59a6-4733-aae3-a115c50c3946">
-  <name>UsersEventClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Users event client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>UsersEventClient</name>
+ <synonym>
+  <key>en</key>
+  <value>7D3D5C76-BAE3-1926-6D2C-CA08F66600E3</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

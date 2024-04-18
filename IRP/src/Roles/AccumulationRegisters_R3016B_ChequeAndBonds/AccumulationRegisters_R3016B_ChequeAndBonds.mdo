@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="316fd275-7b36-40d9-9e51-a43aa4bad33b">
-  <name>AccumulationRegisters_R3016B_ChequeAndBonds</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3016B ChequeAndBonds</value>
-  </synonym>
+ <name>AccumulationRegisters_R3016B_ChequeAndBonds</name>
+ <synonym>
+  <key>en</key>
+  <value>3E9D06E0-DAD1-D6DB-B6BE-E8537459B4BB_______</value>
+ </synonym>
 </mdclass:Role>

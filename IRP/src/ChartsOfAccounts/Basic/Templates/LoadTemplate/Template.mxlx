@@ -190,7 +190,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>LedgerType</v8:content>
+							<v8:content>1F5610C6-8CDE-3837-72A4-424740131295</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -201,7 +201,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>ForbidRecord</v8:content>
+							<v8:content>A44159CB-66D2-2E1D-D5CD-D61FE54BF659</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -212,7 +212,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>OwnerNo</v8:content>
+							<v8:content>195B03A0-CF7C-BCD8-84F0-0F6E57AD1620</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -223,7 +223,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>AccountNo</v8:content>
+							<v8:content>AE3F8BE1-A644-C16B-BE04-47676F50998C</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -234,7 +234,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Description</v8:content>
+							<v8:content>49778CED-D658-75BF-F1F8-808B9BF1D18E</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -245,7 +245,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency</v8:content>
+							<v8:content>6C4DDFFD-F1CF-9C7C-C72F-F3047B494E80</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -256,7 +256,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>A/P</v8:content>
+							<v8:content>EF8A6256-11BC-E36B-BB1E-EA7B882A502F</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -267,7 +267,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>354B141F-8154-170C-CADD-D66A78F9B9CA</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -278,7 +278,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>OffBalance</v8:content>
+							<v8:content>CE7888F9-BE74-12A6-65DC-CA74B23E0875</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -289,7 +289,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub1Type</v8:content>
+							<v8:content>967A31FF-EAF6-5689-9CA2-2C9765D732CF</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -300,7 +300,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub1Turnover</v8:content>
+							<v8:content>AC8D78BD-083E-295A-A6FE-E8FB9DC8B9C7</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -311,7 +311,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub1Quantity</v8:content>
+							<v8:content>25109D7E-7B00-55B0-037B-BE0397C4101D</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -322,7 +322,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub1Currency</v8:content>
+							<v8:content>DF81DF58-8862-D36E-EFE7-7E31C42E21CB</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -333,7 +333,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub1Amount</v8:content>
+							<v8:content>4F2B0A29-7BE4-2003-33F9-9B05D29E7BC1</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -344,7 +344,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub2Type</v8:content>
+							<v8:content>7B2EB87B-49F8-5F58-89E5-510942E35E43</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -355,7 +355,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub2Turnover</v8:content>
+							<v8:content>4BBC2F1C-DE86-F70E-EB09-926D852FAED4</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -366,7 +366,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub2Quantity</v8:content>
+							<v8:content>E2328ADC-4037-6C0B-B428-800BACF7C851</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -377,7 +377,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub2Currency</v8:content>
+							<v8:content>7922445E-E7BB-D07F-F32D-D5C72BD11CF4</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -388,7 +388,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub2Amount</v8:content>
+							<v8:content>9C95389E-C3D7-AC65-59D6-6137BEDA203B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -399,7 +399,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub3Type</v8:content>
+							<v8:content>B4DE2C42-53A3-ABBB-B743-3036EFDAECC3</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -410,7 +410,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub3Turnover</v8:content>
+							<v8:content>C74EF640-304D-3905-54E6-690E9C6B9F37</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -421,7 +421,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub3Quantity</v8:content>
+							<v8:content>30BACB2D-4CA3-162A-A169-9034060E1914</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -432,7 +432,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub3Currency</v8:content>
+							<v8:content>112AF6DA-02A8-29A4-47BD-D3A8145DCB71</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -443,7 +443,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Sub3Amount</v8:content>
+							<v8:content>6F5818D8-F8CC-B2D0-0B80-06DA00F76B90</v8:content>
 						</v8:item>
 					</tl>
 				</c>

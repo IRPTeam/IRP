@@ -1,125 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="36e78c88-c6c6-441a-bd73-ec35cee38a52">
-  <producedTypes>
-    <selectionType typeId="fe81cd8b-7749-4d33-a341-76e95b1fbcd7" valueTypeId="e137c590-0d6e-4571-aed1-fe66d3816423"/>
-    <listType typeId="92ef5316-8ec2-4a8e-9bd9-8d8489b54f13" valueTypeId="03b9c173-e5cd-4044-a419-e00105065b87"/>
-    <managerType typeId="079bfc0c-1873-473b-9aa6-a6b6a440a40e" valueTypeId="19652686-fbec-445c-a856-08bab795a98e"/>
-    <recordSetType typeId="4978243a-db22-482b-948a-a97c81965232" valueTypeId="92e3e996-3758-4927-9b9b-9fbce8329b04"/>
-    <recordKeyType typeId="6979b401-2f3a-4f52-8f73-820e67ca0d49" valueTypeId="46dd6778-1720-42c4-bc5f-0689c7b37ca1"/>
-    <recordType typeId="a993ccc1-c152-4d84-9387-65c42006f91a" valueTypeId="f69f5d4d-09c5-4da8-8dc5-155f5cbd59c3"/>
-    <recordManagerType typeId="1875ec5e-9575-4c0b-8304-53f4782c5215" valueTypeId="7d4fca52-0cfb-4891-aecd-f40eef26a359"/>
-  </producedTypes>
-  <name>T7051S_ProductionDurationDetails</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="36e78c88-c6c6-441a-bd73-ec35cee38a52">
+ <producedTypes>
+  <selectionType typeId="fe81cd8b-7749-4d33-a341-76e95b1fbcd7" valueTypeId="e137c590-0d6e-4571-aed1-fe66d3816423"/>
+  <listType typeId="92ef5316-8ec2-4a8e-9bd9-8d8489b54f13" valueTypeId="03b9c173-e5cd-4044-a419-e00105065b87"/>
+  <managerType typeId="079bfc0c-1873-473b-9aa6-a6b6a440a40e" valueTypeId="19652686-fbec-445c-a856-08bab795a98e"/>
+  <recordSetType typeId="4978243a-db22-482b-948a-a97c81965232" valueTypeId="92e3e996-3758-4927-9b9b-9fbce8329b04"/>
+  <recordKeyType typeId="6979b401-2f3a-4f52-8f73-820e67ca0d49" valueTypeId="46dd6778-1720-42c4-bc5f-0689c7b37ca1"/>
+  <recordType typeId="a993ccc1-c152-4d84-9387-65c42006f91a" valueTypeId="f69f5d4d-09c5-4da8-8dc5-155f5cbd59c3"/>
+  <recordManagerType typeId="1875ec5e-9575-4c0b-8304-53f4782c5215" valueTypeId="7d4fca52-0cfb-4891-aecd-f40eef26a359"/>
+ </producedTypes>
+ <name>T7051S_ProductionDurationDetails</name>
+ <synonym>
+  <key>en</key>
+  <value>6F7DC31E-9BEF-A4C2-2585-5D30016D4BA7</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="f4c0c32d-ad26-4780-ae33-af68c4c45c0e">
+  <name>Duration</name>
   <synonym>
-    <key>en</key>
-    <value>T7051 Production duration details</value>
+   <key>en</key>
+   <value>1AE8AEC0-9F08-A8CD-DDAE-EF5871D7CBD3</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="f4c0c32d-ad26-4780-ae33-af68c4c45c0e">
-    <name>Duration</name>
-    <synonym>
-      <key>en</key>
-      <value>Duration</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="a49d2cf4-4f16-423b-805d-17cd7f27198d">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="b168c583-ef43-429f-9524-ec5f9a37808e">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Workshop</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="b6a527a5-5f61-41c1-91fc-7acee261e038">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="01251559-ba0e-4fae-8162-9d7c23321fc2">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.Production</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="64050a1e-8c5b-4eee-baf7-c34391b9a34c">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+    <scale>2</scale>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="a49d2cf4-4f16-423b-805d-17cd7f27198d">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>56932C96-8D96-A5CA-A2B0-079C17E69DDA</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="b168c583-ef43-429f-9524-ec5f9a37808e">
+  <name>BusinessUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>4E78FAA0-5B2E-FFDD-D743-388FFF1FEEF2</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Workshop</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="b6a527a5-5f61-41c1-91fc-7acee261e038">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>803A704C-02CD-39A5-59D7-7BBDDD34A313</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="01251559-ba0e-4fae-8162-9d7c23321fc2">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>461767F5-0617-38FC-C164-4C10BE3D915A</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.Production</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="64050a1e-8c5b-4eee-baf7-c34391b9a34c">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>582C1368-6050-229E-EB32-215749487C91</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

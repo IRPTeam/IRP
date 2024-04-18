@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1dc2a9ca-2fd0-4317-ae25-de8b9f2a5e16">
-  <name>DocProductionCostsAllocationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc production costs allocation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocProductionCostsAllocationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>AAE0796D-36D4-5352-2AA0-0FC364AE3F6F__</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

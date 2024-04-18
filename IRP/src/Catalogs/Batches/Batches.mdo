@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dfe86f7-6d6b-4c26-9d54-498d7349ca7c">
-  <producedTypes>
-    <objectType typeId="27069a75-74eb-46e6-a1a5-320390475f19" valueTypeId="c7410545-5e7c-4f54-807d-93f75aec352e"/>
-    <refType typeId="9bc87e6a-412b-4cfe-b38d-d61b049aa51b" valueTypeId="a6ba6d1b-8c6b-4109-8c6c-e89e52cd0d81"/>
-    <selectionType typeId="1cabf350-a54f-47c8-90b0-684659a5e150" valueTypeId="67b44882-1b19-4de2-b2f7-dad3aec70538"/>
-    <listType typeId="6e9398ae-ff91-4423-b842-88fd3619105a" valueTypeId="d63826fa-0724-4c78-af1d-810725bc804d"/>
-    <managerType typeId="7e87d51b-77ff-4add-b281-5486f54abbe9" valueTypeId="b76caba2-754d-49bf-a051-9cc25585d764"/>
-  </producedTypes>
-  <name>Batches</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3dfe86f7-6d6b-4c26-9d54-498d7349ca7c">
+ <producedTypes>
+  <objectType typeId="27069a75-74eb-46e6-a1a5-320390475f19" valueTypeId="c7410545-5e7c-4f54-807d-93f75aec352e"/>
+  <refType typeId="9bc87e6a-412b-4cfe-b38d-d61b049aa51b" valueTypeId="a6ba6d1b-8c6b-4109-8c6c-e89e52cd0d81"/>
+  <selectionType typeId="1cabf350-a54f-47c8-90b0-684659a5e150" valueTypeId="67b44882-1b19-4de2-b2f7-dad3aec70538"/>
+  <listType typeId="6e9398ae-ff91-4423-b842-88fd3619105a" valueTypeId="d63826fa-0724-4c78-af1d-810725bc804d"/>
+  <managerType typeId="7e87d51b-77ff-4add-b281-5486f54abbe9" valueTypeId="b76caba2-754d-49bf-a051-9cc25585d764"/>
+ </producedTypes>
+ <name>Batches</name>
+ <synonym>
+  <key>en</key>
+  <value>94E83310-ECE3-286D-DD4F-FC1B30F0663B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.Batches.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>3EF8DF4C-443B-3B14-4783-3295AEC0B9F7</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Batches.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Batches.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Batches.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="e69b1270-255d-4a7b-a709-49bc3fbc5a5f">
+  <name>Document</name>
   <synonym>
-    <key>en</key>
-    <value>Batches</value>
+   <key>en</key>
+   <value>10D247AB-040C-69DF-F333-3C912AF1B496</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Batches.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.PurchaseReturn</types>
+   <types>DocumentRef.Unbundling</types>
+   <types>DocumentRef.OpeningEntry</types>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.StockAdjustmentAsSurplus</types>
+   <types>DocumentRef.ModernizationOfFixedAsset</types>
+   <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+   <types>DocumentRef.Bundling</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.Production</types>
+   <types>DocumentRef.ItemStockAdjustment</types>
+   <types>DocumentRef.DecommissioningOfFixedAsset</types>
+   <types>DocumentRef.InventoryTransfer</types>
+   <types>DocumentRef.BatchReallocateIncoming</types>
+   <types>DocumentRef.BatchReallocateOutgoing</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Batch</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Batches.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Batches.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Batches.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="e69b1270-255d-4a7b-a709-49bc3fbc5a5f">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.StockAdjustmentAsSurplus</types>
-      <types>DocumentRef.ModernizationOfFixedAsset</types>
-      <types>DocumentRef.StockAdjustmentAsWriteOff</types>
-      <types>DocumentRef.Bundling</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.Production</types>
-      <types>DocumentRef.ItemStockAdjustment</types>
-      <types>DocumentRef.DecommissioningOfFixedAsset</types>
-      <types>DocumentRef.InventoryTransfer</types>
-      <types>DocumentRef.BatchReallocateIncoming</types>
-      <types>DocumentRef.BatchReallocateOutgoing</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fc0f6502-e295-4a42-b751-5a727659e20a">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="8a3c41ac-a289-48b0-b21d-958db893d795">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="db277a23-04f9-4777-b31f-695b9946fde9">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6b425d54-d506-4bc8-96b8-dd542aa26650">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="338ee97f-11e7-4f38-8812-8ab1182438bc">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fc0f6502-e295-4a42-b751-5a727659e20a">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>3C6DFCB2-2D67-593B-B3B8-806F8E9E6993</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8a3c41ac-a289-48b0-b21d-958db893d795">
+  <name>Date</name>
+  <synonym>
+   <key>en</key>
+   <value>58F93FF0-99D7-54F5-591A-A8D03B3E46E8</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="db277a23-04f9-4777-b31f-695b9946fde9">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>2CC54A31-6F88-0DD9-943A-A3734AEC4F3D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6b425d54-d506-4bc8-96b8-dd542aa26650">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>120F1C52-4BCF-C63C-CE46-64002D372412</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="338ee97f-11e7-4f38-8812-8ab1182438bc">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>87B25FB1-78AF-B545-5E34-4FE116C47F9A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

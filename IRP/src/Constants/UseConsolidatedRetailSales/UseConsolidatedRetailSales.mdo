@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3139d176-02bd-4c1e-b489-3f00ab6ac05b">
-  <producedTypes>
-    <managerType typeId="fb68185c-d789-4f46-bc26-9bf1f51b2b9f" valueTypeId="e0e1750f-20ac-4ecb-b6f1-7aa164f96c55"/>
-    <valueManagerType typeId="7cf22037-e91b-48ca-9bd6-3226c6536d00" valueTypeId="02f022c8-7f77-47a5-97c7-96d5ac6cb28a"/>
-    <valueKeyType typeId="bff39f05-e928-4956-86db-89445f1bee5d" valueTypeId="38acb31b-51a9-418e-865b-79703aa80c00"/>
-  </producedTypes>
-  <name>UseConsolidatedRetailSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Use consolidated retail sales</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3139d176-02bd-4c1e-b489-3f00ab6ac05b">
+ <producedTypes>
+  <managerType typeId="fb68185c-d789-4f46-bc26-9bf1f51b2b9f" valueTypeId="e0e1750f-20ac-4ecb-b6f1-7aa164f96c55"/>
+  <valueManagerType typeId="7cf22037-e91b-48ca-9bd6-3226c6536d00" valueTypeId="02f022c8-7f77-47a5-97c7-96d5ac6cb28a"/>
+  <valueKeyType typeId="bff39f05-e928-4956-86db-89445f1bee5d" valueTypeId="38acb31b-51a9-418e-865b-79703aa80c00"/>
+ </producedTypes>
+ <name>UseConsolidatedRetailSales</name>
+ <synonym>
+  <key>en</key>
+  <value>830C8A8A-BA6F-33F7-7313-3C3D604A73E3</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

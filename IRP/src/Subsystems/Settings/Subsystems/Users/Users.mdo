@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bbd4486f-fe66-4a44-9b45-4dc814f74e54">
-  <name>Users</name>
-  <synonym>
-    <key>en</key>
-    <value>Users</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.AccessProfiles</content>
-  <content>Catalog.AccessGroups</content>
-  <content>Catalog.Users</content>
-  <content>Catalog.UserGroups</content>
-  <content>Catalog.ReportOptions</content>
-  <content>InformationRegister.AuditLockHistory</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>Users</name>
+ <synonym>
+  <key>en</key>
+  <value>D91935BB-AC75-0AEE-E485-515D999DFC96</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.AccessProfiles</content>
+ <content>Catalog.AccessGroups</content>
+ <content>Catalog.Users</content>
+ <content>Catalog.UserGroups</content>
+ <content>Catalog.ReportOptions</content>
+ <content>InformationRegister.AuditLockHistory</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

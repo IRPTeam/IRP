@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="974cdc90-bfca-449f-8cef-7c9d7fda1dbf">
-  <name>DocPhysicalInventoryClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc physical inventory client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocPhysicalInventoryClient</name>
+ <synonym>
+  <key>en</key>
+  <value>C9AF79F6-8937-1860-0267-7A4569B0FA61</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

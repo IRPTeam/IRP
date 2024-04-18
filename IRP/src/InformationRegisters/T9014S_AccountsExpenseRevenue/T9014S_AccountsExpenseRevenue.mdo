@@ -1,109 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="212fc32b-56b4-4f10-9c5a-9e8a829fef33">
-  <producedTypes>
-    <selectionType typeId="9ceaa8c3-f53b-4930-807c-70e5e4ed836d" valueTypeId="15566296-e76b-4eff-9448-f44b84ce3d1a"/>
-    <listType typeId="0dd63b02-7219-4960-b3f4-aeb5dbf4b089" valueTypeId="888eab1e-1f2c-4c04-8787-49063f098da8"/>
-    <managerType typeId="1b749e23-0f3d-412d-a4ae-ed2652e426d9" valueTypeId="c71ff5c0-1a2b-44ec-9e1d-b4e01deebebd"/>
-    <recordSetType typeId="821bbd05-8615-4aa0-9657-b32b67ff9dd5" valueTypeId="79bf5d10-c4f6-4d9e-ab5e-fb8ae027c22f"/>
-    <recordKeyType typeId="ba974b3a-0509-4d2e-8d18-9e47ce2e4997" valueTypeId="a06d728b-b231-4cf1-8cd4-11595f1d639e"/>
-    <recordType typeId="871ccb68-77b7-4385-a977-24f1affb60f8" valueTypeId="d7a063f3-ba1b-40ec-baca-9c6e44ed6507"/>
-    <recordManagerType typeId="d2e7b41a-115c-423e-8e2d-83a0fc3f1a3a" valueTypeId="add7842f-3b2c-4e76-8040-f360a7471a48"/>
-  </producedTypes>
-  <name>T9014S_AccountsExpenseRevenue</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="212fc32b-56b4-4f10-9c5a-9e8a829fef33">
+ <producedTypes>
+  <selectionType typeId="9ceaa8c3-f53b-4930-807c-70e5e4ed836d" valueTypeId="15566296-e76b-4eff-9448-f44b84ce3d1a"/>
+  <listType typeId="0dd63b02-7219-4960-b3f4-aeb5dbf4b089" valueTypeId="888eab1e-1f2c-4c04-8787-49063f098da8"/>
+  <managerType typeId="1b749e23-0f3d-412d-a4ae-ed2652e426d9" valueTypeId="c71ff5c0-1a2b-44ec-9e1d-b4e01deebebd"/>
+  <recordSetType typeId="821bbd05-8615-4aa0-9657-b32b67ff9dd5" valueTypeId="79bf5d10-c4f6-4d9e-ab5e-fb8ae027c22f"/>
+  <recordKeyType typeId="ba974b3a-0509-4d2e-8d18-9e47ce2e4997" valueTypeId="a06d728b-b231-4cf1-8cd4-11595f1d639e"/>
+  <recordType typeId="871ccb68-77b7-4385-a977-24f1affb60f8" valueTypeId="d7a063f3-ba1b-40ec-baca-9c6e44ed6507"/>
+  <recordManagerType typeId="d2e7b41a-115c-423e-8e2d-83a0fc3f1a3a" valueTypeId="add7842f-3b2c-4e76-8040-f360a7471a48"/>
+ </producedTypes>
+ <name>T9014S_AccountsExpenseRevenue</name>
+ <synonym>
+  <key>en</key>
+  <value>C9018772-7321-3A5E-E899-9C8216FEB55F</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9014S_AccountsExpenseRevenue.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>B03877DB-80C4-6F5F-F61E-E3ECE852F569</value>
+ </recordPresentation>
+ <resources uuid="7098c274-62dd-4d32-a6fa-b34f96f33a2a">
+  <name>Account</name>
   <synonym>
-    <key>en</key>
-    <value>Accounts (Expense / Revenue)</value>
+   <key>en</key>
+   <value>09198F18-61DB-9337-75FC-CB2A1BBC0043</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T9014S_AccountsExpenseRevenue.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Accounts (Expense / Revenue)</value>
-  </recordPresentation>
-  <resources uuid="7098c274-62dd-4d32-a6fa-b34f96f33a2a">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="b923400a-6f16-4fe0-a61e-d9ba57fc9002">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="45f6fdd1-6108-41a1-9c2f-d679491bc594">
-    <name>LedgerTypeVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type variant</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypeVariants</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="807be97c-be6b-4a3d-8f4c-d870b20e9ad1">
-    <name>ExpenseRevenue</name>
-    <synonym>
-      <key>en</key>
-      <value>Expense / Revenue</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="513676d2-16f5-42b9-a3cf-f3f4524f051f">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="b923400a-6f16-4fe0-a61e-d9ba57fc9002">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>654F8AF2-53B0-F14C-CCC6-6DEC5670F6F5</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="45f6fdd1-6108-41a1-9c2f-d679491bc594">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>BCB2552D-2BAC-AA52-2EED-DCEAF5F2A538</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="807be97c-be6b-4a3d-8f4c-d870b20e9ad1">
+  <name>ExpenseRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>965F45D8-0358-C7F6-602D-D8F6D862AD2E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="513676d2-16f5-42b9-a3cf-f3f4524f051f">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>35695DEE-2604-4FA7-7B91-1D2039101052</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

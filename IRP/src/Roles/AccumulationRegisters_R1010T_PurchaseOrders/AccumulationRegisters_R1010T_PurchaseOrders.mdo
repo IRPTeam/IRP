@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="63d9054a-128c-430f-8d42-6df6bf830a1d">
-  <name>AccumulationRegisters_R1010T_PurchaseOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R1010T PurchaseOrders</value>
-  </synonym>
+ <name>AccumulationRegisters_R1010T_PurchaseOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>3205BDCA-73D7-9048-8735-5A1E584CA6FF_______</value>
+ </synonym>
 </mdclass:Role>

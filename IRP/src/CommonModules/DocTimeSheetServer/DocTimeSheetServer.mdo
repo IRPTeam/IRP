@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="59c7579b-83d5-4b27-8fcc-9ac233191891">
-  <name>DocTimeSheetServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc time sheet server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocTimeSheetServer</name>
+ <synonym>
+  <key>en</key>
+  <value>6BE3BFB3-7D17-ABB1-1797-72561EA37288</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

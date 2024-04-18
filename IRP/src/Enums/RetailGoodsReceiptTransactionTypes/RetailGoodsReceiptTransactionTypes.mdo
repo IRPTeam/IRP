@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cfb7ca4a-2350-44f2-b34e-421ed52bcda1">
-  <producedTypes>
-    <refType typeId="2e9683bc-ef58-46e4-a084-2d04838ebb23" valueTypeId="0746e8ba-b003-49fd-b883-ba9d5704c477"/>
-    <listType typeId="aea54605-4d07-420a-9c05-570a78324b7c" valueTypeId="151d4f3f-9c06-4ef9-a18b-65730d27d9fb"/>
-    <managerType typeId="624e3475-bc20-4af3-b7b6-a85304c66bb2" valueTypeId="319f8af9-3540-463b-a255-06667e1e5d5b"/>
-  </producedTypes>
-  <name>RetailGoodsReceiptTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="2e9683bc-ef58-46e4-a084-2d04838ebb23" valueTypeId="0746e8ba-b003-49fd-b883-ba9d5704c477"/>
+  <listType typeId="aea54605-4d07-420a-9c05-570a78324b7c" valueTypeId="151d4f3f-9c06-4ef9-a18b-65730d27d9fb"/>
+  <managerType typeId="624e3475-bc20-4af3-b7b6-a85304c66bb2" valueTypeId="319f8af9-3540-463b-a255-06667e1e5d5b"/>
+ </producedTypes>
+ <name>RetailGoodsReceiptTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>9B43722F-8EA7-BB39-9E32-2BBEAC3E69A7__</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="f748c2c1-9dc5-4519-a21e-2f7054ec55b2">
+  <name>CourierDelivery</name>
   <synonym>
-    <key>en</key>
-    <value>Retail goods receipt transaction types</value>
+   <key>en</key>
+   <value>08AA6395-D960-6B25-5D6E-E67CEDF5E4B3</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="f748c2c1-9dc5-4519-a21e-2f7054ec55b2">
-    <name>CourierDelivery</name>
-    <synonym>
-      <key>en</key>
-      <value>Courier delivery</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="be987c52-cbaa-4092-8f5d-f4ac35c41c35">
-    <name>Pickup</name>
-    <synonym>
-      <key>en</key>
-      <value>Pickup</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a6a524c8-d43f-4ce8-a370-817a947e72ec">
-    <name>ReturnFromCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from customer</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="be987c52-cbaa-4092-8f5d-f4ac35c41c35">
+  <name>Pickup</name>
+  <synonym>
+   <key>en</key>
+   <value>C74CD92F-A60A-7582-29D9-9DBC3CFED590</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a6a524c8-d43f-4ce8-a370-817a947e72ec">
+  <name>ReturnFromCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>616E0A86-D662-ACF7-7778-8C6220BD81C7</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

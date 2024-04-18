@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d08bc81c-7506-4ff6-8087-11049f3c0c7b">
-  <producedTypes>
-    <refType typeId="dc6aac9e-fe77-457b-9e6a-27376e8e6913" valueTypeId="0a6ba93f-ddc6-4ef4-a3d3-1763b384e202"/>
-    <listType typeId="2d13ecdc-c3bb-4234-a0bb-bf2d8d75c527" valueTypeId="6aa19d63-e01f-47fc-bad2-5bb184147f39"/>
-    <managerType typeId="3ce4ae9d-4d89-47f7-817c-76dd99ec9c72" valueTypeId="c6034fae-198c-4498-ac7b-59f680e1083f"/>
-  </producedTypes>
-  <name>StockBalanceDetail</name>
+ <producedTypes>
+  <refType typeId="dc6aac9e-fe77-457b-9e6a-27376e8e6913" valueTypeId="0a6ba93f-ddc6-4ef4-a3d3-1763b384e202"/>
+  <listType typeId="2d13ecdc-c3bb-4234-a0bb-bf2d8d75c527" valueTypeId="6aa19d63-e01f-47fc-bad2-5bb184147f39"/>
+  <managerType typeId="3ce4ae9d-4d89-47f7-817c-76dd99ec9c72" valueTypeId="c6034fae-198c-4498-ac7b-59f680e1083f"/>
+ </producedTypes>
+ <name>StockBalanceDetail</name>
+ <synonym>
+  <key>en</key>
+  <value>8BDFC2B7-0FEC-D3C2-2CA4-43E12D2C5422</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="7dabf78d-9f60-4ca2-91b0-17701ed69054">
+  <name>ByItemKey</name>
   <synonym>
-    <key>en</key>
-    <value>Stock balance detail</value>
+   <key>en</key>
+   <value>CEB66154-8480-C5A0-0C82-2C9EE12EBEC1</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="7dabf78d-9f60-4ca2-91b0-17701ed69054">
-    <name>ByItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>By item key</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5658e438-f93c-4c17-9a94-03204dae7cfc">
-    <name>BySerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>By serial lot number</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="5658e438-f93c-4c17-9a94-03204dae7cfc">
+  <name>BySerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>EF1B7E75-3F58-3393-33BC-C6EC6B0DF216</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

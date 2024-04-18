@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="07e5af9f-89bd-435a-ae78-1535b6446402">
-  <name>OffersClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Offers client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>OffersClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>658496F6-B417-3C21-1AF5-5C469C07916F</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

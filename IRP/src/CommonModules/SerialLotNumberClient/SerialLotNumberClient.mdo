@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4c37467-3437-4bf8-90dd-ffa3abb1ee6d">
-  <name>SerialLotNumberClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Serial lot number client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>SerialLotNumberClient</name>
+ <synonym>
+  <key>en</key>
+  <value>E4700C3A-8A79-ECA8-8B38-8D8AB5FA0BBD</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

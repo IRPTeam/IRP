@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c828acd6-6265-429a-8e62-87da514f2787">
-  <name>IconShowOnlyActive</name>
-  <synonym>
-    <key>en</key>
-    <value>Icon show only active</value>
-  </synonym>
+ <name>IconShowOnlyActive</name>
+ <synonym>
+  <key>en</key>
+  <value>DBE1FDA2-5AF8-1279-9216-6543FD9BB21F</value>
+ </synonym>
 </mdclass:CommonPicture>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="146f6c5b-11d8-4ed9-8169-2a02f46817e1">
-  <name>DocVisitorCounterServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc visitor counter server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocVisitorCounterServer</name>
+ <synonym>
+  <key>en</key>
+  <value>D4A41AAA-794F-777C-C190-0331E169C5C3</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

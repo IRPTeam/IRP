@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a11b4e7a-5bfd-4e1d-9b85-9cf13ff39549">
-  <name>AccumulationRegisters_R4033B_GoodsReceiptSchedule</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4033B GoodsReceiptSchedule</value>
-  </synonym>
+ <name>AccumulationRegisters_R4033B_GoodsReceiptSchedule</name>
+ <synonym>
+  <key>en</key>
+  <value>77FF064C-16CE-2ED2-263C-C45128F5460A_____________</value>
+ </synonym>
 </mdclass:Role>

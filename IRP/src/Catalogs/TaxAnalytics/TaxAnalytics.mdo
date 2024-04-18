@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fd748162-5f5c-4329-985b-4d2336c2fb89">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fd748162-5f5c-4329-985b-4d2336c2fb89">
+ <producedTypes>
+  <objectType typeId="0ad2cf0a-1368-4507-beaa-bd34f2f030a4" valueTypeId="fc8bb056-91e7-4d07-a4e3-ef946e67caf4"/>
+  <refType typeId="a440b82b-5b16-4e8e-a8f9-69f7a1890a91" valueTypeId="64d9a89d-42b9-42aa-8c31-3c8b0351df1b"/>
+  <selectionType typeId="a2f97584-8d8b-4bc7-8661-c5f4c788ba72" valueTypeId="375722c8-f230-43d7-a58c-1c5c4724a45c"/>
+  <listType typeId="b9e9458d-875c-481b-9005-05472cdf536e" valueTypeId="917ddb73-e6ff-4f57-82ad-c18535acdcfa"/>
+  <managerType typeId="6d739b37-7ca5-4e8d-be8a-1188f98ac9b6" valueTypeId="9b2ce4fc-bca2-4e2b-b0d8-240551d0b463"/>
+ </producedTypes>
+ <name>TaxAnalytics</name>
+ <synonym>
+  <key>en</key>
+  <value>6F173EDC-4DBC-ADBB-B654-4479B1A4FA0C</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.TaxAnalytics.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>69DB5801-AE2C-26CC-CA57-73DB57F05FF8</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.TaxAnalytics.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.TaxAnalytics.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.TaxAnalytics.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="645a0aeb-b993-457f-a18c-22afee8f1570">
   <producedTypes>
-    <objectType typeId="0ad2cf0a-1368-4507-beaa-bd34f2f030a4" valueTypeId="fc8bb056-91e7-4d07-a4e3-ef946e67caf4"/>
-    <refType typeId="a440b82b-5b16-4e8e-a8f9-69f7a1890a91" valueTypeId="64d9a89d-42b9-42aa-8c31-3c8b0351df1b"/>
-    <selectionType typeId="a2f97584-8d8b-4bc7-8661-c5f4c788ba72" valueTypeId="375722c8-f230-43d7-a58c-1c5c4724a45c"/>
-    <listType typeId="b9e9458d-875c-481b-9005-05472cdf536e" valueTypeId="917ddb73-e6ff-4f57-82ad-c18535acdcfa"/>
-    <managerType typeId="6d739b37-7ca5-4e8d-be8a-1188f98ac9b6" valueTypeId="9b2ce4fc-bca2-4e2b-b0d8-240551d0b463"/>
+   <objectType typeId="8d979785-6890-4f62-a2f6-1682ee74bef9" valueTypeId="1653798b-e65a-472b-a91c-41df227e1fbe"/>
+   <rowType typeId="3da88404-325f-4f30-9a20-ef3c7559269d" valueTypeId="3348d6ee-472f-4800-8ee9-51159d45d90d"/>
   </producedTypes>
-  <name>TaxAnalytics</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Tax additional analytics</value>
+   <key>en</key>
+   <value>E056DC1E-76D5-81B5-584A-A9BE5E620386</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_TaxAnalytics</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.TaxAnalytics.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.TaxAnalytics.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <attributes uuid="52b46cb0-3b09-4e24-9412-1117982e0f22">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Tax additional analytics</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.TaxAnalytics.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.TaxAnalytics.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.TaxAnalytics.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="645a0aeb-b993-457f-a18c-22afee8f1570">
-    <producedTypes>
-      <objectType typeId="8d979785-6890-4f62-a2f6-1682ee74bef9" valueTypeId="1653798b-e65a-472b-a91c-41df227e1fbe"/>
-      <rowType typeId="3da88404-325f-4f30-9a20-ef3c7559269d" valueTypeId="3348d6ee-472f-4800-8ee9-51159d45d90d"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="52b46cb0-3b09-4e24-9412-1117982e0f22">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="76ffddb7-b57e-4f66-a24d-c86594a5b8fe">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8523e502-3076-4ecb-9abf-d7cf54b6f49e">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2f3e194b-70d3-4dd8-b83d-67a9aa2fa55a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>B66271CA-EABC-151F-FD25-57B5E8654485</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="76ffddb7-b57e-4f66-a24d-c86594a5b8fe">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>83313933-069B-1DAF-FFE3-3059ADACE04D</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.TaxAnalytics.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="8523e502-3076-4ecb-9abf-d7cf54b6f49e">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>B3882F8C-9784-2F4A-AE8E-E3A3D93CE24F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2f3e194b-70d3-4dd8-b83d-67a9aa2fa55a">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>0EA92314-F15B-16A0-0752-25AC5FC6B972</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>182A1DC0-F7DC-F693-3B37-7D1D28535D8E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

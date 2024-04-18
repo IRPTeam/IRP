@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8837c716-8b8e-4a0f-91bb-0654ed1b2f41">
-  <name>RowIDInfoClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Row IDInfo client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>RowIDInfoClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>D46683F8-3E3A-0A00-08EC-C72CFBC5E5A5</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

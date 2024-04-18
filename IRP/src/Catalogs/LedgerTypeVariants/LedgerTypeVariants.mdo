@@ -1,158 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ddd4ea48-6033-4577-873d-ca8fa548ee44">
-  <producedTypes>
-    <objectType typeId="6aeeb6ef-8d4e-4558-a400-8b2e626d7347" valueTypeId="91f5e792-ee50-4594-a869-84a8e9ff75cc"/>
-    <refType typeId="7353d138-3276-443c-ae08-61103792f292" valueTypeId="1e80cea5-af8e-4844-b5e1-c0b3cc948306"/>
-    <selectionType typeId="4c89cf2e-5498-4020-8446-208a1a20cc43" valueTypeId="218bb272-3a90-4eb8-8d3c-0dfc0c7f6fa0"/>
-    <listType typeId="bfcdf92a-b887-4007-8cc3-0bbbccdd53ce" valueTypeId="31d1507c-cb40-49c5-b4ac-e805faad6646"/>
-    <managerType typeId="e5877f90-1610-441d-aaaf-8f391430fdfa" valueTypeId="30582630-a3db-4911-8191-e3120e969bbc"/>
-  </producedTypes>
-  <name>LedgerTypeVariants</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ddd4ea48-6033-4577-873d-ca8fa548ee44">
+ <producedTypes>
+  <objectType typeId="6aeeb6ef-8d4e-4558-a400-8b2e626d7347" valueTypeId="91f5e792-ee50-4594-a869-84a8e9ff75cc"/>
+  <refType typeId="7353d138-3276-443c-ae08-61103792f292" valueTypeId="1e80cea5-af8e-4844-b5e1-c0b3cc948306"/>
+  <selectionType typeId="4c89cf2e-5498-4020-8446-208a1a20cc43" valueTypeId="218bb272-3a90-4eb8-8d3c-0dfc0c7f6fa0"/>
+  <listType typeId="bfcdf92a-b887-4007-8cc3-0bbbccdd53ce" valueTypeId="31d1507c-cb40-49c5-b4ac-e805faad6646"/>
+  <managerType typeId="e5877f90-1610-441d-aaaf-8f391430fdfa" valueTypeId="30582630-a3db-4911-8191-e3120e969bbc"/>
+ </producedTypes>
+ <name>LedgerTypeVariants</name>
+ <synonym>
+  <key>en</key>
+  <value>BC698289-A6F4-30FD-D9B0-0C4901F1822B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.LedgerTypeVariants.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypeVariants</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypeVariants</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.LedgerTypeVariants.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>A68B26EC-D7C0-3B7D-DA83-3B7FFB9412F5</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.LedgerTypeVariants.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.LedgerTypeVariants.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.LedgerTypeVariants.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="48c0a253-3e2c-4d5d-a8da-99b7f543498b">
+  <name>AccountChartsCodeMask</name>
   <synonym>
-    <key>en</key>
-    <value>Ledger type variants</value>
+   <key>en</key>
+   <value>7FF16582-079D-FDB2-2A55-5797CD667047</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.LedgerTypeVariants.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypeVariants</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_LedgerTypeVariants</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.LedgerTypeVariants.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>12</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="72d46856-3994-45b1-90c1-065776127b47">
+  <producedTypes>
+   <objectType typeId="56d3436e-b84c-4d51-922f-c6106c6c0a7e" valueTypeId="cb4ab512-d24e-4bbc-b300-977405b7c4c5"/>
+   <rowType typeId="0bed8069-d8a4-4dfa-b9c2-21f2c49506d4" valueTypeId="3658d199-ff24-4ed5-838c-b572353269b6"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>70238AD4-5E81-BEB0-0D4A-AD7300693EE4</value>
+  </synonym>
+  <attributes uuid="56da6a60-7caa-4ee3-af95-4d224a20a93c">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Ledger type variant</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.LedgerTypeVariants.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.LedgerTypeVariants.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.LedgerTypeVariants.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="48c0a253-3e2c-4d5d-a8da-99b7f543498b">
-    <name>AccountChartsCodeMask</name>
-    <synonym>
-      <key>en</key>
-      <value>Account charts code mask</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>12</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>00A928C4-63D8-8EA0-0380-05AE9C146AE1</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="72d46856-3994-45b1-90c1-065776127b47">
-    <producedTypes>
-      <objectType typeId="56d3436e-b84c-4d51-922f-c6106c6c0a7e" valueTypeId="cb4ab512-d24e-4bbc-b300-977405b7c4c5"/>
-      <rowType typeId="0bed8069-d8a4-4dfa-b9c2-21f2c49506d4" valueTypeId="3658d199-ff24-4ed5-838c-b572353269b6"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="56da6a60-7caa-4ee3-af95-4d224a20a93c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="28321429-c41c-46db-b544-60789f411520">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="f5fe639f-468d-44e9-bf31-85adc60f82bb">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="bea52eaf-362d-4463-adf8-299b47bb637e">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="43b08e37-175d-4e27-8999-e3d45a8aa633">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="28321429-c41c-46db-b544-60789f411520">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>9604B230-839B-B807-7D33-3434CE2DFD02</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.LedgerTypeVariants.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="f5fe639f-468d-44e9-bf31-85adc60f82bb">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>71F06193-85D6-2359-90E6-6265D6D2970A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="bea52eaf-362d-4463-adf8-299b47bb637e">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6CF23668-AB16-E30A-A459-9DF4C2BEE382</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="43b08e37-175d-4e27-8999-e3d45a8aa633">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>AA266639-73EE-699C-C8D8-8FE89611123B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

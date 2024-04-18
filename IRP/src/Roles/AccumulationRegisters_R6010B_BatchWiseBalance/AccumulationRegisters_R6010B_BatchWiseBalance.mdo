@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee3230e3-1fc0-41dc-8926-0c6351961d74">
-  <name>AccumulationRegisters_R6010B_BatchWiseBalance</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R6010B BatchWiseBalance</value>
-  </synonym>
+ <name>AccumulationRegisters_R6010B_BatchWiseBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>0730545A-5A51-665D-D3E0-096D3A386C4D_________</value>
+ </synonym>
 </mdclass:Role>

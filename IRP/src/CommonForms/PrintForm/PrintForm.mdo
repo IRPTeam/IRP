@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99d45dda-857e-4c0c-b91d-70e8cf54c488">
-  <name>PrintForm</name>
-  <synonym>
-    <key>en</key>
-    <value>Print form</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>PrintForm</name>
+ <synonym>
+  <key>en</key>
+  <value>7F83C497-CE3C-FA94-4916-688F5CC4CF32</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

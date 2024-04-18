@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ChartOfCharacteristicTypes xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="571f49a7-18c6-4400-bd45-efa29db05503">
-  <producedTypes>
-    <objectType typeId="c0b1c6da-5a17-46a8-9a55-e4a4b9b4d932" valueTypeId="7b15524f-0f9e-4264-aa09-2b999b90f5a9"/>
-    <refType typeId="3b40198d-27e1-4d23-a929-f9c812cdb0ad" valueTypeId="b7cdf23c-dccf-49dc-af09-19aec1cd3648"/>
-    <selectionType typeId="799bb6c0-acf8-49d6-bfff-6c2567def69c" valueTypeId="9edcf4b9-c2cb-4481-ae29-7c443174b96c"/>
-    <listType typeId="8f570b8e-86d0-452b-9147-b80b791bebb8" valueTypeId="8bbc8f8e-270a-4904-a400-48e14ae58baf"/>
-    <managerType typeId="03e8ac2c-f701-4420-aeb7-c47c548dfa7d" valueTypeId="7c5085d1-fd60-45f0-8d11-e490e6e7b638"/>
-    <containerType typeId="bd69c27c-0fb4-46ed-9951-6672ff2da604" valueTypeId="9d5906fb-b733-4ad2-93d7-be5db822d0c0"/>
-  </producedTypes>
-  <name>AccountingExtraDimensionTypes</name>
+ <producedTypes>
+  <objectType typeId="c0b1c6da-5a17-46a8-9a55-e4a4b9b4d932" valueTypeId="7b15524f-0f9e-4264-aa09-2b999b90f5a9"/>
+  <refType typeId="3b40198d-27e1-4d23-a929-f9c812cdb0ad" valueTypeId="b7cdf23c-dccf-49dc-af09-19aec1cd3648"/>
+  <selectionType typeId="799bb6c0-acf8-49d6-bfff-6c2567def69c" valueTypeId="9edcf4b9-c2cb-4481-ae29-7c443174b96c"/>
+  <listType typeId="8f570b8e-86d0-452b-9147-b80b791bebb8" valueTypeId="8bbc8f8e-270a-4904-a400-48e14ae58baf"/>
+  <managerType typeId="03e8ac2c-f701-4420-aeb7-c47c548dfa7d" valueTypeId="7c5085d1-fd60-45f0-8d11-e490e6e7b638"/>
+  <containerType typeId="bd69c27c-0fb4-46ed-9951-6672ff2da604" valueTypeId="9d5906fb-b733-4ad2-93d7-be5db822d0c0"/>
+ </producedTypes>
+ <name>AccountingExtraDimensionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>2DA9C58E-8DD3-6641-17ED-D9FFD411CF00</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>9BAA346F-E96C-EABF-F86D-DD49B1793950</value>
+ </objectPresentation>
+ <type>
+  <types>CatalogRef.Companies</types>
+  <types>CatalogRef.LegalNameContracts</types>
+  <types>CatalogRef.CashAccounts</types>
+  <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  <types>CatalogRef.Partners</types>
+  <types>CatalogRef.Items</types>
+  <types>CatalogRef.Agreements</types>
+  <types>CatalogRef.Taxes</types>
+  <types>CatalogRef.Stores</types>
+  <types>CatalogRef.ItemKeys</types>
+  <types>CatalogRef.BusinessUnits</types>
+  <types>CatalogRef.FixedAssets</types>
+ </type>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <defaultObjectForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ChoiceForm</defaultChoiceForm>
+ <forms uuid="f4dd26fd-54fe-4c77-80d5-f0865834bff8">
+  <name>ItemForm</name>
   <synonym>
-    <key>en</key>
-    <value>Accounting extra dimensions</value>
+   <key>en</key>
+   <value>B0BC9DE6-B751-832C-C4F4-4A9731D7CF84</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Accounting extra dimension</value>
-  </objectPresentation>
-  <type>
-    <types>CatalogRef.Companies</types>
-    <types>CatalogRef.LegalNameContracts</types>
-    <types>CatalogRef.CashAccounts</types>
-    <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    <types>CatalogRef.Partners</types>
-    <types>CatalogRef.Items</types>
-    <types>CatalogRef.Agreements</types>
-    <types>CatalogRef.Taxes</types>
-    <types>CatalogRef.Stores</types>
-    <types>CatalogRef.ItemKeys</types>
-    <types>CatalogRef.BusinessUnits</types>
-    <types>CatalogRef.FixedAssets</types>
-  </type>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <defaultObjectForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes.Form.ChoiceForm</defaultChoiceForm>
-  <forms uuid="f4dd26fd-54fe-4c77-80d5-f0865834bff8">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e2ac2796-e38b-4e4f-9569-4d5026a0b343">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ab9a7520-23ef-4f58-a5cf-e6d790c4a04d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e2ac2796-e38b-4e4f-9569-4d5026a0b343">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E5F54E53-BB77-634B-B4CF-F584F247C79A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ab9a7520-23ef-4f58-a5cf-e6d790c4a04d">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A1EC8271-320B-71D5-52E0-08C3A0B9ECD2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

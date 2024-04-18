@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b201be4e-2478-4779-867e-10d24d17a770">
-  <producedTypes>
-    <managerType typeId="3fcfe84f-fbbd-430d-bcff-1276ac240182" valueTypeId="9237ded7-cd7e-4828-8b6d-a31b0ada2619"/>
-    <valueManagerType typeId="e56912c9-5208-4745-ad38-4174a11b3ae9" valueTypeId="03efee15-bffb-4857-8554-c79e37ce1b78"/>
-    <valueKeyType typeId="4acb80b2-8a34-4bb7-be8b-adb1e5ede850" valueTypeId="a580fb26-2f7d-4a74-a5b4-7612ce6218b1"/>
-  </producedTypes>
-  <name>UseCommissionTrading</name>
-  <synonym>
-    <key>en</key>
-    <value>Use commission trading</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b201be4e-2478-4779-867e-10d24d17a770">
+ <producedTypes>
+  <managerType typeId="3fcfe84f-fbbd-430d-bcff-1276ac240182" valueTypeId="9237ded7-cd7e-4828-8b6d-a31b0ada2619"/>
+  <valueManagerType typeId="e56912c9-5208-4745-ad38-4174a11b3ae9" valueTypeId="03efee15-bffb-4857-8554-c79e37ce1b78"/>
+  <valueKeyType typeId="4acb80b2-8a34-4bb7-be8b-adb1e5ede850" valueTypeId="a580fb26-2f7d-4a74-a5b4-7612ce6218b1"/>
+ </producedTypes>
+ <name>UseCommissionTrading</name>
+ <synonym>
+  <key>en</key>
+  <value>84CD1CA7-E770-5DFC-C7D5-52FF2004A4C3</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

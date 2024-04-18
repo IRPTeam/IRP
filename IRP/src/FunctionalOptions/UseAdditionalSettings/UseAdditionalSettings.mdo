@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7586a65-288f-4bea-8372-c647be21945d">
-  <name>UseAdditionalSettings</name>
-  <synonym>
-    <key>en</key>
-    <value>Use additional settings</value>
-  </synonym>
-  <location>Constant.UseAdditionalSettings</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.DataBaseStatus</content>
-  <content>InformationRegister.ExternalCommands.Dimension.ConfigurationMetadata</content>
-  <content>Catalog.ConfigurationMetadata</content>
-  <content>InformationRegister.ExternalCommands</content>
-  <content>Catalog.InterfaceGroups</content>
-  <content>InformationRegister.ObjectStatuses</content>
-  <content>Catalog.ObjectStatuses</content>
-  <content>Catalog.UserGroups</content>
-  <content>Catalog.AccessGroups</content>
-  <content>Catalog.AccessProfiles</content>
-  <content>DataProcessor.DataHistory</content>
-  <content>CommonForm.MainSettings</content>
+ <name>UseAdditionalSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>96BF62B5-606A-64DB-BA71-12CC629406B9</value>
+ </synonym>
+ <location>Constant.UseAdditionalSettings</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.DataBaseStatus</content>
+ <content>InformationRegister.ExternalCommands.Dimension.ConfigurationMetadata</content>
+ <content>Catalog.ConfigurationMetadata</content>
+ <content>InformationRegister.ExternalCommands</content>
+ <content>Catalog.InterfaceGroups</content>
+ <content>InformationRegister.ObjectStatuses</content>
+ <content>Catalog.ObjectStatuses</content>
+ <content>Catalog.UserGroups</content>
+ <content>Catalog.AccessGroups</content>
+ <content>Catalog.AccessProfiles</content>
+ <content>DataProcessor.DataHistory</content>
+ <content>CommonForm.MainSettings</content>
 </mdclass:FunctionalOption>

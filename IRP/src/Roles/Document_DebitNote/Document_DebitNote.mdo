@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="702f77fa-161b-45f6-824e-9f9484a55c44">
-  <name>Document_DebitNote</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Debit note&quot;</value>
-  </synonym>
+ <name>Document_DebitNote</name>
+ <synonym>
+  <key>en</key>
+  <value>6D61EE39-0FEF-C939-9AB8-8938092B5727</value>
+ </synonym>
 </mdclass:Role>

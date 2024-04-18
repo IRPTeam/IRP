@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="70d4fce8-ed7e-4cc2-945e-3a7c49ddd24b">
-  <name>IntegrationServerReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Integration server reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>IntegrationServerReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>BD91D22B-2661-5922-2F62-27EC02870DA1</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

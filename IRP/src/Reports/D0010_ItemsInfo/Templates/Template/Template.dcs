@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>File</v8:content>
+					<v8:content>535C99C5-663A-E45A-A68F-F9CA93CC10BD</v8:content>
 				</v8:item>
 			</title>
 			<appearance>
@@ -29,7 +29,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>0A852544-81DA-C721-1E57-732804939EAB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -39,7 +39,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>6252C4B0-B9F0-204F-F714-4E7951E7B0A6</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -49,7 +49,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode</v8:content>
+					<v8:content>7455AE8B-BC2D-DF09-9516-6FEF9BA98B3C</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -59,7 +59,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item serial/lot number</v8:content>
+					<v8:content>AE9C600F-6618-90F6-6346-6C05B58A2D42</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -69,7 +69,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Unit</v8:content>
+					<v8:content>E14CD619-3EAD-995D-D987-7DE09EAFF328</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -143,7 +143,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Char LF</v8:content>
+				<v8:content>9ADB22AC-4B81-7215-5726-6666C6D43145</v8:content>
 			</v8:item>
 		</title>
 		<value xsi:type="xs:string"/>

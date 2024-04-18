@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d535f8ae-29fe-4a86-9f13-fac76517398f">
-  <producedTypes>
-    <refType typeId="953ca162-b9b1-4b2b-9b7e-467c9532ad5e" valueTypeId="dcfb1ccb-70fe-4561-982e-3382b6c17a2b"/>
-    <listType typeId="071ac0c8-b2e9-4f2c-a072-0991a7a44636" valueTypeId="49e9a8e7-bad3-4815-8736-503ca6910a2f"/>
-    <managerType typeId="4a27e5a4-68f6-432e-99c2-ec7fd5f23759" valueTypeId="f6f71592-b872-4f9c-8661-2d0401afe6d8"/>
-  </producedTypes>
-  <name>ControlCodeStringType</name>
+ <producedTypes>
+  <refType typeId="953ca162-b9b1-4b2b-9b7e-467c9532ad5e" valueTypeId="dcfb1ccb-70fe-4561-982e-3382b6c17a2b"/>
+  <listType typeId="071ac0c8-b2e9-4f2c-a072-0991a7a44636" valueTypeId="49e9a8e7-bad3-4815-8736-503ca6910a2f"/>
+  <managerType typeId="4a27e5a4-68f6-432e-99c2-ec7fd5f23759" valueTypeId="f6f71592-b872-4f9c-8661-2d0401afe6d8"/>
+ </producedTypes>
+ <name>ControlCodeStringType</name>
+ <synonym>
+  <key>en</key>
+  <value>80E8A592-E7BE-55ED-D178-8D8F7771877C</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="063b015e-0fc6-455b-9c42-79d254c0a3c1">
+  <name>None</name>
   <synonym>
-    <key>en</key>
-    <value>Control code string type</value>
+   <key>en</key>
+   <value>3ABE9B77-695B-CC7F-F500-017D6BD5FA20</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="063b015e-0fc6-455b-9c42-79d254c0a3c1">
-    <name>None</name>
-    <synonym>
-      <key>en</key>
-      <value>None</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8525a5c2-b25b-4857-bace-43818a6d9983">
-    <name>MarkingCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Marking code</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="80890c5b-7c4a-4a00-8831-6d8202bde2b5">
-    <name>GoodCodeData</name>
-    <synonym>
-      <key>en</key>
-      <value>Good code data</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="8525a5c2-b25b-4857-bace-43818a6d9983">
+  <name>MarkingCode</name>
+  <synonym>
+   <key>en</key>
+   <value>50EF090F-FC01-201D-DDCE-EBDF9444B266</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="80890c5b-7c4a-4a00-8831-6d8202bde2b5">
+  <name>GoodCodeData</name>
+  <synonym>
+   <key>en</key>
+   <value>D6B26A62-3D71-A723-3667-7E79610A816F</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

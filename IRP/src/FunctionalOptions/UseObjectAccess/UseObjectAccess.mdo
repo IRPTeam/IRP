@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6dcd30b8-9784-430c-9656-035122121cff">
-  <name>UseObjectAccess</name>
-  <synonym>
-    <key>en</key>
-    <value>Use object access</value>
-  </synonym>
-  <location>Constant.UseObjectAccess</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Subsystem.Settings.Subsystem.ObjectAccess</content>
+ <name>UseObjectAccess</name>
+ <synonym>
+  <key>en</key>
+  <value>C6D1A50E-CBC3-6EF7-73AB-BC7FE0FE0A7A</value>
+ </synonym>
+ <location>Constant.UseObjectAccess</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Settings.Subsystem.ObjectAccess</content>
 </mdclass:FunctionalOption>

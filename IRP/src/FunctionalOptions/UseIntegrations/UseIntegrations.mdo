@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b54c0a97-01c5-4fa2-b6f8-89fbc5d824ca">
-  <name>UseIntegrations</name>
-  <synonym>
-    <key>en</key>
-    <value>Use integrations</value>
-  </synonym>
-  <location>Constant.UseIntegrations</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>InformationRegister.DataMappingTable</content>
-  <content>Catalog.DataMappingItems</content>
-  <content>CommonForm.DataMappingForm</content>
-  <content>InformationRegister.ExternalCommands</content>
-  <content>Catalog.FileStorageVolumes</content>
-  <content>InformationRegister.IntegrationInfo</content>
-  <content>Catalog.IntegrationSettings</content>
-  <content>Catalog.ExternalDataProc</content>
+ <name>UseIntegrations</name>
+ <synonym>
+  <key>en</key>
+  <value>3C7C82CE-1EBA-8176-6F1F-FCADDB66E9ED</value>
+ </synonym>
+ <location>Constant.UseIntegrations</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>InformationRegister.DataMappingTable</content>
+ <content>Catalog.DataMappingItems</content>
+ <content>CommonForm.DataMappingForm</content>
+ <content>InformationRegister.ExternalCommands</content>
+ <content>Catalog.FileStorageVolumes</content>
+ <content>InformationRegister.IntegrationInfo</content>
+ <content>Catalog.IntegrationSettings</content>
+ <content>Catalog.ExternalDataProc</content>
 </mdclass:FunctionalOption>

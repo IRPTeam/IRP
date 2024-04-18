@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="815df748-45ad-4b15-bf4a-32ed97728952">
-  <name>AccumulationRegisters_R9570T_AdditionalDeduction</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R9570T AdditionalDeduction</value>
-  </synonym>
+ <name>AccumulationRegisters_R9570T_AdditionalDeduction</name>
+ <synonym>
+  <key>en</key>
+  <value>A4C781E1-7D73-E70B-BBF5-5E16781A4F8D____________</value>
+ </synonym>
 </mdclass:Role>

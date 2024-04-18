@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c465156-3a89-4bed-837e-4630835265c1">
-  <name>AddDataProcServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Add data proc server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>AddDataProcServer</name>
+ <synonym>
+  <key>en</key>
+  <value>3621B141-2E80-EC17-7F8E-ECC295712EDE</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

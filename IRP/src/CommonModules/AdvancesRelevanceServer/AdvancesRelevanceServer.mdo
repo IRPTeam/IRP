@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="264d8019-28ba-4b50-a1b5-c023ae2ddb40">
-  <name>AdvancesRelevanceServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Advances relevance server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>AdvancesRelevanceServer</name>
+ <synonym>
+  <key>en</key>
+  <value>F6FF700A-EADF-5EA4-439A-AD982E22A756</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

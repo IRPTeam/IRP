@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6b09282a-9c26-4f8e-9a1d-f15727141058">
-  <producedTypes>
-    <refType typeId="ce9718ae-6eba-4355-bdc4-714d0eaf2d9f" valueTypeId="71393bc0-fb26-4b83-89e6-9b02ef3c1b30"/>
-    <listType typeId="1dd4d94c-ce13-458e-9171-a988dcae7fab" valueTypeId="5d0d8157-f24e-44fc-9f32-9ab7563f5996"/>
-    <managerType typeId="62131d56-ec93-404f-bb50-f140a27e2f46" valueTypeId="5d077787-6ba7-42c1-8ebe-1de32d550623"/>
-  </producedTypes>
-  <name>TaxPayers</name>
+ <producedTypes>
+  <refType typeId="ce9718ae-6eba-4355-bdc4-714d0eaf2d9f" valueTypeId="71393bc0-fb26-4b83-89e6-9b02ef3c1b30"/>
+  <listType typeId="1dd4d94c-ce13-458e-9171-a988dcae7fab" valueTypeId="5d0d8157-f24e-44fc-9f32-9ab7563f5996"/>
+  <managerType typeId="62131d56-ec93-404f-bb50-f140a27e2f46" valueTypeId="5d077787-6ba7-42c1-8ebe-1de32d550623"/>
+ </producedTypes>
+ <name>TaxPayers</name>
+ <synonym>
+  <key>en</key>
+  <value>A04F8F67-2ECD-8D00-0E48-84752F348415</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="6e9e743e-a7a5-4e61-9370-7ba7f8ceb6c0">
+  <name>Employee</name>
   <synonym>
-    <key>en</key>
-    <value>Tax payers</value>
+   <key>en</key>
+   <value>4B06AC39-FC1E-B905-56BB-B8BE42064AFF</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="6e9e743e-a7a5-4e61-9370-7ba7f8ceb6c0">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7c5a5bab-0690-4df7-80d5-b74fdb8f9243">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="7c5a5bab-0690-4df7-80d5-b74fdb8f9243">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>2567888F-AE51-7524-4F7D-D388C1CF026A</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="681b70b4-c761-43f9-a9d5-eb7abc88301e">
-  <name>UseSerialLotNumbers</name>
-  <synonym>
-    <key>en</key>
-    <value>Use serial lot numbers</value>
-  </synonym>
-  <location>Constant.UseSerialLotNumbers</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.SerialLotNumbers</content>
-  <content>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</content>
-  <content>InformationRegister.Barcodes.Resource.SerialLotNumber</content>
-  <content>Enum.SerialNumberTypes</content>
-  <content>Enum.SerialNumbersOwner</content>
-  <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
-  <content>AccumulationRegister.R4014B_SerialLotNumber</content>
-  <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
-  <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
-  <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
-  <content>DataProcessor.CreateSerialLotNumbers</content>
+ <name>UseSerialLotNumbers</name>
+ <synonym>
+  <key>en</key>
+  <value>4975B1B1-ADC4-B616-6C9F-F901FB272481</value>
+ </synonym>
+ <location>Constant.UseSerialLotNumbers</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.SerialLotNumbers</content>
+ <content>AccumulationRegister.R2050T_RetailSales.Dimension.SerialLotNumber</content>
+ <content>InformationRegister.Barcodes.Resource.SerialLotNumber</content>
+ <content>Enum.SerialNumberTypes</content>
+ <content>Enum.SerialNumbersOwner</content>
+ <content>AccumulationRegister.R4014B_SerialLotNumber.Dimension.SerialLotNumber</content>
+ <content>AccumulationRegister.R4014B_SerialLotNumber</content>
+ <content>Catalog.ItemTypes.Attribute.UseSerialLotNumber</content>
+ <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
+ <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
+ <content>DataProcessor.CreateSerialLotNumbers</content>
 </mdclass:FunctionalOption>

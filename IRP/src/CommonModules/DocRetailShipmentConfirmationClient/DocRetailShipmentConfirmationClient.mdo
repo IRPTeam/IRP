@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="14b71b36-86cd-4468-9fdd-653b4ea9dee6">
-  <name>DocRetailShipmentConfirmationClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc retail shipment confirmation client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocRetailShipmentConfirmationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>9E084441-5906-B1E2-206F-FEA58CD1A315___</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

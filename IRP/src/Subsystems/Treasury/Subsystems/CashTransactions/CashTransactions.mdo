@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54e688f2-a9eb-4646-90eb-5b83bb62cc4b">
-  <name>CashTransactions</name>
-  <synonym>
-    <key>en</key>
-    <value>Cash transactions</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.ReconciliationStatement</content>
-  <content>Document.CashExpense</content>
-  <content>Document.CashRevenue</content>
-  <content>Document.CreditNote</content>
-  <content>Document.DebitNote</content>
-  <content>Document.CustomersAdvancesClosing</content>
-  <content>Document.VendorsAdvancesClosing</content>
-  <content>Document.EmployeeCashAdvance</content>
-  <content>Document.ForeignCurrencyRevaluation</content>
-  <content>Document.DebitCreditNote</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>CashTransactions</name>
+ <synonym>
+  <key>en</key>
+  <value>A9D36A29-2851-8E9C-C843-3A8CBE0AC663</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.ReconciliationStatement</content>
+ <content>Document.CashExpense</content>
+ <content>Document.CashRevenue</content>
+ <content>Document.CreditNote</content>
+ <content>Document.DebitNote</content>
+ <content>Document.CustomersAdvancesClosing</content>
+ <content>Document.VendorsAdvancesClosing</content>
+ <content>Document.EmployeeCashAdvance</content>
+ <content>Document.ForeignCurrencyRevaluation</content>
+ <content>Document.DebitCreditNote</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

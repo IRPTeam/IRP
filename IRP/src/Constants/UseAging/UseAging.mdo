@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="482744b9-0f7e-4059-8617-0c59840aef48">
-  <producedTypes>
-    <managerType typeId="bc4717ca-afc9-4107-b4b1-83124922f5ce" valueTypeId="1724d96f-3dd5-4568-af3b-889315ff7c97"/>
-    <valueManagerType typeId="162566da-18b1-4a47-93f3-fdc862e40a85" valueTypeId="f2aa8c93-6dcc-457e-8181-aa3111133dd6"/>
-    <valueKeyType typeId="665c65b9-eb0e-432c-94ca-c6bc258444af" valueTypeId="c3236363-c93a-44be-95a3-107f0d1cac79"/>
-  </producedTypes>
-  <name>UseAging</name>
-  <synonym>
-    <key>en</key>
-    <value>Use aging</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="482744b9-0f7e-4059-8617-0c59840aef48">
+ <producedTypes>
+  <managerType typeId="bc4717ca-afc9-4107-b4b1-83124922f5ce" valueTypeId="1724d96f-3dd5-4568-af3b-889315ff7c97"/>
+  <valueManagerType typeId="162566da-18b1-4a47-93f3-fdc862e40a85" valueTypeId="f2aa8c93-6dcc-457e-8181-aa3111133dd6"/>
+  <valueKeyType typeId="665c65b9-eb0e-432c-94ca-c6bc258444af" valueTypeId="c3236363-c93a-44be-95a3-107f0d1cac79"/>
+ </producedTypes>
+ <name>UseAging</name>
+ <synonym>
+  <key>en</key>
+  <value>3CF4E9F7-22C7-825D-D1E2-2C3EF304C7D3</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

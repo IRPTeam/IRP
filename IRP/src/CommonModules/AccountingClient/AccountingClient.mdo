@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9185dc29-d9cb-470c-ad36-81f850c2d502">
-  <name>AccountingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>AccountingClient</name>
+ <synonym>
+  <key>en</key>
+  <value>999C54F0-9A2D-D062-27F8-8F5C916916EC</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

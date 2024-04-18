@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="16ee6e2a-19d8-4a40-8298-13a12770440e">
-  <name>UseWorkOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Use work orders</value>
-  </synonym>
-  <location>Constant.UseWorkOrders</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.WorkSheet</content>
-  <content>Document.WorkOrderClosing</content>
-  <content>Catalog.BillOfMaterials</content>
-  <content>Document.WorkOrder</content>
-  <content>Subsystem.SalesAR.Subsystem.WorkOrders</content>
-  <content>Catalog.BusinessUnits.Attribute.Workshop</content>
+ <name>UseWorkOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>ECD0AACA-E8B0-C55C-C3DF-F98F85106731</value>
+ </synonym>
+ <location>Constant.UseWorkOrders</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.WorkSheet</content>
+ <content>Document.WorkOrderClosing</content>
+ <content>Catalog.BillOfMaterials</content>
+ <content>Document.WorkOrder</content>
+ <content>Subsystem.SalesAR.Subsystem.WorkOrders</content>
+ <content>Catalog.BusinessUnits.Attribute.Workshop</content>
 </mdclass:FunctionalOption>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f08319ac-58bc-4085-9efe-b00cc5f8a31a">
-  <producedTypes>
-    <refType typeId="b9b1ca6b-2635-45c0-9bdf-2f845b3b4e1f" valueTypeId="155923cd-2802-44fe-986a-5462e91ca035"/>
-    <listType typeId="32046600-90bf-4488-a3c3-7b552eb735a3" valueTypeId="158b2898-20b8-44d7-b4a6-1ccd9dda7697"/>
-    <managerType typeId="4dcc23f0-4b03-4de8-911e-b57fbdc3ff0f" valueTypeId="ac19ba7d-e385-4404-bda1-9f4e7c03fb01"/>
-  </producedTypes>
-  <name>PurchaseTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="b9b1ca6b-2635-45c0-9bdf-2f845b3b4e1f" valueTypeId="155923cd-2802-44fe-986a-5462e91ca035"/>
+  <listType typeId="32046600-90bf-4488-a3c3-7b552eb735a3" valueTypeId="158b2898-20b8-44d7-b4a6-1ccd9dda7697"/>
+  <managerType typeId="4dcc23f0-4b03-4de8-911e-b57fbdc3ff0f" valueTypeId="ac19ba7d-e385-4404-bda1-9f4e7c03fb01"/>
+ </producedTypes>
+ <name>PurchaseTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>7AD8FA8A-5FC1-B301-1FFB-BAE67CC07346</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="79252a78-c81a-41f3-ba14-d9dc4b8e0309">
+  <name>Purchase</name>
   <synonym>
-    <key>en</key>
-    <value>Purchase transaction types</value>
+   <key>en</key>
+   <value>B2B416AD-263F-B7EF-F853-3E43EE87E0AE</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="79252a78-c81a-41f3-ba14-d9dc4b8e0309">
-    <name>Purchase</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f75b49f9-ed39-442b-b7b8-6818820c8cbf">
-    <name>ReceiptFromConsignor</name>
-    <synonym>
-      <key>en</key>
-      <value>Receipt from consignor</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="f75b49f9-ed39-442b-b7b8-6818820c8cbf">
+  <name>ReceiptFromConsignor</name>
+  <synonym>
+   <key>en</key>
+   <value>5BEEE0F8-4DCC-6F0D-DA7B-B40FCC29741C</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

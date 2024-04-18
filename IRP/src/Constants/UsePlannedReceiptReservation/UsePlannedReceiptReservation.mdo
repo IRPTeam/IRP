@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="82157a31-3af8-4991-bfc1-fb405b0a57d0">
-  <producedTypes>
-    <managerType typeId="32e2b434-0af6-43cf-98d9-7d32f8ef4c20" valueTypeId="e0d94659-2ee7-41a6-b08a-a3bc1ffd7095"/>
-    <valueManagerType typeId="ad9c0439-08e2-4fb3-a375-2030387cde78" valueTypeId="5dd960a7-f73f-4139-962c-26e18778fb63"/>
-    <valueKeyType typeId="6bdb7fb9-2ded-45a5-bcc9-c7b347dc764f" valueTypeId="d17a86cc-ed59-4be3-9dcd-e2e7d22a2abb"/>
-  </producedTypes>
-  <name>UsePlannedReceiptReservation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use planned receipt reservation</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="82157a31-3af8-4991-bfc1-fb405b0a57d0">
+ <producedTypes>
+  <managerType typeId="32e2b434-0af6-43cf-98d9-7d32f8ef4c20" valueTypeId="e0d94659-2ee7-41a6-b08a-a3bc1ffd7095"/>
+  <valueManagerType typeId="ad9c0439-08e2-4fb3-a375-2030387cde78" valueTypeId="5dd960a7-f73f-4139-962c-26e18778fb63"/>
+  <valueKeyType typeId="6bdb7fb9-2ded-45a5-bcc9-c7b347dc764f" valueTypeId="d17a86cc-ed59-4be3-9dcd-e2e7d22a2abb"/>
+ </producedTypes>
+ <name>UsePlannedReceiptReservation</name>
+ <synonym>
+  <key>en</key>
+  <value>DA36FB46-AF72-9FE0-031D-DF8F2F942A7C</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

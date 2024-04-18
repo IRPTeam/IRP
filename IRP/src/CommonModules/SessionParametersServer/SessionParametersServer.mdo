@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="48dfe16c-802c-4cd8-b9bb-a029c5aeba16">
-  <name>SessionParametersServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Session parameters server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>SessionParametersServer</name>
+ <synonym>
+  <key>en</key>
+  <value>62C32C4A-D4C2-4AC8-875A-AF1EB39D1F5E</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

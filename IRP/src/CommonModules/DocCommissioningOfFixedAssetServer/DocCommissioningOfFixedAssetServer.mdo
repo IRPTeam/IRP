@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1a29e941-6ce1-4a46-b633-68159b6f7b2e">
-  <name>DocCommissioningOfFixedAssetServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc commissioning of fixed asset server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocCommissioningOfFixedAssetServer</name>
+ <synonym>
+  <key>en</key>
+  <value>FD1CCE29-7CD9-B660-0650-0D8087EDFA69___</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

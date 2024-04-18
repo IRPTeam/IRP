@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="702d1c7e-0229-4a97-b8bc-3f503b301378">
-  <name>FormGetProcessing_OpenMobileForm</name>
-  <synonym>
-    <key>en</key>
-    <value>Form get processing open mobile form</value>
-  </synonym>
-  <source>
-    <types>DocumentManager</types>
-  </source>
-  <event>FormGetProcessing</event>
-  <handler>CommonModule.MobileEvents.OpenMobileFormFormGetProcessing</handler>
+ <name>FormGetProcessing_OpenMobileForm</name>
+ <synonym>
+  <key>en</key>
+  <value>7047EFB5-6233-0881-1FD3-3ED193367A13</value>
+ </synonym>
+ <source>
+  <types>DocumentManager</types>
+ </source>
+ <event>FormGetProcessing</event>
+ <handler>CommonModule.MobileEvents.OpenMobileFormFormGetProcessing</handler>
 </mdclass:EventSubscription>

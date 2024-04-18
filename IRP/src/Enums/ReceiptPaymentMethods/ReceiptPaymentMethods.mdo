@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b2484b2-8193-4e4f-bdae-baac7b3e9444">
-  <producedTypes>
-    <refType typeId="ce27e194-6b43-433e-a42c-f50112d856ab" valueTypeId="bc2ee840-fdce-4b9f-b089-d6376b1d14a4"/>
-    <listType typeId="f21929d3-5f5f-4ed3-801f-86fb599182cf" valueTypeId="d5b08e5b-2a56-4126-96c5-dd363e7ed539"/>
-    <managerType typeId="89986a04-2132-44ae-864b-24e5c0e6e910" valueTypeId="0010beb6-58c3-496a-b585-52b29b0ccec0"/>
-  </producedTypes>
-  <name>ReceiptPaymentMethods</name>
+ <producedTypes>
+  <refType typeId="ce27e194-6b43-433e-a42c-f50112d856ab" valueTypeId="bc2ee840-fdce-4b9f-b089-d6376b1d14a4"/>
+  <listType typeId="f21929d3-5f5f-4ed3-801f-86fb599182cf" valueTypeId="d5b08e5b-2a56-4126-96c5-dd363e7ed539"/>
+  <managerType typeId="89986a04-2132-44ae-864b-24e5c0e6e910" valueTypeId="0010beb6-58c3-496a-b585-52b29b0ccec0"/>
+ </producedTypes>
+ <name>ReceiptPaymentMethods</name>
+ <synonym>
+  <key>en</key>
+  <value>42DE5661-6EAF-E0FD-DFA3-3A2879033EC0</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="8a49f461-0a0d-43e9-a13e-82d93d6af16d">
+  <name>FullPrepayment</name>
   <synonym>
-    <key>en</key>
-    <value>Receipt payment methods</value>
+   <key>en</key>
+   <value>2A27DE6D-835F-97D5-52D5-5964A6992098</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="8a49f461-0a0d-43e9-a13e-82d93d6af16d">
-    <name>FullPrepayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Full prepayment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="940ba78d-a10c-432d-9389-e6305a8731cd">
-    <name>PartialPrepayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Partial prepayment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="451902da-b7a5-45b6-91a4-8cfe6ef78dc7">
-    <name>AdvancePayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Advance payment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="866fbaa5-dae2-48c3-8bc2-1222157cb25d">
-    <name>FullCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Full calculation</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7f84fb93-ab1e-4b29-a903-f74c686505e5">
-    <name>PartialSettlementAndCredit</name>
-    <synonym>
-      <key>en</key>
-      <value>Partial settlement and credit</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6b26691f-8c1f-4126-b8c0-bf9220966c29">
-    <name>TransferOnCredit</name>
-    <synonym>
-      <key>en</key>
-      <value>Transfer on credit</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="792c6582-2ab8-43ad-bd7f-5ed947f7ed82">
-    <name>LoanPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Loan payment</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="940ba78d-a10c-432d-9389-e6305a8731cd">
+  <name>PartialPrepayment</name>
+  <synonym>
+   <key>en</key>
+   <value>6D3F21BF-0AD4-64F5-5D61-130AE09AD225</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="451902da-b7a5-45b6-91a4-8cfe6ef78dc7">
+  <name>AdvancePayment</name>
+  <synonym>
+   <key>en</key>
+   <value>EB2130CF-A70A-8B4C-CA71-1386A59F8314</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="866fbaa5-dae2-48c3-8bc2-1222157cb25d">
+  <name>FullCalculation</name>
+  <synonym>
+   <key>en</key>
+   <value>241235C4-811C-A672-2FE1-11F2FBCB210D</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7f84fb93-ab1e-4b29-a903-f74c686505e5">
+  <name>PartialSettlementAndCredit</name>
+  <synonym>
+   <key>en</key>
+   <value>446041DF-EE47-7491-15E3-39C167E10E3F</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6b26691f-8c1f-4126-b8c0-bf9220966c29">
+  <name>TransferOnCredit</name>
+  <synonym>
+   <key>en</key>
+   <value>9722B410-772D-9841-132F-F13925C2CB1C</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="792c6582-2ab8-43ad-bd7f-5ed947f7ed82">
+  <name>LoanPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>2BFB527A-E798-5377-7D98-889AD4F828A8</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

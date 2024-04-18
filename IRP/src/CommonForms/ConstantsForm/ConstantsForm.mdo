@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e936e0c7-60a7-4a0f-8f2a-ca790ac325f2">
-  <name>ConstantsForm</name>
-  <synonym>
-    <key>en</key>
-    <value>Constants form</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
-  <useStandardCommands>true</useStandardCommands>
+ <name>ConstantsForm</name>
+ <synonym>
+  <key>en</key>
+  <value>ACC5BAEC-EB65-AFBE-E3E7-78D7D58DADB4</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
+ <useStandardCommands>true</useStandardCommands>
 </mdclass:CommonForm>

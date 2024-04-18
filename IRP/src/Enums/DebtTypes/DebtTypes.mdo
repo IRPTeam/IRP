@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7def9404-8317-4909-a07b-a6085d159dc9">
-  <producedTypes>
-    <refType typeId="5e902cab-0aab-46c3-acb1-a6082b7215a5" valueTypeId="c167dc86-302c-4104-9e6b-c0f35d832056"/>
-    <listType typeId="7167a702-56c1-47cc-a25d-adc1abcf4795" valueTypeId="64cce694-0cbc-402e-8d67-81264c153487"/>
-    <managerType typeId="bde0abc3-b86d-4f07-94b1-c746cbd699df" valueTypeId="ae3ec812-6b43-4e6c-ac19-3b222246dc41"/>
-  </producedTypes>
-  <name>DebtTypes</name>
+ <producedTypes>
+  <refType typeId="5e902cab-0aab-46c3-acb1-a6082b7215a5" valueTypeId="c167dc86-302c-4104-9e6b-c0f35d832056"/>
+  <listType typeId="7167a702-56c1-47cc-a25d-adc1abcf4795" valueTypeId="64cce694-0cbc-402e-8d67-81264c153487"/>
+  <managerType typeId="bde0abc3-b86d-4f07-94b1-c746cbd699df" valueTypeId="ae3ec812-6b43-4e6c-ac19-3b222246dc41"/>
+ </producedTypes>
+ <name>DebtTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>9DEF46BC-722D-CED2-2A61-140411B8C191</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="9ee98991-8ba6-4dbd-afb7-7d09fc4866a9">
+  <name>AdvanceVendor</name>
   <synonym>
-    <key>en</key>
-    <value>Debt types</value>
+   <key>en</key>
+   <value>5B4737B1-AE9D-9498-889A-A0D0B2B53FEF</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="9ee98991-8ba6-4dbd-afb7-7d09fc4866a9">
-    <name>AdvanceVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Advance (Vendor)</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="4cd055db-62c0-463c-80e6-823172d9a399">
-    <name>TransactionVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction (Vendor)</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="08dcab73-6a5c-438c-ab26-8e2287c4a288">
-    <name>AdvanceCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Advance (Customer)</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="49188b34-50d3-4121-b8b8-245f4aaab29c">
-    <name>TransactionCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction (Customer)</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="4cd055db-62c0-463c-80e6-823172d9a399">
+  <name>TransactionVendor</name>
+  <synonym>
+   <key>en</key>
+   <value>BAA0D546-4FEA-DB6F-F245-55ABEE4235F7</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="08dcab73-6a5c-438c-ab26-8e2287c4a288">
+  <name>AdvanceCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>8D877E57-6051-6120-0152-25957A6C3F96</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="49188b34-50d3-4121-b8b8-245f4aaab29c">
+  <name>TransactionCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>33A800D4-AF91-605F-F06E-EB4EA767384A</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

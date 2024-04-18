@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57a0e308-4e56-4150-ac46-2e98eb6db036">
-  <name>Payment_ReturnPaymentByPaymentCard</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment return payment by payment card</value>
-  </synonym>
+ <name>Payment_ReturnPaymentByPaymentCard</name>
+ <synonym>
+  <key>en</key>
+  <value>29BEF39D-E9DB-9BB7-7331-1633FAE5585F__</value>
+ </synonym>
 </mdclass:CommonPicture>

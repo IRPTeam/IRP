@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5119810-4560-4d0b-964f-da8e2d5bc05a">
-  <producedTypes>
-    <objectType typeId="4655ccfb-2370-4da7-9874-b8cbbc2b1562" valueTypeId="8b99270e-ed5e-4d77-9ffa-ecb45199038c"/>
-    <managerType typeId="58df0712-1f2c-43bd-9b51-471fade6b9ee" valueTypeId="3419bf14-a1b2-40d2-93fa-dd1527f49729"/>
-  </producedTypes>
-  <name>SystemSettings</name>
+ <producedTypes>
+  <objectType typeId="4655ccfb-2370-4da7-9874-b8cbbc2b1562" valueTypeId="8b99270e-ed5e-4d77-9ffa-ecb45199038c"/>
+  <managerType typeId="58df0712-1f2c-43bd-9b51-471fade6b9ee" valueTypeId="3419bf14-a1b2-40d2-93fa-dd1527f49729"/>
+ </producedTypes>
+ <name>SystemSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>84135F92-077E-E613-3784-4C8BA4ED7799</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.SystemSettings.Form.Form</defaultForm>
+ <forms uuid="8b9f4c4d-a1cb-4665-9cb6-0512fe997ce5">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>System settings</value>
+   <key>en</key>
+   <value>A8BFF7F8-7475-5102-251A-AD566C3BFBA8</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.SystemSettings.Form.Form</defaultForm>
-  <forms uuid="8b9f4c4d-a1cb-4665-9cb6-0512fe997ce5">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

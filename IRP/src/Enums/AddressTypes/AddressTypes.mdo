@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="863c5847-b93b-4cb2-822c-3fd72a15fc7a">
-  <producedTypes>
-    <refType typeId="ea65ca12-307c-4f2a-b05b-da378739a562" valueTypeId="35e5864a-6934-4184-a919-b26518e823cf"/>
-    <listType typeId="60f55b67-30de-4ac4-8e1b-8ef49bb2f639" valueTypeId="e8475b0c-e468-4637-ace8-afc8c024eff0"/>
-    <managerType typeId="200fa718-850a-408d-a100-d18ef877fb7a" valueTypeId="a956be1d-91ea-45d4-ba91-98a45e4f8e1f"/>
-  </producedTypes>
-  <name>AddressTypes</name>
+ <producedTypes>
+  <refType typeId="ea65ca12-307c-4f2a-b05b-da378739a562" valueTypeId="35e5864a-6934-4184-a919-b26518e823cf"/>
+  <listType typeId="60f55b67-30de-4ac4-8e1b-8ef49bb2f639" valueTypeId="e8475b0c-e468-4637-ace8-afc8c024eff0"/>
+  <managerType typeId="200fa718-850a-408d-a100-d18ef877fb7a" valueTypeId="a956be1d-91ea-45d4-ba91-98a45e4f8e1f"/>
+ </producedTypes>
+ <name>AddressTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>0EAF650F-08B7-7E8F-F1FD-D577B1151219</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="a960cfb0-07be-4eba-9f46-1684987974b1">
+  <name>Legal</name>
   <synonym>
-    <key>en</key>
-    <value>Address types</value>
+   <key>en</key>
+   <value>74A36AA0-6167-9706-6CFD-DEBED429DC7C</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="a960cfb0-07be-4eba-9f46-1684987974b1">
-    <name>Legal</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f48c81e6-5d52-4111-a35d-ec457f98e943">
-    <name>Phisical</name>
-    <synonym>
-      <key>en</key>
-      <value>Phisical</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
-    <name>Shipment</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="f48c81e6-5d52-4111-a35d-ec457f98e943">
+  <name>Phisical</name>
+  <synonym>
+   <key>en</key>
+   <value>C5FE5F26-C620-B60A-AB0E-E4A705075D8B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a235c31b-ad9d-4431-b583-95f2933b5e06">
+  <name>Shipment</name>
+  <synonym>
+   <key>en</key>
+   <value>104FD1E3-8B6F-1B00-02EB-BEA36643B327</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="0270931a-aa87-484f-b087-5b4c3b906721">
+  <name>Other</name>
+  <synonym>
+   <key>en</key>
+   <value>4BE9C996-5ADA-5040-0252-2E8550C5A433</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

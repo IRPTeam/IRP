@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e3f64960-8093-44ba-94fd-449bcbc3a92f">
-  <producedTypes>
-    <refType typeId="d270df77-a6eb-4cda-90fe-dd5ced92e662" valueTypeId="bf1fac97-563c-45aa-b4eb-3a9694fdad07"/>
-    <listType typeId="7711e617-16e8-43bb-8e9d-45ce198b5634" valueTypeId="7c195ec3-1571-4d2f-9047-826fe2ef98dc"/>
-    <managerType typeId="137ec776-4553-41d9-9f42-e281727fd73a" valueTypeId="a609783d-9ed6-40af-b344-50c9b031277f"/>
-  </producedTypes>
-  <name>EmployeeScheduleTypes</name>
+ <producedTypes>
+  <refType typeId="d270df77-a6eb-4cda-90fe-dd5ced92e662" valueTypeId="bf1fac97-563c-45aa-b4eb-3a9694fdad07"/>
+  <listType typeId="7711e617-16e8-43bb-8e9d-45ce198b5634" valueTypeId="7c195ec3-1571-4d2f-9047-826fe2ef98dc"/>
+  <managerType typeId="137ec776-4553-41d9-9f42-e281727fd73a" valueTypeId="a609783d-9ed6-40af-b344-50c9b031277f"/>
+ </producedTypes>
+ <name>EmployeeScheduleTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>471026A8-7A73-4FF3-3E3B-BD65E2A378F9</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="ff2a97f4-2ec5-44b3-b5c6-72c930df820a">
+  <name>Day</name>
   <synonym>
-    <key>en</key>
-    <value>Employee schedule types</value>
+   <key>en</key>
+   <value>2DE12A7E-1C0F-73CD-DD09-9D3575E93B66</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="ff2a97f4-2ec5-44b3-b5c6-72c930df820a">
-    <name>Day</name>
-    <synonym>
-      <key>en</key>
-      <value>Day</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="805ea384-3817-4375-9708-3e14f09dff32">
-    <name>Hour</name>
-    <synonym>
-      <key>en</key>
-      <value>Hour</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="805ea384-3817-4375-9708-3e14f09dff32">
+  <name>Hour</name>
+  <synonym>
+   <key>en</key>
+   <value>19CEA46E-6A66-F2AE-E4FA-AAF6F064D57D</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

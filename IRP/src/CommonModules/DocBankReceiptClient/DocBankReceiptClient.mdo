@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="40acaae8-12a5-4b66-b996-419884c8da41">
-  <name>DocBankReceiptClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc bank receipt client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocBankReceiptClient</name>
+ <synonym>
+  <key>en</key>
+  <value>64915628-7B31-CBCB-BF01-17FF02E62515</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

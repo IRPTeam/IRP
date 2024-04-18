@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ab5fe1c-1ea0-4584-bfb1-89dc546bfe32">
-  <producedTypes>
-    <managerType typeId="7fabb48e-5653-4f5a-970c-e16330bae743" valueTypeId="485e8cf5-6c42-4b3d-a09f-9dc92a1ba395"/>
-    <valueManagerType typeId="427a7a80-8626-40f6-b5cb-4f02e63e2c06" valueTypeId="2227893d-8aff-4bae-ae81-2d209f9b7ce4"/>
-    <valueKeyType typeId="922434d2-147d-4060-8438-0f5618bab915" valueTypeId="c7775b91-3d27-4ebc-9b0f-9df21362fa99"/>
-  </producedTypes>
-  <name>UseJobQueueForExternalFunctions</name>
-  <synonym>
-    <key>en</key>
-    <value>Use job queue for external functions</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3ab5fe1c-1ea0-4584-bfb1-89dc546bfe32">
+ <producedTypes>
+  <managerType typeId="7fabb48e-5653-4f5a-970c-e16330bae743" valueTypeId="485e8cf5-6c42-4b3d-a09f-9dc92a1ba395"/>
+  <valueManagerType typeId="427a7a80-8626-40f6-b5cb-4f02e63e2c06" valueTypeId="2227893d-8aff-4bae-ae81-2d209f9b7ce4"/>
+  <valueKeyType typeId="922434d2-147d-4060-8438-0f5618bab915" valueTypeId="c7775b91-3d27-4ebc-9b0f-9df21362fa99"/>
+ </producedTypes>
+ <name>UseJobQueueForExternalFunctions</name>
+ <synonym>
+  <key>en</key>
+  <value>82C7D023-3150-E0E0-010B-B2C74694F986</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

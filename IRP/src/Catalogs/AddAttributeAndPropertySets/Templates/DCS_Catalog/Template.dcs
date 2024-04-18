@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item type</v8:content>
+					<v8:content>14EA206F-DECE-3D38-8DD9-9786819E9A91</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -22,7 +22,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Ref</v8:content>
+					<v8:content>29033C90-0BD4-97C4-4A3B-B1F42571C29D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -46,7 +46,7 @@ FROM
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Item type</v8:content>
+						<v8:content>D8093A98-1B29-C55E-E9D9-99F879152AB0</v8:content>
 					</v8:item>
 				</title>
 				<valueType>
@@ -59,7 +59,7 @@ FROM
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Ref</v8:content>
+						<v8:content>BE52E217-B864-8434-46B4-460A27EA0613</v8:content>
 					</v8:item>
 				</title>
 				<valueType>

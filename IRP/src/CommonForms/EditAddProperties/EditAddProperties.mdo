@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="86f32abd-f24a-4fa8-809d-6752eddbeea4">
-  <name>EditAddProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit add properties</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditAddProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>505DDB13-9895-6400-0E0F-F2CC0C64EBB5</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d9eb045-0a6c-44ea-b276-122a8c39faa4">
-  <name>LockDataModification</name>
-  <synonym>
-    <key>en</key>
-    <value>Lock data modification</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>FunctionalOption.UseLockDataModification</content>
-  <content>Constant.UseLockDataModification</content>
-  <content>EventSubscription.BeforeWrite_DocumentsLockDataModification</content>
-  <content>CommonModule.LockDataModificationPrivileged</content>
-  <content>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</content>
-  <content>InformationRegister.LockDataModificationRules</content>
-  <content>Catalog.LockDataModificationReasons</content>
-  <content>SessionParameter.IgnoreLockModificationData</content>
-  <content>CommonModule.LockDataModificationReuse</content>
-  <content>EventSubscription.BeforeWrite_CatalogsLockDataModification</content>
-  <content>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>LockDataModification</name>
+ <synonym>
+  <key>en</key>
+  <value>1B7B09FA-768D-606D-D577-78D54419A604</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>FunctionalOption.UseLockDataModification</content>
+ <content>Constant.UseLockDataModification</content>
+ <content>EventSubscription.BeforeWrite_DocumentsLockDataModification</content>
+ <content>CommonModule.LockDataModificationPrivileged</content>
+ <content>EventSubscription.BeforeWrite_AccumulationRegistersLockDataModification</content>
+ <content>InformationRegister.LockDataModificationRules</content>
+ <content>Catalog.LockDataModificationReasons</content>
+ <content>SessionParameter.IgnoreLockModificationData</content>
+ <content>CommonModule.LockDataModificationReuse</content>
+ <content>EventSubscription.BeforeWrite_CatalogsLockDataModification</content>
+ <content>EventSubscription.BeforeWrite_InformationRegistersLockDataModification</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

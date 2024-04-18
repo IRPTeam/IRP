@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="596573b0-c473-4cbf-acb9-93cf6cf3e4eb">
-  <name>GetItemInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Get item info</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>GetItemInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>154B975D-FEA3-5612-27E9-9CB79C320D92</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

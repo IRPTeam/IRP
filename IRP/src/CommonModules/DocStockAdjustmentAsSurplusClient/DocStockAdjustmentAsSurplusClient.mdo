@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6a235264-695f-4a69-857c-eb6d57f4a492">
-  <name>DocStockAdjustmentAsSurplusClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc stock adjustment as surplus client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocStockAdjustmentAsSurplusClient</name>
+ <synonym>
+  <key>en</key>
+  <value>668A9BD6-7EF3-B067-758C-CA209FED7EE7__</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

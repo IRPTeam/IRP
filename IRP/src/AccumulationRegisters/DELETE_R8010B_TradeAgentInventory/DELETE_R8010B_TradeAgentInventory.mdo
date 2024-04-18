@@ -1,102 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c5eed7ac-5ada-4925-a357-fcd5781f4926">
-  <producedTypes>
-    <selectionType typeId="12881a66-c5a0-4011-a10f-61a3af7fe308" valueTypeId="58077f29-57d6-45eb-8cdb-f2116080ba97"/>
-    <listType typeId="5198994a-1ac6-4af1-b723-75e9717e725e" valueTypeId="d90f9597-8c0a-4252-8b43-2b68dbc16bf7"/>
-    <managerType typeId="2b806a10-c963-4f0d-84af-0e83ad1112a8" valueTypeId="51b07429-4bac-4c2f-9c29-8f5111f65ec7"/>
-    <recordSetType typeId="43c40ddc-22aa-41ba-a3ab-5f0bb4b12efb" valueTypeId="3ea948aa-fcc7-4a38-9d46-e80a736954c8"/>
-    <recordKeyType typeId="4cdf2994-9e97-471c-89e4-17b133433a62" valueTypeId="cd46dd42-f0b9-4593-b764-97f9222ccbb0"/>
-    <recordType typeId="a9360c7f-8cd7-460e-b5e4-89505ca9bfbe" valueTypeId="d1ae5cc7-2845-4311-bfcd-8fda9c7449ca"/>
-  </producedTypes>
-  <name>DELETE_R8010B_TradeAgentInventory</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c5eed7ac-5ada-4925-a357-fcd5781f4926">
+ <producedTypes>
+  <selectionType typeId="12881a66-c5a0-4011-a10f-61a3af7fe308" valueTypeId="58077f29-57d6-45eb-8cdb-f2116080ba97"/>
+  <listType typeId="5198994a-1ac6-4af1-b723-75e9717e725e" valueTypeId="d90f9597-8c0a-4252-8b43-2b68dbc16bf7"/>
+  <managerType typeId="2b806a10-c963-4f0d-84af-0e83ad1112a8" valueTypeId="51b07429-4bac-4c2f-9c29-8f5111f65ec7"/>
+  <recordSetType typeId="43c40ddc-22aa-41ba-a3ab-5f0bb4b12efb" valueTypeId="3ea948aa-fcc7-4a38-9d46-e80a736954c8"/>
+  <recordKeyType typeId="4cdf2994-9e97-471c-89e4-17b133433a62" valueTypeId="cd46dd42-f0b9-4593-b764-97f9222ccbb0"/>
+  <recordType typeId="a9360c7f-8cd7-460e-b5e4-89505ca9bfbe" valueTypeId="d1ae5cc7-2845-4311-bfcd-8fda9c7449ca"/>
+ </producedTypes>
+ <name>DELETE_R8010B_TradeAgentInventory</name>
+ <synonym>
+  <key>en</key>
+  <value>D401BD43-3853-D2A5-52EE-E74242BD2CCF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="c23121fe-60e5-4721-8d4e-2fd37577d6f5">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R8010 Trade agent inventory</value>
+   <key>en</key>
+   <value>4AAD2F72-50F8-D437-7D79-96A21D4B3203</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="c23121fe-60e5-4721-8d4e-2fd37577d6f5">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="7a850de9-fa58-4400-9eb1-e93a0f19d15d">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="88f0731b-ba97-47da-8e9b-241fd6215238">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="1f6c8f96-39b2-4b7e-8735-ed120ff760e4">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="e61f5d77-7ffb-4557-9543-4d26d04a1690">
-    <name>Agreement</name>
-    <synonym>
-      <key>en</key>
-      <value>Agreement</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="69fabe4c-18ed-4839-a750-b35840721267">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="7a850de9-fa58-4400-9eb1-e93a0f19d15d">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>4AC07CEE-D507-A437-7BB9-9A1E56F976B0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="88f0731b-ba97-47da-8e9b-241fd6215238">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>F2A53215-D502-F2A5-5885-587EA7506BE5</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="1f6c8f96-39b2-4b7e-8735-ed120ff760e4">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>A7CBDB6D-60EF-F9AF-F603-3213892393D3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="e61f5d77-7ffb-4557-9543-4d26d04a1690">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>AF5BC486-ACC1-C97B-BBC7-7C11367E2972</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="69fabe4c-18ed-4839-a750-b35840721267">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>644E6059-7D3F-FC0F-F1E1-14C1AC93C97E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

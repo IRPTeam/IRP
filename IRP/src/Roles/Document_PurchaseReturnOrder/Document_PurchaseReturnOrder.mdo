@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa3a6de9-50e0-44b1-9ac4-6eccd80e6eb6">
-  <name>Document_PurchaseReturnOrder</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Purchase return order&quot;</value>
-  </synonym>
+ <name>Document_PurchaseReturnOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>6507969B-EA35-81CF-F16D-DE315BF52CDA</value>
+ </synonym>
 </mdclass:Role>

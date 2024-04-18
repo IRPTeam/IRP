@@ -115,7 +115,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Retail shipment confirmation [Number] [Date]</v8:content>
+							<v8:content>7182A655-A8A8-F362-2DDB-B4E8F4C2318B________[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -153,7 +153,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>C590D567-E04D-1487-7162-24C6F933C394</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -177,7 +177,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>160F44BD-87A7-C02A-AF68-8FEE98A86FA5</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -208,7 +208,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>7FC4F512-6999-1013-3002-2D58850E416B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -219,7 +219,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>053A0057-19A6-C9B0-073E-E8744AAD4832</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -230,7 +230,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>2BCDA40E-C0CE-5566-689C-C623E1291CA2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -241,7 +241,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>199DD897-0596-2C13-30F0-0675805C0BB8</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -252,7 +252,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>FA2AFAE1-3876-8532-2793-3FF1B6F427B2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -312,7 +312,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>868EC5C9-6203-F124-4A32-2284D50E1DC5</v8:content>
 						</v8:item>
 					</tl>
 				</c>

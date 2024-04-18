@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a8a7efb5-b5f8-4f78-96e2-776203aeacf4">
-  <name>ControllerServer_V2</name>
-  <synonym>
-    <key>en</key>
-    <value>Controller server v2</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>ControllerServer_V2</name>
+ <synonym>
+  <key>en</key>
+  <value>067B1900-CF7E-3ED9-9D39-9A2E433C1FAC</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

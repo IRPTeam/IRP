@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c3f817d1-0e0a-4261-88c8-333169a9c564">
-  <producedTypes>
-    <selectionType typeId="e9ba554f-b17d-443f-9540-85ef95da0916" valueTypeId="6390ebb6-6de8-45bd-a4ee-1e8873984815"/>
-    <listType typeId="3e251962-4d0d-426d-bea7-6dac765a84f5" valueTypeId="c7caf2db-9483-44ad-95f6-bdd827e6d29d"/>
-    <managerType typeId="f6858399-580c-48d8-a31d-1fa90f336563" valueTypeId="d43b925c-4b9b-4e35-b8f7-c53775d15140"/>
-    <recordSetType typeId="33d9e6a2-b99a-4893-8cbe-e8eb6e9a7dfe" valueTypeId="ea1930dc-eb78-423e-9c14-7de8a0ad6dd6"/>
-    <recordKeyType typeId="de973f73-fbcc-4222-a279-f7abc1563471" valueTypeId="0b8ca442-b866-41bc-b1d6-737047dd53fe"/>
-    <recordType typeId="a7658706-6b7a-4f34-b50d-543bccd93326" valueTypeId="006fba6c-51d6-4a16-95b3-de3ff155f4bb"/>
-    <recordManagerType typeId="ad059a00-d478-4c99-9e8d-9cebbc911ac6" valueTypeId="f429d071-df4d-4de5-8d63-27c5cbee7c70"/>
-  </producedTypes>
-  <name>T1020S_Cache</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c3f817d1-0e0a-4261-88c8-333169a9c564">
+ <producedTypes>
+  <selectionType typeId="e9ba554f-b17d-443f-9540-85ef95da0916" valueTypeId="6390ebb6-6de8-45bd-a4ee-1e8873984815"/>
+  <listType typeId="3e251962-4d0d-426d-bea7-6dac765a84f5" valueTypeId="c7caf2db-9483-44ad-95f6-bdd827e6d29d"/>
+  <managerType typeId="f6858399-580c-48d8-a31d-1fa90f336563" valueTypeId="d43b925c-4b9b-4e35-b8f7-c53775d15140"/>
+  <recordSetType typeId="33d9e6a2-b99a-4893-8cbe-e8eb6e9a7dfe" valueTypeId="ea1930dc-eb78-423e-9c14-7de8a0ad6dd6"/>
+  <recordKeyType typeId="de973f73-fbcc-4222-a279-f7abc1563471" valueTypeId="0b8ca442-b866-41bc-b1d6-737047dd53fe"/>
+  <recordType typeId="a7658706-6b7a-4f34-b50d-543bccd93326" valueTypeId="006fba6c-51d6-4a16-95b3-de3ff155f4bb"/>
+  <recordManagerType typeId="ad059a00-d478-4c99-9e8d-9cebbc911ac6" valueTypeId="f429d071-df4d-4de5-8d63-27c5cbee7c70"/>
+ </producedTypes>
+ <name>T1020S_Cache</name>
+ <synonym>
+  <key>en</key>
+  <value>38E63869-1BF6-C35D-D526-6A52032F5868</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>1F352B45-E199-4BFB-B4C0-0943A54552A2</value>
+ </recordPresentation>
+ <resources uuid="8ca74338-df4c-41ac-8114-c7d65cfd4025">
+  <name>Data</name>
   <synonym>
-    <key>en</key>
-    <value>T1020 Cache</value>
+   <key>en</key>
+   <value>F9172087-9B0C-7B2C-C964-4A46E8638FAE</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>T1020 Cache</value>
-  </recordPresentation>
-  <resources uuid="8ca74338-df4c-41ac-8114-c7d65cfd4025">
-    <name>Data</name>
-    <synonym>
-      <key>en</key>
-      <value>Data</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="b4dbef10-d573-42d7-a271-33bfd463378f">
-    <name>Created</name>
-    <synonym>
-      <key>en</key>
-      <value>Created</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="dbab193c-17bd-413f-8fe8-298bafdf0113">
-    <name>LastGet</name>
-    <synonym>
-      <key>en</key>
-      <value>Last get</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="2ab9ff98-d4b8-4fdc-b23b-080cf326d9f9">
-    <name>Size</name>
-    <synonym>
-      <key>en</key>
-      <value>Size</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>20</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="24c9f32e-a368-4112-8713-43b815359f05">
-    <name>UUID</name>
-    <synonym>
-      <key>en</key>
-      <value>UUID</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="1776c651-72da-4cac-95ae-8052f35edb72">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="b4dbef10-d573-42d7-a271-33bfd463378f">
+  <name>Created</name>
+  <synonym>
+   <key>en</key>
+   <value>A921477A-BF10-4646-6199-9574553A78CE</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="dbab193c-17bd-413f-8fe8-298bafdf0113">
+  <name>LastGet</name>
+  <synonym>
+   <key>en</key>
+   <value>1DFC923E-F27F-E12B-B047-7B69D1EECA1B</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="2ab9ff98-d4b8-4fdc-b23b-080cf326d9f9">
+  <name>Size</name>
+  <synonym>
+   <key>en</key>
+   <value>8BD33BF0-5F07-551F-FDF8-8FC957B9A304</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>20</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="24c9f32e-a368-4112-8713-43b815359f05">
+  <name>UUID</name>
+  <synonym>
+   <key>en</key>
+   <value>C7BF953A-8216-F792-2349-97A6AF694B9A</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="1776c651-72da-4cac-95ae-8052f35edb72">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>9A89234A-9984-DC54-4E41-17CC1E8BBA3B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

@@ -11,7 +11,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Opening balance</v8:content>
+					<v8:content>2EEFB8B8-8CC3-8310-0F2F-F76CB0FF8815</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -20,7 +20,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Receipt</v8:content>
+					<v8:content>4CAB5DD7-E232-E1C4-4E20-00B53BDB299D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -29,7 +29,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Expense</v8:content>
+					<v8:content>192D4703-3856-396D-D8C2-29A33A9B5CEB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -38,7 +38,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Closing balance</v8:content>
+					<v8:content>0F8D369B-CD6D-9A78-84A4-4F95A507AB69</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -48,7 +48,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>EE431627-3015-F087-7EBA-A765991D1305</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -63,7 +63,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>6B7C616F-55C9-C3C5-53C0-0FA00C64AB29</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -73,7 +73,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>78CE8CA4-C1C2-ED92-2521-1BC5546D19DA</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -96,7 +96,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Recorder</v8:content>
+					<v8:content>9AD67DD6-7DC4-900E-EB14-40460850939C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -138,7 +138,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>50ACEC04-EED1-0060-0685-548737C21A11</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -179,7 +179,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>F78FB4F8-B58D-D1E2-2849-93F455A5C861</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -194,7 +194,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>A00AA6D0-A09E-BAAE-E20B-B4FE0CA3FDE6</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -204,7 +204,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>3170040A-0BA7-F172-2FE1-130EA18D78FD</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -214,7 +214,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice amount</v8:content>
+					<v8:content>073D4C88-FA0B-79D2-285A-A157C8C02A2A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -229,7 +229,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice tax amount</v8:content>
+					<v8:content>F8FB7176-CE1D-2C0B-B460-0A1A101F9D00</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -244,7 +244,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice tax amount</v8:content>
+					<v8:content>7504D0C9-FE11-5854-4B00-02D40CD5385E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -254,7 +254,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice tax amount</v8:content>
+					<v8:content>CBDB61BF-9296-40F4-40B2-259218B001E1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -264,7 +264,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Invoice tax amount</v8:content>
+					<v8:content>09B385EA-C2AE-1CEB-B582-25EAB0E8D00D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -279,7 +279,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost amount</v8:content>
+					<v8:content>B8106D94-36FF-31CC-CEF7-77F421EB73B8</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -294,7 +294,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost amount</v8:content>
+					<v8:content>FA19D5E5-4A20-FCDF-F1F6-6D19FD3BFE72</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -304,7 +304,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost amount</v8:content>
+					<v8:content>5EB98921-61B6-4957-7F61-187095C58FA5</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -314,7 +314,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost amount</v8:content>
+					<v8:content>CC5CB8E9-CC5C-F52F-FD9D-DF75AB7FADFD</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -329,7 +329,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost tax amount</v8:content>
+					<v8:content>FC957A10-7040-B6AD-DFB1-1B1808F7C3CB</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -344,7 +344,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost tax amount</v8:content>
+					<v8:content>07B489D5-C076-435A-AF55-5F0F96B78FC8</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -354,7 +354,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost tax amount</v8:content>
+					<v8:content>F329349D-32F3-8314-4043-31FF45891219</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -364,7 +364,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Indirect cost tax amount</v8:content>
+					<v8:content>6D0E2701-3348-4A5F-F5F1-17A7FFF7F8F1</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -379,7 +379,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost amount by ratio</v8:content>
+					<v8:content>92A1AF85-9A42-D90C-C7BD-D24E35758D81</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -394,7 +394,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost amount by ratio</v8:content>
+					<v8:content>AA00FBD8-94E2-A3CA-AE42-2393FF6A3940</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -404,7 +404,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost amount by ratio</v8:content>
+					<v8:content>B5A4DE0D-D3F4-01AD-DCD0-0FE767016ECC</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -414,7 +414,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost amount by ratio</v8:content>
+					<v8:content>FF16634D-33D8-BA69-995B-B27437AC01C0</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -429,7 +429,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost tax amount by ratio</v8:content>
+					<v8:content>0D6F6F96-8C41-9E3E-EAE3-354585500207</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -444,7 +444,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost tax amount by ratio</v8:content>
+					<v8:content>A09A3228-7212-0B9A-A4D7-7581D656C7F8</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -454,7 +454,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost tax amount by ratio</v8:content>
+					<v8:content>453229DF-C5B1-9D7F-F7FF-F5329CDF525A</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -464,7 +464,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra cost tax amount by ratio</v8:content>
+					<v8:content>D66853D3-2F8D-EF09-90C4-4B6E44E10E13</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -479,7 +479,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost amount</v8:content>
+					<v8:content>A14BBECB-A664-D6E9-9586-6DB72E642125</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -494,7 +494,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost amount</v8:content>
+					<v8:content>9B75C725-8B98-5A38-8EE5-57443012AB7F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -504,7 +504,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost amount</v8:content>
+					<v8:content>58FEC17F-FB86-4DCF-F8B8-8371C701B1CA</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -514,7 +514,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost amount</v8:content>
+					<v8:content>50AE8422-7C0E-FA89-9DDF-FE3CE4E864C5</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -529,7 +529,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost tax amount</v8:content>
+					<v8:content>8862E684-BF02-892D-DFA0-0A3F82D5153A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -544,7 +544,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost tax amount</v8:content>
+					<v8:content>55C989AE-BDA3-B03F-F8AF-FA4EBC1C59EE</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -554,7 +554,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost tax amount</v8:content>
+					<v8:content>BD96C822-0965-9591-1778-85DEA6BDFDEC</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -564,7 +564,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Extra direct cost tax amount</v8:content>
+					<v8:content>A84376FA-53F4-D18A-A6B2-2C8F5116027C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -579,7 +579,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost amount</v8:content>
+					<v8:content>848B7F2E-86BA-E3A5-50EE-E56DFD92D4FF</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -594,7 +594,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost amount</v8:content>
+					<v8:content>7AF2F298-2B2A-541E-E50A-AB5C1F626C6F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -604,7 +604,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost amount</v8:content>
+					<v8:content>9D4ECB16-C8A5-6EC9-9585-59BCF7214251</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -614,7 +614,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost amount</v8:content>
+					<v8:content>6197D8B6-ED4C-4355-582D-D84463447C87</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -629,7 +629,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost tax amount</v8:content>
+					<v8:content>94BEE6B6-468C-930B-BADF-F6F969306FBC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -644,7 +644,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost tax amount</v8:content>
+					<v8:content>D8F92BBC-97E0-A8B0-017F-FC2B40BDB37B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -654,7 +654,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost tax amount</v8:content>
+					<v8:content>C0C48F14-F3B8-ACE9-9ABB-B7A4DA03FE45</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -664,7 +664,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated cost tax amount</v8:content>
+					<v8:content>5007B067-BCBE-1113-3ABA-A1B57DE20AAC</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -679,7 +679,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue amount</v8:content>
+					<v8:content>40C75696-D880-2125-5EFB-B2FDA461323C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -694,7 +694,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue amount</v8:content>
+					<v8:content>77B16B1C-F2AF-7E7A-AA4B-B73E5A245876</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -704,7 +704,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue amount</v8:content>
+					<v8:content>B834D4CC-2034-7BD0-0374-41AE0F3B68CB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -714,7 +714,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue amount</v8:content>
+					<v8:content>073420E0-C428-8A3F-FDA6-6163A0C83680</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -729,7 +729,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue tax amount</v8:content>
+					<v8:content>9E315F03-CFE0-514D-DC53-3C38B28CBB0F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -744,7 +744,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue tax amount</v8:content>
+					<v8:content>F0728EC0-FCCF-22BF-FFD9-9E6938F26F38</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -754,7 +754,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue tax amount</v8:content>
+					<v8:content>879809E8-09DD-E96A-A54F-FA6FF909986B</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -764,7 +764,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Allocated revenue tax amount</v8:content>
+					<v8:content>6793BCE7-DDBA-3EFB-BE89-964D84DD0C11</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -779,7 +779,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total amount</v8:content>
+					<v8:content>77263955-114B-FFF5-51BA-A00E9BDC3B64</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -794,7 +794,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total amount</v8:content>
+					<v8:content>3EEA96CF-41B3-B4E3-3A62-2FF61B691D05</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -804,7 +804,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total amount</v8:content>
+					<v8:content>4A9681BA-14EA-41D5-5128-8F790AB82C87</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -814,7 +814,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total amount</v8:content>
+					<v8:content>8C44FEB8-C21C-2555-52F6-6BD723043A14</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -829,7 +829,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total net amount</v8:content>
+					<v8:content>87C5E94A-0F94-5FAE-EDCD-D7A2BFC5C65F</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -844,7 +844,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total net amount</v8:content>
+					<v8:content>CB10A668-9BD2-E0CC-CF91-1EB6951D9592</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -854,7 +854,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total net amount</v8:content>
+					<v8:content>4B59153A-8D57-388E-E4E4-4D8FBBCBCCCC</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -864,7 +864,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total net amount</v8:content>
+					<v8:content>7E34920F-4925-0A7E-E759-98A15649396E</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -879,7 +879,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total tax amount</v8:content>
+					<v8:content>5948F9CC-7AAB-B2D2-2490-02134AF7E12C</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -894,7 +894,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total tax amount</v8:content>
+					<v8:content>7C65DAD1-D59E-B3FD-DE72-2EF35FEC2BF7</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -904,7 +904,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total tax amount</v8:content>
+					<v8:content>7006A7C6-E566-FAD3-3464-4E73729B9477</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -914,7 +914,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total tax amount</v8:content>
+					<v8:content>3ECCD126-2267-D895-5B51-158938800A36</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -929,7 +929,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total cost amount</v8:content>
+					<v8:content>0D732EB6-9856-B57E-E1A6-6D9E6824704A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -944,7 +944,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total cost amount</v8:content>
+					<v8:content>CA2F8B70-EC8B-E509-9C32-21E673A0BD76</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -954,7 +954,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total cost amount</v8:content>
+					<v8:content>702E7C93-6127-2B6B-BDFB-B7B0547C624E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -964,7 +964,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Total cost amount</v8:content>
+					<v8:content>AEC163D4-7CE4-AF5D-D87F-F3E1F4A03BBB</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -1341,7 +1341,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>FB5EE21E-B113-7EF9-91D6-605E53636ADA</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1355,7 +1355,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>2F5B8050-5534-6BE0-0AD0-0A66B6E8A410</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1374,7 +1374,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>4E497782-0A01-20B1-145B-B5706748733D</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -1407,7 +1407,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>334BAF45-9856-3561-1813-3BB8B05D3125</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 				</dcsset:item>
@@ -1500,7 +1500,7 @@ FROM
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Period</v8:content>
+							<v8:content>9EC1AF08-78DF-2172-27C9-984B5A30F859</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

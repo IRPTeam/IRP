@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="27c998d2-0150-4703-b05b-23060c46d009">
-  <name>RowIDInfoServerReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Row ID Info reuse</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>RowIDInfoServerReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>7E082A69-6B2D-6D34-4340-09D3A404AD75</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

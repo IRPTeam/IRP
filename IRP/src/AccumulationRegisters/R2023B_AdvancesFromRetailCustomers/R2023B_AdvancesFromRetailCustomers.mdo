@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e944aff6-1738-4172-a6e3-5d9e70119cec">
-  <producedTypes>
-    <selectionType typeId="b314f1ab-08e3-4ee8-a001-995cb971b9f9" valueTypeId="fcc74184-2394-4aff-b671-6cf0a78d121a"/>
-    <listType typeId="56748f24-2fb0-4fd8-96d5-5689b2407766" valueTypeId="ea4ff209-b72f-4d75-a825-38f863613c72"/>
-    <managerType typeId="aa8f9f95-0872-49a8-9b8a-33bb284d8c68" valueTypeId="58c74080-1dc8-4c8b-bc2d-92f08eb1176a"/>
-    <recordSetType typeId="71da6485-f612-4e1f-8e54-d11ba1459a58" valueTypeId="f8cbabf8-0ae0-4e02-aaed-29860336badc"/>
-    <recordKeyType typeId="4dc1ae8c-9fae-4424-a89d-25de3bcaeb0a" valueTypeId="2ccfd9f1-2e1c-4eb7-93b1-1874ca18155b"/>
-    <recordType typeId="f89d0dde-81fa-4d08-a614-7f25493228d7" valueTypeId="7f34f986-f5b6-420e-8182-7e0d3cc34b7f"/>
-  </producedTypes>
-  <name>R2023B_AdvancesFromRetailCustomers</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e944aff6-1738-4172-a6e3-5d9e70119cec">
+ <producedTypes>
+  <selectionType typeId="b314f1ab-08e3-4ee8-a001-995cb971b9f9" valueTypeId="fcc74184-2394-4aff-b671-6cf0a78d121a"/>
+  <listType typeId="56748f24-2fb0-4fd8-96d5-5689b2407766" valueTypeId="ea4ff209-b72f-4d75-a825-38f863613c72"/>
+  <managerType typeId="aa8f9f95-0872-49a8-9b8a-33bb284d8c68" valueTypeId="58c74080-1dc8-4c8b-bc2d-92f08eb1176a"/>
+  <recordSetType typeId="71da6485-f612-4e1f-8e54-d11ba1459a58" valueTypeId="f8cbabf8-0ae0-4e02-aaed-29860336badc"/>
+  <recordKeyType typeId="4dc1ae8c-9fae-4424-a89d-25de3bcaeb0a" valueTypeId="2ccfd9f1-2e1c-4eb7-93b1-1874ca18155b"/>
+  <recordType typeId="f89d0dde-81fa-4d08-a614-7f25493228d7" valueTypeId="7f34f986-f5b6-420e-8182-7e0d3cc34b7f"/>
+ </producedTypes>
+ <name>R2023B_AdvancesFromRetailCustomers</name>
+ <synonym>
+  <key>en</key>
+  <value>D3C8C429-8A0C-98F1-1195-53C9BBB2258E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="75de67cc-9e82-4564-bde6-e75339938afa">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R2023 Advances from retail customers</value>
+   <key>en</key>
+   <value>8923D965-54F7-8AA6-6EC1-1D3963999823</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="75de67cc-9e82-4564-bde6-e75339938afa">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="74405dee-a5d1-4c86-af11-98982be29464">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c7da50fe-fa67-4c30-9201-27c6c81aa9b4">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="58e33a3b-739d-4aa8-a515-f18cfa2b05ba">
-    <name>RetailCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Retail customer</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.RetailCustomers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="74405dee-a5d1-4c86-af11-98982be29464">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>53ABCEEB-3136-9B13-38AA-AB360FFF48CB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c7da50fe-fa67-4c30-9201-27c6c81aa9b4">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>327FD7A2-0FEB-9194-4172-21EABF305489</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="58e33a3b-739d-4aa8-a515-f18cfa2b05ba">
+  <name>RetailCustomer</name>
+  <synonym>
+   <key>en</key>
+   <value>E47EBC75-5A75-1ED8-842E-E8EA94EEFB3E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.RetailCustomers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

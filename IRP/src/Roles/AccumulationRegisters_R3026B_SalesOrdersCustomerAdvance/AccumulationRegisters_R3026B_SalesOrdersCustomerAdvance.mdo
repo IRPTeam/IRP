@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c66a5339-8fb6-43cf-8232-a7ba00cb45dd">
-  <name>AccumulationRegisters_R3026B_SalesOrdersCustomerAdvance</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3026B SalesOrdersCustomerAdvance</value>
-  </synonym>
+ <name>AccumulationRegisters_R3026B_SalesOrdersCustomerAdvance</name>
+ <synonym>
+  <key>en</key>
+  <value>07BA79E6-1CA2-6353-3AAF-F36576F1BF1E___________________</value>
+ </synonym>
 </mdclass:Role>

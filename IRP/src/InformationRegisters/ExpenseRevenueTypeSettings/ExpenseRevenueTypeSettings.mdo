@@ -1,141 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="34f8a190-42d6-4acb-bcb4-8f6676c78086">
-  <producedTypes>
-    <selectionType typeId="fe7ab3d8-5a18-4686-8d9b-d3858193c4de" valueTypeId="2942d107-43d1-4f34-9508-18e03a14c222"/>
-    <listType typeId="441e1f5d-79b1-41c1-910c-52f7812a0186" valueTypeId="ca7ef30f-ec1f-4233-ba4f-28c6f526b3d4"/>
-    <managerType typeId="e1e3c2b4-45a9-4a27-a73b-37df96694aab" valueTypeId="e9a4025e-c812-4775-9555-3dd98829e67f"/>
-    <recordSetType typeId="80235683-6c52-4e9f-ae18-ac4058391804" valueTypeId="e1225240-ebde-45cd-bf8a-5c781618500b"/>
-    <recordKeyType typeId="69284dac-a0bc-49f6-aa56-7370ca417abc" valueTypeId="916c4e09-74a6-42b4-8296-b3a6c13a8f7d"/>
-    <recordType typeId="ca896745-de1d-4837-9302-1936bde28f23" valueTypeId="f819c094-18e9-422a-a5e7-7b8cfb90ca1d"/>
-    <recordManagerType typeId="80884a6d-e3c8-4320-b2f5-75c1130f2ec6" valueTypeId="2cf28450-d0a9-44ed-84bb-71b9f0d10211"/>
-  </producedTypes>
-  <name>ExpenseRevenueTypeSettings</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="34f8a190-42d6-4acb-bcb4-8f6676c78086">
+ <producedTypes>
+  <selectionType typeId="fe7ab3d8-5a18-4686-8d9b-d3858193c4de" valueTypeId="2942d107-43d1-4f34-9508-18e03a14c222"/>
+  <listType typeId="441e1f5d-79b1-41c1-910c-52f7812a0186" valueTypeId="ca7ef30f-ec1f-4233-ba4f-28c6f526b3d4"/>
+  <managerType typeId="e1e3c2b4-45a9-4a27-a73b-37df96694aab" valueTypeId="e9a4025e-c812-4775-9555-3dd98829e67f"/>
+  <recordSetType typeId="80235683-6c52-4e9f-ae18-ac4058391804" valueTypeId="e1225240-ebde-45cd-bf8a-5c781618500b"/>
+  <recordKeyType typeId="69284dac-a0bc-49f6-aa56-7370ca417abc" valueTypeId="916c4e09-74a6-42b4-8296-b3a6c13a8f7d"/>
+  <recordType typeId="ca896745-de1d-4837-9302-1936bde28f23" valueTypeId="f819c094-18e9-422a-a5e7-7b8cfb90ca1d"/>
+  <recordManagerType typeId="80884a6d-e3c8-4320-b2f5-75c1130f2ec6" valueTypeId="2cf28450-d0a9-44ed-84bb-71b9f0d10211"/>
+ </producedTypes>
+ <name>ExpenseRevenueTypeSettings</name>
+ <synonym>
+  <key>en</key>
+  <value>4D95DABE-2D9A-0D54-432B-BD8D61D13236</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>AE039383-A1AF-8D60-07A9-9C6846573A21</value>
+ </recordPresentation>
+ <resources uuid="ed9bfe39-d687-4f4c-aa64-9ffb8852c356">
+  <name>ExpenseType</name>
   <synonym>
-    <key>en</key>
-    <value>Expense revenue type settings</value>
+   <key>en</key>
+   <value>878BDF21-47BD-FAD1-11D6-62DB0D06DED9</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Expense revenue type setting</value>
-  </recordPresentation>
-  <resources uuid="ed9bfe39-d687-4f4c-aa64-9ffb8852c356">
-    <name>ExpenseType</name>
-    <synonym>
-      <key>en</key>
-      <value>Expense type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsExpense</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="b48ff0ab-a838-4055-9552-fa5041ed0920">
-    <name>RevenueType</name>
-    <synonym>
-      <key>en</key>
-      <value>Revenue type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsRevenue</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="15f02684-fe91-43cc-a79d-d2e718bcba10">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="62fda659-a169-4775-8741-0ac7534e9396">
-    <name>ItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Item type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="a2fd549e-b701-4e7c-823a-1212d981e102">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="9cf5a1c8-d17e-4970-829d-34187654502b">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsExpense</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="b48ff0ab-a838-4055-9552-fa5041ed0920">
+  <name>RevenueType</name>
+  <synonym>
+   <key>en</key>
+   <value>58BCAA0F-3729-FD5A-A53B-BD1BF206B49D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsRevenue</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="15f02684-fe91-43cc-a79d-d2e718bcba10">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>FCCC374C-9BD6-9CDA-ABC5-51DAED5FC001</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="62fda659-a169-4775-8741-0ac7534e9396">
+  <name>ItemType</name>
+  <synonym>
+   <key>en</key>
+   <value>E2352627-C2B9-3DBF-FD03-39C4F9CF4897</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="a2fd549e-b701-4e7c-823a-1212d981e102">
+  <name>Item</name>
+  <synonym>
+   <key>en</key>
+   <value>46CEFAE3-9A0A-5F16-68FC-CAE31FBFCCBB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="9cf5a1c8-d17e-4970-829d-34187654502b">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>42106E0E-A726-A26E-E0D4-44D40FBAEA15</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

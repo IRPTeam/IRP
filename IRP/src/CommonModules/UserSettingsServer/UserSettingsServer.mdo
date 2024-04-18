@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c50c61b8-ca37-4882-bd93-1100cc228b34">
-  <name>UserSettingsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>User settings server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>UserSettingsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>0565499C-E984-6456-6E09-93E2A568AF3C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

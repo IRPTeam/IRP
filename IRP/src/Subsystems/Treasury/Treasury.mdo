@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="72c0dd2d-a611-4c24-bbfd-61b16ff848b1">
-  <name>Treasury</name>
-  <synonym>
-    <key>en</key>
-    <value>Treasury</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Finance</picture>
-  </picture>
-  <content>Catalog.CashAccounts</content>
-  <subsystems>Bank</subsystems>
-  <subsystems>Cash</subsystems>
-  <subsystems>Transfer</subsystems>
-  <subsystems>Retail</subsystems>
-  <subsystems>CashTransactions</subsystems>
-  <subsystems>SchedulingOfPaymentDeadlines</subsystems>
-  <subsystems>ChequeBond</subsystems>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="72c0dd2d-a611-4c24-bbfd-61b16ff848b1">
+ <name>Treasury</name>
+ <synonym>
+  <key>en</key>
+  <value>7C98DBD6-8ADB-DA88-8E82-27819F5E2228</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Finance</picture>
+ </picture>
+ <content>Catalog.CashAccounts</content>
+ <subsystems>Bank</subsystems>
+ <subsystems>Cash</subsystems>
+ <subsystems>Transfer</subsystems>
+ <subsystems>Retail</subsystems>
+ <subsystems>CashTransactions</subsystems>
+ <subsystems>SchedulingOfPaymentDeadlines</subsystems>
+ <subsystems>ChequeBond</subsystems>
 </mdclass:Subsystem>

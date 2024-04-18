@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d8ad3679-f766-4181-9506-ec96fa15b5d3">
-  <name>AccumulationRegisters_R5011B_CustomersAging</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R5011B CustomersAging</value>
-  </synonym>
+ <name>AccumulationRegisters_R5011B_CustomersAging</name>
+ <synonym>
+  <key>en</key>
+  <value>BFF0ADBB-592E-9E4B-B1FE-E1D70A920304_______</value>
+ </synonym>
 </mdclass:Role>

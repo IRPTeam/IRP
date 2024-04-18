@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb038f52-83c9-401e-a4f2-d822f634ce0a">
-  <producedTypes>
-    <objectType typeId="8e279eec-43d6-4a77-add2-a607a91da4e6" valueTypeId="ce70dd8b-b34d-4e3f-9eda-1c0ee3d13492"/>
-    <refType typeId="250afa8e-74f2-4d04-bf71-f71fd4a85f00" valueTypeId="c241d31b-557d-4444-806f-8a4c7ab02c37"/>
-    <selectionType typeId="ab071c29-4170-42fe-96d7-a42611b61352" valueTypeId="c89b08cf-df8e-4e02-9353-e7ad5e95319e"/>
-    <listType typeId="98a1b286-4172-4bf6-8466-56eb10b9c6a9" valueTypeId="d1ec30ab-9608-4ab3-bd21-59afd3243f60"/>
-    <managerType typeId="2c605157-9c7a-4377-b61a-3b22796c7311" valueTypeId="91e7c2f0-12f5-4681-9c3e-e9c3d3221b5e"/>
-  </producedTypes>
-  <name>WorkOrderClosing</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bb038f52-83c9-401e-a4f2-d822f634ce0a">
+ <producedTypes>
+  <objectType typeId="8e279eec-43d6-4a77-add2-a607a91da4e6" valueTypeId="ce70dd8b-b34d-4e3f-9eda-1c0ee3d13492"/>
+  <refType typeId="250afa8e-74f2-4d04-bf71-f71fd4a85f00" valueTypeId="c241d31b-557d-4444-806f-8a4c7ab02c37"/>
+  <selectionType typeId="ab071c29-4170-42fe-96d7-a42611b61352" valueTypeId="c89b08cf-df8e-4e02-9353-e7ad5e95319e"/>
+  <listType typeId="98a1b286-4172-4bf6-8466-56eb10b9c6a9" valueTypeId="d1ec30ab-9608-4ab3-bd21-59afd3243f60"/>
+  <managerType typeId="2c605157-9c7a-4377-b61a-3b22796c7311" valueTypeId="91e7c2f0-12f5-4681-9c3e-e9c3d3221b5e"/>
+ </producedTypes>
+ <name>WorkOrderClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>042644A4-CE15-2466-63E3-3401653ECA94</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.WorkOrderClosing.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>B55BB1E9-3334-C257-7BDD-DE4503C809DE</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>0B5E5258-6657-67AD-D751-14E6CD336588</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.WorkOrderClosing.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.WorkOrderClosing.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.WorkOrderClosing.Form.ChoiceForm</defaultChoiceForm>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Work order closing</value>
+   <key>en</key>
+   <value>8C0EF12B-F0B2-DAE4-41D7-7FC29CB0F8CC</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.WorkOrderClosing.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Work order closing</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Work order closings</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.WorkOrderClosing.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.WorkOrderClosing.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.WorkOrderClosing.Form.ChoiceForm</defaultChoiceForm>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="c02890d7-1004-4a0b-8db7-89036fa0461e">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4c31fd92-d2c0-4f5b-b16f-257b59f54fbf">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="577f519e-f00b-4090-8433-d406c3dd4715">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="c02890d7-1004-4a0b-8db7-89036fa0461e">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6C56157A-2650-E852-23F6-6F40CCB5AFD8</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4c31fd92-d2c0-4f5b-b16f-257b59f54fbf">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>09BECAB6-CD9B-A987-7ACA-A4ED9814948F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="577f519e-f00b-4090-8433-d406c3dd4715">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>7BE18138-8735-C84A-A71F-F1A301543454</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Document>

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="68228508-02c9-480b-aafd-9ad2d28d0eee">
-  <name>Inventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Inventory</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Store</picture>
-  </picture>
-  <content>Catalog.Stores</content>
-  <content>Document.ShipmentConfirmation</content>
-  <content>DataProcessor.MobileInvent</content>
-  <content>Report.R6020_BatchBalance</content>
-  <content>Report.R6021_BatchBalanceSimple</content>
-  <content>Document.GoodsReceipt</content>
-  <content>DataProcessor.MobileDesktop</content>
-  <subsystems>Items</subsystems>
-  <subsystems>Transfers</subsystems>
-  <subsystems>CostCalculation</subsystems>
-  <subsystems>PhysicalCount</subsystems>
-  <subsystems>ComposedItems</subsystems>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="68228508-02c9-480b-aafd-9ad2d28d0eee">
+ <name>Inventory</name>
+ <synonym>
+  <key>en</key>
+  <value>C12AA747-A147-D39B-B8C0-05D4FEDB1BCC</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Store</picture>
+ </picture>
+ <content>Catalog.Stores</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>DataProcessor.MobileInvent</content>
+ <content>Report.R6020_BatchBalance</content>
+ <content>Report.R6021_BatchBalanceSimple</content>
+ <content>Document.GoodsReceipt</content>
+ <content>DataProcessor.MobileDesktop</content>
+ <subsystems>Items</subsystems>
+ <subsystems>Transfers</subsystems>
+ <subsystems>CostCalculation</subsystems>
+ <subsystems>PhysicalCount</subsystems>
+ <subsystems>ComposedItems</subsystems>
 </mdclass:Subsystem>

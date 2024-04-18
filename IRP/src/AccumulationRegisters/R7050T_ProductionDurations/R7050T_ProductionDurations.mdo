@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ba06e90a-0a7e-4394-8799-abd402a6e89b">
-  <producedTypes>
-    <selectionType typeId="8d655484-d361-4478-a0db-5085a1de9430" valueTypeId="18a777e8-006a-4c9e-8d75-a9625b9ccca3"/>
-    <listType typeId="ed37d040-2a52-42bf-8696-b64c9f144aa3" valueTypeId="f12a13bd-7fed-4d2b-99ab-88f938915b76"/>
-    <managerType typeId="cfb494b8-2887-4f1a-bacd-8a7f4234328b" valueTypeId="e01d069a-5062-4cd4-a193-c4665acb41cf"/>
-    <recordSetType typeId="2fb029bd-abae-4c69-adf7-83549f8805d7" valueTypeId="3e5ecba0-0067-466d-bf61-4d800922b318"/>
-    <recordKeyType typeId="b952bf39-3cc0-4803-9560-6a64b927a2fc" valueTypeId="c32bfb79-dae9-4356-bb10-6d222df79215"/>
-    <recordType typeId="4c2f7eff-7922-452b-9eed-fcbe608bc589" valueTypeId="64e453e4-7e93-453b-9c80-6faa2a1e58eb"/>
-  </producedTypes>
-  <name>R7050T_ProductionDurations</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ba06e90a-0a7e-4394-8799-abd402a6e89b">
+ <producedTypes>
+  <selectionType typeId="8d655484-d361-4478-a0db-5085a1de9430" valueTypeId="18a777e8-006a-4c9e-8d75-a9625b9ccca3"/>
+  <listType typeId="ed37d040-2a52-42bf-8696-b64c9f144aa3" valueTypeId="f12a13bd-7fed-4d2b-99ab-88f938915b76"/>
+  <managerType typeId="cfb494b8-2887-4f1a-bacd-8a7f4234328b" valueTypeId="e01d069a-5062-4cd4-a193-c4665acb41cf"/>
+  <recordSetType typeId="2fb029bd-abae-4c69-adf7-83549f8805d7" valueTypeId="3e5ecba0-0067-466d-bf61-4d800922b318"/>
+  <recordKeyType typeId="b952bf39-3cc0-4803-9560-6a64b927a2fc" valueTypeId="c32bfb79-dae9-4356-bb10-6d222df79215"/>
+  <recordType typeId="4c2f7eff-7922-452b-9eed-fcbe608bc589" valueTypeId="64e453e4-7e93-453b-9c80-6faa2a1e58eb"/>
+ </producedTypes>
+ <name>R7050T_ProductionDurations</name>
+ <synonym>
+  <key>en</key>
+  <value>5258A69A-98AB-AA20-06E2-2D5ED5F42488</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="01eeb54a-f2ba-4169-bbc6-984bd666758a">
+  <name>Duration</name>
   <synonym>
-    <key>en</key>
-    <value>R7050 Production durations</value>
+   <key>en</key>
+   <value>C3C22069-2FCF-680A-A7C9-92B6A496DE9B</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="01eeb54a-f2ba-4169-bbc6-984bd666758a">
-    <name>Duration</name>
-    <synonym>
-      <key>en</key>
-      <value>Duration</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>2</scale>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="06a2f8d3-5f36-4388-803e-52801fd2e5dd">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-  </dimensions>
-  <dimensions uuid="9f4e795d-2db0-4a53-ae73-21e8de34cd0f">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.Workshop</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fullTextSearch>Use</fullTextSearch>
-  </dimensions>
-  <dimensions uuid="ab79af13-8d0a-4151-b564-07684486fad7">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-  </dimensions>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+    <scale>2</scale>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="06a2f8d3-5f36-4388-803e-52801fd2e5dd">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>F6BB9813-02E7-9AAD-DF39-952E96AB3BF4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+ </dimensions>
+ <dimensions uuid="9f4e795d-2db0-4a53-ae73-21e8de34cd0f">
+  <name>BusinessUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>F500CB80-2A09-ECFF-F8C1-1FCDB5872D9B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.Workshop</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+ </dimensions>
+ <dimensions uuid="ab79af13-8d0a-4151-b564-07684486fad7">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>422A303C-5432-D26E-ED94-4E6BC9A8CE10</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+ </dimensions>
 </mdclass:AccumulationRegister>

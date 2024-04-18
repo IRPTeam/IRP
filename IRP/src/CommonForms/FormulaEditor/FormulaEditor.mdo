@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6cb90b63-8b26-4191-aa3a-093b164b012b">
-  <name>FormulaEditor</name>
-  <synonym>
-    <key>en</key>
-    <value>Formula editor</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>FormulaEditor</name>
+ <synonym>
+  <key>en</key>
+  <value>13BA25D1-7500-8D54-4EA8-8251865583DE</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

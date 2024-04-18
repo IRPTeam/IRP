@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="448c0df8-6af6-44f9-bbdf-72986c99ebb0">
-  <name>Mobile</name>
-  <synonym>
-    <key>en</key>
-    <value>Mobile</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Mobile</picture>
-  </picture>
-  <content>DataProcessor.MobileInvent</content>
-  <content>DataProcessor.MobileDesktop</content>
-  <content>InformationRegister.BarcodeScanInfoCheck</content>
-  <content>DataProcessor.CreateSerialLotNumbers</content>
-  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="448c0df8-6af6-44f9-bbdf-72986c99ebb0">
+ <name>Mobile</name>
+ <synonym>
+  <key>en</key>
+  <value>B40EBA90-A7D9-06CB-BCA5-5CEE27CBA874</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Mobile</picture>
+ </picture>
+ <content>DataProcessor.MobileInvent</content>
+ <content>DataProcessor.MobileDesktop</content>
+ <content>InformationRegister.BarcodeScanInfoCheck</content>
+ <content>DataProcessor.CreateSerialLotNumbers</content>
+ <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

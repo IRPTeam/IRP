@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="900ac4e4-e1b8-43b7-abe5-ced435845440">
-  <producedTypes>
-    <managerType typeId="14c9ea7f-688c-4224-b3e9-b7b3b5edd4e8" valueTypeId="db9fecf5-0d49-429d-b53a-27ab4cd6da9a"/>
-    <valueManagerType typeId="55fec7da-248c-4f89-9e08-5aaabd74ce6e" valueTypeId="978b0a2f-127f-4d0d-93ca-e82b4372bc55"/>
-    <valueKeyType typeId="9da42abc-4e30-4435-8182-e08b8573372f" valueTypeId="4f01a389-142e-4c1e-b230-2c6d54441ce3"/>
-  </producedTypes>
-  <name>MaximumServerDifficultLevel</name>
-  <synonym>
-    <key>en</key>
-    <value>Maximum server difficult level</value>
-  </synonym>
-  <comment>Each external function has difficult level. This constant show how much external function can be runned at one time</comment>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>3</precision>
-      <nonNegative>true</nonNegative>
-    </numberQualifiers>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="900ac4e4-e1b8-43b7-abe5-ced435845440">
+ <producedTypes>
+  <managerType typeId="14c9ea7f-688c-4224-b3e9-b7b3b5edd4e8" valueTypeId="db9fecf5-0d49-429d-b53a-27ab4cd6da9a"/>
+  <valueManagerType typeId="55fec7da-248c-4f89-9e08-5aaabd74ce6e" valueTypeId="978b0a2f-127f-4d0d-93ca-e82b4372bc55"/>
+  <valueKeyType typeId="9da42abc-4e30-4435-8182-e08b8573372f" valueTypeId="4f01a389-142e-4c1e-b230-2c6d54441ce3"/>
+ </producedTypes>
+ <name>MaximumServerDifficultLevel</name>
+ <synonym>
+  <key>en</key>
+  <value>7238DA41-D81B-9C28-89DB-BD6E71D25EFD</value>
+ </synonym>
+ <comment>Each external function has difficult level. This constant show how much external function can be runned at one time</comment>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>3</precision>
+   <nonNegative>true</nonNegative>
+  </numberQualifiers>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="804951f1-204d-427c-a03f-23a3843c7da9">
-  <name>TemplateInformationRegisters</name>
-  <synonym>
-    <key>en</key>
-    <value>Template information registers</value>
-  </synonym>
+ <name>TemplateInformationRegisters</name>
+ <synonym>
+  <key>en</key>
+  <value>47762044-9475-CA62-202B-B61B35836462</value>
+ </synonym>
 </mdclass:Role>

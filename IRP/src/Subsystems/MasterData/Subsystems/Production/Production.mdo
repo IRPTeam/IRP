@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e27dc76d-436d-4f9c-b8d8-20a4c035920e">
-  <name>Production</name>
-  <synonym>
-    <key>en</key>
-    <value>Production</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.BillOfMaterials</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>Production</name>
+ <synonym>
+  <key>en</key>
+  <value>4678516D-C407-FE73-3047-7C19C65EABC7</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.BillOfMaterials</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

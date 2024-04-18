@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cce91224-ddf4-41de-9ec1-96e3e7a4839a">
-  <producedTypes>
-    <refType typeId="dfaa5244-8a64-4586-b51b-07e5a205892a" valueTypeId="7dd0c7b4-3add-4799-a103-b8c9857c3ee0"/>
-    <listType typeId="ae13bf34-416d-41ee-bb3b-0727b962dd31" valueTypeId="63636581-e44a-4f07-b0fd-9e6c391b2379"/>
-    <managerType typeId="00ef7413-1a99-4860-8e31-77c831138c35" valueTypeId="5e9792b4-19ce-44b7-9cbb-c01a04688c70"/>
-  </producedTypes>
-  <name>PaymentTypes</name>
+ <producedTypes>
+  <refType typeId="dfaa5244-8a64-4586-b51b-07e5a205892a" valueTypeId="7dd0c7b4-3add-4799-a103-b8c9857c3ee0"/>
+  <listType typeId="ae13bf34-416d-41ee-bb3b-0727b962dd31" valueTypeId="63636581-e44a-4f07-b0fd-9e6c391b2379"/>
+  <managerType typeId="00ef7413-1a99-4860-8e31-77c831138c35" valueTypeId="5e9792b4-19ce-44b7-9cbb-c01a04688c70"/>
+ </producedTypes>
+ <name>PaymentTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>C30C7EFD-81A0-1B5B-B66B-B4C65C18532F</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="d6587561-910d-4c85-af97-071be3270a45">
+  <name>Cash</name>
   <synonym>
-    <key>en</key>
-    <value>Payment types</value>
+   <key>en</key>
+   <value>25224A23-EEC0-2390-051D-DFD7394B9E60</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="d6587561-910d-4c85-af97-071be3270a45">
-    <name>Cash</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ee294f6d-7a97-4756-877a-d07000d57c25">
-    <name>Card</name>
-    <synonym>
-      <key>en</key>
-      <value>Card</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="acb4e908-95d9-4a02-aea5-3332a8eb783e">
-    <name>PaymentAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment agent</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
-    <name>Advance</name>
-    <synonym>
-      <key>en</key>
-      <value>Advance</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d3e0207c-a9aa-45c5-ac94-2be02ce5b934">
-    <name>Certificate</name>
-    <synonym>
-      <key>en</key>
-      <value>Certificate</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="ee294f6d-7a97-4756-877a-d07000d57c25">
+  <name>Card</name>
+  <synonym>
+   <key>en</key>
+   <value>21ED3DDB-E84A-327C-C9FC-CD53BD7DD026</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="acb4e908-95d9-4a02-aea5-3332a8eb783e">
+  <name>PaymentAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>1C041B05-F7FD-43B4-4046-6469D710EEE1</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="5537df59-4c8e-4e42-8a88-45e4655cb043">
+  <name>Advance</name>
+  <synonym>
+   <key>en</key>
+   <value>A820B3D3-BC26-BB7F-FED3-3688A8D9D181</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="d3e0207c-a9aa-45c5-ac94-2be02ce5b934">
+  <name>Certificate</name>
+  <synonym>
+   <key>en</key>
+   <value>92EF0988-1609-7B55-568E-E6090BEFAD42</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

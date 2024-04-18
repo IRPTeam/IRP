@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dfd3cc69-c336-4758-845d-1885c9d51c6f">
-  <name>AccumulationRegisters_R5021T_Revenues</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R5021T Revenues</value>
-  </synonym>
+ <name>AccumulationRegisters_R5021T_Revenues</name>
+ <synonym>
+  <key>en</key>
+  <value>56781210-3BD7-72D7-76F2-24B6F62350E7_</value>
+ </synonym>
 </mdclass:Role>

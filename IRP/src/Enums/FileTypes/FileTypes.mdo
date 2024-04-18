@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a5e8d2bb-4626-467a-9615-163d0e722507">
-  <producedTypes>
-    <refType typeId="8e924b1a-4d73-433b-b8ce-f2b9c2f3ef41" valueTypeId="4eeea869-e4a1-4f16-9ab5-789de1e8579e"/>
-    <listType typeId="91ddcee4-e6f2-4bfd-b0f1-cea50c79d459" valueTypeId="80a1f8c7-a550-4bdc-b458-81663fa02dcc"/>
-    <managerType typeId="742903f9-7775-4dd5-b08e-cb5c1a53c76b" valueTypeId="7393c9e9-0e8d-4ee0-934d-3b757d4ed64d"/>
-  </producedTypes>
-  <name>FileTypes</name>
+ <producedTypes>
+  <refType typeId="8e924b1a-4d73-433b-b8ce-f2b9c2f3ef41" valueTypeId="4eeea869-e4a1-4f16-9ab5-789de1e8579e"/>
+  <listType typeId="91ddcee4-e6f2-4bfd-b0f1-cea50c79d459" valueTypeId="80a1f8c7-a550-4bdc-b458-81663fa02dcc"/>
+  <managerType typeId="742903f9-7775-4dd5-b08e-cb5c1a53c76b" valueTypeId="7393c9e9-0e8d-4ee0-934d-3b757d4ed64d"/>
+ </producedTypes>
+ <name>FileTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>02BA5230-9E60-0F90-0FAE-E445A93F38E4</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="6bcb92dd-9ffe-4709-a9c5-139534f3c6a5">
+  <name>Picture</name>
   <synonym>
-    <key>en</key>
-    <value>File types</value>
+   <key>en</key>
+   <value>15844467-DC33-8E75-54D8-88FB092AD896</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="6bcb92dd-9ffe-4709-a9c5-139534f3c6a5">
-    <name>Picture</name>
-    <synonym>
-      <key>en</key>
-      <value>Picture</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e042a707-962f-42cb-bb06-9a71e171479a">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="e042a707-962f-42cb-bb06-9a71e171479a">
+  <name>Other</name>
+  <synonym>
+   <key>en</key>
+   <value>AC4D0448-555E-2A97-7A33-36C77F616915</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

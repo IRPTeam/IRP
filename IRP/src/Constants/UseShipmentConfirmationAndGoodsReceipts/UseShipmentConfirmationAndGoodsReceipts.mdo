@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6116a13-20f1-49c0-bc91-e9a466e474be">
-  <producedTypes>
-    <managerType typeId="1879d1ee-01df-4b0e-8c34-bc83431fa358" valueTypeId="50e3ec11-ad6f-4f98-922f-029eb2cb4751"/>
-    <valueManagerType typeId="1e0e7144-5259-4a9d-8ed5-76f6744d1245" valueTypeId="d085ebd8-df50-4675-a381-dff9e488f19c"/>
-    <valueKeyType typeId="4d272695-ec94-4f9f-8a5e-0ac5f00f476a" valueTypeId="1d6e537e-f941-4c12-98ee-54fa1932a770"/>
-  </producedTypes>
-  <name>UseShipmentConfirmationAndGoodsReceipts</name>
-  <synonym>
-    <key>en</key>
-    <value>Use shipment confirmation and goods receipts</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f6116a13-20f1-49c0-bc91-e9a466e474be">
+ <producedTypes>
+  <managerType typeId="1879d1ee-01df-4b0e-8c34-bc83431fa358" valueTypeId="50e3ec11-ad6f-4f98-922f-029eb2cb4751"/>
+  <valueManagerType typeId="1e0e7144-5259-4a9d-8ed5-76f6744d1245" valueTypeId="d085ebd8-df50-4675-a381-dff9e488f19c"/>
+  <valueKeyType typeId="4d272695-ec94-4f9f-8a5e-0ac5f00f476a" valueTypeId="1d6e537e-f941-4c12-98ee-54fa1932a770"/>
+ </producedTypes>
+ <name>UseShipmentConfirmationAndGoodsReceipts</name>
+ <synonym>
+  <key>en</key>
+  <value>EF5556F6-DB7F-19C1-1F59-9F1F4E12374B________</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

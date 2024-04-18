@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Report xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="24f926dd-c519-4e45-a513-15eff367f017">
-  <producedTypes>
-    <objectType typeId="8458c15f-5e4a-4f56-bdb2-001a265de478" valueTypeId="eeedef4d-b819-43fd-a954-2ef67b04c09c"/>
-    <managerType typeId="a6709f31-7264-4a8d-bc05-6cd8fe0cd25f" valueTypeId="f9a03fc9-2abb-4930-bcdb-5bf202d6fc22"/>
-  </producedTypes>
-  <name>D0011_PriceInfo</name>
+<mdclass:Report xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="24f926dd-c519-4e45-a513-15eff367f017">
+ <producedTypes>
+  <objectType typeId="8458c15f-5e4a-4f56-bdb2-001a265de478" valueTypeId="eeedef4d-b819-43fd-a954-2ef67b04c09c"/>
+  <managerType typeId="a6709f31-7264-4a8d-bc05-6cd8fe0cd25f" valueTypeId="f9a03fc9-2abb-4930-bcdb-5bf202d6fc22"/>
+ </producedTypes>
+ <name>D0011_PriceInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>43CECEF2-813F-62FD-D659-90FB01E4DF24</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>Report.D0011_PriceInfo.Form.ReportForm</defaultForm>
+ <mainDataCompositionSchema>Report.D0011_PriceInfo.Template.DataCompositionSchema</mainDataCompositionSchema>
+ <attributes uuid="b81a2f3e-6046-4c4e-9888-144465cbb123">
+  <name>PriceOwner</name>
   <synonym>
-    <key>en</key>
-    <value>D0011 Price info</value>
+   <key>en</key>
+   <value>E99B42B6-A8EB-AC10-0EBA-A24ABEDF7B01</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>Report.D0011_PriceInfo.Form.ReportForm</defaultForm>
-  <mainDataCompositionSchema>Report.D0011_PriceInfo.Template.DataCompositionSchema</mainDataCompositionSchema>
-  <attributes uuid="b81a2f3e-6046-4c4e-9888-144465cbb123">
-    <name>PriceOwner</name>
-    <synonym>
-      <key>en</key>
-      <value>Price owner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="d8f0650f-aae0-4eb0-b74c-6d84d50ced3b">
-    <name>PricePeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Price period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <forms uuid="34a342e7-dcb1-4c0d-bf95-00c4bebdbcaa">
-    <name>ReportForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Report form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="cfd9f7b0-29d5-4680-9d09-040b2a288858">
-    <name>DataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
-  <commands uuid="560e3271-6873-4ed2-87d1-9fb7d82b2e80">
-    <name>OpenPriceInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Price info</value>
-    </synonym>
-    <group>FormNavigationPanelImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.Items</types>
-      <types>CatalogRef.ItemKeys</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+  <type>
+   <types>CatalogRef.Items</types>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="d8f0650f-aae0-4eb0-b74c-6d84d50ced3b">
+  <name>PricePeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>34F1A0E6-2AAF-275F-FB0A-AD548E22B905</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <forms uuid="34a342e7-dcb1-4c0d-bf95-00c4bebdbcaa">
+  <name>ReportForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E8B26290-58FC-1688-8A4D-D9B1C901667B</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="cfd9f7b0-29d5-4680-9d09-040b2a288858">
+  <name>DataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>E77A28FC-67BC-8730-0571-18D3D46AB782</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+ <commands uuid="560e3271-6873-4ed2-87d1-9fb7d82b2e80">
+  <name>OpenPriceInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>A74D25EE-53B1-A752-24BF-FA98D3517904</value>
+  </synonym>
+  <group>FormNavigationPanelImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.Items</types>
+   <types>CatalogRef.ItemKeys</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Report>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e5ee18c8-2ce3-4b0e-8c49-0f18650a72e6">
-  <producedTypes>
-    <refType typeId="c7929707-24be-4dde-ac9d-6ad2f1a8ad39" valueTypeId="81597089-5121-4a01-9ddf-669b06d2af20"/>
-    <listType typeId="24f084a3-93a8-47e3-a5b2-70671b362e8c" valueTypeId="ac075995-8bdd-4b48-a327-074f169db6d9"/>
-    <managerType typeId="70a91dcb-2f0f-4992-bfcd-527bbf84091b" valueTypeId="c66cb10d-c91e-4c2e-8ccb-267210d6f2ee"/>
-  </producedTypes>
-  <name>ProductionTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="c7929707-24be-4dde-ac9d-6ad2f1a8ad39" valueTypeId="81597089-5121-4a01-9ddf-669b06d2af20"/>
+  <listType typeId="24f084a3-93a8-47e3-a5b2-70671b362e8c" valueTypeId="ac075995-8bdd-4b48-a327-074f169db6d9"/>
+  <managerType typeId="70a91dcb-2f0f-4992-bfcd-527bbf84091b" valueTypeId="c66cb10d-c91e-4c2e-8ccb-267210d6f2ee"/>
+ </producedTypes>
+ <name>ProductionTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>7BA3CA89-7B69-F154-4285-505B6DCEE6AE</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="7fa684b5-c180-48e9-9a36-8d0480e50a71">
+  <name>Produce</name>
   <synonym>
-    <key>en</key>
-    <value>Production transaction types</value>
+   <key>en</key>
+   <value>1E5567F9-1DEA-530C-C21F-F965C0D9633B</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="7fa684b5-c180-48e9-9a36-8d0480e50a71">
-    <name>Produce</name>
-    <synonym>
-      <key>en</key>
-      <value>Produce</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="38a73a47-f6e1-47ee-bd17-2758e5245bfd">
-    <name>Repacking</name>
-    <synonym>
-      <key>en</key>
-      <value>Repacking</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="38a73a47-f6e1-47ee-bd17-2758e5245bfd">
+  <name>Repacking</name>
+  <synonym>
+   <key>en</key>
+   <value>D53D83D6-9A17-352D-DA22-231082ACA943</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

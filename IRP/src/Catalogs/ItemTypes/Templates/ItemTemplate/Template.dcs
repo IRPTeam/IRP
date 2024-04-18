@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>0E5E6F7E-05DC-A252-2D16-64155229334E</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -55,7 +55,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Property set</v8:content>
+				<v8:content>C01A2CB3-16F0-D136-6D97-74FE76893475</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

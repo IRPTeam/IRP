@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a251952f-c93d-43fb-9bb7-f2758edeaee0">
-  <producedTypes>
-    <managerType typeId="953e9f2b-05e7-49ff-8d3a-3a9726d4c724" valueTypeId="6386b450-d8d7-4b1b-9a04-2caea41f7fbc"/>
-    <valueManagerType typeId="32bbf785-9083-4b8c-b395-d3694321b5b8" valueTypeId="839f97bf-9e20-44cc-88ec-399ff68ac6eb"/>
-    <valueKeyType typeId="98063c99-63a8-4c54-ad77-f5cf1977a745" valueTypeId="ecea8214-2b56-4d52-975c-5c5d2b9785d2"/>
-  </producedTypes>
-  <name>UseExpenseAndRevenueTypes</name>
-  <synonym>
-    <key>en</key>
-    <value>Use expense and revenue types</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a251952f-c93d-43fb-9bb7-f2758edeaee0">
+ <producedTypes>
+  <managerType typeId="953e9f2b-05e7-49ff-8d3a-3a9726d4c724" valueTypeId="6386b450-d8d7-4b1b-9a04-2caea41f7fbc"/>
+  <valueManagerType typeId="32bbf785-9083-4b8c-b395-d3694321b5b8" valueTypeId="839f97bf-9e20-44cc-88ec-399ff68ac6eb"/>
+  <valueKeyType typeId="98063c99-63a8-4c54-ad77-f5cf1977a745" valueTypeId="ecea8214-2b56-4d52-975c-5c5d2b9785d2"/>
+ </producedTypes>
+ <name>UseExpenseAndRevenueTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>ACBF3F4C-354E-9E68-8598-880B4C4D802C</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

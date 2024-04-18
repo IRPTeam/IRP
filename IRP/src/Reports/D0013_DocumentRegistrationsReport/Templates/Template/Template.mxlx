@@ -53,7 +53,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Register [RegisterType] "[RegisterName]"</v8:content>
+							<v8:content>0B89FFD4-530C-138D-D499-9854B7D001CD____[RegisterType],[RegisterName]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -77,7 +77,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[Document]</v8:content>
+							<v8:content>C4F78D47-7175-4094-499B-B61EDF6787E0[Document]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -100,7 +100,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[Document]</v8:content>
+							<v8:content>0E2BC057-E771-8155-5BD1-1D74BCD9562C[Document]</v8:content>
 						</v8:item>
 					</tl>
 				</c>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="241c5138-b259-4cae-8701-bd8dfd6032ad">
-  <name>UseGroupEditingProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use group editing properties</value>
-  </synonym>
+ <name>UseGroupEditingProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>A33A304D-DF91-5BBE-E57D-D24EF1B26EC6</value>
+ </synonym>
 </mdclass:Role>

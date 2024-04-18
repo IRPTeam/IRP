@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f00ce96b-2e38-4257-ad7e-db7f2c29f4c4">
-  <producedTypes>
-    <selectionType typeId="5d52823a-c530-4646-90bc-e4f7d1fd5a78" valueTypeId="6701493b-437b-4e76-b36a-b9f96895bbbe"/>
-    <listType typeId="448c5dff-2021-43ec-863a-1c5a9a1cac7d" valueTypeId="5314b0ed-d006-4501-8c1c-f3a5f2ee8c1e"/>
-    <managerType typeId="70a88151-f779-431c-af70-baea28bbf7cd" valueTypeId="6eed7a74-b7a3-4153-af0a-26b2b1585bfa"/>
-    <recordSetType typeId="7642b4dd-dc98-4185-afc2-faea9adc8d98" valueTypeId="088b028f-1d3a-4cd7-a255-be42f5fb8ba5"/>
-    <recordKeyType typeId="5e55bc7a-946e-4851-8b2a-773455133a59" valueTypeId="c7422049-caec-4fcd-b3c5-9f800ac28dfc"/>
-    <recordType typeId="41c921dc-89d5-448b-bb95-45ea90c093ac" valueTypeId="eed8ac1f-6ec3-460e-954d-dac6a681cdda"/>
-  </producedTypes>
-  <name>R2031B_ShipmentInvoicing</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f00ce96b-2e38-4257-ad7e-db7f2c29f4c4">
+ <producedTypes>
+  <selectionType typeId="5d52823a-c530-4646-90bc-e4f7d1fd5a78" valueTypeId="6701493b-437b-4e76-b36a-b9f96895bbbe"/>
+  <listType typeId="448c5dff-2021-43ec-863a-1c5a9a1cac7d" valueTypeId="5314b0ed-d006-4501-8c1c-f3a5f2ee8c1e"/>
+  <managerType typeId="70a88151-f779-431c-af70-baea28bbf7cd" valueTypeId="6eed7a74-b7a3-4153-af0a-26b2b1585bfa"/>
+  <recordSetType typeId="7642b4dd-dc98-4185-afc2-faea9adc8d98" valueTypeId="088b028f-1d3a-4cd7-a255-be42f5fb8ba5"/>
+  <recordKeyType typeId="5e55bc7a-946e-4851-8b2a-773455133a59" valueTypeId="c7422049-caec-4fcd-b3c5-9f800ac28dfc"/>
+  <recordType typeId="41c921dc-89d5-448b-bb95-45ea90c093ac" valueTypeId="eed8ac1f-6ec3-460e-954d-dac6a681cdda"/>
+ </producedTypes>
+ <name>R2031B_ShipmentInvoicing</name>
+ <synonym>
+  <key>en</key>
+  <value>E93D9CF4-6AB9-140E-EA14-4CA7243F9315</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="52a58551-b045-4fad-b280-71af681ba7b1">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R2031 Shipment invoicing</value>
+   <key>en</key>
+   <value>3FB43054-B3BE-187F-FF44-4C5328AB1B05</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="52a58551-b045-4fad-b280-71af681ba7b1">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="c0748fd4-7f69-4bdd-8822-87fc9291bb5d">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="bbf9b4b2-a717-4f30-b802-31d127945222">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="fc5ec367-6a82-42ea-b683-95c17a2b2859">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="01e943a8-ed1d-430b-88b7-db4baccf4fd7">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.GoodsReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="7038d347-04a4-4d2e-a5a5-015abe9467ed">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="c0748fd4-7f69-4bdd-8822-87fc9291bb5d">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>60E8BB82-C841-185B-BD7D-DD797AFA7329</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="bbf9b4b2-a717-4f30-b802-31d127945222">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>6BDDA206-27AA-011A-ACC4-4B98CCAFEBAB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="fc5ec367-6a82-42ea-b683-95c17a2b2859">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>C04CB65B-EB82-D70F-F4C0-03849096CE0B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="01e943a8-ed1d-430b-88b7-db4baccf4fd7">
+  <name>Basis</name>
+  <synonym>
+   <key>en</key>
+   <value>77DE4844-CCDF-A7DF-F057-7C9D42A8626B</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ShipmentConfirmation</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.GoodsReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="7038d347-04a4-4d2e-a5a5-015abe9467ed">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>3685AB71-22C1-7035-5F16-6C7F1442B818</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

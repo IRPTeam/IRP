@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c73a8178-ce1d-48f8-988e-4cd50cc16d8f">
-  <name>POSClient</name>
-  <synonym>
-    <key>en</key>
-    <value>POSClient</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>POSClient</name>
+ <synonym>
+  <key>en</key>
+  <value>4548BB0E-BCDD-F860-0CB9-94F215B006D7</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38f9ff85-b72c-43a5-88ed-064f205f8549">
-  <name>DocManualRegisterEntryServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc manual register entry server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocManualRegisterEntryServer</name>
+ <synonym>
+  <key>en</key>
+  <value>DEB31D5B-8826-C81C-C44C-C53F49C24839</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

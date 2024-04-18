@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="32f5e3a7-3b7f-4e35-b469-751a27be97e5">
-  <name>CurrencyRateDirection</name>
-  <synonym>
-    <key>en</key>
-    <value>Currency rate direction</value>
-  </synonym>
+ <name>CurrencyRateDirection</name>
+ <synonym>
+  <key>en</key>
+  <value>323E5970-DFE8-C3A9-9458-84D9CE9F2093</value>
+ </synonym>
 </mdclass:CommonPicture>

@@ -1,89 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74a3fb26-f730-452d-b908-74c0b3f52d56">
-  <producedTypes>
-    <selectionType typeId="9b8f19c6-9e04-4104-8167-9eb97732bc6e" valueTypeId="aeaed3fd-7f7a-4951-b888-384e09a37d3e"/>
-    <listType typeId="ab40cce5-9da6-4c21-99b8-af0ca764d75d" valueTypeId="0d673005-ed06-4d26-9e0e-19e8f8496ec2"/>
-    <managerType typeId="13d80e1c-6c30-4008-9d6e-4870e61daed7" valueTypeId="ed413e40-4b18-4fd7-8c32-d0c83e5be21c"/>
-    <recordSetType typeId="56948393-2504-4473-90b0-0891736df76c" valueTypeId="acc0428a-a7e2-4da1-be35-e7a07a67ad4c"/>
-    <recordKeyType typeId="1e29a6ab-fb28-48c8-9c95-a575a5db52b1" valueTypeId="f6155fbb-db48-417a-b293-14f048808a8d"/>
-    <recordType typeId="e8010cc3-f40b-4488-a6c5-2249d4b40ea1" valueTypeId="31e908e1-236d-43a3-80aa-8b122f10eb5c"/>
-  </producedTypes>
-  <name>R8515T_CostOfFixedAsset</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="74a3fb26-f730-452d-b908-74c0b3f52d56">
+ <producedTypes>
+  <selectionType typeId="9b8f19c6-9e04-4104-8167-9eb97732bc6e" valueTypeId="aeaed3fd-7f7a-4951-b888-384e09a37d3e"/>
+  <listType typeId="ab40cce5-9da6-4c21-99b8-af0ca764d75d" valueTypeId="0d673005-ed06-4d26-9e0e-19e8f8496ec2"/>
+  <managerType typeId="13d80e1c-6c30-4008-9d6e-4870e61daed7" valueTypeId="ed413e40-4b18-4fd7-8c32-d0c83e5be21c"/>
+  <recordSetType typeId="56948393-2504-4473-90b0-0891736df76c" valueTypeId="acc0428a-a7e2-4da1-be35-e7a07a67ad4c"/>
+  <recordKeyType typeId="1e29a6ab-fb28-48c8-9c95-a575a5db52b1" valueTypeId="f6155fbb-db48-417a-b293-14f048808a8d"/>
+  <recordType typeId="e8010cc3-f40b-4488-a6c5-2249d4b40ea1" valueTypeId="31e908e1-236d-43a3-80aa-8b122f10eb5c"/>
+ </producedTypes>
+ <name>R8515T_CostOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>3034DED8-84EE-B0F7-700E-ECE936460183</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="6be16e83-354e-471c-ad11-c57d5fdcb98a">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R8515 Cost of fixed asset</value>
+   <key>en</key>
+   <value>6C50690D-B38A-1E01-14F7-7936A4E0C40B</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="6be16e83-354e-471c-ad11-c57d5fdcb98a">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="2b473920-9257-460e-aa93-3e0c17f97c25">
-    <name>CalculationMovementCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation movement cost</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CalculationMovementCosts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="49bc164b-851c-451a-87e2-3862f2d762b0">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="a87c22dd-d08a-4e24-8848-686b4b7e0cde">
-    <name>FixedAsset</name>
-    <synonym>
-      <key>en</key>
-      <value>Fixed asset</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssets</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d60ea697-398d-4d5a-ade6-7ac7411c3690">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssetsLedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="2b473920-9257-460e-aa93-3e0c17f97c25">
+  <name>CalculationMovementCost</name>
+  <synonym>
+   <key>en</key>
+   <value>40C6BB60-6787-FB7F-F9A1-108541AA0CA8</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="49bc164b-851c-451a-87e2-3862f2d762b0">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>E58CB298-D490-F783-3DBE-E201C1743ACE</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="a87c22dd-d08a-4e24-8848-686b4b7e0cde">
+  <name>FixedAsset</name>
+  <synonym>
+   <key>en</key>
+   <value>E972E26F-4B7A-52EC-CECF-FC65045C7660</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssets</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="d60ea697-398d-4d5a-ade6-7ac7411c3690">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>1CFBBB2F-6C73-8253-3FF7-7DAA543723FE</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

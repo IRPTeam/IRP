@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50297ead-f75e-4690-9e90-aead8866a241">
-  <name>DocBundlingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc bundling server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocBundlingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>C617EFF7-967A-EC15-53C9-945A2D05BE28</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

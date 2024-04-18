@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="088197f3-351b-4b89-aacc-9bf70e7e4fc6">
-  <name>DocCreditDebitNoteClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc credit debit note client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocCreditDebitNoteClient</name>
+ <synonym>
+  <key>en</key>
+  <value>F2582671-C397-9030-03F8-82CA5A7FEA49</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

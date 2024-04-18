@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4498f272-ca2a-4190-a2c4-53258ec5f293">
-  <name>AccumulationRegisters_R2023B_AdvancesFromRetailCustomers</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R2023B AdvancesFromRetailCustomers</value>
-  </synonym>
+ <name>AccumulationRegisters_R2023B_AdvancesFromRetailCustomers</name>
+ <synonym>
+  <key>en</key>
+  <value>D33EAE85-0F58-5ACB-BF0C-CD73270D44B0____________________</value>
+ </synonym>
 </mdclass:Role>

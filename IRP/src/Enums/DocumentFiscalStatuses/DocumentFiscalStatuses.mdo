@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4feceaaa-62f8-41b4-b4b1-b5bb5032e4a0">
-  <producedTypes>
-    <refType typeId="ef539ce9-d083-4e22-9e77-23151f4c6e88" valueTypeId="fd616752-f23b-4f9c-b70d-6cd16bac9145"/>
-    <listType typeId="f4ac935b-bccd-4f63-a5c4-678417b822c9" valueTypeId="6f951c29-753c-4ec0-85ca-65ea35d602c6"/>
-    <managerType typeId="1239b1b6-4754-4052-a1a2-531dc439a9d0" valueTypeId="3e66f4a6-8676-4969-818c-faf3d26818fa"/>
-  </producedTypes>
-  <name>DocumentFiscalStatuses</name>
+ <producedTypes>
+  <refType typeId="ef539ce9-d083-4e22-9e77-23151f4c6e88" valueTypeId="fd616752-f23b-4f9c-b70d-6cd16bac9145"/>
+  <listType typeId="f4ac935b-bccd-4f63-a5c4-678417b822c9" valueTypeId="6f951c29-753c-4ec0-85ca-65ea35d602c6"/>
+  <managerType typeId="1239b1b6-4754-4052-a1a2-531dc439a9d0" valueTypeId="3e66f4a6-8676-4969-818c-faf3d26818fa"/>
+ </producedTypes>
+ <name>DocumentFiscalStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>FBEC39D6-D4ED-7FE0-0F6E-EBE381BB791B</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="f9cb6198-6d08-466e-b51c-758e366cc80a">
+  <name>Prepaired</name>
   <synonym>
-    <key>en</key>
-    <value>Document fiscal statuses</value>
+   <key>en</key>
+   <value>4AB86846-B73E-DC94-4A4C-CB28ABDEAFAF</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="f9cb6198-6d08-466e-b51c-758e366cc80a">
-    <name>Prepaired</name>
-    <synonym>
-      <key>en</key>
-      <value>Prepaired</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="5e4ba1f0-4f27-44e0-a5b1-ff6c30fd6dc8">
-    <name>Printed</name>
-    <synonym>
-      <key>en</key>
-      <value>Printed</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="22577107-f4b3-4201-a6da-3093e287ff9c">
-    <name>FiscalReturnedError</name>
-    <synonym>
-      <key>en</key>
-      <value>Fiscal returned error</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="9d03cf16-d988-4cdd-9550-07007b14436a">
-    <name>NotPrinted</name>
-    <synonym>
-      <key>en</key>
-      <value>Not printed</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="5e4ba1f0-4f27-44e0-a5b1-ff6c30fd6dc8">
+  <name>Printed</name>
+  <synonym>
+   <key>en</key>
+   <value>120025D4-E89D-91AD-D1BD-D957458194B9</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="22577107-f4b3-4201-a6da-3093e287ff9c">
+  <name>FiscalReturnedError</name>
+  <synonym>
+   <key>en</key>
+   <value>268BEAFB-166F-44AF-F5C6-6F6CE7A32139</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="9d03cf16-d988-4cdd-9550-07007b14436a">
+  <name>NotPrinted</name>
+  <synonym>
+   <key>en</key>
+   <value>01A7A6E4-80BA-5AD1-13FF-F5EB7FE29353</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

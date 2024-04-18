@@ -1,331 +1,331 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="52016cc9-453f-44d2-9a07-dae0b9c94e10">
-  <producedTypes>
-    <objectType typeId="a35075e9-1020-4581-99fb-bf1753b9c585" valueTypeId="23b87741-810e-4403-ae32-a1c90d9b982e"/>
-    <refType typeId="50f7560f-144f-4fe9-b87c-a72530c3569e" valueTypeId="acb84d64-b0a1-4a22-a456-e9a221fb367d"/>
-    <selectionType typeId="cddc0bae-89de-45ff-8536-32c1ab801362" valueTypeId="eafbb7e6-4a78-4b0e-85d2-b7cd03a4f2a3"/>
-    <listType typeId="0d360455-587e-4eae-a3c5-f8f8b716b670" valueTypeId="e9232678-c836-49ea-b385-71f4d4156021"/>
-    <managerType typeId="12ae1994-109c-415f-85f6-6678eaf826a5" valueTypeId="3c4e3ac7-947c-4cdf-8b58-2a094d95a6c6"/>
-  </producedTypes>
-  <name>Workstations</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="52016cc9-453f-44d2-9a07-dae0b9c94e10">
+ <producedTypes>
+  <objectType typeId="a35075e9-1020-4581-99fb-bf1753b9c585" valueTypeId="23b87741-810e-4403-ae32-a1c90d9b982e"/>
+  <refType typeId="50f7560f-144f-4fe9-b87c-a72530c3569e" valueTypeId="acb84d64-b0a1-4a22-a456-e9a221fb367d"/>
+  <selectionType typeId="cddc0bae-89de-45ff-8536-32c1ab801362" valueTypeId="eafbb7e6-4a78-4b0e-85d2-b7cd03a4f2a3"/>
+  <listType typeId="0d360455-587e-4eae-a3c5-f8f8b716b670" valueTypeId="e9232678-c836-49ea-b385-71f4d4156021"/>
+  <managerType typeId="12ae1994-109c-415f-85f6-6678eaf826a5" valueTypeId="3c4e3ac7-947c-4cdf-8b58-2a094d95a6c6"/>
+ </producedTypes>
+ <name>Workstations</name>
+ <synonym>
+  <key>en</key>
+  <value>DB0C1774-78E8-5008-8894-43E5F478E18E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.Workstations.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>5C3969EB-193B-B22F-FBE1-129C4ABBD4CC</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Workstations.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
+  <name>CashAccount</name>
   <synonym>
-    <key>en</key>
-    <value>Workstations</value>
+   <key>en</key>
+   <value>1B0950E0-A1A6-26E2-2CE1-1DBCC3929EDE</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Workstations.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.Workstations.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Workstations</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.Workstations.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.Workstations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
+  <name>PrintTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>044DCBEA-14E0-D48B-B532-2E445F053376</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PrintTemplates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="94e4ab8d-4601-461f-949c-27486d382987">
+  <name>UserGroup</name>
+  <synonym>
+   <key>en</key>
+   <value>6B42717F-62EB-2833-3F20-0B835CBD3D81</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.UserGroups</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f2ef3b0f-4927-4e70-b490-ecc4bcd41047">
+  <name>UseCashInAndCashOut</name>
+  <synonym>
+   <key>en</key>
+   <value>7299974D-6F4A-9DF6-6765-517D5CDD8177</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4d9e8c89-0804-476d-8960-c56901ef6033">
+  <name>AutoCreateMoneyTransferAtSessionClosing</name>
+  <synonym>
+   <key>en</key>
+   <value>49E116F6-84E2-AC64-4FBD-DE0DC0E2FA11_________</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a860df6e-07d9-40cd-a5de-98c781ca81d3">
+  <name>AutoCalculateDiscount</name>
+  <synonym>
+   <key>en</key>
+   <value>8E06442A-BF41-766C-C98C-CD8199BA80D3</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2a93110f-8813-436c-81cc-d4f96eb29222">
+  <name>IgnoreCodeStringControl</name>
+  <synonym>
+   <key>en</key>
+   <value>EFEA01E9-EB9C-A30E-E537-76E0211E7A28</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e5b230eb-6f9e-40d6-aa42-461463a06ae6">
+  <name>PrintBarcodeWithDocumentUUID</name>
+  <synonym>
+   <key>en</key>
+   <value>61843335-7DA3-042A-AE1A-A4A60B180FF0</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="10569d4b-48cc-4edd-9cac-7b67f7a65376">
+  <name>PostponeWithReserve</name>
+  <synonym>
+   <key>en</key>
+   <value>BAF61946-20FD-433D-DF91-14DDCF78B69E</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1a5e2075-e9dc-42f0-ba3b-5ca298431aef">
+  <name>PostponeWithoutReserve</name>
+  <synonym>
+   <key>en</key>
+   <value>CCF87B29-278F-ED2B-B087-72803BF48BBB</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
+  <producedTypes>
+   <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>
+   <rowType typeId="67b4e81b-57be-4660-8f3b-87ba24e063ce" valueTypeId="75cad41b-49b7-440f-b39b-ef7fbbcf2d6b"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>9F5E9DBF-5BDF-2EF4-4ACD-D3E966FBBCA6</value>
+  </synonym>
+  <attributes uuid="ee7a4501-03d2-4eba-8bae-5468e72319cf">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Workstation</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Workstations.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Workstations.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Workstations.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="757286e6-1359-4443-8450-2781d00eded7">
-    <name>CashAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>E9C0C51A-7E21-A273-3F4D-DB242DEC4CB3</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="3fcb5091-199a-479b-864a-c80c0880e742">
-    <name>PrintTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Print template</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PrintTemplates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="d620c266-d54a-4063-b34d-d52bf2859ffb">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>A44946D9-9F53-18F9-94A2-243D9B963412</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="94e4ab8d-4601-461f-949c-27486d382987">
-    <name>UserGroup</name>
-    <synonym>
-      <key>en</key>
-      <value>User group</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.UserGroups</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="e0bffc68-3ffe-4e5a-8c78-b315c5f50bb8">
+  <producedTypes>
+   <objectType typeId="2f371810-18ed-4f71-8a3c-feb41095e89f" valueTypeId="876d2017-18d6-4c04-917a-fcef858f9467"/>
+   <rowType typeId="719f8885-ac16-4bbe-ae0b-8ca130f38be6" valueTypeId="0bb938ef-6d95-4541-8056-f32a1b571ee4"/>
+  </producedTypes>
+  <name>HardwareList</name>
+  <synonym>
+   <key>en</key>
+   <value>BE961714-72F2-70FA-ACE3-3E8E15A4A9B0</value>
+  </synonym>
+  <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
+   <name>Enable</name>
+   <synonym>
+    <key>en</key>
+    <value>91979824-9446-E60A-A52B-B92A1C011760</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="f2ef3b0f-4927-4e70-b490-ecc4bcd41047">
-    <name>UseCashInAndCashOut</name>
-    <synonym>
-      <key>en</key>
-      <value>Use Cash in and Cash out</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
+   <name>Hardware</name>
+   <synonym>
+    <key>en</key>
+    <value>10647D95-2D0A-12BA-A13E-EBD4AB79A625</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Hardware</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="4d9e8c89-0804-476d-8960-c56901ef6033">
-    <name>AutoCreateMoneyTransferAtSessionClosing</name>
-    <synonym>
-      <key>en</key>
-      <value>Auto create money transfer at session closing</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a860df6e-07d9-40cd-a5de-98c781ca81d3">
-    <name>AutoCalculateDiscount</name>
-    <synonym>
-      <key>en</key>
-      <value>Auto calculate discount</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2a93110f-8813-436c-81cc-d4f96eb29222">
-    <name>IgnoreCodeStringControl</name>
-    <synonym>
-      <key>en</key>
-      <value>Ignore code string control</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e5b230eb-6f9e-40d6-aa42-461463a06ae6">
-    <name>PrintBarcodeWithDocumentUUID</name>
-    <synonym>
-      <key>en</key>
-      <value>Print barcode with document UUID</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="10569d4b-48cc-4edd-9cac-7b67f7a65376">
-    <name>PostponeWithReserve</name>
-    <synonym>
-      <key>en</key>
-      <value>Postpone with reserve</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="1a5e2075-e9dc-42f0-ba3b-5ca298431aef">
-    <name>PostponeWithoutReserve</name>
-    <synonym>
-      <key>en</key>
-      <value>Postpone without reserve</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="31aae4b9-cf91-4ffc-861f-348ec53883c9">
-    <producedTypes>
-      <objectType typeId="db70d75b-9ed3-4ca7-9b8e-7b1c0d5d1cfe" valueTypeId="dc6b2db3-466c-42fe-990f-bcd1bb236cad"/>
-      <rowType typeId="67b4e81b-57be-4660-8f3b-87ba24e063ce" valueTypeId="75cad41b-49b7-440f-b39b-ef7fbbcf2d6b"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="ee7a4501-03d2-4eba-8bae-5468e72319cf">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d620c266-d54a-4063-b34d-d52bf2859ffb">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Workstations.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e0bffc68-3ffe-4e5a-8c78-b315c5f50bb8">
-    <producedTypes>
-      <objectType typeId="2f371810-18ed-4f71-8a3c-feb41095e89f" valueTypeId="876d2017-18d6-4c04-917a-fcef858f9467"/>
-      <rowType typeId="719f8885-ac16-4bbe-ae0b-8ca130f38be6" valueTypeId="0bb938ef-6d95-4541-8056-f32a1b571ee4"/>
-    </producedTypes>
-    <name>HardwareList</name>
-    <synonym>
-      <key>en</key>
-      <value>Hardware list</value>
-    </synonym>
-    <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
-      <name>Enable</name>
-      <synonym>
-        <key>en</key>
-        <value>Enable</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
-      <name>Hardware</name>
-      <synonym>
-        <key>en</key>
-        <value>Hardware</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Hardware</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <createOnInput>Use</createOnInput>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="be6907cb-f1a0-4a12-bd73-1d703dca564f">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>34E1EEA8-8CB4-30F1-142F-F6E906BA2042</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9378dd86-666f-42b8-9d6b-42607e974020">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1BCDE5D1-0310-DC1E-E27D-D22B75451F3D</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>174FA423-47BE-186E-E801-19EEB75345B2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

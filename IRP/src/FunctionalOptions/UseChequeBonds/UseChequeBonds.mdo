@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6708cd01-c936-4ddf-a33d-ce85eaf4087d">
-  <name>UseChequeBonds</name>
-  <synonym>
-    <key>en</key>
-    <value>Use cheque bonds</value>
-  </synonym>
-  <location>Constant.UseChequeBonds</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.ChequeBonds</content>
-  <content>Document.ChequeBondTransaction</content>
-  <content>Document.ChequeBondTransactionItem</content>
+ <name>UseChequeBonds</name>
+ <synonym>
+  <key>en</key>
+  <value>1DFDC929-D29E-15F1-1BCD-D7405B85FA67</value>
+ </synonym>
+ <location>Constant.UseChequeBonds</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.ChequeBonds</content>
+ <content>Document.ChequeBondTransaction</content>
+ <content>Document.ChequeBondTransactionItem</content>
 </mdclass:FunctionalOption>

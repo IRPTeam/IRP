@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ea94447-49bd-4071-bfd7-d2d1f69f0eec">
-  <name>InternalCommands</name>
-  <synonym>
-    <key>en</key>
-    <value>Internal commands</value>
-  </synonym>
-  <content>CommonModule.InternalCommandsClient</content>
-  <content>CommonModule.InternalCommandsServer</content>
-  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+ <name>InternalCommands</name>
+ <synonym>
+  <key>en</key>
+  <value>702B1027-F53E-AA63-3CBC-C454B067B87F</value>
+ </synonym>
+ <content>CommonModule.InternalCommandsClient</content>
+ <content>CommonModule.InternalCommandsServer</content>
+ <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

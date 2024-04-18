@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f90996aa-f82a-437d-86e1-5a53fcdd4c36">
-  <producedTypes>
-    <managerType typeId="74880a5f-604a-4590-bf6b-6f5e0795456f" valueTypeId="6a993b5a-55fb-40a6-b545-48c07baac6f1"/>
-    <valueManagerType typeId="d7425b23-12a1-4673-aa3d-a9a440319029" valueTypeId="c12c71b1-8452-447c-9fc0-814c75c1086d"/>
-    <valueKeyType typeId="0234cb8d-a498-4e31-998f-4826b78f8396" valueTypeId="54b25a3f-cb70-4db9-b9ea-8470626506b3"/>
-  </producedTypes>
-  <name>DefaultSMSProvider</name>
-  <synonym>
-    <key>en</key>
-    <value>Default SMSProvider</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.IntegrationSettings</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <choiceParameters>
-    <name>Filter.IntegrationType</name>
-    <value xsi:type="core:ReferenceValue">
-      <value>Enum.IntegrationType.EnumValue.SMSProvider</value>
-    </value>
-  </choiceParameters>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f90996aa-f82a-437d-86e1-5a53fcdd4c36">
+ <producedTypes>
+  <managerType typeId="74880a5f-604a-4590-bf6b-6f5e0795456f" valueTypeId="6a993b5a-55fb-40a6-b545-48c07baac6f1"/>
+  <valueManagerType typeId="d7425b23-12a1-4673-aa3d-a9a440319029" valueTypeId="c12c71b1-8452-447c-9fc0-814c75c1086d"/>
+  <valueKeyType typeId="0234cb8d-a498-4e31-998f-4826b78f8396" valueTypeId="54b25a3f-cb70-4db9-b9ea-8470626506b3"/>
+ </producedTypes>
+ <name>DefaultSMSProvider</name>
+ <synonym>
+  <key>en</key>
+  <value>00F49BA2-05E6-CC63-3B31-1A9AF6ED1B64</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.IntegrationSettings</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <choiceParameters>
+  <name>Filter.IntegrationType</name>
+  <value xsi:type="core:ReferenceValue">
+   <value>Enum.IntegrationType.EnumValue.SMSProvider</value>
+  </value>
+ </choiceParameters>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

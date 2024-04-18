@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18ec4bea-69d0-4bad-9fec-90e39d39fe0d">
-  <producedTypes>
-    <objectType typeId="d9979033-1de2-4b87-940f-5fbf2dfbdfc7" valueTypeId="27f61b87-449a-4aad-bc17-6b205b96d62e"/>
-    <managerType typeId="a022f75c-5fae-48c9-a8be-f090cec3d59a" valueTypeId="c0a86e02-9d3b-4d2d-944e-ff803c2a483a"/>
-  </producedTypes>
-  <name>FixDocumentProblems</name>
+ <producedTypes>
+  <objectType typeId="d9979033-1de2-4b87-940f-5fbf2dfbdfc7" valueTypeId="27f61b87-449a-4aad-bc17-6b205b96d62e"/>
+  <managerType typeId="a022f75c-5fae-48c9-a8be-f090cec3d59a" valueTypeId="c0a86e02-9d3b-4d2d-944e-ff803c2a483a"/>
+ </producedTypes>
+ <name>FixDocumentProblems</name>
+ <synonym>
+  <key>en</key>
+  <value>0FB293EA-139A-BAA0-0A8A-AAD756EF6D02</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>
+ <forms uuid="f3078997-4eff-466c-98bf-d2f3b0ad823f">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Fix document problems</value>
+   <key>en</key>
+   <value>B7174028-29B1-BF01-1ED7-72A952573BF0</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.FixDocumentProblems.Form.Form</defaultForm>
-  <forms uuid="f3078997-4eff-466c-98bf-d2f3b0ad823f">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

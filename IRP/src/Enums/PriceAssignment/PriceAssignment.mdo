@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="36937ced-1ca9-4958-bd6f-f30b97af9fd1">
-  <producedTypes>
-    <refType typeId="bb0c42f9-93d2-4490-8f7f-67c91c648a90" valueTypeId="c145d9b3-c166-4b30-b4ba-b53fb0d95812"/>
-    <listType typeId="127653b8-bd0e-41a6-8427-f80e6fcda3d8" valueTypeId="3aaa9f16-42db-4e47-81ee-6712dbd9091e"/>
-    <managerType typeId="1f3dba2b-a0cc-4c0e-bf82-ea49b97f5d58" valueTypeId="5e73dde7-951d-48c6-9344-3dabd0ae7d04"/>
-  </producedTypes>
-  <name>PriceAssignment</name>
+ <producedTypes>
+  <refType typeId="bb0c42f9-93d2-4490-8f7f-67c91c648a90" valueTypeId="c145d9b3-c166-4b30-b4ba-b53fb0d95812"/>
+  <listType typeId="127653b8-bd0e-41a6-8427-f80e6fcda3d8" valueTypeId="3aaa9f16-42db-4e47-81ee-6712dbd9091e"/>
+  <managerType typeId="1f3dba2b-a0cc-4c0e-bf82-ea49b97f5d58" valueTypeId="5e73dde7-951d-48c6-9344-3dabd0ae7d04"/>
+ </producedTypes>
+ <name>PriceAssignment</name>
+ <synonym>
+  <key>en</key>
+  <value>D26B0DAD-3452-70B8-8B31-1C1219363805</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="084abe0b-9b8a-4dbb-a3e7-f98caf29a9c0">
+  <name>Customer</name>
   <synonym>
-    <key>en</key>
-    <value>Price assignment</value>
+   <key>en</key>
+   <value>0BA134EB-3F01-0F0F-F05E-EF9833E49B43</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="084abe0b-9b8a-4dbb-a3e7-f98caf29a9c0">
-    <name>Customer</name>
-    <synonym>
-      <key>en</key>
-      <value>Customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="512ebf93-30eb-4023-b6b5-59287b019725">
-    <name>Vendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Vendor</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="512ebf93-30eb-4023-b6b5-59287b019725">
+  <name>Vendor</name>
+  <synonym>
+   <key>en</key>
+   <value>A13EB2E2-BAB2-5BC1-1EFE-E9FC23C2D9AD</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

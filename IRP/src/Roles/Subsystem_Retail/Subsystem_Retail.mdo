@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="775c058b-3f8e-4f9d-b295-e085ab8611a1">
-  <name>Subsystem_Retail</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Retail</value>
-  </synonym>
+ <name>Subsystem_Retail</name>
+ <synonym>
+  <key>en</key>
+  <value>82FE38A9-D0A9-1ECD-DDFF-FF81072FC714</value>
+ </synonym>
 </mdclass:Role>

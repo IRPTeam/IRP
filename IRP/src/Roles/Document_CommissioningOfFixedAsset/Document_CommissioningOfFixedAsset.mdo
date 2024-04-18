@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc4e4780-ab70-4da3-b456-bcda492c6536">
-  <name>Document_CommissioningOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Commissioning of fixed asset&quot;</value>
-  </synonym>
+ <name>Document_CommissioningOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>6DA41407-44F2-A87E-EE95-5E045AB324EF___</value>
+ </synonym>
 </mdclass:Role>

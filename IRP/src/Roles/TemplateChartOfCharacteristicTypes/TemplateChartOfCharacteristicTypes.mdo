@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f8322518-4199-48de-b13f-f7c9a4c01c17">
-  <name>TemplateChartOfCharacteristicTypes</name>
-  <synonym>
-    <key>en</key>
-    <value>Template chart of characteristic types</value>
-  </synonym>
+ <name>TemplateChartOfCharacteristicTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>0CB4815A-3AE9-FB62-26FC-CD4961968A82__</value>
+ </synonym>
 </mdclass:Role>

@@ -122,7 +122,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Commissioning of fixed asset [Number] [Date]</v8:content>
+							<v8:content>305F64BA-A6FB-5D66-6925-554530C333C2________[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -160,7 +160,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>A2D93513-2958-6BB2-2AE4-4975F9B166B2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -184,7 +184,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>B36F9A3F-E0A1-7388-8096-626AFC85DA20</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -215,7 +215,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>C5E5A245-5E86-7935-55F4-445827D7A72B</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -226,7 +226,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>EA49100E-0598-3E92-2DE9-9A6D17DA6F96</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -237,7 +237,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>707E86BF-3B00-4B2F-FE1F-F17A1E2A3A56</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -248,7 +248,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>854ADAF7-59E8-7C3E-EE84-4337CE7FF248</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -259,7 +259,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>0D33ED0B-4DCE-42A2-2076-6E6E88AC0478</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -319,7 +319,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>FF79BAD0-6938-C7BF-FB68-8AF48BF7336C</v8:content>
 						</v8:item>
 					</tl>
 				</c>

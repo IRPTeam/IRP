@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7de2972-e2e5-48e5-a88f-17a3f9021645">
-  <producedTypes>
-    <refType typeId="6bcc3895-8d75-4f2b-8e12-1c4c83a062a3" valueTypeId="4980abcd-1c94-4823-853d-dd86dd0cb449"/>
-    <listType typeId="c06cae14-271a-4004-9c6d-df79879472e4" valueTypeId="1f502b26-c866-448f-aa06-4ac182b1e64a"/>
-    <managerType typeId="e4c33067-f2e3-4ce5-9320-cac92b985903" valueTypeId="e9b1d85c-4fc2-4cd1-92bd-564cca1003b5"/>
-  </producedTypes>
-  <name>AccrualAndDeductionPeriodicity</name>
+ <producedTypes>
+  <refType typeId="6bcc3895-8d75-4f2b-8e12-1c4c83a062a3" valueTypeId="4980abcd-1c94-4823-853d-dd86dd0cb449"/>
+  <listType typeId="c06cae14-271a-4004-9c6d-df79879472e4" valueTypeId="1f502b26-c866-448f-aa06-4ac182b1e64a"/>
+  <managerType typeId="e4c33067-f2e3-4ce5-9320-cac92b985903" valueTypeId="e9b1d85c-4fc2-4cd1-92bd-564cca1003b5"/>
+ </producedTypes>
+ <name>AccrualAndDeductionPeriodicity</name>
+ <synonym>
+  <key>en</key>
+  <value>4DC87BC8-8D0C-EB46-6A56-6C7FBB0CB055</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="2e629677-1166-4c65-aa1c-a4b227e8cecb">
+  <name>ByDay</name>
   <synonym>
-    <key>en</key>
-    <value>Accrual and deduction periodicity</value>
+   <key>en</key>
+   <value>0B3FF5F2-F8B1-A519-9BDE-EBEC4D021E28</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="2e629677-1166-4c65-aa1c-a4b227e8cecb">
-    <name>ByDay</name>
-    <synonym>
-      <key>en</key>
-      <value>By day</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0b1a7c6f-4f07-4805-b7f5-df97941eaee0">
-    <name>ByPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>By period</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="8d74e46e-bab9-4515-909e-296a0905041f">
-    <name>OneTime</name>
-    <synonym>
-      <key>en</key>
-      <value>One time</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="0b1a7c6f-4f07-4805-b7f5-df97941eaee0">
+  <name>ByPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>F177652B-67DA-EA49-9D89-9664A34D2B6C</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="8d74e46e-bab9-4515-909e-296a0905041f">
+  <name>OneTime</name>
+  <synonym>
+   <key>en</key>
+   <value>5D59CDCF-8341-23D3-30B8-8DE6C28103CC</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

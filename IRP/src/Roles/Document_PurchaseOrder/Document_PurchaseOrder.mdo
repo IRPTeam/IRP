@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6bff5b06-a0ad-41ab-a3f6-d128ee66f5fd">
-  <name>Document_PurchaseOrder</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Purchase order&quot;</value>
-  </synonym>
+ <name>Document_PurchaseOrder</name>
+ <synonym>
+  <key>en</key>
+  <value>FD0F9B13-7FA8-AE31-13D2-2C14323C9D03</value>
+ </synonym>
 </mdclass:Role>

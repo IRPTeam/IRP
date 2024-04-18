@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="10f38a1b-d852-4705-a338-cce78a12c6a2">
-  <name>Marketing</name>
-  <synonym>
-    <key>en</key>
-    <value>Marketing</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.SpecialOffer</picture>
-  </picture>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.PriceTypes</content>
-  <content>Catalog.SpecialOfferTypes</content>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Document.PriceList</content>
-  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="10f38a1b-d852-4705-a338-cce78a12c6a2">
+ <name>Marketing</name>
+ <synonym>
+  <key>en</key>
+  <value>FC5ACF40-CA55-8585-58C3-3E2C93300F7C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.SpecialOffer</picture>
+ </picture>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Document.PriceList</content>
+ <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

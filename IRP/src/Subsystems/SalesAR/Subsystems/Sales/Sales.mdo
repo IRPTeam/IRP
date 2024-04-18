@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="775fc545-53e2-4928-9f69-1ed2cdee6c14">
-  <name>Sales</name>
-  <synonym>
-    <key>en</key>
-    <value>Sales</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.SalesOrder</content>
-  <content>Document.SalesInvoice</content>
-  <content>Document.ShipmentConfirmation</content>
-  <content>Document.SalesOrderClosing</content>
-  <content>Document.PlannedReceiptReservation</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>Sales</name>
+ <synonym>
+  <key>en</key>
+  <value>FF648F2E-DD41-2EAE-EFF6-63ED4714ACBA</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.SalesOrder</content>
+ <content>Document.SalesInvoice</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>Document.SalesOrderClosing</content>
+ <content>Document.PlannedReceiptReservation</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

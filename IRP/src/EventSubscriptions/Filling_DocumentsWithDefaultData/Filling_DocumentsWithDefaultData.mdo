@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99d01884-4a3f-411b-9efb-9ba1e2480506">
-  <name>Filling_DocumentsWithDefaultData</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling documents with default data</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>Filling</event>
-  <handler>CommonModule.FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData</handler>
+ <name>Filling_DocumentsWithDefaultData</name>
+ <synonym>
+  <key>en</key>
+  <value>1B42D572-0B8F-BBE1-1087-7E113422CD23</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>Filling</event>
+ <handler>CommonModule.FillingWithDefaultDataEvent.FillingDocumentsWithDefaultData</handler>
 </mdclass:EventSubscription>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7c9ae22-24e3-4ce2-a5fe-aa847dc16108">
-  <name>Manufacturing</name>
-  <synonym>
-    <key>en</key>
-    <value>Manufacturing</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Factory</picture>
-  </picture>
-  <content>Report.R7010_DetailingSupplies</content>
-  <content>Report.R7030_ProductionPlanning</content>
-  <content>DataProcessor.ProductionWorkspace</content>
-  <content>Document.Production</content>
-  <content>Catalog.BillOfMaterials</content>
-  <subsystems>Planning</subsystems>
-  <subsystems>Produce</subsystems>
-  <subsystems>InventoryTransfer</subsystems>
-  <subsystems>ManufacturingPurchase</subsystems>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e7c9ae22-24e3-4ce2-a5fe-aa847dc16108">
+ <name>Manufacturing</name>
+ <synonym>
+  <key>en</key>
+  <value>EDEBA7F2-BA13-99D1-17C9-9C23E6D2EE95</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Factory</picture>
+ </picture>
+ <content>Report.R7010_DetailingSupplies</content>
+ <content>Report.R7030_ProductionPlanning</content>
+ <content>DataProcessor.ProductionWorkspace</content>
+ <content>Document.Production</content>
+ <content>Catalog.BillOfMaterials</content>
+ <subsystems>Planning</subsystems>
+ <subsystems>Produce</subsystems>
+ <subsystems>InventoryTransfer</subsystems>
+ <subsystems>ManufacturingPurchase</subsystems>
 </mdclass:Subsystem>

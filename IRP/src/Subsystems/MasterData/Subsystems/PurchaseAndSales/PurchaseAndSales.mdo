@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="023164a5-4fcd-43dd-8e38-c0d12b0bfc60">
-  <name>PurchaseAndSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase and sales</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Partners</content>
-  <content>Catalog.PartnerSegments</content>
-  <content>Catalog.Countries</content>
-  <content>Catalog.SpecialOffers</content>
-  <content>Catalog.SpecialOfferTypes</content>
-  <content>Catalog.Agreements</content>
-  <content>Catalog.PriceTypes</content>
-  <content>Catalog.SpecialOfferRules</content>
-  <content>Catalog.Stores</content>
-  <content>CommonCommand.OpenCompanies</content>
-  <content>Catalog.LegalNameContracts</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Catalog.PaymentSchedules</content>
-  <content>Catalog.CancelReturnReasons</content>
-  <content>Document.PriceList</content>
-  <content>Catalog.Incoterms</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>PurchaseAndSales</name>
+ <synonym>
+  <key>en</key>
+  <value>7CA8BD12-F136-55F8-865B-B96387033A6D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.Partners</content>
+ <content>Catalog.PartnerSegments</content>
+ <content>Catalog.Countries</content>
+ <content>Catalog.SpecialOffers</content>
+ <content>Catalog.SpecialOfferTypes</content>
+ <content>Catalog.Agreements</content>
+ <content>Catalog.PriceTypes</content>
+ <content>Catalog.SpecialOfferRules</content>
+ <content>Catalog.Stores</content>
+ <content>CommonCommand.OpenCompanies</content>
+ <content>Catalog.LegalNameContracts</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Catalog.PaymentSchedules</content>
+ <content>Catalog.CancelReturnReasons</content>
+ <content>Document.PriceList</content>
+ <content>Catalog.Incoterms</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

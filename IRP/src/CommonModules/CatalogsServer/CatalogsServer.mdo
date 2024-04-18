@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d31424d-b822-4123-bd28-e5435fa184c5">
-  <name>CatalogsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Catalogs server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>CatalogsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>10045DBB-B18A-74ED-D91E-E1C4C91FE779</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

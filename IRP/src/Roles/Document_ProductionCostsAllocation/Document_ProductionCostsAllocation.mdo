@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e10297c4-7025-47b3-8577-ee086afe73d7">
-  <name>Document_ProductionCostsAllocation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Production costs allocation&quot;</value>
-  </synonym>
+ <name>Document_ProductionCostsAllocation</name>
+ <synonym>
+  <key>en</key>
+  <value>14CC7295-40D4-0C3A-A890-09D0CF8F55C7__</value>
+ </synonym>
 </mdclass:Role>

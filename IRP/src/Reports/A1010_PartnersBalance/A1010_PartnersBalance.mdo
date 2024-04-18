@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e9c6bac6-f4d3-413f-b730-9e75fc4d0343">
-  <producedTypes>
-    <objectType typeId="bc45d47c-724a-4b6e-9a93-2acea5e14a39" valueTypeId="5d8cbf32-a8d8-4749-9702-f4e6ca9c6899"/>
-    <managerType typeId="bc03cc66-6e25-4f49-a34a-ac31a7582228" valueTypeId="372a2a85-8b7f-4f1e-9994-c6aa6ff5775f"/>
-  </producedTypes>
-  <name>A1010_PartnersBalance</name>
+ <producedTypes>
+  <objectType typeId="bc45d47c-724a-4b6e-9a93-2acea5e14a39" valueTypeId="5d8cbf32-a8d8-4749-9702-f4e6ca9c6899"/>
+  <managerType typeId="bc03cc66-6e25-4f49-a34a-ac31a7582228" valueTypeId="372a2a85-8b7f-4f1e-9994-c6aa6ff5775f"/>
+ </producedTypes>
+ <name>A1010_PartnersBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>62B25C9B-8CEA-EBF0-0A39-965A5B91D3C0</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.A1010_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="4f53aeaf-ab62-456d-a135-929c966c6678">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>A1010 Partners balance</value>
+   <key>en</key>
+   <value>F7FF2EB0-D7FA-177A-A642-20D16304BA44</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.A1010_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="4f53aeaf-ab62-456d-a135-929c966c6678">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

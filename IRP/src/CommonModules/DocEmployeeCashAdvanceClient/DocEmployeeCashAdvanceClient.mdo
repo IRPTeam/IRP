@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eba9a9d1-7a00-430d-b0c2-0b9c36a31b9c">
-  <name>DocEmployeeCashAdvanceClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee cash advance client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocEmployeeCashAdvanceClient</name>
+ <synonym>
+  <key>en</key>
+  <value>00636CD0-5F2A-29F9-9608-8F8741B98193</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7ae0644-dfcd-40bb-8f78-a2b30b233682">
-  <name>CostCalculation</name>
-  <synonym>
-    <key>en</key>
-    <value>Cost calculation</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.AdditionalCostAllocation</content>
-  <content>Document.AdditionalRevenueAllocation</content>
-  <content>Document.BatchReallocateIncoming</content>
-  <content>Document.BatchReallocateOutgoing</content>
-  <content>Document.CalculationMovementCosts</content>
-  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
+ <name>CostCalculation</name>
+ <synonym>
+  <key>en</key>
+  <value>BA7C08AF-8C28-B01E-E6A4-422B5AB36D9A</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.AdditionalCostAllocation</content>
+ <content>Document.AdditionalRevenueAllocation</content>
+ <content>Document.BatchReallocateIncoming</content>
+ <content>Document.BatchReallocateOutgoing</content>
+ <content>Document.CalculationMovementCosts</content>
+ <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

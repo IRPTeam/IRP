@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9252d459-7e33-411d-99f6-0640daa2b7d7">
-  <name>AccumulationRegisters_R8015T_ConsignorPrices</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R8015T ConsignorPrices</value>
-  </synonym>
+ <name>AccumulationRegisters_R8015T_ConsignorPrices</name>
+ <synonym>
+  <key>en</key>
+  <value>CFD896BF-65DB-EA97-74E0-0738E262DBE4________</value>
+ </synonym>
 </mdclass:Role>

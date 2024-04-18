@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a9d8641a-2900-4107-9b6e-e466120df36c">
-  <name>AccumulationRegisters_R4011B_FreeStocks</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4011B FreeStocks</value>
-  </synonym>
+ <name>AccumulationRegisters_R4011B_FreeStocks</name>
+ <synonym>
+  <key>en</key>
+  <value>B57E40BB-30A2-EE31-151A-A006B25436B8___</value>
+ </synonym>
 </mdclass:Role>

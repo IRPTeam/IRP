@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f1c591e-0e65-460a-b0e3-20e9d248aa81">
-  <name>SalaryPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Salary privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>SalaryPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>F14C3472-200A-0C51-1FE9-9C05E48A8FEE</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

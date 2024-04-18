@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="75060e5d-21b5-4e82-af61-b5cb86158a18">
-  <name>UserSettingsServerReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>User settings server reuse</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>UserSettingsServerReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>17C6C5DB-C51C-5EC5-5D3A-A2C75415FB61</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

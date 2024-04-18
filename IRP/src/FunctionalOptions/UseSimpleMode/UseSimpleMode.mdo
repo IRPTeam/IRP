@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dbc4b73-5b6a-4bbf-a1b4-bc5677a5772a">
-  <name>UseSimpleMode</name>
-  <synonym>
-    <key>en</key>
-    <value>Use simple mode</value>
-  </synonym>
-  <location>Constant.UseSimpleMode</location>
-  <privilegedGetMode>true</privilegedGetMode>
+ <name>UseSimpleMode</name>
+ <synonym>
+  <key>en</key>
+  <value>2F58EC96-CB1D-DA3F-F7BA-A3C631EE5247</value>
+ </synonym>
+ <location>Constant.UseSimpleMode</location>
+ <privilegedGetMode>true</privilegedGetMode>
 </mdclass:FunctionalOption>

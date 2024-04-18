@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bb4305e0-21b7-4430-92b2-91ff1174f39b">
-  <name>DocUnbundlingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc unbundling client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocUnbundlingClient</name>
+ <synonym>
+  <key>en</key>
+  <value>E3308AE2-4B90-9CD3-3A45-59033B87E4C2</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

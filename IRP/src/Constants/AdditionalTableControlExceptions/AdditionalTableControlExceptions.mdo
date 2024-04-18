@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e992231c-7d32-48fb-88f4-0afce9a1c822">
-  <producedTypes>
-    <managerType typeId="03364abc-59c4-49d1-9049-a249025ba960" valueTypeId="70b0989a-6bcd-4bf6-80a3-55ac7ea06145"/>
-    <valueManagerType typeId="8512ffd8-a661-421f-a39a-77079b3d89ae" valueTypeId="a32dd48a-63cc-4000-8383-5a6f059bfcf7"/>
-    <valueKeyType typeId="79baadab-45b7-410a-b15f-fe0bc68a44bc" valueTypeId="bad49b5c-62a3-422d-aa3d-bc3c33186551"/>
-  </producedTypes>
-  <name>AdditionalTableControlExceptions</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional table control exceptions</value>
-  </synonym>
-  <type>
-    <types>ValueStorage</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e992231c-7d32-48fb-88f4-0afce9a1c822">
+ <producedTypes>
+  <managerType typeId="03364abc-59c4-49d1-9049-a249025ba960" valueTypeId="70b0989a-6bcd-4bf6-80a3-55ac7ea06145"/>
+  <valueManagerType typeId="8512ffd8-a661-421f-a39a-77079b3d89ae" valueTypeId="a32dd48a-63cc-4000-8383-5a6f059bfcf7"/>
+  <valueKeyType typeId="79baadab-45b7-410a-b15f-fe0bc68a44bc" valueTypeId="bad49b5c-62a3-422d-aa3d-bc3c33186551"/>
+ </producedTypes>
+ <name>AdditionalTableControlExceptions</name>
+ <synonym>
+  <key>en</key>
+  <value>2E0D8AFA-6FCC-87BA-A600-0AFCDF87CFD6</value>
+ </synonym>
+ <type>
+  <types>ValueStorage</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

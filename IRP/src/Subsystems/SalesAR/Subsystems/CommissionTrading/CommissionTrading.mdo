@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eee68efd-bb15-466b-b1b3-b8f310db5433">
-  <name>CommissionTrading</name>
-  <synonym>
-    <key>en</key>
-    <value>Commission trading</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.SalesReportFromTradeAgent</content>
-  <content>Document.SalesReportToConsignor</content>
-  <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
+ <name>CommissionTrading</name>
+ <synonym>
+  <key>en</key>
+  <value>86872BF7-B377-CEA0-0733-32848EAD1D3D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.SalesReportFromTradeAgent</content>
+ <content>Document.SalesReportToConsignor</content>
+ <parentSubsystem>Subsystem.SalesAR</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b986d455-9dbc-4b03-ac7a-f69d4077d32e">
-  <name>DocProductionPlanningCorrectionClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc production planning correction client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocProductionPlanningCorrectionClient</name>
+ <synonym>
+  <key>en</key>
+  <value>4B715154-EF03-700F-F680-0027B0ECF125_____</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

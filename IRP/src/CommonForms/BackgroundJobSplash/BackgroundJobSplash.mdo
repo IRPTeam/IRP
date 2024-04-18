@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6317e0c5-c184-4136-ae95-15c1c4fdc32e">
-  <name>BackgroundJobSplash</name>
-  <synonym>
-    <key>en</key>
-    <value>Background job splash</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>BackgroundJobSplash</name>
+ <synonym>
+  <key>en</key>
+  <value>B9C4C9D7-A749-C264-4DCF-FDB4BA22DE69</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88407ccb-b50e-4f0e-a146-da02702b6954">
-  <name>TemplateCatalogs</name>
-  <synonym>
-    <key>en</key>
-    <value>Template catalogs</value>
-  </synonym>
+ <name>TemplateCatalogs</name>
+ <synonym>
+  <key>en</key>
+  <value>E3A0D65A-72B9-974C-CAB7-78268B77BA39</value>
+ </synonym>
 </mdclass:Role>

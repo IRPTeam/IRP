@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2dcbde1a-d70c-4550-a3a5-29b09700dc04">
-  <producedTypes>
-    <refType typeId="16ce8b87-f04d-4633-ae90-2ab19211003b" valueTypeId="630ce086-a7cc-41a3-895f-d5c3360dd0bf"/>
-    <listType typeId="80753ebf-8817-4c5d-bbe8-d7f5f91449ed" valueTypeId="1713defb-ce1a-459b-baa6-89d4102c4600"/>
-    <managerType typeId="de5a5422-8af8-4155-9ee5-defe16627903" valueTypeId="b61456a2-7a8e-477b-a87b-a21d8ae86a95"/>
-  </producedTypes>
-  <name>DepreciationMethods</name>
+ <producedTypes>
+  <refType typeId="16ce8b87-f04d-4633-ae90-2ab19211003b" valueTypeId="630ce086-a7cc-41a3-895f-d5c3360dd0bf"/>
+  <listType typeId="80753ebf-8817-4c5d-bbe8-d7f5f91449ed" valueTypeId="1713defb-ce1a-459b-baa6-89d4102c4600"/>
+  <managerType typeId="de5a5422-8af8-4155-9ee5-defe16627903" valueTypeId="b61456a2-7a8e-477b-a87b-a21d8ae86a95"/>
+ </producedTypes>
+ <name>DepreciationMethods</name>
+ <synonym>
+  <key>en</key>
+  <value>011510DE-1FEC-8535-5BC9-990629751CF6</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="953b18d4-ab13-450b-bfd0-3772a793468f">
+  <name>StraightLine</name>
   <synonym>
-    <key>en</key>
-    <value>Depreciation methods</value>
+   <key>en</key>
+   <value>0751C289-F8F0-847E-E65D-D57BF963EE07</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="953b18d4-ab13-450b-bfd0-3772a793468f">
-    <name>StraightLine</name>
-    <synonym>
-      <key>en</key>
-      <value>Straight line</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="efe77869-0448-4eea-a8eb-afecc651e615">
-    <name>DecliningBalance</name>
-    <synonym>
-      <key>en</key>
-      <value>Declining balance</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="efe77869-0448-4eea-a8eb-afecc651e615">
+  <name>DecliningBalance</name>
+  <synonym>
+   <key>en</key>
+   <value>40096D66-C5E5-87F2-2374-45CACDB4F025</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

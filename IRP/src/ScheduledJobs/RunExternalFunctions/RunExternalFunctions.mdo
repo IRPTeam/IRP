@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:ScheduledJob xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3724640d-0ab9-48b4-8769-e0850a587145">
-  <name>RunExternalFunctions</name>
-  <synonym>
-    <key>en</key>
-    <value>Run external functions</value>
-  </synonym>
-  <methodName>CommonModule.ServiceSystemServer.RunExternalFunctions</methodName>
-  <key>RunExternalFunctions</key>
-  <use>true</use>
-  <predefined>true</predefined>
-  <restartCountOnFailure>1</restartCountOnFailure>
-  <restartIntervalOnFailure>10</restartIntervalOnFailure>
+ <name>RunExternalFunctions</name>
+ <synonym>
+  <key>en</key>
+  <value>E340CE50-A3B9-0A92-28E4-4C79B6DD165D</value>
+ </synonym>
+ <methodName>CommonModule.ServiceSystemServer.RunExternalFunctions</methodName>
+ <key>RunExternalFunctions</key>
+ <use>true</use>
+ <predefined>true</predefined>
+ <restartCountOnFailure>1</restartCountOnFailure>
+ <restartIntervalOnFailure>10</restartIntervalOnFailure>
 </mdclass:ScheduledJob>

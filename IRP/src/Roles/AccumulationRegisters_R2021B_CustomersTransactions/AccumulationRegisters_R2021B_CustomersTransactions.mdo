@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f639a363-29fe-4071-880f-8d657c8d6c1c">
-  <name>AccumulationRegisters_R2021B_CustomersTransactions</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R2021B CustomersTransactions</value>
-  </synonym>
+ <name>AccumulationRegisters_R2021B_CustomersTransactions</name>
+ <synonym>
+  <key>en</key>
+  <value>010A07D5-6A63-FB2A-A304-4F31BD90D42C______________</value>
+ </synonym>
 </mdclass:Role>

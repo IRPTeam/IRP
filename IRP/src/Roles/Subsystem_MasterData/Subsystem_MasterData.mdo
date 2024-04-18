@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2f191879-9abe-42ea-bd00-f8d15e7d583a">
-  <name>Subsystem_MasterData</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Master data</value>
-  </synonym>
+ <name>Subsystem_MasterData</name>
+ <synonym>
+  <key>en</key>
+  <value>610EE715-3D42-C7B5-58B9-91B4DADE4075</value>
+ </synonym>
 </mdclass:Role>

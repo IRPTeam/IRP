@@ -1,101 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74073440-5e27-4729-893a-7b8a5f44c1a1">
-  <producedTypes>
-    <selectionType typeId="b195572f-5e0d-4cc1-b6ab-2ad5be40b65a" valueTypeId="b9c76349-e2a0-4f3f-9707-0e14a51e7b9e"/>
-    <listType typeId="368101a4-4d82-4306-8a33-65585a62acf8" valueTypeId="53c9313e-42c9-4808-9b40-0350b09b986a"/>
-    <managerType typeId="6cfd4661-38b5-4818-99bd-a5fd3d6cfdc1" valueTypeId="6654ea57-557c-4822-b1e9-e4a0ad8901bb"/>
-    <recordSetType typeId="5d93fadf-9ca2-4f39-972e-f8d66b81655d" valueTypeId="1f531830-9cef-456f-9539-71158e74a16a"/>
-    <recordKeyType typeId="8f8216c5-32de-4179-9852-37040f343643" valueTypeId="c40bd655-be17-40f7-87da-37478e4f0810"/>
-    <recordType typeId="098c2b81-7d1d-46dd-86d9-981692cf8257" valueTypeId="879bd9d7-723c-4e38-995c-0e502fc4f245"/>
-    <recordManagerType typeId="1ab89f12-786f-4063-8925-7b8865146350" valueTypeId="9467d40d-52a5-47a7-918c-c9793c03a335"/>
-  </producedTypes>
-  <name>DELETE_ConsignorSerialLotNumbers</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="74073440-5e27-4729-893a-7b8a5f44c1a1">
+ <producedTypes>
+  <selectionType typeId="b195572f-5e0d-4cc1-b6ab-2ad5be40b65a" valueTypeId="b9c76349-e2a0-4f3f-9707-0e14a51e7b9e"/>
+  <listType typeId="368101a4-4d82-4306-8a33-65585a62acf8" valueTypeId="53c9313e-42c9-4808-9b40-0350b09b986a"/>
+  <managerType typeId="6cfd4661-38b5-4818-99bd-a5fd3d6cfdc1" valueTypeId="6654ea57-557c-4822-b1e9-e4a0ad8901bb"/>
+  <recordSetType typeId="5d93fadf-9ca2-4f39-972e-f8d66b81655d" valueTypeId="1f531830-9cef-456f-9539-71158e74a16a"/>
+  <recordKeyType typeId="8f8216c5-32de-4179-9852-37040f343643" valueTypeId="c40bd655-be17-40f7-87da-37478e4f0810"/>
+  <recordType typeId="098c2b81-7d1d-46dd-86d9-981692cf8257" valueTypeId="879bd9d7-723c-4e38-995c-0e502fc4f245"/>
+  <recordManagerType typeId="1ab89f12-786f-4063-8925-7b8865146350" valueTypeId="9467d40d-52a5-47a7-918c-c9793c03a335"/>
+ </producedTypes>
+ <name>DELETE_ConsignorSerialLotNumbers</name>
+ <synonym>
+  <key>en</key>
+  <value>E7676F38-4E73-CB8F-FD83-372500DD1EC6</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>271ACA3F-33F9-F266-62C9-91E7B9942EB6</value>
+ </recordPresentation>
+ <resources uuid="eef806ba-7839-434d-aa01-def9be09bbd8">
+  <name>Consignor</name>
   <synonym>
-    <key>en</key>
-    <value>DELETE consignor serial lot numbers</value>
+   <key>en</key>
+   <value>5C00BB8F-3A7A-9F96-6938-83AEF469C5EE</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Consignor serial lot numbers</value>
-  </recordPresentation>
-  <resources uuid="eef806ba-7839-434d-aa01-def9be09bbd8">
-    <name>Consignor</name>
-    <synonym>
-      <key>en</key>
-      <value>Consignor</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="21a99a42-b80d-4723-87e9-452b27e815b4">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="3b09c89f-d73c-4ad3-993d-44e4434fb62e">
-    <name>TaxRate</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax rate</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxRates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="96e5e973-3cb0-46e1-863c-1b11624a9772">
-    <name>Use</name>
-    <synonym>
-      <key>en</key>
-      <value>Use</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="5c400984-a760-4ffc-bc58-342fa1139706">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="21a99a42-b80d-4723-87e9-452b27e815b4">
+  <name>Tax</name>
+  <synonym>
+   <key>en</key>
+   <value>D80BF5A9-586F-0B35-5E37-7F626D3F1237</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="3b09c89f-d73c-4ad3-993d-44e4434fb62e">
+  <name>TaxRate</name>
+  <synonym>
+   <key>en</key>
+   <value>0E90116B-2683-04CA-AA3D-D4D658DE6FA7</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxRates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="96e5e973-3cb0-46e1-863c-1b11624a9772">
+  <name>Use</name>
+  <synonym>
+   <key>en</key>
+   <value>72648CCD-BBBC-FEF9-99FF-F87994CDF424</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="5c400984-a760-4ffc-bc58-342fa1139706">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>FFDD6F27-7A59-0971-114E-E52631DDEF1D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

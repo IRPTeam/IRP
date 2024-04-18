@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2e793a96-16b8-47d2-841a-cb7c360f5b68">
-  <producedTypes>
-    <refType typeId="434148cb-36c4-497b-9bd4-22276dbc9238" valueTypeId="5c1c83fc-61eb-48c1-8323-3d6ea5a2e8dd"/>
-    <listType typeId="0db92081-a800-4b15-8657-8b27786c39ac" valueTypeId="d513e052-3cee-4fd4-a107-030cd6b5481f"/>
-    <managerType typeId="d40c4a4f-f4bd-47c1-8fbf-b59f6177b2b1" valueTypeId="e1fdc31f-dd19-473a-aaf3-272a975382ba"/>
-  </producedTypes>
-  <name>ConsolidatedRetailSalesStatuses</name>
+ <producedTypes>
+  <refType typeId="434148cb-36c4-497b-9bd4-22276dbc9238" valueTypeId="5c1c83fc-61eb-48c1-8323-3d6ea5a2e8dd"/>
+  <listType typeId="0db92081-a800-4b15-8657-8b27786c39ac" valueTypeId="d513e052-3cee-4fd4-a107-030cd6b5481f"/>
+  <managerType typeId="d40c4a4f-f4bd-47c1-8fbf-b59f6177b2b1" valueTypeId="e1fdc31f-dd19-473a-aaf3-272a975382ba"/>
+ </producedTypes>
+ <name>ConsolidatedRetailSalesStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>325199F1-E643-44CE-E2FE-E70507E585E9</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="e2d86647-e946-458d-964e-24434df40f86">
+  <name>Open</name>
   <synonym>
-    <key>en</key>
-    <value>Consolidated retail sales statuses</value>
+   <key>en</key>
+   <value>90A66437-1594-5CE7-7765-50AF5EDFE1C1</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="e2d86647-e946-458d-964e-24434df40f86">
-    <name>Open</name>
-    <synonym>
-      <key>en</key>
-      <value>Open</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0414a574-76a2-428f-9d11-c753807731dc">
-    <name>Close</name>
-    <synonym>
-      <key>en</key>
-      <value>Close</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f43ece8b-9ab5-449d-b2d9-443db1e4f39e">
-    <name>Cancel</name>
-    <synonym>
-      <key>en</key>
-      <value>Cancel</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="72c916d2-ff46-4eb1-972e-d84794fe0588">
-    <name>New</name>
-    <synonym>
-      <key>en</key>
-      <value>New</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="0414a574-76a2-428f-9d11-c753807731dc">
+  <name>Close</name>
+  <synonym>
+   <key>en</key>
+   <value>7B95A140-C57D-FF72-2D17-7EE45A32AE2B</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f43ece8b-9ab5-449d-b2d9-443db1e4f39e">
+  <name>Cancel</name>
+  <synonym>
+   <key>en</key>
+   <value>F3F6D7C1-D1F0-6F4A-A8E6-6BF8B6FD280C</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="72c916d2-ff46-4eb1-972e-d84794fe0588">
+  <name>New</name>
+  <synonym>
+   <key>en</key>
+   <value>E0486EF4-06E9-26EB-B025-524471645D29</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

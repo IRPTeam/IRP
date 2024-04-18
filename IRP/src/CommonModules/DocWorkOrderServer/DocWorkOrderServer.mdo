@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="de13950f-3870-4b56-926c-24ca06ae16ca">
-  <name>DocWorkOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc work order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocWorkOrderServer</name>
+ <synonym>
+  <key>en</key>
+  <value>F2627999-BFEC-D098-8D1A-AD70739C0CB6</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

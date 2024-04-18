@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d7555651-c238-4b77-984c-276034238d5f">
-  <producedTypes>
-    <objectType typeId="01e432cd-95e5-4634-a408-f61cc84aabf2" valueTypeId="e0b44354-8ef8-442d-b147-922dc4bafa32"/>
-    <managerType typeId="7810a505-9c68-431d-9eba-e42e203dd041" valueTypeId="ff1f6363-409c-4bd4-8f7e-43f816dff5f5"/>
-  </producedTypes>
-  <name>AnalyseXDTO</name>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d7555651-c238-4b77-984c-276034238d5f">
+ <producedTypes>
+  <objectType typeId="01e432cd-95e5-4634-a408-f61cc84aabf2" valueTypeId="e0b44354-8ef8-442d-b147-922dc4bafa32"/>
+  <managerType typeId="7810a505-9c68-431d-9eba-e42e203dd041" valueTypeId="ff1f6363-409c-4bd4-8f7e-43f816dff5f5"/>
+ </producedTypes>
+ <name>AnalyseXDTO</name>
+ <synonym>
+  <key>en</key>
+  <value>6B41E44F-A2C8-C649-9C47-701834ED41D3</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.AnalyseXDTO.Form.Form</defaultForm>
+ <attributes uuid="e7b41ab9-f209-4048-8291-e2a94ae43373">
+  <name>URI</name>
   <synonym>
-    <key>en</key>
-    <value>Analyse XDTO</value>
+   <key>en</key>
+   <value>78FBA1B8-E6DD-FE0B-B108-86547C22DAF1</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.AnalyseXDTO.Form.Form</defaultForm>
-  <attributes uuid="e7b41ab9-f209-4048-8291-e2a94ae43373">
-    <name>URI</name>
-    <synonym>
-      <key>en</key>
-      <value>URI</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>256</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="42d1c8ac-cdc5-4d7d-9ea7-04a8776037b1">
-    <name>TypeName</name>
-    <synonym>
-      <key>en</key>
-      <value>Type name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>256</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="2c9cb935-eb07-4ed0-b386-4b051088f776">
-    <name>WSName</name>
-    <synonym>
-      <key>en</key>
-      <value>WSName</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <forms uuid="163dd282-dd08-404f-8f21-3cdc902f8286">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>256</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="42d1c8ac-cdc5-4d7d-9ea7-04a8776037b1">
+  <name>TypeName</name>
+  <synonym>
+   <key>en</key>
+   <value>E7D85887-A7E1-EE87-7BBB-B9DC3918D237</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>256</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="2c9cb935-eb07-4ed0-b386-4b051088f776">
+  <name>WSName</name>
+  <synonym>
+   <key>en</key>
+   <value>B1195C5D-25DC-37E1-1565-577DE05BE644</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <forms uuid="163dd282-dd08-404f-8f21-3cdc902f8286">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>07ECA6B6-2E49-40FF-FFD1-10B7D2C6D750</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

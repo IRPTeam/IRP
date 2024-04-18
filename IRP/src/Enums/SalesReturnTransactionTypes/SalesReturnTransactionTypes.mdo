@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2d5f2946-fb9d-49df-8f37-474e471b5025">
-  <producedTypes>
-    <refType typeId="a14c55ac-247d-4a31-a945-572761ec401c" valueTypeId="74f0a6e1-fcf4-46ce-99eb-aa1c6f0ba626"/>
-    <listType typeId="edde9bbc-1901-43c2-8c54-8b924847199d" valueTypeId="efdae67c-820b-41fa-bf5a-217c2c0459f3"/>
-    <managerType typeId="72ecf3f4-1118-47fc-b0a8-8bb5cd75960f" valueTypeId="5241c036-d1ab-433f-a77c-09b75239c821"/>
-  </producedTypes>
-  <name>SalesReturnTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="a14c55ac-247d-4a31-a945-572761ec401c" valueTypeId="74f0a6e1-fcf4-46ce-99eb-aa1c6f0ba626"/>
+  <listType typeId="edde9bbc-1901-43c2-8c54-8b924847199d" valueTypeId="efdae67c-820b-41fa-bf5a-217c2c0459f3"/>
+  <managerType typeId="72ecf3f4-1118-47fc-b0a8-8bb5cd75960f" valueTypeId="5241c036-d1ab-433f-a77c-09b75239c821"/>
+ </producedTypes>
+ <name>SalesReturnTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>1B16B015-4A8B-57BB-B166-6D7236E17424</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="07331f84-4b8f-4397-aafb-ed00109a3667">
+  <name>ReturnFromCustomer</name>
   <synonym>
-    <key>en</key>
-    <value>Sales return transaction types</value>
+   <key>en</key>
+   <value>15C7AD7F-2F88-5241-1186-69A238F24307</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="07331f84-4b8f-4397-aafb-ed00109a3667">
-    <name>ReturnFromCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b328dd7a-73b0-4516-8ddc-18b507ed6c70">
-    <name>ReturnFromTradeAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Return from trade agent</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="b328dd7a-73b0-4516-8ddc-18b507ed6c70">
+  <name>ReturnFromTradeAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>0342BDC5-226E-ECC0-0A9F-F408B56E9703</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

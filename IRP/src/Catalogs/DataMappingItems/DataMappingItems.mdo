@@ -1,358 +1,358 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91bebfc6-3750-45c4-817b-9ac9cdb9ab8a">
-  <producedTypes>
-    <objectType typeId="9a5f1a4f-5812-45b8-b2f1-1bf7eab637b0" valueTypeId="be4b58af-160b-419d-9972-ec15c6d29a83"/>
-    <refType typeId="fdf5d304-c0ac-4d29-98e0-c44890578228" valueTypeId="21198fea-edca-4652-872a-9fd7f73aba58"/>
-    <selectionType typeId="c0fe2be5-ecce-4db0-a65a-f3cc9c303f3e" valueTypeId="e1433d1a-a3b1-4c5c-8f41-2bb6993a0938"/>
-    <listType typeId="2dbf5380-d9c1-4c5e-8f37-d0825f0f13b7" valueTypeId="087c1c24-6813-450e-90fb-590cec214b16"/>
-    <managerType typeId="3718763c-289f-4f5a-b23d-deae9c4a0a3c" valueTypeId="d1ed685a-24d5-4942-8fca-395d584f5675"/>
-  </producedTypes>
-  <name>DataMappingItems</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="91bebfc6-3750-45c4-817b-9ac9cdb9ab8a">
+ <producedTypes>
+  <objectType typeId="9a5f1a4f-5812-45b8-b2f1-1bf7eab637b0" valueTypeId="be4b58af-160b-419d-9972-ec15c6d29a83"/>
+  <refType typeId="fdf5d304-c0ac-4d29-98e0-c44890578228" valueTypeId="21198fea-edca-4652-872a-9fd7f73aba58"/>
+  <selectionType typeId="c0fe2be5-ecce-4db0-a65a-f3cc9c303f3e" valueTypeId="e1433d1a-a3b1-4c5c-8f41-2bb6993a0938"/>
+  <listType typeId="2dbf5380-d9c1-4c5e-8f37-d0825f0f13b7" valueTypeId="087c1c24-6813-450e-90fb-590cec214b16"/>
+  <managerType typeId="3718763c-289f-4f5a-b23d-deae9c4a0a3c" valueTypeId="d1ed685a-24d5-4942-8fca-395d584f5675"/>
+ </producedTypes>
+ <name>DataMappingItems</name>
+ <synonym>
+  <key>en</key>
+  <value>D10AEA02-C3F4-419D-D1E6-6B6620DD3D59</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.DataMappingItems.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.DataMappingItems.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
   <synonym>
-    <key>en</key>
-    <value>Data mapping items</value>
+   <key>en</key>
+   <value>204FAB95-1398-5AC8-8CCB-B5A3DF144810</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.DataMappingItems.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.DataMappingItems.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <synonym>
-      <key>en</key>
-      <value>Parent</value>
-    </synonym>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>en</key>
+  <value>156D70CA-D17B-8E7E-EEF1-18EB9A75D1BB</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <codeSeries>WithinSubordination</codeSeries>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.DataMappingItems.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="8949d29b-c57b-4157-b6bd-5f0a518b4799">
+  <name>RefValue</name>
+  <synonym>
+   <key>en</key>
+   <value>A656C662-1CC7-0375-5012-288381EB635E</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="af545167-1c64-4b93-811d-52b83f6dbcf2">
+  <name>SimpleValue</name>
+  <synonym>
+   <key>en</key>
+   <value>26A05362-63E5-110E-E108-8364704864AE</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+   <types>String</types>
+   <types>Date</types>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>15</precision>
+    <scale>5</scale>
+   </numberQualifiers>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
+   <dateQualifiers/>
+  </type>
+  <toolTip>
+   <key>en</key>
+   <value>7EE4CEA3-B393-DAB4-46FB-B354895DDB60</value>
+  </toolTip>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="35be9e35-57d6-43a0-877e-0a1122c9198a">
+  <name>StorageValue</name>
+  <synonym>
+   <key>en</key>
+   <value>230DFBDC-FD49-C507-75AA-AB8102D980A3</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="13066a6e-dd9f-4970-8f2d-7cfeb21762dd">
+  <name>IndexValue</name>
+  <synonym>
+   <key>en</key>
+   <value>5F9AB7CF-5149-E39F-F75A-A72FEC99F85E</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>32</precision>
+   </numberQualifiers>
+  </type>
+  <toolTip>
+   <key>en</key>
+   <value>BA8F5ECC-1581-6EFA-A591-168F713C57A3</value>
+  </toolTip>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8810d0bf-2a07-45b8-bb5c-6f7bba6d6c06">
+  <name>TypeValue</name>
+  <synonym>
+   <key>en</key>
+   <value>95D5C639-AA8A-E5EA-AA27-74418C78C5C2</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>256</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7e6cf07b-08f0-43b8-99ef-06cd31c6a392">
+  <name>DeletedFromSource</name>
+  <synonym>
+   <key>en</key>
+   <value>EB69B50A-46EA-D8B7-7EDD-DF0B796BF09A</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b739c551-6d71-49ab-a1d3-671ed3b70319">
+  <name>Incoming</name>
+  <synonym>
+   <key>en</key>
+   <value>8083A0E9-B6DA-F261-1D15-5631FFD525AF</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5df1d9c1-6184-4b09-93fb-0d6be75fa26e">
+  <name>Outgoing</name>
+  <synonym>
+   <key>en</key>
+   <value>85DBF2BD-60FA-B02A-A949-981A928952D9</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="59e58566-32a6-446e-a7b2-d757dc24c8ff">
+  <producedTypes>
+   <objectType typeId="a11dfc9d-379d-4ccb-9312-c075cd794783" valueTypeId="03b04768-3944-416a-ba10-5f20fd9fcb3e"/>
+   <rowType typeId="0f217f6d-1607-4535-b60b-28695c33d5c8" valueTypeId="45582c6e-e4aa-4128-9374-9999ab8a41dc"/>
+  </producedTypes>
+  <name>ParametersTable</name>
+  <synonym>
+   <key>en</key>
+   <value>E93B1330-643D-7896-601F-F5069B947BFB</value>
+  </synonym>
+  <attributes uuid="178ab33d-c246-40db-a5f2-766843e01f04">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Correspondence data item</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <codeSeries>WithinSubordination</codeSeries>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.DataMappingItems.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="8949d29b-c57b-4157-b6bd-5f0a518b4799">
-    <name>RefValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Ref value</value>
-    </synonym>
-    <type>
-      <types>AnyRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>472DCDA5-4A28-F089-9A01-18CC92824650</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>256</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <indexing>Index</indexing>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="af545167-1c64-4b93-811d-52b83f6dbcf2">
-    <name>SimpleValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Simple value</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-      <types>String</types>
-      <types>Date</types>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>15</precision>
-        <scale>5</scale>
-      </numberQualifiers>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-      <dateQualifiers/>
-    </type>
-    <toolTip>
-      <key>en</key>
-      <value>Dont index</value>
-    </toolTip>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="557f69b0-5daf-492d-a7ac-b287c3a2f874">
+   <name>RefValue</name>
+   <synonym>
+    <key>en</key>
+    <value>25D65F5B-69A1-CEC0-051F-FE7A7D3038D2</value>
+   </synonym>
+   <type>
+    <types>AnyRef</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="35be9e35-57d6-43a0-877e-0a1122c9198a">
-    <name>StorageValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Storage value</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="4dc712e9-13a5-459a-ae5b-99b10bc4bedd">
+   <name>SimpleValue</name>
+   <synonym>
+    <key>en</key>
+    <value>F6A12BB0-A952-13F0-0286-6C5DA7918FA0</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="13066a6e-dd9f-4970-8f2d-7cfeb21762dd">
-    <name>IndexValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Index value</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>32</precision>
-      </numberQualifiers>
-    </type>
-    <toolTip>
-      <key>en</key>
-      <value>Dont index</value>
-    </toolTip>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="4ed88475-8e03-40e2-b285-35b3682a1d18">
+   <name>StorageValue</name>
+   <synonym>
+    <key>en</key>
+    <value>4AB269A9-7E6E-6FE5-5237-707B65B68A8C</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="8810d0bf-2a07-45b8-bb5c-6f7bba6d6c06">
-    <name>TypeValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Type value</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>256</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7e6cf07b-08f0-43b8-99ef-06cd31c6a392">
-    <name>DeletedFromSource</name>
-    <synonym>
-      <key>en</key>
-      <value>Deleted from source</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b739c551-6d71-49ab-a1d3-671ed3b70319">
-    <name>Incoming</name>
-    <synonym>
-      <key>en</key>
-      <value>Incoming</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="5df1d9c1-6184-4b09-93fb-0d6be75fa26e">
-    <name>Outgoing</name>
-    <synonym>
-      <key>en</key>
-      <value>Outgoing</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="59e58566-32a6-446e-a7b2-d757dc24c8ff">
-    <producedTypes>
-      <objectType typeId="a11dfc9d-379d-4ccb-9312-c075cd794783" valueTypeId="03b04768-3944-416a-ba10-5f20fd9fcb3e"/>
-      <rowType typeId="0f217f6d-1607-4535-b60b-28695c33d5c8" valueTypeId="45582c6e-e4aa-4128-9374-9999ab8a41dc"/>
-    </producedTypes>
-    <name>ParametersTable</name>
-    <synonym>
-      <key>en</key>
-      <value>Parameters table</value>
-    </synonym>
-    <attributes uuid="178ab33d-c246-40db-a5f2-766843e01f04">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>256</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <indexing>Index</indexing>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="557f69b0-5daf-492d-a7ac-b287c3a2f874">
-      <name>RefValue</name>
-      <synonym>
-        <key>en</key>
-        <value>Ref value</value>
-      </synonym>
-      <type>
-        <types>AnyRef</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4dc712e9-13a5-459a-ae5b-99b10bc4bedd">
-      <name>SimpleValue</name>
-      <synonym>
-        <key>en</key>
-        <value>Simple value</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Date</types>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>512</length>
-        </stringQualifiers>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4ed88475-8e03-40e2-b285-35b3682a1d18">
-      <name>StorageValue</name>
-      <synonym>
-        <key>en</key>
-        <value>Storage value</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="340ea7c1-9439-461f-b255-f373d9207868">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="340ea7c1-9439-461f-b255-f373d9207868">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5BBE8422-0859-FC8E-E041-16DA814B5709</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

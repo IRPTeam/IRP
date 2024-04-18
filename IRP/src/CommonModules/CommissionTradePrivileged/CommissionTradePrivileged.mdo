@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="911ddf31-e03d-43f1-aa4d-cd12960be2f5">
-  <name>CommissionTradePrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Commission trade privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>CommissionTradePrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>21F407D8-8F83-FAEC-C9AF-FAC4D684FA1D</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

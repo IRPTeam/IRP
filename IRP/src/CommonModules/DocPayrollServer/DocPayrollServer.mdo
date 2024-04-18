@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cdfb134a-e557-4b87-b869-22f3d3e55f97">
-  <name>DocPayrollServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc payroll server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocPayrollServer</name>
+ <synonym>
+  <key>en</key>
+  <value>F5C48A7B-54F7-E8EC-C316-6AC65E9602B1</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

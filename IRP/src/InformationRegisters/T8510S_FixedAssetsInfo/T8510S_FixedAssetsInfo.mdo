@@ -1,155 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b82f65d1-ed11-4c69-8ce9-1a1dda980db9">
-  <producedTypes>
-    <selectionType typeId="1297d489-af85-4b5b-8873-0edcee040131" valueTypeId="5e95be3f-17ea-4256-ab00-d73bc43895c0"/>
-    <listType typeId="0ebcda44-e90f-4f1a-87f5-000a9579f6c0" valueTypeId="aabbe0ec-2c24-45c7-a594-60126dded1ee"/>
-    <managerType typeId="651885cd-dd9c-4ca0-8305-d53effbfa4b9" valueTypeId="0c8b28d7-f880-4129-8673-9fba9f4340d9"/>
-    <recordSetType typeId="f0a03a7a-985e-45a6-95d8-176117c7ca3b" valueTypeId="9262e049-d455-456b-a051-8fe405cebae1"/>
-    <recordKeyType typeId="d4c4d651-8001-42a2-9832-8f9fd48e6fdf" valueTypeId="fa27267e-7c2f-4af4-88f7-ebf7142b53bf"/>
-    <recordType typeId="b70b7705-32cd-49d7-aeef-a8d3330a68c8" valueTypeId="8c45e042-3c71-4a45-823b-8035aecd8ba9"/>
-    <recordManagerType typeId="31ec7480-6c13-48d0-8f2b-8a6a4463edf8" valueTypeId="8e3bb35a-5b1a-4f10-ae79-cdec0b83d023"/>
-  </producedTypes>
-  <name>T8510S_FixedAssetsInfo</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="b82f65d1-ed11-4c69-8ce9-1a1dda980db9">
+ <producedTypes>
+  <selectionType typeId="1297d489-af85-4b5b-8873-0edcee040131" valueTypeId="5e95be3f-17ea-4256-ab00-d73bc43895c0"/>
+  <listType typeId="0ebcda44-e90f-4f1a-87f5-000a9579f6c0" valueTypeId="aabbe0ec-2c24-45c7-a594-60126dded1ee"/>
+  <managerType typeId="651885cd-dd9c-4ca0-8305-d53effbfa4b9" valueTypeId="0c8b28d7-f880-4129-8673-9fba9f4340d9"/>
+  <recordSetType typeId="f0a03a7a-985e-45a6-95d8-176117c7ca3b" valueTypeId="9262e049-d455-456b-a051-8fe405cebae1"/>
+  <recordKeyType typeId="d4c4d651-8001-42a2-9832-8f9fd48e6fdf" valueTypeId="fa27267e-7c2f-4af4-88f7-ebf7142b53bf"/>
+  <recordType typeId="b70b7705-32cd-49d7-aeef-a8d3330a68c8" valueTypeId="8c45e042-3c71-4a45-823b-8035aecd8ba9"/>
+  <recordManagerType typeId="31ec7480-6c13-48d0-8f2b-8a6a4463edf8" valueTypeId="8e3bb35a-5b1a-4f10-ae79-cdec0b83d023"/>
+ </producedTypes>
+ <name>T8510S_FixedAssetsInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>029B2B24-33AE-8D73-362D-DA231AA63F5E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="8fca9e15-1ca9-4e47-a8b4-6ee600f9e023">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>T8510 Fixed assets info</value>
+   <key>en</key>
+   <value>E6DE5009-E311-8470-0CF0-0F3E730CD326</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="8fca9e15-1ca9-4e47-a8b4-6ee600f9e023">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="758ae1f9-f92c-43f3-89c2-59b7c03295b4">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="8d27b879-a508-4e0c-a046-0d6d0d23f1b7">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="616c2387-795b-4c41-bfff-978a9c6f5c02">
-    <name>ProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="1aaa5688-ab8e-4f1b-8757-47d5b2bd0b08">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CommissioningOfFixedAsset</types>
-      <types>DocumentRef.ModernizationOfFixedAsset</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="80e9bd31-fd0a-4892-8df6-c2fa1aaae9ef">
-    <name>FixedAsset</name>
-    <synonym>
-      <key>en</key>
-      <value>Fixed asset</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssets</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="6858164d-a9d8-4b2e-a041-2d9bd1fc5cf5">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssetsLedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="2f5e49f0-0772-4c40-a642-345f4ae2c1a8">
-    <name>Schedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Schedule</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.DepreciationSchedules</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <dimensions uuid="5a2eb75d-386a-423d-ac90-aede08f6e59f">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="758ae1f9-f92c-43f3-89c2-59b7c03295b4">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>A4714D43-88D3-74EC-C903-3814ECD7E89E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="8d27b879-a508-4e0c-a046-0d6d0d23f1b7">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>AA939FB5-4455-B20B-B21E-E89619E0F389</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="616c2387-795b-4c41-bfff-978a9c6f5c02">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>3A64453E-2FAE-97B9-92A0-0EBED7192F30</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="1aaa5688-ab8e-4f1b-8757-47d5b2bd0b08">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>04F5A62A-C724-612A-A3C1-17BA1ABA5369</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CommissioningOfFixedAsset</types>
+   <types>DocumentRef.ModernizationOfFixedAsset</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="80e9bd31-fd0a-4892-8df6-c2fa1aaae9ef">
+  <name>FixedAsset</name>
+  <synonym>
+   <key>en</key>
+   <value>E63426CC-6ED2-9F82-2708-8D7EFAA27E50</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssets</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="6858164d-a9d8-4b2e-a041-2d9bd1fc5cf5">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>7E6A9928-3562-6FA0-0D86-6A510A842AA4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="2f5e49f0-0772-4c40-a642-345f4ae2c1a8">
+  <name>Schedule</name>
+  <synonym>
+   <key>en</key>
+   <value>11119E81-025F-7A0D-DE98-83EE19CDD561</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.DepreciationSchedules</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <dimensions uuid="5a2eb75d-386a-423d-ac90-aede08f6e59f">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>AF93BD17-3998-1AF0-036B-B509B3710615</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

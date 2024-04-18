@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe815f88-ebaa-4662-a323-b1711cae3f8a">
-  <name>HTMLTextField</name>
-  <synonym>
-    <key>en</key>
-    <value>HTMLText field</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLTextField</name>
+ <synonym>
+  <key>en</key>
+  <value>D30F860D-9AAF-663C-C7B7-74C0D58B35E9</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

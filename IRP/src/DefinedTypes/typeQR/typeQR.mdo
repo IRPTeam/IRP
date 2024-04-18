@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1b29cfc3-26ce-4b6a-a8e7-5d295e558df3">
-  <producedTypes>
-    <containerType typeId="3874fa25-0724-4050-9906-619964d78e6d" valueTypeId="7c277286-166c-4f73-8f6a-e1b2c57e34ed"/>
-  </producedTypes>
-  <name>typeQR</name>
-  <synonym>
-    <key>en</key>
-    <value>Type QR</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers/>
-  </type>
+ <producedTypes>
+  <containerType typeId="3874fa25-0724-4050-9906-619964d78e6d" valueTypeId="7c277286-166c-4f73-8f6a-e1b2c57e34ed"/>
+ </producedTypes>
+ <name>typeQR</name>
+ <synonym>
+  <key>en</key>
+  <value>7CA4D0F8-D833-BA82-2B22-2E2C576FBA13</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers/>
+ </type>
 </mdclass:DefinedType>

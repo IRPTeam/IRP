@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8b086c1b-2341-46f0-b947-e0c4002cfbaf">
-  <name>Share</name>
-  <synonym>
-    <key>en</key>
-    <value>Share</value>
-  </synonym>
+ <name>Share</name>
+ <synonym>
+  <key>en</key>
+  <value>A10F55EF-CD1A-F1DE-EE9B-B2D9F1F81E3E</value>
+ </synonym>
 </mdclass:CommonPicture>

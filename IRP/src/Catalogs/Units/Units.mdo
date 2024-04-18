@@ -1,243 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="167a38ce-a50e-4c07-bc08-058076f87110">
-  <producedTypes>
-    <objectType typeId="969f1eb3-9b20-451e-8bd0-8928d770f69c" valueTypeId="5a02bdec-7296-4fdc-bb7c-a78b07a5051e"/>
-    <refType typeId="0b6423f3-c0ab-49aa-bf4b-ef65b7cbe70e" valueTypeId="d93b7a9a-c5be-4d8a-bbe5-7fae2db10d8e"/>
-    <selectionType typeId="0b88f98e-274c-474b-bd21-3c23389f5063" valueTypeId="7a3754a0-e0f8-47c3-919d-926532df70b1"/>
-    <listType typeId="3c04365e-4f7f-410d-95bb-2a89b9d22f8e" valueTypeId="b871869e-f6e9-4e5b-8a8d-4c71a9e0c893"/>
-    <managerType typeId="d819688b-1f74-4c6a-81af-b70cfc0fc7c9" valueTypeId="448b6a71-f625-4785-901e-19bbde7f8e37"/>
-  </producedTypes>
-  <name>Units</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="167a38ce-a50e-4c07-bc08-058076f87110">
+ <producedTypes>
+  <objectType typeId="969f1eb3-9b20-451e-8bd0-8928d770f69c" valueTypeId="5a02bdec-7296-4fdc-bb7c-a78b07a5051e"/>
+  <refType typeId="0b6423f3-c0ab-49aa-bf4b-ef65b7cbe70e" valueTypeId="d93b7a9a-c5be-4d8a-bbe5-7fae2db10d8e"/>
+  <selectionType typeId="0b88f98e-274c-474b-bd21-3c23389f5063" valueTypeId="7a3754a0-e0f8-47c3-919d-926532df70b1"/>
+  <listType typeId="3c04365e-4f7f-410d-95bb-2a89b9d22f8e" valueTypeId="b871869e-f6e9-4e5b-8a8d-4c71a9e0c893"/>
+  <managerType typeId="d819688b-1f74-4c6a-81af-b70cfc0fc7c9" valueTypeId="448b6a71-f625-4785-901e-19bbde7f8e37"/>
+ </producedTypes>
+ <name>Units</name>
+ <synonym>
+  <key>en</key>
+  <value>B365E793-69CE-2F12-22BF-FC7F8E73BB61</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Units</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_Units</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.Units.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.Units.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.Units.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.Units.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.Units.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>en</key>
+  <value>25C33D31-0D3B-9299-91FB-B2099F8F15C3</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="65c650b9-47d4-4a59-bc06-178b7eb3365c">
+   <name>Default</name>
+   <code xsi:type="core:NumberValue">
+    <value>1</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.Units.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.Units.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.Units.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="82b9dc61-781d-4617-a240-2e712aafa7b8">
+  <name>Item</name>
   <synonym>
-    <key>en</key>
-    <value>Item units</value>
+   <key>en</key>
+   <value>490CD296-B37F-33F3-3263-3E7444F7C617</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Units</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_Units</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.Units.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.Units.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.Units.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.Units.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.Units.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>Use</createOnInput>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+ </attributes>
+ <attributes uuid="840178c5-4b1d-441a-a05b-cec5fc49ad11">
+  <name>Quantity</name>
+  <synonym>
+   <key>en</key>
+   <value>3DDEC578-260B-98B9-9D86-617261518775</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>15</precision>
+    <scale>5</scale>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5eef9619-e141-4c45-9e22-dacc1f54d169">
+  <name>BasisUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>188C1A8E-7D5D-AC51-1B12-2F161F7DD497</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Units</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="62c02b78-7b71-4b73-9021-07ad33d45525">
+  <name>UOM</name>
+  <synonym>
+   <key>en</key>
+   <value>5AC8A67F-47C5-263B-B45B-B3183646477A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.UnitsOfMeasurement</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="c0f9951d-d6b4-4220-a20f-82d6d97d352b">
+  <producedTypes>
+   <objectType typeId="a06fe70c-764b-4da4-9209-711bd73450f1" valueTypeId="f5289add-efc2-4e58-834c-799033c8dbf0"/>
+   <rowType typeId="716c8a34-5aa5-4c28-8aef-5fb173b2be32" valueTypeId="ddbf60a0-e242-46f5-b1ec-1d47a9eb9fb4"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>EEDC977F-7080-30B5-50DA-AAB75408209B</value>
+  </synonym>
+  <attributes uuid="1684b5c0-67c9-4393-a7cc-2e564f1d966c">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Item unit</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="65c650b9-47d4-4a59-bc06-178b7eb3365c">
-      <name>Default</name>
-      <code xsi:type="core:NumberValue">
-        <value>1</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Units.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.Units.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Units.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="82b9dc61-781d-4617-a240-2e712aafa7b8">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>Use</createOnInput>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
+    <value>6D265415-15BE-90E9-94E1-18251F8C4716</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="840178c5-4b1d-441a-a05b-cec5fc49ad11">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>15</precision>
-        <scale>5</scale>
-        <nonNegative>true</nonNegative>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="bdb9a87d-eb64-48ce-b01e-590c5f8acf9c">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>6CDE28D5-9834-ADA6-65FD-D769DF1B8415</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.Units.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="5eef9619-e141-4c45-9e22-dacc1f54d169">
-    <name>BasisUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="3a73dd46-b2e2-4481-8a72-937a3ce51869">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>01CD8BC1-4605-DAA1-1C7A-A62E779AD0F1</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="62c02b78-7b71-4b73-9021-07ad33d45525">
-    <name>UOM</name>
-    <synonym>
-      <key>en</key>
-      <value>UOM</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.UnitsOfMeasurement</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="c0f9951d-d6b4-4220-a20f-82d6d97d352b">
-    <producedTypes>
-      <objectType typeId="a06fe70c-764b-4da4-9209-711bd73450f1" valueTypeId="f5289add-efc2-4e58-834c-799033c8dbf0"/>
-      <rowType typeId="716c8a34-5aa5-4c28-8aef-5fb173b2be32" valueTypeId="ddbf60a0-e242-46f5-b1ec-1d47a9eb9fb4"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="1684b5c0-67c9-4393-a7cc-2e564f1d966c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bdb9a87d-eb64-48ce-b01e-590c5f8acf9c">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Units.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3a73dd46-b2e2-4481-8a72-937a3ce51869">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="59b5c950-0af8-47d0-af1b-4bcb5f8f5592">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e9294be7-3296-429b-b5f2-7bb03f50c5c8">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="d2932cf8-4322-468c-86b3-09f75af80703">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <commands uuid="d856385f-cf73-474b-bf8b-e578af0b76fa">
-    <name>OpenUnits</name>
-    <synonym>
-      <key>en</key>
-      <value>Item units</value>
-    </synonym>
-    <group>FormNavigationPanelGoTo</group>
-    <commandParameterType>
-      <types>CatalogRef.Items</types>
-    </commandParameterType>
-    <representation>Auto</representation>
-  </commands>
+ </tabularSections>
+ <forms uuid="59b5c950-0af8-47d0-af1b-4bcb5f8f5592">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>07642954-38BA-446D-D4D8-84EA24BAB0FF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e9294be7-3296-429b-b5f2-7bb03f50c5c8">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>94613754-6240-2EC4-4F39-97B75CD3FCE9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d2932cf8-4322-468c-86b3-09f75af80703">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>2C640356-6057-CAC0-0CB5-5E06D28A52FB</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="d856385f-cf73-474b-bf8b-e578af0b76fa">
+  <name>OpenUnits</name>
+  <synonym>
+   <key>en</key>
+   <value>0045C1CA-1250-473B-B689-9634AD49AE85</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Items</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Catalog>

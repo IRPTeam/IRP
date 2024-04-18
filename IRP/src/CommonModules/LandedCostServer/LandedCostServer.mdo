@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="830387df-32c9-4a34-addd-c2cb8342c146">
-  <name>LandedCostServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Landed cost server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>LandedCostServer</name>
+ <synonym>
+  <key>en</key>
+  <value>E2C61461-E3FB-1001-1984-4F7BD88FF74B</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

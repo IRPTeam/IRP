@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74bde683-eb78-46e7-acbb-21e7de8b259e">
-  <name>AccumulationRegisters_DELETE_R8011B_TradeAgentSerialLotNumber</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters DELETE R8011B TradeAgentSerialLotNumber</value>
-  </synonym>
+ <name>AccumulationRegisters_DELETE_R8011B_TradeAgentSerialLotNumber</name>
+ <synonym>
+  <key>en</key>
+  <value>90FF13D4-5321-B49B-B65A-AE11C0C478DE_________________________</value>
+ </synonym>
 </mdclass:Role>

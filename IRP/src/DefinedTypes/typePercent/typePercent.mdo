@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a4675a97-c2ea-4006-b41e-c26749b59973">
-  <producedTypes>
-    <containerType typeId="d14cd683-dcab-4e0b-a12e-9ca8462ce2ce" valueTypeId="1a1792ce-fdbb-4fc7-995f-8d93a26f4cb6"/>
-  </producedTypes>
-  <name>typePercent</name>
-  <synonym>
-    <key>en</key>
-    <value>Type percent</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>5</precision>
-      <scale>2</scale>
-    </numberQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="d14cd683-dcab-4e0b-a12e-9ca8462ce2ce" valueTypeId="1a1792ce-fdbb-4fc7-995f-8d93a26f4cb6"/>
+ </producedTypes>
+ <name>typePercent</name>
+ <synonym>
+  <key>en</key>
+  <value>6117D487-99BF-9048-8F9E-E003BB9EB7A9</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>5</precision>
+   <scale>2</scale>
+  </numberQualifiers>
+ </type>
 </mdclass:DefinedType>

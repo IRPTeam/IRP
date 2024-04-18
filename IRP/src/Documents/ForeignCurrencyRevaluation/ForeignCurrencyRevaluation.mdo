@@ -1,210 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="08d2c217-11ab-42a6-af14-67feb76ce242">
-  <producedTypes>
-    <objectType typeId="3a44f9be-1abc-48a5-adf6-6416b100aae6" valueTypeId="7828a9ed-1c62-4d1f-9c46-d0b31802c18b"/>
-    <refType typeId="d380113d-24f3-423e-b45c-fe5f4ad52355" valueTypeId="6f6f9840-b459-42cc-9bb1-c050d6cae4a7"/>
-    <selectionType typeId="e42ef38e-1538-4536-b65f-4198deb4eb51" valueTypeId="87d6c383-f695-4f90-ac09-4ca5712b5827"/>
-    <listType typeId="f512d7df-9452-45d3-9570-57a026dc2ba5" valueTypeId="eaba11ce-f92e-471e-a162-e6e2e3b9506d"/>
-    <managerType typeId="988742de-ecae-4327-a38e-87c0bbd7452b" valueTypeId="dd577a42-38c2-41e2-8166-82377593c7d4"/>
-  </producedTypes>
-  <name>ForeignCurrencyRevaluation</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="08d2c217-11ab-42a6-af14-67feb76ce242">
+ <producedTypes>
+  <objectType typeId="3a44f9be-1abc-48a5-adf6-6416b100aae6" valueTypeId="7828a9ed-1c62-4d1f-9c46-d0b31802c18b"/>
+  <refType typeId="d380113d-24f3-423e-b45c-fe5f4ad52355" valueTypeId="6f6f9840-b459-42cc-9bb1-c050d6cae4a7"/>
+  <selectionType typeId="e42ef38e-1538-4536-b65f-4198deb4eb51" valueTypeId="87d6c383-f695-4f90-ac09-4ca5712b5827"/>
+  <listType typeId="f512d7df-9452-45d3-9570-57a026dc2ba5" valueTypeId="eaba11ce-f92e-471e-a162-e6e2e3b9506d"/>
+  <managerType typeId="988742de-ecae-4327-a38e-87c0bbd7452b" valueTypeId="dd577a42-38c2-41e2-8166-82377593c7d4"/>
+ </producedTypes>
+ <name>ForeignCurrencyRevaluation</name>
+ <synonym>
+  <key>en</key>
+  <value>B01628D8-EE63-096F-F4CF-F6BE68145553</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ForeignCurrencyRevaluation.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>CFB8F335-2E2D-2C52-23B3-3316D0449470</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>27D36525-B82A-0999-9227-7E2160A157D0</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ForeignCurrencyRevaluation.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ForeignCurrencyRevaluation.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ForeignCurrencyRevaluation.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+ <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+ <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+ <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+ <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+ <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="14d7bac9-3932-46e7-8838-06e4db8f8928">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Foreign currency revaluation</value>
+   <key>en</key>
+   <value>91408158-CEC4-DC58-8075-5FDEFCCE8D66</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.ForeignCurrencyRevaluation.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Foreign currency revaluation</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Foreign currency revaluations</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.ForeignCurrencyRevaluation.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.ForeignCurrencyRevaluation.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.ForeignCurrencyRevaluation.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
-  <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
-  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
-  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="14d7bac9-3932-46e7-8838-06e4db8f8928">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="3f27a449-d3ce-4f2b-b76d-70bfd167b625">
-    <name>RevenueType</name>
-    <synonym>
-      <key>en</key>
-      <value>(Revenue) Type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsRevenue</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="bcbd0799-08bb-4e5d-a941-e1104a2b6b0d">
-    <name>RevenueProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>(Revenue) Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="aef581e5-65d9-4fb9-8fc2-e3263471e059">
-    <name>RevenueAdditionalAnalytic</name>
-    <synonym>
-      <key>en</key>
-      <value>(Revenue) Additional analytic</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="905ac33b-627a-4a0d-a55d-2f7213d16e05">
-    <name>ExpenseType</name>
-    <synonym>
-      <key>en</key>
-      <value>(Expense) Type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IsExpense</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ab431c03-23ff-43f3-a399-d4cc241108a7">
-    <name>ExpenseProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>(Expense) Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="34c0a6fe-bd6d-4a62-a658-372f83ae6198">
-    <name>ExpenseAdditionalAnalytic</name>
-    <synonym>
-      <key>en</key>
-      <value>(Expense) Additional analytic</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="dea48846-5c50-4d81-a583-712dcc9e7e49">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="cc9f4411-3732-4264-8824-13e0b80f9d2f">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="84877ca5-d9ec-4508-bdc2-a4327abd0d7c">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3f27a449-d3ce-4f2b-b76d-70bfd167b625">
+  <name>RevenueType</name>
+  <synonym>
+   <key>en</key>
+   <value>34C4045B-6D38-7AE9-9335-5D9AA409E40F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsRevenue</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="bcbd0799-08bb-4e5d-a941-e1104a2b6b0d">
+  <name>RevenueProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>7AE60D50-24F3-9D18-8E54-4C0FA61FD509</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="aef581e5-65d9-4fb9-8fc2-e3263471e059">
+  <name>RevenueAdditionalAnalytic</name>
+  <synonym>
+   <key>en</key>
+   <value>DD1A7D29-580C-89C8-85D1-1ABFE0CC231F</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="905ac33b-627a-4a0d-a55d-2f7213d16e05">
+  <name>ExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>2A2FBC15-E30C-03D7-729B-BF47B0044804</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsExpense</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ab431c03-23ff-43f3-a399-d4cc241108a7">
+  <name>ExpenseProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>C54114E1-38CD-1B66-694C-CC60ABEF0585</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="34c0a6fe-bd6d-4a62-a658-372f83ae6198">
+  <name>ExpenseAdditionalAnalytic</name>
+  <synonym>
+   <key>en</key>
+   <value>B3CDDDF0-F80D-45E6-6F37-7B5B22C7C282</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="dea48846-5c50-4d81-a583-712dcc9e7e49">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>12978E2E-5374-13AB-B3BC-C65D54028ED0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="cc9f4411-3732-4264-8824-13e0b80f9d2f">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>CA9AD5DE-39C7-7A51-1C9D-DE017C381648</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="84877ca5-d9ec-4508-bdc2-a4327abd0d7c">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>33D302D9-AAAA-E8BD-D0C0-0112CCEF83E0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Document>

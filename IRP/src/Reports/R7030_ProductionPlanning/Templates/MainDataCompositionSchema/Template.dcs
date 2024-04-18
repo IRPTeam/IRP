@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Planning period</v8:content>
+					<v8:content>40781695-2F85-AC8C-C9AC-C03025493C7D</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -37,7 +37,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Company</v8:content>
+					<v8:content>6080BBF2-9180-8F9F-F366-6045DD941879</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -60,7 +60,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q produced material</v8:content>
+					<v8:content>73613773-0340-4C5F-FACE-EC713374D814</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -84,7 +84,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q planned material</v8:content>
+					<v8:content>6FB5FB1F-6C91-2470-0C32-2C5B7BF0F703</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -108,7 +108,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q corrected production</v8:content>
+					<v8:content>A476FA65-EA68-F8DA-AFFF-F84A1D2C71FF</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -132,7 +132,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q planned production</v8:content>
+					<v8:content>71D9F913-3A3F-EC48-8F3E-E92017E42510</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -156,7 +156,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q produced production</v8:content>
+					<v8:content>A7A5AF70-7B02-5071-1880-056F9CDCF29F</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -172,7 +172,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Q corrected material</v8:content>
+					<v8:content>D208EC40-3031-F105-5AC5-50118281E695</v8:content>
 				</v8:item>
 			</title>
 			<useRestriction>
@@ -204,7 +204,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Material item</v8:content>
+					<v8:content>61A63483-1BFC-B1DE-E82E-E95C9C95FE63</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -217,7 +217,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Material item key</v8:content>
+					<v8:content>8AB031A5-5EE8-0875-5FD9-9E409A05A7D3</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -230,7 +230,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Product item key</v8:content>
+					<v8:content>7792C590-FED1-DAC6-68FD-DAF79714A55A</v8:content>
 				</v8:item>
 			</title>
 			<role>
@@ -527,7 +527,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Q planned</v8:content>
+				<v8:content>774282AD-B99B-F7A0-0365-5905724EC3AB</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -540,7 +540,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Q corrected</v8:content>
+				<v8:content>4BA6AA11-40F7-EFF6-66D5-5F653E74DD0E</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -553,7 +553,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Q produced</v8:content>
+				<v8:content>AE01E1FF-C318-BE9A-A514-4533BD18F494</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -566,7 +566,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Q need to produce</v8:content>
+				<v8:content>7D242A38-A0F8-95CD-D336-6360BB7CAD1D</v8:content>
 			</v8:item>
 		</title>
 		<appearance>
@@ -591,7 +591,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Q deviation</v8:content>
+				<v8:content>96457789-40E8-B2FC-C2D2-2BDD024F0156</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -620,7 +620,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>C8531226-57CB-5DFA-AB8C-CC1E6F771A73</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -638,7 +638,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>E991A368-02CC-4C8A-AF50-05568A55EFA3</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -656,7 +656,7 @@ end</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Business unit</v8:content>
+				<v8:content>72F992CA-9CB6-084E-E3ED-DC09231A45F3</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -717,7 +717,7 @@ end</expression>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Planning periods</v8:content>
+							<v8:content>00A5DE55-9704-77A6-604D-D4E633FF32D9</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcsset:item>
@@ -731,7 +731,7 @@ end</expression>
 					<dcsset:userSettingPresentation xsi:type="v8:LocalStringType">
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Business unit</v8:content>
+							<v8:content>B12AB135-8A52-C68F-F9D8-8D966BB01356</v8:content>
 						</v8:item>
 					</dcsset:userSettingPresentation>
 				</dcscor:item>

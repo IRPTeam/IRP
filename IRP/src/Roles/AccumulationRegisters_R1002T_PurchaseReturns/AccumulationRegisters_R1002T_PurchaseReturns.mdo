@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e0dff4b3-75b1-4fe2-be93-fe0189a081e0">
-  <name>AccumulationRegisters_R1002T_PurchaseReturns</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R1002T PurchaseReturns</value>
-  </synonym>
+ <name>AccumulationRegisters_R1002T_PurchaseReturns</name>
+ <synonym>
+  <key>en</key>
+  <value>668861E1-665F-BA6E-EE56-616977809A4E________</value>
+ </synonym>
 </mdclass:Role>

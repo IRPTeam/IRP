@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7a24044b-9d2f-4858-965f-a1f168f4e580">
-  <producedTypes>
-    <refType typeId="5e27f60a-3f0e-401a-b1d3-6d4c1c66b302" valueTypeId="6d2cc7f3-669b-4636-be9c-45e2f00c565d"/>
-    <listType typeId="b24590cc-72a6-4e12-aac8-53a891a346f9" valueTypeId="8f5350e8-dbd2-4799-9fe6-297047fca768"/>
-    <managerType typeId="b7dbaa71-8bbd-40ff-b49d-8232625de8e1" valueTypeId="be7dfabf-22de-4441-a6ec-070721157d54"/>
-  </producedTypes>
-  <name>ProductionTypes</name>
+ <producedTypes>
+  <refType typeId="5e27f60a-3f0e-401a-b1d3-6d4c1c66b302" valueTypeId="6d2cc7f3-669b-4636-be9c-45e2f00c565d"/>
+  <listType typeId="b24590cc-72a6-4e12-aac8-53a891a346f9" valueTypeId="8f5350e8-dbd2-4799-9fe6-297047fca768"/>
+  <managerType typeId="b7dbaa71-8bbd-40ff-b49d-8232625de8e1" valueTypeId="be7dfabf-22de-4441-a6ec-070721157d54"/>
+ </producedTypes>
+ <name>ProductionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>64A9FA2B-73E3-FF74-4408-859A7F34E0A6</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="db4396f9-7540-4a4e-addf-1a8873868857">
+  <name>Product</name>
   <synonym>
-    <key>en</key>
-    <value>Production type</value>
+   <key>en</key>
+   <value>3D8B68AB-8249-1A57-756E-ED3D925E5D0D</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="db4396f9-7540-4a4e-addf-1a8873868857">
-    <name>Product</name>
-    <synonym>
-      <key>en</key>
-      <value>Product</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ae058f56-8806-4f46-870b-7ee6105d73d8">
-    <name>Semiproduct</name>
-    <synonym>
-      <key>en</key>
-      <value>Semiproduct</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="ae058f56-8806-4f46-870b-7ee6105d73d8">
+  <name>Semiproduct</name>
+  <synonym>
+   <key>en</key>
+   <value>D1953436-7D30-E6B2-27C4-4F979F44B85F</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

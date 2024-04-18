@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0a40a05-5a85-4692-9dbe-43e680f3d57e">
-  <name>Document_Production</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Production&quot;</value>
-  </synonym>
+ <name>Document_Production</name>
+ <synonym>
+  <key>en</key>
+  <value>FFD17A9C-5C68-FBF9-98E7-7AAC3C7EBB07</value>
+ </synonym>
 </mdclass:Role>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="60f0ac76-dabf-4f88-8666-dfaa0e4c6f1c">
-  <name>InputBarcode</name>
-  <synonym>
-    <key>en</key>
-    <value>Input barcode</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>InputBarcode</name>
+ <synonym>
+  <key>en</key>
+  <value>7D64207B-503C-375E-E92F-FA94C212A3CB</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

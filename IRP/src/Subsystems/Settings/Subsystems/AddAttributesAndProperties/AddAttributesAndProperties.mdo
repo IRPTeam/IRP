@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4e49ca66-c920-4833-8ead-b5894fcdb135">
-  <name>AddAttributesAndProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Additional attributes and properties</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.AddProperties</content>
-  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
-  <content>Catalog.AddAttributeAndPropertyValues</content>
-  <content>Catalog.AddAttributeAndPropertySets</content>
-  <content>CommonModule.AddAttributesAndPropertiesClient</content>
-  <content>CommonModule.AddAttributesAndPropertiesServer</content>
-  <content>DefinedType.typeAddPropertyOwners</content>
-  <content>CommonCommand.AddProperties</content>
-  <content>CommonPicture.AddProperties</content>
-  <content>CommonForm.EditAddProperties</content>
-  <content>CommonPicture.RadioButton</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>AddAttributesAndProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>4B4B79B2-C012-1679-9409-9F5425000726</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>InformationRegister.AddProperties</content>
+ <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
+ <content>Catalog.AddAttributeAndPropertyValues</content>
+ <content>Catalog.AddAttributeAndPropertySets</content>
+ <content>CommonModule.AddAttributesAndPropertiesClient</content>
+ <content>CommonModule.AddAttributesAndPropertiesServer</content>
+ <content>DefinedType.typeAddPropertyOwners</content>
+ <content>CommonCommand.AddProperties</content>
+ <content>CommonPicture.AddProperties</content>
+ <content>CommonForm.EditAddProperties</content>
+ <content>CommonPicture.RadioButton</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

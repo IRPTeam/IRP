@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="72099b13-9ee4-440d-81ba-378dc8cf1eff">
-  <producedTypes>
-    <objectType typeId="43b36bd4-1234-476f-beec-678f370f0f9c" valueTypeId="10626004-6ac4-418f-906e-60cbe826fe8a"/>
-    <managerType typeId="8149b098-6250-4826-b642-ac26787d207c" valueTypeId="e55f192f-5d39-40d3-b32f-0b1d5e976c6f"/>
-  </producedTypes>
-  <name>GroupPhotoUploading</name>
+ <producedTypes>
+  <objectType typeId="43b36bd4-1234-476f-beec-678f370f0f9c" valueTypeId="10626004-6ac4-418f-906e-60cbe826fe8a"/>
+  <managerType typeId="8149b098-6250-4826-b642-ac26787d207c" valueTypeId="e55f192f-5d39-40d3-b32f-0b1d5e976c6f"/>
+ </producedTypes>
+ <name>GroupPhotoUploading</name>
+ <synonym>
+  <key>en</key>
+  <value>C37259FF-832F-8EBF-F3A2-2070DF1F2C5A</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>
+ <forms uuid="ae5f8cd1-ebdc-4a49-88ac-280762cac97e">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Uploading groups of photos</value>
+   <key>en</key>
+   <value>320B585C-2BBD-80CF-F1BB-B8588419533E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.GroupPhotoUploading.Form.Form</defaultForm>
-  <forms uuid="ae5f8cd1-ebdc-4a49-88ac-280762cac97e">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

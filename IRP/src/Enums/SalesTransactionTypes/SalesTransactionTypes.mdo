@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb668f78-0133-4a6c-b29b-fdada7140e2f">
-  <producedTypes>
-    <refType typeId="4c77401b-f18c-4bde-9900-ee4958ddb837" valueTypeId="107f1c1a-7d76-481e-a4f5-c2f3738fd7de"/>
-    <listType typeId="4f1a543d-485f-48e4-b647-f0e2a7ff34c1" valueTypeId="fdd7ce61-06d6-4d09-8283-2e57ab2f08f4"/>
-    <managerType typeId="b62b1910-caf8-40cd-8cbf-6cd73c9de678" valueTypeId="8384afb3-9180-4d80-baa5-44f75b52ff19"/>
-  </producedTypes>
-  <name>SalesTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="4c77401b-f18c-4bde-9900-ee4958ddb837" valueTypeId="107f1c1a-7d76-481e-a4f5-c2f3738fd7de"/>
+  <listType typeId="4f1a543d-485f-48e4-b647-f0e2a7ff34c1" valueTypeId="fdd7ce61-06d6-4d09-8283-2e57ab2f08f4"/>
+  <managerType typeId="b62b1910-caf8-40cd-8cbf-6cd73c9de678" valueTypeId="8384afb3-9180-4d80-baa5-44f75b52ff19"/>
+ </producedTypes>
+ <name>SalesTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>78B67442-AD82-5C32-255A-A8375EA291B5</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="ecf776ab-9e00-4383-8903-f79f90804b12">
+  <name>Sales</name>
   <synonym>
-    <key>en</key>
-    <value>Sales transaction types</value>
+   <key>en</key>
+   <value>0B6D7CF7-0DC5-1EA1-10E4-4065C22495AB</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="ecf776ab-9e00-4383-8903-f79f90804b12">
-    <name>Sales</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c314613a-f1b1-4991-873f-be6f6d2d91b6">
-    <name>ShipmentToTradeAgent</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipment to trade agent</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="68f46b93-cb50-4c25-9982-77c7c902a13c">
-    <name>RetailSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Retail sales</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="c314613a-f1b1-4991-873f-be6f6d2d91b6">
+  <name>ShipmentToTradeAgent</name>
+  <synonym>
+   <key>en</key>
+   <value>C735672C-C118-567F-F01C-C4ABEC744925</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="68f46b93-cb50-4c25-9982-77c7c902a13c">
+  <name>RetailSales</name>
+  <synonym>
+   <key>en</key>
+   <value>43C2BD2A-6F86-FD91-1385-5F41D31AC473</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

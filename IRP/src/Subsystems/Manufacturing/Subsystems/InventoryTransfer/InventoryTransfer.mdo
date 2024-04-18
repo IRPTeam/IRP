@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2d684849-982d-4429-b98d-8c1940454281">
-  <name>InventoryTransfer</name>
-  <synonym>
-    <key>en</key>
-    <value>Inventory transfer</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.InventoryTransferOrder</content>
-  <content>Document.InventoryTransfer</content>
-  <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
+ <name>InventoryTransfer</name>
+ <synonym>
+  <key>en</key>
+  <value>664F8972-6424-1068-8FEF-F561B102016C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.InventoryTransferOrder</content>
+ <content>Document.InventoryTransfer</content>
+ <parentSubsystem>Subsystem.Manufacturing</parentSubsystem>
 </mdclass:Subsystem>

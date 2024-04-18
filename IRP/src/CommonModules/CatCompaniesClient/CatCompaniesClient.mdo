@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1641a0d4-bd28-4773-a308-c791f85c24c0">
-  <name>CatCompaniesClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat companies client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CatCompaniesClient</name>
+ <synonym>
+  <key>en</key>
+  <value>12E39FB4-C0DB-D8FA-A894-4D4624004D01</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

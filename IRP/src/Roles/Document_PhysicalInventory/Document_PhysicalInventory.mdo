@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac85d9a2-adb0-4905-bc15-38ba2bffc337">
-  <name>Document_PhysicalInventory</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Physical inventory&quot;</value>
-  </synonym>
+ <name>Document_PhysicalInventory</name>
+ <synonym>
+  <key>en</key>
+  <value>7D326622-DB91-CC2A-A2E2-2B8641491116</value>
+ </synonym>
 </mdclass:Role>

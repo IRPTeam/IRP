@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="62abaf3c-043d-4dcb-bc63-c6796ff0e382">
-  <name>IDInfoClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Contact info client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>IDInfoClient</name>
+ <synonym>
+  <key>en</key>
+  <value>039C2D1B-7DA1-367F-F704-458BDCC5DC7F</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

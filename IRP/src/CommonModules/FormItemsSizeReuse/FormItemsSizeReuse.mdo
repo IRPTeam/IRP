@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9f83cf62-4836-43f7-bead-0f5da2465e63">
-  <name>FormItemsSizeReuse</name>
-  <synonym>
-    <key>en</key>
-    <value>Form items size reuse</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <returnValuesReuse>DuringSession</returnValuesReuse>
+ <name>FormItemsSizeReuse</name>
+ <synonym>
+  <key>en</key>
+  <value>4166B652-0AC3-B6E6-6B6D-D96615525444</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <returnValuesReuse>DuringSession</returnValuesReuse>
 </mdclass:CommonModule>

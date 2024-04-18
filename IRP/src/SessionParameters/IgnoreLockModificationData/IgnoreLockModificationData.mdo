@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4dbb4f1-a4fe-4639-a233-2b8c7a755bb6">
-  <name>IgnoreLockModificationData</name>
-  <synonym>
-    <key>en</key>
-    <value>Ignore lock modification data</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
+ <name>IgnoreLockModificationData</name>
+ <synonym>
+  <key>en</key>
+  <value>163282E9-5AEE-FBEB-B2A9-923F6AA66110</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
 </mdclass:SessionParameter>

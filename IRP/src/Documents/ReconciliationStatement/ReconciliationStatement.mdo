@@ -1,390 +1,390 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="56080286-6619-4f9a-b838-ea75f43f246b">
-  <producedTypes>
-    <objectType typeId="2575ce39-19e7-467b-a7a4-3dfb7425b7e3" valueTypeId="24960aed-c3b7-482d-9d11-f585cedf4eec"/>
-    <refType typeId="dc388300-ff50-4bf8-9256-e3aa16f36a46" valueTypeId="57263f46-89e1-4e73-8f6d-4a53bf5fd9d5"/>
-    <selectionType typeId="3f6101fd-c41a-4950-b049-477952d50a70" valueTypeId="d7c8b3d4-b740-4a43-bfae-9cf0ac8f8891"/>
-    <listType typeId="652fa7e2-6bf4-4bfe-a6e0-2973b93b47b5" valueTypeId="e0ae5587-38ab-40d6-a0c3-00b2323f718d"/>
-    <managerType typeId="e80a3b9a-aa69-4328-a833-d7bc624941a9" valueTypeId="2dc9c326-e152-4a56-be75-24efbe05d881"/>
-  </producedTypes>
-  <name>ReconciliationStatement</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="56080286-6619-4f9a-b838-ea75f43f246b">
+ <producedTypes>
+  <objectType typeId="2575ce39-19e7-467b-a7a4-3dfb7425b7e3" valueTypeId="24960aed-c3b7-482d-9d11-f585cedf4eec"/>
+  <refType typeId="dc388300-ff50-4bf8-9256-e3aa16f36a46" valueTypeId="57263f46-89e1-4e73-8f6d-4a53bf5fd9d5"/>
+  <selectionType typeId="3f6101fd-c41a-4950-b049-477952d50a70" valueTypeId="d7c8b3d4-b740-4a43-bfae-9cf0ac8f8891"/>
+  <listType typeId="652fa7e2-6bf4-4bfe-a6e0-2973b93b47b5" valueTypeId="e0ae5587-38ab-40d6-a0c3-00b2323f718d"/>
+  <managerType typeId="e80a3b9a-aa69-4328-a833-d7bc624941a9" valueTypeId="2dc9c326-e152-4a56-be75-24efbe05d881"/>
+ </producedTypes>
+ <name>ReconciliationStatement</name>
+ <synonym>
+  <key>en</key>
+  <value>DCED1ABC-ACDA-6903-32EF-F526504FA43C</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.ReconciliationStatement.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ReconciliationStatement</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_ReconciliationStatement</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.ReconciliationStatement.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>09C3DE92-31A4-2288-8FED-D393DD61C349</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>57843EB4-31ED-0034-4315-5F1241FB536E</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.ReconciliationStatement.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ReconciliationStatement.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ReconciliationStatement.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="66391b91-70a8-42a0-be75-feb1b225f9b0">
+  <name>BeginPeriod</name>
   <synonym>
-    <key>en</key>
-    <value>Reconciliation statement</value>
+   <key>en</key>
+   <value>40BCC617-B515-60C5-5068-8539C889FC40</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.ReconciliationStatement.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ReconciliationStatement</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ReconciliationStatement</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.ReconciliationStatement.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="164384f8-13d7-43a9-89e6-3faeacb95a4d">
+  <name>ClosingBalanceCredit</name>
+  <synonym>
+   <key>en</key>
+   <value>C67B818B-01DD-32B2-2342-25E935C1CB35</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="148b677a-d787-42d7-aac6-4097c00b3c47">
+  <name>ClosingBalanceDebit</name>
+  <synonym>
+   <key>en</key>
+   <value>AAC0B3B8-0C4A-5C9C-CDBE-EAF0210E26D5</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="08a8bf85-eeb6-4db8-a905-d173e7ddc262">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>8E56A0A2-7B81-D8C7-77F7-77E6DE075DFF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e2526ced-9c50-4c8a-b31a-15e185e55421">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>62E327E2-FFCD-81C9-90E9-9EF2C878DC98</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="33123e72-9f21-4220-ad64-2a450278936f">
+  <name>EndPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>88F4E34F-248D-66AF-F01C-C1B6D67C3D76</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="533466ff-c94b-4be7-b0a4-9179dbaa05b8">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>93BE9FAD-2C11-3EC7-7251-1A7026ACD4A8</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1e7bcfe9-9391-4353-a29b-654097c7d527">
+  <name>OpeningBalanceCredit</name>
+  <synonym>
+   <key>en</key>
+   <value>E17E81B5-A484-BF17-7685-5BF7A86CF590</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f19138da-731f-4fbf-a141-52ae00ea8e71">
+  <name>OpeningBalanceDebit</name>
+  <synonym>
+   <key>en</key>
+   <value>92ED2235-2160-441A-A6DC-C4CEF09284C1</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7082c515-dbb8-496f-ac9c-bde5c1ccdb26">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>58FED474-0625-4727-7DF6-6AE231784ECF</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="007ea086-960a-4417-a9b7-5011423482b5">
+  <name>Status</name>
+  <synonym>
+   <key>en</key>
+   <value>82331AFA-DD36-C60E-E8F5-5B933EE9425B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Parent</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Catalog.ObjectStatuses.ReconciliationStatement</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="f30859e4-1afd-491e-af52-a1fd4b944a14">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>480A4ACC-BD9E-877E-E7A0-0DF0C3A3547C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="bb5ab437-e691-4c22-9733-62f24ac4542a">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>37CD527D-D120-5F58-8280-0A64B8F674C9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="bf2232d4-6073-42a3-8b6f-cb6d688872df">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>89285F07-0BE4-05BE-EAB6-64940CD4503E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="584a672f-5845-437f-8d59-ba251c88d420">
+  <producedTypes>
+   <objectType typeId="c3e3fa66-40c3-48e1-9fab-2361219a54d8" valueTypeId="89e9f188-d7e1-4ecb-9b56-95a20eaab12f"/>
+   <rowType typeId="7b86aa22-6569-4231-bcf7-390067297f79" valueTypeId="a6c8d535-dfed-46d7-86b3-90b5d55cee9a"/>
+  </producedTypes>
+  <name>Transactions</name>
+  <synonym>
+   <key>en</key>
+   <value>660A762C-1879-07C5-57EC-CB3167160F43</value>
+  </synonym>
+  <attributes uuid="5f0f3405-0a57-4528-a6b2-a7d344f748de">
+   <name>Date</name>
+   <synonym>
     <key>en</key>
-    <value>Reconciliation statement</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>BFFE2AEC-F632-9C8D-D1A3-336F5D015587</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9453440e-488f-45bd-a423-f9f3b05ab6bc">
+   <name>Document</name>
+   <synonym>
     <key>en</key>
-    <value>Reconciliation statements</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.ReconciliationStatement.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.ReconciliationStatement.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.ReconciliationStatement.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="66391b91-70a8-42a0-be75-feb1b225f9b0">
-    <name>BeginPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Begin period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>F8E1E8E2-F9B3-29EC-C7CA-AD616625D330</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeReconciliationStatementDocuments</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="164384f8-13d7-43a9-89e6-3faeacb95a4d">
-    <name>ClosingBalanceCredit</name>
-    <synonym>
-      <key>en</key>
-      <value>Closing balance credit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="acb223b3-48c6-4dce-8d6b-cb9e56345942">
+   <name>Debit</name>
+   <synonym>
+    <key>en</key>
+    <value>A7A6E935-9FF9-8F6E-E9F7-7A851E39C491</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="148b677a-d787-42d7-aac6-4097c00b3c47">
-    <name>ClosingBalanceDebit</name>
-    <synonym>
-      <key>en</key>
-      <value>Closing balance debit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9b297f86-624d-4b8d-bf1c-a2146498aa68">
+   <name>Credit</name>
+   <synonym>
+    <key>en</key>
+    <value>58321B7A-3B44-CA2C-CFE4-4399B9F72D27</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="08a8bf85-eeb6-4db8-a905-d173e7ddc262">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="bd916cc9-0dbb-428f-8b43-4f98b84b64b7">
+  <producedTypes>
+   <objectType typeId="fee6a409-9533-496b-a66a-b21cba308d78" valueTypeId="e901829b-5508-4d72-9251-cf99a2f67780"/>
+   <rowType typeId="9b3f3566-6e48-43f8-96e4-f6a652540cd2" valueTypeId="9298c44c-5f6b-46c6-b2cf-19bb60a892b0"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>23DF46B2-D5A4-FD67-7D63-3D71EA642A00</value>
+  </synonym>
+  <attributes uuid="9dc55b0e-de19-4e79-900a-ed1d0982e11a">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>00E786FA-924D-AABE-EC90-02BF29DB6A31</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="e2526ced-9c50-4c8a-b31a-15e185e55421">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="61933538-444b-4234-a55c-3da15e1388be">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>8CFC650C-4287-2702-290A-A512DDF222BC</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="33123e72-9f21-4220-ad64-2a450278936f">
-    <name>EndPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>End period</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="533466ff-c94b-4be7-b0a4-9179dbaa05b8">
-    <name>LegalName</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal name</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="1e7bcfe9-9391-4353-a29b-654097c7d527">
-    <name>OpeningBalanceCredit</name>
-    <synonym>
-      <key>en</key>
-      <value>Opening balance credit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f19138da-731f-4fbf-a141-52ae00ea8e71">
-    <name>OpeningBalanceDebit</name>
-    <synonym>
-      <key>en</key>
-      <value>Opening balance debit</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7082c515-dbb8-496f-ac9c-bde5c1ccdb26">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="007ea086-960a-4417-a9b7-5011423482b5">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.Parent</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Catalog.ObjectStatuses.ReconciliationStatement</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="f30859e4-1afd-491e-af52-a1fd4b944a14">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="bb5ab437-e691-4c22-9733-62f24ac4542a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="bf2232d4-6073-42a3-8b6f-cb6d688872df">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="584a672f-5845-437f-8d59-ba251c88d420">
-    <producedTypes>
-      <objectType typeId="c3e3fa66-40c3-48e1-9fab-2361219a54d8" valueTypeId="89e9f188-d7e1-4ecb-9b56-95a20eaab12f"/>
-      <rowType typeId="7b86aa22-6569-4231-bcf7-390067297f79" valueTypeId="a6c8d535-dfed-46d7-86b3-90b5d55cee9a"/>
-    </producedTypes>
-    <name>Transactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Transactions</value>
-    </synonym>
-    <attributes uuid="5f0f3405-0a57-4528-a6b2-a7d344f748de">
-      <name>Date</name>
-      <synonym>
-        <key>en</key>
-        <value>Date</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9453440e-488f-45bd-a423-f9f3b05ab6bc">
-      <name>Document</name>
-      <synonym>
-        <key>en</key>
-        <value>Document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeReconciliationStatementDocuments</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="acb223b3-48c6-4dce-8d6b-cb9e56345942">
-      <name>Debit</name>
-      <synonym>
-        <key>en</key>
-        <value>Debit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9b297f86-624d-4b8d-bf1c-a2146498aa68">
-      <name>Credit</name>
-      <synonym>
-        <key>en</key>
-        <value>Credit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="bd916cc9-0dbb-428f-8b43-4f98b84b64b7">
-    <producedTypes>
-      <objectType typeId="fee6a409-9533-496b-a66a-b21cba308d78" valueTypeId="e901829b-5508-4d72-9251-cf99a2f67780"/>
-      <rowType typeId="9b3f3566-6e48-43f8-96e4-f6a652540cd2" valueTypeId="9298c44c-5f6b-46c6-b2cf-19bb60a892b0"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="9dc55b0e-de19-4e79-900a-ed1d0982e11a">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="61933538-444b-4234-a55c-3da15e1388be">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+ </tabularSections>
 </mdclass:Document>

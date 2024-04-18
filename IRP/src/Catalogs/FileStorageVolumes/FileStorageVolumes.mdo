@@ -1,185 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
-  <producedTypes>
-    <objectType typeId="c24a5b0d-3297-484d-bc4c-6f763d8629f0" valueTypeId="c4a8ad25-ba92-4351-a844-a7c324bdec2f"/>
-    <refType typeId="a4632c31-45bd-4797-9021-1c8d707ef812" valueTypeId="09a5bb33-1cc0-4b60-9d85-ece77b52a1c8"/>
-    <selectionType typeId="e9073c6b-e6ad-424f-b441-08f93b96f43f" valueTypeId="ffb1d86f-e6fb-4c3e-894c-1a39cb5eb46f"/>
-    <listType typeId="167927b8-013e-4c59-a59d-d662cf56ed0d" valueTypeId="c2f578a7-a0fa-4855-8a3b-1248616ce91a"/>
-    <managerType typeId="70b2f844-187d-441d-9c13-8590ed2f1dcc" valueTypeId="945c216d-c40d-4d23-bfcf-83c1ad24f45c"/>
-  </producedTypes>
-  <name>FileStorageVolumes</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0bf3a5a6-df7d-440c-92d0-6491b76179d2">
+ <producedTypes>
+  <objectType typeId="c24a5b0d-3297-484d-bc4c-6f763d8629f0" valueTypeId="c4a8ad25-ba92-4351-a844-a7c324bdec2f"/>
+  <refType typeId="a4632c31-45bd-4797-9021-1c8d707ef812" valueTypeId="09a5bb33-1cc0-4b60-9d85-ece77b52a1c8"/>
+  <selectionType typeId="e9073c6b-e6ad-424f-b441-08f93b96f43f" valueTypeId="ffb1d86f-e6fb-4c3e-894c-1a39cb5eb46f"/>
+  <listType typeId="167927b8-013e-4c59-a59d-d662cf56ed0d" valueTypeId="c2f578a7-a0fa-4855-8a3b-1248616ce91a"/>
+  <managerType typeId="70b2f844-187d-441d-9c13-8590ed2f1dcc" valueTypeId="945c216d-c40d-4d23-bfcf-83c1ad24f45c"/>
+ </producedTypes>
+ <name>FileStorageVolumes</name>
+ <synonym>
+  <key>en</key>
+  <value>C8D22D17-7B64-991F-F902-26AF9998ABDF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.FileStorageVolumes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>B22CF81B-80E0-D230-0CED-DB76E5DB34AC</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>50</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.FileStorageVolumes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.FileStorageVolumes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.FileStorageVolumes.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="7480283a-c370-40a7-a50b-2d39a8b91f5b">
+  <name>FilesType</name>
   <synonym>
-    <key>en</key>
-    <value>File storage volumes</value>
+   <key>en</key>
+   <value>0D71A72D-6C93-C10C-CB2F-F4009C64B083</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.FileStorageVolumes.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_FileStorageVolumes</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.FileStorageVolumes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.FileStorageVolumes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>EnumRef.FileTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
+  <name>POSTIntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>73AAD085-60EB-61BF-F2D4-48BC33B0D7B1</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
+  <name>GETIntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>9AFA8A83-A8C0-B3B6-6AC6-6E246F9A3D38</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="2fb87184-2a8a-464a-a1df-fa1e0afc4e3f">
+  <producedTypes>
+   <objectType typeId="d61c39b4-1fa9-42c4-a414-3ffbe4e8750e" valueTypeId="9aade3f4-a043-4da7-8a34-f34df328ad1b"/>
+   <rowType typeId="82d2841e-656e-4f46-a33b-086d5c6c675e" valueTypeId="08f912a9-3c86-436c-bb08-0b5fa3697897"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>7B037DEB-1C24-14F8-80BC-CC64C2B66583</value>
+  </synonym>
+  <attributes uuid="3ac33011-e5fc-423a-a209-7fdb8499ce1f">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>File storage volume</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>50</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.FileStorageVolumes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.FileStorageVolumes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.FileStorageVolumes.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="7480283a-c370-40a7-a50b-2d39a8b91f5b">
-    <name>FilesType</name>
-    <synonym>
-      <key>en</key>
-      <value>Files type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.FileTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>F39704D4-BF53-2032-2785-5CCE2F4C3BAE</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
-    <name>POSTIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>POST Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="c44cba3b-65c9-4b85-abf7-661d6027ce90">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>D7866625-773F-6BCE-EFED-DA691D7166EE</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
-    <name>GETIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>GET Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="2fb87184-2a8a-464a-a1df-fa1e0afc4e3f">
-    <producedTypes>
-      <objectType typeId="d61c39b4-1fa9-42c4-a414-3ffbe4e8750e" valueTypeId="9aade3f4-a043-4da7-8a34-f34df328ad1b"/>
-      <rowType typeId="82d2841e-656e-4f46-a33b-086d5c6c675e" valueTypeId="08f912a9-3c86-436c-bb08-0b5fa3697897"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="3ac33011-e5fc-423a-a209-7fdb8499ce1f">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c44cba3b-65c9-4b85-abf7-661d6027ce90">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.FileStorageVolumes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="91232f0d-e17c-4011-921c-4e8b8cc9bee4">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>99AFD649-C26B-64FE-E1B0-08EF9579F619</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="91232f0d-e17c-4011-921c-4e8b8cc9bee4">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5EC0E3BD-9241-605F-F173-3DF094AA6C2A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E5C2D64A-B441-699A-A34E-EAFE44A25449</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

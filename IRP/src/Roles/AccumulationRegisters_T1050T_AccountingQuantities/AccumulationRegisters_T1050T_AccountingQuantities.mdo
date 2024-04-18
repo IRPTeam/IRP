@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c00434ce-09a0-41f6-ac49-b1f89a0cabf3">
-  <name>AccumulationRegisters_T1050T_AccountingQuantities</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters T1050T AccountingQuantities</value>
-  </synonym>
+ <name>AccumulationRegisters_T1050T_AccountingQuantities</name>
+ <synonym>
+  <key>en</key>
+  <value>091FAE05-AFDD-9877-7A65-5C04812BB4C4_____________</value>
+ </synonym>
 </mdclass:Role>

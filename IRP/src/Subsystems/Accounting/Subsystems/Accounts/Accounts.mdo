@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f29f0eae-04ea-4c35-993f-b6c0eed26abd">
-  <name>Accounts</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounts</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.T9010S_AccountsItemKey</content>
-  <content>InformationRegister.T9012S_AccountsPartner</content>
-  <content>InformationRegister.T9011S_AccountsCashAccount</content>
-  <content>InformationRegister.T9013S_AccountsTax</content>
-  <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
-  <content>InformationRegister.T9015S_AccountsFixedAsset</content>
-  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+ <name>Accounts</name>
+ <synonym>
+  <key>en</key>
+  <value>CB011B62-3348-9CEA-A646-6266A1D91760</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>InformationRegister.T9010S_AccountsItemKey</content>
+ <content>InformationRegister.T9012S_AccountsPartner</content>
+ <content>InformationRegister.T9011S_AccountsCashAccount</content>
+ <content>InformationRegister.T9013S_AccountsTax</content>
+ <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
+ <content>InformationRegister.T9015S_AccountsFixedAsset</content>
+ <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

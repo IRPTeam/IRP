@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7302b6c-341c-4b1a-b116-4376506bd55f">
-  <producedTypes>
-    <refType typeId="ea37e323-59b6-4968-9535-1e9999d90a98" valueTypeId="71e4177d-6f3a-4256-9ce1-90fddd922c2c"/>
-    <listType typeId="951756c1-c3a1-492c-bcb5-30fc7c2328a6" valueTypeId="4bd27319-f317-407a-bff4-4ab51c55bfd1"/>
-    <managerType typeId="2b4ba63f-0e11-4910-955f-7896fd97395a" valueTypeId="97e8cd8b-a990-4e93-91f9-afd0329f1bb4"/>
-  </producedTypes>
-  <name>CashExpenseTransactionTypes</name>
+ <producedTypes>
+  <refType typeId="ea37e323-59b6-4968-9535-1e9999d90a98" valueTypeId="71e4177d-6f3a-4256-9ce1-90fddd922c2c"/>
+  <listType typeId="951756c1-c3a1-492c-bcb5-30fc7c2328a6" valueTypeId="4bd27319-f317-407a-bff4-4ab51c55bfd1"/>
+  <managerType typeId="2b4ba63f-0e11-4910-955f-7896fd97395a" valueTypeId="97e8cd8b-a990-4e93-91f9-afd0329f1bb4"/>
+ </producedTypes>
+ <name>CashExpenseTransactionTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>B23D1C07-9A3A-17FF-F0A1-186664D28FA5</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="972704be-82ea-44ad-8d32-1142c14c479c">
+  <name>CurrentCompanyExpense</name>
   <synonym>
-    <key>en</key>
-    <value>Cash expense transaction types</value>
+   <key>en</key>
+   <value>F9E614EF-FA2F-0C51-1F44-42248F593BBA</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="972704be-82ea-44ad-8d32-1142c14c479c">
-    <name>CurrentCompanyExpense</name>
-    <synonym>
-      <key>en</key>
-      <value>Current company expense</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2a4e70ad-5d9c-48e7-ad79-d4a22f380a2a">
-    <name>OtherCompanyExpense</name>
-    <synonym>
-      <key>en</key>
-      <value>Other company expense</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="793ce70b-95ea-467d-8fd3-041b24f3c73d">
-    <name>SalaryPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Salary payment</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="2a4e70ad-5d9c-48e7-ad79-d4a22f380a2a">
+  <name>OtherCompanyExpense</name>
+  <synonym>
+   <key>en</key>
+   <value>A54709AC-5204-53AC-C4A4-453DB36F6FE6</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="793ce70b-95ea-467d-8fd3-041b24f3c73d">
+  <name>SalaryPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>E1CC6DF7-C168-FC05-54F9-98DB92D00321</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c30c34b0-97e9-4d06-b24e-8c02c44dfbd8">
-  <name>AccumulationRegisters_R9010B_SourceOfOriginStock</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R9010B SourceOfOriginStock</value>
-  </synonym>
+ <name>AccumulationRegisters_R9010B_SourceOfOriginStock</name>
+ <synonym>
+  <key>en</key>
+  <value>364BFFE0-D31D-07E0-0230-081C76FF96BD____________</value>
+ </synonym>
 </mdclass:Role>

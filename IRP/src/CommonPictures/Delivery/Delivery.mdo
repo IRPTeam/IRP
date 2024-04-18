@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="10681d34-36d8-4f04-b3a0-cf5ada7d97f3">
-  <name>Delivery</name>
-  <synonym>
-    <key>en</key>
-    <value>Delivery</value>
-  </synonym>
+ <name>Delivery</name>
+ <synonym>
+  <key>en</key>
+  <value>92CA0B4A-6039-17D5-51F1-190779D17F78</value>
+ </synonym>
 </mdclass:CommonPicture>

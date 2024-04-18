@@ -1,103 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7fef2d25-467a-42a9-be2c-f12d57448988">
-  <producedTypes>
-    <selectionType typeId="4188f3ca-0275-410d-9b29-7bdadfc17d03" valueTypeId="d5a1c119-d5df-4710-ae64-8f46a24f56ac"/>
-    <listType typeId="5544c246-0278-483a-87a0-da160df233b8" valueTypeId="a0e638a2-798a-40fe-bc58-3399f723a956"/>
-    <managerType typeId="7292bb01-263b-4f38-b7d8-e91ed1f58d23" valueTypeId="323bc855-eae9-4f3c-b4b6-d167b5697900"/>
-    <recordSetType typeId="1f4b8c5c-ca74-4c6d-a542-d8bdad488976" valueTypeId="051a4623-e0a5-487b-b0b4-c7894d306468"/>
-    <recordKeyType typeId="f7a39ad2-6587-43ce-b09a-b5d9dd1d3ec2" valueTypeId="4418a227-2600-49f4-aeae-d13b26833f8d"/>
-    <recordType typeId="48f0f749-72f1-4eb7-ac89-c8bebde350c0" valueTypeId="b3aed234-f015-40ab-b566-756053a44e05"/>
-    <recordManagerType typeId="1d51451f-e1c3-4bb6-8873-c2e53495db02" valueTypeId="573c8881-aa4e-40ef-aad4-21a9b69a0d53"/>
-  </producedTypes>
-  <name>DataVersions</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7fef2d25-467a-42a9-be2c-f12d57448988">
+ <producedTypes>
+  <selectionType typeId="4188f3ca-0275-410d-9b29-7bdadfc17d03" valueTypeId="d5a1c119-d5df-4710-ae64-8f46a24f56ac"/>
+  <listType typeId="5544c246-0278-483a-87a0-da160df233b8" valueTypeId="a0e638a2-798a-40fe-bc58-3399f723a956"/>
+  <managerType typeId="7292bb01-263b-4f38-b7d8-e91ed1f58d23" valueTypeId="323bc855-eae9-4f3c-b4b6-d167b5697900"/>
+  <recordSetType typeId="1f4b8c5c-ca74-4c6d-a542-d8bdad488976" valueTypeId="051a4623-e0a5-487b-b0b4-c7894d306468"/>
+  <recordKeyType typeId="f7a39ad2-6587-43ce-b09a-b5d9dd1d3ec2" valueTypeId="4418a227-2600-49f4-aeae-d13b26833f8d"/>
+  <recordType typeId="48f0f749-72f1-4eb7-ac89-c8bebde350c0" valueTypeId="b3aed234-f015-40ab-b566-756053a44e05"/>
+  <recordManagerType typeId="1d51451f-e1c3-4bb6-8873-c2e53495db02" valueTypeId="573c8881-aa4e-40ef-aad4-21a9b69a0d53"/>
+ </producedTypes>
+ <name>DataVersions</name>
+ <synonym>
+  <key>en</key>
+  <value>E4B27D92-DD61-545C-C591-113F7B5191F4</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>D1328724-ABD8-7F40-0777-748050D49A2A</value>
+ </recordPresentation>
+ <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
+  <name>Data</name>
   <synonym>
-    <key>en</key>
-    <value>Data versions</value>
+   <key>en</key>
+   <value>986BE4A3-7F82-3B03-34C8-80557B741F33</value>
   </synonym>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Data versions</value>
-  </recordPresentation>
-  <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
-    <name>Data</name>
-    <synonym>
-      <key>en</key>
-      <value>Data</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="7e614bc8-9285-4627-8ddd-096c222bc6e7">
-    <name>Author</name>
-    <synonym>
-      <key>en</key>
-      <value>Author</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="7bf9f87c-be16-46ae-adc3-25b21dafca8f">
-    <name>Created</name>
-    <synonym>
-      <key>en</key>
-      <value>Created</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="523d96d8-d5d7-44d1-9317-2062179b044e">
-    <name>DataRef</name>
-    <synonym>
-      <key>en</key>
-      <value>Data ref</value>
-    </synonym>
-    <type>
-      <types>AnyRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="aecdf0d4-ad89-4c93-986a-a0306eb438b7">
-    <name>PackageID</name>
-    <synonym>
-      <key>en</key>
-      <value>Package ID</value>
-    </synonym>
-    <type>
-      <types>UUID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="7e614bc8-9285-4627-8ddd-096c222bc6e7">
+  <name>Author</name>
+  <synonym>
+   <key>en</key>
+   <value>363A9E70-803F-DC18-83BE-EB07735BC483</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="7bf9f87c-be16-46ae-adc3-25b21dafca8f">
+  <name>Created</name>
+  <synonym>
+   <key>en</key>
+   <value>7AF43EB4-D85F-D934-423A-A5D435C5E88E</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="523d96d8-d5d7-44d1-9317-2062179b044e">
+  <name>DataRef</name>
+  <synonym>
+   <key>en</key>
+   <value>248EBC11-15CE-57BD-D7B1-14F11F498E53</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="aecdf0d4-ad89-4c93-986a-a0306eb438b7">
+  <name>PackageID</name>
+  <synonym>
+   <key>en</key>
+   <value>2CAA4D6F-F2B9-8988-89BD-D234079AAC74</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

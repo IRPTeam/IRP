@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c09747e2-7917-404b-8eb9-d5da9174a5c6">
-  <name>TestConnection</name>
+ <name>TestConnection</name>
+ <synonym>
+  <key>en</key>
+  <value>E79682C6-2C78-5A5A-AE0B-B7CAEAEBAF62</value>
+ </synonym>
+ <rootURL>connection</rootURL>
+ <reuseSessions>AutoUse</reuseSessions>
+ <sessionMaxAge>20</sessionMaxAge>
+ <urlTemplates uuid="b83fb1fe-a5a9-462a-bdf4-a8084efa467b">
+  <name>Connection</name>
   <synonym>
-    <key>en</key>
-    <value>Test connection</value>
+   <key>en</key>
+   <value>851A400A-32D1-E387-7113-3A7D270FCCA4</value>
   </synonym>
-  <rootURL>connection</rootURL>
-  <reuseSessions>AutoUse</reuseSessions>
-  <sessionMaxAge>20</sessionMaxAge>
-  <urlTemplates uuid="b83fb1fe-a5a9-462a-bdf4-a8084efa467b">
-    <name>Connection</name>
-    <synonym>
-      <key>en</key>
-      <value>Connection</value>
-    </synonym>
-    <template>/*</template>
-    <methods uuid="de88f1d0-63a9-4be4-8423-cd46847ce805">
-      <name>test</name>
-      <synonym>
-        <key>en</key>
-        <value>Test</value>
-      </synonym>
-      <handler>ConnectionTest</handler>
-    </methods>
-  </urlTemplates>
+  <template>/*</template>
+  <methods uuid="de88f1d0-63a9-4be4-8423-cd46847ce805">
+   <name>test</name>
+   <synonym>
+    <key>en</key>
+    <value>E0F1A306-33FF-233A-A113-3E217C69E9F7</value>
+   </synonym>
+   <handler>ConnectionTest</handler>
+  </methods>
+ </urlTemplates>
 </mdclass:HTTPService>

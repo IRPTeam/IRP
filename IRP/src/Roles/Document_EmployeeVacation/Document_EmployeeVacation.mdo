@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7e3660c-0cdc-45bc-921d-b46ba30b892f">
-  <name>Document_EmployeeVacation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document employee vacation</value>
-  </synonym>
+ <name>Document_EmployeeVacation</name>
+ <synonym>
+  <key>en</key>
+  <value>7B10BC7A-F717-1B1F-F1E5-5727DDABE528</value>
+ </synonym>
 </mdclass:Role>

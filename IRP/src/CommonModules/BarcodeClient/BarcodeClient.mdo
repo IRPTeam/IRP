@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d2b50cf-18fc-4c38-88c2-bffa821b4259">
-  <name>BarcodeClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Barcode client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>BarcodeClient</name>
+ <synonym>
+  <key>en</key>
+  <value>1C83EA24-C984-CF2C-C697-7AD18A20BB37</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

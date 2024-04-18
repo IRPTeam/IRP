@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="623190ae-f620-4496-9436-e3ef8ddd446d">
-  <name>Treasury</name>
-  <synonym>
-    <key>en</key>
-    <value>Treasury</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.A1010_PartnersBalance</content>
-  <content>Report.R3010_CashOnHand</content>
-  <content>Report.R1200_VendorsAging</content>
-  <content>Report.R1100_CustomersAging</content>
-  <content>Catalog.AgingPeriods</content>
-  <content>Report.R5020_PartnersBalance</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Treasury</name>
+ <synonym>
+  <key>en</key>
+  <value>7B8AB85D-B14F-4580-0FB1-1E3BF1E7319A</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.A1010_PartnersBalance</content>
+ <content>Report.R3010_CashOnHand</content>
+ <content>Report.R1200_VendorsAging</content>
+ <content>Report.R1100_CustomersAging</content>
+ <content>Catalog.AgingPeriods</content>
+ <content>Report.R5020_PartnersBalance</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

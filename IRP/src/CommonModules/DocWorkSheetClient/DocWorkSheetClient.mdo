@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f24f0123-f6bc-4fcc-920f-99b9c8a49d5b">
-  <name>DocWorkSheetClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc work sheet client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocWorkSheetClient</name>
+ <synonym>
+  <key>en</key>
+  <value>230BD775-9C27-3C6A-A420-06C88D232321</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

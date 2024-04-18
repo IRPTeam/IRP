@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3bee48eb-3029-4d91-bf8d-8a9b57994bb8">
-  <name>InternalCommandsClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Internal commands client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>InternalCommandsClient</name>
+ <synonym>
+  <key>en</key>
+  <value>EA71C3C0-7636-DCB5-5AC3-349645DED741</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

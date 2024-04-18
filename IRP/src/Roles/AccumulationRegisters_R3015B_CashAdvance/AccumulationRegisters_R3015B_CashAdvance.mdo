@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="341384fb-1f26-4739-afad-962046962f43">
-  <name>AccumulationRegisters_R3015B_CashAdvance</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R3015B CashAdvance</value>
-  </synonym>
+ <name>AccumulationRegisters_R3015B_CashAdvance</name>
+ <synonym>
+  <key>en</key>
+  <value>BBDAFBD0-F5E0-F082-27D7-753957E00C2B____</value>
+ </synonym>
 </mdclass:Role>

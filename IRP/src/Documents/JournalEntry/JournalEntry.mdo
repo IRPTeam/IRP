@@ -1,370 +1,370 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dae141e9-c68d-4ee9-a643-51b4416f0df1">
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="dae141e9-c68d-4ee9-a643-51b4416f0df1">
+ <producedTypes>
+  <objectType typeId="2bc8afcf-cbcf-4501-8ef4-9457fd56e363" valueTypeId="ba0dd252-238f-4161-8aa4-72e7882141d9"/>
+  <refType typeId="c7e61594-4b0a-42ab-a291-10c918c0828a" valueTypeId="630cbf59-ded4-463a-afcb-ba642ec7614b"/>
+  <selectionType typeId="c2053172-4faf-4410-95b5-35c3a3a64c85" valueTypeId="eaac8613-7dad-43a5-89b3-5c099159c46e"/>
+  <listType typeId="3dbedc9e-abb9-46ba-b3e1-78641a20441e" valueTypeId="00f70393-531e-43a0-9a86-2a70a46dd112"/>
+  <managerType typeId="ef5eca8d-c17c-4539-9f45-59df122ae2a3" valueTypeId="1b3d6f79-c80b-4312-81f4-6f58f6c8052e"/>
+ </producedTypes>
+ <name>JournalEntry</name>
+ <synonym>
+  <key>en</key>
+  <value>B41B4448-24D6-D7DC-C26F-F1040CE1D3A4</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.JournalEntry.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.JournalEntry.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>20D1EE12-7D20-0785-5F8A-A2E663FB54F6</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>F02E4DF8-AA4A-8725-5C0B-BAFC00A33C5C</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.JournalEntry.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.JournalEntry.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.JournalEntry.Form.ChoiceForm</defaultChoiceForm>
+ <posting>Deny</posting>
+ <registerRecords>AccountingRegister.Basic</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>6F72A227-F90C-F3CD-DACC-C9BFFE9DBA1B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>6EBF9DF8-96B1-FB0A-A208-853B237356D0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="394ef6d8-5b4b-46b0-b464-409486bf29a0">
+  <name>Basis</name>
+  <synonym>
+   <key>en</key>
+   <value>E17F0DC4-ECEF-E236-6B98-8074C8F4CE91</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAccountingDocuments</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
+  <name>UserDefined</name>
+  <synonym>
+   <key>en</key>
+   <value>3CD4B146-0955-49DE-E3C4-4E84B0CE4CF0</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>42BECB6B-852C-87DC-C961-1CF0C649E8EE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f6fb5536-eb71-4fec-ae16-cf171fca6762">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>86EF530C-2CE7-00A6-6D94-45CA6A0E0F20</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="57195246-c6a2-46b0-bc5a-cbc57208d5b4">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>706E41CF-8667-4217-751B-BF442659B617</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f0b17e7e-fd9c-49f0-9f1f-5ee97e40078c">
+  <name>SelectLedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>E5A7099D-9D53-DBCE-EEDB-B420C482229C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2a6960c4-a1a2-4afe-aed9-bb0c7a8cadb0">
+  <name>CreateDocuments</name>
+  <synonym>
+   <key>en</key>
+   <value>8C8A5303-79A6-AAE7-7AAD-D3BF2ED1C17E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f66b5f4a-5c19-4a8e-8f7c-53bfc3a142a9">
+  <name>UpdateAnalytics</name>
+  <synonym>
+   <key>en</key>
+   <value>5F93D005-AFAD-436F-FCC0-0AFAFC7A9B9A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="8701e96e-1e6a-4e84-89d4-488947079cde">
   <producedTypes>
-    <objectType typeId="2bc8afcf-cbcf-4501-8ef4-9457fd56e363" valueTypeId="ba0dd252-238f-4161-8aa4-72e7882141d9"/>
-    <refType typeId="c7e61594-4b0a-42ab-a291-10c918c0828a" valueTypeId="630cbf59-ded4-463a-afcb-ba642ec7614b"/>
-    <selectionType typeId="c2053172-4faf-4410-95b5-35c3a3a64c85" valueTypeId="eaac8613-7dad-43a5-89b3-5c099159c46e"/>
-    <listType typeId="3dbedc9e-abb9-46ba-b3e1-78641a20441e" valueTypeId="00f70393-531e-43a0-9a86-2a70a46dd112"/>
-    <managerType typeId="ef5eca8d-c17c-4539-9f45-59df122ae2a3" valueTypeId="1b3d6f79-c80b-4312-81f4-6f58f6c8052e"/>
+   <objectType typeId="65c49faa-3787-43bf-8ac2-d344564087e6" valueTypeId="7dea86f3-5982-4794-8098-a4b719a20776"/>
+   <rowType typeId="92aea984-b6b4-468b-8f90-676ef1439f08" valueTypeId="48f68ba1-8b9a-4e8c-8d24-315c387290da"/>
   </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>3EE6323A-2B20-AC7E-EA0A-A23991C86809</value>
+  </synonym>
+  <attributes uuid="afae46d8-9248-44f5-a78f-9431a4bf0192">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>9979F836-7778-8131-1E36-65A94D37A383</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="63c74c89-8858-4b78-8b26-797f8a5242a5">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>2373A98F-FCF0-7DF0-029F-FDE307BB7427</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="edbfe4ab-ed4e-4f0f-8056-641b688d155b">
+  <producedTypes>
+   <objectType typeId="bc01e623-8177-41f0-91d8-ff632c992a96" valueTypeId="7e58470f-9100-470a-933c-784f145a561f"/>
+   <rowType typeId="59b33465-1b68-480e-b431-9d1ea7641b79" valueTypeId="086e6a53-728f-441c-bc28-e8c63fb4e4bb"/>
+  </producedTypes>
+  <name>Totals</name>
+  <synonym>
+   <key>en</key>
+   <value>0C994318-CFEE-AE27-7D09-9688A6053509</value>
+  </synonym>
+  <attributes uuid="e5a9674d-b549-46d8-b0ef-0b75e6494259">
+   <name>ChartOfAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>FE2050CE-E413-CA75-5D13-3395A0370A44</value>
+   </synonym>
+   <type>
+    <types>ChartOfAccountsRef.Basic</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1fc02546-c2c6-4ba4-94fd-6fd492562f8d">
+   <name>AmountDr</name>
+   <synonym>
+    <key>en</key>
+    <value>32A87FBD-F030-F435-553B-B07B870825EC</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="963d8ca7-9878-40ec-88f8-a8906365d653">
+   <name>AmountCr</name>
+   <synonym>
+    <key>en</key>
+    <value>C7805664-EA25-D01C-CF47-78E452C51CF1</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="22c2f363-5f02-438a-b0d5-39fa556d21ac">
+  <producedTypes>
+   <objectType typeId="2da59cf7-1c53-42dc-9beb-2b05e0882134" valueTypeId="9b02aac3-5006-4268-8cc4-3175a067160e"/>
+   <rowType typeId="ac9c8c29-e5f5-44ec-83fa-a444ef59ae7e" valueTypeId="ddffef96-7468-41ef-9191-a8cf37838719"/>
+  </producedTypes>
+  <name>Errors</name>
+  <synonym>
+   <key>en</key>
+   <value>B2F9E381-D614-9A0C-C672-215A82DB799E</value>
+  </synonym>
+  <attributes uuid="93b40409-9ada-485f-b81a-b3a7a19829d0">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>D2AAE733-7376-3D13-3B09-969DF556DCDF</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="18155338-543f-4c86-bc1c-d567f516b2f0">
+   <name>Operation</name>
+   <synonym>
+    <key>en</key>
+    <value>E19C1DAD-35AB-0BC8-8C38-8161D5A617B3</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.AccountingOperations</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="92f1e85b-b2c6-4cdc-a775-08202e280399">
+   <name>ErrorDescription</name>
+   <synonym>
+    <key>en</key>
+    <value>CB7A5E46-BBD2-B6DC-CC92-2BF02E0626EB</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>200</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
   <name>JournalEntry</name>
   <synonym>
-    <key>en</key>
-    <value>Journal entry</value>
+   <key>en</key>
+   <value>FC448AC6-CE4B-59C6-6CB2-24868FE70A52</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.JournalEntry.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_JournalEntry</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.JournalEntry.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Journal entry</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Journal entries</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.JournalEntry.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.JournalEntry.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.JournalEntry.Form.ChoiceForm</defaultChoiceForm>
-  <posting>Deny</posting>
-  <registerRecords>AccountingRegister.Basic</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="394ef6d8-5b4b-46b0-b464-409486bf29a0">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAccountingDocuments</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
-    <name>UserDefined</name>
-    <synonym>
-      <key>en</key>
-      <value>User defined</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f6fb5536-eb71-4fec-ae16-cf171fca6762">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="57195246-c6a2-46b0-bc5a-cbc57208d5b4">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f0b17e7e-fd9c-49f0-9f1f-5ee97e40078c">
-    <name>SelectLedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Select ledger type</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2a6960c4-a1a2-4afe-aed9-bb0c7a8cadb0">
-    <name>CreateDocuments</name>
-    <synonym>
-      <key>en</key>
-      <value>Create documents</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f66b5f4a-5c19-4a8e-8f7c-53bfc3a142a9">
-    <name>UpdateAnalytics</name>
-    <synonym>
-      <key>en</key>
-      <value>Update analytics</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="8701e96e-1e6a-4e84-89d4-488947079cde">
-    <producedTypes>
-      <objectType typeId="65c49faa-3787-43bf-8ac2-d344564087e6" valueTypeId="7dea86f3-5982-4794-8098-a4b719a20776"/>
-      <rowType typeId="92aea984-b6b4-468b-8f90-676ef1439f08" valueTypeId="48f68ba1-8b9a-4e8c-8d24-315c387290da"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="afae46d8-9248-44f5-a78f-9431a4bf0192">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="63c74c89-8858-4b78-8b26-797f8a5242a5">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="edbfe4ab-ed4e-4f0f-8056-641b688d155b">
-    <producedTypes>
-      <objectType typeId="bc01e623-8177-41f0-91d8-ff632c992a96" valueTypeId="7e58470f-9100-470a-933c-784f145a561f"/>
-      <rowType typeId="59b33465-1b68-480e-b431-9d1ea7641b79" valueTypeId="086e6a53-728f-441c-bc28-e8c63fb4e4bb"/>
-    </producedTypes>
-    <name>Totals</name>
-    <synonym>
-      <key>en</key>
-      <value>Totals</value>
-    </synonym>
-    <attributes uuid="e5a9674d-b549-46d8-b0ef-0b75e6494259">
-      <name>ChartOfAccount</name>
-      <synonym>
-        <key>en</key>
-        <value>Chart of account</value>
-      </synonym>
-      <type>
-        <types>ChartOfAccountsRef.Basic</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1fc02546-c2c6-4ba4-94fd-6fd492562f8d">
-      <name>AmountDr</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount Debit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="963d8ca7-9878-40ec-88f8-a8906365d653">
-      <name>AmountCr</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount Credit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="22c2f363-5f02-438a-b0d5-39fa556d21ac">
-    <producedTypes>
-      <objectType typeId="2da59cf7-1c53-42dc-9beb-2b05e0882134" valueTypeId="9b02aac3-5006-4268-8cc4-3175a067160e"/>
-      <rowType typeId="ac9c8c29-e5f5-44ec-83fa-a444ef59ae7e" valueTypeId="ddffef96-7468-41ef-9191-a8cf37838719"/>
-    </producedTypes>
-    <name>Errors</name>
-    <synonym>
-      <key>en</key>
-      <value>Errors</value>
-    </synonym>
-    <attributes uuid="93b40409-9ada-485f-b81a-b3a7a19829d0">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="18155338-543f-4c86-bc1c-d567f516b2f0">
-      <name>Operation</name>
-      <synonym>
-        <key>en</key>
-        <value>Operation</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.AccountingOperations</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="92f1e85b-b2c6-4cdc-a775-08202e280399">
-      <name>ErrorDescription</name>
-      <synonym>
-        <key>en</key>
-        <value>Error description</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>200</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
-    <name>JournalEntry</name>
-    <synonym>
-      <key>en</key>
-      <value>Journal entry</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>DefinedType.typeAccountingDocuments</types>
-    </commandParameterType>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.DebitCredit</picture>
-    </picture>
-  </commands>
-  <commands uuid="796873d7-7d25-4821-8d80-2ec5c1d8ee2b">
-    <name>JournalEntryMultipleDocuments</name>
-    <synonym>
-      <key>en</key>
-      <value>Journal entry (multiple documents)</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>DefinedType.typeAccountingDocuments</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AccountingRegister</picture>
-    </picture>
-  </commands>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DefinedType.typeAccountingDocuments</types>
+  </commandParameterType>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.DebitCredit</picture>
+  </picture>
+ </commands>
+ <commands uuid="796873d7-7d25-4821-8d80-2ec5c1d8ee2b">
+  <name>JournalEntryMultipleDocuments</name>
+  <synonym>
+   <key>en</key>
+   <value>B0C5F92B-E3EB-E131-1608-820A7766D59E</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>DefinedType.typeAccountingDocuments</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AccountingRegister</picture>
+  </picture>
+ </commands>
 </mdclass:Document>

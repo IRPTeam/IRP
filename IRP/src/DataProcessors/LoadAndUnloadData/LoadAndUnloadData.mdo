@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7c0e89a8-4c5b-4a44-ae4e-a9c44bfdcd22">
-  <producedTypes>
-    <objectType typeId="9190e099-51e1-490c-ad4e-1f5e1806c441" valueTypeId="7f4187c0-53b5-4e71-9413-e575aca84838"/>
-    <managerType typeId="a3e14a5b-8f6a-49d0-a8ec-3b35077eb8cd" valueTypeId="4fca1067-f909-46ed-9d79-5b2714f9f0c7"/>
-  </producedTypes>
-  <name>LoadAndUnloadData</name>
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7c0e89a8-4c5b-4a44-ae4e-a9c44bfdcd22">
+ <producedTypes>
+  <objectType typeId="9190e099-51e1-490c-ad4e-1f5e1806c441" valueTypeId="7f4187c0-53b5-4e71-9413-e575aca84838"/>
+  <managerType typeId="a3e14a5b-8f6a-49d0-a8ec-3b35077eb8cd" valueTypeId="4fca1067-f909-46ed-9d79-5b2714f9f0c7"/>
+ </producedTypes>
+ <name>LoadAndUnloadData</name>
+ <synonym>
+  <key>en</key>
+  <value>941FD70C-669D-439A-A4BC-C9CE7A0B1B99</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
+ <attributes uuid="9886e7f4-2eb0-4e75-a0f5-fd103bbcf3e0">
+  <name>SerializedInfo</name>
   <synonym>
-    <key>en</key>
-    <value>Load and unload data</value>
+   <key>en</key>
+   <value>403D6980-741B-7725-5346-63BC9940098E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
-  <attributes uuid="9886e7f4-2eb0-4e75-a0f5-fd103bbcf3e0">
-    <name>SerializedInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Serialized info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="42468120-8bf6-44ca-adca-2ff30482cd9e">
-    <name>ArchivedInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Archived info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="a8ca6afc-2113-4ac1-a8f3-3bdba459d2c9">
-    <name>DeserializedInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Deserialized info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <forms uuid="6bde5a39-4bcf-4d36-8a66-dd3460b583cb">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="42468120-8bf6-44ca-adca-2ff30482cd9e">
+  <name>ArchivedInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>EC6A79CC-DD9F-90BE-EE7D-DE947CD0BBE0</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="a8ca6afc-2113-4ac1-a8f3-3bdba459d2c9">
+  <name>DeserializedInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>D4FF4F64-B576-612D-DB26-6C796CCF5C3D</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <forms uuid="6bde5a39-4bcf-4d36-8a66-dd3460b583cb">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>95E4B2DA-74A8-E8F0-0836-6B14517BC650</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

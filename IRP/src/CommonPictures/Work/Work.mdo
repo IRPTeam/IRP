@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99987ca0-849e-48c5-8b0e-95f1e0624acd">
-  <name>Work</name>
-  <synonym>
-    <key>en</key>
-    <value>Work</value>
-  </synonym>
+ <name>Work</name>
+ <synonym>
+  <key>en</key>
+  <value>AC914AAA-853C-9D42-2126-6E9293884DC5</value>
+ </synonym>
 </mdclass:CommonPicture>

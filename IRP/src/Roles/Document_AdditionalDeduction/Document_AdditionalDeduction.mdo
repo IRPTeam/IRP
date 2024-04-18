@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc53f67f-bf48-42b0-a5cd-b0623f9c0b3e">
-  <name>Document_AdditionalDeduction</name>
-  <synonym>
-    <key>en</key>
-    <value>Document additional deduction</value>
-  </synonym>
+ <name>Document_AdditionalDeduction</name>
+ <synonym>
+  <key>en</key>
+  <value>61E2FCBD-BE87-DDB3-3E96-6BDF02BDE262</value>
+ </synonym>
 </mdclass:Role>

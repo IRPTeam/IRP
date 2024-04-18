@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac618a7e-bd4f-4d86-b22f-a7df2c03f54c">
-  <name>OnCopy_DocumentProcessing</name>
-  <synonym>
-    <key>en</key>
-    <value>On copy document processing</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>OnCopy</event>
-  <handler>CommonModule.DocumentsServer.OnCopyDocumentProcessingOnCopy</handler>
+ <name>OnCopy_DocumentProcessing</name>
+ <synonym>
+  <key>en</key>
+  <value>097E4801-268B-0583-30F2-2BEC67008450</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnCopy</event>
+ <handler>CommonModule.DocumentsServer.OnCopyDocumentProcessingOnCopy</handler>
 </mdclass:EventSubscription>

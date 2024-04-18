@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0e15019-0e8c-46ef-9e78-6f425f976c37">
-  <name>BeforeWrite_RefreshReusableValues</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write refresh reusable values</value>
-  </synonym>
-  <source>
-    <types>ChartOfCharacteristicTypesObject</types>
-    <types>CatalogObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.LocalizationEvents.RefreshReusableValuesBeforeWrite</handler>
+ <name>BeforeWrite_RefreshReusableValues</name>
+ <synonym>
+  <key>en</key>
+  <value>7CC70555-C6D7-263F-F3D2-20E854920EB7</value>
+ </synonym>
+ <source>
+  <types>ChartOfCharacteristicTypesObject</types>
+  <types>CatalogObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.LocalizationEvents.RefreshReusableValuesBeforeWrite</handler>
 </mdclass:EventSubscription>

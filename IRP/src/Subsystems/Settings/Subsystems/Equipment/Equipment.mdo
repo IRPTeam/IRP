@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="38d873a0-b889-4b32-b64c-c3fde68f6553">
-  <name>Equipment</name>
-  <synonym>
-    <key>en</key>
-    <value>Equipment</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.Hardware</content>
-  <content>Catalog.EquipmentDrivers</content>
-  <content>Catalog.Workstations</content>
-  <content>InformationRegister.HardwareLog</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>Equipment</name>
+ <synonym>
+  <key>en</key>
+  <value>7DDF1737-FFB5-7811-1F5D-D1AEB0B3DA59</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.Hardware</content>
+ <content>Catalog.EquipmentDrivers</content>
+ <content>Catalog.Workstations</content>
+ <content>InformationRegister.HardwareLog</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ea35fd4-eb4e-4c4f-beab-8a23f6fd98fe">
-  <name>Bookkeeping</name>
-  <synonym>
-    <key>en</key>
-    <value>Bookkeeping</value>
-  </synonym>
+ <name>Bookkeeping</name>
+ <synonym>
+  <key>en</key>
+  <value>CA22878F-A07B-4C9E-E5FF-F271AD38376E</value>
+ </synonym>
 </mdclass:CommonPicture>

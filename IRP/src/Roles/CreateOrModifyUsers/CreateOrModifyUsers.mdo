@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc8dabed-0add-46d5-8f8d-0c742bf73f5e">
-  <name>CreateOrModifyUsers</name>
-  <synonym>
-    <key>en</key>
-    <value>Create or modify users</value>
-  </synonym>
+ <name>CreateOrModifyUsers</name>
+ <synonym>
+  <key>en</key>
+  <value>EA7CDC61-DD3D-B3E3-3A2B-BA7DF4E29B00</value>
+ </synonym>
 </mdclass:Role>

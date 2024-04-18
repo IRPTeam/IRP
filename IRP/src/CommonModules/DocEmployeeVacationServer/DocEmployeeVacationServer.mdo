@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="82ea8502-a8e8-40fd-8051-2812d323d984">
-  <name>DocEmployeeVacationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee vacation server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocEmployeeVacationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>E19E3463-0CAA-343A-AC90-0B3C455F4EDF</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

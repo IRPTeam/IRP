@@ -1,196 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="18f6ff64-bc1b-4188-89e7-67091de81f65">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="18f6ff64-bc1b-4188-89e7-67091de81f65">
+ <producedTypes>
+  <objectType typeId="c7e5e69d-5dc1-481c-80ec-0c0fb418c99c" valueTypeId="f0c2d3b1-79bc-4a02-b3ca-fdb1942e5194"/>
+  <refType typeId="7ecb2616-28e8-4049-b7a7-a395168e0f49" valueTypeId="554a458c-e09e-43a8-ad56-442b56bf13d9"/>
+  <selectionType typeId="ae38a0d4-060b-4452-b406-e0825636eee4" valueTypeId="2c4c00f1-c29e-4099-a8c7-a9cc9dc75da7"/>
+  <listType typeId="2c5e6c64-3772-492d-b5e6-f79925cec736" valueTypeId="745c6198-7758-4318-aa63-cdbe7341592c"/>
+  <managerType typeId="fda5852d-b642-4f5f-9f0e-f871820652dd" valueTypeId="d054a5ea-cd76-4bf5-be14-de15a1ec2ff6"/>
+ </producedTypes>
+ <name>PaymentSchedules</name>
+ <synonym>
+  <key>en</key>
+  <value>9486D424-17FA-2329-993E-EAD1D80D6A7E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentSchedules</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentSchedules</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.PaymentSchedules.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PaymentSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>en</key>
+  <value>2C387419-C991-8CD9-90EF-F11F6C5F5742</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PaymentSchedules.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PaymentSchedules.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PaymentSchedules.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="3e0b0bb7-da35-4957-ae72-7d89a1f5de55">
   <producedTypes>
-    <objectType typeId="c7e5e69d-5dc1-481c-80ec-0c0fb418c99c" valueTypeId="f0c2d3b1-79bc-4a02-b3ca-fdb1942e5194"/>
-    <refType typeId="7ecb2616-28e8-4049-b7a7-a395168e0f49" valueTypeId="554a458c-e09e-43a8-ad56-442b56bf13d9"/>
-    <selectionType typeId="ae38a0d4-060b-4452-b406-e0825636eee4" valueTypeId="2c4c00f1-c29e-4099-a8c7-a9cc9dc75da7"/>
-    <listType typeId="2c5e6c64-3772-492d-b5e6-f79925cec736" valueTypeId="745c6198-7758-4318-aa63-cdbe7341592c"/>
-    <managerType typeId="fda5852d-b642-4f5f-9f0e-f871820652dd" valueTypeId="d054a5ea-cd76-4bf5-be14-de15a1ec2ff6"/>
+   <objectType typeId="f9a33ea2-35de-4369-ab0a-bc1f87483704" valueTypeId="5c78012e-7ef9-4999-a0e0-a981d550c0d4"/>
+   <rowType typeId="49666f85-6936-453b-8158-044c4f3e04f1" valueTypeId="2449faab-112a-4302-af71-9f35557e13a8"/>
   </producedTypes>
-  <name>PaymentSchedules</name>
+  <name>StagesOfPayment</name>
   <synonym>
-    <key>en</key>
-    <value>Payment terms</value>
+   <key>en</key>
+   <value>E3E42299-393F-8F74-4015-516AEBB149AA</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentSchedules</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PaymentSchedules</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.PaymentSchedules.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PaymentSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <attributes uuid="8a3181e1-a185-4d68-908f-8bdfb84e4361">
+   <name>CalculationType</name>
+   <synonym>
     <key>en</key>
-    <value>Payment term</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PaymentSchedules.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PaymentSchedules.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PaymentSchedules.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="3e0b0bb7-da35-4957-ae72-7d89a1f5de55">
-    <producedTypes>
-      <objectType typeId="f9a33ea2-35de-4369-ab0a-bc1f87483704" valueTypeId="5c78012e-7ef9-4999-a0e0-a981d550c0d4"/>
-      <rowType typeId="49666f85-6936-453b-8158-044c4f3e04f1" valueTypeId="2449faab-112a-4302-af71-9f35557e13a8"/>
-    </producedTypes>
-    <name>StagesOfPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Stages of payment</value>
-    </synonym>
-    <attributes uuid="8a3181e1-a185-4d68-908f-8bdfb84e4361">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>EnumRef.CalculationTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="f3c27cba-2ad8-424b-bb05-231ef489a5bd">
-      <name>ProportionOfPayment</name>
-      <synonym>
-        <key>en</key>
-        <value>Proportion of payment</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>5</precision>
-          <scale>2</scale>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="812e60c1-19d3-4dad-bc45-e069d87fad5a">
-      <name>DuePeriod</name>
-      <synonym>
-        <key>en</key>
-        <value>Due period, days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-          <nonNegative>true</nonNegative>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="8abbc844-9446-47dc-8a3f-6136a1983e90">
-    <producedTypes>
-      <objectType typeId="8ddc5d59-f06e-48ea-ace8-9b81dda503a7" valueTypeId="b3008ca2-9a87-49a3-b894-57c2234edeae"/>
-      <rowType typeId="3b97028e-7ac8-46a6-ae25-25240be57cfe" valueTypeId="ffc85505-fd77-4c65-aef5-8de7db5194d3"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="219fddb5-4c46-4785-a297-66fdd04405b6">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4a85683a-51bc-49df-bef2-837fd417c71d">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PaymentSchedules.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="357c1110-0424-4d05-958e-4be76ea00d9d">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="debb4ef5-be96-4a23-a308-5dca3da5cf57">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>590C79AD-2569-13B5-501A-ABF48F1F62FE</value>
+   </synonym>
+   <type>
+    <types>EnumRef.CalculationTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="f3c27cba-2ad8-424b-bb05-231ef489a5bd">
+   <name>ProportionOfPayment</name>
+   <synonym>
+    <key>en</key>
+    <value>D19D0198-9B1A-E4D6-6CAE-E13D741F6FE7</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>5</precision>
+     <scale>2</scale>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="812e60c1-19d3-4dad-bc45-e069d87fad5a">
+   <name>DuePeriod</name>
+   <synonym>
+    <key>en</key>
+    <value>6BE3B76C-7D20-A9AA-AB87-789A0A9A0866</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="8abbc844-9446-47dc-8a3f-6136a1983e90">
+  <producedTypes>
+   <objectType typeId="8ddc5d59-f06e-48ea-ace8-9b81dda503a7" valueTypeId="b3008ca2-9a87-49a3-b894-57c2234edeae"/>
+   <rowType typeId="3b97028e-7ac8-46a6-ae25-25240be57cfe" valueTypeId="ffc85505-fd77-4c65-aef5-8de7db5194d3"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>E78127C5-6C84-7BB8-8BC7-7757039EBA64</value>
+  </synonym>
+  <attributes uuid="219fddb5-4c46-4785-a297-66fdd04405b6">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>29A27385-9C88-DE8C-C6AD-DED5B7888F65</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4a85683a-51bc-49df-bef2-837fd417c71d">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>DC33E6C7-55CD-FA57-770D-D7F5B747A83A</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PaymentSchedules.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="357c1110-0424-4d05-958e-4be76ea00d9d">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>203FF82E-9AD9-A71A-AADB-BF446496B7E5</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="debb4ef5-be96-4a23-a308-5dca3da5cf57">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>533F3E76-97FD-B7D9-9095-557441F1C4A6</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>95B48441-24EB-31BC-C4D4-4FD863143F2E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

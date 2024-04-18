@@ -1,106 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e332906-e7af-490c-8d04-773ce9406e4a">
-  <producedTypes>
-    <selectionType typeId="2e747477-b068-4770-8258-9dfaa15c5665" valueTypeId="cf39f769-3f90-4640-ab02-7a82d3a1572a"/>
-    <listType typeId="0b191c2d-7f29-4777-85d0-f93d3b1de96b" valueTypeId="42e10ee2-f695-49f6-99c0-0c324e93f041"/>
-    <managerType typeId="9ce8b7fb-be7c-4e08-9063-fb64bc04932c" valueTypeId="41e44329-ce02-4d72-803b-8914aabeddad"/>
-    <recordSetType typeId="d9eb9065-b796-445c-95ca-11ded36a71d3" valueTypeId="46016dee-eaa6-4fcb-a3a8-345383053d83"/>
-    <recordKeyType typeId="6d4bc89e-9c99-41fc-a4e4-92388a34a9ef" valueTypeId="b252a2e7-31ce-43ae-8723-6407a0d15fa1"/>
-    <recordType typeId="9563c598-e076-48bc-9895-3f82f29985b2" valueTypeId="437a3a49-a4e2-464d-aebe-f33be1262207"/>
-    <recordManagerType typeId="613d8866-b914-4b4a-8ceb-45f869ddea7a" valueTypeId="30bcae2c-8af0-48d8-a00f-bd206b6caccb"/>
-  </producedTypes>
-  <name>IDInfo</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6e332906-e7af-490c-8d04-773ce9406e4a">
+ <producedTypes>
+  <selectionType typeId="2e747477-b068-4770-8258-9dfaa15c5665" valueTypeId="cf39f769-3f90-4640-ab02-7a82d3a1572a"/>
+  <listType typeId="0b191c2d-7f29-4777-85d0-f93d3b1de96b" valueTypeId="42e10ee2-f695-49f6-99c0-0c324e93f041"/>
+  <managerType typeId="9ce8b7fb-be7c-4e08-9063-fb64bc04932c" valueTypeId="41e44329-ce02-4d72-803b-8914aabeddad"/>
+  <recordSetType typeId="d9eb9065-b796-445c-95ca-11ded36a71d3" valueTypeId="46016dee-eaa6-4fcb-a3a8-345383053d83"/>
+  <recordKeyType typeId="6d4bc89e-9c99-41fc-a4e4-92388a34a9ef" valueTypeId="b252a2e7-31ce-43ae-8723-6407a0d15fa1"/>
+  <recordType typeId="9563c598-e076-48bc-9895-3f82f29985b2" valueTypeId="437a3a49-a4e2-464d-aebe-f33be1262207"/>
+  <recordManagerType typeId="613d8866-b914-4b4a-8ceb-45f869ddea7a" valueTypeId="30bcae2c-8af0-48d8-a00f-bd206b6caccb"/>
+ </producedTypes>
+ <name>IDInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>D9C0AFDA-3C3D-CD65-5D2B-B46B3CFD8B5B</value>
+ </synonym>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>247A246C-CFA2-E6DA-AF0C-C94AA2F91C41</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>06B625EF-DA04-3A96-6F4D-D53E44C1B932</value>
+ </listPresentation>
+ <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
+  <name>Value</name>
   <synonym>
-    <key>en</key>
-    <value>Contact info</value>
+   <key>en</key>
+   <value>068CB331-77A9-A736-62E9-98FA500AA95E</value>
   </synonym>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Contact info</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Contacts info</value>
-  </listPresentation>
-  <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>Characteristic.IDInfoTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
-    <name>Info</name>
-    <synonym>
-      <key>en</key>
-      <value>Info</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="ec6c0f46-d6da-4b0b-8d5b-e7e292b31da1">
-    <name>Country</name>
-    <synonym>
-      <key>en</key>
-      <value>Country</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Countries</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="1ff8f3eb-08e8-4eea-aae7-32004a223af6">
-    <name>Object</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-      <types>CatalogRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f2096ab0-3e02-4202-a1fe-ea3dfa46e994">
-    <name>IDInfoType</name>
-    <synonym>
-      <key>en</key>
-      <value>Contact info type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>Characteristic.IDInfoTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
+  <name>Info</name>
+  <synonym>
+   <key>en</key>
+   <value>FA23A177-50C8-1893-3660-01B2D9D7DEB4</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="ec6c0f46-d6da-4b0b-8d5b-e7e292b31da1">
+  <name>Country</name>
+  <synonym>
+   <key>en</key>
+   <value>47FA9DCA-4EF9-21D8-8068-8119482CA13F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Countries</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="1ff8f3eb-08e8-4eea-aae7-32004a223af6">
+  <name>Object</name>
+  <synonym>
+   <key>en</key>
+   <value>F5E3A866-5DF6-A774-4CF4-4A4BB711E7F6</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+   <types>CatalogRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f2096ab0-3e02-4202-a1fe-ea3dfa46e994">
+  <name>IDInfoType</name>
+  <synonym>
+   <key>en</key>
+   <value>6CBE50EE-6988-7C03-3CC4-49BF8829CFAC</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

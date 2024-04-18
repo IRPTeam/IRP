@@ -1,438 +1,438 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bf3c8666-cbf1-48cc-8d02-0b41a462fd3b">
-  <producedTypes>
-    <objectType typeId="9722093e-10ea-4031-be6c-9bd640c9536a" valueTypeId="4c0ba9bb-a19d-4afd-9728-39ed07f31258"/>
-    <refType typeId="1883a77c-4999-49bc-8f88-5d3b0c7e5d80" valueTypeId="4d91b356-1b61-4523-bbb3-24a7a8d4d885"/>
-    <selectionType typeId="47cf0439-f44e-4d94-8b19-9cad7574e3e1" valueTypeId="009bcd21-0c8d-4678-9a9c-25e096358c65"/>
-    <listType typeId="5cea5fda-9b1d-4f4f-8571-71016158493b" valueTypeId="0aaa1dca-1631-4902-b783-9aa3dc7e4ee6"/>
-    <managerType typeId="35632385-ae09-4bec-9050-d4b9888b70a9" valueTypeId="2ef2e598-35f1-47d5-a8b4-23eecb7ff8e7"/>
-  </producedTypes>
-  <name>ExternalFunctions</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bf3c8666-cbf1-48cc-8d02-0b41a462fd3b">
+ <producedTypes>
+  <objectType typeId="9722093e-10ea-4031-be6c-9bd640c9536a" valueTypeId="4c0ba9bb-a19d-4afd-9728-39ed07f31258"/>
+  <refType typeId="1883a77c-4999-49bc-8f88-5d3b0c7e5d80" valueTypeId="4d91b356-1b61-4523-bbb3-24a7a8d4d885"/>
+  <selectionType typeId="47cf0439-f44e-4d94-8b19-9cad7574e3e1" valueTypeId="009bcd21-0c8d-4678-9a9c-25e096358c65"/>
+  <listType typeId="5cea5fda-9b1d-4f4f-8571-71016158493b" valueTypeId="0aaa1dca-1631-4902-b783-9aa3dc7e4ee6"/>
+  <managerType typeId="35632385-ae09-4bec-9050-d4b9888b70a9" valueTypeId="2ef2e598-35f1-47d5-a8b4-23eecb7ff8e7"/>
+ </producedTypes>
+ <name>ExternalFunctions</name>
+ <synonym>
+  <key>en</key>
+  <value>949DC87C-1343-2B35-561F-F3F1DBBBBCEB</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.ExternalFunctions.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>7FD9DEF2-2753-0270-082D-DF93A3B1714C</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>E494BC60-75A7-073A-A9CD-D3A1CEC98482</value>
+ </listPresentation>
+ <dataHistory>Use</dataHistory>
+ <hierarchical>true</hierarchical>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ExternalFunctions.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ExternalFunctions.Form.ListForm</defaultListForm>
+ <updateDataHistoryImmediatelyAfterWrite>true</updateDataHistoryImmediatelyAfterWrite>
+ <executeAfterWriteDataHistoryVersionProcessing>true</executeAfterWriteDataHistoryVersionProcessing>
+ <attributes uuid="fa2198be-48e9-4917-b3a1-72a363b63e55">
+  <name>ExternalFunctionType</name>
   <synonym>
-    <key>en</key>
-    <value>External functions</value>
+   <key>en</key>
+   <value>367ACCC8-8165-60AE-EC12-2827FC9EB64C</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.ExternalFunctions.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>EnumRef.ExternalFunctionType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.ExternalFunctionType.EnumValue.Eval</value>
+  </fillValue>
+ </attributes>
+ <attributes uuid="b89ca813-78b7-4d49-9d34-e38d88f58381">
+  <name>Enable</name>
+  <synonym>
+   <key>en</key>
+   <value>B2251995-A5EF-5613-377B-B3974B976CE1</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>External function</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>External functions</value>
-  </listPresentation>
   <dataHistory>Use</dataHistory>
-  <hierarchical>true</hierarchical>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ExternalFunctions.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ExternalFunctions.Form.ListForm</defaultListForm>
-  <updateDataHistoryImmediatelyAfterWrite>true</updateDataHistoryImmediatelyAfterWrite>
-  <executeAfterWriteDataHistoryVersionProcessing>true</executeAfterWriteDataHistoryVersionProcessing>
-  <attributes uuid="fa2198be-48e9-4917-b3a1-72a363b63e55">
-    <name>ExternalFunctionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ExternalFunctionType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.ExternalFunctionType.EnumValue.Eval</value>
-    </fillValue>
+ </attributes>
+ <attributes uuid="28f09bd7-bfdd-447d-9d0e-9bbd8c93ec18">
+  <name>ExternalCode</name>
+  <synonym>
+   <key>en</key>
+   <value>FDE41B52-869E-08FF-F21B-BE5E32861CCB</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c7bf7b7a-a6bc-4e89-a637-c169eb88e12d">
+  <name>UseForSetDescription</name>
+  <synonym>
+   <key>en</key>
+   <value>64AA77E9-9F8E-91CA-A35F-F470611E13B4</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="588b7e31-7bb9-4822-8c0c-869fb9c570d9">
+  <name>SafeModeIsOn</name>
+  <synonym>
+   <key>en</key>
+   <value>B414743B-804C-0298-81B6-6FD7C8A2CFAF</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:BooleanValue">
+   <value>true</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ecb16935-388e-425b-beb3-befdafec74e5">
+  <name>RegExp</name>
+  <synonym>
+   <key>en</key>
+   <value>F1D87E2B-3F70-97F2-2DA3-363F3746BD9D</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="eebf46fa-6260-4da5-a77f-91bf55fbe3e4">
+  <name>isSchedulerSet</name>
+  <synonym>
+   <key>en</key>
+   <value>D20FBAAC-D92C-1032-2864-4035C84E93CB</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="89a60c17-6912-487b-8ad2-a6aca158c503">
+  <name>JobSchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>7B952F04-1E1A-F2F2-22CE-E8A780976EBE</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="54f72cef-35c8-4bfa-ab44-dcd5887735f8">
+  <name>DifficultLevel</name>
+  <synonym>
+   <key>en</key>
+   <value>AB7E0062-E273-DB86-6DA0-037C50771366</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>2</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:NumberValue">
+   <value>1</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="74acdebf-b881-44d5-8282-3794cc659f28">
+  <name>ResultType</name>
+  <synonym>
+   <key>en</key>
+   <value>77A2A8A1-20E0-FCCD-D058-8CEF9430EFAC</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9cf09496-ab32-4028-a1f5-7c5e596dde84">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>3C3B6E2B-ECD8-27AC-C379-9930937549EB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="66461f2c-9435-4e41-9867-5f80eb10acc2">
+  <producedTypes>
+   <objectType typeId="3717ba06-3797-4225-8757-37970637f40a" valueTypeId="07793604-6f9e-406f-ae2d-104ead5b1d08"/>
+   <rowType typeId="4519636d-6aab-4d9b-82aa-2a940535b205" valueTypeId="eebf8d63-d2d7-4046-b34b-186324973883"/>
+  </producedTypes>
+  <name>Parameters</name>
+  <synonym>
+   <key>en</key>
+   <value>4339B60B-2575-ED4A-AB82-2EF865684A3A</value>
+  </synonym>
+  <attributes uuid="985ab572-a12e-4acd-a488-6a585c596cc5">
+   <name>Name</name>
+   <synonym>
+    <key>en</key>
+    <value>6041590F-B40C-C187-7A1D-D1AAE3B891E3</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>100</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="b89ca813-78b7-4d49-9d34-e38d88f58381">
-    <name>Enable</name>
-    <synonym>
-      <key>en</key>
-      <value>Enable</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="087e804a-82be-42ed-8353-5f2200342b4a">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>C29D1688-B9C7-5A17-7235-543D9BD763F8</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
+    <types>Number</types>
+    <types>AnyRef</types>
+    <numberQualifiers>
+     <precision>32</precision>
+     <scale>10</scale>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>1000</length>
+    </stringQualifiers>
+    <dateQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="28f09bd7-bfdd-447d-9d0e-9bbd8c93ec18">
-    <name>ExternalCode</name>
-    <synonym>
-      <key>en</key>
-      <value>External code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="eafc4ccf-6912-4a2f-9a23-0167286f80f3">
+  <producedTypes>
+   <objectType typeId="52027155-d3d7-47a6-a348-2f1e3565fd52" valueTypeId="e76a5076-dca1-4422-9ce2-454a4575ed2a"/>
+   <rowType typeId="f8a36e25-564e-4738-9db5-b35559d2868a" valueTypeId="0dc93300-5ae9-459d-a612-54df85454761"/>
+  </producedTypes>
+  <name>TestRexExpStrings</name>
+  <synonym>
+   <key>en</key>
+   <value>1CBFC1E6-E3C8-8A5B-BC6D-D9ABDD2BF3E3</value>
+  </synonym>
+  <attributes uuid="ea8ac1ce-d8b8-4241-9520-7d3f89bc4487">
+   <name>Row</name>
+   <synonym>
+    <key>en</key>
+    <value>961F83D0-AE44-66C1-14AF-FCBB9953E65D</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="c7bf7b7a-a6bc-4e89-a637-c169eb88e12d">
-    <name>UseForSetDescription</name>
-    <synonym>
-      <key>en</key>
-      <value>Use for set description</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="4d026058-95be-49d9-8d5d-22535137d5d6">
+  <producedTypes>
+   <objectType typeId="ef9bb67e-9c97-4ab4-b9c8-01c9d7e2545b" valueTypeId="e3dd4e58-dbc4-4191-8cae-8fc119fc03aa"/>
+   <rowType typeId="b0188f0f-0211-41ff-82d6-5060f30c0c88" valueTypeId="92c7b0b0-f962-4291-9e65-cf16148e8ec2"/>
+  </producedTypes>
+  <name>ResultMatches</name>
+  <synonym>
+   <key>en</key>
+   <value>43B51C9A-8E19-4A72-2051-1F1B7CC8258E</value>
+  </synonym>
+  <attributes uuid="75ff7e46-711b-4925-a975-1d906464e50e">
+   <name>Result</name>
+   <synonym>
+    <key>en</key>
+    <value>05B88FBA-6A0C-756E-E637-7B0A8BB1A9C7</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+    <types>String</types>
+    <types>Date</types>
+    <types>Number</types>
+    <types>AnyRef</types>
+    <numberQualifiers>
+     <precision>15</precision>
+     <scale>5</scale>
+    </numberQualifiers>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+    <dateQualifiers>
+     <dateFractions>Date</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="588b7e31-7bb9-4822-8c0c-869fb9c570d9">
-    <name>SafeModeIsOn</name>
-    <synonym>
-      <key>en</key>
-      <value>Safe mode</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:BooleanValue">
-      <value>true</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8b140890-f63c-4a8f-9473-316e3f8be9ac">
+   <name>RegExp</name>
+   <synonym>
+    <key>en</key>
+    <value>A8A0D764-9F33-7381-1126-6FAE2C8963ED</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>512</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="ecb16935-388e-425b-beb3-befdafec74e5">
-    <name>RegExp</name>
-    <synonym>
-      <key>en</key>
-      <value>Reg exp</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="eebf46fa-6260-4da5-a77f-91bf55fbe3e4">
-    <name>isSchedulerSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Use scheduler</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="89a60c17-6912-487b-8ad2-a6aca158c503">
-    <name>JobSchedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Job schedule</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="54f72cef-35c8-4bfa-ab44-dcd5887735f8">
-    <name>DifficultLevel</name>
-    <synonym>
-      <key>en</key>
-      <value>Difficult level</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>2</precision>
-        <nonNegative>true</nonNegative>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:NumberValue">
-      <value>1</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="74acdebf-b881-44d5-8282-3794cc659f28">
-    <name>ResultType</name>
-    <synonym>
-      <key>en</key>
-      <value>Result type</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="9cf09496-ab32-4028-a1f5-7c5e596dde84">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="66461f2c-9435-4e41-9867-5f80eb10acc2">
-    <producedTypes>
-      <objectType typeId="3717ba06-3797-4225-8757-37970637f40a" valueTypeId="07793604-6f9e-406f-ae2d-104ead5b1d08"/>
-      <rowType typeId="4519636d-6aab-4d9b-82aa-2a940535b205" valueTypeId="eebf8d63-d2d7-4046-b34b-186324973883"/>
-    </producedTypes>
-    <name>Parameters</name>
-    <synonym>
-      <key>en</key>
-      <value>Parameters</value>
-    </synonym>
-    <attributes uuid="985ab572-a12e-4acd-a488-6a585c596cc5">
-      <name>Name</name>
-      <synonym>
-        <key>en</key>
-        <value>Name</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="087e804a-82be-42ed-8353-5f2200342b4a">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Date</types>
-        <types>Number</types>
-        <types>AnyRef</types>
-        <numberQualifiers>
-          <precision>32</precision>
-          <scale>10</scale>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>1000</length>
-        </stringQualifiers>
-        <dateQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="eafc4ccf-6912-4a2f-9a23-0167286f80f3">
-    <producedTypes>
-      <objectType typeId="52027155-d3d7-47a6-a348-2f1e3565fd52" valueTypeId="e76a5076-dca1-4422-9ce2-454a4575ed2a"/>
-      <rowType typeId="f8a36e25-564e-4738-9db5-b35559d2868a" valueTypeId="0dc93300-5ae9-459d-a612-54df85454761"/>
-    </producedTypes>
-    <name>TestRexExpStrings</name>
-    <synonym>
-      <key>en</key>
-      <value>Test rex exp strings</value>
-    </synonym>
-    <attributes uuid="ea8ac1ce-d8b8-4241-9520-7d3f89bc4487">
-      <name>Row</name>
-      <synonym>
-        <key>en</key>
-        <value>Row</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="4d026058-95be-49d9-8d5d-22535137d5d6">
-    <producedTypes>
-      <objectType typeId="ef9bb67e-9c97-4ab4-b9c8-01c9d7e2545b" valueTypeId="e3dd4e58-dbc4-4191-8cae-8fc119fc03aa"/>
-      <rowType typeId="b0188f0f-0211-41ff-82d6-5060f30c0c88" valueTypeId="92c7b0b0-f962-4291-9e65-cf16148e8ec2"/>
-    </producedTypes>
-    <name>ResultMatches</name>
-    <synonym>
-      <key>en</key>
-      <value>Result matches</value>
-    </synonym>
-    <attributes uuid="75ff7e46-711b-4925-a975-1d906464e50e">
-      <name>Result</name>
-      <synonym>
-        <key>en</key>
-        <value>Result</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-        <types>String</types>
-        <types>Date</types>
-        <types>Number</types>
-        <types>AnyRef</types>
-        <numberQualifiers>
-          <precision>15</precision>
-          <scale>5</scale>
-        </numberQualifiers>
-        <stringQualifiers>
-          <length>512</length>
-        </stringQualifiers>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8b140890-f63c-4a8f-9473-316e3f8be9ac">
-      <name>RegExp</name>
-      <synonym>
-        <key>en</key>
-        <value>Reg exp</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>512</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="56cbceda-ba36-442e-ab3d-68f25ba61af1">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a8f8a55d-c387-4d5e-a841-a9a96d1d9435">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <templates uuid="ba6f83fa-1386-45eb-b272-927c49fc3686">
-    <name>RegExpAnalyse</name>
-    <synonym>
-      <key>en</key>
-      <value>Reg exp analyse</value>
-    </synonym>
-    <templateType>TextDocument</templateType>
-  </templates>
-  <commands uuid="0bc3f199-b30f-48d8-aa6a-16b299bf954b">
-    <name>PauseJob</name>
-    <synonym>
-      <key>en</key>
-      <value>Pause</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.ExternalFunctions</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <modifiesData>true</modifiesData>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCircleYellow</picture>
-    </picture>
-  </commands>
-  <commands uuid="b66f95f4-a979-4fb8-a84f-71cbb18a255f">
-    <name>ContinueJob</name>
-    <synonym>
-      <key>en</key>
-      <value>Continue</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.ExternalFunctions</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <modifiesData>true</modifiesData>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCircleGreen</picture>
-    </picture>
-  </commands>
-  <commands uuid="b7ae1118-fd50-4c95-a924-f568fdcec808">
-    <name>StopJob</name>
-    <synonym>
-      <key>en</key>
-      <value>Stop</value>
-    </synonym>
-    <group>FormCommandBarImportant</group>
-    <commandParameterType>
-      <types>CatalogRef.ExternalFunctions</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <modifiesData>true</modifiesData>
-    <representation>PictureAndText</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCrossIcon</picture>
-    </picture>
-  </commands>
+ </tabularSections>
+ <forms uuid="56cbceda-ba36-442e-ab3d-68f25ba61af1">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8B7B2EB8-D931-7FF8-85D3-30181B53270E</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a8f8a55d-c387-4d5e-a841-a9a96d1d9435">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1468CEE1-B63C-0954-44B9-9F2304246A9A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="ba6f83fa-1386-45eb-b272-927c49fc3686">
+  <name>RegExpAnalyse</name>
+  <synonym>
+   <key>en</key>
+   <value>A22FA86E-2549-409D-D2D0-02243F408856</value>
+  </synonym>
+  <templateType>TextDocument</templateType>
+ </templates>
+ <commands uuid="0bc3f199-b30f-48d8-aa6a-16b299bf954b">
+  <name>PauseJob</name>
+  <synonym>
+   <key>en</key>
+   <value>80709E53-C359-5F24-44CC-CDE93E1897A8</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.ExternalFunctions</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <modifiesData>true</modifiesData>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceCircleYellow</picture>
+  </picture>
+ </commands>
+ <commands uuid="b66f95f4-a979-4fb8-a84f-71cbb18a255f">
+  <name>ContinueJob</name>
+  <synonym>
+   <key>en</key>
+   <value>060B1F34-4FE7-D157-70B8-88B42D711B90</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.ExternalFunctions</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <modifiesData>true</modifiesData>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceCircleGreen</picture>
+  </picture>
+ </commands>
+ <commands uuid="b7ae1118-fd50-4c95-a924-f568fdcec808">
+  <name>StopJob</name>
+  <synonym>
+   <key>en</key>
+   <value>5E17F3A9-B6B8-8B28-80BF-FE3713856913</value>
+  </synonym>
+  <group>FormCommandBarImportant</group>
+  <commandParameterType>
+   <types>CatalogRef.ExternalFunctions</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <modifiesData>true</modifiesData>
+  <representation>PictureAndText</representation>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceCrossIcon</picture>
+  </picture>
+ </commands>
 </mdclass:Catalog>

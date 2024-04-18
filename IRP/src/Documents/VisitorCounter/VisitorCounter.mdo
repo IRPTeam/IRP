@@ -1,252 +1,252 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="037698ec-5fd5-49b5-81f0-aacc0bf56ba9">
-  <producedTypes>
-    <objectType typeId="2e0b3707-7889-425e-a71d-b76b25da9402" valueTypeId="454f705c-0729-4eb6-92a7-befcda59f3aa"/>
-    <refType typeId="dcd77930-9442-4562-a325-36c506eee8b9" valueTypeId="c48e5a25-faa2-4466-b680-20cddbb18905"/>
-    <selectionType typeId="73a11990-be5b-4c9c-8cee-e0bfd0178612" valueTypeId="fec74d34-c2c8-407c-abc9-218fc6b57022"/>
-    <listType typeId="1e57d0ae-b484-4708-b32c-5fbfc1e1ceb7" valueTypeId="ffd09730-436b-4041-a22f-329fc025aec0"/>
-    <managerType typeId="ffe6f78d-3419-46dc-a686-cfffdfe3fe39" valueTypeId="b5de9f32-d6e9-4c1a-b9a1-f3105a0f506c"/>
-  </producedTypes>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="037698ec-5fd5-49b5-81f0-aacc0bf56ba9">
+ <producedTypes>
+  <objectType typeId="2e0b3707-7889-425e-a71d-b76b25da9402" valueTypeId="454f705c-0729-4eb6-92a7-befcda59f3aa"/>
+  <refType typeId="dcd77930-9442-4562-a325-36c506eee8b9" valueTypeId="c48e5a25-faa2-4466-b680-20cddbb18905"/>
+  <selectionType typeId="73a11990-be5b-4c9c-8cee-e0bfd0178612" valueTypeId="fec74d34-c2c8-407c-abc9-218fc6b57022"/>
+  <listType typeId="1e57d0ae-b484-4708-b32c-5fbfc1e1ceb7" valueTypeId="ffd09730-436b-4041-a22f-329fc025aec0"/>
+  <managerType typeId="ffe6f78d-3419-46dc-a686-cfffdfe3fe39" valueTypeId="b5de9f32-d6e9-4c1a-b9a1-f3105a0f506c"/>
+ </producedTypes>
+ <name>VisitorCounter</name>
+ <synonym>
+  <key>en</key>
+  <value>A1370389-43C2-4A2B-BC57-713FA929939E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.VisitorCounter.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_VisitorCounter</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.VisitorCounter.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_VisitorCounter</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>F20760EA-D95B-D5FD-D18A-A4E6E86F8248</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>DACBB497-76F9-6A6A-A6E6-6E295F1A2DDC</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.VisitorCounter.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.VisitorCounter.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.VisitorCounter.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>8DC4BA58-F4C2-CD94-4164-478AC048BA48</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="440cf36e-853d-418a-9925-8419c15844ad">
+  <name>Store</name>
+  <synonym>
+   <key>en</key>
+   <value>F226158A-CA98-8A0D-DF8B-B36584D16BD6</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e7a47292-71d4-4917-aef6-96954b0133ad">
   <name>VisitorCounter</name>
   <synonym>
-    <key>en</key>
-    <value>Visitor counter</value>
+   <key>en</key>
+   <value>4A0CBB8A-21E5-15A1-1B94-4DBDC0DCD63C</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.VisitorCounter.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_VisitorCounter</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.VisitorCounter.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_VisitorCounter</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IntegrationType</name>
+   <value xsi:type="core:ReferenceValue">
+    <value>Enum.IntegrationType.EnumValue.VisitorCounter</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="441fafca-f4d9-4a0a-9c65-0a23f79c46d6">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>3923A00E-C238-8D8C-CE8D-D606D4849C30</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="9f5607c9-ffb2-4463-9536-f2d4bdafcc95">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6F5E6B8E-4FD5-CD05-5265-50DB64AE9EB2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c914a723-7231-49fe-8826-9b297e951822">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>54BC0E05-B20F-D2EF-F646-6D6FF5060AE3</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="709f07e6-15da-4ec2-a53f-19a4babae179">
+  <producedTypes>
+   <objectType typeId="c194de75-0d43-4a32-bfbf-69e8e145ed57" valueTypeId="ce7156ae-9609-4217-ade8-d76f3c5be3a8"/>
+   <rowType typeId="482d26f4-e646-4457-b719-e17da6b383e2" valueTypeId="9c7061b0-d778-4320-aabb-91af5eadf846"/>
+  </producedTypes>
+  <name>CounterData</name>
+  <synonym>
+   <key>en</key>
+   <value>C1A1046B-10E6-A88A-AB53-31190D9C54F4</value>
+  </synonym>
+  <attributes uuid="e61fe969-6c63-4c1b-bc1a-8cc6934a58fe">
+   <name>Time</name>
+   <synonym>
     <key>en</key>
-    <value>Visitor counter</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>40DD680C-C428-0B1F-F036-6812B6302A01</value>
+   </synonym>
+   <type>
+    <types>Date</types>
+    <dateQualifiers>
+     <dateFractions>Time</dateFractions>
+    </dateQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="11136aca-0601-42b1-93a8-78513a409ae1">
+   <name>In</name>
+   <synonym>
     <key>en</key>
-    <value>Visitor counters</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.VisitorCounter.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.VisitorCounter.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.VisitorCounter.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>C0D75FF5-A108-3457-7E40-035F938B3BB4</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>5</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="440cf36e-853d-418a-9925-8419c15844ad">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="39788a8b-beed-4bdc-90c5-c2e6f2bc2f72">
+   <name>Out</name>
+   <synonym>
+    <key>en</key>
+    <value>B654C0EC-85D2-D3B9-9D1E-E791A2DF4C6C</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>5</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="e7a47292-71d4-4917-aef6-96954b0133ad">
-    <name>VisitorCounter</name>
-    <synonym>
-      <key>en</key>
-      <value>Visitor counter</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.IntegrationType</name>
-      <value xsi:type="core:ReferenceValue">
-        <value>Enum.IntegrationType.EnumValue.VisitorCounter</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+ </tabularSections>
+ <tabularSections uuid="1f640810-cc13-41ee-9159-977ea2c13414">
+  <producedTypes>
+   <objectType typeId="f3537b98-adcf-42db-b7fe-73464f161266" valueTypeId="b7db2bc3-aa57-430f-8744-4f5f77bb4361"/>
+   <rowType typeId="53d236ee-7732-4bbd-9f09-e2d9c7c3d64f" valueTypeId="83552b91-1c1a-4453-8fe8-4cb3f36a41c0"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>8B657E16-49BC-6B6D-D5C0-021CDCE088C7</value>
+  </synonym>
+  <attributes uuid="7ebbcf9b-2f69-4cb5-9474-9c1977582f93">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>A5EDE31D-6F78-A8EB-B555-5C9E2A82523C</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="441fafca-f4d9-4a0a-9c65-0a23f79c46d6">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="9f5607c9-ffb2-4463-9536-f2d4bdafcc95">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c914a723-7231-49fe-8826-9b297e951822">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="709f07e6-15da-4ec2-a53f-19a4babae179">
-    <producedTypes>
-      <objectType typeId="c194de75-0d43-4a32-bfbf-69e8e145ed57" valueTypeId="ce7156ae-9609-4217-ade8-d76f3c5be3a8"/>
-      <rowType typeId="482d26f4-e646-4457-b719-e17da6b383e2" valueTypeId="9c7061b0-d778-4320-aabb-91af5eadf846"/>
-    </producedTypes>
-    <name>CounterData</name>
-    <synonym>
-      <key>en</key>
-      <value>Counter data</value>
-    </synonym>
-    <attributes uuid="e61fe969-6c63-4c1b-bc1a-8cc6934a58fe">
-      <name>Time</name>
-      <synonym>
-        <key>en</key>
-        <value>Time</value>
-      </synonym>
-      <type>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Time</dateFractions>
-        </dateQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="11136aca-0601-42b1-93a8-78513a409ae1">
-      <name>In</name>
-      <synonym>
-        <key>en</key>
-        <value>In</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>5</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="39788a8b-beed-4bdc-90c5-c2e6f2bc2f72">
-      <name>Out</name>
-      <synonym>
-        <key>en</key>
-        <value>Out</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>5</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="1f640810-cc13-41ee-9159-977ea2c13414">
-    <producedTypes>
-      <objectType typeId="f3537b98-adcf-42db-b7fe-73464f161266" valueTypeId="b7db2bc3-aa57-430f-8744-4f5f77bb4361"/>
-      <rowType typeId="53d236ee-7732-4bbd-9f09-e2d9c7c3d64f" valueTypeId="83552b91-1c1a-4453-8fe8-4cb3f36a41c0"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="7ebbcf9b-2f69-4cb5-9474-9c1977582f93">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="b270cdf2-8a4a-4efb-9ef5-760a1e024660">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="b270cdf2-8a4a-4efb-9ef5-760a1e024660">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>C5A2F862-9D6D-C042-2D08-8EE554BA7830</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

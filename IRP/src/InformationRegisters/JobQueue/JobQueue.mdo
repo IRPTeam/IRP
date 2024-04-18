@@ -1,222 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="89a02701-d50f-4478-8eef-c30a2f365536">
-  <producedTypes>
-    <selectionType typeId="276b08be-7b6f-4402-b5db-6f3d4fed2a68" valueTypeId="b72d6744-ed24-4be5-99b7-4db7a0734da4"/>
-    <listType typeId="3618fbbb-6cec-444a-8316-5ef7ff1b3b37" valueTypeId="6fc95f59-43a7-420f-b5c0-fffa381f222c"/>
-    <managerType typeId="20b45ce3-bd05-4aa0-a373-dde1322d7080" valueTypeId="038f0d06-f8c4-4d58-b041-4200ea18d3aa"/>
-    <recordSetType typeId="10ca64ea-8d75-4ff2-9a92-17f3ae9034df" valueTypeId="9c22c30b-d1c6-421a-96f3-fd2484bebf8b"/>
-    <recordKeyType typeId="2836dacd-dedd-4ad4-b80c-ec78f856069f" valueTypeId="f2ccbf98-d190-442f-be5e-13e411b0cf09"/>
-    <recordType typeId="8b9ccea5-7920-4b12-aea5-1965c4418147" valueTypeId="b0e8973c-4839-48b9-94b4-d9d7c87b8bc8"/>
-    <recordManagerType typeId="fc7d9148-5368-4bad-a7c2-a42021581e44" valueTypeId="255a3759-9465-42b4-8147-b2d3d5c2a246"/>
-  </producedTypes>
-  <name>JobQueue</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="89a02701-d50f-4478-8eef-c30a2f365536">
+ <producedTypes>
+  <selectionType typeId="276b08be-7b6f-4402-b5db-6f3d4fed2a68" valueTypeId="b72d6744-ed24-4be5-99b7-4db7a0734da4"/>
+  <listType typeId="3618fbbb-6cec-444a-8316-5ef7ff1b3b37" valueTypeId="6fc95f59-43a7-420f-b5c0-fffa381f222c"/>
+  <managerType typeId="20b45ce3-bd05-4aa0-a373-dde1322d7080" valueTypeId="038f0d06-f8c4-4d58-b041-4200ea18d3aa"/>
+  <recordSetType typeId="10ca64ea-8d75-4ff2-9a92-17f3ae9034df" valueTypeId="9c22c30b-d1c6-421a-96f3-fd2484bebf8b"/>
+  <recordKeyType typeId="2836dacd-dedd-4ad4-b80c-ec78f856069f" valueTypeId="f2ccbf98-d190-442f-be5e-13e411b0cf09"/>
+  <recordType typeId="8b9ccea5-7920-4b12-aea5-1965c4418147" valueTypeId="b0e8973c-4839-48b9-94b4-d9d7c87b8bc8"/>
+  <recordManagerType typeId="fc7d9148-5368-4bad-a7c2-a42021581e44" valueTypeId="255a3759-9465-42b4-8147-b2d3d5c2a246"/>
+ </producedTypes>
+ <name>JobQueue</name>
+ <synonym>
+  <key>en</key>
+  <value>5F92768F-1ABD-4D1E-E10D-D01159BDB50C</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.JobQueue.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <mainFilterOnPeriod>true</mainFilterOnPeriod>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSliceLast>true</enableTotalsSliceLast>
+ <recordPresentation>
+  <key>en</key>
+  <value>3F490AEC-8909-ECC5-56F2-2D65FC7953DA</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>C4D62F7E-7D36-2999-953F-FE838E1CD592</value>
+ </listPresentation>
+ <resources uuid="afa41998-e59b-4515-88c2-453f7cd946f4">
+  <name>Start</name>
   <synonym>
-    <key>en</key>
-    <value>Job queue</value>
+   <key>en</key>
+   <value>3C9F21F7-5450-1C5B-B570-03B2201B0E78</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.JobQueue.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <mainFilterOnPeriod>true</mainFilterOnPeriod>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSliceLast>true</enableTotalsSliceLast>
-  <recordPresentation>
-    <key>en</key>
-    <value>Job queue</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Job queue</value>
-  </listPresentation>
-  <resources uuid="afa41998-e59b-4515-88c2-453f7cd946f4">
-    <name>Start</name>
-    <synonym>
-      <key>en</key>
-      <value>Start</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="7dc8d47a-7488-4c95-b5ab-70dcfd006bd4">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>EnumRef.JobStatus</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="8a8f7f6f-2c93-436c-9ea3-83913c66702d">
-    <name>Description</name>
-    <synonym>
-      <key>en</key>
-      <value>Description</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="56209d99-5c5e-4b8e-9666-54c7296fdd0c">
-    <name>Finish</name>
-    <synonym>
-      <key>en</key>
-      <value>Finish</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="23b184b3-3590-465c-96fa-1d1980c0b3be">
-    <name>DifficultLevel</name>
-    <synonym>
-      <key>en</key>
-      <value>Difficult level</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>2</precision>
-        <nonNegative>true</nonNegative>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:NumberValue">
-      <value>1</value>
-    </fillValue>
-  </resources>
-  <resources uuid="43cd7830-c0c8-4beb-bf5a-84ac1a3a42e2">
-    <name>Log</name>
-    <synonym>
-      <key>en</key>
-      <value>Log</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="2635ce90-d1a4-4f9d-a87a-adb0436c8814">
-    <name>Result</name>
-    <synonym>
-      <key>en</key>
-      <value>Result</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="60bca419-4713-4d7d-82d5-e563e8c6bd2f">
-    <name>Parameters</name>
-    <synonym>
-      <key>en</key>
-      <value>Parameters</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="a92db30e-38ae-4e71-aec4-ff2c56b89927">
-    <name>JobID</name>
-    <synonym>
-      <key>en</key>
-      <value>Job ID</value>
-    </synonym>
-    <type>
-      <types>UUID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="8de45f02-ecf0-4beb-9b4c-5202ff37381c">
-    <name>UserMessages</name>
-    <synonym>
-      <key>en</key>
-      <value>User messages</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="7926796a-9514-4e88-b937-c4749c2931ce">
-    <name>Job</name>
-    <synonym>
-      <key>en</key>
-      <value>Job</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExternalFunctions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="6241f184-55c6-42b6-8c68-1574730957bb">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="7dc8d47a-7488-4c95-b5ab-70dcfd006bd4">
+  <name>Status</name>
+  <synonym>
+   <key>en</key>
+   <value>90C8B787-C413-6496-64D6-64A5B958C302</value>
+  </synonym>
+  <type>
+   <types>EnumRef.JobStatus</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="8a8f7f6f-2c93-436c-9ea3-83913c66702d">
+  <name>Description</name>
+  <synonym>
+   <key>en</key>
+   <value>286AB005-6011-B44E-E229-9549C8744987</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="56209d99-5c5e-4b8e-9666-54c7296fdd0c">
+  <name>Finish</name>
+  <synonym>
+   <key>en</key>
+   <value>F8087257-AF39-63E4-4A1D-DA16D7CCC096</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="23b184b3-3590-465c-96fa-1d1980c0b3be">
+  <name>DifficultLevel</name>
+  <synonym>
+   <key>en</key>
+   <value>0BAF9730-73B2-5B81-1EFF-F9EDE6ED82C9</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>2</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:NumberValue">
+   <value>1</value>
+  </fillValue>
+ </resources>
+ <resources uuid="43cd7830-c0c8-4beb-bf5a-84ac1a3a42e2">
+  <name>Log</name>
+  <synonym>
+   <key>en</key>
+   <value>02CDDB55-A8C5-50A7-7A85-59C98E692932</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="2635ce90-d1a4-4f9d-a87a-adb0436c8814">
+  <name>Result</name>
+  <synonym>
+   <key>en</key>
+   <value>995100ED-74C4-0776-6B91-1279143EC428</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="60bca419-4713-4d7d-82d5-e563e8c6bd2f">
+  <name>Parameters</name>
+  <synonym>
+   <key>en</key>
+   <value>DD658DFC-32FC-AADC-CE9B-B2672209828D</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="a92db30e-38ae-4e71-aec4-ff2c56b89927">
+  <name>JobID</name>
+  <synonym>
+   <key>en</key>
+   <value>B30436C7-9DB4-5DB4-4CED-DB8C95287C45</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="8de45f02-ecf0-4beb-9b4c-5202ff37381c">
+  <name>UserMessages</name>
+  <synonym>
+   <key>en</key>
+   <value>4A7D7204-EEB2-13B0-0185-5B6552F6AA8A</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="7926796a-9514-4e88-b937-c4749c2931ce">
+  <name>Job</name>
+  <synonym>
+   <key>en</key>
+   <value>07FAD33F-D111-C529-9463-361BE69A4FF1</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExternalFunctions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="6241f184-55c6-42b6-8c68-1574730957bb">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>BE7C6421-0B2C-BC0A-A336-6B2245512DBC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

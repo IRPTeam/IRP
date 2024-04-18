@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8c7244b6-5c41-474d-aa27-0e1ae3d2e862">
-  <name>DocAdditionalAccrualServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc additional accrual server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocAdditionalAccrualServer</name>
+ <synonym>
+  <key>en</key>
+  <value>A07FDE93-4565-D4A3-33F5-57C5E8A15CA4</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6fedb7bf-518b-4635-b649-d1e0f2156575">
-  <name>OffersServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Offers server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>OffersServer</name>
+ <synonym>
+  <key>en</key>
+  <value>68F137A6-43DF-62AD-D5A1-10BF2936E256</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

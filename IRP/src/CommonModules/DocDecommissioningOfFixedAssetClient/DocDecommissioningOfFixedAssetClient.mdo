@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef298191-d780-435f-96df-32b0fa3ef767">
-  <name>DocDecommissioningOfFixedAssetClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc decommissioning of fixed asset client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocDecommissioningOfFixedAssetClient</name>
+ <synonym>
+  <key>en</key>
+  <value>C2BE3EC8-79B5-768D-D39F-F008CBFB681B_____</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

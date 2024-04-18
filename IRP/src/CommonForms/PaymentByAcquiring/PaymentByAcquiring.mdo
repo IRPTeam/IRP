@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4a2b6aa-7697-4178-9ded-9f0ff2e504e1">
-  <name>PaymentByAcquiring</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment by acquiring</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>PaymentByAcquiring</name>
+ <synonym>
+  <key>en</key>
+  <value>2E17A684-3AE1-EEBB-BB87-7F28E4935401</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96412010-985a-413e-a010-697461c2c54f">
-  <name>Payment_CancelPaymentByPaymentCard</name>
-  <synonym>
-    <key>en</key>
-    <value>Payment cancel payment by payment card</value>
-  </synonym>
+ <name>Payment_CancelPaymentByPaymentCard</name>
+ <synonym>
+  <key>en</key>
+  <value>92645A81-3CE4-5869-94AA-ACAF0BF4B0EA__</value>
+ </synonym>
 </mdclass:CommonPicture>

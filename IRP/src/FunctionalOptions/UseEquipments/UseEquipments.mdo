@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="681c7feb-14cb-46fa-8481-c57cde0c62e7">
-  <name>UseEquipments</name>
-  <synonym>
-    <key>en</key>
-    <value>Use equipments</value>
-  </synonym>
-  <location>Constant.UseEquipments</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.EquipmentDrivers</content>
-  <content>Catalog.Workstations</content>
-  <content>Catalog.Hardware</content>
+ <name>UseEquipments</name>
+ <synonym>
+  <key>en</key>
+  <value>9D3C7A19-6BD1-5B0C-CEEC-C0C01B76848B</value>
+ </synonym>
+ <location>Constant.UseEquipments</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.EquipmentDrivers</content>
+ <content>Catalog.Workstations</content>
+ <content>Catalog.Hardware</content>
 </mdclass:FunctionalOption>

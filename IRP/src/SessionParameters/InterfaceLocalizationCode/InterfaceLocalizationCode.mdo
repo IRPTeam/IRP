@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4551d333-28aa-4955-ba7c-cab126c54876">
-  <name>InterfaceLocalizationCode</name>
-  <synonym>
-    <key>en</key>
-    <value>Interface localization code</value>
-  </synonym>
-  <type>
-    <types>String</types>
-    <stringQualifiers>
-      <length>5</length>
-    </stringQualifiers>
-  </type>
+ <name>InterfaceLocalizationCode</name>
+ <synonym>
+  <key>en</key>
+  <value>29C82824-2F8B-74CD-DEFD-DEF4EDFF6E0B</value>
+ </synonym>
+ <type>
+  <types>String</types>
+  <stringQualifiers>
+   <length>5</length>
+  </stringQualifiers>
+ </type>
 </mdclass:SessionParameter>

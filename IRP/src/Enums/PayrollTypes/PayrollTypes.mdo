@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="494e61ca-1718-466b-b1b1-c3b051b59098">
-  <producedTypes>
-    <refType typeId="b9edc9ee-6e1b-491f-b2c3-c99da9f85e40" valueTypeId="6bb4c895-387d-4116-9652-22db623cf877"/>
-    <listType typeId="6eee19ef-3900-4465-9e83-9dd85c5453e2" valueTypeId="6d364a49-63c3-4eec-b1d7-640acd4d51c0"/>
-    <managerType typeId="10f3b969-8dde-4936-8206-b59103cb16a9" valueTypeId="34d3b67f-799b-4482-9f07-48e0f30cdefa"/>
-  </producedTypes>
-  <name>PayrollTypes</name>
+ <producedTypes>
+  <refType typeId="b9edc9ee-6e1b-491f-b2c3-c99da9f85e40" valueTypeId="6bb4c895-387d-4116-9652-22db623cf877"/>
+  <listType typeId="6eee19ef-3900-4465-9e83-9dd85c5453e2" valueTypeId="6d364a49-63c3-4eec-b1d7-640acd4d51c0"/>
+  <managerType typeId="10f3b969-8dde-4936-8206-b59103cb16a9" valueTypeId="34d3b67f-799b-4482-9f07-48e0f30cdefa"/>
+ </producedTypes>
+ <name>PayrollTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>3C320018-45D1-5BFE-E27D-DE9FC54D5E19</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="cf1ad9c3-dfbd-4d72-bfe4-01866cbe8acf">
+  <name>Accrual</name>
   <synonym>
-    <key>en</key>
-    <value>Payroll types</value>
+   <key>en</key>
+   <value>6E472E84-FB72-D5BF-F7E0-0D948B7156D5</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="cf1ad9c3-dfbd-4d72-bfe4-01866cbe8acf">
-    <name>Accrual</name>
-    <synonym>
-      <key>en</key>
-      <value>Accrual</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="fd46c290-1097-4a65-bc8e-1ace19f33252">
-    <name>Deduction</name>
-    <synonym>
-      <key>en</key>
-      <value>Deduction</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bce661b5-d0cb-46b0-911d-892bf411a1cc">
-    <name>CashAdvanceDeductions</name>
-    <synonym>
-      <key>en</key>
-      <value>Cash advance deductions</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="fd46c290-1097-4a65-bc8e-1ace19f33252">
+  <name>Deduction</name>
+  <synonym>
+   <key>en</key>
+   <value>27694E9A-9977-437F-F4CE-E8B466CBAE55</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bce661b5-d0cb-46b0-911d-892bf411a1cc">
+  <name>CashAdvanceDeductions</name>
+  <synonym>
+   <key>en</key>
+   <value>9AFAFA4B-791D-F0FB-B193-3B914B30D86C</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

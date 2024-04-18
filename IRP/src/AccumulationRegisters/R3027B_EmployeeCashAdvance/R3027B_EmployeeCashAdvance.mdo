@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2a1dcfc5-bb12-4fa1-ac53-2c7fc15b02ee">
-  <producedTypes>
-    <selectionType typeId="e9671c64-7a22-4238-b530-17d0d06a037d" valueTypeId="d39091a8-669b-426a-880b-aa52de22d228"/>
-    <listType typeId="19d3ad3c-f3f6-4708-b74d-7ab786be1f15" valueTypeId="517138d2-8bd1-4cae-bb1c-41b1654de573"/>
-    <managerType typeId="264ad529-e564-4100-8029-e43ff9786e8c" valueTypeId="b919ba59-f91c-4b23-a126-269591e205d3"/>
-    <recordSetType typeId="61b9b140-89cc-421f-a056-cf321bc8b9b3" valueTypeId="865aa518-e52a-4440-a217-0acd8413bb5e"/>
-    <recordKeyType typeId="9ae34602-cef8-464a-9834-aabd4b356f3d" valueTypeId="894bd789-4222-460f-8a72-19615e1ce9f2"/>
-    <recordType typeId="6486b4a0-3c24-46b4-b660-a5b0026c4dcb" valueTypeId="54db49cb-4452-441b-8e1e-3a8da65e1456"/>
-  </producedTypes>
-  <name>R3027B_EmployeeCashAdvance</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2a1dcfc5-bb12-4fa1-ac53-2c7fc15b02ee">
+ <producedTypes>
+  <selectionType typeId="e9671c64-7a22-4238-b530-17d0d06a037d" valueTypeId="d39091a8-669b-426a-880b-aa52de22d228"/>
+  <listType typeId="19d3ad3c-f3f6-4708-b74d-7ab786be1f15" valueTypeId="517138d2-8bd1-4cae-bb1c-41b1654de573"/>
+  <managerType typeId="264ad529-e564-4100-8029-e43ff9786e8c" valueTypeId="b919ba59-f91c-4b23-a126-269591e205d3"/>
+  <recordSetType typeId="61b9b140-89cc-421f-a056-cf321bc8b9b3" valueTypeId="865aa518-e52a-4440-a217-0acd8413bb5e"/>
+  <recordKeyType typeId="9ae34602-cef8-464a-9834-aabd4b356f3d" valueTypeId="894bd789-4222-460f-8a72-19615e1ce9f2"/>
+  <recordType typeId="6486b4a0-3c24-46b4-b660-a5b0026c4dcb" valueTypeId="54db49cb-4452-441b-8e1e-3a8da65e1456"/>
+ </producedTypes>
+ <name>R3027B_EmployeeCashAdvance</name>
+ <synonym>
+  <key>en</key>
+  <value>4E87B20D-8DD7-98BB-B9CC-C6757565894A</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="b6bf6f7d-207f-4688-8d96-e6de0e2f6193">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R3027 Employee cash advance</value>
+   <key>en</key>
+   <value>69CFEFBD-7A9B-E03F-F6AD-DD5C9F0684F3</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="b6bf6f7d-207f-4688-8d96-e6de0e2f6193">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="5e947daa-ef48-495b-931b-5570725e1b17">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="4033391a-2d06-4025-a52f-b933fe6fc5ff">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="94f2251b-0bf3-4dfc-8857-d9bc7f15e853">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="6f393e4c-ef01-42b1-bfac-78d6de246a72">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="a2008d4b-5c5d-4c50-9ea7-c75f6bca8084">
-    <name>TransactionCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3283efc8-7f76-4d75-8982-7006e6512cc9">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="0fc622b3-9e2c-4366-b474-99fcea78a387">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="5e947daa-ef48-495b-931b-5570725e1b17">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>en</key>
+   <value>E4474257-1527-2D5A-A80F-FD8B7DE8D6AA</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="4033391a-2d06-4025-a52f-b933fe6fc5ff">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>C92ADAA0-F2B7-080E-EF17-78E4FA96DFBE</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="94f2251b-0bf3-4dfc-8857-d9bc7f15e853">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>E0D9C14F-7D86-4B57-7EAF-F7EDD60E1E8B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="6f393e4c-ef01-42b1-bfac-78d6de246a72">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>95297D35-81F8-66FB-BA22-2B32FFF3BDF1</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="a2008d4b-5c5d-4c50-9ea7-c75f6bca8084">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>E1B7A0A9-AFA4-D8AD-DC1E-E089AF97724E</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3283efc8-7f76-4d75-8982-7006e6512cc9">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>E6D0FD26-A8C1-78C2-24C4-434EA02A3E36</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="0fc622b3-9e2c-4366-b474-99fcea78a387">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>C08DCC92-DA36-5C02-2364-4A3768BA0835</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

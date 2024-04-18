@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ea8e0a97-ed3e-4573-a61e-332f8c02f5cb">
-  <name>DataVersioningServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Data versioning server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>DataVersioningServer</name>
+ <synonym>
+  <key>en</key>
+  <value>193686C9-9349-DE25-5818-8D9BD816D0E7</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

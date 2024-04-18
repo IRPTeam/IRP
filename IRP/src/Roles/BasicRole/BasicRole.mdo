@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="115c3806-859b-4aff-971b-97b14ae7e7e1">
-  <name>BasicRole</name>
-  <synonym>
-    <key>en</key>
-    <value>Basic role</value>
-  </synonym>
-  <comment>Basic role, with this role - user can login to database</comment>
+ <name>BasicRole</name>
+ <synonym>
+  <key>en</key>
+  <value>C2730004-625B-EC89-9F24-4495C27F126E</value>
+ </synonym>
+ <comment>Basic role, with this role - user can login to database</comment>
 </mdclass:Role>

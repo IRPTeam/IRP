@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4fba8a5-ca17-43a7-823b-34e7c261939e">
-  <name>DocOrderClosingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc order closing server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocOrderClosingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>5BCE89CA-8F41-9083-345F-F2D831F017EE</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

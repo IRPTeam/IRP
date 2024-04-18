@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="602d417c-1e9b-44eb-95d3-81572f2a9722">
-  <name>ControlCodeStringsClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Control code strings client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>ControlCodeStringsClient</name>
+ <synonym>
+  <key>en</key>
+  <value>65702858-16C9-30B2-2543-3DFC66923070</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

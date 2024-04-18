@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="898129ff-d340-462e-b4a5-6400adc8802f">
-  <name>PhysicalCount</name>
-  <synonym>
-    <key>en</key>
-    <value>Physical count</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.PhysicalCountByLocation</content>
-  <content>Document.PhysicalInventory</content>
-  <content>Document.StockAdjustmentAsSurplus</content>
-  <content>Document.StockAdjustmentAsWriteOff</content>
-  <parentSubsystem>Subsystem.Inventory</parentSubsystem>
+ <name>PhysicalCount</name>
+ <synonym>
+  <key>en</key>
+  <value>FAC6CF60-D270-C3FE-EEB8-8F16D991AF63</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.PhysicalCountByLocation</content>
+ <content>Document.PhysicalInventory</content>
+ <content>Document.StockAdjustmentAsSurplus</content>
+ <content>Document.StockAdjustmentAsWriteOff</content>
+ <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

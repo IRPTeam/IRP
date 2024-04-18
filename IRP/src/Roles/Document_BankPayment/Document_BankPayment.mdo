@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="112df6ac-2724-4b0f-873c-e5cc8fe98bd7">
-  <name>Document_BankPayment</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Bank payment&quot;</value>
-  </synonym>
+ <name>Document_BankPayment</name>
+ <synonym>
+  <key>en</key>
+  <value>775C089E-356B-C210-01E8-821036E6118A</value>
+ </synonym>
 </mdclass:Role>

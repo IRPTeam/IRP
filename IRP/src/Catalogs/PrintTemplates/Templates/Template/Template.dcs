@@ -12,7 +12,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item</v8:content>
+					<v8:content>9B617756-A428-6913-3B97-7F12238855CE</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -25,7 +25,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item Key</v8:content>
+					<v8:content>492A340E-D672-CCD6-6131-1D42CE158EF8</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -38,7 +38,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode</v8:content>
+					<v8:content>49A93B1D-A2EF-1FE4-4DC1-1723BD579B50</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -51,7 +51,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Price</v8:content>
+					<v8:content>139FCA31-1A0F-E735-52AC-CBC8390C10B1</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Unit</v8:content>
+					<v8:content>29788AF8-4DDA-6B89-9125-5D8677DF1BFC</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -77,7 +77,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode type</v8:content>
+					<v8:content>24F6A312-DC7A-D0D3-380A-AA3597A9EED6</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -94,7 +94,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Quantity</v8:content>
+					<v8:content>E81DF79D-6608-E581-1104-4925E8D1CDD7</v8:content>
 				</v8:item>
 			</title>
 			<valueType>
@@ -109,7 +109,7 @@
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>5A763DED-76DA-B6B2-23A8-827E881E06DA</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

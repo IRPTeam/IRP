@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="efb76d24-632d-49b6-aeb3-eff5d27690bd">
-  <name>LockDataModificationPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Lock data modification privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>LockDataModificationPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>C29F3833-3FAB-F69A-AFBF-FB95D0808A39</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

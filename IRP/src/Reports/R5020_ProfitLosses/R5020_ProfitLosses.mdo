@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3624a621-816f-4977-aa5d-a749b61f9f1f">
-  <producedTypes>
-    <objectType typeId="22d9142e-513c-43fb-9dc9-104af76d9f61" valueTypeId="f1834bb0-57ce-42ac-84a2-346fad6ca4f2"/>
-    <managerType typeId="ccbf392e-3c58-437f-be0b-be43bdd7b223" valueTypeId="ad43485e-fbee-40d9-ae7a-48d09f19c71f"/>
-  </producedTypes>
-  <name>R5020_ProfitLosses</name>
+ <producedTypes>
+  <objectType typeId="22d9142e-513c-43fb-9dc9-104af76d9f61" valueTypeId="f1834bb0-57ce-42ac-84a2-346fad6ca4f2"/>
+  <managerType typeId="ccbf392e-3c58-437f-be0b-be43bdd7b223" valueTypeId="ad43485e-fbee-40d9-ae7a-48d09f19c71f"/>
+ </producedTypes>
+ <name>R5020_ProfitLosses</name>
+ <synonym>
+  <key>en</key>
+  <value>E7805C11-73A6-6DC8-8E44-425A9A6CF277</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R5020_ProfitLosses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="408430a1-1df5-41b3-a048-b77ecfd0fe98">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R5020 Profit losses</value>
+   <key>en</key>
+   <value>D0A02979-0CC1-2172-2652-293DE9162F4E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R5020_ProfitLosses.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="408430a1-1df5-41b3-a048-b77ecfd0fe98">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

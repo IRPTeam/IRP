@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1de8be47-5de8-4145-ba7b-e73cc1bd03aa">
-  <name>Document_BankReceipt</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Bank receipt&quot;</value>
-  </synonym>
+ <name>Document_BankReceipt</name>
+ <synonym>
+  <key>en</key>
+  <value>8CE2DFC7-395F-CB06-6CFC-C25B9C11FFD8</value>
+ </synonym>
 </mdclass:Role>

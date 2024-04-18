@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7bd60864-7e04-45ca-bf95-c7f863fd43d7">
-  <name>ObjectAccess</name>
-  <synonym>
-    <key>en</key>
-    <value>Object access</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.ObjectAccessKeys</content>
-  <content>DefinedType.typeAccessDocument</content>
-  <content>EventSubscription.BeforeWrite_ObjectAccessDocument</content>
-  <content>Constant.UseObjectAccess</content>
-  <content>FunctionalOption.UseObjectAccess</content>
-  <content>Role.TemplateDocument</content>
-  <content>SessionParameter.CurrentUserAccessGroupList</content>
-  <content>Role.TemplateAccumulationRegisters</content>
-  <content>InformationRegister.T9101A_ObjectAccessRegisters</content>
-  <content>Role.TemplateCatalogs</content>
-  <content>Catalog.AccessKey</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>ObjectAccess</name>
+ <synonym>
+  <key>en</key>
+  <value>CC018777-0537-1D46-6BEA-A520C62E79EA</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.ObjectAccessKeys</content>
+ <content>DefinedType.typeAccessDocument</content>
+ <content>EventSubscription.BeforeWrite_ObjectAccessDocument</content>
+ <content>Constant.UseObjectAccess</content>
+ <content>FunctionalOption.UseObjectAccess</content>
+ <content>Role.TemplateDocument</content>
+ <content>SessionParameter.CurrentUserAccessGroupList</content>
+ <content>Role.TemplateAccumulationRegisters</content>
+ <content>InformationRegister.T9101A_ObjectAccessRegisters</content>
+ <content>Role.TemplateCatalogs</content>
+ <content>Catalog.AccessKey</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

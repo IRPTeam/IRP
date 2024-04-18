@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7076692e-c6ca-4f47-bf88-939e77bd444c">
-  <producedTypes>
-    <containerType typeId="fe2288f5-1865-41d0-b56c-9b6501fa833a" valueTypeId="4f56efcf-13ab-49c4-99f9-e9b99d6cb3a0"/>
-  </producedTypes>
-  <name>typePrice</name>
-  <synonym>
-    <key>en</key>
-    <value>Type price</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>10</precision>
-      <scale>2</scale>
-      <nonNegative>true</nonNegative>
-    </numberQualifiers>
-  </type>
+ <producedTypes>
+  <containerType typeId="fe2288f5-1865-41d0-b56c-9b6501fa833a" valueTypeId="4f56efcf-13ab-49c4-99f9-e9b99d6cb3a0"/>
+ </producedTypes>
+ <name>typePrice</name>
+ <synonym>
+  <key>en</key>
+  <value>7200330A-F77E-BD0F-FCFD-D69A3AC20CFB</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>10</precision>
+   <scale>2</scale>
+   <nonNegative>true</nonNegative>
+  </numberQualifiers>
+ </type>
 </mdclass:DefinedType>

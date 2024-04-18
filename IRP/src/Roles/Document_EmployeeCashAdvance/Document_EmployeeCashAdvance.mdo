@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa1da632-5d19-4ef1-bf96-2eaec361039c">
-  <name>Document_EmployeeCashAdvance</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Employee cash advance&quot;</value>
-  </synonym>
+ <name>Document_EmployeeCashAdvance</name>
+ <synonym>
+  <key>en</key>
+  <value>9D9AE66C-7C9B-4872-2088-808D81BD6838</value>
+ </synonym>
 </mdclass:Role>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="be5bf755-b5be-4631-87ea-f6bf091024f6">
-  <producedTypes>
-    <refType typeId="c6109204-f76a-4757-8c68-25596f49857e" valueTypeId="e5d74f14-961c-4e19-b5dd-ecf008a38da2"/>
-    <listType typeId="862efd26-9724-4382-9fba-db5ba9e31f85" valueTypeId="e6533e2a-8f3e-42e6-bf14-535b6b260de4"/>
-    <managerType typeId="5e1791a3-7f49-4b83-99d3-f72d2ab379f4" valueTypeId="a228a602-8528-45bd-a7b5-2896d2e0f744"/>
-  </producedTypes>
-  <name>ExpenseTypes</name>
+ <producedTypes>
+  <refType typeId="c6109204-f76a-4757-8c68-25596f49857e" valueTypeId="e5d74f14-961c-4e19-b5dd-ecf008a38da2"/>
+  <listType typeId="862efd26-9724-4382-9fba-db5ba9e31f85" valueTypeId="e6533e2a-8f3e-42e6-bf14-535b6b260de4"/>
+  <managerType typeId="5e1791a3-7f49-4b83-99d3-f72d2ab379f4" valueTypeId="a228a602-8528-45bd-a7b5-2896d2e0f744"/>
+ </producedTypes>
+ <name>ExpenseTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>3CD4B9E5-07C5-1AAF-FAE5-5BB5B4A66B64</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="82328a39-43fb-4cca-a102-baebcadbd26c">
+  <name>GeneralExpenses</name>
   <synonym>
-    <key>en</key>
-    <value>Expense types</value>
+   <key>en</key>
+   <value>8C23B9A2-2EB1-3FFD-D9F8-8E32E046385C</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="82328a39-43fb-4cca-a102-baebcadbd26c">
-    <name>GeneralExpenses</name>
-    <synonym>
-      <key>en</key>
-      <value>General expenses</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="c3aa5289-b0c8-4584-b739-9f53f360d4d3">
-    <name>ProductionCosts</name>
-    <synonym>
-      <key>en</key>
-      <value>Production costs</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="c3aa5289-b0c8-4584-b739-9f53f360d4d3">
+  <name>ProductionCosts</name>
+  <synonym>
+   <key>en</key>
+   <value>60B40F8C-6995-01A6-6DD3-351FF7720794</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

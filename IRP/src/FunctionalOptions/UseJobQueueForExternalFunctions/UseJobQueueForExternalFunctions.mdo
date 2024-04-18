@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0f42242f-8fd7-4658-8668-49ce52bc6f0b">
-  <name>UseJobQueueForExternalFunctions</name>
-  <synonym>
-    <key>en</key>
-    <value>Use job queue for external functions</value>
-  </synonym>
-  <location>Constant.UseJobQueueForExternalFunctions</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.ExternalFunctions.Attribute.DifficultLevel</content>
-  <content>InformationRegister.JobQueue</content>
-  <content>Catalog.ExternalFunctions.Attribute.isSchedulerSet</content>
-  <content>Constant.MaximumServerDifficultLevel</content>
-  <content>Catalog.ExternalFunctions.Attribute.JobSchedule</content>
-  <content>Catalog.ExternalFunctions.Command.PauseJob</content>
-  <content>Catalog.ExternalFunctions.Command.StopJob</content>
-  <content>Catalog.ExternalFunctions.Command.ContinueJob</content>
-  <content>InformationRegister.JobQueue.Resource.Result</content>
-  <content>InformationRegister.JobQueue.Resource.JobID</content>
-  <content>InformationRegister.JobQueue.Resource.Status</content>
-  <content>InformationRegister.JobQueue.Resource.UserMessages</content>
-  <content>InformationRegister.JobQueue.Resource.Description</content>
-  <content>InformationRegister.JobQueue.Resource.Start</content>
-  <content>InformationRegister.JobQueue.Resource.DifficultLevel</content>
-  <content>InformationRegister.JobQueue.Resource.Finish</content>
-  <content>InformationRegister.JobQueue.Resource.Parameters</content>
-  <content>InformationRegister.JobQueue.Resource.Log</content>
-  <content>InformationRegister.JobQueue.Dimension.Job</content>
+ <name>UseJobQueueForExternalFunctions</name>
+ <synonym>
+  <key>en</key>
+  <value>03032A1E-CCD1-B801-1EBA-A667AD2B788F</value>
+ </synonym>
+ <location>Constant.UseJobQueueForExternalFunctions</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.ExternalFunctions.Attribute.DifficultLevel</content>
+ <content>InformationRegister.JobQueue</content>
+ <content>Catalog.ExternalFunctions.Attribute.isSchedulerSet</content>
+ <content>Constant.MaximumServerDifficultLevel</content>
+ <content>Catalog.ExternalFunctions.Attribute.JobSchedule</content>
+ <content>Catalog.ExternalFunctions.Command.PauseJob</content>
+ <content>Catalog.ExternalFunctions.Command.StopJob</content>
+ <content>Catalog.ExternalFunctions.Command.ContinueJob</content>
+ <content>InformationRegister.JobQueue.Resource.Result</content>
+ <content>InformationRegister.JobQueue.Resource.JobID</content>
+ <content>InformationRegister.JobQueue.Resource.Status</content>
+ <content>InformationRegister.JobQueue.Resource.UserMessages</content>
+ <content>InformationRegister.JobQueue.Resource.Description</content>
+ <content>InformationRegister.JobQueue.Resource.Start</content>
+ <content>InformationRegister.JobQueue.Resource.DifficultLevel</content>
+ <content>InformationRegister.JobQueue.Resource.Finish</content>
+ <content>InformationRegister.JobQueue.Resource.Parameters</content>
+ <content>InformationRegister.JobQueue.Resource.Log</content>
+ <content>InformationRegister.JobQueue.Dimension.Job</content>
 </mdclass:FunctionalOption>

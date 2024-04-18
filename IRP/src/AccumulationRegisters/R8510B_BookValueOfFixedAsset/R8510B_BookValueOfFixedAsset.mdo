@@ -1,172 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dc6e94c-1a27-4431-b536-ee486155f015">
-  <producedTypes>
-    <selectionType typeId="5a969b9a-d2d6-4297-9f00-2bc31179a8d6" valueTypeId="4e8ae7f0-a309-47b2-ab96-4f3c5996ab86"/>
-    <listType typeId="8308ea48-c074-458b-ac4b-092095e402e1" valueTypeId="0176a5dc-ccd0-498f-9e7e-5688e383719d"/>
-    <managerType typeId="8774f7b4-744a-4570-86df-925ea0e55717" valueTypeId="56f269bf-59a0-46b9-92fe-cf5c17cc9618"/>
-    <recordSetType typeId="602ec9ad-9f58-4dd3-9200-4f1ab7ef81d8" valueTypeId="d44dcd16-1f2b-4095-8c5c-9b1d361e3b1d"/>
-    <recordKeyType typeId="7acbf619-b4bc-4c8a-81e7-bd3d3fc307eb" valueTypeId="b6f007e3-5aea-4db8-98e7-5d53b51ae2d2"/>
-    <recordType typeId="b6b80828-5af1-47e0-a4f7-e58472a30272" valueTypeId="e64f308e-674b-436d-9799-97f2888946ae"/>
-  </producedTypes>
-  <name>R8510B_BookValueOfFixedAsset</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3dc6e94c-1a27-4431-b536-ee486155f015">
+ <producedTypes>
+  <selectionType typeId="5a969b9a-d2d6-4297-9f00-2bc31179a8d6" valueTypeId="4e8ae7f0-a309-47b2-ab96-4f3c5996ab86"/>
+  <listType typeId="8308ea48-c074-458b-ac4b-092095e402e1" valueTypeId="0176a5dc-ccd0-498f-9e7e-5688e383719d"/>
+  <managerType typeId="8774f7b4-744a-4570-86df-925ea0e55717" valueTypeId="56f269bf-59a0-46b9-92fe-cf5c17cc9618"/>
+  <recordSetType typeId="602ec9ad-9f58-4dd3-9200-4f1ab7ef81d8" valueTypeId="d44dcd16-1f2b-4095-8c5c-9b1d361e3b1d"/>
+  <recordKeyType typeId="7acbf619-b4bc-4c8a-81e7-bd3d3fc307eb" valueTypeId="b6f007e3-5aea-4db8-98e7-5d53b51ae2d2"/>
+  <recordType typeId="b6b80828-5af1-47e0-a4f7-e58472a30272" valueTypeId="e64f308e-674b-436d-9799-97f2888946ae"/>
+ </producedTypes>
+ <name>R8510B_BookValueOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>958FBAF5-DEA0-DAD0-08F5-5D5CB970DCEF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="87162c08-ec36-4b18-9207-ba06301723f1">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R8510 Book value of fixed asset</value>
+   <key>en</key>
+   <value>7B03A653-C172-7187-7B45-55AFC396BCFE</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="87162c08-ec36-4b18-9207-ba06301723f1">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="02faaf17-d13b-46e7-ba94-67d08955e29b">
-    <name>CalculationMovementCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculation movement cost</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CalculationMovementCosts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="a51ddeb5-61ac-4a79-a2f9-10df6c314b49">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="98a325b9-d73d-4d00-8ddb-6e8219d66e3c">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4d6f5b93-5f39-404b-8649-ff58b6169755">
-    <name>ProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="968b6d74-47c3-4960-a1b8-3ca141088718">
-    <name>FixedAsset</name>
-    <synonym>
-      <key>en</key>
-      <value>Fixed asset</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssets</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d2dd43b8-ec12-4d85-a249-30689caf445a">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FixedAssetsLedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="f3fad97e-2095-4132-9b49-45e09c85f140">
-    <name>Schedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Schedule</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.DepreciationSchedules</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="e6ab0a92-4404-49bb-9e80-8e231ca43acf">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="9dd394d7-a244-497e-8bc3-7044f408c739">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c3cf772e-0aaf-40ff-b56f-7c76dcc8cda3">
-    <name>TransactionCurrency</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="02faaf17-d13b-46e7-ba94-67d08955e29b">
+  <name>CalculationMovementCost</name>
+  <synonym>
+   <key>en</key>
+   <value>64A2BC1A-31D2-E0BE-EEE3-3C3EE574A84E</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.CalculationMovementCosts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="a51ddeb5-61ac-4a79-a2f9-10df6c314b49">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>FBDDABEE-0A5A-195D-D97E-EBABA853EFF0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="98a325b9-d73d-4d00-8ddb-6e8219d66e3c">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>B299E7FD-D2B4-2A7A-AC2C-C9E419BB150D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4d6f5b93-5f39-404b-8649-ff58b6169755">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>6EBDC86D-F82E-5136-657C-CB99C3FFBA96</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="968b6d74-47c3-4960-a1b8-3ca141088718">
+  <name>FixedAsset</name>
+  <synonym>
+   <key>en</key>
+   <value>C35197BC-77C9-4CDF-F243-368A4AB445DD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssets</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="d2dd43b8-ec12-4d85-a249-30689caf445a">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>24FC1FCC-2DDC-D8BB-BF60-01E6F4E4B984</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="f3fad97e-2095-4132-9b49-45e09c85f140">
+  <name>Schedule</name>
+  <synonym>
+   <key>en</key>
+   <value>93E0AEDF-3BC0-9964-4AF1-1BAF22E492C4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.DepreciationSchedules</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="e6ab0a92-4404-49bb-9e80-8e231ca43acf">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>43C28342-F3C3-1DD7-787F-F07F88771331</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="9dd394d7-a244-497e-8bc3-7044f408c739">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>9DBFEBA4-A11F-924D-DEFB-BE30047E00BA</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c3cf772e-0aaf-40ff-b56f-7c76dcc8cda3">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>2105D2AE-7AE9-9A4F-F352-20E1CC5E8C94</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

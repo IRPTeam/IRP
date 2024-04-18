@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c51c2387-2523-4dc4-a290-061b34771c4b">
-  <name>ContactInfo</name>
-  <synonym>
-    <key>en</key>
-    <value>Contact info</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <help>
-    <pages>
-      <lang>en</lang>
-    </pages>
-  </help>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>CommonModule.IDInfoClient</content>
-  <content>CommonModule.IDInfoServer</content>
-  <content>Catalog.IDInfoAddresses</content>
-  <content>Catalog.IDInfoSets</content>
-  <content>InformationRegister.IDInfo</content>
-  <content>Catalog.Addresses</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>ContactInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>61DF8EB1-BB4C-F5CF-F359-91C0F6F2A94D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <help>
+  <pages>
+   <lang>en</lang>
+  </pages>
+ </help>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>CommonModule.IDInfoClient</content>
+ <content>CommonModule.IDInfoServer</content>
+ <content>Catalog.IDInfoAddresses</content>
+ <content>Catalog.IDInfoSets</content>
+ <content>InformationRegister.IDInfo</content>
+ <content>Catalog.Addresses</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

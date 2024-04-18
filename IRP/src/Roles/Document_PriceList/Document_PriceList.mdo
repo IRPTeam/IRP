@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="06e88b0c-8697-4b9e-be13-d16243e86164">
-  <name>Document_PriceList</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Price list&quot;</value>
-  </synonym>
+ <name>Document_PriceList</name>
+ <synonym>
+  <key>en</key>
+  <value>3D771709-4416-5B4A-A569-92B4803F78B1</value>
+ </synonym>
 </mdclass:Role>

@@ -1,389 +1,389 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="123d94b4-f8e9-45cd-bbe3-2d1a03dcc8b2">
-  <producedTypes>
-    <objectType typeId="53a8dbe7-4580-4399-9f05-bdee39f2083b" valueTypeId="ce63421e-e4a5-42c1-8915-00efcb5fdc66"/>
-    <refType typeId="dcc43dbc-da02-4241-a215-0ee4ff8ba39a" valueTypeId="e91e167f-0565-4611-b5ff-15111f337c1e"/>
-    <selectionType typeId="c56dcde9-6248-4074-a682-ab9edf86896f" valueTypeId="f6da8e78-09ca-4807-bd8b-409a770ca431"/>
-    <listType typeId="a533db1d-429e-4d58-ab97-11b081a95bbf" valueTypeId="3594753c-fc28-45b1-8503-83a93ed271f7"/>
-    <managerType typeId="69c7e1d7-79c0-4192-98b0-2c8a52076f52" valueTypeId="22a5d29d-c988-493c-9887-0085f17c676f"/>
-  </producedTypes>
-  <name>DepreciationCalculation</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="123d94b4-f8e9-45cd-bbe3-2d1a03dcc8b2">
+ <producedTypes>
+  <objectType typeId="53a8dbe7-4580-4399-9f05-bdee39f2083b" valueTypeId="ce63421e-e4a5-42c1-8915-00efcb5fdc66"/>
+  <refType typeId="dcc43dbc-da02-4241-a215-0ee4ff8ba39a" valueTypeId="e91e167f-0565-4611-b5ff-15111f337c1e"/>
+  <selectionType typeId="c56dcde9-6248-4074-a682-ab9edf86896f" valueTypeId="f6da8e78-09ca-4807-bd8b-409a770ca431"/>
+  <listType typeId="a533db1d-429e-4d58-ab97-11b081a95bbf" valueTypeId="3594753c-fc28-45b1-8503-83a93ed271f7"/>
+  <managerType typeId="69c7e1d7-79c0-4192-98b0-2c8a52076f52" valueTypeId="22a5d29d-c988-493c-9887-0085f17c676f"/>
+ </producedTypes>
+ <name>DepreciationCalculation</name>
+ <synonym>
+  <key>en</key>
+  <value>9FDB788A-FDC4-0C9E-E3D3-33D73D47774E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.DepreciationCalculation.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>9860F9EF-3172-4CC5-5261-16E089950967</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>535FF441-6614-39F3-38FF-F50EBC3A3001</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.DepreciationCalculation.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.DepreciationCalculation.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.DepreciationCalculation.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">
+  <name>Company</name>
   <synonym>
-    <key>en</key>
-    <value>Depreciation calculation</value>
+   <key>en</key>
+   <value>1299D213-A975-D595-5CF5-5EC813473524</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.DepreciationCalculation.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="c7765ab3-3b50-46cc-859a-1f59750ecaba">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>EF696A34-86AB-7FBB-BD98-866A91AB2C45</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ab3948f4-7474-45d5-b9e0-c39794f06375">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>11AEC8D9-8249-EB26-6CA8-82C55CCC104C</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0e7abdd9-63c2-425a-876b-10f47d0f9147">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>34C15CAD-D035-04B3-399F-FEC1873116B8</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="b6fef3fd-8d45-43e9-a46d-50df4e62ef50">
+  <producedTypes>
+   <objectType typeId="85806335-f212-4311-a2c1-d863e7555138" valueTypeId="6c302a4b-2ac9-49c7-a8b0-64d5d520a41c"/>
+   <rowType typeId="f8203c47-596c-4046-8252-f41655774526" valueTypeId="8a5ef027-d80a-46ac-a49f-a165721e508a"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>en</key>
+   <value>4320B397-A3F2-3BCF-F5D3-3E6FD3BC68D0</value>
+  </synonym>
+  <attributes uuid="dd3c1ad7-830c-490b-adef-d393ef117a7b">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Depreciation calculation</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Depreciation calculations</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.DepreciationCalculation.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.DepreciationCalculation.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.DepreciationCalculation.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
-  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameters>
-      <name>Filter.OurCompany</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>E0DFDF0B-811B-597F-FFB1-16FE877EE523</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="c7765ab3-3b50-46cc-859a-1f59750ecaba">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ab3948f4-7474-45d5-b9e0-c39794f06375">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0e7abdd9-63c2-425a-876b-10f47d0f9147">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="b6fef3fd-8d45-43e9-a46d-50df4e62ef50">
-    <producedTypes>
-      <objectType typeId="85806335-f212-4311-a2c1-d863e7555138" valueTypeId="6c302a4b-2ac9-49c7-a8b0-64d5d520a41c"/>
-      <rowType typeId="f8203c47-596c-4046-8252-f41655774526" valueTypeId="8a5ef027-d80a-46ac-a49f-a165721e508a"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="dd3c1ad7-830c-490b-adef-d393ef117a7b">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="bc0fbc35-14fb-403e-9b17-e0eb2ac828b2">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ccdeb45b-6eff-425c-9420-2af122eb7087">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b89f0ce5-ded4-4990-bd95-6b14d2428b1b">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5cc59751-241a-4b65-bc85-08bb2db5c186">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="11c1d960-99d2-4c37-a86e-1ec474f06de7">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e6ec1282-d89f-49b1-ab84-3a9e6980feec">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2090c92c-4da2-42a7-acd0-faeec0409e13">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="5a22e558-cd79-4850-a339-889d9447c8d4">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="dccff1a5-34a5-4cff-bd86-aa80a55aa2d7">
-    <producedTypes>
-      <objectType typeId="fb352896-4c00-41dc-8a70-82f88a336eeb" valueTypeId="46476cb4-9645-43fd-98a3-a490f2e7b01a"/>
-      <rowType typeId="459e037c-d040-4c06-8dfa-0da5dd6677c8" valueTypeId="b3d5fcc2-8d00-416b-8fbc-6b43c1bc1a1f"/>
-    </producedTypes>
-    <name>Calculations</name>
-    <synonym>
-      <key>en</key>
-      <value>Calculations</value>
-    </synonym>
-    <attributes uuid="b107bc13-ecff-4cb7-8733-cd761be3e07c">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="066380d2-4149-4d3d-81df-9fc4808dc2ed">
-      <name>FixedAsset</name>
-      <synonym>
-        <key>en</key>
-        <value>Fixed asset</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.FixedAssets</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d074fbd9-402c-4cc8-a52a-275bc97216dc">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2f3619e6-31f1-4e6a-a92c-aea868cb939a">
-      <name>LedgerType</name>
-      <synonym>
-        <key>en</key>
-        <value>Ledger type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.FixedAssetsLedgerTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7610b195-e64c-4308-a3a9-3bacc0a8e0f9">
-      <name>Schedule</name>
-      <synonym>
-        <key>en</key>
-        <value>Schedule</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.DepreciationSchedules</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="33174149-6947-4c31-be40-7687f309a893">
-      <name>CalculationMethod</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation method</value>
-      </synonym>
-      <type>
-        <types>EnumRef.DepreciationMethods</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f8019f0d-a8f0-4de9-b653-cf456fefa6db">
-      <name>Currency</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b9bef88b-b90b-4484-b7aa-9ee0061f0917">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameters>
-        <name>Filter.IsExpense</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f5deea1e-869c-43e3-aca8-9905ce35b421">
-      <name>AmountBalance</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount balance</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="69777ff1-b5d8-4738-aa44-b02c72051e98">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+  <attributes uuid="bc0fbc35-14fb-403e-9b17-e0eb2ac828b2">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>en</key>
+    <value>C6572146-01B1-E43C-CB04-43353FB52A6B</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ccdeb45b-6eff-425c-9420-2af122eb7087">
+   <name>Rate</name>
+   <synonym>
+    <key>en</key>
+    <value>B17099D4-14FE-BA1C-C4A6-6F488729950B</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b89f0ce5-ded4-4990-bd95-6b14d2428b1b">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>101654AE-A658-B6BD-D895-5EA17D455E09</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5cc59751-241a-4b65-bc85-08bb2db5c186">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>A1D4F20E-9C8B-693F-FEFE-EF55B2F85389</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="11c1d960-99d2-4c37-a86e-1ec474f06de7">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>en</key>
+    <value>A1DC51A2-BF47-1673-3D65-5A7F768C2A48</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e6ec1282-d89f-49b1-ab84-3a9e6980feec">
+   <name>MovementType</name>
+   <synonym>
+    <key>en</key>
+    <value>45E03D0E-636C-1000-0BA0-05C99ACCE7C3</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2090c92c-4da2-42a7-acd0-faeec0409e13">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>5092B803-5AC0-636E-E461-1E708053D824</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5a22e558-cd79-4850-a339-889d9447c8d4">
+   <name>IsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>86CACCD7-1EB5-BC39-98B7-7D4FD8483066</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="dccff1a5-34a5-4cff-bd86-aa80a55aa2d7">
+  <producedTypes>
+   <objectType typeId="fb352896-4c00-41dc-8a70-82f88a336eeb" valueTypeId="46476cb4-9645-43fd-98a3-a490f2e7b01a"/>
+   <rowType typeId="459e037c-d040-4c06-8dfa-0da5dd6677c8" valueTypeId="b3d5fcc2-8d00-416b-8fbc-6b43c1bc1a1f"/>
+  </producedTypes>
+  <name>Calculations</name>
+  <synonym>
+   <key>en</key>
+   <value>6675C934-D8A6-8AB9-964B-B565DEF9FB69</value>
+  </synonym>
+  <attributes uuid="b107bc13-ecff-4cb7-8733-cd761be3e07c">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>6CAF19AF-F8A8-3966-6550-02F8E7F60D43</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="066380d2-4149-4d3d-81df-9fc4808dc2ed">
+   <name>FixedAsset</name>
+   <synonym>
+    <key>en</key>
+    <value>CF699AA7-C3AA-2B17-745B-BDD596E75671</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.FixedAssets</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d074fbd9-402c-4cc8-a52a-275bc97216dc">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>en</key>
+    <value>FD6E9F5E-27B4-4DE0-0BB5-53AB6AC9682B</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="2f3619e6-31f1-4e6a-a92c-aea868cb939a">
+   <name>LedgerType</name>
+   <synonym>
+    <key>en</key>
+    <value>8AC2F01D-A8E0-D76B-B0B1-1BE4FD2A12CF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.FixedAssetsLedgerTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7610b195-e64c-4308-a3a9-3bacc0a8e0f9">
+   <name>Schedule</name>
+   <synonym>
+    <key>en</key>
+    <value>B6CCA561-4FD7-558D-D097-7A18DFCA10C4</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.DepreciationSchedules</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="33174149-6947-4c31-be40-7687f309a893">
+   <name>CalculationMethod</name>
+   <synonym>
+    <key>en</key>
+    <value>F81808E3-1E0D-D59D-D0F7-75BB99DB47D6</value>
+   </synonym>
+   <type>
+    <types>EnumRef.DepreciationMethods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f8019f0d-a8f0-4de9-b653-cf456fefa6db">
+   <name>Currency</name>
+   <synonym>
+    <key>en</key>
+    <value>8EC32B1D-0DF0-D141-11D9-9506CB86224F</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="b9bef88b-b90b-4484-b7aa-9ee0061f0917">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>en</key>
+    <value>F95A76E2-6D0A-07B6-676B-B45C9FAD7A66</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsExpense</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f5deea1e-869c-43e3-aca8-9905ce35b421">
+   <name>AmountBalance</name>
+   <synonym>
+    <key>en</key>
+    <value>67C2C877-1E76-C368-86D3-3EC25EE7110A</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="69777ff1-b5d8-4738-aa44-b02c72051e98">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>2F0F9635-F14B-7FA2-2D1A-AE29A3C1D29F</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
 </mdclass:Document>

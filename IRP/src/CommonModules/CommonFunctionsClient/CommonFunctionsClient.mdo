@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="30a07ed6-b016-4f5d-9949-4f31a9923251">
-  <name>CommonFunctionsClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Common functions client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CommonFunctionsClient</name>
+ <synonym>
+  <key>en</key>
+  <value>6998C5C7-99E8-CDCC-CE93-392BFC854481</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

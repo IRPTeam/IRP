@@ -1,277 +1,277 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="05a6b4be-fdda-4207-8199-49c1f23b1c7a">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="05a6b4be-fdda-4207-8199-49c1f23b1c7a">
+ <producedTypes>
+  <objectType typeId="992de312-8aed-427c-b3ad-9beeea34c7b4" valueTypeId="eeb7885b-dd4b-4e5e-bad9-9f36a131abe2"/>
+  <refType typeId="8b22e9f0-8479-46fb-9702-2be5507f6bd7" valueTypeId="6f8b5502-26da-4b8f-9768-4024d4aba2b7"/>
+  <selectionType typeId="7062ad84-57c5-4878-a0c5-78bb2e7d48a0" valueTypeId="6c94f420-0755-437d-a1c9-e7c07afe19de"/>
+  <listType typeId="369d8a09-7d0d-4e14-ba99-9ffd60b6753f" valueTypeId="1bd22f6f-3802-4f8d-80cd-fade958891f7"/>
+  <managerType typeId="697dfbb0-93af-4dc4-9846-99ab28d270f5" valueTypeId="9682efa7-3760-4a59-b83d-9c77535f1977"/>
+ </producedTypes>
+ <name>AgingPeriods</name>
+ <synonym>
+  <key>en</key>
+  <value>048DC7B7-F460-0245-5247-73F9FB28D86E</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.AgingPeriods.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
+  </typesFilterValue>
+  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
+  </typesFilterValue>
+  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <characteristicValues>Catalog.AgingPeriods.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.AgingPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>7FE76B0E-0179-350A-AC96-6F492473BDC1</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>30A4FB49-5196-BCAC-CDDE-E9E0CC03C2C2</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.AgingPeriods.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.AgingPeriods.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.AgingPeriods.Form.ChoiceForm</defaultChoiceForm>
+ <tabularSections uuid="c56ec33e-2e93-4f25-b022-700f6b8b6c06">
   <producedTypes>
-    <objectType typeId="992de312-8aed-427c-b3ad-9beeea34c7b4" valueTypeId="eeb7885b-dd4b-4e5e-bad9-9f36a131abe2"/>
-    <refType typeId="8b22e9f0-8479-46fb-9702-2be5507f6bd7" valueTypeId="6f8b5502-26da-4b8f-9768-4024d4aba2b7"/>
-    <selectionType typeId="7062ad84-57c5-4878-a0c5-78bb2e7d48a0" valueTypeId="6c94f420-0755-437d-a1c9-e7c07afe19de"/>
-    <listType typeId="369d8a09-7d0d-4e14-ba99-9ffd60b6753f" valueTypeId="1bd22f6f-3802-4f8d-80cd-fade958891f7"/>
-    <managerType typeId="697dfbb0-93af-4dc4-9846-99ab28d270f5" valueTypeId="9682efa7-3760-4a59-b83d-9c77535f1977"/>
+   <objectType typeId="1231ad15-667e-47e0-ac83-b9a21db7c81c" valueTypeId="dc5f4a7d-f547-40de-849d-754005306c21"/>
+   <rowType typeId="c6d5c901-cd47-4d68-991a-7ef61a710ff4" valueTypeId="74d20ad1-ae0a-44da-b712-9c2e153e5011"/>
   </producedTypes>
-  <name>AgingPeriods</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Aging periods</value>
+   <key>en</key>
+   <value>D9F9AAE1-A2CA-1043-37B1-13B14DF489DA</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.AgingPeriods.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
-    </typesFilterValue>
-    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
-    </typesFilterValue>
-    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-    <characteristicValues>Catalog.AgingPeriods.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.AgingPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <attributes uuid="8ad4810d-b76c-44b1-87f4-0c7db7409c55">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Aging periods</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>73E5F439-CCFA-4BC9-9BC4-4BA7F85DF5BB</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8b11aed8-06d0-4bd3-96bf-bc4ecf6046d0">
+   <name>Value</name>
+   <synonym>
     <key>en</key>
-    <value>Aging periods</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.AgingPeriods.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.AgingPeriods.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.AgingPeriods.Form.ChoiceForm</defaultChoiceForm>
-  <tabularSections uuid="c56ec33e-2e93-4f25-b022-700f6b8b6c06">
-    <producedTypes>
-      <objectType typeId="1231ad15-667e-47e0-ac83-b9a21db7c81c" valueTypeId="dc5f4a7d-f547-40de-849d-754005306c21"/>
-      <rowType typeId="c6d5c901-cd47-4d68-991a-7ef61a710ff4" valueTypeId="74d20ad1-ae0a-44da-b712-9c2e153e5011"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="8ad4810d-b76c-44b1-87f4-0c7db7409c55">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8b11aed8-06d0-4bd3-96bf-bc4ecf6046d0">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7387768a-fe2d-4c6f-8cfc-83468f968876">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="f91f6151-652a-48cb-b77c-b122454c539c">
-    <producedTypes>
-      <objectType typeId="507832b7-d73c-4c4b-98a5-d5e0fedae38c" valueTypeId="149279e2-3ff7-4dd9-907d-7a39e35a9722"/>
-      <rowType typeId="afac6c85-0618-4e78-9866-774f4929fab8" valueTypeId="96e25e5f-1ce8-45ed-929b-fb3a4de01176"/>
-    </producedTypes>
-    <name>OverduePeriods</name>
-    <synonym>
-      <key>en</key>
-      <value>Overdue periods</value>
-    </synonym>
-    <attributes uuid="a59f2700-cd58-4894-a6be-8198628b66db">
-      <name>FromDays</name>
-      <synonym>
-        <key>en</key>
-        <value>From days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ec127e55-79a3-4e90-ad7f-87d71c1d0e6a">
-      <name>ToDays</name>
-      <synonym>
-        <key>en</key>
-        <value>To days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4d6efbb2-21bf-4a4a-b183-620843d99665">
-      <name>Presentation</name>
-      <synonym>
-        <key>en</key>
-        <value>Presentation</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>30</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="10d03be9-88d3-48c8-bf61-bf8e3d12f009">
-    <producedTypes>
-      <objectType typeId="7f3f33bb-fd80-4258-8789-bd56d3fe4df9" valueTypeId="020bb574-b5fb-4417-a4ac-882407fc5b89"/>
-      <rowType typeId="0a5028f3-d087-4ceb-a10e-e08fb2f27497" valueTypeId="f6d189e2-a757-468c-84e6-d21d3f787863"/>
-    </producedTypes>
-    <name>FuturePeriods</name>
-    <synonym>
-      <key>en</key>
-      <value>Future periods</value>
-    </synonym>
-    <attributes uuid="3c731c73-4072-4242-87b3-8b4fee284a35">
-      <name>FromDays</name>
-      <synonym>
-        <key>en</key>
-        <value>From days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a4c8443a-2219-436d-ba86-0c8dd7f8030b">
-      <name>ToDays</name>
-      <synonym>
-        <key>en</key>
-        <value>To days</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>3</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="15f4ec7b-ba58-4553-b007-1d502bf1762c">
-      <name>Presentation</name>
-      <synonym>
-        <key>en</key>
-        <value>Presentation</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>30</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="c5992518-d8f8-42c4-830b-bd26c09cecbf">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2f1c4704-a837-494a-8ba4-a0f0e4cd5d84">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="18aaa875-6532-4771-a588-9a721ffdb9bd">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>F8186B71-8E4F-C1E8-8318-866E593EC8B4</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7387768a-fe2d-4c6f-8cfc-83468f968876">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>95E7EA4D-FD84-B79E-E78F-F0E3F95879E9</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="f91f6151-652a-48cb-b77c-b122454c539c">
+  <producedTypes>
+   <objectType typeId="507832b7-d73c-4c4b-98a5-d5e0fedae38c" valueTypeId="149279e2-3ff7-4dd9-907d-7a39e35a9722"/>
+   <rowType typeId="afac6c85-0618-4e78-9866-774f4929fab8" valueTypeId="96e25e5f-1ce8-45ed-929b-fb3a4de01176"/>
+  </producedTypes>
+  <name>OverduePeriods</name>
+  <synonym>
+   <key>en</key>
+   <value>0B44B9D8-1563-B1C8-8020-0E3569FC3B98</value>
+  </synonym>
+  <attributes uuid="a59f2700-cd58-4894-a6be-8198628b66db">
+   <name>FromDays</name>
+   <synonym>
+    <key>en</key>
+    <value>79F586BC-70E1-2707-7A23-3A38903ACC1D</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ec127e55-79a3-4e90-ad7f-87d71c1d0e6a">
+   <name>ToDays</name>
+   <synonym>
+    <key>en</key>
+    <value>DE304FE9-7D85-78F2-2867-7312D2384810</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4d6efbb2-21bf-4a4a-b183-620843d99665">
+   <name>Presentation</name>
+   <synonym>
+    <key>en</key>
+    <value>CCA96FC2-18F3-51FD-DBD5-553218E4E0B7</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>30</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="10d03be9-88d3-48c8-bf61-bf8e3d12f009">
+  <producedTypes>
+   <objectType typeId="7f3f33bb-fd80-4258-8789-bd56d3fe4df9" valueTypeId="020bb574-b5fb-4417-a4ac-882407fc5b89"/>
+   <rowType typeId="0a5028f3-d087-4ceb-a10e-e08fb2f27497" valueTypeId="f6d189e2-a757-468c-84e6-d21d3f787863"/>
+  </producedTypes>
+  <name>FuturePeriods</name>
+  <synonym>
+   <key>en</key>
+   <value>C71536FF-6BA5-CBF5-53E2-2B39F3690600</value>
+  </synonym>
+  <attributes uuid="3c731c73-4072-4242-87b3-8b4fee284a35">
+   <name>FromDays</name>
+   <synonym>
+    <key>en</key>
+    <value>1A85273D-736D-B84B-BB0F-FFF360A375D9</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a4c8443a-2219-436d-ba86-0c8dd7f8030b">
+   <name>ToDays</name>
+   <synonym>
+    <key>en</key>
+    <value>66607806-A25D-D549-94DA-AA5A01D29E4A</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="15f4ec7b-ba58-4553-b007-1d502bf1762c">
+   <name>Presentation</name>
+   <synonym>
+    <key>en</key>
+    <value>6ADBB375-381E-C0CD-D22A-A202C0F52C68</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>30</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="c5992518-d8f8-42c4-830b-bd26c09cecbf">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5A2C5FC4-51BC-CA72-233F-FC20F8AC6A56</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2f1c4704-a837-494a-8ba4-a0f0e4cd5d84">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1516B48D-B83C-D175-5C4C-C7819084C18A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="18aaa875-6532-4771-a588-9a721ffdb9bd">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>882556AA-196B-E2C3-3D42-2CD3482E3D2A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

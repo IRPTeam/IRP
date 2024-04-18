@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5caff977-6628-46a1-afa9-a9186bf8662f">
-  <name>UseConsolidatedRetailSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Use consolidated retail sales</value>
-  </synonym>
-  <location>Constant.UseConsolidatedRetailSales</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.ConsolidatedRetailSales</content>
-  <content>Catalog.BusinessUnits.Attribute.Retail</content>
-  <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSales</content>
+ <name>UseConsolidatedRetailSales</name>
+ <synonym>
+  <key>en</key>
+  <value>092AE4D8-E2B3-E979-9885-5BA8BC5DED72</value>
+ </synonym>
+ <location>Constant.UseConsolidatedRetailSales</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.ConsolidatedRetailSales</content>
+ <content>Catalog.BusinessUnits.Attribute.Retail</content>
+ <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSales</content>
 </mdclass:FunctionalOption>

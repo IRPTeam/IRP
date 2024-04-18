@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ef5feb06-2a53-4911-9e09-5b766acf66cd">
-  <name>BeforeWrite_AuditLock</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write audit lock</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.AuditLockPrivileged.BeforeWrite_AuditLockBeforeWrite</handler>
+ <name>BeforeWrite_AuditLock</name>
+ <synonym>
+  <key>en</key>
+  <value>879F3B9B-F782-5833-323D-D565EA0822A2</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.AuditLockPrivileged.BeforeWrite_AuditLockBeforeWrite</handler>
 </mdclass:EventSubscription>

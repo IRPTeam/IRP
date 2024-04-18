@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c349591c-0509-4497-b92d-ee7f15b4bb48">
-  <name>UseRetailOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Use retail orders</value>
-  </synonym>
-  <location>Constant.UseRetailOrders</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.SalesOrder.Attribute.TransactionType</content>
+ <name>UseRetailOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>FB474E59-BBAE-2DBE-EC83-374AF884DD1D</value>
+ </synonym>
+ <location>Constant.UseRetailOrders</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.SalesOrder.Attribute.TransactionType</content>
 </mdclass:FunctionalOption>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fb5420bb-35c9-43b7-aa32-59a19e332c32">
-  <name>Document_ConsolidatedRetailSales</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Consolidated retail sales&quot;</value>
-  </synonym>
+ <name>Document_ConsolidatedRetailSales</name>
+ <synonym>
+  <key>en</key>
+  <value>1D3CB658-773D-0FA3-3896-6A07EC63344F</value>
+ </synonym>
 </mdclass:Role>

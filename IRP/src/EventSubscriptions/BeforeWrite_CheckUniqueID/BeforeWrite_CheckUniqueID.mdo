@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1c8c7037-737a-491e-9234-ff2c854da18e">
-  <name>BeforeWrite_CheckUniqueID</name>
-  <synonym>
-    <key>en</key>
-    <value>Before write check unique ID</value>
-  </synonym>
-  <source>
-    <types>DefinedType.UseUniqueID</types>
-  </source>
-  <event>BeforeWrite</event>
-  <handler>CommonModule.UniqueID.CheckUniqueIDBeforeWrite</handler>
+ <name>BeforeWrite_CheckUniqueID</name>
+ <synonym>
+  <key>en</key>
+  <value>8DEC511B-4001-CDCA-AC14-475871749D81</value>
+ </synonym>
+ <source>
+  <types>DefinedType.UseUniqueID</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.UniqueID.CheckUniqueIDBeforeWrite</handler>
 </mdclass:EventSubscription>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bd6c96c2-f43c-48a6-ac50-14d4b33f03b7">
-  <name>SMSServer</name>
-  <synonym>
-    <key>en</key>
-    <value>SMSServer</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
-  <serverCall>true</serverCall>
+ <name>SMSServer</name>
+ <synonym>
+  <key>en</key>
+  <value>A4E31D0A-C4E9-FD7E-E32D-DBF96DB2B419</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

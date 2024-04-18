@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="77cd12ae-7dba-465b-bdf7-79a2308e06fe">
-  <name>Finance</name>
-  <synonym>
-    <key>en</key>
-    <value>Finance</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Report.R5020_ProfitLosses</content>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Finance</name>
+ <synonym>
+  <key>en</key>
+  <value>FA0618BC-046A-4CC0-0814-4B9E89FBF4A9</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Report.R5020_ProfitLosses</content>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

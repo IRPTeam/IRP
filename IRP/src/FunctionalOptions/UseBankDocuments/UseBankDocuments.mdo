@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7102ddcd-6263-4d8f-8366-3bb991900740">
-  <name>UseBankDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Use bank documents</value>
-  </synonym>
-  <location>Constant.UseBankDocuments</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.LegalNameContracts.Attribute.PartnerBankAccount</content>
-  <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.PartnerBankAccount</content>
-  <content>Catalog.PartnersBankAccounts</content>
-  <content>Document.PurchaseOrder.Attribute.PartnerBankAccount</content>
-  <content>Document.BankReceipt</content>
-  <content>Document.BankPayment</content>
-  <content>Catalog.CashAccounts.Attribute.BankName</content>
-  <content>Document.BankPayment.Command.GenerateBankPayment</content>
+ <name>UseBankDocuments</name>
+ <synonym>
+  <key>en</key>
+  <value>A1FB71FF-57A4-EE46-6CEB-B35CE1D58968</value>
+ </synonym>
+ <location>Constant.UseBankDocuments</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.LegalNameContracts.Attribute.PartnerBankAccount</content>
+ <content>Document.OutgoingPaymentOrder.TabularSection.PaymentList.Attribute.PartnerBankAccount</content>
+ <content>Catalog.PartnersBankAccounts</content>
+ <content>Document.PurchaseOrder.Attribute.PartnerBankAccount</content>
+ <content>Document.BankReceipt</content>
+ <content>Document.BankPayment</content>
+ <content>Catalog.CashAccounts.Attribute.BankName</content>
+ <content>Document.BankPayment.Command.GenerateBankPayment</content>
 </mdclass:FunctionalOption>

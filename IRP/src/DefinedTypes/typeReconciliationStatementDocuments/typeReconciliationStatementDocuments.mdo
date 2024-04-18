@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7a55eb9-59a6-41c1-810f-cb5875b84124">
-  <producedTypes>
-    <containerType typeId="126508f1-af3d-4da1-9af0-afc721ce4a4b" valueTypeId="b17c71cb-7080-4bad-a922-d6cc1aa4cb6e"/>
-  </producedTypes>
-  <name>typeReconciliationStatementDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Type reconciliation statement documents</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.SalesReportFromTradeAgent</types>
-    <types>DocumentRef.CashPayment</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.DebitNote</types>
-    <types>DocumentRef.CreditNote</types>
-    <types>DocumentRef.BankReceipt</types>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.BankPayment</types>
-    <types>DocumentRef.ChequeBondTransactionItem</types>
-    <types>DocumentRef.CashReceipt</types>
-    <types>DocumentRef.OpeningEntry</types>
-    <types>DocumentRef.SalesReturn</types>
-    <types>DocumentRef.SalesReportToConsignor</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="126508f1-af3d-4da1-9af0-afc721ce4a4b" valueTypeId="b17c71cb-7080-4bad-a922-d6cc1aa4cb6e"/>
+ </producedTypes>
+ <name>typeReconciliationStatementDocuments</name>
+ <synonym>
+  <key>en</key>
+  <value>8A80FC8D-FA90-FEE9-92E1-1D050581D8E6___</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.SalesReportFromTradeAgent</types>
+  <types>DocumentRef.CashPayment</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.DebitNote</types>
+  <types>DocumentRef.CreditNote</types>
+  <types>DocumentRef.BankReceipt</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.BankPayment</types>
+  <types>DocumentRef.ChequeBondTransactionItem</types>
+  <types>DocumentRef.CashReceipt</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.SalesReportToConsignor</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

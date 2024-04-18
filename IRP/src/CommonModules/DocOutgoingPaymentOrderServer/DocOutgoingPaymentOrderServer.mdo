@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f46add51-0678-4143-9ea1-3b072228033e">
-  <name>DocOutgoingPaymentOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc outgoing payment order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocOutgoingPaymentOrderServer</name>
+ <synonym>
+  <key>en</key>
+  <value>FE4EC3A7-3E11-7159-997B-BCC42D42F006</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

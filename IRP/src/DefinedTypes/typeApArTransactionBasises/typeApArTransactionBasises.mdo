@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="20ed18eb-05a0-446b-92b2-f0456628ec7b">
-  <producedTypes>
-    <containerType typeId="fbe363da-53c4-4497-b36b-40945b71e992" valueTypeId="ffb1e42d-5ffb-48b5-8d19-2294a232df3e"/>
-  </producedTypes>
-  <name>typeApArTransactionBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>Type ap ar transaction basises</value>
-  </synonym>
-  <type>
-    <types>DocumentRef.SalesReportFromTradeAgent</types>
-    <types>DocumentRef.CashTransferOrder</types>
-    <types>DocumentRef.PurchaseInvoice</types>
-    <types>DocumentRef.DebitNote</types>
-    <types>DocumentRef.CreditNote</types>
-    <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.EmployeeCashAdvance</types>
-    <types>DocumentRef.OpeningEntry</types>
-    <types>DocumentRef.RetailReturnReceipt</types>
-    <types>DocumentRef.SalesReturn</types>
-    <types>DocumentRef.RetailSalesReceipt</types>
-    <types>DocumentRef.SalesReportToConsignor</types>
-    <types>DocumentRef.SalesInvoice</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="fbe363da-53c4-4497-b36b-40945b71e992" valueTypeId="ffb1e42d-5ffb-48b5-8d19-2294a232df3e"/>
+ </producedTypes>
+ <name>typeApArTransactionBasises</name>
+ <synonym>
+  <key>en</key>
+  <value>7D1CF303-1218-CB86-6985-53139E6C97C3</value>
+ </synonym>
+ <type>
+  <types>DocumentRef.SalesReportFromTradeAgent</types>
+  <types>DocumentRef.CashTransferOrder</types>
+  <types>DocumentRef.PurchaseInvoice</types>
+  <types>DocumentRef.DebitNote</types>
+  <types>DocumentRef.CreditNote</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.EmployeeCashAdvance</types>
+  <types>DocumentRef.OpeningEntry</types>
+  <types>DocumentRef.RetailReturnReceipt</types>
+  <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.RetailSalesReceipt</types>
+  <types>DocumentRef.SalesReportToConsignor</types>
+  <types>DocumentRef.SalesInvoice</types>
+ </type>
 </mdclass:DefinedType>

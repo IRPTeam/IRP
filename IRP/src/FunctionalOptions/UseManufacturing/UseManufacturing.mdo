@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8d3d403a-ee8d-48ff-8e0f-75d3ba1bef62">
-  <name>UseManufacturing</name>
-  <synonym>
-    <key>en</key>
-    <value>Use manufacturing</value>
-  </synonym>
-  <location>Constant.UseManufacturing</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Subsystem.Manufacturing</content>
-  <content>Document.ProductionPlanning</content>
-  <content>Document.ProductionPlanningCorrection</content>
-  <content>Document.ProductionPlanningClosing</content>
-  <content>Document.Production</content>
-  <content>Report.R7010_DetailingSupplies</content>
-  <content>Report.R7030_ProductionPlanning</content>
-  <content>DataProcessor.ProductionWorkspace</content>
-  <content>Catalog.BusinessUnits.Attribute.Workshop</content>
-  <content>Document.ProductionCostsAllocation</content>
-  <content>Catalog.BillOfMaterials</content>
-  <content>Subsystem.Reports.Subsystem.Manufacturing</content>
+ <name>UseManufacturing</name>
+ <synonym>
+  <key>en</key>
+  <value>A10DD6B5-AF3B-9113-3656-6FC30F11E6D8</value>
+ </synonym>
+ <location>Constant.UseManufacturing</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Manufacturing</content>
+ <content>Document.ProductionPlanning</content>
+ <content>Document.ProductionPlanningCorrection</content>
+ <content>Document.ProductionPlanningClosing</content>
+ <content>Document.Production</content>
+ <content>Report.R7010_DetailingSupplies</content>
+ <content>Report.R7030_ProductionPlanning</content>
+ <content>DataProcessor.ProductionWorkspace</content>
+ <content>Catalog.BusinessUnits.Attribute.Workshop</content>
+ <content>Document.ProductionCostsAllocation</content>
+ <content>Catalog.BillOfMaterials</content>
+ <content>Subsystem.Reports.Subsystem.Manufacturing</content>
 </mdclass:FunctionalOption>

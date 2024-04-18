@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="47d1a4ea-3c49-4368-a3fc-119917bdab91">
-  <name>JorDocumentsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Jor documents server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>JorDocumentsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>F562C7DC-7E74-B15F-F99F-F5690F8FB57F</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

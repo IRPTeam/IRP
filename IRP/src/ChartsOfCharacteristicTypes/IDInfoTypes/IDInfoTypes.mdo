@@ -1,216 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:ChartOfCharacteristicTypes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ffd829e0-6f20-4935-a1df-2131b1e7162f">
-  <producedTypes>
-    <objectType typeId="42298251-a43c-4b7f-bb39-020804d184e1" valueTypeId="0ad39381-8574-424c-817c-f441e411f9c1"/>
-    <refType typeId="7876c684-bef8-4be7-886a-5d417b2f560c" valueTypeId="08a7b23f-eae3-42c8-8c7c-778e94898682"/>
-    <selectionType typeId="3189ef04-4ba5-42a2-8cc6-42d722649814" valueTypeId="39097787-158e-45b8-9774-59c32112adda"/>
-    <listType typeId="1701a177-39e2-4f2d-96cd-388de3b40edd" valueTypeId="a62f446e-7e2b-4935-9229-feabff4657b3"/>
-    <managerType typeId="31e7b5bb-5e22-4c2f-bf3f-c10f408b4e0a" valueTypeId="9f468186-3c9b-4dfb-bf74-a3b3b0f6d4b8"/>
-    <containerType typeId="93124dc3-b63b-43dc-94cc-3ff8b067bbaf" valueTypeId="311f94b7-2be4-4015-ba84-f6d136fbb09f"/>
-  </producedTypes>
-  <name>IDInfoTypes</name>
+<mdclass:ChartOfCharacteristicTypes xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ffd829e0-6f20-4935-a1df-2131b1e7162f">
+ <producedTypes>
+  <objectType typeId="42298251-a43c-4b7f-bb39-020804d184e1" valueTypeId="0ad39381-8574-424c-817c-f441e411f9c1"/>
+  <refType typeId="7876c684-bef8-4be7-886a-5d417b2f560c" valueTypeId="08a7b23f-eae3-42c8-8c7c-778e94898682"/>
+  <selectionType typeId="3189ef04-4ba5-42a2-8cc6-42d722649814" valueTypeId="39097787-158e-45b8-9774-59c32112adda"/>
+  <listType typeId="1701a177-39e2-4f2d-96cd-388de3b40edd" valueTypeId="a62f446e-7e2b-4935-9229-feabff4657b3"/>
+  <managerType typeId="31e7b5bb-5e22-4c2f-bf3f-c10f408b4e0a" valueTypeId="9f468186-3c9b-4dfb-bf74-a3b3b0f6d4b8"/>
+  <containerType typeId="93124dc3-b63b-43dc-94cc-3ff8b067bbaf" valueTypeId="311f94b7-2be4-4015-ba84-f6d136fbb09f"/>
+ </producedTypes>
+ <name>IDInfoTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>7B72B5E3-DF31-505C-C3FC-C8515B56FBF0</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>796693D3-F39E-BF4E-E986-6775D690DEBD</value>
+ </objectPresentation>
+ <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
+ <type>
+  <types>CatalogRef.IDInfoAddresses</types>
+  <types>String</types>
+  <types>CatalogRef.Addresses</types>
+  <stringQualifiers>
+   <length>512</length>
+  </stringQualifiers>
+ </type>
+ <foldersOnTop>true</foldersOnTop>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>BothWays</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="9e80b819-ee53-4f2d-884a-2a48390eeb09">
+  <name>Comment</name>
   <synonym>
-    <key>en</key>
-    <value>Contact info types</value>
+   <key>en</key>
+   <value>E117B540-FEC5-19AD-D2C9-9AA02DB3CDAA</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Contact info type</value>
-  </objectPresentation>
-  <characteristicExtValues>Catalog.IDInfoAddresses</characteristicExtValues>
   <type>
-    <types>CatalogRef.IDInfoAddresses</types>
-    <types>String</types>
-    <types>CatalogRef.Addresses</types>
-    <stringQualifiers>
-      <length>512</length>
-    </stringQualifiers>
+   <types>String</types>
+   <stringQualifiers>
+    <length>512</length>
+   </stringQualifiers>
   </type>
-  <foldersOnTop>true</foldersOnTop>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>BothWays</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>ChartOfCharacteristicTypes.IDInfoTypes.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="9e80b819-ee53-4f2d-884a-2a48390eeb09">
-    <name>Comment</name>
-    <synonym>
-      <key>en</key>
-      <value>Comment</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
+  <name>ShowOnForm</name>
+  <synonym>
+   <key>en</key>
+   <value>D2A3BE06-5C0C-3EA1-1114-4FF2AE4A2F89</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
+  <name>ReadOnly</name>
+  <synonym>
+   <key>en</key>
+   <value>0C49B178-B68D-3658-86C7-7DC427BAA2D2</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="893ed389-61ca-4062-8cfc-1bc36817ad3b">
+  <name>AddressType</name>
+  <synonym>
+   <key>en</key>
+   <value>F0F20D6B-D718-1730-0A29-9D3A8F0A7487</value>
+  </synonym>
+  <type>
+   <types>EnumRef.AddressTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.AddressTypes.EnumValue.Other</value>
+  </fillValue>
+ </attributes>
+ <tabularSections uuid="060c9eed-e0be-44dc-acf0-47f055b5a6b5">
+  <producedTypes>
+   <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
+   <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
+  </producedTypes>
+  <name>ExternalDataProcess</name>
+  <synonym>
+   <key>en</key>
+   <value>3805B086-AB84-DDC0-0C4A-A80CA39AC95B</value>
+  </synonym>
+  <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
+   <name>Country</name>
+   <synonym>
+    <key>en</key>
+    <value>E94D39DF-05D6-D0D3-372F-F950F7F6FDB0</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Countries</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
-    <name>ShowOnForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Show on form</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="1cf38532-4bc1-47ec-b32d-769d817b54cc">
+   <name>ExternalDataProc</name>
+   <synonym>
+    <key>en</key>
+    <value>48732198-3222-E8B7-7D1A-A1638FF56AC9</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExternalDataProc</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
-    <name>ReadOnly</name>
-    <synonym>
-      <key>en</key>
-      <value>Read only</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="03ee1a47-cbc6-4069-85cf-4bb276377668">
+   <name>Settings</name>
+   <synonym>
+    <key>en</key>
+    <value>0BBE6D49-2509-0DE6-615E-EDC8B00AED3A</value>
+   </synonym>
+   <type>
+    <types>ValueStorage</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="893ed389-61ca-4062-8cfc-1bc36817ad3b">
-    <name>AddressType</name>
-    <synonym>
-      <key>en</key>
-      <value>Address type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.AddressTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.AddressTypes.EnumValue.Other</value>
-    </fillValue>
+ </tabularSections>
+ <tabularSections uuid="f1e8ef1f-0621-4d98-a987-1e5352b76eae">
+  <producedTypes>
+   <objectType typeId="9d46e559-87cc-4330-a684-670107d14be9" valueTypeId="abae850a-ab0f-47a4-9249-5bf4223f77ac"/>
+   <rowType typeId="8978c935-d150-4a45-b8ce-3258511f219f" valueTypeId="430c1784-1c50-439a-a9d4-cb2d157dddef"/>
+  </producedTypes>
+  <name>RelatedValues</name>
+  <synonym>
+   <key>en</key>
+   <value>0CF64C51-4BFA-663E-E276-6C495F87A2BC</value>
+  </synonym>
+  <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
+   <name>IDInfoType</name>
+   <synonym>
+    <key>en</key>
+    <value>F5F341E9-39E1-7D17-7D55-57ACA0FCE48A</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <tabularSections uuid="060c9eed-e0be-44dc-acf0-47f055b5a6b5">
-    <producedTypes>
-      <objectType typeId="6b8bd8eb-1a94-4c91-8b0b-da553a34904b" valueTypeId="a2c05f04-1a4d-4822-a62b-344b19b92dc0"/>
-      <rowType typeId="ae0aca17-9fee-4963-a9b0-1d4e8c3e580d" valueTypeId="849a8035-9eb6-4e6c-811f-4a6ae2ca8766"/>
-    </producedTypes>
-    <name>ExternalDataProcess</name>
-    <synonym>
-      <key>en</key>
-      <value>Plugins</value>
-    </synonym>
-    <attributes uuid="97042539-5fd3-4d0d-9edb-2f2308bb2bbc">
-      <name>Country</name>
-      <synonym>
-        <key>en</key>
-        <value>Country</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Countries</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="1cf38532-4bc1-47ec-b32d-769d817b54cc">
-      <name>ExternalDataProc</name>
-      <synonym>
-        <key>en</key>
-        <value>Plugins</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExternalDataProc</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="03ee1a47-cbc6-4069-85cf-4bb276377668">
-      <name>Settings</name>
-      <synonym>
-        <key>en</key>
-        <value>Settings</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="f1e8ef1f-0621-4d98-a987-1e5352b76eae">
-    <producedTypes>
-      <objectType typeId="9d46e559-87cc-4330-a684-670107d14be9" valueTypeId="abae850a-ab0f-47a4-9249-5bf4223f77ac"/>
-      <rowType typeId="8978c935-d150-4a45-b8ce-3258511f219f" valueTypeId="430c1784-1c50-439a-a9d4-cb2d157dddef"/>
-    </producedTypes>
-    <name>RelatedValues</name>
-    <synonym>
-      <key>en</key>
-      <value>Related values</value>
-    </synonym>
-    <attributes uuid="ffcf1a90-f99a-47b7-816f-34f62e89b44d">
-      <name>IDInfoType</name>
-      <synonym>
-        <key>en</key>
-        <value>Contact info type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="fd75f5ca-0369-412f-97ea-73d0d18620c0">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6665f12b-d3a6-4ad7-bf34-eaa5895e0d4c">
-    <name>SelectCountryForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Select country form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>87C83D61-4D80-3F19-912D-D87A54978E15</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="fd75f5ca-0369-412f-97ea-73d0d18620c0">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8DAE5538-404B-AF71-1B1C-CD0DC81BF5FC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>75E1AEC1-D8F8-E7C6-6512-222FAD235E78</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6665f12b-d3a6-4ad7-bf34-eaa5895e0d4c">
+  <name>SelectCountryForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6352651F-83B6-ECE2-2609-985E85537DF3</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:ChartOfCharacteristicTypes>

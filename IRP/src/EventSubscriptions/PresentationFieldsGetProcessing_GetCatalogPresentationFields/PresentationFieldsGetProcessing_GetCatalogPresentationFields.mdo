@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4933b72-dc76-482d-962f-8b8802b739a8">
-  <name>PresentationFieldsGetProcessing_GetCatalogPresentationFields</name>
-  <synonym>
-    <key>en</key>
-    <value>Presentation fields get processing get catalog presentation fields</value>
-  </synonym>
-  <source>
-    <types>ChartOfAccountsManager</types>
-    <types>ChartOfCharacteristicTypesManager</types>
-    <types>CatalogManager</types>
-  </source>
-  <event>PresentationFieldsGetProcessing</event>
-  <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>
+ <name>PresentationFieldsGetProcessing_GetCatalogPresentationFields</name>
+ <synonym>
+  <key>en</key>
+  <value>372DB7D1-D390-68BB-B80F-FF4E2DC1D2A7______________________________</value>
+ </synonym>
+ <source>
+  <types>ChartOfAccountsManager</types>
+  <types>ChartOfCharacteristicTypesManager</types>
+  <types>CatalogManager</types>
+ </source>
+ <event>PresentationFieldsGetProcessing</event>
+ <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>
 </mdclass:EventSubscription>

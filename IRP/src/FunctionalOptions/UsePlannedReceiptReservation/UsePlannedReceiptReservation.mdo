@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f3bbe52-ed88-4082-b53c-35e9182b6d40">
-  <name>UsePlannedReceiptReservation</name>
-  <synonym>
-    <key>en</key>
-    <value>Use planned receipt reservation</value>
-  </synonym>
-  <location>Constant.UsePlannedReceiptReservation</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.PlannedReceiptReservation</content>
-  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ReservationDate</content>
-  <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</content>
+ <name>UsePlannedReceiptReservation</name>
+ <synonym>
+  <key>en</key>
+  <value>1EC83174-939B-EE2A-A547-7B9CB374CEC6</value>
+ </synonym>
+ <location>Constant.UsePlannedReceiptReservation</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.PlannedReceiptReservation</content>
+ <content>Document.SalesOrder.TabularSection.ItemList.Attribute.ReservationDate</content>
+ <content>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</content>
 </mdclass:FunctionalOption>

@@ -1,123 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4feb9aec-bf24-4470-9a30-5a070218094a">
-  <producedTypes>
-    <selectionType typeId="e7d0cdc9-3db7-4026-99e5-c74bec4ca7f0" valueTypeId="268bd960-a132-4e42-b2b7-85a9e7e26b94"/>
-    <listType typeId="d520fbe1-63dc-42e8-9d05-f5eb4c223b62" valueTypeId="e694ef26-31a7-4123-980a-713db612ef07"/>
-    <managerType typeId="562ab751-790b-402e-8d51-9c2b17e17029" valueTypeId="78741fc1-3881-4a50-a486-27ba421e5d1b"/>
-    <recordSetType typeId="52acc91d-5f39-45c6-baa2-8329ea873073" valueTypeId="acfda72f-85b5-4f64-b320-f658ec57c2f6"/>
-    <recordKeyType typeId="a7c8bad0-0b6c-4375-b9f4-8567bfa607b1" valueTypeId="e3f2ffad-37d8-4532-85dd-45adb6b7a5a1"/>
-    <recordType typeId="42ef52ec-a290-4689-bf22-2e8e28ecbf61" valueTypeId="68b69ebc-12ee-4054-8768-dfad86426c0c"/>
-    <recordManagerType typeId="9703917c-1b3f-4403-9e38-7987075e81b7" valueTypeId="945b1ecb-e060-461f-9d54-704aaec6dc29"/>
-  </producedTypes>
-  <name>T1010S_ScannedBarcode</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4feb9aec-bf24-4470-9a30-5a070218094a">
+ <producedTypes>
+  <selectionType typeId="e7d0cdc9-3db7-4026-99e5-c74bec4ca7f0" valueTypeId="268bd960-a132-4e42-b2b7-85a9e7e26b94"/>
+  <listType typeId="d520fbe1-63dc-42e8-9d05-f5eb4c223b62" valueTypeId="e694ef26-31a7-4123-980a-713db612ef07"/>
+  <managerType typeId="562ab751-790b-402e-8d51-9c2b17e17029" valueTypeId="78741fc1-3881-4a50-a486-27ba421e5d1b"/>
+  <recordSetType typeId="52acc91d-5f39-45c6-baa2-8329ea873073" valueTypeId="acfda72f-85b5-4f64-b320-f658ec57c2f6"/>
+  <recordKeyType typeId="a7c8bad0-0b6c-4375-b9f4-8567bfa607b1" valueTypeId="e3f2ffad-37d8-4532-85dd-45adb6b7a5a1"/>
+  <recordType typeId="42ef52ec-a290-4689-bf22-2e8e28ecbf61" valueTypeId="68b69ebc-12ee-4054-8768-dfad86426c0c"/>
+  <recordManagerType typeId="9703917c-1b3f-4403-9e38-7987075e81b7" valueTypeId="945b1ecb-e060-461f-9d54-704aaec6dc29"/>
+ </producedTypes>
+ <name>T1010S_ScannedBarcode</name>
+ <synonym>
+  <key>en</key>
+  <value>76A8FED7-1BFE-F9AC-CBF1-1AF4EAF4D2EE</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T1010S_ScannedBarcode.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>EF3583E1-16D6-FBA6-6203-3D468E409129</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>DDE2B52E-E9D2-50C2-2A41-15408A9600F5</value>
+ </listPresentation>
+ <resources uuid="ad9b3ba1-2a02-4039-a2ad-4a1037bec2b5">
+  <name>Barcode</name>
   <synonym>
-    <key>en</key>
-    <value>Scanned barcode</value>
+   <key>en</key>
+   <value>FFB530B1-48DD-0ABB-B4CD-D05830BD768E</value>
   </synonym>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T1010S_ScannedBarcode.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Scanned barcode</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Scanned barcodes</value>
-  </listPresentation>
-  <resources uuid="ad9b3ba1-2a02-4039-a2ad-4a1037bec2b5">
-    <name>Barcode</name>
-    <synonym>
-      <key>en</key>
-      <value>Barcode</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeBarcode</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="8f0e1373-28f6-4592-8e78-db6021cac142">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="5f419aee-66f8-42cf-ab1c-15841c4b9512">
-    <name>Count</name>
-    <synonym>
-      <key>en</key>
-      <value>Count</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <nonNegative>true</nonNegative>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="559d3e1d-b52f-4ea6-9b50-b15c7eabb2bd">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <denyIncompleteValues>true</denyIncompleteValues>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="d59a991a-d010-4645-bb11-80fc39ffa641">
-    <name>InfoID</name>
-    <synonym>
-      <key>en</key>
-      <value>Info ID</value>
-    </synonym>
-    <type>
-      <types>UUID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="f1e7b88d-cab3-44dc-ade1-ef2626ea5214">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>DefinedType.typeBarcode</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="8f0e1373-28f6-4592-8e78-db6021cac142">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>BAA8EF2A-0C6D-DC8E-EB75-52D95C4B1226</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="5f419aee-66f8-42cf-ab1c-15841c4b9512">
+  <name>Count</name>
+  <synonym>
+   <key>en</key>
+   <value>88057A9C-EEBF-C08B-B69E-E0CA1AFDD91D</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="559d3e1d-b52f-4ea6-9b50-b15c7eabb2bd">
+  <name>Basis</name>
+  <synonym>
+   <key>en</key>
+   <value>E2A46B74-D60E-F534-4B7E-E2FB53A77908</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <denyIncompleteValues>true</denyIncompleteValues>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="d59a991a-d010-4645-bb11-80fc39ffa641">
+  <name>InfoID</name>
+  <synonym>
+   <key>en</key>
+   <value>453983B1-648C-3189-956E-E258A215EB48</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="f1e7b88d-cab3-44dc-ade1-ef2626ea5214">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>E0860624-9D9B-9631-1C16-6B6CD87D233F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

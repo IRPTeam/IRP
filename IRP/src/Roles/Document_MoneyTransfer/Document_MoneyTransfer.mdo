@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5b7c166e-07fd-4953-9d7e-b9eed6dfba05">
-  <name>Document_MoneyTransfer</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Money transfer&quot;</value>
-  </synonym>
+ <name>Document_MoneyTransfer</name>
+ <synonym>
+  <key>en</key>
+  <value>91425D78-89FC-B690-0DC2-24962577DDF4</value>
+ </synonym>
 </mdclass:Role>

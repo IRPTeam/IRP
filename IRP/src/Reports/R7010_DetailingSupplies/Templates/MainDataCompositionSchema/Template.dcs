@@ -26,7 +26,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Free quantity</v8:content>
+					<v8:content>49F19F01-0C04-3013-3B1D-DEA0CD27BAA4</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -65,7 +65,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Entry demand quantity</v8:content>
+					<v8:content>852FA4EC-4CFA-843C-C06A-ABB2428C98D2</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -75,7 +75,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Corrected demand quantity</v8:content>
+					<v8:content>39362C37-4A54-C43B-B7A0-07201B678522</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -85,7 +85,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Final demand quantity</v8:content>
+					<v8:content>27A71A88-58F1-7135-5273-3ABC43CBD761</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -95,7 +95,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Balance quantity</v8:content>
+					<v8:content>F551FCF6-DCB9-00A6-62FE-E7832693DCC9</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -105,7 +105,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reserved quantity</v8:content>
+					<v8:content>033623ED-3C92-CCCB-BF9B-B1BBB3F43557</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -115,7 +115,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Needed produce quantity</v8:content>
+					<v8:content>4127BF53-BB50-A4FF-F949-979EAEE357E3</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -125,7 +125,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Produced produce quantity</v8:content>
+					<v8:content>B7855AE2-F24A-F9EE-E1E5-5433CBD58EAC</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -135,7 +135,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Reserved produce quantity</v8:content>
+					<v8:content>8BDC779F-5AD1-5781-149A-A68CD386EBC1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -145,7 +145,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Written off produce quantity</v8:content>
+					<v8:content>BB4D6F8A-DF41-CC6D-D1B9-9943342213BF</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -155,7 +155,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Needed procurement quantity</v8:content>
+					<v8:content>2389324E-D418-1393-3611-13DC9AC24253</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -165,7 +165,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Request procurement quantity</v8:content>
+					<v8:content>56BC80C4-0915-986A-A5E7-79D726D43EDE</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -175,7 +175,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Lack procurement quantity</v8:content>
+					<v8:content>058017B3-8CC9-0548-8BAC-C681935EADC3</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -185,7 +185,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Order transfer quantity</v8:content>
+					<v8:content>09727A1A-E5AF-1AD6-690F-F0B338D9D7A2</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -195,7 +195,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Confirmed transfer quantity</v8:content>
+					<v8:content>8AAB0059-15A0-DF95-5023-3408F5326501</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -205,7 +205,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Order purchase quantity</v8:content>
+					<v8:content>95374415-E92C-B971-156C-CCDD537BD60F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -215,7 +215,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Confirmed purchase quantity</v8:content>
+					<v8:content>7F229D3C-6254-6F3A-A08F-F3A94EEB895D</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -344,7 +344,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Begin of period</v8:content>
+				<v8:content>3B8D5966-C07A-091A-ACAA-A29E4634C81C</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -361,7 +361,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>09CC7AC9-8D19-9BCC-CF98-863BF1C316F0</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -378,7 +378,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>End of period</v8:content>
+				<v8:content>3E275227-D92A-48EF-FA54-4BA0B357F7F4</v8:content>
 			</v8:item>
 		</title>
 		<valueType>
@@ -399,7 +399,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Demand</v8:content>
+							<v8:content>9EB952D7-F313-7903-3055-5BC64829BFBE</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -407,7 +407,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Entry</v8:content>
+								<v8:content>1B27EE5E-2244-4818-8D53-3FAC5A74FA55</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -416,7 +416,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Corrected</v8:content>
+								<v8:content>EC40F768-1F67-6841-1A8C-C3184DDEB907</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -425,7 +425,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Final</v8:content>
+								<v8:content>B457ED37-DC27-D001-1862-27F62F0DAEA6</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -435,7 +435,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Balance</v8:content>
+							<v8:content>A0543F04-4C27-6D27-738D-DB80F7108749</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -443,7 +443,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Quantity</v8:content>
+								<v8:content>C30B93AC-0095-FC6D-DF53-31324EF0B0E3</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -452,7 +452,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Reserved</v8:content>
+								<v8:content>D9CB15B0-5C25-0F68-8E37-7B18F8F042AA</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -461,7 +461,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Free</v8:content>
+								<v8:content>C1C7DE48-09CE-5AB5-5978-867B4B7B33A1</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -471,7 +471,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>To produce</v8:content>
+							<v8:content>13030A56-8C29-F03E-ED67-717ED4C2FCAC</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -479,7 +479,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Needed</v8:content>
+								<v8:content>B8214CCC-E56F-7432-268A-A1363516AD8D</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -488,7 +488,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Produced</v8:content>
+								<v8:content>4B01C9F0-C7E0-C8AE-E003-31D02BB43474</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -497,7 +497,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Reserved</v8:content>
+								<v8:content>8BD34C51-736E-8AF3-3FE7-7A4969DCD835</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -506,7 +506,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Written off</v8:content>
+								<v8:content>DF0E5EE1-AB75-FADE-EDC0-0108DA9183D0</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -516,7 +516,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Procurement</v8:content>
+							<v8:content>F9FEAA88-EDA5-3BED-DCFC-C2DF68FFBE72</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -524,7 +524,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Needed</v8:content>
+								<v8:content>CCE36699-C338-A82B-BD88-8241AD4A8E92</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -533,7 +533,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Request</v8:content>
+								<v8:content>3960DD7A-17CF-C142-29F0-08C9B71FBB39</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -542,7 +542,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Lack</v8:content>
+								<v8:content>F308574C-F7B0-1736-6C98-888619D284C2</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -552,7 +552,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Transfer</v8:content>
+							<v8:content>47FF1CAE-9666-356F-FA01-140F796A0BA2</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -560,7 +560,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Created</v8:content>
+								<v8:content>512C22C7-9D66-5533-3AD7-7EA5A523B1BD</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -569,7 +569,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Confirmed</v8:content>
+								<v8:content>4BE6D2BE-C84C-0FE3-3053-39E819A9A8F5</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -579,7 +579,7 @@ FROM
 					<dcsset:lwsTitle>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Purchase</v8:content>
+							<v8:content>D291EF44-C46B-25EC-CA9A-A16F9D49598F</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -587,7 +587,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Create</v8:content>
+								<v8:content>E9379981-9325-3C3F-FDC5-5518A0FC17C0</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>
@@ -596,7 +596,7 @@ FROM
 						<dcsset:lwsTitle>
 							<v8:item>
 								<v8:lang>en</v8:lang>
-								<v8:content>Confirmed</v8:content>
+								<v8:content>C9E68AF0-949B-7346-626B-BFB6CDECE2FA</v8:content>
 							</v8:item>
 						</dcsset:lwsTitle>
 					</dcsset:item>

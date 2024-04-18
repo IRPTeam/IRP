@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c29ac918-a1c5-427a-9e24-d8b3083df56e">
-  <producedTypes>
-    <selectionType typeId="485790ca-b271-40f0-87e9-270fa98d5dc8" valueTypeId="b59c325e-df56-4d15-883e-af0f68666321"/>
-    <listType typeId="2fbd3be2-f3af-4d45-981c-7deb684399f7" valueTypeId="b0ee8b60-d75c-400e-8f08-38fc741e808a"/>
-    <managerType typeId="d23951f2-e907-4a8b-8caf-0ad2520ba170" valueTypeId="8fc55437-30cc-4ef5-9734-8b0fbd0f325d"/>
-    <recordSetType typeId="df3e5c6b-ab6e-4947-905b-28e80888163c" valueTypeId="f4067437-8f64-4515-a9d6-a75ad2f2eb1b"/>
-    <recordKeyType typeId="58439272-bae8-47c9-9014-b424af830430" valueTypeId="e176ab09-90fc-4622-a300-0fa0ad7ec23d"/>
-    <recordType typeId="65558e7a-f014-417e-9e65-bb2f28c35d65" valueTypeId="2f4480e6-0108-454d-a5ea-f329ee301afa"/>
-  </producedTypes>
-  <name>R2006T_Certificates</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c29ac918-a1c5-427a-9e24-d8b3083df56e">
+ <producedTypes>
+  <selectionType typeId="485790ca-b271-40f0-87e9-270fa98d5dc8" valueTypeId="b59c325e-df56-4d15-883e-af0f68666321"/>
+  <listType typeId="2fbd3be2-f3af-4d45-981c-7deb684399f7" valueTypeId="b0ee8b60-d75c-400e-8f08-38fc741e808a"/>
+  <managerType typeId="d23951f2-e907-4a8b-8caf-0ad2520ba170" valueTypeId="8fc55437-30cc-4ef5-9734-8b0fbd0f325d"/>
+  <recordSetType typeId="df3e5c6b-ab6e-4947-905b-28e80888163c" valueTypeId="f4067437-8f64-4515-a9d6-a75ad2f2eb1b"/>
+  <recordKeyType typeId="58439272-bae8-47c9-9014-b424af830430" valueTypeId="e176ab09-90fc-4622-a300-0fa0ad7ec23d"/>
+  <recordType typeId="65558e7a-f014-417e-9e65-bb2f28c35d65" valueTypeId="2f4480e6-0108-454d-a5ea-f329ee301afa"/>
+ </producedTypes>
+ <name>R2006T_Certificates</name>
+ <synonym>
+  <key>en</key>
+  <value>5E3BAFCA-88E0-9582-229C-C641BD794153</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <listPresentation>
+  <key>en</key>
+  <value>3F14B2C2-5DC5-9FFA-AAC7-772AD79FC846</value>
+ </listPresentation>
+ <resources uuid="643be08c-53a5-4efb-85c8-81ae4e470121">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R2006 Certificates</value>
+   <key>en</key>
+   <value>9E665CEA-AE72-D34E-EC5D-D46FB603F458</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <listPresentation>
-    <key>en</key>
-    <value>R2006 Certificates</value>
-  </listPresentation>
-  <resources uuid="643be08c-53a5-4efb-85c8-81ae4e470121">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>5</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="eb50441c-8146-44c3-bd6c-fd356e24003c">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="1b17cc57-3a8b-4447-85a4-63efaa9e2156">
-    <name>MovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Movement type</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="b3f3e021-c0ce-409a-babb-74bda53eb543">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="f3cf2231-9147-4fbd-889d-ac21370e3cc3">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="eb50441c-8146-44c3-bd6c-fd356e24003c">
+  <name>Amount</name>
+  <synonym>
+   <key>en</key>
+   <value>BBED4C5B-99EF-2441-12C8-83979AC3C45E</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="1b17cc57-3a8b-4447-85a4-63efaa9e2156">
+  <name>MovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>80CD0302-9F8D-EFF6-68D8-88803E9096D5</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="b3f3e021-c0ce-409a-babb-74bda53eb543">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>27391913-1A00-9881-1BBC-C172D1F05F7B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="f3cf2231-9147-4fbd-889d-ac21370e3cc3">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>56133C7E-948D-E2F4-44BD-D96FE4F63989</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

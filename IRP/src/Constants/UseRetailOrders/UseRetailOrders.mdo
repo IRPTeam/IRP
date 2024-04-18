@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="124ec46f-f538-475b-b603-90efa56c1e8a">
-  <producedTypes>
-    <managerType typeId="780b8465-fbff-40ca-8b75-9300c19ccc74" valueTypeId="a7b57c53-5c24-4feb-ac95-798be71f1785"/>
-    <valueManagerType typeId="283508bf-dbfd-4304-a52f-fb26112a426f" valueTypeId="5e5f44b5-bc98-404c-a6a8-f8f549ad0bc4"/>
-    <valueKeyType typeId="7a295fdc-c1ce-404b-8942-56e9e9a43f5a" valueTypeId="6edbd422-b302-4077-a26a-8af7895d66dd"/>
-  </producedTypes>
-  <name>UseRetailOrders</name>
-  <synonym>
-    <key>en</key>
-    <value>Use retail orders</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="124ec46f-f538-475b-b603-90efa56c1e8a">
+ <producedTypes>
+  <managerType typeId="780b8465-fbff-40ca-8b75-9300c19ccc74" valueTypeId="a7b57c53-5c24-4feb-ac95-798be71f1785"/>
+  <valueManagerType typeId="283508bf-dbfd-4304-a52f-fb26112a426f" valueTypeId="5e5f44b5-bc98-404c-a6a8-f8f549ad0bc4"/>
+  <valueKeyType typeId="7a295fdc-c1ce-404b-8942-56e9e9a43f5a" valueTypeId="6edbd422-b302-4077-a26a-8af7895d66dd"/>
+ </producedTypes>
+ <name>UseRetailOrders</name>
+ <synonym>
+  <key>en</key>
+  <value>2BF394A0-10E0-90B6-6822-2CF15F22A8A5</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

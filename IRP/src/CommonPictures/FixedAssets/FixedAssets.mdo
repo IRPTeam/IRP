@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7a7e9977-7381-46e4-8da8-288831a0619f">
-  <name>FixedAssets</name>
-  <synonym>
-    <key>en</key>
-    <value>Fixed assets</value>
-  </synonym>
+ <name>FixedAssets</name>
+ <synonym>
+  <key>en</key>
+  <value>DD27E853-3952-A510-01C7-70C2C3577F6F</value>
+ </synonym>
 </mdclass:CommonPicture>

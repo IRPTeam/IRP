@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3e14bd9a-b1d1-43b3-8432-f45c3d66b6f7">
-  <producedTypes>
-    <selectionType typeId="7af50a7a-5c1d-4446-a4e8-ca509b349596" valueTypeId="9a6855a1-2d87-46c3-995f-a82d16cf46c8"/>
-    <listType typeId="f2ecd1c4-2b37-419a-9c19-549df87e6e63" valueTypeId="513ef83c-b94a-41f5-95e7-24da6f3198fc"/>
-    <managerType typeId="01974a28-4d10-4d71-891a-392a456f25a6" valueTypeId="7e6b6478-3a47-4e63-9853-da557a8a983b"/>
-    <recordSetType typeId="a348fff0-e4d1-4939-92dc-f399e3c64637" valueTypeId="571f30c2-7e6e-4bef-bf33-d9845b076aff"/>
-    <recordKeyType typeId="72be9b92-261f-4623-a3f3-8495b6a2c760" valueTypeId="67e41c1b-08f8-4449-bcb1-b3b01d9856cb"/>
-    <recordType typeId="26676c42-0d7b-4d40-ac39-9d7c7ab87ac0" valueTypeId="8a37b006-497a-4c63-8753-4dc7a951e503"/>
-    <recordManagerType typeId="2be0237b-a5c2-4fec-87ce-60edbf0a57d5" valueTypeId="3e76affe-44d7-4201-813f-874f5c4eb83a"/>
-  </producedTypes>
-  <name>AuditLock</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3e14bd9a-b1d1-43b3-8432-f45c3d66b6f7">
+ <producedTypes>
+  <selectionType typeId="7af50a7a-5c1d-4446-a4e8-ca509b349596" valueTypeId="9a6855a1-2d87-46c3-995f-a82d16cf46c8"/>
+  <listType typeId="f2ecd1c4-2b37-419a-9c19-549df87e6e63" valueTypeId="513ef83c-b94a-41f5-95e7-24da6f3198fc"/>
+  <managerType typeId="01974a28-4d10-4d71-891a-392a456f25a6" valueTypeId="7e6b6478-3a47-4e63-9853-da557a8a983b"/>
+  <recordSetType typeId="a348fff0-e4d1-4939-92dc-f399e3c64637" valueTypeId="571f30c2-7e6e-4bef-bf33-d9845b076aff"/>
+  <recordKeyType typeId="72be9b92-261f-4623-a3f3-8495b6a2c760" valueTypeId="67e41c1b-08f8-4449-bcb1-b3b01d9856cb"/>
+  <recordType typeId="26676c42-0d7b-4d40-ac39-9d7c7ab87ac0" valueTypeId="8a37b006-497a-4c63-8753-4dc7a951e503"/>
+  <recordManagerType typeId="2be0237b-a5c2-4fec-87ce-60edbf0a57d5" valueTypeId="3e76affe-44d7-4201-813f-874f5c4eb83a"/>
+ </producedTypes>
+ <name>AuditLock</name>
+ <synonym>
+  <key>en</key>
+  <value>D4F7CF89-788D-F842-2936-6E0B6F271921</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>03E4B563-27C8-25D7-7C64-4577415CFAA4</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>59C94AD7-E88E-6ABD-DAFE-E79197C155E4</value>
+ </listPresentation>
+ <dimensions uuid="4f0971b4-a3aa-4451-905d-705816410b0f">
+  <name>Document</name>
   <synonym>
-    <key>en</key>
-    <value>Audit lock</value>
+   <key>en</key>
+   <value>75CFB40B-9C8D-2235-512D-DC62D19E0D83</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Audit lock</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Audit locks</value>
-  </listPresentation>
-  <dimensions uuid="4f0971b4-a3aa-4451-905d-705816410b0f">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

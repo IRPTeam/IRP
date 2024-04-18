@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9cd45e9a-090f-4d54-933b-85416a4379eb">
-  <name>LocalizationServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Localization server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>LocalizationServer</name>
+ <synonym>
+  <key>en</key>
+  <value>2DA1390C-16E0-E1AC-C912-251EA08E5D63</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

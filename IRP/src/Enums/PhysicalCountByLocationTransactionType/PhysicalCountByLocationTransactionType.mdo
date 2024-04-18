@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9e09edd1-8842-467a-8899-6fceaa5b91ed">
-  <producedTypes>
-    <refType typeId="83633a74-5def-419e-89be-b5e432ff4dc7" valueTypeId="5740fc3f-de99-4968-be75-af1f7f0ca630"/>
-    <listType typeId="687ebb10-6c19-482f-9e25-7f19594e2378" valueTypeId="7287c1f3-6a12-4884-9128-6288af17344f"/>
-    <managerType typeId="2ab1969b-47be-412c-9279-18f5545a7b4b" valueTypeId="498284e6-9f1c-46af-a594-d729deb9a40d"/>
-  </producedTypes>
-  <name>PhysicalCountByLocationTransactionType</name>
+ <producedTypes>
+  <refType typeId="83633a74-5def-419e-89be-b5e432ff4dc7" valueTypeId="5740fc3f-de99-4968-be75-af1f7f0ca630"/>
+  <listType typeId="687ebb10-6c19-482f-9e25-7f19594e2378" valueTypeId="7287c1f3-6a12-4884-9128-6288af17344f"/>
+  <managerType typeId="2ab1969b-47be-412c-9279-18f5545a7b4b" valueTypeId="498284e6-9f1c-46af-a594-d729deb9a40d"/>
+ </producedTypes>
+ <name>PhysicalCountByLocationTransactionType</name>
+ <synonym>
+  <key>en</key>
+  <value>7D38D694-88EB-CCF6-6260-00985490AE0E_______</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="52c5069b-cbbd-4a7c-afcf-7674c7893aef">
+  <name>PhysicalInventory</name>
   <synonym>
-    <key>en</key>
-    <value>Physical count by location transaction type</value>
+   <key>en</key>
+   <value>2604E6FB-A0A2-B42A-AD20-034D2729BEC3</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="52c5069b-cbbd-4a7c-afcf-7674c7893aef">
-    <name>PhysicalInventory</name>
-    <synonym>
-      <key>en</key>
-      <value>Physical inventory</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="3c5491d7-0ee8-47a0-80a5-c88b031e056e">
-    <name>Package</name>
-    <synonym>
-      <key>en</key>
-      <value>Package</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="3c5491d7-0ee8-47a0-80a5-c88b031e056e">
+  <name>Package</name>
+  <synonym>
+   <key>en</key>
+   <value>403DB65A-8403-09CC-C7EB-B8A6829EC427</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

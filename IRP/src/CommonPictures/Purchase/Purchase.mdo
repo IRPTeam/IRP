@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="76b30dcb-e257-4539-ac70-8b494393e472">
-  <name>Purchase</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase</value>
-  </synonym>
+ <name>Purchase</name>
+ <synonym>
+  <key>en</key>
+  <value>95E95787-421A-FC8A-A5DF-F2D2C2A4F655</value>
+ </synonym>
 </mdclass:CommonPicture>

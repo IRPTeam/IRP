@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a45e7ce4-925c-4ad3-8fb3-7a048364b392">
-  <name>Transfer</name>
-  <synonym>
-    <key>en</key>
-    <value>Transfer</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Document.CashTransferOrder</content>
-  <content>Document.MoneyTransfer</content>
-  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+ <name>Transfer</name>
+ <synonym>
+  <key>en</key>
+  <value>04943421-A32B-6CC8-8B24-425473A52BF5</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.CashTransferOrder</content>
+ <content>Document.MoneyTransfer</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

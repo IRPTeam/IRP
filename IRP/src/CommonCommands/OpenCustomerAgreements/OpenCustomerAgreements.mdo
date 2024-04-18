@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f5749d7f-4597-4a04-9a55-0073c5679fa7">
-  <name>OpenCustomerAgreements</name>
-  <synonym>
-    <key>en</key>
-    <value>Customers partner terms</value>
-  </synonym>
-  <group>NavigationPanelImportant</group>
-  <commandParameterType/>
-  <representation>Auto</representation>
+ <name>OpenCustomerAgreements</name>
+ <synonym>
+  <key>en</key>
+  <value>7C65CEB7-B2C1-DDED-D13D-D8B76C142BF4</value>
+ </synonym>
+ <group>NavigationPanelImportant</group>
+ <commandParameterType/>
+ <representation>Auto</representation>
 </mdclass:CommonCommand>

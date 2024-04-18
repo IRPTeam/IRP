@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c09f1cc9-dd3c-4e85-bea2-44bb5c3996eb">
-  <name>LinkedDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Linked documents</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>LinkedDocuments</name>
+ <synonym>
+  <key>en</key>
+  <value>4335773D-297F-68F1-1898-8EF8DC62F987</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

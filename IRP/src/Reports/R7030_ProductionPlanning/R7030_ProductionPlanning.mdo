@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c303aae4-86c7-4385-baea-74853f98aa56">
-  <producedTypes>
-    <objectType typeId="88c4eb03-30d3-4b8a-a7df-312cab937342" valueTypeId="6758ac12-b647-46fc-8484-74a5699b4add"/>
-    <managerType typeId="afa9db84-b7ee-4793-8e1b-be1d318ff2ed" valueTypeId="0bdee112-2c67-43cb-91bb-0828d48205ae"/>
-  </producedTypes>
-  <name>R7030_ProductionPlanning</name>
+ <producedTypes>
+  <objectType typeId="88c4eb03-30d3-4b8a-a7df-312cab937342" valueTypeId="6758ac12-b647-46fc-8484-74a5699b4add"/>
+  <managerType typeId="afa9db84-b7ee-4793-8e1b-be1d318ff2ed" valueTypeId="0bdee112-2c67-43cb-91bb-0828d48205ae"/>
+ </producedTypes>
+ <name>R7030_ProductionPlanning</name>
+ <synonym>
+  <key>en</key>
+  <value>5D0DA70B-E147-1F62-295F-F906BA51A9F9</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R7030_ProductionPlanning.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="7fad9709-e71e-4528-ba55-976b474989b8">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R7030 Production planning</value>
+   <key>en</key>
+   <value>CB8AFC4C-BEA6-6598-82AB-BD5E589B60C6</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R7030_ProductionPlanning.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="7fad9709-e71e-4528-ba55-976b474989b8">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

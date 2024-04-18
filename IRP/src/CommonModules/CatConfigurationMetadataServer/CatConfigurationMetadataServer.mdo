@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="16e54cfb-09ff-4861-b017-d24c07771a14">
-  <name>CatConfigurationMetadataServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat configuration metadata server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatConfigurationMetadataServer</name>
+ <synonym>
+  <key>en</key>
+  <value>58EF1194-1A12-F78B-BE66-6AA7D2B10287</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

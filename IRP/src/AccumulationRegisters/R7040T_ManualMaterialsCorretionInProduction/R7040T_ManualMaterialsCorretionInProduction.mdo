@@ -1,130 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0e08c29b-84e6-438f-b185-5c461b76fa6e">
-  <producedTypes>
-    <selectionType typeId="59f1925d-9746-4345-ba7b-6ba61425fe07" valueTypeId="4300913e-d54e-4529-9e95-fb276be83fc8"/>
-    <listType typeId="57bc1048-050b-4fab-a35c-d02118ea1af6" valueTypeId="8692b84c-53b1-485d-9dc0-c46bcfa7ac99"/>
-    <managerType typeId="d940c3e5-a7f2-4329-b979-b9a463f97214" valueTypeId="63c6d30f-d0ab-4d10-8b6d-2fa8522f9114"/>
-    <recordSetType typeId="15ae8616-eae7-44dd-9868-fb2d7cffb66c" valueTypeId="c9c2f700-feb4-4e5d-960a-1e607d0db847"/>
-    <recordKeyType typeId="5cb9e2bc-a035-47f3-9c7a-d753e2d46c0b" valueTypeId="949580dd-d0c0-4a82-ab00-612e6b925010"/>
-    <recordType typeId="ad2bda33-0c9c-4d95-9796-8c2a503dc5b3" valueTypeId="94e2e0ea-9b07-46f5-971c-bb4b6fb0aacb"/>
-  </producedTypes>
-  <name>R7040T_ManualMaterialsCorretionInProduction</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="0e08c29b-84e6-438f-b185-5c461b76fa6e">
+ <producedTypes>
+  <selectionType typeId="59f1925d-9746-4345-ba7b-6ba61425fe07" valueTypeId="4300913e-d54e-4529-9e95-fb276be83fc8"/>
+  <listType typeId="57bc1048-050b-4fab-a35c-d02118ea1af6" valueTypeId="8692b84c-53b1-485d-9dc0-c46bcfa7ac99"/>
+  <managerType typeId="d940c3e5-a7f2-4329-b979-b9a463f97214" valueTypeId="63c6d30f-d0ab-4d10-8b6d-2fa8522f9114"/>
+  <recordSetType typeId="15ae8616-eae7-44dd-9868-fb2d7cffb66c" valueTypeId="c9c2f700-feb4-4e5d-960a-1e607d0db847"/>
+  <recordKeyType typeId="5cb9e2bc-a035-47f3-9c7a-d753e2d46c0b" valueTypeId="949580dd-d0c0-4a82-ab00-612e6b925010"/>
+  <recordType typeId="ad2bda33-0c9c-4d95-9796-8c2a503dc5b3" valueTypeId="94e2e0ea-9b07-46f5-971c-bb4b6fb0aacb"/>
+ </producedTypes>
+ <name>R7040T_ManualMaterialsCorretionInProduction</name>
+ <synonym>
+  <key>en</key>
+  <value>CA961A5F-4FAD-2709-9061-1161A28CB901__________</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="7dc9f0a5-5010-4146-a8b4-dde8987f7c49">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>R7040 Manual materials corretion in production</value>
+   <key>en</key>
+   <value>DA5EAEF5-E543-935D-DAC7-7B67D2D124D1</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="7dc9f0a5-5010-4146-a8b4-dde8987f7c49">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="9351d619-25d1-474c-a10a-801f29790680">
-    <name>QuantityBOM</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity BOM</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="f7941f48-c944-4eaf-86d5-6896d8e7600a">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="2ccbad16-f310-4f8b-8caa-6df49e7b28fd">
-    <name>BusinessUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Business unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d5b65cc8-406b-467e-affd-d00b5805e4e3">
-    <name>BillOfMaterials</name>
-    <synonym>
-      <key>en</key>
-      <value>Bill of materials</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BillOfMaterials</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="28567faa-c403-4a37-97c7-7b81b81aaffe">
-    <name>PlanningPeriod</name>
-    <synonym>
-      <key>en</key>
-      <value>Planning period</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.PlanningPeriods</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="33cb4d02-73c2-48a7-8dc4-155d8dfd1dfc">
-    <name>ItemKeyBOM</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key BOM</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3daaa617-4405-47f4-955c-b8f4780b115a">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="9351d619-25d1-474c-a10a-801f29790680">
+  <name>QuantityBOM</name>
+  <synonym>
+   <key>en</key>
+   <value>1B863E97-8709-B35F-FD4E-ED0EF6359482</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="f7941f48-c944-4eaf-86d5-6896d8e7600a">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>A596DA4C-3EA0-BFDC-C715-5383A000BEE8</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="2ccbad16-f310-4f8b-8caa-6df49e7b28fd">
+  <name>BusinessUnit</name>
+  <synonym>
+   <key>en</key>
+   <value>80BE7D20-4052-A461-1AD4-4564D5006AE0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="d5b65cc8-406b-467e-affd-d00b5805e4e3">
+  <name>BillOfMaterials</name>
+  <synonym>
+   <key>en</key>
+   <value>97D93EC0-D5E5-0365-50F5-54EFBD69E8CE</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BillOfMaterials</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="28567faa-c403-4a37-97c7-7b81b81aaffe">
+  <name>PlanningPeriod</name>
+  <synonym>
+   <key>en</key>
+   <value>4B6821E4-E695-6706-6D7D-DE4547652356</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.PlanningPeriods</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="33cb4d02-73c2-48a7-8dc4-155d8dfd1dfc">
+  <name>ItemKeyBOM</name>
+  <synonym>
+   <key>en</key>
+   <value>1A91285D-2465-9CE1-1756-6876C7C53584</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3daaa617-4405-47f4-955c-b8f4780b115a">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>4810AF9A-A0AC-38C8-829E-E0B1C680E031</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

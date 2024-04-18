@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="248b0c65-d144-4bef-868d-9e4d2f14c3b7">
-  <producedTypes>
-    <objectType typeId="36a63082-bb14-4d50-968a-a5837fe87f2d" valueTypeId="d97f5c6b-998f-49c2-8ef7-3c2f9ce66da1"/>
-    <managerType typeId="f6d2b8ef-cbc0-457b-8f6f-10c667f7774a" valueTypeId="129bb79f-2689-4f16-a8e9-d8e38b207641"/>
-  </producedTypes>
-  <name>R5020_PartnersBalance</name>
+ <producedTypes>
+  <objectType typeId="36a63082-bb14-4d50-968a-a5837fe87f2d" valueTypeId="d97f5c6b-998f-49c2-8ef7-3c2f9ce66da1"/>
+  <managerType typeId="f6d2b8ef-cbc0-457b-8f6f-10c667f7774a" valueTypeId="129bb79f-2689-4f16-a8e9-d8e38b207641"/>
+ </producedTypes>
+ <name>R5020_PartnersBalance</name>
+ <synonym>
+  <key>en</key>
+  <value>20903E02-28A4-0665-5709-9E0C3708149D</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R5020_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="ac24f3d9-2641-453a-8943-719c3bcdcdec">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R5020 Partners balance</value>
+   <key>en</key>
+   <value>ABFA8AAB-736A-1DE1-18A0-01D5CE97F7F2</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R5020_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="ac24f3d9-2641-453a-8943-719c3bcdcdec">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

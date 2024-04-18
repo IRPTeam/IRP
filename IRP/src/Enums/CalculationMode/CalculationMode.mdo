@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4c910f14-bab2-4b44-9705-3cea894f0381">
-  <producedTypes>
-    <refType typeId="f5ebe3ae-28c6-4b9a-9704-122151bd3fa0" valueTypeId="4e66047f-3d72-4397-bf04-4592587a5bbf"/>
-    <listType typeId="be16fd22-6a43-4576-a236-5294b4927273" valueTypeId="801b3eb7-fc96-4015-9d62-2d3f596f9584"/>
-    <managerType typeId="39b2a07e-7040-47f0-93d7-364c7bc6e900" valueTypeId="fec1f7da-207f-4145-bfb0-59be07683532"/>
-  </producedTypes>
-  <name>CalculationMode</name>
+ <producedTypes>
+  <refType typeId="f5ebe3ae-28c6-4b9a-9704-122151bd3fa0" valueTypeId="4e66047f-3d72-4397-bf04-4592587a5bbf"/>
+  <listType typeId="be16fd22-6a43-4576-a236-5294b4927273" valueTypeId="801b3eb7-fc96-4015-9d62-2d3f596f9584"/>
+  <managerType typeId="39b2a07e-7040-47f0-93d7-364c7bc6e900" valueTypeId="fec1f7da-207f-4145-bfb0-59be07683532"/>
+ </producedTypes>
+ <name>CalculationMode</name>
+ <synonym>
+  <key>en</key>
+  <value>8505C14B-944B-EB44-427C-CFB23E16ECF5</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
+  <name>LandedCost</name>
   <synonym>
-    <key>en</key>
-    <value>Calculation mode</value>
+   <key>en</key>
+   <value>1E2C22DD-B87A-E61A-A02A-A6690EAD1E41</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="bffa7f17-aa06-4533-8238-f6597368a5b9">
-    <name>LandedCost</name>
-    <synonym>
-      <key>en</key>
-      <value>Landed cost</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
-    <name>LandedCostBatchReallocate</name>
-    <synonym>
-      <key>en</key>
-      <value>Landed cost (batch reallocate)</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="721900e9-3d68-49fc-8872-40ceb43b6ac1">
+  <name>LandedCostBatchReallocate</name>
+  <synonym>
+   <key>en</key>
+   <value>D7FEC479-AF29-669A-AA4F-FABA24E6FD06</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

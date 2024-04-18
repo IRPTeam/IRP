@@ -1,124 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8ec1a0a5-b726-4561-965b-0f51d992c5c7">
+<mdclass:DataProcessor xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="8ec1a0a5-b726-4561-965b-0f51d992c5c7">
+ <producedTypes>
+  <objectType typeId="8f647ad5-3898-4225-b06c-db31be73d49c" valueTypeId="e77430d2-fe3c-49db-85a8-1707fdcd4068"/>
+  <managerType typeId="649b71b9-b4b5-40d7-882c-ef1e55da2255" valueTypeId="8decb860-2f0b-4e67-a27e-ee8bbc43535e"/>
+ </producedTypes>
+ <name>CreateRegExp</name>
+ <synonym>
+  <key>en</key>
+  <value>1BA64BCF-6167-CAB3-3241-10D37C981498</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
+ <tabularSections uuid="f1261008-dee1-45a6-aff1-a3dfd0911197">
   <producedTypes>
-    <objectType typeId="8f647ad5-3898-4225-b06c-db31be73d49c" valueTypeId="e77430d2-fe3c-49db-85a8-1707fdcd4068"/>
-    <managerType typeId="649b71b9-b4b5-40d7-882c-ef1e55da2255" valueTypeId="8decb860-2f0b-4e67-a27e-ee8bbc43535e"/>
+   <objectType typeId="587d0a5f-4ca6-469e-a7ff-2908e78a7795" valueTypeId="0de58656-4cea-4478-ae6d-b17126eecb09"/>
+   <rowType typeId="68ab4bc3-4298-49fb-b1d4-7ca9936771f5" valueTypeId="f7fa9dd8-0cc2-459d-864f-42d829995b11"/>
   </producedTypes>
-  <name>CreateRegExp</name>
+  <name>RowParts</name>
   <synonym>
-    <key>en</key>
-    <value>Create RegExp</value>
+   <key>en</key>
+   <value>7ADF20B5-3B51-D40E-E1F9-992A3555C49B</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.CreateRegExp.Form.Form</defaultForm>
-  <tabularSections uuid="f1261008-dee1-45a6-aff1-a3dfd0911197">
-    <producedTypes>
-      <objectType typeId="587d0a5f-4ca6-469e-a7ff-2908e78a7795" valueTypeId="0de58656-4cea-4478-ae6d-b17126eecb09"/>
-      <rowType typeId="68ab4bc3-4298-49fb-b1d4-7ca9936771f5" valueTypeId="f7fa9dd8-0cc2-459d-864f-42d829995b11"/>
-    </producedTypes>
-    <name>RowParts</name>
-    <synonym>
-      <key>en</key>
-      <value>Row parts</value>
-    </synonym>
-    <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
-      <name>ExpressionType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expression type</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
-      <name>ID</name>
-      <synonym>
-        <key>en</key>
-        <value>ID</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
-      <name>RowPart</name>
-      <synonym>
-        <key>en</key>
-        <value>Row part</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
-      <name>RegExp</name>
-      <synonym>
-        <key>en</key>
-        <value>Reg exp</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
-    <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
-      <name>isWhitespace</name>
-      <synonym>
-        <key>en</key>
-        <value>Is whitespace</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-    <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
-      <name>ExternalFunction</name>
-      <synonym>
-        <key>en</key>
-        <value>External function</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExternalFunctions</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:UndefinedValue"/>
-    </attributes>
-  </tabularSections>
-  <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="c74d06bd-ee73-42ed-a9f7-d65288628973">
+   <name>ExpressionType</name>
+   <synonym>
+    <key>en</key>
+    <value>949DC132-08FA-2AE3-31A6-6BE4AF540080</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="f7920710-b0c0-4365-8f09-61c9fcd5cb83">
+   <name>ID</name>
+   <synonym>
+    <key>en</key>
+    <value>06676B28-7B4A-53AF-FB88-86D718F9FD58</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="ff89796b-f68b-42d9-9b7e-a1d5a343f1ba">
+   <name>RowPart</name>
+   <synonym>
+    <key>en</key>
+    <value>E5749B82-948C-911E-E576-67829B09D794</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="2a15a267-9d17-4be3-8d85-26089e44aa7b">
+   <name>RegExp</name>
+   <synonym>
+    <key>en</key>
+    <value>D469C2D4-D479-8DF2-22A0-0053D98406F5</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers/>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:StringValue">
+    <value/>
+   </fillValue>
+  </attributes>
+  <attributes uuid="eccbda08-6a77-49bd-997e-122c89f32e3e">
+   <name>isWhitespace</name>
+   <synonym>
+    <key>en</key>
+    <value>9E902E73-BD06-B4C6-62C9-913C1EFE6ABA</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="702adb42-ed27-47e9-b8be-c3a40107c7d3">
+   <name>ExternalFunction</name>
+   <synonym>
+    <key>en</key>
+    <value>CF9DCC2F-BA6E-468E-EF69-956011250ED5</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExternalFunctions</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+ </tabularSections>
+ <forms uuid="5e274039-734d-4653-8f72-75e59019cd44">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>BF2A5649-A0D1-B1A9-910A-AE5A5B9614EF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

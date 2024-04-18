@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d17b36d9-4cd9-474b-ba5b-46b72f7efb54">
-  <name>FillCheckProcessing_AdditionalTableControlDocument</name>
-  <synonym>
-    <key>en</key>
-    <value>Fill check processing additional table control document</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>FillCheckProcessing</event>
-  <handler>CommonModule.AdditionalDocumentTableControl.FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing</handler>
+ <name>FillCheckProcessing_AdditionalTableControlDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>D64CEF89-32DA-A4BB-B106-611E0EC5D812___________________</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>FillCheckProcessing</event>
+ <handler>CommonModule.AdditionalDocumentTableControl.FillCheckProcessing_AdditionalTableControlDocumentFillCheckProcessing</handler>
 </mdclass:EventSubscription>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4148d127-4da6-461a-825b-b3f077b6d7c5">
-  <name>Document_TimeSheet</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Time sheet&quot;</value>
-  </synonym>
+ <name>Document_TimeSheet</name>
+ <synonym>
+  <key>en</key>
+  <value>9D024E55-DFDA-02C6-697A-A505E8DC65C3</value>
+ </synonym>
 </mdclass:Role>

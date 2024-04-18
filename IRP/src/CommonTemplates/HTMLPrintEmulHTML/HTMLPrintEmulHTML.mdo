@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51c81d78-1331-48e1-9e54-50c9da5aa1c3">
-  <name>HTMLPrintEmulHTML</name>
-  <synonym>
-    <key>en</key>
-    <value>HTMLPrint emul HTML</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLPrintEmulHTML</name>
+ <synonym>
+  <key>en</key>
+  <value>5EA0AFFC-A2BC-4A85-5B48-859BD29DA70A</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

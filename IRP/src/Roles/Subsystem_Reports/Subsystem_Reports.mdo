@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="00a3f993-51bf-474b-b4b8-e964462a1bfc">
-  <name>Subsystem_Reports</name>
-  <synonym>
-    <key>en</key>
-    <value>Subsystem Reports</value>
-  </synonym>
+ <name>Subsystem_Reports</name>
+ <synonym>
+  <key>en</key>
+  <value>2F14B907-0C21-392D-DEBF-F2C71F266EFA</value>
+ </synonym>
 </mdclass:Role>

@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b747710c-e111-45aa-9e9d-b852fff334f3">
-  <producedTypes>
-    <refType typeId="e8973421-d680-4b23-ac08-b01d14957f7d" valueTypeId="2c22ff40-2a15-40cb-ac6f-8b1e2a038902"/>
-    <listType typeId="8c957c9d-1f48-4498-bc39-197ac011c27f" valueTypeId="342ed369-8a3a-4fdb-8c86-ceec4468a1b4"/>
-    <managerType typeId="69c9cd8a-156f-4a0e-9171-7230655b2f1c" valueTypeId="b2679464-9da5-4c02-b0f9-38a37d2a26b5"/>
-  </producedTypes>
-  <name>KindsOfAttributes</name>
+ <producedTypes>
+  <refType typeId="e8973421-d680-4b23-ac08-b01d14957f7d" valueTypeId="2c22ff40-2a15-40cb-ac6f-8b1e2a038902"/>
+  <listType typeId="8c957c9d-1f48-4498-bc39-197ac011c27f" valueTypeId="342ed369-8a3a-4fdb-8c86-ceec4468a1b4"/>
+  <managerType typeId="69c9cd8a-156f-4a0e-9171-7230655b2f1c" valueTypeId="b2679464-9da5-4c02-b0f9-38a37d2a26b5"/>
+ </producedTypes>
+ <name>KindsOfAttributes</name>
+ <synonym>
+  <key>en</key>
+  <value>D8346DCF-7637-824E-E354-4BB683FE415E</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="5b865806-3ada-401f-935a-8f1f7bf5704b">
+  <name>Standard</name>
   <synonym>
-    <key>en</key>
-    <value>Kinds of attributes</value>
+   <key>en</key>
+   <value>378B11C6-89E3-6791-13AC-C1F0B12C23C1</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="5b865806-3ada-401f-935a-8f1f7bf5704b">
-    <name>Standard</name>
-    <synonym>
-      <key>en</key>
-      <value>Standard</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="e2836d2a-4254-458c-ad08-f41ab9a6f2b7">
-    <name>Regular</name>
-    <synonym>
-      <key>en</key>
-      <value>Regular</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ab49fb61-ea46-45be-8726-f4a6cae174ae">
-    <name>Common</name>
-    <synonym>
-      <key>en</key>
-      <value>Common</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="292ed029-6904-44ec-b34f-183399d2984f">
-    <name>Additional</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="35cffd8f-eec3-441b-b006-66f9ae2c91cf">
-    <name>TabularSection</name>
-    <synonym>
-      <key>en</key>
-      <value>Tabular section</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ba7383f8-8932-463f-90ce-5a1829f84b2d">
-    <name>Column</name>
-    <synonym>
-      <key>en</key>
-      <value>Column</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="12d82c9d-4d26-4491-b83a-059984733766">
-    <name>Custom</name>
-    <synonym>
-      <key>en</key>
-      <value>Custom</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="87bebf5c-8776-4781-a991-ae6f311a1850">
-    <name>AdditionalSetting</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional setting</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="e2836d2a-4254-458c-ad08-f41ab9a6f2b7">
+  <name>Regular</name>
+  <synonym>
+   <key>en</key>
+   <value>81BF1A9E-9C73-493B-B9C7-73646E11A385</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ab49fb61-ea46-45be-8726-f4a6cae174ae">
+  <name>Common</name>
+  <synonym>
+   <key>en</key>
+   <value>A9FCED53-A331-8600-0738-8D40261D777A</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="292ed029-6904-44ec-b34f-183399d2984f">
+  <name>Additional</name>
+  <synonym>
+   <key>en</key>
+   <value>36020F91-424C-FAE8-8179-94DB4B812D72</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="35cffd8f-eec3-441b-b006-66f9ae2c91cf">
+  <name>TabularSection</name>
+  <synonym>
+   <key>en</key>
+   <value>E92513C9-16F8-C3C9-9FE6-648096EB51A4</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ba7383f8-8932-463f-90ce-5a1829f84b2d">
+  <name>Column</name>
+  <synonym>
+   <key>en</key>
+   <value>D0BFA901-ECA0-213C-C189-9EF24458084C</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="12d82c9d-4d26-4491-b83a-059984733766">
+  <name>Custom</name>
+  <synonym>
+   <key>en</key>
+   <value>2A9DDFE9-481F-6D0E-EFC5-5CED9A88A5B1</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="87bebf5c-8776-4781-a991-ae6f311a1850">
+  <name>AdditionalSetting</name>
+  <synonym>
+   <key>en</key>
+   <value>264C70C5-38A9-5FBC-CF53-33295ABE3C9E</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

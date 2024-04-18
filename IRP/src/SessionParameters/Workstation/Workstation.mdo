@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="424a3340-4482-4b5d-adbc-56a28d0ff58e">
-  <name>Workstation</name>
-  <synonym>
-    <key>en</key>
-    <value>Workstation</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.Workstations</types>
-  </type>
+ <name>Workstation</name>
+ <synonym>
+  <key>en</key>
+  <value>C95839E7-0124-5C33-3E88-8DE12E8313D6</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.Workstations</types>
+ </type>
 </mdclass:SessionParameter>

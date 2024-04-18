@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91e0d917-b0f2-4d25-96b2-2d02b046d127">
-  <name>EmptyPicture</name>
-  <synonym>
-    <key>en</key>
-    <value>Empty picture</value>
-  </synonym>
+ <name>EmptyPicture</name>
+ <synonym>
+  <key>en</key>
+  <value>32AB61CD-25C3-CB71-1506-6E162381EEEA</value>
+ </synonym>
 </mdclass:CommonPicture>

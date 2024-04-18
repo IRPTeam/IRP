@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4279b2f3-bf7f-4531-91ae-f045382a5bc8">
-  <name>AccumulationRegisters_R7040T_ManualMaterialsCorretionInProduction</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R7040T ManualMaterialsCorretionInProduction</value>
-  </synonym>
+ <name>AccumulationRegisters_R7040T_ManualMaterialsCorretionInProduction</name>
+ <synonym>
+  <key>en</key>
+  <value>C0B8B919-294E-9CDA-AA8F-F3EC2768C1C3_____________________________</value>
+ </synonym>
 </mdclass:Role>

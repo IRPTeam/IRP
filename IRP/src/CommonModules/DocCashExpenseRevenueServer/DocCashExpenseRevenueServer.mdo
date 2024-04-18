@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cf889d4a-b4b7-46c9-974f-19ec337c73c7">
-  <name>DocCashExpenseRevenueServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash expense revenue server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocCashExpenseRevenueServer</name>
+ <synonym>
+  <key>en</key>
+  <value>E4153BFC-A4BF-AC9F-FE8D-DF5ABF7EF4DF</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

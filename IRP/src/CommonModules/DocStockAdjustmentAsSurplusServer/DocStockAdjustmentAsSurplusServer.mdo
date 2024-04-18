@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9a92226e-9f7d-4e85-b420-7be3e37d0812">
-  <name>DocStockAdjustmentAsSurplusServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc stock adjustment as surplus server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocStockAdjustmentAsSurplusServer</name>
+ <synonym>
+  <key>en</key>
+  <value>4A8CBAEC-E8E5-2F1A-A552-257022D5C6EE__</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

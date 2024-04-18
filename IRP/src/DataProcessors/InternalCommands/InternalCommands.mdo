@@ -1,86 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31796445-2fbc-49af-bbe3-38bef952ccb2">
-  <producedTypes>
-    <objectType typeId="120197fb-a1bb-4f00-932c-814a873c7856" valueTypeId="9b8cef61-8d9e-4bff-a313-f6ce23b0656e"/>
-    <managerType typeId="0e57edbd-60ce-4da9-8580-f3dfc5f84c6f" valueTypeId="333d2515-db52-4445-9205-a8c99a4ae7fd"/>
-  </producedTypes>
-  <name>InternalCommands</name>
+ <producedTypes>
+  <objectType typeId="120197fb-a1bb-4f00-932c-814a873c7856" valueTypeId="9b8cef61-8d9e-4bff-a313-f6ce23b0656e"/>
+  <managerType typeId="0e57edbd-60ce-4da9-8580-f3dfc5f84c6f" valueTypeId="333d2515-db52-4445-9205-a8c99a4ae7fd"/>
+ </producedTypes>
+ <name>InternalCommands</name>
+ <synonym>
+  <key>en</key>
+  <value>960F81EB-0B24-A0F3-3FFF-FEA6EE9BB53B</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.InternalCommands.Form.CommandTemplate</defaultForm>
+ <forms uuid="b24ce069-1bb0-40fb-bcf1-1f748b9a4dae">
+  <name>CommandTemplate</name>
   <synonym>
-    <key>en</key>
-    <value>Internal commands</value>
+   <key>en</key>
+   <value>975F78E6-9ED0-AAE1-17C8-8A101FC49749</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.InternalCommands.Form.CommandTemplate</defaultForm>
-  <forms uuid="b24ce069-1bb0-40fb-bcf1-1f748b9a4dae">
-    <name>CommandTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Command template</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="27a931da-792e-4779-851a-8e7bf241219d">
-    <name>SetNotActive</name>
-    <synonym>
-      <key>en</key>
-      <value>Set not active</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="11eb96fe-8fc0-4f37-b3ac-5600e7e15bc5">
-    <name>ShowNotActive</name>
-    <synonym>
-      <key>en</key>
-      <value>Show not active</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
-    <name>GroupEditingProperties</name>
-    <synonym>
-      <key>en</key>
-      <value>Group editing of properties</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
-    <name>CloneValueFromFirstRow</name>
-    <synonym>
-      <key>en</key>
-      <value>Clone value from first row</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
-    <name>LoadDataFromTable</name>
-    <synonym>
-      <key>en</key>
-      <value>Load data from table</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="25dc0fd4-7989-4078-8958-27c13b6dcace">
-    <name>LoadDataFromTable_Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Load data from table (form)</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="0bd55598-3f42-4f1b-838d-c989a189fd48">
-    <name>AuditLock</name>
-    <synonym>
-      <key>en</key>
-      <value>Audit lock</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="27a931da-792e-4779-851a-8e7bf241219d">
+  <name>SetNotActive</name>
+  <synonym>
+   <key>en</key>
+   <value>27F9A2A1-5CEA-F64E-E518-81C50F527417</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="11eb96fe-8fc0-4f37-b3ac-5600e7e15bc5">
+  <name>ShowNotActive</name>
+  <synonym>
+   <key>en</key>
+   <value>EE221730-FAF3-A8D1-12C1-1EDA7EF987C4</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
+  <name>GroupEditingProperties</name>
+  <synonym>
+   <key>en</key>
+   <value>3249402F-013E-916E-E24D-D9F203210296</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
+  <name>CloneValueFromFirstRow</name>
+  <synonym>
+   <key>en</key>
+   <value>6AE2F365-2D31-64F8-8A55-5551A9276BFC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
+  <name>LoadDataFromTable</name>
+  <synonym>
+   <key>en</key>
+   <value>D8614D60-7361-27D1-1FF0-00FC89117B62</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="25dc0fd4-7989-4078-8958-27c13b6dcace">
+  <name>LoadDataFromTable_Form</name>
+  <synonym>
+   <key>en</key>
+   <value>3D3FCD46-1B72-024C-C126-6E1426B8C4DC</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="0bd55598-3f42-4f1b-838d-c989a189fd48">
+  <name>AuditLock</name>
+  <synonym>
+   <key>en</key>
+   <value>0343084C-E70C-075D-DE08-832C50C453CA</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

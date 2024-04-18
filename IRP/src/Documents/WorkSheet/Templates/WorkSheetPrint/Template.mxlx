@@ -115,7 +115,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Work sheet [Number] [Date]</v8:content>
+							<v8:content>51D23BBA-8FF3-60B5-54E5-527398C1EAA2[Number],[Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -153,7 +153,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:content>2B39BF74-E74C-06AE-EC3C-C91CCFF28409</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -177,7 +177,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:content>17876AC5-70D4-7631-121C-C5DE500924CC</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -208,7 +208,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>#</v8:content>
+							<v8:content>BFAEC80A-23F4-6904-426E-E8784B330251</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -219,7 +219,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:content>D09CDCB0-549E-1707-7FF6-62956C9E8D69</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -230,7 +230,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:content>5315B78F-87F8-F4EC-C989-972E6CE681F8</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -241,7 +241,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
+							<v8:content>571011DE-B581-5C80-00AD-D72220F7E20C</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -252,7 +252,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:content>04CB19E9-A357-D8C7-7831-1FB40E5ED5EF</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -312,7 +312,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Currency:</v8:content>
+							<v8:content>392FDBB4-FD76-B099-9921-17C29E9E437A</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -341,7 +341,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:content>0E110E9B-6A67-09DA-A947-7F0520710429</v8:content>
 						</v8:item>
 					</tl>
 				</c>

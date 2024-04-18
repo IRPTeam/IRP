@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2582b0e6-20c3-4b61-8605-6f0a4a68daa8">
-  <name>Document_ItemStockAdjustment</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Item stock adjustment&quot;</value>
-  </synonym>
+ <name>Document_ItemStockAdjustment</name>
+ <synonym>
+  <key>en</key>
+  <value>69DF823D-E2B1-E1AE-E111-125F78C77C93</value>
+ </synonym>
 </mdclass:Role>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb963f8d-f910-4233-9b93-ede8ccb366a3">
-  <name>Document_ShipmentConfirmation</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Shipment confirmation&quot;</value>
-  </synonym>
+ <name>Document_ShipmentConfirmation</name>
+ <synonym>
+  <key>en</key>
+  <value>179BEB4D-4F59-9006-62B6-665277D2B43D</value>
+ </synonym>
 </mdclass:Role>

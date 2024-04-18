@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d12c2de3-123c-402d-89b5-c7b97153442a">
-  <producedTypes>
-    <refType typeId="375640bb-6285-409f-b9d1-a152e5d4ae4f" valueTypeId="cc06cc91-dc05-4d09-8cff-3deaa0aee02a"/>
-    <listType typeId="51bb1e3c-9fa5-426a-b1d8-71a0c4e29183" valueTypeId="21acb9f9-439a-4bc4-8f2c-9e851504657d"/>
-    <managerType typeId="ee9fb41d-409b-490e-97e8-96a056e9833f" valueTypeId="50a3c5d9-4127-44b5-a3e5-b0ea09eb1958"/>
-  </producedTypes>
-  <name>MaterialTypes</name>
+ <producedTypes>
+  <refType typeId="375640bb-6285-409f-b9d1-a152e5d4ae4f" valueTypeId="cc06cc91-dc05-4d09-8cff-3deaa0aee02a"/>
+  <listType typeId="51bb1e3c-9fa5-426a-b1d8-71a0c4e29183" valueTypeId="21acb9f9-439a-4bc4-8f2c-9e851504657d"/>
+  <managerType typeId="ee9fb41d-409b-490e-97e8-96a056e9833f" valueTypeId="50a3c5d9-4127-44b5-a3e5-b0ea09eb1958"/>
+ </producedTypes>
+ <name>MaterialTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>38136236-1D86-48A4-46DE-E43632B72F2C</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="17e6394c-250f-4cb9-a77a-8b594ec088e7">
+  <name>Material</name>
   <synonym>
-    <key>en</key>
-    <value>Material types</value>
+   <key>en</key>
+   <value>56011111-174B-D85F-F097-72887DF111C1</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="17e6394c-250f-4cb9-a77a-8b594ec088e7">
-    <name>Material</name>
-    <synonym>
-      <key>en</key>
-      <value>Material</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="282e2f9f-cdba-4872-81a4-0756df7dfcf6">
-    <name>Semiproduct</name>
-    <synonym>
-      <key>en</key>
-      <value>Semiproduct</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b64afdb9-640f-48b8-8105-bcdb70e094af">
-    <name>Service</name>
-    <synonym>
-      <key>en</key>
-      <value>Service</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="282e2f9f-cdba-4872-81a4-0756df7dfcf6">
+  <name>Semiproduct</name>
+  <synonym>
+   <key>en</key>
+   <value>6A793379-F155-DB7D-DC42-2F98723269DE</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b64afdb9-640f-48b8-8105-bcdb70e094af">
+  <name>Service</name>
+  <synonym>
+   <key>en</key>
+   <value>7D2FEE1F-7956-0E05-5001-194B5695AD0A</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

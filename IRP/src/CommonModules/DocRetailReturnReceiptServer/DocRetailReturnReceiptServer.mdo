@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c39eb04b-6711-4c59-b2fb-abe7cfeefbb2">
-  <name>DocRetailReturnReceiptServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc retail return receipt server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocRetailReturnReceiptServer</name>
+ <synonym>
+  <key>en</key>
+  <value>467BA950-6284-D697-70D8-8FA1F4622CBA</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

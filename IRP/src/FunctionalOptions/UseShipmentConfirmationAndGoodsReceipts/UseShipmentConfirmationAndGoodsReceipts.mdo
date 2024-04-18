@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="43208d7c-c042-4ede-bbaa-c2bdf19eab42">
-  <name>UseShipmentConfirmationAndGoodsReceipts</name>
-  <synonym>
-    <key>en</key>
-    <value>Use shipment confirmation and goods receipts</value>
-  </synonym>
-  <location>Constant.UseShipmentConfirmationAndGoodsReceipts</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Catalog.Stores.Attribute.UseShipmentConfirmation</content>
-  <content>Document.InventoryTransfer.Attribute.UseShipmentConfirmation</content>
-  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.UseShipmentConfirmation</content>
-  <content>Document.ShipmentConfirmation</content>
-  <content>Document.SalesInvoice.TabularSection.ShipmentConfirmations</content>
-  <content>Enum.ShipmentConfirmationTransactionTypes</content>
-  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.UseShipmentConfirmation</content>
-  <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
-  <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts</content>
-  <content>Document.InventoryTransfer.Attribute.UseGoodsReceipt</content>
-  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.UseGoodsReceipt</content>
-  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.UseGoodsReceipt</content>
-  <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.QuantityInGoodsReceipt</content>
-  <content>Catalog.Stores.Attribute.UseGoodsReceipt</content>
-  <content>Document.GoodsReceipt</content>
-  <content>Document.SalesReturn.TabularSection.GoodsReceipts</content>
-  <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.QuantityInGoodsReceipt</content>
-  <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
-  <content>Enum.GoodsReceiptTransactionTypes</content>
-  <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations</content>
+ <name>UseShipmentConfirmationAndGoodsReceipts</name>
+ <synonym>
+  <key>en</key>
+  <value>D59CBE13-2010-FC58-8737-765EB231D3C6________</value>
+ </synonym>
+ <location>Constant.UseShipmentConfirmationAndGoodsReceipts</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Catalog.Stores.Attribute.UseShipmentConfirmation</content>
+ <content>Document.InventoryTransfer.Attribute.UseShipmentConfirmation</content>
+ <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.UseShipmentConfirmation</content>
+ <content>Document.ShipmentConfirmation</content>
+ <content>Document.SalesInvoice.TabularSection.ShipmentConfirmations</content>
+ <content>Enum.ShipmentConfirmationTransactionTypes</content>
+ <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.UseShipmentConfirmation</content>
+ <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
+ <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts</content>
+ <content>Document.InventoryTransfer.Attribute.UseGoodsReceipt</content>
+ <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.UseGoodsReceipt</content>
+ <content>Document.SalesReturn.TabularSection.ItemList.Attribute.UseGoodsReceipt</content>
+ <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.QuantityInGoodsReceipt</content>
+ <content>Catalog.Stores.Attribute.UseGoodsReceipt</content>
+ <content>Document.GoodsReceipt</content>
+ <content>Document.SalesReturn.TabularSection.GoodsReceipts</content>
+ <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.QuantityInGoodsReceipt</content>
+ <content>Document.SalesReturn.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
+ <content>Enum.GoodsReceiptTransactionTypes</content>
+ <content>Document.PurchaseReturn.TabularSection.ShipmentConfirmations</content>
 </mdclass:FunctionalOption>

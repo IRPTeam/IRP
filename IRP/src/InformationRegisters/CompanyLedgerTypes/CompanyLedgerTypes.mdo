@@ -1,84 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2bbf75f3-7f4f-4e1c-8f81-c2c1d7a254f3">
-  <producedTypes>
-    <selectionType typeId="c84cf327-8b37-4f77-8d9a-56206b538bd3" valueTypeId="8c29caab-7ad2-4bbc-8402-b745d02c0f40"/>
-    <listType typeId="b25bd4c6-0218-4a8e-bfdf-045717e365bf" valueTypeId="3e99f977-81ae-4bd3-b284-f1d578290056"/>
-    <managerType typeId="0a35a2ee-bcde-47f1-9d3b-0edccb1fed39" valueTypeId="8130936e-5937-48ec-98ca-5758aa3cfdf9"/>
-    <recordSetType typeId="b880aeb1-c294-43b0-845f-2626a73c7ac7" valueTypeId="a86efaa7-bd12-440e-aa73-fac5f835d965"/>
-    <recordKeyType typeId="0dbd09cc-a4d1-4de1-a32e-2eaf2170c8bd" valueTypeId="251268b9-63d2-415d-8d30-c9dfdd5b0176"/>
-    <recordType typeId="dfa5865e-92f3-4fa3-ba1f-73713d63f2e7" valueTypeId="e48cdf57-2848-4326-84f1-425f227c909e"/>
-    <recordManagerType typeId="cdb93f34-f539-4a8e-a136-f8da0c6d3786" valueTypeId="f0d31648-da43-45b8-9876-235875e7e6bb"/>
-  </producedTypes>
-  <name>CompanyLedgerTypes</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="2bbf75f3-7f4f-4e1c-8f81-c2c1d7a254f3">
+ <producedTypes>
+  <selectionType typeId="c84cf327-8b37-4f77-8d9a-56206b538bd3" valueTypeId="8c29caab-7ad2-4bbc-8402-b745d02c0f40"/>
+  <listType typeId="b25bd4c6-0218-4a8e-bfdf-045717e365bf" valueTypeId="3e99f977-81ae-4bd3-b284-f1d578290056"/>
+  <managerType typeId="0a35a2ee-bcde-47f1-9d3b-0edccb1fed39" valueTypeId="8130936e-5937-48ec-98ca-5758aa3cfdf9"/>
+  <recordSetType typeId="b880aeb1-c294-43b0-845f-2626a73c7ac7" valueTypeId="a86efaa7-bd12-440e-aa73-fac5f835d965"/>
+  <recordKeyType typeId="0dbd09cc-a4d1-4de1-a32e-2eaf2170c8bd" valueTypeId="251268b9-63d2-415d-8d30-c9dfdd5b0176"/>
+  <recordType typeId="dfa5865e-92f3-4fa3-ba1f-73713d63f2e7" valueTypeId="e48cdf57-2848-4326-84f1-425f227c909e"/>
+  <recordManagerType typeId="cdb93f34-f539-4a8e-a136-f8da0c6d3786" valueTypeId="f0d31648-da43-45b8-9876-235875e7e6bb"/>
+ </producedTypes>
+ <name>CompanyLedgerTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>4C79E52E-50D0-CC71-168A-A548B73D3D71</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.CompanyLedgerTypes.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>36434703-F428-983A-AB5F-F384FFDE50DB</value>
+ </recordPresentation>
+ <resources uuid="56275698-670b-40ed-8aac-77eaf3c633c8">
+  <name>Use</name>
   <synonym>
-    <key>en</key>
-    <value>Company Ledger types</value>
+   <key>en</key>
+   <value>8233491B-B349-2A21-1B10-03A5965C2373</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.CompanyLedgerTypes.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Company Ledger type</value>
-  </recordPresentation>
-  <resources uuid="56275698-670b-40ed-8aac-77eaf3c633c8">
-    <name>Use</name>
-    <synonym>
-      <key>en</key>
-      <value>Use</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="95725f3e-0c15-4fec-a886-f8da0546ffa2">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="724971e2-ddd5-4137-b4ba-e19241e5fbf9">
-    <name>LedgerType</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="e7dea011-ba9f-4ed6-8494-dd1c03f7b839">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="95725f3e-0c15-4fec-a886-f8da0546ffa2">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>3D075061-12B5-F3D4-454E-ECFCA909EAFB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="724971e2-ddd5-4137-b4ba-e19241e5fbf9">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>8D0F0273-5D07-109B-BAA5-5A3F418E8C85</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="e7dea011-ba9f-4ed6-8494-dd1c03f7b839">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>963CC91F-DDCA-E877-7CBE-E96F9D3538CA</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

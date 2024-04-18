@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1cc777b8-0771-45e9-b0e1-2a86983d6b98">
-  <name>AccumulationRegisters_R6060T_CostOfGoodsSold</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R6060T CostOfGoodsSold</value>
-  </synonym>
+ <name>AccumulationRegisters_R6060T_CostOfGoodsSold</name>
+ <synonym>
+  <key>en</key>
+  <value>AE98D68E-9300-A2C9-974A-A43D16A8C20B________</value>
+ </synonym>
 </mdclass:Role>

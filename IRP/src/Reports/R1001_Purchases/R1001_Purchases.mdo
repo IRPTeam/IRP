@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eaa0be34-40b1-4188-a54e-147d8e33b98d">
-  <producedTypes>
-    <objectType typeId="2f84e3fa-42b7-46a6-9074-15a888fa098d" valueTypeId="292044f0-eefc-48f5-8ecf-c789cb50095d"/>
-    <managerType typeId="897a7521-0b33-421a-8d7b-501907caba22" valueTypeId="c9a7627a-615a-4246-9352-9b1b964bfd7e"/>
-  </producedTypes>
-  <name>R1001_Purchases</name>
+ <producedTypes>
+  <objectType typeId="2f84e3fa-42b7-46a6-9074-15a888fa098d" valueTypeId="292044f0-eefc-48f5-8ecf-c789cb50095d"/>
+  <managerType typeId="897a7521-0b33-421a-8d7b-501907caba22" valueTypeId="c9a7627a-615a-4246-9352-9b1b964bfd7e"/>
+ </producedTypes>
+ <name>R1001_Purchases</name>
+ <synonym>
+  <key>en</key>
+  <value>AE453049-04C7-7339-9527-7F8B3E07D2CE</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1001_Purchases.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="79c4c6a1-fda8-430a-9f79-cf32c01b8110">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1001 Purchases</value>
+   <key>en</key>
+   <value>397E88B2-7A24-3B91-19DD-D606B9A0D57A</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1001_Purchases.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="79c4c6a1-fda8-430a-9f79-cf32c01b8110">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

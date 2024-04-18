@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc5bd18b-75c8-44a9-9ed0-270b691acbdd">
-  <name>NotActiveCatalogsShowing</name>
-  <synonym>
-    <key>en</key>
-    <value>Not active catalogs showing</value>
-  </synonym>
-  <type>
-    <types>FixedMap</types>
-  </type>
+ <name>NotActiveCatalogsShowing</name>
+ <synonym>
+  <key>en</key>
+  <value>65EF250E-999C-06DC-CC64-428DECDEBEC6</value>
+ </synonym>
+ <type>
+  <types>FixedMap</types>
+ </type>
 </mdclass:SessionParameter>

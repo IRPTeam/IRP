@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3423d505-e39f-47f2-8dcf-c10995cd5988">
-  <name>InternalCommandsServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Internal commands server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>InternalCommandsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>F3F3BF39-D00F-976B-BE22-29AB575DF801</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

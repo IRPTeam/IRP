@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="801bfd2f-5c54-4aa0-b537-feb099b1f19a">
-  <producedTypes>
-    <selectionType typeId="260ce385-970f-494b-975a-7ccae4810aca" valueTypeId="21722a3c-cf82-42f5-9c54-44f797f1693f"/>
-    <listType typeId="b5b718e0-ec4c-4a2b-a046-af847caf8c64" valueTypeId="51ac8b82-e2e1-4be6-b0f6-8198198c1bf2"/>
-    <managerType typeId="339d24d5-41ed-42fe-9d7c-a86a31c20f96" valueTypeId="d0fc998d-5ff1-4601-82c6-79a87c7a6d33"/>
-    <recordSetType typeId="695bfe76-bac6-4c5f-a4e4-9c6d2ed32682" valueTypeId="455d7942-e83f-4d7e-93b9-3cd0e32082ff"/>
-    <recordKeyType typeId="09f0ae83-1698-43da-ba4d-a0ebf07669dc" valueTypeId="4bc24761-8a8e-4d96-aaa8-78a589a2a32c"/>
-    <recordType typeId="7bbc9a3e-77f5-49d8-a43c-5bd7d4da4ae6" valueTypeId="2a414ef0-1bdb-4c12-9e6e-ffa748cc31aa"/>
-  </producedTypes>
-  <name>R9545T_PaidVacations</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="801bfd2f-5c54-4aa0-b537-feb099b1f19a">
+ <producedTypes>
+  <selectionType typeId="260ce385-970f-494b-975a-7ccae4810aca" valueTypeId="21722a3c-cf82-42f5-9c54-44f797f1693f"/>
+  <listType typeId="b5b718e0-ec4c-4a2b-a046-af847caf8c64" valueTypeId="51ac8b82-e2e1-4be6-b0f6-8198198c1bf2"/>
+  <managerType typeId="339d24d5-41ed-42fe-9d7c-a86a31c20f96" valueTypeId="d0fc998d-5ff1-4601-82c6-79a87c7a6d33"/>
+  <recordSetType typeId="695bfe76-bac6-4c5f-a4e4-9c6d2ed32682" valueTypeId="455d7942-e83f-4d7e-93b9-3cd0e32082ff"/>
+  <recordKeyType typeId="09f0ae83-1698-43da-ba4d-a0ebf07669dc" valueTypeId="4bc24761-8a8e-4d96-aaa8-78a589a2a32c"/>
+  <recordType typeId="7bbc9a3e-77f5-49d8-a43c-5bd7d4da4ae6" valueTypeId="2a414ef0-1bdb-4c12-9e6e-ffa748cc31aa"/>
+ </producedTypes>
+ <name>R9545T_PaidVacations</name>
+ <synonym>
+  <key>en</key>
+  <value>2DBCD443-D831-C1A2-2B96-6D548E8E0952</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="5ed22b94-d3ac-4cd8-a6bd-ba496f0635ab">
+  <name>Paid</name>
   <synonym>
-    <key>en</key>
-    <value>R9545 Paid vacations</value>
+   <key>en</key>
+   <value>892712F6-6CF5-8428-8FEE-EC43F17540A0</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="5ed22b94-d3ac-4cd8-a6bd-ba496f0635ab">
-    <name>Paid</name>
-    <synonym>
-      <key>en</key>
-      <value>Paid</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="3a86d70c-8db8-40ed-92e4-c4235e844ef3">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="c73a91a1-bfc6-4d96-b090-83464adadfba">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>10</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="3a86d70c-8db8-40ed-92e4-c4235e844ef3">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>E8069B76-D714-504F-F532-26350FBE7C97</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="c73a91a1-bfc6-4d96-b090-83464adadfba">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>E77D77B8-D7C3-9EC3-35D2-24558B6097E3</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

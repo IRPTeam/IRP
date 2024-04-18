@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a66a358-9b45-4218-abc6-13e8158ee962">
-  <name>DocEmployeeHiringServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc employee hiring server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocEmployeeHiringServer</name>
+ <synonym>
+  <key>en</key>
+  <value>77A3872D-4FB9-1DF4-45EF-F959E813F3DB</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f572d77a-daf0-4a81-9853-32b2a16bbea5">
-  <name>OffsetOfAdvancesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Offset of advances server</value>
-  </synonym>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <serverCall>true</serverCall>
+ <name>OffsetOfAdvancesServer</name>
+ <synonym>
+  <key>en</key>
+  <value>94302E2F-68C6-FEFD-D0A9-98D8B9B4F007</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

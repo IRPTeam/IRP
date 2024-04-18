@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="92ea6963-1aea-4563-872d-5a66f40433fa">
-  <producedTypes>
-    <objectType typeId="6a2b7ae3-4272-4a92-a6aa-bbcabfa4ad50" valueTypeId="966d8079-0fcd-4503-a95e-39801f995295"/>
-    <refType typeId="1e73c486-e7e1-46d1-b5ad-7c65c1f6a4b6" valueTypeId="118c92a2-d1d2-46cd-8c35-537b32fd4aa5"/>
-    <selectionType typeId="977fd33d-faf9-4394-83ae-9b58bd00cc37" valueTypeId="8d71e133-90a7-490f-a161-b8378ea4900f"/>
-    <listType typeId="3c58a4af-74c7-447d-b0fe-ce08add446ea" valueTypeId="c17510f7-6ff9-407d-9648-909be758d48f"/>
-    <managerType typeId="8e88f601-c4dc-4b6a-a2dd-260acfc1de10" valueTypeId="3c7d4367-4c27-459f-bbbc-a012e9e6840f"/>
-  </producedTypes>
-  <name>PrintInfo</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="92ea6963-1aea-4563-872d-5a66f40433fa">
+ <producedTypes>
+  <objectType typeId="6a2b7ae3-4272-4a92-a6aa-bbcabfa4ad50" valueTypeId="966d8079-0fcd-4503-a95e-39801f995295"/>
+  <refType typeId="1e73c486-e7e1-46d1-b5ad-7c65c1f6a4b6" valueTypeId="118c92a2-d1d2-46cd-8c35-537b32fd4aa5"/>
+  <selectionType typeId="977fd33d-faf9-4394-83ae-9b58bd00cc37" valueTypeId="8d71e133-90a7-490f-a161-b8378ea4900f"/>
+  <listType typeId="3c58a4af-74c7-447d-b0fe-ce08add446ea" valueTypeId="c17510f7-6ff9-407d-9648-909be758d48f"/>
+  <managerType typeId="8e88f601-c4dc-4b6a-a2dd-260acfc1de10" valueTypeId="3c7d4367-4c27-459f-bbbc-a012e9e6840f"/>
+ </producedTypes>
+ <name>PrintInfo</name>
+ <synonym>
+  <key>en</key>
+  <value>1808CC6C-5605-F5DB-BCC3-304A4028E845</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PrintInfo.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.PrintInfo.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>824B0D0B-7F6D-5415-5992-2D47AC6272F1</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>64D72321-8421-1EEF-F232-2E13C899843F</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PrintInfo.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PrintInfo.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PrintInfo.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="ce48fb35-8f06-477c-a577-e71056861195">
+  <name>Logo</name>
   <synonym>
-    <key>en</key>
-    <value>Print info</value>
+   <key>en</key>
+   <value>430A6C99-CACA-92F1-1532-25BA1B17EF83</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PrintInfo.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.PrintInfo.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Print info</value>
-  </objectPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Print informations</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PrintInfo.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PrintInfo.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PrintInfo.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="ce48fb35-8f06-477c-a577-e71056861195">
-    <name>Logo</name>
-    <synonym>
-      <key>en</key>
-      <value>Logo</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="3003f980-056d-4c45-afff-a11f78e116a6">
-    <name>isLogoSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Logo</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6e04b6ac-7435-4115-8e90-d7a667a9e94b">
-    <name>Seal</name>
-    <synonym>
-      <key>en</key>
-      <value>Seal</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="9913bedb-82c8-4c0e-b2bc-27eb8e66b8ed">
-    <name>isSealSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Seal</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6048d1b1-94d2-40aa-a9e5-8a99500d2945">
-    <name>AdditionalPrintInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional print info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="322deef7-6bef-4ac3-b18f-2174b9ef9afe">
-    <name>DefaultColor</name>
-    <synonym>
-      <key>en</key>
-      <value>Default color</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="bbfd3e95-ce42-42f7-8e4f-896b350e2b72">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="d8e9fb59-5cf9-4351-ad7b-3f5178a721b9">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e05d7b49-3720-4273-afa8-50545b5b7401">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3003f980-056d-4c45-afff-a11f78e116a6">
+  <name>isLogoSet</name>
+  <synonym>
+   <key>en</key>
+   <value>3668139D-E001-4149-9AED-D869BA69ED7A</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6e04b6ac-7435-4115-8e90-d7a667a9e94b">
+  <name>Seal</name>
+  <synonym>
+   <key>en</key>
+   <value>90802959-05AE-E7A2-23B4-40297CD04830</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9913bedb-82c8-4c0e-b2bc-27eb8e66b8ed">
+  <name>isSealSet</name>
+  <synonym>
+   <key>en</key>
+   <value>80FB50DD-5FF7-FB39-9156-6C77B21C4E51</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6048d1b1-94d2-40aa-a9e5-8a99500d2945">
+  <name>AdditionalPrintInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>82FF2C63-DCF8-9D5A-A1DB-B5538C539054</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="322deef7-6bef-4ac3-b18f-2174b9ef9afe">
+  <name>DefaultColor</name>
+  <synonym>
+   <key>en</key>
+   <value>F4908796-6D9E-E2C4-43DE-E49400D53FAC</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="bbfd3e95-ce42-42f7-8e4f-896b350e2b72">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>6E7AFDA3-0570-7CE0-0A4E-E74A98CFBBA2</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="d8e9fb59-5cf9-4351-ad7b-3f5178a721b9">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>74556EF9-815C-EA9E-EC51-1AF72500B070</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e05d7b49-3720-4273-afa8-50545b5b7401">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>8D246BE9-C686-24F4-4E03-30A45E81FD17</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

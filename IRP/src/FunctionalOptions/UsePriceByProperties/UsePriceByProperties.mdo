@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8359852a-071b-496c-ae3a-832a68e6835a">
-  <name>UsePriceByProperties</name>
-  <synonym>
-    <key>en</key>
-    <value>Use price by properties</value>
-  </synonym>
-  <location>Constant.UsePriceByProperties</location>
-  <privilegedGetMode>true</privilegedGetMode>
+ <name>UsePriceByProperties</name>
+ <synonym>
+  <key>en</key>
+  <value>5A34AAB2-1B42-D06E-E42F-F5984CACA959</value>
+ </synonym>
+ <location>Constant.UsePriceByProperties</location>
+ <privilegedGetMode>true</privilegedGetMode>
 </mdclass:FunctionalOption>

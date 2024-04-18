@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5dbf29c7-ce97-4f1d-b4f2-dd375727fd84">
-  <name>DocProductionPlanningClosingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc production planning closing server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocProductionPlanningClosingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>64431F3C-75CB-8F30-09F9-931A9104DCCE__</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54717bc2-8f9d-42b6-beed-3fa219b4c9b8">
-  <producedTypes>
-    <selectionType typeId="15f69b93-9bd0-452f-8e22-77ce6581b4a8" valueTypeId="854350bb-5b8a-4c41-b07c-bec9804927fb"/>
-    <listType typeId="b5c43a93-13e3-458f-ac56-72ca12d1e0c9" valueTypeId="4748924c-fff7-43f6-8ce9-fb8a5d492a61"/>
-    <managerType typeId="5d593990-29ee-4eb0-887b-ff4708ec1d3e" valueTypeId="02a8ce4a-c728-4b0b-9e9b-9e89ef57de6d"/>
-    <recordSetType typeId="2b3b9b9b-073b-4df3-a36c-d8c7894a066c" valueTypeId="f1e12ec4-aaa9-4531-8806-6601466ffefd"/>
-    <recordKeyType typeId="4ecffd32-1bff-4ed4-8be0-96d1480d3a5b" valueTypeId="df9a0583-147d-4f8a-a467-a5e17e2b830d"/>
-    <recordType typeId="3a7047a6-4860-49c3-a611-2b8acedbe89a" valueTypeId="de8d28cc-415d-4dbf-9e77-1a9ebe837ded"/>
-    <recordManagerType typeId="47f2ec43-158a-412a-adf1-f4377ce093b4" valueTypeId="7b33f191-c711-4a67-a169-cb4bf278db57"/>
-  </producedTypes>
-  <name>T9530S_WorkDays</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="54717bc2-8f9d-42b6-beed-3fa219b4c9b8">
+ <producedTypes>
+  <selectionType typeId="15f69b93-9bd0-452f-8e22-77ce6581b4a8" valueTypeId="854350bb-5b8a-4c41-b07c-bec9804927fb"/>
+  <listType typeId="b5c43a93-13e3-458f-ac56-72ca12d1e0c9" valueTypeId="4748924c-fff7-43f6-8ce9-fb8a5d492a61"/>
+  <managerType typeId="5d593990-29ee-4eb0-887b-ff4708ec1d3e" valueTypeId="02a8ce4a-c728-4b0b-9e9b-9e89ef57de6d"/>
+  <recordSetType typeId="2b3b9b9b-073b-4df3-a36c-d8c7894a066c" valueTypeId="f1e12ec4-aaa9-4531-8806-6601466ffefd"/>
+  <recordKeyType typeId="4ecffd32-1bff-4ed4-8be0-96d1480d3a5b" valueTypeId="df9a0583-147d-4f8a-a467-a5e17e2b830d"/>
+  <recordType typeId="3a7047a6-4860-49c3-a611-2b8acedbe89a" valueTypeId="de8d28cc-415d-4dbf-9e77-1a9ebe837ded"/>
+  <recordManagerType typeId="47f2ec43-158a-412a-adf1-f4377ce093b4" valueTypeId="7b33f191-c711-4a67-a169-cb4bf278db57"/>
+ </producedTypes>
+ <name>T9530S_WorkDays</name>
+ <synonym>
+  <key>en</key>
+  <value>717C8079-029D-E4D8-8F89-9625BC16DE00</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9530S_WorkDays.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.T9530S_WorkDays.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>3B6F3998-45D0-54E8-8647-7F991EFBC631</value>
+ </recordPresentation>
+ <resources uuid="0495093c-858e-4535-bb67-2d11c590f85e">
+  <name>CountDaysHours</name>
   <synonym>
-    <key>en</key>
-    <value>T9530 Work days</value>
+   <key>en</key>
+   <value>5FB33166-75A4-4BB4-4331-1E8A71D05AF2</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T9530S_WorkDays.Form.RecordForm</defaultRecordForm>
-  <defaultListForm>InformationRegister.T9530S_WorkDays.Form.ListForm</defaultListForm>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>T9530 Work days</value>
-  </recordPresentation>
-  <resources uuid="0495093c-858e-4535-bb67-2d11c590f85e">
-    <name>CountDaysHours</name>
-    <synonym>
-      <key>en</key>
-      <value>Count days/hours</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>3</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="11f03012-45c6-44ec-922f-db0b1f3fb7f0">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="97ec6927-6c70-467a-9c93-2983b9d156e8">
-    <name>EmployeeSchedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee schedule</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.EmployeeSchedule</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </dimensions>
-  <forms uuid="feae0cb6-9c07-42dc-9861-2fb71e3cbad1">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f922bf70-c09b-4bfd-87b6-da3345fa4028">
-    <name>CreateSchedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Create schedule</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="886c43ac-2715-4903-8a88-0e4f9e358cff">
-    <name>CopySchedule</name>
-    <synonym>
-      <key>en</key>
-      <value>Copy schedule</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="4d64914a-8302-4a79-83b3-a0a1338f79df">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="11f03012-45c6-44ec-922f-db0b1f3fb7f0">
+  <name>Date</name>
+  <synonym>
+   <key>en</key>
+   <value>708FD940-36BD-0450-066A-AD442C1499A6</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="97ec6927-6c70-467a-9c93-2983b9d156e8">
+  <name>EmployeeSchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>AC4894E1-4F90-7B54-4CF2-24507227FD3B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeeSchedule</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <forms uuid="feae0cb6-9c07-42dc-9861-2fb71e3cbad1">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A507D7DE-AAAB-2CE7-75F8-8C5041308044</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f922bf70-c09b-4bfd-87b6-da3345fa4028">
+  <name>CreateSchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>1C79D017-3F41-3733-33E0-0E06B7AB84DB</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="886c43ac-2715-4903-8a88-0e4f9e358cff">
+  <name>CopySchedule</name>
+  <synonym>
+   <key>en</key>
+   <value>7335A0B8-CA13-8876-6209-9F397E245E38</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4d64914a-8302-4a79-83b3-a0a1338f79df">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>60EE12FD-F38E-50F6-626A-A0EBD9E8D684</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

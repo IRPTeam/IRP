@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6398c449-a48b-49f5-961d-8d7c80ac29e5">
-  <producedTypes>
-    <refType typeId="a6aa4be6-23f2-41d8-9dcf-5004ace60a65" valueTypeId="2b5a9709-8806-400c-b328-d469567ef053"/>
-    <listType typeId="a7f762d7-8142-4ca2-9654-dca2652a88cb" valueTypeId="b07c94fd-71c0-43d5-9f2e-ecfeab2a048f"/>
-    <managerType typeId="0f9c48a6-8029-40b4-a252-a8ea805d3dd1" valueTypeId="6d7f337a-356f-4c4b-8a5f-99f6523caa92"/>
-  </producedTypes>
-  <name>BillOfMaterialsTypes</name>
+ <producedTypes>
+  <refType typeId="a6aa4be6-23f2-41d8-9dcf-5004ace60a65" valueTypeId="2b5a9709-8806-400c-b328-d469567ef053"/>
+  <listType typeId="a7f762d7-8142-4ca2-9654-dca2652a88cb" valueTypeId="b07c94fd-71c0-43d5-9f2e-ecfeab2a048f"/>
+  <managerType typeId="0f9c48a6-8029-40b4-a252-a8ea805d3dd1" valueTypeId="6d7f337a-356f-4c4b-8a5f-99f6523caa92"/>
+ </producedTypes>
+ <name>BillOfMaterialsTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>B9B4C6A3-2AEB-1454-4944-45F25B8B43C0</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="523e5db1-59f8-4de1-87ef-d8172d91aa7e">
+  <name>Product</name>
   <synonym>
-    <key>en</key>
-    <value>Bill of materials types</value>
+   <key>en</key>
+   <value>84157206-CCF9-E493-3766-68423ACBF408</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="523e5db1-59f8-4de1-87ef-d8172d91aa7e">
-    <name>Product</name>
-    <synonym>
-      <key>en</key>
-      <value>Product</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="0431f3bc-2f13-4fc0-a007-32cff608e7e2">
-    <name>Work</name>
-    <synonym>
-      <key>en</key>
-      <value>Work</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="0431f3bc-2f13-4fc0-a007-32cff608e7e2">
+  <name>Work</name>
+  <synonym>
+   <key>en</key>
+   <value>80B46316-D03F-7F4F-FCCB-BDD8E75F16C1</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

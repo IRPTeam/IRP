@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="870f8ef9-e14f-4461-a03a-c4468741130d">
-  <name>DocPhysicalInventoryServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc physical inventory server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocPhysicalInventoryServer</name>
+ <synonym>
+  <key>en</key>
+  <value>CC70E29C-5D81-AAA6-6881-16D9899BDE79</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

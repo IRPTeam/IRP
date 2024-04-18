@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a33ee9d3-07f8-4e1a-9965-0423acc9cf36">
-  <name>Document_CalculationMovementCosts</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Calculation movement costs&quot;</value>
-  </synonym>
+ <name>Document_CalculationMovementCosts</name>
+ <synonym>
+  <key>en</key>
+  <value>21E9F89D-2740-296A-AD68-837B28A1F627_</value>
+ </synonym>
 </mdclass:Role>

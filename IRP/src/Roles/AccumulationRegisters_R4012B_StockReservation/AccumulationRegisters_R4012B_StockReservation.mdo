@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51b25b38-249d-40b3-b945-c906f7efc147">
-  <name>AccumulationRegisters_R4012B_StockReservation</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R4012B StockReservation</value>
-  </synonym>
+ <name>AccumulationRegisters_R4012B_StockReservation</name>
+ <synonym>
+  <key>en</key>
+  <value>7A52D9BF-AFC3-F01D-D9E4-49B6E3D7E653_________</value>
+ </synonym>
 </mdclass:Role>

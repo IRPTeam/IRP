@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5c6d6f7c-54e4-4aba-8ec7-dbd66b93509d">
-  <name>EditCurrencies</name>
-  <synonym>
-    <key>en</key>
-    <value>Edit currencies</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>EditCurrencies</name>
+ <synonym>
+  <key>en</key>
+  <value>D6B49196-5B56-99F0-05CC-C5E77422303A</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

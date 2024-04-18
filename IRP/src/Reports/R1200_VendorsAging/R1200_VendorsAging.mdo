@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b4f8e14b-14b4-4a94-8b3a-464585de33db">
-  <producedTypes>
-    <objectType typeId="6fb8800f-828f-4727-8bb5-cd4c57b1ab1f" valueTypeId="cfdd3d11-8ca9-4f3d-8f31-d5bb862a78d3"/>
-    <managerType typeId="d839fe0f-f70f-452b-be4b-14611ad45d9f" valueTypeId="2f6868ec-0913-437e-9416-dead8abb09bc"/>
-  </producedTypes>
-  <name>R1200_VendorsAging</name>
+ <producedTypes>
+  <objectType typeId="6fb8800f-828f-4727-8bb5-cd4c57b1ab1f" valueTypeId="cfdd3d11-8ca9-4f3d-8f31-d5bb862a78d3"/>
+  <managerType typeId="d839fe0f-f70f-452b-be4b-14611ad45d9f" valueTypeId="2f6868ec-0913-437e-9416-dead8abb09bc"/>
+ </producedTypes>
+ <name>R1200_VendorsAging</name>
+ <synonym>
+  <key>en</key>
+  <value>51D5AF46-A1D6-8E06-6B7B-B1BC1DB8128D</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.R1200_VendorsAging.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="b76f7cfd-5c14-4b5f-bf41-0608794ac028">
+  <name>MainDataCompositionSchema</name>
   <synonym>
-    <key>en</key>
-    <value>R1200 Vendors aging</value>
+   <key>en</key>
+   <value>62D0E40E-5970-ED8C-C12F-F0380EF1237E</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <mainDataCompositionSchema>Report.R1200_VendorsAging.Template.MainDataCompositionSchema</mainDataCompositionSchema>
-  <templates uuid="b76f7cfd-5c14-4b5f-bf41-0608794ac028">
-    <name>MainDataCompositionSchema</name>
-    <synonym>
-      <key>en</key>
-      <value>Main data composition schema</value>
-    </synonym>
-    <templateType>DataCompositionSchema</templateType>
-  </templates>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
 </mdclass:Report>

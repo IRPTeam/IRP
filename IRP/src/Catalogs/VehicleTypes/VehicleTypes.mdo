@@ -1,157 +1,157 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="66f440cd-655e-41ad-8fc6-c73f1f6b98f1">
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="66f440cd-655e-41ad-8fc6-c73f1f6b98f1">
+ <producedTypes>
+  <objectType typeId="e330dc19-b67d-4e32-b6d6-0044655c2a2b" valueTypeId="0aaa3bce-7cb0-4de8-8f02-7f325ecff6d0"/>
+  <refType typeId="3fead660-8d72-497c-b410-92bd73cbcacc" valueTypeId="84aecb92-791b-4055-ad19-744cf936b651"/>
+  <selectionType typeId="a29e109b-9cd1-4de3-8c58-5f378347645d" valueTypeId="f35c8565-92f5-4c94-a920-57dd016856c6"/>
+  <listType typeId="5a437c84-97ca-43d1-9c98-d564f52c8d41" valueTypeId="52b3641c-0662-4497-8205-103ca82d0dad"/>
+  <managerType typeId="3ce4adc2-a451-4c43-b5e0-e4fad44a915f" valueTypeId="9e136c72-48ed-4fd1-825b-739ba0df1d5c"/>
+ </producedTypes>
+ <name>VehicleTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>81C4D14B-40BD-4ADA-AF0A-A56A0A38E752</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.VehicleTypes.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
+  </typesFilterValue>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.VehicleTypes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.VehicleTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.VehicleTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>4F4F7A5E-8B37-7FAB-B65B-B8E6252FD9D2</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>6A7F48FF-1BAF-9170-081C-C600C66D2E57</value>
+ </listPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.VehicleTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.VehicleTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.VehicleTypes.Form.ChoiceForm</defaultChoiceForm>
+ <tabularSections uuid="b1ff324a-8489-4404-b905-9e3ad8e495d9">
   <producedTypes>
-    <objectType typeId="e330dc19-b67d-4e32-b6d6-0044655c2a2b" valueTypeId="0aaa3bce-7cb0-4de8-8f02-7f325ecff6d0"/>
-    <refType typeId="3fead660-8d72-497c-b410-92bd73cbcacc" valueTypeId="84aecb92-791b-4055-ad19-744cf936b651"/>
-    <selectionType typeId="a29e109b-9cd1-4de3-8c58-5f378347645d" valueTypeId="f35c8565-92f5-4c94-a920-57dd016856c6"/>
-    <listType typeId="5a437c84-97ca-43d1-9c98-d564f52c8d41" valueTypeId="52b3641c-0662-4497-8205-103ca82d0dad"/>
-    <managerType typeId="3ce4adc2-a451-4c43-b5e0-e4fad44a915f" valueTypeId="9e136c72-48ed-4fd1-825b-739ba0df1d5c"/>
+   <objectType typeId="71fbd7ef-6bd5-40a2-be98-1cf485a6d126" valueTypeId="93b03b7f-6a61-41f9-b237-fbf72615dfd6"/>
+   <rowType typeId="173b81fc-f2d9-4216-856d-7f682112abf1" valueTypeId="2b19db2e-4214-4c36-afc6-2f9a22b798d2"/>
   </producedTypes>
-  <name>VehicleTypes</name>
+  <name>AddAttributes</name>
   <synonym>
-    <key>en</key>
-    <value>Vehicle types</value>
+   <key>en</key>
+   <value>D67770DB-35A3-78E1-14B0-0DE6E0304A3C</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.VehicleTypes.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_VehicleTypes</value>
-    </typesFilterValue>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.VehicleTypes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.VehicleTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.VehicleTypes.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <attributes uuid="862acc4e-a421-4465-a03f-34b7a08d1983">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Vehicle type</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>65EA070B-A107-2B19-9226-64BCB92E6FC0</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="72d1de48-7284-424f-8fea-d60d92b5df7d">
+   <name>Value</name>
+   <synonym>
     <key>en</key>
-    <value>Vehicle types</value>
-  </listPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.VehicleTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.VehicleTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.VehicleTypes.Form.ChoiceForm</defaultChoiceForm>
-  <tabularSections uuid="b1ff324a-8489-4404-b905-9e3ad8e495d9">
-    <producedTypes>
-      <objectType typeId="71fbd7ef-6bd5-40a2-be98-1cf485a6d126" valueTypeId="93b03b7f-6a61-41f9-b237-fbf72615dfd6"/>
-      <rowType typeId="173b81fc-f2d9-4216-856d-7f682112abf1" valueTypeId="2b19db2e-4214-4c36-afc6-2f9a22b798d2"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="862acc4e-a421-4465-a03f-34b7a08d1983">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="72d1de48-7284-424f-8fea-d60d92b5df7d">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0dd5546c-8202-41b0-9d82-dc2411ce3161">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8f7de77e-a8bb-438b-af41-8bd92445708d">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="6805fd02-4539-4064-929d-fc49c15b6f6f">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="77f16ea8-8150-4c76-bd46-4de2e341d57b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>24321B0E-AB26-D454-4BFE-E7FEDD2AFF4F</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.VehicleTypes.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0dd5546c-8202-41b0-9d82-dc2411ce3161">
+   <name>SearchLiteral</name>
+   <synonym>
+    <key>en</key>
+    <value>95065E9C-9FF4-A4C3-3CF6-61113CA05168</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>500</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="8f7de77e-a8bb-438b-af41-8bd92445708d">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>75E5C1E0-75D7-D813-3610-06EECF9EC739</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6805fd02-4539-4064-929d-fc49c15b6f6f">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1DF2B033-7D85-9EA5-54EA-A382A09A9B83</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="77f16ea8-8150-4c76-bd46-4de2e341d57b">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5D360E28-41FD-75E8-88E9-99EDE04E87D0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

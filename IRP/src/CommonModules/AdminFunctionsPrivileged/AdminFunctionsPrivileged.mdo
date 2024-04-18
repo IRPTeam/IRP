@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31e0ee88-71df-4250-96b8-1d6a46edacca">
-  <name>AdminFunctionsPrivileged</name>
-  <synonym>
-    <key>en</key>
-    <value>Admin functions privileged</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
-  <privileged>true</privileged>
+ <name>AdminFunctionsPrivileged</name>
+ <synonym>
+  <key>en</key>
+  <value>ACAE46A8-7754-4F85-5896-6979A1496429</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
+ <privileged>true</privileged>
 </mdclass:CommonModule>

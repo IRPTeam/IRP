@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="25646f28-8647-40e3-bd9f-ab6044227c87">
-  <name>Other</name>
-  <synonym>
-    <key>en</key>
-    <value>Other</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <content>InformationRegister.CompanyLedgerTypes</content>
-  <content>InformationRegister.LedgerTypeOperations</content>
-  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+ <name>Other</name>
+ <synonym>
+  <key>en</key>
+  <value>CE9690D6-6BD3-F9DA-A9CF-FA8D72B5EB1A</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <content>InformationRegister.CompanyLedgerTypes</content>
+ <content>InformationRegister.LedgerTypeOperations</content>
+ <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

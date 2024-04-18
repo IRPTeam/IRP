@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="65a1c8f5-1bd5-42a1-8790-3519a5338f4a">
-  <producedTypes>
-    <refType typeId="f75166ca-312b-40eb-9ef3-988f2cb86c24" valueTypeId="9d410079-608c-4424-a854-a1ab7a5e2fa6"/>
-    <listType typeId="365c2924-9060-4803-b20e-8da11c29b98b" valueTypeId="a8c33482-5bf7-48f1-8123-90ab4494fd7e"/>
-    <managerType typeId="134b3187-91e2-4698-8813-751174a2c26f" valueTypeId="59b290ab-b542-4c15-8685-f8e47df83054"/>
-  </producedTypes>
-  <name>FixedAssetTypes</name>
+ <producedTypes>
+  <refType typeId="f75166ca-312b-40eb-9ef3-988f2cb86c24" valueTypeId="9d410079-608c-4424-a854-a1ab7a5e2fa6"/>
+  <listType typeId="365c2924-9060-4803-b20e-8da11c29b98b" valueTypeId="a8c33482-5bf7-48f1-8123-90ab4494fd7e"/>
+  <managerType typeId="134b3187-91e2-4698-8813-751174a2c26f" valueTypeId="59b290ab-b542-4c15-8685-f8e47df83054"/>
+ </producedTypes>
+ <name>FixedAssetTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>151C50EE-9F82-77A2-285F-F9056A7D5EAF</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="9906aa3e-798a-467c-98fb-3dcd337347d2">
+  <name>TangibleAssets</name>
   <synonym>
-    <key>en</key>
-    <value>Fixed asset types</value>
+   <key>en</key>
+   <value>9E47C9C9-52BB-1683-3D53-3AF714657678</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="9906aa3e-798a-467c-98fb-3dcd337347d2">
-    <name>TangibleAssets</name>
-    <synonym>
-      <key>en</key>
-      <value>Tangible assets</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d70c8771-2a8a-4d57-9c17-f612da115951">
-    <name>IntangibleAssets</name>
-    <synonym>
-      <key>en</key>
-      <value>Intangible assets</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="d70c8771-2a8a-4d57-9c17-f612da115951">
+  <name>IntangibleAssets</name>
+  <synonym>
+   <key>en</key>
+   <value>8DB448D5-E4C9-1BCB-BE73-3ABEC340F008</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

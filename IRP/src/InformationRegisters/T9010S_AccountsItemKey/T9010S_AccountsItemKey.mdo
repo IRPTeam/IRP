@@ -1,162 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6d059afa-65de-46bb-82a7-7625f5bcab70">
-  <producedTypes>
-    <selectionType typeId="0e8d09cb-f2b0-406a-b4d9-6f1dc06bd0bf" valueTypeId="aff3519c-6fd3-48d6-ab7a-f5b8084adcc5"/>
-    <listType typeId="9cc0f8a1-c41c-4713-9bd2-79899a5967a5" valueTypeId="0e082509-07c5-4697-83db-29515b211d8b"/>
-    <managerType typeId="a0cb20c4-d1b3-44ef-8871-c4768892104c" valueTypeId="57ca746b-11df-4f43-98f2-83788fd19e5a"/>
-    <recordSetType typeId="d4a19217-e831-4b96-b4b2-6dba1041fa23" valueTypeId="2efa937f-1c01-4b72-a115-c86f3e9ce88a"/>
-    <recordKeyType typeId="d8daf353-4274-425b-8581-b50d7ca2b8c4" valueTypeId="2af1a9c0-4679-416e-9d70-1610622c4be4"/>
-    <recordType typeId="642fb34e-51b9-4167-b335-80e72182824f" valueTypeId="743bbdd7-1ef5-4d21-b4f2-73ee81c92c8e"/>
-    <recordManagerType typeId="84990ad7-e9d5-4020-9089-2ae34d4d5c15" valueTypeId="a83dd5fe-f1f4-407d-9bd6-897d5ccc4828"/>
-  </producedTypes>
-  <name>T9010S_AccountsItemKey</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6d059afa-65de-46bb-82a7-7625f5bcab70">
+ <producedTypes>
+  <selectionType typeId="0e8d09cb-f2b0-406a-b4d9-6f1dc06bd0bf" valueTypeId="aff3519c-6fd3-48d6-ab7a-f5b8084adcc5"/>
+  <listType typeId="9cc0f8a1-c41c-4713-9bd2-79899a5967a5" valueTypeId="0e082509-07c5-4697-83db-29515b211d8b"/>
+  <managerType typeId="a0cb20c4-d1b3-44ef-8871-c4768892104c" valueTypeId="57ca746b-11df-4f43-98f2-83788fd19e5a"/>
+  <recordSetType typeId="d4a19217-e831-4b96-b4b2-6dba1041fa23" valueTypeId="2efa937f-1c01-4b72-a115-c86f3e9ce88a"/>
+  <recordKeyType typeId="d8daf353-4274-425b-8581-b50d7ca2b8c4" valueTypeId="2af1a9c0-4679-416e-9d70-1610622c4be4"/>
+  <recordType typeId="642fb34e-51b9-4167-b335-80e72182824f" valueTypeId="743bbdd7-1ef5-4d21-b4f2-73ee81c92c8e"/>
+  <recordManagerType typeId="84990ad7-e9d5-4020-9089-2ae34d4d5c15" valueTypeId="a83dd5fe-f1f4-407d-9bd6-897d5ccc4828"/>
+ </producedTypes>
+ <name>T9010S_AccountsItemKey</name>
+ <synonym>
+  <key>en</key>
+  <value>EECD33A1-9895-41CA-A4F7-76C96050151D</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9010S_AccountsItemKey.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>3D8942DA-0BC2-73AA-AD8F-F30691A53932</value>
+ </recordPresentation>
+ <resources uuid="26486334-1d28-4aa5-bdfc-a98d6b0de605">
+  <name>Account</name>
   <synonym>
-    <key>en</key>
-    <value>Accounts (Item key)</value>
+   <key>en</key>
+   <value>C24022FF-5A9F-FD78-8F24-4CAED456D7C7</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.T9010S_AccountsItemKey.Form.RecordForm</defaultRecordForm>
-  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Accounts (Item key)</value>
-  </recordPresentation>
-  <resources uuid="26486334-1d28-4aa5-bdfc-a98d6b0de605">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>ChartOfAccountsRef.Basic</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.LedgerTypeVariant</name>
-      <field>InformationRegister.T9010S_AccountsItemKey.Dimension.LedgerTypeVariant</field>
-    </choiceParameterLinks>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="a443958b-1e9e-4fdc-938b-87a5ee9ced38">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="32fe3276-60f3-49c5-bef8-2bd4e363ccd2">
-    <name>LedgerTypeVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Ledger type variant</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LedgerTypeVariants</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="3447e9a2-e541-486c-89cd-478a6831d63a">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f88b6c42-9393-4872-af2b-bd11349609b7">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="7644f0ea-a14f-4675-ad33-5e77928f2fc6">
-    <name>ItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Item type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="3adf4539-a31f-4aaa-918e-2146bfaa1e26">
-    <name>TypeOfItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Type of item type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ItemTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <forms uuid="cd7c54e0-943c-4273-9547-d3ce810eeb30">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9010S_AccountsItemKey.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="a443958b-1e9e-4fdc-938b-87a5ee9ced38">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>B97EC3C9-5FC5-83E0-01C8-8007AA606E87</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="32fe3276-60f3-49c5-bef8-2bd4e363ccd2">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>88734DAE-7C62-FCE3-36CA-A1DFBA80A596</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3447e9a2-e541-486c-89cd-478a6831d63a">
+  <name>ItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>DD8BB256-5822-D482-2E9F-F1A37FD23D8D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f88b6c42-9393-4872-af2b-bd11349609b7">
+  <name>Item</name>
+  <synonym>
+   <key>en</key>
+   <value>ACC7D142-C5C8-2BE3-3073-30C08DDAC882</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="7644f0ea-a14f-4675-ad33-5e77928f2fc6">
+  <name>ItemType</name>
+  <synonym>
+   <key>en</key>
+   <value>10159770-ADD1-CA35-5B52-2E3D30699104</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3adf4539-a31f-4aaa-918e-2146bfaa1e26">
+  <name>TypeOfItemType</name>
+  <synonym>
+   <key>en</key>
+   <value>AF0A32EF-C717-2CD1-1BC0-0E5FBC0E4C73</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ItemTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="cd7c54e0-943c-4273-9547-d3ce810eeb30">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>A400CD6D-C27A-50D5-5B73-3B80EA4491EE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:InformationRegister>

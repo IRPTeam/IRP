@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dec13f0-63ab-4155-908d-a6348313b106">
-  <name>CurrenciesClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Currencies client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>CurrenciesClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>BAC2E09E-B884-C097-797C-C75BCF4A54DB</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a7db1dd-cb35-45f2-b376-63ea12051807">
-  <producedTypes>
-    <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
-    <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
-    <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
-  </producedTypes>
-  <name>IntegrationType</name>
+ <producedTypes>
+  <refType typeId="eae0dd6a-10ac-48f4-b382-9f5d71176f43" valueTypeId="44b4edaa-cd6d-49e0-9a5b-01fe2ca7e05a"/>
+  <listType typeId="29c7191a-f6ff-4007-beeb-8b3c4a81dfc5" valueTypeId="816aea1f-ab9f-40b9-8c86-5a68808c46ff"/>
+  <managerType typeId="b4b52cfd-5280-4a3d-9865-540152aed1db" valueTypeId="16a25d9c-56dd-47ca-9c73-857e94e02093"/>
+ </producedTypes>
+ <name>IntegrationType</name>
+ <synonym>
+  <key>en</key>
+  <value>3496FB11-5D27-2913-3508-8B5D723071EC</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
+  <name>Other</name>
   <synonym>
-    <key>en</key>
-    <value>Integration type</value>
+   <key>en</key>
+   <value>C55B8EF5-5272-AD09-9676-62CC9540F927</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="674271c9-6555-4945-a116-81627a9b7321">
-    <name>Other</name>
-    <synonym>
-      <key>en</key>
-      <value>Other</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
-    <name>CurrencyRates</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency rates</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
-    <name>FileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>File storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
-    <name>LocalFileStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Local file storage</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
-    <name>Email</name>
-    <synonym>
-      <key>en</key>
-      <value>Email</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2705b4b5-f98b-4274-9ab6-0145c1d50a8d">
-    <name>ClientBank</name>
-    <synonym>
-      <key>en</key>
-      <value>Client bank</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="6b85d29f-e2ba-4a50-bc04-be179628bb6e">
-    <name>SMSProvider</name>
-    <synonym>
-      <key>en</key>
-      <value>SMS provider</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="95a80b3a-57fe-4cb5-9de1-76e407620220">
-    <name>Equipment</name>
-    <synonym>
-      <key>en</key>
-      <value>Equipment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
-    <name>VisitorCounter</name>
-    <synonym>
-      <key>en</key>
-      <value>Visitor counter</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="b42a3939-5881-4535-a85d-0d8406134e0b">
+  <name>CurrencyRates</name>
+  <synonym>
+   <key>en</key>
+   <value>E4EE4D55-9B40-9DAE-E129-9FC8A54CA2EE</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f154ff0d-7105-422b-bf50-054de6238e83">
+  <name>FileStorage</name>
+  <synonym>
+   <key>en</key>
+   <value>9EAA98FE-D9DD-250E-E875-5760064CC269</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ca0d76ed-ccb7-4f3f-ac27-fff09e19facb">
+  <name>LocalFileStorage</name>
+  <synonym>
+   <key>en</key>
+   <value>7DF4AD3E-68A1-DB05-52D9-98BE4B5D5A85</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
+  <name>Email</name>
+  <synonym>
+   <key>en</key>
+   <value>75EC4233-0D87-DD38-8172-283389AF9378</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2705b4b5-f98b-4274-9ab6-0145c1d50a8d">
+  <name>ClientBank</name>
+  <synonym>
+   <key>en</key>
+   <value>014CBA16-F7F6-55CC-CF2F-F77B6B3F271D</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="6b85d29f-e2ba-4a50-bc04-be179628bb6e">
+  <name>SMSProvider</name>
+  <synonym>
+   <key>en</key>
+   <value>72671676-1C2E-1CB1-1E13-3A63E9C5ACE5</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="95a80b3a-57fe-4cb5-9de1-76e407620220">
+  <name>Equipment</name>
+  <synonym>
+   <key>en</key>
+   <value>32FF9C7B-B473-210A-AA4A-A104F4A3CEDE</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="cb7b990a-99f7-4969-a757-b0e63a17e95e">
+  <name>VisitorCounter</name>
+  <synonym>
+   <key>en</key>
+   <value>20BC2C2C-D26A-07BC-CEBC-CBB90EAF1088</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

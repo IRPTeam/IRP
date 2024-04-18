@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="81330a23-58ad-40db-86fe-5a09bcc96e5f">
-  <name>Accounting</name>
-  <synonym>
-    <key>en</key>
-    <value>Accounting</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Bookkeeping</picture>
-  </picture>
-  <content>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</content>
-  <content>Document.JournalEntry</content>
-  <content>ChartOfAccounts.Basic</content>
-  <content>AccumulationRegister.T1040T_AccountingAmounts</content>
-  <content>FunctionalOption.UseAccounting</content>
-  <content>Catalog.AccountingOperations</content>
-  <content>AccountingRegister.Basic</content>
-  <content>CommonCommand.OpenAccountingRecords</content>
-  <content>Report.A0010_TrialBalance</content>
-  <content>Report.A0011_TrialBalanceByAccount</content>
-  <content>Report.A0012_AccountCard</content>
-  <content>Report.A0013_AccountAnalysis</content>
-  <subsystems>Accounts</subsystems>
-  <subsystems>LedgerTypes</subsystems>
-  <subsystems>Other</subsystems>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="81330a23-58ad-40db-86fe-5a09bcc96e5f">
+ <name>Accounting</name>
+ <synonym>
+  <key>en</key>
+  <value>A9BC3E91-95A4-52EC-C3FD-DD38EA05079E</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Bookkeeping</picture>
+ </picture>
+ <content>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</content>
+ <content>Document.JournalEntry</content>
+ <content>ChartOfAccounts.Basic</content>
+ <content>AccumulationRegister.T1040T_AccountingAmounts</content>
+ <content>FunctionalOption.UseAccounting</content>
+ <content>Catalog.AccountingOperations</content>
+ <content>AccountingRegister.Basic</content>
+ <content>CommonCommand.OpenAccountingRecords</content>
+ <content>Report.A0010_TrialBalance</content>
+ <content>Report.A0011_TrialBalanceByAccount</content>
+ <content>Report.A0012_AccountCard</content>
+ <content>Report.A0013_AccountAnalysis</content>
+ <subsystems>Accounts</subsystems>
+ <subsystems>LedgerTypes</subsystems>
+ <subsystems>Other</subsystems>
 </mdclass:Subsystem>

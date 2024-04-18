@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="443a8319-7933-4d72-b601-72638465227f">
-  <producedTypes>
-    <selectionType typeId="a19f0638-f78c-4ff3-911b-c365481119ec" valueTypeId="ab7ae0e1-abca-4962-83d6-ae79ad0cddcd"/>
-    <listType typeId="aa29a187-fb7b-478f-83b4-ec479c23cd20" valueTypeId="ffc9e094-0bda-4300-b1d0-f2183c2da2a3"/>
-    <managerType typeId="3af12367-9d97-45b0-a08b-366c65acae5b" valueTypeId="288b02ab-3126-4f55-8be3-0505850bd4bd"/>
-    <recordSetType typeId="88c1aedf-951e-4b59-a7fd-c90d049e296f" valueTypeId="d0b6eb94-0bf0-4726-9e6c-064d3947d1f1"/>
-    <recordKeyType typeId="64db1a80-4535-4a06-8fd0-5b8e0c2ee067" valueTypeId="6f1c973e-7a9f-4c5e-be86-2ddee24c00d1"/>
-    <recordType typeId="5777e3fc-b887-4ebc-8cf0-4737c874da74" valueTypeId="e3f10584-fb5c-4f19-9224-f483f2d8043f"/>
-    <recordManagerType typeId="506d88c9-17ee-4ce5-9d6c-35f1432ac90d" valueTypeId="541fe468-ed6b-43d0-9ad3-44acd56f7087"/>
-  </producedTypes>
-  <name>T9100A_ObjectAccessMap</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="443a8319-7933-4d72-b601-72638465227f">
+ <producedTypes>
+  <selectionType typeId="a19f0638-f78c-4ff3-911b-c365481119ec" valueTypeId="ab7ae0e1-abca-4962-83d6-ae79ad0cddcd"/>
+  <listType typeId="aa29a187-fb7b-478f-83b4-ec479c23cd20" valueTypeId="ffc9e094-0bda-4300-b1d0-f2183c2da2a3"/>
+  <managerType typeId="3af12367-9d97-45b0-a08b-366c65acae5b" valueTypeId="288b02ab-3126-4f55-8be3-0505850bd4bd"/>
+  <recordSetType typeId="88c1aedf-951e-4b59-a7fd-c90d049e296f" valueTypeId="d0b6eb94-0bf0-4726-9e6c-064d3947d1f1"/>
+  <recordKeyType typeId="64db1a80-4535-4a06-8fd0-5b8e0c2ee067" valueTypeId="6f1c973e-7a9f-4c5e-be86-2ddee24c00d1"/>
+  <recordType typeId="5777e3fc-b887-4ebc-8cf0-4737c874da74" valueTypeId="e3f10584-fb5c-4f19-9224-f483f2d8043f"/>
+  <recordManagerType typeId="506d88c9-17ee-4ce5-9d6c-35f1432ac90d" valueTypeId="541fe468-ed6b-43d0-9ad3-44acd56f7087"/>
+ </producedTypes>
+ <name>T9100A_ObjectAccessMap</name>
+ <synonym>
+  <key>en</key>
+  <value>18920949-82C9-C366-6A44-4ED5CE46CF92</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>CE3D98CA-49EB-DB05-5C63-395C686BEBDC</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>01BDBE17-2BAE-0762-2EB4-4F96CEFE891E</value>
+ </listPresentation>
+ <resources uuid="2ad68611-af0a-4917-ba1e-28b5a9a945b3">
+  <name>ObjectAccessKeys</name>
   <synonym>
-    <key>en</key>
-    <value>T9100A Object access map</value>
+   <key>en</key>
+   <value>F46B81AA-1A15-5010-0BA6-6CFB0E7B6104</value>
   </synonym>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>T9100A Object access map</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>T9100A Object access maps</value>
-  </listPresentation>
-  <resources uuid="2ad68611-af0a-4917-ba1e-28b5a9a945b3">
-    <name>ObjectAccessKeys</name>
-    <synonym>
-      <key>en</key>
-      <value>Object access keys</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectAccessKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>Use</createOnInput>
-    <fullTextSearch>Use</fullTextSearch>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="4f4a6a0a-fd8e-43a7-b7a0-fc4da94c2bb1">
-    <name>ObjectRef</name>
-    <synonym>
-      <key>en</key>
-      <value>Object ref</value>
-    </synonym>
-    <type>
-      <types>AnyRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>CatalogRef.ObjectAccessKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="4f4a6a0a-fd8e-43a7-b7a0-fc4da94c2bb1">
+  <name>ObjectRef</name>
+  <synonym>
+   <key>en</key>
+   <value>1E3FE2FF-BE7C-C74C-CE44-49E419581CCF</value>
+  </synonym>
+  <type>
+   <types>AnyRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

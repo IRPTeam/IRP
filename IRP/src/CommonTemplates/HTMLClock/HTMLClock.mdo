@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9d1b6131-6d28-4092-8457-d1bb168b6344">
-  <name>HTMLClock</name>
-  <synonym>
-    <key>en</key>
-    <value>HTMLClock</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLClock</name>
+ <synonym>
+  <key>en</key>
+  <value>9D9AB9BE-53F0-B3E1-1198-8A3C15380322</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

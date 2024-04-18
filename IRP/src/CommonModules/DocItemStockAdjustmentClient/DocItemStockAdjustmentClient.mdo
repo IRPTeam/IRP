@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab912837-0959-448b-aea2-4bb111ef8bbb">
-  <name>DocItemStockAdjustmentClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc item stock adjustment client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocItemStockAdjustmentClient</name>
+ <synonym>
+  <key>en</key>
+  <value>685BC8A0-CFF0-A74E-E732-21ECF37DFD28</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

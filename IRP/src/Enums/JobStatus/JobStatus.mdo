@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e162e94e-a875-4073-8078-7b2c0a47d3bc">
-  <producedTypes>
-    <refType typeId="92731c5c-4e04-46b6-b1ac-a6fbf702ee63" valueTypeId="a73b73df-142e-4600-ac2a-a5630dd89e1f"/>
-    <listType typeId="38984a4b-1e27-4198-b04b-8708dd8287fc" valueTypeId="26edbe71-2fba-4aec-bdc9-57f7d69a67aa"/>
-    <managerType typeId="567f8eca-4931-44eb-ac29-3b56f5ee8e7a" valueTypeId="14729afe-8e62-48eb-b4f5-57c6b91d6d13"/>
-  </producedTypes>
-  <name>JobStatus</name>
+ <producedTypes>
+  <refType typeId="92731c5c-4e04-46b6-b1ac-a6fbf702ee63" valueTypeId="a73b73df-142e-4600-ac2a-a5630dd89e1f"/>
+  <listType typeId="38984a4b-1e27-4198-b04b-8708dd8287fc" valueTypeId="26edbe71-2fba-4aec-bdc9-57f7d69a67aa"/>
+  <managerType typeId="567f8eca-4931-44eb-ac29-3b56f5ee8e7a" valueTypeId="14729afe-8e62-48eb-b4f5-57c6b91d6d13"/>
+ </producedTypes>
+ <name>JobStatus</name>
+ <synonym>
+  <key>en</key>
+  <value>9BEB757B-EF84-A406-6E6C-CD4BDE6577CD</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="0b47550c-96af-411e-af14-7c491b035d56">
+  <name>Completed</name>
   <synonym>
-    <key>en</key>
-    <value>Job status</value>
+   <key>en</key>
+   <value>9FF867BE-1496-682A-A186-692FACC83EE2</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="0b47550c-96af-411e-af14-7c491b035d56">
-    <name>Completed</name>
-    <synonym>
-      <key>en</key>
-      <value>Completed</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7741b97c-2c54-433b-a403-b8c22518957d">
-    <name>Wait</name>
-    <synonym>
-      <key>en</key>
-      <value>Wait</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="ccf5e52d-7fb5-41c2-b9b7-329e82ad62d2">
-    <name>Failed</name>
-    <synonym>
-      <key>en</key>
-      <value>Failed</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="b0d590b0-d9a9-40a0-a697-e3533008ab31">
-    <name>Active</name>
-    <synonym>
-      <key>en</key>
-      <value>Active</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="bd23f04d-3bde-4117-ab5a-23c96316803c">
-    <name>Canceled</name>
-    <synonym>
-      <key>en</key>
-      <value>Canceled</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="d8150dd1-afc8-4975-9545-e4bc74bc52b9">
-    <name>Pause</name>
-    <synonym>
-      <key>en</key>
-      <value>Pause</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="7741b97c-2c54-433b-a403-b8c22518957d">
+  <name>Wait</name>
+  <synonym>
+   <key>en</key>
+   <value>2A2BDF1E-FF4C-C2BB-BEB1-10918E3FDE07</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="ccf5e52d-7fb5-41c2-b9b7-329e82ad62d2">
+  <name>Failed</name>
+  <synonym>
+   <key>en</key>
+   <value>B19F111D-C060-4C95-5AF3-3656645FF995</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="b0d590b0-d9a9-40a0-a697-e3533008ab31">
+  <name>Active</name>
+  <synonym>
+   <key>en</key>
+   <value>662B0047-6648-C427-7A3E-ED0FAA92C732</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="bd23f04d-3bde-4117-ab5a-23c96316803c">
+  <name>Canceled</name>
+  <synonym>
+   <key>en</key>
+   <value>298767E9-7851-ED7E-E994-4911A235F824</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="d8150dd1-afc8-4975-9545-e4bc74bc52b9">
+  <name>Pause</name>
+  <synonym>
+   <key>en</key>
+   <value>38B45EA8-2E2C-97F5-53FC-CA7BE6E993D0</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

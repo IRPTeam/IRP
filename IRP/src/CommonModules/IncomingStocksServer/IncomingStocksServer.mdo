@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b03ee2d7-e7bd-4ad8-90a4-8fe5ddfb759e">
-  <name>IncomingStocksServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Incoming stocks server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>IncomingStocksServer</name>
+ <synonym>
+  <key>en</key>
+  <value>38DBEE67-0267-3385-53BB-BBE2140AF1CB</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1f9c91f3-e3c0-4e06-b9ba-da1c473089b3">
-  <name>UseAdditionalTableControlDocument</name>
-  <synonym>
-    <key>en</key>
-    <value>Use additional table control document</value>
-  </synonym>
-  <location>Constant.UseAdditionalTableControlDocument</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>DataProcessor.FixDocumentProblems</content>
-  <content>Report.D0012_AdditionalDocumentTablesCheck</content>
-  <content>CommonForm.AdditionalTableControlSettings</content>
-  <content>Constant.AdditionalTableControlExceptions</content>
+ <name>UseAdditionalTableControlDocument</name>
+ <synonym>
+  <key>en</key>
+  <value>62EA2A10-DE88-BB43-3AE4-4EA8BB7D26EB_</value>
+ </synonym>
+ <location>Constant.UseAdditionalTableControlDocument</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>DataProcessor.FixDocumentProblems</content>
+ <content>Report.D0012_AdditionalDocumentTablesCheck</content>
+ <content>CommonForm.AdditionalTableControlSettings</content>
+ <content>Constant.AdditionalTableControlExceptions</content>
 </mdclass:FunctionalOption>

@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="67b13c73-5984-4c08-b4ae-291b9ecac393">
-  <producedTypes>
-    <refType typeId="4c6d04c5-7a5f-4d23-960b-071fa705eaf7" valueTypeId="9f8c3909-4131-430c-b1cc-00bd0f339ec0"/>
-    <listType typeId="9f54f26f-df91-4f00-baf3-10e5e5f74bcb" valueTypeId="2d6bda5a-40ac-409b-a5d9-852b96b621fd"/>
-    <managerType typeId="fa57bc27-d3fa-43f5-be40-c4e683dd1f99" valueTypeId="79a02081-ae21-4607-9e07-d2662472b204"/>
-  </producedTypes>
-  <name>ProductionPlanningTypes</name>
+ <producedTypes>
+  <refType typeId="4c6d04c5-7a5f-4d23-960b-071fa705eaf7" valueTypeId="9f8c3909-4131-430c-b1cc-00bd0f339ec0"/>
+  <listType typeId="9f54f26f-df91-4f00-baf3-10e5e5f74bcb" valueTypeId="2d6bda5a-40ac-409b-a5d9-852b96b621fd"/>
+  <managerType typeId="fa57bc27-d3fa-43f5-be40-c4e683dd1f99" valueTypeId="79a02081-ae21-4607-9e07-d2662472b204"/>
+ </producedTypes>
+ <name>ProductionPlanningTypes</name>
+ <synonym>
+  <key>en</key>
+  <value>607BA7BD-F921-1875-5F7F-FCED6E3B6BB3</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="2005d8c3-7f25-498a-8560-1e5ad514bec2">
+  <name>Planned</name>
   <synonym>
-    <key>en</key>
-    <value>(CORE) Production planning types</value>
+   <key>en</key>
+   <value>BBE652D4-2E41-D8D5-5AA9-9E0E609712DD</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="2005d8c3-7f25-498a-8560-1e5ad514bec2">
-    <name>Planned</name>
-    <synonym>
-      <key>en</key>
-      <value>Planned</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="1e69ac9e-abe9-4cca-bbf8-70369f7720c6">
-    <name>Produced</name>
-    <synonym>
-      <key>en</key>
-      <value>Produced</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="dcbf66b8-cfda-4f71-8a13-892ce3ad2aa5">
-    <name>PlanAdjustment</name>
-    <synonym>
-      <key>en</key>
-      <value>Plan adjustment</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="2dfc5b64-cda2-463e-b631-970b22070334">
-    <name>Closing</name>
-    <synonym>
-      <key>en</key>
-      <value>Closing</value>
-    </synonym>
-  </enumValues>
+ </enumValues>
+ <enumValues uuid="1e69ac9e-abe9-4cca-bbf8-70369f7720c6">
+  <name>Produced</name>
+  <synonym>
+   <key>en</key>
+   <value>48ADAE89-1E82-C49F-FE32-2F0B23605E78</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="dcbf66b8-cfda-4f71-8a13-892ce3ad2aa5">
+  <name>PlanAdjustment</name>
+  <synonym>
+   <key>en</key>
+   <value>9BF59484-34D2-40D5-50C1-149737503AAD</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="2dfc5b64-cda2-463e-b631-970b22070334">
+  <name>Closing</name>
+  <synonym>
+   <key>en</key>
+   <value>0A901864-4F7F-5531-19B7-7F5036271EA5</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

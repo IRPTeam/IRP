@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="686ab6e5-f107-4529-9906-7d6e62fbf4ef">
-  <name>Document_WorkOrderClosing</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Work order closing&quot;</value>
-  </synonym>
+ <name>Document_WorkOrderClosing</name>
+ <synonym>
+  <key>en</key>
+  <value>3F44C0AA-16E5-CB51-1A69-9227C3741DB3</value>
+ </synonym>
 </mdclass:Role>

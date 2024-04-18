@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1a661027-a1a6-4d47-82ae-c2b725dc502b">
-  <name>CashOk</name>
-  <synonym>
-    <key>en</key>
-    <value>Cash ok</value>
-  </synonym>
+ <name>CashOk</name>
+ <synonym>
+  <key>en</key>
+  <value>760AA63D-3275-006E-E271-16C06897949E</value>
+ </synonym>
 </mdclass:CommonPicture>

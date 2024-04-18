@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="98e9bed9-0ab2-4391-9393-22835bc09951">
-  <name>AccumulationRegisters_R7050T_ProductionDurations</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R7050T ProductionDurations</value>
-  </synonym>
+ <name>AccumulationRegisters_R7050T_ProductionDurations</name>
+ <synonym>
+  <key>en</key>
+  <value>4F1ACEC8-41C2-A1EF-F4FC-C3503CA88C24____________</value>
+ </synonym>
 </mdclass:Role>

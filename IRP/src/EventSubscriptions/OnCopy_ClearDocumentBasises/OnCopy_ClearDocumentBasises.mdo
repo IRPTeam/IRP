@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d688f223-7102-41a5-88f9-6b37ab01f7fa">
-  <name>OnCopy_ClearDocumentBasises</name>
-  <synonym>
-    <key>en</key>
-    <value>On copy clear document basises</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>OnCopy</event>
-  <handler>CommonModule.FillingWithDefaultDataEvent.ClearDocumentBasisesOnCopy</handler>
+ <name>OnCopy_ClearDocumentBasises</name>
+ <synonym>
+  <key>en</key>
+  <value>42FEB759-5B9C-D451-1867-75FE4BDC3A45</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnCopy</event>
+ <handler>CommonModule.FillingWithDefaultDataEvent.ClearDocumentBasisesOnCopy</handler>
 </mdclass:EventSubscription>

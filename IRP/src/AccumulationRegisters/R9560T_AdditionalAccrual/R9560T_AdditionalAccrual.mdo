@@ -1,131 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ee25d4ae-a039-4d76-80bd-26fae1f9d69a">
-  <producedTypes>
-    <selectionType typeId="18710357-4657-413c-a0e1-d651b0cb6826" valueTypeId="e74a567a-22ab-41f0-9613-e921e0e1187a"/>
-    <listType typeId="6cfd9a8c-a809-40b1-ab3c-f37294345b80" valueTypeId="768bddd8-8c0d-4975-931c-595946612bcf"/>
-    <managerType typeId="42d2616a-f0f4-4525-bb04-d7e219d89af1" valueTypeId="d2bd195e-da63-4e47-adb4-38c5fe1a895c"/>
-    <recordSetType typeId="9593fc63-0269-4e30-be0f-6a733918ae64" valueTypeId="bce91aac-e470-4dd7-95ed-f156e631b31f"/>
-    <recordKeyType typeId="1b2d2d2b-c26a-4df0-ab62-c91a40522940" valueTypeId="9a4e8bfc-7c75-4527-9b6d-29b2744a492d"/>
-    <recordType typeId="b9a9cea1-6294-439e-a8ef-4aa9558bfba4" valueTypeId="583915cc-3904-4e56-a467-77f7f108113b"/>
-  </producedTypes>
-  <name>R9560T_AdditionalAccrual</name>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ee25d4ae-a039-4d76-80bd-26fae1f9d69a">
+ <producedTypes>
+  <selectionType typeId="18710357-4657-413c-a0e1-d651b0cb6826" valueTypeId="e74a567a-22ab-41f0-9613-e921e0e1187a"/>
+  <listType typeId="6cfd9a8c-a809-40b1-ab3c-f37294345b80" valueTypeId="768bddd8-8c0d-4975-931c-595946612bcf"/>
+  <managerType typeId="42d2616a-f0f4-4525-bb04-d7e219d89af1" valueTypeId="d2bd195e-da63-4e47-adb4-38c5fe1a895c"/>
+  <recordSetType typeId="9593fc63-0269-4e30-be0f-6a733918ae64" valueTypeId="bce91aac-e470-4dd7-95ed-f156e631b31f"/>
+  <recordKeyType typeId="1b2d2d2b-c26a-4df0-ab62-c91a40522940" valueTypeId="9a4e8bfc-7c75-4527-9b6d-29b2744a492d"/>
+  <recordType typeId="b9a9cea1-6294-439e-a8ef-4aa9558bfba4" valueTypeId="583915cc-3904-4e56-a467-77f7f108113b"/>
+ </producedTypes>
+ <name>R9560T_AdditionalAccrual</name>
+ <synonym>
+  <key>en</key>
+  <value>09656520-7AFA-380C-C4AB-BE123D96055F</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="7c750d58-4672-45e4-9bb2-30304370dd6a">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>R9560 Additional accrual</value>
+   <key>en</key>
+   <value>385A8566-7AF1-4041-174C-CB9F73D71675</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="7c750d58-4672-45e4-9bb2-30304370dd6a">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="28f610c8-5de7-4ae6-8180-079fb568f6ae">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="e5ca719a-cc6b-4065-98bd-a220848db59c">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="f395a69a-e1aa-4607-aa87-d513b15169e5">
-    <name>Employee</name>
-    <synonym>
-      <key>en</key>
-      <value>Employee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="dcb31435-3dbb-45b4-a12f-fb9faaf0cf17">
-    <name>Position</name>
-    <synonym>
-      <key>en</key>
-      <value>Position</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.EmployeePositions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d310318d-e3fb-4021-bb4e-ed8d7699c232">
-    <name>AccrualType</name>
-    <synonym>
-      <key>en</key>
-      <value>Accrual type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.AccrualAndDeductionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="11fdde24-bb5b-4925-bd98-3a09720371f8">
-    <name>ExpenseType</name>
-    <synonym>
-      <key>en</key>
-      <value>Expense type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b08f81ea-7d3e-48a4-87b7-26edad8010ea">
-    <name>ProfitLossCenter</name>
-    <synonym>
-      <key>en</key>
-      <value>Profit loss center</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="28f610c8-5de7-4ae6-8180-079fb568f6ae">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>20D028C0-509E-D53E-EA89-9DB4E960F9EC</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="e5ca719a-cc6b-4065-98bd-a220848db59c">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>76DAB11E-49BE-35E9-9124-4AC5867B65A4</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="f395a69a-e1aa-4607-aa87-d513b15169e5">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>081CA805-2DB0-D7A6-6376-64AAB2CE96F2</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="dcb31435-3dbb-45b4-a12f-fb9faaf0cf17">
+  <name>Position</name>
+  <synonym>
+   <key>en</key>
+   <value>7E10C91C-B36A-EA92-294B-BB9AAC18D133</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.EmployeePositions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="d310318d-e3fb-4021-bb4e-ed8d7699c232">
+  <name>AccrualType</name>
+  <synonym>
+   <key>en</key>
+   <value>C66C3A5A-84CE-4E24-4BB5-59090372CC88</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.AccrualAndDeductionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="11fdde24-bb5b-4925-bd98-3a09720371f8">
+  <name>ExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>522B7068-8743-82E4-47C6-6561EA928C36</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b08f81ea-7d3e-48a4-87b7-26edad8010ea">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>EEE6D5A7-A19E-E736-66D8-8D9AE3E353D9</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

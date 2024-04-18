@@ -1,247 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e043c678-594a-489e-abff-3d45461cf371">
-  <producedTypes>
-    <objectType typeId="b47481de-7f3e-46ea-9d15-eb6ee9269e8c" valueTypeId="5e155f21-dae9-47b3-bbfc-63016cade580"/>
-    <refType typeId="68b9fc9e-c1e0-4ef5-bdec-c285a6b0bf81" valueTypeId="7db59760-6903-4664-ba23-d39bef1f661a"/>
-    <selectionType typeId="32fafffe-36af-4a65-bb2f-e949801b08ce" valueTypeId="8c74dfd9-5bc3-4590-8507-d8bf4c29c93b"/>
-    <listType typeId="ef95acf7-f342-416e-978c-1247566b99bc" valueTypeId="3fb69e34-c0a1-490b-a6dd-39b286a3e56e"/>
-    <managerType typeId="36dbdc46-377c-40f1-9220-3e631424f765" valueTypeId="68a4ee89-d7b3-499c-9162-1531d613c077"/>
-  </producedTypes>
-  <name>PartnersBankAccounts</name>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e043c678-594a-489e-abff-3d45461cf371">
+ <producedTypes>
+  <objectType typeId="b47481de-7f3e-46ea-9d15-eb6ee9269e8c" valueTypeId="5e155f21-dae9-47b3-bbfc-63016cade580"/>
+  <refType typeId="68b9fc9e-c1e0-4ef5-bdec-c285a6b0bf81" valueTypeId="7db59760-6903-4664-ba23-d39bef1f661a"/>
+  <selectionType typeId="32fafffe-36af-4a65-bb2f-e949801b08ce" valueTypeId="8c74dfd9-5bc3-4590-8507-d8bf4c29c93b"/>
+  <listType typeId="ef95acf7-f342-416e-978c-1247566b99bc" valueTypeId="3fb69e34-c0a1-490b-a6dd-39b286a3e56e"/>
+  <managerType typeId="36dbdc46-377c-40f1-9220-3e631424f765" valueTypeId="68a4ee89-d7b3-499c-9162-1531d613c077"/>
+ </producedTypes>
+ <name>PartnersBankAccounts</name>
+ <synonym>
+  <key>en</key>
+  <value>6BA84227-DF2C-3708-8494-4F9F596497AF</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.PartnersBankAccounts.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnersBankAccounts</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.PartnersBankAccounts.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnersBankAccounts</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>310972DF-637D-4853-32A5-53B2462B6FC6</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.PartnersBankAccounts.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.PartnersBankAccounts.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.PartnersBankAccounts.Form.ChoiceForm</defaultChoiceForm>
+ <attributes uuid="fb2e04d0-eb29-49e0-8125-625d3e3e98b1">
+  <name>BankName</name>
   <synonym>
-    <key>en</key>
-    <value>Partners bank accounts</value>
+   <key>en</key>
+   <value>D400866B-3318-E4BC-C876-6C7ED43B25C0</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.PartnersBankAccounts.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnersBankAccounts</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Catalog.PartnersBankAccounts.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_PartnersBankAccounts</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>150</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1c940c9d-10e3-40aa-8c0e-703ec98acc80">
+  <name>Number</name>
+  <synonym>
+   <key>en</key>
+   <value>A550A339-C7FD-B9DA-A626-6EDACD2FDB7C</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>64</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6bca6201-5a50-4726-8980-a506ca0c65f0">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>0F6E3570-F215-E90B-BBA5-52BDB57D3D0C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <createOnInput>DontUse</createOnInput>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ </attributes>
+ <attributes uuid="90097783-8f75-441b-b316-fdfb51b0a6a4">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>EE699B42-17D3-CFC1-1737-71C4FC7FE17D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <createOnInput>Use</createOnInput>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <attributes uuid="dbefcee4-b2da-4c5a-8101-deb85a7be5ca">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>C1DFB9C3-6793-FCC6-6625-5B59756A0420</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9bc9769f-75e2-42dd-bd7f-3a6faa25c3e8">
+  <name>LegalEntity</name>
+  <synonym>
+   <key>en</key>
+   <value>40611791-5A3E-65E6-6721-10E9F7A3264F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="5c61cf17-926c-4198-84f5-0aea56d3d9d6">
+  <producedTypes>
+   <objectType typeId="a36187d3-8166-4d20-90b6-8effed429400" valueTypeId="049a038f-0483-46f1-87d0-e4c4f10f1f2b"/>
+   <rowType typeId="a0c7f179-ad74-4734-b3f6-b37daf89327d" valueTypeId="f7662831-4cd6-4499-8e47-5495c6f24b65"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>549AA25A-A157-6E0D-DA2C-C03D7F341B5C</value>
+  </synonym>
+  <attributes uuid="e6cb65c0-61a2-491a-923b-c2abd2cf4995">
+   <name>Property</name>
+   <synonym>
     <key>en</key>
-    <value>Partners bank account</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.PartnersBankAccounts.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.PartnersBankAccounts.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.PartnersBankAccounts.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="fb2e04d0-eb29-49e0-8125-625d3e3e98b1">
-    <name>BankName</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>150</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>963428C3-F431-0FB3-30AA-A7B46EAD3F0F</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="1c940c9d-10e3-40aa-8c0e-703ec98acc80">
-    <name>Number</name>
-    <synonym>
-      <key>en</key>
-      <value>Number</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>64</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="6600a57c-0ae4-4ca6-b83d-c268e7ae6c19">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>B6920D63-9C47-F5B0-0CEE-E8976089B0A8</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="6bca6201-5a50-4726-8980-a506ca0c65f0">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  </attributes>
-  <attributes uuid="90097783-8f75-441b-b316-fdfb51b0a6a4">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <createOnInput>Use</createOnInput>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="dbefcee4-b2da-4c5a-8101-deb85a7be5ca">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="9bc9769f-75e2-42dd-bd7f-3a6faa25c3e8">
-    <name>LegalEntity</name>
-    <synonym>
-      <key>en</key>
-      <value>Legal entity</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="5c61cf17-926c-4198-84f5-0aea56d3d9d6">
-    <producedTypes>
-      <objectType typeId="a36187d3-8166-4d20-90b6-8effed429400" valueTypeId="049a038f-0483-46f1-87d0-e4c4f10f1f2b"/>
-      <rowType typeId="a0c7f179-ad74-4734-b3f6-b37daf89327d" valueTypeId="f7662831-4cd6-4499-8e47-5495c6f24b65"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="e6cb65c0-61a2-491a-923b-c2abd2cf4995">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6600a57c-0ae4-4ca6-b83d-c268e7ae6c19">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.PartnersBankAccounts.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="3fba3b1e-bdda-4a2a-817a-b4e3bf1139c1">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="8af96a64-f702-4ffc-8367-26f98aa42560">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="861ac944-c783-4d95-ad8e-053f25acedc2">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="3fba3b1e-bdda-4a2a-817a-b4e3bf1139c1">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>FF096686-35EF-F3F2-2C3F-F4CD50F57E1F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="8af96a64-f702-4ffc-8367-26f98aa42560">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>F2D22479-6E07-0F79-9009-9921CC15CFBB</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="861ac944-c783-4d95-ad8e-053f25acedc2">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>B5D01BAB-E431-75C2-298D-D482969CEFBE</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

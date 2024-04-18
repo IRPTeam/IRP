@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc8bdece-319e-4511-814c-e038c452d943">
-  <name>Finance</name>
-  <synonym>
-    <key>en</key>
-    <value>Finance</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>InformationRegister.Taxes</content>
-  <content>Catalog.Currencies</content>
-  <content>Catalog.ExpenseAndRevenueTypes</content>
-  <content>Catalog.CashAccounts</content>
-  <content>Catalog.BusinessUnits</content>
-  <content>Catalog.PaymentTypes</content>
-  <content>Catalog.PlanningPeriods</content>
-  <content>Catalog.BankTerms</content>
-  <content>Catalog.Projects</content>
-  <parentSubsystem>Subsystem.MasterData</parentSubsystem>
+ <name>Finance</name>
+ <synonym>
+  <key>en</key>
+  <value>68A469D8-DEEC-EA78-8504-4A0E2595ED8D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>InformationRegister.Taxes</content>
+ <content>Catalog.Currencies</content>
+ <content>Catalog.ExpenseAndRevenueTypes</content>
+ <content>Catalog.CashAccounts</content>
+ <content>Catalog.BusinessUnits</content>
+ <content>Catalog.PaymentTypes</content>
+ <content>Catalog.PlanningPeriods</content>
+ <content>Catalog.BankTerms</content>
+ <content>Catalog.Projects</content>
+ <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5de1d5eb-3321-4630-9c11-4796dcd44406">
-  <name>UseCashTransaction</name>
-  <synonym>
-    <key>en</key>
-    <value>Use cash transaction</value>
-  </synonym>
-  <location>Constant.UseCashTransaction</location>
-  <privilegedGetMode>true</privilegedGetMode>
-  <content>Document.CashExpense</content>
-  <content>Document.VendorsAdvancesClosing</content>
-  <content>Document.CashTransferOrder</content>
-  <content>Document.CustomersAdvancesClosing</content>
-  <content>Document.CreditNote</content>
-  <content>Document.CashRevenue</content>
-  <content>Document.DebitNote</content>
-  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+ <name>UseCashTransaction</name>
+ <synonym>
+  <key>en</key>
+  <value>37A5A77B-D120-D7C5-5234-4B9189B2A7ED</value>
+ </synonym>
+ <location>Constant.UseCashTransaction</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Document.CashExpense</content>
+ <content>Document.VendorsAdvancesClosing</content>
+ <content>Document.CashTransferOrder</content>
+ <content>Document.CustomersAdvancesClosing</content>
+ <content>Document.CreditNote</content>
+ <content>Document.CashRevenue</content>
+ <content>Document.DebitNote</content>
+ <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+ <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+ <content>Document.CashPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
+ <content>Document.BankPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
 </mdclass:FunctionalOption>

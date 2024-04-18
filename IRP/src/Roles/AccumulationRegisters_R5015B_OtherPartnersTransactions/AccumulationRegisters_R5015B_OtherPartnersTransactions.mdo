@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1bc55fc1-8b94-42be-9122-e61964d45935">
-  <name>AccumulationRegisters_R5015B_OtherPartnersTransactions</name>
-  <synonym>
-    <key>en</key>
-    <value>AccumulationRegisters R5015B OtherPartnersTransactions</value>
-  </synonym>
+ <name>AccumulationRegisters_R5015B_OtherPartnersTransactions</name>
+ <synonym>
+  <key>en</key>
+  <value>6B78E06D-B671-069B-B455-5999263DF0FD__________________</value>
+ </synonym>
 </mdclass:Role>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7c5c02b-297f-4dd0-b5ea-e38852cad47f">
-  <name>DocCashTransferOrderServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc cash transfer order server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocCashTransferOrderServer</name>
+ <synonym>
+  <key>en</key>
+  <value>2DA49443-337C-5F40-0CAC-CF5752EC7F8C</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

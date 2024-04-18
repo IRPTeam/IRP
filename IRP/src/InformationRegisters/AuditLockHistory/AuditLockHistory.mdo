@@ -1,92 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ce6bf085-8340-4110-a08a-b3a5cfb22225">
-  <producedTypes>
-    <selectionType typeId="4a9f2589-ce52-44cc-b143-8b73c081c920" valueTypeId="e3ab53b2-46f8-4e48-bbfb-2ee1f369f60f"/>
-    <listType typeId="f231e14c-bb32-45c0-b6d9-e6d2c7d087d4" valueTypeId="cdb96f37-032a-4e89-8dd9-b40dcdf607eb"/>
-    <managerType typeId="0ea7caf3-40bc-4a3c-80e5-7b85e8c1793d" valueTypeId="0c491619-2e44-4b8f-8044-ef2254a76aff"/>
-    <recordSetType typeId="665a95da-3a13-46b0-b2f4-9cec5e8a3731" valueTypeId="dcdccdbf-a926-4ca1-9a38-5a759ba03473"/>
-    <recordKeyType typeId="dd1dc4a1-b40b-4ff7-97c3-23bdc65e142a" valueTypeId="df13ddde-369c-46e6-9987-bc4724ae586d"/>
-    <recordType typeId="a6bf93e4-3ef9-4f51-af35-0b197b9bb175" valueTypeId="ca99bef3-f28b-4063-934f-16de6f4fea69"/>
-    <recordManagerType typeId="88d9ca5b-d3c0-41bd-8f95-e8a8442564f3" valueTypeId="a55f7487-24df-4c3f-bacc-f244e099a16e"/>
-  </producedTypes>
-  <name>AuditLockHistory</name>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ce6bf085-8340-4110-a08a-b3a5cfb22225">
+ <producedTypes>
+  <selectionType typeId="4a9f2589-ce52-44cc-b143-8b73c081c920" valueTypeId="e3ab53b2-46f8-4e48-bbfb-2ee1f369f60f"/>
+  <listType typeId="f231e14c-bb32-45c0-b6d9-e6d2c7d087d4" valueTypeId="cdb96f37-032a-4e89-8dd9-b40dcdf607eb"/>
+  <managerType typeId="0ea7caf3-40bc-4a3c-80e5-7b85e8c1793d" valueTypeId="0c491619-2e44-4b8f-8044-ef2254a76aff"/>
+  <recordSetType typeId="665a95da-3a13-46b0-b2f4-9cec5e8a3731" valueTypeId="dcdccdbf-a926-4ca1-9a38-5a759ba03473"/>
+  <recordKeyType typeId="dd1dc4a1-b40b-4ff7-97c3-23bdc65e142a" valueTypeId="df13ddde-369c-46e6-9987-bc4724ae586d"/>
+  <recordType typeId="a6bf93e4-3ef9-4f51-af35-0b197b9bb175" valueTypeId="ca99bef3-f28b-4063-934f-16de6f4fea69"/>
+  <recordManagerType typeId="88d9ca5b-d3c0-41bd-8f95-e8a8442564f3" valueTypeId="a55f7487-24df-4c3f-bacc-f244e099a16e"/>
+ </producedTypes>
+ <name>AuditLockHistory</name>
+ <synonym>
+  <key>en</key>
+  <value>AA0832E5-694B-B4D3-31AB-BB1F1D65514A</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>00FA803B-7827-187F-FAB8-8C121F5129D4</value>
+ </recordPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>E326C77C-9D2D-51BD-D9A6-658AFF2C0C6F</value>
+ </listPresentation>
+ <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
+  <name>Action</name>
   <synonym>
-    <key>en</key>
-    <value>Audit lock history</value>
+   <key>en</key>
+   <value>530646C7-68FE-F1CA-AB9B-B9798B14378A</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <editType>InDialog</editType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <recordPresentation>
-    <key>en</key>
-    <value>Audit lock history</value>
-  </recordPresentation>
-  <listPresentation>
-    <key>en</key>
-    <value>Audit locks history</value>
-  </listPresentation>
-  <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
-    <name>Action</name>
-    <synonym>
-      <key>en</key>
-      <value>Action</value>
-    </synonym>
-    <type>
-      <types>EnumRef.AuditLockActions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <dimensions uuid="fe63a90a-7742-46cf-8d4c-09f5b3cc2086">
-    <name>User</name>
-    <synonym>
-      <key>en</key>
-      <value>User</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="e12f9f25-0138-4f2d-b521-16f390399517">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="1cde977f-2a5c-4386-bf3c-9a1629a6be02">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>EnumRef.AuditLockActions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="fe63a90a-7742-46cf-8d4c-09f5b3cc2086">
+  <name>User</name>
+  <synonym>
+   <key>en</key>
+   <value>AA613A31-DB1E-3AA9-99DB-B0BC1231C38C</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Users</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="e12f9f25-0138-4f2d-b521-16f390399517">
+  <name>Date</name>
+  <synonym>
+   <key>en</key>
+   <value>8E6816C5-290F-7EC3-3677-77365A39DE64</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="1cde977f-2a5c-4386-bf3c-9a1629a6be02">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>12D1D6F5-26F7-93E0-0F62-29462E9B0BE7</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

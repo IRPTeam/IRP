@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="65ff495c-a91c-43aa-8a5e-cbc4ee004b5b">
-  <name>Document_ModernizationOfFixedAsset</name>
-  <synonym>
-    <key>en</key>
-    <value>Document &quot;Modernization of fixed asset&quot;</value>
-  </synonym>
+ <name>Document_ModernizationOfFixedAsset</name>
+ <synonym>
+  <key>en</key>
+  <value>8F7696A3-B033-E3CF-FF83-3EC029855087___</value>
+ </synonym>
 </mdclass:Role>

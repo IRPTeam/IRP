@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6c83d1ae-151a-4408-8aa6-21bb2092f080">
-  <name>CatExpenseAndRevenueTypesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat expense and revenue types server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatExpenseAndRevenueTypesServer</name>
+ <synonym>
+  <key>en</key>
+  <value>70CACAAF-66C8-E586-6AF0-033F68DF4FE9</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

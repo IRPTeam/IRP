@@ -1,1039 +1,1039 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb3ae5d6-f73f-42ee-a899-7cbc016f4201">
-  <producedTypes>
-    <objectType typeId="d6e1f550-a522-43d3-bd9d-800795cc2a3f" valueTypeId="82f7d44b-7d28-4ba2-9092-0110b909594d"/>
-    <refType typeId="51c537b4-7b6f-4471-8822-159a36d19584" valueTypeId="b697a213-bc0a-4eb6-a9b3-0bb5ce381eef"/>
-    <selectionType typeId="e4e99dcc-c926-4db4-8560-84f94d7bd355" valueTypeId="9530c5d2-1c94-4aa1-8fb6-cd0c962cc0f3"/>
-    <listType typeId="e6e9400f-e803-4d66-8af8-c442e1e94bcf" valueTypeId="38844967-9873-4735-806c-f76a83a9a5fa"/>
-    <managerType typeId="6693800e-2687-4cf0-a89f-08342b407787" valueTypeId="c76b6dc6-757a-485d-8528-3dd5439becb7"/>
-  </producedTypes>
-  <name>BankPayment</name>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="eb3ae5d6-f73f-42ee-a899-7cbc016f4201">
+ <producedTypes>
+  <objectType typeId="d6e1f550-a522-43d3-bd9d-800795cc2a3f" valueTypeId="82f7d44b-7d28-4ba2-9092-0110b909594d"/>
+  <refType typeId="51c537b4-7b6f-4471-8822-159a36d19584" valueTypeId="b697a213-bc0a-4eb6-a9b3-0bb5ce381eef"/>
+  <selectionType typeId="e4e99dcc-c926-4db4-8560-84f94d7bd355" valueTypeId="9530c5d2-1c94-4aa1-8fb6-cd0c962cc0f3"/>
+  <listType typeId="e6e9400f-e803-4d66-8af8-c442e1e94bcf" valueTypeId="38844967-9873-4735-806c-f76a83a9a5fa"/>
+  <managerType typeId="6693800e-2687-4cf0-a89f-08342b407787" valueTypeId="c76b6dc6-757a-485d-8528-3dd5439becb7"/>
+ </producedTypes>
+ <name>BankPayment</name>
+ <synonym>
+  <key>en</key>
+  <value>238043CB-9960-C52A-AF24-4AF1647F2D09</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.BankPayment.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+  <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+  <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.CurrencyMovementSets.Document_BankPayment</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>-1</multipleValuesUseField>
+  <characteristicValues>Document.BankPayment.TabularSection.Currencies</characteristicValues>
+  <objectField>Document.BankPayment.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+  <typeField>Document.BankPayment.TabularSection.Currencies.Attribute.MovementType</typeField>
+  <valueField>Document.BankPayment.TabularSection.Currencies.Attribute.Amount</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>-1</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Document.BankPayment.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesOrderField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>D5BD89FB-9DF8-0815-59D1-15B0889858D9</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>9C62A79F-6A57-94E1-147D-D37AE4907F3D</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.BankPayment.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.BankPayment.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.BankPayment.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
+ <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
+ <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+ <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
+ <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
+ <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="7ff8e85b-5f5a-45e8-b1dc-e5b793e290c1">
+  <name>Account</name>
   <synonym>
-    <key>en</key>
-    <value>Bank payment</value>
+   <key>en</key>
+   <value>89AAB314-0C0B-EACB-B22C-C1AE65E72EB7</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.BankPayment.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
-    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
-    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.CurrencyMovementSets.Document_BankPayment</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>-1</multipleValuesUseField>
-    <characteristicValues>Document.BankPayment.TabularSection.Currencies</characteristicValues>
-    <objectField>Document.BankPayment.TabularSection.Currencies.StandardAttribute.Ref</objectField>
-    <typeField>Document.BankPayment.TabularSection.Currencies.Attribute.MovementType</typeField>
-    <valueField>Document.BankPayment.TabularSection.Currencies.Attribute.Amount</valueField>
-    <multipleValuesKeyField>-1</multipleValuesKeyField>
-    <multipleValuesOrderField>-1</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
-    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
-    </typesFilterValue>
-    <dataPathField>-1</dataPathField>
-    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
-    <characteristicValues>Document.BankPayment.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
-    <multipleValuesOrderField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="32e04b3b-f606-4d64-9d83-244b56b8e943">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>AE3309F0-DEBF-2CA3-3EDA-AE9A80EBFE03</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9794f86b-abd7-41a1-bf37-09e2f119b74f">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>E3665026-1647-FEA4-4E00-060F9616916D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b5884df6-b022-4e0b-bcab-2c5c5ee41ad9">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>14380216-5E03-2C38-8AE5-505A47F6958C</value>
+  </synonym>
+  <type>
+   <types>EnumRef.OutgoingPaymentTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.BankPayment.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.OutgoingPaymentTransactionTypes.EnumValue.PaymentToVendor</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f6418c46-f262-4f5e-8b17-e1cb155d4bf0">
+  <name>TransitAccount</name>
+  <synonym>
+   <key>en</key>
+   <value>44B95693-17BB-962A-AFDE-ECD9A0832269</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1ae82fc5-b89c-42d4-8294-2e1a53fa8e5c">
+  <name>DocNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>21F85D99-2D0B-8E68-856A-A096D40FFE83</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="af8a7c74-5c82-428b-aa76-6e6b38370ba2">
+  <name>RRNCode</name>
+  <synonym>
+   <key>en</key>
+   <value>01EF77DA-7C28-80E0-0263-3D80BA325D11</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>30</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="095f8392-3239-47a3-bf36-480bf57bc10d">
+  <name>PaymentInfo</name>
+  <synonym>
+   <key>en</key>
+   <value>6CF8E89D-59E6-7B94-4BE3-3F21AC95FA82</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <multiLine>true</multiLine>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="391c8a24-9573-4293-bfdf-db920a70b7bb">
+  <name>ConsolidatedRetailSales</name>
+  <synonym>
+   <key>en</key>
+   <value>8F029CCC-51E4-C7F7-71C2-2C23390B686C</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ConsolidatedRetailSales</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>DF0911D2-7CBE-16AC-C416-652DACE63140</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1cd0db02-33c5-4189-9352-0472d2d5f7b8">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>CCF80E07-5F16-67E7-7E6A-A8F21532D875</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="91ba3e7f-298c-4098-b8ec-9bfb4282327f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>3B569C0B-ED7B-768F-FCBC-CEC50E1E6DB7</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="7d41b53e-9220-4f7f-b2db-a29a9834b108">
+  <producedTypes>
+   <objectType typeId="c22960fa-dcc9-401e-9138-f3e797d439bd" valueTypeId="0d9532dc-dbe4-420a-ab63-d67488b3c695"/>
+   <rowType typeId="af4d5ac4-fb66-426a-be10-52b979d43c7b" valueTypeId="16783d03-af0d-462e-8911-2bb50a59d01d"/>
+  </producedTypes>
+  <name>PaymentList</name>
+  <synonym>
+   <key>en</key>
+   <value>5D8BB715-E823-41E3-30DF-F7D946EB9315</value>
+  </synonym>
+  <attributes uuid="2e86f332-925f-4906-b19d-9251842df42d">
+   <name>Key</name>
+   <synonym>
     <key>en</key>
-    <value>Bank payment</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>820E91A5-00B5-8BA9-91F8-809C4C929E6C</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fc69909a-78d4-4ccc-a22e-f41692d44868">
+   <name>BasisDocument</name>
+   <synonym>
     <key>en</key>
-    <value>Bank payments</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.BankPayment.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.BankPayment.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.BankPayment.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
-  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
-  <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
-  <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
-  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
-  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
-  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="7ff8e85b-5f5a-45e8-b1dc-e5b793e290c1">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>5DD8F28C-0268-284D-D13C-CFF84C33BB34</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeApTransactionBasises</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="32e04b3b-f606-4d64-9d83-244b56b8e943">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9ef6da19-598d-4620-a88e-7126300d2c54">
+   <name>Agreement</name>
+   <synonym>
+    <key>en</key>
+    <value>810B60CB-4F21-91BB-B64F-F7073BBAC3EA</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="9794f86b-abd7-41a1-bf37-09e2f119b74f">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="980b30cf-a943-4b57-8066-74ffc972ed25">
+   <name>Partner</name>
+   <synonym>
+    <key>en</key>
+    <value>46E38C3F-5528-7D86-61B2-2EC547E9BF2C</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="b5884df6-b022-4e0b-bcab-2c5c5ee41ad9">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.OutgoingPaymentTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <choiceParameterLinks>
-      <name>Filter.Ref</name>
-      <field>Document.BankPayment.StandardAttribute.Ref</field>
-    </choiceParameterLinks>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.OutgoingPaymentTransactionTypes.EnumValue.PaymentToVendor</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="395237c9-dddb-41be-9e06-07ca5c21a8ef">
+   <name>NetAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>E621F8D5-3A3B-7647-7989-9EC936BCD3E6</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="f6418c46-f262-4f5e-8b17-e1cb155d4bf0">
-    <name>TransitAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Transit account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="1e0b81d2-137a-4034-9efd-1535b26bdcbd">
+   <name>TaxAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>777E6F0B-8774-9135-5B2E-EB8B0525A56D</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="1ae82fc5-b89c-42d4-8294-2e1a53fa8e5c">
-    <name>DocNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Doc number</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8e0906d2-fa04-47c5-9908-4d3ba06243f5">
+   <name>TotalAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>DC1520EB-28F9-BF9A-AC06-63CCEAF4B19A</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="af8a7c74-5c82-428b-aa76-6e6b38370ba2">
-    <name>RRNCode</name>
-    <synonym>
-      <key>en</key>
-      <value>RRN Code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>30</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9ba9b566-6640-456f-9802-62b25dcba5a7">
+   <name>Payee</name>
+   <synonym>
+    <key>en</key>
+    <value>AE8D8159-DCAE-D396-6129-90F8A3EF4439</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="095f8392-3239-47a3-bf36-480bf57bc10d">
-    <name>PaymentInfo</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment info</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <multiLine>true</multiLine>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="30953e18-9fc6-41ef-a2c2-aa125b2944bd">
+   <name>PlaningTransactionBasis</name>
+   <synonym>
+    <key>en</key>
+    <value>5CFD8F54-78F7-8CF5-56E3-3E7EB048C39F</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePlaningTransactionBasises</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="391c8a24-9573-4293-bfdf-db920a70b7bb">
-    <name>ConsolidatedRetailSales</name>
-    <synonym>
-      <key>en</key>
-      <value>Consolidated retail sales</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ConsolidatedRetailSales</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
+   <name>DELETE_Commission</name>
+   <synonym>
+    <key>en</key>
+    <value>8971D99B-5199-B754-4E10-046613E13840</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1cd0db02-33c5-4189-9352-0472d2d5f7b8">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="91ba3e7f-298c-4098-b8ec-9bfb4282327f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="7d41b53e-9220-4f7f-b2db-a29a9834b108">
-    <producedTypes>
-      <objectType typeId="c22960fa-dcc9-401e-9138-f3e797d439bd" valueTypeId="0d9532dc-dbe4-420a-ab63-d67488b3c695"/>
-      <rowType typeId="af4d5ac4-fb66-426a-be10-52b979d43c7b" valueTypeId="16783d03-af0d-462e-8911-2bb50a59d01d"/>
-    </producedTypes>
-    <name>PaymentList</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment list</value>
-    </synonym>
-    <attributes uuid="2e86f332-925f-4906-b19d-9251842df42d">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fc69909a-78d4-4ccc-a22e-f41692d44868">
-      <name>BasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeApTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9ef6da19-598d-4620-a88e-7126300d2c54">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner term</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="980b30cf-a943-4b57-8066-74ffc972ed25">
-      <name>Partner</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="395237c9-dddb-41be-9e06-07ca5c21a8ef">
-      <name>NetAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Net amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1e0b81d2-137a-4034-9efd-1535b26bdcbd">
-      <name>TaxAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8e0906d2-fa04-47c5-9908-4d3ba06243f5">
-      <name>TotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Total amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="9ba9b566-6640-456f-9802-62b25dcba5a7">
-      <name>Payee</name>
-      <synonym>
-        <key>en</key>
-        <value>Payee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Companies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="30953e18-9fc6-41ef-a2c2-aa125b2944bd">
-      <name>PlaningTransactionBasis</name>
-      <synonym>
-        <key>en</key>
-        <value>Planning transaction basis</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typePlaningTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
-      <name>DELETE_Commission</name>
-      <synonym>
-        <key>en</key>
-        <value>DELETE commission</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="952345eb-f7af-4d5e-8a63-503f48285e5c">
-      <name>ProfitLossCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Profit loss center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9efb1abf-6381-4f4c-be63-bead8b93f2c7">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f06e9ad7-03e9-44b8-bea1-4b2a9341b828">
-      <name>AdditionalAnalytic</name>
-      <synonym>
-        <key>en</key>
-        <value>Additional analytic</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9e59c57e-b470-4d82-be72-1c338f89ee16">
-      <name>FinancialMovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Financial movement type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3cc680db-51d6-41e1-a706-988eb36cb439">
-      <name>CashFlowCenter</name>
-      <synonym>
-        <key>en</key>
-        <value>Cash flow center</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ff6a73f0-d1d7-4b83-b834-199edc95a13c">
-      <name>LegalNameContract</name>
-      <synonym>
-        <key>en</key>
-        <value>Legal name contract</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.LegalNameContracts</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.LegalName</name>
-        <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e477f740-ebaf-4080-9cce-c3ff70cd17a9">
-      <name>Order</name>
-      <synonym>
-        <key>en</key>
-        <value>Order</value>
-      </synonym>
-      <type>
-        <types>DocumentRef.PurchaseOrder</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="85bf8609-021f-45aa-91b0-25d0e2ab3175">
-      <name>PaymentType</name>
-      <synonym>
-        <key>en</key>
-        <value>Payment type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.PaymentTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8c65265a-4b6b-4e10-9a3b-9882a60e3fc3">
-      <name>PaymentTerminal</name>
-      <synonym>
-        <key>en</key>
-        <value>Payment terminal</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.PaymentTerminals</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0d473cf6-5dd4-4fac-9e22-dcbbdd6cae4a">
-      <name>BankTerm</name>
-      <synonym>
-        <key>en</key>
-        <value>Bank term</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BankTerms</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="7785e464-9266-4de3-8464-8ff89619a7d3">
-      <name>DELETE_CommissionPercent</name>
-      <synonym>
-        <key>en</key>
-        <value>DELETE commission percent</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>6</precision>
-          <scale>2</scale>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="0e460ea1-fd5e-48bf-ad71-b498962074b0">
-      <name>RetailCustomer</name>
-      <synonym>
-        <key>en</key>
-        <value>Retail customer</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.RetailCustomers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="308a4008-2604-43b1-b99b-cf35a216c3d4">
-      <name>Employee</name>
-      <synonym>
-        <key>en</key>
-        <value>Employee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameters>
-        <name>Filter.Employee</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a7df0b22-e70a-4cc0-80ab-8d28164efb8e">
-      <name>PaymentPeriod</name>
-      <synonym>
-        <key>en</key>
-        <value>Payment period</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.PlanningPeriods</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameters>
-        <name>Filter.IsSalary</name>
-        <value xsi:type="core:BooleanValue">
-          <value>true</value>
-        </value>
-      </choiceParameters>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="84b65a15-1320-45bf-970e-2bff2a0740b3">
-      <name>ReceiptingAccount</name>
-      <synonym>
-        <key>en</key>
-        <value>Receipting account</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.CashAccounts</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c4f67f87-1ff2-44ed-b501-4c47f88034e7">
-      <name>ReceiptingBranch</name>
-      <synonym>
-        <key>en</key>
-        <value>Receipting branch</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="409c1569-9d9d-41d8-869d-252ad08938f4">
-      <name>VatRate</name>
-      <synonym>
-        <key>en</key>
-        <value>VAT</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxRates</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="c5dc0862-fd1e-4eb8-87a3-957ae6f84a51">
-      <name>Project</name>
-      <synonym>
-        <key>en</key>
-        <value>Project</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Projects</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="88072425-56fe-4d57-85af-dd4ce382d59b">
-      <name>CalculationType</name>
-      <synonym>
-        <key>en</key>
-        <value>Calculation type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SalaryCalculationType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
-    <producedTypes>
-      <objectType typeId="0465f0d0-c903-4c1e-9e38-2ac6c12ee3d9" valueTypeId="4ee88368-f44d-4824-8dd4-ce3684429569"/>
-      <rowType typeId="8e25fa7b-c108-4423-9985-299fe313e74f" valueTypeId="acd7647b-b04a-47cf-9c03-963dc3bc304f"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="530c988c-cd5b-4da5-8c05-c534401c94cb">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="840e40c8-f3ee-4ab2-b087-8d035dd01d4d">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="efbd7d70-cc48-4df6-b482-dca587523d93">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="814c5586-cfd9-4e2d-a11f-f43aa94fa58f">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1b4a5955-e60c-4673-9419-e1435838df93">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ca956d4a-2e3b-4fac-8a2b-bf1ea125aed6">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="87184a1a-573b-46b3-897f-6f923dfa8fa7">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="23f6bd45-36bf-4c73-b747-26efffd33bf6">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="41284a7a-76e0-44f6-b6c3-d2446b6240ec">
-      <name>IsFixed</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="6191848c-f533-4689-bae3-46499b265e84">
-    <producedTypes>
-      <objectType typeId="a6850450-fa18-4391-8a40-367a327188e5" valueTypeId="5ec631ea-c88e-4344-a79e-5674d2c31e3d"/>
-      <rowType typeId="94d2f221-d4c3-40c1-86e7-10cfcb7a60cf" valueTypeId="10e66145-697b-4449-a16f-2c3e74417aab"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="f3b4a028-2329-45ba-8c9a-374e69978712">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="4078739b-56ae-49e4-aadd-2e9db7b5fa1d">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="87904de8-4f1b-4602-8c0d-6e89fb645dfa">
-    <producedTypes>
-      <objectType typeId="b81b4d38-f375-4684-b7f7-146de01b05cd" valueTypeId="716e6940-1779-46aa-87d6-1049999b8f7c"/>
-      <rowType typeId="36d2788f-2625-4387-9da7-7d245814f544" valueTypeId="64a9b39f-d463-42f2-9df2-801a2581d753"/>
-    </producedTypes>
-    <name>DELETE_TaxList</name>
-    <synonym>
-      <key>en</key>
-      <value>DELETE tax list</value>
-    </synonym>
-    <attributes uuid="8e8d0a50-202c-4dd1-b9a5-de28cf03f172">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="3dac4a09-aa87-4e95-9b3a-84530fdc7b82">
-      <name>Tax</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Taxes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="a7e39bc0-9b2b-4ffa-a392-0dd712435352">
-      <name>Analytics</name>
-      <synonym>
-        <key>en</key>
-        <value>Analytics</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxAnalytics</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a61c6721-cd87-406a-aa98-b1a98e5f56cd">
-      <name>TaxRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax rate</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxRates</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="dc48af4b-20cb-4b79-9d68-1b45584ac66b">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="11d41f92-5eff-4bcf-9783-1d37793ff162">
-      <name>IncludeToTotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Include to total amount</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d8fae146-24cd-4526-9248-22f323529ad8">
-      <name>ManualAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Manual amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
-    <name>GenerateBankPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank payment</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.EmployeeCashAdvance</types>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.OutgoingPaymentOrder</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.SalesReportToConsignor</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-  </commands>
+  <attributes uuid="952345eb-f7af-4d5e-8a63-503f48285e5c">
+   <name>ProfitLossCenter</name>
+   <synonym>
+    <key>en</key>
+    <value>A580E5E6-29FE-B80E-E975-5623CDDE076C</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9efb1abf-6381-4f4c-be63-bead8b93f2c7">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>en</key>
+    <value>60571304-1456-AF7F-F2DE-E6548A8507EF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f06e9ad7-03e9-44b8-bea1-4b2a9341b828">
+   <name>AdditionalAnalytic</name>
+   <synonym>
+    <key>en</key>
+    <value>A2ADCBEE-0B4E-BA21-1E20-074D0AB00237</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9e59c57e-b470-4d82-be72-1c338f89ee16">
+   <name>FinancialMovementType</name>
+   <synonym>
+    <key>en</key>
+    <value>1D5CD77A-F757-738A-A224-4E02E14ED672</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="3cc680db-51d6-41e1-a706-988eb36cb439">
+   <name>CashFlowCenter</name>
+   <synonym>
+    <key>en</key>
+    <value>73C2C658-9D8E-FFC1-1919-93DEC0004B31</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ff6a73f0-d1d7-4b83-b834-199edc95a13c">
+   <name>LegalNameContract</name>
+   <synonym>
+    <key>en</key>
+    <value>44527F82-505F-AB5D-D223-32F0E60204FF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.LegalNameContracts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.LegalName</name>
+    <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e477f740-ebaf-4080-9cce-c3ff70cd17a9">
+   <name>Order</name>
+   <synonym>
+    <key>en</key>
+    <value>162DFE6D-1BBA-4EA8-8DA2-25A20A31D098</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.PurchaseOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="85bf8609-021f-45aa-91b0-25d0e2ab3175">
+   <name>PaymentType</name>
+   <synonym>
+    <key>en</key>
+    <value>87FA131B-C802-DF62-2E2A-A62470C63B6A</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PaymentTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8c65265a-4b6b-4e10-9a3b-9882a60e3fc3">
+   <name>PaymentTerminal</name>
+   <synonym>
+    <key>en</key>
+    <value>4A7A3111-3BC0-418E-E3EB-BC70F4EF5B34</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PaymentTerminals</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0d473cf6-5dd4-4fac-9e22-dcbbdd6cae4a">
+   <name>BankTerm</name>
+   <synonym>
+    <key>en</key>
+    <value>56F332F8-E750-9FEC-CB8A-A2608477558D</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BankTerms</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7785e464-9266-4de3-8464-8ff89619a7d3">
+   <name>DELETE_CommissionPercent</name>
+   <synonym>
+    <key>en</key>
+    <value>53243D67-85C3-DB0F-FBA1-142748CF886E</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>6</precision>
+     <scale>2</scale>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0e460ea1-fd5e-48bf-ad71-b498962074b0">
+   <name>RetailCustomer</name>
+   <synonym>
+    <key>en</key>
+    <value>CD7EEC6E-A8C9-1582-291B-BCA4F62CBF90</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.RetailCustomers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="308a4008-2604-43b1-b99b-cf35a216c3d4">
+   <name>Employee</name>
+   <synonym>
+    <key>en</key>
+    <value>9BA6898E-DD08-8485-5BBD-DF1F3190A2A3</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a7df0b22-e70a-4cc0-80ab-8d28164efb8e">
+   <name>PaymentPeriod</name>
+   <synonym>
+    <key>en</key>
+    <value>EBB466AB-FC17-8748-8797-7C11D2742155</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PlanningPeriods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsSalary</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="84b65a15-1320-45bf-970e-2bff2a0740b3">
+   <name>ReceiptingAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>630691D0-CE80-0D20-0480-0157B47F764A</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.CashAccounts</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c4f67f87-1ff2-44ed-b501-4c47f88034e7">
+   <name>ReceiptingBranch</name>
+   <synonym>
+    <key>en</key>
+    <value>58DB6250-51FF-1CEC-C0CF-FAF7B0423B91</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="409c1569-9d9d-41d8-869d-252ad08938f4">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>895B4322-8895-3EC3-3E3F-FF416CA5155F</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c5dc0862-fd1e-4eb8-87a3-957ae6f84a51">
+   <name>Project</name>
+   <synonym>
+    <key>en</key>
+    <value>DB67420B-D655-2C88-8529-996C5E8DE968</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="88072425-56fe-4d57-85af-dd4ce382d59b">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>93E02551-54B4-57AD-D180-03CB3159978F</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
+  <producedTypes>
+   <objectType typeId="0465f0d0-c903-4c1e-9e38-2ac6c12ee3d9" valueTypeId="4ee88368-f44d-4824-8dd4-ce3684429569"/>
+   <rowType typeId="8e25fa7b-c108-4423-9985-299fe313e74f" valueTypeId="acd7647b-b04a-47cf-9c03-963dc3bc304f"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>en</key>
+   <value>4889C0E6-E789-E131-160D-D3048C20AFBC</value>
+  </synonym>
+  <attributes uuid="530c988c-cd5b-4da5-8c05-c534401c94cb">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>6E7E8A5C-46E0-2A62-2321-1F2A61C02F1D</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="840e40c8-f3ee-4ab2-b087-8d035dd01d4d">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>en</key>
+    <value>ED5C2DEC-3331-2B87-770B-B402EF05D519</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="efbd7d70-cc48-4df6-b482-dca587523d93">
+   <name>Rate</name>
+   <synonym>
+    <key>en</key>
+    <value>B369DE2A-5CB0-37B3-334D-D0F2FC0E8654</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="814c5586-cfd9-4e2d-a11f-f43aa94fa58f">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>4018DA1B-4335-6A17-7E5F-F454784F08D2</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1b4a5955-e60c-4673-9419-e1435838df93">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>69A5CFD9-547F-5A5A-A07A-A6FC1E28CB0C</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ca956d4a-2e3b-4fac-8a2b-bf1ea125aed6">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>en</key>
+    <value>5ADD42BA-6C4E-D2FB-B274-4462F3D236AD</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="87184a1a-573b-46b3-897f-6f923dfa8fa7">
+   <name>MovementType</name>
+   <synonym>
+    <key>en</key>
+    <value>5C0AFD4A-08E3-FFDD-DA1C-CA05D186AFD0</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="23f6bd45-36bf-4c73-b747-26efffd33bf6">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>D35748FB-61B9-5976-6F11-11A84584B2ED</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="41284a7a-76e0-44f6-b6c3-d2446b6240ec">
+   <name>IsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>941E048B-39A8-11ED-DB1D-DAD1CC999911</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="6191848c-f533-4689-bae3-46499b265e84">
+  <producedTypes>
+   <objectType typeId="a6850450-fa18-4391-8a40-367a327188e5" valueTypeId="5ec631ea-c88e-4344-a79e-5674d2c31e3d"/>
+   <rowType typeId="94d2f221-d4c3-40c1-86e7-10cfcb7a60cf" valueTypeId="10e66145-697b-4449-a16f-2c3e74417aab"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>48940524-F46F-FB6F-F3B0-014E32A624AD</value>
+  </synonym>
+  <attributes uuid="f3b4a028-2329-45ba-8c9a-374e69978712">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>63364620-8734-D743-332D-D5F07F2C70DA</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4078739b-56ae-49e4-aadd-2e9db7b5fa1d">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>EF0B9690-45D7-F197-7FBE-EB36F483B667</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="87904de8-4f1b-4602-8c0d-6e89fb645dfa">
+  <producedTypes>
+   <objectType typeId="b81b4d38-f375-4684-b7f7-146de01b05cd" valueTypeId="716e6940-1779-46aa-87d6-1049999b8f7c"/>
+   <rowType typeId="36d2788f-2625-4387-9da7-7d245814f544" valueTypeId="64a9b39f-d463-42f2-9df2-801a2581d753"/>
+  </producedTypes>
+  <name>DELETE_TaxList</name>
+  <synonym>
+   <key>en</key>
+   <value>E524739B-EEFD-1773-37B6-6A871DBD4844</value>
+  </synonym>
+  <attributes uuid="8e8d0a50-202c-4dd1-b9a5-de28cf03f172">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>0485A7BC-364D-A0EC-C3D2-220BBA2997F2</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3dac4a09-aa87-4e95-9b3a-84530fdc7b82">
+   <name>Tax</name>
+   <synonym>
+    <key>en</key>
+    <value>8E8EF60F-C3AD-14C7-7526-65F202156DB9</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Taxes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a7e39bc0-9b2b-4ffa-a392-0dd712435352">
+   <name>Analytics</name>
+   <synonym>
+    <key>en</key>
+    <value>045537E3-E391-4595-50BE-EBE8D109B469</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxAnalytics</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="a61c6721-cd87-406a-aa98-b1a98e5f56cd">
+   <name>TaxRate</name>
+   <synonym>
+    <key>en</key>
+    <value>F354B9CD-9616-2A61-18E3-323AD61276A0</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="dc48af4b-20cb-4b79-9d68-1b45584ac66b">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>78905773-8974-C5CF-FF07-725295BF91E4</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="11d41f92-5eff-4bcf-9783-1d37793ff162">
+   <name>IncludeToTotalAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>352C6AF5-02DC-B38F-F8A8-8A0888699084</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d8fae146-24cd-4526-9248-22f323529ad8">
+   <name>ManualAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>4F9D2A72-25F8-54FC-C50D-DCA2DCC9F2AA</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
+  <name>GenerateBankPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>1502AD50-3500-242F-F8BF-F15A7E3994DC</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.CashTransferOrder</types>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.EmployeeCashAdvance</types>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.OutgoingPaymentOrder</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.SalesReportToConsignor</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Document>

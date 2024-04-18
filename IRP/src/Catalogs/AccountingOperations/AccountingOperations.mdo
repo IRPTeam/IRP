@@ -190,6 +190,34 @@
           <value>74</value>
         </code>
       </content>
+      <content id="6599722f-2a80-4adf-b7c5-3e9e6f3a84a8">
+        <name>BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>85</value>
+        </code>
+      </content>
+      <content id="ceb7799d-3b3a-4e33-ad10-a4d80d2333b0">
+        <name>BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>89</value>
+        </code>
+      </content>
+      <content id="68be677a-980c-4950-bd53-c01b2b71ca23">
+        <name>BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>90</value>
+        </code>
+      </content>
+      <content id="52734ac0-d116-454c-882d-1404ed24fff0">
+        <name>BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>93</value>
+        </code>
+      </content>
     </items>
     <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
       <name>Document_BankReceipt</name>
@@ -249,6 +277,20 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>77</value>
+        </code>
+      </content>
+      <content id="86608e0f-95f7-495f-ba0f-e94270a10adf">
+        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>86</value>
+        </code>
+      </content>
+      <content id="24fed25c-d0e6-419a-a357-ea1182c6714d">
+        <name>BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>91</value>
         </code>
       </content>
     </items>
@@ -403,6 +445,27 @@
           <value>71</value>
         </code>
       </content>
+      <content id="ab50cbf2-eccf-45e8-9d50-bd9e1477eeb0">
+        <name>CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>87</value>
+        </code>
+      </content>
+      <content id="14cc5766-8397-44da-a66b-360c08200909">
+        <name>CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>92</value>
+        </code>
+      </content>
+      <content id="cd26224e-1087-4055-b81c-e1c256741fa0">
+        <name>CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>94</value>
+        </code>
+      </content>
     </items>
     <items id="e77f99dd-6495-487d-9873-5edbf00b51b4">
       <name>Document_CashReceipt</name>
@@ -441,6 +504,13 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>73</value>
+        </code>
+      </content>
+      <content id="4a6b1ef5-72e9-4c7a-b49c-99cd28271efa">
+        <name>CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>88</value>
         </code>
       </content>
     </items>
@@ -494,6 +564,13 @@
           <value>40</value>
         </code>
       </content>
+      <content id="99ab7197-b862-434c-83ec-2affd56b4827">
+        <name>DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>95</value>
+        </code>
+      </content>
     </items>
     <items id="0dc9eae5-05d2-463e-89ce-6840f9a6a934">
       <name>Document_CreditNote</name>
@@ -517,6 +594,13 @@
         <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses</name>
         <code xsi:type="core:NumberValue">
           <value>43</value>
+        </code>
+      </content>
+      <content id="c4075400-3b2b-4aed-8b98-002981184a1e">
+        <name>CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>96</value>
         </code>
       </content>
     </items>

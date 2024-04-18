@@ -329,16 +329,35 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsVendor";
+		|	Transactions.IsVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Key,
+		|	Transactions.Currency,
+		|	Transactions.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions),
+		|	UNDEFINED
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsOther";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses Then
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses Then
 		Return GetAnalytics_CustomerAdvancesExpenses(Parameters); // Customer advances - Expenses
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
+	ElsIf Parameters.Operation = AO.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_OffsetOfAdvancesCustomer(Parameters); // Customers transactions - Advances from customer 
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses Then
-		Return GetAnalytics_VendorTransactionExpenses(Parameters); // Vendor transactions - Expenses
+	ElsIf Parameters.Operation = AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses Then
+		Return GetAnalytics_VendorTransactionExpenses(Parameters); // Vendor transactions - Expenses	
+	ElsIf Parameters.Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
+		Return GetAnalytics_ExpensesOtherPartner(Parameters); // Expenses - Other partner
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -409,6 +428,29 @@ Function GetAnalytics_VendorTransactionExpenses(Parameters)
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Other partner
+Function GetAnalytics_ExpensesOtherPartner(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.ExpenseType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
 	Return AccountingAnalytics;
 EndFunction
 

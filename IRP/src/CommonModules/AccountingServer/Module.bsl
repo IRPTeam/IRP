@@ -19,6 +19,18 @@ Function GetOperationsDefinition()
 	// Transaction type - Currency exchange
 	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
+	// Transaction type - Other partner
+	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	// Transaction type - Other expense
+	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherExpense));	
+	// Transaction type - Salary payment
+	Map.Insert(AO.BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
+	// Transaction type - Employee cash advance
+	Map.Insert(AO.BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance));
 	
 	// Bank receipt
 	// Transaction type - Payment from customer
@@ -41,6 +53,12 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
 	Map.Insert(AO.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit,
 		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
+	// Transaction type - Other partner
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+	// Transaction type - Other income
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -55,7 +73,16 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
 	//  Transaction type - Cash transfer order
 	Map.Insert(AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder,
-		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
+	//  Transaction type - Employee cash advance
+	Map.Insert(AO.CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance));
 	
 	// Cash receipt
 	//  Transaction type - Payment from customer
@@ -70,7 +97,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
 	//  Transaction type - Cash transfer order
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -82,11 +112,13 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
 	// receipt inventory

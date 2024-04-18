@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Goods receipt</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Приходная товарная накладная</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Satın alma irsaliyesi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Goods receipts</value>

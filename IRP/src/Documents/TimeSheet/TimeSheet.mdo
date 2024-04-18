@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Time sheet</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Зарплатный табель</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Zaman çizelgesi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Time sheets</value>

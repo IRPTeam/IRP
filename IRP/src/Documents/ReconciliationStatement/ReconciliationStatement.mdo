@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Reconciliation statement</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Сверка взаиморасчетов</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Cari hesap mutabakatlar</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Reconciliation statements</value>

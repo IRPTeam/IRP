@@ -50,6 +50,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Modernization of fixed asset</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Модернизация основных средств</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sabit kıymetin modernizasyonu</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Modernization of fixed assets</value>

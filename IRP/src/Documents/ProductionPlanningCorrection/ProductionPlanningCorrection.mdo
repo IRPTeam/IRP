@@ -69,6 +69,18 @@
   <key>tr</key>
   <value>Üretim planlama düzeltme fişi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Production planning corrections</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Production planning corrections</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Production planning corrections</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

@@ -70,6 +70,18 @@
   <key>tr</key>
   <value>Konsolide perakende satış fişleri</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Consolidated retail sales</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Отчеты о розничных продажах</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Konsolide perakende satış fişleri</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

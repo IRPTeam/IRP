@@ -38,6 +38,18 @@
   <key>tr</key>
   <value>Malzeme parti transfer - gelen</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Batch reallocate incomings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Batch reallocate incomings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Batch reallocate incomings</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

@@ -74,6 +74,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Cash transfer order</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Перемещение денег</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Finansal transfer siparişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Cash transfer orders</value>

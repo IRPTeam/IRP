@@ -47,7 +47,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Audit locks history</value>
+  <value>Audit kilit tarihçesi</value>
  </listPresentation>
  <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
   <name>Action</name>

@@ -38,6 +38,18 @@
   <key>tr</key>
   <value>Malzeme parti transfer - çıkan</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Batch reallocate outgoings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Batch reallocate outgoings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Batch reallocate outgoings</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

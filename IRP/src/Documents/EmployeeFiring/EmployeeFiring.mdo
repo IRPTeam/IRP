@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Employee firing</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Увольнение сотрудника</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Çalışan çıkışı</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Employee firings</value>

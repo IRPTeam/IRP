@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Inventory transfer</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Перемещение товаров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Depo transfer fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Inventory transfers</value>

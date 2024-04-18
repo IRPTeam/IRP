@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Price list</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Установка цен номенклатуры</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Fiyat listesi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Price lists</value>

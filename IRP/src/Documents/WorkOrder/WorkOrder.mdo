@@ -86,6 +86,18 @@
   <key>tr</key>
   <value>İş emri</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Work orders</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Заказ наряды</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>İş emirleri</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

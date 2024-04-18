@@ -56,6 +56,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Fixed asset transfer</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Перемещение основных средств</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sabit kıymet transferi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Fixed asset transfers</value>

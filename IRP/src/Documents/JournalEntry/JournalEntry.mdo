@@ -70,6 +70,18 @@
   <key>tr</key>
   <value>Mahsup fişi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Journal entries</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Journal entries</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Journal entries</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

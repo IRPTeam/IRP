@@ -74,6 +74,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Bank receipt</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Поступление на расчетный счет</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Banka tahsilat fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Bank receipts</value>

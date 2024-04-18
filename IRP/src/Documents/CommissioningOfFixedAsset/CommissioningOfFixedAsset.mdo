@@ -50,6 +50,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Commissioning of fixed asset</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Принятие к учету основных средств</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sabit kıymetin devreye alınması</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Commissioning of fixed assets</value>

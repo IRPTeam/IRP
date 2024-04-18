@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Stock adjustment as write-off</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Списание товаров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Stok sayım çıkışı</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Stock adjustments as write-off</value>

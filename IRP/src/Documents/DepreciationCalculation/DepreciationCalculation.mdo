@@ -48,7 +48,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Depreciation calculations</value>
+  <value>Amortisman hesaplamaları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -60,8 +60,8 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R8510B_BookValueOfFixedAsset</registerRecords>
- <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="0fb812b1-156c-4055-9a1c-a07db92ca4b5">

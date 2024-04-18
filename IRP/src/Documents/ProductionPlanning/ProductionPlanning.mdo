@@ -69,6 +69,18 @@
   <key>tr</key>
   <value>Üretim planlama fişi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Production plannings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Production plannings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Production plannings</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

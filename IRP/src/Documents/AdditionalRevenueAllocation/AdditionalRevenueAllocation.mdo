@@ -37,6 +37,18 @@
   <key>tr</key>
   <value>Malzeme ek gelir datığım</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Additional revenue allocations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Additional revenue allocations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Additional revenue allocations</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

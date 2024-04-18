@@ -38,6 +38,18 @@
   <key>tr</key>
   <value>Maliyet hesaplama fişi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Calculations movement costs</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Calculations movement costs</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Calculations movement costs</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

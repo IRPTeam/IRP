@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Retail shipment confirmation</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Отгрузка розничной продажи</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Perakende sevkiyat onayı</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Retail shipment confirmations</value>

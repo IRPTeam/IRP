@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Unbundling</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Разукомлектация набора</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ürün takımı bozma fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Unbundling list</value>

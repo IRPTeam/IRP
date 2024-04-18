@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Cash revenue</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Прочие наличные доходы</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Nakit gelir fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Cash revenues</value>

@@ -74,6 +74,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Sales report to consignor</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Отчет комитенту о продажах</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Konsiyeye verene satış raporu</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Sales report to consignors</value>

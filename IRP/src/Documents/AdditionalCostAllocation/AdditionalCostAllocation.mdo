@@ -37,6 +37,18 @@
   <key>tr</key>
   <value>Ek maliyet dağıtım fişi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Additional cost allocations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Additional cost allocations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Additional cost allocations</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

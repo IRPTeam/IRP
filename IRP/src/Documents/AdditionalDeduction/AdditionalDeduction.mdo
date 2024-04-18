@@ -58,17 +58,29 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Additional deduction</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Дополнительное удержание</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ek kesinti</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Aditionals deductions</value>
+  <value>Additional deductions</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Дополнительные вычеты</value>
+  <value>Additional deductions</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Ek kesintiler</value>
+  <value>Additional deductions</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

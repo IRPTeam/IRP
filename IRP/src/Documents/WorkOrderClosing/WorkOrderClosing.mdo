@@ -38,6 +38,18 @@
   <key>tr</key>
   <value>İş emri kapanışı</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Work order closings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Work order closings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Work order closings</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

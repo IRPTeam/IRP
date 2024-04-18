@@ -154,7 +154,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Amount (group)</value>
+   <value>Tutar (grup)</value>
   </title>
   <extendedTooltip>
    <name>GroupAmountExtendedTooltip</name>
@@ -1380,7 +1380,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Allowed types</value>
+   <value>İzin verilen tipler</value>
   </title>
   <id>19</id>
   <valueType>

@@ -866,15 +866,15 @@ Function Strings(Lang) Export
 		|Are you sure you want to process transaction?';
 		|ru='Сейчас вы отменяете транзакцию Продажи/Возврата на POS-терминале!
 		|Вы уверены, что хотите обработать транзакцию?';
-		|tr='Now you are canceling Sales/Return transaction on pos terminal!
-		|Are you sure you want to process transaction?'", Lang));
+		|tr='POS cihazında işlemi İPTAL ediyorsunuz.
+		|Devam etmek istediğinizden emin misiniz?'", Lang));
 	
 	Strings.Insert("POS_Warning_ReturnInDay", NStr("en='Now you are going to RETURN money by pos terminal.
 		|Are you sure you want to process transaction?';
 		|ru='Сейчас вы собираетесь ВЕРНУТЬ деньги через POS-терминал. 
 		|Вы уверены, что хотите обработать транзакцию?';
-		|tr='Now you are going to RETURN money by pos terminal.
-		|Are you sure you want to process transaction?'", Lang));
+		|tr='POS terminal ile para IADESİ yapmak üzeresiniz.
+		|İşlemi yapmak istediğinizden emin misiniz?'", Lang));
 	
 #EndRegion
 
@@ -1656,7 +1656,7 @@ Function Strings(Lang) Export
 		|tr='Borç ve alacak tiplerin yanlıştır'", Lang));	
 	Strings.Insert("Error_143", NStr("en='Document Bank payment (currency exchange) not entered';
 		|ru='Документ Банковский платеж (обмен валют) не введен';
-		|tr='Document Bank payment (currency exchange) not entered'", Lang));	
+		|tr='Banka ödeme evrakı (döviz bozdurma) girilmemiştir'", Lang));	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';

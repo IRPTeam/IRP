@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Bundling</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Комплектация набора</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Takım oluşturma fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Bundling list</value>

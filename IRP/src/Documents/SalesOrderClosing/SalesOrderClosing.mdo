@@ -58,17 +58,29 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Sales order closing</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Закрытие заказа покупателя</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Satış sipariş kapatma fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Sales orders closing</value>
+  <value>Sales orders closings</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Закрытие заказа покупателя</value>
+  <value>Sales orders closings</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Satış sipariş kapatma fişi</value>
+  <value>Sales orders closings</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

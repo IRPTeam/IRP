@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Employee transfer</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Перевод сотрудника</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Çalışan transferi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Employee transfers</value>

@@ -69,6 +69,18 @@
   <key>tr</key>
   <value>Üretim planlama kapanışı</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Production planning closings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Production planning closings</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Production planning closings</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

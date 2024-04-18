@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Opening entry</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Ввод начальных остатков</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Açılış kayıt fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Opening entries</value>

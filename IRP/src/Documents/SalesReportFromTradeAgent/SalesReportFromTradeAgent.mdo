@@ -74,17 +74,29 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Sales report from trade agent</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Отчеты комиссионера о продажах</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Konsiyeye alandan satış raporu</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
-  <value>Sales report from trade agents</value>
+  <value>Sales reports from trade agents</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Отчем комиссионера о продажах</value>
+  <value>Sales reports from trade agents</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Konsiyeye alandan satış raporu</value>
+  <value>Sales reports from trade agents</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

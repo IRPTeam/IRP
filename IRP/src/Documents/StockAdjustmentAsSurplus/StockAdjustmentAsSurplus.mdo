@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Stock adjustment as surplus</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Оприходование товаров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Stok sayım girişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Stock adjustments as surplus</value>

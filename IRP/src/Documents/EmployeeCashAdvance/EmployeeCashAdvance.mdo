@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Employee cash advance</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Подотчет сотрудника</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Personel iş avans kapaması</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Employee cash advances</value>

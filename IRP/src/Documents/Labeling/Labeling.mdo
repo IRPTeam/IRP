@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Labeling</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Штрихкодирование товаров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Seri lot tanımlama fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Labeling list</value>

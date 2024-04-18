@@ -1691,7 +1691,7 @@ Scenario: _0991059 create journal entry for two PI
 	And I close all client application windows
 	* Open journal entry list
 		Given I open hyperlink "e1cib/list/Document.JournalEntry"
-		Then "Journal entry" window is opened
+		Then "Journal entries" window is opened
 		And I click "Create documents" button
 		And I go to line in "TableDocuments" table
 			| 'Presentation'     | 'Use' |
@@ -1724,7 +1724,7 @@ Scenario: _0991059 create journal entry for two PI
 		Then "Create documents" window is opened
 		And I click "Create documents" button
 		And I close "Create documents" window
-		Then "Journal entry" window is opened
+		Then "Journal entries" window is opened
 		And I click "Refresh" button
 				
 						

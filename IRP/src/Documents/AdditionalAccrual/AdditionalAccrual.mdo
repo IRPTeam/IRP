@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Additional accrual</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Дополнительное начисление</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ek tahakkuk</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Additional accruals</value>

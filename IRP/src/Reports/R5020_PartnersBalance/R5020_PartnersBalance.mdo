@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R5020 Partners balance</value>
+  <value>R5020 Cari hesap hareketleri</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R5020_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>

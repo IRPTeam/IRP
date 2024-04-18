@@ -69,6 +69,18 @@
   <key>tr</key>
   <value>Çalışma sistemi</value>
  </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Productions</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Документы производства</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Üretimler</value>
+ </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
  <checkUnique>true</checkUnique>

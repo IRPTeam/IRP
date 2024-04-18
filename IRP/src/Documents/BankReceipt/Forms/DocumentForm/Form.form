@@ -3507,7 +3507,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Currency exchange expense\revenue analytics</value>
+     <value>Kur değerleme gider/gelir kırılımlar</value>
     </title>
     <extendedTooltip>
      <name>GroupCurrencyExchangeExpenseRevenueAnalyticsExtendedTooltip</name>
@@ -4654,7 +4654,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Payment by documents</value>
+   <value>Evraklara göre ödemeler</value>
   </title>
   <id>6</id>
   <use>

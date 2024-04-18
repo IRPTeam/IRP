@@ -74,6 +74,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Outgoing payment order</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Заявка на расходование денежных средств</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Ödeme siparişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Outgoing payment orders</value>

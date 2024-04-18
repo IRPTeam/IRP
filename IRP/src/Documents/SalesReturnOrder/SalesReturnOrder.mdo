@@ -115,6 +115,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Sales return order</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Заказ на возврат покупателя</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Satış iade siparişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Sales return orders</value>

@@ -58,9 +58,21 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
- <listPresentation>
+ <objectPresentation>
   <key>en</key>
   <value>Cash statement</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Кассовая книга</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>İcmal</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Cash statements</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
@@ -68,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>İcmal</value>
+  <value>İcmaller</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

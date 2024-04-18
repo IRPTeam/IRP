@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Production costs allocation</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Распределение производственных затрат</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Üretim maliyetlerinin dağıtımı</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Production costs allocations</value>

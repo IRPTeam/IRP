@@ -34,7 +34,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.ManualRegisterEntry</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.MoneyTransfer</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.DepreciationCalculation</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -335,10 +343,6 @@
  </content>
  <content>
   <metadata>Document.FixedAssetTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.DepreciationCalculation</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

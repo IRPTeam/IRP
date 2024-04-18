@@ -10,7 +10,7 @@
  </title>
  <title>
   <key>tr</key>
-  <value>Cancellation confirmation</value>
+  <value>İptal etme onayı</value>
  </title>
  <items xsi:type="form:Decoration">
   <name>WarningMessage</name>
@@ -27,8 +27,8 @@ Are you sure you want to process transaction?</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Now you are canceling Sales/Return transaction on pos terminal!
-Are you sure you want to process transaction?</value>
+   <value>POS cihazında işlemi İPTAL ediyorsunuz.
+Devam etmek istediğinizden emin misiniz?</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -139,7 +139,7 @@ Are you sure you want to process transaction?</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Group of confirm</value>
+   <value>İzin verme grubu</value>
   </title>
   <height>3</height>
   <extendedTooltip>
@@ -246,7 +246,7 @@ Are you sure you want to process transaction?</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Group of commands</value>
+   <value>Komutlar grubu</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -303,7 +303,7 @@ Are you sure you want to process transaction?</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Warning message</value>
+   <value>Uyarı mesası</value>
   </title>
   <id>1</id>
   <valueType>
@@ -329,7 +329,7 @@ Are you sure you want to process transaction?</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Yes, I do know what am I doing</value>
+   <value>Evet, ne yatığımı biliyorum</value>
   </title>
   <id>2</id>
   <valueType>

@@ -56,6 +56,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Decommissioning of fixed asset</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Списание основного средства</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sabit kıymetin devreden çıkarılması</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Decommissioning of fixed assets</value>

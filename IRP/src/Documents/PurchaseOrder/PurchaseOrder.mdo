@@ -74,6 +74,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Purchase order</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Заказ поставщику</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Satın alma siparişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Purchase orders</value>

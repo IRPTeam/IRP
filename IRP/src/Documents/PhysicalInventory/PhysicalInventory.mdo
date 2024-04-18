@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Physical inventory</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Инвентаризация товаров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Sayım fişi</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Physical inventories</value>

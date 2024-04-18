@@ -58,6 +58,18 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Credit note</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Кредит-нота</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Alacak dekontu</value>
+ </objectPresentation>
  <listPresentation>
   <key>en</key>
   <value>Credit notes</value>

@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>D4010 Actual stocks</value>
+  <value>D4010 Stok bakiye raporu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D4010_ActualStocks.Template.Template</mainDataCompositionSchema>

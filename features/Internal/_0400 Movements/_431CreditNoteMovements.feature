@@ -159,6 +159,10 @@ Scenario: _043100 preparation (Credit note)
 				| "Documents.CreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.CreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+				| "Documents.CreditNote.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+				| "Documents.CreditNote.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When create CreditNote (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 				| "Documents.CreditNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"     |

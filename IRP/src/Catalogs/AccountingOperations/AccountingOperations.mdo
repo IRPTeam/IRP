@@ -773,6 +773,14 @@
         </code>
       </content>
     </items>
+    <items id="b6a08550-c934-49f2-b6b0-f3d3c8777d34">
+      <name>Document_DebitCreditNote</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>97</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

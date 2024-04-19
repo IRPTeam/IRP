@@ -355,6 +355,7 @@ Function T1040T_AccountingAmounts()
 		|	Calculations.Amount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	Calculations AS Calculations
 		|WHERE

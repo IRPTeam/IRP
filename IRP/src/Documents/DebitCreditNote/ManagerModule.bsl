@@ -97,7 +97,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5020B_PartnersBalance());
-	//QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -545,5 +545,237 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", BranchArray);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	Doc.Date AS Period,
+		|	UNDEFINED AS RowKey,
+		|	UNDEFINED AS Key,
+		|	Doc.Currency,
+		|	Doc.Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_Test1) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	Document.DebitCreditNote AS Doc
+		|WHERE
+		|	Doc.Ref = &Ref
+		|
+		|UNION ALL
+		// Vendor advance (offset)*
+		|SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset),
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing
+		|
+		|UNION ALL
+		// Customer advance (offset)*
+		|SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset),
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
+		
+		// DebitCreditNote_Test1
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.DebitCreditNote_Test1 Then
+		Return GetAnalytics_Test1(Parameters);
+	ElsIf Parameters.Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then 
+		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset(Parameters);
+	ElsIf Parameters.Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
+		Return GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset(Parameters);
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+Function GetAnalytics_Test1(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Sender
+	AdditionalAnalytics_Sender = New Structure();
+	AdditionalAnalytics_Sender.Insert("Partner"       , Parameters.ObjectData.SendPartner);
+	AdditionalAnalytics_Sender.Insert("LegalName"     , Parameters.ObjectData.SendLegalName);
+	AdditionalAnalytics_Sender.Insert("Agreement"     , Parameters.ObjectData.SendAgreement);
+	AdditionalAnalytics_Sender.Insert("Contract"      , Parameters.ObjectData.SendLegalNameContract);
+	AdditionalAnalytics_Sender.Insert("Order"         , Parameters.ObjectData.SendOrder);
+	AdditionalAnalytics_Sender.Insert("BasisDocument" , Parameters.ObjectData.SendBasisDocument);
+	
+	Sender = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                               Parameters.ObjectData.SendPartner, 
+		                                               Parameters.ObjectData.SendAgreement,
+		                                               Parameters.ObjectData.Currency);
+		                                               
+	// Receiver
+	AdditionalAnalytics_Receiver = New Structure();
+	AdditionalAnalytics_Receiver.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
+	AdditionalAnalytics_Receiver.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
+	AdditionalAnalytics_Receiver.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
+	AdditionalAnalytics_Receiver.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
+	AdditionalAnalytics_Receiver.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
+	AdditionalAnalytics_Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	
+	Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                                  Parameters.ObjectData.SendPartner, 
+		                                                  Parameters.ObjectData.SendAgreement,
+		                                                  Parameters.ObjectData.Currency);
+	
+	From_CustomerAdvance_To_CustomerAdvance = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer);
+	
+	From_CustomerTransaction_To_CustomerTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
+	
+	From_VendorAdvance_To_VendorAdvance = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor);
+		
+	From_VendorTransaction_To_VendorTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
+		
+	// Advance customer (sender) -> Advance customer (receiver)
+	If From_CustomerAdvance_To_CustomerAdvance Then
+		
+		Debit_Account = Sender.AccountAdvancesCustomer;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+	
+		Credit_Account = Receiver.AccountAdvancesCustomer;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+	
+	// Customer transaction (sender) -> Customer transaction (receiver)
+	ElsIf From_CustomerTransaction_To_CustomerTransaction Then
+		
+		Debit_Account = Receiver.AccountTransactionsCustomer;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+	
+		Credit_Account = Sender.AccountTransactionsCustomer;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+	
+	// Advance vendor (sender) -> Advance vendor (receiver)
+	ElsIf From_VendorAdvance_To_VendorAdvance Then
+		
+		Debit_Account = Receiver.AccountAdvancesVendor;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+	
+		Credit_Account = Sender.AccountAdvancesVendor;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+	
+	// Vendor transaction (sender) -> Vendor transaction (receiver)
+	ElsIf From_VendorTransaction_To_VendorTransaction Then
+		Debit_Account = Sender.AccountAdvancesCustomer;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+	
+		Credit_Account = Receiver.AccountAdvancesCustomer;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+	EndIf;
+	
+	// Debit	                                               
+	AccountingAnalytics.Debit = Debit_Account;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Debit_Analytics);
+	
+	// Credit
+	AccountingAnalytics.Credit = Credit_Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Credit_Analytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Vendors transactions - Advances to vendors (offset)
+Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
+	AdditionalAnalytics.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
+	AdditionalAnalytics.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
+	AdditionalAnalytics.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
+	AdditionalAnalytics.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
+	AdditionalAnalytics.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.ReceivePartner, 
+	                                                      Parameters.ObjectData.ReceiveAgreement,
+	                                                      Parameters.ObjectData.Currency);
+	// Debit                                                      
+	AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Advance from customer - Customer transaction (offset)
+Function GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner"       , Parameters.ObjectData.ReceivePartner);
+	AdditionalAnalytics.Insert("LegalName"     , Parameters.ObjectData.ReceiveLegalName);
+	AdditionalAnalytics.Insert("Agreement"     , Parameters.ObjectData.ReceiveAgreement);
+	AdditionalAnalytics.Insert("Contract"      , Parameters.ObjectData.ReceiveLegalNameContract);
+	AdditionalAnalytics.Insert("Order"         , Parameters.ObjectData.ReceiveOrder);
+	AdditionalAnalytics.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
+	
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.ReceivePartner, 
+	                                                      Parameters.ObjectData.ReceiveAgreement,
+	                                                      Parameters.ObjectData.Currency);
+	// Debit                                                      
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

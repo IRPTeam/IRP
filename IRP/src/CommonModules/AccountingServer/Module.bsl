@@ -190,6 +190,11 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue , New Structure("ByRow, ReferTableName", True, "DeductionList"));
 	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance             , New Structure("ByRow, ReferTableName", True, "CashAdvanceDeductionList"));
 	
+	// Debit\Credit note
+	Map.Insert(AO.DebitCreditNote_Test1, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
+	
 	Return Map;
 EndFunction
 

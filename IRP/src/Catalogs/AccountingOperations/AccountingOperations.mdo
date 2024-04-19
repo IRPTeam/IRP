@@ -780,6 +780,27 @@
         <value>97</value>
       </code>
       <isFolder>true</isFolder>
+      <content id="cba7796e-83f6-41d7-842d-74a0261a4ee7">
+        <name>DebitCreditNote_Test1</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>98</value>
+        </code>
+      </content>
+      <content id="c2ba0d63-b3fe-4456-a940-c27e56e871f4">
+        <name>DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>99</value>
+        </code>
+      </content>
+      <content id="cd0be901-d7c0-434c-9126-c476414ee5c6">
+        <name>DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>100</value>
+        </code>
+      </content>
     </items>
   </predefined>
   <editType>InDialog</editType>

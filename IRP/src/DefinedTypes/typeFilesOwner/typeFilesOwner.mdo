@@ -17,6 +17,7 @@
     <types>CatalogRef.CashAccounts</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.CashPayment</types>
+    <types>CatalogRef.AttachedDocumentSettings</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>

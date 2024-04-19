@@ -3,60 +3,22 @@
 	<item>
 		<selection>
 			<item>
-				<field>Documents</field>
+				<field>CurrentFilesTableFile</field>
 			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Documents.FillChecking</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">0</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:LightSalmon</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
 			<item>
-				<field>Documents</field>
+				<field>CurrentFilesTableFilePrintFormName</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Documents.FillChecking</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
+				<left xsi:type="dcscor:Field">CurrentFilesTable.File</left>
+				<comparisonType>NotFilled</comparisonType>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:LightGoldenRod</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>Documents</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Documents.FillChecking</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>BackColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">web:MediumGreen</dcscor:value>
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

@@ -2,6 +2,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	If IsFolder Then
+		Return;
+	EndIf;
 	
 	isIconSet = ValueIsFilled(Icon.Get());
 EndProcedure

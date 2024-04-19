@@ -121,6 +121,7 @@ Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 			If AdditionalParameters.Property("FilePrefix") Then
 				FilePrefix = AdditionalParameters.FilePrefix;
 				FileName = StrTemplate("%1__%2", FilePrefix, FileName);
+				FileID = FileName;
 			EndIf;
 			
 			If AdditionalParameters.Property("PrintFormName") Then

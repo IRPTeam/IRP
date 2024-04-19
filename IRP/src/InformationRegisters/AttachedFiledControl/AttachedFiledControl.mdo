@@ -51,13 +51,14 @@
   </standardAttributes>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="606085ed-a1c7-47c9-a354-9c4c83ec752d">
-    <name>AttachedDocumentSettings</name>
+    <name>Comment</name>
     <synonym>
       <key>en</key>
-      <value>Attached document settings</value>
+      <value>Comment</value>
     </synonym>
     <type>
-      <types>CatalogRef.AttachedDocumentSettings</types>
+      <types>String</types>
+      <stringQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -116,6 +117,39 @@
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="43d053ec-e528-4f52-aa74-a675f7c6d532">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="0a7a340e-1375-4d9e-a447-5edfad8e7847">
+    <name>RecordID</name>
+    <synonym>
+      <key>en</key>
+      <value>Record ID</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
 </mdclass:InformationRegister>

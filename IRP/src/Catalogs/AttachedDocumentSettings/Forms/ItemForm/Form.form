@@ -269,13 +269,17 @@
       <items xsi:type="form:FormField">
         <name>FileSettingsFileTooltips</name>
         <id>29</id>
+        <title>
+          <key>en</key>
+          <value>Tooltip</value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.FileSettings.FileTooltips</segments>
+          <segments>Object.FileSettings.FilePresention.Comment</segments>
         </dataPath>
         <extendedTooltip>
           <name>FileSettingsFileTooltipsExtendedTooltip</name>
@@ -302,7 +306,6 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>InputField</type>
         <editMode>EnterOnInput</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -311,6 +314,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <wrap>true</wrap>
+          <multiLine>true</multiLine>
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
@@ -387,9 +391,22 @@
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:InputFieldExtInfo">
+          <handlers>
+            <event>StartChoice</event>
+            <name>FileSettingsFileTemplateStartChoice</name>
+          </handlers>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <wrap>true</wrap>
+          <dropListButton>false</dropListButton>
+          <choiceButton>true</choiceButton>
+          <choiceButtonRepresentation>ShowInInputField</choiceButtonRepresentation>
+          <choiceButtonPicture xsi:type="core:PictureRef">
+            <picture>StdPicture.Attach</picture>
+          </choiceButtonPicture>
+          <clearButton>true</clearButton>
+          <openButton>true</openButton>
+          <createButton>false</createButton>
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
@@ -576,7 +593,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.FileSettings.FileFormat</segments>
+          <segments>Object.FileSettings.FileExtension</segments>
         </dataPath>
         <extendedTooltip>
           <name>FileSettingsFileFormatExtendedTooltip</name>
@@ -829,6 +846,10 @@
     <horizontalAlign>Left</horizontalAlign>
     <autoFill>true</autoFill>
   </autoCommandBar>
+  <handlers>
+    <event>NotificationProcessing</event>
+    <name>NotificationProcessing</name>
+  </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

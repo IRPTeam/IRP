@@ -24,3 +24,37 @@ Procedure AfterDocTypeSelect(Result, AdditionalParameters) Export
 	EndIf;	
 	
 EndProcedure	
+
+&AtClient
+Procedure FileSettingsFileTemplateStartChoice(Item, ChoiceData, StandardProcessing)
+	
+	StandardProcessing = False;
+	
+	AttachTemplateAtClient();
+	
+EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	
+	If EventName = "UpdateObjectPictures_AddNewOne" Then
+		Items.FileSettings.CurrentData.FileTemplate = Parameter;
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Async Procedure AttachTemplateAtClient()
+	
+	Structure = New Structure;
+	Structure.Insert("Ref", Object.Ref);
+	Structure.Insert("UUID", ThisObject.UUID);
+	
+	OpenFileDialog = New FileDialog(FileDialogMode.Open);
+	OpenFileDialog.Multiselect = False;
+	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	FileRef = Await PutFileToServerAsync(, , , , ThisObject.UUID);
+	PictureViewerClient.AddFile(FileRef, , Structure);
+	
+EndProcedure
+

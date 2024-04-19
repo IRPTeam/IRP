@@ -147,25 +147,7 @@
         <value>File presention</value>
       </synonym>
       <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>100</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="57f5ba95-5645-464a-92df-41b4d60e7159">
-      <name>FileTooltips</name>
-      <synonym>
-        <key>en</key>
-        <value>File tooltips</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers/>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -179,10 +161,7 @@
         <value>File template</value>
       </synonym>
       <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>10</length>
-        </stringQualifiers>
+        <types>CatalogRef.Files</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -224,12 +203,13 @@
       <name>MaximumFileSize</name>
       <synonym>
         <key>en</key>
-        <value>Maximum file size</value>
+        <value>Maximum file size (Mb)</value>
       </synonym>
       <type>
         <types>Number</types>
         <numberQualifiers>
           <precision>10</precision>
+          <scale>2</scale>
         </numberQualifiers>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
@@ -238,10 +218,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ac6c056d-8551-407f-ae1a-eabf40a1d23c">
-      <name>FileFormat</name>
+      <name>FileExtension</name>
       <synonym>
         <key>en</key>
-        <value>File format</value>
+        <value>File extension</value>
       </synonym>
       <type>
         <types>String</types>

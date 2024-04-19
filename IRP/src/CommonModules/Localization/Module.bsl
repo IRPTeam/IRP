@@ -1519,8 +1519,8 @@ Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en = 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
 	
-Strings.Insert("DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues",
-	NStr("en = 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'", Lang));
+Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues",
+	NStr("en = 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en = 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
@@ -1531,14 +1531,17 @@ Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
 	NStr("en = 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses",
-	NStr("en = 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
+	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en = 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en = 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
-	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
 
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
 	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
@@ -1671,6 +1674,15 @@ Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsN
 	
 Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance",
 	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'", Lang));
+
+Strings.Insert("DebitCreditNote_R5020B_PartnersBalance",
+	NStr("en = 'DebitCreditNote (R5020B_PartnersBalance)'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset",
+	NStr("en = 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
+	NStr("en = 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)'", Lang));
 
 #EndRegion
 

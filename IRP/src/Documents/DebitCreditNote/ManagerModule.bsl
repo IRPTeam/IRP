@@ -558,7 +558,7 @@ Function T1040T_AccountingAmounts()
 		|	UNDEFINED AS Key,
 		|	Doc.Currency,
 		|	Doc.Amount,
-		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_Test1) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
@@ -597,15 +597,13 @@ Function T1040T_AccountingAmounts()
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
-		
-		// DebitCreditNote_Test1
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	AO = Catalogs.AccountingOperations;
 	
-	If Parameters.Operation = AO.DebitCreditNote_Test1 Then
-		Return GetAnalytics_Test1(Parameters);
+	If Parameters.Operation = AO.DebitCreditNote_R5020B_PartnersBalance Then
+		Return GetAnalytics_R5020B_PartnersBalance(Parameters);
 	ElsIf Parameters.Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then 
 		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset(Parameters);
 	ElsIf Parameters.Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
@@ -617,7 +615,7 @@ EndFunction
 
 #Region Accounting_Analytics
 
-Function GetAnalytics_Test1(Parameters)
+Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
@@ -665,6 +663,16 @@ Function GetAnalytics_Test1(Parameters)
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
 		
+	From_CustomerAdvance_To_CustomerTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
+		
+	From_VendorAdvance_To_VendorTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
+		
+	
+	
 	// Advance customer (sender) -> Advance customer (receiver)
 	If From_CustomerAdvance_To_CustomerAdvance Then
 		
@@ -683,6 +691,15 @@ Function GetAnalytics_Test1(Parameters)
 		Credit_Account = Sender.AccountTransactionsCustomer;
 		Credit_Analytics = AdditionalAnalytics_Sender;
 	
+	// Advance customer (sender) -> Customer transaction (receiver)
+	ElsIf From_CustomerAdvance_To_CustomerTransaction Then
+		
+		Debit_Account = Sender.AccountAdvancesCustomer;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+	
+		Credit_Account = Receiver.AccountTransactionsCustomer;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+	
 	// Advance vendor (sender) -> Advance vendor (receiver)
 	ElsIf From_VendorAdvance_To_VendorAdvance Then
 		
@@ -699,6 +716,16 @@ Function GetAnalytics_Test1(Parameters)
 	
 		Credit_Account = Receiver.AccountAdvancesCustomer;
 		Credit_Analytics = AdditionalAnalytics_Receiver;
+	
+	// Advance vendor (sender) -> Vendor transaction (receiver)
+	ElsIf From_VendorAdvance_To_VendorTransaction Then
+		
+		Debit_Account = Receiver.AccountTransactionsVendor;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+	
+		Credit_Account = Sender.AccountAdvancesVendor;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+	
 	EndIf;
 	
 	// Debit	                                               

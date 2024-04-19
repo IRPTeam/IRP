@@ -547,7 +547,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="321ab1a7-d2a3-494b-a559-f947721faf7f">
-        <name>DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues</name>
+        <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues</name>
         <code xsi:type="core:NumberValue">
           <value>38</value>
         </code>
@@ -579,19 +579,19 @@
       </code>
       <isFolder>true</isFolder>
       <content id="e3f8e94f-99a5-4617-93cd-076015ad42ba">
-        <name>CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses</name>
+        <name>CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions</name>
         <code xsi:type="core:NumberValue">
           <value>41</value>
         </code>
       </content>
       <content id="f28b8356-42f7-45bb-a471-518f0f2f310e">
-        <name>CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <name>CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
         <code xsi:type="core:NumberValue">
           <value>42</value>
         </code>
       </content>
       <content id="ede515d2-6be7-4e3e-8805-1e61c552167a">
-        <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses</name>
+        <name>CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
         <code xsi:type="core:NumberValue">
           <value>43</value>
         </code>
@@ -601,6 +601,13 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>96</value>
+        </code>
+      </content>
+      <content id="531e0a1c-e1ec-4f41-941e-ddeeb515584e">
+        <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>101</value>
         </code>
       </content>
     </items>
@@ -781,7 +788,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="cba7796e-83f6-41d7-842d-74a0261a4ee7">
-        <name>DebitCreditNote_Test1</name>
+        <name>DebitCreditNote_R5020B_PartnersBalance</name>
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>98</value>

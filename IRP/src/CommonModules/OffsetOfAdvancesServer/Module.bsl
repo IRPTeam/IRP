@@ -1296,6 +1296,22 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 			Return AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset;
 		EndIf;
 		
+	// Credit note
+	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
+			
+		If IsCustomerAdvanceClosing Then
+			Return AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		ElsIf IsVendorAdvanceClosing Then
+			Return AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		EndIf;	
+		
+	// Debit note
+	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
+		
+		If IsVendorAdvanceClosing Then
+			Return AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		EndIf;
+	
 	EndIf;
 	
 	Return Undefined;

@@ -109,15 +109,16 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues , New Structure("ByRow", True));
 		
 	// Debit note
-	Map.Insert(AO.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 		
 	// Credit note
-	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses , New Structure("ByRow", True));
-	Map.Insert(AO.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
-	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
@@ -191,7 +192,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance             , New Structure("ByRow, ReferTableName", True, "CashAdvanceDeductionList"));
 	
 	// Debit\Credit note
-	Map.Insert(AO.DebitCreditNote_Test1, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_R5020B_PartnersBalance, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
 	

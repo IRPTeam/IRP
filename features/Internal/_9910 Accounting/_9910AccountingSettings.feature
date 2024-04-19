@@ -218,7 +218,7 @@ Scenario: _0991002 filling accounting operation
 	And I click "Fill default descriptions" button
 	And I click "Refresh" button
 	And I click "List" button		
-	And "List" table contains lines
+	And "List" table became equal
 		| 'Predefined data item name'                                                                                  | 'Description'                                                                                                    |
 		| 'Document_BankPayment'                                                                                       | 'Bank payment'                                                                                                   |
 		| 'Document_BankReceipt'                                                                                       | 'Bank receipt'                                                                                                   |
@@ -238,12 +238,18 @@ Scenario: _0991002 filling accounting operation
 		| 'Document_DecommissioningOfFixedAsset'                                                                       | 'Decommissioning of fixed asset'                                                                                 |
 		| 'Document_FixedAssetTransfer'                                                                                | 'Fixed asset transfer'                                                                                           |
 		| 'Document_DepreciationCalculation'                                                                           | 'Depreciation calculation'                                                                                       |
+		| 'Document_Payroll'                                                                                           | 'Payroll'                                                                                                        |
+		| 'Document_DebitCreditNote'                                                                                   | 'Debit/Credit note'                                                                                              |
 		| 'BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
 		| 'BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
 		| 'BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand'              | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'              |
 		| 'BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
 		| 'BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder'                         | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'                           |
 		| 'BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange'                          | 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)'                       |
+		| 'BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand'                                       | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'                                       |
+		| 'BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand'                                                        | 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        |
+		| 'BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand'                                                   | 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)'                                                   |
+		| 'BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand'                                             | 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'                                             |
 		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'BankReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
 		| 'BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                                | 'BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                |
 		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions'                    | 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'                    |
@@ -252,6 +258,8 @@ Scenario: _0991002 filling accounting operation
 		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange'                          | 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Currency exchange)'                       |
 		| 'BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues'                                                     | 'BankReceipt DR (R3021B_CashInTransit) CR (R5021T_Revenues)'                                                     |
 		| 'BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit'                                                     | 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'                                                     |
+		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions'                                       | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'                                       |
+		| 'BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues'                                                         | 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)'                                                         |
 		| 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions'                     | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
 		| 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                  | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
 		| 'PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions'                                      | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
@@ -271,19 +279,26 @@ Scenario: _0991002 filling accounting operation
 		| 'CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand'              | 'CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'              |
 		| 'CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                | 'CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                |
 		| 'CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder'                         | 'CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'                           |
+		| 'CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand'                                       | 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'                                       |
+		| 'CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand'                                                   | 'CashPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)'                                                   |
+		| 'CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand'                                             | 'CashPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'                                             |
 		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions'              | 'CashReceipt DR (R3010B_CashOnHand) CR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions)'              |
 		| 'CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                                | 'CashReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                |
 		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions'                    | 'CashReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'                    |
 		| 'CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions'                                      | 'CashReceipt DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'                                      |
 		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder'                         | 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'                           |
+		| 'CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions'                                       | 'CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'                                       |
 		| 'CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand'                                                        | 'CashExpense DR (R5022T_Expenses) CR (R3010B_CashOnHand)'                                                        |
 		| 'CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues'                                                         | 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'                                                         |
-		| 'DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues'                                                    | 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'                                                    |
+		| 'DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues'                                                  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'                                                  |
 		| 'DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                        | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                        |
 		| 'DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues'                                                | 'DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'                                                |
-		| 'CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses'                                              | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'                                              |
-		| 'CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers'                                 | 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'                                 |
-		| 'CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses'                                                | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'                                                 |
+		| 'DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues'                                            | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)'                                            |
+		| 'CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions'                                              | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'                                              |
+		| 'CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                                 | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                                 |
+		| 'CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions'                                                | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'                                                |
+		| 'CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions'                                          | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'                                          |
+		| 'CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                       | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                       |
 		| 'MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand'                                                    | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'                                                    |
 		| 'MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand'                                                 | 'MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)'                                                 |
 		| 'MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit'                                                 | 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)'                                                 |
@@ -294,7 +309,18 @@ Scenario: _0991002 filling accounting operation
 		| 'ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                         | 'ModernizationOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                         |
 		| 'DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset'                       | 'DecommissioningOfFixedAsset DR (R4050B_StockInventory) CR (R8510B_BookValueOfFixedAsset)'                       |
 		| 'FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset'                         | 'FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'                         |
-		| 'DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset'                                       | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'                                       |	
+		| 'DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset'                                       | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'                                       |
+		| 'Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual'                                                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                                               |
+		| 'Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes'                                  | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'                                |
+		| 'Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue'                                     | 'Payroll DR (R9510B_SalaryPayment) CR (R5021T_Revenues) (Deduction Is Revenue)'                                  |
+		| 'Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue'                                  | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)'                              |
+		| 'Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance'                                              | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'                                              |
+		| 'Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes'                                       | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'                                     |
+		| 'DebitCreditNote_R5020B_PartnersBalance'                                                                     | 'DebitCreditNote (R5020B_PartnersBalance)'                                                                       |
+		| 'DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset'                     | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)'                   |
+		| 'DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset'                           | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)'                         |
+	
+		
 	And I close all client application windows
 		
 		
@@ -2359,8 +2385,8 @@ Scenario: _0991140 check Debit note accounting movements (Vendor)
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                   | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 11:03:25' | '4020.2'     | '1' | '25,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '25'           | 'Partner term with vendor 1' | ''                | 'Business unit 1'     | 'TRY'            | '9100'       | 'Business unit 1'  | 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)' | 'Vendor 1'            | '25'            | ''                    |			
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                     | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 11:03:25' | '5201'       | '1' | '25,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '25'           | 'Partner term with vendor 1' | ''                | 'Business unit 1'     | 'TRY'            | '9100'       | 'Business unit 1'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)' | 'Vendor 1'            | '25'            | ''                    |			
 	And I close all client application windows
 
 Scenario: _0991141 check Debit note accounting movements (Customer)
@@ -2410,8 +2436,8 @@ Scenario: _0991145 check Credit note accounting movements (Customer)
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr'                         | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                         | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 11:02:48' | '5202'       | '1' | '15,00'  | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '15'           | 'Individual partner term 1 (by partner term)' | ''                | 'Business unit 1'     | 'TRY'            | '420.2'      | 'Customer 2 (2 partner term)' | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)' | 'Business unit 1'     | '15'            | 'Other expence'       |
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                         | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 11:02:48' | '420.2'      | '1' | '15,00'  | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '15'           | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '15'            | 'Business unit 1'     |		
 	And I close all client application windows
 
 Scenario: _0991146 check Credit note accounting movements (Vendor)
@@ -2427,8 +2453,8 @@ Scenario: _0991146 check Credit note accounting movements (Vendor)
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr'                                    | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                      | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '27.03.2024 14:45:40' | '5201'       | '1' | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 5'        | '50'           | 'Partner term with vendor (advance payment by document)' | ''                | 'Business unit 1'     | 'TRY'            | '420.2'      | 'Vendor 5'         | 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)' | 'Business unit 1'     | '50'            | 'Other expence'       |	
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                       | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '27.03.2024 14:45:40' | '420.2'      | '1' | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 5'        | '50'           | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '5201'       | 'Vendor 5'         | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor (advance payment by document)' | '50'            | 'Business unit 1'     |		
 	And I close all client application windows
 
 Scenario: _0991147 check Credit note accounting movements (Other)

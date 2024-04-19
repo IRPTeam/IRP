@@ -1666,6 +1666,139 @@ Scenario: _0991038 accounts settings for tax type and rate
 			| '01.01.2022' | 'Own company 1' | 'LTV with account charts code mask' | 'VAT' | '20%'      | '405.01'           | '90878699'         |
 	And I close all client application windows
 
+Scenario: _0991040 check account priority for service (ExpenseType, CostRevenueCenter) for PI
+	And I close all client application windows
+	* Create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Partner" by "Vendor 2 (1 partner term)" string
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "service" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check account (expense type not filled)
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+				| 'Debit' | 'Partner'                   | 'Business unit' | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
+				| '420.5' | 'Vendor 2 (1 partner term)' | ''              | 'Partner term with vendor 2' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |
+		And I close current window
+	* Check account (CostRevenueCenter empty, ExpenseType filled)
+		And I activate "Expense type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "other" from "Expense type" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.2' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |
+		And I close current window
+	* Check account (CostRevenueCenter filled, ExpenseType filled)
+		And I select "Expence and revenue 1" from "Expense type" drop-down list by string in "ItemList" table
+		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button			
+		And "AccountingAnalytics" table contains lines
+			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |					
+		And I close current window
+	* Select another CostRevenueCenter and check account
+		And I select "Business unit 3" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button			
+		And "AccountingAnalytics" table contains lines
+			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.4' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
+		And I close current window
+	* Check account (CostRevenueCenter filled, ExpenseType empty)
+		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I input "" text in "Expense type" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
+		And I close all client application windows
+
+
+Scenario: _0991041 check account priority for service (ExpenseType, CostRevenueCenter) for SI
+	And I close all client application windows
+	* Create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Partner" by "Customer 2 (2 partner term)" string
+		And I select from the drop-down list named "Agreement" by "Individual partner term 1 (by partner term)" string
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "service" from "Item" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check account (revenue type not filled)
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+			| 'Debit' | 'Partner'                     | 'Business unit' | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
+			| '4010'  | ''                            | ''              | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
+			| '9100'  | 'VAT'                         | ''              | ''                                            | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
+		And I close current window
+	* Check account (CostRevenueCenter filled, RevenueType filled)
+		And I select "Expence and revenue 1" from "Revenue type" drop-down list by string in "ItemList" table
+		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button			
+		And "AccountingAnalytics" table contains lines
+			| 'Debit' | 'Partner'         | 'Business unit' | 'Partner term'    | 'Credit' | 'Operation'                                                                               |
+			| '4010'  | 'Business unit 2' | ''              | ''                | '9102'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                     |
+			| '9102'  | 'VAT'             | ''              | 'Business unit 2' | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                             |
+		And I close current window
+	* Check account (CostRevenueCenter empty, RevenueType filled)
+		And I input "" text in "Profit loss center" field of "ItemList" table
+		And I activate "Revenue type" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "Other revenues" from "Revenue type" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+			| 'Debit' | 'Partner' | 'Business unit' | 'Partner term' | 'Credit' | 'Operation'                                                                               |
+			| '4010'  | ''        | ''              | ''             | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                     |
+			| '9100'  | 'VAT'     | ''              | ''             | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                             |
+		And I close current window
+	* Select another CostRevenueCenter and check account
+		And I select "Business unit 3" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I input "Expence and revenue 1" text in "Revenue type" field of "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button			
+		And "AccountingAnalytics" table contains lines
+			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
+			| '4010'  | 'Business unit 3'             | ''                | ''                                            | '9101'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
+			| '9101'  | 'VAT'                         | ''                | 'Business unit 3'                             | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
+		And I close current window
+	* Check account (CostRevenueCenter filled, RevenueType empty)
+		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
+		And I input "" text in "Revenue type" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		And in the table "ItemList" I click "Edit accounting" button
+		And "AccountingAnalytics" table contains lines
+			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
+			| '4010'  | 'Business unit 2'             | ''                | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
+			| '9100'  | 'VAT'                         | ''                | 'Business unit 2'                             | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
+		And I close all client application windows
+
 Scenario: _0991058 create journal entry for one PI
 	And I close all client application windows
 	* Open PI list
@@ -1737,7 +1870,9 @@ Scenario: _0991059 create journal entry for two PI
 			| 'No'           | '22.07.2023 09:38:02' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' | ''            |
 			| 'No'           | '30.11.2023 16:01:04' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' | ''            |
 			
-						
+
+
+
 Scenario: _0991059 create journal entry for two PI
 	And I close all client application windows
 	* Open journal entry list

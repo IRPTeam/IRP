@@ -180,7 +180,9 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = OtherIncome Then
 		StrByType = "
-		|PaymentList.RevenueType";
+		|PaymentList.RevenueType,
+		|PaymentList.ProfitLossCenter,
+		|PaymentList.AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

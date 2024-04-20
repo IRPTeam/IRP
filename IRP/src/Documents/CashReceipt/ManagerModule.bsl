@@ -739,7 +739,23 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsCashTransferOrder";
+		|	PaymentList.IsCashTransferOrder
+		|
+		|UNION ALL
+		|
+		// Other partner
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherPartner";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -755,7 +771,10 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_ReturnFromVendor_Offset(Parameters); // Advance from vendor - Vendor transactions
 	ElsIf Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder Then
 		Return GetAnalytics_CashTransferOrder(Parameters); // Cash on hand - Cash in transit 
+	ElsIf Parameters.Operation = AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions Then
+		Return GetAnalytics_OtherPartner(Parameters); // Cash on hand - Other partner 
 	EndIf;
+		
 	Return Undefined;
 EndFunction
 
@@ -891,6 +910,32 @@ Function GetAnalytics_CashTransferOrder(Parameters)
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash on hand - Other partner
+Function GetAnalytics_OtherPartner(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                       Parameters.ObjectData.CashAccount,
+	                                                       Parameters.ObjectData.Currency);
+	AccountingAnalytics.Debit = Debit.Account;
+
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.CashAccount);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.ObjectData.Currency);                                                
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
 	Return AccountingAnalytics;
 EndFunction
 

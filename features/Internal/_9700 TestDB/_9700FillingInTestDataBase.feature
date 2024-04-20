@@ -137,6 +137,8 @@ When Create document InventoryTransferOrder objects (test data base)
 When Create document OpeningEntry objects (test data base)
 When Create document OutgoingPaymentOrder objects (test data base)
 When Create document PhysicalCountByLocation objects (test data base)
+When Create document CommissioningOfFixedAsset objects (test data base)
+When Create document DepreciationCalculation objects (test data base)
 When Create document CalculationMovementCosts objects (test data base)
 When Create document PhysicalInventory objects (test data base)
 When Create document PlannedReceiptReservation objects (test data base)
@@ -181,6 +183,16 @@ When Create document EmployeeCashAdvance objects (test data base)
 When Create document SalesReportFromTradeAgent objects (test data base)
 When Create document SalesReportToConsignor objects (test data base)
 When Create document ConsolidatedRetailSales objects (test data base)
+* Load data for Salary system
+	When Create document EmployeeHiring objects (test data base)
+	When Create document EmployeeVacation objects (test data base)
+	When Create document EmployeeSickLeave objects (test data base)
+	When Create document EmployeeTransfer objects (test data base)
+	When Create information register T9530S_WorkDays records (test data base)
+	When Create document TimeSheet objects (test data base)
+	When Create document AdditionalDeduction objects (test data base)
+	When Create document AdditionalAccrual objects (test data base)
+	When Create document Payroll objects (test data base)
 * Load data for Accounting system
 	When Create chart of characteristic types AccountingExtraDimensionTypes objects (test data base)
 	When Create chart of accounts Basic objects with LedgerTypeVariants (Basic LTV) (test data base)
@@ -569,6 +581,16 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting CommissioningOfFixedAsset
+		Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting DepreciationCalculation
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 * Posting CalculationMovementCosts
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 		Then I select all lines of "List" table
@@ -606,6 +628,46 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		And Delay "3"
 * Posting SalesReportToConsignor
 		Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeHiring
+		Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeVacation
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeSickLeave
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting EmployeeTransfer
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting TimeSheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting AdditionalDeduction
+		Given I open hyperlink "e1cib/list/Document.AdditionalDeduction"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting AdditionalAccrual
+		Given I open hyperlink "e1cib/list/Document.AdditionalAccrual"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"

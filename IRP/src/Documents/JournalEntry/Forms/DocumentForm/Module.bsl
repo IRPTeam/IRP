@@ -28,6 +28,13 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure AfterWrite(WriteParameters)
+	If ValueIsFilled(Object.Basis) Then
+		NotifyChanged(Object.Basis);
+	EndIf;	
+EndProcedure
+
+&AtClient
 Procedure OnOpen(Cancel)
 	DocJournalEntryClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure

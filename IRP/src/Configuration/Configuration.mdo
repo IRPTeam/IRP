@@ -1412,6 +1412,7 @@
   <informationRegisters>InformationRegister.AuditLock</informationRegisters>
   <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
   <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
+  <informationRegisters>InformationRegister.T9016S_AccountsEmployee</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

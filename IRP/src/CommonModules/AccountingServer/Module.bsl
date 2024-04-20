@@ -19,6 +19,18 @@ Function GetOperationsDefinition()
 	// Transaction type - Currency exchange
 	Map.Insert(AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange,
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CurrencyExchange));
+	// Transaction type - Other partner
+	Map.Insert(AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	// Transaction type - Other expense
+	Map.Insert(AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherExpense));	
+	// Transaction type - Salary payment
+	Map.Insert(AO.BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
+	// Transaction type - Employee cash advance
+	Map.Insert(AO.BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance));
 	
 	// Bank receipt
 	// Transaction type - Payment from customer
@@ -41,6 +53,12 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
 	Map.Insert(AO.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit,
 		New Structure("ByRow, TransactionType", False, Enums.IncomingPaymentTransactionType.CurrencyExchange));
+	// Transaction type - Other partner
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+	// Transaction type - Other income
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -55,7 +73,16 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer));
 	//  Transaction type - Cash transfer order
 	Map.Insert(AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder,
-		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.CashTransferOrder));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.OtherPartner));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.SalaryPayment));	
+	//  Transaction type - Employee cash advance
+	Map.Insert(AO.CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand,
+		New Structure("ByRow, TransactionType", True, Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance));
 	
 	// Cash receipt
 	//  Transaction type - Payment from customer
@@ -70,7 +97,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.ReturnFromVendor));
 	//  Transaction type - Cash transfer order
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
+	//  Transaction type - Other partner
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -79,14 +109,17 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues , New Structure("ByRow", True));
 		
 	// Debit note
-	Map.Insert(AO.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 		
 	// Credit note
-	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses , New Structure("ByRow", True));
-	Map.Insert(AO.CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow", True));
-	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
 	// receipt inventory
@@ -148,10 +181,22 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", False));
 	
 	// Depreciation calculation
-	Map.Insert(AO.DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", True));
 	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
 	
-Return Map;
+	// Payroll
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual                , New Structure("ByRow, ReferTableName", True, "AccrualList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes , New Structure("ByRow, ReferTableName", True, "SalaryTaxList"));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes      , New Structure("ByRow, ReferTableName", True, "SalaryTaxList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue    , New Structure("ByRow, ReferTableName", True, "DeductionList"));
+	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue , New Structure("ByRow, ReferTableName", True, "DeductionList"));
+	Map.Insert(AO.Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance             , New Structure("ByRow, ReferTableName", True, "CashAdvanceDeductionList"));
+	
+	// Debit\Credit note
+	Map.Insert(AO.DebitCreditNote_R5020B_PartnersBalance, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
+	
+	Return Map;
 EndFunction
 
 Function GetSupportedDocuments() Export
@@ -345,7 +390,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	Return ArrayOfLedgerTypes;
 EndFunction
 
-Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
+Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
 	MetadataName = Object.Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
@@ -375,14 +420,28 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
 		ByRow = ?(Def = Undefined, False, Def.ByRow);
+		
 		RequestTable = False;
 		If Def <> Undefined And Def.Property("RequestTable") Then
 			RequestTable = Def.RequestTable;
 		EndIf;
 		
+		ReferTableName = Undefined;
+		If Def <> Undefined And Def.Property("ReferTableName") Then
+			ReferTableName = Def.ReferTableName;
+		EndIf;
+		
+		// Filters
+		
 		If Def <> Undefined 
 			And Def.Property("TransactionType") 
 			And Def.TransactionType <> DocTransactionType Then
+			Continue;
+		EndIf;
+		
+		If ValueIsFilled(ReferTableName)
+			And ValueIsFilled(MainTableName)
+			And ReferTableName <> MainTableName Then
 			Continue;
 		EndIf;
 		
@@ -391,6 +450,7 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType)
 		NewAccountingOperation.Insert("ByRow"        , ByRow);
 		NewAccountingOperation.Insert("RequestTable" , RequestTable);
 		NewAccountingOperation.Insert("MetadataName" , MetadataName);
+		NewAccountingOperation.Insert("ReferTableName" , ReferTableName);
 		ArrayOfAccountingOperations.Add(NewAccountingOperation);
 	EndDo;
 	Return ArrayOfAccountingOperations;
@@ -742,7 +802,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|/////////////////////////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ByAgreement.AccountAdvancesOther,
 	|	ByAgreement.AccountTransactionsOther,
 	|	1 AS Priority
 	|INTO Accounts_Other
@@ -757,7 +816,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByPartner.AccountAdvancesOther,
 	|	ByPartner.AccountTransactionsOther,
 	|	2
 	|FROM
@@ -771,7 +829,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCurrency.AccountAdvancesOther,
 	|	ByCurrency.AccountTransactionsOther,
 	|	3
 	|FROM
@@ -785,7 +842,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.AccountAdvancesOther,
 	|	ByCompany.AccountTransactionsOther,
 	|	4
 	|FROM
@@ -822,7 +878,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
-	|	Accounts.AccountAdvancesOther,
 	|	Accounts.AccountTransactionsOther,
 	|	Accounts.Priority AS Priority
 	|FROM
@@ -845,7 +900,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	Result.Insert("AccountTransactionsVendor"    , Undefined);
 	Result.Insert("AccountAdvancesCustomer"      , Undefined);
 	Result.Insert("AccountTransactionsCustomer"  , Undefined);
-	Result.Insert("AccountAdvancesOther"         , Undefined);
 	Result.Insert("AccountTransactionsOther"     , Undefined);
 
 	QuerySelection_Vendor = QueryResults[3].Select();
@@ -862,7 +916,6 @@ Function __GetT9012S_AccountsPartner(Period, Company, LedgerTypeVariant, Partner
 	
 	QuerySelection_Other = QueryResults[5].Select();
 	If QuerySelection_Other.Next() Then
-		Result.AccountAdvancesOther = QuerySelection_Other.AccountAdvancesOther;
 		Result.AccountTransactionsOther = QuerySelection_Other.AccountTransactionsOther;
 	EndIf;
 	
@@ -952,54 +1005,157 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	Return Result;
 EndFunction
 
-Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue) Export
+Function GetT9014S_AccountsExpenseRevenue(AccountParameters, ExpenseRevenue, ProfitLossCenter) Export
 	Return __GetT9014S_AccountsExpenseRevenue(//AccountingServerReuse.GetT9014S_AccountsExpenseRevenue_Reuse(
 		AccountParameters.Period, 
 		AccountParameters.Company, 
 		AccountParameters.LedgerTypeVariant, 
-		ExpenseRevenue);
+		ExpenseRevenue,
+		ProfitLossCenter);
 EndFunction
 
-Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue) Export
+Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue, ProfitLossCenter) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	ByExpenseRevenue.Account,
+	|	Table.AccountExpense,
 	|	1 AS Priority
-	|INTO Accounts
+	|INTO AccountsExpense
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND ExpenseRevenue = &ExpenseRevenue) AS ByExpenseRevenue
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	ByCompany.Account,
+	|	Table.AccountExpense,
 	|	2
 	|FROM
-	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Company = &Company AND LedgerTypeVariant = &LedgerTypeVariant
-	|	AND ExpenseRevenue.Ref IS NULL) AS ByCompany
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountExpense,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountExpense,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Expense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	Accounts.Account,
-	|	Accounts.Priority AS Priority
+	|	Table.AccountRevenue,
+	|	1 AS Priority
+	|INTO AccountsRevenue
 	|FROM
-	|	Accounts AS Accounts
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	2
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountRevenue,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, Revenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT TOP 1
+	|	Table.AccountExpense,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsExpense AS Table
+	|
+	|ORDER BY
+	|	Priority
+	|;
+	|/////////////////
+	|SELECT TOP 1
+	|	Table.AccountRevenue,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsRevenue AS Table
 	|
 	|ORDER BY
 	|	Priority";
+	
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
 	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
 	Query.SetParameter("ExpenseRevenue" , ExpenseRevenue);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	Result = New Structure("Account");
-	If QuerySelection.Next() Then
-		Result.Account = QuerySelection.Account;
+	Query.SetParameter("ProfitLossCenter" , ProfitLossCenter);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = New Structure();
+	Result.Insert("AccountExpense", Undefined);
+	Result.Insert("AccountRevenue", Undefined);
+	
+	QuerySelection_Expense = QueryResults[2].Select();
+	If QuerySelection_Expense.Next() Then
+		Result.AccountExpense = QuerySelection_Expense.AccountExpense;
 	EndIf;
+	
+	QuerySelection_Revenue = QueryResults[3].Select();
+	If QuerySelection_Revenue.Next() Then
+		Result.AccountRevenue = QuerySelection_Revenue.AccountRevenue;
+	EndIf;
+	
 	Return Result;
 EndFunction
 
@@ -1076,6 +1232,64 @@ Function __GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, Fixe
 	Return Result;
 EndFunction
 
+Function GetT9016S_AccountsEmployee(AccountParameters, Employee) Export
+	Return AccountingServerReuse.GetT9016S_AccountsEmployee_Reuse(
+		AccountParameters.Period, 
+		AccountParameters.Company, 
+		AccountParameters.LedgerTypeVariant, 
+		Employee);
+EndFunction
+
+Function __GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.T9016S_AccountsEmployee.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee = &Employee) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountSalaryPayment,
+	|	Table.AccountCashAdvance,
+	|	2
+	|FROM
+	|	InformationRegister.T9016S_AccountsEmployee.SliceLast(&Period, Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND Employee.Ref IS NULL) AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.AccountSalaryPayment,
+	|	Accounts.AccountCashAdvance,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"   , Period);
+	Query.SetParameter("Company"  , Company);
+	Query.SetParameter("LedgerTypeVariant" , LedgerTypeVariant);
+	Query.SetParameter("Employee" , Employee);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("AccountSalaryPayment, AccountCashAdvance");
+	If QuerySelection.Next() Then
+		Result.AccountSalaryPayment = QuerySelection.AccountSalaryPayment;
+		Result.AccountCashAdvance = QuerySelection.AccountCashAdvance;
+	EndIf;
+	Return Result;
+EndFunction
+
 #EndRegion
 
 Procedure UpdateAccountingTables(Object, 
@@ -1095,7 +1309,7 @@ Procedure UpdateAccountingTables(Object,
 		If Filter_LedgerType <> Undefined And Filter_LedgerType <> LedgerType Then
 			Continue;
 		EndIf;
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			OperationsByLedgerType.Add(New Structure("LedgerType, OperationInfo", LedgerType, OperationInfo));
 		EndDo;
@@ -1288,6 +1502,9 @@ EndProcedure
 
 Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDimensions, Period, LedgerTypes, MainTableName)
 	// AccountingRowAnalytics
+	
+	Def = GetOperationsDefinition();
+	
 	ArrayForDelete = New Array();
 	For Each Row In AccountingRowAnalytics Do
 		
@@ -1296,11 +1513,17 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			Continue;
 		EndIf;
 	
+		OpDef = Def.Get(Row.Operation);
+		If OpDef.Property("ReferTableName") And OpDef.ReferTableName <> MainTableName Then
+			Continue;
+		EndIf;
+	
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
+		
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
 			Continue;
@@ -1317,6 +1540,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			EndIf;
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		AccountingRowAnalytics.Delete(ItemForDelete);
 	EndDo;
@@ -1330,11 +1554,17 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			Continue;
 		EndIf;
 		
+		OpDef = Def.Get(Row.Operation);
+		If OpDef.Property("ReferTableName") And OpDef.ReferTableName <> MainTableName Then
+			Continue;
+		EndIf;
+	
 		Operations = New Array();	
-		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType);
+		OperationsInfo = GetAccountingOperationsByLedgerType(Object, Period, Row.LedgerType, MainTableName);
 		For Each OperationInfo In OperationsInfo Do
 			Operations.Add(OperationInfo.Operation);
 		EndDo;
+		
 		If Operations.Find(Row.Operation) = Undefined Then
 			ArrayForDelete.Add(Row);
 			Continue;
@@ -1351,6 +1581,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			EndIf;
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		AccountingExtDimensions.Delete(ItemForDelete);
 	EndDo;
@@ -1710,7 +1941,14 @@ EndProcedure
 
 // Object
 
-Procedure OnWrite(Object, Cancel) Export
+Procedure OnWrite(Object, Cancel, MainTableName = Undefined) Export
+	
+	If ValueIsFilled(MainTableName) Then
+		_MainTableName = MainTableName;
+	Else
+		_MainTableName = AccountingClientServer.GetDocumentMainTable(Object);
+	EndIf;
+	
 	_AccountingRowAnalytics = CommonFunctionsClientServer.GetFromAddInfo(Object.AdditionalProperties, "AccountingRowAnalytics", Undefined);
 	If _AccountingRowAnalytics = Undefined Then
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
@@ -1730,7 +1968,7 @@ Procedure OnWrite(Object, Cancel) Export
 	AccountingClientServer.UpdateAccountingTables(Object, 
 		                                         _AccountingRowAnalytics, 
 		                                         _AccountingExtDimensions,
-		                                         AccountingClientServer.GetDocumentMainTable(Object));
+		                                         _MainTableName);
 		
 	Object.AdditionalProperties.Insert("AccountingRowAnalytics"  , _AccountingRowAnalytics);
 	Object.AdditionalProperties.Insert("AccountingExtDimensions" , _AccountingExtDimensions);

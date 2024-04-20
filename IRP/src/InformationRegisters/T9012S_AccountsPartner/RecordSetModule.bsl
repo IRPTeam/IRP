@@ -21,7 +21,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 		
 		If Record.Other Then
-			CheckedAttributes.Add("AccountAdvancesOther");
 			CheckedAttributes.Add("AccountTransactionsOther");
 		EndIf;
 		
@@ -29,7 +28,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CheckAccountNotUseForRecords("AccountTransactionsVendor"   , Record, Cancel);
 		CheckAccountNotUseForRecords("AccountAdvancesCustomer"     , Record, Cancel);
 		CheckAccountNotUseForRecords("AccountTransactionsCustomer" , Record, Cancel);
-		CheckAccountNotUseForRecords("AccountAdvancesOther"        , Record, Cancel);
 		CheckAccountNotUseForRecords("AccountTransactionsOther"    , Record, Cancel);
 				
 	EndDo;

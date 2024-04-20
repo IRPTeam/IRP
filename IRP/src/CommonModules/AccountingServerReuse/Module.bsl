@@ -15,10 +15,14 @@ Function GetT9013S_AccountsTax_Reuse(Period, Company, LedgerTypeVariant, Tax, Va
 	Return AccountingServer.__GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRate);
 EndFunction
 
-Function GetT9014S_AccountsExpenseRevenue_Reuse(Period, Company, LedgerTypeVariant, ExpenseRevenue) Export
-	Return AccountingServer.__GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue);
+Function GetT9014S_AccountsExpenseRevenue_Reuse(Period, Company, LedgerTypeVariant, ExpenseRevenue, ProfitLossCenter) Export
+	Return AccountingServer.__GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, ExpenseRevenue, ProfitLossCenter);
 EndFunction
 
 Function GetT9015S_AccountsFixedAsset_Reuse(Period, Company, LedgerTypeVariant, FixedAsset) Export
 	Return AccountingServer.__GetT9015S_AccountsFixedAsset(Period, Company, LedgerTypeVariant, FixedAsset);
+EndFunction
+
+Function GetT9016S_AccountsEmployee_Reuse(Period, Company, LedgerTypeVariant, Employee) Export
+	Return AccountingServer.__GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee);
 EndFunction

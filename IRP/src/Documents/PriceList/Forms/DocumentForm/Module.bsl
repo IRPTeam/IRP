@@ -4,6 +4,11 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		DocumentsClientServer.ChangeTitleGroupTitle(Object, ThisObject);
+	EndIf;
+	ViewServer_V2.OnCreateAtServer(Object, ThisObject, );
+	
 	BuildForm();
 	SetVisible();
 	
@@ -58,6 +63,7 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	BuildForm();
+	DocPriceListServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 EndProcedure
 
 &AtServer
@@ -67,6 +73,7 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters);
 	EndIf;
 EndProcedure
+
 #EndRegion
 
 #Region FormHeaderItemsEventHandlers
@@ -690,6 +697,11 @@ Procedure SetVisible()
 	Items.FillByRules.Visible = ValueIsFilled(Object.PriceType.ExternalDataProc);
 EndProcedure
 
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region AddAttributes
@@ -741,8 +753,44 @@ EndProcedure
 
 #EndRegion
 
+#Region TITLE_DECORATIONS
+
 &AtClient
-Procedure ShowHiddenTables(Command)
-	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
 EndProcedure
 
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocPriceListClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion

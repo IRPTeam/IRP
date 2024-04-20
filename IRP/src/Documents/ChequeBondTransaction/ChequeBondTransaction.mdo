@@ -54,6 +54,10 @@
     <key>en</key>
     <value>Cheque bond transaction</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Cheque bond transactions</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

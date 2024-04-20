@@ -1084,7 +1084,67 @@ Scenario: _52022 SI-BR-SR-BP (PaymentFromCustomerByPOS, ReturnToCustomerByPOS, I
 			| 'Total'                                      | ''                                                                                                                    | ''         | ''                             | '1 400,00'  | '1 400,00' | ''          | '400,00'  | '400,00'  | ''        | '1 000,00'  | '1 000,00' | ''         | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
 		And I close all client application windows
 
+Scenario: _52023 check SI-DN-CN (with customer)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "11.02.2024" text in the field named "DateBegin"
+		And I input "29.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Customer 7" string
+		And I click "Generate" button
+	* Check
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                    | ''                                                                                                                    | ''         | ''                             | 'Amount'  | ''        | ''        | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''        | ''        | 'Other'   | ''        | ''        |
+			| 'Partner'                                    | 'Legal name'                                                                                                          | ''         | ''                             | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                   | 'Agreement'                                                                                                           | 'Currency' | 'Multi currency movement type' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Own company 2'                              | ''                                                                                                                    | ''         | ''                             | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Customer 7'                                 | 'Customer 7'                                                                                                          | ''         | ''                             | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '400,00'  | ''        | '400,00'  | ''        | ''        | ''        | '400,00'  | ''        | '400,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Debit note 4 dated 27.03.2024 12:00:00'     | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '100,00'  | ''        | '500,00'  | ''        | ''        | ''        | '100,00'  | ''        | '500,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Credit note 4 dated 29.03.2024 15:00:00'    | 'Partner term with customer (by document + credit limit)'                                                             | 'TRY'      | 'Legal currency, TRY'          | '-75,00'  | ''        | '425,00'  | ''        | ''        | ''        | '-75,00'  | ''        | '425,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |
+			| 'Total'                                      | ''                                                                                                                    | ''         | ''                             | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | '425,00'  | ''        | '425,00'  | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        |		
+		And I close all client application windows
 
+Scenario: _52024 check PI-DN-CN (with vendor)
+	And I close all client application windows
+	* Open report R5020_PartnersBalance and select option
+		Given I open hyperlink "e1cib/app/Report.R5020_PartnersBalance"
+		And I click "Select option..." button
+		Then "Load form" window is opened
+		And I go to line in "OptionsList" table
+			| 'Report option'  |
+			| 'For test'       |
+		And I select current line in "OptionsList" table
+	* Select partner, period and currency movement type
+		And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+		And I input "10.02.2024" text in the field named "DateBegin"
+		And I input "29.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem1Value" by "Legal currency, TRY" string
+		And I select from the drop-down list named "SettingsComposerUserSettingsItem2Value" by "Vendor 6" string
+		And I click "Generate" button
+	* Check
+		And "Result" spreadsheet document contains lines:
+			| 'Company'                                      | ''                                                                                                                  | ''         | ''                             | 'Amount'  | ''         | ''          | 'CA'      | ''        | ''        | 'CT'      | ''        | ''        | 'VA'      | ''        | ''        | 'VT'      | ''         | ''          | 'Other'   | ''        | ''        |
+			| 'Partner'                                      | 'Legal name'                                                                                                        | ''         | ''                             | 'Receipt' | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense' | 'Closing' | 'Receipt' | 'Expense'  | 'Closing'   | 'Receipt' | 'Expense' | 'Closing' |
+			| 'Recorder'                                     | 'Agreement'                                                                                                         | 'Currency' | 'Multi currency movement type' | ''        | ''         | ''          | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''         | ''          | ''        | ''        | ''        |
+			| 'Own company 2'                                | ''                                                                                                                  | ''         | ''                             | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        |
+			| 'Vendor 6'                                     | 'Vendor 6'                                                                                                          | ''         | ''                             | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        |
+			| 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'Partner term with vendor (advance payment by document)'                                                            | 'TRY'      | 'Legal currency, TRY'          | ''        | '1 000,00' | '-1 000,00' | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '1 000,00' | '-1 000,00' | ''        | ''        | ''        |
+			| 'Debit note 5 dated 27.03.2024 14:00:00'       | 'Partner term with vendor (advance payment by document)'                                                            | 'TRY'      | 'Legal currency, TRY'          | ''        | '-100,00'  | '-900,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '-100,00'  | '-900,00'   | ''        | ''        | ''        |
+			| 'Credit note 5 dated 29.03.2024 16:32:00'      | 'Partner term with vendor (advance payment by document)'                                                            | 'TRY'      | 'Legal currency, TRY'          | ''        | '80,00'    | '-980,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '80,00'    | '-980,00'   | ''        | ''        | ''        |
+			| 'Total'                                        | ''                                                                                                                  | ''         | ''                             | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | ''        | '980,00'   | '-980,00'   | ''        | ''        | ''        |	
+		And I close all client application windows
 
 Scenario: _52040 check Bank payment movements by the Register  "R5020 Partners balance" (PaymentToVendor, IsAdvance = False)
 		And I close all client application windows
@@ -1879,7 +1939,7 @@ Scenario: _52070 check Sales report to consignor movements by the Register  "R50
 			| ''                                                      | 'Expense'     | '10.03.2023 12:00:00' | '240'       | ''                     | ''                 | '240'                | ''               | ''                  | 'Own company 2' | 'Business unit 2' | 'Consignor 1 (without VAT)' | 'Consignor 1' | 'Partner term Consignor 1' | ''         | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | ''                 |
 			| ''                                                      | 'Expense'     | '10.03.2023 12:00:00' | '240'       | ''                     | ''                 | '240'                | ''               | ''                  | 'Own company 2' | 'Business unit 2' | 'Consignor 1 (without VAT)' | 'Consignor 1' | 'Partner term Consignor 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''                 |
 
-Scenario: _52071 check Debit note movements by the Register  "R5020 Partners balance" (IsVendor, IsAdvance = True)
+Scenario: _52071 check Debit note movements by the Register  "R5020 Partners balance" (IsVendor, without basis document)
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -1903,7 +1963,7 @@ Scenario: _52071 check Debit note movements by the Register  "R5020 Partners bal
 			| ''                                       | 'Expense'     | '24.02.2023 11:03:25' | ''          | ''                     | ''                 | ''                   | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Vendor 1 (1 partner term)' | 'Vendor 1'   | 'Partner term with vendor 1' | ''         | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''                 |		
 		
 		
-Scenario: _52072 check Debit note movements by the Register  "R5020 Partners balance" (IsCustomer, IsAdvance = False)
+Scenario: _52072 check Debit note movements by the Register  "R5020 Partners balance" (IsCustomer, without basis document)
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -1927,7 +1987,7 @@ Scenario: _52072 check Debit note movements by the Register  "R5020 Partners bal
 			| ''                                       | 'Receipt'     | '01.04.2023 14:10:35' | '40'        | '40'                   | ''                 | ''                   | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Customer 1 (3 partner terms)' | 'Client 1'   | 'Partner term with customer (by document + credit limit)' | 'Debit note 2 dated 01.04.2023 14:10:35' | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''                 |
 		
 				
-Scenario: _52073 check Credit note movements by the Register  "R5020 Partners balance" (IsCustomer, IsAdvance = True)
+Scenario: _52073 check Credit note movements by the Register  "R5020 Partners balance" (IsCustomer, without basis document)
 	And I close all client application windows
 	* Select Credit note
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -1951,7 +2011,7 @@ Scenario: _52073 check Credit note movements by the Register  "R5020 Partners ba
 			| ''                                        | 'Receipt'     | '07.05.2023 12:00:01' | ''          | ''                     | ''                 | ''                   | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Customer 1 (3 partner terms)' | 'Client 1'   | 'Partner term with customer (by document + credit limit)' | 'Credit note 2 dated 07.05.2023 12:00:01' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''                 |
 				
 
-Scenario: _52074 check Credit note to consignor movements by the Register  "R5020 Partners balance" (IsVendor, IsAdvance = False)
+Scenario: _52074 check Credit note to consignor movements by the Register  "R5020 Partners balance" (IsVendor, without basis document)
 	And I close all client application windows
 	* Select Credit note
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -1974,7 +2034,94 @@ Scenario: _52074 check Credit note to consignor movements by the Register  "R502
 			| ''                                        | 'Expense'     | '27.03.2024 14:45:40' | '50'        | ''                     | ''                 | '50'                 | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Vendor 5' | 'Vendor 5'   | 'Partner term with vendor (advance payment by document)' | 'Credit note 3 dated 27.03.2024 14:45:40' | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | ''                 |
 			| ''                                        | 'Expense'     | '27.03.2024 14:45:40' | '50'        | ''                     | ''                 | '50'                 | ''               | ''                  | 'Own company 2' | 'Business unit 1' | 'Vendor 5' | 'Vendor 5'   | 'Partner term with vendor (advance payment by document)' | 'Credit note 3 dated 27.03.2024 14:45:40' | 'TRY'      | 'en description is empty'      | 'TRY'                  | ''                 |
 				
+Scenario: _52075 check Credit note to consignor movements by the Register  "R5020 Partners balance" (IsVendor, with basis document)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '5'        |
+	* Check movements by the Register  "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 5 dated 29.03.2024 16:32:00' | ''                    | ''           | ''              | ''                | ''         | ''           | ''                                                       | ''                                             | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'      | ''                    | ''           | ''              | ''                | ''         | ''           | ''                                                       | ''                                             | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'  | 'Legal name' | 'Agreement'                                              | 'Document'                                     | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                        | '29.03.2024 16:32:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '80'     | ''                     | ''                 | '80'                 | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 16:32:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | '80'     | ''                     | ''                 | '80'                 | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 16:32:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '80'     | ''                     | ''                 | '80'                 | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 16:32:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '2,45'   | ''                     | ''                 | '2,45'               | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 16:32:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
 				
+		
+Scenario: _52076 check Credit note to consignor movements by the Register  "R5020 Partners balance" (IsCustomer, with basis document)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '4'        |
+	* Check movements by the Register  "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 4 dated 29.03.2024 15:00:00' | ''                    | ''           | ''              | ''                | ''           | ''           | ''                                                        | ''                                           | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'      | ''                    | ''           | ''              | ''                | ''           | ''           | ''                                                        | ''                                           | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'    | 'Legal name' | 'Agreement'                                               | 'Document'                                   | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                        | '29.03.2024 15:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '-75'    | '-75'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 15:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | '-75'    | '-75'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 15:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-75'    | '-75'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 15:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '-2,29'  | '-2,29'                | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                        | '29.03.2024 15:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		
+				
+		
+Scenario: _52077 check Debit note movements by the Register  "R5020 Partners balance" (IsCustomer, with basis document)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '4'        |
+	* Check movements by the Register  "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 4 dated 27.03.2024 12:00:00' | ''                    | ''           | ''              | ''                | ''           | ''           | ''                                                        | ''                                           | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'     | ''                    | ''           | ''              | ''                | ''           | ''           | ''                                                        | ''                                           | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'    | 'Legal name' | 'Agreement'                                               | 'Document'                                   | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                       | '27.03.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '100'    | '100'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | '100'    | '100'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '100'    | '100'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '3,06'   | '3,06'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 12:00:00' | 'Receipt'    | 'Own company 2' | 'Business unit 1' | 'Customer 7' | 'Customer 7' | 'Partner term with customer (by document + credit limit)' | 'Sales invoice 18 dated 11.02.2024 12:00:00' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		
+Scenario: _52078 check Debit note movements by the Register  "R5020 Partners balance" (IsVendor, with basis document)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'   |
+			| '5'        |
+	* Check movements by the Register  "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 5 dated 27.03.2024 14:00:00' | ''                    | ''           | ''              | ''                | ''         | ''           | ''                                                       | ''                                             | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'     | ''                    | ''           | ''              | ''                | ''         | ''           | ''                                                       | ''                                             | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'       | 'Branch'          | 'Partner'  | 'Legal name' | 'Agreement'                                              | 'Document'                                     | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                       | '27.03.2024 14:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'Legal currency, TRY'          | 'TRY'                  | '-100'   | ''                     | ''                 | '-100'               | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 14:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'Agreement currency, TRY'      | 'TRY'                  | '-100'   | ''                     | ''                 | '-100'               | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 14:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '-100'   | ''                     | ''                 | '-100'               | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 14:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'EUR'      | 'Reporting currency, EUR'      | 'TRY'                  | '-3,06'  | ''                     | ''                 | '-3,06'              | ''               | ''                  | ''                 |
+			| ''                                       | '27.03.2024 14:00:00' | 'Expense'    | 'Own company 2' | 'Business unit 1' | 'Vendor 6' | 'Vendor 6'   | 'Partner term with vendor (advance payment by document)' | 'Purchase invoice 9 dated 10.02.2024 14:00:00' | 'EUR'      | 'Budgeting currency, EUR'      | 'TRY'                  | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+		
+						
 
 Scenario: _52080 post customer advance closing and vendor advance closing
 	And I close all client application windows

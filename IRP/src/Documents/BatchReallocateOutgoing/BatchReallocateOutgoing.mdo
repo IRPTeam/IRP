@@ -22,6 +22,10 @@
     <key>en</key>
     <value>Batch reallocate outgoing</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Batch reallocate outgoings</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

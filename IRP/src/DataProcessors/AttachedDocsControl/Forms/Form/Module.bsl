@@ -173,6 +173,7 @@ Procedure DocumentsOnActivateRow(Item)
 	
 	Items.DocumentsAttachedFiles.RowFilter = New FixedStructure("ID", CurrentData.ID);
 	Preview = "";
+	PDFViewer = New PDFDocument();
 	UpdateAttachedFiles(CurrentData.DocRef);
 	
 EndProcedure
@@ -832,6 +833,11 @@ Procedure AttachOther(Command)
 	
 EndProcedure
 
+// After other attachment input.
+// 
+// Parameters:
+//  Result Result
+//  AdditionalParameters Additional parameters
 &AtClient
 Procedure AfterOtherAttachmentInput(Result, AdditionalParameters) Export
 	
@@ -844,6 +850,12 @@ Procedure AfterOtherAttachmentInput(Result, AdditionalParameters) Export
 	
 EndProcedure
 
+// Write other attachment input.
+// 
+// Parameters:
+//  Structure - Structure:
+//	* Company - CatalogRef.Companies
+//	* Branch - CatalogRef.BusinessUnits
 &AtServerNoContext
 Procedure WriteOtherAttachmentInput(Structure)
 

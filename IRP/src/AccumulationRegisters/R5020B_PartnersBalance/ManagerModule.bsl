@@ -2281,3 +2281,32 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		|";
 EndFunction
+
+Function R5020B_PartnersBalance_Payroll() Export
+	Return 
+		// Other transaction
+		"SELECT
+		|
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Partner,
+		|	SalaryTaxList.LegalName,
+		|	SalaryTaxList.Agreement,
+		|	UNDEFINED AS Document,
+		|	SalaryTaxList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	SalaryTaxList.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	SalaryTaxList.Key
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	SalaryTaxList AS SalaryTaxList
+		|WHERE
+		|	TRUE";
+EndFunction

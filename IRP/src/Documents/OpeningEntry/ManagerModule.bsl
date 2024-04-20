@@ -790,6 +790,7 @@ Function SalaryPayment()
 		   |	SalaryPayment.Currency,
 		   |	SalaryPayment.Employee,
 		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.CalculationType,
 		   |	SalaryPayment.Amount AS Amount,
 		   |	SalaryPayment.Ref.Date AS Period,
 		   |	SalaryPayment.Key
@@ -1837,6 +1838,7 @@ Function R9510B_SalaryPayment()
 		   |	SalaryPayment.Branch,
 		   |	SalaryPayment.Employee,
 		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.CalculationType,
 		   |	SalaryPayment.Currency,
 		   |	SalaryPayment.Amount,
 		   |	SalaryPayment.Key

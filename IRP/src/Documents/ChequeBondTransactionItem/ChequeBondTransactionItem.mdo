@@ -22,6 +22,10 @@
     <key>en</key>
     <value>Cheque bond transaction item</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Cheque bond transaction items</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
@@ -37,11 +41,11 @@
   <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="da8acded-b807-4f2b-a5c4-befb6c5c88c4">

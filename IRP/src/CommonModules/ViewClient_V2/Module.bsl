@@ -3597,7 +3597,8 @@ Procedure OnSetPartnerNotify(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
-		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
+		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "Payroll" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 	

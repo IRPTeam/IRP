@@ -196,7 +196,7 @@ Scenario: _1006 create Bill of materials for product
 		And I close all client application windows
 		
 Scenario: _1010 create document Production planning
-	And In the command interface I select "Manufacturing" "Production planning"
+	And In the command interface I select "Manufacturing" "Production plannings"
 	* Production planning First month
 		And I click the button named "FormCreate"
 		* Filling in header info
@@ -454,7 +454,7 @@ Scenario: _1010 create document Production planning
 
 Scenario: _1011 check Production planning movements
 	* Check movements
-		And In the command interface I select "Manufacturing" "Production planning"
+		And In the command interface I select "Manufacturing" "Production plannings"
 		And I go to line in "List" table
 			| 'Number'                                  |
 			| '$$NumberProductionPlanning01103110$$'    |
@@ -746,7 +746,7 @@ Scenario: _1011 check Production planning movements
 
 Scenario: _1035 create document Production
 	* Semiproduct
-		And In the command interface I select "Manufacturing" "Production"
+		And In the command interface I select "Manufacturing" "Productions"
 		And I click the button named "FormCreate"
 		* Filling in header info
 			And I click Select button of "Company" field

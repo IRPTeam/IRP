@@ -480,7 +480,7 @@ Scenario: Create document ProductionPlanning objects
 		And I click Select button of "Planning period" field
 		And I select current line in "List" table
 		And I click "Post and close" button
-		Then "Production planning" window is opened
+		Then "Production plannings" window is opened
 		And I go to line in "List" table
 			| 'Number'    |
 			| '2'         |
@@ -493,7 +493,7 @@ Scenario: Create document ProductionPlanning objects
 			| 'Second month'    |
 		And I select current line in "List" table
 		And I click "Post and close" button
-		Then "Production planning" window is opened
+		Then "Production plannings" window is opened
 		And I go to line in "List" table
 			| 'Number'    |
 			| '3'         |

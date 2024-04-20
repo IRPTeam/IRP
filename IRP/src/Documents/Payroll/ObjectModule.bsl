@@ -20,6 +20,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
+	
+	For Each Row In ThisObject.SalaryTaxList Do
+		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
 		
 	ThisObject.DocumentAmount = 
 	ThisObject.AccrualList.Total("Amount")

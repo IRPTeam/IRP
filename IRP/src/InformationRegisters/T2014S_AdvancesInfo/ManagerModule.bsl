@@ -125,16 +125,16 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|					then case
 		|						when Doc.IsReceiveTransactionCustomer
 		|						OR Doc.IsReceiveAdvanceCustomer
-		|							then VALUE(AccumulationRecordType.Expense)
-		|						else VALUE(AccumulationRecordType.Receipt)
+		|							then VALUE(Enum.RecordType.Expense)
+		|						else VALUE(Enum.RecordType.Receipt)
 		|					end
 		|				else case
 		|					when Doc.IsReceiveTransactionCustomer
 		|					OR Doc.IsReceiveAdvanceVendor
 		|					OR Doc.IsReceiveTransactionVendor
 		|					OR Doc.IsReceiveAdvanceCustomer
-		|						then VALUE(AccumulationRecordType.Expense)
-		|					else VALUE(AccumulationRecordType.Receipt)
+		|						then VALUE(Enum.RecordType.Expense)
+		|					else VALUE(Enum.RecordType.Receipt)
 		|				end
 		|			end
 		|		else case
@@ -142,14 +142,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|				then case
 		|					when Doc.IsReceiveTransactionVendor
 		|					OR Doc.IsReceiveAdvanceVendor
-		|						then VALUE(AccumulationRecordType.Expense)
-		|					else VALUE(AccumulationRecordType.Receipt)
+		|						then VALUE(Enum.RecordType.Expense)
+		|					else VALUE(Enum.RecordType.Receipt)
 		|				end
 		|			else case
 		|				when Doc.IsReceiveTransactionVendor
 		|				OR Doc.IsReceiveAdvanceVendor
-		|					then VALUE(AccumulationRecordType.Expense)
-		|				else VALUE(AccumulationRecordType.Receipt)
+		|					then VALUE(Enum.RecordType.Expense)
+		|				else VALUE(Enum.RecordType.Receipt)
 		|			end
 		|		end
 		|	end AS RecordType,
@@ -179,14 +179,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|					then case
 		|						when Doc.IsSendTransactionVendor
 		|						OR Doc.IsSendAdvanceCustomer
-		|							then VALUE(AccumulationRecordType.Receipt)
-		|						else VALUE(AccumulationRecordType.Expense)
+		|							then VALUE(Enum.RecordType.Receipt)
+		|						else VALUE(Enum.RecordType.Expense)
 		|					end
 		|				else case
 		|					when Doc.IsSendTransactionVendor
 		|					OR Doc.IsSendAdvanceCustomer
-		|						then VALUE(AccumulationRecordType.Receipt)
-		|					else VALUE(AccumulationRecordType.Expense)
+		|						then VALUE(Enum.RecordType.Receipt)
+		|					else VALUE(Enum.RecordType.Expense)
 		|				end
 		|			end
 		|		else case
@@ -194,14 +194,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|				then case
 		|					when Doc.IsSendTransactionCustomer
 		|					OR Doc.IsSendAdvanceVendor
-		|						then VALUE(AccumulationRecordType.Receipt)
-		|					else VALUE(AccumulationRecordType.Expense)
+		|						then VALUE(Enum.RecordType.Receipt)
+		|					else VALUE(Enum.RecordType.Expense)
 		|				end
 		|			else case
 		|				when Doc.IsSendTransactionCustomer
 		|				OR Doc.IsSendAdvanceVendor
-		|					then VALUE(AccumulationRecordType.Receipt)
-		|				else VALUE(AccumulationRecordType.Expense)
+		|					then VALUE(Enum.RecordType.Receipt)
+		|				else VALUE(Enum.RecordType.Expense)
 		|			end
 		|		end
 		|	end,

@@ -1403,6 +1403,7 @@
   <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
   <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
+  <informationRegisters>InformationRegister.T9016S_AccountsEmployee</informationRegisters>
   <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
   <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
   <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>

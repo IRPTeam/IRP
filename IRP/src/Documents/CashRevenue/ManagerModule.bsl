@@ -328,18 +328,16 @@ Function GetAnalytics_Revenues(Parameters)
 	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
 	                                                       Parameters.ObjectData.Account,
 	                                                       Parameters.RowData.Currency);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+	AccountingAnalytics.Debit = Debit.Account;
 	// Debit - Analytics
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.RevenueType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	

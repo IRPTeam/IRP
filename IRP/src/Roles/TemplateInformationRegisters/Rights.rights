@@ -1249,7 +1249,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.AttachedFiledControl</name>
+		<name>InformationRegister.AttachedFilesControl</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

@@ -16,6 +16,9 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateObjectPictures_AddNewOne" Then
 		CurrentDocStructure = GetCurrentDocInTable();
+		If CurrentDocStructure = Undefined Then
+			Return;
+		EndIf;
 		UpdateAttachedFiles(CurrentDocStructure.Ref);
 		
 		DocsArray = New Array; // DocumentRef
@@ -47,32 +50,6 @@ Function CurrentMaxFileSize()
 EndFunction
 
 &AtClient
-Procedure UploadFileDrag(Item, DragParameters, StandardProcessing)
-	StandardProcessing = False;
-	
-	FileArray = New Array; // Array of FileRef
-	If TypeOf(DragParameters.Value) = Type("Array") Then
-		IncomingArray = DragParameters.Value; // Array of FileRef
-		For Each ArrayItem In IncomingArray Do  
-			FileArray.Add(ArrayItem);
-		EndDo;
-	Else
-		IncomingRef = DragParameters.Value; // FileRef
-		FileArray.Add(IncomingRef);
-	EndIf;
-	
-	CheckStructure = CheckFileMaxSize(FileArray, CurrentMaxFileSize());
-	
-	If CheckStructure.Result Then
-		UploadFileDragWithQuestion(FileArray);
-	Else
-		For Each Error In CheckStructure.Errors Do
-			CommonFunctionsClientServer.ShowUsersMessage(Error);
-		EndDo;
-	EndIf;
-EndProcedure
-
-&AtClient
 Function CheckFileMaxSize(FileArray, MaxSizeMb)
 	
 	StringsArray = New Array; // Array of String
@@ -91,10 +68,7 @@ Function CheckFileMaxSize(FileArray, MaxSizeMb)
 		CurrentSizeMb = Round(CurrentSize/(byteSize * byteSize), 2);
 		If CurrentSizeMb > MaxSizeMb Then
 			FileName = FileRef.Name;
-			ErrorText = StrTemplate("File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.",
-			FileName,
-			CurrentSizeMb,
-			MaxSizeMb);
+			ErrorText = StrTemplate(R().InfoMessage_AttachFile_MaxFileSize, FileName, CurrentSizeMb, MaxSizeMb);
 			
 			Structure.Result = False;
 			Structure.Errors.Add(ErrorText);
@@ -106,57 +80,17 @@ Function CheckFileMaxSize(FileArray, MaxSizeMb)
 EndFunction
 
 &AtClient
-Async Procedure UploadFileDragWithQuestion(FileArray)
-	
-	QueryText = GetQueryTextForCurrentUpload();
-	If Await DoQueryBoxAsync(QueryText, QuestionDialogMode.OKCancel) = DialogReturnCode.OK Then
-		
-		CurrentDocStructure = GetCurrentDocInTable();
-		
-		UploadFiles(FileArray, CurrentDocStructure);
+Procedure AddNewDocument(Command)
+	If Items.DocumentsAttachedFiles.CurrentData = Undefined Then
+		Return;
 	EndIf;
 	
-EndProcedure
-
-&AtClient
-Function GetQueryTextForCurrentUpload()
-	
-	CurrentDocumentsData = Items.Documents.CurrentData;
-	CurrentDoc = CurrentDocumentsData.DocRef;
-	
-	CurrentDocumentsAttachedFilesData = Items.DocumentsAttachedFiles.CurrentData;
-	CurrentFormName = CurrentDocumentsAttachedFilesData.FilePresention;
-	
-	Text = "Attach file for %1" + Chars.LF + "as %2";
-	Return StrTemplate(Text, CurrentDoc, CurrentFormName);
-	
-EndFunction
-
-&AtClient
-Procedure UploadFileClick(Item, StandardProcessing)
-	
-	StandardProcessing = False;
-	
-	UploadFileWithQuestion();
-	
-EndProcedure
-
-&AtClient
-Async Procedure UploadFileWithQuestion()
-	
-	QueryText = GetQueryTextForCurrentUpload();
-	If Await DoQueryBoxAsync(QueryText, QuestionDialogMode.OKCancel) = DialogReturnCode.OK Then
-	
-		CurrentDocStructure = GetCurrentDocInTable();
-		
-		Upload(CurrentDocStructure);
+	CurrentDocStructure = GetCurrentDocInTable();
+	If CurrentDocStructure = Undefined Then
+		Return;
 	EndIf;
 	
-EndProcedure
-
-&AtClient
-Procedure UploadFileDragCheck(Item, DragParameters, StandardProcessing)
-	StandardProcessing = False;
+	Upload(CurrentDocStructure);
 EndProcedure
 
 #EndRegion
@@ -166,16 +100,21 @@ EndProcedure
 &AtClient
 Procedure DocumentsOnActivateRow(Item)
 
-	CurrentData = Items.Documents.CurrentData;
+	CurrentData = Items.DocumentList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	
+	If CurrentData.DocRef = LastDocumentRef Then
+		Return;
+	EndIf;
+	
+	LastDocumentRef = CurrentData.DocRef;
 	
 	Items.DocumentsAttachedFiles.RowFilter = New FixedStructure("ID", CurrentData.ID);
 	Preview = "";
 	PDFViewer = New PDFDocument();
 	UpdateAttachedFiles(CurrentData.DocRef);
-	
 EndProcedure
 
 &AtClient
@@ -190,6 +129,16 @@ Procedure CurrentFilesTableOnActivateRow(Item)
 	Else
 		ShowPreview(CurrentData.File);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure DocumentsAttachedFilesOnActivateRow(Item)
+	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
+	If CurrentData = Undefined Then
+		Items.AddNewDocument.Title = R().InfoMessage_AttachFile_NonSelectDocType;
+		Return;
+	EndIf;
+	Items.AddNewDocument.Title = StrTemplate(R().InfoMessage_AttachFile_SelectDocType, String(CurrentData.FilePresention));
 EndProcedure
 
 #EndRegion
@@ -230,8 +179,8 @@ EndProcedure
 &AtServer
 Procedure UpdateDocsDataInTables(DocsArray)
 	
-	Query = PrepareQueryStructure(DocsArray).Query;
-	FillDocumentsTables(Query, , True);
+	QueryStructure = PrepareQueryStructure(DocsArray);
+	FillDocumentsTables(QueryStructure, True);
 	
 EndProcedure
 
@@ -328,11 +277,11 @@ Function GetDocPrefix(DocRef, NamingFormat)
 	EndIf;
 	
 	Structure = New Structure;
-	Structure.Insert("Shop", "Branch.Code");
+	Structure.Insert("Store", "Branch.Code");
 	Structure.Insert("DocDate", "Date");
 	Structure.Insert("DocNumber", "Number");
 	
-	AttributesArray = New Array;
+	AttributesArray = New Array; // Array Of String
 
 	For Each KeyValue In Structure Do
 		If StrFind(NewNamingFormat, KeyValue.Key) > 0 Then
@@ -350,9 +299,9 @@ Function GetDocPrefix(DocRef, NamingFormat)
 	For Each Attribute In AttributesArray Do
 		SearchSubstring = "%" + Attribute;
 		If StrFind(Attribute, ".") > 0 Then
-			Value = Eval("AttributesStructure."+Attribute);
+			Value = Eval("AttributesStructure." + Attribute);
 		Else
-			Value = AttributesStructure[Attribute];
+			Value = AttributesStructure[Attribute]; // String
 		EndIf;
 		If IsTypeOf(Value, "Date") Then
 			ReplaceSubsting = Format(Value, "DF=yyyyMMdd");
@@ -371,28 +320,38 @@ Function IsTypeOf(SourceValue, Type)
 	Return TypeOf(SourceValue) = Type(Type);
 EndFunction
 
+// Get current doc in table.
+// 
+// Returns:
+//  Undefined, Structure - Get current doc in table:
+// * Object - Structure - 
+// * UUID - UUID - 
+// * Items - FormAllItems - 
+// * Ref - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.DocRef
+// * DocMetaName - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.DocMetaName
+// * Branch - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.Branch 
+// * Company - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.Company
+// * Storage - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.FileStorageVolume 
+// * FilePrefix - String - 
+// * PrintFormName - String -
+// * MaxSize - Number -
 &AtClient
 Function GetCurrentDocInTable()
+	CurrentData = Items.DocumentList.CurrentData; // 
+	If CurrentData = Undefined Then
+		Return Undefined;
+	EndIf;
 	
 	Structure = New Structure;
 	Structure.Insert("Object", New Structure);
 	Structure.Insert("UUID", ThisObject.UUID);
 	Structure.Insert("Items", ThisObject.Items);
 		
-	DocRef = Undefined;
-	CurrentData = Items.Documents.CurrentData;
-	If CurrentData <> Undefined Then
-		DocRef = CurrentData.DocRef;
-	EndIf;
-	
-	FilePrefix = "";
 	CurrentDataAttachedDocs = Items.DocumentsAttachedFiles.CurrentData;
-	If CurrentDataAttachedDocs <> Undefined Then
-		FilePrefix = GetDocPrefix(DocRef, CurrentDataAttachedDocs.NamingFormat);
-	EndIf;
+	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataAttachedDocs.NamingFormat);
 	
-	Structure.Object.Insert("Ref", DocRef); 
-	Structure.Insert("Ref", DocRef);
+	Structure.Object.Insert("Ref", CurrentData.DocRef); 
+	Structure.Insert("Ref", CurrentData.DocRef);
 	Structure.Insert("DocMetaName", CurrentData.DocMetaName);
 	Structure.Insert("Branch", CurrentData.Branch);
 	Structure.Insert("Company", CurrentData.Company);
@@ -405,6 +364,12 @@ Function GetCurrentDocInTable()
 	
 EndFunction
 
+// Get array meta docs to control.
+// 
+// Returns:
+//  Array of Structure:
+//  * DocMetaName - String -
+//  * FileStorageVolume - CatalogRef.FileStorageVolumes -
 &AtServer
 Function GetArrayMetaDocsToControl()
 	
@@ -425,7 +390,9 @@ Function GetArrayMetaDocsToControl()
 	SelectionDetailRecords = QueryResult.Select();
 	While SelectionDetailRecords.Next() Do
 		Structure = New Structure;
+		//@skip-check property-return-type
 		Structure.Insert("DocMetaName", SelectionDetailRecords.Name);
+		//@skip-check property-return-type
 		Structure.Insert("FileStorageVolume", SelectionDetailRecords.FileStorageVolume);
 		ArrayDocsNames.Add(Structure);
 	EndDo;
@@ -441,31 +408,35 @@ Function GetAllDocumentsTempTable(DocsNamesArray, DocsArray = Undefined)
 	Query.SetParameter("StartDate", Object.Period.StartDate);
 	Query.SetParameter("EndDate", Object.Period.EndDate);
 	Query.SetParameter("OnlyPosted", True);
-	Query.SetParameter("CompanyArray", Company.UnloadValues());
+	Query.SetParameter("CompanyArray", Company);
 	Query.SetParameter("BranchArray", Branch.UnloadValues());
 	Query.SetParameter("DocsArray", DocsArray);
 
 	Template = "SELECT Doc.Ref, Doc.Date, Doc.Posted, Doc.Author, Doc.Branch, Doc.Number, Doc.Company, Doc.DeletionMark, ""%1"" %2, VALUETYPE(Doc.Ref) %3 FROM Document.%4 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate %5 %6 %7";
 	
-	Array = New Array;
+	Array = New Array; // Array Of String
 	For Each Doc In DocsNamesArray Do
 		Array.Add(StrTemplate(
-		Template,
-		Doc.DocMetaName,
-		?(Array.Count(), "", "AS DocMetaName"),
-		?(Array.Count(), "", "AS DocumentType"), 
-		Doc.DocMetaName,
-		?(DocsArray = Undefined, "", "AND Doc.Ref IN (&DocsArray)"),
-		?(Company.Count() > 0, "AND Doc.Company IN (&CompanyArray)", ""),
-		?(Branch.Count() > 0, "AND Doc.Branch IN (&BranchArray)", "")
-		));
+				Template,
+				Doc.DocMetaName,
+				?(Array.Count() > 0, "", "AS DocMetaName"),
+				?(Array.Count() > 0, "", "AS DocumentType"), 
+				Doc.DocMetaName,
+				?(DocsArray = Undefined, "", "AND Doc.Ref IN (&DocsArray)"),
+				?(Not Company.isEmpty(), "AND Doc.Company IN (&CompanyArray)", ""),
+				?(Branch.Count() > 0, "AND Doc.Branch IN (&BranchArray)", "")
+			)
+		);
 	EndDo;
 
 	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF);
 	
-	Query.Text = QueryTxt;
+	AllDocumentsTempTable = New ValueTable();
+	If Not IsBlankString(QueryTxt) Then
+		Query.Text = QueryTxt;
+		AllDocumentsTempTable = Query.Execute().Unload();
+	EndIf;
 	
-	AllDocumentsTempTable = Query.Execute().Unload();
 	Return AllDocumentsTempTable;
 
 EndFunction
@@ -572,7 +543,7 @@ Function GetQueryText()
 	|	AttachedFiledControl.Comment
 	|FROM
 	|	TT_AllDocumentsAndRequiredAttacments AS TT_AllDocumentsAndRequiredAttacments
-	|		INNER JOIN InformationRegister.AttachedFiledControl AS AttachedFiledControl
+	|		INNER JOIN InformationRegister.AttachedFilesControl AS AttachedFiledControl
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AttachedFiledControl.Document
 	|TOTALS
 	|	MAX(DocDate),
@@ -601,31 +572,32 @@ Procedure FillDocumentsToControl()
 	
 	Object.Documents.Clear();
 	Object.DocumentsAttachedFiles.Clear();
+	CurrentFilesTable.Clear();
 	
 	QueryStructure = PrepareQueryStructure();
-	Query = QueryStructure.Query;
-	DocsNamesAndStorageStructure = QueryStructure.DocsNamesAndStorageStructure;
 	
-	FillDocumentsTables(Query, DocsNamesAndStorageStructure);
+	FillDocumentsTables(QueryStructure);
+	
+	If Items.DocumentList.CurrentRow = Undefined Then
+		If Object.Documents.Count() > 0 Then
+			Items.DocumentList.CurrentRow = Object.Documents[0].GetID();
+		EndIf;
+	EndIf;
 	
 EndProcedure
 
 &AtServer
 Function PrepareQueryStructure(DocsArray = Undefined)
 	
-	DocsToControl = GetArrayMetaDocsToControl(); //Array
+	DocsToControl = GetArrayMetaDocsToControl();
 	AllDocumentsTempTable = GetAllDocumentsTempTable(DocsToControl, DocsArray);
 	DocsNamesAndStorageStructure = New Structure;
 	For Each Doc In DocsToControl Do
 		DocsNamesAndStorageStructure.Insert(Doc.DocMetaName, Doc.FileStorageVolume);
 	EndDo;
 	
-	Query = New Query();
-	Query.Text = GetQueryText();
-	Query.SetParameter("AllDocumentsTempTable", AllDocumentsTempTable);
-	
 	Structure = New Structure;
-	Structure.Insert("Query", Query);
+	Structure.Insert("AllDocumentsTempTable", AllDocumentsTempTable);
 	Structure.Insert("DocsNamesAndStorageStructure", DocsNamesAndStorageStructure);
 	
 	Return Structure;
@@ -633,7 +605,15 @@ Function PrepareQueryStructure(DocsArray = Undefined)
 EndFunction
 
 &AtServer
-Procedure FillDocumentsTables(Query, DocsNamesAndStorageStructure = Undefined, IsUpdate = False)
+Procedure FillDocumentsTables(QueryStructure, IsUpdate = False)
+	
+	If QueryStructure.AllDocumentsTempTable.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	Query = New Query();
+	Query.Text = GetQueryText();
+	Query.SetParameter("AllDocumentsTempTable", QueryStructure.AllDocumentsTempTable);
 	
 	QueryResult = Query.Execute();
 	SelectionDoc = QueryResult.Select(QueryResultIteration.ByGroups, "DocRef");
@@ -642,7 +622,7 @@ Procedure FillDocumentsTables(Query, DocsNamesAndStorageStructure = Undefined, I
 		If Not IsUpdate Then
 			ParentRow = Object.Documents.Add();
 			ParentRow.ID = New UUID;
-			ParentRow.FileStorageVolume = DocsNamesAndStorageStructure[SelectionDoc.DocMetaName];
+			ParentRow.FileStorageVolume = QueryStructure.DocsNamesAndStorageStructure[SelectionDoc.DocMetaName];
 		Else
 			SearchArray = Object.Documents.FindRows(New Structure("DocRef", SelectionDoc.DocRef));
 			ParentRow = SearchArray[0];
@@ -699,8 +679,7 @@ Procedure UpdateAttachedFiles(DocRef)
 	
 	For Each Structure In FilesArray Do
 		NewRow = CurrentFilesTable.Add();
-		NewRow.File = Structure.FileRef;
-		NewRow.Comment = "Click to enlarge!";
+		NewRow.File = Structure.FileRef;		
 	EndDo;
 
 	Query = New Query;
@@ -709,7 +688,7 @@ Procedure UpdateAttachedFiles(DocRef)
 		"SELECT
 		|	AttachedFiledControl.Comment AS Comment
 		|FROM
-		|	InformationRegister.AttachedFiledControl AS AttachedFiledControl
+		|	InformationRegister.AttachedFilesControl AS AttachedFiledControl
 		|WHERE
 		|	AttachedFiledControl.Document = &Document";
 	
@@ -717,20 +696,16 @@ Procedure UpdateAttachedFiles(DocRef)
 	SelectionDetailRecords = QueryResult.Select();
 	
 	While SelectionDetailRecords.Next() Do
-		
 		NewRow = CurrentFilesTable.Add();
 		NewRow.Comment = SelectionDetailRecords.Comment;
-		
 	EndDo;
-	
-	
 EndProcedure
 
 &AtClıent
 Function GetSelectedDocs()
 	
 	DocsArray = New Array; // Array of DocumentRef
-	For Each Row In Items.Documents.SelectedRows Do
+	For Each Row In Items.DocumentList.SelectedRows Do
 		DocsArray.Add(Object.Documents.FindByID(Row).DocRef);
 	EndDo;
 	Return DocsArray;
@@ -778,7 +753,7 @@ Procedure DocumentsAttachedFilesSelection(Item, SelectedRow, Field, StandardProc
 	Structure.Insert("FileRef", FileTemplate);
 	Structure.Insert("Title", Item.CurrentData.FilePresention);
 	Structure.Insert("Description", Item.CurrentData.FileTooltip);
-	OpenForm("DataProcessor.AttachedDocsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
 
@@ -811,16 +786,22 @@ EndFunction
 &AtClient
 Procedure ShowSettings(Command)
 	
-	OpenForm("Catalog.AttachedDocumentSettings.ListForm",,,,,,,FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("Catalog.AttachedDocumentSettings.ListForm", , , , , , , FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
 
 &AtClient
 Procedure AttachOther(Command)
+	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 
-	Message = "Please enter link or any other description";
-	
 	CurrentDocStructure = GetCurrentDocInTable();
+	
+	If CurrentDocStructure = Undefined Then
+		Return;
+	EndIf;
 	
 	Structure = New Structure;
 	Structure.Insert("Company", CurrentDocStructure.Company);
@@ -829,15 +810,10 @@ Procedure AttachOther(Command)
 	Structure.Insert("Document", CurrentDocStructure.Ref);
 	
 	NotifyDescription = New NotifyDescription("AfterOtherAttachmentInput", ThisObject, Structure);
-	ShowInputString(NotifyDescription, "", Message);
+	ShowInputString(NotifyDescription, "", R().InfoMessage_037, , True);
 	
 EndProcedure
 
-// After other attachment input.
-// 
-// Parameters:
-//  Result Result
-//  AdditionalParameters Additional parameters
 &AtClient
 Procedure AfterOtherAttachmentInput(Result, AdditionalParameters) Export
 	
@@ -859,13 +835,13 @@ EndProcedure
 &AtServerNoContext
 Procedure WriteOtherAttachmentInput(Structure)
 
-	RecordManager = InformationRegisters.AttachedFiledControl.CreateRecordManager();
+	RecordManager = InformationRegisters.AttachedFilesControl.CreateRecordManager();
 	RecordManager.Company = Structure.Company;
 	RecordManager.Branch = Structure.Branch;
 	RecordManager.DocumentType = Structure.DocumentType;
 	RecordManager.Document = Structure.Document;
 	RecordManager.RecordID = New UUID;
-	RecordManager.Comment= Structure.Comment;
+	RecordManager.Comment = Structure.Comment;
 	RecordManager.Write();
 	
 EndProcedure
@@ -889,7 +865,7 @@ Procedure CurrentFilesTableSelection(Item, SelectedRow, Field, StandardProcessin
 	Structure.Insert("Title", StrTemplate("%1", FileRef));
 	Structure.Insert("Description", "");
 	Structure.Insert("IsPdf", IsPDF(FileRef));
-	OpenForm("DataProcessor.AttachedDocsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
 
@@ -904,11 +880,9 @@ EndProcedure
 Procedure SetVisibleForCheckMode(Val IsCheckMode)
 	
 	Items.DocumentsGroupLockUnlock.Visible = IsCheckMode;
-	Items.DecorationFileTemplate.Visible = Not IsCheckMode;
 	Items.DocumentsAttachedFiles.Visible = Not IsCheckMode;
 	Items.GroupAttachButton.Visible = Not IsCheckMode;
 	Items.ShowSettings.Visible = IsCheckMode;
-
 	
 EndProcedure
 
@@ -938,9 +912,9 @@ Procedure ShowOnlyUnlocked(Command)
 	Items.DocumentsShowOnlyUnlocked.Check = Not Items.DocumentsShowOnlyUnlocked.Check;
 	
 	If Items.DocumentsShowOnlyUnlocked.Check Then
-		Items.Documents.RowFilter = New FixedStructure("IsAuditLock", -1);
+		Items.DocumentList.RowFilter = New FixedStructure("IsAuditLock", -1);
 	Else
-		Items.Documents.RowFilter = Undefined;
+		Items.DocumentList.RowFilter = Undefined;
 	EndIf;
 	
 EndProcedure

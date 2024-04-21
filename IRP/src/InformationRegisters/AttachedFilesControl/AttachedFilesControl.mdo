@@ -9,10 +9,10 @@
     <recordType typeId="8edd7108-063e-4805-b3ce-38947bc7f60a" valueTypeId="fa95544c-e32b-4707-a124-68479a432c7c"/>
     <recordManagerType typeId="32a6d6c4-7eff-46f7-9862-dc5f746640e4" valueTypeId="926ea232-13ae-45ea-81a6-58555aa96820"/>
   </producedTypes>
-  <name>AttachedFiledControl</name>
+  <name>AttachedFilesControl</name>
   <synonym>
     <key>en</key>
-    <value>Attached filed control</value>
+    <value>Attached files control</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

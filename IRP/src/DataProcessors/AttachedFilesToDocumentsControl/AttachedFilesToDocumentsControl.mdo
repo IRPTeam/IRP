@@ -4,13 +4,13 @@
     <objectType typeId="0bb67b2c-a739-4abc-aed2-16f46fcfdbd0" valueTypeId="158714ba-764c-4411-843f-2a0275e0b49f"/>
     <managerType typeId="ef9a9199-738b-4527-8e3a-6eab5460752f" valueTypeId="346febd0-e0c3-4408-91bb-38a5e6ba2c47"/>
   </producedTypes>
-  <name>AttachedDocsControl</name>
+  <name>AttachedFilesToDocumentsControl</name>
   <synonym>
     <key>en</key>
-    <value>Attached docs control</value>
+    <value>Attached files to documents control</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.AttachedDocsControl.Form.Form</defaultForm>
+  <defaultForm>DataProcessor.AttachedFilesToDocumentsControl.Form.Form</defaultForm>
   <attributes uuid="f3102003-a4fb-494a-bbe5-7569f482c9d3">
     <name>Period</name>
     <synonym>
@@ -221,25 +221,6 @@
       <key>en</key>
       <value>Documents attached files</value>
     </synonym>
-    <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
-      <name>FilePresention</name>
-      <synonym>
-        <key>en</key>
-        <value>File presention</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-        <stringQualifiers>
-          <length>20</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillValue xsi:type="core:StringValue">
-        <value></value>
-      </fillValue>
-    </attributes>
     <attributes uuid="2f654665-5ac5-4ca8-bd31-d1250ff5d7dd">
       <name>FileTooltips</name>
       <synonym>
@@ -264,6 +245,19 @@
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
+      <name>FilePresention</name>
+      <synonym>
+        <key>en</key>
+        <value>File presention</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

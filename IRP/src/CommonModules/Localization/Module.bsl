@@ -1186,7 +1186,13 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en = 'Attach file for ""%1"" as ""%2""'", Lang));
+	Strings.Insert("InfoMessage_037", NStr("en = 'Add link or any add any description'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en = '⬆️ Select document type ⬆️'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en = 'Click to add document'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en = 'File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.'", Lang) + Chars.LF + "%1");
 	
+	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
 	Strings.Insert("InfoMessage_PaymentReturn", NStr("en = 'Payment Return'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));

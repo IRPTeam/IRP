@@ -272,7 +272,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DataProcessorObject.AttachedDocsControl</types>
+      <types>DataProcessorObject.AttachedFilesToDocumentsControl</types>
     </valueType>
     <view>
       <common>true</common>

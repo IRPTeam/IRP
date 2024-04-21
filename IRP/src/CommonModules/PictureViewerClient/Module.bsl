@@ -91,10 +91,10 @@ Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	If PictureViewerServer.isImage(File.FileRef.Extension) Then
 		PictureScaleSize = 200;
 		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
-		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	Else
 		FileInfo = PictureViewerClientServer.FileInfo();
-		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile();
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile(Volume);
 	EndIf;
 
 	FileID = String(New UUID());
@@ -109,26 +109,25 @@ Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
+	
+	If TypeOf(AdditionalParameters) = Type("Structure") Then
+		
+		If AdditionalParameters.Property("FilePrefix") Then
+			FilePrefix = AdditionalParameters.FilePrefix;
+			FileID = StrTemplate("%1__%2", FilePrefix, FileID);
+		EndIf;
+		
+		If AdditionalParameters.Property("PrintFormName") Then
+			FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
+		EndIf;
+	EndIf;
+	
 	Parameters = New Structure();
 	Parameters.Insert("ConnectionSettings", ConnectionSettings);
 	Parameters.Insert("RequestBody", RequestBody);
 	Parameters.Insert("FileID", FileID);
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
 		FileName = FileID;
-		FilePrefix = "";
-		If TypeOf(AdditionalParameters) = Type("Structure") Then
-			
-			If AdditionalParameters.Property("FilePrefix") Then
-				FilePrefix = AdditionalParameters.FilePrefix;
-				FileName = StrTemplate("%1__%2", FilePrefix, FileName);
-				FileID = FileName;
-			EndIf;
-			
-			If AdditionalParameters.Property("PrintFormName") Then
-				FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
-			EndIf;
-		EndIf;
-		
 		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName + "."
 			+ FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;

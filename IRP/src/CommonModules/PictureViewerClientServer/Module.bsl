@@ -14,6 +14,7 @@
 // * MD5 - String -
 // * Ref - CatalogRef.Files -
 // * Preview - Undefined, BinaryData -
+// * PrintFormName - String -
 Function FileInfo() Export
 	FileInfo = New Structure();
 	FileInfo.Insert("Success", False);
@@ -27,6 +28,8 @@ Function FileInfo() Export
 	FileInfo.Insert("MD5", "");
 	FileInfo.Insert("Ref", PredefinedValue("Catalog.Files.EmptyRef"));
 	FileInfo.Insert("Preview", Undefined);
+	FileInfo.Insert("PrintFormName", "");
+	
 	Return FileInfo;
 EndFunction
 
@@ -39,6 +42,7 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	Object.SizeBytes = FileInfo.Size;
 	Object.Extension = FileInfo.Extension;
 	Object.MD5 = FileInfo.MD5;
+	Object.PrintFormName = FileInfo.PrintFormName;
 EndProcedure
 
 Function AllPictureExtensions(AddInfo = Undefined) Export

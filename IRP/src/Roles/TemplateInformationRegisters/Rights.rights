@@ -4,6 +4,20 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
+		<name>InformationRegister.T9015S_AccountsFixedAsset</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.DocumentFiscalStatus.Resource.Status</name>
 		<right>
 			<name>Edit</name>
@@ -80,10 +94,6 @@
 	<object>
 		<name>InformationRegister.IntegrationInfo.Dimension.IntegrationSettings</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -151,20 +161,12 @@
 	<object>
 		<name>InformationRegister.JobQueue.Resource.DifficultLevel</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Result</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -187,13 +189,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.IntegrationInfo.StandardAttribute.Active</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -202,10 +204,6 @@
 	<object>
 		<name>InformationRegister.IntegrationInfo.StandardAttribute.LineNumber</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -213,20 +211,12 @@
 	<object>
 		<name>InformationRegister.IntegrationInfo.StandardAttribute.Recorder</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.IntegrationInfo.StandardAttribute.Period</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -386,10 +376,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Log</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -590,10 +576,6 @@
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Finish</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -614,10 +596,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Parameters</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -831,10 +809,6 @@
 	<object>
 		<name>InformationRegister.JobQueue.Dimension.Job</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -859,10 +833,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Status</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -917,13 +887,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.StandardAttribute.Active</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -932,20 +902,12 @@
 	<object>
 		<name>InformationRegister.JobQueue.StandardAttribute.LineNumber</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.StandardAttribute.Recorder</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -954,20 +916,12 @@
 	<object>
 		<name>InformationRegister.JobQueue.StandardAttribute.Period</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Description</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1000,10 +954,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.UserMessages</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1040,10 +990,6 @@
 	<object>
 		<name>InformationRegister.IntegrationInfo.Resource.SecondValue</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -1061,10 +1007,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.IntegrationInfo.Dimension.isProduct</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1151,10 +1093,6 @@
 	<object>
 		<name>InformationRegister.JobQueue.Resource.JobID</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -1175,10 +1113,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.JobQueue.Resource.Start</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1315,6 +1249,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.AttachedFilesControl</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9012S_AccountsPartner</name>
 		<right>
 			<name>Read</name>
@@ -1385,10 +1330,6 @@
 	<object>
 		<name>InformationRegister.IntegrationInfo.Resource.Value</name>
 		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
-		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
@@ -1445,10 +1386,6 @@
 	</object>
 	<object>
 		<name>InformationRegister.IntegrationInfo.Dimension.Key</name>
-		<right>
-			<name>View</name>
-			<value>false</value>
-		</right>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

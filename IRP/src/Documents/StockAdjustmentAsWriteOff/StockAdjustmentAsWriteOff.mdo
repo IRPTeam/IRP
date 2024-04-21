@@ -50,6 +50,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Stock adjustment as write-off</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Stock adjustments as write-off</value>

@@ -245,19 +245,19 @@ Scenario: _001 test data
 		And Delay "5"
 	* Posting Work order
 		Given I open hyperlink "e1cib/list/Document.WorkOrder"
-		Then "Work order" window is opened
+		Then "Work orders" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	* Posting Work sheet
 		Given I open hyperlink "e1cib/list/Document.WorkSheet"
-		Then "Work sheet" window is opened
+		Then "Work sheets" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
 	* Posting AdditionalCostAllocation
 		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
-		Then "Additional cost allocation" window is opened
+		Then "Additional cost allocations" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"
@@ -272,7 +272,7 @@ Scenario: _0011 check preparation
 Scenario: _002 creating Calculation movement costs
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	* Calculation movement costs for Main company (01/08-15/08)
-		Then "Calculation movement costs" window is opened
+		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table
@@ -813,7 +813,7 @@ Scenario: _006 changing Sales invoice and checking the mechanism for aligning th
 		And in the table "List" I click the button named "ListContextMenuPost"
 	* Calculation movement costs for Main company (19/08-20/08)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		Then "Calculation movement costs" window is opened
+		Then "Calculations movement costs" window is opened
 		And I click the button named "FormCreate"
 		And I click Select button of "Company" field
 		And I go to line in "List" table

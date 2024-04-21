@@ -79,7 +79,7 @@ Async Procedure Upload(Form, Object) Export
 	AddFile(FileRef, Undefined, StrParam);
 EndProcedure
 
-Function UploadPicture(File, Volume) Export
+Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
 	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
@@ -91,10 +91,10 @@ Function UploadPicture(File, Volume) Export
 	If PictureViewerServer.isImage(File.FileRef.Extension) Then
 		PictureScaleSize = 200;
 		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
-		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	Else
 		FileInfo = PictureViewerClientServer.FileInfo();
-		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile();
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile(Volume);
 	EndIf;
 
 	FileID = String(New UUID());
@@ -109,12 +109,26 @@ Function UploadPicture(File, Volume) Export
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
+	
+	If TypeOf(AdditionalParameters) = Type("Structure") Then
+		
+		If AdditionalParameters.Property("FilePrefix") Then
+			FilePrefix = AdditionalParameters.FilePrefix;
+			FileID = StrTemplate("%1__%2", FilePrefix, FileID);
+		EndIf;
+		
+		If AdditionalParameters.Property("PrintFormName") Then
+			FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
+		EndIf;
+	EndIf;
+	
 	Parameters = New Structure();
 	Parameters.Insert("ConnectionSettings", ConnectionSettings);
 	Parameters.Insert("RequestBody", RequestBody);
 	Parameters.Insert("FileID", FileID);
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "."
+		FileName = FileID;
+		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName + "."
 			+ FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;
 		FileInfo.URI = FileID + "." + FileInfo.Extension;
@@ -332,7 +346,7 @@ Procedure AddFile(File, Val Volume, AdditionalParameters) Export
 		EndIf;
 	EndIf;
 
-	FileInfo = UploadPicture(File, Volume);
+	FileInfo = UploadPicture(File, Volume, AdditionalParameters);
 	If FileInfo.Success Then
 		PictureViewerServer.CreateAndLinkFileToObject(Volume, FileInfo, Ref);
 		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);

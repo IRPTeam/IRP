@@ -54,6 +54,10 @@
     <key>en</key>
     <value>Work sheet</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Work sheets</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

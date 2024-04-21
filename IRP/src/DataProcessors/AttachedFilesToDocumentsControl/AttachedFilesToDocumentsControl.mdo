@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22748028-5294-4832-810d-7538c38dd67b">
+  <producedTypes>
+    <objectType typeId="0bb67b2c-a739-4abc-aed2-16f46fcfdbd0" valueTypeId="158714ba-764c-4411-843f-2a0275e0b49f"/>
+    <managerType typeId="ef9a9199-738b-4527-8e3a-6eab5460752f" valueTypeId="346febd0-e0c3-4408-91bb-38a5e6ba2c47"/>
+  </producedTypes>
+  <name>AttachedFilesToDocumentsControl</name>
+  <synonym>
+    <key>en</key>
+    <value>Attached files to documents control</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.AttachedFilesToDocumentsControl.Form.Form</defaultForm>
+  <attributes uuid="f3102003-a4fb-494a-bbe5-7569f482c9d3">
+    <name>Period</name>
+    <synonym>
+      <key>en</key>
+      <value>Period</value>
+    </synonym>
+    <type>
+      <types>StandardPeriod</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <tabularSections uuid="46d1aa80-ca5b-4da6-bd45-4c09a9f32004">
+    <producedTypes>
+      <objectType typeId="7b962a81-402a-4813-9510-83f984d958a0" valueTypeId="bea6a1b9-2e5e-4306-8f5b-24662bbe4d09"/>
+      <rowType typeId="e9ffdc61-c11e-4698-b826-d9544d3e1d31" valueTypeId="17cafac4-7c24-42fa-9a77-7755df051b49"/>
+    </producedTypes>
+    <name>Documents</name>
+    <synonym>
+      <key>en</key>
+      <value>Documents</value>
+    </synonym>
+    <attributes uuid="51e9aeee-a269-4f0d-956f-c07135d0d94a">
+      <name>DocRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Doc ref</value>
+      </synonym>
+      <type>
+        <types>DocumentRef</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="41b27bf0-0792-498f-9276-0ffe0a0b270a">
+      <name>Author</name>
+      <synonym>
+        <key>en</key>
+        <value>Author</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="e94255f6-6099-4404-b8c1-c9953800e2fa">
+      <name>Branch</name>
+      <synonym>
+        <key>en</key>
+        <value>Branch</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.BusinessUnits</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>DontUse</createOnInput>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    </attributes>
+    <attributes uuid="dc9eee78-c0db-40f9-844c-e928ab26302f">
+      <name>DocDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Doc date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="df81b1ea-d841-44ce-b2e3-329da163721f">
+      <name>DocNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Doc number</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="8768ad77-aa18-45de-a590-378e8abf8472">
+      <name>ID</name>
+      <synonym>
+        <key>en</key>
+        <value>ID</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="cbe9e7fa-0575-449a-a02a-2d497c0ab46d">
+      <name>DocMetaName</name>
+      <synonym>
+        <key>en</key>
+        <value>Doc meta name</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="19edf0d7-efb2-4262-a9c6-3373e10ba124">
+      <name>FileStorageVolume</name>
+      <synonym>
+        <key>en</key>
+        <value>File storage volume</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.FileStorageVolumes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="d8836df0-8db6-4207-83fa-a528b61b9c7d">
+      <name>FillChecking</name>
+      <synonym>
+        <key>en</key>
+        <value>Fill checking</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>1</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="eac13bf4-d794-4eaa-872a-9e10142a9fe3">
+      <name>FillCheckingStatus</name>
+      <synonym>
+        <key>en</key>
+        <value>Fill checking status</value>
+      </synonym>
+      <type>
+        <types>EnumRef.DocAttachmentStatus</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="437c81c9-11b1-42d7-8f7b-f9f210e5edd2">
+      <name>IsAuditLock</name>
+      <synonym>
+        <key>en</key>
+        <value>Is audit lock</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>1</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="2dc8aaa3-52e0-42cf-b7b7-1d185402e2c9">
+      <name>Company</name>
+      <synonym>
+        <key>en</key>
+        <value>Company</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="2364009b-31ed-45ee-97fb-e871d63bdfa9">
+    <producedTypes>
+      <objectType typeId="ce803453-25aa-4c0d-aad5-10c91d5829c3" valueTypeId="9643d387-6810-4cac-aab7-aff65765b63c"/>
+      <rowType typeId="54f6d03a-244f-4aef-965d-27e6ed496d29" valueTypeId="2434a16d-368f-4378-874a-33e5879b5888"/>
+    </producedTypes>
+    <name>DocumentsAttachedFiles</name>
+    <synonym>
+      <key>en</key>
+      <value>Documents attached files</value>
+    </synonym>
+    <attributes uuid="2f654665-5ac5-4ca8-bd31-d1250ff5d7dd">
+      <name>FileTooltips</name>
+      <synonym>
+        <key>en</key>
+        <value>File tooltips</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="f030a9f7-788b-49e7-bf04-4be4b2e51a91">
+      <name>Required</name>
+      <synonym>
+        <key>en</key>
+        <value>Required</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
+      <name>FilePresention</name>
+      <synonym>
+        <key>en</key>
+        <value>File presention</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="1f29a840-64a7-4259-87be-037affa8ee0d">
+      <name>FileTooltip</name>
+      <synonym>
+        <key>en</key>
+        <value>File tooltip</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="830900d5-894c-4738-91aa-d63affefd826">
+      <name>IsRequired</name>
+      <synonym>
+        <key>en</key>
+        <value>Required</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="f7474e6a-4463-4ffa-a723-673cba88ddab">
+      <name>FileExtension</name>
+      <synonym>
+        <key>en</key>
+        <value>File extension</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="2f02ef4a-c195-4360-a1a0-0c31de089553">
+      <name>ID</name>
+      <synonym>
+        <key>en</key>
+        <value>ID</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="5a72a22e-374b-437c-ab7f-8977c7318294">
+      <name>NamingFormat</name>
+      <synonym>
+        <key>en</key>
+        <value>Naming format</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
+    <attributes uuid="1f34019f-9b4e-4815-80e8-aa76f5391030">
+      <name>MaximumFileSize</name>
+      <synonym>
+        <key>en</key>
+        <value>Maximum file size (Mb)</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+          <scale>2</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+  </tabularSections>
+  <forms uuid="98be86aa-baca-4362-aad8-e72462019d68">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="1b073fb3-07df-43c2-ba31-86ac78649a3a">
+    <name>PictureViewer</name>
+    <synonym>
+      <key>en</key>
+      <value>Picture viewer</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

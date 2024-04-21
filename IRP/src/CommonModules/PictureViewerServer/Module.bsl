@@ -373,7 +373,7 @@ EndProcedure
 
 Function CreateFile(Volume, FileInfo) Export
 	If ValueIsFilled(FileInfo.Ref) Then
-		FileObject = FileInfo.Ref.GetObject();
+		Return FileInfo.Ref;
 	Else
 		FileObject = Catalogs.Files.CreateItem();
 	EndIf;

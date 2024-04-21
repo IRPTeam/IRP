@@ -70,6 +70,10 @@
     <key>en</key>
     <value>Work order</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Work orders</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

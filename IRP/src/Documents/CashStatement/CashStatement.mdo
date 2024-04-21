@@ -50,9 +50,13 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
-  <listPresentation>
+  <objectPresentation>
     <key>en</key>
     <value>Cash statement</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Cash statements</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>

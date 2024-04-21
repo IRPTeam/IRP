@@ -353,23 +353,9 @@ Function T1040T_AccountingAmounts()
 		|	Calculations.Key AS RowKey,
 		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	Calculations.Amount AS Amount,
-		|	VALUE(Catalog.AccountingOperations.DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset) AS Operation,
-		|	UNDEFINED AS AdvancesClosing
-		|INTO T1040T_AccountingAmounts
-		|FROM
-		|	Calculations AS Calculations
-		|WHERE
-		|	TRUE
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	Calculations.Period,
-		|	Calculations.Key AS RowKey,
-		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
-		|	Calculations.Amount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	Calculations AS Calculations
 		|WHERE
@@ -378,11 +364,7 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset Then
-		
-		Return GetAnalytics_Depreciation_BookValue(Parameters); // Depreciation - Book value		
-	
-	ElsIf Parameters.Operation = Operations.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset Then
+	If Parameters.Operation = Operations.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset Then
 		
 		Return GetAnalytics_Expenses_Depreciation(Parameters); // Expenses - Depreciation
 	
@@ -392,34 +374,16 @@ EndFunction
 
 #Region Accounting_Analytics
 
-// Depreciation - Book value
-Function GetAnalytics_Depreciation_BookValue(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	// Debit
-	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
-	AccountingAnalytics.Debit = Debit.AccountDepreciation;
-	
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-	
-	// Credit
-	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
-	AccountingAnalytics.Credit = Credit.Account;
-	
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
 // Expenses - Depreciation
 Function GetAnalytics_Expenses_Depreciation(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.ExpenseType);
-	AccountingAnalytics.Debit = Debit.Account;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	

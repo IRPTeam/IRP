@@ -2040,7 +2040,8 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Vendor transaction (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		//|	VALUE(AccumulationRecordType.Expense),
+		|	VALUE(AccumulationRecordType.Receipt),
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
@@ -2100,7 +2101,8 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Customer transaction (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		//|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Expense),
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,

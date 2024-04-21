@@ -547,7 +547,11 @@ Function GetAnalytics_CurrencyExchangeRevenues(Parameters)
 	AdditionalAnalytics.Insert("TransitAccount", Parameters.ObjectData.TransitAccount);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
-	AccountingAnalytics.Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.RevenueType).Account;
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.ObjectData.RevenueType,
+	                                                           Parameters.ObjectData.ProfitCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
 	// Debit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;
@@ -558,7 +562,11 @@ Function GetAnalytics_CurrencyExchangeExpenses(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
-	AccountingAnalytics.Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.ExpenseType).Account;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.LossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 

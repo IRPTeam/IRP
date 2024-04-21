@@ -107,6 +107,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Purchase return order</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Purchase return orders</value>

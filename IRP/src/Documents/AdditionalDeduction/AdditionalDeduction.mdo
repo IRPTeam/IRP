@@ -50,9 +50,13 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Additional deduction</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
-    <value>Aditionals deductions</value>
+    <value>Additional deductions</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>

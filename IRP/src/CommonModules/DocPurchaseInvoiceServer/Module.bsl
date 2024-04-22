@@ -13,7 +13,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure FillVendorPrice(Object)
-	InformationRegisters.S1001L_VendorsPricesByItemKey.FillVendorPricesInObject(Object);
+	GetItemInfo.FillVendorPricesInObject(Object);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

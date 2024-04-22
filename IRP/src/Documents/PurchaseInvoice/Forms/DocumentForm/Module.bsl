@@ -316,7 +316,7 @@ EndProcedure
 
 &AtServer
 Procedure ItemListItemKeyOnChangeAtServer()
-	InformationRegisters.S1001L_VendorsPricesByItemKey.FillVendorPricesInObject(Object);
+	GetItemInfo.FillVendorPricesInObject(Object);
 EndProcedure
 
 #EndRegion

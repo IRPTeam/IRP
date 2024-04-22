@@ -50,4 +50,71 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="986f7b88-8e21-4c9c-8578-68aa9d25dae2">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="c63ed337-7a90-45b3-b476-7af26cdfa2b1">
+    <producedTypes>
+      <objectType typeId="9f41b8bd-eefb-4a15-a1ef-f98f66dc54b3" valueTypeId="3646f565-ee59-4b40-b698-672342494699"/>
+      <rowType typeId="6c608315-e6f8-4f32-a517-55a12c4219b2" valueTypeId="5f90ab36-cb31-45c7-b84b-0d78d1ab7fb1"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="2e1ea07e-0c46-4a09-a3ae-32b05abb711c">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="6cd6c8c9-4530-47e3-8788-c35caf9a6afe">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.ExpenseAccruals.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="4c4502ee-a8c9-4d01-adaf-0731b891b5db">
+    <producedTypes>
+      <objectType typeId="f4127dc2-3925-41a6-a90c-52a11c1d0db8" valueTypeId="34faa222-b2a9-490c-a2c3-fa123d9cc996"/>
+      <rowType typeId="16004d78-93fe-4d91-8d90-b67633058645" valueTypeId="8d7afae9-bced-4e27-a523-efcc3e52466a"/>
+    </producedTypes>
+    <name>DocumentsList</name>
+    <synonym>
+      <key>en</key>
+      <value>Documents list</value>
+    </synonym>
+  </tabularSections>
 </mdclass:Document>

@@ -62,6 +62,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ExpenseAccruals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>

@@ -1192,6 +1192,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.DebitCreditNote</documents>
+  <documents>Document.ExpenseAccruals</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

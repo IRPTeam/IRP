@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3bcc262f-4cf5-4285-bfb3-bf7ff21c776b">
+  <producedTypes>
+    <objectType typeId="735a8cfe-440f-4f52-83f8-45621aee4675" valueTypeId="86a8532d-a1cd-409c-a238-7c3af8810ad7"/>
+    <refType typeId="4b73fe3b-e488-47e9-bf77-2fb7d97a20fb" valueTypeId="932e2778-f32b-45dd-8373-4c96f9e73aaf"/>
+    <selectionType typeId="6ecb63be-938e-4ee3-85e9-20e0b12b92e8" valueTypeId="e95c84b4-dca8-4969-9957-52b7867237e3"/>
+    <listType typeId="be94f915-9a73-4ea5-8dee-3502815c2c3a" valueTypeId="5fdafe37-f61c-4bab-ab47-855c30e8e89e"/>
+    <managerType typeId="f45b785f-44b9-4727-b639-178e6b3fc692" valueTypeId="632a7877-5d2e-40e0-b6f4-cebbc6fe66ef"/>
+  </producedTypes>
+  <name>ExpenseAccruals</name>
+  <synonym>
+    <key>en</key>
+    <value>Expense accruals</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ExpenseAccruals.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Expense accruals</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Expenses accruals</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <realTimePosting>Deny</realTimePosting>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="ab437b88-98a6-4638-8aa6-2f175151b76b">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Document>

@@ -650,7 +650,8 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 			And I click the button named "OK"
 			Then there are lines in TestClient message log
 				|'Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010 Actual stocks remaining: 16 . Required: 17 . Lacking: 1 .'|
-			And I close current window									
+			And I close current window
+			And I click "No" button										
 	* Cancel posting SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table

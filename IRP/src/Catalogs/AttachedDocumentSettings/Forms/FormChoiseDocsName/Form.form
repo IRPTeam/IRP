@@ -345,11 +345,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Documents names</value>
+   <value>Наименования документов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Documents names</value>
+   <value>Evraklar isimleri</value>
   </title>
   <id>1</id>
   <valueType>
@@ -395,11 +395,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Document synonym</value>
+    <value>Синоним документа</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Document synonym</value>
+    <value>Evrak eşanlamlı</value>
    </title>
    <id>2</id>
    <valueType>

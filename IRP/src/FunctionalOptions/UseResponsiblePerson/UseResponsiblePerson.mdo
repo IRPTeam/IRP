@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Use responsible person</value>
+  <value>Sorumlu kişi kullan</value>
  </synonym>
  <location>Constant.UseResponsiblePerson</location>
  <privilegedGetMode>true</privilegedGetMode>

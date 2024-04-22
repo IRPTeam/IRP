@@ -92,11 +92,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Sales reports from trade agents</value>
+  <value>Отчеты о продажах от торговых агентов</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Sales reports from trade agents</value>
+  <value>Konsinye satış raporları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

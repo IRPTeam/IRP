@@ -43,11 +43,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Additional revenue allocations</value>
+  <value>Дополнительные распределения доходов</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Additional revenue allocations</value>
+  <value>Ek gelirler dağıtımı</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

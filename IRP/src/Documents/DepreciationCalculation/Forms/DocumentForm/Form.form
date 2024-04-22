@@ -1420,7 +1420,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Calculations</value>
+    <value>Hesaplamalar</value>
    </title>
    <toolTip>
     <key>en</key>
@@ -1428,11 +1428,11 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group calculations</value>
+    <value>Группа расчетов</value>
    </toolTip>
    <toolTip>
     <key>tr</key>
-    <value>Group calculations</value>
+    <value>Grup hesaplamalar</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupCalculationsExtendedTooltip</name>
@@ -2038,7 +2038,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill calculations</value>
+   <value>Hesaplamaları doldur</value>
   </title>
   <id>2</id>
   <use>

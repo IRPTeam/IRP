@@ -3977,7 +3977,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Taxes</value>
+    <value>Vergiler</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxesExtendedTooltip</name>
@@ -5480,7 +5480,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies taxes</value>
+   <value>Dövizler/vergiler değiştir</value>
   </title>
   <id>23</id>
   <use>
@@ -5504,11 +5504,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit accounting accrual</value>
+   <value>Редактировать бух. начисления</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Edit accounting accrual</value>
+   <value>Muh. eklenti değiştir</value>
   </title>
   <id>24</id>
   <use>
@@ -5534,11 +5534,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit accounting deduction</value>
+   <value>Редактировать бух. вычеты</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Edit accounting deduction</value>
+   <value>Muh. kesinti değiştir</value>
   </title>
   <id>25</id>
   <use>
@@ -5564,11 +5564,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit accounting cash advance deduction</value>
+   <value>Редактировать бух. авансовые вычеты</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Edit accounting cash advance deduction</value>
+   <value>Muh. iş avansı değiştir</value>
   </title>
   <id>26</id>
   <use>
@@ -5594,11 +5594,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Edit accounting taxes</value>
+   <value>Редактировать бух. налоги</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Edit accounting taxes</value>
+   <value>Muh. vergileri değiştir</value>
   </title>
   <id>27</id>
   <use>

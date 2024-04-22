@@ -141,7 +141,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Physical inventory [Number] [Date]</v8:content>
+							<v8:content>Sayım fişi [Number] [Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -187,7 +187,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Store:</v8:content>
+							<v8:content>Depo:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -333,7 +333,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Phys. Count</v8:content>
+							<v8:content>Sayım adedi</v8:content>
 						</v8:item>
 					</tl>
 				</c>

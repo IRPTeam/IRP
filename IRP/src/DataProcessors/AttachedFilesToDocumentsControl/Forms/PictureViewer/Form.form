@@ -198,11 +198,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>No template exist</value>
+   <value>Шаблон не существует</value>
   </title>
   <title>
    <key>tr</key>
-   <value>No template exist</value>
+   <value>Şablon yok</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -349,11 +349,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>PDFViewer</value>
+   <value>PDF Просмотрщик</value>
   </title>
   <title>
    <key>tr</key>
-   <value>PDFViewer</value>
+   <value>PDF önizleme</value>
   </title>
   <id>4</id>
   <valueType>
@@ -374,11 +374,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Is PDF</value>
+   <value>Это PDF</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Is PDF</value>
+   <value>bu PDF</value>
   </title>
   <id>5</id>
   <valueType>

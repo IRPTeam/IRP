@@ -1741,7 +1741,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>List attributes to show</value>
+   <value>Gösterilecek alanlar listesi</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1770,7 +1770,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>All attributes value table</value>
+   <value>Tüm alanlar değer tablosu</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1821,7 +1821,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Attribute synonym</value>
+    <value>Alan eşanlamlı</value>
    </title>
    <id>2</id>
    <valueType>
@@ -2068,7 +2068,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show columns</value>
+   <value>Sütunları göster</value>
   </title>
   <id>5</id>
   <toolTip>
@@ -2081,7 +2081,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Show additional columns</value>
+   <value>Ek sütunları göster</value>
   </toolTip>
   <use>
    <common>true</common>

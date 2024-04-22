@@ -11,11 +11,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Attached files to documents control</value>
+  <value>Прикрепленные файлы для контроля документов</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Attached files to documents control</value>
+  <value>Evrek denetimi için eklenen dosyalar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.AttachedFilesToDocumentsControl.Form.Form</defaultForm>
@@ -65,7 +65,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ссылка на документ</value>
+    <value>Ссылка документа</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -130,7 +130,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Дата вх. документа</value>
+    <value>Дата документа</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -154,7 +154,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Номер вх. документа</value>
+    <value>Номер документа</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -201,11 +201,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Doc meta name</value>
+    <value>Наименование метаданных документа</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Doc meta name</value>
+    <value>Evrak metadata tanımı</value>
    </synonym>
    <type>
     <types>String</types>
@@ -227,7 +227,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Тома хранения файлов</value>
+    <value>Том хранения файлов</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -248,11 +248,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Fill checking</value>
+    <value>Проверка заполнения</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Fill checking</value>
+    <value>Kontrolü doldur</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -272,11 +272,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Fill checking status</value>
+    <value>Статус проверки заполнения</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Fill checking status</value>
+    <value>Kontrol statü doldur</value>
    </synonym>
    <type>
     <types>EnumRef.DocAttachmentStatus</types>
@@ -293,11 +293,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Is audit lock</value>
+    <value>Блокировка аудита</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Is audit lock</value>
+    <value>Bu audit kilidi</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -343,11 +343,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Documents attached files</value>
+   <value>Прикрепленные файлы документов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Documents attached files</value>
+   <value>Evraklara eklenen dosyalar</value>
   </synonym>
   <attributes uuid="2f654665-5ac5-4ca8-bd31-d1250ff5d7dd">
    <name>FileTooltips</name>
@@ -357,11 +357,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File tooltips</value>
+    <value>Всплывающие подсказки файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File tooltips</value>
+    <value>Dosya ipuçları</value>
    </synonym>
    <type>
     <types>String</types>
@@ -381,7 +381,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Обязательный для заполнения</value>
+    <value>Обязательный</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -402,11 +402,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File presention</value>
+    <value>Представление файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File presention</value>
+    <value>Dosya görünümü</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -423,11 +423,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File tooltip</value>
+    <value>Всплывающая подсказка файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File tooltip</value>
+    <value>Dosya ipucu</value>
    </synonym>
    <type>
     <types>String</types>
@@ -447,7 +447,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Обязательный для заполнения</value>
+    <value>Обязательный</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -468,11 +468,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File extension</value>
+    <value>Расширение файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File extension</value>
+    <value>Dosya uzantısı</value>
    </synonym>
    <type>
     <types>String</types>
@@ -515,11 +515,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Naming format</value>
+    <value>Формат наименования</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Naming format</value>
+    <value>İsimlendirme formatı</value>
    </synonym>
    <type>
     <types>String</types>
@@ -541,11 +541,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Maximum file size (Mb)</value>
+    <value>Максимальный размер файла (Мб)</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Maximum file size (Mb)</value>
+    <value>Azami dosya boyutu (Mb)</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -584,11 +584,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Picture viewer</value>
+   <value>Просмотрщик изображений</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Picture viewer</value>
+   <value>Resim önüzleme</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

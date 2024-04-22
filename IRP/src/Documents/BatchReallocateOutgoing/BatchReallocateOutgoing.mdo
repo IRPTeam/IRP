@@ -44,11 +44,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Batch reallocate outgoings</value>
+  <value>Пакетное перераспределение расходов</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Batch reallocate outgoings</value>
+  <value>Parti dağıtımı çıkan</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

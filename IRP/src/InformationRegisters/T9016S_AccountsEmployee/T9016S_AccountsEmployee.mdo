@@ -16,11 +16,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Accounts (Employee)</value>
+  <value>Счета (Сотрудник)</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Accounts (Employee)</value>
+  <value>Muh. hesap (çalışan)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -37,7 +37,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Accounts (Fixed asset)</value>
+  <value>Muh. hesap (sabit kıymet)</value>
  </recordPresentation>
  <resources uuid="d23b2e0d-2f28-4e6f-a2e7-cd80615814c6">
   <name>AccountSalaryPayment</name>
@@ -47,11 +47,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (salary payment)</value>
+   <value>Счет (выплата зарплаты)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account (salary payment)</value>
+   <value>Muh. hesap (maaş)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -75,11 +75,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (cash advance)</value>
+   <value>Счет (аванс)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account (cash advance)</value>
+   <value>Muh. hesap (iş avansı)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

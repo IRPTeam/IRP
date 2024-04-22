@@ -76,11 +76,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Journal entries</value>
+  <value>Записи в журнале</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Journal entries</value>
+  <value>Muhasebe mahsup fişleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

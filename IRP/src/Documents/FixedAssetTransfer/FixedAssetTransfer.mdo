@@ -154,7 +154,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Responsible person (sender)</value>
+   <value>Sorumlu kişi (gönderen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -183,7 +183,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Responsible person (receiver)</value>
+   <value>Sorunlu kişi (alıcı)</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -212,7 +212,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Branch (receiver)</value>
+   <value>Şube (alıcı)</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -235,7 +235,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Profit loss center (sender)</value>
+   <value>Kar zarar merkezi (gönderen)</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -258,7 +258,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Profit loss center (receiver)</value>
+   <value>Kar zarar merkezi (alıcı)</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

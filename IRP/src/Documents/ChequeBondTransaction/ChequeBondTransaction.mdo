@@ -76,11 +76,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Cheque bond transactions</value>
+  <value>Операции по чековым обязательствам</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Cheque bond transactions</value>
+  <value>Çek senet bordroları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

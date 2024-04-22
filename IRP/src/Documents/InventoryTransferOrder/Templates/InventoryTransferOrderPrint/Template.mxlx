@@ -123,7 +123,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Inventory transfer order [Number] [Date]</v8:content>
+							<v8:content>Depo transfer siparişi [Number] [Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -201,7 +201,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Store sender:</v8:content>
+							<v8:content>Gönderen depo:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -263,7 +263,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Store receiver:</v8:content>
+							<v8:content>Alıcı depo:</v8:content>
 						</v8:item>
 					</tl>
 				</c>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Perakende sevkiyat onayı</value>
+  <value>Perakende sevk irsaliyesi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RetailShipmentConfirmation.StandardAttribute.Number</inputByString>
@@ -1326,7 +1326,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende sevkiyat onayı</value>
+   <value>Perakende sevk irsaliyesi</value>
   </synonym>
  </templates>
  <commands uuid="b2ececf0-7cbd-456e-b35f-4e2570c5bf85">
@@ -1341,7 +1341,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende sevkiyat onayı</value>
+   <value>Perakende sevk irsaliyesi</value>
   </synonym>
   <group>FormCommandBarCreateBasedOn</group>
   <commandParameterType>
@@ -1362,7 +1362,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Perakende sevkiyat onayı</value>
+   <value>Perakende sevk irsaliyesi</value>
   </synonym>
   <group>CommandGroup.Print</group>
   <commandParameterType>

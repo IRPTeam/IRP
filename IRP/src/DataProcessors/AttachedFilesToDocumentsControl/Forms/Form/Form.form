@@ -188,11 +188,11 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Attach mode</value>
+     <value>Режим прикрепления</value>
     </title>
     <title>
      <key>tr</key>
-     <value>Attach mode</value>
+     <value>Ekleme modu</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -403,7 +403,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Группа верхние уровень</value>
+   <value>Группа Верх</value>
   </title>
   <title>
    <key>tr</key>
@@ -530,11 +530,11 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Documents date number</value>
+      <value>Дата и номер документов</value>
      </title>
      <title>
       <key>tr</key>
-      <value>Documents date number</value>
+      <value>Evraklar tarih numara</value>
      </title>
      <toolTip>
       <key>en</key>
@@ -542,11 +542,11 @@
      </toolTip>
      <toolTip>
       <key>ru</key>
-      <value>Documents date number</value>
+      <value>Дата и номер документов</value>
      </toolTip>
      <toolTip>
       <key>tr</key>
-      <value>Documents date number</value>
+      <value>Evraklar tarih numara</value>
      </toolTip>
      <extendedTooltip>
       <name>DocumentsDateNumberExtendedTooltip</name>
@@ -1035,11 +1035,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Lock selected</value>
+        <value>Блокировать выбранные</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Lock selected</value>
+        <value>Seçileni kilitle</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -1080,11 +1080,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Unlock selected</value>
+        <value>Разблокировать выбранные</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Unlock selected</value>
+        <value>Seçilenin kilidini aç</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -1127,11 +1127,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Lock/Unlock</value>
+       <value>Блокировать/Разблокировать</value>
       </title>
       <title>
        <key>tr</key>
-       <value>Lock/Unlock</value>
+       <value>Kilitle/Kilit aç</value>
       </title>
       <toolTip>
        <key>en</key>
@@ -1139,11 +1139,11 @@
       </toolTip>
       <toolTip>
        <key>ru</key>
-       <value>Documents group lock unlock</value>
+       <value>Блокировка/разблокировка группы документов</value>
       </toolTip>
       <toolTip>
        <key>tr</key>
-       <value>Documents group lock unlock</value>
+       <value>Evraklar grup kilitle kilit aç</value>
       </toolTip>
       <extendedTooltip>
        <name>DocumentsGroupLockUnlockExtendedTooltip</name>
@@ -1177,11 +1177,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Only unlocked</value>
+       <value>Только разблокированные</value>
       </title>
       <title>
        <key>tr</key>
-       <value>Only unlocked</value>
+       <value>Sadece kilitli olmayanlar</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1447,11 +1447,11 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group tables left</value>
+    <value>Группа таблиц слева</value>
    </toolTip>
    <toolTip>
     <key>tr</key>
-    <value>Group tables left</value>
+    <value>Grup tablolar sol</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTablesLeftExtendedTooltip</name>
@@ -1666,11 +1666,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Documents attached files group required format</value>
+       <value>Требуемый формат группы файлов документов</value>
       </title>
       <title>
        <key>tr</key>
-       <value>Documents attached files group required format</value>
+       <value>Evraklar eklenen dosyalar grubu istenilen format</value>
       </title>
       <toolTip>
        <key>en</key>
@@ -1678,11 +1678,11 @@
       </toolTip>
       <toolTip>
        <key>ru</key>
-       <value>Documents attached files group required format</value>
+       <value>Требуемый формат группы файлов документов</value>
       </toolTip>
       <toolTip>
        <key>tr</key>
-       <value>Documents attached files group required format</value>
+       <value>Evraklar eklenen dosyalar grubu istenilen format</value>
       </toolTip>
       <readOnly>true</readOnly>
       <extendedTooltip>
@@ -2032,11 +2032,11 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Group attach button</value>
+      <value>Группа Кнопки прикрепления</value>
      </title>
      <title>
       <key>tr</key>
-      <value>Group attach button</value>
+      <value>Grup ekle butonu</value>
      </title>
      <toolTip>
       <key>en</key>
@@ -2044,11 +2044,11 @@
      </toolTip>
      <toolTip>
       <key>ru</key>
-      <value>Group attach button</value>
+      <value>Группа Кнопки прикрепления</value>
      </toolTip>
      <toolTip>
       <key>tr</key>
-      <value>Group attach button</value>
+      <value>Grup ekle butonu</value>
      </toolTip>
      <verticalStretch>true</verticalStretch>
      <extendedTooltip>
@@ -2447,11 +2447,11 @@
     </toolTip>
     <toolTip>
      <key>ru</key>
-     <value>Group docs to attach</value>
+     <value>Группа документов для прикрепления</value>
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Group docs to attach</value>
+     <value>Grup eklenecek evraklar</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupDocsToAttachExtendedTooltip</name>
@@ -2536,11 +2536,11 @@
       </nonselectedPictureText>
       <nonselectedPictureText>
        <key>ru</key>
-       <value>No image preview</value>
+       <value>Нет изображения для предпросмотра</value>
       </nonselectedPictureText>
       <nonselectedPictureText>
        <key>tr</key>
-       <value>No image preview</value>
+       <value>Önzilenecek resim yok</value>
       </nonselectedPictureText>
       <border xsi:type="core:BorderDef">
        <width>1</width>
@@ -2683,11 +2683,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Group tables right</value>
+    <value>Группа таблиц справа</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Group tables right</value>
+    <value>Grup tablolar sağ</value>
    </title>
    <toolTip>
     <key>en</key>
@@ -2695,11 +2695,11 @@
    </toolTip>
    <toolTip>
     <key>ru</key>
-    <value>Group tables right</value>
+    <value>Группа таблиц справа</value>
    </toolTip>
    <toolTip>
     <key>tr</key>
-    <value>Group tables right</value>
+    <value>Grup tablolar sağ</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTablesRightExtendedTooltip</name>
@@ -2737,11 +2737,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group tables</value>
+   <value>Группа таблиц</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Group tables</value>
+   <value>Grup tablolar</value>
   </title>
   <toolTip>
    <key>en</key>
@@ -2749,11 +2749,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Group tables</value>
+   <value>Группа таблиц</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Group tables</value>
+   <value>Grup tablolar</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupTablesExtendedTooltip</name>
@@ -2857,11 +2857,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Current files</value>
+   <value>Текущие файлы</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Current files</value>
+   <value>Geçerli dosyalar</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2911,11 +2911,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Current files table</value>
+   <value>Таблица текущих файлов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Current files table</value>
+   <value>Geçerli dosyalar tablosu</value>
   </title>
   <id>7</id>
   <valueType>
@@ -2987,11 +2987,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>PDFViewer</value>
+   <value>PDF Просмотрщик</value>
   </title>
   <title>
    <key>tr</key>
-   <value>PDFViewer</value>
+   <value>PDF önizleme</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3016,7 +3016,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Check mode</value>
+   <value>Kontrol modu</value>
   </title>
   <id>8</id>
   <valueType>
@@ -3067,11 +3067,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Last document ref</value>
+   <value>Ссылка последнего документа</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Last document ref</value>
+   <value>Son evrak ref</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3129,11 +3129,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Lock documents</value>
+   <value>Блокировать документы</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Lock documents</value>
+   <value>Evrakları kilitle</value>
   </title>
   <id>2</id>
   <toolTip>
@@ -3142,11 +3142,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Lock documents</value>
+   <value>Блокировать документы</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Lock documents</value>
+   <value>Evrakları kilitle</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3166,11 +3166,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unlock documents</value>
+   <value>Разблокировать документы</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Unlock documents</value>
+   <value>Evrakları kilidi aç</value>
   </title>
   <id>3</id>
   <toolTip>
@@ -3179,11 +3179,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Unlock documents</value>
+   <value>Разблокировать документы</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Unlock documents</value>
+   <value>Evrakları kilidi aç</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3203,11 +3203,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show settings</value>
+   <value>Показать настройки</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Show settings</value>
+   <value>Ayarları göster</value>
   </title>
   <id>4</id>
   <toolTip>
@@ -3216,11 +3216,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Show settings</value>
+   <value>Показать настройки</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Show settings</value>
+   <value>Ayarları göster</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3240,11 +3240,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>I have no current document</value>
+   <value>У меня не текущий документ</value>
   </title>
   <title>
    <key>tr</key>
-   <value>I have no current document</value>
+   <value>Geçerli bir evrak yoktur</value>
   </title>
   <id>5</id>
   <toolTip>
@@ -3253,11 +3253,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Attach other</value>
+   <value>Прикрепить другой</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Attach other</value>
+   <value>Diğer ekle</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3277,11 +3277,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show only unlocked</value>
+   <value>Показывать только разблокированные</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Show only unlocked</value>
+   <value>Sadece kilitli olmayanları göster</value>
   </title>
   <id>6</id>
   <toolTip>
@@ -3290,11 +3290,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Show only unlocked</value>
+   <value>Показывать только разблокированные</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Show only unlocked</value>
+   <value>Sadece kilitli olmayanları göster</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3314,11 +3314,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>⬆️ Select document type ⬆️</value>
+   <value>⬆️ Выберите тип документа ⬆️</value>
   </title>
   <title>
    <key>tr</key>
-   <value>⬆️ Select document type ⬆️</value>
+   <value>⬆️ Evrak tipini seçiniz ⬆️</value>
   </title>
   <id>7</id>
   <use>

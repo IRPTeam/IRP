@@ -75,11 +75,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Production planning closings</value>
+  <value>Закрытия планирования производства</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Production planning closings</value>
+  <value>Üretim planlama kapanışları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

@@ -11,11 +11,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Конструктор свойст объекта</value>
+  <value>Групповое изменение реквизитов</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Nesne parametre sihirbazı</value>
+  <value>Toplu öznitellik değiştirme</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>

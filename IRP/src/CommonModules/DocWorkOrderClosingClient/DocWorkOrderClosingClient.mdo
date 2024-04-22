@@ -7,11 +7,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Doc work order closing client</value>
+  <value>Док закрытие наряд-заказа клиент</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc work order closing client</value>
+  <value>Evrak iş emirler kapanışı client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

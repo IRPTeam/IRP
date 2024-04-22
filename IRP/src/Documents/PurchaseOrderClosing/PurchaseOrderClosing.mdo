@@ -76,11 +76,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Purchase order closings</value>
+  <value>Закрытия заказов на покупку</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Purchase order closings</value>
+  <value>Satın alma sipariş kapanışları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

@@ -75,11 +75,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Production planning corrections</value>
+  <value>Корректировки планирования производства</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Production planning corrections</value>
+  <value>Üretim planlama düzeltmeleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

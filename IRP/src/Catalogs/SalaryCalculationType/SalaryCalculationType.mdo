@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Salary calculation type</value>
+  <value>Maaş hesaplama tipi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.SalaryCalculationType.StandardAttribute.Code</inputByString>
@@ -62,7 +62,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Salary calculation type</value>
+  <value>Maaş hesaplama tipleri</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -74,7 +74,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Salary calculation types</value>
+  <value>Maaş hesaplama tipleri</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>

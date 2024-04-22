@@ -44,11 +44,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Calculations movement costs</value>
+  <value>Расчеты затрат перемещения</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Calculations movement costs</value>
+  <value>Maliyet hesaplama fişleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

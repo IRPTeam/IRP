@@ -16,11 +16,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Attached files control</value>
+  <value>Контроль прикрепленных файлов</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Attached files control</value>
+  <value>Eklenen dosya kontrolü</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -193,11 +193,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Record ID</value>
+   <value>ID записи</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Record ID</value>
+   <value>Kayıt ID</value>
   </synonym>
   <type>
    <types>UUID</types>

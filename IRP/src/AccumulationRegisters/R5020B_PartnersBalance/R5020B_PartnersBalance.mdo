@@ -57,7 +57,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Customer transaction</value>
+   <value>Müşteri hareketleri</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -99,7 +99,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vendor transaction</value>
+   <value>Tedarikçi hareketleri</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -120,7 +120,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Vendor advance</value>
+   <value>Tedarikçi avansı</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -141,7 +141,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other transaction</value>
+   <value>Diğer cari hesaplar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

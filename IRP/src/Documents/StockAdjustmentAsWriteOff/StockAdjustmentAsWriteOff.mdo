@@ -1220,7 +1220,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Stock adjustment as write off</value>
+   <value>Satım çıkış fişi</value>
   </synonym>
  </templates>
  <commands uuid="afca89d7-6ca4-4ef4-be00-d3d54af55c69">
@@ -1256,7 +1256,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Stock adjustment as write off</value>
+   <value>Satım çıkış fişi</value>
   </synonym>
   <group>CommandGroup.Print</group>
   <commandParameterType>

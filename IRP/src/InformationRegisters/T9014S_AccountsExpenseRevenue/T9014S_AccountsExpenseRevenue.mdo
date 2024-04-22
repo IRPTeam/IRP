@@ -47,11 +47,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (expense)</value>
+   <value>Счет (расход)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account (expense)</value>
+   <value>Muh. hesap (gider)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -74,11 +74,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Account (revenue)</value>
+   <value>Счет (доход)</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account (revenue)</value>
+   <value>Muh. hesap (gelir)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

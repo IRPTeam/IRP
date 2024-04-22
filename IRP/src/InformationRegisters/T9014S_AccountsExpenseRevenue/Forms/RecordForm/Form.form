@@ -418,11 +418,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account type</value>
+   <value>Тип счета</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Account type</value>
+   <value>Hesap tipi</value>
   </title>
   <extendedTooltip>
    <name>GroupAccountTypeExtendedTooltip</name>

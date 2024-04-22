@@ -43,11 +43,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Additional cost allocations</value>
+  <value>Распределения дополнительных затрат</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Additional cost allocations</value>
+  <value>Ek giderler dağıtımı</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

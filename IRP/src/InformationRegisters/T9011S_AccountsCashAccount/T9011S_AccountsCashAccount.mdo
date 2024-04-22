@@ -79,7 +79,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account transit</value>
+   <value>Transit hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

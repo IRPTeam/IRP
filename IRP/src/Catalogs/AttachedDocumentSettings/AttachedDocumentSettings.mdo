@@ -14,11 +14,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Attached document settings</value>
+  <value>Настройки прикрепленного документа</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Attached document settings</value>
+  <value>Eklenen dosyalar ayarları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.AttachedDocumentSettings.StandardAttribute.Description</inputByString>
@@ -122,7 +122,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Тома хранения файлов</value>
+   <value>Том хранения файлов</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -150,11 +150,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>File settings</value>
+   <value>Настройки файла</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>File settings</value>
+   <value>Dosya ayarları</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -172,11 +172,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File presention</value>
+    <value>Представление файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File presention</value>
+    <value>Dosya görünümü</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -194,11 +194,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File template</value>
+    <value>Шаблон файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File template</value>
+    <value>Dosya şablonu</value>
    </synonym>
    <type>
     <types>CatalogRef.Files</types>
@@ -216,11 +216,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Naming format</value>
+    <value>Формат наименования</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Naming format</value>
+    <value>İsimlendirme formatı</value>
    </synonym>
    <type>
     <types>String</types>
@@ -241,7 +241,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Обязательный для заполнения</value>
+    <value>Обязательный</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -263,11 +263,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Maximum file size (Mb)</value>
+    <value>Максимальный размер файла (Мб)</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Maximum file size (Mb)</value>
+    <value>Azami dosya boyutu (Mb)</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -289,11 +289,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>File extension</value>
+    <value>Расширение файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File extension</value>
+    <value>Dosya uzantısı</value>
    </synonym>
    <type>
     <types>String</types>
@@ -332,11 +332,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Form choise docs name</value>
+   <value>Форма выбора наименования документов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Form choise docs name</value>
+   <value>Form seç evraklar ismi</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

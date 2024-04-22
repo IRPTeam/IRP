@@ -12,11 +12,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Doc attachment status</value>
+  <value>Статус прикрепления документа</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Doc attachment status</value>
+  <value>Belge ekleme statüsü</value>
  </synonym>
  <standardAttributes>
   <dataHistory>Use</dataHistory>
@@ -44,11 +44,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>All files present</value>
+   <value>Все файлы на месте</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>All files present</value>
+   <value>Tüm dosyalar mevcut</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4c4df86c-2d86-4296-9062-716ba9d31f6a">
@@ -59,11 +59,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Not enough files</value>
+   <value>Недостаточно файлов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Not enough files</value>
+   <value>Eksik dosya</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a391c5f3-9783-4c0a-a569-1cdc1e5f3c52">
@@ -74,11 +74,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>No files</value>
+   <value>Файлов нет</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>No files</value>
+   <value>Dosya yok</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Accounts (Fixed asset)</value>
+  <value>Muh. hesap (sabit kıymet)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -37,7 +37,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Accounts (Fixed asset)</value>
+  <value>Muh. hesap (sabit kıymet)</value>
  </recordPresentation>
  <resources uuid="817b5145-cf25-4dd9-a426-e0c2f48af7b9">
   <name>Account</name>
@@ -79,7 +79,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Account (depreciation)</value>
+   <value>Muh. hesap (amortisman)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

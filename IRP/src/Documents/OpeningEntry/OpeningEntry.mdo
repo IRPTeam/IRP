@@ -4332,7 +4332,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Employment date</value>
+    <value>İşe alma tarihi</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -4453,7 +4453,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Remaining vacation days</value>
+    <value>Kalan tatil gün sayısı</value>
    </synonym>
    <type>
     <types>Number</types>

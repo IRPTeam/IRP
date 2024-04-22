@@ -186,7 +186,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tax payer</value>
+   <value>Vergi ödeyen</value>
   </synonym>
   <type>
    <types>EnumRef.TaxPayers</types>

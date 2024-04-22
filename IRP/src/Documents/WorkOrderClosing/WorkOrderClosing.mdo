@@ -44,11 +44,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Work order closings</value>
+  <value>Закрытия рабочих заказов</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Work order closings</value>
+  <value>İş emirler kapanışları</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

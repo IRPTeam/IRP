@@ -819,7 +819,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Use orders for settlements</value>
+   <value>Hareketlerde sipariş kırılımı kullan</value>
   </synonym>
   <type>
    <types>Boolean</types>

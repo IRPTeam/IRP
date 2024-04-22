@@ -275,11 +275,11 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Tooltip</value>
+     <value>Всплывающая подсказка</value>
     </title>
     <title>
      <key>tr</key>
-     <value>Tooltip</value>
+     <value>İpucu</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>

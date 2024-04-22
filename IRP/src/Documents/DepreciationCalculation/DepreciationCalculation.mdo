@@ -381,7 +381,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Calculations</value>
+   <value>Hesaplamalar</value>
   </synonym>
   <attributes uuid="b107bc13-ecff-4cb7-8733-cd761be3e07c">
    <name>Key</name>
@@ -577,7 +577,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Amount balance</value>
+    <value>Tutar bakiye</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

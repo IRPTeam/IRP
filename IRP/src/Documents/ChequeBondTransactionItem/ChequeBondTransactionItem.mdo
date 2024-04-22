@@ -44,11 +44,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Cheque bond transaction items</value>
+  <value>Операции по чекам и долговым обязательствам</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Cheque bond transaction items</value>
+  <value>Çek senet hareket nesneleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

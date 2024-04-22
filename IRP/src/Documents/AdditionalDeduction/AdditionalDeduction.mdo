@@ -76,11 +76,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Additional deductions</value>
+  <value>Дополнительные вычеты</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Additional deductions</value>
+  <value>Maaş kesintileri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

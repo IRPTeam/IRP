@@ -135,7 +135,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Stock adjustment as surplus [Number] [Date]</v8:content>
+							<v8:content>Sayım giriş fişi [Number] [Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -213,7 +213,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Store:</v8:content>
+							<v8:content>Depo:</v8:content>
 						</v8:item>
 					</tl>
 				</c>

@@ -149,7 +149,14 @@ Procedure PrintQR(Spreadsheet, Ref) Export
 			EndIf;
 			Header = Template.GetArea("Row|Column");
 			Selection = VT[IndexRow];
-			QR = BarcodeServer.GetQRPicture(New Structure("Barcode", Format(Selection.Number, "NG=")));
+			
+			BarcodeParameters = BarcodeServer.GetBarcodeDrawParameters();
+			BarcodeParameters.Width = Round(30 / 0.1);
+			BarcodeParameters.Height = Round(30 / 0.1);
+			BarcodeParameters.Barcode = Format(Selection.Number, "NG=");
+			BarcodeParameters.CodeType = "QR";
+			QR = BarcodeServer.GetBarcodePicture(BarcodeParameters);
+			
 			Picture = Header.Drawings.Add(SpreadsheetDocumentDrawingType.Picture);
 			Picture.Height = 30;
 			Picture.Width = 30;

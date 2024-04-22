@@ -307,8 +307,11 @@ Procedure SetDrawingPicture(Drawing, QuerySelection)
 		EndIf;
 	ElsIf Drawing.Name = "QRPicture" Then
 		If ValueIsFilled(QuerySelection.Barcode) Then
+			BarcodeParameters.Width = Round(Drawing.Width / 0.1);
+			BarcodeParameters.Height = Round(Drawing.Height / 0.1);
 			BarcodeParameters.Barcode = QuerySelection.Barcode;
-			Drawing.Picture = BarcodeServer.GetQRPicture(BarcodeParameters);
+			BarcodeParameters.CodeType = "QR";
+			Drawing.Picture = BarcodeServer.GetBarcodePicture(BarcodeParameters);
 		Else
 			Drawing.Picture = New Picture();
 		EndIf;

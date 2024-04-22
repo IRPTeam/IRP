@@ -1021,7 +1021,9 @@
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Addresses</catalogs>
   <catalogs>Catalog.AdvancesKeys</catalogs>
+  <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
+  <catalogs>Catalog.AttachedDocumentSettings</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.Batches</catalogs>
   <catalogs>Catalog.BatchKeys</catalogs>
@@ -1056,6 +1058,7 @@
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.IDInfoAddresses</catalogs>
   <catalogs>Catalog.IDInfoSets</catalogs>
+  <catalogs>Catalog.Incoterms</catalogs>
   <catalogs>Catalog.IntegrationSettings</catalogs>
   <catalogs>Catalog.InterfaceGroups</catalogs>
   <catalogs>Catalog.ItemKeys</catalogs>
@@ -1085,6 +1088,7 @@
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.RowIDs</catalogs>
+  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <catalogs>Catalog.SerialLotNumbers</catalogs>
   <catalogs>Catalog.SourceOfOrigins</catalogs>
   <catalogs>Catalog.SpecialOfferRules</catalogs>
@@ -1103,10 +1107,6 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.AgingPeriods</catalogs>
-  <catalogs>Catalog.Incoterms</catalogs>
-  <catalogs>Catalog.AttachedDocumentSettings</catalogs>
-  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

@@ -1699,6 +1699,36 @@
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
      <items xsi:type="form:Button">
+      <name>EditAccountingAccrual</name>
+      <id>1586</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingAccrualExtendedTooltip</name>
+       <id>1587</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccountingAccrual</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
       <name>FillAccrual</name>
       <id>1505</id>
       <visible>true</visible>
@@ -2454,6 +2484,36 @@
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
      <items xsi:type="form:Button">
+      <name>EditAccountingDeduction</name>
+      <id>1588</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingDeductionExtendedTooltip</name>
+       <id>1589</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccountingDeduction</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
       <name>FillDeduction</name>
       <id>1507</id>
       <visible>true</visible>
@@ -2951,6 +3011,36 @@
        </extInfo>
       </extendedTooltip>
       <commandName>Form.Command.EditCurrenciesCashAdvanceDeduction</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>EditAccountingCashAdvanceDeduction</name>
+      <id>1590</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingCashAdvanceDeductionExtendedTooltip</name>
+       <id>1591</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccountingCashAdvanceDeduction</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -3651,6 +3741,36 @@
        </extInfo>
       </extendedTooltip>
       <commandName>Form.Command.EditCurrenciesTaxes</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>EditAccountingTaxes</name>
+      <id>1592</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingTaxesExtendedTooltip</name>
+       <id>1593</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccountingTaxes</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -5071,6 +5191,56 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>13</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>14</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
@@ -5324,6 +5494,126 @@
     <name>EditCurrenciesTaxes</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccountingAccrual</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting accrual</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Edit accounting accrual</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit accounting accrual</value>
+  </title>
+  <id>24</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccountingAccrual</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccountingDeduction</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting deduction</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Edit accounting deduction</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit accounting deduction</value>
+  </title>
+  <id>25</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccountingDeduction</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccountingCashAdvanceDeduction</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting cash advance deduction</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Edit accounting cash advance deduction</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit accounting cash advance deduction</value>
+  </title>
+  <id>26</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccountingCashAdvanceDeduction</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccountingTaxes</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting taxes</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Edit accounting taxes</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Edit accounting taxes</value>
+  </title>
+  <id>27</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccountingTaxes</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

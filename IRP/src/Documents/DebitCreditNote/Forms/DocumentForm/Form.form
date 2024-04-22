@@ -566,17 +566,89 @@
   <items xsi:type="form:FormGroup">
    <name>GroupDebitCreditNote</name>
    <id>42</id>
-   <items xsi:type="form:Button">
-    <name>EditCurrencies</name>
-    <id>564</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupCommandBar</name>
+    <id>568</id>
+    <items xsi:type="form:Button">
+     <name>EditCurrencies</name>
+     <id>564</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>EditCurrenciesExtendedTooltip</name>
+      <id>565</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.EditCurrencies</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <items xsi:type="form:Button">
+     <name>EditAccounting</name>
+     <id>566</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>EditAccountingExtendedTooltip</name>
+      <id>567</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.EditAccounting</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
      <common>true</common>
     </userVisible>
+    <title>
+     <key>en</key>
+     <value>Command bar</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Командная панель</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Komut çubuğu</value>
+    </title>
     <extendedTooltip>
-     <name>EditCurrenciesExtendedTooltip</name>
-     <id>565</id>
+     <name>GroupCommandBarExtendedTooltip</name>
+     <id>569</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -589,13 +661,10 @@
       <horizontalAlign>Left</horizontalAlign>
      </extInfo>
     </extendedTooltip>
-    <type>UsualButton</type>
-    <commandName>Form.Command.EditCurrencies</commandName>
-    <representation>Auto</representation>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <placementArea>UserCmds</placementArea>
-    <representationInContextMenu>Auto</representationInContextMenu>
+    <type>CommandBar</type>
+    <extInfo xsi:type="form:CommandBarExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
    </items>
    <items xsi:type="form:FormGroup">
     <name>GroupInfoTitle</name>
@@ -2404,6 +2473,56 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>14</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>15</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
@@ -2486,6 +2605,36 @@
     <name>EditCurrencies</name>
    </handler>
   </action>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe değiştir</value>
+  </title>
+  <id>6</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>

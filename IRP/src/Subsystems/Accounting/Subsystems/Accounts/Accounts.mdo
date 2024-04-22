@@ -21,5 +21,6 @@
  <content>InformationRegister.T9013S_AccountsTax</content>
  <content>InformationRegister.T9014S_AccountsExpenseRevenue</content>
  <content>InformationRegister.T9015S_AccountsFixedAsset</content>
+ <content>InformationRegister.T9016S_AccountsEmployee</content>
  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

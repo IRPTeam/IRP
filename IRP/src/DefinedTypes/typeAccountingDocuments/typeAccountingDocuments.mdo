@@ -35,5 +35,7 @@
   <types>DocumentRef.FixedAssetTransfer</types>
   <types>DocumentRef.ModernizationOfFixedAsset</types>
   <types>DocumentRef.DepreciationCalculation</types>
+  <types>DocumentRef.DebitCreditNote</types>
+  <types>DocumentRef.Payroll</types>
  </type>
 </mdclass:DefinedType>

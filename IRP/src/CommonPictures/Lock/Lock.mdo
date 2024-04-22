@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91d8d9c3-c517-4385-84d3-72b542bbe3c4">
+ <name>Lock</name>
+ <synonym>
+  <key>en</key>
+  <value>Lock</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Блокировка        </value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kilit</value>
+ </synonym>
+</mdclass:CommonPicture>

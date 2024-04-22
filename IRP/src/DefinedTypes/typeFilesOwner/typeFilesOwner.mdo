@@ -25,6 +25,7 @@
   <types>CatalogRef.CashAccounts</types>
   <types>DocumentRef.SalesReturnOrder</types>
   <types>DocumentRef.CashPayment</types>
+  <types>CatalogRef.AttachedDocumentSettings</types>
   <types>DocumentRef.PurchaseInvoice</types>
   <types>DocumentRef.DebitNote</types>
   <types>DocumentRef.CreditNote</types>
@@ -35,6 +36,7 @@
   <types>DocumentRef.PurchaseReturnOrder</types>
   <types>CatalogRef.PriceTypes</types>
   <types>DocumentRef.Labeling</types>
+  <types>DocumentRef.ConsolidatedRetailSales</types>
   <types>DocumentRef.BankPayment</types>
   <types>CatalogRef.Partners</types>
   <types>DocumentRef.ShipmentConfirmation</types>

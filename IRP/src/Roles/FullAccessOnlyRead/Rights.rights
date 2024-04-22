@@ -6634,7 +6634,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Resource.Account</name>
+		<name>InformationRegister.T9014S_AccountsExpenseRevenue.Resource.AccountExpense</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -17937,6 +17937,50 @@
 	</object>
 	<object>
 		<name>Catalog.SalaryCalculationType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9016S_AccountsEmployee</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseResponsiblePerson</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9015S_AccountsFixedAsset</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.DebitCreditNote</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

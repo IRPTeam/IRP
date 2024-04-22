@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e8b7f3dd-d138-4b48-a9be-2b474f44ce95">
+ <producedTypes>
+  <selectionType typeId="d83a50b8-16b8-401c-a77d-306c5a15bb07" valueTypeId="21bf5bbf-e0e8-4436-90a1-6e787fe36855"/>
+  <listType typeId="e7c22f07-9ae4-448d-a8b5-cc17c705cfe3" valueTypeId="293f7542-cd44-4ed4-b819-770fe0b9eed2"/>
+  <managerType typeId="2fc5aa9b-0b6d-4b58-9f59-3b98e7667d6e" valueTypeId="7109c3e1-d45a-454b-baab-665e1be3f2be"/>
+  <recordSetType typeId="db0bb603-6dc6-47a5-9f2f-015174e1ea7a" valueTypeId="7cbb4adf-3067-4d5c-af9b-6c953cfee3a5"/>
+  <recordKeyType typeId="e08cf121-5fa7-4389-b5ba-d6dd245b0292" valueTypeId="53fea7f2-17eb-4836-ba1a-aaacfd3a5430"/>
+  <recordType typeId="27698d51-3506-4a6b-a32d-772783d405f2" valueTypeId="a6a1af13-4e02-453e-9479-63e4a516ff4a"/>
+  <recordManagerType typeId="4b760b25-23f7-4e1a-8338-c1d6e18fa6ab" valueTypeId="5fcb507f-9d8e-4d46-95f3-9f0922b1766e"/>
+ </producedTypes>
+ <name>T9016S_AccountsEmployee</name>
+ <synonym>
+  <key>en</key>
+  <value>Accounts (Employee)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Accounts (Employee)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accounts (Employee)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9016S_AccountsEmployee.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <recordPresentation>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>ru</key>
+  <value>Бух. счета (Основные средства)</value>
+ </recordPresentation>
+ <recordPresentation>
+  <key>tr</key>
+  <value>Accounts (Fixed asset)</value>
+ </recordPresentation>
+ <resources uuid="d23b2e0d-2f28-4e6f-a2e7-cd80615814c6">
+  <name>AccountSalaryPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>Account (salary payment)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Account (salary payment)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Account (salary payment)</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9016S_AccountsEmployee.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="79064c5c-6e04-45bc-9a66-232fc0712b4c">
+  <name>AccountCashAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>Account (cash advance)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Account (cash advance)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Account (cash advance)</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9016S_AccountsEmployee.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="1b18f668-6bf2-4d29-81bc-8eb78a2de966">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="b38164e7-2265-4b93-bf1c-2c4425b3b982">
+  <name>LedgerTypeVariant</name>
+  <synonym>
+   <key>en</key>
+   <value>Ledger type variant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вариант типа учета</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypeVariants</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="fcf0363d-6948-4337-921f-c1a2160c828e">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>Employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.Employee</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="2134264f-8efa-494d-b2e5-ac8f13f0772a">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

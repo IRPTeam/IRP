@@ -7,13 +7,14 @@
 // Returns:
 //  Structure - Get query:
 // * Query - String -
-// * Tables - Structure:
-// ** TaxList - Undefined
-// ** SpecialOffers - Undefined
-// ** SerialLotNumbers - Undefined
-// ** SourceOfOrigins - Undefined
-// ** RowIDInfo - Undefined
-// ** Payments - Undefined
+// * Tables - Structure : 
+// ** ItemList - Undefined, ValueTable -
+// ** SpecialOffers - Undefined, ValueTable -
+// ** SerialLotNumbers - Undefined, ValueTable -
+// ** SourceOfOrigins - Undefined, ValueTable -
+// ** RowIDInfo - Undefined, ValueTable -
+// ** Payments - Undefined, ValueTable -
+// ** PaymentList - Undefined, ValueTable -
 Function GetQuery(DocName) Export
 	
 	Result = New Structure;
@@ -67,15 +68,29 @@ Function GetQuery(DocName) Export
 		ErrorsArray.Add(ErrorWithPayments());
 	EndIf;
 
+	If MetaDoc.TabularSections.Find("PaymentList") = Undefined Then
+		TmplDocPaymentList = Documents.BankPayment.EmptyRef();
+		PaymentListTable = TmplDocPaymentList.PaymentList.Unload();
+		Result.Tables.Insert("PaymentList", PaymentListTable);
+	Else
+		Result.Tables.Insert("PaymentList", Undefined);
+		ErrorsArray.Add(ErrorWithPaymentList(MetaDoc));
+	EndIf;
+	
 	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
+	GetInfo_4 = GetFilterAndFields(ErrorsArray, MetaDoc, 4); // Payment list
 	
 	TextQuery = CheckDocumentsQuery();
 	TextQuery = StrReplace(TextQuery, "%10", GetInfo_3.Fields);
 	TextQuery = StrReplace(TextQuery, "%11", GetInfo_3.Filters);
 	TextQuery = StrReplace(TextQuery, "%12", GetInfo_3.Results);
+	TextQuery = StrReplace(TextQuery, "%13", GetInfo_4.Fields);
+	TextQuery = StrReplace(TextQuery, "%14", GetInfo_4.Filters);
+	TextQuery = StrReplace(TextQuery, "%15", GetInfo_4.Results);
+	
 	Result.Query = StrTemplate(TextQuery, 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
 		GetInfo_1.Fields, GetInfo_1.Filters, GetInfo_1.Results,
@@ -96,6 +111,7 @@ Function GetErrorList() Export
 	ErrorsArray.Add(ErrorWithSerialInTable());
 	ErrorsArray.Add(ErrorWithSourceOfOrigins());
 	ErrorsArray.Add(ErrorWithPayments());
+	ErrorsArray.Add(ErrorWithPaymentList());
 	
 	ErrorList = New ValueList();
 	For Each Errors In ErrorsArray Do
@@ -124,6 +140,17 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 	
 	Exceptions = GetExceptionsByDocument();
 	
+	MetadataAttributes = New Array;
+	For Each AttributeDescription In MetaDoc.Attributes Do
+		MetadataAttributes.Add(AttributeDescription.Name);
+	EndDo;
+	For Each AttributeDescription In Metadata.CommonAttributes Do
+		If Not AttributeDescription.Content.Find(MetaDoc) = Undefined 
+				AND AttributeDescription.Content.Find(MetaDoc).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+			MetadataAttributes.Add(AttributeDescription.Name);
+		EndIf;
+	EndDo;
+	
 	DocName = MetaDoc.Name;
 	For Each Row In ErrorsArray Do
 		For Each Filter In Row Do
@@ -149,13 +176,25 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 			// @skip-check invocation-parameter-type-intersect, property-return-type
 			If QueryNumber = 2 Then // headers of documents
 				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
-					If MetaDoc.Attributes.Find(Field) = Undefined Then
+					If MetadataAttributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			ElsIf QueryNumber = 1 Then // SourceOfOrigins
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.SourceOfOrigins.Attributes.Find(Field) = Undefined Then
 						Skip = True;
 					EndIf;  
 				EndDo;
 			ElsIf QueryNumber = 3 Then // payments
 				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
 					If MetaDoc.TabularSections.Payments.Attributes.Find(Field) = Undefined Then
+						Skip = True;
+					EndIf;  
+				EndDo;
+			ElsIf QueryNumber = 4 Then // PaymentList
+				For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
+					If MetaDoc.TabularSections.PaymentList.Attributes.Find(Field) = Undefined Then
 						Skip = True;
 					EndIf;  
 				EndDo;
@@ -378,10 +417,19 @@ Function CheckDocumentsQuery()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Headers.Ref,
+	|	Headers.*
+	|INTO tmpHeaders
+	|FROM
+	|	&Headers AS Headers
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Headers.Ref,
 	|	%7
 	|INTO Headers
 	|FROM
-	|	&Headers AS Headers
+	|	tmpHeaders AS Headers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -422,7 +470,40 @@ Function CheckDocumentsQuery()
 	|	%12
 	|FROM
 	|	Payments AS Result
-	|WHERE %11";
+	|WHERE %11
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PaymentList.LineNumber,
+	|	PaymentList.Ref,
+	|	PaymentList.Key,
+	|	PaymentList.*
+	|INTO tmpPaymentList
+	|FROM
+	|	&PaymentList AS PaymentList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PaymentList.LineNumber,
+	|	PaymentList.Ref,
+	|	PaymentList.Key,
+	|	%13
+	|INTO PaymentList
+	|FROM
+	|	tmpPaymentList AS PaymentList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.LineNumber,
+	|	Result.Ref,
+	|	Result.Key,
+	|	%15
+	|FROM
+	|	PaymentList AS Result
+	|WHERE %14";
 EndFunction
 
 // Get query for documents array.
@@ -976,6 +1057,12 @@ Function ErrorWithPayments()
 		"Amount",
 		3
 	));
+	
+	Return Str;
+EndFunction
+
+Function ErrorWithPaymentList(MetaDoc = Undefined)
+	Str = New Structure;
 	
 	Return Str;
 EndFunction

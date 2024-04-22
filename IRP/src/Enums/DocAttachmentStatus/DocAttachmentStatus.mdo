@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f7e2b2d6-f4ff-4e30-a058-f9ee6d10d7c0">
+ <producedTypes>
+  <refType typeId="740c8cf7-4734-4161-ac0b-f8dcb26dd5a0" valueTypeId="09e6f19c-c95a-45e0-85cf-813a62d2dbf0"/>
+  <listType typeId="a1ab44df-e5dd-4fe6-abee-dbd17555e819" valueTypeId="c3115595-02be-4672-b74e-86d281d0bb98"/>
+  <managerType typeId="3e30f85c-3fb1-4a41-be2c-9b6249e6a7dd" valueTypeId="401542ab-4228-4790-8131-4167ed6bd554"/>
+ </producedTypes>
+ <name>DocAttachmentStatus</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc attachment status</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Doc attachment status</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc attachment status</value>
+ </synonym>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Order</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="d9da0692-2d43-4b64-96ba-f57e584fb70b">
+  <name>AllFilesPresent</name>
+  <synonym>
+   <key>en</key>
+   <value>All files present</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>All files present</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>All files present</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="4c4df86c-2d86-4296-9062-716ba9d31f6a">
+  <name>NotEnoughFiles</name>
+  <synonym>
+   <key>en</key>
+   <value>Not enough files</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Not enough files</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Not enough files</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a391c5f3-9783-4c0a-a569-1cdc1e5f3c52">
+  <name>NoFiles</name>
+  <synonym>
+   <key>en</key>
+   <value>No files</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>No files</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>No files</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

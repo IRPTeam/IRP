@@ -74,7 +74,6 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	EndIf;
 	
 	If Not CurrentObject.Other Then
-		CurrentObject.AccountAdvancesOther = Undefined;
 		CurrentObject.AccountTransactionsOther = Undefined;
 	EndIf;
 EndProcedure
@@ -94,6 +93,5 @@ Procedure SetVisible()
 	Items.AccountTransactionsCustomer.Visible = Record.Customer;
 	
 	Items.GroupOther.Visible                  = Record.Other;
-	Items.AccountAdvancesOther.Visible        = Record.Other;
 	Items.AccountTransactionsOther.Visible    = Record.Other;
 EndProcedure

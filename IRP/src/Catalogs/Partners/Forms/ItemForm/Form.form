@@ -1633,6 +1633,18 @@ WHERE
      <common>true</common>
     </userVisible>
    </cmiFragmentRecord>
+   <cmiFragmentRecord>
+    <command>InformationRegister.T9016S_AccountsEmployee.StandardCommand.OpenByValue.Employee</command>
+    <group>FormNavigationPanelGoTo</group>
+    <index>0</index>
+    <userVisible/>
+   </cmiFragmentRecord>
+   <cmiFragmentRecord>
+    <command>InformationRegister.T9012S_AccountsPartner.StandardCommand.OpenByValue.Partner</command>
+    <group>FormNavigationPanelGoTo</group>
+    <index>1</index>
+    <userVisible/>
+   </cmiFragmentRecord>
   </navigationPanel>
   <commandBar/>
  </commandInterface>

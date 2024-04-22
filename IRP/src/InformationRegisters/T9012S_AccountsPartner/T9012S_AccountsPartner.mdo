@@ -147,33 +147,6 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
- <resources uuid="3f968698-c565-4815-9422-c5eee9ab1957">
-  <name>AccountAdvancesOther</name>
-  <synonym>
-   <key>en</key>
-   <value>Advances</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Авансы</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Avanslar</value>
-  </synonym>
-  <type>
-   <types>ChartOfAccountsRef.Basic</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <choiceParameterLinks>
-   <name>Filter.LedgerTypeVariant</name>
-   <field>InformationRegister.T9012S_AccountsPartner.Dimension.LedgerTypeVariant</field>
-  </choiceParameterLinks>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
- </resources>
  <resources uuid="f424f156-54b2-4efe-9fe5-e0e236c1ccab">
   <name>AccountTransactionsOther</name>
   <synonym>

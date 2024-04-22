@@ -411,7 +411,8 @@ EndFunction
 //  Picture - Get QRPicture
 Function GetQRPicture(BarcodeParameters) Export
 
-	Return New Picture();
+	BarcodeParameters.CodeType = "QR"; 
+	Return GetBarcodePicture(BarcodeParameters);
 
 EndFunction
 

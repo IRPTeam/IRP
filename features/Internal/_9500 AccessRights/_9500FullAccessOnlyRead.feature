@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @AccessRights
@@ -1081,7 +1081,7 @@ Scenario: 950035 check role Full access only read (Cheque bonds)
 
 Scenario: 950083 check role Full access only read (Work order)
 		And I close all client application windows
-		And In the command interface I select "Sales - A/R" "Work order"	
+		And In the command interface I select "Sales - A/R" "Work orders"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1089,7 +1089,7 @@ Scenario: 950083 check role Full access only read (Work order)
 
 Scenario: 950084 check role Full access only read (Work sheet)
 		And I close all client application windows
-		And In the command interface I select "Sales - A/R" "Work sheet"	
+		And In the command interface I select "Sales - A/R" "Work sheets"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1098,7 +1098,7 @@ Scenario: 950084 check role Full access only read (Work sheet)
 
 Scenario: 950086 check role Full access only read (Production)
 		And I close all client application windows
-		And In the command interface I select "Manufacturing" "Production"	
+		And In the command interface I select "Manufacturing" "Productions"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1106,7 +1106,7 @@ Scenario: 950086 check role Full access only read (Production)
 
 Scenario: 950087 check role Full access only read (Production planning)
 		And I close all client application windows
-		And In the command interface I select "Manufacturing" "Production planning"	
+		And In the command interface I select "Manufacturing" "Production plannings"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1114,7 +1114,7 @@ Scenario: 950087 check role Full access only read (Production planning)
 
 Scenario: 950088 check role Full access only read (Production planning correction)
 		And I close all client application windows
-		And In the command interface I select "Manufacturing" "Production planning correction"	
+		And In the command interface I select "Manufacturing" "Production planning corrections"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
@@ -1134,7 +1134,7 @@ Scenario: 950091 check role Full access only read (Bill of materials)
 
 Scenario: 950089 check role Full access only read (Production planning closing)
 		And I close all client application windows
-		And In the command interface I select "Manufacturing" "Production planning closing"	
+		And In the command interface I select "Manufacturing" "Production planning closings"	
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception

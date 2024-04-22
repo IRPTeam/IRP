@@ -1,6 +1,8 @@
+#Region FormEventHandlers
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
+	DocDepreciationCalculationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
@@ -11,16 +13,23 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	DocumentsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	DocDepreciationCalculationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	DocDepreciationCalculationClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
+
+#EndRegion
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
@@ -100,6 +109,67 @@ Procedure UpdateAccountingData()
 		                                          _AccountingExtDimensions, "Calculations");
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleCollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, True);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+&AtClient
+Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
+	DocumentsClientServer.ChangeTitleCollapse(Object, ThisObject, False);
+EndProcedure
+
+#EndRegion
+
+#Region COMPANY
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	DocDepreciationCalculationClient.CompanyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CompanyStartChoice(Item, ChoiceData, StandardProcessing)
+	DocDepreciationCalculationClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
+	DocDepreciationCalculationClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocDepreciationCalculationClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

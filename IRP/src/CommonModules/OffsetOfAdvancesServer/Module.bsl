@@ -1145,7 +1145,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_AccountingAmounts.AdvancesClosing = Parameters.Object.Ref;
 			NewRow_AccountingAmounts.RowKey = RowOffset.Key;
 			
-			Operation = GetAccountingOperation(DocMetadata, Row.Document);
+			Operation = GetAccountingOperation(DocMetadata, Row.Document, IsCustomerAdvanceClosing, IsVendorAdvanceClosing);
 			If Operation <> Undefined Then
 				NewRow_AccountingAmounts.Operation = Operation;
 			EndIf;
@@ -1238,7 +1238,7 @@ Procedure Write_SelfRecords(Parameters,
 	EndDo;
 EndProcedure
 
-Function GetAccountingOperation(DocMetadata, Doc)
+Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVendorAdvanceClosing)
 	AO = Catalogs.AccountingOperations;
 	
 	// Bank payment
@@ -1279,11 +1279,39 @@ Function GetAccountingOperation(DocMetadata, Doc)
 	
 	// Sales invoice
 	ElsIf DocMetadata = Metadata.Documents.SalesInvoice Then
+		
 		Return AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
 		
 	// Purchase invoice
 	ElsIf DocMetadata = Metadata.Documents.PurchaseInvoice Then
+		
 		Return AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+	
+	// Debit\Credit note
+	ElsIf DocMetadata = Metadata.Documents.DebitCreditNote Then
+		
+		If IsCustomerAdvanceClosing Then
+			Return AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset;
+		ElsIf IsVendorAdvanceClosing Then
+			Return AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset;
+		EndIf;
+		
+	// Credit note
+	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
+			
+		If IsCustomerAdvanceClosing Then
+			Return AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		ElsIf IsVendorAdvanceClosing Then
+			Return AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		EndIf;	
+		
+	// Debit note
+	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
+		
+		If IsVendorAdvanceClosing Then
+			Return AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+		EndIf;
+	
 	EndIf;
 	
 	Return Undefined;

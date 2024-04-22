@@ -66,9 +66,13 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Sales report from trade agent</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
-    <value>Sales report from trade agents</value>
+    <value>Sales reports from trade agents</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>

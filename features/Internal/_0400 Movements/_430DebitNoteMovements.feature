@@ -122,11 +122,47 @@ Scenario: _043000 preparation (Debit note)
 			And I execute 1C:Enterprise script at server
 					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Write);"        |
 					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);"      |
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		If "List" table does not contain lines Then
+			| 'Number'    |
+			| '115'       |
+			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
+			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+			| 'Number'    |
+			| '115'       |
+			| '116'       |
+			When Create document PurchaseInvoice objects (check movements)
+			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
+			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		If "List" table does not contain lines Then
+			| 'Number'    |
+			| '115'       |
+			| '116'       |
+			When Create document GoodsReceipt objects (check movements)
+			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"     |
+			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Write);"       |
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document DebitNote objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.DebitNote.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.DebitNote.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create DebitNote (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.DebitNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -154,7 +190,7 @@ Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliati
 			| ''                                             | 'Receipt'       | '05.04.2021 09:30:36'   | '2 300'       | 'Main Company'   | 'Front office'   | 'TRY'        | 'Company Ferron BP'   | 'Contract Ferron BP New'    |
 	And I close all client application windows
 
-Scenario: _043002 check Debit note movements by the Register "R2021 Customer transactions" (with customer)
+Scenario: _043002 check Debit note movements by the Register "R2021 Customer transactions" (with customer without basis document)
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to line in "List" table
@@ -192,7 +228,7 @@ Scenario: _043003 check absence Debit note movements by the Register "R1021 Vend
 	And I close all client application windows
 
 
-Scenario: _043004 check Debit note movements by the Register "R1021 Vendors transactions" (with vendor)
+Scenario: _043004 check Debit note movements by the Register "R1021 Vendors transactions" (with vendor without basis document)
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to line in "List" table
@@ -335,6 +371,68 @@ Scenario: _043010 check Debit note movements by the Register "R5010 Reconciliati
 			| 'Register  "R5010 Reconciliation statement"' | ''                    | ''           | ''             | ''             | ''         | ''                | ''                    | ''       |
 			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'      | 'Legal name contract' | 'Amount' |
 			| ''                                           | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Other partner 1' | ''                    | '100'    |	
+	And I close all client application windows
+
+Scenario: _043011 check absence Debit note movements by the Register "R2021 Customer transactions" (customer with basis document)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '4'         |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report info" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 4 dated 16.04.2024 13:50:26'  | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                          | ''      | ''        | ''       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                         | ''                                          | ''      | ''        | ''       | ''                     | ''                           |
+			| ''                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | '16.04.2024 13:50:26' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''      | ''        | '100'    | 'No'                   | ''                           |
+			| ''                                        | '16.04.2024 13:50:26' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''      | ''        | '17,12'  | 'No'                   | ''                           |
+			| ''                                        | '16.04.2024 13:50:26' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''      | ''        | '100'    | 'No'                   | ''                           |
+			| ''                                        | '16.04.2024 13:50:26' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''      | ''        | '100'    | 'No'                   | ''                           |		
+	And I close all client application windows
+
+Scenario: _043012 check absence Debit note movements by the Register "R1021 Vendors transactions" (vendor with basis document)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report info" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 5 dated 16.04.2024 14:09:47' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                               | ''      | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''                   | ''                                               | ''      | ''        | ''       | ''                     | ''                         |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Order' | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                       | '16.04.2024 14:09:47' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '-100'   | 'No'                   | ''                         |
+			| ''                                       | '16.04.2024 14:09:47' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '-17,12' | 'No'                   | ''                         |
+			| ''                                       | '16.04.2024 14:09:47' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '-100'   | 'No'                   | ''                         |
+			| ''                                       | '16.04.2024 14:09:47' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''      | ''        | '-100'   | 'No'                   | ''                         |		
+	And I close all client application windows
+
+
+Scenario: _043012 check Debit note movements by the Register "R5020 Partners balance" (OtherPartnersTransactions)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '3'         |
+	* Check movements by the Register  "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 3 dated 12.06.2023 14:52:33' | ''                    | ''           | ''             | ''             | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'     | ''                    | ''           | ''             | ''             | ''                | ''                | ''                | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'         | 'Legal name'      | 'Agreement'       | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
+			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'TRY'                          | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
+			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
+			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '17,12'  | ''                     | ''                 | ''                   | ''               | '17,12'             | ''                 |		
 	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion

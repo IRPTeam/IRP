@@ -585,10 +585,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Paramet
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.ExpenseType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("ProfitCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -598,10 +599,7 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Paramet
 	                                                    Parameters.RowData.Partner, 
 	                                                    Undefined,
 	                                                    Parameters.RowData.Currency);
-	                                                    
-	If ValueIsFilled(Credit.AccountAdvancesCustomer) Then
-		AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
-	EndIf;
+	AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

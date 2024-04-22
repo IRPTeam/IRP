@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.16.4195</version>
+  <version>2024.17.4259</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -194,6 +194,7 @@
   <commonPictures>CommonPicture.IconShowAnyActive</commonPictures>
   <commonPictures>CommonPicture.FillByTemplate</commonPictures>
   <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
+  <commonPictures>CommonPicture.Lock</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -580,6 +581,7 @@
   <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
   <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonModules>CommonModule.DocPriceListClient</commonModules>
+  <commonModules>CommonModule.DocPriceListServer</commonModules>
   <commonModules>CommonModule.DocProductionClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationClient</commonModules>
   <commonModules>CommonModule.DocProductionCostsAllocationServer</commonModules>
@@ -639,8 +641,9 @@
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
-  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
@@ -750,6 +753,10 @@
   <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonModules>CommonModule.AuditLockPrivileged</commonModules>
   <commonModules>CommonModule.DynamicListAPI</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1014,7 +1021,9 @@
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Addresses</catalogs>
   <catalogs>Catalog.AdvancesKeys</catalogs>
+  <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
+  <catalogs>Catalog.AttachedDocumentSettings</catalogs>
   <catalogs>Catalog.BankTerms</catalogs>
   <catalogs>Catalog.Batches</catalogs>
   <catalogs>Catalog.BatchKeys</catalogs>
@@ -1049,6 +1058,7 @@
   <catalogs>Catalog.Hardware</catalogs>
   <catalogs>Catalog.IDInfoAddresses</catalogs>
   <catalogs>Catalog.IDInfoSets</catalogs>
+  <catalogs>Catalog.Incoterms</catalogs>
   <catalogs>Catalog.IntegrationSettings</catalogs>
   <catalogs>Catalog.InterfaceGroups</catalogs>
   <catalogs>Catalog.ItemKeys</catalogs>
@@ -1078,6 +1088,7 @@
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
   <catalogs>Catalog.RowIDs</catalogs>
+  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <catalogs>Catalog.SerialLotNumbers</catalogs>
   <catalogs>Catalog.SourceOfOrigins</catalogs>
   <catalogs>Catalog.SpecialOfferRules</catalogs>
@@ -1096,9 +1107,6 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.AgingPeriods</catalogs>
-  <catalogs>Catalog.Incoterms</catalogs>
-  <catalogs>Catalog.SalaryCalculationType</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1277,6 +1285,7 @@
   <enums>Enum.PaymentStatuses</enums>
   <enums>Enum.AuditLockActions</enums>
   <enums>Enum.SalaryTypes</enums>
+  <enums>Enum.DocAttachmentStatus</enums>
   <enums>Enum.TaxPayers</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
@@ -1326,19 +1335,24 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
+  <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
+  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
+  <informationRegisters>InformationRegister.AuditLock</informationRegisters>
+  <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BranchBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLedgerTypes</informationRegisters>
-  <informationRegisters>InformationRegister.DELETE_ConsignorSerialLotNumbers</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
   <informationRegisters>InformationRegister.DataVersions</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_ConsignorSerialLotNumbers</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
   <informationRegisters>InformationRegister.DocumentFiscalStatus</informationRegisters>
   <informationRegisters>InformationRegister.ExpenseRevenueTypeSettings</informationRegisters>
   <informationRegisters>InformationRegister.ExternalCommands</informationRegisters>
@@ -1347,7 +1361,6 @@
   <informationRegisters>InformationRegister.IntegrationInfo</informationRegisters>
   <informationRegisters>InformationRegister.ItemSegments</informationRegisters>
   <informationRegisters>InformationRegister.JobQueue</informationRegisters>
-  <informationRegisters>InformationRegister.S1001L_VendorsPricesByItemKey</informationRegisters>
   <informationRegisters>InformationRegister.LedgerTypeOperations</informationRegisters>
   <informationRegisters>InformationRegister.LockDataModificationRules</informationRegisters>
   <informationRegisters>InformationRegister.ObjectStatuses</informationRegisters>
@@ -1357,9 +1370,13 @@
   <informationRegisters>InformationRegister.PricesByProperties</informationRegisters>
   <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
   <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
+  <informationRegisters>InformationRegister.S1001L_VendorsPricesByItemKey</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
+  <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
+  <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
+  <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
@@ -1378,34 +1395,29 @@
   <informationRegisters>InformationRegister.T6095S_WriteOffBatchesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T7010S_BillOfMaterials</informationRegisters>
   <informationRegisters>InformationRegister.T7051S_ProductionDurationDetails</informationRegisters>
-  <informationRegisters>InformationRegister.DELETE_T8010S_ConsignorBatches</informationRegisters>
+  <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T8515S_FixedAssetsLocation</informationRegisters>
   <informationRegisters>InformationRegister.T9010S_AccountsItemKey</informationRegisters>
   <informationRegisters>InformationRegister.T9011S_AccountsCashAccount</informationRegisters>
   <informationRegisters>InformationRegister.T9012S_AccountsPartner</informationRegisters>
   <informationRegisters>InformationRegister.T9013S_AccountsTax</informationRegisters>
   <informationRegisters>InformationRegister.T9014S_AccountsExpenseRevenue</informationRegisters>
+  <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
+  <informationRegisters>InformationRegister.T9016S_AccountsEmployee</informationRegisters>
+  <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
+  <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
   <informationRegisters>InformationRegister.T9100A_ObjectAccessMap</informationRegisters>
   <informationRegisters>InformationRegister.T9101A_ObjectAccessRegisters</informationRegisters>
   <informationRegisters>InformationRegister.T9500S_AccrualAndDeductionValues</informationRegisters>
   <informationRegisters>InformationRegister.T9510S_Staffing</informationRegisters>
   <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
   <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
+  <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
+  <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
-  <informationRegisters>InformationRegister.T8510S_FixedAssetsInfo</informationRegisters>
-  <informationRegisters>InformationRegister.T8515S_FixedAssetsLocation</informationRegisters>
-  <informationRegisters>InformationRegister.T9050S_AccountingRowAnalytics</informationRegisters>
-  <informationRegisters>InformationRegister.T9051S_AccountingExtDimensions</informationRegisters>
-  <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
-  <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
-  <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
-  <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
-  <informationRegisters>InformationRegister.AuditLock</informationRegisters>
-  <informationRegisters>InformationRegister.AuditLockHistory</informationRegisters>
-  <informationRegisters>InformationRegister.T9015S_AccountsFixedAsset</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -42,6 +42,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Commissioning of fixed asset</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Commissioning of fixed assets</value>

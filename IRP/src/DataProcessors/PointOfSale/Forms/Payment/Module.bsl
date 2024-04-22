@@ -809,6 +809,12 @@ Async Procedure Payment_PayByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
+	
+	If PaymentRow.Amount = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().ATC_ErrorPaymentsAmountIsZero, Payments.IndexOf(PaymentRow)+1));
+		Return;
+	EndIf;
+	
 	Await Payment_PayByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
@@ -839,6 +845,12 @@ Async Procedure Payment_ReturnPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
+	
+	If PaymentRow.Amount = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().ATC_ErrorPaymentsAmountIsZero, Payments.IndexOf(PaymentRow)+1));
+		Return;
+	EndIf;
+	
 	Await Payment_ReturnPaymentByPaymentCard(PaymentRow);
 	PaymentsOnActivateRow(Undefined);
 EndProcedure
@@ -872,7 +884,12 @@ Procedure Payment_CancelPaymentByPaymentCardManual(Command)
 	If PaymentRow = Undefined Then
 		Return;
 	EndIf;
-
+	
+	If PaymentRow.Amount = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().ATC_ErrorPaymentsAmountIsZero, Payments.IndexOf(PaymentRow)+1));
+		Return;
+	EndIf;
+	
 	Notify = New NotifyDescription(
 		"Payment_CancelPaymentByPaymentCardManual_End", ThisObject, PaymentRow);
 	OpenForm(
@@ -918,6 +935,11 @@ EndFunction
 Async Procedure Payment_RevertLastPaymentManual(Command)
 	PaymentRow = Items.Payments.CurrentData;
 	If PaymentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	If PaymentRow.Amount = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().ATC_ErrorPaymentsAmountIsZero, Payments.IndexOf(PaymentRow)+1));
 		Return;
 	EndIf;
 	

@@ -3556,7 +3556,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|Partner";
 	ElsIf Options.TransactionType = Incoming_OtherIncome Then
 		StrByType = "
-		|RevenueType";
+		|RevenueType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

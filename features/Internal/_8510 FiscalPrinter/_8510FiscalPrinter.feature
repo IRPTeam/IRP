@@ -4164,6 +4164,38 @@ Scenario: _0260214 try unpost printed RRR
 		Then in the TestClient message log contains lines by template:
 			|'Error! Receipt is already printed:*'|
 
+Scenario: _0260215 try card payment without amount
+	And I close all client application windows
+	* Open POS		
+		And In the command interface I select "Retail" "Point of sale"
+	* Add item
+		And I click "Search by barcode (F7)" button		
+		And I input "2202283705" text in the field named "Barcode"
+		And I move to the next attribute
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Card (*)" button
+		And I go to line in "BankPaymentTypeList" table
+			| 'Reference' |
+			| 'Card 03'   |
+		And I select current line in "BankPaymentTypeList" table
+		And I activate field named "PaymentsAmountString" in "Payments" table
+		And I select current line in "Payments" table
+		And I click "⌫" button
+		And I click "Pay" button
+		Then there are lines in TestClient message log
+			|'Row: 1. Payment amount is zero'|
+		And I click "5" button
+		And I click "2" button
+		And I click "0" button
+		And I click "OK" button
+		And I click "Pay" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		And I move to the next attribute
+		And I click "OK" button
+	And I close all client application windows
+	
 Scenario: _0260152 close session
 	And I close all client application windows
 	* Open POS		

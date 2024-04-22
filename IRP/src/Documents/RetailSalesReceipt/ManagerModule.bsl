@@ -1516,17 +1516,14 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 
 	// Debit
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters,
-		Parameters.ObjectData.Company.LandedCostExpenseType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+		                                                      Parameters.ObjectData.Company.LandedCostExpenseType,
+		                                                      Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
 	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	AccountingAnalytics.Credit = Credit.Account;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

@@ -2040,7 +2040,8 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Vendor transaction (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		//|	VALUE(AccumulationRecordType.Expense),
+		|	VALUE(AccumulationRecordType.Receipt),
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
@@ -2100,7 +2101,8 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Customer transaction (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		//|	VALUE(AccumulationRecordType.Receipt),
+		|	VALUE(AccumulationRecordType.Expense),
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
@@ -2280,4 +2282,33 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|		= VALUE(Enum.DebtTypes.TransactionCustomer))
 		|
 		|";
+EndFunction
+
+Function R5020B_PartnersBalance_Payroll() Export
+	Return 
+		// Other transaction
+		"SELECT
+		|
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	SalaryTaxList.Period,
+		|	SalaryTaxList.Company,
+		|	SalaryTaxList.Branch,
+		|	SalaryTaxList.Partner,
+		|	SalaryTaxList.LegalName,
+		|	SalaryTaxList.Agreement,
+		|	UNDEFINED AS Document,
+		|	SalaryTaxList.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	SalaryTaxList.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	SalaryTaxList.Key
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	SalaryTaxList AS SalaryTaxList
+		|WHERE
+		|	TRUE";
 EndFunction

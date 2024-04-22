@@ -27,7 +27,7 @@ Function R1020B_AdvancesToVendors_BP_CP() Export
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	PaymentList.AdvanceAgreement AS Agreement,
@@ -303,7 +303,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement AS Agreement,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	Table.Amount,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
@@ -324,7 +324,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM
@@ -344,7 +344,7 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	Table.LegalName,
 		|	Table.Currency,
 		|	Table.AdvanceAgreement,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	Table.Amount,
 		|	UNDEFINED
 		|FROM

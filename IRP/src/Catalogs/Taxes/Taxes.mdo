@@ -126,6 +126,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="bb297c5c-36b8-4bf0-9d4a-43c0a197cd7c">
+    <name>TaxPayer</name>
+    <synonym>
+      <key>en</key>
+      <value>Tax payer</value>
+    </synonym>
+    <type>
+      <types>EnumRef.TaxPayers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="cdc68f49-26d5-42c6-aacd-85fe929d386e">
     <producedTypes>
       <objectType typeId="f0cf4f9b-1f4c-4400-9d90-2509369a03d3" valueTypeId="6f43b356-5cc3-4de7-853c-2fa728fd6452"/>

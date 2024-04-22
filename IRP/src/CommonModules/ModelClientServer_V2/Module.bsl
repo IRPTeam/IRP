@@ -3278,6 +3278,7 @@ Function ClearByTransactionTypeBankPaymentOptions() Export
 		|RetailCustomer,
 		|Employee,
 		|PaymentPeriod,
+		|CalculationType,
 		|ReceiptingAccount,
 		|ReceiptingBranch,
 		|Project,
@@ -3302,6 +3303,7 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.Calculationtype);
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	Result.Insert("Project"                  , Options.Project);
@@ -3374,7 +3376,8 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
 		|Employee,
-		|PaymentPeriod"; 
+		|PaymentPeriod,
+		|CalculationType"; 
 	ElsIf Options.TransactionType = Outgoing_OtherExpense Then
 		StrByType = "
 		|ExpenseType,
@@ -3553,7 +3556,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|Partner";
 	ElsIf Options.TransactionType = Incoming_OtherIncome Then
 		StrByType = "
-		|RevenueType";
+		|RevenueType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3586,6 +3591,7 @@ Function ClearByTransactionTypeCashPaymentOptions() Export
 		|RetailCustomer,
 		|Employee,
 		|PaymentPeriod,
+		|CalculationType,
 		|ReceiptingAccount,
 		|ReceiptingBranch,
 		|Project");
@@ -3603,6 +3609,7 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	Result.Insert("RetailCustomer"           , Options.RetailCustomer);
 	Result.Insert("Employee"                 , Options.Employee);
 	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.CalculationType);
 	Result.Insert("ReceiptingAccount"        , Options.ReceiptingAccount);
 	Result.Insert("ReceiptingBranch"         , Options.ReceiptingBranch);
 	Result.Insert("Project"                  , Options.Project);
@@ -3649,7 +3656,8 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
 		|Employee,
-		|PaymentPeriod";
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3822,6 +3830,7 @@ Function ClearByTransactionTypeCashExpenseOptions() Export
 		|Employee,
 		|OtherCompany,
 		|PaymentPeriod,
+		|CalculationType,
 		|ProfitLossCenter,
 		|ExpenseType,
 		|FinancialMovementTypeOtherCompany");
@@ -3833,6 +3842,7 @@ Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 	Result.Insert("Employee"      , Options.Employee);
 	Result.Insert("OtherCompany"  , Options.OtherCompany);
 	Result.Insert("PaymentPeriod" , Options.PaymentPeriod);
+	Result.Insert("CalculationType"  , Options.CalculationType);
 	Result.Insert("ProfitLossCenter" , Options.ProfitLossCenter);
 	Result.Insert("ExpenseType"      , Options.ExpenseType);
 	Result.Insert("FinancialMovementTypeOtherCompany" , Options.FinancialMovementTypeOtherCompany);
@@ -3857,7 +3867,8 @@ Function ClearByTransactionTypeCashExpenseExecute(Options) Export
 		|Partner,
 		|Employee,
 		|OtherCompany,
-		|PaymentPeriod";
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 		
 	ArrayOfAttributes = New Array();

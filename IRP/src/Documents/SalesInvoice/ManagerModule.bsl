@@ -380,6 +380,11 @@ Function ItemList()
 		   |	SalesInvoiceItemList.Ref.Date AS Period,
 		   |	SalesInvoiceItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		   |	SalesInvoiceItemList.SalesOrder AS SalesOrder,
+		   |	CASE
+		   |		WHEN SalesInvoiceItemList.Ref.Agreement.UseOrdersForSettlements
+		   |			THEN SalesInvoiceItemList.SalesOrder
+		   |		ELSE UNDEFINED
+		   |	END AS SalesOrderSettlements,
 		   |	NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL AS SalesOrderExists,
 		   |	TableRowIDInfo.RowID AS RowKey,
 		   |	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
@@ -1406,8 +1411,11 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
-	AccountingAnalytics.Credit = ChartsOfAccounts.Basic.FindByCode("REV-SALES"); //Credit.Account;
-
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.RevenueType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;
@@ -1419,18 +1427,16 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.RevenueType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountRevenue;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
 	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
-	If ValueIsFilled(Credit.IncomingAccount) Then
-		AccountingAnalytics.Credit = Credit.IncomingAccount;
-	EndIf;
+	AccountingAnalytics.Credit = Credit.IncomingAccount;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	Return AccountingAnalytics;
@@ -1447,17 +1453,13 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 	                                                      Parameters.ObjectData.Currency);
 
 	// Debit
-	If ValueIsFilled(Accounts.AccountAdvancesCustomer) Then
-		AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
-	EndIf;
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
 	// Credit
-	If ValueIsFilled(Accounts.AccountTransactionsCustomer) Then
-		AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
-	EndIf;
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
@@ -1471,19 +1473,17 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.ObjectData.Company.LandedCostExpenseType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+															  Parameters.ObjectData.Company.LandedCostExpenseType,
+															  Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.Company.LandedCostExpenseType);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
 	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	AccountingAnalytics.Credit = Credit.Account;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

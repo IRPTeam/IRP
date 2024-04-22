@@ -698,7 +698,7 @@ Function NeedAutoLinkAtServer(RowInfo)
 	If BasisesTable.Count() = 1 Then
 		FillPropertyValues(NeedAutoLink.BaseInfo, BasisesTable[0]);
 		NeedAutoLink.IsOk = True;
-	Else
+	Else		
 		For Each Row In BasisesTable Do
 			If RowInfo.SelectedRow.QuantityInBaseUnit = Row.QuantityInBaseUnit Then
 				FillPropertyValues(NeedAutoLink.BaseInfo, Row);

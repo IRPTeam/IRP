@@ -43,6 +43,26 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="12117764-c8ec-4028-87af-2ae972083b6f">
+    <name>AccountTransit</name>
+    <synonym>
+      <key>en</key>
+      <value>Account transit</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.LedgerTypeVariant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="1fc33369-7b9e-4cbb-8312-ffebc2bd32cd">
     <name>Company</name>
     <synonym>
@@ -83,13 +103,17 @@
     <name>CashAccount</name>
     <synonym>
       <key>en</key>
-      <value>Cash account</value>
+      <value>Cash/Bank account</value>
     </synonym>
     <type>
       <types>CatalogRef.CashAccounts</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>InformationRegister.T9011S_AccountsCashAccount.Dimension.Company</field>
+    </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>

@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -55,9 +56,17 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	
 	Form.Items.EditCurrenciesAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesDeduction.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesTaxes.Enabled = Not Form.ReadOnly;
+	
+	Form.Items.EditAccountingAccrual.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingCashAdvanceDeduction.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccountingTaxes.Enabled = Not Form.ReadOnly;
 	
 	Form.Items.FillAccrual.Enabled = Not Form.ReadOnly;
 	Form.Items.FillDeduction.Enabled = Not Form.ReadOnly;	
@@ -146,6 +155,88 @@ Procedure CurrencyOnChange(Item)
 	DocPayrollClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 	
+#EndRegion
+
+
+#Region PARTNER
+
+&AtClient
+Procedure PartnerOnChange(Item)
+	DocPayrollClient.PartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region LEGAL_NAME
+
+&AtClient
+Procedure LegalNameOnChange(Item)
+	DocPayrollClient.LegalNameOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementOnChange(Item)
+	DocPayrollClient.AgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPayrollClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocPayrollClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region SALARY_TAX_LIST
+
+&AtClient
+Procedure SalaryTaxListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPayrollClient.PayrollListsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocPayrollClient.PayrollListsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListBeforeDeleteRow(Item, Cancel)
+	DocPayrollClient.PayrollListsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure SalaryTaxListAfterDeleteRow(Item)
+	DocPayrollClient.PayrollListsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region PAYROLL_LISTS_LIST
@@ -392,6 +483,7 @@ Function FillPayrollListsAtServer(TypeColumnName, _Type)
 	FillingParameters.Insert("_Type"     , _Type);
 	FillingParameters.Insert("TypeColumnName" , TypeColumnName);
 	FillingParameters.Insert("Ref" , Object.Ref);
+	FillingParameters.Insert("CalculationType" , Object.CalculationType);
 	
 	If _Type = Enums.PayrollTypes.Accrual Then
 		Result = DocPayrollServer.GetPayrolls_Accrual(FillingParameters);
@@ -418,6 +510,11 @@ Procedure EditCurrenciesDeduction(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesTaxes(Command)
+	EditCurrencies(Command, "SalaryTaxList");
+EndProcedure
+
+&AtClient
 Procedure EditCurrencies(Command, TableName)
 	CurrentData = ThisObject.Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
@@ -436,6 +533,47 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure EditAccountingAccrual(Command)
+	EditAccounting("AccrualList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingDeduction(Command)
+	EditAccounting("DeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingCashAdvanceDeduction(Command)
+	EditAccounting("CashAdvanceDeductionList");
+EndProcedure
+
+&AtClient
+Procedure EditAccountingTaxes(Command)
+	EditAccounting("SalaryTaxList");
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(TableName)
+	CurrentData = ThisObject.Items[TableName].CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData(TableName);
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, TableName);
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData(TableName)
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, TableName);
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
+
 #EndRegion
 
-ThisObject.MainTables = "AccrualList, DeductionList, CashAdvanceDeductionList";
+ThisObject.MainTables = "AccrualList, DeductionList, CashAdvanceDeductionList, SalaryTaxList";

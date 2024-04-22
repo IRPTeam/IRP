@@ -840,6 +840,9 @@ Procedure ExchangeDifference(Parameters)
 		IsMoneyExchange = True;
 		TransitIncoming_PrepareTable = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3021B_CashInTransitIncoming].PrepareTable;
 		
+		AccountingOperation_Revenues = Catalogs.AccountingOperations.BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues;
+		AccountingOperation_Expenses = Catalogs.AccountingOperations.BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit;
+		
 		ExpenseType  = Parameters.Object.ExpenseType;
 		LossCenter   = Parameters.Object.LossCenter;
 		RevenueType  = Parameters.Object.RevenueType;
@@ -1019,8 +1022,6 @@ Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, Tran
 	QueryTable = QueryResult.Unload();
 	
 	TransactionCurrencyType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
-	
-	TransactionRow = QueryTable.FindRows(New Structure("CurrencyMovementType", TransactionCurrencyType))[0];
 	
 	For Each Row In QueryTable Do
 		If Row.CurrencyMovementType <> TransactionCurrencyType Then

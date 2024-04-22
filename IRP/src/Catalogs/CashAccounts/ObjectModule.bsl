@@ -51,6 +51,6 @@ Procedure OnCopy(CopiedObject)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+	CommonFunctionsServer.CheckUniqueDescriptions_PrivilegedCall(Cancel, ThisObject);
 EndProcedure
 

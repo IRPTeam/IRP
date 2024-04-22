@@ -179,6 +179,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.AttachedDocumentSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.PaymentSchedules</name>
 		<right>
 			<name>Read</name>
@@ -1011,6 +1026,10 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Catalog.DataAreas</name>
@@ -1554,6 +1573,21 @@
 	</object>
 	<object>
 		<name>Catalog.MovementRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.SalaryCalculationType</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

@@ -28,4 +28,5 @@
   <content>AccumulationRegister.R9555T_PaidSickLeaves</content>
   <content>AccumulationRegister.R9560T_AdditionalAccrual</content>
   <content>AccumulationRegister.R9570T_AdditionalDeduction</content>
+  <content>Catalog.SalaryCalculationType</content>
 </mdclass:FunctionalOption>

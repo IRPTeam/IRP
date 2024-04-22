@@ -27,7 +27,7 @@ Function T2014S_AdvancesInfo_BP_CP() Export
 		|	PaymentList.Currency,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsVendorAdvance,
 		|	FALSE AS IsCustomerAdvance,
 		|	PaymentList.AdvanceAgreement,
@@ -78,7 +78,7 @@ Function T2014S_AdvancesInfo_BR_CR() Export
 		|	PaymentList.LegalName,
 		|	PaymentList.AdvanceAgreement,
 		|	PaymentList.Project,
-		|	PaymentList.Order,
+		|	PaymentList.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerAdvance,
 		|	FALSE AS IsVendorAdvance,
 		|	PaymentList.Amount
@@ -125,16 +125,16 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|					then case
 		|						when Doc.IsReceiveTransactionCustomer
 		|						OR Doc.IsReceiveAdvanceCustomer
-		|							then VALUE(AccumulationRecordType.Expense)
-		|						else VALUE(AccumulationRecordType.Receipt)
+		|							then VALUE(Enum.RecordType.Expense)
+		|						else VALUE(Enum.RecordType.Receipt)
 		|					end
 		|				else case
 		|					when Doc.IsReceiveTransactionCustomer
 		|					OR Doc.IsReceiveAdvanceVendor
 		|					OR Doc.IsReceiveTransactionVendor
 		|					OR Doc.IsReceiveAdvanceCustomer
-		|						then VALUE(AccumulationRecordType.Expense)
-		|					else VALUE(AccumulationRecordType.Receipt)
+		|						then VALUE(Enum.RecordType.Expense)
+		|					else VALUE(Enum.RecordType.Receipt)
 		|				end
 		|			end
 		|		else case
@@ -142,14 +142,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|				then case
 		|					when Doc.IsReceiveTransactionVendor
 		|					OR Doc.IsReceiveAdvanceVendor
-		|						then VALUE(AccumulationRecordType.Expense)
-		|					else VALUE(AccumulationRecordType.Receipt)
+		|						then VALUE(Enum.RecordType.Expense)
+		|					else VALUE(Enum.RecordType.Receipt)
 		|				end
 		|			else case
 		|				when Doc.IsReceiveTransactionVendor
 		|				OR Doc.IsReceiveAdvanceVendor
-		|					then VALUE(AccumulationRecordType.Expense)
-		|				else VALUE(AccumulationRecordType.Receipt)
+		|					then VALUE(Enum.RecordType.Expense)
+		|				else VALUE(Enum.RecordType.Receipt)
 		|			end
 		|		end
 		|	end AS RecordType,
@@ -161,7 +161,7 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.Currency AS Currency,
 		|	Doc.SendAgreement AS AdvanceAgreement,
 		|	Doc.SendProject AS Project,
-		|	Doc.SendOrder AS Order,
+		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.SendIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.SendIsVendorAdvance AS IsVendorAdvance,
 		|	Doc.Amount
@@ -179,14 +179,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|					then case
 		|						when Doc.IsSendTransactionVendor
 		|						OR Doc.IsSendAdvanceCustomer
-		|							then VALUE(AccumulationRecordType.Receipt)
-		|						else VALUE(AccumulationRecordType.Expense)
+		|							then VALUE(Enum.RecordType.Receipt)
+		|						else VALUE(Enum.RecordType.Expense)
 		|					end
 		|				else case
 		|					when Doc.IsSendTransactionVendor
 		|					OR Doc.IsSendAdvanceCustomer
-		|						then VALUE(AccumulationRecordType.Receipt)
-		|					else VALUE(AccumulationRecordType.Expense)
+		|						then VALUE(Enum.RecordType.Receipt)
+		|					else VALUE(Enum.RecordType.Expense)
 		|				end
 		|			end
 		|		else case
@@ -194,14 +194,14 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|				then case
 		|					when Doc.IsSendTransactionCustomer
 		|					OR Doc.IsSendAdvanceVendor
-		|						then VALUE(AccumulationRecordType.Receipt)
-		|					else VALUE(AccumulationRecordType.Expense)
+		|						then VALUE(Enum.RecordType.Receipt)
+		|					else VALUE(Enum.RecordType.Expense)
 		|				end
 		|			else case
 		|				when Doc.IsSendTransactionCustomer
 		|				OR Doc.IsSendAdvanceVendor
-		|					then VALUE(AccumulationRecordType.Receipt)
-		|				else VALUE(AccumulationRecordType.Expense)
+		|					then VALUE(Enum.RecordType.Receipt)
+		|				else VALUE(Enum.RecordType.Expense)
 		|			end
 		|		end
 		|	end,
@@ -213,7 +213,7 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
-		|	Doc.ReceiveOrder,
+		|	Doc.ReceiveOrderSettlements,
 		|	Doc.ReceiveIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.ReceiveIsVendorAdvance AS IsVendorAdvance,
 		|	Doc.Amount
@@ -233,7 +233,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements AS Order,
 		|	TRUE AS IsCustomerAdvance,
 		|	FALSE AS IsVendorAdvance,
 		|	Table.Amount
@@ -256,7 +256,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	-Table.Amount
@@ -278,7 +278,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	TRUE,
 		|	FALSE,
 		|	-Table.Amount
@@ -300,7 +300,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	Table.Amount
@@ -322,7 +322,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	-Table.Amount
@@ -344,7 +344,7 @@ Function T2014S_AdvancesInfo_Cheque() Export
 		|	Table.LegalName,
 		|	Table.AdvanceAgreement,
 		|	Table.Project,
-		|	Table.Order,
+		|	Table.OrderSettlements,
 		|	FALSE,
 		|	TRUE,
 		|	-Table.Amount

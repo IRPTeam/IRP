@@ -23,5 +23,5 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	CommonFunctionsServer.CheckUniqueDescriptions(Cancel, ThisObject);
+	CommonFunctionsServer.CheckUniqueDescriptions_PrivilegedCall(Cancel, ThisObject);
 EndProcedure

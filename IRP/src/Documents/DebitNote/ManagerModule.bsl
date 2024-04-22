@@ -293,7 +293,7 @@ Function T1040T_AccountingAmounts()
 		|	Transactions.Key AS Key,
 		|	Transactions.Currency,
 		|	Transactions.Amount,
-		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues) AS Operation,
+		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
@@ -330,16 +330,35 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsCustomer";
+		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Key,
+		|	Transactions.Currency,
+		|	Transactions.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues),
+		|	UNDEFINED
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsOther";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues Then
-		Return GetAnalytics_VendorAdvancesRevenues(Parameters); // Vendors advances - Revenues
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues Then
+		Return GetAnalytics_VendorTransactionRevenues(Parameters); // Vendors transactions - Revenues
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		Return GetAnalytics_OffsetOfAdvancesVendor(Parameters); // Vendors transactions - Advances to vendors 
-	ElsIf Parameters.Operation = Catalogs.AccountingOperations.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues Then
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues Then
 		Return GetAnalytics_CustomerTransactionRevenues(Parameters); // Customer transactions - Revenues
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
+		Return GetAnalytics_OtherPartnerRevenues(Parameters); // OtherPartner - Revenues
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -347,24 +366,23 @@ EndFunction
 #Region Accounting_Analytics
 
 // Vendors advances - Revenues
-Function GetAnalytics_VendorAdvancesRevenues(Parameters)
+Function GetAnalytics_VendorTransactionRevenues(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 
+	// Debit
 	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                   Parameters.RowData.Partner, 
 	                                                   Parameters.RowData.Agreement,
 	                                                   Parameters.RowData.Currency);
-	                                                   
-	AccountingAnalytics.Debit = Debit.AccountAdvancesVendor;
-	// Debit - Analytics
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
-	// Credit - Analytics
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.RevenueType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;
@@ -379,16 +397,10 @@ Function GetAnalytics_OffsetOfAdvancesVendor(Parameters)
 	                                                      Parameters.RowData.Partner, 
 	                                                      Parameters.RowData.Agreement,
 	                                                      Parameters.RowData.Currency);
-	                                                      
-	If ValueIsFilled(Accounts.AccountTransactionsVendor) Then
-		AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
-	EndIf;
+	AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-
-	If ValueIsFilled(Accounts.AccountAdvancesVendor) Then
-		AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
-	EndIf;
+	AccountingAnalytics.Credit = Accounts.AccountAdvancesVendor;
 	// Credit - Analytics
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
@@ -404,18 +416,38 @@ Function GetAnalytics_CustomerTransactionRevenues(Parameters)
 	                                                   Parameters.RowData.Partner, 
 	                                                   Parameters.RowData.Agreement,
 	                                                   Parameters.RowData.Currency);
-	                                                   
-	If ValueIsFilled(Debit.AccountTransactionsCustomer) Then
-		AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
-	EndIf;
+	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	// Debit - Analytics
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, Parameters.RowData.RevenueType);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.RevenueType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// OtherPartner - Revenues
+Function GetAnalytics_OtherPartnerRevenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                           Parameters.RowData.RevenueType,
+	                                                           Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;

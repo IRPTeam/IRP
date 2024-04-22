@@ -911,6 +911,13 @@
         <value>150</value>
       </code>
     </items>
+    <items id="ad2f21c9-8dda-44c6-9cfe-34d6f260ffb3">
+      <name>Catalog_AttachedDocumentSettings</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>151</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

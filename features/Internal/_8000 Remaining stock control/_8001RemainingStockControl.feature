@@ -566,7 +566,7 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I click "Post" button
 		Then user message window does not contain messages
 	* Check stock control in the previous period 
-		And I save the value of "Number" field as "NumberSalesInvoice800009"
+		And I save the value of "Number" field as "$$NumberSalesInvoice800009$$"
 		* Create second SI (previous date)
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I click the button named "FormCreate"
@@ -653,10 +653,11 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 			And I close current window
 			And I click "No" button										
 	* Cancel posting SI
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
-			| 'Number'                     |
-			| '$NumberSalesInvoice800009$' |
+			| 'Number'                       |
+			| '$$NumberSalesInvoice800009$$' |
 		And I click "Cancel posting" button
 		Then user message window does not contain messages
 		And I close all client application windows

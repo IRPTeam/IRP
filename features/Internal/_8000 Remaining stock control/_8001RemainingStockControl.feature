@@ -565,7 +565,97 @@ Scenario:_800009 check remaining stock control serial lot numbers in the Sales i
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then user message window does not contain messages
+	* Check stock control in the previous period 
+		And I save the value of "Number" field as "NumberSalesInvoice800009"
+		* Create second SI (previous date)
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Ferron BP'       |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'           |
+				| 'Company Ferron BP'     |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'                  |
+				| 'Basic Partner terms, TRY'     |
+			And I select current line in "List" table
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'      |
+				| 'Main Company'     |
+			And I select current line in "List" table
+			And I click Choice button of the field named "Store"
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'Store 02'        |
+			And I select current line in "List" table
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I activate field named "ItemListItem" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'           |
+				| 'Product 1 with SLN'    |
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I activate field named "ItemKey" in "List" table
+			And I go to line in "List" table
+				| 'Item'                 | 'Item key'    |
+				| 'Product 1 with SLN'   | 'PZU'         |
+			And I select current line in "List" table
+			And I activate field named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click "Add" button
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number' |
+				| 'PZU'   | '8908899879'    |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "17,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Code' | 'Owner' | 'Serial number' |
+				| '13'   | 'PZU'   | '8908899877'    |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "30,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I click "Ok" button
+			And I input "50,00" text in "Price" field of "ItemList" table
+			And I remove "Use shipment confirmation" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Change date
+			And I save "CurrentDate() - 3600" in "PreviousDate" variable
+			And I move to "Other" tab
+			And I input "$PreviousDate$" text in the field named "Date"
+			And I move to the next attribute
+			Then "Update item list info" window is opened
+			And I click "Uncheck all" button
+			And I click "OK" button
+			And I click "Post" button
+			Then "1C:Enterprise" window is opened
+			And I click the button named "OK"
+			Then there are lines in TestClient message log
+				|'Line No. [1] [Product 1 with SLN PZU] Serial lot number [8908899879] R4010 Actual stocks remaining: 16 . Required: 17 . Lacking: 1 .'|
+			And I close current window									
 	* Cancel posting SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$NumberSalesInvoice800009$' |
 		And I click "Cancel posting" button
 		Then user message window does not contain messages
 		And I close all client application windows

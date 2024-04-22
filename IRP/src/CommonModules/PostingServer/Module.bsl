@@ -742,15 +742,26 @@ EndFunction
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	
 	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
+	IsActualStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4010B_ActualStocks; 
 	
 	If RecordType = AccumulationRecordType.Expense Then
-		If Not IsFreeStock Then
-			Parameters.BalancePeriod = 
-				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+		
+		If IsFreeStock Then
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			Return CheckResult.IsOk;
+		ElsIf IsActualStock Then
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			If Not CheckResult.IsOk Then
+				Return CheckResult.IsOk;
+			EndIf;
+			Parameters.BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+			Parameters.TempTablesManager = New TempTablesManager();
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			Return CheckResult.IsOk;
+		Else
+			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
 		EndIf;
 		
-		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		Return CheckResult.IsOk;
 	Else // Receipt
 		
 		IsPostingNewDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsPostingNewDocument", False);

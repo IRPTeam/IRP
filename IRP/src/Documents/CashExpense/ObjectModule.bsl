@@ -40,7 +40,6 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If FillingData = Undefined Then
 		FillingData = New Structure();
-		FillingData.Insert("TransactionType", Enums.CashExpenseTransactionTypes.CurrentCompanyExpense);
 		FillPropertyValues(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 	EndIf;

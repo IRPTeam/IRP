@@ -665,6 +665,22 @@ Scenario: _041320 check Sales return with serial lot numbers movements by the Re
 			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     |
 	And I close all client application windows
 
+Scenario: _041321 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (Return from trade agent)
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '192'       |
+	* Check movements by the Register  "T2015 Transactions info""
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "T2015 Transactions info"    |
+	And I close all client application windows
+
+
 Scenario: _041326 check Sales return movements by the Register  "T2015 Transactions info"
 	And I close all client application windows
 	* Select Sales return

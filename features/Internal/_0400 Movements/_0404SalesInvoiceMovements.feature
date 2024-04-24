@@ -1307,7 +1307,19 @@ Scenario: _0401348 check Sales invoice movements by the Register  "R4014 Serial 
 			| ''                                            | '04.11.2022 16:33:38' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'PZU'      | '0514'              | '4'        |
 		And I close all client application windows
 
-
+Scenario: _0401349 check absence Sales invoice movements by the Register  "T2015 Transactions info" (Shipment to trade agent)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '192'       |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
 
 Scenario: _0401350 check Sales invoice movements by the Register  "T2015 Transactions info" (consignor and own stocks)
 	And I close all client application windows

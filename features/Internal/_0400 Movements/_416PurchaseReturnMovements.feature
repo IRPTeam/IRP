@@ -610,6 +610,38 @@ Scenario: _041622 check Purchase return movements by the Register  "R4014 Serial
 			| ''                                              | '02.11.2022 16:31:47' | 'Expense'    | 'Main Company' | 'Distribution department' | ''      | 'ODS'      | '1123'              | '1'        |	
 	And I close all client application windows
 
+Scenario: _041623 check Purchase return movements by the Register  "T2015 Transactions info" (Return to vendor)
+	And I close all client application windows 
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '233'       |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 233 dated 14.03.2021 19:26:51' | ''             | ''             | ''      | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''                                     | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'           | ''             | ''             | ''      | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''                                     | ''        | ''       | ''       | ''        |
+			| ''                                              | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                             | 'Unique ID'                            | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                              | 'Main Company' | 'Front office' | ''      | '14.03.2021 19:26:51' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase return 233 dated 14.03.2021 19:26:51' | '*'                                    | ''        | '-400'   | 'Yes'    | 'No'      |		
+	And I close all client application windows
+
+Scenario: _041624 check absence Purchase return movements by the Register  "T2015 Transactions info" (Return to consignor)
+	* Select PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '195'       |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
 
 Scenario: _041625 check there is no Purchase return movements by the Register  "R1001 Purchases" (Return to consignor)
 	And I close all client application windows

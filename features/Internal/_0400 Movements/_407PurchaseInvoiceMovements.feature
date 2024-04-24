@@ -988,7 +988,7 @@ Scenario: _0401036 check Purchase invoice movements by the Register  "T2015 Tran
 			| 'Number'    |
 			| '117'       |
 	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

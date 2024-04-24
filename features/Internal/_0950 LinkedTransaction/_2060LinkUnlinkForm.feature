@@ -621,7 +621,7 @@ Scenario: _2060004 check button not calculate rows
 			And I click "Ok" button		
 			And I finish line editing in "ItemList" table
 			And "ItemList" table became equal
-				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' |
+				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' |
 				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 	* Check not calculate row
@@ -644,7 +644,7 @@ Scenario: _2060004 check button not calculate rows
 		And I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table became equal
-				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' |
+				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' |
 				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 	* Not calculate row (auto link)
@@ -655,7 +655,7 @@ Scenario: _2060004 check button not calculate rows
 		And I click "Auto link" button
 		And I click "Ok" button
 		And "ItemList" table became equal
-				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' |
+				| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' |
 				| '1' | 'en description is empty' | 'Dress'                        | 'XS/Blue'  | 'No'                 | '0,92'       | 'pcs'  | ''                   | '2,000'    | '3,00'  | '18%' | '5,08'       | '6,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 				| '2' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '0,76'       | 'pcs'  | '9009099'            | '1,000'    | '5,00'  | '18%' | '4,24'       | '5,00'         | 'No'             | ''                     | 'Store 01' | 'No'                        |
 		And I close all client application windows
@@ -2620,7 +2620,7 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 		And I click "Auto link" button
 		And I click "Ok" button	
 		And "ItemList" table contains lines
-			| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
 			| '1' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '2' | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '3' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
@@ -2634,7 +2634,7 @@ Scenario: _2060024 check auto form in the SI - SO (with sln)
 			| '2 054'  |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '#' | 'Price type'              | 'Item'                         | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Quantity' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
 			| '1' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009098'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '2' | 'Basic Price Types'       | 'Dress'                        | 'XS/Blue'  | 'No'                 | '168,94'     | 'pcs'  | ''                   | '2,000'    | '520,00' | '18%' | ''              | '871,06'     | '1 040,00'     | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
 			| '3' | 'en description is empty' | 'Product 7 with SLN (new row)' | 'PZU'      | 'No'                 | '16,24'      | 'pcs'  | '9009099'            | '1,000'    | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | 'No'             | ''                     | 'Store 01' | 'No'                        | 'Sales order 2 054 dated 11.04.2023 15:25:22' |
@@ -2780,7 +2780,7 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
+			| '#' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Quantity' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Use work sheet' | 'Other period revenue type'   | 'Store'    | 'Use shipment confirmation' | 'Sales order'                                 |
 			| '1' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | '3 569,49'   | 'pcs'  | '45,000'   | '520,00' | '18%' | '19 830,51'  | '23 400,00'    | 'No'             | ''                     | 'Store 01' | 'Yes'                       | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 			| '2' | 'Basic Price Types' | 'Dress' | 'S/Yellow' | 'No'                 | '62 923,73'  | 'pcs'  | '750,000'  | '550,00' | '18%' | '349 576,27' | '412 500,00'   | 'No'             | ''                     | 'Store 01' | 'Yes'                       | 'Sales order 1 051 dated 20.07.2021 10:44:11' |
 		And I click "Post" button

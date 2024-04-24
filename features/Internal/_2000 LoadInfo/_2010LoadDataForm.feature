@@ -84,7 +84,7 @@ Scenario: _020110 load data in the SI
 		When check load data form in the document
 	* Check document
 		And "ItemList" table contains lines
-			| '#'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other revenue type'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Revenue type'   | 'Sales person'    |
+			| '#'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Revenue type'   | 'Sales person'    |
 			| '1'   | 'Basic Price Types'   | 'Dress'                | 'XS/Blue'    | ''                     | 'No'                   | '475,93'       | 'pcs'    | ''                     | '6,000'      | '520,00'   | '18%'   | ''                | '2 644,07'     | '3 120,00'       | ''                     | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
 			| '2'   | 'Basic Price Types'   | 'Product 1 with SLN'   | 'ODS'        | ''                     | 'No'                   | ''             | 'pcs'    | ''                     | '2,000'      | ''         | '18%'   | ''                | ''             | ''               | ''                     | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
 			| '3'   | 'Basic Price Types'   | 'Product 1 with SLN'   | 'PZU'        | ''                     | 'No'                   | ''             | 'pcs'    | '8908899877'           | '1,000'      | ''         | '18%'   | ''                | ''             | ''               | ''                     | ''                      | 'Store 01'   | ''                | 'No'                          | ''         | ''              | ''               | ''                |
@@ -150,7 +150,7 @@ Scenario: _020111 load data in the SI by serial lot number
 		And I click "Next" button
 		And I click "Next" button
 		And "ItemList" table became equal
-			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other revenue type'   | 'Store'      | 'Delivery date'   | 'Detail'    |
+			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Store'      | 'Delivery date'   | 'Detail'    |
 			| '1'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 3 with SLN'   | 'UNIQ'       | 'No'                   | '61,02'        | 'pcs'    | '09987897977889'       | ''                    | '2,000'      | '200,00'   | '18%'   | ''                | '338,98'       | '400,00'         | ''                     | 'Store 01'   | '12.03.2025'      | 'test'      |
 		And I close all client application windows
 		
@@ -195,7 +195,7 @@ Scenario: _020111 load data in the SI by item and item key
 		And I click "Next" button
 		And I click "Next" button
 		And "ItemList" table became equal
-			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other revenue type'   | 'Store'      | 'Delivery date'   | 'Detail'    |
+			| '#'   | 'Inventory origin'   | 'Price type'          | 'Item'                 | 'Item key'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Store'      | 'Delivery date'   | 'Detail'    |
 			| '1'   | 'Own stocks'         | 'Basic Price Types'   | 'Product 1 with SLN'   | 'ODS'        | 'No'                   | '61,02'        | 'pcs'    | ''                     | ''                    | '2,000'      | '200,00'   | '18%'   | ''                | '338,98'       | '400,00'         | ''                     | 'Store 01'   | ''                | 'test'      |
 		And I close all client application windows
 		

@@ -117,11 +117,19 @@ Procedure SelectCosts(Command)
 	
 EndProcedure
 
+
+
+
 #EndRegion
 #EndRegion
 
 #Region FormCommandsEventHandlers
-// события по нажатию кнопок формы (не табличных частей
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region Public

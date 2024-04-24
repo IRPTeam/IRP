@@ -201,52 +201,56 @@ EndFunction
 // Check documents result.
 // 
 // Parameters:
-//  Document - DocumentRefDocumentName -
+//  Document - DocumentRefDocumentName, DocumentRef.SalesInvoice, DocumentRef.SalesOrder, DocumentRef.CashReceipt -
 //  DocName - String -
 //
 // Returns:
 //  Array Of QueryResult
 Function CheckDocumentsResult(Document, DocName)
-	Result = AdditionalDocumentTableControlReuse.GetQuery(DocName);
+	Result = AdditionalDocumentTableControlReuse.GetQuery(DocName); 
 	
 	Query = New Query(Result.Query);
 	Query.SetParameter("Headers", GetHeaderTable(Document));
 	
 	If Result.Tables.ItemList = Undefined Then
-		Query.SetParameter("ItemList", Document.ItemList.Unload());
-	Else
-		Query.SetParameter("ItemList", Result.Tables.ItemList);
+		Result.Tables.ItemList = Document.ItemList.Unload();
 	EndIf;
-	
 	If Result.Tables.RowIDInfo = Undefined Then
-		Query.SetParameter("RowIDInfo", Document.RowIDInfo.Unload());
-	Else
-		Query.SetParameter("RowIDInfo", Result.Tables.RowIDInfo);
+		Result.Tables.RowIDInfo = Document.RowIDInfo.Unload();
 	EndIf;
-		
 	If Result.Tables.SpecialOffers = Undefined Then
-		Query.SetParameter("SpecialOffers", Document.SpecialOffers.Unload());
-	Else
-		Query.SetParameter("SpecialOffers", Result.Tables.SpecialOffers);
+		Result.Tables.SpecialOffers = Document.SpecialOffers.Unload();
 	EndIf;
-		
 	If Result.Tables.SerialLotNumbers = Undefined Then
-		Query.SetParameter("SerialLotNumbers", Document.SerialLotNumbers.Unload());
-	Else
-		Query.SetParameter("SerialLotNumbers", Result.Tables.SerialLotNumbers);
+		Result.Tables.SerialLotNumbers = Document.SerialLotNumbers.Unload();
 	EndIf;
-	
 	If Result.Tables.SourceOfOrigins = Undefined Then
-		Query.SetParameter("SourceOfOrigins", Document.SourceOfOrigins.Unload());
-	Else
-		Query.SetParameter("SourceOfOrigins", Result.Tables.SourceOfOrigins);
+		Result.Tables.SourceOfOrigins = Document.SourceOfOrigins.Unload();
 	EndIf;
-	
 	If Result.Tables.Payments = Undefined Then
-		Query.SetParameter("Payments", Document.Payments.Unload());
-	Else
-		Query.SetParameter("Payments", Result.Tables.Payments);
+		Result.Tables.Payments = Document.Payments.Unload();
 	EndIf;
+ 	If Result.Tables.PaymentList = Undefined Then
+		Result.Tables.PaymentList = Document.PaymentList.Unload();
+ 	EndIf;
+ 		
+	TypeDescriptionArray = New Array; // Array of Type
+	TypeDescriptionArray.Add(TypeOf(Document.Ref));
+	RefTypeDescription = New TypeDescription(TypeDescriptionArray);
+	For Each TableKeyValue In Result.Tables Do
+		CurrentTable = TableKeyValue.Value; // ValueTable
+		If CurrentTable <> Undefined And CurrentTable.Columns.Find("Ref") = Undefined Then
+			CurrentTable.Columns.Add("Ref", RefTypeDescription);
+		EndIf;
+	EndDo;
+ 		
+	Query.SetParameter("ItemList", Result.Tables.ItemList);
+	Query.SetParameter("RowIDInfo", Result.Tables.RowIDInfo);
+	Query.SetParameter("SpecialOffers", Result.Tables.SpecialOffers);
+	Query.SetParameter("SerialLotNumbers", Result.Tables.SerialLotNumbers);
+	Query.SetParameter("SourceOfOrigins", Result.Tables.SourceOfOrigins);
+	Query.SetParameter("Payments", Result.Tables.Payments);
+	Query.SetParameter("PaymentList", Result.Tables.PaymentList);
 	
   	Return Query.ExecuteBatch();
 EndFunction

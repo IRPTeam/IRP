@@ -49,3 +49,22 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
+
+// Row structure.
+// 
+// Returns:
+//  Structure - Row pickup empty structure:
+// * Amount - Number - 
+// * Currency - CatalogRef.Currencies - 
+// * Document - DocumentRef.PurchaseInvoice 
+// * TaxAmount - Number - 
+Function RowPickupEmptyStructure() Export
+	
+	Structure = New Structure();
+	Structure.Insert("Currency", PredefinedValue("Catalog.Currencies.EmptyRef"));
+	Structure.Insert("Document", Undefined);
+	Structure.Insert("Amount", 0);
+	Structure.Insert("TaxAmount", 0);
+		
+	Return Structure;
+EndFunction	

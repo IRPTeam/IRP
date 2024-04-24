@@ -88,7 +88,7 @@ EndProcedure
 #Region CostList
 
 &AtClient
-Procedure Pickup(Command)
+Procedure SelectCosts(Command)
 
 	Notify = New NotifyDescription("AfterExpensePickup", ThisObject);
 	FormParameters = New Structure();
@@ -135,10 +135,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	//
 EndProcedure
 
-// After expense pickup.
+// After expense SelectСosts.
 // 
 // Parameters:
-//  Result - Array of See Document.ExpenseAccruals.Form.PickupExpenseForm.RowEmptyStructure
+//  Result - Array of See DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure
 //  Structure, Undefined
 //  AdditionalParemeters - Arbitrary
 &AtClient
@@ -161,12 +161,12 @@ Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
 		
 		AmountTax = Structure.TaxAmount; // Number
 		
-		CostListRow.Basis = DocumentRef;
+		CostListRow.Basis = Structure.Document;
 		CostListRow.AmountTax = AmountTax;
 			
 	EndDo;	
 		
-EndProcedure	
+EndProcedure
 
 #EndRegion
 

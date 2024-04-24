@@ -155,7 +155,15 @@ Function CostList()
 	|	ExpenseAccrualsCostList.Ref.Company AS Company,
 	|	ExpenseAccrualsCostList.Ref.Branch AS Branch,
 	|	ExpenseAccrualsCostList.Ref.Currency AS Currency,
-	|	ExpenseAccrualsCostList.Basis AS Basis,
+	|	ExpenseAccrualsCostList.ProfitLossCenter AS ProfitLossCenter,
+	|	ExpenseAccrualsCostList.ExpenseType AS ExpenseType,
+	|	ExpenseAccrualsCostList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	ExpenseAccrualsCostList.Project AS Project,
+	|	CASE
+	|		WHEN ExpenseAccrualsCostList.Basis = UNDEFINED
+	|			THEN &Ref
+	|		ELSE ExpenseAccrualsCostList.Basis
+	|	END AS Basis,
 	|	ExpenseAccrualsCostList.Amount AS Amount,
 	|	ExpenseAccrualsCostList.AmountTax AS AmountTax,
 	|	ExpenseAccrualsCostList.Amount + ExpenseAccrualsCostList.AmountTax AS AmountWithTaxes

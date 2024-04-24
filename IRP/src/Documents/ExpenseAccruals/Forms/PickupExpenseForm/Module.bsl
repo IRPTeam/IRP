@@ -58,7 +58,7 @@ Procedure Ок(Command)
 		If Not Row.Use Then
 			Continue;
 		EndIf;
-		Structure = RowEmptyStructure();
+		Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
 		FillPropertyValues(Structure, Row);
 		
 		Array.Add(Structure);	
@@ -79,30 +79,6 @@ Procedure UncheckAll(Command)
 		Row.Use = False;
 	EndDo;
 EndProcedure
-
-#EndRegion
-
-#Region Private
-
-// Row structure.
-// 
-// Returns:
-//  Structure - Row empty structure:
-// * Amount - Number - 
-// * Currency - CatalogRef.Currencies - 
-// * Document - Undefined - 
-// * TaxAmount - Number - 
-&AtClient
-Function RowEmptyStructure() Export
-	
-	Structure = New Structure();
-	Structure.Insert("Amount", 0);
-	Structure.Insert("Currency", PredefinedValue("Catalog.Currencies.EmptyRef"));
-	Structure.Insert("Document", Undefined);
-	Structure.Insert("TaxAmount", 0);
-	
-	Return Structure;
-EndFunction	
 
 #EndRegion
 

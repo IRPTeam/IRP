@@ -918,10 +918,10 @@ Scenario: _029210 SO - PO - GR - SC - PI - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
-			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 01'   | '8,000'      | 'No'                        | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '677,97'       | 'Yes'                  |
-			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 01'   | '11,000'     | 'No'                        | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '1 864,41'     | 'Yes'                  |
-			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 01'   | '8,000'      | 'No'                        | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '2 033,90'     | 'Yes'                  |
+			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
+			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 01'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '677,97'       | 'Yes'                  |
+			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 01'   | '11,000'     | ''                            | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '1 864,41'     | 'Yes'                  |
+			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 01'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029210$$'   | ''         | '$$SalesOrder029210$$'   | '2 033,90'     | 'Yes'                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -1119,10 +1119,10 @@ Scenario: _029212 SO - PO - GR - PI - SC - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
-			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 01'   | '8,000'      | 'No'                        | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '677,97'       | 'Yes'                  |
-			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 01'   | '11,000'     | 'No'                        | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '1 864,41'     | 'Yes'                  |
-			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 01'   | '8,000'      | 'No'                        | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '2 033,90'     | 'Yes'                  |
+			| 'Item'       | 'Item key'    | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Source of origins'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'            | 'Detail'   | 'Sales order'            | 'Net amount'   | 'Use goods receipt'    |
+			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 01'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '677,97'       | 'Yes'                  |
+			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 01'   | '11,000'     | ''                            | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '1 864,41'     | 'Yes'                  |
+			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 01'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029212$$'   | ''         | '$$SalesOrder029212$$'   | '2 033,90'     | 'Yes'                  |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -1324,10 +1324,10 @@ Scenario: _029216 SO - PO - PI - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029216$$'   | '$$SalesOrder029216$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -1491,10 +1491,10 @@ Scenario: _029218 SO - PO - PI - SI - SC
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029218$$'   | '$$SalesOrder029218$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -1695,10 +1695,10 @@ Scenario: _029220 SO - PO - PI - GR - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029220$$'   | '$$SalesOrder029220$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -1901,10 +1901,10 @@ Scenario: _029222 SO - PO - PI - SC - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029222$$'   | '$$SalesOrder029222$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -2103,10 +2103,10 @@ Scenario: _029224 SO - PO - PI  - GR - SI - SC
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029224$$'   | '$$SalesOrder029224$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -2345,10 +2345,10 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 		And I click "Purchase invoice" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
-			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '677,97'        |
-			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '1 864,41'      |
-			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '2 033,90'      |
+			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '677,97'        |
+			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '1 864,41'      |
+			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029226$$'   | '$$SalesOrder029226$$'   | '2 033,90'      |
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I change checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
@@ -2585,10 +2585,10 @@ Scenario: _029226 SO - PO - PI  - GR - SC - SI
 # 		And I click "Purchase invoice" button
 # 		And I click "Ok" button
 # 		And "ItemList" table contains lines
-# 			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Is additional item cost'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
-# 			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '677,97'        |
-# 			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | 'No'                        | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '1 864,41'      |
-# 			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | 'No'                        | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '2 033,90'      |
+# 			| 'Item'       | 'Item key'    | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Price'    | 'VAT'   | 'Total amount'   | 'Store'      | 'Quantity'   | 'Other period expense type'   | 'Purchase order'            | 'Sales order'            | 'Net amount'    |
+# 			| 'Trousers'   | '38/Yellow'   | 'No'                   | '122,03'       | 'pcs'    | '100,00'   | '18%'   | '800,00'         | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '677,97'        |
+# 			| 'Shirt'      | '38/Black'    | 'No'                   | '335,59'       | 'pcs'    | '200,00'   | '18%'   | '2 200,00'       | 'Store 01'   | '11,000'     | ''                            | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '1 864,41'      |
+# 			| 'Dress'      | 'M/White'     | 'No'                   | '366,10'       | 'pcs'    | '300,00'   | '18%'   | '2 400,00'       | 'Store 01'   | '8,000'      | ''                            | '$$PurchaseOrder029214$$'   | '$$SalesOrder029214$$'   | '2 033,90'      |
 # 		And in the table "ItemList" I click "Link unlink basis documents" button
 # 		And I change checkbox "Linked documents"
 # 		And in the table "ResultsTree" I click "Unlink all" button

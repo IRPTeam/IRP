@@ -15,6 +15,38 @@
   <useStandardCommands>true</useStandardCommands>
   <inputByString>Document.ExpenseAccruals.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+    <multipleValuesUseField>0</multipleValuesUseField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>0</multipleValuesKeyField>
+    <multipleValuesOrderField>0</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+    </typesFilterValue>
+    <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+    <multipleValuesUseField>0</multipleValuesUseField>
+    <characteristicValues>Document.ExpenseAccruals.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.ExpenseAccruals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.ExpenseAccruals.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.ExpenseAccruals.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>0</multipleValuesKeyField>
+    <multipleValuesOrderField>0</multipleValuesOrderField>
+  </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
@@ -30,7 +62,10 @@
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ExpenseAccruals.Form.DocumentForm</defaultObjectForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="ab437b88-98a6-4638-8aa6-2f175151b76b">
@@ -65,6 +100,39 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="8e7f8beb-cb04-46d8-ad2d-83087be01d16">
+    <name>TransactionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.AccrualsTransactionType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="fc3e7f9b-8928-489c-a808-c04442cf48ef">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="463a92c2-2027-41a8-8bd3-fc1750dd85eb">
+    <name>PickupExpenseForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Pickup expense form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="c63ed337-7a90-45b3-b476-7af26cdfa2b1">
     <producedTypes>
       <objectType typeId="9f41b8bd-eefb-4a15-a1ef-f98f66dc54b3" valueTypeId="3646f565-ee59-4b40-b698-672342494699"/>
@@ -111,10 +179,52 @@
       <objectType typeId="f4127dc2-3925-41a6-a90c-52a11c1d0db8" valueTypeId="34faa222-b2a9-490c-a2c3-fa123d9cc996"/>
       <rowType typeId="16004d78-93fe-4d91-8d90-b67633058645" valueTypeId="8d7afae9-bced-4e27-a523-efcc3e52466a"/>
     </producedTypes>
-    <name>DocumentsList</name>
+    <name>CostList</name>
     <synonym>
       <key>en</key>
-      <value>Documents list</value>
+      <value>Cost list</value>
     </synonym>
+    <attributes uuid="b3342b62-86ac-41a3-983f-f9231f736add">
+      <name>Basis</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.ExpenseAccruals</types>
+        <types>DocumentRef.SalesInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c74eeca4-c740-4924-9ecf-bbc9caafc3b7">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="33491c09-c375-48dd-9f71-953a9fc333d4">
+      <name>AmountTax</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount tax</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
 </mdclass:Document>

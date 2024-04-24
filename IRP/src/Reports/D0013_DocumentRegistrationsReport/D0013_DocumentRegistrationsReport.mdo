@@ -114,6 +114,7 @@
       <types>DocumentRef.ProductionPlanningClosing</types>
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.ExpenseAccruals</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

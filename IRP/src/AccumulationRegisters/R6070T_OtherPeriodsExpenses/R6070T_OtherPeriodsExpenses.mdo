@@ -154,4 +154,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="82d258d1-a505-4631-a3b6-55ac72d04e82">
+    <name>OtherPeriodExpenseType</name>
+    <synonym>
+      <key>en</key>
+      <value>Other period expense type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.OtherPeriodExpenseType</types>
+    </type>
+  </dimensions>
 </mdclass:AccumulationRegister>

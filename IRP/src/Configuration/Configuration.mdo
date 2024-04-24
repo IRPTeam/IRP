@@ -757,6 +757,8 @@
   <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
+  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
+  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1288,6 +1290,9 @@
   <enums>Enum.SalaryTypes</enums>
   <enums>Enum.DocAttachmentStatus</enums>
   <enums>Enum.TaxPayers</enums>
+  <enums>Enum.AccrualsTransactionType</enums>
+  <enums>Enum.OtherPeriodExpenseType</enums>
+  <enums>Enum.OtherPeriodRevenueType</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>

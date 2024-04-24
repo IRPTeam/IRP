@@ -12,5 +12,6 @@
   <content>Document.BatchReallocateIncoming</content>
   <content>Document.BatchReallocateOutgoing</content>
   <content>Document.CalculationMovementCosts</content>
+  <content>Document.ExpenseAccruals</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

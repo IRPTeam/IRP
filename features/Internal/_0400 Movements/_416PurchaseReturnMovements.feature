@@ -611,7 +611,7 @@ Scenario: _041622 check Purchase return movements by the Register  "R4014 Serial
 	And I close all client application windows
 
 Scenario: _041623 check Purchase return movements by the Register  "T2015 Transactions info" (Return to vendor)
-	And I close all client application windows
+	And I close all client application windows 
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table

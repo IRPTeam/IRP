@@ -1,6 +1,5 @@
 // @strict-types
 
-
 #Region Variables
 
 #EndRegion
@@ -125,10 +124,6 @@ EndProcedure
 // события по нажатию кнопок формы (не табличных частей
 #EndRegion
 
-#Region Initialize
-// инициализация - не использовать
-#EndRegion
-
 #Region Public
 // все методы, которые являются экспортными, и не относятся к оповещениям внутри формы
 #EndRegion
@@ -143,7 +138,8 @@ EndProcedure
 // After expense pickup.
 // 
 // Parameters:
-//  Result - Array of Structure, Undefined
+//  Result - Array of See Document.ExpenseAccruals.Form.PickupExpenseForm.RowEmptyStructure
+//  Structure, Undefined
 //  AdditionalParemeters - Arbitrary
 &AtClient
 Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
@@ -153,15 +149,21 @@ Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
 	ArrayOfStructure = Result;
 	
 	For Each Structure In ArrayOfStructure Do
-		NewRow = Object.CostList.Add();
-		FillPropertyValues(NewRow, Structure);
-		//@skip-check property-return-type
-		DocumentRef = Structure.Document; // DocumentRef.PurchaseInvoice
-		//@skip-check property-return-type
+		
+		SearchArray = Object.CostList.FindRows(New Structure("Basis", Structure.Document));
+		If SearchArray.Count() = 0 Then
+		
+			CostListRow = Object.CostList.Add();
+		Else
+			CostListRow = SearchArray[0];
+		EndIf;		
+		FillPropertyValues(CostListRow, Structure);
+		
 		AmountTax = Structure.TaxAmount; // Number
 		
-		NewRow.Basis = DocumentRef;
-		NewRow.AmountTax = AmountTax;
+		CostListRow.Basis = DocumentRef;
+		CostListRow.AmountTax = AmountTax;
+			
 	EndDo;	
 		
 EndProcedure	

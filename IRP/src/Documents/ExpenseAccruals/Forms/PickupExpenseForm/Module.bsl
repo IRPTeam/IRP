@@ -93,7 +93,7 @@ EndProcedure
 // * Document - Undefined - 
 // * TaxAmount - Number - 
 &AtClient
-Function RowEmptyStructure()
+Function RowEmptyStructure() Export
 	
 	Structure = New Structure();
 	Structure.Insert("Amount", 0);

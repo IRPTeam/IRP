@@ -2946,10 +2946,6 @@
         <items xsi:type="form:FormField">
           <name>ItemListOtherPeriodRevenueType</name>
           <id>1489</id>
-          <title>
-            <key>en</key>
-            <value>Other revenue type</value>
-          </title>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>

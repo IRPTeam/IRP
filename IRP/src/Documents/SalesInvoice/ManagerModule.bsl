@@ -1152,7 +1152,7 @@ Function R6080T_OtherPeriodsRevenues()
 		   |FROM
 		   |	ItemListLandedCost AS ItemList
 		   |WHERE
-		   |	(ItemList.IsAdditionalItemRevenue OR ItemList.OtherPeriodRevenueType <> VALUE(Enum.OtherPeriodRevenueType.ItemsRevenue)) ";
+		   |	(ItemList.IsAdditionalItemRevenue OR ItemList.OtherPeriodRevenueType <> VALUE(Enum.OtherPeriodRevenueType.EmptyRef)) ";
 EndFunction
 
 Function T6020S_BatchKeysInfo()

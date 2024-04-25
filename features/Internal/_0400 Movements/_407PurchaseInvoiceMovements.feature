@@ -980,6 +980,39 @@ Scenario: _0401035 check Purchase invoice movements by the Register  "S1001L Ven
 			| ''                                               | '12.02.2021 15:12:15' | '200'       | '180'         | '152,54'    | 'en description is empty' | 'Ferron BP' | '36/Yellow' | 'pcs'  | 'TRY'      |	
 		And I close all client application windows
 
+Scenario: _0401036 check Purchase invoice movements by the Register  "T2015 Transactions info" (Purchase)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '117'       |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''             | ''             | ''                                             | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''           | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'            | ''             | ''             | ''                                             | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''           | ''       | ''       | ''        |
+			| ''                                               | 'Company'      | 'Branch'       | 'Order'                                        | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                              | 'Unique ID' | 'Project'    | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                               | 'Main Company' | 'Front office' | ''                                             | '12.02.2021 15:12:15' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '*'         | 'Project 01' | '2 400'  | 'Yes'    | 'No'      |
+			| ''                                               | 'Main Company' | 'Front office' | 'Purchase order 117 dated 12.02.2021 12:45:05' | '12.02.2021 15:12:15' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '*'         | 'Project 01' | '2 070'  | 'Yes'    | 'No'      |
+		And I close all client application windows
+
+Scenario: _0401037 check absence Purchase invoice movements by the Register  "T2015 Transactions info" (Receipt from consignor)
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '195'       |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

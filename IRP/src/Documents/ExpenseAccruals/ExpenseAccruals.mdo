@@ -52,11 +52,11 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Expense accruals</value>
+    <value>Expense accrual</value>
   </objectPresentation>
   <listPresentation>
     <key>en</key>
-    <value>Expenses accruals</value>
+    <value>Expense accruals</value>
   </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
@@ -108,6 +108,22 @@
     </synonym>
     <type>
       <types>EnumRef.AccrualsTransactionType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="02c9fdb6-7d36-4a3f-9bcc-b3f3173088ec">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.ExpenseAccruals</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -184,16 +200,14 @@
       <key>en</key>
       <value>Cost list</value>
     </synonym>
-    <attributes uuid="b3342b62-86ac-41a3-983f-f9231f736add">
-      <name>Basis</name>
+    <attributes uuid="b14a1c44-dc25-4bdd-b40f-ad9160e343c4">
+      <name>Key</name>
       <synonym>
         <key>en</key>
-        <value>Basis</value>
+        <value>Key</value>
       </synonym>
       <type>
-        <types>DocumentRef.PurchaseInvoice</types>
-        <types>DocumentRef.ExpenseAccruals</types>
-        <types>DocumentRef.SalesInvoice</types>
+        <types>DefinedType.typeRowID</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

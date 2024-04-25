@@ -92,6 +92,7 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.ExpenseAccruals</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -163,5 +164,8 @@
     <type>
       <types>EnumRef.OtherPeriodExpenseType</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <useInTotals>true</useInTotals>
   </dimensions>
 </mdclass:AccumulationRegister>

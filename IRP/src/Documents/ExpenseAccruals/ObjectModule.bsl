@@ -4,16 +4,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+	For Each Row In ThisObject.CostList Do
+		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
 	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	
-	ThisObject.DocumentAmount = ThisObject.CostList.Total("TotalAmount");
-	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
-	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
-	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);	
+	ThisObject.DocumentAmount = ThisObject.CostList.Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)

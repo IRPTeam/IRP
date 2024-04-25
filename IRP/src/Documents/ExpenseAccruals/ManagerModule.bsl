@@ -64,6 +64,9 @@ EndFunction
 //  * DocumentDataTables - Structure
 //  AddInfo - Undefined - Add info
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	
+	
+	
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
@@ -151,6 +154,7 @@ EndFunction
 Function CostList()
 	Return
 	"SELECT
+	|	ExpenseAccrualsCostList.Key AS Key,
 	|	ExpenseAccrualsCostList.Ref.Date AS Period,
 	|	ExpenseAccrualsCostList.Ref.Company AS Company,
 	|	ExpenseAccrualsCostList.Ref.Branch AS Branch,
@@ -160,18 +164,65 @@ Function CostList()
 	|	ExpenseAccrualsCostList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ExpenseAccrualsCostList.Project AS Project,
 	|	CASE
-	|		WHEN ExpenseAccrualsCostList.Basis = UNDEFINED
+	|		WHEN ExpenseAccrualsCostList.Ref.Basis = UNDEFINED
 	|			THEN &Ref
-	|		ELSE ExpenseAccrualsCostList.Basis
+	|		ELSE ExpenseAccrualsCostList.Ref.Basis
 	|	END AS Basis,
 	|	ExpenseAccrualsCostList.Amount AS Amount,
 	|	ExpenseAccrualsCostList.AmountTax AS AmountTax,
-	|	ExpenseAccrualsCostList.Amount + ExpenseAccrualsCostList.AmountTax AS AmountWithTaxes
-	|INTO CostList
+	|	ExpenseAccrualsCostList.Amount + ExpenseAccrualsCostList.AmountTax AS AmountWithTaxes,
+	|	CASE
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
+	|			THEN VALUE(AccumulationRecordType.Expense)
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
+	|			THEN VALUE(AccumulationRecordType.Receipt)
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
+	|			THEN VALUE(AccumulationRecordType.Expense)
+	|		ELSE VALUE(AccumulationRecordType.Expense)
+	|	END AS RecordType,
+	|	CASE
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
+	|			THEN 1
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
+	|			THEN 1
+	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
+	|			THEN -1
+	|		ELSE 1
+	|	END AS Factor
+	|INTO CostListTemp
 	|FROM
 	|	Document.ExpenseAccruals.CostList AS ExpenseAccrualsCostList
 	|WHERE
-	|	ExpenseAccrualsCostList.Ref = &Ref";
+	|	ExpenseAccrualsCostList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	CostListTemp.Key AS Key,
+	|	CostListTemp.Period AS Period,
+	|	CostListTemp.Company AS Company,
+	|	CostListTemp.Branch AS Branch,
+	|	CostListTemp.Currency AS Currency,
+	|	CostListTemp.ProfitLossCenter AS ProfitLossCenter,
+	|	CostListTemp.ExpenseType AS ExpenseType,
+	|	CostListTemp.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CostListTemp.Project AS Project,
+	|	CostListTemp.Basis AS Basis,
+	|	CostListTemp.Amount * CostListTemp.Factor AS Amount,
+	|	CostListTemp.AmountTax * CostListTemp.Factor AS AmountTax,
+	|	CostListTemp.AmountWithTaxes * CostListTemp.Factor AS AmountWithTaxes,
+	|	CostListTemp.RecordType AS RecordType
+	|INTO CostList
+	|FROM
+	|	CostListTemp AS CostListTemp";
+EndFunction
+
+#EndRegion
+
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
 EndFunction
 
 #EndRegion
@@ -281,7 +332,6 @@ Function R6070T_OtherPeriodsExpenses()
 	Return
 	"SELECT
 	|	*,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 	|	VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS OtherPeriodExpenseType,
 	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency) AS CurrencyMovementType
 	|INTO R6070T_OtherPeriodsExpenses
@@ -290,6 +340,30 @@ Function R6070T_OtherPeriodsExpenses()
 	|WHERE
 	|	TRUE";
 
+EndFunction
+
+#EndRegion
+
+#Region AccessObject
+
+
+// Get access key.
+// 
+// Parameters:
+//  Obj - DocumentRef.ExpenseAccruals
+// 
+// Returns:
+//  Map - Map:
+//  *Company - CatalogRef.Companies
+//	*Branch - CatalogRef.BusinessUnits
+Function GetAccessKey(Obj) Export
+	AccessKeyMap = New Map;
+	AccessKeyMap.Insert("Company", Obj.Company);
+	//@skip-check property-return-type
+	//@skip-check invocation-parameter-type-intersect
+	//@skip-check unknown-method-property
+	AccessKeyMap.Insert("Branch", Obj.Branch);
+	Return AccessKeyMap;
 EndFunction
 
 #EndRegion

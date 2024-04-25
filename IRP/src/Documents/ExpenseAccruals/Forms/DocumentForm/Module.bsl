@@ -58,6 +58,27 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
+	StandardProcessing = False;
+	Notify = New NotifyDescription("AfterExpensePickup", ThisObject);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("Date", Object.Date);
+	FormParameters.Insert("Currency", Object.Currency);
+	FormParameters.Insert("TransactionType", Object.TransactionType);
+	
+	OpenForm("Document.ExpenseAccruals.Form.PickupExpenseForm",
+		FormParameters,
+		ThisObject,
+		ThisObject.UUID,
+		,
+		ThisObject.URL,
+		Notify,
+		FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
 #Region GroupTitleDecorations
 
 &AtClient
@@ -85,39 +106,33 @@ EndProcedure
 #EndRegion
 
 #Region FormTableItemsEventHandlers
+
 #Region CostList
 
 &AtClient
-Procedure SelectCosts(Command)
-
-	Notify = New NotifyDescription("AfterExpensePickup", ThisObject);
-	FormParameters = New Structure();
-	FormParameters.Insert("Company", Object.Company);
-	FormParameters.Insert("Ref", Object.Ref);
-	FormParameters.Insert("Date", Object.Date);
-	FormParameters.Insert("Currency", Object.Currency);
-	
-	ArrayOfSelectedRows = New Array(); // Array of structure
-	For Each Row In Object.CostList Do
-		SelectedRow = New Structure();
-		SelectedRow.Insert("Basis", Row.Basis);
-		SelectedRow.Insert("Amount", Row.Amount);
-		ArrayOfSelectedRows.Add(SelectedRow);
-	EndDo;
-	FormParameters.Insert("SelectedRows", ArrayOfSelectedRows);
-	
-	OpenForm("Document.ExpenseAccruals.Form.PickupExpenseForm",
-		FormParameters,
-		ThisObject,
-		ThisObject.UUID,
-		,
-		ThisObject.URL,
-		Notify,
-		FormWindowOpeningMode.LockOwnerWindow);	
-	
+Procedure CostListOnChange(Item)
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not ValueIsFilled(CurrentData.Key) Then
+		CurrentData.Key = String(New UUID());
+	EndIf;
 EndProcedure
 
-
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.CostList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
 
 #EndRegion
@@ -156,20 +171,22 @@ Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
 	EndIf;	
 	ArrayOfStructure = Result;
 	
+	If ArrayOfStructure.Count() = 0 Then
+		Return;
+	EndIf;
+
+	Object.CostList.Clear();
+	Object.Basis = ArrayOfStructure[0].Document;
+	
 	For Each Structure In ArrayOfStructure Do
 		
-		SearchArray = Object.CostList.FindRows(New Structure("Basis", Structure.Document));
-		If SearchArray.Count() = 0 Then
-		
-			CostListRow = Object.CostList.Add();
-		Else
-			CostListRow = SearchArray[0];
-		EndIf;		
+		CostListRow = Object.CostList.Add();
+		CostListRow.Key = String(New UUID());
+			
 		FillPropertyValues(CostListRow, Structure);
 		
 		AmountTax = Structure.TaxAmount; // Number
 		
-		CostListRow.Basis = Structure.Document;
 		CostListRow.AmountTax = AmountTax;
 			
 	EndDo;	
@@ -236,5 +253,6 @@ EndProcedure
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
+
 
 #EndRegion

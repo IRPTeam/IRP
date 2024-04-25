@@ -8,21 +8,34 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Query.Text = 
 	"SELECT
 	|	R6070T_OtherPeriodsExpenses.Basis AS Document,
-	|	R6070T_OtherPeriodsExpenses.Currency,
-	|	R6070T_OtherPeriodsExpenses.TransactionCurrency,
-	|	R6070T_OtherPeriodsExpenses.CurrencyMovementType,
+	|	R6070T_OtherPeriodsExpenses.Currency AS Currency,
+	|	R6070T_OtherPeriodsExpenses.TransactionCurrency AS TransactionCurrency,
+	|	R6070T_OtherPeriodsExpenses.CurrencyMovementType AS CurrencyMovementType,
 	|	R6070T_OtherPeriodsExpenses.AmountBalance AS Amount,
 	|	R6070T_OtherPeriodsExpenses.AmountTaxBalance AS TaxAmount
 	|FROM
-	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, Company = &Company
-	|	AND CurrencyMovementType = &CurrencyMovementType
-	|	AND OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals)
-	|	AND Currency = &Currency) AS R6070T_OtherPeriodsExpenses";
+	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(
+	|			&BalancePeriod,
+	|			Company = &Company
+	|				AND CurrencyMovementType = &CurrencyMovementType
+	|				AND OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals)
+	|				AND Currency = &Currency
+	|				AND &DocTypeFilter) AS R6070T_OtherPeriodsExpenses";
 	
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	Query.SetParameter("Currency", Parameters.Currency);
-
+	
+	CurrentTransactionType = Parameters.TransactionType;
+	If CurrentTransactionType = Enums.AccrualsTransactionType.Accrual Then 
+		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.PurchaseInvoice)");
+	ElsIf CurrentTransactionType = Enums.AccrualsTransactionType.Void 
+		Or CurrentTransactionType = Enums.AccrualsTransactionType.Reverse Then
+		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.ExpenseAccruals)");
+	Else
+		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "True");
+	EndIf;
+	
 	BalancePeriod = Undefined;
 	If ValueIsFilled(Parameters.Ref) And Parameters.Ref.Posted Then
 		BalancePeriod = New Boundary(Parameters.Ref.PointInTime(), BoundaryType.Excluding);
@@ -44,40 +57,19 @@ EndProcedure
 #Region FormHeaderItemsEventHandlers
 
 &AtClient
-Procedure CheckAll(Command)
-	For Each Row In ExpenseValueTable Do
-		Row.Use = True;
-	EndDo;
-EndProcedure
-
-&AtClient
-Procedure Ок(Command)
+Procedure ExpenseValueTableSelection(Item, RowSelected, Field, StandardProcessing)
 	
 	Array = New Array(); // Array of Structure
-	For Each Row In ExpenseValueTable Do
-		If Not Row.Use Then
-			Continue;
-		EndIf;
-		Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
-		FillPropertyValues(Structure, Row);
-		
-		Array.Add(Structure);	
-	EndDo;
+	RowID = RowSelected; // Number
 	
-	Close(Array);		
-
-EndProcedure
-
-&AtClient
-Procedure Cancel(Command)
-	Close();
-EndProcedure
-
-&AtClient
-Procedure UncheckAll(Command)
-	For Each Row In ExpenseValueTable Do
-		Row.Use = False;
-	EndDo;
+	CurrentData = ExpenseValueTable.FindByID(RowID);
+	Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
+	FillPropertyValues(Structure, CurrentData);
+		
+	Array.Add(Structure);
+		
+	Close(Array);	
+	
 EndProcedure
 
 #EndRegion

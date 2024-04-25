@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
+  <title>
+    <key>en</key>
+    <value>Select document</value>
+  </title>
   <items xsi:type="form:Table">
     <name>ExpenseValueTable</name>
     <id>1</id>
@@ -12,49 +16,6 @@
       <segments>ExpenseValueTable</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <items xsi:type="form:FormField">
-      <name>ExpenseValueTableUse</name>
-      <id>23</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ExpenseValueTable.Use</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ExpenseValueTableUseExtendedTooltip</name>
-        <id>25</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ExpenseValueTableUseContextMenu</name>
-        <id>24</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>CheckBoxField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-    </items>
     <items xsi:type="form:FormField">
       <name>ExpenseValueTableDocument</name>
       <id>14</id>
@@ -258,72 +219,6 @@
     <autoCommandBar>
       <name>ExpenseValueTableCommandBar</name>
       <id>2</id>
-      <items xsi:type="form:Button">
-        <name>ExpenseValueTableCheckAll</name>
-        <id>35</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>ExpenseValueTableCheckAllExtendedTooltip</name>
-          <id>36</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <commandName>Form.Command.CheckAll</commandName>
-        <representation>Auto</representation>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <placementArea>UserCmds</placementArea>
-        <picture xsi:type="core:PictureRef">
-          <picture>StdPicture.CheckAll</picture>
-        </picture>
-        <representationInContextMenu>Auto</representationInContextMenu>
-      </items>
-      <items xsi:type="form:Button">
-        <name>ExpenseValueTableUncheckAll</name>
-        <id>37</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <extendedTooltip>
-          <name>ExpenseValueTableUncheckAllExtendedTooltip</name>
-          <id>38</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <commandName>Form.Command.UncheckAll</commandName>
-        <representation>Auto</representation>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <placementArea>UserCmds</placementArea>
-        <picture xsi:type="core:PictureRef">
-          <picture>StdPicture.UncheckAll</picture>
-        </picture>
-        <representationInContextMenu>Auto</representationInContextMenu>
-      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -331,6 +226,10 @@
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
     </autoCommandBar>
+    <handlers>
+      <event>Selection</event>
+      <name>ExpenseValueTableSelection</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -495,79 +394,17 @@
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
-    <items xsi:type="form:Button">
-      <name>ExpenseValueTableОк</name>
-      <id>39</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>ExpenseValueTableОкExtendedTooltip</name>
-        <id>40</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <commandName>Form.Command.Ок</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <representationInContextMenu>Auto</representationInContextMenu>
-    </items>
-    <items xsi:type="form:Button">
-      <name>ExpenseValueTableCancel</name>
-      <id>41</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-        <name>ExpenseValueTableCancelExtendedTooltip</name>
-        <id>42</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <commandName>Form.Command.Cancel</commandName>
-      <representation>Auto</representation>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <placementArea>UserCmds</placementArea>
-      <representationInContextMenu>Auto</representationInContextMenu>
-    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <horizontalAlign>Left</horizontalAlign>
-    <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
-  <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>
@@ -600,6 +437,7 @@
       <id>2</id>
       <valueType>
         <types>DocumentRef.PurchaseInvoice</types>
+        <types>DocumentRef.ExpenseAccruals</types>
       </valueType>
       <view>
         <common>true</common>
@@ -677,82 +515,6 @@
       </edit>
     </columns>
   </attributes>
-  <formCommands>
-    <name>CheckAll</name>
-    <title>
-      <key>en</key>
-      <value>Check all</value>
-    </title>
-    <id>1</id>
-    <toolTip>
-      <key>en</key>
-      <value>Check all</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>CheckAll</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>UncheckAll</name>
-    <title>
-      <key>en</key>
-      <value>Uncheck all</value>
-    </title>
-    <id>2</id>
-    <toolTip>
-      <key>en</key>
-      <value>Uncheck all</value>
-    </toolTip>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>UncheckAll</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>Ок</name>
-    <title>
-      <key>en</key>
-      <value>Ок</value>
-    </title>
-    <id>4</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>Ок</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
-    <name>Cancel</name>
-    <title>
-      <key>en</key>
-      <value>Cancel</value>
-    </title>
-    <id>5</id>
-    <use>
-      <common>true</common>
-    </use>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>Cancel</name>
-      </handler>
-    </action>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
   <parameters>
     <name>Company</name>
     <valueType>
@@ -769,6 +531,12 @@
     <name>Currency</name>
     <valueType>
       <types>CatalogRef.Currencies</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>TransactionType</name>
+    <valueType>
+      <types>EnumRef.AccrualsTransactionType</types>
     </valueType>
   </parameters>
   <commandInterface>

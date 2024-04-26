@@ -60,7 +60,21 @@ EndProcedure
 
 &AtClient
 Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
+	
 	StandardProcessing = False;
+	If Not ValueIsFilled(Object.Currency) Then
+		//@skip-check property-return-type
+		TextMessage = R().EmptyCurrency; // String
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.Currency");
+		Return;
+	EndIf;
+	If Not ValueIsFilled(Object.TransactionType) Then
+		//@skip-check property-return-type
+		TextMessage = R().EmptyTransactionType; // String
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.TransactionType");
+		Return;
+	EndIf;
+	
 	Notify = New NotifyDescription("AfterExpensePickup", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
@@ -78,6 +92,7 @@ Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
 		Notify,
 		FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
+	
 
 #Region GroupTitleDecorations
 
@@ -118,6 +133,7 @@ Procedure CostListOnChange(Item)
 	If Not ValueIsFilled(CurrentData.Key) Then
 		CurrentData.Key = String(New UUID());
 	EndIf;
+	FillDocumentAmount();
 EndProcedure
 
 &AtClient
@@ -134,8 +150,8 @@ Procedure EditCurrencies(Command)
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-
 #EndRegion
+
 #EndRegion
 
 #Region FormCommandsEventHandlers
@@ -177,21 +193,95 @@ Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
 
 	Object.CostList.Clear();
 	Object.Basis = ArrayOfStructure[0].Document;
+	Object.Currencies.Clear();
 	
 	For Each Structure In ArrayOfStructure Do
 		
 		CostListRow = Object.CostList.Add();
-		CostListRow.Key = String(New UUID());
-			
+	
 		FillPropertyValues(CostListRow, Structure);
 		
 		AmountTax = Structure.TaxAmount; // Number
 		
 		CostListRow.AmountTax = AmountTax;
-			
-	EndDo;	
+		
+		AfterRowAdd(CostListRow);
+	EndDo;
+	
+	FillDocumentAmount();
 		
 EndProcedure
+
+&AtClient
+Procedure AfterRowAdd(Row)
+	
+	CurrentBasis = Object.Basis;
+	Row.Key = String(New UUID());
+	If ValueIsFilled(CurrentBasis) Then
+		If Object.CostList.Count() = 1 Then
+			If TypeOf(CurrentBasis) = Type("DocumentRef.PurchaseInvoice") Then
+				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
+				For Each CurrencyRow In ObjectCurrencies Do
+					NewRow = Object.Currencies.Add();
+					FillPropertyValues(NewRow, CurrencyRow);
+					NewRow.Key = Row.Key;
+				EndDo;
+			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.ExpenseAccruals") Then
+				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
+				If ObjectCurrencies.Count() > 0 Then
+					FirstRowID = ObjectCurrencies[0].Key; // String
+					
+					For Each RowInArray In ObjectCurrencies Do
+						If RowInArray.Key = FirstRowID Then
+							NewCurrencyRow = Object.Currencies.Add();
+							FillPropertyValues(NewCurrencyRow, RowInArray);
+							NewCurrencyRow.Key = Row.Key;
+						EndIf;
+					EndDo;
+					
+				EndIf;
+			EndIf;
+		Else
+			FirstRowID = Object.CostList[0].Key;
+				
+			RowArray = Object.Currencies.FindRows(New Structure("Key", FirstRowID));
+			For Each RowInArray In RowArray Do
+				NewCurrencyRow = Object.Currencies.Add();
+				FillPropertyValues(NewCurrencyRow, RowInArray);
+				NewCurrencyRow.Key = Row.Key;
+			EndDo;
+		EndIf;
+	EndIf;
+	
+EndProcedure
+
+&AtClient
+Procedure FillDocumentAmount()
+	TotalAmount = Object.CostList.Total("Amount"); // Number
+	//@skip-check property-return-type
+	Object.DocumentAmount = TotalAmount;
+EndProcedure
+
+// Get object currencies.
+// 
+// Parameters:
+//  DocRef - DocumentRef.PurchaseInvoice, DocumentRef.ExpenseAccruals - Doc ref
+// 
+// Returns:
+//  Array - Array of Structure:
+// * Key - String
+// * CurrencyFrom - CatalogRef.Currencies
+// * Rate - String
+// * ReverseRate - DefinedType.typeCurrencyRate
+// * ShowReverseRate - Boolean
+// * Multiplicity - Number
+// * MovementType - ChartOfCharacteristicTypesRef.CurrencyMovementType
+// * Amount - DefinedType.typeAmount
+// * IsFixed - Boolean
+&AtServer
+Function GetObjectCurrencies(DocRef)
+	Return CommonFunctionsServer.GetTableForClient(DocRef.Currencies.Unload());
+EndFunction
 
 #EndRegion
 
@@ -253,6 +343,7 @@ EndProcedure
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
+
 
 
 #EndRegion

@@ -171,7 +171,9 @@ Function OperandTextProcessing(Val OperandText)
 		
 	OperandText = StrReplace(OperandText, "[", "");
 	OperandText = StrReplace(OperandText, "]", "");
-	Return "[" + StrReplace(OperandText, "Item.", "") + "]";
+	OperandText = StrReplace(OperandText, "Item.", "");
+	OperandText = GetAttributeUniqueID(OperandText);
+	Return "[" + OperandText + "]";
 EndFunction
 
 &AtServerNoContext

@@ -1003,7 +1003,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <footerDataPath xsi:type="form:DataPath">
-            <segments>Object.CostList.TotalAmount</segments>
+            <segments>Object.CostList.Amount</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -1056,7 +1056,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <footerDataPath xsi:type="form:DataPath">
-            <segments>Object.CostList.TotalAmountTax</segments>
+            <segments>Object.CostList.AmountTax</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -1798,7 +1798,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DocumentObject.ExpenseAccruals</types>
+      <types>DocumentObject.RevenueAccruals</types>
     </valueType>
     <view>
       <common>true</common>

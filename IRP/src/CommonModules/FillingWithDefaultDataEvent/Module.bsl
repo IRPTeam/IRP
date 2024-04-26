@@ -189,6 +189,7 @@ Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export
 	ArrayOfExclude.Add(Type("DocumentObject.AdditionalCostAllocation"));
 	ArrayOfExclude.Add(Type("DocumentObject.AdditionalRevenueAllocation"));
 	ArrayOfExclude.Add(Type("DocumentObject.ExpenseAccruals"));
+	ArrayOfExclude.Add(Type("DocumentObject.RevenueAccruals"));
 	If ArrayOfExclude.Find(TypeOfSource) <> Undefined Then
 		Return;
 	EndIf;

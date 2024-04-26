@@ -805,6 +805,8 @@ Function CashInTransitDoc()
 	Return
 		"SELECT
 		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Ref,
+		|	CashInTransitDoc.UseBasisDocument,
 		|	CashInTransitDoc.Ref.Date AS Period,
 		|	CashInTransitDoc.Ref.Company AS Company,
 		|	CashInTransitDoc.ReceiptingBranch AS Branch,
@@ -870,7 +872,11 @@ Function CashInTransit()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	OpeningEntryCashInTransit.Ref As BasisDocument,
+		|	CASE
+		|		WHEN OpeningEntryCashInTransit.UseBasisDocument
+		|			THEN OpeningEntryCashInTransit.Ref
+		|		ELSE UNDEFINED
+		|	END As BasisDocument,
 		|	OpeningEntryCashInTransit.Ref.Date AS Period,
 		|	OpeningEntryCashInTransit.Ref.Company,
 		|	OpeningEntryCashInTransit.Account AS FromAccount,
@@ -1194,7 +1200,11 @@ Function R3021B_CashInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	CashInTransitDoc.BasisDocument As Basis,
+		|	CASE
+		|		WHEN CashInTransitDoc.UseBasisDocument
+		|			THEN CashInTransitDoc.Ref
+		|		ELSE UNDEFINED
+		|	END As Basis,
 		|	CashInTransitDoc.Key,
 		|	CashInTransitDoc.Period,
 		|	CashInTransitDoc.Company,

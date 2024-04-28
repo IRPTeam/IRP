@@ -64,13 +64,13 @@ Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	If Not ValueIsFilled(Object.Currency) Then
 		//@skip-check property-return-type
-		TextMessage = R().EmptyCurrency; // String
+		TextMessage = R().Error_EmptyCurrency; // String
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.Currency");
 		Return;
 	EndIf;
 	If Not ValueIsFilled(Object.TransactionType) Then
 		//@skip-check property-return-type
-		TextMessage = R().EmptyTransactionType; // String
+		TextMessage = R().Error_EmptyTransactionType; // String
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.TransactionType");
 		Return;
 	EndIf;

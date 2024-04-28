@@ -5,7 +5,7 @@
     <value>Select document</value>
   </title>
   <items xsi:type="form:Table">
-    <name>ExpenseValueTable</name>
+    <name>RevenueValueTable</name>
     <id>1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -13,7 +13,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>ExpenseValueTable</segments>
+      <segments>RevenueValueTable</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
@@ -25,7 +25,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>ExpenseValueTable.Document</segments>
+        <segments>RevenueValueTable.Document</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExpenseValueTableDocumentExtendedTooltip</name>
@@ -75,7 +75,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>ExpenseValueTable.Currency</segments>
+        <segments>RevenueValueTable.Currency</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExpenseValueTableCurrencyExtendedTooltip</name>
@@ -125,7 +125,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>ExpenseValueTable.Amount</segments>
+        <segments>RevenueValueTable.Amount</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExpenseValueTableAmountExtendedTooltip</name>
@@ -175,7 +175,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>ExpenseValueTable.TaxAmount</segments>
+        <segments>RevenueValueTable.TaxAmount</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExpenseValueTableTaxAmountExtendedTooltip</name>
@@ -217,7 +217,7 @@
       </extInfo>
     </items>
     <autoCommandBar>
-      <name>ExpenseValueTableCommandBar</name>
+      <name>RevenueValueTableCommandBar</name>
       <id>2</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -236,10 +236,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>ExpenseValueTableSearchString</name>
+      <name>RevenueValueTableSearchString</name>
       <id>5</id>
       <extendedTooltip>
-        <name>ExpenseValueTableSearchStringExtendedTooltip</name>
+        <name>RevenueValueTableSearchStringExtendedTooltip</name>
         <id>7</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -254,7 +254,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ExpenseValueTableSearchStringContextMenu</name>
+        <name>RevenueValueTableSearchStringContextMenu</name>
         <id>6</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -263,7 +263,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ExpenseValueTableSearchString</source>
+      <source>RevenueValueTableSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -274,10 +274,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>ExpenseValueTableViewStatus</name>
+      <name>RevenueValueTableViewStatus</name>
       <id>11</id>
       <extendedTooltip>
-        <name>ExpenseValueTableViewStatusExtendedTooltip</name>
+        <name>RevenueValueTableViewStatusExtendedTooltip</name>
         <id>13</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -292,7 +292,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ExpenseValueTableViewStatusContextMenu</name>
+        <name>RevenueValueTableViewStatusContextMenu</name>
         <id>12</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -302,7 +302,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ExpenseValueTableViewStatus</source>
+      <source>RevenueValueTableViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -313,10 +313,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>ExpenseValueTableSearchControl</name>
+      <name>RevenueValueTableSearchControl</name>
       <id>8</id>
       <extendedTooltip>
-        <name>ExpenseValueTableSearchControlExtendedTooltip</name>
+        <name>RevenueValueTableSearchControlExtendedTooltip</name>
         <id>10</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -331,7 +331,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>ExpenseValueTableSearchControlContextMenu</name>
+        <name>RevenueValueTableSearchControlContextMenu</name>
         <id>9</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -341,13 +341,13 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>ExpenseValueTableSearchControl</source>
+      <source>RevenueValueTableSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>ExpenseValueTableExtendedTooltip</name>
+      <name>RevenueValueTableExtendedTooltip</name>
       <id>4</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -362,7 +362,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>ExpenseValueTableContextMenu</name>
+      <name>RevenueValueTableContextMenu</name>
       <id>3</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -413,10 +413,10 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>ExpenseValueTable</name>
+    <name>RevenueValueTable</name>
     <title>
       <key>en</key>
-      <value>Expense value table</value>
+      <value>Revenue value table</value>
     </title>
     <id>1</id>
     <valueType>

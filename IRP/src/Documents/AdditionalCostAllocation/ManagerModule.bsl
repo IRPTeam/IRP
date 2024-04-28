@@ -267,9 +267,12 @@ EndFunction
 
 Function R6070T_OtherPeriodsExpenses()
 	Return "SELECT
-		   |	*,
+		   |	CostList.Company,
+		   |	CostList.Branch,
+		   |	CostList.Basis,
+		   |	CostList.Currency,
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	value(enum.OtherPeriodExpenseType.ItemsCost) as OtherPeriodExpenseType
+		   |	VALUE(enum.OtherPeriodExpenseType.ItemsCost) as OtherPeriodExpenseType
 		   |INTO R6070T_OtherPeriodsExpenses
 		   |FROM
 		   |	CostList AS CostList

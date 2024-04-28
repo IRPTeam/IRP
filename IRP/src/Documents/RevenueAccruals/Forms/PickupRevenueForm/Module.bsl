@@ -4,6 +4,41 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	FillRevenueTable();
+EndProcedure
+
+#EndRegion
+
+#Region FormHeaderItemsEventHandlers
+
+// Expense value table selection.
+// 
+// Parameters:
+//  Item - FormTable - Item
+//  RowSelected - Number - Row selected
+//  Field - FormField - Field
+//  StandardProcessing - Boolean - Standard processing
+&AtClient
+Procedure ExpenseValueTableSelection(Item, RowSelected, Field, StandardProcessing)
+	
+	Array = New Array(); // Array of Structure
+	
+	CurrentData = RevenueValueTable.FindByID(RowSelected);
+	Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
+	FillPropertyValues(Structure, CurrentData);
+		
+	Array.Add(Structure);
+		
+	Close(Array);	
+	
+EndProcedure
+
+#EndRegion
+
+#Region Private
+
+&AtServer
+Procedure FillRevenueTable()
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -47,29 +82,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	QuerySelection_Document = QueryResult.Select(QueryResultIteration.ByGroups);
 	While QuerySelection_Document.Next() Do
 		
-		NewRow = ExpenseValueTable.Add();
+		NewRow = RevenueValueTable.Add();
 		FillPropertyValues(NewRow, QuerySelection_Document);
 		
 	EndDo;
-EndProcedure
-#EndRegion
-
-#Region FormHeaderItemsEventHandlers
-
-&AtClient
-Procedure ExpenseValueTableSelection(Item, RowSelected, Field, StandardProcessing)
-	
-	Array = New Array(); // Array of Structure
-	RowID = RowSelected; // Number
-	
-	CurrentData = ExpenseValueTable.FindByID(RowID);
-	Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
-	FillPropertyValues(Structure, CurrentData);
-		
-	Array.Add(Structure);
-		
-	Close(Array);	
-	
 EndProcedure
 
 #EndRegion

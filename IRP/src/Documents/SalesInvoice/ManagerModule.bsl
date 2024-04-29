@@ -440,27 +440,28 @@ EndFunction
 
 Function ItemListLandedCost()
 	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.ProfitLossCenter,
-		   |	ItemList.RevenueType,
-		   |	ItemList.ItemKey,
-		   |	ItemList.AdditionalAnalytic,
-		   |	ItemList.NetAmount,
-		   |	ItemList.TaxAmount,
-		   |	ItemList.IsAdditionalItemRevenue,
-		   |	ItemList.IsService AS IsService,
-		   |	TableRowIDInfo.RowID AS RowID
-		   |INTO ItemListLandedCost
-		   |FROM
-		   |	Document.SalesInvoice.ItemList AS ItemList
-		   |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-		   |		ON ItemList.Key = TableRowIDInfo.Key
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	       |	ItemList.Ref.Date AS Period,
+	       |	ItemList.Ref AS Basis,
+	       |	ItemList.Ref.Company AS Company,
+	       |	ItemList.Ref.Branch AS Branch,
+	       |	ItemList.Ref.Currency AS Currency,
+	       |	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	       |	ItemList.RevenueType AS RevenueType,
+	       |	ItemList.ItemKey AS ItemKey,
+	       |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	       |	ItemList.NetAmount AS NetAmount,
+	       |	ItemList.TaxAmount AS TaxAmount,
+	       |	ItemList.DELETE_IsAdditionalItemRevenue AS IsAdditionalItemRevenue,
+	       |	ItemList.IsService AS IsService,
+	       |	TableRowIDInfo.RowID AS RowID,
+	       |	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType
+	       |INTO ItemListLandedCost
+	       |FROM
+	       |	Document.SalesInvoice.ItemList AS ItemList
+	       |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	       |		ON ItemList.Key = TableRowIDInfo.Key
+	       |WHERE
+	       |	ItemList.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -1151,7 +1152,7 @@ Function R6080T_OtherPeriodsRevenues()
 		   |FROM
 		   |	ItemListLandedCost AS ItemList
 		   |WHERE
-		   |	ItemList.IsAdditionalItemRevenue";
+		   |	(ItemList.IsAdditionalItemRevenue OR ItemList.OtherPeriodRevenueType <> VALUE(Enum.OtherPeriodRevenueType.EmptyRef)) ";
 EndFunction
 
 Function T6020S_BatchKeysInfo()

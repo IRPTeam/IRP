@@ -54,6 +54,7 @@ Scenario: _051001 preparation (Cash payment)
 		When Create catalog Partners objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register Taxes records (VAT)
+		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then

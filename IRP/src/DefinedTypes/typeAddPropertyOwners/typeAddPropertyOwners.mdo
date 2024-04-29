@@ -157,5 +157,7 @@
     <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
     <types>CatalogRef.SalaryCalculationType</types>
+    <types>DocumentRef.ExpenseAccruals</types>
+    <types>DocumentRef.RevenueAccruals</types>
   </type>
 </mdclass:DefinedType>

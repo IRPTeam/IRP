@@ -436,8 +436,8 @@
       </title>
       <id>2</id>
       <valueType>
-        <types>DocumentRef.SalesInvoice</types>
         <types>DocumentRef.RevenueAccruals</types>
+        <types>DocumentRef.SalesInvoice</types>
       </valueType>
       <view>
         <common>true</common>

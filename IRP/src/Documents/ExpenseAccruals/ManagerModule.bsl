@@ -165,7 +165,7 @@ Function CostList()
 	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
 	|			THEN 1
 	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
-	|			THEN -1
+	|			THEN 1
 	|		ELSE 1
 	|	END AS Factor
 	|INTO CostListTemp

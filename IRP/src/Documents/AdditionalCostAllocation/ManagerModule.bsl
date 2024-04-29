@@ -266,18 +266,25 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function R6070T_OtherPeriodsExpenses()
-	Return "SELECT
-		   |	CostList.Company,
-		   |	CostList.Branch,
-		   |	CostList.Basis,
-		   |	CostList.Currency,
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	VALUE(enum.OtherPeriodExpenseType.ItemsCost) as OtherPeriodExpenseType
-		   |INTO R6070T_OtherPeriodsExpenses
-		   |FROM
-		   |	CostList AS CostList
-		   |WHERE
-		   |	TRUE";
+	Return
+	"SELECT
+	|	CostList.Period AS Period,
+	|	CostList.Company AS Company,
+	|	CostList.Branch AS Branch,
+	|	CostList.Basis AS Basis,
+	|	CostList.ItemKey AS ItemKey,
+	|	CostList.RowID AS RowID,
+	|	CostList.Currency AS Currency,
+	|	CostList.Key AS Key,
+	|	CostList.Amount AS Amount,
+	|	CostList.AmountTax AS AmountTax,
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	VALUE(enum.OtherPeriodExpenseType.ItemsCost) AS OtherPeriodExpenseType
+	|INTO R6070T_OtherPeriodsExpenses
+	|FROM
+	|	CostList AS CostList
+	|WHERE
+	|	TRUE";
 EndFunction
 
 Function T6060S_BatchCostAllocationInfo()

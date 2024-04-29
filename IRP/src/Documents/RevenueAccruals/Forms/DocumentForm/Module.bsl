@@ -26,6 +26,11 @@ Procedure OnOpen(Cancel)
 	DocExpenseRevenueAccrualsClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocExpenseRevenueAccrualsServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+EndProcedure
+
 #EndRegion
 
 #Region FormHeaderItemsEventHandlers
@@ -62,36 +67,11 @@ EndProcedure
 Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
 	
 	StandardProcessing = False;
-	If Not ValueIsFilled(Object.Currency) Then
-		//@skip-check property-return-type
-		TextMessage = R().Error_EmptyCurrency; // String
-		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.Currency");
-		Return;
-	EndIf;
-	If Not ValueIsFilled(Object.TransactionType) Then
-		//@skip-check property-return-type
-		TextMessage = R().Error_EmptyTransactionType; // String
-		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.TransactionType");
-		Return;
-	EndIf;
 	
-	Notify = New NotifyDescription("AfterRevenuePickup", ThisObject);
-	FormParameters = New Structure();
-	FormParameters.Insert("Company", Object.Company);
-	FormParameters.Insert("Ref", Object.Ref);
-	FormParameters.Insert("Date", Object.Date);
-	FormParameters.Insert("Currency", Object.Currency);
-	FormParameters.Insert("TransactionType", Object.TransactionType);
+	OpenPickupForm();
 	
-	OpenForm("Document.RevenueAccruals.Form.PickupRevenueForm",
-		FormParameters,
-		ThisObject,
-		ThisObject.UUID,
-		,
-		ThisObject.URL,
-		Notify,
-		FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
+
 	
 #Region GroupTitleDecorations
 
@@ -284,6 +264,54 @@ EndProcedure
 Function GetObjectCurrencies(DocRef)
 	Return CommonFunctionsServer.GetTableForClient(DocRef.Currencies.Unload());
 EndFunction
+
+&AtClient
+Async Procedure OpenPickupForm()
+	
+	TableIsFilled = Object.CostList.Count() > 0;
+	
+	If TableIsFilled Then
+		Answer = Await DoQueryBoxAsync(R().QuestionToUser_015, QuestionDialogMode.OKCancel);
+	EndIf;
+	
+	If TableIsFilled And Answer = DialogReturnCode.Cancel Then
+		Return;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.Currency) Then
+		//@skip-check property-return-type
+		TextMessage = R().Error_EmptyCurrency; // String
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.Currency");
+		Return;
+	EndIf;
+	If Not ValueIsFilled(Object.TransactionType) Then
+		//@skip-check property-return-type
+		TextMessage = R().Error_EmptyTransactionType; // String
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage, "Object.TransactionType");
+		Return;
+	EndIf;
+	
+	Object.CostList.Clear();
+	
+	Notify = New NotifyDescription("AfterRevenuePickup", ThisObject);
+	FormParameters = New Structure();
+	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Ref", Object.Ref);
+	FormParameters.Insert("Date", Object.Date);
+	FormParameters.Insert("Currency", Object.Currency);
+	FormParameters.Insert("TransactionType", Object.TransactionType);
+	
+	OpenForm("Document.RevenueAccruals.Form.PickupRevenueForm",
+	FormParameters,
+	ThisObject,
+	ThisObject.UUID,
+	,
+	ThisObject.URL,
+	Notify,
+	FormWindowOpeningMode.LockOwnerWindow);
+
+EndProcedure
+
 
 #EndRegion
 

@@ -1266,7 +1266,7 @@ Function R5022T_Expenses()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.IsService
-		   |	AND (NOT ItemList.IsAdditionalItemCost OR ItemList.OtherPeriodExpenseType <> VALUE(Enum.OtherPeriodExpenseType.ItemsCost))
+		   |	AND (NOT ItemList.IsAdditionalItemCost AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef))
 		   |	AND ItemList.IsPurchase";
 EndFunction
 

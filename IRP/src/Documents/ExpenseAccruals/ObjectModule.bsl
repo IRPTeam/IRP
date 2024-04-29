@@ -36,3 +36,17 @@ Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
 
+Procedure FillCheckProcessing(Cancel, CheckedAttributes)
+	
+	TypesToControl = New Array; // Array of EnumRef.AccrualsTransactionType
+	TypesToControl.Add(Enums.AccrualsTransactionType.Void);
+	TypesToControl.Add(Enums.AccrualsTransactionType.Reverse);
+	
+	If TypesToControl.Find(TransactionType) <> Undefined Then
+		CheckedAttributes.Add("Basis");
+	EndIf;
+	
+EndProcedure
+
+
+

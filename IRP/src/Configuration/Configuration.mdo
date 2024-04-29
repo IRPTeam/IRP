@@ -913,7 +913,6 @@
   <commonCommands>CommonCommand.OpenPartnersEmployee</commonCommands>
   <commonCommands>CommonCommand.OpenFixedAssets</commonCommands>
   <commonCommands>CommonCommand.OpenAccountingRecords</commonCommands>
-  <commonCommands>CommonCommand.OpenVendorPrices</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>

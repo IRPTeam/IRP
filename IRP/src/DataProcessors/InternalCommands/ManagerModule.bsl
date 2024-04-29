@@ -482,7 +482,6 @@ Function LoadDataFromTable_GetCommandDescription()
 	
 	CommandDescription.HasActionOnCommandCreate = True;
 
-	
 	Targets = CommandDescription.Targets;
 	
 	ArrayOfExcludingDocuments = New Array(); // Array of MetadataObject
@@ -665,45 +664,17 @@ EndProcedure
 #Region OpenVendorPrices
 Function OpenVendorPrices_GetCommandDescription()
 	
-	//CommandDescription = InternalCommandsServer.GetCommandDescription();
-	//
-	//CommandDescription.Name = "OpenVendorPrices";
-	//CommandDescription.Title = R().OVP_Button_Title;
-	//CommandDescription.ToolTip = R().OVP_Button_ToolTip; 
-	//	
-	//CommandDescription.LocationGroup = "FormCommandBar.Service";
-	//CommandDescription.ModifiesStoredData = False;
-	//
-	//CommandDescription.HasActionInitialization = True;
-	//CommandDescription.HasActionOnCommandCreate = True;
-	//CommandDescription.HasActionAfterRunning = True;
-	//
-	//CommandDescription.UsingListForm = False;
-	//CommandDescription.UsingChoiceForm = False;
-	//CommandDescription.UsingObjectForm = True;
-	//
-	//Targets = CommandDescription.Targets;
-	//
-	//Targets.Add(Metadata.Documents.PurchaseInvoice.FullName());
-	//Targets.Add(Metadata.Documents.PurchaseOrder.FullName());
-	//
-	//CommandDescription.Targets = New FixedArray(Targets);
-	
-	//////////////////////////////
 	CommandDescription = InternalCommandsServer.GetCommandDescription();
 	
 	CommandDescription.Name = "OpenVendorPrices";
 	//@skip-check statement-type-change, property-return-type
 	CommandDescription.Title = R().OVP_Button_Title;
+	//@skip-check statement-type-change, property-return-type
 	CommandDescription.ToolTip = R().OVP_Button_Title;
-	CommandDescription.Picture = "CloneObject";
+	CommandDescription.Picture = "Price";
 	CommandDescription.Representation = "PictureAndText";
 	
-	//CommandDescription.ForTables = True;
-	//CommandDescription.SpecificTables = "PaymentList, ItemList";
-	
-	CommandDescription.LocationGroup = "CommandBar.Tools";
-	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.LocationGroup = "FormCommandBar.FormService";
 	CommandDescription.ModifiesStoredData = False;
 	
 	CommandDescription.HasActionInitialization = True;
@@ -721,35 +692,9 @@ Function OpenVendorPrices_GetCommandDescription()
 	
 	CommandDescription.Targets = New FixedArray(Targets);
 	
-	//////////////////////////////
-	
 	Return CommandDescription;
 	
 EndFunction
-
-// See RunCommandAction
-Procedure OpenVendorPrices_RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
-	
-	Message(123);
-	
-//	Filter = New Structure("ItemKey, Partner");
-//	Filter.ItemKey = GetItemKeyArray(CommandParameter);
-//	Filter.Partner = CommonFunctionsServer.GetRefAttribute(CommandParameter, "Partner");
-//	
-//	FormParameters = New Structure;
-//	FormParameters.Insert("Filter", Filter);
-//	FormParameters.Insert("GenerateOnOpen", True);
-//	
-//	OpenForm("Report.S1001L_VendorsPrices.Form", 
-//		FormParameters,
-//		CommandExecuteParameters.Source,
-//		CommandExecuteParameters.Uniqueness,
-//		CommandExecuteParameters.Window,
-//		CommandExecuteParameters.URL);
-//	
-	
-
-EndProcedure
 
 #EndRegion
 

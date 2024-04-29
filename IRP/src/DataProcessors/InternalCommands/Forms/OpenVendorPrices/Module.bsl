@@ -35,23 +35,23 @@ EndProcedure
 // See InternalCommandsClient.Form_RunCommandAction
 &AtClient
 Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInfo = Undefined) Export
-	
-		Filter = New Structure("ItemKey, Partner");
-		Filter.ItemKey = GetItemKeyArray(CommandParameter);
-		Filter.Partner = CommonFunctionsServer.GetRefAttribute(CommandParameter, "Partner");
 		
-		FormParameters = New Structure;
-		FormParameters.Insert("Filter", Filter);
-		FormParameters.Insert("GenerateOnOpen", True);
-		
-		OpenForm("Report.S1001L_VendorsPrices.Form", 
-			FormParameters,
-			CommandExecuteParameters.Source,
-			CommandExecuteParameters.Uniqueness,
-			CommandExecuteParameters.Window,
-			CommandExecuteParameters.URL);
+	DocumentRef = Targets;
 
+	Filter = New Structure;
+	Filter.Insert("ItemKey", GetItemKeyArray(DocumentRef)); // Array of CatalogRef.ItemKeys
+	Filter.Insert("Partner", CommonFunctionsServer.GetRefAttribute(DocumentRef, "Partner")); // CatalogRef.Partners
+		
+	FormParameters = New Structure;
+	FormParameters.Insert("Filter", Filter);
+	FormParameters.Insert("GenerateOnOpen", True);
 	
+	OpenForm("Report.S1001L_VendorsPrices.Form", 
+		FormParameters,
+		DocumentRef,
+		DocumentRef.UUID(),
+		,
+		);
 	
 EndProcedure
 
@@ -74,6 +74,20 @@ EndProcedure
 Procedure CommandProcessingAtServer(CommandParameter, AddInfo = Undefined)
 	Return;
 EndProcedure
+
+&AtServer
+Function GetItemKeyArray(DocRef)
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(DocRef, "ItemList") Then
+				
+		TempTable = DocRef.ItemList.Unload();
+		Array = TempTable.UnloadColumn("ItemKey");
+		
+		Return Array;
+	EndIf;
+	
+EndFunction
+
 
 #EndRegion
 

@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Attached files</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <recordPresentation>
     <key>en</key>

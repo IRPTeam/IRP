@@ -299,6 +299,7 @@ Async Procedure OpenPickupForm()
 	FormParameters.Insert("Date", Object.Date);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("TransactionType", Object.TransactionType);
+	FormParameters.Insert("Branch", Object.Branch);
 	
 	OpenForm("Document.ExpenseAccruals.Form.PickupExpenseForm",
 		FormParameters,

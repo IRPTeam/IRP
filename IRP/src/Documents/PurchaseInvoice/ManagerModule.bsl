@@ -734,7 +734,8 @@ Function ItemListLandedCost()
 	       |	ItemList.DELETE_IsAdditionalItemCost AS IsAdditionalItemCost,
 	       |	ItemList.IsService AS IsService,
 	       |	TableRowIDInfo.RowID AS RowID,
-	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType
+	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
+		   |	ItemList.OtherPeriodExpenseType IN (VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals), VALUE(Enum.OtherPeriodExpenseType.ItemsCost)) AS isOtherPeriodExpense
 	       |INTO ItemListLandedCost
 	       |FROM
 	       |	Document.PurchaseInvoice.ItemList AS ItemList
@@ -1296,15 +1297,28 @@ EndFunction
 
 Function R6070T_OtherPeriodsExpenses()
 	Return "SELECT
-		   |	*,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.NetAmount AS Amount,
-		   |	ItemList.TaxAmount AS AmountTax
-		   |INTO R6070T_OtherPeriodsExpenses
-		   |FROM
-		   |	ItemListLandedCost AS ItemList
-		   |WHERE
-		   |	ItemList.IsAdditionalItemCost OR ItemList.OtherPeriodExpenseType IN (VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals), VALUE(Enum.OtherPeriodExpenseType.ItemsCost)) ";
+	       |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	       |	ItemList.Period AS Period,
+	       |	ItemList.Company AS Company,
+	       |	ItemList.Branch AS Branch,
+	       |	ItemList.Basis AS Basis,
+		   |	CASE
+	       |		WHEN ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ItemsCost)
+	       |			THEN ItemList.RowID
+	       |	END AS RowID,
+	       |	CASE
+	       |		WHEN ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ItemsCost)
+	       |			THEN ItemList.ItemKey
+	       |	END AS ItemKey,
+	       |	ItemList.Currency AS Currency,
+	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
+	       |	ItemList.NetAmount AS Amount,
+	       |	ItemList.TaxAmount AS AmountTax
+	       |INTO R6070T_OtherPeriodsExpenses
+	       |FROM
+	       |	ItemListLandedCost AS ItemList
+	       |WHERE
+	       |	ItemList.isOtherPeriodExpense";
 EndFunction
 
 Function T6010S_BatchesInfo()

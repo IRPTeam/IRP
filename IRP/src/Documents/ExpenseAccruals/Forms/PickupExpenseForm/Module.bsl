@@ -53,12 +53,14 @@ Procedure FillExpenseValueTable()
 	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(
 	|			&BalancePeriod,
 	|			Company = &Company
+	|				AND Branch = &Branch
 	|				AND CurrencyMovementType = &CurrencyMovementType
 	|				AND OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals)
 	|				AND Currency = &Currency
 	|				AND &DocTypeFilter) AS R6070T_OtherPeriodsExpenses";
 	
 	Query.SetParameter("Company", Parameters.Company);
+	Query.SetParameter("Branch", Parameters.Branch);
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	Query.SetParameter("Currency", Parameters.Currency);
 	

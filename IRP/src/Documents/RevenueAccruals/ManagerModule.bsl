@@ -148,53 +148,24 @@ Function CostList()
 	|			THEN &Ref
 	|		ELSE RevenueAccrualsCostList.Ref.Basis
 	|	END AS Basis,
-	|	RevenueAccrualsCostList.Amount AS Amount,
-	|	RevenueAccrualsCostList.AmountTax AS AmountTax,
-	|	RevenueAccrualsCostList.Amount + RevenueAccrualsCostList.AmountTax AS AmountWithTaxes,
-	|	CASE
-	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
-	|			THEN VALUE(AccumulationRecordType.Expense)
-	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
-	|			THEN VALUE(AccumulationRecordType.Receipt)
-	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
-	|			THEN VALUE(AccumulationRecordType.Expense)
-	|		ELSE VALUE(AccumulationRecordType.Expense)
-	|	END AS RecordType,
 	|	CASE
 	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
 	|			THEN 1
 	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
-	|			THEN 1
+	|			THEN -1
 	|		WHEN RevenueAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
 	|			THEN 1
 	|		ELSE 1
-	|	END AS Factor
-	|INTO CostListTemp
+	|	END AS Factor,
+	|	RevenueAccrualsCostList.Amount AS Amount,
+	|	RevenueAccrualsCostList.AmountTax AS AmountTax,
+	|	RevenueAccrualsCostList.Amount + RevenueAccrualsCostList.AmountTax AS AmountWithTaxes,
+	|	RevenueAccrualsCostList.Ref.TransactionType AS TransactionType
+	|INTO CostList
 	|FROM
 	|	Document.RevenueAccruals.CostList AS RevenueAccrualsCostList
 	|WHERE
-	|	RevenueAccrualsCostList.Ref = &Ref
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	CostListTemp.Key AS Key,
-	|	CostListTemp.Period AS Period,
-	|	CostListTemp.Company AS Company,
-	|	CostListTemp.Branch AS Branch,
-	|	CostListTemp.Currency AS Currency,
-	|	CostListTemp.ProfitLossCenter AS ProfitLossCenter,
-	|	CostListTemp.ExpenseType AS ExpenseType,
-	|	CostListTemp.AdditionalAnalytic AS AdditionalAnalytic,
-	|	CostListTemp.Project AS Project,
-	|	CostListTemp.Basis AS Basis,
-	|	CostListTemp.Amount * CostListTemp.Factor AS Amount,
-	|	CostListTemp.AmountTax * CostListTemp.Factor AS AmountTax,
-	|	CostListTemp.AmountWithTaxes * CostListTemp.Factor AS AmountWithTaxes,
-	|	CostListTemp.RecordType AS RecordType
-	|INTO CostList
-	|FROM
-	|	CostListTemp AS CostListTemp";
+	|	RevenueAccrualsCostList.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -301,10 +272,18 @@ EndProcedure
 Function R5021T_Revenues()
 	Return
 	"SELECT
-	|	*,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals) AS OtherPeriodRevenueType,
-	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency) AS CurrencyMovementType
+	|	CostList.Period AS Period,
+	|	CostList.Company AS Company,
+	|	CostList.Branch AS Branch,
+	|	CostList.Currency AS Currency,
+	|	CostList.ProfitLossCenter AS ProfitLossCenter,
+	|	CostList.ExpenseType AS ExpenseType,
+	|	CostList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CostList.Project AS Project,
+	|	CostList.Basis AS Basis,
+	|	CostList.Amount AS Amount,
+	|	CostList.AmountTax AS AmountTax,
+	|	CostList.AmountWithTaxes AS AmountWithTaxes
 	|INTO R5021T_Revenues
 	|FROM
 	|	CostList AS CostList
@@ -315,14 +294,28 @@ EndFunction
 Function R6080T_OtherPeriodsRevenues()
 	Return
 	"SELECT
-	|	*,
-	|	VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals) AS OtherPeriodRevenueType,
-	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency) AS CurrencyMovementType
+	|	CostList.Period AS Period, 
+	|	CASE
+	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
+	|			THEN VALUE(AccumulationRecordType.Expense)
+	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
+	|			THEN VALUE(AccumulationRecordType.Receipt)
+	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
+	|			THEN VALUE(AccumulationRecordType.Expense)
+	|	END AS RecordType,
+	|	VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS OtherPeriodExpenseType,
+	|	CostList.Company AS Company,
+	|	CostList.Branch AS Branch,
+	|	CostList.Basis AS Basis,
+	|	CostList.Currency AS Currency,
+	|	CostList.Amount * CostList.Factor AS Amount,
+	|	CostList.AmountTax * CostList.Factor AS AmountTax
 	|INTO R6080T_OtherPeriodsRevenues
 	|FROM
 	|	CostList AS CostList
 	|WHERE
 	|	TRUE";
+
 
 EndFunction
 

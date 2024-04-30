@@ -196,7 +196,7 @@ Procedure WriteMovements(Command)
 	Cancel = False;
 	WriteMovementsOnServer(Cancel);
 	If Not Cancel Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_037);
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_039);
 	EndIf;
 	
 EndProcedure
@@ -297,7 +297,7 @@ Procedure SetDefaultMovementsToDocument()
 			
 			SetManualMovementsEditInDocument(False);
 						
-			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_037);
+			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_039);
 		Else
 			ManualMovementsEdit = True;
 		EndIf;

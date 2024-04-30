@@ -233,7 +233,7 @@ Function RegisterRecords(Parameters)
 		If isManualRecordsHasDifference Then
 			Parameters.Messages.Add(R().Error_144);
 		Else
-			Parameters.Messages.Add(R().InfoMessage_036);
+			Parameters.Messages.Add(R().InfoMessage_038);
 		EndIf;
 	EndIf;
 				

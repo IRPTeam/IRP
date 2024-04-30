@@ -255,7 +255,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other period expense type</value>
+   <value>Diğer dönemler giderler tipi</value>
   </synonym>
   <type>
    <types>EnumRef.OtherPeriodExpenseType</types>

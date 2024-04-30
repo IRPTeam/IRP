@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Expense accruals</value>
+  <value>Gider tahakkuklar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ExpenseAccruals.StandardAttribute.Number</inputByString>
@@ -68,7 +68,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Expense accrual</value>
+  <value>Gider tahakkuk</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -80,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Expense accruals</value>
+  <value>Gider tahakkuklar</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -217,7 +217,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Pickup expense form</value>
+   <value>Gider seçme formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

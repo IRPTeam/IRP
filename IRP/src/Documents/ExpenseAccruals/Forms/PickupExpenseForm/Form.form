@@ -10,7 +10,7 @@
  </title>
  <title>
   <key>tr</key>
-  <value>Select document</value>
+  <value>Evrak seç</value>
  </title>
  <items xsi:type="form:Table">
   <name>ExpenseValueTable</name>
@@ -432,7 +432,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Expense value table</value>
+   <value>Giderler değer tablosu</value>
   </title>
   <id>1</id>
   <valueType>

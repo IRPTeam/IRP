@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Other period expense type</value>
+  <value>Diğer dönemler giderler tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -28,11 +28,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Стоимость товаров</value>
+   <value>Доп. расход на товары</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Items cost</value>
+   <value>Malzeme ek gideri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a9cc6f28-3189-4bec-8b1b-aec5920ae5c1">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Expense accruals</value>
+   <value>Gider tahakkuklar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

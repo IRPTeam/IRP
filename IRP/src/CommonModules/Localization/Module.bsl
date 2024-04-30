@@ -1659,10 +1659,10 @@ Function Strings(Lang) Export
 		|tr='Banka ödeme evrakı (döviz bozdurma) girilmemiştir'", Lang));	
 	Strings.Insert("Error_EmptyCurrency", NStr("en='Currency not entered';
 		|ru='Валюта не указана';
-		|tr='Currency not entered'", Lang));
+		|tr='Döviz girilmedi'", Lang));
 	Strings.Insert("Error_EmptyTransactionType", NStr("en='Transaction type not entered';
 		|ru='Вид документа не указан';
-		|tr='Transaction type not entered'", Lang));
+		|tr='İşlem tipi girilmedi'", Lang));
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
 		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));

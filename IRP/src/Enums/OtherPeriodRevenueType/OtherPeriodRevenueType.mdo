@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Other period revenue type</value>
+  <value>Diğer dönemler gelirler tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -28,11 +28,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Доходы от товаров</value>
+   <value>Доп. доход на товары</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Items revenue</value>
+   <value>Malzeme ek geliri</value>
   </synonym>
  </enumValues>
  <enumValues uuid="41eb6187-96e6-4269-bf79-2b26e2b4d02f">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Revenue accruals</value>
+   <value>Gelir tahakkuklar</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

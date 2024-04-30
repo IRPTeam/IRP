@@ -3985,7 +3985,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Temel belgeyi kullan</value>
+    <value>Kaynak evrak kullan</value>
    </synonym>
    <type>
     <types>Boolean</types>

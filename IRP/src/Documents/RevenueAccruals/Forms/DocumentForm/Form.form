@@ -609,7 +609,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group title left</value>
+     <value>Grup başlık sol</value>
     </title>
     <extendedTooltip>
      <name>GroupTitleLeftExtendedTooltip</name>
@@ -1701,7 +1701,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Pages main pages</value>
+   <value>Sayfalar ana sayfalar</value>
   </toolTip>
   <extendedTooltip>
    <name>PagesMainPagesExtendedTooltip</name>

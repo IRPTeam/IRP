@@ -255,7 +255,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Other period revenue type</value>
+   <value>Diğer dönemler gelirler tipi</value>
   </synonym>
   <type>
    <types>EnumRef.OtherPeriodRevenueType</types>

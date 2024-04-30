@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Accruals transaction type</value>
+  <value>Tahakkuk işlem tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -43,7 +43,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Аннулировать</value>
+   <value>Сторнирование</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -58,11 +58,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сторнировать</value>
+   <value>Обратноая проводка</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Reverse</value>
+   <value>Ters kayıt</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

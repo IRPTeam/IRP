@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Revenue accruals</value>
+  <value>Gelir tahakkuklar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.RevenueAccruals.StandardAttribute.Number</inputByString>
@@ -68,7 +68,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Revenue accrual</value>
+  <value>Gelir tahakkuk</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -80,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Revenue accruals</value>
+  <value>Gelir tahakkuklar</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -217,7 +217,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Pickup revenue form</value>
+   <value>Gelir seçme formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

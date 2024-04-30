@@ -62,7 +62,6 @@ Scenario: _605700 preparation (edit documents movements)
 	When Create document InventoryTransferOrder objects (check movements)
 	When Create document InternalSupplyRequest objects (check movements)
 	When Create document PurchaseInvoice objects
-	When Create catalog AccessGroups and AccessProfiles (Basic)
 	* PI posting
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -171,6 +170,9 @@ Scenario: _605703 change movements for PI
 			And I input "-137 000" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
 			And I click "Write movements" button
+			Then there are lines in TestClient message log
+				|'Failed to save: "R5020 Partners balance"!'|
+			And I click "Write movements (register self-control)" button			
 	* Check
 		Then there are lines in TestClient message log
 			|'Movements successfully recorded'|

@@ -1078,19 +1078,37 @@ Scenario: _018020 check Purchase price records
 			| 'Period'                      | 'Recorder'                | 'Line number' | 'Price type'              | 'Partner'   | 'Item key' | 'Unit'                   | 'Currency' | 'Price'  | 'Total price' | 'Net price' |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '1'           | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'                    | 'TRY'      | '222,00' | '222,00'      | '188,14'    |
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | '2'           | 'en description is empty' | 'Ferron BP' | '39/19SD'  | 'High shoes box (8 pcs)' | 'TRY'      | '250,00' | '31,25'       | '26,48'     |
+	* Add one more line and check command Show vendor price
+		And in opened panel I select "$PurchaseInvoice018020$"
+		And in the table "ItemList" I click "Add" button
+		And I select "dress" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "S/Yellow" from "Item key" drop-down list by string in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Total amount" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,00" text in "Total amount" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ShowVendorPrice"	
+		* Check
+			And "ItemList" table became equal
+				| 'Item'       | 'Item key' | 'Unit'                   | 'Quantity' | 'Price'  | 'VAT' | 'Total amount' | 'Net amount' | 'Last vendor price' |
+				| 'Boots'      | '37/18SD'  | 'pcs'                    | '4,000'    | '222,00' | '18%' | '888,00'       | '752,54'     | '222,00, TRY'       |
+				| 'High shoes' | '39/19SD'  | 'High shoes box (8 pcs)' | '8,000'    | '250,00' | '18%' | '2 000,00'     | '1 694,92'   | '250,00, TRY'       |
+				| 'Dress'      | 'S/Yellow' | 'pcs'                    | '1,000'    | '200,00' | '18%' | '200,00'       | '169,49'     | '100,00, TRY'       |
+		* Check Open vendor prices report
+			And I click "Open vendor prices" button
+			And I click "Generate" button
+			Then "Result" spreadsheet document contains lines
+				| 'Filter:'   | 'Item key In list "37/18SD; 39/19SD; S/Yellow"' | ''                        | ''                       | ''          | ''       | ''            |
+				| ''          | ''                                              | ''                        | ''                       | ''          | ''       | ''            |
+				| 'Partner'   | 'Item key'                                      | ''                        | ''                       | 'Total'     | ''       | ''            |
+				| 'Period'    | 'Price type'                                    | 'Recorder'                | 'Unit'                   | 'Net price' | 'Price'  | 'Total price' |
+				| '*'         | 'en description is empty'                       | '*'                       | 'pcs'                    | '76,27'     | '100,00' | '90,00'       |
+				| '*'         | 'en description is empty'                       | '*'                       | 'pcs'                    | '76,27'     | '100,00' | '90,00'       |
+				| 'Ferron BP' | '37/18SD'                                       | ''                        | ''                       | '188,14'    | '222,00' | '222,00'      |
+				| '*'         | 'en description is empty'                       | '$PurchaseInvoice018020$' | 'pcs'                    | '188,14'    | '222,00' | '222,00'      |
+				| 'Ferron BP' | '39/19SD'                                       | ''                        | ''                       | '26,48'     | '250,00' | '31,25'       |
+				| '*'         | 'en description is empty'                       | '$PurchaseInvoice018020$' | 'High shoes box (8 pcs)' | '26,48'     | '250,00' | '31,25'       |
+				| 'Total'     | ''                                              | ''                        | ''                       | ''          | ''       | ''            |	
 		And I close all client application windows
-		
-				
-				
-
-
-				
-				
-
-
-		
-						
-
-				
-		
-			

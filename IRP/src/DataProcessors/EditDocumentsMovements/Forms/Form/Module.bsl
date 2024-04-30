@@ -105,10 +105,12 @@ EndProcedure
 // 
 // Parameters:
 //  Item - FormTable - Item
+//@skip-check module-unused-method
 &AtClient
 Procedure RegisterTableOnChange(Item)
 	
 	Parent = Item.Parent; // FormGroup
+	//@skip-check property-return-type
 	Parent.Picture = PictureLib.AppearanceExclamationMark;
 	
 EndProcedure
@@ -157,7 +159,9 @@ Async Procedure ManualMovementsEditOnChange(Item)
 	
 	If CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "ManualMovementsEdit") Then
 		
-		Answer = Await DoQueryBoxAsync(R().QuestionToUser_030, QuestionDialogMode.YesNo, , DialogReturnCode.Yes); // DialogReturnCode
+		//@skip-check property-return-type
+		QuestionText = R().QuestionToUser_030; //String
+		Answer = Await DoQueryBoxAsync(QuestionText, QuestionDialogMode.YesNo, , DialogReturnCode.Yes); // DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetDefaultMovementsToDocument();
@@ -180,24 +184,24 @@ EndProcedure
 Procedure SetEnabledToRegisterPages(Val ManualMovementsEditValue)
 	
 	Items.Registers.ReadOnly = Not ManualMovementsEditValue;
-	Items.FormWriteMovements.Enabled = ManualMovementsEditValue;
+	Items.GroupWriteMovemementsMenu.Enabled = ManualMovementsEditValue;
+	
+EndProcedure
+
+&AtClient
+Procedure WriteMovementsWithRegisterSelfControl(Command)
+	
+	RegisterSelfControl = True;
+	Cancel = False;
+	WriteMovementsOnServer(Cancel, RegisterSelfControl);
 	
 EndProcedure
 
 &AtClient
 Procedure WriteMovements(Command)
 	
-	Posted = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "Posted");
-	If Not Posted Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().Error_146);
-		Return;
-	EndIf;
-	
 	Cancel = False;
 	WriteMovementsOnServer(Cancel);
-	If Not Cancel Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_039);
-	EndIf;
 	
 EndProcedure
 
@@ -211,7 +215,14 @@ Procedure RereadPostingData(Command)
 EndProcedure
 
 &AtServer
-Procedure WriteMovementsOnServer(Cancel)
+Procedure WriteMovementsOnServer(Cancel, RegisterSelfControl = False)
+	
+	Posted = CommonFunctionsServer.GetRefAttribute(Object.DocumentRef, "Posted");
+	If Not Posted Then
+		//@skip-check property-return-type
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_146);
+		Return;
+	EndIf;
 	
 	BeginTransaction();
 	Try
@@ -225,9 +236,23 @@ Procedure WriteMovementsOnServer(Cancel)
 			RegisterRecords = DocumentObject.RegisterRecords[Row.RegisterName];
 			If DoNotControlWriteRules = True Then
 				RegisterRecords.DataExchange.Load = True;
-			EndIf;	
+			EndIf;
+			
+			IsSelfControlled = False;
+			If RegisterSelfControl Then
+				If Metadata.AccumulationRegisters.Contains(RegisterRecords.Metadata()) Then
+					IsSelfControlled = True;
+					RegisterName = Row.RegisterName;
+					//@skip-check dynamic-access-method-not-found
+					AccumulationRegisters[RegisterName].AdditionalDataFilling(VT_Movements);
+				EndIf;
+			EndIf;
 			RegisterRecords.Load(VT_Movements);
 			RegisterRecords.Write();
+			
+			If IsSelfControlled Then
+				Table.Load(VT_Movements);
+			EndIf;
 		EndDo;
 		
 		DocumentObject.ManualMovementsEdit	= True;
@@ -240,8 +265,13 @@ Procedure WriteMovementsOnServer(Cancel)
 		RollbackTransaction();
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(
-			ErrorProcessing.BriefErrorDescription(ErrorInfo()));
+		ErrorProcessing.BriefErrorDescription(ErrorInfo()));
 	EndTry;
+	
+	If Not Cancel Then
+		//@skip-check property-return-type
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_039);
+	EndIf;
 	
 EndProcedure
 
@@ -258,10 +288,13 @@ Async Procedure MovementAnalysisAsync()
 	
 	If ManualMovementsEdit And Not IsDifferenceInMovements Then
 		
+		//@skip-check invocation-parameter-type-intersect
+		//@skip-check property-return-type
 		Answer = Await DoQueryBoxAsync(R().QuestionToUser_029, QuestionDialogMode.YesNo, , DialogReturnCode.Yes); // DialogReturnCode
 		
 		If Answer = DialogReturnCode.Yes Then 
 			SetManualMovementsEditInDocument(False);
+			SetEnabledToRegisterPages(ManualMovementsEdit);
 		EndIf;
 	
 	EndIf;	
@@ -283,9 +316,9 @@ Procedure SetDefaultMovementsToDocument()
 			DotPosition = StrFind(RegInfo.RegName, ".");
 			RegName = Mid(RegInfo.RegName, DotPosition + 1);
 			
+			//@skip-check property-return-type
 			NewPostingData = RegInfo.NewPostingData; // ValueTable
 			
-			TableName = RegName;
 			Table = ThisObject[RegName]; // FormDataCollection
 			Table.Load(NewPostingData);
 			
@@ -297,6 +330,7 @@ Procedure SetDefaultMovementsToDocument()
 			
 			SetManualMovementsEditInDocument(False);
 						
+			//@skip-check property-return-type
 			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_039);
 		Else
 			ManualMovementsEdit = True;
@@ -357,3 +391,4 @@ Procedure SetPicturesForPages(RegEditNames)
 	EndDo;
 	
 EndProcedure
+

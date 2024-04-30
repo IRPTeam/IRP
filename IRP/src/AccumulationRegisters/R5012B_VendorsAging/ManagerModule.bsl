@@ -175,3 +175,11 @@ Function R5012B_VendorsAging_CreditNote() Export
 		|	OffsetOfAging.Document = &Ref
 		|	AND OffsetOfAging.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
+
+// Additional data filling.
+// 
+// Parameters:
+//  MovementsValueTable - ValueTable
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	Return;	
+EndProcedure

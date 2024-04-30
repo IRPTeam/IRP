@@ -1081,6 +1081,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_EmptyCurrency", NStr("en = 'Currency not entered'", Lang));
 	Strings.Insert("Error_EmptyTransactionType", NStr("en = 'Transaction type not entered'", Lang));
 	Strings.Insert("Error_144", NStr("en = 'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
+	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en = '""Amount"" does not equal the sum of all resources'", Lang));
 	
 	// %1 - Register name
 	Strings.Insert("Error_145", NStr("en = 'Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));

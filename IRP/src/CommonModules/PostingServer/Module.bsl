@@ -201,7 +201,10 @@ Function RegisterRecords(Parameters)
 			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
 				Continue; //Never rewrite
 		EndIf;
-		
+		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
+			RegisterName = Row.Value.Metadata.Name;
+			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+		EndIf;
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
@@ -316,18 +319,6 @@ Procedure WriteAdvances(DocObject, RecordMeta, TableForLoad) Export
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, Metadata.AccumulationRegisters.R5012B_VendorsAging);
 	ElsIf RecordMeta = Metadata.AccumulationRegisters.R5011B_CustomersAging Then
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, Metadata.AccumulationRegisters.R5011B_CustomersAging);
-	ElsIf RecordMeta = Metadata.AccumulationRegisters.R5020B_PartnersBalance Then
-		For Each Row In TableForLoad Do
-			If ValueIsFilled(Row.AdvancesClosing) Then
-				Continue;
-			EndIf;
-			Row.Amount = 
-			Row.CustomerTransaction
-			+ Row.CustomerAdvance
-			+ Row.VendorTransaction
-			+ Row.VendorAdvance
-			+ Row.OtherTransaction;
-		EndDo;	
 	EndIf;
 EndProcedure
 

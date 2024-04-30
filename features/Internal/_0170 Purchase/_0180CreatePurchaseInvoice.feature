@@ -1090,6 +1090,7 @@ Scenario: _018020 check Purchase price records
 		And I input "200,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And in the table "ItemList" I click the button named "ShowVendorPrice"	
+		And I click "Post" button
 		* Check
 			And "ItemList" table became equal
 				| 'Item'       | 'Item key' | 'Unit'                   | 'Quantity' | 'Price'  | 'VAT' | 'Total amount' | 'Net amount' | 'Last vendor price' |

@@ -40,8 +40,7 @@ Procedure RunCommandAction(Targets, Form, CommandFormItem, MainAttribute, AddInf
 
 	Filter = New Structure;
 	Filter.Insert("ItemKey", GetItemKeyArray(DocumentRef)); // Array of CatalogRef.ItemKeys
-	Filter.Insert("Partner", CommonFunctionsServer.GetRefAttribute(DocumentRef, "Partner")); // CatalogRef.Partners
-		
+	
 	FormParameters = New Structure;
 	FormParameters.Insert("Filter", Filter);
 	FormParameters.Insert("GenerateOnOpen", True);
@@ -65,16 +64,6 @@ EndProcedure
 
 #Region PrivateServer
 
-// Command processing at server.
-// 
-// Parameters:
-//  CommandParameter - AnyRef, Array of AnyRef - Command parameter
-//  AddInfo - Undefined - Add info
-&AtServer
-Procedure CommandProcessingAtServer(CommandParameter, AddInfo = Undefined)
-	Return;
-EndProcedure
-
 &AtServer
 Function GetItemKeyArray(DocRef)
 	
@@ -87,20 +76,5 @@ Function GetItemKeyArray(DocRef)
 	EndIf;
 	
 EndFunction
-
-
-#EndRegion
-
-#Region PrivateClient
-
-// Command processing at client.
-// 
-// Parameters:
-//  CommandParameter - AnyRef, Array of AnyRef - Command parameter
-//  AddInfo - Undefined - Add info
-&AtClient
-Procedure CommandProcessingAtClient(CommandParameter, AddInfo = Undefined)
-	Return;
-EndProcedure
 
 #EndRegion

@@ -77,7 +77,7 @@ Scenario: _980001 preparation (fixed assets)
 			And Delay "5"
 		* Posting Calculation movement costs
 			Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-			Then "Calculation movement costs" window is opened
+			Then "Calculations movement costs" window is opened
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "5"
@@ -281,7 +281,7 @@ Scenario: _9800020 create depreciation calculation
 	And I close all client application windows
 	* Preparation (calculation movement cost)
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
-		Then "Calculation movement costs" window is opened
+		Then "Calculations movement costs" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "5"

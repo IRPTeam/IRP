@@ -1,6 +1,14 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	Return;
+	ViewClient_V2.OnOpen(Object, Form, );
 EndProcedure
+
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, );
+EndProcedure
+
+#EndRegion
 
 #Region Item
 

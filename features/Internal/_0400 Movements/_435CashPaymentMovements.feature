@@ -48,6 +48,7 @@ Scenario: _043500 preparation (Cash payment)
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
+		When Create catalog SalaryCalculationType objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When Create catalog SerialLotNumbers objects
@@ -128,7 +129,7 @@ Scenario: _043500 preparation (Cash payment)
 		And I execute 1C:Enterprise script at server
 			| "Documents.OutgoingPaymentOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Load Cash payment
-		When Create document CashPayment objects (payment to vendor without basis document)
+		When Create document CashPayment objects (payment to vendor with basis document)
 		When Create document CashPayment objects (exchange and transfer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -213,21 +214,19 @@ Scenario: _043503 check Cash payment movements by the Register "R1020 Advances t
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '1'         |
+			| '324'       |
 		And I select current line in "List" table
 	* Check movements by the Register  "R1020 Advances to vendors" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash payment 1 dated 05.04.2021 12:40:00' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                         |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                         |
-			| 'Register  "R1020 Advances to vendors"'    | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                         |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | 'Attributes'           | ''                         |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '171,2'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                         |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                         |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                         |
+			| 'Cash payment 324 dated 04.06.2021 11:30:02' | ''                    | ''           | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''        | ''       | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'      | ''                    | ''           | ''             | ''             | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                   | ''        | ''       | ''                     | ''                         |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'          | 'Project' | 'Amount' | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                   | ''                         |
+			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '164,35' | 'No'                   | ''                         |
+			| ''                                           | '04.06.2021 11:30:02' | 'Receipt'    | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                   | ''                         |
 	And I close all client application windows
 
 Scenario: _043504 check Cash payment movements by the Register "Return to customer" (return to customer)
@@ -543,21 +542,19 @@ Scenario: _043527 check Cash payment movements by the Register  "R9510 Salary pa
 			| '329'       |
 		And I select current line in "List" table
 	* Check movements by the Register  "R9510 Salary payment" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R9510 Salary payment" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash payment 329 dated 08.02.2023 13:10:49'   | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                 | ''           | ''                       | ''                                |
-			| 'Document registrations records'               | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                 | ''           | ''                       | ''                                |
-			| 'Register  "R9510 Salary payment"'             | ''              | ''                      | ''            | ''               | ''               | ''                  | ''                 | ''           | ''                       | ''                                |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''               | ''                  | ''                 | ''           | ''                       | ''                                |
-			| ''                                             | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Employee'          | 'Payment period'   | 'Currency'   | 'Transaction currency'   | 'Multi currency movement type'    |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '171,2'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | ''                 | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '256,8'       | 'Main Company'   | 'Front office'   | 'Anna Petrova'      | ''                 | 'USD'        | 'TRY'                    | 'Reporting currency'              |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '1 000'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | ''                 | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '1 000'       | 'Main Company'   | 'Front office'   | 'Alexander Orlov'   | ''                 | 'TRY'        | 'TRY'                    | 'en description is empty'         |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Anna Petrova'      | ''                 | 'TRY'        | 'TRY'                    | 'Local currency'                  |
-			| ''                                             | 'Expense'       | '08.02.2023 13:10:49'   | '1 500'       | 'Main Company'   | 'Front office'   | 'Anna Petrova'      | ''                 | 'TRY'        | 'TRY'                    | 'en description is empty'         |
+			| 'Cash payment 329 dated 08.02.2023 13:10:49' | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'           | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '1 000'  |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '1 000'  |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '171,2'  |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '1 500'  |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '1 500'  |
+			| ''                                           | '08.02.2023 13:10:49' | 'Expense'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '256,8'  |
 	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
@@ -810,3 +807,100 @@ Scenario: _043537 check Cash payment movements by the Register  "R3021 Cash in t
 			| ''                                             | '03.07.2023 14:21:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'Reporting currency'           | 'USD'      | 'TRY'                  | ''      | '171,2'  | 'No'                   |
 			| ''                                             | '03.07.2023 14:21:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Cash desk №1' | 'en description is empty'      | 'TRY'      | 'TRY'                  | ''      | '1 000'  | 'No'                   |	
 	And I close all client application windows
+
+#
+Scenario: _043538 check Cash payment movements by the Register  "T2015 Transactions info" (Payment to the vendor, advance=false)
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 dated 05.04.2021 12:40:00' | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'      | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''        | ''       | ''       | ''        |
+			| ''                                         | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                              | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                         | 'Main Company' | 'Front office' | ''      | '05.04.2021 12:40:00' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 323 dated 30.05.2021 15:08:40' | '*'         | ''        | '1 000'  | 'No'     | 'Yes'     |
+	And I close all client application windows
+
+Scenario: _043539 check Cash receipt movements by the Register  "T2014 Advances info" (Payment to the vendor, advance=true)
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '324'   |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 324 dated 04.06.2021 11:30:02' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'            | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                           | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'  | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                           | 'Main Company' | 'Front office' | '04.06.2021 11:30:02' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY' | ''        | '960'    | 'No'                      | 'No'                   | 'Receipt'     |	
+	And I close all client application windows
+
+Scenario: _043540 check absence Cash payment movements by the Register  "T2015 Transactions info" (Payment to the vendor, advance=true)
+	* Select CP
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '324'     |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+Scenario: _043541 check absence Cash payment movements by the Register  "T2014 Advances info" (Payment to the vendor, advance=false)
+	* Select CP
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1'       |
+	* Check movements by the Register  "T2014 Advances info"
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2014 Advances info"'    |
+		And I close all client application windows
+
+Scenario: _043542 check Cash payment movements by the Register  "T2014 Advances info" (Return to customer, without basis)
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '327'   |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 327 dated 02.09.2021 14:09:26' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'            | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                  | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                           | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement' | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                           | 'Main Company' | 'Front office' | '02.09.2021 14:09:26' | '*'   | 'USD'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'         | 'Ferron, USD'       | ''        | '-450'   | 'No'                      | 'No'                   | 'Receipt'     |
+	And I close all client application windows
+
+Scenario: _043543 check absence Cash payment movements by the Register  "T2015 Transactions info" (Return to customer, without basis)
+	* Select CP
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '327'     |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows

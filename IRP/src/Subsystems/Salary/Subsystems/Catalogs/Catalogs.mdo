@@ -10,5 +10,6 @@
   <content>Catalog.AccrualAndDeductionTypes</content>
   <content>Catalog.EmployeePositions</content>
   <content>Catalog.EmployeeSchedule</content>
+  <content>Catalog.SalaryCalculationType</content>
   <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

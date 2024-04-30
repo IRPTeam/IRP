@@ -53,6 +53,10 @@
     <key>en</key>
     <value>Production</value>
   </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Productions</value>
+  </listPresentation>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>

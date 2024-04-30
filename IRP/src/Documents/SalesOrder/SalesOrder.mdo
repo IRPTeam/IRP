@@ -66,6 +66,10 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Sales order</value>
+  </objectPresentation>
   <listPresentation>
     <key>en</key>
     <value>Sales orders</value>

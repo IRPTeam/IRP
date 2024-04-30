@@ -210,6 +210,7 @@ Function PaymentList()
 		|	PaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.PaymentPeriod AS PaymentPeriod,
+		|	PaymentList.CalculationType AS CalculationType,
 		|	PaymentList.Ref AS Basis,
 		|	PaymentList.Key AS Key,
 		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
@@ -412,6 +413,7 @@ Function R9510B_SalaryPayment()
 		   |	PaymentList.Branch,
 		   |	PaymentList.Employee,
 		   |	PaymentList.PaymentPeriod,
+		   |	PaymentList.CalculationType,
 		   |	PaymentList.Currency,
 		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R9510B_SalaryPayment
@@ -836,7 +838,71 @@ Function T1040T_AccountingAmounts()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsCurrencyExchange";
+		|	PaymentList.IsCurrencyExchange
+		|
+		|UNION ALL
+		|
+		// Other partner
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherPartner
+		|
+		|UNION ALL
+		|
+		// Other expense
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsOtherExpense
+		|
+		|UNION ALL
+		|
+		// Salary payment
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsSalaryPayment
+		|
+		|UNION ALL
+		|
+		// Employee cash advance
+		|SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Key AS RowKey,
+		|	PaymentList.Key AS Key,
+		|	PaymentList.Currency,
+		|	PaymentList.Amount,
+		|	VALUE(Catalog.AccountingOperations.BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsEmployeeCashAdvance";
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
@@ -846,7 +912,7 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_PaymentToVendor(Parameters); // Vendors transactions - Cash on hand
 	ElsIf Parameters.Operation = AO.BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		Return GetAnalytics_PaymentToVendor_Offset(Parameters); // Vendors transactions - Advances to vendors
-	ElsIf Parameters.Operation = AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand Then	
+	ElsIf Parameters.Operation = AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand Then
 		Return GetAnalytics_ReturnToCustomer(Parameters); // Customer transactions - Cash on hand
 	ElsIf Parameters.Operation = AO.BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_ReturnToCustomer_Offset(Parameters); // Customer transactions - Advances from customer
@@ -854,7 +920,16 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_CashTransferOrder(Parameters); // Cash in transit - Cash on hand
 	ElsIf Parameters.Operation = AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange Then
 		Return GetAnalytics_CurrencyExchange(Parameters); // Cash in transit - Cash on hand		
+	ElsIf Parameters.Operation = AO.BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_OtherPartner(Parameters); // Other partner - Cash on hand		
+	ElsIf Parameters.Operation = AO.BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_OtherExpense(Parameters); // Expense - Cash on hand		
+	ElsIf Parameters.Operation = AO.BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_SalaryPayment(Parameters); // SalaryPayment - Cash on hand		
+	ElsIf Parameters.Operation = AO.BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_EmployeeCashAdvance(Parameters); // Employee cash advance - Cash on hand		
 	EndIf;
+	
 	Return Undefined;
 EndFunction
 
@@ -1000,6 +1075,105 @@ Function GetAnalytics_CurrencyExchange(Parameters)
 	AccountingAnalytics.Debit = Debit.Account;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.TransitAccount);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Other partner - Cash on hand
+Function GetAnalytics_OtherPartner(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+		                                               Parameters.RowData.Partner, 
+		                                               Parameters.RowData.Agreement,
+		                                               Parameters.ObjectData.Currency);
+		                                               
+	AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Expense - Cash on hand
+Function GetAnalytics_OtherExpense(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+		                                                      Parameters.RowData.ExpenseType, 
+		                                                      Parameters.RowData.ProfitLossCenter);
+		                                               
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// SalaryPayment - Cash on hand
+Function GetAnalytics_SalaryPayment(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Employee); 
+	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Employee", Parameters.RowData.Employee);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+															Parameters.ObjectData.Account,
+															Parameters.ObjectData.Currency);
+	AccountingAnalytics.Credit = Credit.Account;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Account", Parameters.ObjectData.Account);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Employee cash advance - Cash on hand
+Function GetAnalytics_EmployeeCashAdvance(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Partner); 
+	AccountingAnalytics.Debit = Debit.AccountCashAdvance;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.RowData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	// Credit

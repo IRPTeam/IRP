@@ -56,6 +56,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.RetailCustomer,
 	|PaymentList.Employee,
 	|PaymentList.PaymentPeriod,
+	|PaymentList.CalculationType,
 	|PaymentList.ReceiptingAccount,
 	|PaymentList.ReceiptingBranch,
 	|PaymentList.Project";
@@ -115,7 +116,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	ElsIf TransactionType = SalaryPayment Then
 		StrByType = "
 		|PaymentList.Employee,
-		|PaymentList.PaymentPeriod";
+		|PaymentList.PaymentPeriod,
+		|PaymentList.CalculationType";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();

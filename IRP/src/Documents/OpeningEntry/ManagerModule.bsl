@@ -790,6 +790,7 @@ Function SalaryPayment()
 		   |	SalaryPayment.Currency,
 		   |	SalaryPayment.Employee,
 		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.CalculationType,
 		   |	SalaryPayment.Amount AS Amount,
 		   |	SalaryPayment.Ref.Date AS Period,
 		   |	SalaryPayment.Key
@@ -804,6 +805,8 @@ Function CashInTransitDoc()
 	Return
 		"SELECT
 		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Ref,
+		|	CashInTransitDoc.UseBasisDocument,
 		|	CashInTransitDoc.Ref.Date AS Period,
 		|	CashInTransitDoc.Ref.Company AS Company,
 		|	CashInTransitDoc.ReceiptingBranch AS Branch,
@@ -869,6 +872,11 @@ Function CashInTransit()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN OpeningEntryCashInTransit.UseBasisDocument
+		|			THEN OpeningEntryCashInTransit.Ref
+		|		ELSE UNDEFINED
+		|	END As BasisDocument,
 		|	OpeningEntryCashInTransit.Ref.Date AS Period,
 		|	OpeningEntryCashInTransit.Ref.Company,
 		|	OpeningEntryCashInTransit.Account AS FromAccount,
@@ -1192,6 +1200,11 @@ Function R3021B_CashInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN CashInTransitDoc.UseBasisDocument
+		|			THEN CashInTransitDoc.Ref
+		|		ELSE UNDEFINED
+		|	END As Basis,
 		|	CashInTransitDoc.Key,
 		|	CashInTransitDoc.Period,
 		|	CashInTransitDoc.Company,
@@ -1837,6 +1850,7 @@ Function R9510B_SalaryPayment()
 		   |	SalaryPayment.Branch,
 		   |	SalaryPayment.Employee,
 		   |	SalaryPayment.PaymentPeriod,
+		   |	SalaryPayment.CalculationType,
 		   |	SalaryPayment.Currency,
 		   |	SalaryPayment.Amount,
 		   |	SalaryPayment.Key

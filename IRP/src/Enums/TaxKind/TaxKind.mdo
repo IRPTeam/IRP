@@ -19,4 +19,11 @@
       <value>VAT</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="856964ff-a841-4648-84bc-65f5dcd0a756">
+    <name>Salary</name>
+    <synonym>
+      <key>en</key>
+      <value>Salary</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

@@ -904,6 +904,27 @@
         <value>149</value>
       </code>
     </items>
+    <items id="14341052-2325-4066-93a7-1385274365eb">
+      <name>Catalog_SalaryCalculationType</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>150</value>
+      </code>
+    </items>
+    <items id="5ba60815-19f1-4c55-a388-13cec899dc02">
+      <name>Document_ExpenseAccruals</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>151</value>
+      </code>
+    </items>
+    <items id="04652227-eb4d-4e84-9193-2871224f7df8">
+      <name>Document_RevenueAccruals</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>152</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -1078,6 +1078,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
 	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
+	Strings.Insert("Error_EmptyCurrency", NStr("en = 'Currency not entered'", Lang));
+	Strings.Insert("Error_EmptyTransactionType", NStr("en = 'Transaction type not entered'", Lang));
 	Strings.Insert("Error_144", NStr("en = 'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
 	
 	// %1 - Register name
@@ -1197,9 +1199,15 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_034", NStr("en = 'Time zone not changed'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en = 'Time zone changed to %1'", Lang));
-	Strings.Insert("InfoMessage_036", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
-	Strings.Insert("InfoMessage_037", NStr("en = 'Movements successfully recorded'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en = 'Attach file for ""%1"" as ""%2""'", Lang));
+	Strings.Insert("InfoMessage_037", NStr("en = 'Add link or any add any description'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en = '⬆️ Select document type ⬆️'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en = 'Click to add document'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en = 'File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_038", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
+	Strings.Insert("InfoMessage_039", NStr("en = 'Movements successfully recorded'", Lang));
 	
+	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
 	Strings.Insert("InfoMessage_PaymentReturn", NStr("en = 'Payment Return'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en = 'Session is closed'", Lang));
@@ -1455,6 +1463,10 @@ Strings.Insert("AccountingQuestion_02", NStr("en = 'Change [Currency] mark in an
 
 Strings.Insert("AccountingInfo_01", NStr("en = 'Load complete'", Lang));
 Strings.Insert("AccountingInfo_02", NStr("en = '<For all transaction types>'", Lang));
+Strings.Insert("AccountingInfo_03", NStr("en = 'Profit loss center'", Lang));
+Strings.Insert("AccountingInfo_04", NStr("en = 'Expense/Revenue'", Lang));
+Strings.Insert("AccountingInfo_05", NStr("en = 'Expense/Revenue & Profit loss center'", Lang));
+Strings.Insert("AccountingInfo_06", NStr("en = 'Employee'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en = 'JE '", Lang));
 
@@ -1530,23 +1542,32 @@ Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en = 'CashRevenue DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
 	
-Strings.Insert("DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues",
-	NStr("en = 'DebitNote DR (R1020B_AdvancesToVendors) CR (R5021_Revenues)'", Lang));
+Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues",
+	NStr("en = 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en = 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 	NStr("en = 'DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)'", Lang));
+
+Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
+	NStr("en = 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses",
-	NStr("en = 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R5022T_Expenses)'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
+	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en = 'CreditNote DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en = 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'", Lang));
 	
-Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
-	NStr("en = 'CreditNote DR (R1021B_VendorsTransactions CR (R5022T_Expenses)'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en = 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
 	NStr("en = 'MoneyTransfer DR (R3010B_CashOnHand) CR (R3010B_CashOnHand)'", Lang));
@@ -1578,9 +1599,6 @@ Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_Boo
 Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en = 'FixedAssetTransfer DR (R8510B_BookValueOfFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
 
-Strings.Insert("DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en = 'DepreciationCalculation DR (DepreciationFixedAsset) CR (R8510B_BookValueOfFixedAsset)'", Lang));
-
 Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
 	NStr("en = 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)'", Lang));
 
@@ -1590,11 +1608,20 @@ Strings.Insert("BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTran
 Strings.Insert("BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en = 'BankPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
 
+Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
+	NStr("en = 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'", Lang));
+
 Strings.Insert("CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
 	NStr("en = 'CashPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'", Lang));
 
 Strings.Insert("CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en = 'CashPayment DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
+	NStr("en = 'CashPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
+	NStr("en = 'CashPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions)'", Lang));
@@ -1614,8 +1641,20 @@ Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand
 Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange",
 	NStr("en = 'BankPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Currency exchange)'", Lang));
 
+Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en = 'BankPayment DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
+	NStr("en = 'BankPayment DR (R9510B_SalaryPayment) CR (R3010B_CashOnHand)'", Lang));
+
+Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
+	NStr("en = 'BankPayment DR (R3027B_EmployeeCashAdvance) CR (R3010B_CashOnHand)'", Lang));
+
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en = 'CashPayment DR (R3021B_CashInTransitIncoming) CR (R3010B_CashOnHand) (Cash transfer)'", Lang));
+
+Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
+	NStr("en = 'CashPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
@@ -1629,8 +1668,44 @@ Strings.Insert("BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
 Strings.Insert("BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	NStr("en = 'BankReceipt DR (R5022T_Expenses) CR (R3021B_CashInTransit)'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
+	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
+	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
+	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R5021T_Revenues) (Deduction Is Revenue)'", Lang));
+	
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue",
+	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance",
+	NStr("en = 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'", Lang));
+
+Strings.Insert("DebitCreditNote_R5020B_PartnersBalance",
+	NStr("en = 'DebitCreditNote (R5020B_PartnersBalance)'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset",
+	NStr("en = 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
+	NStr("en = 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)'", Lang));
 
 #EndRegion
 

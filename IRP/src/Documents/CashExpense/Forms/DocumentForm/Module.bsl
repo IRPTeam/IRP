@@ -57,6 +57,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 
 	Form.Items.PaymentListEmployee.Visible      = IsSalaryPayment;
 	Form.Items.PaymentListPaymentPeriod.Visible = IsSalaryPayment;
+	Form.Items.PaymentListCalculationType.Visible = IsSalaryPayment;
 	
 	Form.Items.PaymentListFinancialMovementTypeOtherCompany.Visible = IsOtherCompanyExpense;
 	Form.Items.PaymentListCashFlowCenterOtherCompany.Visible = IsOtherCompanyExpense;

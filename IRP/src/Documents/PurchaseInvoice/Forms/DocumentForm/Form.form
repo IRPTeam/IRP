@@ -2811,13 +2811,12 @@
     <items xsi:type="form:FormField">
      <name>ItemListIsAdditionalItemCost</name>
      <id>976</id>
-     <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.ItemList.IsAdditionalItemCost</segments>
+      <segments>Object.ItemList.DELETE_IsAdditionalItemCost</segments>
      </dataPath>
      <extendedTooltip>
       <name>ItemListIsAdditionalItemCostExtendedTooltip</name>
@@ -2850,6 +2849,69 @@
      <headerHorizontalAlign>Left</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>ItemListOtherPeriodExpenseType</name>
+     <id>1055</id>
+     <title>
+      <key>en</key>
+      <value>Other period expense type</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Тип расхода другого периода</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Other period expense type</value>
+     </title>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.OtherPeriodExpenseType</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListOtherPeriodExpenseTypeExtendedTooltip</name>
+      <id>1057</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListOtherPeriodExpenseTypeContextMenu</name>
+      <id>1056</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <clearButton>true</clearButton>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
     </items>
     <autoCommandBar>
      <name>ItemListCommandBar</name>
@@ -7594,7 +7656,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Дата выполнения</value>
+   <value>Дата доставки</value>
   </title>
   <title>
    <key>tr</key>

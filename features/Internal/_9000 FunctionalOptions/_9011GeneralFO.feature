@@ -42,7 +42,7 @@ Scenario: _900105 check FO use store
 			And I select "Service 1" from "Item" drop-down list by string in "ItemList" table
 			And I finish line editing in "ItemList" table
 			When I Check the steps for Exception
-				| 'And I activate "Is additional item cost" field in "ItemList" table'     |
+				| 'And I activate "Other period expense type" field in "ItemList" table'     |
 			And I close all client application windows
 	
 								

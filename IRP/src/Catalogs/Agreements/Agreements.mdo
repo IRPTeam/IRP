@@ -415,7 +415,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Вид</value>
+   <value>Тип партнера</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -463,11 +463,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Вид мультивалютной аналитики</value>
+   <value>Валюта взаиморасчетов</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Çoklu döviz kırılım tipi</value>
+   <value>Sözleşme dövizi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -535,7 +535,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Вид</value>
+   <value>Тип соглашения</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -581,7 +581,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма</value>
+   <value>Сумма лимита взаиморасчетов</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -792,7 +792,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Касса/банк</value>
+   <value>Банк. счет партнера</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -815,7 +815,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Использовать заказы в взаиморасчетах</value>
+   <value>Заказы в взаиморасчетах</value>
   </synonym>
   <synonym>
    <key>tr</key>

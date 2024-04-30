@@ -7,10 +7,10 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Документ "Журнал-ордер"</value>
+  <value>Документ "Бухгалтерская операция"</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Belge "Muhasebe fişi"</value>
+  <value>Evrak "Muhasebe fişi"</value>
  </synonym>
 </mdclass:Role>

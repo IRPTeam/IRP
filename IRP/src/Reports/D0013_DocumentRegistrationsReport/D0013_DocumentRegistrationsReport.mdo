@@ -90,6 +90,7 @@
    <types>DocumentRef.FixedAssetTransfer</types>
    <types>DocumentRef.ManualRegisterEntry</types>
    <types>DocumentRef.PurchaseReturnOrder</types>
+   <types>DocumentRef.ExpenseAccruals</types>
    <types>DocumentRef.ConsolidatedRetailSales</types>
    <types>DocumentRef.BankPayment</types>
    <types>DocumentRef.ShipmentConfirmation</types>
@@ -131,6 +132,7 @@
    <types>DocumentRef.TimeSheet</types>
    <types>DocumentRef.InventoryTransferOrder</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
+   <types>DocumentRef.RevenueAccruals</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.ProductionPlanningCorrection</types>
    <types>DocumentRef.InventoryTransfer</types>

@@ -151,7 +151,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Статья доходов и расходов</value>
+  <value>Вид начисления и удержания</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -202,7 +202,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Статьи затрат</value>
+   <value>Статья затрат</value>
   </synonym>
   <synonym>
    <key>tr</key>

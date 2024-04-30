@@ -224,6 +224,40 @@ Function RecordSetIsEqual(RecordSet, TableForLoad)
 	Return Result;
 EndFunction
 
+// Get posting parameters structure.
+// 
+// Returns:
+//  Structure - Get posting parameters structure:
+//	* Cancel - Boolean
+//  * Object - DocumentObject
+//  * PostingByRef - Boolean
+//  * IsReposting - Boolean
+//  * PointInTime - PointInTime
+//  * TempTablesManager - TempTablesManager
+//  * Metadata - MetadataObject
+//  * DocumentDataTables - Structure
+//  * LockDataSources - Map
+//  * PostingDataTables - Map
+//  * AddInfo - Arbitrary
+Function GetPostingParametersEmptyStructure() Export
+	
+	Structure = New Structure;
+	Structure.Insert("Cancel"); 
+	Structure.Insert("Object");
+	Structure.Insert("PostingByRef");
+	Structure.Insert("IsReposting");
+	Structure.Insert("PointInTime");
+	Structure.Insert("TempTablesManager");
+	Structure.Insert("Metadata");
+	Structure.Insert("DocumentDataTables", New Structure); 
+	Structure.Insert("LockDataSources");
+	Structure.Insert("PostingDataTables"); 
+	Structure.Insert("AddInfo");
+	
+	Return Structure;
+	
+EndFunction		
+
 #EndRegion
 
 Procedure WriteAdvances(DocObject, RecordMeta, TableForLoad) Export

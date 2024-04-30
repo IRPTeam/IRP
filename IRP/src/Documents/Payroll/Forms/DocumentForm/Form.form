@@ -1954,7 +1954,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Начисление</value>
+    <value>Начисления</value>
    </title>
    <title>
     <key>tr</key>
@@ -4443,7 +4443,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Начисление</value>
+      <value>Начислено</value>
      </title>
      <title>
       <key>tr</key>
@@ -4551,7 +4551,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Удержания</value>
+      <value>Удержано</value>
      </title>
      <title>
       <key>tr</key>
@@ -4659,7 +4659,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Удержание аванса наличными</value>
+      <value>Удержано авансов наличными</value>
      </title>
      <title>
       <key>tr</key>

@@ -1069,7 +1069,7 @@ Function Strings(Lang) Export
 		|ru='Убрать как основной';
 		|tr='Varsayılan olarak kaldır'", Lang));
 	Strings.Insert("Form_038", NStr("en='Employee';
-		|ru='Сотрудник';
+		|ru='Сотрудники';
 		|tr='Personel'", Lang));
 	Strings.Insert("Form_039", NStr("en='Add attribute in additional attribute set in extension tab for current object type: %1';
 		|ru='Добавить атрибут в дополнительный набор атрибутов на вкладке расширения для текущего типа объекта: %1';
@@ -1657,7 +1657,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_143", NStr("en='Document Bank payment (currency exchange) not entered';
 		|ru='Документ Банковский платеж (обмен валют) не введен';
 		|tr='Banka ödeme evrakı (döviz bozdurma) girilmemiştir'", Lang));	
-	
+	Strings.Insert("Error_EmptyCurrency", NStr("en='Currency not entered';
+		|ru='Валюта не указана';
+		|tr='Currency not entered'", Lang));
+	Strings.Insert("Error_EmptyTransactionType", NStr("en='Transaction type not entered';
+		|ru='Вид документа не указан';
+		|tr='Transaction type not entered'", Lang));
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
 		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));
@@ -2487,7 +2492,7 @@ Strings.Insert("AccountingInfo_05", NStr("en='Expense/Revenue & Profit loss cent
 	|ru='Расходы/Доходы & Центр убытков и прибылей';
 	|tr='Gider/Gelir ve kar zarar merkezi'", Lang));
 Strings.Insert("AccountingInfo_06", NStr("en='Employee';
-		|ru='Сотрудник';
+		|ru='Сотрудники';
 		|tr='Personel'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en='JE ';

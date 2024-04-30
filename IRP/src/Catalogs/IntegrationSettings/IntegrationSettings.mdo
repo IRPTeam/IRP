@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Настройка интеграции</value>
+  <value>Интеграционные настройки</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -91,7 +91,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Внешние обработки</value>
+   <value>Внешняя обработка</value>
   </synonym>
   <synonym>
    <key>tr</key>

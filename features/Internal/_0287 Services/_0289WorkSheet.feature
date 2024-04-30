@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Services
@@ -455,9 +455,9 @@ Scenario: _0293009 create SI based on WS (with WO and SO)
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
-			| '#'   | 'Price type'          | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                 | 'Work order'                                | 'Revenue type'   | 'Sales person'    |
-			| '1'   | 'Basic Price Types'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'Work order 31 dated 22.09.2022 12:41:21'   | ''               | ''                |
-			| '2'   | 'Basic Price Types'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'Work order 31 dated 22.09.2022 12:41:21'   | ''               | ''                |
+			| '#'   | 'Price type'          | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                 | 'Work order'                                | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'Basic Price Types'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'Work order 31 dated 22.09.2022 12:41:21'   | ''               | ''                |
+			| '2'   | 'Basic Price Types'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 182 dated 22.09.2022 11:13:46'   | 'Work order 31 dated 22.09.2022 12:41:21'   | ''               | ''                |
 		And "SpecialOffers" table became equal
 			| '#'   | 'Amount'   | 'Special offer'       |
 			| '1'   | '5,00'     | 'DocumentDiscount'    |

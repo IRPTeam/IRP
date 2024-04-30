@@ -452,7 +452,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Комментарий</value>
+    <value>Наименование</value>
    </title>
    <title>
     <key>tr</key>
@@ -946,7 +946,7 @@ FROM
   </title>
   <title>
    <key>ru</key>
-   <value>Дополнительно</value>
+   <value>Прочий</value>
   </title>
   <title>
    <key>tr</key>

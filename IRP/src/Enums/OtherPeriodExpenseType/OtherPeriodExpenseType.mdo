@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="17bb7ba6-7df5-4726-a3f0-00ee32f89319">
+ <producedTypes>
+  <refType typeId="c90be316-451a-499f-8276-685cbe3812ae" valueTypeId="26a6e9a1-72db-4107-bd73-ee64c369315a"/>
+  <listType typeId="4633e4db-6976-409b-9dd2-22d8b9bbeac7" valueTypeId="046c4649-af48-4fa4-82cf-1729e33c17c7"/>
+  <managerType typeId="3ef01f95-90ef-4b18-9b95-2bed501b3d4a" valueTypeId="b3edd926-1a21-4c05-8740-0b3943728c1d"/>
+ </producedTypes>
+ <name>OtherPeriodExpenseType</name>
+ <synonym>
+  <key>en</key>
+  <value>Other period expense type</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Тип расхода другого периода</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Other period expense type</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="df5268b5-3491-4ad5-a63a-c9f5f0fc571c">
+  <name>ItemsCost</name>
+  <synonym>
+   <key>en</key>
+   <value>Items cost</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Стоимость товаров</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Items cost</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="a9cc6f28-3189-4bec-8b1b-aec5920ae5c1">
+  <name>ExpenseAccruals</name>
+  <synonym>
+   <key>en</key>
+   <value>Expense accruals</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Начисление расходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Expense accruals</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

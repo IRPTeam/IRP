@@ -22,7 +22,6 @@
   <key>tr</key>
   <value>Dış dosyalar</value>
  </synonym>
- <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
   <key>en</key>

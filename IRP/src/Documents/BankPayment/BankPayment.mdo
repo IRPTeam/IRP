@@ -140,11 +140,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Касса/Банковский счет</value>
+   <value>Банковский счет</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Kasa/Banka</value>
+   <value>Banka hesabı</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -615,7 +615,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Плановый документ-основания</value>
+    <value>Документ планирования</value>
    </synonym>
    <synonym>
     <key>tr</key>

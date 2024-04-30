@@ -76,11 +76,11 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Записи в журнале</value>
+  <value>Бухгалтерские операции</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Muhasebe mahsup fişleri</value>
+  <value>Mahsup fişleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -563,7 +563,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Muhasebe kaydı (çoklu belgeler)</value>
+   <value>Mahsup fişler (çoklu oluşturma)</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

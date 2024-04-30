@@ -53,6 +53,7 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then
@@ -821,4 +822,40 @@ Scenario: _050019 check amount when create CR based on SI (partner term - by par
 		And "PaymentList" table became equal
 			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
-	And I close all client application windows				
+	And I close all client application windows	
+
+Scenario: _050020 create Cash receipt with transaction type Other partner
+	And I close all client application windows
+	* Open CR
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select "Other partner" exact value from "Transaction type" drop-down list
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+	* Filling payment list
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select current line in "PaymentList" table
+		And I input "Tax authority" text in "Partner" field of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And I click the button named "FormPost"
+	* Check
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		And "PaymentList" table became equal
+			| '#' | 'Partner'       | 'Payer'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
+			| '1' | 'Tax authority' | 'Tax authority' | 'Tax'          | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
+		Then the form attribute named "TransactionType" became equal to "Other partner"
+		And I save the value of "Number" field as "NumberCashReceipt052023"
+		And I click the button named "FormPostAndClose"
+		* Check creation
+			And "List" table contains lines
+				| 'Number'                        |
+				| '$NumberCashReceipt052023$'     |			

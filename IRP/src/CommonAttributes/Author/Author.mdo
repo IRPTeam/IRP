@@ -129,6 +129,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.ExpenseAccruals</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Countries</metadata>
   <use>Use</use>
  </content>
@@ -441,11 +445,19 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.ModernizationOfFixedAsset</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.OutgoingPaymentOrder</metadata>
   <use>Use</use>
  </content>
  <content>
   <metadata>Document.SalesOrderClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.RevenueAccruals</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -613,6 +625,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.SalaryCalculationType</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.ObjectStatuses</metadata>
   <use>Use</use>
  </content>
@@ -645,15 +661,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Document.ModernizationOfFixedAsset</metadata>
-  <use>Use</use>
- </content>
- <content>
   <metadata>Document.FixedAssetTransfer</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Catalog.SalaryCalculationType</metadata>
   <use>Use</use>
  </content>
  <autoUse>DontUse</autoUse>

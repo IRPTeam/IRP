@@ -64,7 +64,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Расчет зарплаты</value>
+  <value>Начисление зарплаты</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -76,7 +76,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Расчеты зарплаты</value>
+  <value>Начисления зарплаты</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
@@ -144,7 +144,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Валюты</value>
+   <value>Валюта</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -506,7 +506,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Тип начислений</value>
+    <value>Тип начисления</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -535,7 +535,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статьи затрат</value>
+    <value>Статья затрат</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -825,7 +825,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статьи затрат</value>
+    <value>Статья затрат</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1393,7 +1393,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статьи затрат</value>
+    <value>Статья затрат</value>
    </synonym>
    <synonym>
     <key>tr</key>

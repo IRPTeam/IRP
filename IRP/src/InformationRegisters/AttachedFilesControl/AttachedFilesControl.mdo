@@ -22,7 +22,6 @@
   <key>tr</key>
   <value>Eklenen dosya kontrolü</value>
  </synonym>
- <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <standardAttributes>
   <dataHistory>Use</dataHistory>

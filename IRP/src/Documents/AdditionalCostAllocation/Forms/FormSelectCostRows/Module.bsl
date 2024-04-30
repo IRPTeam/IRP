@@ -12,7 +12,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	R6070T_OtherPeriodsExpenses.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	AccumulationRegister.R6070T_OtherPeriodsExpenses.Balance(&BalancePeriod, Company = &Company
-	|	AND CurrencyMovementType = &CurrencyMovementType) AS R6070T_OtherPeriodsExpenses
+	|	AND CurrencyMovementType = &CurrencyMovementType
+	|	AND OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ItemsCost)) AS R6070T_OtherPeriodsExpenses
 	|TOTALS
 	|BY
 	|	Document";

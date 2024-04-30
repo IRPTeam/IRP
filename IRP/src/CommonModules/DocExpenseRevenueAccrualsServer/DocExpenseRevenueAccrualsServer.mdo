@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0d838e05-0631-446b-90cf-32bd5c5ab0d1">
+  <name>DocExpenseRevenueAccrualsServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc expense revenue accruals server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

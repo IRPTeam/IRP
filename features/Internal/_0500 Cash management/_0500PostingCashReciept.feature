@@ -53,6 +53,7 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		If "List" table does not contain lines Then

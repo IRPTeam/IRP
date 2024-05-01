@@ -259,6 +259,8 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
+// * Error_144 - String - 
+// * Error_145 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -314,6 +316,8 @@
 // * InfoMessage_033 - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
+// * InfoMessage_036 - String - 
+// * InfoMessage_037 - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -1663,6 +1667,25 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_EmptyTransactionType", NStr("en='Transaction type not entered';
 		|ru='Вид документа не указан';
 		|tr='İşlem tipi girilmedi'", Lang));
+	Strings.Insert("Error_144", NStr("en='Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.';
+		|ru='Движения документа были изменены вручную. Перепроведение или отмена проведения невозможны из-за ручных корректировок.';
+		|tr='Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
+	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en='""Amount"" does not equal the sum of all resources';
+		|ru='""Сумма"" не равна сумме всех ресурсов';
+		|tr='""Amount"" does not equal the sum of all resources'", Lang));
+	
+	// %1 - Register name
+	Strings.Insert("Error_145", NStr("en='Differences detected between the current manual movements and the potential automated movements in register [%1].';
+		|ru='Обнаружены различия между текущими ручными движениями и потенциальными автоматическими движениями в регистре [%1].';
+		|tr='Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));
+	
+	Strings.Insert("Error_146", NStr("en='Document in not posted.';
+		|ru='Документ не проведен.';
+		|tr='Belge kaydedilmedi.'", Lang));
+	Strings.insert("Error_147", NStr("en='The document has manual entries and cannot be canceled.';
+		|ru='Документ имеет ручные записи и не может быть отменён.';
+		|tr='The document has manual entries and cannot be canceled.'", Lang));
+	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
 		|tr='Toplam tutarı doldur. Satır: [%1]'", Lang));
@@ -1895,6 +1918,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en='File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.';
 		|ru='Размер файла %1 составляет %2 Мб, что больше допустимого размера %3 Мб.';
 		|tr='%1 dosyanın boyutu %2 MB ve izin verilen %3 MB''ten fazladır'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_038", NStr("en='New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.';
+		|ru='Новые движения документа идентичны ручным корректировкам. Флажок ""Редактирование ручных движений"" теперь не нужен и может быть удалён.';
+		|tr='New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
+	Strings.Insert("InfoMessage_039", NStr("en='Movements successfully recorded';
+		|ru='Движения успешно записаны';
+		|tr='Movements successfully recorded'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en='Save object, before continue.';
 		|ru='Сохраните объект, прежде чем продолжить.';
@@ -2030,6 +2059,12 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_028", NStr("en='Do you want to refund the client?';
 		|ru='Вы хотите вернуть клиенту?';
 		|tr='Müşteriye iade yapmak istiyor musunuz?'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en='New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?';
+		|ru='Новые движения документа соответствуют ручным корректировкам, делая флажок ""Редактирование ручных движений"" ненужным. Хотите ли вы удалить этот флажок?';
+		|tr='New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
+	Strings.Insert("QuestionToUser_030", NStr("en='Do you want to restore movements to default?';
+		|ru='Вы хотите восстановить движения по умолчанию?';
+		|tr='Do you want to restore movements to default?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

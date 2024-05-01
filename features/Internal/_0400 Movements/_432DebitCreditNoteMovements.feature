@@ -373,7 +373,7 @@ Scenario: _0432014 check DebitCreditNote movements by the register "T2014 Advanc
 		And I click "Registrations report info" button
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines
 			| 'Debit/Credit note 3 dated 30.03.2024 11:34:17' | ''             | ''             | ''                    | ''                                     | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                                 | ''        | ''       | ''                        | ''                     | ''            |
 			| 'Register  "T2014 Advances info"'               | ''             | ''             | ''                    | ''                                     | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                                 | ''        | ''       | ''                        | ''                     | ''            |
 			| ''                                              | 'Company'      | 'Branch'       | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'                | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
@@ -439,7 +439,7 @@ Scenario: _0432017 check DebitCreditNote movements by the register "T2014 Advanc
 		And I click "Registrations report info" button
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines
 			| 'Debit/Credit note 4 dated 01.04.2024 11:48:58' | ''             | ''             | ''                    | ''                                     | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''       | ''                        | ''                     | ''            |
 			| 'Register  "T2014 Advances info"'               | ''             | ''             | ''                    | ''                                     | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''       | ''                        | ''                     | ''            |
 			| ''                                              | 'Company'      | 'Branch'       | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'       | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |

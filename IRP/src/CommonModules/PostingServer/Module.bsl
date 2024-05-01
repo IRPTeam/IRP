@@ -30,6 +30,12 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(Parameters);
+	If Parameters.Cancel Then
+		For Each Message In Parameters.Messages Do
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndDo;
+		Return;
+	EndIf;	
 	
 	RegisteredRecordsArray = New Array;
 	For Each Record In RegisteredRecords Do
@@ -71,8 +77,10 @@ EndProcedure
 // * DocumentDataTables - Map -
 // * LockDataSources - Map -
 // * PostingDataTables - Array Of KeyAndValue:
-// ** Key - MetadataObject -
+// ** Key - MetadataObjectDocument - Meta doc
 // ** Value - See PostingTableSettings
+// * ManualMovementsEdit - Boolean -  
+// * Messages -  Array of String - User message
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
 	
@@ -87,7 +95,9 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-
+	Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Parameters.Insert("Messages", New Array);
+	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);
 	
@@ -165,6 +175,9 @@ EndFunction
 // Returns:
 //  Map - Register records
 Function RegisterRecords(Parameters)
+	
+	isManualRecordsHasDifference = False;
+	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
 		RecordSet = Row.Value.RecordSet_Document;
@@ -188,14 +201,23 @@ Function RegisterRecords(Parameters)
 			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
 				Continue; //Never rewrite
 		EndIf;
-
+		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
+			RegisterName = Row.Value.Metadata.Name;
+			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+		EndIf;
+		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;
+		Else
+			If Parameters.ManualMovementsEdit Then
+				Parameters.Cancel = True;
+				isManualRecordsHasDifference = True;
+			EndIf;		
 		EndIf;
 			
 		//If Not Parameters.PostingByRef Then
-			WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
+			// WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 			
 			UpdateCosts(Parameters.Object, Row.Value.Metadata, TableForLoad, RegisteredRecords);
 		//EndIf;
@@ -210,8 +232,32 @@ Function RegisterRecords(Parameters)
 		Data.Insert("Metadata", RecordSet.Metadata());
 		RegisteredRecords.Insert(RecordSet.Metadata(), Data);
 	EndDo;
+	If Parameters.ManualMovementsEdit Then
+		If isManualRecordsHasDifference Then
+			Parameters.Messages.Add(R().Error_144);
+		Else
+			Parameters.Messages.Add(R().InfoMessage_038);
+		EndIf;
+	EndIf;
+				
 	Return RegisteredRecords;
 EndFunction
+
+// Get document movements by register name.
+// 
+// Parameters:
+//  DocRef - DocumentRef - Doc ref
+//  RegisterName - String - Register name
+// 
+// Returns:
+//  ValueTable - ValueTable
+Function GetDocumentMovementsByRegisterName(DocRef, RegisterName) Export
+	Query = New Query("SELECT * FROM " + RegisterName + " WHERE Recorder = &Ref");
+	Query.SetParameter("Ref", DocRef);
+	
+	Return Query.Execute().Unload();
+	
+EndFunction	
 
 Function RecordSetIsEqual(RecordSet, TableForLoad)
 	RecordSet.Read();
@@ -223,6 +269,40 @@ Function RecordSetIsEqual(RecordSet, TableForLoad)
 	
 	Return Result;
 EndFunction
+
+// Get posting parameters structure.
+// 
+// Returns:
+//  Structure - Get posting parameters structure:
+//	* Cancel - Boolean
+//  * Object - DocumentObject
+//  * PostingByRef - Boolean
+//  * IsReposting - Boolean
+//  * PointInTime - PointInTime
+//  * TempTablesManager - TempTablesManager
+//  * Metadata - MetadataObject
+//  * DocumentDataTables - Structure
+//  * LockDataSources - Map
+//  * PostingDataTables - Map
+//  * AddInfo - Arbitrary
+Function GetPostingParametersEmptyStructure() Export
+	
+	Structure = New Structure;
+	Structure.Insert("Cancel"); 
+	Structure.Insert("Object");
+	Structure.Insert("PostingByRef");
+	Structure.Insert("IsReposting");
+	Structure.Insert("PointInTime");
+	Structure.Insert("TempTablesManager");
+	Structure.Insert("Metadata");
+	Structure.Insert("DocumentDataTables", New Structure); 
+	Structure.Insert("LockDataSources");
+	Structure.Insert("PostingDataTables"); 
+	Structure.Insert("AddInfo");
+	
+	Return Structure;
+	
+EndFunction		
 
 #EndRegion
 

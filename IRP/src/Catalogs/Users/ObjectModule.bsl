@@ -3,6 +3,10 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 
+	If Not IsBlankString(Email) Then
+		CommonFunctionsServer.ValidateEmail(Email, True);
+	EndIf;
+
 	PreviousInfobaseUserID = InfobaseUserID;
 	AdminFunctionsPrivileged.CreateUser(ThisObject);
 	If PreviousInfobaseUserID <> InfobaseUserID Then
@@ -17,7 +21,7 @@ Procedure OnWrite(Cancel)
 	EndIf;
 	
 	If Not Cancel Then
-		If Disable Then
+		If Disable OR DeletionMark Then
 			User = InfoBaseUsers.FindByUUID(InfobaseUserID);
 			If Not User = Undefined Then
 				User.Delete();

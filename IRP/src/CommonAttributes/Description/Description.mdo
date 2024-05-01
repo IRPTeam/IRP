@@ -82,6 +82,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ExpenseAccruals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>
@@ -206,6 +210,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.DecommissioningOfFixedAsset</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.Payroll</metadata>
     <use>Use</use>
   </content>
@@ -234,11 +242,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ModernizationOfFixedAsset</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.OutgoingPaymentOrder</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Document.SalesOrderClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.RevenueAccruals</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -351,14 +367,6 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.DecommissioningOfFixedAsset</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ModernizationOfFixedAsset</metadata>
     <use>Use</use>
   </content>
   <content>

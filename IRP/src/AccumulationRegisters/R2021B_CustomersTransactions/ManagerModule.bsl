@@ -559,3 +559,11 @@ Function R2021B_CustomersTransactions_Cheque() Export
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
+
+// Additional data filling.
+// 
+// Parameters:
+//  MovementsValueTable - ValueTable
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	Return;	
+EndProcedure

@@ -1060,3 +1060,166 @@ Scenario: _0433308 check Bank payment movements by the Register  "R3021 Cash in 
 			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '171,2'  | 'No'                   |
 			| ''                                             | '03.06.2021 17:05:34' | 'Receipt'    | 'Main Company' | ''       | 'Transit Main' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | '1 000'  | 'No'                   |	
 		And I close all client application windows
+
+#
+Scenario: _0433309 check Bank payment movements by the Register  "T2015 Transactions info" (Payment to the vendor, advance=false)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 dated 07.09.2020 19:16:43' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'      | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                              | ''          | ''        | ''       | ''       | ''        |
+			| ''                                         | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                             | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                         | 'Main Company' | ''       | ''      | '07.09.2020 19:16:43' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | '*'         | ''        | '1 000'  | 'No'     | 'Yes'     |
+	And I close all client application windows
+
+Scenario: _0433310 check Bank payment movements by the Register  "T2014 Advances info" (Payment to the vendor, advance=true)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '10'    |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 10 dated 12.02.2021 11:24:13' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'           | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                   | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                          | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'  | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                          | 'Main Company' | 'Front office' | '12.02.2021 11:24:13' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY' | ''        | '2 000'  | 'No'                      | 'No'                   | 'Receipt'     |
+	And I close all client application windows
+
+Scenario: _0433311 check absence Bank payment movements by the Register  "T2015 Transactions info" (Payment to the vendor, advance=true)
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '10'      |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+Scenario: _0433312 check absence Bank payment movements by the Register  "T2014 Advances info" (Payment to the vendor, advance=false)
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1'       |
+	* Check movements by the Register  "T2014 Advances info"
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2014 Advances info"'    |
+		And I close all client application windows
+
+Scenario: _0433313 check Bank payment movements by the Register  "T2014 Advances info" (Return to customer, without basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '326'   |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'            | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                           | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name'      | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                           | 'Main Company' | 'Distribution department' | '02.09.2021 14:24:44' | '*'   | 'TRY'      | 'Kalipso' | 'Company Kalipso' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
+	And I close all client application windows
+
+Scenario: _0433314 check absence Bank payment movements by the Register  "T2015 Transactions info" (Return to customer, without basis)
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326'     |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+
+Scenario: _0433315 check Bank payment movements by the Register  "T2014 Advances info" (Return to customer by POS, without basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 330'   |
+	* Check movements by the Register  "T2014 Advances info" 
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 330 dated 24.06.2022 18:07:02' | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
+			| 'Register  "T2014 Advances info"'              | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
+			| ''                                             | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
+			| ''                                             | 'Main Company' | 'Distribution department' | '24.06.2022 18:07:02' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '-50'    | 'No'                      | 'No'                   | 'Receipt'     |
+	And I close all client application windows
+
+
+Scenario: _0433316 check absence Bank payment movements by the Register  "T2015 Transactions info" (Return to customer by POS, without basis)
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 330'   |
+	* Check movements by the Register  "T2015 Transactions info"
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+Scenario: _0433317 check Bank payment movements by the Register  "T2015 Transactions info" (Return to customer by POS, with basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 329' |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 329 dated 24.06.2022 18:06:56' | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'          | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''       | ''       | ''        |
+			| ''                                             | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                             | 'Main Company' | 'Distribution department' | ''      | '24.06.2022 18:06:56' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales return 103 dated 12.03.2021 08:59:52' | '*'         | ''        | '-50'    | 'No'     | 'Yes'     |
+	And I close all client application windows
+
+Scenario: _0433318 check absence Bank payment movements by the Register  "T2014 Advances info" (Return to customer by POS, with basis)
+	* Select BP
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 329'   |
+	* Check movements by the Register  "T2014 Advances info"
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2014 Advances info"'    |
+		And I close all client application windows

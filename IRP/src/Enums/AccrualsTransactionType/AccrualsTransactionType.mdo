@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7d24c223-9d84-4b18-9285-9fc98bcb17fe">
+  <producedTypes>
+    <refType typeId="fc9b1416-b583-4fc1-8bf7-5ed0ecd472c7" valueTypeId="4ae2308a-a93b-480c-8b4b-0d76ae29ec36"/>
+    <listType typeId="cad7025a-5663-4e17-82d8-141917915520" valueTypeId="115146ed-56c4-45bd-8c78-f4629817bc26"/>
+    <managerType typeId="d5367b3f-ba05-46a9-b055-b4ade1720ef3" valueTypeId="4bcf2dbc-5492-406f-aee4-74a6195ba2a1"/>
+  </producedTypes>
+  <name>AccrualsTransactionType</name>
+  <synonym>
+    <key>en</key>
+    <value>Accruals transaction type</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="b47a78cc-d57c-41fc-a8d2-5c237217e7e7">
+    <name>Accrual</name>
+    <synonym>
+      <key>en</key>
+      <value>Accrual</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="1306a88d-dede-4be5-96a8-da7ec0b08858">
+    <name>Void</name>
+    <synonym>
+      <key>en</key>
+      <value>Void</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="64c4c398-9da5-4761-bee6-1d3d101bd532">
+    <name>Reverse</name>
+    <synonym>
+      <key>en</key>
+      <value>Reverse</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

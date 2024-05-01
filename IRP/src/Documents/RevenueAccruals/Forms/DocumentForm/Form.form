@@ -770,7 +770,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.CostList.ExpenseType</segments>
+            <segments>Object.CostList.RevenueType</segments>
           </dataPath>
           <extendedTooltip>
             <name>CostListExpenseTypeExtendedTooltip</name>
@@ -1281,7 +1281,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Expense</value>
+        <value>Revenue</value>
       </title>
       <extendedTooltip>
         <name>GroupCostListExtendedTooltip</name>

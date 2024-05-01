@@ -199,14 +199,14 @@ Procedure AfterRowAdd(Row)
 	Row.Key = String(New UUID());
 	If ValueIsFilled(CurrentBasis) Then
 		If Object.CostList.Count() = 1 Then
-			If TypeOf(CurrentBasis) = Type("DocumentRef.PurchaseInvoice") Then
+			If TypeOf(CurrentBasis) = Type("DocumentRef.SalesInvoice") Then
 				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
 				For Each CurrencyRow In ObjectCurrencies Do
 					NewRow = Object.Currencies.Add();
 					FillPropertyValues(NewRow, CurrencyRow);
 					NewRow.Key = Row.Key;
 				EndDo;
-			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.ExpenseAccruals") Then
+			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.RevenueAccruals") Then
 				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
 				If ObjectCurrencies.Count() > 0 Then
 					//@skip-check property-return-type

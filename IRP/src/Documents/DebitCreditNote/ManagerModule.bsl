@@ -145,7 +145,7 @@ Function SendAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerAdvance,
-		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -202,7 +202,7 @@ Function ReceiveAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS ReceiveIsCustomerAdvance,
-		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -260,7 +260,7 @@ Function SendTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
-		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -322,7 +322,7 @@ Function ReceiveTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
-		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
+		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName

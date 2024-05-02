@@ -116,6 +116,23 @@ Procedure CostListOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
+	If NewRow Then
+		CurrentData = Item.CurrentData;
+		If CurrentData = Undefined Then
+			Return;
+		EndIf;
+		AfterRowAdd(CurrentData);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure CostListAfterDeleteRow(Item)
+	DeleteUnnecessaryRowsInCurrencies();
+EndProcedure
+
+
+&AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.CostList.CurrentData;
 	If CurrentData = Undefined Then
@@ -140,10 +157,6 @@ Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
-#EndRegion
-
-#Region Public
-// все методы, которые являются экспортными, и не относятся к оповещениям внутри формы
 #EndRegion
 
 #Region Private
@@ -199,14 +212,14 @@ Procedure AfterRowAdd(Row)
 	Row.Key = String(New UUID());
 	If ValueIsFilled(CurrentBasis) Then
 		If Object.CostList.Count() = 1 Then
-			If TypeOf(CurrentBasis) = Type("DocumentRef.PurchaseInvoice") Then
+			If TypeOf(CurrentBasis) = Type("DocumentRef.SalesInvoice") Then
 				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
 				For Each CurrencyRow In ObjectCurrencies Do
 					NewRow = Object.Currencies.Add();
 					FillPropertyValues(NewRow, CurrencyRow);
 					NewRow.Key = Row.Key;
 				EndDo;
-			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.ExpenseAccruals") Then
+			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.RevenueAccruals") Then
 				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
 				If ObjectCurrencies.Count() > 0 Then
 					//@skip-check property-return-type
@@ -312,6 +325,18 @@ Async Procedure OpenPickupForm()
 
 EndProcedure
 
+&AtClient
+Procedure DeleteUnnecessaryRowsInCurrencies()
+	ArrayRowsToDelete = New Array; // Array of FormDataCollectionItem
+	For Each Row In Object.Currencies Do
+		If Object.CostList.FindRows(New Structure("Key", Row.Key)).Count() = 0 Then
+			ArrayRowsToDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In ArrayRowsToDelete Do
+		Object.Currencies.Delete(Row);
+	EndDo;
+EndProcedure
 
 #EndRegion
 

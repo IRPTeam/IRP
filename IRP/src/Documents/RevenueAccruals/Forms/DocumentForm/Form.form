@@ -1109,6 +1109,14 @@
           <autoFill>true</autoFill>
         </autoCommandBar>
         <handlers>
+          <event>OnEditEnd</event>
+          <name>CostListOnEditEnd</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>CostListAfterDeleteRow</name>
+        </handlers>
+        <handlers>
           <event>OnChange</event>
           <name>CostListOnChange</name>
         </handlers>

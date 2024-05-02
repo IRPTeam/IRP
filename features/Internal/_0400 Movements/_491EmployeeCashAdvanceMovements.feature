@@ -70,6 +70,8 @@ Scenario: _040910 preparation (Employee cash advance movements)
 			| "Documents.PurchaseInvoice.FindByNumber(213).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeCashAdvance.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.VendorsAdvancesClosing.FindByNumber(213).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _040911 check preparation (Employee cash advance movements)
@@ -213,4 +215,22 @@ Scenario: _040915 check EmployeeCashAdvance movements by the Register  "T2015 Tr
 			| ''                                                  | 'Resources' | ''       | ''        | 'Dimensions'   | ''                        | ''      | ''                    | ''    | ''         | ''        | ''           | ''                        | ''                      | ''                        | ''                                               | ''          | ''        |
 			| ''                                                  | 'Amount'    | 'Is due' | 'Is paid' | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name' | 'Agreement'               | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                              | 'Unique ID' | 'Project' |
 			| ''                                                  | '118'       | 'No'     | 'Yes'     | 'Main Company' | 'Distribution department' | ''      | '02.05.2024 10:12:05' | '*'   | 'TRY'      | 'DFC'     | 'DFC'        | 'Partner term vendor DFC' | 'Yes'                   | 'No'                      | 'Purchase invoice 213 dated 01.05.2024 12:00:00' | '*'         | ''        |
+		And I close all client application windows
+
+Scenario: _040916 check EmployeeCashAdvance movements by the Register  "R5012 Vendors aging" (with PI)
+		And I close all client application windows
+	* Select EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1'         |
+	* Check movements by the Register  "R5012 Vendors aging" 
+		And I click "Registrations report info" button
+		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Employee cash advance 1 dated 02.05.2024 10:12:05' | ''                    | ''           | ''             | ''                        | ''         | ''                        | ''        | ''                                               | ''                    | ''       | ''                                                     |
+			| 'Register  "R5012 Vendors aging"'                   | ''                    | ''           | ''             | ''                        | ''         | ''                        | ''        | ''                                               | ''                    | ''       | ''                                                     |
+			| ''                                                  | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Currency' | 'Agreement'               | 'Partner' | 'Invoice'                                        | 'Payment date'        | 'Amount' | 'Aging closing'                                        |
+			| ''                                                  | '02.05.2024 10:12:05' | 'Expense'    | 'Main Company' | 'Distribution department' | 'TRY'      | 'Partner term vendor DFC' | 'DFC'     | 'Purchase invoice 213 dated 01.05.2024 12:00:00' | '02.05.2024 00:00:00' | '118'    | 'Vendors advances closing 213 dated 02.05.2024 15:34:27' |	
 		And I close all client application windows

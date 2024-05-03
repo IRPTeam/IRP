@@ -118,6 +118,22 @@ Procedure CostListOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure CostListAfterDeleteRow(Item)
+	DeleteUnnecessaryRowsInCurrencies();
+EndProcedure
+
+&AtClient
+Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
+	If NewRow Then
+		CurrentData = Item.CurrentData;
+		If CurrentData = Undefined Then
+			Return;
+		EndIf;
+		AfterRowAdd(CurrentData);
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure EditCurrencies(Command)
 	CurrentData = ThisObject.Items.CostList.CurrentData;
 	If CurrentData = Undefined Then
@@ -153,6 +169,19 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	//
+EndProcedure
+
+&AtClient
+Procedure DeleteUnnecessaryRowsInCurrencies()
+	ArrayRowsToDelete = New Array; // Array of FormDataCollectionItem
+	For Each Row In Object.Currencies Do
+		If Object.CostList.FindRows(New Structure("Key", Row.Key)).Count() = 0 Then
+			ArrayRowsToDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In ArrayRowsToDelete Do
+		Object.Currencies.Delete(Row);
+	EndDo;
 EndProcedure
 
 // After expense SelectСosts.

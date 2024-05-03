@@ -140,7 +140,7 @@ Function CostList()
 	|	RevenueAccrualsCostList.Ref.Branch AS Branch,
 	|	RevenueAccrualsCostList.Ref.Currency AS Currency,
 	|	RevenueAccrualsCostList.ProfitLossCenter AS ProfitLossCenter,
-	|	RevenueAccrualsCostList.ExpenseType AS ExpenseType,
+	|	RevenueAccrualsCostList.RevenueType AS RevenueType,
 	|	RevenueAccrualsCostList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	RevenueAccrualsCostList.Project AS Project,
 	|	CASE
@@ -277,7 +277,7 @@ Function R5021T_Revenues()
 	|	CostList.Branch AS Branch,
 	|	CostList.Currency AS Currency,
 	|	CostList.ProfitLossCenter AS ProfitLossCenter,
-	|	CostList.ExpenseType AS ExpenseType,
+	|	CostList.RevenueType AS RevenueType,
 	|	CostList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	CostList.Project AS Project,
 	|	CostList.Basis AS Basis,
@@ -303,7 +303,7 @@ Function R6080T_OtherPeriodsRevenues()
 	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
 	|			THEN VALUE(AccumulationRecordType.Expense)
 	|	END AS RecordType,
-	|	VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS OtherPeriodExpenseType,
+	|	VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals) AS OtherPeriodRevenueType,
 	|	CostList.Company AS Company,
 	|	CostList.Branch AS Branch,
 	|	CostList.Basis AS Basis,

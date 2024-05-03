@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Manual movements edit</value>
+  <value>Manuel harketleri değişitirme</value>
  </synonym>
  <type>
   <types>Boolean</types>
@@ -78,6 +78,10 @@
  </content>
  <content>
   <metadata>Document.AdditionalCostAllocation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.ExpenseAccruals</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -242,6 +246,10 @@
  </content>
  <content>
   <metadata>Document.SalesOrderClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Document.RevenueAccruals</metadata>
   <use>Use</use>
  </content>
  <content>

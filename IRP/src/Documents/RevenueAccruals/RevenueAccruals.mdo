@@ -179,8 +179,8 @@
    <value>Kaynak evrak</value>
   </synonym>
   <type>
-   <types>DocumentRef.ExpenseAccruals</types>
    <types>DocumentRef.SalesInvoice</types>
+   <types>DocumentRef.RevenueAccruals</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -349,18 +349,18 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="69c62f27-9527-4c76-ac6a-cdc47c6d726f">
-   <name>ExpenseType</name>
+   <name>RevenueType</name>
    <synonym>
     <key>en</key>
-    <value>Expense type</value>
+    <value>Revenue type</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статьи затрат</value>
+    <value>Статья доходов</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Gider tipi</value>
+    <value>Gelir tipi</value>
    </synonym>
    <type>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>

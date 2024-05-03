@@ -22,7 +22,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Write movements</value>
+      <value>Hareketleri yaz</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -65,7 +65,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Write movements (register self-control)</value>
+      <value>Hareketleri sakla (kayıt tablosu kendi kontrolü)</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -109,7 +109,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Write movements</value>
+     <value>Hareketleri yaz</value>
     </title>
     <toolTip>
      <key>en</key>
@@ -121,7 +121,7 @@
     </toolTip>
     <toolTip>
      <key>tr</key>
-     <value>Group write movemements menu</value>
+     <value>Grup hareketleri yazma menüsü</value>
     </toolTip>
     <toolTipRepresentation>ShowLeft</toolTipRepresentation>
     <extendedTooltip>
@@ -159,7 +159,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Write movements</value>
+    <value>Hareketleri yaz</value>
    </title>
    <toolTip>
     <key>en</key>
@@ -171,7 +171,7 @@
    </toolTip>
    <toolTip>
     <key>tr</key>
-    <value>Group write movements control panel</value>
+    <value>Grup hareketleri yazma araç çubuğu</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupWriteMovementsControlPanelExtendedTooltip</name>
@@ -206,7 +206,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Manual edit</value>
+    <value>El ile değiştir</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -384,7 +384,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>No control write rules</value>
+    <value>Yazma kurallar devre dışı</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -589,7 +589,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Manual movements edit</value>
+   <value>Manuel harketleri değişitirme</value>
   </title>
   <id>2</id>
   <valueType>
@@ -614,7 +614,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Do not control write rules</value>
+   <value>Yazma kurallarını kontrol etme</value>
   </title>
   <id>3</id>
   <valueType>
@@ -639,7 +639,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Write movements</value>
+   <value>Hareketleri yaz</value>
   </title>
   <id>1</id>
   <toolTip>
@@ -652,7 +652,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Write movements</value>
+   <value>Hareketleri yaz</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -676,7 +676,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Reread posting data</value>
+   <value>Kaydetme verisini tekrar oku</value>
   </title>
   <id>2</id>
   <use>
@@ -701,7 +701,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Movement analysis</value>
+   <value>Hareket analizi</value>
   </title>
   <id>3</id>
   <toolTip>
@@ -714,7 +714,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Movement analysis</value>
+   <value>Hareket analizi</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -738,7 +738,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Write movements with register self control</value>
+   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
   </title>
   <id>4</id>
   <toolTip>
@@ -751,7 +751,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Write movements with register self control</value>
+   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
   </toolTip>
   <use>
    <common>true</common>

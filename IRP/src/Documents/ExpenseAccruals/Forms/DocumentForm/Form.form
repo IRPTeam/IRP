@@ -1144,6 +1144,14 @@
      <event>OnChange</event>
      <name>CostListOnChange</name>
     </handlers>
+    <handlers>
+     <event>AfterDeleteRow</event>
+     <name>CostListAfterDeleteRow</name>
+    </handlers>
+    <handlers>
+     <event>OnEditEnd</event>
+     <name>CostListOnEditEnd</name>
+    </handlers>
     <searchStringAddition>
      <visible>true</visible>
      <enabled>true</enabled>

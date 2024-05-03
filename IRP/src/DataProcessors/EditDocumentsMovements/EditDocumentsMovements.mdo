@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Edit documents movements</value>
+  <value>Evrak hareketlerini değiştir</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.EditDocumentsMovements.Form.Form</defaultForm>
@@ -55,7 +55,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Movements</value>
+   <value>Hareketler</value>
   </synonym>
   <attributes uuid="c527158a-5525-40c6-b0c3-8e76da291e24">
    <name>RegisterName</name>
@@ -93,7 +93,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Movements count</value>
+    <value>Hareket sayısı</value>
    </synonym>
    <type>
     <types>Number</types>

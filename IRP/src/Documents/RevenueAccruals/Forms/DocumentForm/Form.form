@@ -802,7 +802,7 @@
       <common>true</common>
      </userVisible>
      <dataPath xsi:type="form:DataPath">
-      <segments>Object.CostList.ExpenseType</segments>
+      <segments>Object.CostList.RevenueType</segments>
      </dataPath>
      <extendedTooltip>
       <name>CostListExpenseTypeExtendedTooltip</name>
@@ -1141,6 +1141,14 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
+     <event>OnEditEnd</event>
+     <name>CostListOnEditEnd</name>
+    </handlers>
+    <handlers>
+     <event>AfterDeleteRow</event>
+     <name>CostListAfterDeleteRow</name>
+    </handlers>
+    <handlers>
      <event>OnChange</event>
      <name>CostListOnChange</name>
     </handlers>
@@ -1313,15 +1321,15 @@
    </userVisible>
    <title>
     <key>en</key>
-    <value>Expense</value>
+    <value>Revenue</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Расход</value>
+    <value>Доход</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Gider</value>
+    <value>Gelir</value>
    </title>
    <extendedTooltip>
     <name>GroupCostListExtendedTooltip</name>

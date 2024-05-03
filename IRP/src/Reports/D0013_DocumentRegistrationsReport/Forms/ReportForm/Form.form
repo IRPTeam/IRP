@@ -1380,7 +1380,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show technical columns</value>
+   <value>Teknik sütunları göster</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1433,7 +1433,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit movements</value>
+   <value>Hareketleri değiştir</value>
   </title>
   <id>2</id>
   <use>

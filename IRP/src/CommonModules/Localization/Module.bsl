@@ -1669,22 +1669,22 @@ Function Strings(Lang) Export
 		|tr='İşlem tipi girilmedi'", Lang));
 	Strings.Insert("Error_144", NStr("en='Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.';
 		|ru='Движения документа были изменены вручную. Перепроведение или отмена проведения невозможны из-за ручных корректировок.';
-		|tr='Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
+		|tr='Evrak hareketler manuel olarak değişitirilmişti. Tekrar kaydetme veya kaydetme iptal manuel düzeltilen evraklar için devre dışıdır.'", Lang));
 	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en='""Amount"" does not equal the sum of all resources';
 		|ru='""Сумма"" не равна сумме всех ресурсов';
-		|tr='""Amount"" does not equal the sum of all resources'", Lang));
+		|tr='""Tutar"" tüm kaynaklara eşit değildir'", Lang));
 	
 	// %1 - Register name
 	Strings.Insert("Error_145", NStr("en='Differences detected between the current manual movements and the potential automated movements in register [%1].';
 		|ru='Обнаружены различия между текущими ручными движениями и потенциальными автоматическими движениями в регистре [%1].';
-		|tr='Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));
+		|tr='[%1] kayıt tablosunda mevcut ve potansiyel kayıtları arasında farklar tespit edilmişti.'", Lang));
 	
 	Strings.Insert("Error_146", NStr("en='Document in not posted.';
 		|ru='Документ не проведен.';
 		|tr='Belge kaydedilmedi.'", Lang));
 	Strings.insert("Error_147", NStr("en='The document has manual entries and cannot be canceled.';
 		|ru='Документ имеет ручные записи и не может быть отменён.';
-		|tr='The document has manual entries and cannot be canceled.'", Lang));
+		|tr='Evrak hareketleri manuel olarak değiştirilmişti, iptal edilemez.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -1920,10 +1920,10 @@ Function Strings(Lang) Export
 		|tr='%1 dosyanın boyutu %2 MB ve izin verilen %3 MB''ten fazladır'", Lang) + Chars.LF + "%1");
 	Strings.Insert("InfoMessage_038", NStr("en='New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.';
 		|ru='Новые движения документа идентичны ручным корректировкам. Флажок ""Редактирование ручных движений"" теперь не нужен и может быть удалён.';
-		|tr='New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
+		|tr='Yeni evrak hareketleri manuel hareketlerine eşittir. ""Menuel hareket düzeltme"" işareti gereksiz olduğundan kaldırılabilir.'", Lang));
 	Strings.Insert("InfoMessage_039", NStr("en='Movements successfully recorded';
 		|ru='Движения успешно записаны';
-		|tr='Movements successfully recorded'", Lang));
+		|tr='Hareketler başarıyla kadyedildi'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en='Save object, before continue.';
 		|ru='Сохраните объект, прежде чем продолжить.';
@@ -2061,10 +2061,10 @@ Function Strings(Lang) Export
 		|tr='Müşteriye iade yapmak istiyor musunuz?'", Lang));
 	Strings.Insert("QuestionToUser_029", NStr("en='New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?';
 		|ru='Новые движения документа соответствуют ручным корректировкам, делая флажок ""Редактирование ручных движений"" ненужным. Хотите ли вы удалить этот флажок?';
-		|tr='New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
+		|tr='Yeni evrak hareketleri manuel hareketlerine eşittir. ""Menuel hareket düzeltme"" işaretleme gereksiz. Devam etmek ister misiniz?'", Lang));
 	Strings.Insert("QuestionToUser_030", NStr("en='Do you want to restore movements to default?';
 		|ru='Вы хотите восстановить движения по умолчанию?';
-		|tr='Do you want to restore movements to default?'", Lang));
+		|tr='Ayarları varsayınlara getirmek ister misiniz?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

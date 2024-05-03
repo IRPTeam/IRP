@@ -15054,6 +15054,34 @@ EndFunction
 
 #EndRegion
 
+#Region COSTLIST
+
+// PayrollLists.Load
+Procedure CostListLoad(Parameters) Export
+	Binding = BindCostListLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// PayrollLists.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderCostList(Parameters, Results) Export
+	Binding = BindCostListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// CostList.Load.Bind
+Function BindCostListLoad(Parameters)
+	DataPath = Parameters.TableName;
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCostListLoad");
+EndFunction
+
+
+#EndRegion
+
 #Region PAYROLL_LISTS_LOAD_DATA
 
 // PayrollLists.Load
@@ -15392,6 +15420,11 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "CostListOnAddRowFormNotify"           Then ViewClient_V2.CostListOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CostListOnCopyRowFormNotify"          Then ViewClient_V2.CostListOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CostListAfterDeleteRowFormNotify"     Then ViewClient_V2.CostListAfterDeleteRowFormNotify(Parameters);
+	
 	ElsIf ViewNotify = "FixedAssetsOnAddRowFormNotify"         Then ViewClient_V2.FixedAssetsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "FixedAssetsOnCopyRowFormNotify"        Then ViewClient_V2.FixedAssetsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);

@@ -259,7 +259,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Key AS Key,
 	|	SUM(ItemList.NetAmount) AS Amount,
 	|	ItemList.Ref.Currency AS Currency,
-	|	ItemList.DELETE_IsAdditionalItemCost AS IsAdditionalItemCost,
+	|	ItemList.OtherPeriodExpenseType <> VALUE(Enum.OtherPeriodExpenseType.EmptyRef) AS IsAdditionalItemCost,
 	|	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
 	|	RowIDInfo.RowID AS RowID
 	|INTO tmpItemList
@@ -270,8 +270,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		AND RowIDInfo.Ref = &Ref
 	|WHERE
 	|	ItemList.Ref = &Ref
-	|	AND ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
-	|	AND (NOT ItemList.DELETE_IsAdditionalItemCost OR ItemList.OtherPeriodExpenseType <> VALUE(Enum.OtherPeriodExpenseType.ItemsCost))
+	|	AND NOT ItemList.IsService
+	|	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
@@ -279,7 +279,6 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ItemList.Ref.Date,
 	|	ItemList.Key,
 	|	ItemList.Ref.Currency,
-	|	ItemList.DELETE_IsAdditionalItemCost,
 	|	ItemList.OtherPeriodExpenseType,
 	|	RowIDInfo.RowID,
 	|	VALUE(Enum.BatchDirection.Receipt)
@@ -689,7 +688,6 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 	       |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 	       |	PurchaseInvoiceItemList.Ref.RecordPurchasePrices AS RecordPurchasePrices,
-	       |	PurchaseInvoiceItemList.DELETE_IsAdditionalItemCost AS IsAdditionalItemCost,
 	       |	PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
 	       |	PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
 	       |	PurchaseInvoiceItemList.VatRate AS VatRate,
@@ -731,7 +729,6 @@ Function ItemListLandedCost()
 	       |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	       |	ItemList.NetAmount AS NetAmount,
 	       |	ItemList.TaxAmount AS TaxAmount,
-	       |	ItemList.DELETE_IsAdditionalItemCost AS IsAdditionalItemCost,
 	       |	ItemList.IsService AS IsService,
 	       |	TableRowIDInfo.RowID AS RowID,
 	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
@@ -1267,7 +1264,7 @@ Function R5022T_Expenses()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.IsService
-		   |	AND (NOT ItemList.IsAdditionalItemCost AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef))
+		   |	AND ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.EmptyRef)
 		   |	AND ItemList.IsPurchase";
 EndFunction
 

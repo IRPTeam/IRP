@@ -106,32 +106,52 @@ EndProcedure
 #Region CostList
 
 &AtClient
-Procedure CostListOnChange(Item)
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(CurrentData.Key) Then
-		CurrentData.Key = String(New UUID());
-	EndIf;
-	FillDocumentAmount();
+Procedure CostListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocExpenseRevenueAccrualsClient.CostListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CostListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocExpenseRevenueAccrualsClient.CostListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure CostListBeforeDeleteRow(Item, Cancel)
+	DocExpenseRevenueAccrualsClient.CostListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
 Procedure CostListAfterDeleteRow(Item)
-	DeleteUnnecessaryRowsInCurrencies();
+	DocExpenseRevenueAccrualsClient.CostListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
-	If NewRow Then
-		CurrentData = Item.CurrentData;
-		If CurrentData = Undefined Then
-			Return;
-		EndIf;
-		AfterRowAdd(CurrentData);
-	EndIf;
-EndProcedure
+//&AtClient
+//Procedure CostListOnChange(Item)
+//	CurrentData = Item.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	If Not ValueIsFilled(CurrentData.Key) Then
+//		CurrentData.Key = String(New UUID());
+//	EndIf;
+//	FillDocumentAmount();
+//EndProcedure
+//
+//&AtClient
+//Procedure CostListAfterDeleteRow(Item)
+//	DeleteUnnecessaryRowsInCurrencies();
+//EndProcedure
+//
+//&AtClient
+//Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
+//	If NewRow Then
+//		CurrentData = Item.CurrentData;
+//		If CurrentData = Undefined Then
+//			Return;
+//		EndIf;
+//		AfterRowAdd(CurrentData);
+//	EndIf;
+//EndProcedure
 
 &AtClient
 Procedure EditCurrencies(Command)
@@ -190,36 +210,63 @@ EndProcedure
 //  Result - Array of See DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure
 //  Structure, Undefined
 //  AdditionalParemeters - Arbitrary
+
+
+&AtServer
+Function FillCostist(Result)
+	Table = New ValueTable();
+	Table.Columns.Add("Amount");
+	Table.Columns.Add("AmountTax");
+	
+	For Each Structure In Result Do
+		Row = Table.Add();
+		FillPropertyValues(Row, Structure);
+	EndDo;
+	
+	Address = PutToTempStorage(Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, "", "Amount, AmountTax");
+EndFunction
+
 &AtClient
 Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;	
-	ArrayOfStructure = Result;
 	
-	If ArrayOfStructure.Count() = 0 Then
-		Return;
-	EndIf;
-
-	Object.CostList.Clear();
-	Object.Basis = ArrayOfStructure[0].Document;
-	Object.Currencies.Clear();
+	Result = FillCostist(Result);
+	Object.CostList.Clear();		
+	ViewClient_V2.CostListLoad(Object, ThisObject, Result.Address, "CostList", Result.GroupColumn, Result.SumColumn);
+	ThisObject.Modified = True;
+		
+		
 	
-	For Each Structure In ArrayOfStructure Do
-		
-		CostListRow = Object.CostList.Add();
 	
-		FillPropertyValues(CostListRow, Structure);
-		
-		AmountTax = Structure.TaxAmount; // Number
-		
-		CostListRow.AmountTax = AmountTax;
-		
-		AfterRowAdd(CostListRow);
-	EndDo;
 	
-	FillDocumentAmount();
-		
+//	ArrayOfStructure = Result;
+//	
+//	If ArrayOfStructure.Count() = 0 Then
+//		Return;
+//	EndIf;
+//
+//	Object.CostList.Clear();
+//	Object.Basis = ArrayOfStructure[0].Document;
+//	Object.Currencies.Clear();
+//	
+//	For Each Structure In ArrayOfStructure Do
+//		
+//		CostListRow = Object.CostList.Add();
+//	
+//		FillPropertyValues(CostListRow, Structure);
+//		
+//		AmountTax = Structure.TaxAmount; // Number
+//		
+//		CostListRow.AmountTax = AmountTax;
+//		
+//		AfterRowAdd(CostListRow);
+//	EndDo;
+//	
+//	FillDocumentAmount();
+//		
 EndProcedure
 
 &AtClient

@@ -1,7 +1,7 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
-	ViewClient_V2.OnOpen(Object, Form, );
+	ViewClient_V2.OnOpen(Object, Form, "CostList");
 EndProcedure
 
 #EndRegion
@@ -9,7 +9,7 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, Item) Export
-	ViewClient_V2.DateOnChange(Object, Form, );
+	ViewClient_V2.DateOnChange(Object, Form, "CostList");
 EndProcedure
 
 #EndRegion
@@ -17,7 +17,7 @@ EndProcedure
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CompanyOnChange(Object, Form, );
+	ViewClient_V2.CompanyOnChange(Object, Form, "CostList");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -45,7 +45,27 @@ EndProcedure
 #Region CURRENCY
 
 Procedure CurrencyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CurrencyOnChange(Object, Form, "ChequeBonds");
+	ViewClient_V2.CurrencyOnChange(Object, Form, "CostList");
+EndProcedure
+
+#EndRegion
+
+#Region COSTLIST
+
+Procedure CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CostListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.CostListBeforeAddRow(Object, Form, Item.Name, Cancel, Clone);
+EndProcedure
+
+Procedure CostListBeforeDeleteRow(Object, Form, Item, Cancel) Export
+	Return;
+EndProcedure
+
+Procedure CostListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.CostListAfterDeleteRow(Object, Form, Item.Name);
 EndProcedure
 
 #EndRegion

@@ -620,7 +620,9 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
-			AgreementInfo.CurrencyMovementType);
+			AgreementInfo.CurrencyMovementType,
+			,
+			Parameters.Ref);
 	EndIf;
 	
 	// Legal currency
@@ -629,7 +631,9 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
-			ItemOfArray.CurrencyMovementType);
+			ItemOfArray.CurrencyMovementType,
+			,
+			Parameters.Ref);
 	EndDo;
 	
 	// Reporting currency
@@ -638,7 +642,9 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
-			ItemOfArray.CurrencyMovementType);
+			ItemOfArray.CurrencyMovementType,
+			,
+			Parameters.Ref);
 	EndDo;
 	
 	// Budgeting currency
@@ -647,7 +653,9 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
-			ItemOfArray.CurrencyMovementType);
+			ItemOfArray.CurrencyMovementType,
+			,
+			Parameters.Ref);
 	EndDo;
 	
 	CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, Parameters.DocumentAmount);
@@ -717,7 +725,20 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EndDo;
 EndProcedure
 
-Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType, FixedRates = Undefined) Export
+// Add row to currency table.
+// 
+// Parameters:
+//  RatePeriod - Date
+//  CurrenciesTable - ValueTable
+//  RowKey - DefinedType.typeRowID
+//  CurrencyFrom - CatalogRef.Currencies
+//  CurrencyMovementType - ChartOfCharacteristicTypesRef.CurrencyMovementType
+//  FixedRates - Undefined - Fixed rates
+//  DocumentRef - DocumentRef
+// 
+// Returns:
+//  
+Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType, FixedRates = Undefined, DocumentRef = Undefined) Export
 	If FixedRates <> Undefined Then
 		TableOfFixedRates = New ValueTable();
 		TableOfFixedRates.Columns.Add("Key");
@@ -772,6 +793,23 @@ Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom
 				NewRow.Multiplicity = CurrencyInfo.Multiplicity;
 			EndIf;
 		EndIf;
+		
+		// rates from basis document
+		If ValueIsFilled(DocumentRef) Then
+			If DocumentRef.Metadata().Attributes.Find("Basis") <> Undefined Then
+				
+				CurrencyInfo = Catalogs.Currencies.GetFromBasisDocument(DocumentRef.Basis, NewRow.CurrencyFrom, NewRow.MovementType);
+				If Not ValueIsFilled(CurrencyInfo.Rate) Then
+					NewRow.Rate = 0;
+					NewRow.ReverseRate = 0;
+					NewRow.Multiplicity = 1;
+				Else
+					NewRow.Rate = CurrencyInfo.Rate;
+					NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
+					NewRow.Multiplicity = CurrencyInfo.Multiplicity;
+				EndIf;
+			EndIf;	
+		EndIf;	
 	EndIf;
 	Return NewRow;
 EndFunction

@@ -410,7 +410,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 
 	For Each Row In BatchKeysInfo Do
 		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType,
-			ArrayOfFixedRates);
+			ArrayOfFixedRates, Ref);
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;

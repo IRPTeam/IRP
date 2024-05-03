@@ -762,6 +762,55 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>CostListKey</name>
+          <id>172</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CostList.Key</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>CostListKeyExtendedTooltip</name>
+            <id>174</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>CostListKeyContextMenu</name>
+            <id>173</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>EnterOnInput</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>CostListExpenseType</name>
           <id>153</id>
           <visible>true</visible>
@@ -1113,12 +1162,20 @@
           <name>CostListOnEditEnd</name>
         </handlers>
         <handlers>
-          <event>AfterDeleteRow</event>
-          <name>CostListAfterDeleteRow</name>
+          <event>Selection</event>
+          <name>CostListSelection</name>
         </handlers>
         <handlers>
-          <event>OnChange</event>
-          <name>CostListOnChange</name>
+          <event>BeforeAddRow</event>
+          <name>CostListBeforeAddRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>CostListBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>CostListAfterDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1433,6 +1490,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Currency</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>CurrencyOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>CurrencyExtendedTooltip</name>
             <id>12</id>
@@ -1745,6 +1806,36 @@
     <name>FormCommandBar</name>
     <id>-1</id>
     <items xsi:type="form:Button">
+      <name>FormShowRowKey</name>
+      <id>175</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormShowRowKeyExtendedTooltip</name>
+        <id>176</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.ShowRowKey</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+    </items>
+    <items xsi:type="form:Button">
       <name>FormHowHiddenTables</name>
       <id>162</id>
       <visible>true</visible>
@@ -1894,6 +1985,26 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>EditCurrencies</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ShowRowKey</name>
+    <title>
+      <key>en</key>
+      <value>Show row key</value>
+    </title>
+    <id>2</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GetURL</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ShowRowKey</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

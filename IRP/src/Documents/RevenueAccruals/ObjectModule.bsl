@@ -5,12 +5,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	For Each Row In ThisObject.CostList Do
-		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	
+	Parameters = CurrenciesClientServer.GetParameters_V12(ThisObject);
+	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	
 	ThisObject.DocumentAmount = ThisObject.CostList.Total("Amount");
@@ -47,4 +45,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 	
 EndProcedure
-

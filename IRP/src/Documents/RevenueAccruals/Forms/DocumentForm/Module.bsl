@@ -63,6 +63,16 @@ EndProcedure
 
 #EndRegion
 
+#Region CURRENCY
+
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocExpenseRevenueAccrualsClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+
 &AtClient
 Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
 	
@@ -104,31 +114,24 @@ EndProcedure
 #Region CostList
 
 &AtClient
-Procedure CostListOnChange(Item)
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(CurrentData.Key) Then
-		CurrentData.Key = String(New UUID());
-	EndIf;
-	FillDocumentAmount();
+Procedure CostListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocExpenseRevenueAccrualsClient.CostListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
-	If NewRow Then
-		CurrentData = Item.CurrentData;
-		If CurrentData = Undefined Then
-			Return;
-		EndIf;
-		AfterRowAdd(CurrentData);
-	EndIf;
+Procedure CostListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocExpenseRevenueAccrualsClient.CostListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
+
+&AtClient
+Procedure CostListBeforeDeleteRow(Item, Cancel)
+	DocExpenseRevenueAccrualsClient.CostListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
 
 &AtClient
 Procedure CostListAfterDeleteRow(Item)
-	DeleteUnnecessaryRowsInCurrencies();
+	DocExpenseRevenueAccrualsClient.CostListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 
@@ -166,88 +169,35 @@ Procedure SetVisibilityAvailability(Object, Form)
 	//
 EndProcedure
 
-// After expense SelectСosts.
-// 
-// Parameters:
-//  Result - Array of See DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure
-//  Structure, Undefined
-//  AdditionalParemeters - Arbitrary
+&AtServer
+Function FillCosts(Result)
+	Table = New ValueTable();
+	Table.Columns.Add("Amount");
+	Table.Columns.Add("AmountTax");
+	Table.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
+	
+	For Each Structure In Result Do
+		Row = Table.Add();
+		Row.Amount = Structure.Amount;
+		Row.AmountTax = Structure.TaxAmount;
+		FillPropertyValues(Row, Structure);
+	EndDo;
+	
+	Address = PutToTempStorage(Table, ThisObject.UUID);
+	Return New Structure("Address, GroupColumn, SumColumn", Address, "ItemKey", "Amount, AmountTax");
+EndFunction
+
 &AtClient
 Procedure AfterRevenuePickup(Result, AdditionalParemeters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;	
-	ArrayOfStructure = Result;
 	
-	If ArrayOfStructure.Count() = 0 Then
-		Return;
-	EndIf;
-
+	Result = FillCosts(Result);
 	Object.CostList.Clear();
-	//@skip-check statement-type-change
-	Object.Basis = ArrayOfStructure[0].Document;
-	Object.Currencies.Clear();
-	
-	For Each Structure In ArrayOfStructure Do
+	ViewClient_V2.CostListLoad(Object, ThisObject, Result.Address, "CostList", Result.GroupColumn, Result.SumColumn);
+	ThisObject.Modified = True;
 		
-		CostListRow = Object.CostList.Add();
-	
-		FillPropertyValues(CostListRow, Structure);
-		
-		AmountTax = Structure.TaxAmount; // Number
-		
-		CostListRow.AmountTax = AmountTax;
-		
-		AfterRowAdd(CostListRow);
-	EndDo;
-	
-	FillDocumentAmount();
-		
-EndProcedure
-
-&AtClient
-Procedure AfterRowAdd(Row)
-	
-	CurrentBasis = Object.Basis;
-	Row.Key = String(New UUID());
-	If ValueIsFilled(CurrentBasis) Then
-		If Object.CostList.Count() = 1 Then
-			If TypeOf(CurrentBasis) = Type("DocumentRef.SalesInvoice") Then
-				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
-				For Each CurrencyRow In ObjectCurrencies Do
-					NewRow = Object.Currencies.Add();
-					FillPropertyValues(NewRow, CurrencyRow);
-					NewRow.Key = Row.Key;
-				EndDo;
-			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.RevenueAccruals") Then
-				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
-				If ObjectCurrencies.Count() > 0 Then
-					//@skip-check property-return-type
-					FirstRowID = ObjectCurrencies[0].Key; // String
-					
-					For Each RowInArray In ObjectCurrencies Do
-						//@skip-check property-return-type
-						If RowInArray.Key = FirstRowID Then
-							NewCurrencyRow = Object.Currencies.Add();
-							FillPropertyValues(NewCurrencyRow, RowInArray);
-							NewCurrencyRow.Key = Row.Key;
-						EndIf;
-					EndDo;
-					
-				EndIf;
-			EndIf;
-		Else
-			FirstRowID = Object.CostList[0].Key;
-				
-			RowArray = Object.Currencies.FindRows(New Structure("Key", FirstRowID));
-			For Each RowInArray In RowArray Do
-				NewCurrencyRow = Object.Currencies.Add();
-				FillPropertyValues(NewCurrencyRow, RowInArray);
-				NewCurrencyRow.Key = Row.Key;
-			EndDo;
-		EndIf;
-	EndIf;
-	
 EndProcedure
 
 &AtClient
@@ -325,19 +275,6 @@ Async Procedure OpenPickupForm()
 
 EndProcedure
 
-&AtClient
-Procedure DeleteUnnecessaryRowsInCurrencies()
-	ArrayRowsToDelete = New Array; // Array of FormDataCollectionItem
-	For Each Row In Object.Currencies Do
-		If Object.CostList.FindRows(New Structure("Key", Row.Key)).Count() = 0 Then
-			ArrayRowsToDelete.Add(Row);
-		EndIf;
-	EndDo;
-	For Each Row In ArrayRowsToDelete Do
-		Object.Currencies.Delete(Row);
-	EndDo;
-EndProcedure
-
 #EndRegion
 
 #Region DescriptionEvents
@@ -397,6 +334,19 @@ EndProcedure
 &AtServer
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure ShowRowKey(Command)
+	
+	Array = New Array; //Array of String
+	Array.Add("CostList");
+	
+	DocumentsClient.ShowRowKey(ThisObject, Array);
 EndProcedure
 
 #EndRegion

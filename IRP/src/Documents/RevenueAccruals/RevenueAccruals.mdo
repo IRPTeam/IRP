@@ -123,8 +123,8 @@
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.RevenueAccruals</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

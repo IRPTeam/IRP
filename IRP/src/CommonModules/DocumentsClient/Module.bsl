@@ -1034,6 +1034,7 @@ EndProcedure
 
 Function GetFormItemNames()
 	ItemNames = "ItemListKey, SpecialOffersKey, TransactionsKey,
+				|CostListKey,
 				|ItemListRowsKey,
 				|ResultsTable,
 				|RowIDInfo,
@@ -1097,12 +1098,16 @@ Function GetFormItemNames()
 	Return ItemNames;
 EndFunction	
 
-Procedure ShowRowKey(Form) Export
+Procedure ShowRowKey(Form, ExcludedItems = Undefined) Export
+	If ExcludedItems = Undefined Then
+		ExcludedItems = New Array;
+	EndIf;
+	
 	ItemNames = GetFormItemNames();
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do
 		ItemName = TrimAll(ItemName);
-		If Form.Items.Find(ItemName) <> Undefined Then
+		If Form.Items.Find(ItemName) <> Undefined And ExcludedItems.Find(ItemName) = Undefined Then
 			Form.Items[ItemName].Visible = Not Form.Items[ItemName].Visible;
 		EndIf;
 	EndDo;

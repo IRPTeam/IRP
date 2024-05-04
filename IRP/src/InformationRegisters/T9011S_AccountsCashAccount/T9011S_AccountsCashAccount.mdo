@@ -16,11 +16,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Бух. счета (касса/банк)</value>
+  <value>Бух. счета (Кассы/банк. счета)</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Muh. hesaplar (kasa/banka)</value>
+  <value>Muh. hesap (kasa/banka)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -33,11 +33,11 @@
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
-  <value>Бух. счета (касса/банк)</value>
+  <value>Бух. счета (Кассы/банк. счета)</value>
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Muh. hesaplar (kasa/banka)</value>
+  <value>Muh. hesap (kasa/banka)</value>
  </recordPresentation>
  <resources uuid="65c87eb8-f642-4c30-b73d-1f3b08aff762">
   <name>Account</name>

@@ -16,11 +16,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Счета (Сотрудник)</value>
+  <value>Бух. счета (Сотрудники)</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Muh. hesap (çalışan)</value>
+  <value>Muh. hesap (çalışanlar)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>

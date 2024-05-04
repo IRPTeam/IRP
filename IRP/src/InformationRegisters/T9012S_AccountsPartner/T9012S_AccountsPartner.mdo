@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Hesaplar (Cari hesap)</value>
+  <value>Muh. hesap (Cari hesap)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -37,7 +37,7 @@
  </recordPresentation>
  <recordPresentation>
   <key>tr</key>
-  <value>Hesaplar (Cari hesap)</value>
+  <value>Muh. hesap (Cari hesap)</value>
  </recordPresentation>
  <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
   <name>AccountAdvancesVendor</name>

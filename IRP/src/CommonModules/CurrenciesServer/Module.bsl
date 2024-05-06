@@ -795,20 +795,22 @@ Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom
 		EndIf;
 		
 		// rates from basis document
-		If ValueIsFilled(DocumentRef) Then
-			If DocumentRef.Metadata().Attributes.Find("Basis") <> Undefined Then
-				
-				CurrencyInfo = Catalogs.Currencies.GetFromBasisDocument(DocumentRef.Basis, NewRow.CurrencyFrom, NewRow.MovementType);
-				If Not ValueIsFilled(CurrencyInfo.Rate) Then
-					NewRow.Rate = 0;
-					NewRow.ReverseRate = 0;
-					NewRow.Multiplicity = 1;
-				Else
-					NewRow.Rate = CurrencyInfo.Rate;
-					NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
-					NewRow.Multiplicity = CurrencyInfo.Multiplicity;
-				EndIf;
-			EndIf;	
+		BasisDocument = Undefined;
+		If ValueIsFilled(DocumentRef) And DocumentRef.Metadata().Attributes.Find("Basis") <> Undefined Then
+			BasisDocument = CommonFunctionsServer.GetRefAttribute(DocumentRef,"Basis");
+		EndIf;		
+		 //DocumentRef
+		If ValueIsFilled(BasisDocument) Then			
+			CurrencyInfo = Catalogs.Currencies.GetFromBasisDocument(DocumentRef.Basis, NewRow.CurrencyFrom, NewRow.MovementType);
+			If Not ValueIsFilled(CurrencyInfo.Rate) Then
+				NewRow.Rate = 0;
+				NewRow.ReverseRate = 0;
+				NewRow.Multiplicity = 1;
+			Else
+				NewRow.Rate = CurrencyInfo.Rate;
+				NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
+				NewRow.Multiplicity = CurrencyInfo.Multiplicity;
+			EndIf;			
 		EndIf;	
 	EndIf;
 	Return NewRow;

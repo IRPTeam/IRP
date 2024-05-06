@@ -996,6 +996,9 @@ Async Procedure PrintSlip(Hardware, PaymentSettings)
 	EndIf;
 
 	For Each SlipInfoPart In SlipArray Do
+		If IsBlankString(SlipInfoPart) Then
+			Continue;
+		EndIf;
 		PaymentSettings.Out.Slip = SlipInfoPart;
 		DocumentPackage = EquipmentFiscalPrinterAPIClient.DocumentPackage();
 		DocumentPackage.TextString = StrSplit(SlipInfoPart, Chars.LF + Chars.CR);

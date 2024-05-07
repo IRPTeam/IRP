@@ -2312,3 +2312,17 @@ Function R5020B_PartnersBalance_Payroll() Export
 		|WHERE
 		|	TRUE";
 EndFunction
+
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	For Each Row In MovementsValueTable Do
+		If ValueIsFilled(Row.AdvancesClosing) Then
+			Continue;
+		EndIf;
+		Row.Amount = 
+		Row.CustomerTransaction
+		+ Row.CustomerAdvance
+		+ Row.VendorTransaction
+		+ Row.VendorAdvance
+		+ Row.OtherTransaction;
+	EndDo;
+EndProcedure

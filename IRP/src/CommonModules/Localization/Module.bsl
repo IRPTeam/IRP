@@ -259,6 +259,8 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
+// * Error_144 - String - 
+// * Error_145 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -314,6 +316,8 @@
 // * InfoMessage_033 - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
+// * InfoMessage_036 - String - 
+// * InfoMessage_037 - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -1076,6 +1080,15 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
 	Strings.Insert("Error_EmptyCurrency", NStr("en = 'Currency not entered'", Lang));
 	Strings.Insert("Error_EmptyTransactionType", NStr("en = 'Transaction type not entered'", Lang));
+	Strings.Insert("Error_144", NStr("en = 'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
+	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en = '""Amount"" does not equal the sum of all resources'", Lang));
+	
+	// %1 - Register name
+	Strings.Insert("Error_145", NStr("en = 'Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));
+	
+	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
+	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
+	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
 	// manufacturing errors
@@ -1192,6 +1205,8 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en = '⬆️ Select document type ⬆️'", Lang));
 	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en = 'Click to add document'", Lang) + Chars.LF + "%1");
 	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en = 'File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_038", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
+	Strings.Insert("InfoMessage_039", NStr("en = 'Movements successfully recorded'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
@@ -1245,6 +1260,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
+	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser

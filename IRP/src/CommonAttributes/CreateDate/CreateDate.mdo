@@ -14,6 +14,10 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
   <content>
+    <metadata>Document.BatchReallocateOutgoing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.PaymentTerminals</metadata>
     <use>Use</use>
   </content>
@@ -26,7 +30,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.VendorsAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.AgingPeriods</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ForeignCurrencyRevaluation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -63,6 +75,10 @@
   </content>
   <content>
     <metadata>Catalog.LegalNameContracts</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Labeling</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -118,7 +134,15 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.BatchReallocateIncoming</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.AdditionalCostAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ExpenseAccruals</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -134,11 +158,19 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CustomersAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Batches</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.CashAccounts</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CalculationMovementCosts</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -446,6 +478,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RevenueAccruals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailSalesReceipt</metadata>
     <use>Use</use>
   </content>
@@ -459,6 +495,10 @@
   </content>
   <content>
     <metadata>Catalog.Partners</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.WorkOrderClosing</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -610,6 +650,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.SalaryCalculationType</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
@@ -643,10 +687,6 @@
   </content>
   <content>
     <metadata>Document.FixedAssetTransfer</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.SalaryCalculationType</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

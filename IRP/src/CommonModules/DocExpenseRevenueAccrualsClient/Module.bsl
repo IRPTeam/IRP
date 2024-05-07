@@ -56,7 +56,7 @@ EndProcedure
 //  Structure - Row pickup empty structure:
 // * Amount - Number - 
 // * Currency - CatalogRef.Currencies - 
-// * Document - DocumentRef 
+// * Document - DocumentRef  
 // * TaxAmount - Number - 
 Function RowPickupEmptyStructure() Export
 	

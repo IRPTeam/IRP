@@ -9,6 +9,13 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	
+	If DocObject.ManualMovementsEdit Then
+		Cancel = True;
+		TextMessage = R().Error_147;
+		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);
+		Return;
+	EndIf;
+	
 	For Each RecordSet In DocObject.RegisterRecords Do
 		TableForLoad = New ValueTable();
 		PostingServer.WriteAdvances(DocObject, RecordSet.Metadata(), TableForLoad);

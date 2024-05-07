@@ -832,7 +832,8 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 	* Filling main details
 		And I select "Other partner" exact value from "Transaction type" drop-down list
 		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №3" string
+		And I select from the drop-down list named "Currency" by "Turkish lira" string
 	* Filling payment list
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select current line in "PaymentList" table
@@ -845,7 +846,7 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 	* Check
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table became equal

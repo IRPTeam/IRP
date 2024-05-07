@@ -365,8 +365,12 @@ Function R5010B_ReconciliationStatement()
 		|UNION ALL
 		|
 		// Vendor advance (receive)
-		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|SELECT                                   
+		|	case when ReceiveAdvances.IsSendAdvanceCustomer and ReceiveAdvances.IsReceiveAdvanceVendor then
+		|   	VALUE(AccumulationRecordType.Expense)
+		|	else
+		|		VALUE(AccumulationRecordType.Receipt)
+		|	end,
 		|	ReceiveAdvances.Period,
 		|	ReceiveAdvances.Company,
 		|	ReceiveAdvances.ReceiveBranch AS Branch,
@@ -437,8 +441,12 @@ Function R5010B_ReconciliationStatement()
 		|UNION ALL
 		|
 		// Vendor transaction (receive)
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		|SELECT                       
+		|	case when ReceiveTransactions.IsSendTransactionVendor and ReceiveTransactions.IsReceiveTransactionVendor then
+		|   	value(AccumulationRecordType.Expense)
+		|   else
+		|   	VALUE(AccumulationRecordType.Receipt)
+		|	end,
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,
@@ -474,7 +482,11 @@ Function R5010B_ReconciliationStatement()
 		|
 		// Customer transaction (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	case when ReceiveTransactions.IsSendTransactionCustomer and ReceiveTransactions.IsReceiveTransactionCustomer then
+		|   	value(AccumulationRecordType.Receipt)
+		|   else
+		|   	VALUE(AccumulationRecordType.Expense)
+		|	end,
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,

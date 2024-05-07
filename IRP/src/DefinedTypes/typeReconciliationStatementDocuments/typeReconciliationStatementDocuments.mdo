@@ -23,5 +23,6 @@
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.SalesReportToConsignor</types>
     <types>DocumentRef.SalesInvoice</types>
+    <types>DocumentRef.DebitCreditNote</types>
   </type>
 </mdclass:DefinedType>

@@ -438,6 +438,9 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
 	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
 
+	// CostList
+	EventHandlerMap.Insert("CostList.Amount", "SetCostListAmount");
+
 	Return EventHandlerMap;
 EndFunction
 
@@ -15054,34 +15057,6 @@ EndFunction
 
 #EndRegion
 
-#Region COSTLIST
-
-// PayrollLists.Load
-Procedure CostListLoad(Parameters) Export
-	Binding = BindCostListLoad(Parameters);
-	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// PayrollLists.Load.Set
-#If Server Then
-	
-Procedure ServerTableLoaderCostList(Parameters, Results) Export
-	Binding = BindCostListLoad(Parameters);
-	LoaderTable(Binding.DataPath, Parameters, Results);
-EndProcedure
-
-#EndIf
-
-// CostList.Load.Bind
-Function BindCostListLoad(Parameters)
-	DataPath = Parameters.TableName;
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCostListLoad");
-EndFunction
-
-
-#EndRegion
-
 #Region PAYROLL_LISTS_LOAD_DATA
 
 // PayrollLists.Load
@@ -15207,6 +15182,28 @@ Procedure StepTimeSheetListLoadTable(Parameters, Chain) Export
 	Options.TableAddress = Parameters.LoadData.Address;
 	Chain.LoadTable.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region COST_LIST
+
+#Region COST_LIST_AMOUNT
+
+// CostList.Amount.Set
+Procedure SetCostListAmount(Parameters, Results) Export
+	Binding = BindCostListAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// CostList.Amount.Bind
+Function BindCostListAmount(Parameters)
+	DataPath = "CostList.Amount";
+	
+	Binding = New Structure();
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCostListAmount");
+EndFunction
 
 #EndRegion
 

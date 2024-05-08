@@ -409,8 +409,11 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	EndDo;
 
 	For Each Row In BatchKeysInfo Do
-		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType,
-			ArrayOfFixedRates, Ref);
+		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
+		CurrencyParameters.RowKey   = Row.Key;
+		CurrencyParameters.Currency = Row.Currency;
+		CurrencyParameters.Ref      = Ref;
+		CurrenciesServer.AddRowToCurrencyTable(CurrencyParameters, Ref.Date, CurrencyTable, CurrencyMovementType, ArrayOfFixedRates);
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
@@ -732,7 +735,8 @@ Function ItemListLandedCost()
 	       |	ItemList.IsService AS IsService,
 	       |	TableRowIDInfo.RowID AS RowID,
 	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
-		   |	ItemList.OtherPeriodExpenseType IN (VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals), VALUE(Enum.OtherPeriodExpenseType.ItemsCost)) AS isOtherPeriodExpense
+		   |	ItemList.OtherPeriodExpenseType  = VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS IsExpenseAccruals,
+		   |	ItemList.OtherPeriodExpenseType  = VALUE(Enum.OtherPeriodExpenseType.ItemsCost) AS IsItemsCost
 	       |INTO ItemListLandedCost
 	       |FROM
 	       |	Document.PurchaseInvoice.ItemList AS ItemList
@@ -1293,29 +1297,34 @@ Function T2015S_TransactionsInfo()
 EndFunction
 
 Function R6070T_OtherPeriodsExpenses()
-	Return "SELECT
-	       |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	       |	ItemList.Period AS Period,
-	       |	ItemList.Company AS Company,
-	       |	ItemList.Branch AS Branch,
-	       |	ItemList.Basis AS Basis,
-		   |	CASE
-	       |		WHEN ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ItemsCost)
-	       |			THEN ItemList.RowID
-	       |	END AS RowID,
-	       |	CASE
-	       |		WHEN ItemList.OtherPeriodExpenseType = VALUE(Enum.OtherPeriodExpenseType.ItemsCost)
-	       |			THEN ItemList.ItemKey
-	       |	END AS ItemKey,
-	       |	ItemList.Currency AS Currency,
-	       |	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
-	       |	ItemList.NetAmount AS Amount,
-	       |	ItemList.TaxAmount AS AmountTax
-	       |INTO R6070T_OtherPeriodsExpenses
-	       |FROM
-	       |	ItemListLandedCost AS ItemList
-	       |WHERE
-	       |	ItemList.isOtherPeriodExpense";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Basis AS Basis,
+		|	CASE
+		|		WHEN ItemList.IsItemsCost
+		|			THEN ItemList.RowID
+		|	END AS RowID,
+		|	CASE
+		|		WHEN ItemList.IsItemsCost
+		|			THEN ItemList.ItemKey
+		|	END AS ItemKey,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
+		|	ItemList.NetAmount AS Amount,
+		|	CASE
+		|		WHEN ItemList.IsItemsCost
+		|			THEN ItemList.TaxAmount
+		|	END AS AmountTax
+		|INTO R6070T_OtherPeriodsExpenses
+		|FROM
+		|	ItemListLandedCost AS ItemList
+		|WHERE
+		|	ItemList.IsItemsCost
+		|	OR ItemList.IsExpenseAccruals";
 EndFunction
 
 Function T6010S_BatchesInfo()
@@ -1555,7 +1564,11 @@ Function GetAnalytics_ReceiptInventory(Parameters)
 	                                                          Parameters.RowData.ProfitLossCenter);
 	
 	If ValueIsFilled(Debit.AccountExpense) And Parameters.RowData.IsService  Then
-		AccountingAnalytics.Debit = Debit.AccountExpense;
+		If Parameters.RowData.OtherPeriodExpenseType = Enums.OtherPeriodExpenseType.ExpenseAccruals Then
+			AccountingAnalytics.Debit = Debit.AccountOtherPeriodsExpense;
+		Else
+			AccountingAnalytics.Debit = Debit.AccountExpense;
+		EndIf;
 	Else
 		Debit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
 		AccountingAnalytics.Debit = Debit.Account;

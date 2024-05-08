@@ -18,6 +18,11 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;	
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -35,7 +40,6 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	
 	TypesToControl = New Array; // Array of EnumRef.AccrualsTransactionType
 	TypesToControl.Add(Enums.AccrualsTransactionType.Void);
 	TypesToControl.Add(Enums.AccrualsTransactionType.Reverse);
@@ -43,7 +47,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If TypesToControl.Find(TransactionType) <> Undefined Then
 		CheckedAttributes.Add("Basis");
 	EndIf;
-	
 EndProcedure
 
 

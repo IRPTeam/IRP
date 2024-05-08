@@ -54,37 +54,3 @@ Function GetCurrencyInfo(Period, CurrencyFrom, CurrencyTo, Source = Undefined) E
 
 	Return Result;
 EndFunction
-
-// Get from basis document.
-// 
-// Parameters:
-//  BasisDocument - DocumentRef
-// 
-// Returns:
-//  Structure - Get from basis document:
-// * CurrencyFrom - CatalogRef.Currencies
-// * Rate - Number
-// * ReverseRate - Number
-// * ShowReverseRate - Boolean
-// * Multiplicity - Number
-Function GetFromBasisDocument(BasisDocument, CurrencyFrom, MovementType) Export
-
-	Result = New Structure("CurrencyFrom,
-						   |Rate,
-						   |ReverseRate,
-						   |ShowReverseRate,
-						   |Multiplicity");
-
-	If BasisDocument.Metadata().TabularSections.Find("Currencies") = Undefined Then
-		Return Result;
-	EndIf;	
-	
-	ValueTable = BasisDocument.Currencies.Unload( , "CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType");
-	SearchArray = ValueTable.FindRows(New Structure("CurrencyFrom, MovementType", CurrencyFrom, MovementType));
-	
-	If SearchArray.Count() > 0 Then
-		FillPropertyValues(Result, SearchArray[0]);
-	EndIf;
-	Return Result;
-	
-EndFunction

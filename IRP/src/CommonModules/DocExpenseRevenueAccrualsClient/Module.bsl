@@ -57,7 +57,7 @@ Procedure CostListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 EndProcedure
 
 Procedure CostListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
-	ViewClient_V2.CostListBeforeAddRow(Object, Form, Item.Name, Cancel, Clone);
+	ViewClient_V2.CostListBeforeAddRow(Object, Form, Cancel, Clone);
 EndProcedure
 
 Procedure CostListBeforeDeleteRow(Object, Form, Item, Cancel) Export
@@ -65,26 +65,7 @@ Procedure CostListBeforeDeleteRow(Object, Form, Item, Cancel) Export
 EndProcedure
 
 Procedure CostListAfterDeleteRow(Object, Form, Item) Export
-	ViewClient_V2.CostListAfterDeleteRow(Object, Form, Item.Name);
+	ViewClient_V2.CostListAfterDeleteRow(Object, Form);
 EndProcedure
 
 #EndRegion
-
-// Row structure.
-// 
-// Returns:
-//  Structure - Row pickup empty structure:
-// * Amount - Number - 
-// * Currency - CatalogRef.Currencies - 
-// * Document - DocumentRef  
-// * TaxAmount - Number - 
-Function RowPickupEmptyStructure() Export
-	
-	Structure = New Structure();
-	Structure.Insert("Currency", PredefinedValue("Catalog.Currencies.EmptyRef"));
-	Structure.Insert("Document", Undefined);
-	Structure.Insert("Amount", 0);
-	Structure.Insert("TaxAmount", 0);
-		
-	Return Structure;
-EndFunction	

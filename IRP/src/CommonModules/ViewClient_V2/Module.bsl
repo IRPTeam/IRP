@@ -2960,17 +2960,27 @@ EndProcedure
 
 #EndRegion
 
-//-------------
 #Region COST_LIST
 
 Procedure CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
 	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
-Function CostListBeforeAddRow(Object, Form, TableName, Cancel = False, Clone = False, CurrentData = Undefined) Export
-	NewRow = AddOrCopyRow(Object, Form, TableName, Cancel, Clone, CurrentData,
+Procedure CostListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "CostList", Cancel, Clone, CurrentData,
 		"CostListOnAddRowFormNotify", "CostListOnCopyRowFormNotify");
+	Form.Items.CostList.CurrentRow = NewRow.GetID();
+	If Form.Items.CostList.CurrentRow <> Undefined Then
+		Form.Items.CostList.ChangeRow();
+	EndIf;
+EndProcedure
 
+Function CostListAddFilledRow(Object, Form,  FillingValues) Export
+	Cancel      = False;
+	Clone       = False;
+	CurrentData = Undefined;
+	NewRow = AddOrCopyRow(Object, Form, "CostList", Cancel, Clone, CurrentData,
+		"CostListOnAddRowFormNotify", "CostListOnCopyRowFormNotify", FillingValues);
 	Form.Items.CostList.CurrentRow = NewRow.GetID();
 	If Form.Items.CostList.CurrentRow <> Undefined Then
 		Form.Items.CostList.ChangeRow();
@@ -2986,25 +2996,11 @@ Procedure CostListOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure
 
-Procedure CostListAfterDeleteRow(Object, Form, TableName) Export
-	DeleteRows(Object, Form, TableName, "CostListAfterDeleteRowFormNotify");
+Procedure CostListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "CostList");
 EndProcedure
-
-Procedure CostListAfterDeleteRowFormNotify(Parameters) Export
-	UpdateTotalAmounts(Parameters);
-EndProcedure
-
-Procedure CostListLoad(Object, Form, Address, TableName, GroupColumn = "", SumColumn = "") Export
-	Parameters = GetLoadParameters(Object, Form, TableName, Address, GroupColumn, SumColumn);
-	Parameters.LoadData.ExecuteAllViewNotify = True;
-	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
-	ControllerClientServer_V2.PayrollListsLoad(Parameters);
-EndProcedure
-
 
 #EndRegion
-
-//---------------
 
 #Region TIME_SHEET_LIST
 

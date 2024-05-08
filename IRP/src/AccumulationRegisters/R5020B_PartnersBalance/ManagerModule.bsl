@@ -1920,7 +1920,13 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Vendor advance (receipt)
 		|SELECT
-		|	VALUE(AccumulationRecordType.Receipt),
+		//|	VALUE(AccumulationRecordType.Receipt),
+		|   
+		|	case when ReceiveAdvances.IsSendAdvanceCustomer and ReceiveAdvances.IsReceiveAdvanceVendor then
+		|   	VALUE(AccumulationRecordType.Expense)
+		|	else
+		|		VALUE(AccumulationRecordType.Receipt)
+		|	end,
 		|
 		|	ReceiveAdvances.Period,
 		|	ReceiveAdvances.Company,
@@ -2040,8 +2046,12 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Vendor transaction (receipt)
 		|SELECT
-		//|	VALUE(AccumulationRecordType.Expense),
-		|	VALUE(AccumulationRecordType.Receipt),
+		|	
+		|	case when ReceiveTransactions.IsSendTransactionVendor and ReceiveTransactions.IsReceiveTransactionVendor then
+		|   	value(AccumulationRecordType.Expense)
+		|   else
+		|   	VALUE(AccumulationRecordType.Receipt)
+		|	end,
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
@@ -2101,8 +2111,12 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Customer transaction (receipt)
 		|SELECT
-		//|	VALUE(AccumulationRecordType.Receipt),
-		|	VALUE(AccumulationRecordType.Expense),
+		|         
+		|	case when ReceiveTransactions.IsSendTransactionCustomer and ReceiveTransactions.IsReceiveTransactionCustomer then
+		|   	value(AccumulationRecordType.Receipt)
+		|   else
+		|   	VALUE(AccumulationRecordType.Expense)
+		|	end,
 		|
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
@@ -2283,7 +2297,6 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		|";
 EndFunction
-
 Function R5020B_PartnersBalance_Payroll() Export
 	Return 
 		// Other transaction

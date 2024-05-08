@@ -334,7 +334,7 @@ Scenario: _042411 check Retail sales receipt movements by the Register  "R5021 R
 			| ''                                                   | '28.07.2021 13:53:27' | '7 777,8'   | '9 177,8'           | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'   | 'TRY'      | ''                    | 'en description is empty'      | ''        |
 		And I close all client application windows
 
-Scenario:_042412 check Retail sales receipt movements by the Register  "R2005 Sales special offers" (without discount)
+Scenario: _042412 check Retail sales receipt movements by the Register  "R2005 Sales special offers" (without discount)
 	And I close all client application windows
 	* Select Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -379,6 +379,26 @@ Scenario: _042413 check Retail sales receipt movements by the Register  "R2001 S
 			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'XL/Green' | ''                  | 'f3d688c7-7c7b-4432-9725-06721e496320' | ''             |			
 		And I close all client application windows
 
+Scenario: _042414 check Retail sales receipt movements by the Register  "R4050 Stock inventory"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '202'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'                  | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '1'         | 'Main Company' | 'Store 03' | 'XS/Blue'   |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '2'         | 'Main Company' | 'Store 03' | '38/Yellow' |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '12'        | 'Main Company' | 'Store 03' | '36/18SD'   |		
+		And I close all client application windows
 
 Scenario: _042415 check Retail sales receipt movements by the Register  "R2050 Retail sales" (consignor and own stocks) 
 	* Select Retail sales receipt
@@ -401,6 +421,19 @@ Scenario: _042415 check Retail sales receipt movements by the Register  "R2050 R
 			| ''                                                     | '14.11.2022 13:29:44' | '4'         | '1 600'  | '1 600'      | ''              | 'Main Company' | 'Shop 01' | 'Store 02' | ''             | 'Retail sales receipt 1 113 dated 14.11.2022 13:29:44' | 'XL/Green' | ''                  | 'f3d688c7-7c7b-4432-9725-06721e496320' |		
 		And I close all client application windows
 
+Scenario: _042416 check Retail sales receipt absence movements by the Register  "R4050 Stock inventory" (consignor and own stocks) 
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 113'     |
+	* Check movements by the Register  "R2050 Retail sales"
+		And I click "Registrations report" button
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4050 Stock inventory'    |
+		And I close all client application windows
 
 Scenario: _042418 check Retail sales receipt movements by the Register  "R4010 Actual stocks" (consignor and own stocks) 
 	* Select Retail sales receipt

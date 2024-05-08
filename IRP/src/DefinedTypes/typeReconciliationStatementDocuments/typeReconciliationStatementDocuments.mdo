@@ -24,5 +24,6 @@
     <types>DocumentRef.SalesReportToConsignor</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.DebitCreditNote</types>
+    <types>DocumentRef.EmployeeCashAdvance</types>
   </type>
 </mdclass:DefinedType>

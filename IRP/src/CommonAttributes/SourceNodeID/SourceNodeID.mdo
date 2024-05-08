@@ -120,10 +120,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.ExpenseAccruals</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Countries</metadata>
     <use>Use</use>
   </content>
@@ -417,10 +413,6 @@
   </content>
   <content>
     <metadata>Document.SalesOrderClosing</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RevenueAccruals</metadata>
     <use>Use</use>
   </content>
   <content>

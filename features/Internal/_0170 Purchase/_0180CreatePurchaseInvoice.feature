@@ -909,47 +909,6 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '5dff43f5-e537-4fae-a925-7fd7a77a4aae'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
 		And I close all client application windows
 		
-									
-				
-		
-				
-
-
-
-// Scenario: _018020 check the form Pick up items in the document Purchase invoice
-// 	And I close all client application windows
-// 	* Opening a form for creating Purchase invoice
-// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-// 		And I click the button named "FormCreate"
-// 	* Filling in the main details of the document
-// 		And I click Select button of "Company" field
-// 		And I go to line in "List" table
-// 			| Description  |
-// 			| Main Company |
-// 		And I select current line in "List" table
-// 	* Filling in vendor information
-// 		And I click Select button of "Partner" field
-// 		And I go to line in "List" table
-// 			| Description |
-// 			| Ferron BP   |
-// 		And I select current line in "List" table
-// 		And I click Select button of "Legal name" field
-// 		And I activate "Description" field in "List" table
-// 		And I go to line in "List" table
-// 			| Description       |
-// 			| Company Ferron BP |
-// 		And I select current line in "List" table
-// 		And I click Select button of "Partner term" field
-// 		And I go to line in "List" table
-// 			| Description        |
-// 			| Vendor Ferron, TRY |
-// 		And I select current line in "List" table
-// 		And I click Select button of "Store" field
-// 		Then "Stores" window is opened
-// 		And I select current line in "List" table
-// 	When check the product selection form with price information in Purchase invoice
-// 	And I close all client application windows
-
 
 
 Scenario: _300503 check connection to Purchase invoice report "Related documents"

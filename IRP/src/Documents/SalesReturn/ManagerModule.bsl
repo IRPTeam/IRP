@@ -1036,6 +1036,7 @@ Function R4050B_StockInventory()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.IsService
+		   |	AND ItemList.IsOwnStocks
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,

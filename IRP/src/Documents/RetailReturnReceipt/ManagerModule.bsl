@@ -1429,6 +1429,7 @@ Function R4050B_StockInventory()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.IsService
+		   |	AND ItemList.IsOwnStocks
 		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),

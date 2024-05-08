@@ -99,8 +99,6 @@ Scenario: _0851002 create Expense accruals (without PI and empty basis)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And in the table "CostList" I click the button named "CostListAdd"
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -108,8 +106,6 @@ Scenario: _0851002 create Expense accruals (without PI and empty basis)
 		And I select "Distribution department" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "80,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "16,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 	* Check currency rate (from basis)
@@ -155,8 +151,8 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		And I select current line in "ExpenseValueTable" table
 		Then the form attribute named "Basis" became equal to "Expense accrual 171 dated 30.04.2024 14:01:53"		
 		And "CostList" table became equal
-			| 'Amount'  | 'Amount tax' |
-			| '-180,00' | '-36,00'     |				
+			| 'Amount'  |
+			| '-180,00' |				
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -164,8 +160,6 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And in the table "CostList" I click the button named "CostListAdd"
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -173,8 +167,6 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		And I select "Distribution department" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-80,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-16,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -227,8 +219,8 @@ Scenario: _0851004 create Expense accruals (without PI, Reverse)
 		And I select current line in "ExpenseValueTable" table
 		Then the form attribute named "Basis" became equal to "Expense accrual 170 dated 30.04.2024 12:30:37"		
 		And "CostList" table became equal
-			| 'Amount'  | 'Amount tax' |
-			| '-100,00' | '-20,00'     |				
+			| 'Amount'  |
+			| '-100,00' |				
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -236,8 +228,6 @@ Scenario: _0851004 create Expense accruals (without PI, Reverse)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -318,8 +308,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I select current line in "ExpenseValueTable" table
 		Then the form attribute named "Basis" became equal to "Purchase invoice 171 dated 30.04.2024 12:55:27"		
 		And "CostList" table became equal
-			| 'Amount'   | 'Amount tax' |
-			| '3 000,00' | '540,00'     |				
+			| 'Amount'   |
+			| '3 000,00' |			
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -327,8 +317,6 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "1000,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "180,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -375,8 +363,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I select current line in "ExpenseValueTable" table
 		Then the form attribute named "Basis" became equal to "Purchase invoice 171 dated 30.04.2024 12:55:27"		
 		And "CostList" table became equal
-			| 'Amount'   | 'Amount tax' |
-			| '2 000,00' | '360,00'     |
+			| 'Amount'   |
+			| '2 000,00' |
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Expense" from "Expense type" drop-down list by string in "CostList" table
@@ -384,8 +372,6 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "1000,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "180,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -436,8 +422,6 @@ Scenario: _0851007 create Revenue accruals (without SI and empty basis)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And in the table "CostList" I click the button named "CostListAdd"
 		And I select "Revenue" from "Revenue type" drop-down list by string in "CostList" table
@@ -445,8 +429,6 @@ Scenario: _0851007 create Revenue accruals (without SI and empty basis)
 		And I select "Distribution department" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "80,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "16,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 	* Check currency rate (from basis)
@@ -492,8 +474,8 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		And I select current line in "RevenueValueTable" table
 		Then the form attribute named "Basis" became equal to "Revenue accrual 172 dated 01.05.2024 18:43:16"		
 		And "CostList" table became equal
-			| 'Amount'  | 'Amount tax' |
-			| '-180,00' | '-36,00'     |				
+			| 'Amount'  |
+			| '-180,00' |			
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Software" from "Revenue type" drop-down list by string in "CostList" table
@@ -501,8 +483,6 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And in the table "CostList" I click the button named "CostListAdd"
 		And I select "Fuel" from "Revenue type" drop-down list by string in "CostList" table
@@ -510,8 +490,6 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		And I select "Distribution department" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-80,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-16,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -564,8 +542,8 @@ Scenario: _0851009 create Revenue accruals (without SI, Reverse)
 		And I select current line in "RevenueValueTable" table
 		Then the form attribute named "Basis" became equal to "Revenue accrual 171 dated 01.05.2024 18:35:11"		
 		And "CostList" table became equal
-			| 'Amount'  | 'Amount tax' |
-			| '-100,00' | '-20,00'     |				
+			| 'Amount'  |
+			| '-100,00' |				
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Software" from "Revenue type" drop-down list by string in "CostList" table
@@ -573,8 +551,6 @@ Scenario: _0851009 create Revenue accruals (without SI, Reverse)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "-100,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "-20,00" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -655,8 +631,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I select current line in "RevenueValueTable" table
 		Then the form attribute named "Basis" became equal to "Sales invoice 171 dated 30.04.2024 13:36:19"		
 		And "CostList" table became equal
-			| 'Amount'   | 'Amount tax' |
-			| '847,46'   | '152,54'     |				
+			| 'Amount'   |
+			| '847,46'   |				
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Revenue" from "Revenue type" drop-down list by string in "CostList" table
@@ -664,8 +640,6 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I select "Front office" from "Profit loss center" drop-down list by string in "CostList" table
 		And I activate field named "CostListAmount" in "CostList" table
 		And I input "500,00" text in the field named "CostListAmount" of "CostList" table
-		And I activate "Amount tax" field in "CostList" table
-		And I input "76,27" text in "Amount tax" field of "CostList" table
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
@@ -712,8 +686,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I select current line in "RevenueValueTable" table
 		Then the form attribute named "Basis" became equal to "Sales invoice 171 dated 30.04.2024 13:36:19"		
 		And "CostList" table became equal
-			| 'Amount'   | 'Amount tax' |
-			| '347,46'   | '76,27'      |
+			| 'Amount'   |
+			| '347,46'   |
 	* Filling in the tabular part
 		And I select current line in "CostList" table
 		And I select "Revenue" from "Revenue type" drop-down list by string in "CostList" table

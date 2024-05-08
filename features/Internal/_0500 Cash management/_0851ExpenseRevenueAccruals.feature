@@ -170,13 +170,11 @@ Scenario: _0851003 create Expense accruals (without PI, Void)
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
-		And I move to "Currencies (4)" tab
+		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'  | 'Is fixed' |
-			| 'TRY'           | '0,181200' | '5,518764'     | 'No'                | '1'            | 'Reporting currency' | '-18,12'  | 'Yes'      |
-			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-100,00' | 'No'       |
-			| 'TRY'           | '0,181200' | '5,518764'     | 'No'                | '1'            | 'Reporting currency' | '-14,50'  | 'Yes'      |
-			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-80,00'  | 'No'       |
+			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-180,00' | 'No'       |
+			| 'TRY'           | '0,181200' | '5,518764'     | 'No'                | '1'            | 'Reporting currency' | '-32,62'  | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberExpenseAccruals2$$" variable
 		And I delete "$$ExpenseAccruals2$$" variable
@@ -234,8 +232,8 @@ Scenario: _0851004 create Expense accruals (without PI, Reverse)
 		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'  | 'Is fixed' |
-			| 'TRY'           | '0,191200' | '5,230126'     | 'No'                | '1'            | 'Reporting currency' | '-19,12'  | 'Yes'      |
 			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-100,00' | 'No'       |		
+			| 'TRY'           | '0,191200' | '5,230126'     | 'No'                | '1'            | 'Reporting currency' | '-19,12'  | 'No'       |	
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberExpenseAccruals3$$" variable
 		And I delete "$$ExpenseAccruals3$$" variable

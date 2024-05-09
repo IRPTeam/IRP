@@ -269,6 +269,28 @@ Scenario: _042505 check Retail return receipt movements by the Register  "R4010 
 			| ''                                                        | 'Receipt'       | '20.05.2022 18:28:10'   | '10'          | 'Store 01'     | 'UNIQ'       | ''                     |
 		And I close all client application windows
 
+Scenario: _042506 check Retail return receipt movements by the Register  "R4050 Stock inventory"
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '201'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Document registrations records'                      | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'                   | ''            | ''                    | ''          | ''             | ''         | ''          |
+			| ''                                                    | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
+			| ''                                                    | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
+			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '1'         | 'Main Company' | 'Store 01' | 'XS/Blue'   |
+			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '2'         | 'Main Company' | 'Store 01' | '38/Yellow' |
+			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '12'        | 'Main Company' | 'Store 01' | '36/18SD'   |		
+		And I close all client application windows
+
 Scenario: _042508 check Retail return receipt movements by the Register  "R2021 Customer transactions"
 	* Select Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -627,7 +649,23 @@ Scenario: _042524 check Retail return receipt movements by the Register  "R4014 
 			| ''                                                      | 'Receipt'     | '14.11.2022 13:57:09' | '2'         | 'Main Company' | 'Shop 01' | ''      | 'UNIQ'     | '0514'              |		
 		And I close all client application windows
 
-
+Scenario: _042525 check Retail sales receipt absence movements by the Register  "R4050 Stock inventory" (consignor and own stocks) 
+		And I close all client application windows
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 113'     |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 1 113 dated 14.11.2022 13:57:09' | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                     | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| ''                                                      | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                                      | '14.11.2022 13:57:09' | 'Receipt'    | 'Main Company' | 'Store 02' | 'XS/Blue'  | '2'        |	
+		And I close all client application windows
 
 Scenario: _042527 check Retail return receipt movements by the Register  "R8014 Consignor sales" (consignor and own stocks)
 		And I close all client application windows

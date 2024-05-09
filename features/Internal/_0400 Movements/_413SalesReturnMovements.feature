@@ -1072,3 +1072,21 @@ Scenario: _041339 check Sales return movements by the Register  "R5021 Revenues"
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R5021 Revenues"'    |
 		And I close all client application windows
+
+Scenario: _041340 check Sales return movements by the Register  "R4050 Stock inventory" (consignor and own stock)
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '193'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |		
+		And I close all client application windows	

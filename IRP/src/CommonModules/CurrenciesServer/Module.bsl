@@ -766,18 +766,18 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 		EndIf;
 		
 		// rates from basis document
-		If ValueIsFilled(Parameters.Ref) Then
+		If Parameters.Property("DocObject") Then
 			
-			DocMetadata = Parameters.Ref.Metadata();
+			DocMetadata = Parameters.DocObject.Metadata();
 			If (DocMetadata = Metadata.Documents.ExpenseAccruals 
 				Or DocMetadata = Metadata.Documents.RevenueAccruals)
-				And ValueIsFilled(Parameters.Ref.Basis) Then
+				And ValueIsFilled(Parameters.DocObject.Basis) Then
 				
 				Filter = New Structure();
 				Filter.Insert("CurrencyFrom" , NewRow.CurrencyFrom);
 				Filter.Insert("MovementType" , NewRow.MovementType);
 			
-				RowsBasisDocumentRates = Parameters.Ref.Basis.Currencies.FindRows(Filter);
+				RowsBasisDocumentRates = Parameters.DocObject.Basis.Currencies.FindRows(Filter);
 				If RowsBasisDocumentRates.Count() Then
 					UseBasisDocumentRates = True;				
 					NewRow.Rate         = RowsBasisDocumentRates[0].Rate;

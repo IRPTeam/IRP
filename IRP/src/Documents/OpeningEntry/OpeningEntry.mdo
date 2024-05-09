@@ -427,13 +427,14 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -558,13 +559,14 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Agreement</value>
+        <value>Partner term</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

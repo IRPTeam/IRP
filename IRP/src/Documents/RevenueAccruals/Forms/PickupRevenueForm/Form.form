@@ -166,56 +166,6 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-      <name>ExpenseValueTableTaxAmount</name>
-      <id>32</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>RevenueValueTable.TaxAmount</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>ExpenseValueTableTaxAmountExtendedTooltip</name>
-        <id>34</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>ExpenseValueTableTaxAmountContextMenu</name>
-        <id>33</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
     <autoCommandBar>
       <name>RevenueValueTableCommandBar</name>
       <id>2</id>
@@ -228,7 +178,7 @@
     </autoCommandBar>
     <handlers>
       <event>Selection</event>
-      <name>ExpenseValueTableSelection</name>
+      <name>RevenueValueTableSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -470,40 +420,6 @@
         <value>Amount</value>
       </title>
       <id>6</id>
-      <valueType>
-        <types>DefinedType.typeAmount</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Use</name>
-      <title>
-        <key>en</key>
-        <value>Use</value>
-      </title>
-      <id>7</id>
-      <valueType>
-        <types>Boolean</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>TaxAmount</name>
-      <title>
-        <key>en</key>
-        <value>Tax amount</value>
-      </title>
-      <id>11</id>
       <valueType>
         <types>DefinedType.typeAmount</types>
       </valueType>

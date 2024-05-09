@@ -73,10 +73,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.ExpenseAccruals</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.SalesReturn</metadata>
     <use>Use</use>
   </content>
@@ -241,10 +237,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.RevenueAccruals</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.RetailSalesReceipt</metadata>
     <use>Use</use>
   </content>
@@ -358,6 +350,14 @@
   </content>
   <content>
     <metadata>Document.FixedAssetTransfer</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ExpenseAccruals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.RevenueAccruals</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

@@ -63,6 +63,8 @@ Scenario: _099100 preparation
 		When Create catalog Taxes objects (test data base)
 		When Create catalog SerialLotNumbers objects (test data base)
 		When Create information register Taxes records (test data base)
+		When Create document ExpenseAccruals objects (test data base)
+		When Create document RevenueAccruals objects (test data base)
 		* Tax settings
 			Given I open hyperlink "e1cib/list/Catalog.Companies"
 			And I go to line in "List" table
@@ -240,6 +242,9 @@ Scenario: _0991002 filling accounting operation
 		| 'Document_DepreciationCalculation'                                                                           | 'Depreciation calculation'                                                                                       |
 		| 'Document_Payroll'                                                                                           | 'Payroll'                                                                                                        |
 		| 'Document_DebitCreditNote'                                                                                   | 'Debit/Credit note'                                                                                              |
+		| 'Document_ExpenseAccruals'                                                                                   | 'Expense accruals'                                                                                               |
+		| 'Document_RevenueAccruals'                                                                                   | 'Revenue accruals'                                                                                               |
+		| 'Document_EmployeeCashAdvance'                                                                               | 'Employee cash advance'                                                                                          |
 		| 'BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'BankPayment DR (R1020B_AdvancesToVendors R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
 		| 'BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                      | 'BankPayment DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                      |
 		| 'BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand'              | 'BankPayment DR (R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions) CR (R3010B_CashOnHand)'              |
@@ -319,7 +324,12 @@ Scenario: _0991002 filling accounting operation
 		| 'DebitCreditNote_R5020B_PartnersBalance'                                                                     | 'DebitCreditNote (R5020B_PartnersBalance)'                                                                       |
 		| 'DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset'                     | 'DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)'                   |
 		| 'DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset'                           | 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)'                         |
-	
+		| 'ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses'                                          | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)'                                          |
+		| 'ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses'                                          | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)'                                          |
+		| 'RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues'                                          | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)'                                          |
+		| 'RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues'                                          | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)'                                          |
+		| 'EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance'                                       | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'                                       |
+		| 'EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance'                            | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'                            |
 		
 	And I close all client application windows
 		
@@ -2488,6 +2498,248 @@ Scenario: _0991150 check Retail sales receipt accounting movements
 			| 'Debit' | 'Item'               | 'Business unit'   | 'Expense and revenue type'   | 'Credit' | 'Item key'   | 'Operation'                                                          |
 			| '420.1' | 'Item with item key' | 'Business unit 3' | 'Purchase of goods for sale' | '3540'   | 'XS/Color 2' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' |		
 	And I close all client application windows
+
+Scenario: _0991160 check Employee cash advance accounting movements (with PI)
+	And I close all client application windows
+	* Select EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'    | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                           |
+			| '420.2' | 'Employee 1' | 'Business unit 1' | 'Other expence'            | '4020.1' | ''  | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'            |
+			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Business unit 1'          | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'      | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '22.03.2024 11:52:17' | '5201'       | '1' | '200,00' | ''              | 'Yes'      | 'TRY'             | 'Vendor 4 (1 partner term)' | '200'          | 'Vendor 4 (partner term) ' | ''                | 'Business unit 1'     | 'TRY'            | '4020.1'     | 'Employee 1'       | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' | 'Business unit 1'     | '200'           | ''                    |
+		And I close all client application windows
+
+Scenario: _0991161 check Employee cash advance accounting movements (without PI)
+	And I close all client application windows
+	* Select EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'    | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                           |
+			| '420.2' | 'Employee 1' | 'Business unit 1' | 'Other expence'            | '4020.1' | ''  | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'            |
+			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Business unit 1'          | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '01.07.2023 00:00:00' | '420.2'      | '1' | '1 000,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '1 000'        | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '4020.1'     | 'Employee 1'       | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)' | 'Business unit 1'     | '1 000'         | ''                    |
+		And I close all client application windows
+
+Scenario: _0991170 check Expense accruals accounting movements (without basis)
+	And I close all client application windows
+	* Select ExpenseAccruals
+		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '30.01.2024 00:00:00' | '420.5'      | '1' | '32 704,90' | ''              | 'Yes'      | 'EUR'             | ''                | '1 000'        | 'Business unit 1'     | ''                | 'Rent'                | 'EUR'            | '970.1'      | ''                 | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' | ''                    | '1 000'         | ''                    |
+		And I close all client application windows
+
+Scenario: _0991171 check Expense accruals accounting movements (basis - Expense accrual, Void)
+	And I close all client application windows
+	* Select ExpenseAccruals
+		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'     | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '01.02.2024 12:00:00' | '420.5'      | '1' | '-32 704,90' | ''              | 'Yes'      | 'EUR'             | ''                | '-1 000'       | 'Business unit 1'     | ''                | 'Rent'                | 'EUR'            | '970.1'      | ''                 | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' | ''                    | '-1 000'        | ''                    |		
+		And I close all client application windows
+
+Scenario: _0991172 check Expense accruals accounting movements (basis - Expense accrual, Reverse)
+	And I close all client application windows
+	* Select ExpenseAccruals
+		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | ' ' | 'Credit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Operation'                                                             |
+			| '970.1' | ''  | '420.5'  | ''        | 'Business unit 1' | 'Rent'                     | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)' |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '01.03.2024 12:00:00' | '970.1'      | '1' | '35 975,39' | ''              | 'Yes'      | 'EUR'             | ''                | '1 100'        | ''                    | ''                | ''                    | 'EUR'            | '420.5'      | ''                 | 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)' | 'Business unit 1'     | '1 100'         | 'Rent'                |
+		Then the form attribute named "Basis" became equal to "Expense accrual 4 dated 01.03.2024 12:00:00"
+		Then the form attribute named "Company" became equal to "Own company 2"
+		Then the form attribute named "LedgerType" became equal to "Basic LTV"						
+		And I close all client application windows
+
+Scenario: _0991173 check Expense accruals accounting movements (basis - Purchase invoice)
+	And I close all client application windows
+	* Select ExpenseAccruals
+		Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner' | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
+			| '420.5' | ''        | 'Business unit 1' | 'Rent'                     | '970.1'  | ''  | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' |	
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '28.02.2024 12:00:00' | '420.5'      | '1' | '2 500,00' | ''              | 'Yes'      | 'TRY'             | ''                | '2 500'        | 'Business unit 1'     | ''                | 'Rent'                | 'TRY'            | '970.1'      | ''                 | 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)' | ''                    | '2 500'         | ''                    |	
+		Then the form attribute named "Company" became equal to "Own company 2"
+		Then the form attribute named "LedgerType" became equal to "Basic LTV"						
+		And I close all client application windows
+
+Scenario: _0991174 check Revenue accruals accounting movements (without basis)
+	And I close all client application windows
+	* Select RevenueAccruals
+		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Company'       | 'Operation'                                                             |
+			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |	
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '30.01.2024 12:00:00' | '980.1'      | '1' | '1 000,00' | ''              | 'Yes'      | 'TRY'             | ''                | '1 000'        | ''                    | ''                | ''                    | 'TRY'            | '9100'       | 'Business unit 1'  | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' | 'Own company 2'       | '1 000'         | ''                    |
+		And I close all client application windows
+
+Scenario: _0991175 check Revenue accruals accounting movements (basis - Revenue accrual, Reverse)
+	And I close all client application windows
+	* Select RevenueAccruals
+		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Business unit'   | 'Company'       | ' ' | 'Credit' | 'Operation'                                                             |
+			| '9100'  | 'Business unit 1' | 'Own company 2' | ''  | '980.1'  | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '01.02.2024 12:00:00' | '9100'       | '1' | '1 000,00' | ''              | 'Yes'      | 'TRY'             | 'Business unit 1' | '1 000'        | 'Own company 2'       | ''                | ''                    | 'TRY'            | '980.1'      | ''                 | 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)' | ''                    | '1 000'         | ''                    |
+		And I close all client application windows
+
+Scenario: _0991176 check Revenue accruals accounting movements (basis - Revenue accrual, Void)
+	And I close all client application windows
+	* Select RevenueAccruals
+		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | ' ' | 'Credit' | 'Business unit'   | 'Company'       | 'Operation'                                                             |
+			| '980.1' | ''  | '9100'   | 'Business unit 1' | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '01.03.2024 12:00:00' | '980.1'      | '1' | '-1 000,00' | ''              | 'Yes'      | 'TRY'             | ''                | '-1 000'       | ''                    | ''                | ''                    | 'TRY'            | '9100'       | 'Business unit 1'  | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' | 'Own company 2'       | '-1 000'        | ''                    |
+		Then the form attribute named "Basis" became equal to "Revenue accrual 4 dated 01.03.2024 12:00:00"
+		Then the form attribute named "Company" became equal to "Own company 2"
+		Then the form attribute named "LedgerType" became equal to "Basic LTV"						
+		And I close all client application windows
+
+Scenario: _0991177 check Revenue accruals accounting movements (basis - Sales invoice)
+	And I close all client application windows
+	* Select RevenueAccruals
+		Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
+		And I go to line in "List" table
+			| 'Number' |
+			| '5'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "CostList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | ' ' | 'Credit' | 'Business unit' | 'Company'       | 'Operation'                                                             |
+			| '980.1' | ''  | '9100'   | ''              | 'Own company 2' | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' |
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '28.02.2024 12:00:00' | '980.1'      | '1' | '2 500,00' | ''              | 'Yes'      | 'TRY'             | ''                | '2 500'        | ''                    | ''                | ''                    | 'TRY'            | '9100'       | ''                 | 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)' | 'Own company 2'       | '2 500'         | ''                    |		
+		Then the form attribute named "Company" became equal to "Own company 2"
+		Then the form attribute named "LedgerType" became equal to "Basic LTV"						
+		And I close all client application windows
 
 Scenario: _0991190 check Money transfer accounting movements (Currency exchange)
 	And I close all client application windows

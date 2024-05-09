@@ -61,6 +61,44 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="4fe0c3c7-a2bc-4d2a-b713-080e965fd8ab">
+    <name>AccountOtherPeriodsExpense</name>
+    <synonym>
+      <key>en</key>
+      <value>Account (other periods expense)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="2a2c0786-46c1-439d-8d11-d397be0e970c">
+    <name>AccountOtherPeriodsRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Account (other periods revenue)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.LedgerTypeVariant</name>
+      <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+    </choiceParameterLinks>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="b923400a-6f16-4fe0-a61e-d9ba57fc9002">
     <name>Company</name>
     <synonym>
@@ -154,6 +192,38 @@
     <synonym>
       <key>en</key>
       <value>Revenue</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="762f6375-e166-4d30-b59b-a18310654415">
+    <name>OtherPeriodsExpense</name>
+    <synonym>
+      <key>en</key>
+      <value>Other periods expense</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="bfcc4cd9-7ca3-4ed9-9014-1679730e8410">
+    <name>OtherPeriodsRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Other periods revenue</value>
     </synonym>
     <type>
       <types>Boolean</types>

@@ -52,6 +52,12 @@ Procedure FillCheckProcessing_Catalog_ItemTypes(Cancel, Object) Export
 		Return;
 	EndIf;
 	
+	If Object.Type = Object.Ref.Type 
+		And Object.UseSerialLotNumber = Object.Ref.UseSerialLotNumber
+		And Object.StockBalanceDetail = Object.Ref.StockBalanceDetail Then
+		Return;
+	EndIf;
+	
 	RegIsFilled = R4010B_ActualStocs_R4050B_StockInventory_IsFilled(Object.Ref);
 	
 	If Object.Type <> Object.Ref.Type And RegIsFilled Then

@@ -464,11 +464,7 @@ Function AdvancesToVendors()
 		|	OpeningEntryAdvanceToSuppliers.Partner,
 		|	OpeningEntryAdvanceToSuppliers.LegalName,
 		|	OpeningEntryAdvanceToSuppliers.LegalNameContract,
-		|	case
-		|		when OpeningEntryAdvanceToSuppliers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then OpeningEntryAdvanceToSuppliers.Agreement
-		|		else Undefined
-		|	end AS Agreement,
+		|	OpeningEntryAdvanceToSuppliers.Agreement AS Agreement,
 		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
 		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
 		|	OpeningEntryAdvanceToSuppliers.Key,
@@ -563,11 +559,7 @@ Function AdvancesFromCustomers()
 		|	OpeningEntryAdvanceFromCustomers.Partner,
 		|	OpeningEntryAdvanceFromCustomers.LegalName,
 		|	OpeningEntryAdvanceFromCustomers.LegalNameContract,
-		|	case
-		|		when OpeningEntryAdvanceFromCustomers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then OpeningEntryAdvanceFromCustomers.Agreement
-		|		else Undefined
-		|	end AS Agreement,
+		|	OpeningEntryAdvanceFromCustomers.Agreement AS Agreement,
 		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
 		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
 		|	OpeningEntryAdvanceFromCustomers.Key,

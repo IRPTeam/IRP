@@ -416,8 +416,22 @@ Scenario: _029208 create SI based on Work order (without SO)
 		And I close all client application windows				
 						
 				
-
-				
+Scenario: _029209 create Work order closing
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
+	And I click the button named "FormCreate"			
+	And I select from the drop-down list named "Company" by "Main Company" string
+	And I select from the drop-down list named "Branch" by "Distribution department" string
+	And I click "Post" button
+	And I delete "$$NumberWorkOrderClosing$$" variable
+	And I save the value of "Number" field as "$$NumberWorkOrderClosing$$"
+	And I click the button named "FormPostAndClose"
+* Check document creation
+	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
+	And "List" table contains lines
+		| 'Number'                     | 'Company'      |
+		| '$$NumberWorkOrderClosing$$' | 'Main Company' |
+	And I close all client application windows				
 				
 						
 							

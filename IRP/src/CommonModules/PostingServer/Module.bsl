@@ -330,22 +330,22 @@ Procedure UpdateCosts(DocObject, RecordMeta, TableForLoad, RegisteredRecords)
 		R6020B_BatchBalance = AccumulationRegisters.R6020B_BatchBalance.BatchBalance_CollectRecords(DocObject);
 		R6020B_BatchBalance_RecordSet.Load(R6020B_BatchBalance);
 				
-		Data = New Structure;
-		Data.Insert("RecordSet", R6020B_BatchBalance_RecordSet);
-		Data.Insert("WriteInTransaction", True);
-		Data.Insert("Metadata", R6020B_BatchBalance_RecordSet.Metadata());
-		RegisteredRecords.Insert(R6020B_BatchBalance_RecordSet.Metadata(), Data);
+		Data1 = New Structure;
+		Data1.Insert("RecordSet", R6020B_BatchBalance_RecordSet);
+		Data1.Insert("WriteInTransaction", True);
+		Data1.Insert("Metadata", R6020B_BatchBalance_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6020B_BatchBalance_RecordSet.Metadata(), Data1);
 		
 		R6060T_CostOfGoodsSold_RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
 		R6060T_CostOfGoodsSold_RecordSet.Filter.Recorder.Set(DocObject.Ref);
 		R6060T_CostOfGoodsSold = AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_CollectRecords(DocObject);
 		R6060T_CostOfGoodsSold_RecordSet.Load(R6060T_CostOfGoodsSold);
 		
-		Data = New Structure;
-		Data.Insert("RecordSet", R6060T_CostOfGoodsSold_RecordSet);
-		Data.Insert("WriteInTransaction", True);
-		Data.Insert("Metadata", R6060T_CostOfGoodsSold_RecordSet.Metadata());
-		RegisteredRecords.Insert(R6060T_CostOfGoodsSold_RecordSet.Metadata(), Data);
+		Data2 = New Structure;
+		Data2.Insert("RecordSet", R6060T_CostOfGoodsSold_RecordSet);
+		Data2.Insert("WriteInTransaction", True);
+		Data2.Insert("Metadata", R6060T_CostOfGoodsSold_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6060T_CostOfGoodsSold_RecordSet.Metadata(), Data2);
 		
 		TableForLoadEmpty = CommonFunctionsServer.CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 		For Each Row In TableForLoad Do

@@ -321,8 +321,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'   | 'Is fixed' |
-			| 'TRY'           | '0,251710' | '3,972826'     | 'No'                | '1'            | 'Reporting currency' | '251,71'   | 'Yes'      |
 			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '1 000,00' | 'No'       |			
+			| 'TRY'           | '0,251710' | '3,972826'     | 'No'                | '1'            | 'Reporting currency' | '251,71'   | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberExpenseAccruals4$$" variable
 		And I delete "$$ExpenseAccruals4$$" variable
@@ -376,8 +376,8 @@ Scenario: _0851006 create Expense accruals (other period expense)
 		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'   | 'Is fixed' |
-			| 'TRY'           | '0,251710' | '3,972826'     | 'No'                | '1'            | 'Reporting currency' | '251,71'   | 'Yes'      |
-			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '1 000,00' | 'No'       |			
+			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '1 000,00' | 'No'       |	
+			| 'TRY'           | '0,251710' | '3,972826'     | 'No'                | '1'            | 'Reporting currency' | '251,71'   | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberExpenseAccruals5$$" variable
 		And I delete "$$ExpenseAccruals5$$" variable
@@ -491,13 +491,11 @@ Scenario: _0851008 create Revenue accruals (without SI, Void)
 		And I finish line editing in "CostList" table
 		And I click the button named "FormPost"
 		And I click "Show hidden tables" button
-		And I move to "Currencies (4)" tab
+		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'  | 'Is fixed' |
-			| 'TRY'           | '0,191200' | '5,230126'     | 'No'                | '1'            | 'Reporting currency' | '-19,12'  | 'Yes'      |
-			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-100,00' | 'No'       |
-			| 'TRY'           | '0,191200' | '5,230126'     | 'No'                | '1'            | 'Reporting currency' | '-15,30'  | 'Yes'      |
-			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-80,00'  | 'No'       |	
+			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '-180,00' | 'No'       |
+			| 'TRY'           | '0,191200' | '5,230126'     | 'No'                | '1'            | 'Reporting currency' | '-34,42'  | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberRevenueAccruals2$$" variable
 		And I delete "$$RevenueAccruals2$$" variable
@@ -644,8 +642,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'   | 'Is fixed' |
-			| 'TRY'           | '0,312100' | '3,204101'     | 'No'                | '1'            | 'Reporting currency' | '156,05'   | 'Yes'      |
 			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '500,00'   | 'No'       |			
+			| 'TRY'           | '0,312100' | '3,204101'     | 'No'                | '1'            | 'Reporting currency' | '156,05'   | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberRevenueAccruals4$$" variable
 		And I delete "$$RevenueAccruals4$$" variable
@@ -696,8 +694,8 @@ Scenario: _0851011 create Revenue accruals (other period expense)
 		And I move to "Currencies (2)" tab
 		And "Currencies" table became equal
 			| 'Currency from' | 'Rate'     | 'Reverse rate' | 'Show reverse rate' | 'Multiplicity' | 'Movement type'      | 'Amount'   | 'Is fixed' |
-			| 'TRY'           | '0,312100' | '3,204101'     | 'No'                | '1'            | 'Reporting currency' | '108,44'   | 'Yes'      |
 			| 'TRY'           | '1,000000' | '1,000000'     | 'No'                | '1'            | 'Local currency'     | '347,46'   | 'No'       |			
+			| 'TRY'           | '0,312100' | '3,204101'     | 'No'                | '1'            | 'Reporting currency' | '108,44'   | 'No'       |
 		And I close "Edit hidden tables" window
 		And I delete "$$NumberRevenueAccruals5$$" variable
 		And I delete "$$RevenueAccruals5$$" variable

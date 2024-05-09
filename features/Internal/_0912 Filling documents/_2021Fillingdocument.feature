@@ -1844,6 +1844,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
 				| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
 			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And "List" table contains lines
 				| 'Number'                            | 'Amount'       |
 				| '$$NumberPurchaseOrder0154101$$'    | '1 962,60'     |

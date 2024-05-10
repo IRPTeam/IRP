@@ -203,7 +203,9 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
 			RegisterName = Row.Value.Metadata.Name;
+			try
 			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			except endtry;
 		EndIf;
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		// MD5
@@ -1613,10 +1615,17 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			Else
 				
 				Parts = StrSplit(Doc.RegName, ".");
-				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				RegisterFullName = Parts[0] + "s." + Parts[1];
+				CreateRecordSet = Eval(RegisterFullName + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
 				//@skip-check unknown-method-property
-				CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
-				NewMovement.FillValues(Doc.Ref, "Recorder");
+				If AccountingServer.IsAccountingAnalyticsRegister(RegisterFullName) Then
+					CreateRecordSet.Filter.Document.Set(Doc.Ref);
+					NewMovement.FillValues(Doc.Ref, "Document");
+				Else
+					CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
+					NewMovement.FillValues(Doc.Ref, "Recorder");
+				EndIf;
+				
 				CreateRecordSet.Load(NewMovement);
 				CreateRecordSet.Write(True);
 			EndIf;
@@ -1659,3 +1668,4 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 EndFunction
 
 #EndRegion
+

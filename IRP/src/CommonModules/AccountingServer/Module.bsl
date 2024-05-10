@@ -2329,3 +2329,166 @@ EndProcedure
 
 #EndRegion
 
+#Region FixDocumentProblems
+
+Function IsAccountingAnalyticsRegister(RegisterName) Export
+	Return Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9050S_AccountingRowAnalytics.FullName())
+		Or Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9051S_AccountingExtDimensions.FullName());
+EndFunction
+
+Function GetCurrentAnalyticsRegisterRecord(Doc, RegisterName) Export
+	If Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9050S_AccountingRowAnalytics.FullName()) Then
+		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+		SortColumns = "Document, Key, Operation, LedgerType, AccountDebit, AccountCredit, IsFixed";
+	ElsIf Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9051S_AccountingExtDimensions.FullName()) Then
+		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+		SortColumns = "Document, Key, Operation, LedgerType, AnalyticType, ExtDimensionType, ExtDimension";
+	Else
+		Raise StrTemplate("Unsupported reister name [%1]", RegisterName);
+	EndIf;
+	
+	RecordSet.Filter.Document.Set(Doc);
+	RecordSet.Read();
+	Records = RecordSet.Unload();
+	Records.Sort(SortColumns);
+	
+	Return Records;
+EndFunction
+
+Function RegisterRecords(Doc)
+
+	// T9050S_AccountingRowAnalytics
+	RecordSet_T9050S = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+	RecordSet_T9050S.Filter.Document.Set(Doc);
+	RecordSet_T9050S.Read();
+	Old_AccountingRowAnalytics = RecordSet_T9050S.Unload();
+	New_AccountingRowAnalytics = Old_AccountingRowAnalytics.Copy();
+			
+	// T9051S_AccountingExtDimensions
+	RecordSet_T9051S = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+	RecordSet_T9051S.Filter.Document.Set(Doc);
+	RecordSet_T9051S.Read();
+	Old_AccountingExtDimensions = RecordSet_T9051S.Unload();
+	New_AccountingExtDimensions = Old_AccountingExtDimensions.Copy();
+		
+	New_AccountingRowAnalytics = Old_AccountingRowAnalytics.Copy();
+	New_AccountingExtDimensions = Old_AccountingExtDimensions.Copy();
+	
+	AccountingClientServer.UpdateAccountingTables(Doc, New_AccountingRowAnalytics, New_AccountingExtDimensions, 
+		AccountingClientServer.GetDocumentMainTable(Doc));
+		
+	IgnoredColumns = "UUID";
+	
+	SortColumns_AccountingRowAnalytics = "Document, Key, Operation, LedgerType, AccountDebit, AccountCredit, IsFixed";
+	SortColumns_AccountingExtDimensions = "Document, Key, Operation, LedgerType, AnalyticType, ExtDimensionType, ExtDimension";
+	
+	Old_AccountingRowAnalytics.Sort(SortColumns_AccountingRowAnalytics);
+	New_AccountingRowAnalytics.Sort(SortColumns_AccountingRowAnalytics);
+	
+	Old_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
+	New_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
+	
+	RegisterRecords = New Map();
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingRowAnalytics, New_AccountingRowAnalytics, IgnoredColumns) Then
+		RegisterRecords.Insert(RecordSet_T9050S.Metadata(), New_AccountingRowAnalytics);	
+	EndIf;
+	
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingExtDimensions, New_AccountingExtDimensions, IgnoredColumns) Then
+		RegisterRecords.Insert(RecordSet_T9051S.Metadata(), New_AccountingExtDimensions);	
+	EndIf;
+	
+	Return RegisterRecords;
+EndFunction
+
+Function CheckDocumentArray_AccountingAnalytics(DocumentArray, isJob = False) Export
+	Errors = New Array;
+	
+	If isJob And DocumentArray.Count() = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Empty doc list: " + DocumentArray.Count();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	If Not Metadata.DefinedTypes.typeAccountingDocuments.Type.ContainsType(TypeOf(DocumentArray[0])) Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Document type: " + DocumentArray[0].Metadata().Name + " not supported document type.";
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+		Return Errors;
+	EndIf;
+
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.Log = "Start check: " + DocumentArray.Count();
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Count = 0; 
+	LastPercentLogged = 0;
+	StartDate = CurrentUniversalDateInMilliseconds();
+	For Each Doc In DocumentArray Do
+		BeginTransaction();
+		
+		DocObject = Doc;
+		Try
+			RegisteredRecords = RegisterRecords(Doc);
+			
+			If RegisteredRecords.Count() > 0 Then
+				Result = New Structure;
+				Result.Insert("Ref", Doc);
+				Result.Insert("RegInfo", New Array);
+				Result.Insert("Error", "");
+				For Each Reg In RegisteredRecords Do
+					RegInfo = New Structure;
+					RegInfo.Insert("RegName", Reg.Key.FullName());
+					RegInfo.Insert("NewPostingData", Reg.Value);
+					Result.RegInfo.Add(RegInfo);
+				EndDo;
+				
+				Errors.Add(Result);
+			EndIf;
+		Except
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			Msg.Log = "Error: " + DocObject + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			BackgroundJobAPIServer.NotifyStream(Msg);
+			
+			Result = New Structure;
+			Result.Insert("Ref", Doc);
+			Result.Insert("RegInfo", New Array);
+			Result.Insert("Error", Msg.Log);
+			Errors.Add(Result);
+		EndTry;
+		
+		RollbackTransaction();
+		
+		Count = Count + 1;
+		
+		Percent = 100 * Count / DocumentArray.Count();
+		If isJob And (Percent - LastPercentLogged >= 1) Then  
+			LastPercentLogged = Int(Percent);
+			Msg = BackgroundJobAPIServer.NotifySettings();
+			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
+			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			Msg.Percent = Percent;
+			BackgroundJobAPIServer.NotifyStream(Msg);
+		EndIf;
+
+	EndDo;
+	
+	If isJob Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Msg.End = True;
+		Msg.DataAddress = CommonFunctionsServer.PutToCache(Errors);
+		BackgroundJobAPIServer.NotifyStream(Msg);
+	EndIf;
+	
+	Return Errors;
+EndFunction
+
+#EndRegion
+
+

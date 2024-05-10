@@ -1,4 +1,9 @@
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ThisObject.Company.Add(Catalogs.Companies.FindByCode(85));	
+EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	OnlyPosted = True;
@@ -327,20 +332,28 @@ EndProcedure
 &AtClient
 Procedure CheckPosting(Command)
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("PostingServer.CheckDocumentArray");
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;
 EndProcedure
 
+&AtClient
+Procedure CheckAccountingAnalytics(Command)
+	PostingInfo.GetItems().Clear();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics");
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
+EndProcedure
+
 &AtServer
-Function GetJobsForCheckPostingDocuments()
+Function GetJobsForCheckPostingDocuments(ProcedurePath)
 	
 	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
 	TypesTable.GroupBy("DocumentType");
 	
 	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
 	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
-	JobDataSettings.ProcedurePath = "PostingServer.CheckDocumentArray";
+	JobDataSettings.ProcedurePath = ProcedurePath;
 	JobDataSettings.CallbackWhenAllJobsDone = False;
 					
 	DocsInPack = 100;
@@ -400,9 +413,9 @@ Procedure FillRegInfoInRow(TreeRow, RegInfoArray, Parent = Undefined)
 	SkipRegFilled = SkipCheckRegisters.Count() > 0;
 	For Each DocRow In RegInfoArray Do
 			
-			If DocRow.RegInfo.Count() = 0 Then
-				Continue;
-			EndIf;
+			//If DocRow.RegInfo.Count() = 0 Then
+			//	Continue;
+			//EndIf;
 			
 			ParentRow = ?(Parent = Undefined, TreeRow.Add(), Parent);
 			ParentRow.Ref = DocRow.Ref;
@@ -565,7 +578,12 @@ EndProcedure
 
 &AtServer
 Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)	
-	ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
+	If AccountingServer.IsAccountingAnalyticsRegister(CurrentRegName) Then
+		ValueTable = AccountingServer.GetCurrentAnalyticsRegisterRecord(Ref, CurrentRegName);
+	Else 
+		ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
+	EndIf;
+	
 	CurrentMovement.Load(ValueTable);
 	NewMovement.Load(NewMovementStorage.Get());
 EndProcedure

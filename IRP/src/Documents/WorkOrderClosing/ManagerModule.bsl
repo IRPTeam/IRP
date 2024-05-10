@@ -10,18 +10,7 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
-
-	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
-	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	Parameters.Insert("StatusInfo", StatusInfo);
-
-	If Not StatusInfo.Posting Then
-		QueryArray = GetQueryTextsSecondaryTables();
-		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-		Return Tables;
-	EndIf;
-
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;

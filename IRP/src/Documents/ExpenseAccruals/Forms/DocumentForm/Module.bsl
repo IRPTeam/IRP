@@ -1,16 +1,10 @@
-// @strict-types
 
-#Region Variables
+#Region FORM
 
-#EndRegion
-
-#Region FormEventHandlers
-
-&AtClient
-Procedure NotificationProcessing(EventName, Parameter, Source)
-	If EventName = "UpdateAddAttributeAndPropertySets" Then
-		AddAttributesCreateFormControl();
-	EndIf;
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	DocExpenseRevenueAccrualsServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -21,22 +15,90 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;	
 EndProcedure
 
+&AtServer
+Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtServer
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	DocEmployeeCashAdvanceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
+EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	DocExpenseRevenueAccrualsClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
-&AtServer
-Procedure OnReadAtServer(CurrentObject)
-	DocExpenseRevenueAccrualsServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
+		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If Not Source = ThisObject Then
+		Return;
+	EndIf;	
 EndProcedure
 
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	Return;
+EndProcedure
 
+&AtClient
+Procedure API_Callback(TableName, ArrayOfDataPaths) Export
+	API_CallbackAtServer(TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtServer
+Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
+	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;	
+EndProcedure
+
+&AtClient
+Procedure _IdeHandler()
+	ViewClient_V2.ViewIdleHandler(ThisObject, Object);
+EndProcedure
+
+&AtClient
+Procedure _AttachIdleHandler() Export
+	AttachIdleHandler("_IdeHandler", 1);
+EndProcedure
+
+&AtClient 
+Procedure _DetachIdleHandler() Export
+	DetachIdleHandler("_IdeHandler");
+EndProcedure
 
 #EndRegion
 
-#Region FormHeaderItemsEventHandlers
+#Region _DATE
+
+&AtClient
+Procedure DateOnChange(Item)
+	DocExpenseRevenueAccrualsClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
 
 #Region COMPANY
 
@@ -57,25 +119,65 @@ EndProcedure
 
 #EndRegion
 
-#Region _DATE
+#Region CURRENCY
 
 &AtClient
-Procedure DateOnChange(Item)
-	DocExpenseRevenueAccrualsClient.DateOnChange(Object, ThisObject, Item);
+Procedure CurrencyOnChange(Item)
+	DocExpenseRevenueAccrualsClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region COST_LIST
+
+&AtClient
+Procedure CostListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocExpenseRevenueAccrualsClient.CostListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CostListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocExpenseRevenueAccrualsClient.CostListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure CostListBeforeDeleteRow(Item, Cancel)
+	DocExpenseRevenueAccrualsClient.CostListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure CostListAfterDeleteRow(Item)
+	DocExpenseRevenueAccrualsClient.CostListAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
 
 &AtClient
 Procedure BasisStartChoice(Item, ChoiceData, StandardProcessing)
-	
 	StandardProcessing = False;
-	
 	OpenPickupForm();
-	
 EndProcedure
 
-#Region GroupTitleDecorations
+#Region SERVICE
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocExpenseRevenueAccrualsClient);
+	Str.Insert("Server", DocExpenseRevenueAccrualsServer);
+	Return Str;
+EndFunction
+
+#Region DESCRIPTION
+
+&AtClient
+Procedure DescriptionClick(Item, StandardProcessing)
+	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TITLE_DECORATIONS
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
@@ -99,47 +201,72 @@ EndProcedure
 
 #EndRegion
 
+#Region ADD_ATTRIBUTES
+
+&AtClient
+Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
+	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
+EndProcedure
+
+&AtServer
+Procedure AddAttributesCreateFormControl()
+	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
+EndProcedure
+
+&AtClient
+Procedure AddAttributeButtonClick(Item) Export
+	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
-#Region FormTableItemsEventHandlers
-
-#Region CostList
+#Region EXTERNAL_COMMANDS
 
 &AtClient
-Procedure CostListOnChange(Item)
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Not ValueIsFilled(CurrentData.Key) Then
-		CurrentData.Key = String(New UUID());
-	EndIf;
-	FillDocumentAmount();
+Procedure GeneratedFormCommandActionByName(Command) Export
+	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
+	GeneratedFormCommandActionByNameServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
+	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+EndProcedure
+
+#EndRegion
+
+#Region COMMANDS
+
+&AtClient
+Procedure InternalCommandAction(Command) Export
+	InternalCommandsClient.RunCommandAction(Command, ThisObject, Object, Object.Ref);
 EndProcedure
 
 &AtClient
-Procedure CostListAfterDeleteRow(Item)
-	DeleteUnnecessaryRowsInCurrencies();
+Procedure InternalCommandActionWithServerContext(Command) Export
+	InternalCommandActionWithServerContextAtServer(Command.Name);
+EndProcedure
+
+&AtServer
+Procedure InternalCommandActionWithServerContextAtServer(CommandName)
+	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 &AtClient
-Procedure CostListOnEditEnd(Item, NewRow, CancelEdit)
-	If NewRow Then
-		CurrentData = Item.CurrentData;
-		If CurrentData = Undefined Then
-			Return;
-		EndIf;
-		AfterRowAdd(CurrentData);
-	EndIf;
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure EditCurrencies(Command)
-	CurrentData = ThisObject.Items.CostList.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;	
-	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V12(Object);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", ThisObject);
@@ -147,155 +274,29 @@ Procedure EditCurrencies(Command)
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
-#EndRegion
-
-#EndRegion
-
-#Region FormCommandsEventHandlers
-
 &AtClient
-Procedure ShowHiddenTables(Command)
-	DocumentsClient.ShowHiddenTables(Object, ThisObject);
-EndProcedure
-
-#EndRegion
-
-#Region Public
-// все методы, которые являются экспортными, и не относятся к оповещениям внутри формы
-#EndRegion
-
-#Region Private
-
-&AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form)
-	//
-EndProcedure
-
-&AtClient
-Procedure DeleteUnnecessaryRowsInCurrencies()
-	ArrayRowsToDelete = New Array; // Array of FormDataCollectionItem
-	For Each Row In Object.Currencies Do
-		If Object.CostList.FindRows(New Structure("Key", Row.Key)).Count() = 0 Then
-			ArrayRowsToDelete.Add(Row);
-		EndIf;
-	EndDo;
-	For Each Row In ArrayRowsToDelete Do
-		Object.Currencies.Delete(Row);
-	EndDo;
-EndProcedure
-
-// After expense SelectСosts.
-// 
-// Parameters:
-//  Result - Array of See DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure
-//  Structure, Undefined
-//  AdditionalParemeters - Arbitrary
-&AtClient
-Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;	
-	ArrayOfStructure = Result;
-	
-	If ArrayOfStructure.Count() = 0 Then
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.CostList.CurrentData;
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-
-	Object.CostList.Clear();
-	Object.Basis = ArrayOfStructure[0].Document;
-	Object.Currencies.Clear();
-	
-	For Each Structure In ArrayOfStructure Do
-		
-		CostListRow = Object.CostList.Add();
-	
-		FillPropertyValues(CostListRow, Structure);
-		
-		AmountTax = Structure.TaxAmount; // Number
-		
-		CostListRow.AmountTax = AmountTax;
-		
-		AfterRowAdd(CostListRow);
-	EndDo;
-	
-	FillDocumentAmount();
-		
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "CostList");
 EndProcedure
 
-&AtClient
-Procedure AfterRowAdd(Row)
-	
-	CurrentBasis = Object.Basis;
-	Row.Key = String(New UUID());
-	If ValueIsFilled(CurrentBasis) Then
-		If Object.CostList.Count() = 1 Then
-			If TypeOf(CurrentBasis) = Type("DocumentRef.PurchaseInvoice") Then
-				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
-				For Each CurrencyRow In ObjectCurrencies Do
-					NewRow = Object.Currencies.Add();
-					FillPropertyValues(NewRow, CurrencyRow);
-					NewRow.Key = Row.Key;
-				EndDo;
-			ElsIf TypeOf(CurrentBasis) = Type("DocumentRef.ExpenseAccruals") Then
-				ObjectCurrencies = GetObjectCurrencies(CurrentBasis);
-				If ObjectCurrencies.Count() > 0 Then
-					FirstRowID = ObjectCurrencies[0].Key; // String
-					
-					For Each RowInArray In ObjectCurrencies Do
-						If RowInArray.Key = FirstRowID Then
-							NewCurrencyRow = Object.Currencies.Add();
-							FillPropertyValues(NewCurrencyRow, RowInArray);
-							NewCurrencyRow.Key = Row.Key;
-						EndIf;
-					EndDo;
-					
-				EndIf;
-			EndIf;
-		Else
-			FirstRowID = Object.CostList[0].Key;
-				
-			RowArray = Object.Currencies.FindRows(New Structure("Key", FirstRowID));
-			For Each RowInArray In RowArray Do
-				NewCurrencyRow = Object.Currencies.Add();
-				FillPropertyValues(NewCurrencyRow, RowInArray);
-				NewCurrencyRow.Key = Row.Key;
-			EndDo;
-		EndIf;
-	EndIf;
-	
-EndProcedure
-
-&AtClient
-Procedure FillDocumentAmount()
-	TotalAmount = Object.CostList.Total("Amount"); // Number
-	//@skip-check property-return-type
-	Object.DocumentAmount = TotalAmount;
-EndProcedure
-
-// Get object currencies.
-// 
-// Parameters:
-//  DocRef - DocumentRef.PurchaseInvoice, DocumentRef.ExpenseAccruals - Doc ref
-// 
-// Returns:
-//  Array - Array of Structure:
-// * Key - String
-// * CurrencyFrom - CatalogRef.Currencies
-// * Rate - String
-// * ReverseRate - DefinedType.typeCurrencyRate
-// * ShowReverseRate - Boolean
-// * Multiplicity - Number
-// * MovementType - ChartOfCharacteristicTypesRef.CurrencyMovementType
-// * Amount - DefinedType.typeAmount
-// * IsFixed - Boolean
 &AtServer
-Function GetObjectCurrencies(DocRef)
-	Return CommonFunctionsServer.GetTableForClient(DocRef.Currencies.Unload());
-EndFunction
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "CostList");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
+EndProcedure
 
 &AtClient
 Async Procedure OpenPickupForm()
-	
 	TableIsFilled = Object.CostList.Count() > 0;
 	
 	If TableIsFilled Then
@@ -324,11 +325,11 @@ Async Procedure OpenPickupForm()
 	Notify = New NotifyDescription("AfterExpensePickup", ThisObject);
 	FormParameters = New Structure();
 	FormParameters.Insert("Company", Object.Company);
+	FormParameters.Insert("Branch", Object.Branch);
 	FormParameters.Insert("Ref", Object.Ref);
 	FormParameters.Insert("Date", Object.Date);
 	FormParameters.Insert("Currency", Object.Currency);
 	FormParameters.Insert("TransactionType", Object.TransactionType);
-	FormParameters.Insert("Branch", Object.Branch);
 	
 	OpenForm("Document.ExpenseAccruals.Form.PickupExpenseForm",
 		FormParameters,
@@ -337,70 +338,19 @@ Async Procedure OpenPickupForm()
 		,
 		ThisObject.URL,
 		Notify,
-		FormWindowOpeningMode.LockOwnerWindow);	
+		FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
 
+&AtClient
+Procedure AfterExpensePickup(Result, AdditionalParemeters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;	
 	
-EndProcedure
-
-#EndRegion
-
-#Region DescriptionEvents
-
-&AtClient
-Procedure DescriptionClick(Item, StandardProcessing)
-	CommonFormActions.EditMultilineText(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region AddAttributes
-
-// Add attribute start choice.
-// 
-// Parameters:
-//  Item - FormAllItems
-//  ChoiceData - Arbitrary
-//  StandardProcessing - Boolean
-&AtClient
-Procedure AddAttributeStartChoice(Item, ChoiceData, StandardProcessing) Export
-	AddAttributesAndPropertiesClient.AddAttributeStartChoice(ThisObject, Item, StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure AddAttributesCreateFormControl()
-	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject, "GroupOther");
-EndProcedure
-
-// Add attribute button click.
-// 
-// Parameters:
-//  Item - FormItems
-&AtClient
-Procedure AddAttributeButtonClick(Item) Export
-	AddAttributesAndPropertiesClient.AddAttributeButtonClick(ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region ExternalCommands
-
-// Generated form command action by name.
-// 
-// Parameters:
-//  Command - FormCommand
-&AtClient
-Procedure GeneratedFormCommandActionByName(Command) Export
-	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);
-EndProcedure
-
-// Generated form command action by name.
-// 
-// Parameters:
-//  CommandName - String
-&AtServer
-Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
-	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
+	For Each Row In Result Do
+		Object.Basis = Row.Basis;
+		ViewClient_V2.CostListAddFilledRow(Object, ThisObject, Row);
+	EndDo;	
 EndProcedure
 
 #EndRegion

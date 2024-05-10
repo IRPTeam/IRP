@@ -442,29 +442,31 @@ Function ItemList()
 EndFunction
 
 Function ItemListLandedCost()
-	Return "SELECT
-	       |	ItemList.Ref.Date AS Period,
-	       |	ItemList.Ref AS Basis,
-	       |	ItemList.Ref.Company AS Company,
-	       |	ItemList.Ref.Branch AS Branch,
-	       |	ItemList.Ref.Currency AS Currency,
-	       |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-	       |	ItemList.RevenueType AS RevenueType,
-	       |	ItemList.ItemKey AS ItemKey,
-	       |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	       |	ItemList.NetAmount AS NetAmount,
-	       |	ItemList.TaxAmount AS TaxAmount,
-	       |	ItemList.DELETE_IsAdditionalItemRevenue AS IsAdditionalItemRevenue,
-	       |	ItemList.IsService AS IsService,
-	       |	TableRowIDInfo.RowID AS RowID,
-	       |	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType
-	       |INTO ItemListLandedCost
-	       |FROM
-	       |	Document.SalesInvoice.ItemList AS ItemList
-	       |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-	       |		ON ItemList.Key = TableRowIDInfo.Key
-	       |WHERE
-	       |	ItemList.Ref = &Ref";
+	Return 
+		"SELECT
+		|	ItemList.Ref.Date AS Period,
+		|	ItemList.Ref AS Basis,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemList.IsService AS IsService,
+		|	TableRowIDInfo.RowID AS RowID,
+		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+		|	ItemList.OtherPeriodRevenueType = VALUE(Enum.OtherPeriodRevenueType.ItemsRevenue) AS IsItemsRevenue,
+		|	ItemList.OtherPeriodRevenueType = VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals) AS IsRevenueAccruals
+		|INTO ItemListLandedCost
+		|FROM
+		|	Document.SalesInvoice.ItemList AS ItemList
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
+		|WHERE
+		|	ItemList.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -1156,16 +1158,34 @@ Function T2015S_TransactionsInfo()
 EndFunction
 
 Function R6080T_OtherPeriodsRevenues()
-	Return "SELECT
-		   |	*,
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.NetAmount AS Amount,
-		   |	ItemList.TaxAmount AS AmountTax
-		   |INTO R6080T_OtherPeriodsRevenues
-		   |FROM
-		   |	ItemListLandedCost AS ItemList
-		   |WHERE
-		   |	(ItemList.IsAdditionalItemRevenue OR ItemList.OtherPeriodRevenueType <> VALUE(Enum.OtherPeriodRevenueType.EmptyRef)) ";
+	Return	
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Basis AS Basis,
+		|	CASE
+		|		WHEN ItemList.IsItemsRevenue
+		|			THEN ItemList.RowID
+		|	END AS RowID,
+		|	CASE
+		|		WHEN ItemList.IsItemsRevenue
+		|			THEN ItemList.ItemKey
+		|	END AS ItemKey,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+		|	ItemList.NetAmount AS Amount,
+		|	CASE
+		|		WHEN ItemList.IsItemsRevenue
+		|			THEN ItemList.TaxAmount
+		|	END AS AmountTax
+		|INTO R6080T_OtherPeriodsRevenues
+		|FROM
+		|	ItemListLandedCost AS ItemList
+		|WHERE
+		|	ItemList.IsItemsRevenue
+		|	OR ItemList.IsRevenueAccruals";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
@@ -1419,7 +1439,6 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	                                                   Parameters.ObjectData.Currency);
 	                                                   
 	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
-	// Debit - Analytics
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -1428,9 +1447,11 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                           Parameters.RowData.RevenueType,
 	                                                           Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Credit = Credit.AccountRevenue;
-	
-	// Credit - Analytics
+	If Parameters.RowData.OtherPeriodRevenueType = Enums.OtherPeriodRevenueType.RevenueAccruals Then
+		AccountingAnalytics.Credit = Credit.AccountOtherPeriodsRevenue;
+	Else
+		AccountingAnalytics.Credit = Credit.AccountRevenue;
+	EndIf;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	Return AccountingAnalytics;
 EndFunction
@@ -1444,8 +1465,11 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                          Parameters.RowData.RevenueType,
 	                                                          Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Debit = Debit.AccountRevenue;
-	// Debit - Analytics
+	If Parameters.RowData.OtherPeriodRevenueType = Enums.OtherPeriodRevenueType.RevenueAccruals Then
+		AccountingAnalytics.Debit = Debit.AccountOtherPeriodsRevenue;
+	Else
+		AccountingAnalytics.Debit = Debit.AccountRevenue;
+	EndIf;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit

@@ -181,7 +181,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow", False));
 	
 	// Depreciation calculation
-	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset             , New Structure("ByRow", True));
+	Map.Insert(AO.DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset, New Structure("ByRow", True));
 	
 	// Payroll
 	Map.Insert(AO.Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual                , New Structure("ByRow, ReferTableName", True, "AccrualList"));
@@ -196,6 +196,23 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
 	
+	ArrayOfAccrualsTransactionTypes = New Array();
+	ArrayOfAccrualsTransactionTypes.Add(Enums.AccrualsTransactionType.Accrual);
+	ArrayOfAccrualsTransactionTypes.Add(Enums.AccrualsTransactionType.Void);
+	
+	// Expense accruals
+	Map.Insert(AO.ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses, New Structure("ByRow, TransactionType", True, ArrayOfAccrualsTransactionTypes));
+	Map.Insert(AO.ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses, New Structure("ByRow, TransactionType", True, Enums.AccrualsTransactionType.Reverse));
+	
+	// Revenue accruals
+	Map.Insert(AO.RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues, New Structure("ByRow,TransactionType", True, ArrayOfAccrualsTransactionTypes));
+	Map.Insert(AO.RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues, New Structure("ByRow, TransactionType", True, Enums.AccrualsTransactionType.Reverse));
+	
+	// Employee cash advance
+	Map.Insert(AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
+	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
+	
+		
 	Return Map;
 EndFunction
 
@@ -433,10 +450,22 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTab
 		
 		// Filters
 		
-		If Def <> Undefined 
-			And Def.Property("TransactionType") 
-			And Def.TransactionType <> DocTransactionType Then
-			Continue;
+//		If Def <> Undefined 
+//			And Def.Property("TransactionType") 
+//			And Def.TransactionType <> DocTransactionType Then
+//			Continue;
+//		EndIf;
+		
+		If Def <> Undefined And Def.Property("TransactionType") Then
+			If TypeOf(Def.TransactionType) = Type("Array") Then
+				If Def.TransactionType.Find(DocTransactionType) = Undefined Then
+					Continue;
+				EndIf;
+			Else 
+				If Def.TransactionType <> DocTransactionType Then
+					Continue;
+				EndIf;
+			EndIf;
 		EndIf;
 		
 		If ValueIsFilled(ReferTableName)
@@ -1065,7 +1094,56 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	AND ProfitLossCenter.Ref IS NULL) AS Table
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	|//1//////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.AccountOtherPeriodsExpense,
+	|	1 AS Priority
+	|INTO AccountsOtherPeriodsExpense
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsExpense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsExpense,
+	|	2
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsExpense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsExpense,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsExpense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsExpense,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsExpense
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|;
+	|
+	|//2//////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Table.AccountRevenue,
 	|	1 AS Priority
@@ -1114,7 +1192,56 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	AND ProfitLossCenter.Ref IS NULL) AS Table
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	|//3//////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.AccountOtherPeriodsRevenue,
+	|	1 AS Priority
+	|INTO AccountsOtherPeriodsRevenue
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsRevenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsRevenue,
+	|	2
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsRevenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue = &ExpenseRevenue
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsRevenue,
+	|	3
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsRevenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter = &ProfitLossCenter) AS Table
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.AccountOtherPeriodsRevenue,
+	|	4
+	|FROM
+	|	InformationRegister.T9014S_AccountsExpenseRevenue.SliceLast(&Period, OtherPeriodsRevenue
+	|	AND Company = &Company
+	|	AND LedgerTypeVariant = &LedgerTypeVariant
+	|	AND ExpenseRevenue.Ref IS NULL
+	|	AND ProfitLossCenter.Ref IS NULL) AS Table
+	|;
+	|
+	|//4//////////////////////////////////////////////////////////////////////////////
 	|SELECT TOP 1
 	|	Table.AccountExpense,
 	|	Table.Priority AS Priority
@@ -1124,7 +1251,17 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|ORDER BY
 	|	Priority
 	|;
-	|/////////////////
+	|//5///////////////
+	|SELECT TOP 1
+	|	Table.AccountOtherPeriodsExpense,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsOtherPeriodsExpense AS Table
+	|
+	|ORDER BY
+	|	Priority
+	|;
+	|//6///////////////
 	|SELECT TOP 1
 	|	Table.AccountRevenue,
 	|	Table.Priority AS Priority
@@ -1132,7 +1269,19 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	|	AccountsRevenue AS Table
 	|
 	|ORDER BY
+	|	Priority
+	|;
+	|
+	|//7//////////////////////////////////////////////////////////////////////////////
+	|SELECT TOP 1
+	|	Table.AccountOtherPeriodsRevenue,
+	|	Table.Priority AS Priority
+	|FROM
+	|	AccountsOtherPeriodsRevenue AS Table
+	|
+	|ORDER BY
 	|	Priority";
+	
 	
 	Query.SetParameter("Period"  , Period);
 	Query.SetParameter("Company" , Company);
@@ -1144,16 +1293,28 @@ Function __GetT9014S_AccountsExpenseRevenue(Period, Company, LedgerTypeVariant, 
 	
 	Result = New Structure();
 	Result.Insert("AccountExpense", Undefined);
+	Result.Insert("AccountOtherPeriodsExpense", Undefined);
 	Result.Insert("AccountRevenue", Undefined);
+	Result.Insert("AccountOtherPeriodsRevenue", Undefined);
 	
-	QuerySelection_Expense = QueryResults[2].Select();
+	QuerySelection_Expense = QueryResults[4].Select();
 	If QuerySelection_Expense.Next() Then
 		Result.AccountExpense = QuerySelection_Expense.AccountExpense;
 	EndIf;
 	
-	QuerySelection_Revenue = QueryResults[3].Select();
+	QuerySelection_OtherPeriodsExpense = QueryResults[5].Select();
+	If QuerySelection_OtherPeriodsExpense.Next() Then
+		Result.AccountOtherPeriodsExpense = QuerySelection_OtherPeriodsExpense.AccountOtherPeriodsExpense;
+	EndIf;
+	
+	QuerySelection_Revenue = QueryResults[6].Select();
 	If QuerySelection_Revenue.Next() Then
 		Result.AccountRevenue = QuerySelection_Revenue.AccountRevenue;
+	EndIf;
+	
+	QuerySelection_OtherPeriodsRevenue = QueryResults[7].Select();
+	If QuerySelection_OtherPeriodsRevenue.Next() Then
+		Result.AccountOtherPeriodsRevenue = QuerySelection_OtherPeriodsRevenue.AccountOtherPeriodsRevenue;
 	EndIf;
 	
 	Return Result;

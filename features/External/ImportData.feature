@@ -3544,3 +3544,9 @@ Scenario: Create catalog Taxes objects (Salary tax)
 		| 'e1cib/data/Catalog.Taxes?ref=b7b9951512c95f4111eefb026303d962' | 'False'        | 9      | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                        | 'Enum.TaxType.Rate' | 'Enum.TaxKind.Salary' | 'Enum.TaxPayers.Company'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Single Social Contribution (Company)' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '15.04.2024 11:42:20' | '15.04.2024 11:42:41' | 'False'     |
 		| 'e1cib/data/Catalog.Taxes?ref=b7b9951512c95f4111eefb026303d963' | 'False'        | 10     | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''                        | 'Enum.TaxType.Rate' | 'Enum.TaxKind.Salary' | 'Enum.TaxPayers.Employee' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Income Tax (Emloyee)'                 | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '15.04.2024 11:43:08' | '15.04.2024 11:42:33' | 'False'     |
 
+Scenario: Create information register UserSettings records (for PhysicalCountByLocation)
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                   | 'AttributeName' | 'KindOfAttribute'               | 'Value'                                                                 |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Document.PhysicalCountByLocation' | 'Branch'        | 'Enum.KindsOfAttributes.Common' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' |
+

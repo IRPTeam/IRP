@@ -343,6 +343,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Store,
+		|	ItemList.AdjustmentBasis AS Basis,
 		|	ItemList.ItemKey,
 		|	ItemList.Quantity
 		|INTO R4032B_GoodsInTransitOutgoing

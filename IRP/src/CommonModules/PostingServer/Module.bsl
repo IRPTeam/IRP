@@ -1615,10 +1615,9 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			Else
 				
 				Parts = StrSplit(Doc.RegName, ".");
-				RegisterFullName = Parts[0] + "s." + Parts[1];
-				CreateRecordSet = Eval(RegisterFullName + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
 				//@skip-check unknown-method-property
-				If AccountingServer.IsAccountingAnalyticsRegister(RegisterFullName) Then
+				If AccountingServer.IsAccountingAnalyticsRegister(Parts[0] + "." + Parts[1]) Then
 					CreateRecordSet.Filter.Document.Set(Doc.Ref);
 					NewMovement.FillValues(Doc.Ref, "Document");
 				Else
@@ -1636,7 +1635,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			BackgroundJobAPIServer.NotifyStream(Msg);
 			
 			Result = New Structure;
-			Result.Insert("Ref", Doc);
+			Result.Insert("Ref", Doc.Ref);
 			Result.Insert("Error", Msg.Log);
 			Result.Insert("RegName", Doc.RegName);
 			Errors.Add(Result);

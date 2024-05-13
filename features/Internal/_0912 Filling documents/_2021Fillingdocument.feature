@@ -56,7 +56,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog BillOfMaterials objects
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
-		When Create information register Agreements records (NDB, Second Company)
 	* Add plugin for discount
 		When Create Document discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -8828,6 +8827,7 @@ Scenario: _0154191 check filter by Company when select partner term
 
 Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
 	And I close all client application windows
+	When When Create information register Agreements records (NDB, Second Company)
 	* Open CR creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"

@@ -1853,7 +1853,7 @@ Scenario: _0991058 create journal entry for one PI
 		Then the form attribute named "LedgerType" became equal to "Basic LTV"
 		Then the form attribute named "LedgerTypeCurrencyMovementTypeCurrency" became equal to "TRY"
 		Then the form attribute named "Number" became equal to "1"
-		And "RegisterRecords" table became equal
+		And "RegisterRecords" table contains lines
 			| 'Period'              | 'Account Dr' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'                                   | 'Debit amount' | 'Extra dimension2 Dr'   | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                                  | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
 			| '24.02.2023 10:04:33' | '3540'       | '633,33'   | '4'             | 'Yes'      | 'TRY'             | 'Item 1 with serial lot number (use line grouping)' | '633,33'       | 'XS/Color 2'            | ''                | 'Business unit 1'     | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '633,33'        | 'Business unit 1'     |
 			| '24.02.2023 10:04:33' | '5301'       | '126,67'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '126,67'       | 'Business unit 1'       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '126,67'        | 'Business unit 1'     |
@@ -1869,6 +1869,7 @@ Scenario: _0991058 create journal entry for one PI
 			| '24.02.2023 10:04:33' | '5301'       | '20,00'    | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '20'           | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '20'            | ''                    |
 			| '24.02.2023 10:04:33' | '3540'       | '875,00'   | '10'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '875'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '875'           | ''                    |
 			| '24.02.2023 10:04:33' | '5301'       | '175,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '175'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '175'           | ''                    |
+		Then the number of "RegisterRecords" table lines is "равно" "14"
 		And "Totals" table became equal
 			| '#' | 'Chart of account' | 'Amount Debit' | 'Amount Credit' |
 			| '1' | '3540'             | '11 433,33'    | ''              |
@@ -1906,50 +1907,6 @@ Scenario: _0991059 create journal entry for two PI
 			| 'No'           | '22.07.2023 09:38:02' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 2 dated 22.07.2023 09:38:02' | ''            |
 			| 'No'           | '30.11.2023 16:01:04' | 'Own company 2' | 'Basic LTV'   | 'Purchase invoice 3 dated 30.11.2023 16:01:04' | ''            |
 			
-
-
-
-Scenario: _0991059 create journal entry for two PI
-	And I close all client application windows
-	* Open journal entry list
-		Given I open hyperlink "e1cib/list/Document.JournalEntry"
-		Then "Journal entries" window is opened
-		And I click "Create documents" button
-		And I go to line in "TableDocuments" table
-			| 'Presentation'     | 'Use' |
-			| 'Purchase invoice' | 'No'  |
-		And I change "Use" checkbox in "TableDocuments" table
-		And I finish line editing in "TableDocuments" table
-		And I go to line in "TableDocuments" table
-			| 'Presentation'  | 'Use' |
-			| 'Sales invoice' | 'No'  |
-		And I change "Use" checkbox in "TableDocuments" table
-		And I finish line editing in "TableDocuments" table
-		And I click Choice button of the field named "Company"
-		And I go to line in "List" table
-			| 'Description'   |
-			| 'Own company 2' |
-		And I select current line in "List" table
-		And I click Select button of "Ledger type" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Basic LTV'   |
-		And I select current line in "List" table
-		And I click "Create documents" button
-	* Check journal entry
-		Given I open hyperlink "e1cib/list/Document.JournalEntry"
-		And I click "Create documents" button		
-		And I click Choice button of the field named "Period"
-		And I input "01.01.2021" text in the field named "DateBegin"
-		And I input "01.01.2024" text in the field named "DateEnd"
-		And I click the button named "Select"
-		Then "Create documents" window is opened
-		And I click "Create documents" button
-		And I close "Create documents" window
-		Then "Journal entries" window is opened
-		And I click "Refresh" button
-				
-						
 				
 Scenario: _0991070 check Bank receipt accounting movements (Payment from customer)
 	And I close all client application windows
@@ -2262,7 +2219,7 @@ Scenario: _0991090 check Sales invoice accounting movements (product and service
 		And I select current line in "List" table
 	* Check accounting movements
 		And in the table "ItemList" I click "Edit accounting" button
-		And "AccountingAnalytics" table became equal
+		And "AccountingAnalytics" table contains lines
 			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Partner term'                                            | 'Credit' | 'Operation'                                                                                            |
 			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
 			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)' |
@@ -2270,17 +2227,19 @@ Scenario: _0991090 check Sales invoice accounting movements (product and service
 			| '9100'  | 'VAT'                          | ''                | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
 			| '420.1' | 'Item with item key'           | 'Business unit 1' | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
 			| '4010'  | 'Business unit 1'              | ''                | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'              |
+		Then the number of "AccountingAnalytics" table lines is "равно" "6"
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button	
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'              | 'Debit amount' | 'Extra dimension2 Dr'                                     | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Operation'                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '30.03.2023 12:23:56' | '4010'       | '1' | '380,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 1 (3 partner terms)' | '380'          | 'Partner term with customer (by document + credit limit)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                    | '380'           | ''                    |
-			| '30.03.2023 12:23:56' | '9100'       | '2' | '63,33'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'              | '63,33'        | ''                                                        | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'     | '63,33'         | ''                    |
-			| '30.03.2023 12:23:56' | '420.1'      | '3' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key'           | '100'          | 'Business unit 1'                                         | '2'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key' | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'S/Color 1'           | '100'           | 'Business unit 1'     |
-			| '30.03.2023 12:23:56' | '4010'       | '4' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 1 (3 partner terms)' | '100'          | 'Partner term with customer (by document + credit limit)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                    | '100'           | ''                    |
-			| '30.03.2023 12:23:56' | '9100'       | '5' | '16,67'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'              | '16,67'        | ''                                                        | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'     | '16,67'         | ''                    |			
+		And "RegisterRecords" table contains lines
+			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'              | 'Debit amount' | 'Extra dimension2 Dr'                                     | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Operation'                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '30.03.2023 12:23:56' | '4010'       | '380,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 1 (3 partner terms)' | '380'          | 'Partner term with customer (by document + credit limit)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                    | '380'           | ''                    |
+			| '30.03.2023 12:23:56' | '9100'       | '63,33'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'              | '63,33'        | ''                                                        | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'     | '63,33'         | ''                    |
+			| '30.03.2023 12:23:56' | '420.1'      | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key'           | '100'          | 'Business unit 1'                                         | '2'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key' | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'S/Color 1'           | '100'           | 'Business unit 1'     |
+			| '30.03.2023 12:23:56' | '4010'       | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 1 (3 partner terms)' | '100'          | 'Partner term with customer (by document + credit limit)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'    | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                    | '100'           | ''                    |
+			| '30.03.2023 12:23:56' | '9100'       | '16,67'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'              | '16,67'        | ''                                                        | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'     | '16,67'         | ''                    |
+		Then the number of "RegisterRecords" table lines is "равно" "5"
 	And I close all client application windows
 
 Scenario: _0991091 check Sales invoice accounting movements (product)
@@ -2306,14 +2265,15 @@ Scenario: _0991091 check Sales invoice accounting movements (product)
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button	
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr'                         | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                           | 'Extra dimension2 Cr'   | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 10:14:47' | '4010'       | '1' | '760,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '760'          | 'Individual partner term 1 (by partner term)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'             | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                      | '760'           | ''                    |
-			| '24.02.2023 10:14:47' | '9100'       | '2' | '126,67' | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'             | '126,67'       | ''                                            | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                         | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'       | '126,67'        | ''                    |
-			| '24.02.2023 10:14:47' | '420.1'      | '3' | '200,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key'          | '200'          | 'Business unit 1'                             | '4'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key'          | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'S/Color 1'             | '200'           | 'Business unit 1'     |
-			| '24.02.2023 10:14:47' | '4010'       | '4' | '450,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '450'          | 'Individual partner term 1 (by partner term)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'             | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                      | '450'           | ''                    |
-			| '24.02.2023 10:14:47' | '9100'       | '5' | '75,00'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'             | '75'           | ''                                            | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                         | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'       | '75'            | ''                    |
-			| '24.02.2023 10:14:47' | '420.1'      | '6' | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Item without item key (pcs)' | '50'           | 'Business unit 1'                             | '1'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item without item key (pcs)' | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'Item without item key' | '50'            | 'Business unit 1'     |	
+		And "RegisterRecords" table contains lines
+			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr'                         | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                           | 'Extra dimension2 Cr'   | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 10:14:47' | '4010'       | '760,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '760'          | 'Individual partner term 1 (by partner term)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'             | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                      | '760'           | ''                    |
+			| '24.02.2023 10:14:47' | '9100'       | '126,67' | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'             | '126,67'       | ''                                            | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                         | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'       | '126,67'        | ''                    |
+			| '24.02.2023 10:14:47' | '420.1'      | '200,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key'          | '200'          | 'Business unit 1'                             | '4'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key'          | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'S/Color 1'             | '200'           | 'Business unit 1'     |
+			| '24.02.2023 10:14:47' | '4010'       | '450,00' | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '450'          | 'Individual partner term 1 (by partner term)' | ''                | 'Business unit 1'            | 'TRY'            | '9100'       | 'Business unit 1'             | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)' | ''                      | '450'           | ''                    |
+			| '24.02.2023 10:14:47' | '9100'       | '75,00'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'             | '75'           | ''                                            | ''                | ''                           | 'TRY'            | '5302'       | 'VAT'                         | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'         | 'Business unit 1'       | '75'            | ''                    |
+			| '24.02.2023 10:14:47' | '420.1'      | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Item without item key (pcs)' | '50'           | 'Business unit 1'                             | '1'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item without item key (pcs)' | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'Item without item key' | '50'            | 'Business unit 1'     |
+		Then the number of "RegisterRecords" table lines is "равно" "6"
 	And I close all client application windows
 
 Scenario: _0991100 check Cash payment accounting movements
@@ -2773,7 +2733,7 @@ Scenario: _0991195 check Payroll accounting movements (acruals, deductions, taxe
 	* Check accounting movements
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table became equal
+		And "RegisterRecords" table contains lines
 			| 'Period'              | 'Account Dr' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                         | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
 			| '31.01.2023 12:00:00' | '5401'       | '2 745,27'  | ''              | 'Yes'      | 'TRY'             | ''                | '2 745,27'     | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '2 745,27'      | ''                    |
 			| '31.01.2023 12:00:00' | '420.3'      | '-100,00'   | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '-100'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' | ''                    | '-100'          | ''                    |
@@ -2786,6 +2746,7 @@ Scenario: _0991195 check Payroll accounting movements (acruals, deductions, taxe
 			| '31.01.2023 12:00:00' | '420.3'      | '3 660,36'  | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '3 660,36'     | 'Business unit 2'     | ''                | 'Salary (expense)'      | 'TRY'            | '9200'       | 'Business unit 2'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        | 'Own company 2'       | '3 660,36'      | ''                    |
 			| '31.01.2023 12:00:00' | '420.3'      | '120,00'    | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '120'          | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  | ''                    | '120'           | ''                    |
 			| '31.01.2023 12:00:00' | '5401'       | '1 636,36'  | ''              | 'Yes'      | 'TRY'             | ''                | '1 636,36'     | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '1 636,36'      | ''                    |
+		Then the number of "RegisterRecords" table lines is "равно" "11"
 	And I close all client application windows
 
 Scenario: _0991196 check Payroll accounting movements (cash advance deduction)
@@ -2807,19 +2768,20 @@ Scenario: _0991196 check Payroll accounting movements (cash advance deduction)
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#'  | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                         | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '30.04.2024 10:36:50' | '5401'       | '1'  | '3 100,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '3 100'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '3 100'         | ''                    |
-			| '30.04.2024 10:36:50' | '420.3'      | '2'  | '-100,00'   | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '-100'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' | ''                    | '-100'          | ''                    |
-			| '30.04.2024 10:36:50' | '420.2'      | '3'  | '19 475,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '19 475'       | 'Business unit 2'     | ''                | 'Other expence'         | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  | ''                    | '19 475'        | ''                    |
-			| '30.04.2024 10:36:50' | '420.3'      | '4'  | '3 600,00'  | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '3 600'        | 'Business unit 2'     | ''                | 'Salary (expense)'      | 'TRY'            | '9200'       | 'Business unit 2'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        | 'Own company 2'       | '3 600'         | ''                    |
-			| '30.04.2024 10:36:50' | '5401'       | '5'  | '50,00'     | ''              | 'Yes'      | 'TRY'             | ''                | '50'           | ''                    | ''                | ''                      | 'TRY'            | '4020.1'     | 'Employee 1'       | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'                 | ''                    | '50'            | ''                    |
-			| '30.04.2024 10:36:50' | '420.3'      | '6'  | '-100,00'   | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '-100'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' | ''                    | '-100'          | ''                    |
-			| '30.04.2024 10:36:50' | '5401'       | '7'  | '2 050,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '2 050'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '2 050'         | ''                    |
-			| '30.04.2024 10:36:50' | '5401'       | '8'  | '2 400,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '2 400'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '2 400'         | ''                    |
-			| '30.04.2024 10:36:50' | '420.3'      | '9'  | '4 100,00'  | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '4 100'        | 'Business unit 2'     | ''                | 'Salary (expense)'      | 'TRY'            | '9200'       | 'Business unit 2'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        | 'Own company 2'       | '4 100'         | ''                    |
-			| '30.04.2024 10:36:50' | '420.2'      | '10' | '18 000,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '18 000'       | 'Business unit 2'     | ''                | 'Other expence'         | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  | ''                    | '18 000'        | ''                    |
-			| '30.04.2024 10:36:50' | '5401'       | '11' | '1 600,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '1 600'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '1 600'         | ''                    |
+		And "RegisterRecords" table contains lines
+			| 'Period'              | 'Account Dr' | 'Amount'    | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                         | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '30.04.2024 10:36:50' | '5401'       | '3 100,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '3 100'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '3 100'         | ''                    |
+			| '30.04.2024 10:36:50' | '420.3'      | '-100,00'   | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '-100'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' | ''                    | '-100'          | ''                    |
+			| '30.04.2024 10:36:50' | '420.2'      | '19 475,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '19 475'       | 'Business unit 2'     | ''                | 'Other expence'         | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  | ''                    | '19 475'        | ''                    |
+			| '30.04.2024 10:36:50' | '420.3'      | '3 600,00'  | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '3 600'        | 'Business unit 2'     | ''                | 'Salary (expense)'      | 'TRY'            | '9200'       | 'Business unit 2'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        | 'Own company 2'       | '3 600'         | ''                    |
+			| '30.04.2024 10:36:50' | '5401'       | '50,00'     | ''              | 'Yes'      | 'TRY'             | ''                | '50'           | ''                    | ''                | ''                      | 'TRY'            | '4020.1'     | 'Employee 1'       | 'Payroll DR (R9510B_SalaryPayment) CR (R3027B_EmployeeCashAdvance)'                 | ''                    | '50'            | ''                    |
+			| '30.04.2024 10:36:50' | '420.3'      | '-100,00'   | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '-100'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Deduction Is Not Revenue)' | ''                    | '-100'          | ''                    |
+			| '30.04.2024 10:36:50' | '5401'       | '2 050,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '2 050'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '2 050'         | ''                    |
+			| '30.04.2024 10:36:50' | '5401'       | '2 400,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '2 400'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '2 400'         | ''                    |
+			| '30.04.2024 10:36:50' | '420.3'      | '4 100,00'  | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '4 100'        | 'Business unit 2'     | ''                | 'Salary (expense)'      | 'TRY'            | '9200'       | 'Business unit 2'  | 'Payroll DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions) (Taxes)'        | 'Own company 2'       | '4 100'         | ''                    |
+			| '30.04.2024 10:36:50' | '420.2'      | '18 000,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 2'      | '18 000'       | 'Business unit 2'     | ''                | 'Other expence'         | 'TRY'            | '5401'       | ''                 | 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'                  | ''                    | '18 000'        | ''                    |
+			| '30.04.2024 10:36:50' | '5401'       | '1 600,00'  | ''              | 'Yes'      | 'TRY'             | ''                | '1 600'        | ''                    | ''                | ''                      | 'TRY'            | '9200'       | ''                 | 'Payroll DR (R9510B_SalaryPayment) CR (R5015B_OtherPartnersTransactions) (Taxes)'   | 'Own company 2'       | '1 600'         | ''                    |
+		Then the number of "RegisterRecords" table lines is "равно" "11"
 		And I close all client application windows
 
 Scenario: _0991197 check CommissioningOfFixedAsset movements

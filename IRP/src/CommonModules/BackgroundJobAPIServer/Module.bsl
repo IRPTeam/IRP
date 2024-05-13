@@ -36,7 +36,7 @@ Function JobDataSettings() Export
 	Settings.Insert("StopOnErrorAnyJob", True);
 	Settings.Insert("JobSettings", New Array);
 	Settings.Insert("CallbackWhenAllJobsDone", True);
-	Settings.Insert("UpdatePause", 3);
+	Settings.Insert("UpdatePause", 20);
 	Return Settings;
 EndFunction
 

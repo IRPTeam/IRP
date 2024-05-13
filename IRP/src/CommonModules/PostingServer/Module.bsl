@@ -1601,7 +1601,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 	Count = 0; 
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
-	
+		
 	For Each Doc In DocumentArray Do
 		
 		Try
@@ -1609,24 +1609,45 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			Result.Insert("Ref", Doc.Ref);
 			Result.Insert("RegName", Doc.RegName);
 			Result.Insert("Error", "");
+			
 			NewMovement = Doc.NewMovement.Get(); // ValueTable
 			If Not Doc.Ref.Posted And NewMovement.Count() > 0 Then
 				Result.Error = String(Doc.Ref) + " - Not posted. Can not update records";
 			Else
 				
 				Parts = StrSplit(Doc.RegName, ".");
-				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
-				//@skip-check unknown-method-property
-				If AccountingServer.IsAccountingAnalyticsRegister(Parts[0] + "." + Parts[1]) Then
-					CreateRecordSet.Filter.Document.Set(Doc.Ref);
-					NewMovement.FillValues(Doc.Ref, "Document");
-				Else
-					CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
-					NewMovement.FillValues(Doc.Ref, "Recorder");
-				EndIf;
+				ManagerRegisterName = Parts[0] + "s." + Parts[1];
+				ObjectRegisterName = Parts[0] + "." + Parts[1];
 				
-				CreateRecordSet.Load(NewMovement);
-				CreateRecordSet.Write(True);
+				If AccountingServer.IsAccountingDataRegister(ObjectRegisterName) Then
+					
+					ArrayOfBasisDocuments = New Array();
+					ArrayOfBasisDocuments.Add(Doc.Ref);
+
+					ArrayOfLedgerTypes = AccountingServer.GetLedgerTypesByCompany(Doc.Ref, Doc.Ref.Date, Doc.Ref.Company);
+					
+					TableOfJEDocuments = AccountingServer.GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
+					
+					For Each Row In TableOfJEDocuments Do
+						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "DataTable", NewMovement);
+						Row.JEDocument.Write(DocumentWriteMode.Write);
+					EndDo;							
+				Else
+					CreateRecordSet = Eval(ManagerRegisterName + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				
+					//@skip-check unknown-method-property
+					If AccountingServer.IsAccountingAnalyticsRegister(ObjectRegisterName) Then
+						CreateRecordSet.Filter.Document.Set(Doc.Ref);
+						NewMovement.FillValues(Doc.Ref, "Document");
+					Else
+						CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
+						NewMovement.FillValues(Doc.Ref, "Recorder");
+					EndIf;
+				
+					CreateRecordSet.Load(NewMovement);
+					CreateRecordSet.Write(True);
+				EndIf;
 			EndIf;
 			Errors.Add(Result);
 		Except

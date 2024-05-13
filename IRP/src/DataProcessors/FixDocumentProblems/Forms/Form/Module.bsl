@@ -1,8 +1,6 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.Company.Add(Catalogs.Companies.FindByCode(85));	
-	
 	ThisObject.MapRowsLeft = New ValueList();
 	ThisObject.MapRowsRight = New ValueList();
 	
@@ -351,6 +349,14 @@ Procedure CheckAccountingAnalytics(Command)
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
 EndProcedure
 
+&AtClient
+Procedure CheckAccountingTranslations(Command)
+	PostingInfo.GetItems().Clear();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation");
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
+EndProcedure
+
 &AtServer
 Function GetJobsForCheckPostingDocuments(ProcedurePath)
 	
@@ -586,7 +592,9 @@ EndProcedure
 &AtServer
 Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)	
 	If AccountingServer.IsAccountingAnalyticsRegister(CurrentRegName) Then
-		ValueTable = AccountingServer.GetCurrentAnalyticsRegisterRecord(Ref, CurrentRegName);
+		ValueTable = AccountingServer.GetCurrentAnalyticsRegisterRecords(Ref, CurrentRegName);
+	ElsIf AccountingServer.IsAccountingDataRegister(CurrentRegName) Then
+		ValueTable = AccountingServer.GetCurrentDataRegisterRecords(Ref, CurrentRegName);
 	Else 
 		ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
 	EndIf;

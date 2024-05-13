@@ -56,6 +56,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog BillOfMaterials objects
 		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
+		When Create information register Agreements records (NDB, Second Company)
 	* Add plugin for discount
 		When Create Document discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -8824,3 +8825,75 @@ Scenario: _0154191 check filter by Company when select partner term
 		And I select from "Company" drop-down list by "second" string
 		Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
+
+Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows
+	
+Scenario: _0154193 check auto filling partner term in the CP (filter by Company)
+	And I close all client application windows
+	* Open CP creation form
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows	
+
+Scenario: _0154194 check auto filling partner term in the BP (filter by Company)
+	And I close all client application windows
+	* Open BP creation form
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows		
+				
+Scenario: _0154195 check auto filling partner term in the BR (filter by Company)
+	And I close all client application windows
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows					

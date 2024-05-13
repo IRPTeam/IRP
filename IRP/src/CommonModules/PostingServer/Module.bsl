@@ -182,6 +182,10 @@ Function RegisterRecords(Parameters)
 	For Each Row In Parameters.PostingDataTables Do
 		RecordSet = Row.Value.RecordSet_Document;
 		TableForLoad = Row.Value.PrepareTable.Copy();
+		
+		If Not Parameters.Object.Posted Then
+			TableForLoad.Clear();
+		EndIf;
 			
 		// Set record type
 		If Row.Value.Property("RecordType") Then
@@ -1494,6 +1498,7 @@ Function SkipOnCheckPosting(Doc)
 
 	Array = New Array;
 	Array.Add(Metadata.Documents.CalculationMovementCosts);
+	Array.Add(Metadata.Documents.JournalEntry);
 	
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction
@@ -1631,6 +1636,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 					For Each Row In TableOfJEDocuments Do
 						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
 						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "DataTable", NewMovement);
+						Row.JEDocument.DeletionMark = Row.BasisDocument.DeletionMark;
 						Row.JEDocument.Write(DocumentWriteMode.Write);
 					EndDo;							
 				Else

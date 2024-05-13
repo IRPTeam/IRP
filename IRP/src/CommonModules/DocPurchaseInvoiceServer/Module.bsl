@@ -20,6 +20,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
+	FillVendorPrice(Object);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

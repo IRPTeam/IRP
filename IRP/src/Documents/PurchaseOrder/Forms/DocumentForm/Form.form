@@ -2956,7 +2956,6 @@
           </extendedTooltip>
           <type>ColumnGroup</type>
           <extInfo xsi:type="form:ColumnGroupExtInfo">
-            <group>InCell</group>
             <showTitle>true</showTitle>
             <showInHeader>true</showInHeader>
           </extInfo>

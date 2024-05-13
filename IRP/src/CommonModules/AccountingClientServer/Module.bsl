@@ -88,7 +88,9 @@ Function GetDocumentMainTable(Doc) Export
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Transactions") Then
 		MainTable = "Transactions";
 	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "Calculations") Then
-		MainTable = "Calculations";		
+		MainTable = "Calculations";	
+	ElsIf CommonFunctionsClientServer.ObjectHasProperty(Doc, "CostList") Then
+		MainTable = "CostList";				
 	EndIf;
 	Return MainTable;
 EndFunction

@@ -2777,19 +2777,23 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListIsAdditionalItemCost</name>
-          <id>976</id>
+          <name>ItemListOtherPeriodExpenseType</name>
+          <id>1055</id>
+          <title>
+            <key>en</key>
+            <value>Other period expense type</value>
+          </title>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.IsAdditionalItemCost</segments>
+            <segments>Object.ItemList.OtherPeriodExpenseType</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListIsAdditionalItemCostExtendedTooltip</name>
-            <id>978</id>
+            <name>ItemListOtherPeriodExpenseTypeExtendedTooltip</name>
+            <id>1057</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2803,8 +2807,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListIsAdditionalItemCostContextMenu</name>
-            <id>977</id>
+            <name>ItemListOtherPeriodExpenseTypeContextMenu</name>
+            <id>1056</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2812,12 +2816,20 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>CheckBoxField</type>
+          <type>InputField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <clearButton>true</clearButton>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
         </items>
         <items xsi:type="form:FormGroup">
           <name>VendorPrice</name>

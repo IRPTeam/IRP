@@ -3,7 +3,7 @@
 #Region EventSubscriptions
 
 Procedure BeforeWrite_DocumentsLockDataModification(Source, Cancel, WriteMode, PostingMode) Export
-	CheckLockData(Source, Cancel, Source.IsNew());
+	CheckLockData(Source, Cancel, Source.IsNew());	
 EndProcedure
 
 Procedure BeforeWrite_CatalogsLockDataModification(Source, Cancel) Export

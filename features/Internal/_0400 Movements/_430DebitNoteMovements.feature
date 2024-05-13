@@ -282,7 +282,6 @@ Scenario: _043006 check Debit note movements by the Register "R5021 Revenues" (w
 			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    |
 			| ''                                       | '05.04.2021 09:30:36' | '393,76'    | '393,76'            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
 			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          | 'Project 01' |
 			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
 	And I close all client application windows
 
@@ -305,7 +304,6 @@ Scenario: _043007 check Debit note movements by the Register "R5021 Revenues" (w
 			| ''                                         | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'         | 'Profit loss center'        | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    | 'Project'    |
 			| ''                                         | '05.04.2021 09:31:09'   | '17,12'       | '17,12'               | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'USD'        | ''                      | 'Reporting currency'              | ''           |
 			| ''                                         | '05.04.2021 09:31:09'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'TRY'        | ''                      | 'Local currency'                  | ''           |
-			| ''                                         | '05.04.2021 09:31:09'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'TRY'        | ''                      | 'TRY'                             | ''           |
 			| ''                                         | '05.04.2021 09:31:09'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'TRY'        | ''                      | 'en description is empty'         | ''           |
 	And I close all client application windows
 
@@ -328,7 +326,6 @@ Scenario: _043008 check Debit note movements by the Register "R5021 Revenues" (O
 			| ''                                         | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'         | 'Profit loss center'        | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    | 'Project'    |
 			| ''                                         | '12.06.2023 14:52:33'   | '17,12'       | '17,12'               | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Revenue'        | ''           | 'USD'        | ''                      | 'Reporting currency'              | ''           |
 			| ''                                         | '12.06.2023 14:52:33'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Revenue'        | ''           | 'TRY'        | ''                      | 'Local currency'                  | ''           |
-			| ''                                         | '12.06.2023 14:52:33'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Revenue'        | ''           | 'TRY'        | ''                      | 'TRY'                             | ''           |
 			| ''                                         | '12.06.2023 14:52:33'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Revenue'        | ''           | 'TRY'        | ''                      | 'en description is empty'         | ''           |
 	And I close all client application windows
 
@@ -414,7 +411,7 @@ Scenario: _043012 check absence Debit note movements by the Register "R1021 Vend
 	And I close all client application windows
 
 
-Scenario: _043012 check Debit note movements by the Register "R5020 Partners balance" (OtherPartnersTransactions)
+Scenario: _043013 check Debit note movements by the Register "R5020 Partners balance" (OtherPartnersTransactions)
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -434,6 +431,71 @@ Scenario: _043012 check Debit note movements by the Register "R5020 Partners bal
 			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
 			| ''                                       | '12.06.2023 14:52:33' | 'Receipt'    | 'Main Company' | 'Front office' | 'Other partner 1' | 'Other partner 1' | 'Other partner 1' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '17,12'  | ''                     | ''                 | ''                   | ''               | '17,12'             | ''                 |		
 	And I close all client application windows
+
+
+Scenario: _043014 check DebitNote movements by the Register  "T2015 Transactions info" (with vendor)
+	And I close all client application windows
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                       | ''          | ''           | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'    | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                       | ''          | ''           | ''       | ''       | ''        |
+			| ''                                       | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                      | 'Unique ID' | 'Project'    | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                       | 'Main Company' | 'Front office' | ''      | '05.04.2021 09:30:36' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Debit note 1 dated 05.04.2021 09:30:36' | '*'         | 'Project 01' | '-2 300' | 'Yes'    | 'No'      |	
+	And I close all client application windows
+
+Scenario: _043015 check absence DebitNote movements by the Register  "T2014 Advances info" (with vendor)
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1'       |
+	* Check movements by the Register  "T2014 Advances info"
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2014 Advances info"'    |
+		And I close all client application windows
+
+Scenario: _043016 check DebitNote movements by the Register  "T2015 Transactions info" (with customer)
+	And I close all client application windows
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '2'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 2 dated 05.04.2021 09:31:09' | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                       | ''          | ''        | ''       | ''       | ''        |
+			| 'Register  "T2015 Transactions info"'    | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                       | ''          | ''        | ''       | ''       | ''        |
+			| ''                                       | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                      | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
+			| ''                                       | 'Main Company' | 'Front office' | ''      | '05.04.2021 09:31:09' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Debit note 2 dated 05.04.2021 09:31:09' | '*'         | ''        | '100'    | 'Yes'    | 'No'      |
+	And I close all client application windows
+
+Scenario: _043017 check absence DebitNote movements by the Register  "T2014 Advances info" (Return to customer, with customer)
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2'       |
+	* Check movements by the Register  "T2014 Advances info"
+		And I click "Registrations report info" button
+		And I select "T2014 Advances info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "T2014 Advances info"'    |
+		And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows

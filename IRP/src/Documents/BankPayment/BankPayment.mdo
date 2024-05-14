@@ -528,6 +528,10 @@
         <name>Filter.LegalName</name>
         <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.BankPayment.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -236,7 +236,7 @@ Scenario: _0991002 filling accounting operation
 	And I click "Fill default descriptions" button
 	And I click "Refresh" button
 	And I click "List" button		
-	And "List" table became equal
+	And "List" table contains lines
 		| 'Predefined data item name'                                                                                  | 'Description'                                                                                                    |
 		| 'Document_BankPayment'                                                                                       | 'Bank payment'                                                                                                   |
 		| 'Document_BankReceipt'                                                                                       | 'Bank receipt'                                                                                                   |

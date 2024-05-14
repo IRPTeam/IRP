@@ -160,6 +160,33 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues , New Structure("ByRow, RequestTable", True, True));
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers , New Structure("ByRow, RequestTable", True, True));
 	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues , New Structure("ByRow, RequestTable", True, True));
+	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+	
 	// Money transfer
 	Map.Insert(AO.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand    , New Structure("ByRow", False));
 	Map.Insert(AO.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit , New Structure("ByRow", False));

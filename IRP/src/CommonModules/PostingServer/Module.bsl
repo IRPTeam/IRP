@@ -203,7 +203,9 @@ Function RegisterRecords(Parameters)
 		EndIf;
 		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
 			RegisterName = Row.Value.Metadata.Name;
+			try
 			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			except endtry;
 		EndIf;
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		// MD5

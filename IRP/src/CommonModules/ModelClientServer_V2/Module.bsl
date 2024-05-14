@@ -1038,7 +1038,7 @@ EndFunction
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
+	Return GetChainLinkOptions("Company, Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
 EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export

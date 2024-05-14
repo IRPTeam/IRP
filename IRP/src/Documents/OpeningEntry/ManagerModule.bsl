@@ -252,7 +252,11 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	CurrencyTable = Ref.Currencies.UnloadColumns();
 	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
 	For Each Row In BatchKeysInfo Do
-		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
+		CurrencyParameters.RowKey   = Row.Key;
+		CurrencyParameters.Currency = Row.Currency;
+		CurrencyParameters.Ref      = Ref;
+		CurrenciesServer.AddRowToCurrencyTable(CurrencyParameters, Ref.Date, CurrencyTable, CurrencyMovementType);
 	EndDo;
 	
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
@@ -460,11 +464,7 @@ Function AdvancesToVendors()
 		|	OpeningEntryAdvanceToSuppliers.Partner,
 		|	OpeningEntryAdvanceToSuppliers.LegalName,
 		|	OpeningEntryAdvanceToSuppliers.LegalNameContract,
-		|	case
-		|		when OpeningEntryAdvanceToSuppliers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then OpeningEntryAdvanceToSuppliers.Agreement
-		|		else Undefined
-		|	end AS Agreement,
+		|	OpeningEntryAdvanceToSuppliers.Agreement AS Agreement,
 		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
 		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
 		|	OpeningEntryAdvanceToSuppliers.Key,
@@ -559,11 +559,7 @@ Function AdvancesFromCustomers()
 		|	OpeningEntryAdvanceFromCustomers.Partner,
 		|	OpeningEntryAdvanceFromCustomers.LegalName,
 		|	OpeningEntryAdvanceFromCustomers.LegalNameContract,
-		|	case
-		|		when OpeningEntryAdvanceFromCustomers.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			Then OpeningEntryAdvanceFromCustomers.Agreement
-		|		else Undefined
-		|	end AS Agreement,
+		|	OpeningEntryAdvanceFromCustomers.Agreement AS Agreement,
 		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
 		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
 		|	OpeningEntryAdvanceFromCustomers.Key,
@@ -805,6 +801,8 @@ Function CashInTransitDoc()
 	Return
 		"SELECT
 		|	CashInTransitDoc.Key,
+		|	CashInTransitDoc.Ref,
+		|	CashInTransitDoc.UseBasisDocument,
 		|	CashInTransitDoc.Ref.Date AS Period,
 		|	CashInTransitDoc.Ref.Company AS Company,
 		|	CashInTransitDoc.ReceiptingBranch AS Branch,
@@ -870,6 +868,11 @@ Function CashInTransit()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN OpeningEntryCashInTransit.UseBasisDocument
+		|			THEN OpeningEntryCashInTransit.Ref
+		|		ELSE UNDEFINED
+		|	END As BasisDocument,
 		|	OpeningEntryCashInTransit.Ref.Date AS Period,
 		|	OpeningEntryCashInTransit.Ref.Company,
 		|	OpeningEntryCashInTransit.Account AS FromAccount,
@@ -1193,6 +1196,11 @@ Function R3021B_CashInTransitIncoming()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CASE
+		|		WHEN CashInTransitDoc.UseBasisDocument
+		|			THEN CashInTransitDoc.Ref
+		|		ELSE UNDEFINED
+		|	END As Basis,
 		|	CashInTransitDoc.Key,
 		|	CashInTransitDoc.Period,
 		|	CashInTransitDoc.Company,
@@ -1328,44 +1336,47 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 Function T2014S_AdvancesInfo()
-	Return "SELECT
-		   |	AdvancesToVendors.Period AS Date,
-		   |	AdvancesToVendors.Key,
-		   |	AdvancesToVendors.Company,
-		   |	AdvancesToVendors.Branch,
-		   |	AdvancesToVendors.Currency,
-		   |	AdvancesToVendors.Agreement AS AdvanceAgreement,
-		   |	AdvancesToVendors.Partner,
-		   |	AdvancesToVendors.LegalName,
-		   |	AdvancesToVendors.Project,
-		   |	TRUE AS IsVendorAdvance,
-		   |	FALSE AS IsCustomerAdvance,
-		   |	AdvancesToVendors.Amount
-		   |INTO T2014S_AdvancesInfo
-		   |FROM
-		   |	AdvancesToVendors AS AdvancesToVendors
-		   |WHERE
-		   |	TRUE
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	AdvancesFromCustomers.Period,
-		   |	AdvancesFromCustomers.Key,
-		   |	AdvancesFromCustomers.Company,
-		   |	AdvancesFromCustomers.Branch,
-		   |	AdvancesFromCustomers.Currency,
-		   |	AdvancesFromCustomers.Agreement,
-		   |	AdvancesFromCustomers.Partner,
-		   |	AdvancesFromCustomers.LegalName,
-		   |	AdvancesFromCustomers.Project,
-		   |	FALSE,
-		   |	TRUE,
-		   |	AdvancesFromCustomers.Amount
-		   |FROM
-		   |	AdvancesFromCustomers AS AdvancesFromCustomers
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	VALUE(Enum.RecordType.Receipt) AS RecordType,
+		|	AdvancesToVendors.Period AS Date,
+		|	AdvancesToVendors.Key,
+		|	AdvancesToVendors.Company,
+		|	AdvancesToVendors.Branch,
+		|	AdvancesToVendors.Currency,
+		|	AdvancesToVendors.Agreement AS AdvanceAgreement,
+		|	AdvancesToVendors.Partner,
+		|	AdvancesToVendors.LegalName,
+		|	AdvancesToVendors.Project,
+		|	TRUE AS IsVendorAdvance,
+		|	FALSE AS IsCustomerAdvance,
+		|	AdvancesToVendors.Amount
+		|INTO T2014S_AdvancesInfo
+		|FROM
+		|	AdvancesToVendors AS AdvancesToVendors
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(Enum.RecordType.Receipt),
+		|	AdvancesFromCustomers.Period,
+		|	AdvancesFromCustomers.Key,
+		|	AdvancesFromCustomers.Company,
+		|	AdvancesFromCustomers.Branch,
+		|	AdvancesFromCustomers.Currency,
+		|	AdvancesFromCustomers.Agreement,
+		|	AdvancesFromCustomers.Partner,
+		|	AdvancesFromCustomers.LegalName,
+		|	AdvancesFromCustomers.Project,
+		|	FALSE,
+		|	TRUE,
+		|	AdvancesFromCustomers.Amount
+		|FROM
+		|	AdvancesFromCustomers AS AdvancesFromCustomers
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function T2015S_TransactionsInfo()

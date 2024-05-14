@@ -669,7 +669,7 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.Order");
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.IsPurchaseOrderClose");
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.IsSalesOrderClose");
-	Array.Add("OpeningEntry.T2014S_AdvancesInfo.RecordType");
+	//Array.Add("OpeningEntry.T2014S_AdvancesInfo.RecordType");
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.Order");
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.IsPaid");
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");

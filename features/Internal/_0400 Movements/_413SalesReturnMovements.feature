@@ -412,14 +412,11 @@ Scenario: _041309 check Sales return movements by the Register  "R5021 Revenues"
 			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''                        | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
 			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'                  | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    |
 			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'TRY'                          | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | '-665'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | '-494'              | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-96,48'    | '-113,85'           | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'TRY'                          | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | '-95'               | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-71,67'    | '-84,57'            | 'Main Company' | 'Distribution department' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
 			| ''                                           | '12.03.2021 08:44:18' | '-13,78'    | '-16,26'            | 'Main Company' | 'Distribution department' | 'Front office'            | 'Revenue'      | 'Internet' | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
@@ -664,6 +661,22 @@ Scenario: _041320 check Sales return with serial lot numbers movements by the Re
 			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'XL/Green'   | ''                     |
 			| ''                                               | 'Receipt'       | '20.05.2022 18:36:56'   | '10'          | 'Store 02'     | 'UNIQ'       | ''                     |
 	And I close all client application windows
+
+Scenario: _041321 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (Return from trade agent)
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '192'       |
+	* Check movements by the Register  "T2015 Transactions info""
+		And I click "Registrations report info" button
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "T2015 Transactions info"    |
+	And I close all client application windows
+
 
 Scenario: _041326 check Sales return movements by the Register  "T2015 Transactions info"
 	And I close all client application windows
@@ -1059,3 +1072,21 @@ Scenario: _041339 check Sales return movements by the Register  "R5021 Revenues"
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R5021 Revenues"'    |
 		And I close all client application windows
+
+Scenario: _041340 check Sales return movements by the Register  "R4050 Stock inventory" (consignor and own stock)
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '193'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 193 dated 05.11.2022 00:00:01' | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'          | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |		
+		And I close all client application windows	

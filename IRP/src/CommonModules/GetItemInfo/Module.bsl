@@ -2023,6 +2023,16 @@ Function GetDescriptionByTemplate(Val ObjectOrRef, Val Template, LocalizationCod
 	Return Description;
 EndFunction
 
+// Parse description formula.
+// 
+// Parameters:
+//  ObjectOrRef - AnyRef - Object or ref
+//  Template - String - Template
+// 
+// Returns:
+//  Structure - Parse description formula:
+// * Value - String - 
+// * ArrayOfAttributeValues - Array - 
 Function ParseDescriptionFormula(Val ObjectOrRef, Val Template)
 	Result = New Structure("Value, ArrayOfAttributeValues","" + Template, New Array());
 	PrimitiveTypes = New TypeDescription("Number, String, Date, Boolean, ValueStorage, UUID");
@@ -2060,20 +2070,13 @@ Function ParseDescriptionFormula(Val ObjectOrRef, Val Template)
 				Or CommonFunctionsServer.isCommonAttributeUseForMetadata(AttributeName, _Metadata) Then
 				
 				If AttributeCounter > 0 Or  CommonFunctionsServer.IsRef(TypeOf(OperandValue)) Then
-					OperandValue = CommonFunctionsServer.GetRefAttribute(OperandValue, AttributeName);
+					OperandValue = CommonFunctionsServer.GetRefAttribute(OperandValue, AttributeName); // AnyRef
 				Else
-					OperandValue = OperandValue[AttributeName];
+					OperandValue = OperandValue[AttributeName]; // AnyRef
 				EndIf;
 				
 			Else
-				AddAttribute = Undefined;
-				For Each Desc In LocalizationReuse.AllDescription() Do
-					AddAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute(Desc, AttributeName);
-					If ValueIsFilled(AddAttribute) Then
-						Break;
-					EndIf;
-				EndDo;
-						 
+				AddAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute("UniqueID", AttributeName);
 				If Not ValueIsFilled(AddAttribute) Then
 					Raise StrTemplate("Can not eval description formula. error operand [%1]:[%2]", OperandName, AttributeName);
 				EndIf;

@@ -679,13 +679,27 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="167c9d0c-ffee-4d75-9033-398dc34c49de">
-      <name>IsAdditionalItemCost</name>
+      <name>DELETE_IsAdditionalItemCost</name>
       <synonym>
         <key>en</key>
         <value>Is additional item cost</value>
       </synonym>
       <type>
         <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="40740b8b-fdcb-4237-943f-47bf6a4543ae">
+      <name>OtherPeriodExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Other period expense type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.OtherPeriodExpenseType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -103,6 +103,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
 	
+	Form.Items.ItemListOtherPeriodExpenseType.Visible = FOServer.IsUseStores();
 EndProcedure
 
 &AtClient

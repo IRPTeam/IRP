@@ -310,6 +310,7 @@
         <types>DocumentRef.SalesReturn</types>
         <types>DocumentRef.PurchaseInvoice</types>
         <types>DocumentRef.PurchaseReturn</types>
+        <types>DocumentRef.OpeningEntry</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

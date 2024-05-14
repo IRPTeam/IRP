@@ -470,6 +470,29 @@
     <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.PurchaseReturn</types>
+    <types>DocumentRef.OpeningEntry</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="05dc1fdb-b7b0-41f7-b0cb-8fff1c1c41ec">
+   <name>Detail</name>
+   <synonym>
+    <key>en</key>
+    <value>Detail</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Комментарий</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Detaylar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeDescription</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

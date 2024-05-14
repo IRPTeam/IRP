@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Перевод сотрудника</value>
+  <value>Кадровое перемещение</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -64,7 +64,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Перевод сотрудника</value>
+  <value>Кадровое перемещение</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -76,7 +76,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Переводы сотрудников</value>
+  <value>Кадровые перемещения</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Из должности</value>
+   <value>Должность</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -190,7 +190,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Из графика работы сотрудника</value>
+   <value>График работы сотрудника</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -214,7 +214,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Центр прибылей/убытков расход</value>
+   <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -237,7 +237,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>На должность</value>
+   <value>Должность</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -261,7 +261,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>В график работы сотрудника</value>
+   <value>График работы сотрудника</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -285,7 +285,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Центр ДДС (расход)</value>
+   <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -308,7 +308,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>В подразделение</value>
+   <value>Подразделение</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -403,7 +403,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Из типа начисления</value>
+   <value>Тип начисления</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -479,7 +479,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>В тип начисления</value>
+   <value>Тип начисления</value>
   </synonym>
   <synonym>
    <key>tr</key>

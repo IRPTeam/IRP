@@ -11,26 +11,16 @@ EndProcedure
 
 #Region FormHeaderItemsEventHandlers
 
-// Expense value table selection.
-// 
-// Parameters:
-//  Item - FormTable - Item
-//  RowSelected - Number - Row selected
-//  Field - FormField - Field
-//  StandardProcessing - Boolean - Standard processing
 &AtClient
-Procedure ExpenseValueTableSelection(Item, RowSelected, Field, StandardProcessing)
+Procedure RevenueValueTableSelection(Item, RowSelected, Field, StandardProcessing)	
+	CurrentData = Items.RevenueValueTable.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
 	
-	Array = New Array(); // Array of Structure
-	
-	CurrentData = RevenueValueTable.FindByID(RowSelected);
-	Structure = DocExpenseRevenueAccrualsClient.RowPickupEmptyStructure();
-	FillPropertyValues(Structure, CurrentData);
-		
-	Array.Add(Structure);
-		
-	Close(Array);	
-	
+	Result = New Array();
+	Result.Add(New Structure("Amount, Basis", CurrentData.Amount, CurrentData.Document));
+	Close(Result);
 EndProcedure
 
 #EndRegion
@@ -46,30 +36,33 @@ Procedure FillRevenueTable()
 	|	R6080T_OtherPeriodsRevenues.Currency AS Currency,
 	|	R6080T_OtherPeriodsRevenues.TransactionCurrency AS TransactionCurrency,
 	|	R6080T_OtherPeriodsRevenues.CurrencyMovementType AS CurrencyMovementType,
-	|	R6080T_OtherPeriodsRevenues.AmountBalance AS Amount,
-	|	R6080T_OtherPeriodsRevenues.AmountTaxBalance AS TaxAmount
+	|	R6080T_OtherPeriodsRevenues.AmountBalance AS Amount
 	|FROM
-	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(
-	|			&BalancePeriod,
-	|			Company = &Company
-	|				AND CurrencyMovementType = &CurrencyMovementType
-	|				AND OtherPeriodRevenueType = VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals)
-	|				AND Currency = &Currency
-	|				AND &DocTypeFilter) AS R6080T_OtherPeriodsRevenues";
+	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, Company = &Company
+	|	AND CurrencyMovementType = &CurrencyMovementType
+	|	AND OtherPeriodRevenueType = VALUE(Enum.OtherPeriodRevenueType.RevenueAccruals)
+	|	AND Currency = &Currency
+	|	AND CASE
+	|		WHEN &TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
+	|			THEN Basis REFS Document.SalesInvoice
+	|		ELSE Basis REFS Document.RevenueAccruals
+	|	END) AS R6080T_OtherPeriodsRevenues";
 	
 	Query.SetParameter("Company", Parameters.Company);
+	Query.SetParameter("Branch", Parameters.Branch);
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	Query.SetParameter("Currency", Parameters.Currency);
+	Query.SetParameter("TransactionType", Parameters.TransactionType);
 	
-	CurrentTransactionType = Parameters.TransactionType;
-	If CurrentTransactionType = Enums.AccrualsTransactionType.Accrual Then 
-		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.SalesInvoice)");
-	ElsIf CurrentTransactionType = Enums.AccrualsTransactionType.Void 
-		Or CurrentTransactionType = Enums.AccrualsTransactionType.Reverse Then
-		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.RevenueAccruals)");
-	Else
-		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "True");
-	EndIf;
+//	CurrentTransactionType = Parameters.TransactionType;
+//	If CurrentTransactionType = Enums.AccrualsTransactionType.Accrual Then 
+//		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.SalesInvoice)");
+//	ElsIf CurrentTransactionType = Enums.AccrualsTransactionType.Void 
+//		Or CurrentTransactionType = Enums.AccrualsTransactionType.Reverse Then
+//		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "VALUETYPE(Basis) = TYPE(Document.RevenueAccruals)");
+//	Else
+//		Query.Text = StrReplace(Query.Text, "&DocTypeFilter", "True");
+//	EndIf;
 	
 	BalancePeriod = Undefined;
 	If ValueIsFilled(Parameters.Ref) And Parameters.Ref.Posted Then

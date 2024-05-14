@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Статус базы данных</value>
+  <value>Статусы базы данных</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -145,11 +145,11 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Это рабочий сервер</value>
+   <value>Рабочий сервер</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Bu PROD sunucu</value>
+   <value>PROD sunucu </value>
   </synonym>
   <type>
    <types>Boolean</types>

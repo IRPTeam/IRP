@@ -118,7 +118,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Комментарий</value>
+    <value>Наименование</value>
    </title>
    <title>
     <key>tr</key>
@@ -530,7 +530,7 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Наименование</value>
+       <value>Описание</value>
       </content>
       <content>
        <key>tr</key>

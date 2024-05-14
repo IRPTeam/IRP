@@ -2809,48 +2809,6 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>ItemListIsAdditionalItemCost</name>
-     <id>976</id>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.ItemList.DELETE_IsAdditionalItemCost</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>ItemListIsAdditionalItemCostExtendedTooltip</name>
-      <id>978</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>ItemListIsAdditionalItemCostContextMenu</name>
-      <id>977</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>CheckBoxField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-    </items>
-    <items xsi:type="form:FormField">
      <name>ItemListOtherPeriodExpenseType</name>
      <id>1055</id>
      <title>
@@ -7073,7 +7031,7 @@
    </extendedTooltip>
    <type>UsualGroup</type>
    <extInfo xsi:type="form:UsualGroupExtInfo">
-    <group>HorizontalIfPossible</group>
+    <group>AlwaysHorizontal</group>
     <showLeftMargin>true</showLeftMargin>
     <united>true</united>
     <backColor xsi:type="core:ColorDef">

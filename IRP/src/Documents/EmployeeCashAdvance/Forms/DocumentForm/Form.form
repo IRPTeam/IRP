@@ -1418,6 +1418,36 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
+     <items xsi:type="form:Button">
+      <name>EditAccounting</name>
+      <id>683</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingExtendedTooltip</name>
+       <id>684</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccounting</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -2624,6 +2654,56 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>30</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>31</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
@@ -2731,6 +2811,36 @@
     <name>FillByAdvances</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe değiştir</value>
+  </title>
+  <id>5</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

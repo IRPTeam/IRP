@@ -61,7 +61,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Тип ведомости основных средств</value>
+  <value>Вид учета основного средства</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -73,7 +73,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Вид расчета основных средств</value>
+  <value>Виды учета основных средств</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>

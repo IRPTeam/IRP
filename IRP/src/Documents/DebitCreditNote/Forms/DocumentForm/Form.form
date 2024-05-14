@@ -1235,7 +1235,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Данные отправителя</value>
+      <value>Отправитель</value>
      </title>
      <title>
       <key>tr</key>
@@ -1771,7 +1771,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Данные получателя</value>
+      <value>Получатель</value>
      </title>
      <title>
       <key>tr</key>
@@ -2142,7 +2142,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Прочий</value>
+    <value>Дополнительно</value>
    </title>
    <title>
     <key>tr</key>
@@ -2401,7 +2401,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Комментарий</value>
   </title>
   <title>
    <key>tr</key>

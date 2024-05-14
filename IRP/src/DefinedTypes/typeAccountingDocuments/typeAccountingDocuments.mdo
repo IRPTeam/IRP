@@ -37,5 +37,8 @@
   <types>DocumentRef.DepreciationCalculation</types>
   <types>DocumentRef.DebitCreditNote</types>
   <types>DocumentRef.Payroll</types>
+  <types>DocumentRef.EmployeeCashAdvance</types>
+  <types>DocumentRef.ExpenseAccruals</types>
+  <types>DocumentRef.RevenueAccruals</types>
  </type>
 </mdclass:DefinedType>

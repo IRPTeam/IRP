@@ -37,7 +37,6 @@
  <content>Document.AdditionalRevenueAllocation.TabularSection.RevenueDocuments</content>
  <content>Document.CashRevenue.TabularSection.PaymentList</content>
  <content>Document.DebitNote.TabularSection.Transactions.Attribute.RevenueType</content>
- <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.DELETE_IsAdditionalItemRevenue</content>
  <content>Catalog.ExpenseAndRevenueTypes</content>
  <content>InformationRegister.ExpenseRevenueTypeSettings.Resource.RevenueType</content>
  <content>InformationRegister.T6070S_BatchRevenueAllocationInfo</content>

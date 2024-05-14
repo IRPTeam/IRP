@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Прием на работу</value>
+  <value>Найм сотрудника</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -64,7 +64,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Прием на работу</value>
+  <value>Найм сотрудника</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -283,7 +283,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Тип начислений</value>
+   <value>Тип начисления</value>
   </synonym>
   <synonym>
    <key>tr</key>

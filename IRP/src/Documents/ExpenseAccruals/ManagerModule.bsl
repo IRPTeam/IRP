@@ -1,5 +1,22 @@
 // @strict-types
 
+#Region PrintForm
+
+// Get print form.
+// 
+// Parameters:
+//  Ref - DocumentRef.ExpenseAccruals
+//  PrintFormName - String
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Undefined - Get print form
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 // Posting get document data tables.
@@ -10,13 +27,14 @@
 // Returns:
 //  Structure - Posting get document data tables
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Parameters.IsReposting = False;
-	Return Tables;
 	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	
+	Return Tables;
 EndFunction
 
 // Posting get lock data source.
@@ -120,79 +138,103 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array; // Array of String
 	QueryArray.Add(CostList());
 	Return QueryArray;
 EndFunction
 
-Function CostList()
-	Return
-	"SELECT
-	|	ExpenseAccrualsCostList.Key AS Key,
-	|	ExpenseAccrualsCostList.Ref.Date AS Period,
-	|	ExpenseAccrualsCostList.Ref.Company AS Company,
-	|	ExpenseAccrualsCostList.Ref.Branch AS Branch,
-	|	ExpenseAccrualsCostList.Ref.Currency AS Currency,
-	|	ExpenseAccrualsCostList.ProfitLossCenter AS ProfitLossCenter,
-	|	ExpenseAccrualsCostList.ExpenseType AS ExpenseType,
-	|	ExpenseAccrualsCostList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	ExpenseAccrualsCostList.Project AS Project,
-	|	CASE
-	|		WHEN ExpenseAccrualsCostList.Ref.Basis = UNDEFINED
-	|			THEN &Ref
-	|		ELSE ExpenseAccrualsCostList.Ref.Basis
-	|	END AS Basis,
-	|	CASE
-	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
-	|			THEN 1
-	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
-	|			THEN -1
-	|		WHEN ExpenseAccrualsCostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
-	|			THEN 1
-	|		ELSE 1
-	|	END AS Factor,
-	|	ExpenseAccrualsCostList.Amount AS Amount,
-	|	ExpenseAccrualsCostList.AmountTax AS AmountTax,
-	|	ExpenseAccrualsCostList.Amount + ExpenseAccrualsCostList.AmountTax AS AmountWithTaxes,
-	|	ExpenseAccrualsCostList.Ref.TransactionType As TransactionType
-	|INTO CostList
-	|FROM
-	|	Document.ExpenseAccruals.CostList AS ExpenseAccrualsCostList
-	|WHERE
-	|	ExpenseAccrualsCostList.Ref = &Ref";
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array; // Array of String
+	QueryArray.Add(R5022T_Expenses());	
+	QueryArray.Add(R6070T_OtherPeriodsExpenses());
+	QueryArray.Add(T1040T_AccountingAmounts());	
+	Return QueryArray;
 EndFunction
 
 #EndRegion
 
-#Region PrintForm
+#Region Posting_SourceTable
 
-// Get print form.
-// 
-// Parameters:
-//  Ref - DocumentRef.ExpenseAccruals
-//  PrintFormName - String
-//  AddInfo - Undefined - Add info
-// 
-// Returns:
-//  Undefined - Get print form
-Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
-	Return Undefined;
+Function CostList()
+	Return
+	"SELECT
+	|	CostList.Key AS Key,
+	|	CostList.Ref.Date AS Period,
+	|	CostList.Ref.Company AS Company,
+	|	CostList.Ref.Branch AS Branch,
+	|	CostList.Ref.Currency AS Currency,
+	|	CostList.ProfitLossCenter AS ProfitLossCenter,
+	|	CostList.ExpenseType AS ExpenseType,
+	|	CostList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CostList.Project AS Project,
+	|	CASE
+	|		WHEN CostList.Ref.Basis.Ref IS NULL
+	|			THEN &Ref
+	|		ELSE CostList.Ref.Basis
+	|	END AS Basis,
+	|	CASE
+	|		WHEN CostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
+	|			THEN -1
+	|		ELSE 1
+	|	END AS Factor,
+	|	CostList.Amount AS Amount,
+	|	CostList.Ref.TransactionType As TransactionType,
+	|	CostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse) AS IsReverse,
+	|	CostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual) AS IsAccrual,
+	|	CostList.Ref.TransactionType = VALUE(Enum.AccrualsTransactionType.Void) AS IsVoid
+	|INTO CostList
+	|FROM
+	|	Document.ExpenseAccruals.CostList AS CostList
+	|WHERE
+	|	CostList.Ref = &Ref";
 EndFunction
 
 #EndRegion
 
 #Region Posting_MainTables
 
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array; // Array of String
-	QueryArray.Add(R5022T_Expenses());	
-	QueryArray.Add(R6070T_OtherPeriodsExpenses());	
-	Return QueryArray;
+Function R5022T_Expenses()
+	Return
+	"SELECT
+	|	CostList.Period AS Period,
+	|	CostList.Company AS Company,
+	|	CostList.Branch AS Branch,
+	|	CostList.Currency AS Currency,
+	|	CostList.ProfitLossCenter AS ProfitLossCenter,
+	|	CostList.ExpenseType AS ExpenseType,
+	|	CostList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	CostList.Project AS Project,
+	|	CostList.Basis AS Basis,
+	|	CostList.Amount AS Amount
+	|INTO R5022T_Expenses
+	|FROM
+	|	CostList AS CostList
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function R6070T_OtherPeriodsExpenses()
+	Return
+	"SELECT
+	|	CostList.Period AS Period, 
+	|	CASE
+	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
+	|			THEN VALUE(AccumulationRecordType.Receipt)
+	|		ELSE
+	|			VALUE(AccumulationRecordType.Expense)
+	|	END AS RecordType,
+	|	VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS OtherPeriodExpenseType,
+	|	CostList.Company AS Company,
+	|	CostList.Branch AS Branch,
+	|	CostList.Basis AS Basis,
+	|	CostList.Currency AS Currency,
+	|	CostList.Amount * CostList.Factor AS Amount
+	|INTO R6070T_OtherPeriodsExpenses
+	|FROM
+	|	CostList AS CostList
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #EndRegion
@@ -263,58 +305,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PostingInfo
-
-Function R5022T_Expenses()
-	Return
-	"SELECT
-	|	CostList.Period AS Period,
-	|	CostList.Company AS Company,
-	|	CostList.Branch AS Branch,
-	|	CostList.Currency AS Currency,
-	|	CostList.ProfitLossCenter AS ProfitLossCenter,
-	|	CostList.ExpenseType AS ExpenseType,
-	|	CostList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	CostList.Project AS Project,
-	|	CostList.Basis AS Basis,
-	|	CostList.Amount AS Amount,
-	|	CostList.AmountTax AS AmountTax,
-	|	CostList.AmountWithTaxes AS AmountWithTaxes
-	|INTO R5022T_Expenses
-	|FROM
-	|	CostList AS CostList
-	|WHERE
-	|	TRUE";
-EndFunction
-
-Function R6070T_OtherPeriodsExpenses()
-	Return
-	"SELECT
-	|	CostList.Period AS Period, 
-	|	CASE
-	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.Accrual)
-	|			THEN VALUE(AccumulationRecordType.Expense)
-	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.Reverse)
-	|			THEN VALUE(AccumulationRecordType.Receipt)
-	|		WHEN CostList.TransactionType = VALUE(Enum.AccrualsTransactionType.VOID)
-	|			THEN VALUE(AccumulationRecordType.Expense)
-	|	END AS RecordType,
-	|	VALUE(Enum.OtherPeriodExpenseType.ExpenseAccruals) AS OtherPeriodExpenseType,
-	|	CostList.Company AS Company,
-	|	CostList.Branch AS Branch,
-	|	CostList.Basis AS Basis,
-	|	CostList.Currency AS Currency,
-	|	CostList.Amount * CostList.Factor AS Amount,
-	|	CostList.AmountTax * CostList.Factor AS AmountTax
-	|INTO R6070T_OtherPeriodsExpenses
-	|FROM
-	|	CostList AS CostList
-	|WHERE
-	|	TRUE";
-EndFunction
-
-#EndRegion
-
 #Region AccessObject
 
 
@@ -336,5 +326,114 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	CostList.Period,
+		|	CostList.Key AS RowKey,
+		|	CostList.Currency,
+		|	CostList.Amount * CostList.Factor AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	CostList AS CostList
+		|WHERE
+		|	CostList.IsAccrual
+		|	OR CostList.IsVoid
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	CostList.Period,
+		|	CostList.Key AS RowKey,
+		|	CostList.Currency,
+		|	CostList.Amount * CostList.Factor AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	CostList AS CostList
+		|WHERE
+		|	CostList.IsReverse";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	AO = Catalogs.AccountingOperations;
+	If Parameters.Operation = AO.ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses Then
+		
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses(Parameters); // Expense - Other period expense
+		
+	ElsIf Parameters.Operation = AO.ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses Then
+		
+		Return GetAnalytics_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses(Parameters); // Other period expense - Expense (reverse) 
+		
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+// Expense - Other period expense
+Function GetAnalytics_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                    	   Parameters.RowData.ExpenseType,
+	                                                    	   Parameters.RowData.ProfitLossCenter);
+	                                                    
+	AccountingAnalytics.Credit = Credit.AccountOtherPeriodsExpense;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Other period expense - Expense (reverse)
+Function GetAnalytics_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.RowData.ExpenseType,
+	                                                          Parameters.RowData.ProfitLossCenter);
+	
+	AccountingAnalytics.Debit = Debit.AccountOtherPeriodsExpense;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                    	   Parameters.RowData.ExpenseType,
+	                                                    	   Parameters.RowData.ProfitLossCenter);
+	                                                    
+	AccountingAnalytics.Credit = Credit.AccountExpense;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

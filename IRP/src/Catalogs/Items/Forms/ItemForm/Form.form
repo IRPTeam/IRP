@@ -2563,7 +2563,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Комментарий</value>
+   <value>Наименование</value>
   </title>
   <title>
    <key>tr</key>
@@ -2690,7 +2690,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Наименование</value>
+    <value>Описание</value>
    </title>
    <title>
     <key>tr</key>

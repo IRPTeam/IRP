@@ -1720,7 +1720,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Прочий</value>
+    <value>Прочее</value>
    </title>
    <title>
     <key>tr</key>
@@ -1979,7 +1979,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Комментарий</value>
   </title>
   <title>
    <key>tr</key>
@@ -2034,7 +2034,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Заполнить расчеты</value>
+   <value>Рассчитать</value>
   </title>
   <title>
    <key>tr</key>

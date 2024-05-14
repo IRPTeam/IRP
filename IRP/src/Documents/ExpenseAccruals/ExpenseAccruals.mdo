@@ -87,9 +87,12 @@
  <checkUnique>true</checkUnique>
  <autonumbering>true</autonumbering>
  <defaultObjectForm>Document.ExpenseAccruals.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.ExpenseAccruals.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.ExpenseAccruals.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ab437b88-98a6-4638-8aa6-2f175151b76b">
@@ -160,6 +163,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -218,6 +222,40 @@
   <synonym>
    <key>tr</key>
    <value>Gider seçme formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="63701f53-e60d-4d72-8fb7-2fd8cbc1b78f">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="49526d6b-a68f-43d1-ba39-f851f1d37d42">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -356,7 +394,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Статьи затрат</value>
+    <value>Статья затрат</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -367,6 +405,12 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsExpense</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="86018318-77b9-43be-834f-759ba0dbbcc2">
@@ -424,27 +468,6 @@
    <synonym>
     <key>tr</key>
     <value>Tutar</value>
-   </synonym>
-   <type>
-    <types>DefinedType.typeAmount</types>
-   </type>
-   <minValue xsi:type="core:UndefinedValue"/>
-   <maxValue xsi:type="core:UndefinedValue"/>
-   <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="33491c09-c375-48dd-9f71-953a9fc333d4">
-   <name>AmountTax</name>
-   <synonym>
-    <key>en</key>
-    <value>Amount tax</value>
-   </synonym>
-   <synonym>
-    <key>ru</key>
-    <value>Сумма налогов</value>
-   </synonym>
-   <synonym>
-    <key>tr</key>
-    <value>Vergi tutarı</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>

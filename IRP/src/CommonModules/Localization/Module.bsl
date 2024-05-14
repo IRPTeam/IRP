@@ -2619,11 +2619,101 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5
 		|ru='ForeignCurrencyRevaluation Дт (R2020B_AdvancesFromCustomers) Кт (R5021T_Revenues)';
 		|tr='ForeignCurrencyRevaluation DR (R2020B_MüşterilerdenAvanslar) CR (R5021T_Gelirler)'", Lang));
 
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3010B_CashOnHand)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R3010B_CashOnHand) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R9510B_SalaryPayment) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1020B_AdvancesToVendors)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R1020B_AdvancesToVendors CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R3015B_CashAdvance) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R3027B_EmployeeCashAdvance) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R5015B_OtherPartnersTransactions) CR (R5021T_Revenues)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)';
+		|ru='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)';
+		|tr='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R8510B_BookValueOfFixedAsset)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)';
+		|ru='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)';
+		|tr='ForeignCurrencyRevaluation DR (R8510B_BookValueOfFixedAsset) CR (R5021T_Revenues)'", Lang));
+
 Strings.Insert("BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
 	NStr("en='BankReceipt DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
 		|ru='ПоступлениеНаРасчетныйСчет Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
 		|tr='BankaMakbuzu DR (R2020B_MüşterilerdenAlınanPeşinatlar) CR (R2021B_Müşteriİşlemleri)'", Lang));
-	
+
 Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
 	NStr("en='CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)';
 		|ru='Денежный платеж Дебет (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) Кредит (R3010B_CashOnHand)';
@@ -2928,6 +3018,36 @@ Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_Advances
 	NStr("en='DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)';
 		|ru='DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)';
 		|tr='BorçAlacak Dekontu DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar) (Mahsup)'", Lang));
+
+Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
+	NStr("en='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)';
+		|ru='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)';
+		|tr='ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)'", Lang));
+
+Strings.Insert("RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues",
+	NStr("en='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)';
+		|ru='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)';
+		|tr='RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses",
+	NStr("en='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)';
+		|ru='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)';
+		|tr='ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)'", Lang));
+	
+Strings.Insert("RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues",
+	NStr("en='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)';
+		|ru='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)';
+		|tr='RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)'", Lang));
+	
+Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
+		|ru='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)';
+		|tr='EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'", Lang));
+	
+Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
+		|ru='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
+		|tr='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'", Lang));
 
 #EndRegion
 

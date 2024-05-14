@@ -773,7 +773,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Набор настроек</value>
+   <value>Компоновщик настроек</value>
   </title>
   <title>
    <key>tr</key>
@@ -822,7 +822,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Наименование</value>
+    <value>Описание</value>
    </title>
    <title>
     <key>tr</key>
@@ -928,7 +928,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Проверка</value>
+   <value>Тест</value>
   </title>
   <title>
    <key>tr</key>

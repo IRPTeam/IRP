@@ -774,7 +774,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Из подразделения</value>
+      <value>Подразделение</value>
      </title>
      <title>
       <key>tr</key>
@@ -1253,7 +1253,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Из типа зарплаты</value>
+       <value>Тип зарплаты</value>
       </title>
       <title>
        <key>tr</key>
@@ -1295,7 +1295,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Формировать зарплату</value>
+      <value>Текущая зарплата</value>
      </title>
      <title>
       <key>tr</key>
@@ -1338,7 +1338,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Данные отправителя</value>
+     <value>Текущие условия работы</value>
     </title>
     <title>
      <key>tr</key>
@@ -2030,7 +2030,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>В зарплату</value>
+      <value>Измененная зарплата</value>
      </title>
      <title>
       <key>tr</key>
@@ -2073,7 +2073,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Данные получателя</value>
+     <value>Новые условия работы</value>
     </title>
     <title>
      <key>tr</key>
@@ -2117,7 +2117,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Перевод сотрудника</value>
+    <value>Кадровое перемещение</value>
    </title>
    <title>
     <key>tr</key>
@@ -2650,7 +2650,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Комментарий</value>
   </title>
   <title>
    <key>tr</key>
@@ -2704,7 +2704,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Из типа зарплаты</value>
+   <value>Тип зарплаты</value>
   </title>
   <title>
    <key>tr</key>
@@ -2730,7 +2730,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>В тип зарплаты</value>
+   <value>Тип зарплаты</value>
   </title>
   <title>
    <key>tr</key>

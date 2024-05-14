@@ -716,6 +716,7 @@
   <horizontalStretch>true</horizontalStretch>
   <verticalStretch>true</verticalStretch>
   <fileDragMode>AsFileRef</fileDragMode>
+  <searchStringLocation>Top</searchStringLocation>
  </items>
  <autoCommandBar>
   <name>FormCommandBar</name>

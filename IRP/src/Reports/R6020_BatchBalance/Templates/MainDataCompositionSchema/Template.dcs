@@ -4307,7 +4307,7 @@ WHERE
 								</v8:item>
 								<v8:item>
 									<v8:lang>ru</v8:lang>
-									<v8:content>Перерасход по партии</v8:content>
+									<v8:content>Over Batch balance</v8:content>
 								</v8:item>
 								<v8:item>
 									<v8:lang>tr</v8:lang>

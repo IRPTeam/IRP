@@ -234,7 +234,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Дата начала</value>
+    <value>Дата начала отпуска</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -260,7 +260,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Дата окончания</value>
+    <value>Дата окончания отпуска</value>
    </synonym>
    <synonym>
     <key>tr</key>

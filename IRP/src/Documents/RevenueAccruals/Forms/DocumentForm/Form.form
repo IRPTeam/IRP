@@ -493,57 +493,6 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-     <name>DocumentAmount</name>
-     <id>169</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.DocumentAmount</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>DocumentAmountExtendedTooltip</name>
-      <id>171</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>DocumentAmountContextMenu</name>
-      <id>170</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <readOnly>true</readOnly>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
      <name>Description</name>
      <id>114</id>
      <visible>true</visible>
@@ -781,6 +730,55 @@
      </contextMenu>
      <type>InputField</type>
      <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>CostListKey</name>
+     <id>172</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.CostList.Key</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CostListKeyExtendedTooltip</name>
+      <id>174</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CostListKeyContextMenu</name>
+      <id>173</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>EnterOnInput</editMode>
      <showInHeader>true</showInHeader>
      <headerHorizontalAlign>Left</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
@@ -1046,64 +1044,11 @@
       <textEdit>true</textEdit>
      </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-     <name>CostListAmountTax</name>
-     <id>145</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.CostList.AmountTax</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>CostListAmountTaxExtendedTooltip</name>
-      <id>147</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>CostListAmountTaxContextMenu</name>
-      <id>146</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <footerDataPath xsi:type="form:DataPath">
-      <segments>Object.CostList.AmountTax</segments>
-     </footerDataPath>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-     </extInfo>
-    </items>
     <autoCommandBar>
      <name>CostListCommandBar</name>
      <id>118</id>
      <items xsi:type="form:Button">
-      <name>CostListEditCurrencies</name>
+      <name>EditCurrencies</name>
       <id>167</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1111,7 +1056,7 @@
        <common>true</common>
       </userVisible>
       <extendedTooltip>
-       <name>CostListEditCurrenciesExtendedTooltip</name>
+       <name>EditCurrenciesExtendedTooltip</name>
        <id>168</id>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -1132,6 +1077,36 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
+     <items xsi:type="form:Button">
+      <name>EditAccounting</name>
+      <id>177</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingExtendedTooltip</name>
+       <id>178</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccounting</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -1141,16 +1116,20 @@
      <autoFill>true</autoFill>
     </autoCommandBar>
     <handlers>
-     <event>OnEditEnd</event>
-     <name>CostListOnEditEnd</name>
+     <event>Selection</event>
+     <name>CostListSelection</name>
+    </handlers>
+    <handlers>
+     <event>BeforeAddRow</event>
+     <name>CostListBeforeAddRow</name>
+    </handlers>
+    <handlers>
+     <event>BeforeDeleteRow</event>
+     <name>CostListBeforeDeleteRow</name>
     </handlers>
     <handlers>
      <event>AfterDeleteRow</event>
      <name>CostListAfterDeleteRow</name>
-    </handlers>
-    <handlers>
-     <event>OnChange</event>
-     <name>CostListOnChange</name>
     </handlers>
     <searchStringAddition>
      <visible>true</visible>
@@ -1301,7 +1280,6 @@
     <selectionMode>MultiRow</selectionMode>
     <header>true</header>
     <headerHeight>1</headerHeight>
-    <footer>true</footer>
     <footerHeight>1</footerHeight>
     <horizontalScrollBar>AutoUse</horizontalScrollBar>
     <verticalScrollBar>AutoUse</verticalScrollBar>
@@ -1334,6 +1312,47 @@
    <extendedTooltip>
     <name>GroupCostListExtendedTooltip</name>
     <id>46</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>Page</type>
+   <extInfo xsi:type="form:PageGroupExtInfo">
+    <group>Vertical</group>
+    <showTitle>true</showTitle>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+   <name>GroupAddAttributes</name>
+   <id>196</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>en</key>
+    <value>Additional attributes</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Дополнительные реквизиты</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Ek özellikler</value>
+   </title>
+   <extendedTooltip>
+    <name>GroupAddAttributesExtendedTooltip</name>
+    <id>197</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -1473,6 +1492,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.Currency</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>CurrencyOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>CurrencyExtendedTooltip</name>
       <id>12</id>
@@ -1667,7 +1690,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Прочий</value>
+    <value>Прочее</value>
    </title>
    <title>
     <key>tr</key>
@@ -1735,6 +1758,187 @@
  <items xsi:type="form:FormGroup">
   <name>GroupBottom</name>
   <id>107</id>
+  <items xsi:type="form:FormGroup">
+   <name>GroupTotal</name>
+   <id>198</id>
+   <items xsi:type="form:FormGroup">
+    <name>GroupTotalAmount</name>
+    <id>205</id>
+    <items xsi:type="form:FormField">
+     <name>CostListTotalTotalAmount</name>
+     <id>207</id>
+     <title>
+      <key>en</key>
+      <value>Total amount</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Итого</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Toplam tutar</value>
+     </title>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.CostList.TotalAmount</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CostListTotalTotalAmountExtendedTooltip</name>
+      <id>209</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CostListTotalTotalAmountContextMenu</name>
+      <id>208</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <readOnly>true</readOnly>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <maxWidth>20</maxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <choiceButton>false</choiceButton>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>CurrencyTotalAmount</name>
+     <id>210</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.Currency</segments>
+     </dataPath>
+     <titleLocation>None</titleLocation>
+     <extendedTooltip>
+      <name>CurrencyTotalAmountExtendedTooltip</name>
+      <id>212</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CurrencyTotalAmountContextMenu</name>
+      <id>211</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>LabelField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:LabelFieldExtInfo">
+      <maxWidth>6</maxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+     </extInfo>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>GroupTotalAmountExtendedTooltip</name>
+     <id>206</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>HorizontalIfPossible</group>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <groupHorizontalAlign>Right</groupHorizontalAlign>
+   <extendedTooltip>
+    <name>GroupTotalExtendedTooltip</name>
+    <id>199</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>UsualGroup</type>
+   <extInfo xsi:type="form:UsualGroupExtInfo">
+    <group>HorizontalIfPossible</group>
+    <showLeftMargin>true</showLeftMargin>
+    <united>true</united>
+    <backColor xsi:type="core:ColorDef">
+     <red>242</red>
+     <green>242</green>
+     <blue>242</blue>
+    </backColor>
+    <throughAlign>Auto</throughAlign>
+    <currentRowUse>Auto</currentRowUse>
+   </extInfo>
+  </items>
   <visible>true</visible>
   <enabled>true</enabled>
   <userVisible>
@@ -1765,57 +1969,39 @@
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
- <items xsi:type="form:FormGroup">
-  <name>GroupHead</name>
-  <id>109</id>
-  <visible>true</visible>
-  <enabled>true</enabled>
-  <userVisible>
-   <common>true</common>
-  </userVisible>
-  <title>
-   <key>en</key>
-   <value>Group head</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Группа заголовок</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Grup başlık</value>
-  </title>
-  <horizontalStretch>true</horizontalStretch>
-  <extendedTooltip>
-   <name>GroupHeadExtendedTooltip</name>
-   <id>110</id>
+ <autoCommandBar>
+  <name>FormCommandBar</name>
+  <id>-1</id>
+  <items xsi:type="form:Button">
+   <name>FormShowRowKey</name>
+   <id>175</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
     <common>true</common>
    </userVisible>
-   <type>Label</type>
+   <extendedTooltip>
+    <name>FormShowRowKeyExtendedTooltip</name>
+    <id>176</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <commandName>Form.Command.ShowRowKey</commandName>
+   <representation>Auto</representation>
    <autoMaxWidth>true</autoMaxWidth>
    <autoMaxHeight>true</autoMaxHeight>
-   <extInfo xsi:type="form:LabelDecorationExtInfo">
-    <horizontalAlign>Left</horizontalAlign>
-   </extInfo>
-  </extendedTooltip>
-  <type>UsualGroup</type>
-  <extInfo xsi:type="form:UsualGroupExtInfo">
-   <group>AlwaysHorizontal</group>
-   <showLeftMargin>true</showLeftMargin>
-   <united>true</united>
-   <backColor xsi:type="core:ColorRef">
-    <color>Web.Pink</color>
-   </backColor>
-   <throughAlign>Auto</throughAlign>
-   <currentRowUse>Auto</currentRowUse>
-  </extInfo>
- </items>
- <autoCommandBar>
-  <name>FormCommandBar</name>
-  <id>-1</id>
+   <placementArea>UserCmds</placementArea>
+   <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+  </items>
   <items xsi:type="form:Button">
    <name>FormHowHiddenTables</name>
    <id>162</id>
@@ -1900,7 +2086,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Наименование</value>
+   <value>Описание</value>
   </title>
   <title>
    <key>tr</key>
@@ -1945,6 +2131,56 @@
   <extInfo xsi:type="form:ValueListExtInfo">
    <itemValueType/>
   </extInfo>
+ </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>4</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>5</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
  </attributes>
  <formCommands>
   <name>ShowHiddenTables</name>
@@ -2002,6 +2238,64 @@
   </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
+ <formCommands>
+  <name>ShowRowKey</name>
+  <title>
+   <key>en</key>
+   <value>Show row key</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Показать row key</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
+  </title>
+  <id>2</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.GetURL</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ShowRowKey</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe değiştir</value>
+  </title>
+  <id>4</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
  <commandInterface>
   <navigationPanel/>
   <commandBar/>
@@ -2010,6 +2304,22 @@
   <handlers>
    <event>OnReadAtServer</event>
    <name>OnReadAtServer</name>
+  </handlers>
+  <handlers>
+   <event>BeforeWriteAtServer</event>
+   <name>BeforeWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>AfterWriteAtServer</event>
+   <name>AfterWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>OnWriteAtServer</event>
+   <name>OnWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>AfterWrite</event>
+   <name>AfterWrite</name>
   </handlers>
   <repostOnWrite>true</repostOnWrite>
  </extInfo>

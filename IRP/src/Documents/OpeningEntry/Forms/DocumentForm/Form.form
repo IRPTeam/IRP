@@ -2917,6 +2917,10 @@
        <dataPath xsi:type="form:DataPath">
         <segments>Object.AdvanceFromCustomers.Agreement</segments>
        </dataPath>
+       <handlers>
+        <event>OnChange</event>
+        <name>AgreementOnChange</name>
+       </handlers>
        <extendedTooltip>
         <name>AdvanceFromCustomersAgreementExtendedTooltip</name>
         <id>1576</id>
@@ -2948,6 +2952,14 @@
        <headerHorizontalAlign>Left</headerHorizontalAlign>
        <showInFooter>true</showInFooter>
        <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+         <event>StartChoice</event>
+         <name>AdvanceFromCustomersAgreementStartChoice</name>
+        </handlers>
+        <handlers>
+         <event>EditTextChange</event>
+         <name>AdvanceFromCustomersAgreementEditTextChange</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
@@ -3656,6 +3668,10 @@
        <dataPath xsi:type="form:DataPath">
         <segments>Object.AdvanceToSuppliers.Agreement</segments>
        </dataPath>
+       <handlers>
+        <event>OnChange</event>
+        <name>AgreementOnChange</name>
+       </handlers>
        <extendedTooltip>
         <name>AdvanceToSuppliersAgreementExtendedTooltip</name>
         <id>1579</id>
@@ -3687,6 +3703,14 @@
        <headerHorizontalAlign>Left</headerHorizontalAlign>
        <showInFooter>true</showInFooter>
        <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+         <event>StartChoice</event>
+         <name>AdvanceToSuppliersAgreementStartChoice</name>
+        </handlers>
+        <handlers>
+         <event>EditTextChange</event>
+         <name>AdvanceToSuppliersAgreementEditTextChange</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>

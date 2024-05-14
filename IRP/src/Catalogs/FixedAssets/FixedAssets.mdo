@@ -261,7 +261,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Тип учета</value>
+    <value>Вид учета ОС</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -284,7 +284,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Расписание</value>
+    <value>График амортизации ОС</value>
    </synonym>
    <synonym>
     <key>tr</key>

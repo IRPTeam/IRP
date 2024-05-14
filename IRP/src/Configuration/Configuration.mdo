@@ -275,6 +275,7 @@
  <commonPictures>CommonPicture.FillByTemplate</commonPictures>
  <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
  <commonPictures>CommonPicture.Lock</commonPictures>
+ <commonPictures>CommonPicture.Expand</commonPictures>
  <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
  <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

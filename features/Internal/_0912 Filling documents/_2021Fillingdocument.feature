@@ -8827,7 +8827,7 @@ Scenario: _0154191 check filter by Company when select partner term
 
 Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
 	And I close all client application windows
-	When When Create information register Agreements records (NDB, Second Company)
+	When Create information register Agreements records (NDB, Second Company)
 	* Open CR creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"

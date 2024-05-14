@@ -262,6 +262,7 @@ EndFunction
 Procedure CreatePhysicalCount(ObjectRef, GenerateParameters) Export
 	GenerateParameters.Insert("PhysicalInventory", ObjectRef);
 	GenerateParameters.Insert("Store", ObjectRef.Store);
+	GenerateParameters.Insert("Branch", ObjectRef.Branch);
 	ArrayOfInstance = GetArrayOfInstance(GenerateParameters);
 	GenerateParameters.Insert("ArrayOfInstance", ArrayOfInstance);
 	Documents.PhysicalCountByLocation.GeneratePhysicalCountByLocation(GenerateParameters);

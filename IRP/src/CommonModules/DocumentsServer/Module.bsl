@@ -258,6 +258,7 @@ EndFunction
 //		* Agreement - CatalogRef.Agreements
 //		* CurrentDate - Date
 //		* ArrayOfFilters - Array of Filter
+//		* Company - CatalogRef.Companies
 // Returns:
 // 	CatalogRef.Agreements - Description
 Function GetAgreementByPartner(AgreementParameters) Export
@@ -304,7 +305,7 @@ Function GetAgreementByPartner(AgreementParameters) Export
 	Parameters.Insert("AdditionalParameters" , SerializeArrayOfFilters(AdditionalParameters));
 	Parameters.Insert("Agreement"            , AgreementParameters.Agreement);
 	
-	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters);
+	Return Catalogs.Agreements.GetDefaultChoiceRef(Parameters, AgreementParameters);
 EndFunction
 
 Function GetLegalNameByPartner(Partner, LegalName) Export

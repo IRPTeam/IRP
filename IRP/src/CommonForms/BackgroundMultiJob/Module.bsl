@@ -26,6 +26,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DontContinueOnError = JobDataSettings.StopOnErrorAnyJob;
 	MaxJobStream = JobDataSettings.JobLimitCount;
 	CallbackWhenAllJobsDone = JobDataSettings.CallbackWhenAllJobsDone;
+	UpdatePause = JobDataSettings.UpdatePause;
 EndProcedure
 
 &AtClient

@@ -894,6 +894,32 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And "ItemList" table contains lines
 				| 'Item key'    | 'Quantity'    | 'Unit'                      | 'Tax amount'    | 'Price'     | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Price type'                 | 'Item'           |
 				| '37/19SD'     | '2,000'       | 'High shoes box (8 pcs)'    | '180,00'        | '500,00'    | '18%'    | '1 000,00'      | '1 180,00'        | 'Store 01'    | 'en description is empty'    | 'High shoes'     |
+			* Edit quantity in base unit
+				And in the table "ItemList" I click "Edit quantity in base unit" button
+				And I go to line in "ItemList" table
+					| 'Item'     | 'Item key'     |
+					| 'Dress'    | 'S/Yellow'      |		
+				And I select current line in "ItemList" table
+				And I set "Quantity is fixed" checkbox in "ItemList" table
+				And I input "2,000" text in "Stock quantity" field of "ItemList" table
+				And I finish line editing in "ItemList" table
+				And I go to line in "ItemList" table
+					| 'Item'       | 'Item key'     |
+					| 'High shoes' | '37/19SD'      |		
+				And I select current line in "ItemList" table
+				And I set "Quantity is fixed" checkbox in "ItemList" table
+				And I input "17,000" text in "Stock quantity" field of "ItemList" table
+				And I finish line editing in "ItemList" table
+			* Check 
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'S/Yellow' | 'Basic Price Types'       | 'Dress'      | '1,000'    | '550,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '99,00'      | '550,00' | '649,00'       |
+					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |
+				And I click "Post" button
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'S/Yellow' | 'Basic Price Types'       | 'Dress'      | '1,000'    | '550,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '99,00'      | '550,00' | '649,00'       |
+					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |									
 			And I close all client application windows
 			
 
@@ -1242,6 +1268,32 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 			And "ItemList" table contains lines
 				| 'Item key'    | 'Quantity'    | 'Unit'                      | 'Tax amount'    | 'Price'     | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Price type'                 | 'Item'           |
 				| '37/19SD'     | '2,000'       | 'High shoes box (8 pcs)'    | '180,00'        | '500,00'    | '18%'    | '1 000,00'      | '1 180,00'        | 'Store 01'    | 'en description is empty'    | 'High shoes'     |
+			* Edit quantity in base unit
+				And in the table "ItemList" I click "Edit quantity in base unit" button
+				And I go to line in "ItemList" table
+					| 'Item'     | 'Item key'     |
+					| 'Dress'    | 'XS/Blue'      |		
+				And I select current line in "ItemList" table
+				And I set "Quantity is fixed" checkbox in "ItemList" table
+				And I input "2,000" text in "Stock quantity" field of "ItemList" table
+				And I finish line editing in "ItemList" table
+				And I go to line in "ItemList" table
+					| 'Item'       | 'Item key'     |
+					| 'High shoes' | '37/19SD'      |		
+				And I select current line in "ItemList" table
+				And I set "Quantity is fixed" checkbox in "ItemList" table
+				And I input "17,000" text in "Stock quantity" field of "ItemList" table
+				And I finish line editing in "ItemList" table
+			* Check 
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |
+				And I click "Post" button
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |									
 			And I close all client application windows
 			
 
@@ -1774,7 +1826,25 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
-			And I click "Post and close" button
+		* Edit quantity in base unit
+			And in the table "ItemList" I click "Edit quantity in base unit" button
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'     |
+				| 'Dress'    | 'XS/Blue'      |		
+			And I select current line in "ItemList" table
+			And I set "Quantity is fixed" checkbox in "ItemList" table
+			And I input "2,000" text in "Stock quantity" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* Check 
+			And "ItemList" table contains lines
+				| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+				| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+			And I click "Post" button
+			And "ItemList" table contains lines
+				| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+				| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And "List" table contains lines
 				| 'Number'                            | 'Amount'       |
 				| '$$NumberPurchaseOrder0154101$$'    | '1 962,60'     |
@@ -2102,7 +2172,25 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
-
+			* Edit quantity in base unit
+				And in the table "ItemList" I click "Edit quantity in base unit" button
+				And I go to line in "ItemList" table
+					| 'Item'     | 'Item key'     |
+					| 'Dress'    | 'XS/Blue'      |		
+				And I select current line in "ItemList" table
+				And I set "Quantity is fixed" checkbox in "ItemList" table
+				And I input "2,000" text in "Stock quantity" field of "ItemList" table
+				And I finish line editing in "ItemList" table
+			* Check 
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+				And I click "Post" button
+				And "ItemList" table contains lines
+					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
+					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
+				And I close all client application windows
+			
 Scenario: _0154107 check filling in and refilling Cash receipt (transaction type Payment from customer)
 	And I close all client application windows
 	* Open the Cash receipt creation form
@@ -8736,3 +8824,76 @@ Scenario: _0154191 check filter by Company when select partner term
 		And I select from "Company" drop-down list by "second" string
 		Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
+
+Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
+	And I close all client application windows
+	When Create information register Agreements records (NDB, Second Company)
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows
+	
+Scenario: _0154193 check auto filling partner term in the CP (filter by Company)
+	And I close all client application windows
+	* Open CP creation form
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows	
+
+Scenario: _0154194 check auto filling partner term in the BP (filter by Company)
+	And I close all client application windows
+	* Open BP creation form
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows		
+				
+Scenario: _0154195 check auto filling partner term in the BR (filter by Company)
+	And I close all client application windows
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows					

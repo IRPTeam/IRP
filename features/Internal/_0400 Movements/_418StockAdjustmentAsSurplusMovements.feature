@@ -192,12 +192,12 @@ Scenario: _041606 check Stock adjustment as surplus movements by the Register  "
 		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as surplus 1 201 dated 11.08.2023 12:19:26' | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| 'Register  "R4031 Goods in transit (incoming)"'               | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''          |
-			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
-			| ''                                                            | 'Expense'     | '11.08.2023 12:19:26' | '5'         | 'Store 06'   | ''      | '36/Yellow' |		
+			| 'Stock adjustment as surplus 1 201 dated 11.08.2023 12:19:26' | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'               | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''          |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key'  |
+			| ''                                                            | 'Expense'     | '11.08.2023 12:19:26' | '5'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | '36/Yellow' |
 	And I close all client application windows
 
 Scenario: _041607 check Stock adjustment as surplus movements by the Register  "R4052 Stock adjustment (Surplus)" (with PhysicalInventory)

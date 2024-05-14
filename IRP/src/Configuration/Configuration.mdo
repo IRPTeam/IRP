@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.18.4318</version>
+  <version>2024.20.4379</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -195,6 +195,7 @@
   <commonPictures>CommonPicture.FillByTemplate</commonPictures>
   <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
   <commonPictures>CommonPicture.Lock</commonPictures>
+  <commonPictures>CommonPicture.Expand</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>

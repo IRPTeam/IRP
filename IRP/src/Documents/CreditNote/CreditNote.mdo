@@ -310,6 +310,21 @@
         <types>DocumentRef.SalesReturn</types>
         <types>DocumentRef.PurchaseInvoice</types>
         <types>DocumentRef.PurchaseReturn</types>
+        <types>DocumentRef.OpeningEntry</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="030b2621-7b23-42b1-a545-443100f030b8">
+      <name>Detail</name>
+      <synonym>
+        <key>en</key>
+        <value>Detail</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

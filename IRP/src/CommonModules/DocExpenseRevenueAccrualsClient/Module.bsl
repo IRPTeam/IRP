@@ -1,7 +1,7 @@
 #Region FORM
 
 Procedure OnOpen(Object, Form, Cancel) Export
-	ViewClient_V2.OnOpen(Object, Form, );
+	ViewClient_V2.OnOpen(Object, Form, "CostList");
 EndProcedure
 
 #EndRegion
@@ -9,7 +9,7 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, Item) Export
-	ViewClient_V2.DateOnChange(Object, Form, );
+	ViewClient_V2.DateOnChange(Object, Form, "CostList");
 EndProcedure
 
 #EndRegion
@@ -17,7 +17,7 @@ EndProcedure
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CompanyOnChange(Object, Form, );
+	ViewClient_V2.CompanyOnChange(Object, Form, "CostList");
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -45,26 +45,27 @@ EndProcedure
 #Region CURRENCY
 
 Procedure CurrencyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CurrencyOnChange(Object, Form, "ChequeBonds");
+	ViewClient_V2.CurrencyOnChange(Object, Form, "CostList");
 EndProcedure
 
 #EndRegion
 
-// Row structure.
-// 
-// Returns:
-//  Structure - Row pickup empty structure:
-// * Amount - Number - 
-// * Currency - CatalogRef.Currencies - 
-// * Document - DocumentRef  
-// * TaxAmount - Number - 
-Function RowPickupEmptyStructure() Export
-	
-	Structure = New Structure();
-	Structure.Insert("Currency", PredefinedValue("Catalog.Currencies.EmptyRef"));
-	Structure.Insert("Document", Undefined);
-	Structure.Insert("Amount", 0);
-	Structure.Insert("TaxAmount", 0);
-		
-	Return Structure;
-EndFunction	
+#Region COSTLIST
+
+Procedure CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.CostListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CostListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.CostListBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure CostListBeforeDeleteRow(Object, Form, Item, Cancel) Export
+	Return;
+EndProcedure
+
+Procedure CostListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.CostListAfterDeleteRow(Object, Form);
+EndProcedure
+
+#EndRegion

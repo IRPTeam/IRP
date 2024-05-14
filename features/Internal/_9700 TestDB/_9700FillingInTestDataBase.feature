@@ -97,6 +97,8 @@ When Create catalog LegalNameContracts objects (test data base)
 When Create catalog Projects objects (test data base)
 When Create catalog UnitsOfMeasurement objects (test data base)
 When Create catalog Vehicles objects (test data base)
+When Create document ExpenseAccruals objects (test data base)
+When Create document RevenueAccruals objects (test data base)
 * Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Companies"
 		And I go to line in "List" table

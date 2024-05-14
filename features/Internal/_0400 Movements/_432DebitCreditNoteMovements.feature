@@ -513,6 +513,29 @@ Scenario: _0432020 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Distribution department' | ''      | '02.04.2024 13:06:46' | '                                    ' | 'TRY'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | '111'    | 'Yes'    | 'No'      |
 	And I close all client application windows
 
+Scenario: _0432059 check DebitCreditNote movements by the register "R5020 Partners balance" (CT-CT, by partner terms, same partner)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '5'         |
+	* Check movements by the Register "R5020 Partners balance" 
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 5 dated 02.04.2024 13:06:46' | ''                    | ''           | ''             | ''                        | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'            | ''                    | ''           | ''             | ''                        | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '111'    | '111'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '111'    | '111'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '19'     | '19'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Main Company' | 'Front office'            | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '111'    | '111'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Main Company' | 'Front office'            | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '111'    | '111'                  | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                              | '02.04.2024 13:06:46' | 'Expense'    | 'Main Company' | 'Front office'            | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '19'     | '19'                   | ''                 | ''                   | ''               | ''                  | ''                 |		
+	And I close all client application windows
+
 #
 Scenario: _0432021 check DebitCreditNote movements by the register "R1021 Vendors transactions" (CT-CT, by partner terms, same partner)
 	And I close all client application windows
@@ -656,6 +679,25 @@ Scenario: _0432027 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '26.04.2024 13:31:41' | '                                    ' | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'                                    | ''        | '21'     | 'No'     | 'Yes'     |		
 	And I close all client application windows
 
+Scenario: _0432060 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VA-VT, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '7'         |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 7 dated 26.04.2024 13:31:41'           | ''                    | ''           | ''             | ''             | ''         | ''                                    | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'              | ''                    | ''           | ''             | ''             | ''         | ''                                    | ''                    | ''       |
+			| ''                                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                          | 'Legal name contract' | 'Amount' |
+			| ''                                                        | '26.04.2024 13:31:41' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by documents)' | ''                    | '21'     |
+			| ''                                                        | '26.04.2024 13:31:41' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Advance, by documents)'      | ''                    | '21'     |		
+	And I close all client application windows
+
 #
 Scenario: _0432028 check DebitCreditNote movements by the register "R1021 Vendors transactions" (VT-CA, by documents, different partners)
 	And I close all client application windows
@@ -756,6 +798,25 @@ Scenario: _0432032 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '03.04.2024 14:19:17' | '                                    ' | 'TRY'      | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | '41'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
+Scenario: _0432065 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VT-CA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '8'         |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 8 dated 03.04.2024 14:19:17' | ''                    | ''           | ''             | ''             | ''         | ''                                    | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''                    | ''           | ''             | ''             | ''         | ''                                    | ''                    | ''       |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                          | 'Legal name contract' | 'Amount' |
+			| ''                                              | '03.04.2024 14:19:17' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by documents)' | ''                    | '41'     |
+			| ''                                              | '03.04.2024 14:19:17' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Advance, by documents)'    | ''                    | '41'     |		
+	And I close all client application windows
+
 #
 Scenario: _0432033 check DebitCreditNote movements by the register "R1021 Vendors transactions" (VT-CT, by documents, different partners)
 	And I close all client application windows
@@ -838,6 +899,25 @@ Scenario: _0432036 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                              | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'                               | 'Legal name'                            | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis' | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '26.04.2024 16:15:09' | '                                    ' | 'TRY'      | 'Customer (Transactions, by documents)' | 'Customer (Transactions, by documents)' | 'Basic Partner terms, TRY'            | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | '51'     | 'No'     | 'Yes'     |
 			| ''                                              | 'Main Company' | 'Front office' | ''      | '26.04.2024 16:15:09' | '                                    ' | 'TRY'      | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)'   | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | ''                  | '*'         | ''        | '51'     | 'No'     | 'Yes'     |
+	And I close all client application windows
+
+Scenario: _0432066 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VT-CT, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '9'         |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 9 dated 26.04.2024 16:15:09'           | ''                    | ''           | ''             | ''             | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'              | ''                    | ''           | ''             | ''             | ''         | ''                                      | ''                    | ''       |
+			| ''                                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                                        | '26.04.2024 16:15:09' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by documents)'   | ''                    | '51'     |
+			| ''                                                        | '26.04.2024 16:15:09' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '51'     |
 	And I close all client application windows
 
 #
@@ -941,6 +1021,25 @@ Scenario: _0432041 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '26.04.2024 17:51:11' | '                                    ' | 'TRY'      | 'Vendor (Advance, by documents)' | 'Vendor (Advance, by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | '74'     | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
+Scenario: _0432067 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CT-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '10'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 10 dated 26.04.2024 17:51:11' | ''                    | ''           | ''             | ''             | ''         | ''                                      | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''             | ''             | ''         | ''                                      | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                            | 'Legal name contract' | 'Amount' |
+			| ''                                               | '26.04.2024 17:51:11' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Advance, by documents)'        | ''                    | '74'     |
+			| ''                                               | '26.04.2024 17:51:11' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Transactions, by documents)' | ''                    | '74'     |	
+	And I close all client application windows
+
 #
 Scenario: _0432042 check DebitCreditNote movements by the register "R1020 Advances to vendors" (CA-VA, by documents, different partners)
 	And I close all client application windows
@@ -1001,6 +1100,47 @@ Scenario: _0432044 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 10:25:38' | '                                    ' | 'TRY'      | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | '48'     | 'No'                      | 'No'                   | 'Expense'     |
 	And I close all client application windows
 
+Scenario: _0432061 check DebitCreditNote movements by the register "R5020 Partners balance" (CA-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '11'        |
+	* Check movements by the Register  "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''                    | ''           | ''             | ''             | ''                                 | ''                                 | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''             | ''             | ''                                 | ''                                 | ''                               | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'                          | 'Legal name'                       | 'Agreement'                      | 'Document' | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Basic Partner terms, TRY'       | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '48'     | ''                     | '48'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Basic Partner terms, TRY'       | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '48'     | ''                     | '48'               | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Advance, by documents)' | 'Customer (Advance, by documents)' | 'Basic Partner terms, TRY'       | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '8,22'   | ''                     | '8,22'             | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'Local currency'               | 'TRY'                  | '48'     | ''                     | ''                 | ''                   | '48'             | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '48'     | ''                     | ''                 | ''                   | '48'             | ''                  | ''                 |
+			| ''                                               | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)'   | 'Vendor (Advance, by documents)' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '8,22'   | ''                     | ''                 | ''                   | '8,22'           | ''                  | ''                 |		
+	And I close all client application windows
+
+Scenario: _0432068 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CA-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '11'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38'          | ''                    | ''           | ''             | ''             | ''         | ''                                 | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'              | ''                    | ''           | ''             | ''             | ''         | ''                                 | ''                    | ''       |
+			| ''                                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                       | 'Legal name contract' | 'Amount' |
+			| ''                                                        | '29.04.2024 10:25:38' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Advance, by documents)' | ''                    | '48'     |
+			| ''                                                        | '29.04.2024 10:25:38' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Advance, by documents)'   | ''                    | '48'     |		
+	And I close all client application windows
 #
 Scenario: _0432045 check DebitCreditNote movements by the register "R1021 Vendors transactions" (CT-VT, by partner term, different partners)
 	And I close all client application windows
@@ -1084,6 +1224,25 @@ Scenario: _0432048 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 10:42:01' | '                                    ' | 'TRY'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                  | '*'         | ''        | '43'     | 'No'     | 'Yes'     |
 	And I close all client application windows
 
+Scenario: _0432069 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (CT-VT, by partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '12'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01'          | ''                    | ''           | ''             | ''             | ''         | ''                                          | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'              | ''                    | ''           | ''             | ''             | ''         | ''                                          | ''                    | ''       |
+			| ''                                                        | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                                | 'Legal name contract' | 'Amount' |
+			| ''                                                        | '29.04.2024 10:42:01' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by partner term)'    | ''                    | '43'     |
+			| ''                                                        | '29.04.2024 10:42:01' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Transacrions, by partner terms)' | ''                    | '43'     |		
+	And I close all client application windows
+
 #
 Scenario: _0432049 check DebitCreditNote movements by the register "R1020 Advances to vendors" (VA-VA, by documents, different partners)
 	And I close all client application windows
@@ -1149,6 +1308,25 @@ Scenario: _0432051 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Company'      | 'Branch'       | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 11:06:59' | '                                    ' | 'TRY'      | 'Vendor (Advance, by documents)'     | 'Vendor (Advance, by documents)'     | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (Advance, by documents)' | ''        | '47'     | 'No'                      | 'No'                   | 'Expense'     |
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 11:06:59' | '                                    ' | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor (by documents) 2'        | ''        | '47'     | 'No'                      | 'No'                   | 'Receipt'     |
+	And I close all client application windows
+
+Scenario: _0432070 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (VA-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '13'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 13 dated 29.04.2024 11:06:59' | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:06:59' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '47'     |
+			| ''                                               | '29.04.2024 11:06:59' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Advance, by documents)'     | ''                    | '47'     |				
 	And I close all client application windows
 
 #
@@ -1218,6 +1396,25 @@ Scenario: _0432054 check DebitCreditNote movements by the register "T2014 Advanc
 			| ''                                               | 'Main Company' | 'Front office' | '29.04.2024 11:15:01' | '                                    ' | 'TRY'      | 'Vendor and Customer (by documents)' | 'Vendor and Customer (by documents)' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '49'     | 'No'                      | 'No'                   | 'Receipt'     |
 	And I close all client application windows
 
+Scenario: _0432071 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СA-СA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '14'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''             | ''             | ''         | ''                                   | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                         | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:15:01' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Advance, by documents)'   | ''                    | '49'     |
+			| ''                                               | '29.04.2024 11:15:01' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor and Customer (by documents)' | ''                    | '49'     |		
+	And I close all client application windows
+
 #
 Scenario: _0432055 check DebitCreditNote movements by the register "R2021 Customer transactions" (СT-СT, by documents and partner term, different partners)
 	And I close all client application windows
@@ -1262,6 +1459,48 @@ Scenario: _0432056 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 11:21:10' | '                                    ' | 'TRY'      | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'No'                    | 'Yes'                     | ''                                            | '*'         | ''        | '53'     | 'Yes'    | 'No'      |
 	And I close all client application windows
 
+Scenario: _0432064 check DebitCreditNote movements by the register "R5020 Partners balance" (СT-СT, by documents and partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '15'        |
+	* Check movements by the Register  "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''           | ''             | ''             | ''                                          | ''                                          | ''                                          | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''             | ''             | ''                                          | ''                                          | ''                                          | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Document'                                    | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'TRY'      | 'Local currency'               | 'TRY'                  | '53'     | '53'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'TRY'      | 'en description is empty'      | 'TRY'                  | '53'     | '53'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | 'Customer (Transacrions, by partner terms)' | ''                                            | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,07'   | '9,07'                 | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Basic Partner terms, TRY'                  | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'TRY'      | 'Local currency'               | 'TRY'                  | '53'     | '53'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Basic Partner terms, TRY'                  | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '53'     | '53'                   | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Main Company' | 'Front office' | 'Customer (Transactions, by documents)'     | 'Customer (Transactions, by documents)'     | 'Basic Partner terms, TRY'                  | 'Sales invoice 114 dated 17.02.2024 12:00:00' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,07'   | '9,07'                 | ''                 | ''                   | ''               | ''                  | ''                 |	
+	And I close all client application windows
+
+Scenario: _0432072 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СT-СT, by documents and partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '15'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''                    | ''           | ''             | ''             | ''         | ''                                          | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''             | ''             | ''         | ''                                          | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                                | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 11:21:10' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Transacrions, by partner terms)' | ''                    | '53'     |
+			| ''                                               | '29.04.2024 11:21:10' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Customer (Transactions, by documents)'     | ''                    | '53'     |		
+	And I close all client application windows
+
 ##
 Scenario: _0432057 check DebitCreditNote movements by the register "R1021 Vendors transactions" (СT-СT, by documents and partner term, different partners)
 	And I close all client application windows
@@ -1304,4 +1543,46 @@ Scenario: _0432058 check DebitCreditNote movements by the register "T2015 Transa
 			| ''                                               | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                              | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 12:14:25' | '                                    ' | 'TRY'      | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY'                         | 'Yes'                   | 'No'                      | ''                                               | '*'         | ''        | '54'     | 'No'     | 'Yes'     |
 			| ''                                               | 'Main Company' | 'Front office' | ''      | '29.04.2024 12:14:25' | '                                    ' | 'TRY'      | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Yes'                   | 'No'                      | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | '*'         | ''        | '54'     | 'Yes'    | 'No'      |
+	And I close all client application windows
+
+Scenario: _0432063 check DebitCreditNote movements by the register "R5020 Partners balance" (СT-СT, by documents and partner term, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '16'        |
+	* Check movements by the Register  "R5020 Partners balance"
+		And I click "Registrations report info" button
+		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''           | ''             | ''             | ''                                       | ''                                       | ''                                    | ''                                               | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| 'Register  "R5020 Partners balance"'             | ''                    | ''           | ''             | ''             | ''                                       | ''                                       | ''                                    | ''                                               | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'                                | 'Legal name'                             | 'Agreement'                           | 'Document'                                       | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY'                         | ''                                               | 'TRY'      | 'Local currency'               | 'TRY'                  | '54'     | ''                     | ''                 | '54'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY'                         | ''                                               | 'TRY'      | 'en description is empty'      | 'TRY'                  | '54'     | ''                     | ''                 | '54'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by partner term)' | 'Vendor (Transactions, by partner term)' | 'Vendor, TRY'                         | ''                                               | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,24'   | ''                     | ''                 | '9,24'               | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | 'TRY'      | 'Local currency'               | 'TRY'                  | '54'     | ''                     | ''                 | '54'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | 'TRY'      | 'en description is empty'      | 'TRY'                  | '54'     | ''                     | ''                 | '54'                 | ''               | ''                  | ''                 |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)'    | 'Vendor (Transactions, by documents)' | 'Purchase invoice 325 dated 18.02.2024 19:37:36' | 'USD'      | 'Reporting currency'           | 'TRY'                  | '9,24'   | ''                     | ''                 | '9,24'               | ''               | ''                  | ''                 |		
+	And I close all client application windows
+
+Scenario: _0432073 check DebitCreditNote movements by the register "R5010 Reconciliation statement" (СT-СT, by documents and partner term, different partner)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '16'        |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report info" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 16 dated 29.04.2024 12:14:25' | ''                    | ''           | ''             | ''             | ''         | ''                                       | ''                    | ''       |
+			| 'Register  "R5010 Reconciliation statement"'     | ''                    | ''           | ''             | ''             | ''         | ''                                       | ''                    | ''       |
+			| ''                                               | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'                             | 'Legal name contract' | 'Amount' |
+			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by partner term)' | ''                    | '54'     |
+			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by documents)'    | ''                    | '54'     |		
 	And I close all client application windows

@@ -144,12 +144,12 @@ Scenario: _041704 check Physical inventory movements by the Register  "R4031 Goo
 		And I select "R4031 Goods in transit (incoming)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| 'Register  "R4031 Goods in transit (incoming)"'    | ''            | ''                    | ''          | ''           | ''      | ''          |
-			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''      | ''          |
-			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
-			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | ''      | '36/Yellow' |		
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Document registrations records'                   | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| 'Register  "R4031 Goods in transit (incoming)"'    | ''            | ''                    | ''          | ''           | ''                                                 | ''          |
+			| ''                                                 | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''          |
+			| ''                                                 | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key'  |
+			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | '36/Yellow' |
 		And I close all client application windows
 
 Scenario: _041705 check Physical inventory movements by the Register  "R4032 Goods in transit (outgoing)"
@@ -163,10 +163,10 @@ Scenario: _041705 check Physical inventory movements by the Register  "R4032 Goo
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''                    | ''           | ''         | ''      | ''         | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''                    | ''           | ''         | ''      | ''         | ''         |
-			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Basis' | 'Item key' | 'Quantity' |
-			| ''                                                 | '15.03.2021 15:29:31' | 'Receipt'    | 'Store 06' | ''      | 'XS/Blue'  | '2'        |	
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' | ''                    | ''           | ''         | ''                                                 | ''         | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''                    | ''           | ''         | ''                                                 | ''         | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                            | 'Item key' | 'Quantity' |
+			| ''                                                 | '15.03.2021 15:29:31' | 'Receipt'    | 'Store 06' | 'Physical inventory 201 dated 15.03.2021 15:29:31' | 'XS/Blue'  | '2'        |
 		And I close all client application windows
 
 Scenario: _041730 Physical inventory clear posting/mark for deletion

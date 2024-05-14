@@ -71,6 +71,7 @@ Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Expor
 			BuilderAPI.SetProperty(Wrapper, "Date", CommonFunctionsServer.GetCurrentSessionDate());
 			BuilderAPI.SetProperty(Wrapper, "PhysicalInventory", Parameters.PhysicalInventory);
 			BuilderAPI.SetProperty(Wrapper, "Store", Parameters.Store);
+			BuilderAPI.SetProperty(Wrapper, "Branch", Parameters.Branch);
 			BuilderAPI.SetProperty(Wrapper, "UseSerialLot", Parameters.PhysicalInventory.UseSerialLot);
 			BuilderAPI.SetProperty(Wrapper, "RuleEditQuantity", Parameters.PhysicalInventory.RuleEditQuantity);
 			BuilderAPI.SetProperty(Wrapper, "TransactionType", Enums.PhysicalCountByLocationTransactionType.PhysicalInventory);
@@ -123,6 +124,7 @@ EndFunction
 //	Spreadsheet - SpreadsheetDocument - spreadsheet document to fill out and print.
 //	Ref - Arbitrary - contains a reference to the object for which the print command was executed.
 Procedure PrintQR(Spreadsheet, Ref) Export
+	//@skip-check undefined-function
 	Template = GetTemplate("PrintQR");
 	Query = New Query;
 	Query.Text =

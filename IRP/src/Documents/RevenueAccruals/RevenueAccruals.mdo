@@ -63,9 +63,12 @@
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
   <defaultObjectForm>Document.RevenueAccruals.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.RevenueAccruals.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.RevenueAccruals.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="9b4a5276-b31a-45fe-95d4-e29919c9e790">
@@ -112,6 +115,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -123,8 +127,8 @@
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.RevenueAccruals</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -146,6 +150,24 @@
     <synonym>
       <key>en</key>
       <value>Pickup revenue form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="eb006712-38ed-4b25-9efc-d928504db1cb">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="0c92dfc1-fdf0-4d11-8c65-61fbdcde9ef6">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -239,6 +261,12 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.IsRevenue</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="821688a1-5f38-40fb-867d-0d986f167a79">
@@ -272,19 +300,6 @@
       <synonym>
         <key>en</key>
         <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="99441ce6-c7a2-4eda-9bf0-6715b867944e">
-      <name>AmountTax</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount tax</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>

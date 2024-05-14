@@ -530,39 +530,26 @@ Scenario: _1003064 check advance closing when SI has two same strings
 		And "Doc" spreadsheet document contains "OffsetOfAdvanceCustomerLunch" template lines by template
 	And I close all client application windows
 
-// Scenario: _1003070 check payment status for SI
-// 	And I close all client application windows
-// 	* Open SI list form
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 	* Add payment status to the SI list form
-// 		And I click "Change form..." button
-// 		And I go to line in "" table
-// 			| 'Column1'        |
-// 			| 'Payment status' |
-// 		And I select current line in "" table
-// 		And Delay 2
-// 		And I activate current test client window
-// 		And I select current line in "" table
-// 		And Delay 2
-// 		And I press keyboard shortcut "SPACE"
-// 		And I click "Apply" button
-// 		And I click "OK" button
-// 	* Check
-// 		And "List" table became equal
-// 			| 'Number' | 'Amount'    | 'Date'                | 'Partner'         | 'Company'      | 'Legal name'        | 'Status'   | 'Currency' | 'Store'    | 'Payment status' |
-// 			| '1'      | '3 914,00'  | '28.01.2021 18:48:53' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'     |
-// 			| '2'      | '5 890,00'  | '28.01.2021 18:49:39' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'     |
-// 			| '3'      | '35 834,00' | '28.01.2021 18:50:57' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Shipping' | 'TRY'      | 'Store 02' | 'Partially paid' |
-// 			| '10'     | '2 000,00'  | '28.01.2021 18:52:06' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Not tracked'    |
-// 			| '12'     | '1 000,00'  | '28.01.2021 18:52:07' | 'Partner Kalipso' | 'Main Company' | 'Company Kalipso'   | 'Closed'   | 'TRY'      | 'Store 02' | 'Not tracked'    |
-// 			| '4'      | '23 374,00' | '16.02.2021 10:59:49' | 'Kalipso'         | 'Main Company' | 'Company Kalipso'   | 'Shipping' | 'USD'      | 'Store 02' | 'Fully paid'     |
-// 			| '13'     | '2 000,00'  | '16.02.2021 12:14:53' | 'Partner Kalipso' | 'Main Company' | 'Company Kalipso'   | 'Closed'   | 'TRY'      | 'Store 02' | 'Not tracked'    |
-// 			| '14'     | '12 400,00' | '16.02.2021 12:14:54' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Fully paid'     |
-// 			| '5'      | '26 400,00' | '17.02.2021 10:33:31' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Fully paid'     |
-// 			| '6'      | '26 400,00' | '17.02.2021 10:43:29' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 02' | 'Partially paid' |
-// 			| '8'      | '13 000,00' | '18.02.2021 10:48:46' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Awaiting' | 'TRY'      | 'Store 02' | 'Not paid'       |
-// 			| '11'     | '944,00'    | '12.04.2021 12:00:00' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Not tracked'    |
-// 			| '15'     | '20 000,00' | '12.04.2021 12:00:01' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Not paid'       |
-// 			| '9'      | '1 180,00'  | '15.04.2021 14:53:05' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Fully paid'     |
-// 			| '16'     | '5 200,00'  | '04.09.2023 13:04:13' | 'Lunch'           | 'Main Company' | 'Company Lunch'     | 'Closed'   | 'TRY'      | 'Store 01' | 'Not paid'       |	
-// 	And I close all client application windows
+Scenario: _1003070 check payment status for SI
+	And I close all client application windows
+	* Open SI list form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	* Check
+		And "List" table became equal
+			| 'Number' | 'Amount'    | 'Date'                | 'Partner'         | 'Company'      | 'Legal name'        | 'Status'   | 'Currency' | 'Store'    | 'PaymentStatusUnit' |
+			| '1'      | '3 914,00'  | '28.01.2021 18:48:53' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'        |
+			| '2'      | '5 890,00'  | '28.01.2021 18:49:39' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Closed'   | 'TRY'      | 'Store 02' | 'Fully paid'        |
+			| '3'      | '35 834,00' | '28.01.2021 18:50:57' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Shipping' | 'TRY'      | 'Store 02' | 'Partially paid'    |
+			| '10'     | '2 000,00'  | '28.01.2021 18:52:06' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Not tracked'       |
+			| '12'     | '1 000,00'  | '28.01.2021 18:52:07' | 'Partner Kalipso' | 'Main Company' | 'Company Kalipso'   | 'Closed'   | 'TRY'      | 'Store 02' | 'Not tracked'       |
+			| '4'      | '23 374,00' | '16.02.2021 10:59:49' | 'Kalipso'         | 'Main Company' | 'Company Kalipso'   | 'Shipping' | 'USD'      | 'Store 02' | 'Fully paid'        |
+			| '13'     | '2 000,00'  | '16.02.2021 12:14:53' | 'Partner Kalipso' | 'Main Company' | 'Company Kalipso'   | 'Closed'   | 'TRY'      | 'Store 02' | 'Not tracked'       |
+			| '14'     | '12 400,00' | '16.02.2021 12:14:54' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Fully paid'        |
+			| '5'      | '26 400,00' | '17.02.2021 10:33:31' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Fully paid'        |
+			| '6'      | '26 400,00' | '17.02.2021 10:43:29' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 02' | 'Partially paid'    |
+			| '8'      | '13 000,00' | '18.02.2021 10:48:46' | 'Ferron BP'       | 'Main Company' | 'Company Ferron BP' | 'Awaiting' | 'TRY'      | 'Store 02' | 'Not paid'          |
+			| '11'     | '944,00'    | '12.04.2021 12:00:00' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Not tracked'       |
+			| '15'     | '20 000,00' | '12.04.2021 12:00:01' | 'Lomaniti'        | 'Main Company' | 'Company Lomaniti'  | 'Closed'   | 'TRY'      | 'Store 01' | 'Not paid'          |
+			| '9'      | '1 180,00'  | '15.04.2021 14:53:05' | 'DFC'             | 'Main Company' | 'DFC'               | 'Closed'   | 'TRY'      | 'Store 03' | 'Fully paid'        |
+			| '16'     | '5 200,00'  | '04.09.2023 13:04:13' | 'Lunch'           | 'Main Company' | 'Company Lunch'     | 'Closed'   | 'TRY'      | 'Store 01' | 'Not paid'          |
+	And I close all client application windows

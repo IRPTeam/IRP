@@ -426,6 +426,21 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="85026b5f-9cff-4025-b35a-28813ad424af">
+    <name>Incoterm</name>
+    <synonym>
+      <key>en</key>
+      <value>Incoterm</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Incoterms</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="e96a316f-c149-4648-b0a6-9650523e0e47">
     <name>DocumentForm</name>
     <synonym>

@@ -2833,10 +2833,10 @@
         </items>
         <items xsi:type="form:FormGroup">
           <name>VendorPrice</name>
-          <id>1055</id>
+          <id>1065</id>
           <items xsi:type="form:FormField">
             <name>ItemListLastVendorPrice</name>
-            <id>1057</id>
+            <id>1067</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2943,7 +2943,7 @@
           </title>
           <extendedTooltip>
             <name>VendorPriceExtendedTooltip</name>
-            <id>1056</id>
+            <id>1066</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

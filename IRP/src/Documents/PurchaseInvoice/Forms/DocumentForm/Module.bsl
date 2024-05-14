@@ -99,11 +99,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
 	
-	Form.Items.ItemListIsAdditionalItemCost.Visible = FOServer.IsUseStores();
-	
 	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
 	
 	Form.Items.ItemListOtherPeriodExpenseType.Visible = FOServer.IsUseStores();
+	
+	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
 EndProcedure
 
 &AtClient

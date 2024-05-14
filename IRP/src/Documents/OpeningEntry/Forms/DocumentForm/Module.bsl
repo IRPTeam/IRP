@@ -578,6 +578,7 @@ Procedure AccountByAgreementsMainTablePartnerOnChange(Item, AgreementType, ApArP
 	AgreementParameters.Insert("Partner", CurrentData.Partner);
 	AgreementParameters.Insert("Agreement", CurrentData.Agreement);
 	AgreementParameters.Insert("CurrentDate", Object.Date);
+	AgreementParameters.Insert("Company", Object.Company);
 
 	AgreementParameters.Insert("ArrayOfFilters", New Array());
 	AgreementParameters.ArrayOfFilters.Add(

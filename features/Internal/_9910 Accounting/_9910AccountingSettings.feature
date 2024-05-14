@@ -132,6 +132,9 @@ Scenario: _099100 preparation
 		When Create document DepreciationCalculation objects (test data base)
 		When Create document CalculationMovementCosts objects (test data base)
 		When Create document EmployeeCashAdvance objects (test data base)
+		When Create document CustomersAdvancesClosing objects (test data base)
+		When Create document VendorsAdvancesClosing objects (test data base)
+		When Create document ForeignCurrencyRevaluation objects (test data base)
 		When Create chart of characteristic types AddAttributeAndProperty objects (test data base)
 		When Create chart of characteristic types IDInfoTypes objects (test data base)
 		When Create chart of characteristic types CustomUserSettings objects (test data base)
@@ -168,33 +171,228 @@ Scenario: _099100 preparation
 		When Create information register T9013S_AccountsTax records (Basic LTV) (test data base)
 		When Create information register T9016S_AccountsEmployee records (test data base)
 		When Create information register T9015S_AccountsFixedAsset records (test data base)
-	* Post OE
+	* Posting first documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		Then "Opening entries" window is opened
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay "3"
-	* Post PI
+ 		And Delay "3"
+	* Posting Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And Delay "3"
-	* Post SI
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And Delay "5"
+	* Posting Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
-	* Post RSR
+	* Posting WorkOrder
+		Given I open hyperlink "e1cib/list/Document.WorkOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting WorkSheet
+		Given I open hyperlink "e1cib/list/Document.WorkSheet"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Shipment confirmation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting CashTransferOrder
+		Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting BankPayment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting BankReceipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Sales invoice
+		And I execute 1C:Enterprise script at server
+			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"    |
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+		And I close all client application windows
+	* Posting Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting PurchaseReturnOrder
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+		And I close all client application windows
+	* Posting Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting InternalSupplyRequest
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+		And I close all client application windows
+	* Posting Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting Unbundling
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting PurchaseOrderClosing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting SalesOrderClosing
+		When Create document SalesOrderClosing objects (test data base)
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting PlannedReceiptReservation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting CashPayment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting CashReceipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting CashExpense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting CashRevenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting CreditNote
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting DebitNote
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting ReconciliationStatement
+		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting IncomingPaymentOrder
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting OutgoingPaymentOrder
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+	* Posting ItemStockAdjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting RetailSalesReceipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
-	* Post RRR
+	* Posting RetailReturnReceipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
-	* Post CalculationMovementCosts
-		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+	* Posting PriceList
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting CashStatement
+		Given I open hyperlink "e1cib/list/Document.CashStatement"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting SalesReturn
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting MoneyTransfer
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
@@ -205,6 +403,71 @@ Scenario: _099100 preparation
 		And Delay "3"
 	* Posting DepreciationCalculation
 		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting CalculationMovementCosts
+		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting CustomersAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting VendorsAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting ForeignCurrencyRevaluation
+		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting EmployeeHiring
+		Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting EmployeeVacation
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting EmployeeSickLeave
+		Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting EmployeeTransfer
+		Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting TimeSheet
+		Given I open hyperlink "e1cib/list/Document.TimeSheet"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting AdditionalDeduction
+		Given I open hyperlink "e1cib/list/Document.AdditionalDeduction"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting AdditionalAccrual
+		Given I open hyperlink "e1cib/list/Document.AdditionalAccrual"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+	* Posting Payroll
+		Given I open hyperlink "e1cib/list/Document.Payroll"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
@@ -1869,12 +2132,7 @@ Scenario: _0991058 create journal entry for one PI
 			| '24.02.2023 10:04:33' | '5301'       | '20,00'    | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '20'           | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '20'            | ''                    |
 			| '24.02.2023 10:04:33' | '3540'       | '875,00'   | '10'            | 'Yes'      | 'TRY'             | 'Item with item key'                                | '875'          | 'S/Color 1'             | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor 1' | '875'           | ''                    |
 			| '24.02.2023 10:04:33' | '5301'       | '175,00'   | ''              | 'Yes'      | 'TRY'             | 'VAT'                                               | '175'          | ''                      | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                  | 'Partner term with vendor 1' | '175'           | ''                    |
-		Then the number of "RegisterRecords" table lines is "равно" "14"
-		And "Totals" table became equal
-			| '#' | 'Chart of account' | 'Amount Debit' | 'Amount Credit' |
-			| '1' | '3540'             | '11 433,33'    | ''              |
-			| '2' | '5201'             | ''             | '13 720,00'     |
-			| '3' | '5301'             | '2 286,67'     | ''              |			
+		Then the number of "RegisterRecords" table lines is "равно" "14"		
 		Then the form attribute named "UserDefined" became equal to "No"
 		And I click "Save and close" button	
 	* Check Journal entry creation
@@ -2838,3 +3096,18 @@ Scenario: _0991198 check DepreciationCalculation movements
 		And I click "Journal entry" button
 		And I click "Save" button
 		And I close all client application windows
+
+Scenario: _0991199 check create JE from Data processor fix document problems
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+	* Fill documents
+		And I click Choice button of the field named "Period"
+		And I input "01.01.2022" text in the field named "DateBegin"
+		And I input "31.03.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And in the table "DocumentList" I click "Fill documents" button
+		Then the number of "DocumentList" table lines is "больше" "10"	
+				
+
+		

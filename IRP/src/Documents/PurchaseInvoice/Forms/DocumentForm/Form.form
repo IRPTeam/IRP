@@ -2777,23 +2777,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListOtherPeriodExpenseType</name>
-          <id>1055</id>
-          <title>
-            <key>en</key>
-            <value>Other period expense type</value>
-          </title>
+          <name>ItemListIsAdditionalItemCost</name>
+          <id>976</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.OtherPeriodExpenseType</segments>
+            <segments>Object.ItemList.IsAdditionalItemCost</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListOtherPeriodExpenseTypeExtendedTooltip</name>
-            <id>1057</id>
+            <name>ItemListIsAdditionalItemCostExtendedTooltip</name>
+            <id>978</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2807,8 +2803,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListOtherPeriodExpenseTypeContextMenu</name>
-            <id>1056</id>
+            <name>ItemListIsAdditionalItemCostContextMenu</name>
+            <id>977</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2816,20 +2812,12 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
+          <type>CheckBoxField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <clearButton>true</clearButton>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormGroup">
           <name>VendorPrice</name>

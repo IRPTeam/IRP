@@ -14,6 +14,7 @@
     <key>en</key>
     <value>Attached files control</value>
   </synonym>
+  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <standardAttributes>
     <dataHistory>Use</dataHistory>

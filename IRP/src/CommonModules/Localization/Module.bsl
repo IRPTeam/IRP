@@ -259,8 +259,6 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
-// * Error_144 - String - 
-// * Error_145 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -316,8 +314,6 @@
 // * InfoMessage_033 - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
-// * InfoMessage_036 - String - 
-// * InfoMessage_037 - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -1078,16 +1074,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en = '[%1] cannot be changed, has posted documents'", Lang));	
 	Strings.Insert("Error_142", NStr("en = 'Wrong combination of send and receive debt type'", Lang));	
 	Strings.Insert("Error_143", NStr("en = 'Document Bank payment (currency exchange) not entered'", Lang));	
-	Strings.Insert("Error_EmptyCurrency", NStr("en = 'Currency not entered'", Lang));
-	Strings.Insert("Error_EmptyTransactionType", NStr("en = 'Transaction type not entered'", Lang));
-	Strings.Insert("Error_144", NStr("en = 'Document`s movements had been modified manually. Reposting or undoposting is disabled due to manual adjustments.'", Lang));
-	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en = '""Amount"" does not equal the sum of all resources'", Lang));
-	
-	// %1 - Register name
-	Strings.Insert("Error_145", NStr("en = 'Differences detected between the current manual movements and the potential automated movements in register [%1].'", Lang));
-	
-	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
-	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1205,8 +1191,6 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en = '⬆️ Select document type ⬆️'", Lang));
 	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en = 'Click to add document'", Lang) + Chars.LF + "%1");
 	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en = 'File size %1 is %2 Mb, which is larger than the allowed size of %3 Mb.'", Lang) + Chars.LF + "%1");
-	Strings.Insert("InfoMessage_038", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
-	Strings.Insert("InfoMessage_039", NStr("en = 'Movements successfully recorded'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
@@ -1260,8 +1244,6 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en = 'Do you want to update payment agent?'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en = 'Filled data by employee [%1] will be cleared. Continue?'", Lang));
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
-	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
-	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1712,24 +1694,6 @@ Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_Custom
 
 Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
 	NStr("en = 'DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)'", Lang));
-
-Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
-	NStr("en = 'ExpenseAccruals DR (R5022T_Expenses) CR (R6070T_OtherPeriodsExpenses)'", Lang));
-
-Strings.Insert("RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues",
-	NStr("en = 'RevenueAccruals DR (R6080T_OtherPeriodsRevenues) CR (R5021T_Revenues)'", Lang));
-
-Strings.Insert("ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses",
-	NStr("en = 'ExpenseAccruals DR (R6070T_OtherPeriodsExpenses) CR (R5022T_Expenses)'", Lang));
-	
-Strings.Insert("RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues",
-	NStr("en = 'RevenueAccruals DR (R5021T_Revenues) CR (R6080T_OtherPeriodsRevenues)'", Lang));
-	
-Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
-	NStr("en = 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'", Lang));
-	
-Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
-	NStr("en = 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'", Lang));
 
 #EndRegion
 

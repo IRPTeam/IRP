@@ -18,5 +18,4 @@
   <subsystems>CashTransactions</subsystems>
   <subsystems>SchedulingOfPaymentDeadlines</subsystems>
   <subsystems>ChequeBond</subsystems>
-  <subsystems>Accruals</subsystems>
 </mdclass:Subsystem>

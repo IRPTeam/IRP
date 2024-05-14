@@ -1034,7 +1034,6 @@ EndProcedure
 
 Function GetFormItemNames()
 	ItemNames = "ItemListKey, SpecialOffersKey, TransactionsKey,
-				|CostListKey,
 				|ItemListRowsKey,
 				|ResultsTable,
 				|RowIDInfo,
@@ -1046,7 +1045,7 @@ Function GetFormItemNames()
 				|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 				|LinkedBasises,
 				|QuantityInBaseUnit,
-				|RevenueList, AllocationList, CostRowsRowID, RevenueRowsRowID, 
+				|CostList, RevenueList, AllocationList, CostRowsRowID, RevenueRowsRowID, 
 				|AllocationRowsBasisRowID, AllocationRowsRowID, 
 				|CostDocumentsKey, RevenueDocumentsKey, CostRowsTreeRowID, RevenueRowsTreeRowID,
 				|AllocationDocumentsKey, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,

@@ -377,11 +377,3 @@ Function R1020B_AdvancesToVendors_Cheque() Export
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
-
-// Additional data filling.
-// 
-// Parameters:
-//  MovementsValueTable - ValueTable
-Procedure AdditionalDataFilling(MovementsValueTable) Export
-	Return;	
-EndProcedure

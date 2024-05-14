@@ -550,7 +550,7 @@ Scenario: _012010 create Partner term without currency (negative test)
 		When I Check the steps for Exception
 			| 'Then I check for the "Agreements" catalog element with the "Description_en" 'Currency, TRY''    |
 
-Scenario: _012011 check auto filling manual price type and description in the partner term
+Scenario: _012011 create Partner term without price type (negative test)
 	* Opening an Partner term catalog
 		Given I open hyperlink "e1cib/list/Catalog.Agreements"
 	* Creating Partner term without price type
@@ -582,13 +582,17 @@ Scenario: _012011 check auto filling manual price type and description in the pa
 				| 'Sale autum'      |
 		And I select current line in "List" table
 		And I input "01.11.2018" text in "Start using" field
-	* Check auto filling description and price type
-		And I click "Save" button
-		Then the form attribute named "Description_en" became equal to "Turkish lira"	
-		Then the field named "PriceType" is filled				
-		And I click "Save and close" button	
-		And Delay 2
-		Then I check for the "Agreements" catalog element with the "Description_en" 'Turkish lira'
+		And I click Open button of the field named "Description_en"
+		And I input "Price Type, TRY" text in the field named "Description_en"
+		And I input "Price Type, TRY" text in the field named "Description_tr"
+		And I click "Ok" button
+		And I click "Save and close" button
+		And Delay 10
+	*  Checking that the Partner term without price type is not created
+		If current window contains user messages Then
+		And I close all client application windows
+		When I Check the steps for Exception
+			| 'Then I check for the "Agreements" catalog element with the "Description_en" 'Price Type, TRY''    |
 
 
 Scenario: _012012 create Partner term for other partners

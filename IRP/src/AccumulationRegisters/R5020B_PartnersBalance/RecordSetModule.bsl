@@ -8,15 +8,11 @@ Procedure BeforeWrite(Cancel, Replacing)
 		If ValueIsFilled(_row.AdvancesClosing) Then
 			Continue;
 		EndIf;
-		TotalAmount = _row.CustomerTransaction			 
+		_row.Amount = 
+			  _row.CustomerTransaction 
 			  + _row.CustomerAdvance
 			  + _row.VendorTransaction
 			  + _row.VendorAdvance
 			  + _row.OtherTransaction;
-		
-		If _row.Amount <> TotalAmount Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_PartnerBalanceCheckfailed);	
-		EndIf;			  
 	EndDo;	
 EndProcedure

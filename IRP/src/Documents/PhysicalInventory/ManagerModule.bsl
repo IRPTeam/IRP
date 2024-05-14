@@ -367,7 +367,6 @@ Function R4031B_GoodsInTransitIncoming()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Store,
-		|	ItemList.Basis,
 		|	ItemList.ItemKey,
 		|	ItemList.SurplusQuantity AS Quantity
 		|INTO R4031B_GoodsInTransitIncoming
@@ -383,7 +382,6 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Store,
-		|	ItemList.Basis,
 		|	ItemList.ItemKey,
 		|	ItemList.WriteOffQuantity AS Quantity
 		|INTO R4032B_GoodsInTransitOutgoing

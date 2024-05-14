@@ -1,11 +1,6 @@
 #Region Public
 
-// Create user.
-// 
-// Parameters:
-//  UserObject - CatalogObject.Users - User object
 Procedure CreateUser(UserObject) Export
-	//@skip-check using-isinrole
 	If Not IsInRole(Metadata.Roles.FullAccess) And 
 			Not IsInRole(Metadata.Roles.CreateOrModifyUsers) And
 			Not UserObject.AdditionalProperties.Property("isUpdated") Then
@@ -22,9 +17,6 @@ Procedure CreateUser(UserObject) Export
 	EndIf;
 	User.Name = UserObject.Description;
 	User.FullName = String(UserObject);
-	User.Email = UserObject.Email;
-	User.OSAuthentication = Not IsBlankString(UserObject.OSUser);
-	User.OSUser = UserObject.OSUser;
 	User.UnsafeOperationProtection.UnsafeOperationWarnings = False;
 	For Each Lang In Metadata.Languages Do
 		If TrimAll(Upper(Lang.LanguageCode)) = TrimAll(Upper(UserObject.InterfaceLocalizationCode)) Then

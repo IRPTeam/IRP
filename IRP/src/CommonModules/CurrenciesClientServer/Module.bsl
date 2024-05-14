@@ -133,19 +133,6 @@ Function GetParameters_V11(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-Function GetParameters_V12(Object) Export
-	Parameters = New Structure();
-	Parameters.Insert("Ref"            , Object.Ref);
-	Parameters.Insert("Date"           , Object.Date);
-	Parameters.Insert("Company"        , Object.Company);
-	Parameters.Insert("Currency"       , Object.Currency);
-	Parameters.Insert("Agreement"      , Undefined);
-	Parameters.Insert("RowKey"         , "");
-	Parameters.Insert("DocumentAmount" , Object.CostList.Total("Amount"));
-	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies));
-	Return Parameters;
-EndFunction
-
 Function GetCurrenciesTable(Currencies, RowKey = Undefined) Export
 	ArrayOfCurrenciesRows = New Array();
 	RowColumns = "Key, IsFixed, CurrencyFrom, Rate, ReverseRate,

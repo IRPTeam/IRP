@@ -582,8 +582,7 @@
 FROM
 	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&amp;BalancePeriod, Company = &amp;Company
 	AND CurrencyMovementType = &amp;CurrencyMovementType
-	AND NOT Basis IN (&amp;SelectedDocuments)
-	AND OtherPeriodRevenueType = VALUE(enum.OtherPeriodRevenueType.ItemsRevenue)) AS R6080T_OtherPeriodsRevenues
+	AND NOT Basis IN (&amp;SelectedDocuments)) AS R6080T_OtherPeriodsRevenues
 GROUP BY
 	R6080T_OtherPeriodsRevenues.Basis,
 	R6080T_OtherPeriodsRevenues.Company,
@@ -659,10 +658,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>OtherPeriodRevenueType</dataPath>
-        <field>OtherPeriodRevenueType</field>
       </fields>
       <parameters>
         <name>BalancePeriod</name>

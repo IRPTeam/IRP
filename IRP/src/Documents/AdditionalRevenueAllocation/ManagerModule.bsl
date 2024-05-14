@@ -268,25 +268,14 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function R6080T_OtherPeriodsRevenues()
-	Return
-	"SELECT
-	|	VALUE(ENUM.OtherPeriodRevenueType.ItemsRevenue) AS OtherPeriodRevenueType,
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	RevenueList.Period AS Period,
-	|	RevenueList.Company AS Company,
-	|	RevenueList.Branch AS Branch,
-	|	RevenueList.Basis AS Basis,
-	|	RevenueList.ItemKey AS ItemKey,
-	|	RevenueList.RowID AS RowID,
-	|	RevenueList.Currency AS Currency,
-	|	RevenueList.Key AS Key,
-	|	RevenueList.Amount AS Amount,
-	|	RevenueList.AmountTax AS AmountTax
-	|INTO R6080T_OtherPeriodsRevenues
-	|FROM
-	|	RevenueList AS RevenueList
-	|WHERE
-	|	TRUE";
+	Return "SELECT
+		   |	*,
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType
+		   |INTO R6080T_OtherPeriodsRevenues
+		   |FROM
+		   |	RevenueList AS RevenueList
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function T6070S_BatchRevenueAllocationInfo()

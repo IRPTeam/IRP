@@ -91,7 +91,6 @@
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DocumentRef.RevenueAccruals</types>
       <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -153,19 +152,6 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="217de585-383e-4f60-b8d5-87aea198d2d0">
-    <name>OtherPeriodRevenueType</name>
-    <synonym>
-      <key>en</key>
-      <value>Other period revenue type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.OtherPeriodRevenueType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
     <useInTotals>true</useInTotals>
   </dimensions>
 </mdclass:AccumulationRegister>

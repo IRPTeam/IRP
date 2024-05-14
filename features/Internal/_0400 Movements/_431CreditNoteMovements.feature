@@ -284,6 +284,7 @@ Scenario: _043106 check Credit note movements by the Register "R5022 Expenses" (
 			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
 			| ''                                        | '05.04.2021 09:30:47' | '85,6'      | '85,6'              | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
 			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | ''        | ''                          |
 			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 		And I close all client application windows
 
@@ -306,6 +307,7 @@ Scenario: _043107 check Credit note movements by the Register "R5022 Expenses" (
 			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
 			| ''                                        | '05.04.2021 09:30:58' | '119,84'    | '119,84'            | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
 			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | ''        | ''                          |
 			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 	And I close all client application windows
 
@@ -328,6 +330,7 @@ Scenario: _043108 check Credit note movements by the Register "R5022 Expenses" (
 			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
 			| ''                                        | '12.06.2023 14:56:54' | '17,12'     | '17,12'             | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
 			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | ''        | ''                          |
 			| ''                                        | '12.06.2023 14:56:54' | '100'       | '100'               | ''            | 'Main Company' | 'Front office' | 'Distribution department' | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |
 	And I close all client application windows
 
@@ -432,73 +435,6 @@ Scenario: _043113 check Credit note movements by the Register "R5020 Partners ba
 			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'TRY'      | 'en description is empty'      | 'TRY'                  | '100'    | ''                     | ''                 | ''                   | ''               | '100'               | ''                 |
 			| ''                                        | '12.06.2023 14:56:54' | 'Expense'    | 'Main Company' | 'Front office' | 'Other partner 2' | 'Other partner 2' | 'Other partner 2' | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '17,12'  | ''                     | ''                 | ''                   | ''               | '17,12'             | ''                 |		
 		And I close all client application windows
-
-
-Scenario: _043014 check Credit note movements by the Register  "T2015 Transactions info" (with vendor)
-	And I close all client application windows
-	* Select CN
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And I go to line in "List" table
-			| 'Number'|
-			| '1'     |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                        | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'     | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                        | ''          | ''        | ''       | ''       | ''        |
-			| ''                                        | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                       | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                        | 'Main Company' | 'Front office' | ''      | '05.04.2021 09:30:47' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Credit note 1 dated 05.04.2021 09:30:47' | '*'         | ''        | '500'    | 'Yes'    | 'No'      |	
-	And I close all client application windows
-
-Scenario: _043015 check absence Credit note movements by the Register  "T2014 Advances info" (with vendor)
-	* Select CN
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1'       |
-	* Check movements by the Register  "T2014 Advances info"
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2014 Advances info"'    |
-		And I close all client application windows
-
-Scenario: _043016 check Credit note movements by the Register  "T2015 Transactions info" (with customer)
-	And I close all client application windows
-	* Select CN
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And I go to line in "List" table
-			| 'Number'|
-			| '2'     |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 2 dated 05.04.2021 09:30:58' | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                        | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'     | ''             | ''             | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                        | ''          | ''        | ''       | ''       | ''        |
-			| ''                                        | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                       | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                        | 'Main Company' | 'Front office' | ''      | '05.04.2021 09:30:58' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Credit note 2 dated 05.04.2021 09:30:58' | '*'         | ''        | '-700'   | 'Yes'    | 'No'      |	
-	And I close all client application windows
-
-Scenario: _043017 check absence Credit note movements by the Register  "T2014 Advances info" (Return to customer, with customer)
-	* Select CN
-		Given I open hyperlink "e1cib/list/Document.CreditNote"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '2'       |
-	* Check movements by the Register  "T2014 Advances info"
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2014 Advances info"'    |
-		And I close all client application windows
-
-
 
 Scenario: _043130 Credit note clear posting/mark for deletion
 	And I close all client application windows

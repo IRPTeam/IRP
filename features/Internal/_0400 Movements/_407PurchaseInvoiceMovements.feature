@@ -581,6 +581,7 @@ Scenario: _0401070 check Purchase invoice movements by the Register  "R5022 Expe
 			| ''                                               | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    | 'Calculation movement cost' |
 			| ''                                               | '12.02.2021 15:12:15' | '39,17'     | '46,22'             | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Internet' | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' | ''                          |
 			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Internet' | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' | ''                          |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Internet' | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | 'Project 01' | ''                          |
 			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | '270'               | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Internet' | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' | ''                          |
 		And I close all client application windows
 
@@ -977,39 +978,6 @@ Scenario: _0401035 check Purchase invoice movements by the Register  "S1001L Ven
 			| ''                                               | '12.02.2021 15:12:15' | '100'       | '100'         | '84,75'     | 'en description is empty' | 'Ferron BP' | '37/18SD'   | 'pcs'  | 'TRY'      |
 			| ''                                               | '12.02.2021 15:12:15' | '150'       | '135'         | '114,41'    | 'en description is empty' | 'Ferron BP' | 'Internet'  | 'pcs'  | 'TRY'      |
 			| ''                                               | '12.02.2021 15:12:15' | '200'       | '180'         | '152,54'    | 'en description is empty' | 'Ferron BP' | '36/Yellow' | 'pcs'  | 'TRY'      |	
-		And I close all client application windows
-
-Scenario: _0401036 check Purchase invoice movements by the Register  "T2015 Transactions info" (Purchase)
-	* Select Purchase invoice
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '117'       |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''             | ''             | ''                                             | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''           | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'            | ''             | ''             | ''                                             | ''                    | ''                                     | ''         | ''          | ''                  | ''                   | ''                      | ''                        | ''                                               | ''          | ''           | ''       | ''       | ''        |
-			| ''                                               | 'Company'      | 'Branch'       | 'Order'                                        | 'Date'                | 'Key'                                  | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                              | 'Unique ID' | 'Project'    | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                               | 'Main Company' | 'Front office' | ''                                             | '12.02.2021 15:12:15' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '*'         | 'Project 01' | '2 400'  | 'Yes'    | 'No'      |
-			| ''                                               | 'Main Company' | 'Front office' | 'Purchase order 117 dated 12.02.2021 12:45:05' | '12.02.2021 15:12:15' | '                                    ' | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Yes'                   | 'No'                      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '*'         | 'Project 01' | '2 070'  | 'Yes'    | 'No'      |
-		And I close all client application windows
-
-Scenario: _0401037 check absence Purchase invoice movements by the Register  "T2015 Transactions info" (Receipt from consignor)
-	* Select PI
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '195'       |
-	* Check movements by the Register  "T2015 Transactions info"
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2015 Transactions info"'    |
 		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion

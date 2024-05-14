@@ -375,12 +375,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 		If CurrencyTable.FindRows(New Structure("Key, MovementType", Row.Key, CurrencyMovementType)).Count() Then
 			Continue;
 		EndIf;
-		
-		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
-		CurrencyParameters.RowKey   = Row.Key;
-		CurrencyParameters.Currency = Row.Currency;
-		CurrencyParameters.Ref      = Ref;
-		CurrenciesServer.AddRowToCurrencyTable(CurrencyParameters, Ref.Date, CurrencyTable, CurrencyMovementType);
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
@@ -1041,7 +1036,6 @@ Function R4050B_StockInventory()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsOwnStocks
 		   |GROUP BY
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,

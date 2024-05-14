@@ -2942,15 +2942,4 @@
 			<value>false</value>
 		</right>
 	</object>
-	<object>
-		<name>Document.ExpenseAccruals</name>
-		<right>
-			<name>InteractiveDeleteMarked</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
 </Rights>

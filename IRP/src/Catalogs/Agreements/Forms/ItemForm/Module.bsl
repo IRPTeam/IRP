@@ -34,13 +34,6 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-	
-	Currency = CommonFunctionsServer.GetRefAttribute(Object.CurrencyMovementType, "Currency");
-	For Each PathDescription In LocalizationReuse.AllDescription() Do
-		If IsBlankString(CurrentObject[PathDescription]) Then
-			CurrentObject[PathDescription] = Currency[PathDescription];
-		EndIf;
-	EndDo;
 EndProcedure
 
 &AtServer

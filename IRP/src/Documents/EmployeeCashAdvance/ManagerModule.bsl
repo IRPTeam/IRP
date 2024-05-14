@@ -12,9 +12,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-		
-	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
-	
 	Return Tables;
 EndFunction
 
@@ -32,7 +29,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -85,28 +81,15 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
+#EndRegion
+
+#Region Posting_SourceTable
+
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R3027B_EmployeeCashAdvance());
-	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R5022T_Expenses());
-	QueryArray.Add(T2015S_TransactionsInfo());
-	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(T1040T_AccountingAmounts());
-	Return QueryArray;
-EndFunction
-
-#EndRegion
-
-#Region Posting_SourceTable
 
 Function PaymentList()
 	Return "SELECT
@@ -144,6 +127,18 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R3027B_EmployeeCashAdvance());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(R5020B_PartnersBalance());
+	Return QueryArray;
+EndFunction
 
 Function R3027B_EmployeeCashAdvance()
 	Return "SELECT
@@ -224,117 +219,5 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
-
-#EndRegion
-
-#Region Accounting
-
-Function T1040T_AccountingAmounts()
-	Return 
-	"SELECT
-	|	PaymentList.Period,
-	|	PaymentList.Key AS RowKey,
-	|	PaymentList.Key AS Key,
-	|	PaymentList.Currency,
-	|	PaymentList.TotalAmount AS Amount,
-	|	VALUE(Catalog.AccountingOperations.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance) AS
-	|		Operation,
-	|	UNDEFINED AS AdvancesClosing
-	|INTO T1040T_AccountingAmounts
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	PaymentList.IsPurchase
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	PaymentList.Period,
-	|	PaymentList.Key AS RowKey,
-	|	PaymentList.Key AS Key,
-	|	PaymentList.Currency,
-	|	PaymentList.TotalAmount,
-	|	VALUE(Catalog.AccountingOperations.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS
-	|		Operation,
-	|	UNDEFINED AS AdvancesClosing
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	NOT PaymentList.IsPurchase";
-EndFunction
-
-
-Function GetAccountingAnalytics(Parameters) Export
-	AO = Catalogs.AccountingOperations;
-	If Parameters.Operation = AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance Then
-		
-		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance(Parameters); // Vendor transactions - Employee cash advance
-		
-	ElsIf Parameters.Operation = AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
-		
-		Return GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters); // Expenses - Employee cash advance
-	
-	EndIf;
-	Return Undefined;
-EndFunction
-
-#Region Accounting_Analytics
-
-// Vendor transactions - Employee cash advance
-Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-	
-	// Debit
-	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-										      		   Parameters.RowData.Invoice.Partner, 
-										      		   Parameters.RowData.Invoice.Agreement, 
-										      		   Parameters.RowData.Currency);
-	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
-	
-	AdditionalAnalytics = New Structure();
-	AdditionalAnalytics.Insert("Partner", Parameters.RowData.Invoice.Partner);
-	AdditionalAnalytics.Insert("Agreement", Parameters.RowData.Invoice.Agreement);
-	AdditionalAnalytics.Insert("LegalName", Parameters.RowData.Invoice.LegalName);
-	AdditionalAnalytics.Insert("LegalNameContract", Parameters.RowData.Invoice.LegalNameContract);
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
-		
-	// Credit
-	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.ObjectData.Partner);                                                  
-	AccountingAnalytics.Credit = Credit.AccountCashAdvance;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
-// Expenses - Employee cash advance
-Function GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters)
-	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-
-	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-														  Parameters.RowData.ExpenseType,
-														  Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Debit = Debit.AccountExpense;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-	
-	// Credit
-	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.ObjectData.Partner);                                                  
-	AccountingAnalytics.Credit = Credit.AccountCashAdvance;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-
-	Return AccountingAnalytics;
-EndFunction
-
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-	Return Value;
-EndFunction
-
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-	Return Value;
-EndFunction
-
-#EndRegion
 
 #EndRegion

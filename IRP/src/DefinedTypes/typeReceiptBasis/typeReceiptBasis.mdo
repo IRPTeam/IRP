@@ -16,7 +16,5 @@
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.GoodsReceipt</types>
-    <types>DocumentRef.PhysicalInventory</types>
-    <types>DocumentRef.StockAdjustmentAsSurplus</types>
   </type>
 </mdclass:DefinedType>

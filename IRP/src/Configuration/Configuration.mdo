@@ -435,7 +435,6 @@
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
   <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
-  <roles>Role.ManualRegisterEdit</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -758,8 +757,6 @@
   <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
   <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
-  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
-  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -782,7 +779,6 @@
   <commonAttributes>CommonAttribute.CreateDate</commonAttributes>
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
-  <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -1196,8 +1192,6 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.DebitCreditNote</documents>
-  <documents>Document.ExpenseAccruals</documents>
-  <documents>Document.RevenueAccruals</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1293,9 +1287,6 @@
   <enums>Enum.SalaryTypes</enums>
   <enums>Enum.DocAttachmentStatus</enums>
   <enums>Enum.TaxPayers</enums>
-  <enums>Enum.AccrualsTransactionType</enums>
-  <enums>Enum.OtherPeriodExpenseType</enums>
-  <enums>Enum.OtherPeriodRevenueType</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>
@@ -1345,7 +1336,6 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
-  <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>

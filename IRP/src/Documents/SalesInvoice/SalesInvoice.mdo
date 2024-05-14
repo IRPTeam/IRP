@@ -100,7 +100,6 @@
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
@@ -115,6 +114,7 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -795,27 +795,13 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="51529ae4-9023-4f25-ba83-1698d033fdf7">
-      <name>DELETE_IsAdditionalItemRevenue</name>
+      <name>IsAdditionalItemRevenue</name>
       <synonym>
         <key>en</key>
         <value>Is additional item revenue</value>
       </synonym>
       <type>
         <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9f6ce9e6-73c5-494d-b163-7884e1faf572">
-      <name>OtherPeriodRevenueType</name>
-      <synonym>
-        <key>en</key>
-        <value>Other period revenue type</value>
-      </synonym>
-      <type>
-        <types>EnumRef.OtherPeriodRevenueType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

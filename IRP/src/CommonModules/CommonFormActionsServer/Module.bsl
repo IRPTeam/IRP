@@ -121,7 +121,7 @@ Function QuerySearchInputByString(Settings) Export
 		IDSearch = "Table.Description LIKE &SearchString + ""%%""";
 		UseDescriptionSearch = False;
 	ElsIf Settings.MetadataObject = Metadata.ChartsOfAccounts.Basic Then
-		IDSearch = "Table.Ref.SearchCode LIKE &SearchString + ""%%"" OR Table.Ref.Code LIKE &SearchString + ""%%""";
+		IDSearch = "Table.Ref.SearchCode LIKE &SearchString + ""%%""";
 	EndIf;
 	
 	If Settings.Property("UseSearchByCode") And Settings.UseSearchByCode Then

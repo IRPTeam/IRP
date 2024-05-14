@@ -59,7 +59,6 @@ Scenario: _053000 preparation (Bank payment)
 		When Create catalog CashAccounts objects (POS)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create information register Taxes records (VAT)
-		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -714,79 +713,3 @@ Scenario: _053021 check amount when create BP based on PI (partner term - by par
 			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
 	And I close all client application windows	
-
-Scenario: _053022 create Bank payment with transaction type Other expense
-	And I close all client application windows
-	* Open BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I click the button named "FormCreate"
-	* Filling main details
-		And I select "Other expense" exact value from "Transaction type" drop-down list
-		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from the drop-down list named "Account" by "Bank account, TRY" string
-	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-		And I select current line in "PaymentList" table
-		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I activate "Financial movement type" field in "PaymentList" table
-		And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
-		And I activate "Cash flow center" field in "PaymentList" table
-		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
-		And I select "Expense" by string from the drop-down list named "PaymentListExpenseType" in "PaymentList" table
-		And I activate "Profit loss center" field in "PaymentList" table
-		And I select "Distribution department" from "Profit loss center" drop-down list by string in "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And I click the button named "FormPost"
-	* Check
-		Then the form attribute named "Account" became equal to "Bank account, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "PaymentList" table became equal
-			| '#' | 'Expense type' | 'Total amount' | 'Financial movement type' | 'Profit loss center'      | 'Cash flow center'        | 'Additional analytic' |
-			| '1' | 'Expense'      | '100,00'       | 'Movement type 1'         | 'Distribution department' | 'Distribution department' | ''                    |
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
-		Then the form attribute named "TransactionType" became equal to "Other expense"
-		And I save the value of "Number" field as "NumberBankPayment053022"
-		And I click the button named "FormPostAndClose"
-		* Check creation
-			And "List" table contains lines
-				| 'Number'                        |
-				| '$NumberBankPayment053022$'     |
-
-
-Scenario: _053023 create Bank payment with transaction type Other partner
-	And I close all client application windows
-	* Open BP
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I click the button named "FormCreate"
-	* Filling main details
-		And I select "Other partner" exact value from "Transaction type" drop-down list
-		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from the drop-down list named "Account" by "Bank account, TRY" string
-	* Filling payment list
-		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I select current line in "PaymentList" table
-		And I input "Tax authority" text in "Partner" field of "PaymentList" table
-		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I activate "Financial movement type" field in "PaymentList" table
-		And I input "Movement type 1" text in "Financial movement type" field of "PaymentList" table
-		And I activate "Cash flow center" field in "PaymentList" table
-		And I select "Distribution department" from "Cash flow center" drop-down list by string in "PaymentList" table
-		And I finish line editing in "PaymentList" table
-		And I click the button named "FormPost"
-	* Check
-		Then the form attribute named "Account" became equal to "Bank account, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "PaymentList" table became equal
-			| '#' | 'Partner'       | 'Payee'         | 'Partner term' | 'Legal name contract' | 'Total amount' | 'Financial movement type' | 'Cash flow center'        |
-			| '1' | 'Tax authority' | 'Tax authority' | 'Tax'          | ''                    | '100,00'       | 'Movement type 1'         | 'Distribution department' |		
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
-		Then the form attribute named "TransactionType" became equal to "Other partner"
-		And I save the value of "Number" field as "NumberBankPayment053023"
-		And I click the button named "FormPostAndClose"
-		* Check creation
-			And "List" table contains lines
-				| 'Number'                        |
-				| '$NumberBankPayment053023$'     |

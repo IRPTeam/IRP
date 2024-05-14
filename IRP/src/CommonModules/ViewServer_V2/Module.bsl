@@ -242,9 +242,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	LegalNameContractIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "LegalNameContract");
 	PayeeIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payee");
 	PayerIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payer");
-
-	// Cost list
-	AmountIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Amount");
+	
 
 	If FillingValues.Property("Item") And ItemIsPresent Then
 		ControllerClientServer_V2.SetItemListItem(Parameters, PrepareValue(FillingValues.Item, Row.Key));
@@ -341,12 +339,6 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		EndIf;		
 	EndIf;
 	
-	If TableName = "CostList" Then
-		If FillingValues.Property("Amount") And AmountIsPresent Then
-			ControllerClientServer_V2.SetCostListAmount(Parameters, PrepareValue(FillingValues.Amount, Row.Key));
-		EndIf;
-	EndIf;
-		
 	FilledColumns = New Array();
 	For Each KeyValue In FillingValues Do
 		ColumnName = KeyValue.Key;

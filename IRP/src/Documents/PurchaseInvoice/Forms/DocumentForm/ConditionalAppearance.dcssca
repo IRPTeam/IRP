@@ -169,9 +169,6 @@
 			<item>
 				<field>ItemListIsAdditionalItemCost</field>
 			</item>
-			<item>
-				<field>ItemListOtherPeriodExpenseType</field>
-			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">

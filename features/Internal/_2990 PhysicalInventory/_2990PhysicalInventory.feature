@@ -64,7 +64,6 @@ Scenario: _2990000 preparation (product inventory)
 		When Create information register Barcodes records (serial lot numbers)
 		When Create information register Taxes records (VAT)
 		When Create document PurchaseInvoice objects (serial lot numbers)
-		When Create information register UserSettings records (for PhysicalCountByLocation)
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(161).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Add balances for created store (Opening entry)
@@ -709,8 +708,6 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
 			| '4'   | '120,000'      | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '-120,000'     | ''              | ''                     | ''               |
 	* Create Physical count by location
-		And I move to "Other" tab
-		And I select from the drop-down list named "Branch" by "Logistics department" string	
 		And I click "Post" button
 		And I delete "$$NumberPhysicalInventory3$$" variable
 		And I delete "$$PhysicalInventory3$$" variable
@@ -815,7 +812,6 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 			And I move to the next attribute
 			// And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			// And I select "Done" exact value from the drop-down list named "Status"
-			Then the form attribute named "Branch" became equal to "Logistics department"			
 			And I click "Save and close" button
 	* Check update Physical count by location tab in the Physical inventory
 		And "PhysicalCountByLocationList" table contains lines

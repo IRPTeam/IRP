@@ -164,27 +164,11 @@ Function OperandTextProcessing(Val OperandText)
 		If StrFind(NameOperand, ".") <> 0 Then
 			Return Undefined;
 		EndIf;
-		If Not IsBlankString(NameOperand) Then
-			OperandText = GetAttributeUniqueID(NameOperand);
-		EndIf;
 	EndIf;
 		
 	OperandText = StrReplace(OperandText, "[", "");
 	OperandText = StrReplace(OperandText, "]", "");
-	OperandText = StrReplace(OperandText, "Item.", "");
-	OperandText = GetAttributeUniqueID(OperandText);
-	Return "[" + OperandText + "]";
-EndFunction
-
-&AtServerNoContext
-Function GetAttributeUniqueID(NameOperand)
-	For Each Desc In LocalizationReuse.AllDescription() Do
-		AddAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.FindByAttribute(Desc, NameOperand);
-		If ValueIsFilled(AddAttribute) Then
-			Return CommonFunctionsServer.GetRefAttribute(AddAttribute, "UniqueID");
-		EndIf;
-	EndDo;
-	Return NameOperand;
+	Return "[" + СтрЗаменить(OperandText, "Item.", "") + "]";
 EndFunction
 
 &AtClient

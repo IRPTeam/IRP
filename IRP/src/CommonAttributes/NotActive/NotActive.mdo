@@ -21,10 +21,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.AccessKey</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.AgingPeriods</metadata>
     <use>Use</use>
   </content>
@@ -33,15 +29,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.DataBaseStatus</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Items</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.DepreciationSchedules</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -57,10 +45,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.AttachedDocumentSettings</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.PaymentSchedules</metadata>
     <use>Use</use>
   </content>
@@ -73,19 +57,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.TransactionsKeys</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Users</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.AddAttributeAndPropertySets</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.EquipmentDrivers</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -201,10 +177,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.Extensions</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.Stores</metadata>
     <use>Use</use>
   </content>
@@ -214,10 +186,6 @@
   </content>
   <content>
     <metadata>Catalog.AccessGroups</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ConfigurationMetadata</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -237,23 +205,11 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.PriceKeys</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.ReportOptions</metadata>
     <use>Use</use>
   </content>
   <content>
     <metadata>Catalog.DataMappingItems</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PrintInfo</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.DataAreas</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -270,10 +226,6 @@
   </content>
   <content>
     <metadata>Catalog.LockDataModificationReasons</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.RowIDs</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -314,10 +266,6 @@
   </content>
   <content>
     <metadata>Catalog.ChequeBonds</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PrintTemplates</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -377,10 +325,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.SalaryCalculationType</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
@@ -390,6 +334,10 @@
   </content>
   <content>
     <metadata>Catalog.TaxAnalytics</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.SalaryCalculationType</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

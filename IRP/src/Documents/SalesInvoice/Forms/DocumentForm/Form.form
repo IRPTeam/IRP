@@ -2902,19 +2902,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListOtherPeriodRevenueType</name>
-          <id>1489</id>
+          <name>ItemListIsAdditionalItemRevenue</name>
+          <id>1274</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.OtherPeriodRevenueType</segments>
+            <segments>Object.ItemList.IsAdditionalItemRevenue</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListOtherPeriodRevenueTypeExtendedTooltip</name>
-            <id>1491</id>
+            <name>ItemListIsAdditionalItemRevenueExtendedTooltip</name>
+            <id>1276</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2928,8 +2928,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListOtherPeriodRevenueTypeContextMenu</name>
-            <id>1490</id>
+            <name>ItemListIsAdditionalItemRevenueContextMenu</name>
+            <id>1275</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2937,20 +2937,12 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <type>InputField</type>
+          <type>CheckBoxField</type>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <extInfo xsi:type="form:InputFieldExtInfo">
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <wrap>true</wrap>
-            <clearButton>true</clearButton>
-            <chooseType>true</chooseType>
-            <typeDomainEnabled>true</typeDomainEnabled>
-            <textEdit>true</textEdit>
-          </extInfo>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSalesPerson</name>

@@ -349,9 +349,9 @@ Scenario: _029207 create SI based on Work order (with SO)
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
-			| '#'   | 'Price type'          | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                 | 'Work order'       | 'Revenue type'   | 'Sales person'    |
-			| '1'   | 'Basic Price Types'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
-			| '2'   | 'Basic Price Types'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
+			| '#'   | 'Price type'          | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                 | 'Work order'       | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'Basic Price Types'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
+			| '2'   | 'Basic Price Types'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '14,49'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | 'Sales order 183 dated 22.09.2022 11:13:46'   | '$$WorkOrder2$$'   | ''               | ''                |
 		
 		And "SpecialOffers" table became equal
 			| '#'   | 'Amount'   | 'Special offer'       |
@@ -393,9 +393,9 @@ Scenario: _029208 create SI based on Work order (without SO)
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		And "ItemList" table became equal
-			| '#'   | 'Price type'                | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Other period revenue type'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'       | 'Revenue type'   | 'Sales person'    |
-			| '1'   | 'en description is empty'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '30,51'        | 'pcs'    | ''                     | '1,000'      | '200,00'   | '18%'   | ''                | '169,49'       | '200,00'         | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
-			| '2'   | 'en description is empty'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '15,25'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | ''                | '84,75'        | '100,00'         | ''                     | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
+			| '#'   | 'Price type'                | 'Item'           | 'Item key'       | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Serial lot numbers'   | 'Quantity'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Is additional item revenue'   | 'Additional analytic'   | 'Store'   | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'   | 'Work order'       | 'Revenue type'   | 'Sales person'    |
+			| '1'   | 'en description is empty'   | 'Assembly'       | 'Assembly'       | ''                     | 'No'                   | '30,51'        | 'pcs'    | ''                     | '1,000'      | '200,00'   | '18%'   | ''                | '169,49'       | '200,00'         | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
+			| '2'   | 'en description is empty'   | 'Installation'   | 'Installation'   | ''                     | 'No'                   | '15,25'        | 'pcs'    | ''                     | '1,000'      | '100,00'   | '18%'   | ''                | '84,75'        | '100,00'         | 'No'                           | ''                      | ''        | ''                | 'No'                          | ''         | ''              | '$$WorkOrder1$$'   | ''               | ''                |
 		Then the form attribute named "Branch" became equal to "Workshop 1"
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "254,24"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "45,76"
@@ -416,22 +416,8 @@ Scenario: _029208 create SI based on Work order (without SO)
 		And I close all client application windows				
 						
 				
-Scenario: _029209 create Work order closing
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
-	And I click the button named "FormCreate"			
-	And I select from the drop-down list named "Company" by "Main Company" string
-	And I select from the drop-down list named "Branch" by "Distribution department" string
-	And I click "Post" button
-	And I delete "$$NumberWorkOrderClosing$$" variable
-	And I save the value of "Number" field as "$$NumberWorkOrderClosing$$"
-	And I click the button named "FormPostAndClose"
-* Check document creation
-	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
-	And "List" table contains lines
-		| 'Number'                     | 'Company'      |
-		| '$$NumberWorkOrderClosing$$' | 'Main Company' |
-	And I close all client application windows				
+
+				
 				
 						
 							

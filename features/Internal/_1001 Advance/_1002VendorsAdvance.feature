@@ -635,25 +635,38 @@ Scenario: _1002064 check advance closing when PI has two same strings
 	And I close all client application windows				
 		
 							
-Scenario: _1002070 check payment status for PI
-	And I close all client application windows
-	* Open PI list form
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	* Check
-		And "List" table contains lines
-			| 'Number' | 'Date'                | 'Partner'   | 'Amount'   | 'Legal name'        | 'Status'   | 'Store'    | 'PaymentStatusUnit' |
-			| '125'    | '12.02.2021 12:00:00' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Not paid'          |
-			| '117'    | '12.02.2021 15:12:15' | 'Ferron BP' | '4 470,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
-			| '116'    | '12.02.2021 15:13:37' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '115'    | '12.02.2021 15:13:56' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '120'    | '12.02.2021 15:40:00' | 'DFC'       | '170,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '121'    | '12.02.2021 15:40:00' | 'Adel'      | '170,00'   | 'Company Adel'      | 'Closed'   | 'Store 02' | 'Not tracked'       |
-			| '118'    | '12.02.2021 16:08:41' | 'Ferron BP' | '2 070,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'        |
-			| '119'    | '12.02.2021 16:21:23' | 'Ferron BP' | '1 600,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'        |
-			| '126'    | '15.03.2021 12:00:00' | 'Maxim'     | '190,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
-			| '122'    | '15.03.2021 12:00:01' | 'DFC'       | '110,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '123'    | '15.03.2021 19:00:00' | 'DFC'       | '190,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '124'    | '28.04.2021 16:40:13' | 'DFC'       | '200,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'       |
-			| '127'    | '28.04.2021 21:50:01' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
-			| '194'    | '04.09.2023 13:50:38' | 'Maxim'     | '1 800,00' | 'Company Aldis'     | 'Closed'   | 'Store 01' | 'Fully paid'        |
-	And I close all client application windows
+// Scenario: _1002070 check payment status for PI
+// 	And I close all client application windows
+// 	* Open PI list form
+// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+// 	* Add payment status to the PI list form
+// 		And I click "Change form..." button
+// 		And I go to line in "" table
+// 			| 'Column1'        |
+// 			| 'Payment status' | 
+// 		And Delay 2
+// 		And I activate current test client window
+// 		And I select current line in "" table
+// 		And Delay 2
+// 		And I press keyboard shortcut "SPACE"
+// 		And I click "Apply" button
+// 		And I click "OK" button
+// 	* Check
+// 		And "List" table contains lines
+// 			| 'Number' | 'Date'                | 'Partner'   | 'Amount'   | 'Legal name'        | 'Status'   | 'Store'    | 'Payment status' |
+// 			| '191'    | '27.01.2021 19:50:43' | 'Ferron BP' | ''         | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Not tracked'    |
+// 			| '125'    | '12.02.2021 12:00:00' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Not paid'       |
+// 			| '117'    | '12.02.2021 15:12:15' | 'Ferron BP' | '4 470,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'     |
+// 			| '116'    | '12.02.2021 15:13:37' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'     |
+// 			| '115'    | '12.02.2021 15:13:56' | 'Ferron BP' | '2 300,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'     |
+// 			| '120'    | '12.02.2021 15:40:00' | 'DFC'       | '170,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'    |
+// 			| '121'    | '12.02.2021 15:40:00' | 'Adel'      | '170,00'   | 'Company Adel'      | 'Closed'   | 'Store 02' | 'Not tracked'    |
+// 			| '118'    | '12.02.2021 16:08:41' | 'Ferron BP' | '2 070,00' | 'Company Ferron BP' | 'Shipping' | 'Store 02' | 'Fully paid'     |
+// 			| '119'    | '12.02.2021 16:21:23' | 'Ferron BP' | '1 600,00' | 'Company Ferron BP' | 'Closed'   | 'Store 02' | 'Fully paid'     |
+// 			| '126'    | '15.03.2021 12:00:00' | 'Maxim'     | '190,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'     |
+// 			| '122'    | '15.03.2021 12:00:01' | 'DFC'       | '110,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'    |
+// 			| '123'    | '15.03.2021 19:00:00' | 'DFC'       | '190,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'    |
+// 			| '124'    | '28.04.2021 16:40:13' | 'DFC'       | '200,00'   | 'DFC'               | 'Awaiting' | 'Store 02' | 'Not tracked'    |
+// 			| '127'    | '28.04.2021 21:50:01' | 'Maxim'     | '100,00'   | 'Company Maxim'     | 'Closed'   | 'Store 01' | 'Fully paid'     |
+// 			| '194'    | '04.09.2023 13:50:38' | 'Maxim'     | '1 800,00' | 'Company Aldis'     | 'Closed'   | 'Store 01' | 'Fully paid'     |
+// 	And I close all client application windows

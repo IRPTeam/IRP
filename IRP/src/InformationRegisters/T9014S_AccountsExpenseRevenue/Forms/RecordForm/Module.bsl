@@ -29,17 +29,7 @@ Procedure ExpenseOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure OtherPeriodsExpenseOnChange(Item)
-	SetVisible();
-EndProcedure
-
-&AtClient
 Procedure RevenueOnChange(Item)
-	SetVisible();
-EndProcedure
-
-&AtClient
-Procedure OtherPeriodsRevenueOnChange(Item)
 	SetVisible();
 EndProcedure
 
@@ -57,16 +47,8 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 		CurrentObject.AccountExpense = Undefined;
 	EndIf;
 	
-	If Not Record.OtherPeriodsExpense Then
-		CurrentObject.AccountOtherPeriodsExpense = Undefined;
-	EndIf;
-	
 	If Not Record.Revenue Then
 		CurrentObject.AccountRevenue = Undefined;
-	EndIf;
-	
-	If Not Record.OtherPeriodsRevenue Then
-		CurrentObject.AccountOtherPeriodsRevenue = Undefined;
 	EndIf;
 EndProcedure
 
@@ -76,9 +58,7 @@ Procedure SetVisible()
 	Items.ProfitLossCenter.Visible = (ThisObject.RecordType = "ProfitLossCenter" Or ThisObject.RecordType = "ExpenseRevenueAndProfitLossCenter");
 
 	Items.AccountExpense.Visible = Record.Expense;
-	Items.AccountOtherPeriodsExpense.Visible = Record.OtherPeriodsExpense;
 	Items.AccountRevenue.Visible = Record.Revenue;
-	Items.AccountOtherPeriodsRevenue.Visible = Record.OtherPeriodsRevenue;
 EndProcedure
 
 

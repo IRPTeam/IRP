@@ -88,13 +88,10 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
 	OpeningSettings.FormName = "Catalog.CashAccounts.Form.ChoiceForm";
 	OpeningSettings.FormParameters = New Structure();
 	
-	CompanyList = New ValueList;
-	CompanyList.Add(Object.Company);
-	CompanyList.Add(PredefinedValue("Catalog.Companies.EmptyRef"));
-	
 	OpeningSettings.ArrayOfFilters = New Array();
-	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Company"     , CompanyList , DataCompositionComparisonType.InList));
-	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("DeletionMark", False       , DataCompositionComparisonType.Equal));
+	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("DeletionMark", False          , DataCompositionComparisonType.Equal));
+	OpeningSettings.ArrayOfFilters.Add(DocumentsClient.CreateFilterItem("Company"     , Object.Company , DataCompositionComparisonType.Equal));
+	
 	For Each Filter In ArrayOfFIlters Do
 		OpeningSettings.ArrayOfFilters.Add(Filter);
 	EndDo;

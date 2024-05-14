@@ -14,11 +14,3 @@ Function GetAccessKey() Export
 EndFunction
 
 #EndRegion
-
-// Additional data filling.
-// 
-// Parameters:
-//  MovementsValueTable - ValueTable
-Procedure AdditionalDataFilling(MovementsValueTable) Export
-	Return;	
-EndProcedure

@@ -101,8 +101,8 @@
       <value>Advances closing</value>
     </synonym>
     <type>
-      <types>DocumentRef.VendorsAdvancesClosing</types>
       <types>DocumentRef.CustomersAdvancesClosing</types>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

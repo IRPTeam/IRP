@@ -722,28 +722,6 @@ Procedure AccountPayableOtherAgreementStartChoice(Item, ChoiceData, StandardProc
 EndProcedure
 
 &AtClient
-Procedure AdvanceFromCustomersAgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	ArrayOfApArPostingDetail = New Array();
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-
-	AgreementStartChoice("AdvanceFromCustomers", PredefinedValue("Enum.AgreementTypes.Customer"),
-		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AdvanceToSuppliersAgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	ArrayOfApArPostingDetail = New Array();
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-
-	AgreementStartChoice("AdvanceToSuppliers", PredefinedValue("Enum.AgreementTypes.Vendor"),
-		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
 Procedure AgreementStartChoice(TableName, AgreementType, ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
@@ -831,28 +809,6 @@ Procedure AccountPayableOtherAgreementEditTextChange(Item, Text, StandardProcess
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
 
 	AgreementEditTextChange("AccountPayableOther", PredefinedValue("Enum.AgreementTypes.Other"),
-		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AdvanceFromCustomersAgreementEditTextChange(Item, Text, StandardProcessing)
-	ArrayOfApArPostingDetail = New Array();
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-
-	AgreementEditTextChange("AdvanceFromCustomers", PredefinedValue("Enum.AgreementTypes.Customer"),
-		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure AdvanceToSuppliersAgreementEditTextChange(Item, Text, StandardProcessing)
-		ArrayOfApArPostingDetail = New Array();
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-
-	AgreementEditTextChange("AdvanceToSuppliers", PredefinedValue("Enum.AgreementTypes.Vendor"),
 		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
 EndProcedure
 

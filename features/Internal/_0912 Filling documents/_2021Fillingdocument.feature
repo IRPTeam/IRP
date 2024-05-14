@@ -894,32 +894,6 @@ Scenario: _0154101 check filling in and refilling Sales order
 			And "ItemList" table contains lines
 				| 'Item key'    | 'Quantity'    | 'Unit'                      | 'Tax amount'    | 'Price'     | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Price type'                 | 'Item'           |
 				| '37/19SD'     | '2,000'       | 'High shoes box (8 pcs)'    | '180,00'        | '500,00'    | '18%'    | '1 000,00'      | '1 180,00'        | 'Store 01'    | 'en description is empty'    | 'High shoes'     |
-			* Edit quantity in base unit
-				And in the table "ItemList" I click "Edit quantity in base unit" button
-				And I go to line in "ItemList" table
-					| 'Item'     | 'Item key'     |
-					| 'Dress'    | 'S/Yellow'      |		
-				And I select current line in "ItemList" table
-				And I set "Quantity is fixed" checkbox in "ItemList" table
-				And I input "2,000" text in "Stock quantity" field of "ItemList" table
-				And I finish line editing in "ItemList" table
-				And I go to line in "ItemList" table
-					| 'Item'       | 'Item key'     |
-					| 'High shoes' | '37/19SD'      |		
-				And I select current line in "ItemList" table
-				And I set "Quantity is fixed" checkbox in "ItemList" table
-				And I input "17,000" text in "Stock quantity" field of "ItemList" table
-				And I finish line editing in "ItemList" table
-			* Check 
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'S/Yellow' | 'Basic Price Types'       | 'Dress'      | '1,000'    | '550,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '99,00'      | '550,00' | '649,00'       |
-					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |
-				And I click "Post" button
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'S/Yellow' | 'Basic Price Types'       | 'Dress'      | '1,000'    | '550,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '99,00'      | '550,00' | '649,00'       |
-					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |									
 			And I close all client application windows
 			
 
@@ -1268,32 +1242,6 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 			And "ItemList" table contains lines
 				| 'Item key'    | 'Quantity'    | 'Unit'                      | 'Tax amount'    | 'Price'     | 'VAT'    | 'Net amount'    | 'Total amount'    | 'Store'       | 'Price type'                 | 'Item'           |
 				| '37/19SD'     | '2,000'       | 'High shoes box (8 pcs)'    | '180,00'        | '500,00'    | '18%'    | '1 000,00'      | '1 180,00'        | 'Store 01'    | 'en description is empty'    | 'High shoes'     |
-			* Edit quantity in base unit
-				And in the table "ItemList" I click "Edit quantity in base unit" button
-				And I go to line in "ItemList" table
-					| 'Item'     | 'Item key'     |
-					| 'Dress'    | 'XS/Blue'      |		
-				And I select current line in "ItemList" table
-				And I set "Quantity is fixed" checkbox in "ItemList" table
-				And I input "2,000" text in "Stock quantity" field of "ItemList" table
-				And I finish line editing in "ItemList" table
-				And I go to line in "ItemList" table
-					| 'Item'       | 'Item key'     |
-					| 'High shoes' | '37/19SD'      |		
-				And I select current line in "ItemList" table
-				And I set "Quantity is fixed" checkbox in "ItemList" table
-				And I input "17,000" text in "Stock quantity" field of "ItemList" table
-				And I finish line editing in "ItemList" table
-			* Check 
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |
-				And I click "Post" button
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-					| '37/19SD'  | 'en description is empty' | 'High shoes' | '2,000'    | '1 000,00'   | 'Yes'               | '17,000'         | '18%' | 'High shoes box (8 pcs)' | '180,00'     | '500,00' | '1 180,00'     |									
 			And I close all client application windows
 			
 
@@ -1826,25 +1774,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
-		* Edit quantity in base unit
-			And in the table "ItemList" I click "Edit quantity in base unit" button
-			And I go to line in "ItemList" table
-				| 'Item'     | 'Item key'     |
-				| 'Dress'    | 'XS/Blue'      |		
-			And I select current line in "ItemList" table
-			And I set "Quantity is fixed" checkbox in "ItemList" table
-			And I input "2,000" text in "Stock quantity" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-		* Check 
-			And "ItemList" table contains lines
-				| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-				| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-			And I click "Post" button
-			And "ItemList" table contains lines
-				| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-				| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-			And I close all client application windows
-			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I click "Post and close" button
 			And "List" table contains lines
 				| 'Number'                            | 'Amount'       |
 				| '$$NumberPurchaseOrder0154101$$'    | '1 962,60'     |
@@ -2172,25 +2102,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				Then the form attribute named "ItemListTotalNetAmount" became equal to "1 770,00"
 				Then the form attribute named "ItemListTotalTaxAmount" became equal to "192,60"
 				And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 962,60"
-			* Edit quantity in base unit
-				And in the table "ItemList" I click "Edit quantity in base unit" button
-				And I go to line in "ItemList" table
-					| 'Item'     | 'Item key'     |
-					| 'Dress'    | 'XS/Blue'      |		
-				And I select current line in "ItemList" table
-				And I set "Quantity is fixed" checkbox in "ItemList" table
-				And I input "2,000" text in "Stock quantity" field of "ItemList" table
-				And I finish line editing in "ItemList" table
-			* Check 
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-				And I click "Post" button
-				And "ItemList" table contains lines
-					| 'Item key' | 'Price type'              | 'Item'       | 'Quantity' | 'Net amount' | 'Quantity is fixed' | 'Stock quantity' | 'VAT' | 'Unit'                   | 'Tax amount' | 'Price'  | 'Total amount' |
-					| 'XS/Blue'  | 'Basic Price Types'       | 'Dress'      | '1,000'    | '520,00'     | 'Yes'               | '2,000'          | '18%' | 'pcs'                    | '93,60'      | '520,00' | '613,60'       |
-				And I close all client application windows
-			
+
 Scenario: _0154107 check filling in and refilling Cash receipt (transaction type Payment from customer)
 	And I close all client application windows
 	* Open the Cash receipt creation form

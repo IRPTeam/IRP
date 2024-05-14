@@ -387,12 +387,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 		If CurrencyTable.FindRows(New Structure("Key, MovementType", Row.Key, CurrencyMovementType)).Count() Then
 			Continue;
 		EndIf;
-		
-		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
-		CurrencyParameters.RowKey   = Row.Key;
-		CurrencyParameters.Currency = Row.Currency;
-		CurrencyParameters.Ref      = Ref;
-		CurrenciesServer.AddRowToCurrencyTable(CurrencyParameters, Ref.Date, CurrencyTable, CurrencyMovementType);
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
 	EndDo;
 
 	T6020S_BatchKeysInfo = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
@@ -521,16 +516,15 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
-	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6010S_BatchesInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1419,29 +1413,6 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_RRR();
-EndFunction
-
-Function R4050B_StockInventory()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey,
-		   |	SUM(ItemList.Quantity) AS Quantity
-		   |INTO R4050B_StockInventory
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND ItemList.IsOwnStocks
-		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
-		   |GROUP BY
-		   |	VALUE(AccumulationRecordType.Receipt),
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemLIst.Store,
-		   |	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

@@ -427,14 +427,13 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Partner term</value>
+        <value>Agreement</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -559,14 +558,13 @@
       <name>Agreement</name>
       <synonym>
         <key>en</key>
-        <value>Partner term</value>
+        <value>Agreement</value>
       </synonym>
       <type>
         <types>CatalogRef.Agreements</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -2580,20 +2578,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e7cecabf-668c-485a-a03b-96bb04ef640c">
-      <name>UseBasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Use basis document</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

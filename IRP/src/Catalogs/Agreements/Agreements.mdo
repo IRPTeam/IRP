@@ -161,9 +161,7 @@
     <fillChecking>ShowError</fillChecking>
     <createOnInput>DontUse</createOnInput>
     <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Catalog.PriceTypes.ManualPriceType</value>
-    </fillValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="221341c7-69ea-4300-96f9-e3f311d4b079">
     <name>ItemSegment</name>

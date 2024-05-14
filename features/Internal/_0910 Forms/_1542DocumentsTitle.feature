@@ -563,25 +563,3 @@ Scenario: _023132 check the display of the header of the collapsible group in De
 								| 'And I click Select button of  "Company" field'         |
 	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 	And I close all client application windows
-
-Scenario: _023133 check the display of the header of the collapsible group in ExpenseAccruals
-	Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
-	* Check the display of the header of the collapsible group
-		When check the display of the header of the collapsible group in OpeningEntry
-		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
-	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
-	When I Check the steps for Exception
-								| 'And I click Select button of  "Company" field'         |
-	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I close all client application windows
-
-Scenario: _023134 check the display of the header of the collapsible group in RevenueAccruals
-	Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
-	* Check the display of the header of the collapsible group
-		When check the display of the header of the collapsible group in OpeningEntry
-		Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company" text
-	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
-	When I Check the steps for Exception
-								| 'And I click Select button of  "Company" field'         |
-	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-	And I close all client application windows

@@ -773,9 +773,9 @@ Scenario: _018016 create PI based on GR with two same items (creation based on)
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| '#'   | 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
-			| '1'   | 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | ''                            | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
-			| '2'   | 'en description is empty'   | 'Dress'   | 'M/White'    | ''                     | 'No'                   | '793,22'       | 'pcs'    | '10,000'     | ''                     | '520,00'   | '18%'   | ''                | '5 200,00'       | ''                      | ''                          | 'Store 02'   | ''                | ''                            | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '4 406,78'     | 'Yes'                  |
+			| '#'   | 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Is additional item cost'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
+			| '1'   | 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | 'No'                        | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
+			| '2'   | 'en description is empty'   | 'Dress'   | 'M/White'    | ''                     | 'No'                   | '793,22'       | 'pcs'    | '10,000'     | ''                     | '520,00'   | '18%'   | ''                | '5 200,00'       | ''                      | ''                          | 'Store 02'   | ''                | 'No'                        | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '4 406,78'     | 'Yes'                  |
 		And I close all client application windows
 		
 Scenario: _018017 create PI based on GR with two same items (link items)
@@ -829,8 +829,8 @@ Scenario: _018017 create PI based on GR with two same items (link items)
 		And I click "Ok" button	
 	* Check
 		And "ItemList" table became equal
-			| '#'   | 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
-			| '1'   | 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | ''                            | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
+			| '#'   | 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Is additional item cost'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
+			| '1'   | 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | 'No'                        | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
@@ -896,9 +896,9 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 		And I click "Ok" button
 	* Check
 		And "ItemList" table became equal
-			| 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Other period expense type'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
-			| 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | ''                            | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
-			| 'en description is empty'   | 'Dress'   | 'M/White'    | ''                     | 'No'                   | '793,22'       | 'pcs'    | '10,000'     | ''                     | '520,00'   | '18%'   | ''                | '5 200,00'       | ''                      | ''                          | 'Store 02'   | ''                | ''                            | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '4 406,78'     | 'Yes'                  |
+			| 'Price type'                | 'Item'    | 'Item key'   | 'Profit loss center'   | 'Dont calculate row'   | 'Tax amount'   | 'Unit'   | 'Quantity'   | 'Serial lot numbers'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Total amount'   | 'Additional analytic'   | 'Internal supply request'   | 'Store'      | 'Delivery date'   | 'Is additional item cost'   | 'Expense type'   | 'Purchase order'                                   | 'Detail'   | 'Sales order'   | 'Net amount'   | 'Use goods receipt'    |
+			| 'en description is empty'   | 'Dress'   | 'XS/Blue'    | ''                     | 'No'                   | '1 507,12'     | 'pcs'    | '19,000'     | ''                     | '520,00'   | '18%'   | ''                | '9 880,00'       | ''                      | ''                          | 'Store 02'   | ''                | 'No'                        | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '8 372,88'     | 'Yes'                  |
+			| 'en description is empty'   | 'Dress'   | 'M/White'    | ''                     | 'No'                   | '793,22'       | 'pcs'    | '10,000'     | ''                     | '520,00'   | '18%'   | ''                | '5 200,00'       | ''                      | ''                          | 'Store 02'   | ''                | 'No'                        | ''               | 'Purchase order 1 111 dated 15.02.2022 12:31:27'   | ''         | ''              | '4 406,78'     | 'Yes'                  |
 		And I click "Show row key" button
 		And I move to "Row ID Info" tab	
 		And "RowIDInfo" table became equal
@@ -909,6 +909,47 @@ Scenario: _018018 create PI based on GR with two same items (add linked document
 			| '*'     | 'Goods receipt 1 111 dated 15.02.2022 14:34:54'   | 'f5b7bbaf-7525-4d01-a472-687190c70d35'   | ''            | '5,000'      | '5dff43f5-e537-4fae-a925-7fd7a77a4aae'   | 'PI'             | 'f5b7bbaf-7525-4d01-a472-687190c70d35'    |
 		And I close all client application windows
 		
+									
+				
+		
+				
+
+
+
+// Scenario: _018020 check the form Pick up items in the document Purchase invoice
+// 	And I close all client application windows
+// 	* Opening a form for creating Purchase invoice
+// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+// 		And I click the button named "FormCreate"
+// 	* Filling in the main details of the document
+// 		And I click Select button of "Company" field
+// 		And I go to line in "List" table
+// 			| Description  |
+// 			| Main Company |
+// 		And I select current line in "List" table
+// 	* Filling in vendor information
+// 		And I click Select button of "Partner" field
+// 		And I go to line in "List" table
+// 			| Description |
+// 			| Ferron BP   |
+// 		And I select current line in "List" table
+// 		And I click Select button of "Legal name" field
+// 		And I activate "Description" field in "List" table
+// 		And I go to line in "List" table
+// 			| Description       |
+// 			| Company Ferron BP |
+// 		And I select current line in "List" table
+// 		And I click Select button of "Partner term" field
+// 		And I go to line in "List" table
+// 			| Description        |
+// 			| Vendor Ferron, TRY |
+// 		And I select current line in "List" table
+// 		And I click Select button of "Store" field
+// 		Then "Stores" window is opened
+// 		And I select current line in "List" table
+// 	When check the product selection form with price information in Purchase invoice
+// 	And I close all client application windows
+
 
 
 Scenario: _300503 check connection to Purchase invoice report "Related documents"

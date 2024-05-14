@@ -390,17 +390,18 @@ Scenario: _043412 check Bank receipt movements by the Register "R2020 Advances f
 			| 'Number'    |
 			| '5'         |
 	* Check movements by the Register  "R2020 Advances from customer" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 5 dated 15.04.2021 10:21:22' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | ''         | ''                     | ''                           |
-			| 'Register  "R2020 Advances from customer"' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | ''         | ''                     | ''                           |
-			| ''                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner'  | 'Order' | 'Agreement'                | 'Project' | 'Amount'   | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |
-			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '9 381,76' | 'No'                   | ''                           |
-			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |
-			| ''                                         | '15.04.2021 10:21:22' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | '54 800'   | 'No'                   | ''                           |		
+			| 'Bank receipt 5 dated 15.04.2021 10:21:22' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | ''                     | ''                           |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                     | ''                 | ''         | ''      | ''                         | ''        | 'Attributes'           | ''                           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'       | 'Partner'  | 'Order' | 'Agreement'                | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                         | 'Receipt'     | '15.04.2021 10:21:22' | '9 381,76'  | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '15.04.2021 10:21:22' | '54 800'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                         | 'Receipt'     | '15.04.2021 10:21:22' | '54 800'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Lomaniti' | 'Lomaniti' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
 	And I close all client application windows
 
 Scenario: _043413 check absence Bank receipt movements by the Register "R2021 Customer transactions" (advance)
@@ -563,17 +564,18 @@ Scenario: _043427 check Bank receipt movements by the Register "R2020 Advances f
 			| 'Number'    |
 			| '518'       |
 	* Check movements by the Register  "R2020 Advances from customer" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 518 dated 08.02.2022 13:39:01' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''       | ''                     | ''                           |
-			| 'Register  "R2020 Advances from customer"'   | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''       | ''                     | ''                           |
-			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |
-			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '8,56'   | 'No'                   | ''                           |
-			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |
-			| ''                                           | '08.02.2022 13:39:01' | 'Receipt'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '50'     | 'No'                   | ''                           |		
+			| 'Bank receipt 518 dated 08.02.2022 13:39:01' | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'   | ''            | ''                    | ''          | ''             | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | 'Attributes'           | ''                           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '8,56'      | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '50'        | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '08.02.2022 13:39:01' | '50'        | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
 	And I close all client application windows
 
 
@@ -585,17 +587,18 @@ Scenario: _0434281 check Bank receipt movements by the Register "R2020 Advances 
 			| 'Number'    |
 			| '1 520'     |
 	* Check movements by the Register  "R2020 Advances from customer" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 520 dated 23.06.2022 19:41:15' | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''       | ''                     | ''                           |
-			| 'Register  "R2020 Advances from customer"'     | ''                    | ''           | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''       | ''                     | ''                           |
-			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Amount' | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |
-			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '17,12'  | 'No'                   | ''                           |
-			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |
-			| ''                                             | '23.06.2022 19:41:15' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                   | ''                           |				
+			| 'Bank receipt 1 520 dated 23.06.2022 19:41:15' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| 'Register  "R2020 Advances from customer"'     | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | ''                     | ''                           |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                     | ''                  | ''          | ''      | ''                         | ''        | 'Attributes'           | ''                           |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'        | 'Partner'   | 'Order' | 'Agreement'                | 'Project' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '17,12'     | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
+			| ''                                             | 'Receipt'     | '23.06.2022 19:41:15' | '100'       | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | ''      | 'Basic Partner terms, TRY' | ''        | 'No'                   | ''                           |
 	And I close all client application windows
 
 Scenario: _0434282 check Bank receipt movements by the Register "R3010 Cash on hand" (Payment from customer by POS, without bases)
@@ -1602,16 +1605,19 @@ Scenario: _0434342 check Bank receipt movements by the Register "R5022 Expenses"
 			| 'Number'    |
 			| '1 527'     |
 	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report info" button
+		And I click "Registrations report" button
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 527 dated 05.03.2024 16:24:49' | ''                    | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
-			| 'Register  "R5022 Expenses"'                   | ''                    | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
-			| ''                                             | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
-			| ''                                             | '05.03.2024 16:24:49' | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '5'      | '5'                 | ''            | ''                          |
-			| ''                                             | '05.03.2024 16:24:49' | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | '5'      | '5'                 | ''            | ''                          |
-			| ''                                             | '05.03.2024 16:24:49' | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,86'   | '0,86'              | ''            | ''                          |		
+			| 'Bank receipt 1 527 dated 05.03.2024 16:24:49' | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Document registrations records'               | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| 'Register  "R5022 Expenses"'                   | ''                    | ''          | ''                  | ''            | ''             | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''                          |
+			| ''                                             | 'Period'              | 'Resources' | ''                  | ''            | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | 'Attributes'                |
+			| ''                                             | ''                    | 'Amount'    | 'Amount with taxes' | 'Amount cost' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Calculation movement cost' |
+			| ''                                             | '05.03.2024 16:24:49' | '0,86'      | '0,86'              | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | ''                          |
+			| ''                                             | '05.03.2024 16:24:49' | '5'         | '5'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | ''                          |
+			| ''                                             | '05.03.2024 16:24:49' | '5'         | '5'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'TRY'                          | ''        | ''                          |
+			| ''                                             | '05.03.2024 16:24:49' | '5'         | '5'                 | ''            | 'Main Company' | 'Front office' | 'Front office'       | 'Rent'         | ''         | ''            | ''            | 'TRY'      | ''                    | 'en description is empty'      | ''        | ''                          |		
 	And I close all client application windows
 
 
@@ -1769,196 +1775,3 @@ Scenario: _0434350 check Bank receipt movements by the Register "R5022 Expenses"
 			| ''                                             | '09.07.2022 10:44:39' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,34'   | '0,34'              | ''            | ''                          |
 			| ''                                             | '09.07.2022 10:44:39' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,51'   | '0,51'              | ''            | ''                          |		
 	And I close all client application windows
-
-Scenario: _0434351 check Bank receipt movements by the Register  "T2015 Transactions info" (Payment from customer, advance=false)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '1'     |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 dated 07.09.2020 19:14:59' | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                          | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'      | ''             | ''       | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                          | ''          | ''        | ''       | ''       | ''        |
-			| ''                                         | 'Company'      | 'Branch' | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                         | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                         | 'Main Company' | ''       | ''      | '07.09.2020 19:14:59' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '*'         | ''        | '100'    | 'No'     | 'Yes'     |	
-	And I close all client application windows
-
-Scenario: _0434352 check Bank receipt movements by the Register  "T2014 Advances info" (Payment from customer, advance=true)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '6'     |
-	* Check movements by the Register  "T2014 Advances info" 
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 6 dated 21.04.2021 13:09:56' | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                          | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'          | ''             | ''                        | ''                    | ''    | ''         | ''        | ''                | ''      | ''                  | ''                    | ''          | ''                          | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                         | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name'      | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'         | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                         | 'Main Company' | 'Distribution department' | '21.04.2021 13:09:56' | '*'   | 'USD'      | 'Kalipso' | 'Company Kalipso' | ''      | 'No'                | 'Yes'                 | '*'         | 'Personal Partner terms, $' | ''        | '25 000' | 'No'                      | 'No'                   | 'Receipt'     |
-	And I close all client application windows
-
-Scenario: _0401053 check absence Bank receipt movements by the Register  "T2015 Transactions info" (Payment from customer, advance=true)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '6'       |
-	* Check movements by the Register  "T2015 Transactions info"
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2015 Transactions info"'    |
-		And I close all client application windows
-
-Scenario: _0401054 check absence Bank receipt movements by the Register  "T2014 Advances info" (Payment from customer, advance=false)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1'       |
-	* Check movements by the Register  "T2014 Advances info"
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2014 Advances info"'    |
-		And I close all client application windows
-
-Scenario: _0434355 check Bank receipt movements by the Register  "T2015 Transactions info" (Return from vendor, with basis)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '517'   |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 517 dated 08.02.2022 12:44:01' | ''             | ''             | ''      | ''                    | ''    | ''         | ''        | ''              | ''                   | ''                      | ''                        | ''                                             | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'        | ''             | ''             | ''      | ''                    | ''    | ''         | ''        | ''              | ''                   | ''                      | ''                        | ''                                             | ''          | ''        | ''       | ''       | ''        |
-			| ''                                           | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner' | 'Legal name'    | 'Agreement'          | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                            | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                           | 'Main Company' | 'Front office' | ''      | '08.02.2022 12:44:01' | '*'   | 'TRY'      | 'Maxim'   | 'Company Maxim' | 'Partner term Maxim' | 'Yes'                   | 'No'                      | 'Purchase return 21 dated 28.04.2021 21:50:02' | '*'         | ''        | '-50'    | 'No'     | 'Yes'     |
-	And I close all client application windows
-
-Scenario: _0401056 check absence Bank receipt movements by the Register  "T2014 Advances info" (Return from vendor, with basis)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '517'       |
-	* Check movements by the Register  "T2014 Advances info"
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2014 Advances info"'    |
-		And I close all client application windows
-
-Scenario: _0434357 check Bank receipt movements by the Register  "T2014 Advances info" (Return from vendor, without basis)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '516'   |
-	* Check movements by the Register  "T2014 Advances info" 
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 516 dated 02.09.2021 14:30:07' | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'            | ''             | ''             | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                        | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                           | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'       | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                           | 'Main Company' | 'Front office' | '02.09.2021 14:30:07' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'Yes'               | 'No'                  | '*'         | 'Vendor Ferron, TRY'      | ''        | '-100'   | 'No'                      | 'No'                   | 'Receipt'     |
-			| ''                                           | 'Main Company' | 'Front office' | '02.09.2021 14:30:07' | '*'   | 'TRY'      | 'DFC'       | 'DFC'               | ''      | 'Yes'               | 'No'                  | '*'         | 'Partner term vendor DFC' | ''        | '-200'   | 'No'                      | 'No'                   | 'Receipt'     |
-	And I close all client application windows
-
-Scenario: _0401058 check absence Bank receipt movements by the Register  "T2015 Transactions info" (Return from vendor, without basis)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '516'     |
-	* Check movements by the Register  "T2015 Transactions info"
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2015 Transactions info"'    |
-		And I close all client application windows
-
-Scenario: _0434357 check Bank receipt movements by the Register  "T2014 Advances info" (Payment from customer by POS, advance=true)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '1 520' |
-	* Check movements by the Register  "T2014 Advances info" 
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 520 dated 23.06.2022 19:41:15' | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| 'Register  "T2014 Advances info"'              | ''             | ''                        | ''                    | ''    | ''         | ''          | ''                  | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
-			| ''                                             | 'Company'      | 'Branch'                  | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
-			| ''                                             | 'Main Company' | 'Distribution department' | '23.06.2022 19:41:15' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | ''      | 'No'                | 'Yes'                 | '*'         | 'Basic Partner terms, TRY' | ''        | '100'    | 'No'                      | 'No'                   | 'Receipt'     |
-	And I close all client application windows
-
-Scenario: _0401058 check absence Bank receipt movements by the Register  "T2015 Transactions info" (Payment from customer by POS, advance=true)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 520'   |
-	* Check movements by the Register  "T2015 Transactions info"
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2015 Transactions info"'    |
-		And I close all client application windows
-
-Scenario: _0434355 check Bank receipt movements by the Register  "T2015 Transactions info" (Payment from customer by POS,  advance=false)
-	And I close all client application windows
-	* Select Bank receipt
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'|
-			| '1 519' |
-	* Check movements by the Register  "T2015 Transactions info" 
-		And I click "Registrations report info" button
-		And I select "T2015 Transactions info" exact value from "Register" drop-down list
-		And I click "Generate report" button	
-		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 1 519 dated 23.06.2022 17:50:08' | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                          | ''          | ''        | ''       | ''       | ''        |
-			| 'Register  "T2015 Transactions info"'          | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                          | ''          | ''        | ''       | ''       | ''        |
-			| ''                                             | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                         | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
-			| ''                                             | 'Main Company' | 'Distribution department' | ''      | '23.06.2022 17:50:08' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '*'         | ''        | '100'    | 'No'     | 'Yes'     |
-	And I close all client application windows
-
-Scenario: _0401056 check absence Bank receipt movements by the Register  "T2014 Advances info" (Return from vendor, advance=false)
-	* Select BR
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1 519'   |
-	* Check movements by the Register  "T2014 Advances info"
-		And I click "Registrations report info" button
-		And I select "T2014 Advances info" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "T2014 Advances info"'    |
-		And I close all client application windows

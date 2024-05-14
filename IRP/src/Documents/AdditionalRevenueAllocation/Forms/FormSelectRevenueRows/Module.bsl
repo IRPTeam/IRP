@@ -12,8 +12,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	R6080T_OtherPeriodsRevenues.AmountTaxBalance AS TaxAmount
 	|FROM
 	|	AccumulationRegister.R6080T_OtherPeriodsRevenues.Balance(&BalancePeriod, Company = &Company
-	|	AND CurrencyMovementType = &CurrencyMovementType
-	|	AND OtherPeriodRevenueType = VALUE(Enum.OtherPeriodRevenueType.ItemsRevenue)) AS R6080T_OtherPeriodsRevenues
+	|	AND CurrencyMovementType = &CurrencyMovementType) AS R6080T_OtherPeriodsRevenues
 	|TOTALS
 	|BY
 	|	Document";

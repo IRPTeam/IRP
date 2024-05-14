@@ -564,9 +564,10 @@ Procedure PostingInfoBeforeRowChange(Item, Cancel)
 EndProcedure
 
 &AtServer
-Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)	
-	ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
-	CurrentMovement.Load(ValueTable);
+Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)
+	Query = New Query("SELECT * FROM " + CurrentRegName + " WHERE Recorder = &Ref");
+	Query.SetParameter("Ref", Ref);
+	CurrentMovement.Load(Query.Execute().Unload());
 	NewMovement.Load(NewMovementStorage.Get());
 EndProcedure
 
@@ -575,19 +576,37 @@ Procedure PostingInfo_CreateTable(NewMovementStorage)
 	
 	Table = NewMovementStorage.Get(); // ValueTable
 	
-	CurrentMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
-	CurrentMovementStructure.TableName	= "CurrentMovement";
-	CurrentMovementStructure.ValueTable = Table;
-	CurrentMovementStructure.Form		= ThisObject;
+	ArrayAddedAttributes = New Array; // Array Of FormAttribute
 	
-	CommonFunctionsServer.CreateFormTable(CurrentMovementStructure);
+	For Each Column In Table.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+		TypeDescription = New TypeDescription(Column.ValueType);
+	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "CurrentMovement"); 
+	    ArrayAddedAttributes.Add(AttributeDescription); 
+	    AttributeDescription = New FormAttribute(Column.Name, TypeDescription, "NewMovement"); 
+	    ArrayAddedAttributes.Add(AttributeDescription); 
+	EndDo; 
 	
-	NewMovementStructure = CommonFunctionsServer.BlankFormTableCreationStructure();
-	NewMovementStructure.TableName	= "NewMovement";
-	NewMovementStructure.ValueTable = Table;
-	NewMovementStructure.Form		= ThisObject;
+	ChangeAttributes(ArrayAddedAttributes);
 	
-	CommonFunctionsServer.CreateFormTable(NewMovementStructure);
+	For Each Column In Table.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+	    NewColumn = Items.Add("CurrentMovement" + Column.Name, Type("FormField"), Items.CurrentMovement); // FormField 
+	    NewColumn.Title = Column.Name; 
+	    NewColumn.DataPath = "CurrentMovement." + Column.Name;
+	    NewColumn.Type = FormFieldType.InputField; 
+	    
+		NewColumn = Items.Add("NewMovement" + Column.Name, Type("FormField"), Items.NewMovement); // FormField 
+	    NewColumn.Title = Column.Name; 
+	    NewColumn.DataPath = "NewMovement." + Column.Name;
+	    NewColumn.Type = FormFieldType.InputField; 
+	EndDo;
 	
 EndProcedure
 

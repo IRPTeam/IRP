@@ -514,17 +514,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ExpenseAccruals</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
@@ -1579,13 +1568,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ExpenseAccruals.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.RevenueType</name>
 		<right>
 			<name>View</name>
@@ -2367,33 +2349,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Configuration.IRP</name>
-		<right>
-			<name>MainWindowModeNormal</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeEmbeddedWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeFullscreenWorkplace</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>MainWindowModeKiosk</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>AnalyticsSystemClient</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashExpense.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
@@ -2438,24 +2393,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

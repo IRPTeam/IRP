@@ -139,12 +139,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 						If RowPaymentList.Partner = RowMovementTypes.Partner And RowPaymentList.LegalName = RowMovementTypes.LegalName Then
 							ArrayOfCurrencies = CurrencyTable.FindRows(New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
 							If Not ArrayOfCurrencies.Count() Then
-								CurrencyParameters = GetNewCurrencyRowParameters();
-								CurrencyParameters.RowKey   = RowPaymentList.Key;
-								CurrencyParameters.Currency = Parameters.Object.Currency;
-								CurrencyParameters.Ref      = Parameters.Object.Ref;
-								
-								NewRow = AddRowToCurrencyTable(CurrencyParameters, Parameters.Object.Date, CurrencyTable, RowMovementTypes.MovementType);
+								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key, Parameters.Object.Currency, RowMovementTypes.MovementType);
 								CurrenciesClientServer.CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
 							EndIf;
 						EndIf;
@@ -166,10 +161,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			If ItemOfPostingInfo.PrepareTable.Count() Then
 				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-				ItemOfPostingInfo.PrepareTable = ExpandTable(TempTableManager, 
-															ItemOfPostingInfo.PrepareTable, 
-															UseAgreementMovementType, 
-															UseCurrencyJoin);
+				ItemOfPostingInfo.PrepareTable = ExpandTable(TempTableManager, ItemOfPostingInfo.PrepareTable, UseAgreementMovementType, UseCurrencyJoin);
 				
 				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
 				IsLandedCost = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsLandedCost", False);
@@ -345,16 +337,8 @@ Function IsUseAgreementMovementType(RecMetadata)
 	
 	TypeOfRecordSetsArray = New Array();
 	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
-	
-	//TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
-	//TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
-	
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R6080T_OtherPeriodsRevenues);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R5022T_Expenses);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R5021T_Revenues);
-	
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
 	
 	If TypeOfRecordSetsArray.Find(RecMetadata) = Undefined Then
 		Return True;
@@ -367,12 +351,12 @@ EndFunction
 Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	UseCurrencyJoin = False;
 
-	ArrayOfRecMetadata = New Array();
-	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3035T_CashPlanning);
-	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
-	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
-	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
-	ArrayOfRecMetadata.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+	TypeOfRecordSetsArray = New Array();
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3035T_CashPlanning);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3015B_CashAdvance);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
+	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
 
 	FilterByDocument = False;
 
@@ -386,7 +370,7 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 		FilterByDocument = True;
 	EndIf;
 
-	If FilterByDocument And ArrayOfRecMetadata.Find(RecMetadata) <> Undefined Then
+	If FilterByDocument And TypeOfRecordSetsArray.Find(RecMetadata) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;
 
@@ -632,22 +616,38 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	
 	// Agreement currency
 	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, AgreementInfo.CurrencyMovementType);
+		AddRowToCurrencyTable(RatePeriod,
+			EmptyCurrenciesTable,
+			Parameters.RowKey,
+			Parameters.Currency,
+			AgreementInfo.CurrencyMovementType);
 	EndIf;
 	
 	// Legal currency
 	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(RatePeriod,
+			EmptyCurrenciesTable,
+			Parameters.RowKey,
+			Parameters.Currency,
+			ItemOfArray.CurrencyMovementType);
 	EndDo;
 	
 	// Reporting currency
 	For Each ItemOfArray In Catalogs.Companies.GetReportingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(RatePeriod,
+			EmptyCurrenciesTable,
+			Parameters.RowKey,
+			Parameters.Currency,
+			ItemOfArray.CurrencyMovementType);
 	EndDo;
 	
 	// Budgeting currency
 	For Each ItemOfArray In Catalogs.Companies.GetBudgetingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(RatePeriod,
+			EmptyCurrenciesTable,
+			Parameters.RowKey,
+			Parameters.Currency,
+			ItemOfArray.CurrencyMovementType);
 	EndDo;
 	
 	CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, Parameters.DocumentAmount);
@@ -717,15 +717,7 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EndDo;
 EndProcedure
 
-Function GetNewCurrencyRowParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("RowKey", Undefined);
-	Parameters.Insert("Currency", Undefined);
-	Parameters.Insert("Ref", Undefined);
-	Return Parameters;
-EndFunction							
-
-Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, CurrencyMovementType, FixedRates = Undefined) Export
+Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType, FixedRates = Undefined) Export
 	If FixedRates <> Undefined Then
 		TableOfFixedRates = New ValueTable();
 		TableOfFixedRates.Columns.Add("Key");
@@ -741,13 +733,12 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 	EndIf;
 	
 	NewRow = CurrenciesTable.Add();
-	NewRow.Key = Parameters.RowKey;
-	NewRow.CurrencyFrom = Parameters.Currency;
+	NewRow.Key = RowKey;
+	NewRow.CurrencyFrom = CurrencyFrom;
 	NewRow.MovementType = CurrencyMovementType;
 	If Not CurrencyMovementType.DeferredCalculation Then
 		
 		UseFixedRates = False;
-		UseBasisDocumentRates = False;
 		
 		// fixed rates from document
 		If FixedRates <> Undefined Then
@@ -765,32 +756,10 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 			EndIf;
 		EndIf;
 		
-		// rates from basis document
-		If Parameters.Property("DocObject") Then
-			
-			DocMetadata = Parameters.DocObject.Metadata();
-			If (DocMetadata = Metadata.Documents.ExpenseAccruals 
-				Or DocMetadata = Metadata.Documents.RevenueAccruals)
-				And ValueIsFilled(Parameters.DocObject.Basis) Then
-				
-				Filter = New Structure();
-				Filter.Insert("CurrencyFrom" , NewRow.CurrencyFrom);
-				Filter.Insert("MovementType" , NewRow.MovementType);
-			
-				RowsBasisDocumentRates = Parameters.DocObject.Basis.Currencies.FindRows(Filter);
-				If RowsBasisDocumentRates.Count() Then
-					UseBasisDocumentRates = True;				
-					NewRow.Rate         = RowsBasisDocumentRates[0].Rate;
-					NewRow.ReverseRate  = RowsBasisDocumentRates[0].ReverseRate;
-					NewRow.Multiplicity = RowsBasisDocumentRates[0].Multiplicity;
-				EndIf;
-			EndIf;
-		EndIf;
-		
 		// rates from register	
-		If Not UseFixedRates And Not UseBasisDocumentRates Then
+		If Not UseFixedRates Then
 			CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
-				Parameters.Currency, 
+				CurrencyFrom, 
 				CurrencyMovementType.Currency,
 				CurrencyMovementType.Source);
 			If Not ValueIsFilled(CurrencyInfo.Rate) Then
@@ -803,7 +772,6 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 				NewRow.Multiplicity = CurrencyInfo.Multiplicity;
 			EndIf;
 		EndIf;
-		
 	EndIf;
 	Return NewRow;
 EndFunction

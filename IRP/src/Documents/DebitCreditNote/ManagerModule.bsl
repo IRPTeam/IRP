@@ -145,7 +145,7 @@ Function SendAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerAdvance,
-		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -202,7 +202,7 @@ Function ReceiveAdvances()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS ReceiveIsCustomerAdvance,
-		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -260,7 +260,7 @@ Function SendTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
-		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -322,7 +322,7 @@ Function ReceiveTransactions()
 		|			THEN TRUE
 		|		ELSE FALSE
 		|	END AS SendIsCustomerTransaction,
-		|	(Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract OR Doc.SendLegalName <> Doc.ReceiveLegalName) AS IsDifferentContracts,
+		|	Doc.SendLegalNameContract <> Doc.ReceiveLegalNameContract AS IsDifferentContracts,
 		|	(Doc.Branch <> Doc.ReceiveBranch 
 		|		Or Doc.SendPartner <> Doc.ReceivePartner
 		|		Or Doc.SendLegalName <> Doc.ReceiveLegalName
@@ -365,12 +365,8 @@ Function R5010B_ReconciliationStatement()
 		|UNION ALL
 		|
 		// Vendor advance (receive)
-		|SELECT                                   
-		|	case when ReceiveAdvances.IsSendAdvanceCustomer and ReceiveAdvances.IsReceiveAdvanceVendor then
-		|   	VALUE(AccumulationRecordType.Expense)
-		|	else
-		|		VALUE(AccumulationRecordType.Receipt)
-		|	end,
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
 		|	ReceiveAdvances.Period,
 		|	ReceiveAdvances.Company,
 		|	ReceiveAdvances.ReceiveBranch AS Branch,
@@ -441,12 +437,8 @@ Function R5010B_ReconciliationStatement()
 		|UNION ALL
 		|
 		// Vendor transaction (receive)
-		|SELECT                       
-		|	case when ReceiveTransactions.IsSendTransactionVendor and ReceiveTransactions.IsReceiveTransactionVendor then
-		|   	value(AccumulationRecordType.Expense)
-		|   else
-		|   	VALUE(AccumulationRecordType.Receipt)
-		|	end,
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,
@@ -482,11 +474,7 @@ Function R5010B_ReconciliationStatement()
 		|
 		// Customer transaction (receipt)
 		|SELECT
-		|	case when ReceiveTransactions.IsSendTransactionCustomer and ReceiveTransactions.IsReceiveTransactionCustomer then
-		|   	value(AccumulationRecordType.Receipt)
-		|   else
-		|   	VALUE(AccumulationRecordType.Expense)
-		|	end,
+		|	VALUE(AccumulationRecordType.Receipt),
 		|	ReceiveTransactions.Period,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,

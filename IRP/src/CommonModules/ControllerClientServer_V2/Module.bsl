@@ -438,9 +438,6 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
 	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
 
-	// CostList
-	EventHandlerMap.Insert("CostList.Amount", "SetCostListAmount");
-
 	Return EventHandlerMap;
 EndFunction
 
@@ -15187,28 +15184,6 @@ EndProcedure
 
 #EndRegion
 
-#Region COST_LIST
-
-#Region COST_LIST_AMOUNT
-
-// CostList.Amount.Set
-Procedure SetCostListAmount(Parameters, Results) Export
-	Binding = BindCostListAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
-
-// CostList.Amount.Bind
-Function BindCostListAmount(Parameters)
-	DataPath = "CostList.Amount";
-	
-	Binding = New Structure();
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCostListAmount");
-EndFunction
-
-#EndRegion
-
-#EndRegion
-
 #Region SEND_DEBT_TYPE
 
 // SendDebtType.OnChange
@@ -15417,11 +15392,6 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	If ViewNotify = "OnOpenFormNotify"                         Then ViewClient_V2.OnOpenFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnAddRowFormNotify"           Then ViewClient_V2.InventoryOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "InventoryOnCopyRowFormNotify"          Then ViewClient_V2.InventoryOnCopyRowFormNotify(Parameters);
-	
-	ElsIf ViewNotify = "CostListOnAddRowFormNotify"           Then ViewClient_V2.CostListOnAddRowFormNotify(Parameters);
-	ElsIf ViewNotify = "CostListOnCopyRowFormNotify"          Then ViewClient_V2.CostListOnCopyRowFormNotify(Parameters);
-	ElsIf ViewNotify = "CostListAfterDeleteRowFormNotify"     Then ViewClient_V2.CostListAfterDeleteRowFormNotify(Parameters);
-	
 	ElsIf ViewNotify = "FixedAssetsOnAddRowFormNotify"         Then ViewClient_V2.FixedAssetsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "FixedAssetsOnCopyRowFormNotify"        Then ViewClient_V2.FixedAssetsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "AccountBalanceOnAddRowFormNotify"      Then ViewClient_V2.AccountBalanceOnAddRowFormNotify(Parameters);

@@ -1153,6 +1153,151 @@ Scenario: check Description
 	Then the form attribute named "Description" became equal to "Test description"
 	And I close all client application windows
 
+Scenario: check filter for Legal name contract (in BP, CP)
+	And I click the button named "FormCreate"
+	And I select from the drop-down list named "Company" by "Main Company" string
+	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Payee" drop-down list by string in "PaymentList" table
+	* Check list from
+		And I activate "Legal name contract" field in "PaymentList" table
+		And I click choice button of "Legal name contract" attribute in "PaymentList" table
+		And "List" table became equal
+			| 'Description'              |
+			| 'Contract (Empty Company)' |
+		And I close current window
+	* Check input by string
+		And I select "Contract (Empty Company)" from "Legal name contract" drop-down list by string in "PaymentList" table
+	* Change Company
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I activate "Legal name contract" field in "PaymentList" table
+		And I click choice button of "Legal name contract" attribute in "PaymentList" table
+		And "List" table became equal
+			| 'Description'               |
+			| 'Contract (Empty Company)'  |
+			| 'Contract (Second Company)' |
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Contract (Second Company)' |
+		And I select current line in "List" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payee'             | 'Legal name contract'       |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
+		And I finish line editing in "PaymentList" table
+		And I select from the drop-down list named "Company" by "main" string
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payee'             | 'Legal name contract' |
+			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
+		And I close all client application windows
+		
+Scenario: check filter for Legal name contract (in BR, CR)
+	And I click the button named "FormCreate"
+	And I select from the drop-down list named "Company" by "Main Company" string
+	And in the table "PaymentList" I click the button named "PaymentListAdd"
+	And I select "Ferron BP" from "Partner" drop-down list by string in "PaymentList" table
+	And I select "Company Ferron BP" from "Payer" drop-down list by string in "PaymentList" table
+	* Check list from
+		And I activate "Legal name contract" field in "PaymentList" table
+		And I click choice button of "Legal name contract" attribute in "PaymentList" table
+		And "List" table became equal
+			| 'Description'              |
+			| 'Contract (Empty Company)' |
+		And I close current window
+	* Check input by string
+		And I select "Contract (Empty Company)" from "Legal name contract" drop-down list by string in "PaymentList" table
+	* Change Company
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I activate "Legal name contract" field in "PaymentList" table
+		And I click choice button of "Legal name contract" attribute in "PaymentList" table
+		And "List" table became equal
+			| 'Description'               |
+			| 'Contract (Empty Company)'  |
+			| 'Contract (Second Company)' |
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Contract (Second Company)' |
+		And I select current line in "List" table
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Legal name contract'       |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Contract (Second Company)' |
+		And I finish line editing in "PaymentList" table
+		And I select from the drop-down list named "Company" by "main" string
+		And "PaymentList" table became equal
+			| 'Partner'   | 'Payer'             | 'Legal name contract' |
+			| 'Ferron BP' | 'Company Ferron BP' | ''                    |			
+		And I close all client application windows		
+
+Scenario: check filter for Legal name contract (in CN, DN)
+	And I click the button named "FormCreate"
+	And I select from the drop-down list named "Company" by "Main Company" string
+	And in the table "Transactions" I click the button named "TransactionsAdd"
+	And I select "Ferron BP" from "Partner" drop-down list by string in "Transactions" table
+	And I select "Company Ferron BP" from "Legal name" drop-down list by string in "Transactions" table
+	* Check list from
+		And I activate "Legal name contract" field in "Transactions" table
+		And I click choice button of "Legal name contract" attribute in "Transactions" table
+		And "List" table became equal
+			| 'Description'              |
+			| 'Contract (Empty Company)' |
+		And I close current window
+	* Check input by string
+		And I select "Contract (Empty Company)" from "Legal name contract" drop-down list by string in "Transactions" table
+	* Change Company
+		And I select from the drop-down list named "Company" by "Second Company" string
+		And I activate "Legal name contract" field in "Transactions" table
+		And I click choice button of "Legal name contract" attribute in "Transactions" table
+		And "List" table became equal
+			| 'Description'               |
+			| 'Contract (Empty Company)'  |
+			| 'Contract (Second Company)' |
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Contract (Second Company)' |
+		And I select current line in "List" table
+		And "Transactions" table became equal
+			| 'Partner'   | 'Legal name'             | 'Legal name contract'       |
+			| 'Ferron BP' | 'Company Ferron BP'      | 'Contract (Second Company)' |
+		And I finish line editing in "Transactions" table
+		And I select from the drop-down list named "Company" by "main" string
+		And "Transactions" table became equal
+			| 'Partner'   | 'Legal name'             | 'Legal name contract' |
+			| 'Ferron BP' | 'Company Ferron BP'      | ''                    |			
+		And I close all client application windows
+
+Scenario: check filter for Legal name contract (LNC in header)
+	And I click the button named "FormCreate"
+	And I select from the drop-down list named "Partner" by "Ferron BP" string
+	And I activate field named "ItemListLineNumber" in "ItemList" table
+	And I select from "Legal name" drop-down list by "Company Ferron BP" string
+	And I select from the drop-down list named "Company" by "Main Company" string
+	* Check list form
+		And I click Select button of "Legal name contract" field
+		And "List" table became equal
+			| 'Description'              |
+			| 'Contract (Empty Company)' |
+		And I close current window	
+	* Check input by string
+		And I select from "Legal name contract" drop-down list by "empty" string
+		When I Check the steps for Exception
+			| 'And I select from "Legal name contract" drop-down list by "Contract (Second Company)" string'   |
+		And I input "" text in "Legal name contract" field			
+	* Change Company
+		And I select from the drop-down list named "Company" by "Second Company" string	
+		And I click Select button of "Legal name contract" field
+		And "List" table became equal
+			| 'Description'               |
+			| 'Contract (Empty Company)'  |
+			| 'Contract (Second Company)' |
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Contract (Second Company)' |
+		And I select current line in "List" table
+		Then the form attribute named "LegalNameContract" became equal to "Contract (Second Company)"
+		And I select from the drop-down list named "Company" by "main" string
+		Then the form attribute named "LegalNameContract" became equal to ""
+		And I close all client application windows
+						
+
 # Collapsible group
 
 Scenario: check the display of the header of the collapsible group in sales, purchase and return documents

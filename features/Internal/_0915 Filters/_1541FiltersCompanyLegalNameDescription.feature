@@ -3,7 +3,7 @@
 @Positive
 @Filters
 
-Feature: filter by Company and Legal name on document forms
+Feature: filter by Company, Legal name and Legal name contract on document forms
 
 
 
@@ -48,6 +48,7 @@ Scenario: _0154000 preparation
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
+		When Create catalog LegalNameContracts objects (Ferron, filters)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -503,6 +504,71 @@ Scenario: _028014 check Description in the document DebitCreditNote
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
 	When check Description
+
+Scenario: _028015 check filter for Legal name contract in the document BankPayment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	When check filter for Legal name contract (in BP, CP)
+
+Scenario: _028016 check filter for Legal name contract in the document BankReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	When check filter for Legal name contract (in BR, CR)
+
+Scenario: _028017 check filter for Legal name contract in the document CashReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	When check filter for Legal name contract (in BR, CR)
+
+Scenario: _028018 check filter for Legal name contract in the document CashPayment
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashPayment"
+	When check filter for Legal name contract (in BP, CP)
+
+Scenario: _028019 check filter for Legal name contract in the document CreditNote
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	When check filter for Legal name contract (in CN, DN)
+
+Scenario: _028020 check filter for Legal name contract in the document DebitNote
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
+	When check filter for Legal name contract (in CN, DN)
+
+Scenario: _028021 check filter for Legal name contract in the document PurchaseInvoice
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028022 check filter for Legal name contract in the document SalesInvoice
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028023 check filter for Legal name contract in the document SalesReturn
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028024 check filter for Legal name contract in the document PurchaseReturn
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028025 check filter for Legal name contract in the document RetailSalesReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028026 check filter for Legal name contract in the document RetailReturnReceipt
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	When check filter for Legal name contract (LNC in header)
+
+Scenario: _028027 check filter for Legal name contract in the document RetailReceiptCorrection
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReceiptCorrection"
+	When check filter for Legal name contract (LNC in header)
 
 
 Scenario: _028050 check the filter by Company when selecting cash/bank in Cash expense document

@@ -542,6 +542,7 @@ EndFunction
 
 Function T1040T_AccountingAmounts()
 	Return 
+		// passive RecordType.Receipt - Expense   RecordType.Expense - Revenue
 		"SELECT
 		|	Table.Period,
 		|	Table.Key AS RowKey,
@@ -549,35 +550,526 @@ Function T1040T_AccountingAmounts()
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS
+		|		Operation
 		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	Revaluated_R2020B_AdvancesFromCustomers AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R2020B_AdvancesFromCustomers AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R1021B_VendorsTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R1021B_VendorsTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R9510B_SalaryPayment AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R9510B_SalaryPayment AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		// active RecordType.Receipt - Revenue  RecordType.Expense - Expense
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand) AS Operation
+		|FROM
+		|	Revaluated_R3010B_CashOnHand AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues) AS Operation
+		|FROM
+		|	Revaluated_R3010B_CashOnHand AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R1020B_AdvancesToVendors AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R1020B_AdvancesToVendors AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R2021B_CustomersTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R2021B_CustomersTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance) AS Operation
+		|FROM
+		|	Revaluated_R3015B_CashAdvance AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues) AS Operation
+		|FROM
+		|	Revaluated_R3015B_CashAdvance AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R3027B_EmployeeCashAdvance AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R3027B_EmployeeCashAdvance AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R5015B_OtherPartnersTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R5015B_OtherPartnersTransactions AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R8510B_BookValueOfFixedAsset AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+		|	AND Table.AmountRevaluated > 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Table.Period,
+		|	Table.Key AS RowKey,
+		|	Table.Key AS Key,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.AmountRevaluated AS Amount,
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues) AS
+		|		Operation
+		|FROM
+		|	Revaluated_R8510B_BookValueOfFixedAsset AS Table
+		|WHERE
+		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
 		|	AND Table.AmountRevaluated > 0";
+		
+		//R3010B_CashOnHand
 EndFunction
 
 Function GetAccountingDataTable(Operation, AddInfo) Export
-	If Operation = Catalogs.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
-		Query = New Query();
-		Query.TempTablesManager = AddInfo.Parameters.TempTablesManager;
+	AO = Catalogs.AccountingOperations;
+	Query = New Query();
+	Query.TempTablesManager = AddInfo.Parameters.TempTablesManager;
+	
+	// passive
+	If Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
 		Query.Text = 
 		"SELECT * FROM Revaluated_R2020B_AdvancesFromCustomers AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2020B_AdvancesFromCustomers AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+		
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1021B_VendorsTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1021B_VendorsTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+		
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R9510B_SalaryPayment AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R9510B_SalaryPayment AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+		
+		
+	
+	// active
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3010B_CashOnHand AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3010B_CashOnHand AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1020B_AdvancesToVendors AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1020B_AdvancesToVendors AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2021B_CustomersTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2021B_CustomersTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3015B_CashAdvance AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3015B_CashAdvance AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3027B_EmployeeCashAdvance AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R3027B_EmployeeCashAdvance AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R5015B_OtherPartnersTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R5015B_OtherPartnersTransactions AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R8510B_BookValueOfFixedAsset AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R8510B_BookValueOfFixedAsset AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	
+			 
 	EndIf;
 	Return New ValueTable();
 EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
+	AO = Catalogs.AccountingOperations;
+	// passive
+	If Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers Then
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Parameters); // Expenses - Advance from customers
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues(Parameters); // Advance from customers - Revenue	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions(Parameters); // Expenses - Vendor transactions
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues(Parameters); // Vendor transactions - Revenue	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment(Parameters); // Expenses - Salary payments
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues(Parameters); // Salary payments - Revenue	
+	
+	
+	// active
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R3010B_CashOnHand(Parameters); // Expenses - Cash on hand		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R3010B_CashOnHand_CR_R5021T_Revenues(Parameters); // Cash on hand - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors(Parameters); // Expenses - Advance to vendors		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues(Parameters); // Advance to vendors - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions(Parameters); // Expenses - Customer transactions		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues(Parameters); // Customer transactions - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R3015B_CashAdvance(Parameters); // Expenses - Cash advance		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R3015B_CashAdvance_CR_R5021T_Revenues(Parameters); // Cash advance - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters); // Expenses - Employee cash advance		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues(Parameters); // Employee cash advance - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions(Parameters); // Expenses - Other partner transactions		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues(Parameters); // Other partner transactions - Revenues	
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset(Parameters); // Expenses - Fixed asset		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues(Parameters); // Fixed asset - Revenues	
+		
 	EndIf;
 	Return Undefined;
 EndFunction
 
 #Region Accounting_Analytics
+
+// passive
 
 // Expenses - Advance from customers
 Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Parameters)
@@ -591,16 +1083,476 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers(Paramet
 	AccountingAnalytics.Debit = Debit.AccountExpense;
 	
 	AdditionalAnalytics = New Structure();
-	AdditionalAnalytics.Insert("ProfitCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalytics.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 
 	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                    Parameters.RowData.Partner, 
-	                                                    Undefined,
-	                                                    Parameters.RowData.Currency);
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
 	AccountingAnalytics.Credit = Credit.AccountAdvancesCustomer;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Advance from customers - Revenue
+Function GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.AccountAdvancesCustomer;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalytics.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Vendor transactions
+Function GetAnalytics_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalytics.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Vendor transactions - Revenue
+Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalytics.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Salary payments
+Function GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalytics.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
+	                                                    Parameters.RowData.Employee); 
+	AccountingAnalytics.Credit = Credit.AccountSalaryPayment;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Salary payments - Revenue
+Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
+	                                                    Parameters.RowData.Employee); 
+	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalytics.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// active
+
+// Expenses - Cash on hand
+Function GetAnalytics_DR_R5022T_Expenses_CR_R3010B_CashOnHand(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                    Parameters.RowData.Account,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Credit = Credit.Account;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("FinMovType", Catalogs.ExpenseAndRevenueTypes.EmptyRef());
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Cash on hand - Revenue
+Function GetAnalytics_DR_R3010B_CashOnHand_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9011S_AccountsCashAccount(AccountParameters, 
+	                                                    Parameters.RowData.Account, 
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.Account;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("FinMovType", Catalogs.ExpenseAndRevenueTypes.EmptyRef());
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Advance to vendors
+Function GetAnalytics_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner,
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Credit = Credit.AccountAdvancesVendor;	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Advance to vendors - Revenue
+Function GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement, 
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.AccountAdvancesVendor;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Customer transactions
+Function GetAnalytics_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner,
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Customer transactions - Revenue
+Function GetAnalytics_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement, 
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Cash advance
+Function GetAnalytics_DR_R5022T_Expenses_CR_R3015B_CashAdvance(Parameters)
+	Raise "Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]";
+EndFunction
+
+// Cash advance - Revenue
+Function GetAnalytics_DR_R3015B_CashAdvance_CR_R5021T_Revenues(Parameters)
+	Raise "Not supported [DR_R5022T_Expenses_CR_R3015B_CashAdvance]";
+EndFunction
+
+// Expenses - Employee cash advance
+Function GetAnalytics_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Partner);
+	AccountingAnalytics.Credit = Credit.AccountCashAdvance;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Employee cash advance - Revenue
+Function GetAnalytics_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, Parameters.RowData.Partner);
+	AccountingAnalytics.Debit = Debit.AccountCashAdvance;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Other partner transactions
+Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner,
+	                                                    Parameters.RowData.Agreement,
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Other partner transactions - Revenue
+Function GetAnalytics_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                    Parameters.RowData.Partner, 
+	                                                    Parameters.RowData.Agreement, 
+	                                                    Parameters.RowData.TransactionCurrency);
+	AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Fixed assets
+Function GetAnalytics_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
+	AccountingAnalytics.Credit = Credit.Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Fixed assets - Revenue
+Function GetAnalytics_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9015S_AccountsFixedAsset(AccountParameters, Parameters.RowData.FixedAsset);
+	AccountingAnalytics.Debit = Debit.Account;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
 
 	Return AccountingAnalytics;
 EndFunction

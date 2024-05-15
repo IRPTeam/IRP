@@ -6835,6 +6835,7 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
 		Options.Partner       = GetPaymentListPartner(Parameters, Row.Key);
 		Options.Agreement     = GetPaymentListAgreement(Parameters, Row.Key);
+		Options.Company		  = GetCompany(Parameters);
 		Options.CurrentDate   = GetDate(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "PaymentListChangeAgreementByPartner";

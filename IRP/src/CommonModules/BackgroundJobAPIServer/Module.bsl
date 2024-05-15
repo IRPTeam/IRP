@@ -26,6 +26,7 @@ EndFunction
 // * StopOnErrorAnyJob - Boolean -
 // * CallbackWhenAllJobsDone - Boolean -
 // * JobSettings - Array Of See JobSettings 
+// * UpdatePause - Number -
 Function JobDataSettings() Export
 	Settings = New Structure;
 	Settings.Insert("CallbackModule", "");
@@ -35,6 +36,7 @@ Function JobDataSettings() Export
 	Settings.Insert("StopOnErrorAnyJob", True);
 	Settings.Insert("JobSettings", New Array);
 	Settings.Insert("CallbackWhenAllJobsDone", True);
+	Settings.Insert("UpdatePause", 20);
 	Return Settings;
 EndFunction
 

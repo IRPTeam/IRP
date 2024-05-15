@@ -1808,4 +1808,96 @@ Function GetTableForClient(Table) Export
 	
 EndFunction
 
+// Blank form table creation structure.
+// 
+// Returns:
+//  Structure - Blank form creation structure:
+// * TableName - String
+// * ValueTable - ValueTable
+// * Form - ClientApplicationForm
+// * CreateTableOnForm - Boolean - 
+// * ParentName - String 
+// * OnChangeProcedureName - String 
+Function BlankFormTableCreationStructure() Export
+	
+	Structure = New Structure();
+	Structure.Insert("TableName", "");
+	Structure.Insert("ValueTable", New ValueTable());
+	Structure.Insert("Form", Undefined);
+	Structure.Insert("CreateTableOnForm", False);
+	Structure.Insert("ParentName", "");
+	Structure.Insert("OnChangeProcedureName", "");
+	
+	Return Structure;
+	
+EndFunction	
+
+// Create form table.
+// 
+// Parameters:
+//  CreactionStructure - See BlankFormTableCreationStructure
+Procedure CreateFormTable(CreactionStructure) Export
+	
+	TableName = CreactionStructure.TableName;
+	ValueTable = CreactionStructure.ValueTable;
+	Form = CreactionStructure.Form;
+	CreateTableOnForm = CreactionStructure.CreateTableOnForm;
+	ParentName 	= CreactionStructure.ParentName;
+	
+	ArrayAddedAttributes = New Array; // Array Of FormAttribute
+	
+	If CreateTableOnForm Then
+		ArrayAddedAttributes.Add(New FormAttribute(TableName, New TypeDescription("ValueTable")));
+		
+		Form.ChangeAttributes(ArrayAddedAttributes);
+		
+		FormTable = Form.Items.Add(TableName, Type("FormTable"), Form.Items[ParentName]);
+		FormTable.DataPath = TableName;
+		If ValueIsFilled(CreactionStructure.OnChangeProcedureName) Then
+			FormTable.SetAction("OnChange", CreactionStructure.OnChangeProcedureName);
+		EndIf;
+			
+	EndIf;
+	ArrayAddedAttributes.Clear();
+	
+	For Each Column In ValueTable.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+		TypesArray = Column.ValueType.Types(); //Array of type
+		
+		TypesArrayResult = New Array;
+		For Each ArrayItem In TypesArray Do
+			If ArrayItem <> Type("Null") Then
+				TypesArrayResult.Add(ArrayItem);
+			EndIf;
+		EndDo;
+		
+		TypeDescription = New TypeDescription(
+				TypesArrayResult,
+				Column.ValueType.NumberQualifiers,
+				Column.ValueType.StringQualifiers,
+				Column.ValueType.DateQualifiers,
+				Column.ValueType.BinaryDataQualifiers);
+		AttributeDescription = New FormAttribute(Column.Name, TypeDescription, TableName);
+		ArrayAddedAttributes.Add(AttributeDescription);
+	EndDo;
+	
+	Form.ChangeAttributes(ArrayAddedAttributes);
+	
+	For Each Column In ValueTable.Columns Do 
+		If Column.Name = "PointInTime" Or Column.Name = "Recorder" Then
+			Continue;
+		EndIf;
+		
+		NewColumn = Form.Items.Add(TableName + Column.Name, Type("FormField"), Form.Items[TableName]); // FormField 
+		NewColumn.Title		= Column.Name; 
+		NewColumn.DataPath	= TableName + "." + Column.Name;
+		NewColumn.Type		= FormFieldType.InputField; 
+		
+	EndDo;
+	
+EndProcedure
+
 #EndRegion

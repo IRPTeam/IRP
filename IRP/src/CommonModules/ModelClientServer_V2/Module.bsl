@@ -1038,7 +1038,7 @@ EndFunction
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
+	Return GetChainLinkOptions("Company, Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
 EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export
@@ -3556,7 +3556,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|Partner";
 	ElsIf Options.TransactionType = Incoming_OtherIncome Then
 		StrByType = "
-		|RevenueType";
+		|RevenueType,
+		|ProfitLossCenter,
+		|AdditionalAnalytic";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="336cab43-29a7-42f6-8c4d-569385f93848">
+ <name>ManualRegisterEdit</name>
+ <synonym>
+  <key>en</key>
+  <value>25355AAC-D085-E403-3B75-558BE28763B9</value>
+ </synonym>
+</mdclass:Role>

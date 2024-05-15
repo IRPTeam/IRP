@@ -101,8 +101,8 @@
    <value>B7AA457F-7936-DC2F-FA5F-F56C36F9B37C</value>
   </synonym>
   <type>
-   <types>DocumentRef.CustomersAdvancesClosing</types>
    <types>DocumentRef.VendorsAdvancesClosing</types>
+   <types>DocumentRef.CustomersAdvancesClosing</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

@@ -92,6 +92,7 @@
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.ExpenseAccruals</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -152,6 +153,19 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="82d258d1-a505-4631-a3b6-55ac72d04e82">
+  <name>OtherPeriodExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>5A60A972-DB06-44A4-40C2-22CDD7D0A2E8</value>
+  </synonym>
+  <type>
+   <types>EnumRef.OtherPeriodExpenseType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <useInTotals>true</useInTotals>
  </dimensions>
 </mdclass:AccumulationRegister>

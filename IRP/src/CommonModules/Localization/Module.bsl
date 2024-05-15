@@ -259,6 +259,8 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
+// * Error_144 - String - 
+// * Error_145 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -314,6 +316,8 @@
 // * InfoMessage_033 - String - 
 // * InfoMessage_034 - String - 
 // * InfoMessage_035 - String - 
+// * InfoMessage_036 - String - 
+// * InfoMessage_037 - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -1051,6 +1055,16 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_141", NStr("en='58C8999C-94E6-824C-C33E-E9D55B2FB9D9________%1'", Lang));	
 	Strings.Insert("Error_142", NStr("en='C6B8586A-A0FE-9DEF-FAF1-1BF3E1E15A58___________'", Lang));	
 	Strings.Insert("Error_143", NStr("en='F29A27AA-E1C5-55DE-E681-1A0B7CF0A232_________________'", Lang));	
+	Strings.Insert("Error_EmptyCurrency", NStr("en='873BA3B5-4FE2-05A4-475A-A9DA2D37777C'", Lang));
+	Strings.Insert("Error_EmptyTransactionType", NStr("en='D24795CB-D16A-F8B5-5FD3-38287AB121EC'", Lang));
+	Strings.Insert("Error_144", NStr("en='FDC0F2F8-5242-F88A-ACFD-D616C484EBE3____________________________________________________________________________'", Lang));
+	Strings.Insert("Error_PartnerBalanceCheckfailed", NStr("en='7BBA4501-417F-F330-0F72-2530F5485BB2____________'", Lang));
+	
+	// %1 - Register name
+	Strings.Insert("Error_145", NStr("en='BFD67D3A-90F6-EDE7-7F5E-E54CA4B0311A_____________________________________________________________________________%1'", Lang));
+	
+	Strings.Insert("Error_146", NStr("en='0D210B61-E849-22AD-DEA5-5E735458607B'", Lang));
+	Strings.insert("Error_147", NStr("en='0BFD3CA7-AEEE-BC87-7F0E-E17228A189CE___________________'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='E76C9AA7-C27F-D236-698A-A1ACB6BB42B1%1'", Lang));
 	
@@ -1157,7 +1171,15 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("InfoMessage_034", NStr("en='545C9E2A-91C0-0073-32BA-AF97DF8C44F7'", Lang));
 	Strings.Insert("InfoMessage_035", NStr("en='384DA243-1523-D17D-DDD1-147614CEA196%1'", Lang));
+	Strings.Insert("InfoMessage_036", NStr("en='3428361F-AE28-E594-48D2-2BCD86BEF2DE%1,%2'", Lang));
+	Strings.Insert("InfoMessage_037", NStr("en='CBF9C85A-B0EC-4772-29C0-015E09E84E14'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en='F889FE64-C2BF-71A2-2A58-8C6E87C7C5E5'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en='F6853798-DCF1-4328-8761-19463EBE69CB'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en='4ED58E60-FD47-A00D-D6AE-EE106E5BCE7D__________________________________%1,%2,%3'", Lang) + Chars.LF + "%1");
+	Strings.Insert("InfoMessage_038", NStr("en='62B4FE33-28D5-0B14-4389-95507838FF47_______________________________________________________________________________________________________'", Lang));
+	Strings.Insert("InfoMessage_039", NStr("en='0847EC02-3E83-9ADB-B486-668861C8D2AA'", Lang));
 	
+	Strings.Insert("InfoMessage_WriteObject", NStr("en='2928233E-7EA0-DD38-830F-F339347701A0'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en='FC6DE927-8CF3-CA10-00D4-4E9938551163'", Lang));
 	Strings.Insert("InfoMessage_PaymentReturn", NStr("en='3D2C3CCC-09EE-9DDC-CE2C-C4CD508625B3'", Lang));
 	Strings.Insert("InfoMessage_SessionIsClosed", NStr("en='2CF4ABE9-AA01-7514-49D7-7204273080AE'", Lang));
@@ -1207,6 +1229,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_026", NStr("en='07F191BC-9351-881F-F44F-F68BAB5C5EA3'", Lang));
 	Strings.Insert("QuestionToUser_027", NStr("en='97D4DED5-D07E-B7D4-497B-B4CE8B1691CC___________________%1'", Lang));
 	Strings.Insert("QuestionToUser_028", NStr("en='8C422C34-EA75-8D7E-E296-6F68D69E5DDB'", Lang));
+	Strings.Insert("QuestionToUser_029", NStr("en='702B3291-6073-39F0-0844-41430CDE4DAE_________________________________________________________________________________________________________________'", Lang));
+	Strings.Insert("QuestionToUser_030", NStr("en='044A4D5D-DFC6-D6F1-19B9-903B50609F32________'", Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1409,6 +1433,10 @@ Strings.Insert("AccountingQuestion_02", NStr("en='90F59EC5-D33A-7504-42D2-27EC8E
 
 Strings.Insert("AccountingInfo_01", NStr("en='2DE35D08-C922-4A3E-ED85-5CA8D65195BC'", Lang));
 Strings.Insert("AccountingInfo_02", NStr("en='9746781D-2DA9-3D23-3500-09644A90C3E9'", Lang));
+Strings.Insert("AccountingInfo_03", NStr("en='F4D432FE-8E38-A74D-D74F-F7B73E1F4B07'", Lang));
+Strings.Insert("AccountingInfo_04", NStr("en='6E7CAF0B-7DD9-AF78-8DFC-C2D48329EDB0'", Lang));
+Strings.Insert("AccountingInfo_05", NStr("en='9BC04F79-2A42-F076-60B3-324B13ACFAF4'", Lang));
+Strings.Insert("AccountingInfo_06", NStr("en='773327A1-6E49-DCE9-9CF7-73DC06D9F09F'", Lang));
 
 Strings.Insert("AccountingJE_prefix_01", NStr("en='54372627-A6E3-2FBF-FF01-1E8F32DD9303'", Lang));
 
@@ -1463,9 +1491,63 @@ Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R102
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
 	NStr("en='FC31E6D4-F0C8-2514-452A-A52C740E238C_____________________________________________'", Lang));
 
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en='ADB63049-3EEB-53D2-2261-18E86F804814__________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues",
+	NStr("en='26D6E9B9-F3A6-0ED2-2102-21DC617B3277__________________________________'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='565365A5-8F9D-01D1-1C4E-EB7BB8CA3EA2___________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues",
+	NStr("en='252C0AA0-80CA-84FB-B852-2AE8E88813E7___________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment",
+	NStr("en='59593238-6565-259E-E04D-D7412E8FEEB1_____________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues",
+	NStr("en='C789175E-35C9-AB3E-E931-177003C19328_____________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors",
+	NStr("en='3F30CAF3-0A76-7AD9-9F55-51451A3A1641_________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues",
+	NStr("en='C0B821E2-CB5E-7511-1864-4F3C7C3100E6________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
+	NStr("en='F7054A61-9598-954C-CF32-2DF2540B8DE7_____________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
+	NStr("en='1E7211C5-D690-35B3-3E7B-B81A4865FB18_____________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance",
+	NStr("en='E15BA479-D02A-ADA3-3F81-19F1013F8DA8___________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues",
+	NStr("en='960A7364-BEEA-010C-CD1A-A292B512D874___________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='414A1A12-0777-E0A6-6794-44E3706BE9DE___________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues",
+	NStr("en='40E97E80-CE1F-72F8-86A1-1F7C7F284A01___________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='6895D844-7BE2-A319-9828-8A327A4DF4A2_________________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues",
+	NStr("en='B5097FB9-20CA-AE24-4149-9792F8867FB0_________________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset",
+	NStr("en='3CCAC90A-4D19-E043-392E-EE9DC5C9AA42_____________________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues",
+	NStr("en='4A006432-EDA4-F980-092E-E41BDEBD7D33_____________________________________________'", Lang));
+
 Strings.Insert("BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
 	NStr("en='9DFD9B3C-9871-1976-6FB6-625B1760E998___________________________________________'", Lang));
-	
+
 Strings.Insert("CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand",
 	NStr("en='99AA294E-3414-EEBF-F836-61263FDE8B77_______________________________________________________'", Lang));
 
@@ -1484,23 +1566,32 @@ Strings.Insert("CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
 Strings.Insert("CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en='A4D5D19F-CF03-EAAD-D2B8-8DD3FC192DB0__________________'", Lang));
 	
-Strings.Insert("DebitNote_DR_R1020B_AdvancesToVendors_CR_R5021_Revenues",
-	NStr("en='A9DAE265-67BD-D7F3-3003-3FD083696539_______________________'", Lang));
+Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues",
+	NStr("en='E1967B71-4C50-F893-3247-7BC94A377C7E_________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
 	NStr("en='7B249F9C-AEBD-0E70-0C1B-B0938BD966B5___________________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 	NStr("en='56C6639E-C648-903B-BD2B-B8EA0A5C51B0___________________________'", Lang));
+
+Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
+	NStr("en='812FA080-6E20-7502-26EC-CBB48E33B2CE_______________________________'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R5022T_Expenses",
-	NStr("en='7218F5EB-DF36-FBD9-9E58-8D749CC62250_____________________________'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
+	NStr("en='0BCBB721-D920-06C3-3AC6-6103B6E48E86_____________________________'", Lang));
 	
-Strings.Insert("CreditNote_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
-	NStr("en='826F999D-5109-3EA6-641B-BB8AF18C0466__________________________________________'", Lang));
+Strings.Insert("CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='1E25517D-6D4E-FD52-230C-C7F58D664F24__________________________________________'", Lang));
+
+Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors",
+	NStr("en='9ACC873B-F4E8-6E13-3D8F-FBB21E8163F6____________________________________'", Lang));
 	
-Strings.Insert("CreditNote_DR_R1021B_VendorsTransactions_CR_R5022T_Expenses",
-	NStr("en='25A9C733-1C27-5F30-0511-1BF8CD24F75D__________________________'", Lang));
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions",
+	NStr("en='E2E6E93F-9B7B-72C7-7A7A-A30743868957___________________________'", Lang));
+
+Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='ED805170-0FB4-0046-64E5-5BE41E7D5EF7_________________________________'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
 	NStr("en='FEDF768B-1C91-739D-DAF4-4FC043271593_______________________'", Lang));
@@ -1532,9 +1623,6 @@ Strings.Insert("ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_Boo
 Strings.Insert("FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset",
 	NStr("en='BBC85647-ACB3-6578-8844-40119ACCF2BA__________________________________________________'", Lang));
 
-Strings.Insert("DepreciationCalculation_DR_DepreciationFixedAsset_CR_R8510B_BookValueOfFixedAsset",
-	NStr("en='5917581B-8777-E463-3030-0D59C1FB596A_________________________________________________'", Lang));
-
 Strings.Insert("DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset",
 	NStr("en='52965161-2F53-FC15-55BB-B3232A5C541F____________________________________'", Lang));
 
@@ -1544,11 +1632,20 @@ Strings.Insert("BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTran
 Strings.Insert("BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='B918D93C-C4AF-CCC6-656C-C537196747C9___________________________________________'", Lang));
 
+Strings.Insert("BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
+	NStr("en='D4CCEEFB-C9C3-0299-9F91-1A42A9BD2206____________________________________'", Lang));
+
 Strings.Insert("CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand",
 	NStr("en='94D3BD77-FCDC-714A-A9AF-F3F0162CD5AD_____________________________________________________________'", Lang));
 
 Strings.Insert("CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='5F252199-4C61-F587-7548-822329A9C06B___________________________________________'", Lang));
+
+Strings.Insert("CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
+	NStr("en='1C9B649B-4A37-9CF9-9B8D-D58514CF4249________________________'", Lang));
+
+Strings.Insert("CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
+	NStr("en='B1A4363C-2E41-E766-6B4E-EC2FFCD99C71______________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions",
 	NStr("en='09FF34D2-23F4-48F1-1F14-4491FA4FA83C_______________________________________________________'", Lang));
@@ -1568,8 +1665,20 @@ Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand
 Strings.Insert("BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange",
 	NStr("en='37164626-9262-6A38-8161-1A625548ABA1____________________________________________________'", Lang));
 
+Strings.Insert("BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand",
+	NStr("en='31EF64B5-4C81-E08B-BBE9-97A8256BF936___________________'", Lang));
+
+Strings.Insert("BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand",
+	NStr("en='9F137865-8AAE-49A3-30C1-19F0C01DE3E8________________________'", Lang));
+
+Strings.Insert("BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand",
+	NStr("en='B941D19F-B05A-97C1-10A6-668E389B8166______________________________'", Lang));
+
 Strings.Insert("CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder",
 	NStr("en='80020829-B528-3E71-17A3-3EA4AD559314________________________________________________'", Lang));
+
+Strings.Insert("CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand",
+	NStr("en='139DC35D-652C-3C9D-D49A-A71683431FA7____________________________________'", Lang));
 
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='E1D06307-7E8D-DE23-3B5D-D44B00F132E6________________________________________________'", Lang));
@@ -1583,8 +1692,62 @@ Strings.Insert("BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues",
 Strings.Insert("BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit",
 	NStr("en='AF468973-372A-4FA1-1760-0BC6FA978A2E______________________'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='3C1685D1-EDEE-0619-9887-7ADEEF8069E7____________________________________'", Lang));
+
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
+	NStr("en='035344C9-DC6D-F602-2C21-17D5685317C8__________________'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='D7F13B54-C0C8-D2AF-F132-258C22D9B903________________________________________________'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='EE0DB7A7-5EAD-CF1E-E060-0374F72B6851____________________________________'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
+	NStr("en='EB2600C7-2FE0-1D70-0AD6-629FF963E555____________________________'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en='6D16A8AF-CEE0-83F2-286D-D010DC5EB3AB___________________________________________'", Lang));
+
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes",
+	NStr("en='D7DAA285-1EB0-5B53-3E75-5496CBEBF3BE______________________________________'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue",
+	NStr("en='9B559F7F-E68D-1173-3075-5C0E0E002521_________________________________________'", Lang));
+	
+Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue",
+	NStr("en='3C754268-175B-C567-7DD7-719FB2B4D99D_____________________________________________'", Lang));
+	
+Strings.Insert("Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='A10C8AEC-53E2-D045-5BD6-6029F48259C3_____________________________'", Lang));
+
+Strings.Insert("DebitCreditNote_R5020B_PartnersBalance",
+	NStr("en='22B66A4B-8FFC-4389-97FC-C2A1DE9CF08D____'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset",
+	NStr("en='92CD2A6F-9E9A-46FE-E412-2EA2A4B77948________________________________________________________'", Lang));
+
+Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset",
+	NStr("en='D4E8D5BE-F9A8-176A-A2DB-B66B14756714__________________________________________________'", Lang));
+
+Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
+	NStr("en='FCA4D443-ABC6-7884-4EF1-17BC73E36083_________________________________'", Lang));
+
+Strings.Insert("RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues",
+	NStr("en='077D0A3A-00C8-00DC-C445-5BA0114262DA_________________________________'", Lang));
+
+Strings.Insert("ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses",
+	NStr("en='6686EE96-3E6F-F0E1-1401-1EDCE5D16053_________________________________'", Lang));
+	
+Strings.Insert("RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues",
+	NStr("en='98D3E7DD-F64D-5454-40F5-5E32CE0798B8_________________________________'", Lang));
+	
+Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='D1FB5BA8-4E2E-0807-72CA-A5A43AA410F1____________________________________'", Lang));
+	
+Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
+	NStr("en='D1D1FC81-D741-FC4E-E5AE-E1017688ECE3_______________________________________________'", Lang));
 
 #EndRegion
 

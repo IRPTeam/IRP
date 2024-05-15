@@ -1156,7 +1156,14 @@
   <savedData>true</savedData>
  </attributes>
  <commandInterface>
-  <navigationPanel/>
+  <navigationPanel>
+   <cmiFragmentRecord>
+    <command>InformationRegister.T9011S_AccountsCashAccount.StandardCommand.OpenByValue.CashAccount</command>
+    <group>FormNavigationPanelGoTo</group>
+    <index>0</index>
+    <userVisible/>
+   </cmiFragmentRecord>
+  </navigationPanel>
   <commandBar/>
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">

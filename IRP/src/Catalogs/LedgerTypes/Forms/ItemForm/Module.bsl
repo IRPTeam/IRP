@@ -224,7 +224,11 @@ Function CreateLevel2(TransactionType)
 	Level2 = New Structure();
 	Level2.Insert("Level", 2);
 	Level2.Insert("Picture", 2);
-	Level2.Insert("Presentation", String(TransactionType));
+	If TypeOf(TransactionType) = Type("Array") Then
+		Level2.Insert("Presentation", StrConcat(TransactionType, ";"));
+	Else
+		Level2.Insert("Presentation", String(TransactionType));
+	EndIf;
 	Level2.Insert("Rows", New Array());
 	Return Level2;
 EndFunction

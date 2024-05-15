@@ -24,17 +24,73 @@
   <value>B03877DB-80C4-6F5F-F61E-E3ECE852F569</value>
  </recordPresentation>
  <resources uuid="7098c274-62dd-4d32-a6fa-b34f96f33a2a">
-  <name>Account</name>
+  <name>AccountExpense</name>
   <synonym>
    <key>en</key>
-   <value>09198F18-61DB-9337-75FC-CB2A1BBC0043</value>
+   <value>78B5BDB5-58EC-2FE6-6A78-82F859C63D93</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="3ac66420-f5dc-4b52-a383-15275d9b2305">
+  <name>AccountRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>CCD4F03C-3278-6E80-0762-23E08B02321C</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="4fe0c3c7-a2bc-4d2a-b713-080e965fd8ab">
+  <name>AccountOtherPeriodsExpense</name>
+  <synonym>
+   <key>en</key>
+   <value>3806FCF4-3AF1-01D3-399D-D656D068B6B5</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="2a2c0786-46c1-439d-8d11-d397be0e970c">
+  <name>AccountOtherPeriodsRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>B2B87AD8-143C-A512-2450-0880AE117E9F</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
   <choiceParameterLinks>
    <name>Filter.LedgerTypeVariant</name>
    <field>InformationRegister.T9014S_AccountsExpenseRevenue.Dimension.LedgerTypeVariant</field>
@@ -95,6 +151,88 @@
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="cdcd6651-b743-4852-8f51-c88fa47717e0">
+  <name>ProfitLossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>B06CA9A4-A20D-5D7A-A103-35745671DE6A</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="48082164-b14d-4dbb-a1ef-6128482a8377">
+  <name>Expense</name>
+  <synonym>
+   <key>en</key>
+   <value>0381120D-AD50-2112-2E9E-E274FF82F22E</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="2b9d6fc8-c5e9-425d-b276-9574c3da8ef9">
+  <name>Revenue</name>
+  <synonym>
+   <key>en</key>
+   <value>0558EF22-E8B8-4638-82F5-56238CBCAD81</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="762f6375-e166-4d30-b59b-a18310654415">
+  <name>OtherPeriodsExpense</name>
+  <synonym>
+   <key>en</key>
+   <value>ECCC3681-2FCD-3E7A-A18C-C4D540441426</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="bfcc4cd9-7ca3-4ed9-9014-1679730e8410">
+  <name>OtherPeriodsRevenue</name>
+  <synonym>
+   <key>en</key>
+   <value>74CF6374-AD0F-519F-F9E4-48AA1A7881FE</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
  <forms uuid="513676d2-16f5-42b9-a3cf-f3f4524f051f">

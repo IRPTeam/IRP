@@ -343,6 +343,21 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="4bcde2a3-a739-4017-a10a-4208f1f6678f">
+  <name>PrintFormName</name>
+  <synonym>
+   <key>en</key>
+   <value>F698AB2D-1E9B-6DAB-B21C-C859DCB87B6D</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="d199093a-d6ed-4204-82e8-ccd2e47d6b33">
   <producedTypes>
    <objectType typeId="c26f695f-f115-44a8-9f9c-487ab561a3c1" valueTypeId="b37fb1f8-8db3-47eb-bde2-b6dc3b5e8d35"/>

@@ -14,7 +14,6 @@
   <key>en</key>
   <value>ACF2C033-ECA9-BC09-935D-DF6BF9069119</value>
  </synonym>
- <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
   <key>en</key>

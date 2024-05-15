@@ -19,6 +19,7 @@
  <content>Catalog.RetailCustomers</content>
  <content>Document.RetailShipmentConfirmation</content>
  <content>Document.RetailGoodsReceipt</content>
+ <content>DataProcessor.AttachedFilesToDocumentsControl</content>
  <subsystems>Sales</subsystems>
  <subsystems>VisitorCounter</subsystems>
 </mdclass:Subsystem>

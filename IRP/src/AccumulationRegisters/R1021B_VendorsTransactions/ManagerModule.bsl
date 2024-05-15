@@ -631,3 +631,10 @@ Function R1021B_VendorsTransactions_Cheque() Export
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
 EndFunction
 
+// Additional data filling.
+// 
+// Parameters:
+//  MovementsValueTable - ValueTable
+Procedure AdditionalDataFilling(MovementsValueTable) Export
+	Return;	
+EndProcedure

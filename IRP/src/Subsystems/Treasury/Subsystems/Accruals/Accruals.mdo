@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="97aa4faa-3220-41fa-90b9-fe16ac55a668">
+ <name>Accruals</name>
+ <synonym>
+  <key>en</key>
+  <value>18EF9305-8999-72CC-C776-6A2D5B28D41C</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.ExpenseAccruals</content>
+ <content>Document.RevenueAccruals</content>
+ <parentSubsystem>Subsystem.Treasury</parentSubsystem>
+</mdclass:Subsystem>

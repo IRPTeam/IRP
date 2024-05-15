@@ -144,7 +144,7 @@
 	<font faceName="Arial" height="14" bold="true" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<font faceName="Arial" height="12" bold="true" italic="true" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 	<format>
-		<width>258</width>
+		<width>637</width>
 	</format>
 	<format>
 		<height>114</height>
@@ -154,6 +154,7 @@
 		<font>0</font>
 		<width>258</width>
 		<verticalAlignment>Center</verticalAlignment>
+		<textPlacement>Wrap</textPlacement>
 		<fillType>Template</fillType>
 	</format>
 	<format>

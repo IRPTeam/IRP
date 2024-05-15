@@ -475,6 +475,11 @@ Scenario: _400003 opening entry advance balance
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "100,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
 		And I finish line editing in "AdvanceFromCustomers" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'The "Partner term" is required on line 1 of the "Advance from customers" list.'|
+		And I select current line in "AdvanceFromCustomers" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table	
 	* Filling in AdvanceToSuppliers
 		And I move to "To suppliers" tab
 		And in the table "AdvanceToSuppliers" I click the button named "AdvanceToSuppliersAdd"
@@ -500,6 +505,11 @@ Scenario: _400003 opening entry advance balance
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "100,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
 		And I finish line editing in "AdvanceToSuppliers" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'The "Partner term" is required on line 1 of the "Advance to suppliers" list.'|
+		And I select current line in "AdvanceToSuppliers" table
+		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "AdvanceToSuppliers" table
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400003$$" variable
@@ -750,6 +760,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		And I select current line in "List" table
 		And I activate field named "AdvanceFromCustomersAmount" in "AdvanceFromCustomers" table
 		And I input "525,00" text in the field named "AdvanceFromCustomersAmount" of "AdvanceFromCustomers" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "AdvanceFromCustomers" table
 		And I finish line editing in "AdvanceFromCustomers" table
 	* Filling in Advance to suppliers
 		And I move to "To suppliers" tab
@@ -775,6 +786,7 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		And I select current line in "List" table
 		And I activate field named "AdvanceToSuppliersAmount" in "AdvanceToSuppliers" table
 		And I input "811,00" text in the field named "AdvanceToSuppliersAmount" of "AdvanceToSuppliers" table
+		And I select "Vendor Ferron, TRY" from "Partner term" drop-down list by string in "AdvanceToSuppliers" table
 		And I finish line editing in "AdvanceToSuppliers" table
 	* Filling in Account payable by agreements
 		* Filling in partner and Legal name

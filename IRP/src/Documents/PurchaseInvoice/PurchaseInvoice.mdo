@@ -108,6 +108,7 @@
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
@@ -118,7 +119,6 @@
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -679,13 +679,27 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="167c9d0c-ffee-4d75-9033-398dc34c49de">
-   <name>IsAdditionalItemCost</name>
+   <name>DELETE_IsAdditionalItemCost</name>
    <synonym>
     <key>en</key>
-    <value>B833C276-F381-2095-50A5-52C46FE1706A</value>
+    <value>C75BCC60-6AEA-A199-94D4-40CB92024E08</value>
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="40740b8b-fdcb-4237-943f-47bf6a4543ae">
+   <name>OtherPeriodExpenseType</name>
+   <synonym>
+    <key>en</key>
+    <value>98951D4A-6C50-6189-9048-81536BA287DD</value>
+   </synonym>
+   <type>
+    <types>EnumRef.OtherPeriodExpenseType</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

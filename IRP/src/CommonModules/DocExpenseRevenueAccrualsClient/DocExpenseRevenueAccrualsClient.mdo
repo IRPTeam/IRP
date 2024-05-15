@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1772280c-1061-4ff5-97c8-36969b3c30ad">
+ <name>DocExpenseRevenueAccrualsClient</name>
+ <synonym>
+  <key>en</key>
+  <value>1E29ACD8-70A8-FC35-5A44-4808EE99CF3B</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

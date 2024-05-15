@@ -100,6 +100,7 @@
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
@@ -114,7 +115,6 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -425,6 +425,21 @@
   <createOnInput>Use</createOnInput>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <attributes uuid="85026b5f-9cff-4025-b35a-28813ad424af">
+  <name>Incoterm</name>
+  <synonym>
+   <key>en</key>
+   <value>8FDF96E1-B8D2-FA3F-F23F-F5F7DBE733F0</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Incoterms</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
  </attributes>
  <forms uuid="e96a316f-c149-4648-b0a6-9650523e0e47">
   <name>DocumentForm</name>
@@ -795,13 +810,27 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="51529ae4-9023-4f25-ba83-1698d033fdf7">
-   <name>IsAdditionalItemRevenue</name>
+   <name>DELETE_IsAdditionalItemRevenue</name>
    <synonym>
     <key>en</key>
-    <value>3F143BCC-7D1E-EAE8-8E6E-EC1323E7D174</value>
+    <value>DCF89FFA-E1BB-812D-D49C-CFF7D5053246</value>
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9f6ce9e6-73c5-494d-b163-7884e1faf572">
+   <name>OtherPeriodRevenueType</name>
+   <synonym>
+    <key>en</key>
+    <value>9B898AC2-D4FD-FB3A-A6C9-903954765F1F</value>
+   </synonym>
+   <type>
+    <types>EnumRef.OtherPeriodRevenueType</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

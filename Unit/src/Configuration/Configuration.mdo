@@ -47,6 +47,8 @@
   <subsystems>Subsystem.Unit_UnitTest</subsystems>
   <commonPictures>CommonPicture.IconCollection2</commonPictures>
   <commonPictures>CommonPicture.Unit_Autotest</commonPictures>
+  <commonPictures>CommonPicture.CashOk</commonPictures>
+  <commonPictures>CommonPicture.PaymentStatuses</commonPictures>
   <roles>Role.FullAccess</roles>
   <roles>Role.TemplateInformationRegisters</roles>
   <roles>Role.Unit_MainRole</roles>
@@ -66,6 +68,8 @@
   <commonModules>CommonModule.Unit_DocumentRegistration</commonModules>
   <commonModules>CommonModule.Units_CommonServerCall</commonModules>
   <commonModules>CommonModule.EquipmentFiscalPrinter_CommonAPI</commonModules>
+  <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
+  <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -197,6 +201,7 @@
   <enums>Enum.REP_ReportParametrTypes</enums>
   <reports>Report.REP_Barcodes</reports>
   <reports>Report.D0009_DocumentRegistrationsReport</reports>
+  <reports>Report.D0013_DocumentRegistrationsReport</reports>
   <dataProcessors>DataProcessor.Unit_CheckAllTypeData</dataProcessors>
   <dataProcessors>DataProcessor.Unit_RunTest</dataProcessors>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

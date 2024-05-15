@@ -2276,7 +2276,14 @@
   <savedData>true</savedData>
  </attributes>
  <commandInterface>
-  <navigationPanel/>
+  <navigationPanel>
+   <cmiFragmentRecord>
+    <command>InformationRegister.T9012S_AccountsPartner.StandardCommand.OpenByValue.Agreement</command>
+    <group>FormNavigationPanelGoTo</group>
+    <index>0</index>
+    <userVisible/>
+   </cmiFragmentRecord>
+  </navigationPanel>
   <commandBar/>
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">

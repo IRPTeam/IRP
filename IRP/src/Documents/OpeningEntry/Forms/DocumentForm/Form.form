@@ -2335,6 +2335,49 @@
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
     </items>
+    <items xsi:type="form:FormField">
+     <name>CashInTransitUseBasisDocument</name>
+     <id>1689</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.CashInTransit.UseBasisDocument</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>CashInTransitUseBasisDocumentExtendedTooltip</name>
+      <id>1691</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>CashInTransitUseBasisDocumentContextMenu</name>
+      <id>1690</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
     <autoCommandBar>
      <name>CashInTransitCommandBar</name>
      <id>1485</id>
@@ -2826,6 +2869,10 @@
        <dataPath xsi:type="form:DataPath">
         <segments>Object.AdvanceFromCustomers.Agreement</segments>
        </dataPath>
+       <handlers>
+        <event>OnChange</event>
+        <name>AgreementOnChange</name>
+       </handlers>
        <extendedTooltip>
         <name>AdvanceFromCustomersAgreementExtendedTooltip</name>
         <id>1576</id>
@@ -2857,6 +2904,14 @@
        <headerHorizontalAlign>Left</headerHorizontalAlign>
        <showInFooter>true</showInFooter>
        <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+         <event>StartChoice</event>
+         <name>AdvanceFromCustomersAgreementStartChoice</name>
+        </handlers>
+        <handlers>
+         <event>EditTextChange</event>
+         <name>AdvanceFromCustomersAgreementEditTextChange</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>
@@ -3557,6 +3612,10 @@
        <dataPath xsi:type="form:DataPath">
         <segments>Object.AdvanceToSuppliers.Agreement</segments>
        </dataPath>
+       <handlers>
+        <event>OnChange</event>
+        <name>AgreementOnChange</name>
+       </handlers>
        <extendedTooltip>
         <name>AdvanceToSuppliersAgreementExtendedTooltip</name>
         <id>1579</id>
@@ -3588,6 +3647,14 @@
        <headerHorizontalAlign>Left</headerHorizontalAlign>
        <showInFooter>true</showInFooter>
        <extInfo xsi:type="form:InputFieldExtInfo">
+        <handlers>
+         <event>StartChoice</event>
+         <name>AdvanceToSuppliersAgreementStartChoice</name>
+        </handlers>
+        <handlers>
+         <event>EditTextChange</event>
+         <name>AdvanceToSuppliersAgreementEditTextChange</name>
+        </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <wrap>true</wrap>

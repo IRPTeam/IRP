@@ -27,6 +27,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 		
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	ThisObject.DocumentAmount = 
 	ThisObject.AccrualList.Total("Amount")
 	- ThisObject.DeductionList.Total("Amount") 
@@ -36,6 +38,14 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
+	EndIf;
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel, "AccrualList");
+		AccountingServer.OnWrite(ThisObject, Cancel, "DeductionList");
+		AccountingServer.OnWrite(ThisObject, Cancel, "CashAdvanceDeductionList");
+		AccountingServer.OnWrite(ThisObject, Cancel, "SalaryTaxList");
 	EndIf;
 EndProcedure
 

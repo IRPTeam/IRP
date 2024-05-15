@@ -118,6 +118,8 @@
  <content>Document.RetailGoodsReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
  <content>Document.RetailReturnReceipt.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
  <content>Document.RetailReceiptCorrection.Attribute.BasisDocument</content>
+ <content>Document.ExpenseAccruals.Attribute.Basis</content>
+ <content>Document.RevenueAccruals.Attribute.Basis</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
@@ -195,6 +197,8 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.RetailGoodsReceipt</types>
    <types>DocumentRef.CashExpense</types>
+   <types>DocumentRef.ExpenseAccruals</types>
+   <types>DocumentRef.RevenueAccruals</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

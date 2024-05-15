@@ -1104,7 +1104,14 @@
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>
-  <navigationPanel/>
+  <navigationPanel>
+   <cmiFragmentRecord>
+    <command>InformationRegister.T9013S_AccountsTax.StandardCommand.OpenByValue.Tax</command>
+    <group>FormNavigationPanelGoTo</group>
+    <index>0</index>
+    <userVisible/>
+   </cmiFragmentRecord>
+  </navigationPanel>
   <commandBar/>
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="beb64406-074c-47cb-a8be-f430900a0525">
+ <producedTypes>
+  <selectionType typeId="b62e6f0b-afc8-407f-9f44-5c444a6162be" valueTypeId="5a3361b6-9947-4c81-af9b-bffc0b082f79"/>
+  <listType typeId="cddc5a6f-5bbd-46b9-ab50-bee4ce983e74" valueTypeId="a1f7cf84-8ed7-431e-8d73-d30a770dc6fd"/>
+  <managerType typeId="01773875-dc74-4194-8cd1-9d7f8ba34739" valueTypeId="2af25aec-68d4-4be2-82ef-d6871dd0325f"/>
+  <recordSetType typeId="9ef143d2-ed60-4aaa-9bfe-7f8408e3816c" valueTypeId="638b5642-fca2-4b33-86e6-e4fedb2a8baf"/>
+  <recordKeyType typeId="3af878a1-7471-4dc8-bd13-1c7ae173b1fb" valueTypeId="3fb1f9c4-f549-4def-a3d5-6c4b60096005"/>
+  <recordType typeId="8edd7108-063e-4805-b3ce-38947bc7f60a" valueTypeId="fa95544c-e32b-4707-a124-68479a432c7c"/>
+  <recordManagerType typeId="32a6d6c4-7eff-46f7-9862-dc5f746640e4" valueTypeId="926ea232-13ae-45ea-81a6-58555aa96820"/>
+ </producedTypes>
+ <name>AttachedFilesControl</name>
+ <synonym>
+  <key>en</key>
+  <value>77C990B3-19D9-0E6A-AAD0-05BF044313BB</value>
+ </synonym>
+ <editType>InDialog</editType>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Active</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>LineNumber</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Recorder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Period</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="606085ed-a1c7-47c9-a354-9c4c83ec752d">
+  <name>Comment</name>
+  <synonym>
+   <key>en</key>
+   <value>E21187E8-6219-D52D-D7D2-2A8DDD284A71</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="79d28eeb-d70c-47d4-bc80-d136b9111f7c">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>85A6EE9B-9611-A396-6195-5661F93A71FD</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="62b6f915-1710-4cd4-a8ac-a5e0c45f659c">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>660203C7-11EA-36F8-810E-EB38E6CA93CB</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f2041c77-df5f-485c-88f8-0c128321c141">
+  <name>DocumentType</name>
+  <synonym>
+   <key>en</key>
+   <value>8118CB75-D267-465F-FC1D-D778C835847C</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="43d053ec-e528-4f52-aa74-a675f7c6d532">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>3BFF558B-D395-A331-12A2-2176597CAD0D</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="0a7a340e-1375-4d9e-a447-5edfad8e7847">
+  <name>RecordID</name>
+  <synonym>
+   <key>en</key>
+   <value>33F9F06A-0A28-DB8D-DA15-5340C92A1776</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+</mdclass:InformationRegister>

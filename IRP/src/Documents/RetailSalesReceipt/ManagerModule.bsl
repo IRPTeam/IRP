@@ -294,7 +294,10 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
@@ -302,8 +305,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
-	QueryArray.Add(R5015B_OtherPartnersTransactions());
-	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -1461,6 +1462,29 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_RSR();
 EndFunction
 
+Function R4050B_StockInventory()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey,
+		   |	SUM(ItemList.Quantity) AS Quantity
+		   |INTO R4050B_StockInventory
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND ItemList.IsOwnStocks
+		   |	AND ItemList.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
+		   |GROUP BY
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.Company,
+		   |	ItemList.Store,
+		   |	ItemList.ItemKey";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -1516,17 +1540,14 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 
 	// Debit
 	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters,
-		Parameters.ObjectData.Company.LandedCostExpenseType);
-	If ValueIsFilled(Debit.Account) Then
-		AccountingAnalytics.Debit = Debit.Account;
-	EndIf;
+		                                                      Parameters.ObjectData.Company.LandedCostExpenseType,
+		                                                      Parameters.RowData.ProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 	
 	// Credit
 	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
-	If ValueIsFilled(Credit.Account) Then
-		AccountingAnalytics.Credit = Credit.Account;
-	EndIf;
+	AccountingAnalytics.Credit = Credit.Account;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 
 	Return AccountingAnalytics;

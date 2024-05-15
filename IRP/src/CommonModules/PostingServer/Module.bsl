@@ -30,6 +30,12 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 
 	RegisteredRecords = RegisterRecords(Parameters);
+	If Parameters.Cancel Then
+		For Each Message In Parameters.Messages Do
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndDo;
+		Return;
+	EndIf;	
 	
 	RegisteredRecordsArray = New Array;
 	For Each Record In RegisteredRecords Do
@@ -71,8 +77,10 @@ EndProcedure
 // * DocumentDataTables - Map -
 // * LockDataSources - Map -
 // * PostingDataTables - Array Of KeyAndValue:
-// ** Key - MetadataObject -
+// ** Key - MetadataObjectDocument - Meta doc
 // ** Value - See PostingTableSettings
+// * ManualMovementsEdit - Boolean -  
+// * Messages -  Array of String - User message
 Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Cancel = False;
 	
@@ -87,7 +95,9 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-
+	Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Parameters.Insert("Messages", New Array);
+	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);
 	
@@ -165,10 +175,17 @@ EndFunction
 // Returns:
 //  Map - Register records
 Function RegisterRecords(Parameters)
+	
+	isManualRecordsHasDifference = False;
+	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
 		RecordSet = Row.Value.RecordSet_Document;
 		TableForLoad = Row.Value.PrepareTable.Copy();
+		
+		If Not Parameters.Object.Posted Then
+			TableForLoad.Clear();
+		EndIf;
 			
 		// Set record type
 		If Row.Value.Property("RecordType") Then
@@ -188,14 +205,25 @@ Function RegisterRecords(Parameters)
 			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
 				Continue; //Never rewrite
 		EndIf;
-
+		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
+			RegisterName = Row.Value.Metadata.Name;
+			try
+			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
+			except endtry;
+		EndIf;
+		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;
+		Else
+			If Parameters.ManualMovementsEdit Then
+				Parameters.Cancel = True;
+				isManualRecordsHasDifference = True;
+			EndIf;		
 		EndIf;
 			
 		//If Not Parameters.PostingByRef Then
-			WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
+			// WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 			
 			UpdateCosts(Parameters.Object, Row.Value.Metadata, TableForLoad, RegisteredRecords);
 		//EndIf;
@@ -210,8 +238,32 @@ Function RegisterRecords(Parameters)
 		Data.Insert("Metadata", RecordSet.Metadata());
 		RegisteredRecords.Insert(RecordSet.Metadata(), Data);
 	EndDo;
+	If Parameters.ManualMovementsEdit Then
+		If isManualRecordsHasDifference Then
+			Parameters.Messages.Add(R().Error_144);
+		Else
+			Parameters.Messages.Add(R().InfoMessage_038);
+		EndIf;
+	EndIf;
+				
 	Return RegisteredRecords;
 EndFunction
+
+// Get document movements by register name.
+// 
+// Parameters:
+//  DocRef - DocumentRef - Doc ref
+//  RegisterName - String - Register name
+// 
+// Returns:
+//  ValueTable - ValueTable
+Function GetDocumentMovementsByRegisterName(DocRef, RegisterName) Export
+	Query = New Query("SELECT * FROM " + RegisterName + " WHERE Recorder = &Ref");
+	Query.SetParameter("Ref", DocRef);
+	
+	Return Query.Execute().Unload();
+	
+EndFunction	
 
 Function RecordSetIsEqual(RecordSet, TableForLoad)
 	RecordSet.Read();
@@ -223,6 +275,40 @@ Function RecordSetIsEqual(RecordSet, TableForLoad)
 	
 	Return Result;
 EndFunction
+
+// Get posting parameters structure.
+// 
+// Returns:
+//  Structure - Get posting parameters structure:
+//	* Cancel - Boolean
+//  * Object - DocumentObject
+//  * PostingByRef - Boolean
+//  * IsReposting - Boolean
+//  * PointInTime - PointInTime
+//  * TempTablesManager - TempTablesManager
+//  * Metadata - MetadataObject
+//  * DocumentDataTables - Structure
+//  * LockDataSources - Map
+//  * PostingDataTables - Map
+//  * AddInfo - Arbitrary
+Function GetPostingParametersEmptyStructure() Export
+	
+	Structure = New Structure;
+	Structure.Insert("Cancel"); 
+	Structure.Insert("Object");
+	Structure.Insert("PostingByRef");
+	Structure.Insert("IsReposting");
+	Structure.Insert("PointInTime");
+	Structure.Insert("TempTablesManager");
+	Structure.Insert("Metadata");
+	Structure.Insert("DocumentDataTables", New Structure); 
+	Structure.Insert("LockDataSources");
+	Structure.Insert("PostingDataTables"); 
+	Structure.Insert("AddInfo");
+	
+	Return Structure;
+	
+EndFunction		
 
 #EndRegion
 
@@ -250,22 +336,22 @@ Procedure UpdateCosts(DocObject, RecordMeta, TableForLoad, RegisteredRecords)
 		R6020B_BatchBalance = AccumulationRegisters.R6020B_BatchBalance.BatchBalance_CollectRecords(DocObject);
 		R6020B_BatchBalance_RecordSet.Load(R6020B_BatchBalance);
 				
-		Data = New Structure;
-		Data.Insert("RecordSet", R6020B_BatchBalance_RecordSet);
-		Data.Insert("WriteInTransaction", True);
-		Data.Insert("Metadata", R6020B_BatchBalance_RecordSet.Metadata());
-		RegisteredRecords.Insert(R6020B_BatchBalance_RecordSet.Metadata(), Data);
+		Data1 = New Structure;
+		Data1.Insert("RecordSet", R6020B_BatchBalance_RecordSet);
+		Data1.Insert("WriteInTransaction", True);
+		Data1.Insert("Metadata", R6020B_BatchBalance_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6020B_BatchBalance_RecordSet.Metadata(), Data1);
 		
 		R6060T_CostOfGoodsSold_RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
 		R6060T_CostOfGoodsSold_RecordSet.Filter.Recorder.Set(DocObject.Ref);
 		R6060T_CostOfGoodsSold = AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_CollectRecords(DocObject);
 		R6060T_CostOfGoodsSold_RecordSet.Load(R6060T_CostOfGoodsSold);
 		
-		Data = New Structure;
-		Data.Insert("RecordSet", R6060T_CostOfGoodsSold_RecordSet);
-		Data.Insert("WriteInTransaction", True);
-		Data.Insert("Metadata", R6060T_CostOfGoodsSold_RecordSet.Metadata());
-		RegisteredRecords.Insert(R6060T_CostOfGoodsSold_RecordSet.Metadata(), Data);
+		Data2 = New Structure;
+		Data2.Insert("RecordSet", R6060T_CostOfGoodsSold_RecordSet);
+		Data2.Insert("WriteInTransaction", True);
+		Data2.Insert("Metadata", R6060T_CostOfGoodsSold_RecordSet.Metadata());
+		RegisteredRecords.Insert(R6060T_CostOfGoodsSold_RecordSet.Metadata(), Data2);
 		
 		TableForLoadEmpty = CommonFunctionsServer.CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 		For Each Row In TableForLoad Do
@@ -742,15 +828,26 @@ EndFunction
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	
 	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
+	IsActualStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4010B_ActualStocks; 
 	
 	If RecordType = AccumulationRecordType.Expense Then
-		If Not IsFreeStock Then
-			Parameters.BalancePeriod = 
-				CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+		
+		If IsFreeStock Then
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			Return CheckResult.IsOk;
+		ElsIf IsActualStock Then
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			If Not CheckResult.IsOk Then
+				Return CheckResult.IsOk;
+			EndIf;
+			Parameters.BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
+			Parameters.TempTablesManager = New TempTablesManager();
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			Return CheckResult.IsOk;
+		Else
+			Raise StrTemplate("Unsupported register type [%1]", Parameters.Metadata);
 		EndIf;
 		
-		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		Return CheckResult.IsOk;
 	Else // Receipt
 		
 		IsPostingNewDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsPostingNewDocument", False);
@@ -1401,6 +1498,7 @@ Function SkipOnCheckPosting(Doc)
 
 	Array = New Array;
 	Array.Add(Metadata.Documents.CalculationMovementCosts);
+	Array.Add(Metadata.Documents.JournalEntry);
 	
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction
@@ -1508,7 +1606,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 	Count = 0; 
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
-	
+		
 	For Each Doc In DocumentArray Do
 		
 		Try
@@ -1516,18 +1614,46 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			Result.Insert("Ref", Doc.Ref);
 			Result.Insert("RegName", Doc.RegName);
 			Result.Insert("Error", "");
+			
 			NewMovement = Doc.NewMovement.Get(); // ValueTable
 			If Not Doc.Ref.Posted And NewMovement.Count() > 0 Then
 				Result.Error = String(Doc.Ref) + " - Not posted. Can not update records";
 			Else
 				
 				Parts = StrSplit(Doc.RegName, ".");
-				CreateRecordSet = Eval(Parts[0] + "s." + Parts[1] + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
-				//@skip-check unknown-method-property
-				CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
-				NewMovement.FillValues(Doc.Ref, "Recorder");
-				CreateRecordSet.Load(NewMovement);
-				CreateRecordSet.Write(True);
+				ManagerRegisterName = Parts[0] + "s." + Parts[1];
+				ObjectRegisterName = Parts[0] + "." + Parts[1];
+				
+				If AccountingServer.IsAccountingDataRegister(ObjectRegisterName) Then
+					
+					ArrayOfBasisDocuments = New Array();
+					ArrayOfBasisDocuments.Add(Doc.Ref);
+
+					ArrayOfLedgerTypes = AccountingServer.GetLedgerTypesByCompany(Doc.Ref, Doc.Ref.Date, Doc.Ref.Company);
+					
+					TableOfJEDocuments = AccountingServer.GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
+					
+					For Each Row In TableOfJEDocuments Do
+						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "DataTable", NewMovement);
+						Row.JEDocument.DeletionMark = Row.BasisDocument.DeletionMark;
+						Row.JEDocument.Write(DocumentWriteMode.Write);
+					EndDo;							
+				Else
+					CreateRecordSet = Eval(ManagerRegisterName + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
+				
+					//@skip-check unknown-method-property
+					If AccountingServer.IsAccountingAnalyticsRegister(ObjectRegisterName) Then
+						CreateRecordSet.Filter.Document.Set(Doc.Ref);
+						NewMovement.FillValues(Doc.Ref, "Document");
+					Else
+						CreateRecordSet.Filter.Recorder.Set(Doc.Ref);
+						NewMovement.FillValues(Doc.Ref, "Recorder");
+					EndIf;
+				
+					CreateRecordSet.Load(NewMovement);
+					CreateRecordSet.Write(True);
+				EndIf;
 			EndIf;
 			Errors.Add(Result);
 		Except
@@ -1536,7 +1662,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			BackgroundJobAPIServer.NotifyStream(Msg);
 			
 			Result = New Structure;
-			Result.Insert("Ref", Doc);
+			Result.Insert("Ref", Doc.Ref);
 			Result.Insert("Error", Msg.Log);
 			Result.Insert("RegName", Doc.RegName);
 			Errors.Add(Result);
@@ -1568,3 +1694,4 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 EndFunction
 
 #EndRegion
+

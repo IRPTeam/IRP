@@ -15,7 +15,9 @@ Function GetChoiceDataTable(Parameters) Export
 	Filter = "
 		 	 |	AND Table.Ref IN (&ArrayOfRef)";
 	For Each FilterItem In Parameters.Filter Do
-		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+		If FilterItem.Key = "CustomSearchFilter" OR
+			FilterItem.Key = "CustomFilterByItem" OR
+			FilterItem.Key = "AdditionalParameters" Then
 			Continue; // Service properties
 		EndIf;
 		Filter = Filter
@@ -30,6 +32,7 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("UseSearchByCode", True);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	

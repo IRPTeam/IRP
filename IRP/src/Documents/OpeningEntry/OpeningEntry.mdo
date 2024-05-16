@@ -420,6 +420,10 @@
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AdvanceFromCustomers.Attribute.LegalName</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -551,6 +555,10 @@
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
@@ -699,6 +707,10 @@
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.LegalName</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -830,6 +842,10 @@
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
@@ -963,6 +979,10 @@
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments.Attribute.LegalName</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -1094,6 +1114,10 @@
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
@@ -2348,6 +2372,10 @@
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountReceivableOther.Attribute.LegalName</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -2465,6 +2493,10 @@
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
         <field>Document.OpeningEntry.TabularSection.AccountPayableOther.Attribute.LegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.OpeningEntry.Attribute.Company</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

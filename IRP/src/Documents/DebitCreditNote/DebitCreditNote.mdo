@@ -166,6 +166,10 @@
       <name>Filter.LegalName</name>
       <field>Document.DebitCreditNote.Attribute.SendLegalName</field>
     </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.DebitCreditNote.Attribute.Company</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -291,6 +295,10 @@
     <choiceParameterLinks>
       <name>Filter.LegalName</name>
       <field>Document.DebitCreditNote.Attribute.ReceiveLegalName</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.DebitCreditNote.Attribute.Company</field>
     </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>

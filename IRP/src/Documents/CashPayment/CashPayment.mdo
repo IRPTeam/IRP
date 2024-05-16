@@ -415,6 +415,10 @@
         <name>Filter.LegalName</name>
         <field>Document.CashPayment.TabularSection.PaymentList.Attribute.Payee</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.CashPayment.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

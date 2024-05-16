@@ -328,6 +328,10 @@
       <name>Filter.LegalName</name>
       <field>Document.RetailSalesReceipt.Attribute.LegalName</field>
     </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.RetailSalesReceipt.Attribute.Company</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -1484,6 +1488,10 @@
       <choiceParameterLinks>
         <name>Filter.LegalName</name>
         <field>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentLegalName</field>
+      </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.RetailSalesReceipt.Attribute.Company</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>

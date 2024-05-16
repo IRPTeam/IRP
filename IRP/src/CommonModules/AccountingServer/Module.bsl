@@ -375,6 +375,9 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("RowKey"   , AnalyticRow.Key);
 	Parameters.Insert("Operation", AnalyticRow.Operation);
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
+	Parameters.Insert("IsCurrencyRevaluation", 
+		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));
+		
 	Data = GetAccountingData(Parameters);
 	
 	Result = GetAccountingDataResult();
@@ -2008,7 +2011,7 @@ Function GetAccountingData(Parameters)
 	|WHERE
 	|	Amounts.Recorder = &Recorder
 	|	AND Amounts.Operation = &Operation
-	|	AND Amounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Amounts.CurrencyMovementType = &RevaluationCurrency
 	|	AND case
 	|		when &FilterByRowKey
 	|			then Amounts.RowKey = &RowKey
@@ -2061,6 +2064,12 @@ Function GetAccountingData(Parameters)
 	Query.SetParameter("Operation"            , Parameters.Operation);
 	Query.SetParameter("FilterByRowKey"       , ValueIsFilled(RowKey));
 	Query.SetParameter("RowKey"           	  , RowKey);
+	
+	If Parameters.IsCurrencyRevaluation Then
+		Query.SetParameter("RevaluationCurrency", Parameters.CurrencyMovementType);
+	Else
+		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	EndIf;
 	
 	QueryResults = Query.ExecuteBatch();
 	

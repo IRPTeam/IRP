@@ -1161,13 +1161,10 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 				EndIf;
 
 				_IsNegative = False;
-				If OtherCurrencyRow.Amount < 0 Then
-					_IsNegative = True;
-					OtherCurrencyRow.Amount = -OtherCurrencyRow.Amount;
-				EndIf;
-
 				If Row.Amount < 0 Then
+					_IsNegative = True;
 					Row.Amount = -Row.Amount;
+					OtherCurrencyRow.Amount = -OtherCurrencyRow.Amount;
 				EndIf;
 				
 				//Row.Amount; -  amount in transaction currency

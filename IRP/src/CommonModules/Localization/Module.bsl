@@ -1425,6 +1425,11 @@ Function Strings(Lang) Export
 	Strings.Insert("LDT_FailReading", NStr("en = 'Failed to read the value: [%1]'", Lang));
 	Strings.Insert("LDT_ValueNotFound", NStr("en = 'Nothing was found for [%1]'", Lang));
 	Strings.Insert("LDT_TooMuchFound", NStr("en = 'Several variants were found for [%1]'", Lang));
+#EndRegion
+
+#Region OpenVendorPrices
+	Strings.Insert("OVP_Button_Title",   NStr("en = 'Open vendor prices'", Lang));
+	Strings.Insert("OVP_Button_ToolTip", NStr("en = 'Open vendor prices'", Lang));	
 #EndRegion	
 
 #Region OpenSerialLotNumberTree

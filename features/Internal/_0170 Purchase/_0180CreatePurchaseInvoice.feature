@@ -1052,10 +1052,10 @@ Scenario: _018020 check Purchase price records
 		And I click "Post" button
 		* Check
 			And "ItemList" table became equal
-				| 'Item'       | 'Item key' | 'Unit'                   | 'Quantity' | 'Price'  | 'VAT' | 'Total amount' | 'Net amount' | 'Last vendor price' |
-				| 'Boots'      | '37/18SD'  | 'pcs'                    | '4,000'    | '222,00' | '18%' | '888,00'       | '752,54'     | '222,00, TRY'       |
-				| 'High shoes' | '39/19SD'  | 'High shoes box (8 pcs)' | '8,000'    | '250,00' | '18%' | '2 000,00'     | '1 694,92'   | '250,00, TRY'       |
-				| 'Dress'      | 'S/Yellow' | 'pcs'                    | '1,000'    | '200,00' | '18%' | '200,00'       | '169,49'     | '100,00, TRY'       |
+				| 'Item'       | 'Item key' | 'Unit'                   | 'Quantity' | 'Price'  | 'VAT' | 'Total amount' | 'Net amount' | 'Last vendor price' | 'Last vendor price currency' |
+				| 'Boots'      | '37/18SD'  | 'pcs'                    | '4,000'    | '222,00' | '18%' | '888,00'       | '752,54'     | '222,00'            | 'TRY'                        |
+				| 'High shoes' | '39/19SD'  | 'High shoes box (8 pcs)' | '8,000'    | '250,00' | '18%' | '2 000,00'     | '1 694,92'   | '250,00'            | 'TRY'                        |
+				| 'Dress'      | 'S/Yellow' | 'pcs'                    | '1,000'    | '200,00' | '18%' | '200,00'       | '169,49'     | '200,00'            | 'TRY'                        |
 		* Check Open vendor prices report
 			And I click "Open vendor prices" button
 			And I click "Generate" button

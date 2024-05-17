@@ -97,9 +97,11 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		| "Documents.BankReceipt.FindByNumber(813).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I execute 1C:Enterprise script at server
 		| "Documents.BankReceipt.FindByNumber(814).GetObject().Write(DocumentWriteMode.Posting);"   |
-	When Create document CashReceipt objects (multicurrency revaluation)
+	When Create document CashReceipt and objects EmployeeCashAdvance (multicurrency revaluation)
 	And I execute 1C:Enterprise script at server
 		| "Documents.CashReceipt.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.EmployeeCashAdvance.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);"   |
 	When Create document MoneyTransfer objects (multicurrency revaluation)
 	And I execute 1C:Enterprise script at server
 		| "Documents.MoneyTransfer.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);"   |
@@ -114,6 +116,8 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 	When Create document SalesInvoice objects (multicurrency revaluation)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(811).GetObject().Write(DocumentWriteMode.Posting);"   |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(812).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I close all client application windows
 
 
@@ -253,7 +257,7 @@ Scenario: _0978006 check ForeignCurrencyRevaluation by the Register  "R5015 Othe
 			| 'Number'         |
 			| '$$Number3$$'    |
 	* Check movements by the Register  "R5015 Other partners transactions" 
-		And I click "Registrations report" button
+		And I click "Registrations report info" button
 		And I select "R5015 Other partners transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -263,9 +267,15 @@ Scenario: _0978006 check ForeignCurrencyRevaluation by the Register  "R5015 Othe
 			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'     | ''         | ''                               | ''           | ''                       | ''                  | ''                  | ''                  | ''                  | 'Attributes'              |
 			| ''                                                | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'   | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'        | 'Partner'           | 'Agreement'         | 'Basis'             | 'Deferred calculation'    |
 			| ''                                                | 'Receipt'       | '08.02.2023 23:59:59'   | '-2,78'       | 'Main Company'   | ''         | 'Local currency'                 | 'TRY'        | 'USD'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
-			| ''                                                | 'Receipt'       | '08.02.2023 23:59:59'   | '-2,78'       | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'USD'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
-			| ''                                                | 'Receipt'       | '08.02.2023 23:59:59'   | '-1,39'       | 'Main Company'   | ''         | 'Local currency'                 | 'TRY'        | 'USD'                    | 'Other partner 1'   | 'Other partner 1'   | 'Other partner 1'   | ''                  | 'No'                      |
-			| ''                                                | 'Receipt'       | '08.02.2023 23:59:59'   | '-1,39'       | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'USD'                    | 'Other partner 1'   | 'Other partner 1'   | 'Other partner 1'   |  ''                 | 'No'                      |
+			| ''                                                | 'Receipt'       | '08.02.2023 23:59:59'   | '-1,39'       | 'Main Company'   | ''         | 'TRY'                            | 'TRY'        | 'USD'                    | 'Other partner 2'   | 'Other partner 2'   | 'Other partner 2'   | ''                  | 'No'                      |
+		Then "ResultTable" spreadsheet document is equal
+			| '$$ForeignCurrencyRevaluation3$$'               | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                                                         | ''      | ''       | ''                     |
+			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                                                         | ''      | ''       | ''                     |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'                                                | 'Basis' | 'Amount' | 'Deferred calculation' |
+			| ''                                              | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 1' | 'Other partner 1' | '<Object not found> (56:b7bf8c16981f994a11ef1419cba382d3)' | ''      | '-1,39'  | 'No'                   |
+			| ''                                              | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 2' | 'Other partner 2' | '<Object not found> (56:b7bf8c16981f994a11ef1419cba382d4)' | ''      | '-2,78'  | 'No'                   |
+		
+				
 	And I close all client application windows
 
 Scenario: _0978007 check ForeignCurrencyRevaluation by the Register  "R1020 Advances to vendors"

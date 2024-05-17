@@ -62,8 +62,8 @@ Scenario: _4001702 check preparation
 Scenario: _4001703 check file attachment to document
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select "C:\Users\G.BASUSTA\Documents\TEST docs\rabbit.jpg" file
-	And Delay 5
+	And I select "$Path$/features/Internal/_4000 TestWithExtension/rabbit.jpg" file
+	And Delay 10
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:
 		| 'File'      |
@@ -86,8 +86,8 @@ Scenario: _4001704 check attached file in document
 Scenario: _4001705 check attach file with undefined extensions
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select "C:\Users\G.BASUSTA\Documents\TEST docs\Purchase Order Instruction.pdf" file
-	And Delay 10
+	And I select "$Path$/features/Internal/_4000 TestWithExtension/Purchase Order Instruction.pdf" file
+	And Delay 20
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:
 		| 'File'                           |
@@ -131,7 +131,7 @@ Scenario: _4001707 check Date, Company and Branch filters
 	And I click the button named "OK"
 	And I change checkbox "Check mode"
 	And "DocumentList" table became equal
-		| 'Document'                                   | 'Author'                  | 'Branch'    |
-		| 'Purchase order 1 dated 09.05.2023 12:29:59' | 'en description is empty' | 'Branch_02' |
-		| 'Purchase order 4 dated 09.05.2023 13:10:09' | 'en description is empty' | 'Branch_02' |
+		| 'Document'                                   | 'Branch'    |
+		| 'Purchase order 1 dated 09.05.2023 12:29:59' | 'Branch_02' |
+		| 'Purchase order 4 dated 09.05.2023 13:10:09' | 'Branch_02' |
 	

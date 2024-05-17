@@ -3558,9 +3558,9 @@ Scenario: Create catalog IntegrationSettings objects (Attach File Control)
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=b7bf8c16981f994a11ef0dffe1a30149' | 'False'        | *      | 'DOCUMENT STORAGE' | ''                 | 'Enum.IntegrationType.LocalFileStorage' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'                    | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '_e6d6ad337e08414cb350d43075842892' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '09.05.2024 15:30:13' | '09.05.2024 16:11:26' | 'False'     |
 
 	And I refill object tabular section "ConnectionSetting":
-		| 'Ref'                                                                         | 'Key'         | 'Value' | 'Hide'  |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath' | ''      | 'False' |
-		| 'e1cib/data/Catalog.IntegrationSettings?ref=b7bf8c16981f994a11ef0dffe1a30149' | 'AddressPath' | ''      | 'False' |
+		| 'Ref'                                                                         | 'Key'         | 'Value'                       | 'Hide'  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath' | '#workingDir#/Picture/Source' | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b7bf8c16981f994a11ef0dffe1a30149' | 'AddressPath' | '#workingDir#/Picture/Source' | 'False' |
 
 	And I refill object tabular section "ConnectionSettingTest":
 		| 'Ref'                                                                         | 'Key'         | 'Value'                       | 'Hide'  |

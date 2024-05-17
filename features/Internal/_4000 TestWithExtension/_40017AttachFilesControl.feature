@@ -62,7 +62,7 @@ Scenario: _4001702 check preparation
 Scenario: _4001703 check file attachment to document
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select "$Path$/features/Internal/_4000 TestWithExtension/rabbit.jpg" file
+	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/rabbit.jpg"
 	And Delay 10
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:
@@ -86,7 +86,7 @@ Scenario: _4001704 check attached file in document
 Scenario: _4001705 check attach file with undefined extensions
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select "$Path$/features/Internal/_4000 TestWithExtension/Purchase Order Instruction.pdf" file
+	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/Purchase Order Instruction.pdf"
 	And Delay 20
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:

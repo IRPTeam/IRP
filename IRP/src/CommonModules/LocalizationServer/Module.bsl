@@ -200,6 +200,9 @@ Function FieldsListForDescriptions(Val Source) Export
 	ElsIf Source = "CatalogManager.PriceKeys" Then
 		Fields.Add("Ref");
 		Return Fields;
+	ElsIf Source = "CatalogManager.PrintInfo" Then
+		Fields.Add("Description");
+		Return Fields;	
 	ElsIf Source = "CatalogManager.IDInfoAddresses" Then
 		Fields.Add("FullDescription");
 	ElsIf Not LocalizationReuse.UseMultiLanguage(Source) Then

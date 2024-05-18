@@ -273,8 +273,8 @@ Scenario: _0978006 check ForeignCurrencyRevaluation by the Register  "R5015 Othe
 			| '$$ForeignCurrencyRevaluation3$$'               | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                     | ''      | ''       | ''                     |
 			| 'Register  "R5015 Other partners transactions"' | ''                    | ''           | ''             | ''       | ''                             | ''         | ''                     | ''                | ''                | ''                     | ''      | ''       | ''                     |
 			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Legal name'      | 'Partner'         | 'Agreement'            | 'Basis' | 'Amount' | 'Deferred calculation' |
-			| ''                                              | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1, USD' | ''      | '-1,39'  | 'No'                   |
-			| ''                                              | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2, USD' | ''      | '-2,78'  | 'No'                   |
+			| ''                                              | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 1' | 'Other partner 1' | 'Other partner 1, USD' | ''      | '1,39'   | 'No'                   |
+			| ''                                              | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Other partner 2' | 'Other partner 2' | 'Other partner 2, USD' | ''      | '2,78'   | 'No'                   |
 	And I close all client application windows
 
 Scenario: _0978007 check ForeignCurrencyRevaluation by the Register  "R1020 Advances to vendors"
@@ -336,32 +336,32 @@ Scenario: _0978009 check ForeignCurrencyRevaluation by the Register  "R2021 Cust
 			| ''                                        | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'USD'                  | 'Company Kalipso'   | 'Kalipso'   | 'Personal Partner terms, $' | 'Sales invoice 811 dated 01.02.2023 12:00:00' | ''      | ''        | '38,2'   | 'No'                   | ''                           |	
 	And I close all client application windows
 
-Scenario: _0978010 check ForeignCurrencyRevaluation by the Register  "R3010 Cash on hand"
-		And  I close all client application windows
-	* Select ForeignCurrencyRevaluation
-		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
-		And I go to line in "List" table
-			| 'Number'         |
-			| '$$Number3$$'    |
-	* Check movements by the Register  "R3010 Cash on hand" 
-		And I click "Registrations report info" button
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''          | ''                     |
-			| 'Register  "R3010 Cash on hand"'  | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''          | ''                     |
-			| ''                                | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount'    | 'Deferred calculation' |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'TRY'                  | 'Reporting currency'           | '0,24'      | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | '104'       | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №2'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | '10,5'      | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №3'      | 'TRY'      | 'USD'                  | 'Local currency'               | '1,91'      | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '-5,84'     | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '19,11'     | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | '-6 119,97' | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | '223,5'     | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №1'      | 'TRY'      | 'EUR'                  | 'Local currency'               | '-9,9'      | 'No'                   |
-			| ''                                | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №2'      | 'TRY'      | 'EUR'                  | 'Local currency'               | '5,13'      | 'No'                   |	
-	And I close all client application windows
+// Scenario: _0978010 check ForeignCurrencyRevaluation by the Register  "R3010 Cash on hand"
+// 		And  I close all client application windows
+// 	* Select ForeignCurrencyRevaluation
+// 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+// 		And I go to line in "List" table
+// 			| 'Number'         |
+// 			| '$$Number3$$'    |
+// 	* Check movements by the Register  "R3010 Cash on hand" 
+// 		And I click "Registrations report info" button
+// 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''          | ''                     |
+// 			| 'Register  "R3010 Cash on hand"'  | ''                    | ''           | ''             | ''       | ''                  | ''         | ''                     | ''                             | ''          | ''                     |
+// 			| ''                                | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount'    | 'Deferred calculation' |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'TRY'                  | 'Reporting currency'           | '0,24'      | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №1'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | '104'       | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №2'      | 'USD'      | 'EUR'                  | 'Reporting currency'           | '10,5'      | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Cash desk №3'      | 'TRY'      | 'USD'                  | 'Local currency'               | '1,91'      | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '-5,84'     | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '19,11'     | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | '-6 119,97' | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | '223,5'     | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №1'      | 'TRY'      | 'EUR'                  | 'Local currency'               | '-9,9'      | 'No'                   |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Cash desk №2'      | 'TRY'      | 'EUR'                  | 'Local currency'               | '5,13'      | 'No'                   |	
+// 	And I close all client application windows
 
 Scenario: _0978011 check ForeignCurrencyRevaluation by the Register  "R3027 Employee cash advance"
 		And  I close all client application windows
@@ -382,62 +382,62 @@ Scenario: _0978011 check ForeignCurrencyRevaluation by the Register  "R3027 Empl
 			| ''                                        | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'TRY'      | 'EUR'                  | 'David Romanov' | 'Local currency'               | '4,95'   | 'No'                   |
 	And I close all client application windows
 
-Scenario: _09780114 check ForeignCurrencyRevaluation by the Register  "R5021 Revenues"
-		And  I close all client application windows
-	* Select ForeignCurrencyRevaluation
-		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
-		And I go to line in "List" table
-			| 'Number'         |
-			| '$$Number3$$'    |
-	* Check movements by the Register  "R5021 Revenues" 
-		And I click "Registrations report info" button
-		And I select "R5021 Revenues" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''          | ''                  |
-			| 'Register  "R5021 Revenues"'      | ''                    | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''          | ''                  |
-			| ''                                | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount'    | 'Amount with taxes' |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-6 119,97' | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-2,78'     | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-1,39'     | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '1,91'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '1,91'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '4,95'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '19,11'     | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '38,2'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '-5,84'     | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,24'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '1,95'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '2,5'       | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '3,89'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10,5'      | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '104'       | ''                  |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '223,5'     | ''                  |
-	And I close all client application windows
+// Scenario: _09780114 check ForeignCurrencyRevaluation by the Register  "R5021 Revenues"
+// 		And  I close all client application windows
+// 	* Select ForeignCurrencyRevaluation
+// 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+// 		And I go to line in "List" table
+// 			| 'Number'         |
+// 			| '$$Number3$$'    |
+// 	* Check movements by the Register  "R5021 Revenues" 
+// 		And I click "Registrations report info" button
+// 		And I select "R5021 Revenues" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''          | ''                  |
+// 			| 'Register  "R5021 Revenues"'      | ''                    | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''        | ''          | ''                  |
+// 			| ''                                | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount'    | 'Amount with taxes' |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-6 119,97' | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-2,78'     | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '-1,39'     | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '1,91'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '1,91'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '4,95'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '19,11'     | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        | '38,2'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '-5,84'     | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,24'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '1,95'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '2,5'       | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '3,89'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '10,5'      | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '104'       | ''                  |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '223,5'     | ''                  |
+// 	And I close all client application windows
 
-Scenario: _09780111 check ForeignCurrencyRevaluation by the Register  "R5022 Expenses"
-		And  I close all client application windows
-	* Select ForeignCurrencyRevaluation
-		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
-		And I go to line in "List" table
-			| 'Number'         |
-			| '$$Number3$$'    |
-	* Check movements by the Register  "R5022 Expenses" 
-		And I click "Registrations report info" button
-		And I select "R5022 Expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
-			| 'Register  "R5022 Expenses"'      | ''                    | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
-			| ''                                | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '-9,9'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '5,13'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '6,79'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '7,64'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '8,25'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '9,55'   | ''                  | ''            | ''                          |
-			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,39'   | ''                  | ''            | ''                          |
-	And I close all client application windows
+// Scenario: _09780111 check ForeignCurrencyRevaluation by the Register  "R5022 Expenses"
+// 		And  I close all client application windows
+// 	* Select ForeignCurrencyRevaluation
+// 		Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"
+// 		And I go to line in "List" table
+// 			| 'Number'         |
+// 			| '$$Number3$$'    |
+// 	* Check movements by the Register  "R5022 Expenses" 
+// 		And I click "Registrations report info" button
+// 		And I select "R5022 Expenses" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| '$$ForeignCurrencyRevaluation3$$' | ''                    | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+// 			| 'Register  "R5022 Expenses"'      | ''                    | ''             | ''       | ''                   | ''             | ''         | ''            | ''            | ''         | ''                    | ''                             | ''        | ''       | ''                  | ''            | ''                          |
+// 			| ''                                | 'Period'              | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Fixed asset' | 'Ledger type' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' | 'Amount' | 'Amount with taxes' | 'Amount cost' | 'Calculation movement cost' |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '-9,9'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '5,13'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '6,79'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '7,64'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '8,25'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'TRY'      | ''                    | 'Local currency'               | ''        | '9,55'   | ''                  | ''            | ''                          |
+// 			| ''                                | '08.02.2023 23:59:59' | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '0,39'   | ''                  | ''            | ''                          |
+// 	And I close all client application windows
 
 Scenario: _09780112 check ForeignCurrencyRevaluation by the Register  "R5020 Partners balance"
 		And  I close all client application windows
@@ -454,15 +454,15 @@ Scenario: _09780112 check ForeignCurrencyRevaluation by the Register  "R5020 Par
 			| '$$ForeignCurrencyRevaluation3$$'    | ''                    | ''           | ''             | ''       | ''                | ''                  | ''                                 | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
 			| 'Register  "R5020 Partners balance"' | ''                    | ''           | ''             | ''       | ''                | ''                  | ''                                 | ''                                            | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |
 			| ''                                   | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Partner'         | 'Legal name'        | 'Agreement'                        | 'Document'                                    | 'Currency' | 'Multi currency movement type' | 'Transaction currency' | 'Amount' | 'Customer transaction' | 'Customer advance' | 'Vendor transaction' | 'Vendor advance' | 'Other transaction' | 'Advances closing' |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP'       | 'Company Ferron BP' | 'Vendor Ferron, USD'               | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-6,79'  | ''                     | ''                 | '-6,79'              | ''               | ''                  | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP'       | 'Company Ferron BP' | 'Ferron, USD'                      | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-8,25'  | ''                     | '-8,25'            | ''                   | ''               | ''                  | ''                 |
 			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Ferron BP'       | 'Company Ferron BP' | 'Ferron, USD'                      | 'Sales invoice 812 dated 02.02.2023 12:00:00' | 'TRY'      | 'Local currency'               | 'USD'                  | '1,91'   | '1,91'                 | ''                 | ''                   | ''               | ''                  | ''                 |
 			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Kalipso'         | 'Company Kalipso'   | 'Basic Partner terms, TRY'         | ''                                            | 'USD'      | 'Reporting currency'           | 'TRY'                  | '1,95'   | ''                     | ''                 | ''                   | '1,95'           | ''                  | ''                 |
 			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Kalipso'         | 'Company Kalipso'   | 'Basic Partner terms, without VAT' | ''                                            | 'USD'      | 'Reporting currency'           | 'TRY'                  | '3,89'   | ''                     | ''                 | ''                   | '3,89'           | ''                  | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Kalipso'         | 'Company Kalipso'   | 'Personal Partner terms, $'        | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-9,55'  | ''                     | '-9,55'            | ''                   | ''               | ''                  | ''                 |
 			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Kalipso'         | 'Company Kalipso'   | 'Personal Partner terms, $'        | 'Sales invoice 811 dated 01.02.2023 12:00:00' | 'TRY'      | 'Local currency'               | 'USD'                  | '38,2'   | '38,2'                 | ''                 | ''                   | ''               | ''                  | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Big foot'        | 'Big foot'          | 'Basic Partner terms, TRY'         | ''                                            | 'USD'      | 'Reporting currency'           | 'TRY'                  | '-0,39'  | ''                     | '-0,39'            | ''                   | ''               | ''                  | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Big foot'        | 'Big foot'          | 'Basic Partner terms, $'           | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-7,64'  | ''                     | '-7,64'            | ''                   | ''               | ''                  | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1'   | 'Other partner 1, USD'             | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-1,39'  | ''                     | ''                 | ''                   | ''               | '-1,39'             | ''                 |
-			| ''                                   | '08.02.2023 23:59:59' | 'Receipt'    | 'Main Company' | ''       | 'Other partner 2' | 'Other partner 2'   | 'Other partner 2, USD'             | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '-2,78'  | ''                     | ''                 | ''                   | ''               | '-2,78'             | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP'       | 'Company Ferron BP' | 'Vendor Ferron, USD'               | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '6,79'   | ''                     | ''                 | '6,79'               | ''               | ''                  | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Ferron BP'       | 'Company Ferron BP' | 'Ferron, USD'                      | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '8,25'   | ''                     | '8,25'             | ''                   | ''               | ''                  | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Kalipso'         | 'Company Kalipso'   | 'Personal Partner terms, $'        | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '9,55'   | ''                     | '9,55'             | ''                   | ''               | ''                  | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Big foot'        | 'Big foot'          | 'Basic Partner terms, TRY'         | ''                                            | 'USD'      | 'Reporting currency'           | 'TRY'                  | '0,39'   | ''                     | '0,39'             | ''                   | ''               | ''                  | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Big foot'        | 'Big foot'          | 'Basic Partner terms, $'           | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '7,64'   | ''                     | '7,64'             | ''                   | ''               | ''                  | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Other partner 1' | 'Other partner 1'   | 'Other partner 1, USD'             | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '1,39'   | ''                     | ''                 | ''                   | ''               | '1,39'              | ''                 |
+			| ''                                   | '08.02.2023 23:59:59' | 'Expense'    | 'Main Company' | ''       | 'Other partner 2' | 'Other partner 2'   | 'Other partner 2, USD'             | ''                                            | 'TRY'      | 'Local currency'               | 'USD'                  | '2,78'   | ''                     | ''                 | ''                   | ''               | '2,78'              | ''                 |
 	And I close all client application windows

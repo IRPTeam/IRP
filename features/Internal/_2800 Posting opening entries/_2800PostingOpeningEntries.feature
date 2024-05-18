@@ -1534,6 +1534,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And I select current line in "List" table
 		And I activate field named "AccountPayableOtherAmount" in "AccountPayableOther" table
 		And I input "50,00" text in the field named "AccountPayableOtherAmount" of "AccountPayableOther" table
+		And I select "Other partner 1" from "Partner term" drop-down list by string in "AccountPayableOther" table	
 		And I finish line editing in "AccountPayableOther" table
 		And in the table "AccountPayableOther" I click the button named "AccountPayableOtherAdd"
 		And I click choice button of the attribute named "AccountPayableOtherPartner" in "AccountPayableOther" table
@@ -1543,6 +1544,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And I select current line in "List" table
 		And I activate field named "AccountPayableOtherAmount" in "AccountPayableOther" table
 		And I input "70,00" text in the field named "AccountPayableOtherAmount" of "AccountPayableOther" table
+		And I select "Other partner 2" from "Partner term" drop-down list by string in "AccountPayableOther" table
 		And I finish line editing in "AccountPayableOther" table
 		And I move to "Account receivable (other)" tab
 		And in the table "AccountReceivableOther" I click the button named "AccountReceivableOtherAdd"
@@ -1553,6 +1555,7 @@ Scenario: _400020 create OpeningEntry (account payble other and account receivab
 		And I select current line in "List" table
 		And I activate field named "AccountReceivableOtherAmount" in "AccountReceivableOther" table
 		And I input "10,00" text in the field named "AccountReceivableOtherAmount" of "AccountReceivableOther" table
+		And I select "Other partner 2" from "Partner term" drop-down list by string in "AccountReceivableOther" table	
 		And I finish line editing in "AccountReceivableOther" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400020$$" variable

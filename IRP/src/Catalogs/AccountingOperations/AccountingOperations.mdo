@@ -1066,6 +1066,14 @@
         </code>
       </content>
     </items>
+    <items id="a45d3c59-ab7e-4dc0-89ca-9829cc97d70f">
+      <name>Document_RetailReturnReceipt</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>138</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

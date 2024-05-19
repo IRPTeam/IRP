@@ -155,6 +155,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -282,6 +283,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
 	Return QueryArray;
 EndFunction
 
@@ -870,5 +873,162 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.NetAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsReturnToVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Currency,
+		|	ItemList.TaxAmount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions),
+		|	UNDEFINED
+		|FROM
+		|	ItemList as ItemList
+		|WHERE
+		|	ItemList.IsReturnToVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	T2010S_OffsetOfAdvances.Period,
+		|	T2010S_OffsetOfAdvances.Key AS RowKey,
+		|	T2010S_OffsetOfAdvances.Currency,
+		|	T2010S_OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions),
+		|	T2010S_OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+		|WHERE
+		|	T2010S_OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function T1050T_AccountingQuantities()
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Key AS RowKey,
+		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory) AS Operation,
+		|	ItemList.Quantity
+		|INTO T1050T_AccountingQuantities
+		|FROM
+		|	ItemList AS ItemList";
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	AO = Catalogs.AccountingOperations;
+	
+	If Parameters.Operation = AO.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions Then
+		Return GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions(Parameters);
+	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory Then
+		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Parameters);
+	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions Then
+		Return GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions(Parameters);
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+Function GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.Partner, 
+	                                                      Parameters.ObjectData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+
+	// Debit
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesVendor;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsVendor;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.Partner, 
+	                                                      Parameters.ObjectData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+
+	// Debit
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	
+	// Credit
+	Credit = AccountingServer.GetT9010S_AccountsItemKey(AccountParameters, Parameters.RowData.ItemKey);
+	AccountingAnalytics.Credit = Credit.Account;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	AccountingAnalytics.Debit = Debit.IncomingAccount;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.ObjectData.Partner, 
+	                                                      Parameters.ObjectData.Agreement,
+	                                                      Parameters.ObjectData.Currency);
+	
+	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

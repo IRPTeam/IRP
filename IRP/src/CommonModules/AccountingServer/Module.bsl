@@ -239,6 +239,28 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	
+	// Sales return
+	Map.Insert(AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers, 
+		New Structure("ByRow, TransactionType", False, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
+	
+	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions, 
+		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
+	
+	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing, 
+		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
+	
+	Map.Insert(AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory, 
+		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
+	
+	// Purchase return
+	Map.Insert(AO.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions, 
+		New Structure("ByRow, TransactionType", False, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
+	
+	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory, 
+		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
+	
+	Map.Insert(AO.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions, 
+		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
 		
 	Return Map;
 EndFunction
@@ -1771,7 +1793,7 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 	EndDo;
 EndProcedure
 
-Function GetAccountingData_LandedCost(Parameters)
+Function GetAccountingData_LandedCost(Parameters, IsReverse=False)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -1958,22 +1980,22 @@ Function GetAccountingData_LandedCost(Parameters)
 	QuerySelection = QueryResults[1].Select();
 	If QuerySelection.Next() Then
 		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
+		Result.CurrencyAmountDr = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
 		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
+		Result.CurrencyAmountCr = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
 	EndIf;
 	
 	// Amount
 	QuerySelection = QueryResults[2].Select();
 	If QuerySelection.Next() Then
-		Result.Amount = QuerySelection.Amount;
+		Result.Amount = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
 	EndIf;
 	
 	// Quantity
 	QuerySelection = QueryResults[3].Select();
 	If QuerySelection.Next() Then
-		Result.QuantityCr = QuerySelection.Quantity;
-		Result.QuantityDr = QuerySelection.Quantity;
+		Result.QuantityCr = ?(IsReverse, -QuerySelection.Quantity, QuerySelection.Quantity);
+		Result.QuantityDr = ?(IsReverse, -QuerySelection.Quantity, QuerySelection.Quantity);
 	EndIf;
 	
 	Return Result;	
@@ -1999,6 +2021,10 @@ Function GetAccountingData(Parameters)
 	
 	If Parameters.Operation = Catalogs.AccountingOperations.DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset Then
 		Return GetAccountingData_LandedCost(Parameters);
+	EndIf;
+	
+	If Parameters.Operation = Catalogs.AccountingOperations.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		Return GetAccountingData_LandedCost(Parameters, True);
 	EndIf;
 	
 	Query = New Query();

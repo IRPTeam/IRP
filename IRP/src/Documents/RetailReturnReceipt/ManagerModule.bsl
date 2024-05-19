@@ -171,6 +171,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	CashInTransit = Metadata.AccumulationRegisters.CashInTransit;
 	Tables.Insert(CashInTransit.Name, CommonFunctionsServer.CreateTable(CashInTransit));
 	
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Return Tables;
 EndFunction
 
@@ -1464,5 +1465,25 @@ Function GetAccessKey(Obj) Export
 	AccessKeyMap.Insert("Store", StoreList.UnloadColumn("Store"));
 	Return AccessKeyMap;
 EndFunction
+
+#EndRegion
+
+#Region Accounting
+
+Function GetAccountingAnalytics(Parameters) Export
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
 
 #EndRegion

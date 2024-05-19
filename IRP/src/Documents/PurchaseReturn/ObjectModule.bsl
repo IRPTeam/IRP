@@ -7,6 +7,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
@@ -18,6 +20,11 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;
 	RowIDInfoPrivileged.OnWrite_RowID(ThisObject, Cancel);
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

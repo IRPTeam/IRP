@@ -3072,6 +3072,36 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
+            <name>EditAccounting</name>
+            <id>767</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>EditAccountingExtendedTooltip</name>
+              <id>768</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.EditAccounting</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
             <name>EditQuantityInBaseUnit</name>
             <id>720</id>
             <visible>true</visible>
@@ -8059,6 +8089,40 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>AccountingExtDimensions</name>
+    <title>
+      <key>en</key>
+      <value>Accounting ext dimensions</value>
+    </title>
+    <id>177</id>
+    <valueType>
+      <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>AccountingRowAnalytics</name>
+    <title>
+      <key>en</key>
+      <value>Accounting row analytics</value>
+    </title>
+    <id>178</id>
+    <valueType>
+      <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
     <id>1</id>
@@ -8335,6 +8399,28 @@
         <name>UnlockForm</name>
       </handler>
     </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>EditAccounting</name>
+    <title>
+      <key>en</key>
+      <value>Edit accounting</value>
+    </title>
+    <id>15</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.ChartOfAccounts</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>EditAccounting</name>
+      </handler>
+    </action>
+    <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+    <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

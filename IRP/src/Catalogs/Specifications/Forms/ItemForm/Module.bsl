@@ -99,8 +99,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
-	//CatSpecificationsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-
+	
 	If Not ValueIsFilled(Object.Type) Then
 		Object.Type = Enums.SpecificationType.Bundle;
 	EndIf;
@@ -115,7 +114,7 @@ EndProcedure
 
 &AtClient
 Procedure FormSetVisibilityAvailability() Export
-	
+	Return;	
 EndProcedure
 
 #EndRegion
@@ -599,5 +598,3 @@ Procedure ItemListAfterDeleteRow(Item)
 EndProcedure
 
 #EndRegion
-
-

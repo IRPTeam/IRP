@@ -10495,7 +10495,6 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("Unbundling"          , "StepItemListChangeUnitByItemKey");
 	
 	Binding.Insert("Specifications", "StepItemListChangeUnitByItemKey");
-
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListItemKey");
 EndFunction

@@ -1979,23 +1979,35 @@ Function GetAccountingData_LandedCost(Parameters, IsReverse=False)
 	// Currency amount
 	QuerySelection = QueryResults[1].Select();
 	If QuerySelection.Next() Then
+		_Amount = 0;
+		If ValueIsFilled(QuerySelection.Amount) Then
+			_Amount = QuerySelection.Amount;
+		EndIf;
 		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
+		Result.CurrencyAmountDr = ?(IsReverse, -_Amount, _Amount);
 		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
+		Result.CurrencyAmountCr = ?(IsReverse, -_Amount, _Amount);
 	EndIf;
 	
 	// Amount
 	QuerySelection = QueryResults[2].Select();
 	If QuerySelection.Next() Then
-		Result.Amount = ?(IsReverse, -QuerySelection.Amount, QuerySelection.Amount);
+		_Amount = 0;
+		If ValueIsFilled(QuerySelection.Amount) Then
+			_Amount = QuerySelection.Amount;
+		EndIf;
+		Result.Amount = ?(IsReverse, -_Amount, _Amount);
 	EndIf;
 	
 	// Quantity
 	QuerySelection = QueryResults[3].Select();
 	If QuerySelection.Next() Then
-		Result.QuantityCr = ?(IsReverse, -QuerySelection.Quantity, QuerySelection.Quantity);
-		Result.QuantityDr = ?(IsReverse, -QuerySelection.Quantity, QuerySelection.Quantity);
+		_Quantity = 0;
+		If ValueIsFilled(QuerySelection.Quantity) Then
+			_Quantity = QuerySelection.Quantity;
+		EndIf;
+		Result.QuantityCr = ?(IsReverse, -_Quantity, _Quantity);
+		Result.QuantityDr = ?(IsReverse, -_Quantity, _Quantity);
 	EndIf;
 	
 	Return Result;	

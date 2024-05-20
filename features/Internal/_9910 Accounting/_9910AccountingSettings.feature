@@ -2692,6 +2692,86 @@ Scenario: _0991091 check Sales invoice accounting movements (product)
 		Then the number of "RegisterRecords" table lines is "равно" "6"
 	And I close all client application windows
 
+
+Scenario: _0991093 check Sales return accounting movements (product)
+	And I close all client application windows
+	* Select SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button	
+		And "RegisterRecords" table contains lines
+			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'    | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'        | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                          | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '02.03.2023 15:00:00' | '9100'       | '31,67'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'    | '31,67'        | ''                    | ''                | ''                           | 'TRY'            | '5301'       | 'VAT'                         | 'SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'         | 'Business unit 1'                             | '31,67'         | ''                    |
+			| '02.03.2023 15:00:00' | '9100'       | '190,00' | ''              | 'Yes'      | 'TRY'             | 'Business unit 1'    | '190'          | ''                    | ''                | ''                           | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '190'           | 'Business unit 1'     |
+			| '02.03.2023 15:00:00' | '420.1'      | '-50,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key' | '-50'          | 'Business unit 1'     | '-1'              | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key'          | 'SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)'        | 'S/Color 1'                                   | '-50'           | 'Business unit 1'     |	
+		Then the number of "RegisterRecords" table lines is "равно" "3"
+	And I close all client application windows
+
+Scenario: _0991094 check Sales return accounting movements (service)
+	And I close all client application windows
+	* Select SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button	
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                          | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '20.05.2024 11:27:09' | '9100'       | '1' | '1,67'   | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '1,67'         | ''                    | ''                | ''                    | 'TRY'            | '5301'       | 'VAT'                         | 'SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'         | 'Business unit 2'                             | '1,67'          | ''                    |
+			| '20.05.2024 11:27:09' | '9100'       | '2' | '10,00'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '10'           | ''                    | ''                | ''                    | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '10'            | 'Business unit 2'     |
+		Then the number of "RegisterRecords" table lines is "равно" "2"
+	And I close all client application windows
+
+Scenario: _0991095 check Purchase return accounting movements (product)
+	And I close all client application windows
+	* Select PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button	
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'          | 'Operation'                                                                 | 'Extra dimension2 Cr'        | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '24.02.2023 17:01:27' | '5201'       | '183,33' | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '183,33'       | 'Partner term with vendor 1' | '2'               | 'Business unit 1'     | 'TRY'            | '3540'       | 'Item with item key'        | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'S/Color 1'                  | '183,33'        | 'Business unit 1'     |
+			| '24.02.2023 17:01:27' | '5302'       | '36,67'  | ''              | 'Yes'      | 'TRY'             | 'VAT'                       | '36,67'        | 'Business unit 1'            | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 1 (1 partner term)' | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor 1' | '36,67'         | 'Business unit 1'     |
+		Then the number of "RegisterRecords" table lines is "равно" "2"
+	And I close all client application windows
+
+Scenario: _0991096 check Purchase return accounting movements (service and product)
+	And I close all client application windows
+	* Select PR
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And I select current line in "List" table
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button	
+		And "RegisterRecords" table became equal
+			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr'                                    | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Operation'                                                                 | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
+			| '20.05.2024 11:28:01' | '5201'       | '166,67' | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '166,67'       | 'Partner term with vendor (advance payment by document)' | '1'               | ''                    | 'TRY'            | '3540'       | 'Item with item key' | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'S/Color 1'                                              | '166,67'        | ''                    |
+			| '20.05.2024 11:28:01' | '5201'       | '41,67'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '41,67'        | 'Partner term with vendor (advance payment by document)' | ''                | 'Business unit 2'     | 'TRY'            | '3250'       | ''                   | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'Own company 2'                                          | '41,67'         | 'Business unit 2'     |
+			| '20.05.2024 11:28:01' | '5302'       | '33,33'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '33,33'        | ''                                                       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '33,33'         | ''                    |
+			| '20.05.2024 11:28:01' | '5302'       | '8,33'   | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '8,33'         | 'Business unit 2'                                        | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '8,33'          | 'Business unit 2'     |
+		Then the number of "RegisterRecords" table lines is "равно" "4"
+	And I close all client application windows
+
 Scenario: _0991100 check Cash payment accounting movements
 	And I close all client application windows
 	* Select CP

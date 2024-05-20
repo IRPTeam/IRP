@@ -6837,6 +6837,7 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options.Agreement     = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.Company		  = GetCompany(Parameters);
 		Options.CurrentDate   = GetDate(Parameters);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "PaymentListChangeAgreementByPartner";
 		Chain.ChangeAgreementByPartner.Options.Add(Options);

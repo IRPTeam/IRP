@@ -234,18 +234,15 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 		DataCompositionComparisonType.NotEqual));
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
 		"Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
-	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
-	OpenSettings.FormParameters.Insert("IncludePartnerSegments", True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate", Object.Date);
-	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate", True);
-	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner", CurrentData.Partner);
-	OpenSettings.FillingData.Insert("LegalName", CurrentData.Payee);
-	OpenSettings.FillingData.Insert("Company", Object.Company);
+	OpenSettings.Insert("Partner", CurrentData.Partner);
+	OpenSettings.Insert("IncludeFilterByPartner", True);
+	OpenSettings.Insert("IncludePartnerSegments", True);
+	OpenSettings.Insert("EndOfUseDate", Object.Date);
+	OpenSettings.Insert("IncludeFilterByEndOfUseDate", True);
+	OpenSettings.Insert("LegalName", CurrentData.Payee);
+	OpenSettings.Insert("Company", Object.Company);
 
-	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, OpenSettings);
 EndProcedure
 
 Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -265,8 +262,9 @@ Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 	AdditionalParameters.Insert("IncludePartnerSegments", True);
 	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", CurrentData.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
+		
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType, AdditionalParameters);
+		
 EndProcedure
 
 #EndRegion

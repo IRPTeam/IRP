@@ -206,7 +206,10 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenSettings.Insert("EndOfUseDate", Object.Date);
 	OpenSettings.Insert("IncludeFilterByEndOfUseDate", True);
 	OpenSettings.Insert("LegalName", CurrentData.Payee);
-	OpenSettings.Insert("Company", Object.Company);
+	OpenSettings.FillingData = New Structure();
+	OpenSettings.FillingData.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FillingData.Insert("LegalName", CurrentData.Payee);
+	OpenSettings.FillingData.Insert("Company", Object.Company);
 
 	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, OpenSettings);
 EndProcedure

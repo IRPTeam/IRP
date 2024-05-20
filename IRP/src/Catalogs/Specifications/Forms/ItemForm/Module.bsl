@@ -99,6 +99,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	//CatSpecificationsServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 
 	If Not ValueIsFilled(Object.Type) Then
 		Object.Type = Enums.SpecificationType.Bundle;
@@ -110,6 +111,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.GroupMainPages.CurrentPage = Items.GroupMainPages.ChildItems[0];
 	EndIf;
 	SetVisible();
+EndProcedure
+
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	
 EndProcedure
 
 #EndRegion
@@ -131,10 +137,18 @@ EndProcedure
 
 &AtServer
 Procedure DrawForm()
-	If Object.DataSet.Count() Then
-		RestoreData();
+	If Object.Type = Enums.SpecificationType.BundleByItemKey Then
+		Items.GroupAddNewPage.Visible = False;
+		Items.GroupItemList.Visible = True;
 	Else
-		CreatePage();
+		Items.GroupAddNewPage.Visible = True;
+		Items.GroupItemList.Visible = False;
+		
+		If Object.DataSet.Count() Then
+			RestoreData();
+		Else
+			CreatePage();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -459,6 +473,7 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	Object.DataSet.Clear();
 	Object.DataQuantity.Clear();
+	Object.ItemList.Clear();
 	Object.ItemBundle = Undefined;
 	SavedDataStructure = GetSavedData();
 	For Each CommAnd In SavedDataStructure.Commands Do
@@ -525,3 +540,64 @@ Procedure InternalCommandActionWithServerContextAtServer(CommandName)
 EndProcedure
 
 #EndRegion
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	CatSpecificationsClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
+	CatSpecificationsClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
+	CatSpecificationsClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	CatSpecificationsClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+EndProcedure
+#EndRegion
+
+#Region QUANTITY
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	CatSpecificationsClient.ItemListQuantityOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+&AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	CatSpecificationsClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	CatSpecificationsClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	CatSpecificationsClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);	
+EndProcedure
+
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	CatSpecificationsClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+

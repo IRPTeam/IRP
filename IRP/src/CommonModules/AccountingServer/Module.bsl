@@ -389,9 +389,6 @@ Function ExtractValueByType(ObjectData, RowData, ArrayOfTypes, AdditionalAnalyti
 EndFunction
 
 Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
-	If Not ValueIsFilled(AnalyticRow.AccountDebit) Or Not ValueIsFilled(AnalyticRow.AccountCredit) Then
-		Return GetAccountingDataResult();
-	EndIf;
 	Parameters = New Structure();
 	Parameters.Insert("Recorder" , BasisRef);
 	Parameters.Insert("RowKey"   , AnalyticRow.Key);
@@ -403,11 +400,19 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Data = GetAccountingData(Parameters);
 	
 	Result = GetAccountingDataResult();
-	
+
 	If Data = Undefined Then
 		Return Result;
 	EndIf;
 	
+	If Data.Property("Amount") Then
+		Result.Amount = Data.Amount;
+	EndIf;
+	
+	If  Not ValueIsFilled(AnalyticRow.AccountDebit) Or  Not ValueIsFilled(AnalyticRow.AccountCredit) Then
+		Return Result;
+	EndIf;
+			
 	If Data.Property("CurrencyDr") Then
 		Result.CurrencyDr = Data.CurrencyDr;
 	EndIf;
@@ -432,9 +437,6 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 		Result.QuantityCr = Data.QuantityCr;
 	EndIf;
 
-	If Data.Property("Amount") Then
-		Result.Amount = Data.Amount;
-	EndIf;
 	Return Result;	
 EndFunction
 
@@ -2591,7 +2593,7 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 			Continue;
 		EndIf;
 		
-		DataByAnalytics = AccountingServer.GetDataByAccountingAnalytics(BasisDoc, Row);
+		DataByAnalytics = GetDataByAccountingAnalytics(BasisDoc, Row);
 		
 		If Not ValueIsFilled(DataByAnalytics.Amount) Then
 			Continue;

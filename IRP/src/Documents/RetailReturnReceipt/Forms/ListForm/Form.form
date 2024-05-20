@@ -52,6 +52,59 @@
     <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
+      <name>IsHaveJE</name>
+      <id>61</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.IsHaveJE</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+        <name>IsHaveJEExtendedTooltip</name>
+        <id>63</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>IsHaveJEContextMenu</name>
+        <id>62</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>StdPicture.DebitCredit</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>Number</name>
       <id>16</id>
       <visible>true</visible>
@@ -1046,13 +1099,22 @@
 	END AS Store,
 	RetailReturnReceipt.StatusType,
 	DocumentFiscalStatus.Status,
-	DocumentFiscalStatus.CheckNumber
+	DocumentFiscalStatus.CheckNumber,
+	MAX(JE.LedgerType) AS LedgerType,
+	MAX(CASE
+		WHEN NOT JE.Ref IS NULL
+			THEN 0
+		ELSE 1
+	END) AS IsHaveJE
 FROM
 	Document.RetailReturnReceipt AS RetailReturnReceipt
 		LEFT JOIN Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
 		ON RetailReturnReceiptItemList.Ref = RetailReturnReceipt.Ref
 		LEFT JOIN InformationRegister.DocumentFiscalStatus AS DocumentFiscalStatus
 		ON DocumentFiscalStatus.Document = RetailReturnReceipt.Ref
+		LEFT JOIN Document.JournalEntry AS JE
+		ON RetailReturnReceipt.Ref = CAST(JE.Basis AS Document.RetailReturnReceipt)
+		AND NOT JE.DeletionMark
 GROUP BY
 	RetailReturnReceipt.Ref,
 	RetailReturnReceipt.DeletionMark,
@@ -1091,10 +1153,6 @@ GROUP BY
             </content>
           </localValue>
         </title>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>TransactionType</dataPath>
-        <field>TransactionType</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Ref</dataPath>
@@ -1173,6 +1231,26 @@ GROUP BY
         <field>CheckNumber</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>StatusType</dataPath>
+        <field>StatusType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>LedgerType</dataPath>
+        <field>LedgerType</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>IsHaveJE</dataPath>
+        <field>IsHaveJE</field>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Is have JE</value>
+            </content>
+          </localValue>
+        </title>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>UsePartnerTransactions</dataPath>
         <field>UsePartnerTransactions</field>
       </fields>
@@ -1201,8 +1279,8 @@ GROUP BY
         <field>SpecialOffers</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>TaxList</dataPath>
-        <field>TaxList</field>
+        <dataPath>DELETE_TaxList</dataPath>
+        <field>DELETE_TaxList</field>
       </fields>
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>Currencies</dataPath>
@@ -1243,6 +1321,26 @@ GROUP BY
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>SourceNodeID</dataPath>
         <field>SourceNodeID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Editor</dataPath>
+        <field>Editor</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>UniqueID</dataPath>
+        <field>UniqueID</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ModifyDate</dataPath>
+        <field>ModifyDate</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>ManualMovementsEdit</dataPath>
+        <field>ManualMovementsEdit</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>CreateDate</dataPath>
+        <field>CreateDate</field>
       </fields>
     </extInfo>
   </attributes>

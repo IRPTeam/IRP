@@ -1411,7 +1411,7 @@ Function GetAccountingAnalytics(Parameters) Export
 	
 	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then 
 		
-		Return GetAnalytics_VATOutgoing(Parameters); // Revenues - Tax outgoing
+		Return GetAnalytics_VATIncoming(Parameters); // Revenues - Tax outgoing
 	
 	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions
 		Or Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation  Then
@@ -1457,7 +1457,7 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 EndFunction
 
 // Revenues - Taxes outgoing
-Function GetAnalytics_VATOutgoing(Parameters)
+Function GetAnalytics_VATIncoming(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		

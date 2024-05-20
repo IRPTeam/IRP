@@ -36,3 +36,34 @@ Procedure Write(Name, Logs, Level = 0, Step = "", Ref = Undefined) Export
 	
 	WriteLogEvent(Name, EventLevel, , Ref, _Logs);
 EndProcedure
+
+// Get table presentation.
+// 
+// Parameters:
+//  Table - ValueTable -
+// 
+// Returns:
+//  String
+Function GetTablePresentation(Table) Export
+
+	Array = New Array; // Array Of String
+
+	Header = New Array; // Array Of String
+	Cutter = New Array; // Array Of String
+	For Each Column In Table.Columns Do
+		Header.Add(Column.Name);
+		Cutter.Add("--");
+	EndDo;
+	
+	Array.Add(StrConcat(Header, "|"));
+	Array.Add(StrConcat(Cutter, "|"));
+	
+	For Each Row In Table Do
+		Rows = New Array; // Array Of String
+		For Each Column In Table.Columns Do
+			Rows.Add(String(Row[Column.Name]));
+		EndDo;
+		Array.Add(StrConcat(Rows, "|"));
+	EndDo;
+	Return StrConcat(Array, Chars.LF);
+EndFunction

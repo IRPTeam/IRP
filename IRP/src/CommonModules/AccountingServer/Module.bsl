@@ -2808,4 +2808,32 @@ EndFunction
 
 #EndRegion
 
+#Region BackgroundJob
 
+// Fix document problems as job.
+// 
+// Parameters:
+//  Settings - See FixDocumentProblemsServer.GetDocumentListSettings
+//  ResultInfo - Structure - Result info
+Procedure FixDocumentProblemsAsJob(Settings, ResultInfo) Export
+	ProcedurePath = "AccountingServer.CheckDocumentArray_AccountingAnalytics";
+
+	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+	                 
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocList, ProcedurePath);
+    JobList = BackgroundJobAPIServer.GetJobList();
+	BackgroundJobAPIServer.FillJobList(JobDataSettings, JobList);
+	BackgroundJobAPIServer.RunJobsFromServer(JobDataSettings, JobList);           
+
+	For Each JobRow In JobList Do
+		If Not JobRow.Status = Enums.JobStatus.Completed Then
+			Raise "One job is failed";
+		EndIf; 
+	EndDo;     
+
+	For Each JobRow In JobList Do      
+		RegInfoArray = CommonFunctionsServer.GetFromCache(JobRow.DataAddress);
+	EndDo; 
+EndProcedure
+
+#EndRegion

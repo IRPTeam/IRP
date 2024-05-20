@@ -353,6 +353,56 @@
       <textEdit>true</textEdit>
     </extInfo>
   </items>
+  <items xsi:type="form:FormField">
+    <name>SourceOfOrigin</name>
+    <id>114</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.SourceOfOrigin</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>SourceOfOriginExtendedTooltip</name>
+      <id>116</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>SourceOfOriginContextMenu</name>
+      <id>115</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
+  </items>
   <items xsi:type="form:FormGroup">
     <name>GroupConsignorInfo</name>
     <id>44</id>
@@ -1431,6 +1481,10 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.EachSerialLotNumberIsUnique</segments>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>EachSerialLotNumberIsUniqueOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>EachSerialLotNumberIsUniqueExtendedTooltip</name>
         <id>32</id>

@@ -258,6 +258,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e6e70b41-8ada-489d-b7cc-3be89fd64c3f">
+    <name>SourceOfOrigin</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origin</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SourceOfOrigins</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="ef605c80-fa78-4080-af6f-a89ca3452c86">
     <producedTypes>
       <objectType typeId="a069c6dd-b2ef-4730-94be-aa7292aaf35a" valueTypeId="d08be586-09e2-4600-baf1-9b7864cb7368"/>

@@ -54,6 +54,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.InheritConsignorsInfo.Visible = Form.ConsignorInfoMode = "Inherit";
 	
 	Form.Items.GroupRelatedSerialLotNumbers.Visible = Object.HasRelatedSerialLotNumbers;
+	Form.Items.SourceOfOrigin.Visible = Object.EachSerialLotNumberIsUnique;
 EndProcedure
 
 &AtServer
@@ -116,6 +117,11 @@ EndFunction
 &AtClient
 Procedure HasRelatedSerialLotNumbersOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EachSerialLotNumberIsUniqueOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);	
 EndProcedure
 
 #EndRegion

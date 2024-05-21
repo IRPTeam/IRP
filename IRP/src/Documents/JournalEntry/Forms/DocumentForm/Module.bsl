@@ -50,6 +50,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
 	Form.Items.Basis.Visible = Not Object.UserDefined;
+	Form.Items.RegularOperations.Visible = Object.UserDefined;
 EndProcedure
 
 &AtClient
@@ -251,5 +252,24 @@ Function GetProcessingModule() Export
 	Str.Insert("Server", DocJournalEntryServer);
 	Return Str;
 EndFunction
+
+&AtClient
+Procedure ProfitLostOffset(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	ProfitLostOffsetAtServer();
+	Write();
+EndProcedure
+
+&AtServer
+Procedure ProfitLostOffsetAtServer()
+	Object.RegisterRecords.Basic.Clear();
+	DataTable = Catalogs.LedgerTypes.ProfitLostOffset(Object.Company, Object.LedgerType, Object.Ref, Object.Date);
+	AccountingServer.SetDataRegisterRecords(DataTable, Object.LedgerType, Object.RegisterRecords.Basic);
+	For Each Record In Object.RegisterRecords.Basic Do
+		Record.Active = Not Object.DeletionMark;
+	EndDo;
+EndProcedure
 
 #EndRegion

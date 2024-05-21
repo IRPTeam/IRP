@@ -2387,6 +2387,76 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
+     <items xsi:type="form:FormGroup">
+      <name>RegularOperations</name>
+      <id>178</id>
+      <items xsi:type="form:Button">
+       <name>RegisterRecordsProfitLostOffset</name>
+       <id>180</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <extendedTooltip>
+        <name>RegisterRecordsProfitLostOffsetExtendedTooltip</name>
+        <id>181</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <commandName>Form.Command.ProfitLostOffset</commandName>
+       <representation>Auto</representation>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <placementArea>UserCmds</placementArea>
+       <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <title>
+       <key>en</key>
+       <value>Regular operations</value>
+      </title>
+      <title>
+       <key>ru</key>
+       <value>Регламентные операции</value>
+      </title>
+      <title>
+       <key>tr</key>
+       <value>Regular operations</value>
+      </title>
+      <extendedTooltip>
+       <name>RegularOperationsExtendedTooltip</name>
+       <id>179</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <type>Popup</type>
+      <extInfo xsi:type="form:PopupGroupExtInfo">
+       <representation>Auto</representation>
+      </extInfo>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -3011,6 +3081,31 @@
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>ProfitLostOffset</name>
+  <title>
+   <key>en</key>
+   <value>Profit\Lost offset</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Закрытие прибылей/убытков</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Profit\Lost offset</value>
+  </title>
+  <id>2</id>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>ProfitLostOffset</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

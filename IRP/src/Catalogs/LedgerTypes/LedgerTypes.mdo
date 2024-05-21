@@ -223,6 +223,124 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="8b987351-c5e3-4783-a867-8c08bfbb699d">
+  <producedTypes>
+   <objectType typeId="c17bcfaa-1631-479e-9754-ad02476b9486" valueTypeId="4cf066b2-10c0-4e27-8e79-f2d6007c23bc"/>
+   <rowType typeId="d343d1d6-c610-445e-81c3-e942a8fb2b17" valueTypeId="90fe6f52-f03d-4c48-b5e4-bb2896a76945"/>
+  </producedTypes>
+  <name>PLOffset</name>
+  <synonym>
+   <key>en</key>
+   <value>P&amp;L offset</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Закрытие счетов прибылей/убытков</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>P&amp;L offset</value>
+  </synonym>
+  <attributes uuid="8ae69f15-a9a7-49db-83ad-0e6b9e68d6d4">
+   <name>FromAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>From account</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Отправитель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çıkan kasa/banka</value>
+   </synonym>
+   <type>
+    <types>ChartOfAccountsRef.Basic</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.LedgerTypeVariant</name>
+    <field>Catalog.LedgerTypes.Attribute.LedgerTypeVariant</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1e671dc0-df49-435b-b019-6afab15a572e">
+   <name>BalanceType</name>
+   <synonym>
+    <key>en</key>
+    <value>Balance type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид остатка</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Balance type</value>
+   </synonym>
+   <type>
+    <types>EnumRef.AccountingAnalyticTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ecefa0c3-80b2-4d16-a6b6-a090fc42deff">
+   <name>ToAccount</name>
+   <synonym>
+    <key>en</key>
+    <value>To account</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Получатель</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Giren kasa/banka</value>
+   </synonym>
+   <type>
+    <types>ChartOfAccountsRef.Basic</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.LedgerTypeVariant</name>
+    <field>Catalog.LedgerTypes.Attribute.LedgerTypeVariant</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="5c6879e9-051c-4408-a2a8-6254ae137d0f">
+   <name>BySubAccounts</name>
+   <synonym>
+    <key>en</key>
+    <value>By sub accounts</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>По субсчетам</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>By sub accounts</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <forms uuid="691b8cd4-a6b7-4669-b207-05be9ee72b6b">
   <name>ItemForm</name>
   <synonym>

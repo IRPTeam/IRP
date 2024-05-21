@@ -135,6 +135,7 @@ Scenario: _099100 preparation
 		When Create document CustomersAdvancesClosing objects (test data base)
 		When Create document VendorsAdvancesClosing objects (test data base)
 		When Create document ForeignCurrencyRevaluation objects (test data base)
+		When Create document SI, SR, PI, PR objects (accounting, return service)
 		When Create chart of characteristic types AddAttributeAndProperty objects (test data base)
 		When Create chart of characteristic types IDInfoTypes objects (test data base)
 		When Create chart of characteristic types CustomUserSettings objects (test data base)
@@ -2719,7 +2720,7 @@ Scenario: _0991094 check Sales return accounting movements (service)
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '12'      |
+			| '112'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check JE
@@ -2727,8 +2728,8 @@ Scenario: _0991094 check Sales return accounting movements (service)
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                          | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '20.05.2024 11:27:09' | '9100'       | '1' | '1,67'   | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '1,67'         | ''                    | ''                | ''                    | 'TRY'            | '5301'       | 'VAT'                         | 'SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'         | 'Business unit 2'                             | '1,67'          | ''                    |
-			| '20.05.2024 11:27:09' | '9100'       | '2' | '10,00'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '10'           | ''                    | ''                | ''                    | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '10'            | 'Business unit 2'     |
+			| '20.03.2024 11:27:09' | '9100'       | '1' | '1,67'   | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '1,67'         | ''                    | ''                | ''                    | 'TRY'            | '5301'       | 'VAT'                         | 'SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'         | 'Business unit 2'                             | '1,67'          | ''                    |
+			| '20.03.2024 11:27:09' | '9100'       | '2' | '10,00'  | ''              | 'Yes'      | 'TRY'             | 'Business unit 2' | '10'           | ''                    | ''                | ''                    | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '10'            | 'Business unit 2'     |
 		Then the number of "RegisterRecords" table lines is "равно" "2"
 	And I close all client application windows
 
@@ -2757,7 +2758,7 @@ Scenario: _0991096 check Purchase return accounting movements (service and produ
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '4'      |
+			| '112'    |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check JE
@@ -2765,10 +2766,10 @@ Scenario: _0991096 check Purchase return accounting movements (service and produ
 		And I click "Save" button	
 		And "RegisterRecords" table became equal
 			| 'Period'              | 'Account Dr' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr'                                    | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'   | 'Operation'                                                                 | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '20.05.2024 11:28:01' | '5201'       | '166,67' | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '166,67'       | 'Partner term with vendor (advance payment by document)' | '1'               | ''                    | 'TRY'            | '3540'       | 'Item with item key' | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'S/Color 1'                                              | '166,67'        | ''                    |
-			| '20.05.2024 11:28:01' | '5201'       | '41,67'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '41,67'        | 'Partner term with vendor (advance payment by document)' | ''                | 'Business unit 2'     | 'TRY'            | '3250'       | ''                   | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'Own company 2'                                          | '41,67'         | 'Business unit 2'     |
-			| '20.05.2024 11:28:01' | '5302'       | '33,33'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '33,33'        | ''                                                       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '33,33'         | ''                    |
-			| '20.05.2024 11:28:01' | '5302'       | '8,33'   | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '8,33'         | 'Business unit 2'                                        | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '8,33'          | 'Business unit 2'     |
+			| '20.03.2024 11:28:01' | '5201'       | '166,67' | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '166,67'       | 'Partner term with vendor (advance payment by document)' | '1'               | ''                    | 'TRY'            | '3540'       | 'Item with item key' | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'S/Color 1'                                              | '166,67'        | ''                    |
+			| '20.03.2024 11:28:01' | '5201'       | '41,67'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 6'        | '41,67'        | 'Partner term with vendor (advance payment by document)' | ''                | 'Business unit 2'     | 'TRY'            | '3250'       | ''                   | 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)' | 'Own company 2'                                          | '41,67'         | 'Business unit 2'     |
+			| '20.03.2024 11:28:01' | '5302'       | '33,33'  | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '33,33'        | ''                                                       | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '33,33'         | ''                    |
+			| '20.03.2024 11:28:01' | '5302'       | '8,33'   | ''              | 'Yes'      | 'TRY'             | 'VAT'             | '8,33'         | 'Business unit 2'                                        | ''                | ''                    | 'TRY'            | '5201'       | 'Vendor 6'           | 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'  | 'Partner term with vendor (advance payment by document)' | '8,33'          | 'Business unit 2'     |
 		Then the number of "RegisterRecords" table lines is "равно" "4"
 	And I close all client application windows
 

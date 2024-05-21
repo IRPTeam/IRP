@@ -2317,7 +2317,7 @@ Function IsAccountingDataRegister(RegisterName) Export
 	Return Upper(RegisterName) = Upper(Metadata.AccountingRegisters.Basic.FullName());
 EndFunction
 
-Function GetExtDimType_ByNumber(ExtDimNumber, Account);
+Function GetExtDimType_ByNumber(ExtDimNumber, Account) Export
 	If Account.ExtDimensionTypes.Count() < ExtDimNumber Then
 		Return Undefined;
 	EndIf;
@@ -2325,7 +2325,18 @@ Function GetExtDimType_ByNumber(ExtDimNumber, Account);
 	Return Account.ExtDimensionTypes[ExtDimNumber - 1].ExtDimensionType;
 EndFunction
 
-Function GetExtDimValue_ByType(ExtDimType, ExtDimensionRows);
+Function GetExtDimNumber_ByType(ExtDimType, Account) Export
+	Number = 1;
+	For Each Row In Account.ExtDimensionTypes Do
+		If Row.ExtDimensionType = ExtDimType Then
+			Return Number;
+		EndIf;
+		Number = Number + 1;
+	EndDo;
+	Return Undefined;
+EndFunction
+
+Function GetExtDimValue_ByType(ExtDimType, ExtDimensionRows)
 	If Not ValueIsFilled(ExtDimType) Then
 		Return Undefined;
 	EndIf;
@@ -2350,30 +2361,37 @@ Procedure SetExtDimValue_ByNumberCr(ExtDimNumber, Record, Value)
 		Return;
 	EndIf;
 	
-	ExtDimType = GetExtDimType_ByNumber(ExtDimNumber, Record.AccountCr);
+	If TypeOf(Record) = Type("AccountingRegisterRecord.Basic") Then
+		ExtDimType = GetExtDimType_ByNumber(ExtDimNumber, Record.AccountCr);
 	
-	If Not ValueIsFilled(ExtDimType) Then
-		Return;
-	EndIf;
+		If Not ValueIsFilled(ExtDimType) Then
+			Return;
+		EndIf;
 	
-	Record.ExtDimensionsCr[ExtDimType] = Value;
+		Record.ExtDimensionsCr[ExtDimType] = Value;
+	Else
+		Record["ExtDimensionCr" + String(ExtDimNumber)] = Value;
+	EndIf;	
 EndProcedure
 
 Procedure SetExtDimValue_ByNumberDr(ExtDimNumber, Record, Value)
 	If Not ValueIsFilled(Value) Then
 		Return;
 	EndIf;
+	If TypeOf(Record) = Type("AccountingRegisterRecord.Basic") Then	
+		ExtDimType = GetExtDimType_ByNumber(ExtDimNumber, Record.AccountDr);
 	
-	ExtDimType = GetExtDimType_ByNumber(ExtDimNumber, Record.AccountDr);
+		If Not ValueIsFilled(ExtDimType) Then
+			Return;
+		EndIf;
 	
-	If Not ValueIsFilled(ExtDimType) Then
-		Return;
+		Record.ExtDimensionsDr[ExtDimType] = Value;
+	Else
+		Record["ExtDimensionDr" + String(ExtDimNumber)] = Value;
 	EndIf;
-	
-	Record.ExtDimensionsDr[ExtDimType] = Value;
 EndProcedure
 
-Function CreateAccountingDataTable()
+Function CreateAccountingDataTable() Export
 	RegMetadata = Metadata.AccountingRegisters.Basic;
 	ExtDimMetadata = Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes;
 	ExtDimType = New TypeDescription("ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes");
@@ -2500,17 +2518,7 @@ Function RegisterRecords_AccountingAnalytics(Doc)
 	Return RegisterRecords;
 EndFunction
 
-Procedure SetDataRegisterRecords(DataTable, LedgerType, Recorder = Undefined, RecordSet = Undefined) Export
-	If Recorder = Undefined And RecordSet = Undefined Then
-		Raise "Recorder = Undefined And RecordSet = Undefined";
-	EndIf;
-	WriteRecordSet = False;
-	If RecordSet = Undefined Then
-		RecordSet = AccountingRegisters.Basic.CreateRecordSet();
-		RecordSet.Filter.Recorder.Set(Recorder);
-		WriteRecordSet = True;
-	EndIf;
-	
+Procedure SetDataRegisterRecords(DataTable, LedgerType, RecordSet) Export
 	For Each Row In DataTable Do
 		If Row.LedgerType <> LedgerType Then
 			Continue;
@@ -2527,10 +2535,6 @@ Procedure SetDataRegisterRecords(DataTable, LedgerType, Recorder = Undefined, Re
 		SetExtDimValue_ByNumberCr(2, Record, Row.ExtDimCrValue2);
 		SetExtDimValue_ByNumberCr(3, Record, Row.ExtDimCrValue3);
 	EndDo;
-	
-	If WriteRecordSet Then
-		RecordSet.Write();
-	EndIf;
 EndProcedure
 
 Function GetCurrentDataRegisterRecords(BasisDoc, RegisterName) Export

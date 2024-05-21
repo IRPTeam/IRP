@@ -2045,3 +2045,102 @@ Scenario: set True value to the constant Use source of origin
 		And I set "Use" checkbox in "FunctionalOptions" table
 		And I click "Save" button
 		And I close current window
+
+
+Scenario: check filter by transaction type in CR/BR 
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Main Company'     |
+		And I select current line in "List" table
+		And I select "Payment from customer" exact value from the drop-down list named "TransactionType"		
+	* Check filter for partner term (transaction type)
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+		And I select current line in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
+		And I remove checkbox named "FilterCompanyUse"
+		And "List" table became equal
+			| 'Description'      | 'Type'     |
+			| 'Partner term NDB' | 'Customer' |
+		And I close current window
+	* Select transaction type Return from vendor
+		And I finish line editing in "PaymentList" table
+		And I select "Return from vendor" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
+	* Add second line and check partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'            |
+			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
+	* Select transaction type Other partner
+		And I select "Other partner" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term' |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+
+Scenario: check filter by transaction type in CP/BP 
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'      |
+			| 'Main Company'     |
+		And I select current line in "List" table
+		And I select "Payment to the vendor" exact value from the drop-down list named "TransactionType"		
+	* Check filter for partner term (transaction type)
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term'            |
+			| 'NDB'     | 'Company NDB' | 'Partner term vendor NDB' |
+		And I select current line in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
+		And I remove checkbox named "FilterCompanyUse"
+		And "List" table became equal
+			| 'Description'             | 'Type'     |
+			| 'Partner term vendor NDB' | 'Vendor'   |
+		And I close current window
+	* Select transaction type Return to customer
+		And I finish line editing in "PaymentList" table
+		And I select "Return to customer" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	* Add second line and check partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	* Select transaction type Other partner
+		And I select "Other partner" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" by string from the drop-down list named "PaymentListPartner" in "PaymentList" table
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term' |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
+			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |

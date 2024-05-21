@@ -8823,9 +8823,74 @@ Scenario: _0154191 check filter by Company when select partner term
 		Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
 
-Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
+Scenario: _0154192 check auto filling partner term in the CR (filter by transaction type)
 	And I close all client application windows
 	When Create information register Agreements records (NDB, Second Company)
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	And I close all client application windows
+
+Scenario: _0154193 check auto filling partner term in the BR (filter by transaction type)
+	And I close all client application windows
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	* Select transaction type Payment from customer by POS
+		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows	
+				
+Scenario: _0154194 check auto filling partner term in the CP (filter by transaction type)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CP/BP 
+	And I close all client application windows
+
+Scenario: _0154195 check auto filling partner term in the BP (filter by transaction type)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CP/BP 
+	* Select transaction type Payment from customer by POS
+		And I select "Return to customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows
+
+Scenario: _0154196 check auto filling partner term in the BP (filter by transaction type)
+	And I close all client application windows
+	When Create information register Agreements records (NDB, Second Company)
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	* Select transaction type Payment from customer by POS
+		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows
+
+Scenario: _0154197 check auto filling partner term in the CR (filter by Company)
+	And I close all client application windows
 	* Open CR creation form
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
@@ -8842,7 +8907,7 @@ Scenario: _0154192 check auto filling partner term in the CR (filter by Company)
 			| 'NDB'     | 'Partner term Second Company' |
 	And I close all client application windows
 	
-Scenario: _0154193 check auto filling partner term in the CP (filter by Company)
+Scenario: _0154198 check auto filling partner term in the CP (filter by Company)
 	And I close all client application windows
 	* Open CP creation form
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -8856,11 +8921,11 @@ Scenario: _0154193 check auto filling partner term in the CP (filter by Company)
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner' | 'Partner term'                |
-			| 'NDB'     | 'Partner term Second Company' |
+			| 'Partner' | 'Partner term'                       |
+			| 'NDB'     | 'Partner term Second Company Vendor' |
 	And I close all client application windows	
 
-Scenario: _0154194 check auto filling partner term in the BP (filter by Company)
+Scenario: _0154199 check auto filling partner term in the BP (filter by Company)
 	And I close all client application windows
 	* Open BP creation form
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
@@ -8874,11 +8939,11 @@ Scenario: _0154194 check auto filling partner term in the BP (filter by Company)
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner' | 'Partner term'                |
-			| 'NDB'     | 'Partner term Second Company' |
+			| 'Partner' | 'Partner term'                       |
+			| 'NDB'     | 'Partner term Second Company Vendor' |
 	And I close all client application windows		
 				
-Scenario: _0154195 check auto filling partner term in the BR (filter by Company)
+Scenario: _0154200 check auto filling partner term in the BR (filter by Company)
 	And I close all client application windows
 	* Open BR creation form
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"

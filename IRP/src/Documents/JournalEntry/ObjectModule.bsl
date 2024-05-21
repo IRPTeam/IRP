@@ -5,6 +5,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If ValueIsFilled(ThisObject.Basis) Then
 		ThisObject.Date = ThisObject.Basis.Date;
+		ThisObject.Branch = ThisObject.Basis.Branch;
 	EndIf;
 	
 	If Not ThisObject.DeletionMark And Not ThisObject.UserDefined Then

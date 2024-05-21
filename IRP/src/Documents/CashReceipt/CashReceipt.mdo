@@ -459,6 +459,10 @@
         <name>Filter.LegalName</name>
         <field>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.CashReceipt.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

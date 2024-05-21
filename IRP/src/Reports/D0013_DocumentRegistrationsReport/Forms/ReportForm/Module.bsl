@@ -435,6 +435,7 @@ Procedure SetConditionalAppearance(ReportBuilder)
 		Appearance.Area.Add("RecordType", "RecordType", AppearanceAreaType.Field);
 		Filter = Appearance.Filter.Add("RecordType");
 		Filter.Value = AccumulationRecordType.Expense;
+		Filter.Use = True;
 		Appearance.Appearance.TextColor.Value = WebColors.Red;
 		Appearance.Appearance.TextColor.Use = True;
 		
@@ -442,6 +443,7 @@ Procedure SetConditionalAppearance(ReportBuilder)
 		Appearance.Use = True;
 		Filter = Appearance.Filter.Add("RecordType");
 		Filter.Value = AccumulationRecordType.Receipt;
+		Filter.Use = True;
 		Appearance.Area.Add("RecordType");
 		Appearance.Appearance.TextColor.Value = WebColors.Green;
 		Appearance.Appearance.TextColor.Use = True;

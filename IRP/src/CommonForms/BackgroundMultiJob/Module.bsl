@@ -1,6 +1,24 @@
 
 // @strict-types
 
+// Before load data from settings at server.
+// 
+// Parameters:
+//  Settings - Map - Settings:
+//  * MaxJobStream - Number -
+//  * UpdatePause - Number -
+&AtServer
+Procedure BeforeLoadDataFromSettingsAtServer(Settings)
+	If Not Settings.Get("UpdatePause") = Undefined Then
+		//@skip-check statement-type-change
+		UpdatePause = Settings["UpdatePause"];
+	EndIf;	
+	If Not Settings.Get("MaxJobStream") = Undefined Then
+		//@skip-check statement-type-change
+		MaxJobStream = Settings["MaxJobStream"];
+	EndIf;	
+EndProcedure
+
 &AtClient
 Procedure DoNotCloseForm(Command)
 	DoNotCloseForm = Not DoNotCloseForm;

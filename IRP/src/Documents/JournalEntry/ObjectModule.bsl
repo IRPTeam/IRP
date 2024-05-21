@@ -25,7 +25,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 			DataTable = AccountingServer.GetNewDataRegisterRecords(ThisObject.Basis, _AccountingRowAnalytics, _AccountingExtDimensions);
 		EndIf;
 		
-		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, Undefined, ThisObject.RegisterRecords.Basic);
+		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, ThisObject.RegisterRecords.Basic);
 	EndIf;
 EndProcedure
 

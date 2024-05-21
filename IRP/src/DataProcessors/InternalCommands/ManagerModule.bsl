@@ -442,6 +442,8 @@ Procedure CloneValueFromFirstRow_RunCommandAction(Targets, Form, CommandFormItem
 	EnableColumns.Add("RevenueType");
 	EnableColumns.Add("ReturnReason");
 	EnableColumns.Add("Project");
+	EnableColumns.Add("PaymentPeriod");
+	EnableColumns.Add("CalculationType");
 	
 	ColumnName = StrSplit(TableItem.CurrentItem.DataPath, ".")[2];
 	If EnableColumns.Find(ColumnName) = Undefined Then

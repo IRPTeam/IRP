@@ -201,22 +201,12 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 		Return;
 	EndIf;
 
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
-	OpenSettings.Insert("Partner", CurrentData.Partner);
-	OpenSettings.Insert("IncludeFilterByPartner", True);
-	OpenSettings.Insert("IncludePartnerSegments", True);
-	OpenSettings.Insert("EndOfUseDate", Object.Date);
-	OpenSettings.Insert("IncludeFilterByEndOfUseDate", True);
-	OpenSettings.Insert("LegalName", CurrentData.Payer);
-	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner", CurrentData.Partner);
-	OpenSettings.FillingData.Insert("LegalName", CurrentData.Payer);
-	OpenSettings.FillingData.Insert("Company", Object.Company);
+	Parameters = New Structure();
+	Parameters.Insert("Partner"  , CurrentData.Partner);
+	Parameters.Insert("LegalName", CurrentData.Payer);
+	Parameters.Insert("Company"  , Object.Company);
 
-	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, OpenSettings);
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, Object.TransactionType, Parameters);
 EndProcedure
 
 Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
@@ -225,17 +215,10 @@ Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 		Return;
 	EndIf;
 
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
-	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
-	AdditionalParameters.Insert("IncludeFilterByPartner", True);
-	AdditionalParameters.Insert("IncludePartnerSegments", True);
-	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
-	AdditionalParameters.Insert("Partner", CurrentData.Partner);
-	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType, AdditionalParameters);
+	Parameters = New Structure();
+	Parameters.Insert("Partner", CurrentData.Partner);
 	
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, Object.TransactionType, Parameters);
 EndProcedure
 
 #EndRegion

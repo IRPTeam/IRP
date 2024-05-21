@@ -1500,23 +1500,27 @@ Function BindTransactionType(Parameters)
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,
-		|StepClearByTransactionTypeBankPayment, 
+		|StepClearByTransactionTypeBankPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("BankReceipt",
 		"StepChangeTransitAccountByAccount,
 		|StepClearByTransactionTypeBankReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashPayment", 
 		"StepClearByTransactionTypeCashPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeCashAccountByTransactionType,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");

@@ -318,50 +318,64 @@ EndFunction
 	
 Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map = New Map();
-	Map.Insert(Enums.PurchaseTransactionTypes.Purchase             , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.PurchaseTransactionTypes.ReceiptFromConsignor , Enums.AgreementTypes.Consignor);
+	Map.Insert(Enums.PurchaseTransactionTypes.Purchase             , "Vendor");
+	Map.Insert(Enums.PurchaseTransactionTypes.ReceiptFromConsignor , "Consignor");
 	
-	Map.Insert(Enums.SalesTransactionTypes.Sales                , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent , Enums.AgreementTypes.TradeAgent);
-	Map.Insert(Enums.SalesTransactionTypes.RetailSales          , Enums.AgreementTypes.Customer);
+	Map.Insert(Enums.SalesTransactionTypes.Sales                , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
+	Map.Insert(Enums.SalesTransactionTypes.RetailSales          , "Customer");
 	
-	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent , Enums.AgreementTypes.TradeAgent);
+	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , "Customer");
+	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 
-	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToVendor    , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToConsignor , Enums.AgreementTypes.Consignor);
+	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToVendor    , "Vendor");
+	Map.Insert(Enums.PurchaseReturnTransactionTypes.ReturnToConsignor , "Consignor");
 	
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.Sales                , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor       , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent , Enums.AgreementTypes.TradeAgent);
-	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor    , Enums.AgreementTypes.Consignor);
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.Sales                , "Customer");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor       , "Vendor");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
+	Map.Insert(Enums.ShipmentConfirmationTransactionTypes.ReturnToConsignor    , "Consignor");
 	
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , Enums.AgreementTypes.Consignor);
-	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent , Enums.AgreementTypes.TradeAgent);
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.Purchase             , "Vendor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer   , "Customer");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReceiptFromConsignor , "Consignor");
+	Map.Insert(Enums.GoodsReceiptTransactionTypes.ReturnFromTradeAgent , "TradeAgent");
 	
-	Map.Insert(Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery , Enums.AgreementTypes.Vendor);
+	Map.Insert(Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery , "Vendor");
+	Map.Insert(Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery , "Vendor");
 	
-	Map.Insert(Enums.OutgoingPaymentTransactionTypes.PaymentToVendor , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherPartner , Enums.AgreementTypes.Other);
-	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherExpense , Enums.AgreementTypes.Other);
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.PaymentToVendor , "Vendor");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer , "Customer");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS , "Customer");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherPartner , "Other");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherExpense , "Other");
 	
-	Map.Insert(Enums.IncomingPaymentTransactionType.ReturnFromVendor , Enums.AgreementTypes.Vendor);
-	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomer , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS , Enums.AgreementTypes.Customer);
-	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , Enums.AgreementTypes.Other);
-	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , Enums.AgreementTypes.Other);
+	Map.Insert(Enums.IncomingPaymentTransactionType.ReturnFromVendor , "Vendor");
+	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomer , "Customer");
+	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS , "Customer");
+	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , "Other");
+	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , "Other");
 	
 	Return Map.Get(TransactionType);
 EndFunction
 
 Function GetAgreementTypeByTransactionType(TransactionType) Export
 	PartnerType = GetPartnerTypeByTransactionType(TransactionType);
-	Return PartnerType;
+	If PartnerType = "Customer" Then
+		Return Enums.AgreementTypes.Customer;
+	ElsIf PartnerType = "Vendor" Then
+		Return Enums.AgreementTypes.Vendor;
+	ElsIf PartnerType = "Consignor" Then
+		Return Enums.AgreementTypes.Consignor;
+	ElsIf PartnerType = "TradeAgent" Then
+		Return Enums.AgreementTypes.TradeAgent;
+	ElsIf PartnerType = "RetailCustomer" Then
+		Return Enums.AgreementTypes.EmptyRef();
+	ElsIf PartnerType = "Other" Then
+		Return Enums.AgreementTypes.Other;
+	Else
+		Return Enums.AgreementTypes.EmptyRef();
+	EndIf;
 EndFunction	
 
 Function GetAgreementTypeByDebtType(DebtType) Export

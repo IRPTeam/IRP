@@ -426,6 +426,10 @@
     <name>Filter.LegalName</name>
     <field>Document.DebitNote.TabularSection.Transactions.Attribute.LegalName</field>
    </choiceParameterLinks>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <field>Document.DebitNote.Attribute.Company</field>
+   </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

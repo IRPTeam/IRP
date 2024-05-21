@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="90cf882c-ba2f-4db2-9369-767a01fe3edd">
+ <producedTypes>
+  <objectType typeId="dddb9d2a-2605-4466-8ea0-44a49bbd4864" valueTypeId="1a8f666b-8cd5-436f-a634-a2f92a9e096b"/>
+  <managerType typeId="bd99c8ea-9f1f-450f-8f78-55b2798ec897" valueTypeId="b1b4acfa-ec7f-4c66-ab0d-154bb90afba0"/>
+ </producedTypes>
+ <name>S1001L_VendorsPrices</name>
+ <synonym>
+  <key>en</key>
+  <value>S1001L Vendors prices</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>S1001L Цены поставщиков</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>S1001L Vendors prices</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.S1001L_VendorsPrices.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="147b81cf-6271-4ab4-a383-35af10a4de59">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

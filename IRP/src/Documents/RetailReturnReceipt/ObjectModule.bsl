@@ -28,6 +28,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ValuesBeforeWrite.Insert("Posted", ThisObject.Ref.Posted);
 	ValuesBeforeWrite.Insert("DeletionMark", ThisObject.Ref.DeletionMark);
 	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	ThisObject.AdditionalProperties.Insert("ValuesBeforeWrite", ValuesBeforeWrite);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
@@ -53,6 +55,11 @@ Procedure OnWrite(Cancel)
 		EndIf;
 	EndIf;
 	RowIDInfoPrivileged.OnWrite_RowID(ThisObject, Cancel);
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel);
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

@@ -2432,6 +2432,15 @@ Function Strings(Lang) Export
 	Strings.Insert("LDT_TooMuchFound", NStr("en='Several variants were found for [%1]';
 		|ru='Несколько вариантов было найдено для [%1]';
 		|tr='[%1] için birden fazla varyant bulundu'", Lang));
+#EndRegion
+
+#Region OpenVendorPrices
+	Strings.Insert("OVP_Button_Title",   NStr("en='Open vendor prices';
+		|ru='Открыть цены поставщиков';
+		|tr='Open vendor prices'", Lang));
+	Strings.Insert("OVP_Button_ToolTip", NStr("en='Open vendor prices';
+		|ru='Открыть цены поставщиков';
+		|tr='Open vendor prices'", Lang));	
 #EndRegion	
 
 #Region OpenSerialLotNumberTree
@@ -3048,6 +3057,41 @@ Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_Empl
 	NStr("en='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
 		|ru='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)';
 		|tr='EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'", Lang));
+
+Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|ru='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)';
+		|tr='SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
+
+Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions",
+	NStr("en='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)';
+		|ru='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)';
+		|tr='SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)'", Lang));
+
+Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing",
+	NStr("en='SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)';
+		|ru='SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)';
+		|tr='SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'", Lang));
+
+Strings.Insert("SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|ru='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)';
+		|tr='SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
+	NStr("en='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
+		|ru='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)';
+		|tr='PurchaseReturn DR (R1020B_AdvancesToVendors) CR (R1021B_VendorsTransactions)'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory",
+	NStr("en='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)';
+		|ru='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)';
+		|tr='PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions",
+	NStr("en='PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)';
+		|ru='PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)';
+		|tr='PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'", Lang));
 
 #EndRegion
 

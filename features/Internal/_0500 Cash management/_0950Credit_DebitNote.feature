@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CashManagement
@@ -634,6 +634,7 @@ Scenario: _095008 create DebitNote (OtherPartnersTransactions)
 			| 'Description'     |
 			| 'Front office'    |
 		And I select current line in "List" table
+		And I select "Other partner 1" from "Partner term" drop-down list by string in "Transactions" table	
 	* Check creation
 		And I click the button named "FormPost"
 		And "Transactions" table became equal
@@ -688,6 +689,7 @@ Scenario: _095009 create CreditNote (OtherPartnersTransactions)
 			| 'Description'    |
 			| 'Expense'        |
 		And I select current line in "List" table
+		And I select "Other partner 2" from "Partner term" drop-down list by string in "Transactions" table	
 		And I finish line editing in "Transactions" table
 		And I move to "Other" tab
 		And I click Choice button of the field named "Branch"

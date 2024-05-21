@@ -155,4 +155,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="7ccf662b-7384-4cfe-97d9-6cfb8e88b57b">
+  <name>OpenVendorPrices</name>
+  <synonym>
+   <key>en</key>
+   <value>Open vendor prices</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Открыть цены поставщиков</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Open vendor prices</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

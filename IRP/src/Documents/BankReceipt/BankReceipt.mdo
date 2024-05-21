@@ -954,6 +954,10 @@
     <name>Filter.LegalName</name>
     <field>Document.BankReceipt.TabularSection.PaymentList.Attribute.Payer</field>
    </choiceParameterLinks>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <field>Document.BankReceipt.Attribute.Company</field>
+   </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

@@ -40,5 +40,8 @@
   <types>DocumentRef.EmployeeCashAdvance</types>
   <types>DocumentRef.ExpenseAccruals</types>
   <types>DocumentRef.RevenueAccruals</types>
+  <types>DocumentRef.PurchaseReturn</types>
+  <types>DocumentRef.RetailReturnReceipt</types>
+  <types>DocumentRef.SalesReturn</types>
  </type>
 </mdclass:DefinedType>

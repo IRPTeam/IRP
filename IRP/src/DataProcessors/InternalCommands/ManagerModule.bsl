@@ -16,6 +16,7 @@ Function GetAllCommandDescriptions() Export
 	Result.Add(GetCommandDescription("CloneValueFromFirstRow"));
 	Result.Add(GetCommandDescription("LoadDataFromTable"));
 	Result.Add(GetCommandDescription("AuditLock"));
+	Result.Add(GetCommandDescription("OpenVendorPrices"));
 	
 	Return Result;
 	
@@ -47,7 +48,8 @@ Function GetCommandDescription(CommandName) Export
 	
 	ElsIf CommandName = "AuditLock" Then
 		Return AuditLock_GetCommandDescription();
-
+	ElsIf CommandName = "OpenVendorPrices" Then	
+		Return OpenVendorPrices_GetCommandDescription();
 	EndIf;
 	
 	Raise StrTemplate(R().Exc_011, CommandName);
@@ -480,7 +482,6 @@ Function LoadDataFromTable_GetCommandDescription()
 	
 	CommandDescription.HasActionOnCommandCreate = True;
 
-	
 	Targets = CommandDescription.Targets;
 	
 	ArrayOfExcludingDocuments = New Array(); // Array of MetadataObject
@@ -657,6 +658,43 @@ Procedure AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 	EndIf;
 		 
 EndProcedure
+
+#EndRegion
+
+#Region OpenVendorPrices
+Function OpenVendorPrices_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "OpenVendorPrices";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().OVP_Button_Title;
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.ToolTip = R().OVP_Button_Title;
+	CommandDescription.Picture = "Price";
+	CommandDescription.Representation = "PictureAndText";
+	
+	CommandDescription.LocationGroup = "FormCommandBar.FormService";
+	CommandDescription.ModifiesStoredData = False;
+	
+	CommandDescription.HasActionInitialization = True;
+	CommandDescription.HasActionOnCommandCreate = True;
+	CommandDescription.HasActionAfterRunning = True;
+	
+	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingChoiceForm = False;
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	
+	Targets.Add(Metadata.Documents.PurchaseInvoice.FullName());
+	Targets.Add(Metadata.Documents.PurchaseOrder.FullName());
+	
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
 
 #EndRegion
 

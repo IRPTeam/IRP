@@ -1025,6 +1025,7 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Description'   | 'Type'    |
 			| 'A-8'           | 'Set'     |
 		And I select current line in "List" table
+		And I select from the drop-down list named "Specification" by "A-8" string	
 		And I click "Save and close" button
 		And Delay 5
 		And "List" table contains lines

@@ -1119,33 +1119,50 @@ Function CreateExpenseRevenueInfo(Params) Export
 EndFunction
 
 Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRates, RegisterType, ExpenseRevenueInfo) Export
+	_TransactionCurrency = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+	
 	For Each RegisterName In ArrayOfRegisterNames Do
 		QueryTable = _TempTablesManager.Tables.Find("_" + RegisterName).GetData().Unload();
 		
-		QueryTable.Columns.Add("Processed");
-		QueryTable.FillValues(False, "Processed");
-		
 		DimensionsInfo = CreateDimensionsTableAndFilter(RegisterName);
-
-		For Each Row In QueryTable Do
-			If Row.CurrencyMovementType <> ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
-				Continue;
-			EndIf;
+		
+		QueryTableCopy = QueryTable.Copy();
+		QueryTableCopy.GroupBy(StrConcat(DimensionsInfo.DimensionsArray, ","));
+		
+		ArrayOfDataForRevaluate = New Array();
+		
+		For Each Row In QueryTableCopy Do
 			FillPropertyValues(DimensionsInfo.DimensionsFilter, Row);
-
-			OtherCurrenciesRows = QueryTable.FindRows(DimensionsInfo.DimensionsFilter);
+			Rows = QueryTable.FindRows(DimensionsInfo.DimensionsFilter);
 			
-			HaveBalanceByTransactionCurrency = False;
-			For Each OtherCurrencyRow In OtherCurrenciesRows Do
-				If OtherCurrencyRow.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency Then
-					HaveBalanceByTransactionCurrency = True;
-					Continue;
+			_CurrentBalanceByTransactionCurrency = 0;
+			For Each Row2 In Rows Do
+				If Row2.CurrencyMovementType = _TransactionCurrency Then
+					_CurrentBalanceByTransactionCurrency = Row2.Amount;
+					Break;
 				EndIf;
+			EndDo;
+			
+			DataForRevaluate = New Structure();
+			DataForRevaluate.Insert("CurrentBalanceByTransactionCurrency", _CurrentBalanceByTransactionCurrency);
+			DataForRevaluate.Insert("RowsForRevaluate", New Array());
+			
+			For Each Row3 In Rows Do
+				If Row3.CurrencyMovementType <> _TransactionCurrency Then
+					DataForRevaluate.RowsForRevaluate.Add(Row3);
+				EndIf;
+			EndDo;
+			
+			ArrayOfDataForRevaluate.Add(DataForRevaluate);		
+		EndDo;
+		
+		For Each ItemOfDataForRevaluate In ArrayOfDataForRevaluate Do
+			For Each OtherCurrencyRow In ItemOfDataForRevaluate.RowsForRevaluate Do
 
 				CurrencyRatesFilter = New Structure;
-				CurrencyRatesFilter.Insert("CurrencyFrom", OtherCurrencyRow.TransactionCurrency);
-				CurrencyRatesFilter.Insert("CurrencyTo", OtherCurrencyRow.Currency);
-				CurrencyRatesFilter.Insert("Source", OtherCurrencyRow.Source);
+				CurrencyRatesFilter.Insert("CurrencyFrom" , OtherCurrencyRow.TransactionCurrency);
+				CurrencyRatesFilter.Insert("CurrencyTo"   , OtherCurrencyRow.Currency);
+				CurrencyRatesFilter.Insert("Source"       , OtherCurrencyRow.Source);
 
 				CurrencyInfo = CurrencyRates.FindRows(CurrencyRatesFilter);
 				If CurrencyInfo.Count() > 1 Then
@@ -1160,162 +1177,70 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 					Continue;
 				EndIf;
 
-				_IsNegative = False;
-				If OtherCurrencyRow.Amount < 0 Then
-					_IsNegative = True;
-					OtherCurrencyRow.Amount = -OtherCurrencyRow.Amount;
-				EndIf;
-
-				If Row.Amount < 0 Then
-					Row.Amount = -Row.Amount;
+				CurrentAmountValue = OtherCurrencyRow.Amount;
+				RevaluatedAmountValue = (ItemOfDataForRevaluate.CurrentBalanceByTransactionCurrency 
+					* CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
+				
+				_IsExpense = False;
+				_IsRevenue = False;
+				
+				If CurrentAmountValue > RevaluatedAmountValue Then
+					AmountDifference = CurrentAmountValue - RevaluatedAmountValue;
+					_RecordType = AccumulationRecordType.Expense;
+					
+					If RegisterType = "Active" Then
+						_IsExpense = True;
+					EndIf;
+					
+					If RegisterType = "Passive" Then
+						_IsRevenue = True;
+					EndIf;
+					
+				Else
+					AmountDifference = RevaluatedAmountValue - CurrentAmountValue;
+					_RecordType = AccumulationRecordType.Receipt;
+					
+					If RegisterType = "Active" Then
+						_IsRevenue = True;
+					EndIf;
+					
+					If RegisterType = "Passive" Then
+						_IsExpense = True;
+					EndIf;
+					
 				EndIf;
 				
-				//Row.Amount; -  amount in transaction currency
-				AmountRevaluated = (Row.Amount * CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
-
-				If AmountRevaluated <> OtherCurrencyRow.Amount Then
-
-					_RecordType = Undefined;
-					AmountDifference = 0;
-					If AmountRevaluated > OtherCurrencyRow.Amount Then
-						_RecordType = AccumulationRecordType.Receipt;
-						AmountDifference = AmountRevaluated - OtherCurrencyRow.Amount;
-					Else
-						_RecordType = AccumulationRecordType.Expense;
-						AmountDifference = OtherCurrencyRow.Amount - AmountRevaluated;
-					EndIf;
-										
-					NewRow = DimensionsInfo.DimensionsTable.Add();
-					FillPropertyValues(NewRow, OtherCurrencyRow);
-					NewRow.RecordType = _RecordType;
-					NewRow.Period = ExpenseRevenueInfo.DocumentDate;
-					NewRow.Key = String(New UUID());
-					
-					If _IsNegative Then
-						NewRow.AmountRevaluated = -AmountDifference;
-					Else
-						NewRow.AmountRevaluated = AmountDifference;
-					EndIf;
-
-					_IsExpense = False;
-					_IsRevenue = False;
-
-					If RegisterType = "Active" Then
-						If AmountRevaluated > OtherCurrencyRow.Amount Then // revenue
-							_IsRevenue = True;
-						Else // expense
-							_IsExpense = True;
-						EndIf;
-					EndIf;
-
-					If RegisterType = "Passive" Then
-						If AmountRevaluated > OtherCurrencyRow.Amount Then // expense
-							_IsExpense = True;
-						Else // revenue
-							_IsRevenue = True;
-						EndIf;
-					EndIf;
-
-					If _IsRevenue Then
-						NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
-						FillPropertyValues(NewRevenue, NewRow);
-						NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
-						NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
-						NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
-						NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
-						If _IsNegative Then
-							NewRevenue.Amount = -AmountDifference;
-						Else
-							NewRevenue.Amount = AmountDifference;
-						EndIf;
-					EndIf;
-
-					If _IsExpense Then
-						NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
-						FillPropertyValues(NewExpense, NewRow);
-						NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
-						NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
-						NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
-						NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
-						If _IsNegative Then
-							NewExpense.Amount = -AmountDifference;
-						Else
-							NewExpense.Amount = AmountDifference;
-						EndIf;
-					EndIf;
-					
-				EndIf; // AmountRevaluated <> OtherCurrencyRow.Amount
-
-			EndDo; // OtherCurrenciesRows
-			
-			If HaveBalanceByTransactionCurrency Then
-				For Each OtherCurrencyRow In OtherCurrenciesRows Do
-					OtherCurrencyRow.Processed = True;
-				EndDo;
-			EndIf;
-		
-		EndDo; // QueryTable
-		
-		NotProcessedRows = QueryTable.FindRows(New Structure("Processed", False));
-		For Each NotProcessedRow In NotProcessedRows Do
-			_RecordType = Undefined;
-			If NotProcessedRow.Amount = 0 Then
-				Continue;
-			ElsIf NotProcessedRow.Amount > 0 Then
-				_RecordType = AccumulationRecordType.Expense;
-				AmountBalance = NotProcessedRow.Amount;
-			Else
-				_RecordType = AccumulationRecordType.Receipt;
-				AmountBalance = - NotProcessedRow.Amount;
-			EndIf;
-													
-			NewRow = DimensionsInfo.DimensionsTable.Add();
-			FillPropertyValues(NewRow, NotProcessedRow);
-			NewRow.RecordType = _RecordType;
-			NewRow.Period = ExpenseRevenueInfo.DocumentDate;
-			NewRow.Key = String(New UUID());
-					
-			NewRow.AmountRevaluated = AmountBalance;
-					
-			_IsExpense = False;
-			_IsRevenue = False;
-
-			If RegisterType = "Active" Then
-				If AmountBalance > 0 Then // revenue
-					_IsRevenue = True;
-				Else // expense
-					_IsExpense = True;
+				If Not ValueIsFilled(AmountDifference) Then
+					Continue;
 				EndIf;
-			EndIf;
+														
+				NewRow = DimensionsInfo.DimensionsTable.Add();
+				FillPropertyValues(NewRow, OtherCurrencyRow);
+				NewRow.RecordType = _RecordType;
+				NewRow.Period = ExpenseRevenueInfo.DocumentDate;
+				NewRow.Key = String(New UUID());
+				NewRow.AmountRevaluated = AmountDifference;
 
-			If RegisterType = "Passive" Then
-				If AmountBalance < 0 Then // expense
-					_IsExpense = True;
-				Else // revenue
-					_IsRevenue = True;
+				If _IsRevenue Then
+					NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
+					FillPropertyValues(NewRevenue, NewRow);
+					NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
+					NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
+					NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
+					NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
+					NewRevenue.Amount = AmountDifference;
 				EndIf;
-			EndIf;
 
-			If _IsRevenue Then
-				NewRevenue = ExpenseRevenueInfo.RevenuesTable.Add();
-				FillPropertyValues(NewRevenue, NewRow);
-				NewRevenue.Period = ExpenseRevenueInfo.DocumentDate;
-				NewRevenue.ProfitLossCenter    = ExpenseRevenueInfo.Revenue_ProfitLossCenter;
-				NewRevenue.RevenueType         = ExpenseRevenueInfo.RevenueType;
-				NewRevenue.AdditionalAnalytic  = ExpenseRevenueInfo.Revenue_AdditionalAnalytic;
-				NewRevenue.Amount = AmountBalance;
-			EndIf;
-
-			If _IsExpense Then
-				NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
-				FillPropertyValues(NewExpense, NewRow);
-				NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
-				NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
-				NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
-				NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
-				NewExpense.Amount = AmountBalance;
-			EndIf;
-		
+				If _IsExpense Then
+					NewExpense = ExpenseRevenueInfo.ExpensesTable.Add();
+					FillPropertyValues(NewExpense, NewRow);
+					NewExpense.Period = ExpenseRevenueInfo.DocumentDate;
+					NewExpense.ProfitLossCenter    = ExpenseRevenueInfo.Expense_ProfitLossCenter;
+					NewExpense.ExpenseType         = ExpenseRevenueInfo.ExpenseType;
+					NewExpense.AdditionalAnalytic  = ExpenseRevenueInfo.Expense_AdditionalAnalytic;
+					NewExpense.Amount = AmountDifference;
+				EndIf;
+			EndDo;
 		EndDo;
 		
 		DeleteEmptyAmounts(DimensionsInfo.DimensionsTable, "AmountRevaluated");
@@ -1364,14 +1289,18 @@ EndProcedure
 
 Function CreateDimensionsTableAndFilter(RegisterName)
 	_RegisterName = GetMetadataReisterName(RegisterName);
-	DimensionsFilter = New Structure;
-	DimensionsTable = New ValueTable;
+	
+	DimensionsFilter = New Structure();
+	DimensionsTable = New ValueTable();
+	DimensionsArray = New Array();
+	
 	For Each Dimension In Metadata.AccumulationRegisters[_RegisterName].Dimensions Do
 		DimensionsTable.Columns.Add(Dimension.Name, Dimension.Type);
 		If Upper(Dimension.Name) = Upper("CurrencyMovementType") Or Upper(Dimension.Name) = Upper("Currency") Then
 			Continue;
 		EndIf;
 		DimensionsFilter.Insert(Dimension.Name);
+		DimensionsArray.Add(Dimension.Name);
 	EndDo;
 	DimensionsTable.Columns.Add("AmountRevaluated", Metadata.DefinedTypes.typeAmount.Type);
 	DimensionsTable.Columns.Add("RecordType"      , Metadata.AccumulationRegisters[_RegisterName].StandardAttributes.RecordType.Type);
@@ -1381,6 +1310,8 @@ Function CreateDimensionsTableAndFilter(RegisterName)
 	Result = New Structure;
 	Result.Insert("DimensionsTable", DimensionsTable);
 	Result.Insert("DimensionsFilter", DimensionsFilter);
+	Result.Insert("DimensionsArray", DimensionsArray);
+	
 	Return Result;
 EndFunction
 

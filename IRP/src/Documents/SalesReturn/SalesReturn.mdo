@@ -175,6 +175,7 @@
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -408,6 +409,10 @@
   <choiceParameterLinks>
    <name>Filter.LegalName</name>
    <field>Document.SalesReturn.Attribute.LegalName</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.SalesReturn.Attribute.Company</field>
   </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>

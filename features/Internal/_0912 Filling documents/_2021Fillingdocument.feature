@@ -2837,7 +2837,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Partner'   | 'Partner term'                                 | 'Payee'              |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas'    |
 		And in the table "PaymentList" I click "Delete" button
-	* Check the display to select only available partner terms
+	* Check the display to select only available partner terms (for vendor)
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2853,12 +2853,10 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                         |
-			| 'Basic Partner terms, TRY'            |
-			| 'Basic Partner terms, without VAT'    |
 			| 'Vendor Ferron, TRY'                  |
 			| 'Vendor Ferron, USD'                  |
 			| 'Vendor Ferron, EUR'                  |
-			| 'Ferron, USD'                         |
+		Then the number of "List" table lines is "равно" "3"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -3131,12 +3129,10 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                         |
-			| 'Basic Partner terms, TRY'            |
-			| 'Basic Partner terms, without VAT'    |
 			| 'Vendor Ferron, TRY'                  |
 			| 'Vendor Ferron, USD'                  |
 			| 'Vendor Ferron, EUR'                  |
-			| 'Ferron, USD'                         |
+		Then the number of "List" table lines is "равно" "3"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -4160,6 +4156,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Payer and Partner term
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4225,8 +4222,8 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payer'               |
-		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
+			| 'Partner'    | 'Partner term'                               | 'Payer'               |
+			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
 	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4276,6 +4273,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Payer and Partner term
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4285,23 +4283,23 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payee'               |
-		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
+			| 'Partner'    | 'Partner term'                               | 'Payee'               |
+			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
 	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Total amount'  | 'Planning transaction basis'   |
-		| '1'  | ''              | ''                             |
+			| '#'  | 'Total amount'  | 'Planning transaction basis'   |
+			| '1'  | ''              | ''                             |
 		* Check filling in Transit account from Accountant
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4311,8 +4309,8 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		And I close all client application windows
 
 

@@ -537,7 +537,7 @@ Scenario: _051008 check basis document filter in Cash payment
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I click the button named "FormChoose"
 		And I click Select button of "Cash account" field
@@ -547,7 +547,7 @@ Scenario: _051008 check basis document filter in Cash payment
 		And I select current line in "List" table
 		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "TransactionType" became equal to "Return to customer"
 	* Filling in partner and legal name
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table

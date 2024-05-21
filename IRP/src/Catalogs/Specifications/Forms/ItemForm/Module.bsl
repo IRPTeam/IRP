@@ -544,17 +544,15 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item)
-	CatSpecificationsClient.ItemListItemOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
-	CatSpecificationsClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
-	CatSpecificationsClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+ 
+	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item); 
+	CurrentData.Unit = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey).Unit;
+	
 EndProcedure
 
 #EndRegion
@@ -562,39 +560,11 @@ EndProcedure
 #Region ITEM_KEY
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	CatSpecificationsClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+ 
+	CurrentData.Unit = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey).Unit;
 EndProcedure
-#EndRegion
-
-#Region QUANTITY
-
-&AtClient
-Procedure ItemListQuantityOnChange(Item)
-	CatSpecificationsClient.ItemListQuantityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region ITEM_LIST
-
-&AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	CatSpecificationsClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	CatSpecificationsClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
-Procedure ItemListBeforeDeleteRow(Item, Cancel)
-	CatSpecificationsClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);	
-EndProcedure
-
-&AtClient
-Procedure ItemListAfterDeleteRow(Item)
-	CatSpecificationsClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
 #EndRegion

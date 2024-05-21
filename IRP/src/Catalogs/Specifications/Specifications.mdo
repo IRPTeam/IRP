@@ -294,19 +294,6 @@
       <key>en</key>
       <value>Item list</value>
     </synonym>
-    <attributes uuid="02933705-87f1-41c7-ad97-5095fa9ec278">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
     <attributes uuid="cf2d571e-ed87-41b2-8bf3-8b991b1fc30b">
       <name>Item</name>
       <synonym>

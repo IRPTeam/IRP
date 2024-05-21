@@ -10237,8 +10237,6 @@ Function BindItemListItem(Parameters)
 	Binding.Insert("SalesReportFromTradeAgent" , "StepItemListChangeItemKeyByItem");
 	Binding.Insert("SalesReportToConsignor"    , "StepItemListChangeItemKeyByItem");
 	
-	Binding.Insert("Specifications"	, "StepItemListChangeItemKeyByItem");
-	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListItem");
 EndFunction
 
@@ -10493,8 +10491,6 @@ Function BindItemListItemKey(Parameters)
 	Binding.Insert("ItemStockAdjustment" , "StepItemListChangeUnitByItemKey");
 	Binding.Insert("Bundling"            , "StepItemListChangeUnitByItemKey");
 	Binding.Insert("Unbundling"          , "StepItemListChangeUnitByItemKey");
-	
-	Binding.Insert("Specifications", "StepItemListChangeUnitByItemKey");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListItemKey");
 EndFunction

@@ -517,14 +517,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>EditTextChange</event>
-              <name>ItemListItemEditTextChange</name>
-            </handlers>
-            <handlers>
-              <event>StartChoice</event>
-              <name>ItemListItemStartChoice</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -648,10 +640,6 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.ItemList.Quantity</segments>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>ItemListQuantityOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>ItemListQuantityExtendedTooltip</name>
             <id>124</id>
@@ -702,22 +690,6 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
-        <handlers>
-          <event>Selection</event>
-          <name>ItemListSelection</name>
-        </handlers>
-        <handlers>
-          <event>BeforeAddRow</event>
-          <name>ItemListBeforeAddRow</name>
-        </handlers>
-        <handlers>
-          <event>BeforeDeleteRow</event>
-          <name>ItemListBeforeDeleteRow</name>
-        </handlers>
-        <handlers>
-          <event>AfterDeleteRow</event>
-          <name>ItemListAfterDeleteRow</name>
-        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1026,21 +998,6 @@
       <types>String</types>
       <stringQualifiers/>
     </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
-    <name>CacheBeforeChange</name>
-    <title>
-      <key>en</key>
-      <value>Cache before change</value>
-    </title>
-    <id>2</id>
-    <valueType/>
     <view>
       <common>true</common>
     </view>

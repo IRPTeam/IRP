@@ -761,8 +761,6 @@
   <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
   <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
   <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
-  <commonModules>CommonModule.CatSpecificationsClient</commonModules>
-  <commonModules>CommonModule.CatSpecificationsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

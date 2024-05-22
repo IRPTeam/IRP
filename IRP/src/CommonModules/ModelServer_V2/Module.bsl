@@ -344,6 +344,18 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map.Insert(Enums.RetailGoodsReceiptTransactionTypes.CourierDelivery , "Vendor");
 	Map.Insert(Enums.RetailShipmentConfirmationTransactionTypes.CourierDelivery , "Vendor");
 	
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.PaymentToVendor , "Vendor");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer , "Customer");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS , "Customer");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherPartner , "Other");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherExpense , "Other");
+	
+	Map.Insert(Enums.IncomingPaymentTransactionType.ReturnFromVendor , "Vendor");
+	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomer , "Customer");
+	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS , "Customer");
+	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , "Other");
+	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , "Other");
+	
 	Return Map.Get(TransactionType);
 EndFunction
 
@@ -359,8 +371,10 @@ Function GetAgreementTypeByTransactionType(TransactionType) Export
 		Return Enums.AgreementTypes.TradeAgent;
 	ElsIf PartnerType = "RetailCustomer" Then
 		Return Enums.AgreementTypes.EmptyRef();
+	ElsIf PartnerType = "Other" Then
+		Return Enums.AgreementTypes.Other;
 	Else
-		Raise StrTemplate("Unknown AgreementType by TransactionType [%1]", TransactionType);
+		Return Enums.AgreementTypes.EmptyRef();
 	EndIf;
 EndFunction	
 

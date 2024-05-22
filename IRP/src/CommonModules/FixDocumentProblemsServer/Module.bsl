@@ -55,6 +55,51 @@ Function GetJobsForCheckPostingDocuments(DocumentList, ProcedurePath) Export
 	Return JobDataSettings;
 EndFunction
 
+Function GetJobsForWriteRecordSet(Tree) Export
+	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
+	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
+	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
+					
+	DocsInPack = 100;
+	StreamArray = New Array;
+	For Each Doc In Tree.Rows Do
+		
+		For Each Row In Doc.Rows Do
+		
+			If Not Row.Select OR Row.Processed Then
+				Continue;
+			EndIf;
+			
+			Pack = 1;
+			Str = New Structure;
+			Str.Insert("Ref", Row.Ref);
+			Str.Insert("NewMovement", Row.NewMovement);
+			Str.Insert("RegName", Row.RegName);
+			StreamArray.Add(Str);
+			
+			If StreamArray.Count() = DocsInPack Then
+				JobSettings = BackgroundJobAPIServer.JobSettings();
+				JobSettings.ProcedureParams.Add(StreamArray);
+				JobSettings.ProcedureParams.Add(True);
+				JobSettings.Description = "Write records: " + Pack + " * (" + DocsInPack + ")";
+				JobDataSettings.JobSettings.Add(JobSettings);
+				
+				StreamArray = New Array;
+				Pack = Pack + 1;
+			EndIf;
+		EndDo;
+	EndDo;
+	If StreamArray.Count() > 0 Then
+		JobSettings = BackgroundJobAPIServer.JobSettings();
+		JobSettings.ProcedureParams.Add(StreamArray);
+		JobSettings.ProcedureParams.Add(True);
+		JobSettings.Description = "Write records: " + Pack + " * (" + StreamArray.Count() + ")";
+		JobDataSettings.JobSettings.Add(JobSettings);
+	EndIf;
+
+	Return JobDataSettings;
+EndFunction
+
 // Get document list settings.
 // 
 // Returns:
@@ -69,6 +114,7 @@ Function GetDocumentListSettings() Export
 	Settings.Insert("EndDate", EndOfMonth(CommonFunctionsServer.GetCurrentSessionDate()));
 	Settings.Insert("OnlyPosted", True);
 	Settings.Insert("CompanyList", New Array);
+	Settings.Insert("ExcludeDocumentTypes", New Array());
 	Return Settings;
 EndFunction
 
@@ -107,7 +153,7 @@ Function GetDocumentList(Settings) Export
 	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
 	|	AND CASE WHEN &OnlyPosted THEN AllDocuments.Ref.Posted ELSE TRUE END
 	|	AND CASE WHEN &CompanySet THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
-	|
+	|	AND CASE WHEN &UseExcludeDocuments THEN VALUETYPE(AllDocuments.Ref) NOT IN (&ExcludeDocumentTypes) ELSE TRUE END
 	|ORDER BY
 	|	AllDocuments.Date";
 	
@@ -117,6 +163,8 @@ Function GetDocumentList(Settings) Export
 	Query.SetParameter("OnlyPosted", Settings.OnlyPosted);
 	Query.SetParameter("CompanySet", Settings.CompanyList.Count() > 0);
 	Query.SetParameter("CompanyList", Settings.CompanyList);
+	Query.SetParameter("UseExcludeDocuments", Settings.ExcludeDocumentTypes.Count() > 0);
+	Query.SetParameter("ExcludeDocumentTypes", Settings.ExcludeDocumentTypes);
 	Result = Query.Execute().Unload();
 	Return Result
 EndFunction

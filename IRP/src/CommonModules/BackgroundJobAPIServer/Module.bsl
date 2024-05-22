@@ -356,6 +356,40 @@ Function GetJobList() Export
 	Return Table;
 EndFunction
 
+Function GetPostingInfo() Export
+	Tree = New ValueTree();
+	Tree.Columns.Add("Date");
+	Tree.Columns.Add("DocumentType");
+	Tree.Columns.Add("Errors");
+	Tree.Columns.Add("NewMovement");
+	Tree.Columns.Add("Processed");
+	Tree.Columns.Add("Ref");
+	Tree.Columns.Add("RegName");
+	Tree.Columns.Add("Select");
+	Return Tree;
+EndFunction
+
+Function RegInfoArrayToPostingInfo(RegInfoArray) Export
+	Tree = GetPostingInfo();
+	
+	For Each DocRow In RegInfoArray Do			
+		ParentRow = Tree.Rows.Add();
+		ParentRow.Ref = DocRow.Ref;
+		ParentRow.DocumentType = TypeOf(DocRow.Ref);
+		ParentRow.Errors = DocRow.Error;
+		For Each RegInfoData In DocRow.RegInfo Do
+			NewRow = ParentRow.Rows.Add();
+			FillPropertyValues(NewRow, RegInfoData);
+			NewRow.Select = True;
+			NewRow.Processed = False;
+			NewRow.Date = ParentRow.Date;
+			NewRow.Ref = ParentRow.Ref;
+			NewRow.DocumentType = ParentRow.DocumentType;
+			NewRow.NewMovement = New ValueStorage(RegInfoData.NewPostingData, New Deflation(9));
+		EndDo;
+	EndDo;
+	Return Tree;
+EndFunction
 
 // Run jobs from server.
 // 

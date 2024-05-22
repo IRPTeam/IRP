@@ -2810,34 +2810,98 @@ Function CheckDocumentArray_AccountingTranslation(DocumentArray, isJob = False) 
 	Return CheckDocumentArray(DocumentArray, "AccountingData", isJob);
 EndFunction
 
+Function GetExcludeDocumentTypes_AccountingAnalytics() Export
+	Array = New Array();
+	Array.Add(Type("DocumentRef.CalculationMovementCosts"));
+	Array.Add(Type("DocumentRef.CustomersAdvancesClosing"));
+	Array.Add(Type("DocumentRef.VendorsAdvancesClosing"));
+	Array.Add(Type("DocumentRef.ForeignCurrencyRevaluation"));
+	Array.Add(Type("DocumentRef.JournalEntry"));
+	Return Array;
+EndFunction
+
+Function GetExcludeDocumentTypes_AccountingTranslation() Export
+	Array = New Array();
+	Array.Add(Type("DocumentRef.CalculationMovementCosts"));
+	Array.Add(Type("DocumentRef.CustomersAdvancesClosing"));
+	Array.Add(Type("DocumentRef.VendorsAdvancesClosing"));
+	Array.Add(Type("DocumentRef.JournalEntry"));
+	Return Array;
+EndFunction
+
 #EndRegion
 
 #Region BackgroundJob
 
-// Fix document problems as job.
-// 
-// Parameters:
-//  Settings - See FixDocumentProblemsServer.GetDocumentListSettings
-//  ResultInfo - Structure - Result info
-Procedure FixDocumentProblemsAsJob(Settings, ResultInfo) Export
-	ProcedurePath = "AccountingServer.CheckDocumentArray_AccountingAnalytics";
-
+Procedure CheckAndFixAccounting(Settings) Export
+	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingAnalytics();
 	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
-	                 
-	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocList, ProcedurePath);
-    JobList = BackgroundJobAPIServer.GetJobList();
-	BackgroundJobAPIServer.FillJobList(JobDataSettings, JobList);
-	BackgroundJobAPIServer.RunJobsFromServer(JobDataSettings, JobList);           
+	
+	// step 1. analytics
+	RegInfoArray = CheckAsJob_AccountingAnalytics(DocList);
+	If RegInfoArray.Count() Then
+		FixAsJob(RegInfoArray);
+		// control check after fix
+		RegInfoArray = CheckAsJob_AccountingAnalytics(DocList);
+		If RegInfoArray.Count() Then
+			Return; // can not fix, write error to log
+		EndIf;
+	EndIf;
+	
+	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingTranslation();
+	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+		
+	// step 2. translations
+	RegInfoArray = CheckAsJob_AccountingTranslation(DocList);
+	If RegInfoArray.Count() Then
+		FixAsJob(RegInfoArray);
+		// control check after fix
+		RegInfoArray = CheckAsJob_AccountingTranslation(DocList);
+		If RegInfoArray.Count() Then
+			Return; // can not fix, write error to log
+		EndIf;		
+	EndIf;	
+EndProcedure
 
-	For Each JobRow In JobList Do
+Function CheckAsJob_AccountingAnalytics(DocList)
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocList, 
+		"AccountingServer.CheckDocumentArray_AccountingAnalytics");
+	Return RunJob(JobDataSettings);
+EndFunction
+
+Function CheckAsJob_AccountingTranslation(DocList)
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocList, 
+		"AccountingServer.CheckDocumentArray_AccountingTranslation");
+	Return RunJob(JobDataSettings);
+EndFunction
+
+
+Function FixAsJob(RegInfoArray)
+	Tree = BackgroundJobAPIServer.RegInfoArrayToPostingInfo(RegInfoArray);
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForWriteRecordSet(Tree);
+	Return RunJob(JobDataSettings);
+EndFunction
+
+Function RunJob(JobDataSettings)
+	_JobList = BackgroundJobAPIServer.GetJobList();
+	BackgroundJobAPIServer.FillJobList(JobDataSettings, _JobList);
+	BackgroundJobAPIServer.RunJobsFromServer(JobDataSettings, _JobList);           
+
+	For Each JobRow In _JobList Do
 		If Not JobRow.Status = Enums.JobStatus.Completed Then
 			Raise "One job is failed";
 		EndIf; 
 	EndDo;     
-
-	For Each JobRow In JobList Do      
-		RegInfoArray = CommonFunctionsServer.GetFromCache(JobRow.DataAddress);
-	EndDo; 
-EndProcedure
+	
+	RegInfoArray = New Array();
+	For Each JobRow In _JobList Do
+		ArrayOfData = CommonFunctionsServer.GetFromCache(JobRow.DataAddress);
+		For Each ItemOfData In ArrayOfData Do
+			RegInfoArray.Add(ItemOfData);
+		EndDo;
+	EndDo;
+	
+	Return RegInfoArray;
+EndFunction
 
 #EndRegion

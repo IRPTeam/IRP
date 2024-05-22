@@ -311,9 +311,10 @@ Procedure CheckPosting(Command)
 EndProcedure
 
 &AtClient
-Procedure CheckAccountingAnalytics(Command)
+Procedure CheckAccountingAnalytics(Command)	
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics");
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingAnalytics();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics", ArrayOfExcludeTypes);
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
 EndProcedure
@@ -321,14 +322,30 @@ EndProcedure
 &AtClient
 Procedure CheckAccountingTranslations(Command)
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation");
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingTranslation();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation", ArrayOfExcludeTypes);
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
 EndProcedure
 
 &AtServer
-Function GetJobsForCheckPostingDocuments(ProcedurePath)
-	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocumentList.Unload(), ProcedurePath);
+Function GetJobsForCheckPostingDocuments(ProcedurePath, ArrayOfExcludeTypes = Undefined)
+	DocumentsTable = DocumentList.Unload();
+	If ArrayOfExcludeTypes <> Undefined Then
+		ArrayForDelete = New Array();
+		
+		For Each Row In DocumentsTable Do
+			If ArrayOfExcludeTypes.Find(TypeOf(Row.Ref)) <> Undefined Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			DocumentsTable.Delete(ItemForDelete);
+		EndDo;
+	EndIf;
+	
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocumentsTable, ProcedurePath);
 	Return JobDataSettings;
 EndFunction
 
@@ -590,47 +607,8 @@ EndProcedure
 
 &AtServer
 Function GetJobsForWriteRecordSet()
-	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
-	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
-	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
-					
-	DocsInPack = 100;
-	StreamArray = New Array;
-	For Each Doc In PostingInfo.GetItems() Do
-		
-		For Each Row In Doc.GetItems() Do
-		
-			If Not Row.Select OR Row.Processed Then
-				Continue;
-			EndIf;
-			
-			Pack = 1;
-			Str = New Structure;
-			Str.Insert("Ref", Row.Ref);
-			Str.Insert("NewMovement", Row.NewMovement);
-			Str.Insert("RegName", Row.RegName);
-			StreamArray.Add(Str);
-			
-			If StreamArray.Count() = DocsInPack Then
-				JobSettings = BackgroundJobAPIServer.JobSettings();
-				JobSettings.ProcedureParams.Add(StreamArray);
-				JobSettings.ProcedureParams.Add(True);
-				JobSettings.Description = "Write records: " + Pack + " * (" + DocsInPack + ")";
-				JobDataSettings.JobSettings.Add(JobSettings);
-				
-				StreamArray = New Array;
-				Pack = Pack + 1;
-			EndIf;
-		EndDo;
-	EndDo;
-	If StreamArray.Count() > 0 Then
-		JobSettings = BackgroundJobAPIServer.JobSettings();
-		JobSettings.ProcedureParams.Add(StreamArray);
-		JobSettings.ProcedureParams.Add(True);
-		JobSettings.Description = "Write records: " + Pack + " * (" + StreamArray.Count() + ")";
-		JobDataSettings.JobSettings.Add(JobSettings);
-	EndIf;
-
+	Tree = FormAttributeToValue("PostingInfo", Type("ValueTree"));
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForWriteRecordSet(Tree);
 	Return JobDataSettings;
 EndFunction
 

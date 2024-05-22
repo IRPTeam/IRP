@@ -104,6 +104,13 @@ Scenario: _0154100 preparation ( filling documents)
 			And I select current line in "List" table
 			And I click "Save and close" button
 			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Catalog.Partners"
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'NDB'             |
+			And I select current line in "List" table
+			And I set checkbox named "Other"
+			And I click "Save and close" button		
 		* Preparation: creating a vendor partner term for Avira Vendor
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
@@ -4121,8 +4128,8 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'    | 'Partner term'  | 'Total amount'  | 'Payer'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | 'Nicoletta'  | ''              | ''              | ''       | ''                | ''                             |
+		| '#' | 'Partner'   | 'Partner term'                              | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | 'Posting by Standard Partner term Customer' | ''             | ''      | ''               | ''                           |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4999,45 +5006,50 @@ Scenario: _0154131  check currency form in  Bank Receipt
 		* Basic recalculation at the rate
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '34,24'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window		
 		* Recalculation of Rate presentation when changing Amount
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "35,00" text in "Amount" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,175000'  | '35,00'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,175000' | '35,00'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window			
 		* Recount Amount when changing Multiplicity
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "2" text in "Multiplicity" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '2'               | '0,171200'  | '17,12'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '2'            | '0,171200' | '17,12'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window
 		* Recount Amount when changing Multiplicity
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "0,1667" text in "Rate" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,166700'  | '33,34'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,166700' | '33,34'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '250'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '42,80'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '42,80'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '250'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '250'    |	
 			And I close current window
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -5056,9 +5068,8 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
 			And I close current window		
 		* Recount when currency changes
 			And I click Select button of "Account" field
@@ -5070,7 +5081,6 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And "CurrenciesTable" table contains lines
 				| 'Movement type'     | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'       |
 				| 'Local currency'    | 'Legal'           | 'TRY'    | 'USD'     | '1'               | '5,627500'  | '1 125,50'     |
-				| 'TRY'               | 'Partner term'    | 'TRY'    | 'USD'     | '1'               | '5,627500'  | '1 125,50'     |
 		# * Reverse rate display check
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -8866,7 +8876,7 @@ Scenario: _0154195 check auto filling partner term in the BP (filter by transact
 		And I select "Return to customer by POS" exact value from the drop-down list named "TransactionType"
 		And I click the button named "Button0"
 		And "PaymentList" table became equal
-			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'Partner' | 'Payee'       | 'Partner term'     |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
 			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |

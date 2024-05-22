@@ -2064,8 +2064,9 @@ Scenario: check filter by transaction type in CR/BR
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
 		And I remove checkbox named "FilterCompanyUse"
 		And "List" table became equal
-			| 'Description'      | 'Type'     |
-			| 'Partner term NDB' | 'Customer' |
+			| 'Description'                 | 'Type'     |
+			| 'Partner term NDB'            | 'Customer' |
+			| 'Partner term Second Company' | 'Customer' |
 		And I close current window
 	* Select transaction type Return from vendor
 		And I finish line editing in "PaymentList" table
@@ -2113,8 +2114,9 @@ Scenario: check filter by transaction type in CP/BP
 		And I click choice button of the attribute named "PaymentListAgreement" in "PaymentList" table
 		And I remove checkbox named "FilterCompanyUse"
 		And "List" table became equal
-			| 'Description'             | 'Type'     |
-			| 'Partner term vendor NDB' | 'Vendor'   |
+			| 'Description'                        | 'Type'   |
+			| 'Partner term Second Company Vendor' | 'Vendor' |
+			| 'Partner term vendor NDB'            | 'Vendor' |
 		And I close current window
 	* Select transaction type Return to customer
 		And I finish line editing in "PaymentList" table

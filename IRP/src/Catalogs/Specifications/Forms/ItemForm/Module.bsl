@@ -126,8 +126,17 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
+	SpecificationTypeArray = New Array();
+	SpecificationTypeArray.Add(Enums.SpecificationType.Bundle);
+	SpecificationTypeArray.Add(Enums.SpecificationType.BundleByItemKey);
+	
+	IsVisibleItemBundle = False;
+	If SpecificationTypeArray.Find(Object.Type) <> Undefined Then
+		IsVisibleItemBundle = True;
+	EndIf;	
+		
 	Items.GroupAddNewPage.Visible = Object.Type = Enums.SpecificationType.Bundle;
-	Items.ItemBundle.Visible = Object.Type = Enums.SpecificationType.Bundle;
+	Items.ItemBundle.Visible = IsVisibleItemBundle;
 	SavedDataStructure = GetSavedData();
 	For Each Row In SavedDataStructure.Commands Do
 		ThisObject.Items[Row.Value.ButtonName].Visible = SavedDataStructure.Commands.Count() > 1;

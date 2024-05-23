@@ -55,12 +55,13 @@ Function GetAvailableSpecificationsByItem(Item) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	SpecificationsDataSet.Ref
+	|	SpecificationsDataSet.Ref AS Ref
 	|FROM
 	|	Catalog.Specifications.DataSet AS SpecificationsDataSet
 	|WHERE
 	|	SpecificationsDataSet.Item = &ItemType
-	|	AND SpecificationsDataSet.Ref.Type = Value(Enum.SpecificationType.Set)
+	|	AND SpecificationsDataSet.Ref.Type = VALUE(Enum.SpecificationType.Set)
+	|
 	|GROUP BY
 	|	SpecificationsDataSet.Ref
 	|
@@ -71,8 +72,22 @@ Function GetAvailableSpecificationsByItem(Item) Export
 	|FROM
 	|	Catalog.Specifications AS Specifications
 	|WHERE
-	|	Specifications.Type = Value(Enum.SpecificationType.Bundle)
+	|	Specifications.Type = VALUE(Enum.SpecificationType.Bundle)
 	|	AND Specifications.ItemBundle = &Item
+	|
+	|GROUP BY
+	|	Specifications.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Specifications.Ref
+	|FROM
+	|	Catalog.Specifications AS Specifications
+	|WHERE
+	|	Specifications.Type = VALUE(Enum.SpecificationType.BundleByItemKey)
+	|	AND Specifications.ItemBundle = &Item
+	|
 	|GROUP BY
 	|	Specifications.Ref";
 	Query.SetParameter("ItemType", Item.ItemType);

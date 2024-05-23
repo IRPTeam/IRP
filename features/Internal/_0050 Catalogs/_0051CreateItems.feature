@@ -1006,6 +1006,7 @@ Scenario: _005120 set Coat/Jeans specification creation
 		And I click "Save and close" button
 		And Delay 10
 
+
 Scenario: _005121 filling item key according to specification for set
 	* Opening the Bodie element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
@@ -1057,6 +1058,76 @@ Scenario: _005121 filling item key according to specification for set
 			| 'Jeans/S-8'    |
 		And I close current window
 
+Scenario: _005122 create specification (item key)
+		And I close all client application windows
+	* Select item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description'   | 'Item type'    |
+			| 'Bodie'         | 'Coat'         |
+		And I select current line in "List" table
+	* Create new item key
+		And In this window I click command interface button "Item keys"
+		And I click the button named "FormCreate"
+		And I change checkbox "Specification"
+		And I click Choice button of the field named "Specification"
+	* Create Specification
+		And I click the button named "FormCreate"
+		And I change the radio button named "Type" value to "Bundle by item key"
+		And I input "Bundle by item key" text in "ENG" field
+		And I click Select button of "Item bundle" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Bodie'       |
+		And I select current line in "List" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Jeans' | '38/18SD'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Jeans' | '36/19SD'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click "Save and close" button
+	* Check creation
+		And "List" table contains lines
+			| 'Description'        |
+			| 'Bundle by item key' |
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Bundle by item key' |
+		And I select current line in "List" table
+	* Save item key
+		And I click "Save" button
+		Then the form attribute named "Specification" became equal to "Bundle by item key"
+		And I click "Save and close" button	
+		And "List" table contains lines
+			| 'Item key'                 | 'Specification'      |
+			| 'Bodie/Bundle by item key' | 'Bundle by item key' |
+	And I close all client application windows
+	
 
 Scenario: _005125 check Dimensions and weight information (item)
 	*  Select item

@@ -37,6 +37,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CallbackFunction = JobDataSettings.CallbackFunction;
 	CallbackModule = JobDataSettings.CallbackModule;
 	
+	//@skip-check invocation-parameter-type-intersect
 	BackgroundJobAPIServer.FillJobList(JobDataSettings, JobList);
 	
 	RunBackgroundJobInDebugMode = SessionParameters.RunBackgroundJobInDebugMode;
@@ -128,10 +129,12 @@ EndProcedure
 
 &AtServer
 Function GetJobsResult()
+	//@skip-check invocation-parameter-type-intersect
 	Return BackgroundJobAPIServer.GetJobsResult(JobList);
 EndFunction
 
 &AtServer
+//@skip-check invocation-parameter-type-intersect
 Function CheckJobStatusAtServer()
 	
 	BackgroundJobAPIServer.CheckJobs(JobList);

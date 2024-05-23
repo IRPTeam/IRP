@@ -80,7 +80,7 @@ Procedure RunAtServer()
 	EndIf;
 
 	ResultJSON = CommonFunctionsServer.SerializeJSON(Result);
-	
+	ResultLog = StrConcat(ResultInfo.Log, Chars.LF);
 EndProcedure
 
 #EndRegion

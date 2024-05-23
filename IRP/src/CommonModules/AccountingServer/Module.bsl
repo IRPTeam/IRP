@@ -113,6 +113,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
@@ -125,12 +126,8 @@ Function GetOperationsDefinition()
 	// receipt inventory
 	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
-	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation,
-		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
 	// offset of advabces
 	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
-		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
-	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation,
 		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
 	
 	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
@@ -140,12 +137,8 @@ Function GetOperationsDefinition()
 	// sales inventory
 	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
-	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
 	// offset of advances
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
-		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
-	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation,
 		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
 	
 	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming,
@@ -1527,10 +1520,13 @@ Procedure UpdateAccountingTables(Object,
 	
 	ObjectData = GetDocumentData(Object, Undefined, Undefined).ObjectData;
 	
+	ArrayOfNotUsedOperations = New Array();
+	
 	For Each Operation In OperationsByLedgerType Do
 		If Operation.OperationInfo.ByRow Then
 			Continue;
 		EndIf;
+				
 		Parameters = New Structure();
 		Parameters.Insert("Object"        , Object);
 		Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
@@ -1545,7 +1541,7 @@ Procedure UpdateAccountingTables(Object,
 		
 		FillAccountingRowAnalytics(Parameters);
 	EndDo;
-	
+		
 	If MainTableName = Undefined Then
 		For Each Operation In OperationsByLedgerType Do
 			If Not Operation.OperationInfo.RequestTable Then
@@ -1578,6 +1574,12 @@ Procedure UpdateAccountingTables(Object,
 				If Not Operation.OperationInfo.ByRow Then
 					Continue;
 				EndIf;
+				
+				If IsNotUsedOperation(Operation.OperationInfo.Operation, ObjectData, RowData) Then
+					AddNotUsedOperation(ArrayOfNotUsedOperations, Operation.OperationInfo.Operation, Row.Key);
+					Continue;
+				EndIf;
+		 
 				Parameters = New Structure();
 				Parameters.Insert("Object"        , Object);
 				Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
@@ -1597,6 +1599,51 @@ Procedure UpdateAccountingTables(Object,
 	
 	AccountingRowAnalytics.FillValues(Object.Ref, "Document");
 	AccountingExtDimensions.FillValues(Object.Ref, "Document");
+	
+	RemoveNotUsedOperations(ArrayOfNotUsedOperations, AccountingRowAnalytics);
+	RemoveNotUsedOperations(ArrayOfNotUsedOperations, AccountingExtDimensions);
+EndProcedure
+
+Function IsNotUsedOperation(Operation, ObjectData, RowData)
+	// custom flter for each document
+	DocMetadata = ObjectData.Ref.Metadata();
+	
+	If DocMetadata = Metadata.Documents.SalesInvoice Then
+		Return IsNotUsedOperation_SalesInvoice(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.SalesReturn Then
+		Return IsNotUsedOperation_SalesReturn(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
+		Return IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
+		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);		
+	EndIf;
+	
+	Return False; // is used operation
+EndFunction
+
+Procedure AddNotUsedOperation(ArrayOfNotUsedOperations, Operation, RowKey = Undefined)
+	ArrayOfNotUsedOperations.Add(New Structure("Operation, RowKey", Operation, RowKey));
+EndProcedure
+
+Procedure RemoveNotUsedOperations(ArrayOfNotUsedOperations, AccountingTable)
+	ArrayForDelete = New Array();
+	For Each ItemOfNotUsedOperation In ArrayOfNotUsedOperations Do
+		For Each Row In AccountingTable Do
+			If Row.Operation = ItemOfNotUsedOperation.Operation Then
+				If ValueIsFilled(ItemOfNotUsedOperation.RowKey) Then
+					If Row.Key = ItemOfNotUsedOperation.RowKey Then
+						ArrayForDelete.Add(Row);
+					EndIf;
+				Else
+					ArrayForDelete.Add(Row);
+				EndIf;
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		AccountingTable.Delete(ItemForDelete);
+	EndDo;
 EndProcedure
 
 Function GetDocumentData(Object, TableRow, MainTableName)
@@ -1721,6 +1768,11 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 			Continue;
 		EndIf;
 	
+		If Row.Operation.DeletionMark Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+		
 		OpDef = Def.Get(Row.Operation);
 		If OpDef.Property("ReferTableName") And OpDef.ReferTableName <> MainTableName Then
 			Continue;
@@ -1758,6 +1810,11 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 	For Each Row In AccountingExtDimensions Do
 		
 		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
+			ArrayForDelete.Add(Row);
+			Continue;
+		EndIf;
+		
+		If Row.Operation.DeletionMark Then
 			ArrayForDelete.Add(Row);
 			Continue;
 		EndIf;
@@ -2303,6 +2360,86 @@ Procedure CreateJE_ByArrayRefs(ArrayOfBasisDocuments, ArrayOfLedgerTypes) Export
 		Row.JEDocument.Write(DocumentWriteMode.Write);
 	EndDo;	
 EndProcedure
+
+#EndRegion
+
+#Region OperationFilters
+
+Function IsNotUsedOperation_SalesInvoice(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If Operation = AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		If RowData <> Undefined And RowData.IsService Then
+			Return True;
+		ENdIf;
+	EndIf;
+	Return False;
+EndFunction
+
+Function IsNotUsedOperation_SalesReturn(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If Operation = AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
+		If RowData <> Undefined And RowData.IsService Then
+			Return True;
+		ENdIf;
+	EndIf;
+	Return False;
+EndFunction
+
+Function IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Not ValueIsFilled(RowData.Agreement) Then
+		Return True;
+	EndIf;
+	
+	IsVendor   = RowData.Agreement.Type = Enums.AgreementTypes.Vendor;
+	IsCustomer = RowData.Agreement.Type = Enums.AgreementTypes.Customer;
+	IsOther    = RowData.Agreement.Type = Enums.AgreementTypes.Other;
+	
+	If IsVendor And Operation = AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
+		Return False;
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
+		Return False;
+	ElsIf IsVendor And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
+		Return False;
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions Then
+		Return False;
+	ElsIf IsOther And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
+		Return False;
+	EndIf;
+	Return True;
+EndFunction
+
+Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Not ValueIsFilled(RowData.Agreement) Then
+		Return True;
+	EndIf;
+	
+	IsVendor   = RowData.Agreement.Type = Enums.AgreementTypes.Vendor;
+	IsCustomer = RowData.Agreement.Type = Enums.AgreementTypes.Customer;
+	IsOther    = RowData.Agreement.Type = Enums.AgreementTypes.Other;
+	
+	If IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
+		Return False;
+	ElsIf IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues Then
+		Return False;
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
+		Return False;
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues Then
+		Return False;
+	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
+		Return False;
+	EndIf;
+	Return True;
+EndFunction
 
 #EndRegion
 

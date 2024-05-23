@@ -36,8 +36,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 		DateValueFilter = 
 			?(BegOfDay(Parameters.DocumentDate) = BegOfDay(CurrentDate), 
 				EndOfDay(CurrentDate), Parameters.DocumentDate);
-		//DateField = New DataCompositionField("Ref.Date");
-		DateField = New DataCompositionField("Date");
+		DateField = New DataCompositionField("Ref.Date");
 		For Each FilterItem In Form.List.Filter.Items Do
 			If FilterItem.LeftValue = DateField Then
 				DateFilter = FilterItem;

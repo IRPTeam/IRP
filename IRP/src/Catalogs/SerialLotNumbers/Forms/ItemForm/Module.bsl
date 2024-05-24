@@ -51,7 +51,10 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 		
 	Form.Items.ConsignorsInfo.Visible = Form.ConsignorInfoMode = "Own";
-	Form.Items.InheritConsignorsInfo.Visible = Form.ConsignorInfoMode = "Inherit";	
+	Form.Items.InheritConsignorsInfo.Visible = Form.ConsignorInfoMode = "Inherit";
+	
+	Form.Items.GroupRelatedSerialLotNumbers.Visible = Object.HasRelatedSerialLotNumbers;
+	Form.Items.SourceOfOrigin.Visible = Object.EachSerialLotNumberIsUnique;
 EndProcedure
 
 &AtServer
@@ -110,6 +113,16 @@ Function GetOwnerInfo(OwnerRef)
 	
 	Return Result;
 EndFunction
+
+&AtClient
+Procedure HasRelatedSerialLotNumbersOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EachSerialLotNumberIsUniqueOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
 
 #EndRegion
 

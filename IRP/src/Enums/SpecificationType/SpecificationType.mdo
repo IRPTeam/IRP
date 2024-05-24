@@ -50,4 +50,19 @@
    <value>Set</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="37edd0bb-5779-4d3d-a00f-58cd49b461a8">
+  <name>BundleByItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>Bundle by item key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Набор по характеристике</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyanta göre takım</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

@@ -4463,3 +4463,69 @@ Scenario: _092103 check scan unique serial in the PhysicalCountByLocation (use s
 		Then there are lines in TestClient message log
 			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
 	And I close all client application windows		
+
+
+Scenario: _092104 create a serial lot number with dependent serial lot numbers
+	And I close all client application windows
+	* Create sln
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"	
+		And I click "Create" button
+		And I wait "Source of origin" attribute unavailability in "1" seconds
+	* Filling main details
+		And I click Choice button of the field named "Owner"
+		And I go to line in "" table
+			| ''         |
+			| 'Item key' |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key'  | 'Specification' |
+			| 'Dress' | 'Dress/A-8' | 'A-8'           |
+		And I select current line in "List" table	
+		And I input "90899808089" text in "Serial number" field
+		And I set checkbox "Stock balance detail"
+		And I set checkbox "Batch balance detail"
+		And I set checkbox "Has related serial lot numbers"	
+	* Add related sln
+		And in the table "RelatedSerialLotNumbers" I click the button named "RelatedSerialLotNumbersAdd"
+		And I click choice button of "Serial lot number" attribute in "RelatedSerialLotNumbers" table
+		And I go to line in "List" table
+			| 'Owner' | 'Serial number'  |
+			| 'UNIQ'  | '09987897977889' |
+		And I select current line in "List" table
+		And I finish line editing in "RelatedSerialLotNumbers" table
+		And in the table "RelatedSerialLotNumbers" I click the button named "RelatedSerialLotNumbersAdd"
+		And I select "99098809009910" from "Serial lot number" drop-down list by string in "RelatedSerialLotNumbers" table
+		And I finish line editing in "RelatedSerialLotNumbers" table
+		And in the table "RelatedSerialLotNumbers" I click the button named "RelatedSerialLotNumbersAdd"
+		And I click Create button of "Serial lot number" field
+		And I input "7893" text in "Serial number" field
+		And I click "Save and close" button
+		And I finish line editing in "RelatedSerialLotNumbers" table
+		And I click "Save" button
+	* Check
+		Then the form attribute named "BatchBalanceDetail" became equal to "Yes"
+		Then the form attribute named "CreateBarcodeWithSerialLotNumber" became equal to "No"
+		Then the form attribute named "Description" became equal to "90899808089"
+		Then the form attribute named "EachSerialLotNumberIsUnique" became equal to "Yes"
+		Then the form attribute named "HasRelatedSerialLotNumbers" became equal to "Yes"
+		Then the form attribute named "Inactive" became equal to "No"
+		Then the form attribute named "Owner" became equal to "Dress/A-8"
+		Then the form attribute named "OwnerSelect" became equal to "Manual"
+		And "RelatedSerialLotNumbers" table became equal
+			| 'Serial lot number' |
+			| '09987897977889'    |
+			| '99098809009910'    |
+			| '7893'              |
+		Then the form attribute named "SourceOfOrigin" became equal to ""
+		Then the form attribute named "StockBalanceDetail" became equal to "Yes"
+	* Fill source of origin
+		And I input "1234" text in "Source of origin" field
+		And I click Create button of "Source of origin" field
+		And I click "Save and close" button
+		And I wait "Source of origin (create)" window closing in 5 seconds
+	* Check creation
+		And I click "Save and close" button	
+		And "List" table contains lines
+			| 'Serial number'   |
+			| '90899808089'     |
+	And I close all client application windows

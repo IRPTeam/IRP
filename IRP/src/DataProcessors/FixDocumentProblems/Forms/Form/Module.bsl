@@ -23,44 +23,13 @@ EndProcedure
 &AtServer
 Procedure FillDocumentsAtServer()
 	
-	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
-	Array  = New Array;
-	For Each Doc In Metadata.Documents Do
-		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), Doc.Name));
-	EndDo;	
+	Settings = FixDocumentProblemsServer.GetDocumentListSettings();
+	Settings.StartDate = Period.StartDate;
+	Settings.EndDate = Period.EndDate;
+	Settings.OnlyPosted = OnlyPosted;
+	Settings.CompanyList = Company.UnloadValues();
 	
-	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	AllDocuments.Date AS Date,
-	|	AllDocuments.Ref,
-	|	AllDocuments.DocumentType,
-	|	CASE
-	|		WHEN AllDocuments.Ref.Posted
-	|			THEN 0
-	|		WHEN AllDocuments.Ref.DeletionMark
-	|			THEN 1
-	|		ELSE 2
-	|	END AS Picture
-	|FROM
-	|	AllDocuments AS AllDocuments
-	|WHERE
-	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
-	|	AND CASE WHEN &OnlyPosted THEN AllDocuments.Ref.Posted ELSE TRUE END
-	|	AND CASE WHEN &CompanySet THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
-	|
-	|ORDER BY
-	|	AllDocuments.Date";
-	
-	Query = New Query(QueryTxt);
-	Query.SetParameter("StartDate", Period.StartDate);
-	Query.SetParameter("EndDate", Period.EndDate);
-	Query.SetParameter("OnlyPosted", OnlyPosted);
-	Query.SetParameter("CompanySet", Company.Count() > 0);
-	Query.SetParameter("CompanyList", Company.UnloadValues());
-	Result = Query.Execute().Unload();
+	Result = FixDocumentProblemsServer.GetDocumentList(Settings);
 	
 	DocumentList.Load(Result);
 EndProcedure
@@ -342,9 +311,10 @@ Procedure CheckPosting(Command)
 EndProcedure
 
 &AtClient
-Procedure CheckAccountingAnalytics(Command)
+Procedure CheckAccountingAnalytics(Command)	
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics");
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingAnalytics();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics", ArrayOfExcludeTypes);
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
 EndProcedure
@@ -352,52 +322,30 @@ EndProcedure
 &AtClient
 Procedure CheckAccountingTranslations(Command)
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation");
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingTranslation();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation", ArrayOfExcludeTypes);
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
 EndProcedure
 
 &AtServer
-Function GetJobsForCheckPostingDocuments(ProcedurePath)
-	
-	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
-	TypesTable.GroupBy("DocumentType");
-	
-	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
-	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
-	JobDataSettings.ProcedurePath = ProcedurePath;
-	JobDataSettings.CallbackWhenAllJobsDone = False;
-					
-	DocsInPack = 100;
-	For Each TypeItem In TypesTable Do
-		DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
-		 
-		StreamArray = New Array;
-		Pack = 1;
-		TotalDocs = DocumentsRows.Count();
-		For Each Row In DocumentsRows Do
-			StreamArray.Add(Row.Ref);
-		 	
-		 	If StreamArray.Count() = DocsInPack Then
-		 		JobSettings = BackgroundJobAPIServer.JobSettings();
-				JobSettings.ProcedureParams.Add(StreamArray);
-				JobSettings.ProcedureParams.Add(True);
-				JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
-				JobDataSettings.JobSettings.Add(JobSettings);
-				
-				StreamArray = New Array;
-		 		Pack = Pack + 1;
-		 	EndIf;
+Function GetJobsForCheckPostingDocuments(ProcedurePath, ArrayOfExcludeTypes = Undefined)
+	DocumentsTable = DocumentList.Unload();
+	If ArrayOfExcludeTypes <> Undefined Then
+		ArrayForDelete = New Array();
+		
+		For Each Row In DocumentsTable Do
+			If ArrayOfExcludeTypes.Find(TypeOf(Row.Ref)) <> Undefined Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		EndDo;
-		If StreamArray.Count() > 0 Then
-			JobSettings = BackgroundJobAPIServer.JobSettings();
-			JobSettings.ProcedureParams.Add(StreamArray);
-			JobSettings.ProcedureParams.Add(True);
-			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
-			JobDataSettings.JobSettings.Add(JobSettings);
-	 	EndIf;
-	EndDo;
-
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			DocumentsTable.Delete(ItemForDelete);
+		EndDo;
+	EndIf;
+	
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocumentsTable, ProcedurePath);
 	Return JobDataSettings;
 EndFunction
 
@@ -659,47 +607,8 @@ EndProcedure
 
 &AtServer
 Function GetJobsForWriteRecordSet()
-	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
-	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
-	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
-					
-	DocsInPack = 100;
-	StreamArray = New Array;
-	For Each Doc In PostingInfo.GetItems() Do
-		
-		For Each Row In Doc.GetItems() Do
-		
-			If Not Row.Select OR Row.Processed Then
-				Continue;
-			EndIf;
-			
-			Pack = 1;
-			Str = New Structure;
-			Str.Insert("Ref", Row.Ref);
-			Str.Insert("NewMovement", Row.NewMovement);
-			Str.Insert("RegName", Row.RegName);
-			StreamArray.Add(Str);
-			
-			If StreamArray.Count() = DocsInPack Then
-				JobSettings = BackgroundJobAPIServer.JobSettings();
-				JobSettings.ProcedureParams.Add(StreamArray);
-				JobSettings.ProcedureParams.Add(True);
-				JobSettings.Description = "Write records: " + Pack + " * (" + DocsInPack + ")";
-				JobDataSettings.JobSettings.Add(JobSettings);
-				
-				StreamArray = New Array;
-				Pack = Pack + 1;
-			EndIf;
-		EndDo;
-	EndDo;
-	If StreamArray.Count() > 0 Then
-		JobSettings = BackgroundJobAPIServer.JobSettings();
-		JobSettings.ProcedureParams.Add(StreamArray);
-		JobSettings.ProcedureParams.Add(True);
-		JobSettings.Description = "Write records: " + Pack + " * (" + StreamArray.Count() + ")";
-		JobDataSettings.JobSettings.Add(JobSettings);
-	EndIf;
-
+	Tree = FormAttributeToValue("PostingInfo", Type("ValueTree"));
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForWriteRecordSet(Tree);
 	Return JobDataSettings;
 EndFunction
 
@@ -905,7 +814,8 @@ EndProcedure
 #EndRegion
 
 #Region ShowDiff
-	
+
+&AtServer	
 Procedure ShowDiff()
 	ThisObject.BlockDiffDocActivate = True;
 	
@@ -1038,8 +948,6 @@ EndProcedure
 
 &AtClient
 Procedure NextChanges(FormItem, FormAttribute, DiffTable)
-	
-	Var Index;
 	
 	CurrentCell = FormItem.CurrentArea;
 	NumberRow = CurrentCell.Top;
@@ -1206,7 +1114,6 @@ Procedure CompareSpreadsheetDocuments()
 				
 				Area1.BackColor = BackColor_Changed;
 				Area2.BackColor = BackColor_Changed;
-				
 				
 				NewDiffRow = ThisObject.DiffCellsLeft.Add();
 				NewDiffRow.NumberRow = RowNumber1;
@@ -1411,5 +1318,3 @@ Function GetDataForCompare(ValueTableSource, ByRow)
 EndFunction
 	
 #EndRegion
-
-

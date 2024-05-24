@@ -149,7 +149,8 @@ Scenario: _0154052 check item and item key input by search in line in a document
 		| 'Item'   | 'Item key'   |
 		| 'Boots'  | '36/18SD'    |
 		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I input "J22001" text in "Item" field of "ItemList" table		
+		And I input "J22001" text in "Item" field of "ItemList" table	
+		And Delay 2	
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001   |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
@@ -1011,7 +1012,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
-		And I select "tr" from "Partner term" drop-down list by string in "PaymentList" table
+		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
@@ -1019,8 +1020,8 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payee'              | 'Partner term'               |
-		| 'Ferron BP'  | 'Company Ferron BP'  | 'Basic Partner terms, TRY'   |
+		| 'Partner'    | 'Payee'              | 'Partner term'         |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Vendor Ferron, USD'   |
 	And I close all client application windows
 
 
@@ -1045,7 +1046,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		And I select "co" from "Payee" drop-down list by string in "PaymentList" table
 	* Partner term input by search in line
 		And I activate "Partner term" field in "PaymentList" table
-		And I select "tr" from "Partner term" drop-down list by string in "PaymentList" table
+		And I select "usd" from "Partner term" drop-down list by string in "PaymentList" table
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
@@ -1053,8 +1054,8 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Payee'              | 'Partner term'               |
-		| 'Ferron BP'  | 'Company Ferron BP'  | 'Basic Partner terms, TRY'   |
+		| 'Partner'    | 'Payee'              | 'Partner term'         |
+		| 'Ferron BP'  | 'Company Ferron BP'  | 'Vendor Ferron, USD'   |
 	And I close all client application windows
 
 Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency, partner, payee, input by search in line in a Bank receipt (in english)
@@ -1790,10 +1791,10 @@ Scenario: _01540114 check item input by search in line by code in a document Ban
 			| 'Payee'                |
 			| 'Company Ferron BP'    |
 	* Partner term
-		And I select "46" from "Partner term" drop-down list by string in "PaymentList" table
+		And I select "49" from "Partner term" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner term'                        |
-			| 'Basic Partner terms, without VAT'    |
+			| 'Partner term'          |
+			| 'Vendor Ferron, USD'    |
 	* Financial movement type
 		And I select "10" from "Financial movement type" drop-down list by string in "PaymentList" table
 		And "PaymentList" table contains lines

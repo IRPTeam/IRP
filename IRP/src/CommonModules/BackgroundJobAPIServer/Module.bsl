@@ -59,6 +59,10 @@ Function NotifySettings() Export
 	Return Settings;
 EndFunction
 
+// Notify stream.
+// 
+// Parameters:
+//  NotifySettings - See NotifySettings
 Procedure NotifyStream(NotifySettings) Export
 	Settings = CommonFunctionsServer.SerializeJSONUseXDTO(NotifySettings);
 	Settings = "✔️❌" + Settings;
@@ -68,13 +72,12 @@ EndProcedure
 Function RunJob(JobRow)
 	
 	If TypeOf(JobRow.JobParameters) = Type("String") Then
-		Params = CommonFunctionsServer.GetFromCache(JobRow.JobParameters);
+		Params = CommonFunctionsServer.GetFromCache(JobRow.JobParameters); // Array Of String
 	Else
-		Params = JobRow.JobParameters;
+		Params = JobRow.JobParameters; // Array Of String
 	EndIf;
 	
 	If SessionParameters.RunBackgroundJobInDebugMode Then
-		
 		Job = New Structure;
 		Job.Insert("UUID", "Not job - " + New UUID);
 		Job.Insert("Begin", CommonFunctionsServer.GetCurrentSessionDate());
@@ -86,7 +89,8 @@ Function RunJob(JobRow)
 			ParamsText = New Array; // Array Of String
 			For Index = 0 To Params.UBound() Do
 				ParamsText.Add("Params[" + Index + "]");
-			EndDo; 
+			EndDo;
+			SetSafeMode(True);
 			Execute JobRow.ProcedurePath + "(" + StrConcat(ParamsText, ",") + ")";
 			Job.Insert("State", Enums.JobStatus.Completed);
 		Except
@@ -95,6 +99,7 @@ Function RunJob(JobRow)
 		EndTry;
 		Job.Insert("End", CommonFunctionsServer.GetCurrentSessionDate());
 	Else
+		//@skip-check statement-type-change
 		Job = BackgroundJobs.Execute(JobRow.ProcedurePath, Params, JobRow.Key, JobRow.Title);
 	EndIf;
 	
@@ -104,7 +109,7 @@ EndFunction
 // Run jobs.
 // 
 // Parameters:
-//  JobList - See CommonForm.BackgroundMultiJob.JobList
+//  JobList - See GetJobList
 //  MaxJobStream - Number - 
 Procedure RunJobs(JobList, MaxJobStream) Export
 	
@@ -128,8 +133,10 @@ Procedure RunJobs(JobList, MaxJobStream) Export
 		
 		Job = RunJob(JobRow);
 		If TypeOf(Job) = Type("Structure") Then
+			//@skip-check property-return-type
 			JobRow.NonJobData = Job;
 		EndIf;
+		//@skip-check invocation-parameter-type-intersect
 		FillJobInfo(Job, JobRow);
 		
 		CanRun = CanRun - 1;
@@ -144,7 +151,7 @@ EndProcedure
 // 
 // Parameters:
 //  JobDataSettings - See JobDataSettings
-//  JobList - See CommonForm.BackgroundMultiJob.JobList
+//  JobList - See GetJobList
 Procedure FillJobList(JobDataSettings, JobList) Export
 	For Each JobSetting In JobDataSettings.JobSettings Do
 		JobRow = JobList.Add();
@@ -164,7 +171,7 @@ EndProcedure
 // Check jobs.
 // 
 // Parameters:
-//  JobList - See CommonForm.BackgroundMultiJob.JobList
+//  JobList - See GetJobList
 Procedure CheckJobs(JobList) Export
 	For Each JobRow In JobList Do
 		
@@ -172,11 +179,14 @@ Procedure CheckJobs(JobList) Export
 			Continue;
 		EndIf;
 		
+		//@skip-check property-return-type
 		If Not JobRow.NonJobData = Undefined Then
+			//@skip-check variable-value-type
 			Job = JobRow.NonJobData;
 		Else
 			Job = BackgroundJobs.FindByUUID(New UUID(JobRow.ID));
 		EndIf;
+		//@skip-check invocation-parameter-type-intersect
 		FillJobInfo(Job, JobRow);
 	EndDo;
 EndProcedure
@@ -185,7 +195,7 @@ EndProcedure
 // 
 // Parameters:
 //  Job - BackgroundJob - Job
-//  JobRow - ValueTableRow Of See CommonForm.BackgroundMultiJob.JobList
+//  JobRow - ValueTableRow Of See GetJobList
 Procedure FillJobInfo(Job, JobRow)
 	JobRow.ID = Job.UUID;
 	JobRow.Start = Job.Begin;
@@ -196,6 +206,7 @@ Procedure FillJobInfo(Job, JobRow)
 	LogData = New Array; // Array Of String
 	MsgArray = New Array; // Array Of String
 	
+	//@skip-check property-return-type
 	If JobRow.NonJobData = Undefined Then
 		UsrMsg = Job.GetUserMessages(True);
 		If Job.State = BackgroundJobState.Active Then
@@ -210,6 +221,7 @@ Procedure FillJobInfo(Job, JobRow)
 			JobRow.Status = Enums.JobStatus.EmptyRef();
 		EndIf;
 	Else
+		//@skip-check statement-type-change
 		UsrMsg = GetUserMessages(True);
 		JobRow.Status = Job.State;
 	EndIf;
@@ -238,6 +250,7 @@ Procedure FillJobInfo(Job, JobRow)
 				JobRow.Speed = NotifySettings.Speed;
 			EndIf;
 			If NotifySettings.End Then
+				//@skip-check property-return-type, statement-type-change
 				JobRow.DataAddress = NotifySettings.DataAddress;
 				NotifySettings.Percent = 100;
 			EndIf;
@@ -267,7 +280,7 @@ EndProcedure
 // Get jobs result.
 // 
 // Parameters:
-//  JobList - See CommonForm.BackgroundMultiJob.JobList
+//  JobList - See GetJobList
 // 
 // Returns:
 //  Array Of Structure:
@@ -297,3 +310,117 @@ Function GetJobsResult(JobList) Export
 	Return Array;
 	
 EndFunction
+
+// Get job list.
+// 
+// Returns:
+//  ValueTable - Get job list:
+// * CallbackDone - Boolean - 
+// * DataAddress - String - 
+// * End - Date - 
+// * EndAt - Date - 
+// * ID - String - 
+// * Icon - Picture - 
+// * JobParameters - String - 
+// * Key - String - 
+// * Log - String - 
+// * NonJobData - Arbitrary - 
+// * Percent - Number - 
+// * PercentIndicator - String - 
+// * ProcedurePath - String - 
+// * Speed - String - 
+// * Start - Date - 
+// * Status - EnumRef.JobStatus - 
+// * Title - String - 
+// * UserMessages - String - 
+Function GetJobList() Export
+	Table = New ValueTable();
+	Table.Columns.Add("CallbackDone", New TypeDescription("Boolean"));
+	Table.Columns.Add("DataAddress", New TypeDescription("String"));
+	Table.Columns.Add("End", New TypeDescription("Date"));
+	Table.Columns.Add("EndAt", New TypeDescription("Date"));
+	Table.Columns.Add("ID", New TypeDescription("String"));
+	Table.Columns.Add("Icon", New TypeDescription("Picture"));
+	Table.Columns.Add("JobParameters", New TypeDescription("String"));
+	Table.Columns.Add("Key", New TypeDescription("String"));
+	Table.Columns.Add("Log", New TypeDescription("String"));
+	Table.Columns.Add("NonJobData");
+	Table.Columns.Add("Percent", New TypeDescription("Number"));
+	Table.Columns.Add("PercentIndicator", New TypeDescription("String"));
+	Table.Columns.Add("ProcedurePath", New TypeDescription("String"));
+	Table.Columns.Add("Speed", New TypeDescription("String"));
+	Table.Columns.Add("Start", New TypeDescription("Date"));
+	Table.Columns.Add("Status", New TypeDescription("EnumRef.JobStatus"));
+	Table.Columns.Add("Title", New TypeDescription("String"));
+	Table.Columns.Add("UserMessages", New TypeDescription("String"));
+	Return Table;
+EndFunction
+
+Function GetPostingInfo() Export
+	Tree = New ValueTree();
+	Tree.Columns.Add("Date");
+	Tree.Columns.Add("DocumentType");
+	Tree.Columns.Add("Errors");
+	Tree.Columns.Add("NewMovement");
+	Tree.Columns.Add("Processed");
+	Tree.Columns.Add("Ref");
+	Tree.Columns.Add("RegName");
+	Tree.Columns.Add("Select");
+	Return Tree;
+EndFunction
+
+Function RegInfoArrayToPostingInfo(RegInfoArray) Export
+	Tree = GetPostingInfo();
+	
+	For Each DocRow In RegInfoArray Do			
+		ParentRow = Tree.Rows.Add();
+		ParentRow.Ref = DocRow.Ref;
+		ParentRow.DocumentType = TypeOf(DocRow.Ref);
+		ParentRow.Errors = DocRow.Error;
+		For Each RegInfoData In DocRow.RegInfo Do
+			NewRow = ParentRow.Rows.Add();
+			FillPropertyValues(NewRow, RegInfoData);
+			NewRow.Select = True;
+			NewRow.Processed = False;
+			NewRow.Date = ParentRow.Date;
+			NewRow.Ref = ParentRow.Ref;
+			NewRow.DocumentType = ParentRow.DocumentType;
+			NewRow.NewMovement = New ValueStorage(RegInfoData.NewPostingData, New Deflation(9));
+		EndDo;
+	EndDo;
+	Return Tree;
+EndFunction
+
+// Run jobs from server.
+// 
+// Parameters:
+//  JobDataSettings - See BackgroundJobAPIServer.JobDataSettings
+//  JobList - See BackgroundJobAPIServer.GetJobList
+Procedure RunJobsFromServer(JobDataSettings, JobList) Export
+	RunBackgroundJobInDebugMode = SessionParameters.RunBackgroundJobInDebugMode;
+ 
+	AllJobIsDone = False;
+	While Not AllJobIsDone Do 
+		CheckJobs(JobList);
+		RunJobs(JobList, JobDataSettings.JobLimitCount); 
+		
+		JobListForWait = New Array; // Array Of BackgroundJob 
+		For Each Row In JobList Do
+			If Row.Status = Enums.JobStatus.Active Then
+				JobListForWait.Add(BackgroundJobs.FindByUUID(New UUID(Row.ID)));
+			EndIf;   			
+		EndDo;
+		
+		NotAllJobIsDone = False;
+		For Each Row In JobList Do
+			If Row.Status = Enums.JobStatus.Active OR Row.Status = Enums.JobStatus.Wait Then
+				NotAllJobIsDone = True;
+			EndIf;   			
+		EndDo;           
+		
+		AllJobIsDone = Not NotAllJobIsDone;
+		If Not RunBackgroundJobInDebugMode Then
+			BackgroundJobs.WaitForExecutionCompletion(JobListForWait);   
+		EndIf;
+	EndDo;
+EndProcedure

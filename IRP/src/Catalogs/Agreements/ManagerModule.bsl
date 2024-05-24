@@ -190,7 +190,7 @@ Function GetDefaultChoiceRef(Parameters, AgreementParameters) Export
 			EndIf;
 		EndDo;
 		If CountAgreementWithCompany = 1 Then
-			Agreement = TmpAgreement; 
+			Agreement = TmpAgreement;
 		EndIf;
 	EndIf;
 	

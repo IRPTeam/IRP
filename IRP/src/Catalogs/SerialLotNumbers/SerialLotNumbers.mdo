@@ -243,6 +243,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="28967193-b3aa-4a40-9124-ddf19b1b20dd">
+    <name>HasRelatedSerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Has related serial lot numbers</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e6e70b41-8ada-489d-b7cc-3be89fd64c3f">
+    <name>SourceOfOrigin</name>
+    <synonym>
+      <key>en</key>
+      <value>Source of origin</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SourceOfOrigins</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="ef605c80-fa78-4080-af6f-a89ca3452c86">
     <producedTypes>
       <objectType typeId="a069c6dd-b2ef-4730-94be-aa7292aaf35a" valueTypeId="d08be586-09e2-4600-baf1-9b7864cb7368"/>
@@ -349,6 +379,31 @@
         <name>Filter.OurCompany</name>
         <value xsi:type="core:BooleanValue"/>
       </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e4db55c3-8132-490f-a882-960c21c1206d">
+    <producedTypes>
+      <objectType typeId="bf1fbb15-400f-4663-aa54-b8ab9597a1a5" valueTypeId="bbbe9097-d9f4-4ab8-9861-de6e1155a92a"/>
+      <rowType typeId="37f2c83c-9bcc-4fe9-a026-01dd22151273" valueTypeId="ec98bb6f-f8eb-453e-8945-38caa6ae1296"/>
+    </producedTypes>
+    <name>RelatedSerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Related serial lot numbers</value>
+    </synonym>
+    <attributes uuid="e969d874-8a74-4394-82f4-5731c0f73bbd">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

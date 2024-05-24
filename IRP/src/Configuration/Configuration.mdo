@@ -17,7 +17,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.21.4434</version>
+  <version>2024.21.4451</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -761,6 +761,7 @@
   <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
   <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
   <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
+  <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

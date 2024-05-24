@@ -1500,23 +1500,27 @@ Function BindTransactionType(Parameters)
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,
-		|StepClearByTransactionTypeBankPayment, 
+		|StepClearByTransactionTypeBankPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("BankReceipt",
 		"StepChangeTransitAccountByAccount,
 		|StepClearByTransactionTypeBankReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashPayment", 
 		"StepClearByTransactionTypeCashPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeCashAccountByTransactionType,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");
@@ -6837,6 +6841,7 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options.Agreement     = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.Company		  = GetCompany(Parameters);
 		Options.CurrentDate   = GetDate(Parameters);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "PaymentListChangeAgreementByPartner";
 		Chain.ChangeAgreementByPartner.Options.Add(Options);

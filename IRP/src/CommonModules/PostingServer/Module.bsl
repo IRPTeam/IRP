@@ -1612,16 +1612,22 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			Result.Insert("RegName", Doc.RegName);
 			Result.Insert("Error", "");
 			
+			Parts = StrSplit(Doc.RegName, ".");
+			ManagerRegisterName = Parts[0] + "s." + Parts[1];
+			ObjectRegisterName = Parts[0] + "." + Parts[1];
+				
+			IsAccountingDataRegister = AccountingServer.IsAccountingDataRegister(ObjectRegisterName);
+			IsAccountingAnalyticsRegister = AccountingServer.IsAccountingAnalyticsRegister(ObjectRegisterName);
+			
 			NewMovement = Doc.NewMovement.Get(); // ValueTable
-			If Not Doc.Ref.Posted And NewMovement.Count() > 0 Then
+			If Not Doc.Ref.Posted 
+			   And NewMovement.Count() > 0
+			   And Not IsAccountingDataRegister 
+			   And Not IsAccountingAnalyticsRegister Then
 				Result.Error = String(Doc.Ref) + " - Not posted. Can not update records";
 			Else
 				
-				Parts = StrSplit(Doc.RegName, ".");
-				ManagerRegisterName = Parts[0] + "s." + Parts[1];
-				ObjectRegisterName = Parts[0] + "." + Parts[1];
-				
-				If AccountingServer.IsAccountingDataRegister(ObjectRegisterName) Then
+				If IsAccountingDataRegister Then
 					
 					ArrayOfBasisDocuments = New Array();
 					ArrayOfBasisDocuments.Add(Doc.Ref);
@@ -1640,7 +1646,7 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 					CreateRecordSet = Eval(ManagerRegisterName + ".CreateRecordSet()"); // AccumulationRegisterRecordSet
 				
 					//@skip-check unknown-method-property
-					If AccountingServer.IsAccountingAnalyticsRegister(ObjectRegisterName) Then
+					If IsAccountingAnalyticsRegister Then
 						CreateRecordSet.Filter.Document.Set(Doc.Ref);
 						NewMovement.FillValues(Doc.Ref, "Document");
 					Else

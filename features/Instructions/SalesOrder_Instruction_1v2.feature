@@ -34,13 +34,12 @@ Cancel reason 	-	Iptal Sebebi 	-	Причина отмены 	-	this field is fo
 Sales person 	-	Satış personeli 	-	Продавец 	-	this field is for entering the name or identifier of the salesperson responsible for the current sales order.	-	Bu alan, mevcut satış siparişinden sorumlu satıcının adını veya kimliğini girmek için tasarlanmıştır.	-	это поле предназначено для ввода имени или идентификатора продавца, ответственного за текущий заказ на продажу
 
 Scenario: Sales Order Instruction
-
-* Welcome to our IRP system tutorial. 
-* In this video, we will walk you through the steps to create a Sales Order. 
-* The sales order process is a way for businesses to manage customer orders from start to finish. First, a customer places an order, and the sales team records the order details in the system, including customer information, product details, quantities, prices, and any special instructions.
-* By the end of this guide, you'll be able to efficiently input all necessary details for a sales transaction. Let's get started!
-* The warehouse team prepares the order for shipping by picking, packing, and labelling the products. An invoice is created and sent to the customer, detailing the products, prices, discounts, and the total amount due. Payment is collected based on the agreed terms, which could be before delivery, upon delivery, or on credit. Finally, the company reviews data from orders to understand sales trends, customer preferences, and inventory needs. Reports are created to evaluate how well the sales order process is working and to find areas for improvement. Business process chain can be different depends on company management preferences and goverment rules.
-* Firstly go to Sales Orders from Sales - A/R subsystem
+* Welcome to our IRP system tutorial.
+* In this video, we will guide you through the steps to create a Sales Order. The sales order process helps businesses manage customer orders from beginning to end. It starts when a customer places an order, and the sales team records the order details in the system. This includes customer information, product details, quantities, prices, and any special instructions.
+* Once the Sales Order document is created, you can either create the Sales Invoice first and send it to the customer, detailing the products, prices, discounts, and the total amount due. The warehouse team then prepares the order for shipping by picking, packing, and labeling the products, and creates a Shipment Confirmation Document. Alternatively, the warehouse team can create the Shipment Confirmation first, and the Sales Invoice can be generated accordingly. Payment is collected based on the agreed terms, which could be before delivery, upon delivery, or on credit.
+* After the order is delivered, the company reviews data from orders to understand sales trends, customer preferences, and inventory needs. Reports are generated to evaluate how well the sales order process is working and to identify areas for improvement. The business process chain can vary depending on company management preferences and government regulations.
+* By the end of this guide, you’ll be able to efficiently input all necessary details for a sales transaction. Let’s get started!
+* Firstly, go to Sales Orders from Sales - A/R subsystem
 	When in sections panel I select "Sales - A/R"
 	And I make dimming effect on UI Automation form elements "" as prompted
 		| 'Hint' |

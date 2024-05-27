@@ -2701,7 +2701,7 @@ Scenario: _0991095 check Purchase return accounting movements (product)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number' |
-			| '112'    |
+			| '1'      |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check JE

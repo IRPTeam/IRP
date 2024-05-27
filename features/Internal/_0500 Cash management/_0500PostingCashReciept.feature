@@ -516,9 +516,21 @@ Scenario: _0500012 check form for select basis document
 			And I change "Status" radio button value to "By document date"
 			Then the number of "List" table lines is "равно" 0
 			And I change "Status" radio button value to "Current time"
+			Then the number of "List" table lines is "равно" 0
+			And I close current window
+		* Check forms DocumentsForIncomingPayment by time
+			And I input "{CurrentDate()}" text in the field named "Date"
+			And I move to "Payments" tab
+			And I go to line in "PaymentList" table
+				| '#'    | 'Partner'      | 'Partner term'                | 'Payer'                 |
+				| '2'    | 'Ferron BP'    | 'Basic Partner terms, TRY'    | 'Company Ferron BP'     |
+			And I finish line editing in "PaymentList" table
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
 			And "List" table contains lines
 				| 'Document'            | 'Company'         | 'Partner'      | 'Amount'      | 'Legal name'           | 'Partner term'                | 'Currency'     |
 				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '4 150,00'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
+			And I close current window
 		And I close all client application windows
 		
 		

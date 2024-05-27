@@ -58,7 +58,7 @@ Scenario: Sales Order Instruction
 		| 'Sales orders' | 'MenuItem(50011)' |
 			
 		| 'Name' | 'Value' |
-		| 'text' | 'Here are Sales orders' |
+		| 'text' | 'Here are Sales orders, click on it' |
 		| 'color' | 32768 |
 		| 'transparency' | 127 |
 		| 'duration' | 4000 |
@@ -119,7 +119,6 @@ Scenario: Sales Order Instruction
 	And Delay 1
 	And I select current line in "List" table
 * The Legal Name field is filled in automatically, as system takes this information from Partner's Details catalog.
-	And Delay 1
 	And I dim UI Automation form items ""
 		| 'Name / ID' | 'Type' |
 		| 'Legal Name:' | 'ComboBox(50003)' |
@@ -266,8 +265,7 @@ Scenario: Sales Order Instruction
 	And I finish line editing in "ItemList" table
 * Finally, review all the details and save the Sales Order to complete the process
 * You may firstly save document
-	And I draw a border around UI Automation form items ""
-		And I dim UI Automation form items ""
+	And I dim UI Automation form items ""
 		| 'Name / ID'      | 'Type'   |
 		| 'Save' | 'Button' |
 			

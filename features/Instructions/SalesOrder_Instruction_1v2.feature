@@ -78,11 +78,10 @@ Scenario: Sales Order Instruction
 		| 'duration' | 4000 |
 		| 'thickness' | 6 |
 		| 'frameDelay' | 20 |
-	And Delay 5
+	And Delay 3
 	And I click the button named "FormCreate"
 * New document form will open
 	Then "Sales order (create)" window is opened
-	And Delay 1
 	And I dim UI Automation form items ""
 		| 'Name / ID' | 'Type' |
 		| 'Partner:' | 'Text(50020)' |
@@ -91,7 +90,7 @@ Scenario: Sales Order Instruction
 		| 'Store:' | 'ComboBox(50003)' |
 
 		| 'Name' | 'Value' |
-		| 'text' | 'Now, in new document we will enter the basic details as partner, the legal name, the term and the warehouse' |
+		| 'text' | 'Now, new document opened and we will enter the basic details as partner, the legal name, the term and the warehouse' |
 		| 'color' | 32768 |
 		| 'transparency' | 127 |
 		| 'duration' | 8000 |
@@ -110,7 +109,7 @@ Scenario: Sales Order Instruction
 		| 'duration' |3000 |
 		| 'thickness' | 6 |
 		| 'frameDelay' | 20 |
-	And	Delay 7
+	And	Delay 6
 	And I click Choice button of the field named "Partner"
 	Then "Partners" window is opened
 	And I activate field named "Description" in "List" table
@@ -147,7 +146,7 @@ Scenario: Sales Order Instruction
 		| 'duration' | 15000 |
 		| 'thickness' | 6 |
 		| 'frameDelay' | 120 |
-	And Delay 15
+	And Delay 19
 	And I click Choice button of the field named "Agreement"
 	And I go to line in "List" table
 		| 'Description'                                             |
@@ -167,7 +166,7 @@ Scenario: Sales Order Instruction
 		| 'duration' | 6000 |
 		| 'thickness' | 6 |
 		| 'frameDelay' | 30 |
-	And Delay 7	
+	And Delay 5	
 	Then the form attribute named "Company" became equal to "Own company 2"
 	Then the form attribute named "Store" became equal to "Store 1 (with balance control)"
 	And Delay 2
@@ -180,10 +179,10 @@ Scenario: Sales Order Instruction
 		| 'text'         | 'Next you need to fill in the Items for the order by Add button'|
 		| 'color'        | 32768   |
 		| 'transparency' | 127     |
-		| 'duration'     | 5000    |
+		| 'duration'     | 6000    |
 		| 'thickness'    | 6       |
-		| 'frameDelay'   | 25      |
-	And Delay 5
+		| 'frameDelay'   | 30      |
+	And Delay 8
 	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate field named "ItemListPartnerItem" in "ItemList" table
 	And I select current line in "ItemList" table
@@ -234,7 +233,7 @@ Scenario: Sales Order Instruction
 		| 'duration' | 6000 |
 		| 'thickness' | 6 |
 		| 'frameDelay' | 30 |
-	And Delay 5	
+	And Delay 10	
 	And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
 	Then "Item keys" window is opened
 	And I activate field named "Item" in "List" table
@@ -248,6 +247,9 @@ Scenario: Sales Order Instruction
 		| 'Procurement method' | 'Quantity' | 'Unit' | 'Price type' | 'Price'  | 'VAT' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'                          |
 		| 'Stock'              | '1,000'    | 'pcs'  | 'Wholesale'  | '190,00' | '20%' | '31,67'      | '158,33'     | '190,00'       | 'Store 1 (with balance control)' |
 * Enter the quantity of item and all other VAT, NET, Total amounts are calculated automatically
+	And Delay 2
+	And I activate field named "ItemListQuantity" in "ItemList" table
+	And I select current line in "ItemList" table
 	And I dim UI Automation form items ""
 		| 'Name / ID' | 'Type' |
 		| 'Quantity' | 'Custom(50025)' |
@@ -265,16 +267,18 @@ Scenario: Sales Order Instruction
 * Finally, review all the details and save the Sales Order to complete the process
 * You may firstly save document
 	And I draw a border around UI Automation form items ""
-		| 'Name' | 'Type' |
+		And I dim UI Automation form items ""
+		| 'Name / ID'      | 'Type'   |
 		| 'Save' | 'Button' |
 			
 		| 'Name'         | 'Value' |
+		| 'text'         | 'You may save your document before posting' |
 		| 'color'        | 32768   |
 		| 'transparency' | 127     |
-		| 'duration'     | 2000    |
+		| 'duration'     | 4000    |
 		| 'thickness'    | 6       |
 		| 'frameDelay'   | 20      |
-	And Delay 2
+	And Delay 5
 	And I click the button named "FormWrite"
 * Then post and close, but you can direcly post and close, document will be saved anyway
 	And I dim UI Automation form items ""
@@ -282,13 +286,13 @@ Scenario: Sales Order Instruction
 		| 'Post And Close' | 'Button' |
 			
 		| 'Name'         | 'Value' |
-		| 'text'         | ''      |
+		| 'text'         | 'By clicking this button, your document will be automatically saved and posted, then closed'      |
 		| 'color'        | 32768   |
 		| 'transparency' | 127     |
-		| 'duration'     | 6000    |
+		| 'duration'     | 4000    |
 		| 'thickness'    | 6       |
-		| 'frameDelay'   | 30      |
-	And Delay 2
+		| 'frameDelay'   | 20      |
+	And Delay 5
 	And I click the button named "FormPostAndClose"
  	And I wait "Sales order * dated *" window closing in 20 seconds
 * Thank you for watching this tutorial. 

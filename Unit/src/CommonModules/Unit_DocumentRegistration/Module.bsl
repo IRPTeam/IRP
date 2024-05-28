@@ -674,6 +674,8 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.IsPaid");
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");
 	Array.Add("OpeningEntry.R3021B_CashInTransitIncoming.Basis");
+	Array.Add("OpeningEntry.R1040B_TaxesOutgoing.TaxMovementType");
+	Array.Add("OpeningEntry.R2040B_TaxesIncoming.TaxMovementType");
 	
 	Map = New Map();
 	

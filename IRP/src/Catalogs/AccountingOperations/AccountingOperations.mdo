@@ -342,18 +342,6 @@
      <value>8</value>
     </code>
    </content>
-   <content id="3139d27d-f017-4cd2-9371-581a24328085">
-    <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
-    <code xsi:type="core:NumberValue">
-     <value>24</value>
-    </code>
-   </content>
-   <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
-    <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
-    <code xsi:type="core:NumberValue">
-     <value>25</value>
-    </code>
-   </content>
   </items>
   <items id="2629786b-a1c8-4e5f-819b-76ffc472e4eb">
    <name>Document_RetailSalesReceipt</name>
@@ -396,18 +384,6 @@
     <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
     <code xsi:type="core:NumberValue">
      <value>18</value>
-    </code>
-   </content>
-   <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
-    <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
-    <code xsi:type="core:NumberValue">
-     <value>22</value>
-    </code>
-   </content>
-   <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
-    <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
-    <code xsi:type="core:NumberValue">
-     <value>23</value>
     </code>
    </content>
   </items>
@@ -719,6 +695,13 @@
     <description/>
     <code xsi:type="core:NumberValue">
      <value>95</value>
+    </code>
+   </content>
+   <content id="787bf187-a0cc-4e5d-8115-9ecb8496fcd7">
+    <name>DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>139</value>
     </code>
    </content>
   </items>

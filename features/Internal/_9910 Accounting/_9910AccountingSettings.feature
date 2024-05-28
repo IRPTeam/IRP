@@ -538,15 +538,11 @@ Scenario: _0991002 filling accounting operation
 		| 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions'                     | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
 		| 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors'                                  | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
 		| 'PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions'                                      | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
-		| 'PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation'              | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              |
-		| 'PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |
 		| 'RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory'                                             | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                             |
 		| 'SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues'                                            | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                            |
 		| 'SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming'                                                    | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                                    |
 		| 'SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory'                                                   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                                   |
 		| 'SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions'                               | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                               |
-		| 'SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation'           | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'           |
-		| 'SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation'                        | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'                        |
 		| 'ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues'                              | 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'                              |
 		| 'ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers'                              | 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'                              |
 		| 'CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand'                    | 'CashPayment DR (R1020B_AdvancesToVendors_R1021B_VendorsTransactions) CR (R3010B_CashOnHand)'                    |
@@ -671,18 +667,6 @@ Scenario: _0991003 create ledger type
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
 			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                                      | 'Use' |
-				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                                                   | 'Use' |
-				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I go to line in "OperationsTree" table
 				| 'Presentation'                                                       | 'Use' |
 				| 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' | 'No'  |
 			And I activate "Period" field in "OperationsTree" table
@@ -713,18 +697,6 @@ Scenario: _0991003 create ledger type
 			And I select current line in "OperationsTree" table
 			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
 			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                                         | 'Use' |
-				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I go to line in "OperationsTree" table
-				| 'Presentation'                                                                            | 'Use' |
-				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)' | 'No'  |
-			And I activate "Period" field in "OperationsTree" table
-			And I select current line in "OperationsTree" table
-			And I input "01.01.2021" text in "Period" field of "OperationsTree" table
-			And I go to line in "OperationsTree" table
 				| 'Presentation'                                                                      | 'Use' |
 				| 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)' | 'No'  |
 			And I activate "Period" field in "OperationsTree" table
@@ -751,8 +723,6 @@ Scenario: _0991003 create ledger type
 				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     | 'Yes' | '01.01.2021' |
 				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  | 'Yes' | '01.01.2021' |
 				| 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      | 'Yes' | '01.01.2021' |
-				| 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              | 'Yes' | '01.01.2021' |
-				| 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Yes' | '01.01.2021' |
 				| 'Retail sales receipt'                                                                                           | 'No'  | ''           |
 				| 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                             | 'Yes' | '01.01.2021' |
 				| 'Sales invoice'                                                                                                  | 'No'  | ''           |
@@ -760,8 +730,6 @@ Scenario: _0991003 create ledger type
 				| 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                                    | 'Yes' | '01.01.2021' |
 				| 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                                   | 'Yes' | '01.01.2021' |
 				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                               | 'Yes' | '01.01.2021' |
-				| 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)'           | 'Yes' | '01.01.2021' |
-				| 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'                        | 'Yes' | '01.01.2021' |
 				| 'Foreign currency revaluation'                                                                                   | 'No'  | ''           |
 				| 'ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)'                              | 'Yes' | '01.01.2021' |
 				| 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)'                              | 'Yes' | '01.01.2021' |		
@@ -1992,8 +1960,8 @@ Scenario: _0991040 check account priority for service (ExpenseType, CostRevenueC
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
-				| 'Debit' | 'Partner'                   | 'Business unit' | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
-				| '420.5' | 'Vendor 2 (1 partner term)' | ''              | 'Partner term with vendor 2' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |
+				| 'Debit' | 'Partner'                   | 'Business unit' | 'Partner term'               | 'Credit' | 'Operation'                                                                                  |
+				| '420.5' | 'Vendor 2 (1 partner term)' | ''              | 'Partner term with vendor 2' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' |
 		And I close current window
 	* Check account (CostRevenueCenter empty, ExpenseType filled)
 		And I activate "Expense type" field in "ItemList" table
@@ -2003,8 +1971,8 @@ Scenario: _0991040 check account priority for service (ExpenseType, CostRevenueC
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
-			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
-			| '5201'   | '420.2' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |
+			| 'Credit' | 'Debit' | 'Operation'                                                                                  | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.2' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |
 		And I close current window
 	* Check account (CostRevenueCenter filled, ExpenseType filled)
 		And I select "Expence and revenue 1" from "Expense type" drop-down list by string in "ItemList" table
@@ -2012,16 +1980,16 @@ Scenario: _0991040 check account priority for service (ExpenseType, CostRevenueC
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button			
 		And "AccountingAnalytics" table contains lines
-			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
-			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |					
+			| 'Credit' | 'Debit' | 'Operation'                                                                                  | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |					
 		And I close current window
 	* Select another CostRevenueCenter and check account
 		And I select "Business unit 3" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button			
 		And "AccountingAnalytics" table contains lines
-			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
-			| '5201'   | '420.4' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
+			| 'Credit' | 'Debit' | 'Operation'                                                                                  | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.4' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
 		And I close current window
 	* Check account (CostRevenueCenter filled, ExpenseType empty)
 		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table
@@ -2030,8 +1998,8 @@ Scenario: _0991040 check account priority for service (ExpenseType, CostRevenueC
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
-			| 'Credit' | 'Debit' | 'Operation'                                                                                                      | 'Partner'                   | 'Partner term'               |
-			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
+			| 'Credit' | 'Debit' | 'Operation'                                                                                  | 'Partner'                   | 'Partner term'               |
+			| '5201'   | '420.3' | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Vendor 2 (1 partner term)' | 'Partner term with vendor 2' |								
 		And I close all client application windows
 
 
@@ -2598,10 +2566,8 @@ Scenario: _0991080 check Purchase invoice accounting movements
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                   | 'Business unit'   | 'Partner term'               | 'Credit' | 'Operation'                                                                                                      |
 			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)'                                  |
-			| '5201'  | 'Vendor 1 (1 partner term)' | ''                | 'Partner term with vendor 1' | '4020.2' | 'PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)'              |
 			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)'                     |
 			| '5301'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'                                      |
-			| '3540'  | 'Vendor 1 (1 partner term)' | 'Business unit 1' | 'Partner term with vendor 1' | '5201'   | 'PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)' |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2639,12 +2605,10 @@ Scenario: _0991090 check Sales invoice accounting movements (product and service
 		And "AccountingAnalytics" table contains lines
 			| 'Debit' | 'Partner'                      | 'Business unit'   | 'Partner term'                                            | 'Credit' | 'Operation'                                                                                            |
 			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '5202'  | 'Customer 1 (3 partner terms)' | ''                | 'Partner term with customer (by document + credit limit)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)' |
 			| '4010'  | 'Business unit 1'              | ''                | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
 			| '9100'  | 'VAT'                          | ''                | 'Business unit 1'                                         | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
 			| '420.1' | 'Item with item key'           | 'Business unit 1' | 'S/Color 1'                                               | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
-			| '4010'  | 'Business unit 1'              | ''                | ''                                                        | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'              |
-		Then the number of "AccountingAnalytics" table lines is "равно" "6"
+		Then the number of "AccountingAnalytics" table lines is "равно" "4"
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2673,11 +2637,9 @@ Scenario: _0991091 check Sales invoice accounting movements (product)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Partner term'                                | 'Credit' | 'Operation'                                                                                            |
 			| '5202'  | 'Customer 2 (2 partner term)' | ''                | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'                     |
-			| '5202'  | 'Customer 2 (2 partner term)' | ''                | 'Individual partner term 1 (by partner term)' | '4010'   | 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)' |
 			| '4010'  | 'Business unit 1'             | ''                | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'                                  |
 			| '9100'  | 'VAT'                         | ''                | 'Business unit 1'                             | '5302'   | 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'                                          |
 			| '420.1' | 'Item with item key'          | 'Business unit 1' | 'S/Color 1'                                   | '3540'   | 'SalesInvoice DR (R5022T_Expenses) CR (R4050B_StockInventory)'                                         |
-			| '4010'  | 'Business unit 1'             | ''                | ''                                            | '9100'   | 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)'              |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2878,11 +2840,11 @@ Scenario: _0991140 check Debit note accounting movements (Vendor)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And I click "Journal entry" button
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'           | 'Debit amount' | 'Extra dimension2 Dr'        | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                     | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 11:03:25' | '5201'       | '1' | '25,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 1 (1 partner term)' | '25'           | 'Partner term with vendor 1' | ''                | 'Business unit 1'     | 'TRY'            | '9100'       | 'Business unit 1'  | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)' | 'Vendor 1'            | '25'            | ''                    |			
+		And in the table "Transactions" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                   | 'Business unit'             | 'Company'                    | 'Partner term'               | 'Credit' | ' '               | 'Operation'                                                               |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Business unit 1'           | 'Vendor 1'                   | 'Partner term with vendor 1' | '9100'   | ''                | 'DebitNote DR (R1021B_VendorsTransactions) CR (R5021_Revenues)'           |
+			| '5201'  | 'Vendor 1 (1 partner term)' | 'Vendor 1 (1 partner term)' | 'Partner term with vendor 1' | 'Partner term with vendor 1' | '4020.2' | 'Business unit 1' | 'DebitNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2919,11 +2881,10 @@ Scenario: _0991142 check Debit note accounting movements (Other)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And I click "Journal entry" button
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                           | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '21.04.2024 20:40:55' | '9200'       | '1' | '150,00' | ''              | 'Yes'      | 'TRY'             | 'Business unit 3' | '150'          | 'Other partner 2'     | ''                | ''                    | 'TRY'            | '9100'       | 'Business unit 3'  | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' | 'Other partner 2'     | '150'           | ''                    |	
+		And in the table "Transactions" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Business unit'   | 'Company'         | ' ' | 'Credit' | 'Operation'                                                           |
+			| '9200'  | 'Business unit 3' | 'Other partner 2' | ''  | '9100'   | 'DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2943,11 +2904,11 @@ Scenario: _0991145 check Credit note accounting movements (Customer)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And I click "Journal entry" button
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'             | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'            | 'Operation'                                                         | 'Extra dimension2 Cr'                         | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '24.02.2023 11:02:48' | '420.2'      | '1' | '15,00'  | ''              | 'Yes'      | 'TRY'             | 'Customer 2 (2 partner term)' | '15'           | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '4010'       | 'Customer 2 (2 partner term)' | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)' | 'Individual partner term 1 (by partner term)' | '15'            | 'Business unit 1'     |		
+		And in the table "Transactions" I click "Edit accounting" button		
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'                     | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                | 'Credit' | 'Operation'                                                                      |
+			| '420.2' | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Other expence'            | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R5022T_Expenses) CR (R2021B_CustomersTransactions)'              |
+			| '5202'  | 'Customer 2 (2 partner term)' | 'Business unit 1' | 'Business unit 1'          | 'Individual partner term 1 (by partner term)' | '4010'   | 'CreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2967,11 +2928,11 @@ Scenario: _0991146 check Credit note accounting movements (Vendor)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And I click "Journal entry" button
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                       | 'Extra dimension2 Cr'                                    | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '27.03.2024 14:45:40' | '420.2'      | '1' | '50,00'  | ''              | 'Yes'      | 'TRY'             | 'Vendor 5'        | '50'           | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '5201'       | 'Vendor 5'         | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)' | 'Partner term with vendor (advance payment by document)' | '50'            | 'Business unit 1'     |		
+		And in the table "Transactions" I click "Edit accounting" button		
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'  | 'Business unit'   | 'Expense and revenue type' | 'Partner term'                                           | 'Credit' | 'Operation'                                                                |
+			| '420.2' | 'Vendor 5' | 'Business unit 1' | 'Other expence'            | 'Partner term with vendor (advance payment by document)' | '5201'   | 'CreditNote DR (R5022T_Expenses) CR (R1021B_VendorsTransactions)'          |
+			| '5201'  | 'Vendor 5' | 'Business unit 1' | 'Business unit 1'          | 'Partner term with vendor (advance payment by document)' | '4020.2' | 'CreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -2991,11 +2952,10 @@ Scenario: _0991147 check Credit note accounting movements (Other)
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I select current line in "List" table
 	* Check accounting movements
-		And I click "Journal entry" button
-		And I click "Save" button
-		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                             | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '21.03.2024 12:00:00' | '420.2'      | '1' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Other partner'   | '100'          | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '9200'       | 'Business unit 1'  | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' | 'Other partner'       | '100'           | ''                    |	
+		And in the table "Transactions" I click "Edit accounting" button		
+		And "AccountingAnalytics" table became equal
+			| 'Debit' | 'Partner'       | 'Business unit'   | 'Company'       | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                             |
+			| '420.2' | 'Other partner' | 'Business unit 1' | 'Other partner' | 'Other expence'            | '9200'   | ''  | 'CreditNote DR (R5022T_Expenses) CR (R5015B_OtherPartnersTransactions)' |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button

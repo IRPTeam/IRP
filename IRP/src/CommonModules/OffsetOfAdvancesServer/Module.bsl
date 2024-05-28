@@ -1318,7 +1318,9 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 	// Debit note
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
 		
-		If IsVendorAdvanceClosing Then
+		If IsCustomerAdvanceClosing Then
+			Return AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		ElsIf IsVendorAdvanceClosing Then
 			Return AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
 		EndIf;
 	

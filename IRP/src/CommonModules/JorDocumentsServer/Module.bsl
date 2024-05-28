@@ -27,8 +27,28 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Parameters.Property("CustomFilter") Then
 		AdditionalParameters.Insert("Ref", Parameters.CustomFilter.QueryParameters.Ref);
 	EndIf;
+	
 	If Parameters.Property("DocumentDate") Then
 		AdditionalParameters.Insert("DocumentDate", Parameters.DocumentDate);
+		
+		DateFilter = Undefined;
+		CurrentDate = CommonFunctionsServer.GetCurrentSessionDate();
+		DateValueFilter = 
+			?(BegOfDay(Parameters.DocumentDate) = BegOfDay(CurrentDate), 
+				EndOfDay(CurrentDate), Parameters.DocumentDate);
+		DateField = New DataCompositionField("Ref.Date");
+		For Each FilterItem In Form.List.Filter.Items Do
+			If FilterItem.LeftValue = DateField Then
+				DateFilter = FilterItem;
+			EndIf;
+		EndDo;
+		If DateFilter = Undefined Then
+			DateFilter = Form.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+			DateFilter.LeftValue = DateField;
+		EndIf;
+		DateFilter.ComparisonType = DataCompositionComparisonType.LessOrEqual;
+		DateFilter.RightValue = DateValueFilter;
+		DateFilter.Use = True;
 	EndIf;
 	
 	AdditionalProperties.Insert("AdditionalParameters", AdditionalParameters);

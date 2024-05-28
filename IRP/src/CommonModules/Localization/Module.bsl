@@ -2598,30 +2598,10 @@ Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_Customers
 		|ru='SalesInvoice Дт (R2020B_AdvancesFromCustomers) Кт (R2021B_CustomersTransactions)';
 		|tr='SalesInvoice DR (R2020B_MüşterilerdenAvanslar) CR (R2021B_Müşteriİşlemleri)'", Lang));
 
-Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation",
-	NStr("en='PurchaseInvoice DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors_CurrencyRevaluation)';
-		|ru='PurchaseInvoice Дт (R1021B_VendorsTransactions) Кт (R1020B_AdvancesToVendors_CurrencyRevaluation)';
-		|tr='AlımFaturası DR (R1021B_Tedarikçiİşlemleri) CR (R1020B_TedarikçilereAvanslar_DövizKıymetlenmesi)'", Lang));
-
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2020B_AdvancesFromCustomers)';
 		|ru='ForeignCurrencyRevaluation Дт (R5022T_Expenses) Кт (R2020B_AdvancesFromCustomers)';
 		|tr='YabancıParaDeğerleme DR (R5022T_Giderler) CR (R2020B_MüşterilerdenAvanslar)'", Lang));
-
-Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation",
-	NStr("en='SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions_CurrencyRevaluation)';
-		|ru='Счет-фактура Дебет (R2020B_AdvancesFromCustomers) Кредит (R2021B_CustomersTransactions_CurrencyRevaluation)';
-		|tr='SatışFaturası DR (R2020B_MüşteridenAvanslar) CR (R2021B_Müşteriİşlemleri_DövizKıymetlenmesi)'", Lang));
-
-Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation",
-	NStr("en='SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues_CurrencyRevaluation)';
-		|ru='SalesInvoice ДР (R2021B_ТранзакцииКлиентов) КР (R5021T_Доходы_ПереоценкаВалюты)';
-		|tr='SatışFaturası DR (R2021B_Müşteriİşlemleri) CR (R5021T_Gelirler_DövizKıymetlenmesi)'", Lang));
-
-Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation",
-	NStr("en='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
-		|ru='PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions_CurrencyRevaluation)';
-		|tr='PurchaseInvoice DR (R4050B_StokEnvanter_R5022T_Giderler) CR (R1021B_Tedarikçiİşlemleri_DövizKıymetlendirme)'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
 	NStr("en='ForeignCurrencyRevaluation DR (R2020B_AdvancesFromCustomers) CR (R5021T_Revenues)';
@@ -2767,6 +2747,11 @@ Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 	NStr("en='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
 		|ru='DebitNote DR (R2021B_CustomersTransactions) CR (R5021_Revenues)';
 		|tr='DebitNote DR (R2021B_Müşteriİşlemleri) CR (R5021_Gelirler)'", Lang));
+
+Strings.Insert("DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|ru='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)';
+		|tr='DebitNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));
 
 Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
 	NStr("en='DebitNote DR (R5015B_OtherPartnersTransactions) CR (R5021_Revenues)';

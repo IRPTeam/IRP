@@ -23,6 +23,7 @@
   <value>Döviz kurları</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
+ <defaultListForm>InformationRegister.CurrencyRates.Form.ListForm</defaultListForm>
  <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
  <mainFilterOnPeriod>true</mainFilterOnPeriod>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -124,7 +125,6 @@
   <dataHistory>Use</dataHistory>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
-  <master>true</master>
   <mainFilter>true</mainFilter>
  </dimensions>
  <dimensions uuid="846f0ce7-3734-45ed-a4b8-d829224173b4">
@@ -183,4 +183,41 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <mainFilter>true</mainFilter>
  </dimensions>
+ <forms uuid="0cf1ccae-45c0-4e6c-bcc5-d15e68bf89a1">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <commands uuid="051859f2-425e-4f35-9eda-1150d1602b51">
+  <name>CurrencyRates</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency rates</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Курсы валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz kurları</value>
+  </synonym>
+  <group>FormNavigationPanelGoTo</group>
+  <commandParameterType>
+   <types>CatalogRef.Currencies</types>
+  </commandParameterType>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:InformationRegister>

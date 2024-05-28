@@ -696,7 +696,7 @@ Scenario: _900032 return money to customer
 	* Filling CP
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
-		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		And I select "Return to customer" exact value from "Transaction type" drop-down list	
 		Then the form attribute named "Currency" became equal to "USD"
 		And in the table "PaymentList" I click "Add" button
 		And I select "customer" from "Partner" drop-down list by string in "PaymentList" table

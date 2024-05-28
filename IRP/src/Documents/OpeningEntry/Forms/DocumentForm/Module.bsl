@@ -85,7 +85,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrenciesAccountPayableOther.Enabled           = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountReceivableOther.Enabled        = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesFixedAssets.Enabled                   = Not Form.ReadOnly;
-
+	Form.Items.EditCurrenciesTaxesIncoming.Enabled                 = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesTaxesOutgoing.Enabled                 = Not Form.ReadOnly;
+	
 	UseCommissionTrading = FOServer.IsUseCommissionTrading();
 	
 	Form.Items.GroupReceiptFromConsignor.Visible = UseCommissionTrading;
@@ -103,7 +105,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ReceiptFromConsignor.Visible = UseCommissionTrading;
 	
 	Form.Items.SalaryPayment.Visible              = FOServer.IsUseSalary();
-	Form.Items.EmployeeList.Visible                   = FOServer.IsUseSalary();
+	Form.Items.EmployeeList.Visible               = FOServer.IsUseSalary();
 	Form.Items.AdvanceFromRetailCustomers.Visible = FOServer.IsUseRetail();
 EndProcedure
 
@@ -453,6 +455,74 @@ EndProcedure
 &AtClient
 Procedure EmployeeListSalaryTypeOnChange(Item)
 	DocOpeningEntryClient.EmployeeListSalaryTypeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING
+		
+&AtClient
+Procedure TaxesIncomingBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.TaxesIncomingBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure TaxesIncomingAfterDeleteRow(Item)
+	DocOpeningEntryClient.TaxesIncomingAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesIncomingVatRateOnChange(Item)
+	DocOpeningEntryClient.TaxesIncomingVatRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesIncomingNetAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesIncomingNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesIncomingTaxAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesIncomingTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesIncomingTotalAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesIncomingTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_OUTGOING
+
+&AtClient
+Procedure TaxesOutgoingBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocOpeningEntryClient.TaxesOutgoingBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
+Procedure TaxesOutgoingAfterDeleteRow(Item)
+	DocOpeningEntryClient.TaxesOutgoingAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesOutgoingVatRateOnChange(Item)
+	DocOpeningEntryClient.TaxesOutgoingVatRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesOutgoingNetAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesOutgoingNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesOutgoingTaxAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesOutgoingTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TaxesOutgoingTotalAmountOnChange(Item)
+	DocOpeningEntryClient.TaxesOutgoingTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -1263,6 +1333,34 @@ Procedure EditCurrenciesReceiptFromConsignor(Command)
 EndProcedure
 
 &AtClient
+Procedure EditCurrenciesTaxesIncoming(Command)
+	CurrentData = ThisObject.Items.TaxesIncoming.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V2(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesTaxesOutgoing(Command)
+	CurrentData = ThisObject.Items.TaxesOutgoing.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V2(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
@@ -1673,5 +1771,5 @@ MainTables = "AccountBalance, AdvanceFromCustomers, AdvanceToSuppliers,
 		|Inventory,
 		|ShipmentToTradeAgent, ReceiptFromConsignor,
 		|EmployeeCashAdvance, AdvanceFromRetailCustomers, SalaryPayment, EmployeeList,
-		|AccountReceivableOther, AccountPayableOther, CashInTransit, FixedAssets";
+		|AccountReceivableOther, AccountPayableOther, CashInTransit, FixedAssets, TaxesIncoming, TaxesOutgoing";
 

@@ -143,6 +143,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	EndIf;
 	
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
@@ -178,6 +179,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R8510B_BookValueOfFixedAsset.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.CashInTransit.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2040B_TaxesIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -346,6 +349,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -369,6 +373,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(CashInTransitDoc());
 	QueryArray.Add(FixedAssets());
 	QueryArray.Add(EmployeeList());
+	QueryArray.Add(TaxesIncoming());
+	QueryArray.Add(TaxesOutgoing());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -407,6 +413,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T9510S_Staffing());
 	QueryArray.Add(R9545T_PaidVacations());
+	QueryArray.Add(R2040B_TaxesIncoming());
+	QueryArray.Add(R1040B_TaxesOutgoing());
 	Return QueryArray;
 EndFunction
 
@@ -858,6 +866,44 @@ Function EmployeeList()
 		|	Document.OpeningEntry.EmployeeList AS EmployeeList
 		|WHERE
 		|	EmployeeList.Ref = &Ref"
+EndFunction
+
+Function TaxesIncoming()
+	Return
+		"SELECT
+		|	TaxesIncoming.Ref.Date AS Period,
+		|	TaxesIncoming.Ref.Company AS Company,
+		|	TaxesIncoming.Ref.Branch AS Branch,
+		|	TaxesIncoming.Key,
+		|	TaxesIncoming.Currency,
+		|	TaxesIncoming.VatRate AS TaxRate,
+		|	TaxesIncoming.NetAmount AS TaxableAmount,
+		|	TaxesIncoming.TaxAmount,
+		|	&Vat AS Tax
+		|INTO TaxesIncoming
+		|FROM
+		|	Document.OpeningEntry.TaxesIncoming AS TaxesIncoming
+		|WHERE
+		|	TaxesIncoming.Ref = &Ref";
+EndFunction
+
+Function TaxesOutgoing()
+	Return
+		"SELECT
+		|	TaxesOutgoing.Ref.Date AS Period,
+		|	TaxesOutgoing.Ref.Company AS Company,
+		|	TaxesOutgoing.Ref.Branch AS Branch,
+		|	TaxesOutgoing.Key,
+		|	TaxesOutgoing.Currency,
+		|	TaxesOutgoing.VatRate AS TaxRate,
+		|	TaxesOutgoing.NetAmount AS TaxableAmount,
+		|	TaxesOutgoing.TaxAmount,
+		|	&Vat AS Tax
+		|INTO TaxesOutgoing
+		|FROM
+		|	Document.OpeningEntry.TaxesOutgoing AS TaxesOutgoing
+		|WHERE
+		|	TaxesOutgoing.Ref = &Ref";
 EndFunction
 
 #EndRegion
@@ -1975,6 +2021,46 @@ Function R9545T_PaidVacations()
 		|	EmployeeList AS EmployeeList
 		|WHERE
 		|	EmployeeList.PaidVacationDays <> 0";
+EndFunction
+
+Function R2040B_TaxesIncoming()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesIncoming.Key,
+		|	TaxesIncoming.Period,
+		|	TaxesIncoming.Company,
+		|	TaxesIncoming.Branch,
+		|	TaxesIncoming.Currency,
+		|	TaxesIncoming.TaxRate,
+		|	TaxesIncoming.TaxableAmount,
+		|	TaxesIncoming.TaxAmount,
+		|	TaxesIncoming.Tax
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	TaxesIncoming AS TaxesIncoming
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R1040B_TaxesOutgoing()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesOutgoing.Key,
+		|	TaxesOutgoing.Period,
+		|	TaxesOutgoing.Company,
+		|	TaxesOutgoing.Branch,
+		|	TaxesOutgoing.Currency,
+		|	TaxesOutgoing.TaxRate,
+		|	TaxesOutgoing.TaxableAmount,
+		|	TaxesOutgoing.TaxAmount,
+		|	TaxesOutgoing.Tax
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	TaxesOutgoing AS TaxesOutgoing
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

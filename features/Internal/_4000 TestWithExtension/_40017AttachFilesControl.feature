@@ -48,11 +48,11 @@ Scenario: _4001701 preparation (Attach Files Control)
 		When Create catalog IntegrationSettings objects (Attach File Control)
 		When Create catalog AttachedDocumentSettings objects
 		When Create catalog FileStorageVolumes objects (Attach File Control)
-		When Create catalog CashAccounts objects (Attach File Control)
-		When Create catalog PaymentTypes objects (Attach File Control)
-		When Create catalog Workstations objects (Attch File Control)
+		When Create catalog CashAccounts objects
+		When Create catalog PaymentTypes objects
+		When Create catalog Workstations objects
 		When Create chart of characteristic types AddAttributeAndProperty objects (Attach File Control)
-		When Create catalog BusinessUnits objects (Attach File Control)
+		When Create catalog BusinessUnits objects
 		When Create document PurchaseOrder objects (PO Attach File Control)
 		When Create document RetailReturnReceipt objects (RRR Attach File Control)
 		
@@ -62,12 +62,12 @@ Scenario: _4001702 check preparation
 Scenario: _4001703 check file attachment to document
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/rabbit.jpg"
+	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 	And Delay 10
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:
-		| 'File'      |
-		| 'rabbit.jpg' |
+		| 'File'         |
+		| 'testjpg1.jpg' |
 
 Scenario: _4001704 check attached file in document	
 	And I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
@@ -80,18 +80,18 @@ Scenario: _4001704 check attached file in document
 	Then "Attach file" window is opened
 	And I activate "File" field in "FileList" table
 	And "FileList" table contains lines:
-		| 'File'       |
-		| 'rabbit.jpg' |
+		| 'File'         |
+		| 'testjpg1.jpg' |
 	
 Scenario: _4001705 check attach file with undefined extensions
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I go to the first line in "DocumentList" table
-	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/Purchase Order Instruction.pdf"
+	And I select external file "$Path$/features/Internal/_4000 TestWithExtension/Test pdf 1 page.pdf"
 	And Delay 20
 	And I click the button named "AddNewDocument"
 	And "CurrentFilesTable" table contains lines:
-		| 'File'                           |
-		| 'Purchase Order Instruction.pdf' |
+		| 'File'                |
+		| 'Test pdf 1 page.pdf' |
 
 Scenario: _4001706 check Attach Mode and Check Mode
 	* Check Attach Mode

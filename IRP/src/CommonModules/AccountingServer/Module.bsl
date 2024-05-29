@@ -2101,8 +2101,8 @@ Function GetAccountingData(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	Amounts.Currency,
-	|	SUM(Amounts.Amount) AS Amount
+	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end as Currency,
+	|	SUM(case when &IsRevaluationCurrency then 0 else Amounts.Amount end) AS Amount
 	|FROM
 	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
 	|WHERE
@@ -2115,7 +2115,7 @@ Function GetAccountingData(Parameters)
 	|		else True
 	|	end
 	|GROUP BY
-	|	Amounts.Currency
+	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2164,8 +2164,10 @@ Function GetAccountingData(Parameters)
 	
 	If Parameters.IsCurrencyRevaluation Then
 		Query.SetParameter("RevaluationCurrency", Parameters.CurrencyMovementType);
+		Query.SetParameter("IsRevaluationCurrency", True);
 	Else
 		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+		Query.SetParameter("IsRevaluationCurrency", False);
 	EndIf;
 	
 	QueryResults = Query.ExecuteBatch();

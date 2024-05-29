@@ -549,6 +549,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency AS RevaluatedCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS
 		|		Operation
@@ -567,6 +568,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues) AS
 		|		Operation
@@ -584,6 +586,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS
 		|		Operation
@@ -601,6 +604,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues) AS
 		|		Operation
@@ -618,6 +622,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment) AS
 		|		Operation
@@ -635,6 +640,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues) AS
 		|		Operation
@@ -653,6 +659,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand) AS Operation
 		|FROM
@@ -669,6 +676,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues) AS Operation
 		|FROM
@@ -685,6 +693,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors) AS
 		|		Operation
@@ -702,6 +711,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues) AS
 		|		Operation
@@ -719,6 +729,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions) AS
 		|		Operation
@@ -736,6 +747,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS
 		|		Operation
@@ -753,6 +765,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance) AS Operation
 		|FROM
@@ -769,6 +782,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues) AS Operation
 		|FROM
@@ -785,6 +799,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS
 		|		Operation
@@ -802,6 +817,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues) AS
 		|		Operation
@@ -819,6 +835,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions) AS
 		|		Operation
@@ -836,6 +853,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS
 		|		Operation
@@ -853,6 +871,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS
 		|		Operation
@@ -870,6 +889,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.Key AS Key,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues) AS
 		|		Operation

@@ -402,7 +402,6 @@
   <roles>Role.AccumulationRegisters_R5015B_OtherPartnersTransactions</roles>
   <roles>Role.AccumulationRegisters_R5021T_Revenues</roles>
   <roles>Role.AccumulationRegisters_R5022T_Expenses</roles>
-  <roles>Role.AccumulationRegisters_R5041B_TaxesPayable</roles>
   <roles>Role.AccumulationRegisters_R6010B_BatchWiseBalance</roles>
   <roles>Role.AccumulationRegisters_R6020B_BatchBalance</roles>
   <roles>Role.AccumulationRegisters_R6030T_BatchShortageOutgoing</roles>
@@ -1498,7 +1497,6 @@
   <accumulationRegisters>AccumulationRegister.R5015B_OtherPartnersTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>

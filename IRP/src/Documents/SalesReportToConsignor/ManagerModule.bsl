@@ -177,6 +177,7 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	-ItemList.NetAmount AS TaxableAmount,

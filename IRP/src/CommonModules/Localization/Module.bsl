@@ -1782,8 +1782,8 @@ Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFr
 Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions",
 	NStr("en = 'SalesReturn DR (R5021T_Revenues) CR (R2021B_CustomersTransactions)'", Lang));
 
-Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing",
-	NStr("en = 'SalesReturn DR (R5021T_Revenues) CR (R1040B_TaxesOutgoing)'", Lang));
+Strings.Insert("SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues",
+	NStr("en = 'SalesReturn DR (R1040B_TaxesOutgoing) CR (R5021T_Revenues)'", Lang));
 
 Strings.Insert("SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory",
 	NStr("en = 'SalesReturn DR (R5022T_Expenses) CR (R4050B_StockInventory)'", Lang));
@@ -1794,8 +1794,8 @@ Strings.Insert("PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTran
 Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory",
 	NStr("en = 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R4050B_StockInventory)'", Lang));
 
-Strings.Insert("PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions",
-	NStr("en = 'PurchaseReturn DR (R2040B_TaxesIncoming) CR (R1021B_VendorsTransactions)'", Lang));
+Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en = 'PurchaseReturn DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)'", Lang));
 
 #EndRegion
 

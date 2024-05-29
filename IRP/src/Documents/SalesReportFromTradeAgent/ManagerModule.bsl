@@ -432,6 +432,7 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	ItemList.TaxAmount,

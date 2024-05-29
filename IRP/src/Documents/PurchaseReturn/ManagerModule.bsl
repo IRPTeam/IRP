@@ -269,7 +269,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
-	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
@@ -617,18 +617,19 @@ Function R1031B_ReceiptInvoicing()
 
 EndFunction
 
-Function R1040B_TaxesOutgoing()
+Function R2040B_TaxesIncoming()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	ItemList.NetAmount AS TaxableAmount,
 		|	ItemList.TaxAmount AS TaxAmount
-		|INTO R1040B_TaxesOutgoing
+		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
@@ -900,7 +901,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
 		|	ItemList.TaxAmount,
-		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions),
+		|	VALUE(Catalog.AccountingOperations.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming),
 		|	UNDEFINED
 		|FROM
 		|	ItemList as ItemList
@@ -941,8 +942,8 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory Then
 		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Parameters);
-	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions Then
-		Return GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions(Parameters);
+	ElsIf Parameters.Operation = AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return GetAnalytics_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming(Parameters);
 	EndIf;
 	
 	Return Undefined;
@@ -998,25 +999,25 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory(Par
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions(Parameters)
+Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-	
+		
 	// Debit
-	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
-	AccountingAnalytics.Debit = Debit.IncomingAccount;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
-	
-	// Credit
-	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.ObjectData.Partner, 
 	                                                      Parameters.ObjectData.Agreement,
 	                                                      Parameters.ObjectData.Currency);
 	
-	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	AccountingAnalytics.Debit = Debit.AccountTransactionsVendor;
 	AdditionalAnalytics = New Structure();
 	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	AccountingAnalytics.Credit = Credit.IncomingAccount;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	Return AccountingAnalytics;
 EndFunction

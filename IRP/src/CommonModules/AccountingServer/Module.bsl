@@ -239,7 +239,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
-	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing, 
+	Map.Insert(AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
 	Map.Insert(AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory, 
@@ -252,7 +252,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
 	
-	Map.Insert(AO.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions, 
+	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
 		
 	Return Map;

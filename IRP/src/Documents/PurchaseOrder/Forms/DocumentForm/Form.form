@@ -3017,7 +3017,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Vendor's price</value>
+      <value>Tedarikçi fiyatı</value>
      </title>
      <extendedTooltip>
       <name>VendorPriceExtendedTooltip</name>

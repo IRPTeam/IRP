@@ -180,4 +180,26 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="761642fc-2a73-4f78-be0b-e514af4fc441">
+  <name>RevaluatedCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>Revaluated currency</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Переоцениваемая валюта</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değerlenen döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1526,6 +1526,12 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsT
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues",
 	NStr("en = 'ForeignCurrencyRevaluation DR (R1021B_VendorsTransactions) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R2040B_TaxesIncoming)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R2040B_TaxesIncoming) CR (R5021T_Revenues)'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment",
 	NStr("en = 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R9510B_SalaryPayment)'", Lang));
@@ -1544,6 +1550,12 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_Customer
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en = 'ForeignCurrencyRevaluation DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R1040B_TaxesOutgoing)'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues",
+	NStr("en = 'ForeignCurrencyRevaluation DR (R1040B_TaxesOutgoing) CR (R5021T_Revenues)'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance",
 	NStr("en = 'ForeignCurrencyRevaluation DR (R5022T_Expenses) CR (R3015B_CashAdvance)'", Lang));

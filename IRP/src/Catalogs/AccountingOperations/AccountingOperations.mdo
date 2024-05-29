@@ -507,6 +507,34 @@
           <value>128</value>
         </code>
       </content>
+      <content id="5378e82f-3724-45aa-9927-f8fedc1a7d35">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>140</value>
+        </code>
+      </content>
+      <content id="020b71ea-d852-45fa-96ff-91870a4c7e69">
+        <name>ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>141</value>
+        </code>
+      </content>
+      <content id="0dc4dcf8-1763-486d-8ca7-d4e345483c2f">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>142</value>
+        </code>
+      </content>
+      <content id="762d5163-0447-4e9c-8a71-dcfb92f50be2">
+        <name>ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>143</value>
+        </code>
+      </content>
     </items>
     <items id="dbb6f24e-0162-41b1-969f-af92a96b2508">
       <name>Document_CashPayment</name>

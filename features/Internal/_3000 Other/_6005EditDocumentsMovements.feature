@@ -113,7 +113,7 @@ Scenario: _605703 change movements for PI
 				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 |
 			And I activate field named "R1021B_VendorsTransactionsCompany" in "R1021B_VendorsTransactions" table
 		* Change movements for R1040B_TaxesOutgoing
-			And I move to "R1040B_TaxesOutgoing (3)" tab
+			And I move to "R1040B_TaxesOutgoing *" tab
 			And I go to line in "R1040B_TaxesOutgoing" table
 				| 'Active' | 'Company'      | 'LineNumber' | 'Period'              | 'RecordType' | 'Tax' | 'TaxableAmount' | 'TaxAmount' | 'TaxRate' |
 				| 'Yes'    | 'Main Company' | '2'          | '07.09.2020 17:53:38' | 'Receipt'    | 'VAT' | '35 593,22'     | '6 406,78'  | '18%'     |

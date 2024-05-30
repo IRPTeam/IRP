@@ -262,26 +262,32 @@ Scenario: _041606 check Purchase return movements by the Register  "R4050 Stock 
 			| ''                                                | 'Expense'       | '14.03.2021 18:53:34'   | '5'           | 'Main Company'   | 'Store 02'   | 'S/Yellow'     |
 	And I close all client application windows
 
-Scenario: _041607 check Purchase return movements by the Register  "R1040 Taxes outgoing"
+Scenario: _041607 check Purchase return movements by the Register  "R2040 Taxes incoming"
 	And I close all client application windows
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '231'       |
-	* Check movements by the Register  "R1040 Taxes outgoing" 
+	* Check movements by the Register  "R2040 Taxes incoming" 
 		And I click "Registrations report" button
-		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''                 | ''             | ''               | ''               | ''      | ''           | ''                     |
-			| 'Document registrations records'                  | ''              | ''                      | ''                 | ''             | ''               | ''               | ''      | ''           | ''                     |
-			| 'Register  "R1040 Taxes outgoing"'                | ''              | ''                      | ''                 | ''             | ''               | ''               | ''      | ''           | ''                     |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'        | ''             | 'Dimensions'     | ''               | ''      | ''           | ''                     |
-			| ''                                                | ''              | ''                      | 'Taxable amount'   | 'Tax amount'   | 'Company'        | 'Branch'         | 'Tax'   | 'Tax rate'   | 'Tax movement type'    |
-			| ''                                                | 'Receipt'       | '14.03.2021 18:53:34'   | '152,54'           | '27,46'        | 'Main Company'   | 'Front office'   | 'VAT'   | '18%'        | ''                     |
-			| ''                                                | 'Receipt'       | '14.03.2021 18:53:34'   | '228,81'           | '41,19'        | 'Main Company'   | 'Front office'   | 'VAT'   | '18%'        | ''                     |
-			| ''                                                | 'Receipt'       | '14.03.2021 18:53:34'   | '381,36'           | '68,64'        | 'Main Company'   | 'Front office'   | 'VAT'   | '18%'        | ''                     |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''               | ''           | ''             | ''             | ''    | ''         | ''                             | ''         | ''                     |
+			| 'Document registrations records'                | ''            | ''                    | ''               | ''           | ''             | ''             | ''    | ''         | ''                             | ''         | ''                     |
+			| 'Register  "R2040 Taxes incoming"'              | ''            | ''                    | ''               | ''           | ''             | ''             | ''    | ''         | ''                             | ''         | ''                     |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources'      | ''           | 'Dimensions'   | ''             | ''    | ''         | ''                             | ''         | ''                     |
+			| ''                                              | ''            | ''                    | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '26,11'          | '4,7'        | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '39,17'          | '7,05'       | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '65,29'          | '11,75'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '152,54'         | '27,46'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '152,54'         | '27,46'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '228,81'         | '41,19'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '228,81'         | '41,19'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '381,36'         | '68,64'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '381,36'         | '68,64'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
 	And I close all client application windows
 
 Scenario: _041608 check Purchase return movements by the Register  "R1012 Invoice closing of purchase orders" (with PRO)
@@ -687,19 +693,19 @@ Scenario: _041627 check there is no Purchase return movements by the Register  "
 			| 'Register  "R1021 Vendors transactions"'    |
 	And I close all client application windows
 
-Scenario: _041628 check there is no Purchase return movements by the Register  "R1040 Taxes outgoing" (Return to consignor)
+Scenario: _041628 check there is no Purchase return movements by the Register  "R2040 Taxes incoming" (Return to consignor)
 	And I close all client application windows
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '195'       |
-	* Check movements by the Register  "R1040 Taxes outgoing" 
+	* Check movements by the Register  "R2040 Taxes incoming" 
 		And I click "Registrations report" button
-		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R1040 Taxes outgoing"'    |
+			| 'Register  "R2040 Taxes incoming"'    |
 	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion
@@ -736,7 +742,7 @@ Scenario: _041630 Purchase return clear posting/mark for deletion
 			| 'R4050 Stock inventory'                       |
 			| 'R4011 Free stocks'                           |
 			| 'R4032 Goods in transit (outgoing)'           |
-			| 'R1040 Taxes outgoing'                        |
+			| 'R2040 Taxes incoming'                        |
 			| 'R1012 Invoice closing of purchase orders'    |
 		And I close all client application windows
 	* Mark for deletion
@@ -776,6 +782,6 @@ Scenario: _041630 Purchase return clear posting/mark for deletion
 			| 'R4050 Stock inventory'                       |
 			| 'R4011 Free stocks'                           |
 			| 'R4032 Goods in transit (outgoing)'           |
-			| 'R1040 Taxes outgoing'                        |
+			| 'R2040 Taxes incoming'                        |
 			| 'R1012 Invoice closing of purchase orders'    |
 		And I close all client application windows

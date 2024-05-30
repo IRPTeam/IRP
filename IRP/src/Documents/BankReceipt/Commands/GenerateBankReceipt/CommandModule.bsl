@@ -133,6 +133,29 @@ Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
 	ValueTable.Columns.Add("BankTerm"        , New TypeDescription("CatalogRef.BankTerms"));
 	ValueTable.Columns.Add("Commission"      , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	
+	HasBankTerm = False;
+	UsersBankTerm = Undefined;
+	For Each Table In ArrayOfTables Do
+		If Table.Count() = 0 Then
+			Continue;
+		EndIf;
+		For Each Column In Table.Columns Do
+			If Column.Name = "BankTerm" Then
+				HasBankTerm = True;
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	If Not HasBankTerm Then
+		FilterParameters = New Structure();
+		FilterParameters.Insert("MetadataObject", Metadata.Documents.BankReceipt);
+		FilterParameters.Insert("AttributeName", "PaymentList.BankTerm");
+		UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
+		If UserSettings.Count() > 0 Then
+			UsersBankTerm = UserSettings[0].Value; 
+		EndIf;
+	EndIf;
+	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
 			NewRow = ValueTable.Add();
@@ -204,8 +227,12 @@ Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
 			NewRow.Insert("RetailCustomer"          , RowPaymentList.RetailCustomer);
 			NewRow.Insert("PaymentType"             , RowPaymentList.PaymentType);
 			NewRow.Insert("PaymentTerminal"         , RowPaymentList.PaymentTerminal);
-			NewRow.Insert("BankTerm"                , RowPaymentList.BankTerm);
 			NewRow.Insert("Commission"              , RowPaymentList.Commission);
+			
+			NewRow.Insert("BankTerm"                , RowPaymentList.BankTerm);
+			If Not HasBankTerm Then
+				NewRow.BankTerm = UsersBankTerm;
+			EndIf;
 	
 			Result.PaymentList.Add(NewRow);
 		EndDo;

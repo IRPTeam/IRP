@@ -1535,18 +1535,16 @@ EndFunction
 
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
-	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions 
-		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation Then
+	If Parameters.Operation = Operations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions Then
 		
 		Return GetAnalytics_ReceiptInventory(Parameters); // Stock inventory - Vendors transactions
 		
-	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors 
-		Or Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation Then
+	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors Then
 		
 		Return GetAnalytics_OffsetOfAdvances(Parameters); // Vendors transactions - Advances to vendors
 	
 	ElsIf Parameters.Operation = Operations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
-		Return GetAnalytics_VATIncoming(Parameters); // Taxes outgoing - Vendors transactions
+		Return GetAnalytics_VATOutgoing(Parameters); // Taxes outgoing - Vendors transactions
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -1611,7 +1609,7 @@ Function GetAnalytics_OffsetOfAdvances(Parameters)
 EndFunction
 
 // Taxes outgoing - Vendors transactions
-Function GetAnalytics_VATIncoming(Parameters)
+Function GetAnalytics_VATOutgoing(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		

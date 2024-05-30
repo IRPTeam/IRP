@@ -4,6 +4,9 @@ Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	If Not ThisObject.EachSerialLotNumberIsUnique Then
+		ThisObject.SourceOfOrigin = Catalogs.SourceOfOrigins.EmptyRef();	
+	EndIf;	
 EndProcedure
 
 Procedure OnWrite(Cancel)

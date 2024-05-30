@@ -242,6 +242,9 @@ Function CheckDocumentsResult(Document, DocName)
 		If CurrentTable <> Undefined And CurrentTable.Columns.Find("Ref") = Undefined Then
 			CurrentTable.Columns.Add("Ref", RefTypeDescription);
 		EndIf;
+		If CurrentTable <> Undefined And CurrentTable.Columns.Find("Key") = Undefined Then
+			CurrentTable.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+		EndIf;
 	EndDo;
  		
 	Query.SetParameter("ItemList", Result.Tables.ItemList);

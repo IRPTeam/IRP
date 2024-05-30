@@ -163,24 +163,38 @@ Function GetChoiceDataTable(Parameters) Export
 	Return Query.Execute().Unload();
 EndFunction
 
-Function GetDefaultChoiceRef(Parameters) Export
+Function GetDefaultChoiceRef(Parameters, AgreementParameters) Export
 	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
 
+	Agreement = Catalogs.Agreements.EmptyRef();
+
 	If QueryTable.Count() = 1 Then
-		Return QueryTable[0].Ref;
-	Else
-		If Parameters.Property("Agreement") Then
-			Rows = QueryTable.FindRows(New Structure("Ref", Parameters.Agreement));
-			If Rows.Count() = 0 Then
-				Return PredefinedValue("Catalog.Agreements.EmptyRef");
-			Else
-				Return Parameters.Agreement;
-			EndIf;
-		Else
-			Return PredefinedValue("Catalog.Agreements.EmptyRef");
+		Agreement = QueryTable[0].Ref;
+	ElsIf Parameters.Property("Agreement") Then
+		Rows = QueryTable.FindRows(New Structure("Ref", Parameters.Agreement));
+		If Not Rows.Count() = 0 Then
+			Agreement = Parameters.Agreement;
 		EndIf;
 	EndIf;
-
+	
+	If Agreement.IsEmpty() And ValueIsFilled(AgreementParameters.Property("Company")) Then
+		CountAgreementWithCompany = 0;
+		TmpAgreement = Agreement;
+		For Each Row In QueryTable Do
+			If Row.Ref.Company = AgreementParameters.Company Then
+				TmpAgreement = Row.Ref;
+				CountAgreementWithCompany = CountAgreementWithCompany + 1;
+				If CountAgreementWithCompany = 2 Then
+					Break;
+				EndIf;
+			EndIf;
+		EndDo;
+		If CountAgreementWithCompany = 1 Then
+			Agreement = TmpAgreement;
+		EndIf;
+	EndIf;
+	
+	Return Agreement;
 EndFunction
 
 Function GetAgreementInfo(Agreement) Export

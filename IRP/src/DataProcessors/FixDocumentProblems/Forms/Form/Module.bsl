@@ -1,4 +1,13 @@
 
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ThisObject.MapRowsLeft = New ValueList();
+	ThisObject.MapRowsRight = New ValueList();
+	
+	ThisObject.MapColumnsLeft = New ValueList();
+	ThisObject.MapColumnsRight = New ValueList();
+EndProcedure
+
 &AtClient
 Procedure OnOpen(Cancel)
 	OnlyPosted = True;
@@ -14,44 +23,13 @@ EndProcedure
 &AtServer
 Procedure FillDocumentsAtServer()
 	
-	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
-	Array  = New Array;
-	For Each Doc In Metadata.Documents Do
-		Array.Add(StrTemplate(Template, ?(Array.Count(), "", "AS DocumentType"), ?(Array.Count(), "", "INTO AllDocuments"), Doc.Name));
-	EndDo;	
+	Settings = FixDocumentProblemsServer.GetDocumentListSettings();
+	Settings.StartDate = Period.StartDate;
+	Settings.EndDate = Period.EndDate;
+	Settings.OnlyPosted = OnlyPosted;
+	Settings.CompanyList = Company.UnloadValues();
 	
-	QueryTxt = StrConcat(Array, Chars.LF + "UNION ALL" + Chars.LF) +	"
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	AllDocuments.Date AS Date,
-	|	AllDocuments.Ref,
-	|	AllDocuments.DocumentType,
-	|	CASE
-	|		WHEN AllDocuments.Ref.Posted
-	|			THEN 0
-	|		WHEN AllDocuments.Ref.DeletionMark
-	|			THEN 1
-	|		ELSE 2
-	|	END AS Picture
-	|FROM
-	|	AllDocuments AS AllDocuments
-	|WHERE
-	|	AllDocuments.Ref.Date BETWEEN &StartDate AND &EndDate
-	|	AND CASE WHEN &OnlyPosted THEN AllDocuments.Ref.Posted ELSE TRUE END
-	|	AND CASE WHEN &CompanySet THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
-	|
-	|ORDER BY
-	|	AllDocuments.Date";
-	
-	Query = New Query(QueryTxt);
-	Query.SetParameter("StartDate", Period.StartDate);
-	Query.SetParameter("EndDate", Period.EndDate);
-	Query.SetParameter("OnlyPosted", OnlyPosted);
-	Query.SetParameter("CompanySet", Company.Count() > 0);
-	Query.SetParameter("CompanyList", Company.UnloadValues());
-	Result = Query.Execute().Unload();
+	Result = FixDocumentProblemsServer.GetDocumentList(Settings);
 	
 	DocumentList.Load(Result);
 EndProcedure
@@ -327,52 +305,47 @@ EndProcedure
 &AtClient
 Procedure CheckPosting(Command)
 	PostingInfo.GetItems().Clear();
-	JobSettingsArray = GetJobsForCheckPostingDocuments();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("PostingServer.CheckDocumentArray");
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;
 EndProcedure
 
-&AtServer
-Function GetJobsForCheckPostingDocuments()
-	
-	TypesTable = ThisObject.DocumentList.Unload(, "DocumentType");
-	TypesTable.GroupBy("DocumentType");
-	
-	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
-	JobDataSettings.CallbackFunction = "GetJobsForCheckPostingDocuments_Callback";
-	JobDataSettings.ProcedurePath = "PostingServer.CheckDocumentArray";
-	JobDataSettings.CallbackWhenAllJobsDone = False;
-					
-	DocsInPack = 100;
-	For Each TypeItem In TypesTable Do
-		DocumentsRows = DocumentList.FindRows(New Structure("DocumentType", TypeItem.DocumentType));
-		 
-		StreamArray = New Array;
-		Pack = 1;
-		TotalDocs = DocumentsRows.Count();
-		For Each Row In DocumentsRows Do
-			StreamArray.Add(Row.Ref);
-		 	
-		 	If StreamArray.Count() = DocsInPack Then
-		 		JobSettings = BackgroundJobAPIServer.JobSettings();
-				JobSettings.ProcedureParams.Add(StreamArray);
-				JobSettings.ProcedureParams.Add(True);
-				JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + DocsInPack + ") / " + TotalDocs;
-				JobDataSettings.JobSettings.Add(JobSettings);
-				
-				StreamArray = New Array;
-		 		Pack = Pack + 1;
-		 	EndIf;
-		EndDo;
-		If StreamArray.Count() > 0 Then
-			JobSettings = BackgroundJobAPIServer.JobSettings();
-			JobSettings.ProcedureParams.Add(StreamArray);
-			JobSettings.ProcedureParams.Add(True);
-			JobSettings.Description = String(TypeItem.DocumentType) + ": " + Pack + " * (" + StreamArray.Count() + ") / " + TotalDocs;
-			JobDataSettings.JobSettings.Add(JobSettings);
-	 	EndIf;
-	EndDo;
+&AtClient
+Procedure CheckAccountingAnalytics(Command)	
+	PostingInfo.GetItems().Clear();
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingAnalytics();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingAnalytics", ArrayOfExcludeTypes);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
+EndProcedure
 
+&AtClient
+Procedure CheckAccountingTranslations(Command)
+	PostingInfo.GetItems().Clear();
+	ArrayOfExcludeTypes = AccountingServer.GetExcludeDocumentTypes_AccountingTranslation();
+	JobSettingsArray = GetJobsForCheckPostingDocuments("AccountingServer.CheckDocumentArray_AccountingTranslation", ArrayOfExcludeTypes);
+	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);	
+	Items.PagesDocuments.CurrentPage = Items.PagePosting;	
+EndProcedure
+
+&AtServer
+Function GetJobsForCheckPostingDocuments(ProcedurePath, ArrayOfExcludeTypes = Undefined)
+	DocumentsTable = DocumentList.Unload();
+	If ArrayOfExcludeTypes <> Undefined Then
+		ArrayForDelete = New Array();
+		
+		For Each Row In DocumentsTable Do
+			If ArrayOfExcludeTypes.Find(TypeOf(Row.Ref)) <> Undefined Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		
+		For Each ItemForDelete In ArrayForDelete Do
+			DocumentsTable.Delete(ItemForDelete);
+		EndDo;
+	EndIf;
+	
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForCheckPostingDocuments(DocumentsTable, ProcedurePath);
 	Return JobDataSettings;
 EndFunction
 
@@ -400,9 +373,9 @@ Procedure FillRegInfoInRow(TreeRow, RegInfoArray, Parent = Undefined)
 	SkipRegFilled = SkipCheckRegisters.Count() > 0;
 	For Each DocRow In RegInfoArray Do
 			
-			If DocRow.RegInfo.Count() = 0 Then
-				Continue;
-			EndIf;
+			//If DocRow.RegInfo.Count() = 0 Then
+			//	Continue;
+			//EndIf;
 			
 			ParentRow = ?(Parent = Undefined, TreeRow.Add(), Parent);
 			ParentRow.Ref = DocRow.Ref;
@@ -561,11 +534,19 @@ Procedure PostingInfoBeforeRowChange(Item, Cancel)
 	EndIf;
 
 	PostingInfo_UpdateTable(CurrentRow.Ref, CurrentRow.NewMovement);
+	ShowDiff();
 EndProcedure
 
 &AtServer
 Procedure PostingInfo_UpdateTable(Ref, NewMovementStorage)	
-	ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
+	If AccountingServer.IsAccountingAnalyticsRegister(CurrentRegName) Then
+		ValueTable = AccountingServer.GetCurrentAnalyticsRegisterRecords(Ref, CurrentRegName);
+	ElsIf AccountingServer.IsAccountingDataRegister(CurrentRegName) Then
+		ValueTable = AccountingServer.GetCurrentDataRegisterRecords(Ref, CurrentRegName);
+	Else 
+		ValueTable = PostingServer.GetDocumentMovementsByRegisterName(Ref, CurrentRegName);
+	EndIf;
+	
 	CurrentMovement.Load(ValueTable);
 	NewMovement.Load(NewMovementStorage.Get());
 EndProcedure
@@ -626,47 +607,8 @@ EndProcedure
 
 &AtServer
 Function GetJobsForWriteRecordSet()
-	JobDataSettings = BackgroundJobAPIServer.JobDataSettings();
-	JobDataSettings.CallbackFunction = "GetJobsForWriteRecordSet_Callback";
-	JobDataSettings.ProcedurePath = "PostingServer.WriteDocumentsRecords";
-					
-	DocsInPack = 100;
-	StreamArray = New Array;
-	For Each Doc In PostingInfo.GetItems() Do
-		
-		For Each Row In Doc.GetItems() Do
-		
-			If Not Row.Select OR Row.Processed Then
-				Continue;
-			EndIf;
-			
-			Pack = 1;
-			Str = New Structure;
-			Str.Insert("Ref", Row.Ref);
-			Str.Insert("NewMovement", Row.NewMovement);
-			Str.Insert("RegName", Row.RegName);
-			StreamArray.Add(Str);
-			
-			If StreamArray.Count() = DocsInPack Then
-				JobSettings = BackgroundJobAPIServer.JobSettings();
-				JobSettings.ProcedureParams.Add(StreamArray);
-				JobSettings.ProcedureParams.Add(True);
-				JobSettings.Description = "Write records: " + Pack + " * (" + DocsInPack + ")";
-				JobDataSettings.JobSettings.Add(JobSettings);
-				
-				StreamArray = New Array;
-				Pack = Pack + 1;
-			EndIf;
-		EndDo;
-	EndDo;
-	If StreamArray.Count() > 0 Then
-		JobSettings = BackgroundJobAPIServer.JobSettings();
-		JobSettings.ProcedureParams.Add(StreamArray);
-		JobSettings.ProcedureParams.Add(True);
-		JobSettings.Description = "Write records: " + Pack + " * (" + StreamArray.Count() + ")";
-		JobDataSettings.JobSettings.Add(JobSettings);
-	EndIf;
-
+	Tree = FormAttributeToValue("PostingInfo", Type("ValueTree"));
+	JobDataSettings = FixDocumentProblemsServer.GetJobsForWriteRecordSet(Tree);
 	Return JobDataSettings;
 EndFunction
 
@@ -869,4 +811,510 @@ Procedure RestoreOriginCheckList()
 	EndDo;
 EndProcedure
 
+#EndRegion
+
+#Region ShowDiff
+
+&AtServer	
+Procedure ShowDiff()
+	ThisObject.BlockDiffDocActivate = True;
+	
+	ThisObject.MapRowsLeft = New ValueList();
+	ThisObject.MapRowsRight = New ValueList();
+	
+	ThisObject.MapColumnsLeft = New ValueList();
+	ThisObject.MapColumnsRight = New ValueList();
+	
+	ThisObject.DiffCellsLeft.Clear();
+	ThisObject.DiffCellsRight.Clear();
+	
+	ThisObject.DiffDocLeft.Clear();
+	ThisObject.DiffDocRight.Clear();
+	
+	ReportBuilder = New ReportBuilder();
+	ReportBuilder.PutReportHeader = False;
+	
+	IgnoreColumns = "Recorder,LineNumber,PointInTime,UniqueID, UUID";
+	
+	_NewMovement = ThisObject.NewMovement.Unload();
+	_CurrentMovement = ThisObject.CurrentMovement.Unload();
+	
+	For Each Column In StrSplit(IgnoreColumns, ",") Do
+		CommonFunctionsServer.DeleteColumn(_NewMovement, TrimAll(Column));
+		CommonFunctionsServer.DeleteColumn(_CurrentMovement, TrimAll(Column));
+	EndDo;
+	
+	ReportBuilder.DataSource = New DataSourceDescription(_CurrentMovement);
+	ReportBuilder.Put(ThisObject.DiffDocLeft);
+	
+	ReportBuilder.DataSource = New DataSourceDescription(_NewMovement);       
+	ReportBuilder.Put(ThisObject.DiffDocRight);
+	
+	CompareSpreadsheetDocuments();
+	
+	ThisObject.DiffDocLeft.FixedTop = 1;
+	ThisObject.DiffDocRight.FixedTop = 1;
+		
+	ThisObject.BlockDiffDocActivate = False;
+EndProcedure
+
+&AtClient
+Procedure ExpandDiff(Command)
+	Items.ExpandDiff.Check = Not Items.ExpandDiff.Check;
+	Items.GroupClearRows.Visible = Not Items.ExpandDiff.Check;
+	Items.PostingInfo.Visible = Not Items.ExpandDiff.Check;
+	ExpandDiffAtServer();
+EndProcedure
+
+&AtServer
+Procedure ExpandDiffAtServer()
+	Items.GroupDiffDocs.Group = ?(Items.ExpandDiff.Check, ChildFormItemsGroup.Vertical, ChildFormItemsGroup.Horizontal);
+EndProcedure	
+
+&AtClient
+Procedure PrevChangesLeft(Command)
+	PrevChanges(Items.DiffDocLeft, ThisObject.DiffDocLeft, ThisObject.DiffCellsLeft);
+EndProcedure
+
+&AtClient
+Procedure PrevChangesRight(Command)
+	PrevChanges(Items.DiffDocRight, ThisObject.DiffDocRight, ThisObject.DiffCellsRight);
+EndProcedure
+
+&AtClient
+Procedure NextChangeLeft(Command)
+	NextChanges(Items.DiffDocLeft, ThisObject.DiffDocLeft, ThisObject.DiffCellsLeft);
+EndProcedure
+
+&AtClient
+Procedure NextChangeRight(Command)
+	NextChanges(Items.DiffDocRight, ThisObject.DiffDocRight, ThisObject.DiffCellsRight);
+EndProcedure
+
+&AtClient
+Procedure DiffDocLeftOnActivate(Item)
+	If ThisObject.BlockDiffDocActivate Then
+		Return;
+	EndIf;
+	
+	Source = New Structure("FormAttribute, FormItem", ThisObject.DiffDocLeft, Items.DiffDocLeft);
+	Receiver = New Structure("FormAttribute, FormItem", ThisObject.DiffDocRight, Items.DiffDocRight);
+	
+	MapSource = New Structure("Rows, Columns", ThisObject.MapRowsLeft, ThisObject.MapColumnsLeft);
+	MapReceiver = New Structure("Rows, Columns", ThisObject.MapRowsRight, ThisObject.MapColumnsRight);
+	
+	DiffDocOnActivate(Source, Receiver, MapSource, MapReceiver);
+EndProcedure
+
+&AtClient
+Procedure DiffDocRightOnActivate(Item)
+	If ThisObject.BlockDiffDocActivate Then
+		Return;
+	EndIf;
+		
+	Source = New Structure("FormAttribute, FormItem", ThisObject.DiffDocRight, Items.DiffDocRight);
+	Receiver = New Structure("FormAttribute, FormItem", ThisObject.DiffDocLeft, Items.DiffDocLeft);
+	
+	MapSource = New Structure("Rows, Columns", ThisObject.MapRowsRight, ThisObject.MapColumnsRight);
+	MapReceiver = New Structure("Rows, Columns", ThisObject.MapRowsLeft, ThisObject.MapColumnsLeft);
+	
+	DiffDocOnActivate(Source, Receiver, MapSource, MapReceiver);
+EndProcedure
+
+&AtClient
+Procedure PrevChanges(FormItem, FormAttribute, DiffTable)
+	
+	Var Index;
+	
+	CurrentCell = FormItem.CurrentArea;
+	NumberRow = CurrentCell.Top;
+	NumberColumn = CurrentCell.Left;
+	For Each CurrentRow In DiffTable Do
+		If CurrentRow.NumberRow < NumberRow 
+			Or CurrentRow.NumberRow = NumberRow And CurrentRow.NumberColumn < NumberColumn Then
+			Index = DiffTable.Индекс(CurrentRow);
+		ElsIf CurrentRow.NumberRow >= NumberRow And CurrentRow.NumberColumn > NumberColumn Then
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Index <> Undefined Then
+		RowDiff = DiffTable[Index];
+		NumberRow = RowDiff.NumberRow;
+		NumberColumn = RowDiff.NumberColumn;
+		FormItem.CurrentArea = FormAttribute.Area(NumberRow, NumberColumn, NumberRow, NumberColumn);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure NextChanges(FormItem, FormAttribute, DiffTable)
+	
+	CurrentCell = FormItem.CurrentArea;
+	NumberRow = CurrentCell.Top;
+	NumberColumn = CurrentCell.Left;
+	For Each CurrentRow In DiffTable Do
+		If CurrentRow.NumberRow = NumberRow And CurrentRow.NumberColumn > NumberColumn 
+			Or CurrentRow.NumberRow > NumberRow Then
+			Index = DiffTable.Индекс(CurrentRow);
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Index <> Undefined Then
+		RowDiff = DiffTable[Index];
+		NumberRow = RowDiff.NumberRow;
+		NumberColumn = RowDiff.NumberColumn;
+		FormItem.CurrentArea = FormAttribute.Area(NumberRow, NumberColumn, NumberRow, NumberColumn);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure DiffDocOnActivate(Source, Receiver, MapSource, MapReceiver)
+	
+	ThisObject.BlockDiffDocActivate = True;
+	
+	CurrentArea = Source.FormItem.CurrentArea;
+	
+	If CurrentArea.AreaType = SpreadsheetDocumentCellAreaType.Table Then
+		
+		SelectedArea = Receiver.Area();
+		
+	Else
+	
+		If CurrentArea.Bottom < MapSource.Rows.Count() Then
+			RowNumber = MapSource.Rows[CurrentArea.Bottom].Value;
+		Else
+			RowNumber = CurrentArea.Bottom - MapSource.Rows.Count() + MapReceiver.Rows.Count();
+		EndIf;
+		
+		If CurrentArea.Left < MapSource.Columns.Count() Then
+			ColumnNumber = MapSource.Columns[CurrentArea.Left].Value;
+		Else
+			ColumnNumber = CurrentArea.Left - MapSource.Columns.Count() + MapReceiver.Columns.Count();
+		EndIf;
+		
+		SelectedArea = Undefined;
+		
+		If CurrentArea.AreaType = SpreadsheetDocumentCellAreaType.Rectangle Then		
+			If RowNumber <> Undefined And ColumnNumber <> Undefined Then
+				SelectedArea = Receiver.FormAttribute.Area(RowNumber, ColumnNumber);
+			EndIf;
+		ElsIf CurrentArea.AreaType = SpreadsheetDocumentCellAreaType.Rows Then
+			If RowNumber <> Undefined Then
+				SelectedArea = Receiver.FormAttribute.Area(RowNumber, 0, RowNumber, 0);
+			EndIf;
+		ElsIf CurrentArea.AreaType = SpreadsheetDocumentCellAreaType.Columns Then
+			If ColumnNumber <> Undefined Then
+				SelectedArea = Receiver.FormAttribute.Area(0, ColumnNumber, 0, ColumnNumber);
+			EndIf;
+		Else
+			Return;
+		EndIf;
+	EndIf;
+	
+	Receiver.FormItem.CurrentArea = SelectedArea;
+	ThisObject.BlockDiffDocActivate = False;
+EndProcedure
+	
+&AtServer
+Procedure CompareSpreadsheetDocuments()
+	LeftDocumentTable = ReadSpreadsheetDocument(ThisObject.DiffDocLeft);
+	RightDocumentTable = ReadSpreadsheetDocument(ThisObject.DiffDocRight);
+	
+	Mapping = CreateMapping(LeftDocumentTable, RightDocumentTable, True);
+	LeftRowMapping = Mapping[0];
+	RightRowMapping = Mapping[1];
+	
+	Mapping = CreateMapping(LeftDocumentTable, RightDocumentTable, False);
+	LeftColumnMapping = Mapping[0];
+	RightColumnMapping = Mapping[1];
+	
+	LeftDocumentTable  = Undefined;
+	RightDocumentTable = Undefined;
+			
+	BackColor_Delete    = WebColors.LightPink;
+	BackColor_Add	    = WebColors.LightGreen;
+	BackColor_Changed	= WebColors.LightCyan;
+	TextColor_Changed	= WebColors.Blue;
+
+	LeftTableHeight = ThisObject.DiffDocLeft.TableHeight;
+	LeftTableWidth  = ThisObject.DiffDocLeft.TableWidth;
+	
+	RightTableHeight = ThisObject.DiffDocRight.TableHeight;
+	RightTableWidth  = ThisObject.DiffDocRight.TableWidth;
+
+	For RowNumber = 1 To LeftRowMapping.Count() - 1 Do
+		If LeftRowMapping[RowNumber].Value = Undefined Then
+			ThisObject.DiffDocLeft.Area(RowNumber, 1, RowNumber, LeftTableWidth).BackColor = BackColor_Delete;
+			
+			NewDiffRow = ThisObject.DiffCellsLeft.Add();
+			NewDiffRow.NumberRow = RowNumber;
+			NewDiffRow.NumberColumn = 0;
+			
+		EndIf;		
+	EndDo;
+	
+	For ColumnNumber = 1 По LeftColumnMapping.Count() - 1 Do
+		If LeftColumnMapping[ColumnNumber].Value = Undefined Then
+			ThisObject.DiffDocLeft.Area(1, ColumnNumber, LeftTableHeight, ColumnNumber).BackColor = BackColor_Delete;
+			
+			NewDiffRow = ThisObject.DiffCellsLeft.Add();
+			NewDiffRow.NumberRow = 0;
+			NewDiffRow.NumberColumn = ColumnNumber;
+			
+		EndIf;
+	EndDo;
+	
+	For RowNumber = 1 To RightRowMapping.Count() - 1 Do
+		If RightRowMapping[RowNumber].Value = Undefined Then
+			ThisObject.DiffDocRight.Area(RowNumber, 1, RowNumber, RightTableWidth).BackColor = BackColor_Add;
+			
+			NewDiffRow = ThisObject.DiffCellsRight.Add();
+			NewDiffRow.NumberRow = RowNumber;
+			NewDiffRow.NumberColumn = 0;
+			
+		EndIf;
+	EndDo;
+	
+	For ColumnNumber = 1 To RightColumnMapping.Count() - 1 Do
+		If RightColumnMapping[ColumnNumber].Value = Undefined Then
+			ThisObject.DiffDocRight.Area(1, ColumnNumber, RightTableHeight, ColumnNumber).BackColor = BackColor_Add;
+			
+			NewDiffRow = ThisObject.DiffCellsRight.Add();
+			NewDiffRow.NumberRow = 0;
+			NewDiffRow.NumberColumn = ColumnNumber;
+			
+		EndIf;
+	EndDo;
+	
+	For RowNumber1 = 1 To LeftRowMapping.Count() - 1 Do
+		
+		RowNumber2 = LeftRowMapping[RowNumber1].Value;
+		If RowNumber2 = Undefined Then
+			Continue;
+		EndIf;
+		
+		For ColumnNumber1 = 1 To LeftColumnMapping.Count() - 1 Do
+			
+			ColumnNumber2 = LeftColumnMapping[ColumnNumber1].Value;
+			If ColumnNumber2 = Undefined Then
+				Continue;
+			EndIf;
+			
+			Area1 = ThisObject.DiffDocLeft.Area(RowNumber1, ColumnNumber1, RowNumber1, ColumnNumber1);
+			Area2 = ThisObject.DiffDocRight.Area(RowNumber2, ColumnNumber2, RowNumber2, ColumnNumber2);
+			
+			If Not CompareAreas(Area1, Area2) Then
+				
+				Area1 = ThisObject.DiffDocLeft.Area(RowNumber1, ColumnNumber1);
+				Area2 = ThisObject.DiffDocRight.Area(RowNumber2, ColumnNumber2);
+				
+				Area1.TextColor = TextColor_Changed;
+				Area2.TextColor = TextColor_Changed;
+				
+				Area1.BackColor = BackColor_Changed;
+				Area2.BackColor = BackColor_Changed;
+				
+				NewDiffRow = ThisObject.DiffCellsLeft.Add();
+				NewDiffRow.NumberRow = RowNumber1;
+				NewDiffRow.NumberColumn = ColumnNumber1;
+				
+				NewDiffRow = ThisObject.DiffCellsRight.Add();
+				NewDiffRow.NumberRow = RowNumber2;
+				NewDiffRow.NumberColumn = ColumnNumber2;
+				
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	ThisObject.DiffCellsLeft.Sort("NumberRow, NumberColumn");
+	ThisObject.DiffCellsRight.Sort("NumberRow, NumberColumn");	
+EndProcedure
+
+&AtServer
+Function CompareAreas(Area1, Area2)
+	If Area1.Text <> Area2.Text Then
+		Return False;
+	EndIf;
+	
+	If Area1.Comment.Text <> Area2.Comment.Text Then
+		Return False;
+	EndIf;
+	
+	Return True;
+EndFunction
+
+&AtServer
+Function ReadSpreadsheetDocument(SourceSpreadsheetDocument)
+	
+	CountColumns = SourceSpreadsheetDocument.TableWidth;
+	
+	If CountColumns = 0 Then
+		Return New ValueTable();
+	EndIf;
+	
+	SpreadsheetDocument = New SpreadsheetDocument();
+	For ColumnNumber = 1 To CountColumns Do
+		SpreadsheetDocument.Area(1, ColumnNumber, 1, ColumnNumber).Text = "Number_" + Format(ColumnNumber,"NG=0;");
+	EndDo;
+	
+	SpreadsheetDocument.Put(SourceSpreadsheetDocument);
+	QueryBuilder = New QueryBuilder();
+	QueryBuilder.DataSource = New DataSourceDescription(SpreadsheetDocument.Area());
+	QueryBuilder.Execute();
+	Return QueryBuilder.Result.Unload();	
+EndFunction
+
+&AtServer
+Function CreateMapping(LeftTable, RightTable, ByRow)
+	Data_LeftTable = GetDataForCompare(LeftTable, ByRow);
+	Data_RightTable = GetDataForCompare(RightTable, ByRow);
+	
+	If ByRow Then
+		MappingResult_Left = New ValueList();
+		MappingResult_Left.LoadValues(New Array(LeftTable.Count() + 1));
+		
+		MappingResult_Right = New ValueList();
+		MappingResult_Right.LoadValues(New Array(RightTable.Count() + 1));		
+	Else
+		MappingResult_Left = New ValueList();
+		MappingResult_Left.LoadValues(New Array(LeftTable.Columns.Count() + 1));
+		
+		MappingResult_Right = New ValueList();
+		MappingResult_Right.LoadValues(New Array(RightTable.Columns.Count() + 1));
+	EndIf;
+	
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	*
+	|INTO LeftTable
+	|FROM
+	|	&Data_LeftTable AS Data_LeftTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|INTO RightTable
+	|FROM
+	|	&Data_RightTable AS Data_RightTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	LeftTable.Number AS NumberLeft,
+	|	RightTable.Number AS NumberRight,
+	|	CASE
+	|		WHEN RightTable.Number - LeftTable.Number < 0
+	|			THEN LeftTable.Number - RightTable.Number
+	|		ELSE RightTable.Number - LeftTable.Number
+	|	END AS DistanceOfBegin,
+	|	CASE
+	|		WHEN &RightTable_Count - RightTable.Number - (&LeftTable_Count - LeftTable.Number) < 0
+	|			THEN &LeftTable_Count - LeftTable.Number - (&RightTable_Count - RightTable.Number)
+	|		ELSE &RightTable_Count - RightTable.Number - (&LeftTable_Count - LeftTable.Number)
+	|	END AS DistanceOfEnd,
+	|	SUM(CASE
+	|		WHEN LeftTable.Value <> """"
+	|			THEN CASE
+	|				WHEN LeftTable.Count < RightTable.Count
+	|					THEN LeftTable.Count
+	|				ELSE RightTable.Count
+	|			END
+	|		ELSE 0
+	|	END) AS ValueMatches,
+	|	SUM(CASE
+	|		WHEN LeftTable.Count < RightTable.Count
+	|			THEN LeftTable.Count
+	|		ELSE RightTable.Count
+	|	END) AS TotalMatches
+	|INTO GroupingData
+	|FROM
+	|	LeftTable AS LeftTable
+	|		INNER JOIN RightTable AS RightTable
+	|		ON LeftTable.Value = RightTable.Value
+	|GROUP BY
+	|	LeftTable.Number,
+	|	RightTable.Number,
+	|	CASE
+	|		WHEN RightTable.Number - LeftTable.Number < 0
+	|			THEN LeftTable.Number - RightTable.Number
+	|		ELSE RightTable.Number - LeftTable.Number
+	|	END,
+	|	CASE
+	|		WHEN &RightTable_Count - RightTable.Number - (&LeftTable_Count - LeftTable.Number) < 0
+	|			THEN &LeftTable_Count - LeftTable.Number - (&RightTable_Count - RightTable.Number)
+	|		ELSE &RightTable_Count - RightTable.Number - (&LeftTable_Count - LeftTable.Number)
+	|	END
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GroupingData.NumberLeft AS NumberLeft,
+	|	GroupingData.NumberRight AS NumberRight,
+	|	GroupingData.ValueMatches AS ValueMatches,
+	|	GroupingData.TotalMatches AS TotalMatches,
+	|	CASE
+	|		WHEN GroupingData.DistanceOfBegin < GroupingData.DistanceOfEnd
+	|			THEN GroupingData.DistanceOfBegin
+	|		ELSE GroupingData.DistanceOfEnd
+	|	END AS MinDistance
+	|FROM
+	|	GroupingData AS GroupingData
+	|
+	|ORDER BY
+	|	ValueMatches DESC,
+	|	TotalMatches DESC,
+	|	MinDistance,
+	|	NumberLeft,
+	|	NumberRight";
+
+	Query.SetParameter("Data_LeftTable", Data_LeftTable);
+	Query.SetParameter("Data_RightTable", Data_RightTable);
+	Query.SetParameter("LeftTable_Count", LeftTable.Count());
+	Query.SetParameter("RightTable_Count", RightTable.Count());
+	
+	QuerySelection = Query.Execute().Select();
+	
+	While QuerySelection.Next() Do
+		If MappingResult_Left[QuerySelection.NumberLeft].Value = Undefined
+			And MappingResult_Right[QuerySelection.NumberRight].Value = Undefined Then
+				MappingResult_Left[QuerySelection.NumberLeft].Value = QuerySelection.NumberRight;
+				MappingResult_Right[QuerySelection.NumberRight].Value = QuerySelection.NumberLeft;
+		EndIf;
+	EndDo;
+	
+	Result = New Array();
+	Result.Add(MappingResult_Left);
+	Result.Add(MappingResult_Right);
+	
+	Return Result;
+EndFunction
+
+&AtServer
+Function GetDataForCompare(ValueTableSource, ByRow)
+	Result = New ValueTable();
+	Result.Columns.Add("Number", New TypeDescription("Number"));
+	Result.Columns.Add("Value",	 New TypeDescription("String", , New StringQualifiers(100)));
+	
+	Bound1 = ?(ByRow, ValueTableSource.Count(), ValueTableSource.Columns.Count()) - 1;
+	Bound2 = ?(ByRow, ValueTableSource.Columns.Count(), ValueTableSource.Count()) - 1;
+		
+	For Index1 = 0 To Bound1 Do
+		For Index2 = 0 To Bound2 Do
+			NewRow = Result.Add();
+			NewRow.Number = Index1 + 1;
+			NewRow.Value = ?(ByRow, ValueTableSource[Index1][Index2], ValueTableSource[Index2][Index1]);
+		EndDo;
+	EndDo;
+
+	Result.Columns.Add("Count", New TypeDescription("Number"));
+	Result.FillValues(1, "Count");
+	
+	Result.GroupBy("Number, Value", "Count");
+	
+	Return Result;
+EndFunction
+	
 #EndRegion

@@ -12266,7 +12266,7 @@ EndProcedure
 
 Procedure ClearAppearance_Header(Object, Form) Export
 	// Reset ReadOnly
-	For Each FieldName In Form.LockedFields Do
+For Each FieldName In Form.LockedFields Do
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement <> Undefined Then
 			If TypeOf(FormElement) = Type("FormButton") Then

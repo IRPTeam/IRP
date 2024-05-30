@@ -1404,17 +1404,15 @@ EndFunction
 Function GetAccountingAnalytics(Parameters) Export
 	Operations = Catalogs.AccountingOperations;
 	
-	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues
-		Or Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation Then
+	If Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues Then
 		
 		Return GetAnalytics_RevenueFromSales(Parameters); // Customer transactions - Revenues
 	
 	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then 
 		
-		Return GetAnalytics_VATOutgoing(Parameters); // Revenues - Tax outgoing
+		Return GetAnalytics_VATIncoming(Parameters); // Revenues - Tax outgoing
 	
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions
-		Or Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation  Then
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
 			
 		Return GetAnalytics_OffsetOfAdvances(Parameters); // Offset of advances (Advances from customer - Customer transactions)
 		
@@ -1457,7 +1455,7 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 EndFunction
 
 // Revenues - Taxes outgoing
-Function GetAnalytics_VATOutgoing(Parameters)
+Function GetAnalytics_VATIncoming(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 		

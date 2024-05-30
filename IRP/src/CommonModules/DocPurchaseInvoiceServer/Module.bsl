@@ -9,12 +9,18 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
+	FillVendorPrice(Object);
+EndProcedure
+
+Procedure FillVendorPrice(Object)
+	GetItemInfo.FillVendorPricesInObject(Object);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
+	FillVendorPrice(Object);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

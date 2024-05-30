@@ -62,6 +62,7 @@ Procedure UpdateSourceOfOriginsQuantity(Object) Export
 					NewRow = Object.SourceOfOrigins.Add();
 					NewRow.Key = Row_ItemList.Key; 
 					NewRow.SerialLotNumber = Row_SerialLotNumbers.SerialLotNumber;
+					NewRow.SourceOfOrigin = CommonFunctionsServer.GetRefAttribute(Row_SerialLotNumbers.SerialLotNumber, "SourceOfOrigin");
 					NewRow.Quantity = Row_SerialLotNumbers.Quantity;				
 				EndIf;
 			EndDo; // SerialLotNumbers

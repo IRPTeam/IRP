@@ -14,6 +14,7 @@ Procedure BeforeWrite(Cancel)
 	|FROM
 	|	&DataSet AS SpecificationsDataSet
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	SpecificationsDataQuantity.Key AS Key,
@@ -22,18 +23,43 @@ Procedure BeforeWrite(Cancel)
 	|FROM
 	|	&DataQuantity AS SpecificationsDataQuantity
 	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SpecificationItemList.Item AS Item,
+	|	SpecificationItemList.ItemKey AS ItemKey,
+	|	SpecificationItemList.Unit AS Unit,
+	|	SpecificationItemList.Quantity AS Quantity
+	|INTO tmp_ItemList
+	|FROM
+	|	&SpecificationItemList AS SpecificationItemList
+	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp_DataSet.Item AS Item,
 	|	tmp_DataSet.Attribute AS Property,
 	|	tmp_DataSet.Value AS Value,
-	|	tmp_DataQuantity.Quantity AS Quantity
+	|	tmp_DataQuantity.Quantity AS Quantity,
+	|	NULL AS Unit
 	|FROM
 	|	tmp_DataSet AS tmp_DataSet
 	|		INNER JOIN tmp_DataQuantity AS tmp_DataQuantity
-	|		ON tmp_DataSet.Key = tmp_DataQuantity.Key";
+	|		ON tmp_DataSet.Key = tmp_DataQuantity.Key
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	tmp_ItemList.Item,
+	|	tmp_ItemList.ItemKey,
+	|	NULL,
+	|	tmp_ItemList.Quantity,
+	|	tmp_ItemList.Unit
+	|FROM
+	|	tmp_ItemList AS tmp_ItemList";
 	Query.SetParameter("DataSet", ThisObject.DataSet.Unload());
 	Query.SetParameter("DataQuantity", ThisObject.DataQuantity.Unload());
+	Query.SetParameter("SpecificationItemList", ThisObject.ItemList.Unload());
 	QueryResult = Query.Execute();
 	ThisObject.UniqueMD5 = AddAttributesAndPropertiesServer.GetMD5BySpecification(QueryResult.Unload());
 	If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then

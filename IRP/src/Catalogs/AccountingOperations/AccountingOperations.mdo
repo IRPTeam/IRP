@@ -318,18 +318,6 @@
           <value>8</value>
         </code>
       </content>
-      <content id="3139d27d-f017-4cd2-9371-581a24328085">
-        <name>PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>24</value>
-        </code>
-      </content>
-      <content id="bfff9af6-8d6a-4bb7-bc85-dcb122c941a7">
-        <name>PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>25</value>
-        </code>
-      </content>
     </items>
     <items id="2629786b-a1c8-4e5f-819b-76ffc472e4eb">
       <name>Document_RetailSalesReceipt</name>
@@ -374,18 +362,6 @@
           <value>18</value>
         </code>
       </content>
-      <content id="494bc5e0-6a57-4f1c-ad2d-657643e6436f">
-        <name>SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>22</value>
-        </code>
-      </content>
-      <content id="7c250c81-c5a7-4347-9445-d06ba1390361">
-        <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation</name>
-        <code xsi:type="core:NumberValue">
-          <value>23</value>
-        </code>
-      </content>
     </items>
     <items id="75cbb6bf-1e5f-4185-b83d-648393a21e9c">
       <name>Document_ForeignCurrencyRevaluation</name>
@@ -403,6 +379,132 @@
         <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers</name>
         <code xsi:type="core:NumberValue">
           <value>21</value>
+        </code>
+      </content>
+      <content id="ae9bab95-c274-4e7b-804a-97ba0271c65f">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>111</value>
+        </code>
+      </content>
+      <content id="91885012-4f2b-456d-b9e5-affe38f670ff">
+        <name>ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>112</value>
+        </code>
+      </content>
+      <content id="587109fe-39e1-4257-a808-dbbff22143b8">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>113</value>
+        </code>
+      </content>
+      <content id="da1d4ee2-0ed9-4fcf-8b3b-6546675088fa">
+        <name>ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>114</value>
+        </code>
+      </content>
+      <content id="3c3532d0-c9b3-4c22-b28d-3938261880bd">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>115</value>
+        </code>
+      </content>
+      <content id="21ddc5db-304c-4b2f-94fb-a6a1b66f82a4">
+        <name>ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>116</value>
+        </code>
+      </content>
+      <content id="c6e9ec0d-b76b-4dad-8e66-5611c6e4d3fe">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>117</value>
+        </code>
+      </content>
+      <content id="cde2a1a7-589e-4916-bfeb-bde3b2b4a011">
+        <name>ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>118</value>
+        </code>
+      </content>
+      <content id="30ba338d-8ac0-4448-b28f-861d6f890830">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>119</value>
+        </code>
+      </content>
+      <content id="084bb2ec-8a10-4909-8f5b-156c58c1272e">
+        <name>ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>120</value>
+        </code>
+      </content>
+      <content id="952c499d-5296-41c9-9151-3604462da88b">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>121</value>
+        </code>
+      </content>
+      <content id="a3485a3f-61df-4f1e-b657-ac663d78127b">
+        <name>ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>122</value>
+        </code>
+      </content>
+      <content id="12aca914-dcf6-4b01-8c9b-6adbdc361e61">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>123</value>
+        </code>
+      </content>
+      <content id="08b60486-774e-467f-9173-e9babc05c68f">
+        <name>ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>124</value>
+        </code>
+      </content>
+      <content id="65324f33-0e45-4752-947e-c2c866143b88">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>125</value>
+        </code>
+      </content>
+      <content id="bf0fe8cd-71bc-4118-94bc-d56f774aaf8a">
+        <name>ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>126</value>
+        </code>
+      </content>
+      <content id="16d14d74-1f44-4a4a-92df-83b13ca42f35">
+        <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>127</value>
+        </code>
+      </content>
+      <content id="116e75ea-da3f-40b3-b909-1b2f965d9431">
+        <name>ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>128</value>
         </code>
       </content>
     </items>
@@ -569,6 +671,13 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>95</value>
+        </code>
+      </content>
+      <content id="787bf187-a0cc-4e5d-8115-9ecb8496fcd7">
+        <name>DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>139</value>
         </code>
       </content>
     </items>
@@ -874,6 +983,79 @@
           <value>110</value>
         </code>
       </content>
+    </items>
+    <items id="ce5c929f-72e9-4f31-9991-be7f614112a8">
+      <name>Document_SalesReturn</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>129</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="4a47c339-ae02-4bbe-bc3a-132feac35c8c">
+        <name>SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>130</value>
+        </code>
+      </content>
+      <content id="224a1b85-ae6c-43a7-bf66-95531bc08cd6">
+        <name>SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>131</value>
+        </code>
+      </content>
+      <content id="b6fe36de-ca3b-45e7-a725-c7ba33eaec64">
+        <name>SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>132</value>
+        </code>
+      </content>
+      <content id="2da816e4-b705-4d48-8654-9078ae45e39a">
+        <name>SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>133</value>
+        </code>
+      </content>
+    </items>
+    <items id="604486a8-e337-43aa-982f-0e287cda03c0">
+      <name>Document_PurchaseReturn</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>134</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="d7b12a93-3812-4421-adb1-eb7ecfa90a97">
+        <name>PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>135</value>
+        </code>
+      </content>
+      <content id="e9e9f450-750a-4c31-9b1b-45f7a5d594de">
+        <name>PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>136</value>
+        </code>
+      </content>
+      <content id="9785ae63-62cf-4d11-9e5b-4be04774cd27">
+        <name>PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>137</value>
+        </code>
+      </content>
+    </items>
+    <items id="a45d3c59-ab7e-4dc0-89ca-9829cc97d70f">
+      <name>Document_RetailReturnReceipt</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>138</value>
+      </code>
+      <isFolder>true</isFolder>
     </items>
   </predefined>
   <editType>InDialog</editType>

@@ -99,7 +99,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
-
+	
 	If Not ValueIsFilled(Object.Type) Then
 		Object.Type = Enums.SpecificationType.Bundle;
 	EndIf;
@@ -112,6 +112,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetVisible();
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	Return;	
+EndProcedure
+
 #EndRegion
 
 &AtClient
@@ -121,8 +126,17 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
+	SpecificationTypeArray = New Array();
+	SpecificationTypeArray.Add(Enums.SpecificationType.Bundle);
+	SpecificationTypeArray.Add(Enums.SpecificationType.BundleByItemKey);
+	
+	IsVisibleItemBundle = False;
+	If SpecificationTypeArray.Find(Object.Type) <> Undefined Then
+		IsVisibleItemBundle = True;
+	EndIf;	
+		
 	Items.GroupAddNewPage.Visible = Object.Type = Enums.SpecificationType.Bundle;
-	Items.ItemBundle.Visible = Object.Type = Enums.SpecificationType.Bundle;
+	Items.ItemBundle.Visible = IsVisibleItemBundle;
 	SavedDataStructure = GetSavedData();
 	For Each Row In SavedDataStructure.Commands Do
 		ThisObject.Items[Row.Value.ButtonName].Visible = SavedDataStructure.Commands.Count() > 1;
@@ -131,10 +145,18 @@ EndProcedure
 
 &AtServer
 Procedure DrawForm()
-	If Object.DataSet.Count() Then
-		RestoreData();
+	If Object.Type = Enums.SpecificationType.BundleByItemKey Then
+		Items.GroupAddNewPage.Visible = False;
+		Items.GroupItemList.Visible = True;
 	Else
-		CreatePage();
+		Items.GroupAddNewPage.Visible = True;
+		Items.GroupItemList.Visible = False;
+		
+		If Object.DataSet.Count() Then
+			RestoreData();
+		Else
+			CreatePage();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -459,6 +481,7 @@ EndProcedure
 Procedure TypeOnChange(Item)
 	Object.DataSet.Clear();
 	Object.DataQuantity.Clear();
+	Object.ItemList.Clear();
 	Object.ItemBundle = Undefined;
 	SavedDataStructure = GetSavedData();
 	For Each CommAnd In SavedDataStructure.Commands Do
@@ -524,4 +547,33 @@ Procedure InternalCommandActionWithServerContextAtServer(CommandName)
 	InternalCommandsServer.RunCommandAction(CommandName, ThisObject, Object, Object.Ref);
 EndProcedure
 
+#EndRegion
+
+#Region _ITEM
+
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+ 
+	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item); 
+	CurrentData.Unit = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey).Unit;
+	
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_KEY
+&AtClient
+Procedure ItemListItemKeyOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+ 
+	CurrentData.Unit = GetItemInfo.ItemUnitInfo(CurrentData.ItemKey).Unit;
+EndProcedure
 #EndRegion

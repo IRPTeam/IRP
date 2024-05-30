@@ -15,7 +15,9 @@ Function GetChoiceDataTable(Parameters) Export
 	Filter = "
 		 	 |	AND Table.Ref IN (&ArrayOfRef)";
 	For Each FilterItem In Parameters.Filter Do
-		If FilterItem.Key = "CustomSearchFilter" OR FilterItem.Key = "AdditionalParameters" Then
+		If FilterItem.Key = "CustomSearchFilter" OR
+			FilterItem.Key = "CustomFilterByItem" OR
+			FilterItem.Key = "AdditionalParameters" Then
 			Continue; // Service properties
 		EndIf;
 		Filter = Filter
@@ -30,6 +32,7 @@ Function GetChoiceDataTable(Parameters) Export
 	Settings.Insert("UseSearchByCode", True);
 	
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
+
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	
@@ -52,12 +55,13 @@ Function GetAvailableSpecificationsByItem(Item) Export
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	SpecificationsDataSet.Ref
+	|	SpecificationsDataSet.Ref AS Ref
 	|FROM
 	|	Catalog.Specifications.DataSet AS SpecificationsDataSet
 	|WHERE
 	|	SpecificationsDataSet.Item = &ItemType
-	|	AND SpecificationsDataSet.Ref.Type = Value(Enum.SpecificationType.Set)
+	|	AND SpecificationsDataSet.Ref.Type = VALUE(Enum.SpecificationType.Set)
+	|
 	|GROUP BY
 	|	SpecificationsDataSet.Ref
 	|
@@ -68,8 +72,22 @@ Function GetAvailableSpecificationsByItem(Item) Export
 	|FROM
 	|	Catalog.Specifications AS Specifications
 	|WHERE
-	|	Specifications.Type = Value(Enum.SpecificationType.Bundle)
+	|	Specifications.Type = VALUE(Enum.SpecificationType.Bundle)
 	|	AND Specifications.ItemBundle = &Item
+	|
+	|GROUP BY
+	|	Specifications.Ref
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Specifications.Ref
+	|FROM
+	|	Catalog.Specifications AS Specifications
+	|WHERE
+	|	Specifications.Type = VALUE(Enum.SpecificationType.BundleByItemKey)
+	|	AND Specifications.ItemBundle = &Item
+	|
 	|GROUP BY
 	|	Specifications.Ref";
 	Query.SetParameter("ItemType", Item.ItemType);

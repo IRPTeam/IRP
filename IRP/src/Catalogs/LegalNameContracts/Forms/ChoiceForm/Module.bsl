@@ -2,6 +2,21 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatalogsServer.OnCreateAtServerChoiceForm(ThisObject, List, Cancel, StandardProcessing);
+	
+	CompanyFilter = Undefined;
+	If Parameters.Property("Filter") And Parameters.Filter.Property("Company", CompanyFilter) Then
+		Parameters.Filter.Delete("Company");
+		If ValueIsFilled(CompanyFilter) Then
+			CompanyList = New ValueList();
+			CompanyList.Add(CompanyFilter);
+			CompanyList.Add(Catalogs.Companies.EmptyRef());
+			ListFilter = List.Filter.Items.Add(Type("DataCompositionFilterItem"));
+			ListFilter.LeftValue = New DataCompositionField("Company");
+			ListFilter.ComparisonType = DataCompositionComparisonType.InList;
+			ListFilter.RightValue = CompanyList;
+			ListFilter.Use = True;
+		EndIf;
+	EndIf;
 EndProcedure
 
 #Region COMMANDS

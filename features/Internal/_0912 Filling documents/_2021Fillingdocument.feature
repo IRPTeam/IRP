@@ -104,6 +104,13 @@ Scenario: _0154100 preparation ( filling documents)
 			And I select current line in "List" table
 			And I click "Save and close" button
 			And I close all client application windows
+			Given I open hyperlink "e1cib/list/Catalog.Partners"
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'NDB'             |
+			And I select current line in "List" table
+			And I set checkbox named "Other"
+			And I click "Save and close" button		
 		* Preparation: creating a vendor partner term for Avira Vendor
 			Given I open hyperlink "e1cib/list/Catalog.Agreements"
 			And I click the button named "FormCreate"
@@ -2837,7 +2844,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Partner'   | 'Partner term'                                 | 'Payee'              |
 			| 'Veritas'   | 'Posting by Standard Partner term (Veritas)'   | 'Company Veritas'    |
 		And in the table "PaymentList" I click "Delete" button
-	* Check the display to select only available partner terms
+	* Check the display to select only available partner terms (for vendor)
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click Clear button of the attribute named "PaymentListPayee" in "PaymentList"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -2853,12 +2860,10 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                         |
-			| 'Basic Partner terms, TRY'            |
-			| 'Basic Partner terms, without VAT'    |
 			| 'Vendor Ferron, TRY'                  |
 			| 'Vendor Ferron, USD'                  |
 			| 'Vendor Ferron, EUR'                  |
-			| 'Ferron, USD'                         |
+		Then the number of "List" table lines is "равно" "3"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -3131,12 +3136,10 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And "List" table contains lines
 			| 'Description'                         |
-			| 'Basic Partner terms, TRY'            |
-			| 'Basic Partner terms, without VAT'    |
 			| 'Vendor Ferron, TRY'                  |
 			| 'Vendor Ferron, USD'                  |
 			| 'Vendor Ferron, EUR'                  |
-			| 'Ferron, USD'                         |
+		Then the number of "List" table lines is "равно" "3"
 		And I go to line in "List" table
 			| 'Description'           |
 			| 'Vendor Ferron, TRY'    |
@@ -4125,8 +4128,8 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'    | 'Partner term'  | 'Total amount'  | 'Payer'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | 'Nicoletta'  | ''              | ''              | ''       | ''                | ''                             |
+		| '#' | 'Partner'   | 'Partner term'                              | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | 'Posting by Standard Partner term Customer' | ''             | ''      | ''               | ''                           |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4160,6 +4163,7 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Payer and Partner term
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4225,8 +4229,8 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payer'               |
-		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
+			| 'Partner'    | 'Partner term'                               | 'Payer'               |
+			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
 	* Check clearing fields 'Partner term' and 'Payer' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -4276,6 +4280,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| Code    |
 			| TRY     |
 		And I select current line in "List" table
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 	* Fillin in Partner, Payer and Partner term
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Partner" field in "PaymentList" table
@@ -4285,23 +4290,23 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 			| Nicoletta      |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| 'Partner'    | 'Partner term'                               | 'Payee'               |
-		| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
+			| 'Partner'    | 'Partner term'                               | 'Payee'               |
+			| 'Nicoletta'  | 'Posting by Standard Partner term Customer'  | 'Company Nicoletta'   |
 	* Check clearing fields 'Partner term' and 'Payee' when re-selecting the type of operation to Currency exchange
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Total amount'  | 'Planning transaction basis'   |
-		| '1'  | ''              | ''                             |
+			| '#'  | 'Total amount'  | 'Planning transaction basis'   |
+			| '1'  | ''              | ''                             |
 		* Check filling in Transit account from Accountant
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4311,8 +4316,8 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
-		| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
+			| '#'  | 'Partner'  | 'Partner term'  | 'Total amount'  | 'Payee'  | 'Basis document'  | 'Planning transaction basis'   |
+			| '1'  | ''         | ''              | ''              | ''       | ''                | ''                             |
 		And I close all client application windows
 
 
@@ -5001,45 +5006,50 @@ Scenario: _0154131  check currency form in  Bank Receipt
 		* Basic recalculation at the rate
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '34,24'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window		
 		* Recalculation of Rate presentation when changing Amount
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "35,00" text in "Amount" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,175000'  | '35,00'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,175000' | '35,00'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window			
 		* Recount Amount when changing Multiplicity
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "2" text in "Multiplicity" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '2'               | '0,171200'  | '17,12'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '2'            | '0,171200' | '17,12'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window
 		* Recount Amount when changing Multiplicity
 			And in the table "PaymentList" I click "Edit currencies" button
 			And I input "0,1667" text in "Rate" field of "CurrenciesTable" table
 			And I finish line editing in "CurrenciesTable" table
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,166700'  | '33,34'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,166700' | '33,34'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '200'    |			
 			And I close current window
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
-				| 'Movement type'         | 'Type'         | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Local currency'        | 'Legal'        | 'TRY'    | 'TRY'     | '1'               | '1'         | '250'        |
-				| 'Reporting currency'    | 'Reporting'    | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '42,80'      |
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '42,80'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '250'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '250'    |	
 			And I close current window
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -5058,9 +5068,8 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'         | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'     |
-				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
 				| 'Local currency'        | 'Legal'           | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
-				| 'TRY'                   | 'Partner term'    | 'TRY'    | 'TRY'     | '1'               | '1'         | '200'        |
+				| 'Reporting currency'    | 'Reporting'       | 'USD'    | 'TRY'     | '1'               | '0,171200'  | '34,24'      |
 			And I close current window		
 		* Recount when currency changes
 			And I click Select button of "Account" field
@@ -5072,7 +5081,6 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And "CurrenciesTable" table contains lines
 				| 'Movement type'     | 'Type'            | 'To'     | 'From'    | 'Multiplicity'    | 'Rate'      | 'Amount'       |
 				| 'Local currency'    | 'Legal'           | 'TRY'    | 'USD'     | '1'               | '5,627500'  | '1 125,50'     |
-				| 'TRY'               | 'Partner term'    | 'TRY'    | 'USD'     | '1'               | '5,627500'  | '1 125,50'     |
 		# * Reverse rate display check
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -8824,3 +8832,141 @@ Scenario: _0154191 check filter by Company when select partner term
 		And I select from "Company" drop-down list by "second" string
 		Then the number of "List" table lines is "равно" 0
 		And I close all client application windows
+
+Scenario: _0154192 check auto filling partner term in the CR (filter by transaction type)
+	And I close all client application windows
+	When Create information register Agreements records (NDB, Second Company)
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	And I close all client application windows
+
+Scenario: _0154193 check auto filling partner term in the BR (filter by transaction type)
+	And I close all client application windows
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	* Select transaction type Payment from customer by POS
+		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows	
+				
+Scenario: _0154194 check auto filling partner term in the CP (filter by transaction type)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CP/BP 
+	And I close all client application windows
+
+Scenario: _0154195 check auto filling partner term in the BP (filter by transaction type)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CP/BP 
+	* Select transaction type Payment from customer by POS
+		And I select "Return to customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payee'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows
+
+Scenario: _0154196 check auto filling partner term in the BP (filter by transaction type)
+	And I close all client application windows
+	When Create information register Agreements records (NDB, Second Company)
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		When check filter by transaction type in CR/BR 
+	* Select transaction type Payment from customer by POS
+		And I select "Payment from customer by POS" exact value from the drop-down list named "TransactionType"
+		And I click the button named "Button0"
+		And "PaymentList" table became equal
+			| 'Partner' | 'Payer'       | 'Partner term'     |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+			| 'NDB'     | 'Company NDB' | 'Partner term NDB' |
+	And I close all client application windows
+
+Scenario: _0154197 check auto filling partner term in the CR (filter by Company)
+	And I close all client application windows
+	* Open CR creation form
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows
+	
+Scenario: _0154198 check auto filling partner term in the CP (filter by Company)
+	And I close all client application windows
+	* Open CP creation form
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                       |
+			| 'NDB'     | 'Partner term Second Company Vendor' |
+	And I close all client application windows	
+
+Scenario: _0154199 check auto filling partner term in the BP (filter by Company)
+	And I close all client application windows
+	* Open BP creation form
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                       |
+			| 'NDB'     | 'Partner term Second Company Vendor' |
+	And I close all client application windows		
+				
+Scenario: _0154200 check auto filling partner term in the BR (filter by Company)
+	And I close all client application windows
+	* Open BR creation form
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Second Company'     |
+		And I select current line in "List" table	
+	* Check filter by company for partner term
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I select "ndb" from "Partner" drop-down list by string in "PaymentList" table
+		And "PaymentList" table contains lines
+			| 'Partner' | 'Partner term'                |
+			| 'NDB'     | 'Partner term Second Company' |
+	And I close all client application windows					

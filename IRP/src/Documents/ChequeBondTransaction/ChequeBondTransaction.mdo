@@ -252,6 +252,10 @@
         <name>Filter.LegalName</name>
         <field>Document.ChequeBondTransaction.TabularSection.ChequeBonds.Attribute.LegalName</field>
       </choiceParameterLinks>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.ChequeBondTransaction.Attribute.Company</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

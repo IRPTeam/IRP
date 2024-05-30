@@ -1038,7 +1038,7 @@ EndFunction
 #Region CHANGE_AGREEMENT_BY_PARTNER
 
 Function ChangeAgreementByPartnerOptions() Export
-	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
+	Return GetChainLinkOptions("Company, Partner, Agreement, CurrentDate, AgreementType, TransactionType, DebtType");
 EndFunction
 
 Function ChangeAgreementByPartnerExecute(Options) Export
@@ -3341,10 +3341,16 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		Or Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
 		
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+					
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If (PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType))
+			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 		
 		If Options.TransactionType = Outgoing_ReturnToCustomerByPOS Then
 			StrByType = StrByType + ", 
@@ -3360,10 +3366,15 @@ Function ClearByTransactionTypeBankPaymentExecute(Options) Export
 		
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payee,
-		|LegalNameContract";		
+		|LegalNameContract";
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Outgoing_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer,
@@ -3504,7 +3515,6 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		Or Options.TransactionType = Incoming_PaymentFromCustomerByPOS Then
 		
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payer,
 		|LegalNameContract";
@@ -3528,12 +3538,23 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 			StrByType = StrByType + ", Project";
 		EndIf;
 		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If (PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType))
+			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payer,
-		|LegalNameContract";	
+		|LegalNameContract";
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_TransferFromPOS Then
 		StrByType = "
 		|POSAccount,
@@ -3642,17 +3663,28 @@ Function ClearByTransactionTypeCashPaymentExecute(Options) Export
 		|RetailCustomer";
 	ElsIf Options.TransactionType = Outgoing_PaymentToVendor Or Options.TransactionType = Outgoing_ReturnToCustomer Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payee,
 		|LegalNameContract,
 		|Project";
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If (PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType))
+			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Outgoing_OtherPartner Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payee,
 		|LegalNameContract";
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Outgoing_SalaryPayment Then
 		StrByType = "
 		|Employee,
@@ -3739,17 +3771,28 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 		|AmountExchange";
 	ElsIf Options.TransactionType = Incoming_PaymentFromCustomer Or Options.TransactionType = Incoming_ReturnFromVendor Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payer,
 		|LegalNameContract,
 		|Project";
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If (PartnerType = "Vendor" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType))
+			Or (PartnerType = "Customer" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType)) Then	 
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_OtherPartner Then
 		StrByType = "
-		|Partner,
 		|Agreement,
 		|Payer,
-		|LegalNameContract";			
+		|LegalNameContract";	
+		
+		PartnerType = ModelServer_V2.GetPartnerTypeByTransactionType(Options.TransactionType);
+		If PartnerType = "Other" And CommonFunctionsServer.GetRefAttribute(Options.Partner, PartnerType) Then
+			StrByType = StrByType + ", 
+			|Partner";
+		EndIf;
 	ElsIf Options.TransactionType = Incoming_RetailCustomerAdvance Then
 		StrByType = "
 		|RetailCustomer";

@@ -1282,10 +1282,20 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 		
 		Return AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
 		
+	// Sales return
+	ElsIf DocMetadata = Metadata.Documents.SalesReturn Then
+		
+		Return AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers;
+	
 	// Purchase invoice
 	ElsIf DocMetadata = Metadata.Documents.PurchaseInvoice Then
 		
 		Return AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
+	
+	// Purchase return
+	ElsIf DocMetadata = Metadata.Documents.PurchaseReturn Then
+		
+		Return AO.PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions;
 	
 	// Debit\Credit note
 	ElsIf DocMetadata = Metadata.Documents.DebitCreditNote Then
@@ -1308,7 +1318,9 @@ Function GetAccountingOperation(DocMetadata, Doc, IsCustomerAdvanceClosing, IsVe
 	// Debit note
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
 		
-		If IsVendorAdvanceClosing Then
+		If IsCustomerAdvanceClosing Then
+			Return AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions;
+		ElsIf IsVendorAdvanceClosing Then
 			Return AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors;
 		EndIf;
 	

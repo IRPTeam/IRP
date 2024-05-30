@@ -1404,4 +1404,46 @@ Scenario: _150077 try to remove mark Batch balance details in the Source of orig
 	And I remove checkbox "Batch balance detail"
 	And I click "Save and close" button
 	Then I wait that in user messages the "[Batch balance detail] cannot be changed, has posted documents" substring will appear in 10 seconds
-	And I close all client application windows				
+	And I close all client application windows	
+
+Scenario: _150078 check filling source of origin from sln
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click "Create" button
+	* Filling in main info
+		And I click Choice button of the field named "Partner"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Store"
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Store 01'       |
+		And I select current line in "List" table
+	* Scan sln and check source of origin
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I activate "Item" field in "ItemList" table
+		And I select "Product 1 with SLN" from "Item" drop-down list by string in "ItemList" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I select "PZU" by string from the drop-down list named "ItemListItemKey" in "ItemList" table
+		And I activate "Serial lot numbers" field in "ItemList" table
+		And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+		And in the table "SerialLotNumbers" I click "Add" button
+		And I select "8908899880" by string from the drop-down list named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate field named "SerialLotNumbersSerialLotNumber" in "SerialLotNumbers" table
+		And I activate "Quantity" field in "SerialLotNumbers" table
+		And I select current line in "SerialLotNumbers" table
+		And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+		And I finish line editing in "SerialLotNumbers" table
+		And I click "Ok" button
+	* Check
+		And "ItemList" table contains lines
+			| 'Item'               | 'Item key' | 'Unit' | 'Serial lot numbers' | 'Source of origins'  | 'Quantity' |
+			| 'Product 1 with SLN' | 'PZU'      | 'pcs'  | '8908899880'         | 'Source of origin 6' | '1,000'    |
+	And I close all client application windows		

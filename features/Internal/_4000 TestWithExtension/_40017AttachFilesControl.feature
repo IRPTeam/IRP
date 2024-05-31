@@ -172,6 +172,9 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 		And I click the button named "Select"	
 	* Add file
 		And I go to line in "DocumentList" table
+			| "Document"                                     |
+			| "Purchase order 222 dated 09.05.2023 13:09:34" |
+		And I go to line in "DocumentList" table
 			| 'Document'                                            |
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
 		And I go to line in "DocumentsAttachedFiles" table
@@ -209,6 +212,9 @@ Scenario: _4001713 check optional documents for RRR (pdf)
 		And I input "08.05.2024" text in the field named "DateEnd"
 		And I click the button named "Select"	
 	* Add file
+		And I go to line in "DocumentList" table
+			| "Document"                                     |
+			| "Purchase order 222 dated 09.05.2023 13:09:34" |
 		And I go to line in "DocumentList" table
 			| 'Document'                                            |
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
@@ -320,7 +326,7 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 		And in the table "DocumentList" I click "Lock selected" button
 	* Check
 		And in the table "DocumentList" I click "Only unlocked" button
-		And "DocumentList" file does not contain lines
+		And "DocumentList" table does not contain lines
 			| 'Document'                                            |
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
 			| 'Purchase order 221 dated 09.05.2023 12:29:59'        |

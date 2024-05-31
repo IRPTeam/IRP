@@ -165,6 +165,7 @@ Function GetIgnored_Fields()
 	// technical dimensions
 	Array.Add("*.*.CurrencyMovementType");
 	Array.Add("*.*.TransactionCurrency");
+	Array.Add("*.*.RevaluatedCurrency");
 	Array.Add("*.T2014S_AdvancesInfo.Key");
 	Array.Add("*.T2014S_AdvancesInfo.UniqueID");
 	Array.Add("*.T2015S_TransactionsInfo.UniqueID");

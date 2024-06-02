@@ -150,15 +150,24 @@ Scenario: _047005 check Sales report to consignor movements by the Register  "R1
 			| 'Number'    |
 			| '15'        |
 	* Check movements by the Register  "R1040 Taxes outgoing"
+	//Incoming
 		And I click "Registrations report info" button
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                    | ''           | ''             | ''                        | ''    | ''         | ''                  | ''               | ''           |
-			| 'Register  "R1040 Taxes outgoing"'                       | ''                    | ''           | ''             | ''                        | ''    | ''         | ''                  | ''               | ''           |
-			| ''                                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Tax movement type' | 'Taxable amount' | 'Tax amount' |
-			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  | '-847,46'        | '-152,54'    |
-			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  | '-677,97'        | '-122,03'    |
-			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  | '-593,22'        | '-106,78'    |
-			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  | '-338,98'        | '-61,02'     |	
+			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                    | ''           | ''             | ''                        | ''    | ''         | ''                             | ''         | ''                     | ''               | ''           |
+			| 'Register  "R1040 Taxes outgoing"'                       | ''                    | ''           | ''             | ''                        | ''    | ''         | ''                             | ''         | ''                     | ''               | ''           |
+			| ''                                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Taxable amount' | 'Tax amount' |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '-847,46'        | '-152,54'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '-677,97'        | '-122,03'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '-593,22'        | '-106,78'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '-338,98'        | '-61,02'     |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '-145,09'        | '-26,11'     |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '-116,07'        | '-20,89'     |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '-101,56'        | '-18,28'     |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '-58,03'         | '-10,45'     |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '-847,46'        | '-152,54'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '-677,97'        | '-122,03'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '-593,22'        | '-106,78'    |
+			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '-338,98'        | '-61,02'     |	
 		And I close all client application windows

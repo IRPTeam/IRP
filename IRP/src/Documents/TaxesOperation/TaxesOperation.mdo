@@ -441,38 +441,26 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="ca160554-1edf-49de-acbf-2d9c8e068cef">
-      <name>NetAmount</name>
+    <attributes uuid="4c354b3a-0ce4-4a6a-b126-2c08f43fdf25">
+      <name>InvoiceType</name>
       <synonym>
         <key>en</key>
-        <value>Net amount</value>
+        <value>Invoice type</value>
       </synonym>
       <type>
-        <types>DefinedType.typeAmount</types>
+        <types>EnumRef.InvoiceType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="0fd57de3-92db-441b-ab91-5fdef0ece40f">
-      <name>TaxAmount</name>
+      <name>Amount</name>
       <synonym>
         <key>en</key>
-        <value>Tax amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="c2d11266-9916-4cad-a675-6b1131329fd0">
-      <name>TotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Total amount</value>
+        <value>Amount</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
@@ -522,38 +510,26 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="fca107fb-de1d-4f90-afcf-9a056c31d8b7">
-      <name>NetAmount</name>
+    <attributes uuid="c4a434d3-4a73-4de0-8d22-e399a4c41d7d">
+      <name>InvoiceType</name>
       <synonym>
         <key>en</key>
-        <value>Net amount</value>
+        <value>Invoice type</value>
       </synonym>
       <type>
-        <types>DefinedType.typeAmount</types>
+        <types>EnumRef.InvoiceType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="657ce6d7-87ba-42ff-9fe0-5705e8334ed1">
-      <name>TaxAmount</name>
+      <name>Amount</name>
       <synonym>
         <key>en</key>
-        <value>Tax amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="723feedf-5adf-4350-acef-05eb0fc01d4a">
-      <name>TotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Total amount</value>
+        <value>Amount</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
@@ -599,7 +575,20 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7240abe2-87b6-4120-b681-afd44733988f">
+      <name>IncomingInvoiceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Invoice type (incoming)</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InvoiceType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -614,196 +603,34 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="e3d27c84-8f52-4ea2-8a16-aa1960db9549">
-      <name>NetAmount</name>
+    <attributes uuid="9ff71f6d-6548-40a3-a0bc-b60b3345035f">
+      <name>OutgoingInvoiceType</name>
       <synonym>
         <key>en</key>
-        <value>Net amount</value>
+        <value>Invoice type (outgoing)</value>
       </synonym>
       <type>
-        <types>DefinedType.typeAmount</types>
+        <types>EnumRef.InvoiceType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="168122b7-a8ac-4bfc-b771-1bc5f52071f9">
-      <name>TaxAmount</name>
+      <name>Amount</name>
       <synonym>
         <key>en</key>
-        <value>Tax amount</value>
+        <value>Amount</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="301b8bb1-d6f7-4ac0-971f-f48905981d18">
-    <producedTypes>
-      <objectType typeId="0138d58a-a323-4eaf-929e-cf75e8a828ea" valueTypeId="a3e3aa9f-c1ae-467d-864e-557f357c9ec1"/>
-      <rowType typeId="0c6c1dab-2843-4763-a0c7-568fa87c76d1" valueTypeId="01171774-48c0-4abc-a0e8-75c68dd38e7a"/>
-    </producedTypes>
-    <name>TaxesIncomingDifference</name>
-    <synonym>
-      <key>en</key>
-      <value>Taxes incoming difference</value>
-    </synonym>
-    <attributes uuid="94f74907-296c-46d9-bfff-0a7d485fa32c">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="e9b604f2-db84-4c97-941e-40af9c4beec7">
-      <name>VatRate</name>
-      <synonym>
-        <key>en</key>
-        <value>VAT</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxRates</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="2c8db701-b13d-41d1-a832-3300a5615f43">
-      <name>NetAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Net amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="403bd3be-def4-4001-8443-c991018fb574">
-      <name>TaxAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="2dd7421c-20f1-4641-8c76-7f7d2f8e01a2">
-      <name>TotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Total amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="554c7cd5-7559-4eab-9c57-4918f51a865a">
-    <producedTypes>
-      <objectType typeId="26cad9ed-cb38-4745-8ae8-c0dbb27c9993" valueTypeId="43d27749-641d-47fd-8a17-559cc72af2b7"/>
-      <rowType typeId="21073de7-4b45-4e4e-b80c-1bc086377c3b" valueTypeId="23cb6bca-7e6a-4848-9800-39e3640797b3"/>
-    </producedTypes>
-    <name>TaxesOutgoingDifference</name>
-    <synonym>
-      <key>en</key>
-      <value>Taxes outgoing difference</value>
-    </synonym>
-    <attributes uuid="d143732b-e5c5-4364-b545-22bd6c27b1a7">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9c7c50ea-cfac-454c-934a-7463536406ce">
-      <name>VatRate</name>
-      <synonym>
-        <key>en</key>
-        <value>VAT</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.TaxRates</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="945dfb68-1837-484a-9ea9-17604a6f4381">
-      <name>NetAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Net amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="9c9ae329-022b-40fc-ad77-4972865bccb3">
-      <name>TaxAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Tax amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="f08e44ed-7a63-423b-a424-1ee210a366b8">
-      <name>TotalAmount</name>
-      <synonym>
-        <key>en</key>
-        <value>Total amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>

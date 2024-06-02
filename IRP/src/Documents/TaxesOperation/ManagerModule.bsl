@@ -95,14 +95,14 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
-	QueryArray.Add(TaxesDifference());
+	//QueryArray.Add(TaxesDifference());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
-	QueryArray.Add(R1040B_TaxesOutgoing());
-	QueryArray.Add(R2040B_TaxesIncoming());
+//	QueryArray.Add(R1040B_TaxesOutgoing());
+//	QueryArray.Add(R2040B_TaxesIncoming());
 //	QueryArray.Add(R5010B_ReconciliationStatement());
 //	QueryArray.Add(R5015B_OtherPartnersTransactions());
 //	QueryArray.Add(T1040T_AccountingAmounts());

@@ -147,8 +147,8 @@ Function GetParameters_V12(Object) Export
 EndFunction
 
 Function GetParameters_V13(Object) Export
-	TotalIncoming = Object.TaxesIncoming.Total("TaxAmount");
-	TotalOutgoing = Object.TaxesOutgoing.Total("TaxAmount");
+	TotalIncoming = Object.TaxesIncoming.Total("Amount");
+	TotalOutgoing = Object.TaxesOutgoing.Total("Amount");
 	
 	TotalTaxAmount = 0;
 	If TotalIncoming < TotalOutgoing Then

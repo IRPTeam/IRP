@@ -228,26 +228,6 @@ Procedure TaxesIncomingAfterDeleteRow(Item)
 	DocTaxesOperationClient.TaxesIncomingAfterDeleteRow(Object, ThisObject, Item);
 EndProcedure
 
-&AtClient
-Procedure TaxesIncomingVatRateOnChange(Item)
-	DocTaxesOperationClient.TaxesIncomingVatRateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesIncomingNetAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesIncomingNetAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesIncomingTaxAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesIncomingTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesIncomingTotalAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesIncomingTotalAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
 #EndRegion
 
 #Region TAXES_OUTGOING
@@ -260,26 +240,6 @@ EndProcedure
 &AtClient
 Procedure TaxesOutgoingAfterDeleteRow(Item)
 	DocTaxesOperationClient.TaxesOutgoingAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesOutgoingVatRateOnChange(Item)
-	DocTaxesOperationClient.TaxesOutgoingVatRateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesOutgoingNetAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesOutgoingNetAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesOutgoingTaxAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesOutgoingTaxAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure TaxesOutgoingTotalAmountOnChange(Item)
-	DocTaxesOperationClient.TaxesOutgoingTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

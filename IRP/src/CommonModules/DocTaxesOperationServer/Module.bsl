@@ -63,9 +63,8 @@ Function FillTaxesIncomingOutgoing(FormUUID, DocRef, DocDate, Company, Branch, C
 	Query.Text = 
 	"SELECT
 	|	Taxes.TaxRate AS VatRate,
-	|	Taxes.TaxableAmountBalance AS NetAmount,
-	|	Taxes.TaxAmountBalance AS TaxAmount,
-	|	Taxes.TaxableAmountBalance + Taxes.TaxAmountBalance AS TotalAmount
+	|	Taxes.InvoiceType AS InvoiceType,
+	|	Taxes.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R1040B_TaxesOutgoing.Balance(&BalancePeriod, Company = &Company
 	|	AND Branch = &Branch
@@ -87,8 +86,8 @@ Function FillTaxesIncomingOutgoing(FormUUID, DocRef, DocDate, Company, Branch, C
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	
-	GroupColumn = "VatRate";
-	SumColumn = "NetAmount, TaxAmount, TotalAmount";
+	GroupColumn = "VatRate, InvoiceType";
+	SumColumn = "Amount";
 	QueryTable.GroupBy(GroupColumn, SumColumn);
 	Address = PutToTempStorage(QueryTable, FormUUID);
 	Return New Structure("Address, GroupColumn, SumColumn", Address, GroupColumn, SumColumn);
@@ -97,8 +96,8 @@ EndFunction
 Function CalculateTaxDifference(val DocObject) Export
 	Result = New Array();
 	
-	TotalTaxAmount_Incoming = DocObject.TaxesIncoming.Total("TaxAmount");
-	TotalTaxAmount_Outgoing = DocObject.TaxesOutgoing.Total("TaxAmount");
+	TotalTaxAmount_Incoming = DocObject.TaxesIncoming.Total("Amount");
+	TotalTaxAmount_Outgoing = DocObject.TaxesOutgoing.Total("Amount");
 	
 	If TotalTaxAmount_Incoming < TotalTaxAmount_Outgoing Then
 		MinTableName = "TaxesIncoming";
@@ -126,7 +125,7 @@ Function CalculateTaxDifference(val DocObject) Export
 EndFunction
 
 Function GetTaxesDifferenceRow()
-	Return New Structure("Key, IncomingVatRate, OutgoingVatRate, NetAmount, TaxAmount");
+	Return New Structure("Key, IncomingVatRate, IncomingInvoiceType, OutgoingVatRate, OutgoingInvoiceType, Amount");
 EndFunction
 
 Function Calculate_TaxOffset(MinTableName, MinTable, MaxTableName, MaxTable, Result)
@@ -134,14 +133,12 @@ Function Calculate_TaxOffset(MinTableName, MinTable, MaxTableName, MaxTable, Res
 		
 		For Each MaxRow In MaxTable Do
 			
-			If Not ValueIsFilled(MinRow.NetAmount) 
-				And Not ValueIsFilled(MinRow.TaxAmount) Then
-					Continue;
+			If Not ValueIsFilled(MinRow.Amount) Then
+				Continue;
 			EndIf;
 			
-			If Not ValueIsFilled(MaxRow.NetAmount) 
-				And Not ValueIsFilled(MaxRow.TaxAmount) Then
-					Continue;
+			If Not ValueIsFilled(MaxRow.Amount) Then
+				Continue;
 			EndIf;
 			 
 			DiffRow = GetTaxesDifferenceRow();
@@ -150,24 +147,24 @@ Function Calculate_TaxOffset(MinTableName, MinTable, MaxTableName, MaxTable, Res
 			
 			If MinTableName = "TaxesIncoming" Then
 				DiffRow.IncomingVatRate = MinRow.VatRate;
+				DiffRow.IncomingInvoiceType = MinRow.InvoiceType;
 			ElsIf MinTableName = "TaxesOutgoing" Then
 				DiffRow.OutgoingVatRate = MinRow.VatRate;
+				DiffRow.OutgoingInvoiceType = MinRow.InvoiceType;
 			EndIf;
 			
 			If MaxTableName = "TaxesIncoming" Then
 				DiffRow.IncomingVatRate = MaxRow.VatRate;
+				DiffRow.IncomingInvoiceType = MaxRow.InvoiceType;
 			ElsIf MaxTableName = "TaxesOutgoing" Then
 				DiffRow.OutgoingVatRate = MaxRow.VatRate;
+				DiffRow.OutgoingInvoiceType = MaxRow.InvoiceType;
 			EndIf;
 						
-			DiffRow.NetAmount = Min(MaxRow.NetAmount, MinRow.NetAmount);
-			DiffRow.TaxAmount = Min(MaxRow.TaxAmount, MinRow.TaxAmount);
+			DiffRow.Amount = Min(MaxRow.Amount, MinRow.Amount);
 			
-			MinRow.NetAmount = MinRow.NetAmount - DiffRow.NetAmount;
-			MinRow.TaxAmount = MinRow.TaxAmount - DiffRow.TaxAmount;
-			
-			MaxRow.NetAmount = MaxRow.NetAmount - DiffRow.NetAmount;
-			MaxRow.TaxAmount = MaxRow.TaxAmount - DiffRow.TaxAmount;
+			MinRow.Amount = MinRow.Amount - DiffRow.Amount;
+			MaxRow.Amount = MaxRow.Amount - DiffRow.Amount;
 			
 		EndDo;
 	EndDo;
@@ -176,21 +173,24 @@ EndFunction
 
 Function Calculate_TaxPayment(TableName, Table, Result)
 	For Each Row In Table Do
+		If Not ValueIsFilled(Row.Amount) Then
+			Continue;
+		EndIf;
+		
 		DiffRow = GetTaxesDifferenceRow();
 		Result.Add(DiffRow);
 		DiffRow.Key = String(New UUID());	
 			
 		If TableName = "TaxesIncoming" Then
 			DiffRow.IncomingVatRate = Row.VatRate;
+			DiffRow.IncomingInvoiceType = Row.InvoiceType;
 		ElsIf TableName = "TaxesOutgoing" Then
 			DiffRow.OutgoingVatRate = Row.VatRate;
+			DiffRow.OutgoingInvoiceType = Row.InvoiceType;
 		EndIf;
 		
-		DiffRow.NetAmount = Row.NetAmount;
-		DiffRow.TaxAmount = Row.TaxAmount;
-			
-		Row.NetAmount = Row.NetAmount - DiffRow.NetAmount;
-		Row.TaxAmount = Row.TaxAmount - DiffRow.TaxAmount;	
+		DiffRow.Amount = Row.Amount;
+		Row.Amount = Row.Amount - DiffRow.Amount;	
 	EndDo;
 EndFunction
 

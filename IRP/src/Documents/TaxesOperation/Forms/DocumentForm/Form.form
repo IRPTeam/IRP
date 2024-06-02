@@ -999,10 +999,6 @@
               <dataPath xsi:type="form:DataPath">
                 <segments>Object.TaxesIncoming.VatRate</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesIncomingVatRateOnChange</name>
-              </handlers>
               <extendedTooltip>
                 <name>TaxesIncomingVatRateExtendedTooltip</name>
                 <id>258</id>
@@ -1044,23 +1040,19 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>TaxesIncomingNetAmount</name>
-              <id>259</id>
+              <name>TaxesIncomingInvoiceType</name>
+              <id>380</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesIncoming.NetAmount</segments>
+                <segments>Object.TaxesIncoming.InvoiceType</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesIncomingNetAmountOnChange</name>
-              </handlers>
               <extendedTooltip>
-                <name>TaxesIncomingNetAmountExtendedTooltip</name>
-                <id>261</id>
+                <name>TaxesIncomingInvoiceTypeExtendedTooltip</name>
+                <id>382</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1074,8 +1066,8 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>TaxesIncomingNetAmountContextMenu</name>
-                <id>260</id>
+                <name>TaxesIncomingInvoiceTypeContextMenu</name>
+                <id>381</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1088,13 +1080,6 @@
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
-              <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesIncoming.TotalNetAmount</segments>
-              </footerDataPath>
-              <footerFont xsi:type="core:FontDef">
-                <height>8.0</height>
-                <bold>true</bold>
-              </footerFont>
               <extInfo xsi:type="form:InputFieldExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
                 <autoMaxHeight>true</autoMaxHeight>
@@ -1105,23 +1090,19 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>TaxesIncomingTaxAmount</name>
-              <id>262</id>
+              <name>TaxesIncomingAmount</name>
+              <id>383</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesIncoming.TaxAmount</segments>
+                <segments>Object.TaxesIncoming.Amount</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesIncomingTaxAmountOnChange</name>
-              </handlers>
               <extendedTooltip>
-                <name>TaxesIncomingTaxAmountExtendedTooltip</name>
-                <id>264</id>
+                <name>TaxesIncomingAmountExtendedTooltip</name>
+                <id>385</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1135,8 +1116,8 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>TaxesIncomingTaxAmountContextMenu</name>
-                <id>263</id>
+                <name>TaxesIncomingAmountContextMenu</name>
+                <id>384</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1150,68 +1131,7 @@
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
               <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesIncoming.TotalTaxAmount</segments>
-              </footerDataPath>
-              <footerFont xsi:type="core:FontDef">
-                <height>8.0</height>
-                <bold>true</bold>
-              </footerFont>
-              <extInfo xsi:type="form:InputFieldExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <wrap>true</wrap>
-                <chooseType>true</chooseType>
-                <typeDomainEnabled>true</typeDomainEnabled>
-                <textEdit>true</textEdit>
-              </extInfo>
-            </items>
-            <items xsi:type="form:FormField">
-              <name>TaxesIncomingTotalAmount</name>
-              <id>265</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
                 <segments>Object.TaxesIncoming.TotalAmount</segments>
-              </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesIncomingTotalAmountOnChange</name>
-              </handlers>
-              <extendedTooltip>
-                <name>TaxesIncomingTotalAmountExtendedTooltip</name>
-                <id>267</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>TaxesIncomingTotalAmountContextMenu</name>
-                <id>266</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>InputField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesIncoming.TotalTotalAmount</segments>
               </footerDataPath>
               <footerFont xsi:type="core:FontDef">
                 <height>8.0</height>
@@ -1598,10 +1518,6 @@
               <dataPath xsi:type="form:DataPath">
                 <segments>Object.TaxesOutgoing.VatRate</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesOutgoingVatRateOnChange</name>
-              </handlers>
               <extendedTooltip>
                 <name>TaxesOutgoingVatRateExtendedTooltip</name>
                 <id>289</id>
@@ -1643,23 +1559,19 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>TaxesOutgoingNetAmount</name>
-              <id>290</id>
+              <name>TaxesOutgoingInvoiceType</name>
+              <id>386</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesOutgoing.NetAmount</segments>
+                <segments>Object.TaxesOutgoing.InvoiceType</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesOutgoingNetAmountOnChange</name>
-              </handlers>
               <extendedTooltip>
-                <name>TaxesOutgoingNetAmountExtendedTooltip</name>
-                <id>292</id>
+                <name>TaxesOutgoingInvoiceTypeExtendedTooltip</name>
+                <id>388</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1673,8 +1585,8 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>TaxesOutgoingNetAmountContextMenu</name>
-                <id>291</id>
+                <name>TaxesOutgoingInvoiceTypeContextMenu</name>
+                <id>387</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1687,13 +1599,6 @@
               <showInHeader>true</showInHeader>
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
-              <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesOutgoing.TotalNetAmount</segments>
-              </footerDataPath>
-              <footerFont xsi:type="core:FontDef">
-                <height>8.0</height>
-                <bold>true</bold>
-              </footerFont>
               <extInfo xsi:type="form:InputFieldExtInfo">
                 <autoMaxWidth>true</autoMaxWidth>
                 <autoMaxHeight>true</autoMaxHeight>
@@ -1704,23 +1609,19 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormField">
-              <name>TaxesOutgoingTaxAmount</name>
-              <id>293</id>
+              <name>TaxesOutgoingAmount</name>
+              <id>389</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesOutgoing.TaxAmount</segments>
+                <segments>Object.TaxesOutgoing.Amount</segments>
               </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesOutgoingTaxAmountOnChange</name>
-              </handlers>
               <extendedTooltip>
-                <name>TaxesOutgoingTaxAmountExtendedTooltip</name>
-                <id>295</id>
+                <name>TaxesOutgoingAmountExtendedTooltip</name>
+                <id>391</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1734,8 +1635,8 @@
                 </extInfo>
               </extendedTooltip>
               <contextMenu>
-                <name>TaxesOutgoingTaxAmountContextMenu</name>
-                <id>294</id>
+                <name>TaxesOutgoingAmountContextMenu</name>
+                <id>390</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -1749,68 +1650,7 @@
               <headerHorizontalAlign>Left</headerHorizontalAlign>
               <showInFooter>true</showInFooter>
               <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesOutgoing.TotalTaxAmount</segments>
-              </footerDataPath>
-              <footerFont xsi:type="core:FontDef">
-                <height>8.0</height>
-                <bold>true</bold>
-              </footerFont>
-              <extInfo xsi:type="form:InputFieldExtInfo">
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <wrap>true</wrap>
-                <chooseType>true</chooseType>
-                <typeDomainEnabled>true</typeDomainEnabled>
-                <textEdit>true</textEdit>
-              </extInfo>
-            </items>
-            <items xsi:type="form:FormField">
-              <name>TaxesOutgoingTotalAmount</name>
-              <id>296</id>
-              <visible>true</visible>
-              <enabled>true</enabled>
-              <userVisible>
-                <common>true</common>
-              </userVisible>
-              <dataPath xsi:type="form:DataPath">
                 <segments>Object.TaxesOutgoing.TotalAmount</segments>
-              </dataPath>
-              <handlers>
-                <event>OnChange</event>
-                <name>TaxesOutgoingTotalAmountOnChange</name>
-              </handlers>
-              <extendedTooltip>
-                <name>TaxesOutgoingTotalAmountExtendedTooltip</name>
-                <id>298</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <type>Label</type>
-                <autoMaxWidth>true</autoMaxWidth>
-                <autoMaxHeight>true</autoMaxHeight>
-                <extInfo xsi:type="form:LabelDecorationExtInfo">
-                  <horizontalAlign>Left</horizontalAlign>
-                </extInfo>
-              </extendedTooltip>
-              <contextMenu>
-                <name>TaxesOutgoingTotalAmountContextMenu</name>
-                <id>297</id>
-                <visible>true</visible>
-                <enabled>true</enabled>
-                <userVisible>
-                  <common>true</common>
-                </userVisible>
-                <autoFill>true</autoFill>
-              </contextMenu>
-              <type>InputField</type>
-              <editMode>Enter</editMode>
-              <showInHeader>true</showInHeader>
-              <headerHorizontalAlign>Left</headerHorizontalAlign>
-              <showInFooter>true</showInFooter>
-              <footerDataPath xsi:type="form:DataPath">
-                <segments>Object.TaxesOutgoing.TotalTotalAmount</segments>
               </footerDataPath>
               <footerFont xsi:type="core:FontDef">
                 <height>8.0</height>
@@ -2218,8 +2058,8 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TaxesDifferenceFromVatRate</name>
-          <id>363</id>
+          <name>TaxesDifferenceIncomingVatRate</name>
+          <id>392</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2229,8 +2069,8 @@
             <segments>Object.TaxesDifference.IncomingVatRate</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TaxesDifferenceFromVatRateExtendedTooltip</name>
-            <id>365</id>
+            <name>TaxesDifferenceIncomingVatRateExtendedTooltip</name>
+            <id>394</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2244,8 +2084,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TaxesDifferenceFromVatRateContextMenu</name>
-            <id>364</id>
+            <name>TaxesDifferenceIncomingVatRateContextMenu</name>
+            <id>393</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2268,8 +2108,58 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TaxesDifferenceToVatRate</name>
-          <id>366</id>
+          <name>TaxesDifferenceIncomingInvoiceType</name>
+          <id>395</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.TaxesDifference.IncomingInvoiceType</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>TaxesDifferenceIncomingInvoiceTypeExtendedTooltip</name>
+            <id>397</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>TaxesDifferenceIncomingInvoiceTypeContextMenu</name>
+            <id>396</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>TaxesDifferenceOutgoingVatRate</name>
+          <id>398</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -2279,8 +2169,8 @@
             <segments>Object.TaxesDifference.OutgoingVatRate</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TaxesDifferenceToVatRateExtendedTooltip</name>
-            <id>368</id>
+            <name>TaxesDifferenceOutgoingVatRateExtendedTooltip</name>
+            <id>400</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2294,8 +2184,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TaxesDifferenceToVatRateContextMenu</name>
-            <id>367</id>
+            <name>TaxesDifferenceOutgoingVatRateContextMenu</name>
+            <id>399</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2318,19 +2208,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TaxesDifferenceNetAmount</name>
-          <id>369</id>
+          <name>TaxesDifferenceOutgoingInvoiceType</name>
+          <id>401</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.TaxesDifference.NetAmount</segments>
+            <segments>Object.TaxesDifference.OutgoingInvoiceType</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TaxesDifferenceNetAmountExtendedTooltip</name>
-            <id>371</id>
+            <name>TaxesDifferenceOutgoingInvoiceTypeExtendedTooltip</name>
+            <id>403</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2344,8 +2234,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TaxesDifferenceNetAmountContextMenu</name>
-            <id>370</id>
+            <name>TaxesDifferenceOutgoingInvoiceTypeContextMenu</name>
+            <id>402</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2358,13 +2248,6 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <footerDataPath xsi:type="form:DataPath">
-            <segments>Object.TaxesDifference.TotalNetAmount</segments>
-          </footerDataPath>
-          <footerFont xsi:type="core:FontDef">
-            <height>8.0</height>
-            <bold>true</bold>
-          </footerFont>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2375,19 +2258,19 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TaxesDifferenceTaxAmount</name>
-          <id>372</id>
+          <name>TaxesDifferenceAmount</name>
+          <id>404</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.TaxesDifference.TaxAmount</segments>
+            <segments>Object.TaxesDifference.Amount</segments>
           </dataPath>
           <extendedTooltip>
-            <name>TaxesDifferenceTaxAmountExtendedTooltip</name>
-            <id>374</id>
+            <name>TaxesDifferenceAmountExtendedTooltip</name>
+            <id>406</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2401,8 +2284,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TaxesDifferenceTaxAmountContextMenu</name>
-            <id>373</id>
+            <name>TaxesDifferenceAmountContextMenu</name>
+            <id>405</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2416,7 +2299,7 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <footerDataPath xsi:type="form:DataPath">
-            <segments>Object.TaxesDifference.TotalTaxAmount</segments>
+            <segments>Object.TaxesDifference.TotalAmount</segments>
           </footerDataPath>
           <footerFont xsi:type="core:FontDef">
             <height>8.0</height>

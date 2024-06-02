@@ -180,13 +180,13 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	-ItemList.NetAmount AS TaxableAmount,
-		|	-ItemList.TaxAmount AS TaxAmount
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
+		|	-ItemList.TaxAmount AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
-		|	TRUE";
+		|	ItemList.TaxAmount <> 0";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

@@ -16,24 +16,11 @@
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="0e86e4c7-5edc-4ad6-a7ce-d5ce9274a057">
-    <name>TaxableAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Taxable amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
   <resources uuid="210f094c-6ece-4fdb-99a6-1cd9570db0e1">
-    <name>TaxAmount</name>
+    <name>Amount</name>
     <synonym>
       <key>en</key>
-      <value>Tax amount</value>
+      <value>Amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -92,6 +79,20 @@
     </synonym>
     <type>
       <types>CatalogRef.TaxRates</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="c7253578-aa97-401e-bf65-5fd9db9ff8c2">
+    <name>InvoiceType</name>
+    <synonym>
+      <key>en</key>
+      <value>Invoice type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.InvoiceType</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

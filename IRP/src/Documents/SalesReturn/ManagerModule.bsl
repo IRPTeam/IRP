@@ -900,13 +900,14 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount AS TaxAmount,
-		|	ItemLIst.NetAmount AS TaxableAmount
+		|	ItemList.TaxAmount AS Amount,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsReturnFromCustomer";
+		|	ItemList.IsReturnFromCustomer
+		|	AND ItemList.TaxAmount <> 0";
 EndFunction
 
 #Region Stock
@@ -1300,6 +1301,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList as ItemList
 		|WHERE
 		|	ItemList.IsReturnFromCustomer
+		|	AND ItemList.TaxAmount <> 0
 		|
 		|UNION ALL
 		|

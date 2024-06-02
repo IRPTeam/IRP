@@ -1289,14 +1289,7 @@ EndFunction
 
 Function GetMetadataReisterName(RegisterName)
 	If StrStartsWith(RegisterName, "R5020B_PartnersBalance") Then
-		Return "R5020B_PartnersBalance";
-	
-	ElsIf StrStartsWith(RegisterName, "R1040B_TaxesOutgoing") Then
-		Return "R1040B_TaxesOutgoing";
-	
-	ElsIf StrStartsWith(RegisterName, "R2040B_TaxesIncoming") Then
-		Return "R2040B_TaxesIncoming";
-	
+		Return "R5020B_PartnersBalance";	
 	Else
 		Return RegisterName;
 	EndIf;

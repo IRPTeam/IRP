@@ -877,14 +877,15 @@ Function TaxesIncoming()
 		|	TaxesIncoming.Key,
 		|	TaxesIncoming.Currency,
 		|	TaxesIncoming.VatRate AS TaxRate,
-		|	TaxesIncoming.NetAmount AS TaxableAmount,
-		|	TaxesIncoming.TaxAmount,
+		|	TaxesIncoming.InvoiceType AS InvoiceType,
+		|	TaxesIncoming.TaxAmount AS Amount,
 		|	&Vat AS Tax
 		|INTO TaxesIncoming
 		|FROM
 		|	Document.OpeningEntry.TaxesIncoming AS TaxesIncoming
 		|WHERE
-		|	TaxesIncoming.Ref = &Ref";
+		|	TaxesIncoming.Ref = &Ref
+		|	AND TaxesIncoming.TaxAmount <> 0";
 EndFunction
 
 Function TaxesOutgoing()
@@ -896,14 +897,15 @@ Function TaxesOutgoing()
 		|	TaxesOutgoing.Key,
 		|	TaxesOutgoing.Currency,
 		|	TaxesOutgoing.VatRate AS TaxRate,
-		|	TaxesOutgoing.NetAmount AS TaxableAmount,
-		|	TaxesOutgoing.TaxAmount,
+		|	TaxesOutgoing.InvoiceType AS InvoiceType,
+		|	TaxesOutgoing.TaxAmount AS Amount,
 		|	&Vat AS Tax
 		|INTO TaxesOutgoing
 		|FROM
 		|	Document.OpeningEntry.TaxesOutgoing AS TaxesOutgoing
 		|WHERE
-		|	TaxesOutgoing.Ref = &Ref";
+		|	TaxesOutgoing.Ref = &Ref
+		|	AND TaxesOutgoing.TaxAmount <> 0";
 EndFunction
 
 #EndRegion
@@ -2033,8 +2035,8 @@ Function R2040B_TaxesIncoming()
 		|	TaxesIncoming.Branch,
 		|	TaxesIncoming.Currency,
 		|	TaxesIncoming.TaxRate,
-		|	TaxesIncoming.TaxableAmount,
-		|	TaxesIncoming.TaxAmount,
+		|	TaxesIncoming.InvoiceType,
+		|	TaxesIncoming.Amount,
 		|	TaxesIncoming.Tax
 		|INTO R2040B_TaxesIncoming
 		|FROM
@@ -2053,8 +2055,8 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesOutgoing.Branch,
 		|	TaxesOutgoing.Currency,
 		|	TaxesOutgoing.TaxRate,
-		|	TaxesOutgoing.TaxableAmount,
-		|	TaxesOutgoing.TaxAmount,
+		|	TaxesOutgoing.InvoiceType,
+		|	TaxesOutgoing.Amount,
 		|	TaxesOutgoing.Tax
 		|INTO R1040B_TaxesOutgoing
 		|FROM

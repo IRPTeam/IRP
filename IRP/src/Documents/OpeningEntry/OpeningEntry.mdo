@@ -3011,6 +3011,21 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="7521f901-4b9a-4ff0-acd0-97477142f149">
+      <name>InvoiceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Invoice type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InvoiceType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="adb13ca8-81da-4848-95d0-787b9721c49c">
       <name>NetAmount</name>
       <synonym>
@@ -3100,6 +3115,21 @@
       </synonym>
       <type>
         <types>CatalogRef.TaxRates</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="503a1f24-5f6b-41d8-9c96-5c631b64b37e">
+      <name>InvoiceType</name>
+      <synonym>
+        <key>en</key>
+        <value>Invoice type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.InvoiceType</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

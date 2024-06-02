@@ -1302,6 +1302,7 @@
   <enums>Enum.OtherPeriodExpenseType</enums>
   <enums>Enum.OtherPeriodRevenueType</enums>
   <enums>Enum.TaxesOperationTransactionType</enums>
+  <enums>Enum.InvoiceType</enums>
   <reports>Report.A0010_TrialBalance</reports>
   <reports>Report.A0011_TrialBalanceByAccount</reports>
   <reports>Report.A0012_AccountCard</reports>

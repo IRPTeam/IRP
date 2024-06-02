@@ -724,13 +724,14 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount,
-		|	ItemLIst.NetAmount AS TaxableAmount
+		|	ItemList.TaxAmount AS Amount,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.IsSales";
+		|	ItemList.IsSales
+		|	AND ItemList.TaxAmount <> 0";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -1374,6 +1375,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList as ItemList
 		|WHERE
 		|	ItemList.IsSales
+		|	AND ItemList.TaxAmount <> 0
 		|
 		|UNION ALL
 		|

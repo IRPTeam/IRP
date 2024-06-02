@@ -1536,12 +1536,16 @@ EndFunction
 
 Procedure TaxesIncomingOutgoingOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
-	Parameters.Form.CalculateTaxesDifference();
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
 EndProcedure
 
 Procedure TaxesIncomingOutgoingOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
-	Parameters.Form.CalculateTaxesDifference();
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
 EndProcedure
 
 Procedure TaxesIncomingOutgoingAfterDeleteRow(Object, Form, TableName) Export
@@ -1550,7 +1554,9 @@ EndProcedure
 
 Procedure TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
-	Parameters.Form.CalculateTaxesDifference();
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
 EndProcedure
 
 Procedure TaxesIncomingOutgoingLoad(Object, Form, TableName, Address, GroupColumn = "", SumColumn = "") Export
@@ -1607,7 +1613,9 @@ Procedure TaxesIncomingOutgoingTotalAmountOnChange(Object, Form, TableName, Curr
 EndProcedure
 
 Procedure OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters) Export
-	Parameters.Form.CalculateTaxesDifference();
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
 EndProcedure
 
 #EndRegion

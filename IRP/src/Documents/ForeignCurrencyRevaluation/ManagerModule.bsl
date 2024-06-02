@@ -42,19 +42,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	*,
 	|	Reg.CurrencyMovementType.Source AS Source,
-	|	Reg.TaxableAmountBalance AS Amount
-	|INTO _R1040B_TaxesOutgoing_TaxableAmount
-	|FROM
-	|	AccumulationRegister.R1040B_TaxesOutgoing.Balance(&Period, Company = &Company
-	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	or Currency <> TransactionCurrency)) AS Reg
-	|;
-	|// active
-	|SELECT
-	|	*,
-	|	Reg.CurrencyMovementType.Source AS Source,
-	|	Reg.TaxAmountBalance AS Amount
-	|INTO _R1040B_TaxesOutgoing_TaxAmount
+	|	Reg.AmountBalance AS Amount
+	|INTO _R1040B_TaxesOutgoing
 	|FROM
 	|	AccumulationRegister.R1040B_TaxesOutgoing.Balance(&Period, Company = &Company
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
@@ -86,19 +75,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	*,
 	|	Reg.CurrencyMovementType.Source AS Source,
-	|	Reg.TaxableAmountBalance AS Amount
-	|INTO _R2040B_TaxesIncoming_TaxableAmount
-	|FROM
-	|	AccumulationRegister.R2040B_TaxesIncoming.Balance(&Period, Company = &Company
-	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	or Currency <> TransactionCurrency)) AS Reg
-	|;
-	|// passive
-	|SELECT
-	|	*,
-	|	Reg.CurrencyMovementType.Source AS Source,
-	|	Reg.TaxAmountBalance AS Amount
-	|INTO _R2040B_TaxesIncoming_TaxAmount
+	|	Reg.AmountBalance AS Amount
+	|INTO _R2040B_TaxesIncoming
 	|FROM
 	|	AccumulationRegister.R2040B_TaxesIncoming.Balance(&Period, Company = &Company
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
@@ -468,7 +446,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Currency AS CurrencyTo,
 	|	Reg.Source AS Source
 	|FROM
-	|	_R1040B_TaxesOutgoing_TaxableAmount AS Reg
+	|	_R1040B_TaxesOutgoing AS Reg
 	|
 	|UNION ALL
 	|
@@ -477,25 +455,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Currency AS CurrencyTo,
 	|	Reg.Source AS Source
 	|FROM
-	|	_R1040B_TaxesOutgoing_TaxAmount AS Reg
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Reg.TransactionCurrency AS CurrencyFrom,
-	|	Reg.Currency AS CurrencyTo,
-	|	Reg.Source AS Source
-	|FROM
-	|	_R2040B_TaxesIncoming_TaxableAmount AS Reg
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Reg.TransactionCurrency AS CurrencyFrom,
-	|	Reg.Currency AS CurrencyTo,
-	|	Reg.Source AS Source
-	|FROM
-	|	_R2040B_TaxesIncoming_TaxAmount AS Reg
+	|	_R2040B_TaxesIncoming AS Reg
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -548,15 +508,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R3027B_EmployeeCashAdvance");
 	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
 	ArrayOfActives.Add("R8510B_BookValueOfFixedAsset");
-//	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxableAmount");
-//	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxAmount");
+	ArrayOfActives.Add("R1040B_TaxesOutgoing");
 
 	ArrayOfPassives = New Array();
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
 	ArrayOfPassives.Add("R2020B_AdvancesFromCustomers");
 	ArrayOfPassives.Add("R9510B_SalaryPayment");
-//	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxableAmount");
-//	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxAmount");
+	ArrayOfPassives.Add("R2040B_TaxesIncoming");
 
 	ArrayOfOthers = New Array();
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");
@@ -739,7 +697,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming) AS Operation
 		|FROM
-		|	Revaluated_R2040B_TaxesIncoming_TaxAmount AS Table
+		|	Revaluated_R2040B_TaxesIncoming AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
 		|	AND Table.AmountRevaluated > 0
@@ -755,7 +713,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues) AS Operation
 		|FROM
-		|	Revaluated_R2040B_TaxesIncoming_TaxAmount AS Table
+		|	Revaluated_R2040B_TaxesIncoming AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Expense)
 		|	AND Table.AmountRevaluated > 0
@@ -1011,7 +969,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing) AS Operation
 		|FROM
-		|	Revaluated_R1040B_TaxesOutgoing_TaxAmount AS Table
+		|	Revaluated_R1040B_TaxesOutgoing AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Expense)
 		|	AND Table.AmountRevaluated > 0
@@ -1027,7 +985,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.AmountRevaluated AS Amount,
 		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues) AS Operation
 		|FROM
-		|	Revaluated_R1040B_TaxesOutgoing_TaxAmount AS Table
+		|	Revaluated_R1040B_TaxesOutgoing AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
 		|	AND Table.AmountRevaluated > 0";
@@ -1073,12 +1031,12 @@ Function GetAccountingDataTable(Operation, AddInfo) Export
 		Return Query.Execute().Unload();
 	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming Then
 		Query.Text = 
-		"SELECT * FROM Revaluated_R2040B_TaxesIncoming_TaxAmount AS Table WHERE 
+		"SELECT * FROM Revaluated_R2040B_TaxesIncoming AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
 	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues Then
 		Query.Text = 
-		"SELECT * FROM Revaluated_R2040B_TaxesIncoming_TaxAmount AS Table WHERE 
+		"SELECT * FROM Revaluated_R2040B_TaxesIncoming AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
 		
@@ -1164,12 +1122,12 @@ Function GetAccountingDataTable(Operation, AddInfo) Export
 	
 	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing Then
 		Query.Text = 
-		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing_TaxAmount AS Table WHERE 
+		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
 	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues Then
 		Query.Text = 
-		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing_TaxAmount AS Table WHERE 
+		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
 	

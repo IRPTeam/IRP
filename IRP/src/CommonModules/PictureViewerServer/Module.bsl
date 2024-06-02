@@ -297,7 +297,12 @@ Function GetVolumeURLByIntegrationSettings(IntegrationSettings, URI) Export
 	FullURL = "";
 
 	If IntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage Then
-		FullURL = ConnectionSettings.Value.AddressPath + "/" + URI;
+		Try
+			BD = New BinaryData(ConnectionSettings.Value.AddressPath + "/" + URI);
+		Except
+			BD = Undefined;
+		EndTry;
+		FullURL = PutToTempStorage(BD);
 	ElsIf Not ExtensionCall_GetVolumeURLByIntegrationSettings(FullURL, IntegrationSettings, URI) Then
 
 		If ConnectionSettings.Value.Property("SecureConnection") And ConnectionSettings.Value.SecureConnection = True Then
@@ -522,7 +527,7 @@ EndFunction
 // Pictures info for slider.
 // 
 // Parameters:
-//  ItemRef - CatalogRef.Items, CatalogRef.ItemKeys - Item ref
+//  ItemRef - CatalogRefCatalogName, DocumentRefDocumentName -
 //  FileRef - Undefined - File ref
 //  UseFullSizePhoto - Boolean - Use full size photo
 // 
@@ -619,6 +624,20 @@ EndFunction
 
 #EndRegion
 
+// Create picture parameters.
+// 
+// Parameters:
+//  FileRef - CatalogRef.Files - File ref
+// 
+// Returns:
+//  Structure - Create picture parameters:
+// * Ref - CatalogRef.Files
+// * Description - String -
+// * FileID - String -
+// * isFilledVolume - Boolean - 
+// * GETIntegrationSettings - CatalogRef.IntegrationSettings 
+// * isLocalPictureURL - Boolean - 
+// * URI - String 
 Function CreatePictureParameters(FileRef) Export
 	Ref = FileRef;
 	If TypeOf(FileRef) = Type("FormDataStructure") Then

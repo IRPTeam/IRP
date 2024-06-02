@@ -95,14 +95,14 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
-	//QueryArray.Add(TaxesDifference());
+	QueryArray.Add(TaxesDifference());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
-//	QueryArray.Add(R1040B_TaxesOutgoing());
-//	QueryArray.Add(R2040B_TaxesIncoming());
+	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(R2040B_TaxesIncoming());
 //	QueryArray.Add(R5010B_ReconciliationStatement());
 //	QueryArray.Add(R5015B_OtherPartnersTransactions());
 //	QueryArray.Add(T1040T_AccountingAmounts());
@@ -121,11 +121,11 @@ Function TaxesDifference()
 		|	TaxesDifference.Ref.Company AS Company,
 		|	TaxesDifference.Ref.Branch AS Branch,
 		|	&Vat AS Tax,
-//		|	&IncomingIsLess AS IncomingIsLess,
-//		|	&OutgoingIsLess AS OutgoingIsLess,
 		|	TaxesDifference.Ref.Currency AS Currency,
 		|	TaxesDifference.IncomingVatRate,
+		|	TaxesDifference.IncomingInvoiceType,
 		|	TaxesDifference.OutgoingVatRate,
+		|	TaxesDifference.OutgoingInvoiceType,
 		|	TaxesDifference.Ref.Partner AS Partner,
 		|	TaxesDifference.Ref.LegalName AS LegalName,
 		|	TaxesDifference.Ref.LegalNameContract AS LegalNameContract,
@@ -135,8 +135,7 @@ Function TaxesDifference()
 		|			THEN TaxesDifference.Ref
 		|		ELSE UNDEFINED
 		|	END AS Basis,
-		|	TaxesDifference.NetAmount AS TaxableAmount,
-		|	TaxesDifference.TaxAmount AS TaxAmount,
+		|	TaxesDifference.Amount AS Amount,
 		|	TaxesDifference.Ref.TransactionType = VALUE(Enum.TaxesOperationTransactionType.TaxOffset) AS IsTaxOffset,
 		|	TaxesDifference.Ref.TransactionType = VALUE(Enum.TaxesOperationTransactionType.TaxOffsetAndPayment) AS IsTaxOffsetAndPayment,
 		|	TaxesDifference.Ref.TransactionType = VALUE(Enum.TaxesOperationTransactionType.TaxPayment) AS IsTaxPayment
@@ -161,14 +160,13 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesDifference.Tax,
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.OutgoingVatRate AS TaxRate,
-		|	TaxesDifference.TaxableAmount,
-		|	TaxesDifference.TaxAmount
+		|	TaxesDifference.OutgoingInvoiceType AS InvoiceType,
+		|	TaxesDifference.Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	TaxesDifference as TaxesDifference
 		|WHERE
-		|	(TaxesDifference.IsTaxOffset OR TaxesDifference.IsTaxOffsetAndPayment)
-		|	AND NOT TaxesDifference.OutgoingVatRate.Ref IS NULL ";
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL ";
 EndFunction 
 
 Function R2040B_TaxesIncoming()
@@ -181,14 +179,13 @@ Function R2040B_TaxesIncoming()
 		|	TaxesDifference.Tax,
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.IncomingVatRate AS TaxRate,
-		|	TaxesDifference.TaxableAmount,
-		|	TaxesDifference.TaxAmount
+		|	TaxesDifference.IncomingInvoiceType AS InvoiceType,
+		|	TaxesDifference.Amount
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	TaxesDifference as TaxesDifference
 		|WHERE
-		|	(TaxesDifference.IsTaxOffset OR TaxesDifference.IsTaxOffsetAndPayment)
-		|	AND NOT TaxesDifference.IncomingVatRate.Ref IS NULL";
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL";
 EndFunction 
 
 Function R5015B_OtherPartnersTransactions()

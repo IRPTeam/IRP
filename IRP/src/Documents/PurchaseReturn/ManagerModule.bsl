@@ -1018,7 +1018,7 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming(Para
 	
 	// Credit
 	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
-	AccountingAnalytics.Credit = Credit.IncomingAccount;
+	AccountingAnalytics.Credit = Credit.IncomingAccountReturn;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	Return AccountingAnalytics;

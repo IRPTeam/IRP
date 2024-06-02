@@ -1403,7 +1403,7 @@ Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters)
 	
 	// Debit
 	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
-	AccountingAnalytics.Debit = Debit.OutgoingAccount;
+	AccountingAnalytics.Debit = Debit.OutgoingAccountReturn;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	// Credit

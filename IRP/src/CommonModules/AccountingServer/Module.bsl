@@ -1012,7 +1012,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByVatRate.Tax,
 	|	ByVatRate.VatRate,
 	|	ByVatRate.IncomingAccount,
+	|	ByVatRate.IncomingAccountReturn,
 	|	ByVatRate.OutgoingAccount,
+	|	ByVatRate.OutgoingAccountReturn,
 	|	0 AS Priority
 	|INTO Accounts
 	|FROM
@@ -1028,7 +1030,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByTax.Tax,
 	|	ByTax.VatRate,
 	|	ByTax.IncomingAccount,
+	|	ByTax.IncomingAccountReturn,
 	|	ByTax.OutgoingAccount,
+	|	ByTax.OutgoingAccountReturn,
 	|	1
 	|FROM
 	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
@@ -1043,7 +1047,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByCompany.Tax,
 	|	ByCompany.VatRate,
 	|	ByCompany.IncomingAccount,
+	|	ByCompany.IncomingAccountReturn,
 	|	ByCompany.OutgoingAccount,
+	|	ByCompany.OutgoingAccountReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
@@ -1058,7 +1064,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	Accounts.Tax,
 	|	Accounts.VatRate,
 	|	Accounts.IncomingAccount,
+	|	Accounts.IncomingAccountReturn,
 	|	Accounts.OutgoingAccount,
+	|	Accounts.OutgoingAccountReturn,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -1072,10 +1080,12 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	Query.SetParameter("VatRate" , VatRate);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("IncomingAccount, OutgoingAccount", Undefined, Undefined);
+	Result = New Structure("IncomingAccount, OutgoingAccount, IncomingAccountReturn, OutgoingAccountReturn");
 	If QuerySelection.Next() Then
 		Result.IncomingAccount = QuerySelection.IncomingAccount;
+		Result.IncomingAccountReturn = QuerySelection.IncomingAccountReturn;
 		Result.OutgoingAccount = QuerySelection.OutgoingAccount;
+		Result.OutgoingAccountReturn = QuerySelection.OutgoingAccountReturn;
 	EndIf;
 	Return Result;
 EndFunction

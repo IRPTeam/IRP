@@ -345,7 +345,7 @@
         </code>
       </content>
       <content id="1b7650ad-043d-4694-a395-c0f1ec19d281">
-        <name>SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming</name>
+        <name>SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming</name>
         <code xsi:type="core:NumberValue">
           <value>16</value>
         </code>

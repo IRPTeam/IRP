@@ -1353,7 +1353,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
-		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
@@ -1369,7 +1369,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
 		|	ItemList.TaxAmount,
-		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming),
+		|	VALUE(Catalog.AccountingOperations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming),
 		|	UNDEFINED
 		|FROM
 		|	ItemList as ItemList
@@ -1411,9 +1411,9 @@ Function GetAccountingAnalytics(Parameters) Export
 		
 		Return GetAnalytics_RevenueFromSales(Parameters); // Customer transactions - Revenues
 	
-	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming Then 
+	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then 
 		
-		Return GetAnalytics_VATIncoming(Parameters); // Revenues - Tax outgoing
+		Return GetAnalytics_VATIncoming(Parameters); // Customer transaction - Tax incoming
 	
 	ElsIf Parameters.Operation = Operations.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
 			
@@ -1457,21 +1457,21 @@ Function GetAnalytics_RevenueFromSales(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-// Revenues - Taxes outgoing
+// Customer transactions - Taxes incoming
 Function GetAnalytics_VATIncoming(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-		
+	
 	// Debit
-	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-	                                                          Parameters.RowData.RevenueType,
-	                                                          Parameters.RowData.ProfitLossCenter);
-	If Parameters.RowData.OtherPeriodRevenueType = Enums.OtherPeriodRevenueType.RevenueAccruals Then
-		AccountingAnalytics.Debit = Debit.AccountOtherPeriodsRevenue;
-	Else
-		AccountingAnalytics.Debit = Debit.AccountRevenue;
-	EndIf;
-	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.ObjectData.Partner, 
+	                                                   Parameters.ObjectData.Agreement,
+	                                                   Parameters.ObjectData.Currency);
+	                                                   
+	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	// Credit
 	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);

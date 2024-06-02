@@ -1503,8 +1503,8 @@ Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en = 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)'", Lang));
 
-Strings.Insert("SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming",
-	NStr("en = 'SalesInvoice DR (R5021T_Revenues) CR (R2040B_TaxesIncoming)'", Lang));
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en = 'SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
 	NStr("en = 'SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)'", Lang));

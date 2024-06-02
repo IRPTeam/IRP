@@ -141,7 +141,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
 		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
 	
-	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming,
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
 		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
 	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory,
 		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));

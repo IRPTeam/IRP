@@ -8,7 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	Parameters.Insert("DocObject", ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-
+	
 	Result = DocTaxesOperationServer.CalculateTaxDifference(ThisObject);
 	ThisObject.TaxesDifference.Clear();
 	For Each Row In Result Do

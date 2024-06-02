@@ -1536,14 +1536,28 @@ EndFunction
 
 Procedure TaxesIncomingOutgoingOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.CalculateTaxesDifference();
 EndProcedure
 
 Procedure TaxesIncomingOutgoingOnCopyRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
+	Parameters.Form.CalculateTaxesDifference();
 EndProcedure
 
 Procedure TaxesIncomingOutgoingAfterDeleteRow(Object, Form, TableName) Export
-	DeleteRows(Object, Form, TableName);
+	DeleteRows(Object, Form, TableName, "TaxesIncomingOutgoingAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	Parameters.Form.CalculateTaxesDifference();
+EndProcedure
+
+Procedure TaxesIncomingOutgoingLoad(Object, Form, TableName, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, TableName, Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
+	ControllerClientServer_V2.TaxesIncomingOutgoingLoad(Parameters);
 EndProcedure
 
 #EndRegion
@@ -1590,6 +1604,10 @@ Procedure TaxesIncomingOutgoingTotalAmountOnChange(Object, Form, TableName, Curr
 	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 	ControllerClientServer_V2.TaxesIncomingOutgoingTotalAmountOnChange(Parameters);
+EndProcedure
+
+Procedure OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters) Export
+	Parameters.Form.CalculateTaxesDifference();
 EndProcedure
 
 #EndRegion

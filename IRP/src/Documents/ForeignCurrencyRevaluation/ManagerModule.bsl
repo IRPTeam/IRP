@@ -548,15 +548,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R3027B_EmployeeCashAdvance");
 	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
 	ArrayOfActives.Add("R8510B_BookValueOfFixedAsset");
-	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxableAmount");
-	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxAmount");
+//	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxableAmount");
+//	ArrayOfActives.Add("R1040B_TaxesOutgoing_TaxAmount");
 
 	ArrayOfPassives = New Array();
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
 	ArrayOfPassives.Add("R2020B_AdvancesFromCustomers");
 	ArrayOfPassives.Add("R9510B_SalaryPayment");
-	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxableAmount");
-	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxAmount");
+//	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxableAmount");
+//	ArrayOfPassives.Add("R2040B_TaxesIncoming_TaxAmount");
 
 	ArrayOfOthers = New Array();
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");

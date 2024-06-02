@@ -3183,6 +3183,10 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeIsOther,
 		|StepChangeLegalNameByPartner");
 	
+	Binding.Insert("TaxesOperation",
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
+		|StepChangeLegalNameByPartner");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction
 
@@ -5119,6 +5123,10 @@ Function BindAgreement(Parameters)
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement");
 	
+	Binding.Insert("TaxesOperation",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAgreement");
 EndFunction
 
@@ -15373,6 +15381,45 @@ EndProcedure
 
 #Region TAXES_INCOMING_OUTGOING
 
+#Region TAXES_INCOMING_OUTGOING_LOAD_DATA
+
+// TaxesIncomingOutgoing.Load
+Procedure TaxesIncomingOutgoingLoad(Parameters) Export
+	Binding = BindTaxesIncomingOutgoingLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderTaxesIncomingOutgoing(Parameters, Results) Export
+	Binding = BindPaymentListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// TaxesIncomingOutgoing.Load.Bind
+Function BindTaxesIncomingOutgoingLoad(Parameters)
+	DataPath = "PaymentList";
+	Binding = New Structure();
+	Return BindSteps("StepTaxesIncomingOutgoingLoadTable", DataPath, Binding, Parameters, "BindPaymentListLoad");
+EndFunction
+
+// TaxesIncomingOutgoing.LoadAtServer.Step
+Procedure StepTaxesIncomingOutgoingLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.LoadTable.Setter = "ServerTableLoaderTaxesIncomingOutgoing";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region TAXES_INCOMING_OUTGOING_VAT_RATE
 
 // TaxesIncomingOutgoing.VatRate.OnChange
@@ -15455,6 +15502,7 @@ EndFunction
 
 // TaxesIncomingOutgoing.TotalAmount.OnChange
 Procedure TaxesIncomingOutgoingTotalAmountOnChange(Parameters) Export
+	AddViewNotify("OnChangeTaxesIncomingOutgoingTotalAmountNotify", Parameters);
 	Binding = BindTaxesIncomingOutgoingTotalAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -15483,7 +15531,8 @@ EndFunction
 Procedure SetTaxesIncomingOutgoingCalculations(Parameters, Results) Export
 	SetterObject(Undefined, BindTaxesIncomingOutgoingNetAmount(Parameters).DataPath   , Parameters, Results, , "NetAmount");
 	SetterObject(Undefined, BindTaxesIncomingOutgoingTaxAmount(Parameters).DataPath   , Parameters, Results, , "TaxAmount");
-	SetterObject(Undefined, BindTaxesIncomingOutgoingTotalAmount(Parameters).DataPath , Parameters, Results, , "TotalAmount");
+	SetterObject(Undefined, BindTaxesIncomingOutgoingTotalAmount(Parameters).DataPath , Parameters, Results,
+		"OnChangeTaxesIncomingOutgoingTotalAmountNotify" , "TotalAmount");
 EndProcedure
 
 // TaxesIncomingOutgoing.Calculations.[IsVatRateChanged].Step
@@ -15738,6 +15787,9 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetReceiveDebtTypeNotify"                  Then ViewClient_V2.OnSetReceiveDebtTypeNotify(Parameters);
 	ElsIf ViewNotify = "TaxesIncomingOutgoingOnAddRowFormNotify"     Then ViewClient_V2.TaxesIncomingOutgoingOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "TaxesIncomingOutgoingOnCopyRowFormNotify"    Then ViewClient_V2.TaxesIncomingOutgoingOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "TaxesIncomingOutgoingAfterDeleteRowFormNotify"  Then ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnChangeTaxesIncomingOutgoingTotalAmountNotify" Then ViewClient_V2.OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

@@ -1085,6 +1085,14 @@
       </code>
       <isFolder>true</isFolder>
     </items>
+    <items id="703e2697-b910-4f27-8d6b-65ce9de6d7cb">
+      <name>Document_TaxesOperation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>144</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

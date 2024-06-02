@@ -1279,7 +1279,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Period,
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
-		|	ItemList.Amount AS Amount,
+		|	ItemList.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
@@ -1295,7 +1295,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList.Key AS RowKey,
 		|	ItemList.Currency,
 		|	ItemList.TaxAmount,
-		|	VALUE(Catalog.AccountingOperations.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues),
+		|	VALUE(Catalog.AccountingOperations.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions),
 		|	UNDEFINED
 		|FROM
 		|	ItemList as ItemList
@@ -1337,8 +1337,8 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions Then
 		Return GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Parameters);
-	ElsIf Parameters.Operation = AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues Then
-		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters);
+	ElsIf Parameters.Operation = AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Parameters);
 	ElsIf Parameters.Operation = AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R4050B_StockInventory(Parameters);
 	EndIf;
@@ -1397,7 +1397,7 @@ Function GetAnalytics_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions(Paramet
 	Return AccountingAnalytics;
 EndFunction
 	
-Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters)
+Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions(Parameters)
 	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
 	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
 	
@@ -1407,11 +1407,15 @@ Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters)
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	// Credit
-	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-	                                                           Parameters.RowData.RevenueType,
-	                                                           Parameters.RowData.ProfitLossCenter);
-	AccountingAnalytics.Credit = Credit.AccountRevenue;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.ObjectData.Partner, 
+	                                                   Parameters.ObjectData.Agreement,
+	                                                   Parameters.ObjectData.Currency);
+	                                                   
+	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction

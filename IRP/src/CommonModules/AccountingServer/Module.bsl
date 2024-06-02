@@ -245,7 +245,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
-	Map.Insert(AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues, 
+	Map.Insert(AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
 	Map.Insert(AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory, 

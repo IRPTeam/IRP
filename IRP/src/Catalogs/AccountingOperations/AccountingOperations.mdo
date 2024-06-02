@@ -1034,7 +1034,7 @@
         </code>
       </content>
       <content id="b6fe36de-ca3b-45e7-a725-c7ba33eaec64">
-        <name>SalesReturn_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues</name>
+        <name>SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions</name>
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>132</value>

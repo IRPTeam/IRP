@@ -78,18 +78,6 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Vat", TaxesServer.GetVatRef());
-	
-//	TotalTaxAmount_Incoming = Ref.TaxesIncoming.Total("TaxAmount");
-//	TotalTaxAmount_Outgoing = Ref.TaxesOutgoing.Total("TaxAmount");
-//	
-//	If TotalTaxAmount_Incoming < TotalTaxAmount_Outgoing Then
-//		StrParams.Insert("IncomingIsLess", True);	
-//		StrParams.Insert("OutgoingIsLess", False);
-//	Else
-//		StrParams.Insert("IncomingIsLess", False);	
-//		StrParams.Insert("OutgoingIsLess", True);
-//	EndIf;		
-	
 	Return StrParams;
 EndFunction
 
@@ -103,10 +91,10 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R2040B_TaxesIncoming());
-//	QueryArray.Add(R5010B_ReconciliationStatement());
-//	QueryArray.Add(R5015B_OtherPartnersTransactions());
+	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5015B_OtherPartnersTransactions());
 //	QueryArray.Add(T1040T_AccountingAmounts());
-//	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
 
@@ -191,49 +179,81 @@ EndFunction
 Function R5015B_OtherPartnersTransactions()
 	Return
 		"SELECT
-		|	CASE
-		|		WHEN TaxesDifference.IncomingIsLess
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
-		|	END AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	TaxesDifference.Period,
 		|	TaxesDifference.Company,
 		|	TaxesDifference.Branch,
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.LegalName,
 		|	TaxesDifference.Partner,
-		|	TaxesDifference.Areement,
+		|	TaxesDifference.Agreement,
 		|	TaxesDifference.Basis,
-		|	TaxesDifference.TaxAmount AS Amount
+		|	TaxesDifference.Amount AS Amount
 		|INTO R5015B_OtherPartnersTransactions
 		|FROM
 		|	TaxesDifference AS TaxesDifference
 		|WHERE
-		|	TaxesDifference.IsTaxOffsetAndPaymant
-		|	OR TaxesDifference.IsTaxPayment";
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.Partner,
+		|	TaxesDifference.Agreement,
+		|	TaxesDifference.Basis,
+		|	TaxesDifference.Amount AS Amount
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.IncomingVatRate.Ref IS NULL";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
 	Return
 		"SELECT
-		|	CASE
-		|		WHEN TaxesDifference.IncomingIsLess
-		|			THEN VALUE(AccumulationRecordType.Expense)
-		|		ELSE VALUE(AccumulationRecordType.Receipt)
-		|	END AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	TaxesDifference.Period,
 		|	TaxesDifference.Company,
 		|	TaxesDifference.Branch,
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.LegalName,
 		|	TaxesDifference.LegalNameContract,
-		|	TaxesDifference.TaxAmount AS Amount
+		|	TaxesDifference.Amount AS Amount
 		|INTO R5010B_ReconciliationStatement
 		|FROM
 		|	TaxesDifference AS TaxesDifference
 		|WHERE
-		|	TaxesDifference.IsTaxOffsetAndPaymant
-		|	OR TaxesDifference.IsTaxPayment";
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.LegalNameContract,
+		|	TaxesDifference.Amount AS Amount
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.IncomingVatRate.Ref IS NULL";
+EndFunction
+
+Function R5020B_PartnersBalance()
+	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_TaxesOperation();
 EndFunction
 
 #EndRegion

@@ -168,7 +168,6 @@ EndProcedure
 &AtClient
 Procedure Tree_RefreshData(Command)
 	RefreshDetailsTreeAtServer();
-	Tree_ExpandAll(Command);
 EndProcedure
 
 &AtClient

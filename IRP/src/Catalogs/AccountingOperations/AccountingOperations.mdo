@@ -1092,6 +1092,27 @@
         <value>144</value>
       </code>
       <isFolder>true</isFolder>
+      <content id="d5635200-cc1e-41d1-af78-e96ce790a640">
+        <name>TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>145</value>
+        </code>
+      </content>
+      <content id="77be4283-a70e-47dc-8f94-13cbca40cbe8">
+        <name>TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>146</value>
+        </code>
+      </content>
+      <content id="742b46b0-b5e0-4c20-b2c1-34b63c831d28">
+        <name>TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>147</value>
+        </code>
+      </content>
     </items>
   </predefined>
   <editType>InDialog</editType>

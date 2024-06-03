@@ -23,10 +23,10 @@ Procedure OnWrite(Cancel)
 		Return;
 	EndIf;	
 	
-//	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
-//	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
-//		AccountingServer.OnWrite(ThisObject, Cancel);
-//	EndIf;
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel, "TaxesDifference");
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

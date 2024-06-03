@@ -15,7 +15,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Parameters.IsReposting = False;
 	
-	//AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
+	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
 	
 	Return Tables;
 EndFunction
@@ -93,7 +93,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5015B_OtherPartnersTransactions());
-//	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
 	Return QueryArray;
 EndFunction
@@ -106,6 +106,7 @@ Function TaxesDifference()
 	Return
 		"SELECT
 		|	TaxesDifference.Ref.Date AS Period,
+		|	TaxesDifference.Key AS Key,
 		|	TaxesDifference.Ref.Company AS Company,
 		|	TaxesDifference.Ref.Branch AS Branch,
 		|	&Vat AS Tax,
@@ -284,52 +285,173 @@ EndFunction
 
 #Region Accounting
 
-//Function T1040T_AccountingAmounts()
-//	Return 
-//		"SELECT
-//		|	CostList.Period,
-//		|	CostList.Key AS RowKey,
-//		|	CostList.Currency,
-//		|	CostList.Amount * CostList.Factor AS Amount,
-//		|	VALUE(Catalog.AccountingOperations.ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses) AS Operation,
-//		|	UNDEFINED AS AdvancesClosing
-//		|INTO T1040T_AccountingAmounts
-//		|FROM
-//		|	CostList AS CostList
-//		|WHERE
-//		|	CostList.IsAccrual
-//		|	OR CostList.IsVoid
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	CostList.Period,
-//		|	CostList.Key AS RowKey,
-//		|	CostList.Currency,
-//		|	CostList.Amount * CostList.Factor AS Amount,
-//		|	VALUE(Catalog.AccountingOperations.ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses) AS Operation,
-//		|	UNDEFINED AS AdvancesClosing
-//		|FROM
-//		|	CostList AS CostList
-//		|WHERE
-//		|	CostList.IsReverse";
-//EndFunction
-//
-//Function GetAccountingAnalytics(Parameters) Export
-//	AO = Catalogs.AccountingOperations;
-//	If Parameters.Operation = AO.ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses Then
-//		
-//		Return GetAnalytics_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses(Parameters); // Expense - Other period expense
-//		
-//	ElsIf Parameters.Operation = AO.ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses Then
-//		
-//		Return GetAnalytics_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses(Parameters); // Other period expense - Expense (reverse) 
-//		
-//	EndIf;
-//	Return Undefined;
-//EndFunction
+Function T1040T_AccountingAmounts()
+	Return 
+		"SELECT
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Key AS RowKey,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.Amount <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Key AS RowKey,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.Amount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.Amount <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Key AS RowKey,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.Amount Amount,
+		|	VALUE(Catalog.AccountingOperations.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.Amount <> 0";
+
+EndFunction
+
+Function GetAccountingAnalytics(Parameters) Export
+	AO = Catalogs.AccountingOperations;
+	If Parameters.Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing Then
+		Return GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing(Parameters);
+	ElsIf Parameters.Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions Then
+		Return GetAnalytics_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions(Parameters);
+	ElsIf Parameters.Operation = AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing Then
+		Return GetAnalytics_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing(Parameters);
+	EndIf;
+	Return Undefined;
+EndFunction
 
 #Region Accounting_Analytics
+
+Function GetAnalytics_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	TaxVat = TaxesServer.GetVatRef();
+	
+	IncomingTaxInfo = New Structure();
+	IncomingTaxInfo.Insert("Tax", TaxVat);
+	IncomingTaxInfo.Insert("VatRate", Parameters.RowData.IncomingVatRate);
+	
+	OutgoingTaxInfo = New Structure();
+	OutgoingTaxInfo.Insert("Tax", TaxVat);
+	OutgoingTaxInfo.Insert("VatRate", Parameters.RowData.OutgoingVatRate);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, IncomingTaxInfo);
+	If Parameters.RowData.IncomingInvoiceType = Enums.InvoiceType.Invoice Then
+		AccountingAnalytics.Debit = Debit.IncomingAccount;
+	Else
+		AccountingAnalytics.Debit = Debit.IncomingAccountReturn;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, IncomingTaxInfo);
+	
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, OutgoingTaxInfo);
+	If Parameters.RowData.OutgoingInvoiceType = Enums.InvoiceType.Invoice Then
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+	Else
+		AccountingAnalytics.Credit = Credit.OutgoingAccountReturn;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, OutgoingTaxInfo);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetAnalytics_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	TaxVat = TaxesServer.GetVatRef();
+	
+	IncomingTaxInfo = New Structure();
+	IncomingTaxInfo.Insert("Tax", TaxVat);
+	IncomingTaxInfo.Insert("VatRate", Parameters.RowData.IncomingVatRate);
+	
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, IncomingTaxInfo);
+	If Parameters.RowData.IncomingInvoiceType = Enums.InvoiceType.Invoice Then
+		AccountingAnalytics.Debit = Debit.IncomingAccount;
+	Else
+		AccountingAnalytics.Debit = Debit.IncomingAccountReturn;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, IncomingTaxInfo);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.ObjectData.Partner, 
+	                                                   Parameters.ObjectData.Agreement,
+	                                                   Parameters.ObjectData.Currency);
+	                                                   
+	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetAnalytics_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+	
+	TaxVat = TaxesServer.GetVatRef();
+	
+	OutgoingTaxInfo = New Structure();
+	OutgoingTaxInfo.Insert("Tax", TaxVat);
+	OutgoingTaxInfo.Insert("VatRate", Parameters.RowData.OutgoingVatRate);
+	
+	// Debit
+	Debit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.ObjectData.Partner, 
+	                                                   Parameters.ObjectData.Agreement,
+	                                                   Parameters.ObjectData.Currency);
+	                                                   
+	AccountingAnalytics.Debit = Debit.AccountTransactionsOther;
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("Partner", Parameters.ObjectData.Partner);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, OutgoingTaxInfo);
+	If Parameters.RowData.OutgoingInvoiceType = Enums.InvoiceType.Invoice Then
+		AccountingAnalytics.Credit = Credit.OutgoingAccount;
+	Else
+		AccountingAnalytics.Credit = Credit.OutgoingAccountReturn;
+	EndIf;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, OutgoingTaxInfo);
+	
+	Return AccountingAnalytics;
+EndFunction
 
 //// Expense - Other period expense
 //Function GetAnalytics_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses(Parameters)
@@ -379,13 +501,13 @@ EndFunction
 //	Return AccountingAnalytics;
 //EndFunction
 //
-//Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
-//	Return Value;
-//EndFunction
-//
-//Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
-//	Return Value;
-//EndFunction
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
 
 #EndRegion
 

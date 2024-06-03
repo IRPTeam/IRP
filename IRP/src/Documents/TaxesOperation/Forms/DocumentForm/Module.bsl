@@ -21,7 +21,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-	//AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -362,12 +362,12 @@ EndProcedure
 
 &AtClient
 Procedure EditAccounting(Command)
-	CurrentData = ThisObject.Items.CostList.CurrentData;
+	CurrentData = ThisObject.Items.TaxesDifference.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	UpdateAccountingData();
-	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "CostList");
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "TaxesDifference");
 EndProcedure
 
 &AtServer
@@ -376,7 +376,7 @@ Procedure UpdateAccountingData()
 	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
 	AccountingClientServer.UpdateAccountingTables(Object, 
 			                                      _AccountingRowAnalytics, 
-		                                          _AccountingExtDimensions, "CostList");
+		                                          _AccountingExtDimensions, "TaxesDifference");
 	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure

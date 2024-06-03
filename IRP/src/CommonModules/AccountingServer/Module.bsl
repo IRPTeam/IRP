@@ -260,6 +260,24 @@ Function GetOperationsDefinition()
 	
 	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
+	
+	// Taxes operation	
+	ArrayOfTaxesOperationTransactionTypes_Offset = New Array();
+	ArrayOfTaxesOperationTransactionTypes_Offset.Add(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment);
+	ArrayOfTaxesOperationTransactionTypes_Offset.Add(Enums.TaxesOperationTransactionType.TaxOffset);
+	
+	Map.Insert(AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Offset));
+		
+	ArrayOfTaxesOperationTransactionTypes_Payment = New Array();
+	ArrayOfTaxesOperationTransactionTypes_Payment.Add(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment);
+	ArrayOfTaxesOperationTransactionTypes_Payment.Add(Enums.TaxesOperationTransactionType.TaxPayment);
+	
+	Map.Insert(AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
+		
+	Map.Insert(AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
 		
 	Return Map;
 EndFunction
@@ -1631,7 +1649,9 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
 		Return IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
-		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);		
+		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.TaxesOperation Then
+		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);			
 	EndIf;
 	
 	Return False; // is used operation
@@ -1678,7 +1698,7 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
-		
+				
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
@@ -2455,6 +2475,34 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return False;
+	EndIf;
+	Return True;
+EndFunction
+
+Function IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing Then
+		If ValueIsFilled(RowData.IncomingVatRate) And ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
+	ElsIf Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions Then
+		If ValueIsFilled(RowData.IncomingVatRate) And Not ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
+	ElsIf Operation = AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing Then
+		If Not ValueIsFilled(RowData.IncomingVatRate) And ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
 	EndIf;
 	Return True;
 EndFunction

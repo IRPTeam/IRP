@@ -121,11 +121,34 @@ Function CalculateTaxDifference(val DocObject) Export
 		Calculate_TaxPayment(MaxTableName, MaxTable, Result);
 	EndIf;
 	
+	TaxesDifferenceTable = DocObject.TaxesDifference.Unload();
+	For Each Row In Result Do
+		Filter = New Structure("IncomingVatRate, IncomingInvoiceType, OutgoingVatRate, OutgoingInvoiceType");
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = TaxesDifferenceTable.FindRows(Filter);
+		If ArrayOfRows.Count() = 1 Then
+			If ValueIsFilled(ArrayOfRows[0].Key) Then
+				Row.Key = ArrayOfRows[0].Key;
+			EndIf;
+		EndIf;
+		
+		For Each FilteredRow In ArrayOfRows Do
+			FilteredRow.Key = "";
+		EndDo;
+	EndDo;
+	
 	Return Result;
 EndFunction
 
 Function GetTaxesDifferenceRow()
-	Return New Structure("Key, IncomingVatRate, IncomingInvoiceType, OutgoingVatRate, OutgoingInvoiceType, Amount");
+	DiffRow = New Structure();
+	DiffRow.Insert("Key", "");
+	DiffRow.Insert("IncomingVatRate"     , Catalogs.TaxRates.EmptyRef());
+	DiffRow.Insert("IncomingInvoiceType" , Enums.InvoiceType.EmptyRef());
+	DiffRow.Insert("OutgoingVatRate"     , Catalogs.TaxRates.EmptyRef());
+	DiffRow.Insert("OutgoingInvoiceType" , Enums.InvoiceType.EmptyRef());
+	DiffRow.Insert("Amount", 0);
+	Return DiffRow;
 EndFunction
 
 Function Calculate_TaxOffset(MinTableName, MinTable, MaxTableName, MaxTable, Result)

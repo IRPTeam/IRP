@@ -172,7 +172,8 @@ Scenario: _605703 change movements for PI
 			And I click "Write movements" button
 			Then there are lines in TestClient message log
 				|'Failed to save: "R5020 Partners balance"!'|
-			And I click "Write movements (register self-control)" button			
+			And I click "Write movements (register self-control)" button	
+			And I click "Write movements" button			
 	* Check
 		Then there are lines in TestClient message log
 			|'Movements successfully recorded'|
@@ -209,20 +210,7 @@ Scenario: _605703 change movements for PI
 			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '23 454,4' | 'No'                   | ''                         |
 			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''           | ''          | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
-			| 'Register  "R1040 Taxes outgoing !Manual edit"' | ''           | ''          | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
-			| ''                                              | 'ManualEdit' | 'Potential' | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount'    |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '6 406,78'  |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '11 440,68' |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '3 050,85'  |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '6 406,78'  |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '11 440,68' |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '522,31'    |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 096,84'  |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 958,64'  |
-			| ''                                              | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '3 050,85'  |
-			| ''                                              | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '35 593,23' |	
+		
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

@@ -3384,8 +3384,7 @@ Scenario: _0991198 check DepreciationCalculation movements
 		And "RegisterRecords" table became equal
 			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr'   | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
 			| '31.03.2024 00:00:00' | '420.3'      | '1' | '4,17'   | ''              | 'Yes'      | 'TRY'             | ''                | '4,17'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '7501'       | ''                 | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' | ''                    | '4,17'          | ''                    |		
-		And I close all client application windows
-
+		And I close all client application windows	
 
 Scenario: _0991199 check create JE from Data processor fix document problems
 	And I close all client application windows
@@ -3397,4 +3396,6 @@ Scenario: _0991199 check create JE from Data processor fix document problems
 		And I input "31.03.2024" text in the field named "DateEnd"
 		And I click the button named "Select"
 		And in the table "DocumentList" I click "Fill documents" button
-		Then the number of "DocumentList" table lines is "больше" "10"	
+		Then the number of "DocumentList" table lines is "больше" "10"
+
+

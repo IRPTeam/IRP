@@ -2027,7 +2027,7 @@ Scenario: _0991041 check account priority for service (ExpenseType, CostRevenueC
 			| "Debit" | "Partner"                     | "Business unit" | "Partner term"                                | "Credit" | "Operation"                                                                        |
 			| "5202"  | "Customer 2 (2 partner term)" | ""              | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
 			| "4010"  | ""                            | ""              | ""                                            | "9100"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
-			| "4010"  | "VAT"                         | ""              | ""                                            | "5303"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
+			| "4010"  | "VAT"                         | ""              | ""                                            | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
 		And I close current window
 	* Check account (CostRevenueCenter filled, RevenueType filled)
 		And I select "Expence and revenue 1" from "Revenue type" drop-down list by string in "ItemList" table
@@ -2036,8 +2036,9 @@ Scenario: _0991041 check account priority for service (ExpenseType, CostRevenueC
 		And in the table "ItemList" I click "Edit accounting" button			
 		And "AccountingAnalytics" table contains lines
 			| "Debit" | "Partner"                     | "Business unit" | "Partner term"                                | "Credit" | "Operation"                                                                        |
+			| "5202"  | "Customer 2 (2 partner term)" | ""              | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
 			| "4010"  | "Business unit 2"             | ""              | ""                                            | "9102"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
-			| "4010"  | "VAT"                         | ""              | "Business unit 2"                             | "5303"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
+			| "4010"  | "VAT"                         | ""              | "Business unit 2"                             | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
 		And I close current window
 	* Check account (CostRevenueCenter empty, RevenueType filled)
 		And I input "" text in "Profit loss center" field of "ItemList" table
@@ -2049,18 +2050,20 @@ Scenario: _0991041 check account priority for service (ExpenseType, CostRevenueC
 		And in the table "ItemList" I click "Edit accounting" button
 		And "AccountingAnalytics" table contains lines
 			| "Debit" | "Partner"                     | "Business unit" | "Partner term"                                | "Credit" | "Operation"                                                                        |
+			| "5202"  | "Customer 2 (2 partner term)" | ""              | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
 			| "4010"  | ""                            | ""              | ""                                            | "9100"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
-			| "4010"  | "VAT"                         | ""              | ""                                            | "5303"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
+			| "4010"  | "VAT"                         | ""              | ""                                            | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
 		And I close current window
 	* Select another CostRevenueCenter and check account
 		And I select "Business unit 3" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I input "Expence and revenue 1" text in "Revenue type" field of "ItemList" table
 		And I click "Post" button
 		And in the table "ItemList" I click "Edit accounting" button			
-		And "AccountingAnalytics" table contains lines
+		And "AccountingAnalytics" table became equal
 			| "Debit" | "Partner"                     | "Business unit" | "Partner term"                                | "Credit" | "Operation"                                                                        |
+			| "5202"  | "Customer 2 (2 partner term)" | ""              | "Individual partner term 1 (by partner term)" | "4010"   | "SalesInvoice DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions)" |
 			| "4010"  | "Business unit 3"             | ""              | ""                                            | "9101"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)"              |
-			| "4010"  | "VAT"                         | ""              | "Business unit 3"                             | "5303"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |	
+			| "4010"  | "VAT"                         | ""              | "Business unit 3"                             | "5302"   | "SalesInvoice DR (R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)"         |		
 		And I close current window
 	* Check account (CostRevenueCenter filled, RevenueType empty)
 		And I select "Business unit 2" from "Profit loss center" drop-down list by string in "ItemList" table

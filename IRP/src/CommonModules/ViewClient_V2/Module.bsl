@@ -1522,6 +1522,106 @@ EndProcedure
 
 #EndRegion
 
+#Region TAXES_INCOMING_OUTGOING
+
+Function TaxesIncomingOutgoingBeforeAddRow(Object, Form, TableName, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, TableName, Cancel, Clone, CurrentData,
+		"TaxesIncomingOutgoingOnAddRowFormNotify", "TaxesIncomingOutgoingOnCopyRowFormNotify");
+	Form.Items[TableName].CurrentRow = NewRow.GetID();
+	If Form.Items[TableName].CurrentRow <> Undefined Then
+		Form.Items[TableName].ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TaxesIncomingOutgoingOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
+EndProcedure
+
+Procedure TaxesIncomingOutgoingOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
+EndProcedure
+
+Procedure TaxesIncomingOutgoingAfterDeleteRow(Object, Form, TableName) Export
+	DeleteRows(Object, Form, TableName, "TaxesIncomingOutgoingAfterDeleteRowFormNotify");
+EndProcedure
+
+Procedure TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
+EndProcedure
+
+Procedure TaxesIncomingOutgoingLoad(Object, Form, TableName, Address, GroupColumn = "", SumColumn = "") Export
+	Parameters = GetLoadParameters(Object, Form, TableName, Address, GroupColumn, SumColumn);
+	Parameters.LoadData.ExecuteAllViewNotify = True;
+	ControllerClientServer_V2.AddEmptyRowsForLoad(Parameters);
+	ControllerClientServer_V2.TaxesIncomingOutgoingLoad(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_COLUMNS
+
+#Region TAXES_INCOMING_OUTGOING_VAT_RATE
+
+// TaxesIncomingOutgoing.VatRate
+Procedure TaxesIncomingOutgoingVatRateOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.TaxesIncomingOutgoingVatRateOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_NET_AMOUNT
+
+// TaxesIncomingOutgoing.NetAmount
+Procedure TaxesIncomingOutgoingNetAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.TaxesIncomingOutgoingNetAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_TAX_AMOUNT
+
+// TaxesIncomingOutgoing.TaxAmount
+Procedure TaxesIncomingOutgoingTaxAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.TaxesIncomingOutgoingTaxAmountOnChange(Parameters);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_TOTAL_AMOUNT
+
+// TaxesIncomingOutgoing.TotalAmount
+Procedure TaxesIncomingOutgoingTotalAmountOnChange(Object, Form, TableName, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, TableName, CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
+	ControllerClientServer_V2.TaxesIncomingOutgoingTotalAmountOnChange(Parameters);
+EndProcedure
+
+Procedure OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "TaxesOperation" Then
+		Parameters.Form.CalculateTaxesDifference();
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region CHEQUE_BONDS
 
 Function ChequeBondsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export

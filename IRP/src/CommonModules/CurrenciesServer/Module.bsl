@@ -299,20 +299,20 @@ EndFunction
 
 Function IsUseAgreementMovementType(RecMetadata)
 	
-	TypeOfRecordSetsArray = New Array();
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
+	ExcludeRegisters = New Array();
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
+		
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R6080T_OtherPeriodsRevenues);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R5022T_Expenses);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R5021T_Revenues);
 	
-	//TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers);
-	//TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R1020B_AdvancesToVendors);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
 	
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R6080T_OtherPeriodsRevenues);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R5022T_Expenses);
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.R5021T_Revenues);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R2040B_TaxesIncoming);
+	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R1040B_TaxesOutgoing);
 	
-	TypeOfRecordSetsArray.Add(Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
-	
-	If TypeOfRecordSetsArray.Find(RecMetadata) = Undefined Then
+	If ExcludeRegisters.Find(RecMetadata) = Undefined Then
 		Return True;
 	Else
 		Return False;
@@ -376,6 +376,8 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	AddAmountsColumns(RecordSet, "VendorTransaction");
 	AddAmountsColumns(RecordSet, "VendorAdvance");
 	AddAmountsColumns(RecordSet, "OtherTransaction");
+	AddAmountsColumns(RecordSet, "TaxableAmount");
+	AddAmountsColumns(RecordSet, "TaxAmount");
 
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
@@ -487,6 +489,18 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|			THEN 0
 	|		ELSE (RecordSet.OtherTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
 	|	END AS Number(15,2)) AS OtherTransaction,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.TaxableAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS TaxableAmount,
+	|	CAST(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.TaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END AS Number(15,2)) AS TaxAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -528,6 +542,8 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|	CAST(RecordSet.VendorTransaction AS Number(15,2)) AS VendorTransaction,
 	|	CAST(RecordSet.VendorAdvance AS Number(15,2)) AS VendorAdvance,
 	|	CAST(RecordSet.OtherTransaction AS Number(15,2)) AS OtherTransaction,
+	|	CAST(RecordSet.TaxableAmount AS Number(15,2)) AS TaxableAmount,
+	|	CAST(RecordSet.TaxAmount AS Number(15,2)) AS TaxAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -1273,7 +1289,7 @@ EndFunction
 
 Function GetMetadataReisterName(RegisterName)
 	If StrStartsWith(RegisterName, "R5020B_PartnersBalance") Then
-		Return "R5020B_PartnersBalance";
+		Return "R5020B_PartnersBalance";	
 	Else
 		Return RegisterName;
 	EndIf;

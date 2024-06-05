@@ -432,15 +432,16 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount,
-		|	ItemLIst.NetAmount AS TaxableAmount
+		|	ItemList.TaxAmount AS Amount,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	ItemList.TaxAmount <> 0";
 EndFunction
 
 Function R4050B_StockInventory()

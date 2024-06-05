@@ -435,11 +435,6 @@ Scenario: 961069 check R5022T_Expenses register access (admin)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R5022T_Expenses"
 	Then the number of "List" table lines is "равно" "9"
 
-Scenario: 961070 check R5041B_TaxesPayable register access (admin)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R5041B_TaxesPayable"
-	Then the number of "List" table lines is "равно" "3"
-
 // Scenario: 961071 check R6010B_BatchWiseBalance register access (admin)
 // 	And I close all client application windows
 // 	Given I open hyperlink "e1cib/list/AccumulationRegister.R6010B_BatchWiseBalance"
@@ -1101,11 +1096,6 @@ Scenario: 962069 check R5022T_Expenses register access (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R5022T_Expenses"
 	Then the number of "List" table lines is "равно" "4"
-
-Scenario: 962070 check R5041B_TaxesPayable register access (LimitedAccess)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R5041B_TaxesPayable"
-	Then the number of "List" table lines is "равно" "2"
 
 // Scenario: 962071 check R6010B_BatchWiseBalance register access (LimitedAccess)
 // 	And I close all client application windows

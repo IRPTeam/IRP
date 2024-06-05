@@ -105,7 +105,6 @@
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
-  <registerRecords>AccumulationRegister.R5041B_TaxesPayable</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.DELETE_R8013B_ConsignorBatchWiseBalance</registerRecords>

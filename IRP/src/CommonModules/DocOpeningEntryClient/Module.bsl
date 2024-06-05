@@ -229,3 +229,60 @@ Procedure EmployeeListSalaryTypeOnChange(Object, Form, Item, CurrentData = Undef
 EndProcedure
 
 #EndRegion
+
+
+#Region TAXES_INCOMING
+
+Procedure TaxesIncomingBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.TaxesIncomingOutgoingBeforeAddRow(Object, Form, "TaxesIncoming", Cancel, Clone);
+EndProcedure
+
+Procedure TaxesIncomingAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRow(Object, Form, "TaxesIncoming");
+EndProcedure
+
+Procedure TaxesIncomingVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingVatRateOnChange(Object, Form, "TaxesIncoming", CurrentData);
+EndProcedure
+
+Procedure TaxesIncomingNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingNetAmountOnChange(Object, Form, "TaxesIncoming", CurrentData);
+EndProcedure
+
+Procedure TaxesIncomingTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingTaxAmountOnChange(Object, Form, "TaxesIncoming", CurrentData);
+EndProcedure
+
+Procedure TaxesIncomingTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingTotalAmountOnChange(Object, Form, "TaxesIncoming", CurrentData);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_OUTGOING
+
+Procedure TaxesOutgoingBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.TaxesIncomingOutgoingBeforeAddRow(Object, Form, "TaxesOutgoing", Cancel, Clone);
+EndProcedure
+
+Procedure TaxesOutgoingAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRow(Object, Form, "TaxesOutgoing");
+EndProcedure
+
+Procedure TaxesOutgoingVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingVatRateOnChange(Object, Form, "TaxesOutgoing", CurrentData);
+EndProcedure
+
+Procedure TaxesOutgoingNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingNetAmountOnChange(Object, Form, "TaxesOutgoing", CurrentData);
+EndProcedure
+
+Procedure TaxesOutgoingTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingTaxAmountOnChange(Object, Form, "TaxesOutgoing", CurrentData);
+EndProcedure
+
+Procedure TaxesOutgoingTotalAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TaxesIncomingOutgoingTotalAmountOnChange(Object, Form, "TaxesOutgoing", CurrentData);
+EndProcedure
+
+#EndRegion

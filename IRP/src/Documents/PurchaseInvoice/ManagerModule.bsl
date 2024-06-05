@@ -981,15 +981,17 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Period,
 		|	ItemList.Company,
 		|	ItemList.Branch,
+		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.NetAmount AS TaxableAmount,
-		|	ItemList.TaxAmount AS TaxAmount
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
+		|	ItemList.TaxAmount AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
-		|	ItemList.IsPurchase";
+		|	ItemList.IsPurchase
+		|	AND ItemList.TaxAmount <> 0";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1504,6 +1506,7 @@ Function T1040T_AccountingAmounts()
 		|	ItemList as ItemList
 		|WHERE
 		|	ItemList.IsPurchase
+		|	AND ItemList.TaxAmount <> 0
 		|
 		|UNION ALL
 		|

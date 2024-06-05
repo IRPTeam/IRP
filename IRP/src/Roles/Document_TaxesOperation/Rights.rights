@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://v8.1c.ru/8.2/roles" xsi:type="Rights">
+	<setForNewObjects>false</setForNewObjects>
+	<setForAttributesByDefault>true</setForAttributesByDefault>
+	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
+	<object>
+		<name>Document.TaxesOperation</name>
+		<right>
+			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#CheckDocumentAccess()</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePostingRegular</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>EditDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistorySettings</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UpdateDataHistoryVersionComment</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#CheckDocumentAccess()</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#CheckDocumentAccess()</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<restrictionTemplate>
+		<name>CheckDocumentAccess</name>
+		<condition>
+#If Not &amp;UseObjectAccess #Then
+	// Access restiction not using. Set UseObjectAccess functional option TRUE
+	WHERE TRUE
+#Else
+Table
+WHERE NOT (FALSE) IN (
+	SELECT
+		MIN((ObjectAccessKeysFilterDataList.Key = "" OR NOT AG.Key IS NULL))
+		
+	FROM InformationRegister.T9100A_ObjectAccessMap AS T9100A_ObjectAccessMap
+		LEFT JOIN Catalog.ObjectAccessKeys.FilterDataList AS ObjectAccessKeysFilterDataList
+			LEFT JOIN Catalog.AccessGroups.ObjectAccess AS AG
+				ON AG.Ref IN (&amp;CurrentUserAccessGroupList)
+					AND NOT AG.Ref.OnlyRegisters
+					AND AG.Key = ObjectAccessKeysFilterDataList.Key
+					AND (AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef1 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef2 
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef3
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef4
+					 	OR AG.ValueRef = ObjectAccessKeysFilterDataList.ValueRef5
+					 	OR  AG.DoNotControl)
+					#If #CurrentAccessRightName = "Insert" OR #CurrentAccessRightName = "Update" #Then
+					AND (AG.Modify)
+					#EndIf
+			ON ObjectAccessKeysFilterDataList.Ref = T9100A_ObjectAccessMap.ObjectAccessKeys
+		
+	WHERE
+		T9100A_ObjectAccessMap.ObjectRef = Table.Ref
+)#EndIf</condition>
+	</restrictionTemplate>
+</Rights>

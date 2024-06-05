@@ -186,6 +186,15 @@ Procedure SetEnabledToRegisterPages(Val ManualMovementsEditValue)
 	Items.Registers.ReadOnly = Not ManualMovementsEditValue;
 	Items.GroupWriteMovemementsMenu.Enabled = ManualMovementsEditValue;
 	
+	For Each MovementsPage In Items.Registers.ChildItems Do
+		If ManualMovementsEditValue Then
+			MovementsPage.Visible = True;
+		Else
+			//@skip-check dynamic-access-method-not-found
+			MovementsPage.Visible = ThisObject[MovementsPage.ChildItems[0].Name].Count() > 0;
+		EndIf;
+	EndDo;
+	
 EndProcedure
 
 &AtClient

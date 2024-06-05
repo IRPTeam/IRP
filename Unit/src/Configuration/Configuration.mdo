@@ -120,6 +120,7 @@
   <documents>Document.BatchReallocateIncoming</documents>
   <documents>Document.BatchReallocateOutgoing</documents>
   <documents>Document.Bundling</documents>
+  <documents>Document.CalculationDeservedVacations</documents>
   <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.CashExpense</documents>
   <documents>Document.CashPayment</documents>

@@ -346,56 +346,39 @@ Function _CalculateDaysForPaid_Vacation(VacationEmployeeTable, Parameters, Setti
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee,
-	|	SUM(R9545T_PaidVacationsTurnovers.PaidTurnover) AS PaidTurnover
-	|FROM
-	|	AccumulationRegister.R9545T_PaidVacations.Turnovers(BEGINOFPERIOD(&EndDate, YEAR), ENDOFPERIOD(&EndDate, YEAR),
-	|		Recorder, (Company, Employee) IN
-	|		(SELECT
-	|			tmp.Company,
-	|			tmp.Employee
-	|		FROM
-	|			tmp AS tmp)) AS R9545T_PaidVacationsTurnovers
-	|WHERE
-	|	R9545T_PaidVacationsTurnovers.Recorder <> &Recorder
-	|GROUP BY
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	tmp.Company,
 	|	tmp.Employee,
-	|	COUNT(tmp.Date) AS CountDates
+	|	COUNT(tmp.Date) AS CountDates,
+	|	MAX(ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0)) AS VacationDays,
+	|	MAX(ISNULL(R9545T_PaidVacationsTurnovers.PaidTurnover, 0)) AS PaidDays
 	|FROM
 	|	tmp AS tmp
+	|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Balance(ENDOFPERIOD(&Date, Month),) AS
+	|			R9541T_VacationUsageBalance
+	|		ON tmp.Company = R9541T_VacationUsageBalance.Company
+	|		AND tmp.Employee = R9541T_VacationUsageBalance.Employee
+	|		LEFT JOIN AccumulationRegister.R9545T_PaidVacations.Turnovers(BEGINOFPERIOD(&Date, Month), ENDOFPERIOD(&Date,
+	|			Month), Recorder,) AS R9545T_PaidVacationsTurnovers
+	|		ON tmp.Company = R9545T_PaidVacationsTurnovers.Company
+	|		AND tmp.Employee = R9545T_PaidVacationsTurnovers.Employee
+	|		AND R9545T_PaidVacationsTurnovers.Recorder <> &Recorder
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Employee";
 	Query.SetParameter("tmp", VacationEmployeeTable);
-	Query.SetParameter("EndDate", Parameters.EndDate);
+	Query.SetParameter("Date", Parameters.BeginDate);
 	Query.SetParameter("Recorder", Parameters.Ref);
 	
-	QueryResults = Query.ExecuteBatch();
-	PaidDays = QueryResults[1].Unload();
-	TotalDays = QueryResults[2].Unload();
+	TotalDays = Query.Execute().Unload();
 	
 	For Each TotalRow In TotalDays Do
 		Filter = New Structure();
 		Filter.Insert("Company"  , TotalRow.Company);
 		Filter.Insert("Employee" , TotalRow.Employee);
 		
-		PaidRows = PaidDays.FindRows(Filter);
-		_PaidDays = 0;
-		For Each PaidRow In PaidRows Do
-			_PaidDays = _PaidDays + PaidRow.PaidTurnover;
-		EndDo;
-		
 		EmployeeRows = VacationEmployeeTable.FindRows(Filter);
 						
-		CalculatePaidDays(_PaidDays, Settings.VacationDays, EmployeeRows, "IsPaidVacation");
+		CalculatePaidDays(TotalRow.PaidDays, TotalRow.VacationDays, EmployeeRows, "IsPaidVacation");
 	EndDo;
 	
 	Return VacationEmployeeTable;

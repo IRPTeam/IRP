@@ -12,57 +12,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
-	
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
-	"SELECT
-	|	MIN(EmployeeList.BeginDate) AS BeginDate,
-	|	MAX(EmployeeList.EndDate) AS EndDate,
-	|	DATETIME(1, 1, 1) AS Date
-	|FROM
-	|	Document.EmployeeVacation.EmployeeList AS EmployeeList
-	|WHERE
-	|	EmployeeList.Ref = &Ref";
-	Query.SetParameter("Ref", Ref);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	DateTable = QueryTable.CopyColumns("Date");
-	If QueryTable.Count() Then
-		_CurrentDate = BegOfDay(QueryTable[0].BeginDate);
-		While _CurrentDate <= BegOfDay(QueryTable[0].EndDate) Do
-			DateTable.Add().Date = _CurrentDate;
-			_CurrentDate = BegOfDay(EndOfDay(_CurrentDate) + 1);
-		EndDo;
-	EndIf;
-	Query.SetParameter("DateTable", DateTable);
-	
-	Query.Text = 
-	"SELECT
-	|	DateTable.Date
-	|INTO DateTable
-	|FROM
-	|	&DateTable AS DateTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	EmployeeList.Ref.Date AS Period,
-	|	DateTable.Date AS Date,
-	|	EmployeeList.Employee AS Employee,
-	|	EmployeeList.Ref.Company AS Company,
-	|	EmployeeList.Ref.Branch AS Branch
-	|INTO EmployeeVacations
-	|FROM
-	|	Document.EmployeeVacation.EmployeeList AS EmployeeList
-	|		LEFT JOIN DateTable AS DateTable
-	|		ON DateTable.Date >= EmployeeList.BeginDate
-	|		AND DateTable.Date <= EmployeeList.EndDate
-	|		AND EmployeeList.Ref = &Ref
-	|WHERE
-	|	EmployeeList.Ref = &Ref";
-	Query.Execute();
-	
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return Tables;
 EndFunction
@@ -134,9 +83,13 @@ Function GetInformationAboutMovements(Ref) Export
 EndFunction
 
 Function GetAdditionalQueryParameters(Ref)
+	RefData = CommonFunctionsServer.GetAttributesFromRef(Ref, "Company, EndDate");
+	
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
-	StrParams.Insert("DateBefore", New Boundary(CommonFunctionsServer.GetRefAttribute(Ref, "Date"), BoundaryType.Excluding));
+	StrParams.Insert("Company", RefData.Company);
+	StrParams.Insert("Period", EndOfDay(RefData.EndDate));
+	StrParams.Insert("BeforEnd", New Boundary(EndOfDay(RefData.EndDate), BoundaryType.Excluding));
 	Return StrParams;
 EndFunction
 
@@ -147,7 +100,6 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(T9540S_EmployeeVacations());
 	QueryArray.Add(R9541T_VacationUsage());
 	Return QueryArray;
 EndFunction
@@ -160,61 +112,106 @@ EndFunction
 
 #Region Posting_MainTables
 
-Function T9540S_EmployeeVacations()
-	Return
-		"SELECT
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Date,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Branch,
-		|	EmployeeVacations.Employee
-		|INTO T9540S_EmployeeVacations
-		|FROM
-		|	EmployeeVacations AS EmployeeVacations
-		|WHERE
-		|	TRUE";
-EndFUnction
-
 Function R9541T_VacationUsage()
+	
 	Return
 		"SELECT
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Employee,
-		|	COUNT(DISTINCT EmployeeVacations.Date) AS Dates
-		|INTO tmp_VacationDays
+		|	T9510S_StaffingSliceLast.Company,
+		|	T9510S_StaffingSliceLast.Employee
+		|INTO tmpStaff
 		|FROM
-		|	EmployeeVacations AS EmployeeVacations
-		|GROUP BY
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Employee
+		|	InformationRegister.T9510S_Staffing.SliceLast(&Period, Company = &Company) AS T9510S_StaffingSliceLast
+		|WHERE
+		|	NOT T9510S_StaffingSliceLast.Fired
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Employee,
+		|	tmpStaff.Company,
+		|	tmpStaff.Employee,
 		|	CASE
-		|		WHEN ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) > EmployeeVacations.Dates
-		|			THEN EmployeeVacations.Dates
-		|		ELSE ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0)
-		|	END AS Days
-		|INTO R9541T_VacationUsage
+		|		WHEN NOT EmployeeCompanyLimits.DayLimit IS NULL
+		|			THEN EmployeeCompanyLimits.DayLimit
+		|		WHEN NOT EmployeeLimits.DayLimit IS NULL
+		|			THEN EmployeeLimits.DayLimit
+		|		WHEN NOT CompanyLimits.DayLimit IS NULL
+		|			THEN CompanyLimits.DayLimit
+		|		WHEN NOT AllLimits.DayLimit IS NULL
+		|			THEN AllLimits.DayLimit
+		|		ELSE 0
+		|	END AS DayLimit
+		|INTO tmpDayLimits
 		|FROM
-		|	tmp_VacationDays AS EmployeeVacations
-		|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Balance(&DateBefore,) AS R9541T_VacationUsageBalance
-		|		ON EmployeeVacations.Company = R9541T_VacationUsageBalance.Company
-		|		AND EmployeeVacations.Employee = R9541T_VacationUsageBalance.Employee
+		|	tmpStaff AS tmpStaff
+		|		LEFT JOIN InformationRegister.T9545S_VacationDaysLimits.SliceLast(&BeforEnd,) AS AllLimits
+		|		ON AllLimits.Company = VALUE(Catalog.Companies.EmptyRef)
+		|		AND AllLimits.Employee = VALUE(Catalog.Partners.EmptyRef)
+		|		LEFT JOIN InformationRegister.T9545S_VacationDaysLimits.SliceLast(&BeforEnd,) AS CompanyLimits
+		|		ON tmpStaff.Company = CompanyLimits.Company
+		|		AND CompanyLimits.Employee = VALUE(Catalog.Partners.EmptyRef)
+		|		LEFT JOIN InformationRegister.T9545S_VacationDaysLimits.SliceLast(&BeforEnd,) AS EmployeeLimits
+		|		ON tmpStaff.Employee = EmployeeLimits.Employee
+		|		AND EmployeeLimits.Company = VALUE(Catalog.Companies.EmptyRef)
+		|		LEFT JOIN InformationRegister.T9545S_VacationDaysLimits.SliceLast(&BeforEnd,) AS EmployeeCompanyLimits
+		|		ON tmpStaff.Company = EmployeeCompanyLimits.Company
+		|		AND tmpStaff.Employee = EmployeeCompanyLimits.Employee
 		|WHERE
-		|	ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) > 0
+		|	CASE
+		|		WHEN NOT EmployeeCompanyLimits.DayLimit IS NULL
+		|			THEN EmployeeCompanyLimits.DayLimit
+		|		WHEN NOT EmployeeLimits.DayLimit IS NULL
+		|			THEN EmployeeLimits.DayLimit
+		|		WHEN NOT CompanyLimits.DayLimit IS NULL
+		|			THEN CompanyLimits.DayLimit
+		|		WHEN NOT AllLimits.DayLimit IS NULL
+		|			THEN AllLimits.DayLimit
+		|		ELSE 0
+		|	END > 0
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
-		|DROP tmp_VacationDays";
-EndFUnction
+		|SELECT
+		|	tmpDayLimits.Company,
+		|	tmpDayLimits.Employee,
+		|	tmpDayLimits.DayLimit,
+		|	INT((DATEDIFF(BEGINOFPERIOD(&Period, Year), &Period, DAY) + 1) / (DATEDIFF(BEGINOFPERIOD(&Period, Year),
+		|		ENDOFPERIOD(&Period, Year), DAY) + 1) * tmpDayLimits.DayLimit) - ISNULL(R9541T_VacationUsageTurnovers.DaysReceipt,
+		|		0) AS Days
+		|INTO tmpDeservedDays
+		|FROM
+		|	tmpDayLimits AS tmpDayLimits
+		|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Turnovers(BEGINOFPERIOD(&Period, Year), &BeforEnd,,) AS
+		|			R9541T_VacationUsageTurnovers
+		|		ON tmpDayLimits.Company = R9541T_VacationUsageTurnovers.Company
+		|		AND tmpDayLimits.Employee = R9541T_VacationUsageTurnovers.Employee
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	&Period AS Period,
+		|	tmpDeservedDays.Company,
+		|	tmpDeservedDays.Employee,
+		|	tmpDeservedDays.Days
+		|INTO R9541T_VacationUsage
+		|FROM
+		|	tmpDeservedDays AS tmpDeservedDays
+		|WHERE
+		|	tmpDeservedDays.Days > 0
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP tmpStaff
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP tmpDayLimits
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|DROP tmpDeservedDays";
+	
+EndFunction
 
 #EndRegion
 
@@ -230,7 +227,6 @@ EndFUnction
 Function GetAccessKey(Obj) Export
 	AccessKeyMap = New Map;
 	AccessKeyMap.Insert("Company", Obj.Company);
-	AccessKeyMap.Insert("Branch", Obj.Branch);
 	Return AccessKeyMap;
 EndFunction
 

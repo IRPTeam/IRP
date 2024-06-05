@@ -104,6 +104,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CalculationDeservedVacations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Users</metadata>
     <use>Use</use>
   </content>
@@ -117,6 +121,10 @@
   </content>
   <content>
     <metadata>Document.AdditionalCostAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ExpenseAccruals</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -416,6 +424,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.RevenueAccruals</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailSalesReceipt</metadata>
     <use>Use</use>
   </content>
@@ -609,14 +621,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ExpenseAccruals</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.RevenueAccruals</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

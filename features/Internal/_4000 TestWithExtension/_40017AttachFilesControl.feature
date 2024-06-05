@@ -108,7 +108,7 @@ Scenario: _4001705 setting for Attached document settings
 		And I click "Save" button
 	* Check
 		And "FileSettings" table became equal
-			| 'Required' | 'File type'          | 'Naming format'                    | 'File extension' |
+			| 'Required' | 'File presention' | 'Naming format'                    | 'File extension' |
 			| 'Yes'      | 'Type'            | '%DocDate_Sales_Invoice%DocNumber' | '*.pdf, *.jpg'   |
 		And I click "Save and close" button
 		And "List" table contains lines

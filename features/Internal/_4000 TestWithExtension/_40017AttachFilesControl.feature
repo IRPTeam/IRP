@@ -120,8 +120,8 @@ Scenario: _4001705 setting for Attached document settings
 			| 'RetailReturnReceipt' |
 		And I select current line in "List" table
 		And I go to line in "FileSettings" table
-			| 'File type'          |
-			| 'Return request'  |
+			| "File presention" |
+			| "Return receipt"  |
 		And I select current line in "FileSettings" table
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 		And I click choice button of "File template" attribute in "FileSettings" table
@@ -145,14 +145,14 @@ Scenario: _4001705 check the display of the document template in the AttachedFil
 	* Check template
 		And I go to line in "DocumentsAttachedFiles" table
 			| 'File type'       | 'Required' |
-			| 'Return request'  | 'Yes'      |
+			| 'Return receipt'  | 'No'       |
 		And I activate "File" field in "CurrentFilesTable" table
 		And I select current line in "DocumentsAttachedFiles" table
 		Then the field named "Picture" is filled
 		And I close current window
 		And I go to line in "DocumentsAttachedFiles" table
 			| 'File type'       | 'Required' |
-			| 'Return receipt'  | 'No'       |
+			| 'Return request'  | 'Yes'      |
 		And I activate "File" field in "CurrentFilesTable" table
 		And I select current line in "DocumentsAttachedFiles" table
 		When I Check the steps for Exception

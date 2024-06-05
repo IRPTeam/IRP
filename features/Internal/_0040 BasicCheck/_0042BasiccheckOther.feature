@@ -721,13 +721,6 @@ Scenario: Open object form "R5022T_Expenses"
 		Then I raise "Failed to open information register form R5022T_Expenses" exception
 	And I close current window
 
-Scenario: Open object form "R5041B_TaxesPayable"
-
-	Given I open "R5041B_TaxesPayable" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R5041B_TaxesPayable" exception
-	And I close current window
-
 Scenario: Open object form "R1022B_VendorsPaymentPlanning"
 
 	Given I open "R1022B_VendorsPaymentPlanning" accumulation register default form

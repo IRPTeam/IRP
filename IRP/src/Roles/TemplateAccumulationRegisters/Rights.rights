@@ -1466,20 +1466,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R5041B_TaxesPayable</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R2040B_TaxesIncoming</name>
 		<right>
 			<name>Read</name>

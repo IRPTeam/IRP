@@ -253,7 +253,6 @@ Function GetIgnored_Fields()
 	Array.Add("ShipmentConfirmation.R4032B_GoodsInTransitOutgoing.*");
 	Array.Add("ShipmentConfirmation.R4034B_GoodsShipmentSchedule.*");
 	
-	//Array.Add("CommissioningOfFixedAsset.R4011B_FreeStocks.*");
 	Array.Add("CommissioningOfFixedAsset.R4014B_SerialLotNumber.Store");
 
 	Array.Add("DecommissioningOfFixedAsset.R4011B_FreeStocks.*");
@@ -391,36 +390,15 @@ Function GetIgnored_Fields()
 	Array.Add("ChequeBondTransactionItem.R2020B_AdvancesFromCustomers.Project");
 	Array.Add("ChequeBondTransactionItem.R2021B_CustomersTransactions.Project");
 
-	//Array.Add("CreditNote.R1020B_AdvancesToVendors.Order");
-	//Array.Add("CreditNote.R1021B_VendorsTransactions.Order");
-	//Array.Add("CreditNote.R2020B_AdvancesFromCustomers.Order");
-	//Array.Add("CreditNote.R2021B_CustomersTransactions.Order");
-	//Array.Add("CreditNote.T2014S_AdvancesInfo.Order");
-	//Array.Add("CreditNote.T2014S_AdvancesInfo.IsVendorAdvance");
-	//Array.Add("CreditNote.T2015S_TransactionsInfo.Order");
-	//Array.Add("CreditNote.T2015S_TransactionsInfo.IsCustomerTransaction");
-	//Array.Add("CreditNote.R5015B_OtherPartnersTransactions.Basis");
-
-	//Array.Add("DebitNote.R1020B_AdvancesToVendors.Order");
-	//Array.Add("DebitNote.R2020B_AdvancesFromCustomers.Order");
-	//Array.Add("DebitNote.R2021B_CustomersTransactions.Order");
-	//Array.Add("DebitNote.T2014S_AdvancesInfo.Order");
-	//Array.Add("DebitNote.T2014S_AdvancesInfo.IsCustomerAdvance");
-	//Array.Add("DebitNote.T2015S_TransactionsInfo.Order");
-	//Array.Add("DebitNote.T2015S_TransactionsInfo.IsVendorTransaction");
-	//Array.Add("DebitNote.R5015B_OtherPartnersTransactions.Basis");
-	
 	Array.Add("DebitCreditNote.R1020B_AdvancesToVendors.Order");
 	Array.Add("DebitCreditNote.R2020B_AdvancesFromCustomers.Order");
 	Array.Add("DebitCreditNote.T2015S_TransactionsInfo.Key");
 	
-	Array.Add("PurchaseInvoice.R1040B_TaxesOutgoing.TaxMovementType");
 	Array.Add("PurchaseInvoice.T2015S_TransactionsInfo.Key");
 	Array.Add("PurchaseInvoice.T2015S_TransactionsInfo.IsCustomerTransaction");
 	
 	Array.Add("PurchaseOrderClosing.T2014S_AdvancesInfo.IsCustomerAdvance");
 
-	Array.Add("PurchaseReturn.R1040B_TaxesOutgoing.TaxMovementType");
 	Array.Add("PurchaseReturn.R1021B_VendorsTransactions.Order");
 	Array.Add("PurchaseReturn.T2015S_TransactionsInfo.Order");
 	Array.Add("PurchaseReturn.T2015S_TransactionsInfo.Key");
@@ -443,7 +421,6 @@ Function GetIgnored_Fields()
 	Array.Add("RetailSalesReceipt.T2015S_TransactionsInfo.Project");
 	Array.Add("RetailReturnReceipt.R5015B_OtherPartnersTransactions.Basis");
 
-	Array.Add("SalesInvoice.R2040B_TaxesIncoming.TaxMovementType");
 	Array.Add("SalesInvoice.T2015S_TransactionsInfo.Key");
 	Array.Add("SalesInvoice.T2015S_TransactionsInfo.IsVendorTransaction");
 
@@ -451,7 +428,6 @@ Function GetIgnored_Fields()
 	Array.Add("SalesOrderClosing.T2014S_AdvancesInfo.IsVendorAdvance");
 
 	Array.Add("SalesReportFromTradeAgent.R2001T_Sales.SalesPerson");
-	Array.Add("SalesReportFromTradeAgent.R2040B_TaxesIncoming.TaxMovementType");
 	Array.Add("SalesReportFromTradeAgent.T2015S_TransactionsInfo.Key");
 	Array.Add("SalesReportFromTradeAgent.T2015S_TransactionsInfo.IsVendorTransaction");
 	
@@ -460,12 +436,10 @@ Function GetIgnored_Fields()
 	Array.Add("WorkSheet.R5022T_Expenses.AdditionalAnalytic");
 
 	Array.Add("SalesReturn.R2021B_CustomersTransactions.Order");
-	Array.Add("SalesReturn.R2040B_TaxesIncoming.TaxMovementType");
 	Array.Add("SalesReturn.T2015S_TransactionsInfo.Order");
 	Array.Add("SalesReturn.T2015S_TransactionsInfo.Key");
 	Array.Add("SalesReturn.T2015S_TransactionsInfo.IsVendorTransaction");
 
-	Array.Add("SalesReportToConsignor.R1040B_TaxesOutgoing.TaxMovementType");
 	Array.Add("SalesReportToConsignor.T2015S_TransactionsInfo.Key");
 	Array.Add("SalesReportToConsignor.T2015S_TransactionsInfo.IsCustomerTransaction");
 
@@ -670,7 +644,6 @@ Function GetIgnored_Fields()
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.Order");
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.IsPurchaseOrderClose");
 	Array.Add("OpeningEntry.T2014S_AdvancesInfo.IsSalesOrderClose");
-	//Array.Add("OpeningEntry.T2014S_AdvancesInfo.RecordType");
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.Order");
 	Array.Add("OpeningEntry.T2015S_TransactionsInfo.IsPaid");
 	Array.Add("OpeningEntry.R5015B_OtherPartnersTransactions.Basis");

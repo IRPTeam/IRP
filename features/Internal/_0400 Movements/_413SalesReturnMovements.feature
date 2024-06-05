@@ -352,25 +352,31 @@ Scenario: _041306 check Sales return movements by the Register  "R2021 Customer 
 			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '-214,68'     | 'Main Company'   | 'Distribution department'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Basic Partner terms, TRY'   | 'Sales return 101 dated 12.03.2021 08:44:18'   | ''        | 'Project 01'        | 'No'                     | ''                              |
 	And I close all client application windows
 
-Scenario: _041307 check Sales return movements by the Register  "R2040 Taxes incoming"
+Scenario: _041307 check Sales return movements by the Register  "R1040 Taxes outgoing"
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '101'       |
-	* Check movements by the Register  "R2040 Taxes incoming"
+	* Check movements by the Register  "R1040 Taxes outgoing"
 		And I click "Registrations report" button
-		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18'   | ''              | ''                      | ''                 | ''             | ''               | ''                          | ''      | ''           | ''                     |
-			| 'Document registrations records'               | ''              | ''                      | ''                 | ''             | ''               | ''                          | ''      | ''           | ''                     |
-			| 'Register  "R2040 Taxes incoming"'             | ''              | ''                      | ''                 | ''             | ''               | ''                          | ''      | ''           | ''                     |
-			| ''                                             | 'Record type'   | 'Period'                | 'Resources'        | ''             | 'Dimensions'     | ''                          | ''      | ''           | ''                     |
-			| ''                                             | ''              | ''                      | 'Taxable amount'   | 'Tax amount'   | 'Company'        | 'Branch'                    | 'Tax'   | 'Tax rate'   | 'Tax movement type'    |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '80,51'            | '14,49'        | 'Main Company'   | 'Distribution department'   | 'VAT'   | '18%'        | ''                     |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '418,64'           | '75,36'        | 'Main Company'   | 'Distribution department'   | 'VAT'   | '18%'        | ''                     |
-			| ''                                             | 'Receipt'       | '12.03.2021 08:44:18'   | '563,56'           | '101,44'       | 'Main Company'   | 'Distribution department'   | 'VAT'   | '18%'        | ''                     |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| 'Register  "R1040 Taxes outgoing"'           | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '2,48'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '12,9'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '14,49'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '14,49'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '17,37'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '75,36'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '75,36'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '101,44'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '101,44'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
 	And I close all client application windows
 
 Scenario: _041308 check Sales return movements by the Register  "R4014 Serial lot numbers"
@@ -881,7 +887,7 @@ Scenario: _041330 Sales return clear posting/mark for deletion
 			| 'R4050 Stock inventory'                |
 			| 'R2021 Customer transactions'          |
 			| 'R4031 Goods in transit (incoming)'    |
-			| 'R2040 Taxes incoming'                 |
+			| 'R1040 Taxes outgoing'                 |
 		And I close all client application windows
 	* Mark for deletion
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -918,7 +924,7 @@ Scenario: _041330 Sales return clear posting/mark for deletion
 			| 'R4050 Stock inventory'                |
 			| 'R2021 Customer transactions'          |
 			| 'R4031 Goods in transit (incoming)'    |
-			| 'R2040 Taxes incoming'                 |
+			| 'R1040 Taxes outgoing'                 |
 		And I close all client application windows
 
 Scenario: _041328 check Sales return movements by the Register  "R4010 Actual stocks" (Return from trade agent)
@@ -1031,18 +1037,18 @@ Scenario: _041336 check Sales return movements by the Register  "R2021 Customer 
 			| 'Register  "R2021 Customer transactions"'    |
 		And I close all client application windows
 
-Scenario: _041337 check Sales return movements by the Register  "R2040 Taxes incoming" (Return from trade agent)
+Scenario: _041337 check Sales return movements by the Register  "R1040 Taxes outgoing" (Return from trade agent)
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '192'       |
-	* Check movements by the Register  "R2040 Taxes incoming"
+	* Check movements by the Register  "R1040 Taxes outgoing"
 		And I click "Registrations report" button
-		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R2040 Taxes incoming"'    |
+			| 'Register  "R1040 Taxes outgoing"'    |
 		And I close all client application windows
 
 Scenario: _041338 check Sales return movements by the Register  "R5021 Revenues" (Return from trade agent)

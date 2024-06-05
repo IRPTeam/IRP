@@ -932,6 +932,13 @@
         <value>152</value>
       </code>
     </items>
+    <items id="04e3e9fe-41ec-4198-a420-7c57231371fe">
+      <name>Document_TaxesOperation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>153</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

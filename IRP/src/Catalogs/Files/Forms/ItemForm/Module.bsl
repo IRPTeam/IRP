@@ -1,3 +1,4 @@
+
 #Region FormEvents
 
 &AtServer
@@ -26,12 +27,20 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	ShowPicture();
+	ShowData();
 EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
-	ShowPicture();
+	ShowData();
+EndProcedure
+
+&AtClient
+Procedure Download(Command)
+	PictureParameters = CreatePictureParameters();
+	URL = PictureViewerClient.GetPictureURL(PictureParameters);
+	Dialog = New GetFilesDialogParameters();
+	GetFileFromServerAsync(URL, Object.Description, Dialog);			
 EndProcedure
 
 #EndRegion
@@ -56,12 +65,22 @@ Function CreatePictureParameters()
 EndFunction
 
 &AtClient
-Procedure ShowPicture()
-	If Not Object.Volume.IsEmpty() And PictureViewerServer.isImage("." + Object.Extension) Then
-		PictureParameters = CreatePictureParameters();
-
-		ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters)
-			+ """ height=""100%""></html>";
+Procedure ShowData()
+	If Not Object.Volume.IsEmpty() Then 
+		
+		If PictureViewerServer.isImage("." + Object.Extension) Then
+			PictureParameters = CreatePictureParameters();
+			ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters) + """ height=""100%""></html>";
+			Items.Picture.Visible = True;
+			Items.PDF.Visible = False;
+		ElsIf StrCompare(Object.Extension, "pdf") = 0 Then
+			PictureViewerClient.SetPDFForView(Object.Ref, PDF);
+			Items.Picture.Visible = False;
+			Items.PDF.Visible = True;
+		Else
+			Items.Picture.Visible = False;
+			Items.PDF.Visible = False;
+		EndIf;
 	EndIf;
 EndProcedure
 

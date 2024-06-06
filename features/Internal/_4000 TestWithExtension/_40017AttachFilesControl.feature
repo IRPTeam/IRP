@@ -120,8 +120,8 @@ Scenario: _4001705 setting for Attached document settings
 			| 'RetailReturnReceipt' |
 		And I select current line in "List" table
 		And I go to line in "FileSettings" table
-			| 'File presention' |
-			| 'Return request'  |
+			| "File presention" |
+			| "Return receipt"  |
 		And I select current line in "FileSettings" table
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 		And I click choice button of "File template" attribute in "FileSettings" table
@@ -139,20 +139,20 @@ Scenario: _4001705 check the display of the document template in the AttachedFil
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
 	* Check settings 
 		And "DocumentsAttachedFiles" table contains lines
-			| 'File presention' | 'Required' | 'Extension'            |
-			| 'Return request'  | 'Yes'      | '*.jpeg; *.png; *.jpg' |
-			| 'Return receipt'  | 'No'       | '*.pdf'                |
+			| 'File type'       | 'Required' |
+			| 'Return request'  | 'Yes'      |
+			| 'Return receipt'  | 'No'       |
 	* Check template
 		And I go to line in "DocumentsAttachedFiles" table
-			| 'Extension'            | 'File presention' | 'Required' |
-			| '*.jpeg; *.png; *.jpg' | 'Return request'  | 'Yes'      |
+			| 'File type'       | 'Required' |
+			| 'Return receipt'  | 'No'       |
 		And I activate "File" field in "CurrentFilesTable" table
 		And I select current line in "DocumentsAttachedFiles" table
 		Then the field named "Picture" is filled
 		And I close current window
 		And I go to line in "DocumentsAttachedFiles" table
-			| 'Extension' | 'File presention' | 'Required' |
-			| '*.pdf'     | 'Return receipt'  | 'No'       |
+			| 'File type'       | 'Required' |
+			| 'Return request'  | 'Yes'      |
 		And I activate "File" field in "CurrentFilesTable" table
 		And I select current line in "DocumentsAttachedFiles" table
 		When I Check the steps for Exception
@@ -178,7 +178,7 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 			| 'Document'                                            |
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
 		And I go to line in "DocumentsAttachedFiles" table
-			| 'File presention' | 'Required' |
+			| 'File type'          | 'Required' |
 			| 'Return request'  | 'Yes'      |	
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 		And Delay 10
@@ -219,8 +219,8 @@ Scenario: _4001713 check optional documents for RRR (pdf)
 			| 'Document'                                            |
 			| 'Retail return receipt 223 dated 08.05.2024 18:37:53' |
 		And I go to line in "DocumentsAttachedFiles" table
-			| 'Extension' | 'File presention' | 'Required' |
-			| '*.pdf'     | 'Return receipt'  | 'No'       |
+			| 'File type'          | 'Required' |
+			| 'Return receipt'  | 'No'       |
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/Test pdf 1 page.pdf"
 		And Delay 10
 		And I click the button named "AddNewDocument"

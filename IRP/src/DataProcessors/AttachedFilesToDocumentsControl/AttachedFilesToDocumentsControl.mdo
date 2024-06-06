@@ -254,7 +254,7 @@
       <name>FilePresention</name>
       <synonym>
         <key>en</key>
-        <value>File presention</value>
+        <value>File type</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

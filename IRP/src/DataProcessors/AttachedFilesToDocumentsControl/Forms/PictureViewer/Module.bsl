@@ -28,19 +28,14 @@ EndFunction
 
 &AtClient
 Procedure ShowPDF()
-	PictureParameters = PictureViewerServer.CreatePictureParameters(FileRef);
-	
-	URI = PictureViewerClient.GetPictureURL(PictureParameters);
-	PDFViewer.Read(URI);
+	PictureViewerClient.SetPDFForView(FileRef, PDFViewer);
 EndProcedure
 
 &AtClient
 Procedure ShowPicture()
 	If Not FileRef.IsEmpty() Then
 		PictureParameters = CreatePictureParameters(FileRef);
-
-		ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters)
-			+ """ height=""100%""></html>";
+		ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters) + """ height=""100%""></html>";
 	Else
 		Items.Picture.Visible = False;
 		Items.DecorationNoTemplate.Visible = True;

@@ -17,6 +17,10 @@ Procedure ChangeVsible(Form, Visible) Export
 	_arrayOfFormItems.Add("PaymentListTotalNetAmount");
 	_arrayOfFormItems.Add("PaymentListVATRate");
 	
+	_arrayOfFormItems.Add("TransactionsVatRate");
+	_arrayOfFormItems.Add("TransactionsNetAmount");
+	_arrayOfFormItems.Add("TransactionsTaxAmount");
+	
 	For Each _item In _arrayOfFormItems Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, _item) Then
 			Form.Items[_item].Visible = Visible;

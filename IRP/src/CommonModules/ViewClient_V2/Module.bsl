@@ -2975,6 +2975,34 @@ Procedure TransactionsLegalNameOnChange(Object, Form, CurrentData = Undefined) E
 	ControllerClientServer_V2.TransactionsLegalNameOnChange(Parameters);
 EndProcedure
 
+// Transactions.VatRate
+Procedure TransactionsVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsVatRateOnChange(Parameters);
+EndProcedure
+
+// Transactions.NetAmount
+Procedure TransactionsNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsNetAmountOnChange(Parameters);
+EndProcedure
+
+// Transactions.TaxAmount
+Procedure TransactionsTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsTaxAmountOnChange(Parameters);
+EndProcedure
+
+// Transactions.Amount
+Procedure TransactionsAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	ControllerClientServer_V2.TransactionsAmountOnChange(Parameters);
+EndProcedure
+
 #EndRegion
 
 #Region PAYROLL_LISTS

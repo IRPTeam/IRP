@@ -1152,6 +1152,7 @@ Procedure RevaluateCurrency(_TempTablesManager, ArrayOfRegisterNames, CurrencyRa
 				CurrentAmountValue = OtherCurrencyRow.Amount;
 				RevaluatedAmountValue = (ItemOfDataForRevaluate.CurrentBalanceByTransactionCurrency 
 					* CurrencyInfo[0].Rate) / CurrencyInfo[0].Multiplicity;
+				RevaluatedAmountValue = Round(RevaluatedAmountValue, 2);
 				
 				_IsExpense = False;
 				_IsRevenue = False;

@@ -1651,7 +1651,9 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
 		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.TaxesOperation Then
-		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);			
+		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);				
+	ElsIf DocMetadata = Metadata.Documents.Payroll Then
+		Return IsNotUsedOperation_Payroll(Operation, ObjectData, RowData);
 	EndIf;
 	
 	Return False; // is used operation
@@ -2505,6 +2507,28 @@ Function IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData)
 		EndIf;
 	EndIf;
 	Return True;
+EndFunction
+
+Function IsNotUsedOperation_Payroll(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Operation = AO.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes Then
+		If ValueIsFilled(RowData.Tax) And RowData.Tax.TaxPayer <> Enums.TaxPayers.Employee Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes Then
+		If ValueIsFilled(RowData.Tax) And RowData.Tax.TaxPayer <> Enums.TaxPayers.Company Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	Return False;
 EndFunction
 
 #EndRegion

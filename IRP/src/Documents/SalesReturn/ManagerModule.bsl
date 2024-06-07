@@ -901,7 +901,7 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	ItemList.TaxAmount AS Amount,
-		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
+		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemList

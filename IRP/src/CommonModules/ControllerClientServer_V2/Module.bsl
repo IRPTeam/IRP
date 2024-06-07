@@ -595,6 +595,7 @@ Function GetAllBindingsByDefault(Parameters)
 	
 	Binding.Insert("ItemList.VatRate"    , BindDefaultItemListVatRate(Parameters));
 	Binding.Insert("PaymentList.VatRate" , BindDefaultPaymentListVatRate(Parameters));
+	Binding.Insert("Transactions.VatRate" , BindDefaultTransactionsVatRate(Parameters));
 	
 	Binding.Insert("PaymentList.Currency"  , BindDefaultPaymentListCurrency(Parameters));
 	
@@ -6471,6 +6472,12 @@ Procedure TransactionsVatRateOnChange(Parameters) Export
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// Transactions.VatRate.Set
+Procedure SetTransactionsVatRate(Parameters, Results) Export
+	Binding = BindTransactionsVatRate(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
 // Transactions.VatRate.Get
 Function GetTransactionsVatRate(Parameters, _Key)
 	Return GetPropertyObject(Parameters, BindTransactionsVatRate(Parameters).DataPath, _Key);
@@ -6483,6 +6490,33 @@ Function BindTransactionsVatRate(Parameters)
 	Binding = New Structure();	
 	Return BindSteps("StepTransactionsCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindTransactionsVatRate");
 EndFunction
+
+// Transactions.VatRate.Default.Bind
+Function BindDefaultTransactionsVatRate(Parameters)
+	DataPath = "Transctions.VatRate";
+	Binding = New Structure();
+	Return BindSteps("StepTransactionsDefaultVatRateInList", DataPath, Binding, Parameters, "BindDefaultTransactionsVatRate");
+EndFunction
+
+// PaymentList.VatRate.DefaultVatRateInList.Step
+Procedure StepTransactionsDefaultVatRateInList(Parameters, Chain) Export
+	Chain.DefaultVatRateInList.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.DefaultVatRateInList.Setter = "SetTransactionsVatRate";
+	Options = ModelClientServer_V2.DefaultVatRateInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentVatRate  = GetTransactionsVatRate(Parameters, NewRow.Key);
+	Options.Date            = GetDate(Parameters);
+	Options.Company         = GetCompany(Parameters);
+	If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "Agreement") Then
+		Options.Agreement       = GetTransactionsAgreement(Parameters, NewRow.Key);
+	EndIf;
+	Options.DocumentName = Parameters.ObjectMetadataInfo.MetadataName;
+	Options.Key = NewRow.Key;
+	Chain.DefaultVatRateInList.Options.Add(Options);
+EndProcedure
 
 #EndRegion
 

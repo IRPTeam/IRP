@@ -114,6 +114,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
@@ -121,6 +123,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
 	// receipt inventory
@@ -2449,6 +2453,10 @@ Function IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction
@@ -2477,6 +2485,10 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction

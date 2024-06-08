@@ -140,7 +140,7 @@ Scenario: _2050001 preparation
 			And I finish line editing in "PaymentList" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-			And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "PaymentList" table		
+			And I select "Vendor, TRY" from "Partner term" drop-down list by string in "PaymentList" table		
 		And I click the button named "FormPost"
 		And I delete "$$BankPayment2050001$$" variable
 		And I delete "$$NumberBankPayment2050001$$" variable
@@ -276,7 +276,7 @@ Scenario: _2050001 preparation
 			And I finish line editing in "PaymentList" table
 			And I activate "Partner term" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-			And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "PaymentList" table	
+			And I select "Vendor, TRY" from "Partner term" drop-down list by string in "PaymentList" table	
 		And I click the button named "FormPost"
 		And I delete "$$CashPayment2050001$$" variable
 		And I delete "$$NumberCashPayment2050001$$" variable

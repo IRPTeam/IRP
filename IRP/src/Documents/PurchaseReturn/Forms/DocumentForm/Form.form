@@ -2910,6 +2910,36 @@
       <representationInContextMenu>Auto</representationInContextMenu>
      </items>
      <items xsi:type="form:Button">
+      <name>EditAccounting</name>
+      <id>811</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingExtendedTooltip</name>
+       <id>812</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccounting</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
       <name>EditQuantityInBaseUnit</name>
       <id>800</id>
       <visible>true</visible>
@@ -6356,6 +6386,40 @@
    <itemValueType/>
   </extInfo>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>12EA9C16-3D35-5122-2BFE-E0692313C679</value>
+  </title>
+  <id>179</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>153441B0-C20E-9F14-4846-68BAE5A6872C</value>
+  </title>
+  <id>180</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SearchByBarcode</name>
   <id>1</id>
@@ -6610,6 +6674,28 @@
     <name>EditQuantityInBaseUnit</name>
    </handler>
   </action>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>B235D49A-92E0-4E0C-C847-796D4E231AA3</value>
+  </title>
+  <id>15</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>

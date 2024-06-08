@@ -11343,17 +11343,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R5041B_TaxesPayable</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T6010S_BatchesInfo.Dimension.Document</name>
 		<right>
 			<name>Edit</name>

@@ -331,24 +331,42 @@ EndFunction
 Function GetDocumentsWithTax() Export
 	List = New ValueList();
 	For Each Document In Metadata.Documents Do
-		If Document.TabularSections.Find("PaymentList") <> Undefined Then
-			For Each _column In Document.TabularSections.PaymentList.Attributes Do
-				If Upper(_column.Name) = Upper("VatRate") Then
-					List.Add(Document.Name, Document.Synonym);
-					Break;
-				EndIf;
-			EndDo;					
-		EndIf;
+		FindTaxInTabularSection(Document, "PaymentList"  , List);
+		FindTaxInTabularSection(Document, "ItemList"     , List);
+		FindTaxInTabularSection(Document, "Transactions" , List);
 		
-		If Document.TabularSections.Find("ItemList") <> Undefined Then
-			For Each _column In Document.TabularSections.ItemList.Attributes Do
-				If Upper(_column.Name) = Upper("VatRate") Then
-					List.Add(Document.Name, Document.Synonym);
-					Break;
-				EndIf;
-			EndDo;					
-		EndIf;
+//		If Document.TabularSections.Find("PaymentList") <> Undefined Then
+//			For Each _column In Document.TabularSections.PaymentList.Attributes Do
+//				If Upper(_column.Name) = Upper("VatRate") Then
+//					List.Add(Document.Name, Document.Synonym);
+//					Break;
+//				EndIf;
+//			EndDo;					
+//		EndIf;
+//		
+//		If Document.TabularSections.Find("ItemList") <> Undefined Then
+//			For Each _column In Document.TabularSections.ItemList.Attributes Do
+//				If Upper(_column.Name) = Upper("VatRate") Then
+//					List.Add(Document.Name, Document.Synonym);
+//					Break;
+//				EndIf;
+//			EndDo;					
+//		EndIf;
 		
 	EndDo;
 	Return List;
 EndFunction
+
+Procedure FindTaxInTabularSection(Document, TabularSectionName, List)
+	If Document.TabularSections.Find(TabularSectionName) <> Undefined Then
+		For Each _column In Document.TabularSections[TabularSectionName].Attributes Do
+			If Upper(_column.Name) = Upper("VatRate") Then
+				List.Add(Document.Name, Document.Synonym);
+				Break;
+			EndIf;
+		EndDo;					
+	EndIf;
+EndProcedure
+
+
+

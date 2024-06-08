@@ -911,6 +911,13 @@
     <value>150</value>
    </code>
   </items>
+  <items id="ad2f21c9-8dda-44c6-9cfe-34d6f260ffb3">
+   <name>Catalog_AttachedDocumentSettings</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>151</value>
+   </code>
+  </items>
   <items id="5ba60815-19f1-4c55-a388-13cec899dc02">
    <name>Document_ExpenseAccruals</name>
    <description/>
@@ -923,6 +930,13 @@
    <description/>
    <code xsi:type="core:NumberValue">
     <value>152</value>
+   </code>
+  </items>
+  <items id="04e3e9fe-41ec-4198-a420-7c57231371fe">
+   <name>Document_TaxesOperation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>153</value>
    </code>
   </items>
  </predefined>

@@ -26,4 +26,11 @@
    <value>ED89A2A0-DA1C-9C0E-E16A-A066824D60A4</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="37edd0bb-5779-4d3d-a00f-58cd49b461a8">
+  <name>BundleByItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>55DA1CAA-A6C3-F160-0094-47635B786EA4</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

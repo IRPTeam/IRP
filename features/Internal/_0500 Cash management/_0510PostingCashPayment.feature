@@ -402,101 +402,108 @@ Scenario: _0510011 create Cash payment (independently)
 			| 'Number'                          |
 			| '$$NumberCashPayment0510013$$'    |
 	
-# Scenario: _0510012 check form for select basis document	
-# 		And I close all client application windows
-# 	* Create Cash payment in lire for Ferron BP (Purchase invoice in lire)
-# 		Given I open hyperlink "e1cib/list/Document.CashPayment"
-# 		And I click the button named "FormCreate"
-# 		* Filling in the details of the document
-# 			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
-# 			And I click Select button of "Company" field
-# 			And I go to line in "List" table
-# 				| Description      |
-# 				| Main Company     |
-# 			And I select current line in "List" table
-# 			And I click Select button of "Currency" field
-# 			And I activate "Description" field in "List" table
-# 			And I go to line in "List" table
-# 				| Code    | Description      |
-# 				| TRY     | Turkish lira     |
-# 			And I select current line in "List" table
-# 			And I click Select button of "Cash account" field
-# 			And I go to line in "List" table
-# 				| Description      |
-# 				| Cash desk №1     |
-# 			And I select current line in "List" table
-# 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-# 		* Filling in a partner in a tabular part
-# 			And I activate "Partner" field in "PaymentList" table
-# 			And I click choice button of "Partner" attribute in "PaymentList" table
-# 			And I go to line in "List" table
-# 				| Description     |
-# 				| Ferron BP       |
-# 			And I select current line in "List" table
-# 			And I click choice button of "Payee" attribute in "PaymentList" table
-# 			And I go to line in "List" table
-# 				| Description           |
-# 				| Company Ferron BP     |
-# 			And I select current line in "List" table
-# 		* Filling in an Partner term
-# 			And I click choice button of "Partner term" attribute in "PaymentList" table
-# 			And I go to line in "List" table
-# 				| 'Description'            |
-# 				| 'Vendor Ferron, TRY'     |
-# 			And I select current line in "List" table
-# 		* Check forms DocumentsForOutgoingPayment (current time)
-# 			And I finish line editing in "PaymentList" table
-# 			And I activate "Basis document" field in "PaymentList" table
-# 			And I select current line in "PaymentList" table
-# 			And "List" table contains lines
-# 				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-# 				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '136 000,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 			And I go to line in "List" table
-# 				| 'Amount'         |
-# 				| '136 000,00'     |
-# 			And I click "Select" button
-# 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
-# 			And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-# 			And I finish line editing in "PaymentList" table
-# 			And in the table "PaymentList" I click the button named "PaymentListAdd"
-# 			And I activate "Partner" field in "PaymentList" table
-# 			And I click choice button of "Partner" attribute in "PaymentList" table
-# 			And I go to line in "List" table
-# 				| 'Code'    | 'Description'     |
-# 				| '50'      | 'Ferron BP'       |
-# 			And I select current line in "List" table
-# 			And I activate "Partner term" field in "PaymentList" table
-# 			And I click choice button of "Partner term" attribute in "PaymentList" table
-# 			And I go to line in "List" table
-# 				| 'Description'            |
-# 				| 'Vendor Ferron, TRY'     |
-# 			And I select current line in "List" table
-# 			And I finish line editing in "PaymentList" table
-# 			And I activate "Basis document" field in "PaymentList" table
-# 			And I select current line in "PaymentList" table
-# 			And "List" table contains lines
-# 				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-# 				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 			And I close current window
-# 		* Check forms DocumentsForIncomingPayment (by document date)
-# 			And I input "{CurrentDate() - 86401}" text in the field named "Date"
-# 			And I move to "Payments" tab
-# 			And I go to line in "PaymentList" table
-# 				| '#'    | 'Partner'      | 'Partner term'          | 'Payee'                 |
-# 				| '2'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | 'Company Ferron BP'     |
-# 			And I finish line editing in "PaymentList" table
-# 			And I activate "Basis document" field in "PaymentList" table
-# 			And I select current line in "PaymentList" table
-# 			And I change "Status" radio button value to "By document date"
-# 			Then the number of "List" table lines is "равно" 0
-# 			And I change "Status" radio button value to "Current time"
-# 			And "List" table contains lines
-# 				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-# 				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
-# 		And I close all client application windows	
+Scenario: _0510012 check form for select basis document	
+ 		And I close all client application windows
+ 	* Create Cash payment in lire for Ferron BP (Purchase invoice in lire)
+	  	Given I open hyperlink "e1cib/list/Document.CashPayment"
+ 		And I click the button named "FormCreate"
+ 		* Filling in the details of the document
+ 			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+ 			And I click Select button of "Company" field
+ 			And I go to line in "List" table
+ 				| Description      |
+ 				| Main Company     |
+ 			And I select current line in "List" table
+ 			And I click Select button of "Currency" field
+ 			And I activate "Description" field in "List" table
+ 			And I go to line in "List" table
+ 				| Code    | Description      |
+ 				| TRY     | Turkish lira     |
+ 			And I select current line in "List" table
+ 			And I click Select button of "Cash account" field
+ 			And I go to line in "List" table
+ 				| Description      |
+ 				| Cash desk №1     |
+ 			And I select current line in "List" table
+ 		And in the table "PaymentList" I click the button named "PaymentListAdd"
+ 		* Filling in a partner in a tabular part
+ 			And I activate "Partner" field in "PaymentList" table
+ 			And I click choice button of "Partner" attribute in "PaymentList" table
+ 			And I go to line in "List" table
+ 				| Description     |
+ 				| Ferron BP       |
+ 			And I select current line in "List" table
+ 			And I click choice button of "Payee" attribute in "PaymentList" table
+ 			And I go to line in "List" table
+ 				| Description           |
+ 				| Company Ferron BP     |
+ 			And I select current line in "List" table
+ 		* Filling in an Partner term
+ 			And I click choice button of "Partner term" attribute in "PaymentList" table
+ 			And I go to line in "List" table
+ 				| 'Description'            |
+ 				| 'Vendor Ferron, TRY'     |
+ 			And I select current line in "List" table
+ 		* Check forms DocumentsForOutgoingPayment (current time)
+ 			And I finish line editing in "PaymentList" table
+ 			And I activate "Basis document" field in "PaymentList" table
+ 			And I select current line in "PaymentList" table
+ 			And "List" table contains lines
+ 				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
+ 				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '136 000,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+ 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+ 			And I go to line in "List" table
+ 				| 'Amount'         |
+ 				| '136 000,00'     |
+ 			And I click "Select" button
+ 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+ 			And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+ 			And I finish line editing in "PaymentList" table
+ 			And in the table "PaymentList" I click the button named "PaymentListAdd"
+ 			And I activate "Partner" field in "PaymentList" table
+ 			And I click choice button of "Partner" attribute in "PaymentList" table
+ 			And I go to line in "List" table
+ 				| 'Code'    | 'Description'     |
+ 				| '50'      | 'Ferron BP'       |
+ 			And I select current line in "List" table
+ 			And I activate "Partner term" field in "PaymentList" table
+ 			And I click choice button of "Partner term" attribute in "PaymentList" table
+ 			And I go to line in "List" table
+ 				| 'Description'            |
+ 				| 'Vendor Ferron, TRY'     |
+ 			And I select current line in "List" table
+ 			And I finish line editing in "PaymentList" table
+ 			And I activate "Basis document" field in "PaymentList" table
+ 			And I select current line in "PaymentList" table
+ 			And "List" table contains lines
+				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
+ 				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+ 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+ 			And I close current window
+ 		* Check forms DocumentsForIncomingPayment
+ 			And I input "{CurrentDate()}" text in the field named "Date"
+ 			And I move to "Payments" tab
+ 			And I go to line in "PaymentList" table
+ 				| '#'    | 'Partner'      | 'Partner term'          | 'Payee'                 |
+ 				| '2'    | 'Ferron BP'    | 'Vendor Ferron, TRY'    | 'Company Ferron BP'     |
+ 			And I finish line editing in "PaymentList" table
+ 			And I activate "Basis document" field in "PaymentList" table
+ 			And I select current line in "PaymentList" table
+ 			And "List" table contains lines
+ 				| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
+				| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+ 				| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			And I close current window
+			And I input "{CurrentDate() - 86401}" text in the field named "Date"
+			And I move to "Payments" tab
+			And I go to line in "PaymentList" table
+				| '#' | 'Partner'   | 'Partner term'       | 'Payee'             |
+				| '2' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
+			And I finish line editing in "PaymentList" table
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			Then the number of "List" table lines is "равно" 0
+		 And I close all client application windows	
 
 # Filters
 
@@ -537,7 +544,7 @@ Scenario: _051008 check basis document filter in Cash payment
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And I click the button named "FormCreate"
 	* Filling in the details of the document
-		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
+		And I select "Return to customer" exact value from "Transaction type" drop-down list
 		And I click Select button of "Company" field
 		And I click the button named "FormChoose"
 		And I click Select button of "Cash account" field
@@ -547,7 +554,7 @@ Scenario: _051008 check basis document filter in Cash payment
 		And I select current line in "List" table
 		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
+		Then the form attribute named "TransactionType" became equal to "Return to customer"
 	* Filling in partner and legal name
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table

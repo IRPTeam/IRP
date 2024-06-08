@@ -18,6 +18,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -83,7 +84,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
+	
 	_QuantityIsFixed = False;
 	For Each Row In Object.ItemList Do
 		If Row.QuantityIsFixed Then
@@ -758,6 +760,27 @@ EndProcedure
 Procedure EditQuantityInBaseUnit(Command)
 	Items.ItemListQuantityInBaseUnit.Visible = Not Items.ItemListQuantityInBaseUnit.Visible;
 	Items.ItemListQuantityIsFixed.Visible = Not Items.ItemListQuantityIsFixed.Visible;	 	
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "ItemList");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "ItemList");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 #EndRegion

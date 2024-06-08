@@ -284,6 +284,109 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="26f505fd-a092-433a-9cc4-d60be4284aeb">
+  <producedTypes>
+   <objectType typeId="3b16f26e-add6-4c63-9218-61be38663b93" valueTypeId="2472a2ea-8f71-4379-aef6-103780f05670"/>
+   <rowType typeId="0e1936dd-676c-4e4c-bec0-46f07d9c85a6" valueTypeId="3d2cb0ba-dd73-4838-8758-d0c2a77576c8"/>
+  </producedTypes>
+  <name>ItemList</name>
+  <synonym>
+   <key>en</key>
+   <value>7144CD80-537F-42B3-37A9-9A586F4A27D0</value>
+  </synonym>
+  <attributes uuid="cf2d571e-ed87-41b2-8bf3-8b991b1fc30b">
+   <name>Item</name>
+   <synonym>
+    <key>en</key>
+    <value>5E28DD26-75C3-6200-019A-A6FFA5C64B1B</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Items</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0b3ec506-6643-4265-86a7-692efd878cc2">
+   <name>ItemKey</name>
+   <synonym>
+    <key>en</key>
+    <value>4CDAA0DC-602C-B6E5-549F-F5CBB49B34FF</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ItemKeys</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Catalog.Specifications.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5a6dedaa-6f33-430f-bcd9-a3a4207a0ef3">
+   <name>Unit</name>
+   <synonym>
+    <key>en</key>
+    <value>2AA92825-F9BF-4802-2B18-8EB270AED117</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Units</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Item</name>
+    <changeMode>DontChange</changeMode>
+    <field>Catalog.Specifications.TabularSection.ItemList.Attribute.Item</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0dcba887-c0e8-4a0e-be3a-729196c04fca">
+   <name>Quantity</name>
+   <synonym>
+    <key>en</key>
+    <value>FF4060C5-7EAB-25BE-E39C-CFD2F8EB2918</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5d09a905-4151-4b8d-be7b-c57ed09d756e">
+   <name>QuantityInBaseUnit</name>
+   <synonym>
+    <key>en</key>
+    <value>96D13A37-157C-E6D4-4A1D-DBB0B9B21ADA</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeQuantity</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b6953aab-bdaf-47f8-9037-d195ab38c5c3">
+   <name>QuantityIsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>24CA9585-ECE7-2FE2-2E18-84F65F09B934</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
   <name>ItemForm</name>
   <synonym>

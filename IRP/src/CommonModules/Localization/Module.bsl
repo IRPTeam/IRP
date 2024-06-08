@@ -6,7 +6,7 @@
 //  Lang - String - Lang
 // 
 // Returns:
-//  Structure -  Strings:
+//  Structure - Strings:
 // * ACS_UnknownValueType - String - 
 // * CERT_OnlyProdOrCert - String - 
 // * CERT_CertAlreadyUsed - String - 
@@ -23,11 +23,14 @@
 // * DomainPartMin1Dot - String - 
 // * DomainIdentifierExceedsLength - String - 
 // * InvalidCharacterInAddress - String - 
+// * AddAttributeCannotUseWithProperty - String - 
+// * AddAttributeTagPathHasNotTwoPart - String - 
 // * SMS_SendIsOk - String - 
 // * SMS_SendIsError - String - 
 // * SMS_WaitUntilNextSend - String - 
 // * SMS_SMSCodeWrong - String - 
 // * ATC_001 - String - 
+// * ATC_NotSupported - String - 
 // * ATC_ErrorTaxAmountInItemListNotEqualTaxAmountInTaxList - String - 
 // * ATC_ErrorNetAmountGreaterTotalAmount - String - 
 // * ATC_ErrorQuantityIsZero - String - 
@@ -35,6 +38,7 @@
 // * ATC_ErrorOffersAmountInItemListNotEqualOffersAmountInOffersList - String - 
 // * ATC_ErrorItemTypeIsNotService - String - 
 // * ATC_ErrorItemTypeUseSerialNumbers - String - 
+// * ATC_ErrorItemTypeNotUseSerialNumbers - String - 
 // * ATC_ErrorUseSerialButSerialNotSet - String - 
 // * ATC_ErrorNotTheSameQuantityInSerialListTableAndInItemList - String - 
 // * ATC_ErrorItemNotEqualItemInItemKey - String - 
@@ -45,6 +49,22 @@
 // * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInSerialLotNumber - String - 
 // * ATC_ErrorQuantityInSourceOfOriginsDiffQuantityInItemList - String - 
 // * ATC_ErrorNotFilledUnit - String - 
+// * ATC_ErrorNotFilledInventoryOrigin - String - 
+// * ATC_ErrorPaymentsAmountIsZero - String - 
+// * ATC_ErrorNotFilledPaymentMethod - String - 
+// * ATC_ErrorNotFilledPurchaseTransactionType - String - 
+// * ATC_ErrorNotFilledSalesTransactionType - String - 
+// * ATC_ErrorNotFilledSalesReturnTransactionType - String - 
+// * ATC_ErrorNotFilledPurchaseReturnTransactionType - String - 
+// * ATC_FIX_ErrorItemTypeUseSerialNumbers - String - 
+// * ATC_FIX_ErrorItemTypeNotUseSerialNumbers - String - 
+// * ATC_FIX_ErrorNotFilledQuantityInSourceOfOrigins - String - 
+// * ATC_FIX_ErrorNotFilledInventoryOrigin - String - 
+// * ATC_FIX_ErrorNotFilledPaymentMethod - String - 
+// * ATC_FIX_ErrorNotFilledPurchaseTransactionType - String - 
+// * ATC_FIX_ErrorNotFilledSalesTransactionType - String - 
+// * ATC_FIX_ErrorNotFilledSalesReturnTransactionType - String - 
+// * ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType - String - 
 // * Eq_001 - String - 
 // * Eq_002 - String - 
 // * Eq_003 - String - 
@@ -57,6 +77,7 @@
 // * Eq_010 - String - 
 // * Eq_011 - String - 
 // * Eq_012 - String - 
+// * Eq_013 - String - 
 // * Eq_CanNotFindAPIModule - String - 
 // * EqError_001 - String - 
 // * EqError_002 - String - 
@@ -69,6 +90,8 @@
 // * EqFP_DocumentAlreadyPrinted - String - 
 // * EqFP_DocumentNotPrintedOnFiscal - String - 
 // * EqFP_FiscalDeviceIsEmpty - String - 
+// * EqFP_CannotPrintNotPosted - String - 
+// * EqFP_CanPrintOnlyComplete - String - 
 // * EqAc_AlreadyhasTransaction - String - 
 // * EqAc_LastSettlementHasError - String - 
 // * EqAc_LastSettlementNotFound - String - 
@@ -82,6 +105,7 @@
 // * EqFP_ProblemWhileCheckCodeString - String - 
 // * EqFP_ErrorWhileConfirmCode - String - 
 // * EqFP_CashierNameCanNotBeEmpty - String - 
+// * EqFP_ReceivedWrongAnswerFromDevice - String - 
 // * POS_s1 - String - 
 // * POS_s2 - String - 
 // * POS_s3 - String - 
@@ -97,6 +121,11 @@
 // * POS_Error_ThisBarcodeFromAnotherItem - String - 
 // * POS_Error_ThisIsNotControleStringBarcode - String - 
 // * POS_Error_CheckFillingForAllCodes - String - 
+// * POS_ClearAllItems - String - 
+// * POS_CancelPostponed - String - 
+// * POS_ERROR_NoDeletingPrintedReceipt - String - 
+// * POS_Warning_Revert - String - 
+// * POS_Warning_ReturnInDay - String - 
 // * S_002 - String - 
 // * S_003 - String - 
 // * S_004 - String - 
@@ -148,6 +177,7 @@
 // * Form_036 - String - 
 // * Form_037 - String - 
 // * Form_038 - String - 
+// * Form_039 - String - 
 // * Error_002 - String - 
 // * Error_003 - String - 
 // * Error_004 - String - 
@@ -259,8 +289,28 @@
 // * Error_126 - String - 
 // * Error_127 - String - 
 // * Error_128 - String - 
+// * Error_129 - String - 
+// * Error_130 - String - 
+// * Error_131 - String - 
+// * Error_132 - String - 
+// * Error_133 - String - 
+// * Error_134 - String - 
+// * Error_135 - String - 
+// * Error_136 - String - 
+// * Error_137 - String - 
+// * Error_138 - String - 
+// * Error_139 - String - 
+// * Error_140 - String - 
+// * Error_141 - String - 
+// * Error_142 - String - 
+// * Error_143 - String - 
+// * Error_EmptyCurrency - String - 
+// * Error_EmptyTransactionType - String - 
 // * Error_144 - String - 
+// * Error_PartnerBalanceCheckfailed - String - 
 // * Error_145 - String - 
+// * Error_146 - String - 
+// * Error_147 - String - 
 // * Error_FillTotalAmount - String - 
 // * MF_Error_001 - String - 
 // * MF_Error_002 - String - 
@@ -318,6 +368,13 @@
 // * InfoMessage_035 - String - 
 // * InfoMessage_036 - String - 
 // * InfoMessage_037 - String - 
+// * InfoMessage_AttachFile_NonSelectDocType - String - 
+// * InfoMessage_AttachFile_SelectDocType - String - 
+// * InfoMessage_AttachFile_MaxFileSize - String - 
+// * InfoMessage_038 - String - 
+// * InfoMessage_039 - String - 
+// * InfoMessage_040 - String - 
+// * InfoMessage_WriteObject - String - 
 // * InfoMessage_Payment - String - 
 // * InfoMessage_PaymentReturn - String - 
 // * InfoMessage_SessionIsClosed - String - 
@@ -325,6 +382,8 @@
 // * InfoMessage_Returns - String - 
 // * InfoMessage_ReturnTitle - String - 
 // * InfoMessage_POS_Title - String - 
+// * InfoMessage_CanOpenOnlyNewStatus - String - 
+// * InfoMessage_CanCloseOnlyOpenStatus - String - 
 // * InfoMessage_NotProperty - String - 
 // * InfoMessage_DataUpdated - String - 
 // * InfoMessage_DataSaved - String - 
@@ -355,12 +414,19 @@
 // * QuestionToUser_024 - String - 
 // * QuestionToUser_025 - String - 
 // * QuestionToUser_026 - String - 
+// * QuestionToUser_027 - String - 
+// * QuestionToUser_028 - String - 
+// * QuestionToUser_029 - String - 
+// * QuestionToUser_030 - String - 
 // * SuggestionToUser_1 - String - 
 // * SuggestionToUser_2 - String - 
 // * SuggestionToUser_3 - String - 
 // * SuggestionToUser_4 - String - 
 // * UsersEvent_001 - String - 
 // * UsersEvent_002 - String - 
+// * UsersEvent_003 - String - 
+// * UsersEvent_004 - String - 
+// * UsersEvent_005 - String - 
 // * I_1 - String - 
 // * I_2 - String - 
 // * I_3 - String - 
@@ -437,6 +503,10 @@
 // * Add_Setiings_006 - String - 
 // * Add_Setiings_007 - String - 
 // * Add_Setiings_008 - String - 
+// * Add_Setiings_009 - String - 
+// * Add_Setiings_010 - String - 
+// * Add_Setiings_011 - String - 
+// * Add_Setiings_012 - String - 
 // * Mob_001 - String - 
 // * CP_001 - String - 
 // * CP_002 - String - 
@@ -449,18 +519,192 @@
 // * LDT_FailReading - String - 
 // * LDT_ValueNotFound - String - 
 // * LDT_TooMuchFound - String - 
+// * OVP_Button_Title - String - 
+// * OVP_Button_ToolTip - String - 
 // * OpenSLNTree_Button_Title - String - 
 // * OpenSLNTree_Button_ToolTip - String - 
 // * BgJ_Title_001 - String - 
 // * BgJ_Title_002 - String - 
-// * InternalCommands_SetNotActive - String -
-// * InternalCommands_SetNotActive_Check - String -
-// * InternalCommands_ShowNotActive - String -
-// * InternalCommands_ShowNotActive_Check - String -
-// * GPU_AnalizeFolder - String -
-// * GPU_Load_SendToDrive - String -
-// * GPU_Load_SaveInBase - String -
-// * GPU_CheckingFilesExist - String -
+// * Salary_Err_001 - String - 
+// * Salary_Err_002 - String - 
+// * Salary_Err_003 - String - 
+// * Salary_WeekDays_1 - String - 
+// * Salary_WeekDays_2 - String - 
+// * Salary_WeekDays_3 - String - 
+// * Salary_WeekDays_4 - String - 
+// * Salary_WeekDays_5 - String - 
+// * Salary_WeekDays_6 - String - 
+// * Salary_WeekDays_7 - String - 
+// * AccountingError_01 - String - 
+// * AccountingError_02 - String - 
+// * AccountingError_03 - String - 
+// * AccountingError_04 - String - 
+// * AccountingError_05 - String - 
+// * AccountingQuestion_01 - String - 
+// * AccountingQuestion_02 - String - 
+// * AccountingInfo_01 - String - 
+// * AccountingInfo_02 - String - 
+// * AccountingInfo_03 - String - 
+// * AccountingInfo_04 - String - 
+// * AccountingInfo_05 - String - 
+// * AccountingInfo_06 - String - 
+// * AccountingJE_prefix_01 - String - 
+// * BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions - String - 
+// * PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
+// * PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions - String - 
+// * RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
+// * SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
+// * SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
+// * SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming - String - 
+// * SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers - String - 
+// * ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand - String - 
+// * ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
+// * ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment - String - 
+// * ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors - String - 
+// * ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
+// * ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance - String - 
+// * ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
+// * ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues - String - 
+// * ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset - String - 
+// * ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues - String - 
+// * BankReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
+// * CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions - String - 
+// * CashReceipt_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
+// * CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand - String - 
+// * CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues - String - 
+// * DebitNote_DR_R1021B_VendorsTransactions_CR_R5021_Revenues - String - 
+// * DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues - String - 
+// * DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
+// * DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues - String - 
+// * CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions - String - 
+// * CreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions - String - 
+// * CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors - String - 
+// * CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions - String - 
+// * CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions - String - 
+// * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand - String - 
+// * MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit - String - 
+// * MoneyTransfer_DR_R3021B_CashInTransit_CR_R3010B_CashOnHand - String - 
+// * MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues - String - 
+// * MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit - String - 
+// * CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory - String - 
+// * DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset - String - 
+// * ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory - String - 
+// * ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset - String - 
+// * FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset - String - 
+// * DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset - String - 
+// * BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers - String - 
+// * BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers - String - 
+// * CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions - String - 
+// * BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions - String - 
+// * CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions - String - 
+// * BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder - String - 
+// * BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange - String - 
+// * BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand - String - 
+// * BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand - String - 
+// * CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder - String - 
+// * CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange - String - 
+// * BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues - String - 
+// * BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
+// * BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder - String - 
+// * CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions - String - 
+// * Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual - String - 
+// * Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
+// * Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes - String - 
+// * Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue - String - 
+// * Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue - String - 
+// * Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance - String - 
+// * DebitCreditNote_R5020B_PartnersBalance - String - 
+// * DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset - String - 
+// * DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset - String - 
+// * ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses - String - 
+// * RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues - String - 
+// * ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses - String - 
+// * RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues - String - 
+// * EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance - String - 
+// * EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance - String - 
+// * SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers - String - 
+// * SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions - String - 
+// * SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing - String - 
+// * SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory - String - 
+// * PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions - String - 
+// * PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory - String - 
+// * PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions - String - 
+// * InternalCommands_SetNotActive - String - 
+// * InternalCommands_SetNotActive_Check - String - 
+// * InternalCommands_ShowNotActive - String - 
+// * InternalCommands_ShowNotActive_Check - String - 
+// * FormulaEditor_Delimiters - String - 
+// * FormulaEditor_Space - String - 
+// * FormulaEditor_Operators - String - 
+// * FormulaEditor_LogicalOperatorsAndConstants - String - 
+// * FormulaEditor_AND - String - 
+// * FormulaEditor_OR - String - 
+// * FormulaEditor_NOT - String - 
+// * FormulaEditor_TRUE - String - 
+// * FormulaEditor_FALSE - String - 
+// * FormulaEditor_NumericFunctions - String - 
+// * FormulaEditor_Max - String - 
+// * FormulaEditor_Min - String - 
+// * FormulaEditor_Round - String - 
+// * FormulaEditor_Int - String - 
+// * FormulaEditor_StringFunctions - String - 
+// * FormulaEditor_String - String - 
+// * FormulaEditor_Upper - String - 
+// * FormulaEditor_Left - String - 
+// * FormulaEditor_Lower - String - 
+// * FormulaEditor_Right - String - 
+// * FormulaEditor_TrimL - String - 
+// * FormulaEditor_TrimAll - String - 
+// * FormulaEditor_TrimR - String - 
+// * FormulaEditor_Title - String - 
+// * FormulaEditor_StrReplace - String - 
+// * FormulaEditor_StrLen - String - 
+// * FormulaEditor_OtherFunctions - String - 
+// * FormulaEditor_Condition - String - 
+// * FormulaEditor_PredefinedValue - String - 
+// * FormulaEditor_ValueIsFilled - String - 
+// * FormulaEditor_Format - String - 
+// * FormulaEditor_Error01 - String - 
+// * FormulaEditor_Error02 - String - 
+// * FormulaEditor_Error03 - String - 
+// * FormulaEditor_Error04 - String - 
+// * FormulaEditor_Error05 - String - 
+// * FormulaEditor_Msg01 - String - 
+// * GPU_AnalizeFolder - String - 
+// * GPU_Load_SendToDrive - String - 
+// * GPU_Load_SaveInBase - String - 
+// * GPU_CheckingFilesExist - String - 
+// * AuditLock_001 - String - 
+// * AuditLock_002 - String - 
+// * AuditLock_003 - String - 
+// * AuditLock_004 - String - 
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -1173,11 +1417,12 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_035", NStr("en='384DA243-1523-D17D-DDD1-147614CEA196%1'", Lang));
 	Strings.Insert("InfoMessage_036", NStr("en='3428361F-AE28-E594-48D2-2BCD86BEF2DE%1,%2'", Lang));
 	Strings.Insert("InfoMessage_037", NStr("en='CBF9C85A-B0EC-4772-29C0-015E09E84E14'", Lang));
-	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en='F889FE64-C2BF-71A2-2A58-8C6E87C7C5E5'", Lang));
+	Strings.Insert("InfoMessage_AttachFile_NonSelectDocType", NStr("en='762875CB-16A5-CEE1-1896-633AEB30DAB3'", Lang));
 	Strings.Insert("InfoMessage_AttachFile_SelectDocType", NStr("en='F6853798-DCF1-4328-8761-19463EBE69CB'", Lang) + Chars.LF + "%1");
 	Strings.Insert("InfoMessage_AttachFile_MaxFileSize", NStr("en='4ED58E60-FD47-A00D-D6AE-EE106E5BCE7D__________________________________%1,%2,%3'", Lang) + Chars.LF + "%1");
 	Strings.Insert("InfoMessage_038", NStr("en='62B4FE33-28D5-0B14-4389-95507838FF47_______________________________________________________________________________________________________'", Lang));
 	Strings.Insert("InfoMessage_039", NStr("en='0847EC02-3E83-9ADB-B486-668861C8D2AA'", Lang));
+	Strings.Insert("InfoMessage_040", NStr("en='6D300CE5-9D61-E3DF-F97A-AE98B83E3069'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en='2928233E-7EA0-DD38-830F-F339347701A0'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en='FC6DE927-8CF3-CA10-00D4-4E9938551163'", Lang));
@@ -1394,6 +1639,11 @@ Function Strings(Lang) Export
 	Strings.Insert("LDT_FailReading", NStr("en='E5DF2A41-E695-2DD6-6D85-5E219126FCDE%1'", Lang));
 	Strings.Insert("LDT_ValueNotFound", NStr("en='3257ADF4-9AAC-C999-96D5-57D0BA45CD4C%1'", Lang));
 	Strings.Insert("LDT_TooMuchFound", NStr("en='584444C6-B53F-2CC0-0D63-35E98D2EED42%1'", Lang));
+#EndRegion
+
+#Region OpenVendorPrices
+	Strings.Insert("OVP_Button_Title",   NStr("en='19A6D677-E5AA-033C-C241-1C9D454E7E36'", Lang));
+	Strings.Insert("OVP_Button_ToolTip", NStr("en='19A6D677-E5AA-033C-C241-1C9D454E7E36'", Lang));	
 #EndRegion	
 
 #Region OpenSerialLotNumberTree
@@ -1467,26 +1717,14 @@ Strings.Insert("SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory",
 Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en='2C155001-43FE-A352-27BB-BA17F7CC292B_______________________________'", Lang));
 
-Strings.Insert("SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming",
-	NStr("en='6DFC3C24-05A6-F827-7BE9-947557D5D9D0_______________________'", Lang));
+Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='C1D48C49-55A6-CD8E-EC88-846C979BC417____________________________________'", Lang));
 
 Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
 	NStr("en='BBFB3A13-2AF2-B3BB-BE25-514241D84871____________________________________________'", Lang));
 
-Strings.Insert("PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_CurrencyRevaluation",
-	NStr("en='2E313181-7C04-1970-016F-FB1B2A5819B5_____________________________________________________________'", Lang));
-
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers",
 	NStr("en='5F8FC0F1-C63E-DDA6-6F29-911B5AFE3C62_____________________________________________'", Lang));
-
-Strings.Insert("SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_CurrencyRevaluation",
-	NStr("en='A9E0760A-C0CE-DE61-17CD-DB5E4252FDC4________________________________________________________________'", Lang));
-
-Strings.Insert("SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues_CurrencyRevaluation",
-	NStr("en='3D8578DD-CC10-20DE-EA4C-C63B263177C1___________________________________________________'", Lang));
-
-Strings.Insert("PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions_CurrencyRevaluation",
-	NStr("en='98CA4712-F25A-1F0C-C775-5454F762EAA0__________________________________________________________________________'", Lang));
 
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues",
 	NStr("en='FC31E6D4-F0C8-2514-452A-A52C740E238C_____________________________________________'", Lang));
@@ -1502,6 +1740,12 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsT
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues",
 	NStr("en='252C0AA0-80CA-84FB-B852-2AE8E88813E7___________________________________________'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming",
+	NStr("en='1B3D7C74-B7F4-7723-3005-5B2196B15C05_____________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues",
+	NStr("en='AB618ECA-5E19-E53D-DF35-5CC95AC4B590_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment",
 	NStr("en='59593238-6565-259E-E04D-D7412E8FEEB1_____________________________________'", Lang));
@@ -1520,6 +1764,12 @@ Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_Customer
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues",
 	NStr("en='1E7211C5-D690-35B3-3E7B-B81A4865FB18_____________________________________________'", Lang));
+
+Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing",
+	NStr("en='AE96C850-4F2F-274A-AB2C-C8DE29FEB86F_____________________________________'", Lang));
+	
+Strings.Insert("ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues",
+	NStr("en='B54D4C64-3A49-69FB-B168-8C75D0541C86_____________________________________'", Lang));
 	
 Strings.Insert("ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance",
 	NStr("en='E15BA479-D02A-ADA3-3F81-19F1013F8DA8___________________________________'", Lang));
@@ -1574,6 +1824,9 @@ Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVend
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues",
 	NStr("en='56C6639E-C648-903B-BD2B-B8EA0A5C51B0___________________________'", Lang));
+
+Strings.Insert("DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions",
+	NStr("en='DCBFFC6C-515B-EF3A-A391-1C74F21B5F1B_________________________________________'", Lang));
 
 Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues",
 	NStr("en='812FA080-6E20-7502-26EC-CBB48E33B2CE_______________________________'", Lang));
@@ -1748,6 +2001,36 @@ Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdv
 	
 Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
 	NStr("en='D1D1FC81-D741-FC4E-E5AE-E1017688ECE3_______________________________________________'", Lang));
+
+Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
+	NStr("en='4E03C877-87E7-6039-90B7-7A1BB2811D4E___________________________________________'", Lang));
+
+Strings.Insert("SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions",
+	NStr("en='3F416D58-66DE-44D1-1DA5-5A387305E650______________________________'", Lang));
+
+Strings.Insert("SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions",
+	NStr("en='9BC36768-E0F4-FC9A-ACF6-6E6D28CA9941___________________________________'", Lang));
+
+Strings.Insert("SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory",
+	NStr("en='ED2D5A6B-7B12-C424-4612-2F5E05CDF420_______________________'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions",
+	NStr("en='663166A7-AC75-73C9-9AF0-02317119A052________________________________________'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory",
+	NStr("en='AEA1ED4F-AADB-9C31-1603-33D967B0C5DB_____________________________________'", Lang));
+
+Strings.Insert("PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
+	NStr("en='F4C24365-574F-4AC1-12F0-0480FCEDEFE0____________________________________'", Lang));
+
+Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing",
+	NStr("en='88CCB8B0-4E51-2CD6-62AB-B0C61DF26627______________________________'", Lang));
+
+Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions",
+	NStr("en='BC146481-8029-60E3-3BC1-192B33C3FCAD__________________________________________'", Lang));
+
+Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
+	NStr("en='818F7E93-391A-1C55-58B6-6D2BBD8B0C0A__________________________________________'", Lang));
 
 #EndRegion
 

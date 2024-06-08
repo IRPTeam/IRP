@@ -164,15 +164,22 @@ Scenario: _046003 check Sales report from trade agent movements by the Register 
 		And I click "Registrations report" button
 		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 		And I click "Generate report" button
+	//Outgoing
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
-			| 'Document registrations records'                            | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
-			| 'Register  "R2040 Taxes incoming"'                          | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
-			| ''                                                          | 'Record type' | 'Period'              | 'Resources'      | ''           | 'Dimensions'   | ''                        | ''    | ''         | ''                  |
-			| ''                                                          | ''            | ''                    | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Tax movement type' |
-			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '169,49'         | '30,51'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |
-			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '355,93'         | '64,07'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |
-			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '881,36'         | '158,64'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |		
+			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| 'Register  "R2040 Taxes incoming"'                          | ''            | ''                    | ''          | ''             | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''    | ''         | ''             | ''                             | ''         | ''                     |
+			| ''                                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '5,22'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '10,97'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '27,16'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '30,51'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '30,51'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '64,07'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '64,07'     | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '158,64'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                                          | 'Receipt'     | '03.11.2022 10:53:35' | '158,64'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
 		And I close all client application windows
 
 Scenario: _046004 check Sales report from trade agent movements by the Register  "R4050 Stock inventory"

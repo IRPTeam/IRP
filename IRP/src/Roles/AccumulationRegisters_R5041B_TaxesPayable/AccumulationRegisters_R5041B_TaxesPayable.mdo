@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aaaecf91-1eaa-4e0f-aaf7-596219eacc99">
- <name>AccumulationRegisters_R5041B_TaxesPayable</name>
- <synonym>
-  <key>en</key>
-  <value>795506F3-AB4E-4001-1294-46DF4059DD37_____</value>
- </synonym>
-</mdclass:Role>

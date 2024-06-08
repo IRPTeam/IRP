@@ -183,6 +183,10 @@
    <name>Filter.LegalName</name>
    <field>Document.ChequeBondTransactionItem.Attribute.LegalName</field>
   </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.ChequeBondTransactionItem.Attribute.Company</field>
+  </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>

@@ -1,5 +1,5 @@
 #Region FORM
-//++
+
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
@@ -8,17 +8,19 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	ViewServer_V2.OnCreateAtServer(Object, Form, "");
 EndProcedure
-//++
+
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
-//++
+
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	AccountingServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

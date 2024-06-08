@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7e802540-efd0-4c58-830d-472bf22eb6c9">
+ <producedTypes>
+  <refType typeId="83d61272-f39c-4bb9-b2f6-732b7bc2a454" valueTypeId="164c245a-8b78-45a5-81c4-bc21a3ad6e1e"/>
+  <listType typeId="e73c2831-0f76-4c90-b767-d6a053033d7c" valueTypeId="026ed9e6-b9d4-4d3d-9f1e-803555f18542"/>
+  <managerType typeId="ffdfbed9-a9db-4fcb-938e-ce5b9ee5c95e" valueTypeId="c22e838e-0c7b-43ff-b96a-402b9bce4262"/>
+ </producedTypes>
+ <name>TaxesOperationTransactionType</name>
+ <synonym>
+  <key>en</key>
+  <value>1EBD55EC-BBD9-562F-F562-285E36A8B2CC</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="cfc8a0d7-a37c-406c-b70e-228a3c487d05">
+  <name>TaxOffset</name>
+  <synonym>
+   <key>en</key>
+   <value>29FC77F2-E84E-4799-911E-E9D8E9676935</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="96610545-66bf-487d-80f9-1dc4de7b4c32">
+  <name>TaxOffsetAndPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>F816EBBC-46FA-BE1B-B18C-C9B0BD95F366</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="fe81af84-a5eb-4cd3-aa3c-d8e0c28f1e3e">
+  <name>TaxPayment</name>
+  <synonym>
+   <key>en</key>
+   <value>257A961C-A36D-754D-DE2C-C319E1997F57</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

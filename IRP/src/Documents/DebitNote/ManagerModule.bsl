@@ -11,6 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -36,6 +37,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2040B_TaxesIncoming.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -85,6 +87,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -109,6 +112,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R2040B_TaxesIncoming());
 	Return QueryArray;
 EndFunction
 
@@ -147,6 +151,9 @@ Function Transactions()
 		|	Transactions.Currency,
 		|	Transactions.Key,
 		|	Transactions.Amount,
+		|	Transactions.NetAmount,
+		|	Transactions.TaxAmount,
+		|	Transactions.VatRate,
 		|	Transactions.Ref.Branch AS Branch,
 		|	Transactions.LegalNameContract AS LegalNameContract,
 		|	Transactions.ProfitLossCenter,
@@ -263,6 +270,46 @@ Function T2015S_TransactionsInfo()
 	Return InformationRegisters.T2015S_TransactionsInfo.T2015S_TransactionsInfo_DebitNote();
 EndFunction
 
+Function R2040B_TaxesIncoming()	
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|	AND Transactions.TaxAmount <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|	AND Transactions.TaxAmount <> 0";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -335,6 +382,22 @@ Function T1040T_AccountingAmounts()
 		|UNION ALL
 		|
 		|SELECT
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions),
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref
+		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing
+		|
+		|UNION ALL
+		|
+		|SELECT
 		|	Transactions.Period,
 		|	Transactions.Key,
 		|	Transactions.Key,
@@ -357,6 +420,8 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_OffsetOfAdvancesVendor(Parameters); // Vendors transactions - Advances to vendors 
 	ElsIf Parameters.Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues Then
 		Return GetAnalytics_CustomerTransactionRevenues(Parameters); // Customer transactions - Revenues
+	ElsIf Parameters.Operation = AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions Then
+		Return GetAnalytics_OffsetOfAdvancesCustomer(Parameters); // Advances from customers - Customers transactions
 	ElsIf Parameters.Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return GetAnalytics_OtherPartnerRevenues(Parameters); // OtherPartner - Revenues
 	EndIf;
@@ -425,6 +490,27 @@ Function GetAnalytics_CustomerTransactionRevenues(Parameters)
 	                                                           Parameters.RowData.ProfitLossCenter);
 	AccountingAnalytics.Credit = Credit.AccountRevenue;
 	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Advances from customers - Customers transactions
+Function GetAnalytics_OffsetOfAdvancesCustomer(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                      Parameters.RowData.Partner, 
+	                                                      Parameters.RowData.Agreement,
+	                                                      Parameters.RowData.Currency);	                                                      
+
+	// Debit
+	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	AccountingAnalytics.Credit = Accounts.AccountTransactionsCustomer;
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
 	
 	Return AccountingAnalytics;

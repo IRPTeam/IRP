@@ -713,6 +713,9 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("SalesReportToConsignor"    , "StepChangeTaxVisible");
 	Binding.Insert("WorkOrder"                 , "StepChangeTaxVisible");
 	
+	Binding.Insert("DebitNote"  , "StepChangeTaxVisible");
+	Binding.Insert("CreditNote" , "StepChangeTaxVisible");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindFormOnOpen");
 EndFunction
 
@@ -1500,23 +1503,27 @@ Function BindTransactionType(Parameters)
 	Binding = New Structure();
 	Binding.Insert("BankPayment",
 		"StepChangeTransitAccountByAccount,
-		|StepClearByTransactionTypeBankPayment, 
+		|StepClearByTransactionTypeBankPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("BankReceipt",
 		"StepChangeTransitAccountByAccount,
 		|StepClearByTransactionTypeBankReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashPayment", 
 		"StepClearByTransactionTypeCashPayment,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeTaxVisible, 
 		|StepChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CashReceipt", 
 		"StepClearByTransactionTypeCashReceipt,
+		|StepPaymentListChangeAgreementByPartner,
 		|StepChangeCashAccountByTransactionType,
 		|StepChangeTaxVisible,
 		|StepChangeVatRate_AgreementInList");
@@ -2592,6 +2599,9 @@ Function BindDate(Parameters)
 
 	Binding.Insert("EmployeeHiring", "StepChangeSalaryByPosition");
 	
+	Binding.Insert("DebitNote", "StepChangeTaxVisible");
+	Binding.Insert("CreditNote", "StepChangeTaxVisible");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindDate");
 EndFunction
 
@@ -2785,6 +2795,9 @@ Function BindCompany(Parameters)
 		|StepChangeBranchByEmployee");
 	
 	Binding.Insert("EmployeeHiring", "StepChangeAccrualTypeByCompany");
+	
+	Binding.Insert("DebitNote", "StepChangeTaxVisible");
+	Binding.Insert("CreditNote", "StepChangeTaxVisible");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
 EndFunction
@@ -3177,6 +3190,10 @@ Function BindPartner(Parameters)
 		
 	Binding.Insert("Payroll",
 		"StepChangeAgreementByPartner_AgreementTypeIsOther,
+		|StepChangeLegalNameByPartner");
+	
+	Binding.Insert("TaxesOperation",
+		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
@@ -5115,6 +5132,10 @@ Function BindAgreement(Parameters)
 		"StepChangeCompanyByAgreement,
 		|StepChangeCurrencyByAgreement");
 	
+	Binding.Insert("TaxesOperation",
+		"StepChangeCompanyByAgreement,
+		|StepChangeCurrencyByAgreement");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindAgreement");
 EndFunction
 
@@ -6442,6 +6463,180 @@ EndProcedure
 
 #EndRegion
 
+#Region TRANSACTIONS_LIST_VAT_RATE
+
+// Transactions.VatRate.OnChange
+Procedure TransactionsVatRateOnChange(Parameters) Export
+	Binding = BindTransactionsVatRate(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.VatRate.Get
+Function GetTransactionsVatRate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsVatRate(Parameters).DataPath, _Key);
+EndFunction
+
+// Transactions.VatRate.Bind
+Function BindTransactionsVatRate(Parameters)
+	DataPath = "Transactions.VatRate";
+	
+	Binding = New Structure();	
+	Return BindSteps("StepTransactionsCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindTransactionsVatRate");
+EndFunction
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_TAX_AMOUNT
+
+// Transactions.TaxAmount.OnChange
+Procedure TransactionsTaxAmountOnChange(Parameters) Export
+	Binding = BindTransactionsTaxAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.TaxAmount.Get
+Function GetTransactionsTaxAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsTaxAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Transactions.TaxAmount.Bind
+Function BindTransactionsTaxAmount(Parameters)
+	DataPath = "Transactions.TaxAmount";
+	
+	Binding = New Structure();
+	Return BindSteps("StepTransactionsCalculations_IsTaxAmountChanged", DataPath, Binding, Parameters, "BindTransactionsTaxAmount");
+EndFunction
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_NET_AMOUNT
+
+// Transactions.NetAmount.OnChange
+Procedure TransactionsNetAmountOnChange(Parameters) Export
+	Binding = BindTransactionsNetAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.NetAmount.Get
+Function GetTransactionsNetAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsNetAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Transactions.NetAmount.Bind
+Function BindTransactionsNetAmount(Parameters)
+	DataPath = "Transactions.NetAmount";
+	
+	Binding = New Structure();
+	Return BindSteps("StepTransactionsCalculations_IsNetAmountChanged", DataPath, Binding, Parameters, "BindTransactionsNetAmount");
+EndFunction
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_AMOUNT
+
+// Transactions.Amount.OnChange
+Procedure TransactionsAmountOnChange(Parameters) Export
+	Binding = BindTransactionsAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Transactions.Amount.Get
+Function GetTransactionsAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTransactionsAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// Transactions.Amount.Bind
+Function BindTransactionsAmount(Parameters)
+	DataPath = "Transactions.Amount";
+	
+	Binding = New Structure();
+	Return BindSteps("StepTransactionsCalculations_IsAmountChanged", DataPath, Binding, Parameters, "BindTransactionsAmount");
+EndFunction
+
+#EndRegion
+
+#Region TRANSACTIONS_LIST_CALCULATIONS_NET_TAX_TOTAL
+
+// Transactions.Calculations.Set
+Procedure SetTransactionsCalculations(Parameters, Results) Export
+	SetterObject(Undefined, BindTransactionsNetAmount(Parameters).DataPath   , Parameters, Results, , "NetAmount");
+	SetterObject(Undefined, BindTransactionsTaxAmount(Parameters).DataPath   , Parameters, Results, , "TaxAmount");
+	SetterObject(Undefined, BindTransactionsAmount(Parameters).DataPath      , Parameters, Results, , "TotalAmount");
+EndProcedure
+
+// Transactions.Calculations.[IsVatRateChanged].Step
+Procedure StepTransactionsCalculations_IsVatRateChanged(Parameters, Chain) Export
+	StepTransactionsCalculations(Parameters, Chain, "IsVatRateChanged");
+EndProcedure
+
+// Transactions.Calculations.[IsTaxAmountChanged].Step
+Procedure StepTransactionsCalculations_IsTaxAmountChanged(Parameters, Chain) Export
+	StepTransactionsCalculations(Parameters, Chain, "IsTaxAmountChanged");
+EndProcedure
+
+// Transactions.Calculations.[IsNetAmountChanged].Step
+Procedure StepTransactionsCalculations_IsNetAmountChanged(Parameters, Chain) Export
+	StepTransactionsCalculations(Parameters, Chain, "IsNetAmountChanged");
+EndProcedure
+
+// Transactions.Calculations.[IsTotalAmountChanged].Step
+Procedure StepTransactionsCalculations_IsAmountChanged(Parameters, Chain) Export
+	StepTransactionsCalculations(Parameters, Chain, "IsAmountChanged");
+EndProcedure
+
+Procedure StepTransactionsCalculations(Parameters, Chain, WhoIsChanged);
+	Chain.Calculations.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.Calculations.Setter = "SetTransactionsCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		
+		// need recalculate NetAmount, TotalAmount, TaxAmount
+		If WhoIsChanged = "IsVatRateChanged" Then
+			Options.CalculateNetAmount.Enable     = True;
+			Options.CalculateTotalAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+			
+		ElsIf WhoIsChanged = "IsAmountChanged" Then
+		//  when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount
+			Options.CalculateTaxAmountReverse.Enable   = True;
+			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+		// enable use ManualAmount when calculating TaxAmount
+			Options.TaxOptions.UseManualAmount = True;
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
+			Options.CalculateTaxAmountByNetAmount.Enable   = True;
+			Options.CalculateTotalAmountByNetAmount.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.AmountOptions.DontCalculateRow = False;
+		
+		Options.AmountOptions.NetAmount        = GetTransactionsNetAmount(Parameters, Row.Key);
+		Options.AmountOptions.TaxAmount        = GetTransactionsTaxAmount(Parameters, Row.Key);
+		Options.AmountOptions.TotalAmount      = GetTransactionsAmount(Parameters, Row.Key);
+		
+		Options.TaxOptions.VatRate = GetTransactionsVatRate(Parameters, Row.Key);
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepTransactionsCalculations" + WhoIsChanged;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region PAYMENT_LIST
@@ -6837,6 +7032,7 @@ Procedure StepPaymentListChangeAgreementByPartner(Parameters, Chain) Export
 		Options.Agreement     = GetPaymentListAgreement(Parameters, Row.Key);
 		Options.Company		  = GetCompany(Parameters);
 		Options.CurrentDate   = GetDate(Parameters);
+		Options.TransactionType = GetTransactionType(Parameters);
 		Options.Key = Row.Key;
 		Options.StepName = "PaymentListChangeAgreementByPartner";
 		Chain.ChangeAgreementByPartner.Options.Add(Options);
@@ -15366,6 +15562,237 @@ EndProcedure
 
 #EndRegion
 
+#Region TAXES_INCOMING_OUTGOING
+
+#Region TAXES_INCOMING_OUTGOING_LOAD_DATA
+
+// TaxesIncomingOutgoing.Load
+Procedure TaxesIncomingOutgoingLoad(Parameters) Export
+	Binding = BindTaxesIncomingOutgoingLoad(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.Load.Set
+#If Server Then
+	
+Procedure ServerTableLoaderTaxesIncomingOutgoing(Parameters, Results) Export
+	Binding = BindPaymentListLoad(Parameters);
+	LoaderTable(Binding.DataPath, Parameters, Results);
+EndProcedure
+
+#EndIf
+
+// TaxesIncomingOutgoing.Load.Bind
+Function BindTaxesIncomingOutgoingLoad(Parameters)
+	DataPath = "PaymentList";
+	Binding = New Structure();
+	Return BindSteps("StepTaxesIncomingOutgoingLoadTable", DataPath, Binding, Parameters, "BindPaymentListLoad");
+EndFunction
+
+// TaxesIncomingOutgoing.LoadAtServer.Step
+Procedure StepTaxesIncomingOutgoingLoadTable(Parameters, Chain) Export
+	Chain.LoadTable.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.LoadTable.Setter = "ServerTableLoaderTaxesIncomingOutgoing";
+	Options = ModelClientServer_V2.LoadTableOptions();
+	Options.TableAddress = Parameters.LoadData.Address;
+	Chain.LoadTable.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_VAT_RATE
+
+// TaxesIncomingOutgoing.VatRate.OnChange
+Procedure TaxesIncomingOutgoingVatRateOnChange(Parameters) Export
+	Binding = BindTaxesIncomingOutgoingVatRate(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.VatRate.Get
+Function GetTaxesIncomingOutgoingVatRate(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTaxesIncomingOutgoingVatRate(Parameters).DataPath, _Key);
+EndFunction
+
+// TaxesIncomingOutgoing.VatRate.Bind
+Function BindTaxesIncomingOutgoingVatRate(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("TaxesIncoming", "TaxesIncoming.VatRate");
+	DataPathMap.Insert("TaxesOutgoing", "TaxesOutgoing.VatRate");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();	
+	Return BindSteps("StepTaxesIncomingOutgoingCalculations_IsVatRateChanged", DataPath, Binding, Parameters, "BindTaxesIncomingOutgoingVatRate");
+EndFunction
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_TAX_AMOUNT
+
+// TaxesIncomingOutgoing.TaxAmount.OnChange
+Procedure TaxesIncomingOutgoingTaxAmountOnChange(Parameters) Export
+	Binding = BindTaxesIncomingOutgoingTaxAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.TaxAmount.Get
+Function GetTaxesIncomingOutgoingTaxAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTaxesIncomingOutgoingTaxAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// TaxesIncomingOutgoing.TaxAmount.Bind
+Function BindTaxesIncomingOutgoingTaxAmount(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("TaxesIncoming", "TaxesIncoming.TaxAmount");
+	DataPathMap.Insert("TaxesOutgoing", "TaxesOutgoing.TaxAmount");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("StepTaxesIncomingOutgoingCalculations_IsTaxAmountChanged", DataPath, Binding, Parameters, "BindTaxesIncomingOutgoingTaxAmount");
+EndFunction
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_NET_AMOUNT
+
+// TaxesIncomingOutgoing.NetAmount.OnChange
+Procedure TaxesIncomingOutgoingNetAmountOnChange(Parameters) Export
+	Binding = BindTaxesIncomingOutgoingNetAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.NetAmount.Get
+Function GetTaxesIncomingOutgoingNetAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTaxesIncomingOutgoingNetAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// TaxesIncomingOutgoing.NetAmount.Bind
+Function BindTaxesIncomingOutgoingNetAmount(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("TaxesIncoming", "TaxesIncoming.NetAmount");
+	DataPathMap.Insert("TaxesOutgoing", "TaxesOutgoing.NetAmount");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("StepTaxesIncomingOutgoingCalculations_IsNetAmountChanged", DataPath, Binding, Parameters, "BindTaxesIncomingOutgoingNetAmount");
+EndFunction
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_TOTAL_AMOUNT
+
+// TaxesIncomingOutgoing.TotalAmount.OnChange
+Procedure TaxesIncomingOutgoingTotalAmountOnChange(Parameters) Export
+	AddViewNotify("OnChangeTaxesIncomingOutgoingTotalAmountNotify", Parameters);
+	Binding = BindTaxesIncomingOutgoingTotalAmount(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxesIncomingOutgoing.TotalAmount.Get
+Function GetTaxesIncomingOutgoingTotalAmount(Parameters, _Key)
+	Return GetPropertyObject(Parameters, BindTaxesIncomingOutgoingTotalAmount(Parameters).DataPath, _Key);
+EndFunction
+
+// TaxesIncomingOutgoing.TotalAmount.Bind
+Function BindTaxesIncomingOutgoingTotalAmount(Parameters)
+	DataPathMap = New Map();
+	DataPathMap.Insert("TaxesIncoming", "TaxesIncoming.TotalAmount");
+	DataPathMap.Insert("TaxesOutgoing", "TaxesOutgoing.TotalAmount");
+	DataPath = DataPathMap.Get(Parameters.TableName);
+	
+	Binding = New Structure();
+	Return BindSteps("StepTaxesIncomingOutgoingCalculations_IsTotalAmountChanged", DataPath, Binding, Parameters, "BindTaxesIncomingOutgoingTotalAmount");
+EndFunction
+
+#EndRegion
+
+#Region TAXES_INCOMING_OUTGOING_CALCULATIONS_NET_TAX_TOTAL
+
+// TaxesIncomingOutgoing.Calculations.Set
+Procedure SetTaxesIncomingOutgoingCalculations(Parameters, Results) Export
+	SetterObject(Undefined, BindTaxesIncomingOutgoingNetAmount(Parameters).DataPath   , Parameters, Results, , "NetAmount");
+	SetterObject(Undefined, BindTaxesIncomingOutgoingTaxAmount(Parameters).DataPath   , Parameters, Results, , "TaxAmount");
+	SetterObject(Undefined, BindTaxesIncomingOutgoingTotalAmount(Parameters).DataPath , Parameters, Results,
+		"OnChangeTaxesIncomingOutgoingTotalAmountNotify" , "TotalAmount");
+EndProcedure
+
+// TaxesIncomingOutgoing.Calculations.[IsVatRateChanged].Step
+Procedure StepTaxesIncomingOutgoingCalculations_IsVatRateChanged(Parameters, Chain) Export
+	StepTaxesIncomingOutgoingCalculations(Parameters, Chain, "IsVatRateChanged");
+EndProcedure
+
+// TaxesIncomingOutgoing.Calculations.[IsTaxAmountChanged].Step
+Procedure StepTaxesIncomingOutgoingCalculations_IsTaxAmountChanged(Parameters, Chain) Export
+	StepTaxesIncomingOutgoingCalculations(Parameters, Chain, "IsTaxAmountChanged");
+EndProcedure
+
+// TaxesIncomingOutgoing.Calculations.[IsNetAmountChanged].Step
+Procedure StepTaxesIncomingOutgoingCalculations_IsNetAmountChanged(Parameters, Chain) Export
+	StepTaxesIncomingOutgoingCalculations(Parameters, Chain, "IsNetAmountChanged");
+EndProcedure
+
+// TaxesIncomingOutgoing.Calculations.[IsTotalAmountChanged].Step
+Procedure StepTaxesIncomingOutgoingCalculations_IsTotalAmountChanged(Parameters, Chain) Export
+	StepTaxesIncomingOutgoingCalculations(Parameters, Chain, "IsTotalAmountChanged");
+EndProcedure
+
+Procedure StepTaxesIncomingOutgoingCalculations(Parameters, Chain, WhoIsChanged);
+	Chain.Calculations.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.Calculations.Setter = "SetTaxesIncomingOutgoingCalculations";
+	
+	For Each Row In GetRows(Parameters, Parameters.TableName) Do
+		
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		
+		// need recalculate NetAmount, TotalAmount, TaxAmount
+		If WhoIsChanged = "IsVatRateChanged" Then
+			Options.CalculateNetAmount.Enable     = True;
+			Options.CalculateTotalAmount.Enable   = True;
+			Options.CalculateTaxAmount.Enable     = True;
+			
+		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
+		//  when TotalAmount is changed taxes need recalculate reverse, will be changed NetAmount
+			Options.CalculateTaxAmountReverse.Enable   = True;
+			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+		// enable use ManualAmount when calculating TaxAmount
+			Options.TaxOptions.UseManualAmount = True;
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
+			
+		ElsIf WhoIsChanged = "IsNetAmountChanged" Then
+			Options.CalculateTaxAmountByNetAmount.Enable   = True;
+			Options.CalculateTotalAmountByNetAmount.Enable = True;
+		Else
+			Raise StrTemplate("Unsupported [WhoIsChanged] = %1", WhoIsChanged);
+		EndIf;
+		
+		Options.AmountOptions.DontCalculateRow = False;
+		
+		Options.AmountOptions.NetAmount        = GetTaxesIncomingOutgoingNetAmount(Parameters, Row.Key);
+		Options.AmountOptions.TaxAmount        = GetTaxesIncomingOutgoingTaxAmount(Parameters, Row.Key);
+		Options.AmountOptions.TotalAmount      = GetTaxesIncomingOutgoingTotalAmount(Parameters, Row.Key);
+		
+		Options.TaxOptions.VatRate = GetTaxesIncomingOutgoingVatRate(Parameters, Row.Key);
+		
+		Options.Key = Row.Key;
+		Options.StepName = "StepPaymentListCalculations" + WhoIsChanged;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 // called when all chain steps is complete
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
@@ -15541,6 +15968,11 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "OnSetReceiveAgreementNotify"                 Then ViewClient_V2.OnSetReceiveAgreementNotify(Parameters);
 	ElsIf ViewNotify = "OnSetSendDebtTypeNotify"                     Then ViewClient_V2.OnSetSendDebtTypeNotify(Parameters);
 	ElsIf ViewNotify = "OnSetReceiveDebtTypeNotify"                  Then ViewClient_V2.OnSetReceiveDebtTypeNotify(Parameters);
+	ElsIf ViewNotify = "TaxesIncomingOutgoingOnAddRowFormNotify"     Then ViewClient_V2.TaxesIncomingOutgoingOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "TaxesIncomingOutgoingOnCopyRowFormNotify"    Then ViewClient_V2.TaxesIncomingOutgoingOnCopyRowFormNotify(Parameters);
+	
+	ElsIf ViewNotify = "TaxesIncomingOutgoingAfterDeleteRowFormNotify"  Then ViewClient_V2.TaxesIncomingOutgoingAfterDeleteRowFormNotify(Parameters);
+	ElsIf ViewNotify = "OnChangeTaxesIncomingOutgoingTotalAmountNotify" Then ViewClient_V2.OnChangeTaxesIncomingOutgoingTotalAmountNotify(Parameters);
 	
 	Else
 		Raise StrTemplate("Not handled view notify [%1]", ViewNotify);

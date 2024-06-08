@@ -16,24 +16,11 @@
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <enableTotalsSplitting>true</enableTotalsSplitting>
- <resources uuid="0e86e4c7-5edc-4ad6-a7ce-d5ce9274a057">
-  <name>TaxableAmount</name>
-  <synonym>
-   <key>en</key>
-   <value>8AE7ED13-A124-B502-2DE7-71EC0D871430</value>
-  </synonym>
-  <type>
-   <types>DefinedType.typeAmount</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
- </resources>
  <resources uuid="210f094c-6ece-4fdb-99a6-1cd9570db0e1">
-  <name>TaxAmount</name>
+  <name>Amount</name>
   <synonym>
    <key>en</key>
-   <value>679BD121-239D-076C-C4C9-90EBD1D4D28C</value>
+   <value>12E0C10F-0FF7-FFA5-53B1-167F24894663</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -98,17 +85,56 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
- <dimensions uuid="af359c9f-ec14-4b29-a247-560f377ebf45">
-  <name>TaxMovementType</name>
+ <dimensions uuid="c7253578-aa97-401e-bf65-5fd9db9ff8c2">
+  <name>InvoiceType</name>
   <synonym>
    <key>en</key>
-   <value>7331191C-068B-5F54-4FF3-3EA9E3795072</value>
+   <value>D70BC7AF-1ED1-4308-812C-CD3F772BEB21</value>
   </synonym>
   <type>
-   <types>String</types>
-   <stringQualifiers>
-    <length>10</length>
-   </stringQualifiers>
+   <types>EnumRef.InvoiceType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="bf80f826-aaa1-4b73-b046-3b1cc3a508c2">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>en</key>
+   <value>1E5BB302-3C43-67E6-6E69-94D68D8DBB0B</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="63376ac5-808d-457f-b73d-0737328b6a6b">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>047F1348-D368-F79E-E098-89B613F09E5B</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="1daad7d1-81fe-458a-a539-770defc785b0">
+  <name>TransactionCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>2A63830D-379E-BB76-6620-0AD1D2771D48</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

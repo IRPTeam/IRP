@@ -2282,6 +2282,11 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <handlers>
+  <event>BeforeLoadDataFromSettingsAtServer</event>
+  <name>BeforeLoadDataFromSettingsAtServer</name>
+ </handlers>
+ <autoSaveDataInSettings>Use</autoSaveDataInSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -2648,6 +2653,9 @@
   <edit>
    <common>true</common>
   </edit>
+  <settingsSavedData xsi:type="form:DataPath">
+   <segments>UpdatePause</segments>
+  </settingsSavedData>
  </attributes>
  <attributes>
   <name>CallbackFunction</name>
@@ -2818,6 +2826,9 @@
   <edit>
    <common>true</common>
   </edit>
+  <settingsSavedData xsi:type="form:DataPath">
+   <segments>MaxJobStream</segments>
+  </settingsSavedData>
  </attributes>
  <attributes>
   <name>DoNotCloseForm</name>

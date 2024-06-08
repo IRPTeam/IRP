@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7e6b922-4f44-48a3-96a5-b7b4110a004a">
+ <name>FixDocumentProblemsServer</name>
+ <synonym>
+  <key>en</key>
+  <value>569C863E-A32F-104A-A923-373FDB22DD82</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

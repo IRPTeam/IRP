@@ -61,6 +61,44 @@
   <dataHistory>Use</dataHistory>
   <fillValue xsi:type="core:UndefinedValue"/>
  </resources>
+ <resources uuid="b9a7488a-a5f7-468c-a7d3-cf5f99f3ab9a">
+  <name>IncomingAccountReturn</name>
+  <synonym>
+   <key>en</key>
+   <value>72411D3E-769F-843A-A2DD-D7DE13923FF2</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="062c8d52-fd6f-4e42-96ee-d257eb97dbad">
+  <name>OutgoingAccountReturn</name>
+  <synonym>
+   <key>en</key>
+   <value>65555C15-4262-4CDE-E090-08E763796852</value>
+  </synonym>
+  <type>
+   <types>ChartOfAccountsRef.Basic</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LedgerTypeVariant</name>
+   <field>InformationRegister.T9013S_AccountsTax.Dimension.LedgerTypeVariant</field>
+  </choiceParameterLinks>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
  <dimensions uuid="055d2b93-7a3a-4f88-a0f8-1309a66b26ef">
   <name>Company</name>
   <synonym>

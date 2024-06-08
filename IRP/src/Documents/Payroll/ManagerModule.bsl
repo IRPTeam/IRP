@@ -614,8 +614,12 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransaction
 	                                                    Parameters.ObjectData.Partner,
 	                                                    Parameters.ObjectData.Agreement,
 	                                                    Parameters.ObjectData.Currency);
+	AdditonalAnalytics = New Structure();
+	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
+	
 	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction
@@ -638,8 +642,12 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Tax
 	                                                    Parameters.ObjectData.Partner,
 	                                                    Parameters.ObjectData.Agreement,
 	                                                    Parameters.ObjectData.Currency);
+	AdditonalAnalytics = New Structure();
+	AdditonalAnalytics.Insert("Partner"   ,Parameters.ObjectData.Partner);
+	AdditonalAnalytics.Insert("Agreement" ,Parameters.ObjectData.Agreement);
+	
 	AccountingAnalytics.Credit = Credit.AccountTransactionsOther;
-	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditonalAnalytics);
 	
 	Return AccountingAnalytics;
 EndFunction

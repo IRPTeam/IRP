@@ -80,6 +80,7 @@
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -282,6 +283,10 @@
     <name>Filter.LegalName</name>
     <field>Document.CreditNote.TabularSection.Transactions.Attribute.LegalName</field>
    </choiceParameterLinks>
+   <choiceParameterLinks>
+    <name>Filter.Company</name>
+    <field>Document.CreditNote.Attribute.Company</field>
+   </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
@@ -330,6 +335,47 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8f0d421c-a9d3-4089-85ab-27cb8aafec1b">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>E0F86A1C-1B23-A0EF-FA84-4689EDA202B9</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9ef28a3f-cc7c-4841-9932-cf494476951c">
+   <name>NetAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>657C5681-4F6C-512D-DE5E-E9E89F5F555A</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="346b3355-d2e3-4a32-8e1b-9a0af9c6a1af">
+   <name>TaxAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>39E73740-566C-2483-3E97-749E0CD63334</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
  <tabularSections uuid="60518354-b0ed-4c3a-94ca-aac151a28234">

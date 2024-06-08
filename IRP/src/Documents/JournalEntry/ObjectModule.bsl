@@ -5,6 +5,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	If ValueIsFilled(ThisObject.Basis) Then
 		ThisObject.Date = ThisObject.Basis.Date;
+		If CommonFunctionsClientServer.ObjectHasProperty(ThisObject.Basis, "Branch") Then
+			ThisObject.Branch = ThisObject.Basis.Branch;
+		EndIf;
 	EndIf;
 	
 	If Not ThisObject.DeletionMark And Not ThisObject.UserDefined Then
@@ -25,7 +28,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 			DataTable = AccountingServer.GetNewDataRegisterRecords(ThisObject.Basis, _AccountingRowAnalytics, _AccountingExtDimensions);
 		EndIf;
 		
-		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, Undefined, ThisObject.RegisterRecords.Basic);
+		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, ThisObject.RegisterRecords.Basic);
 	EndIf;
 EndProcedure
 

@@ -11,6 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -36,6 +37,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -85,6 +87,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -109,6 +112,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R1040B_TaxesOutgoing());
 	Return QueryArray;
 EndFunction
 
@@ -146,6 +150,9 @@ Function Transactions()
 	|	Transactions.Currency,
 	|	Transactions.Key,
 	|	Transactions.Amount,
+	|	Transactions.NetAmount,
+	|	Transactions.TaxAmount,
+	|	Transactions.VatRate,
 	|	Transactions.Ref.Branch AS Branch,
 	|	Transactions.LegalNameContract AS LegalNameContract,
 	|	Transactions.ProfitLossCenter,
@@ -260,6 +267,46 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_CreditNote();
+EndFunction
+
+Function R1040B_TaxesOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
+		|	Transactions.TaxAmount AS Amount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|	AND Transactions.TaxAmount <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType,
+		|	Transactions.TaxAmount AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|	AND Transactions.TaxAmount <> 0";
 EndFunction
 
 #EndRegion

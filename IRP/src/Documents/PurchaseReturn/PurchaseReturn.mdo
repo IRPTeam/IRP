@@ -141,7 +141,6 @@
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
- <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
@@ -150,6 +149,8 @@
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+ <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -303,6 +304,10 @@
   <choiceParameterLinks>
    <name>Filter.LegalName</name>
    <field>Document.PurchaseReturn.Attribute.LegalName</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.PurchaseReturn.Attribute.Company</field>
   </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>

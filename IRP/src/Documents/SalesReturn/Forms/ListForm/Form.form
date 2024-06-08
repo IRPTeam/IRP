@@ -52,6 +52,59 @@
   <defaultItem>true</defaultItem>
   <titleLocation>None</titleLocation>
   <items xsi:type="form:FormField">
+   <name>IsHaveJE</name>
+   <id>55</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.IsHaveJE</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>IsHaveJEExtendedTooltip</name>
+    <id>57</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>IsHaveJEContextMenu</name>
+    <id>56</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>PictureField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:ImageFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <valuesPicture xsi:type="core:PictureRef">
+     <picture>StdPicture.DebitCredit</picture>
+    </valuesPicture>
+    <fileDragMode>AsFileRef</fileDragMode>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>Number</name>
    <id>16</id>
    <visible>true</visible>
@@ -968,13 +1021,22 @@ INDEX BY
 		WHEN ItemListTable.StoreCount = 1
 			THEN ItemListTable.Store
 		ELSE VALUE(Catalog.Stores.EmptyRef)
-	END AS Store
+	END AS Store,
+	MAX(JE.LedgerType) AS LedgerType,
+	MAX(CASE
+		WHEN NOT JE.Ref IS NULL
+			THEN 0
+		ELSE 1
+	END) AS IsHaveJE
 FROM
 	Document.SalesReturn AS SalesReturn
 		LEFT JOIN ItemListTable AS ItemListTable
 		ON ItemListTable.Ref = SalesReturn.Ref
 		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance AS R2031B_ShipmentInvoicingBalance
 		ON SalesReturn.Ref = CAST(R2031B_ShipmentInvoicingBalance.Basis AS Document.SalesReturn)
+		LEFT JOIN Document.JournalEntry AS JE
+		ON SalesReturn.Ref = CAST(JE.Basis AS Document.SalesReturn)
+		AND NOT JE.DeletionMark
 GROUP BY
 	SalesReturn.Ref,
 	SalesReturn.DeletionMark,
@@ -1038,6 +1100,185 @@ GROUP BY
      </localValue>
     </title>
    </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Agreement</dataPath>
+    <field>Agreement</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TransactionType</dataPath>
+    <field>TransactionType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currency</dataPath>
+    <field>Currency</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DateOfShipment</dataPath>
+    <field>DateOfShipment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LegalName</dataPath>
+    <field>LegalName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManagerSegment</dataPath>
+    <field>ManagerSegment</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Partner</dataPath>
+    <field>Partner</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PriceIncludeTax</dataPath>
+    <field>PriceIncludeTax</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Author</dataPath>
+    <field>Author</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Branch</dataPath>
+    <field>Branch</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentAmount</dataPath>
+    <field>DocumentAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Basis</dataPath>
+    <field>Basis</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemKey</dataPath>
+    <field>ItemKey</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LedgerType</dataPath>
+    <field>LedgerType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>IsHaveJE</dataPath>
+    <field>IsHaveJE</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>BBD9BD7A-9336-47E0-04D5-573E01D00AF1</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LegalNameContract</dataPath>
+    <field>LegalNameContract</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ItemList</dataPath>
+    <field>ItemList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SpecialOffers</dataPath>
+    <field>SpecialOffers</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DELETE_TaxList</dataPath>
+    <field>DELETE_TaxList</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Currencies</dataPath>
+    <field>Currencies</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>GoodsReceipts</dataPath>
+    <field>GoodsReceipts</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SerialLotNumbers</dataPath>
+    <field>SerialLotNumbers</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>RowIDInfo</dataPath>
+    <field>RowIDInfo</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceOfOrigins</dataPath>
+    <field>SourceOfOrigins</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>SourceNodeID</dataPath>
+    <field>SourceNodeID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ModifyDate</dataPath>
+    <field>ModifyDate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
+   </fields>
+   <parameters>
+    <name>Period</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>001A0513-36BD-B5C9-993F-F562C7F69F53</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>Date</types>
+     <dateQualifiers/>
+    </valueType>
+   </parameters>
   </extInfo>
  </attributes>
  <commandInterface>

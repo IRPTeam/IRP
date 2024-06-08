@@ -41,7 +41,8 @@ Scenario: _043100 preparation (Credit note)
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
+		When Create catalog Taxes objects
+		When Create catalog Taxes objects (for debit and credit note)	
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects

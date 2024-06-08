@@ -116,4 +116,18 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="761642fc-2a73-4f78-be0b-e514af4fc441">
+  <name>RevaluatedCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>D1D652A7-2212-35F0-08CC-CC494783407F</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

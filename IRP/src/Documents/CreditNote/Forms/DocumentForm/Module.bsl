@@ -180,6 +180,26 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure TransactionsVatRateOnChange(Item)
+	DocCreditDebitNoteClient.TransactionsVatRateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsNetAmountOnChange(Item)
+	DocCreditDebitNoteClient.TransactionsNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsTaxAmountOnChange(Item)
+	DocCreditDebitNoteClient.TransactionsTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure TransactionsAmountOnChange(Item)
+	DocCreditDebitNoteClient.TransactionsAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #EndRegion

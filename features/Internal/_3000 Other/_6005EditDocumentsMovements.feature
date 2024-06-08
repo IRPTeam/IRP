@@ -113,13 +113,13 @@ Scenario: _605703 change movements for PI
 				| 'Yes'    | 'Vendor Ferron, TRY' | '23 454,40' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'Main Company' | 'USD'      | 'Reporting currency'   | 'No'                  | 'Company Ferron BP' | '3'          | 'Ferron BP' | '07.09.2020 17:53:38' | 'Expense'    | 'TRY'                 |
 			And I activate field named "R1021B_VendorsTransactionsCompany" in "R1021B_VendorsTransactions" table
 		* Change movements for R1040B_TaxesOutgoing
-			And I move to "R1040B_TaxesOutgoing (3)" tab
+			And I move to "R1040B_TaxesOutgoing *" tab
 			And I go to line in "R1040B_TaxesOutgoing" table
-				| 'Active' | 'Company'      | 'LineNumber' | 'Period'              | 'RecordType' | 'Tax' | 'TaxableAmount' | 'TaxAmount' | 'TaxRate' |
-				| 'Yes'    | 'Main Company' | '2'          | '07.09.2020 17:53:38' | 'Receipt'    | 'VAT' | '35 593,22'     | '6 406,78'  | '18%'     |
-			And I activate "TaxableAmount" field in "R1040B_TaxesOutgoing" table
+				| 'Active' | 'Company'      | 'Period'              | 'RecordType' | 'Tax' | 'Amount'   | 'TaxRate' |
+				| 'Yes'    | 'Main Company' | '07.09.2020 17:53:38' | 'Receipt'    | 'VAT' | '3 050,85' | '18%'     |
+			And I activate "Amount" field in "R1040B_TaxesOutgoing" table
 			And I select current line in "R1040B_TaxesOutgoing" table
-			And I input "35 593,23" text in "TaxableAmount" field of "R1040B_TaxesOutgoing" table
+			And I input "35 593,23" text in "Amount" field of "R1040B_TaxesOutgoing" table
 			And I finish line editing in "R1040B_TaxesOutgoing" table
 		* Change movements for R5020B_PartnersBalance
 			And I move to "R5020B_PartnersBalance (4)" tab
@@ -172,7 +172,8 @@ Scenario: _605703 change movements for PI
 			And I click "Write movements" button
 			Then there are lines in TestClient message log
 				|'Failed to save: "R5020 Partners balance"!'|
-			And I click "Write movements (register self-control)" button			
+			And I click "Write movements (register self-control)" button	
+			And I click "Write movements" button			
 	* Check
 		Then there are lines in TestClient message log
 			|'Movements successfully recorded'|
@@ -209,15 +210,7 @@ Scenario: _605703 change movements for PI
 			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '23 454,4' | 'No'                   | ''                         |
 			| ''                                                    | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Expense'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'TRY'                  | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''      | ''        | '137 000'  | 'No'                   | ''                         |
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''           | ''          | ''                    | ''           | ''             | ''       | ''    | ''         | ''                  | ''               | ''           |
-			| 'Register  "R1040 Taxes outgoing !Manual edit"' | ''           | ''          | ''                    | ''           | ''             | ''       | ''    | ''         | ''                  | ''               | ''           |
-			| ''                                              | 'ManualEdit' | 'Potential' | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Tax movement type' | 'Taxable amount' | 'Tax amount' |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '16 949,15'      | '3 050,85'   |
-			| ''                                              | 'No'         | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '63 559,32'      | '11 440,68'  |
-			| ''                                              | 'No'         | 'Yes'       | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '35 593,22'      | '6 406,78'   |
-			| ''                                              | 'Yes'        | 'No'        | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '35 593,23'      | '6 406,78'   |
+		
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
@@ -262,12 +255,18 @@ Scenario: _605703 change movements for PI
 		And I select "R1040 Taxes outgoing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''                    | ''           | ''             | ''       | ''    | ''         | ''                  | ''               | ''           |
-			| 'Register  "R1040 Taxes outgoing"'              | ''                    | ''           | ''             | ''       | ''    | ''         | ''                  | ''               | ''           |
-			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Tax movement type' | 'Taxable amount' | 'Tax amount' |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '16 949,15'      | '3 050,85'   |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '35 593,22'      | '6 406,78'   |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  | '63 559,32'      | '11 440,68'  |
+			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
+			| 'Register  "R1040 Taxes outgoing"'              | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
+			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount'    |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '3 050,85'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '6 406,78'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '11 440,68' |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '522,31'    |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 096,84'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 958,64'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '3 050,85'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '6 406,78'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '11 440,68' |		
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

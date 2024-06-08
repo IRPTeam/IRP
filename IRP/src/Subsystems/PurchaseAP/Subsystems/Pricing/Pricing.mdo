@@ -10,5 +10,6 @@
  <content>Document.PriceList</content>
  <content>Catalog.PriceTypes</content>
  <content>InformationRegister.S1001L_VendorsPricesByItemKey</content>
+ <content>Report.S1001L_VendorsPrices</content>
  <parentSubsystem>Subsystem.PurchaseAP</parentSubsystem>
 </mdclass:Subsystem>

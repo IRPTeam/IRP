@@ -2474,7 +2474,7 @@
 				</role>
 			</field>
 			<dataSource>DataSource1</dataSource>
-			<query>SELECT
+			<query>SELECT ALLOWED
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
 	R6020B_BatchBalanceBalanceAndTurnovers.Store,
 	R6020B_BatchBalanceBalanceAndTurnovers.ItemKey,
@@ -2486,68 +2486,68 @@
 	R6020B_BatchBalanceBalanceAndTurnovers.Partner,
 	R6020B_BatchBalanceBalanceAndTurnovers.Agreement,
 	R6020B_BatchBalanceBalanceAndTurnovers.LegalName,
-	// Quantity
-	R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance,
+// Quantity
+ R6020B_BatchBalanceBalanceAndTurnovers.QuantityOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.QuantityClosingBalance,
-	// InvoiceAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountOpeningBalance,
+// InvoiceAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceAmountClosingBalance,
-	// InvoiceTaxAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountOpeningBalance,
+// InvoiceTaxAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.InvoiceTaxAmountClosingBalance,
-	// IndirectCostAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountOpeningBalance,
+// IndirectCostAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostAmountClosingBalance,
-	// IndirectCostTaxAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountOpeningBalance,
+// IndirectCostTaxAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.IndirectCostTaxAmountClosingBalance,
-	// ExtraCostAmountByRatio
-	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioOpeningBalance,
+// ExtraCostAmountByRatio
+ R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostAmountByRatioClosingBalance,
-	// ExtraCostTaxAmountByRatio
-	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioOpeningBalance,
+// ExtraCostTaxAmountByRatio
+ R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraCostTaxAmountByRatioClosingBalance,
-	// ExtraDirectCostAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountOpeningBalance,
+// ExtraDirectCostAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostAmountClosingBalance,
-	// ExtraDirectCostTaxAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountOpeningBalance,
+// ExtraDirectCostTaxAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.ExtraDirectCostTaxAmountClosingBalance,
-	// AllocatedCostAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountOpeningBalance,
+// AllocatedCostAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostAmountClosingBalance,
-	// AllocatedCostTaxAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountOpeningBalance,
+// AllocatedCostTaxAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedCostTaxAmountClosingBalance,
-	// AllocatedRevenueAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountOpeningBalance,
+// AllocatedRevenueAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueAmountClosingBalance,
-	// AllocatedRevenueTaxAmount
-	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountOpeningBalance,
+// AllocatedRevenueTaxAmount
+ R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountOpeningBalance,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountReceipt,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountExpense,
 	R6020B_BatchBalanceBalanceAndTurnovers.AllocatedRevenueTaxAmountClosingBalance,
@@ -2667,7 +2667,7 @@ ORDER BY
 				</role>
 			</field>
 			<dataSource>DataSource1</dataSource>
-			<query>SELECT
+			<query>SELECT ALLOWED
 	T6020S_BatchKeysInfo.Company AS Company,
 	T6020S_BatchKeysInfo.Store AS Store,
 	T6020S_BatchKeysInfo.ItemKey AS ItemKey,

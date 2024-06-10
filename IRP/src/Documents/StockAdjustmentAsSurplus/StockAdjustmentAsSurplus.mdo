@@ -325,10 +325,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="cf5311ec-82f7-41fd-a35a-8df4be4d1ae7">
-      <name>TotalAmount</name>
+      <name>NetAmount</name>
       <synonym>
         <key>en</key>
-        <value>Total amount</value>
+        <value>Net amount</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
@@ -394,10 +394,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="1407c83d-7578-4e73-9386-b736bfdf43e0">
-      <name>NetAmount</name>
+      <name>TotalAmount</name>
       <synonym>
         <key>en</key>
-        <value>Net amount</value>
+        <value>Total amount</value>
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>

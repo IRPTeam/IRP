@@ -601,7 +601,7 @@ Function R5021T_Revenues()
 		   |	ItemList.RevenueType,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Currency,
-		   |	ItemList.TotalAmount AS Amount,
+		   |	ItemList.NetAmount AS Amount,
 		   |	ItemList.Key
 		   |INTO R5021T_Revenues
 		   |FROM

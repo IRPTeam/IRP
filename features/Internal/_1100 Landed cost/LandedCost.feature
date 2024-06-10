@@ -1682,6 +1682,9 @@ Scenario: _010 change Stock adjustment as surplus, Stock adjustment as write-off
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table	
 		And I click "Post and close" button
 	* Repeated posting document CalculationMovementCosts №1, №3
 		Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"

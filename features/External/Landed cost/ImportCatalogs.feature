@@ -1035,26 +1035,24 @@ Scenario: Create catalog Taxes objects (LC)
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f651fcdcb98'   |
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f652bba50d6'   |
 		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f651fcdcb99'   |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c'  | 'e1cib/data/Catalog.TaxRates?ref=86ffd69b4676df1211ea9f6531b259be'   |
-
+	
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'          |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'SalesOrder'            |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'SalesInvoice'          |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'PurchaseOrder'         |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'PurchaseInvoice'       |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'CashExpense'           |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'CashRevenue'           |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'CashRevenue'           |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'PurchaseReturn'        |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'PurchaseReturnOrder'   |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'SalesReturnOrder'      |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'SalesReturn'           |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'RetailSalesReceipt'    |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b'  | 'RetailReturnReceipt'   |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c'  | 'SalesOrder'            |
-		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862c'  | 'SalesInvoice'          |
-
+		| 'Ref'                                                           | 'DocumentName'             |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'SalesOrder'               |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'SalesInvoice'             |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'PurchaseOrder'            |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'PurchaseInvoice'          |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'CashExpense'              |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'PurchaseReturn'           |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'PurchaseReturnOrder'      |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'SalesReturnOrder'         |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'SalesReturn'              |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'RetailSalesReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'RetailReturnReceipt'      |
+		| 'e1cib/data/Catalog.Taxes?ref=86ffd69b4676df1211ea9f6a86a5862b' | 'StockAdjustmentAsSurplus' |
+	
 Scenario: Create catalog InterfaceGroups objects (LC)
 
 	And I check or create catalog "InterfaceGroups" objects:

@@ -1572,6 +1572,7 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportFromTradeAgent'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReceiptCorrection'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'StockAdjustmentAsSurplus'    |
 
 
 Scenario: Create catalog Taxes objects (with transaction type)

@@ -1658,25 +1658,26 @@ Scenario: Create catalog Taxes objects (for work order)
 Scenario: Create catalog Taxes objects (for debit and credit note)
 
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'           |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrder'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesInvoice'           |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrder'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseInvoice'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashExpense'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturn'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturnOrder'    |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturnOrder'       |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturn'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailSalesReceipt'     |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReturnReceipt'    |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrderClosing'      |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrderClosing'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'WorkOrder'              |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CreditNote'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'DebitNote'              |
+		| 'Ref'                                                           | 'DocumentName'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'         |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'StockAdjustmentAsSurplus' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'WorkOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CreditNote'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'DebitNote'                |
 
 Scenario: Create catalog Taxes objects (for commission trade)
 

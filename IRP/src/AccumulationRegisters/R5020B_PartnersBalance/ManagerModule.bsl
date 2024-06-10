@@ -2297,6 +2297,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		|";
 EndFunction
+
 Function R5020B_PartnersBalance_Payroll() Export
 	Return 
 		// Other transaction
@@ -2324,6 +2325,61 @@ Function R5020B_PartnersBalance_Payroll() Export
 		|	SalaryTaxList AS SalaryTaxList
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R5020B_PartnersBalance_TaxesOperation() Export
+	Return
+		// Other transaction
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Partner,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.Agreement,
+		|	UNDEFINED AS Document,
+		|	TaxesDifference.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	TaxesDifference.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Partner,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.Agreement,
+		|	UNDEFINED AS Document,
+		|	TaxesDifference.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	TaxesDifference.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.IncomingVatRate.Ref IS NULL";
 EndFunction
 
 Procedure AdditionalDataFilling(MovementsValueTable) Export

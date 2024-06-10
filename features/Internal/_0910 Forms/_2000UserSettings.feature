@@ -1491,7 +1491,7 @@ Scenario: _200026 check filling in field from custom user settings in Unbundling
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 03"
+		Then the form attribute named "Store" became equal to "Store 01"
 	And I close all client application windows
 
 Scenario: _200027 check filling in field from custom user settings in Reconciliation statement

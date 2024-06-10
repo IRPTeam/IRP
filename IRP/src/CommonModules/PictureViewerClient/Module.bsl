@@ -1,4 +1,11 @@
 
+// Get picture URL.
+// 
+// Parameters:
+//  FileRef - See PictureViewerServer.CreatePictureParameters
+// 
+// Returns:
+//  String
 Function GetPictureURL(FileRef) Export
 	URLStructure = PictureViewerServer.GetPictureURL(FileRef);
 	ProcessingCommonModule = Eval(URLStructure.ProcessingModule);
@@ -225,6 +232,20 @@ Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePh
 	Return PicArrayJSON;
 
 EndFunction
+
+Procedure SetPDFForView(FileRef, PDFViewer) Export
+	PictureParameters = PictureViewerServer.CreatePictureParameters(FileRef);
+	
+	URI = GetPictureURL(PictureParameters); //String
+	BD = GetFromTempStorage(URI); // BinaryData
+	If Not BD = Undefined Then
+		BDB = GetBinaryDataBufferFromBinaryData(BD);
+		MemoryStream = New MemoryStream(BDB); 
+		PDFViewer.ReadAsync(MemoryStream);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_040);
+	EndIf;
+EndProcedure
 
 #Region FormEvents
 

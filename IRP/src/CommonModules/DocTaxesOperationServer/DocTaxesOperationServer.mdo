@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="decc56c7-0daa-48db-a7ba-f064a93d4c22">
+  <name>DocTaxesOperationServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc taxes operation server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

@@ -117,6 +117,7 @@
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.CalculationDeservedVacations</types>
+      <types>DocumentRef.TaxesOperation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

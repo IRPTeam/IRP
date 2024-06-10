@@ -25,6 +25,14 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -126,7 +134,8 @@ Function SendAdvances()
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
 		|	Doc.SendLegalNameContract,
-		|	Doc.Currency,
+//		|	Doc.Currency,
+		|	Doc.SendCurrency AS Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
@@ -152,7 +161,9 @@ Function SendAdvances()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+		//|	Doc.Amount
+		|	Doc.SendAmount AS Amount,
+		|	Doc.SendUUID AS Key
 		|INTO SendAdvances
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -183,7 +194,8 @@ Function ReceiveAdvances()
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
 		|	Doc.ReceiveLegalNameContract,
-		|	Doc.Currency,
+//		|	Doc.Currency,
+		|	Doc.ReceiveCurrency AS Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
@@ -209,7 +221,9 @@ Function ReceiveAdvances()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+//		|	Doc.Amount
+		|	Doc.ReceiveAmount AS Amount,
+		|	Doc.ReceiveUUID AS Key
 		|INTO ReceiveAdvances
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -240,7 +254,8 @@ Function SendTransactions()
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
 		|	Doc.SendLegalNameContract,
-		|	Doc.Currency,
+//		|	Doc.Currency,
+		|	Doc.SendCurrency AS Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
@@ -267,7 +282,9 @@ Function SendTransactions()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+//		|	Doc.Amount
+		|	Doc.SendAmount AS Amount,
+		|	Doc.SendUUID AS Key
 		|INTO SendTransactions
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -298,7 +315,8 @@ Function ReceiveTransactions()
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
 		|	Doc.ReceiveLegalNameContract,
-		|	Doc.Currency,
+//		|	Doc.Currency,
+		|	Doc.ReceiveCurrency AS Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
@@ -329,7 +347,9 @@ Function ReceiveTransactions()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+//		|	Doc.Amount
+		|	Doc.ReceiveAmount AS Amount,
+		|	Doc.ReceiveUUID AS Key
 		|INTO ReceiveTransactions
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -567,12 +587,27 @@ Function T1040T_AccountingAmounts()
 		"SELECT
 		|	Doc.Date AS Period,
 		|	UNDEFINED AS RowKey,
-		|	UNDEFINED AS Key,
-		|	Doc.Currency,
-		|	Doc.Amount,
+		|	Doc.SendUUID AS Key,
+		|	Doc.SendCurrency AS Currency,
+		|	Doc.SendAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
+		|FROM
+		|	Document.DebitCreditNote AS Doc
+		|WHERE
+		|	Doc.Ref = &Ref
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Doc.Date AS Period,
+		|	UNDEFINED AS RowKey,
+		|	Doc.ReceiveUUID AS Key,
+		|	Doc.ReceiveCurrency AS Currency,
+		|	Doc.ReceiveAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
 		|FROM
 		|	Document.DebitCreditNote AS Doc
 		|WHERE
@@ -643,7 +678,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	Sender = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 		                                               Parameters.ObjectData.SendPartner, 
 		                                               Parameters.ObjectData.SendAgreement,
-		                                               Parameters.ObjectData.Currency);
+		                                               Parameters.ObjectData.SendCurrency);
 		                                               
 	// Receiver
 	AdditionalAnalytics_Receiver = New Structure();
@@ -657,7 +692,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 		                                                  Parameters.ObjectData.SendPartner, 
 		                                                  Parameters.ObjectData.SendAgreement,
-		                                                  Parameters.ObjectData.Currency);
+		                                                  Parameters.ObjectData.ReceiveCurrency);
 	
 	From_CustomerAdvance_To_CustomerAdvance = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
@@ -767,7 +802,7 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.ObjectData.ReceivePartner, 
 	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.Currency);
+	                                                      Parameters.ObjectData.ReceiveCurrency);
 	// Debit                                                      
 	AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -795,7 +830,7 @@ Function GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransac
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.ObjectData.ReceivePartner, 
 	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.Currency);
+	                                                      Parameters.ObjectData.ReceiveCurrency);
 	// Debit                                                      
 	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);

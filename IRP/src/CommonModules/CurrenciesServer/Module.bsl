@@ -203,7 +203,8 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndDo;
 	EndIf;
 	
-	ExchangeDifference(Parameters);	
+	ExchangeDifference(Parameters);
+//	DebitCreditNoteDiffence(Parameters);
 EndProcedure
 
 Function GetAdvancesCurrencyRevaluation(DocRef)
@@ -814,7 +815,7 @@ Procedure ExchangeDifference(Parameters)
 	
 	IsMoneyExchange = False;
 	TransitIncoming = New ValueTable();
-	TransitIncoming_PrepareTable = NEw ValueTable();
+	TransitIncoming_PrepareTable = New ValueTable();
 	AccountingOperation_Revenues = Undefined;
 	AccountingOperation_Expenses = Undefined;
 	
@@ -1043,6 +1044,185 @@ Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, Tran
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region DEBIT_CREDIT_NOTE_DIFFERENCE
+
+Procedure DebitCreditNoteDifference(Parameters)
+	
+	IsDifferenceCurrency = False;
+	TransitIncoming = New ValueTable();
+	TransitIncoming_PrepareTable = New ValueTable();
+	
+	AccountingOperation_Revenues = Undefined;
+	AccountingOperation_Expenses = Undefined;
+	
+	ExpenseType  = Undefined;
+	LossCenter   = Undefined;
+	RevenueType  = Undefined;
+	ProfitCenter = Undefined;
+	
+	If Parameters.Metadata = Metadata.Documents.DebitCreditNote 
+		And Parameters.Object.SendCurrency <> Parameters.Object.ReceiveCurrency Then
+		
+		IsDifferenceCurrency = True;
+		TransitIncoming_PrepareTable = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3021B_CashInTransitIncoming].PrepareTable;
+		TransitIncoming = TransitIncoming_PrepareTable;
+		
+		AccountingOperation_Revenues = Catalogs.AccountingOperations.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues;
+		AccountingOperation_Expenses = Catalogs.AccountingOperations.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit;
+		
+		ExpenseType  = Parameters.Object.ExpenseType;
+		LossCenter   = Parameters.Object.LossCenter;
+		RevenueType  = Parameters.Object.RevenueType;
+		ProfitCenter = Parameters.Object.ProfitCenter;
+					
+	EndIf;
+		
+	If Not IsDifferenceCurrency Then
+		Return; // is not difference currency
+	EndIf;
+	
+	Expenes = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
+	Revenues = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
+	Accounting = Parameters.PostingDataTables[Metadata.AccumulationRegisters.T1040T_AccountingAmounts].PrepareTable;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT *
+	|INTO TransitIncoming
+	|FROM &TransitIncoming AS TransitIncoming";
+	Query.SetParameter("TransitIncoming", TransitIncoming);
+	Query.Execute();
+	
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Receipt, TransitIncoming);
+	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Expense, TransitIncoming);
+	
+	Query.Text = 
+	"SELECT
+	|	*
+	|INTO TransitIncomingReplaced
+	|FROM
+	|	&TransitIncoming AS TransitIncoming
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransitIncomingExpense.RecordType AS ExpenseRecordType,
+	|	TransitIncomingReceipt.RecordType AS ReceiptRecordType,
+	|	TransitIncomingExpense.Period AS Period,
+	|	TransitIncomingReceipt.Amount - TransitIncomingExpense.Amount AS Amount,
+	|	TransitIncomingReceipt.*
+	|INTO Diff
+	|FROM
+	|	TransitIncomingReplaced AS TransitIncomingReceipt
+	|		INNER JOIN TransitIncomingReplaced AS TransitIncomingExpense
+	|		ON TransitIncomingReceipt.Company = TransitIncomingExpense.Company
+	|		AND TransitIncomingReceipt.Branch = TransitIncomingExpense.Branch
+	|		AND TransitIncomingReceipt.Account = TransitIncomingExpense.Account
+	|		AND TransitIncomingReceipt.CurrencyMovementType = TransitIncomingExpense.CurrencyMovementType
+	|		AND TransitIncomingReceipt.Currency = TransitIncomingExpense.Currency
+	|		AND TransitIncomingReceipt.TransactionCurrency = TransitIncomingExpense.TransactionCurrency
+	|		AND TransitIncomingReceipt.Basis = TransitIncomingExpense.Basis
+	|
+	|		AND (TransitIncomingReceipt.RecordType = VALUE(AccumulationRecordType.Receipt))
+	|		AND (TransitIncomingExpense.RecordType = VALUE(AccumulationRecordType.Expense))
+	|
+	|		AND (NOT TransitIncomingReceipt.Period IS NULL)
+	|		AND (NOT TransitIncomingExpense.Period IS NULL)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	CASE
+	|		WHEN Diff.Amount < 0
+	|			THEN Diff.ReceiptRecordType
+	|		ELSE Diff.ExpenseRecordType
+	|	END AS RecordType,
+	|	CASE
+	|		WHEN Diff.Amount < 0
+	|			THEN -Diff.Amount
+	|		ELSE Diff.Amount
+	|	END AS Amount,
+	|	Diff.*
+	|FROM
+	|	Diff AS Diff";
+		
+	Query.SetParameter("TransitIncoming", TransitIncoming);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	For Each Row In QueryTable Do
+		If Not ValueIsFilled(Row.Amount) Then
+			Continue; // not currency difference
+		EndIf;
+		
+		FillPropertyValues(TransitIncoming_PrepareTable.Add(), Row);
+		
+		If Row.RecordType = AccumulationRecordType.Receipt Then
+			
+			If ValueIsFilled(AccountingOperation_Revenues) Then
+				Accounting_NewRow = Accounting.Add();
+				FillPropertyValues(Accounting_NewRow, Row);
+				Accounting_NewRow.Operation = AccountingOperation_Revenues;
+			EndIf;
+			
+			Revenues_NewRow = Revenues.Add();
+			FillPropertyValues(Revenues_NewRow, Row);
+			Revenues_NewRow.RevenueType = RevenueType;
+			Revenues_NewRow.ProfitLossCenter = ProfitCenter;
+			
+		ElsIf Row.RecordType = AccumulationRecordType.Expense Then 
+			
+			If ValueIsFilled(AccountingOperation_Expenses) Then
+				Accounting_NewRow = Accounting.Add();
+				FillPropertyValues(Accounting_NewRow, Row);
+				Accounting_NewRow.Operation = AccountingOperation_Expenses;
+			EndIf;
+			
+			Expenses_NewRow = Expenes.Add();
+			FillPropertyValues(Expenses_NewRow, Row);
+			Expenses_NewRow.ExpenseType = ExpenseType;
+			Expenses_NewRow.ProfitLossCenter = LossCenter;
+			
+		EndIf;
+	EndDo;
+	
+EndProcedure
+
+//Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, TransitIncoming)
+//	Query = New Query();
+//	Query.TempTablesManager = TempTablesManager;
+//	Query.Text = 
+//	"SELECT *
+//	|FROM TransitIncoming AS TransitIncoming
+//	|WHERE
+//	|	TransitIncoming.RecordType = &RecordType
+//	|	AND (TransitIncoming.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+//	|		OR TransitIncoming.TransactionCurrency = TransitIncoming.Currency)";
+//	Query.SetParameter("RecordType", RecordType);
+//	QueryResult = Query.Execute();
+//	QueryTable = QueryResult.Unload();
+//	
+//	TransactionCurrencyType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+//	
+//	For Each Row In QueryTable Do
+//		If Row.CurrencyMovementType <> TransactionCurrencyType Then
+//			Filter = New Structure();
+//			Filter.Insert("CurrencyMovementType", TransactionCurrencyType);
+//			Filter.Insert("RecordType", RecordType);
+//			TransitIncomingRows = TransitIncoming.FindRows(Filter);
+//			If TransitIncomingRows.Count() <> 1 Then
+//				Raise StrTemplate("Found [%1] rows in transit incoming", TransitIncomingRows.Count());
+//			EndIf;
+//			
+//			TransitIncomingRows[0].Amount = Row.Amount;
+//			
+//			Break;
+//		EndIf;
+//	EndDo;
+//EndProcedure
 
 #EndRegion
 

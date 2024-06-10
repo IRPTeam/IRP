@@ -164,7 +164,8 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.SendIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.SendIsVendorAdvance AS IsVendorAdvance,
-		|	Doc.Amount
+		|	Doc.Amount,
+		|	Doc.Key
 		|INTO T2014S_AdvancesInfo
 		|FROM
 		|	SendAdvances AS Doc
@@ -216,7 +217,8 @@ Function T2014S_AdvancesInfo_DebitCreditNote() Export
 		|	Doc.ReceiveOrderSettlements,
 		|	Doc.ReceiveIsCustomerAdvance AS IsCustomerAdvance,
 		|	Doc.ReceiveIsVendorAdvance AS IsVendorAdvance,
-		|	Doc.Amount
+		|	Doc.Amount,
+		|	Doc.Key
 		|FROM
 		|	ReceiveAdvances AS Doc";
 EndFunction

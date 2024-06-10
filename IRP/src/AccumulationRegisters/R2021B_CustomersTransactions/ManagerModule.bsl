@@ -402,6 +402,7 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 		|	Doc.SendBasisDocument AS Basis,
 		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
 		|FROM
@@ -437,6 +438,7 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 		|	Doc.ReceiveBasisDocument,
 		|	Doc.ReceiveOrderSettlements,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED
 		|FROM
 		|	ReceiveTransactions AS Doc
@@ -462,6 +464,7 @@ Function R2021B_CustomersTransactions_DebitCreditNote() Export
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
 		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances

@@ -116,6 +116,14 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+	&AtClient
+Procedure DateOnChange(Item)
+	DocStockAdjustmentAsSurplusClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+	
+#EndRegion
+
 #Region STORE
 
 &AtClient
@@ -267,14 +275,25 @@ EndProcedure
 
 #EndRegion
 
-#Region AMOUNT
-
 &AtClient
-Procedure ItemListAmountOnChange(Item)
-	DocStockAdjustmentAsSurplusClient.ItemListAmountOnChange(Object, ThisObject);
+Procedure ItemListVatRateOnChange(Item)
+	ViewClient_V2.ItemListVatRateOnChange(Object, ThisObject);
 EndProcedure
 
-#EndRegion
+&AtClient
+Procedure ItemListTaxAmountOnChange(Item)
+	ViewClient_V2.ItemListTaxAmountOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListNetAmountOnChange(Item)
+	ViewClient_V2.ItemListNetAmountOnChange(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ItemListTotalAmountOnChange(Item)
+	ViewClient_V2.ItemListTotalAmountOnChange(Object, ThisObject);
+EndProcedure
 
 #EndRegion
 
@@ -529,7 +548,7 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V14(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

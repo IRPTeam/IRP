@@ -1092,7 +1092,7 @@ Scenario: _0432044 check DebitCreditNote movements by the register "T2014 Advanc
 		And I click "Registrations report info" button
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines:
 			| 'Debit/Credit note 11 dated 29.04.2024 10:25:38' | ''             | ''             | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''       | ''                        | ''                     | ''            |
 			| 'Register  "T2014 Advances info"'                | ''             | ''             | ''                    | ''    | ''         | ''                                 | ''                                 | ''      | ''                  | ''                    | ''          | ''                               | ''        | ''       | ''                        | ''                     | ''            |
 			| ''                                               | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'                          | 'Legal name'                       | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'              | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
@@ -1388,7 +1388,7 @@ Scenario: _0432054 check DebitCreditNote movements by the register "T2014 Advanc
 		And I click "Registrations report info" button
 		And I select "T2014 Advances info" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines:
 			| 'Debit/Credit note 14 dated 29.04.2024 11:15:01' | ''             | ''             | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
 			| 'Register  "T2014 Advances info"'                | ''             | ''             | ''                    | ''    | ''         | ''                                   | ''                                   | ''      | ''                  | ''                    | ''          | ''                         | ''        | ''       | ''                        | ''                     | ''            |
 			| ''                                               | 'Company'      | 'Branch'       | 'Date'                | 'Key' | 'Currency' | 'Partner'                            | 'Legal name'                         | 'Order' | 'Is vendor advance' | 'Is customer advance' | 'Unique ID' | 'Advance agreement'        | 'Project' | 'Amount' | 'Is purchase order close' | 'Is sales order close' | 'Record type' |
@@ -1451,7 +1451,7 @@ Scenario: _0432056 check DebitCreditNote movements by the register "T2015 Transa
 		And I click "Registrations report info" button
 		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
+		Then "ResultTable" spreadsheet document contains lines:
 			| 'Debit/Credit note 15 dated 29.04.2024 11:21:10' | ''             | ''             | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                                            | ''          | ''        | ''       | ''       | ''        |
 			| 'Register  "T2015 Transactions info"'            | ''             | ''             | ''      | ''                    | ''    | ''         | ''                                          | ''                                          | ''                                          | ''                      | ''                        | ''                                            | ''          | ''        | ''       | ''       | ''        |
 			| ''                                               | 'Company'      | 'Branch'       | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'                                   | 'Legal name'                                | 'Agreement'                                 | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                           | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |

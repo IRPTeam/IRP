@@ -2435,6 +2435,13 @@ Scenario: Create catalog Workstations objects  (Test)
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Description'  | 'CashAccount'  | 'UniqueID'   |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee'  | 'False'         | 'Test'         | ''             | ''           |
 
+Scenario: Create catalog AddAttributeAndProperty (boolean)
+
+	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:
+		| 'Ref'                                                                                                | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Icon'                                  | 'isIconSet' | 'isURL' | 'Description_en'            | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'ValueType'               |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7a0d8de1a1c04c611ee1b0a09bcb8a8' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'False' | 'Add attribute (boolean)'   | ''                 | ''               | ''               | '_e19e213c0a1647deb8835dab2a35089f' | '<Type>xs:boolean</Type>' |
+
+
 Scenario: Create catalog AddAttributeAndProperty (hyperlink)
 
 	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:

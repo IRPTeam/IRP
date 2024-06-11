@@ -170,6 +170,10 @@ Function GetIgnored_Fields()
 	Array.Add("*.T2014S_AdvancesInfo.UniqueID");
 	Array.Add("*.T2015S_TransactionsInfo.UniqueID");
 	Array.Add("*.T3010S_RowIDInfo.UniqueID");
+	Array.Add("*.T1040T_AccountingAmounts.DrCurrency");
+	Array.Add("*.T1040T_AccountingAmounts.CrCurrency");
+	Array.Add("*.T1040T_AccountingAmounts.DrCurrencyAmount");
+	Array.Add("*.T1040T_AccountingAmounts.CrCurrencyAmount");
 		
 	// technical registers
 	Array.Add("*.T6020S_BatchKeysInfo.*");

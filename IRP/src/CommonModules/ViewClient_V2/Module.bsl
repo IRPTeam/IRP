@@ -3280,7 +3280,8 @@ EndProcedure
 
 Procedure OnSetReceiveAmountNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
-	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "DebitCreditNote" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure

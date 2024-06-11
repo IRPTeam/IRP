@@ -416,7 +416,7 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("Operation", AnalyticRow.Operation);
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Parameters.Insert("IsCurrencyRevaluation", 
-		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));
+		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));		
 		
 	Data = GetAccountingData(Parameters);
 	
@@ -2143,8 +2143,43 @@ Function GetAccountingData(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end as Currency,
-	|	SUM(case when &IsRevaluationCurrency then 0 else Amounts.Amount end) AS Amount
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end as DrCurrency,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end as CrCurrency,
+	|
+	|
+	|	SUM(case when &IsRevaluationCurrency then 
+	|			0 
+	|			else
+	|				case when Amounts.DrCurrencyAmount <> 0 then
+	|					Amounts.DrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS DrCurrencyAmount,
+	|
+	|	SUM(case when &IsRevaluationCurrency then 
+	|			0 
+	|			else
+	|				case when Amounts.CrCurrencyAmount <> 0 then
+	|					Amounts.CrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS CrCurrencyAmount
+	|
+	|
+	|
 	|FROM
 	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
 	|WHERE
@@ -2157,7 +2192,23 @@ Function GetAccountingData(Parameters)
 	|		else True
 	|	end
 	|GROUP BY
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2211,7 +2262,7 @@ Function GetAccountingData(Parameters)
 		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 		Query.SetParameter("IsRevaluationCurrency", False);
 	EndIf;
-	
+		
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = GetAccountingDataResult();
@@ -2219,10 +2270,10 @@ Function GetAccountingData(Parameters)
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();
 	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
+		Result.CurrencyDr       = QuerySelection.DrCurrency;
+		Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
+		Result.CurrencyCr       = QuerySelection.CrCurrency;
+		Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
 	EndIf;
 	
 	// Amount

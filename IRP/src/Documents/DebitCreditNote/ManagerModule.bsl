@@ -25,6 +25,14 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	
+	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1021B_VendorsTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R2021B_CustomersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
 
@@ -126,7 +134,7 @@ Function SendAdvances()
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
 		|	Doc.SendLegalNameContract,
-		|	Doc.Currency,
+		|	Doc.SendCurrency AS Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
@@ -152,7 +160,8 @@ Function SendAdvances()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+		|	Doc.SendAmount AS Amount,
+		|	Doc.SendUUID AS Key
 		|INTO SendAdvances
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -183,7 +192,7 @@ Function ReceiveAdvances()
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
 		|	Doc.ReceiveLegalNameContract,
-		|	Doc.Currency,
+		|	Doc.ReceiveCurrency AS Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
@@ -209,7 +218,8 @@ Function ReceiveAdvances()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+		|	Doc.ReceiveAmount AS Amount,
+		|	Doc.ReceiveUUID AS Key
 		|INTO ReceiveAdvances
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -240,7 +250,7 @@ Function SendTransactions()
 		|	Doc.SendPartner,
 		|	Doc.SendLegalName,
 		|	Doc.SendLegalNameContract,
-		|	Doc.Currency,
+		|	Doc.SendCurrency AS Currency,
 		|	Doc.SendAgreement,
 		|	Doc.SendProject,
 		|	Doc.SendOrder,
@@ -267,7 +277,8 @@ Function SendTransactions()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+		|	Doc.SendAmount AS Amount,
+		|	Doc.SendUUID AS Key
 		|INTO SendTransactions
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -298,7 +309,7 @@ Function ReceiveTransactions()
 		|	Doc.ReceivePartner,
 		|	Doc.ReceiveLegalName,
 		|	Doc.ReceiveLegalNameContract,
-		|	Doc.Currency,
+		|	Doc.ReceiveCurrency AS Currency,
 		|	Doc.ReceiveAgreement,
 		|	Doc.ReceiveProject,
 		|	Doc.ReceiveOrder,
@@ -329,7 +340,8 @@ Function ReceiveTransactions()
 		|		Or Doc.SendAgreement <> Doc.ReceiveAgreement
 		|		Or case when Doc.SendBasisDocument.Ref IS NULL Then Undefined else Doc.SendBasisDocument end
 		|			<> case when Doc.ReceiveBasisDocument.Ref IS NULL Then Undefined else Doc.ReceiveBasisDocument end) AS IsDifferentPartners,
-		|	Doc.Amount
+		|	Doc.ReceiveAmount AS Amount,
+		|	Doc.ReceiveUUID AS Key
 		|INTO ReceiveTransactions
 		|FROM
 		|	Document.DebitCreditNote AS Doc
@@ -564,13 +576,79 @@ EndFunction
 
 Function T1040T_AccountingAmounts()
 	Return 
+//		"SELECT
+//		|	Doc.Date AS Period,
+//		|	UNDEFINED AS RowKey,
+//		|	Doc.SendUUID AS Key,
+//		|	Doc.SendCurrency AS Currency,
+//		|	Doc.SendAmount AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
+//		|	UNDEFINED AS AdvancesClosing
+//		|INTO T1040T_AccountingAmounts
+//		|FROM
+//		|	Document.DebitCreditNote AS Doc
+//		|WHERE
+//		|	Doc.Ref = &Ref
 		"SELECT
 		|	Doc.Date AS Period,
 		|	UNDEFINED AS RowKey,
-		|	UNDEFINED AS Key,
-		|	Doc.Currency,
-		|	Doc.Amount,
+		|	Doc.SendUUID AS Key,
+		|	Doc.SendCurrency AS Currency,
+		|	Doc.SendAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
+		// Dr currency
+		|	case 
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor) Then
+		|			
+		|			Doc.ReceiveCurrency
+		|		
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer) Then
+		|			
+		|			Doc.SendCurrency
+		|
+		|		else undefined end as DrCurrency,
+		// Dr currency amount
+		|	case 
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor) Then
+		|			
+		|			Doc.ReceiveAmount
+		|		
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer) Then
+		|			
+		|			Doc.SendAmount
+		|
+		|		else 0 end as DrCurrencyAmount,
+		// Cr currency
+		|	case 
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor) Then
+		|			
+		|			Doc.SendCurrency
+		|		
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer) Then
+		|			
+		|			Doc.ReceiveCurrency
+		|
+		|		else undefined end as CrCurrency,
+		// Cr currency amount
+		|	case 
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionCustomer) 
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceVendor) Then
+		|			
+		|			Doc.SendAmount
+		|		
+		|		when Doc.SendDebtType = value(enum.DebtTypes.TransactionVendor)
+		|			or Doc.SendDebtType = value(enum.DebtTypes.AdvanceCustomer) Then
+		|			
+		|			Doc.ReceiveAmount
+		|
+		|		else 0 end as CrCurrencyAmount,		
+		|
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
 		|FROM
@@ -587,6 +665,10 @@ Function T1040T_AccountingAmounts()
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset),
+		|	Undefined,
+		|	0,
+		|	Undefined,
+		|	0,
 		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -603,6 +685,10 @@ Function T1040T_AccountingAmounts()
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.Amount,
 		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset),
+		|	Undefined,
+		|	0,
+		|	Undefined,
+		|	0,
 		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -643,7 +729,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	Sender = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 		                                               Parameters.ObjectData.SendPartner, 
 		                                               Parameters.ObjectData.SendAgreement,
-		                                               Parameters.ObjectData.Currency);
+		                                               Parameters.ObjectData.SendCurrency);
 		                                               
 	// Receiver
 	AdditionalAnalytics_Receiver = New Structure();
@@ -657,7 +743,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 		                                                  Parameters.ObjectData.SendPartner, 
 		                                                  Parameters.ObjectData.SendAgreement,
-		                                                  Parameters.ObjectData.Currency);
+		                                                  Parameters.ObjectData.ReceiveCurrency);
 	
 	From_CustomerAdvance_To_CustomerAdvance = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
@@ -685,7 +771,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		
 	
 	
-	// Advance customer (sender) -> Advance customer (receiver)
+	// Advance customer (sender) -> Advance customer (receiver)*
 	If From_CustomerAdvance_To_CustomerAdvance Then
 		
 		Debit_Account = Sender.AccountAdvancesCustomer;
@@ -694,7 +780,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Credit_Account = Receiver.AccountAdvancesCustomer;
 		Credit_Analytics = AdditionalAnalytics_Receiver;
 	
-	// Customer transaction (sender) -> Customer transaction (receiver)
+	// Customer transaction (sender) -> Customer transaction (receiver)*
 	ElsIf From_CustomerTransaction_To_CustomerTransaction Then
 		
 		Debit_Account = Receiver.AccountTransactionsCustomer;
@@ -703,7 +789,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Credit_Account = Sender.AccountTransactionsCustomer;
 		Credit_Analytics = AdditionalAnalytics_Sender;
 	
-	// Advance customer (sender) -> Customer transaction (receiver)
+	// Advance customer (sender) -> Customer transaction (receiver)*
 	ElsIf From_CustomerAdvance_To_CustomerTransaction Then
 		
 		Debit_Account = Sender.AccountAdvancesCustomer;
@@ -712,7 +798,7 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Credit_Account = Receiver.AccountTransactionsCustomer;
 		Credit_Analytics = AdditionalAnalytics_Receiver;
 	
-	// Advance vendor (sender) -> Advance vendor (receiver)
+	// Advance vendor (sender) -> Advance vendor (receiver)*
 	ElsIf From_VendorAdvance_To_VendorAdvance Then
 		
 		Debit_Account = Receiver.AccountAdvancesVendor;
@@ -721,21 +807,21 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		Credit_Account = Sender.AccountAdvancesVendor;
 		Credit_Analytics = AdditionalAnalytics_Sender;
 	
-	// Vendor transaction (sender) -> Vendor transaction (receiver)
+	// Vendor transaction (sender) -> Vendor transaction (receiver)*
 	ElsIf From_VendorTransaction_To_VendorTransaction Then
-		Debit_Account = Sender.AccountAdvancesCustomer;
+		Debit_Account = Sender.AccountTransactionsVendor;
 		Debit_Analytics = AdditionalAnalytics_Sender;
 	
-		Credit_Account = Receiver.AccountAdvancesCustomer;
+		Credit_Account = Receiver.AccountTransactionsVendor;
 		Credit_Analytics = AdditionalAnalytics_Receiver;
 	
-	// Advance vendor (sender) -> Vendor transaction (receiver)
+	// Advance vendor (sender) -> Vendor transaction (receiver)*
 	ElsIf From_VendorAdvance_To_VendorTransaction Then
 		
-		Debit_Account = Receiver.AccountTransactionsVendor;
+		Debit_Account = Receiver.AccountAdvancesVendor;
 		Debit_Analytics = AdditionalAnalytics_Receiver;
 	
-		Credit_Account = Sender.AccountAdvancesVendor;
+		Credit_Account = Sender.AccountTransactionsVendor;
 		Credit_Analytics = AdditionalAnalytics_Sender;
 	
 	EndIf;
@@ -767,7 +853,7 @@ Function GetAnalytics_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.ObjectData.ReceivePartner, 
 	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.Currency);
+	                                                      Parameters.ObjectData.ReceiveCurrency);
 	// Debit                                                      
 	AccountingAnalytics.Debit = Accounts.AccountTransactionsVendor;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
@@ -795,7 +881,7 @@ Function GetAnalytics_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransac
 	Accounts = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
 	                                                      Parameters.ObjectData.ReceivePartner, 
 	                                                      Parameters.ObjectData.ReceiveAgreement,
-	                                                      Parameters.ObjectData.Currency);
+	                                                      Parameters.ObjectData.ReceiveCurrency);
 	// Debit                                                      
 	AccountingAnalytics.Debit = Accounts.AccountAdvancesCustomer;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);

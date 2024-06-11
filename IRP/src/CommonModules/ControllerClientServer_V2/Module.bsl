@@ -646,6 +646,10 @@ Function BindFormOnCreateAtServer(Parameters)
 		"StepGenerateNewSendUUID,
 		|StepGenerateNewReceiptUUID");
 		
+	Binding.Insert("DebitCreditNote",
+		"StepGenerateNewSendUUID,
+		|StepGenerateNewReceiptUUID");
+			
 	Binding.Insert("CashRevenue",
 		"StepPaymentListCalculations_RecalculationsOnCopy");
 		
@@ -2130,6 +2134,8 @@ Function BindReceiveCurrency(Parameters)
 		"StepChangeReceiveAmountBySendAmount,
 		|StepChangeTransitAccountBySendAccount");
 	
+	Binding.Insert("DebitCreditNote", "StepChangeReceiveAmountBySendAmount");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveCurrency");
 EndFunction
 
@@ -2145,6 +2151,20 @@ Procedure StepChangeReceiveCurrencyByAccount(Parameters, Chain) Export
 	Options.CurrentCurrency = GetReceiveCurrency(Parameters);
 	Options.StepName = "StepChangeReceiveCurrencyByAccount";
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+
+// ReceiveCurrency.ChangeCurrencyByAgreement.Step
+Procedure StepChangeReceiveCurrencyByAgreement(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeCurrencyByAgreement.Setter = "SetReceiveCurrency";
+	Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
+	Options.Agreement       = GetReceiveAgreement(Parameters);
+	Options.CurrentCurrency = GetReceiveCurrency(Parameters);
+	Options.StepName = "StepChangeReceiveCurrencyByAgreement";
+	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -2180,6 +2200,8 @@ Function BindSendCurrency(Parameters)
 		"StepChangeReceiveAmountBySendAmount,
 		|StepChangeTransitAccountBySendAccount");
 		
+	Binding.Insert("DebitCreditNote", "StepChangeReceiveAmountBySendAmount");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendCurrency");
 EndFunction
 
@@ -2195,6 +2217,20 @@ Procedure StepChangeSendCurrencyByAccount(Parameters, Chain) Export
 	Options.CurrentCurrency = GetSendCurrency(Parameters);
 	Options.StepName = "StepChangeSendCurrencyByAccount";
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+
+// SendCurrency.ChangeCurrencyByAgreement.Step
+Procedure StepChangeSendCurrencyByAgreement(Parameters, Chain) Export
+	Chain.ChangeCurrencyByAgreement.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangeCurrencyByAgreement.Setter = "SetSendCurrency";
+	Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
+	Options.Agreement       = GetSendAgreement(Parameters);
+	Options.CurrentCurrency = GetSendCurrency(Parameters);
+	Options.StepName = "StepChangeSendCurrencyByAgreement";
+	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -2253,6 +2289,7 @@ Function BindSendAmount(Parameters)
 	Binding = New Structure();
 	Binding.Insert("CashTransferOrder" , "StepChangeReceiveAmountBySendAmount");
 	Binding.Insert("MoneyTransfer"     , "StepChangeReceiveAmountBySendAmount");
+	Binding.Insert("DebitCreditNote"   , "StepChangeReceiveAmountBySendAmount");
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendAmount");
 EndFunction
 
@@ -5348,7 +5385,10 @@ EndFunction
 Function BindSendAgreement(Parameters)
 	DataPath = "SendAgreement";
 	Binding = New Structure();
-	Binding.Insert("DebitCreditNote", "StepChangeSendBasisDocumentBySendAgreement");
+	Binding.Insert("DebitCreditNote", 
+		"StepChangeSendBasisDocumentBySendAgreement,
+		|StepChangeSendCurrencyByAgreement");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindSendAgreement");
 EndFunction
 
@@ -5395,7 +5435,10 @@ EndFunction
 Function BindReceiveAgreement(Parameters)
 	DataPath = "ReceiveAgreement";
 	Binding = New Structure();
-	Binding.Insert("DebitCreditNote", "StepChangeReceiveBasisDocumentByReceiveAgreement");
+	Binding.Insert("DebitCreditNote", 
+		"StepChangeReceiveBasisDocumentByReceiveAgreement,
+		|StepChangeReceiveCurrencyByAgreement");
+		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindReceiveAgreement");
 EndFunction
 

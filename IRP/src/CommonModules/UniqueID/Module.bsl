@@ -15,8 +15,6 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	DataLockItem.Mode = DataLockMode.Shared;
 	Try
 		DataLock.Lock();
-		//@skip-check module-unused-local-variable
-		Str = New Structure(Source.UniqueID);
 	Except
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_012, "UniqueID", Source);

@@ -43,6 +43,7 @@ Scenario: _0153500 preparation
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog AddAttributeAndProperty (boolean)
 		When Create chart of characteristic types AddAttributeAndProperty objects (collection)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
@@ -6154,6 +6155,50 @@ Scenario: _015400670 check AddAttribute with type hyperlink
 		And I click the button named "OK"
 		And I close all client application windows
 
+Scenario: _015400672 check AddAttribute with type (boolean)
+	And I close all client application windows
+	* Adding additional Add attribute (boolean) for PO
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name    |
+			| Document_PurchaseOrder  |
+		And I select current line in "List" table
+		And in the table "Attributes" I click "Add" button
+		And I click choice button of the attribute named "AttributesAttribute" in "Attributes" table
+		And I go to line in "List" table
+			| 'Description'               |
+			| 'Add attribute (boolean)' |
+		And I select current line in "List" table
+		And I finish line editing in "Attributes" table
+		And I click "Save and close" button
+	* Check
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I click the button named "FormCreate"
+		And I move to the tab named "GroupOther"
+		And I set checkbox named "__e19e213c0a1647deb8835dab2a35089f"
+		And I click the button named "FormWrite"
+		Then the form attribute named "__e19e213c0a1647deb8835dab2a35089f" became equal to "Yes"
+	And I close all client application windows
+									
+Scenario: _015400673 check add common attribute to attribute set
+	And I close all client application windows
+	* Adding additional Add attribute (UniqueID) for Company
+		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
+		And I go to line in "List" table
+			| Predefined data name  |
+			| Catalog_Companies     |
+		And I select current line in "List" table
+		And I move to the tab named "GroupExtensionAttributes"
+		And in the table "ExtensionAttributes" I click the button named "ExtensionAttributesAdd"
+		And I input "Author" text in the field named "ExtensionAttributesAttribute" of "ExtensionAttributes" table
+		And I change checkbox named "ExtensionAttributesShow" in "ExtensionAttributes" table
+		And I finish line editing in "ExtensionAttributes" table
+		And I click the button named "FormWriteAndClose"
+	* Check
+		Given I open hyperlink "e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c"
+		And I move to "External attributes" tab
+		Then the field named "Author" is filled	
+	And I close all client application windows
 
 Scenario: _015400680 check add attributes (collection, Projects and Stores)
 	And I close all client application windows

@@ -507,7 +507,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|INTO TT_AllDocumentsAndRequiredAttacments
 	|FROM
 	|	TT_AllDocuments AS TT_AllDocuments
-	|		LEFT JOIN Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
+	|		INNER JOIN Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
 	|		ON TT_AllDocuments.DocMetaName = AttachedDocumentSettingsFileSettings.Ref.Description
 	|;
 	|

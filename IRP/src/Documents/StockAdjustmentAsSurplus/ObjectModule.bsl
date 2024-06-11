@@ -5,7 +5,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.ItemList);
 	For Each Row In ThisObject.ItemList Do
-		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		Parameters = CurrenciesClientServer.GetParameters_V14(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

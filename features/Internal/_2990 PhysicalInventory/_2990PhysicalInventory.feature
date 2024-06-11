@@ -1337,12 +1337,12 @@ Scenario: _2990030 check filling in Stock adjustment as surplus based on Physica
 		And I click "Ok" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#'   | 'Revenue type'   | 'Amount'   | 'Item'                 | 'Basis document'           | 'Item key'   | 'Profit loss center'   | 'Physical inventory'       | 'Serial lot numbers'   | 'Unit'   | 'Quantity'    |
-			| '1'   | ''               | ''         | 'Dress'                | '$$PhysicalInventory3$$'   | 'XS/Blue'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '103,000'     |
-			| '2'   | ''               | ''         | 'Product 2 with SLN'   | '$$PhysicalInventory3$$'   | 'UNIQ'       | ''                     | '$$PhysicalInventory3$$'   | '45678899'             | 'pcs'    | '2,000'       |
-			| '3'   | ''               | ''         | 'Boots'                | '$$PhysicalInventory3$$'   | '36/18SD'    | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '2,000'       |
-			| '4'   | ''               | ''         | 'Product 1 with SLN'   | '$$PhysicalInventory3$$'   | 'ODS'        | ''                     | '$$PhysicalInventory3$$'   | '677899'               | 'pcs'    | '4,000'       |
-			| '5'   | ''               | ''         | 'Dress'                | '$$PhysicalInventory3$$'   | 'S/Yellow'   | ''                     | '$$PhysicalInventory3$$'   | ''                     | 'pcs'    | '110,000'     |
+			| '#' | 'Revenue type' | 'Total amount' | 'Item'               | 'Basis document'         | 'Item key' | 'Profit loss center' | 'Physical inventory'     | 'Serial lot numbers' | 'Unit' | 'Quantity' |
+			| '1' | ''             | ''             | 'Dress'              | '$$PhysicalInventory3$$' | 'XS/Blue'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '103,000'  |
+			| '2' | ''             | ''             | 'Product 2 with SLN' | '$$PhysicalInventory3$$' | 'UNIQ'     | ''                   | '$$PhysicalInventory3$$' | '45678899'           | 'pcs'  | '2,000'    |
+			| '3' | ''             | ''             | 'Boots'              | '$$PhysicalInventory3$$' | '36/18SD'  | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '2,000'    |
+			| '4' | ''             | ''             | 'Product 1 with SLN' | '$$PhysicalInventory3$$' | 'ODS'      | ''                   | '$$PhysicalInventory3$$' | '677899'             | 'pcs'  | '4,000'    |
+			| '5' | ''             | ''             | 'Dress'              | '$$PhysicalInventory3$$' | 'S/Yellow' | ''                   | '$$PhysicalInventory3$$' | ''                   | 'pcs'  | '110,000'  |
 	And I close all client application windows
 		
 Scenario: _2990032 check filling in Stock adjustment as write off based on Physical Inventory with Serial lot numbers
@@ -1576,8 +1576,8 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I finish line editing in "ItemList" table
 	* Check amount calculation
 		And "ItemList" table became equal
-			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
-			| '5 000,00'   | 'Dress'   | 'XS/Blue'    | '500,000'    | '10,00'   | ''              |
+			| "#" | "Item"  | "Item key" | "Unit" | "Tax amount" | "Quantity" | "Price" | "VAT" | "Net amount" | "Total amount" |
+			| "1" | "Dress" | "XS/Blue"  | "pcs"  | "900,00"     | "500,000"  | "10,00" | "18%" | "5 000,00"   | "5 900,00"     |		
 	* Price calculation	
 		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of "Item" attribute in "ItemList" table
@@ -1592,33 +1592,33 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "400,000" text in "Quantity" field of "ItemList" table
-		And I activate field named "ItemListAmount" in "ItemList" table
-		And I input "4 400,00" text in the field named "ItemListAmount" of "ItemList" table
+		And I activate field named "ItemListTotalAmount" in "ItemList" table
+		And I input "4 400,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Check price calculation
 		And "ItemList" table contains lines
-			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'    |
-			| '4 400,00'   | 'Dress'   | 'S/Yellow'   | '400,000'    | '11,00'    |
+			| 'Total amount' | 'Item'  | 'Item key' | 'Quantity' | 'Price' | 'Net amount' | 'Tax amount' |
+			| '4 400,00'     | 'Dress' | 'S/Yellow' | '400,000'  | '9,32'  | '3 728,81'   | '671,19'     |
 	* Change quantity and check amount
 		And I go to line in "ItemList" table
-			| '#'   | 'Amount'     | 'Item'    | 'Item key'   | 'Price'   | 'Quantity'    |
-			| '1'   | '5 000,00'   | 'Dress'   | 'XS/Blue'    | '10,00'   | '500,000'     |
+			| '#'   | 'Total amount'| 'Item'    | 'Item key'   | 'Price'   | 'Quantity'    |
+			| '1'   | '5 900,00'    | 'Dress'   | 'XS/Blue'    | '10,00'   | '500,000'     |
 		And I select current line in "ItemList" table
 		And I input "550,00" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'     | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
-			| '5 500,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '10,00'   | ''              |
+			| 'Total amount'| 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Tax amount'    |
+			| '6 490,00'    | 'Dress'   | 'XS/Blue'    | '550,000'    | '10,00'   | '990,00'        |
 	* Change amount and check price
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
 			| 'Dress'   | 'XS/Blue'     |
 		And I select current line in "ItemList" table
-		And I input "10 000,00" text in the field named "ItemListAmount" of "ItemList" table
+		And I input "10 000,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'      | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
-			| '10 000,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '18,18'   | ''              |
+			| 'Total amount' | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Tax amount'    |
+			| '10 000,00'    | 'Dress'   | 'XS/Blue'    | '550,000'    | '15,41'   | '1 525,42'      |
 	* Change price and check amount	
 		And I go to line in "ItemList" table
 			| 'Item'    | 'Item key'    |
@@ -1627,8 +1627,8 @@ Scenario: _2990055 check filling price and sum in the Stock adjustment as surplu
 		And I input "22,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Amount'      | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Amount tax'    |
-			| '12 100,00'   | 'Dress'   | 'XS/Blue'    | '550,000'    | '22,00'   | ''              |
+			| 'Total amount' | 'Item'    | 'Item key'   | 'Quantity'   | 'Price'   | 'Tax amount'    | 'Net amount'    | 'VAT'    |
+			| '14 278,00'    | 'Dress'   | 'XS/Blue'    | '550,000'    | '22,00'   | '2 178,00'      | '12 100,00'     | '18%'    |
 		And I close all client application windows					
 
 		

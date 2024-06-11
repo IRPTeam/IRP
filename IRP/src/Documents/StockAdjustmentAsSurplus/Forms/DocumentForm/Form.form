@@ -1658,23 +1658,23 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListAmount</name>
-          <id>419</id>
+          <name>ItemListVatRate</name>
+          <id>502</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Amount</segments>
+            <segments>Object.ItemList.VatRate</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>ItemListAmountOnChange</name>
+            <name>ItemListVatRateOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>ItemListAmountExtendedTooltip</name>
-            <id>421</id>
+            <name>ItemListVatRateExtendedTooltip</name>
+            <id>504</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1688,8 +1688,8 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListAmountContextMenu</name>
-            <id>420</id>
+            <name>ItemListVatRateContextMenu</name>
+            <id>503</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1712,19 +1712,23 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListAmountTax</name>
-          <id>430</id>
+          <name>ItemListTaxAmount</name>
+          <id>505</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.AmountTax</segments>
+            <segments>Object.ItemList.TaxAmount</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListTaxAmountOnChange</name>
+          </handlers>
           <extendedTooltip>
-            <name>ItemListAmountTaxExtendedTooltip</name>
-            <id>432</id>
+            <name>ItemListTaxAmountExtendedTooltip</name>
+            <id>507</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -1738,8 +1742,116 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListAmountTaxContextMenu</name>
-            <id>431</id>
+            <name>ItemListTaxAmountContextMenu</name>
+            <id>506</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListNetAmount</name>
+          <id>508</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.NetAmount</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListNetAmountOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListNetAmountExtendedTooltip</name>
+            <id>510</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListNetAmountContextMenu</name>
+            <id>509</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListTotalAmount</name>
+          <id>511</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.TotalAmount</segments>
+          </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListTotalAmountOnChange</name>
+          </handlers>
+          <extendedTooltip>
+            <name>ItemListTotalAmountExtendedTooltip</name>
+            <id>513</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListTotalAmountContextMenu</name>
+            <id>512</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -2258,6 +2370,10 @@
         <dataPath xsi:type="form:DataPath">
           <segments>Object.Date</segments>
         </dataPath>
+        <handlers>
+          <event>OnChange</event>
+          <name>DateOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
           <id>6</id>

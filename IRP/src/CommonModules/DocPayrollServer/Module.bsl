@@ -350,37 +350,29 @@ Function _CalculateDaysForPaid_Vacation(VacationEmployeeTable, Parameters, Setti
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Employee,
-	|	COUNT(tmp.Date) AS CountDates,
-	|	MAX(ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0)) AS VacationDays,
-	|	MAX(ISNULL(R9545T_PaidVacationsTurnovers.PaidTurnover, 0)) AS PaidDays
+	|	COUNT(tmp.Date) AS TotalDays,
+	|	SUM(ISNULL(R9541T_VacationUsage.Days, 0)) AS PaidDays
 	|FROM
 	|	tmp AS tmp
-	|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Balance(ENDOFPERIOD(&Date, Month),) AS
-	|			R9541T_VacationUsageBalance
-	|		ON tmp.Company = R9541T_VacationUsageBalance.Company
-	|		AND tmp.Employee = R9541T_VacationUsageBalance.Employee
-	|		LEFT JOIN AccumulationRegister.R9545T_PaidVacations.Turnovers(BEGINOFPERIOD(&Date, Month), ENDOFPERIOD(&Date,
-	|			Month), Recorder,) AS R9545T_PaidVacationsTurnovers
-	|		ON tmp.Company = R9545T_PaidVacationsTurnovers.Company
-	|		AND tmp.Employee = R9545T_PaidVacationsTurnovers.Employee
-	|		AND R9545T_PaidVacationsTurnovers.Recorder <> &Recorder
+	|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage AS R9541T_VacationUsage
+	|		ON tmp.Company = R9541T_VacationUsage.Company
+	|		AND tmp.Employee = R9541T_VacationUsage.Employee
+	|		AND tmp.Date = R9541T_VacationUsage.Period
+	|		AND R9541T_VacationUsage.Active
+	|		AND R9541T_VacationUsage.Recorder REFS Document.EmployeeVacation
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Employee";
 	Query.SetParameter("tmp", VacationEmployeeTable);
-	Query.SetParameter("Date", Parameters.BeginDate);
-	Query.SetParameter("Recorder", Parameters.Ref);
 	
-	TotalDays = Query.Execute().Unload();
-	
-	For Each TotalRow In TotalDays Do
+	DaysTable = Query.Execute().Unload();
+	For Each TotalRow In DaysTable Do
 		Filter = New Structure();
 		Filter.Insert("Company"  , TotalRow.Company);
 		Filter.Insert("Employee" , TotalRow.Employee);
-		
 		EmployeeRows = VacationEmployeeTable.FindRows(Filter);
 						
-		CalculatePaidDays(TotalRow.PaidDays, TotalRow.VacationDays, EmployeeRows, "IsPaidVacation");
+		CalculatePaidDays(0, TotalRow.PaidDays, EmployeeRows, "IsPaidVacation");
 	EndDo;
 	
 	Return VacationEmployeeTable;

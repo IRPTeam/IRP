@@ -49,13 +49,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	EmployeeList.Ref.Date AS Period,
 	|	DateTable.Date AS Date,
+	|	EmployeeList.BeginDate AS BeginDate,
+	|	EmployeeList.EndDate AS EndDate,
+	|	EmployeeList.PaidDays AS PaidDays,
 	|	EmployeeList.Employee AS Employee,
 	|	EmployeeList.Ref.Company AS Company,
 	|	EmployeeList.Ref.Branch AS Branch
 	|INTO EmployeeVacations
 	|FROM
 	|	Document.EmployeeVacation.EmployeeList AS EmployeeList
-	|		LEFT JOIN DateTable AS DateTable
+	|		INNER JOIN DateTable AS DateTable
 	|		ON DateTable.Date >= EmployeeList.BeginDate
 	|		AND DateTable.Date <= EmployeeList.EndDate
 	|		AND EmployeeList.Ref = &Ref
@@ -178,42 +181,16 @@ EndFUnction
 Function R9541T_VacationUsage()
 	Return
 		"SELECT
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Employee,
-		|	COUNT(DISTINCT EmployeeVacations.Date) AS Dates
-		|INTO tmp_VacationDays
-		|FROM
-		|	EmployeeVacations AS EmployeeVacations
-		|GROUP BY
-		|	EmployeeVacations.Period,
-		|	EmployeeVacations.Company,
-		|	EmployeeVacations.Employee
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	EmployeeVacations.Period,
+		|	EmployeeVacations.Date AS Period,
 		|	EmployeeVacations.Company,
 		|	EmployeeVacations.Employee,
-		|	CASE
-		|		WHEN ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) > EmployeeVacations.Dates
-		|			THEN EmployeeVacations.Dates
-		|		ELSE ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0)
-		|	END AS Days
+		|	1 AS Days
 		|INTO R9541T_VacationUsage
 		|FROM
-		|	tmp_VacationDays AS EmployeeVacations
-		|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage.Balance(&DateBefore,) AS R9541T_VacationUsageBalance
-		|		ON EmployeeVacations.Company = R9541T_VacationUsageBalance.Company
-		|		AND EmployeeVacations.Employee = R9541T_VacationUsageBalance.Employee
+		|	EmployeeVacations AS EmployeeVacations
 		|WHERE
-		|	ISNULL(R9541T_VacationUsageBalance.DaysBalance, 0) > 0
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|DROP tmp_VacationDays";
+		|	EmployeeVacations.Date < DATEADD(EmployeeVacations.BeginDate, Day, EmployeeVacations.PaidDays)";
 EndFUnction
 
 #EndRegion

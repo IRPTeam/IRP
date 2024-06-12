@@ -191,6 +191,24 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="4746d8a1-4acc-4d7a-a05c-7681f81a9b8e">
+      <name>PaidDays</name>
+      <synonym>
+        <key>en</key>
+        <value>Paid days</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>3</precision>
+          <nonNegative>true</nonNegative>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="0ec660d1-4fc2-41e2-908f-27df1ad30bcb">
     <producedTypes>

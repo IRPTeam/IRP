@@ -764,6 +764,13 @@
             <green>102</green>
             <blue>255</blue>
           </titleTextColor>
+          <titleFont xsi:type="core:FontRef">
+            <font>Style.NormalTextFont</font>
+            <bold>true</bold>
+            <italic>false</italic>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+          </titleFont>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -772,6 +779,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.EmployeeList.PaidDays</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>EmployeeListPaidDaysOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>EmployeeListPaidDaysExtendedTooltip</name>
             <id>1508</id>
@@ -798,7 +809,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>InputField</type>
-          <readOnly>true</readOnly>
           <editMode>Enter</editMode>
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -807,6 +817,14 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <format>
+              <key>en</key>
+              <value>NZ=</value>
+            </format>
+            <editFormat>
+              <key>en</key>
+              <value>NZ=</value>
+            </editFormat>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
@@ -815,9 +833,6 @@
         <items xsi:type="form:FormField">
           <name>EmployeeListOwnCostDays</name>
           <id>1503</id>
-          <titleTextColor xsi:type="core:ColorDef">
-            <red>255</red>
-          </titleTextColor>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -826,6 +841,9 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.EmployeeList.OwnCostDays</segments>
           </dataPath>
+          <titleBackColor xsi:type="core:ColorRef">
+            <color>Style.ReportHeaderBackColor</color>
+          </titleBackColor>
           <extendedTooltip>
             <name>EmployeeListOwnCostDaysExtendedTooltip</name>
             <id>1505</id>
@@ -861,9 +879,92 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
+            <format>
+              <key>en</key>
+              <value>NZ=</value>
+            </format>
+            <editFormat>
+              <key>en</key>
+              <value>NZ=</value>
+            </editFormat>
             <chooseType>true</chooseType>
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
+            <backColor xsi:type="core:ColorRef">
+              <color>Style.ReportHeaderBackColor</color>
+            </backColor>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>EmployeeListTotalDays</name>
+          <id>1509</id>
+          <titleFont xsi:type="core:FontRef">
+            <font>Style.NormalTextFont</font>
+            <bold>true</bold>
+            <italic>false</italic>
+            <underline>false</underline>
+            <strikeout>false</strikeout>
+          </titleFont>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.EmployeeList.TotalDays</segments>
+          </dataPath>
+          <titleBackColor xsi:type="core:ColorRef">
+            <color>Style.ReportHeaderBackColor</color>
+          </titleBackColor>
+          <extendedTooltip>
+            <name>EmployeeListTotalDaysExtendedTooltip</name>
+            <id>1511</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>EmployeeListTotalDaysContextMenu</name>
+            <id>1510</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <readOnly>true</readOnly>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <format>
+              <key>en</key>
+              <value>NZ=</value>
+            </format>
+            <editFormat>
+              <key>en</key>
+              <value>NZ=</value>
+            </editFormat>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+            <backColor xsi:type="core:ColorRef">
+              <color>Style.ReportHeaderBackColor</color>
+            </backColor>
           </extInfo>
         </items>
         <autoCommandBar>
@@ -1588,10 +1689,10 @@
         <segments>Object.EmployeeList</segments>
       </tablePath>
       <columns>
-        <name>PaidDays</name>
+        <name>TotalDays</name>
         <title>
           <key>en</key>
-          <value>Paid days</value>
+          <value>Total</value>
         </title>
         <id>11</id>
         <valueType>

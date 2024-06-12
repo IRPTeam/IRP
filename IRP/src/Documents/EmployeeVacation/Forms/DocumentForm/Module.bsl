@@ -117,6 +117,15 @@ Procedure EmployeeListBeginDateOnChange(Item)
 	CalculateEmployeeRow(Items.EmployeeList.CurrentData);
 EndProcedure
 
+&AtClient
+Procedure EmployeeListPaidDaysOnChange(Item)
+	EmployeeRow = Items.EmployeeList.CurrentData;
+	If EmployeeRow.PaidDays > EmployeeRow.TotalDays Then
+		EmployeeRow.PaidDays = EmployeeRow.TotalDays;
+	EndIf;
+	EmployeeRow.OwnCostDays = EmployeeRow.TotalDays - EmployeeRow.PaidDays;
+EndProcedure
+
 #EndRegion
 
 #Region SERVICE
@@ -231,6 +240,7 @@ Procedure CalculateEmployeeRow(EmployeeRow)
 			OR NOT ValueIsFilled(EmployeeRow.BeginDate)
 			OR NOT ValueIsFilled(EmployeeRow.EndDate)
 			OR EmployeeRow.EndDate < EmployeeRow.BeginDate Then
+		EmployeeRow.TotalDays = 0;
 		EmployeeRow.PaidDays = 0;
 		EmployeeRow.OwnCostDays = 0;
 		Return;
@@ -241,18 +251,11 @@ EndProcedure
 &AtServer
 Procedure CalculateEmployeeRowAtServer(EmployeeRowID)
 	EmployeeRow = Object.EmployeeList.FindByID(EmployeeRowID);
-	TotalDays = Max((EmployeeRow.EndDate - EmployeeRow.BeginDate) / 86400 + 1, 0);
-	AvailableDays = 
-		AccumulationRegisters.R9541T_VacationUsage.GetAvailableDays(
-			Object.Company, EmployeeRow.Employee, EmployeeRow.BeginDate);
-	
-	If AvailableDays >= TotalDays Then
-		EmployeeRow.PaidDays = TotalDays;
-		EmployeeRow.OwnCostDays = 0;
-	Else
-		EmployeeRow.PaidDays = AvailableDays;
-		EmployeeRow.OwnCostDays = TotalDays - AvailableDays;
+	EmployeeRow.TotalDays = Max((EmployeeRow.EndDate - EmployeeRow.BeginDate) / 86400 + 1, 0);
+	If EmployeeRow.PaidDays = 0 Or EmployeeRow.PaidDays > EmployeeRow.TotalDays Then
+		EmployeeRow.PaidDays = EmployeeRow.TotalDays;
 	EndIf;
+	EmployeeRow.OwnCostDays = EmployeeRow.TotalDays - EmployeeRow.PaidDays;
 EndProcedure
 	
 #EndRegion

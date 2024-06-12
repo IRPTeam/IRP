@@ -64,13 +64,13 @@ Function GetParameters_V6(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-Function GetParameters_V7(Object, RowKey, Currency, Amount) Export
+Function GetParameters_V7(Object, RowKey, Currency, Amount, Agreement = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);
 	Parameters.Insert("Date"           , Object.Date);
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Currency);
-	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("Agreement"      , Agreement);
 	Parameters.Insert("RowKey"         , RowKey);
 	Parameters.Insert("DocumentAmount" , Amount);
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, RowKey));

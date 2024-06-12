@@ -221,6 +221,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitCreditNote_R5020B_PartnersBalance, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance, New Structure("ByRow", False));
 	
 	ArrayOfAccrualsTransactionTypes = New Array();
 	ArrayOfAccrualsTransactionTypes.Add(Enums.AccrualsTransactionType.Accrual);
@@ -413,6 +415,10 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Parameters.Insert("IsCurrencyRevaluation", 
 		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));		
+	Parameters.Insert("IsDebitCreditNoteDifference", 
+		AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues
+		Or AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance);
+	
 		
 	Data = GetAccountingData(Parameters);
 	
@@ -1561,6 +1567,11 @@ Procedure UpdateAccountingTables(Object,
 			Continue;
 		EndIf;
 				
+		If IsNotUsedOperation(Operation.OperationInfo.Operation, ObjectData, Undefined) Then
+			AddNotUsedOperation(ArrayOfNotUsedOperations, Operation.OperationInfo.Operation, Undefined);
+			Continue;
+		EndIf;
+		 
 		Parameters = New Structure();
 		Parameters.Insert("Object"        , Object);
 		Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
@@ -1576,7 +1587,7 @@ Procedure UpdateAccountingTables(Object,
 		FillAccountingRowAnalytics(Parameters);
 	EndDo;
 		
-	If MainTableName = Undefined Then
+	If MainTableName = Undefined Then // reques table
 		For Each Operation In OperationsByLedgerType Do
 			If Not Operation.OperationInfo.RequestTable Then
 				Continue;
@@ -1649,7 +1660,9 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 	ElsIf DocMetadata = Metadata.Documents.CreditNote Then
 		Return IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
-		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);
+		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);		
+	ElsIf DocMetadata = Metadata.Documents.DebitCreditNote Then
+		Return IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.TaxesOperation Then
 		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);				
 	ElsIf DocMetadata = Metadata.Documents.Payroll Then
@@ -2158,7 +2171,8 @@ Function GetAccountingData(Parameters)
 	|				Amounts.Currency end end as CrCurrency,
 	|
 	|
-	|	SUM(case when &IsRevaluationCurrency then 
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
 	|			0 
 	|			else
 	|				case when Amounts.DrCurrencyAmount <> 0 then
@@ -2166,7 +2180,8 @@ Function GetAccountingData(Parameters)
 	|				else
 	|					Amounts.Amount end end) AS DrCurrencyAmount,
 	|
-	|	SUM(case when &IsRevaluationCurrency then 
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
 	|			0 
 	|			else
 	|				case when Amounts.CrCurrencyAmount <> 0 then
@@ -2250,6 +2265,7 @@ Function GetAccountingData(Parameters)
 	Query.SetParameter("Operation"            , Parameters.Operation);
 	Query.SetParameter("FilterByRowKey"       , ValueIsFilled(RowKey));
 	Query.SetParameter("RowKey"           	  , RowKey);
+	Query.SetParameter("IsDebitCreditNoteDifference", Parameters.IsDebitCreditNoteDifference);
 	
 	If Parameters.IsCurrencyRevaluation Then
 		Query.SetParameter("RevaluationCurrency", Parameters.CurrencyMovementType);
@@ -2530,6 +2546,26 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	EndIf;
 	Return True;
+EndFunction
+
+Function IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	
+	If Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer 
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+			Return False;
+		EndIf;
+		Return True;
+	ElsIf Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+			Return False;
+		EndIf;
+		Return True;	
+	EndIf;
+	
+	Return False;
 EndFunction
 
 Function IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData)

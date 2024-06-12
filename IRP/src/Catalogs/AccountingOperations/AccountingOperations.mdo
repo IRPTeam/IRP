@@ -945,6 +945,20 @@
           <value>100</value>
         </code>
       </content>
+      <content id="bb6f45e3-69fd-4849-8378-da8bff10037e">
+        <name>DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>148</value>
+        </code>
+      </content>
+      <content id="97345aa8-10a2-4081-a626-909d0321f499">
+        <name>DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>149</value>
+        </code>
+      </content>
     </items>
     <items id="656735e9-e351-43cf-a5e6-33f3cd4b5502">
       <name>Document_ExpenseAccruals</name>

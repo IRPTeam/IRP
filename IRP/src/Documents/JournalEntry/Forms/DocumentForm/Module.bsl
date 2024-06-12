@@ -261,7 +261,20 @@ EndProcedure
 &AtServer
 Procedure ProfitLostOffsetAtServer()
 	Object.RegisterRecords.Basic.Clear();
-	DataTable = Catalogs.LedgerTypes.ProfitLostOffset(Object.Company, Object.LedgerType, Object.Ref, Object.Date);
+	
+	RegisterRecords = AccountingRegisters.Basic.CreateRecordSet();
+	RegisterRecords.Filter.Recorder.Set(Object.Ref);
+	RegisterRecords.Write();
+		
+	DataTable = Catalogs.LedgerTypes.ProfitLostOffset(Object.Company, 
+		Object.LedgerType, 
+		Object.Ref, 
+		Object.Date, 
+		Object.DeletionMark,
+		RegisterRecords);
+	
+	Object.RegisterRecords.Basic.Clear();
+	
 	AccountingServer.SetDataRegisterRecords(DataTable, Object.LedgerType, Object.RegisterRecords.Basic);
 	For Each Record In Object.RegisterRecords.Basic Do
 		Record.Active = Not Object.DeletionMark;

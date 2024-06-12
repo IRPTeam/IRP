@@ -1572,6 +1572,7 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportFromTradeAgent'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReceiptCorrection'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'StockAdjustmentAsSurplus'    |
 
 
 Scenario: Create catalog Taxes objects (with transaction type)
@@ -1657,25 +1658,26 @@ Scenario: Create catalog Taxes objects (for work order)
 Scenario: Create catalog Taxes objects (for debit and credit note)
 
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'           |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrder'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesInvoice'           |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrder'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseInvoice'        |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashExpense'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturn'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturnOrder'    |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturnOrder'       |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturn'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailSalesReceipt'     |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReturnReceipt'    |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrderClosing'      |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrderClosing'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'WorkOrder'              |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CreditNote'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'DebitNote'              |
+		| 'Ref'                                                           | 'DocumentName'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'         |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'StockAdjustmentAsSurplus' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'WorkOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CreditNote'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'DebitNote'                |
 
 Scenario: Create catalog Taxes objects (for commission trade)
 
@@ -2434,6 +2436,13 @@ Scenario: Create catalog Workstations objects  (Test)
 	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Description'  | 'CashAccount'  | 'UniqueID'   |
 		| 'e1cib/data/Catalog.Workstations?ref=aa7d120ed92fbced11eb096728fa8eee'  | 'False'         | 'Test'         | ''             | ''           |
+
+Scenario: Create catalog AddAttributeAndProperty (boolean)
+
+	And I check or create chart of characteristic types "AddAttributeAndProperty" objects:
+		| 'Ref'                                                                                                | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Icon'                                  | 'isIconSet' | 'isURL' | 'Description_en'            | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          | 'ValueType'               |
+		| 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7a0d8de1a1c04c611ee1b0a09bcb8a8' | 'False'        | ''       | 'False'    | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'     | 'False' | 'Add attribute (boolean)'   | ''                 | ''               | ''               | '_e19e213c0a1647deb8835dab2a35089f' | '<Type>xs:boolean</Type>' |
+
 
 Scenario: Create catalog AddAttributeAndProperty (hyperlink)
 

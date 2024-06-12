@@ -204,7 +204,11 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 	EndIf;
 	
 	ExchangeDifference(Parameters);
-//	DebitCreditNoteDiffence(Parameters);
+	
+	If Not CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsDebitCreditNoteDifference", False)
+		And Not CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False)  Then
+		DebitCreditNoteDifference(Parameters);
+	EndIf;
 EndProcedure
 
 Function GetAdvancesCurrencyRevaluation(DocRef)
@@ -905,7 +909,7 @@ Procedure ExchangeDifference(Parameters)
 		Return; // is not exchange
 	EndIf;
 	
-	Expenes = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
+	Expenses = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
 	Revenues = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
 	Accounting = Parameters.PostingDataTables[Metadata.AccumulationRegisters.T1040T_AccountingAmounts].PrepareTable;
 	
@@ -1002,7 +1006,7 @@ Procedure ExchangeDifference(Parameters)
 				Accounting_NewRow.Operation = AccountingOperation_Expenses;
 			EndIf;
 			
-			Expenses_NewRow = Expenes.Add();
+			Expenses_NewRow = Expenses.Add();
 			FillPropertyValues(Expenses_NewRow, Row);
 			Expenses_NewRow.ExpenseType = ExpenseType;
 			Expenses_NewRow.ProfitLossCenter = LossCenter;
@@ -1050,179 +1054,267 @@ EndProcedure
 #Region DEBIT_CREDIT_NOTE_DIFFERENCE
 
 Procedure DebitCreditNoteDifference(Parameters)
-	
-	IsDifferenceCurrency = False;
-	TransitIncoming = New ValueTable();
-	TransitIncoming_PrepareTable = New ValueTable();
-	
-	AccountingOperation_Revenues = Undefined;
-	AccountingOperation_Expenses = Undefined;
-	
-	ExpenseType  = Undefined;
-	LossCenter   = Undefined;
-	RevenueType  = Undefined;
-	ProfitCenter = Undefined;
-	
-	If Parameters.Metadata = Metadata.Documents.DebitCreditNote 
-		And Parameters.Object.SendCurrency <> Parameters.Object.ReceiveCurrency Then
-		
-		IsDifferenceCurrency = True;
-		TransitIncoming_PrepareTable = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R3021B_CashInTransitIncoming].PrepareTable;
-		TransitIncoming = TransitIncoming_PrepareTable;
-		
-		AccountingOperation_Revenues = Catalogs.AccountingOperations.MoneyTransfer_DR_R3021B_CashInTransit_CR_R5021T_Revenues;
-		AccountingOperation_Expenses = Catalogs.AccountingOperations.MoneyTransfer_DR_R5022T_Expenses_CR_R3021B_CashInTransit;
-		
-		ExpenseType  = Parameters.Object.ExpenseType;
-		LossCenter   = Parameters.Object.LossCenter;
-		RevenueType  = Parameters.Object.RevenueType;
-		ProfitCenter = Parameters.Object.ProfitCenter;
-					
-	EndIf;
-		
-	If Not IsDifferenceCurrency Then
-		Return; // is not difference currency
+
+	If Not (Parameters.Metadata = Metadata.Documents.DebitCreditNote 
+		And Parameters.Object.SendCurrency <> Parameters.Object.ReceiveCurrency) Then
+		Return;
 	EndIf;
 	
-	Expenes = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
-	Revenues = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
+	TotalReceipt = 0;
+	TotalExpense = 0;
+	LegalCurrency = Undefined;
+	BalanceType   = Undefined;
+	
+	// Send (expenses)
+	If Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionCustomer Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+	
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+		
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+		
+	ElsIf Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceVendor Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Expense);
+		TotalExpense  = Result.TotalAmount;
+	
+	EndIf;
+				
+	// Receive (receipt)
+	If Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "passive";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor Then
+		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
+		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "passive";
+		TotalReceipt  = Result.TotalAmount;
+		LegalCurrency = Result.LegalCurrency;
+		
+	EndIf;
+		
+	If TotalExpense = TotalReceipt Then
+		Return;
+	EndIf;
+	
+	DataInfo = New Structure();
+	DataInfo.Insert("RecordPeriod"    , Parameters.Object.Date);
+	DataInfo.Insert("ReceiveCurrency" , Parameters.Object.ReceiveCurrency); 
+	DataInfo.Insert("DocRef"          , Parameters.Object.Ref);
+	DataInfo.Insert("ExpenseType"     , Parameters.Object.ExpenseType);
+	DataInfo.Insert("LossCenter"      , Parameters.Object.LossCenter);
+	DataInfo.Insert("RevenueType"     , Parameters.Object.RevenueType);
+	DataInfo.Insert("ProfitCenter"    , Parameters.Object.ProfitCenter);
+	DataInfo.Insert("TransitUUID"     , Parameters.Object.TransitUUID);
+	DataInfo.Insert("Company"         , Parameters.Object.Company);
+	DataInfo.Insert("Branch"          , Parameters.Object.Branch);
+	DataInfo.Insert("Project"         , Parameters.Object.ReceiveProject);
+	DataInfo.Insert("LegalCurrency"   , LegalCurrency);
+	DataInfo.Insert("CurrenciesTable" , Parameters.Object.Currencies.Unload().Copy(New Structure("Key", DataInfo.TransitUUID)));
+	
+	Expenses    = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5022T_Expenses].PrepareTable;	
+	Revenues   = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R5021T_Revenues].PrepareTable;	
 	Accounting = Parameters.PostingDataTables[Metadata.AccumulationRegisters.T1040T_AccountingAmounts].PrepareTable;
-	
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
-	"SELECT *
-	|INTO TransitIncoming
-	|FROM &TransitIncoming AS TransitIncoming";
-	Query.SetParameter("TransitIncoming", TransitIncoming);
-	Query.Execute();
-	
-	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Receipt, TransitIncoming);
-	ReplaceAmountInTransactionCurrency(Parameters.TempTablesManager, AccumulationRecordType.Expense, TransitIncoming);
-	
-	Query.Text = 
-	"SELECT
-	|	*
-	|INTO TransitIncomingReplaced
-	|FROM
-	|	&TransitIncoming AS TransitIncoming
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TransitIncomingExpense.RecordType AS ExpenseRecordType,
-	|	TransitIncomingReceipt.RecordType AS ReceiptRecordType,
-	|	TransitIncomingExpense.Period AS Period,
-	|	TransitIncomingReceipt.Amount - TransitIncomingExpense.Amount AS Amount,
-	|	TransitIncomingReceipt.*
-	|INTO Diff
-	|FROM
-	|	TransitIncomingReplaced AS TransitIncomingReceipt
-	|		INNER JOIN TransitIncomingReplaced AS TransitIncomingExpense
-	|		ON TransitIncomingReceipt.Company = TransitIncomingExpense.Company
-	|		AND TransitIncomingReceipt.Branch = TransitIncomingExpense.Branch
-	|		AND TransitIncomingReceipt.Account = TransitIncomingExpense.Account
-	|		AND TransitIncomingReceipt.CurrencyMovementType = TransitIncomingExpense.CurrencyMovementType
-	|		AND TransitIncomingReceipt.Currency = TransitIncomingExpense.Currency
-	|		AND TransitIncomingReceipt.TransactionCurrency = TransitIncomingExpense.TransactionCurrency
-	|		AND TransitIncomingReceipt.Basis = TransitIncomingExpense.Basis
-	|
-	|		AND (TransitIncomingReceipt.RecordType = VALUE(AccumulationRecordType.Receipt))
-	|		AND (TransitIncomingExpense.RecordType = VALUE(AccumulationRecordType.Expense))
-	|
-	|		AND (NOT TransitIncomingReceipt.Period IS NULL)
-	|		AND (NOT TransitIncomingExpense.Period IS NULL)
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	CASE
-	|		WHEN Diff.Amount < 0
-	|			THEN Diff.ReceiptRecordType
-	|		ELSE Diff.ExpenseRecordType
-	|	END AS RecordType,
-	|	CASE
-	|		WHEN Diff.Amount < 0
-	|			THEN -Diff.Amount
-	|		ELSE Diff.Amount
-	|	END AS Amount,
-	|	Diff.*
-	|FROM
-	|	Diff AS Diff";
 		
-	Query.SetParameter("TransitIncoming", TransitIncoming);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	For Each Row In QueryTable Do
-		If Not ValueIsFilled(Row.Amount) Then
-			Continue; // not currency difference
+	Accounting_ClearCopy = Accounting.CopyColumns("Period, Operation, Currency, DrCurrency, CrCurrency, Amount, Key");
+	
+	Revenues_ClearCopy = Revenues.CopyColumns("Period, Company, Branch, ProfitLossCenter, RevenueType, Currency, Project, Amount");
+	Revenues_ClearCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	
+	Expenses_ClearCopy = Expenses.CopyColumns("Period, Company, Branch, ProfitLossCenter, ExpenseType, Currency, Project, Amount");
+	Expenses_ClearCopy.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+				
+	If BalanceType = "active" Then
+		// is revenue
+		If TotalExpense < TotalReceipt Then
+			
+			Revenue_Amount = TotalReceipt - TotalExpense;
+			
+			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
+			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
+					
+		// is Expense
+		ElsIf TotalExpense > TotalReceipt Then
+			
+			Expense_Amount = TotalExpense - TotalReceipt;
+			
+			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
+			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
+			
+		EndIf;
+	EndIf;
+	
+	If BalanceType = "passive" Then
+		// is Expense
+		If TotalExpense < TotalReceipt Then
+			
+			Expense_Amount = TotalReceipt - TotalExpense;
+			
+			AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Expense_Amount);
+			AddRecord_Expense(DataInfo, Expenses_ClearCopy, Expense_Amount);
+					
+		// is Revenue
+		ElsIf TotalExpense > TotalReceipt Then
+			
+			Revenue_Amount = TotalExpense - TotalReceipt;
+			
+			AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Revenue_Amount);
+			AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Revenue_Amount);
+			
+		EndIf;
+	EndIf;
+	
+	PostingDataTables = New Map();
+	
+	RecordSet_AccountingAmounts = AccumulationRegisters.T1040T_AccountingAmounts.CreateRecordSet();
+	Settings_AccountingAmounts = PostingServer.PostingTableSettings(Accounting_ClearCopy, RecordSet_AccountingAmounts);
+	PostingDataTables.Insert(RecordSet_AccountingAmounts.Metadata(), Settings_AccountingAmounts);
+	
+	RecordSet_Expenses = AccumulationRegisters.R5022T_Expenses.CreateRecordSet();
+	Settings_Expenses = PostingServer.PostingTableSettings(Expenses_ClearCopy, RecordSet_Expenses);
+	PostingDataTables.Insert(RecordSet_Expenses.Metadata(), Settings_Expenses);
+	
+	RecordSet_Revenues = AccumulationRegisters.R5021T_Revenues.CreateRecordSet();
+	Settings_Revenues = PostingServer.PostingTableSettings(Revenues_ClearCopy, RecordSet_Revenues);
+	PostingDataTables.Insert(RecordSet_Revenues.Metadata(), Settings_Revenues);
+	
+	CurrenciesParameters = New Structure("IsDebitCreditNoteDifference", True);
+
+	ArrayOfPostingInfo = New Array();
+	For Each DataTable In PostingDataTables Do
+		ArrayOfPostingInfo.Add(DataTable);
+	EndDo;
+	CurrenciesParameters.Insert("Object"   , DataInfo.DocRef);
+	CurrenciesParameters.Insert("Metadata" , DataInfo.DocRef.Metadata());
+	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
+
+	PreparePostingDataTables(CurrenciesParameters, DataInfo.CurrenciesTable);
+	
+	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
+				FillPropertyValues(Accounting.Add(), RowPostingInfo);
+			EndDo;
 		EndIf;
 		
-		FillPropertyValues(TransitIncoming_PrepareTable.Add(), Row);
+		If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R5022T_Expenses Then
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
+				FillPropertyValues(Expenses.Add(), RowPostingInfo);
+			EndDo;
+		EndIf;
 		
-		If Row.RecordType = AccumulationRecordType.Receipt Then
-			
-			If ValueIsFilled(AccountingOperation_Revenues) Then
-				Accounting_NewRow = Accounting.Add();
-				FillPropertyValues(Accounting_NewRow, Row);
-				Accounting_NewRow.Operation = AccountingOperation_Revenues;
-			EndIf;
-			
-			Revenues_NewRow = Revenues.Add();
-			FillPropertyValues(Revenues_NewRow, Row);
-			Revenues_NewRow.RevenueType = RevenueType;
-			Revenues_NewRow.ProfitLossCenter = ProfitCenter;
-			
-		ElsIf Row.RecordType = AccumulationRecordType.Expense Then 
-			
-			If ValueIsFilled(AccountingOperation_Expenses) Then
-				Accounting_NewRow = Accounting.Add();
-				FillPropertyValues(Accounting_NewRow, Row);
-				Accounting_NewRow.Operation = AccountingOperation_Expenses;
-			EndIf;
-			
-			Expenses_NewRow = Expenes.Add();
-			FillPropertyValues(Expenses_NewRow, Row);
-			Expenses_NewRow.ExpenseType = ExpenseType;
-			Expenses_NewRow.ProfitLossCenter = LossCenter;
-			
+		If ItemOfPostingInfo.Key = Metadata.AccumulationRegisters.R5021T_Revenues Then
+			For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
+				FillPropertyValues(Revenues.Add(), RowPostingInfo);
+			EndDo;
+		EndIf;
+
+	EndDo;
+EndProcedure
+
+Function GetAmountByRecordType(Table, IgnoreColumnName, RecordType)
+	Result = New Structure("LegalCurrency, TotalAmount", Undefined, 0);
+	
+	For Each Row In Table Do
+		If ValueIsFilled(Row[IgnoreColumnName]) Then
+			Continue;
+		EndIf;
+		
+		If Row.CurrencyMovementType.Type <> Enums.CurrencyType.Legal Then
+			Continue;
+		EndIf;
+		
+		Result.LegalCurrency = Row.Currency;
+		
+		If Row.RecordType = RecordType Then
+			Result.TotalAmount = Result.TotalAmount + Row.Amount;
 		EndIf;
 	EndDo;
 	
+	Return Result;
+EndFunction
+
+Procedure AddRecord_Revenue(DataInfo, Revenues_ClearCopy, Amount)
+	NewRow = Revenues_ClearCopy.Add();
+	NewRow.Period           = DataInfo.RecordPeriod;
+	NewRow.Company          = DataInfo.Company;
+	NewRow.Branch           = DataInfo.Branch;
+	NewRow.ProfitLossCenter = DataInfo.ProfitCenter;
+	NewRow.RevenueType      = DataInfo.RevenueType;
+	NewRow.Currency         = DataInfo.LegalCurrency;
+	NewRow.Project          = DataInfo.Project;
+	NewRow.Amount           = Amount;
+	NewRow.Key              = DataInfo.TransitUUID;
+EndProcedure	
+
+Procedure AddRecord_Expense(DataInfo, Expenses_ClearCopy, Amount)
+	NewRow = Expenses_ClearCopy.Add();
+	NewRow.Period           = DataInfo.RecordPeriod;
+	NewRow.Company          = DataInfo.Company;
+	NewRow.Branch           = DataInfo.Branch;
+	NewRow.ProfitLossCenter = DataInfo.LossCenter;
+	NewRow.ExpenseType      = DataInfo.ExpenseType;
+	NewRow.Currency         = DataInfo.LegalCurrency;
+	NewRow.Project          = DataInfo.Project;
+	NewRow.Amount           = Amount;
+	NewRow.Key              = DataInfo.TransitUUID;
 EndProcedure
 
-//Procedure ReplaceAmountInTransactionCurrency(TempTablesManager, RecordType, TransitIncoming)
-//	Query = New Query();
-//	Query.TempTablesManager = TempTablesManager;
-//	Query.Text = 
-//	"SELECT *
-//	|FROM TransitIncoming AS TransitIncoming
-//	|WHERE
-//	|	TransitIncoming.RecordType = &RecordType
-//	|	AND (TransitIncoming.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-//	|		OR TransitIncoming.TransactionCurrency = TransitIncoming.Currency)";
-//	Query.SetParameter("RecordType", RecordType);
-//	QueryResult = Query.Execute();
-//	QueryTable = QueryResult.Unload();
-//	
-//	TransactionCurrencyType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
-//	
-//	For Each Row In QueryTable Do
-//		If Row.CurrencyMovementType <> TransactionCurrencyType Then
-//			Filter = New Structure();
-//			Filter.Insert("CurrencyMovementType", TransactionCurrencyType);
-//			Filter.Insert("RecordType", RecordType);
-//			TransitIncomingRows = TransitIncoming.FindRows(Filter);
-//			If TransitIncomingRows.Count() <> 1 Then
-//				Raise StrTemplate("Found [%1] rows in transit incoming", TransitIncomingRows.Count());
-//			EndIf;
-//			
-//			TransitIncomingRows[0].Amount = Row.Amount;
-//			
-//			Break;
-//		EndIf;
-//	EndDo;
-//EndProcedure
+Procedure AddRecord_Revenue_Accounting(DataInfo, Accounting_ClearCopy, Amount)
+	NewRow = Accounting_ClearCopy.Add();
+	NewRow.Period     = DataInfo.RecordPeriod;
+	NewRow.Currency   = DataInfo.LegalCurrency;
+	NewRow.Key        = DataInfo.TransitUUID;
+	NewRow.Operation  = Catalogs.AccountingOperations.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues;
+	NewRow.DrCurrency = DataInfo.ReceiveCurrency;
+	NewRow.CrCurrency = DataInfo.LegalCurrency;
+	NewRow.Amount     = Amount;
+EndProcedure
+
+Procedure AddRecord_Expense_Accounting(DataInfo, Accounting_ClearCopy, Amount)
+	NewRow = Accounting_ClearCopy.Add();
+	NewRow.Period     = DataInfo.RecordPeriod;
+	NewRow.Currency   = DataInfo.LegalCurrency;
+	NewRow.Key        = DataInfo.TransitUUID;
+	NewRow.Operation  = Catalogs.AccountingOperations.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance;
+	NewRow.DrCurrency = DataInfo.LegalCurrency;
+	NewRow.CrCurrency = DataInfo.ReceiveCurrency;
+	NewRow.Amount     = Amount;
+EndProcedure
 
 #EndRegion
 

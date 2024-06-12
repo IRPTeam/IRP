@@ -64,13 +64,13 @@ Function GetParameters_V6(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-Function GetParameters_V7(Object, RowKey, Currency, Amount) Export
+Function GetParameters_V7(Object, RowKey, Currency, Amount, Agreement = Undefined) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);
 	Parameters.Insert("Date"           , Object.Date);
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Currency);
-	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("Agreement"      , Agreement);
 	Parameters.Insert("RowKey"         , RowKey);
 	Parameters.Insert("DocumentAmount" , Amount);
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, RowKey));
@@ -156,6 +156,19 @@ Function GetParameters_V13(Object) Export
 	Parameters.Insert("RowKey"         , Undefined);
 	Parameters.Insert("DocumentAmount" , Object.TaxesDifference.Total("Amount"));
 	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies));
+	Return Parameters;
+EndFunction
+
+Function GetParameters_V14(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.Currency);
+	Parameters.Insert("Agreement"      , Undefined);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
 	Return Parameters;
 EndFunction
 

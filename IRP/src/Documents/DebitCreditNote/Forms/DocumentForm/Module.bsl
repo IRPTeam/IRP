@@ -382,7 +382,7 @@ EndProcedure
 &AtClient
 Procedure EditCurrenciesSender(Command)
 	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.SendUUID, Object.SendCurrency,
-		Object.SendAmount);
+		Object.SendAmount, Object.SendAgreement);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
@@ -393,7 +393,7 @@ EndProcedure
 &AtClient
 Procedure EditCurrenciesReceiver(Command)
 	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.ReceiveUUID, Object.ReceiveCurrency,
-		Object.ReceiveAmount);
+		Object.ReceiveAmount, Object.ReceiveAgreement);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

@@ -708,6 +708,20 @@
           <value>139</value>
         </code>
       </content>
+      <content id="33e35216-97d1-4a65-a38a-c059a27e0d3f">
+        <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>148</value>
+        </code>
+      </content>
+      <content id="714bb1c1-92f3-473b-ae30-ca69769f6c6c">
+        <name>DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>149</value>
+        </code>
+      </content>
     </items>
     <items id="0dc9eae5-05d2-463e-89ce-6840f9a6a934">
       <name>Document_CreditNote</name>
@@ -745,6 +759,20 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>101</value>
+        </code>
+      </content>
+      <content id="d95201cb-17c8-433e-90ae-989162a446f4">
+        <name>CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>150</value>
+        </code>
+      </content>
+      <content id="7f184882-357a-4b02-bed4-d169efa1c217">
+        <name>CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>151</value>
         </code>
       </content>
     </items>
@@ -943,6 +971,20 @@
         <description></description>
         <code xsi:type="core:NumberValue">
           <value>100</value>
+        </code>
+      </content>
+      <content id="bb6f45e3-69fd-4849-8378-da8bff10037e">
+        <name>DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>148</value>
+        </code>
+      </content>
+      <content id="97345aa8-10a2-4081-a626-909d0321f499">
+        <name>DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>149</value>
         </code>
       </content>
     </items>

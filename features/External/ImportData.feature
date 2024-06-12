@@ -484,6 +484,11 @@ Scenario: Create catalog Partners objects (Employee for salary)
 		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 8 (several vacation + several sick leave)'         |
 		| 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50033' | 'False'        | ''       | 'False'    | 'False'  | 'True'     | 'False'     | 'Employee 9 (hours shedule + several sick leave)'            |
 
+Scenario: Create information register T9545S_VacationDaysLimits records
+
+	And I check or create information register "T9545S_VacationDaysLimits" records:
+		| 'Period'              | 'Company' | 'Employee' | 'DayLimit' | 'Document' |
+		| '01.01.2022 00:00:00' | ''        | ''         | 24         | ''         |
 
 Scenario: Create catalog BankTerms objects (for Shop 02)
 

@@ -54,7 +54,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.SendLegalName.Enabled    = ValueIsFilled(Object.SendPartner);
 	Form.Items.ReceiveLegalName.Enabled = ValueIsFilled(Object.ReceivePartner);
 	
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
 	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 	
 	IsEnabled_SendBasisDocument = True;
@@ -123,15 +124,6 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item) Export
 	DocDebitCreditNoteClient.DateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region CURRENCY
-
-&AtClient
-Procedure CurrencyOnChange(Item)
-	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -268,6 +260,31 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure CurrencyOnChange(Item)
+	DocDebitCreditNoteClient.CurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SendCurrencyOnChange(Item)
+	DocDebitCreditNoteClient.SendCurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ReceiveCurrencyOnChange(Item)
+	DocDebitCreditNoteClient.ReceiveCurrencyOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure SendAmountOnChange(Item)
+	DocDebitCreditNoteClient.SendAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ReceiveAmountOnChange(Item)
+	DocDebitCreditNoteClient.ReceiveAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
 #Region SERVICE
 
 #Region DESCRIPTION
@@ -363,8 +380,20 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 &AtClient
-Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, "", Object.Currency, Object.Amount);
+Procedure EditCurrenciesSender(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.SendUUID, Object.SendCurrency,
+		Object.SendAmount);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesReceiver(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, Object.ReceiveUUID, Object.ReceiveCurrency,
+		Object.ReceiveAmount);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

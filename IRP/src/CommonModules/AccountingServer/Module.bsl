@@ -114,6 +114,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
@@ -121,6 +123,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
 	// receipt inventory
@@ -412,7 +416,7 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("Operation", AnalyticRow.Operation);
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Parameters.Insert("IsCurrencyRevaluation", 
-		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));
+		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));		
 		
 	Data = GetAccountingData(Parameters);
 	
@@ -2139,8 +2143,43 @@ Function GetAccountingData(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end as Currency,
-	|	SUM(case when &IsRevaluationCurrency then 0 else Amounts.Amount end) AS Amount
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end as DrCurrency,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end as CrCurrency,
+	|
+	|
+	|	SUM(case when &IsRevaluationCurrency then 
+	|			0 
+	|			else
+	|				case when Amounts.DrCurrencyAmount <> 0 then
+	|					Amounts.DrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS DrCurrencyAmount,
+	|
+	|	SUM(case when &IsRevaluationCurrency then 
+	|			0 
+	|			else
+	|				case when Amounts.CrCurrencyAmount <> 0 then
+	|					Amounts.CrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS CrCurrencyAmount
+	|
+	|
+	|
 	|FROM
 	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
 	|WHERE
@@ -2153,7 +2192,23 @@ Function GetAccountingData(Parameters)
 	|		else True
 	|	end
 	|GROUP BY
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2207,7 +2262,7 @@ Function GetAccountingData(Parameters)
 		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 		Query.SetParameter("IsRevaluationCurrency", False);
 	EndIf;
-	
+		
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = GetAccountingDataResult();
@@ -2215,10 +2270,10 @@ Function GetAccountingData(Parameters)
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();
 	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
+		Result.CurrencyDr       = QuerySelection.DrCurrency;
+		Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
+		Result.CurrencyCr       = QuerySelection.CrCurrency;
+		Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
 	EndIf;
 	
 	// Amount
@@ -2449,6 +2504,10 @@ Function IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction
@@ -2477,6 +2536,10 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction

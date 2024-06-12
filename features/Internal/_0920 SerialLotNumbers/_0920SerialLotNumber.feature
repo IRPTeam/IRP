@@ -2006,9 +2006,9 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
 			And "ItemList" table became equal
-				| '#'    | 'Revenue type'    | 'Amount'    | 'Item'        | 'Basis document'    | 'Item key'     | 'Profit loss center'         | 'Physical inventory'    | 'Serial lot numbers'                | 'Unit'    | 'Quantity'    | 'Amount tax'     |
-				| '1'    | 'Revenue'         | ''          | 'Trousers'    | ''                  | '38/Yellow'    | 'Distribution department'    | ''                      | '99098809009999; 99098809009008'    | 'pcs'     | '4,000'       | ''               |
-				| '2'    | 'Revenue'         | ''          | 'Boots'       | ''                  | '38/18SD'      | 'Distribution department'    | ''                      | ''                                  | 'pcs'     | '2,000'       | ''               |
+				| '#' | 'Revenue type' | 'Total amount' | 'Item'     | 'Basis document' | 'Item key'  | 'Profit loss center'      | 'Physical inventory' | 'Serial lot numbers'             | 'Unit' | 'Quantity' | 'Tax amount' |
+				| '1' | 'Revenue'      | ''             | 'Trousers' | ''               | '38/Yellow' | 'Distribution department' | ''                   | '99098809009999; 99098809009008' | 'pcs'  | '4,000'    | ''           |
+				| '2' | 'Revenue'      | ''             | 'Boots'    | ''               | '38/18SD'   | 'Distribution department' | ''                   | ''                               | 'pcs'  | '2,000'    | ''           |
 		* Change serial/lot numbers quantity to 3
 			And I go to line in "ItemList" table
 				| 'Item'        | 'Item key'      |

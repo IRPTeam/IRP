@@ -524,8 +524,11 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 				| 'Description'     |
 				| 'Revenue'         |
 			And I select current line in "List" table
-			And I input "50,00" text in "Amount" field of "ItemList" table
-			And I input "10,00" text in "Amount tax" field of "ItemList" table
+			And I input "50,00" text in "Total amount" field of "ItemList" table
+			And I finish line editing
+			And "ItemList" table became equal
+				| "Revenue type" | "Item"  | "Item key" | "Profit loss center"      | "Unit" | "Tax amount" | "Source of origins"  | "Quantity" | "Price" | "VAT" | "Net amount" | "Total amount" |
+				| "Revenue"      | "Dress" | "XS/Blue"  | "Distribution department" | "pcs"  | "7,63"       | "Source of origin 5" | "2,000"    | "21,19" | "18%" | "42,37"      | "50,00"        |		
 			And I finish line editing in "ItemList" table
 		* Second item
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -577,14 +580,13 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 				| 'Description'     |
 				| 'Revenue'         |
 			And I select current line in "List" table
-			And I input "50,00" text in "Amount" field of "ItemList" table
-			And I input "10,00" text in "Amount tax" field of "ItemList" table
+			And I input "50,00" text in "Total amount" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Check
 			And "ItemList" table contains lines
-				| 'Revenue type'    | 'Amount'    | 'Item'                  | 'Item key'    | 'Profit loss center'         | 'Serial lot numbers'    | 'Unit'    | 'Source of origins'     | 'Quantity'    | 'Price'    | 'Amount tax'     |
-				| 'Revenue'         | '50,00'     | 'Dress'                 | 'XS/Blue'     | 'Distribution department'    | ''                      | 'pcs'     | 'Source of origin 5'    | '2,000'       | '25,00'    | '10,00'          |
-				| 'Revenue'         | '50,00'     | 'Product 3 with SLN'    | 'UNIQ'        | 'Distribution department'    | '09987897977895'        | 'pcs'     | 'Source of origin 6'    | '2,000'       | '25,00'    | '10,00'          |
+				| 'Revenue type' | 'Total amount' | 'Item'               | 'Item key' | 'Profit loss center'      | 'Serial lot numbers' | 'Unit' | 'Source of origins'  | 'Quantity' | 'Price' | 'Tax amount' | 'Net amount' | 'VAT' |
+				| 'Revenue'      | '50,00'        | 'Dress'              | 'XS/Blue'  | 'Distribution department' | ''                   | 'pcs'  | 'Source of origin 5' | '2,000'    | '21,19' | '7,63'       | '42,37'      | '18%' |
+				| 'Revenue'      | '50,00'        | 'Product 3 with SLN' | 'UNIQ'     | 'Distribution department' | '09987897977895'     | 'pcs'  | 'Source of origin 6' | '2,000'    | '21,19' | '7,63'       | '42,37'      | '18%' |
 		* Post
 			And I click the button named "FormPost"
 			And I delete "$$StockAdjustmentAsSurplus1$$" variable
@@ -605,10 +607,10 @@ Scenario: _150049 check filling source of origin in the StockAdjustmentAsSurplus
 			And I input "2202283714" text in the field named "Barcode"
 			And I move to the next attribute		
 			And "ItemList" table contains lines
-				| 'Revenue type'    | 'Amount'    | 'Item'                  | 'Item key'    | 'Profit loss center'         | 'Serial lot numbers'    | 'Unit'    | 'Source of origins'     | 'Quantity'    | 'Price'    | 'Amount tax'     |
-				| 'Revenue'         | '50,00'     | 'Dress'                 | 'XS/Blue'     | 'Distribution department'    | ''                      | 'pcs'     | 'Source of origin 5'    | '2,000'       | '25,00'    | '10,00'          |
-				| 'Revenue'         | '50,00'     | 'Product 3 with SLN'    | 'UNIQ'        | 'Distribution department'    | '09987897977895'        | 'pcs'     | 'Source of origin 6'    | '2,000'       | '25,00'    | '10,00'          |
-				| ''                | ''          | 'Dress'                 | 'M/Brown'     | ''                           | ''                      | 'pcs'     | 'Source of origin 5'    | '1,000'       | ''         | ''               |
+				| 'Revenue type' | 'Total amount' | 'Item'               | 'Item key' | 'Profit loss center'      | 'Serial lot numbers' | 'Unit' | 'Source of origins'  | 'Quantity' | 'Price' | 'Tax amount' |
+				| 'Revenue'      | '50,00'        | 'Dress'              | 'XS/Blue'  | 'Distribution department' | ''                   | 'pcs'  | 'Source of origin 5' | '2,000'    | '21,19' | '7,63'       |
+				| 'Revenue'      | '50,00'        | 'Product 3 with SLN' | 'UNIQ'     | 'Distribution department' | '09987897977895'     | 'pcs'  | 'Source of origin 6' | '2,000'    | '21,19' | '7,63'       |
+				| ''             | ''             | 'Dress'              | 'M/Brown'  | ''                        | ''                   | 'pcs'  | 'Source of origin 5' | '1,000'    | ''      | ''           |
 			And I close all client application windows
 						
 			

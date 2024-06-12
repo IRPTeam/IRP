@@ -42,7 +42,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
-		When Create catalog Taxes objects (for work order)
 		When Create catalog Taxes objects (for debit and credit note)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
@@ -8397,8 +8396,8 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 			| 'Description'    |
 			| 'Revenue'        |
 		And I select current line in "List" table
-		And I activate "Amount" field in "ItemList" table
-		And I input "100,00" text in "Amount" field of "ItemList" table
+		And I activate "Total amount" field in "ItemList" table
+		And I input "100,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change unit
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -8408,8 +8407,8 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		And I select current line in "List" table
 	* Check
 		And "ItemList" table became equal
-			| '#'   | 'Revenue type'   | 'Amount'   | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
-			| '1'   | 'Revenue'        | '100,00'   | 'Dress'   | ''                 | 'XS/Blue'    | 'Distribution department'   | ''                     | ''                     | 'box Dress (8 pcs)'   | '1,000'       |
+			| '#'   | 'Revenue type'   | 'Total amount' | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
+			| '1'   | 'Revenue'        | '100,00'       | 'Dress'   | ''                 | 'XS/Blue'    | 'Distribution department'   | ''                     | ''                     | 'box Dress (8 pcs)'   | '1,000'       |
 	* Edit currency
 		And in the table "ItemList" I click "Edit currencies" button
 		Then "Edit currencies" window is opened

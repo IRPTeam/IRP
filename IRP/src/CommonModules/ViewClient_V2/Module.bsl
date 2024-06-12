@@ -2487,17 +2487,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST_AMOUNT
-
-// ItemList.Amount
-Procedure ItemListAmountOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListAmountOnChange(Parameters);
-EndProcedure
-
-#EndRegion
-
 #Region ITEM_LIST_STORE
 
 // ItemList.Store
@@ -3291,7 +3280,8 @@ EndProcedure
 
 Procedure OnSetReceiveAmountNotify(Parameters) Export
 	If Parameters.ObjectMetadataInfo.MetadataName = "MoneyTransfer"
-	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder" Then
+	Or Parameters.ObjectMetadataInfo.MetadataName = "CashTransferOrder"
+	Or Parameters.ObjectMetadataInfo.MetadataName = "DebitCreditNote" Then
 		Parameters.Form.FormSetVisibilityAvailability();
 	EndIf;
 EndProcedure

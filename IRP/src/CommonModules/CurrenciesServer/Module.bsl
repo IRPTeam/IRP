@@ -1242,9 +1242,8 @@ Procedure DebitCreditNoteDifference(Parameters)
 				FillPropertyValues(Revenues.Add(), RowPostingInfo);
 			EndDo;
 		EndIf;
-		
+
 	EndDo;
-	
 EndProcedure
 
 Function GetAmountByRecordType(Table, IgnoreColumnName, RecordType)

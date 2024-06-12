@@ -576,6 +576,19 @@ EndFunction
 
 Function T1040T_AccountingAmounts()
 	Return 
+//		"SELECT
+//		|	Doc.Date AS Period,
+//		|	UNDEFINED AS RowKey,
+//		|	Doc.SendUUID AS Key,
+//		|	Doc.SendCurrency AS Currency,
+//		|	Doc.SendAmount AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.DebitCreditNote_R5020B_PartnersBalance) AS Operation,
+//		|	UNDEFINED AS AdvancesClosing
+//		|INTO T1040T_AccountingAmounts
+//		|FROM
+//		|	Document.DebitCreditNote AS Doc
+//		|WHERE
+//		|	Doc.Ref = &Ref
 		"SELECT
 		|	Doc.Date AS Period,
 		|	UNDEFINED AS RowKey,

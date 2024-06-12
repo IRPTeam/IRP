@@ -49,7 +49,6 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
-	Form.Items.Basis.Visible = Not Object.UserDefined;
 	Form.Items.RegularOperations.Visible = Object.UserDefined;
 EndProcedure
 
@@ -143,9 +142,6 @@ EndProcedure
 
 &AtClient
 Procedure UserDefinedOnChange(Item)
-	If Object.UserDefined Then
-		Object.Basis = Undefined;
-	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

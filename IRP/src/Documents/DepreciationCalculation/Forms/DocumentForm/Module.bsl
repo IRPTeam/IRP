@@ -111,6 +111,16 @@ Procedure UpdateAccountingData()
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region TITLE_DECORATIONS

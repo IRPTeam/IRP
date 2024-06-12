@@ -1095,7 +1095,8 @@ Function GetFormItemNames()
 				|FixedAssetsKey,
 				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
 				|EmployeeListKey, SalaryTaxListKey,
-				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey";
+				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey,
+				|CalculationsKey";
 	Return ItemNames;
 EndFunction	
 

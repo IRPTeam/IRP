@@ -30,7 +30,7 @@ Function GetFormParameters(Form) Export
 	Result.Insert("TaxVisible", Undefined); // Undefined - do not change visible, True or False - change visible
 	Result.Insert("TaxChoiceList", New Array());
 	
-	Result.Insert("PartnerChoiceList", New Array());
+	Result.Insert("PartnerChoiceList", Undefined);
 	
 	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
 		New Structure(), New Structure(), New Structure()));

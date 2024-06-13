@@ -43,7 +43,7 @@ Function GetChoiceListForDocument(DocumentName, Company, TransactionType) Export
 	
 	Query = New Query;
 	Query.Text =
-	"SELECT DISTINCT TOP 10
+	"SELECT DISTINCT TOP 10 ALLOWED
 	|	DocTable.Partner,
 	|	MAX(DocTable.Date) AS Date
 	|FROM

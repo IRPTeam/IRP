@@ -38,3 +38,40 @@ Function GetPartnersByCompanies(CompaniesArray) Export
 	Return ReturnValue;
 
 EndFunction
+
+Function GetChoiceListForDocument(DocumentName, Company, TransactionType) Export
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT DISTINCT TOP 10
+	|	DocTable.Partner,
+	|	MAX(DocTable.Date) AS Date
+	|FROM
+	|	Document.SalesOrder AS DocTable
+	|WHERE
+	|	&Condition
+	|GROUP BY
+	|	DocTable.Partner
+	|
+	|ORDER BY
+	|	Date DESC";
+	
+	ConditionText = "(Author = &User OR Editor = &User)";
+	Query.SetParameter("User", SessionParameters.CurrentUser);
+	
+	If ValueIsFilled(Company) Then
+		ConditionText = ConditionText + " AND Company = &Company";
+		Query.SetParameter("Company", Company);
+	EndIf;
+	
+	If ValueIsFilled(TransactionType) Then
+		ConditionText = ConditionText + " AND TransactionType = &TransactionType";
+		Query.SetParameter("TransactionType", TransactionType);
+	EndIf;
+	
+	Query.Text = StrReplace(Query.Text, "&Condition", ConditionText);
+	Query.Text = StrReplace(Query.Text, "SalesOrder", DocumentName);
+	
+	Return Query.Execute().Unload().UnloadColumn("Partner");
+	
+EndFunction

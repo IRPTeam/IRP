@@ -234,6 +234,10 @@ Procedure OnChainComplete(Parameters) Export
 		EndIf;
 	EndIf;
 	
+	If Parameters.PartnerChoiceList <> Undefined Then
+		CommonFunctionsClientServer.LoadFormItemChoiceList(Parameters.Form, "Partner", Parameters.PartnerChoiceList);
+	EndIf;
+	
 	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseInvoice"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReturn"

@@ -239,7 +239,9 @@ Procedure ExecuteInExtension(Result, Options, ExecutorName)
 EndProcedure
 
 Function GetChain()
+	
 	Chain = New Structure("Idle", False);
+	
 	// Default.List
 	Chain.Insert("DefaultStoreInList"        , GetChainLink("DefaultStoreInListExecute"));
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
@@ -437,6 +439,8 @@ Function GetChain()
 	Chain.Insert("ChangeAccrualTypeByPositionOrEmployee"  , GetChainLink("ChangeAccrualTypeByPositionOrEmployeeExecute"));
 	Chain.Insert("ChangeSalaryBySalaryType", GetChainLink("ChangeSalaryBySalaryTypeExecute"));
 
+	Chain.Insert("ChangePartnerChoiceList", GetChainLink("ChangePartnerChoiceListExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -444,7 +448,6 @@ Function GetChain()
 	// Loaders
 	Chain.Insert("LoadTable", GetChainLink("LoadTableExecute"));
 
-	
 	Return Chain;
 EndFunction
 
@@ -2279,6 +2282,18 @@ EndFunction
 
 Function CovertQuantityToQuantityInBaseUnitExecute(Options) Export
 	Return ModelServer_V2.ConvertQuantityToQuantityInBaseUnit(Options.Bundle, Options.Unit, Options.Quantity);
+EndFunction
+
+#EndRegion
+
+#Region PARTNERS
+
+Function ChangePartnerChoiceListOptions() Export
+	Return GetChainLinkOptions("DocumentName, Company, TransactionType");
+EndFunction
+
+Function ChangePartnerChoiceListExecute(Options) Export
+	Return CatPartnersServer.GetChoiceListForDocument(Options.DocumentName, Options.Company, Options.TransactionType);
 EndFunction
 
 #EndRegion

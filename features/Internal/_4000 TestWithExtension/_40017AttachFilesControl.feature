@@ -84,7 +84,11 @@ Scenario: _4001705 setting for Attached document settings
 	* Create new Attached document settings for SI
 		Given I open hyperlink "e1cib/list/Catalog.AttachedDocumentSettings"		
 		And I click the button named "FormCreate"
-		And I input "SalesInvoice" text in the field named "Description"
+		And I click Choice button of the field named "Description"
+		And I go to line in "DocumentsNames" table
+			| "Name"         | "Synonym"       |
+			| "SalesInvoice" | "Sales invoice" |
+		And I select current line in "DocumentsNames" table		
 		And I click Select button of "File storage volume" field
 		And I go to line in "List" table
 			| 'Description'              |

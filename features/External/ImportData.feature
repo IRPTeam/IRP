@@ -3323,12 +3323,12 @@ Scenario: test data for payroll calculation (position and salary change in the m
 	// Document.EmployeeVacation
 
 	And I check or create document "EmployeeVacation" objects:
-		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'False'        | 3        | '13.11.2023 11:11:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'UniqueID' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'ManualMovementsEdit' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'False'        | 3        | '13.11.2023 11:11:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:44:51' | '13.06.2024 11:48:56' | 'False'               |
 
 	And I refill object tabular section "EmployeeList":
-		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | '13.11.2023 00:00:00' | '18.11.2023 00:00:00' |
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             | 'PaidDays' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec61' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002b' | '13.11.2023 00:00:00' | '18.11.2023 00:00:00' | 4          |
 
 
 Scenario: test data for check of payroll calculation (work schedule change (days) + vacation + sick leave)
@@ -3358,12 +3358,12 @@ Scenario: test data for check of payroll calculation (work schedule change (days
 	// Document.EmployeeVacation
 
 	And I check or create document "EmployeeVacation" objects:
-		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'False'        | 4        | '20.11.2023 11:57:45' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'UniqueID' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'ManualMovementsEdit' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'False'        | 4        | '20.11.2023 11:57:45' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:50:20' | '13.06.2024 11:53:17' | 'False'               |
 
 	And I refill object tabular section "EmployeeList":
-		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | '23.11.2023 00:00:00' | '26.11.2023 00:00:00' |
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             | 'PaidDays' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec67' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002c' | '23.11.2023 00:00:00' | '26.11.2023 00:00:00' | 4          |
 
 Scenario: test data for check of payroll calculation (vacation + truancy)
 
@@ -3376,12 +3376,12 @@ Scenario: test data for check of payroll calculation (vacation + truancy)
 	// Document.EmployeeVacation
 
 	And I check or create document "EmployeeVacation" objects:
-		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'False'        | 5        | '09.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'UniqueID' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'ManualMovementsEdit' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'False'        | 5        | '09.11.2023 12:00:00' | 'False'  | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:53:44' | '13.06.2024 11:55:42' | 'False'               |
 
 	And I refill object tabular section "EmployeeList":
-		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002d' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             | 'PaidDays' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec69' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002d' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' | 2          |
 
 Scenario: test data for check of payroll calculation (change of work schedule (from hours to days) + sick leave)
 
@@ -3418,14 +3418,15 @@ Scenario: test data for check of payroll calculation (several vacations)
 	// Document.EmployeeVacation
 
 	And I check or create document "EmployeeVacation" objects:
-		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'False'        | 6        | '09.11.2023 12:00:01' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'False'        | 7        | '15.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'UniqueID' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'ManualMovementsEdit' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'False'        | 6        | '09.11.2023 12:00:01' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:56:05' | '13.06.2024 11:57:22' | 'False'               |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'False'        | 7        | '15.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:56:05' | '13.06.2024 11:58:33' | 'False'               |
 
 	And I refill object tabular section "EmployeeList":
-		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '15.11.2023 00:00:00' | '17.11.2023 00:00:00' |
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             | 'PaidDays' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6e' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '09.11.2023 00:00:00' | '10.11.2023 00:00:00' | 2          |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec6f' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d5002f' | '15.11.2023 00:00:00' | '17.11.2023 00:00:00' | 2          |
+
 
 Scenario: test data for check of payroll calculation (hours shedule + truancy)
 
@@ -3471,14 +3472,14 @@ Scenario: test data for check of payroll calculation (several vacation and sick 
 	// Document.EmployeeVacation
 
 	And I check or create document "EmployeeVacation" objects:
-		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'False'        | 8        | '05.12.2023 14:54:03' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'False'        | 9        | '25.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            |
+		| 'Ref'                                                                       | 'DeletionMark' | 'Number' | 'Date'                | 'Posted'  | 'Company'                                                           | 'Author'                                                        | 'Branch'                                                                | 'Description' | 'UniqueID' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'ManualMovementsEdit' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'False'        | 8        | '05.12.2023 14:54:03' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:59:08' | '13.06.2024 11:59:35' | 'False'               |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'False'        | 9        | '25.11.2023 12:00:00' | 'False'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' | ''            | ''         | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '13.06.2024 11:59:08' | '13.06.2024 12:00:15' | 'False'               |
 
 	And I refill object tabular section "EmployeeList":
-		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '21.11.2023 00:00:00' | '22.11.2023 00:00:00' |
-		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '25.11.2023 00:00:00' | '29.11.2023 00:00:00' |
+		| 'Ref'                                                                       | 'Employee'                                                         | 'BeginDate'           | 'EndDate'             | 'PaidDays' |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec77' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '21.11.2023 00:00:00' | '22.11.2023 00:00:00' | 2          |
+		| 'e1cib/data/Document.EmployeeVacation?ref=b7b18e1cb2a9e83611ee934dac9fec78' | 'e1cib/data/Catalog.Partners?ref=b7b18e1cb2a9e83611ee92afd0d50032' | '25.11.2023 00:00:00' | '29.11.2023 00:00:00' | 4          |
 
 
 Scenario: test data for check of payroll calculation (hours shedule + several sick leave)

@@ -262,9 +262,9 @@ Scenario: _097707 check Employee vacation
 		And I click "Post" button	
 		And I save the value of "Number" field as "NumberEmployeeVacation"
 		And "EmployeeList" table became equal
-			| "Employee"     | "Begin date" | "End date"   | "Paid days" | "Own cost days" |
-			| "Arina Brown"  | "06.11.2023" | "15.11.2023" | "10"        | ""              |
-			| "Anna Petrova" | "04.11.2023" | "08.11.2023" | "5"         | ""              |	
+			| "Employee"     | "Begin date" | "End date"   | "Paid days" | "Own cost days" | "Total" |
+			| "Arina Brown"  | "06.11.2023" | "15.11.2023" | "10"        | "0"             | "10"    |
+			| "Anna Petrova" | "04.11.2023" | "08.11.2023" | "5"         | "0"             | "5"     |
 		And I click "Post and close" button
 	* Check
 		And "List" table contains lines
@@ -993,6 +993,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And Delay 2
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet

@@ -81,6 +81,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Document.WorkOrderClosing");
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
 	ArrayOfExcluded.Add("Document.DepreciationCalculation");
+	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
 	Return ArrayOfExcluded;
 EndFunction
 
@@ -125,6 +126,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Document.WorkOrderClosing");
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
 	ArrayOfExcluded.Add("Document.DepreciationCalculation");
+	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
 	Return ArrayOfExcluded;
 EndFunction
 

@@ -109,6 +109,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CalculationDeservedVacations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Users</metadata>
     <use>Use</use>
   </content>

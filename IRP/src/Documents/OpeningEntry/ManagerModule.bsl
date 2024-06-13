@@ -412,6 +412,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T9510S_Staffing());
+	QueryArray.Add(R9541T_VacationUsage());
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R1040B_TaxesOutgoing());
@@ -856,6 +857,7 @@ Function EmployeeList()
 		|	EmployeeList.Position,
 		|	EmployeeList.EmployeeSchedule,
 		|	EmployeeList.ProfitLossCenter,
+		|	EmployeeList.RemainingVacationDays,
 		|	CASE
 		|		WHEN EmployeeList.RemainingVacationDays >= EmployeeList.Ref.Company.SalaryMaxDaysVacation
 		|			THEN 0
@@ -2008,6 +2010,21 @@ Function T9510S_Staffing()
 		|	EmployeeList AS EmployeeList
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R9541T_VacationUsage()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	EmployeeList.Period,
+		|	EmployeeList.Company,
+		|	EmployeeList.Employee,
+		|	EmployeeList.RemainingVacationDays AS Days
+		|INTO R9541T_VacationUsage
+		|FROM
+		|	EmployeeList AS EmployeeList
+		|WHERE
+		|	EmployeeList.RemainingVacationDays > 0";
 EndFunction
 
 Function R9545T_PaidVacations()

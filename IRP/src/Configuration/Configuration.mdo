@@ -1124,6 +1124,7 @@
   <documents>Document.BatchReallocateIncoming</documents>
   <documents>Document.BatchReallocateOutgoing</documents>
   <documents>Document.Bundling</documents>
+  <documents>Document.CalculationDeservedVacations</documents>
   <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.CashExpense</documents>
   <documents>Document.CashPayment</documents>
@@ -1431,6 +1432,7 @@
   <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
   <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
   <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
+  <informationRegisters>InformationRegister.T9545S_VacationDaysLimits</informationRegisters>
   <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
@@ -1532,6 +1534,7 @@
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R8515T_CostOfFixedAsset</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R9541T_VacationUsage</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9545T_PaidVacations</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>

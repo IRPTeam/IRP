@@ -10,5 +10,6 @@
   <content>InformationRegister.T9500S_AccrualAndDeductionValues</content>
   <content>InformationRegister.T9510S_Staffing</content>
   <content>InformationRegister.T9530S_WorkDays</content>
+  <content>InformationRegister.T9545S_VacationDaysLimits</content>
   <parentSubsystem>Subsystem.Salary</parentSubsystem>
 </mdclass:Subsystem>

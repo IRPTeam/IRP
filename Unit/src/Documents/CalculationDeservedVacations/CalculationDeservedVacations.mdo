@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:mdclassExtension="http://g5.1c.ru/v8/dt/metadata/mdclass/extension" uuid="8ef11991-cc33-4f9b-aea1-adcbb22ab676" extendedConfigurationObject="28c0c592-485c-4648-ab64-a7d98884466a">
+  <producedTypes>
+    <objectType typeId="f06a1d39-2db1-44c9-8678-efe4881d1b36" valueTypeId="8627301f-cbdc-4c29-874b-6c0b8941203b"/>
+    <refType typeId="303e0f2b-8971-4a5c-b0af-719f7f435c2c" valueTypeId="bc1254ee-8fda-4f3e-958b-85428fd7d8a4"/>
+    <selectionType typeId="139d2f6a-01c3-4063-a5aa-e73287e512a2" valueTypeId="17fada40-66a6-4f5e-a628-1c1c77bb08df"/>
+    <listType typeId="9b6c0bc4-e9ca-43dd-bd44-fbbf3037bcbb" valueTypeId="55f8ed4a-397a-423a-8108-58351705dbc2"/>
+    <managerType typeId="ecfb8ee1-5b0d-482c-88fa-35dcbc332ef0" valueTypeId="ae4748e2-5c3d-42e2-af10-cab95d7fbb0e"/>
+  </producedTypes>
+  <name>CalculationDeservedVacations</name>
+  <objectBelonging>Adopted</objectBelonging>
+  <extension xsi:type="mdclassExtension:DocumentExtension">
+    <extendedConfigurationObject>Checked</extendedConfigurationObject>
+  </extension>
+  <useStandardCommands>true</useStandardCommands>
+</mdclass:Document>

@@ -32,6 +32,22 @@
     <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
   </characteristics>
   <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_CreditNote</value>
+    </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>Document.CreditNote.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.CreditNote.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.CreditNote.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesOrderField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
     <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
     <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
     <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>

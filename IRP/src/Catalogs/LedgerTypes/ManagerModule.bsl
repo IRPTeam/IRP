@@ -1,7 +1,7 @@
 
 #Region RegularAccountingOperations
 
-Function ProfitLostOffset(Company, LedgerType, Ref, Date) Export
+Function ProfitLostOffset(Company, LedgerType, Ref, Date, DeletionMark, RegisterRecords) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -65,6 +65,13 @@ Function ProfitLostOffset(Company, LedgerType, Ref, Date) Export
 			EndIf;
 			
 		EndDo;
+		
+		RegisterRecords.Clear();
+		AccountingServer.SetDataRegisterRecords(DataTable, LedgerType, RegisterRecords);
+		For Each Record In RegisterRecords Do
+			Record.Active = Not DeletionMark;
+		EndDo;
+		RegisterRecords.Write();
 	EndDo;
 	
 	Return DataTable;
@@ -117,11 +124,7 @@ Function GetAccountBalance(Company, LedgerType, Ref, Date, Account, BalanceType,
 	Query.SetParameter("LedgerType"   , LedgerType);
 	Query.SetParameter("Account"      , Account);
 	
-	If ValueIsFilled(Ref) Then
-		Query.SetParameter("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
-	Else
-		Query.SetParameter("BalancePeriod", EndOfDay(Date));
-	EndIf;
+	Query.SetParameter("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Including));
 	
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();

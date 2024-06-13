@@ -2045,6 +2045,9 @@ Strings.Insert("EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdv
 Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance",
 	NStr("en = 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)'", Lang));
 
+Strings.Insert("EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance",
+	NStr("en = 'EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)'", Lang));
+
 Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
 	NStr("en = 'SalesReturn DR (R2021B_CustomersTransactions) CR (R2020B_AdvancesFromCustomers)'", Lang));
 

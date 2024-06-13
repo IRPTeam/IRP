@@ -1039,6 +1039,13 @@
           <value>110</value>
         </code>
       </content>
+      <content id="dbb3a205-5062-4d7f-88ed-605703b8683d">
+        <name>EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance</name>
+        <description></description>
+        <code xsi:type="core:NumberValue">
+          <value>152</value>
+        </code>
+      </content>
     </items>
     <items id="ce5c929f-72e9-4f31-9991-be7f614112a8">
       <name>Document_SalesReturn</name>

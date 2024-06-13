@@ -241,6 +241,7 @@ Function GetOperationsDefinition()
 	// Employee cash advance
 	Map.Insert(AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
+	Map.Insert(AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	
 	// Sales return
 	Map.Insert(AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers, 
@@ -1658,6 +1659,8 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);				
 	ElsIf DocMetadata = Metadata.Documents.Payroll Then
 		Return IsNotUsedOperation_Payroll(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.EmployeeCashAdvance Then
+		Return IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData);		
 	EndIf;
 	
 	Return False; // is used operation
@@ -2592,6 +2595,27 @@ Function IsNotUsedOperation_Payroll(Operation, ObjectData, RowData)
 		EndIf;
 	EndIf;
 	Return False;
+EndFunction
+
+Function IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	If Operation = AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance Then
+		If ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	EndIf;	
+	Return True;
 EndFunction
 
 #EndRegion

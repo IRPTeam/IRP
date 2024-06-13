@@ -348,19 +348,20 @@ Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasTyp
 		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
 	EndIf;
 	
-	UsedInFunctionalOptions = False;
+	MetadataUsedInFunctionalOptions = False;
 	MetadataAvailableInFunctionalOptions = False;
+	TypeUsedInFunctionalOptions = False;
 	TypeAvailableInFunctionalOptions = ?(hasType And MetadataByType <> Undefined, False, True);
     
     For Each FunctionalOption In Metadata.FunctionalOptions Do
     	
     	If NOT MetadataAvailableInFunctionalOptions And FunctionalOption.Content.Contains(ValidatedMetadata) Then
-    		UsedInFunctionalOptions = True;
+    		MetadataUsedInFunctionalOptions = True;
     		MetadataAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
     	EndIf;
     	
     	If NOT TypeAvailableInFunctionalOptions And FunctionalOption.Content.Contains(MetadataByType) Then
-    		UsedInFunctionalOptions = True;
+    		TypeUsedInFunctionalOptions = True;
     		TypeAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
     	EndIf;
     	
@@ -369,7 +370,8 @@ Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasTyp
         EndIf;
     EndDo;
     
-    Return MetadataAvailableInFunctionalOptions And TypeAvailableInFunctionalOptions OR NOT UsedInFunctionalOptions;
+    Return (NOT MetadataUsedInFunctionalOptions OR MetadataAvailableInFunctionalOptions) And 
+    		(NOT TypeUsedInFunctionalOptions OR TypeAvailableInFunctionalOptions);
     	
 EndFunction	
 

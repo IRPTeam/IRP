@@ -3004,9 +3004,8 @@ Scenario: _0991160 check Employee cash advance accounting movements (with PI)
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'    | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                           |
-			| '420.2' | 'Employee 1' | 'Business unit 1' | 'Other expence'            | '4020.1' | ''  | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'            |
-			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Business unit 1'          | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
+			| "Debit" | "Partner"    | "Business unit"   | "Partner term"             | "Credit" | " " | "Operation"                                                                           |
+			| "5201"  | "Employee 1" | "Business unit 1" | "Vendor 4 (partner term) " | "4020.1" | ""  | "EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)" |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
@@ -3016,7 +3015,7 @@ Scenario: _0991160 check Employee cash advance accounting movements (with PI)
 			| '22.03.2024 11:52:17' | '5201'       | '1' | '200,00' | ''              | 'Yes'      | 'TRY'             | 'Vendor 4 (1 partner term)' | '200'          | 'Vendor 4 (partner term) ' | ''                | 'Business unit 1'     | 'TRY'            | '4020.1'     | 'Employee 1'       | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' | 'Business unit 1'     | '200'           | ''                    |
 		And I close all client application windows
 
-Scenario: _0991161 check Employee cash advance accounting movements (without PI)
+Scenario: _0991161 check Employee cash advance accounting movements (without PI, VAT)
 	And I close all client application windows
 	* Select EmployeeCashAdvance
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
@@ -3030,7 +3029,6 @@ Scenario: _0991161 check Employee cash advance accounting movements (without PI)
 		And "AccountingAnalytics" table became equal
 			| 'Debit' | 'Partner'    | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                           |
 			| '420.2' | 'Employee 1' | 'Business unit 1' | 'Other expence'            | '4020.1' | ''  | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'            |
-			| '5201'  | 'Employee 1' | 'Business unit 1' | 'Business unit 1'          | '4020.1' | ''  | 'EmployeeCashAdvance DR (R1021B_VendorsTransactions) CR (R3027B_EmployeeCashAdvance)' |
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button

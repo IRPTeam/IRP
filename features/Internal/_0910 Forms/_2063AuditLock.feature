@@ -165,9 +165,8 @@ Scenario: _2063004 check audit lock (PI)
 		And I go to line in "FileList" table
 			| 'File'   |
 			| 'Test 1' |
-		And in the table "FileList" I click the button named "FileListContextMenuDelete"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
+		And I activate "File" field in "FileList" table
+		And in the table "FileList" I click "Delete files" button
 		Then "1C:Enterprise" window is opened
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
@@ -215,9 +214,8 @@ Scenario: _2063007 check audit unlock
 		And I go to line in "FileList" table
 			| 'File'   |
 			| 'Test 1' |
-		And in the table "FileList" I click the button named "FileListContextMenuDelete"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
+		And I activate "File" field in "FileList" table
+		And in the table "FileList" I click "Delete files" button
 		Then the number of "FileList" table lines is "равно" "0"
 		Then user message window does not contain messages	
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e325d953-4d11-4c69-b095-c26c97a50a9c">
+  <name>AttachedFilesDelete</name>
+  <synonym>
+    <key>en</key>
+    <value>Attached files delete</value>
+  </synonym>
+</mdclass:Role>

@@ -347,22 +347,31 @@ Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasTyp
 	If hasType And ValidatedMetadata.Type.Types().Count() = 1 Then
 		MetadataByType = Metadata.FindByType(ValidatedMetadata.Type.Types()[0]);
 	EndIf;
-	If MetadataByType = Undefined Then
-		MetadataByType = ValidatedMetadata;
-	EndIf;
 	
-	UsedInFunctionalOptions = False;
+	MetadataUsedInFunctionalOptions = False;
+	MetadataAvailableInFunctionalOptions = False;
+	TypeUsedInFunctionalOptions = False;
+	TypeAvailableInFunctionalOptions = ?(hasType And MetadataByType <> Undefined, False, True);
     
     For Each FunctionalOption In Metadata.FunctionalOptions Do
-        If FunctionalOption.Content.Contains(ValidatedMetadata) Or FunctionalOption.Content.Contains(MetadataByType) Then
-            UsedInFunctionalOptions = True;
-            If GetFunctionalOption(FunctionalOption.Name) = True Then
-                Return True;
-            EndIf;
+    	
+    	If NOT MetadataAvailableInFunctionalOptions And FunctionalOption.Content.Contains(ValidatedMetadata) Then
+    		MetadataUsedInFunctionalOptions = True;
+    		MetadataAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
+    	EndIf;
+    	
+    	If NOT TypeAvailableInFunctionalOptions And FunctionalOption.Content.Contains(MetadataByType) Then
+    		TypeUsedInFunctionalOptions = True;
+    		TypeAvailableInFunctionalOptions = (GetFunctionalOption(FunctionalOption.Name) = True);
+    	EndIf;
+    	
+        If MetadataAvailableInFunctionalOptions And TypeAvailableInFunctionalOptions Then
+            Break;
         EndIf;
     EndDo;
     
-    Return Not UsedInFunctionalOptions;
+    Return (NOT MetadataUsedInFunctionalOptions OR MetadataAvailableInFunctionalOptions) And 
+    		(NOT TypeUsedInFunctionalOptions OR TypeAvailableInFunctionalOptions);
     	
 EndFunction	
 

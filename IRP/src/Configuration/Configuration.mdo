@@ -437,6 +437,7 @@
   <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
   <roles>Role.ManualRegisterEdit</roles>
   <roles>Role.Document_TaxesOperation</roles>
+  <roles>Role.AttachedFilesDelete</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>

@@ -27,11 +27,13 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
 	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, ThisObject.SendAmount);
+	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, 
+		ThisObject.SendAmount, ThisObject.SendAgreement);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, ThisObject.ReceiveAmount);
+	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, 
+		ThisObject.ReceiveAmount, ThisObject.ReceiveAgreement);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 				

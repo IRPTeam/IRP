@@ -1,4 +1,32 @@
 
+&AtClient
+Procedure CheckAll(Command)
+	For Each Row In Documents Do
+		Row.Check = True;
+	EndDo;
+	CalculateAmount();
+EndProcedure
+
+&AtClient
+Procedure UnckeckAll(Command)
+	For Each Row In Documents Do
+		Row.Check = False;
+	EndDo;
+	CalculateAmount();
+EndProcedure
+
+&AtClient
+Procedure DocumentsCheckOnChange(Item)
+	CalculateAmount();		
+EndProcedure
+
+&AtServer
+Procedure CalculateAmount()	
+	TempTableDocuments = Documents.Unload(New Structure("Check", True), "Check, Amount");
+	Amount = TempTableDocuments.Total("Amount");	
+EndProcedure	
+
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.RegisterName      = Parameters.RegisterName;
@@ -111,11 +139,12 @@ Function CalculateRows()
 	EndDo;
 	
 	ArrayOfRows = New Array();
+	SelectedRowsArray = Documents.FindRows(New Structure("Check", True));
 	
-	If Items.Documents.SelectedRows.Count() > 1 Then
-		For Each SelectedRow In Items.Documents.SelectedRows Do
+	If SelectedRowsArray.Count() > 0 Then
+		For Each SelectedRow In SelectedRowsArray Do
 			NewRow = GetEmptyRowTable();
-			FillPropertyValues(NewRow, ThisObject.Documents.FindByID(SelectedRow));
+			FillPropertyValues(NewRow, SelectedRow);
 			ArrayOfRows.Add(NewRow);
 		EndDo;
 	Else

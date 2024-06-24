@@ -30,6 +30,8 @@ Function GetFormParameters(Form) Export
 	Result.Insert("TaxVisible", Undefined); // Undefined - do not change visible, True or False - change visible
 	Result.Insert("TaxChoiceList", New Array());
 	
+	Result.Insert("PartnerChoiceList", Undefined);
+	
 	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
 		New Structure(), New Structure(), New Structure()));
 	Result.PropertyBeforeChange.Object.Insert("Names"   , "");
@@ -74,6 +76,8 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("TaxVisible"   , FormParameters.TaxVisible);
 	Parameters.Insert("TaxChoiceList", FormParameters.TaxChoiceList);
+
+	Parameters.Insert("PartnerChoiceList", FormParameters.PartnerChoiceList);
 	
 	Parameters.Insert("CacheForm"        , New Structure()); // cache for form attributes
 	Parameters.Insert("ViewNotify"       , New Array());
@@ -685,6 +689,32 @@ Procedure StepChangeTaxVisible(Parameters, Chain) Export
 	Chain.ChangeTaxVisible.Options.Add(Options);	
 EndProcedure
 
+// PartnerChoiceList.Set
+Procedure SetPartnerChoiceList(Parameters, Results) Export
+	If Results.Count() > 0 Then
+		Parameters.PartnerChoiceList = Results[0].Value;
+	Else
+		Parameters.PartnerChoiceList = New Array;
+	EndIf;
+EndProcedure
+
+// Form.StepChangePartnerChoiceList.Step
+Procedure StepChangePartnerChoiceList(Parameters, Chain) Export
+	Chain.ChangePartnerChoiceList.Enable = True;
+	If Chain.Idle Then
+		Return;
+	EndIf;
+	Chain.ChangePartnerChoiceList.Setter = "SetPartnerChoiceList";
+	Options = ModelClientServer_V2.ChangePartnerChoiceListOptions();
+	Options.DocumentName   = Parameters.ObjectMetadataInfo.MetadataName;
+	Options.Company        = GetCompany(Parameters);
+	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
+		Options.TransactionType = GetTransactionType(Parameters);
+	EndIf;
+	Options.StepName = "StepChangePartnerChoiceList";
+	Chain.ChangePartnerChoiceList.Options.Add(Options);	
+EndProcedure
+
 // Form.OnOpen
 Procedure FormOnOpen(Parameters) Export
 	AddViewNotify("OnOpenFormNotify", Parameters);
@@ -699,15 +729,15 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("CashExpense" , "StepChangeTaxVisible, StepExtractDataCurrencyFromAccount");
 	Binding.Insert("CashRevenue" , "StepChangeTaxVisible, StepExtractDataCurrencyFromAccount");
 	
-	Binding.Insert("SalesOrder"        , "StepChangeTaxVisible");
-	Binding.Insert("SalesInvoice"      , "StepChangeTaxVisible");
-	Binding.Insert("SalesReturnOrder"  , "StepChangeTaxVisible");
-	Binding.Insert("SalesReturn"       , "StepChangeTaxVisible");
+	Binding.Insert("SalesOrder"        , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("SalesInvoice"      , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("SalesReturnOrder"  , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("SalesReturn"       , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	
-	Binding.Insert("PurchaseOrder"        , "StepChangeTaxVisible");
-	Binding.Insert("PurchaseInvoice"      , "StepChangeTaxVisible");
-	Binding.Insert("PurchaseReturnOrder"  , "StepChangeTaxVisible");
-	Binding.Insert("PurchaseReturn"       , "StepChangeTaxVisible");
+	Binding.Insert("PurchaseOrder"        , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("PurchaseInvoice"      , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("PurchaseReturnOrder"  , "StepChangeTaxVisible, StepChangePartnerChoiceList");
+	Binding.Insert("PurchaseReturn"       , "StepChangeTaxVisible, StepChangePartnerChoiceList");
 	
 	Binding.Insert("RetailSalesReceipt"   , "StepChangeTaxVisible");	
 	Binding.Insert("RetailReceiptCorrection"   , "StepChangeTaxVisible");	
@@ -1565,46 +1595,53 @@ Function BindTransactionType(Parameters)
 		|StepChangePartnerByRetailCustomerAndTransactionType,
 		|StepChangeLegalNameByRetailCustomerAndTransactionType");
 	
-	
 	Binding.Insert("PurchaseInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("PurchaseOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("PurchaseReturn", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("PurchaseReturnOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("SalesInvoice", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("SalesOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepChangeShipmentModeByTransactionType");
 	
 	Binding.Insert("SalesReturn", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("SalesReturnOrder", 
 		"StepChangePartnerByTransactionType,
 		|StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader");
 	
 	Binding.Insert("Production", 
@@ -2689,6 +2726,7 @@ Function BindCompany(Parameters)
 	Binding = New Structure();
 	Binding.Insert("SalesOrder",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
@@ -2698,6 +2736,7 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("SalesInvoice",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeInventoryOriginByItemKey,
 		|StepItemListChangeConsignorByItemKey,
@@ -2723,16 +2762,19 @@ Function BindCompany(Parameters)
 
 	Binding.Insert("PurchaseOrder",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseInvoice",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("SalesReportFromTradeAgent",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeTradeAgentFeeAmountByTradeAgentFeeType");
 	
@@ -2743,11 +2785,13 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("SalesReturnOrder",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeRevenueTypeByItemKey");
 	
 	Binding.Insert("SalesReturn",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeInventoryOriginByItemKey,
 		|StepItemListChangeConsignorByItemKey,
@@ -2756,11 +2800,13 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("PurchaseReturnOrder",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	
 	Binding.Insert("PurchaseReturn",
 		"StepChangeTaxVisible,
+		|StepChangePartnerChoiceList,
 		|StepItemListChangeVatRate_AgreementInHeader,
 		|StepItemListChangeExpenseTypeByItemKey");
 	

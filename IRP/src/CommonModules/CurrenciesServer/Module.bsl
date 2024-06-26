@@ -740,7 +740,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		
 		If Not PrepereTable.Count() Then
 			Continue;
-		EndIf
+		EndIf;
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then

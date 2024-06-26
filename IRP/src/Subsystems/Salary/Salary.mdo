@@ -23,6 +23,8 @@
  <content>CommonCommand.OpenPartnersEmployee</content>
  <content>Document.AdditionalAccrual</content>
  <content>Document.AdditionalDeduction</content>
+ <content>AccumulationRegister.R9541T_VacationUsage</content>
+ <content>Document.CalculationDeservedVacations</content>
  <subsystems>Settings</subsystems>
  <subsystems>Catalogs</subsystems>
  <subsystems>PersonnelRecords</subsystems>

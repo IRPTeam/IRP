@@ -167,5 +167,6 @@
   <types>CatalogRef.SalaryCalculationType</types>
   <types>DocumentRef.ExpenseAccruals</types>
   <types>DocumentRef.RevenueAccruals</types>
+  <types>DocumentRef.TaxesOperation</types>
  </type>
 </mdclass:DefinedType>

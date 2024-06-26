@@ -482,7 +482,6 @@
  <roles>Role.AccumulationRegisters_R5015B_OtherPartnersTransactions</roles>
  <roles>Role.AccumulationRegisters_R5021T_Revenues</roles>
  <roles>Role.AccumulationRegisters_R5022T_Expenses</roles>
- <roles>Role.AccumulationRegisters_R5041B_TaxesPayable</roles>
  <roles>Role.AccumulationRegisters_R6010B_BatchWiseBalance</roles>
  <roles>Role.AccumulationRegisters_R6020B_BatchBalance</roles>
  <roles>Role.AccumulationRegisters_R6030T_BatchShortageOutgoing</roles>
@@ -517,6 +516,8 @@
  <roles>Role.AuditLockUnset</roles>
  <roles>Role.AccumulationRegisters_R5020B_PartnersBalance</roles>
  <roles>Role.ManualRegisterEdit</roles>
+ <roles>Role.Document_TaxesOperation</roles>
+ <roles>Role.AttachedFilesDelete</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -842,6 +843,8 @@
  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
  <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
+ <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
+ <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1202,6 +1205,7 @@
  <documents>Document.BatchReallocateIncoming</documents>
  <documents>Document.BatchReallocateOutgoing</documents>
  <documents>Document.Bundling</documents>
+ <documents>Document.CalculationDeservedVacations</documents>
  <documents>Document.CalculationMovementCosts</documents>
  <documents>Document.CashExpense</documents>
  <documents>Document.CashPayment</documents>
@@ -1280,6 +1284,7 @@
  <documents>Document.DebitCreditNote</documents>
  <documents>Document.ExpenseAccruals</documents>
  <documents>Document.RevenueAccruals</documents>
+ <documents>Document.TaxesOperation</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1378,6 +1383,8 @@
  <enums>Enum.AccrualsTransactionType</enums>
  <enums>Enum.OtherPeriodExpenseType</enums>
  <enums>Enum.OtherPeriodRevenueType</enums>
+ <enums>Enum.TaxesOperationTransactionType</enums>
+ <enums>Enum.InvoiceType</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
@@ -1506,6 +1513,7 @@
  <informationRegisters>InformationRegister.T9520S_TimeSheetInfo</informationRegisters>
  <informationRegisters>InformationRegister.T9530S_WorkDays</informationRegisters>
  <informationRegisters>InformationRegister.T9540S_EmployeeVacations</informationRegisters>
+ <informationRegisters>InformationRegister.T9545S_VacationDaysLimits</informationRegisters>
  <informationRegisters>InformationRegister.T9550S_EmployeeSickLeave</informationRegisters>
  <informationRegisters>InformationRegister.Taxes</informationRegisters>
  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
@@ -1578,7 +1586,6 @@
  <accumulationRegisters>AccumulationRegister.R5015B_OtherPartnersTransactions</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
- <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
@@ -1608,6 +1615,7 @@
  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R8510B_BookValueOfFixedAsset</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R8515T_CostOfFixedAsset</accumulationRegisters>
+ <accumulationRegisters>AccumulationRegister.R9541T_VacationUsage</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9545T_PaidVacations</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9555T_PaidSickLeaves</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>

@@ -629,6 +629,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.EmployeeList.Employee</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>EmployeeListEmployeeOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>EmployeeListEmployeeExtendedTooltip</name>
       <id>1496</id>
@@ -679,6 +683,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.EmployeeList.BeginDate</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>EmployeeListBeginDateOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>EmployeeListBeginDateExtendedTooltip</name>
       <id>1499</id>
@@ -729,6 +737,10 @@
      <dataPath xsi:type="form:DataPath">
       <segments>Object.EmployeeList.EndDate</segments>
      </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>EmployeeListEndDateOnChange</name>
+     </handlers>
      <extendedTooltip>
       <name>EmployeeListEndDateExtendedTooltip</name>
       <id>1502</id>
@@ -766,6 +778,265 @@
       <chooseType>true</chooseType>
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>EmployeeListPaidDays</name>
+     <id>1506</id>
+     <titleTextColor xsi:type="core:ColorDef">
+      <red>51</red>
+      <green>102</green>
+      <blue>255</blue>
+     </titleTextColor>
+     <titleFont xsi:type="core:FontRef">
+      <font>Style.NormalTextFont</font>
+      <bold>true</bold>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </titleFont>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.EmployeeList.PaidDays</segments>
+     </dataPath>
+     <handlers>
+      <event>OnChange</event>
+      <name>EmployeeListPaidDaysOnChange</name>
+     </handlers>
+     <extendedTooltip>
+      <name>EmployeeListPaidDaysExtendedTooltip</name>
+      <id>1508</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>EmployeeListPaidDaysContextMenu</name>
+      <id>1507</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <format>
+       <key>en</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>ru</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>tr</key>
+       <value>NZ=</value>
+      </format>
+      <editFormat>
+       <key>en</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>ru</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>tr</key>
+       <value>NZ=</value>
+      </editFormat>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>EmployeeListOwnCostDays</name>
+     <id>1503</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.EmployeeList.OwnCostDays</segments>
+     </dataPath>
+     <titleBackColor xsi:type="core:ColorRef">
+      <color>Style.ReportHeaderBackColor</color>
+     </titleBackColor>
+     <extendedTooltip>
+      <name>EmployeeListOwnCostDaysExtendedTooltip</name>
+      <id>1505</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>EmployeeListOwnCostDaysContextMenu</name>
+      <id>1504</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <readOnly>true</readOnly>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <format>
+       <key>en</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>ru</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>tr</key>
+       <value>NZ=</value>
+      </format>
+      <editFormat>
+       <key>en</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>ru</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>tr</key>
+       <value>NZ=</value>
+      </editFormat>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+      <backColor xsi:type="core:ColorRef">
+       <color>Style.ReportHeaderBackColor</color>
+      </backColor>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>EmployeeListTotalDays</name>
+     <id>1509</id>
+     <titleFont xsi:type="core:FontRef">
+      <font>Style.NormalTextFont</font>
+      <bold>true</bold>
+      <italic>false</italic>
+      <underline>false</underline>
+      <strikeout>false</strikeout>
+     </titleFont>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.EmployeeList.TotalDays</segments>
+     </dataPath>
+     <titleBackColor xsi:type="core:ColorRef">
+      <color>Style.ReportHeaderBackColor</color>
+     </titleBackColor>
+     <extendedTooltip>
+      <name>EmployeeListTotalDaysExtendedTooltip</name>
+      <id>1511</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>EmployeeListTotalDaysContextMenu</name>
+      <id>1510</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <readOnly>true</readOnly>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <format>
+       <key>en</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>ru</key>
+       <value>NZ=</value>
+      </format>
+      <format>
+       <key>tr</key>
+       <value>NZ=</value>
+      </format>
+      <editFormat>
+       <key>en</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>ru</key>
+       <value>NZ=</value>
+      </editFormat>
+      <editFormat>
+       <key>tr</key>
+       <value>NZ=</value>
+      </editFormat>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+      <backColor xsi:type="core:ColorRef">
+       <color>Style.ReportHeaderBackColor</color>
+      </backColor>
      </extInfo>
     </items>
     <autoCommandBar>
@@ -1525,6 +1796,69 @@
   </edit>
   <main>true</main>
   <savedData>true</savedData>
+  <additionalColumns>
+   <tablePath xsi:type="form:DataPath">
+    <segments>Object.EmployeeList</segments>
+   </tablePath>
+   <columns>
+    <name>TotalDays</name>
+    <title>
+     <key>en</key>
+     <value>Total</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Итого</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Toplam</value>
+    </title>
+    <id>11</id>
+    <valueType>
+     <types>Number</types>
+     <numberQualifiers>
+      <precision>3</precision>
+      <nonNegative>true</nonNegative>
+     </numberQualifiers>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+   <columns>
+    <name>OwnCostDays</name>
+    <title>
+     <key>en</key>
+     <value>Own cost days</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Дней за свой счет</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Own cost days</value>
+    </title>
+    <id>12</id>
+    <valueType>
+     <types>Number</types>
+     <numberQualifiers>
+      <precision>3</precision>
+      <nonNegative>true</nonNegative>
+     </numberQualifiers>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
+   </columns>
+  </additionalColumns>
  </attributes>
  <attributes>
   <name>Description</name>

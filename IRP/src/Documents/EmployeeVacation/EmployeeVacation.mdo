@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.EmployeeVacation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
+ <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -275,6 +276,32 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4746d8a1-4acc-4d7a-a05c-7681f81a9b8e">
+   <name>PaidDays</name>
+   <synonym>
+    <key>en</key>
+    <value>Paid days</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Оплачиваемые дни</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Paid days</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>3</precision>
+     <nonNegative>true</nonNegative>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

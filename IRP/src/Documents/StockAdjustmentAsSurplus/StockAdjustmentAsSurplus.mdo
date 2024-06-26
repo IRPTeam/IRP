@@ -485,18 +485,18 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="cf5311ec-82f7-41fd-a35a-8df4be4d1ae7">
-   <name>Amount</name>
+   <name>NetAmount</name>
    <synonym>
     <key>en</key>
-    <value>Amount</value>
+    <value>Net amount</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Сумма</value>
+    <value>Сумма без налогов</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Tutar</value>
+    <value>Net tutar</value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -507,10 +507,10 @@
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="9f7478de-babf-4bbe-821e-9c43adb199d5">
-   <name>AmountTax</name>
+   <name>TaxAmount</name>
    <synonym>
     <key>en</key>
-    <value>Amount tax</value>
+    <value>Tax amount</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -587,6 +587,50 @@
    </synonym>
    <type>
     <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1407c83d-7578-4e73-9386-b736bfdf43e0">
+   <name>TotalAmount</name>
+   <synonym>
+    <key>en</key>
+    <value>Total amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Итого</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Toplam tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c0c103e5-24e5-4b30-a4b5-79f6814687fb">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>KDV</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

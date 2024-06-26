@@ -1499,7 +1499,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Related serial lot numbers</value>
+   <value>İlişkili seri lotlar</value>
   </title>
   <toolTip>
    <key>en</key>
@@ -1511,7 +1511,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Group related serial lot numbers</value>
+   <value>Grup ilişkili seri lotlar</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupRelatedSerialLotNumbersExtendedTooltip</name>
@@ -1542,7 +1542,7 @@
    </collapsedRepresentationTitle>
    <collapsedRepresentationTitle>
     <key>tr</key>
-    <value>Related serial lot numbers</value>
+    <value>İlişkili seri lotlar</value>
    </collapsedRepresentationTitle>
    <showLeftMargin>true</showLeftMargin>
    <united>true</united>

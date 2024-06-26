@@ -43,5 +43,6 @@
   <types>DocumentRef.PurchaseReturn</types>
   <types>DocumentRef.RetailReturnReceipt</types>
   <types>DocumentRef.SalesReturn</types>
+  <types>DocumentRef.TaxesOperation</types>
  </type>
 </mdclass:DefinedType>

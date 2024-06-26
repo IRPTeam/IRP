@@ -304,6 +304,33 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="b40373fa-a73d-452a-9d76-34a9e0bd5153">
+  <name>VacationDayLimit</name>
+  <synonym>
+   <key>en</key>
+   <value>Vacation day limit</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Лимит дней отпуска</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vacation day limit</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="71582d48-71d7-4f95-823b-18b6b9da6767">
   <name>DocumentForm</name>
   <synonym>

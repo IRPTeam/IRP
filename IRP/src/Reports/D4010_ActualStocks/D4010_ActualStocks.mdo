@@ -35,4 +35,25 @@
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>
+ <commands uuid="67da924e-ff9e-415b-b1d9-9425eca3600f">
+  <name>D4010_ActualStocks</name>
+  <synonym>
+   <key>en</key>
+   <value>Actual stocks</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Фактические запасы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Actual stocks</value>
+  </synonym>
+  <group>CommandGroup.Service</group>
+  <commandParameterType>
+   <types>CatalogRef.Items</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
 </mdclass:Report>

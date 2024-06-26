@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="35bda943-24ee-4899-bd30-de80b970b405">
+ <producedTypes>
+  <selectionType typeId="906c1ac0-3807-4e04-b03a-151dd2490d43" valueTypeId="8efc6843-e13a-4f5f-9d99-eaa68b966f6f"/>
+  <listType typeId="b21d05ab-c345-435b-a2a9-4065ac79c990" valueTypeId="4da1b3b6-1ffc-425d-b842-5d96efcc61cb"/>
+  <managerType typeId="c4be482f-069a-4022-8f5a-83f603c961e3" valueTypeId="08bdb9f0-df6e-4757-a2bf-886247a7ed8f"/>
+  <recordSetType typeId="6985c4c1-e8a9-4cde-bab7-abbbafc79221" valueTypeId="fabeb235-67fd-424c-b8df-85603e15ade3"/>
+  <recordKeyType typeId="7dd6e779-edd7-44de-ba8a-c1b1243f0b7d" valueTypeId="3e71a7b2-be1d-46d2-a7c3-02a1dea3ac8d"/>
+  <recordType typeId="3e83205a-b117-42a0-9b36-546bb9281490" valueTypeId="5af53015-33f3-4548-8864-5f87862134fa"/>
+ </producedTypes>
+ <name>R9541T_VacationUsage</name>
+ <synonym>
+  <key>en</key>
+  <value>R9541T Vacation usage</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>R9541T Использование отпуска</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>R9541T Vacation usage</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="806f5017-0daa-445d-807c-ac64250c2270">
+  <name>Days</name>
+  <synonym>
+   <key>en</key>
+   <value>Days</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дни</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Days</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>5</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="c81d3f0f-471c-4faa-9eda-8a267c6c3be2">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="00a5d9d2-fb51-49cf-8b61-1090de3fac36">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>Employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+</mdclass:AccumulationRegister>

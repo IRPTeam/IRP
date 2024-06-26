@@ -1558,7 +1558,7 @@
 			</role>
 		</field>
 		<dataSource>DataSource1</dataSource>
-		<query>SELECT
+		<query>SELECT ALLOWED
 	R6020B_BatchBalanceBalanceAndTurnovers.Company,
 	R6020B_BatchBalanceBalanceAndTurnovers.Store,
 	R6020B_BatchBalanceBalanceAndTurnovers.ItemKey,

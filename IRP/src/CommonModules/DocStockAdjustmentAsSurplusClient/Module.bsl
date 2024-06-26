@@ -41,6 +41,14 @@ EndProcedure
 
 #EndRegion
 
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, Item) Export
+	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
+EndProcedure
+
+#EndRegion
+
 #Region STORE
 
 Procedure StoreOnChange(Object, Form, Item) Export
@@ -147,13 +155,21 @@ EndProcedure
 
 #EndRegion
 
-#Region AMOUNT
-
-Procedure ItemListAmountOnChange(Object, Form, CurrentData = Undefined) Export
-	ViewClient_V2.ItemListAmountOnChange(Object, Form, CurrentData);
+Procedure ItemListVatRateOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListVatRateOnChange(Object, Form, CurrentData);
 EndProcedure
 
-#EndRegion
+Procedure ItemListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTaxAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ItemListNetAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListNetAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	ViewClient_V2.ItemListTotalAmountOnChange(Object, Form, CurrentData);
+EndProcedure
 
 #EndRegion
 

@@ -17,6 +17,10 @@ Procedure ChangeVsible(Form, Visible) Export
 	_arrayOfFormItems.Add("PaymentListTotalNetAmount");
 	_arrayOfFormItems.Add("PaymentListVATRate");
 	
+	_arrayOfFormItems.Add("TransactionsVatRate");
+	_arrayOfFormItems.Add("TransactionsNetAmount");
+	_arrayOfFormItems.Add("TransactionsTaxAmount");
+	
 	For Each _item In _arrayOfFormItems Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, _item) Then
 			Form.Items[_item].Visible = Visible;
@@ -25,13 +29,15 @@ Procedure ChangeVsible(Form, Visible) Export
 EndProcedure
 
 Procedure LoadChoiceList(Form, ChoiceList) Export
-	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "ItemListVATRate") Then
-		Form.Items["ItemListVATRate"].ChoiceList.Clear();
-		Form.Items["ItemListVATRate"].ChoiceList.LoadValues(ChoiceList);
-	EndIf;
-	
-	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, "PaymentListVATRate") Then
-		Form.Items["PaymentListVATRate"].ChoiceList.Clear();
-		Form.Items["PaymentListVATRate"].ChoiceList.LoadValues(ChoiceList);
-	EndIf;
+	LoadChoiceList_VatRate(Form, ChoiceList, "ItemListVATRate");
+	LoadChoiceList_VatRate(Form, ChoiceList, "PaymentListVATRate");
+	LoadChoiceList_VatRate(Form, ChoiceList, "TransactionsVATRate");
 EndProcedure
+
+Procedure LoadChoiceList_VatRate(Form, ChoiceList, ItemName)
+	If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, ItemName) Then
+		Form.Items[ItemName].ChoiceList.Clear();
+		Form.Items[ItemName].ChoiceList.LoadValues(ChoiceList);
+	EndIf;	
+EndProcedure	
+

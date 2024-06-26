@@ -714,8 +714,8 @@ Scenario: _020134 load data in the Stock adjustment as surplus
 		And I set checkbox "Price"
 		And I click "Next" button
 		Then the form attribute named "Field_Price" became equal to "Yes"
-		Then the form attribute named "Field_Amount" became equal to "No"
-		Then the form attribute named "Field_AmountTax" became equal to "No"		
+		Then the form attribute named "Field_TotalAmount" became equal to "No"
+		Then the form attribute named "Field_TaxAmount" became equal to "No"		
 		And I close all client application windows
 
 Scenario: _020135 load data in the Stock adjustment as write off

@@ -44,8 +44,7 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 	EndIf;
 
 	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
-	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata,
-		MetaTypeOrRef);
+	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata, MetaTypeOrRef);
 	FormGroups = AddAttributesAndPropertiesServer.FormGroups(AttributesList);
 	If ElementParent <> Undefined Then
 		For Each FormGroup In FormGroups Do
@@ -67,8 +66,14 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object." + Attribute.Attribute;
-		If ObjectMetadata.Attributes[Attribute.Attribute].Type = BooleanTypeDescription Then
-			NewAttribute.Type = FormFieldType.CheckBoxField;
+		If ObjectMetadata.Attributes.Find(Attribute.Attribute) = Undefined Then
+			If Metadata.CommonAttributes[Attribute.Attribute].Type = BooleanTypeDescription Then
+				NewAttribute.Type = FormFieldType.CheckBoxField;
+			EndIf;
+		Else
+			If ObjectMetadata.Attributes[Attribute.Attribute].Type = BooleanTypeDescription Then
+				NewAttribute.Type = FormFieldType.CheckBoxField;
+			EndIf;
 		EndIf;
 	EndDo;
 

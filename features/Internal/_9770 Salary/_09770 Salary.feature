@@ -63,6 +63,7 @@ Scenario: _097700 preparation (Сheck payroll)
 		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Data for salary
 		When Create catalog EmployeePositions objects
+		When Create information register T9545S_VacationDaysLimits records
 		When Create catalog Partners objects (Employee for salary)
 		When Create catalog AccrualAndDeductionTypes objects
 		When Create information register T9500S_AccrualAndDeductionValues records
@@ -196,6 +197,36 @@ Scenario: _097706 check Employee sick leave
 			| 'Number'                    |
 			| '$NumberEmployeeSickLeave$' |
 
+Scenario: _097717 calculate deserved vacations
+	And I close all client application windows
+	* October (Main Company)
+		Given I open hyperlink "e1cib/list/Document.CalculationDeservedVacations"
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "01.11.2023 12:00:00" text in the field named "Date"
+		And I input "01.10.2023" text in "Begin date" field
+		And I input "31.10.2023" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacation"	
+		And I click "Post and close" button	
+	* Check
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$NumberDeservedVacation$' |
+	* November
+		And I click the button named "FormCreate"
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I input "01.12.2023 12:00:00" text in the field named "Date"
+		And I input "01.11.2023" text in "Begin date" field
+		And I input "30.11.2023" text in "End date" field
+		And I click "Save" button
+		And I save the value of "Number" field as "NumberDeservedVacation1"	
+		And I click "Post and close" button	
+	* Check
+		And "List" table contains lines
+			| 'Number'                   |
+			| '$NumberDeservedVacation1$' |
+		
 Scenario: _097707 check Employee vacation
 	And I close all client application windows
 	* Create EmployeeVacation (Arina Brown, Anna Petrova)
@@ -230,6 +261,10 @@ Scenario: _097707 check Employee vacation
 		And I select from the drop-down list named "Branch" by "shop 01" string
 		And I click "Post" button	
 		And I save the value of "Number" field as "NumberEmployeeVacation"
+		And "EmployeeList" table became equal
+			| "Employee"     | "Begin date" | "End date"   | "Paid days" | "Own cost days" | "Total" |
+			| "Arina Brown"  | "06.11.2023" | "15.11.2023" | "10"        | "0"             | "10"    |
+			| "Anna Petrova" | "04.11.2023" | "08.11.2023" | "5"         | "0"             | "5"     |
 		And I click "Post and close" button
 	* Check
 		And "List" table contains lines
@@ -958,6 +993,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| "Documents.EmployeeHiring.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeTransfer.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And Delay 2
 		And I execute 1C:Enterprise script at server
 			| "Documents.EmployeeVacation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Check Time Sheet

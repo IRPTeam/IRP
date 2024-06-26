@@ -430,20 +430,209 @@
       <currentRowUse>Auto</currentRowUse>
      </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-     <name>PackageUnit</name>
-     <id>126</id>
+    <items xsi:type="form:FormGroup">
+     <name>GroupPackageUnit</name>
+     <id>178</id>
+     <items xsi:type="form:FormField">
+      <name>InheritPackageUnit</name>
+      <id>183</id>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>InheritPackageUnit</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>InheritPackageUnitExtendedTooltip</name>
+       <id>185</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>InheritPackageUnitContextMenu</name>
+       <id>184</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>LabelField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:LabelFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <hyperlink>true</hyperlink>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>OwnPackageUnit</name>
+      <id>126</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>Object.PackageUnit</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>OwnPackageUnitExtendedTooltip</name>
+       <id>128</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>OwnPackageUnitContextMenu</name>
+       <id>127</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>PackageUnitMode</name>
+      <id>180</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>PackageUnitMode</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <handlers>
+       <event>OnChange</event>
+       <name>PackageUnitModeOnChange</name>
+      </handlers>
+      <extendedTooltip>
+       <name>PackageUnitModeExtendedTooltip</name>
+       <id>182</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>PackageUnitModeContextMenu</name>
+       <id>181</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>RadioButtonField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+       <radioButtonsType>Tumbler</radioButtonsType>
+       <choiceList>
+        <presentation>
+         <key>en</key>
+         <value>Own</value>
+        </presentation>
+        <presentation>
+         <key>ru</key>
+         <value>Собственная</value>
+        </presentation>
+        <presentation>
+         <key>tr</key>
+         <value>Kendi çekimiz</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+         <value>Own</value>
+        </value>
+       </choiceList>
+       <choiceList>
+        <presentation>
+         <key>en</key>
+         <value>Inherit</value>
+        </presentation>
+        <presentation>
+         <key>ru</key>
+         <value>Унаследованная</value>
+        </presentation>
+        <presentation>
+         <key>tr</key>
+         <value>Üst öğeden al</value>
+        </presentation>
+        <value xsi:type="core:StringValue">
+         <value>Inherit</value>
+        </value>
+       </choiceList>
+      </extInfo>
+     </items>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
       <common>true</common>
      </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.PackageUnit</segments>
-     </dataPath>
+     <title>
+      <key>en</key>
+      <value>Group of Package unit</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Группа ед.изм. упаковки</value>
+     </title>
+     <title>
+      <key>tr</key>
+      <value>Group of Package unit</value>
+     </title>
      <extendedTooltip>
-      <name>PackageUnitExtendedTooltip</name>
-      <id>128</id>
+      <name>GroupPackageUnitExtendedTooltip</name>
+      <id>179</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -456,28 +645,14 @@
        <horizontalAlign>Left</horizontalAlign>
       </extInfo>
      </extendedTooltip>
-     <contextMenu>
-      <name>PackageUnitContextMenu</name>
-      <id>127</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>InputField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
+     <type>UsualGroup</type>
+     <extInfo xsi:type="form:UsualGroupExtInfo">
+      <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
+      <showLeftMargin>true</showLeftMargin>
+      <united>true</united>
+      <throughAlign>Auto</throughAlign>
+      <currentRowUse>Auto</currentRowUse>
      </extInfo>
     </items>
     <items xsi:type="form:FormGroup">
@@ -2892,6 +3067,58 @@
     <common>true</common>
    </edit>
   </columns>
+ </attributes>
+ <attributes>
+  <name>PackageUnitMode</name>
+  <title>
+   <key>en</key>
+   <value>Package unit mode</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Режим ед.изм. упаковки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Package unit mode</value>
+  </title>
+  <id>12</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <savedData>true</savedData>
+ </attributes>
+ <attributes>
+  <name>InheritPackageUnit</name>
+  <title>
+   <key>en</key>
+   <value>Inherit package unit</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Унаследованная ед.изм. упаковки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Inherit package unit</value>
+  </title>
+  <id>13</id>
+  <valueType>
+   <types>CatalogRef.Units</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
  </attributes>
  <commandInterface>
   <navigationPanel>

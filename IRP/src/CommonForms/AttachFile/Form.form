@@ -316,6 +316,43 @@
    <contextMenu>
     <name>FileListContextMenu</name>
     <id>3</id>
+    <items xsi:type="form:Button">
+     <name>FileListContextMenuDeleteFile</name>
+     <id>52</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <for>
+       <value>true</value>
+       <role>Role.FullAccess</role>
+      </for>
+      <for>
+       <value>true</value>
+       <role>Role.AttachedFilesDelete</role>
+      </for>
+     </userVisible>
+     <extendedTooltip>
+      <name>FileListContextMenuDeleteFileExtendedTooltip</name>
+      <id>53</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <commandName>Form.Command.DeleteFiles</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -324,6 +361,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <representation>HierarchicalList</representation>
+   <readOnly>true</readOnly>
    <changeRowSet>true</changeRowSet>
    <changeRowOrder>true</changeRowOrder>
    <autoMaxWidth>true</autoMaxWidth>
@@ -768,6 +806,35 @@
     <name>DownloadFile</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>DeleteFiles</name>
+  <title>
+   <key>en</key>
+   <value>Delete files</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Удаление файлов</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Dosyaları sil</value>
+  </title>
+  <id>2</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.Delete</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>DeleteSelectedFiles</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <parameters>

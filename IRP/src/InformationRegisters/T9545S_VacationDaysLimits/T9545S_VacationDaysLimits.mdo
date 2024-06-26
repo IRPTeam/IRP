@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="17a631b8-bd64-4727-b468-66c59e70ed51">
+ <producedTypes>
+  <selectionType typeId="f244d5fa-4b4c-4cff-b5e4-78f10a8387f0" valueTypeId="a7c92f29-b782-48f8-99d8-2fd789b16b55"/>
+  <listType typeId="0a3eb00a-023e-4da5-bd3a-901239e87d4b" valueTypeId="223d272c-f11e-4196-8871-cd617f8a42f0"/>
+  <managerType typeId="f42a0df8-62a1-4ac8-b1c3-44675515411d" valueTypeId="0852f7ba-0fc7-4baa-b92c-c05db04f88b9"/>
+  <recordSetType typeId="edd5d4b6-70f5-4f9e-9333-6c5ef9620d37" valueTypeId="b0ac95dd-4d43-4307-a3f3-6d99badf70ad"/>
+  <recordKeyType typeId="adbc54c6-ebc8-4aba-a1bd-b7a7be766ddd" valueTypeId="711e7416-5336-4e1a-9cb9-53c302d79000"/>
+  <recordType typeId="b769c50c-9a1a-442c-ac90-f161be474da9" valueTypeId="bef6d392-189a-4622-b2ed-b8b46ccadff6"/>
+  <recordManagerType typeId="51e8c94b-2386-4cff-b77e-3bb91a31df08" valueTypeId="b3c884f5-fd1b-4c9e-bbb5-1c1df7bfe134"/>
+ </producedTypes>
+ <name>T9545S_VacationDaysLimits</name>
+ <synonym>
+  <key>en</key>
+  <value>T9545 Vacation days limits </value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9545 Лимиты дней отпуска</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9545 Vacation days limits </value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9545S_VacationDaysLimits.Form.RecordForm</defaultRecordForm>
+ <informationRegisterPeriodicity>Year</informationRegisterPeriodicity>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="32a0bd75-54f2-490d-a109-e5b8e1d138dd">
+  <name>DayLimit</name>
+  <synonym>
+   <key>en</key>
+   <value>Day limit</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Лимит дней</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Day limit</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>3</precision>
+    <nonNegative>true</nonNegative>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="54668562-a229-47c7-991d-6a8ce0a86784">
+  <name>Document</name>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.EmployeeHiring</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="862b8ba8-a482-4c5b-85d7-f13ad20d2124">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="c4c9d1a7-b052-403b-a005-9914f80be3ba">
+  <name>Employee</name>
+  <synonym>
+   <key>en</key>
+   <value>Employee</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сотрудник</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Personel</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="8e1cb836-53ce-4299-afc1-c94e943f8562">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

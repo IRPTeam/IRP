@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="60b6e2e5-2b02-4517-9c29-a5aff143bab3">
+ <producedTypes>
+  <objectType typeId="71869410-81ac-475d-ab20-fad1213a5046" valueTypeId="19ec8573-bd58-40a2-a442-54c083256bdc"/>
+  <refType typeId="51bbd347-0d7a-4576-8a1e-9cdfbd39ee13" valueTypeId="851b2332-aceb-4cba-bddb-8209a080ca42"/>
+  <selectionType typeId="977412c6-1008-4d7e-b670-ab014331fd1a" valueTypeId="7f72bb00-8b9f-4570-83b8-7fce1f3c77d5"/>
+  <listType typeId="15aa504e-aa92-40b2-b879-41d65fd6ece5" valueTypeId="5eafbb37-db4f-4934-9b43-876e06ff4173"/>
+  <managerType typeId="7c6ee441-7e2c-44b4-a91f-22ad94fe5c0e" valueTypeId="61a7c73f-b0ee-409a-b905-4a64922d1a3d"/>
+ </producedTypes>
+ <name>TaxesOperation</name>
+ <synonym>
+  <key>en</key>
+  <value>Taxes operation</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Операция налогообложения</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Taxes operation</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.TaxesOperation.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_TaxesOperation</value>
+  </typesFilterValue>
+  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <multipleValuesUseField>0</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>0</multipleValuesKeyField>
+  <multipleValuesOrderField>0</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_TaxesOperation</value>
+  </typesFilterValue>
+  <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <multipleValuesUseField>0</multipleValuesUseField>
+  <characteristicValues>Document.TaxesOperation.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.TaxesOperation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.TaxesOperation.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.TaxesOperation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>0</multipleValuesKeyField>
+  <multipleValuesOrderField>0</multipleValuesOrderField>
+ </characteristics>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Taxes operation</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Операция налогообложения</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Taxes operation</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Taxes operations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Операции налогообложения</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Taxes operations</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.TaxesOperation.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.TaxesOperation.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.TaxesOperation.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="2106790f-b240-4188-b1d4-e141f71b6744">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f8afb5fd-4623-4aa2-a970-b0f01db827ef">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="78d80dd0-e150-46c5-bc5f-8dca1ffd385a">
+  <name>TransactionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид операции</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi</value>
+  </synonym>
+  <type>
+   <types>EnumRef.TaxesOperationTransactionType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="32d1214b-8438-481a-be79-0514abc766c1">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="de5eca44-f0fb-4fcc-a71a-2249dca3ea90">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8d6655a9-82fc-4022-8240-12e02df56307">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>Partner term</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c2e21246-32a0-45f9-9569-e23401f76043">
+  <name>LegalNameContract</name>
+  <synonym>
+   <key>en</key>
+   <value>Legal name contract</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Договор контрагента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesap kontratı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LegalNameContracts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.LegalName</name>
+   <field>Document.TaxesOperation.Attribute.LegalName</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.TaxesOperation.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="71c3e55f-2adf-4fde-b87f-e3a137849edb">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="57db25ef-5033-4aef-bd8b-900d9f3032c8">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="68e02373-e376-4fc8-b2be-bed872a90d06">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="0d480d36-60a7-4064-ab15-66fcaf0cac18">
+  <producedTypes>
+   <objectType typeId="22a9facf-9e29-4f4f-8fad-82ea8dafe197" valueTypeId="19ae5ba4-600e-488a-8244-2904bc5db471"/>
+   <rowType typeId="e6de4114-78d5-4952-911d-803aa9ae8069" valueTypeId="55ae30b7-0de5-4f71-811c-f193514ed219"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <attributes uuid="03b79e8a-0554-48d9-862e-93bce67f9f5c">
+   <name>Property</name>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="166b1fca-45c4-4b11-a471-5f96becd14a2">
+   <name>Value</name>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Document.TaxesOperation.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="bba56cf6-4df3-462b-8b1e-22a24a012758">
+  <producedTypes>
+   <objectType typeId="36571587-4abd-414e-a19e-ad98c9035164" valueTypeId="85be414c-f069-432c-a8f7-f3654398156d"/>
+   <rowType typeId="f26ae2af-2a1a-4f1e-9943-b2c00c212702" valueTypeId="81fd00ba-3d86-42aa-88f7-ded8d650cc93"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <attributes uuid="77e9be53-5ffc-4163-b21a-9907718e66c3">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="15f49bf3-76fe-4769-b903-47c41a7af271">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4e8a89a0-4130-470e-b9dc-8737a0f605c4">
+   <name>Rate</name>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ae061bc9-8374-412d-a77c-4f0d62ff8b20">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="74f4a396-1568-4ab3-8151-f6698db2fb3d">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="795cafeb-a1bb-498f-8ca8-265b2631d911">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="04ed3816-2d84-4847-b7eb-fdb5d030a8cf">
+   <name>MovementType</name>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вид движения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="15055c13-581e-447b-832e-6e8e82e26ca8">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="e8ae0b0b-45f0-48cb-b3bb-c32520b5343e">
+   <name>IsFixed</name>
+   <synonym>
+    <key>en</key>
+    <value>Is fixed</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Фиксированный</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sabittir</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="7324d34f-d102-46a4-8cca-67959c49d83d">
+  <producedTypes>
+   <objectType typeId="f5ec5caa-5e64-40e3-ac20-822bdf691e55" valueTypeId="c438819e-f07d-417b-9d54-918ef0ae9767"/>
+   <rowType typeId="15b7fee7-71dd-4748-8a6a-77fc96e823ef" valueTypeId="ba9a401e-69ea-4514-8a5e-ecc9c0b7f12f"/>
+  </producedTypes>
+  <name>TaxesIncoming</name>
+  <synonym>
+   <key>en</key>
+   <value>Taxes incoming</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Входящие налоги</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Taxes incoming</value>
+  </synonym>
+  <attributes uuid="79acde43-cef7-4b81-9a62-f21b5f0da47f">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c8aba5f3-8b90-4c50-995f-8c03ed65a001">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>KDV</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="4c354b3a-0ce4-4a6a-b126-2c08f43fdf25">
+   <name>InvoiceType</name>
+   <synonym>
+    <key>en</key>
+    <value>Invoice type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип инвойса</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Invoice type</value>
+   </synonym>
+   <type>
+    <types>EnumRef.InvoiceType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="0fd57de3-92db-441b-ab91-5fdef0ece40f">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="da1bb1f1-9cb0-4d51-8d9b-aae2ae36dd0c">
+  <producedTypes>
+   <objectType typeId="7ff65edb-24ab-477e-a9e3-59e192344b54" valueTypeId="14c28685-37b7-4de2-b096-8e5976e51143"/>
+   <rowType typeId="a24fe901-9a64-4076-a2ac-7b0cb2796837" valueTypeId="b02143a1-2a6b-4fd8-9caf-36494ca1b32d"/>
+  </producedTypes>
+  <name>TaxesOutgoing</name>
+  <synonym>
+   <key>en</key>
+   <value>Taxes outgoing</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Исходящие налоги</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Taxes outgoing</value>
+  </synonym>
+  <attributes uuid="05b7d99b-6a9a-41ef-a3f1-b6532862d9d6">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d8d6a5ed-0fc2-46c9-857f-17749f10e2e3">
+   <name>VatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>KDV</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="c4a434d3-4a73-4de0-8d22-e399a4c41d7d">
+   <name>InvoiceType</name>
+   <synonym>
+    <key>en</key>
+    <value>Invoice type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип инвойса</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Invoice type</value>
+   </synonym>
+   <type>
+    <types>EnumRef.InvoiceType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="657ce6d7-87ba-42ff-9fe0-5705e8334ed1">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <fillChecking>ShowError</fillChecking>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="1a483388-ddf3-4ba1-a409-2e987713e8d7">
+  <producedTypes>
+   <objectType typeId="a045f3ef-83e0-4c90-b619-97a814d522f9" valueTypeId="7996dd61-6922-4873-ba4b-8d8571944430"/>
+   <rowType typeId="3c69cf25-ac3d-4e68-8ffe-278d0415d793" valueTypeId="6dba08e8-c67f-42bb-857a-a0169db4f6f7"/>
+  </producedTypes>
+  <name>TaxesDifference</name>
+  <synonym>
+   <key>en</key>
+   <value>Taxes difference</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Разница налогов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Taxes difference</value>
+  </synonym>
+  <attributes uuid="e8139b4a-1cb4-4a4d-9cce-cd138a84ed14">
+   <name>Key</name>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="495ddfa2-d721-48a2-a781-f54ffc7813d1">
+   <name>IncomingVatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT (Incoming)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС (входящий)</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>VAT (Incoming)</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="7240abe2-87b6-4120-b681-afd44733988f">
+   <name>IncomingInvoiceType</name>
+   <synonym>
+    <key>en</key>
+    <value>Invoice type (incoming)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип инвойса (входящий)</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Invoice type (incoming)</value>
+   </synonym>
+   <type>
+    <types>EnumRef.InvoiceType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="8b47f66e-145f-47cf-b8d7-d5bce674aad9">
+   <name>OutgoingVatRate</name>
+   <synonym>
+    <key>en</key>
+    <value>VAT (outgoing)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>НДС (исходящий)</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>VAT (outgoing)</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxRates</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9ff71f6d-6548-40a3-a0bc-b60b3345035f">
+   <name>OutgoingInvoiceType</name>
+   <synonym>
+    <key>en</key>
+    <value>Invoice type (outgoing)</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Тип инвойса (исходящий)</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Invoice type (outgoing)</value>
+   </synonym>
+   <type>
+    <types>EnumRef.InvoiceType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="168122b7-a8ac-4bfc-b771-1bc5f52071f9">
+   <name>Amount</name>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+</mdclass:Document>

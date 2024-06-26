@@ -898,9 +898,6 @@
   <mdObject>Constant.DefaultFilesStorageVolume</mdObject>
  </content>
  <content>
-  <mdObject>AccumulationRegister.R5041B_TaxesPayable</mdObject>
- </content>
- <content>
   <mdObject>AccumulationRegister.R2040B_TaxesIncoming</mdObject>
  </content>
  <content>

@@ -11,10 +11,20 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocEmployeeHiringServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	
 	ThisObject.SalaryType = ?(ValueIsFilled(Object.PersonalSalary),"Personal", "ByPosition");
-	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);
+	
+	ThisObject.VacationDaysCompany = 
+		InformationRegisters.T9545S_VacationDaysLimits.GetLimit(Object.Date, Object.Company);
+	If ValueIsFilled(ThisObject.VacationDays) Then
+		ThisObject.VacationDays = Object.VacationDayLimit;
+		ThisObject.VacationDaysType = "Personal";
+	Else
+		ThisObject.VacationDays = ThisObject.VacationDaysCompany;
+		ThisObject.VacationDaysType = "ByCompany";
 	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -62,6 +72,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.Items.GroupSalaryAmount.CurrentPage = Form.Items.GroupSalaryByPosition;
 	EndIf;
+	
+	If Form.VacationDaysType = "Personal" Then
+		Form.Items.VacationDays.ReadOnly = False;
+	Else
+		Form.Items.VacationDays.ReadOnly = True;
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -71,6 +87,23 @@ Procedure SalaryTypeOnChange(Item)
 	EndIf;
 	
 	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure VacationDaysTypeOnChange(Item)
+	If ThisObject.VacationDaysType = "ByCompany" Then
+		Object.VacationDayLimit = 0;
+		ThisObject.VacationDays = ThisObject.VacationDaysCompany;
+	Else
+		Object.VacationDayLimit = ThisObject.VacationDays;
+	EndIf;
+	
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure VacationDaysOnChange(Item)
+	Object.VacationDayLimit = ThisObject.VacationDays;
 EndProcedure
 
 &AtClient

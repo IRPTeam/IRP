@@ -134,8 +134,15 @@ EndFunction
 Function R8510B_BookValueOfFixedAsset()
 	Return
 		"SELECT
-		|	*,
+		|	Calculations.Company,
+		|	Calculations.Branch,
+		|	Calculations.ProfitLossCenter,
+		|	Calculations.FixedAsset,
+		|	Calculations.LedgerType,
+		|	Calculations.Schedule,
+		|	Calculations.Amount,
 		|	&Date AS Period,
+		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType
 		|INTO R8510B_BookValueOfFixedAsset
 		|FROM
@@ -147,8 +154,15 @@ EndFunction
 Function R5022T_Expenses()
 	Return
 		"SELECT
-		|	*,
-		|	&Date AS Period
+		|	Calculations.Company,
+		|	Calculations.Branch,
+		|	Calculations.ProfitLossCenter,
+		|	Calculations.FixedAsset,
+		|	Calculations.LedgerType,
+		|	Calculations.ExpenseType,
+		|	Calculations.Amount,
+		|	&Date AS Period,
+		|	Calculations.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
 		|INTO R5022T_Expenses
 		|FROM
 		|	Calculations

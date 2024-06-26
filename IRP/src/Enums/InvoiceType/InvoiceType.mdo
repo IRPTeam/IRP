@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fc0bbbb9-9f74-4c33-a036-40367b097a21">
+ <producedTypes>
+  <refType typeId="17cec62f-b101-4db9-b98f-64f94e483bb2" valueTypeId="9e5df7f7-0065-4e7b-b95c-94220d68be12"/>
+  <listType typeId="5a1d5908-a3ec-4253-90a0-197adb8380fb" valueTypeId="f0a62b0c-8d6e-472b-a149-25d4e0a1c32a"/>
+  <managerType typeId="2ebb6b64-3c4a-4b9b-bfb1-114e90275716" valueTypeId="a7027d22-6f5b-4e04-897d-fc67435def2f"/>
+ </producedTypes>
+ <name>InvoiceType</name>
+ <synonym>
+  <key>en</key>
+  <value>Invoice type</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Тип инвойса</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Invoice type</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="1ac212f6-f7da-4f05-bea5-02bf0dfefe0e">
+  <name>Invoice</name>
+  <synonym>
+   <key>en</key>
+   <value>Invoice</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Инвойс</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7a95fe96-7059-4946-9f21-d5526145a772">
+  <name>Return</name>
+  <synonym>
+   <key>en</key>
+   <value>Return</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Возврат</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İade</value>
+  </synonym>
+ </enumValues>
+</mdclass:Enum>

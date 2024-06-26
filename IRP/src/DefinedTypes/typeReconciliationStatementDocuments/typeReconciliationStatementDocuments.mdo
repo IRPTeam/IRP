@@ -33,5 +33,6 @@
   <types>DocumentRef.SalesInvoice</types>
   <types>DocumentRef.DebitCreditNote</types>
   <types>DocumentRef.EmployeeCashAdvance</types>
+  <types>DocumentRef.TaxesOperation</types>
  </type>
 </mdclass:DefinedType>

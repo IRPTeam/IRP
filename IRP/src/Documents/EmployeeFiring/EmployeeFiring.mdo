@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.EmployeeFiring.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9510S_Staffing</registerRecords>
+ <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

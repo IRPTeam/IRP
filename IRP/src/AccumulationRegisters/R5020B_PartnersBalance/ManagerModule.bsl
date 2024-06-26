@@ -1892,6 +1892,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	
 		|	SendAdvances.Period,
+		|	SendAdvances.Key,
 		|	SendAdvances.Company,
 		|	SendAdvances.SendBranch AS Branch,
 		|	SendAdvances.SendPartner AS Partner,
@@ -1920,7 +1921,6 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		// Vendor advance (receipt)
 		|SELECT
-		//|	VALUE(AccumulationRecordType.Receipt),
 		|   
 		|	case when ReceiveAdvances.IsSendAdvanceCustomer and ReceiveAdvances.IsReceiveAdvanceVendor then
 		|   	VALUE(AccumulationRecordType.Expense)
@@ -1929,6 +1929,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	end,
 		|
 		|	ReceiveAdvances.Period,
+		|	ReceiveAdvances.Key,
 		|	ReceiveAdvances.Company,
 		|	ReceiveAdvances.ReceiveBranch AS Branch,
 		|	ReceiveAdvances.ReceivePartner AS Partner,
@@ -1959,6 +1960,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	VALUE(AccumulationRecordType.Receipt),
 		|
 		|	SendAdvances.Period,
+		|	SendAdvances.Key,
 		|	SendAdvances.Company,
 		|	SendAdvances.SendBranch AS Branch,
 		|	SendAdvances.SendPartner AS Partner,
@@ -1989,6 +1991,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	VALUE(AccumulationRecordType.Expense),
 		|
 		|	ReceiveAdvances.Period,
+		|	ReceiveAdvances.Key,
 		|	ReceiveAdvances.Company,
 		|	ReceiveAdvances.ReceiveBranch AS Branch,
 		|	ReceiveAdvances.ReceivePartner AS Partner,
@@ -2019,6 +2022,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	
 		|	SendTransactions.Period,
+		|	SendTransactions.Key,
 		|	SendTransactions.Company,
 		|	SendTransactions.SendBranch AS Branch,
 		|	SendTransactions.SendPartner AS Partner,
@@ -2054,6 +2058,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	end,
 		|
 		|	ReceiveTransactions.Period,
+		|	ReceiveTransactions.Key,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,
 		|	ReceiveTransactions.ReceivePartner AS Partner,
@@ -2084,6 +2089,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	VALUE(AccumulationRecordType.Expense),
 		|
 		|	SendTransactions.Period,
+		|	SendTransactions.Key,
 		|	SendTransactions.Company,
 		|	SendTransactions.SendBranch AS Branch,
 		|	SendTransactions.SendPartner AS Partner,
@@ -2119,6 +2125,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|	end,
 		|
 		|	ReceiveTransactions.Period,
+		|	ReceiveTransactions.Key,
 		|	ReceiveTransactions.Company,
 		|	ReceiveTransactions.ReceiveBranch AS Branch,
 		|	ReceiveTransactions.ReceivePartner AS Partner,
@@ -2152,6 +2159,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END,
 		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
@@ -2190,6 +2198,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|		ELSE VALUE(AccumulationRecordType.Receipt)
 		|	END,
 		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
@@ -2229,6 +2238,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|		ELSE VALUE(AccumulationRecordType.Receipt)
 		|	END,
 		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
@@ -2267,6 +2277,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|		ELSE VALUE(AccumulationRecordType.Expense)
 		|	END,
 		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
@@ -2297,6 +2308,7 @@ Function R5020B_PartnersBalance_DebitCreditNote() Export
 		|
 		|";
 EndFunction
+
 Function R5020B_PartnersBalance_Payroll() Export
 	Return 
 		// Other transaction
@@ -2324,6 +2336,61 @@ Function R5020B_PartnersBalance_Payroll() Export
 		|	SalaryTaxList AS SalaryTaxList
 		|WHERE
 		|	TRUE";
+EndFunction
+
+Function R5020B_PartnersBalance_TaxesOperation() Export
+	Return
+		// Other transaction
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Partner,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.Agreement,
+		|	UNDEFINED AS Document,
+		|	TaxesDifference.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	TaxesDifference.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|INTO R5020B_PartnersBalance
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|	AND TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Partner,
+		|	TaxesDifference.LegalName,
+		|	TaxesDifference.Agreement,
+		|	UNDEFINED AS Document,
+		|	TaxesDifference.Currency,
+		|	0 AS Amount,
+		|	0 AS CustomerTransaction,
+		|	0 AS CustomerAdvance,
+		|	0 AS VendorTransaction,
+		|	0 AS VendorAdvance,
+		|	TaxesDifference.Amount AS OtherTransaction,
+		|	UNDEFINED AS AdvancesClosing,
+		|	UNDEFINED AS Key
+		|FROM
+		|	TaxesDifference AS TaxesDifference
+		|WHERE
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|	AND TaxesDifference.IncomingVatRate.Ref IS NULL";
 EndFunction
 
 Procedure AdditionalDataFilling(MovementsValueTable) Export

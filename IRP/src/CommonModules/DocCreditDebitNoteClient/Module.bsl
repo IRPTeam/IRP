@@ -192,6 +192,22 @@ EndProcedure
 
 #EndRegion
 
+Procedure TransactionsVatRateOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsVatRateOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure TransactionsNetAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsNetAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure TransactionsTaxAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsTaxAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
+Procedure TransactionsAmountOnChange(Object, Form, Item, CurrentData = Undefined) Export
+	ViewClient_V2.TransactionsAmountOnChange(Object, Form, CurrentData);
+EndProcedure
+
 #EndRegion
 
 #EndRegion

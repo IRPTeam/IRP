@@ -49,7 +49,6 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
-	Form.Items.Basis.Visible = Not Object.UserDefined;
 	Form.Items.RegularOperations.Visible = Object.UserDefined;
 EndProcedure
 
@@ -143,9 +142,6 @@ EndProcedure
 
 &AtClient
 Procedure UserDefinedOnChange(Item)
-	If Object.UserDefined Then
-		Object.Basis = Undefined;
-	EndIf;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -265,7 +261,20 @@ EndProcedure
 &AtServer
 Procedure ProfitLostOffsetAtServer()
 	Object.RegisterRecords.Basic.Clear();
-	DataTable = Catalogs.LedgerTypes.ProfitLostOffset(Object.Company, Object.LedgerType, Object.Ref, Object.Date);
+	
+	RegisterRecords = AccountingRegisters.Basic.CreateRecordSet();
+	RegisterRecords.Filter.Recorder.Set(Object.Ref);
+	RegisterRecords.Write();
+		
+	DataTable = Catalogs.LedgerTypes.ProfitLostOffset(Object.Company, 
+		Object.LedgerType, 
+		Object.Ref, 
+		Object.Date, 
+		Object.DeletionMark,
+		RegisterRecords);
+	
+	Object.RegisterRecords.Basic.Clear();
+	
 	AccountingServer.SetDataRegisterRecords(DataTable, Object.LedgerType, Object.RegisterRecords.Basic);
 	For Each Record In Object.RegisterRecords.Basic Do
 		Record.Active = Not Object.DeletionMark;

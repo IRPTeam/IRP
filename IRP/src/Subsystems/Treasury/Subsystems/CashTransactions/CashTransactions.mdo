@@ -25,5 +25,6 @@
  <content>Document.EmployeeCashAdvance</content>
  <content>Document.ForeignCurrencyRevaluation</content>
  <content>Document.DebitCreditNote</content>
+ <content>Document.TaxesOperation</content>
  <parentSubsystem>Subsystem.Treasury</parentSubsystem>
 </mdclass:Subsystem>

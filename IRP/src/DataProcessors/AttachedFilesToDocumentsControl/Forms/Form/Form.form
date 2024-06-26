@@ -1436,6 +1436,390 @@
     <enableDrag>true</enableDrag>
     <fileDragMode>AsFileRef</fileDragMode>
    </items>
+   <items xsi:type="form:Table">
+    <name>DocumentsAttachedFiles</name>
+    <id>47</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.DocumentsAttachedFiles</segments>
+    </dataPath>
+    <titleLocation>None</titleLocation>
+    <items xsi:type="form:FormField">
+     <name>DocumentsAttachedFilesRequired</name>
+     <id>69</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.DocumentsAttachedFiles.IsRequired</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesRequiredExtendedTooltip</name>
+      <id>71</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesRequiredContextMenu</name>
+      <id>70</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>EnterOnInput</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>DocumentsAttachedFilesFilePresention</name>
+     <id>63</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.DocumentsAttachedFiles.FilePresention</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesFilePresentionExtendedTooltip</name>
+      <id>65</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesFilePresentionContextMenu</name>
+      <id>64</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <readOnly>true</readOnly>
+     <editMode>EnterOnInput</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <width>10</width>
+      <maxWidth>10</maxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>false</horizontalStretch>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>DocumentsAttachedFilesFilePresentionComment</name>
+     <id>232</id>
+     <titleTextColor xsi:type="core:ColorRef">
+      <color>Style.ButtonTextColor</color>
+     </titleTextColor>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.DocumentsAttachedFiles.FilePresention.Comment</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesFilePresentionCommentExtendedTooltip</name>
+      <id>234</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesFilePresentionCommentContextMenu</name>
+      <id>233</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>LabelField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:LabelFieldExtInfo">
+      <autoMaxHeight>true</autoMaxHeight>
+      <horizontalStretch>true</horizontalStretch>
+      <textColor xsi:type="core:ColorRef">
+       <color>Style.BorderColor</color>
+      </textColor>
+     </extInfo>
+    </items>
+    <autoCommandBar>
+     <name>DocumentsAttachedFilesCommandBar</name>
+     <id>49</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <horizontalAlign>Left</horizontalAlign>
+    </autoCommandBar>
+    <handlers>
+     <event>Selection</event>
+     <name>DocumentsAttachedFilesSelection</name>
+    </handlers>
+    <handlers>
+     <event>OnActivateRow</event>
+     <name>DocumentsAttachedFilesOnActivateRow</name>
+    </handlers>
+    <searchStringAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>DocumentsAttachedFilesSearchString</name>
+     <id>51</id>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesSearchStringExtendedTooltip</name>
+      <id>53</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesSearchStringContextMenu</name>
+      <id>52</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <source>DocumentsAttachedFilesSearchString</source>
+     <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </searchStringAddition>
+    <viewStatusAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>DocumentsAttachedFilesViewStatus</name>
+     <id>54</id>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesViewStatusExtendedTooltip</name>
+      <id>56</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesViewStatusContextMenu</name>
+      <id>55</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>ViewStatusAddition</type>
+     <source>DocumentsAttachedFilesViewStatus</source>
+     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </viewStatusAddition>
+    <searchControlAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>DocumentsAttachedFilesSearchControl</name>
+     <id>57</id>
+     <extendedTooltip>
+      <name>DocumentsAttachedFilesSearchControlExtendedTooltip</name>
+      <id>59</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentsAttachedFilesSearchControlContextMenu</name>
+      <id>58</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>SearchControlAddition</type>
+     <source>DocumentsAttachedFilesSearchControl</source>
+     <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </searchControlAddition>
+    <extendedTooltip>
+     <name>DocumentsAttachedFilesExtendedTooltip</name>
+     <id>50</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>DocumentsAttachedFilesContextMenu</name>
+     <id>48</id>
+     <items xsi:type="form:Button">
+      <name>AttachOther</name>
+      <id>185</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>AttachOtherExtendedTooltip</name>
+       <id>186</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.AttachOther</commandName>
+      <representation>PictureAndText</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <height>4</height>
+      <autoMaxHeight>true</autoMaxHeight>
+      <verticalStretch>true</verticalStretch>
+      <placementArea>UserCmds</placementArea>
+      <font xsi:type="core:FontRef">
+       <font>Style.NormalTextFont</font>
+       <height>14.0</height>
+       <bold>true</bold>
+       <italic>false</italic>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+      </font>
+      <picture xsi:type="core:PictureRef">
+       <picture>StdPicture.Attach</picture>
+      </picture>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+    </contextMenu>
+    <representation>HierarchicalList</representation>
+    <changeRowSet>true</changeRowSet>
+    <changeRowOrder>true</changeRowOrder>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxRowsCount>true</autoMaxRowsCount>
+    <selectionMode>MultiRow</selectionMode>
+    <header>true</header>
+    <headerHeight>1</headerHeight>
+    <footerHeight>1</footerHeight>
+    <horizontalScrollBar>AutoUse</horizontalScrollBar>
+    <verticalScrollBar>AutoUse</verticalScrollBar>
+    <horizontalLines>true</horizontalLines>
+    <verticalLines>true</verticalLines>
+    <autoInsertNewRow>true</autoInsertNewRow>
+    <searchOnInput>Auto</searchOnInput>
+    <initialListView>Auto</initialListView>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <enableStartDrag>true</enableStartDrag>
+    <enableDrag>true</enableDrag>
+    <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -1470,7 +1854,7 @@
    </extendedTooltip>
    <type>UsualGroup</type>
    <extInfo xsi:type="form:UsualGroupExtInfo">
-    <group>HorizontalIfPossible</group>
+    <group>Vertical</group>
     <behavior>Auto</behavior>
     <showLeftMargin>true</showLeftMargin>
     <united>true</united>
@@ -1484,598 +1868,6 @@
    <items xsi:type="form:FormGroup">
     <name>GroupDocsToAttach</name>
     <id>138</id>
-    <items xsi:type="form:Table">
-     <name>DocumentsAttachedFiles</name>
-     <id>47</id>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Object.DocumentsAttachedFiles</segments>
-     </dataPath>
-     <titleLocation>None</titleLocation>
-     <items xsi:type="form:FormField">
-      <name>DocumentsAttachedFilesFilePresention</name>
-      <id>63</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-       <segments>Object.DocumentsAttachedFiles.FilePresention</segments>
-      </dataPath>
-      <extendedTooltip>
-       <name>DocumentsAttachedFilesFilePresentionExtendedTooltip</name>
-       <id>65</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocumentsAttachedFilesFilePresentionContextMenu</name>
-       <id>64</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <readOnly>true</readOnly>
-      <editMode>EnterOnInput</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <wrap>true</wrap>
-       <chooseType>true</chooseType>
-       <typeDomainEnabled>true</typeDomainEnabled>
-       <textEdit>true</textEdit>
-      </extInfo>
-     </items>
-     <items xsi:type="form:FormGroup">
-      <name>DocumentsAttachedFilesGroupRequiredFormat</name>
-      <id>77</id>
-      <items xsi:type="form:FormField">
-       <name>DocumentsAttachedFilesRequired</name>
-       <id>69</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <dataPath xsi:type="form:DataPath">
-        <segments>Object.DocumentsAttachedFiles.IsRequired</segments>
-       </dataPath>
-       <extendedTooltip>
-        <name>DocumentsAttachedFilesRequiredExtendedTooltip</name>
-        <id>71</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-         <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-       </extendedTooltip>
-       <contextMenu>
-        <name>DocumentsAttachedFilesRequiredContextMenu</name>
-        <id>70</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-       </contextMenu>
-       <type>CheckBoxField</type>
-       <editMode>EnterOnInput</editMode>
-       <showInHeader>true</showInHeader>
-       <headerHorizontalAlign>Left</headerHorizontalAlign>
-       <showInFooter>true</showInFooter>
-       <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-      </items>
-      <items xsi:type="form:FormField">
-       <name>DocumentsAttachedFilesFileExtension</name>
-       <id>72</id>
-       <title>
-        <key>en</key>
-        <value>Extension</value>
-       </title>
-       <title>
-        <key>ru</key>
-        <value>Расширение</value>
-       </title>
-       <title>
-        <key>tr</key>
-        <value>Uzantı</value>
-       </title>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <dataPath xsi:type="form:DataPath">
-        <segments>Object.DocumentsAttachedFiles.FileExtension</segments>
-       </dataPath>
-       <extendedTooltip>
-        <name>DocumentsAttachedFilesFileExtensionExtendedTooltip</name>
-        <id>74</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-         <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-       </extendedTooltip>
-       <contextMenu>
-        <name>DocumentsAttachedFilesFileExtensionContextMenu</name>
-        <id>73</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-       </contextMenu>
-       <type>InputField</type>
-       <editMode>EnterOnInput</editMode>
-       <showInHeader>true</showInHeader>
-       <headerHorizontalAlign>Left</headerHorizontalAlign>
-       <showInFooter>true</showInFooter>
-       <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-       </extInfo>
-      </items>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <title>
-       <key>en</key>
-       <value>Documents attached files group required format</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Требуемый формат группы файлов документов</value>
-      </title>
-      <title>
-       <key>tr</key>
-       <value>Evraklar eklenen dosyalar grubu istenilen format</value>
-      </title>
-      <toolTip>
-       <key>en</key>
-       <value>Documents attached files group required format</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Требуемый формат группы файлов документов</value>
-      </toolTip>
-      <toolTip>
-       <key>tr</key>
-       <value>Evraklar eklenen dosyalar grubu istenilen format</value>
-      </toolTip>
-      <readOnly>true</readOnly>
-      <extendedTooltip>
-       <name>DocumentsAttachedFilesGroupRequiredFormatExtendedTooltip</name>
-       <id>78</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <type>ColumnGroup</type>
-      <extInfo xsi:type="form:ColumnGroupExtInfo">
-       <showTitle>true</showTitle>
-      </extInfo>
-     </items>
-     <autoCommandBar>
-      <name>DocumentsAttachedFilesCommandBar</name>
-      <id>49</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <horizontalAlign>Left</horizontalAlign>
-     </autoCommandBar>
-     <handlers>
-      <event>Selection</event>
-      <name>DocumentsAttachedFilesSelection</name>
-     </handlers>
-     <handlers>
-      <event>OnActivateRow</event>
-      <name>DocumentsAttachedFilesOnActivateRow</name>
-     </handlers>
-     <searchStringAddition>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <name>DocumentsAttachedFilesSearchString</name>
-      <id>51</id>
-      <extendedTooltip>
-       <name>DocumentsAttachedFilesSearchStringExtendedTooltip</name>
-       <id>53</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocumentsAttachedFilesSearchStringContextMenu</name>
-       <id>52</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <source>DocumentsAttachedFilesSearchString</source>
-      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-      </extInfo>
-     </searchStringAddition>
-     <viewStatusAddition>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <name>DocumentsAttachedFilesViewStatus</name>
-      <id>54</id>
-      <extendedTooltip>
-       <name>DocumentsAttachedFilesViewStatusExtendedTooltip</name>
-       <id>56</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocumentsAttachedFilesViewStatusContextMenu</name>
-       <id>55</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>ViewStatusAddition</type>
-      <source>DocumentsAttachedFilesViewStatus</source>
-      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-      </extInfo>
-     </viewStatusAddition>
-     <searchControlAddition>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <name>DocumentsAttachedFilesSearchControl</name>
-      <id>57</id>
-      <extendedTooltip>
-       <name>DocumentsAttachedFilesSearchControlExtendedTooltip</name>
-       <id>59</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-       <name>DocumentsAttachedFilesSearchControlContextMenu</name>
-       <id>58</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <autoFill>true</autoFill>
-      </contextMenu>
-      <type>SearchControlAddition</type>
-      <source>DocumentsAttachedFilesSearchControl</source>
-      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
-       <autoMaxWidth>true</autoMaxWidth>
-      </extInfo>
-     </searchControlAddition>
-     <extendedTooltip>
-      <name>DocumentsAttachedFilesExtendedTooltip</name>
-      <id>50</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>DocumentsAttachedFilesContextMenu</name>
-      <id>48</id>
-      <items xsi:type="form:Button">
-       <name>AttachOther</name>
-       <id>185</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <extendedTooltip>
-        <name>AttachOtherExtendedTooltip</name>
-        <id>186</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-         <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-         <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-       </extendedTooltip>
-       <commandName>Form.Command.AttachOther</commandName>
-       <representation>PictureAndText</representation>
-       <autoMaxWidth>true</autoMaxWidth>
-       <height>4</height>
-       <autoMaxHeight>true</autoMaxHeight>
-       <verticalStretch>true</verticalStretch>
-       <placementArea>UserCmds</placementArea>
-       <font xsi:type="core:FontRef">
-        <font>Style.NormalTextFont</font>
-        <height>14.0</height>
-        <bold>true</bold>
-        <italic>false</italic>
-        <underline>false</underline>
-        <strikeout>false</strikeout>
-       </font>
-       <picture xsi:type="core:PictureRef">
-        <picture>StdPicture.Attach</picture>
-       </picture>
-       <representationInContextMenu>Auto</representationInContextMenu>
-      </items>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-     </contextMenu>
-     <representation>HierarchicalList</representation>
-     <changeRowSet>true</changeRowSet>
-     <changeRowOrder>true</changeRowOrder>
-     <autoMaxWidth>true</autoMaxWidth>
-     <autoMaxRowsCount>true</autoMaxRowsCount>
-     <selectionMode>MultiRow</selectionMode>
-     <header>true</header>
-     <headerHeight>1</headerHeight>
-     <footerHeight>1</footerHeight>
-     <horizontalScrollBar>AutoUse</horizontalScrollBar>
-     <verticalScrollBar>AutoUse</verticalScrollBar>
-     <horizontalLines>true</horizontalLines>
-     <verticalLines>true</verticalLines>
-     <autoInsertNewRow>true</autoInsertNewRow>
-     <searchOnInput>Auto</searchOnInput>
-     <initialListView>Auto</initialListView>
-     <horizontalStretch>true</horizontalStretch>
-     <verticalStretch>true</verticalStretch>
-     <enableStartDrag>true</enableStartDrag>
-     <enableDrag>true</enableDrag>
-     <fileDragMode>AsFileRef</fileDragMode>
-     <rowFilter xsi:type="core:UndefinedValue"/>
-    </items>
-    <items xsi:type="form:FormField">
-     <name>DocumentsAttachedFilesFilePresentionComment</name>
-     <id>232</id>
-     <titleTextColor xsi:type="core:ColorRef">
-      <color>Style.ButtonTextColor</color>
-     </titleTextColor>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <dataPath xsi:type="form:DataPath">
-      <segments>Items.DocumentsAttachedFiles.CurrentData.FilePresention.Comment</segments>
-     </dataPath>
-     <extendedTooltip>
-      <name>DocumentsAttachedFilesFilePresentionCommentExtendedTooltip</name>
-      <id>234</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <contextMenu>
-      <name>DocumentsAttachedFilesFilePresentionCommentContextMenu</name>
-      <id>233</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-     </contextMenu>
-     <type>LabelField</type>
-     <editMode>Enter</editMode>
-     <showInHeader>true</showInHeader>
-     <headerHorizontalAlign>Left</headerHorizontalAlign>
-     <showInFooter>true</showInFooter>
-     <extInfo xsi:type="form:LabelFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <textColor xsi:type="core:ColorRef">
-       <color>Style.BorderColor</color>
-      </textColor>
-     </extInfo>
-    </items>
-    <items xsi:type="form:FormGroup">
-     <name>GroupAttachButton</name>
-     <id>183</id>
-     <items xsi:type="form:Button">
-      <name>AddNewDocument</name>
-      <id>230</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <extendedTooltip>
-       <name>AddNewDocumentExtendedTooltip</name>
-       <id>231</id>
-       <visible>true</visible>
-       <enabled>true</enabled>
-       <userVisible>
-        <common>true</common>
-       </userVisible>
-       <type>Label</type>
-       <autoMaxWidth>true</autoMaxWidth>
-       <autoMaxHeight>true</autoMaxHeight>
-       <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-       </extInfo>
-      </extendedTooltip>
-      <type>UsualButton</type>
-      <commandName>Form.Command.AddNewDocument</commandName>
-      <representation>Auto</representation>
-      <height>2</height>
-      <autoMaxHeight>true</autoMaxHeight>
-      <horizontalStretch>true</horizontalStretch>
-      <placementArea>UserCmds</placementArea>
-      <font xsi:type="core:FontRef">
-       <font>Style.ExtraLargeTextFont</font>
-      </font>
-      <representationInContextMenu>Auto</representationInContextMenu>
-      <shapeRepresentation>WhenActive</shapeRepresentation>
-     </items>
-     <visible>true</visible>
-     <enabled>true</enabled>
-     <userVisible>
-      <common>true</common>
-     </userVisible>
-     <title>
-      <key>en</key>
-      <value>Group attach button</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Группа Кнопки прикрепления</value>
-     </title>
-     <title>
-      <key>tr</key>
-      <value>Grup ekle butonu</value>
-     </title>
-     <toolTip>
-      <key>en</key>
-      <value>Group attach button</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Группа Кнопки прикрепления</value>
-     </toolTip>
-     <toolTip>
-      <key>tr</key>
-      <value>Grup ekle butonu</value>
-     </toolTip>
-     <verticalStretch>true</verticalStretch>
-     <extendedTooltip>
-      <name>GroupAttachButtonExtendedTooltip</name>
-      <id>184</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-       <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-       <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-     </extendedTooltip>
-     <type>UsualGroup</type>
-     <extInfo xsi:type="form:UsualGroupExtInfo">
-      <group>AlwaysHorizontal</group>
-      <behavior>Auto</behavior>
-      <showLeftMargin>true</showLeftMargin>
-      <united>true</united>
-      <throughAlign>Auto</throughAlign>
-      <currentRowUse>Auto</currentRowUse>
-     </extInfo>
-    </items>
     <items xsi:type="form:Table">
      <name>CurrentFilesTable</name>
      <id>120</id>
@@ -2253,6 +2045,66 @@
      <autoCommandBar>
       <name>CurrentFilesTableCommandBar</name>
       <id>122</id>
+      <items xsi:type="form:Button">
+       <name>AddNewDocument</name>
+       <id>230</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <extendedTooltip>
+        <name>AddNewDocumentExtendedTooltip</name>
+        <id>231</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <commandName>Form.Command.AddNewDocument</commandName>
+       <representation>Auto</representation>
+       <autoMaxHeight>true</autoMaxHeight>
+       <horizontalStretch>true</horizontalStretch>
+       <placementArea>UserCmds</placementArea>
+       <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:Button">
+       <name>CurrentFilesTableDownloadFile</name>
+       <id>235</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <extendedTooltip>
+        <name>CurrentFilesTableDownloadFileExtendedTooltip</name>
+        <id>236</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <commandName>Form.Command.DownloadFile</commandName>
+       <representation>Auto</representation>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <placementArea>UserCmds</placementArea>
+       <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -2427,7 +2279,6 @@
      <searchOnInput>Auto</searchOnInput>
      <initialListView>Auto</initialListView>
      <horizontalStretch>true</horizontalStretch>
-     <verticalStretch>true</verticalStretch>
      <enableStartDrag>true</enableStartDrag>
      <enableDrag>true</enableDrag>
      <fileDragMode>AsFileRef</fileDragMode>
@@ -2524,9 +2375,6 @@
      <headerHorizontalAlign>Left</headerHorizontalAlign>
      <showInFooter>true</showInFooter>
      <extInfo xsi:type="form:ImageFieldExtInfo">
-      <width>15</width>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
       <horizontalStretch>true</horizontalStretch>
       <verticalStretch>true</verticalStretch>
       <pictureSize>Proportionally</pictureSize>
@@ -2632,10 +2480,8 @@
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
       </viewStatusAddition>
-      <width>49</width>
-      <autoMaxWidth>true</autoMaxWidth>
+      <width>50</width>
       <height>10</height>
-      <autoMaxHeight>true</autoMaxHeight>
       <horizontalStretch>true</horizontalStretch>
       <verticalStretch>true</verticalStretch>
      </extInfo>
@@ -3310,15 +3156,15 @@
   <name>AddNewDocument</name>
   <title>
    <key>en</key>
-   <value>⬆️ Select document type ⬆️</value>
+   <value>Attach document</value>
   </title>
   <title>
    <key>ru</key>
-   <value>⬆️ Выберите тип документа ⬆️</value>
+   <value>Прикрепить документ</value>
   </title>
   <title>
    <key>tr</key>
-   <value>⬆️ Evrak tipini seçiniz ⬆️</value>
+   <value>Attach document</value>
   </title>
   <id>7</id>
   <use>
@@ -3330,6 +3176,35 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>AddNewDocument</name>
+   </handler>
+  </action>
+  <representation>TextPicture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>DownloadFile</name>
+  <title>
+   <key>en</key>
+   <value>Download file</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Скачать файл</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Dosya indir</value>
+  </title>
+  <id>8</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.AppearanceDownArrowGray</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>DownloadFile</name>
    </handler>
   </action>
   <representation>TextPicture</representation>

@@ -57,8 +57,64 @@ Procedure EditAccounting(Result, AdditionalParameters) Export
 	DebitType = PredefinedValue("Enum.AccountingAnalyticTypes.Debit");
 	CreditType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit");
 	
-	Form.AccountingRowAnalytics.Clear();
-	Form.AccountingExtDimensions.Clear();
+	ArrayForDelete_Analytics = New Array();
+	ArrayForDelete_Dimensions = New Array();
+	
+	ProcessedKeys = New Array();
+	
+	For Each Row In Result.AccountingAnalytics Do
+		If ProcessedKeys.Find(Row.Key) <> Undefined Then
+			Continue;
+		EndIf;
+		
+		If ValueIsFilled(Row.Key) Then
+			ProcessedKeys.Add(Row.Key);
+			
+			For Each Row_Analytics In Form.AccountingRowAnalytics Do
+				If Row_Analytics.Key = Row.Key Then
+					ArrayForDelete_Analytics.Add(Row_Analytics);
+				EndIf;
+			EndDo;
+	
+			For Each Row_Dimensions In Form.AccountingExtDimensions Do
+				If Row_Dimensions.Key = Row.Key Then
+					ArrayForDelete_Dimensions.Add(Row_Dimensions);
+				EndIf;
+			EndDo;
+		
+		EndIf;
+	EndDo;
+	
+	For Each ArrayItem In ArrayForDelete_Analytics Do
+		Form.AccountingRowAnalytics.Delete(ArrayItem);
+	EndDo;
+	
+	For Each ArrayItem In ArrayForDelete_Dimensions Do
+		Form.AccountingExtDimensions.Delete(ArrayItem);
+	EndDo;
+	
+	ArrayForDelete_Analytics.Clear();
+	ArrayForDelete_Dimensions.Clear();
+	
+	For Each Row In Form.AccountingRowAnalytics Do
+		If Not ValueIsFilled(Row.Key) Then
+			ArrayForDelete_Analytics.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each ArrayItem In ArrayForDelete_Analytics Do
+		Form.AccountingRowAnalytics.Delete(ArrayItem);
+	EndDo;
+	
+	For Each Row In Form.AccountingExtDimensions Do
+		If Not ValueIsFilled(Row.Key) Then
+			ArrayForDelete_Dimensions.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each ArrayItem In ArrayForDelete_Dimensions Do
+		Form.AccountingExtDimensions.Delete(ArrayItem);
+	EndDo;
 	
 	For Each Row In Result.AccountingAnalytics Do
 		NewRow = Form.AccountingRowAnalytics.Add();

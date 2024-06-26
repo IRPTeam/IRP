@@ -543,7 +543,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Related serial lot numbers</value>
+   <value>İlişkili seri lotlar</value>
   </synonym>
   <attributes uuid="e969d874-8a74-4394-82f4-5731c0f73bbd">
    <name>SerialLotNumber</name>

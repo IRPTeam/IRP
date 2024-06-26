@@ -95,6 +95,8 @@
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+ <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -211,6 +213,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -405,6 +408,7 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -558,21 +562,292 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="d984b78c-64cd-4c23-acd7-76e73f595b18">
-  <name>Amount</name>
+  <name>DELETE_Amount</name>
   <synonym>
    <key>en</key>
-   <value>Amount</value>
+   <value>DELETE amount</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Сумма</value>
+   <value>УДАЛИТЬ сумму</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tutar</value>
+   <value>DELETE amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4fd6fe03-bf3c-4ee2-9f23-f4651a03bde9">
+  <name>SendUUID</name>
+  <synonym>
+   <key>en</key>
+   <value>Send UUID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>UUID отправки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Giden UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5e3a6f96-74c3-4b65-b779-3f8826e2d32e">
+  <name>ReceiveUUID</name>
+  <synonym>
+   <key>en</key>
+   <value>Receive UUID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>UUID получения</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gelen UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="57993dc7-7f6c-482f-8a3c-2d6aef0c0c5a">
+  <name>SendAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма (отправка)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount (send)</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1fa357c2-25d7-4b9d-b6b9-1176ff134dba">
+  <name>ReceiveAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Amount (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма (получение)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Amount (receive)</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5054debf-80aa-4aac-aa7f-9081f92cf79b">
+  <name>SendCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency (send)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта (отправка)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Currency (send)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4475f025-3378-49b4-b23f-0d521370e717">
+  <name>ReceiveCurrency</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency (receive)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта (получение)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Currency (receive)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4a41edb0-9cfd-4ab8-a85b-96e1f2a75ab7">
+  <name>ExpenseType</name>
+  <synonym>
+   <key>en</key>
+   <value>Expense type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Статья затрат</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gider tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsExpense</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="dcab6b1e-4284-4600-a07f-b4c75bf0024b">
+  <name>LossCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>Loss center</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Центр убытков</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Zarar merkezi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e256ce7e-1353-4b47-b8e5-181870ab26b4">
+  <name>RevenueType</name>
+  <synonym>
+   <key>en</key>
+   <value>Revenue type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Статья доходов</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Gelir tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.IsRevenue</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8c9b8117-6fa9-4426-8b45-d0bddbe2e476">
+  <name>ProfitCenter</name>
+  <synonym>
+   <key>en</key>
+   <value>Profit center</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Центр прибыли</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kâr merkezi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e3f1a9e3-1457-422f-b99b-f8b2a6de49b4">
+  <name>TransitUUID</name>
+  <synonym>
+   <key>en</key>
+   <value>Transit UUID</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>UUID транзита</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Geçiş UUID</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d7a843bf-2558-496a-9ed2-4d65fef626cb">
+ <name>DocTaxesOperationClient</name>
+ <synonym>
+  <key>en</key>
+  <value>Doc taxes operation client</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Операции с налогами документов клиент</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Doc taxes operation client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+</mdclass:CommonModule>

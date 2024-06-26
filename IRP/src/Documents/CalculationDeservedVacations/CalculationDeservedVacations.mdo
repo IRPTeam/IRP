@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="28c0c592-485c-4648-ab64-a7d98884466a">
+ <producedTypes>
+  <objectType typeId="c17b24ce-3b9c-474b-a04c-e28d5f8499ae" valueTypeId="b5b7c87b-0606-4ea2-98e7-9222173c30fa"/>
+  <refType typeId="724df342-2349-4d32-989d-45813b79aebc" valueTypeId="bb6a28ab-23b2-44c7-8d59-b2462de35228"/>
+  <selectionType typeId="f8405dcc-a8e8-478b-9f49-c671ca3b3685" valueTypeId="1efabd19-838c-4afa-98a7-3d0209d0f545"/>
+  <listType typeId="ebac0268-f4ef-44eb-b4c1-a218c4515dc8" valueTypeId="c032818c-5f98-4032-b03f-c16a206982ae"/>
+  <managerType typeId="0d8b4745-6ce6-4cb1-a26c-999a9059e38c" valueTypeId="ff871006-5604-4e29-9b19-0e9adfa2a970"/>
+ </producedTypes>
+ <name>CalculationDeservedVacations</name>
+ <synonym>
+  <key>en</key>
+  <value>Calculation deserved vacations</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Расчет заслуженных отпусков</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Calculation deserved vacations</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.CalculationDeservedVacations.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Calculation deserved vacations</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Расчет заслуженных отпусков</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Calculation deserved vacations</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Calculation deserved vacations</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Расчет заслуженных отпусков</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Calculation deserved vacations</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.CalculationDeservedVacations.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.CalculationDeservedVacations.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.CalculationDeservedVacations.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
+ <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <attributes uuid="cb53aaa1-8a04-47c3-b563-21d12a903f6e">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameters>
+   <name>Filter.OurCompany</name>
+   <value xsi:type="core:BooleanValue">
+    <value>true</value>
+   </value>
+  </choiceParameters>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c5334661-d13b-40bf-84c3-8953e68bd5a8">
+  <name>BeginDate</name>
+  <synonym>
+   <key>en</key>
+   <value>Begin date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата начала больничного</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="c48477a3-1c48-42bb-8d9a-4b8a2d316516">
+  <name>EndDate</name>
+  <synonym>
+   <key>en</key>
+   <value>End date</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата окончания больничного</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bitiş tarihi</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="c14df75b-b1fa-4df2-965d-3a526d48f3c2">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e6cba52c-2fcc-4568-b5e1-d981f6e5ff52">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="cb571914-037e-4e31-81f1-8afb53ac2307">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:Document>

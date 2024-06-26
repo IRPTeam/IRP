@@ -398,15 +398,15 @@
    <name>FilePresention</name>
    <synonym>
     <key>en</key>
-    <value>File presention</value>
+    <value>File type</value>
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Представление файла</value>
+    <value>Тип файла</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Dosya görünümü</value>
+    <value>File type</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

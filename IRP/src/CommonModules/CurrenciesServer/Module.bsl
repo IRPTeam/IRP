@@ -116,6 +116,9 @@ Function IsUseAgreementMovementType(RegMetadata)
 	Registers.Add(Reg.R5015B_OtherPartnersTransactions);
 	Registers.Add(Reg.R5020B_PartnersBalance);
 	
+	Registers.Add(Reg.R8014T_ConsignorSales);
+	Registers.Add(Reg.R8015T_ConsignorPrices);
+	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
 	Else
@@ -700,6 +703,10 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			Raise "Unknown transaction type in [T2015S_TransactionsInfo]";
 		EndIf;
 		
+		If Not PrepereTable.Count() Then
+			Continue
+		EndIf;
+		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then
 			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
@@ -730,6 +737,10 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 		Else
 			Raise "Unknown transaction type in [Table_T2014S_AdvancesInfo]";
 		EndIf;
+		
+		If Not PrepereTable.Count() Then
+			Continue;
+		EndIf
 		
 		RegisterRows = PrepereTable.FindRows(Filter);	
 		If RegisterRows.Count() = 0 Then

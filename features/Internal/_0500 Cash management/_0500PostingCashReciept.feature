@@ -790,6 +790,28 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    |
 				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 250,00'  |
 				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' |				
+		* Select SI
+			And I go to line in "Documents" table
+				| "Document"                                   | "Order"                                   |
+				| "Sales invoice 16 dated 04.09.2023 13:04:13" | 'Sales order 7 dated 04.09.2023 13:03:26' |
+			And I set "Check" checkbox in "Documents" table
+			And the editing text of form attribute named "Amount" became equal to "2 600,00"			
+			And I finish line editing in "Documents" table
+			And I click the button named "Calculate"
+			And "Documents" table became equal
+				| "Document"                                   | "Amount"   | "Payment"  | "Order"                                   |
+				| "Sales invoice 16 dated 04.09.2023 13:04:13" | "2 600,00" | ""         | 'Sales order 6 dated 04.09.2023 13:03:16' |
+				| "Sales invoice 16 dated 04.09.2023 13:04:13" | "2 600,00" | "2 600,00" | 'Sales order 7 dated 04.09.2023 13:03:26' |
+			And I go to line in "Documents" table
+				| "Document"                                   | "Amount"   | "Payment"  | "Order"                                   |
+				| "Sales invoice 16 dated 04.09.2023 13:04:13" | "2 600,00" | ""         | 'Sales order 6 dated 04.09.2023 13:03:16' |
+			And I set "Check" checkbox in "Documents" table
+			And the editing text of form attribute named "Amount" became equal to "5 200,00"	
+			And I go to line in "Documents" table
+				| "Document"                                   | "Order"                                   |
+				| "Sales invoice 16 dated 04.09.2023 13:04:13" | 'Sales order 7 dated 04.09.2023 13:03:26' |
+			And I remove "Check" checkbox in "Documents" table	
+			And the editing text of form attribute named "Amount" became equal to "2 600,00"	
 		And I close all client application windows
 
 Scenario: _050018 check amount when create CR based on SI (partner term - by documents)

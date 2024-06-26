@@ -42,7 +42,8 @@ Scenario: _043000 preparation (Debit note)
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects	
+		When Create catalog Taxes objects
+		When Create catalog Taxes objects (for debit and credit note)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -280,9 +281,9 @@ Scenario: _043006 check Debit note movements by the Register "R5021 Revenues" (w
 			| 'Register  "R5021 Revenues"'             | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
 			| ''                                       | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''           |
 			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project'    |
-			| ''                                       | '05.04.2021 09:30:36' | '393,76'    | '393,76'            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
-			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
-			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
+			| ''                                       | '05.04.2021 09:30:36' | '333,69'    | '393,76'            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'Project 01' |
+			| ''                                       | '05.04.2021 09:30:36' | '1 949,15'  | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               | 'Project 01' |
+			| ''                                       | '05.04.2021 09:30:36' | '1 949,15'  | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'Project 01' |
 	And I close all client application windows
 
 Scenario: _043007 check Debit note movements by the Register "R5021 Revenues" (with customer)
@@ -297,14 +298,14 @@ Scenario: _043007 check Debit note movements by the Register "R5021 Revenues" (w
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 2 dated 05.04.2021 09:31:09'   | ''                      | ''            | ''                    | ''               | ''               | ''                          | ''               | ''           | ''           | ''                      | ''                                | ''           |
-			| 'Document registrations records'           | ''                      | ''            | ''                    | ''               | ''               | ''                          | ''               | ''           | ''           | ''                      | ''                                | ''           |
-			| 'Register  "R5021 Revenues"'               | ''                      | ''            | ''                    | ''               | ''               | ''                          | ''               | ''           | ''           | ''                      | ''                                | ''           |
-			| ''                                         | 'Period'                | 'Resources'   | ''                    | 'Dimensions'     | ''               | ''                          | ''               | ''           | ''           | ''                      | ''                                | ''           |
-			| ''                                         | ''                      | 'Amount'      | 'Amount with taxes'   | 'Company'        | 'Branch'         | 'Profit loss center'        | 'Revenue type'   | 'Item key'   | 'Currency'   | 'Additional analytic'   | 'Multi currency movement type'    | 'Project'    |
-			| ''                                         | '05.04.2021 09:31:09'   | '17,12'       | '17,12'               | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'USD'        | ''                      | 'Reporting currency'              | ''           |
-			| ''                                         | '05.04.2021 09:31:09'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'TRY'        | ''                      | 'Local currency'                  | ''           |
-			| ''                                         | '05.04.2021 09:31:09'   | '100'         | '100'                 | 'Main Company'   | 'Front office'   | 'Distribution department'   | 'Software'       | ''           | 'TRY'        | ''                      | 'en description is empty'         | ''           |
+			| 'Debit note 2 dated 05.04.2021 09:31:09' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''        |
+			| 'Document registrations records'         | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''        |
+			| 'Register  "R5021 Revenues"'             | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''        |
+			| ''                                       | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             | ''        |
+			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Project' |
+			| ''                                       | '05.04.2021 09:31:09' | '14,51'     | '17,12'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        |
+			| ''                                       | '05.04.2021 09:31:09' | '84,75'     | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               | ''        |
+			| ''                                       | '05.04.2021 09:31:09' | '84,75'     | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      | ''        |
 	And I close all client application windows
 
 Scenario: _043008 check Debit note movements by the Register "R5021 Revenues" (OtherPartnersTransactions)
@@ -496,6 +497,46 @@ Scenario: _043017 check absence DebitNote movements by the Register  "T2014 Adva
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2014 Advances info"'    |
 		And I close all client application windows
+
+Scenario: _043018 check DebitNote movements by the Register  "R2040 Taxes incoming" (with vendor)
+	And I close all client application windows
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1'     |
+	* Check movements by the Register  "R2040 Taxes incoming" 
+		And I click "Registrations report info" button
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R2040 Taxes incoming"'       | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                       | '05.04.2021 09:30:36' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'Local currency'               | 'TRY'      | 'TRY'                  | '350,85' |
+			| ''                                       | '05.04.2021 09:30:36' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'Reporting currency'           | 'USD'      | 'TRY'                  | '60,07'  |
+			| ''                                       | '05.04.2021 09:30:36' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Return'       | 'en description is empty'      | 'TRY'      | 'TRY'                  | '350,85' |		
+	And I close all client application windows
+
+Scenario: _043018 check DebitNote movements by the Register  "R2040 Taxes incoming" (with customer)
+	And I close all client application windows
+	* Select DN
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'|
+			| '2'     |
+	* Check movements by the Register  "R2040 Taxes incoming" 
+		And I click "Registrations report info" button
+		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 2 dated 05.04.2021 09:31:09' | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| 'Register  "R2040 Taxes incoming"'       | ''                    | ''           | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     | ''       |
+			| ''                                       | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount' |
+			| ''                                       | '05.04.2021 09:31:09' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '15,25'  |
+			| ''                                       | '05.04.2021 09:31:09' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '2,61'   |
+			| ''                                       | '05.04.2021 09:31:09' | 'Receipt'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '15,25'  |
+	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows

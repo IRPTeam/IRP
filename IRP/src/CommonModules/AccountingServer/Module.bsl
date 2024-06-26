@@ -114,6 +114,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues , New Structure("ByRow", True));
 	Map.Insert(AO.DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
+	Map.Insert(AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming , New Structure("ByRow", True));
 		
 	// Credit note
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
@@ -121,6 +123,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
 	Map.Insert(AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions , New Structure("ByRow", True));
+	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
 	// receipt inventory
@@ -141,7 +145,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
 		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
 	
-	Map.Insert(AO.SalesInvoice_DR_R5021T_Revenues_CR_R2040B_TaxesIncoming,
+	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
 		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
 	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory,
 		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
@@ -180,6 +184,12 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset, New Structure("ByRow, RequestTable", True, True));
 	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
 	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+	
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming, New Structure("ByRow, RequestTable", True, True));
+	Map.Insert(AO.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues, New Structure("ByRow, RequestTable", True, True));
+	
 	// Money transfer
 	Map.Insert(AO.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand    , New Structure("ByRow", False));
 	Map.Insert(AO.MoneyTransfer_DR_R3010B_CashOnHand_CR_R3021B_CashInTransit , New Structure("ByRow", False));
@@ -215,6 +225,8 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.DebitCreditNote_R5020B_PartnersBalance, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset, New Structure("ByRow", False));
 	Map.Insert(AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues, New Structure("ByRow", False));
+	Map.Insert(AO.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance, New Structure("ByRow", False));
 	
 	ArrayOfAccrualsTransactionTypes = New Array();
 	ArrayOfAccrualsTransactionTypes.Add(Enums.AccrualsTransactionType.Accrual);
@@ -231,6 +243,7 @@ Function GetOperationsDefinition()
 	// Employee cash advance
 	Map.Insert(AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	Map.Insert(AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
+	Map.Insert(AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance, New Structure("ByRow", True));
 	
 	// Sales return
 	Map.Insert(AO.SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers, 
@@ -239,7 +252,7 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
-	Map.Insert(AO.SalesReturn_DR_R5021T_Revenues_CR_R1040B_TaxesOutgoing, 
+	Map.Insert(AO.SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions, 
 		New Structure("ByRow, TransactionType", True, Enums.SalesReturnTransactionTypes.ReturnFromCustomer));
 	
 	Map.Insert(AO.SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory, 
@@ -252,8 +265,26 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
 	
-	Map.Insert(AO.PurchaseReturn_DR_R2040B_TaxesIncoming_CR_R1021B_VendorsTransactions, 
+	Map.Insert(AO.PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming, 
 		New Structure("ByRow, TransactionType", True, Enums.PurchaseReturnTransactionTypes.ReturnToVendor));
+	
+	// Taxes operation	
+	ArrayOfTaxesOperationTransactionTypes_Offset = New Array();
+	ArrayOfTaxesOperationTransactionTypes_Offset.Add(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment);
+	ArrayOfTaxesOperationTransactionTypes_Offset.Add(Enums.TaxesOperationTransactionType.TaxOffset);
+	
+	Map.Insert(AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Offset));
+		
+	ArrayOfTaxesOperationTransactionTypes_Payment = New Array();
+	ArrayOfTaxesOperationTransactionTypes_Payment.Add(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment);
+	ArrayOfTaxesOperationTransactionTypes_Payment.Add(Enums.TaxesOperationTransactionType.TaxPayment);
+	
+	Map.Insert(AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
+		
+	Map.Insert(AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing, 
+		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
 		
 	Return Map;
 EndFunction
@@ -389,7 +420,10 @@ Function GetDataByAccountingAnalytics(BasisRef, AnalyticRow) Export
 	Parameters.Insert("CurrencyMovementType", AnalyticRow.LedgerType.CurrencyMovementType);
 	Parameters.Insert("IsCurrencyRevaluation", 
 		TypeOf(BasisRef) = Type("DocumentRef.ForeignCurrencyRevaluation"));
-		
+	Parameters.Insert("IsDebitCreditNoteDifference", 
+		AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues
+		Or AnalyticRow.Operation = Catalogs.AccountingOperations.DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance);
+			
 	Data = GetAccountingData(Parameters);
 	
 	Result = GetAccountingDataResult();
@@ -1006,7 +1040,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByVatRate.Tax,
 	|	ByVatRate.VatRate,
 	|	ByVatRate.IncomingAccount,
+	|	ByVatRate.IncomingAccountReturn,
 	|	ByVatRate.OutgoingAccount,
+	|	ByVatRate.OutgoingAccountReturn,
 	|	0 AS Priority
 	|INTO Accounts
 	|FROM
@@ -1022,7 +1058,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByTax.Tax,
 	|	ByTax.VatRate,
 	|	ByTax.IncomingAccount,
+	|	ByTax.IncomingAccountReturn,
 	|	ByTax.OutgoingAccount,
+	|	ByTax.OutgoingAccountReturn,
 	|	1
 	|FROM
 	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
@@ -1037,7 +1075,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	ByCompany.Tax,
 	|	ByCompany.VatRate,
 	|	ByCompany.IncomingAccount,
+	|	ByCompany.IncomingAccountReturn,
 	|	ByCompany.OutgoingAccount,
+	|	ByCompany.OutgoingAccountReturn,
 	|	2
 	|FROM
 	|	InformationRegister.T9013S_AccountsTax.SliceLast(&Period, Company = &Company
@@ -1052,7 +1092,9 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	|	Accounts.Tax,
 	|	Accounts.VatRate,
 	|	Accounts.IncomingAccount,
+	|	Accounts.IncomingAccountReturn,
 	|	Accounts.OutgoingAccount,
+	|	Accounts.OutgoingAccountReturn,
 	|	Accounts.Priority AS Priority
 	|FROM
 	|	Accounts AS Accounts
@@ -1066,10 +1108,12 @@ Function __GetT9013S_AccountsTax(Period, Company, LedgerTypeVariant, Tax, VatRat
 	Query.SetParameter("VatRate" , VatRate);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	Result = New Structure("IncomingAccount, OutgoingAccount", Undefined, Undefined);
+	Result = New Structure("IncomingAccount, OutgoingAccount, IncomingAccountReturn, OutgoingAccountReturn");
 	If QuerySelection.Next() Then
 		Result.IncomingAccount = QuerySelection.IncomingAccount;
+		Result.IncomingAccountReturn = QuerySelection.IncomingAccountReturn;
 		Result.OutgoingAccount = QuerySelection.OutgoingAccount;
+		Result.OutgoingAccountReturn = QuerySelection.OutgoingAccountReturn;
 	EndIf;
 	Return Result;
 EndFunction
@@ -1527,6 +1571,11 @@ Procedure UpdateAccountingTables(Object,
 			Continue;
 		EndIf;
 				
+		If IsNotUsedOperation(Operation.OperationInfo.Operation, ObjectData, Undefined) Then
+			AddNotUsedOperation(ArrayOfNotUsedOperations, Operation.OperationInfo.Operation, Undefined);
+			Continue;
+		EndIf;
+		 
 		Parameters = New Structure();
 		Parameters.Insert("Object"        , Object);
 		Parameters.Insert("Operation"     , Operation.OperationInfo.Operation);
@@ -1542,7 +1591,7 @@ Procedure UpdateAccountingTables(Object,
 		FillAccountingRowAnalytics(Parameters);
 	EndDo;
 		
-	If MainTableName = Undefined Then
+	If MainTableName = Undefined Then // reques table
 		For Each Operation In OperationsByLedgerType Do
 			If Not Operation.OperationInfo.RequestTable Then
 				Continue;
@@ -1616,6 +1665,14 @@ Function IsNotUsedOperation(Operation, ObjectData, RowData)
 		Return IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData);
 	ElsIf DocMetadata = Metadata.Documents.DebitNote Then
 		Return IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData);		
+	ElsIf DocMetadata = Metadata.Documents.DebitCreditNote Then
+		Return IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.TaxesOperation Then
+		Return IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData);				
+	ElsIf DocMetadata = Metadata.Documents.Payroll Then
+		Return IsNotUsedOperation_Payroll(Operation, ObjectData, RowData);
+	ElsIf DocMetadata = Metadata.Documents.EmployeeCashAdvance Then
+		Return IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData);		
 	EndIf;
 	
 	Return False; // is used operation
@@ -1662,7 +1719,7 @@ Function GetDocumentData(Object, TableRow, MainTableName)
 			TaxInfo.Insert("VatRate", TableRow.VatRate);
 			Result.RowData.Insert("TaxInfo", TaxInfo);
 		EndIf;
-		
+				
 	Else
 		Result.RowData.Insert("Key", "");
 	EndIf;
@@ -2101,8 +2158,45 @@ Function GetAccountingData(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end as Currency,
-	|	SUM(case when &IsRevaluationCurrency then 0 else Amounts.Amount end) AS Amount
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end as DrCurrency,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end as CrCurrency,
+	|
+	|
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
+	|			0 
+	|			else
+	|				case when Amounts.DrCurrencyAmount <> 0 then
+	|					Amounts.DrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS DrCurrencyAmount,
+	|
+	|	SUM(case 
+	|			when &IsRevaluationCurrency Or &IsDebitCreditNoteDifference then 
+	|			0 
+	|			else
+	|				case when Amounts.CrCurrencyAmount <> 0 then
+	|					Amounts.CrCurrencyAmount
+	|				else
+	|					Amounts.Amount end end) AS CrCurrencyAmount
+	|
+	|
+	|
 	|FROM
 	|	AccumulationRegister.T1040T_AccountingAmounts AS Amounts
 	|WHERE
@@ -2115,7 +2209,23 @@ Function GetAccountingData(Parameters)
 	|		else True
 	|	end
 	|GROUP BY
-	|	case when &IsRevaluationCurrency then Amounts.RevaluatedCurrency else Amounts.Currency end
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.DrCurrency.ref is null then
+	|				Amounts.DrCurrency
+	|			else
+	|				Amounts.Currency end end,
+	|
+	|	case 
+	|		when &IsRevaluationCurrency then 
+	|			Amounts.RevaluatedCurrency 
+	|		else 
+	|			case when not Amounts.CrCurrency.ref is null then
+	|				Amounts.CrCurrency
+	|			else
+	|				Amounts.Currency end end
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2161,6 +2271,7 @@ Function GetAccountingData(Parameters)
 	Query.SetParameter("Operation"            , Parameters.Operation);
 	Query.SetParameter("FilterByRowKey"       , ValueIsFilled(RowKey));
 	Query.SetParameter("RowKey"           	  , RowKey);
+	Query.SetParameter("IsDebitCreditNoteDifference", Parameters.IsDebitCreditNoteDifference);
 	
 	If Parameters.IsCurrencyRevaluation Then
 		Query.SetParameter("RevaluationCurrency", Parameters.CurrencyMovementType);
@@ -2169,7 +2280,7 @@ Function GetAccountingData(Parameters)
 		Query.SetParameter("RevaluationCurrency", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 		Query.SetParameter("IsRevaluationCurrency", False);
 	EndIf;
-	
+		
 	QueryResults = Query.ExecuteBatch();
 	
 	Result = GetAccountingDataResult();
@@ -2177,10 +2288,10 @@ Function GetAccountingData(Parameters)
 	// Currency amount
 	QuerySelection = QueryResults[0].Select();
 	If QuerySelection.Next() Then
-		Result.CurrencyDr       = QuerySelection.Currency;
-		Result.CurrencyAmountDr = QuerySelection.Amount;
-		Result.CurrencyCr       = QuerySelection.Currency;
-		Result.CurrencyAmountCr = QuerySelection.Amount;
+		Result.CurrencyDr       = QuerySelection.DrCurrency;
+		Result.CurrencyAmountDr = QuerySelection.DrCurrencyAmount;
+		Result.CurrencyCr       = QuerySelection.CrCurrency;
+		Result.CurrencyAmountCr = QuerySelection.CrCurrencyAmount;
 	EndIf;
 	
 	// Amount
@@ -2411,6 +2522,10 @@ Function IsNotUsedOperation_CreditNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
 	Return True;
 EndFunction
@@ -2439,7 +2554,102 @@ Function IsNotUsedOperation_DebitNote(Operation, ObjectData, RowData)
 		Return False;
 	ElsIf IsOther And Operation = AO.DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues Then
 		Return False;
+	ElsIf IsVendor And Operation = AO.DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
+	ElsIf IsCustomer And Operation = AO.DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming Then
+		Return Not ValueIsFilled(RowData.TaxAmount);
 	EndIf;
+	Return True;
+EndFunction
+
+Function IsNotUsedOperation_DebitCreditNote(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	
+	If Operation = AO.DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer 
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
+			Return False;
+		EndIf;
+		Return True;
+	ElsIf Operation = AO.DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset Then
+		If ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor
+			Or ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor Then
+			Return False;
+		EndIf;
+		Return True;	
+	EndIf;
+	
+	Return False;
+EndFunction
+
+Function IsNotUsedOperation_TaxesOperation(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing Then
+		If ValueIsFilled(RowData.IncomingVatRate) And ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
+	ElsIf Operation = AO.TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions Then
+		If ValueIsFilled(RowData.IncomingVatRate) And Not ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
+	ElsIf Operation = AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing Then
+		If Not ValueIsFilled(RowData.IncomingVatRate) And ValueIsFilled(RowData.OutgoingVatRate) Then
+			Return False;
+		Else
+			Return True;
+		EndIf;
+	EndIf;
+	Return True;
+EndFunction
+
+Function IsNotUsedOperation_Payroll(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	
+	If Operation = AO.Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes Then
+		If ValueIsFilled(RowData.Tax) And RowData.Tax.TaxPayer <> Enums.TaxPayers.Employee Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes Then
+		If ValueIsFilled(RowData.Tax) And RowData.Tax.TaxPayer <> Enums.TaxPayers.Company Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	Return False;
+EndFunction
+
+Function IsNotUsedOperation_EmployeeCashAdvance(Operation, ObjectData, RowData)
+	AO = Catalogs.AccountingOperations;
+	If RowData = Undefined Then
+		Return True;
+	EndIf;
+	If Operation = AO.EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance Then
+		If Not ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	ElsIf Operation = AO.EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance Then
+		If ValueIsFilled(RowData.Invoice) Then
+			Return False;
+		EndIf;
+	EndIf;	
 	Return True;
 EndFunction
 

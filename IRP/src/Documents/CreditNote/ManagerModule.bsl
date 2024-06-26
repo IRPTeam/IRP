@@ -11,6 +11,7 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure;
 	QueryArray = GetQueryTextsSecondaryTables();
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -36,6 +37,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R5015B_OtherPartnersTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5020B_PartnersBalance.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R1040B_TaxesOutgoing.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 EndProcedure
@@ -85,6 +87,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("Vat", TaxesServer.GetVatRef());
 	Return StrParams;
 EndFunction
 
@@ -109,6 +112,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R1040B_TaxesOutgoing());
 	Return QueryArray;
 EndFunction
 
@@ -146,6 +150,9 @@ Function Transactions()
 	|	Transactions.Currency,
 	|	Transactions.Key,
 	|	Transactions.Amount,
+	|	Transactions.NetAmount,
+	|	Transactions.TaxAmount,
+	|	Transactions.VatRate,
 	|	Transactions.Ref.Branch AS Branch,
 	|	Transactions.LegalNameContract AS LegalNameContract,
 	|	Transactions.ProfitLossCenter,
@@ -176,6 +183,7 @@ Function R5022T_Expenses()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	Transactions.Amount AS AmountWithTaxes,
+		   |	Transactions.NetAmount AS Amount,
 		   |	*
 		   |INTO R5022T_Expenses
 		   |FROM
@@ -262,6 +270,46 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_CreditNote();
 EndFunction
 
+Function R1040B_TaxesOutgoing()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
+		|	Transactions.TaxAmount AS Amount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|	AND Transactions.TaxAmount <> 0
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	&Vat AS Tax,
+		|	Transactions.VatRate AS TaxRate,
+		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType,
+		|	Transactions.TaxAmount AS Amount
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|	AND Transactions.TaxAmount <> 0";
+EndFunction
+
 #EndRegion
 
 #Region AccessObject
@@ -291,7 +339,7 @@ Function T1040T_AccountingAmounts()
 		|	Transactions.Key AS RowKey,
 		|	Transactions.Key AS Key,
 		|	Transactions.Currency,
-		|	Transactions.Amount,
+		|	Transactions.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions) AS Operation,
 		|	UNDEFINED AS AdvancesClosing
 		|INTO T1040T_AccountingAmounts
@@ -299,6 +347,22 @@ Function T1040T_AccountingAmounts()
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key AS RowKey,
+		|	Transactions.Key AS Key,
+		|	Transactions.Currency,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions) AS Operation,
+		|	UNDEFINED AS AdvancesClosing
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|	AND Transactions.TaxAmount <> 0
 		|
 		|UNION ALL
 		|
@@ -323,13 +387,29 @@ Function T1040T_AccountingAmounts()
 		|	Transactions.Key,
 		|	Transactions.Key,
 		|	Transactions.Currency,
-		|	Transactions.Amount AS Amount,
+		|	Transactions.NetAmount AS Amount,
 		|	VALUE(Catalog.AccountingOperations.CreditNote_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions),
 		|	UNDEFINED
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Key,
+		|	Transactions.Currency,
+		|	Transactions.TaxAmount AS Amount,
+		|	VALUE(Catalog.AccountingOperations.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions),
+		|	UNDEFINED
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor
+		|	AND Transactions.TaxAmount <> 0
 		|
 		|UNION ALL
 		|
@@ -376,6 +456,10 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_ExpensesVendorTransaction(Parameters); // Expenses - Vendor transactions	
 	ElsIf Parameters.Operation = AO.CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions Then
 		Return GetAnalytics_ExpensesOtherPartner(Parameters); // Expenses - Other partner
+	ElsIf Parameters.Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions Then
+		Return GetAnalytics_TaxesOutgoingCustomerTransaction(Parameters); // Taxes outgoing - Customer transacrions
+	ElsIf Parameters.Operation = AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions Then
+		Return GetAnalytics_TaxesOutgoingVendorTransaction(Parameters); // Taxes outgoing - Vendor transactions
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -393,6 +477,31 @@ Function GetAnalytics_ExpensesCustomerTransaction(Parameters)
 	                                                           Parameters.RowData.ProfitLossCenter);
 	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);	                                                   
+	AccountingAnalytics.Credit = Credit.AccountTransactionsCustomer;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Taxes outgoing - Customer transaction
+Function GetAnalytics_TaxesOutgoingCustomerTransaction(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If Parameters.RowData.Agreement.Type = Enums.AgreementTypes.Customer Then
+		AccountingAnalytics.Debit = Debit.OutgoingAccountReturn;
+	Else
+		AccountingAnalytics.Debit = Debit.OutgoingAccount;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
@@ -437,6 +546,31 @@ Function GetAnalytics_ExpensesVendorTransaction(Parameters)
 	                                                           Parameters.RowData.ProfitLossCenter);
 	AccountingAnalytics.Debit = Debit.AccountExpense;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
+	// Credit
+	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
+	                                                   Parameters.RowData.Partner, 
+	                                                   Parameters.RowData.Agreement,
+	                                                   Parameters.RowData.Currency);
+	AccountingAnalytics.Credit = Credit.AccountTransactionsVendor;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Taxes outgoing - Vendor transactions
+Function GetAnalytics_TaxesOutgoingVendorTransaction(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, Parameters.RowData.TaxInfo);
+	If Parameters.RowData.Agreement.Type = Enums.AgreementTypes.Vendor Then
+		AccountingAnalytics.Debit = Debit.OutgoingAccount;
+	Else
+		AccountingAnalytics.Debit = Debit.OutgoingAccountReturn;
+	EndIf;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, Parameters.RowData.TaxInfo);
 	
 	// Credit
 	Credit = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 

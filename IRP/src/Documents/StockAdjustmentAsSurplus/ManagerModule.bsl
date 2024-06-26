@@ -45,9 +45,9 @@ Function StockAdjustmentAsSurplusPrint(Ref, Param)
 	|	DocumentItemList.Quantity AS Quantity,
 	|	DocumentItemList.Unit.Description_en AS Unit,
 	|	DocumentItemList.Price AS Price,
-	|	DocumentItemList.AmountTax AS TaxAmount,
-	|	DocumentItemList.Amount AS TotalAmount,
-	|	DocumentItemList.Amount AS NetAmount,
+	|	DocumentItemList.TaxAmount AS TaxAmount,
+	|	DocumentItemList.TotalAmount AS TotalAmount,
+	|	DocumentItemList.NetAmount AS NetAmount,
 	|	DocumentItemList.Ref AS Ref,
 	|	DocumentItemList.Key AS Key
 	|INTO Items
@@ -292,8 +292,9 @@ Function ItemList()
 		|	ItemList.PhysicalInventory AS PhysicalInventory,
 		|	ItemList.Ref AS Basis,
 		|	ItemList.QuantityInBaseUnit AS Quantity,
-		|	ItemList.Amount AS Amount,
-		|	ItemList.AmountTax AS AmountTax,
+		|	ItemList.NetAmount AS NetAmount,
+		|	ItemList.TaxAmount AS TaxAmount,
+		|	ItemList.TotalAmount AS TotalAmount,
 		|	ItemList.Key
 		|INTO ItemList
 		|FROM
@@ -513,8 +514,8 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 		|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	ItemList.Quantity AS TotalQuantity,
-		|	ItemList.Amount AS InvoiceAmount,
-		|	ItemList.AmountTax AS InvoiceTaxAmount,
+		|	ItemList.TotalAmount AS InvoiceAmount,
+		|	ItemList.TaxAmount AS InvoiceTaxAmount,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Receipt) AS Direction
 		|INTO BatchKeysInfo_1
@@ -600,7 +601,8 @@ Function R5021T_Revenues()
 		   |	ItemList.RevenueType,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Currency,
-		   |	ItemList.Amount,
+		   |	ItemList.NetAmount AS Amount,
+		   |	ItemList.TotalAmount AS AmountWithTaxes,
 		   |	ItemList.Key
 		   |INTO R5021T_Revenues
 		   |FROM

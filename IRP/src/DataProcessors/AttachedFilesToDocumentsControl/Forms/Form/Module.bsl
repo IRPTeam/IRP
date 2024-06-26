@@ -13,6 +13,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure OnOpen(Cancel)
+	SetVisibleForCheckMode(CheckMode);
+EndProcedure
+
+&AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "UpdateObjectPictures_AddNewOne" Then
 		CurrentDocStructure = GetCurrentDocInTable();
@@ -41,15 +46,6 @@ Procedure FillDocuments(Command)
 EndProcedure
 
 &AtClient
-Function CurrentMaxFileSize()
-	
-	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
-	
-	Return CurrentData.MaximumFileSize;
-	
-EndFunction
-
-&AtClient
 Function CheckFileMaxSize(FileArray, MaxSizeMb)
 	
 	StringsArray = New Array; // Array of String
@@ -68,6 +64,7 @@ Function CheckFileMaxSize(FileArray, MaxSizeMb)
 		CurrentSizeMb = Round(CurrentSize/(byteSize * byteSize), 2);
 		If CurrentSizeMb > MaxSizeMb Then
 			FileName = FileRef.Name;
+			//@skip-check invocation-parameter-type-intersect, property-return-type
 			ErrorText = StrTemplate(R().InfoMessage_AttachFile_MaxFileSize, FileName, CurrentSizeMb, MaxSizeMb);
 			
 			Structure.Result = False;
@@ -91,6 +88,102 @@ Procedure AddNewDocument(Command)
 	EndIf;
 	
 	Upload(CurrentDocStructure);
+EndProcedure
+
+&AtClient
+Async Procedure DownloadFile(Command)
+	CurrentData = Items.CurrentFilesTable.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	PictureParameters = PictureViewerServer.CreatePictureParameters(CurrentData.File);
+	URI = PictureViewerClient.GetPictureURL(PictureParameters); // String
+	Dialog = New GetFilesDialogParameters();
+	Try
+		//@skip-check invocation-parameter-type-intersect, property-return-type
+		Await GetFileFromServerAsync(URI, PictureParameters.Description, Dialog);
+	Except
+		//@skip-check property-return-type
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_040);
+	EndTry;
+EndProcedure
+
+&AtClient
+Async Procedure Upload(StructureParams)
+	
+	Structure = New Structure;
+	Structure.Insert("Ref", StructureParams.Ref);
+	Structure.Insert("UUID", StructureParams.UUID);
+	Structure.Insert("FilePrefix", StructureParams.FilePrefix);
+	Structure.Insert("PrintFormName", StructureParams.PrintFormName);
+	
+	OpenFileDialog = New FileDialog(FileDialogMode.Open);
+	OpenFileDialog.Multiselect = False;
+	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	FileRef = Await PutFileToServerAsync(, , , , StructureParams.UUID); // PlacedFileDescription
+	
+	If FileRef = Undefined Then
+		Return;
+	EndIf;
+	
+	FileArray = New Array; // Array of FileRef
+	//@skip-check invocation-parameter-type-intersect, property-return-type
+	FileArray.Add(FileRef.FileRef);
+	CheckSizeResult = CheckFileMaxSize(FileArray, StructureParams.MaxSize);
+	If CheckSizeResult.Result Then
+		PictureViewerClient.AddFile(FileRef, StructureParams.Storage, Structure);
+		
+	Else
+		For Each Error In CheckSizeResult.Errors Do
+			CommonFunctionsClientServer.ShowUsersMessage(Error);
+		EndDo;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure CheckModeOnChange(Item)
+	
+	SetVisibleForCheckMode(CheckMode);
+		
+EndProcedure 
+
+&AtClient
+Procedure SetVisibleForCheckMode(Val IsCheckMode)
+	
+	Items.DocumentsGroupLockUnlock.Visible = IsCheckMode;
+	Items.DocumentsAttachedFiles.Visible = Not IsCheckMode;
+	Items.AddNewDocument.Visible = Not IsCheckMode;
+	Items.ShowSettings.Visible = IsCheckMode;
+	
+EndProcedure
+
+&AtClient
+Procedure CompanyOnChange(Item)
+	FillDocumentsToControl();
+EndProcedure
+
+&AtClient
+Procedure BranchOnChange(Item)
+	FillDocumentsToControl();
+EndProcedure
+
+&AtClient
+Procedure PeriodOnChange(Item)
+	FillDocumentsToControl();
+EndProcedure
+
+&AtClient
+Procedure ShowOnlyUnlocked(Command)
+	
+	Items.DocumentsShowOnlyUnlocked.Check = Not Items.DocumentsShowOnlyUnlocked.Check;
+	
+	If Items.DocumentsShowOnlyUnlocked.Check Then
+		Items.DocumentList.RowFilter = New FixedStructure("IsAuditLock", -1);
+	Else
+		Items.DocumentList.RowFilter = Undefined;
+	EndIf;
+	
 EndProcedure
 
 #EndRegion
@@ -128,16 +221,25 @@ Procedure CurrentFilesTableOnActivateRow(Item)
 		ShowPreviewPDF(CurrentData.File);
 	Else
 		ShowPreview(CurrentData.File);
+		GetFullPicture(CurrentData);
 	EndIf;
+EndProcedure
+
+&AtClient
+Async Procedure GetFullPicture(CurrentData)
+	PictureParameters = PictureViewerServer.CreatePictureParameters(CurrentData.File);
+	Preview = PictureViewerClient.GetPictureURL(PictureParameters); // String
 EndProcedure
 
 &AtClient
 Procedure DocumentsAttachedFilesOnActivateRow(Item)
 	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
 	If CurrentData = Undefined Then
+		//@skip-check invocation-parameter-type-intersect, property-return-type, statement-type-change
 		Items.AddNewDocument.Title = R().InfoMessage_AttachFile_NonSelectDocType;
 		Return;
 	EndIf;
+	//@skip-check invocation-parameter-type-intersect, property-return-type
 	Items.AddNewDocument.Title = StrTemplate(R().InfoMessage_AttachFile_SelectDocType, String(CurrentData.FilePresention));
 EndProcedure
 
@@ -145,102 +247,12 @@ EndProcedure
 
 #Region Private
 
-&AtClient
-Async Procedure Upload(StructureParams)
-	
-	Structure = New Structure;
-	Structure.Insert("Ref", StructureParams.Ref);
-	Structure.Insert("UUID", StructureParams.UUID);
-	Structure.Insert("FilePrefix", StructureParams.FilePrefix);
-	Structure.Insert("PrintFormName", StructureParams.PrintFormName);
-	
-	OpenFileDialog = New FileDialog(FileDialogMode.Open);
-	OpenFileDialog.Multiselect = False;
-	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	FileRef = Await PutFileToServerAsync(, , , , StructureParams.UUID);
-	
-	If FileRef = Undefined Then
-		Return;
-	EndIf;
-	
-	FileArray = New Array; // Array of FileRef
-	FileArray.Add(FileRef.FileRef);
-	CheckSizeResult = CheckFileMaxSize(FileArray, StructureParams.MaxSize);
-	If CheckSizeResult.Result Then
-		PictureViewerClient.AddFile(FileRef, StructureParams.Storage, Structure);
-		
-	Else
-		For Each Error In CheckSizeResult.Errors Do
-			CommonFunctionsClientServer.ShowUsersMessage(Error);
-		EndDo;
-	EndIf;
-EndProcedure
-
 &AtServer
 Procedure UpdateDocsDataInTables(DocsArray)
 	
 	QueryStructure = PrepareQueryStructure(DocsArray);
 	FillDocumentsTables(QueryStructure, True);
 	
-EndProcedure
-
-// File attach empty structure.
-// 
-// Returns:
-//  Structure - File attach empty structure:
-// * FileIDs - Array of String  
-// * FileOwner - DocumentRef
-// * FilesStorageVolume - CatalogRef.FileStorageVolumes - 
-// * FilePrefix - String - 
-// * PrintFormName - String - 
-&AtClient
-Function FileAttachEmptyStructure()
-	
-	Structure = New Structure;
-	Structure.Insert("FileIDs", New Array);  
-	Structure.Insert("FileOwner");
-	Structure.Insert("FilesStorageVolume");
-	Structure.Insert("FilePrefix", "");
-	Structure.Insert("PrintFormName", "");
-	Return Structure;
-	
-EndFunction
-
-&AtClient
-Async Procedure AttachFileToOwner(StructureParams)
-
-	FilesAtServer = Await PutFilesToServerAsync( , , StructureParams.FileIDs, UUID);	
-	
-	StructureParam = New Structure;
-	StructureParam.Insert("Ref", StructureParams.FileOwner);
-	StructureParam.Insert("UUID", UUID);
-	StructureParam.Insert("FilePrefix", StructureParams.FilePrefix);
-	StructureParam.Insert("PrintFormName", StructureParams.PrintFormName);
-	
-	For Each File In FilesAtServer Do
-		PictureViewerClient.AddFile(File, StructureParams.FilesStorageVolume, StructureParam);
-	EndDo;
-	NotifyChanged(Type("InformationRegisterRecordKey.AttachedFiles"));
-EndProcedure
-
-&AtClient
-Async Procedure UploadFiles(FileArray, DocStructure)
-
-	FilesToTransfer = New Array; //Array of FileRef
-	For Each FileRef In FileArray Do
-		If Not Await FileRef.File.IsDirectoryAsync() Then
-			FilesToTransfer.Add(FileRef);
-		EndIf;
-	EndDo;
-			
-	Structure = FileAttachEmptyStructure();
-	Structure.FileIDs = FilesToTransfer;
-	Structure.FileOwner = DocStructure.Ref;
-	Structure.FilesStorageVolume = DocStructure.Storage;
-	Structure.FilePrefix = DocStructure.FilePrefix;
-	Structure.PrintFormName = DocStructure.PrintFormName;
-	
-	AttachFileToOwner(Structure);	
 EndProcedure
 
 &AtServer
@@ -257,10 +269,7 @@ Async Procedure ShowPreviewPDF(FileRef)
 	Items.PDFViewer.Visible = True;
 	Items.Preview.Visible = False;
 	
-	PictureParameters = PictureViewerServer.CreatePictureParameters(FileRef);
-	
-	URI = PictureViewerClient.GetPictureURL(PictureParameters); //String
-	PDFViewer.ReadAsync(URI);
+	PictureViewerClient.SetPDFForView(FileRef, PDFViewer); 
 	Items.PDFViewer.Scale = 20;
 	
 EndProcedure
@@ -291,6 +300,7 @@ Function GetDocPrefix(DocRef, NamingFormat)
 			
 			NewNamingFormat = StrReplace(NewNamingFormat, SearchSubstring, ReplaceSubsting);
 			
+			//@skip-check invocation-parameter-type-intersect
 			AttributesArray.Add(KeyValue.Value);
 		EndIf;
 	EndDo;
@@ -304,6 +314,7 @@ Function GetDocPrefix(DocRef, NamingFormat)
 			Value = AttributesStructure[Attribute]; // String
 		EndIf;
 		If IsTypeOf(Value, "Date") Then
+			//@skip-check invocation-parameter-type-intersect
 			ReplaceSubsting = Format(Value, "DF=yyyyMMdd");
 		Else
 			ReplaceSubsting = Value;
@@ -327,11 +338,11 @@ EndFunction
 // * Object - Structure - 
 // * UUID - UUID - 
 // * Items - FormAllItems - 
-// * Ref - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.DocRef
-// * DocMetaName - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.DocMetaName
-// * Branch - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.Branch 
-// * Company - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.Company
-// * Storage - See DataProcessor.AttachedFilesToDocumentsControl.DocumentList.FileStorageVolume 
+// * Ref - See DataProcessor.AttachedFilesToDocumentsControl.Documents.DocRef
+// * DocMetaName - See DataProcessor.AttachedFilesToDocumentsControl.Documents.DocMetaName
+// * Branch - See DataProcessor.AttachedFilesToDocumentsControl.Documents.Branch 
+// * Company - See DataProcessor.AttachedFilesToDocumentsControl.Documents.Company
+// * Storage - See DataProcessor.AttachedFilesToDocumentsControl.Documents.FileStorageVolume 
 // * FilePrefix - String - 
 // * PrintFormName - String -
 // * MaxSize - Number -
@@ -441,8 +452,20 @@ Function GetAllDocumentsTempTable(DocsNamesArray, DocsArray = Undefined)
 
 EndFunction
 
+// Get attached documents.
+// 
+// Parameters:
+//  AllDocumentsTempTable - ValueTable - All documents temp table
+// 
+// Returns:
+//  QueryResultSelection - Get attached documents:
+//  * DocMetaName - String -
+//  * DocRef - DocumentRefDocumentName -
+//  * PrintFormName - ChartOfCharacteristicTypesRef.AddAttributeAndProperty -
+//  * IsFile - Boolean -
+//  * IsRequired - Boolean -
 &AtServerNoContext
-Function GetQueryText()
+Function GetAttachedDocuments(AllDocumentsTempTable)
 	QueryTxt = 
 	"SELECT
 	|	AllDocumentsTempTable.Ref AS DocRef,
@@ -484,7 +507,7 @@ Function GetQueryText()
 	|INTO TT_AllDocumentsAndRequiredAttacments
 	|FROM
 	|	TT_AllDocuments AS TT_AllDocuments
-	|		LEFT JOIN Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
+	|		INNER JOIN Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
 	|		ON TT_AllDocuments.DocMetaName = AttachedDocumentSettingsFileSettings.Ref.Description
 	|;
 	|
@@ -563,8 +586,12 @@ Function GetQueryText()
 	|	DocRef,
 	|	PrintFormName";
 	
-	Return QueryTxt;
+	Query = New Query();
+	Query.Text = QueryTxt;
+	Query.SetParameter("AllDocumentsTempTable", AllDocumentsTempTable);
 	
+	QueryResult = Query.Execute();
+	Return QueryResult.Select(QueryResultIteration.ByGroups, "DocRef");
 EndFunction
 
 &AtServer
@@ -611,17 +638,13 @@ Procedure FillDocumentsTables(QueryStructure, IsUpdate = False)
 		Return;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text = GetQueryText();
-	Query.SetParameter("AllDocumentsTempTable", QueryStructure.AllDocumentsTempTable);
-	
-	QueryResult = Query.Execute();
-	SelectionDoc = QueryResult.Select(QueryResultIteration.ByGroups, "DocRef");
+	SelectionDoc = GetAttachedDocuments(QueryStructure.AllDocumentsTempTable);
 	
 	While SelectionDoc.Next() Do
 		If Not IsUpdate Then
 			ParentRow = Object.Documents.Add();
 			ParentRow.ID = New UUID;
+			//@skip-check statement-type-change
 			ParentRow.FileStorageVolume = QueryStructure.DocsNamesAndStorageStructure[SelectionDoc.DocMetaName];
 		Else
 			SearchArray = Object.Documents.FindRows(New Structure("DocRef", SelectionDoc.DocRef));
@@ -697,6 +720,7 @@ Procedure UpdateAttachedFiles(DocRef)
 	
 	While SelectionDetailRecords.Next() Do
 		NewRow = CurrentFilesTable.Add();
+		//@skip-check property-return-type, statement-type-change
 		NewRow.Comment = SelectionDetailRecords.Comment;
 	EndDo;
 EndProcedure
@@ -705,7 +729,7 @@ EndProcedure
 Function GetSelectedDocs()
 	
 	DocsArray = New Array; // Array of DocumentRef
-	For Each Row In Items.DocumentList.SelectedRows Do
+	For Each Row In Items.DocumentList.SelectedRows Do // Number
 		DocsArray.Add(Object.Documents.FindByID(Row).DocRef);
 	EndDo;
 	Return DocsArray;
@@ -776,6 +800,7 @@ Function GetDocTemplate(FileSettingPresention)
 	SelectionDetailRecords = QueryResult.Select();
 	
 	If SelectionDetailRecords.Next() Then
+		//@skip-check property-return-type, statement-type-change
 		TemplateFile = SelectionDetailRecords.FileTemplate;
 	EndIf;
 	
@@ -803,17 +828,39 @@ Procedure AttachOther(Command)
 		Return;
 	EndIf;
 	
-	Structure = New Structure;
-	Structure.Insert("Company", CurrentDocStructure.Company);
-	Structure.Insert("Branch", CurrentDocStructure.Branch);
-	Structure.Insert("DocumentType", CurrentDocStructure.DocMetaName);
-	Structure.Insert("Document", CurrentDocStructure.Ref);
+	Structure = GetOtherAttachmentSettings(CurrentDocStructure);
 	
 	NotifyDescription = New NotifyDescription("AfterOtherAttachmentInput", ThisObject, Structure);
 	ShowInputString(NotifyDescription, "", R().InfoMessage_037, , True);
 	
 EndProcedure
 
+// Get other attachment settings.
+// 
+// Parameters:
+//  CurrentDocStructure - See GetCurrentDocInTable
+// 
+// Returns:
+//  Structure - Get other attachment settings:
+// * Company - CatalogRef.Companies - 
+// * Branch - CatalogRef.BusinessUnits - 
+// * DocumentType - String - 
+// * Document - DocumentRef - 
+&AtClient
+Function GetOtherAttachmentSettings(CurrentDocStructure)
+	Structure = New Structure;
+	Structure.Insert("Company", CurrentDocStructure.Company);
+	Structure.Insert("Branch", CurrentDocStructure.Branch);
+	Structure.Insert("DocumentType", CurrentDocStructure.DocMetaName);
+	Structure.Insert("Document", CurrentDocStructure.Ref);
+	Return Structure
+EndFunction
+
+// After other attachment input.
+// 
+// Parameters:
+//  Result - String - Result
+//  AdditionalParameters - See GetOtherAttachmentSettings
 &AtClient
 Procedure AfterOtherAttachmentInput(Result, AdditionalParameters) Export
 	
@@ -866,56 +913,6 @@ Procedure CurrentFilesTableSelection(Item, SelectedRow, Field, StandardProcessin
 	Structure.Insert("Description", "");
 	Structure.Insert("IsPdf", IsPDF(FileRef));
 	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
-	
-EndProcedure
-
-&AtClient
-Procedure CheckModeOnChange(Item)
-	
-	SetVisibleForCheckMode(CheckMode);
-		
-EndProcedure 
-
-&AtClient
-Procedure SetVisibleForCheckMode(Val IsCheckMode)
-	
-	Items.DocumentsGroupLockUnlock.Visible = IsCheckMode;
-	Items.DocumentsAttachedFiles.Visible = Not IsCheckMode;
-	Items.GroupAttachButton.Visible = Not IsCheckMode;
-	Items.ShowSettings.Visible = IsCheckMode;
-	
-EndProcedure
-
-&AtClient
-Procedure OnOpen(Cancel)
-	SetVisibleForCheckMode(CheckMode);
-EndProcedure
-
-&AtClient
-Procedure CompanyOnChange(Item)
-	FillDocumentsToControl();
-EndProcedure
-
-&AtClient
-Procedure BranchOnChange(Item)
-	FillDocumentsToControl();
-EndProcedure
-
-&AtClient
-Procedure PeriodOnChange(Item)
-	FillDocumentsToControl();
-EndProcedure
-
-&AtClient
-Procedure ShowOnlyUnlocked(Command)
-	
-	Items.DocumentsShowOnlyUnlocked.Check = Not Items.DocumentsShowOnlyUnlocked.Check;
-	
-	If Items.DocumentsShowOnlyUnlocked.Check Then
-		Items.DocumentList.RowFilter = New FixedStructure("IsAuditLock", -1);
-	Else
-		Items.DocumentList.RowFilter = Undefined;
-	EndIf;
 	
 EndProcedure
 

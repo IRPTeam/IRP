@@ -38,6 +38,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
+	|// active
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R1040B_TaxesOutgoing
+	|FROM
+	|	AccumulationRegister.R1040B_TaxesOutgoing.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
 	|// passive
 	|SELECT
 	|	*,
@@ -57,6 +68,17 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|INTO _R5020B_PartnersBalance_VendorTransaction
 	|FROM
 	|	AccumulationRegister.R5020B_PartnersBalance.Balance(&Period, Company = &Company
+	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	or Currency <> TransactionCurrency)) AS Reg
+	|;
+	|// passive
+	|SELECT
+	|	*,
+	|	Reg.CurrencyMovementType.Source AS Source,
+	|	Reg.AmountBalance AS Amount
+	|INTO _R2040B_TaxesIncoming
+	|FROM
+	|	AccumulationRegister.R2040B_TaxesIncoming.Balance(&Period, Company = &Company
 	|	and (CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	or Currency <> TransactionCurrency)) AS Reg
 	|;
@@ -416,6 +438,24 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Reg.Source AS Source
 	|FROM
 	|	_R5020B_PartnersBalance_OtherTransaction AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R1040B_TaxesOutgoing AS Reg
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Reg.TransactionCurrency AS CurrencyFrom,
+	|	Reg.Currency AS CurrencyTo,
+	|	Reg.Source AS Source
+	|FROM
+	|	_R2040B_TaxesIncoming AS Reg
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -468,11 +508,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	ArrayOfActives.Add("R3027B_EmployeeCashAdvance");
 	ArrayOfActives.Add("R5015B_OtherPartnersTransactions");
 	ArrayOfActives.Add("R8510B_BookValueOfFixedAsset");
+//	ArrayOfActives.Add("R1040B_TaxesOutgoing");
 
 	ArrayOfPassives = New Array();
 	ArrayOfPassives.Add("R1021B_VendorsTransactions");
 	ArrayOfPassives.Add("R2020B_AdvancesFromCustomers");
 	ArrayOfPassives.Add("R9510B_SalaryPayment");
+//	ArrayOfPassives.Add("R2040B_TaxesIncoming");
 
 	ArrayOfOthers = New Array();
 	ArrayOfOthers.Add("R3016B_ChequeAndBonds");
@@ -551,8 +593,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency AS RevaluatedCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2020B_AdvancesFromCustomers) AS Operation
 		|INTO T1040T_AccountingAmounts
 		|FROM
 		|	Revaluated_R2020B_AdvancesFromCustomers AS Table
@@ -570,8 +611,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2020B_AdvancesFromCustomers_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R2020B_AdvancesFromCustomers AS Table
 		|WHERE
@@ -588,8 +628,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions) AS Operation
 		|FROM
 		|	Revaluated_R1021B_VendorsTransactions AS Table
 		|WHERE
@@ -606,8 +645,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R1021B_VendorsTransactions AS Table
 		|WHERE
@@ -624,8 +662,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment) AS Operation
 		|FROM
 		|	Revaluated_R9510B_SalaryPayment AS Table
 		|WHERE
@@ -642,13 +679,47 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R9510B_SalaryPayment AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Expense)
 		|	AND Table.AmountRevaluated > 0
+		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	Table.Period,
+//		|	Table.Key AS RowKey,
+//		|	Table.Key AS Key,
+//		|	Table.Currency,
+//		|	Table.CurrencyMovementType,
+//		|	Table.TransactionCurrency,
+//		|	Table.AmountRevaluated AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming) AS Operation
+//		|FROM
+//		|	Revaluated_R2040B_TaxesIncoming AS Table
+//		|WHERE
+//		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+//		|	AND Table.AmountRevaluated > 0
+//		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	Table.Period,
+//		|	Table.Key AS RowKey,
+//		|	Table.Key AS Key,
+//		|	Table.Currency,
+//		|	Table.CurrencyMovementType,
+//		|	Table.TransactionCurrency,
+//		|	Table.AmountRevaluated AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues) AS Operation
+//		|FROM
+//		|	Revaluated_R2040B_TaxesIncoming AS Table
+//		|WHERE
+//		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+//		|	AND Table.AmountRevaluated > 0
+//		|
 		|
 		// active RecordType.Receipt - Revenue  RecordType.Expense - Expense
 		|UNION ALL
@@ -695,8 +766,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors) AS Operation
 		|FROM
 		|	Revaluated_R1020B_AdvancesToVendors AS Table
 		|WHERE
@@ -713,8 +783,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R1020B_AdvancesToVendors AS Table
 		|WHERE
@@ -731,8 +800,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions) AS Operation
 		|FROM
 		|	Revaluated_R2021B_CustomersTransactions AS Table
 		|WHERE
@@ -749,8 +817,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R2021B_CustomersTransactions AS Table
 		|WHERE
@@ -801,8 +868,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance) AS Operation
 		|FROM
 		|	Revaluated_R3027B_EmployeeCashAdvance AS Table
 		|WHERE
@@ -819,8 +885,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R3027B_EmployeeCashAdvance AS Table
 		|WHERE
@@ -837,8 +902,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions) AS Operation
 		|FROM
 		|	Revaluated_R5015B_OtherPartnersTransactions AS Table
 		|WHERE
@@ -855,8 +919,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R5015B_OtherPartnersTransactions AS Table
 		|WHERE
@@ -873,8 +936,7 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset) AS Operation
 		|FROM
 		|	Revaluated_R8510B_BookValueOfFixedAsset AS Table
 		|WHERE
@@ -891,15 +953,46 @@ Function T1040T_AccountingAmounts()
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,
 		|	Table.AmountRevaluated AS Amount,
-		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues) AS
-		|		Operation
+		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues) AS Operation
 		|FROM
 		|	Revaluated_R8510B_BookValueOfFixedAsset AS Table
 		|WHERE
 		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
 		|	AND Table.AmountRevaluated > 0";
-		
-		//R3010B_CashOnHand
+//		|
+//		|UNION ALL
+//		|		
+//		|SELECT
+//		|	Table.Period,
+//		|	Table.Key AS RowKey,
+//		|	Table.Key AS Key,
+//		|	Table.Currency,
+//		|	Table.CurrencyMovementType,
+//		|	Table.TransactionCurrency,
+//		|	Table.AmountRevaluated AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing) AS Operation
+//		|FROM
+//		|	Revaluated_R1040B_TaxesOutgoing AS Table
+//		|WHERE
+//		|	Table.RecordType = Value(AccumulationRecordType.Expense)
+//		|	AND Table.AmountRevaluated > 0
+//		|
+//		|UNION ALL
+//		|
+//		|SELECT
+//		|	Table.Period,
+//		|	Table.Key AS RowKey,
+//		|	Table.Key AS Key,
+//		|	Table.Currency,
+//		|	Table.CurrencyMovementType,
+//		|	Table.TransactionCurrency,
+//		|	Table.AmountRevaluated AS Amount,
+//		|	VALUE(Catalog.AccountingOperations.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues) AS Operation
+//		|FROM
+//		|	Revaluated_R1040B_TaxesOutgoing AS Table
+//		|WHERE
+//		|	Table.RecordType = Value(AccumulationRecordType.Receipt)
+//		|	AND Table.AmountRevaluated > 0";
 EndFunction
 
 Function GetAccountingDataTable(Operation, AddInfo) Export
@@ -940,9 +1033,17 @@ Function GetAccountingDataTable(Operation, AddInfo) Export
 		"SELECT * FROM Revaluated_R9510B_SalaryPayment AS Table WHERE 
 		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2040B_TaxesIncoming AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R2040B_TaxesIncoming AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
 		
-		
-	
 	// active
 	
 	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand Then
@@ -1022,7 +1123,16 @@ Function GetAccountingDataTable(Operation, AddInfo) Export
 		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
 		Return Query.Execute().Unload();
 	
-			 
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Expense) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();
+	ElsIf Operation = AO.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues Then
+		Query.Text = 
+		"SELECT * FROM Revaluated_R1040B_TaxesOutgoing AS Table WHERE 
+		|Table.RecordType = Value(AccumulationRecordType.Receipt) AND Table.AmountRevaluated > 0";
+		Return Query.Execute().Unload();		 
 	EndIf;
 	Return New ValueTable();
 EndFunction
@@ -1045,6 +1155,10 @@ Function GetAccountingAnalytics(Parameters) Export
 	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues Then
 		Return GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues(Parameters); // Salary payments - Revenue	
 	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming(Parameters); // Expenses - Taxes incoming
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues(Parameters); // Taxes incoming - Revenue	
 	
 	// active
 	
@@ -1082,7 +1196,12 @@ Function GetAccountingAnalytics(Parameters) Export
 		Return GetAnalytics_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset(Parameters); // Expenses - Fixed asset		
 	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues Then
 		Return GetAnalytics_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues(Parameters); // Fixed asset - Revenues	
-		
+	
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing Then
+		Return GetAnalytics_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing(Parameters); // Expenses - Taxes outgoing		
+	ElsIf Parameters.Operation = AO.ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues Then
+		Return GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters); // Taxes outgoing - Revenues	
+			
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -1233,6 +1352,56 @@ Function GetAnalytics_DR_R9510B_SalaryPayment_CR_R5021T_Revenues(Parameters)
 	Debit = AccountingServer.GetT9016S_AccountsEmployee(AccountParameters, 
 	                                                    Parameters.RowData.Employee); 
 	AccountingAnalytics.Debit = Debit.AccountSalaryPayment;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalytics.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Taxes incoming
+Function GetAnalytics_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalytics = New Structure();
+	AdditionalAnalytics.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalytics.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalytics);
+
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, 
+		New Structure("Tax, VatRate", Parameters.RowData.Tax, Parameters.RowData.TaxRate));
+	AccountingAnalytics.Credit = Credit.IncomingAccount;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Taxes incoming - Revenue
+Function GetAnalytics_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, 
+		New Structure("Tax, VatRate", Parameters.RowData.Tax, Parameters.RowData.TaxRate));
+	AccountingAnalytics.Debit = Debit.IncomingAccount;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
 	// Credit
@@ -1403,6 +1572,56 @@ Function GetAnalytics_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues(Paramet
 	AccountingAnalytics.Debit = Debit.AccountTransactionsCustomer;
 	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
 
+	// Credit
+	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.RevenueType,
+	                                                          Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingAnalytics.Credit = Credit.AccountRevenue;
+	
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("RevenueType", Parameters.ObjectData.RevenueType);
+	AdditionalAnalyticsCr.Insert("RevenueCenter", Parameters.ObjectData.RevenueProfitLossCenter);
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+
+	Return AccountingAnalytics;
+EndFunction
+
+// Expenses - Taxes outgoing
+Function GetAnalytics_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
+	                                                          Parameters.ObjectData.ExpenseType,
+	                                                          Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingAnalytics.Debit = Debit.AccountExpense;
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExpenseType", Parameters.ObjectData.ExpenseType);
+	AdditionalAnalyticsDr.Insert("ExpenseCenter", Parameters.ObjectData.ExpenseProfitLossCenter);
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	Credit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, 
+		New Structure("Tax, VatRate", Parameters.RowData.Tax, Parameters.RowData.TaxRate));
+	AccountingAnalytics.Credit = Credit.OutgoingAccount;
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// Taxes outgoing - Revenue
+Function GetAnalytics_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	Debit = AccountingServer.GetT9013S_AccountsTax(AccountParameters, 
+		New Structure("Tax, VatRate", Parameters.RowData.Tax, Parameters.RowData.TaxRate));
+	AccountingAnalytics.Debit = Debit.OutgoingAccount;
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+	
 	// Credit
 	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
 	                                                          Parameters.ObjectData.RevenueType,
@@ -1694,6 +1913,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8510B_BookValueOfFixedAsset());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(R5020B_PartnersBalance());
+//	QueryArray.Add(R1040B_TaxesOutgoing());
+//	QueryArray.Add(R2040B_TaxesIncoming());
 	Return QueryArray;
 EndFunction
 
@@ -1980,6 +2201,47 @@ Function R8510B_BookValueOfFixedAsset()
 		   |	Revaluated_R8510B_BookValueOfFixedAsset
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function R1040B_TaxesOutgoing()
+	Return
+		"SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Tax,
+		|	Table.TaxRate,
+		|	Table.InvoiceType,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	Table.AmountRevaluated AS Amount
+		|INTO R1040B_TaxesOutgoing
+		|FROM
+		|	Revaluated_R1040B_TaxesOutgoing AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0";
+EndFunction
+
+Function R2040B_TaxesIncoming()
+	Return
+		"SELECT
+		|	Table.RecordType,
+		|	Table.Period,
+		|	Table.Company,
+		|	Table.Branch,
+		|	Table.Tax,
+		|	Table.TaxRate,
+		|	Table.Currency,
+		|	Table.CurrencyMovementType,
+		|	Table.TransactionCurrency,
+		|	Table.AmountRevaluated AS Amount
+		|INTO R2040B_TaxesIncoming
+		|FROM
+		|	Revaluated_R2040B_TaxesIncoming AS Table
+		|WHERE
+		|	Table.AmountRevaluated <> 0";
 EndFunction
 
 #EndRegion

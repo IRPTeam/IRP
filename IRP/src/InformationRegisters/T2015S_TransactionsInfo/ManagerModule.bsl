@@ -345,7 +345,8 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|			end
 		|		end
 		|	end AS IsPaid,
-		|	Doc.Amount
+		|	Doc.Amount,
+		|	Doc.Key
 		|INTO T2015S_TransactionsInfo
 		|FROM
 		|	SendTransactions AS Doc
@@ -427,7 +428,8 @@ Function T2015S_TransactionsInfo_DebitCreditNote() Export
 		|			end
 		|		end
 		|	end AS IsPaid,
-		|	Doc.Amount
+		|	Doc.Amount,
+		|	Doc.Key
 		|FROM
 		|	ReceiveTransactions AS Doc";
 EndFunction

@@ -11,6 +11,7 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	AccountingServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -19,6 +20,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	LockDataModificationPrivileged.LockFormIfObjectIsLocked(Form, CurrentObject);
+	AccountingServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion
@@ -346,56 +348,31 @@ Function _CalculateDaysForPaid_Vacation(VacationEmployeeTable, Parameters, Setti
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee,
-	|	SUM(R9545T_PaidVacationsTurnovers.PaidTurnover) AS PaidTurnover
-	|FROM
-	|	AccumulationRegister.R9545T_PaidVacations.Turnovers(BEGINOFPERIOD(&EndDate, YEAR), ENDOFPERIOD(&EndDate, YEAR),
-	|		Recorder, (Company, Employee) IN
-	|		(SELECT
-	|			tmp.Company,
-	|			tmp.Employee
-	|		FROM
-	|			tmp AS tmp)) AS R9545T_PaidVacationsTurnovers
-	|WHERE
-	|	R9545T_PaidVacationsTurnovers.Recorder <> &Recorder
-	|GROUP BY
-	|	R9545T_PaidVacationsTurnovers.Company,
-	|	R9545T_PaidVacationsTurnovers.Employee
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
 	|	tmp.Company,
 	|	tmp.Employee,
-	|	COUNT(tmp.Date) AS CountDates
+	|	COUNT(tmp.Date) AS TotalDays,
+	|	SUM(ISNULL(R9541T_VacationUsage.Days, 0)) AS PaidDays
 	|FROM
 	|	tmp AS tmp
+	|		LEFT JOIN AccumulationRegister.R9541T_VacationUsage AS R9541T_VacationUsage
+	|		ON tmp.Company = R9541T_VacationUsage.Company
+	|		AND tmp.Employee = R9541T_VacationUsage.Employee
+	|		AND tmp.Date = R9541T_VacationUsage.Period
+	|		AND R9541T_VacationUsage.Active
+	|		AND R9541T_VacationUsage.Recorder REFS Document.EmployeeVacation
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.Employee";
 	Query.SetParameter("tmp", VacationEmployeeTable);
-	Query.SetParameter("EndDate", Parameters.EndDate);
-	Query.SetParameter("Recorder", Parameters.Ref);
 	
-	QueryResults = Query.ExecuteBatch();
-	PaidDays = QueryResults[1].Unload();
-	TotalDays = QueryResults[2].Unload();
-	
-	For Each TotalRow In TotalDays Do
+	DaysTable = Query.Execute().Unload();
+	For Each TotalRow In DaysTable Do
 		Filter = New Structure();
 		Filter.Insert("Company"  , TotalRow.Company);
 		Filter.Insert("Employee" , TotalRow.Employee);
-		
-		PaidRows = PaidDays.FindRows(Filter);
-		_PaidDays = 0;
-		For Each PaidRow In PaidRows Do
-			_PaidDays = _PaidDays + PaidRow.PaidTurnover;
-		EndDo;
-		
 		EmployeeRows = VacationEmployeeTable.FindRows(Filter);
 						
-		CalculatePaidDays(_PaidDays, Settings.VacationDays, EmployeeRows, "IsPaidVacation");
+		CalculatePaidDays(0, TotalRow.PaidDays, EmployeeRows, "IsPaidVacation");
 	EndDo;
 	
 	Return VacationEmployeeTable;

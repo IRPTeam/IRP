@@ -227,6 +227,7 @@ Function R1020B_AdvancesToVendors_DebitCreditNote() Export
 		|	Doc.SendAgreement AS Agreement,
 		|	Doc.SendProject AS Project,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
 		|FROM
@@ -261,6 +262,7 @@ Function R1020B_AdvancesToVendors_DebitCreditNote() Export
 		|	Doc.ReceiveAgreement AS Agreement,
 		|	Doc.ReceiveProject AS Project,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED
 		|FROM
 		|	ReceiveAdvances AS Doc
@@ -284,6 +286,7 @@ Function R1020B_AdvancesToVendors_DebitCreditNote() Export
 		|	OffsetOfAdvances.AdvanceAgreement,
 		|	OffsetOfAdvances.AdvanceProject,
 		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances

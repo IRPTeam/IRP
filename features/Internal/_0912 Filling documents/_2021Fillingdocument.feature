@@ -42,7 +42,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
-		When Create catalog Taxes objects (for work order)
+		When Create catalog Taxes objects (for debit and credit note)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
@@ -4974,7 +4974,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 
 
 
-Scenario: _0154131  check currency form in  Bank Receipt
+Scenario: _0154131 check currency form in  Bank Receipt
 	* Filling in Bank Receipt
 		* Filling the document header
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -5092,7 +5092,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
 
-Scenario: _0154132  check currency form in Incoming payment order
+Scenario: _0154132 check currency form in Incoming payment order
 	* Filling in Incoming payment order
 		* Filling the document header
 			Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -5201,7 +5201,7 @@ Scenario: _0154132  check currency form in Incoming payment order
 		And I close all client application windows
 
 
-Scenario: _0154133  check currency form in Outgoing payment order
+Scenario: _0154133 check currency form in Outgoing payment order
 	* Filling in Outgoing Payment Order
 		* Filling the document header
 			Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
@@ -5308,10 +5308,133 @@ Scenario: _0154133  check currency form in Outgoing payment order
 		# 		| 'Local currency' | 'Legal'     | 'USD'           | 'TRY'      | '5,6497'             | '1 129,94' | '1'            |
 		And I close all client application windows
 	
-
+Scenario: _0154101 check filling in and refilling Debit note (with VAT)
+	And I close all client application windows
+	* Open Debit note creation form
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I activate "Partner" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "Transactions" table
+		And I activate "Legal name" field in "Transactions" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "Transactions" table
+		And I activate "Amount" field in "Transactions" table
+	* Select VAT rate
+		And I activate "VAT" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "18%" exact value from "VAT" drop-down list in "Transactions" table
+	* Amount
+		And I select current line in "Transactions" table
+		And I input "15 000,00" text in "Amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+	* Check VAT calculation
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "15 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "2 288,14"   | "TRY"      | "18%" | "12 711,86"  |
+	* Change Net amount and check VAT and Amount calculation 
+		And I select current line in "Transactions" table
+		And I input "15 000,00" text in "Net amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "17 700,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "2 700,00"   | "TRY"      | "18%" | "15 000,00"  |
+	* Change Vat rate and check amount and net amount calculation
+		And I activate "VAT" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "8%" exact value from "VAT" drop-down list in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "16 200,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 200,00"   | "TRY"      | "8%"  | "15 000,00"  |
+	* Change amount and check net amount and tax amount calculation 
+		And I activate "Amount" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I input "20 000,00" text in "Amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "20 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 481,48"   | "TRY"      | "8%"  | "18 518,52"  |
+	* Save and check tax
+		And I click "Save" button
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "20 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 481,48"   | "TRY"      | "8%"  | "18 518,52"  |
+	And I close all client application windows
+	
+				
+Scenario: _0154102 check filling in and refilling Credit note (with VAT)
+	And I close all client application windows
+	* Open Credit note creation form
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And in the table "Transactions" I click the button named "TransactionsAdd"
+		And I activate "Partner" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "Ferron BP" from "Partner" drop-down list by string in "Transactions" table
+		And I activate "Legal name" field in "Transactions" table
+		And I select "Company Ferron BP" from "Legal name" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "Transactions" table
+		And I activate "Amount" field in "Transactions" table
+	* Select VAT rate
+		And I activate "VAT" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "18%" exact value from "VAT" drop-down list in "Transactions" table
+	* Amount
+		And I select current line in "Transactions" table
+		And I input "15 000,00" text in "Amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+	* Check VAT calculation
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "15 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "2 288,14"   | "TRY"      | "18%" | "12 711,86"  |
+	* Change Net amount and check VAT and Amount calculation 
+		And I select current line in "Transactions" table
+		And I input "15 000,00" text in "Net amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "17 700,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "2 700,00"   | "TRY"      | "18%" | "15 000,00"  |
+	* Change Vat rate and check amount and net amount calculation
+		And I activate "VAT" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "8%" exact value from "VAT" drop-down list in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "16 200,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 200,00"   | "TRY"      | "8%"  | "15 000,00"  |
+	* Change amount and check net amount and tax amount calculation 
+		And I activate "Amount" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I input "20 000,00" text in "Amount" field of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "20 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 481,48"   | "TRY"      | "8%"  | "18 518,52"  |
+	* Save and check tax
+		And I click "Save" button
+		And "Transactions" table became equal
+			| "Partner"   | "Amount"    | "Legal name"        | "Partner term"             | "Tax amount" | "Currency" | "VAT" | "Net amount" |
+			| "Ferron BP" | "20 000,00" | "Company Ferron BP" | "Basic Partner terms, TRY" | "1 481,48"   | "TRY"      | "8%"  | "18 518,52"  |
+	And I close all client application windows				
+				
+				
+				
+				
+				
+				
+				
+		
+				
+				
 
 Scenario: _0154150 check function DontCalculateRow in the Purchase order
-	* Open the Purchase order creation form
+	* Open Purchase order creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
@@ -8273,8 +8396,8 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 			| 'Description'    |
 			| 'Revenue'        |
 		And I select current line in "List" table
-		And I activate "Amount" field in "ItemList" table
-		And I input "100,00" text in "Amount" field of "ItemList" table
+		And I activate "Total amount" field in "ItemList" table
+		And I input "100,00" text in "Total amount" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Change unit
 		And I click choice button of "Unit" attribute in "ItemList" table
@@ -8284,8 +8407,8 @@ Scenario: _0154187 check edit currency in the StockAdjustmentAsSurplus
 		And I select current line in "List" table
 	* Check
 		And "ItemList" table became equal
-			| '#'   | 'Revenue type'   | 'Amount'   | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
-			| '1'   | 'Revenue'        | '100,00'   | 'Dress'   | ''                 | 'XS/Blue'    | 'Distribution department'   | ''                     | ''                     | 'box Dress (8 pcs)'   | '1,000'       |
+			| '#'   | 'Revenue type'   | 'Total amount' | 'Item'    | 'Basis document'   | 'Item key'   | 'Profit loss center'        | 'Physical inventory'   | 'Serial lot numbers'   | 'Unit'                | 'Quantity'    |
+			| '1'   | 'Revenue'        | '100,00'       | 'Dress'   | ''                 | 'XS/Blue'    | 'Distribution department'   | ''                     | ''                     | 'box Dress (8 pcs)'   | '1,000'       |
 	* Edit currency
 		And in the table "ItemList" I click "Edit currencies" button
 		Then "Edit currencies" window is opened

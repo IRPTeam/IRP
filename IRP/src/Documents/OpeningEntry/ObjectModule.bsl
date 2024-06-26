@@ -21,6 +21,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	ArrayOfTableNames.Add("AccountPayableOther");
 	ArrayOfTableNames.Add("CashInTransit");
 	ArrayOfTableNames.Add("FixedAssets");
+	ArrayOfTableNames.Add("TaxesIncoming");
+	ArrayOfTableNames.Add("TaxesOutgoing");
 	
 	For Each TableName In ArrayOfTableNames Do
 		For Each Row In ThisObject[TableName] Do
@@ -102,6 +104,16 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	For Each Row In ThisObject.SalaryPayment Do
 		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.TaxesIncoming Do
+		Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.TaxesOutgoing Do
+		Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

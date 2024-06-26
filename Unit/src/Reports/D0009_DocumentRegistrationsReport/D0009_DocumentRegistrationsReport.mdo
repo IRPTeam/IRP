@@ -120,6 +120,7 @@
       <types>DocumentRef.WorkOrder</types>
       <types>DocumentRef.WorkOrderClosing</types>
       <types>DocumentRef.WorkSheet</types>
+      <types>DocumentRef.CalculationDeservedVacations</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

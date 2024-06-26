@@ -423,29 +423,6 @@ Function R1021B_VendorsTransactions_CreditNote() Export
 EndFunction
 
 Function R1021B_VendorsTransactions_DebitCreditNote() Export
-	
-//IsSendAdvanceCustomer
-//IsSendAdvanceVendor
-//
-//IsSendTransactionCustomer
-//IsSendTransactionVendor
-//
-//IsReceiveAdvanceCustomer
-//IsReceiveAdvanceVendor
-//
-//IsReceiveTransactionCustomer
-//IsReceiveTransactionVendor
-
-//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
-//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
-//
-//3. Vendor transactions (VT) - Customer advances (CA) - minus - plus
-//4. Vendor transactions (VT) - Customer transactions (CT) - minus - minus
-//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
-//16. Vendor transactions (VT) - Vendor transactions (VT) (CT)- minus - plus
-//16. Vendor transactions (VT) - Vendor transactions (VT) - minus - plus
-
 	Return
 		"SELECT
 		|case when Doc.PartnersIsEqual then
@@ -475,6 +452,7 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|	Doc.SendBasisDocument AS Basis,
 		|	Doc.SendOrderSettlements AS Order,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
 		|FROM
@@ -508,6 +486,7 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|	Doc.ReceiveBasisDocument,
 		|	Doc.ReceiveOrderSettlements,
 		|	Doc.Amount,
+		|	Doc.Key,
 		|	UNDEFINED
 		|FROM
 		|	ReceiveTransactions AS Doc
@@ -533,6 +512,7 @@ Function R1021B_VendorsTransactions_DebitCreditNote() Export
 		|	OffsetOfAdvances.TransactionDocument,
 		|	OffsetOfAdvances.TransactionOrder,
 		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances

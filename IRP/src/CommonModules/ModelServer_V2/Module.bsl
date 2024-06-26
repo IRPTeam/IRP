@@ -356,6 +356,10 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , "Other");
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , "Other");
 	
+	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffset , "Other");
+	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment , "Other");
+	Map.Insert(Enums.TaxesOperationTransactionType.TaxPayment , "Other");
+	
 	Return Map.Get(TransactionType);
 EndFunction
 

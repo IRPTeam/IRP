@@ -49,13 +49,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|SELECT
 	|	EmployeeList.Ref.Date AS Period,
 	|	DateTable.Date AS Date,
+	|	EmployeeList.BeginDate AS BeginDate,
+	|	EmployeeList.EndDate AS EndDate,
+	|	EmployeeList.PaidDays AS PaidDays,
 	|	EmployeeList.Employee AS Employee,
 	|	EmployeeList.Ref.Company AS Company,
 	|	EmployeeList.Ref.Branch AS Branch
 	|INTO EmployeeVacations
 	|FROM
 	|	Document.EmployeeVacation.EmployeeList AS EmployeeList
-	|		LEFT JOIN DateTable AS DateTable
+	|		INNER JOIN DateTable AS DateTable
 	|		ON DateTable.Date >= EmployeeList.BeginDate
 	|		AND DateTable.Date <= EmployeeList.EndDate
 	|		AND EmployeeList.Ref = &Ref
@@ -136,6 +139,7 @@ EndFunction
 Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
+	StrParams.Insert("DateBefore", New Boundary(CommonFunctionsServer.GetRefAttribute(Ref, "Date"), BoundaryType.Excluding));
 	Return StrParams;
 EndFunction
 
@@ -147,6 +151,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T9540S_EmployeeVacations());
+	QueryArray.Add(R9541T_VacationUsage());
 	Return QueryArray;
 EndFunction
 
@@ -171,6 +176,21 @@ Function T9540S_EmployeeVacations()
 		|	EmployeeVacations AS EmployeeVacations
 		|WHERE
 		|	TRUE";
+EndFUnction
+
+Function R9541T_VacationUsage()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	EmployeeVacations.Date AS Period,
+		|	EmployeeVacations.Company,
+		|	EmployeeVacations.Employee,
+		|	1 AS Days
+		|INTO R9541T_VacationUsage
+		|FROM
+		|	EmployeeVacations AS EmployeeVacations
+		|WHERE
+		|	EmployeeVacations.Date < DATEADD(EmployeeVacations.BeginDate, Day, EmployeeVacations.PaidDays)";
 EndFUnction
 
 #EndRegion

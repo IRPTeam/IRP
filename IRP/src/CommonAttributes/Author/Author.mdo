@@ -109,6 +109,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.CalculationDeservedVacations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Users</metadata>
     <use>Use</use>
   </content>
@@ -686,6 +690,10 @@
   </content>
   <content>
     <metadata>Document.FixedAssetTransfer</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.TaxesOperation</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

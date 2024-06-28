@@ -770,9 +770,9 @@ Scenario: _051017 check selection form (Payment by documents) in CP
 			And I click the button named "Calculate"
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
-				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | '100,00'     |
+				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
 				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 887,45' | '135 887,45' |
-				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '12 900,00'  |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '13 000,00'  |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |

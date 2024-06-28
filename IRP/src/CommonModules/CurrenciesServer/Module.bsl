@@ -398,6 +398,11 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 		Return;
 	EndIf;		
 	
+	ExcludeDimensions = New Array();
+	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
+	ExcludeDimensions.Add(Lower("Currency")); 
+	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	
 	AgrRows = New Array();
 	
 	If UseAgreementMovementType Then
@@ -408,7 +413,7 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 		EndDo;
 		
 		ArrayOfResourceNames = GetArrayOfResourceNames();
-		
+			
 		For Each AgrRow In AgrRows Do
 			For Each TrnRow In TrnRows Do
 				If UseKey And ValueIsFilled(AgrRow.Key) And TrnRow.Key <> AgrRow.Key Then
@@ -416,7 +421,11 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 				EndIf;
 				
 				DimensionsMatch = True;
-				For Each RegDimension In RegMetadata.Dimensions Do
+				For Each RegDimension In RegMetadata.Dimensions Do   
+					If ExcludeDimensions.Find(Lower(RegDimension.Name)) <> Undefined Then
+						Continue;
+					EndIf;
+					
 					If AgrRow[RegDimension.Name] <> TrnRow[RegDimension.Name] Then
 						DimensionsMatch = False;
 						Break;
@@ -446,6 +455,22 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 				Continue;
 			EndIf;
 			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do   
+				If ExcludeDimensions.Find(Lower(RegDimension.Name)) <> Undefined Then
+					Continue;
+				EndIf;
+					
+				If TrnRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+				
 			Row.TransactionCurrency = TrnRow.Currency;
 		EndDo;
 	EndDo;
@@ -698,6 +723,11 @@ EndProcedure
 Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 	Filter = New Structure("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	
+	ExcludeDimensions = New Array();
+	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
+	ExcludeDimensions.Add(Lower("Currency")); 
+	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	
 	// transactions
 	For Each Row In PartnerBalanceTables.T2015S_TransactionsInfo Do
 		
@@ -731,7 +761,11 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			EndIf;       
 			
 			DimensionsMatch = True;
-			For Each RegDimension In RegMetadata.Dimensions Do  
+			For Each RegDimension In RegMetadata.Dimensions Do 
+				If ExcludeDimensions.Find(RegDimension.Name) <> Undefined Then
+					Continue;
+				EndIf;
+				
 				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
 					Continue;
 				EndIf;
@@ -786,6 +820,10 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			
 			DimensionsMatch = True;
 			For Each RegDimension In RegMetadata.Dimensions Do  
+				If ExcludeDimensions.Find(RegDimension.Name) <> Undefined Then
+					Continue;
+				EndIf;
+				
 				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
 					Continue;
 				EndIf;

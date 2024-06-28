@@ -80,8 +80,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		
 		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-		ItemOfPostingInfo.PrepareTable = ExpandTable(TempTablesManager, ItemOfPostingInfo.PrepareTable, 
-			UseAgreementMovementType, UseCurrencyJoin);
+		ItemOfPostingInfo.PrepareTable = ExpandTable(TempTablesManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin);
 					
 		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
 							
@@ -189,12 +188,12 @@ Procedure AddAmountsColumns(RecordSet, ColumnName)
 	EndIf;
 EndProcedure
 
-Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseCurrencyJoin)
+Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin)
 	
 	ArrayOfRecourceNames = GetArrayOfResourceNames();
 	
 	For Each ResourceName In ArrayOfRecourceNames Do
-		AddAmountsColumns(RecordSet, ResourceName);
+		AddAmountsColumns(ItemOfPostingInfo.PrepareTable, ResourceName);
 	EndDo;
 	
 	Query = New Query();
@@ -370,24 +369,24 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
-	UseKey = RecordSet.Columns.Find("Key") <> Undefined;
+	UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
 	If Not UseKey Then
-		RecordSet.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+		ItemOfPostingInfo.PrepareTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 
-	Query.SetParameter("RecordSet", RecordSet);
+	Query.SetParameter("RecordSet", ItemOfPostingInfo.PrepareTable);
 	Query.SetParameter("UseKey", UseKey);
 	Query.SetParameter("UseAgreementMovementType", UseAgreementMovementType);
 	Query.SetParameter("UseCurrencyJoin", UseCurrencyJoin);
 	QueryResults = Query.ExecuteBatch();
 	QueryTable = QueryResults[1].Unload();
 	
-	SetTransactionCurrency(QueryTable, UseKey, UseAgreementMovementType);
+	SetTransactionCurrency(QueryTable, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
 	
 	Return QueryTable;
 EndFunction
 
-Procedure SetTransactionCurrency(ExpandTable, UseKey, UseAgreementMovementType)
+Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
 	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
 		Return;
 	EndIf;
@@ -413,6 +412,18 @@ Procedure SetTransactionCurrency(ExpandTable, UseKey, UseAgreementMovementType)
 		For Each AgrRow In AgrRows Do
 			For Each TrnRow In TrnRows Do
 				If UseKey And ValueIsFilled(AgrRow.Key) And TrnRow.Key <> AgrRow.Key Then
+					Continue;
+				EndIf;
+				
+				DimensionsMatch = True;
+				For Each RegDimension In RegMetadata.Dimensions Do
+					If AgrRow[RegDimension.Name] <> TrnRow[RegDimension.Name] Then
+						DimensionsMatch = False;
+						Break;
+					EndIf;
+				EndDo;
+				
+				If Not DimensionsMatch Then
 					Continue;
 				EndIf;
 				
@@ -712,10 +723,29 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
 		EndIf;
 		
+		RegMetadata = Metadata.AccumulationRegisters[MainTableName];  
+		
 		For Each RegisterRow In RegisterRows Do
 			If ValueIsFilled(Row.Key) And RegisterRow.Key <> Row.Key Then
 				Continue;
+			EndIf;       
+			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do  
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
+					Continue;
+				EndIf;
+				
+				If RegisterRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
 			EndIf;
+			
 			Row.Currency = RegisterRow.Currency;
 			Row.Amount   = RegisterRow.Amount;
 		EndDo;
@@ -747,10 +777,29 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
 		EndIf;
 		
+		RegMetadata = Metadata.AccumulationRegisters[MainTableName];
+		
 		For Each RegisterRow In RegisterRows Do
 			If ValueIsFilled(Row.Key) And RegisterRow.Key <> Row.Key Then
 				Continue;
+			EndIf;        
+			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do  
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
+					Continue;
+				EndIf;
+				
+				If RegisterRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
 			EndIf;
+			
 			Row.Currency = RegisterRow.Currency;
 			Row.Amount   = RegisterRow.Amount;
 		EndDo;

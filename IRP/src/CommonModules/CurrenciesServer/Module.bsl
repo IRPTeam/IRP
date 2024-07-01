@@ -391,6 +391,35 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 		Return;
 	EndIf;
 	
+	GroupColumns = New Array(); 
+	SummColumn = New Array();
+	
+	For Each Field In RegMetadata.Dimensions Do
+		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;
+	EndDo;
+	
+	For Each Field In RegMetadata.Attributes Do
+		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;		
+	EndDo;
+	
+	For Each Field In RegMetadata.StandardAttributes Do
+		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;		
+	EndDo;
+	
+	For Each Field In RegMetadata.Resources Do
+		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+			SummColumn.Add(Field.Name)
+		EndIf;				
+	EndDo;
+	
+	ExpandTable.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
+	
 	TrnRows = ExpandTable.FindRows(New Structure("CurrencyMovementType", 
 		ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
 	
@@ -438,8 +467,11 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 				EndIf;
 				
 				TrnRow.Currency = AgrRow.Currency;
-				For Each ResourceName In ArrayOfResourceNames Do
-					TrnRow[ResourceName] = AgrRow[ResourceName];
+				For Each ResourceName In ArrayOfResourceNames Do 
+					If CommonFunctionsClientServer.ObjectHasProperty(TrnRow, ResourceName)
+						And CommonFunctionsClientServer.ObjectHasProperty(AgrRow, ResourceName) Then
+						TrnRow[ResourceName] = AgrRow[ResourceName];
+					EndIf;
 				EndDo;
 				
 			EndDo;

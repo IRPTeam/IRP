@@ -402,6 +402,7 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
 	ExcludeDimensions.Add(Lower("Currency")); 
 	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	ExcludeDimensions.Add(Lower("Price")); 
 	
 	AgrRows = New Array();
 	
@@ -727,6 +728,7 @@ Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
 	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
 	ExcludeDimensions.Add(Lower("Currency")); 
 	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	ExcludeDimensions.Add(Lower("Price")); 
 	
 	// transactions
 	For Each Row In PartnerBalanceTables.T2015S_TransactionsInfo Do

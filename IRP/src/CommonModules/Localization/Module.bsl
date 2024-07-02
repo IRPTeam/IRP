@@ -2158,5 +2158,13 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
 #EndRegion
 	
+#Region DocStatuses
+	Strings.Insert("DocStatus_Name", NStr("en = 'Status'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en = 'New'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en = 'Not posted'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en = 'Deleted'", Lang));	
+#EndRegion
+	
 	Return Strings;
 EndFunction

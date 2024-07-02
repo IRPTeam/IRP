@@ -27,6 +27,17 @@ Function GetGroupItemsArray(Object, Form)
 		ItemsArray.Add(ItemStructure);
 	EndDo;
 
+	ItemStructure = New Structure();
+	ItemStructure.Insert("Title", R().DocStatus_Name + ":" + Chars.NBSp);
+	ItemStructure.Insert("Value", 
+		?(Object.Ref.IsEmpty(), R().DocStatus_New, 
+			?(Object.DeletionMark, R().DocStatus_Deleted, 
+				?(Object.Posted, R().DocStatus_Posted, R().DocStatus_NotPosted)
+			)
+		)
+	);
+	ItemsArray.Add(ItemStructure);
+
 	Return ItemsArray;
 EndFunction
 

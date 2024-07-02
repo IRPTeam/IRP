@@ -394,6 +394,10 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 	GroupColumns = New Array(); 
 	SummColumn = New Array();
 	
+	If ExpandTable.Columns.Find("Key") <> Undefined Then
+		GroupColumns.Add("Key");
+	EndIf;
+	
 	For Each Field In RegMetadata.Dimensions Do
 		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)

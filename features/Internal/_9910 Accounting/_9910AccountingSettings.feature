@@ -3027,8 +3027,9 @@ Scenario: _0991161 check Employee cash advance accounting movements (without PI,
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Partner'    | 'Business unit'   | 'Expense and revenue type' | 'Credit' | ' ' | 'Operation'                                                                           |
-			| '420.2' | 'Employee 1' | 'Business unit 1' | 'Other expence'            | '4020.1' | ''  | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)'            |
+			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
+			| "420.2" | "Employee 1" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
+			| "5301"  | "Employee 1" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button

@@ -939,7 +939,7 @@ Procedure Write_SelfRecords(Parameters,
 		TableAccountingAmounts.Columns.Delete(TableAccountingAmounts.Columns.PointInTime);
 
 		// Accounting amounts (currency revaluation)
-		TableAccountingAmounts_CurrencyRevaluation = TableAccountingAmounts.CopyColumns();
+		//TableAccountingAmounts_CurrencyRevaluation = TableAccountingAmounts.CopyColumns();
 
 		// Advances
 		RecordSet_Advances = AccumulationRegisters[Parameters.RegisterName_Advances].CreateRecordSet();
@@ -954,7 +954,7 @@ Procedure Write_SelfRecords(Parameters,
 		TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 
 		// Transactions (currency revaluation)
-		TableTransactions_CurrencyRevaluation = TableTransactions.CopyColumns();
+		//TableTransactions_CurrencyRevaluation = TableTransactions.CopyColumns();
 
 		// Partners balance
 		RecordSet_PartnersBalance = AccumulationRegisters.R5020B_PartnersBalance.CreateRecordSet();

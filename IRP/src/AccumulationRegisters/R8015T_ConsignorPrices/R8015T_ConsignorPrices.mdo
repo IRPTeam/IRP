@@ -157,4 +157,18 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="fb1c1438-a754-4e23-bf33-29cecb58b22c">
+    <name>TransactionCurrency</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

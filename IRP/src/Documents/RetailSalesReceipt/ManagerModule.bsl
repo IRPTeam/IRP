@@ -302,7 +302,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R8014T_ConsignorSales());
 	QueryArray.Add(R9010B_SourceOfOriginStock());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
@@ -1289,38 +1288,6 @@ Function R5010B_ReconciliationStatement()
 		   |	PaymentAgent.LegalNameContract,
 		   |	PaymentAgent.Currency,
 		   |	PaymentAgent.Period";
-EndFunction
-
-Function T2015S_TransactionsInfo()
-	Return "SELECT
-		   |	PaymentAgent.Period,
-		   |	PaymentAgent.Company,
-		   |	PaymentAgent.Branch,
-		   |	PaymentAgent.Currency,
-		   |	PaymentAgent.Partner,
-		   |	PaymentAgent.LegalName,
-		   |	PaymentAgent.Agreement,
-		   |	PaymentAgent.Order,
-		   |	TRUE AS IsCustomerTransaction,
-		   |	PaymentAgent.Basis AS TransactionBasis,
-		   |	SUM(PaymentAgent.Amount) AS Amount,
-		   |	TRUE AS IsDue
-		   |INTO T2015S_TransactionsInfo
-		   |FROM
-		   |	PaymentAgent AS PaymentAgent
-		   |WHERE
-		   |	TRUE
-		   |	AND PaymentAgent.StatusType = VALUE(ENUM.RetailReceiptStatusTypes.Completed)
-		   |GROUP BY
-		   |	PaymentAgent.Period,
-		   |	PaymentAgent.Company,
-		   |	PaymentAgent.Branch,
-		   |	PaymentAgent.Currency,
-		   |	PaymentAgent.Partner,
-		   |	PaymentAgent.LegalName,
-		   |	PaymentAgent.Agreement,
-		   |	PaymentAgent.Order,
-		   |	PaymentAgent.Basis";
 EndFunction
 
 Function T3010S_RowIDInfo()

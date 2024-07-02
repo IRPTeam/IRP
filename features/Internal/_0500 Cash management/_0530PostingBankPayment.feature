@@ -668,6 +668,16 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| 'Amount'     | 'Document'                                     |
 				| '135 000,00' | '$$PurchaseInvoice018001$$' |
 			And I move one line down in "Documents" table and select line
+			And I go to line in "Documents" table
+				| "Amount"     |
+				| "135 000,00" |
+			And I set "Check" checkbox in "Documents" table
+			And I finish line editing in "Documents" table
+			And I go to line in "Documents" table
+				| "Amount"    |
+				| "13 000,00" |
+			And I set "Check" checkbox in "Documents" table
+			And I finish line editing in "Documents" table
 			And I input "146 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
@@ -675,6 +685,14 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
 				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | '135 000,00' |
 				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 000,00'  |
+			And in the table "Documents" I click "Unckeck all" button
+			And I input "146 000,00" text in the field named "Amount"
+			And I click the button named "Calculate"	
+			And "Documents" table became equal
+				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
+				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | '100,00'     |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | '135 000,00' |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '10 900,00'  |		
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |

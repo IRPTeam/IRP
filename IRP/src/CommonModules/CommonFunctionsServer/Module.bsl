@@ -1681,7 +1681,7 @@ EndProcedure
 // Create table.
 // 
 // Parameters:
-//  RegisterMetadata - MetadataObjectAccountingRegister - Register metadata
+//  RegisterMetadata - MetadataObjectAccountingRegister, MetadataObjectInformationRegister - Register metadata
 // 
 // Returns:
 //  ValueTable - Create table

@@ -57,28 +57,30 @@ Procedure FillTable()
 	Query.Text = 
 	"SELECT ALLOWED
 	|	TransactionsBalance.Basis AS Document,
-	|	TransactionsBalance.Basis.Partner AS Partner,
-	|	TransactionsBalance.Basis.Agreement AS Agreement,
+	|	ISNULL(TransactionsBalance.Basis.Partner, TransactionsBalance.Partner) AS Partner,
+	|	ISNULL(TransactionsBalance.Basis.Agreement, TransactionsBalance.Agreement) AS Agreement,
 	|	TransactionsBalance.AmountBalance AS Amount,
-	|	TransactionsBalance.Order,
-	|	TransactionsBalance.Project,
-	|	TransactionsBalance.Basis.LegalName AS LegalName,
+	|	TransactionsBalance.Order AS Order,
+	|	TransactionsBalance.Project AS Project,
+	|	ISNULL(TransactionsBalance.Basis.LegalName, TransactionsBalance.LegalName) AS LegalName,
 	|	TransactionsBalance.Basis.LegalNameContract AS LegalNameContract,
 	|	TransactionsBalance.Basis.Date AS DocDate
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Boundary, Company = &Company
-	|	AND Branch = &Branch
-	|	AND Currency = &Currency
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND VALUETYPE(Basis) IN (&AllowedTypes)
-	|	AND CASE
-	|		WHEN &Filter_Partner
-	|			THEN Partner = &Partner
-	|		ELSE TRUE
-	|	END) AS TransactionsBalance
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(
+	|			&Boundary,
+	|			Company = &Company
+	|				AND Branch = &Branch
+	|				AND Currency = &Currency
+	|				AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|				AND (VALUETYPE(Basis) IN (&AllowedTypes)
+	|					OR Basis = UNDEFINED)
+	|				AND CASE
+	|					WHEN &Filter_Partner
+	|						THEN Partner = &Partner
+	|					ELSE TRUE
+	|				END) AS TransactionsBalance
 	|WHERE
 	|	TransactionsBalance.AmountBalance > 0
-	|	AND NOT TransactionsBalance.Basis.Ref IS NULL
 	|	AND NOT TransactionsBalance.Basis IN (&SelectedDocuments)
 	|
 	|ORDER BY

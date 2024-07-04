@@ -263,12 +263,9 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 			| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''          | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                 | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                 | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '323,83'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '365,61'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '1 891,53'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '1 891,53'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '2 135,59'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '2 135,59'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
+			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '689,44'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 027,12'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 027,12'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
 	* Check SI movements (Register  "R4050 Stock inventory")
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -572,12 +569,9 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 				| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''          | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     |
 				| ''                                 | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     |
 				| ''                                 | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '323,83'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '365,61'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '1 891,53'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '1 891,53'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '2 135,59'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '2 135,59'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
+				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '689,44'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 027,12'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+				| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 027,12'  | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
 		* Check SI movements (Register  "R4050 Stock inventory")
 			And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 			And I click "Generate report" button

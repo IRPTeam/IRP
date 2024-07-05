@@ -116,7 +116,7 @@ Scenario: _605703 change movements for PI
 			And I move to "R1040B_TaxesOutgoing *" tab
 			And I go to line in "R1040B_TaxesOutgoing" table
 				| 'Active' | 'Company'      | 'Period'              | 'RecordType' | 'Tax' | 'Amount'   | 'TaxRate' |
-				| 'Yes'    | 'Main Company' | '07.09.2020 17:53:38' | 'Receipt'    | 'VAT' | '3 050,85' | '18%'     |
+				| 'Yes'    | 'Main Company' | '07.09.2020 17:53:38' | 'Receipt'    | 'VAT' | '3 577,79' | '18%'     |
 			And I activate "Amount" field in "R1040B_TaxesOutgoing" table
 			And I select current line in "R1040B_TaxesOutgoing" table
 			And I input "35 593,23" text in "Amount" field of "R1040B_TaxesOutgoing" table
@@ -247,15 +247,9 @@ Scenario: _605703 change movements for PI
 			| 'Purchase invoice 12 dated 07.09.2020 17:53:38' | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
 			| 'Register  "R1040 Taxes outgoing"'              | ''                    | ''           | ''             | ''       | ''    | ''         | ''             | ''                             | ''         | ''                     | ''          |
 			| ''                                              | 'Period'              | 'RecordType' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' | 'Amount'    |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '3 050,85'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '6 406,78'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '11 440,68' |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '522,31'    |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 096,84'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '1 958,64'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '3 050,85'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '6 406,78'  |
-			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '11 440,68' |		
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  | '20 898,31' |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  | '3 577,79'  |
+			| ''                                              | '07.09.2020 17:53:38' | 'Receipt'    | 'Main Company' | ''       | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '20 898,31' |		
 		And I select "R5020 Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal

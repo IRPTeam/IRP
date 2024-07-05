@@ -1847,7 +1847,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not Row.IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else		
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;
@@ -1865,6 +1867,12 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 	// AccountingExtDimensions
 	ArrayForDelete.Clear();
 	For Each Row In AccountingExtDimensions Do
+		_IsFixed = False;
+		_Filter = New Structure("Key, Operation, LedgerType", Row.Key, Row.Operation, Row.LedgerType);
+		_Rows = AccountingRowAnalytics.FindRows(_Filter);
+		If _Rows.Count() Then
+			_IsFixed = _Rows[0].IsFixed;
+		EndIf;
 		
 		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
 			ArrayForDelete.Add(Row);
@@ -1893,7 +1901,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not _IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else	
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;

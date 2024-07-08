@@ -711,7 +711,7 @@ Procedure PaymentByDocuments(Command)
 		EndIf;
 	EndDo;
 	Notify = New NotifyDescription("PaymentByDocumentSelectionEnd", ThisObject);		
-	OpenForm("CommonForm.PaymentByDocuments", FormParameters, ThisObject,,,,Notify, FormWindowOpeningMode.LockOwnerWindow);	
+	OpenForm("CommonForm.PaymentDistribution", FormParameters, ThisObject,,,,Notify, FormWindowOpeningMode.LockOwnerWindow);	
 EndProcedure
 
 &AtClient

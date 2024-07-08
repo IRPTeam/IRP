@@ -1020,7 +1020,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.BackgroundMultiJob</commonForms>
   <commonForms>CommonForm.FormulaEditor</commonForms>
-  <commonForms>CommonForm.PaymentByDocuments</commonForms>
+  <commonForms>CommonForm.PaymentDistribution</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>

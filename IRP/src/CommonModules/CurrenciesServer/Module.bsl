@@ -448,19 +448,26 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 		
 		ArrayOfResourceNames = GetArrayOfResourceNames();
 			
+		MatchingColumns = New Array();
+		For Each RegDimension In RegMetadata.Dimensions Do
+			MatchingColumns.Add(Lower(RegDimension.Name));
+		EndDo;
+		MatchingColumns.Add(Lower("RecordType"));
+		
 		For Each AgrRow In AgrRows Do
 			For Each TrnRow In TrnRows Do
+								
 				If UseKey And ValueIsFilled(AgrRow.Key) And TrnRow.Key <> AgrRow.Key Then
 					Continue;
 				EndIf;
 				
 				DimensionsMatch = True;
-				For Each RegDimension In RegMetadata.Dimensions Do   
-					If ExcludeDimensions.Find(Lower(RegDimension.Name)) <> Undefined Then
+				For Each MatchingColumn In MatchingColumns Do   
+					If ExcludeDimensions.Find(Lower(MatchingColumn)) <> Undefined Then
 						Continue;
 					EndIf;
 					
-					If AgrRow[RegDimension.Name] <> TrnRow[RegDimension.Name] Then
+					If AgrRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
 						DimensionsMatch = False;
 						Break;
 					EndIf;

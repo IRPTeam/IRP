@@ -467,9 +467,12 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 						Continue;
 					EndIf;
 					
-					If AgrRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
-						DimensionsMatch = False;
-						Break;
+					If CommonFunctionsClientServer.ObjectHasProperty(AgrRow, MatchingColumn)
+						And CommonFunctionsClientServer.ObjectHasProperty(TrnRow, MatchingColumn) Then
+						If AgrRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
+							DimensionsMatch = False;
+							Break;
+						EndIf;
 					EndIf;
 				EndDo;
 				

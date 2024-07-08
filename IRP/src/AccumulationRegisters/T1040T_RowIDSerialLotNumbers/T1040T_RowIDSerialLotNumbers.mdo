@@ -8,12 +8,13 @@
     <recordKeyType typeId="06d60f28-6451-4e4d-b774-ca1ea9e0c39a" valueTypeId="daa16c66-e34f-4a89-994a-a9556d3e5ffb"/>
     <recordType typeId="d60c83d1-61f1-406a-9810-0ae82c138a63" valueTypeId="7977f4d5-716f-4e6e-8e5b-9fb9ac4678b7"/>
   </producedTypes>
-  <name>T1040B_RowIDSerialLotNumbers</name>
+  <name>T1040T_RowIDSerialLotNumbers</name>
   <synonym>
     <key>en</key>
     <value>T 1040 Row ID Serial lot numbers</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="06988083-5d72-47bf-b20f-e3697da731f4">
@@ -65,6 +66,20 @@
     </synonym>
     <type>
       <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="fc1b16c6-303e-4f6c-a06d-527dd6d928b5">
+    <name>Step</name>
+    <synonym>
+      <key>en</key>
+      <value>Step</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.MovementRules</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

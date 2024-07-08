@@ -1994,7 +1994,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.T1040B_RowIDSerialLotNumbers</name>
+		<name>AccumulationRegister.T1040T_RowIDSerialLotNumbers</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

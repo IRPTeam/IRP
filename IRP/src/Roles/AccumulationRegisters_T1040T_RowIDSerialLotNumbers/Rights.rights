@@ -4,7 +4,7 @@
 	<setForAttributesByDefault>true</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>AccumulationRegister.T1040B_RowIDSerialLotNumbers</name>
+		<name>AccumulationRegister.T1040T_RowIDSerialLotNumbers</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

@@ -323,7 +323,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
 	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(T1040B_RowIDSerialLotNumbers());	
+	QueryArray.Add(T1040T_RowIDSerialLotNumbers());	
 	Return QueryArray;
 EndFunction
 
@@ -1323,14 +1323,20 @@ Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SI();
 EndFunction
 	
-Function T1040B_RowIDSerialLotNumbers()
+Function T1040T_RowIDSerialLotNumbers()
 	Return
 		"SELECT
 		|	CASE
 		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN VALUE(AccumulationRecordType.Receipt)
-		|		ELSE VALUE(AccumulationRecordType.Expense)
-		|	END AS RecordType,
+		|			THEN SerialLotNumbers.Quantity
+		|		ELSE - SerialLotNumbers.Quantity
+		|	END AS Quantity,
+		|	CASE 
+		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
+		|			THEN RowIDInfo.NextStep
+		|		ELSE RowIDInfo.CurrentStep
+		|	END AS Step,
+		|
 		|	RowIDInfo.Ref.Date AS Period,
 		|	RowIDInfo.RowID AS RowID,
 		|	CASE
@@ -1338,15 +1344,35 @@ Function T1040B_RowIDSerialLotNumbers()
 		|			THEN RowIDInfo.Ref
 		|		ELSE RowIDInfo.Basis
 		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber,
-		|	SerialLotNumbers.Quantity AS Quantity
-		|INTO T1040B_RowIDSerialLotNumbers
+		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
+		|INTO T1040T_RowIDSerialLotNumbers
 		|FROM
 		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
 		|		INNER JOIN Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
 		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref
-		|		AND SerialLotNumbers.Ref = &Ref)
+		|		AND (RowIDInfo.Ref = &Ref)
+		|		AND (SerialLotNumbers.Ref = &Ref)
+		|		AND RowIDInfo.Key = SerialLotNumbers.Key
+		|		INNER JOIN Document.SalesInvoice.ItemList AS ItemList
+		|		ON RowIDInfo.Ref = ItemList.Ref
+		|		AND (ItemList.Ref = &Ref)
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND (ItemList.UseShipmentConfirmation)
+		|UNION ALL
+		|
+		|SELECT
+		|	SerialLotNumbers.Quantity AS Quantity,
+		|	VALUE(Catalog.MovementRules.SRO_SR) AS Step,
+		|	RowIDInfo.Ref.Date AS Period,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Ref AS Basis,
+		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
+		|FROM
+		|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+		|		INNER JOIN Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
+		|		AND (RowIDInfo.Ref = &Ref)
+		|		AND (SerialLotNumbers.Ref = &Ref)
 		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 		 

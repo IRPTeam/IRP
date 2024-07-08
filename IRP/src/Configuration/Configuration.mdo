@@ -438,6 +438,7 @@
   <roles>Role.ManualRegisterEdit</roles>
   <roles>Role.Document_TaxesOperation</roles>
   <roles>Role.AttachedFilesDelete</roles>
+  <roles>Role.AccumulationRegisters_T1040B_RowIDSerialLotNumbers</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1541,6 +1542,7 @@
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040B_RowIDSerialLotNumbers</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

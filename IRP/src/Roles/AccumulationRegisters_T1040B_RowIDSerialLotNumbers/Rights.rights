@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Rights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://v8.1c.ru/8.2/roles" xsi:type="Rights">
+	<setForNewObjects>false</setForNewObjects>
+	<setForAttributesByDefault>true</setForAttributesByDefault>
+	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
+	<object>
+		<name>AccumulationRegister.T1040B_RowIDSerialLotNumbers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<restrictionTemplate>
+		<name>AccessRegisters(D1, D2, D3, D4, D5, CompareRule)</name>
+		<condition>
+#If Not &amp;UseObjectAccess #Then
+	// Access restiction not using. Set UseObjectAccess functional option TRUE
+	WHERE TRUE
+	
+#ElseIf  "#D1" = "" AND "#D2" = "" AND "#D3" = "" AND "#D4" = "" AND "#D5" = "" AND "#CompareRule" = "" #Then
+	WHERE TRUE
+#Else
+Table
+WHERE TRUE IN 
+(
+	SELECT	TOP 1	
+		TRUE
+	FROM		
+			 InformationRegister.T9101A_ObjectAccessRegisters AS OAR
+	WHERE OAR.AccessGroup IN (&amp;CurrentUserAccessGroupList)
+		AND #CurrentTableName = OAR.TableName
+		
+		#If "#CompareRule" = "" #Then
+			#If Not "#D1" = "" #Then AND (OAR.DoNotControl1 OR OAR.Value1 = Table.#D1) #EndIf
+			#If Not "#D2" = "" #Then AND (OAR.DoNotControl2 OR OAR.Value2 = Table.#D2) #EndIf
+			#If Not "#D3" = "" #Then AND (OAR.DoNotControl3 OR OAR.Value3 = Table.#D3) #EndIf
+			#If Not "#D4" = "" #Then AND (OAR.DoNotControl4 OR OAR.Value4 = Table.#D4) #EndIf
+			#If Not "#D5" = "" #Then AND (OAR.DoNotControl5 OR OAR.Value5 = Table.#D5) #EndIf
+		#Else
+			AND (#CompareRule)
+		#EndIf
+)
+#EndIf</condition>
+	</restrictionTemplate>
+</Rights>

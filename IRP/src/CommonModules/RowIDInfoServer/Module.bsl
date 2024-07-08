@@ -2661,16 +2661,33 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+//	|SELECT DISTINCT
+//	|	UNDEFINED AS Ref,
+//	|	BasisesTable.Key,
+//	|	SerialLotNumbers.SerialLotNumber,
+//	|	SerialLotNumbers.Quantity
+//	|FROM
+//	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+//	|		INNER JOIN BasisesTable AS BasisesTable
+//	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+//	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+//	|;
+	|
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SerialLotNumbers.QuantityBalance AS Quantity
 	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040B_RowIDSerialLotNumbers.Balance(, (Basis, RowID) IN
+	|		(SELECT
+	|			BasisesTable.Basis,
+	|			BasisesTable.BasisKey
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.Basis = BasisesTable.Basis
+	|		AND SerialLotNumbers.RowID = BasisesTable.BasisKey
 	|;
 	|
 	|///////////////////////////////////////////////////////////////////////////////

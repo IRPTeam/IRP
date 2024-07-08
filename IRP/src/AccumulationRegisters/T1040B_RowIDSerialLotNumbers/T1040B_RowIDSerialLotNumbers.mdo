@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4a3ab18e-8caf-43a7-b669-41f741ab99a6">
+  <producedTypes>
+    <selectionType typeId="73552ea9-52cb-41e2-bfcc-d5bbff856292" valueTypeId="5ff84f20-a49e-4ee2-aca9-3a435d60e842"/>
+    <listType typeId="47008237-26b6-4ce6-be30-e9ec7a159596" valueTypeId="115b8d77-2787-47d2-bd91-54c892dcbb17"/>
+    <managerType typeId="a76dfe5d-0310-47df-8a9f-6cd483567543" valueTypeId="d9ff84b2-b168-4fe0-8a5f-e575fa0ad56b"/>
+    <recordSetType typeId="d3f6d700-5dd4-44f3-bb67-b25906c28ced" valueTypeId="549adead-d8c8-4c64-822b-7b855b36ac13"/>
+    <recordKeyType typeId="06d60f28-6451-4e4d-b774-ca1ea9e0c39a" valueTypeId="daa16c66-e34f-4a89-994a-a9556d3e5ffb"/>
+    <recordType typeId="d60c83d1-61f1-406a-9810-0ae82c138a63" valueTypeId="7977f4d5-716f-4e6e-8e5b-9fb9ac4678b7"/>
+  </producedTypes>
+  <name>T1040B_RowIDSerialLotNumbers</name>
+  <synonym>
+    <key>en</key>
+    <value>T 1040 Row ID Serial lot numbers</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="06988083-5d72-47bf-b20f-e3697da731f4">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="8358c1c2-4b22-4bf4-afa6-1e1171387a9e">
+    <name>RowID</name>
+    <synonym>
+      <key>en</key>
+      <value>Row ID</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="1ccb68c3-0ceb-46ce-8ffd-ec98d5f0a3b1">
+    <name>Basis</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis</value>
+    </synonym>
+    <type>
+      <types>DocumentRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ce6b6940-61d6-4e7c-a783-c1db330c5716">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

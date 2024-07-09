@@ -469,9 +469,9 @@ Scenario: _053009 create Bank payment based on Sales return
 		And I click "Bank payment" button
 	* Check creation
 		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   Posting status: New   "
 		Then the form attribute named "DecorationGroupTitleUncollapsedPicture" became equal to "DecorationGroupTitleUncollapsedPicture"
-		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   "
+		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return to customer   Posting status: New   "
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to ""
 		Then the form attribute named "TransactionType" became equal to "Return to customer"

@@ -789,6 +789,11 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute: %1 : %2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute will be remove'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en = 'Not filled Tag-Attribute: %1%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en = 'Attribute will be set'", Lang));
+	
 #EndRegion
 
 #Region Equipment

@@ -1638,7 +1638,6 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 					
 					For Each Row In TableOfJEDocuments Do
 						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
-						CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "DataTable", NewMovement);
 						Row.JEDocument.DeletionMark = Row.BasisDocument.DeletionMark;
 						Row.JEDocument.Write(DocumentWriteMode.Write);
 					EndDo;							

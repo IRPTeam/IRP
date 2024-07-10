@@ -3457,3 +3457,141 @@ Scenario: _0991200 write empty JE with problems (without accounting settings)
 			| '$NumberEmptyJE$'    |
 		And I close all client application windows
 
+Scenario: _0991210 edit accounting manualy (document with tabular part)
+	And I close all client application windows
+	* Select document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '7'      |
+		And I select current line in "List" table	
+	* Create JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "05.12.2023 12:00:00" | "5301"       | "1" | "88,00"  | ""              | "Yes"      | "TRY"             | "VAT"                | "88"           | ""                    | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)"                  | "№31-92"              | "88"            | ""                    |
+			| "05.12.2023 12:00:00" | "3540"       | "2" | "440,00" | "4"             | "Yes"      | "TRY"             | "Item with item key" | "440"          | "S/Color 1"           | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)" | "№31-92"              | "440"           | ""                    |
+	* Edit accounting in document
+		When in opened panel I select "Purchase invoice 7 dated 05.12.2023 12:00:00"
+		* First
+			And in the table "ItemList" I click "Edit accounting" button
+			And I go to line in "AccountingAnalytics" table
+				| "Credit" | "Debit" |
+				| "5201"   | "3540"  |
+			And I select current line in "AccountingAnalytics" table
+			And I select "3530" from "Debit" drop-down list by string in "AccountingAnalytics" table
+			And I finish line editing in "AccountingAnalytics" table
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Purchase invoice 7 dated 05.12.2023 12:00:00"
+			Then "JE Purchase invoice * dated *" window is opened
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+				| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+				| "05.12.2023 12:00:00" | "5301"       | "1" | "88,00"  | ""              | "Yes"      | "TRY"             | "VAT"                | "88"           | ""                    | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)"                  | "№31-92"              | "88"            | ""                    |
+				| "05.12.2023 12:00:00" | "3530"       | "2" | "440,00" | "4"             | "Yes"      | "TRY"             | "Item with item key" | "440"          | "S/Color 1"           | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)" | "№31-92"              | "440"           | ""                    |
+		* Second
+			When in opened panel I select "Purchase invoice 7 dated 05.12.2023 12:00:00"	
+			And in the table "ItemList" I click "Edit accounting" button
+			Then "Edit accounting" window is opened
+			And I go to line in "AccountingAnalytics" table
+				| "Credit" | "Debit" |
+				| "5201"   | "5301"  |	
+			And I select current line in "AccountingAnalytics" table
+			And I select "5302" from "Debit" drop-down list by string in "AccountingAnalytics" table
+			And I finish line editing in "AccountingAnalytics" table
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Purchase invoice 7 dated 05.12.2023 12:00:00"
+			Then "JE Purchase invoice * dated *" window is opened
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+				| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+				| "05.12.2023 12:00:00" | "5302"       | "1" | "88,00"  | ""              | "Yes"      | "TRY"             | "VAT"                | "88"           | ""                    | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)"                  | "№31-92"              | "88"            | ""                    |
+				| "05.12.2023 12:00:00" | "3530"       | "2" | "440,00" | "4"             | "Yes"      | "TRY"             | "Item with item key" | "440"          | "S/Color 1"           | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)" | "№31-92"              | "440"           | ""                    |		
+		* Reset	
+			When in opened panel I select "Purchase invoice 7 dated 05.12.2023 12:00:00"
+			And in the table "ItemList" I click "Edit accounting" button
+			And I click "Refresh" button
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Purchase invoice 7 dated 05.12.2023 12:00:00"
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"    | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"          | "Operation"                                                                                  | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "05.12.2023 12:00:00" | "5301"       | "1" | "88,00"  | ""              | "Yes"      | "TRY"             | "VAT"                | "88"           | ""                    | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)"                  | "№31-92"              | "88"            | ""                    |
+			| "05.12.2023 12:00:00" | "3540"       | "2" | "440,00" | "4"             | "Yes"      | "TRY"             | "Item with item key" | "440"          | "S/Color 1"           | ""                | ""                    | "TRY"            | "5201"       | "Vendor 3 (1 partner term)" | "PurchaseInvoice DR (R4050B_StockInventory_R5022T_Expenses) CR (R1021B_VendorsTransactions)" | "№31-92"              | "440"           | ""                    |
+		And I close all client application windows
+
+Scenario: _0991211 edit accounting manualy (document without tabular part)
+	And I close all client application windows
+	* Select document
+		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table	
+	* Create JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "11.03.2023 14:34:06" | "3250"       | "1" | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | "Business unit 3"         | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
+			| "11.03.2023 14:34:06" | "3221"       | "2" | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
+			| "11.03.2023 14:34:06" | "420.5"      | "3" | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |		
+	* Edit accounting in document
+		When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"
+		* First
+			And I click the button named "EditAccounting"				
+			And I go to line in "AccountingAnalytics" table
+				| "Credit" | "Debit" |
+				| "3221"   | "3250"  |
+			And I select current line in "AccountingAnalytics" table
+			And I select "3240" from "Debit" drop-down list by string in "AccountingAnalytics" table
+			And I finish line editing in "AccountingAnalytics" table
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+				| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+				| "11.03.2023 14:34:06" | "3240"       | "1" | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | ""                        | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
+				| "11.03.2023 14:34:06" | "3221"       | "2" | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
+				| "11.03.2023 14:34:06" | "420.5"      | "3" | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |			
+		* Second
+			When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"	
+			And I click the button named "EditAccounting"	
+			Then "Edit accounting" window is opened
+			And I go to line in "AccountingAnalytics" table
+				| "Credit" | "Debit" |
+				| "3250"   | "3221"  |	
+			And I select current line in "AccountingAnalytics" table
+			And I select "3260" from "Debit" drop-down list by string in "AccountingAnalytics" table
+			And I finish line editing in "AccountingAnalytics" table
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+				| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+				| "11.03.2023 14:34:06" | "3240"       | "1" | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | ""                        | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
+				| "11.03.2023 14:34:06" | "3260"       | "2" | "2 003,76" | ""              | "Yes"      | "EUR"             | ""                  | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
+				| "11.03.2023 14:34:06" | "420.5"      | "3" | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |			
+		* Reset	
+			When in opened panel I select "Money transfer 2 dated 11.03.2023 14:34:06"
+			And I click the button named "EditAccounting"	
+			And I click "Refresh" button
+			And I click "Ok" button
+			And I click "Post" button
+			When in opened panel I select "JE Money transfer 2 dated 11.03.2023 14:34:06"
+			And I click "Save" button
+			And "RegisterRecords" table became equal
+				| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"   | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr"     | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"  | "Operation"                                                      | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+				| "11.03.2023 14:34:06" | "3250"       | "1" | "1 921,27" | ""              | "Yes"      | "USD"             | "Bank account, USD" | "102"          | "Own company 2"       | ""                | "Business unit 3"         | "USD"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R3010B_CashOnHand) CR (R3021B_CashInTransit)" | "Own company 2"       | "102"           | ""                    |
+				| "11.03.2023 14:34:06" | "3221"       | "2" | "2 003,76" | ""              | "Yes"      | "EUR"             | "Transit, TRY"      | "100"          | "Own company 2"       | ""                | ""                        | "EUR"            | "3250"       | "Bank account, EUR" | "MoneyTransfer DR (R3021B_CashInTransit) CR (R3010B_CashOnHand)" | "Own company 2"       | "100"           | "Business unit 3"     |
+				| "11.03.2023 14:34:06" | "420.5"      | "3" | "82,49"    | ""              | "Yes"      | "TRY"             | ""                  | "82,49"        | "Business unit 3"     | ""                | "Foreign exchange losses" | "TRY"            | "3221"       | "Transit, TRY"      | "MoneyTransfer DR (R5022T_Expenses) CR (R3021B_CashInTransit)"   | "Own company 2"       | "82,49"         | ""                    |		
+		And I close all client application windows
+					
+				
+				

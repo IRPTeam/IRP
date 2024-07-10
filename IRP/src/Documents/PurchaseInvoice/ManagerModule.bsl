@@ -365,7 +365,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		when BatchKeysInfo.TotalQuantity <> 0
 	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
 	|		else 0
-	|	end as AmountTax,
+	|	end as InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -428,7 +429,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -986,13 +987,21 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	ItemList.TaxAmount AS Amount
+		|	SUM(ItemList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
 		|	ItemList.IsPurchase
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1342,9 +1351,7 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*,
-		   |	BatchKeysInfo.Amount AS InvoiceAmount, 
-		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
+		   |	*
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo

@@ -211,10 +211,10 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ReceiptFromConsignor.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 	|	ReceiptFromConsignor.Key AS Key,
-	|	SUM(ReceiptFromConsignor.Amount) AS Amount,
+	|	SUM(ReceiptFromConsignor.Amount) AS InvoiceAmount,
 	|	ReceiptFromConsignor.Currency AS Currency,
 	|	Value(ChartOfCharacteristicTypes.CurrencyMovementType.EmptyRef) AS CurrencyMovementType,
-	|	SUM(ReceiptFromConsignor.AmountTax) AS AmountTax,
+	|	SUM(ReceiptFromConsignor.AmountTax) AS InvoiceTaxAmount,
 	|	CASE
 	|		WHEN ReceiptFromConsignor.SerialLotNumber.BatchBalanceDetail
 	|			THEN ReceiptFromConsignor.SerialLotNumber
@@ -274,7 +274,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -1670,8 +1670,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SerialLotNumber,
 		|	BatchKeysInfo.SourceOfOrigin,
 		|	SUM(BatchKeysInfo.Quantity) AS Quantity,
-		|	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
-		|	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount
+		|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount
 		|FROM
 		|	BatchKeysInfo AS BatchKeysInfo
 		|WHERE
@@ -2053,13 +2053,23 @@ Function R2040B_TaxesIncoming()
 		|	TaxesIncoming.Currency,
 		|	TaxesIncoming.TaxRate,
 		|	TaxesIncoming.InvoiceType,
-		|	TaxesIncoming.Amount,
+		|	SUM(TaxesIncoming.Amount) AS Amount,
 		|	TaxesIncoming.Tax
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	TaxesIncoming AS TaxesIncoming
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	TaxesIncoming.Key,
+		|	TaxesIncoming.Period,
+		|	TaxesIncoming.Company,
+		|	TaxesIncoming.Branch,
+		|	TaxesIncoming.Currency,
+		|	TaxesIncoming.TaxRate,
+		|	TaxesIncoming.InvoiceType,
+		|	TaxesIncoming.Tax";
 EndFunction
 
 Function R1040B_TaxesOutgoing()
@@ -2073,13 +2083,23 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesOutgoing.Currency,
 		|	TaxesOutgoing.TaxRate,
 		|	TaxesOutgoing.InvoiceType,
-		|	TaxesOutgoing.Amount,
+		|	SUM(TaxesOutgoing.Amount) AS Amount,
 		|	TaxesOutgoing.Tax
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	TaxesOutgoing AS TaxesOutgoing
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	TaxesOutgoing.Key,
+		|	TaxesOutgoing.Period,
+		|	TaxesOutgoing.Company,
+		|	TaxesOutgoing.Branch,
+		|	TaxesOutgoing.Currency,
+		|	TaxesOutgoing.TaxRate,
+		|	TaxesOutgoing.InvoiceType,
+		|	TaxesOutgoing.Tax";
 EndFunction
 
 #EndRegion

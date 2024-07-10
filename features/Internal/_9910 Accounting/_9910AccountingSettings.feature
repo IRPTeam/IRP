@@ -2992,7 +2992,7 @@ Scenario: _0991150 check Retail sales receipt accounting movements
 			| '25.02.2023 15:00:00' | '420.1'      | '2' | '100,00' | ''              | 'Yes'      | 'TRY'             | 'Item with item key' | '100'          | 'Business unit 3'     | '2'               | 'Purchase of goods for sale' | 'TRY'            | '3540'       | 'Item with item key' | 'RetailSalesReceipt DR (R5022T_Expenses) CR (R4050B_StockInventory)' | 'XS/Color 2'          | '100'           | 'Business unit 3'     |			
 	And I close all client application windows
 
-Scenario: _0991160 check Employee cash advance accounting movements (with PI)
+Scenario: _0991160 check Employee cash advance accounting movements (with PI and VAT)
 	And I close all client application windows
 	* Select EmployeeCashAdvance
 		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
@@ -3035,9 +3035,35 @@ Scenario: _0991161 check Employee cash advance accounting movements (without PI,
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
-			| 'Period'              | 'Account Dr' | '#' | 'Amount'   | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '01.07.2023 00:00:00' | '420.2'      | '1' | '1 000,00' | ''              | 'Yes'      | 'TRY'             | 'Employee 1'      | '1 000'        | 'Business unit 1'     | ''                | 'Other expence'       | 'TRY'            | '4020.1'     | 'Employee 1'       | 'EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)' | 'Business unit 1'     | '1 000'         | ''                    |
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                     | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "01.07.2023 00:00:00" | "5301"       | "1" | "166,67" | ""              | "Yes"      | "TRY"             | "VAT"             | "166,67"       | "Business unit 1"     | ""                | ""                    | "TRY"            | "4020.1"     | "Employee 1"       | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" | "Business unit 1"     | "166,67"        | ""                    |
+			| "01.07.2023 00:00:00" | "420.2"      | "2" | "833,33" | ""              | "Yes"      | "TRY"             | "Employee 1"      | "833,33"       | "Business unit 1"     | ""                | "Other expence"       | "TRY"            | "4020.1"     | "Employee 1"       | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      | "Business unit 1"     | "833,33"        | ""                    |		
 		And I close all client application windows
+
+Scenario: _0991162 check Employee cash advance accounting movements (without PI and VAT)
+	And I close all client application windows
+	* Select EmployeeCashAdvance
+		Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And in the table "PaymentList" I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| "Debit" | "Partner"    | "Business unit"   | "Expense and revenue type" | "Credit" | " " | "Operation"                                                                     |
+			| "420.2" | "Employee 2" | "Business unit 1" | "Other expence"            | "4020.1" | ""  | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)"      |
+			| "5301"  | "Employee 2" | "Business unit 1" | ""                         | "4020.1" | ""  | "EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)" |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit" | "Debit amount" | "Extra dimension2 Dr" | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit" | "Operation"                                                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "01.08.2023 12:00:00" | "420.2"      | "1" | "500,00" | ""              | "Yes"      | "TRY"             | "Employee 2"      | "500"          | "Business unit 1"     | ""                | "Other expence"       | "TRY"            | "4020.1"     | "Employee 2"       | "EmployeeCashAdvance DR (R5022T_Expenses) CR (R3027B_EmployeeCashAdvance)" | "Business unit 1"     | "500"           | ""                    |		
+		And I close all client application windows
+	
 
 Scenario: _0991170 check Expense accruals accounting movements (without basis)
 	And I close all client application windows

@@ -2416,13 +2416,13 @@ Scenario: Create catalog SpecialOfferTypes objects (Test)
 
 	And I check or create catalog "SpecialOfferTypes" objects:
 		| 'Ref'                                                                        | 'DeletionMark'  | 'Code'  | 'Settings'      | 'ExternalDataProc'  | 'TermsOfDiscountCalculation'  | 'GroupTypes'  | 'Description_en'        | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8'  | 'False'         | '1'     | 'ValueStorage'  | ''                  | 'False'                       | 'False'       | 'Test special offer01'  | ''                  | ''                | ''                 |
+		| 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8'  | 'False'         | '51'    | 'ValueStorage'  | ''                  | 'False'                       | 'False'       | 'Test special offer01'  | ''                  | ''                | ''                 |
 
 Scenario: Create catalog SpecialOffers objects (Test)
 
 	And I check or create catalog "SpecialOffers" objects:
 		| 'Ref'                                                                    | 'DeletionMark'  | 'Parent'  | 'IsFolder'  | 'Code'  | 'Settings'      | 'SpecialOfferType'                                                           | 'Priority'  | 'Manually'  | 'StartOf'              | 'EndOf'                | 'Launch'  | 'ManualInputValue'  | 'Type'                                | 'DocumentType'                    | 'Description_en'        | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.SpecialOffers?ref=aa7d120ed92fbced11eb096728fa8ee9'  | 'False'         | ''        | 'False'     | '1'     | 'ValueStorage'  | 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8'  | '2'         | 'False'     | '01.01.0001 00:00:00'  | '01.01.0001 00:00:00'  | 'False'   | 'False'             | 'Enum.SpecialOfferTypes.ForDocument'  | 'Enum.OffersDocumentTypes.Sales'  | 'Test special offer01'  | ''                  | ''                | ''                 |
+		| 'e1cib/data/Catalog.SpecialOffers?ref=aa7d120ed92fbced11eb096728fa8ee9'  | 'False'         | ''        | 'False'     | '51'    | 'ValueStorage'  | 'e1cib/data/Catalog.SpecialOfferTypes?ref=aa7d120ed92fbced11eb096728fa8ee8'  | '2'         | 'False'     | '01.01.0001 00:00:00'  | '01.01.0001 00:00:00'  | 'False'   | 'False'             | 'Enum.SpecialOfferTypes.ForDocument'  | 'Enum.OffersDocumentTypes.Sales'  | 'Test special offer01'  | ''                  | ''                | ''                 |
 
 Scenario: Create catalog CashStatementStatuses objects (Test)
 

@@ -450,11 +450,11 @@ Scenario: _0510012 check form for select basis document
 		And I select current line in "PaymentList" table
 		And "List" table contains lines
 			| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '136 000,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 887,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 			| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 		And I go to line in "List" table
 			| 'Amount'         |
-			| '136 000,00'     |
+			| '135 887,45'     |
 		And I click "Select" button
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -477,7 +477,7 @@ Scenario: _0510012 check form for select basis document
 		And I select current line in "PaymentList" table
 		And "List" table contains lines
 			| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 787,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 			| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 		And I close current window
 	* Check forms DocumentsForIncomingPayment
@@ -491,7 +491,7 @@ Scenario: _0510012 check form for select basis document
 		And I select current line in "PaymentList" table
 		And "List" table contains lines
 			| 'Document'               | 'Company'         | 'Partner'      | 'Amount'        | 'Legal name'           | 'Partner term'          | 'Currency'     |
-			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 900,00'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
+			| 'Purchase invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '135 787,45'    | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 			| 'Purchase invoice 2*'    | 'Main Company'    | 'Ferron BP'    | '13 000,00'     | 'Company Ferron BP'    | 'Vendor Ferron, TRY'    | 'TRY'          |
 		And I close current window
 		And I input "{CurrentDate() - 86401}" text in the field named "Date"
@@ -713,7 +713,7 @@ And I close all client application windows
 		And "Documents" table became equal
 			| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 			| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
-			| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '136 000,00' | ''        |
+			| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 887,45' | ''        |
 			| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | ''        |
 		And I close current window
 	* With branch
@@ -764,14 +764,14 @@ And I close all client application windows
 	* Select lines and check allocation	
 		And I go to line in "Documents" table
 			| 'Amount'     | 'Document'                  |
-			| '136 000,00' | '$$PurchaseInvoice018001$$' |
+			| '135 887,45' | '$$PurchaseInvoice018001$$' |
 		And I move one line down in "Documents" table and select line
-		And I input "149 000,00" text in the field named "Amount"
+		And I input "148 900,00" text in the field named "Amount"
 		And I click the button named "Calculate"
 		And "Documents" table became equal
 			| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
 			| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
-			| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '136 000,00' | '136 000,00' |
+			| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 887,45' | '135 887,45' |
 			| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '13 000,00'  |
 		And I click "Ok" button
 		And "PaymentList" table became equal
@@ -781,8 +781,8 @@ And I close all client application windows
 			| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
 			| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       |
 			| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | ''        | ''                                             | '100,00'       |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '136 000,00'   |
-			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '12 900,00'    |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '135 887,45'   |
+			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '12 912,55'    |
 	And I close all client application windows
 
 Scenario: _050018 check amount when create CP based on PI (partner term - by documents)
@@ -797,7 +797,7 @@ And I close all client application windows
 * Check amount (document balance)
 	And "PaymentList" table became equal
 		| '#' | 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'            | 'Project' | 'Order'                   | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-		| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$' | ''        | '$$PurchaseOrder017001$$' | '136 000,00'   | ''                        | ''                 | ''                           |
+		| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$' | ''        | '$$PurchaseOrder017001$$' | '135 887,45'   | ''                        | ''                 | ''                           |
 And I close all client application windows
 
 

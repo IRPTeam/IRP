@@ -428,21 +428,24 @@ Scenario: _0401574 check there is no Sales order movements by the Register  "R30
 			| 'Document registrations records'             |
 		And I close all client application windows
 
-Scenario: _0401573 Sales order clear posting/mark for deletion
-	* Select Sales order closing
+Scenario: _0401573 Sales order clear posting/mark for deletion + check posting status
+	* Select Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'    |
 			| '1'         |
+		And I select current line in "List" table
+		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Posted   " text
 	* Clear posting
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		And I click "Cancel posting" button	
+		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Not posted   " text
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Sales order 1 dated 27.01.2021 19:50:45'    |
 			| 'Document registrations records'             |
-		And I close current window
+		And I close all client application windows
 	* Post Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -462,16 +465,18 @@ Scenario: _0401573 Sales order clear posting/mark for deletion
 		And I go to line in "List" table
 			| 'Number'    |
 			| '1'         |
-		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		And I select current line in "List" table
+		And I click "Mark for deletion / Unmark for deletion" button
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
+		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Deleted   " text
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Sales order 1 dated 27.01.2021 19:50:45'    |
 			| 'Document registrations records'             |
-		And I close current window
+		And I close all client application windows
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table

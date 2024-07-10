@@ -80,7 +80,21 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		
 		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-		ItemOfPostingInfo.PrepareTable = ExpandTable(TempTablesManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin);
+		UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
+		
+		PrepareTable = ItemOfPostingInfo.PrepareTable;
+		If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+			FullTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(PrepareTable, ItemOfPostingInfo.Metadata, "RowKey");	
+			GroupedTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			
+			Table = AlignTables(FullTable, GroupedTable);
+					
+		Else
+			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata);
+		EndIf;
+		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
 					
 		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
 							
@@ -188,12 +202,12 @@ Procedure AddAmountsColumns(RecordSet, ColumnName)
 	EndIf;
 EndProcedure
 
-Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin)
+Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurrencyJoin, UseKey)
 	
 	ArrayOfRecourceNames = GetArrayOfResourceNames();
 	
 	For Each ResourceName In ArrayOfRecourceNames Do
-		AddAmountsColumns(ItemOfPostingInfo.PrepareTable, ResourceName);
+		AddAmountsColumns(Table, ResourceName);
 	EndDo;
 	
 	Query = New Query();
@@ -369,66 +383,150 @@ Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementTy
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
-	UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
-	If Not UseKey Then
-		ItemOfPostingInfo.PrepareTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
+	If Not UseKey And Table.Columns.Find("Key") = Undefined Then
+		Table.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 
-	Query.SetParameter("RecordSet", ItemOfPostingInfo.PrepareTable);
+	Query.SetParameter("RecordSet", Table);
 	Query.SetParameter("UseKey", UseKey);
 	Query.SetParameter("UseAgreementMovementType", UseAgreementMovementType);
 	Query.SetParameter("UseCurrencyJoin", UseCurrencyJoin);
 	QueryResults = Query.ExecuteBatch();
 	QueryTable = QueryResults[1].Unload();
 	
-	SetTransactionCurrency(QueryTable, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
+//	SetTransactionCurrency(QueryTable, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
 	
 	Return QueryTable;
 EndFunction
 
-Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
-	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
-		Return;
-	EndIf;
+Function AlignTables(FullTable, GroupedTable)
+
+	ArrayOfCurrencyMovementTypes = New Array();
+	For Each Row In GroupedTable Do
+		If ArrayOfCurrencyMovementTypes.Find(Row.CurrencyMovementType) = Undefined Then
+			ArrayOfCurrencyMovementTypes.Add(Row.CurrencyMovementType);
+		EndIf;
+	EndDo;
+		
+	For Each CurrencyMovementType In ArrayOfCurrencyMovementTypes Do
+		Filter = New Structure("CurrencyMovementType", CurrencyMovementType);
+			
+		// sum full table resources
+		FullTableRows = FullTable.FindRows(Filter);
+		TotalsFullTable = New Structure();
+			
+		For Each Row In FullTableRows Do
+			For Each ResourceName In GetArrayOfResourceNames() Do
+				If CommonFunctionsClientServer.ObjectHasProperty(Row, ResourceName) Then
+					If TotalsFullTable.Property(ResourceName) Then
+						TotalsFullTable[ResourceName] = TotalsFullTable[ResourceName] + Row[ResourceName];
+					Else
+						TotalsFullTable.Insert(ResourceName, Row[ResourceName]);
+					EndIf;
+				EndIf;
+			EndDo;
+		EndDo;
+			
+		// sum grouped table resources
+		GroupedTableRows = GroupedTable.FindRows(Filter);			
+		TotalsGroupedTable = New Structure();
+			
+		For Each Row In GroupedTableRows Do
+			For Each ResourceName In GetArrayOfResourceNames() Do
+				If CommonFunctionsClientServer.ObjectHasProperty(Row, ResourceName) Then
+					If TotalsGroupedTable.Property(ResourceName) Then
+						TotalsGroupedTable[ResourceName] = TotalsGroupedTable[ResourceName] + Row[ResourceName];
+					Else
+						TotalsGroupedTable.Insert(ResourceName, Row[ResourceName]);
+					EndIf;
+				EndIf;
+			EndDo;
+		EndDo;
+			
+		// compare resource amounts
+		For Each KeyValue In TotalsGroupedTable Do
+			ResourceName = KeyValue.Key;
+				
+			Difference = TotalsGroupedTable[ResourceName] - TotalsFullTable[ResourceName];
+			If Difference <> 0 Then
+				// find max row in full table
+				MaxRow = Undefined;
+				
+				For Each Row In FullTableRows Do
+					If MaxRow = Undefined Then
+						MaxRow = Row;
+					Else
+						If MaxRow[ResourceName] < Row[ResourceName] Then
+							MaxRow = Row;
+						EndIf;
+					EndIf;
+				EndDo;
+				
+				If MaxRow <> Undefined Then
+					MaxRow[ResourceName] = MaxRow[ResourceName] + Difference;
+				EndIf;
+			EndIf;
+		EndDo; // TotalsGroupedTable
+			
+	EndDo;
 	
+	Return FullTable;
+EndFunction
+
+Procedure GroupTableByAllDimensions(Table, RegMetadata, ExcludeDimensions = "")
 	GroupColumns = New Array(); 
 	SummColumn = New Array();
 	
-	If ExpandTable.Columns.Find("Key") <> Undefined Then
+	ArrayOfExludeDimensions = StrSplit(Lower(ExcludeDimensions), ",");
+	
+	If Table.Columns.Find("Key") <> Undefined Then
 		GroupColumns.Add("Key");
 	EndIf;
 	
 	For Each Field In RegMetadata.Dimensions Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If ArrayOfExludeDimensions.Find(Lower(Field.Name)) <> Undefined Then
+			Continue;
+		EndIf;
+		
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;
 	EndDo;
 	
 	For Each Field In RegMetadata.Attributes Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;		
 	EndDo;
 	
 	For Each Field In RegMetadata.StandardAttributes Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;		
 	EndDo;
 	
 	For Each Field In RegMetadata.Resources Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			SummColumn.Add(Field.Name)
 		EndIf;				
 	EndDo;
 	
-	ExpandTable.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
+	Table.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
+EndProcedure
+
+Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
+	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
+		Return ExpandTable;
+	EndIf;
+	
+//	GroupTableByAllDimensions(ExpandTable, RegMetadata);
 	
 	TrnRows = ExpandTable.FindRows(New Structure("CurrencyMovementType", 
 		ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
 	
 	If TrnRows.Count() = 0 Then
-		Return;
+		Return ExpandTable;
 	EndIf;		
 	
 	ExcludeDimensions = New Array();
@@ -521,7 +619,9 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 			Row.TransactionCurrency = TrnRow.Currency;
 		EndDo;
 	EndDo;
-EndProcedure
+	
+	Return ExpandTable;
+EndFunction
 
 Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;

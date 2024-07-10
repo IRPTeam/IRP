@@ -47,6 +47,7 @@ Scenario: _099100 preparation
 		When Create catalog CurrencyMovementSets objects (test data base)
 		When Create catalog ObjectStatuses objects (test data base)
 		When Create catalog PartnerSegments objects (test data base)
+		When Create catalog LegalNameContracts objects (test data base)
 		When Create catalog Agreements objects (test data base)
 		When Create catalog Partners objects (test data base)
 		When Create catalog PartnersBankAccounts objects (test data base)
@@ -3423,4 +3424,36 @@ Scenario: _0991199 check create JE from Data processor fix document problems
 		And in the table "DocumentList" I click "Fill documents" button
 		Then the number of "DocumentList" table lines is "больше" "10"
 
+
+Scenario: _0991200 write empty JE with problems (without accounting settings)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		And Delay 5
+		Then "Update item list info" window is opened
+		And I click "Uncheck all" button
+		And I click "OK" button
+		And I select from the drop-down list named "Company" by "Own company 3" string
+		And I activate field named "ItemListLineNumber" in "ItemList" table
+		And I click "Post" button
+	* Create JE
+		And I click "Journal entry" button
+		Then "Journal entry (create)" window is opened
+		And I click "Save" button
+		And "Errors" table contains rows by template:
+			| "#" | "Error"                                                                                                                              |
+			| "1" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)] *" |
+			| "2" | "Debit is empty [SalesInvoice DR (R2021B_CustomersTransactions) CR (R5021T_Revenues)] *" |		
+		And I save the value of "Number" field as "NumberEmptyJE"
+		And I click the button named "FormWriteAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.JournalEntry"
+		And "List" table contains lines
+			| 'Number'             |
+			| '$NumberEmptyJE$'    |
+		And I close all client application windows
 

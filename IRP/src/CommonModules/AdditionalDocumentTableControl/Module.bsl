@@ -122,7 +122,9 @@ Function AdditionalTableControl(Document, DocName, ArrayOfErrors)
 						DetailErrors.Add(Str);
 						
 						//	@skip-check invocation-parameter-type-intersect, property-return-type
-						If Row.LineNumber > 0 Then
+						If Row.Key = "0123456789" Then // AddAttributes
+							Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.Attribute, Row.AttributeValue));
+						ElsIf Row.LineNumber > 0 Then
 							Errors.Add(StrTemplate(R()["ATC_" + Column.Name], Row.LineNumber));
 						Else
 							Errors.Add(R()["ATC_" + Column.Name]);
@@ -170,6 +172,9 @@ Procedure AdditionalTableControlForDocumentArray(DocumentArray, Result)
 						DetailError.LineNumber = Row.LineNumber;
 						DetailError.RowKey = Row.Key;
 						DetailError.ErrorID = Column.Name;
+						If DetailError.RowKey = "0123456789" Then
+							DetailError.RowKey = XMLString(Row.Attribute);
+						EndIf;
 						
 						ErrorRow = RefRow.Rows.Add();
 						ErrorRow.Ref = RefRow.Ref;
@@ -219,6 +224,7 @@ Function CheckDocumentsResult(Document, DocName)
 	Tables.Insert("SourceOfOrigins", EmptyTable);
 	Tables.Insert("Payments", EmptyTable);
 	Tables.Insert("PaymentList", EmptyTable);
+	Tables.Insert("AddAttributes", EmptyTable);
 	
 	Tables.ItemList = 
 		?(Result.Tables.ItemList = Undefined, Document.ItemList.Unload(), Result.Tables.ItemList);
@@ -234,6 +240,8 @@ Function CheckDocumentsResult(Document, DocName)
 		?(Result.Tables.Payments = Undefined, Document.Payments.Unload(), Result.Tables.Payments);
 	Tables.PaymentList = 
 		?(Result.Tables.PaymentList = Undefined, Document.PaymentList.Unload(), Result.Tables.PaymentList);
+	Tables.AddAttributes = 
+		?(Result.Tables.AddAttributes = Undefined, Document.AddAttributes.Unload(), Result.Tables.AddAttributes);
 
 	TypeDescriptionArray = New Array; // Array of Type
 	TypeDescriptionArray.Add(TypeOf(Document.Ref));
@@ -247,6 +255,10 @@ Function CheckDocumentsResult(Document, DocName)
 			CurrentTable.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 	EndDo;
+	
+	If Tables.AddAttributes.Count() = 0 Then
+		Tables.AddAttributes.Add();
+	EndIf;
  		
 	Query = New Query(Result.Query);
 	Query.SetParameter("Headers", GetHeaderTable(Document));
@@ -257,14 +269,36 @@ Function CheckDocumentsResult(Document, DocName)
 	Query.SetParameter("SourceOfOrigins", Tables.SourceOfOrigins);
 	Query.SetParameter("Payments", Tables.Payments);
 	Query.SetParameter("PaymentList", Tables.PaymentList);
+	Query.SetParameter("AddAttributes", Tables.AddAttributes);
+	
+	For Each AddParamerKeyValue In Result.AddParameres Do
+		Query.SetParameter(AddParamerKeyValue.Key, AddParamerKeyValue.Value);
+	EndDo;
 	
   	Return Query.ExecuteBatch();
 EndFunction
 
+// Check result for document array.
+// 
+// Parameters:
+//  DocumentArray - Array of DocumentRef - Document array
+// 
+// Returns:
+//  Array - Check result for document array
 Function CheckResultForDocumentArray(DocumentArray)
+	
 	Query = New Query;
 	Query.SetParameter("Refs", DocumentArray);
-	Query.Text = AdditionalDocumentTableControlReuse.GetQueryForDocumentArray(DocumentArray[0].Metadata().Name);
+	
+	MetaDoc = DocumentArray[0].Metadata();
+	Query.Text = AdditionalDocumentTableControlReuse.GetQueryForDocumentArray(MetaDoc.Name);
+	
+	If MetaDoc.TabularSections.Find("AddAttributes") <> Undefined Then
+		AddAttributesSetName = StrReplace(MetaDoc.FullName(), ".", "_"); 
+		AddAttributesSetRef = Catalogs.AddAttributeAndPropertySets[AddAttributesSetName];
+		Query.SetParameter("AddAttributesSetRef", AddAttributesSetRef);
+	EndIf;
+ 	
  	Return Query.ExecuteBatch();
 EndFunction
 
@@ -380,6 +414,7 @@ Function QuickFixArray(ProblemsList, IsJob) Export
 	Count = 0;
 	LastPercentLogged = 0;
 	StartDate = CurrentUniversalDateInMilliseconds();
+	//@skip-check property-return-type
 	For Each Doc In ProblemsList Do
 		For Each Problem In Doc.Value Do
 			Result = New Structure;
@@ -400,6 +435,7 @@ Function QuickFixArray(ProblemsList, IsJob) Export
 				BackgroundJobAPIServer.NotifyStream(Msg);
 				
 			EndTry;
+			//@skip-check typed-value-adding-to-untyped-collection
 			ResultArray.Add(Result);
 		EndDo;
 		
@@ -750,6 +786,15 @@ Function ErrorNotFilledUnit(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled inventory origin.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledInventoryOrigin(Document, RowIDList)
 	Result = New Array; // Array of String
 	If RowIDList.Count() = 0 Then
@@ -774,6 +819,15 @@ Function ErrorNotFilledInventoryOrigin(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled payment method.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledPaymentMethod(Document, RowIDList)
 	Result = New Array; // Array of String
 	DocObject = Document.GetObject(); // DocumentObject.RetailSalesReceipt
@@ -786,6 +840,15 @@ Function ErrorNotFilledPaymentMethod(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled purchase transaction type.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledPurchaseTransactionType(Document, RowIDList)
 	Result = New Array; // Array of String
 	DocObject = Document.GetObject(); // DocumentObject.PurchaseInvoice
@@ -798,6 +861,15 @@ Function ErrorNotFilledPurchaseTransactionType(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled sales transaction type.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledSalesTransactionType(Document, RowIDList)
 	Result = New Array; // Array of String
 	DocObject = Document.GetObject(); // DocumentObject.SalesInvoice
@@ -810,6 +882,15 @@ Function ErrorNotFilledSalesTransactionType(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled sales return transaction type.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledSalesReturnTransactionType(Document, RowIDList)
 	Result = New Array; // Array of String
 	DocObject = Document.GetObject(); // DocumentObject.SalesReturn
@@ -822,6 +903,15 @@ Function ErrorNotFilledSalesReturnTransactionType(Document, RowIDList)
 	Return Result;
 EndFunction
 
+// Error not filled purchase return transaction type.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  RowIDList - Array Of String - Row IDList
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
 Function ErrorNotFilledPurchaseReturnTransactionType(Document, RowIDList)
 	Result = New Array; // Array of String
 	DocObject = Document.GetObject(); // DocumentObject.PurchaseReturn
@@ -831,6 +921,101 @@ Function ErrorNotFilledPurchaseReturnTransactionType(Document, RowIDList)
 	Else
 		DocObject.Write(DocumentWriteMode.Write);
 	EndIf;
+	Return Result;
+EndFunction
+
+// Error add attributes is unknow attribute.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  AttribureUUIDList - Array Of String - Array of UUID
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorAddAttributesIsUnknowAttribute(Document, AttribureUUIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.PurchaseReturn
+	
+	AttributesArray = New Array; // Array of ChartOfCharacteristicTypesRef.AddAttributeAndProperty
+	For Each AttribureUUID In AttribureUUIDList Do
+		AttributesArray.Add(ChartsOfCharacteristicTypes.AddAttributeAndProperty.GetRef(New UUID(AttribureUUID)));
+	EndDo;
+	
+	RowForDeleting = New Array; // Array of LineOfATabularSection
+	For Each AddAttributeRow In DocObject.AddAttributes Do
+		If AttributesArray.Find(AddAttributeRow.Property) <> Undefined Then
+			RowForDeleting.Add(AddAttributeRow);
+		EndIf;
+	EndDo;
+	For Each AddAttributeRow In RowForDeleting Do
+		DocObject.AddAttributes.Delete(AddAttributeRow);
+	EndDo;
+	
+	DocObject.DataExchange.Load = True;
+	DocObject.Write(DocumentWriteMode.Write);
+	Return Result;
+EndFunction
+
+// Error add attributes not set tag.
+// 
+// Parameters:
+//  Document - DocumentRefDocumentName - Document
+//  AttribureUUIDList - Array Of String - Array of UUID 
+// 
+// Returns:
+//  Array of String
+//@skip-check module-unused-method
+Function ErrorAddAttributesNotSetTag(Document, AttribureUUIDList)
+	Result = New Array; // Array of String
+	DocObject = Document.GetObject(); // DocumentObject.PurchaseReturn
+	
+	AttributesArray = New Array; // Array of ChartOfCharacteristicTypesRef.AddAttributeAndProperty
+	For Each AttribureUUID In AttribureUUIDList Do
+		AttributesArray.Add(ChartsOfCharacteristicTypes.AddAttributeAndProperty.GetRef(New UUID(AttribureUUID)));
+	EndDo;
+	
+	FormInfo = New Structure();
+	FormInfo.Insert("Ref", Document);
+	FormInfo.Insert("Metadata", Document.Metadata());
+	FormInfo.Insert("IsNew", False);
+	FormInfo.Insert("AddAttributes", DocObject.AddAttributes);
+	FormInfo.Insert("ExternalDataSet", New ValueTable());
+
+	AddAttributeAndPropertySetName = AddAttributesAndPropertiesServer.AddAttributeAndPropertySetName(Document);
+	ObjectAttributes = AddAttributesAndPropertiesServer.ObjectAttributes(FormInfo, AddAttributeAndPropertySetName);
+	
+	For Each Row In ObjectAttributes Do
+		AttributeInfo = AddAttributesAndPropertiesServer.AttributeAndPropertyInfo(Row);
+		
+		If AttributesArray.Find(AttributeInfo.Ref) = Undefined Then
+			Continue;
+		EndIf;
+		
+		If AttributeInfo.Collection And AttributeInfo.isTag Then
+			OldRows = DocObject.AddAttributes.FindRows(New Structure("Property", AttributeInfo.Ref));
+			For Each OldRow In OldRows Do
+				DocObject.AddAttributes.Delete(OldRow);
+			EndDo;
+			
+			Parts = StrSplit(AttributeInfo.PathForTag, ".");
+			//@skip-check variable-value-type, dynamic-access-method-not-found
+			CopyTable = DocObject[Parts[0]].Unload(); // ValueTable
+			CopyTable.GroupBy(Parts[1]);
+			For Each Attr In CopyTable.UnloadColumn(Parts[1]) Do // String
+				If Not ValueIsFilled(Attr) Then
+					Continue;
+				EndIf;
+				AddAttributes = DocObject.AddAttributes;
+				NewAttribute = AddAttributes.Add(); 
+				NewAttribute.Property = AttributeInfo.Ref;
+				NewAttribute.Value = Attr;
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	DocObject.DataExchange.Load = True;
+	DocObject.Write(DocumentWriteMode.Write);
 	Return Result;
 EndFunction
 

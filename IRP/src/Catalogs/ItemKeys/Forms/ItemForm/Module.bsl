@@ -1,3 +1,4 @@
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
@@ -22,6 +23,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 	EndIf;
 	ThisObject.UnitMode = ?(ValueIsFilled(Object.Unit), "Own", "Inherit");
+	ThisObject.PackageUnitMode = ?(ValueIsFilled(Object.PackageUnit), "Own", "Inherit");
 	ThisObject.ConsignorInfoMode = ?(Object.ConsignorsInfo.Count()>0, "Own", "Inherit");
 	ThisObject.SpecificationMode = ValueIsFilled(Object.Specification);
 	SetVisible();
@@ -126,6 +128,14 @@ Procedure UnitModeOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure PackageUnitModeOnChange(Item)
+	If ThisObject.PackageUnitMode = "Inherit" Then
+		Object.PackageUnit = Undefined;
+	EndIf;
+	SetVisible();
+EndProcedure
+
+&AtClient
 Procedure ConsignorInfoModeOnChange(Item)
 	If ThisObject.ConsignorInfoMode = "Inherit" Then
 		Object.ConsignorsInfo.Clear();
@@ -175,6 +185,9 @@ Procedure SetVisible()
 	Items.OwnUnit.Visible = ThisObject.UnitMode = "Own";
 	Items.InheritUnit.Visible = ThisObject.UnitMode = "Inherit";
 	
+	Items.OwnPackageUnit.Visible = ThisObject.PackageUnitMode = "Own";
+	Items.InheritPackageUnit.Visible = ThisObject.PackageUnitMode = "Inherit";
+	
 	Items.ConsignorsInfo.Visible = ThisObject.ConsignorInfoMode = "Own";
 	Items.InheritConsignorsInfo.Visible = ThisObject.ConsignorInfoMode = "Inherit";
 	
@@ -183,6 +196,7 @@ Procedure SetVisible()
 	Items.SpecificationMode.Visible = Not GetTypeOfItemType(Object.Item) = PredefinedValue("Enum.ItemTypes.Service");
 
 	ThisObject.InheritUnit = ?(ValueIsFilled(Object.Item), Object.Item.Unit, Undefined);
+	ThisObject.InheritPackageUnit = ?(ValueIsFilled(Object.Item), Object.Item.PackageUnit, Undefined);
 	ThisObject.ItemType = ?(ValueIsFilled(Object.Item), Object.Item.ItemType, Undefined);
 EndProcedure
 

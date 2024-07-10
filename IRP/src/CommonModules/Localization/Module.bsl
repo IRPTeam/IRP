@@ -789,6 +789,11 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute: %1 : %2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute will be remove'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en = 'Not filled Tag-Attribute: %1%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en = 'Attribute will be set'", Lang));
+	
 #EndRegion
 
 #Region Equipment
@@ -2156,6 +2161,14 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("AuditLock_002", NStr("en = 'Audit lock (unlock)'", Lang));
 	Strings.Insert("AuditLock_003", NStr("en = 'Access is denied'", Lang));
 	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
+#EndRegion
+	
+#Region DocStatuses
+	Strings.Insert("DocStatus_Name", NStr("en = 'Posting status'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en = 'New'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en = 'Not posted'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en = 'Deleted'", Lang));	
 #EndRegion
 	
 	Return Strings;

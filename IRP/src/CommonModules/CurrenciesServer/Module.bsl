@@ -80,7 +80,30 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		
 		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
 		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-		ItemOfPostingInfo.PrepareTable = ExpandTable(TempTablesManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin);
+		UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
+		
+		IncludeDimensions = "";
+		IncludeDimensionsMap = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IncludeDimensions");
+		If IncludeDimensionsMap <> Undefined Then
+			_IncludeDimensions = IncludeDimensionsMap.Get(ItemOfPostingInfo.Metadata);
+			If _IncludeDimensions <> Undefined Then
+				IncludeDimensions = _IncludeDimensions;
+			EndIf;
+		EndIf;
+		
+		PrepareTable = ItemOfPostingInfo.PrepareTable;
+		If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+			FullTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(PrepareTable, ItemOfPostingInfo.Metadata, UseKey, "RowKey", IncludeDimensions);	
+			GroupedTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			
+			Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
+					
+		Else
+			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
+		EndIf;
+		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
 					
 		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
 							
@@ -177,6 +200,18 @@ Function GetArrayOfResourceNames()
 	ArrayOfRecourceNames.Add("OtherTransaction");
 	ArrayOfRecourceNames.Add("TaxableAmount");
 	ArrayOfRecourceNames.Add("TaxAmount");
+	ArrayOfRecourceNames.Add("InvoiceAmount");
+	ArrayOfRecourceNames.Add("InvoiceTaxAmount");
+	ArrayOfRecourceNames.Add("IndirectCostAmount");
+	ArrayOfRecourceNames.Add("IndirectCostTaxAmount");
+	ArrayOfRecourceNames.Add("ExtraCostAmountByRatio");
+	ArrayOfRecourceNames.Add("ExtraCostTaxAmountByRatio");
+	ArrayOfRecourceNames.Add("ExtraDirectCostAmount");
+	ArrayOfRecourceNames.Add("ExtraDirectCostTaxAmount");
+	ArrayOfRecourceNames.Add("AllocatedCostAmount");
+	ArrayOfRecourceNames.Add("AllocatedCostTaxAmount");
+	ArrayOfRecourceNames.Add("AllocatedRevenueAmount");
+	ArrayOfRecourceNames.Add("AllocatedRevenueTaxAmount");
 	
 	Return ArrayOfRecourceNames;
 EndFunction
@@ -188,12 +223,12 @@ Procedure AddAmountsColumns(RecordSet, ColumnName)
 	EndIf;
 EndProcedure
 
-Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementType, UseCurrencyJoin)
+Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurrencyJoin, UseKey)
 	
 	ArrayOfRecourceNames = GetArrayOfResourceNames();
 	
 	For Each ResourceName In ArrayOfRecourceNames Do
-		AddAmountsColumns(ItemOfPostingInfo.PrepareTable, ResourceName);
+		AddAmountsColumns(Table, ResourceName);
 	EndDo;
 	
 	Query = New Query();
@@ -210,114 +245,186 @@ Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementTy
 	|SELECT
 	|	RecordSet.*,
 	|	CurrencyTable.MovementType AS CurrencyMovementType,
-	|	CAST(CASE
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetOfferAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS NetOfferAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS NetOfferAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.SalesAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS SalesAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS SalesAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Amount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Amount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Amount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ManualAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS ManualAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS ManualAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS NetAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS NetAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.OffersAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS OffersAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS OffersAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountWithTaxes * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS AmountWithTaxes,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS AmountWithTaxes,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Commission * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Commission,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Commission,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountTax * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS AmountTax,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS AmountTax,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Price * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Price,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Price,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ConsignorPrice * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS ConsignorPrice,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS ConsignorPrice,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.CustomerTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS CustomerTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS CustomerTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.CustomerAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS CustomerAdvance,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS CustomerAdvance,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.VendorTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS VendorTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS VendorTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.VendorAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS VendorAdvance,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS VendorAdvance,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.OtherTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS OtherTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS OtherTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.TaxableAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS TaxableAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS TaxableAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.TaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS TaxAmount,
+	|	END, &RoundDigitCapacity) AS TaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.InvoiceAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS InvoiceAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.InvoiceTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS InvoiceTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.IndirectCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS IndirectCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.IndirectCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS IndirectCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraCostAmountByRatio * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraCostAmountByRatio,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraCostTaxAmountByRatio * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraCostTaxAmountByRatio,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraDirectCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraDirectCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraDirectCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraDirectCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedRevenueAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedRevenueAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedRevenueTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -343,24 +450,36 @@ Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementTy
 	|SELECT
 	|	RecordSet.*,
 	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
-	|	CAST(RecordSet.NetOfferAmount AS Number(15,2)) AS NetOfferAmount,
-	|	CAST(RecordSet.SalesAmount AS Number(15,2)) AS SalesAmount,
-	|	CAST(RecordSet.Amount AS Number(15,2)) AS Amount,
-	|	CAST(RecordSet.ManualAmount AS Number(15,2)) AS ManualAmount,
-	|	CAST(RecordSet.NetAmount AS Number(15,2)) AS NetAmount,
-	|	CAST(RecordSet.OffersAmount AS Number(15,2)) AS OffersAmount,
-	|	CAST(RecordSet.AmountWithTaxes AS Number(15,2)) AS AmountWithTaxes,
-	|	CAST(RecordSet.Commission AS Number(15,2)) AS Commission,
-	|	CAST(RecordSet.AmountTax AS Number(15,2)) AS AmountTax,
-	|	CAST(RecordSet.Price AS Number(15,2)) AS Price,
-	|	CAST(RecordSet.ConsignorPrice AS Number(15,2)) AS ConsignorPrice,
-	|	CAST(RecordSet.CustomerTransaction AS Number(15,2)) AS CustomerTransaction,
-	|	CAST(RecordSet.CustomerAdvance AS Number(15,2)) AS CustomerAdvance,
-	|	CAST(RecordSet.VendorTransaction AS Number(15,2)) AS VendorTransaction,
-	|	CAST(RecordSet.VendorAdvance AS Number(15,2)) AS VendorAdvance,
-	|	CAST(RecordSet.OtherTransaction AS Number(15,2)) AS OtherTransaction,
-	|	CAST(RecordSet.TaxableAmount AS Number(15,2)) AS TaxableAmount,
-	|	CAST(RecordSet.TaxAmount AS Number(15,2)) AS TaxAmount,
+	|	ROUND(RecordSet.NetOfferAmount, &RoundDigitCapacity) AS NetOfferAmount,
+	|	ROUND(RecordSet.SalesAmount, &RoundDigitCapacity) AS SalesAmount,
+	|	ROUND(RecordSet.Amount, &RoundDigitCapacity) AS Amount,
+	|	ROUND(RecordSet.ManualAmount, &RoundDigitCapacity) AS ManualAmount,
+	|	ROUND(RecordSet.NetAmount, &RoundDigitCapacity) AS NetAmount,
+	|	ROUND(RecordSet.OffersAmount, &RoundDigitCapacity) AS OffersAmount,
+	|	ROUND(RecordSet.AmountWithTaxes, &RoundDigitCapacity) AS AmountWithTaxes,
+	|	ROUND(RecordSet.Commission, &RoundDigitCapacity) AS Commission,
+	|	ROUND(RecordSet.AmountTax, &RoundDigitCapacity) AS AmountTax,
+	|	ROUND(RecordSet.Price, &RoundDigitCapacity) AS Price,
+	|	ROUND(RecordSet.ConsignorPrice, &RoundDigitCapacity) AS ConsignorPrice,
+	|	ROUND(RecordSet.CustomerTransaction, &RoundDigitCapacity) AS CustomerTransaction,
+	|	ROUND(RecordSet.CustomerAdvance, &RoundDigitCapacity) AS CustomerAdvance,
+	|	ROUND(RecordSet.VendorTransaction, &RoundDigitCapacity) AS VendorTransaction,
+	|	ROUND(RecordSet.VendorAdvance, &RoundDigitCapacity) AS VendorAdvance,
+	|	ROUND(RecordSet.OtherTransaction, &RoundDigitCapacity) AS OtherTransaction,
+	|	ROUND(RecordSet.TaxableAmount, &RoundDigitCapacity) AS TaxableAmount,
+	|	ROUND(RecordSet.TaxAmount, &RoundDigitCapacity) AS TaxAmount,
+	|	ROUND(RecordSet.InvoiceAmount, &RoundDigitCapacity) AS InvoiceAmount,
+	|	ROUND(RecordSet.InvoiceTaxAmount, &RoundDigitCapacity) AS InvoiceTaxAmount,
+	|	ROUND(RecordSet.IndirectCostAmount, &RoundDigitCapacity) AS IndirectCostAmount,
+	|	ROUND(RecordSet.IndirectCostTaxAmount, &RoundDigitCapacity) AS IndirectCostTaxAmount,
+	|	ROUND(RecordSet.ExtraCostAmountByRatio, &RoundDigitCapacity) AS ExtraCostAmountByRatio,
+	|	ROUND(RecordSet.ExtraCostTaxAmountByRatio, &RoundDigitCapacity) AS ExtraCostTaxAmountByRatio,
+	|	ROUND(RecordSet.ExtraDirectCostAmount, &RoundDigitCapacity) AS ExtraDirectCostAmount,
+	|	ROUND(RecordSet.ExtraDirectCostTaxAmount, &RoundDigitCapacity) AS ExtraDirectCostTaxAmount,
+	|	ROUND(RecordSet.AllocatedCostAmount, &RoundDigitCapacity) AS AllocatedCostAmount,
+	|	ROUND(RecordSet.AllocatedCostTaxAmount, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
+	|	ROUND(RecordSet.AllocatedRevenueAmount, &RoundDigitCapacity) AS AllocatedRevenueAmount,
+	|	ROUND(RecordSet.AllocatedRevenueTaxAmount, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -369,66 +488,160 @@ Function ExpandTable(TempTableManager, ItemOfPostingInfo, UseAgreementMovementTy
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
-	UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
-	If Not UseKey Then
-		ItemOfPostingInfo.PrepareTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	If Not UseKey And Table.Columns.Find("Key") = Undefined Then
+		Table.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 
-	Query.SetParameter("RecordSet", ItemOfPostingInfo.PrepareTable);
+	Query.SetParameter("RecordSet", Table);
 	Query.SetParameter("UseKey", UseKey);
 	Query.SetParameter("UseAgreementMovementType", UseAgreementMovementType);
 	Query.SetParameter("UseCurrencyJoin", UseCurrencyJoin);
+	Query.SetParameter("RoundDigitCapacity", Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits);
 	QueryResults = Query.ExecuteBatch();
 	QueryTable = QueryResults[1].Unload();
-	
-	SetTransactionCurrency(QueryTable, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
-	
+		
 	Return QueryTable;
 EndFunction
 
-Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
-	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
-		Return;
-	EndIf;
+Function AlignTables(FullTable, GroupedTable, RegMetadata, UseKey)
+
+	ArrayOfCurrencyMovementTypes = New Array();
+	For Each Row In GroupedTable Do
+		If ArrayOfCurrencyMovementTypes.Find(Row.CurrencyMovementType) = Undefined Then
+			ArrayOfCurrencyMovementTypes.Add(Row.CurrencyMovementType);
+		EndIf;
+	EndDo;
+		
+	For Each CurrencyMovementType In ArrayOfCurrencyMovementTypes Do
+			
+		GroupedTableRows = GroupedTable.FindRows(New Structure("CurrencyMovementType", CurrencyMovementType));
+		
+		For Each RowGrouped In GroupedTableRows Do
+			TotalsGroupedTable = New Structure();
+				
+			For Each ResourceName In GetArrayOfResourceNames() Do
+				If CommonFunctionsClientServer.ObjectHasProperty(RowGrouped, ResourceName) Then
+					If TotalsGroupedTable.Property(ResourceName) Then
+						TotalsGroupedTable[ResourceName] = TotalsGroupedTable[ResourceName] + RowGrouped[ResourceName];
+					Else
+						TotalsGroupedTable.Insert(ResourceName, RowGrouped[ResourceName]);
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			Filter = New Structure(StrConcat(GetGroupColumns(FullTable, RegMetadata, UseKey, "RowKey", ""),","));
+			FillPropertyValues(Filter, RowGrouped);
+			
+			FullTableRows = FullTable.FindRows(Filter);			
+			TotalsFullTable = New Structure();
+			
+			For Each RowFull In FullTableRows Do
+				For Each ResourceName In GetArrayOfResourceNames() Do
+					If CommonFunctionsClientServer.ObjectHasProperty(RowFull, ResourceName) Then
+						If TotalsFullTable.Property(ResourceName) Then
+							TotalsFullTable[ResourceName] = TotalsFullTable[ResourceName] + RowFull[ResourceName];
+						Else
+							TotalsFullTable.Insert(ResourceName, RowFull[ResourceName]);
+						EndIf;
+					EndIf;
+				EndDo;
+			EndDo;
+		
+			// compare resource amounts
+			For Each KeyValue In TotalsGroupedTable Do
+				ResourceName = KeyValue.Key;
+				
+				Difference = TotalsGroupedTable[ResourceName] - TotalsFullTable[ResourceName];
+				If Difference <> 0 Then
+					// find max row in full table
+					MaxRow = Undefined;
+				
+					For Each Row In FullTableRows Do
+						If MaxRow = Undefined Then
+							MaxRow = Row;
+						Else
+							If MaxRow[ResourceName] < Row[ResourceName] Then
+								MaxRow = Row;
+							EndIf;
+						EndIf;
+					EndDo;
+				
+					If MaxRow <> Undefined Then
+						MaxRow[ResourceName] = MaxRow[ResourceName] + Difference;
+					EndIf;
+				EndIf;
+			EndDo; // TotalsGroupedTable
+				
+		EndDo;
+			
+	EndDo;
 	
-	GroupColumns = New Array(); 
-	SummColumn = New Array();
-	
-	If ExpandTable.Columns.Find("Key") <> Undefined Then
+	Return FullTable;
+EndFunction
+
+Function GetGroupColumns(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions)
+	GroupColumns = New Array();
+	ArrayOfExludeDimensions = StrSplit(StrReplace(Lower(ExcludeDimensions)," ",""), ",", False);
+	ArrayOfIncludeDimensions = StrSplit(StrReplace(Lower(IncludeDimensions)," ",""), ",", False);
+		
+	If UseKey Then
 		GroupColumns.Add("Key");
 	EndIf;
 	
+	For Each Field In ArrayOfIncludeDimensions Do
+		If Table.Columns.Find(Field) <> Undefined Then
+			GroupColumns.Add(Field)
+		EndIf;		
+	EndDo;
+	
 	For Each Field In RegMetadata.Dimensions Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If ArrayOfExludeDimensions.Find(Lower(Field.Name)) <> Undefined Then
+			Continue;
+		EndIf;
+		
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;
 	EndDo;
 	
 	For Each Field In RegMetadata.Attributes Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;		
 	EndDo;
 	
 	For Each Field In RegMetadata.StandardAttributes Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			GroupColumns.Add(Field.Name)
 		EndIf;		
 	EndDo;
 	
+	Return GroupColumns;
+EndFunction
+
+Procedure GroupTableByAllDimensions(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions)
+	GroupColumns = GetGroupColumns(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions); 
+	SummColumn = New Array();
+	
 	For Each Field In RegMetadata.Resources Do
-		If ExpandTable.Columns.Find(Field.Name) <> Undefined Then
+		If Table.Columns.Find(Field.Name) <> Undefined Then
 			SummColumn.Add(Field.Name)
 		EndIf;				
 	EndDo;
 	
-	ExpandTable.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
-	
+	Table.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
+EndProcedure
+
+Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
+	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
+		Return ExpandTable;
+	EndIf;
+		
 	TrnRows = ExpandTable.FindRows(New Structure("CurrencyMovementType", 
 		ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
 	
 	If TrnRows.Count() = 0 Then
-		Return;
+		Return ExpandTable;
 	EndIf;		
 	
 	ExcludeDimensions = New Array();
@@ -521,7 +734,9 @@ Procedure SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementM
 			Row.TransactionCurrency = TrnRow.Currency;
 		EndDo;
 	EndDo;
-EndProcedure
+	
+	Return ExpandTable;
+EndFunction
 
 Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;

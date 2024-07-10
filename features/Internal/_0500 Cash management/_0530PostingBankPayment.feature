@@ -117,13 +117,13 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
-			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '136 000,00'     | '$$PurchaseInvoice018001$$'    |
+			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '135 887,45'     | '$$PurchaseInvoice018001$$'    |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 283,20'    |
-			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
-			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'     | 'Amount'     |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,171200' | '23 263,93'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'        | '135 887,45' |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'        | '135 887,45' |
 		And I close current window
 	* Data overflow check
 		And I click Select button of "Account" field
@@ -136,16 +136,16 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And "PaymentList" table contains lines
 			| 'Partner'     | 'Payee'               | 'Partner term'         | 'Total amount'   | 'Basis document'               |
-			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '136 000,00'     | '$$PurchaseInvoice018001$$'    |
+			| 'Ferron BP'   | 'Company Ferron BP'   | 'Vendor Ferron, TRY'   | '135 887,45'     | '$$PurchaseInvoice018001$$'    |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
 			| 'Movement type'        | 'Type'           | 'To'    | 'From'   | 'Multiplicity'   | 'Rate'     | 'Amount'       |
-			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200'   | '23 283,20'    |
-			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
-			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '136 000'      |
+			| 'Reporting currency'   | 'Reporting'      | 'USD'   | 'TRY'    | '1'              | '0,171200' | '23 263,93'    |
+			| 'Local currency'       | 'Legal'          | 'TRY'   | 'TRY'    | '1'              | '1'        | '135 887,45'   |
+			| 'TRY'                  | 'Partner term'   | 'TRY'   | 'TRY'    | '1'              | '1'        | '135 887,45'   |
 		And I close current window
 	* Check calculation Document amount
-		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "136 000,00"
+		Then the form attribute named "PaymentListTotalTotalAmount" became equal to "135 887,45"
 	* Change in basis document
 		And I select current line in "PaymentList" table
 		And I click choice button of "Basis document" attribute in "PaymentList" table
@@ -185,7 +185,7 @@ Scenario: _051002 check that the amount does not change when select basis docume
 		And I select current line in "PaymentList" table
 		And I go to line in "List" table
 			| 'Company'        | 'Amount'      | 'Legal name'          | 'Partner'      |
-			| 'Main Company'   | '136 000,00'  | 'Company Ferron BP'   | 'Ferron BP'    |
+			| 'Main Company'   | '135 887,45'  | 'Company Ferron BP'   | 'Ferron BP'    |
 		And I click "Select" button
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'       | 'Total amount' | 'Payee'             | 'Basis document'            |
@@ -260,12 +260,12 @@ Scenario: _0530011 create Bank payment (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '136 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '135 887,45'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-				| '136 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+				| '135 887,45'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -340,12 +340,12 @@ Scenario: _0530011 create Bank payment (independently)
 			# temporarily
 			And I go to line in "List" table
 				| 'Amount'        | 'Company'         | 'Legal name'           | 'Partner'       |
-				| '135 000,00'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
+				| '134 887,45'    | 'Main Company'    | 'Company Ferron BP'    | 'Ferron BP'     |
 			And I click "Select" button
 			And I click choice button of "Order" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Amount'       | 'Company'        | 'Legal name'          | 'Partner'      |
-				| '135 000,00'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
+				| '134 887,45'   | 'Main Company'   | 'Company Ferron BP'   | 'Ferron BP'    |
 			And I select current line in "List" table
 		# temporarily
 		* Filling in amount in a tabular part
@@ -615,7 +615,7 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment' |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''        |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | ''        |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '134 774,90' | ''        |
 				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | ''        |
 			And I close current window
 		* With branch
@@ -666,15 +666,15 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 		* Select lines and check allocation	
 			And I go to line in "Documents" table
 				| 'Amount'     | 'Document'                                     |
-				| '135 000,00' | '$$PurchaseInvoice018001$$' |
+				| '134 774,90' | '$$PurchaseInvoice018001$$' |
 			And I move one line down in "Documents" table and select line
 			And I input "146 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
 				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
-				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '135 000,00' | '135 000,00' |
-				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 000,00'  |
+				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '134 774,90' | '134 774,90' |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 225,10'  |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |
@@ -683,8 +683,8 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       |
 				| 'Maxim'     | 'Company Aldis'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       |
 				| 'Maxim'     | 'Company Maxim'     | 'Partner term Maxim' | ''                    | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | ''        | ''                                             | '100,00'       |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '135 000,00'   |
-				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '10 900,00'    |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice018001$$'                      | ''        | '$$PurchaseOrder017001$$'                      | '134 774,90'   |
+				| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | ''                    | '$$PurchaseInvoice29604$$'                       | ''        | ''                                             | '11 125,10'    |
 		And I close all client application windows
 
 Scenario: _053021 check amount when create BP based on PI (partner term - by partner terms)

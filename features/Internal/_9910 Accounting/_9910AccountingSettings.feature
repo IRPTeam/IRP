@@ -2378,15 +2378,15 @@ Scenario: _0991079 check Bank receipt accounting movements (Other partner)
 	* Check accounting movements
 		And in the table "PaymentList" I click "Edit accounting" button
 		And "AccountingAnalytics" table became equal
-			| 'Debit' | 'Cash/Bank account' | 'Company'       | 'Business unit' | 'Credit' | ' ' | 'Operation'                                                                |
-			| '3250'  | 'Bank account, TRY' | 'Other partner' | ''              | '9200'   | ''  | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' |		
+			| "Debit" | "Cash/Bank account" | "Company"       | "Business unit" | "Partner"       | "Credit" | "Operation"                                                                |
+			| "3250"  | "Bank account, TRY" | "Other partner" | ""              | "Other partner" | "9200"   | "BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)" |	
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit'   | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit' | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '11.01.2024 10:00:00' | '3250'       | '1' | '490,00' | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY' | '490'          | 'Other partner'       | ''                | ''                    | 'TRY'            | '9200'       | ''                 | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' | 'Other partner'       | '490'           | ''                    |		
+			| '11.01.2024 10:00:00' | '3250'       | '1' | '490,00' | ''              | 'Yes'      | 'TRY'             | 'Bank account, TRY' | '490'          | 'Other partner'       | ''                | ''                    | 'TRY'            | '9200'       | ''                 | 'BankReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)' | 'Other partner'       | '490'           | 'Other partner'       |
 	And I close all client application windows
 
 Scenario: _0991081 check Bank receipt accounting movements (Other income)
@@ -2433,7 +2433,7 @@ Scenario: _0991082 check Bank payment accounting movements (Other partners)
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| 'Period'              | 'Account Dr' | '#' | 'Amount' | 'DebitQuantity' | 'Activity' | 'Credit currency' | 'Ext. Dim. Debit' | 'Debit amount' | 'Extra dimension2 Dr' | 'Credit quantity' | 'Extra dimension3 Dr' | 'Debit currency' | 'Account Cr' | 'Ext. Dim. Credit'  | 'Operation'                                                                | 'Extra dimension2 Cr' | 'Credit amount' | 'Extra dimension3 Cr' |
-			| '22.03.2024 10:51:11' | '9200'       | '1' | '9,80'   | ''              | 'Yes'      | 'TRY'             | ''                | '9,8'          | 'Other partner'       | ''                | ''                    | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' | 'Other partner'       | '9,8'           | ''                    |		
+			| '22.03.2024 10:51:11' | '9200'       | '1' | '9,80'   | ''              | 'Yes'      | 'TRY'             | ''                | '9,8'          | 'Other partner'       | ''                | ''                    | 'TRY'            | '3250'       | 'Bank account, TRY' | 'BankPayment DR (R5015B_OtherPartnersTransactions) CR (R3010B_CashOnHand)' | 'Other partner'       | '9,8'           | 'Other partner'       |		
 	And I close all client application windows
 
 

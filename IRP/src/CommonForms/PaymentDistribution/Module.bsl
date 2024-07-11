@@ -43,6 +43,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow = ThisObject.AllowedTypes.Add();
 		NewRow.Type = Row;	
 	EndDo;
+	
+	If Parameters.Property("SelectedPositionWithoutDocuments") Then
+		For Each Row In Parameters.SelectedPositionWithoutDocuments Do
+			NewRow = SelectedDocuments.Add();
+			NewRow.Partner = Row.Partner;
+			NewRow.Agreement = Row.Agreement;
+		EndDo;	
+	EndIf;	
+	
 	FillTable();
 EndProcedure
 
@@ -99,9 +108,17 @@ Procedure FillTable()
 		ArrayOfAllowedTypes.Add(Row.Type);	
 	EndDo;
 	
+	TableOfSelectedRowsWithoutDocuments = New ValueTable;
+	TableOfSelectedRowsWithoutDocuments.Columns.Add("Partner");
+	TableOfSelectedRowsWithoutDocuments.Columns.Add("Agreement");
+	
 	ArrayOfSelectedDocuments = New Array();
 	For Each Row In ThisObject.SelectedDocuments Do
-		ArrayOfSelectedDocuments.Add(Row.Document);
+		If ValueIsFilled(Row.Document) Then
+			ArrayOfSelectedDocuments.Add(Row.Document);
+		Else
+			FillPropertyValues(TableOfSelectedRowsWithoutDocuments.Add(), Row);		
+		EndIf;
 	EndDo;
 	
 	Query.SetParameter("Company"           , ThisObject.Company);
@@ -117,6 +134,17 @@ Procedure FillTable()
 	For Each Row In ThisObject.Documents Do
 		Row.RowKey = String(New UUID());
 	EndDo;
+	
+	ArrayToDelete = New Array;
+	For Each Row In ThisObject.Documents Do
+		SearchStructure = New Structure("Partner, Agreement", Row.Partner, Row.Agreement);
+		If TableOfSelectedRowsWithoutDocuments.FindRows(SearchStructure).Count() > 0 Then
+			ArrayToDelete.Add(Row);
+		EndIf;	
+	EndDo;
+	For Each Row In ArrayToDelete Do
+		ThisObject.Documents.Delete(Row);
+	EndDo;		
 EndProcedure
 
 &AtClient

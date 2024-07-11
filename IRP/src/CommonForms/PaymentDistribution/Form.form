@@ -1405,6 +1405,40 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>Partner</name>
+      <title>
+        <key>en</key>
+        <value>Partner</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>CatalogRef.Partners</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Agreement</name>
+      <title>
+        <key>en</key>
+        <value>Agreement</value>
+      </title>
+      <id>28</id>
+      <valueType>
+        <types>CatalogRef.Agreements</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>Currency</name>

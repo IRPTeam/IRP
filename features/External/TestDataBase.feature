@@ -3911,6 +3911,7 @@ Scenario: Create chart of accounts Basic objects with LedgerTypeVariants (Basic 
 		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d60' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f79' | 'False'         | 'False'    | 'False'    | 'False'  |
 		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d61' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f77' | 'False'         | 'False'    | 'False'    | 'False'  |
 		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d61' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f79' | 'False'         | 'False'    | 'False'    | 'False'  |
+		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d61' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f7e' | 'False'         | 'False'    | 'False'    | 'False'  |
 		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d63' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f77' | 'False'         | 'False'    | 'True'     | 'True'   |
 		| 'e1cib/data/ChartOfAccounts.Basic?ref=b7b3f42485a6975311ee9d8e807d8d64' | 'e1cib/data/ChartOfCharacteristicTypes.AccountingExtraDimensionTypes?ref=b7b18e1cb2a9e83611ee94e6505c8f77' | 'False'         | 'False'    | 'True'     | 'True'   |
 		

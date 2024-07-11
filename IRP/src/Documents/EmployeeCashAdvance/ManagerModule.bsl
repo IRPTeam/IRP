@@ -225,13 +225,22 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	PaymentList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	PaymentList.TaxAmount AS Amount
+		|	SUM(PaymentList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsExpense
-		|	AND PaymentList.TaxAmount <> 0";
+		|	AND PaymentList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Branch,
+		|	PaymentList.Currency,
+		|	PaymentList.Key,
+		|	PaymentList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 #EndRegion

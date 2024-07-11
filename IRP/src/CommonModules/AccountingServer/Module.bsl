@@ -1847,7 +1847,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not Row.IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else		
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;
@@ -1865,6 +1867,12 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 	// AccountingExtDimensions
 	ArrayForDelete.Clear();
 	For Each Row In AccountingExtDimensions Do
+		_IsFixed = False;
+		_Filter = New Structure("Key, Operation, LedgerType", Row.Key, Row.Operation, Row.LedgerType);
+		_Rows = AccountingRowAnalytics.FindRows(_Filter);
+		If _Rows.Count() Then
+			_IsFixed = _Rows[0].IsFixed;
+		EndIf;
 		
 		If LedgerTypes.Find(Row.LedgerType) = Undefined Then
 			ArrayForDelete.Add(Row);
@@ -1893,7 +1901,9 @@ Procedure ClearAccountingTables(Object, AccountingRowAnalytics, AccountingExtDim
 		EndIf;
 		
 		If Not ValueIsFilled(MainTableName) Then
-			ArrayForDelete.Add(Row);
+			If Not _IsFixed Then
+				ArrayForDelete.Add(Row);
+			EndIf;
 		Else	
 			If Not ValueIsFilled(Row.Key) Then
 				Continue;
@@ -2940,6 +2950,8 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 	
 	AvailableLedgerTypes = GetLedgerTypesByCompany(BasisDoc, BasisDoc.Date, BasisDoc.Company);
 	
+	Errors = New Array();
+	
 	For Each LedgerType In AvailableLedgerTypes Do
 	For Each Row In AccountingRowAnalytics Do
 		If LedgerType <> Row.LedgerType Then
@@ -2953,11 +2965,13 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 		EndIf;
 		
 		If Not ValueIsFilled(Row.AccountDebit) Then
-			Raise StrTemplate("Debit is empty [%1] [%2]", Row.Operation, Row.Key);
+			Errors.Add(StrTemplate("Debit is empty [%1] row-key[%2]", Row.Operation, TrimAll(Row.Key)));
+			Continue;
 		EndIf;
 		
 		If Not ValueIsFilled(Row.AccountCredit) Then
-			Raise StrTemplate("Credit is empty [%1] [%2]", Row.Operation, Row.Key);
+			Errors.Add(StrTemplate("Credit is empty [%1] row-key[%2]", Row.Operation, TrimAll(Row.Key)));
+			Continue;
 		EndIf;
 				
 		Record = DataTable.Add();
@@ -3029,7 +3043,8 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 	EndDo;
 	EndDo;
 	SortAccountingDataTable(DataTable);
-	Return DataTable;
+	
+	Return New Structure("DataTable, Errors", DataTable, Errors);
 EndFunction
 
 Function RegisterRecords_AccountingData(BasisDoc)	
@@ -3043,15 +3058,15 @@ Function RegisterRecords_AccountingData(BasisDoc)
 	RecordSet.Read();
 	_AccountingExtDimensions = RecordSet.Unload();
 	
-	NewRecords_DataTable = GetNewDataRegisterRecords(BasisDoc, _AccountingRowAnalytics, _AccountingExtDimensions);	
+	NewRecords = GetNewDataRegisterRecords(BasisDoc, _AccountingRowAnalytics, _AccountingExtDimensions);	
 	
 	OldRecords_DataTable = GetCurrentDataRegisterRecords(BasisDoc, "");
 	
 	IgnoredColumns = "LineNumber,PointInTime";
 	
 	RegisterRecords = New Map();
-	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords_DataTable, IgnoredColumns) Then
-		RegisterRecords.Insert(AccountingRegisters.Basic.CreateRecordSet().Metadata(), NewRecords_DataTable);	
+	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords.DataTable, IgnoredColumns) Then
+		RegisterRecords.Insert(AccountingRegisters.Basic.CreateRecordSet().Metadata(), NewRecords.DataTable);	
 	EndIf;
 	Return RegisterRecords;		
 EndFunction

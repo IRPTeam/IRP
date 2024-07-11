@@ -13,22 +13,26 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	If Not ThisObject.DeletionMark And Not ThisObject.UserDefined Then
 		ThisObject.RegisterRecords.Basic.Clear();
-		DataTable = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "DataTable", Undefined);
-		If DataTable = Undefined Then
 			
-			RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
-			RecordSet.Filter.Document.Set(ThisObject.Basis);
-			RecordSet.Read();
-			_AccountingRowAnalytics = RecordSet.Unload();
+		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
+		RecordSet.Filter.Document.Set(ThisObject.Basis);
+		RecordSet.Read();
+		_AccountingRowAnalytics = RecordSet.Unload();
 			
-			RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
-			RecordSet.Filter.Document.Set(ThisObject.Basis);
-			RecordSet.Read();
-			_AccountingExtDimensions = RecordSet.Unload();
+		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
+		RecordSet.Filter.Document.Set(ThisObject.Basis);
+		RecordSet.Read();
+		_AccountingExtDimensions = RecordSet.Unload();
 			
-			DataTable = AccountingServer.GetNewDataRegisterRecords(ThisObject.Basis, _AccountingRowAnalytics, _AccountingExtDimensions);
-		EndIf;
-		
+		Result = AccountingServer.GetNewDataRegisterRecords(ThisObject.Basis, _AccountingRowAnalytics, _AccountingExtDimensions);
+		DataTable = Result.DataTable;
+			
+		ThisObject.Errors.Clear();
+		For Each Error In Result.Errors Do
+			NewError = ThisObject.Errors.Add();
+			NewError.Error = Error;
+		EndDo;
+					
 		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, ThisObject.RegisterRecords.Basic);
 	EndIf;
 EndProcedure

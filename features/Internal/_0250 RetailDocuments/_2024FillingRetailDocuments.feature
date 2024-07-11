@@ -309,9 +309,9 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I click "Ok" button		
 	* Check filling in
 		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Partner: Retail customer   Legal name: Company Retail customer   Partner term: Retail partner term   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Partner: Retail customer   Legal name: Company Retail customer   Partner term: Retail partner term   Posting status: New   "
 		Then the form attribute named "DecorationGroupTitleUncollapsedPicture" became equal to "DecorationGroupTitleUncollapsedPicture"
-		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Partner: Retail customer   Legal name: Company Retail customer   Partner term: Retail partner term   "
+		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Partner: Retail customer   Legal name: Company Retail customer   Partner term: Retail partner term   Posting status: New   "
 		Then the form attribute named "Partner" became equal to "Retail customer"
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term"

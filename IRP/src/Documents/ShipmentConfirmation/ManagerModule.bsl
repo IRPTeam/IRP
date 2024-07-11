@@ -331,6 +331,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -785,6 +786,38 @@ Function T3010S_RowIDInfo()
 		   |		AND ItemList.Ref = &Ref
 		   |		AND RowIDInfo.Key = ItemList.Key
 		   |		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T1040T_RowIDSerialLotNumbers()
+	Return
+		"SELECT
+		|	CASE
+		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
+		|			THEN SerialLotNumbers.Quantity
+		|		ELSE - SerialLotNumbers.Quantity
+		|	END AS Quantity,
+		|	CASE 
+		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
+		|			THEN RowIDInfo.NextStep
+		|		ELSE RowIDInfo.CurrentStep
+		|	END AS Step,
+		|
+		|	RowIDInfo.Ref.Date AS Period,
+		|	RowIDInfo.RowID AS RowID,
+		|	CASE
+		|		WHEN RowIDInfo.Basis.Ref IS NULL
+		|			THEN RowIDInfo.Ref
+		|		ELSE RowIDInfo.Basis
+		|	END AS Basis,
+		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
+		|INTO T1040T_RowIDSerialLotNumbers
+		|FROM
+		|	Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+		|		INNER JOIN Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
+		|		AND (RowIDInfo.Ref = &Ref
+		|		AND SerialLotNumbers.Ref = &Ref)
+		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

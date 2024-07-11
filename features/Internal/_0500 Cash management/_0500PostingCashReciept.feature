@@ -479,7 +479,7 @@ Scenario: _0500012 check form for select basis document
 			And I select current line in "PaymentList" table
 			And "List" table contains lines
 				| 'Document'            | 'Company'         | 'Partner'      | 'Amount'      | 'Legal name'           | 'Partner term'                | 'Currency'     |
-				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '4 250,00'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
+				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '3 687,25'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
 			And I click "Select" button
 			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 			And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -502,7 +502,7 @@ Scenario: _0500012 check form for select basis document
 			And I select current line in "PaymentList" table
 			And "List" table contains lines
 				| 'Document'            | 'Company'         | 'Partner'      | 'Amount'      | 'Legal name'           | 'Partner term'                | 'Currency'     |
-				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '4 150,00'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
+				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '3 587,25'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
 			And I close current window
 		* Check forms DocumentsForIncomingPayment (by document date)
 			And I input "{CurrentDate() - 86401}" text in the field named "Date"
@@ -529,7 +529,7 @@ Scenario: _0500012 check form for select basis document
 			And I select current line in "PaymentList" table
 			And "List" table contains lines
 				| 'Document'            | 'Company'         | 'Partner'      | 'Amount'      | 'Legal name'           | 'Partner term'                | 'Currency'     |
-				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '4 150,00'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
+				| 'Sales invoice 1*'    | 'Main Company'    | 'Ferron BP'    | '3 587,25'    | 'Company Ferron BP'    | 'Basic Partner terms, TRY'    | 'TRY'          |
 			And I close current window
 		And I close all client application windows
 		
@@ -579,7 +579,7 @@ Scenario: _050009 create Cash receipt based on Purchase return
 		And I select current line in "List" table
 		And I click "Cash receipt" button
 	* Check creation
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return from vendor   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Currency: TRY   Transaction type: Return from vendor   Posting status: New   "
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Return from vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -715,7 +715,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | ''        |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | ''        |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 250,00'  | ''        |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '3 687,25'  | ''        |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''        |
 			And I close current window
 		* With branch
@@ -766,7 +766,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| 'Document'                                   | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                                   | 'Project' | 'Amount'    | 'Payment'  |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 6 dated 04.09.2023 13:03:16' | ''        | '2 600,00'  | '2 600,00' |
 				| 'Sales invoice 16 dated 04.09.2023 13:04:13' | 'Lunch'     | 'Basic Partner terms, TRY'         | 'Company Lunch'     | ''                    | 'Sales order 7 dated 04.09.2023 13:03:26' | ''        | '2 600,00'  | '1 400,00' |
-				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '4 250,00'  | ''         |
+				| '$$SalesInvoice024001$$'                     | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$'                    | ''        | '3 687,25'  | ''         |
 				| '$$SalesInvoice024008$$'                     | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$'                    | ''        | '11 099,93' | ''         |
 		* Check fifo allocation
 			Then "Payment by documents" window is opened
@@ -776,19 +776,19 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 			Then the form attribute named "FilterPartner" became equal to "Ferron BP"
 			And "Documents" table became equal
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    | 'Payment'  |
-				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 250,00'  | '4 250,00' |
-				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '750,00'   |
+				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '3 687,25'  | '3 687,25' |
+				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '1 312,75' |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| '#' | 'Partner'   | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
 				| '1' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
 				| '2' | 'Lomaniti'  | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
-				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '4 250,00'     | ''                        | ''                 | ''                           |
-				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '750,00'       | ''                        | ''                 | ''                           |
+				| '3' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '3 687,25'     | ''                        | ''                 | ''                           |
+				| '4' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '1 312,75'       | ''                        | ''                 | ''                           |
 			And in the table "PaymentList" I click "Payment by documents" button
 			And "Documents" table does not contain lines
 				| 'Document'               | 'Partner'   | 'Partner term'                     | 'Legal name'        | 'Legal name contract' | 'Order'                | 'Project' | 'Amount'    |
-				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '4 250,00'  |
+				| '$$SalesInvoice024001$$' | 'Ferron BP' | 'Basic Partner terms, TRY'         | 'Company Ferron BP' | ''                    | '$$SalesOrder023001$$' | ''        | '3 687,25'  |
 				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' |				
 		* Select SI
 			And I go to line in "Documents" table
@@ -826,7 +826,7 @@ Scenario: _050018 check amount when create CR based on SI (partner term - by doc
 	* Check amount (document balance)
 		And "PaymentList" table became equal
 			| '#' | 'Partner'   | 'Payer'             | 'Partner term'             | 'Legal name contract' | 'Basis document'         | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | '$$SalesInvoice024001$$' | ''        | '$$SalesOrder023001$$' | '4 250,00'     | ''                        | ''                 | ''                           |
+			| '1' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | ''                    | '$$SalesInvoice024001$$' | ''        | '$$SalesOrder023001$$' | '3 687,25'     | ''                        | ''                 | ''                           |
 	And I close all client application windows
 	
 

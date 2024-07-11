@@ -228,3 +228,10 @@ Function isBase64Value(Value) Export
 	
 	Return True;
 EndFunction
+
+Procedure LoadFormItemChoiceList(Form, ItemName, ChoiceList) Export
+	If ObjectHasProperty(Form.Items, ItemName) Then
+		Form.Items[ItemName].ChoiceList.Clear();
+		Form.Items[ItemName].ChoiceList.LoadValues(ChoiceList);
+	EndIf;
+EndProcedure

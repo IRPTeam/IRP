@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4d9354d9-e146-4f06-85e2-ebc20059a9ad">
+  <name>AccumulationRegisters_T1040T_RowIDSerialLotNumbers</name>
+  <synonym>
+    <key>en</key>
+    <value>Accumulation registers T1040T RowIDSerialLotNumbers</value>
+  </synonym>
+</mdclass:Role>

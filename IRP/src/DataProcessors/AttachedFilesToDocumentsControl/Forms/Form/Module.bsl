@@ -431,7 +431,7 @@ Function GetAllDocumentsTempTable(DocsNamesArray, DocsArray = Undefined)
 	Query.SetParameter("BranchArray", Branch.UnloadValues());
 	Query.SetParameter("DocsArray", DocsArray);
 
-	Template = "SELECT Doc.Ref, Doc.Date, Doc.Posted, Doc.Author, Doc.Branch, Doc.Number, Doc.Company, Doc.DeletionMark, ""%1"" %2, VALUETYPE(Doc.Ref) %3 FROM Document.%4 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate %5 %6 %7";
+	Template = "SELECT Doc.Ref, Doc.Date, Doc.Posted, Doc.Author, Doc.Branch, Doc.Number, Doc.Company, Doc.DeletionMark, ""%1"" %2, PRESENTATION(VALUETYPE(Doc.Ref)) %3 FROM Document.%4 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate %5 %6 %7";
 	
 	Array = New Array; // Array Of String
 	For Each Doc In DocsNamesArray Do
@@ -479,6 +479,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	AllDocumentsTempTable.Ref AS DocRef,
 	|	AllDocumentsTempTable.Date AS DocDate,
 	|	AllDocumentsTempTable.DocMetaName AS DocMetaName,
+	|	AllDocumentsTempTable.DocumentType AS DocType,
 	|	AllDocumentsTempTable.Author AS Author,
 	|	AllDocumentsTempTable.Branch AS Branch,
 	|	AllDocumentsTempTable.Posted AS Posted,
@@ -498,6 +499,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocuments.DocNumber AS DocNumber,
 	|	TT_AllDocuments.DocRef AS DocRef,
 	|	TT_AllDocuments.DocMetaName AS DocMetaName,
+	|	TT_AllDocuments.DocType AS DocType,
 	|	CASE
 	|		WHEN TT_AllDocuments.Posted
 	|			THEN 0
@@ -525,6 +527,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.DocDate AS DocDate,
 	|	TT_AllDocumentsAndRequiredAttacments.DocRef AS DocRef,
 	|	TT_AllDocumentsAndRequiredAttacments.DocMetaName AS DocMetaName,
+	|	TT_AllDocumentsAndRequiredAttacments.DocType AS DocType,
 	|	TT_AllDocumentsAndRequiredAttacments.PrintFormName AS PrintFormName,
 	|	CAST(TT_AllDocumentsAndRequiredAttacments.PrintFormName.Comment AS STRING(1000)) AS FileToolTip,
 	|	TT_AllDocumentsAndRequiredAttacments.NamingFormat AS NamingFormat,
@@ -561,6 +564,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.DocDate,
 	|	TT_AllDocumentsAndRequiredAttacments.DocRef,
 	|	TT_AllDocumentsAndRequiredAttacments.DocMetaName,
+	|	TT_AllDocumentsAndRequiredAttacments.DocType AS DocType,
 	|	TT_AllDocumentsAndRequiredAttacments.PrintFormName,
 	|	CAST(TT_AllDocumentsAndRequiredAttacments.PrintFormName.Comment AS STRING(1000)),
 	|	TT_AllDocumentsAndRequiredAttacments.NamingFormat,
@@ -585,6 +589,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|TOTALS
 	|	MAX(DocDate),
 	|	MAX(DocMetaName),
+	|	MAX(DocType),
 	|	MAX(FileToolTip),
 	|	MAX(NamingFormat),
 	|	MAX(IsRequired),
@@ -607,6 +612,19 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	QueryResult = Query.Execute();
 	Return QueryResult.Select(QueryResultIteration.ByGroups, "DocRef");
 EndFunction
+
+&AtClient
+Procedure DocumentListSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	CurrentDoc = Item.CurrentData.DocRef;
+	OpenDocByRef(CurrentDoc);
+EndProcedure
+
+&AtClient
+Async Procedure OpenDocByRef(DocRef)
+	OpenValueAsync(DocRef);
+EndProcedure	
+
 
 &AtServer
 Procedure FillDocumentsToControl()

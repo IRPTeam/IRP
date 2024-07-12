@@ -577,7 +577,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -1451,59 +1450,6 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI();
-EndFunction
-
-Function T1040T_RowIDSerialLotNumbers()
-	Return
-		"SELECT
-		|	CASE
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN SerialLotNumbers.Quantity
-		|		ELSE - SerialLotNumbers.Quantity
-		|	END AS Quantity,
-		|	CASE 
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN RowIDInfo.NextStep
-		|		ELSE RowIDInfo.CurrentStep
-		|	END AS Step,
-		|
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	CASE
-		|		WHEN RowIDInfo.Basis.Ref IS NULL
-		|			THEN RowIDInfo.Ref
-		|		ELSE RowIDInfo.Basis
-		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|INTO T1040T_RowIDSerialLotNumbers
-		|FROM
-		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key
-		|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
-		|		ON RowIDInfo.Ref = ItemList.Ref
-		|		AND (ItemList.Ref = &Ref)
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND (ItemList.UseGoodsReceipt)
-		|UNION ALL
-		|
-		|SELECT
-		|	SerialLotNumbers.Quantity AS Quantity,
-		|	VALUE(Catalog.MovementRules.PRO_PR) AS Step,
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Ref AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|FROM
-		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

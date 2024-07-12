@@ -503,7 +503,8 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	AttachedDocumentSettingsFileSettings.Required AS Required,
 	|	AttachedDocumentSettingsFileSettings.MaximumFileSize AS MaximumFileSize,
 	|	AttachedDocumentSettingsFileSettings.FileExtension AS FileExtension,
-	|	TT_AllDocuments.Company AS Company
+	|	TT_AllDocuments.Company AS Company,
+	|	ISNULL(AttachedDocumentSettingsFileSettings.LineNumber, 0) AS LineNumber
 	|INTO TT_AllDocumentsAndRequiredAttacments
 	|FROM
 	|	TT_AllDocuments AS TT_AllDocuments
@@ -523,7 +524,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.MaximumFileSize AS MaximumFileSize,
 	|	TT_AllDocumentsAndRequiredAttacments.FileExtension AS FileExtension,
 	|	CASE
-	|		WHEN AttachedFiles.File IS NOT NULL 
+	|		WHEN AttachedFiles.File IS NOT NULL
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END AS IsFile,
@@ -536,12 +537,13 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.Branch AS Branch,
 	|	TT_AllDocumentsAndRequiredAttacments.DocNumber AS DocNumber,
 	|	TT_AllDocumentsAndRequiredAttacments.Company AS Company,
-	|	NULL AS Comment
+	|	NULL AS Comment,
+	|	TT_AllDocumentsAndRequiredAttacments.LineNumber AS LineNumber
 	|FROM
 	|	TT_AllDocumentsAndRequiredAttacments AS TT_AllDocumentsAndRequiredAttacments
 	|		LEFT JOIN InformationRegister.AttachedFiles AS AttachedFiles
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AttachedFiles.Owner
-	|			AND TT_AllDocumentsAndRequiredAttacments.PrintFormName = AttachedFiles.File.PrintFormName
+	|		AND TT_AllDocumentsAndRequiredAttacments.PrintFormName = AttachedFiles.File.PrintFormName
 	|		LEFT JOIN InformationRegister.AuditLock AS AuditLock
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AuditLock.Document
 	|
@@ -563,11 +565,15 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.Branch,
 	|	TT_AllDocumentsAndRequiredAttacments.DocNumber,
 	|	TT_AllDocumentsAndRequiredAttacments.Company,
-	|	AttachedFiledControl.Comment
+	|	AttachedFiledControl.Comment,
+	|	TT_AllDocumentsAndRequiredAttacments.LineNumber
 	|FROM
 	|	TT_AllDocumentsAndRequiredAttacments AS TT_AllDocumentsAndRequiredAttacments
 	|		INNER JOIN InformationRegister.AttachedFilesControl AS AttachedFiledControl
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AttachedFiledControl.Document
+	|
+	|ORDER BY
+	|	LineNumber
 	|TOTALS
 	|	MAX(DocDate),
 	|	MAX(DocMetaName),

@@ -901,7 +901,15 @@ Function Posting_T1040T_RowIDSerialLotNumbers_Invoice(Source)
 	|		ON RowIDInfo.Ref = &Ref
 	|		AND SLN.Ref = &Ref
 	|		AND RowIDInfo.Ref = SLN.Ref
-	|		AND RowIDInfo.Key = SLN.Key";
+	|		AND RowIDInfo.Key = SLN.Key
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key,
+	|	SLN.Quantity,
+	|	RowIDInfo.RowRef,
+	|	SLN.SerialLotNumber";
 	
 	Query.Text = StrReplace(Query.Text, "SalesInvoice", Source.Metadata().Name);
 	
@@ -3571,19 +3579,45 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = U
 	|	BasisesTable.BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit
 	|FROM
-	|	BasisesTable AS BasisesTable";
-
+	|	BasisesTable AS BasisesTable
+	|
+	|;
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
 
 	TableRowIDInfo = QueryResults[1].Unload();
-
+	TableSerialLotNumbers = QueryResults[3].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("SpecialOffers", TablesSO.SpecialOffers);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 

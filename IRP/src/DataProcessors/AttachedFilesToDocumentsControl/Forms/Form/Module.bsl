@@ -78,9 +78,17 @@ EndFunction
 
 &AtClient
 Procedure AddNewDocument(Command)
-	If Items.DocumentsAttachedFiles.CurrentData = Undefined Then
+	//@skip-check property-return-type
+	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	
+	If Not ValueIsFilled(CurrentData.FilePresention) Then
+		//@skip-check property-return-type
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_041);
+		Return;
+	EndIf;	
 	
 	CurrentDocStructure = GetCurrentDocInTable();
 	If CurrentDocStructure = Undefined Then

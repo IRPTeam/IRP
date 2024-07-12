@@ -254,13 +254,6 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 				EndDo;
 			EndIf;
 			
-//			If _Is_Return Then
-//				Records_SerialLotNumbers_Return = Posting_T1040T_RowIDSerialLotNumbers_Return(Source);
-//				For Each Row In Records_SerialLotNumbers_Return Do
-//					FillPropertyValues(Records_SerialLotNumbers.Add(), Row);
-//				EndDo;
-//			EndIf;
-//			
 			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Load(Records_SerialLotNumbers);
 			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
 		EndIf;
@@ -931,51 +924,6 @@ Function Posting_T1040T_RowIDSerialLotNumbers_Invoice(Source)
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
-
-//Function Posting_T1040T_RowIDSerialLotNumbers_Return(Source)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	RowIDInfo.Ref.Date AS Period,
-//	|	RowIDInfo.Ref AS Recorder,
-//	|	RowIDInfo.RowID,
-//	|	RowIDInfo.BasisKey,
-//	|	RowIDInfo.CurrentStep AS Step,
-//	|	RowIDInfo.Basis AS Basis,
-//	|	RowIDInfo.RowRef,
-//	|	SLN.SerialLotNumber,
-//	|	-SLN.Quantity AS Quantity
-//	|FROM
-//	|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
-//	|		INNER JOIN Document.PurchaseReturn.SerialLotNumbers AS SLN
-//	|		ON RowIDInfo.Ref = &Ref
-//	|		AND SLN.Ref = &Ref
-//	|		AND RowIDInfo.Ref = SLN.Ref
-//	|		AND RowIDInfo.Key = SLN.Key
-//	|		AND RowIDInfo.CurrentStep = &CurrentStep";
-//	
-//	Query.Text = StrReplace(Query.Text, "SalesInvoice", Source.Metadata().Name);
-//	
-//	Query.SetParameter("Ref", Source.Ref);
-//
-//	CurrentStep = Undefined;
-//	Is = Is(Source);
-//	If Is.SR Or Is.SRO Then
-//		CurrentStep = Catalogs.MovementRules.SRO_SR;
-//	ElsIf Is.PR Or Is.PRO Then
-//		CurrentStep = Catalogs.MovementRules.PRO_PR;
-//	ElsIf Is.RRR Then
-//		CurrentStep = Catalogs.MovementRules.RRR_RGR;
-//	ElsIf Is.RGR Then
-//		CurrentStep = Catalogs.MovementRules.RRR_RGR;
-//	EndIf;
-//
-//	Query.SetParameter("CurrentStep", CurrentStep);
-//
-//	QueryResult = Query.Execute();
-//	QueryTable = QueryResult.Unload();
-//	Return QueryTable;
-//EndFunction
 
 #Region RowID
 

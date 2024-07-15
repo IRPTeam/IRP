@@ -2318,12 +2318,54 @@
           <contextMenu>
             <name>CurrentFilesTableContextMenu</name>
             <id>121</id>
+            <items xsi:type="form:Button">
+              <name>AttachOtherToCurrentFiles</name>
+              <id>255</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>AttachOtherToCurrentFilesExtendedTooltip</name>
+                <id>256</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.AttachOther</commandName>
+              <representation>PictureAndText</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <height>4</height>
+              <autoMaxHeight>true</autoMaxHeight>
+              <verticalStretch>true</verticalStretch>
+              <placementArea>UserCmds</placementArea>
+              <font xsi:type="core:FontRef">
+                <font>Style.NormalTextFont</font>
+                <height>14.0</height>
+                <bold>true</bold>
+                <italic>false</italic>
+                <underline>false</underline>
+                <strikeout>false</strikeout>
+              </font>
+              <picture xsi:type="core:PictureRef">
+                <picture>StdPicture.Attach</picture>
+              </picture>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
-            <autoFill>true</autoFill>
           </contextMenu>
           <readOnly>true</readOnly>
           <changeRowSet>true</changeRowSet>

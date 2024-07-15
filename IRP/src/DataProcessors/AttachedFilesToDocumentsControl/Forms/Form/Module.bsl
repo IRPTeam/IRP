@@ -79,7 +79,7 @@ EndFunction
 &AtClient
 Procedure AddNewDocument(Command)
 	//@skip-check property-return-type
-	CurrentData = Items.DocumentsAttachedFiles.CurrentData;
+	CurrentData = Items.CurrentFilesTable.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -369,6 +369,15 @@ Function GetCurrentDocInTable()
 	CurrentDataAttachedDocs = Items.DocumentsAttachedFiles.CurrentData;
 	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataAttachedDocs.NamingFormat);
 	
+	CurrentItemName = ThisObject.CurrentItem.Name;
+	PrintFormName = Undefined;
+	If CurrentItemName = "CurrentFilesTable" Then
+		CurrentDataCurrentAttachments = Items.CurrentFilesTable.CurrentData;
+	ElsIf CurrentItemName = "DocumentsAttachedFiles" Then
+		CurrentDataCurrentAttachments = Items.DocumentsAttachedFiles.CurrentData;
+	EndIf;
+	PrintFormName = CurrentDataCurrentAttachments.FilePresention;		
+	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
 	Structure.Insert("ID", CurrentData.ID);
 	Structure.Insert("Ref", CurrentData.DocRef);
@@ -377,7 +386,7 @@ Function GetCurrentDocInTable()
 	Structure.Insert("Company", CurrentData.Company);
 	Structure.Insert("Storage", CurrentData.FileStorageVolume);
 	Structure.Insert("FilePrefix", FilePrefix);
-	Structure.Insert("PrintFormName", CurrentDataAttachedDocs.FilePresention);
+	Structure.Insert("PrintFormName", PrintFormName);
 	Structure.Insert("MaxSize", CurrentDataAttachedDocs.MaximumFileSize);
 	
 	Return Structure;
@@ -760,7 +769,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	Query.Text = 
 		"SELECT
 		|	AttachedFiledControl.Comment AS Comment,
-		|	AttachedFiledControl.DocumentType
+		|	AttachedFiledControl.FileType
 		|FROM
 		|	InformationRegister.AttachedFilesControl AS AttachedFiledControl
 		|WHERE
@@ -770,7 +779,18 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	SelectionDetailRecords = QueryResult.Select();
 	
 	While SelectionDetailRecords.Next() Do
-		TableRow = CurrentFilesTable.Add();
+		//@skip-check structure-consructor-value-type
+		//@skip-check property-return-type
+		SearchStructure = New Structure("FilePresention", SelectionDetailRecords.FileType);
+		SearchArray = CurrentFilesTable.FindRows(SearchStructure);
+		
+		If SearchArray.Count() > 0 Then
+			TableRow = SearchArray[0];
+		Else
+			TableRow = CurrentFilesTable.Add();		
+		EndIf;	 
+		//@skip-check property-return-type
+		//@skip-check statement-type-change
 		TableRow.Comment = SelectionDetailRecords.Comment;
 	EndDo;
 EndProcedure
@@ -895,7 +915,8 @@ EndProcedure
 // * Company - CatalogRef.Companies - 
 // * Branch - CatalogRef.BusinessUnits - 
 // * DocumentType - String - 
-// * Document - DocumentRef - 
+// * Document - DocumentRef -
+// * FileType - ChartOfCharacteristicTypesRef.AddAttributeAndProperty - 
 &AtClient
 Function GetOtherAttachmentSettings(CurrentDocStructure)
 	Structure = New Structure;
@@ -903,6 +924,7 @@ Function GetOtherAttachmentSettings(CurrentDocStructure)
 	Structure.Insert("Branch", CurrentDocStructure.Branch);
 	Structure.Insert("DocumentType", CurrentDocStructure.DocMetaName);
 	Structure.Insert("Document", CurrentDocStructure.Ref);
+	Structure.Insert("FileType", CurrentDocStructure.PrintFormName);
 	Return Structure
 EndFunction
 
@@ -919,6 +941,9 @@ Procedure AfterOtherAttachmentInput(Result, AdditionalParameters) Export
 		AdditionalParameters.Insert("Comment", Result);
 		
 		WriteOtherAttachmentInput(AdditionalParameters);
+		
+		Notify("UpdateObjectPictures_AddNewOne", Undefined, Undefined);
+		
 	EndIf;
 	
 EndProcedure
@@ -939,6 +964,7 @@ Procedure WriteOtherAttachmentInput(Structure)
 	RecordManager.Document = Structure.Document;
 	RecordManager.RecordID = New UUID;
 	RecordManager.Comment = Structure.Comment;
+	RecordManager.FileType = Structure.FileType;
 	RecordManager.Write();
 	
 EndProcedure

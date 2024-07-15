@@ -24,7 +24,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		If CurrentDocStructure = Undefined Then
 			Return;
 		EndIf;
-		UpdateAttachedFiles(CurrentDocStructure.Ref);
+		UpdateAttachedFiles(CurrentDocStructure.Ref, CurrentDocStructure.ID);
 		
 		DocsArray = New Array; // DocumentRef
 		DocsArray.Add(CurrentDocStructure.Ref);
@@ -215,7 +215,7 @@ Procedure DocumentsOnActivateRow(Item)
 	Items.DocumentsAttachedFiles.RowFilter = New FixedStructure("ID", CurrentData.ID);
 	Preview = "";
 	PDFViewer = New PDFDocument();
-	UpdateAttachedFiles(CurrentData.DocRef);
+	UpdateAttachedFiles(CurrentData.DocRef, CurrentData.ID);
 EndProcedure
 
 &AtClient
@@ -370,6 +370,7 @@ Function GetCurrentDocInTable()
 	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataAttachedDocs.NamingFormat);
 	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
+	Structure.Insert("ID", CurrentData.ID);
 	Structure.Insert("Ref", CurrentData.DocRef);
 	Structure.Insert("DocMetaName", CurrentData.DocMetaName);
 	Structure.Insert("Branch", CurrentData.Branch);
@@ -727,21 +728,39 @@ Procedure FillDocumentsTables(QueryStructure, IsUpdate = False)
 EndProcedure
 
 &AtServer
-Procedure UpdateAttachedFiles(DocRef)
-	
+Procedure UpdateAttachedFiles(DocRef, RowID)
 	CurrentFilesTable.Clear();
+	
+	ArrayDocsToAttach = Object.DocumentsAttachedFiles.FindRows(New Structure("ID", RowID));
+	For Each ArrayItem In ArrayDocsToAttach Do
+		NewRow = CurrentFilesTable.Add();
+		NewRow.FilePresention = ArrayItem.FilePresention;
+		NewRow.IsRequired = ArrayItem.IsRequired;
+	EndDo;		
+	
 	FilesArray = PictureViewerServer.PicturesInfoForSlider(DocRef);
 	
 	For Each Structure In FilesArray Do
-		NewRow = CurrentFilesTable.Add();
-		NewRow.File = Structure.FileRef;		
+		SearchStructure = New Structure;
+		SearchStructure.Insert("FilePresention", CommonFunctionsServer.GetRefAttribute(Structure.FileRef, "PrintFormName"));
+		SearchStructure.Insert("File", Catalogs.Files.EmptyRef());
+		
+		SearchArray = CurrentFilesTable.FindRows(SearchStructure);
+		If SearchArray.Count() = 0 Then
+			TableRow = CurrentFilesTable.Add();			
+		Else
+			TableRow = SearchArray[0];		
+		EndIf;
+		TableRow.File = Structure.FileRef;		
+				
 	EndDo;
 
 	Query = New Query;
 	Query.SetParameter("Document", DocRef);
 	Query.Text = 
 		"SELECT
-		|	AttachedFiledControl.Comment AS Comment
+		|	AttachedFiledControl.Comment AS Comment,
+		|	AttachedFiledControl.DocumentType
 		|FROM
 		|	InformationRegister.AttachedFilesControl AS AttachedFiledControl
 		|WHERE
@@ -751,9 +770,8 @@ Procedure UpdateAttachedFiles(DocRef)
 	SelectionDetailRecords = QueryResult.Select();
 	
 	While SelectionDetailRecords.Next() Do
-		NewRow = CurrentFilesTable.Add();
-		//@skip-check property-return-type, statement-type-change
-		NewRow.Comment = SelectionDetailRecords.Comment;
+		TableRow = CurrentFilesTable.Add();
+		TableRow.Comment = SelectionDetailRecords.Comment;
 	EndDo;
 EndProcedure
 

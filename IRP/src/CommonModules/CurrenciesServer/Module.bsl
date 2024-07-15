@@ -79,6 +79,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 		EndIf;
 		
 		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
+		UseLegalMovementType = IsUseLegalMovementType(ItemOfPostingInfo.Metadata);
 		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
 		UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
 		
@@ -103,7 +104,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
 			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
 		EndIf;
-		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, UseKey, UseAgreementMovementType);
+		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, 
+																UseKey, 
+																UseAgreementMovementType,
+																UseLegalMovementType);
 					
 		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
 							
@@ -140,6 +144,22 @@ Function IsUseAgreementMovementType(RegMetadata)
 	
 	Registers.Add(Reg.R8014T_ConsignorSales);
 	Registers.Add(Reg.R8015T_ConsignorPrices);
+	
+	If Registers.Find(RegMetadata) = Undefined Then
+		Return False;
+	Else
+		Return True;
+	EndIf;
+EndFunction
+
+Function IsUseLegalMovementType(RegMetadata)
+	// return true if use else (not use) return false	
+	
+	Reg = Metadata.AccumulationRegisters;
+	
+	Registers = New Array();
+	Registers.Add(Reg.R2040B_TaxesIncoming);
+	Registers.Add(Reg.R1040B_TaxesOutgoing);
 	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
@@ -632,7 +652,7 @@ Procedure GroupTableByAllDimensions(Table, RegMetadata, UseKey, ExcludeDimension
 	Table.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
 EndProcedure
 
-Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType)
+Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType, UseLegalMovementType)
 	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
 		Return ExpandTable;
 	EndIf;
@@ -650,65 +670,34 @@ Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMo
 	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
 	ExcludeDimensions.Add(Lower("Price")); 
 	
-	AgrRows = New Array();
-	
 	If UseAgreementMovementType Then
+		AgrRows = New Array();
+	
 		For Each Row In ExpandTable Do
 			If Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement Then
 				AgrRows.Add(Row);
 			EndIf;
 		EndDo;
 		
-		ArrayOfResourceNames = GetArrayOfResourceNames();
-			
-		MatchingColumns = New Array();
-		For Each RegDimension In RegMetadata.Dimensions Do
-			MatchingColumns.Add(Lower(RegDimension.Name));
-		EndDo;
-		MatchingColumns.Add(Lower("RecordType"));
-		
-		For Each AgrRow In AgrRows Do
-			For Each TrnRow In TrnRows Do
-								
-				If UseKey And ValueIsFilled(AgrRow.Key) And TrnRow.Key <> AgrRow.Key Then
-					Continue;
-				EndIf;
-				
-				DimensionsMatch = True;
-				For Each MatchingColumn In MatchingColumns Do   
-					If ExcludeDimensions.Find(Lower(MatchingColumn)) <> Undefined Then
-						Continue;
-					EndIf;
-					
-					If CommonFunctionsClientServer.ObjectHasProperty(AgrRow, MatchingColumn)
-						And CommonFunctionsClientServer.ObjectHasProperty(TrnRow, MatchingColumn) Then
-						If AgrRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
-							DimensionsMatch = False;
-							Break;
-						EndIf;
-					EndIf;
-				EndDo;
-				
-				If Not DimensionsMatch Then
-					Continue;
-				EndIf;
-				
-				TrnRow.Currency = AgrRow.Currency;
-				For Each ResourceName In ArrayOfResourceNames Do 
-					If CommonFunctionsClientServer.ObjectHasProperty(TrnRow, ResourceName)
-						And CommonFunctionsClientServer.ObjectHasProperty(AgrRow, ResourceName) Then
-						TrnRow[ResourceName] = AgrRow[ResourceName];
-					EndIf;
-				EndDo;
-				
-			EndDo;
-		EndDo;
+		ReplaceTransactionCurrency(ExpandTable, TrnRows, AgrRows, ExcludeDimensions, RegMetadata, UseKey);
 		
 		For Each AgrRow In AgrRows Do
 			ExpandTable.Delete(AgrRow);
-		EndDo;
+		EndDo;		
 	EndIf;
+		
+	If UseLegalMovementType Then
+		LegalRows = New Array();
 	
+		For Each Row In ExpandTable Do
+			If Row.CurrencyMovementType.Type = Enums.CurrencyType.Legal Then
+				LegalRows.Add(Row);
+			EndIf;
+		EndDo;
+		
+		ReplaceTransactionCurrency(ExpandTable, TrnRows, LegalRows, ExcludeDimensions, RegMetadata, UseKey);
+	EndIf;
+				
 	For Each TrnRow In TrnRows Do
 		For Each Row In ExpandTable Do
 			If UseKey And ValueIsFilled(TrnRow.Key) And Row.Key <> TrnRow.Key Then 
@@ -737,6 +726,54 @@ Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMo
 	
 	Return ExpandTable;
 EndFunction
+
+Procedure ReplaceTransactionCurrency(ExpandTable, TrnRows, OtherRows, ExcludeDimensions, RegMetadata, UseKey)
+	
+	ArrayOfResourceNames = GetArrayOfResourceNames();
+			
+	MatchingColumns = New Array();
+	For Each RegDimension In RegMetadata.Dimensions Do
+		MatchingColumns.Add(Lower(RegDimension.Name));
+	EndDo;
+	MatchingColumns.Add(Lower("RecordType"));
+		
+	For Each OtherRow In OtherRows Do
+		For Each TrnRow In TrnRows Do
+								
+			If UseKey And ValueIsFilled(OtherRow.Key) And TrnRow.Key <> OtherRow.Key Then
+				Continue;
+			EndIf;
+			
+			DimensionsMatch = True;
+			For Each MatchingColumn In MatchingColumns Do   
+				If ExcludeDimensions.Find(Lower(MatchingColumn)) <> Undefined Then
+					Continue;
+				EndIf;
+				
+				If CommonFunctionsClientServer.ObjectHasProperty(OtherRow, MatchingColumn)
+					And CommonFunctionsClientServer.ObjectHasProperty(TrnRow, MatchingColumn) Then
+					If OtherRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
+						DimensionsMatch = False;
+						Break;
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+			
+			TrnRow.Currency = OtherRow.Currency;
+			For Each ResourceName In ArrayOfResourceNames Do 
+				If CommonFunctionsClientServer.ObjectHasProperty(TrnRow, ResourceName)
+					And CommonFunctionsClientServer.ObjectHasProperty(OtherRow, ResourceName) Then
+					TrnRow[ResourceName] = OtherRow[ResourceName];
+				EndIf;
+			EndDo;
+				
+		EndDo;
+	EndDo;		
+EndProcedure
 
 Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;

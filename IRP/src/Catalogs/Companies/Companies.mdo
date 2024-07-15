@@ -415,6 +415,27 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="9c52a58f-e85c-430a-aa8b-2f53c30da901">
+    <name>LegalCurrencyMovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal currency movement type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.Type</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Enum.CurrencyType.EnumValue.Legal</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
     <producedTypes>
       <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

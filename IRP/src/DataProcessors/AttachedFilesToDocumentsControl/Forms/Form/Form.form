@@ -2869,6 +2869,26 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>NamingFormat</name>
+      <title>
+        <key>en</key>
+        <value>Naming format</value>
+      </title>
+      <id>13</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>PDFViewer</name>

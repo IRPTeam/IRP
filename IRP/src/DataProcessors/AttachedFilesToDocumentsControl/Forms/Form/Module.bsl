@@ -367,16 +367,19 @@ Function GetCurrentDocInTable()
 	Structure.Insert("Items", ThisObject.Items);
 		
 	CurrentDataAttachedDocs = Items.DocumentsAttachedFiles.CurrentData;
-	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataAttachedDocs.NamingFormat);
 	
+	FilePrefix = "";
 	CurrentItemName = ThisObject.CurrentItem.Name;
 	PrintFormName = Undefined;
 	If CurrentItemName = "CurrentFilesTable" Then
-		CurrentDataCurrentAttachments = Items.CurrentFilesTable.CurrentData;
+		CurrentDataCurrentAttachments = Items.CurrentFilesTable.CurrentData;		
 	ElsIf CurrentItemName = "DocumentsAttachedFiles" Then
-		CurrentDataCurrentAttachments = Items.DocumentsAttachedFiles.CurrentData;
+		CurrentDataCurrentAttachments = Items.DocumentsAttachedFiles.CurrentData;		
+	Else
+		CurrentDataCurrentAttachments = CurrentDataAttachedDocs;
 	EndIf;
-	PrintFormName = CurrentDataCurrentAttachments.FilePresention;		
+	PrintFormName = CurrentDataCurrentAttachments.FilePresention;
+	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);		
 	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
 	Structure.Insert("ID", CurrentData.ID);
@@ -714,7 +717,7 @@ Procedure FillDocumentsTables(QueryStructure, IsUpdate = False)
 				
 			FillPropertyValues(ChildRow, SelectionPrintForm);
 			
-			If SelectionPrintForm.IsFile Then
+			If SelectionPrintForm.IsFile And SelectionPrintForm.IsRequired Then
 				IsFile = IsFile + 1;
 			EndIf;
 			If SelectionPrintForm.IsRequired Then
@@ -745,6 +748,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 		NewRow = CurrentFilesTable.Add();
 		NewRow.FilePresention = ArrayItem.FilePresention;
 		NewRow.IsRequired = ArrayItem.IsRequired;
+		NewRow.NamingFormat = ArrayItem.NamingFormat;
 	EndDo;		
 	
 	FilesArray = PictureViewerServer.PicturesInfoForSlider(DocRef);

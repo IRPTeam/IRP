@@ -447,6 +447,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	|	AND TransactionKey.Branch = &Branch
 	|	AND TransactionKey.Currency = &Currency
 	|	AND TransactionKey.Partner = &Partner
+	|	AND TransactionKey.Agreement = &Agreement
 	|	AND TransactionKey.LegalName = &LegalName) AS TransactionsBalance";
 
 	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
@@ -458,6 +459,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	Query.SetParameter("Currency"  , AdvanceKey.Currency);
 	Query.SetParameter("Partner"   , AdvanceKey.Partner);
 	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
+	Query.SetParameter("Agreement" , AdvanceKey.AdvanceAgreement);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -465,7 +467,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	NeedWriteoff = AdvanceAmount;
 	NeedWriteTransactions = False;
 	While QuerySelection.Next() Do
-		If QuerySelection.TransactionAmount <= 0 Then
+		If QuerySelection.TransactionAmount < 0 And Not Parameters.DontWriteNegativeDebtAsAdvance Then
 			// Return due to advance, change advance balance
 			
 			// Transactions

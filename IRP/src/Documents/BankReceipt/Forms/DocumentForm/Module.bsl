@@ -694,6 +694,7 @@ EndProcedure
 Procedure PaymentByDocuments(Command)
 	FormParameters = New Structure();
 	FormParameters.Insert("SelectedDocuments", New Array());
+	FormParameters.Insert("SelectedPositionWithoutDocuments", New Array());
 	
 	FormParameters.Insert("Ref"           , Object.Ref);
 	FormParameters.Insert("Company"       , Object.Company);
@@ -708,6 +709,10 @@ Procedure PaymentByDocuments(Command)
 	For Each Row In Object.PaymentList Do
 		If ValueIsFilled(Row.BasisDocument) Then
 			FormParameters.SelectedDocuments.Add(Row.BasisDocument);
+		Else
+			PositionStructure = New Structure("Partner, Agreement");
+			FillPropertyValues(PositionStructure, Row);
+			FormParameters.SelectedPositionWithoutDocuments.Add(PositionStructure);	
 		EndIf;
 	EndDo;
 	Notify = New NotifyDescription("PaymentByDocumentSelectionEnd", ThisObject);		

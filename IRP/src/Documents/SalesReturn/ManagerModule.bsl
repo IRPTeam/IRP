@@ -532,7 +532,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -1259,38 +1258,6 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SR();
-EndFunction
-
-Function T1040T_RowIDSerialLotNumbers()
-	Return
-		"SELECT
-		|	CASE
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN SerialLotNumbers.Quantity
-		|		ELSE - SerialLotNumbers.Quantity
-		|	END AS Quantity,
-		|	CASE 
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN RowIDInfo.NextStep
-		|		ELSE RowIDInfo.CurrentStep
-		|	END AS Step,
-		|
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	CASE
-		|		WHEN RowIDInfo.Basis.Ref IS NULL
-		|			THEN RowIDInfo.Ref
-		|		ELSE RowIDInfo.Basis
-		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|INTO T1040T_RowIDSerialLotNumbers
-		|FROM
-		|	Document.SalesReturn.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

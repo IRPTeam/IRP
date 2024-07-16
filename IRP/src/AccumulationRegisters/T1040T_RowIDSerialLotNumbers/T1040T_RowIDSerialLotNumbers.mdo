@@ -44,6 +44,34 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="8f5175b1-98a5-451d-92c0-d5aa266a4219">
+    <name>BasisKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis key</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="fc1b16c6-303e-4f6c-a06d-527dd6d928b5">
+    <name>Step</name>
+    <synonym>
+      <key>en</key>
+      <value>Step</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.MovementRules</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="1ccb68c3-0ceb-46ce-8ffd-ec98d5f0a3b1">
     <name>Basis</name>
     <synonym>
@@ -66,20 +94,6 @@
     </synonym>
     <type>
       <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="fc1b16c6-303e-4f6c-a06d-527dd6d928b5">
-    <name>Step</name>
-    <synonym>
-      <key>en</key>
-      <value>Step</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.MovementRules</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -365,7 +365,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		when BatchKeysInfo.TotalQuantity <> 0
 	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
 	|		else 0
-	|	end as AmountTax,
+	|	end as InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -428,7 +429,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -577,7 +578,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(S1001L_VendorsPricesByItemKey());
 	QueryArray.Add(R5020B_PartnersBalance());
-	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -986,13 +986,21 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	ItemList.TaxAmount AS Amount
+		|	SUM(ItemList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
 		|	ItemList.IsPurchase
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1342,9 +1350,7 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*,
-		   |	BatchKeysInfo.Amount AS InvoiceAmount, 
-		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
+		   |	*
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo
@@ -1451,59 +1457,6 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_PI();
-EndFunction
-
-Function T1040T_RowIDSerialLotNumbers()
-	Return
-		"SELECT
-		|	CASE
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN SerialLotNumbers.Quantity
-		|		ELSE - SerialLotNumbers.Quantity
-		|	END AS Quantity,
-		|	CASE 
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN RowIDInfo.NextStep
-		|		ELSE RowIDInfo.CurrentStep
-		|	END AS Step,
-		|
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	CASE
-		|		WHEN RowIDInfo.Basis.Ref IS NULL
-		|			THEN RowIDInfo.Ref
-		|		ELSE RowIDInfo.Basis
-		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|INTO T1040T_RowIDSerialLotNumbers
-		|FROM
-		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key
-		|		INNER JOIN Document.PurchaseInvoice.ItemList AS ItemList
-		|		ON RowIDInfo.Ref = ItemList.Ref
-		|		AND (ItemList.Ref = &Ref)
-		|		AND RowIDInfo.Key = ItemList.Key
-		|		AND (ItemList.UseGoodsReceipt)
-		|UNION ALL
-		|
-		|SELECT
-		|	SerialLotNumbers.Quantity AS Quantity,
-		|	VALUE(Catalog.MovementRules.PRO_PR) AS Step,
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	RowIDInfo.Ref AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|FROM
-		|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

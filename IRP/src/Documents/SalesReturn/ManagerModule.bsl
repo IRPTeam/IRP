@@ -348,7 +348,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled
 	|			THEN BatchKeysInfo.LandedCostTax
 	|		ELSE 0
-	|	END AS AmountTax,
+	|	END AS InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -388,6 +389,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6020S_BatchKeysInfo.Name, BatchKeysInfo);
 	Parameters.PostingDataTables[T6020S_BatchKeysInfo].WriteInTransaction = Parameters.IsReposting;
 	
+	IncludeDimensions = New Map();
+	IncludeDimensions.Insert(T6020S_BatchKeysInfo, "SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor");
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IncludeDimensions", IncludeDimensions);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
@@ -396,7 +400,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -528,7 +532,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -901,14 +904,22 @@ Function R1040B_TaxesOutgoing()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount AS Amount,
+		|	SUM(ItemList.TaxAmount) AS Amount,
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.IsReturnFromCustomer
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";
 EndFunction
 
 #Region Stock
@@ -1161,8 +1172,8 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
 		   |	SUM(BatchKeysInfo.Quantity) AS Quantity,
-		   |	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
-		   |	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount,
+		   |	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
+		   |	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |INTO T6020S_BatchKeysInfo
@@ -1247,38 +1258,6 @@ EndFunction
 
 Function R5020B_PartnersBalance()
 	Return AccumulationRegisters.R5020B_PartnersBalance.R5020B_PartnersBalance_SR();
-EndFunction
-
-Function T1040T_RowIDSerialLotNumbers()
-	Return
-		"SELECT
-		|	CASE
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN SerialLotNumbers.Quantity
-		|		ELSE - SerialLotNumbers.Quantity
-		|	END AS Quantity,
-		|	CASE 
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN RowIDInfo.NextStep
-		|		ELSE RowIDInfo.CurrentStep
-		|	END AS Step,
-		|
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	CASE
-		|		WHEN RowIDInfo.Basis.Ref IS NULL
-		|			THEN RowIDInfo.Ref
-		|		ELSE RowIDInfo.Basis
-		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|INTO T1040T_RowIDSerialLotNumbers
-		|FROM
-		|	Document.SalesReturn.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.SalesReturn.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

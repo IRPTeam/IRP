@@ -285,7 +285,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5020B_PartnersBalance());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(T1040T_RowIDSerialLotNumbers());
 	Return QueryArray;
 EndFunction
 
@@ -629,13 +628,21 @@ Function R2040B_TaxesIncoming()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType,
-		|	ItemList.TaxAmount AS Amount
+		|	SUM(ItemList.TaxAmount) AS Amount
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
 		|	ItemList.IsReturnToVendor
-		|	AND ItemList.TaxAmount <> 0";	
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";	
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -854,38 +861,6 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.BatchDocument,
 		|	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef)),
 		|	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef))";
-EndFunction
-
-Function T1040T_RowIDSerialLotNumbers()
-	Return
-		"SELECT
-		|	CASE
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN SerialLotNumbers.Quantity
-		|		ELSE - SerialLotNumbers.Quantity
-		|	END AS Quantity,
-		|	CASE 
-		|		WHEN RowIDInfo.Key = RowIDInfo.RowID
-		|			THEN RowIDInfo.NextStep
-		|		ELSE RowIDInfo.CurrentStep
-		|	END AS Step,
-		|
-		|	RowIDInfo.Ref.Date AS Period,
-		|	RowIDInfo.RowID AS RowID,
-		|	CASE
-		|		WHEN RowIDInfo.Basis.Ref IS NULL
-		|			THEN RowIDInfo.Ref
-		|		ELSE RowIDInfo.Basis
-		|	END AS Basis,
-		|	SerialLotNumbers.SerialLotNumber AS SerialLotNumber
-		|INTO T1040T_RowIDSerialLotNumbers
-		|FROM
-		|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
-		|		INNER JOIN Document.PurchaseReturn.SerialLotNumbers AS SerialLotNumbers
-		|		ON RowIDInfo.Ref = SerialLotNumbers.Ref
-		|		AND (RowIDInfo.Ref = &Ref)
-		|		AND (SerialLotNumbers.Ref = &Ref)
-		|		AND RowIDInfo.Key = SerialLotNumbers.Key";
 EndFunction
 
 #EndRegion

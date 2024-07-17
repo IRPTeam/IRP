@@ -624,20 +624,22 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 			And I move to "Payments" tab
 			And in the table "PaymentList" I click "Payment by documents" button
 			And "Documents" table became equal
-				| 'Document'                                       | 'Partner' | 'Partner term'       | 'Legal name'    | 'Legal name contract' | 'Order'                                        | 'Project' | 'Amount' | 'Payment' |
-				| 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '190,00' | ''        |
-				| 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '100,00' | ''        |
-				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 118 dated 04.09.2023 13:46:08' | ''        | '900,00' | ''        |
-				| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 119 dated 04.09.2023 13:50:07' | ''        | '900,00' | ''        |
+				| "Check" | "Document"                                       | "Partner" | "Partner term"                | "Legal name"    | "Order"                                        | "Amount" | "Payment" | "Legal name contract" | "Project" |
+				| "No"    | ""                                               | "DFC"     | "DFC Vendor by Partner terms" | "DFC"           | ""                                             | "670,00" | ""        | ""                    | ""        |
+				| "No"    | "Purchase invoice 126 dated 15.03.2021 12:00:00" | "Maxim"   | "Partner term Maxim"          | "Company Maxim" | ""                                             | "190,00" | ""        | ""                    | ""        |
+				| "No"    | "Purchase invoice 127 dated 28.04.2021 21:50:01" | "Maxim"   | "Partner term Maxim"          | "Company Maxim" | ""                                             | "100,00" | ""        | ""                    | ""        |
+				| "No"    | "Purchase invoice 194 dated 04.09.2023 13:50:38" | "Maxim"   | "Partner term Maxim"          | "Company Aldis" | "Purchase order 118 dated 04.09.2023 13:46:08" | "900,00" | ""        | ""                    | ""        |
+				| "No"    | "Purchase invoice 194 dated 04.09.2023 13:50:38" | "Maxim"   | "Partner term Maxim"          | "Company Aldis" | "Purchase order 119 dated 04.09.2023 13:50:07" | "900,00" | ""        | ""                    | ""        |		
 	* Allocation check	(one partner)
 		And I input "2 000,00" text in the field named "Amount"
+		And I select from the drop-down list named "FilterPartner" by "maxim" string
 		And I click the button named "Calculate"
 		And "Documents" table became equal
-			| 'Document'                                       | 'Partner' | 'Partner term'       | 'Legal name'    | 'Legal name contract' | 'Order'                                        | 'Project' | 'Amount' | 'Payment' |
-			| 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '190,00' | '190,00'  |
-			| 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'Maxim'   | 'Partner term Maxim' | 'Company Maxim' | ''                    | ''                                             | ''        | '100,00' | '100,00'  |
-			| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 118 dated 04.09.2023 13:46:08' | ''        | '900,00' | '900,00'  |
-			| 'Purchase invoice 194 dated 04.09.2023 13:50:38' | 'Maxim'   | 'Partner term Maxim' | 'Company Aldis' | ''                    | 'Purchase order 119 dated 04.09.2023 13:50:07' | ''        | '900,00' | '810,00'  |
+			| "Check" | "Document"                                       | "Partner" | "Partner term"       | "Legal name"    | "Order"                                        | "Amount" | "Payment" | "Legal name contract" | "Project" |
+			| "No"    | "Purchase invoice 126 dated 15.03.2021 12:00:00" | "Maxim"   | "Partner term Maxim" | "Company Maxim" | ""                                             | "190,00" | "190,00"  | ""                    | ""        |
+			| "No"    | "Purchase invoice 127 dated 28.04.2021 21:50:01" | "Maxim"   | "Partner term Maxim" | "Company Maxim" | ""                                             | "100,00" | "100,00"  | ""                    | ""        |
+			| "No"    | "Purchase invoice 194 dated 04.09.2023 13:50:38" | "Maxim"   | "Partner term Maxim" | "Company Aldis" | "Purchase order 118 dated 04.09.2023 13:46:08" | "900,00" | "900,00"  | ""                    | ""        |
+			| "No"    | "Purchase invoice 194 dated 04.09.2023 13:50:38" | "Maxim"   | "Partner term Maxim" | "Company Aldis" | "Purchase order 119 dated 04.09.2023 13:50:07" | "900,00" | "810,00"  | ""                    | ""        |			
 		* Amount more then invoice sum
 			And I input "5 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
@@ -656,7 +658,9 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 				| '3' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 118 dated 04.09.2023 13:46:08' | '900,00'       | ''                        | ''                 | ''                           |
 				| '4' | 'Maxim'   | 'Company Aldis' | 'Partner term Maxim' | ''                    | 'Purchase invoice 194 dated 04.09.2023 13:50:38' | ''        | 'Purchase order 119 dated 04.09.2023 13:50:07' | '900,00'       | ''                        | ''                 | ''                           |
 			And in the table "PaymentList" I click "Payment by documents" button
-			Then the number of "Documents" table lines is "равно" "0"
+			And "Documents" table became equal
+				| "Check" | "Document" | "Partner" | "Partner term"                | "Legal name" | "Order" | "Amount" | "Payment" | "Legal name contract" | "Project" |
+				| "No"    | ""         | "DFC"     | "DFC Vendor by Partner terms" | "DFC"        | ""      | "670,00" | ""        | ""                    | ""        |		
 	* Allocation check	(two partners)
 			And I close current window	
 			And I move to "Other" tab
@@ -672,9 +676,9 @@ Scenario: _053020 check selection form (Payment by documents) in BP
 			And I click the button named "Calculate"
 			And "Documents" table became equal
 				| 'Document'                                       | 'Partner'   | 'Partner term'       | 'Legal name'        | 'Legal name contract' | 'Order'                   | 'Project' | 'Amount'     | 'Payment'    |
-				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | ''           |
+				| 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'Maxim'     | 'Partner term Maxim' | 'Company Maxim'     | ''                    | ''                        | ''        | '100,00'     | '100,00'     |
 				| '$$PurchaseInvoice018001$$'                      | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | '$$PurchaseOrder017001$$' | ''        | '134 774,90' | '134 774,90' |
-				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 225,10'  |
+				| '$$PurchaseInvoice29604$$'                       | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' | ''                    | ''                        | ''        | '13 000,00'  | '11 125,10'  |
 			And I click "Ok" button
 			And "PaymentList" table became equal
 				| 'Partner'   | 'Payee'             | 'Partner term'       | 'Legal name contract' | 'Basis document'                                 | 'Project' | 'Order'                                        | 'Total amount' |

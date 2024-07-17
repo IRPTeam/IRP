@@ -242,6 +242,7 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 	LegalNameContractIsPresent = CommonFunctionsClientServer.ObjectHasProperty(Row, "LegalNameContract");
 	PayeeIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payee");
 	PayerIsPresent         = CommonFunctionsClientServer.ObjectHasProperty(Row, "Payer");
+	PartnerIsPresent       = CommonFunctionsClientServer.ObjectHasProperty(Row, "Partner");
 
 	// Cost list
 	AmountIsPresent   = CommonFunctionsClientServer.ObjectHasProperty(Row, "Amount");
@@ -329,7 +330,11 @@ Procedure AddNewRowAtServer(TableName, Parameters, OnAddViewNotify, FillingValue
 		
 		If FillingValues.Property("Payer") And PayerIsPresent Then
 			ControllerClientServer_V2.SetPaymentListLegalName(Parameters, PrepareValue(FillingValues.Payer, Row.Key));
-		EndIf;	
+		EndIf;
+		
+		If FillingValues.Property("Partner") And PartnerIsPresent Then
+			ControllerClientServer_V2.SetPaymentListPartner(Parameters, PrepareValue(FillingValues.Partner, Row.Key));
+		EndIf;
 	EndIf;
 	
 	If TableName = "TimeSheetList" Then

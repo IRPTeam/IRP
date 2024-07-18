@@ -3617,8 +3617,8 @@ Scenario: Create catalog AttachedDocumentSettings objects
 
 	And I refill object tabular section "FileSettings":
 		| 'Ref'                                                                              | 'FilePresention'                                                                                     | 'FileTemplate' | 'NamingFormat'                              | 'Required' | 'MaximumFileSize' | 'FileExtension'        |
-		| 'e1cib/data/Catalog.AttachedDocumentSettings?ref=b7bf8c16981f994a11ef0d4fefcf3883' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7bf8c16981f994a11ef0d4fefcf3882' | ''             | '%Store_%DocDate_Return_request%_DocNumber' | 'True'     |                   | '*.jpeg; *.png; *.jpg' |
-		| 'e1cib/data/Catalog.AttachedDocumentSettings?ref=b7bf8c16981f994a11ef0d4fefcf3883' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7c0b354b75942f011ef1ced5b66c2c5' | ''             | '%DocDate_Return_Receipt%_DocNumber'        | 'False'    |                   | '*.pdf'                |
+		| 'e1cib/data/Catalog.AttachedDocumentSettings?ref=b7bf8c16981f994a11ef0d4fefcf3883' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7bf8c16981f994a11ef0d4fefcf3882' | ''             | '%Store_%DocDate_Return_request_%DocNumber' | 'True'     |                   | '*.jpeg; *.png; *.jpg' |
+		| 'e1cib/data/Catalog.AttachedDocumentSettings?ref=b7bf8c16981f994a11ef0d4fefcf3883' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7c0b354b75942f011ef1ced5b66c2c5' | ''             | '%DocDate_Return_Receipt_%DocNumber'        | 'False'    |                   | '*.pdf'                |
 		| 'e1cib/data/Catalog.AttachedDocumentSettings?ref=b7bf8c16981f994a11ef0d4fefcf38a1' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b7bf8c16981f994a11ef0d4fefcf38a0' | ''             | ''                                          | 'True'     |                   | '*.jpg; *.pdf; *.docx' |
 
 Scenario: Create catalog FileStorageVolumes objects (Attach File Control)

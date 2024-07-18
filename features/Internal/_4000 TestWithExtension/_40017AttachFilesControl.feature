@@ -103,7 +103,7 @@ Scenario: _4001705 setting for Attached document settings
 		And I select current line in "List" table
 		And I set "Required" checkbox in "FileSettings" table
 		And I activate "Naming format" field in "FileSettings" table
-		And I input "%DocDate_Sales_Invoice%DocNumber" text in "Naming format" field of "FileSettings" table
+		And I input "%DocDate_Sales_Invoice_%DocNumber" text in "Naming format" field of "FileSettings" table
 		And I finish line editing in "FileSettings" table
 		And I activate "File extension" field in "FileSettings" table
 		And I select current line in "FileSettings" table
@@ -112,12 +112,12 @@ Scenario: _4001705 setting for Attached document settings
 		And I click "Save" button
 	* Check
 		And "FileSettings" table became equal
-			| 'Required' | 'File presention' | 'Naming format'                    | 'File extension' |
-			| 'Yes'      | 'Type'            | '%DocDate_Sales_Invoice%DocNumber' | '*.pdf, *.jpg'   |
+			| 'Required' | 'File presention' | 'Naming format'                     | 'File extension' |
+			| 'Yes'      | 'Type'            | '%DocDate_Sales_Invoice_%DocNumber' | '*.pdf, *.jpg'   |
 		And I click "Save and close" button
 		And "List" table contains lines
 			| 'Description'   |
-			| 'SalesInvoice' |	
+			| 'SalesInvoice'  |	
 	* Change Attached document setting
 		And I go to line in "List" table
 			| 'Description'         |
@@ -172,7 +172,7 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 		And I click Choice button of the field named "Period"
 		And I click "Clear period" button			
 		And I input "01.01.2023" text in the field named "DateBegin"
-		And I input "08.05.2024" text in the field named "DateEnd"
+		And I input "09.05.2024" text in the field named "DateEnd"
 		And I click the button named "Select"	
 	* Add file
 		And I go to line in "DocumentList" table
@@ -180,16 +180,16 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 			| "Purchase order" | "09.05.2023" | "222"        | "Distribution department" |
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch" |
-			| "Retail return receipt" | "16.07.2024" | "225"        | ""       |
+			| "Retail return receipt" | "09.05.2024" | "224"        | ""       |
 		And I go to line in "DocumentsAttachedFiles" table
-			| 'File type'          | 'Required' |
+			| 'File type'       | 'Required' |
 			| 'Return request'  | 'Yes'      |	
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 		And Delay 10
 		And I click the button named "AddNewDocument"
 		And "CurrentFilesTable" table contains lines:
-			| 'File'         |
-			| 'testjpg1.jpg' |
+			| 'File'                        |
+			| '20240508_Return_Receipt_223' |
 
 Scenario: _4001712 check attached file in document	
 	And I close all client application windows
@@ -203,8 +203,8 @@ Scenario: _4001712 check attached file in document
 	Then "Attach file" window is opened
 	And I activate "File" field in "FileList" table
 	And "FileList" table contains lines:
-		| 'File'         |
-		| 'testjpg1.jpg' |
+		| 'File'                        |
+		| '20240508_Return_Receipt_223' |
 	
 Scenario: _4001713 check optional documents for RRR (pdf)
 	And I close all client application windows
@@ -229,14 +229,14 @@ Scenario: _4001713 check optional documents for RRR (pdf)
 		And Delay 10
 		And I click the button named "AddNewDocument"
 		And "CurrentFilesTable" table contains lines:
-			| 'File'                |
-			| 'Test pdf 1 page.pdf' |
+			| 'File'                        |
+			| '20240508_Return_Receipt_223' |
 	* Open pdf file
 		And I go to line in "CurrentFilesTable" table
-			| 'File'                | 'Print form'     |
-			| 'Test pdf 1 page.pdf' | 'Return receipt' |
+			| 'File'                        | 'File presentation' |
+			| '20240508_Return_Receipt_223' | 'Return receipt'    |
 		And I select current line in "CurrentFilesTable" table
-		Then "Test pdf * page.pdf" window is opened
+		Then "20240508_Return_Receipt_223" window is opened
 	And I close all client application windows
 									
 		
@@ -299,11 +299,11 @@ Scenario: _4001715 check Date, Company and Branch filters
 		And I input "01.01.2023" text in the field named "DateBegin"
 		And I input "08.05.2024" text in the field named "DateEnd"
 		And I click the button named "Select"	
-		And "DocumentList" table contains lines
+		And "DocumentList" table became equal
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"                  |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""                        |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""                        |
 			| "Purchase order"        | "09.05.2023" | "221"        | "Front office"            |
-			| "Purchase order"        | "09.05.2023" | "222"        | "Front office"            |
+			| "Purchase order"        | "09.05.2023" | "222"        | "Distribution department" |
 			| "Purchase order"        | "09.05.2023" | "223"        | ""                        |
 			| "Purchase order"        | "09.05.2023" | "224"        | "Distribution department" |
 		And I close all client application windows
@@ -322,7 +322,7 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 		And I set checkbox "Check mode"
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"                  |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""                        |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""                        |
 		And in the table "DocumentList" I click "Lock selected" button
 		And I go to line in "DocumentList" table
 			| "Doc type"       | "Doc date"   | "Doc number" | "Branch"       |
@@ -332,13 +332,13 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 		And in the table "DocumentList" I click "Only unlocked" button
 		And "DocumentList" table does not contain lines
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""             |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 			| "Purchase order"        | "09.05.2023" | "221"        | "Front office" |
 		And in the table "DocumentList" I click "Only unlocked" button
 	* Try unlock without permission
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""             |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 		And in the table "DocumentList" I click "Unlock selected" button
 		Then there are lines in TestClient message log
 			|'Access is denied'|
@@ -366,10 +366,10 @@ Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data 
 		And I set checkbox "Check mode"
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""             |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 		And in the table "DocumentList" I click "Unlock selected" button
 		And in the table "DocumentList" I click "Only unlocked" button
 		And "DocumentList" table contains lines
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2023" | "223"        | ""             |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 	And I close all client application windows

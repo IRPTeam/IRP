@@ -71,6 +71,13 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
+	If ThisObject.SendCurrency = ThisObject.ReceiveCurrency
+		And ThisObject.SendAmount <> ThisObject.ReceiveAmount Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "SendAmount", ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "ReceiveAmount", ThisObject);
+		Cancel = True;
+	EndIf;
+	
 	If ThisObject.SendPartner = ThisObject.ReceivePartner And ThisObject.SendLegalName = ThisObject.ReceiveLegalName Then
 				
 		If (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer        And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)

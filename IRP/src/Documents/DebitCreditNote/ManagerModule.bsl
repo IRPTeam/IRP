@@ -775,8 +775,6 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
 
-
-//-----------------------------------	
 	From_VendorTransaction_To_CustomerTransaction = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);

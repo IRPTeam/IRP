@@ -745,10 +745,11 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	AdditionalAnalytics_Receiver.Insert("BasisDocument" , Parameters.ObjectData.ReceiveBasisDocument);
 	
 	Receiver = AccountingServer.GetT9012S_AccountsPartner(AccountParameters, 
-		                                                  Parameters.ObjectData.SendPartner, 
-		                                                  Parameters.ObjectData.SendAgreement,
+		                                                  Parameters.ObjectData.ReceivePartner, 
+		                                                  Parameters.ObjectData.ReceiveAgreement,
 		                                                  Parameters.ObjectData.ReceiveCurrency);
 	
+	// Customer - Customer
 	From_CustomerAdvance_To_CustomerAdvance = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer);
@@ -757,6 +758,11 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionCustomer
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
 	
+	From_CustomerAdvance_To_CustomerTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
+	
+	// Vendor - Vendor
 	From_VendorAdvance_To_VendorAdvance = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor);
@@ -764,17 +770,33 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	From_VendorTransaction_To_VendorTransaction = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
-		
-	From_CustomerAdvance_To_CustomerTransaction = 
-		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
-		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
-		
+			
 	From_VendorAdvance_To_VendorTransaction = 
 		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceVendor
 		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
+
+
+//-----------------------------------	
+	From_VendorTransaction_To_CustomerTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer);
+	
+	From_CustomerAdvance_To_VendorAdvance = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.AdvanceCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor);
+	
+	From_CustomerTransaction_To_VendorTransaction = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.TransactionVendor);
+	
+	From_CustomerTransaction_To_VendorAdvance = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionCustomer
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor);
+	
+	From_VendorTransaction_To_CustomerAdvance = 
+		(Parameters.ObjectData.SendDebtType = Enums.DebtTypes.TransactionVendor
+		And Parameters.ObjectData.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer);
 		
-	
-	
 	// Advance customer (sender) -> Advance customer (receiver)*
 	If From_CustomerAdvance_To_CustomerAdvance Then
 		
@@ -822,12 +844,54 @@ Function GetAnalytics_R5020B_PartnersBalance(Parameters)
 	// Advance vendor (sender) -> Vendor transaction (receiver)*
 	ElsIf From_VendorAdvance_To_VendorTransaction Then
 		
-		Debit_Account = Receiver.AccountAdvancesVendor;
+		Debit_Account = Sender.AccountTransactionsVendor;
 		Debit_Analytics = AdditionalAnalytics_Receiver;
 	
-		Credit_Account = Sender.AccountTransactionsVendor;
+		Credit_Account = Receiver.AccountAdvancesVendor;
 		Credit_Analytics = AdditionalAnalytics_Sender;
+		
+	// Vendor transaction (sender) -> Customer transaction
+	ElsIf From_VendorTransaction_To_CustomerTransaction Then
+				
+		Debit_Account = Sender.AccountTransactionsVendor;
+		Debit_Analytics = AdditionalAnalytics_Sender;
 	
+		Credit_Account = Receiver.AccountTransactionsCustomer;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+			
+	// Advance customer (sender) -> Advance Vendor
+	ElsIf From_CustomerAdvance_To_VendorAdvance Then
+	
+		Debit_Account = Receiver.AccountAdvancesCustomer;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+					
+		Credit_Account = Sender.AccountAdvancesVendor;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+			
+	ElsIf From_CustomerTransaction_To_VendorTransaction Then
+		
+		Debit_Account = Receiver.AccountTransactionsVendor;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+					
+		Credit_Account = Sender.AccountTransactionsCustomer;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+					
+	ElsIf From_CustomerTransaction_To_VendorAdvance Then
+		
+		Debit_Account = Receiver.AccountAdvancesVendor;
+		Debit_Analytics = AdditionalAnalytics_Receiver;
+					
+		Credit_Account = Sender.AccountTransactionsCustomer;
+		Credit_Analytics = AdditionalAnalytics_Sender;
+
+	ElsIf From_VendorTransaction_To_CustomerAdvance Then
+		
+		Debit_Account = Receiver.AccountTransactionsVendor;
+		Debit_Analytics = AdditionalAnalytics_Sender;
+					
+		Credit_Account = Sender.AccountAdvancesCustomer;
+		Credit_Analytics = AdditionalAnalytics_Receiver;
+					
 	EndIf;
 	
 	// Debit	                                               

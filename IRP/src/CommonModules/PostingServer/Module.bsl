@@ -1474,7 +1474,9 @@ Function CheckDocumentArray(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
@@ -1555,7 +1557,9 @@ Function PostingDocumentArray(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;
@@ -1677,7 +1681,9 @@ Function WriteDocumentsRecords(DocumentArray, isJob = False) Export
 			LastPercentLogged = Int(Percent);
 			Msg = BackgroundJobAPIServer.NotifySettings();
 			DateDiff = CurrentUniversalDateInMilliseconds() - StartDate;
-			Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			If DateDiff > 0 Then
+				Msg.Speed = Format(1000 * Count / DateDiff, "NFD=2; NG=") + " doc/sec";
+			EndIf;
 			Msg.Percent = Percent;
 			BackgroundJobAPIServer.NotifyStream(Msg);
 		EndIf;

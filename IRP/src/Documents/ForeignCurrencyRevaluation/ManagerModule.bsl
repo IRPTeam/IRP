@@ -2233,6 +2233,7 @@ Function R2040B_TaxesIncoming()
 		|	Table.Branch,
 		|	Table.Tax,
 		|	Table.TaxRate,
+		|	Table.InvoiceType,
 		|	Table.Currency,
 		|	Table.CurrencyMovementType,
 		|	Table.TransactionCurrency,

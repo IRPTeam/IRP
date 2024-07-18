@@ -617,6 +617,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt1000050$$" variable
@@ -710,6 +711,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt10000505$$" variable

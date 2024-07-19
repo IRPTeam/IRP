@@ -266,7 +266,7 @@
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
-      <name>FilePresention</name>
+      <name>FilePresentation</name>
       <synonym>
         <key>en</key>
         <value>File type</value>

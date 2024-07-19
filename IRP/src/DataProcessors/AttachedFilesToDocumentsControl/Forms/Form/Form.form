@@ -1540,7 +1540,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.DocumentsAttachedFiles.FilePresention</segments>
+            <segments>Object.DocumentsAttachedFiles.FilePresentation</segments>
           </dataPath>
           <extendedTooltip>
             <name>DocumentsAttachedFilesFilePresentionExtendedTooltip</name>
@@ -1597,7 +1597,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.DocumentsAttachedFiles.FilePresention.Comment</segments>
+            <segments>Object.DocumentsAttachedFiles.FilePresentation.Comment</segments>
           </dataPath>
           <extendedTooltip>
             <name>DocumentsAttachedFilesFilePresentionCommentExtendedTooltip</name>
@@ -1965,7 +1965,7 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>CurrentFilesTable.FilePresention</segments>
+              <segments>CurrentFilesTable.FilePresentation</segments>
             </dataPath>
             <extendedTooltip>
               <name>CurrentFilesTableFilePresentionExtendedTooltip</name>
@@ -2836,10 +2836,10 @@
       </edit>
     </columns>
     <columns>
-      <name>FilePresention</name>
+      <name>FilePresentation</name>
       <title>
         <key>en</key>
-        <value>File presention</value>
+        <value>File presentation</value>
       </title>
       <id>11</id>
       <valueType>

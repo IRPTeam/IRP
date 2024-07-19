@@ -84,16 +84,15 @@ Procedure AddNewDocument(Command)
 		Return;
 	EndIf;
 	
-	If Not ValueIsFilled(CurrentData.FilePresention) Then
-		//@skip-check property-return-type
-		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_041);
-		Return;
-	EndIf;	
-	
 	CurrentDocStructure = GetCurrentDocInTable();
 	If CurrentDocStructure = Undefined Then
 		Return;
 	EndIf;
+	If Not ValueIsFilled(CurrentDocStructure.PrintFormName) Then
+		//@skip-check property-return-type
+		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_041);
+		Return;	
+	EndIf;	
 	
 	Upload(CurrentDocStructure);
 EndProcedure
@@ -248,7 +247,7 @@ Procedure DocumentsAttachedFilesOnActivateRow(Item)
 		Return;
 	EndIf;
 	//@skip-check invocation-parameter-type-intersect, property-return-type
-	Items.AddNewDocument.Title = StrTemplate(R().InfoMessage_AttachFile_SelectDocType, String(CurrentData.FilePresention));
+	Items.AddNewDocument.Title = StrTemplate(R().InfoMessage_AttachFile_SelectDocType, String(CurrentData.FilePresentation));
 EndProcedure
 
 #EndRegion
@@ -378,7 +377,7 @@ Function GetCurrentDocInTable()
 	Else
 		CurrentDataCurrentAttachments = CurrentDataAttachedDocs;
 	EndIf;
-	PrintFormName = CurrentDataCurrentAttachments.FilePresention;
+	PrintFormName = CurrentDataCurrentAttachments.FilePresentation;
 	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);		
 	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
@@ -487,7 +486,7 @@ EndFunction
 //  * IsRequired - Boolean -
 &AtServerNoContext
 Function GetAttachedDocuments(AllDocumentsTempTable)
-	QueryTxt = 
+		QueryTxt = 
 	"SELECT
 	|	AllDocumentsTempTable.Ref AS DocRef,
 	|	AllDocumentsTempTable.Date AS DocDate,
@@ -520,8 +519,8 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|			THEN 1
 	|		ELSE 2
 	|	END AS Picture,
-	|	AttachedDocumentSettingsFileSettings.FilePresention AS PrintFormName,
-	|	AttachedDocumentSettingsFileSettings.FilePresention.Comment AS FileTooltips,
+	|	AttachedDocumentSettingsFileSettings.FilePresentation AS PrintFormName,
+	|	AttachedDocumentSettingsFileSettings.FilePresentation.Comment AS FileTooltips,
 	|	AttachedDocumentSettingsFileSettings.NamingFormat AS NamingFormat,
 	|	AttachedDocumentSettingsFileSettings.Required AS Required,
 	|	AttachedDocumentSettingsFileSettings.MaximumFileSize AS MaximumFileSize,
@@ -548,7 +547,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.MaximumFileSize AS MaximumFileSize,
 	|	TT_AllDocumentsAndRequiredAttacments.FileExtension AS FileExtension,
 	|	CASE
-	|		WHEN AttachedFiles.File IS NOT NULL
+	|		WHEN AttachedFiles.File IS NOT NULL 
 	|			THEN TRUE
 	|		ELSE FALSE
 	|	END AS IsFile,
@@ -567,7 +566,7 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments AS TT_AllDocumentsAndRequiredAttacments
 	|		LEFT JOIN InformationRegister.AttachedFiles AS AttachedFiles
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AttachedFiles.Owner
-	|		AND TT_AllDocumentsAndRequiredAttacments.PrintFormName = AttachedFiles.File.PrintFormName
+	|			AND TT_AllDocumentsAndRequiredAttacments.PrintFormName = AttachedFiles.File.PrintFormName
 	|		LEFT JOIN InformationRegister.AuditLock AS AuditLock
 	|		ON TT_AllDocumentsAndRequiredAttacments.DocRef = AuditLock.Document
 	|
@@ -577,14 +576,18 @@ Function GetAttachedDocuments(AllDocumentsTempTable)
 	|	TT_AllDocumentsAndRequiredAttacments.DocDate,
 	|	TT_AllDocumentsAndRequiredAttacments.DocRef,
 	|	TT_AllDocumentsAndRequiredAttacments.DocMetaName,
-	|	TT_AllDocumentsAndRequiredAttacments.DocType AS DocType,
+	|	TT_AllDocumentsAndRequiredAttacments.DocType,
 	|	TT_AllDocumentsAndRequiredAttacments.PrintFormName,
 	|	CAST(TT_AllDocumentsAndRequiredAttacments.PrintFormName.Comment AS STRING(1000)),
 	|	TT_AllDocumentsAndRequiredAttacments.NamingFormat,
 	|	TT_AllDocumentsAndRequiredAttacments.Required,
 	|	TT_AllDocumentsAndRequiredAttacments.MaximumFileSize,
 	|	TT_AllDocumentsAndRequiredAttacments.FileExtension,
-	|	FALSE,
+	|	CASE
+	|		WHEN AttachedFiledControl.Document IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END,
 	|	FALSE,
 	|	TT_AllDocumentsAndRequiredAttacments.Author,
 	|	TT_AllDocumentsAndRequiredAttacments.Branch,
@@ -704,12 +707,12 @@ Procedure FillDocumentsTables(QueryStructure, IsUpdate = False)
 		While SelectionPrintForm.Next() Do
 			If Not IsUpdate Then
 				ChildRow = Object.DocumentsAttachedFiles.Add();
-				ChildRow.FilePresention = SelectionPrintForm.PrintFormName;
+				ChildRow.FilePresentation = SelectionPrintForm.PrintFormName;
 				ChildRow.ID = ParentRow.ID;
 			Else
 				SearchStructure = New Structure;
 				SearchStructure.Insert("ID", ParentRow.ID);
-				SearchStructure.Insert("FilePresention", SelectionPrintForm.PrintFormName);
+				SearchStructure.Insert("FilePresentation", SelectionPrintForm.PrintFormName);
 				
 				SearchArray = Object.DocumentsAttachedFiles.FindRows(SearchStructure);
 				ChildRow = SearchArray[0];
@@ -746,7 +749,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	ArrayDocsToAttach = Object.DocumentsAttachedFiles.FindRows(New Structure("ID", RowID));
 	For Each ArrayItem In ArrayDocsToAttach Do
 		NewRow = CurrentFilesTable.Add();
-		NewRow.FilePresention = ArrayItem.FilePresention;
+		NewRow.FilePresentation = ArrayItem.FilePresentation;
 		NewRow.IsRequired = ArrayItem.IsRequired;
 		NewRow.NamingFormat = ArrayItem.NamingFormat;
 	EndDo;		
@@ -755,7 +758,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	
 	For Each Structure In FilesArray Do
 		SearchStructure = New Structure;
-		SearchStructure.Insert("FilePresention", CommonFunctionsServer.GetRefAttribute(Structure.FileRef, "PrintFormName"));
+		SearchStructure.Insert("FilePresentation", CommonFunctionsServer.GetRefAttribute(Structure.FileRef, "PrintFormName"));
 		SearchStructure.Insert("File", Catalogs.Files.EmptyRef());
 		
 		SearchArray = CurrentFilesTable.FindRows(SearchStructure);
@@ -785,7 +788,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	While SelectionDetailRecords.Next() Do
 		//@skip-check structure-consructor-value-type
 		//@skip-check property-return-type
-		SearchStructure = New Structure("FilePresention", SelectionDetailRecords.FileType);
+		SearchStructure = New Structure("FilePresentation", SelectionDetailRecords.FileType);
 		SearchArray = CurrentFilesTable.FindRows(SearchStructure);
 		
 		If SearchArray.Count() > 0 Then
@@ -845,11 +848,11 @@ EndProcedure
 &AtClient
 Procedure DocumentsAttachedFilesSelection(Item, SelectedRow, Field, StandardProcessing)
 	
-	FileTemplate = GetDocTemplate(Item.CurrentData.FilePresention);
+	FileTemplate = GetDocTemplate(Item.CurrentData.FilePresentation);
 	
 	Structure = New Structure;
 	Structure.Insert("FileRef", FileTemplate);
-	Structure.Insert("Title", Item.CurrentData.FilePresention);
+	Structure.Insert("Title", Item.CurrentData.FilePresentation);
 	Structure.Insert("Description", Item.CurrentData.FileTooltip);
 	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
 	
@@ -860,14 +863,14 @@ Function GetDocTemplate(FileSettingPresention)
 	
 	TemplateFile = Undefined;
 	Query = New Query;
-	Query.SetParameter("FilePresention", FileSettingPresention);
+	Query.SetParameter("FilePresentation", FileSettingPresention);
 	Query.Text = 
 		"SELECT TOP 1
 		|	AttachedDocumentSettingsFileSettings.FileTemplate AS FileTemplate
 		|FROM
 		|	Catalog.AttachedDocumentSettings.FileSettings AS AttachedDocumentSettingsFileSettings
 		|WHERE
-		|	AttachedDocumentSettingsFileSettings.FilePresention = &FilePresention";
+		|	AttachedDocumentSettingsFileSettings.FilePresentation = &FilePresentation";
 	
 	QueryResult = Query.Execute();
 	

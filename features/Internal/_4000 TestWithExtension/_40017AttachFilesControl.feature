@@ -96,7 +96,7 @@ Scenario: _4001705 setting for Attached document settings
 		And I select current line in "List" table
 		And in the table "FileSettings" I click the button named "FileSettingsAdd"
 		And I select current line in "FileSettings" table
-		And I click choice button of "File presention" attribute in "FileSettings" table
+		And I click choice button of "File presentation" attribute in "FileSettings" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Type'        |
@@ -112,8 +112,8 @@ Scenario: _4001705 setting for Attached document settings
 		And I click "Save" button
 	* Check
 		And "FileSettings" table became equal
-			| 'Required' | 'File presention' | 'Naming format'                     | 'File extension' |
-			| 'Yes'      | 'Type'            | '%DocDate_Sales_Invoice_%DocNumber' | '*.pdf, *.jpg'   |
+			| 'Required' | 'File presentation' | 'Naming format'                     | 'File extension' |
+			| 'Yes'      | 'Type'              | '%DocDate_Sales_Invoice_%DocNumber' | '*.pdf, *.jpg'   |
 		And I click "Save and close" button
 		And "List" table contains lines
 			| 'Description'   |
@@ -124,8 +124,8 @@ Scenario: _4001705 setting for Attached document settings
 			| 'RetailReturnReceipt' |
 		And I select current line in "List" table
 		And I go to line in "FileSettings" table
-			| "File presention" |
-			| "Return receipt"  |
+			| "File presentation" |
+			| "Return receipt"    |
 		And I select current line in "FileSettings" table
 		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
 		And I click choice button of "File template" attribute in "FileSettings" table
@@ -180,16 +180,16 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 			| "Purchase order" | "09.05.2023" | "222"        | "Distribution department" |
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch" |
-			| "Retail return receipt" | "09.05.2024" | "224"        | ""       |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""       |
 		And I go to line in "DocumentsAttachedFiles" table
 			| 'File type'       | 'Required' |
 			| 'Return request'  | 'Yes'      |	
-		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg1.jpg"
+		And I select external file "$Path$/features/Internal/_4000 TestWithExtension/testjpg3.jpg"
 		And Delay 10
 		And I click the button named "AddNewDocument"
 		And "CurrentFilesTable" table contains lines:
-			| 'File'                        |
-			| '20240508_Return_Receipt_223' |
+			| 'File'                         |
+			| '_20240508_Return_request_223' |
 
 Scenario: _4001712 check attached file in document	
 	And I close all client application windows
@@ -203,8 +203,8 @@ Scenario: _4001712 check attached file in document
 	Then "Attach file" window is opened
 	And I activate "File" field in "FileList" table
 	And "FileList" table contains lines:
-		| 'File'                        |
-		| '20240508_Return_Receipt_223' |
+		| 'File'                         |
+		| '_20240508_Return_request_223' |
 	
 Scenario: _4001713 check optional documents for RRR (pdf)
 	And I close all client application windows

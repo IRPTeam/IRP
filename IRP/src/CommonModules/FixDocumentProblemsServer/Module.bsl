@@ -108,6 +108,7 @@ EndFunction
 // * EndDate - Date - 
 // * OnlyPosted - Boolean - 
 // * CompanyList - Array Of CatalogRef.Companies - 
+// * QueryText - String - 
 Function GetDocumentListSettings() Export
 	Settings = New Structure;
 	Settings.Insert("StartDate", BegOfMonth(CommonFunctionsServer.GetCurrentSessionDate()));
@@ -115,6 +116,7 @@ Function GetDocumentListSettings() Export
 	Settings.Insert("OnlyPosted", True);
 	Settings.Insert("CompanyList", New Array);
 	Settings.Insert("ExcludeDocumentTypes", New Array());
+	Settings.Insert("QueryText", "");
 	Return Settings;
 EndFunction
 
@@ -126,6 +128,25 @@ EndFunction
 // Returns:
 //  ValueTable - Get document list
 Function GetDocumentList(Settings) Export
+	If IsBlankString(Settings.QueryText) Then 
+		QueryTxt = GetDocumentQueryText();
+	Else
+		QueryTxt = Settings.QueryText;
+	EndIf;
+	
+	Query = New Query(QueryTxt);
+	Query.SetParameter("StartDate", Settings.StartDate);
+	Query.SetParameter("EndDate", Settings.EndDate);
+	Query.SetParameter("OnlyPosted", Settings.OnlyPosted);
+	Query.SetParameter("CompanySet", Settings.CompanyList.Count() > 0);
+	Query.SetParameter("CompanyList", Settings.CompanyList);
+	Query.SetParameter("UseExcludeDocuments", Settings.ExcludeDocumentTypes.Count() > 0);
+	Query.SetParameter("ExcludeDocumentTypes", Settings.ExcludeDocumentTypes);
+	Result = Query.Execute().Unload();
+	Return Result
+EndFunction
+
+Function GetDocumentQueryText() Export
 	Template = "SELECT Doc.Ref, Doc.Date, VALUETYPE(Doc.Ref) %1 %2 FROM Document.%3 AS Doc WHERE Doc.Date BETWEEN &StartDate AND &EndDate";
 	Array  = New Array; // Array Of String
 	For Each Doc In Metadata.Documents Do
@@ -156,15 +177,5 @@ Function GetDocumentList(Settings) Export
 	|	AND CASE WHEN &UseExcludeDocuments THEN VALUETYPE(AllDocuments.Ref) NOT IN (&ExcludeDocumentTypes) ELSE TRUE END
 	|ORDER BY
 	|	AllDocuments.Date";
-	
-	Query = New Query(QueryTxt);
-	Query.SetParameter("StartDate", Settings.StartDate);
-	Query.SetParameter("EndDate", Settings.EndDate);
-	Query.SetParameter("OnlyPosted", Settings.OnlyPosted);
-	Query.SetParameter("CompanySet", Settings.CompanyList.Count() > 0);
-	Query.SetParameter("CompanyList", Settings.CompanyList);
-	Query.SetParameter("UseExcludeDocuments", Settings.ExcludeDocumentTypes.Count() > 0);
-	Query.SetParameter("ExcludeDocumentTypes", Settings.ExcludeDocumentTypes);
-	Result = Query.Execute().Unload();
-	Return Result
+	Return QueryTxt
 EndFunction

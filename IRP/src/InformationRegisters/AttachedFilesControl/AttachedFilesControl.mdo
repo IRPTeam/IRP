@@ -151,4 +151,20 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="2c71d082-5c30-4e78-8010-5a33269efb94">
+    <name>FileType</name>
+    <synonym>
+      <key>en</key>
+      <value>File type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

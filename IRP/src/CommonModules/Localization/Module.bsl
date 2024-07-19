@@ -1457,6 +1457,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_038", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
 	Strings.Insert("InfoMessage_039", NStr("en = 'Movements successfully recorded'", Lang));
 	Strings.Insert("InfoMessage_040", NStr("en = 'File not found'", Lang));
+	Strings.Insert("InfoMessage_041", NStr("en = 'Select type of attached document'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));

@@ -167,10 +167,10 @@
       <maxValue xsi:type="core:UndefinedValue"/>
     </standardAttributes>
     <attributes uuid="9d2df0b6-f3fe-46fd-aef3-5a4c89a0eaf8">
-      <name>FilePresention</name>
+      <name>FilePresentation</name>
       <synonym>
         <key>en</key>
-        <value>File presention</value>
+        <value>File presentation</value>
       </synonym>
       <type>
         <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

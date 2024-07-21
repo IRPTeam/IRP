@@ -345,5 +345,5 @@ Scenario: 2050002 check filling in Reconcilation statement
 	* Check document
 		And I click the button named "FormPost"
 	* Clear movements
-		And I click "Cancel posting" button
+		And I click the button named "FormUndoPosting"
 		And I close all client application windows

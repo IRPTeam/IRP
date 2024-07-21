@@ -437,7 +437,7 @@ Scenario: _0401573 Sales order clear posting/mark for deletion + check posting s
 		And I select current line in "List" table
 		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Posted   " text
 	* Clear posting
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		Then the field named "DecorationGroupTitleCollapsedLabel" value contains "Status: Approved   Posting status: Not posted   " text
 		Then user message window does not contain messages
 		And I click "Registrations report" button

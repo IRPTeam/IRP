@@ -6338,7 +6338,7 @@ Scenario: _015400681 check multistring additional attributes
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 		And I click Select button of "Country of consignment" field
-		And I click the button named "Add"
+		And I click the button named "FormCreate"		
 		And I click choice button of the attribute named "Value" in "ValueList" table
 		And I go to line in "List" table
 			| 'Additional attribute'   | 'Description'    |

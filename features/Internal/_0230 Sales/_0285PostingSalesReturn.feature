@@ -732,7 +732,7 @@ Scenario: _028515 create document Sales return based on SRO
 					| '1'     | '$$Rov1SalesReturn028515$$'     | 'Sales return order 105 dated 25.03.2021 12:09:40'     | '$$Rov1SalesReturnOrder028515$$'     | 'GR'            | '1,000'        | '$$Rov1SalesReturnOrder028515$$'     | 'SR'               | '$$Rov1SalesReturnOrder028515$$'      |
 					| '2'     | '$$Rov2SalesReturn028515$$'     | 'Sales return order 106 dated 25.03.2021 12:10:03'     | '$$Rov3SalesReturnOrder028515$$'     | ''              | '12,000'       | '$$Rov3SalesReturnOrder028515$$'     | 'SR'               | '$$Rov3SalesReturnOrder028515$$'      |
 				Then the number of "RowIDInfo" table lines is "равно" "2"
-				And I click "Cancel posting" button	
+				And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 	* Create Sales return based on Sales return order(Create button)
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"

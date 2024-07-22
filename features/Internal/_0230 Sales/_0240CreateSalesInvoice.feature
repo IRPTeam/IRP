@@ -482,7 +482,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30'   | ''            | '7,000'      | 'SI'              |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
-		And I click "Cancel posting" button		
+		And I click the button named "FormUndoPosting"		
 		And I close all client application windows
 
 

@@ -345,7 +345,7 @@ Scenario: _020014 create ITO based on Internal supply request
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'IT'           | '10,000'      | 'ITO&PO&PI'        |
 				| 'Internal supply request 117 dated 12.02.2021 14:39:38'    | 'IT'           | '50,000'      | 'ITO&PO&PI'        |
 			Then the number of "RowIDInfo" table lines is "равно" "2"	
-			And I click "Cancel posting" button	
+			And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 	* Create ITO based on ISR (Create button)
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

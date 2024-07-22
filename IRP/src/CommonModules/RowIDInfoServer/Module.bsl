@@ -1900,7 +1900,16 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StoreReturn = RowItemList.Store;
 	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
-		RowRefObject.StoreReturn = RowItemList.Store;		
+		RowRefObject.StoreReturn = RowItemList.Store;
+	ElsIf Is.SO And RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+		RowRefObject.StoreSales = RowItemList.Store;
+	ElsIf Is.PO And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store"); 
+		RowRefObject.StorePurchases = RowItemList.Store;
+	ElsIf Is.PI And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store"); 
+		RowRefObject.StorePurchases = RowItemList.Store;		
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
@@ -5617,7 +5626,7 @@ Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
 	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 	
 	Is = Is(DataReceiver);
-	// only when procurecement method Pyrchase
+	// only when procurecement method Purchase
 	If Is.PO Or Is.PI Then
 		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, TransactionTypePurchases, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
@@ -6589,14 +6598,15 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		//Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.ItemList = "Item, ItemKey, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
 							  |ProcurementMethod , ItemList.ProcurementMethod,
-							  |ItemKey           , ItemList.ItemKey,
-							  |Store             , ItemList.Store";
-	
+							  |ItemKey           , ItemList.ItemKey";
+							  //|Store             , ItemList.Store";
+							  
 	ElsIf ExternalDocAliase = Aliases.WO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
@@ -6701,7 +6711,7 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6753,7 +6763,7 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6810,7 +6820,7 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6857,7 +6867,7 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6902,11 +6912,12 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
+//	|			AND CASE
+//	|				WHEN &Filter_Store
+//	|					THEN RowRef.Store = &Store
+//	|				ELSE TRUE
+//	|			END
+	|))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -6976,7 +6987,7 @@ Procedure ApplyFilterSet_SO_ForWO(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7085,7 +7096,7 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8228,8 +8239,10 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		//Result.Header   = "Company, Branch, Store";
+		Result.Header   = "Company, Branch";
+		//Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	Else
 		Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
 	EndIf;
@@ -8337,7 +8350,7 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8394,7 +8407,7 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store  OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8906,8 +8919,10 @@ Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Partner, LegalName, Store, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		//Result.Header   = "Company, Branch, Store";
+		Result.Header   = "Company, Branch";
+		//Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.ItemList = "Item, ItemKey, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
@@ -12507,7 +12522,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
-	If Is.RRR Or Is.SR Then
+	If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then
 		Query.SetParameter("Filter_Store", False);
 	Else
 		Query.SetParameter("Filter_Store", True);

@@ -479,7 +479,7 @@ Scenario: _01541361 check filling in Row Id info table in the RRR (RSR-RRR)
 			| '#' | 'Key'                          | 'Basis'                                              | 'Row ID'                               | 'Next step' | 'Quantity' | 'Basis key'                            | 'Current step' | 'Row ref'                              |
 			| '1' | '$$Rov1RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | ''          | '1,000'    | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' | 'RRR&RGR'      | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
 			| '2' | '$$Rov2RetailReturnReceipt1$$' | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | ''          | '1,000'    | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' | 'RRR&RGR'      | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 	

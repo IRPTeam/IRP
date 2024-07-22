@@ -518,7 +518,7 @@ Scenario: _022015 create PRO using form link/unlink
 			| '1'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '40,000'     | 'PRO&PR'          |
 			| '2'   | '$$PurchaseInvoice018001$$'   | 'PR'          | '60,000'     | 'PRO&PR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 Scenario: _022016 check totals in the document Purchase return order

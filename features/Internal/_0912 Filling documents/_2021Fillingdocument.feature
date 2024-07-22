@@ -423,7 +423,7 @@ Scenario: _01541002 check filters in the PI list form
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	* Add filter by currency
 		And I click "Configure list..." button
-		Then "List Options" window is opened
+		Then "List settings" window is opened
 		And I go to line in "SettingsComposerUserSettingsItem0AvailableFieldsTable" table
 			| 'Available fields'    |
 			| 'Currency'            |

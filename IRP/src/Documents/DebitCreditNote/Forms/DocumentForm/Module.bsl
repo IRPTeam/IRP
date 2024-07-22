@@ -250,7 +250,7 @@ EndProcedure
 
 &AtClient
 Procedure ReceiveLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
-	DocDebitCreditNoteClient.ReceivePartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocDebitCreditNoteClient.ReceiveLegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient

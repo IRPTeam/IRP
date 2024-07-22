@@ -396,8 +396,6 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 	And I select "In list" exact value from "Comparison type" drop-down list in "SettingsComposerSettingsFilter" table
 	And I activate field named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
 	And I click choice button of the attribute named "SettingsComposerSettingsFilterRightValue" in "SettingsComposerSettingsFilter" table
-	And I click the button named "Add"
-	And I click choice button of the attribute named "Value" in "ValueList" table
 	And I go to line in "" table
 		| ''                   |
 		| 'Purchase invoice'   |
@@ -406,9 +404,8 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 		| 'Amount'    | 'Company'      | 'Currency' | 'Date'                | 'Legal name'        | 'Number' | 'Partner'   |
 		| '19 700,00' | 'Main Company' | 'USD'      | '15.08.2021 16:56:10' | 'Company Ferron BP' | '5'      | 'Ferron BP' |
 	And I select current line in "List" table
-	And I finish line editing in "ValueList" table
-	And I click the button named "Add"
-	And I click choice button of the attribute named "Value" in "ValueList" table
+	And I select current line in "SettingsComposerSettingsFilter" table
+	And I click choice button of "Right value" attribute in "SettingsComposerSettingsFilter" table
 	And I go to line in "" table
 		| ''                   |
 		| 'Purchase invoice'   |
@@ -417,8 +414,6 @@ Scenario: _045 check additional cost allocation (rows, by amount)
 		| 'Amount'     | 'Company'      | 'Currency' | 'Date'                | 'Legal name' | 'Number' | 'Partner' |
 		| '839 233,70' | 'Main Company' | 'TRY'      | '15.08.2021 16:56:11' | 'DFC'        | '6'      | 'DFC'     |
 	And I select current line in "List" table
-	And I finish line editing in "ValueList" table
-	And I click the button named "OK"
 	And I finish line editing in "SettingsComposerSettingsFilter" table
 	And I move to "Parameters" tab
 	And I change checkbox named "SettingsComposerSettingsDataParametersUse" in "SettingsComposerSettingsDataParameters" table

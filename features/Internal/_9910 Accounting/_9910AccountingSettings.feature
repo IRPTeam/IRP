@@ -3413,27 +3413,29 @@ Scenario: _0991198 check DepreciationCalculation movements
 			| '31.03.2024 00:00:00' | '420.3'      | '1' | '4,17'   | ''              | 'Yes'      | 'TRY'             | ''                | '4,17'         | 'Business unit 2'     | ''                | 'Expence and revenue 1' | 'TRY'            | '7501'       | ''                 | 'DepreciationCalculation DR (R5022T_Expenses) CR (DepreciationFixedAsset)' | ''                    | '4,17'          | ''                    |		
 		And I close all client application windows	
 
-// Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same partner)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '1'      |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button	
-// 		And "AccountingAnalytics" table became equal
-// 			| "Debit" | " "               | "Credit" | "Operation"                                                                              |
-// 			| "5201"  | "Business unit 2" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |	
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And "RegisterRecords" table became equal
-		
-// 		And I close all client application windows	
+Scenario: _0991212 check DebitCreditNote movements (CT-VA, by documents, same partner)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| "Debit"  | "Partner"                            | "Business unit"   | "Partner term"          | "Credit" | "Operation"                                                                              |
+			| "4020.2" | "Vendor and Customer (by documents)" | "Business unit 2" | "Partner term, TRY"     | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
+			| "5201"   | "Vendor and Customer (by documents)" | "Business unit 2" | "Vendor (by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                    | "Debit amount" | "Extra dimension2 Dr"   | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                   | "Operation"                                | "Extra dimension2 Cr" | "Credit amount" | "Extra dimension3 Cr" |
+			| "23.02.2024 12:00:00" | "4020.2"     | "1" | "20,00"  | ""              | "Yes"      | "TRY"             | "Vendor and Customer (by documents)" | "1"            | "Vendor (by documents)" | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Vendor and Customer (by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Partner term, TRY"   | "20"            | "Business unit 2"     |		
+		And I close all client application windows	
 
 Scenario: _0991213 check DebitCreditNote movements (CA-CT, by documents, same partner, Agreement currency - EURO, invoice and payment TRY)
 	And I close all client application windows
@@ -3567,109 +3569,137 @@ Scenario: _0991218 check DebitCreditNote movements (VA-VT, by documents, differe
 	* Check accounting movements
 		And I click "Edit accounting" button	
 		And "AccountingAnalytics" table became equal
-			| "Debit"  | "Partner"                             | "Business unit"   | "Partner term"                        | "Credit" | "Operation"                                                                              |
-			| "4020.2" | "Vendor (Advance, by documents)"      | "Business unit 2" | "Vendor (Advance, by documents)"      | "5201"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
-			| "5201"   | "Vendor (Transactions, by documents)" | "Business unit 2" | "Vendor (Transactions, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+			| "Debit" | "Partner"                             | "Business unit"   | "Partner term"                        | "Credit" | "Operation"                                                                              |
+			| "5201"  | "Vendor (Advance, by documents)"      | "Business unit 2" | "Vendor (Advance, by documents)"      | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
+			| "5201"  | "Vendor (Transactions, by documents)" | "Business unit 2" | "Vendor (Transactions, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
 		And I close current window
 	* Check JE
 		And I click "Journal entry" button
 		And I click "Save" button
 		And "RegisterRecords" table became equal
 			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
-			| "26.04.2024 13:31:41" | "4020.2"     | "1" | "21,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by documents)" | "21"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "5201"       | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "21"            | "Business unit 2"     |		
+			| "26.04.2024 13:31:41" | "5201"       | "1" | "21,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by documents)" | "21"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4020.2"     | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "21"            | "Business unit 2"     |		
 		And I close all client application windows
 
-// Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, different partners)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '8'      |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And I close all client application windows
+Scenario: _0991219 check DebitCreditNote movements (VT-CA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '8'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button
+		And "AccountingAnalytics" table became equal
+			| "Debit" | "Partner"                          | "Business unit"   | "Partner term"               | "Credit" | "Operation"                                                                                    |
+			| "5201"  | "Customer (Advance, by documents)" | "Business unit 2" | "Advance, by documents, EUR" | "5202"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
+			| "5202"  | "Customer (Advance, by documents)" | "Business unit 2" | "Advance, by documents, EUR" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                 | "Operation"                                | "Extra dimension2 Cr"        | "Credit amount" | "Extra dimension3 Cr" |
+			| "03.04.2024 14:19:17" | "5201"       | "1" | "60,00"  | ""              | "Yes"      | "EUR"             | "Vendor (Transactions, by documents)" | "60"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "5202"       | "Customer (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Advance, by documents, EUR" | "2"             | "Business unit 2"     |		
+		And I close all client application windows
 
-// Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, different partners)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '9'      |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button	
-// 		And "AccountingAnalytics" table became equal
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And I close all client application windows
+Scenario: _0991220 check DebitCreditNote movements (VT-CT, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '9'      |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| "Debit" | "Partner"                               | "Business unit"   | "Partner term"                          | "Credit" | "Operation"                                                                                    |
+			| "5201"  | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                                     |
+			| "5202"  | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote DR (R2020B_AdvancesFromCustomers) CR (R2021B_CustomersTransactions) (Offset)" |
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                     | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
+			| "26.04.2024 16:15:09" | "5201"       | "1" | "51,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Transactions, by documents)" | "51"           | "Vendor (Transactions, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4010"       | "Customer (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transactions, by documents)" | "51"            | "Business unit 2"     |		
+		And I close all client application windows
 
-// Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, different partners)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '10'     |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button	
-// 		And "AccountingAnalytics" table became equal
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And "RegisterRecords" table became equal
-// 		And I close all client application windows
+Scenario: _0991221 check DebitCreditNote movements (CT-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '10'     |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| "Debit"  | "Partner"                               | "Business unit"   | "Partner term"                          | "Credit" | "Operation"                                                                              |
+			| "4020.2" | "Customer (Transactions, by documents)" | "Business unit 2" | "Customer (Transactions, by documents)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
+			| "5201"   | "Vendor (Advance, by documents)"        | "Business unit 2" | "Vendor (Advance, by documents)"        | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                | "Debit amount" | "Extra dimension2 Dr"            | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                      | "Operation"                                | "Extra dimension2 Cr"                   | "Credit amount" | "Extra dimension3 Cr" |
+			| "26.04.2024 17:51:11" | "4020.2"     | "1" | "74,00"  | ""              | "Yes"      | "TRY"             | "Vendor (Advance, by documents)" | "74"           | "Vendor (Advance, by documents)" | ""                | "Business unit 2"     | "TRY"            | "4010"       | "Customer (Transactions, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transactions, by documents)" | "74"            | "Business unit 2"     |	
+		And I close all client application windows
 
-// Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, different partners)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '11'     |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button	
-// 		And "AccountingAnalytics" table became equal
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And "RegisterRecords" table became equal
-// 		And I close all client application windows
+Scenario: _0991222 check DebitCreditNote movements (CT-VA, by documents, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '11'     |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| "Debit" | "Partner"                        | "Business unit"   | "Partner term"                   | "Credit" | "Operation"                                                                              |
+			| "5202"  | "Vendor (Advance, by documents)" | "Business unit 2" | "Vendor (Advance, by documents)" | "4020.2" | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
+			| "5201"  | "Vendor (Advance, by documents)" | "Business unit 2" | "Vendor (Advance, by documents)" | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |	
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount" | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                  | "Debit amount" | "Extra dimension2 Dr"        | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"               | "Operation"                                | "Extra dimension2 Cr"            | "Credit amount" | "Extra dimension3 Cr" |
+			| "29.04.2024 10:25:38" | "5202"       | "1" | "327,05" | ""              | "Yes"      | "TRY"             | "Customer (Advance, by documents)" | "10"           | "Advance, by documents, EUR" | ""                | "Business unit 2"     | "EUR"            | "4020.2"     | "Vendor (Advance, by documents)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Vendor (Advance, by documents)" | "320"           | "Business unit 2"     |		
+		And I close all client application windows
 
-// Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, different partners)
-// 	And I close all client application windows
-// 	* Select DebitCreditNote
-// 		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '12'     |	
-// 		And I select current line in "List" table
-// 		And I click "Post" button		
-// 	* Check accounting movements
-// 		And I click "Edit accounting" button	
-// 		And "AccountingAnalytics" table became equal
-// 		And I close current window
-// 	* Check JE
-// 		And I click "Journal entry" button
-// 		And I click "Save" button
-// 		And "RegisterRecords" table became equal
-// 		And I close all client application windows
+Scenario: _0991223 check DebitCreditNote movements (CT-VT, by partner terms, different partners)
+	And I close all client application windows
+	* Select DebitCreditNote
+		Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+		And I go to line in "List" table
+			| 'Number' |
+			| '12'     |	
+		And I select current line in "List" table
+		And I click "Post" button		
+	* Check accounting movements
+		And I click "Edit accounting" button	
+		And "AccountingAnalytics" table became equal
+			| "Debit" | "Partner"                                   | "Business unit"   | "Partner term"                              | "Credit" | "Operation"                                                                              |
+			| "5201"  | "Customer (Transactions, by partner terms)" | "Business unit 2" | "Customer (Transacrions, by partner terms)" | "4010"   | "DebitCreditNote (R5020B_PartnersBalance)"                                               |
+			| "5201"  | "Vendor (Transactions, by partner term)"    | "Business unit 2" | "Vendor, transaction by partner term"       | "4020.2" | "DebitCreditNote DR (R1021B_VendorsTransactions) CR (R1020B_AdvancesToVendors) (Offset)" |		
+		And I close current window
+	* Check JE
+		And I click "Journal entry" button
+		And I click "Save" button
+		And "RegisterRecords" table became equal
+			| "Period"              | "Account Dr" | "#" | "Amount"   | "DebitQuantity" | "Activity" | "Credit currency" | "Ext. Dim. Debit"                        | "Debit amount" | "Extra dimension2 Dr"                 | "Credit quantity" | "Extra dimension3 Dr" | "Debit currency" | "Account Cr" | "Ext. Dim. Credit"                          | "Operation"                                | "Extra dimension2 Cr"                       | "Credit amount" | "Extra dimension3 Cr" |
+			| "29.04.2024 10:42:01" | "5201"       | "1" | "1 400,00" | ""              | "Yes"      | "EUR"             | "Vendor (Transactions, by partner term)" | "42,8"         | "Vendor, transaction by partner term" | ""                | "Business unit 2"     | "EUR"            | "4010"       | "Customer (Transactions, by partner terms)" | "DebitCreditNote (R5020B_PartnersBalance)" | "Customer (Transacrions, by partner terms)" | "42,8"          | "Business unit 2"     |	
+		And I close all client application windows
 
 Scenario: _0991224 check DebitCreditNote movements (VA-VA, by documents, different partners)
 	And I close all client application windows

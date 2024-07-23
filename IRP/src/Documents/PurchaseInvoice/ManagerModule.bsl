@@ -560,6 +560,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
@@ -644,6 +645,7 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Ref.Company AS Company,
 	       |	PurchaseInvoiceItemList.Store AS Store,
 	       |	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
+	       |	PurchaseInvoiceItemList.Ref.StoreDistributedPurchase AS StoreDistributedPurchase,
 	       |	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
 	       |	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
 	       |	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
@@ -1129,6 +1131,22 @@ Function R4017B_InternalSupplyRequestProcurement()
 		   |	AND NOT ItemList.UseGoodsReceipt";
 
 EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return "SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	ItemList.Invoice AS Basis,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity
+	|INTO R4032B_GoodsInTransitOutgoing
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	NOT ItemList.IsService
+	|	AND ItemList.StoreDistributedPurchase";
+EndFunction	
 
 Function R4031B_GoodsInTransitIncoming()
 	Return "SELECT

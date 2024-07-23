@@ -914,6 +914,7 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
+      <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.InventoryTransferOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

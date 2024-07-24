@@ -6597,15 +6597,13 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
-		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
-		//Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.Header   = "Company, Branch, Status, ItemListSetProcurementMethods";
 		Result.ItemList = "Item, ItemKey, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
 							  |ProcurementMethod , ItemList.ProcurementMethod,
 							  |ItemKey           , ItemList.ItemKey";
-							  //|Store             , ItemList.Store";
 							  
 	ElsIf ExternalDocAliase = Aliases.WO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
@@ -6912,11 +6910,6 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
 	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_Store
-//	|					THEN RowRef.Store = &Store
-//	|				ELSE TRUE
-//	|			END
 	|))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
@@ -8239,9 +8232,7 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		//Result.Header   = "Company, Branch, Store";
 		Result.Header   = "Company, Branch";
-		//Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 		Result.ItemList = "Item, ItemKey, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	Else
 		Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
@@ -8919,9 +8910,7 @@ Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Partner, LegalName, Store, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		//Result.Header   = "Company, Branch, Store";
 		Result.Header   = "Company, Branch";
-		//Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 		Result.ItemList = "Item, ItemKey, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, Store";

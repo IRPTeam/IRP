@@ -16,7 +16,9 @@
       <key>en</key>
       <value>REP_Attribute1</value>
     </synonym>
-    <extension xsi:type="mdclassExtension:BasicFeatureExtension"/>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <synonym>Extended</synonym>
+    </extension>
     <type>
       <types>String</types>
       <stringQualifiers>

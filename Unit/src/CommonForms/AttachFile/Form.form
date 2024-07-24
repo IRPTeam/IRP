@@ -11,6 +11,9 @@
       <userVisible>
         <common>true</common>
       </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>FileList</segments>
+      </dataPath>
       <titleLocation>None</titleLocation>
       <items xsi:type="form:FormField">
         <name>FileListCreationDate</name>
@@ -306,6 +309,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <representation>HierarchicalList</representation>
+      <readOnly>true</readOnly>
       <changeRowSet>true</changeRowSet>
       <changeRowOrder>true</changeRowOrder>
       <autoMaxWidth>true</autoMaxWidth>
@@ -346,6 +350,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>DefaultFilesStorageVolume</segments>
+        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>DefaultFilesStorageVolumeExtendedTooltip</name>
@@ -394,6 +401,9 @@
         <userVisible>
           <common>true</common>
         </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Upload</segments>
+        </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
           <name>UploadExtendedTooltip</name>
@@ -545,6 +555,7 @@
     <name>IRPTE_OnCreateAtServerAfter</name>
     <callType>After</callType>
   </handlers>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>

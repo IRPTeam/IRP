@@ -530,6 +530,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbersAndItemKeys());
 	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
@@ -645,7 +646,6 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Ref.Company AS Company,
 	       |	PurchaseInvoiceItemList.Store AS Store,
 	       |	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
-	       |	PurchaseInvoiceItemList.Ref.StoreDistributedPurchase AS StoreDistributedPurchase,
 	       |	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
 	       |	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
 	       |	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
@@ -767,6 +767,29 @@ Function SerialLotNumbers()
 		   |		AND ItemList.Ref = &Ref
 		   |WHERE
 		   |	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbersAndItemKeys()
+	Return "SELECT
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Key AS Key,
+	|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	ISNULL(SerialLotNumbers.Quantity, ItemList.Quantity) AS Quantity,
+	|	ItemList.Ref AS Ref,
+	|	ItemList.IsService AS IsService,
+	|	ItemList.Ref.StoreDistributedPurchase
+	|INTO SerialLotNumbersAndItemKeys
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		LEFT JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|		AND ItemList.Ref = SerialLotNumbers.Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function IncomingStocksReal()
@@ -1135,17 +1158,18 @@ EndFunction
 Function R4032B_GoodsInTransitOutgoing()
 	Return "SELECT
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	ItemList.Period,
-	|	ItemList.Store,
-	|	ItemList.Invoice AS Basis,
-	|	ItemList.ItemKey,
-	|	ItemList.Quantity
+	|	SerialLotNumbersAndItemKeys.Period,
+	|	SerialLotNumbersAndItemKeys.Store,
+	|	SerialLotNumbersAndItemKeys.Ref AS Basis,
+	|	SerialLotNumbersAndItemKeys.ItemKey,
+	|	SerialLotNumbersAndItemKeys.Quantity,
+	|	SerialLotNumbersAndItemKeys.SerialLotNumber
 	|INTO R4032B_GoodsInTransitOutgoing
 	|FROM
-	|	ItemList AS ItemList
+	|	SerialLotNumbersAndItemKeys AS SerialLotNumbersAndItemKeys
 	|WHERE
-	|	NOT ItemList.IsService
-	|	AND ItemList.StoreDistributedPurchase";
+	|	NOT SerialLotNumbersAndItemKeys.IsService
+	|	AND SerialLotNumbersAndItemKeys.StoreDistributedPurchase";
 EndFunction	
 
 Function R4031B_GoodsInTransitIncoming()

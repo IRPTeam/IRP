@@ -22,5 +22,6 @@
         </types>
       </typeExtension>
     </extension>
+    <type/>
   </attributes>
 </mdclass:Catalog>

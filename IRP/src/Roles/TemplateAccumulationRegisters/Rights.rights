@@ -515,6 +515,20 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.T1040T_RowIDSerialLotNumbers</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</name>
 		<right>
 			<name>Read</name>
@@ -1224,6 +1238,20 @@
 			<value>true</value>
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Store", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R5020B_PartnersBalance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
 		</right>
 		<right>
@@ -1977,34 +2005,6 @@
 		<right>
 			<name>View</name>
 			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R5020B_PartnersBalance</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
-			</restrictionByCondition>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.T1040T_RowIDSerialLotNumbers</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("", "", "", "", "", "")</condition>
-			</restrictionByCondition>
 		</right>
 	</object>
 	<restrictionTemplate>

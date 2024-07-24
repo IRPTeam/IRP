@@ -224,6 +224,9 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
     </attributes>
   </tabularSections>
   <tabularSections uuid="2364009b-31ed-45ee-97fb-e871d63bdfa9">

@@ -7776,7 +7776,7 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9130,7 +9130,7 @@ Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END)) AS RowIDMovements";
 	Query.Execute();

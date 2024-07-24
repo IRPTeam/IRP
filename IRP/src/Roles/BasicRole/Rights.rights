@@ -235,6 +235,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseResponsiblePerson</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.AddLinkedDocumentRows</name>
 		<right>
 			<name>View</name>
@@ -1791,13 +1798,6 @@
 		</right>
 		<right>
 			<name>Set</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.UseResponsiblePerson</name>
-		<right>
-			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

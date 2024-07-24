@@ -285,6 +285,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.SalaryCalculationType</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ObjectStatuses</metadata>
     <use>Use</use>
   </content>
@@ -298,10 +302,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.SalaryCalculationType</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

@@ -99,6 +99,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9545S_VacationDaysLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6040S_BundleAmountValues</name>
 		<right>
 			<name>Read</name>
@@ -1385,6 +1396,20 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9016S_AccountsEmployee</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.IntegrationInfo.Dimension.Key</name>
 		<right>
 			<name>Edit</name>
@@ -1494,45 +1519,6 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
 			</restrictionByCondition>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9015S_AccountsFixedAsset</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
-			</restrictionByCondition>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9016S_AccountsEmployee</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-			<restrictionByCondition>
-				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
-			</restrictionByCondition>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T9545S_VacationDaysLimits</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>

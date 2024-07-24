@@ -638,6 +638,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ExpenseAccruals</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarked</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Countries</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -2939,17 +2950,6 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ExpenseAccruals</name>
-		<right>
-			<name>InteractiveDeleteMarked</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
 	</object>

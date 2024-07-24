@@ -21,6 +21,7 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssets</value>
     </typesFilterValue>
+    <dataPathField>0</dataPathField>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -36,6 +37,7 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Catalog_FixedAssets</value>
     </typesFilterValue>
+    <dataPathField>0</dataPathField>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>Catalog.FixedAssets.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.FixedAssets.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>

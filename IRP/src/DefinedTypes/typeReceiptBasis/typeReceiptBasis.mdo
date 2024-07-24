@@ -13,10 +13,10 @@
     <types>DocumentRef.Unbundling</types>
     <types>DocumentRef.PurchaseOrder</types>
     <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.StockAdjustmentAsSurplus</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.GoodsReceipt</types>
     <types>DocumentRef.PhysicalInventory</types>
-    <types>DocumentRef.StockAdjustmentAsSurplus</types>
   </type>
 </mdclass:DefinedType>

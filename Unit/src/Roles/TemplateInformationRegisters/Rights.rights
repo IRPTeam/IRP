@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Rights xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://v8.1c.ru/8.2/roles" xsi:type="Rights">
 	<setForNewObjects>false</setForNewObjects>
-	<setForAttributesByDefault>true</setForAttributesByDefault>
+	<setForAttributesByDefault>false</setForAttributesByDefault>
 	<independentRightsOfChildObjects>false</independentRightsOfChildObjects>
 	<object>
-		<name>InformationRegister.Unit_MockStates</name>
+		<name>InformationRegister.REP_ReportParameters.Resource.Value</name>
 		<right>
-			<name>Read</name>
+			<name>View</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Unit_MockStates.Resource.Value</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.REP_ReportParameters.Dimension.ParametrType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -26,14 +36,14 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.REP_ReportParameters.StandardAttribute.LineNumber</name>
+		<name>InformationRegister.REP_ReportParameters.StandardAttribute.Active</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.REP_ReportParameters.StandardAttribute.Period</name>
+		<name>InformationRegister.REP_ReportParameters.StandardAttribute.LineNumber</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -47,28 +57,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.REP_ReportParameters.Dimension.ParametrType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.REP_ReportParameters.StandardAttribute.Active</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.REP_ReportParameters.Resource.Value</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.Unit_MockStates.StandardAttribute.Period</name>
+		<name>InformationRegister.REP_ReportParameters.StandardAttribute.Period</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -82,7 +71,18 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.Unit_MockStates.StandardAttribute.Recorder</name>
+		<name>InformationRegister.Unit_MockStates.Dimension.Key</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Unit_MockStates</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -96,21 +96,21 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.Unit_MockStates.Dimension.Key</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.Unit_MockStates.Resource.Value</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.Unit_MockStates.StandardAttribute.LineNumber</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Unit_MockStates.StandardAttribute.Recorder</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Unit_MockStates.StandardAttribute.Period</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

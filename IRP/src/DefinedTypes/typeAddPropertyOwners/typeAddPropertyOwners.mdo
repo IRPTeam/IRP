@@ -21,6 +21,7 @@
     <types>CatalogRef.SpecialOffers</types>
     <types>CatalogRef.CashAccounts</types>
     <types>CatalogRef.Units</types>
+    <types>CatalogRef.SalaryCalculationType</types>
     <types>CatalogRef.PaymentTypes</types>
     <types>CatalogRef.CancelReturnReasons</types>
     <types>DocumentRef.SalesReturnOrder</types>
@@ -56,10 +57,12 @@
     <types>CatalogRef.ItemSegments</types>
     <types>DocumentRef.PurchaseReturnOrder</types>
     <types>CatalogRef.PriceTypes</types>
+    <types>DocumentRef.ExpenseAccruals</types>
     <types>CatalogRef.DepreciationSchedules</types>
     <types>DocumentRef.Labeling</types>
     <types>DocumentRef.ConsolidatedRetailSales</types>
     <types>CatalogRef.Workstations</types>
+    <types>DocumentRef.TaxesOperation</types>
     <types>DocumentRef.BankPayment</types>
     <types>CatalogRef.Partners</types>
     <types>DocumentRef.ShipmentConfirmation</types>
@@ -132,6 +135,7 @@
     <types>CatalogRef.AccessProfiles</types>
     <types>CatalogRef.CashStatementStatuses</types>
     <types>DocumentRef.PurchaseOrderClosing</types>
+    <types>DocumentRef.RevenueAccruals</types>
     <types>DocumentRef.SalesOrderClosing</types>
     <types>CatalogRef.PriceKeys</types>
     <types>DocumentRef.JournalEntry</types>
@@ -156,9 +160,5 @@
     <types>DocumentRef.RetailGoodsReceipt</types>
     <types>DocumentRef.CashExpense</types>
     <types>CatalogRef.FixedAssetsLedgerTypes</types>
-    <types>CatalogRef.SalaryCalculationType</types>
-    <types>DocumentRef.ExpenseAccruals</types>
-    <types>DocumentRef.RevenueAccruals</types>
-    <types>DocumentRef.TaxesOperation</types>
   </type>
 </mdclass:DefinedType>

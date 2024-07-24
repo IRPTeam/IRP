@@ -60,6 +60,7 @@
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.ExpenseAccruals</types>
       <types>DocumentRef.ConsolidatedRetailSales</types>
+      <types>DocumentRef.TaxesOperation</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.ShipmentConfirmation</types>
       <types>DocumentRef.InternalSupplyRequest</types>
@@ -77,6 +78,7 @@
       <types>DocumentRef.Payroll</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.MoneyTransfer</types>
+      <types>DocumentRef.CalculationDeservedVacations</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.VendorsAdvancesClosing</types>
       <types>DocumentRef.CashRevenue</types>
@@ -116,8 +118,6 @@
       <types>DocumentRef.ProductionPlanningClosing</types>
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
-      <types>DocumentRef.CalculationDeservedVacations</types>
-      <types>DocumentRef.TaxesOperation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

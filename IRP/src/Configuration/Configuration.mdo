@@ -12,7 +12,6 @@
   <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="a6cea7c6-a6a3-47f6-9424-59d2f6347dae"/>
   <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b7d6465-4ba2-48d9-be1b-7d5bffceab4a"/>
   <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="087e34df-3957-4ed1-a442-5f02f2e51da0"/>
-  <configurationExtensionCompatibilityMode>8.3.21</configurationExtensionCompatibilityMode>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>

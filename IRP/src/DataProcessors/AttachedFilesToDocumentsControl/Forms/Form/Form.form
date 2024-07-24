@@ -1304,12 +1304,12 @@
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <handlers>
-          <event>OnActivateRow</event>
-          <name>DocumentsOnActivateRow</name>
-        </handlers>
-        <handlers>
           <event>Selection</event>
           <name>DocumentListSelection</name>
+        </handlers>
+        <handlers>
+          <event>OnActivateRow</event>
+          <name>DocumentsOnActivateRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1475,6 +1475,7 @@
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:Table">
         <name>DocumentsAttachedFiles</name>
@@ -2707,6 +2708,7 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>

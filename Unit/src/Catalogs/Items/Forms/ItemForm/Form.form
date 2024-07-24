@@ -160,7 +160,7 @@
             <segments>Object.ItemID</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ExtendedTooltip</name>
+            <name>ItemIDExtendedTooltip</name>
             <id>135</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -457,9 +457,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Length</segments>
-            </dataPath>
             <extendedTooltip>
               <name>LengthExtendedTooltip</name>
               <id>152</id>
@@ -507,9 +504,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Width</segments>
-            </dataPath>
             <extendedTooltip>
               <name>WidthExtendedTooltip</name>
               <id>155</id>
@@ -557,9 +551,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Height</segments>
-            </dataPath>
             <extendedTooltip>
               <name>HeightExtendedTooltip</name>
               <id>158</id>
@@ -607,9 +598,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Volume</segments>
-            </dataPath>
             <extendedTooltip>
               <name>VolumeExtendedTooltip</name>
               <id>166</id>
@@ -701,9 +689,6 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.Weight</segments>
-            </dataPath>
             <extendedTooltip>
               <name>WeightExtendedTooltip</name>
               <id>163</id>
@@ -1199,6 +1184,7 @@
     <name>REP_OnCreateAtServerAfter</name>
     <callType>After</callType>
   </handlers>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>

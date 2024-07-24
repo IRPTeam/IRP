@@ -22,6 +22,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ForeignCurrencyRevaluation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.ProductionCostsAllocation</metadata>
     <use>Use</use>
   </content>
@@ -103,6 +107,10 @@
   </content>
   <content>
     <metadata>Document.StockAdjustmentAsSurplus</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.TaxesOperation</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -343,14 +351,6 @@
   </content>
   <content>
     <metadata>Document.FixedAssetTransfer</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ForeignCurrencyRevaluation</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.TaxesOperation</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

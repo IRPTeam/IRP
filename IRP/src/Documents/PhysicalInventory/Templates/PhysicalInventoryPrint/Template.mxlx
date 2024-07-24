@@ -67,15 +67,15 @@
 			</column>
 		</columnsItem>
 		<columnsItem>
-			<index>8</index>
-			<column>
-				<formatIndex>5</formatIndex>
-			</column>
-		</columnsItem>
-		<columnsItem>
 			<index>7</index>
 			<column>
 				<formatIndex>6</formatIndex>
+			</column>
+		</columnsItem>
+		<columnsItem>
+			<index>8</index>
+			<column>
+				<formatIndex>5</formatIndex>
 			</column>
 		</columnsItem>
 	</columns>

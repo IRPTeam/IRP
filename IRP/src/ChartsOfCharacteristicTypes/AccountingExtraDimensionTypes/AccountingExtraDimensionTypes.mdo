@@ -27,13 +27,13 @@
     <types>CatalogRef.CashAccounts</types>
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
     <types>CatalogRef.Partners</types>
+    <types>CatalogRef.FixedAssets</types>
     <types>CatalogRef.Items</types>
     <types>CatalogRef.Agreements</types>
     <types>CatalogRef.Taxes</types>
     <types>CatalogRef.Stores</types>
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.BusinessUnits</types>
-    <types>CatalogRef.FixedAssets</types>
   </type>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>

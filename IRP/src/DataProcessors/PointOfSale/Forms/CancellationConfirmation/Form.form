@@ -250,6 +250,7 @@ Are you sure you want to process transaction?</value>
     <name>OnCreateAtServer</name>
   </handlers>
   <windowOpeningMode>LockWholeInterface</windowOpeningMode>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
   <autoFillCheck>true</autoFillCheck>

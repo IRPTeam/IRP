@@ -16,7 +16,9 @@
       <key>en</key>
       <value>Save exchange history</value>
     </synonym>
-    <extension xsi:type="mdclassExtension:BasicFeatureExtension"/>
+    <extension xsi:type="mdclassExtension:BasicFeatureExtension">
+      <synonym>Extended</synonym>
+    </extension>
     <type>
       <types>Boolean</types>
     </type>

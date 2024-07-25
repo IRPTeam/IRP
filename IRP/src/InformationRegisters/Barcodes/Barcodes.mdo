@@ -55,6 +55,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <resources uuid="5384bfe8-154f-45e9-bcbd-39ef224d096d">
@@ -153,6 +154,7 @@
     <group>FormNavigationPanelGoTo</group>
     <commandParameterType>
       <types>CatalogRef.Items</types>
+      <types>CatalogRef.SerialLotNumbers</types>
       <types>CatalogRef.ItemKeys</types>
     </commandParameterType>
     <representation>Auto</representation>

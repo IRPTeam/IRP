@@ -420,15 +420,15 @@ Scenario: _0402421 check Inventory transfer movements by the Register  "R4032 Go
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| 'Document registrations records'                    | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''              | ''         | ''            | ''             | ''                                                  | ''             |
-			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''                                                  | ''             |
-			| ''                                                  | ''              | ''         | 'Quantity'    | 'Store'        | 'Basis'                                             | 'Item key'     |
-			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Yellow'    |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'S/Yellow'     |
-			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'XS/Blue'      |
-			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Red'       |
+			| 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| 'Document registrations records'                    | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'     | ''              | ''         | ''            | ''             | ''                                                  | ''             | ''                 |
+			| ''                                                  | 'Record type'   | 'Period'   | 'Resources'   | 'Dimensions'   | ''                                                  | ''             | ''                 |
+			| ''                                                  | ''              | ''         | 'Quantity'    | 'Store'        | 'Basis'                                             | 'Item key'     | 'Serial lot number'|
+			| ''                                                  | 'Receipt'       | '*'        | '2'           | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Yellow'    | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'S/Yellow'     | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '10'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | 'XS/Blue'      | ''                 |
+			| ''                                                  | 'Receipt'       | '*'        | '15'          | 'Store 02'     | 'Inventory transfer 21 dated 01.03.2021 09:54:36'   | '36/Red'       | ''                 |
 		And I close all client application windows
 
 

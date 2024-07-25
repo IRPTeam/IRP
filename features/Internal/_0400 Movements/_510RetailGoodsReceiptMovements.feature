@@ -157,13 +157,13 @@ Scenario: _051004 check Retail goods receipt movements by the Register  "R4032 G
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'        | ''              | ''                      | ''            | ''             | ''                                                             | ''            |
-			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                             | ''            |
-			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                        | 'Item key'    |
-			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'XS/Blue'     |
-			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'PZU'         |
+			| 'Retail goods receipt 314 dated 24.05.2023 15:17:43'   | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| 'Document registrations records'                       | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'        | ''              | ''                      | ''            | ''             | ''                                                             | ''            | ''                 |
+			| ''                                                     | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                             | ''            | ''                 |
+			| ''                                                     | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                        | 'Item key'    | 'Serial lot number'|
+			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'XS/Blue'     | ''                 |
+			| ''                                                     | 'Expense'       | '24.05.2023 15:17:43'   | '-2'          | 'Store 01'     | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31'   | 'PZU'         | ''                 |
 		
 
 Scenario: _051004 check Retail goods receipt movements by the Register  "TM1010B Row ID movements"

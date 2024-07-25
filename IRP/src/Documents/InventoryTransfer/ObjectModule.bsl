@@ -87,10 +87,9 @@ Procedure FillByPI(ArrayOfPI)
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
 	|		LEFT JOIN Document.PurchaseInvoice.SerialLotNumbers AS PurchaseInvoiceSerialLotNumbers
 	|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceSerialLotNumbers.Key
-	|		AND PurchaseInvoiceItemList.Ref = PurchaseInvoiceSerialLotNumbers.Ref
+	|		AND PurchaseInvoiceSerialLotNumbers.Ref IN (&BasisArray)
 	|WHERE
 	|	PurchaseInvoiceItemList.Ref IN (&BasisArray)
-	|	AND PurchaseInvoiceSerialLotNumbers.Ref IN (&BasisArray)
 	|TOTALS
 	|	MAX(Item) AS Item,
 	|	MAX(Unit) AS Unit
@@ -102,7 +101,9 @@ Procedure FillByPI(ArrayOfPI)
 	|SELECT
 	|	MAX(PurchaseInvoiceItemList.Ref.Company) AS Company,
 	|	MAX(PurchaseInvoiceItemList.Store) AS StoreSender,
-	|	MAX(PurchaseInvoiceItemList.Ref.Ref) AS DistributedPurchaseInvıoice
+	|	MAX(PurchaseInvoiceItemList.Ref.Ref) AS DistributedPurchaseInvıoice,
+	|	MAX(PurchaseInvoiceItemList.Store.UseShipmentConfirmation) AS UseShipmentConfirmation,
+	|	MAX(PurchaseInvoiceItemList.Ref.StoreDistributedPurchase) AS StoreDistributedPurchase
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
 	|WHERE
@@ -163,7 +164,10 @@ Procedure FillByPI(ArrayOfPI)
 	While SelectionHeader.Next() Do
 		Company						= SelectionHeader.Company;
 		StoreSender					= SelectionHeader.StoreSender;
-		DistributedPurchaseInvıoice = SelectionHeader.DistributedPurchaseInvıoice;
+		UseShipmentConfirmation		= SelectionHeader.UseShipmentConfirmation;
+		If SelectionHeader.StoreDistributedPurchase Then
+			DistributedPurchaseInvıoice = SelectionHeader.DistributedPurchaseInvıoice;
+		EndIf;
 	EndDo;
 	
 EndProcedure

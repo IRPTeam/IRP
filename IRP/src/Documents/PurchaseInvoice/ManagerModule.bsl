@@ -781,15 +781,15 @@ Function SerialLotNumbersAndItemKeys()
 	|	ISNULL(SerialLotNumbers.Quantity, ItemList.Quantity) AS Quantity,
 	|	ItemList.Ref AS Ref,
 	|	ItemList.IsService AS IsService,
-	|	ItemList.Ref.StoreDistributedPurchase
+	|	ItemList.Ref.StoreDistributedPurchase AS StoreDistributedPurchase
 	|INTO SerialLotNumbersAndItemKeys
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS ItemList
 	|		LEFT JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
-	|		ON ItemList.Key = SerialLotNumbers.Key
-	|		AND ItemList.Ref = SerialLotNumbers.Ref
+	|		ON (ItemList.Key = SerialLotNumbers.Key
+	|				AND SerialLotNumbers.Ref = &Ref)
 	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function IncomingStocksReal()

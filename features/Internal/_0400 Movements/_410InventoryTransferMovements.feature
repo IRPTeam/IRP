@@ -98,7 +98,11 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.InventoryTransfer.FindByNumber(204).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(1112).GetObject().Write(DocumentWriteMode.Posting);"    |
-		
+		When Create document PurchaseInvoice and InventoryTransfer objects (Store distributed purchase, movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |	
 	* Load documents (comission trade)
 		When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 		When Create document InventoryTransfer objects (comission trade)
@@ -577,6 +581,63 @@ Scenario: _0402433 check Inventory transfer movements by the Register  "R4050 St
 			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
 		And I close all client application windows
 
+Scenario: _0402434 check Inventory transfer movements by the Register  "R4050 Stock inventory" (transfer commission products)
+	* Select Inventory transfer
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '192'       |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report info" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 192 dated 04.11.2022 17:58:35' | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                | ''                    | ''           | ''             | ''         | ''         | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Receipt'    | 'Main Company' | 'Store 01' | 'S/Yellow' | '2'        |
+			| ''                                                 | '04.11.2022 17:58:35' | 'Expense'    | 'Main Company' | 'Store 02' | 'S/Yellow' | '2'        |	
+		And I close all client application windows
+
+Scenario: _0402435 check absence Inventory transfer movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=False)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192'     |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4032 Goods in transit (outgoing)"'    |
+		And I close all client application windows
+
+Scenario: _0402436 check Inventory transfer movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=True)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1 501'   |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | ''                    | ''           | ''         | ''                                                   | ''         | ''                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'      | ''                    | ''           | ''         | ''                                                   | ''         | ''                  | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                              | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'XS/Blue'  | ''                  | '3'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'XS/Red'   | ''                  | '2'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'ODS'      | ''                  | '8'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Receipt'    | 'Store 02' | 'Inventory transfer 1 501 dated 25.07.2024 14:36:20' | 'UNIQ'     | ''                  | '5'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'XS/Blue'  | ''                  | '3'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'XS/Red'   | ''                  | '2'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'ODS'      | '9090098908'        | '8'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977889'    | '1'        |
+			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977890'    | '4'        |	
+		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 	* Select Inventory transfer

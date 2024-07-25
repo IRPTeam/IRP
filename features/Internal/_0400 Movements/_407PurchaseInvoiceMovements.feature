@@ -118,6 +118,9 @@ Scenario: _04096 preparation (Purchase invoice)
 	And I execute 1C:Enterprise script at server	
 		| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I close all client application windows
+	When Create document PurchaseInvoice and InventoryTransfer objects (Store distributed purchase, movements)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Load PI comission trade 
 	When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 	And I execute 1C:Enterprise script at server	
@@ -1003,6 +1006,43 @@ Scenario: _0401037 check absence Purchase invoice movements by the Register  "T2
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+
+Scenario: _0401038 check Purchase invoice movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=True)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 501'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | ''                    | ''           | ''         | ''                                                 | ''         | ''                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''                    | ''           | ''         | ''                                                 | ''         | ''                  | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                            | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'XS/Blue'  | ''                  | '10'       |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'XS/Red'   | ''                  | '5'        |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'ODS'      | '9090098908'        | '10'       |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'UNIQ'     | '09987897977889'    | '5'        |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'UNIQ'     | '09987897977890'    | '5'        | 				
+		And I close all client application windows
+
+Scenario: _0401039 check absence Purchase invoice movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=False)
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117'     |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4032 Goods in transit (outgoing)"'    |
 		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion

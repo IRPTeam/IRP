@@ -149,13 +149,17 @@ Procedure FillByPI(ArrayOfPI)
 						NewRowSerialLotNumbers.Key = NewRowItemList.Key;
 						NewRowSerialLotNumbers.SerialLotNumber = SerialLotNumberStructure.SerialLotNumber;
 						NewRowSerialLotNumbers.Quantity = SerialLotNumberStructure.Quantity;
-						
+									
 						NewRowItemList.UseSerialLotNumber = True;
-					EndIf;	
-					
-					TotalQuantity = TotalQuantity + NewRowSerialLotNumbers.Quantity;
+						
+						TotalQuantity = TotalQuantity + NewRowSerialLotNumbers.Quantity;
+					Else
+						TotalQuantity = TotalQuantity + SerialLotNumberStructure.Quantity;
+					EndIf;					
 				EndDo;
 				NewRowItemList.Quantity = TotalQuantity;
+				UnitFactor = GetItemInfo.GetUnitFactor(NewRowItemList.ItemKey, NewRowItemList.Unit);
+				NewRowItemList.QuantityInBaseUnit = NewRowItemList.Quantity  * UnitFactor;				
 			EndIf;	
 		EndIf;	
 	EndDo;

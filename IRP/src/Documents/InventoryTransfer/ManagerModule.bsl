@@ -339,9 +339,9 @@ Function SerialLotNumbersAndItemKeys()
 	|	Document.InventoryTransfer.ItemList AS ItemList
 	|		LEFT JOIN Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
 	|		ON ItemList.Key = SerialLotNumbers.Key
-	|		AND ItemList.Ref = SerialLotNumbers.Ref
+	|		AND SerialLotNumbers.Ref = &Ref
 	|WHERE
-	|	SerialLotNumbers.Ref = &Ref";
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()

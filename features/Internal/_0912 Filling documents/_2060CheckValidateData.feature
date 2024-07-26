@@ -80,6 +80,11 @@ Scenario: _0206000 preparation (checks data)
 		When Create document InternalSupplyRequest objects (wrong data)
 		When Create document SalesOrder objects (wrong data)
 		When Create document RetailSalesReceipt objects (wrong movements)
+		When Create document PurchaseInvoice objects (advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(120).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _0260601 check preparation
@@ -454,4 +459,31 @@ Scenario: _0206014 сheck posting in Fix document problems (Post selected docume
 		And "PostingInfo" table does not contain lines
 			| 'Ref'                                                  |
 			| 'Retail sales receipt 8 813 dated 29.01.2024 17:37:58' |	
+	And I close all client application windows
+
+Scenario: _0206015 skeep sheck for reposting
+	And I close all client application windows
+	* Open data proc
+		Given I open hyperlink "e1cib/app/DataProcessor.FixDocumentProblems"
+		And I click Choice button of the field named "Period"
+		And I input "29.01.2021" text in the field named "DateBegin"
+		And I input "29.01.2024" text in the field named "DateEnd"
+		And I click the button named "Select"
+		And I set checkbox "Only posted"
+		And in the table "DocumentList" I click "Fill documents" button
+		And in the table "DocumentList" I click "Skeep check (for reposting)" button
+	* Skeep checks (for reposting)
+		And "PostingInfo" table contains lines
+			| "Date"       | "Document type"        | "Ref"                                                  | "Select" | "Reg name" | "Processed" | "Errors" |
+			| "12.02.2021" | "Purchase invoice"     | "Purchase invoice 120 dated 12.02.2021 15:40:00"       | "No"     | ""         | "No"        | ""       |
+			| "12.02.2021" | "Purchase invoice"     | "Purchase invoice 121 dated 12.02.2021 15:40:00"       | "No"     | ""         | "No"        | ""       |
+			| "07.03.2023" | "Retail sales receipt" | "Retail sales receipt 8 811 dated 07.03.2023 16:47:01" | "No"     | ""         | "No"        | ""       |	
+// 		And in the table "DocumentList" I click "Check posting" button
+// 		Then " [Jobs: 1]: Background multi job" window is opened
+// 		And Delay 5
+// 		And I click "Update statuses" button
+// 		And "PostingInfo" table does not contain lines
+// 			| "Date"       | "Document type"        | "Ref"                                                  | "Select" | "Reg name" | "Processed" | "Errors" |
+// 			| "12.02.2021" | "Purchase invoice"     | "Purchase invoice 120 dated 12.02.2021 15:40:00"       | "No"     | ""         | "No"        | ""       |
+// 			| "12.02.2021" | "Purchase invoice"     | "Purchase invoice 121 dated 12.02.2021 15:40:00"       | "No"     | ""         | "No"        | ""       |
 	And I close all client application windows

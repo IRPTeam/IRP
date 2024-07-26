@@ -934,19 +934,13 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			Then user message window does not contain messages	
 		* (CT) - (VA)	
 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string	
+			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string	
 			And I click "Post" button
 			Then user message window does not contain messages	
 		* (CA) - (VA)
 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
-		* (CA) - (VT)	
-			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
+			Then user message window does not contain messages	
 		* (CA) - (VT)	
 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
 			And I click "Post" button
@@ -955,13 +949,12 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 		* (CT) - (VT)	
 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button
-			Then there are lines in TestClient message log
-				|"Wrong combination of send and receive debt type"|
+			Then user message window does not contain messages
 		* (VA) - (CA)	
 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
 			And I select from "Partner term (send)" drop-down list by "Vendor Ferron, TRY" string
 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Basic Partner terms, TRY" string
+			And I select from "Partner term (receive)" drop-down list by "Partner term DFC" string
 			And I click "Post" button
 			Then there are lines in TestClient message log
 				|"Wrong combination of send and receive debt type"|
@@ -981,7 +974,7 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			Then user message window does not contain messages
 		* (VT) - (VA)				
 			And I select "Advance (Vendor)" exact value from "Debt type (receive)" drop-down list
-			And I select from "Partner term (receive)" drop-down list by "Vendor Ferron, TRY" string
+			And I select from "Partner term (receive)" drop-down list by "Partner term vendor DFC" string
 			And I click "Post" button
 			Then there are lines in TestClient message log
 				|"Wrong combination of send and receive debt type"|	
@@ -998,5 +991,3 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
 			And I click "Post" button	
 			Then user message window does not contain messages				
-
-				

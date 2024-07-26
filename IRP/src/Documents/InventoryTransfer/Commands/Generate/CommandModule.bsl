@@ -14,7 +14,13 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		EndIf;
 	EndDo;
 	If IsPI Then
-		ParametersStructure = Новый Структура("Basis", CommandParameter);
+		BasedOnStructure = New Structure;
+		BasedOnStructure.Insert("BasedOn", "PurchaiceInvoice");
+		BasedOnStructure.Insert("Basis", CommandParameter);
+		
+		ParametersStructure = New Structure;
+		ParametersStructure.Insert("Basis", BasedOnStructure);
+		
 		OpenForm("Document.InventoryTransfer.ObjectForm", ParametersStructure);
 		Return;
 	EndIf;

@@ -247,7 +247,7 @@ Scenario: _0226004 create IT based on PI, Store distributed purchase = True
 			And I go to line in "List" table
 				| 'Number'                              |
 				| '$$NumberPurchaseInvoice0226002$$'    |
-			And I select current line in "TableName" table
+			And I select current line in "List" table
 			And I click the button named "FormDocumentInventoryTransferGenerate"			
 	* Create second IT
 		And I select from the drop-down list named "StoreReceiver" by "Store 07" string

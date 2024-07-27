@@ -44,7 +44,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			ElsIf FillingData.BasedOn = "PurchaiceInvoice" Then
 				ObjectRef = FillingData.Basis[0];
 				If TypeOf(ObjectRef) = Type("DocumentRef.PurchaseInvoice") Then
-					DocPurchaseInvoiceServer.FillByPI(FillingData.Basis, ThisObject);
+					DocInventoryTransferServer.FillByPI(FillingData.Basis, ThisObject);
 				EndIf;		
 			Else
 				PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());

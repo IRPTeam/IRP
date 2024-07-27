@@ -4790,7 +4790,7 @@
                 <common>true</common>
               </userVisible>
               <dataPath xsi:type="form:DataPath">
-                <segments>Object.DistributedPurchaseInvıoice</segments>
+                <segments>Object.DistributedPurchaseInvoice</segments>
               </dataPath>
               <extendedTooltip>
                 <name>DistributedPurchaseInvıoiceExtendedTooltip</name>

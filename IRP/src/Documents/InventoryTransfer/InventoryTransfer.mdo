@@ -302,10 +302,10 @@
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="74f385da-3b77-4df4-9391-d19946b4e7b3">
-    <name>DistributedPurchaseInvıoice</name>
+    <name>DistributedPurchaseInvoice</name>
     <synonym>
       <key>en</key>
-      <value>Distributed purchase invıoice</value>
+      <value>Distributed purchase invoice</value>
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>

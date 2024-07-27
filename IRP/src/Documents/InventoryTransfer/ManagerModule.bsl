@@ -328,9 +328,9 @@ Function SerialLotNumbersAndItemKeys()
 	|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	ISNULL(SerialLotNumbers.Quantity, ItemList.Quantity) AS Quantity,
 	|	ItemList.Ref AS Ref,
-	|	ItemList.Ref.DistributedPurchaseInvıoice AS Basis,
+	|	ItemList.Ref.DistributedPurchaseInvoice AS Basis,
 	|	CASE
-	|		WHEN ItemList.Ref.DistributedPurchaseInvıoice.Ref IS NOT NULL
+	|		WHEN ItemList.Ref.DistributedPurchaseInvoice.Ref IS NOT NULL
 	|			THEN True
 	|		ELSE FALSE
 	|	END StoreDistributedPurchase

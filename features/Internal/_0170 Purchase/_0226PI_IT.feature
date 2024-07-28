@@ -253,7 +253,6 @@ Scenario: _0226004 create IT based on PI, Store distributed purchase = True
 		And I select from the drop-down list named "StoreReceiver" by "Store 07" string
 		* Check tab
 			And "ItemList" table became equal
-			And "ItemList" table became equal
 				| "#" | "Item"               | "Item key" | "Serial lot numbers"             | "Unit" | "Source of origins" | "Quantity" | "Inventory transfer order" | "Production planning" |
 				| "1" | "Dress"              | "XS/Blue"  | ""                               | "pcs"  | ""                  | "7,000"    | ""                         | ""                    |
 				| "2" | "Scarf"              | "XS/Red"   | ""                               | "pcs"  | ""                  | "3,000"    | ""                         | ""                    |

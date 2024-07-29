@@ -520,6 +520,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="0918b60e-2a37-4baf-97bc-46c9a8258282">
+      <name>PurchaseInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <createOnInput>DontUse</createOnInput>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="c99d67d6-126b-41c7-a695-e2b052fbb9e1">
     <producedTypes>

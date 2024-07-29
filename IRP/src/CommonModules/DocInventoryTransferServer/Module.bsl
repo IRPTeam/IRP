@@ -62,9 +62,31 @@ EndProcedure
 
 #Region Public
 
-Procedure FillByPI(ArrayOfPI, DocObject) Export
+// Fill by PI.
+// 
+// Parameters:
+//  BasisArray - Array Of DocumentRef.PurchaseInvoice -
+Function GetDataFromPI(BasisArray) Export
+	
+	FillingData = New Structure;
+	FillingData.Insert("BasedOn", "PurchaiceInvoice");
+	FillingData.Insert("ItemList", New Array);
+	FillingData.Insert("SerialLotNumbers", New Array);
+
+	ColumnsForItemList = New Array;	
+	For Each Column In Documents.InventoryTransfer.EmptyRef().ItemList.Unload().Columns Do
+		ColumnsForItemList.Add(Column.Name);
+	EndDo;
+	ColumnForItemList = StrConcat(ColumnsForItemList, ",");
+	
+	ColumnsForSN = New Array;	
+	For Each Column In Documents.InventoryTransfer.EmptyRef().SerialLotNumbers.Unload().Columns Do
+		ColumnsForSN.Add(Column.Name);
+	EndDo;
+	ColumnForSN = StrConcat(ColumnsForSN, ",");
+	
 	Query = New Query;
-	Query.SetParameter("BasisArray", ArrayOfPI);
+	Query.SetParameter("BasisArray", BasisArray);
 	Query.Text = 
 	"SELECT
 	|	R4032B_GoodsInTransitOutgoingBalance.Store AS Store,
@@ -81,7 +103,7 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 	TableRest = Query.Execute().Unload();
 	
 	Query = New Query;
-	Query.SetParameter("BasisArray", ArrayOfPI);
+	Query.SetParameter("BasisArray", BasisArray);
 	Query.Text = 
 	"SELECT
 	|	PurchaseInvoiceItemList.Item AS Item,
@@ -107,6 +129,7 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 	|SELECT
 	|	MAX(PurchaseInvoiceItemList.Ref.Company) AS Company,
 	|	MAX(PurchaseInvoiceItemList.Store) AS StoreSender,
+	|	MAX(PurchaseInvoiceItemList.Ref.Branch) AS Branch,
 	|	MAX(PurchaseInvoiceItemList.Ref.Ref) AS DistributedPurchaseInvoice,
 	|	MAX(PurchaseInvoiceItemList.Store.UseShipmentConfirmation) AS UseShipmentConfirmation,
 	|	MAX(PurchaseInvoiceItemList.Ref.StoreDistributedPurchase) AS StoreDistributedPurchase
@@ -116,6 +139,19 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 	|	PurchaseInvoiceItemList.Ref IN (&BasisArray)";
 	
 	ResultsArray = Query.ExecuteBatch();
+	
+	SelectionHeader = ResultsArray[1].Select();
+	While SelectionHeader.Next() Do
+		FillingData.Insert("Company", SelectionHeader.Company);
+		FillingData.Insert("StoreSender", SelectionHeader.StoreSender);
+		FillingData.Insert("StoreReceiver", Catalogs.Stores.EmptyRef());
+		FillingData.Insert("Branch", SelectionHeader.Branch);
+		FillingData.Insert("UseShipmentConfirmation", SelectionHeader.UseShipmentConfirmation);
+		If SelectionHeader.StoreDistributedPurchase Then
+			FillingData.Insert("DistributedPurchaseInvoice", SelectionHeader.DistributedPurchaseInvoice);
+		EndIf;
+	EndDo;
+	
 	SelectionItemKey = ResultsArray[0].Select(QueryResultIteration.ByGroups, "ItemKey");
 	While SelectionItemKey.Next() Do
 		Selection = SelectionItemKey.Select();
@@ -144,14 +180,15 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 			EndDo;			
 		EndDo;
 		If CreateRow Then
-			NewRowItemList = DocObject.ItemList.Add();
+			NewRowItemList = New Structure(ColumnForItemList);
 			NewRowItemList.Key = New UUID();
 			FillPropertyValues(NewRowItemList, SelectionItemKey, "Item, ItemKey, Unit");
+			NewRowItemList.PurchaseInvoice = SelectionHeader.DistributedPurchaseInvoice;
 			If ArrayOfSerialLotNumbers.Count() > 0 Then
 				TotalQuantity = 0;
 				For Each SerialLotNumberStructure In ArrayOfSerialLotNumbers Do
 					If ValueIsFilled(SerialLotNumberStructure.SerialLotNumber) Then
-						NewRowSerialLotNumbers = DocObject.SerialLotNumbers.Add();
+						NewRowSerialLotNumbers = New Structure(ColumnForSN);
 						NewRowSerialLotNumbers.Key = NewRowItemList.Key;
 						NewRowSerialLotNumbers.SerialLotNumber = SerialLotNumberStructure.SerialLotNumber;
 						NewRowSerialLotNumbers.Quantity = SerialLotNumberStructure.Quantity;
@@ -159,6 +196,7 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 						NewRowItemList.UseSerialLotNumber = True;
 						
 						TotalQuantity = TotalQuantity + NewRowSerialLotNumbers.Quantity;
+						FillingData.SerialLotNumbers.Add(NewRowSerialLotNumbers);
 					Else
 						TotalQuantity = TotalQuantity + SerialLotNumberStructure.Quantity;
 					EndIf;					
@@ -167,18 +205,14 @@ Procedure FillByPI(ArrayOfPI, DocObject) Export
 				UnitFactor = GetItemInfo.GetUnitFactor(NewRowItemList.ItemKey, NewRowItemList.Unit);
 				NewRowItemList.QuantityInBaseUnit = NewRowItemList.Quantity  * UnitFactor;				
 			EndIf;	
+			FillingData.ItemList.Add(NewRowItemList);
 		EndIf;	
 	EndDo;
-	
-	SelectionHeader = ResultsArray[1].Select();
-	While SelectionHeader.Next() Do
-		DocObject.Company						= SelectionHeader.Company;
-		DocObject.StoreSender					= SelectionHeader.StoreSender;
-		DocObject.UseShipmentConfirmation		= SelectionHeader.UseShipmentConfirmation;
-		If SelectionHeader.StoreDistributedPurchase Then
-			DocObject.DistributedPurchaseInvoice = SelectionHeader.DistributedPurchaseInvoice;
-		EndIf;
-	EndDo;
-	
-EndProcedure
+
+	Result = New Structure();
+	Result.Insert("FillingValues", New Array);
+	Result.FillingValues.Add(FillingData);
+	Return Result;
+EndFunction
+
 #EndRegion

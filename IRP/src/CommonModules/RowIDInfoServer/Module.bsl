@@ -11287,7 +11287,7 @@ Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Und
 			Return "Company, Branch, Partner, LegalName, TransactionType";
 		EndIf;
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
-		Return "Company, Branch, StoreSender, StoreReceiver, DistributedPurchaseInvoice";
+		Return "Company, Branch, StoreSender, StoreReceiver";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransferOrder Then
 		Return "Company, Branch, StoreReceiver";
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsSurplus Then

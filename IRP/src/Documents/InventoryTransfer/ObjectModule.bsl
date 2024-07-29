@@ -44,6 +44,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 			Else
 				PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 				FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
+				FillingData.Property("DistributedPurchaseInvoice", ThisObject.DistributedPurchaseInvoice);
 				LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 				ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 			EndIf;

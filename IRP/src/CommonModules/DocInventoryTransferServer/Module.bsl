@@ -149,6 +149,8 @@ Function GetDataFromPI(BasisArray) Export
 		FillingData.Insert("UseShipmentConfirmation", SelectionHeader.UseShipmentConfirmation);
 		If SelectionHeader.StoreDistributedPurchase Then
 			FillingData.Insert("DistributedPurchaseInvoice", SelectionHeader.DistributedPurchaseInvoice);
+		Else
+			FillingData.Insert("DistributedPurchaseInvoice", Undefined);		
 		EndIf;
 	EndDo;
 	

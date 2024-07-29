@@ -440,12 +440,12 @@ Scenario: _041619 check Purchase return movements by the Register  "R4032 Goods 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''             | ''                                                | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                                | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                                | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                           | 'Item key'    |
-			| ''                                                | 'Receipt'       | '14.03.2021 18:53:34'   | '5'           | 'Store 02'     | 'Purchase return 231 dated 14.03.2021 18:53:34'   | 'S/Yellow'    |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34'   | ''              | ''                      | ''            | ''             | ''                                                | ''            | ''                  |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                                | ''            | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                                | ''            | ''                  |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                | ''            | ''                  |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                           | 'Item key'    | 'Serial lot number' |
+			| ''                                                | 'Receipt'       | '14.03.2021 18:53:34'   | '5'           | 'Store 02'     | 'Purchase return 231 dated 14.03.2021 18:53:34'   | 'S/Yellow'    | ''                  |
 	And I close all client application windows
 
 Scenario: _041615 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing)" (SC - PR)
@@ -460,12 +460,12 @@ Scenario: _041615 check Purchase return movements by the Register  "R4032 Goods 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 233 dated 14.03.2021 19:26:51'   | ''              | ''                      | ''            | ''             | ''                                                      | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                                      | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                                      | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                      | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                 | 'Item key'    |
-			| ''                                                | 'Receipt'       | '14.03.2021 19:26:51'   | '4'           | 'Store 02'     | 'Shipment confirmation 233 dated 14.03.2021 19:22:58'   | 'S/Yellow'    |
+			| 'Purchase return 233 dated 14.03.2021 19:26:51'   | ''              | ''                      | ''            | ''             | ''                                                      | ''            | ''                  |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                                      | ''            | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                                      | ''            | ''                  |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                      | ''            | ''                  |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                                 | 'Item key'    | 'Serial lot number' |
+			| ''                                                | 'Receipt'       | '14.03.2021 19:26:51'   | '4'           | 'Store 02'     | 'Shipment confirmation 233 dated 14.03.2021 19:22:58'   | 'S/Yellow'    | ''                  |
 	And I close all client application windows
 
 Scenario: _041616 check Purchase return movements by the Register  "R1031 Receipt invoicing" (SC - PR)

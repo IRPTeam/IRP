@@ -48,7 +48,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 				ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 			EndIf;
 		EndIf;
-	 EndIf;
+	EndIf;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

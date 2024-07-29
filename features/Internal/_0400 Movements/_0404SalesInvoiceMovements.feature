@@ -367,13 +367,13 @@ Scenario: _040140 check Sales invoice movements by the Register  "R4032 Goods in
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                                  | ''         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   |		
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'     | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                                  | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                  | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                             | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '1'         | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | 'XS/Blue'  | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:48:53' | '10'        | 'Store 02'   | 'Shipment confirmation 1 dated 28.01.2021 18:42:17' | '36/Red'   | ''                  |
 		And I close all client application windows
 		
 Scenario: _040141 check Sales invoice movements by the Register  "R5011 Customers aging" (without aging)
@@ -686,14 +686,14 @@ Scenario: _0401385 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57'     | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                          | ''         |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                          | ''         |
-			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                     | 'Item key' |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   |
-			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/18SD'  |		
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57'     | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| 'Register  "R4032 Goods in transit (outgoing)"' | ''            | ''                    | ''          | ''           | ''                                          | ''         | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                          | ''         | ''                  |
+			| ''                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                     | 'Item key' | 'Serial lot number' |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '1'         | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'XS/Blue'  | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '10'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/Red'   | ''                  |
+			| ''                                              | 'Receipt'     | '28.01.2021 18:50:57' | '24'        | 'Store 02'   | 'Sales invoice 3 dated 28.01.2021 18:50:57' | '36/18SD'  |	''                  |	
 		And I close all client application windows
 
 
@@ -856,13 +856,13 @@ Scenario: _0401319 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '1'           | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '24'          | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | '37/18SD'     |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '1'           | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '16.02.2021 10:59:49'   | '24'          | 'Store 02'     | 'Sales invoice 4 dated 16.02.2021 10:59:49'   | '37/18SD'     | ''                 |
 		And I close all client application windows
 
 //8 SI>SO
@@ -907,13 +907,13 @@ Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
+			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods in transit (outgoing)" (SI >SO, use SC)
@@ -927,13 +927,13 @@ Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods i
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
-			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
+			| 'Sales invoice 8 dated 18.02.2021 10:48:46'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                  | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
+			| ''                                                | 'Receipt'       | '18.02.2021 10:48:46'   | '15'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 // Commission trade

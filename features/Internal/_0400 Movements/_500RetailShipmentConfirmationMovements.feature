@@ -195,12 +195,12 @@ Scenario: _050006 check Retail shipment confirmation movements by the Register  
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'              | ''                    | ''           | ''         | ''                                                           | ''         | ''         |
-			| ''                                                           | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                                      | 'Item key' | 'Quantity' |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'XS/Blue'  | '2'        |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '37/18SD'  | '2'        |
-			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'PZU'      | '2'        |		
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                    | ''           | ''         | ''                                                           | ''         | ''                 | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'              | ''                    | ''           | ''         | ''                                                           | ''         | ''                 | ''         |
+			| ''                                                           | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                                      | 'Item key' | 'Serial lot number'| 'Quantity' |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'XS/Blue'  | ''                 | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '37/18SD'  | ''                 | '2'        |
+			| ''                                                           | '24.05.2023 14:43:31' | 'Expense'    | 'Store 01' | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | 'PZU'      | ''                 | '2'        |		
 		
 
 Scenario: _050007 check Retail shipment confirmation movements by the Register  "T3010S Row ID info"

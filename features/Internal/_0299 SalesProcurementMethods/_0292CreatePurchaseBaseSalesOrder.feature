@@ -2799,6 +2799,7 @@ Scenario: _029228 SO - PO - GR - SC - PI - SI (selling from one store while purc
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
+		And Delay 2
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    |
@@ -3042,6 +3043,7 @@ Scenario: _029229 SO - PO - GR - PI - SC - SI (selling from one store while purc
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
+		And Delay 2
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    |
@@ -3286,6 +3288,7 @@ Scenario: _029230 SO - PO - PI - SI (selling from one store while purchasing for
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
+		And Delay 2
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029230$$'   | '$$SalesOrder029230$$'    |
@@ -3346,6 +3349,7 @@ Scenario: _029230 SO - PO - PI - SI (selling from one store while purchasing for
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
+		And Delay 2
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
 			| 'Trousers' | '38/Yellow' | '$$SalesOrder029230$$' | '$$PurchaseOrder029230$$' | 'Store 02' |
@@ -3464,6 +3468,7 @@ Scenario: _029231 SO - PO - PI - SI - SC (selling from one store while purchasin
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
+		And Delay 2
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029231$$'   | '$$SalesOrder029231$$'    |

@@ -86,7 +86,9 @@ Function GetDefaultChoiceRef(Parameters) Export
 EndFunction
 
 Function GetLegalCurrencies(CompanyRef) Export
-	Return GetCurrenciesByType(CompanyRef, Enums.CurrencyType.Legal);
+	Array = New Array();
+	Array.Add(New Structure("CurrencyMovementType", CompanyRef.LegalCurrencyMovementType));
+	Return Array;
 EndFunction
 
 Function GetReportingCurrencies(CompanyRef) Export

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6eee25f9-8f84-411c-89c4-21077aaf569e">
+ <producedTypes>
+  <objectType typeId="2ab2431e-960b-41ac-8e55-2365d961ca37" valueTypeId="ad3b76d5-9210-4a1f-9742-69a204b1d520"/>
+  <managerType typeId="3cc45120-d904-44cf-8b98-2fc5f8a7df1e" valueTypeId="337ae90f-e155-4090-9d08-f250e0b55ddf"/>
+ </producedTypes>
+ <name>DownloadAttachedFiles</name>
+ <synonym>
+  <key>en</key>
+  <value>Download attached files</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Загрузить прикрепленные файлы</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Download attached files</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.DownloadAttachedFiles.Form.Form</defaultForm>
+ <forms uuid="3b30d8bd-5a7f-4ab7-a03a-a5599caf8a16">
+  <name>Form</name>
+  <synonym>
+   <key>en</key>
+   <value>Form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:DataProcessor>

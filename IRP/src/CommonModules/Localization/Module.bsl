@@ -905,6 +905,19 @@ Function Strings(Lang) Export
 		|ru='Вместо пустых значений будет установлено ""Возврат поставщику"".';
 		|tr='Boş değerler yerine, ""Satıcıya iade"" ayarlanacak.'", Lang));
 	
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en='Unknown attribute: %1 : %2';
+		|ru='Неизвестный атрибут: %1 : %2';
+		|tr='Unknown attribute: %1 : %2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en='Unknown attribute will be remove';
+		|ru='Неизвестный атрибут будет удален';
+		|tr='Unknown attribute will be remove'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en='Not filled Tag-Attribute: %1%2';
+		|ru='Не заполнен Реквизит-Атрибут: %1%2';
+		|tr='Not filled Tag-Attribute: %1%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en='Attribute will be set';
+		|ru='Реквизит будет установлен';
+		|tr='Attribute will be set'", Lang));
+	
 #EndRegion
 
 #Region Equipment
@@ -1929,6 +1942,18 @@ Function Strings(Lang) Export
 	Strings.insert("Error_147", NStr("en='The document has manual entries and cannot be canceled.';
 		|ru='Документ имеет ручные записи и не может быть отменён.';
 		|tr='Evrak hareketleri manuel olarak değiştirilmişti, iptal edilemez.'", Lang));
+	Strings.Insert("Error_148", NStr("en='Debit\Credit note is available only when amounts are equal.';
+		|ru='Суммы в одной валюте должны быть равны';
+		|tr='Debit\Credit note is available only when amounts are equal.'", Lang));
+	Strings.Insert("Error_149", NStr("en='Fill field';
+		|ru='Заполните поле';
+		|tr='Fill field'", Lang));
+	Strings.Insert("Error_150", NStr("en='Can not find file at data base';
+		|ru='Не найден файл в базе данных';
+		|tr='Can not find file at data base'", Lang));
+	Strings.Insert("Error_151", NStr("en='Can not find file at storage service';
+		|ru='Не найден файл в службе хранения';
+		|tr='Can not find file at storage service'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2171,6 +2196,9 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_040", NStr("en='File not found';
 		|ru='Файл не найден';
 		|tr='File not found'", Lang));
+	Strings.Insert("InfoMessage_041", NStr("en='Select type of attached document';
+		|ru='Выберите тип прикрепляемого документа';
+		|tr='Select type of attached document'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en='Save object, before continue.';
 		|ru='Сохраните объект, прежде чем продолжить.';
@@ -3027,12 +3055,12 @@ Strings.Insert("DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues"
 
 Strings.Insert("DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming",
 	NStr("en='DebitNote DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='ДебетоваяНота ДР (R1021B_VendorsTransactions) КР (R2040B_TaxesIncoming)';
+		|ru='ДебетоваяНота Дт (R1021B_VendorsTransactions) Кт (R2040B_TaxesIncoming)';
 		|tr='DebitNote DR (R1021B_VendorsTransactions) CR (R2040B_TaxesIncoming)'", Lang));
 
 Strings.Insert("DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming",
 	NStr("en='DebitNote (DR_R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)';
-		|ru='ДебетоваяНота (ДР_R2021B_CustomersTransactions) КР (R2040B_TaxesIncoming)';
+		|ru='ДебетоваяНота (Дт_R2021B_CustomersTransactions) Кт (R2040B_TaxesIncoming)';
 		|tr='DebitNote (DR_R2021B_CustomersTransactions) CR (R2040B_TaxesIncoming)'", Lang));
 	
 Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions",
@@ -3062,12 +3090,12 @@ Strings.Insert("CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransaction
 
 Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions",
 	NStr("en='CreditNote DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)';
-		|ru='КредитоваяНота ДР (R1040B_TaxesOutgoing) КР (R1021B_VendorsTransactions)';
+		|ru='КредитоваяНота Дт (R1040B_TaxesOutgoing) Кт (R1021B_VendorsTransactions)';
 		|tr='CreditNote DR (R1040B_TaxesOutgoing) CR (R1021B_VendorsTransactions)'", Lang));
 
 Strings.Insert("CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions",
 	NStr("en='CreditNote DR (R1040B_TaxesOutgoing) CR (R2021B_CustomersTransactions)';
-		|ru='КредитоваяНота ДР (R1040B_TaxesOutgoing) КР (R2021B_CustomersTransactions)';
+		|ru='КредитоваяНота Дт (R1040B_TaxesOutgoing) Кт (R2021B_CustomersTransactions)';
 		|tr='CreditNote DR (R1040B_TaxesOutgoing) CR (R2021B_CustomersTransactions)'", Lang));
 
 Strings.Insert("MoneyTransfer_DR_R3010B_CashOnHand_CR_R3010B_CashOnHand",
@@ -3302,12 +3330,12 @@ Strings.Insert("DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_Advances
 
 Strings.Insert("DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues",
 	NStr("en='DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)';
-		|ru='ДебетКредитоваяНота ДР (R5020B_PartnersBalance) КР (R5021_Revenues)';
+		|ru='ДебетоваяКредитоваяНота Дт (R5020B_PartnersBalance) Кт (R5021_Revenues)';
 		|tr='DebitCreditNote DR (R5020B_PartnersBalance) CR (R5021_Revenues)'", Lang));
 
 Strings.Insert("DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance",
 	NStr("en='DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)';
-		|ru='ДебетКредитоваяНота ДР (R5022T_Expenses) КР (R5020B_PartnersBalance)';
+		|ru='ДебетоваяКредитоваяНота Дт (R5022T_Expenses) Кт (R5020B_PartnersBalance)';
 		|tr='DebitCreditNote DR (R5022T_Expenses) CR (R5020B_PartnersBalance)'", Lang));
 
 Strings.Insert("ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses",
@@ -3342,7 +3370,7 @@ Strings.Insert("EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_Empl
 
 Strings.Insert("EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance",
 	NStr("en='EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)';
-		|ru='АвансСотрудника ДР (R1040B_TaxesOutgoing) КР (R3027B_EmployeeCashAdvance)';
+		|ru='АвансСотрудника Дт (R1040B_TaxesOutgoing) Кт (R3027B_EmployeeCashAdvance)';
 		|tr='EmployeeCashAdvance DR (R1040B_TaxesOutgoing) CR (R3027B_EmployeeCashAdvance)'", Lang));
 
 Strings.Insert("SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers",
@@ -3565,6 +3593,24 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("AuditLock_004", NStr("en='Document is locked by audit lock';
 		|ru='Документ заблокирован аудиторской блокировкой';
 		|tr='Evrak audit tarafından kilitlendi'", Lang));	
+#EndRegion
+	
+#Region DocStatuses
+	Strings.Insert("DocStatus_Name", NStr("en='Posting status';
+		|ru='Статус проведения';
+		|tr='Posting status'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en='New';
+		|ru='Новый';
+		|tr='Yeni'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en='Posted';
+		|ru='Провести';
+		|tr='Kaydedildi'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en='Not posted';
+		|ru='Не проведено          ';
+		|tr='Not posted'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en='Deleted';
+		|ru='Удалено';
+		|tr='Silindi'", Lang));	
 #EndRegion
 	
 	Return Strings;

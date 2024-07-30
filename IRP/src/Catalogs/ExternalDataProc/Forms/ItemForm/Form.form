@@ -354,6 +354,7 @@
   <name>OnCreateAtServer</name>
  </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>

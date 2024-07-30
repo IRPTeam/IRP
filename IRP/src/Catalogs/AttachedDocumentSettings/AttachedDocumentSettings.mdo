@@ -108,10 +108,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_AttachedDocumentSettings</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
+  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>0</multipleValuesKeyField>
+  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -121,10 +124,13 @@
    <value>Catalog.AddAttributeAndPropertySets.Catalog_AttachedDocumentSettings</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
+  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>Catalog.AttachedDocumentSettings.TabularSection.AddAttributes</characteristicValues>
   <objectField>Catalog.AttachedDocumentSettings.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Catalog.AttachedDocumentSettings.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Catalog.AttachedDocumentSettings.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>0</multipleValuesKeyField>
+  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -191,10 +197,10 @@
    <maxValue xsi:type="core:UndefinedValue"/>
   </standardAttributes>
   <attributes uuid="9d2df0b6-f3fe-46fd-aef3-5a4c89a0eaf8">
-   <name>FilePresention</name>
+   <name>FilePresentation</name>
    <synonym>
     <key>en</key>
-    <value>File presention</value>
+    <value>File presentation</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -202,7 +208,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Dosya görünümü</value>
+    <value>File presentation</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

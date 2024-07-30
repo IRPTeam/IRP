@@ -150,12 +150,21 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.OutgoingVatRate AS TaxRate,
 		|	TaxesDifference.OutgoingInvoiceType AS InvoiceType,
-		|	TaxesDifference.Amount
+		|	SUM(TaxesDifference.Amount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	TaxesDifference as TaxesDifference
 		|WHERE
-		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL ";
+		|	NOT TaxesDifference.OutgoingVatRate.Ref IS NULL
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Tax,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.OutgoingVatRate,
+		|	TaxesDifference.OutgoingInvoiceType";
 EndFunction 
 
 Function R2040B_TaxesIncoming()
@@ -169,12 +178,21 @@ Function R2040B_TaxesIncoming()
 		|	TaxesDifference.Currency,
 		|	TaxesDifference.IncomingVatRate AS TaxRate,
 		|	TaxesDifference.IncomingInvoiceType AS InvoiceType,
-		|	TaxesDifference.Amount
+		|	SUM(TaxesDifference.Amount) AS Amount
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	TaxesDifference as TaxesDifference
 		|WHERE
-		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL";
+		|	NOT TaxesDifference.IncomingVatRate.Ref IS NULL
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	TaxesDifference.Period,
+		|	TaxesDifference.Company,
+		|	TaxesDifference.Branch,
+		|	TaxesDifference.Tax,
+		|	TaxesDifference.Currency,
+		|	TaxesDifference.IncomingVatRate,
+		|	TaxesDifference.IncomingInvoiceType";
 EndFunction 
 
 Function R5015B_OtherPartnersTransactions()

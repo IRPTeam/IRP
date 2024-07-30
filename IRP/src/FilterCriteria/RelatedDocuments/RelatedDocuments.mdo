@@ -128,6 +128,7 @@
  <content>Document.RetailReceiptCorrection.Attribute.BasisDocument</content>
  <content>Document.ExpenseAccruals.Attribute.Basis</content>
  <content>Document.RevenueAccruals.Attribute.Basis</content>
+ <content>Document.InventoryTransfer.Attribute.DistributedPurchaseInvoice</content>
  <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
   <name>RelatedDocuments</name>
   <synonym>
@@ -165,6 +166,7 @@
    <types>DocumentRef.RetailShipmentConfirmation</types>
    <types>DocumentRef.FixedAssetTransfer</types>
    <types>DocumentRef.PurchaseReturnOrder</types>
+   <types>DocumentRef.ExpenseAccruals</types>
    <types>DocumentRef.Labeling</types>
    <types>DocumentRef.ConsolidatedRetailSales</types>
    <types>DocumentRef.BankPayment</types>
@@ -202,6 +204,7 @@
    <types>DocumentRef.DecommissioningOfFixedAsset</types>
    <types>DocumentRef.InventoryTransferOrder</types>
    <types>DocumentRef.PurchaseOrderClosing</types>
+   <types>DocumentRef.RevenueAccruals</types>
    <types>DocumentRef.SalesOrderClosing</types>
    <types>DocumentRef.JournalEntry</types>
    <types>DocumentRef.ProductionPlanningCorrection</types>
@@ -213,8 +216,6 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.RetailGoodsReceipt</types>
    <types>DocumentRef.CashExpense</types>
-   <types>DocumentRef.ExpenseAccruals</types>
-   <types>DocumentRef.RevenueAccruals</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

@@ -23,6 +23,8 @@
  <content>CommonForm.EditIDInfo</content>
  <content>DataProcessor.GroupPhotoUploading</content>
  <content>Catalog.PrintInfo</content>
+ <content>Report.T0001_FilesAnalyser</content>
+ <content>DataProcessor.DownloadAttachedFiles</content>
  <subsystems>PurchaseAndSales</subsystems>
  <subsystems>Finance</subsystems>
  <subsystems>OpeningEntry</subsystems>

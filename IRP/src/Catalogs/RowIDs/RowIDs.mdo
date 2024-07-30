@@ -1026,6 +1026,52 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="fcf7a841-5d09-41f3-bc92-679b0c241529">
+  <name>StoreSales</name>
+  <synonym>
+   <key>en</key>
+   <value>Store (Sales)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад (Продажи)</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Store (Sales)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1a4afe6a-f926-4aad-bf87-08b93aa6ce34">
+  <name>StorePurchases</name>
+  <synonym>
+   <key>en</key>
+   <value>Store (Purchases)</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад (Закупки) </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Store (Purchases)</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
   <name>ItemForm</name>
   <synonym>

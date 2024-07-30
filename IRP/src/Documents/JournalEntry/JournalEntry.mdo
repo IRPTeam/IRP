@@ -321,6 +321,50 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <tabularSections uuid="80c317ce-1ce8-4492-8590-d4dcf330114b">
+  <producedTypes>
+   <objectType typeId="bdfefc31-4176-4f7d-82ec-5d6965be2759" valueTypeId="6b5a6bbf-331a-479f-aea0-da6f73d1a632"/>
+   <rowType typeId="ddfc7662-de12-413c-bbc4-2b3cf92767d2" valueTypeId="4f04e2c5-af8a-444b-a4ba-ab55ef233424"/>
+  </producedTypes>
+  <name>Errors</name>
+  <synonym>
+   <key>en</key>
+   <value>Errors</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ошибки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hatalar</value>
+  </synonym>
+  <attributes uuid="40aa1101-080a-412f-bc13-a5bf5d005d7d">
+   <name>Error</name>
+   <synonym>
+    <key>en</key>
+    <value>Error</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ошибка</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hata</value>
+   </synonym>
+   <type>
+    <types>String</types>
+    <stringQualifiers>
+     <length>1024</length>
+    </stringQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
   <name>JournalEntry</name>
   <synonym>

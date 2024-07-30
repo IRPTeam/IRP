@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="daeb6ec7-41e4-4980-bd89-da490a86b054">
- <name>PaymentByDocuments</name>
+ <name>PaymentDistribution</name>
  <synonym>
   <key>en</key>
-  <value>Payment by documents</value>
+  <value>Payment distribution</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Оплата по документам</value>
+  <value>Распределение платежей</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Evraklara göre ödemeler</value>
+  <value>Payment distribution</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

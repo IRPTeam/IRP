@@ -282,13 +282,22 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	Transactions.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	Transactions.TaxAmount AS Amount
+		|	SUM(Transactions.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsVendor
 		|	AND Transactions.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)
 		|
 		|UNION ALL
 		|
@@ -302,12 +311,21 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	Transactions.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType,
-		|	Transactions.TaxAmount AS Amount
+		|	SUM(Transactions.TaxAmount)
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsCustomer
-		|	AND Transactions.TaxAmount <> 0";
+		|	AND Transactions.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Transactions.Period,
+		|	Transactions.Key,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Currency,
+		|	Transactions.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";
 EndFunction
 
 #EndRegion

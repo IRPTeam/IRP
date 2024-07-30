@@ -90,8 +90,8 @@
  <defaultListForm>Document.EmployeeVacation.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.EmployeeVacation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
- <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
  <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
+ <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -561,7 +561,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| '2'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '2,000'      | 'SRO&SR'          |
 			| '3'   | 'Sales invoice 101 dated 05.03.2021 12:56:38'   | 'SR'            | '32,000'     | 'SRO&SR'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 

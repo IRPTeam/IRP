@@ -96,10 +96,10 @@
  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
- <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

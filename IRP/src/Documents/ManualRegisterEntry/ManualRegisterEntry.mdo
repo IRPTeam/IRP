@@ -122,6 +122,7 @@
  <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.DELETE_R8012B_ConsignorInventory</registerRecords>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
@@ -146,7 +147,6 @@
  <registerRecords>AccumulationRegister.R3016B_ChequeAndBonds</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="0efb3e65-ce41-418b-bedd-d2b4e61ae11a">

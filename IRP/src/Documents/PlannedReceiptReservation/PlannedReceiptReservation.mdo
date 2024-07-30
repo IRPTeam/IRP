@@ -93,6 +93,7 @@
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>

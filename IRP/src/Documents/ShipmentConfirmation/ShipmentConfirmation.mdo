@@ -93,6 +93,7 @@
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>

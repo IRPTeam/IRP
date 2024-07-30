@@ -71,30 +71,33 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
+	If ThisObject.SendCurrency = ThisObject.ReceiveCurrency
+		And ThisObject.SendAmount <> ThisObject.ReceiveAmount Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "SendAmount", ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_148, "ReceiveAmount", ThisObject);
+		Cancel = True;
+	EndIf;
+
+	If 	   (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer     And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
+   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
+   
+   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
+   		Cancel = True;
+   EndIf;
+	
 	If ThisObject.SendPartner = ThisObject.ReceivePartner And ThisObject.SendLegalName = ThisObject.ReceiveLegalName Then
 				
 		If (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer        And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer     And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
+	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor) Then
 	   			   
 	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
 	   		Cancel = True;
 		EndIf;
 	Else
 				
-		If 	(ThisObject.SendDebtType = Enums.DebtTypes.AdvanceCustomer     And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionVendor)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionCustomer And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.AdvanceVendor       And ThisObject.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer)
-	   		Or (ThisObject.SendDebtType = Enums.DebtTypes.TransactionVendor   And ThisObject.ReceiveDebtType = Enums.DebtTypes.AdvanceVendor) Then
-	   
-	   		CommonFunctionsClientServer.ShowUsersMessage(R().Error_142, "SendDebtType", ThisObject);
-	   		Cancel = True;
-	   EndIf;
 	EndIf;
 
 EndProcedure

@@ -390,6 +390,11 @@ Function isCommonAttributeUseForMetadata(Name, MetadataFullName) Export
 	
 	Attr = Metadata.CommonAttributes[Name];
 	Content = Attr.Content.Find(MetadataFullName);
+	
+	If Content = Undefined Then
+		Return False;
+	EndIf;
+	
 	UseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use;
 	AutoUseAndUseAtContent = Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
 		And Attr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use;
@@ -1681,7 +1686,7 @@ EndProcedure
 // Create table.
 // 
 // Parameters:
-//  RegisterMetadata - MetadataObjectAccountingRegister - Register metadata
+//  RegisterMetadata - MetadataObjectAccountingRegister, MetadataObjectInformationRegister - Register metadata
 // 
 // Returns:
 //  ValueTable - Create table

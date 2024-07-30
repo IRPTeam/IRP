@@ -2835,6 +2835,7 @@
   <event>FillCheckProcessingAtServer</event>
   <name>FillCheckProcessingAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>

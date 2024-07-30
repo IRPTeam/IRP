@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a602332b-7f84-43cd-b33f-335fa24f84bd">
+ <producedTypes>
+  <objectType typeId="032b89c0-7d34-48f8-af6a-15b0a1687168" valueTypeId="387bbfa6-7ef2-4fa5-a621-c297610fede8"/>
+  <managerType typeId="252949fc-6280-4511-be2d-69f61f4359bd" valueTypeId="cd8e2903-26fc-4039-b854-49e8c19f4db4"/>
+ </producedTypes>
+ <name>T0001_FilesAnalyser</name>
+ <synonym>
+  <key>en</key>
+  <value>T0001 Files analyser</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T0001 Анализатор файлов</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T0001 Files analyser</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.T0001_FilesAnalyser.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="8c58c567-d830-4c5d-acb9-5d888922fe23">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

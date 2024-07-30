@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @AgingAndCreditLimit
@@ -446,11 +446,11 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 		And I go to line in "List" table
 			| 'Description'    |
 			| 'Crystal'        |
-		And I activate "Description" field in "List" table
 		And I select current line in "List" table
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I input "3 500,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
-		And I finish line editing in "PaymentList" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I click the button named "FormPost"
 		And I input current date in "Date" field
 		And I click the button named "FormPostAndClose"
@@ -609,13 +609,10 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 		And I input "10 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And I click the button named "FormPostAndClose"
-		* Post CustomersAdvancesClosing
-			Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
-			And I go to line in "List" table
-				| 'Number'     |
-				| '1'          |
-			And in the table "List" I click the button named "ListContextMenuPost"			
+		And I activate "Partner term" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "DFC Customer by Partner terms" from "Partner term" drop-down list by string in "PaymentList" table	
+		And I click the button named "FormPostAndClose"			
 		* Create SI and filling in customer information
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I click the button named "FormCreate"
@@ -652,7 +649,7 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 				| 'L/Green'      |
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
-			And I input "10,000" text in "Quantity" field of "ItemList" table
+			And I input "50,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I click the button named "FormPost"
 			And I click "OK" button

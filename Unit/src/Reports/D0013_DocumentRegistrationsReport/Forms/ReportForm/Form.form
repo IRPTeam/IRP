@@ -445,6 +445,7 @@
     <callType>After</callType>
   </handlers>
   <autoSaveDataInSettings>Use</autoSaveDataInSettings>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -457,5 +458,4 @@
     <navigationPanel/>
     <commandBar/>
   </commandInterface>
-  <extInfo xsi:type="form:ReportFormExtInfo"/>
 </form:Form>

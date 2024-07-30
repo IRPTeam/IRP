@@ -2052,6 +2052,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -2302,12 +2303,16 @@
  </commandInterface>
  <extInfo xsi:type="form:DocumentFormExtInfo">
   <handlers>
-   <event>OnReadAtServer</event>
-   <name>OnReadAtServer</name>
+   <event>AfterWrite</event>
+   <name>AfterWrite</name>
   </handlers>
   <handlers>
    <event>AfterWriteAtServer</event>
    <name>AfterWriteAtServer</name>
+  </handlers>
+  <handlers>
+   <event>OnReadAtServer</event>
+   <name>OnReadAtServer</name>
   </handlers>
   <handlers>
    <event>BeforeWriteAtServer</event>
@@ -2316,10 +2321,6 @@
   <handlers>
    <event>OnWriteAtServer</event>
    <name>OnWriteAtServer</name>
-  </handlers>
-  <handlers>
-   <event>AfterWrite</event>
-   <name>AfterWrite</name>
   </handlers>
   <repostOnWrite>true</repostOnWrite>
  </extInfo>

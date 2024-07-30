@@ -99,7 +99,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Дата начала больничного</value>
+   <value>Дата начала</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -126,7 +126,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Дата окончания больничного</value>
+   <value>Дата окончания</value>
   </synonym>
   <synonym>
    <key>tr</key>

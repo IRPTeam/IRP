@@ -2179,11 +2179,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Дебетовая/Кредитовая нота</value>
+    <value>Корректировка долга</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Borç/Alacak Fişi</value>
+    <value>Borç/Alacak Dekontu</value>
    </title>
    <extendedTooltip>
     <name>GroupDebitCreditNoteExtendedTooltip</name>
@@ -3037,6 +3037,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>

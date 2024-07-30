@@ -720,7 +720,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Purchase order 217 dated 12.02.2021 12:45:05'   | ''            | '2,000'      | 'PI'              |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
-		And I click "Cancel posting" button	
+		And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 
 Scenario: _018015 cancel line in the PO and create PI
@@ -987,7 +987,7 @@ Scenario: _018020 check Purchase price records
 			| '$DatePurchaseInvoice018020$' | '$PurchaseInvoice018020$' | 'en description is empty' | 'Ferron BP' | '37/18SD'  | 'pcs'  | 'TRY'      | '221,00' | '221,00'      | '187,29'    |
 	* Unpost PI and check price clearance
 		When in opened panel I select "$PurchaseInvoice018020$"
-		And I click "Cancel posting" button
+		And I click the button named "FormUndoPosting"
 		When in opened panel I select "S1001L Vendors prices by item key"
 		And "List" table does not contain lines
 			| 'Period'                      | 'Recorder'                | 'Price type'              | 'Partner'   | 'Item key' | 'Unit' | 'Currency' | 'Price'  | 'Total price' | 'Net price' |

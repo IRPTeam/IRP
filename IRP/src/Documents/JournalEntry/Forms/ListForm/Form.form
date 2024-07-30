@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
   <id>1</id>
@@ -59,6 +59,59 @@
   </dataPath>
   <defaultItem>true</defaultItem>
   <titleLocation>None</titleLocation>
+  <items xsi:type="form:FormField">
+   <name>HaveErrors</name>
+   <id>44</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.HaveErrors</segments>
+   </dataPath>
+   <titleLocation>None</titleLocation>
+   <extendedTooltip>
+    <name>HaveErrorsExtendedTooltip</name>
+    <id>46</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>HaveErrorsContextMenu</name>
+    <id>45</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>PictureField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:ImageFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <valuesPicture xsi:type="core:PictureRef">
+     <picture>StdPicture.AppearanceCrossIcon</picture>
+    </valuesPicture>
+    <fileDragMode>AsFileRef</fileDragMode>
+   </extInfo>
+  </items>
   <items xsi:type="form:FormField">
    <name>Number</name>
    <id>16</id>
@@ -635,6 +688,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -655,16 +709,109 @@
   <edit>
    <common>true</common>
   </edit>
-  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-   <segments>List.Ref</segments>
-  </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
+   <queryText>SELECT
+	JournalEntry.Ref,
+	JournalEntry.Number,
+	JournalEntry.Date,
+	JournalEntry.Company,
+	JournalEntry.LedgerType,
+	JournalEntry.Basis,
+	JournalEntry.UserDefined,
+	JournalEntry.Description,
+	Case
+		when SUM(JournalEntryErrors.LineNumber) &gt; 0
+			then True
+		else False
+	end AS HaveErrors
+FROM
+	Document.JournalEntry AS JournalEntry
+		LEFT JOIN Document.JournalEntry.Errors AS JournalEntryErrors
+		ON JournalEntry.Ref = JournalEntryErrors.Ref
+GROUP BY
+	JournalEntry.Ref,
+	JournalEntry.Number,
+	JournalEntry.Date,
+	JournalEntry.Company,
+	JournalEntry.LedgerType,
+	JournalEntry.Basis,
+	JournalEntry.UserDefined,
+	JournalEntry.Description</queryText>
    <mainTable>Document.JournalEntry</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
+   <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Number</dataPath>
+    <field>Number</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Date</dataPath>
+    <field>Date</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Company</dataPath>
+    <field>Company</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LedgerType</dataPath>
+    <field>LedgerType</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Basis</dataPath>
+    <field>Basis</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>UserDefined</dataPath>
+    <field>UserDefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>HaveErrors</dataPath>
+    <field>HaveErrors</field>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Have errors</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Есть ошибки</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Have errors</value>
+      </content>
+     </localValue>
+    </title>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Errors</dataPath>
+    <field>Errors</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PointInTime</dataPath>
+    <field>PointInTime</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Posted</dataPath>
+    <field>Posted</field>
+   </fields>
   </extInfo>
  </attributes>
  <commandInterface>

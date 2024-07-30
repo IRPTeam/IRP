@@ -1966,6 +1966,7 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
+ <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
  <group>Vertical</group>
@@ -2134,7 +2135,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Дней отпуска (компания)</value>
+   <value>Дней отпуска (организация)</value>
   </title>
   <title>
    <key>tr</key>

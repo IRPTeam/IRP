@@ -371,7 +371,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		WHEN NOT BatchKeysInfo.SalesInvoiceIsFilled
 	|			THEN BatchKeysInfo.LandedCostTax
 	|		ELSE 0
-	|	END AS AmountTax,
+	|	END AS InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	tmpBatchKeysInfo AS BatchKeysInfo";
@@ -400,6 +401,9 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, T6020S_BatchKeysInfo.Name, BatchKeysInfo);
 	Parameters.PostingDataTables[T6020S_BatchKeysInfo].WriteInTransaction = Parameters.IsReposting;
 	
+	IncludeDimensions = New Map();
+	IncludeDimensions.Insert(T6020S_BatchKeysInfo, "SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor");
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IncludeDimensions", IncludeDimensions);
 	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
 	CurrenciesServer.ExcludePostingDataTable(Parameters, T6020S_BatchKeysInfo);
 	
@@ -408,7 +412,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -1351,8 +1355,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 		|	BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 		|	BatchKeysInfo.Store AS Store,
-		|	SUM(BatchKeysInfo.Amount) AS InvoiceAmount,
-		|	SUM(BatchKeysInfo.AmountTax) AS InvoiceTaxAmount
+		|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
+		|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	BatchKeysInfo AS BatchKeysInfo

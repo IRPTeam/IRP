@@ -188,56 +188,48 @@
    </content>
    <content id="457b2655-1ac4-4443-9d2f-d5b97b218b81">
     <name>BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>62</value>
     </code>
    </content>
    <content id="846d9a22-1946-4b22-a831-e5055950c36e">
     <name>BankPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>63</value>
     </code>
    </content>
    <content id="fd556c44-372a-43f5-877a-101ca36e8ab4">
     <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>70</value>
     </code>
    </content>
    <content id="f9d0e384-1f43-4213-adbe-06a404f4f679">
     <name>BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>74</value>
     </code>
    </content>
    <content id="6599722f-2a80-4adf-b7c5-3e9e6f3a84a8">
     <name>BankPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>85</value>
     </code>
    </content>
    <content id="ceb7799d-3b3a-4e33-ad10-a4d80d2333b0">
     <name>BankPayment_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>89</value>
     </code>
    </content>
    <content id="68be677a-980c-4950-bd53-c01b2b71ca23">
     <name>BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>90</value>
     </code>
    </content>
    <content id="52734ac0-d116-454c-882d-1404ed24fff0">
     <name>BankPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>93</value>
     </code>
@@ -263,56 +255,48 @@
    </content>
    <content id="75a21bc0-af5b-4d26-8313-ad8281d4c473">
     <name>BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>66</value>
     </code>
    </content>
    <content id="111f2066-7855-40c6-bf54-228e5ae44756">
     <name>BankReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>67</value>
     </code>
    </content>
    <content id="5852dccb-2a40-47d5-9665-4513840fc9f8">
     <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>72</value>
     </code>
    </content>
    <content id="139e87e1-68ee-4541-9b4b-bde8b1809b45">
     <name>BankReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CurrencyExchange</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>75</value>
     </code>
    </content>
    <content id="005882d8-a501-4fb4-98dd-60bf331ad902">
     <name>BankReceipt_DR_R3021B_CashInTransit_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>76</value>
     </code>
    </content>
    <content id="31d74fe2-210a-4709-b934-5b62df10368a">
     <name>BankReceipt_DR_R5022T_Expenses_CR_R3021B_CashInTransit</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>77</value>
     </code>
    </content>
    <content id="86608e0f-95f7-495f-ba0f-e94270a10adf">
     <name>BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>86</value>
     </code>
    </content>
    <content id="24fed25c-d0e6-419a-a357-ea1182c6714d">
     <name>BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>91</value>
     </code>
@@ -407,154 +391,132 @@
    </content>
    <content id="ae9bab95-c274-4e7b-804a-97ba0271c65f">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>111</value>
     </code>
    </content>
    <content id="91885012-4f2b-456d-b9e5-affe38f670ff">
     <name>ForeignCurrencyRevaluation_DR_R3010B_CashOnHand_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>112</value>
     </code>
    </content>
    <content id="587109fe-39e1-4257-a808-dbbff22143b8">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>113</value>
     </code>
    </content>
    <content id="da1d4ee2-0ed9-4fcf-8b3b-6546675088fa">
     <name>ForeignCurrencyRevaluation_DR_R1021B_VendorsTransactions_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>114</value>
     </code>
    </content>
    <content id="3c3532d0-c9b3-4c22-b28d-3938261880bd">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R9510B_SalaryPayment</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>115</value>
     </code>
    </content>
    <content id="21ddc5db-304c-4b2f-94fb-a6a1b66f82a4">
     <name>ForeignCurrencyRevaluation_DR_R9510B_SalaryPayment_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>116</value>
     </code>
    </content>
    <content id="c6e9ec0d-b76b-4dad-8e66-5611c6e4d3fe">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1020B_AdvancesToVendors</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>117</value>
     </code>
    </content>
    <content id="cde2a1a7-589e-4916-bfeb-bde3b2b4a011">
     <name>ForeignCurrencyRevaluation_DR_R1020B_AdvancesToVendors_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>118</value>
     </code>
    </content>
    <content id="30ba338d-8ac0-4448-b28f-861d6f890830">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2021B_CustomersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>119</value>
     </code>
    </content>
    <content id="084bb2ec-8a10-4909-8f5b-156c58c1272e">
     <name>ForeignCurrencyRevaluation_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>120</value>
     </code>
    </content>
    <content id="952c499d-5296-41c9-9151-3604462da88b">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3015B_CashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>121</value>
     </code>
    </content>
    <content id="a3485a3f-61df-4f1e-b657-ac663d78127b">
     <name>ForeignCurrencyRevaluation_DR_R3015B_CashAdvance_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>122</value>
     </code>
    </content>
    <content id="12aca914-dcf6-4b01-8c9b-6adbdc361e61">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>123</value>
     </code>
    </content>
    <content id="08b60486-774e-467f-9173-e9babc05c68f">
     <name>ForeignCurrencyRevaluation_DR_R3027B_EmployeeCashAdvance_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>124</value>
     </code>
    </content>
    <content id="65324f33-0e45-4752-947e-c2c866143b88">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>125</value>
     </code>
    </content>
    <content id="bf0fe8cd-71bc-4118-94bc-d56f774aaf8a">
     <name>ForeignCurrencyRevaluation_DR_R5015B_OtherPartnersTransactions_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>126</value>
     </code>
    </content>
    <content id="16d14d74-1f44-4a4a-92df-83b13ca42f35">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R8510B_BookValueOfFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>127</value>
     </code>
    </content>
    <content id="116e75ea-da3f-40b3-b909-1b2f965d9431">
     <name>ForeignCurrencyRevaluation_DR_R8510B_BookValueOfFixedAsset_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>128</value>
     </code>
    </content>
    <content id="5378e82f-3724-45aa-9927-f8fedc1a7d35">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R1040B_TaxesOutgoing</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>140</value>
     </code>
    </content>
    <content id="020b71ea-d852-45fa-96ff-91870a4c7e69">
     <name>ForeignCurrencyRevaluation_DR_R1040B_TaxesOutgoing_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>141</value>
     </code>
    </content>
    <content id="0dc4dcf8-1763-486d-8ca7-d4e345483c2f">
     <name>ForeignCurrencyRevaluation_DR_R5022T_Expenses_CR_R2040B_TaxesIncoming</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>142</value>
     </code>
    </content>
    <content id="762d5163-0447-4e9c-8a71-dcfb92f50be2">
     <name>ForeignCurrencyRevaluation_DR_R2040B_TaxesIncoming_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>143</value>
     </code>
@@ -580,42 +542,36 @@
    </content>
    <content id="f7106390-3987-4720-aeee-dacaa0f2a3b3">
     <name>CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>64</value>
     </code>
    </content>
    <content id="06d24c46-557b-4e20-a5a0-6b707047e40f">
     <name>CashPayment_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>65</value>
     </code>
    </content>
    <content id="f5e035f2-dbde-448b-9d6c-600a07679776">
     <name>CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>71</value>
     </code>
    </content>
    <content id="ab50cbf2-eccf-45e8-9d50-bd9e1477eeb0">
     <name>CashPayment_DR_R5015B_OtherPartnersTransactions_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>87</value>
     </code>
    </content>
    <content id="14cc5766-8397-44da-a66b-360c08200909">
     <name>CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>92</value>
     </code>
    </content>
    <content id="cd26224e-1087-4055-b81c-e1c256741fa0">
     <name>CashPayment_DR_R3027B_EmployeeCashAdvance_CR_R3010B_CashOnHand</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>94</value>
     </code>
@@ -641,28 +597,24 @@
    </content>
    <content id="c992cd20-6d49-4b01-935b-3e21fdced2fa">
     <name>CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>68</value>
     </code>
    </content>
    <content id="92cc20b7-780f-419b-84e1-bf4c3e7a54ec">
     <name>CashReceipt_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>69</value>
     </code>
    </content>
    <content id="f8a2280a-433a-4d02-8d1a-668abd4a705d">
     <name>CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>73</value>
     </code>
    </content>
    <content id="4a6b1ef5-72e9-4c7a-b49c-99cd28271efa">
     <name>CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>88</value>
     </code>
@@ -720,28 +672,24 @@
    </content>
    <content id="99ab7197-b862-434c-83ec-2affd56b4827">
     <name>DebitNote_DR_R5015B_OtherPartnersTransactions_CR_R5021_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>95</value>
     </code>
    </content>
    <content id="787bf187-a0cc-4e5d-8115-9ecb8496fcd7">
     <name>DebitNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>139</value>
     </code>
    </content>
    <content id="33e35216-97d1-4a65-a38a-c059a27e0d3f">
     <name>DebitNote_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>148</value>
     </code>
    </content>
    <content id="714bb1c1-92f3-473b-ae30-ca69769f6c6c">
     <name>DebitNote_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>149</value>
     </code>
@@ -773,28 +721,24 @@
    </content>
    <content id="c4075400-3b2b-4aed-8b98-002981184a1e">
     <name>CreditNote_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>96</value>
     </code>
    </content>
    <content id="531e0a1c-e1ec-4f41-941e-ddeeb515584e">
     <name>CreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>101</value>
     </code>
    </content>
    <content id="d95201cb-17c8-433e-90ae-989162a446f4">
     <name>CreditNote_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>150</value>
     </code>
    </content>
    <content id="7f184882-357a-4b02-bed4-d169efa1c217">
     <name>CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>151</value>
     </code>
@@ -839,14 +783,12 @@
   </items>
   <items id="d6dda5c8-2319-4196-8da6-f299137dcb0b">
    <name>Document_CommissioningOfFixedAsset</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>50</value>
    </code>
    <isFolder>true</isFolder>
    <content id="1da3da7d-dfd9-41e4-961b-d313cbde7d23">
     <name>CommissioningOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>54</value>
     </code>
@@ -854,21 +796,18 @@
   </items>
   <items id="e9a75965-1fa6-4738-ad40-19f9b3edceed">
    <name>Document_ModernizationOfFixedAsset</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>51</value>
    </code>
    <isFolder>true</isFolder>
    <content id="7d1f4663-2901-4049-8255-add0457c7654">
     <name>ModernizationOfFixedAsset_DR_R8510B_BookValueOfFixedAsset_CR_R4050B_StockInventory</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>56</value>
     </code>
    </content>
    <content id="54333f77-3f41-4e24-91fe-0799c1119831">
     <name>ModernizationOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>57</value>
     </code>
@@ -876,14 +815,12 @@
   </items>
   <items id="90bd03f3-a90b-4e8c-835d-acbbc7338e5f">
    <name>Document_DecommissioningOfFixedAsset</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>52</value>
    </code>
    <isFolder>true</isFolder>
    <content id="9f91bf98-f604-4fb7-b411-e670a3714169">
     <name>DecommissioningOfFixedAsset_DR_R4050B_StockInventory_CR_R8510B_BookValueOfFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>55</value>
     </code>
@@ -891,14 +828,12 @@
   </items>
   <items id="3ce38b7f-d089-41cf-bb68-1b59233374ae">
    <name>Document_FixedAssetTransfer</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>53</value>
    </code>
    <isFolder>true</isFolder>
    <content id="fdf17dc2-596d-41b2-8a08-b9a0377c2657">
     <name>FixedAssetTransfer_DR_R8510B_BookValueOfFixedAsset_CR_R8510B_BookValueOfFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>58</value>
     </code>
@@ -906,14 +841,12 @@
   </items>
   <items id="408073ab-5900-48d6-a691-735f8c53b524">
    <name>Document_DepreciationCalculation</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>59</value>
    </code>
    <isFolder>true</isFolder>
    <content id="fe69b40a-efd7-47f5-95ea-df8f185a3ed5">
     <name>DepreciationCalculation_DR_R5022T_Expenses_CR_DepreciationFixedAsset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>61</value>
     </code>
@@ -921,49 +854,42 @@
   </items>
   <items id="c97bde75-9f0f-421f-ad63-4e0cc0a59588">
    <name>Document_Payroll</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>78</value>
    </code>
    <isFolder>true</isFolder>
    <content id="88eec9da-0451-4bd2-8172-99098e5b853c">
     <name>Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>79</value>
     </code>
    </content>
    <content id="d9937e47-c736-4cde-b7d1-b2d8759380d4">
     <name>Payroll_DR_R9510B_SalaryPayment_CR_R5015B_OtherPartnersTransactions_Taxes</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>80</value>
     </code>
    </content>
    <content id="ad11c30b-b7ed-4c80-b1b1-86d99bae367d">
     <name>Payroll_DR_R9510B_SalaryPayment_CR_R5021T_Revenues_Deduction_IsRevenue</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>81</value>
     </code>
    </content>
    <content id="abef70ac-b942-4ca6-8f3d-dbccda6d8587">
     <name>Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNotRevenue</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>82</value>
     </code>
    </content>
    <content id="ac38ce85-d26d-411b-9a73-46b01874b4d3">
     <name>Payroll_DR_R9510B_SalaryPayment_CR_R3027B_EmployeeCashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>83</value>
     </code>
    </content>
    <content id="cab29434-922f-4b02-a4ee-05264b06bf7c">
     <name>Payroll_DR_R5022T_Expenses_CR_R5015B_OtherPartnersTransactions_Taxes</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>84</value>
     </code>
@@ -971,42 +897,36 @@
   </items>
   <items id="b6a08550-c934-49f2-b6b0-f3d3c8777d34">
    <name>Document_DebitCreditNote</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>97</value>
    </code>
    <isFolder>true</isFolder>
    <content id="cba7796e-83f6-41d7-842d-74a0261a4ee7">
     <name>DebitCreditNote_R5020B_PartnersBalance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>98</value>
     </code>
    </content>
    <content id="c2ba0d63-b3fe-4456-a940-c27e56e871f4">
     <name>DebitCreditNote_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions_Offset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>99</value>
     </code>
    </content>
    <content id="cd0be901-d7c0-434c-9126-c476414ee5c6">
     <name>DebitCreditNote_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors_Offset</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>100</value>
     </code>
    </content>
    <content id="bb6f45e3-69fd-4849-8378-da8bff10037e">
     <name>DebitCreditNote_DR_R5020B_PartnersBalance_CR_R5021_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>148</value>
     </code>
    </content>
    <content id="97345aa8-10a2-4081-a626-909d0321f499">
     <name>DebitCreditNote_DR_R5022T_Expenses_CR_R5020B_PartnersBalance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>149</value>
     </code>
@@ -1014,21 +934,18 @@
   </items>
   <items id="656735e9-e351-43cf-a5e6-33f3cd4b5502">
    <name>Document_ExpenseAccruals</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>102</value>
    </code>
    <isFolder>true</isFolder>
    <content id="d66fe8b5-a7b2-4a3d-9b86-c83b3e695777">
     <name>ExpenseAccruals_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>103</value>
     </code>
    </content>
    <content id="7be23a5c-1e6e-4182-b8d1-99b553550a13">
     <name>ExpenseAccruals_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>106</value>
     </code>
@@ -1036,21 +953,18 @@
   </items>
   <items id="6d4c2250-d882-4181-bc11-085e403c3c93">
    <name>Document_RevenueAccruals</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>104</value>
    </code>
    <isFolder>true</isFolder>
    <content id="e6ba4f0a-50d8-488d-93a7-4d0546a301e4">
     <name>RevenueAccruals_DR_R6080T_OtherPeriodsRevenues_CR_R5021T_Revenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>105</value>
     </code>
    </content>
    <content id="7bbbe347-241a-456b-ae7b-742f69b5ea12">
     <name>RevenueAccruals_DR_R5021T_Revenues_CR_R6080T_OtherPeriodsRevenues</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>107</value>
     </code>
@@ -1058,28 +972,24 @@
   </items>
   <items id="d253bdb2-021d-4b0f-a190-2adf7d2b7079">
    <name>Document_EmployeeCashAdvance</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>108</value>
    </code>
    <isFolder>true</isFolder>
    <content id="3516841d-2c63-4c6b-aa88-9860766e4aa2">
     <name>EmployeeCashAdvance_DR_R5022T_Expenses_CR_R3027B_EmployeeCashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>109</value>
     </code>
    </content>
    <content id="6e0de223-9d8b-4a5a-b779-08b7292d831f">
     <name>EmployeeCashAdvance_DR_R1021B_VendorsTransactions_CR_R3027B_EmployeeCashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>110</value>
     </code>
    </content>
    <content id="dbb3a205-5062-4d7f-88ed-605703b8683d">
     <name>EmployeeCashAdvance_DR_R1040B_TaxesOutgoing_CR_R3027B_EmployeeCashAdvance</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>152</value>
     </code>
@@ -1087,35 +997,30 @@
   </items>
   <items id="ce5c929f-72e9-4f31-9991-be7f614112a8">
    <name>Document_SalesReturn</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>129</value>
    </code>
    <isFolder>true</isFolder>
    <content id="4a47c339-ae02-4bbe-bc3a-132feac35c8c">
     <name>SalesReturn_DR_R2021B_CustomersTransactions_CR_R2020B_AdvancesFromCustomers</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>130</value>
     </code>
    </content>
    <content id="224a1b85-ae6c-43a7-bf66-95531bc08cd6">
     <name>SalesReturn_DR_R5021T_Revenues_CR_R2021B_CustomersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>131</value>
     </code>
    </content>
    <content id="b6fe36de-ca3b-45e7-a725-c7ba33eaec64">
     <name>SalesReturn_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>132</value>
     </code>
    </content>
    <content id="2da816e4-b705-4d48-8654-9078ae45e39a">
     <name>SalesReturn_DR_R5022T_Expenses_CR_R4050B_StockInventory</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>133</value>
     </code>
@@ -1123,28 +1028,24 @@
   </items>
   <items id="604486a8-e337-43aa-982f-0e287cda03c0">
    <name>Document_PurchaseReturn</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>134</value>
    </code>
    <isFolder>true</isFolder>
    <content id="d7b12a93-3812-4421-adb1-eb7ecfa90a97">
     <name>PurchaseReturn_DR_R1020B_AdvancesToVendors_CR_R1021B_VendorsTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>135</value>
     </code>
    </content>
    <content id="e9e9f450-750a-4c31-9b1b-45f7a5d594de">
     <name>PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R4050B_StockInventory</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>136</value>
     </code>
    </content>
    <content id="9785ae63-62cf-4d11-9e5b-4be04774cd27">
     <name>PurchaseReturn_DR_R1021B_VendorsTransactions_CR_R2040B_TaxesIncoming</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>137</value>
     </code>
@@ -1152,7 +1053,6 @@
   </items>
   <items id="a45d3c59-ab7e-4dc0-89ca-9829cc97d70f">
    <name>Document_RetailReturnReceipt</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>138</value>
    </code>
@@ -1160,28 +1060,24 @@
   </items>
   <items id="703e2697-b910-4f27-8d6b-65ce9de6d7cb">
    <name>Document_TaxesOperation</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>144</value>
    </code>
    <isFolder>true</isFolder>
    <content id="d5635200-cc1e-41d1-af78-e96ce790a640">
     <name>TaxesOperation_DR_R2040B_TaxesIncoming_CR_R1040B_TaxesOutgoing</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>145</value>
     </code>
    </content>
    <content id="77be4283-a70e-47dc-8f94-13cbca40cbe8">
     <name>TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTransactions</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>146</value>
     </code>
    </content>
    <content id="742b46b0-b5e0-4c20-b2c1-34b63c831d28">
     <name>TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing</name>
-    <description/>
     <code xsi:type="core:NumberValue">
      <value>147</value>
     </code>

@@ -1,4 +1,32 @@
 
+&AtClient
+Procedure CheckAll(Command)
+	For Each Row In Documents Do
+		Row.Check = True;
+	EndDo;
+	CalculateAmount();
+EndProcedure
+
+&AtClient
+Procedure UnckeckAll(Command)
+	For Each Row In Documents Do
+		Row.Check = False;
+	EndDo;
+	CalculateAmount();
+EndProcedure
+
+&AtClient
+Procedure DocumentsCheckOnChange(Item)
+	CalculateAmount();		
+EndProcedure
+
+&AtServer
+Procedure CalculateAmount()	
+	TempTableDocuments = Documents.Unload(New Structure("Check", True), "Check, Amount");
+	Amount = TempTableDocuments.Total("Amount");	
+EndProcedure	
+
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.RegisterName      = Parameters.RegisterName;
@@ -15,6 +43,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow = ThisObject.AllowedTypes.Add();
 		NewRow.Type = Row;	
 	EndDo;
+	
+	If Parameters.Property("SelectedPositionWithoutDocuments") Then
+		For Each Row In Parameters.SelectedPositionWithoutDocuments Do
+			NewRow = SelectedDocuments.Add();
+			NewRow.Partner = Row.Partner;
+			NewRow.Agreement = Row.Agreement;
+		EndDo;	
+	EndIf;	
+	
 	FillTable();
 EndProcedure
 
@@ -29,28 +66,30 @@ Procedure FillTable()
 	Query.Text = 
 	"SELECT ALLOWED
 	|	TransactionsBalance.Basis AS Document,
-	|	TransactionsBalance.Basis.Partner AS Partner,
-	|	TransactionsBalance.Basis.Agreement AS Agreement,
+	|	ISNULL(TransactionsBalance.Basis.Partner, TransactionsBalance.Partner) AS Partner,
+	|	ISNULL(TransactionsBalance.Basis.Agreement, TransactionsBalance.Agreement) AS Agreement,
 	|	TransactionsBalance.AmountBalance AS Amount,
-	|	TransactionsBalance.Order,
-	|	TransactionsBalance.Project,
-	|	TransactionsBalance.Basis.LegalName AS LegalName,
+	|	TransactionsBalance.Order AS Order,
+	|	TransactionsBalance.Project AS Project,
+	|	ISNULL(TransactionsBalance.Basis.LegalName, TransactionsBalance.LegalName) AS LegalName,
 	|	TransactionsBalance.Basis.LegalNameContract AS LegalNameContract,
 	|	TransactionsBalance.Basis.Date AS DocDate
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Boundary, Company = &Company
-	|	AND Branch = &Branch
-	|	AND Currency = &Currency
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND VALUETYPE(Basis) IN (&AllowedTypes)
-	|	AND CASE
-	|		WHEN &Filter_Partner
-	|			THEN Partner = &Partner
-	|		ELSE TRUE
-	|	END) AS TransactionsBalance
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(
+	|			&Boundary,
+	|			Company = &Company
+	|				AND Branch = &Branch
+	|				AND Currency = &Currency
+	|				AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|				AND (VALUETYPE(Basis) IN (&AllowedTypes)
+	|					OR Basis = UNDEFINED)
+	|				AND CASE
+	|					WHEN &Filter_Partner
+	|						THEN Partner = &Partner
+	|					ELSE TRUE
+	|				END) AS TransactionsBalance
 	|WHERE
 	|	TransactionsBalance.AmountBalance > 0
-	|	AND NOT TransactionsBalance.Basis.Ref IS NULL
 	|	AND NOT TransactionsBalance.Basis IN (&SelectedDocuments)
 	|
 	|ORDER BY
@@ -69,9 +108,17 @@ Procedure FillTable()
 		ArrayOfAllowedTypes.Add(Row.Type);	
 	EndDo;
 	
+	TableOfSelectedRowsWithoutDocuments = New ValueTable;
+	TableOfSelectedRowsWithoutDocuments.Columns.Add("Partner");
+	TableOfSelectedRowsWithoutDocuments.Columns.Add("Agreement");
+	
 	ArrayOfSelectedDocuments = New Array();
 	For Each Row In ThisObject.SelectedDocuments Do
-		ArrayOfSelectedDocuments.Add(Row.Document);
+		If ValueIsFilled(Row.Document) Then
+			ArrayOfSelectedDocuments.Add(Row.Document);
+		Else
+			FillPropertyValues(TableOfSelectedRowsWithoutDocuments.Add(), Row);		
+		EndIf;
 	EndDo;
 	
 	Query.SetParameter("Company"           , ThisObject.Company);
@@ -87,6 +134,17 @@ Procedure FillTable()
 	For Each Row In ThisObject.Documents Do
 		Row.RowKey = String(New UUID());
 	EndDo;
+	
+	ArrayToDelete = New Array;
+	For Each Row In ThisObject.Documents Do
+		SearchStructure = New Structure("Partner, Agreement", Row.Partner, Row.Agreement);
+		If TableOfSelectedRowsWithoutDocuments.FindRows(SearchStructure).Count() > 0 Then
+			ArrayToDelete.Add(Row);
+		EndIf;	
+	EndDo;
+	For Each Row In ArrayToDelete Do
+		ThisObject.Documents.Delete(Row);
+	EndDo;		
 EndProcedure
 
 &AtClient
@@ -111,11 +169,12 @@ Function CalculateRows()
 	EndDo;
 	
 	ArrayOfRows = New Array();
+	SelectedRowsArray = Documents.FindRows(New Structure("Check", True));
 	
-	If Items.Documents.SelectedRows.Count() > 1 Then
-		For Each SelectedRow In Items.Documents.SelectedRows Do
+	If SelectedRowsArray.Count() > 0 Then
+		For Each SelectedRow In SelectedRowsArray Do
 			NewRow = GetEmptyRowTable();
-			FillPropertyValues(NewRow, ThisObject.Documents.FindByID(SelectedRow));
+			FillPropertyValues(NewRow, SelectedRow);
 			ArrayOfRows.Add(NewRow);
 		EndDo;
 	Else

@@ -355,6 +355,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.MoneyTransfer.Attribute.RevenueType</name>
 		<right>
 			<name>View</name>
@@ -416,6 +423,13 @@
 	</object>
 	<object>
 		<name>Document.SalesReturn.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.Partner</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -860,6 +874,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashReceipt.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -1294,6 +1319,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation.Attribute.Agreement</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ProductionPlanningCorrection.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
@@ -1405,6 +1437,13 @@
 	</object>
 	<object>
 		<name>Document.EmployeeCashAdvance.TabularSection.PaymentList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RevenueAccruals.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1671,6 +1710,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.RevenueAccruals</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.GoodsReceipt.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
@@ -1888,6 +1938,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation.Attribute.LegalNameContract</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesOrder.Attribute.TransactionType</name>
 		<right>
 			<name>View</name>
@@ -2075,6 +2132,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation.Attribute.LegalName</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -2438,70 +2502,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.RevenueAccruals.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Partner</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.LegalName</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.Agreement</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.TaxesOperation.Attribute.LegalNameContract</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

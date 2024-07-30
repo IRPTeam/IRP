@@ -37,7 +37,6 @@
   <dataHistory>Use</dataHistory>
   <name>Order</name>
   <fillValue xsi:type="core:UndefinedValue"/>
-  <fillChecking>ShowError</fillChecking>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
  </standardAttributes>

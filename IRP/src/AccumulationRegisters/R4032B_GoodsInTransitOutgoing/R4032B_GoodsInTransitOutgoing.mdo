@@ -111,4 +111,26 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="69399707-1d99-4326-a783-3fcfded35e6e">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>en</key>
+   <value>Serial lot number</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

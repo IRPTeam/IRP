@@ -1,4 +1,5 @@
-Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
+
+Function GetArrayOfPostingInfo(Parameters)
 	ArrayOfPostingInfo = New Array();
 	If Parameters.Property("ArrayOfPostingInfo") Then
 		ArrayOfPostingInfo = Parameters.ArrayOfPostingInfo;
@@ -20,309 +21,151 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 			EndIf;
 		EndDo;
 	EndIf;
+	Return ArrayOfPOstingInfo;
+EndFunction
 
-	If ArrayOfPostingInfo.Count() And (Parameters.Metadata.TabularSections.Find("Currencies") <> Undefined Or CurrencyTable <> Undefined) Then
-		TempTableManager = New TempTablesManager();
-		Query = New Query();
-		Query.TempTablesManager = TempTableManager;
-		Query.Text =
-		"SELECT
-		|	*
-		|INTO CurrencyTable
-		|FROM
-		|	&CurrencyTable AS CurrencyTable";
-		If CurrencyTable = Undefined Then
-			CurrencyTable = Parameters.Object.Currencies.Unload();
-			DocumentCondition = False;
+Function PutCurrencyTableToTempTablesManager(Parameters, CurrencyTable)
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text =
+	"SELECT
+	|	*
+	|INTO CurrencyTable
+	|FROM
+	|	&CurrencyTable AS CurrencyTable";
+	
+	If CurrencyTable = Undefined Then
+		Query.SetParameter("CurrencyTable", Parameters.Object.Currencies.Unload());
+	Else
+		Query.SetParameter("CurrencyTable", CurrencyTable);
+	EndIf;
+	Query.Execute();
+	Return Query.TempTablesManager;
+EndFunction
 
-			// Partner, Agreement, LegalName, Key, BasisDocument
-			_PaymentList = New ValueTable();
-			_PaymentList.Columns.Add("Partner");
-			_PaymentList.Columns.Add("Agreement");
-			_PaymentList.Columns.Add("LegalName");
-			_PaymentList.Columns.Add("Key");
-			_PaymentList.Columns.Add("BasisDocument");
-			
-			If Parameters.Metadata = Metadata.Documents.CashReceipt Or Parameters.Metadata = Metadata.Documents.BankReceipt Then
-				DocumentCondition = True;
-				RegisterType = Metadata.AccumulationRegisters.R2021B_CustomersTransactions;
-				For Each RowPaymentList In Parameters.Object.PaymentList Do
-					NewRowPaymentList = _PaymentList.Add();
-					FillPropertyValues(NewRowPaymentList, RowPaymentList);
-					NewRowPaymentList.LegalName = RowPaymentList.Payer;
-				EndDo;
-			EndIf;
-			If Parameters.Metadata = Metadata.Documents.CashPayment Or Parameters.Metadata = Metadata.Documents.BankPayment Then
-				DocumentCondition = True;
-				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
-				For Each RowPaymentList In Parameters.Object.PaymentList Do
-					NewRowPaymentList = _PaymentList.Add();
-					FillPropertyValues(NewRowPaymentList, RowPaymentList);
-					NewRowPaymentList.LegalName = RowPaymentList.Payee;
-				EndDo;
-			EndIf;
-			If Parameters.Metadata = Metadata.Documents.EmployeeCashAdvance Then
-				DocumentCondition = True;
-				RegisterType = Metadata.AccumulationRegisters.R1021B_VendorsTransactions;
-				For Each RowPaymentList In Parameters.Object.PaymentList Do
-					If Not ValueIsFilled(RowPaymentList.Invoice) Then
-						Continue;
-					EndIf;
-					NewRowPaymentList = _PaymentList.Add();
-					NewRowPaymentList.Partner   = RowPaymentList.Invoice.Partner;
-					NewRowPaymentList.Agreement = RowPaymentList.Invoice.Agreement;
-					NewRowPaymentList.LegalName = RowPaymentList.Invoice.LegalName;
-					NewRowPaymentList.Key       = RowPaymentList.Key;
-					If RowPaymentList.Invoice.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByDocuments Then
-						NewRowPaymentList.BasisDocument = RowPaymentList.Invoice;
-					Else
-						NewRowPaymentList.BasisDocument = Undefined;
-					EndIf;	
-				EndDo;
-			EndIf;
-			If DocumentCondition Then
-				TableOfAgreementMovementTypes = New ValueTable();
-				TableOfAgreementMovementTypes.Columns.Add("MovementType");
-				TableOfAgreementMovementTypes.Columns.Add("Partner");
-				TableOfAgreementMovementTypes.Columns.Add("LegalName");
-				TableOfAgreementMovementTypes.Columns.Add("Amount");
-				TableOfAgreementMovementTypes.Columns.Add("Key");
-				For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
-					ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
-					If ItemOfPostingInfo.Metadata = RegisterType Then
-						If ItemOfPostingInfo.PrepareTable.Columns.Find("Key") = Undefined Then
-							ItemOfPostingInfo.PrepareTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-						EndIf;
-						For Each RowRecordSet In ItemOfPostingInfo.PrepareTable Do
-							NewRow = TableOfAgreementMovementTypes.Add();
-							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
-							NewRow.Partner      = RowRecordSet.Partner;
-							NewRow.LegalName    = RowRecordSet.LegalName;
-							NewRow.Amount       = RowRecordSet.Amount;
-							For Each RowPaymentList In _PaymentList Do
-								PartnerAndLegalNameCondition = False;
-								AgreementCondition = False;
-								BasisDocumentCondition = False;
-								If RowPaymentList.Partner = RowRecordSet.Partner And RowPaymentList.LegalName = RowRecordSet.LegalName Then
-									PartnerAndLegalNameCondition = True;
-								EndIf;
-								If Not ValueIsFilled(RowPaymentList.Agreement) Then
-									AgreementCondition = True;
-								Else
-									If RowPaymentList.Agreement.ApArPostingDetail = Enums.ApArPostingDetail.ByStandardAgreement
-										And RowPaymentList.Agreement.StandardAgreement = RowRecordSet.Agreement Then
-										AgreementCondition = True;
-									Else
-										If RowPaymentList.Agreement = RowRecordSet.Agreement Then
-											AgreementCondition = True;
-										EndIf;
-									EndIf;
-								EndIf;
-								If Not ValueIsFilled(RowPaymentList.BasisDocument) Or RowPaymentList.BasisDocument = RowRecordSet.Basis Then
-									BasisDocumentCondition = True;
-								EndIf;
-								If PartnerAndLegalNameCondition And AgreementCondition And BasisDocumentCondition Then
-									RowRecordSet.Key = RowPaymentList.Key;
-								EndIf;
-							EndDo;
-						EndDo;
-					EndIf;
-				EndDo;
-
-				TableOfAgreementMovementTypes.GroupBy("MovementType, Partner, LegalName, Amount, Key");
-
-				For Each RowPaymentList In _PaymentList Do
-					If ValueIsFilled(RowPaymentList.Agreement) Then
-						Continue;
-					EndIf;
-					For Each RowMovementTypes In TableOfAgreementMovementTypes Do
-						If RowPaymentList.Partner = RowMovementTypes.Partner And RowPaymentList.LegalName = RowMovementTypes.LegalName Then
-							ArrayOfCurrencies = CurrencyTable.FindRows(New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
-							If Not ArrayOfCurrencies.Count() Then
-								CurrencyParameters = GetNewCurrencyRowParameters();
-								CurrencyParameters.RowKey   = RowPaymentList.Key;
-								CurrencyParameters.Currency = Parameters.Object.Currency;
-								CurrencyParameters.Ref      = Parameters.Object.Ref;
-								
-								NewRow = AddRowToCurrencyTable(CurrencyParameters, Parameters.Object.Date, CurrencyTable, RowMovementTypes.MovementType);
-								CurrenciesClientServer.CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
-							EndIf;
-						EndIf;
-					EndDo;
-				EndDo;
-
-			EndIf; // DocumentCondition
-			
-			Query.SetParameter("CurrencyTable", CurrencyTable);
+Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
+	ArrayOfPostingInfo = GetArrayOfPostingInfo(Parameters);
 		
-		Else // CurrencyTable <> Undefined
-		
-			Query.SetParameter("CurrencyTable", CurrencyTable);
-			
+	If ArrayOfPostingInfo.Count() = 0 Then
+ 		Return; // not support currencies
+ 	EndIf;
+	
+	If CurrencyTable = Undefined Then
+		If Parameters.Metadata.TabularSections.Find("Currencies") = Undefined Then
+			Return;
 		EndIf;
-		Query.Execute();
-		For Each ItemOfPostingInfoRow In ArrayOfPostingInfo Do
-			ItemOfPostingInfo = ItemOfPostingInfoRow.Value;
-			If ItemOfPostingInfo.PrepareTable.Count() Then
-				UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
-				UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
-				ItemOfPostingInfo.PrepareTable = ExpandTable(TempTableManager, 
-															ItemOfPostingInfo.PrepareTable, 
-															UseAgreementMovementType, 
-															UseCurrencyJoin);
-				
-				IsOffsetOfAdvances = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
-				IsLandedCost = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsLandedCost", False);
-				
-				If Not IsOffsetOfAdvances And Not IsLandedCost Then
-				
-					// Advances
-					If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
-						Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
-					
-						AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
-						For Each Row In AdvancesCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
-						EndDo;	
-					
-					EndIf;
-			
-					// Transactions
-					If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
-						Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
-					
-						TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
-						For Each Row In TransactionsCurrencyRevaluation Do
-							FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
-						EndDo;	
-					
-					EndIf;
-						
-				EndIf; // Not IsOffsetOfAdvances 
-			EndIf;
-		EndDo;
 	EndIf;
 	
+	TempTablesManager = PutCurrencyTableToTempTablesManager(Parameters, CurrencyTable);
+		
+	PartnerBalanceTables = GetPartnerBalanceTables();
+	
+	If Parameters.Property("PostingDataTables") Then
+		TransactionInfo = Parameters.PostingDataTables.Get(Metadata.InformationRegisters.T2015S_TransactionsInfo);
+		If TransactionInfo <> Undefined Then
+			PartnerBalanceTables.T2015S_TransactionsInfo = TransactionInfo.PrepareTable;
+		EndIf;
+	
+		AdvanceInfo = Parameters.PostingDataTables.Get(Metadata.InformationRegisters.T2014S_AdvancesInfo);
+		If AdvanceInfo <> Undefined Then
+			PartnerBalanceTables.Table_T2014S_AdvancesInfo = AdvanceInfo.PrepareTable;
+		EndIf;
+	EndIf;
+	
+	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		ItemOfPostingInfo = ItemOfPostingInfo.Value;
+		If ItemOfPostingInfo.PrepareTable.Count() = 0 Then
+			Continue; // register is empty
+		EndIf;
+		
+		UseAgreementMovementType = IsUseAgreementMovementType(ItemOfPostingInfo.Metadata);
+		UseLegalMovementType = IsUseLegalMovementType(ItemOfPostingInfo.Metadata);
+		UseCurrencyJoin = IsUseCurrencyJoin(Parameters, ItemOfPostingInfo.Metadata);
+		UseKey = ItemOfPostingInfo.PrepareTable.Columns.Find("Key") <> Undefined;
+		
+		IncludeDimensions = "";
+		IncludeDimensionsMap = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IncludeDimensions");
+		If IncludeDimensionsMap <> Undefined Then
+			_IncludeDimensions = IncludeDimensionsMap.Get(ItemOfPostingInfo.Metadata);
+			If _IncludeDimensions <> Undefined Then
+				IncludeDimensions = _IncludeDimensions;
+			EndIf;
+		EndIf;
+		
+		PrepareTable = ItemOfPostingInfo.PrepareTable;
+		If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.T1040T_AccountingAmounts Then
+			FullTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(PrepareTable, ItemOfPostingInfo.Metadata, UseKey, "RowKey", IncludeDimensions);	
+			GroupedTable = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			
+			Table = AlignTables(FullTable, GroupedTable, ItemOfPostingInfo.Metadata, UseKey);
+					
+		Else
+			Table = ExpandTable(TempTablesManager, PrepareTable, UseAgreementMovementType, UseCurrencyJoin, UseKey);
+			GroupTableByAllDimensions(Table, ItemOfPostingInfo.Metadata, UseKey, "", IncludeDimensions);
+		EndIf;
+		ItemOfPostingInfo.PrepareTable = SetTransactionCurrency(Table, ItemOfPostingInfo.Metadata, 
+																UseKey, 
+																UseAgreementMovementType,
+																UseLegalMovementType);
+					
+		PutToPartnerBalanceTables(PartnerBalanceTables, ItemOfPostingInfo.Metadata, ItemOfPostingInfo.PrepareTable);
+							
+	EndDo;
+	
+	IsOffsetOfAdvances          = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False);
+	IsDebitCreditNoteDifference = CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsDebitCreditNoteDifference", False);
+	
+	// currencies rate difference on money transfer
 	ExchangeDifference(Parameters);
 	
-	If Not CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsDebitCreditNoteDifference", False)
-		And Not CommonFunctionsClientServer.GetFromAddInfo(Parameters, "IsOffsetOfAdvances", False)  Then
+	// currencies rate difference on debit/credit note with difference currencies
+	If Not IsDebitCreditNoteDifference And Not IsOffsetOfAdvances Then
 		DebitCreditNoteDifference(Parameters);
+	EndIf;
+	
+	If Not IsOffsetOfAdvances Then
+		UpdatePartnerBalanceTables(PartnerBalanceTables);
 	EndIf;
 EndProcedure
 
-Function GetAdvancesCurrencyRevaluation(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Table.Period,
-	|	Table.Recorder AS VendorsAdvancesClosing,
-	|	Table.Recorder AS CustomersAdvancesClosing,
-	|	Table.AdvanceOrder AS Order,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.LegalName,
-	|	Table.Partner,
-	|	Table.Amount,
-	|	Table.CurrencyMovementType,
-	|	Table.TransactionCurrency
-	|FROM
-	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetTransactionsCurrencyRevaluation(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Table.Period,
-	|	Table.Recorder AS VendorsAdvancesClosing,
-	|	Table.Recorder AS CustomersAdvancesClosing,
-	|	Table.TransactionOrder AS Order,
-	|	Table.TransactionDocument AS Basis,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.LegalName,
-	|	Table.Partner,
-	|	Table.Agreement,
-	|	Table.Amount,
-	|	Table.CurrencyMovementType,
-	|	Table.TransactionCurrency
-	|FROM
-	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetAccountingAmounts(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	Table.Period,
-	|	Table.Currency,
-	|	Table.CurrencyMovementType,
-	|	Table.Amount,
-	|	Table.Recorder AS AdvancesClosing,
-	|	""Advance"" AS AmountType
-	|FROM
-	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Table.Period,
-	|	Table.Currency,
-	|	Table.CurrencyMovementType,
-	|	Table.Amount,
-	|	Table.Recorder,
-	|	""Transaction""
-	|FROM
-	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-		
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function IsUseAgreementMovementType(RecMetadata)
+Function IsUseAgreementMovementType(RegMetadata)
+	// return true if use else (not use) return false	
 	
-	ExcludeRegisters = New Array();
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R3010B_CashOnHand);
-		
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R6070T_OtherPeriodsExpenses);
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R6080T_OtherPeriodsRevenues);
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R5022T_Expenses);
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R5021T_Revenues);
+	Reg = Metadata.AccumulationRegisters;
 	
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.T1040T_AccountingAmounts);
+	Registers = New Array();
+	Registers.Add(Reg.R2020B_AdvancesFromCustomers);
+	Registers.Add(Reg.R2021B_CustomersTransactions);
+	Registers.Add(Reg.R1020B_AdvancesToVendors);
+	Registers.Add(Reg.R1021B_VendorsTransactions);
+	Registers.Add(Reg.R5015B_OtherPartnersTransactions);
+	Registers.Add(Reg.R5020B_PartnersBalance);
 	
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R2040B_TaxesIncoming);
-	ExcludeRegisters.Add(Metadata.AccumulationRegisters.R1040B_TaxesOutgoing);
+	Registers.Add(Reg.R8014T_ConsignorSales);
+	Registers.Add(Reg.R8015T_ConsignorPrices);
 	
-	If ExcludeRegisters.Find(RecMetadata) = Undefined Then
-		Return True;
-	Else
+	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
+	Else
+		Return True;
 	EndIf;
+EndFunction
+
+Function IsUseLegalMovementType(RegMetadata)
+	// return true if use else (not use) return false	
 	
+	Reg = Metadata.AccumulationRegisters;
+	
+	Registers = New Array();
+	Registers.Add(Reg.R2040B_TaxesIncoming);
+	Registers.Add(Reg.R1040B_TaxesOutgoing);
+	
+	If Registers.Find(RegMetadata) = Undefined Then
+		Return False;
+	Else
+		Return True;
+	EndIf;
 EndFunction
 
 Function IsUseCurrencyJoin(Parameters, RecMetadata)
@@ -354,6 +197,45 @@ Function IsUseCurrencyJoin(Parameters, RecMetadata)
 	Return UseCurrencyJoin;
 EndFunction
 
+Function GetArrayOfResourceNames()
+	ArrayOfRecourceNames = New Array();
+	
+	ArrayOfRecourceNames.Add("Amount");
+	ArrayOfRecourceNames.Add("ManualAmount");
+	ArrayOfRecourceNames.Add("NetAmount");
+	ArrayOfRecourceNames.Add("OffersAmount");
+	ArrayOfRecourceNames.Add("SalesAmount");
+	ArrayOfRecourceNames.Add("NetOfferAmount");
+	ArrayOfRecourceNames.Add("AmountWithTaxes");
+	ArrayOfRecourceNames.Add("Commission");
+	ArrayOfRecourceNames.Add("AmountTax");
+	ArrayOfRecourceNames.Add("Price");
+	ArrayOfRecourceNames.Add("ConsignorPrice");
+	ArrayOfRecourceNames.Add("SalesAmount");
+	ArrayOfRecourceNames.Add("NetOfferAmount");
+	ArrayOfRecourceNames.Add("CustomerTransaction");
+	ArrayOfRecourceNames.Add("CustomerAdvance");
+	ArrayOfRecourceNames.Add("VendorTransaction");
+	ArrayOfRecourceNames.Add("VendorAdvance");
+	ArrayOfRecourceNames.Add("OtherTransaction");
+	ArrayOfRecourceNames.Add("TaxableAmount");
+	ArrayOfRecourceNames.Add("TaxAmount");
+	ArrayOfRecourceNames.Add("InvoiceAmount");
+	ArrayOfRecourceNames.Add("InvoiceTaxAmount");
+	ArrayOfRecourceNames.Add("IndirectCostAmount");
+	ArrayOfRecourceNames.Add("IndirectCostTaxAmount");
+	ArrayOfRecourceNames.Add("ExtraCostAmountByRatio");
+	ArrayOfRecourceNames.Add("ExtraCostTaxAmountByRatio");
+	ArrayOfRecourceNames.Add("ExtraDirectCostAmount");
+	ArrayOfRecourceNames.Add("ExtraDirectCostTaxAmount");
+	ArrayOfRecourceNames.Add("AllocatedCostAmount");
+	ArrayOfRecourceNames.Add("AllocatedCostTaxAmount");
+	ArrayOfRecourceNames.Add("AllocatedRevenueAmount");
+	ArrayOfRecourceNames.Add("AllocatedRevenueTaxAmount");
+	
+	Return ArrayOfRecourceNames;
+EndFunction
+
 Procedure AddAmountsColumns(RecordSet, ColumnName)
 	If RecordSet.Columns.Find(ColumnName) = Undefined Then
 		RecordSet.Columns.Add(ColumnName, Metadata.DefinedTypes.typeAmount.Type);
@@ -361,29 +243,14 @@ Procedure AddAmountsColumns(RecordSet, ColumnName)
 	EndIf;
 EndProcedure
 
-Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseCurrencyJoin)
-
-	AddAmountsColumns(RecordSet, "Amount");
-	AddAmountsColumns(RecordSet, "ManualAmount");
-	AddAmountsColumns(RecordSet, "NetAmount");
-	AddAmountsColumns(RecordSet, "OffersAmount");
-	AddAmountsColumns(RecordSet, "SalesAmount");
-	AddAmountsColumns(RecordSet, "NetOfferAmount");
-	AddAmountsColumns(RecordSet, "AmountWithTaxes");
-	AddAmountsColumns(RecordSet, "Commission");
-	AddAmountsColumns(RecordSet, "AmountTax");
-	AddAmountsColumns(RecordSet, "Price");
-	AddAmountsColumns(RecordSet, "ConsignorPrice");
-	AddAmountsColumns(RecordSet, "SalesAmount");
-	AddAmountsColumns(RecordSet, "NetOfferAmount");
-	AddAmountsColumns(RecordSet, "CustomerTransaction");
-	AddAmountsColumns(RecordSet, "CustomerAdvance");
-	AddAmountsColumns(RecordSet, "VendorTransaction");
-	AddAmountsColumns(RecordSet, "VendorAdvance");
-	AddAmountsColumns(RecordSet, "OtherTransaction");
-	AddAmountsColumns(RecordSet, "TaxableAmount");
-	AddAmountsColumns(RecordSet, "TaxAmount");
-
+Function ExpandTable(TempTableManager, Table, UseAgreementMovementType, UseCurrencyJoin, UseKey)
+	
+	ArrayOfRecourceNames = GetArrayOfResourceNames();
+	
+	For Each ResourceName In ArrayOfRecourceNames Do
+		AddAmountsColumns(Table, ResourceName);
+	EndDo;
+	
 	Query = New Query();
 	Query.TempTablesManager = TempTableManager;
 	Query.Text =
@@ -398,114 +265,186 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	CurrencyTable.MovementType AS CurrencyMovementType,
-	|	CAST(CASE
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetOfferAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS NetOfferAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS NetOfferAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.SalesAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS SalesAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS SalesAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Amount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Amount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Amount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ManualAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS ManualAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS ManualAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.NetAmount * CurrencyTable.Rate) / CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS NetAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS NetAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.OffersAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS OffersAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS OffersAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountWithTaxes * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS AmountWithTaxes,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS AmountWithTaxes,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Commission * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Commission,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Commission,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.AmountTax * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS AmountTax,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS AmountTax,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.Price * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS Price,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS Price,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.ConsignorPrice * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS ConsignorPrice,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS ConsignorPrice,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.CustomerTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS CustomerTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS CustomerTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.CustomerAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS CustomerAdvance,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS CustomerAdvance,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.VendorTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS VendorTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS VendorTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.VendorAdvance * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS VendorAdvance,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS VendorAdvance,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.OtherTransaction * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS OtherTransaction,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS OtherTransaction,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.TaxableAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS TaxableAmount,
-	|	CAST(CASE
+	|	END, &RoundDigitCapacity) AS TaxableAmount,
+	|	ROUND(CASE
 	|		WHEN CurrencyTable.Rate = 0
 	|		OR CurrencyTable.Multiplicity = 0
 	|			THEN 0
 	|		ELSE (RecordSet.TaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
-	|	END AS Number(15,2)) AS TaxAmount,
+	|	END, &RoundDigitCapacity) AS TaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.InvoiceAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS InvoiceAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.InvoiceTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS InvoiceTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.IndirectCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS IndirectCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.IndirectCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS IndirectCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraCostAmountByRatio * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraCostAmountByRatio,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraCostTaxAmountByRatio * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraCostTaxAmountByRatio,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraDirectCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraDirectCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.ExtraDirectCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS ExtraDirectCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedCostAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedCostAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedCostTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedRevenueAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedRevenueAmount,
+	|	ROUND(CASE
+	|		WHEN CurrencyTable.Rate = 0
+	|		OR CurrencyTable.Multiplicity = 0
+	|			THEN 0
+	|		ELSE (RecordSet.AllocatedRevenueTaxAmount * CurrencyTable.Rate )/ CurrencyTable.Multiplicity
+	|	END, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
 	|	CurrencyTable.MovementType.DeferredCalculation AS DeferredCalculation,
 	|	CurrencyTable.MovementType.Currency AS Currency
 	|FROM
@@ -531,24 +470,36 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|SELECT
 	|	RecordSet.*,
 	|	VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency),
-	|	CAST(RecordSet.NetOfferAmount AS Number(15,2)) AS NetOfferAmount,
-	|	CAST(RecordSet.SalesAmount AS Number(15,2)) AS SalesAmount,
-	|	CAST(RecordSet.Amount AS Number(15,2)) AS Amount,
-	|	CAST(RecordSet.ManualAmount AS Number(15,2)) AS ManualAmount,
-	|	CAST(RecordSet.NetAmount AS Number(15,2)) AS NetAmount,
-	|	CAST(RecordSet.OffersAmount AS Number(15,2)) AS OffersAmount,
-	|	CAST(RecordSet.AmountWithTaxes AS Number(15,2)) AS AmountWithTaxes,
-	|	CAST(RecordSet.Commission AS Number(15,2)) AS Commission,
-	|	CAST(RecordSet.AmountTax AS Number(15,2)) AS AmountTax,
-	|	CAST(RecordSet.Price AS Number(15,2)) AS Price,
-	|	CAST(RecordSet.ConsignorPrice AS Number(15,2)) AS ConsignorPrice,
-	|	CAST(RecordSet.CustomerTransaction AS Number(15,2)) AS CustomerTransaction,
-	|	CAST(RecordSet.CustomerAdvance AS Number(15,2)) AS CustomerAdvance,
-	|	CAST(RecordSet.VendorTransaction AS Number(15,2)) AS VendorTransaction,
-	|	CAST(RecordSet.VendorAdvance AS Number(15,2)) AS VendorAdvance,
-	|	CAST(RecordSet.OtherTransaction AS Number(15,2)) AS OtherTransaction,
-	|	CAST(RecordSet.TaxableAmount AS Number(15,2)) AS TaxableAmount,
-	|	CAST(RecordSet.TaxAmount AS Number(15,2)) AS TaxAmount,
+	|	ROUND(RecordSet.NetOfferAmount, &RoundDigitCapacity) AS NetOfferAmount,
+	|	ROUND(RecordSet.SalesAmount, &RoundDigitCapacity) AS SalesAmount,
+	|	ROUND(RecordSet.Amount, &RoundDigitCapacity) AS Amount,
+	|	ROUND(RecordSet.ManualAmount, &RoundDigitCapacity) AS ManualAmount,
+	|	ROUND(RecordSet.NetAmount, &RoundDigitCapacity) AS NetAmount,
+	|	ROUND(RecordSet.OffersAmount, &RoundDigitCapacity) AS OffersAmount,
+	|	ROUND(RecordSet.AmountWithTaxes, &RoundDigitCapacity) AS AmountWithTaxes,
+	|	ROUND(RecordSet.Commission, &RoundDigitCapacity) AS Commission,
+	|	ROUND(RecordSet.AmountTax, &RoundDigitCapacity) AS AmountTax,
+	|	ROUND(RecordSet.Price, &RoundDigitCapacity) AS Price,
+	|	ROUND(RecordSet.ConsignorPrice, &RoundDigitCapacity) AS ConsignorPrice,
+	|	ROUND(RecordSet.CustomerTransaction, &RoundDigitCapacity) AS CustomerTransaction,
+	|	ROUND(RecordSet.CustomerAdvance, &RoundDigitCapacity) AS CustomerAdvance,
+	|	ROUND(RecordSet.VendorTransaction, &RoundDigitCapacity) AS VendorTransaction,
+	|	ROUND(RecordSet.VendorAdvance, &RoundDigitCapacity) AS VendorAdvance,
+	|	ROUND(RecordSet.OtherTransaction, &RoundDigitCapacity) AS OtherTransaction,
+	|	ROUND(RecordSet.TaxableAmount, &RoundDigitCapacity) AS TaxableAmount,
+	|	ROUND(RecordSet.TaxAmount, &RoundDigitCapacity) AS TaxAmount,
+	|	ROUND(RecordSet.InvoiceAmount, &RoundDigitCapacity) AS InvoiceAmount,
+	|	ROUND(RecordSet.InvoiceTaxAmount, &RoundDigitCapacity) AS InvoiceTaxAmount,
+	|	ROUND(RecordSet.IndirectCostAmount, &RoundDigitCapacity) AS IndirectCostAmount,
+	|	ROUND(RecordSet.IndirectCostTaxAmount, &RoundDigitCapacity) AS IndirectCostTaxAmount,
+	|	ROUND(RecordSet.ExtraCostAmountByRatio, &RoundDigitCapacity) AS ExtraCostAmountByRatio,
+	|	ROUND(RecordSet.ExtraCostTaxAmountByRatio, &RoundDigitCapacity) AS ExtraCostTaxAmountByRatio,
+	|	ROUND(RecordSet.ExtraDirectCostAmount, &RoundDigitCapacity) AS ExtraDirectCostAmount,
+	|	ROUND(RecordSet.ExtraDirectCostTaxAmount, &RoundDigitCapacity) AS ExtraDirectCostTaxAmount,
+	|	ROUND(RecordSet.AllocatedCostAmount, &RoundDigitCapacity) AS AllocatedCostAmount,
+	|	ROUND(RecordSet.AllocatedCostTaxAmount, &RoundDigitCapacity) AS AllocatedCostTaxAmount,
+	|	ROUND(RecordSet.AllocatedRevenueAmount, &RoundDigitCapacity) AS AllocatedRevenueAmount,
+	|	ROUND(RecordSet.AllocatedRevenueTaxAmount, &RoundDigitCapacity) AS AllocatedRevenueTaxAmount,
 	|	FALSE,
 	|	RecordSet.Currency
 	|FROM
@@ -557,39 +508,272 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP RecordSet";
-	UseKey = RecordSet.Columns.Find("Key") <> Undefined;
-	If Not UseKey Then
-		RecordSet.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	If Not UseKey And Table.Columns.Find("Key") = Undefined Then
+		Table.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	EndIf;
 
-	Query.SetParameter("RecordSet", RecordSet);
+	Query.SetParameter("RecordSet", Table);
 	Query.SetParameter("UseKey", UseKey);
 	Query.SetParameter("UseAgreementMovementType", UseAgreementMovementType);
 	Query.SetParameter("UseCurrencyJoin", UseCurrencyJoin);
+	Query.SetParameter("RoundDigitCapacity", Metadata.DefinedTypes.typeAmount.Type.NumberQualifiers.FractionDigits);
 	QueryResults = Query.ExecuteBatch();
 	QueryTable = QueryResults[1].Unload();
-	
-	If QueryTable.Columns.Find("TransactionCurrency") <> Undefined Then
-		TransactionRows = QueryTable.FindRows(New Structure("CurrencyMovementType", 
-			ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
-			
-		For Each TransactionRow In TransactionRows Do
-			For Each Row In QueryTable Do
-				If UseKey And ValueIsFilled(TransactionRow.Key) Then 
-					If Row.Key = TransactionRow.Key Then
-						Row.TransactionCurrency = TransactionRow.Currency;
-					Else
-						Continue;
-					EndIf;
-				Else
-					Row.TransactionCurrency = TransactionRow.Currency;
-				EndIf;
-			EndDo;
-		EndDo;
-	EndIf;
-	
+		
 	Return QueryTable;
 EndFunction
+
+Function AlignTables(FullTable, GroupedTable, RegMetadata, UseKey)
+
+	ArrayOfCurrencyMovementTypes = New Array();
+	For Each Row In GroupedTable Do
+		If ArrayOfCurrencyMovementTypes.Find(Row.CurrencyMovementType) = Undefined Then
+			ArrayOfCurrencyMovementTypes.Add(Row.CurrencyMovementType);
+		EndIf;
+	EndDo;
+		
+	For Each CurrencyMovementType In ArrayOfCurrencyMovementTypes Do
+			
+		GroupedTableRows = GroupedTable.FindRows(New Structure("CurrencyMovementType", CurrencyMovementType));
+		
+		For Each RowGrouped In GroupedTableRows Do
+			TotalsGroupedTable = New Structure();
+				
+			For Each ResourceName In GetArrayOfResourceNames() Do
+				If CommonFunctionsClientServer.ObjectHasProperty(RowGrouped, ResourceName) Then
+					If TotalsGroupedTable.Property(ResourceName) Then
+						TotalsGroupedTable[ResourceName] = TotalsGroupedTable[ResourceName] + RowGrouped[ResourceName];
+					Else
+						TotalsGroupedTable.Insert(ResourceName, RowGrouped[ResourceName]);
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			Filter = New Structure(StrConcat(GetGroupColumns(FullTable, RegMetadata, UseKey, "RowKey", ""),","));
+			FillPropertyValues(Filter, RowGrouped);
+			
+			FullTableRows = FullTable.FindRows(Filter);			
+			TotalsFullTable = New Structure();
+			
+			For Each RowFull In FullTableRows Do
+				For Each ResourceName In GetArrayOfResourceNames() Do
+					If CommonFunctionsClientServer.ObjectHasProperty(RowFull, ResourceName) Then
+						If TotalsFullTable.Property(ResourceName) Then
+							TotalsFullTable[ResourceName] = TotalsFullTable[ResourceName] + RowFull[ResourceName];
+						Else
+							TotalsFullTable.Insert(ResourceName, RowFull[ResourceName]);
+						EndIf;
+					EndIf;
+				EndDo;
+			EndDo;
+		
+			// compare resource amounts
+			For Each KeyValue In TotalsGroupedTable Do
+				ResourceName = KeyValue.Key;
+				
+				Difference = TotalsGroupedTable[ResourceName] - TotalsFullTable[ResourceName];
+				If Difference <> 0 Then
+					// find max row in full table
+					MaxRow = Undefined;
+				
+					For Each Row In FullTableRows Do
+						If MaxRow = Undefined Then
+							MaxRow = Row;
+						Else
+							If MaxRow[ResourceName] < Row[ResourceName] Then
+								MaxRow = Row;
+							EndIf;
+						EndIf;
+					EndDo;
+				
+					If MaxRow <> Undefined Then
+						MaxRow[ResourceName] = MaxRow[ResourceName] + Difference;
+					EndIf;
+				EndIf;
+			EndDo; // TotalsGroupedTable
+				
+		EndDo;
+			
+	EndDo;
+	
+	Return FullTable;
+EndFunction
+
+Function GetGroupColumns(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions)
+	GroupColumns = New Array();
+	ArrayOfExludeDimensions = StrSplit(StrReplace(Lower(ExcludeDimensions)," ",""), ",", False);
+	ArrayOfIncludeDimensions = StrSplit(StrReplace(Lower(IncludeDimensions)," ",""), ",", False);
+		
+	If UseKey Then
+		GroupColumns.Add("Key");
+	EndIf;
+	
+	For Each Field In ArrayOfIncludeDimensions Do
+		If Table.Columns.Find(Field) <> Undefined Then
+			GroupColumns.Add(Field)
+		EndIf;		
+	EndDo;
+	
+	For Each Field In RegMetadata.Dimensions Do
+		If ArrayOfExludeDimensions.Find(Lower(Field.Name)) <> Undefined Then
+			Continue;
+		EndIf;
+		
+		If Table.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;
+	EndDo;
+	
+	For Each Field In RegMetadata.Attributes Do
+		If Table.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;		
+	EndDo;
+	
+	For Each Field In RegMetadata.StandardAttributes Do
+		If Table.Columns.Find(Field.Name) <> Undefined Then
+			GroupColumns.Add(Field.Name)
+		EndIf;		
+	EndDo;
+	
+	Return GroupColumns;
+EndFunction
+
+Procedure GroupTableByAllDimensions(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions)
+	GroupColumns = GetGroupColumns(Table, RegMetadata, UseKey, ExcludeDimensions, IncludeDimensions); 
+	SummColumn = New Array();
+	
+	For Each Field In RegMetadata.Resources Do
+		If Table.Columns.Find(Field.Name) <> Undefined Then
+			SummColumn.Add(Field.Name)
+		EndIf;				
+	EndDo;
+	
+	Table.GroupBy(StrConcat(GroupColumns, ","), StrConcat(SummColumn, ","));
+EndProcedure
+
+Function SetTransactionCurrency(ExpandTable, RegMetadata, UseKey, UseAgreementMovementType, UseLegalMovementType)
+	If ExpandTable.Columns.Find("TransactionCurrency") = Undefined Then
+		Return ExpandTable;
+	EndIf;
+		
+	TrnRows = ExpandTable.FindRows(New Structure("CurrencyMovementType", 
+		ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency));
+	
+	If TrnRows.Count() = 0 Then
+		Return ExpandTable;
+	EndIf;		
+	
+	ExcludeDimensions = New Array();
+	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
+	ExcludeDimensions.Add(Lower("Currency")); 
+	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	ExcludeDimensions.Add(Lower("Price")); 
+	
+	If UseAgreementMovementType Then
+		AgrRows = New Array();
+	
+		For Each Row In ExpandTable Do
+			If Row.CurrencyMovementType.Type = Enums.CurrencyType.Agreement Then
+				AgrRows.Add(Row);
+			EndIf;
+		EndDo;
+		
+		ReplaceTransactionCurrency(ExpandTable, TrnRows, AgrRows, ExcludeDimensions, RegMetadata, UseKey);
+		
+		For Each AgrRow In AgrRows Do
+			ExpandTable.Delete(AgrRow);
+		EndDo;		
+	EndIf;
+		
+	If UseLegalMovementType Then
+		LegalRows = New Array();
+	
+		For Each Row In ExpandTable Do
+			If Row.CurrencyMovementType.Type = Enums.CurrencyType.Legal Then
+				LegalRows.Add(Row);
+			EndIf;
+		EndDo;
+		
+		ReplaceTransactionCurrency(ExpandTable, TrnRows, LegalRows, ExcludeDimensions, RegMetadata, UseKey);
+	EndIf;
+				
+	For Each TrnRow In TrnRows Do
+		For Each Row In ExpandTable Do
+			If UseKey And ValueIsFilled(TrnRow.Key) And Row.Key <> TrnRow.Key Then 
+				Continue;
+			EndIf;
+			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do   
+				If ExcludeDimensions.Find(Lower(RegDimension.Name)) <> Undefined Then
+					Continue;
+				EndIf;
+					
+				If TrnRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+				
+			Row.TransactionCurrency = TrnRow.Currency;
+		EndDo;
+	EndDo;
+	
+	Return ExpandTable;
+EndFunction
+
+Procedure ReplaceTransactionCurrency(ExpandTable, TrnRows, OtherRows, ExcludeDimensions, RegMetadata, UseKey)
+	
+	ArrayOfResourceNames = GetArrayOfResourceNames();
+			
+	MatchingColumns = New Array();
+	For Each RegDimension In RegMetadata.Dimensions Do
+		MatchingColumns.Add(Lower(RegDimension.Name));
+	EndDo;
+	MatchingColumns.Add(Lower("RecordType"));
+		
+	For Each OtherRow In OtherRows Do
+		For Each TrnRow In TrnRows Do
+								
+			If UseKey And ValueIsFilled(OtherRow.Key) And TrnRow.Key <> OtherRow.Key Then
+				Continue;
+			EndIf;
+			
+			DimensionsMatch = True;
+			For Each MatchingColumn In MatchingColumns Do   
+				If ExcludeDimensions.Find(Lower(MatchingColumn)) <> Undefined Then
+					Continue;
+				EndIf;
+				
+				If CommonFunctionsClientServer.ObjectHasProperty(OtherRow, MatchingColumn)
+					And CommonFunctionsClientServer.ObjectHasProperty(TrnRow, MatchingColumn) Then
+					If OtherRow[MatchingColumn] <> TrnRow[MatchingColumn] Then
+						DimensionsMatch = False;
+						Break;
+					EndIf;
+				EndIf;
+			EndDo;
+			
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+			
+			TrnRow.Currency = OtherRow.Currency;
+			For Each ResourceName In ArrayOfResourceNames Do 
+				If CommonFunctionsClientServer.ObjectHasProperty(TrnRow, ResourceName)
+					And CommonFunctionsClientServer.ObjectHasProperty(OtherRow, ResourceName) Then
+					TrnRow[ResourceName] = OtherRow[ResourceName];
+				EndIf;
+			EndDo;
+				
+		EndDo;
+	EndDo;		
+EndProcedure
 
 Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;
@@ -812,6 +996,156 @@ Procedure ExcludePostingDataTable(Parameters, RegMetadata) Export
 		Parameters.Insert("MultiCurrencyExcludePostingDataTables", Array);
 	EndIf;
 EndProcedure
+
+#Region PARTNER_BALANCE
+
+Function GetPartnerBalanceTables()
+	PartnerBalanceTables = New Structure();	
+	PartnerBalanceTables.Insert("T2015S_TransactionsInfo", New ValueTable());
+	PartnerBalanceTables.Insert("Table_T2014S_AdvancesInfo", New ValueTable());
+		
+	PartnerBalanceTables.Insert("R2020B_AdvancesFromCustomers"    , New ValueTable());
+	PartnerBalanceTables.Insert("R2021B_CustomersTransactions"    , New ValueTable());
+	PartnerBalanceTables.Insert("R1020B_AdvancesToVendors"        , New ValueTable());
+	PartnerBalanceTables.Insert("R1021B_VendorsTransactions"      , New ValueTable());
+	
+	Return PartnerBalanceTables;
+EndFunction
+
+Procedure PutToPartnerBalanceTables(PartnerBalanceTables, RegMetadata, PrepareTable)
+	RegName = RegMetadata.Name;
+	If PartnerBalanceTables.Property(RegName) Then
+		PartnerBalanceTables[RegName] = PrepareTable;
+	EndIf;
+EndProcedure
+
+Procedure UpdatePartnerBalanceTables(PartnerBalanceTables)
+	Filter = New Structure("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
+	
+	ExcludeDimensions = New Array();
+	ExcludeDimensions.Add(Lower("TransactionCurrency")); 
+	ExcludeDimensions.Add(Lower("Currency")); 
+	ExcludeDimensions.Add(Lower("CurrencyMovementType")); 
+	ExcludeDimensions.Add(Lower("Price")); 
+	
+	// transactions
+	For Each Row In PartnerBalanceTables.T2015S_TransactionsInfo Do
+		
+		PrepereTable = Undefined;
+		MainTableName = "";
+		
+		If Row.IsCustomerTransaction Then
+			PrepereTable = PartnerBalanceTables.R2021B_CustomersTransactions;
+			MainTableName = "R2021B_CustomersTransactions";	
+		ElsIf Row.IsVendorTransaction Then
+			PrepereTable = PartnerBalanceTables.R1021B_VendorsTransactions;
+			MainTableName = "R1021B_VendorsTransactions";
+		Else
+			Raise "Unknown transaction type in [T2015S_TransactionsInfo]";
+		EndIf;
+		
+		If Not PrepereTable.Count() Then
+			Continue
+		EndIf;
+		
+		RegisterRows = PrepereTable.FindRows(Filter);	
+		If RegisterRows.Count() = 0 Then
+			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
+		EndIf;
+		
+		RegMetadata = Metadata.AccumulationRegisters[MainTableName];  
+		
+		For Each RegisterRow In RegisterRows Do
+			If ValueIsFilled(Row.Key) And RegisterRow.Key <> Row.Key Then
+				Continue;
+			EndIf;       
+			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do 
+				If ExcludeDimensions.Find(RegDimension.Name) <> Undefined Then
+					Continue;
+				EndIf;
+				
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
+					Continue;
+				EndIf;
+				
+				If RegisterRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+			
+			Row.Currency = RegisterRow.Currency;
+			Row.Amount   = RegisterRow.Amount;
+		EndDo;
+		
+	EndDo;
+	
+	// advances
+	For Each Row In PartnerBalanceTables.Table_T2014S_AdvancesInfo Do
+		
+		PrepereTable = Undefined;
+		MainTableName = "";
+		
+		If Row.IsCustomerAdvance Then
+			PrepereTable = PartnerBalanceTables.R2020B_AdvancesFromCustomers;
+			MainTableName = "R2020B_AdvancesFromCustomers";	
+		ElsIf Row.IsVendorAdvance Then
+			PrepereTable = PartnerBalanceTables.R1020B_AdvancesToVendors;
+			MainTableName = "R1020B_AdvancesToVendors";
+		Else
+			Raise "Unknown transaction type in [Table_T2014S_AdvancesInfo]";
+		EndIf;
+		
+		If Not PrepereTable.Count() Then
+			Continue;
+		EndIf;
+		
+		RegisterRows = PrepereTable.FindRows(Filter);	
+		If RegisterRows.Count() = 0 Then
+			Raise StrTemplate("Not forund TRANSACTION CURRENCY in [%1]", MainTableName);
+		EndIf;
+		
+		RegMetadata = Metadata.AccumulationRegisters[MainTableName];
+		
+		For Each RegisterRow In RegisterRows Do
+			If ValueIsFilled(Row.Key) And RegisterRow.Key <> Row.Key Then
+				Continue;
+			EndIf;        
+			
+			DimensionsMatch = True;
+			For Each RegDimension In RegMetadata.Dimensions Do  
+				If ExcludeDimensions.Find(RegDimension.Name) <> Undefined Then
+					Continue;
+				EndIf;
+				
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Row, RegDimension.Name) Then
+					Continue;
+				EndIf;
+				
+				If RegisterRow[RegDimension.Name] <> Row[RegDimension.Name] Then
+					DimensionsMatch = False;
+					Break;
+				EndIf;
+			EndDo;
+				
+			If Not DimensionsMatch Then
+				Continue;
+			EndIf;
+			
+			Row.Currency = RegisterRow.Currency;
+			Row.Amount   = RegisterRow.Amount;
+		EndDo;
+		
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #Region EXCHANGE_DIFFERENCE
 
@@ -1569,3 +1903,121 @@ Function GetMetadataReisterName(RegisterName)
 EndFunction
 
 #EndRegion
+
+#Region REAL_TIME_CURRENCY_REVALUATION
+
+Procedure RestoreRealTimeCurrencyRevaluation(Parameters, ItemOfPostingInfo)
+	// Advances
+	If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
+		Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
+					
+		AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
+		For Each Row In AdvancesCurrencyRevaluation Do
+			FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
+		EndDo;				
+	EndIf;
+			
+	// Transactions
+	If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
+		Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
+					
+		TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
+		For Each Row In TransactionsCurrencyRevaluation Do
+			FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
+		EndDo;	
+	EndIf;
+EndProcedure
+
+Function GetAdvancesCurrencyRevaluation(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Recorder AS VendorsAdvancesClosing,
+	|	Table.Recorder AS CustomersAdvancesClosing,
+	|	Table.AdvanceOrder AS Order,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.LegalName,
+	|	Table.Partner,
+	|	Table.Amount,
+	|	Table.CurrencyMovementType,
+	|	Table.TransactionCurrency
+	|FROM
+	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetTransactionsCurrencyRevaluation(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Table.Period,
+	|	Table.Recorder AS VendorsAdvancesClosing,
+	|	Table.Recorder AS CustomersAdvancesClosing,
+	|	Table.TransactionOrder AS Order,
+	|	Table.TransactionDocument AS Basis,
+	|	Table.Company,
+	|	Table.Branch,
+	|	Table.Currency,
+	|	Table.LegalName,
+	|	Table.Partner,
+	|	Table.Agreement,
+	|	Table.Amount,
+	|	Table.CurrencyMovementType,
+	|	Table.TransactionCurrency
+	|FROM
+	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetAccountingAmounts(DocRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Currency,
+	|	Table.CurrencyMovementType,
+	|	Table.Amount,
+	|	Table.Recorder AS AdvancesClosing,
+	|	""Advance"" AS AmountType
+	|FROM
+	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Period,
+	|	Table.Currency,
+	|	Table.CurrencyMovementType,
+	|	Table.Amount,
+	|	Table.Recorder,
+	|	""Transaction""
+	|FROM
+	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
+	|WHERE
+	|	Table.Document = &DocRef";
+		
+	Query.SetParameter("DocRef", DocRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+#EndRegion
+

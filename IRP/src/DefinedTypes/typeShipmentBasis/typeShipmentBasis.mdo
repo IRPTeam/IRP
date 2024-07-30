@@ -17,15 +17,16 @@
   <value>Tip sevkiyat kaynak evrakı</value>
  </synonym>
  <type>
+  <types>DocumentRef.PurchaseInvoice</types>
   <types>DocumentRef.PurchaseReturn</types>
   <types>DocumentRef.RetailShipmentConfirmation</types>
   <types>DocumentRef.ShipmentConfirmation</types>
   <types>DocumentRef.Unbundling</types>
   <types>DocumentRef.SalesOrder</types>
+  <types>DocumentRef.StockAdjustmentAsWriteOff</types>
   <types>DocumentRef.Bundling</types>
   <types>DocumentRef.InventoryTransfer</types>
-  <types>DocumentRef.SalesInvoice</types>
   <types>DocumentRef.PhysicalInventory</types>
-  <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+  <types>DocumentRef.SalesInvoice</types>
  </type>
 </mdclass:DefinedType>

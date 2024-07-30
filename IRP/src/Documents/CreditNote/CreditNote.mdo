@@ -113,14 +113,14 @@
  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
- <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -487,11 +487,11 @@
     <value>Kaynak evrak</value>
    </synonym>
    <type>
-    <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.SalesReturn</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.OpeningEntry</types>
+    <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.SalesInvoice</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

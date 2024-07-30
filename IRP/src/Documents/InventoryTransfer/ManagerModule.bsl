@@ -272,6 +272,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbersAndItemKeys());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(SourceOfOrigins());
@@ -315,6 +316,32 @@ Function ItemList()
 		   |	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
 		   |WHERE
 		   |	InventoryTransferItemList.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbersAndItemKeys()
+	Return "SELECT
+	|	ItemList.Ref.StoreSender AS StoreSender,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Key AS Key,
+	|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	ISNULL(SerialLotNumbers.Quantity, ItemList.Quantity) AS Quantity,
+	|	ItemList.Ref AS Ref,
+	|	ItemList.Ref.DistributedPurchaseInvoice AS Basis,
+	|	CASE
+	|		WHEN ItemList.Ref.DistributedPurchaseInvoice.Ref IS NOT NULL
+	|			THEN True
+	|		ELSE FALSE
+	|	END StoreDistributedPurchase
+	|INTO SerialLotNumbersAndItemKeys
+	|FROM
+	|	Document.InventoryTransfer.ItemList AS ItemList
+	|		LEFT JOIN Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
+	|		ON ItemList.Key = SerialLotNumbers.Key
+	|		AND SerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -734,17 +761,32 @@ EndFunction
 
 Function R4032B_GoodsInTransitOutgoing()
 	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.StoreSender AS Store,
-		   |	ItemList.Basis,
-		   |	ItemList.ItemKey,
-		   |	ItemList.Quantity
-		   |INTO R4032B_GoodsInTransitOutgoing
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.UseShipmentConfirmation";
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.Period,
+	|	ItemList.StoreSender AS Store,
+	|	ItemList.Basis,
+	|	ItemList.ItemKey,
+	|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
+	|	ItemList.Quantity
+	|INTO R4032B_GoodsInTransitOutgoing
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.UseShipmentConfirmation
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(AccumulationRecordType.Expense),
+	|	SerialLotNumbersAndItemKeys.Period,
+	|	SerialLotNumbersAndItemKeys.StoreSender,
+	|	SerialLotNumbersAndItemKeys.Basis,
+	|	SerialLotNumbersAndItemKeys.ItemKey,
+	|	SerialLotNumbersAndItemKeys.SerialLotNumber,
+	|	SerialLotNumbersAndItemKeys.Quantity
+	|FROM
+	|	SerialLotNumbersAndItemKeys AS SerialLotNumbersAndItemKeys
+	|WHERE SerialLotNumbersAndItemKeys.StoreDistributedPurchase";
 EndFunction
 
 Function R4050B_StockInventory()

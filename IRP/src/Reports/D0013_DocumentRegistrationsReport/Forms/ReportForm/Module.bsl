@@ -317,7 +317,9 @@ Procedure OutputDifferenceInRegistersMovements(ParametersStructure)
 	EndDo;
 	FieldsString = Left(FieldsString, StrLen(FieldsString) - 1);
 	
-	NewMovementsVT.Columns.Delete("LineNumber");
+	If NewMovementsVT.Columns.Find("LineNumber") <> Undefined Then
+		NewMovementsVT.Columns.Delete("LineNumber");
+	EndIf;
 	If Not CurrentMovementsVT.Columns.Find("ItemKeyItem") = Undefined Then
 		ColumnString = "";
 		For Each Column In NewMovementsVT.Columns Do

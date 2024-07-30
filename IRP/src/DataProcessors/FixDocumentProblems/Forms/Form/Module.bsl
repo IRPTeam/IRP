@@ -11,6 +11,9 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	OnlyPosted = True;
+	If PackSize = 0 Then
+		PackSize = 100;
+	EndIf;
 EndProcedure
 
 #Region FillDocuments
@@ -28,7 +31,7 @@ Procedure FillDocumentsAtServer()
 	Settings.EndDate = Period.EndDate;
 	Settings.OnlyPosted = OnlyPosted;
 	Settings.CompanyList = Company.UnloadValues();
-	
+	Settings.QueryText = QueryText;
 	Result = FixDocumentProblemsServer.GetDocumentList(Settings);
 	
 	DocumentList.Load(Result);
@@ -232,7 +235,7 @@ Function GetJobsForQuickFix(Map)
 	JobDataSettings.ProcedurePath = "AdditionalDocumentTableControl.QuickFixArray";
 	JobDataSettings.CallbackWhenAllJobsDone = False;
 					
-	DocsInPack = 100;
+	DocsInPack = PackSize;
 	StreamArray = New Array;
 	Pack = 1;
 	TotalDocs = Map.Count();
@@ -308,6 +311,16 @@ Procedure CheckPosting(Command)
 	JobSettingsArray = GetJobsForCheckPostingDocuments("PostingServer.CheckDocumentArray");
 	BackgroundJobAPIClient.OpenJobForm(JobSettingsArray, ThisObject);
 	Items.PagesDocuments.CurrentPage = Items.PagePosting;
+EndProcedure
+
+&AtClient
+Procedure MoveWithoutCheck(Command)
+	For Each Row In DocumentList Do
+		NewRow = PostingInfo.GetItems().Add();
+		NewRow.Date = Row.Date;
+		NewRow.DocumentType = Row.DocumentType;
+		NewRow.Ref = Row.Ref;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -435,7 +448,7 @@ Function GetJobsForPostSelectedDocument()
 	JobDataSettings.ProcedurePath = "PostingServer.PostingDocumentArray";
 	JobDataSettings.CallbackWhenAllJobsDone = False;
 					
-	DocsInPack = 100;
+	DocsInPack = PackSize;
 	StreamArray = New Array;
 	For Each Row In PostingInfo.GetItems() Do
 		If Not Row.Select OR Row.Processed Then
@@ -809,6 +822,11 @@ Procedure RestoreOriginCheckList()
 	For Each HightRow In ThisObject.CheckList.GetItems() Do
 		Items.CheckList.Collapse(HightRow.GetID());
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure FillQueryTemplate(Command)
+	QueryText = FixDocumentProblemsServer.GetDocumentQueryText();
 EndProcedure
 
 #EndRegion

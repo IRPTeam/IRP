@@ -28,7 +28,16 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	EndIf;
 EndProcedure
 
-Function FindRefByUniqueMD5(Object, UniqueMD5) Export
+// Find ref by unique m d5.
+// 
+// Parameters:
+//  Object - CatalogObject, DocumentObject - Object
+//  UniqueMD5 - String - Unique MD5
+//  WithoutDeleted - Boolean - Without deleted
+// 
+// Returns:
+//  Undefined - Find ref by unique MD5
+Function FindRefByUniqueMD5(Object, UniqueMD5, WithoutDeleted = False) Export
 	MetadataFullName = Object.Metadata().FullName();
 	DataLock = New DataLock();
 	DataLockItem = DataLock.Add(MetadataFullName);
@@ -41,10 +50,13 @@ Function FindRefByUniqueMD5(Object, UniqueMD5) Export
 	|FROM
 	|	%1 AS T
 	|WHERE
-	|	T.UniqueMD5 = &UniqueMD5 AND T.Ref <> &Ref";
+	|	T.UniqueMD5 = &UniqueMD5 
+	|	AND T.Ref <> &Ref
+	|	AND NOT(T.DeletionMark AND &WithoutDeleted)";
 	Query.Text = StrTemplate(Query.Text, MetadataFullName);
 	Query.SetParameter("UniqueMD5", UniqueMD5);
 	Query.SetParameter("Ref", Object.Ref);
+	Query.SetParameter("WithoutDeleted", WithoutDeleted);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then

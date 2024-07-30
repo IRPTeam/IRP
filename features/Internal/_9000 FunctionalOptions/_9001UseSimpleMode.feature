@@ -325,7 +325,7 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 	* Create CR
 		And I click "Cash receipt" button
 	* Check filling
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Cash account: Cash 1   Currency: USD   Transaction type: Payment from customer   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Cash account: Cash 1   Currency: USD   Transaction type: Payment from customer   Posting status: New   "
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
@@ -394,7 +394,7 @@ Scenario: _900015 create Cash payment based on PI (Payment to the vendor)
 	* Create CP
 		And I click "Cash payment" button
 	* Check filling
-		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Cash account: Cash 1   Currency: USD   Transaction type: Payment to the vendor   "
+		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Cash account: Cash 1   Currency: USD   Transaction type: Payment to the vendor   Posting status: New   "
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "CashAccount" became equal to "Cash 1"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"

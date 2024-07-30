@@ -118,6 +118,9 @@ Scenario: _04096 preparation (Purchase invoice)
 	And I execute 1C:Enterprise script at server	
 		| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);"   |
 	And I close all client application windows
+	When Create document PurchaseInvoice and InventoryTransfer objects (Store distributed purchase, movements)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(1501).GetObject().Write(DocumentWriteMode.Posting);"   |
 	* Load PI comission trade 
 	When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 	And I execute 1C:Enterprise script at server	
@@ -148,7 +151,6 @@ Scenario: _04097 check Purchase invoice movements by the Register  "R1021 Vendor
 			| ''                                                 | ''              | ''                      | 'Amount'      | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Transaction currency'   | 'Legal name'          | 'Partner'     | 'Agreement'            | 'Basis'                                            | 'Order'                                          | 'Project'    | 'Deferred calculation'   | 'Vendors advances closing'    |
 			| ''                                                 | 'Receipt'       | '12.02.2021 15:13:56'   | '393,76'      | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''           | 'No'                     | ''                            |
 			| ''                                                 | 'Receipt'       | '12.02.2021 15:13:56'   | '2 300'       | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''           | 'No'                     | ''                            |
-			| ''                                                 | 'Receipt'       | '12.02.2021 15:13:56'   | '2 300'       | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''           | 'No'                     | ''                            |
 			| ''                                                 | 'Receipt'       | '12.02.2021 15:13:56'   | '2 300'       | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'TRY'                    | 'Company Ferron BP'   | 'Ferron BP'   | 'Vendor Ferron, TRY'   | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Purchase order 115 dated 12.02.2021 12:44:43'   | ''           | 'No'                     | ''                            |
 		And I close all client application windows
 		
@@ -170,15 +172,12 @@ Scenario: _04098 check Purchase invoice movements by the Register  "R1001 Purcha
 			| ''                                                 | ''                      | 'Quantity'    | 'Amount'   | 'Net amount'   | 'Offers amount'   | 'Company'        | 'Branch'         | 'Multi currency movement type'   | 'Currency'   | 'Invoice'                                          | 'Item key'    | 'Row key'                                | 'Deferred calculation'    |
 			| ''                                                 | '12.02.2021 15:13:56'   | '2'           | '51,36'    | '43,53'        | ''                | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '2'           | '300'      | '254,24'       | ''                | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:13:56'   | '2'           | '300'      | '254,24'       | ''                | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '2'           | '300'      | '254,24'       | ''                | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'Internet'    | '9db770ce-c5f9-4f4c-a8a9-7adc10793d77'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '5'           | '171,2'    | '145,09'       | ''                | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '5'           | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:13:56'   | '5'           | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '5'           | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | '36/Yellow'   | '18d36228-af88-4ba5-a17a-f3ab3ddb6816'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '10'          | '171,2'    | '145,09'       | ''                | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '10'          | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:13:56'   | '10'          | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:13:56'   | '10'          | '1 000'    | '847,46'       | ''                | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 115 dated 12.02.2021 15:13:56'   | 'S/Yellow'    | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'No'                      |
 			
 		And I close all client application windows
@@ -320,15 +319,9 @@ Scenario: _040107 check Purchase invoice movements by the Register  "R1040 Taxes
 			| 'Register  "R1040 Taxes outgoing"'               | ''            | ''                    | ''          | ''             | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''    | ''         | ''             | ''                             | ''         | ''                     |
 			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Tax' | 'Tax rate' | 'Invoice type' | 'Multi currency movement type' | 'Currency' | 'Transaction currency' |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '7,83'      | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '26,11'     | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '26,11'     | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '45,76'     | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '45,76'     | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '152,54'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '152,54'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '152,54'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |
-			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '152,54'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '60,06'     | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Reporting currency'           | 'USD'      | 'TRY'                  |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '350,84'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'Local currency'               | 'TRY'      | 'TRY'                  |
+			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '350,84'    | 'Main Company' | 'Front office' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  |		
 		And I close all client application windows
 		
 Scenario: _040108 check Purchase invoice movements by the Register  "R1012 Invoice closing of purchase orders" (PO exists)
@@ -471,12 +464,9 @@ Scenario: _040993 check Purchase invoice movements by the Register  "R1005 Speci
 			| ''                                                 | '12.02.2021 15:12:15'   | '17,12'           | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'S/Yellow'    | '4fcbb4cf-3824-47fb-89b5-50d151315d4d'   | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '17,12'           | 'Main Company'   | 'Front office'   | 'Reporting currency'             | 'USD'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | '36/Yellow'   | '923e7825-c20f-4a3e-a983-2b85d80e475a'   | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '30'              | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'Internet'    | '1b90516b-b3ac-4ca5-bb47-44477975f242'   | 'DocumentDiscount'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:12:15'   | '30'              | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'Internet'    | '1b90516b-b3ac-4ca5-bb47-44477975f242'   | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '30'              | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'Internet'    | '1b90516b-b3ac-4ca5-bb47-44477975f242'   | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'S/Yellow'    | '4fcbb4cf-3824-47fb-89b5-50d151315d4d'   | 'DocumentDiscount'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | '36/Yellow'   |'923e7825-c20f-4a3e-a983-2b85d80e475a'   | 'DocumentDiscount'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'S/Yellow'    | '4fcbb4cf-3824-47fb-89b5-50d151315d4d'   | 'DocumentDiscount'   | 'No'                      |
-			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'TRY'                            | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | '36/Yellow'   | '923e7825-c20f-4a3e-a983-2b85d80e475a'   | 'DocumentDiscount'   | 'No'                      |
+			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'Local currency'                 | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | '36/Yellow'   |'923e7825-c20f-4a3e-a983-2b85d80e475a'    | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | 'S/Yellow'    | '4fcbb4cf-3824-47fb-89b5-50d151315d4d'   | 'DocumentDiscount'   | 'No'                      |
 			| ''                                                 | '12.02.2021 15:12:15'   | '100'             | 'Main Company'   | 'Front office'   | 'en description is empty'        | 'TRY'        | 'Purchase invoice 117 dated 12.02.2021 15:12:15'   | '36/Yellow'   | '923e7825-c20f-4a3e-a983-2b85d80e475a'   | 'DocumentDiscount'   | 'No'                      |
 			
@@ -1016,6 +1006,43 @@ Scenario: _0401037 check absence Purchase invoice movements by the Register  "T2
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2015 Transactions info"'    |
+		And I close all client application windows
+
+
+Scenario: _0401038 check Purchase invoice movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=True)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1 501'     |
+	* Check movements by the Register  "T2015 Transactions info" 
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | ''                    | ''           | ''         | ''                                                 | ''         | ''                  | ''         |
+			| 'Register  "R4032 Goods in transit (outgoing)"'    | ''                    | ''           | ''         | ''                                                 | ''         | ''                  | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Basis'                                            | 'Item key' | 'Serial lot number' | 'Quantity' |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'XS/Blue'  | ''                  | '10'       |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'XS/Red'   | ''                  | '5'        |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'ODS'      | '9090098908'        | '10'       |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'UNIQ'     | '09987897977889'    | '5'        |
+			| ''                                                 | '25.07.2024 13:46:27' | 'Receipt'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'UNIQ'     | '09987897977890'    | '5'        | 				
+		And I close all client application windows
+
+Scenario: _0401039 check absence Purchase invoice movements by the Register  "R4032 Goods in transit (outgoing)" (Store distributed purchase=False)
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117'     |
+	* Check movements by the Register  "R4032 Goods in transit (outgoing)"
+		And I click "Registrations report info" button
+		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4032 Goods in transit (outgoing)"'    |
 		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion

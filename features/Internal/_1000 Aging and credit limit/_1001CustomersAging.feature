@@ -203,7 +203,6 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| ''                                           | ''               | ''                               | 'Amount'       | 'Company'         | 'Branch'    | 'Multi currency movement type'    | 'Currency'    | 'Transaction currency'    | 'Legal name'         | 'Partner'    | 'Agreement'                           | 'Basis'                      | 'Order'    | 'Project'  | 'Deferred calculation'    | 'Customers advances closing'     |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '94,16'        | 'Main Company'    | ''          | 'Reporting currency'              | 'USD'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'Local currency'                  | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
-				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'TRY'                             | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 				| ''                                           | 'Receipt'        | '$$DateSalesInvoice0240162$$'    | '550'          | 'Main Company'    | ''          | 'en description is empty'         | 'TRY'         | 'TRY'                     | 'Company Kalipso'    | 'Kalipso'    | 'Basic Partner terms, without VAT'    | '$$SalesInvoice0240162$$'    | ''         | ''         | 'No'                      | ''                               |
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -618,6 +617,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt1000050$$" variable
@@ -711,6 +711,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Kalipso'          |
 				And I select current line in "List" table
 				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+				And I select "Basic Partner terms, without VAT" from "Partner term" drop-down list by string in "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt10000505$$" variable

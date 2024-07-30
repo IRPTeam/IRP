@@ -949,6 +949,7 @@
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>
@@ -1278,6 +1279,7 @@ GROUP BY
           <types>Date</types>
           <dateQualifiers/>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
       </parameters>
     </extInfo>
   </attributes>

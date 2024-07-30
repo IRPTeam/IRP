@@ -15,11 +15,16 @@
 // ** RowIDInfo - Undefined, ValueTable -
 // ** Payments - Undefined, ValueTable -
 // ** PaymentList - Undefined, ValueTable -
+// ** AddAttributes - Undefined, ValueTable -
+// * AddParameres - Structure :
+//	** Key - String - Name of an additional parameter 
+//	** Value - AnyRef - Value of an additional parameter 
 Function GetQuery(DocName) Export
 	
 	Result = New Structure;
 	Result.Insert("Query", "");
 	Result.Insert("Tables", New Structure);
+	Result.Insert("AddParameres", New Structure);
 	MetaDoc = Metadata.Documents[DocName];
 	
 	TmplDoc = Documents.RetailSalesReceipt.EmptyRef();
@@ -77,11 +82,23 @@ Function GetQuery(DocName) Export
 		ErrorsArray.Add(ErrorWithPaymentList(MetaDoc));
 	EndIf;
 	
+	If MetaDoc.TabularSections.Find("AddAttributes") = Undefined Then
+		Result.Tables.Insert("AddAttributes", TmplDoc.AddAttributes.Unload());
+		Result.AddParameres.Insert("AddAttributesRef", Catalogs.AddAttributeAndPropertySets.EmptyRef());
+	Else
+		Result.Tables.Insert("AddAttributes", Undefined);
+		ErrorsArray.Add(ErrorWithAddAttributes());
+		
+		AttributesSetName = StrReplace(MetaDoc.FullName(), ".", "_"); 
+		Result.AddParameres.Insert("AddAttributesSetRef", Catalogs.AddAttributeAndPropertySets[AttributesSetName]);
+	EndIf;
+
 	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
 	GetInfo_4 = GetFilterAndFields(ErrorsArray, MetaDoc, 4); // Payment list
+	GetInfo_5 = GetFilterAndFields(ErrorsArray, MetaDoc, 5); // Additional attributes
 	
 	TextQuery = CheckDocumentsQuery();
 	TextQuery = StrReplace(TextQuery, "%10", GetInfo_3.Fields);
@@ -90,6 +107,9 @@ Function GetQuery(DocName) Export
 	TextQuery = StrReplace(TextQuery, "%13", GetInfo_4.Fields);
 	TextQuery = StrReplace(TextQuery, "%14", GetInfo_4.Filters);
 	TextQuery = StrReplace(TextQuery, "%15", GetInfo_4.Results);
+	TextQuery = StrReplace(TextQuery, "%16", GetInfo_5.Fields);
+	TextQuery = StrReplace(TextQuery, "%17", GetInfo_5.Filters);
+	TextQuery = StrReplace(TextQuery, "%18", GetInfo_5.Results);
 	
 	Result.Query = StrTemplate(TextQuery, 
 		GetInfo_0.Fields, GetInfo_0.Filters, GetInfo_0.Results,
@@ -112,6 +132,7 @@ Function GetErrorList() Export
 	ErrorsArray.Add(ErrorWithSourceOfOrigins());
 	ErrorsArray.Add(ErrorWithPayments());
 	ErrorsArray.Add(ErrorWithPaymentList());
+	ErrorsArray.Add(ErrorWithAddAttributes());
 	
 	ErrorList = New ValueList();
 	For Each Errors In ErrorsArray Do
@@ -198,6 +219,8 @@ Function GetFilterAndFields(Val ErrorsArray, MetaDoc, QueryNumber)
 						Skip = True;
 					EndIf;  
 				EndDo;
+			ElsIf QueryNumber = 5 Then // AddAttributes
+				
 			Else
 				If Not MetaDoc.TabularSections.Find("ItemList") = Undefined Then
 					For Each Field In StrSplit(Filter.Value.Fields, " ,", False) Do
@@ -503,7 +526,97 @@ Function CheckDocumentsQuery()
 	|	%15
 	|FROM
 	|	PaymentList AS Result
-	|WHERE %14";
+	|WHERE %14
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AddAttributes.LineNumber,
+	|	AddAttributes.Ref,
+	|	AddAttributes.Property,
+	|	AddAttributes.Value
+	|INTO tmpAddAttributes
+	|FROM
+	|	&AddAttributes AS AddAttributes
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ISNULL(AddAttributes.LineNumber, 0) AS LineNumber,
+	|	""0123456789"" AS Key,
+	|	ISNULL(AddAttributes.Ref, AddAttributesSet.Ref) AS Ref,
+	|	ISNULL(AddAttributesSet.Attribute, AddAttributes.Property) AS Attribute,
+	|	AddAttributesSet.Attribute IS NULL AS isUnknown,
+	|	ISNULL(AddAttributes.Value, Undefined) AS AttributeValue,
+	|	ISNULL(AddAttributesSet.IsConditionSet, FALSE) AS IsConditionSet,
+	|	AddAttributesSet.InterfaceGroup AS InterfaceGroup,
+	|	ISNULL(AddAttributesSet.Required, FALSE) AS Required,
+	|	ISNULL(AddAttributesSet.ShowInHTML, FALSE) AS ShowInHTML,
+	|	ISNULL(AddAttributesSet.Collection, FALSE) AS Collection,
+	|	ISNULL(AddAttributesSet.DefaultName, """") AS DefaultName,
+	|	ISNULL(AddAttributesSet.PathForTag, """") AS PathForTag
+	|INTO tmpAddAttributesExtended
+	|FROM
+	|	tmpAddAttributes AS AddAttributes
+	|		FULL JOIN (SELECT DISTINCT
+	|			tmpAddAttributes.Ref AS Ref,
+	|			AddAttributeAndPropertySetsAttributes.Attribute AS Attribute,
+	|			AddAttributeAndPropertySetsAttributes.IsConditionSet AS IsConditionSet,
+	|			AddAttributeAndPropertySetsAttributes.InterfaceGroup AS InterfaceGroup,
+	|			AddAttributeAndPropertySetsAttributes.Required AS Required,
+	|			AddAttributeAndPropertySetsAttributes.ShowInHTML AS ShowInHTML,
+	|			AddAttributeAndPropertySetsAttributes.Collection AS Collection,
+	|			AddAttributeAndPropertySetsAttributes.DefaultName AS DefaultName,
+	|			AddAttributeAndPropertySetsAttributes.PathForTag AS PathForTag
+	|		FROM
+	|			tmpAddAttributes AS tmpAddAttributes,
+	|			Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
+	|		WHERE
+	|			AddAttributeAndPropertySetsAttributes.Ref = &AddAttributesSetRef
+	|		UNION ALL
+	|		SELECT DISTINCT
+	|			tmpAddAttributes.Ref,
+	|			AddAttributeAndPropertySetsExtensionAttributes.Attribute,
+	|			AddAttributeAndPropertySetsExtensionAttributes.IsConditionSet,
+	|			AddAttributeAndPropertySetsExtensionAttributes.InterfaceGroup,
+	|			AddAttributeAndPropertySetsExtensionAttributes.Required,
+	|			AddAttributeAndPropertySetsExtensionAttributes.ShowInHTML,
+	|			FALSE,
+	|			"""",
+	|			""""
+	|		FROM
+	|			tmpAddAttributes AS tmpAddAttributes,
+	|			Catalog.AddAttributeAndPropertySets.ExtensionAttributes AS AddAttributeAndPropertySetsExtensionAttributes
+	|		WHERE
+	|			AddAttributeAndPropertySetsExtensionAttributes.Ref = &AddAttributesSetRef) AS AddAttributesSet
+	|		ON AddAttributes.Ref = AddAttributesSet.Ref
+	|			AND AddAttributes.Property = AddAttributesSet.Attribute
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AddAttributes.LineNumber,
+	|	AddAttributes.Ref,
+	|	AddAttributes.Key,
+	|	AddAttributes.Attribute,
+	|	AddAttributes.AttributeValue,
+	|	%16
+	|INTO AddAttributes
+	|FROM
+	|	tmpAddAttributesExtended AS AddAttributes
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Result.LineNumber,
+	|	Result.Ref,
+	|	Result.Key,
+	|	Result.Attribute,
+	|	Result.AttributeValue,
+	|	%18
+	|FROM
+	|	AddAttributes AS Result
+	|WHERE %17";
 EndFunction
 
 // Get query for documents array.
@@ -531,6 +644,8 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 	Exists_SerialLotNumbers = MetaDoc.TabularSections.Find("SerialLotNumbers") 	<> Undefined;
 	Exists_SourceOfOrigins 	= MetaDoc.TabularSections.Find("SourceOfOrigins") 	<> Undefined;
 	Exists_Payments 		= MetaDoc.TabularSections.Find("Payments") 			<> Undefined;
+	Exists_PaymentList 		= MetaDoc.TabularSections.Find("PaymentList") 		<> Undefined;
+	Exists_AddAttributes	= MetaDoc.TabularSections.Find("AddAttributes")		<> Undefined;
 
 	If Exists_ItemList Then	
 		QueryTextArray.Add(GetQuery_ItemList());
@@ -556,14 +671,35 @@ Function GetQueryForDocumentArray(MetaDocName) Export
 		ErrorsArray.Add(ErrorWithSourceOfOrigins());
 	EndIf;
 	
+	If Exists_Payments Then
+		ErrorsArray.Add(ErrorWithPayments());
+	EndIf;
+	
+	If Exists_PaymentList Then
+		ErrorsArray.Add(ErrorWithPaymentList());
+	EndIf;
+	
+	If Exists_AddAttributes Then
+		ErrorsArray.Add(ErrorWithAddAttributes());
+	EndIf;
+	
 	GetInfo_0 = GetFilterAndFields(ErrorsArray, MetaDoc, 0); // Other tables
 	GetInfo_1 = GetFilterAndFields(ErrorsArray, MetaDoc, 1); // SourceOfOrigins table
 	GetInfo_2 = GetFilterAndFields(ErrorsArray, MetaDoc, 2); // Headers table
 	GetInfo_3 = GetFilterAndFields(ErrorsArray, MetaDoc, 3); // Payments table
+	GetInfo_4 = GetFilterAndFields(ErrorsArray, MetaDoc, 4); // Payment list
+	GetInfo_5 = GetFilterAndFields(ErrorsArray, MetaDoc, 5); // Additional attributes
 
 	If Exists_Payments Then
 		QueryTextArray.Add(GetQuery_Payments(GetInfo_3));
-		ErrorsArray.Add(ErrorWithPayments());
+	EndIf;
+	
+	If Exists_PaymentList Then
+		QueryTextArray.Add(GetQuery_PaymentList(GetInfo_4));
+	EndIf;
+	
+	If Exists_AddAttributes Then
+		QueryTextArray.Add(GetQuery_AddAttributes(GetInfo_5));
 	EndIf;
 	
 	If Exists_ItemList Then
@@ -690,6 +826,137 @@ Function GetQuery_Payments(GetInfo_3)
 		|FROM
 		|	Payments AS Result
 		|WHERE " + GetInfo_3.Filters;
+EndFunction
+
+Function GetQuery_PaymentList(GetInfo_4)
+	Return "
+		|SELECT
+		|	PaymentList.Ref,
+		|	PaymentList.Key,
+		|	PaymentList.LineNumber,
+		|	" + GetInfo_4.Fields + "
+		|INTO PaymentList
+		|FROM
+		|	%1.PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Ref IN (&Refs)
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Result.Ref,
+		|	Result.Key,
+		|	Result.LineNumber,
+		|	" + GetInfo_4.Results + "
+		|FROM
+		|	PaymentList AS Result
+		|WHERE " + GetInfo_4.Filters;
+EndFunction
+
+Function GetQuery_AddAttributes(GetInfo_5)
+	Return "
+		|SELECT
+		|	AddAttributes.Ref,
+		|	AddAttributes.LineNumber,
+		|	AddAttributes.Property,
+		|	AddAttributes.Value
+		|INTO tmpAddAttributes
+		|FROM
+		|	%1.AddAttributes AS AddAttributes
+		|WHERE
+		|	AddAttributes.Ref IN (&Refs)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	DocTable.Ref,
+		|	0,
+		|	UNDEFINED,
+		|	UNDEFINED
+		|FROM
+		|	%1 AS DocTable
+		|WHERE
+		|	DocTable.Ref IN (&Refs)
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	ISNULL(AddAttributes.LineNumber, 0) AS LineNumber,
+		|	""0123456789"" AS Key,
+		|	ISNULL(AddAttributes.Ref, AddAttributesSet.Ref) AS Ref,
+		|	ISNULL(AddAttributesSet.Attribute, AddAttributes.Property) AS Attribute,
+		|	AddAttributesSet.Attribute IS NULL AS isUnknown,
+		|	ISNULL(AddAttributes.Value, Undefined) AS AttributeValue,
+		|	ISNULL(AddAttributesSet.IsConditionSet, FALSE) AS IsConditionSet,
+		|	AddAttributesSet.InterfaceGroup AS InterfaceGroup,
+		|	ISNULL(AddAttributesSet.Required, FALSE) AS Required,
+		|	ISNULL(AddAttributesSet.ShowInHTML, FALSE) AS ShowInHTML,
+		|	ISNULL(AddAttributesSet.Collection, FALSE) AS Collection,
+		|	ISNULL(AddAttributesSet.DefaultName, """") AS DefaultName,
+		|	ISNULL(AddAttributesSet.PathForTag, """") AS PathForTag
+		|INTO tmpAddAttributesExtended
+		|FROM
+		|	tmpAddAttributes AS AddAttributes
+		|		FULL JOIN (SELECT DISTINCT
+		|			tmpAddAttributes.Ref AS Ref,
+		|			AddAttributeAndPropertySetsAttributes.Attribute AS Attribute,
+		|			AddAttributeAndPropertySetsAttributes.IsConditionSet AS IsConditionSet,
+		|			AddAttributeAndPropertySetsAttributes.InterfaceGroup AS InterfaceGroup,
+		|			AddAttributeAndPropertySetsAttributes.Required AS Required,
+		|			AddAttributeAndPropertySetsAttributes.ShowInHTML AS ShowInHTML,
+		|			AddAttributeAndPropertySetsAttributes.Collection AS Collection,
+		|			AddAttributeAndPropertySetsAttributes.DefaultName AS DefaultName,
+		|			AddAttributeAndPropertySetsAttributes.PathForTag AS PathForTag
+		|		FROM
+		|			tmpAddAttributes AS tmpAddAttributes,
+		|			Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
+		|		WHERE
+		|			AddAttributeAndPropertySetsAttributes.Ref = &AddAttributesSetRef
+		|		
+		|		UNION ALL
+		|		
+		|		SELECT DISTINCT
+		|			tmpAddAttributes.Ref,
+		|			AddAttributeAndPropertySetsExtensionAttributes.Attribute,
+		|			AddAttributeAndPropertySetsExtensionAttributes.IsConditionSet,
+		|			AddAttributeAndPropertySetsExtensionAttributes.InterfaceGroup,
+		|			AddAttributeAndPropertySetsExtensionAttributes.Required,
+		|			AddAttributeAndPropertySetsExtensionAttributes.ShowInHTML,
+		|			FALSE,
+		|			"""",
+		|			""""
+		|		FROM
+		|			tmpAddAttributes AS tmpAddAttributes,
+		|			Catalog.AddAttributeAndPropertySets.ExtensionAttributes AS AddAttributeAndPropertySetsExtensionAttributes
+		|		WHERE
+		|			AddAttributeAndPropertySetsExtensionAttributes.Ref = &AddAttributesSetRef) AS AddAttributesSet
+		|		ON AddAttributes.Ref = AddAttributesSet.Ref
+		|			AND AddAttributes.Property = AddAttributesSet.Attribute
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	AddAttributes.LineNumber,
+		|	AddAttributes.Ref,
+		|	AddAttributes.Key,
+		|	AddAttributes.Attribute,
+		|	AddAttributes.AttributeValue,
+		|	" + GetInfo_5.Fields + "
+		|INTO AddAttributes
+		|FROM
+		|	tmpAddAttributesExtended AS AddAttributes
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Result.Ref,
+		|	Result.Key,
+		|	Result.LineNumber,
+		|	Result.Attribute,
+		|	Result.AttributeValue,
+		|	" + GetInfo_5.Results + "
+		|FROM
+		|	AddAttributes AS Result
+		|WHERE " + GetInfo_5.Filters;
 EndFunction
 
 Function GetQuery_SerialLotNumbers()
@@ -1063,6 +1330,24 @@ EndFunction
 
 Function ErrorWithPaymentList(MetaDoc = Undefined)
 	Str = New Structure;
+	
+	Return Str;
+EndFunction
+
+Function ErrorWithAddAttributes(MetaDoc = Undefined)
+	Str = New Structure;
+	
+	Str.Insert("ErrorAddAttributesIsUnknowAttribute", New Structure("Query, Fields, QueryNumber", 
+		"(AddAttributes.isUnknown AND AddAttributes.LineNumber > 0)",
+		"isUnknown",
+		5
+	));
+	
+	Str.Insert("ErrorAddAttributesNotSetTag", New Structure("Query, Fields, QueryNumber", 
+		"(AddAttributes.PathForTag <> """" AND AttributeValue = Undefined)",
+		"PathForTag",
+		5
+	));
 	
 	Return Str;
 EndFunction

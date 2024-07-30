@@ -12,12 +12,11 @@
   <containedObjects classId="51f2d5d8-ea4d-4064-8892-82951750031e" objectId="a6cea7c6-a6a3-47f6-9424-59d2f6347dae"/>
   <containedObjects classId="e68182ea-4237-4383-967f-90c1e3370bc7" objectId="9b7d6465-4ba2-48d9-be1b-7d5bffceab4a"/>
   <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="087e34df-3957-4ed1-a442-5f02f2e51da0"/>
-  <configurationExtensionCompatibilityMode>8.3.21</configurationExtensionCompatibilityMode>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.27.56</version>
+  <version>2024.31.4716</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -438,6 +437,7 @@
   <roles>Role.ManualRegisterEdit</roles>
   <roles>Role.Document_TaxesOperation</roles>
   <roles>Role.AttachedFilesDelete</roles>
+  <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -1020,7 +1020,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.BackgroundMultiJob</commonForms>
   <commonForms>CommonForm.FormulaEditor</commonForms>
-  <commonForms>CommonForm.PaymentByDocuments</commonForms>
+  <commonForms>CommonForm.PaymentDistribution</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1332,6 +1332,7 @@
   <reports>Report.R7030_ProductionPlanning</reports>
   <reports>Report.R5020_PartnersBalance</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
+  <reports>Report.T0001_FilesAnalyser</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1356,6 +1357,7 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
+  <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
@@ -1541,6 +1543,7 @@
   <accumulationRegisters>AccumulationRegister.R9560T_AdditionalAccrual</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R9570T_AdditionalDeduction</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5020B_PartnersBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040T_RowIDSerialLotNumbers</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CurrencyMovementType</chartsOfCharacteristicTypes>

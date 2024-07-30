@@ -365,7 +365,8 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|		when BatchKeysInfo.TotalQuantity <> 0
 	|			then (isnull(TaxesAmounts.AmountTax, 0) / BatchKeysInfo.TotalQuantity) * BatchKeysInfo.Quantity
 	|		else 0
-	|	end as AmountTax,
+	|	end as InvoiceTaxAmount,
+	|	BatchKeysInfo.Amount AS InvoiceAmount,
 	|	BatchKeysInfo.*
 	|FROM
 	|	BatchKeysInfo AS BatchKeysInfo
@@ -428,7 +429,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
 	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
-	BatchKeysInfoSettings.Totals = "Quantity, Amount, AmountTax";
+	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
 	PostingServer.SetBatchKeyInfoTable(Parameters, BatchKeysInfoSettings);
@@ -529,6 +530,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbersAndItemKeys());
 	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
@@ -559,6 +561,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
@@ -764,6 +767,29 @@ Function SerialLotNumbers()
 		   |		AND ItemList.Ref = &Ref
 		   |WHERE
 		   |	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbersAndItemKeys()
+	Return "SELECT
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Key AS Key,
+	|	ISNULL(SerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	ISNULL(SerialLotNumbers.Quantity, ItemList.Quantity) AS Quantity,
+	|	ItemList.Ref AS Ref,
+	|	ItemList.IsService AS IsService,
+	|	ItemList.Ref.StoreDistributedPurchase AS StoreDistributedPurchase
+	|INTO SerialLotNumbersAndItemKeys
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		LEFT JOIN Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+	|		ON (ItemList.Key = SerialLotNumbers.Key
+	|				AND SerialLotNumbers.Ref = &Ref)
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function IncomingStocksReal()
@@ -985,13 +1011,21 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	ItemList.TaxAmount AS Amount
+		|	SUM(ItemList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
 		|	ItemList.IsPurchase
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
@@ -1120,6 +1154,23 @@ Function R4017B_InternalSupplyRequestProcurement()
 		   |	AND NOT ItemList.UseGoodsReceipt";
 
 EndFunction
+
+Function R4032B_GoodsInTransitOutgoing()
+	Return "SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	SerialLotNumbersAndItemKeys.Period,
+	|	SerialLotNumbersAndItemKeys.Store,
+	|	SerialLotNumbersAndItemKeys.Ref AS Basis,
+	|	SerialLotNumbersAndItemKeys.ItemKey,
+	|	SerialLotNumbersAndItemKeys.Quantity,
+	|	SerialLotNumbersAndItemKeys.SerialLotNumber
+	|INTO R4032B_GoodsInTransitOutgoing
+	|FROM
+	|	SerialLotNumbersAndItemKeys AS SerialLotNumbersAndItemKeys
+	|WHERE
+	|	NOT SerialLotNumbersAndItemKeys.IsService
+	|	AND SerialLotNumbersAndItemKeys.StoreDistributedPurchase";
+EndFunction	
 
 Function R4031B_GoodsInTransitIncoming()
 	Return "SELECT
@@ -1341,9 +1392,7 @@ EndFunction
 
 Function T6020S_BatchKeysInfo()
 	Return "SELECT
-		   |	*,
-		   |	BatchKeysInfo.Amount AS InvoiceAmount, 
-		   |	BatchKeysInfo.AmountTax AS InvoiceTaxAmount
+		   |	*
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	BatchKeysInfo

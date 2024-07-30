@@ -135,6 +135,8 @@
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
@@ -143,14 +145,13 @@
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
-  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

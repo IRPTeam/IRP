@@ -448,7 +448,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 				And "RowIDInfo" table contains lines
 					| '#'     | 'Key'                             | 'Basis'                             | 'Row ID'     | 'Next step'     | 'Quantity'     | 'Basis key'                             | 'Current step'     | 'Row ref'      |
 					| '1'     | '$$Rov1PurchaseReturn22310$$'     | '$$PurchaseReturnOrder022006$$'     | '*'          | 'SC'            | '3,000'        | '$$Rov1PurchaseReturnOrder022310$$'     | 'PR'               | '*'            |
-				And I click "Cancel posting" button	
+				And I click the button named "FormUndoPosting"	
 		And I close all client application windows
 	* Create Purchase return based on Purchase return order(Create button)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"

@@ -181,12 +181,20 @@ Function R1040B_TaxesOutgoing()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType,
-		|	-ItemList.TaxAmount AS Amount
+		|	SUM(-ItemList.TaxAmount) AS Amount
 		|INTO R1040B_TaxesOutgoing
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
-		|	ItemList.TaxAmount <> 0";
+		|	ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

@@ -2897,7 +2897,7 @@ Scenario: _2060028 check SR (different store then in the SI) - GR link form
 		And I delete "$$NumberGoodsReceipt1051$$" variable
 		And I save the value of "Number" field as "$$NumberGoodsReceipt1051$$"
 	* Unpost documents
-		And I click "Cancel posting" button
+		And I click the button named "FormUndoPosting"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table

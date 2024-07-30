@@ -210,6 +210,24 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
+    <attributes uuid="7aa15aa2-70ac-4e3a-b44a-e96bf65158b7">
+      <name>DocType</name>
+      <synonym>
+        <key>en</key>
+        <value>Doc type</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:StringValue">
+        <value></value>
+      </fillValue>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="2364009b-31ed-45ee-97fb-e871d63bdfa9">
     <producedTypes>
@@ -251,7 +269,7 @@
       <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
-      <name>FilePresention</name>
+      <name>FilePresentation</name>
       <synonym>
         <key>en</key>
         <value>File type</value>

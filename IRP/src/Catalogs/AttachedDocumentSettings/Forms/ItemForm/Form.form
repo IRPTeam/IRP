@@ -224,7 +224,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.FileSettings.FilePresention</segments>
+          <segments>Object.FileSettings.FilePresentation</segments>
         </dataPath>
         <extendedTooltip>
           <name>FileSettingsFilePresentionExtendedTooltip</name>
@@ -278,7 +278,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.FileSettings.FilePresention.Comment</segments>
+          <segments>Object.FileSettings.FilePresentation.Comment</segments>
         </dataPath>
         <extendedTooltip>
           <name>FileSettingsFileTooltipsExtendedTooltip</name>
@@ -305,6 +305,7 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <type>InputField</type>
         <editMode>EnterOnInput</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
@@ -850,6 +851,7 @@
     <name>NotificationProcessing</name>
   </handlers>
   <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
+  <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
   <group>Vertical</group>

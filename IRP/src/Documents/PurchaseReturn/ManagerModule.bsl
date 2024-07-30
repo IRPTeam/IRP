@@ -628,13 +628,21 @@ Function R2040B_TaxesIncoming()
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
 		|	VALUE(Enum.InvoiceType.Return) AS InvoiceType,
-		|	ItemList.TaxAmount AS Amount
+		|	SUM(ItemList.TaxAmount) AS Amount
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemLIst
 		|WHERE
 		|	ItemList.IsReturnToVendor
-		|	AND ItemList.TaxAmount <> 0";	
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Return)";	
 EndFunction
 
 Function R4010B_ActualStocks()

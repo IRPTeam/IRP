@@ -6338,21 +6338,15 @@ Scenario: _015400681 check multistring additional attributes
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 		And I click Select button of "Country of consignment" field
-		And I click the button named "Add"
-		And I click choice button of the attribute named "Value" in "ValueList" table
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Description'    |
-			| 'Country of consignment' |  'Turkey'        |
+			| "Additional attribute"   | "Description" |
+			| "Country of consignment" | "Turkey"      |
 		And I select current line in "List" table
-		And I finish line editing in "ValueList" table
-		And I click the button named "Add"
-		And I click choice button of the attribute named "Value" in "ValueList" table
+		And I click Select button of "Country of consignment" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Description'    |
-			| 'Country of consignment' |  'Poland'        |
+			| "Additional attribute"   | "Description" |
+			| "Country of consignment" | "Poland"      |
 		And I select current line in "List" table
-		And I finish line editing in "ValueList" table
-		And I click the button named "OK"
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"
 		And I click "Save" button	
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"	

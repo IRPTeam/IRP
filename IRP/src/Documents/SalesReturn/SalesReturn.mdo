@@ -131,14 +131,18 @@
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
   <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
@@ -149,9 +153,6 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
-  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
-  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

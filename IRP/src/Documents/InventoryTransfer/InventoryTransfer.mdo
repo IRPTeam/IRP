@@ -71,6 +71,7 @@
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
@@ -300,6 +301,27 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="74f385da-3b77-4df4-9391-d19946b4e7b3">
+    <name>DistributedPurchaseInvoice</name>
+    <synonym>
+      <key>en</key>
+      <value>Distributed purchase invoice</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.StoreDistributedPurchase</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="7a5be0d3-3151-4fcc-999d-14fc15ce18bc">
     <name>DocumentForm</name>
     <synonym>
@@ -496,6 +518,19 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0918b60e-2a37-4baf-97bc-46c9a8258282">
+      <name>PurchaseInvoice</name>
+      <synonym>
+        <key>en</key>
+        <value>Purchase invoice</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <createOnInput>DontUse</createOnInput>
+      <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
@@ -913,6 +948,7 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
+      <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.InventoryTransferOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

@@ -789,6 +789,11 @@ Function Strings(Lang) Export
 	Strings.Insert("ATC_FIX_ErrorNotFilledSalesReturnTransactionType", NStr("en = 'Instead of empty values, ""Return from customer"" will be set.'", Lang));
 	Strings.Insert("ATC_FIX_ErrorNotFilledPurchaseReturnTransactionType", NStr("en = 'Instead of empty values, ""Return to vendor"" will be set.'", Lang));
 	
+	Strings.Insert("ATC_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute: %1 : %2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesIsUnknowAttribute", NStr("en = 'Unknown attribute will be remove'", Lang));
+	Strings.Insert("ATC_ErrorAddAttributesNotSetTag", NStr("en = 'Not filled Tag-Attribute: %1%2'", Lang));
+	Strings.Insert("ATC_FIX_ErrorAddAttributesNotSetTag", NStr("en = 'Attribute will be set'", Lang));
+	
 #EndRegion
 
 #Region Equipment
@@ -1332,6 +1337,10 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
+	Strings.Insert("Error_148", NStr("en = 'Debit\Credit note is available only when amounts are equal.'", Lang));
+	Strings.Insert("Error_149", NStr("en = 'Fill field'", Lang));
+	Strings.Insert("Error_150", NStr("en = 'Can not find file at data base'", Lang));
+	Strings.Insert("Error_151", NStr("en = 'Can not find file at storage service'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1452,6 +1461,7 @@ Function Strings(Lang) Export
 	Strings.Insert("InfoMessage_038", NStr("en = 'New document movements are identical to the manual corrections. The ""Manual Movements Edit"" checkbox is now unnecessary and can be removed.'", Lang));
 	Strings.Insert("InfoMessage_039", NStr("en = 'Movements successfully recorded'", Lang));
 	Strings.Insert("InfoMessage_040", NStr("en = 'File not found'", Lang));
+	Strings.Insert("InfoMessage_041", NStr("en = 'Select type of attached document'", Lang));
 	
 	Strings.Insert("InfoMessage_WriteObject", NStr("en = 'Save object, before continue.'", Lang));
 	Strings.Insert("InfoMessage_Payment", NStr("en = 'Payment (+)'", Lang));
@@ -2156,6 +2166,14 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 	Strings.Insert("AuditLock_002", NStr("en = 'Audit lock (unlock)'", Lang));
 	Strings.Insert("AuditLock_003", NStr("en = 'Access is denied'", Lang));
 	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
+#EndRegion
+	
+#Region DocStatuses
+	Strings.Insert("DocStatus_Name", NStr("en = 'Posting status'", Lang));
+	Strings.Insert("DocStatus_New", NStr("en = 'New'", Lang));
+	Strings.Insert("DocStatus_Posted", NStr("en = 'Posted'", Lang));
+	Strings.Insert("DocStatus_NotPosted", NStr("en = 'Not posted'", Lang));	
+	Strings.Insert("DocStatus_Deleted", NStr("en = 'Deleted'", Lang));	
 #EndRegion
 	
 	Return Strings;

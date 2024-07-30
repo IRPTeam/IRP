@@ -322,7 +322,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T6020S_BatchKeysInfo());
 	QueryArray.Add(T1040T_AccountingAmounts());
 	QueryArray.Add(T1050T_AccountingQuantities());
-	QueryArray.Add(R5020B_PartnersBalance());
+	QueryArray.Add(R5020B_PartnersBalance());	
 	Return QueryArray;
 EndFunction
 
@@ -724,14 +724,22 @@ Function R2040B_TaxesIncoming()
 		|	ItemList.Currency,
 		|	&Vat AS Tax,
 		|	ItemList.VatRate AS TaxRate,
-		|	ItemList.TaxAmount AS Amount,
+		|	SUM(ItemList.TaxAmount) AS Amount,
 		|	VALUE(Enum.InvoiceType.Invoice) AS InvoiceType
 		|INTO R2040B_TaxesIncoming
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	ItemList.IsSales
-		|	AND ItemList.TaxAmount <> 0";
+		|	AND ItemList.TaxAmount <> 0
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.VatRate,
+		|	VALUE(Enum.InvoiceType.Invoice)";
 EndFunction
 
 Function R4010B_ActualStocks()

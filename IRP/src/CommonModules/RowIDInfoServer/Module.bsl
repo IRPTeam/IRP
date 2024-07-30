@@ -213,10 +213,13 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);	
 	
-
+	Is = Is(Source);
+	_Is_Invoice = (Is.SI Or Is.PI Or Is.RSR);
+	_Is_Return = (Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Or Is.RGR);
 	If Not Cancel Then
-		Is = Is(Source);
-		If Is.SI Or Is.PI Or Is.RSR Then
+			
+		// invoices
+		If _Is_Invoice Then
 			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
 			
 			If Is.RSR Then
@@ -225,8 +228,9 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Receipt, Unposting);
 			EndIf;
 		EndIf;
-
-		If Is.SR Or Is.SRO Or Is.PR Or Is.PRO Or Is.RRR Or Is.RGR Then
+		
+		// returns
+		If _Is_Return Then
 			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
 			If Is.RRR Then
 				Records_InDocument = GetRecordsInDocument_TM1010T_RRR(Source);
@@ -234,6 +238,24 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 				Records_Exists = GetRecordsExists_TM1010T(Source, AccumulationRecordType.Expense);
 				CheckAfterWrite_TM1010T(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, AccumulationRecordType.Expense, Unposting);
 			EndIf;
+		EndIf;
+	EndIf;
+	
+	// serial lot numbers
+	If Not Cancel Then
+		If Source.Metadata().TabularSections.Find("SerialLotNumbers") <> Undefined Then
+			Records_SerialLotNumbers = Posting_T1040T_RowIDSerialLotNumbers(Source);
+			
+			// invoices
+			If _Is_Invoice Then
+				Records_SerialLotNumbers_Invoice = Posting_T1040T_RowIDSerialLotNumbers_Invoice(Source);
+				For Each Row In Records_SerialLotNumbers_Invoice Do
+					FillPropertyValues(Records_SerialLotNumbers.Add(), Row);
+				EndDo;
+			EndIf;
+			
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Load(Records_SerialLotNumbers);
+			Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
 		EndIf;
 	EndIf;
 EndProcedure
@@ -251,6 +273,9 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	Unposting = True;
 	Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
 	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+	
+	Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Clear();
+	Source.RegisterRecords.T1040T_RowIDSerialLotNumbers.Write();
 	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 	
@@ -710,6 +735,194 @@ Function GetRecordsInDocument(Source)
 	Query.SetParameter("Ref", Source.Ref);
 	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	Return New Structure("TM1010B_RowIDMovements", Query.Execute().Unload());
+EndFunction
+
+Function Posting_T1040T_RowIDSerialLotNumbers(Source)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Ref AS Recorder,
+	|	Table.Ref.Date AS Period,
+	|	Table.RowID AS RowID,
+	|	Table.BasisKey AS BasisKey,
+	|	Table.CurrentStep AS CurrentStep,
+	|	Table.Basis AS Basis,
+	|	Table.RowRef AS RowRef,
+	|	SLN.SerialLotNumber AS SerialLotNumber,
+	|	SUM(SLN.Quantity) AS Quantity
+	|INTO RowIDMovements
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS Table
+	|		INNER JOIN Document.GoodsReceipt.SerialLotNumbers AS SLN
+	|		ON (Table.Ref = &Ref)
+	|		AND (SLN.Ref = &Ref)
+	|		AND Table.Ref = SLN.Ref
+	|		AND Table.Key = SLN.Key
+	|GROUP BY
+	|	Table.Ref,
+	|	Table.Ref.Date,
+	|	Table.RowID,
+	|	Table.BasisKey,
+	|	Table.CurrentStep,
+	|	Table.Basis,
+	|	Table.RowRef,
+	|	SLN.SerialLotNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Ref AS Recorder,
+	|	Table.Ref.Date AS Period,
+	|	Table.RowID AS RowID,
+	|	Table.Key AS Key,
+	|	Table.NextStep AS NextStep,
+	|	Table.Basis AS Basis,
+	|	Table.RowRef AS RowRef,
+	|	SLN.SerialLotNumber AS SerialLotNumber,
+	|	SLN.Quantity AS Quantity
+	|INTO RowIDMovementsFull
+	|FROM
+	|	Document.GoodsReceipt.RowIDInfo AS Table
+	|		INNER JOIN Document.GoodsReceipt.SerialLotNumbers AS SLN
+	|		ON (Table.Ref = &Ref)
+	|		AND (SLN.Ref = &Ref)
+	|		AND Table.Ref = SLN.Ref
+	|		AND Table.Key = SLN.Key
+	|GROUP BY
+	|	Table.Ref,
+	|	Table.Ref.Date,
+	|	Table.RowID,
+	|	Table.Key,
+	|	Table.NextStep,
+	|	Table.Basis,
+	|	Table.RowRef,
+	|	SLN.SerialLotNumber,
+	|	SLN.Quantity
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Recorder AS Recorder,
+	|	Table.Period AS Period,
+	|	Table.RowID AS RowID,
+	|	Table.BasisKey AS BasisKey,
+	|	Table.CurrentStep AS Step,
+	|	CASE
+	|		WHEN Table.Basis.Ref IS NULL
+	|			THEN &Ref
+	|		ELSE Table.Basis
+	|	END AS Basis,
+	|	Table.SerialLotNumber AS SerialLotNumber,
+	|	-SUM(CASE
+	|		WHEN ISNULL(T1040T_RowIDSerialLotNumbers.QuantityTurnover, 0) < Table.Quantity
+	|			THEN ISNULL(T1040T_RowIDSerialLotNumbers.QuantityTurnover, 0)
+	|		ELSE Table.Quantity
+	|	END) AS Quantity
+	|FROM
+	|	RowIDMovements AS Table
+	|		INNER JOIN AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,&Period,, (RowID, BasisKey, Step, Basis,
+	|			SerialLotNumber) IN
+	|			(SELECT
+	|				Table.RowID,
+	|				Table.BasisKey,
+	|				Table.CurrentStep,
+	|				Table.Basis,
+	|				Table.SerialLotNumber
+	|			FROM
+	|				RowIDMovements AS Table
+	|			WHERE
+	|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS T1040T_RowIDSerialLotNumbers
+	|		ON (T1040T_RowIDSerialLotNumbers.RowID = Table.RowID)
+	|		AND (T1040T_RowIDSerialLotNumbers.BasisKey = Table.BasisKey)
+	|		AND (T1040T_RowIDSerialLotNumbers.Step = Table.CurrentStep)
+	|		AND (T1040T_RowIDSerialLotNumbers.Basis = Table.Basis)
+	|		AND (T1040T_RowIDSerialLotNumbers.SerialLotNumber = Table.SerialLotNumber)
+	|WHERE
+	|	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
+	|GROUP BY
+	|	Table.Recorder,
+	|	Table.Period,
+	|	Table.RowID,
+	|	Table.BasisKey,
+	|	Table.CurrentStep,
+	|	CASE
+	|		WHEN Table.Basis.Ref IS NULL
+	|			THEN &Ref
+	|		ELSE Table.Basis
+	|	END,
+	|	Table.SerialLotNumber
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Table.Recorder,
+	|	Table.Period,
+	|	Table.RowID,
+	|	Table.Key,
+	|	Table.NextStep,
+	|	&Ref,
+	|	Table.SerialLotNumber,
+	|	Table.Quantity
+	|FROM
+	|	RowIDMovementsFull AS Table
+	|WHERE
+	|	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
+	Query.Text = StrReplace(Query.Text, "GoodsReceipt", Source.Metadata().Name);
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function Posting_T1040T_RowIDSerialLotNumbers_Invoice(Source)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key AS BasisKey,
+	|	&NextStep AS Step,
+	|	SLN.Quantity,
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef,
+	|	SLN.SerialLotNumber
+	|FROM
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|		INNER JOIN Document.SalesInvoice.SerialLotNumbers AS SLN
+	|		ON RowIDInfo.Ref = &Ref
+	|		AND SLN.Ref = &Ref
+	|		AND RowIDInfo.Ref = SLN.Ref
+	|		AND RowIDInfo.Key = SLN.Key
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Key,
+	|	SLN.Quantity,
+	|	RowIDInfo.RowRef,
+	|	SLN.SerialLotNumber";
+	
+	Query.Text = StrReplace(Query.Text, "SalesInvoice", Source.Metadata().Name);
+	
+	Query.SetParameter("Ref", Source.Ref);
+
+	NextStep = Undefined;
+	Is = Is(Source);
+	If Is.SI Then
+		NextStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is.PI Then
+		NextStep = Catalogs.MovementRules.PRO_PR;
+	ElsIf Is.RSR Then
+		NextStep = Catalogs.MovementRules.RRR_RGR;
+	EndIf;
+
+	Query.SetParameter("NextStep", NextStep);
+
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
 EndFunction
 
 #Region RowID
@@ -1687,7 +1900,16 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		RowRefObject.StoreReturn = RowItemList.Store;
 	ElsIf Is.RGR And Source.TransactionType = Enums.RetailGoodsReceiptTransactionTypes.ReturnFromCustomer Then
 		FillPropertyValues(RowRefObject, RowItemList, , "Store");
-		RowRefObject.StoreReturn = RowItemList.Store;		
+		RowRefObject.StoreReturn = RowItemList.Store;
+	ElsIf Is.SO And RowItemList.ProcurementMethod = Enums.ProcurementMethods.Purchase Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store");
+		RowRefObject.StoreSales = RowItemList.Store;
+	ElsIf Is.PO And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store"); 
+		RowRefObject.StorePurchases = RowItemList.Store;
+	ElsIf Is.PI And ValueIsFilled(RowItemList.SalesOrder) Then
+		FillPropertyValues(RowRefObject, RowItemList, , "Store"); 
+		RowRefObject.StorePurchases = RowItemList.Store;		
 	Else
 		FillPropertyValues(RowRefObject, RowItemList);
 	EndIf;
@@ -2661,16 +2883,28 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|
 	|///////////////////////////////////////////////////////////////////////////////
@@ -2768,17 +3002,29 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -2855,16 +3101,28 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.RetailShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|///////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
@@ -2945,17 +3203,29 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3019,16 +3289,28 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.RetailShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|///////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
@@ -3108,17 +3390,29 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Und
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3182,16 +3476,28 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, 
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3230,19 +3536,45 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = U
 	|	BasisesTable.BasisUnit,
 	|	BasisesTable.QuantityInBaseUnit
 	|FROM
-	|	BasisesTable AS BasisesTable";
-
+	|	BasisesTable AS BasisesTable
+	|
+	|;
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TablesSO = ExtractData_FromSO(QueryResults[2].Unload(), DataReceiver);
 
 	TableRowIDInfo = QueryResults[1].Unload();
-
+	TableSerialLotNumbers = QueryResults[3].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TablesSO.ItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("SpecialOffers", TablesSO.SpecialOffers);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -3436,18 +3768,29 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber
 	|;
-	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
@@ -3543,17 +3886,29 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3619,18 +3974,29 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-							  
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3694,17 +4060,28 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-							  
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";						  
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3775,16 +4152,28 @@ Function ExtractData_FromRGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		AND BasisesTable.BasisKey = ItemList.Key
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.RetailGoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3850,17 +4239,28 @@ Function ExtractData_FromRGR_ThenFromRSR(BasisesTable, DataReceiver, AddInfo = U
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.RetailGoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-							  
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";						  
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3962,17 +4362,29 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.LineNumber
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
-
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
 	If Is(DataReceiver).SC Then
@@ -4189,19 +4601,44 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.PurchaseReturn.SpecialOffers AS SpecialOffers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SpecialOffers.Ref
-	|		AND BasisesTable.BasisKey = SpecialOffers.Key";
-
+	|		AND BasisesTable.BasisKey = SpecialOffers.Key
+	|;
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
 	TableSpecialOffers = QueryResults[3].Unload();
-
+	TableSerialLotNumbers = QueryResults[4].Unload();
+	
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -4366,19 +4803,44 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.SalesReturn.SpecialOffers AS SpecialOffers
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SpecialOffers.Ref
-	|		AND BasisesTable.BasisKey = SpecialOffers.Key";
-
+	|		AND BasisesTable.BasisKey = SpecialOffers.Key
+	|;
+	|SELECT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
+	|FROM
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber";
+	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
 	TableRowIDInfo     = QueryResults[1].Unload();
 	TableItemList      = QueryResults[2].Unload();
 	TableSpecialOffers = QueryResults[3].Unload();
+	TableSerialLotNumbers = QueryResults[4].Unload();
 
 	Tables = New Structure();
 	Tables.Insert("ItemList", TableItemList);
 	Tables.Insert("RowIDInfo", TableRowIDInfo);
 	Tables.Insert("SpecialOffers", TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers", TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -4543,16 +5005,28 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT DISTINCT
+	|SELECT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
 	|	SerialLotNumbers.SerialLotNumber,
-	|	SerialLotNumbers.Quantity
+	|	SUM(SerialLotNumbers.QuantityTurnover) AS Quantity
 	|FROM
-	|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS SerialLotNumbers
 	|		INNER JOIN BasisesTable AS BasisesTable
-	|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-	|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+	|		ON SerialLotNumbers.RowID = BasisesTable.RowID
+	|		AND SerialLotNumbers.BasisKey = BasisesTable.BasisKey
+	|		AND SerialLotNumbers.Step = BasisesTable.CurrentStep
+	|		AND SerialLotNumbers.Basis = BasisesTable.Basis
+	|GROUP BY
+	|	BasisesTable.Key,
+	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|///////////////////////////////////////////////////////////////////////////////
 	|SELECT DISTINCT
@@ -5152,7 +5626,7 @@ Function ReduceExtractedDataInfo_SO(Tables, DataReceiver)
 	ReduceInfo = New Structure("Reduce, Tables", False, New Structure());
 	
 	Is = Is(DataReceiver);
-	// only when procurecement method Pyrchase
+	// only when procurecement method Purchase
 	If Is.PO Or Is.PI Then
 		ReduceInfo.Tables.Insert("ItemList", "Key, BasedOn, Company, TransactionTypePurchases, Store, UseGoodsReceipt, PurchaseBasis, SalesOrder, 
 											 |Item, ItemKey, Unit, BasisUnit, Quantity, QuantityInBaseUnit");
@@ -6123,15 +6597,14 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 							  |Store             , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
-		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
-		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		Result.Header   = "Company, Branch, Status, ItemListSetProcurementMethods";
+		Result.ItemList = "Item, ItemKey, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
 							  |ProcurementMethod , ItemList.ProcurementMethod,
-							  |ItemKey           , ItemList.ItemKey,
-							  |Store             , ItemList.Store";
-	
+							  |ItemKey           , ItemList.ItemKey";
+							  
 	ElsIf ExternalDocAliase = Aliases.WO Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
 			|ItemListSetProcurementMethods, TransactionType";
@@ -6236,7 +6709,7 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6288,7 +6761,7 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6345,7 +6818,7 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6392,7 +6865,7 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6437,11 +6910,7 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
+	|))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -6511,7 +6980,7 @@ Procedure ApplyFilterSet_SO_ForWO(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6620,7 +7089,7 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6969,7 +7438,7 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7300,7 +7769,7 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7763,8 +8232,8 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+		Result.Header   = "Company, Branch";
+		Result.ItemList = "Item, ItemKey, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 	Else
 		Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
 	EndIf;
@@ -7872,7 +8341,7 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7929,7 +8398,7 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store  OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8087,7 +8556,7 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8441,8 +8910,8 @@ Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
 		Result.Header   = "Company, Branch, Partner, LegalName, Store, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+		Result.Header   = "Company, Branch";
+		Result.ItemList = "Item, ItemKey, PurchaseOrder, SalesOrder, InternalSupplyRequest";
 	ElsIf InternalDocAliase = Aliases.ISR Then
 		Result.Header   = "Company, Branch, Store";
 		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
@@ -8538,7 +9007,7 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8650,7 +9119,7 @@ Procedure ApplyFilterSet_PI_ForSI_ForSC(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END)) AS RowIDMovements";
 	Query.Execute();
@@ -12042,7 +12511,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	Query.SetParameter("ItemList", ItemListTable);
 
 	Is = Is(Object);
-	If Is.RRR Or Is.SR Then
+	If Is.RRR Or Is.SR Or Is.PO Or Is.PI Or Is.SC Or Is.SI Then
 		Query.SetParameter("Filter_Store", False);
 	Else
 		Query.SetParameter("Filter_Store", True);

@@ -50,6 +50,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
 	Form.Items.RegularOperations.Visible = Object.UserDefined;
+	Form.Items.Errors.Visible = Object.Errors.Count() > 0;
 EndProcedure
 
 &AtClient

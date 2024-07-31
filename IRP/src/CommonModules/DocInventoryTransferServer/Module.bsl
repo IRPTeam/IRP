@@ -110,7 +110,8 @@ Function GetDataFromPI(BasisArray) Export
 	|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 	|	PurchaseInvoiceItemList.Unit AS Unit,
 	|	ISNULL(PurchaseInvoiceSerialLotNumbers.Quantity, PurchaseInvoiceItemList.Quantity) AS Quantity,
-	|	ISNULL(PurchaseInvoiceSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber
+	|	ISNULL(PurchaseInvoiceSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
+	|	PurchaseInvoiceItemList.Key AS Key
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
 	|		LEFT JOIN Document.PurchaseInvoice.SerialLotNumbers AS PurchaseInvoiceSerialLotNumbers
@@ -120,9 +121,10 @@ Function GetDataFromPI(BasisArray) Export
 	|	PurchaseInvoiceItemList.Ref IN (&BasisArray)
 	|TOTALS
 	|	MAX(Item) AS Item,
-	|	MAX(Unit) AS Unit
+	|	MAX(Unit) AS Unit,
+	|	MAX(ItemKey) AS ItemKey
 	|BY
-	|	ItemKey
+	|	Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -154,9 +156,9 @@ Function GetDataFromPI(BasisArray) Export
 		EndIf;
 	EndDo;
 	
-	SelectionItemKey = ResultsArray[0].Select(QueryResultIteration.ByGroups, "ItemKey");
-	While SelectionItemKey.Next() Do
-		Selection = SelectionItemKey.Select();
+	SelectionKey = ResultsArray[0].Select(QueryResultIteration.ByGroups, "Key");
+	While SelectionKey.Next() Do
+		Selection = SelectionKey.Select();
 		CreateRow = False;
 		ArrayOfSerialLotNumbers = New Array;
 		While Selection.Next() Do
@@ -184,7 +186,7 @@ Function GetDataFromPI(BasisArray) Export
 		If CreateRow Then
 			NewRowItemList = New Structure(ColumnForItemList);
 			NewRowItemList.Key = New UUID();
-			FillPropertyValues(NewRowItemList, SelectionItemKey, "Item, ItemKey, Unit");
+			FillPropertyValues(NewRowItemList, SelectionKey, "Item, ItemKey, Unit, Key");
 			NewRowItemList.PurchaseInvoice = SelectionHeader.DistributedPurchaseInvoice;
 			If ArrayOfSerialLotNumbers.Count() > 0 Then
 				TotalQuantity = 0;

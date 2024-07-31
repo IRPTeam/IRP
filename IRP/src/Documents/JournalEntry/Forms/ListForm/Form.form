@@ -787,7 +787,7 @@ GROUP BY
       </content>
       <content>
        <key>tr</key>
-       <value>Have errors</value>
+       <value>Hatalar mevcut</value>
       </content>
      </localValue>
     </title>

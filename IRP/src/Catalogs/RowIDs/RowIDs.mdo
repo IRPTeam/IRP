@@ -1038,7 +1038,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Store (Sales)</value>
+   <value>Depo (Satışlar)</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -1061,7 +1061,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Store (Purchases)</value>
+   <value>Depo (Alımlar)</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>

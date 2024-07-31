@@ -145,7 +145,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Invoice type</value>
+   <value>Fatura tipi</value>
   </synonym>
   <type>
    <types>EnumRef.InvoiceType</types>

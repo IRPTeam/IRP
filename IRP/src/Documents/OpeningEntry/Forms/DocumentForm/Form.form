@@ -16290,7 +16290,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Incoming and Outgoing</value>
+     <value>Hesaplanan ve indrilen</value>
     </title>
     <extendedTooltip>
      <name>GroupIncomingAndOutgoingExtendedTooltip</name>
@@ -17443,7 +17443,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies taxes incoming</value>
+   <value>İndirilen vergi döviz değiştir</value>
   </title>
   <id>18</id>
   <use>
@@ -17472,7 +17472,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit currencies taxes outgoing</value>
+   <value>Hesaplanan vergi döviz değiştir</value>
   </title>
   <id>19</id>
   <use>

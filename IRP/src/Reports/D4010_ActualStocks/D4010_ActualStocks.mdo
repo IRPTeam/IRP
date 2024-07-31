@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Actual stocks</value>
+   <value>Gerçek stoklar</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

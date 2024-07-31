@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Calculation deserved vacations</value>
+  <value>İzin hakediş hesaplama</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.CalculationDeservedVacations.StandardAttribute.Number</inputByString>
@@ -36,7 +36,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Calculation deserved vacations</value>
+  <value>İzin hakediş hesaplama</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -48,7 +48,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Calculation deserved vacations</value>
+  <value>İzin hakediş hesaplama</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>

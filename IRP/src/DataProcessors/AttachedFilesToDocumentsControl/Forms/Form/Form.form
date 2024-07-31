@@ -3065,7 +3065,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>File presentation</value>
+    <value>Dosya görünüm</value>
    </title>
    <id>11</id>
    <valueType>
@@ -3090,7 +3090,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is required</value>
+    <value>Zorunlu</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3471,7 +3471,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Attach document</value>
+   <value>Dış evrak ekle</value>
   </title>
   <id>7</id>
   <use>

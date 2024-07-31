@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T 1040 Row ID Serial lot numbers</value>
+  <value>T1040 Seri lot numaralar Satır ID</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>

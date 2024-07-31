@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Invoice type</value>
+  <value>Fatura tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>

@@ -1983,7 +1983,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Group incoming outgoing</value>
+     <value>Grup indirilen vergiler</value>
     </title>
     <extendedTooltip>
      <name>GroupIncomingOutgoingExtendedTooltip</name>
@@ -3475,7 +3475,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill taxes</value>
+   <value>Vergileri doldur</value>
   </title>
   <id>5</id>
   <use>
@@ -3500,7 +3500,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill taxes</value>
+   <value>Vergileri doldur</value>
   </title>
   <id>6</id>
   <use>

@@ -251,7 +251,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Query settings</value>
+      <value>Sorgu ayarları</value>
      </title>
      <extendedTooltip>
       <name>GroupQueryFilterExtendedTooltip</name>
@@ -3428,7 +3428,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Command bar left</value>
+          <value>Araç çubuk sol</value>
          </title>
          <extendedTooltip>
           <name>CommandBarLeftExtendedTooltip</name>
@@ -3642,7 +3642,7 @@
          </title>
          <title>
           <key>tr</key>
-          <value>Command bar right</value>
+          <value>Araç çubuk sağ</value>
          </title>
          <extendedTooltip>
           <name>CommandBarRightExtendedTooltip</name>
@@ -6222,7 +6222,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Pack size</value>
+   <value>Paket boyutu</value>
   </title>
   <id>68</id>
   <valueType>
@@ -6253,7 +6253,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Query text</value>
+   <value>Sorgu metni</value>
   </title>
   <id>69</id>
   <valueType>
@@ -6937,7 +6937,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Skeep check (for reposting)</value>
+   <value>Kontol atla (tekrar kaydetme için)</value>
   </title>
   <id>33</id>
   <use>
@@ -6966,7 +6966,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Fill query template</value>
+   <value>Sorgu şablonu doldur</value>
   </title>
   <id>34</id>
   <use>

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Taxes operation</value>
+  <value>Vergi işlemi</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.TaxesOperation.StandardAttribute.Number</inputByString>
@@ -68,7 +68,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Taxes operation</value>
+  <value>Vergiler işlemi</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -80,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Taxes operations</value>
+  <value>Vergiler işlemleri</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -626,7 +626,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Taxes incoming</value>
+   <value>İndirilen vergiler</value>
   </synonym>
   <attributes uuid="79acde43-cef7-4b81-9a62-f21b5f0da47f">
    <name>Key</name>
@@ -685,7 +685,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type</value>
+    <value>Fatura tipi</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>
@@ -735,7 +735,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Taxes outgoing</value>
+   <value>Hesaplanan vergiler</value>
   </synonym>
   <attributes uuid="05b7d99b-6a9a-41ef-a3f1-b6532862d9d6">
    <name>Key</name>
@@ -794,7 +794,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type</value>
+    <value>Fatura tipi</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>
@@ -844,7 +844,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Taxes difference</value>
+   <value>Vergi farkları</value>
   </synonym>
   <attributes uuid="e8139b4a-1cb4-4a4d-9cce-cd138a84ed14">
    <name>Key</name>
@@ -880,7 +880,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT (Incoming)</value>
+    <value>KDV (indirilen)</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -902,7 +902,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type (incoming)</value>
+    <value>Fatura tipi (gelen)</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>
@@ -924,7 +924,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>VAT (outgoing)</value>
+    <value>KDV (hesaplanan)</value>
    </synonym>
    <type>
     <types>CatalogRef.TaxRates</types>
@@ -946,7 +946,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type (outgoing)</value>
+    <value>Fatura tipi (çıkan)</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>

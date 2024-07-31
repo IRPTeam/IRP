@@ -208,7 +208,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File presentation</value>
+    <value>Dosya görünüm</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

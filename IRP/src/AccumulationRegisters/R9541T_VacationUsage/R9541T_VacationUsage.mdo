@@ -19,7 +19,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>R9541T Vacation usage</value>
+  <value>R9541T İzin kullanımı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -36,7 +36,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Days</value>
+   <value>Günler</value>
   </synonym>
   <type>
    <types>Number</types>

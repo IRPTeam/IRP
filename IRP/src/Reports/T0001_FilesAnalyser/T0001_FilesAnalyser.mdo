@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T0001 Files analyser</value>
+  <value>T0001 Dosya analiz</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.T0001_FilesAnalyser.Template.MainDataCompositionSchema</mainDataCompositionSchema>

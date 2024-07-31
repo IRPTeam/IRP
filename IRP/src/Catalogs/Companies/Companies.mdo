@@ -595,7 +595,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Legal currency movement type</value>
+   <value>Yerel döviz hareket tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>

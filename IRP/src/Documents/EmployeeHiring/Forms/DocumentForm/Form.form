@@ -1237,7 +1237,7 @@
         </presentation>
         <presentation>
          <key>tr</key>
-         <value>By company</value>
+         <value>Şirkete göre</value>
         </presentation>
         <value xsi:type="core:StringValue">
          <value>ByCompany</value>
@@ -1333,7 +1333,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group of vacation limit</value>
+      <value>Grup izin günleri</value>
      </title>
      <extendedTooltip>
       <name>GroupVacationLimitExtendedTooltip</name>
@@ -2082,7 +2082,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Vacation days</value>
+   <value>İzin günleri</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2111,7 +2111,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Vacation days</value>
+   <value>İzin günleri</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2139,7 +2139,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Vacation days (company)</value>
+   <value>İzin günleri (şirket)</value>
   </title>
   <id>14</id>
   <valueType>

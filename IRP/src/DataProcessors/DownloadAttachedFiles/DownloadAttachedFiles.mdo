@@ -15,7 +15,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Download attached files</value>
+  <value>Ek dosyaları indir</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.DownloadAttachedFiles.Form.Form</defaultForm>

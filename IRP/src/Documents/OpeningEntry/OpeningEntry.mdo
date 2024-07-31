@@ -4543,7 +4543,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Taxes incoming</value>
+   <value>İndirilen vergiler</value>
   </synonym>
   <attributes uuid="b98111e6-dd13-4ccc-862e-8ead2a1969db">
    <name>Key</name>
@@ -4625,7 +4625,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type</value>
+    <value>Fatura tipi</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>
@@ -4718,7 +4718,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Taxes outgoing</value>
+   <value>Hesaplanan vergiler</value>
   </synonym>
   <attributes uuid="9348b4db-11e5-4d84-ad5c-bf6fa59936bc">
    <name>Key</name>
@@ -4800,7 +4800,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Invoice type</value>
+    <value>Fatura tipi</value>
    </synonym>
    <type>
     <types>EnumRef.InvoiceType</types>

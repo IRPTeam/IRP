@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Dr currency amount</value>
+   <value>Bç dövizli tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -79,7 +79,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Cr currency amount</value>
+   <value>Ak dövizli tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>

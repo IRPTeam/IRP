@@ -579,7 +579,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE amount</value>
+   <value>DELETE tutar</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -648,7 +648,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount (send)</value>
+   <value>Tutar (çıkan)</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -672,7 +672,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Amount (receive)</value>
+   <value>Tutar (gelen)</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -696,7 +696,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Currency (send)</value>
+   <value>Döviz (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -721,7 +721,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Currency (receive)</value>
+   <value>Döviz (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

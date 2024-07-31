@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Taxes operation transaction type</value>
+  <value>Vergiler işlemler hareket tipi</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
@@ -32,7 +32,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tax оffset</value>
+   <value>Vergi hesaplama</value>
   </synonym>
  </enumValues>
  <enumValues uuid="96610545-66bf-487d-80f9-1dc4de7b4c32">
@@ -47,7 +47,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tax offset and payment</value>
+   <value>Vergi hesaplama ve ödeme</value>
   </synonym>
  </enumValues>
  <enumValues uuid="fe81af84-a5eb-4cd3-aa3c-d8e0c28f1e3e">
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Tax Payment</value>
+   <value>Vergi ödeme</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

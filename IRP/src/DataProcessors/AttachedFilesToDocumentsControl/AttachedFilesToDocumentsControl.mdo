@@ -342,7 +342,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Doc type</value>
+    <value>Evrak tipi</value>
    </synonym>
    <type>
     <types>String</types>
@@ -432,7 +432,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>File type</value>
+    <value>Dosya tipi</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

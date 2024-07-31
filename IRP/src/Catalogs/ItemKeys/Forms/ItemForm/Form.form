@@ -628,7 +628,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group of Package unit</value>
+      <value>Grup paketleme birimi</value>
      </title>
      <extendedTooltip>
       <name>GroupPackageUnitExtendedTooltip</name>
@@ -3081,7 +3081,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Package unit mode</value>
+   <value>Paketleme birim modu</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3108,7 +3108,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Inherit package unit</value>
+   <value>Bağlı paketleme birimi</value>
   </title>
   <id>13</id>
   <valueType>

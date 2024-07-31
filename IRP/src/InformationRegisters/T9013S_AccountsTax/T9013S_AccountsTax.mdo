@@ -105,7 +105,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Incoming account (return)</value>
+   <value>İndirilen hesap (iade)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -132,7 +132,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Outgoing account (return)</value>
+   <value>Hesaplanan hesap (iade)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>

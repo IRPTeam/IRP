@@ -441,7 +441,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Distributed purchase invoice</value>
+   <value>Dağıtılan alım faturası</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseInvoice</types>

@@ -67,7 +67,7 @@
       </inputHint>
       <inputHint>
        <key>tr</key>
-       <value>Destination dir [ C:\Files ]</value>
+       <value>Hedef konum [ C:\Files ]</value>
       </inputHint>
      </extInfo>
     </items>
@@ -1090,7 +1090,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>File table</value>
+   <value>Dosya tablosu</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1165,7 +1165,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>File exists</value>
+    <value>Dosya mevcut</value>
    </title>
    <id>11</id>
    <valueType>

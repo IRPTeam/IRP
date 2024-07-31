@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9545 Vacation days limits </value>
+  <value>T9545 İzin günler limiti</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Day limit</value>
+   <value>Gün limiti</value>
   </synonym>
   <type>
    <types>Number</types>

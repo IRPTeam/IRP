@@ -2657,6 +2657,21 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_012", NStr("en='Enable - Change price type';
 		|ru='Включить - Изменить тип цены';
 		|tr='Etkinleştir - Fiyat tipi değiştir'", Lang));
+	Strings.Insert("Add_Settings_013", NStr("en='Attached files to documents control';
+		|ru='Прикрепленные файлы для контроля документов';
+		|tr='Evrek denetimi için eklenen dosyalar'", Lang));
+	Strings.Insert("Add_Settings_014", NStr("en='Enable - Change filters';
+		|ru='Включить - Изменить фильтры';
+		|tr='Enable - Change filters'", Lang));
+	Strings.Insert("Add_Settings_015", NStr("en='Enable - Check-mode';
+		|ru='Включить - Режим проверки';
+		|tr='Enable - Check-mode'", Lang));
+	Strings.Insert("Add_Settings_016", NStr("en='Company';
+		|ru='Организация';
+		|tr='Şirket'", Lang));
+	Strings.Insert("Add_Settings_017", NStr("en='Branch';
+		|ru='Структурное подразделение';
+		|tr='Şube'", Lang));
 #EndRegion
 
 #Region Mobile

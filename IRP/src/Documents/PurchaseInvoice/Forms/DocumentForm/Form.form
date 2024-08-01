@@ -8573,7 +8573,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show vendor price</value>
+   <value>Tedarikçi fiyatı göster</value>
   </title>
   <id>20</id>
   <toolTip>
@@ -8586,7 +8586,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Show vendor price</value>
+   <value>Tedarikçi fiyatı göster</value>
   </toolTip>
   <use>
    <common>true</common>

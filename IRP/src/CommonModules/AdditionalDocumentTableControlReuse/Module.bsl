@@ -84,7 +84,7 @@ Function GetQuery(DocName) Export
 	
 	If MetaDoc.TabularSections.Find("AddAttributes") = Undefined Then
 		Result.Tables.Insert("AddAttributes", TmplDoc.AddAttributes.Unload());
-		Result.AddParameres.Insert("AddAttributesRef", Catalogs.AddAttributeAndPropertySets.EmptyRef());
+		Result.AddParameres.Insert("AddAttributesSetRef", Catalogs.AddAttributeAndPropertySets.EmptyRef());
 	Else
 		Result.Tables.Insert("AddAttributes", Undefined);
 		ErrorsArray.Add(ErrorWithAddAttributes());

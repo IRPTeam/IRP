@@ -1656,6 +1656,11 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_010", NStr("en = 'Linked documents'", Lang));
 	Strings.Insert("Add_Setiings_011", NStr("en = 'Use reverse tree'", Lang));
 	Strings.Insert("Add_Setiings_012", NStr("en = 'Enable - Change price type'", Lang));
+	Strings.Insert("Add_Settings_013", NStr("en = 'Attached files to documents control'", Lang));
+	Strings.Insert("Add_Settings_014", NStr("en = 'Enable - Change filters'", Lang));
+	Strings.Insert("Add_Settings_015", NStr("en = 'Enable - Check-mode'", Lang));
+	Strings.Insert("Add_Settings_016", NStr("en = 'Company'", Lang));
+	Strings.Insert("Add_Settings_017", NStr("en = 'Branch'", Lang));
 #EndRegion
 
 #Region Mobile

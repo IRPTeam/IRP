@@ -16,7 +16,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2024.31.4721</version>
+  <version>2024.31.4731</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>

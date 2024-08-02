@@ -31,6 +31,29 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure CalculationsFixedAssetOnChange(Item)
+	CurrentId = Items.Calculations.CurrentRow;
+	CalculationsFixedAssetOnChangeAtServer(CurrentId);	
+EndProcedure
+
+&AtServer
+Procedure CalculationsFixedAssetOnChangeAtServer(ID)
+	CurrentData = Object.Calculations.FindByID(ID);
+	
+	DataTable = Documents.DepreciationCalculation.GetCalculations(
+		Object.Ref,
+		Object.Date,
+		Object.Company,
+		Object.Branch,
+		CurrentData.FixedAsset);
+	If DataTable.Count() > 0 Then
+		PropertyString = "ProfitLossCenter, LedgerType, Schedule, CalculationMethod, Currency, ExpenseType, AmountBalance, Amount";
+		FillPropertyValues(CurrentData, DataTable[0], PropertyString);
+	EndIf;		
+	
+EndProcedure	 
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
@@ -180,6 +203,30 @@ EndProcedure
 &AtClient
 Procedure DateOnChange(Item)
 	DocDepreciationCalculationClient.DateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region CALCULATIONS
+
+&AtClient
+Procedure CalculationsAfterDeleteRow(Item)
+	DocDepreciationCalculationClient.CalculationsAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure CalculationsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocDepreciationCalculationClient.CalculationsBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+EndProcedure
+
+&AtClient
+Procedure CalculationsSelection(Item, RowSelected, Field, StandardProcessing)
+	DocDepreciationCalculationClient.CalculationsSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure CalculationsBeforeDeleteRow(Item, Cancel)
+	DocDepreciationCalculationClient.CalculationsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 #EndRegion

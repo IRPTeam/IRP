@@ -869,6 +869,7 @@
   <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
   <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
   <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAccountingService</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -979,6 +980,7 @@
   <constants>Constant.UseFixedAssets</constants>
   <constants>Constant.UseLegalNameContract</constants>
   <constants>Constant.UseResponsiblePerson</constants>
+  <constants>Constant.UseAccountingService</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1021,6 +1023,7 @@
   <commonForms>CommonForm.BackgroundMultiJob</commonForms>
   <commonForms>CommonForm.FormulaEditor</commonForms>
   <commonForms>CommonForm.PaymentDistribution</commonForms>
+  <commonForms>CommonForm.EditUUID</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessKey</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
@@ -1116,6 +1119,7 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.ExtDimensions</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1205,6 +1209,7 @@
   <documents>Document.ExpenseAccruals</documents>
   <documents>Document.RevenueAccruals</documents>
   <documents>Document.TaxesOperation</documents>
+  <documents>Document.ExternalAccountingOperation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1356,6 +1361,7 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
+  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
@@ -1439,6 +1445,14 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.TemplateActions</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.T9061S_AccountingMappingAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.T9062S_AccountingMappingCompanies</informationRegisters>
+  <informationRegisters>InformationRegister.T9063S_AccountingMappingCurrencies</informationRegisters>
+  <informationRegisters>InformationRegister.T9064S_AccountingMappingRegisters</informationRegisters>
+  <informationRegisters>InformationRegister.T9065S_AccountingMappingExtDimensions</informationRegisters>
+  <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

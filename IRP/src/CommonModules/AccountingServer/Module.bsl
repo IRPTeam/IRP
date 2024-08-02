@@ -285,7 +285,10 @@ Function GetOperationsDefinition()
 		
 	Map.Insert(AO.TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing, 
 		New Structure("ByRow, TransactionType", True, ArrayOfTaxesOperationTransactionTypes_Payment));
-		
+	
+	// External accounting operation
+	Map.Insert(AO.ExternalAccountingOperation, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 
@@ -471,6 +474,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	If Not ValueIsFilled(Company) Then
 		Return New Array();
 	EndIf;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -485,6 +489,15 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	ArrayOfLedgerTypes = QueryTable.UnloadColumn("LedgerType");
+	
+	If TypeOf(Ref) = Type("DocumentRef.ExternalAccountingOperation") Then
+		Array = New Array();
+		If ArrayOfLedgerTypes.Find(Ref.LedgerType) <> Undefined Then
+			Array.Add(Ref.LedgerType);
+		EndIf;
+		Return Array;
+	EndIf;
+	
 	Return ArrayOfLedgerTypes;
 EndFunction
 
@@ -3269,3 +3282,710 @@ Function RunJob(JobDataSettings)
 EndFunction
 
 #EndRegion
+
+#Region AccountingService
+
+Procedure LoadAccountingRecordsByPeriod(IntegrationSettings, StartDate, EndDate, RegisterName = "") Export
+	TotalArrayOfDates = New Array();
+	_Date = BegOfDay(StartDate);
+	While _Date < BegOfDay(EndDate) Do
+		TotalArrayOfDates.Add(_Date);
+		_Date = BegOfDay(EndOfDay(_Date) + 1);
+	EndDo;
+		
+	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName);
+EndProcedure
+
+Procedure LoadAccountingRecordsAll(IntegrationSettings, RegisterName = "") Export
+	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
+	
+	TotalArrayOfDates = New Array();
+	
+	For Each ExternalRegister In ExternalRegisters Do
+		
+		If ValueIsFilled(RegisterName) And Upper(RegisterName) <> Upper(TrimAll(ExternalRegister.ExternalName)) Then
+			Continue;
+		EndIf;
+	
+		QueryParams = New Structure();
+		QueryParams.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+		QueryParams.Insert("NodeCode", IntegrationSettings.UniqueID);
+		Json = SendGETRequest(IntegrationSettings, "changesdates", QueryParams);
+		ArrayOfDates = CommonFunctionsServer.DeserializeJSON(Json);
+		For Each ChangesDate In ArrayOfDates Do
+			_ChangesDate = ReadJSONDate(ChangesDate, JSONDateFormat.ISO);
+			If TotalArrayOfDates.Find(_ChangesDate) = Undefined Then
+				TotalArrayOfDates.Add(_ChangesDate);
+			EndIf;
+		EndDo;
+	EndDo;
+		
+	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName);
+EndProcedure
+
+Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName)
+
+	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
+	
+	For Each ExternalRegister In ExternalRegisters Do
+		
+		If ValueIsFilled(RegisterName) And Upper(RegisterName) <> Upper(TrimAll(ExternalRegister.ExternalName)) Then
+			Continue;
+		EndIf;
+		
+		For Each ChangesDate In ArrayOfDates Do
+			RequestData = New Structure();
+			RequestData.Insert("StartDate", BegOfDay(ChangesDate));
+			RequestData.Insert("EndDate", EndOfDay(ChangesDate));
+			RequestData.Insert("NodeCode", IntegrationSettings.UniqueID);
+			RequestData.Insert("RegisterName", TrimAll(ExternalRegister.ExternalName));
+	
+			Json = SendPOSTRequest(IntegrationSettings, "get_changes", RequestData);
+			ResponseData = CommonFunctionsServer.DeserializeJSON(Json);
+		
+			For Each Data In ResponseData Do
+				If Data.Records.Count() Then
+					CreateExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
+				Else
+					DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
+				EndIf;
+			EndDo;
+						
+		EndDo;
+	EndDo;
+EndProcedure
+
+Function GetExternalRegisters(IntegrationSettings)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExternalName,
+	|	Reg.LedgerType
+	|FROM
+	|	InformationRegister.T9064S_AccountingMappingRegisters AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings";
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Procedure DeleteExternalAccountingOperation(IntegrationSettings, Data, LedgerType)
+	DataTable = GetEmptyTableForResponseData();
+	NewRow = DataTable.Add();
+	FillPropertyValues(NewRow, Data);
+	NewRow.RecorderDate = ReadJSONDate(Data.RecorderDate, JSONDateFormat.ISO);
+	NewRow.RecorderRef  = ?(ValueIsFilled(Data.RecorderRef)     , New UUID(Data.RecorderRef)   , Undefined);	
+	NewRow.LedgerType = LedgerType;
+	
+	Query = New Query();
+	Query.Text = GetDataTableQueryText();
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	Query.SetParameter("DataTable", DataTable);
+	
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload(); 
+	
+	If QueryTable.Count() Then
+		If ValueIsFilled(QueryTable[0].DocRef) Then
+			DocObject = QueryTable[0].DocRef.GetObject();
+		Else
+			Return;
+		EndIf;
+				
+		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
+		DocObject.Date = QueryTable[0].RecorderDate;
+		DocObject.Records.Clear();
+		DocObject.Write(DocumentWriteMode.UndoPosting);
+	EndIf;
+EndProcedure
+
+Procedure CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType)
+	DataTable = GetEmptyTableForResponseData();
+	For Each Record In Data.Records Do
+		NewRow = DataTable.Add();
+		FillPropertyValues(NewRow, Data);
+		FillPropertyValues(NewRow, Record);
+		NewRow.RecorderDate = ReadJSONDate(Data.RecorderDate, JSONDateFormat.ISO);
+		NewRow.RecorderRef  = ?(ValueIsFilled(Data.RecorderRef)     , New UUID(Data.RecorderRef)   , Undefined);
+		
+		NewRow.Period         = ReadJSONDate(Record.Period, JSONDateFormat.ISO);
+		NewRow.CompanyRef     = ?(ValueIsFilled(Record.CompanyRef)    , New UUID(Record.CompanyRef)    , Undefined);
+		NewRow.CurrencyRef    = ?(ValueIsFilled(Record.CurrencyRef)   , New UUID(Record.CurrencyRef)   , Undefined);
+		NewRow.CurrencyDrRef  = ?(ValueIsFilled(Record.CurrencyDrRef) , New UUID(Record.CurrencyDrRef) , Undefined);
+		NewRow.CurrencyCrRef  = ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
+		NewRow.AccountDrRef   = ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
+		NewRow.AccountCrRef   = ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
+		NewRow.LedgerType = LedgerType;
+		
+		For Each ExtDimension In Record.ExtDimensionValueDr Do
+			FillExdimensionsRow(NewRow, ExtDimension, "Dr");	
+		EndDo;
+		
+		For Each ExtDimension In Record.ExtDimensionValueCr Do
+			FillExdimensionsRow(NewRow, ExtDimension, "Cr");	
+		EndDo;
+		
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = GetDataTableQueryText();
+	Query.SetParameter("IntegrationSettings", IntegrationSettings);
+	Query.SetParameter("DataTable", DataTable);
+	
+	QueryResult = Query.Execute();
+	
+	QueryTable = QueryResult.Unload(); 
+	
+	If QueryTable.Count() Then
+		If Not ValueIsFilled(QueryTable[0].DocRef) Then
+			DocObject = Documents.ExternalAccountingOperation.CreateDocument();
+		Else
+			DocObject = QueryTable[0].DocRef.GetObject();
+		EndIf;
+				
+		FillPropertyValues(DocObject, QueryTable[0], , "Posted");
+		DocObject.Date = QueryTable[0].RecorderDate;
+		
+		DocObject.Records.Clear();
+		DocObject.Errors.Clear();
+		
+		For Each Row In QueryTable Do
+			FindOrCreateAnalytic(IntegrationSettings, Row, Row, "Dr");
+			FindOrCreateAnalytic(IntegrationSettings, Row, Row, "Cr");
+			
+			NewRow = DocObject.Records.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Key = New UUID();
+			
+			// errors
+			If Not ValueIsFilled(NewRow.Company) And ValueIsFilled(NewRow.CompanyRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Company is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.Currency) And ValueIsFilled(NewRow.CurrencyRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Currency is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.AccountDr) And ValueIsFilled(NewRow.AccountDrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Account Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.AccountCr) And ValueIsFilled(NewRow.AccountCrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Account Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.CurrencyDr) And ValueIsFilled(NewRow.CurrencyDrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Currency Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.CurrencyCr) And ValueIsFilled(NewRow.CurrencyCrRef) Then
+				DocObject.Errors.Add().Error = StrTemplate("Currency Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr1) And ValueIsFilled(NewRow.ExtDimensionValueDr1) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 value Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr1) And ValueIsFilled(NewRow.ExtDimensionRefDr1) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 type Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr2) And ValueIsFilled(NewRow.ExtDimensionValueDr2) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 value Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr2) And ValueIsFilled(NewRow.ExtDimensionRefDr2) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 type Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr3) And ValueIsFilled(NewRow.ExtDimensionValueDr3) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 value Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr3) And ValueIsFilled(NewRow.ExtDimensionRefDr3) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 type Dr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+						
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr1) And ValueIsFilled(NewRow.ExtDimensionValueCr1) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 value Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr1) And ValueIsFilled(NewRow.ExtDimensionRefCr1) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 type Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr2) And ValueIsFilled(NewRow.ExtDimensionValueCr2) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 value Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr2) And ValueIsFilled(NewRow.ExtDimensionRefCr2) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 type Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr3) And ValueIsFilled(NewRow.ExtDimensionValueCr3) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 value Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr3) And ValueIsFilled(NewRow.ExtDimensionRefCr3) Then
+				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 type Cr is empty row-key[%1]", NewRow.Key);
+			EndIf;
+			
+		EndDo;
+		
+		If QueryTable[0].Posted Then
+			DocObject.Write(DocumentWriteMode.Posting);
+		Else
+			DocObject.Write(DocumentWriteMode.UndoPosting);
+		EndIf;
+	EndIf;
+EndProcedure
+
+Function GetEmptyTableForResponseData()
+	Doc_StandardAttr = Metadata.Documents.ExternalAccountingOperation.StandardAttributes;
+	
+	Type_LedgerType = New TypeDescription("CatalogRef.LedgerTypes");
+	Type_AnalyticType = New TypeDescription("ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes");
+	Type_Analytic = New TypeDescription(Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes.Type.Types());
+	
+	Type_UUID     = New TypeDescription("UUID");
+	Type_Boolean  = New TypeDescription("Boolean");
+	Type_Desc     = Metadata.DefinedTypes.typeDescription.Type;
+	Type_Amount   = Metadata.DefinedTypes.typeAmount.Type;
+	Type_Quantity = Metadata.DefinedTypes.typeQuantity.Type;
+	
+	EmptyTable = New ValueTable();
+	
+	EmptyTable.Columns.Add("RecorderRef"          , Type_UUID);
+	EmptyTable.Columns.Add("RecorderPresentation" , Type_Desc);
+	EmptyTable.Columns.Add("LedgerType"           , Type_LedgerType);
+	EmptyTable.Columns.Add("RecorderDate"         , Doc_StandardAttr.Date.Type);
+	
+	EmptyTable.Columns.Add("Posted"               , Type_Boolean);
+	EmptyTable.Columns.Add("DeletionMark"         , Type_Boolean);
+	
+	EmptyTable.Columns.Add("Period"                , Doc_StandardAttr.Date.Type);	
+	EmptyTable.Columns.Add("Activity"              , Type_Boolean);
+	EmptyTable.Columns.Add("OperationTitle"        , Type_Desc);
+	
+	EmptyTable.Columns.Add("CompanyRef"            , Type_UUID);
+	EmptyTable.Columns.Add("CompanyPresentation"   , Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyRef"           , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyPresentation"  , Type_Desc);
+	EmptyTable.Columns.Add("Amount"                , Type_Amount);
+	
+	// debit
+	EmptyTable.Columns.Add("ChartNameDr"           , Type_Desc);
+	EmptyTable.Columns.Add("AccountDrRef"          , Type_UUID);
+	EmptyTable.Columns.Add("AccountDrPresentation" , Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyDrRef"         , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyDrPresentation", Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyDr"      , Type_Amount);
+	EmptyTable.Columns.Add("QuantityDr"            , Type_Quantity);
+	
+	// credit
+	EmptyTable.Columns.Add("ChartNameCr"           , Type_Desc);
+	EmptyTable.Columns.Add("AccountCrRef"          , Type_UUID);
+	EmptyTable.Columns.Add("AccountCrPresentation" , Type_Desc);
+	
+	EmptyTable.Columns.Add("CurrencyCrRef"         , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyCrPresentation", Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyCr"      , Type_Amount);
+	EmptyTable.Columns.Add("QuantityCr"            , Type_Quantity);
+	
+	CreateExtDimensionsColumns(EmptyTable, "Dr");
+	CreateExtDimensionsColumns(EmptyTable, "Cr");
+		
+	Return EmptyTable;
+EndFunction
+
+Procedure CreateExtDimensionsColumns(Table, AnalyticType)
+	Type_UUID     = New TypeDescription("UUID");
+	Type_Boolean  = New TypeDescription("Boolean");
+	Type_Desc     = Metadata.DefinedTypes.typeDescription.Type;
+	Type_AnalyticType = New TypeDescription("ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes");
+	Type_Analytic = New TypeDescription(Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes.Type.Types());
+	
+	i = 1;
+	While i <= 3 Do
+		
+		Table.Columns.Add("ExtDimensionRef"   + AnalyticType + i , Type_UUID);
+		Table.Columns.Add("BaseClass"         + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Class"             + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("IsRef"             + AnalyticType + i , Type_Boolean);
+		Table.Columns.Add("ExtDimensionValue" + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_ru"    + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_en"    + AnalyticType + i , Type_Desc);
+		Table.Columns.Add("Description_tr"    + AnalyticType + i , Type_Desc);
+		
+		Table.Columns.Add("InternalExtDimensionValue" + AnalyticType + i , Type_Analytic);
+		
+		i = i + 1;
+	EndDo;
+	
+EndProcedure
+
+Procedure FillExdimensionsRow(Row, ExtDimension, AnalyticType)
+	Row["ExtDimensionRef"   + AnalyticType + ExtDimension.Number] = New UUID(ExtDimension.ExtDimensionRef);
+	Row["BaseClass"         + AnalyticType + ExtDimension.Number] = ExtDimension.BaseClass;
+	Row["Class"             + AnalyticType + ExtDimension.Number] = ExtDimension.Class;
+	Row["IsRef"             + AnalyticType + ExtDimension.Number] = ExtDimension.IsRef;
+	
+	Row["ExtDimensionValue" + AnalyticType + ExtDimension.Number] = ?(ExtDimension.IsRef, ExtDimension.Value.Ref, ExtDimension.Value.Name);
+	Row["Description_ru"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_ru;
+	Row["Description_en"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_en;
+	Row["Description_tr"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_tr;
+EndProcedure
+
+Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType)
+
+	i = 1;
+	While i <= 3 Do
+		_ExtDimensionRef   = Source["ExtDimensionRef"   + AnalyticType + i]; 
+		_ExternalBaseClass = Source["BaseClass"         + AnalyticType + i]; 
+		_ExternalClass     = Source["Class"             + AnalyticType + i]; 
+		_ExtDimensionValue = Source["ExtDimensionValue" + AnalyticType + i]; 
+		
+		_Description_ru = Source["Description_ru" + AnalyticType + i]; 
+		_Description_en = Source["Description_en" + AnalyticType + i]; 
+		_Description_tr = Source["Description_tr" + AnalyticType + i]; 
+		
+		_ExtDimensionType  = Source["ExtDimensionType"  + AnalyticType + i];
+		_InternalBaseClass = Source["InternalBaseClass" + AnalyticType + i];
+		_InternalClass     = Source["InternalClass"     + AnalyticType + i];
+		
+		If (ValueIsFilled(_ExtDimensionRef) And ValueIsFilled(_ExtDimensionValue))
+			And Not ValueIsFilled(_ExtDimensionType) Then
+			Raise StrTemplate("Not defined ext. dimension type for [%1] [%2] [%3]",
+				_ExtDimensionRef, _ExternalBaseClass, _ExternalClass);
+		EndIf;
+		
+		If ValueIsFilled(_ExtDimensionValue) Then
+			
+			ExternalIsRef = Upper(_ExternalBaseClass) = Upper("Catalogs") Or Upper(_ExternalBaseClass) = Upper("Documents");
+			InternalIsRef = Upper(_InternalBaseClass) = Upper("Catalogs") Or Upper(_InternalBaseClass) = Upper("Documents");
+			
+			NewObjData = New Structure();
+			NewObjData.Insert("Description_ru", _Description_ru);
+			NewObjData.Insert("Description_en", _Description_en);
+			NewObjData.Insert("Description_tr", _Description_tr);
+			NewObjData.Insert("InternalBaseClass" , _InternalBaseClass);
+			NewObjData.Insert("InternalClass"     , _InternalClass);			
+			NewObjData.Insert("ExternalBaseClass" , _ExternalBaseClass);
+			NewObjData.Insert("ExternalClass"     , _ExternalClass);
+			
+			If ExternalIsRef Then				
+				Target["InternalExtDimensionValue" + AnalyticType + i] 
+				= FindOrCreateRefAnalytic(IntegrationSettings, _ExtDimensionValue, _ExtDimensionType, NewObjData, InternalIsRef);
+			
+			ELsIf Not ExternalIsRef Then 
+				Target["InternalExtDimensionValue" + AnalyticType + i] 
+					= FindOrCreateEnumAnalytic(IntegrationSettings, _ExtDimensionValue, _ExtDimensionType, NewObjData, InternalIsRef);
+			EndIf;
+			
+		EndIf;
+		
+		i = i + 1;
+	EndDo;
+
+EndProcedure
+
+Function FindOrCreateRefAnalytic(IntegrationSettings, ExternalRef, ExtDimensionType, NewObjData, InternalIsRef)
+	_ExternalRef_UUID = New UUID(ExternalRef);
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExtDimensionValue
+	|FROM
+	|	InformationRegister.T9066S_AccountingMappingExtDimensionRefValues AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.ExternalRef = &ExternalRef
+	|	AND Reg.ExtDimensionType = &ExtDimensionType";
+	
+	Query.SetParameter("IntegrationSettings" , IntegrationSettings);
+	Query.SetParameter("ExternalRef"         , _ExternalRef_UUID);
+	Query.SetParameter("ExtDimensionType"    , ExtDimensionType);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	_ExtDimensionValue = Undefined;
+	If QuerySelection.Next() Then
+		_ExtDimensionValue = QuerySelection.ExtDimensionValue;
+	EndIf;
+	
+	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
+		Raise StrTemplate("Not found value for external ref [%1]", ExternalRef);
+	EndIf;
+		
+	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
+		
+	If NewRefData.IsNewObject Then
+		RecordsSet = InformationRegisters.T9066S_AccountingMappingExtDimensionRefValues.CreateRecordSet();
+		RecordsSet.Filter.IntegrationSettings.Set(IntegrationSettings);
+		RecordsSet.Filter.ExternalRef.Set(_ExternalRef_UUID);
+		RecordsSet.Filter.ExtDimensionType.Set(ExtDimensionType);
+		
+		Record = RecordsSet.Add();
+		Record.IntegrationSettings = IntegrationSettings;
+		Record.ExternalRef         = _ExternalRef_UUID;
+		Record.ExtDimensionType    = ExtDimensionType;
+		
+		Record.ExtDimensionValue = NewRefData.Ref;
+		
+		RecordsSet.Write();
+	EndIf;
+	
+	Return NewRefData.Ref;
+EndFunction
+
+Function FindOrCreateEnumAnalytic(IntegrationSettings, ExternalValue, ExtDimensionType, NewObjData, InternalIsRef)
+	
+	_ExternalValue = "" + NewObjData.ExternalBaseClass + "." + NewObjData.ExternalClass + "." + ExternalValue;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExtDimensionValue
+	|FROM
+	|	InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.ExternalValue = &ExternalValue
+	|	AND Reg.ExtDimensionType = &ExtDimensionType";
+	
+	Query.SetParameter("IntegrationSettings" , IntegrationSettings);
+	Query.SetParameter("ExternalValue"       , _ExternalValue);
+	Query.SetParameter("ExtDimensionType"    , ExtDimensionType);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	_ExtDimensionValue = Undefined;
+	If QuerySelection.Next() Then
+		_ExtDimensionValue = QuerySelection.ExtDimensionValue;
+	EndIf;
+	
+	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
+		Raise StrTemplate("Not found value for external value [%1]", _ExternalValue);
+	EndIf;
+	
+	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
+		
+	If NewRefData.IsNewObject Then
+		RecordsSet = InformationRegisters.T9067S_AccountingMappingExtDimensionEnumValues.CreateRecordSet();
+		RecordsSet.Filter.IntegrationSettings.Set(IntegrationSettings);
+		RecordsSet.Filter.ExternalValue.Set(_ExternalValue);
+		RecordsSet.Filter.ExtDimensionType.Set(ExtDimensionType);
+		
+		Record = RecordsSet.Add();
+		Record.IntegrationSettings = IntegrationSettings;
+		Record.ExternalValue       = _ExternalValue;
+		Record.ExtDimensionType    = ExtDimensionType;
+		
+		Record.ExtDimensionValue = NewRefData.Ref;
+		
+		RecordsSet.Write();
+	EndIf;
+	
+	Return NewRefData.Ref;
+EndFunction
+
+Function FindOrCreateCatalogRef(ExsistsRef, ExtDimensionType, NewObjData)
+	IsNewObject = False;
+	If ValueIsFilled(ExsistsRef) Then
+		Obj = ExsistsRef.GetObject();
+	Else
+		// create new Catalogs
+		If Upper(NewObjData.InternalBaseClass) = Upper("Catalogs") Then
+			IsNewObject = True;
+			Obj = Catalogs[NewObjData.InternalClass].CreateItem();
+			Obj.SetNewCode();
+		Else
+			Raise "Create new analytics with Document type not supported";
+		EndIf;
+	EndIf;
+
+	FillPropertyValues(Obj, NewObjData);
+	If TypeOf(Obj) = Type("CatalogObject.ExtDimensions") Then
+		Obj.Owner = ExtDimensionType;
+	EndIf;	
+	Obj.DataExchange.Load = True;
+	Obj.Write();
+	Return New Structure("IsNewObject, Ref", IsNewObject, Obj.Ref);
+EndFunction
+
+Function GetDataTableQueryText()
+	Return
+	"SELECT
+	|	DataTable.*
+	|INTO DataTable
+	|FROM
+	|	&DataTable AS DataTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DataTable.*,
+	|	Doc.Ref AS DocRef,
+	|	RegCompanies.InternalRef AS Company,
+	|	RegCurrenciesDr.InternalRef AS CurrencyDr,
+	|	RegCurrenciesCr.InternalRef AS CurrencyCr,
+	|	RegCurrencies.InternalRef AS Currency,
+	|	AccountsDr.InternalRef AS AccountDr,
+	|	AccountsCr.InternalRef AS AccountCr,
+	|
+	|	ExtDimensionsDr1.InternalRef AS ExtDimensionTypeDr1,
+	|	ExtDimensionsDr1.InternalBaseClass AS InternalBaseClassDr1,
+	|	ExtDimensionsDr1.InternalClass AS InternalClassDr1,
+	|
+	|	ExtDimensionsDr2.InternalRef AS ExtDimensionTypeDr2,
+	|	ExtDimensionsDr2.InternalBaseClass AS InternalBaseClassDr2,
+	|	ExtDimensionsDr2.InternalClass AS InternalClassDr2,
+	|
+	|	ExtDimensionsDr3.InternalRef AS ExtDimensionTypeDr3,
+	|	ExtDimensionsDr3.InternalBaseClass AS InternalBaseClassDr3,
+	|	ExtDimensionsDr3.InternalClass AS InternalClassDr3,
+	|
+	|	ExtDimensionsCr1.InternalRef AS ExtDimensionTypeCr1,
+	|	ExtDimensionsCr1.InternalBaseClass AS InternalBaseClassCr1,
+	|	ExtDimensionsCr1.InternalClass AS InternalClassCr1,
+	|
+	|	ExtDimensionsCr2.InternalRef AS ExtDimensionTypeCr2,
+	|	ExtDimensionsCr2.InternalBaseClass AS InternalBaseClassCr2,
+	|	ExtDimensionsCr2.InternalClass AS InternalClassCr2,
+	|
+	|	ExtDimensionsCr3.InternalRef AS ExtDimensionTypeCr3,
+	|	ExtDimensionsCr3.InternalBaseClass AS InternalBaseClassCr3,
+	|	ExtDimensionsCr3.InternalClass AS InternalClassCr3
+	|
+	|FROM
+	|	DataTable AS DataTable
+	|		LEFT JOIN Document.ExternalAccountingOperation AS Doc
+	|		ON Doc.RecorderRef = DataTable.RecorderRef
+	|		AND Doc.LedgerType = DataTable.LedgerType
+	|
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesDr
+	|		ON RegCurrenciesDr.ExternalRef = DataTable.CurrencyDrRef
+	|		AND RegCurrenciesDr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesCr
+	|		ON RegCurrenciesCr.ExternalRef = DataTable.CurrencyCrRef
+	|		AND RegCurrenciesCr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrencies
+	|		ON RegCurrencies.ExternalRef = DataTable.CurrencyRef
+	|		AND RegCurrencies.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9062S_AccountingMappingCompanies AS RegCompanies
+	|		ON RegCompanies.ExternalRef = DataTable.CompanyRef
+	|		AND RegCompanies.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS AccountsDr
+	|		ON AccountsDr.ExternalRef = DataTable.AccountDrRef
+	|		AND AccountsDr.ExternalChartName = DataTable.ChartNameDr
+	|		AND AccountsDr.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9061S_AccountingMappingAccounts AS AccountsCr
+	|		ON AccountsCr.ExternalRef = DataTable.AccountCrRef
+	|		AND AccountsCr.ExternalChartName = DataTable.ChartNameCr
+	|		AND AccountsCr.IntegrationSettings = &IntegrationSettings
+	|
+	|// analytics Dr
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr1
+	|		on ExtDimensionsDr1.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr1.ExternalRef = DataTable.ExtDimensionRefDr1
+	|		and ExtDimensionsDr1.ExternalBaseClass = DataTable.BaseClassDr1
+	|		and ExtDimensionsDr1.ExternalClass = DataTable.ClassDr1
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr2
+	|		on ExtDimensionsDr2.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr2.ExternalRef = DataTable.ExtDimensionRefDr2
+	|		and ExtDimensionsDr2.ExternalBaseClass = DataTable.BaseClassDr2
+	|		and ExtDimensionsDr2.ExternalClass = DataTable.ClassDr2
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsDr3
+	|		on ExtDimensionsDr3.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsDr3.ExternalRef = DataTable.ExtDimensionRefDr3
+	|		and ExtDimensionsDr3.ExternalBaseClass = DataTable.BaseClassDr3
+	|		and ExtDimensionsDr3.ExternalClass = DataTable.ClassDr3
+	|
+	|// analytics Cr
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr1
+	|		on ExtDimensionsCr1.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr1.ExternalRef = DataTable.ExtDimensionRefCr1
+	|		and ExtDimensionsCr1.ExternalBaseClass = DataTable.BaseClassCr1
+	|		and ExtDimensionsCr1.ExternalClass = DataTable.ClassCr1
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr2
+	|		on ExtDimensionsCr2.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr2.ExternalRef = DataTable.ExtDimensionRefCr2
+	|		and ExtDimensionsCr2.ExternalBaseClass = DataTable.BaseClassCr2
+	|		and ExtDimensionsCr2.ExternalClass = DataTable.ClassCr2
+	|
+	|		left join InformationRegister.T9065S_AccountingMappingExtDimensions AS ExtDimensionsCr3
+	|		on ExtDimensionsCr3.IntegrationSettings = &IntegrationSettings
+	|		and ExtDimensionsCr3.ExternalRef = DataTable.ExtDimensionRefCr3
+	|		and ExtDimensionsCr3.ExternalBaseClass = DataTable.BaseClassCr3
+	|		and ExtDimensionsCr3.ExternalClass = DataTable.ClassCr3
+	|";
+EndFunction
+	
+
+Function SendGETRequest(IntegrationSettings, Action, QueryParameters = Undefined) Export
+	
+	ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings);
+	ConnectionSettings.Value.QueryType = "GET";
+	
+	If Not ConnectionSettings.Success Then
+		Raise ConnectionSettings.Message;
+	EndIf;
+	
+	ResourceParameters = New Structure();
+	ResourceParameters.Insert("action", Action);
+	
+	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters, QueryParameters);
+	
+	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+		JsonObj = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
+	Else
+		Raise RequestResult.ResponseBody;
+	EndIf;
+	
+	Return JsonObj;
+EndFunction
+	
+Function SendPOSTRequest(IntegrationSettings, Action, Data) Export
+	
+	ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings);
+	ConnectionSettings.Value.QueryType = "POST";
+	
+	If Not ConnectionSettings.Success Then
+		Raise ConnectionSettings.Message;
+	EndIf;
+	
+	ResourceParameters = New Structure();
+	ResourceParameters.Insert("action", Action);
+	
+	RequestBody = CommonFunctionsServer.SerializeJSON(Data);
+	
+	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters,,RequestBody);
+	
+	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+		Return RequestResult.ResponseBody;
+	Else
+		Raise RequestResult.ResponseBody;
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
+
+
+

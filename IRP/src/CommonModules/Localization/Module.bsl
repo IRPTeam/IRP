@@ -1338,6 +1338,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	Strings.Insert("Error_148", NStr("en = 'Debit\Credit note is available only when amounts are equal.'", Lang));
+	Strings.Insert("Error_149", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2090,6 +2091,9 @@ Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTr
 
 Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
 	NStr("en = 'TaxesOperation DR (R5015B_OtherPartnersTransactions) CR (R1040B_TaxesOutgoing)'", Lang));
+
+Strings.Insert("ExternalAccountingOperation",
+	NStr("en = 'External accounting operation'", Lang));
 
 #EndRegion
 

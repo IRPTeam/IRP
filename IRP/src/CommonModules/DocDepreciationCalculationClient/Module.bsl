@@ -88,3 +88,21 @@ Procedure StatusEditTextChange(Object, Form, Item, Text, StandardProcessing) Exp
 EndProcedure
 
 #EndRegion
+
+#Region CALCULATIONS
+Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ViewClient_V2.CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CalculationsBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.CalculationsBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
+Procedure CalculationsBeforeDeleteRow(Object, Form, Item, Cancel) Export
+	Return;
+EndProcedure
+
+Procedure CalculationsAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.CalculationsAfterDeleteRow(Object, Form);
+EndProcedure
+#EndRegion

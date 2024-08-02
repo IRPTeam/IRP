@@ -384,7 +384,7 @@ Scenario: _4000130 check reports option share (all users)
 		And "OptionsList" table contains lines
 			| 'Author'   | 'Report option'   | 'Shared'    |
 			| 'CI'       | 'test_new'        | 'Yes'       |
-		And I go to line in "UsersList" table
+		And I go to line in "OptionsList" table
 			| 'Report option' |
 			| 'test_new'      |
 		And I select current line in "OptionsList" table

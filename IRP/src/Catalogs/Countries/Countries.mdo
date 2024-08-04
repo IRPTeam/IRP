@@ -278,6 +278,7 @@
       <key>en</key>
       <value>Country list</value>
     </synonym>
+    <comment>https://restcountries.com</comment>
     <templateType>BinaryData</templateType>
   </templates>
 </mdclass:Catalog>

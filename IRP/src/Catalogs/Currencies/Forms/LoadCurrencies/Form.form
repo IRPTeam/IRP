@@ -2,10 +2,10 @@
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
     <name>GroupTop</name>
-    <id>36</id>
+    <id>26</id>
     <items xsi:type="form:Button">
       <name>FormCreateSelected</name>
-      <id>38</id>
+      <id>28</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -14,7 +14,7 @@
       <defaultItem>true</defaultItem>
       <extendedTooltip>
         <name>FormCreateSelectedExtendedTooltip</name>
-        <id>39</id>
+        <id>29</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -38,10 +38,10 @@
     </items>
     <items xsi:type="form:FormGroup">
       <name>GroupLoading</name>
-      <id>26</id>
+      <id>30</id>
       <items xsi:type="form:Decoration">
         <name>LoadingImage</name>
-        <id>28</id>
+        <id>32</id>
         <title>
           <key>en</key>
           <value>Loading...</value>
@@ -53,7 +53,7 @@
         </userVisible>
         <extendedTooltip>
           <name>LoadingImageExtendedTooltip</name>
-          <id>30</id>
+          <id>34</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -68,7 +68,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>LoadingImageContextMenu</name>
-          <id>29</id>
+          <id>33</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -90,7 +90,7 @@
       </items>
       <items xsi:type="form:Decoration">
         <name>DecorationLoading</name>
-        <id>31</id>
+        <id>35</id>
         <title>
           <key>en</key>
           <value>Loading...</value>
@@ -102,7 +102,7 @@
         </userVisible>
         <extendedTooltip>
           <name>DecorationLoadingExtendedTooltip</name>
-          <id>33</id>
+          <id>37</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -117,7 +117,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>DecorationLoadingContextMenu</name>
-          <id>32</id>
+          <id>36</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -144,7 +144,7 @@
       <groupVerticalAlign>Center</groupVerticalAlign>
       <extendedTooltip>
         <name>GroupLoadingExtendedTooltip</name>
-        <id>27</id>
+        <id>31</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -170,7 +170,7 @@
     </items>
     <items xsi:type="form:FormGroup">
       <name>CommandBarMain</name>
-      <id>34</id>
+      <id>38</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -182,7 +182,7 @@
       </title>
       <extendedTooltip>
         <name>CommandBarMainExtendedTooltip</name>
-        <id>35</id>
+        <id>39</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -212,7 +212,7 @@
     </title>
     <extendedTooltip>
       <name>GroupTopExtendedTooltip</name>
-      <id>37</id>
+      <id>27</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -236,7 +236,7 @@
     </extInfo>
   </items>
   <items xsi:type="form:Table">
-    <name>CountryList</name>
+    <name>CurrencyList</name>
     <id>1</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -244,23 +244,58 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>CountryList</segments>
+      <segments>CurrencyList</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
-    <excludedCommands>EndEdit</excludedCommands>
-    <excludedCommands>ShowMultipleSelection</excludedCommands>
     <excludedCommands>Change</excludedCommands>
-    <excludedCommands>CopyToClipboard</excludedCommands>
-    <excludedCommands>FindByCurrentValue</excludedCommands>
-    <excludedCommands>SearchEverywhere</excludedCommands>
-    <excludedCommands>ShowRowRearrangement</excludedCommands>
-    <excludedCommands>Add</excludedCommands>
     <excludedCommands>Copy</excludedCommands>
-    <excludedCommands>SelectAll</excludedCommands>
-    <excludedCommands>SearchHistory</excludedCommands>
+    <excludedCommands>Add</excludedCommands>
     <excludedCommands>Delete</excludedCommands>
     <items xsi:type="form:FormField">
-      <name>CountryListExists</name>
+      <name>CurrencyListExists</name>
+      <id>40</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CurrencyList.Exists</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyListExistsExtendedTooltip</name>
+        <id>42</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyListExistsContextMenu</name>
+        <id>41</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>CheckBoxField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>CurrencyListCode</name>
       <id>14</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -268,10 +303,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>CountryList.Exists</segments>
+        <segments>CurrencyList.Code</segments>
       </dataPath>
       <extendedTooltip>
-        <name>CountryListExistsExtendedTooltip</name>
+        <name>CurrencyListCodeExtendedTooltip</name>
         <id>16</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -286,7 +321,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CountryListExistsContextMenu</name>
+        <name>CurrencyListCodeContextMenu</name>
         <id>15</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -295,16 +330,125 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <type>CheckBoxField</type>
-      <readOnly>true</readOnly>
+      <type>InputField</type>
       <editMode>Enter</editMode>
       <showInHeader>true</showInHeader>
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <width>1</width>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CountryListCode</name>
+      <name>CurrencyListNumericCode</name>
+      <id>17</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CurrencyList.NumericCode</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyListNumericCodeExtendedTooltip</name>
+        <id>19</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyListNumericCodeContextMenu</name>
+        <id>18</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <width>1</width>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>CurrencyListSymbol</name>
+      <id>23</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CurrencyList.Symbol</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrencyListSymbolExtendedTooltip</name>
+        <id>25</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrencyListSymbolContextMenu</name>
+        <id>24</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <width>1</width>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>CurrencyListDescription</name>
       <id>20</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -312,10 +456,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>CountryList.Code</segments>
+        <segments>CurrencyList.Description</segments>
       </dataPath>
       <extendedTooltip>
-        <name>CountryListCodeExtendedTooltip</name>
+        <name>CurrencyListDescriptionExtendedTooltip</name>
         <id>22</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -330,7 +474,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CountryListCodeContextMenu</name>
+        <name>CurrencyListDescriptionContextMenu</name>
         <id>21</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -353,108 +497,8 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
-    <items xsi:type="form:FormField">
-      <name>CountryListUserLangDescription</name>
-      <id>40</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>CountryList.UserLangDescription</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>CountryListUserLangDescriptionExtendedTooltip</name>
-        <id>42</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>CountryListUserLangDescriptionContextMenu</name>
-        <id>41</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>CountryListDescription</name>
-      <id>23</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>CountryList.Description</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>CountryListDescriptionExtendedTooltip</name>
-        <id>25</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>CountryListDescriptionContextMenu</name>
-        <id>24</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
     <autoCommandBar>
-      <name>CountryListCommandBar</name>
+      <name>CurrencyListCommandBar</name>
       <id>2</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -470,10 +514,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CountryListSearchString</name>
+      <name>CurrencyListSearchString</name>
       <id>5</id>
       <extendedTooltip>
-        <name>CountryListSearchStringExtendedTooltip</name>
+        <name>CurrencyListSearchStringExtendedTooltip</name>
         <id>7</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -488,7 +532,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CountryListSearchStringContextMenu</name>
+        <name>CurrencyListSearchStringContextMenu</name>
         <id>6</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -497,7 +541,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>CountryListSearchString</source>
+      <source>CurrencyListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -508,10 +552,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CountryListViewStatus</name>
+      <name>CurrencyListViewStatus</name>
       <id>11</id>
       <extendedTooltip>
-        <name>CountryListViewStatusExtendedTooltip</name>
+        <name>CurrencyListViewStatusExtendedTooltip</name>
         <id>13</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -526,7 +570,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CountryListViewStatusContextMenu</name>
+        <name>CurrencyListViewStatusContextMenu</name>
         <id>12</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -536,7 +580,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>CountryListViewStatus</source>
+      <source>CurrencyListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -547,10 +591,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CountryListSearchControl</name>
+      <name>CurrencyListSearchControl</name>
       <id>8</id>
       <extendedTooltip>
-        <name>CountryListSearchControlExtendedTooltip</name>
+        <name>CurrencyListSearchControlExtendedTooltip</name>
         <id>10</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -565,7 +609,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CountryListSearchControlContextMenu</name>
+        <name>CurrencyListSearchControlContextMenu</name>
         <id>9</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -575,13 +619,13 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>CountryListSearchControl</source>
+      <source>CurrencyListSearchControl</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>CountryListExtendedTooltip</name>
+      <name>CurrencyListExtendedTooltip</name>
       <id>4</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -596,7 +640,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>CountryListContextMenu</name>
+      <name>CurrencyListContextMenu</name>
       <id>3</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -650,10 +694,10 @@
   <showTitle>true</showTitle>
   <showCloseButton>true</showCloseButton>
   <attributes>
-    <name>CountryList</name>
+    <name>CurrencyList</name>
     <title>
       <key>en</key>
-      <value>Country list</value>
+      <value>Currency list</value>
     </title>
     <id>1</id>
     <valueType>
@@ -666,14 +710,15 @@
       <common>true</common>
     </edit>
     <columns>
-      <name>Exists</name>
+      <name>Code</name>
       <title>
         <key>en</key>
-        <value>Exists</value>
+        <value>Code</value>
       </title>
       <id>2</id>
       <valueType>
-        <types>Boolean</types>
+        <types>String</types>
+        <stringQualifiers/>
       </valueType>
       <view>
         <common>true</common>
@@ -683,12 +728,12 @@
       </edit>
     </columns>
     <columns>
-      <name>Code</name>
+      <name>NumericCode</name>
       <title>
         <key>en</key>
-        <value>Code</value>
+        <value>Numeric code</value>
       </title>
-      <id>5</id>
+      <id>3</id>
       <valueType>
         <types>Number</types>
         <numberQualifiers>
@@ -708,6 +753,24 @@
         <key>en</key>
         <value>Description</value>
       </title>
+      <id>4</id>
+      <valueType>
+        <types>String</types>
+        <stringQualifiers/>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Symbol</name>
+      <title>
+        <key>en</key>
+        <value>Symbol</value>
+      </title>
       <id>6</id>
       <valueType>
         <types>String</types>
@@ -721,13 +784,15 @@
       </edit>
     </columns>
     <columns>
-      <name>Data</name>
+      <name>Exists</name>
       <title>
         <key>en</key>
-        <value>Data</value>
+        <value>Exists</value>
       </title>
       <id>7</id>
-      <valueType/>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
       <view>
         <common>true</common>
       </view>
@@ -736,10 +801,10 @@
       </edit>
     </columns>
     <columns>
-      <name>UserLangDescription</name>
+      <name>Data</name>
       <title>
         <key>en</key>
-        <value>User lang description</value>
+        <value>Data</value>
       </title>
       <id>8</id>
       <valueType>

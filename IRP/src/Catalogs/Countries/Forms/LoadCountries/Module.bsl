@@ -26,7 +26,7 @@ Procedure CreateSelectedAtServer(RowIDList)
 			Continue;
 		EndIf; 
 		
-		Country = CommonFunctionsServer.DeserializeJSON(Row.Data, True);
+		Country = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.Data).Get();
 		
 		NewCountry = Catalogs.Countries.CreateItem();
 		NewCountry.Code = Country["ccn3"];
@@ -85,7 +85,7 @@ Procedure LoadCountryListAtServer()
 		NewRow.Code = Country["ccn3"];
 		NewRow.Description = Country["name"]["common"];
 		NewRow.Exists = Not Catalogs.Countries.FindByCode(NewRow.Code).IsEmpty();
-		NewRow.Data = CommonFunctionsServer.SerializeJSON(Country);
+		NewRow.Data = CommonFunctionsServer.SerializeXMLUseXDTO(New ValueStorage(Country, New Deflation(9)));
 		
 		If LangCode = Undefined Then
 			NewRow.UserLangDescription = NewRow.Description;

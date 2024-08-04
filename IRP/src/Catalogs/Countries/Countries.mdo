@@ -139,9 +139,10 @@
   </attributes>
   <attributes uuid="52fb26f1-4c82-4e8b-89e4-53bdb96f70cf">
     <name>ICAOCode</name>
+    <name>CIOCCode</name>
     <synonym>
       <key>en</key>
-      <value>ICAOCode</value>
+      <value>CIOC Code</value>
     </synonym>
     <type>
       <types>String</types>
@@ -173,17 +174,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="577b1bf2-2057-4adc-955d-74bac407026b">
-    <name>PassportCode</name>
+  <attributes uuid="e9c7537e-0802-4050-a2aa-2153b6889a44">
+    <name>Flag</name>
     <synonym>
       <key>en</key>
-      <value>Passport code</value>
+      <value>Flag</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
+      <types>ValueStorage</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -249,6 +247,11 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
+    <help>
+      <pages>
+        <lang>en</lang>
+      </pages>
+    </help>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
@@ -261,4 +264,21 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="4ea481c4-e3fb-4b4d-a17a-dc55f531afe2">
+    <name>LoadCountries</name>
+    <synonym>
+      <key>en</key>
+      <value>Load countries</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <templates uuid="432424d0-adac-4bfc-9e6d-75a4c49625c2">
+    <name>CountryList</name>
+    <synonym>
+      <key>en</key>
+      <value>Country list</value>
+    </synonym>
+    <templateType>BinaryData</templateType>
+  </templates>
 </mdclass:Catalog>

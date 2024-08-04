@@ -138,7 +138,6 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="52fb26f1-4c82-4e8b-89e4-53bdb96f70cf">
-    <name>ICAOCode</name>
     <name>CIOCCode</name>
     <synonym>
       <key>en</key>

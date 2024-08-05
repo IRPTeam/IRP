@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @CompanyCatalogs
@@ -17,35 +17,41 @@ Background:
 
 Scenario: _005010 filling in the "Countries" catalog
 	When set True value to the constant
-	* Clearing the Countries catalog
 		And I close all client application windows
-	* Open Country creation form
+	* Open Country list form
 		Given I open hyperlink "e1cib/list/Catalog.Countries"
-		And I click the button named "FormCreate"
-	* Data Filling - Turkey
-		And I click Open button of the field named "Description_en"
-		And I input "Poland" text in the field named "Description_en"
-		And I input "Poland TR" text in the field named "Description_tr"
-		And I input "Польша" text in "RU" field
-		And I click "Ok" button
-		And I click the button named "FormWriteAndClose"
-	* Data Filling - Ukraine
-		And I click the button named "FormCreate"
-		And Delay 2
-		And I click Open button of the field named "Description_en"
-		And I input "Ukraine" text in the field named "Description_en"
-		And I input "Ukraine TR" text in the field named "Description_tr"
-		And I input "Украина" text in the field named "Description_ru"
-		And I click "Ok" button
-		And I click the button named "FormWriteAndClose"
-		And Delay 5
+	* Load selected countries
+		And I click "Load countries" button
+		And I go to line in "CountryList" table
+			| "Code" | "Description" | "Exists" |
+			| "380"  | "Italy"       | "No"     |
+		And I click "Create selected" button
+		And I go to line in "CountryList" table
+			| "Code" | "Description" | "Exists" |
+			| "792"  | "Turkey"      | "No"     |
+		And I click "Create selected" button
+		And I go to line in "CountryList" table
+			| "Code" | "Description"    | "Exists" |
+			| "826"  | "United Kingdom" | "No"     |
+		And I click "Create selected" button
 	* Check for added countries in the catalog
-		Then I check for the "Countries" catalog element with the "Description_en" "Poland"
-		Then I check for the "Countries" catalog element with the "Description_tr" "Poland TR"
-		Then I check for the "Countries" catalog element with the "Description_ru" "Польша"
-		Then I check for the "Countries" catalog element with the "Description_en" "Ukraine"
-		Then I check for the "Countries" catalog element with the "Description_tr" "Ukraine TR"
-		Then I check for the "Countries" catalog element with the "Description_ru" "Украина"
-	# * Clean catalog Countries
-	# 	And I delete "Countries" catalog element with the Description_en "Turkey"
-	# 	And I delete "Countries" catalog element with the Description_en "Ukraine"
+		When in opened panel I select "Countries"
+		And "List" table became equal
+			| "Code" | "Alpha code 2" | "Alpha code 3" | "Description"    |
+			| "380"  | "IT"           | "ITA"          | "Italy"          |
+			| "792"  | "TR"           | "TUR"          | "Turkey"         |
+			| "826"  | "GB"           | "GBR"          | "United Kingdom" |
+		And I go to line in "List" table
+			| "Alpha code 2" | "Alpha code 3" | "Code" | "Description" |
+			| "TR"           | "TUR"          | "792"  | "Turkey"      |
+		And I select current line in "List" table
+		Then the form attribute named "PhonePrefix" became equal to "+9(0)"
+		And I close current window	
+	* Load all countries
+		When in opened panel I select "Load countries"
+		Then I select all lines of "CountryList" table
+		And I click "Create selected" button
+		And Delay 20
+	* Check
+		When in opened panel I select "Countries"
+		Then the number of "List" table lines is "равно" "249"

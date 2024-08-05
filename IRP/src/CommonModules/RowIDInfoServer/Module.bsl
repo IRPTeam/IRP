@@ -7342,7 +7342,7 @@ EndFunction
 Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType, Account";
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
 	ElsIf InternalDocAliase = Aliases.SC Or InternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
@@ -7356,7 +7356,7 @@ EndFunction
 Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Or ExternalDocAliase = Aliases.WS Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType, Account";
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,

@@ -220,17 +220,140 @@ Function GetAnalytics_ExternalAccountingOperation(Parameters)
 	
 	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
 	
+	If ValueIsFilled(AccountingAnalytics.LedgerType.SourceLedgerType) Then
+		Return MatchAnalytics(Parameters, AccountingAnalytics, AccountingAnalytics.LedgerType.SourceLedgerType);
+	EndIf;
+	
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
+EndFunction
+
+Function MatchAnalytics(Parameters, SourceAnalytics, SourceLedgerType)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
+
+	// Debit
+	AccountingAnalytics.Debit = MatchAccount(SourceAnalytics.Debit, 
+											 SourceAnalytics.DebitExtDimensions,
+											 SourceLedgerType, 
+											 SourceAnalytics.LedgerType);
+	
+	AdditionalAnalyticsDr = New Structure();
+	AdditionalAnalyticsDr.Insert("ExtDimDr1", Parameters.RowData.InternalExtDimensionValueDr1);
+	AdditionalAnalyticsDr.Insert("ExtDimDr2", Parameters.RowData.InternalExtDimensionValueDr2);
+	AdditionalAnalyticsDr.Insert("ExtDimDr3", Parameters.RowData.InternalExtDimensionValueDr3);
+				                                               
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsDr);
+
+	// Credit
+	AccountingAnalytics.Credit = MatchAccount(SourceAnalytics.Credit, 
+											  SourceAnalytics.CreditExtDimensions,
+											  SourceLedgerType, 
+											  SourceAnalytics.LedgerType); 
+
+	AdditionalAnalyticsCr = New Structure();
+	AdditionalAnalyticsCr.Insert("ExtDimCr1", Parameters.RowData.InternalExtDimensionValueCr1);
+	AdditionalAnalyticsCr.Insert("ExtDimCr2", Parameters.RowData.InternalExtDimensionValueCr2);
+	AdditionalAnalyticsCr.Insert("ExtDimCr3", Parameters.RowData.InternalExtDimensionValueCr3);
+	
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics, AdditionalAnalyticsCr);
+	
+	Return AccountingAnalytics;	
+EndFunction
+
+Function MatchAccount(SourceAccount, ExtDimensions, SourceLedgerType, TargetLedgerType)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.TargetAccount
+	|FROM
+	|	InformationRegister.T9068S_AccountingMappingAccountsMatching AS Reg
+	|WHERE
+	|	Reg.SourceLedgerType = &SourceLedgerType
+	|	AND Reg.TargetLedgerType = &TargetLedgerType
+	|	AND Reg.SourceAccount = &SourceAccount
+	|	AND (CASE
+	|		WHEN Reg.AllExtDimensionValues1
+	|			THEN TRUE
+	|		ELSE Reg.ExtDimensionValue1 = &ExtDimensionValue1
+	|	END
+	|	AND CASE
+	|		WHEN Reg.AllExtDimensionValues2
+	|			THEN TRUE
+	|		ELSE Reg.ExtDimensionValue2 = &ExtDimensionValue2
+	|	END
+	|	AND CASE
+	|		WHEN Reg.AllExtDimensionValues3
+	|			THEN TRUE
+	|		ELSE Reg.ExtDimensionValue3 = &ExtDimensionValue3
+	|	END)";
+	
+	Query.SetParameter("SourceLedgerType", SourceLedgerType);
+	Query.SetParameter("TargetLedgerType", TargetLedgerType);
+	Query.SetParameter("SourceAccount", SourceAccount);
+	
+	ExtDimensionType1 = AccountingServer.GetExtDimType_ByNumber(1, SourceAccount);
+	ExtDimensionValue1 = Undefined;
+	If ValueIsFilled(ExtDimensionType1) Then
+		ExtDimensionValue1 = GetExtDimensionValue(ExtDimensionType1, ExtDimensions);
+	EndIf;
+	Query.SetParameter("ExtDimensionValue1", ExtDimensionValue1);
+	
+	ExtDimensionType2 = AccountingServer.GetExtDimType_ByNumber(2, SourceAccount);
+	ExtDimensionValue2 = Undefined;
+	If ValueIsFilled(ExtDimensionType2) Then
+		ExtDimensionValue2 = GetExtDimensionValue(ExtDimensionType2, ExtDimensions);
+	EndIf;
+	Query.SetParameter("ExtDimensionValue2", ExtDimensionValue2);
+	
+	ExtDimensionType3 = AccountingServer.GetExtDimType_ByNumber(3, SourceAccount);
+	ExtDimensionValue3 = Undefined;
+	If ValueIsFilled(ExtDimensionType3) Then
+		ExtDimensionValue3 = GetExtDimensionValue(ExtDimensionType3, ExtDimensions);
+	EndIf;
+	Query.SetParameter("ExtDimensionValue3", ExtDimensionValue3);
+		
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	If QuerySelection.Next() Then
+		Return QuerySelection.TargetAccount;
+	EndIf;
+	
+	Return Undefined;
+EndFunction
+
+Function GetExtDimensionValue(ExtDimensionType, ExtDimensions)
+	For Each Row In ExtDimensions Do
+		If Row.ExtDimensionType = ExtDimensionType Then
+			Return Row.ExtDimension;
+		EndIf;
+	EndDo;
+	Return Undefined;
 EndFunction
 
 #EndRegion
 
 #EndRegion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

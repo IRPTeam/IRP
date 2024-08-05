@@ -5,6 +5,8 @@ Procedure GroupStepsOnCurrentPageChange(Item, CurrentPage)
 		FillAvailableChartsOfAccounts();
 	ElsIf CurrentPage = Items.GroupStep3 Then
 		 FillAvailableExtraDimensionTypes();
+	ElsIf CurrentPage = Items.GroupStep4 Then
+		FillAvailableTargetChartOfAccounts();
 	EndIf;
 EndProcedure
 
@@ -32,6 +34,32 @@ Procedure FillAvailableChartsOfAccounts()
 		Items.ChartOfAccount.ChoiceList.Add(QuerySelection.ExternalName, 
 			StrTemplate("%1 [%2]", QuerySelection.LedgerTypeVariant, QuerySelection.ExternalName));
 		ThisObject.LedgerTypeVariantsMapping.Insert(QuerySelection.ExternalName, QuerySelection.LedgerTypeVariant);
+	EndDo;
+EndProcedure
+
+&AtServer
+Procedure FillAvailableTargetChartOfAccounts()
+	Items.TargetChartOfAccount.ChoiceList.Clear();
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.ExternalName,
+	|	Reg.LedgerTypeVariant
+	|FROM
+	|	InformationRegister.T9060S_AccountingMappingChartsOfAccounts AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.ExternalName <> &ChartOfAccounts";
+	
+	Query.SetParameter("IntegrationSettings", ThisObject.IntegrationSettings);
+	Query.SetParameter("ChartOfAccounts", ThisObject.ChartOfAccount);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+		
+	While QuerySelection.Next() Do
+		Items.TargetChartOfAccount.ChoiceList.Add(QuerySelection.ExternalName);
 	EndDo;
 EndProcedure
 
@@ -77,7 +105,7 @@ EndProcedure
 
 &AtServer
 Procedure FillExternalChartOfAccountsAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "charts_of_accounts");
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "charts_of_accounts");
 	
 	Query = New Query();
 	Query.Text = 
@@ -95,7 +123,7 @@ Procedure FillExternalChartOfAccountsAtServer()
 	
 	ThisObject.ExternalChartsOfAccounts.Clear();
 	
-	For Each Row In Result Do
+	For Each Row In ResponseData.Data Do
 		NewRow = ThisObject.ExternalChartsOfAccounts.Add();
 		FillPropertyValues(NewRow, Row);
 		QuerySelection.Reset();
@@ -151,23 +179,14 @@ EndProcedure
 &AtClient
 Procedure FillExternalAccounts(Command)
 	FillExternalAccountsAtServer();
-	//AttachIdleHandler("ExpandExternalAccountsTree", 0.1, True);
 EndProcedure
-
-//&AtClient
-//Procedure ExpandExternalAccountsTree() Export
-//	CommonFormActions.ExpandTree(Items.ExternalAccounts, ThisObject.ExternalAccounts.GetItems());
-//EndProcedure
 
 &AtServer
 Procedure FillExternalAccountsAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "accounts", 
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "accounts", 
 		New Structure("chart", ThisObject.ChartOfAccount));
-	//ThisObject.ExternalAccounts.GetItems().Clear();
 	ThisObject.ExternalAccounts.Clear();
-	//Tree = FormAttributeToValue("ExternalAccounts", Type("ValueTree"));
-	For Each Row In Result Do
-		//NewRow = Tree.Rows.Add();
+	For Each Row In ResponseData.Data Do
 		NewRow = ThisObject.ExternalAccounts.Add();
 		NewRow.Ref               = Row.Ref;
 		NewRow.ParentRef         = Row.ParentRef;
@@ -192,45 +211,18 @@ Procedure FillExternalAccountsAtServer()
 				
 	EndDo;
 
-//	ArrayForDelete = New Array();
-	
-//	For Each Row In Tree.Rows Do
-//		If ValueIsFilled(Row.ParentRef) Then
-//			ParentRow = Tree.Rows.Find(Row.ParentRef, "Ref", True);
-//			If ParentRow = Undefined Then
-//				Raise StrTemplate("Not found parent row with ref:[%1]", Row.ParentRef);
-//			EndIf;
-//			NewRow = ParentRow.Rows.Add();
-//			FillPropertyValues(NewRow, Row);
-//			ArrayForDelete.Add(Row);
-//		EndIf;
-//	EndDo;
-	
-//	For Each Item In ArrayForDelete Do
-//		Tree.Rows.Delete(Item);
-//	EndDo;
-	
-//	Tree.Rows.Sort("Order", True);
 	ThisObject.ExternalAccounts.Sort("Order");
-	
-	
-//	ValueToFormAttribute(Tree, "ExternalAccounts");
-	
-	//GetMappingExternalAccountsAtServer(ThisObject.ExternalAccounts.GetItems());
 	GetMappingExternalAccountsAtServer();
 EndProcedure
 
 &AtServer
-//Procedure GetMappingExternalAccountsAtServer(Rows)
 Procedure GetMappingExternalAccountsAtServer()
-	//For Each Row In Rows Do
 	For Each Row In ThisObject.ExternalAccounts Do
-		InternalAccount = GetInternalAccount(Row.Ref, False);
+		InternalAccount = GetInternalAccount(ThisObject.ChartOfAccount, Row.Ref, False);
 		If ValueIsFilled(InternalAccount) Then
 			Row.Use = True;
 			Row.InternalRef = InternalAccount;
 		EndIf;
-		//GetMappingExternalAccountsAtServer(Row.GetItems())
 	EndDo;
 EndProcedure
 
@@ -241,16 +233,12 @@ EndProcedure
 
 &AtServer
 Procedure CreateAndMapAccounts()
-	//SetMappingExternalAccountsAtServer(ThisObject.ExternalAccounts.GetItems());
 	SetMappingExternalAccountsAtServer();
-	//SetParentForInternalAccountsAtServer(ThisObject.ExternalAccounts.GetItems());
 	SetParentForInternalAccountsAtServer();
 EndProcedure
 
 &AtServer
-//Procedure SetMappingExternalAccountsAtServer(Rows)
 Procedure SetMappingExternalAccountsAtServer()
-	//For Each Row In Rows Do
 	For Each Row In ThisObject.ExternalAccounts Do
 		If Row.Use Then
 			// create new internal account
@@ -278,33 +266,32 @@ Procedure SetMappingExternalAccountsAtServer()
 			RecordSet.Write();
 			
 		EndIf;
-//		SetMappingExternalAccountsAtServer(Row.GetItems())
 	EndDo;
 EndProcedure
 
 &AtServer
-Function CreateNewInternalAccount(TreeRow, AccountObj)
+Function CreateNewInternalAccount(Row, AccountObj)
 	MapAccountType = New Map();
 	MapAccountType.Insert(Upper("Active"), AccountType.Active);
 	MapAccountType.Insert(Upper("Passive"), AccountType.Passive);
 	MapAccountType.Insert(Upper("ActivePassive"), AccountType.ActivePassive);
 	
 	AccountObj.LedgerTypeVariant = ThisObject.LedgerTypeVariant;
-	AccountObj.Code = TreeRow.Code;
-	AccountObj.Order = TreeRow.Order;
-	AccountObj.Type = MapAccountType.Get(Upper(TreeRow.Type));
-	AccountObj.NotUsedForRecords = TreeRow.NotUsedForRecords;
-	AccountObj.Quantity = TreeRow.Quantity;
-	AccountObj.Currency = TreeRow.Currency;
-	AccountObj.OffBalance = TreeRow.OffBalance;
-	SetDescriptions(AccountObj, TreeRow);
+	AccountObj.Code = Row.Code;
+	AccountObj.Order = Row.Order;
+	AccountObj.Type = MapAccountType.Get(Upper(Row.Type));
+	AccountObj.NotUsedForRecords = Row.NotUsedForRecords;
+	AccountObj.Quantity = Row.Quantity;
+	AccountObj.Currency = Row.Currency;
+	AccountObj.OffBalance = Row.OffBalance;
+	SetDescriptions(AccountObj, Row);
 	
 	AccountObj.Write();
 	Return AccountObj.Ref;
 EndFunction
 
 &AtServer
-Function GetInternalAccount(ExternalRef, RaiseExceptionIfNotFound=True)
+Function GetInternalAccount(ExternalChartName, ExternalRef, RaiseExceptionIfNotFound)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -316,7 +303,7 @@ Function GetInternalAccount(ExternalRef, RaiseExceptionIfNotFound=True)
 	|	AND Reg.ExternalChartName = &ExternalChartName
 	|	AND Reg.ExternalRef = &ExternalRef";
 	Query.SetParameter("IntegrationSettings", ThisObject.IntegrationSettings);
-	Query.SetParameter("ExternalChartName", ThisObject.ChartOfAccount);
+	Query.SetParameter("ExternalChartName", ExternalChartName);
 	Query.SetParameter("ExternalRef", New UUID(ExternalRef));
 	
 	QueryResult = Query.Execute();
@@ -334,62 +321,301 @@ Function GetInternalAccount(ExternalRef, RaiseExceptionIfNotFound=True)
 EndFunction
 
 &AtServer
-//Procedure SetParentForInternalAccountsAtServer(Rows)
 Procedure SetParentForInternalAccountsAtServer()
-	//For Each Row In Rows Do
 	For Each Row In ThisObject.ExternalAccounts Do
 		If ValueIsFilled(Row.ParentRef) And ValueIsFilled(Row.InternalRef) Then
-			ParentAccount = GetInternalAccount(Row.ParentRef);
+			ParentAccount = GetInternalAccount(ThisObject.ChartOfAccount, Row.ParentRef, True);
 			ObjAccount = Row.InternalRef.GetObject();
 			ObjAccount.Parent = ParentAccount;
 			ObjAccount.Write();
 		EndIf;
-		//SetParentForInternalAccountsAtServer(Row.GetItems())
 	EndDo;
 EndProcedure
 
 &AtClient
 Procedure SelectAllExternalAccounts(Command)
-	//SetSelectedAccounts(ThisObject.ExternalAccounts.GetItems(), True);
 	SetSelectedAccounts(True);
 EndProcedure
 
 &AtClient
 Procedure UnselectAllExternalAccounts(Command)
-	//SetSelectedAccounts(ThisObject.ExternalAccounts.GetItems(), False);
 	SetSelectedAccounts(False);
 EndProcedure
 
 &AtClient
-//Procedure SetSelectedAccounts(Rows, Value)
 Procedure SetSelectedAccounts(Value)
 	For Each Row In ThisObject.ExternalAccounts Do
 		Row.Use = Value;
-//		SetSelectedAccounts(Row.GetItems(), Value);
 	EndDo;
 EndProcedure
 
 &AtClient
 Procedure ExternalAccountsUseOnChange(Item)
-//	CurrentData = Items.ExternalAccounts.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	If CurrentData.Use Then
-//		SetSelectedParentAccounts(CurrentData.GetParent());
-//	Else
-//		SetSelectedAccounts(CurrentData.GetItems(), False);
-//	EndIf;
+	Return;
 EndProcedure
 
-//&AtClient
-//Procedure SetSelectedParentAccounts(TreeRow)
-//	If TreeRow <> Undefined Then
-//		TreeRow.Use = True;
-//		SetSelectedParentAccounts(TreeRow.GetParent());
-//	EndIf;
-//EndProcedure
+#EndRegion
+
+#Region AccounMatching
+
+&AtClient
+Procedure FillAccountMatching(Command)
+	FillAccountMatchingAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillAccountMatchingAtServer()
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "account_matching");
+	
+	ThisObject.AccountMatching.Clear();
+	
+	For Each Row In ResponseData.Data Do
+		NewRow = ThisObject.AccountMatching.Add();
+		
+		NewRow.SourceAccountRef = Row.SourceAccount.Ref;
+		NewRow.SourceAccountCode = Row.SourceAccount.Code;
+		NewRow.SourceAccountDescription_en = Row.SourceAccount.Description_en;
+		NewRow.SourceAccountDescription_ru = Row.SourceAccount.Description_ru;
+		NewRow.SourceAccountDescription_tr = Row.SourceAccount.Description_tr;
+		
+		NewRow.TargetAccountRef = Row.TargetAccount.Ref;
+		NewRow.TargetAccountCode = Row.TargetAccount.Code;
+		NewRow.TargetAccountDescription_en = Row.TargetAccount.Description_en;
+		NewRow.TargetAccountDescription_ru = Row.TargetAccount.Description_ru;
+		NewRow.TargetAccountDescription_tr = Row.TargetAccount.Description_tr;
+		
+		NewRow.AllExtDimensionValues1 = Row.AllExtDimensionValues1;
+		NewRow.AllExtDimensionValues2 = Row.AllExtDimensionValues2;
+		NewRow.AllExtDimensionValues3 = Row.AllExtDimensionValues3;
+		
+		
+		// ext dimensions
+		For Each Analytic In Row.Analytics Do
+			NewRow["ExtDimensionRef" + Analytic.Number]  = Analytic.ExtDimensionRef;
+			NewRow["BaseClass" + Analytic.Number]        = Analytic.BaseClass;
+			NewRow["Class" + Analytic.Number]            = Analytic.Class;
+			NewRow["IsRef" + Analytic.Number]            = Analytic.IsRef;
+			
+			NewRow["ValueRef" + Analytic.Number] = Analytic.Value.Ref;
+			NewRow["ValueDescription_ru" + Analytic.Number] = Analytic.Value.Description_ru;
+			NewRow["ValueDescription_en" + Analytic.Number] = Analytic.Value.Description_en;
+			NewRow["ValueDescription_tr" + Analytic.Number] = Analytic.Value.Description_tr;
+		EndDo;
+				
+	EndDo;
+
+	ThisObject.AccountMatching.Sort("SourceAccountCode");
+	
+	GetMappingAccountMatchingAtServer();
+EndProcedure
+
+&AtServer
+Procedure GetMappingAccountMatchingAtServer()
+	For Each Row In ThisObject.AccountMatching Do
+		
+		Row.InternalSourceAccount = GetInternalAccount(ThisObject.ChartOfAccount, Row.SourceAccountRef, False);
+		Row.InternalTargetAccount = GetInternalAccount(ThisObject.TargetChartOfAccount, Row.TargetAccountRef, False);
+		
+		If ValueIsFilled(Row.ExtDimensionRef1) Then		
+			Result1 = GetInternalExtDimension(New UUID(Row.ExtDimensionRef1), Row.BaseClass1, Row.Class1);
+			Row.InternalExtDimension1 = Result1.InternalRef;
+			Row.InternalBaseClass1 = Result1.InternalBaseClass;
+			Row.InternalClass1 = Result1.InternalClass;
+		EndIf;
+		
+		If ValueIsFilled(Row.ExtDimensionRef2) Then		
+			Result2 = GetInternalExtDimension(New UUID(Row.ExtDimensionRef2), Row.BaseClass2, Row.Class2);
+			Row.InternalExtDimension2 = Result2.InternalRef;
+			Row.InternalBaseClass2 = Result2.InternalBaseClass;
+			Row.InternalClass2 = Result2.InternalClass;
+		EndIf;
+		
+		If ValueIsFilled(Row.ExtDimensionRef3) Then		
+			Result3 = GetInternalExtDimension(New UUID(Row.ExtDimensionRef3), Row.BaseClass3, Row.Class3);
+			Row.InternalExtDimension3 = Result3.InternalRef;
+			Row.InternalBaseClass3 = Result3.InternalBaseClass;
+			Row.InternalClass3 = Result3.InternalClass;			
+		EndIf;
+		
+		If ValueIsFilled(Row.ValueRef1) Then
+			Row.InternalExtDimensionValue1 = FindOrCreateAnalytic(Row, 1);
+		EndIf;
+		
+		If ValueIsFilled(Row.ValueRef2) Then
+			Row.InternalExtDimensionValue2 = FindOrCreateAnalytic(Row, 2);
+		EndIf;
+		
+		If ValueIsFilled(Row.ValueRef3) Then
+			Row.InternalExtDimensionValue3 = FindOrCreateAnalytic(Row, 3);
+		EndIf;
+		
+		Row.Use = GetExstingAccountMatching(Row);
+		
+	EndDo;
+EndProcedure
+
+Function FindOrCreateAnalytic(Row, Number)
+		
+		ExternalIsRef = Upper(Row["BaseClass" + Number]) = Upper("Catalogs") 
+						Or Upper(Row["BaseClass" + Number]) = Upper("Documents");
+		InternalIsRef = Upper(Row["InternalBaseClass" + Number]) = Upper("Catalogs") 
+						Or Upper(Row["InternalBaseClass" + Number]) = Upper("Documents");
+		
+		NewObjData = New Structure();
+		NewObjData.Insert("Description_ru", Row["ValueDescription_ru" + Number]);
+		NewObjData.Insert("Description_en", Row["ValueDescription_en" + Number]);
+		NewObjData.Insert("Description_tr", Row["ValueDescription_tr" + Number]);
+		
+		NewObjData.Insert("InternalBaseClass" , Row["InternalBaseClass" + Number]);
+		NewObjData.Insert("InternalClass"     , Row["InternalClass" + Number]);			
+		
+		NewObjData.Insert("ExternalBaseClass" , Row["BaseClass" + Number]);
+		NewObjData.Insert("ExternalClass"     , Row["Class" + Number]);
+		
+		If ExternalIsRef Then				
+			Return AccountingServer.FindOrCreateRefAnalytic(ThisObject.IntegrationSettings, 
+										   Row["ValueRef" + Number], 
+										   Row["InternalExtDimension" + Number], 
+										   NewObjData, InternalIsRef);
+		
+		ELsIf Not ExternalIsRef Then 
+			Return AccountingServer.FindOrCreateEnumAnalytic(ThisObject.IntegrationSettings, 
+			                                Row["ValueRef" + Number], 
+			                                Row["InternalExtDimension" + Number], 
+			                                NewObjData, InternalIsRef);
+		EndIf;
+		
+EndFunction
+
+&AtServer
+Function GetExstingAccountMatching(Row)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.TargetAccount
+	|FROM
+	|	InformationRegister.T9068S_AccountingMappingAccountsMatching AS Reg
+	|WHERE
+	|	Reg.IntegrationSettings = &IntegrationSettings
+	|	AND Reg.SourceLedgerType = &SourceLedgerType
+	|	AND Reg.SourceAccount = &SourceAccount
+	|	AND Reg.ExtDimensionType1 = &ExtDimensionType1
+	|	AND Reg.ExtDimensionValue1 = &ExtDimensionValue1
+	|	AND Reg.ExtDimensionType2 = &ExtDimensionType2
+	|	AND Reg.ExtDimensionValue2 = &ExtDimensionValue2
+	|	AND Reg.ExtDimensionType3 = &ExtDimensionType3
+	|	AND Reg.ExtDimensionValue3 = &ExtDimensionValue3
+	|	AND Reg.TargetLedgerType = &TargetLedgerType";
+	 
+	Query.SetParameter("IntegrationSettings" , ThisObject.IntegrationSettings);
+	Query.SetParameter("SourceLedgerType"    , ThisObject.SourceLedgerType);	
+	Query.SetParameter("TargetLedgerType"    , ThisObject.TargetLedgerType);
+	
+	Query.SetParameter("SourceAccount"       , Row.InternalSourceAccount);
+			
+	Query.SetParameter("ExtDimensionType1"   , Row.InternalExtDimension1);
+	Query.SetParameter("ExtDimensionValue1"  , Row.InternalExtDimensionValue1);
+	Query.SetParameter("ExtDimensionType2"   , Row.InternalExtDimension2);
+	Query.SetParameter("ExtDimensionValue2"  , Row.InternalExtDimensionValue2);		
+	Query.SetParameter("ExtDimensionType3"   , Row.InternalExtDimension3);
+	Query.SetParameter("ExtDimensionValue3"  , Row.InternalExtDimensionValue3);
+		
+	 QueryResult = Query.Execute();
+	 QuerySelection = QueryResult.Select();
+	 
+	 If QuerySelection.Next() Then
+	 	Return True
+	 EndIf;
+	 
+	 Return False; 
+EndFunction
+
+&AtClient
+Procedure SetMappingAccountMatching(Command)
+	SetMappingAccountMatchingAtServer()
+EndProcedure
+
+&AtServer
+Procedure SetMappingAccountMatchingAtServer()
+	CountMatches = 0;
+	For Each Row In ThisObject.AccountMatching Do
+		
+		RecordSet = InformationRegisters.T9068S_AccountingMappingAccountsMatching.CreateRecordSet();
+		RecordSet.Filter.IntegrationSettings.Set(ThisObject.IntegrationSettings);
+		
+		RecordSet.Filter.SourceLedgerType.Set(ThisObject.SourceLedgerType);
+		RecordSet.Filter.TargetLedgerType.Set(ThisObject.TargetLedgerType);
+		
+		RecordSet.Filter.SourceAccount.Set(Row.InternalSourceAccount);
+		
+		RecordSet.Filter.ExtDimensionType1.Set(Row.InternalExtDimension1);
+		RecordSet.Filter.ExtDimensionValue1.Set(Row.InternalExtDimensionValue1);
+		
+		RecordSet.Filter.ExtDimensionType2.Set(Row.InternalExtDimension2);
+		RecordSet.Filter.ExtDimensionValue2.Set(Row.InternalExtDimensionValue2);
+		
+		RecordSet.Filter.ExtDimensionType3.Set(Row.InternalExtDimension3);
+		RecordSet.Filter.ExtDimensionValue3.Set(Row.InternalExtDimensionValue3);
+		
+		If Not Row.Use Then
+			RecordSet.Clear();
+			RecordSet.Write();
+			Continue;
+		EndIf;
+		
+		CountMatches = CountMatches + 1;
+		
+		Record = RecordSet.Add();
+		
+		Record.IntegrationSettings = ThisObject.IntegrationSettings;
+		
+		Record.SourceLedgerType = ThisObject.SourceLedgerType;
+		Record.TargetLedgerType = ThisObject.TargetLedgerType;
+		
+		Record.SourceAccount = Row.InternalSourceAccount;
+		
+		Record.ExtDimensionType1 = Row.InternalExtDimension1;
+		Record.ExtDimensionValue1 = Row.InternalExtDimensionValue1;
+		
+		Record.ExtDimensionType2 = Row.InternalExtDimension2;
+		Record.ExtDimensionValue2 = Row.InternalExtDimensionValue2;
+		
+		Record.ExtDimensionType3 = Row.InternalExtDimension3;
+		Record.ExtDimensionValue3 = Row.InternalExtDimensionValue3;
+		
+		Record.TargetAccount = Row.InternalTargetAccount;
+		Record.TargetLedgerType = ThisObject.TargetLedgerType;
+		
+		Record.AllExtDimensionValues1 = Row.AllExtDimensionValues1;
+		Record.AllExtDimensionValues2 = Row.AllExtDimensionValues2;
+		Record.AllExtDimensionValues3 = Row.AllExtDimensionValues3;
+		
+		RecordSet.Write();
+	EndDo;
+	
+	If CountMatches > 0 Then
+		Obj = ThisObject.TargetLedgerType.GetObject();
+		Obj.SourceLedgerType = ThisObject.SourceLedgerType;
+		Obj.Write();
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure SelectAllAccountMatching(Command)
+	SetSelectedAccountMatching(True);
+EndProcedure
+
+&AtClient
+Procedure UnselectAllAccountMatching(Command)
+	SetSelectedAccountMatching(False);
+EndProcedure
+
+&AtClient
+Procedure SetSelectedAccountMatching(Value)
+	For Each Row In ThisObject.AccountMatching Do
+		Row.Use = Value;
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -402,7 +628,7 @@ EndProcedure
 
 &AtServer
 Procedure FillExtarnalCompaniesAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "companies");
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "companies");
 	
 	Query = New Query();
 	Query.Text = 
@@ -420,7 +646,7 @@ Procedure FillExtarnalCompaniesAtServer()
 	
 	ThisObject.ExternalCompanies.Clear();
 	
-	For Each Row In Result Do
+	For Each Row In ResponseData.Data Do
 		NewRow = ThisObject.ExternalCompanies.Add();
 		FillPropertyValues(NewRow, Row);
 		QuerySelection.Reset();
@@ -473,7 +699,7 @@ EndProcedure
 
 &AtServer
 Procedure FillExternalCurrenciesAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "currencies");
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "currencies");
 	
 	Query = New Query();
 	Query.Text = 
@@ -491,7 +717,7 @@ Procedure FillExternalCurrenciesAtServer()
 	
 	ThisObject.ExternalCurrencies.Clear();
 	
-	For Each Row In Result Do
+	For Each Row In ResponseData.Data Do
 		NewRow = ThisObject.ExternalCurrencies.Add();
 		FillPropertyValues(NewRow, Row);
 		QuerySelection.Reset();
@@ -544,7 +770,7 @@ EndProcedure
 
 &AtServer
 Procedure FillExternalRegistersAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "registers");
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "registers");
 	
 	Query = New Query();
 	Query.Text = 
@@ -562,7 +788,7 @@ Procedure FillExternalRegistersAtServer()
 	
 	ThisObject.ExternalRegisters.Clear();
 	
-	For Each Row In Result Do
+	For Each Row In ResponseData.Data Do
 		NewRow = ThisObject.ExternalRegisters.Add();
 		FillPropertyValues(NewRow, Row);
 		QuerySelection.Reset();
@@ -620,11 +846,11 @@ EndProcedure
 
 &AtServer
 Procedure FillExternalExtDimensionsAtServer()
-	Result = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "extdimensiontypes", 
+	ResponseData = AccountingServer.SendGETRequest(ThisObject.IntegrationSettings, "extdimensiontypes", 
 		New Structure("name", ThisObject.ExtraDimensionTypes));
 	ThisObject.ExternalExtDimensions.GetItems().Clear();
 	
-	For Each Row In Result Do
+	For Each Row In ResponseData.Data Do
 		ExternalRef = New UUID(Row.Ref);
 		
 		NewRow = ThisObject.ExternalExtDimensions.GetItems().Add();
@@ -667,7 +893,6 @@ EndProcedure
 Procedure CreateAndMapExtDimensions()
 	SetMappingExternalExtDimensionsAtServer();
 	FillExternalExtDimensionsAtServer();
-	//SetAccountExtDimensions(ThisObject.ExternalAccounts.GetItems());
 	SetAccountExtDimensions();
 EndProcedure
 
@@ -761,9 +986,7 @@ Procedure SetMappingExternalExtDimensionsAtServer()
 EndProcedure
 
 &AtServer
-//Procedure SetAccountExtDimensions(Rows)
 Procedure SetAccountExtDimensions()
-	//For Each Row In Rows Do
 	For Each Row In ThisObject.ExternalAccounts Do
 		If Row.Use  And ValueIsFilled(Row.InternalRef) Then
 			AccountObject = Row.InternalRef.GetObject();
@@ -799,7 +1022,6 @@ Procedure SetAccountExtDimensions()
 			
 			AccountObject.Write();
 		EndIf;
-		//SetAccountExtDimensions(Row.GetItems());
 	EndDo;
 EndProcedure
 
@@ -941,6 +1163,19 @@ Procedure TestPostRequestAtServer()
 EndProcedure
 
 &AtClient
+Procedure TestPostRequest2(Command)
+	TestPostRequest2AtServer();
+EndProcedure
+
+&AtServer
+Procedure TestPostRequest2AtServer()
+	Data = New Structure();
+	Data.Insert("Date", EndOfDay(ThisObject.TestOpeningEntryDate));
+	Data.Insert("RegisterName", ThisObject.TestRegisterName);	
+	ThisObject.TestPostResponse = AccountingServer.SendPOSTRequest(IntegrationSettings, "get_opening_entry", Data);	
+EndProcedure
+
+&AtClient
 Procedure TestLoadRecords(Command)
 	TestLoadRecordsAtServer();
 EndProcedure
@@ -955,6 +1190,15 @@ Procedure TestLoadRecordsAtServer()
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure TestLoadOpeningEntry(Command)
+	TestLoadOpeningEntryAtServer();
+EndProcedure
+
+&AtServer
+Procedure TestLoadOpeningEntryAtServer()
+	AccountingServer.LoadAccountingOpeningEntry(ThisObject.IntegrationSettings, ThisObject.TestOpeningEntryDate, ThisObject.TestRegisterName);
+EndProcedure
 
 
 

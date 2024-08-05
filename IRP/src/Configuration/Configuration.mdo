@@ -438,6 +438,7 @@
   <roles>Role.Document_TaxesOperation</roles>
   <roles>Role.AttachedFilesDelete</roles>
   <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
+  <roles>Role.Document_ExternalAccountingOperation</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -765,6 +766,7 @@
   <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
   <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
   <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
+  <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -1453,6 +1455,7 @@
   <informationRegisters>InformationRegister.T9065S_AccountingMappingExtDimensions</informationRegisters>
   <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
   <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
+  <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -3,7 +3,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.TextUUID = Parameters.TextUUID;
-	If Parameters.Property("ReadOnly") Then
+	If Parameters.Property("ReadOnly") And TypeOf(Parameters.ReadOnly) = Type("Boolean") Then
 		Items.TextUUID.ReadOnly = Parameters.ReadOnly;
 	EndIf;
 EndProcedure

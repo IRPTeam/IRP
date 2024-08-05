@@ -17,4 +17,6 @@
   <content>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</content>
   <content>Document.ExternalAccountingOperation</content>
   <content>InformationRegister.T9064S_AccountingMappingRegisters</content>
+  <content>InformationRegister.T9068S_AccountingMappingAccountsMatching</content>
+  <content>Catalog.LedgerTypes.Attribute.SourceLedgerType</content>
 </mdclass:FunctionalOption>

@@ -941,6 +941,13 @@
         <value>154</value>
       </code>
     </items>
+    <items id="c9a0f2b6-d7c8-495c-bbc6-d95ccbe7f001">
+      <name>Document_ExternalAccountingOperation</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>155</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

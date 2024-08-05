@@ -33,23 +33,36 @@ Procedure CreateSelectedAtServer(RowIDList)
 		NewCountry.AlphaCode3 = Country["cca3"];
 		NewCountry.AlphaCode2 = Country["cca2"];
 		NewCountry.CIOCCode = Country["cioc"];
-		NewCountry.PhonePrefix = Country["idd"]["root"] + "(" + StrConcat(Country["idd"]["suffixes"], ";") + ")";
+		If Not Country["idd"]["suffixes"] = Undefined Then
+			NewCountry.PhonePrefix = Country["idd"]["root"] + "(" + StrConcat(Country["idd"]["suffixes"], ";") + ")";
+		EndIf;
 		NewCountry.Currency = Country["ccn3"];
 		NewCountry.Description_en = Country["name"]["common"];
 		NewCountry.Description_ru = GetLangName(Country, LangMap.ru);
 		NewCountry.Description_tr = GetLangName(Country, LangMap.tr);
-		//https://flagcdn.com/w20/ua.png
-		HTTP = New HTTPConnection("flagcdn.com", , , , , True);
-		Request = New HTTPRequest("/w20/" + Lower(NewCountry.AlphaCode2) + ".png");
-		Result = HTTP.Get(Request);
-		If Result.StatusCode = 200 Then
-			NewCountry.Flag = New ValueStorage(Result.GetBodyAsBinaryData());
-		EndIf;
-		
+		NewCountry.Flag = GetFlag(NewCountry);
 		NewCountry.Write();
 		Row.Exists = True;
 	EndDo;
 EndProcedure
+
+&AtServer
+Function GetFlag(NewCountry)
+	Result = Undefined;
+	Try
+		HTTP = New HTTPConnection("flagcdn.com", , , , , True);
+		Request = New HTTPRequest("/w20/" + Lower(NewCountry.AlphaCode2) + ".png");
+		Result = HTTP.Get(Request);
+		If Result.StatusCode = 200 Then
+			Result = New ValueStorage(Result.GetBodyAsBinaryData());
+		Else
+			WriteLogEvent("Load Flag", EventLogLevel.Error, , , Result.StatusCode + ": " + Result.GetBodyAsString());
+		EndIf;
+	Except
+		WriteLogEvent("Load Flag", EventLogLevel.Error, , , ErrorProcessing.DetailErrorDescription(ErrorInfo()));
+	EndTry;
+	Return Result;
+EndFunction
 
 &AtServer
 Function GetLangName(Country, LangCode)

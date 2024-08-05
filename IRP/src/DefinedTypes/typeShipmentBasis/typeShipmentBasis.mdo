@@ -9,6 +9,7 @@
     <value>Type shipment basis</value>
   </synonym>
   <type>
+    <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.RetailShipmentConfirmation</types>
     <types>DocumentRef.ShipmentConfirmation</types>

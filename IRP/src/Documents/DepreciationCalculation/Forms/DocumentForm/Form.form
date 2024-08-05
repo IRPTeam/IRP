@@ -702,6 +702,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>Object.Calculations.FixedAsset</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>CalculationsFixedAssetOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>CalculationsFixedAssetExtendedTooltip</name>
             <id>39</id>
@@ -1212,6 +1216,22 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
+        <handlers>
+          <event>Selection</event>
+          <name>CalculationsSelection</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>CalculationsBeforeAddRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>CalculationsBeforeDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>CalculationsAfterDeleteRow</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

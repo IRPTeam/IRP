@@ -48,7 +48,7 @@ EndProcedure
 &AtClient
 Async Procedure DoChangeIconAction()
 	QueryText = R().QuestionToUser_016;
-	QueryButtons = New ValueList();
+	QueryButtons = New ValueList(); // ValueList Of String
 	QueryButtons.Add("Change", R().Form_017);
 	QueryButtons.Add("Clear", R().Form_018);
 	QueryButtons.Add("Cancel", R().Form_019);

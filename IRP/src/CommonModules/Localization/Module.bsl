@@ -1338,7 +1338,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	Strings.Insert("Error_148", NStr("en = 'Debit\Credit note is available only when amounts are equal.'", Lang));
-	Strings.Insert("Error_149", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
+
+	Strings.Insert("Error_149", NStr("en = 'Fill field'", Lang));
+	Strings.Insert("Error_150", NStr("en = 'Can not find file at data base'", Lang));
+	Strings.Insert("Error_151", NStr("en = 'Can not find file at storage service'", Lang));
+	Strings.Insert("Error_152", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
+	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1654,6 +1659,11 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Setiings_010", NStr("en = 'Linked documents'", Lang));
 	Strings.Insert("Add_Setiings_011", NStr("en = 'Use reverse tree'", Lang));
 	Strings.Insert("Add_Setiings_012", NStr("en = 'Enable - Change price type'", Lang));
+	Strings.Insert("Add_Settings_013", NStr("en = 'Attached files to documents control'", Lang));
+	Strings.Insert("Add_Settings_014", NStr("en = 'Enable - Change filters'", Lang));
+	Strings.Insert("Add_Settings_015", NStr("en = 'Enable - Check-mode'", Lang));
+	Strings.Insert("Add_Settings_016", NStr("en = 'Company'", Lang));
+	Strings.Insert("Add_Settings_017", NStr("en = 'Branch'", Lang));
 #EndRegion
 
 #Region Mobile

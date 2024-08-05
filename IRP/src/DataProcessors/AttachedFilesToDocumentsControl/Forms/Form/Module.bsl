@@ -5,9 +5,8 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
-	Object.Period.StartDate = BegOfYear(CurrentSessionDate());
-	Object.Period.EndDate = EndOfYear(CurrentSessionDate());
-	
+	FillDefaultSettings();
+	SetVisibilityAvailability();
 	FillDocumentsToControl();
 		
 EndProcedure
@@ -802,7 +801,7 @@ Procedure UpdateAttachedFiles(DocRef, RowID)
 	EndDo;
 EndProcedure
 
-&AtClıent
+&AtClient
 Function GetSelectedDocs()
 	
 	DocsArray = New Array; // Array of DocumentRef
@@ -998,6 +997,36 @@ Procedure CurrentFilesTableSelection(Item, SelectedRow, Field, StandardProcessin
 	OpenForm("DataProcessor.AttachedFilesToDocumentsControl.Form.PictureViewer", Structure, , , , , ,FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
+
+&AtServer
+Procedure FillDefaultSettings()
+	CurrentUser = SessionParameters.CurrentUser;
+	
+	Object.Period.StartDate = BegOfYear(CurrentSessionDate());
+	Object.Period.EndDate = EndOfYear(CurrentSessionDate());
+	Company = UserSettingsServer.AttachedFilesToDocumentsControl_AdditionalSettings_CompanyFilter(CurrentUser);
+	//@skip-check typed-value-adding-to-untyped-collection
+	Branch.Add(UserSettingsServer.AttachedFilesToDocumentsControl_AdditionalSettings_BranchFilter(CurrentUser));
+EndProcedure	
+
+&AtServer
+Procedure SetVisibilityAvailability()
+	CurrentUser = SessionParameters.CurrentUser;
+	
+	EnableChangeFilters = UserSettingsServer.AttachedFilesToDocumentsControl_AdditionalSettings_EnableChangeFilters(CurrentUser);
+	EnableCheckMode = UserSettingsServer.AttachedFilesToDocumentsControl_AdditionalSettings_EnableCheckMode(CurrentUser);
+	
+	ArrayFilterItems = New Array; //Array of String
+	ArrayFilterItems.Add("Company");
+	ArrayFilterItems.Add("Branch");
+	
+	For Each ArrayItem In ArrayFilterItems Do
+		Items[ArrayItem].ReadOnly = Not EnableChangeFilters;	
+	EndDo;
+		
+	Items.CheckMode.Enabled = EnableCheckMode;	
+	
+EndProcedure	
 
 #EndRegion
 

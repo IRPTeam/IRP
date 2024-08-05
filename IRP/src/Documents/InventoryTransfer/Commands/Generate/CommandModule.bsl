@@ -5,11 +5,16 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		"Document.InventoryTransfer.EmptyRef")));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen", True);
-
-	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
-		New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+	
+	If TypeOf(CommandParameter[0]) = Type("DocumentRef.PurchaseInvoice") Then
+		Result = DocInventoryTransferServer.GetDataFromPI(CommandParameter);
+		AddDocumentRowsContinue(Result, New Structure);
+	Else
+		OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+			New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
+	EndIf;
 EndProcedure
-
+	
 &AtClient
 Procedure AddDocumentRowsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then

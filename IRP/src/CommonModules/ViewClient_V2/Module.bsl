@@ -2945,6 +2945,40 @@ EndProcedure
 
 #EndRegion
 
+#Region _CALCULATIONS
+
+Procedure CalculationsAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "Calculations", "CalculationsAfterDeleteRowFormNotify");
+EndProcedure
+
+Function CalculationsBeforeAddRow(Object, Form, Cancel = False, Clone = False, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "Calculations", Cancel, Clone, CurrentData,
+		"CalculationsOnAddRowFormNotify", "CalculationsOnCopyRowFormNotify");
+	Form.Items.Calculations.CurrentRow = NewRow.GetID();
+	If Form.Items.Calculations.CurrentRow <> Undefined Then
+		Form.Items.Calculations.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure CalculationsSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export
+	ListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+Procedure CalculationsOnAddRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsOnCopyRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+Procedure CalculationsAfterDeleteRowFormNotify(Parameters) Export
+	Parameters.Form.Modified = True;
+EndProcedure
+
+#EndRegion
+
 #Region _TRANSACTIONS_LIST_COLUMNS
 
 // Transactions.Partner

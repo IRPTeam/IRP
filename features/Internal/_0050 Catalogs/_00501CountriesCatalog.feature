@@ -54,4 +54,4 @@ Scenario: _005010 filling in the "Countries" catalog
 		And Delay 20
 	* Check
 		When in opened panel I select "Countries"
-		Then the number of "List" table lines is "равно" "249"
+		Then the number of "List" table lines is "равно" "250"

@@ -14,7 +14,7 @@ Procedure Ok(Command)
 	Try
 		_UUID = New UUID(ThisObject.TextUUID);
 	Except
-		ShowMessageBox(, StrTemplate(R().Error_149, ThisObject.TextUUID));
+		ShowMessageBox(, StrTemplate(R().Error_152, ThisObject.TextUUID));
 		Return;
 	EndTry;
 	Close(_UUID);

@@ -1110,6 +1110,8 @@ Function BindAccount(Parameters)
 	DataPath.Insert("OutgoingPaymentOrder", "Account");
 	DataPath.Insert("BankPayment"   , "Account");
 	DataPath.Insert("BankReceipt"   , "Account");
+	DataPath.Insert("SalesOrder"   , "Account");
+	DataPath.Insert("SalesInvoice"   , "Account");
 	DataPath.Insert("CashPayment"   , "CashAccount");
 	DataPath.Insert("CashReceipt"   , "CashAccount");
 	DataPath.Insert("CashExpense"   , "Account");

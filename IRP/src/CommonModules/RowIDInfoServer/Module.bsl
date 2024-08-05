@@ -2648,6 +2648,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref AS PurchaseBasis,
 	|	ItemList.Ref AS Requester,
 	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+	|	ItemList.Ref.Account AS Account,
 	|	ItemList.Ref.Partner AS Partner,
 	|	ItemList.Ref.LegalName AS LegalName,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -7341,7 +7342,7 @@ EndFunction
 Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType";
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, TransactionType, Account";
 		Result.ItemList = "Item, ItemKey, Store, SalesOrder, WorkOrder";
 	ElsIf InternalDocAliase = Aliases.SC Or InternalDocAliase = Aliases.WS Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
@@ -7355,7 +7356,7 @@ EndFunction
 Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Or ExternalDocAliase = Aliases.WS Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType, Account";
 		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, UseWorkSheet, SalesOrder, WorkOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
@@ -11254,7 +11255,7 @@ EndFunction
 
 Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Undefined) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName, Account" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
@@ -11597,6 +11598,7 @@ Function GetColumnNames_ItemList()
 		   |Key,
 		   |BasedOn,
 		   |Company,
+		   |Account,
 		   |Partner,
 		   |LegalName,
 		   |Agreement,

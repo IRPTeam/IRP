@@ -330,6 +330,7 @@
   <roles>Role.UseExternalReports</roles>
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
+  <roles>Role.AccountingReports</roles>
   <roles>Role.AccumulationRegisters_CashInTransit</roles>
   <roles>Role.AccumulationRegisters_DELETE_R8010B_TradeAgentInventory</roles>
   <roles>Role.AccumulationRegisters_DELETE_R8011B_TradeAgentSerialLotNumber</roles>

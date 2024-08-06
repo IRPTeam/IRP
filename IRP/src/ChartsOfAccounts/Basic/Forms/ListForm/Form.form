@@ -483,6 +483,10 @@
     <items xsi:type="form:FormField">
       <name>ExtraDimension1</name>
       <id>60</id>
+      <title>
+        <key>en</key>
+        <value>Ext. Dim 1</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -533,6 +537,10 @@
     <items xsi:type="form:FormField">
       <name>ExtraDimension2</name>
       <id>63</id>
+      <title>
+        <key>en</key>
+        <value>Ext. Dim 2</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -583,6 +591,10 @@
     <items xsi:type="form:FormField">
       <name>ExtraDimension3</name>
       <id>66</id>
+      <title>
+        <key>en</key>
+        <value>Ext. Dim 3</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -924,6 +936,10 @@
   <showCloseButton>true</showCloseButton>
   <attributes>
     <name>List</name>
+    <title>
+      <key>en</key>
+      <value>Ext. Dim 1</value>
+    </title>
     <id>1</id>
     <valueType>
       <types>DynamicList</types>

@@ -79,7 +79,7 @@ Procedure FillTable()
 	|			&Boundary,
 	|			Company = &Company
 	|				AND Branch = &Branch
-	|				AND Currency = &Currency
+	|				AND Agreement.CurrencyMovementType.Currency = &Currency
 	|				AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|				AND (VALUETYPE(Basis) IN (&AllowedTypes)
 	|					OR Basis = UNDEFINED)

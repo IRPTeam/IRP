@@ -810,7 +810,7 @@ Procedure FillDocumentAmountTable(DocumentAmountTable, ArrayOfocuments, Order_Co
 		DocHeader = New Structure();
 		DocHeader.Insert("Company"   , DocRef.Company);
 		DocHeader.Insert("Branch"    , DocRef.Branch);
-		DocHeader.Insert("Currency"  , DocRef.Currency);
+		DocHeader.Insert("Currency"  , DocRef.Agreement.CurrencyMovementType.Currency);
 		DocHeader.Insert("Partner"   , DocRef.Partner);
 		DocHeader.Insert("LegalName" , DocRef.LegalName);
 		DocHeader.Insert("Agreement" , DocRef.Agreement);

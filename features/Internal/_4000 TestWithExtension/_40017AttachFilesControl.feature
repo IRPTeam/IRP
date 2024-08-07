@@ -72,6 +72,33 @@ Scenario: _4001701 preparation (Attach Files Control)
 		And I select current line in "List" table
 		And I click "Save and close" button
 		And Delay 3
+	* User settings
+		Given I open hyperlink "e1cib/list/Catalog.Users"
+		And I go to line in "List" table
+			| 'Login' |
+			| 'CI'    |
+		And I click "Settings" button
+		And I go to line in "MetadataTree" table
+			| "Group name"              | "Use" |
+			| "Enable - Change filters" | "No"  |
+		And I activate "Value" field in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| "Group name"          | "Use" |
+			| "Enable - Check-mode" | "No"  |
+		And I select current line in "MetadataTree" table
+		And I select current line in "MetadataTree" table
+		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I go to line in "MetadataTree" table
+			| "Group name" | "Use" |
+			| "Company"    | "No"  |
+		And I select current line in "MetadataTree" table
+		And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
+		And I finish line editing in "MetadataTree" table
+		And I click "Ok" button
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one	
 		
@@ -169,6 +196,7 @@ Scenario: _4001711 check mandatory documents for RRR (jpg)
 	And I close all client application windows
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
+		And I click Clear button of the field named "Branch"
 		And I click Choice button of the field named "Period"
 		And I click "Clear period" button			
 		And I input "01.01.2023" text in the field named "DateBegin"
@@ -210,6 +238,7 @@ Scenario: _4001713 check optional documents for RRR (pdf)
 	And I close all client application windows
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
+		And I click Clear button of the field named "Branch"
 		And I click Choice button of the field named "Period"
 		And I click "Clear period" button			
 		And I input "01.01.2023" text in the field named "DateBegin"
@@ -244,6 +273,7 @@ Scenario: _4001715 check Date, Company and Branch filters
 	And I close all client application windows
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
+		And I click Clear button of the field named "Branch"
 		And I click Choice button of the field named "Period"
 		And I click "Clear period" button			
 		And I input "01.01.2023" text in the field named "DateBegin"
@@ -313,6 +343,7 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 	And I close all client application windows
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
+		And I click Clear button of the field named "Branch"
 		And I click Choice button of the field named "Period"
 		And I click "Clear period" button			
 		And I input "01.01.2023" text in the field named "DateBegin"

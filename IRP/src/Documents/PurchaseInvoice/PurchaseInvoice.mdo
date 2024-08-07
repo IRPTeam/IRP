@@ -120,6 +120,7 @@
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -300,6 +301,21 @@
     <synonym>
       <key>en</key>
       <value>Record purchase prices</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="daf45082-29e1-4de2-ba5c-0e14a611f958">
+    <name>StoreDistributedPurchase</name>
+    <synonym>
+      <key>en</key>
+      <value>Store distributed purchase</value>
     </synonym>
     <type>
       <types>Boolean</types>

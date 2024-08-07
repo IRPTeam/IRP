@@ -183,12 +183,12 @@ Scenario: _041906 check Stock adjustment as write off movements by the Register 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Stock adjustment as write-off 1 201 dated 11.08.2023 12:20:03' | ''            | ''                    | ''          | ''           | ''                                                 | ''         |
-			| 'Document registrations records'                                | ''            | ''                    | ''          | ''           | ''                                                 | ''         |
-			| 'Register  "R4032 Goods in transit (outgoing)"'                 | ''            | ''                    | ''          | ''           | ''                                                 | ''         |
-			| ''                                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''         |
-			| ''                                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key' |
-			| ''                                                              | 'Expense'     | '11.08.2023 12:20:03' | '2'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | 'XS/Blue'  |
+			| 'Stock adjustment as write-off 1 201 dated 11.08.2023 12:20:03' | ''            | ''                    | ''          | ''           | ''                                                 | ''         | ''                   |
+			| 'Document registrations records'                                | ''            | ''                    | ''          | ''           | ''                                                 | ''         | ''                   |
+			| 'Register  "R4032 Goods in transit (outgoing)"'                 | ''            | ''                    | ''          | ''           | ''                                                 | ''         | ''                   |
+			| ''                                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                                                 | ''         | ''                   |
+			| ''                                                              | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                            | 'Item key' | 'Serial lot number'  |
+			| ''                                                              | 'Expense'     | '11.08.2023 12:20:03' | '2'         | 'Store 06'   | 'Physical inventory 201 dated 15.03.2021 15:29:31' | 'XS/Blue'  | ''                   |
 	And I close all client application windows
 
 

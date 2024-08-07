@@ -4529,3 +4529,18 @@ Scenario: _092104 create a serial lot number with dependent serial lot numbers
 			| 'Serial number'   |
 			| '90899808089'     |
 	And I close all client application windows
+
+Scenario: _092105 barcodes link in SerialLotNumbers form
+	And I close all client application windows
+	* Select sln
+		Given I open hyperlink "e1cib/list/Catalog.SerialLotNumbers"
+		And I go to line in "List" table
+			| "Owner" | "Serial number"  |
+			| "UNIQ"  | "09987897977890" |
+		And I select current line in "List" table
+	* Check barcode
+		And In this window I click command interface button "Barcodes"
+		And "List" table became equal
+			| "Barcode"       | "Item key" | "Item serial/lot number" | "Source of origin" | "Unit" |
+			| "7889000090010" | "UNIQ"     | "09987897977890"         | ""                 | "pcs"  |
+	And I close all client application windows

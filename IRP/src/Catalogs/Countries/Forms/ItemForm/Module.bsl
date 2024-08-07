@@ -1,3 +1,10 @@
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	Flag = PutToTempStorage(CurrentObject.Flag.Get(), UUID);
+EndProcedure
+
+
 #Region FormEvents
 
 &AtServer

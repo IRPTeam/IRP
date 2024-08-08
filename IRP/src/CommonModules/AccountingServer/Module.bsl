@@ -535,8 +535,7 @@ Function GetLedgerTypesByCompany(Ref, Date, Company) Export
 EndFunction
 
 Function GetMatchingLedgerTypes(LedgerType)
-//	Return AccountingServerReuse.GetMatchingLedgerTypes(LedgerType);
-	Return __GetMatchingLedgerTypes(LedgerType);
+	Return AccountingServerReuse.GetMatchingLedgerTypes(LedgerType);
 EndFunction
 
 Function __GetMatchingLedgerTypes(LedgerType) Export
@@ -3022,98 +3021,98 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 	Errors = New Array();
 	
 	For Each LedgerType In AvailableLedgerTypes Do
-	For Each Row In AccountingRowAnalytics Do
-		If LedgerType <> Row.LedgerType Then
-			Continue;
-		EndIf;
-		
-		DataByAnalytics = GetDataByAccountingAnalytics(BasisDoc, Row);
-		
-		If Not ValueIsFilled(DataByAnalytics.Amount) Then
-			Continue;
-		EndIf;
-		
-		If Not ValueIsFilled(Row.AccountDebit) Then
-			If Not (ValueIsFilled(Row.AccountCredit) And Row.AccountCredit.OffBalance) Then
-				Errors.Add(StrTemplate("Debit is empty [%1] row-key[%2]", Row.Operation, TrimAll(Row.Key)));
+		For Each Row In AccountingRowAnalytics Do
+			If LedgerType <> Row.LedgerType Then
 				Continue;
 			EndIf;
-		EndIf;
-		
-		If Not ValueIsFilled(Row.AccountCredit) Then
-			If Not (ValueIsFilled(Row.AccountDebit) And Row.AccountDebit.OffBalance) Then
-				Errors.Add(StrTemplate("Credit is empty [%1] row-key[%2]", Row.Operation, TrimAll(Row.Key)));
+			
+			DataByAnalytics = GetDataByAccountingAnalytics(BasisDoc, Row);
+			
+			If Not ValueIsFilled(DataByAnalytics.Amount) Then
 				Continue;
 			EndIf;
-		EndIf;
-				
-		Record = DataTable.Add();
-		Record.Period     = BasisDoc.Date;
-		Record.Company    = BasisDoc.Company;
-		Record.LedgerType = Row.LedgerType;
-		Record.Operation  = Row.Operation;
-		Record.IsFixed    = Row.IsFixed;
-		Record.IsByRow    = ValueIsFilled(Row.Key);
-		Record.Key        = Row.Key;
-		
-		Filter = New Structure();
-		Filter.Insert("Key"          , Row.Key);
-		Filter.Insert("Operation"    , Row.Operation);
-		Filter.Insert("LedgerType"   , Row.LedgerType);
-		Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
-		
-		// Debit analytics
-		Record.AccountDr = Row.AccountDebit;
-		
-		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
-		AccountingExtDimDr = AccountingExtDimensions.FindRows(Filter);
-		
-		Record.ExtDimDrType1 = GetExtDimType_ByNumber(1, Record.AccountDr);
-		Record.ExtDimDrType2 = GetExtDimType_ByNumber(2, Record.AccountDr);
-		Record.ExtDimDrType3 = GetExtDimType_ByNumber(3, Record.AccountDr);
-		
-		Record.ExtDimDrValue1 = GetExtDimValue_ByType(Record.ExtDimDrType1, AccountingExtDimDr);
-		Record.ExtDimDrValue2 = GetExtDimValue_ByType(Record.ExtDimDrType2, AccountingExtDimDr);
-		Record.ExtDimDrValue3 = GetExtDimValue_ByType(Record.ExtDimDrType3, AccountingExtDimDr);
-		
-		// Credit analytics
-		Record.AccountCr = Row.AccountCredit;
-		
-		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
-		AccountingExtDimCr = AccountingExtDimensions.FindRows(Filter);
-		
-		Record.ExtDimCrType1 = GetExtDimType_ByNumber(1, Record.AccountCr);
-		Record.ExtDimCrType2 = GetExtDimType_ByNumber(2, Record.AccountCr);
-		Record.ExtDimCrType3 = GetExtDimType_ByNumber(3, Record.AccountCr);
-		
-		Record.ExtDimCrValue1 = GetExtDimValue_ByType(Record.ExtDimCrType1, AccountingExtDimCr);
-		Record.ExtDimCrValue2 = GetExtDimValue_ByType(Record.ExtDimCrType2, AccountingExtDimCr);
-		Record.ExtDimCrValue3 = GetExtDimValue_ByType(Record.ExtDimCrType3, AccountingExtDimCr);
-				
-		// Debit currency
-		If Row.AccountDebit.Currency Then
-			Record.CurrencyDr       = DataByAnalytics.CurrencyDr;
-			Record.CurrencyAmountDr = DataByAnalytics.CurrencyAmountDr;
-		EndIf;
-		
-		// Credit currency
-		If Row.AccountCredit.Currency Then
-			Record.CurrencyCr       = DataByAnalytics.CurrencyCr;
-			Record.CurrencyAmountCr = DataByAnalytics.CurrencyAmountCr;
-		EndIf;
-		
-		// Debit quantity
-		If Row.AccountDebit.Quantity Then
-			Record.QuantityDr = DataByAnalytics.QuantityDr;
-		EndIf;
-		
-		// Credit quantity
-		If Row.AccountCredit.Quantity Then
-			Record.QuantityCr = DataByAnalytics.QuantityCr;
-		EndIf;
-		
-		Record.Amount = DataByAnalytics.Amount;
-	EndDo;
+			
+			If Not ValueIsFilled(Row.AccountDebit) Then
+				If Not (ValueIsFilled(Row.AccountCredit) And Row.AccountCredit.OffBalance) Then
+					Errors.Add(StrTemplate(R().Error_153, Row.Operation, TrimAll(Row.Key)));
+					Continue;
+				EndIf;
+			EndIf;
+			
+			If Not ValueIsFilled(Row.AccountCredit) Then
+				If Not (ValueIsFilled(Row.AccountDebit) And Row.AccountDebit.OffBalance) Then
+					Errors.Add(StrTemplate(R().Error_154, Row.Operation, TrimAll(Row.Key)));
+					Continue;
+				EndIf;
+			EndIf;
+					
+			Record = DataTable.Add();
+			Record.Period     = BasisDoc.Date;
+			Record.Company    = BasisDoc.Company;
+			Record.LedgerType = Row.LedgerType;
+			Record.Operation  = Row.Operation;
+			Record.IsFixed    = Row.IsFixed;
+			Record.IsByRow    = ValueIsFilled(Row.Key);
+			Record.Key        = Row.Key;
+			
+			Filter = New Structure();
+			Filter.Insert("Key"          , Row.Key);
+			Filter.Insert("Operation"    , Row.Operation);
+			Filter.Insert("LedgerType"   , Row.LedgerType);
+			Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
+			
+			// Debit analytics
+			Record.AccountDr = Row.AccountDebit;
+			
+			Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
+			AccountingExtDimDr = AccountingExtDimensions.FindRows(Filter);
+			
+			Record.ExtDimDrType1 = GetExtDimType_ByNumber(1, Record.AccountDr);
+			Record.ExtDimDrType2 = GetExtDimType_ByNumber(2, Record.AccountDr);
+			Record.ExtDimDrType3 = GetExtDimType_ByNumber(3, Record.AccountDr);
+			
+			Record.ExtDimDrValue1 = GetExtDimValue_ByType(Record.ExtDimDrType1, AccountingExtDimDr);
+			Record.ExtDimDrValue2 = GetExtDimValue_ByType(Record.ExtDimDrType2, AccountingExtDimDr);
+			Record.ExtDimDrValue3 = GetExtDimValue_ByType(Record.ExtDimDrType3, AccountingExtDimDr);
+			
+			// Credit analytics
+			Record.AccountCr = Row.AccountCredit;
+			
+			Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
+			AccountingExtDimCr = AccountingExtDimensions.FindRows(Filter);
+			
+			Record.ExtDimCrType1 = GetExtDimType_ByNumber(1, Record.AccountCr);
+			Record.ExtDimCrType2 = GetExtDimType_ByNumber(2, Record.AccountCr);
+			Record.ExtDimCrType3 = GetExtDimType_ByNumber(3, Record.AccountCr);
+			
+			Record.ExtDimCrValue1 = GetExtDimValue_ByType(Record.ExtDimCrType1, AccountingExtDimCr);
+			Record.ExtDimCrValue2 = GetExtDimValue_ByType(Record.ExtDimCrType2, AccountingExtDimCr);
+			Record.ExtDimCrValue3 = GetExtDimValue_ByType(Record.ExtDimCrType3, AccountingExtDimCr);
+					
+			// Debit currency
+			If Row.AccountDebit.Currency Then
+				Record.CurrencyDr       = DataByAnalytics.CurrencyDr;
+				Record.CurrencyAmountDr = DataByAnalytics.CurrencyAmountDr;
+			EndIf;
+			
+			// Credit currency
+			If Row.AccountCredit.Currency Then
+				Record.CurrencyCr       = DataByAnalytics.CurrencyCr;
+				Record.CurrencyAmountCr = DataByAnalytics.CurrencyAmountCr;
+			EndIf;
+			
+			// Debit quantity
+			If Row.AccountDebit.Quantity Then
+				Record.QuantityDr = DataByAnalytics.QuantityDr;
+			EndIf;
+			
+			// Credit quantity
+			If Row.AccountCredit.Quantity Then
+				Record.QuantityCr = DataByAnalytics.QuantityCr;
+			EndIf;
+			
+			Record.Amount = DataByAnalytics.Amount;
+		EndDo;
 	EndDo;
 	SortAccountingDataTable(DataTable);
 	
@@ -3535,11 +3534,11 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		NewRow.LedgerType = LedgerType;
 		
 		For Each ExtDimension In Record.ExtDimensionValueDr Do
-			FillExdimensionsRow(NewRow, ExtDimension, "Dr");	
+			FillExtDimensionsRow(NewRow, ExtDimension, "Dr");	
 		EndDo;
 		
 		For Each ExtDimension In Record.ExtDimensionValueCr Do
-			FillExdimensionsRow(NewRow, ExtDimension, "Cr");	
+			FillExtDimensionsRow(NewRow, ExtDimension, "Cr");	
 		EndDo;
 		
 	EndDo;
@@ -3747,7 +3746,7 @@ Procedure CreateExtDimensionsColumns(Table, AnalyticType)
 	
 EndProcedure
 
-Procedure FillExdimensionsRow(Row, ExtDimension, AnalyticType)
+Procedure FillExtDimensionsRow(Row, ExtDimension, AnalyticType)
 	Row["ExtDimensionRef"   + AnalyticType + ExtDimension.Number] = New UUID(ExtDimension.ExtDimensionRef);
 	Row["BaseClass"         + AnalyticType + ExtDimension.Number] = ExtDimension.BaseClass;
 	Row["Class"             + AnalyticType + ExtDimension.Number] = ExtDimension.Class;
@@ -3768,9 +3767,16 @@ Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType
 		_ExternalClass     = Source["Class"             + AnalyticType + i]; 
 		_ExtDimensionValue = Source["ExtDimensionValue" + AnalyticType + i]; 
 		
-		_Description_ru = Source["Description_ru" + AnalyticType + i]; 
-		_Description_en = Source["Description_en" + AnalyticType + i]; 
-		_Description_tr = Source["Description_tr" + AnalyticType + i]; 
+		ArrayOfDescriptions = LocalizationReuse.AllDescription();
+		
+		NewObjData = New Structure();
+		
+		For Each Description In ArrayOfDescriptions Do
+			PropertyName = Description + AnalyticType + i;
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, PropertyName) Then
+				NewObjData.Insert(Description, Source[PropertyName]);
+			EndIf;
+		EndDo;
 		
 		_ExtDimensionType  = Source["ExtDimensionType"  + AnalyticType + i];
 		_InternalBaseClass = Source["InternalBaseClass" + AnalyticType + i];
@@ -3787,10 +3793,6 @@ Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType
 			ExternalIsRef = Upper(_ExternalBaseClass) = Upper("Catalogs") Or Upper(_ExternalBaseClass) = Upper("Documents");
 			InternalIsRef = Upper(_InternalBaseClass) = Upper("Catalogs") Or Upper(_InternalBaseClass) = Upper("Documents");
 			
-			NewObjData = New Structure();
-			NewObjData.Insert("Description_ru", _Description_ru);
-			NewObjData.Insert("Description_en", _Description_en);
-			NewObjData.Insert("Description_tr", _Description_tr);
 			NewObjData.Insert("InternalBaseClass" , _InternalBaseClass);
 			NewObjData.Insert("InternalClass"     , _InternalClass);			
 			NewObjData.Insert("ExternalBaseClass" , _ExternalBaseClass);
@@ -3841,9 +3843,7 @@ Function FindOrCreateRefAnalytic(IntegrationSettings, ExternalRef, ExtDimensionT
 	If Not InternalIsRef And Not ValueIsFilled(_ExtDimensionValue) Then
 		Raise StrTemplate("Not found value for external ref [%1]", ExternalRef);
 	EndIf;
-	
-	BeginTransaction();
-		
+			
 	NewRefData = FindOrCreateCatalogRef(_ExtDimensionValue, ExtDimensionType, NewObjData);
 		
 	If NewRefData.IsNewObject Then
@@ -3861,8 +3861,6 @@ Function FindOrCreateRefAnalytic(IntegrationSettings, ExternalRef, ExtDimensionT
 		
 		RecordsSet.Write();
 	EndIf;
-	
-	CommitTransaction();
 	
 	Return NewRefData.Ref;
 EndFunction

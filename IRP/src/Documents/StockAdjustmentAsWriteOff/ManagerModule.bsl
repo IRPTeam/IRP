@@ -345,6 +345,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	ItemList.Store,
 		|	ItemList.AdjustmentBasis AS Basis,
 		|	ItemList.ItemKey,
+		|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		|	ItemList.Quantity
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM

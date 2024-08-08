@@ -1346,6 +1346,24 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_153", NStr("en = 'Debit is empty [%1] row-key[%2]'", Lang));
 	Strings.Insert("Error_154", NStr("en = 'Credit is empty [%1] row-key[%2]'", Lang));
 	
+	Strings.Insert("Error_155", NStr("en = 'Company is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_156", NStr("en = 'Currency is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_157", NStr("en = 'Account Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_158", NStr("en = 'Account Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_159", NStr("en = 'Currency Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_160", NStr("en = 'Currency Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_161", NStr("en = 'Ext. dimension 1 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_162", NStr("en = 'Ext. dimension 1 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_163", NStr("en = 'Ext. dimension 2 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_164", NStr("en = 'Ext. dimension 2 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_165", NStr("en = 'Ext. dimension 3 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_166", NStr("en = 'Ext. dimension 3 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_167", NStr("en = 'Ext. dimension 1 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_168", NStr("en = 'Ext. dimension 1 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_169", NStr("en = 'Ext. dimension 2 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_170", NStr("en = 'Ext. dimension 2 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_171", NStr("en = 'Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_172", NStr("en = 'Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

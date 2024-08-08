@@ -3575,75 +3575,75 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 			
 			// errors
 			If Not ValueIsFilled(NewRow.Company) And ValueIsFilled(NewRow.CompanyRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Company is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_155, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.Currency) And ValueIsFilled(NewRow.CurrencyRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Currency is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_156, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.AccountDr) And ValueIsFilled(NewRow.AccountDrRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Account Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_157, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.AccountCr) And ValueIsFilled(NewRow.AccountCrRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Account Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_158, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.CurrencyDr) And ValueIsFilled(NewRow.CurrencyDrRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Currency Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_159, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.CurrencyCr) And ValueIsFilled(NewRow.CurrencyCrRef) Then
-				DocObject.Errors.Add().Error = StrTemplate("Currency Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_160, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr1) And ValueIsFilled(NewRow.ExtDimensionValueDr1) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 value Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_161, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr1) And ValueIsFilled(NewRow.ExtDimensionRefDr1) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 type Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_162, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr2) And ValueIsFilled(NewRow.ExtDimensionValueDr2) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 value Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_163, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr2) And ValueIsFilled(NewRow.ExtDimensionRefDr2) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 type Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_164, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueDr3) And ValueIsFilled(NewRow.ExtDimensionValueDr3) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 value Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_165, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeDr3) And ValueIsFilled(NewRow.ExtDimensionRefDr3) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 type Dr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_166, NewRow.Key);
 			EndIf;
 						
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr1) And ValueIsFilled(NewRow.ExtDimensionValueCr1) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 value Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_167, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr1) And ValueIsFilled(NewRow.ExtDimensionRefCr1) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 1 type Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_168, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr2) And ValueIsFilled(NewRow.ExtDimensionValueCr2) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 value Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_169, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr2) And ValueIsFilled(NewRow.ExtDimensionRefCr2) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 2 type Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_170, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.InternalExtDimensionValueCr3) And ValueIsFilled(NewRow.ExtDimensionValueCr3) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 value Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_171, NewRow.Key);
 			EndIf;
 			
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr3) And ValueIsFilled(NewRow.ExtDimensionRefCr3) Then
-				DocObject.Errors.Add().Error = StrTemplate("Ext. dimension 3 type Cr is empty row-key[%1]", NewRow.Key);
+				DocObject.Errors.Add().Error = StrTemplate(R().Error_172, NewRow.Key);
 			EndIf;
 			
 		EndDo;

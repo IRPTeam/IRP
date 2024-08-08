@@ -1343,6 +1343,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_150", NStr("en = 'Can not find file at data base'", Lang));
 	Strings.Insert("Error_151", NStr("en = 'Can not find file at storage service'", Lang));
 	Strings.Insert("Error_152", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
+	Strings.Insert("Error_153", NStr("en = 'Debit is empty [%1] row-key[%2]'", Lang));
+	Strings.Insert("Error_154", NStr("en = 'Credit is empty [%1] row-key[%2]'", Lang));
 	
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));

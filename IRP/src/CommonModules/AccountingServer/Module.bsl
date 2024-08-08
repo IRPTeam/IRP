@@ -3662,8 +3662,6 @@ Function GetEmptyTableForResponseData()
 	Doc_StandardAttr = Metadata.Documents.ExternalAccountingOperation.StandardAttributes;
 	
 	Type_LedgerType = New TypeDescription("CatalogRef.LedgerTypes");
-	Type_AnalyticType = New TypeDescription("ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes");
-	Type_Analytic = New TypeDescription(Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes.Type.Types());
 	
 	Type_UUID     = New TypeDescription("UUID");
 	Type_Boolean  = New TypeDescription("Boolean");
@@ -3724,7 +3722,6 @@ Procedure CreateExtDimensionsColumns(Table, AnalyticType)
 	Type_UUID     = New TypeDescription("UUID");
 	Type_Boolean  = New TypeDescription("Boolean");
 	Type_Desc     = Metadata.DefinedTypes.typeDescription.Type;
-	Type_AnalyticType = New TypeDescription("ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes");
 	Type_Analytic = New TypeDescription(Metadata.ChartsOfCharacteristicTypes.AccountingExtraDimensionTypes.Type.Types());
 	
 	i = 1;

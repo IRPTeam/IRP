@@ -823,12 +823,6 @@ Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
 	
 	If ChangedPoints.Property("IsChangedTaxRates") Then
 		DataPaths = "ItemList.VatRate";
-//		If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense" Or
-//			Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
-//			DataPaths = "PaymentList.VatRate";
-//		Else	
-//			DataPaths = "ItemList.VatRate";
-//		EndIf;
 		ArrayOfDataPaths.Add(DataPaths);
 		If Not Answer.Property("UpdateTaxRates") Then
 			RemoveFromCache(DataPaths, Parameters);

@@ -248,8 +248,15 @@ Procedure OnChainComplete(Parameters) Export
 		Or Parameters.ObjectMetadataInfo.MetadataName = "PurchaseReturnOrder"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportFromTradeAgent"
 		Or Parameters.ObjectMetadataInfo.MetadataName = "SalesReportToConsignor" Then
-		__tmp_CommonDocuments_OnChainComplete(Parameters, False);
+			__tmp_CommonDocuments_OnChainComplete(Parameters, False);
 		Return;
+	EndIf;
+	
+	// CashExpense, CashRevenue
+	If Parameters.ObjectMetadataInfo.MetadataName = "CashExpense"
+		Or Parameters.ObjectMetadataInfo.MetadataName = "CashRevenue" Then
+				__tmp_CashExpenseRevenue_OnChainComplete(Parameters);
+			Return;
 	EndIf;
 	
 	// SalesOrder
@@ -437,11 +444,12 @@ Procedure __tmp_CommonDocuments_OnChainComplete(Parameters, IsRetail)
 	EndIf;
 	
 	Changes = IsChangedProperty(Parameters, "ItemList.VatRate");
+	
 	If Changes.IsChanged And Not Parameters.EventCaller = "CompanyOnUserChange" Then
 		// refill question TaxRates
 		ChangedPoints.Insert("IsChangedTaxRates");
 		QuestionsParameters.Add(New Structure("Action, QuestionText",
-			"TaxRates", R().QuestionToUser_004));
+		"TaxRates", R().QuestionToUser_004));
 	EndIf;
 	
 	If QuestionsParameters.Count() Then
@@ -601,6 +609,7 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("AccountOnUserChange");
 	ArrayOfEventCallers.Add("DateOnUserChange");
+	ArrayOfEventCallers.Add("CompanyOnUserChange");
 	
 	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);
@@ -613,20 +622,36 @@ Procedure __tmp_CashExpenseRevenue_OnChainComplete(Parameters)
 			And Parameters.Object.PaymentList.Count() Then
 			NotifyParameters = New Structure("Parameters", Parameters);
 			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_AccountOnUserChangeContinue", ThisObject, NotifyParameters), 
-						R().QuestionToUser_006, QuestionDialogMode.YesNo);
+			R().QuestionToUser_006, QuestionDialogMode.YesNo);
 		Else
 			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
 		EndIf;
-
-		ElsIf Parameters.EventCaller = "DateOnUserChange" Then
+		
+	ElsIf Parameters.EventCaller = "DateOnUserChange" Then
 		// refill question tax rate
 		If IsChangedProperty(Parameters, "PaymentList.VatRate").IsChanged 
 			And Parameters.Object.PaymentList.Count() Then
 			NotifyParameters = New Structure("Parameters", Parameters);
 			ShowQueryBox(New NotifyDescription("__tmp_CashExpenseRevenue_DateOnUserChangeContinue", ThisObject, NotifyParameters), 
-						R().QuestionToUser_025, QuestionDialogMode.YesNo);
+			R().QuestionToUser_025, QuestionDialogMode.YesNo);
 		Else
 			__tmp_CashExpenseRevenue_CommitChanges(Parameters);
+		EndIf;
+	ElsIf Parameters.EventCaller = "CompanyOnUserChange" Then
+		If IsChangedProperty(Parameters, "PaymentList.VatRate").IsChanged Then 
+			ChangedPoints = New Structure();
+			QuestionsParameters = New Array();
+			// refill question TaxRates
+			ChangedPoints.Insert("IsChangedTaxRates");
+			QuestionsParameters.Add(New Structure("Action, QuestionText", "TaxRates", R().QuestionToUser_031));
+			
+			NotifyParameters = New Structure("Parameters, ChangedPoints", Parameters, ChangedPoints);
+			Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+			OpenForm("CommonForm.UpdateItemListInfo",
+			New Structure("QuestionsParameters", QuestionsParameters), 
+			Parameters.Form, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+		Else
+			__tmp_CashExpenseRevenue_CommitChanges(Parameters);	
 		EndIf;
 	Else
 		__tmp_CashExpenseRevenue_CommitChanges(Parameters);

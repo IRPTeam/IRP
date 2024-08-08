@@ -1517,6 +1517,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
 	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
+	Strings.Insert("QuestionToUser_031", NStr("en = 'Do you want to change tax rates according to the company?'",
+		Lang));
 #EndRegion
 
 #Region SuggestionToUser

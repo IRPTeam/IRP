@@ -2100,21 +2100,4 @@ Procedure UpdateLocalTotalAmounts(Object, TotalAmounts, AmountsInfo) Export
 	EndIf;
 EndProcedure
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #EndRegion
-
-

@@ -1103,3 +1103,133 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 			And "List" table contains lines
 				| 'Number'                        |
 				| '$NumberBankReceipt052023$'     |
+
+// Scenario: _052024 create Bank receipt based on SO (Partner term - TRY, document USD)	
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '235'    |
+// 	* Create BR
+// 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+// 		And I click Select button of "Account" field
+// 		And I go to line in "List" table
+// 			| "Currency" | "Description"       |
+// 			| "TRY"      | "Bank account, TRY" |
+// 		And I select current line in "List" table
+// 	* Check filling
+// 		Then the form attribute named "Account" became equal to "Cash desk №4"
+// 		Then the form attribute named "Company" became equal to "Main Company"
+// 		Then the form attribute named "Currency" became equal to "TRY"
+// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		
+Scenario: _052026 create Bank receipt based on SI (Partner term - USD, document TRY)	
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '236'    |
+	* Create first BR
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| "Description"       |
+			| "Bank account, USD" |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "Account" became equal to "Bank account, USD"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click "Save" button		
+		And "PaymentList" table became equal
+			| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+	* Reselect SI
+		* From form select
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Basis document" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| "Amount" | "Company"      | "Currency" | "Document"                                    | "Legal name"        | "Partner"   | "Partner term" |
+				| "171,20" | "Main Company" | "USD"      | "Sales invoice 236 dated 08.08.2024 11:20:30" | "Company Ferron BP" | "Ferron BP" | "Ferron, USD"  |
+			And I select current line in "List" table
+			And I click "Save" button		
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+		* From payment distribution
+			And I select current line in "PaymentList" table
+			And I delete a line in "PaymentList" table
+			And in the table "PaymentList" I click "Payment by documents" button
+			And I go to line in "Documents" table
+				| "Amount" | "Document"                                    |
+				| "171,20" | "Sales invoice 236 dated 08.08.2024 11:20:30" |
+			And I set "Check" checkbox in "Documents" table
+			And I finish line editing in "Documents" table
+			And I click "Ok" button
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+		* Change amount and Post BR
+			And I select current line in "PaymentList" table
+			And I input "150,00" text in "Total amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+			And I click "Post" button
+		* Create second BR
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I go to line in "List" table
+				| 'Number' |
+				| '236'    |			
+			And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+			And I click Select button of "Account" field
+			And I go to line in "List" table
+				| "Description"       |
+				| "Bank account, USD" |
+			And I select current line in "List" table
+		* Check amount
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "21,20"        | ""                        | ""                 | ""                           |
+			And I click "Post" button			
+	And I close all client application windows
+
+// Scenario: _050027 create Bank receipt based on SI (Partner term - TRY, document USD)
+// 	And I close all client application windows
+// 	* Select SI
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '235'    |
+// 	* Create CR
+// 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+// 		And I click Select button of "Account" field
+// 		And I go to line in "List" table
+// 			| "Currency" | "Description"       |
+// 			| "TRY"      | "Bank account, TRY" |
+// 		And I select current line in "List" table
+// 	* Check filling	
+// 		Then the form attribute named "Account" became equal to "Cash desk №4"
+// 		Then the form attribute named "Company" became equal to "Main Company"
+// 		Then the form attribute named "Currency" became equal to "TRY"
+// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+// 		And I click "Save" button	
+// 		And "PaymentList" table became equal
+// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+// 	* Reselect SI
+// 		And I select current line in "PaymentList" table
+// 		And I delete a line in "PaymentList" table
+// 		And in the table "PaymentList" I click "Payment by documents" button
+// 		And I go to line in "Documents" table
+// 			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
+// 			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
+// 		And I set "Check" checkbox in "Documents" table
+// 		And I click "Ok" button
+// 		And I click "Save" button
+// 		And "PaymentList" table became equal
+// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+// 	
+// And I close all client application windows			

@@ -100,6 +100,16 @@ Scenario: _053000 preparation (Bank payment)
 		| "Documents.PurchaseInvoice.FindByNumber(127).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(194).GetObject().Write(DocumentWriteMode.Posting);"    |
+	When Create document PurchaseInvoice objects (Partner term - TRY, document USD and vice versa)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
+	When Create document PurchaseOrder objects (Partner term - TRY, document USD and vice versa)
+		And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
 
 Scenario: _0530001 check preparation
 	When check preparation

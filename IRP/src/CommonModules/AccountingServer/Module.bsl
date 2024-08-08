@@ -3750,9 +3750,16 @@ Procedure FillExtDimensionsRow(Row, ExtDimension, AnalyticType)
 	Row["IsRef"             + AnalyticType + ExtDimension.Number] = ExtDimension.IsRef;
 	
 	Row["ExtDimensionValue" + AnalyticType + ExtDimension.Number] = ?(ExtDimension.IsRef, ExtDimension.Value.Ref, ExtDimension.Value.Name);
-	Row["Description_ru"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_ru;
-	Row["Description_en"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_en;
-	Row["Description_tr"    + AnalyticType + ExtDimension.Number] = ExtDimension.Value.Description_tr;
+	
+	ArrayOfDescriptions = LocalizationReuse.AllDescription();
+	
+	For Each Description In ArrayOfDescriptions Do
+		PropertyName = Description + + AnalyticType + ExtDimension.Number;
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) 
+			And CommonFunctionsClientServer.ObjectHasProperty(ExtDimension.Value, Description) Then
+			Row[PropertyName] = ExtDimension.Value[Description];
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure FindOrCreateAnalytic(IntegrationSettings, Source, Target, AnalyticType)

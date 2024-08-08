@@ -115,7 +115,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 	|	Obj.Ref.LegalName AS LegalName,
 	|	Obj.Ref.Agreement AS Agreement,
 	|	Obj.Ref.DocumentAmount AS DocumentAmount,
-	|	Obj.Ref.Currency AS Currency
+	|	Obj.Ref.Agreement.CurrencyMovementType.Currency AS Currency
 	|INTO Doc
 	|FROM
 	|	DocumentJournal.%1 AS Obj
@@ -134,7 +134,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	CustomersTransactions.LegalName,
 		|	CustomersTransactions.Agreement,
 		|	CustomersTransactions.Amount,
-		|	CustomersTransactions.Currency
+		|	CustomersTransactions.Agreement.CurrencyMovementType.Currency
 		|FROM
 		|	AccumulationRegister.R2021B_CustomersTransactions AS CustomersTransactions
 		|WHERE
@@ -153,7 +153,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(OpeningEntry.LegalName),
 		|	MAX(OpeningEntry.Agreement),
 		|	SUM(OpeningEntry.Amount),
-		|	MAX(OpeningEntry.Currency)
+		|	MAX(OpeningEntry.Agreement.CurrencyMovementType.Currency)
 		|FROM
 		|Document.OpeningEntry.%1 AS OpeningEntry
 		|	WHERE
@@ -174,7 +174,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(OpeningEntry.LegalName),
 		|	MAX(OpeningEntry.Agreement),
 		|	SUM(OpeningEntry.Amount),
-		|	MAX(OpeningEntry.Currency)
+		|	MAX(OpeningEntry.Agreement.CurrencyMovementType.Currency)
 		|FROM
 		|Document.OpeningEntry.%1 AS OpeningEntry
 		|	WHERE
@@ -195,7 +195,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(DebitNote.LegalName),
 		|	MAX(DebitNote.Agreement),
 		|	SUM(DebitNote.Amount),
-		|	MAX(DebitNote.Currency)
+		|	MAX(DebitNote.Agreement.CurrencyMovementType.Currency)
 		|FROM
 		|Document.DebitNote.%1 AS DebitNote
 		|	WHERE
@@ -216,7 +216,7 @@ Function GetDocQueryText(QueryParameters, Parameters, TableName,
 		|	MAX(CreditNote.LegalName),
 		|	MAX(CreditNote.Agreement),
 		|	SUM(CreditNote.Amount),
-		|	MAX(CreditNote.Currency)
+		|	MAX(CreditNote.Agreement.CurrencyMovementType.Currency)
 		|FROM
 		|Document.CreditNote.%1 AS CreditNote
 		|	WHERE

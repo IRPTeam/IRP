@@ -3352,7 +3352,7 @@ Procedure LoadAccountingRecordsByPeriod(IntegrationSettings, StartDate, EndDate,
 		_Date = BegOfDay(StartDate);
 		While _Date <= BegOfDay(EndDate) Do
 			TotalArrayOfDates.Add(_Date);
-			_Date = BegOfDay(EndOfDay(_Date) + 1);
+			_Date = EndOfDay(_Date) + 1;
 		EndDo;
 	EndIf;
 

@@ -3709,3 +3709,24 @@ Scenario: Create catalog LegalNameContracts objects (Ferron, filters)
 		| 'Ref'                                                                        | 'DeletionMark' | 'Code'  | 'Description'               | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount' | 'ContractNumber' | 'Currency'                                                           | 'LegalName'                                                         | 'Author'                                                        | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f1207' | 'False'        | 11      | 'Contract (Second Company)' | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:03:29' | '01.01.0001 00:00:00' | 'False'     |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f120b' | 'False'        | 12      | 'Contract (Empty Company)'  | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | ''                                                                  | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:04:28' | '01.01.0001 00:00:00' | 'False'     |
+
+Scenario: Create catalog AccessGroups and AccessProfiles objects (Full access + Accounting reports)
+
+	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create catalog "AccessGroups" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7c3b7b1d5c014d211ef53224a7fb945' | 'False'        | 11     | 'False'         | '$$IdCI$$' | 'Admin'          | ''                 | ''               | ''               | ''             | ''       | '05.08.2024 15:01:17' | '01.01.0001 00:00:00' | 'False'     |
+
+	And I refill object tabular section "Profiles":
+		| 'Ref'                                                                  | 'Profile'                                                                |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b7c3b7b1d5c014d211ef53224a7fb945' | 'e1cib/data/Catalog.AccessProfiles?ref=b7c3b7b1d5c014d211ef53224a7fb944' |
+
+
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'   | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7c3b7b1d5c014d211ef53224a7fb944' | 'False'        | 11     | '$$IdCI$$' | 'Full access'    | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '05.08.2024 15:01:01' | '05.08.2024 15:02:10' | 'False'     |
+
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'              | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7c3b7b1d5c014d211ef53224a7fb944' | 'FullAccess'        | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7c3b7b1d5c014d211ef53224a7fb944' | 'AccountingReports' | 'IRP'           |

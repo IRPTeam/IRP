@@ -601,6 +601,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.A0012_AccountCard</name>
+		<right>
+			<name>Use</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.FileStoragesInfo</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -769,6 +780,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.A0010_TrialBalance</name>
+		<right>
+			<name>Use</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.FillingTemplates</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -848,6 +870,17 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.A0011_TrialBalanceByAccount</name>
+		<right>
+			<name>Use</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -2867,6 +2900,17 @@
 		<name>Document.BankReceipt</name>
 		<right>
 			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.A0013_AccountAnalysis</name>
+		<right>
+			<name>Use</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>false</value>
 		</right>
 	</object>

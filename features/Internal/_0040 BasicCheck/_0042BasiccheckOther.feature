@@ -16,6 +16,15 @@ Background:
 Scenario: preparation
 	When set True value to the constant
 	When set True value to the constant Use accounting
+	When Create catalog AccessGroups and AccessProfiles objects (Full access + Accounting reports)
+	Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7c3b7b1d5c014d211ef53224a7fb945"
+	And I move to "Users" tab
+	And in the table "Users" I click the button named "UsersAdd"
+	And I select "ci" from "User" drop-down list by string in "Users" table
+	And I finish line editing in "Users" table	
+	And I click "Save and close" button
+	And I close TestClient session
+	And I open new TestClient session or connect the existing one
 	* Add VA extension
 		Given I open hyperlink "e1cib/list/Catalog.Extensions"
 		If "List" table does not contain lines Then

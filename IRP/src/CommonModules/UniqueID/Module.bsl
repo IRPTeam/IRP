@@ -7,6 +7,9 @@ Procedure OnCopyRemoveUniqueIDOnCopy(Source, CopiedObject) Export
 EndProcedure
 
 Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
+	If TypeOf(Source) = Type("CatalogObject.Workstations") Then
+		Return; // exeptions with manual control
+	EndIf;
 	If Not ValueIsFilled(Source.UniqueID) Then
 		Source.UniqueID = "_" + StrReplace(String(New UUID()), "-", "");
 	EndIf;

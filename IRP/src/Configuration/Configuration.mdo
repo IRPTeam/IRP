@@ -788,6 +788,7 @@
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
+  <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

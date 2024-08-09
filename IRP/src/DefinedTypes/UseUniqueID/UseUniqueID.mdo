@@ -18,5 +18,22 @@
     <types>CatalogObject.ItemTypes</types>
     <types>CatalogObject.AddAttributeAndPropertyValues</types>
     <types>CatalogObject.Extensions</types>
+    <types>CatalogObject.BankTerms</types>
+    <types>CatalogObject.CashAccounts</types>
+    <types>CatalogObject.Companies</types>
+    <types>CatalogObject.ExpenseAndRevenueTypes</types>
+    <types>CatalogObject.Incoterms</types>
+    <types>CatalogObject.Items</types>
+    <types>CatalogObject.ItemKeys</types>
+    <types>CatalogObject.LedgerTypeVariants</types>
+    <types>CatalogObject.LegalNameContracts</types>
+    <types>CatalogObject.Partners</types>
+    <types>CatalogObject.PaymentSchedules</types>
+    <types>CatalogObject.PriceTypes</types>
+    <types>CatalogObject.SpecialOffers</types>
+    <types>CatalogObject.TaxRates</types>
+    <types>CatalogObject.Units</types>
+    <types>CatalogObject.UnitsOfMeasurement</types>
+    <types>CatalogObject.Workstations</types>
   </type>
 </mdclass:DefinedType>

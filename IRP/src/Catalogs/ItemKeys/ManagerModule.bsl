@@ -223,6 +223,10 @@ Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
 	EndDo;
 EndProcedure
 
+Function FindRefByUniqueMD5(Object, UniqueMD5) Export
+	Return UniqueID.FindRefByUniqueMD5(Object, UniqueMD5);
+EndFunction
+
 #Region Bundling
 
 Function FindOrCreateRefByProperties(TableOfProperties, Item, AddInfo = Undefined) Export

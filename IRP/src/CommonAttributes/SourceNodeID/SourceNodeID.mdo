@@ -452,6 +452,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Incoterms</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.EmployeeVacation</metadata>
     <use>Use</use>
   </content>

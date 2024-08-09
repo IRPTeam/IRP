@@ -84,6 +84,7 @@ Scenario: _0202002 check import item
 		And I save the value of the field named "SerializedInfo" as "SerializedInfo"
 		And I execute 1C:Enterprise script
 			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "992046ec-7f8d-11ed-b78d-b8d3fd6dff8b", "992046ec-7f8d-11ed-b78d-b8d3fd6dff9b");" |
+			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "2748bf9b8b774ed3af93dcbbb186545e", "2748bf9b8b774ed3af93dcbbb186546e");"         |
 			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "Product 5 with SLN", "Product 5 with SLN New");"                                 |
 			| "Контекст.SerializedInfo=StrReplace(Контекст.SerializedInfo, "165", "180")"                                                                    |
 		And I input "$SerializedInfo$" variable value in "Deserialized info" field

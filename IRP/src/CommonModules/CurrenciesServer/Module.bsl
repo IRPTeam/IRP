@@ -775,8 +775,8 @@ Procedure ReplaceTransactionCurrency(ExpandTable, TrnRows, OtherRows, ExcludeDim
 	EndDo;		
 EndProcedure
 
-Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
-	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;
+Function GetEmptyCurrenciesTable(RefMetadata)
+	Columns = RefMetadata.TabularSections.Currencies.Attributes;
 	EmptyCurrenciesTable = New ValueTable();
 	EmptyCurrenciesTable.Columns.Add("Key"             , Columns.Key.Type);
 	EmptyCurrenciesTable.Columns.Add("IsFixed"         , Columns.IsFixed.Type);
@@ -787,7 +787,12 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable.Columns.Add("Multiplicity"    , Columns.Multiplicity.Type);
 	EmptyCurrenciesTable.Columns.Add("MovementType"    , Columns.MovementType.Type);
 	EmptyCurrenciesTable.Columns.Add("Amount"          , Columns.Amount.Type);
+	Return EmptyCurrenciesTable;
+EndFunction
 
+Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
+	EmptyCurrenciesTable = GetEmptyCurrenciesTable(Parameters.Ref.Metadata());
+	
 	RatePeriod    = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement);
 	
@@ -2021,3 +2026,78 @@ EndFunction
 
 #EndRegion
 
+#Region LOCAL_TOTAL_AMOUNTS
+
+Function GetLocalTotalAmounts(Object, Parameters, AmountsInfo) Export
+	
+	Result = New Structure("LocalTotalAmount, LocalNetAmount, LocalTaxAmount, LocalRate", 0, 0, 0, 0);
+	
+	EmptyCurrenciesTable = GetEmptyCurrenciesTable(Parameters.Ref.Metadata());
+	
+	RatePeriod = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
+	
+	ArrayOfFixedRates = New Array;
+	For Each Row In Parameters.Currencies Do
+		If Row.IsFixed Then
+			FixedRates = New Structure("Key, CurrencyFrom, MovementType, Rate, ReverseRate, Multiplicity");
+			FillPropertyValues(FixedRates, Row);
+			ArrayOfFixedRates.Add(FixedRates);
+		EndIf;
+	EndDo;
+	
+	// Legal currency
+	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Parameters.Company) Do
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType, ArrayOfFixedRates);
+	EndDo;
+	
+	If Not EmptyCurrenciesTable.Count() Then
+		Return Result;
+	EndIf;
+	
+	// Local rate
+	Result.LocalRate = EmptyCurrenciesTable[0].Rate;
+	
+	// Total amount
+	If ValueIsFilled(AmountsInfo.TotalAmount.Value) Then
+		CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, AmountsInfo.TotalAmount.Value);
+		Result.LocalTotalAmount = EmptyCurrenciesTable[0].Amount;
+	EndIf;
+	
+	// Net amount
+	If ValueIsFilled(AmountsInfo.NetAmount.Value) Then
+		CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, AmountsInfo.NetAmount.Value);
+		Result.LocalNetAmount = EmptyCurrenciesTable[0].Amount;
+	EndIf;
+	
+	// Tax amount
+	If ValueIsFilled(AmountsInfo.TaxAmount.Value) Then
+		CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, AmountsInfo.TaxAmount.Value);
+		Result.LocalTaxAmount = EmptyCurrenciesTable[0].Amount;
+	EndIf;
+	
+	Return Result;	
+EndFunction
+
+Procedure UpdateLocalTotalAmounts(Object, TotalAmounts, AmountsInfo) Export
+	If TotalAmounts.LocalTotalAmount <> AmountsInfo.TotalAmount.Name 
+		And CommonFunctionsClientServer.ObjectHasProperty(Object, AmountsInfo.TotalAmount.Name) Then
+		Object[AmountsInfo.TotalAmount.Name] = TotalAmounts.LocalTotalAmount;
+	EndIf;
+	
+	If TotalAmounts.LocalNetAmount <> AmountsInfo.NetAmount.Name 
+		And CommonFunctionsClientServer.ObjectHasProperty(Object, AmountsInfo.NetAmount.Name) Then
+		Object[AmountsInfo.NetAmount.Name] = TotalAmounts.LocalNetAmount;
+	EndIf;
+	
+	If TotalAmounts.LocalTaxAmount <> AmountsInfo.TaxAmount.Name 
+		And CommonFunctionsClientServer.ObjectHasProperty(Object, AmountsInfo.TaxAmount.Name) Then
+		Object[AmountsInfo.TaxAmount.Name] = TotalAmounts.LocalTaxAmount;
+	EndIf;
+	
+	If TotalAmounts.LocalRate <> AmountsInfo.LocalRate.Name 
+		And CommonFunctionsClientServer.ObjectHasProperty(Object, AmountsInfo.LocalRate.Name) Then
+		Object[AmountsInfo.LocalRate.Name] = TotalAmounts.LocalRate;
+	EndIf;
+EndProcedure
+
+#EndRegion

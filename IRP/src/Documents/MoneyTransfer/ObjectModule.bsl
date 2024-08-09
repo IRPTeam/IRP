@@ -32,9 +32,23 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	
+	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+	AmountsInfo.TotalAmount.Value = ThisObject.SendAmount;
+	AmountsInfo.TotalAmount.Name  = "SendLocalTotalAmount";
+	AmountsInfo.LocalRate.Name    = "SendLocalRate";
+	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+	
 	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, ThisObject.ReceiveAmount);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	
+	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+	AmountsInfo.TotalAmount.Value = ThisObject.ReceiveAmount;
+	AmountsInfo.TotalAmount.Name  = "ReceiveLocalTotalAmount";
+	AmountsInfo.LocalRate.Name    = "ReceiveLocalRate";
+	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
 	
 	If IsMoneyExchange Then
 		

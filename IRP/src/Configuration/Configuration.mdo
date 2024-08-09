@@ -1333,6 +1333,7 @@
   <reports>Report.R7030_ProductionPlanning</reports>
   <reports>Report.R5020_PartnersBalance</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
+  <reports>Report.T0001_FilesAnalyser</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
@@ -1357,6 +1358,7 @@
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
   <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
+  <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

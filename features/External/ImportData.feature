@@ -2730,11 +2730,11 @@ Scenario: Create catalog CancelReturnReasons objects
 
 Scenario: Create catalog Workstations objects
 
-	And I check or create for catalog "Workstations" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UserGroup' | 'UseCashInAndCashOut' | 'UniqueID'                          |
-		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | 5      | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755' | ''              | ''          | 'True'                | 'TeamAgent'                         |
-		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed60ce59f44f81' | 'False'        | 6      | 'Workstation 02' | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756' | ''              | ''          | 'False'               | '_143ea254651f4db3b95e7cd294c35636' |
-		
+	And I check or create catalog "Workstations" objects:
+		| 'Ref'                                                                   | 'DeletionMark'  | 'Code'  | 'Description'     | 'CashAccount'                                                           | 'PrintTemplate'  | 'UserGroup'  | 'UseCashInAndCashOut'  | 'UniqueID'    |
+		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899'  | 'False'         | 5       | 'Workstation 01'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3755'  | ''               | ''           | 'True'                 |  'DPL101'     |
+		| 'e1cib/data/Catalog.Workstations?ref=b788b483d858e32911ed60ce59f44f81'  | 'False'         | 6       | 'Workstation 02'  | 'e1cib/data/Catalog.CashAccounts?ref=b784ae4f9cb08e5e11ed2447ef2a3756'  | ''               | ''           | 'False'                |  'DPL101'     |
+
 
 Scenario: Create POS cash account objects
 
@@ -2933,7 +2933,7 @@ Scenario: Create second Workstation
 
 	And I check or create catalog "Workstations" objects:
 		| 'Ref'                                                                   | 'DeletionMark'  | 'Code'          | 'Description'     | 'CashAccount'                                                           | 'PrintTemplate'  | 'UserGroup'  | 'UniqueID'    |
-		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4'  | 'False'         | '000000000002'  | 'Workstation 02'  | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'  | ''               | ''           | 'TeamAgent'   |
+		| 'e1cib/data/Catalog.Workstations?ref=b784ae4f9cb08e5e11ed1a17667e6bb4'  | 'False'         | '000000000002'  | 'Workstation 02'  | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c186a'  | ''               | ''           |  'DPL101'     |
 
 
 Scenario: Create PaymentType (advance)

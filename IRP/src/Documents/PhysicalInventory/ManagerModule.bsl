@@ -381,10 +381,11 @@ Function R4032B_GoodsInTransitOutgoing()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.Period,
-		|	ItemList.Store,
-		|	ItemList.Basis,
-		|	ItemList.ItemKey,
+		|	ItemList.Period AS Period,
+		|	ItemList.Store AS Store,
+		|	ItemList.Basis AS Basis,
+		|	ItemList.ItemKey AS ItemKey,
+		|	VALUE(Catalog.SerialLotNumbers.EmptyRef) AS SerialLotNumber,
 		|	ItemList.WriteOffQuantity AS Quantity
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM

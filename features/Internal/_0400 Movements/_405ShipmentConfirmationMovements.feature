@@ -194,13 +194,13 @@ Scenario: _040174 check Shipment confirmation movements by the Register  "R4032 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                    | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                               | 'Item key'    |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | 'XS/Blue'     |
-			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | '36/Red'      |
+			| 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                    | ''            | ''                 |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                               | 'Item key'    | 'Serial lot number'|
+			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '1'           | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | 'XS/Blue'     | ''                 |
+			| ''                                                    | 'Expense'       | '28.01.2021 18:42:17'   | '10'          | 'Store 02'     | 'Shipment confirmation 1 dated 28.01.2021 18:42:17'   | '36/Red'      | ''                 |
 		And I close all client application windows
 		
 Scenario: _040175 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SC-SI)
@@ -456,13 +456,13 @@ Scenario: _040187 check Shipment confirmation movements by the Register  "R4032 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                                    | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                    | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                               | 'Item key'    |
-			| ''                                                    | 'Expense'       | '16.02.2021 12:14:52'   | '10'          | 'Store 02'     | 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | 'XS/Blue'     |
-			| ''                                                    | 'Expense'       | '16.02.2021 12:14:52'   | '15'          | 'Store 02'     | 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | 'XS/Blue'     |
+			| 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                                    | ''            | ''                 |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                                    | ''            | ''                 |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                               | 'Item key'    | 'Serial lot number'|
+			| ''                                                    | 'Expense'       | '16.02.2021 12:14:52'   | '10'          | 'Store 02'     | 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | 'XS/Blue'     | ''                 |
+			| ''                                                    | 'Expense'       | '16.02.2021 12:14:52'   | '15'          | 'Store 02'     | 'Shipment confirmation 4 dated 16.02.2021 12:14:52'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 //2 (SO-reserve 3, SC - 5)
@@ -566,13 +566,13 @@ Scenario: _040191 check Shipment confirmation movements by the Register  "R4032 
 		And I select "R4032 Goods in transit (outgoing)" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53'   | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                            | ''            |
-			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            |
-			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    |
-			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
-			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '16'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     |
+			| 'Shipment confirmation 8 dated 18.02.2021 10:48:53'   | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Document registrations records'                      | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| 'Register  "R4032 Goods in transit (outgoing)"'       | ''              | ''                      | ''            | ''             | ''                                            | ''            | ''                 |
+			| ''                                                    | 'Record type'   | 'Period'                | 'Resources'   | 'Dimensions'   | ''                                            | ''            | ''                 |
+			| ''                                                    | ''              | ''                      | 'Quantity'    | 'Store'        | 'Basis'                                       | 'Item key'    | 'Serial lot number'|
+			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '10'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
+			| ''                                                    | 'Expense'       | '18.02.2021 10:48:53'   | '16'          | 'Store 02'     | 'Sales invoice 8 dated 18.02.2021 10:48:46'   | 'XS/Blue'     | ''                 |
 		And I close all client application windows
 
 Scenario: _040193 check Shipment confirmation movements by the Register  "R4012 Stock Reservation" (SO-SI-SC, SC>SI>SO)

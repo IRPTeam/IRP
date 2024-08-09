@@ -1125,7 +1125,10 @@ Scenario: _015400644 check that additional attributes and properties are display
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Countries
 		Given I open hyperlink "e1cib/list/Catalog.Countries"
-		And I click the button named "FormCreate"
+		And I go to line in "List" table
+			| "Description"|
+			| "Turkey"     |
+		And I select current line in "List" table
 		And field "Test" is not present on the form
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
@@ -1169,8 +1172,10 @@ Scenario: _015400645 check that additional attributes and properties are display
 	Then I check for the "AddAttributeAndPropertyValues" charts of characteristic types with the Description Eng "Test"
 	* Open a form to create Currencies
 		Given I open hyperlink "e1cib/list/Catalog.Currencies"
-		And I click the button named "FormCreate"
-		And field "Test" is not present on the form
+		And I go to line in "List" table
+			| "Code" | "Description"     |
+			| "USD"  | "American dollar" |
+		And I select current line in "List" table		
 	* Adding additional Test attribute without closing the form
 		Given I open hyperlink "e1cib/list/Catalog.AddAttributeAndPropertySets"
 		And I go to line in "List" table
@@ -6338,21 +6343,15 @@ Scenario: _015400681 check multistring additional attributes
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
 		And I click Select button of "Country of consignment" field
-		And I click the button named "FormCreate"		
-		And I click choice button of the attribute named "Value" in "ValueList" table
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Description'    |
-			| 'Country of consignment' |  'Turkey'        |
+			| "Additional attribute"   | "Description" |
+			| "Country of consignment" | "Turkey"      |
 		And I select current line in "List" table
-		And I finish line editing in "ValueList" table
-		And I click the button named "Add"
-		And I click choice button of the attribute named "Value" in "ValueList" table
+		And I click Select button of "Country of consignment" field
 		And I go to line in "List" table
-			| 'Additional attribute'   | 'Description'    |
-			| 'Country of consignment' |  'Poland'        |
+			| "Additional attribute"   | "Description" |
+			| "Country of consignment" | "Poland"      |
 		And I select current line in "List" table
-		And I finish line editing in "ValueList" table
-		And I click the button named "OK"
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"
 		And I click "Save" button	
 		Then the form attribute named "_V123449" became equal to "Turkey; Poland"	

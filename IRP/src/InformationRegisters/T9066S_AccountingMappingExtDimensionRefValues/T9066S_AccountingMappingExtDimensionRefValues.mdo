@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f43c301a-c2ff-436c-96a8-654a161eb18f">
+  <producedTypes>
+    <selectionType typeId="b7448e12-538a-4050-83f2-62804a6fd150" valueTypeId="44bc6dfe-1d78-46a5-b5bf-827a1887fe0a"/>
+    <listType typeId="4459c45f-8ac7-4548-96d6-8a1ccd46ace6" valueTypeId="3a1b064c-8380-4e66-8223-4d8606e098a2"/>
+    <managerType typeId="8147edf6-cd91-4a84-bc0c-7f94b69b28ab" valueTypeId="88a66518-5460-4112-92d0-c6f3753795d2"/>
+    <recordSetType typeId="6651b27d-eda6-4f0d-b2b4-d0dc35e716cf" valueTypeId="0491a0e2-9b13-4c74-8206-178d3e6cc2ab"/>
+    <recordKeyType typeId="86c7ba47-d5d5-4f5a-8ea9-d7e045521ad2" valueTypeId="cac099c9-9a9f-4618-a347-0b9a6667aa09"/>
+    <recordType typeId="108977ff-9d1d-4a2f-a062-db94a1f4cb5f" valueTypeId="d7fc47ca-0b23-4126-ab91-b8fdd2a2a68c"/>
+    <recordManagerType typeId="f417abd2-4cb9-4027-b3a0-77d39a3fa8f5" valueTypeId="3f0d10cd-1299-4a57-8da3-64601fbf0d3c"/>
+  </producedTypes>
+  <name>T9066S_AccountingMappingExtDimensionRefValues</name>
+  <synonym>
+    <key>en</key>
+    <value>T9066 Accounting mapping (ext dimension ref values)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues.Form.RecordForm</defaultRecordForm>
+  <defaultListForm>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues.Form.ListForm</defaultListForm>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="9bab276d-a759-492c-9c21-d9db0942f7e0">
+    <name>ExtDimensionValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension value</value>
+    </synonym>
+    <type>
+      <types>Characteristic.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="289b8763-295b-4041-aadf-e45b77bb9c24">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="0247c0b1-b10a-4934-bc24-465b6b039ae1">
+    <name>ExternalRef</name>
+    <synonym>
+      <key>en</key>
+      <value>External ref</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="af203e82-9be8-4f72-9a4c-5bb1de70b643">
+    <name>ExtDimensionType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension type</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
+  <forms uuid="c5779614-f3ee-4d6c-b7ff-bfd9f6b985f3">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="17b9b073-f777-473a-a0b2-9fd9ffc9a3ca">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

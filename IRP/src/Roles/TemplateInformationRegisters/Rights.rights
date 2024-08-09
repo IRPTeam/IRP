@@ -99,6 +99,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9064S_AccountingMappingRegisters</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9545S_VacationDaysLimits</name>
 		<right>
 			<name>Read</name>
@@ -132,6 +143,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.SharedReportOptions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9062S_AccountingMappingCompanies</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -339,6 +361,17 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("", "", "", "", "",	"")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9068S_AccountingMappingAccountsMatching</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -719,6 +752,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9065S_AccountingMappingExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9010S_AccountsItemKey</name>
 		<right>
 			<name>Read</name>
@@ -886,6 +930,28 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Store", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -1081,6 +1147,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.AddProperties</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9061S_AccountingMappingAccounts</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1396,6 +1473,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9063S_AccountingMappingCurrencies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9016S_AccountsEmployee</name>
 		<right>
 			<name>Read</name>
@@ -1435,6 +1523,17 @@
 			<restrictionByCondition>
 				<condition>#AccessRegisters("Company", "Branch", "", "", "", "")</condition>
 			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>

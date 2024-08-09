@@ -344,7 +344,7 @@ Function GetAnalytics_Revenues(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;
@@ -352,7 +352,7 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.CashRevenue_DR_R3010B_CashOnHand_CR_R5021_Revenues 
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.RevenueType;

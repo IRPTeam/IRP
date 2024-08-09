@@ -72,7 +72,11 @@ EndProcedure
 Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)	
 	If ValueIsFilled(Data.Basis) Then
 		StandardProcessing = False;
-		Presentation = ""+R().AccountingJE_prefix_01 + Data.Basis;
+		If TypeOf(Data.Basis) = Type("DocumentRef.ExternalAccountingOperation") Then
+			Presentation = ""+R().AccountingJE_prefix_01 + Data.Basis.RecorderPresentation;
+		Else
+			Presentation = ""+R().AccountingJE_prefix_01 + Data.Basis;
+		EndIf;
 	EndIf;
 EndProcedure
 

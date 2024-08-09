@@ -93,6 +93,10 @@ Function IsUseChequeBonds() Export
 	Return GetFunctionalOption("UseChequeBonds");
 EndFunction
 
+Function IsUseAccountingService() Export
+	Return GetFunctionalOption("UseAccountingService");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

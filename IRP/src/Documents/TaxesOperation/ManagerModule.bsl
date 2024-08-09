@@ -471,59 +471,11 @@ Function GetAnalytics_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoin
 	Return AccountingAnalytics;
 EndFunction
 
-//// Expense - Other period expense
-//Function GetAnalytics_DR_R5022T_Expenses_CR_R6070T_OtherPeriodsExpenses(Parameters)
-//	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-//	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-//
-//	// Debit
-//	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-//	                                                          Parameters.RowData.ExpenseType,
-//	                                                          Parameters.RowData.ProfitLossCenter);
-//	
-//	AccountingAnalytics.Debit = Debit.AccountExpense;
-//	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-//	
-//	// Credit
-//	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-//	                                                    	   Parameters.RowData.ExpenseType,
-//	                                                    	   Parameters.RowData.ProfitLossCenter);
-//	                                                    
-//	AccountingAnalytics.Credit = Credit.AccountOtherPeriodsExpense;
-//	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-//
-//	Return AccountingAnalytics;
-//EndFunction
-//
-//// Other period expense - Expense (reverse)
-//Function GetAnalytics_DR_R6070T_OtherPeriodsExpenses_CR_R5022T_Expenses(Parameters)
-//	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
-//	AccountParameters   = AccountingServer.GetAccountParameters(Parameters);
-//
-//	// Debit
-//	Debit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-//	                                                          Parameters.RowData.ExpenseType,
-//	                                                          Parameters.RowData.ProfitLossCenter);
-//	
-//	AccountingAnalytics.Debit = Debit.AccountOtherPeriodsExpense;
-//	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
-//	
-//	// Credit
-//	Credit = AccountingServer.GetT9014S_AccountsExpenseRevenue(AccountParameters, 
-//	                                                    	   Parameters.RowData.ExpenseType,
-//	                                                    	   Parameters.RowData.ProfitLossCenter);
-//	                                                    
-//	AccountingAnalytics.Credit = Credit.AccountExpense;
-//	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
-//
-//	Return AccountingAnalytics;
-//EndFunction
-//
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

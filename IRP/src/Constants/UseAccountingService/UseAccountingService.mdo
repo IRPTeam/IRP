@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="093e75e0-602f-4a41-befa-95b263bceaaf">
+  <producedTypes>
+    <managerType typeId="8182c8be-aa76-4034-bf62-88b7432d4cfa" valueTypeId="d032b3af-ee50-4bbb-8f59-ad1c7cd65e84"/>
+    <valueManagerType typeId="bc8badd5-c2f8-450d-887d-3dd820a3cd26" valueTypeId="11664d4c-315b-4c43-b196-b592a3e8ff59"/>
+    <valueKeyType typeId="28cd8853-d7c1-46f4-bcb5-301bcd8a45f7" valueTypeId="c39d87ac-6275-424e-ab34-2f94a1b318d1"/>
+  </producedTypes>
+  <name>UseAccountingService</name>
+  <synonym>
+    <key>en</key>
+    <value>Use accounting service</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

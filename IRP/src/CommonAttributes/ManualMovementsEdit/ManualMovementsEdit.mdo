@@ -17,6 +17,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ExternalAccountingOperation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.VisitorCounter</metadata>
     <use>Use</use>
   </content>

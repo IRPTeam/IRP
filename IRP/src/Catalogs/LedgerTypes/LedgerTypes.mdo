@@ -99,6 +99,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="3d76805a-d007-41e0-b8d6-832db4e6ea3f">
+    <name>SourceLedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Source ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="fa18f0c6-27fa-4ba6-811d-503fac6d71ca">
     <producedTypes>
       <objectType typeId="63f39028-ae9c-447a-a56c-275894c0a2d2" valueTypeId="adff4ad1-b7f5-4ef7-9727-828d12d7ec03"/>

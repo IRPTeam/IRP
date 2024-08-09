@@ -21,6 +21,7 @@
     <key>en</key>
     <value>Accounting extra dimension</value>
   </objectPresentation>
+  <characteristicExtValues>Catalog.ExtDimensions</characteristicExtValues>
   <type>
     <types>CatalogRef.Companies</types>
     <types>CatalogRef.LegalNameContracts</types>
@@ -34,6 +35,7 @@
     <types>CatalogRef.Stores</types>
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.BusinessUnits</types>
+    <types>CatalogRef.ExtDimensions</types>
   </type>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="823b78e9-f6f7-4609-acb7-16d2ecdb9297">
+  <producedTypes>
+    <objectType typeId="76b9c06a-0121-4edd-97a0-e054305ded0b" valueTypeId="73fee449-990f-4043-88c5-ee1f9c87b83a"/>
+    <refType typeId="dc8b5672-59a0-4ec4-ac41-3c6e9333db84" valueTypeId="71d53d48-ecf2-43de-996d-4041f1642d7d"/>
+    <selectionType typeId="0ba537e1-79c9-4ed4-9b57-337141505ce8" valueTypeId="22e05b9d-8cbc-4a21-bbf9-6354c976e1cb"/>
+    <listType typeId="a174a583-8cf9-4c2c-b8e3-e47310e1a3ec" valueTypeId="be03169c-798e-4673-9a25-c62baccce7ff"/>
+    <managerType typeId="652e6362-4b9a-440b-a2ff-f035da08328b" valueTypeId="f21f049e-019d-4956-ab1c-3f19c36fbdff"/>
+  </producedTypes>
+  <name>ExtDimensions</name>
+  <synonym>
+    <key>en</key>
+    <value>Ext dimensions</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_ExtDimensions</value>
+    </typesFilterValue>
+    <characteristicValues>Catalog.ExtDimensions.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Catalog.ExtDimensions.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Catalog.ExtDimensions.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Catalog.ExtDimensions.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Catalog_ExtDimensions</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Ext dimension</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Ext dimensions</value>
+  </listPresentation>
+  <hierarchyType>HierarchyOfItems</hierarchyType>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <owners>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</owners>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.ExtDimensions.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.ExtDimensions.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.ExtDimensions.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <tabularSections uuid="c732a494-e3c7-4af3-8d91-a01ff2500ecf">
+    <producedTypes>
+      <objectType typeId="03d0efe6-eb6b-4dc0-8a57-1066c034acee" valueTypeId="ba809a9d-a9d6-41fd-815b-234ece20cbb3"/>
+      <rowType typeId="c876096c-ce1d-460e-9794-3b1ee2b60867" valueTypeId="6f35de1a-cf52-4a15-ba86-4e8ab57c1ae6"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="ba418065-5d43-4e1d-936f-c59cb4b7e730">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fda70baa-121b-4369-bc0c-6f0911308a84">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.ExtDimensions.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b60dbb09-991f-4d0b-a2eb-8c68036852b9">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <forms uuid="0c5ef59d-c2ca-4e2b-88ef-2cbf3df1384e">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="edbce98d-c5de-4575-b026-b483611aa5f1">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="5ee95b6b-5a69-4893-b1d3-68ee0abc8d8f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

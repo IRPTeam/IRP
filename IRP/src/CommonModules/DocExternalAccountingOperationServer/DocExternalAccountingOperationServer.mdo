@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7ff40172-c972-440c-9eed-2f581d417a2a">
+  <name>DocExternalAccountingOperationServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Doc external accounting operation server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

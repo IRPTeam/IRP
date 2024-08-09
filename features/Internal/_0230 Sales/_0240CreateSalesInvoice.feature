@@ -517,6 +517,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
 		And "ItemList" table contains lines
 			| '#'   | 'Profit loss center'        | 'Price type'                | 'Item'      | 'Item key'   | 'Dont calculate row'   | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Total amount'   | 'Additional analytic'   | 'Store'      | 'Delivery date'   | 'Use shipment confirmation'   | 'Detail'   | 'Sales order'                                | 'Revenue type'   | 'Sales person'       |
 			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
@@ -923,7 +924,37 @@ Scenario: _024030 create SI based on SC with two same items (add linked document
 			| 'And I activate "Inventory origin" field in "ItemList" table'    |
 		And I close all client application windows
 		
-					
+Scenario: _024030 filling in Account field in the SI
+	And I close all client application windows
+	* Open SI and fill main details
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Basic Partner terms, without VAT'   |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select current line in "ItemList" table
+		And I select "scarf" from "Item" drop-down list by string in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Fill Account for payment
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| "Currency" | "Description"       |
+			| "TRY"      | "Bank account, TRY" |
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	And I close all client application windows					
 
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"

@@ -178,6 +178,25 @@ EndProcedure
 
 #EndRegion
 
+#Region ACCOUNT
+
+&AtClient
+Procedure AccountOnChange(Item)
+	DocSalesOrderClient.AccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccountStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocSalesOrderClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountEditTextChange(Item, Text, StandardProcessing)
+	DocSalesOrderClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 &AtClient

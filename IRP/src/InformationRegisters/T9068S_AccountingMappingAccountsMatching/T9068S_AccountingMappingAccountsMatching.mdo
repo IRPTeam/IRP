@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3bc65d8c-d5b3-42ef-9ffb-c507b846d69b">
+  <producedTypes>
+    <selectionType typeId="d1dbb301-d7a3-45f3-a220-593800269b2f" valueTypeId="e2158463-c76c-445d-bd86-1b05392af9fc"/>
+    <listType typeId="e217f4d3-4ebf-4e03-8316-949db4072b73" valueTypeId="d4df2a6a-4da2-4e16-9b1e-6c765eb6c1b1"/>
+    <managerType typeId="98c92f75-4987-40a6-acf0-4c7396477eee" valueTypeId="594b9f68-5503-4d0e-afd1-016fa2c9cff3"/>
+    <recordSetType typeId="f5b2efec-ba6d-4a31-bd0f-b3b9f8e7701c" valueTypeId="879b2ddf-38ea-47a5-a3d6-af9df60260fa"/>
+    <recordKeyType typeId="2958fbb5-0ec3-4bc6-a0e7-2422c29be5ea" valueTypeId="0d5a0a42-bd59-4c81-94a8-b54d19eec1cf"/>
+    <recordType typeId="583de450-1663-4b26-bab6-90d405fda0a9" valueTypeId="9e00ddb7-304a-41b3-8f51-36dbc458a93c"/>
+    <recordManagerType typeId="b7958533-2c4a-4e0e-a01f-3c8bf712df40" valueTypeId="a5f8ad48-5b5a-447f-8122-3ac7513d44b5"/>
+  </producedTypes>
+  <name>T9068S_AccountingMappingAccountsMatching</name>
+  <synonym>
+    <key>en</key>
+    <value>T9068 Accounting mapping (accounts matching)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T9068S_AccountingMappingAccountsMatching.Form.RecordForm</defaultRecordForm>
+  <defaultListForm>InformationRegister.T9068S_AccountingMappingAccountsMatching.Form.ListForm</defaultListForm>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="7a102bc2-62dd-496d-8b40-4824039d69ba">
+    <name>TargetAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Target account</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <attributes uuid="cc488211-20bb-4187-ada9-ff5b97ac0ad5">
+    <name>AllExtDimensionValues1</name>
+    <synonym>
+      <key>en</key>
+      <value>All</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="c7931a24-7c50-4260-b4b2-aafee6b0c1e0">
+    <name>AllExtDimensionValues2</name>
+    <synonym>
+      <key>en</key>
+      <value>All</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="6d4f18db-23c6-4126-b930-f658f2c906df">
+    <name>AllExtDimensionValues3</name>
+    <synonym>
+      <key>en</key>
+      <value>All</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <dimensions uuid="e0ff5eeb-090e-45a9-9ac5-0dd458d18145">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="92238cdd-08b2-4a5e-9772-44ab38845bd3">
+    <name>SourceLedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Source ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ad4760d0-ebf4-42cd-a971-82cb1dd252c2">
+    <name>TargetLedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Target ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
+  <dimensions uuid="7c1c2c02-710d-4397-8fe8-5da4389517c0">
+    <name>SourceAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Source account</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.Basic</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="894af47e-c4bc-475f-99cd-3a7325f6e231">
+    <name>ExtDimensionType1</name>
+    <synonym>
+      <key>en</key>
+      <value>1</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="05e7c737-2a48-4fb5-84b8-88181854c0f5">
+    <name>ExtDimensionValue1</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension value1</value>
+    </synonym>
+    <type>
+      <types>Characteristic.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType1</field>
+    </choiceParameterLinks>
+    <linkByType>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType1</field>
+    </linkByType>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="4835f67c-37a3-41bf-adc0-715c1fb77730">
+    <name>ExtDimensionType2</name>
+    <synonym>
+      <key>en</key>
+      <value>2</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="134f5ebc-87dd-4592-b044-7a1df9ff82d8">
+    <name>ExtDimensionValue2</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension value2</value>
+    </synonym>
+    <type>
+      <types>Characteristic.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType2</field>
+    </choiceParameterLinks>
+    <linkByType>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType2</field>
+    </linkByType>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="31f93499-0c18-4037-842a-a6804b929b01">
+    <name>ExtDimensionType3</name>
+    <synonym>
+      <key>en</key>
+      <value>3</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="6e297e6a-6ecb-49c7-8fa8-b15a016ce173">
+    <name>ExtDimensionValue3</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension value3</value>
+    </synonym>
+    <type>
+      <types>Characteristic.AccountingExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType3</field>
+    </choiceParameterLinks>
+    <linkByType>
+      <field>InformationRegister.T9068S_AccountingMappingAccountsMatching.Dimension.ExtDimensionType3</field>
+    </linkByType>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="fbe80b80-4e66-4f97-acd2-d550d4437e9a">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="1f91b8f0-6dda-458e-9d8c-e9187b40d29a">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

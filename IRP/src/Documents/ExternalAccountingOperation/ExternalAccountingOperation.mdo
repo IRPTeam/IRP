@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="012722e4-0ac5-4f0c-97da-f702f1edd3a5">
+  <producedTypes>
+    <objectType typeId="c7070c2f-b1f1-4a96-b511-edbf955d82e6" valueTypeId="753b12e9-a947-4201-9523-ff32c7929d21"/>
+    <refType typeId="18880275-2a2c-4d8e-81cd-08728015e7bf" valueTypeId="b985a14e-7b6e-49e6-8cf9-c7666b49cea8"/>
+    <selectionType typeId="74ebd3a8-5e20-474b-8a50-5eaac6294390" valueTypeId="bb5c5db9-898e-49ec-8c82-24a90d786492"/>
+    <listType typeId="2d14f4c5-bba8-4b2c-92e5-cb33c4c7537a" valueTypeId="664086a5-8872-4a20-b375-71672a3dedd8"/>
+    <managerType typeId="07725890-dc56-40cc-8429-229fbcf1d9da" valueTypeId="f9665e87-751d-4b69-a679-e06598f8eefb"/>
+  </producedTypes>
+  <name>ExternalAccountingOperation</name>
+  <synonym>
+    <key>en</key>
+    <value>External accounting operation</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.ExternalAccountingOperation.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ExternalAccountingOperation</value>
+    </typesFilterValue>
+    <characteristicValues>Document.ExternalAccountingOperation.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.Attribute.Value</valueField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_ExternalAccountingOperation</value>
+    </typesFilterValue>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  </characteristics>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.ExternalAccountingOperation.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.ExternalAccountingOperation.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.ExternalAccountingOperation.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="c1376c16-89e2-44bc-bab5-a93a2041351a">
+    <name>RecorderRef</name>
+    <synonym>
+      <key>en</key>
+      <value>Recorder ref</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="aa4eb62a-3b44-4124-874d-9b8c8f8deca2">
+    <name>RecorderPresentation</name>
+    <synonym>
+      <key>en</key>
+      <value>Recorder presentation</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1b015963-2d3b-4bc4-aeb5-cf15ad263fe3">
+    <name>LedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f77ba85d-5dae-460c-b150-dc8ac75df28a">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.OurCompany</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="563419e5-8f0d-4b23-98dc-32569176c8b6">
+    <name>RecorderName</name>
+    <synonym>
+      <key>en</key>
+      <value>Recorder name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e3f2fb32-7d60-48f0-8a3c-15000c6c5c77">
+    <name>IsOpeningEntry</name>
+    <synonym>
+      <key>en</key>
+      <value>Is opening entry</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="79ee5856-dc75-430e-a3d5-dfac48f2bf78">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="ed01191e-3f58-45f9-8ddf-88f101787e57">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6582a22a-397f-4660-86c1-e873fa757680">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="122a8ab1-bdae-41b2-8afa-1f3dcbc1b604">
+    <name>RowForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Row form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="2145687b-2d55-44cc-bd68-1b2164db5a07">
+    <producedTypes>
+      <objectType typeId="9c6abd70-3338-4710-9cd4-e9f5fb33a045" valueTypeId="7450251c-10f9-46bf-bbc3-876c83e5817e"/>
+      <rowType typeId="716f1719-1925-4def-84b3-6dbda7d8555d" valueTypeId="350564c9-2194-4ff7-b56c-4423339e0f54"/>
+    </producedTypes>
+    <name>Records</name>
+    <synonym>
+      <key>en</key>
+      <value>Records</value>
+    </synonym>
+    <attributes uuid="b0c68528-a384-4d25-b66b-ea6537955c1d">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="baabf376-724b-4048-8338-47c4eaddc276">
+      <name>Period</name>
+      <synonym>
+        <key>en</key>
+        <value>Period</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="84f0e255-c3d1-4d7e-82ff-8a47c797830e">
+      <name>Activity</name>
+      <synonym>
+        <key>en</key>
+        <value>Activity</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="878e1562-5a5f-4b27-bc44-0c8832b2a081">
+      <name>CompanyRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Company ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f71c15b6-cab2-4b88-948a-d9106ac327a8">
+      <name>CompanyPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Company presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7e5a6c01-60c4-46f2-a327-7094abda61cc">
+      <name>Company</name>
+      <synonym>
+        <key>en</key>
+        <value>Company</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Companies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4a195c1e-67b8-40e2-acd7-1d4f46ea47ca">
+      <name>CurrencyRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="507fb5ea-4ad6-456e-b21c-6b4a5b6a8f9d">
+      <name>CurrencyPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2f8db63d-e57b-4aaf-b49f-28af5c58b4c8">
+      <name>Currency</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2a47b4e6-1b5d-48cf-a608-412596e1f786">
+      <name>AccountDrRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Dr ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="64b46f4d-1865-4850-a767-3cc4b2ca8c90">
+      <name>AccountDrPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Dr presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="16840753-cdef-4dca-939a-5db855077d58">
+      <name>AccountDr</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Dr</value>
+      </synonym>
+      <type>
+        <types>ChartOfAccountsRef.Basic</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ec60d261-509a-452f-839b-7b7c651ad1b9">
+      <name>CurrencyDrRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Dr ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="68465cc1-caf9-4a92-a7d7-631ccdd0db1d">
+      <name>CurrencyDrPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Dr presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cbaed439-a00c-4ed9-9247-7cb3697f940c">
+      <name>CurrencyDr</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Dr</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6da0874a-cc7e-47fe-9d98-6e9a25c2d7f7">
+      <name>AmountCurrencyDr</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount currency Dr</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d805f9b1-0292-481e-a666-5f48af541632">
+      <name>QuantityDr</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity Dr</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b3b59d1f-eaec-47e2-b9f2-996895a87f2f">
+      <name>AccountCrRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Cr ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="339e5cfb-2569-415d-8502-83e48932fa1e">
+      <name>AccountCrPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Cr presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4c3b7923-dc29-412e-be4a-2c54be04df0f">
+      <name>AccountCr</name>
+      <synonym>
+        <key>en</key>
+        <value>Account Cr</value>
+      </synonym>
+      <type>
+        <types>ChartOfAccountsRef.Basic</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5c4e1212-8a12-4e64-ac57-0f31137bca3a">
+      <name>CurrencyCrRef</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Cr ref</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e19d62f1-1147-48d3-bad0-caa81ff2b3f2">
+      <name>CurrencyCrPresentation</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Cr presentation</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d9e5a6af-3d6a-4eef-921a-969740a343af">
+      <name>CurrencyCr</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency Cr</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0f562d87-0a14-4ab3-aebd-efb6e4d2e231">
+      <name>AmountCurrencyCr</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount currency Cr</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fa9f268a-68d3-44ab-b189-1f28fee7eef8">
+      <name>QuantityCr</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity Cr</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="43c78f26-032d-4791-b9ea-2a263d5652a2">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4424f11c-e1fc-43c5-9adf-2578d61b9269">
+      <name>OperationTitle</name>
+      <synonym>
+        <key>en</key>
+        <value>Operation title</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>1024</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5c641c16-4e41-47a9-b99d-a4fc40013914">
+      <name>ChartNameDr</name>
+      <synonym>
+        <key>en</key>
+        <value>Chart name Dr</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8e4c39ed-a93c-48bf-9b4a-e53ba0b32e74">
+      <name>ChartNameCr</name>
+      <synonym>
+        <key>en</key>
+        <value>Chart name Cr</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="35ac0b0d-cd38-487c-b454-d3f79d7e392b">
+      <name>ExtDimensionRefDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref dr1</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b4ad9432-ce30-4e77-a43d-8927a74d60d6">
+      <name>BaseClassDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class dr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7d5f83ce-0a58-4a98-844c-b6825bdc7206">
+      <name>ClassDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Class dr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c7e1452b-861a-49b5-8f51-48e2b60de4cf">
+      <name>ExtDimensionValueDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value dr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9c553d35-f7f0-4b2a-9c26-3bd0148d587d">
+      <name>ExtDimensionTypeDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type dr1</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b59912f5-8809-4b35-9b15-5c901c85de6d">
+      <name>InternalBaseClassDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class dr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="35174b20-abd2-496c-96a1-19df3e25079a">
+      <name>InternalClassDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class dr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="745919c5-3654-4ba4-9977-a24957a63494">
+      <name>InternalExtDimensionValueDr1</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Dr1</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="cee4592a-0573-44ac-9a67-4f798657b068">
+      <name>ExtDimensionRefDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref dr2</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e61c086f-77b4-4c56-9cb1-9e74e0e50edb">
+      <name>BaseClassDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class dr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9bcf89ea-fd13-4c4d-86d3-eef83ee0640b">
+      <name>ClassDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Class dr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="58ccffb8-0f31-4e17-b4f7-713ad952c238">
+      <name>ExtDimensionValueDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value dr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="dc83fa89-f27a-4be9-bcb3-427e51b91e55">
+      <name>ExtDimensionTypeDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type dr2</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="269582bd-78f4-4510-85db-d23e94c83964">
+      <name>InternalBaseClassDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class dr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fd950a1b-aa24-406c-920d-3ea79047766a">
+      <name>InternalClassDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class dr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9a9a4e2b-0bbb-440f-84ae-bffb1f0d2667">
+      <name>InternalExtDimensionValueDr2</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Dr2</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d46eefb3-7f9a-4ef3-a439-b55cc3f53830">
+      <name>ExtDimensionRefDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref dr3</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="a04c3fdd-cfc9-402a-a06b-3bf935c9f95c">
+      <name>BaseClassDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class dr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="61ba105b-aa53-463d-901b-14379655e630">
+      <name>ClassDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Class dr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7b2778d4-24d9-4415-9e7f-aa70400d4726">
+      <name>ExtDimensionValueDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value dr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4a395b56-0f7c-47ab-91ad-4b9898920f5e">
+      <name>ExtDimensionTypeDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type dr3</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ad8c458e-65ba-4c34-aa6d-ce3044cb14dd">
+      <name>InternalBaseClassDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class dr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c78fed4d-eb16-4148-aa43-ecb6706c0f9e">
+      <name>InternalClassDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class dr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5f6703f8-41a6-4d75-8790-0746ccdd19f9">
+      <name>InternalExtDimensionValueDr3</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Dr3</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f03f8cac-ead0-449c-baaa-10e993ce3bda">
+      <name>ExtDimensionRefCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref cr1</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="8cb53629-02de-492e-aed8-d94105f36bd8">
+      <name>BaseClassCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class cr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f9c581d0-7bd9-46d9-8c69-0b08f06215b7">
+      <name>ClassCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Class cr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5cb45627-e4fa-4330-98db-834b976af9ce">
+      <name>ExtDimensionValueCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value cr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="fb740310-efb2-4e8a-b3ce-4efbf29af31f">
+      <name>ExtDimensionTypeCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type cr1</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f49c36f9-cf2d-48ae-98b1-9c37375ba3a7">
+      <name>InternalBaseClassCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class cr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bc485950-d9a8-4919-ba44-b3a699d33862">
+      <name>InternalClassCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class cr1</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ae9976c9-a4ba-4a08-8fdf-fc56ffde5e57">
+      <name>InternalExtDimensionValueCr1</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Cr1</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0d74560c-9db5-4d70-908f-045f12512809">
+      <name>ExtDimensionRefCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref cr2</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="9e18a67c-40a2-49f1-b242-12aa9a5e2840">
+      <name>BaseClassCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class cr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2ea767ca-e439-4e15-9859-9df71e9cd09a">
+      <name>ClassCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Class cr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8886a9ac-563e-4021-abeb-ef84a8fe624a">
+      <name>ExtDimensionValueCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value cr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c85097b5-e7ef-401c-85b2-edbdf45bf6dc">
+      <name>ExtDimensionTypeCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type cr2</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1dd00be9-e11e-4e8e-b752-a767dffdaedd">
+      <name>InternalBaseClassCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class cr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8901eb14-431b-4dff-b800-b47c9a75389c">
+      <name>InternalClassCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class cr2</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bb6190c8-9cc5-4d2e-9823-79fd1077237e">
+      <name>InternalExtDimensionValueCr2</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Cr2</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4a2249bb-6eac-42c4-9d27-97d8c9267d38">
+      <name>ExtDimensionRefCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension ref cr3</value>
+      </synonym>
+      <type>
+        <types>UUID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="0d0e0d36-0ae4-4af5-bebb-49d05bde0ff2">
+      <name>BaseClassCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Base class cr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="aeed7e39-04a2-469b-a649-4f14a46a2677">
+      <name>ClassCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Class cr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9a444f10-d9c0-4437-a323-fa6ec7f17303">
+      <name>ExtDimensionValueCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension value cr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>50</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="36663361-ab8c-4d18-a955-64abe36a2ac0">
+      <name>ExtDimensionTypeCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension type cr3</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e30dfa85-f273-4708-985b-64c7950439a4">
+      <name>InternalBaseClassCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal base class cr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>20</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4177785a-d287-4173-8337-4b89fa678bba">
+      <name>InternalClassCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>Internal class cr3</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>150</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d9f59bfe-6d00-49c7-89e0-c47348750419">
+      <name>InternalExtDimensionValueCr3</name>
+      <synonym>
+        <key>en</key>
+        <value>ext. dimension value Cr3</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AccountingExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="a85f5dce-f56c-4ac0-861e-93a0195d0aa9">
+    <producedTypes>
+      <objectType typeId="e96f7027-d8f7-45b3-9c21-f0135554ff37" valueTypeId="da07435b-cc41-4392-9c58-8272b936f25e"/>
+      <rowType typeId="dbb473b3-305e-4ac8-9414-f0ec0e847822" valueTypeId="fe663a0c-fd1b-44f1-b51d-3b2a8a0e57ec"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="4617ab59-ecd5-4fd9-a747-6b7377edf54b">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="aec37176-c69d-47f3-b6cc-f968c93a9d38">
+      <name>CurrencyFrom</name>
+      <synonym>
+        <key>en</key>
+        <value>Currency from</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8b71e479-f92b-4e3d-a29b-35f0bc4ea3b9">
+      <name>Rate</name>
+      <synonym>
+        <key>en</key>
+        <value>Rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a7d00681-fa42-41e4-95f9-65ed7af605c8">
+      <name>ReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reverse rate</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeCurrencyRate</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="37ec6a13-aa94-40c7-bb2e-d7d7552859cf">
+      <name>ShowReverseRate</name>
+      <synonym>
+        <key>en</key>
+        <value>Show reverse rate</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="751b0cd7-e5c1-4021-b349-d5d007435a52">
+      <name>Multiplicity</name>
+      <synonym>
+        <key>en</key>
+        <value>Multiplicity</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2f075576-132b-46de-8d2a-dff542e7648d">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="10a87085-66ad-4793-a7be-19e01b2bd1ed">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d768b8a4-4418-41c1-9067-7eac6469fafa">
+      <name>IsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="0f0562cc-31b7-4ce3-8a8f-4a853e67fcc0">
+    <producedTypes>
+      <objectType typeId="f31af649-f2ff-4ec9-8aac-91b97dcaef92" valueTypeId="12f612e3-5811-4521-9a47-c1d344a65672"/>
+      <rowType typeId="607c60e5-d95f-42fe-9c22-8412f1b60483" valueTypeId="9dbb7165-efe4-4132-aaa7-c7a96ddde115"/>
+    </producedTypes>
+    <name>Errors</name>
+    <synonym>
+      <key>en</key>
+      <value>Errors</value>
+    </synonym>
+    <attributes uuid="720d3e81-f200-4968-9984-7b88aa877680">
+      <name>Error</name>
+      <synonym>
+        <key>en</key>
+        <value>Error</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>1024</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="6e447f3c-ab27-41f4-b8aa-320c90f82118">
+    <producedTypes>
+      <objectType typeId="bc6a6d29-c809-44e0-8556-d7a1fb6434da" valueTypeId="3a05165b-9bbb-4537-862e-38d5e31d9ce3"/>
+      <rowType typeId="c5b302c1-081f-481e-87b8-5f03ec724b14" valueTypeId="76c4b3e9-5e39-48a4-af87-ece0544e9fa5"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="b63c0e07-5aa3-4568-8be6-c00fd8e5668b">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="6f4031e5-d1a6-4308-856c-2e7ddb33d991">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.ExternalAccountingOperation.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

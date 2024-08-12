@@ -1338,9 +1338,32 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	Strings.Insert("Error_148", NStr("en = 'Debit\Credit note is available only when amounts are equal.'", Lang));
+
 	Strings.Insert("Error_149", NStr("en = 'Fill field'", Lang));
 	Strings.Insert("Error_150", NStr("en = 'Can not find file at data base'", Lang));
 	Strings.Insert("Error_151", NStr("en = 'Can not find file at storage service'", Lang));
+	Strings.Insert("Error_152", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
+	Strings.Insert("Error_153", NStr("en = 'Debit is empty [%1] row-key[%2]'", Lang));
+	Strings.Insert("Error_154", NStr("en = 'Credit is empty [%1] row-key[%2]'", Lang));
+	
+	Strings.Insert("Error_155", NStr("en = 'Company is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_156", NStr("en = 'Currency is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_157", NStr("en = 'Account Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_158", NStr("en = 'Account Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_159", NStr("en = 'Currency Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_160", NStr("en = 'Currency Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_161", NStr("en = 'Ext. dimension 1 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_162", NStr("en = 'Ext. dimension 1 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_163", NStr("en = 'Ext. dimension 2 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_164", NStr("en = 'Ext. dimension 2 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_165", NStr("en = 'Ext. dimension 3 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_166", NStr("en = 'Ext. dimension 3 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_167", NStr("en = 'Ext. dimension 1 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_168", NStr("en = 'Ext. dimension 1 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_169", NStr("en = 'Ext. dimension 2 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_170", NStr("en = 'Ext. dimension 2 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_171", NStr("en = 'Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_172", NStr("en = 'Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -2098,6 +2121,9 @@ Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTr
 
 Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
 	NStr("en = 'TaxesOperation DR (R5015B_OtherPartnersTransactions) CR (R1040B_TaxesOutgoing)'", Lang));
+
+Strings.Insert("ExternalAccountingOperation",
+	NStr("en = 'External accounting operation'", Lang));
 
 #EndRegion
 

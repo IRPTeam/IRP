@@ -827,7 +827,6 @@ Scenario: _0991008 create Account charts (Basic) - group and assets account
 		* Check creation
 			And "List" table contains lines
 				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
 				| '405'                    | '10'    | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
 	* Create first account (assets)	
 		And I click the button named "FormCreate"
@@ -868,7 +867,6 @@ Scenario: _0991008 create Account charts (Basic) - group and assets account
 		* Check 
 			And "List" table contains lines
 				| 'Code'                   | 'Order' | 'Description'           | 'Type' | 'Ext. Dim 2' | 'Q.'  | 'Ext. Dim 3' | 'C.' | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-				| 'Account charts (Basic)' | ''      | ''                      | ''     | ''           | ''    | ''           | ''   | ''                                  | ''           | ''            |
 				| '405'                    | '10'    | 'Group Assets acccount' | 'AP'   | ''           | 'Yes' | ''           | 'No' | 'LTV with account charts code mask' | ''           | 'No'          |
 				| '405.01'                 | '40501' | 'Assets acccount'       | 'A'    | 'Item key'   | 'Yes' | 'Store'      | 'No' | 'LTV with account charts code mask' | 'Item'       | 'No'          |					
 
@@ -878,9 +876,6 @@ Scenario: _0991009 create Account charts (Basic) - liabilities account without g
 		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
 		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
 	* Create liabilities account
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
 		And I click "Create" button
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"			
 		And I input "1021311" text in the field named "Code"
@@ -915,7 +910,6 @@ Scenario: _0991009 create Account charts (Basic) - liabilities account without g
 	* Check 
 		And "List" table contains lines
 			| 'Code'                   | 'Order'   | 'Description'         | 'Type' | 'Ext. Dim 2'   | 'Q.' | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| 'Account charts (Basic)' | ''        | ''                    | ''     | ''             | ''   | ''                    | ''    | ''                                  | ''           | ''            |
 			| '102.13.11'              | '1021311' | 'Liabilities account' | 'P'    | 'Partner term' | 'No' | 'Legal name contract' | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
 		
 Scenario: _0991010 create Account charts (Basic) - Assets/Liabilities account, Off-balance
@@ -924,9 +918,6 @@ Scenario: _0991010 create Account charts (Basic) - Assets/Liabilities account, O
 		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
 		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
 	* Create liabilities account
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
 		And I click "Create" button
 		Then the form attribute named "LedgerTypeVariant" became equal to "LTV with account charts code mask"			
 		And I input "7021311" text in the field named "Code"
@@ -962,9 +953,6 @@ Scenario: _0991013 check account charts code mask
 		Given I open hyperlink "e1cib/list/ChartOfAccounts.Basic"
 		And I change the radio button named "LedgerTypeVariantFilter" value to "LTV with account charts code mask"
 	* Create liabilities account
-		And I go to line in "List" table
-			| 'Code'                      |
-			| 'Account charts (Basic)'    |
 		And I click "Create" button 
 	* Check charts code mask (@@@.@@.@@@)
 		And I input "898.99.008" text in the field named "Code"
@@ -1114,12 +1102,8 @@ Scenario: _0991015 check load charts of accounts (correct data)
 	* Check
 		And "List" table contains lines
 			| 'Code'                   | 'Order'    | 'Description'         | 'Type' | 'Ext. Dim 2'       | 'Q.'  | 'Ext. Dim 3'          | 'C.'  | 'Ledger type variant'               | 'Ext. Dim 1' | 'Off-balance' |
-			| 'Account charts (Basic)' | ''         | ''                    | ''     | ''                 | ''    | ''                    | ''    | ''                                  | ''           | ''            |
 			| '90878699'               | '90878699' | 'Test assets account' | 'A'    | 'Item key (turn.)' | 'Yes' | 'Fixed asset (turn.)' | 'No'  | 'LTV with account charts code mask' | 'Item'       | 'No'          |
 			| '908990'                 | '908990'   | 'Test group'          | 'P'    | ''                 | 'No'  | ''                    | 'Yes' | 'LTV with account charts code mask' | 'Partner'    | 'No'          |
-		And I expand a line in "List" table
-			| 'C.'  | 'Code'   | 'Description' | 'Ext. Dim 1' | 'Ledger type variant'               | 'Off-balance' | 'Order'  | 'Q.' | 'Type' |
-			| 'Yes' | '908990' | 'Test group'  | 'Partner'    | 'LTV with account charts code mask' | 'No'          | '908990' | 'No' | 'P'    |
 		* Liabilities account
 			And I go to line in "List" table
 				| 'C.' | 'Code'      | 'Description'              | 'Ext. Dim 1' | 'Ext. Dim 2'       | 'Ext. Dim 3'          | 'Ledger type variant'               | 'Off-balance' | 'Order'     | 'Q.'  | 'Type' |

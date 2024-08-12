@@ -102,10 +102,6 @@ Scenario: _050000 preparation (Cash receipt)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
 	When Create document SalesInvoice objects (Partner term - TRY, document USD and vice versa)
-	And I execute 1C:Enterprise script at server
-		| "Documents.SalesInvoice.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
-	And I execute 1C:Enterprise script at server
-		| "Documents.SalesInvoice.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
 	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
 	And I set checkbox "Number editing available"
 	And I close "System settings" window
@@ -739,7 +735,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | ""        | ""                    | ""        |
 				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | ""        | ""                    | ""        |
 				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""        | ""                    | ""        |				
-	* Allocation check	(one partner)
+* Allocation check	(one partner)
 		And I input "10 000,00" text in the field named "Amount"
 		And I click the button named "Calculate"
 		And "Documents" table became equal
@@ -893,28 +889,32 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 				| 'Number'                        |
 				| '$NumberCashReceipt052023$'     |	
 
-// Scenario: _050021 create Cash receipt based on SO (Partner term - TRY, document USD)	
-// 	And I close all client application windows
-// 	* Select SO
-// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '235'    |
-// 	* Create CR
-// 		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
-// 		And I click Select button of "Cash account" field
-// 		And I go to line in "List" table
-// 			| "Currency" | "Description"  |
-// 			| "TRY"      | "Cash desk №4" |
-// 		And I select current line in "List" table
-// 	* Check filling
-// 		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		Then the form attribute named "Currency" became equal to "TRY"
-// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+Scenario: _050021 create Cash receipt based on SO (Partner term - TRY, document USD)	
+	And I close all client application windows
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '235'    |
+	* Create CR
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| "Description"  |
+			| "Cash desk №3" |
+		And I select current line in "List" table
+	* Check filling
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		
 Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document TRY)	
 	And I close all client application windows
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
 	* Select SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table

@@ -940,9 +940,6 @@ Procedure Write_SelfRecords(Parameters,
 		TableAccountingAmounts = RecordSet_AccountingAmounts.UnloadColumns();
 		TableAccountingAmounts.Columns.Delete(TableAccountingAmounts.Columns.PointInTime);
 
-		// Accounting amounts (currency revaluation)
-		//TableAccountingAmounts_CurrencyRevaluation = TableAccountingAmounts.CopyColumns();
-
 		// Advances
 		RecordSet_Advances = AccumulationRegisters[Parameters.RegisterName_Advances].CreateRecordSet();
 		RecordSet_Advances.Filter.Recorder.Set(Row.Document);
@@ -954,9 +951,6 @@ Procedure Write_SelfRecords(Parameters,
 		RecordSet_Transactions.Filter.Recorder.Set(Row.Document);
 		TableTransactions = RecordSet_Transactions.UnloadColumns();
 		TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
-
-		// Transactions (currency revaluation)
-		//TableTransactions_CurrencyRevaluation = TableTransactions.CopyColumns();
 
 		// Partners balance
 		RecordSet_PartnersBalance = AccumulationRegisters.R5020B_PartnersBalance.CreateRecordSet();
@@ -1221,6 +1215,7 @@ Procedure Write_SelfRecords(Parameters,
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.R5020B_PartnersBalance);
 			
 		RecordSet_PartnersBalance.Read();
+		AccumulationRegisters.R5020B_PartnersBalance.AdditionalDataFilling(ItemOfPostingInfo.Value.PrepareTable);
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_PartnersBalance.Add(), RowPostingInfo);
 		EndDo;

@@ -94,9 +94,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 		
 		If Not ValueIsFilled(Row.AccountDr) Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(
-				R().AccountingError_02, "RegisterRecords.Basic["+ Index +"].AccountDr", ThisObject);
+			If Not (ValueIsFilled(Row.AccountCr) And Row.AccountCr.OffBalance) Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().AccountingError_02, "RegisterRecords.Basic["+ Index +"].AccountDr", ThisObject);
+			EndIf;
 		Else
 			If Row.AccountDr.NotUsedForRecords Then
 				Cancel = True;
@@ -106,9 +108,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 		
 		If Not ValueIsFilled(Row.AccountCr) Then
-			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(
-				R().AccountingError_03, "RegisterRecords.Basic["+ Index +"].AccountCr", ThisObject);
+			If Not (ValueIsFilled(Row.AccountDr) And Row.AccountDr.OffBalance) Then
+				Cancel = True;
+				CommonFunctionsClientServer.ShowUsersMessage(
+					R().AccountingError_03, "RegisterRecords.Basic["+ Index +"].AccountCr", ThisObject);
+			EndIf;
 		Else
 			If Row.AccountCr.NotUsedForRecords Then
 				Cancel = True;

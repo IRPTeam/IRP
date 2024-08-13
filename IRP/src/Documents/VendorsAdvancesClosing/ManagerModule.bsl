@@ -110,8 +110,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T2010S_OffsetOfAdvances());
 	QueryArray.Add(T2013S_OffsetOfAging());
-	QueryArray.Add(T2012S_AdvancesCurrencyRevaluation());
-	QueryArray.Add(T2011S_TransactionsCurrencyRevaluation());
 	Return QueryArray;
 EndFunction
 
@@ -133,28 +131,6 @@ Function T2013S_OffsetOfAging()
 		|INTO T2013S_OffsetOfAging
 		|FROM
 		|	Records_OffsetAging
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function T2012S_AdvancesCurrencyRevaluation()
-	Return 
-		"SELECT
-		|	*
-		|INTO T2012S_AdvancesCurrencyRevaluation
-		|FROM
-		|	Records_AdvancesCurrencyRevaluation
-		|WHERE
-		|	TRUE";
-EndFunction
-
-Function T2011S_TransactionsCurrencyRevaluation()
-	Return
-		"SELECT
-		|	*
-		|INTO T2011S_TransactionsCurrencyRevaluation
-		|FROM
-		|	Records_TransactionsCurrencyRevaluation
 		|WHERE
 		|	TRUE";
 EndFunction

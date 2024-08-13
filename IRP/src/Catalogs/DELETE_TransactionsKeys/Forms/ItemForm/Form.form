@@ -352,7 +352,7 @@
   </items>
   <items xsi:type="form:FormField">
     <name>Order</name>
-    <id>28</id>
+    <id>31</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -363,7 +363,7 @@
     </dataPath>
     <extendedTooltip>
       <name>OrderExtendedTooltip</name>
-      <id>30</id>
+      <id>33</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -378,7 +378,7 @@
     </extendedTooltip>
     <contextMenu>
       <name>OrderContextMenu</name>
-      <id>29</id>
+      <id>32</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -401,19 +401,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>AdvanceAgreement</name>
-    <id>37</id>
+    <name>Agreement</name>
+    <id>28</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.AdvanceAgreement</segments>
+      <segments>Object.Agreement</segments>
     </dataPath>
     <extendedTooltip>
-      <name>AdvanceAgreementExtendedTooltip</name>
-      <id>39</id>
+      <name>AgreementExtendedTooltip</name>
+      <id>30</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -427,8 +427,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>AdvanceAgreementContextMenu</name>
-      <id>38</id>
+      <name>AgreementContextMenu</name>
+      <id>29</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -437,7 +437,7 @@
       <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
-    <editMode>Enter</editMode>
+    <editMode>EnterOnInput</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
@@ -501,19 +501,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>IsVendorAdvance</name>
-    <id>31</id>
+    <name>IsVendorTransaction</name>
+    <id>34</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.IsVendorAdvance</segments>
+      <segments>Object.IsVendorTransaction</segments>
     </dataPath>
     <extendedTooltip>
-      <name>IsVendorAdvanceExtendedTooltip</name>
-      <id>33</id>
+      <name>IsVendorTransactionExtendedTooltip</name>
+      <id>36</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -527,8 +527,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>IsVendorAdvanceContextMenu</name>
-      <id>32</id>
+      <name>IsVendorTransactionContextMenu</name>
+      <id>35</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -544,19 +544,19 @@
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <items xsi:type="form:FormField">
-    <name>IsCustomerAdvance</name>
-    <id>34</id>
+    <name>IsCustomerTransaction</name>
+    <id>37</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.IsCustomerAdvance</segments>
+      <segments>Object.IsCustomerTransaction</segments>
     </dataPath>
     <extendedTooltip>
-      <name>IsCustomerAdvanceExtendedTooltip</name>
-      <id>36</id>
+      <name>IsCustomerTransactionExtendedTooltip</name>
+      <id>39</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -570,8 +570,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>IsCustomerAdvanceContextMenu</name>
-      <id>35</id>
+      <name>IsCustomerTransactionContextMenu</name>
+      <id>38</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -585,6 +585,56 @@
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>TransactionBasis</name>
+    <id>40</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.TransactionBasis</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>TransactionBasisExtendedTooltip</name>
+      <id>42</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>TransactionBasisContextMenu</name>
+      <id>41</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>EnterOnInput</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+    </extInfo>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -615,7 +665,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.AdvancesKeys</types>
+      <types>CatalogObject.DELETE_TransactionsKeys</types>
     </valueType>
     <view>
       <common>true</common>

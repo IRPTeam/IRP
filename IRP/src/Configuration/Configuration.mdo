@@ -1029,7 +1029,7 @@
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Addresses</catalogs>
-  <catalogs>Catalog.AdvancesKeys</catalogs>
+  <catalogs>Catalog.DELETE_AdvancesKeys</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
   <catalogs>Catalog.AttachedDocumentSettings</catalogs>
@@ -1108,7 +1108,7 @@
   <catalogs>Catalog.TaxAnalytics</catalogs>
   <catalogs>Catalog.Taxes</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
-  <catalogs>Catalog.TransactionsKeys</catalogs>
+  <catalogs>Catalog.DELETE_TransactionsKeys</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
@@ -1324,7 +1324,6 @@
   <reports>Report.R1200_VendorsAging</reports>
   <reports>Report.R2001_Sales</reports>
   <reports>Report.R3010_CashOnHand</reports>
-  <reports>Report.R5012_OffsetOfAdvances</reports>
   <reports>Report.R5020_ProfitLosses</reports>
   <reports>Report.R6020_BatchBalance</reports>
   <reports>Report.R6021_BatchBalanceSimple</reports>
@@ -1397,8 +1396,8 @@
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
-  <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</informationRegisters>
+  <informationRegisters>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>

@@ -28,12 +28,12 @@
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
   <content>Document.SalesReturnOrder.Attribute.Agreement</content>
   <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.Agreement</content>
-  <content>InformationRegister.T2010S_OffsetOfAdvances.Dimension.TransactionAgreement</content>
+  <content>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_TransactionAgreement</content>
   <content>InformationRegister.TaxSettings.Dimension.Agreement</content>
   <content>Document.RetailSalesReceipt.Attribute.Agreement</content>
   <content>Catalog.Agreements.Command.OpenAgreementsList</content>
   <content>Catalog.RowIDs.Attribute.AgreementSales</content>
-  <content>Catalog.TransactionsKeys.Attribute.Agreement</content>
+  <content>Catalog.DELETE_TransactionsKeys.Attribute.Agreement</content>
   <content>AccumulationRegister.R1022B_VendorsPaymentPlanning.Dimension.Agreement</content>
   <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Agreement</content>
   <content>InformationRegister.T9012S_AccountsPartner.Dimension.Agreement</content>

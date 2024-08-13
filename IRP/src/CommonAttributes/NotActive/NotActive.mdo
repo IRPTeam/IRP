@@ -73,7 +73,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.TransactionsKeys</metadata>
+    <metadata>Catalog.DELETE_TransactionsKeys</metadata>
     <use>Use</use>
   </content>
   <content>
@@ -97,7 +97,7 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Catalog.AdvancesKeys</metadata>
+    <metadata>Catalog.DELETE_AdvancesKeys</metadata>
     <use>Use</use>
   </content>
   <content>

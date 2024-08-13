@@ -352,7 +352,7 @@
   </items>
   <items xsi:type="form:FormField">
     <name>Order</name>
-    <id>31</id>
+    <id>28</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -363,7 +363,7 @@
     </dataPath>
     <extendedTooltip>
       <name>OrderExtendedTooltip</name>
-      <id>33</id>
+      <id>30</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -378,7 +378,7 @@
     </extendedTooltip>
     <contextMenu>
       <name>OrderContextMenu</name>
-      <id>32</id>
+      <id>29</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -401,19 +401,19 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>Agreement</name>
-    <id>28</id>
+    <name>AdvanceAgreement</name>
+    <id>37</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.Agreement</segments>
+      <segments>Object.AdvanceAgreement</segments>
     </dataPath>
     <extendedTooltip>
-      <name>AgreementExtendedTooltip</name>
-      <id>30</id>
+      <name>AdvanceAgreementExtendedTooltip</name>
+      <id>39</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -427,8 +427,8 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>AgreementContextMenu</name>
-      <id>29</id>
+      <name>AdvanceAgreementContextMenu</name>
+      <id>38</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -437,7 +437,7 @@
       <autoFill>true</autoFill>
     </contextMenu>
     <type>InputField</type>
-    <editMode>EnterOnInput</editMode>
+    <editMode>Enter</editMode>
     <showInHeader>true</showInHeader>
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
@@ -501,7 +501,50 @@
     </extInfo>
   </items>
   <items xsi:type="form:FormField">
-    <name>IsVendorTransaction</name>
+    <name>IsVendorAdvance</name>
+    <id>31</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+      <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.IsVendorAdvance</segments>
+    </dataPath>
+    <extendedTooltip>
+      <name>IsVendorAdvanceExtendedTooltip</name>
+      <id>33</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+      <name>IsVendorAdvanceContextMenu</name>
+      <id>32</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+    </contextMenu>
+    <type>CheckBoxField</type>
+    <editMode>EnterOnInput</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+  </items>
+  <items xsi:type="form:FormField">
+    <name>IsCustomerAdvance</name>
     <id>34</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -509,10 +552,10 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.IsVendorTransaction</segments>
+      <segments>Object.IsCustomerAdvance</segments>
     </dataPath>
     <extendedTooltip>
-      <name>IsVendorTransactionExtendedTooltip</name>
+      <name>IsCustomerAdvanceExtendedTooltip</name>
       <id>36</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -527,7 +570,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>IsVendorTransactionContextMenu</name>
+      <name>IsCustomerAdvanceContextMenu</name>
       <id>35</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -542,99 +585,6 @@
     <headerHorizontalAlign>Left</headerHorizontalAlign>
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-  </items>
-  <items xsi:type="form:FormField">
-    <name>IsCustomerTransaction</name>
-    <id>37</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.IsCustomerTransaction</segments>
-    </dataPath>
-    <extendedTooltip>
-      <name>IsCustomerTransactionExtendedTooltip</name>
-      <id>39</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>IsCustomerTransactionContextMenu</name>
-      <id>38</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>CheckBoxField</type>
-    <editMode>EnterOnInput</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
-  </items>
-  <items xsi:type="form:FormField">
-    <name>TransactionBasis</name>
-    <id>40</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.TransactionBasis</segments>
-    </dataPath>
-    <extendedTooltip>
-      <name>TransactionBasisExtendedTooltip</name>
-      <id>42</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>TransactionBasisContextMenu</name>
-      <id>41</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>InputField</type>
-    <editMode>EnterOnInput</editMode>
-    <showInHeader>true</showInHeader>
-    <headerHorizontalAlign>Left</headerHorizontalAlign>
-    <showInFooter>true</showInFooter>
-    <extInfo xsi:type="form:InputFieldExtInfo">
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <wrap>true</wrap>
-      <chooseType>true</chooseType>
-      <typeDomainEnabled>true</typeDomainEnabled>
-      <textEdit>true</textEdit>
-    </extInfo>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -665,7 +615,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>CatalogObject.TransactionsKeys</types>
+      <types>CatalogObject.DELETE_AdvancesKeys</types>
     </valueType>
     <view>
       <common>true</common>

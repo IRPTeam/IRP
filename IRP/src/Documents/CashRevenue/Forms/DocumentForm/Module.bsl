@@ -70,6 +70,16 @@ Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
 EndProcedure
 
+&AtClient
+Procedure API_Callback(TableName, ArrayOfDataPaths) Export
+	API_CallbackAtServer(TableName, ArrayOfDataPaths);
+EndProcedure
+
+&AtServer
+Procedure API_CallbackAtServer(TableName, ArrayOfDataPaths)
+	ViewServer_V2.API_CallbackAtServer(Object, ThisObject, TableName, ArrayOfDataPaths);
+EndProcedure
+
 #EndRegion
 
 #Region _DATE

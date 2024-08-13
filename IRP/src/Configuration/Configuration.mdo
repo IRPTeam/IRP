@@ -302,6 +302,7 @@
   <roles>Role.Document_WorkSheet</roles>
   <roles>Role.FilterForUserSettings</roles>
   <roles>Role.FullAccess</roles>
+  <roles>Role.FullAccessNoAdminFunctions</roles>
   <roles>Role.FullAccessOnlyRead</roles>
   <roles>Role.RunMobileClient</roles>
   <roles>Role.RunThickClient</roles>
@@ -791,14 +792,11 @@
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
-
   <commonAttributes>CommonAttribute.LocalTotalAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalNetAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalTaxAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
-
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
-
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

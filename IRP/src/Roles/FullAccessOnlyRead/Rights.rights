@@ -3008,6 +3008,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.A0012_AccountCard</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T2015S_TransactionsInfo.Dimension.Date</name>
 		<right>
 			<name>Edit</name>
@@ -4095,6 +4106,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.A0010_TrialBalance</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>SessionParameter.InterfaceLocalizationCode</name>
 		<right>
 			<name>Get</name>
@@ -4834,6 +4856,17 @@
 	</object>
 	<object>
 		<name>Subsystem.Reports</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.A0011_TrialBalanceByAccount</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -15502,6 +15535,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.A0013_AccountAnalysis</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

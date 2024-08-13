@@ -1110,6 +1110,8 @@ Function BindAccount(Parameters)
 	DataPath.Insert("OutgoingPaymentOrder", "Account");
 	DataPath.Insert("BankPayment"   , "Account");
 	DataPath.Insert("BankReceipt"   , "Account");
+	DataPath.Insert("SalesOrder"   , "Account");
+	DataPath.Insert("SalesInvoice"   , "Account");
 	DataPath.Insert("CashPayment"   , "CashAccount");
 	DataPath.Insert("CashReceipt"   , "CashAccount");
 	DataPath.Insert("CashExpense"   , "Account");
@@ -16207,6 +16209,10 @@ Procedure ExecuteViewNotify(Parameters, ViewNotify)
 	ElsIf ViewNotify = "PayrollListsOnAddRowFormNotify"       Then ViewClient_V2.PayrollListsOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PayrollListsOnCopyRowFormNotify"      Then ViewClient_V2.PayrollListsOnCopyRowFormNotify(Parameters);
 	ElsIf ViewNotify = "PayrollListsAfterDeleteRowFormNotify" Then ViewClient_V2.PayrollListsAfterDeleteRowFormNotify(Parameters);
+		
+	ElsIf ViewNotify = "CalculationsOnAddRowFormNotify"			Then ViewClient_V2.CalculationsOnAddRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CalculationsOnCopyRowFormNotify"		Then ViewClient_V2.CalculationsOnCopyRowFormNotify(Parameters);
+	ElsIf ViewNotify = "CalculationsAfterDeleteRowFormNotify"	Then ViewClient_V2.CalculationsAfterDeleteRowFormNotify(Parameters);
 		
 	ElsIf ViewNotify = "TimeSheetListOnAddRowFormNotify"       Then ViewClient_V2.TimeSheetListOnAddRowFormNotify(Parameters);
 	ElsIf ViewNotify = "TimeSheetListOnCopyRowFormNotify"      Then ViewClient_V2.TimeSheetListOnCopyRowFormNotify(Parameters);

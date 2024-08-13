@@ -22,7 +22,9 @@
   <content>Report.A0011_TrialBalanceByAccount</content>
   <content>Report.A0012_AccountCard</content>
   <content>Report.A0013_AccountAnalysis</content>
+  <content>Catalog.ExtDimensions</content>
   <subsystems>Accounts</subsystems>
   <subsystems>LedgerTypes</subsystems>
   <subsystems>Other</subsystems>
+  <subsystems>AccountingService</subsystems>
 </mdclass:Subsystem>

@@ -38,7 +38,8 @@ Procedure SetGroupItemsList(Object, Form)
 	
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
-	AttributesArray.Add("Agreement");	
+	AttributesArray.Add("Agreement");
+	AttributesArray.Add("Account");	
 	
 	AttributesArray.Add("Status");
 	

@@ -256,7 +256,7 @@ Scenario: _4000128 check mark/unmark option for deletion
 			| 'test2'            |
 	And I close all client application windows
 
-Scenario: _4000128 check reports option share
+Scenario: _4000128 check reports option share (select users)
 	* Open test report	
 		And In the command interface I select "Reports" "Barcodes"
 	* Option share
@@ -351,4 +351,44 @@ Scenario: _4000129 check that report created by another user cannot be overwritt
 		And I select current line in "OptionsList" table
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
-		And I close all client application windows		
+		And I close all client application windows	
+
+Scenario: _4000130 check reports option share (all users)
+		Then I connect launched Test client "Этот клиент"
+		And I close all client application windows
+	* Open test report	
+		And In the command interface I select "Reports" "D2001 Sales"
+	* Option share
+		And I click "Save option..." button
+		And I set checkbox "Share"		
+		And I click "Save as..." button
+		And I input "test_new" text in the field named "InputFld"
+		And I click the button named "OK"
+		And I go to line in "UsersList" table
+			| 'User'         |
+			| 'All users'    |
+		And I set "Use" checkbox in "UsersList" table
+		And I finish line editing in "UsersList" table
+		And I click "Save (share)" button
+	* Check option share
+		Given I open hyperlink "e1cib/list/InformationRegister.SharedReportOptions"
+		And "List" table contains lines
+			| 'User' | 'Report option' |
+			| ''     | 'test_new'      |
+			| 'CI'   | 'test_new'      |
+		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And In the command interface I select "Reports" "D2001 Sales"
+		And I click "Generate" button
+		And I click "Select option..." button
+		And I move to "Custom" tab
+		And "OptionsList" table contains lines
+			| 'Author'   | 'Report option'   | 'Shared'    |
+			| 'CI'       | 'test_new'        | 'Yes'       |
+		And I go to line in "OptionsList" table
+			| 'Report option' |
+			| 'test_new'      |
+		And I select current line in "OptionsList" table
+		And I click "Generate" button
+		Then user message window does not contain messages		
+	And I close TestClient session
+	Then I connect launched Test client "Этот клиент"	

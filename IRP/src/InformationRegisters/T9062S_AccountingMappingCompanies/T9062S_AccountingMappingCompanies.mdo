@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1dcd3482-94b7-44ee-99b4-cbd6e04f295d">
+  <producedTypes>
+    <selectionType typeId="8e640cba-2773-482b-aafc-cbfc82c5e909" valueTypeId="c4fb438d-a8cc-459b-8387-bd30657fbe54"/>
+    <listType typeId="3f1bcd6d-2cc0-4642-b919-b2da2dc36506" valueTypeId="e383b6df-8d76-4304-8869-b1b51fc3bdf7"/>
+    <managerType typeId="07d54199-7d5b-4cd6-8bd7-639463054f70" valueTypeId="1a925d43-7cf3-4cb3-a6d2-25e5946c5fcc"/>
+    <recordSetType typeId="2884aca4-d2fc-44db-a957-f64f3ff23f41" valueTypeId="f1cdd384-c35b-4358-a4d9-b4867f794b72"/>
+    <recordKeyType typeId="dcb3424e-5ce2-4cb3-b82b-90001f1a0b07" valueTypeId="e9d20bcf-8d47-404b-861f-32a009f540fb"/>
+    <recordType typeId="bfdc40ab-2bc9-4d4a-8802-58cbb1561767" valueTypeId="2aa47409-a2f0-4073-8ecd-5c3e3d257839"/>
+    <recordManagerType typeId="e7f55abd-2355-466f-86fd-15f441ac12b8" valueTypeId="724b4da9-bad9-4a17-adbb-db700cc9f6f0"/>
+  </producedTypes>
+  <name>T9062S_AccountingMappingCompanies</name>
+  <synonym>
+    <key>en</key>
+    <value>T9062 Accounting mapping (companies)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T9062S_AccountingMappingCompanies.Form.RecordForm</defaultRecordForm>
+  <defaultListForm>InformationRegister.T9062S_AccountingMappingCompanies.Form.ListForm</defaultListForm>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="1911c43f-c24f-42b5-afb7-5ce9ca4ff58d">
+    <name>InternalRef</name>
+    <synonym>
+      <key>en</key>
+      <value>Internal ref</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="9b5ae110-d13b-45ad-b87f-273d7c55555e">
+    <name>IntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="5cf0c452-a1bb-4f16-b1a4-7d7e5b38c441">
+    <name>ExternalRef</name>
+    <synonym>
+      <key>en</key>
+      <value>External ref</value>
+    </synonym>
+    <type>
+      <types>UUID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="9bd3db32-ddf5-40b4-af1b-7d89005eeae7">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a3962f47-2483-4467-93d1-fe7fca624941">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

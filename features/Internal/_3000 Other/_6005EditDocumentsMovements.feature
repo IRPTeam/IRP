@@ -163,7 +163,7 @@ Scenario: _605703 change movements for PI
 			And I select current line in "R5020B_PartnersBalance" table
 			And I input "-137 000" text in "VendorTransaction" field of "R5020B_PartnersBalance" table
 			And I finish line editing in "R5020B_PartnersBalance" table
-			And I click "Write movements" button
+			And I click "Write movements (register self-control)" button			
 	* Check
 		Then there are lines in TestClient message log
 			|'Movements successfully recorded'|

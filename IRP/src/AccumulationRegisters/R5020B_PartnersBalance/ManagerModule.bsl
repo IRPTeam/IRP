@@ -2394,15 +2394,34 @@ Function R5020B_PartnersBalance_TaxesOperation() Export
 EndFunction
 
 Procedure AdditionalDataFilling(MovementsValueTable) Export
+	
+	NewRecords = MovementsValueTable.CopyColumns();
+	
 	For Each Row In MovementsValueTable Do
-		If ValueIsFilled(Row.AdvancesClosing) Then
-			Continue;
-		EndIf;
 		Row.Amount = 
 		Row.CustomerTransaction
 		+ Row.CustomerAdvance
 		+ Row.VendorTransaction
 		+ Row.VendorAdvance
 		+ Row.OtherTransaction;
+
+		If ValueIsFilled(Row.AdvancesClosing)
+			And (ValueIsFilled(Row.CustomerAdvance) Or ValueIsFilled(Row.VendorAdvance)) Then
+				NewRecord = NewRecords.Add();
+				FillPropertyValues(NewRecord, Row);
+				NewRecord.Amount = - Row.Amount;
+				NewRecord.CustomerAdvance = 0;
+				NewRecord.VendorAdvance = 0;
+				Row.Amount = 0;
+				If Row.RecordType = AccumulationRecordType.Receipt Then
+					NewRecord.RecordType = AccumulationRecordType.Expense;
+				Else
+					NewRecord.RecordType = AccumulationRecordType.Receipt;
+				EndIf;				
+		EndIf;			
+	EndDo;
+	
+	For Each Record In NewRecords Do
+		FillPropertyValues(MovementsValueTable.Add(), Record);
 	EndDo;
 EndProcedure

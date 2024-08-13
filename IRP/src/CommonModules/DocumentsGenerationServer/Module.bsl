@@ -415,7 +415,7 @@ Function GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments, AddInf
 	|	R3025B_PurchaseOrdersToBePaid.Branch,
 	|	R3025B_PurchaseOrdersToBePaid.Currency,
 	|	R3025B_PurchaseOrdersToBePaid.Partner,
-	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3025B_PurchaseOrdersToBePaid.Order.Agreement AS Agreement,
 	|	R3025B_PurchaseOrdersToBePaid.LegalName AS Payee,
 	|	R3025B_PurchaseOrdersToBePaid.Order,
 	|	R3025B_PurchaseOrdersToBePaid.AmountBalance AS Amount
@@ -438,7 +438,7 @@ Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments) Export
 	|	R3024B_SalesOrdersToBePaid.Branch,
 	|	R3024B_SalesOrdersToBePaid.Currency,
 	|	R3024B_SalesOrdersToBePaid.Partner,
-	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3024B_SalesOrdersToBePaid.Order.Agreement AS Agreement,
 	|	R3024B_SalesOrdersToBePaid.LegalName AS Payer,
 	|	R3024B_SalesOrdersToBePaid.Order,
 	|	R3024B_SalesOrdersToBePaid.AmountBalance AS Amount

@@ -437,6 +437,7 @@
   <roles>Role.ManualRegisterEdit</roles>
   <roles>Role.Document_TaxesOperation</roles>
   <roles>Role.AttachedFilesDelete</roles>
+  <roles>Role.RelatedDocuments</roles>
   <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
   <roles>Role.Document_ExternalAccountingOperation</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
@@ -790,14 +791,11 @@
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
-
   <commonAttributes>CommonAttribute.LocalTotalAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalNetAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalTaxAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
-
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
-
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

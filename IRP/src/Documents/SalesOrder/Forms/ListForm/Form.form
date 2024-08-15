@@ -737,7 +737,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -1085,7 +1085,7 @@
 			THEN MAX(SalesOrderItemList.Store)
 		ELSE UNDEFINED
 	END AS Store,
-	SalesOrderList.Description
+	SalesOrderList.Comment
 FROM
 	Document.SalesOrder AS SalesOrderList
 		LEFT JOIN Document.SalesOrderClosing AS SalesOrderClosing
@@ -1113,7 +1113,7 @@ GROUP BY
 	NOT SalesOrderClosing.Ref IS NULL,
 	SalesOrderClosing.Ref,
 	SalesOrderList.TransactionType,
-	SalesOrderList.Description</queryText>
+	SalesOrderList.Comment</queryText>
       <mainTable>Document.SalesOrder</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

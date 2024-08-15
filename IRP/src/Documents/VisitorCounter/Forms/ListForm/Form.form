@@ -291,7 +291,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -619,7 +619,7 @@
        DocumentVisitorCounter.Branch, 
        DocumentVisitorCounter.SourceNodeID, 
        DocumentVisitorCounter.Author, 
-       DocumentVisitorCounter.Description
+       DocumentVisitorCounter.Comment
  FROM 
        Document.VisitorCounter
  AS 

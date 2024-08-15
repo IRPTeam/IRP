@@ -387,7 +387,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -711,7 +711,7 @@
 	JournalEntry.LedgerType,
 	JournalEntry.Basis,
 	JournalEntry.UserDefined,
-	JournalEntry.Description,
+	JournalEntry.Comment,
 	Case
 		when SUM(JournalEntryErrors.LineNumber) > 0
 			then True
@@ -729,7 +729,7 @@ GROUP BY
 	JournalEntry.LedgerType,
 	JournalEntry.Basis,
 	JournalEntry.UserDefined,
-	JournalEntry.Description</queryText>
+	JournalEntry.Comment</queryText>
       <mainTable>Document.JournalEntry</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

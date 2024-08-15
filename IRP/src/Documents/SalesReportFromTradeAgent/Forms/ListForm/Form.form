@@ -453,7 +453,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -816,7 +816,7 @@
 	SalesReportFromTradeAgent.PriceIncludeTax,
 	SalesReportFromTradeAgent.Author,
 	SalesReportFromTradeAgent.Branch,
-	SalesReportFromTradeAgent.Description,
+	SalesReportFromTradeAgent.Comment,
 	SalesReportFromTradeAgent.DocumentAmount
 FROM
 	Document.SalesReportFromTradeAgent AS SalesReportFromTradeAgent
@@ -834,7 +834,7 @@ GROUP BY
 	SalesReportFromTradeAgent.PriceIncludeTax,
 	SalesReportFromTradeAgent.Author,
 	SalesReportFromTradeAgent.Branch,
-	SalesReportFromTradeAgent.Description,
+	SalesReportFromTradeAgent.Comment,
 	SalesReportFromTradeAgent.DocumentAmount</queryText>
       <mainTable>Document.SalesReportFromTradeAgent</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>

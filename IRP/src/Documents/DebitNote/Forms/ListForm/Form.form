@@ -306,7 +306,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -632,7 +632,7 @@
 	DebitNote.Date,
 	DebitNote.Company,
 	DebitNote.Author,
-	DebitNote.Description,
+	DebitNote.Comment,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
 		WHEN NOT JE.Ref IS NULL
@@ -650,7 +650,7 @@ GROUP BY
 	DebitNote.Date,
 	DebitNote.Company,
 	DebitNote.Author,
-	DebitNote.Description</queryText>
+	DebitNote.Comment</queryText>
       <mainTable>Document.DebitNote</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

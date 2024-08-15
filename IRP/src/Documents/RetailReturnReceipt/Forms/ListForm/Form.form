@@ -706,7 +706,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -1091,7 +1091,7 @@
 	RetailReturnReceipt.RetailCustomer,
 	RetailReturnReceipt.Author,
 	RetailReturnReceipt.Branch,
-	RetailReturnReceipt.Description,
+	RetailReturnReceipt.Comment,
 	RetailReturnReceipt.DocumentAmount,
 	CASE
 		WHEN COUNT(DISTINCT RetailReturnReceiptItemList.Store) = 1
@@ -1132,7 +1132,7 @@ GROUP BY
 	RetailReturnReceipt.RetailCustomer,
 	RetailReturnReceipt.Author,
 	RetailReturnReceipt.Branch,
-	RetailReturnReceipt.Description,
+	RetailReturnReceipt.Comment,
 	RetailReturnReceipt.DocumentAmount,
 	RetailReturnReceipt.StatusType,
 	DocumentFiscalStatus.Status,

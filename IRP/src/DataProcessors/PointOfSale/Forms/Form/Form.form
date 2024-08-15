@@ -4204,7 +4204,7 @@
                   <common>true</common>
                 </userVisible>
                 <dataPath xsi:type="form:DataPath">
-                  <segments>Object.Description</segments>
+                  <segments>Object.Comment</segments>
                 </dataPath>
                 <extendedTooltip>
                   <name>DescriptionExtendedTooltip</name>

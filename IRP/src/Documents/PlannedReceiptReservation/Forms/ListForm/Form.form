@@ -394,7 +394,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -720,7 +720,7 @@
 	PlannedReceiptReservation.Requester,
 	PlannedReceiptReservation.Store,
 	PlannedReceiptReservation.Author,
-	PlannedReceiptReservation.Description,
+	PlannedReceiptReservation.Comment,
 	CASE WHEN COUNT(DISTINCT PlannedReceiptReservationItemList.Store) = 1 THEN
 		MAX(PlannedReceiptReservationItemList.Store)
 	ELSE UNDEFINED END AS StoreOutgoing
@@ -738,7 +738,7 @@ GROUP BY
 	PlannedReceiptReservation.Requester,
 	PlannedReceiptReservation.Store,
 	PlannedReceiptReservation.Author,
-	PlannedReceiptReservation.Description</queryText>
+	PlannedReceiptReservation.Comment</queryText>
       <mainTable>Document.PlannedReceiptReservation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

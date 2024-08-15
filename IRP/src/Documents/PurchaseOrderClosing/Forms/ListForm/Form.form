@@ -453,7 +453,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -786,7 +786,7 @@
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
-	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.Comment,
 	PurchaseOrderClosing.DocumentAmount,
 	CASE
 		WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1
@@ -811,7 +811,7 @@ GROUP BY
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
-	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.Comment,
 	PurchaseOrderClosing.DocumentAmount</queryText>
       <mainTable>Document.PurchaseOrderClosing</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

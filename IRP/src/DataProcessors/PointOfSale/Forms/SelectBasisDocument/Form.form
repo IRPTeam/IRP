@@ -278,7 +278,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>SalesOrders.Description</segments>
+        <segments>SalesOrders.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>SalesOrdersDescriptionExtendedTooltip</name>
@@ -1290,7 +1290,7 @@ WHERE
 	SalesOrder.Ref,
 	SalesOrder.RetailCustomer,
 	SalesOrder.Branch,
-	SalesOrder.Description,
+	SalesOrder.Comment,
 	SalesOrder.DocumentAmount
 FROM
 	Document.SalesOrder AS SalesOrder
@@ -1542,7 +1542,7 @@ WHERE
 	RetailShipmentConfirmation.Vehicle,
 	RetailShipmentConfirmation.Author,
 	RetailShipmentConfirmation.Branch,
-	RetailShipmentConfirmation.Description,
+	RetailShipmentConfirmation.Comment,
 	RetailShipmentConfirmation.SourceNodeID
 FROM
 	Document.RetailShipmentConfirmation AS RetailShipmentConfirmation

@@ -646,7 +646,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -983,7 +983,7 @@
 	PurchaseOrderList.UseItemsReceiptScheduling,
 	PurchaseOrderList.Author,
 	PurchaseOrderList.Branch,
-	PurchaseOrderList.Description,
+	PurchaseOrderList.Comment,
 	PurchaseOrderList.DocumentAmount,
 	Not PurchaseOrderClosing.Ref IS NULL AS Closed,
 	PurchaseOrderClosing.Ref AS ClosingOrder,
@@ -1017,7 +1017,7 @@ GROUP BY
 	PurchaseOrderList.UseItemsReceiptScheduling,
 	PurchaseOrderList.Author,
 	PurchaseOrderList.Branch,
-	PurchaseOrderList.Description,
+	PurchaseOrderList.Comment,
 	PurchaseOrderList.DocumentAmount,
 	NOT PurchaseOrderClosing.Ref IS NULL,
 	PurchaseOrderClosing.Ref</queryText>

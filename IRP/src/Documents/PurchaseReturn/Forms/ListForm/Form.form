@@ -656,7 +656,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -1016,7 +1016,7 @@ INDEX BY
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
 	PurchaseReturn.Branch,
-	PurchaseReturn.Description,
+	PurchaseReturn.Comment,
 	PurchaseReturn.DocumentAmount,
 	CASE
 		WHEN ItemListTable.StoreCount = 1
@@ -1055,7 +1055,7 @@ GROUP BY
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
 	PurchaseReturn.Branch,
-	PurchaseReturn.Description,
+	PurchaseReturn.Comment,
 	PurchaseReturn.DocumentAmount,
 	CASE
 		WHEN ItemListTable.StoreCount = 1

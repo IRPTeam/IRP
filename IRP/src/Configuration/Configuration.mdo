@@ -769,7 +769,7 @@
   <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
-  <commonAttributes>CommonAttribute.Description</commonAttributes>
+  <commonAttributes>CommonAttribute.Comment</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
   <commonAttributes>CommonAttribute.Description_ru</commonAttributes>
@@ -790,14 +790,11 @@
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
-
   <commonAttributes>CommonAttribute.LocalTotalAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalNetAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalTaxAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
-
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
-
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>

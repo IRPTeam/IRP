@@ -252,7 +252,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -576,7 +576,7 @@
 	ForeignCurrencyRevaluation.Number,
 	ForeignCurrencyRevaluation.Date,
 	ForeignCurrencyRevaluation.Company,
-	ForeignCurrencyRevaluation.Description,
+	ForeignCurrencyRevaluation.Comment,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
 		WHEN NOT JE.Ref IS NULL
@@ -593,7 +593,7 @@ GROUP BY
 	ForeignCurrencyRevaluation.Number,
 	ForeignCurrencyRevaluation.Date,
 	ForeignCurrencyRevaluation.Company,
-	ForeignCurrencyRevaluation.Description</queryText>
+	ForeignCurrencyRevaluation.Comment</queryText>
       <mainTable>Document.ForeignCurrencyRevaluation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

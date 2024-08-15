@@ -587,7 +587,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -917,7 +917,7 @@
 	Payroll.Currency,
 	Payroll.Author,
 	Payroll.Branch,
-	Payroll.Description,
+	Payroll.Comment,
 	Payroll.DocumentAmount,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
@@ -941,7 +941,7 @@ GROUP BY
 	Payroll.Currency,
 	Payroll.Author,
 	Payroll.Branch,
-	Payroll.Description,
+	Payroll.Comment,
 	Payroll.DocumentAmount</queryText>
       <mainTable>Document.Payroll</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

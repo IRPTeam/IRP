@@ -619,7 +619,7 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -953,7 +953,7 @@
 	RetailReceiptCorrection.BasisDocument,
 	RetailReceiptCorrection.Author,
 	RetailReceiptCorrection.Branch,
-	RetailReceiptCorrection.Description,
+	RetailReceiptCorrection.Comment,
 	RetailReceiptCorrection.DocumentAmount,
 	RetailReceiptCorrection.RetailCustomer,
 	RetailReceiptCorrection.ConsolidatedRetailSales,
@@ -985,7 +985,7 @@ GROUP BY
 	RetailReceiptCorrection.BasisDocument,
 	RetailReceiptCorrection.Author,
 	RetailReceiptCorrection.Branch,
-	RetailReceiptCorrection.Description,
+	RetailReceiptCorrection.Comment,
 	RetailReceiptCorrection.DocumentAmount,
 	RetailReceiptCorrection.RetailCustomer,
 	RetailReceiptCorrection.ConsolidatedRetailSales,

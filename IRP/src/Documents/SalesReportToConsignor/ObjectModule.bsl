@@ -7,6 +7,13 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
+	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+	AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
+	AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
+	AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
+	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
 

@@ -1226,6 +1226,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		ItemOfPostingInfo = GetFromPostingInfo(ArrayOfPostingInfo, Metadata.AccumulationRegisters.R5020B_PartnersBalance);
 			
 		RecordSet_PartnersBalance.Read();
+		AccumulationRegisters.R5020B_PartnersBalance.AdditionalDataFilling(ItemOfPostingInfo.Value.PrepareTable);
 		For Each RowPostingInfo In ItemOfPostingInfo.Value.PrepareTable Do
 			FillPropertyValues(RecordSet_PartnersBalance.Add(), RowPostingInfo);
 		EndDo;

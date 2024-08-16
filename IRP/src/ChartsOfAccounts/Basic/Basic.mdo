@@ -112,7 +112,6 @@
   <extDimensionTypes>ChartOfCharacteristicTypes.AccountingExtraDimensionTypes</extDimensionTypes>
   <maxExtDimensionCount>3</maxExtDimensionCount>
   <codeLength>12</codeLength>
-  <checkUnique>true</checkUnique>
   <standardTabularSections>
     <name>ExtDimensionTypes</name>
     <synonym>

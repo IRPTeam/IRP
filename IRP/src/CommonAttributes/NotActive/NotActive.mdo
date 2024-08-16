@@ -213,6 +213,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ExtDimensions</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.AccessGroups</metadata>
     <use>Use</use>
   </content>

@@ -337,6 +337,66 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="1ce5316e-4a54-42d9-8fa5-471be8c944f0">
+    <name>SendLocalTotalAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Send local total amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2ba28cb4-ca2c-49b2-bcc6-d5fa040dfb9f">
+    <name>SendLocalRate</name>
+    <synonym>
+      <key>en</key>
+      <value>Send local rate</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeCurrencyRate</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="75c64ee4-e3bf-4a07-8f16-4876bcb338f1">
+    <name>ReceiveLocalTotalAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive local total amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e4234682-7b2c-436c-b50b-bbed077b048d">
+    <name>ReceiveLocalRate</name>
+    <synonym>
+      <key>en</key>
+      <value>Receive local rate</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeCurrencyRate</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="ad6991b2-8b4d-4542-ab3d-232ab7c6fec8">
     <name>DocumentForm</name>
     <synonym>

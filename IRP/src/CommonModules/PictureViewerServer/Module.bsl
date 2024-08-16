@@ -660,3 +660,106 @@ EndFunction
 Function ExtensionCall_UploadPicture(FileInfo, Parameters) Export
 	Return False;
 EndFunction
+
+Function GetFileBinaryData(FileRef) Export
+	
+	FileParameters = CreatePictureParameters(FileRef);
+	FileURL = GetVolumeURLByIntegrationSettings(FileParameters.GETIntegrationSettings, FileParameters.URI);
+	
+	If StrStartsWith(FileURL, "e1cib/tempstorage") Then
+		FileBinaryData = GetFromTempStorage(FileURL);
+		Return FileBinaryData;
+	EndIf;
+	
+	OpenSSLSecureConnection = Undefined;
+	PortHTTP = 80;
+	If StrFind(Lower(FileURL), "https://") > 0 Then
+		OpenSSLSecureConnection = New OpenSSLSecureConnection();
+		PortHTTP = 443;
+	EndIf;
+	
+	IpPart = FileURL;
+	If StrFind(IpPart, "://") > 0 Then
+		IpPart = Mid(IpPart, StrFind(IpPart, "://") + 3);
+	EndIf;
+	If StrFind(IpPart, "/") > 0 Then
+		IpPart = Mid(IpPart, 1, StrFind(IpPart, "/") - 1);
+	EndIf;
+	If StrFind(IpPart, "@") > 0 Then
+		IpPart = Mid(IpPart, StrFind(IpPart, "@") + 1);
+	EndIf;
+	If StrFind(IpPart, ":") > 0 Then
+		IpPart = Mid(IpPart, 1, StrFind(IpPart, ":") - 1);
+	EndIf;
+	
+	HTTPConnection = New HTTPConnection(IpPart, PortHTTP,,,,, OpenSSLSecureConnection);
+	HTTPRequest = New HTTPRequest(FileURL);
+	HTTPResponse = HTTPConnection.Get(HTTPRequest);
+	Return HTTPResponse.GetBodyAsBinaryData();
+	
+EndFunction
+
+Function GetFileRefByBinaryData(FileInfo, Owner = Undefined, isPicture = False) Export
+	
+	FileRef = GetFileRefByMD5(FileInfo.MD5);
+	
+	If Not ValueIsFilled(FileRef) Then
+		
+		FileStorageVolume = Constants.DefaultFilesStorageVolume.Get();
+		If Not ValueIsFilled(FileStorageVolume) Then
+			Raise R().Error_102;
+		EndIf;
+		
+		IntegrationSettings = FileStorageVolume.POSTIntegrationSettings;
+		ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings.UniqueID);
+		
+		FileBinaryData = FileInfo.RequestBody;
+		
+		UploadPictureParameters = New Structure();
+		UploadPictureParameters.Insert("ConnectionSettings", ConnectionSettings);
+		UploadPictureParameters.Insert("RequestBody", FileBinaryData);
+		UploadPictureParameters.Insert("FileID", FileInfo.FileID);
+		
+		//@skip-check property-return-type
+		If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
+			
+			IntegrationServer.SaveFileToFileStorage(
+				ConnectionSettings.Value.AddressPath, 
+				FileInfo.FileID + "." + FileInfo.Extension, 
+				FileBinaryData);
+			FileInfo.URI = FileInfo.FileID + "." + FileInfo.Extension;
+	
+		ElsIf Not PictureViewerServer.ExtensionCall_UploadPicture(FileInfo, UploadPictureParameters) Then
+			
+			ConnectionSettings.Value.QueryType = "POST";
+			ResourceParameters = New Map();
+			ResourceParameters.Insert("filename", FileInfo.FileID + "." + FileInfo.Extension);	
+			RequestResult = IntegrationClientServer.SendRequest(
+				ConnectionSettings.Value, ResourceParameters, , FileBinaryData);
+			If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+				DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
+				//@skip-check statement-type-change
+				FileInfo.URI = DeserializeResponse.Data.URI;
+			EndIf;
+		EndIf;
+		
+		If IsBlankString(FileInfo.URI) Then
+			Return Catalogs.Files.EmptyRef();
+		EndIf;
+		
+		If isPicture Then
+			FilePreview = UpdatePictureInfoAndGetPreview(FileBinaryData, 200);
+			FillPropertyValues(FileInfo, FilePreview, "Preview,Size,Height,Width");
+		EndIf;
+		
+		FileRef = CreateFile(FileStorageVolume, FileInfo);
+	
+	EndIf;
+	
+	If Owner <> Undefined Then
+		LinkFileToObject(FileRef, Owner);
+	EndIf;
+	
+	Return FileRef;
+	
+EndFunction

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f1310457-3d47-42ff-afb2-e454c9c0f03f">
+  <name>UseMessaging</name>
+  <synonym>
+    <key>en</key>
+    <value>Use messaging</value>
+  </synonym>
+  <location>Constant.UseMessaging</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Document.OutgoingMessage</content>
+  <content>Enum.MessagesImportance</content>
+  <content>InformationRegister.MessagesQueueToSend</content>
+</mdclass:FunctionalOption>

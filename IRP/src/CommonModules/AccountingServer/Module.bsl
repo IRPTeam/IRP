@@ -557,6 +557,10 @@ Function __GetMatchingLedgerTypes(LedgerType) Export
 EndFunction
 
 Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
+	Return AccountingServerReuse.GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName);
+EndFunction
+
+Function __GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName) Export
 	MetadataName = Object.Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();

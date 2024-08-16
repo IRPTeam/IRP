@@ -30,3 +30,7 @@ EndFunction
 Function GetMatchingLedgerTypes(LedgerType) Export
 	Return AccountingServer.__GetMatchingLedgerTypes(LedgerType);
 EndFunction
+
+Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName) Export
+	Return AccountingServer.__GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName);
+EndFunction

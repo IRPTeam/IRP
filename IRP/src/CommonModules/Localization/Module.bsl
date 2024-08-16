@@ -1702,6 +1702,7 @@ Function Strings(Lang) Export
 	Strings.Insert("CP_004", NStr("en = 'Copied'", Lang));
 	Strings.Insert("CP_005", NStr("en = 'NOT copied'", Lang));
 	Strings.Insert("CP_006", NStr("en = 'Copied %1 rows'", Lang));
+	Strings.Insert("CP_007", NStr("en = 'Paste values from clipboard'", Lang));
 #EndRegion	
 	
 #Region LoadDataFromTable

@@ -667,6 +667,15 @@ Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
+&AtClient
+Async Procedure PasteFromClipboardValues(Command)
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);
+		
+	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
+	
+EndProcedure
+
 &AtClient
 Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
 	If PasteSettings = Undefined Then

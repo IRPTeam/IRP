@@ -94,4 +94,64 @@ Procedure AfterPaste(Object, Form, CopyPastResult) Export
 	SerialLotNumberClient.OnFinishEditSerialLotNumbers(CopyPastResult.SerialLotNumbers, OpeningParameter);
 EndProcedure
 
+// Text from clip board.
+// 
+// Parameters:
+//  DataFormat  - ClipboardDataStandardFormat
+//  DefaultValue - Arbitrary
+// 
+// Returns:
+//  Promise - Text from clip board
+Async Function TextFromClipBoard(DataFormat, DefaultValue = Undefined) Export
+	
+    If ClipboardTools.CanUse() Then
+        If Await ClipboardTools.ContainsDataAsync(DataFormat) Then
+            Return Await ClipboardTools.GetDataAsync(DataFormat);
+        EndIf;
+    EndIf;	
+    Return DefaultValue;
+		
+EndFunction	
+
+#EndRegion
+
+#Region PasteValuesIntoDocs
+// Recalculate rows by new values.
+// 
+// Parameters:
+//  Object - FormDataStructure
+//  Form - ClientApplicationForm
+//  ClipBoardText - String
+Procedure RecalculateRowsByNewValues(Object, Form, ClipBoardText) Export
+	//@skip-check property-return-type
+	//@skip-check variable-value-type
+	DocRef = Object.Ref;
+	FormItems = Form.Items;
+	ValueArray = StrSplit(ClipBoardText, Chars.LF, False);
+	ArraySize = ValueArray.Count();
+	If TypeOf(DocRef) = Type("DocumentRef.SalesInvoice") Then
+		CurrentColumn = FormItems.ItemList.CurrentItem;
+		If CurrentColumn = Undefined Then
+			Return
+		EndIf;
+		CurrentColumnName = CurrentColumn.Name;
+		Counter = 0;
+		 
+		//@skip-check property-return-type
+		//@skip-check variable-value-type
+		For Each Row In Object.ItemList Do
+			Counter = Counter + 1;
+			If Counter > ArraySize Then
+				Break;	
+			EndIf;
+			NewValue = ValueArray[Counter - 1];
+			If CurrentColumnName = "ItemListPrice" Then
+				Row.Price = NewValue;
+				DocSalesInvoiceClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
+			EndIf;	
+		EndDo;			
+	EndIf;	 
+	
+EndProcedure	
+
 #EndRegion

@@ -670,10 +670,8 @@ EndProcedure
 //@skip-check module-unused-method
 &AtClient
 Async Procedure PasteFromClipboardValues(Command)
-	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);
-		
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);		
 	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
-	
 EndProcedure
 
 &AtClient

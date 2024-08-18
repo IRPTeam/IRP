@@ -790,14 +790,11 @@
   <commonAttributes>CommonAttribute.ModifyDate</commonAttributes>
   <commonAttributes>CommonAttribute.NotActive</commonAttributes>
   <commonAttributes>CommonAttribute.ManualMovementsEdit</commonAttributes>
-
   <commonAttributes>CommonAttribute.LocalTotalAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalNetAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalTaxAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
-
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
-
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -833,6 +830,7 @@
   <settingsStorages>SettingsStorage.ReportOptions</settingsStorages>
   <functionalOptions>FunctionalOption.SaasMode</functionalOptions>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAccountingService</functionalOptions>
   <functionalOptions>FunctionalOption.UseAddAttributesAndProperties</functionalOptions>
   <functionalOptions>FunctionalOption.UseAdditionalSettings</functionalOptions>
   <functionalOptions>FunctionalOption.UseAdditionalTableControlDocument</functionalOptions>
@@ -850,10 +848,13 @@
   <functionalOptions>FunctionalOption.UseDeliveryDate</functionalOptions>
   <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
   <functionalOptions>FunctionalOption.UseExpenseAndRevenueTypes</functionalOptions>
+  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
   <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
   <functionalOptions>FunctionalOption.UseLandedCost</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLegalName</functionalOptions>
+  <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
   <functionalOptions>FunctionalOption.UseManufacturing</functionalOptions>
@@ -865,21 +866,18 @@
   <functionalOptions>FunctionalOption.UsePartnerTerms</functionalOptions>
   <functionalOptions>FunctionalOption.UsePlannedReceiptReservation</functionalOptions>
   <functionalOptions>FunctionalOption.UsePriceByProperties</functionalOptions>
+  <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetail</functionalOptions>
   <functionalOptions>FunctionalOption.UseRetailOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseSalary</functionalOptions>
   <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
   <functionalOptions>FunctionalOption.UseShipmentConfirmationAndGoodsReceipts</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
+  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
   <functionalOptions>FunctionalOption.UseSpecialOffers</functionalOptions>
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseSimpleMode</functionalOptions>
-  <functionalOptions>FunctionalOption.UseSourceOfOrigin</functionalOptions>
-  <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
-  <functionalOptions>FunctionalOption.UseLegalNameContract</functionalOptions>
-  <functionalOptions>FunctionalOption.UseResponsiblePerson</functionalOptions>
-  <functionalOptions>FunctionalOption.UseAccountingService</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -991,6 +989,7 @@
   <constants>Constant.UseLegalNameContract</constants>
   <constants>Constant.UseResponsiblePerson</constants>
   <constants>Constant.UseAccountingService</constants>
+  <constants>Constant.UseLegalName</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>

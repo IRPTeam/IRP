@@ -843,7 +843,7 @@ EndProcedure
 #Region TitleChanges
 
 Procedure SetTextOfDescriptionAtForm(Object, Form) Export
-	If ValueIsFilled(Object.Description) Then
+	If ValueIsFilled(Object.Comment) Then
 		Form.Comment = Object.Comment;
 	Else
 		Form.Comment = R().I_2;

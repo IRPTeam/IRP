@@ -1,8 +1,16 @@
 
 Procedure EditMultilineText(Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
-	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", Item.Name), Form, , , ,
-		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, Item.Name)),
+
+	// TODO: Fixme
+	If Item.Name = "Description" Then
+		Name = "Comment";
+	Else
+		Name = Item.Name;
+	EndIf;
+
+	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", Name), Form, , , ,
+		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, Name)),
 		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 

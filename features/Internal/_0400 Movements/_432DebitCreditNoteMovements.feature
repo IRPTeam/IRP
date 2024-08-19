@@ -1191,7 +1191,7 @@ Scenario: _0432047 check DebitCreditNote movements by the register "R5020 Partne
 			| '12'        |
 	* Check movements by the Register  "R5020 Partners balance"
 		And I click "Registrations report info" button
-		And I select "R5020 Partners balance" exact value from "Register" drop-down list
+		And I select "R Partners balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Debit/Credit note 12 dated 29.04.2024 10:42:01' | ''                    | ''           | ''             | ''             | ''                                          | ''                                          | ''                                          | ''         | ''         | ''                             | ''                     | ''       | ''                     | ''                 | ''                   | ''               | ''                  | ''                 |

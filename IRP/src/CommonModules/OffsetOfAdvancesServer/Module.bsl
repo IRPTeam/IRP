@@ -430,6 +430,12 @@ Procedure ReturnMoneyByTransaction(Parameters,
 			EndIf;
 		EndIf;
 				
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
+				Continue;
+			EndIf;
+		EndIf;
+				
 		// advance by Project
 		If ProjectsNotMatch(Parameters, AdvanceRecordData.Project, TransactionRecordData.Project) Then
 			Continue;
@@ -563,6 +569,12 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		
 		If ValueIsFilled(AdvanceRecordData.Order) Then // advance by order
 			If TransactionRecordData.Order <> AdvanceRecordData.Order Then
+				Continue;
+			EndIf;
+		EndIf;
+		
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
 				Continue;
 			EndIf;
 		EndIf;
@@ -872,6 +884,12 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		
 		If ValueIsFilled(AdvanceRecordData.Order) Then // transaction by order
 			If AdvanceRecordData.Order <> TransactionRecordData.Order Then
+				Continue;
+			EndIf;
+		EndIf;
+		
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
 				Continue;
 			EndIf;
 		EndIf;

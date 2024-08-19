@@ -557,11 +557,21 @@ Function __GetMatchingLedgerTypes(LedgerType) Export
 EndFunction
 
 Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
-	Return AccountingServerReuse.GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName);
+	
+	DocTransactionType = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+		DocTransactionType = Object.TransactionType;
+	EndIf;
+	
+	Return AccountingServerReuse.GetAccountingOperationsByLedgerType(Object.Ref, 
+	                                                                 Period,
+	                                                                 DocTransactionType,
+	                                                                 LedgerType,
+	                                                                 MainTableName);
 EndFunction
 
-Function __GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName) Export
-	MetadataName = Object.Ref.Metadata().Name;
+Function __GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, LedgerType, MainTableName) Export
+	MetadataName = Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
 	Query.Text =
@@ -581,11 +591,6 @@ Function __GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainT
 	ArrayOfAccountingOperations = New Array();
 	
 	OperationsDefinition = GetOperationsDefinition();
-	
-	DocTransactionType = Undefined;
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
-		DocTransactionType = Object.TransactionType;
-	EndIf;
 	
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);

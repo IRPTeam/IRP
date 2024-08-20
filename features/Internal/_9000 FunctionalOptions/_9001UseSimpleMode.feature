@@ -205,7 +205,7 @@ Scenario: _900007 create Opening entry
 	* Check creation
 		And In the command interface I select "Master data" "Opening entries"
 		Then the form attribute named "Company" became equal to "My Company"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter description"
 		And "Inventory" table became equal
 			| '#'   | 'Item'        | 'Quantity'    |
 			| '1'   | 'Product 1'   | '100,000'     |
@@ -632,7 +632,7 @@ Scenario: _900029 create Sales return
 		Then the form attribute named "Partner" became equal to "Customer 1"
 		Then the form attribute named "LegalName" became equal to "Customer 1"
 		Then the form attribute named "Agreement" became equal to "Customer standard term"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal

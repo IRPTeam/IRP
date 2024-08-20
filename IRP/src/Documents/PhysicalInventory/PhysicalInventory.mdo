@@ -324,7 +324,7 @@
       <name>Comment</name>
       <synonym>
         <key>en</key>
-        <value>Description</value>
+        <value>Comment</value>
       </synonym>
       <type>
         <types>String</types>

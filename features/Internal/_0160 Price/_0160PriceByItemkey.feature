@@ -360,7 +360,7 @@ Scenario: _016001 base price fill (incl. VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                        | 'Price list type'     | 'Price type'         | 'Description'   |
+		| 'Number'                                        | 'Price list type'     | 'Price type'         | 'Comment'   |
 		| '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'  | 'Basic Price Types'  | 'Basic price'   |
 		And I close all client application windows
 
@@ -692,7 +692,7 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                        | 'Price list type'     | 'Price type'               | 'Description'               |
+		| 'Number'                                        | 'Price list type'     | 'Price type'               | 'Comment'               |
 		| '$$NumberPriceListBasicPriceByItemKey016002$$'  | 'Price by item keys'  | 'Basic Price without VAT'  | 'Basic Price without VAT'   |
 		And I close all client application windows
 	
@@ -788,7 +788,7 @@ Scenario: _016010 check dependent prices calculation
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                        | 'Price list type'     | 'Price type'           | 'Description'       |
+		| 'Number'                                        | 'Price list type'     | 'Price type'           | 'Comment'       |
 		| '$$NumberPriceListBasicPriceByItemKey016010$$'  | 'Price by item keys'  | 'Dependent Price New'  | 'Dependent Price'   |
 		And I close all client application windows
 	

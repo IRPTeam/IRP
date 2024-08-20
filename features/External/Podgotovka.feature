@@ -1302,7 +1302,7 @@ Scenario: create InventoryTransfer021030
 Scenario: Create document PriceList objects (works)
 
 	And I check or create document "PriceList" objects:
-		| 'Ref'                                                                 | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'ItemType'  | 'PriceListType'                     | 'PriceType'                                                           | 'Author'                                                         | 'Branch'  | 'Description'   |
+		| 'Ref'                                                                 | 'DeletionMark'  | 'Number'  | 'Date'                 | 'Posted'  | 'ItemType'  | 'PriceListType'                     | 'PriceType'                                                           | 'Author'                                                         | 'Branch'  | 'Comment'   |
 		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558c'  | 'False'         | 21        | '25.09.2022 17:18:39'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59eeffe'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
 		| 'e1cib/data/Document.PriceList?ref=b785989306affb7a11ed3da49fd4558d'  | 'False'         | 22        | '25.09.2022 17:19:14'  | 'False'   | ''          | 'Enum.PriceListTypes.PriceByItems'  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002'  | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0'  | ''        | ''              |
 

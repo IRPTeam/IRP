@@ -156,7 +156,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                           | 'Price list type'      | 'Price type'         | 'Description'   |
+		| 'Number'                                           | 'Price list type'      | 'Price type'         | 'Comment'   |
 		| '$$NumberPriceListBasicPriceByProperties150001$$'  | 'Price by properties'  | 'Basic Price Types'  | 'Basic price'   |
 		And I close all client application windows
 	* Create Price key for Dress

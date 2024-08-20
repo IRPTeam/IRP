@@ -828,9 +828,9 @@ Scenario: _0155273 select items from RSC in POS
 	* Select RSC with RGR based on RSO
 		And I click "Select basis document" button
 		And "SalesOrders" table became equal
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
-			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       | ''            |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '317'    | '11.08.2023 15:50:42' | '3 183,00' | 'Daniel Smith'    | ''       |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And "RetailShipmentConfirmation" table became equal
 			| 'Number' | 'Date'                | 'Retail customer' | 'Courier' | 'Transaction type' | 'Branch' |
 			| '317'    | '11.08.2023 16:02:15' | 'Daniel Smith'    | ''        | 'Courier delivery' | ''       |
@@ -929,8 +929,8 @@ Scenario: _0155274 select items from RSO in POS
 		And I click "OK" button	
 		And I click "Select basis document" button
 		And "SalesOrders" table does not contain lines
-			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' | 'Description' |
-			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       | ''            |
+			| 'Number' | 'Date'                | 'Amount'   | 'Retail customer' | 'Branch' |
+			| '318'    | '11.08.2023 15:51:30' | '1 188,00' | 'Daniel Smith'    | ''       |
 		And I close all client application windows
 		
 				

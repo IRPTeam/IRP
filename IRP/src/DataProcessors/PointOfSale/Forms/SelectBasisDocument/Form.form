@@ -270,7 +270,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>SalesOrdersDescription</name>
+      <name>SalesOrdersComment</name>
       <id>33</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -281,7 +281,7 @@
         <segments>SalesOrders.Comment</segments>
       </dataPath>
       <extendedTooltip>
-        <name>SalesOrdersDescriptionExtendedTooltip</name>
+        <name>SalesOrdersCommentExtendedTooltip</name>
         <id>35</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -296,7 +296,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>SalesOrdersDescriptionContextMenu</name>
+        <name>SalesOrdersCommentContextMenu</name>
         <id>34</id>
         <visible>true</visible>
         <enabled>true</enabled>

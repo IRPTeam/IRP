@@ -2855,7 +2855,7 @@
       <common>true</common>
     </userVisible>
     <dataPath xsi:type="form:DataPath">
-      <segments>Object.Comment</segments>
+      <segments>Comment</segments>
     </dataPath>
     <extendedTooltip>
       <name>CommentExtendedTooltip</name>

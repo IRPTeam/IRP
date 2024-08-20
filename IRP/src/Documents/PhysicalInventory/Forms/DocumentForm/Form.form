@@ -408,7 +408,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Description</name>
+          <name>Comment</name>
           <id>13</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -416,11 +416,11 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+            <segments>Object.Comment</segments>
           </dataPath>
           <defaultItem>true</defaultItem>
           <extendedTooltip>
-            <name>DescriptionExtendedTooltip</name>
+            <name>CommentExtendedTooltip</name>
             <id>15</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -435,7 +435,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DescriptionContextMenu</name>
+            <name>CommentContextMenu</name>
             <id>14</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1443,7 +1443,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListDescription</name>
+          <name>ItemListComment</name>
           <id>464</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1451,10 +1451,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Description</segments>
+            <segments>Object.ItemList.Comment</segments>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListDescriptionExtendedTooltip</name>
+            <name>ItemListCommentExtendedTooltip</name>
             <id>466</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1469,7 +1469,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListDescriptionContextMenu</name>
+            <name>ItemListCommentContextMenu</name>
             <id>465</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1811,10 +1811,10 @@
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormGroup">
-        <name>GroupRowDescription</name>
+        <name>GroupRowComment</name>
         <id>470</id>
         <items xsi:type="form:FormField">
-          <name>ItemListDescriptionInfo</name>
+          <name>ItemListCommentInfo</name>
           <id>467</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1822,11 +1822,11 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Items.ItemList.CurrentData.Description</segments>
+            <segments>Items.ItemList.CurrentData.Comment</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
-            <name>ItemListDescriptionInfoExtendedTooltip</name>
+            <name>ItemListCommentInfoExtendedTooltip</name>
             <id>469</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1841,7 +1841,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListDescriptionInfoContextMenu</name>
+            <name>ItemListCommentInfoContextMenu</name>
             <id>468</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1871,10 +1871,10 @@
         </userVisible>
         <title>
           <key>en</key>
-          <value>Row description</value>
+          <value>Row comment</value>
         </title>
         <extendedTooltip>
-          <name>GroupRowDescriptionExtendedTooltip</name>
+          <name>GroupRowCommentExtendedTooltip</name>
           <id>471</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3886,7 +3886,7 @@
     </additionalColumns>
   </attributes>
   <attributes>
-    <name>Description</name>
+    <name>Comment</name>
     <title>
       <key>en</key>
       <value>Description</value>

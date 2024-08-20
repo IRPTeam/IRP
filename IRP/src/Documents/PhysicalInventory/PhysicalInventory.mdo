@@ -321,7 +321,7 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ff4c05f5-e5d7-47b6-a48f-9da9324e1502">
-      <name>Description</name>
+      <name>Comment</name>
       <synonym>
         <key>en</key>
         <value>Description</value>

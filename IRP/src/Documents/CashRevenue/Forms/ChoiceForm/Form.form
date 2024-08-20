@@ -287,7 +287,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Description</name>
+      <name>Comment</name>
       <id>34</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -295,10 +295,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
-        <name>DescriptionExtendedTooltip</name>
+        <name>CommentExtendedTooltip</name>
         <id>36</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -313,7 +313,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>DescriptionContextMenu</name>
+        <name>CommentContextMenu</name>
         <id>35</id>
         <visible>true</visible>
         <enabled>true</enabled>

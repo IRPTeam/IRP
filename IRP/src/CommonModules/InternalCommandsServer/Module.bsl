@@ -63,6 +63,22 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 		EndIf;
 		
 		For Each TableName In TablesArray Do
+			
+			IntenalCommandsParams = New Structure;
+			IntenalCommandsParams.Insert("CommandDescription", Command);
+			IntenalCommandsParams.Insert("Form", Form);
+			IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
+			IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
+			IntenalCommandsParams.Insert("FormType", FormType);
+			
+			If Command.HasActionInitialization Then
+				Cancel = False;
+				DataProcessors.InternalCommands.OnInitialization(Command.Name, IntenalCommandsParams, Cancel, AddInfo);
+				If Cancel Then
+					Continue;
+				EndIf;
+			EndIf;
+			
 			CommandName = "InternalCommand_" + ?(TableName="", "", TableName + "_") + Command.Name;
 			
 			CommandForm = Form.Commands.Add(CommandName); // FormCommand
@@ -86,15 +102,11 @@ Procedure CreateCommands(Form, MainAttribute, ObjectFullName, FormType, AddInfo 
 				ContextCommandButton.CommandName = CommandName;
 			EndIf;
 			
-			IntenalCommandsParams = New Structure;
 			IntenalCommandsParams.Insert("CommandButton", CommandButton);
-			IntenalCommandsParams.Insert("CommandDescription", Command);
-			IntenalCommandsParams.Insert("Form", Form);
-			IntenalCommandsParams.Insert("MainAttribute", MainAttribute);
-			IntenalCommandsParams.Insert("ObjectFullName", ObjectFullName);
-			IntenalCommandsParams.Insert("FormType", FormType);
 			
-			DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+			If Command.HasActionOnCommandCreate Then
+				DataProcessors.InternalCommands.OnCommandCreate(Command.Name, IntenalCommandsParams, AddInfo);
+			EndIf;
 		EndDo;
 	EndDo;
 	
@@ -261,6 +273,22 @@ Function GetCommandGroupDescription() Export
 	Return CommandGroupDescription;
 	
 EndFunction
+
+// On command Initialization.
+// 
+// Parameters:
+// 	CommandName - String - Command name
+// 	CommandParameters - Structure - Command parameters:
+//  * CommandDescription - See InternalCommandsServer.GetCommandDescription
+//  * Form - ClientApplicationForm - Form
+//  * MainAttribute - FormAttribute, DynamicList - Main attribute
+//  * ObjectFullName - String - Object full name
+//  * FormType - EnumRef.FormTypes - Form type
+//  Cancel - Boolean - Cancel 
+//  AddInfo - Undefined - Add info
+Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Undefined) Export
+	Return;
+EndProcedure
 
 // On command create.
 // 

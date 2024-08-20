@@ -81,6 +81,11 @@ Function GetCommandGroupDescription(GroupName) Export
 	Return CommandGroupDescription;
 EndFunction
 
+// See InternalCommandsServer.OnInitialization
+Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Undefined) Export
+	
+EndProcedure
+
 // See InternalCommandsServer.OnCommandCreate
 Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) Export
 	

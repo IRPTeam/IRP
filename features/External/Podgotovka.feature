@@ -568,7 +568,7 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Select store
 		And I click Select button of "Store" field
@@ -608,7 +608,7 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
@@ -1108,7 +1108,7 @@ Scenario: create SalesReturnOrder028004
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-			Then the form attribute named "Description" became equal to "Click to enter description"
+			Then the form attribute named "Comment" became equal to "Click to enter description"
 			Then the form attribute named "Company" became equal to "Main Company"
 		And I click Select button of "Store" field
 		And I go to line in "List" table

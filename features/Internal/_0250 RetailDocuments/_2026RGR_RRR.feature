@@ -109,7 +109,7 @@ Scenario: _0202601 create RGR based on RSR
 		Then the form attribute named "RetailCustomer" became equal to "Sam Jons"
 		Then the form attribute named "Partner" became equal to "Retail customer"
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter description"
 		Then the form attribute named "TransactionType" became equal to "Return from customer"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal

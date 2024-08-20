@@ -844,9 +844,9 @@ EndProcedure
 
 Procedure SetTextOfDescriptionAtForm(Object, Form) Export
 	If ValueIsFilled(Object.Comment) Then
-		Form.Description = Object.Comment;
+		Form.Comment = Object.Comment;
 	Else
-		Form.Description = R().I_2;
+		Form.Comment = R().I_2;
 	EndIf;
 EndProcedure
 

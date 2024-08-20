@@ -440,6 +440,7 @@
   <roles>Role.ManualRegisterEdit</roles>
   <roles>Role.Document_TaxesOperation</roles>
   <roles>Role.AttachedFilesDelete</roles>
+  <roles>Role.RelatedDocuments</roles>
   <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
   <roles>Role.Document_ExternalAccountingOperation</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>

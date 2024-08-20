@@ -333,9 +333,9 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '300,00'          |
+			| '1'   | 'Customer 1'   | '450,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table

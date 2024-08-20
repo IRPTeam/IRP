@@ -96,7 +96,7 @@ Scenario: 960002 check SO creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                 |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                 |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |

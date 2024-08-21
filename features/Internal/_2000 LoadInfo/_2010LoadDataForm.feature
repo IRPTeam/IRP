@@ -217,7 +217,7 @@ Scenario: _020112 load data in the Physical inventory
 		When check load data form in the document
 	* Check document
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '6,000'        | '6,000'         | ''                     | ''               |
 			| '2'   | ''             | 'Product 1 with SLN'   | 'ODS'        | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
 			| '3'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '1,000'        | '1,000'         | ''                     | ''               |

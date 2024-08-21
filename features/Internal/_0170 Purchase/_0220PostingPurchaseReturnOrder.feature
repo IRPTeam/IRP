@@ -88,7 +88,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I select "Approved" exact value from "Status" drop-down list

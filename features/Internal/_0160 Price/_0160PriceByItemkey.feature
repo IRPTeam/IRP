@@ -67,7 +67,7 @@ Scenario: _016001 base price fill (incl. VAT)
 	* Filling in the details of the price list by item key
 		And I change "Set price" radio button value to "By Item keys"
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -455,7 +455,7 @@ Scenario: _016006 base price fill and special price fill (not incl. VAT)
 	* Filling in the details of the price list by item key Basic Price without VAT
 		And I change "Set price" radio button value to "By Item keys"
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic Price without VAT" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -757,7 +757,7 @@ Scenario: _016010 check dependent prices calculation
 		* Filling in the details of the price list by item key Discount Price TRY 1
 			And I change "Set price" radio button value to "By Item keys"
 			And I move to "Other" tab
-			And I click the hyperlink named "Description"
+			And I click the hyperlink named "Comment"
 			And I input "Dependent Price" text in the field named "Text"
 			And I click "OK" button
 			And I click Select button of "Price type" field
@@ -1002,7 +1002,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 		And I click the button named "FormCreate"
 	* Filling in the details of the price list by item key
 		And I change "Set price" radio button value to "By Item keys"
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field

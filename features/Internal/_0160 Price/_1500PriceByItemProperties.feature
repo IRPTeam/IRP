@@ -71,7 +71,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		And I click the button named "FormCreate"
 	* Filling in price list
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -181,7 +181,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "FormCreate"
 	* Filling in price list by item
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -896,7 +896,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I click the button named "FormCreate"
 	* Filling in the details of the price list by item
 		And I change "Set price" radio button value to "By Items"
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -976,7 +976,7 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I click the button named "FormCreate"
 	* Filling in the details of the price list by properties
 		And I change "Set price" radio button value to "By properties"
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field

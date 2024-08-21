@@ -340,7 +340,7 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		Then the form attribute named "Partner" became equal to "Kalipso"
 		Then the form attribute named "LegalName" became equal to "Company Kalipso"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines

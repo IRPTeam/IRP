@@ -521,7 +521,7 @@ When check the filter by cash account (bank account selection is not available)
 Scenario: _051004 check input Description in the documentCash payment
 And I close all client application windows
 Given I open hyperlink "e1cib/list/Document.CashPayment"
-When check filling in Description
+When check filling in Comment
 
 Scenario: _051005 check the choice of transaction type in the document Cash payment
 And I close all client application windows

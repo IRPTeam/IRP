@@ -1016,7 +1016,7 @@ Scenario: _0154083 check company, Cash accounts, transaction type, currency, par
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
@@ -1050,7 +1050,7 @@ Scenario: _0154084 check company, Cash/Bank accounts, transaction type, currency
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
@@ -1083,7 +1083,7 @@ Scenario: _0154085 check company, Cash/Bank accounts, transaction type, currency
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Account" became equal to "Bank account, USD"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines
@@ -1116,7 +1116,7 @@ Scenario: _0154086 check company, Cash accounts, transaction type, currency, par
 	* Check entered values
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table contains lines

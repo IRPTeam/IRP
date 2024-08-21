@@ -473,7 +473,7 @@ Scenario: _052004 check the filter by bank accounts (the choice of Cash/Bank acc
 Scenario: _052005 check input Description in the document Bank Receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
-	When check filling in Description
+	When check filling in Comment
 
 Scenario: _052006 check the choice of transaction type in the document Bank Receipt
 	And I close all client application windows

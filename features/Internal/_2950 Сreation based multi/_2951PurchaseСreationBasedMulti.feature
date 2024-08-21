@@ -913,7 +913,7 @@ Scenario: _090310 create Goods receipt for several Purchase invoice with differe
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Partner" became equal to "Partner Ferron 1"
 		And I save number of "ItemList" table lines as "Quantity"
@@ -954,7 +954,7 @@ Scenario: _090311 create Goods receipt for several Purchase invoice with differe
 		And I click "Ok" button	
 	* Check filling in Goods receipt
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Comment" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table contains lines
 		| 'Item'   | 'Quantity'  | 'Item key'  | 'Unit'  | 'Store'     | 'Receipt basis'                  |

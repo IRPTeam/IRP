@@ -551,7 +551,7 @@ Scenario: _050004 cash filter check (bank selection not available)
 Scenario: _050005 check input Description in the documentCash receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
-	When check filling in Description
+	When check filling in Comment
 
 Scenario: _050006 check the choice of transaction type in the document Cash receipt
 	And I close all client application windows

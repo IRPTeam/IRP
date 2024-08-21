@@ -773,7 +773,7 @@ Scenario: _01541986 copy lines from SI to Physical inventory
 		And I change "Paste quantity as" radio button value to "Phys. count"
 		And I click "OK" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'                | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'                | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '0512'                | 'pcs'                 | '2,000'        | '2,000'         | ''                     | ''               |
 			| '2'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '0514'                | 'pcs'                 | '1,000'        | '1,000'         | ''                     | ''               |
 			| '3'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'box Dress (8 pcs)'   | '2,000'        | '2,000'         | ''                     | ''               |

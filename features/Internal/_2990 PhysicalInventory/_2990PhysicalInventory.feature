@@ -372,7 +372,7 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 		And I input "125,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | '120,000'      | 'Dress'   | 'S/Yellow'   | 'pcs'    | '5,000'        | '125,000'       | ''                     | ''               |
 			| '2'   | '200,000'      | 'Dress'   | 'XS/Blue'    | 'pcs'    | '-2,000'       | '198,000'       | ''                     | ''               |
 	* Posting the document Physical inventory
@@ -703,7 +703,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I click "Fill expected count" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |

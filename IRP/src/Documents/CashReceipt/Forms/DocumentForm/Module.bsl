@@ -117,6 +117,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";		
 	EndIf;
 

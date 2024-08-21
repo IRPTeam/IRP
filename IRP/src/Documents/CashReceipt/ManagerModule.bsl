@@ -338,6 +338,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
+		   |	PaymentList.Agreement,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Amount
 		   |INTO R3027B_EmployeeCashAdvance

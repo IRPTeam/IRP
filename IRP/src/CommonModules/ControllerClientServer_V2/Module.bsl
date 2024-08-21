@@ -3306,6 +3306,9 @@ Function BindPartner(Parameters)
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
 	
+	Binding.Insert("EmployeeCashAdvance",
+		"StepChangeAgreementByPartner_AgreementTypeIsOther");
+	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction
 

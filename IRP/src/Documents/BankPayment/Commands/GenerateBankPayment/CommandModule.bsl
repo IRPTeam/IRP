@@ -253,7 +253,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	"SELECT
 	|	TableBasisDocument.Company,
 	|	TableBasisDocument.Branch,
-	|	TableBasisDocument.Currency,
+	|	TableBasisDocument.Agreement,
 	|	TableBasisDocument.Partner,
 	|	TableBasisDocument.BasisDocument
 	|INTO TableBasisDocument
@@ -269,14 +269,15 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	|	R3027B_EmployeeCashAdvanceBalance.Branch,
 	|	R3027B_EmployeeCashAdvanceBalance.Currency,
 	|	R3027B_EmployeeCashAdvanceBalance.Partner,
+	|	R3027B_EmployeeCashAdvanceBalance.Agreement,
 	|	-R3027B_EmployeeCashAdvanceBalance.AmountBalance AS Amount,
 	|	TableBasisDocument.BasisDocument
 	|FROM
-	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Currency, Partner) IN
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Agreement, Partner) IN
 	|		(SELECT
 	|			TableBasisDocument.Company,
 	|			TableBasisDocument.Branch,
-	|			TableBasisDocument.Currency,
+	|			TableBasisDocument.Agreement,
 	|			TableBasisDocument.Partner
 	|		FROM
 	|			TableBasisDocument AS TableBasisDocument)
@@ -285,7 +286,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	|		INNER JOIN TableBasisDocument AS TableBasisDocument
 	|		ON TableBasisDocument.Company = R3027B_EmployeeCashAdvanceBalance.Company
 	|		AND TableBasisDocument.Branch = R3027B_EmployeeCashAdvanceBalance.Branch
-	|		AND TableBasisDocument.Currency = R3027B_EmployeeCashAdvanceBalance.Currency
+	|		AND TableBasisDocument.Agreement = R3027B_EmployeeCashAdvanceBalance.Agreement
 	|		AND TableBasisDocument.Partner = R3027B_EmployeeCashAdvanceBalance.Partner
 	|WHERE
 	|	R3027B_EmployeeCashAdvanceBalance.AmountBalance < 0";
@@ -294,7 +295,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	TableBasisDocument = New ValueTable();
 	TableBasisDocument.Columns.Add("Company"  , AccReg.Company.Type);
 	TableBasisDocument.Columns.Add("Branch"   , AccReg.Branch.Type);
-	TableBasisDocument.Columns.Add("Currency" , AccReg.Currency.Type);
+	TableBasisDocument.Columns.Add("Agreement" , AccReg.Agreement.Type);
 	TableBasisDocument.Columns.Add("Partner"  , AccReg.Partner.Type);
 	TableBasisDocument.Columns.Add("BasisDocument"          , New TypeDescription("DocumentRef.EmployeeCashAdvance"));
 		
@@ -303,7 +304,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 			NewRow = TableBasisDocument.Add();
 			NewRow.Company  = Basis.Company;
 			NewRow.Branch   = Basis.Branch;
-			NewRow.Currency = Row.Currency;
+			NewRow.Agreement = Basis.Agreement;
 			NewRow.Partner  = Basis.Partner;
 			NewRow.BasisDocument = Basis;
 		EndDo;

@@ -684,7 +684,7 @@
 	Doc.Branch,
 	Doc.Basis,
 	Doc.Author,
-	Doc.Description,
+	Doc.Comment,
 	Doc.DocumentAmount,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
@@ -708,7 +708,7 @@ GROUP BY
 	Doc.Branch,
 	Doc.Basis,
 	Doc.Author,
-	Doc.Description,
+	Doc.Comment,
 	Doc.DocumentAmount</queryText>
       <mainTable>Document.ExpenseAccruals</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

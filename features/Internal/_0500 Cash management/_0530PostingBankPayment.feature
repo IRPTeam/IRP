@@ -436,7 +436,7 @@ Scenario: _053004 check the filter by bank accounts (the choice of Cash/Bank acc
 Scenario: _053005 check input Description in the document Bank payment
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
-	When check filling in Description
+	When check filling in Comment
 
 Scenario: _053006 check the choice of transaction type in the document Bank payment
 	And I close all client application windows
@@ -504,7 +504,7 @@ Scenario: _053013 check the display of details on the form Bank payment with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -533,7 +533,7 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 	* Check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available

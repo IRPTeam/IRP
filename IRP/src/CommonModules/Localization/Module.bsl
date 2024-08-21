@@ -1563,7 +1563,7 @@ Function Strings(Lang) Export
 	
 	// Interface
 	Strings.Insert("I_1", NStr("en = 'Enter description'", Lang));
-	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
+	Strings.Insert("I_2", NStr("en = 'Click to enter comment'", Lang));
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));

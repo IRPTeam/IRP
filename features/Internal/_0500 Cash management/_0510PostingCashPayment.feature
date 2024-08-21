@@ -521,7 +521,7 @@ When check the filter by cash account (bank account selection is not available)
 Scenario: _051004 check input Description in the documentCash payment
 And I close all client application windows
 Given I open hyperlink "e1cib/list/Document.CashPayment"
-When check filling in Description
+When check filling in Comment
 
 Scenario: _051005 check the choice of transaction type in the document Cash payment
 And I close all client application windows
@@ -624,7 +624,7 @@ And I select "Payment to the vendor" exact value from "Transaction type" drop-do
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
@@ -649,7 +649,7 @@ And I select "Currency exchange" exact value from "Transaction type" drop-down l
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Currency exchange"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
@@ -672,7 +672,7 @@ And I select "Cash transfer order" exact value from "Transaction type" drop-down
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available

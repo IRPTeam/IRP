@@ -773,7 +773,7 @@
   <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
-  <commonAttributes>CommonAttribute.Description</commonAttributes>
+  <commonAttributes>CommonAttribute.Comment</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
   <commonAttributes>CommonAttribute.Description_ru</commonAttributes>

@@ -372,7 +372,7 @@ Scenario: _2990004 create Physical inventory and check Row Id info tab
 		And I input "125,000" text in "Phys. count" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'    | 'Item key'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | '120,000'      | 'Dress'   | 'S/Yellow'   | 'pcs'    | '5,000'        | '125,000'       | ''                     | ''               |
 			| '2'   | '200,000'      | 'Dress'   | 'XS/Blue'    | 'pcs'    | '-2,000'       | '198,000'       | ''                     | ''               |
 	* Posting the document Physical inventory
@@ -703,7 +703,7 @@ Scenario: _2990015 create Physical inventory with Physical count by location (wi
 		And I click "Fill expected count" button
 	* Check filling
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1043,7 +1043,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 			| 'Location count 3*'   | 'Prepared'   | '5'            | '222,000'        |
 		Then the number of "PhysicalCountByLocationList" table lines is "равно" 3
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1051,7 +1051,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 	* Try to filling Physical inventory from Physical count by location (status prepared)
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1072,7 +1072,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-500,000'     | ''              | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1089,7 +1089,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1101,7 +1101,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 	* Update exp count
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1122,7 +1122,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1145,7 +1145,7 @@ Scenario: _2990022 filling Physical inventory from Physical count by location
 		And I move to "Items" tab
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1219,7 +1219,7 @@ Scenario: _2990025 write off product and check update exp count
 			| '$$NumberPhysicalInventory3$$'    |
 		And I select current line in "List" table				
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | '500,000'      | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '-397,000'     | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1230,7 +1230,7 @@ Scenario: _2990025 write off product and check update exp count
 			| '8'   | ''             | 'Dress'                | 'S/Yellow'   | ''                    | 'pcs'    | '110,000'      | '110,000'       | ''                     | ''               |
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-150,000'     | ''              | ''                     | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-20,000'      | ''              | ''                     | ''               |
@@ -1270,7 +1270,7 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 			| '6'   | '2,000'        | 'Boots'   | '36/18SD'    | '2,000'         | 'pcs'     |
 	* Check tab
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |
@@ -1282,7 +1282,7 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 	* Update exp count
 		And in the table "ItemList" I click "Fill expected count" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |
@@ -1294,7 +1294,7 @@ Scenario: _2990027 filling in manual fixed count and check update phys count and
 	* Update phys count
 		And in the table "ItemList" I click "Fill from locations" button
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'    |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '103,000'      | '103,000'       | ''                     | ''               |
 			| '2'   | '150,000'      | 'Boots'                | '37/18SD'    | ''                    | 'pcs'    | '-10,000'      | ''              | '140,000'              | ''               |
 			| '3'   | '20,000'       | 'High shoes'           | '37/19SD'    | ''                    | 'pcs'    | '-2,000'       | ''              | '18,000'               | ''               |

@@ -571,7 +571,7 @@
        DocumentVisitorCounter.Branch, 
        DocumentVisitorCounter.SourceNodeID, 
        DocumentVisitorCounter.Author, 
-       DocumentVisitorCounter.Description
+       DocumentVisitorCounter.Comment
  FROM 
        Document.VisitorCounter
  AS 

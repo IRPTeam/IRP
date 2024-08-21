@@ -50,6 +50,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Items</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.MoneyTransfer</metadata>
   <use>Use</use>
  </content>
@@ -62,7 +66,19 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.LegalNameContracts</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.Labeling</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Units</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.PaymentSchedules</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -102,6 +118,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.CashAccounts</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.CalculationMovementCosts</metadata>
   <use>Use</use>
  </content>
@@ -118,6 +138,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.BankTerms</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.SpecialOffers</metadata>
   <use>Use</use>
  </content>
@@ -127,6 +151,10 @@
  </content>
  <content>
   <metadata>Document.ReconciliationStatement</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.TaxRates</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -147,6 +175,10 @@
  </content>
  <content>
   <metadata>Document.StockAdjustmentAsSurplus</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ItemKeys</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -179,6 +211,10 @@
  </content>
  <content>
   <metadata>Document.PurchaseReturn</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.UnitsOfMeasurement</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -242,6 +278,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Currencies</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.AdditionalRevenueAllocation</metadata>
   <use>Use</use>
  </content>
@@ -278,6 +318,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.ExpenseAndRevenueTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ModernizationOfFixedAsset</metadata>
   <use>Use</use>
  </content>
@@ -306,7 +350,15 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.Partners</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.WorkOrderClosing</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Incoterms</metadata>
   <use>Use</use>
  </content>
  <content>
@@ -366,6 +418,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.PriceTypes</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.ProductionPlanningCorrection</metadata>
   <use>Use</use>
  </content>
@@ -411,6 +467,10 @@
  </content>
  <content>
   <metadata>Document.BankReceipt</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Companies</metadata>
   <use>Use</use>
  </content>
  <content>

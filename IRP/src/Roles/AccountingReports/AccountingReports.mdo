@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b7b0fa3f-2464-4271-822c-1f8bc685f0be">
+ <name>AccountingReports</name>
+ <synonym>
+  <key>en</key>
+  <value>Accounting reports</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Бухгалтерские отчеты</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Accounting reports</value>
+ </synonym>
+</mdclass:Role>

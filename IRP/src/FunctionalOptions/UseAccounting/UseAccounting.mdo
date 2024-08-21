@@ -40,4 +40,5 @@
  <content>Report.A0012_AccountCard</content>
  <content>Report.A0013_AccountAnalysis</content>
  <content>Subsystem.Reports.Subsystem.Accounting</content>
+ <content>Catalog.ExtDimensions</content>
 </mdclass:FunctionalOption>

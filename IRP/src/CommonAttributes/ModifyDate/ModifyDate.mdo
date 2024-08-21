@@ -30,6 +30,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Document.ExternalAccountingOperation</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.Agreements</metadata>
   <use>Use</use>
  </content>
@@ -343,6 +347,10 @@
  </content>
  <content>
   <metadata>Catalog.AccessProfiles</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ExtDimensions</metadata>
   <use>Use</use>
  </content>
  <content>

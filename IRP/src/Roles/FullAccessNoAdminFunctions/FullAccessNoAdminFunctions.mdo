@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a5941b8e-fb28-42fd-a819-323c8d40c43c">
+ <name>FullAccessNoAdminFunctions</name>
+ <synonym>
+  <key>en</key>
+  <value>Full access no admin functions</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Full access no admin functions</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Full access no admin functions</value>
+ </synonym>
+</mdclass:Role>

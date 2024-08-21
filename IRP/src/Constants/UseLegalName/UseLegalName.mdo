@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e56150ef-0685-44cb-9ff1-99df0b8114ed">
+ <producedTypes>
+  <managerType typeId="d4fc17ad-9c9e-40ae-835e-b41fe8c612c6" valueTypeId="33b288a4-a874-4457-b5c7-442009037b14"/>
+  <valueManagerType typeId="d3b884d9-b2b0-4986-84bd-43998001c02f" valueTypeId="38ed4e39-e25e-4131-a8b1-5b2fddc33d21"/>
+  <valueKeyType typeId="f2b2f17d-835b-485f-9019-24af10d59d43" valueTypeId="666ebdb7-067c-43a2-9fa8-55e111bb1e6e"/>
+ </producedTypes>
+ <name>UseLegalName</name>
+ <synonym>
+  <key>en</key>
+  <value>Use legal name</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use legal name</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Use legal name</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

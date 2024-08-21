@@ -150,6 +150,7 @@
    <types>DocumentRef.ProductionPlanningClosing</types>
    <types>DocumentRef.RetailGoodsReceipt</types>
    <types>DocumentRef.CashExpense</types>
+   <types>DocumentRef.ExternalAccountingOperation</types>
   </commandParameterType>
   <representation>Auto</representation>
  </commands>

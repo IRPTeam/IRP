@@ -671,6 +671,98 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="5d74a21a-a5b0-499a-bcbd-6c19bb994dd5">
+  <name>SendLocalTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Send local total amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Send local total amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Send local total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3aa3411e-9d69-408d-9bd3-600ac7f1b058">
+  <name>SendLocalRate</name>
+  <synonym>
+   <key>en</key>
+   <value>Send local rate</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Send local rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Send local rate</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeCurrencyRate</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="020cc034-99d1-447f-8d43-074a448d982f">
+  <name>ReceiveLocalTotalAmount</name>
+  <synonym>
+   <key>en</key>
+   <value>Receive local total amount</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Receive local total amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Receive local total amount</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="0adb5862-2637-4f38-9238-f62cce231d8d">
+  <name>ReceiveLocalRate</name>
+  <synonym>
+   <key>en</key>
+   <value>Receive local rate</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Receive local rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Receive local rate</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeCurrencyRate</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="9199dc05-6aa4-4c94-99b2-08023fc5cb21">
   <name>DocumentForm</name>
   <synonym>

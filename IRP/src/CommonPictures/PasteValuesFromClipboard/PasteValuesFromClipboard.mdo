@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c82d2727-0064-4890-9934-bcf9976752af">
+ <name>PasteValuesFromClipboard</name>
+ <synonym>
+  <key>en</key>
+  <value>Paste values from clipboard</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Paste values from clipboard</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Paste values from clipboard</value>
+ </synonym>
+</mdclass:CommonPicture>

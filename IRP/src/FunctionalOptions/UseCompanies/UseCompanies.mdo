@@ -25,38 +25,101 @@
  <content>Document.OpeningEntry.Attribute.Company</content>
  <content>Document.StockAdjustmentAsSurplus.Attribute.Company</content>
  <content>Document.BankReceipt.Attribute.Company</content>
- <content>Document.SalesReturn.Attribute.LegalName</content>
- <content>Document.PurchaseReturn.Attribute.LegalName</content>
  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Payee</content>
  <content>Document.CashTransferOrder.Attribute.Company</content>
  <content>Document.StockAdjustmentAsWriteOff.Attribute.Company</content>
- <content>Document.SalesOrder.Attribute.LegalName</content>
- <content>Document.SalesReturnOrder.Attribute.LegalName</content>
  <content>Document.CashExpense.Attribute.Company</content>
  <content>Document.SalesOrder.Attribute.Company</content>
  <content>Document.InternalSupplyRequest.Attribute.Company</content>
  <content>Document.ShipmentConfirmation.Attribute.Company</content>
  <content>Document.InventoryTransferOrder.Attribute.Company</content>
- <content>Document.PurchaseOrder.Attribute.LegalName</content>
  <content>Document.PurchaseReturnOrder.Attribute.Company</content>
  <content>Document.CashRevenue.Attribute.Company</content>
- <content>Document.SalesInvoice.Attribute.LegalName</content>
  <content>Document.Unbundling.Attribute.Company</content>
  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</content>
  <content>Document.IncomingPaymentOrder.Attribute.Company</content>
  <content>Document.SalesReturnOrder.Attribute.Company</content>
  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Payer</content>
- <content>Document.ReconciliationStatement.Attribute.LegalName</content>
- <content>Document.PurchaseReturnOrder.Attribute.LegalName</content>
  <content>Document.SalesReturn.Attribute.Company</content>
  <content>Document.CashPayment.Attribute.Company</content>
  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Payer</content>
  <content>Document.SalesInvoice.Attribute.Company</content>
  <content>Document.GoodsReceipt.Attribute.Company</content>
  <content>Document.CashReceipt.Attribute.Company</content>
- <content>Document.GoodsReceipt.Attribute.LegalName</content>
- <content>Document.ShipmentConfirmation.Attribute.LegalName</content>
  <content>Catalog.Companies.Command.OpenCompanyList</content>
- <content>Document.PurchaseInvoice.Attribute.LegalName</content>
  <content>Document.PurchaseInvoice.Attribute.Company</content>
+ <content>Document.RetailSalesReceipt.Attribute.Company</content>
+ <content>Document.EmployeeFiring.Attribute.Company</content>
+ <content>Document.Payroll.Attribute.Company</content>
+ <content>Document.DebitCreditNote.Attribute.Company</content>
+ <content>DataProcessor.AttachedFilesToDocumentsControl.TabularSection.Documents.Attribute.Company</content>
+ <content>Document.ExternalAccountingOperation.TabularSection.Records.Attribute.CompanyRef</content>
+ <content>Document.PurchaseOrderClosing.Attribute.Company</content>
+ <content>Document.ConsolidatedRetailSales.Attribute.Company</content>
+ <content>Document.JournalEntry.Attribute.Company</content>
+ <content>Document.RetailGoodsReceipt.Attribute.Company</content>
+ <content>Document.EmployeeHiring.Attribute.Company</content>
+ <content>Catalog.ItemKeys.TabularSection.ConsignorsInfo.Attribute.Company</content>
+ <content>Catalog.Companies.Attribute.MainCompany</content>
+ <content>Document.WorkOrderClosing.Attribute.Company</content>
+ <content>Document.AdditionalRevenueAllocation.Attribute.Company</content>
+ <content>Document.PlannedReceiptReservation.Attribute.Company</content>
+ <content>Document.VisitorCounter.Attribute.Company</content>
+ <content>Document.CreditNote.Attribute.Company</content>
+ <content>Document.SalesReportToConsignor.Attribute.Company</content>
+ <content>Document.CashExpense.TabularSection.PaymentList.Attribute.FinancialMovementTypeOtherCompany</content>
+ <content>Document.TimeSheet.Attribute.Company</content>
+ <content>Document.CalculationDeservedVacations.Attribute.Company</content>
+ <content>Document.ProductionPlanning.Attribute.Company</content>
+ <content>Document.ExternalAccountingOperation.Attribute.Company</content>
+ <content>Document.CashStatement.Attribute.Company</content>
+ <content>Document.ExpenseAccruals.Attribute.Company</content>
+ <content>Document.DepreciationCalculation.Attribute.Company</content>
+ <content>Catalog.CashAccounts.Attribute.Company</content>
+ <content>Document.SalesReportFromTradeAgent.Attribute.Company</content>
+ <content>Document.CashExpense.Attribute.OtherCompany</content>
+ <content>Document.ProductionCostsAllocation.Attribute.Company</content>
+ <content>Document.SalesOrderClosing.Attribute.Company</content>
+ <content>Document.ExternalAccountingOperation.TabularSection.Records.Attribute.Company</content>
+ <content>Document.CalculationMovementCosts.Attribute.Company</content>
+ <content>Document.CashRevenue.Attribute.OtherCompany</content>
+ <content>Document.ModernizationOfFixedAsset.Attribute.Company</content>
+ <content>Document.ProductionPlanningCorrection.Attribute.Company</content>
+ <content>Document.CommissioningOfFixedAsset.Attribute.Company</content>
+ <content>Document.DebitNote.Attribute.Company</content>
+ <content>Document.TaxesOperation.Attribute.Company</content>
+ <content>Catalog.LegalNameContracts.Attribute.Company</content>
+ <content>Document.EmployeeSickLeave.Attribute.Company</content>
+ <content>Document.WorkOrder.Attribute.Company</content>
+ <content>Document.EmployeeCashAdvance.Attribute.Company</content>
+ <content>Document.ChequeBondTransaction.Attribute.Company</content>
+ <content>Catalog.Stores.Attribute.Company</content>
+ <content>Document.ChequeBondTransactionItem.Attribute.Company</content>
+ <content>Document.DecommissioningOfFixedAsset.Attribute.Company</content>
+ <content>Document.ItemStockAdjustment.Attribute.Company</content>
+ <content>Document.Production.Attribute.Company</content>
+ <content>Document.ProductionPlanningClosing.Attribute.Company</content>
+ <content>Catalog.Companies.Attribute.OurCompany</content>
+ <content>Document.CustomersAdvancesClosing.Attribute.Company</content>
+ <content>Document.ManualRegisterEntry.Attribute.Company</content>
+ <content>Document.MoneyTransfer.Attribute.Company</content>
+ <content>Document.BatchReallocateIncoming.Attribute.Company</content>
+ <content>Catalog.Agreements.Attribute.Company</content>
+ <content>Document.AdditionalAccrual.Attribute.Company</content>
+ <content>Document.EmployeeVacation.Attribute.Company</content>
+ <content>Document.BatchReallocateOutgoing.Attribute.Company</content>
+ <content>Document.RetailReturnReceipt.Attribute.Company</content>
+ <content>AccountingRegister.Basic.Dimension.Company</content>
+ <content>Document.RevenueAccruals.Attribute.Company</content>
+ <content>Document.CashExpense.TabularSection.PaymentList.Attribute.CashFlowCenterOtherCompany</content>
+ <content>Document.FixedAssetTransfer.Attribute.Company</content>
+ <content>Catalog.Items.TabularSection.ConsignorsInfo.Attribute.Company</content>
+ <content>Document.EmployeeTransfer.Attribute.Company</content>
+ <content>Document.RetailShipmentConfirmation.Attribute.Company</content>
+ <content>Document.WorkSheet.Attribute.Company</content>
+ <content>Document.VendorsAdvancesClosing.Attribute.Company</content>
+ <content>Document.ForeignCurrencyRevaluation.Attribute.Company</content>
+ <content>Document.AdditionalCostAllocation.Attribute.Company</content>
+ <content>Document.ExternalAccountingOperation.TabularSection.Records.Attribute.CompanyPresentation</content>
+ <content>Document.RetailReceiptCorrection.Attribute.Company</content>
 </mdclass:FunctionalOption>

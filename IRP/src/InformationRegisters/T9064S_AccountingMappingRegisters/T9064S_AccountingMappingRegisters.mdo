@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="14498600-508a-45a1-ba48-f51a812f86c4">
+ <producedTypes>
+  <selectionType typeId="174e0ef3-84af-4377-9c9e-3227b99204cf" valueTypeId="4bb18ca6-ee80-4a32-a3bc-3258dce6a89a"/>
+  <listType typeId="bc1708b8-fb6b-4653-a14d-8f52e1825e26" valueTypeId="778fa0e9-b50b-4814-8b4f-24d6f4d619ec"/>
+  <managerType typeId="037be11c-b87d-42b2-ad97-2c7cf88f6438" valueTypeId="3001b656-498c-42ee-ac90-8c95b3a518d5"/>
+  <recordSetType typeId="3f021fe7-d4e4-424a-85b0-e21225b93f11" valueTypeId="43929c66-5652-4001-8e25-aaf6319a9240"/>
+  <recordKeyType typeId="07aedaa3-c133-4a73-bf56-960fab9303fe" valueTypeId="eea08c33-4ce9-4286-8833-b89fff552911"/>
+  <recordType typeId="b75adb27-dff1-4086-97d6-44725f5d4fe2" valueTypeId="91e01f34-ac37-4b99-80ba-daaf0a11c3f6"/>
+  <recordManagerType typeId="55128cef-3346-47cc-901c-febe1c5c5754" valueTypeId="b9fc84ca-6320-4989-97de-a8cb94725f95"/>
+ </producedTypes>
+ <name>T9064S_AccountingMappingRegisters</name>
+ <synonym>
+  <key>en</key>
+  <value>T9064 Accounting mapping (registers)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9064 Accounting mapping (registers)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9064 Accounting mapping (registers)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9064S_AccountingMappingRegisters.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.T9064S_AccountingMappingRegisters.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="dd60a2b3-abed-4f82-934e-aa17b2a210b0">
+  <name>LedgerType</name>
+  <synonym>
+   <key>en</key>
+   <value>Ledger type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Тип учета</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Defter tipi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.LedgerTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="6b61788c-9975-4acf-90b0-668ca6fb3bfc">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="9181630d-040a-4787-9d1d-fb4a55f219ee">
+  <name>ExternalName</name>
+  <synonym>
+   <key>en</key>
+   <value>External name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>External name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>100</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="501c915c-9262-490a-9d8d-5faa2567a05c">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2545c0d2-5ed1-41a3-bb49-205ef51b4ff8">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

@@ -168,5 +168,7 @@
   <types>DocumentRef.RetailGoodsReceipt</types>
   <types>DocumentRef.CashExpense</types>
   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  <types>CatalogRef.ExtDimensions</types>
+  <types>DocumentRef.ExternalAccountingOperation</types>
  </type>
 </mdclass:DefinedType>

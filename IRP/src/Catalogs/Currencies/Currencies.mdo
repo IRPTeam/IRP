@@ -357,4 +357,38 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="5d0b6755-7929-43b5-b090-bf6a674234b7">
+  <name>LoadCurrencies</name>
+  <synonym>
+   <key>en</key>
+   <value>Load currencies</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Load currencies</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Load currencies</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <templates uuid="9e8375d4-6b4a-4b02-963f-b3c2bcf22d67">
+  <name>CurrencyList</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency list</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Currency list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Currency list</value>
+  </synonym>
+  <comment>https://github.com/wiredmax/world-currencies</comment>
+  <templateType>BinaryData</templateType>
+ </templates>
 </mdclass:Catalog>

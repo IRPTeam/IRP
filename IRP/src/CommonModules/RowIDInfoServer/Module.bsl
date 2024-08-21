@@ -2648,6 +2648,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref AS PurchaseBasis,
 	|	ItemList.Ref AS Requester,
 	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+	|	ItemList.Ref.Account AS Account,
 	|	ItemList.Ref.Partner AS Partner,
 	|	ItemList.Ref.LegalName AS LegalName,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -11254,7 +11255,7 @@ EndFunction
 
 Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Undefined) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName, Account" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
@@ -11597,6 +11598,7 @@ Function GetColumnNames_ItemList()
 		   |Key,
 		   |BasedOn,
 		   |Company,
+		   |Account,
 		   |Partner,
 		   |LegalName,
 		   |Agreement,

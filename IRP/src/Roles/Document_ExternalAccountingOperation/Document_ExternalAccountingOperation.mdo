@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2c83def3-f702-4bcf-8602-b9855c4ea11b">
+ <name>Document_ExternalAccountingOperation</name>
+ <synonym>
+  <key>en</key>
+  <value>Document "External accounting operation"</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Document "External accounting operation"</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Document "External accounting operation"</value>
+ </synonym>
+</mdclass:Role>

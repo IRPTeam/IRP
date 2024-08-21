@@ -365,3 +365,46 @@ Scenario: _9800021 check filter by branch for Depreciation calculation
 		And in the table "Calculations" I click "Fill calculations" button
 		Then the number of "Calculations" table lines is "равно" 0
 	And I close all client application windows	
+
+Scenario: _9800022 manual filling Depreciation calculation
+	And I close all client application windows
+	* Create deprecation calculation
+		Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+		And I click "Create" button
+		And I click Choice button of the field named "Date"
+		And I input "30.05.2024 00:00:00" text in the field named "Date"
+		And I move to the next attribute
+		And I select from the drop-down list named "Company" by "Main Company" string	
+		And I select from the drop-down list named "Branch" by "Front office" string	
+	* Add fixed assets
+		And I move to "Calculations" tab
+		And in the table "Calculations" I click the button named "CalculationsAdd"
+		And I activate "Fixed asset" field in "Calculations" table
+		And I select current line in "Calculations" table
+		And I click choice button of "Fixed asset" attribute in "Calculations" table
+		And I go to line in "List" table
+			| "Description"      |
+			| "Computer Servers" |
+		And I select current line in "List" table
+		And I finish line editing in "Calculations" table
+	* Check filling
+		And "Calculations" table became equal
+			| "Amount" | "Fixed asset"      | "Profit loss center"   | "Ledger type"                          | "Schedule"                  | "Expense type" | "Calculation method" | "Currency" | "Amount balance" |
+			| "138,89" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 583,33"       |
+	* Change amount
+		And I select current line in "Calculations" table
+		And I input "500,00" text in "Amount" field of "Calculations" table
+		And I finish line editing in "Calculations" table
+	* Post and check amount
+		And I click "Post" button
+		Then user message window does not contain messages
+		And "Calculations" table became equal
+			| "#" | "Amount" | "Fixed asset"      | "Profit loss center"   | "Ledger type"                          | "Schedule"                  | "Expense type" | "Calculation method" | "Currency" | "Amount balance" |
+			| "1" | "500,00" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 583,33"       |
+	And I close all client application windows
+	
+				
+				
+				
+				
+				

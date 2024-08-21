@@ -38,6 +38,7 @@ Scenario: _023000 preparation (Sales order)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog CashAccounts objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
 		When Create catalog Countries objects
@@ -693,9 +694,38 @@ Scenario: _023104 filling in Store field from the Partner term
 
 
 				
-
+Scenario: _023105 filling in Account field in the SO
+	And I close all client application windows
+	* Open SO and fill main details
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+				| 'Description'    |
+				| 'Ferron BP'      |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                        |
+			| 'Basic Partner terms, without VAT'   |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I select current line in "ItemList" table
+		And I select "scarf" from "Item" drop-down list by string in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Fill Account for payment
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| "Currency" | "Description"       |
+			| "TRY"      | "Bank account, TRY" |
+		And I select current line in "List" table
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+	And I close all client application windows	
 		
-				
 
 
 Scenario: _300504 check connection to Sales order report "Related documents"

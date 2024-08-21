@@ -155,4 +155,19 @@
    <value>Ziyaretçi sayacı</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="d8d76565-9bac-4ff5-b5db-7beb763f1a84">
+  <name>AccountingService</name>
+  <synonym>
+   <key>en</key>
+   <value>Accounting service</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Accounting service</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Accounting service</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

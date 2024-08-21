@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6a69a7fd-a0c3-488b-b1dd-3bcf2e6f8a8c">
+ <producedTypes>
+  <selectionType typeId="b35781d5-19dc-4e44-a4da-8fe28adf4bd9" valueTypeId="18a1536d-8177-465a-a65e-a2d47a0e0eea"/>
+  <listType typeId="e1c576e0-6af7-4266-b1fc-5ac39696a055" valueTypeId="d4780e40-7063-45a4-84ef-dfa5b588c5e8"/>
+  <managerType typeId="924a64ff-d945-470e-afb2-b8602a1b17a0" valueTypeId="6bbbda5f-ae3b-4c4d-9234-0394681f659e"/>
+  <recordSetType typeId="454a274f-50b3-4d73-b0b7-395af4195186" valueTypeId="9f41d0fd-e90b-48ef-8d87-d8766acc6ec1"/>
+  <recordKeyType typeId="0c876bb6-61a6-4b3c-b93a-33044a81e395" valueTypeId="b6374340-ec18-44dc-a9d5-d6000fbee3f8"/>
+  <recordType typeId="57b87b2f-a533-4572-866c-57e7ad3e8ee4" valueTypeId="563fbb88-931d-444d-8e59-012d491a7292"/>
+  <recordManagerType typeId="071e2d9d-8b2b-4f13-bf6a-6ceca58fae19" valueTypeId="9dbafa25-0d50-4dac-b942-6add353d8007"/>
+ </producedTypes>
+ <name>T9065S_AccountingMappingExtDimensions</name>
+ <synonym>
+  <key>en</key>
+  <value>T9065 Accounting mapping (ext dimensions)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9065 Accounting mapping (ext dimensions)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9065 Accounting mapping (ext dimensions)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9065S_AccountingMappingExtDimensions.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.T9065S_AccountingMappingExtDimensions.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="7a963e45-2b36-4edb-b22c-b08a4f2732e4">
+  <name>InternalRef</name>
+  <synonym>
+   <key>en</key>
+   <value>Internal ref</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Internal ref</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Internal ref</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="d96c2bd3-3069-49a7-a65f-3c7026cde40b">
+  <name>InternalBaseClass</name>
+  <synonym>
+   <key>en</key>
+   <value>Internal base class</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Internal base class</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Internal base class</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="7e4e8d3b-90b3-4d61-9160-dd66055bf443">
+  <name>InternalClass</name>
+  <synonym>
+   <key>en</key>
+   <value>Internal class</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Internal class</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Internal class</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="5e476242-9406-422d-89ec-9adc2a375636">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="5c2e9b82-42fc-4669-b3c9-2d4a3d8bd373">
+  <name>ExternalRef</name>
+  <synonym>
+   <key>en</key>
+   <value>External ref</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>External ref</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External ref</value>
+  </synonym>
+  <type>
+   <types>UUID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="c8f9a9dc-3b24-4f46-9d5f-ae0d3ee8af10">
+  <name>ExternalBaseClass</name>
+  <synonym>
+   <key>en</key>
+   <value>External base class</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>External base class</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External base class</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>20</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="3ec4d097-b5a3-4ee5-86f9-ebaf07cf761a">
+  <name>ExternalClass</name>
+  <synonym>
+   <key>en</key>
+   <value>External class</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>External class</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External class</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>150</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <forms uuid="af80b80c-a7b5-4d54-9c81-0e19cb3faa57">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="15b1fce6-81bf-48b1-b60a-5109aa23b260">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

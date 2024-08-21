@@ -20,11 +20,22 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
-		
+	LocalTotalAmounts = New Structure("LocalTotalAmount, LocalNetAmount, LocalTaxAmount, LocalRate", 0, 0, 0, 0);
+	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();		
 	For Each Row In ThisObject.PaymentList Do
 		Parameters = CurrenciesClientServer.GetParameters_V8(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+		AmountsInfo.TotalAmount.Value = Row.TotalAmount;
+		AmountsInfo.NetAmount.Value   = Row.NetAmount;
+		AmountsInfo.TaxAmount.Value   = Row.TaxAmount;
+		TotalAounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		LocalTotalAmounts.LocalTotalAmount = LocalTotalAmounts.LocalTotalAmount + TotalAounts.LocalTotalAmount;
+		LocalTotalAmounts.LocalNetAmount   = LocalTotalAmounts.LocalNetAmount   + TotalAounts.LocalNetAmount;
+		LocalTotalAmounts.LocalTaxAmount   = LocalTotalAmounts.LocalTaxAmount   + TotalAounts.LocalTaxAmount;
+		LocalTotalAmounts.LocalRate        = TotalAounts.LocalRate;
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, LocalTotalAmounts, AmountsInfo);		
 		
 		If IsMoneyExchange Then		
 			TransitCurrency = ThisObject.TransitAccount.Currency;

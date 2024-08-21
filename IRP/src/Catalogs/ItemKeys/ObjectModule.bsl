@@ -26,7 +26,7 @@ Procedure BeforeWrite(Cancel)
 		NewRow.Item = String(ThisObject.Item.UUID());
 
 		ThisObject.UniqueMD5 = CommonFunctionsServer.GetMD5(ValueTable);
-		If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
+		If ValueIsFilled(Catalogs.ItemKeys.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_065);
 		EndIf;
@@ -51,7 +51,7 @@ Procedure BeforeWrite(Cancel)
 		EndIf;
 
 		ThisObject.UniqueMD5 = AddAttributesAndPropertiesServer.GetMD5ByAddAttributes(ValueTable);
-		If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
+		If ValueIsFilled(Catalogs.ItemKeys.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_065);
 		EndIf;

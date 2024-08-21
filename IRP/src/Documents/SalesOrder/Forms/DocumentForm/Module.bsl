@@ -178,6 +178,25 @@ EndProcedure
 
 #EndRegion
 
+#Region ACCOUNT
+
+&AtClient
+Procedure AccountOnChange(Item)
+	DocSalesOrderClient.AccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccountStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocSalesOrderClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountEditTextChange(Item, Text, StandardProcessing)
+	DocSalesOrderClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region TRANSACTION_TYPE
 
 &AtClient
@@ -719,6 +738,13 @@ EndProcedure
 Function PasteFromClipboardServer(CopySettings)
 	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
+
+//@skip-check module-unused-method
+&AtClient
+Async Procedure PasteFromClipboardValues(Command)
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);		
+	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
+EndProcedure
 
 #EndRegion
 

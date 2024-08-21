@@ -1083,6 +1083,21 @@
     </code>
    </content>
   </items>
+  <items id="4b4821d4-9477-4a7b-8135-c4d42f54f3e7">
+   <name>Document_ExternalAccountingOperation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>153</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="7aef00ff-c0a1-4de6-8a7c-8ea4888fb372">
+    <name>ExternalAccountingOperation</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>154</value>
+    </code>
+   </content>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

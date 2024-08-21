@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac642ca5-714e-4010-aaf3-d904f27cf354">
+ <name>UseAccountingService</name>
+ <synonym>
+  <key>en</key>
+  <value>Use accounting service</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Use accounting service</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Use accounting service</value>
+ </synonym>
+ <location>Constant.UseAccountingService</location>
+ <privilegedGetMode>true</privilegedGetMode>
+ <content>Subsystem.Accounting.Subsystem.AccountingService</content>
+ <content>InformationRegister.T9065S_AccountingMappingExtDimensions</content>
+ <content>InformationRegister.T9061S_AccountingMappingAccounts</content>
+ <content>InformationRegister.T9063S_AccountingMappingCurrencies</content>
+ <content>InformationRegister.T9062S_AccountingMappingCompanies</content>
+ <content>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</content>
+ <content>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</content>
+ <content>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</content>
+ <content>Document.ExternalAccountingOperation</content>
+ <content>InformationRegister.T9064S_AccountingMappingRegisters</content>
+ <content>InformationRegister.T9068S_AccountingMappingAccountsMatching</content>
+ <content>Catalog.LedgerTypes.Attribute.SourceLedgerType</content>
+</mdclass:FunctionalOption>

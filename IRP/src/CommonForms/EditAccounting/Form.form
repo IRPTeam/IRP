@@ -320,6 +320,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr1</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr1</segments>
@@ -375,6 +381,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr2</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr2</segments>
@@ -430,6 +442,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr3</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr3</segments>
@@ -587,6 +605,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr1</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr1</segments>
@@ -642,6 +666,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr2</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr2</segments>
@@ -697,6 +727,12 @@
      <chooseType>true</chooseType>
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
+     <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <datapath xsi:type="form:DataPath">
+       <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr3</segments>
+      </datapath>
+     </choiceParameterLinks>
      <typeLink>
       <datapath xsi:type="form:DataPath">
        <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr3</segments>

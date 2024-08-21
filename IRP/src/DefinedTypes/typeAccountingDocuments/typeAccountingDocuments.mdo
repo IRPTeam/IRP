@@ -44,5 +44,6 @@
   <types>DocumentRef.DepreciationCalculation</types>
   <types>DocumentRef.SalesInvoice</types>
   <types>DocumentRef.CashExpense</types>
+  <types>DocumentRef.ExternalAccountingOperation</types>
  </type>
 </mdclass:DefinedType>

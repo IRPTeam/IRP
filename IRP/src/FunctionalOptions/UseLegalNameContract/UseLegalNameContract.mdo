@@ -16,4 +16,37 @@
  <location>Constant.UseLegalNameContract</location>
  <privilegedGetMode>true</privilegedGetMode>
  <content>Catalog.LegalNameContracts</content>
+ <content>Document.ChequeBondTransaction.TabularSection.ChequeBonds.Attribute.LegalNameContract</content>
+ <content>Document.SalesReportFromTradeAgent.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableOther.Attribute.LegalNameContract</content>
+ <content>Document.SalesReturn.Attribute.LegalNameContract</content>
+ <content>Document.SalesInvoice.Attribute.LegalNameContract</content>
+ <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.LegalNameContract</content>
+ <content>Document.CreditNote.TabularSection.Transactions.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.Attribute.LegalNameConsignor</content>
+ <content>Document.RetailSalesReceipt.TabularSection.Payments.Attribute.PaymentAgentLegalNameContract</content>
+ <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableByAgreements.Attribute.LegalNameContract</content>
+ <content>Catalog.BankTerms.TabularSection.PaymentTypes.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AdvanceFromCustomers.Attribute.LegalNameContract</content>
+ <content>Document.RetailReturnReceipt.Attribute.LegalNameContract</content>
+ <content>Document.ChequeBondTransactionItem.Attribute.LegalNameContract</content>
+ <content>Document.DebitNote.TabularSection.Transactions.Attribute.LegalNameContract</content>
+ <content>Document.BankPayment.TabularSection.PaymentList.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableByDocuments.Attribute.LegalNameContract</content>
+ <content>Document.RetailReturnReceipt.TabularSection.Payments.Attribute.PaymentAgentLegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AdvanceToSuppliers.Attribute.LegalNameContract</content>
+ <content>Document.PurchaseInvoice.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableOther.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountReceivableByAgreements.Attribute.LegalNameContract</content>
+ <content>Document.TaxesOperation.Attribute.LegalNameContract</content>
+ <content>Document.RetailReceiptCorrection.Attribute.LegalNameContract</content>
+ <content>Document.SalesReportToConsignor.Attribute.LegalNameContract</content>
+ <content>Document.DebitCreditNote.Attribute.ReceiveLegalNameContract</content>
+ <content>Document.DebitCreditNote.Attribute.SendLegalNameContract</content>
+ <content>Document.RetailReceiptCorrection.TabularSection.Payments.Attribute.PaymentAgentLegalNameContract</content>
+ <content>Document.CashPayment.TabularSection.PaymentList.Attribute.LegalNameContract</content>
+ <content>Document.OpeningEntry.TabularSection.AccountPayableByDocuments.Attribute.LegalNameContract</content>
+ <content>Document.RetailSalesReceipt.Attribute.LegalNameContract</content>
+ <content>Document.PurchaseReturn.Attribute.LegalNameContract</content>
 </mdclass:FunctionalOption>

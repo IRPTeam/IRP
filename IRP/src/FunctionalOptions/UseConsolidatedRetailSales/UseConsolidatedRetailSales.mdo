@@ -18,4 +18,6 @@
  <content>Document.ConsolidatedRetailSales</content>
  <content>Catalog.BusinessUnits.Attribute.Retail</content>
  <content>Catalog.BusinessUnits.Attribute.UseConsolidatedRetailSales</content>
+ <content>InformationRegister.DocumentFiscalStatus.Resource.Status</content>
+ <content>InformationRegister.DocumentFiscalStatus.Resource.CheckNumber</content>
 </mdclass:FunctionalOption>

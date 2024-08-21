@@ -358,9 +358,16 @@ When Create document ConsolidatedRetailSales objects (test data base)
 		And I click "Close session" button		
 		And Delay 2
 		And I click "Open session" button
+* Additional table control
+	Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"	
+	And I go to line in "FunctionalOptions" table
+		| "Option"                                |
+		| "Use additional table control document" |
+	And I set "Use" checkbox in "FunctionalOptions" table
+	And I click "Save" button
 * Posting first documents
 	And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
+		| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);"    |
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="85cea4a8-4174-48b5-aa3e-9af991ebeb93">
+ <producedTypes>
+  <selectionType typeId="3eead49c-fcb8-44d1-807f-7169193ac9d4" valueTypeId="0897c184-771f-40a3-98d8-24c3ae0b19c3"/>
+  <listType typeId="0aa1a5d9-73c9-4057-bd40-a2588f4e3864" valueTypeId="64ed2815-efcf-4d9f-80c9-1323f247e234"/>
+  <managerType typeId="0202f3aa-1e94-4892-b51e-9765eef38053" valueTypeId="d58ff83c-92b9-4853-a949-8e41abc597c6"/>
+  <recordSetType typeId="0474b5cd-873e-4dbc-9130-dd92d48ed117" valueTypeId="c9ef22e2-4679-4f41-a58d-8d4b79765e7c"/>
+  <recordKeyType typeId="c76f07a8-d4ab-4ebe-8f23-cfba04bcfc94" valueTypeId="6c204dc1-8e67-413f-84a8-612f514888f9"/>
+  <recordType typeId="56702629-9d4b-4fa6-a0c1-39f84cc66b21" valueTypeId="4025e006-4b60-405d-99cf-78554c243b4b"/>
+  <recordManagerType typeId="17f0011c-dc7f-46c1-8844-d883a8654176" valueTypeId="9e5e3b1c-1a55-422e-9d06-59a37a3e57d3"/>
+ </producedTypes>
+ <name>T9067S_AccountingMappingExtDimensionEnumValues</name>
+ <synonym>
+  <key>en</key>
+  <value>T9067 Accounting mapping (ext dimension enum values)</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>T9067 Accounting mapping (ext dimension enum values)</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>T9067 Accounting mapping (ext dimension enum values)</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <editType>InDialog</editType>
+ <defaultRecordForm>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues.Form.RecordForm</defaultRecordForm>
+ <defaultListForm>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues.Form.ListForm</defaultListForm>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="3c4bdbb8-930a-4a38-8e67-ae8ffe1f18ba">
+  <name>ExtDimensionValue</name>
+  <synonym>
+   <key>en</key>
+   <value>Ext dimension value</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ext dimension value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ext dimension value</value>
+  </synonym>
+  <type>
+   <types>Characteristic.AccountingExtraDimensionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <dimensions uuid="9cabeef8-a54c-40e7-98d0-b1dd9077e698">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f79637ae-555d-4b6d-bf7c-2b404af01ad9">
+  <name>ExternalValue</name>
+  <synonym>
+   <key>en</key>
+   <value>External value</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>External value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>External value</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>150</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="1bf799ff-645d-4204-9911-1d7e762fe62b">
+  <name>ExtDimensionType</name>
+  <synonym>
+   <key>en</key>
+   <value>Ext dimension type</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ext dimension type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ext dimension type</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </dimensions>
+ <forms uuid="3924f95c-1ee6-4426-95dc-550973e3eb63">
+  <name>RecordForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Record form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма записи</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kayıt formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="79445b98-515b-4aca-b46b-aeee7f9e70ce">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:InformationRegister>

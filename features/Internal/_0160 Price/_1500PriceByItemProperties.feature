@@ -347,7 +347,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order
@@ -480,7 +480,7 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
@@ -532,7 +532,7 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
@@ -571,7 +571,7 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order

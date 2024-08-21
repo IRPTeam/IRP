@@ -1,7 +1,5 @@
 // @strict-types
 
-#If Server Or ThickClientOrdinaryApplication Or ExternalConnection Then
-
 #Region Public
 
 Procedure SendMessagesFromQueue() Export
@@ -47,4 +45,19 @@ EndProcedure
 
 #EndRegion
 
-#EndIf
+#Region Internal
+
+#Region AccessObject
+
+// Get access key.
+// See Role.TemplateInformationRegisters
+// 
+// Returns:
+//  Structure - Get access key:
+Function GetAccessKey() Export
+	Return New Structure();
+EndFunction
+
+#EndRegion
+
+#EndRegion

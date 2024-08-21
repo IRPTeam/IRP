@@ -67,7 +67,6 @@
     <key>en</key>
     <value>Outgoing messages</value>
   </listPresentation>
-  <numberType>String</numberType>
   <numberLength>12</numberLength>
   <numberAllowedLength>Variable</numberAllowedLength>
   <autonumbering>true</autonumbering>

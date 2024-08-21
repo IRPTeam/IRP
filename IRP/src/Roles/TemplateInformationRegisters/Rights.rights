@@ -1398,6 +1398,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.MessagesQueueToSend</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T8515S_FixedAssetsLocation.Dimension.Branch</name>
 		<right>
 			<name>Edit</name>

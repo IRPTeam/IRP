@@ -232,7 +232,7 @@ Scenario: _020112 load data in the Physical inventory
 		Then the form attribute named "Field_PhysCount" became equal to "No"
 		Then the form attribute named "Field_ManualFixedCount" became equal to "Yes"
 		Then the form attribute named "Field_Difference" became equal to "No"
-		Then the form attribute named "Field_Description" became equal to "No"
+		Then the form attribute named "Field_Comment" became equal to "No"
 		And I close all client application windows	
 
 Scenario: _020113 load data in the Bundling

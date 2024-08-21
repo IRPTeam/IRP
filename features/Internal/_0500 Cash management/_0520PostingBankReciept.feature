@@ -534,7 +534,7 @@ Scenario: _052013 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -560,7 +560,7 @@ Scenario: _052014 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -584,7 +584,7 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available

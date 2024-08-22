@@ -309,6 +309,57 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a09c8c62-8328-4ba2-8260-1d85d75e84b6">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2a59dc7d-d2e6-4d46-8f99-a1575cf8e4ca">
+    <name>MainPhoneNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Main phone number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4bfd6297-cfcc-4e63-a51a-d7ddf9ed2609">
+    <name>MainAddress</name>
+    <synonym>
+      <key>en</key>
+      <value>Main address</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="0f3997c1-d4c3-4285-ac02-48b8f2135aec">
     <producedTypes>
       <objectType typeId="68d06b99-215e-4c26-90cf-7850dea4cfc7" valueTypeId="971686f2-98a4-40a4-870f-5ce3e0daa05d"/>

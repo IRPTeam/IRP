@@ -23,7 +23,7 @@ Function Get(DynamicList, ListName = Undefined, Form = Undefined) Export
 	FormQueryText = DynamicList.QueryText;
 	MainAttributeTable = DynamicList.MainTable;
 	If Not DynamicList.CustomQuery Then
-		FormQueryText = "Select * From " + MainAttributeTable;
+		FormQueryText = "Select _MainTable.* From " + MainAttributeTable + " AS _MainTable";
 	EndIf;
 	
 	QuerySchema = New QuerySchema;

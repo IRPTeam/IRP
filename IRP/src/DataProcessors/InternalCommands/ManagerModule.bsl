@@ -81,6 +81,16 @@ Function GetCommandGroupDescription(GroupName) Export
 	Return CommandGroupDescription;
 EndFunction
 
+// See InternalCommandsServer.OnInitialization
+Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Undefined) Export
+	
+	If CommandName = "AuditLock" Then
+		AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo);
+		
+	EndIf;
+	
+EndProcedure
+
 // See InternalCommandsServer.OnCommandCreate
 Procedure OnCommandCreate(CommandName, CommandParameters, AddInfo = Undefined) Export
 	
@@ -621,7 +631,7 @@ Function AuditLock_GetCommandDescription()
 	CommandDescription.HasActionOnCommandCreate = True;
 	CommandDescription.HasActionAfterRunning = True;
 	
-	CommandDescription.UsingListForm = False;
+	CommandDescription.UsingListForm = True;
 	CommandDescription.UsingChoiceForm = False;
 	CommandDescription.UsingObjectForm = True;
 	
@@ -635,6 +645,43 @@ Function AuditLock_GetCommandDescription()
 	Return CommandDescription;
 	
 EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
+
+	If CommandParameters.FormType = Enums.FormTypes.ListForm Then
+		
+		QuerySchemaAPI = DynamicListAPI.Get(CommandParameters.MainAttribute);
+		DynamicListAPI.AddSource(
+				QuerySchemaAPI, 
+				"InformationRegister.AuditLock", 
+				"_AuditLock", 
+				"#MainTable#.Ref = _AuditLock.Document");
+		DynamicListAPI.AddField(
+				QuerySchemaAPI, 
+				"(NOT _AuditLock.Document IS NULL)", 
+				"AuditLockSet", 
+				Metadata.InformationRegisters.AuditLock.Synonym);
+		DynamicListAPI.Set(QuerySchemaAPI);
+		
+		NewColumn = CommandParameters.Form.Items.Insert(
+				"ListAuditLockSet", 
+				Type("FormField"), 
+				CommandParameters.Form.Items["List"],
+				CommandParameters.Form.Items["List"].ChildItems[0]);
+		NewColumn.DataPath = "List.AuditLockSet";
+		NewColumn.Type = FormFieldType.PictureField;
+		NewColumn.TitleLocation = FormItemTitleLocation.None;
+		
+		CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
+		NewColumn.HeaderPicture = CommandPicture; 
+		NewColumn.ValuesPicture = CommandPicture; 
+		
+		Cancel = True;
+		
+	EndIf;
+		 
+EndProcedure
 
 // See InternalCommandsServer.OnCommandCreate
 Procedure AuditLock_OnCommandCreate(CommandName, CommandParameters, AddInfo)

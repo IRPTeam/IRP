@@ -307,8 +307,8 @@ Function T6020S_BatchKeysInfo()
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
 		   |	AllocationList.Document AS PurchaseInvoiceDocument,
-		   |	SUM(AllocationList.Amount) AS AllocatedCostAmount,
-		   |	SUM(AllocationList.AmountTax) AS AllocatedCostTaxAmount
+		   |	SUM(AllocationList.Amount) AS AllocatedRevenueAmount,
+		   |	SUM(AllocationList.AmountTax) AS AllocatedRevenueTaxAmount
 		   |INTO T6020S_BatchKeysInfo
 		   |FROM
 		   |	AllocationList AS AllocationList

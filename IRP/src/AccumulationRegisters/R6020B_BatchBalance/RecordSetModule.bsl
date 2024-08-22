@@ -11,7 +11,7 @@ Procedure BeforeWrite(Cancel, Replacing)
 			  + _row.ExtraCostAmountByRatio
 			  + _row.ExtraDirectCostAmount
 			  + _row.AllocatedCostAmount
-			  + _row.AllocatedRevenueAmount;
+			  - _row.AllocatedRevenueAmount;
 			  
 		_row.TotalTaxAmount = 
 			  _row.InvoiceTaxAmount 
@@ -19,7 +19,7 @@ Procedure BeforeWrite(Cancel, Replacing)
 			  + _row.ExtraCostTaxAmountByRatio
 			  + _row.ExtraDirectCostTaxAmount
 			  + _row.AllocatedCostTaxAmount
-			  + _row.AllocatedRevenueTaxAmount;                      
+			  - _row.AllocatedRevenueTaxAmount;                      
 			  
 		_row.TotalAmount = _row.TotalNetAmount + _row.TotalTaxAmount;	  
 	EndDo;

@@ -205,12 +205,13 @@ Function RegisterRecords(Parameters)
 			Or Row.Value.Metadata = AccumulationRegisters.R6060T_CostOfGoodsSold Then
 				Continue; //Never rewrite
 		EndIf;
-		If Metadata.AccumulationRegisters.Contains(Row.Value.Metadata) Then
+		
+		ArrayOfRegisters = RegistersWithAdditionalDataFilling();
+		If ArrayOfRegisters.Find(Row.Value.Metadata) <> Undefined Then
 			RegisterName = Row.Value.Metadata.Name;
-			try
 			AccumulationRegisters[RegisterName].AdditionalDataFilling(TableForLoad);
-			except endtry;
 		EndIf;
+		
 		WriteAdvances(Parameters.Object, Row.Value.Metadata, TableForLoad);
 		
 		If Row.Value.Metadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo Then
@@ -1311,6 +1312,12 @@ Function Exists_R2001T_Sales() Export
 		|	AccumulationRegister.R2001T_Sales AS R2001T_Sales
 		|WHERE
 		|	R2001T_Sales.Recorder = &Ref";
+EndFunction
+
+Function RegistersWithAdditionalDataFilling()
+	ArrayOfRegisters = New Array();
+	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);
+	Return ArrayOfRegisters;
 EndFunction
 
 #Region BatchInfo

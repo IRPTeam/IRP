@@ -270,7 +270,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>SalesOrdersDescription</name>
+      <name>SalesOrdersComment</name>
       <id>33</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -278,10 +278,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>SalesOrders.Description</segments>
+        <segments>SalesOrders.Comment</segments>
       </dataPath>
       <extendedTooltip>
-        <name>SalesOrdersDescriptionExtendedTooltip</name>
+        <name>SalesOrdersCommentExtendedTooltip</name>
         <id>35</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -296,7 +296,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>SalesOrdersDescriptionContextMenu</name>
+        <name>SalesOrdersCommentContextMenu</name>
         <id>34</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1290,7 +1290,7 @@ WHERE
 	SalesOrder.Ref,
 	SalesOrder.RetailCustomer,
 	SalesOrder.Branch,
-	SalesOrder.Description,
+	SalesOrder.Comment,
 	SalesOrder.DocumentAmount
 FROM
 	Document.SalesOrder AS SalesOrder
@@ -1542,7 +1542,7 @@ WHERE
 	RetailShipmentConfirmation.Vehicle,
 	RetailShipmentConfirmation.Author,
 	RetailShipmentConfirmation.Branch,
-	RetailShipmentConfirmation.Description,
+	RetailShipmentConfirmation.Comment,
 	RetailShipmentConfirmation.SourceNodeID
 FROM
 	Document.RetailShipmentConfirmation AS RetailShipmentConfirmation

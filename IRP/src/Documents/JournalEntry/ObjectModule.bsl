@@ -18,7 +18,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		RecordSet.Filter.Document.Set(ThisObject.Basis);
 		RecordSet.Read();
 		_AccountingRowAnalytics = RecordSet.Unload();
-			
+		
+		AccountingServer.SortAccountingAnalyticRows(_AccountingRowAnalytics, ThisObject.Basis);
+				
 		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 		RecordSet.Filter.Document.Set(ThisObject.Basis);
 		RecordSet.Read();

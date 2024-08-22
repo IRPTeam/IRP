@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @ExportScenarios
 @IgnoreOnCIMainBuild
 @tree
@@ -135,7 +135,7 @@ Scenario: check filling in Description
 		And I click "Description" hyperlink
 		And I input "Test Description" text in "Text" field
 		And I click "OK" button
-		Then the form attribute named "Description" became equal to "Test Description"
+		Then the form attribute named "Comment" became equal to "Test Description"
 	And I close all client application windows
 
 Scenario: check the choice of type of operation in the payment documents

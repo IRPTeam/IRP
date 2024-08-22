@@ -1,17 +1,11 @@
 {
   "version": 1,
   "settings": {
-    "begin-transaction": {
-      "enabled": true
-    },
     "code-after-async-call": {
       "enabled": true
     },
     "commit-transaction": {
       "enabled": true
-    },
-    "module-structure-method-in-regions": {
-      "enabled": false
     },
     "manager-module-named-self-reference": {
       "enabled": false
@@ -19,10 +13,7 @@
     "export-procedure-missing-comment": {
       "enabled": false
     },
-    "form-ql-hub": {
-      "enabled": false
-    },
-    "ql-join-to-sub-query": {
+    "right-administration": {
       "enabled": false
     },
     "module-region-empty": {
@@ -37,6 +28,84 @@
     "ql-temp-table-index": {
       "enabled": false
     },
+    "right-configuration-extensions-administration": {
+      "enabled": false
+    },
+    "module-consecutive-blank-lines": {
+      "enabled": true
+    },
+    "right-interactive-delete": {
+      "enabled": false
+    },
+    "right-data-administration": {
+      "enabled": false
+    },
+    "constructor-function-return-section": {
+      "enabled": false
+    },
+    "right-interactive-clear-deletion-mark-predefined-data": {
+      "enabled": false
+    },
+    "doc-comment-export-function-return-section": {
+      "enabled": false
+    },
+    "doc-comment-parameter-section": {
+      "enabled": false
+    },
+    "role-right-has-rls": {
+      "enabled": false
+    },
+    "method-too-many-params": {
+      "enabled": false
+    },
+    "doc-comment-return-section-type": {
+      "enabled": false
+    },
+    "right-active-users": {
+      "enabled": false
+    },
+    "module-structure-top-region": {
+      "enabled": false
+    },
+    "right-interactive-set-deletion-mark-predefined-data": {
+      "enabled": false
+    },
+    "right-output-to-printer-file-clipboard": {
+      "enabled": false
+    },
+    "module-structure-event-regions": {
+      "enabled": false
+    },
+    "right-update-database-configuration": {
+      "enabled": false
+    },
+    "right-start-thick-client": {
+      "enabled": false
+    },
+    "right-all-functions-mode": {
+      "enabled": false
+    },
+    "module-structure-var-in-region": {
+      "enabled": false
+    },
+    "right-start-web-client": {
+      "enabled": false
+    },
+    "begin-transaction": {
+      "enabled": true
+    },
+    "right-interactive-open-external-data-processors": {
+      "enabled": false
+    },
+    "module-structure-method-in-regions": {
+      "enabled": false
+    },
+    "form-ql-hub": {
+      "enabled": false
+    },
+    "ql-join-to-sub-query": {
+      "enabled": false
+    },
     "reading-attribute-from-database": {
       "enabled": false
     },
@@ -46,14 +115,17 @@
     "invocation-form-event-handler": {
       "enabled": false
     },
+    "right-start-automation": {
+      "enabled": false
+    },
     "doc-comment-collection-item-type": {
+      "enabled": false
+    },
+    "right-delete": {
       "enabled": false
     },
     "bsl-legacy-check-dynamic-feature-access": {
       "enabled": false
-    },
-    "module-consecutive-blank-lines": {
-      "enabled": true
     },
     "unknown-form-parameter-access": {
       "enabled": false
@@ -64,22 +136,25 @@
         "attributesList": "Description"
       }
     },
-    "constructor-function-return-section": {
+    "right-view-event-log": {
       "enabled": false
     },
     "export-method-in-command-form-module": {
       "enabled": false
     },
-    "doc-comment-export-function-return-section": {
+    "right-interactive-delete-predefined-data": {
       "enabled": false
     },
-    "doc-comment-parameter-section": {
+    "right-start-external-connection": {
+      "enabled": false
+    },
+    "right-interactive-delete-marked-predefined-data": {
       "enabled": false
     },
     "db-object-anyref-type": {
       "enabled": false
     },
-    "method-too-many-params": {
+    "right-start-thin-client": {
       "enabled": false
     },
     "property-return-type": {
@@ -93,28 +168,28 @@
     "module-structure-form-event-regions": {
       "enabled": false
     },
-    "doc-comment-return-section-type": {
-      "enabled": false
-    },
     "query-in-loop": {
-      "enabled": false
-    },
-    "module-structure-top-region": {
       "enabled": false
     },
     "structure-consructor-too-many-keys": {
       "enabled": false
     },
-    "module-structure-event-regions": {
-      "enabled": false
-    },
-    "module-structure-var-in-region": {
+    "right-exclusive-mode": {
       "enabled": false
     },
     "module-self-reference": {
       "enabled": false
     },
+    "form-commands-single-action-handler": {
+      "enabled": false
+    },
+    "right-save-user-data": {
+      "enabled": false
+    },
     "dcs-ql-hub": {
+      "enabled": false
+    },
+    "right-interactive-open-external-reports": {
       "enabled": false
     }
   }

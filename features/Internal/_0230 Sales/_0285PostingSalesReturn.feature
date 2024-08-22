@@ -102,7 +102,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Crystal"
 		Then the form attribute named "LegalName" became equal to "Company Adel"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Store" became equal to "Store 01"

@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Ext dimensions</value>
+  <value>Kırılımlar</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -71,7 +71,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Ext dimensions</value>
+  <value>Kırılımlar</value>
  </listPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>

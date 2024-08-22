@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9064 Accounting mapping (registers)</value>
+  <value>T9064 Muhasebe mappingi (kayıt tabloları)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External name</value>
+   <value>Dış isim</value>
   </synonym>
   <type>
    <types>String</types>

@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Source node</value>
+  <value>Kaynak düğüm</value>
  </synonym>
  <type>
   <types>ExchangePlanRef.FullExchange</types>

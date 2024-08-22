@@ -873,7 +873,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Send local total amount</value>
+   <value>Yerel toplam tutar (çıkan)</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -896,7 +896,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Send local rate</value>
+   <value>Yerel döviz kuru (çıkan)</value>
   </synonym>
   <type>
    <types>DefinedType.typeCurrencyRate</types>
@@ -919,7 +919,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Receive local total amount</value>
+   <value>Yerel toplam tutar (gelen)</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -942,7 +942,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Receive local rate</value>
+   <value>Alan</value>
   </synonym>
   <type>
    <types>DefinedType.typeCurrencyRate</types>

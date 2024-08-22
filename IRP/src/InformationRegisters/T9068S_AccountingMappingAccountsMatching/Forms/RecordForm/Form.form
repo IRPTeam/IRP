@@ -182,7 +182,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group source</value>
+   <value>Grup kaynak</value>
   </title>
   <extendedTooltip>
    <name>GroupSourceExtendedTooltip</name>
@@ -376,7 +376,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group ext dimension 1</value>
+   <value>Grup Kırılım 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension1ExtendedTooltip</name>
@@ -570,7 +570,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group ext dimension 1</value>
+   <value>Grup Kırılım 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension2ExtendedTooltip</name>
@@ -764,7 +764,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group ext dimension 1</value>
+   <value>Grup Kırılım 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension3ExtendedTooltip</name>
@@ -919,7 +919,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group target</value>
+   <value>Grup hedef</value>
   </title>
   <extendedTooltip>
    <name>GroupTargetExtendedTooltip</name>
@@ -994,7 +994,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Source ledger type variant</value>
+   <value>Kaynak defter tip varyantı</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1019,7 +1019,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Target ledger type variant</value>
+   <value>Hedef defter tip varyantı</value>
   </title>
   <id>3</id>
   <valueType>

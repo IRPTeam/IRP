@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Use legal name</value>
+  <value>Kullanmak - Fatura hesabı</value>
  </synonym>
  <location>Constant.UseLegalName</location>
  <privilegedGetMode>true</privilegedGetMode>

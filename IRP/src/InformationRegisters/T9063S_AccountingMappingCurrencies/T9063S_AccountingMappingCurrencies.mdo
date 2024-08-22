@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9063 Accounting mapping (currencies)</value>
+  <value>T9063 Muhasebe mappingi (dövizler)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal ref</value>
+   <value>İç sınıf</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External ref</value>
+   <value>Dış ref</value>
   </synonym>
   <type>
    <types>UUID</types>

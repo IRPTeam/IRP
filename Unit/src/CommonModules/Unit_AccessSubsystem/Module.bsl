@@ -105,9 +105,9 @@ Function GenerateDocuments() Export
 			EndDo;
 			Descr = MetaObj.FullName() + " " + Descr;
 			NewDoc = CreateDoc(Row, MetaObj);
-			NewDoc.Description = Descr;
+			NewDoc.Comment = Descr;
 			NewDoc.Write();
-			AllDoc.Add(NewDoc.Description);
+			AllDoc.Add(NewDoc.Comment);
 			
 			StrTables = New Structure;
 			StrTables.Insert("AllocationList", "Store");
@@ -137,50 +137,50 @@ Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, R
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][1];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][1];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][1] + "&" + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][0];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][2];
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 	
 	NewDoc = CreateDoc(Row, MetaObj);
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
@@ -189,9 +189,9 @@ Procedure CreateDocumentsWithTable(Data, MetaObj, TabSection, AttrName, Descr, R
 	NewRow[AttrName] = Data[AttrName][1];
 	NewRow = AddRowToDocTable(NewDoc, MetaObj, TabSection);
 	NewRow[AttrName] = Data[AttrName][2];	
-	NewDoc.Description = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
+	NewDoc.Comment = Descr + AttrName + ": " + Data[AttrName][0] + "&" + Data[AttrName][1] + "&" + Data[AttrName][2];		
 	NewDoc.Write();
-	AllDoc.Add(NewDoc.Description);
+	AllDoc.Add(NewDoc.Comment);
 EndProcedure
 
 Function CreateDoc(Row, MetaObj)

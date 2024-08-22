@@ -506,7 +506,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>49</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -514,10 +514,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>51</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -532,7 +532,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>50</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -846,7 +846,7 @@
 	BankReceipt.Currency,
 	BankReceipt.TransactionType,
 	BankReceipt.Author,
-	BankReceipt.Description,
+	BankReceipt.Comment,
 	BankReceipt.DocumentAmount,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
@@ -868,7 +868,7 @@ GROUP BY
 	BankReceipt.Currency,
 	BankReceipt.TransactionType,
 	BankReceipt.Author,
-	BankReceipt.Description,
+	BankReceipt.Comment,
 	BankReceipt.DocumentAmount</queryText>
    <mainTable>Document.BankReceipt</mainTable>
    <dynamicDataRead>true</dynamicDataRead>

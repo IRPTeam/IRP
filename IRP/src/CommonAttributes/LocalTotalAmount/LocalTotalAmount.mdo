@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Local total amount</value>
+  <value>Yerel toplam tutar</value>
  </synonym>
  <type>
   <types>DefinedType.typeAmount</types>

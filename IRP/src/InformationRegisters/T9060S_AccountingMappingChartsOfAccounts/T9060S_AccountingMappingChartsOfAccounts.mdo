@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9060 Accounting mapping (charts of accounts)</value>
+  <value>T9060 Muhasebe mappingi (hesap planı)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Extra dimension types name</value>
+   <value>Kırılım tip ismi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -113,7 +113,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External name</value>
+   <value>Dış isim</value>
   </synonym>
   <type>
    <types>String</types>

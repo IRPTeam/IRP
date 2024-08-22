@@ -453,7 +453,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>55</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -461,10 +461,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>57</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -479,7 +479,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>56</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -794,7 +794,7 @@
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
-	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.Comment,
 	PurchaseOrderClosing.DocumentAmount,
 	CASE
 		WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1
@@ -819,7 +819,7 @@ GROUP BY
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
 	PurchaseOrderClosing.Branch,
-	PurchaseOrderClosing.Description,
+	PurchaseOrderClosing.Comment,
 	PurchaseOrderClosing.DocumentAmount</queryText>
    <mainTable>Document.PurchaseOrderClosing</mainTable>
    <dynamicDataRead>true</dynamicDataRead>

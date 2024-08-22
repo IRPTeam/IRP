@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9066 Accounting mapping (ext dimension ref values)</value>
+  <value>T9066 Muhasebe mappingi (kırılım ref değerleri)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension value</value>
+   <value>Kırılım değeri</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External ref</value>
+   <value>Dış ref</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -112,7 +112,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension type</value>
+   <value>Kırılım tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>

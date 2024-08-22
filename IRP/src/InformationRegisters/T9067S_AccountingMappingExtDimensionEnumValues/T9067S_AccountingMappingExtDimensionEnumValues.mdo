@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9067 Accounting mapping (ext dimension enum values)</value>
+  <value>T9067 Muhasebe mappingi (kırılım enum değerleri)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension value</value>
+   <value>Kırılım değeri</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External value</value>
+   <value>Dış değer</value>
   </synonym>
   <type>
    <types>String</types>
@@ -115,7 +115,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension type</value>
+   <value>Kırılım tipi</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>

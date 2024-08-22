@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Local rate</value>
+  <value>Yerel döviz kuru</value>
  </synonym>
  <type>
   <types>DefinedType.typeCurrencyRate</types>

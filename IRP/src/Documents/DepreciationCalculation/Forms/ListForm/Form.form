@@ -589,7 +589,7 @@
 	DepreciationCalculation.Number,
 	DepreciationCalculation.Date,
 	DepreciationCalculation.Company,
-	DepreciationCalculation.Description,
+	DepreciationCalculation.Comment,
 	DepreciationCalculation.Branch,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
@@ -607,7 +607,7 @@ GROUP BY
 	DepreciationCalculation.Number,
 	DepreciationCalculation.Date,
 	DepreciationCalculation.Company,
-	DepreciationCalculation.Description,
+	DepreciationCalculation.Comment,
 	DepreciationCalculation.Branch</queryText>
    <mainTable>Document.DepreciationCalculation</mainTable>
    <dynamicDataRead>true</dynamicDataRead>

@@ -145,7 +145,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External Ref</value>
+   <value>Dış Ref</value>
   </title>
   <extendedTooltip>
    <name>GroupExternalRefExtendedTooltip</name>
@@ -270,7 +270,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Edit UUID</value>
+   <value>UUID değiştir</value>
   </title>
   <id>1</id>
   <use>

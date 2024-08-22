@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9062 Accounting mapping (companies)</value>
+  <value>T9062 Muhasebe mappingi (şirketler)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal ref</value>
+   <value>İç sınıf</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External ref</value>
+   <value>Dış ref</value>
   </synonym>
   <type>
    <types>UUID</types>

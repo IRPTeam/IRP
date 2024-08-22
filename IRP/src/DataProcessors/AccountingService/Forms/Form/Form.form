@@ -722,7 +722,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Charts of accounts</value>
+      <value>Hesap planları         </value>
      </title>
      <extendedTooltip>
       <name>GroupChartsOfAccountExtendedTooltip</name>
@@ -2749,7 +2749,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Step 1</value>
+    <value>Adım 1        </value>
    </title>
    <extendedTooltip>
     <name>GroupStep1ExtendedTooltip</name>
@@ -4539,7 +4539,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Step 2</value>
+    <value>Adım 2        </value>
    </title>
    <extendedTooltip>
     <name>GroupStep2ExtendedTooltip</name>
@@ -5636,7 +5636,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Step 3</value>
+    <value>Adım 3        </value>
    </title>
    <extendedTooltip>
     <name>GroupStep3ExtendedTooltip</name>
@@ -6236,7 +6236,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Source account</value>
+      <value>Kaynak hesap</value>
      </title>
      <extendedTooltip>
       <name>GroupSourceAccounExtendedTooltip</name>
@@ -6576,7 +6576,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Target account</value>
+      <value>Hedef hesap</value>
      </title>
      <extendedTooltip>
       <name>GroupTargetAccountExtendedTooltip</name>
@@ -7252,7 +7252,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Ext dimension 1</value>
+      <value>Dış boyut 1</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension1ExtendedTooltip</name>
@@ -7928,7 +7928,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Ext dimension 2</value>
+      <value>Dış boyut 2</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension2ExtendedTooltip</name>
@@ -8604,7 +8604,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Ext dimension 3</value>
+      <value>Dış boyut 3</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension3ExtendedTooltip</name>
@@ -8931,7 +8931,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Step 4</value>
+    <value>Adım 4        </value>
    </title>
    <extendedTooltip>
     <name>GroupStep4ExtendedTooltip</name>
@@ -9171,7 +9171,7 @@
       </presentation>
       <presentation>
        <key>tr</key>
-       <value>Типовой</value>
+       <value>Tipik          </value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Типовой</value>
@@ -9188,7 +9188,7 @@
       </presentation>
       <presentation>
        <key>tr</key>
-       <value>Налоговый</value>
+       <value>Vergisel       </value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Налоговый</value>
@@ -9205,7 +9205,7 @@
       </presentation>
       <presentation>
        <key>tr</key>
-       <value>&lt;all&gt;</value>
+       <value>&lt;tüm&gt;</value>
       </presentation>
      </choiceList>
     </extInfo>
@@ -9425,7 +9425,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Steps</value>
+   <value>Adımlar       </value>
   </title>
   <extendedTooltip>
    <name>GroupStepsExtendedTooltip</name>
@@ -9524,7 +9524,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External charts of accounts</value>
+   <value>Dış muhasebe planları</value>
   </title>
   <id>3</id>
   <valueType>
@@ -9574,7 +9574,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Code mask</value>
+    <value>Kod maskesi     </value>
    </title>
    <id>6</id>
    <valueType>
@@ -9650,7 +9650,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>9</id>
    <valueType>
@@ -9676,7 +9676,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>10</id>
    <valueType>
@@ -9702,7 +9702,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>11</id>
    <valueType>
@@ -9728,7 +9728,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Extra dimension types name</value>
+    <value>Kırılım tip ismi</value>
    </title>
    <id>62</id>
    <valueType>
@@ -9755,7 +9755,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External accounts</value>
+   <value>Dış hesaplar</value>
   </title>
   <id>12</id>
   <valueType>
@@ -9805,7 +9805,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Parent ref</value>
+    <value>Üst ref                   </value>
    </title>
    <id>14</id>
    <valueType>
@@ -9857,7 +9857,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Parent code</value>
+    <value>Üst kod                   </value>
    </title>
    <id>16</id>
    <valueType>
@@ -9883,7 +9883,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>17</id>
    <valueType>
@@ -9909,7 +9909,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>18</id>
    <valueType>
@@ -9935,7 +9935,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>19</id>
    <valueType>
@@ -10013,7 +10013,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Off balance</value>
+    <value>Bilanço dışı              </value>
    </title>
    <id>22</id>
    <valueType>
@@ -10138,7 +10138,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ref</value>
+    <value>İç sınıf</value>
    </title>
    <id>29</id>
    <valueType>
@@ -10163,7 +10163,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim ref1</value>
+    <value>Dış boyut ref1</value>
    </title>
    <id>70</id>
    <valueType>
@@ -10189,7 +10189,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim turnovers only1</value>
+    <value>Yalnızca dış boyut ciroları1</value>
    </title>
    <id>71</id>
    <valueType>
@@ -10214,7 +10214,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim currency1</value>
+    <value>Ext dim para birimi1</value>
    </title>
    <id>72</id>
    <valueType>
@@ -10239,7 +10239,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim quantity1</value>
+    <value>Ext dim miktar1    </value>
    </title>
    <id>73</id>
    <valueType>
@@ -10264,7 +10264,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim amount1</value>
+    <value>Ext dim miktarı1</value>
    </title>
    <id>74</id>
    <valueType>
@@ -10289,7 +10289,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim amount2</value>
+    <value>Ext dim miktarı2</value>
    </title>
    <id>75</id>
    <valueType>
@@ -10314,7 +10314,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim currency2</value>
+    <value>Ext dim para birimi2</value>
    </title>
    <id>76</id>
    <valueType>
@@ -10339,7 +10339,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim quantity2</value>
+    <value>Ext dim miktar2    </value>
    </title>
    <id>77</id>
    <valueType>
@@ -10364,7 +10364,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim ref2</value>
+    <value>Dış boyut ref2</value>
    </title>
    <id>78</id>
    <valueType>
@@ -10390,7 +10390,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim turnovers only2</value>
+    <value>Yalnızca dış boyut ciroları2</value>
    </title>
    <id>79</id>
    <valueType>
@@ -10415,7 +10415,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim amount3</value>
+    <value>Ext dim tutar3     </value>
    </title>
    <id>80</id>
    <valueType>
@@ -10440,7 +10440,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim currency3</value>
+    <value>Ext dim para birimi3</value>
    </title>
    <id>81</id>
    <valueType>
@@ -10465,7 +10465,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim quantity3</value>
+    <value>Ext dim miktar3    </value>
    </title>
    <id>82</id>
    <valueType>
@@ -10490,7 +10490,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim ref3</value>
+    <value>Dış boyut ref3</value>
    </title>
    <id>83</id>
    <valueType>
@@ -10516,7 +10516,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dim turnovers only3</value>
+    <value>Yalnızca dış boyut ciroları3</value>
    </title>
    <id>84</id>
    <valueType>
@@ -10593,7 +10593,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ledger type variants mapping</value>
+   <value>Defter türü varyant eşleme</value>
   </title>
   <id>31</id>
   <valueType/>
@@ -10616,7 +10616,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test post response</value>
+   <value>Test post yanıtı</value>
   </title>
   <id>32</id>
   <valueType>
@@ -10642,7 +10642,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test period</value>
+   <value>Test dönemi</value>
   </title>
   <id>33</id>
   <valueType>
@@ -10667,7 +10667,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External companies</value>
+   <value>Dış şirketler</value>
   </title>
   <id>34</id>
   <valueType>
@@ -10743,7 +10743,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>40</id>
    <valueType>
@@ -10769,7 +10769,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>42</id>
    <valueType>
@@ -10795,7 +10795,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>44</id>
    <valueType>
@@ -10821,7 +10821,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ref</value>
+    <value>İç sınıf</value>
    </title>
    <id>46</id>
    <valueType>
@@ -10872,7 +10872,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External currencies</value>
+   <value>Dış para birimleri   </value>
   </title>
   <id>35</id>
   <valueType>
@@ -10948,7 +10948,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>41</id>
    <valueType>
@@ -10974,7 +10974,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>43</id>
    <valueType>
@@ -11000,7 +11000,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>45</id>
    <valueType>
@@ -11026,7 +11026,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ref</value>
+    <value>İç sınıf</value>
    </title>
    <id>47</id>
    <valueType>
@@ -11077,7 +11077,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External registers</value>
+   <value>Dış kayıtlar         </value>
   </title>
   <id>50</id>
   <valueType>
@@ -11127,7 +11127,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>41</id>
    <valueType>
@@ -11153,7 +11153,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>43</id>
    <valueType>
@@ -11179,7 +11179,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>45</id>
    <valueType>
@@ -11282,7 +11282,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>External ext dimensions</value>
+   <value>Dış ek boyutlar     </value>
   </title>
   <id>53</id>
   <valueType>
@@ -11357,7 +11357,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description en</value>
+    <value>Tanım en         </value>
    </title>
    <id>56</id>
    <valueType>
@@ -11383,7 +11383,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description ru</value>
+    <value>Tanım ru         </value>
    </title>
    <id>57</id>
    <valueType>
@@ -11409,7 +11409,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Description tr</value>
+    <value>Tanım tr         </value>
    </title>
    <id>58</id>
    <valueType>
@@ -11461,7 +11461,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Base class</value>
+    <value>Temel sınıf            </value>
    </title>
    <id>64</id>
    <valueType>
@@ -11487,7 +11487,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Class</value>
+    <value>Sınıf                  </value>
    </title>
    <id>65</id>
    <valueType>
@@ -11513,7 +11513,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is ref</value>
+    <value>Ref mi                    </value>
    </title>
    <id>66</id>
    <valueType>
@@ -11538,7 +11538,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ref</value>
+    <value>İç sınıf</value>
    </title>
    <id>67</id>
    <valueType>
@@ -11563,7 +11563,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal base class</value>
+    <value>İç kaynak sınıfı</value>
    </title>
    <id>68</id>
    <valueType>
@@ -11589,7 +11589,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal class</value>
+    <value>İç sınıf</value>
    </title>
    <id>69</id>
    <valueType>
@@ -11668,7 +11668,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test register name</value>
+   <value>Test kayıt adı</value>
   </title>
   <id>86</id>
   <valueType>
@@ -11694,7 +11694,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test load all records</value>
+   <value>Tüm kayıtları test et</value>
   </title>
   <id>87</id>
   <valueType>
@@ -11719,7 +11719,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test opening entry date</value>
+   <value>Test açılış kaydı tarihi</value>
   </title>
   <id>88</id>
   <valueType>
@@ -11747,7 +11747,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Account matching</value>
+   <value>Hesap eşleştirme</value>
   </title>
   <id>89</id>
   <valueType>
@@ -11771,7 +11771,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Source account ref</value>
+    <value>Kaynak hesap ref      </value>
    </title>
    <id>90</id>
    <valueType>
@@ -11797,7 +11797,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Source account code</value>
+    <value>Kaynak hesap kodu     </value>
    </title>
    <id>91</id>
    <valueType>
@@ -11823,7 +11823,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Source account description ru</value>
+    <value>Kaynak hesap tanımı ru</value>
    </title>
    <id>92</id>
    <valueType>
@@ -11849,7 +11849,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Source account description en</value>
+    <value>Kaynak hesap tanımı en</value>
    </title>
    <id>93</id>
    <valueType>
@@ -11875,7 +11875,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Source account description tr</value>
+    <value>Kaynak hesap tanımı tr</value>
    </title>
    <id>94</id>
    <valueType>
@@ -11901,7 +11901,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>All ext dimension values1</value>
+    <value>Tüm dış boyut değerleri1</value>
    </title>
    <id>95</id>
    <valueType>
@@ -11926,7 +11926,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>All ext dimension values2</value>
+    <value>Tüm dış boyut değerleri2</value>
    </title>
    <id>96</id>
    <valueType>
@@ -11951,7 +11951,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>All ext dimension values3</value>
+    <value>Tüm dış boyut değerleri3 </value>
    </title>
    <id>97</id>
    <valueType>
@@ -11976,7 +11976,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Target account code</value>
+    <value>Hedef hesap kodu</value>
    </title>
    <id>98</id>
    <valueType>
@@ -12002,7 +12002,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Target account description en</value>
+    <value>Hedef hesap tanımı en</value>
    </title>
    <id>100</id>
    <valueType>
@@ -12028,7 +12028,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Target account description ru</value>
+    <value>Hedef hesap tanımı ru</value>
    </title>
    <id>101</id>
    <valueType>
@@ -12054,7 +12054,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Target account description tr</value>
+    <value>Hedef hesap tanımı tr</value>
    </title>
    <id>102</id>
    <valueType>
@@ -12080,7 +12080,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Target account ref</value>
+    <value>Hedef hesap ref</value>
    </title>
    <id>103</id>
    <valueType>
@@ -12106,7 +12106,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Base class 1</value>
+    <value>Temel sınıf 1          </value>
    </title>
    <id>105</id>
    <valueType>
@@ -12132,7 +12132,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Base class 2</value>
+    <value>Temel sınıf 2          </value>
    </title>
    <id>106</id>
    <valueType>
@@ -12158,7 +12158,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Base class 3</value>
+    <value>Temel sınıf 3          </value>
    </title>
    <id>107</id>
    <valueType>
@@ -12184,7 +12184,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Class 1</value>
+    <value>Sınıf 1</value>
    </title>
    <id>109</id>
    <valueType>
@@ -12210,7 +12210,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Class 2</value>
+    <value>Sınıf 2</value>
    </title>
    <id>110</id>
    <valueType>
@@ -12236,7 +12236,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Class 3</value>
+    <value>Sınıf 3</value>
    </title>
    <id>111</id>
    <valueType>
@@ -12262,7 +12262,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is ref 1</value>
+    <value>Ref 1 mi                  </value>
    </title>
    <id>113</id>
    <valueType>
@@ -12287,7 +12287,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is ref 2</value>
+    <value>Ref 2 mi                  </value>
    </title>
    <id>114</id>
    <valueType>
@@ -12312,7 +12312,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Is ref 3</value>
+    <value>Ref 3 mi                  </value>
    </title>
    <id>115</id>
    <valueType>
@@ -12415,7 +12415,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description ru1</value>
+    <value>Değer tanımı ru1</value>
    </title>
    <id>119</id>
    <valueType>
@@ -12441,7 +12441,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description ru2</value>
+    <value>Değer tanımı ru2</value>
    </title>
    <id>120</id>
    <valueType>
@@ -12467,7 +12467,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description ru3</value>
+    <value>Değer tanımı ru3</value>
    </title>
    <id>121</id>
    <valueType>
@@ -12493,7 +12493,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description en1</value>
+    <value>Değer tanımı en1</value>
    </title>
    <id>122</id>
    <valueType>
@@ -12519,7 +12519,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description en2</value>
+    <value>Değer tanımı en2</value>
    </title>
    <id>123</id>
    <valueType>
@@ -12545,7 +12545,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description en3</value>
+    <value>Değer tanımı en3</value>
    </title>
    <id>124</id>
    <valueType>
@@ -12571,7 +12571,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description tr1</value>
+    <value>Değer tanımı tr1</value>
    </title>
    <id>125</id>
    <valueType>
@@ -12597,7 +12597,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description tr2</value>
+    <value>Değer tanımı tr2</value>
    </title>
    <id>126</id>
    <valueType>
@@ -12623,7 +12623,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Value description tr3</value>
+    <value>Değer tanımı tr3</value>
    </title>
    <id>127</id>
    <valueType>
@@ -12674,7 +12674,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dimension ref1</value>
+    <value>Dış boyut referans1</value>
    </title>
    <id>129</id>
    <valueType>
@@ -12700,7 +12700,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dimension ref2</value>
+    <value>Dış boyut referans2</value>
    </title>
    <id>130</id>
    <valueType>
@@ -12726,7 +12726,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Ext dimension ref3</value>
+    <value>Dış boyut ref3</value>
    </title>
    <id>131</id>
    <valueType>
@@ -12752,7 +12752,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal source account</value>
+    <value>Dahili kaynak hesap       </value>
    </title>
    <id>133</id>
    <valueType>
@@ -12777,7 +12777,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal target account</value>
+    <value>Dahili hedef hesap        </value>
    </title>
    <id>134</id>
    <valueType>
@@ -12802,7 +12802,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension1</value>
+    <value>Dahili ek boyut1          </value>
    </title>
    <id>135</id>
    <valueType>
@@ -12827,7 +12827,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension2</value>
+    <value>Dahili ek boyut2          </value>
    </title>
    <id>136</id>
    <valueType>
@@ -12852,7 +12852,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension3</value>
+    <value>Dahili ek boyut3          </value>
    </title>
    <id>137</id>
    <valueType>
@@ -12877,7 +12877,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension value1</value>
+    <value>Dahili ek boyut değeri1   </value>
    </title>
    <id>138</id>
    <valueType>
@@ -12902,7 +12902,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension value2</value>
+    <value>Dahili ek boyut değeri2   </value>
    </title>
    <id>139</id>
    <valueType>
@@ -12927,7 +12927,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal ext dimension value3</value>
+    <value>Dahili ek boyut değeri3   </value>
    </title>
    <id>140</id>
    <valueType>
@@ -12952,7 +12952,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal base class1</value>
+    <value>Dahili temel sınıf1</value>
    </title>
    <id>143</id>
    <valueType>
@@ -12978,7 +12978,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal class1</value>
+    <value>Dahili sınıf1       </value>
    </title>
    <id>144</id>
    <valueType>
@@ -13004,7 +13004,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal base class2</value>
+    <value>Dahili temel sınıf2</value>
    </title>
    <id>145</id>
    <valueType>
@@ -13030,7 +13030,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal base class3</value>
+    <value>Dahili temel sınıf3</value>
    </title>
    <id>146</id>
    <valueType>
@@ -13056,7 +13056,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal class2</value>
+    <value>Dahili sınıf2       </value>
    </title>
    <id>147</id>
    <valueType>
@@ -13082,7 +13082,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Internal class3</value>
+    <value>Dahili sınıf3       </value>
    </title>
    <id>148</id>
    <valueType>
@@ -13109,7 +13109,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Target chart of account</value>
+   <value>Hedef hesap planı</value>
   </title>
   <id>132</id>
   <valueType>
@@ -13135,7 +13135,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Source ledger type</value>
+   <value>Kaynak defter tipi</value>
   </title>
   <id>141</id>
   <valueType>
@@ -13160,7 +13160,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Target ledger type</value>
+   <value>Hedef defter tipi</value>
   </title>
   <id>142</id>
   <valueType>
@@ -13210,7 +13210,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>3</id>
   <use>
@@ -13260,7 +13260,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>5</id>
   <use>
@@ -13285,7 +13285,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Select all external accounts</value>
+   <value>Tüm dış hesapları seç  </value>
   </title>
   <id>6</id>
   <use>
@@ -13314,7 +13314,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Unselect all external accounts</value>
+   <value>Tüm harici hesapları seçme</value>
   </title>
   <id>7</id>
   <use>
@@ -13343,7 +13343,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test post request</value>
+   <value>Test post isteği</value>
   </title>
   <id>8</id>
   <use>
@@ -13418,7 +13418,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>11</id>
   <use>
@@ -13443,7 +13443,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>12</id>
   <use>
@@ -13468,7 +13468,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test load records</value>
+   <value>Test kayıtları yükle</value>
   </title>
   <id>13</id>
   <use>
@@ -13518,7 +13518,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>15</id>
   <use>
@@ -13568,7 +13568,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>17</id>
   <use>
@@ -13593,7 +13593,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Select all external ext dimensions</value>
+   <value>Tüm dış ek boyutları seç  </value>
   </title>
   <id>18</id>
   <use>
@@ -13621,7 +13621,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Unselect all external ext dimensions</value>
+   <value>Tüm harici boyutları seçme</value>
   </title>
   <id>20</id>
   <use>
@@ -13649,7 +13649,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test load opening entry</value>
+   <value>Test açılış kaydını yükle</value>
   </title>
   <id>21</id>
   <use>
@@ -13674,7 +13674,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Test post request2</value>
+   <value>Test post isteği2</value>
   </title>
   <id>22</id>
   <use>
@@ -13724,7 +13724,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Set mapping</value>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <id>24</id>
   <use>
@@ -13749,7 +13749,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Select all external accounts</value>
+   <value>Tüm dış hesapları seç  </value>
   </title>
   <id>25</id>
   <use>
@@ -13778,7 +13778,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Unselect all external accounts</value>
+   <value>Tüm harici hesapları seçme</value>
   </title>
   <id>26</id>
   <use>

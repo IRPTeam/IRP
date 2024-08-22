@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Use accounting service</value>
+  <value>Kullanmak - muhasebe servisi</value>
  </synonym>
  <location>Constant.UseAccountingService</location>
  <privilegedGetMode>true</privilegedGetMode>

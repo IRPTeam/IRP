@@ -122,7 +122,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group flag</value>
+    <value>Grup işaret</value>
    </title>
    <extendedTooltip>
     <name>GroupFlagExtendedTooltip</name>
@@ -556,7 +556,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Flag</value>
+   <value>İşaret</value>
   </title>
   <id>2</id>
   <valueType>

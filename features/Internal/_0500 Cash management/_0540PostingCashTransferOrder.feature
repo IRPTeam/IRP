@@ -887,7 +887,7 @@ Scenario: _054010 filter check by own companies in the document Cash Transfer Or
 Scenario: _054011 check input Description in the document Cash Transfer Order
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
-	When check filling in Description
+	When check filling in Comment
 
 # EndFilters
 

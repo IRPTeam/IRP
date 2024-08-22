@@ -113,7 +113,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group Period/Activity</value>
+   <value>Grup Dönem/Aktivite </value>
   </title>
   <extendedTooltip>
    <name>GroupPeriodActivityExtendedTooltip</name>
@@ -543,7 +543,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group UUID</value>
+      <value>Grup UUID </value>
      </title>
      <extendedTooltip>
       <name>GroupAccountDrRefExtendedTooltip</name>
@@ -768,7 +768,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group UUID</value>
+      <value>Grup UUID </value>
      </title>
      <extendedTooltip>
       <name>GroupCurrencyDrRefExtendedTooltip</name>
@@ -1094,7 +1094,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr1ExtendedTooltip</name>
@@ -1289,7 +1289,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr1ExtendedTooltip</name>
@@ -1540,7 +1540,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr1ExtendedTooltip</name>
@@ -1584,7 +1584,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 1</value>
+       <value>Ek. boyut 1 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr1PageExtendedTooltip</name>
@@ -1709,7 +1709,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr2ExtendedTooltip</name>
@@ -1904,7 +1904,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr2ExtendedTooltip</name>
@@ -2155,7 +2155,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr2ExtendedTooltip</name>
@@ -2199,7 +2199,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 2</value>
+       <value>Ek. boyut 2 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr2PageExtendedTooltip</name>
@@ -2324,7 +2324,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr3ExtendedTooltip</name>
@@ -2519,7 +2519,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr3ExtendedTooltip</name>
@@ -2770,7 +2770,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr3ExtendedTooltip</name>
@@ -2814,7 +2814,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 3</value>
+       <value>Ek. boyut 3 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr3PageExtendedTooltip</name>
@@ -2852,7 +2852,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Debit analytic pages</value>
+      <value>Borç analitik sayfaları </value>
      </title>
      <extendedTooltip>
       <name>DebitAnalyticPagesExtendedTooltip</name>
@@ -2890,7 +2890,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Analytic</value>
+     <value>Analitik </value>
     </title>
     <extendedTooltip>
      <name>DebitAnalyticPageExtendedTooltip</name>
@@ -2928,7 +2928,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Debit pages</value>
+    <value>Borç sayfaları </value>
    </title>
    <extendedTooltip>
     <name>GroupDebitPagesExtendedTooltip</name>
@@ -3053,7 +3053,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group UUID</value>
+      <value>Grup UUID </value>
      </title>
      <extendedTooltip>
       <name>GroupAccountCrRefExtendedTooltip</name>
@@ -3278,7 +3278,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Group UUID</value>
+      <value>Grup UUID </value>
      </title>
      <extendedTooltip>
       <name>GroupCurrencyCrRefExtendedTooltip</name>
@@ -3604,7 +3604,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr1ExtendedTooltip</name>
@@ -3799,7 +3799,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr1ExtendedTooltip</name>
@@ -4050,7 +4050,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr1ExtendedTooltip</name>
@@ -4094,7 +4094,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 1</value>
+       <value>Ek. boyut 1 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr1PageExtendedTooltip</name>
@@ -4219,7 +4219,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr2ExtendedTooltip</name>
@@ -4414,7 +4414,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr2ExtendedTooltip</name>
@@ -4665,7 +4665,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr2ExtendedTooltip</name>
@@ -4709,7 +4709,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 2</value>
+       <value>Ek. boyut 2 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr2PageExtendedTooltip</name>
@@ -4834,7 +4834,7 @@
         </title>
         <title>
          <key>tr</key>
-         <value>Group UUID</value>
+         <value>Grup UUID </value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr3ExtendedTooltip</name>
@@ -5029,7 +5029,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>External data</value>
+        <value>Dış veri </value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr3ExtendedTooltip</name>
@@ -5280,7 +5280,7 @@
        </title>
        <title>
         <key>tr</key>
-        <value>Internal data</value>
+        <value>Dahili veri </value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr3ExtendedTooltip</name>
@@ -5324,7 +5324,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Ext. dimension 3</value>
+       <value>Ek. boyut 3 </value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr3PageExtendedTooltip</name>
@@ -5362,7 +5362,7 @@
      </title>
      <title>
       <key>tr</key>
-      <value>Credit analytic pages</value>
+      <value>Alacak analitik sayfaları </value>
      </title>
      <extendedTooltip>
       <name>CreditAnalyticPagesExtendedTooltip</name>
@@ -5400,7 +5400,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Analytic</value>
+     <value>Analitik </value>
     </title>
     <extendedTooltip>
      <name>CreditAnalyticPageExtendedTooltip</name>
@@ -5438,7 +5438,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Credit pages</value>
+    <value>Alacak sayfaları </value>
    </title>
    <extendedTooltip>
     <name>GroupCreditPagesExtendedTooltip</name>
@@ -5476,7 +5476,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Group Debit\Credit</value>
+   <value>Grup Borç\Alacak </value>
   </title>
   <extendedTooltip>
    <name>GroupDebitCreditExtendedTooltip</name>
@@ -5562,7 +5562,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Activity</value>
+   <value>Aktivite </value>
   </title>
   <id>2</id>
   <valueType>
@@ -5587,7 +5587,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Company Ref</value>
+   <value>Şirket Ref </value>
   </title>
   <id>3</id>
   <valueType>
@@ -5612,7 +5612,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Company presentation</value>
+   <value>Şirket sunumu </value>
   </title>
   <id>4</id>
   <valueType>
@@ -5638,7 +5638,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency Ref</value>
+   <value>Para birimi Ref </value>
   </title>
   <id>5</id>
   <valueType>
@@ -5663,7 +5663,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency presentation</value>
+   <value>Para birimi sunumu </value>
   </title>
   <id>6</id>
   <valueType>
@@ -5689,7 +5689,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Account Dr Ref</value>
+   <value>Hesap Borç Ref </value>
   </title>
   <id>7</id>
   <valueType>
@@ -5714,7 +5714,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Account Dr presentation</value>
+   <value>Hesap Borç sunumu </value>
   </title>
   <id>8</id>
   <valueType>
@@ -5740,7 +5740,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency Dr Ref</value>
+   <value>Para birimi Borç Ref </value>
   </title>
   <id>9</id>
   <valueType>
@@ -5765,7 +5765,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency Dr presentation</value>
+   <value>Para birimi Borç sunumu </value>
   </title>
   <id>10</id>
   <valueType>
@@ -5791,7 +5791,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Account Cr Ref</value>
+   <value>Hesap Alacak Ref </value>
   </title>
   <id>11</id>
   <valueType>
@@ -5816,7 +5816,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Account Cr presentation</value>
+   <value>Hesap Alacak sunumu </value>
   </title>
   <id>12</id>
   <valueType>
@@ -5842,7 +5842,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency Cr Ref</value>
+   <value>Para birimi Alacak Ref </value>
   </title>
   <id>13</id>
   <valueType>
@@ -5867,7 +5867,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Currency Cr presentation</value>
+   <value>Para birimi Alacak sunumu </value>
   </title>
   <id>14</id>
   <valueType>
@@ -5893,7 +5893,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Amount currency Dr</value>
+   <value>Para birimi Borç Tutarı </value>
   </title>
   <id>15</id>
   <valueType>
@@ -5918,7 +5918,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Amount currency Cr</value>
+   <value>Para birimi Alacak Tutarı </value>
   </title>
   <id>16</id>
   <valueType>
@@ -5943,7 +5943,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Quantity Dr</value>
+   <value>Miktar Borç </value>
   </title>
   <id>17</id>
   <valueType>
@@ -5968,7 +5968,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Quantity Cr</value>
+   <value>Miktar Alacak </value>
   </title>
   <id>18</id>
   <valueType>
@@ -5994,7 +5994,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Operation title</value>
+   <value>Operasyon başlığı </value>
   </title>
   <id>19</id>
   <valueType>
@@ -6045,7 +6045,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Chart name Dr</value>
+   <value>Grafik adı Borç </value>
   </title>
   <id>21</id>
   <valueType>
@@ -6071,7 +6071,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Chart name Cr</value>
+   <value>Grafik adı Alacak </value>
   </title>
   <id>22</id>
   <valueType>
@@ -6097,7 +6097,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Dr1</value>
+   <value>Ek boyut Ref Borç1 </value>
   </title>
   <id>23</id>
   <valueType>
@@ -6122,7 +6122,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Dr2</value>
+   <value>Ek boyut Ref Borç2 </value>
   </title>
   <id>24</id>
   <valueType>
@@ -6147,7 +6147,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Dr3</value>
+   <value>Ek boyut Ref Borç3 </value>
   </title>
   <id>25</id>
   <valueType>
@@ -6172,7 +6172,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Cr1</value>
+   <value>Ek boyut Ref Alacak1 </value>
   </title>
   <id>26</id>
   <valueType>
@@ -6197,7 +6197,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Cr2</value>
+   <value>Ek boyut Ref Alacak2 </value>
   </title>
   <id>27</id>
   <valueType>
@@ -6222,7 +6222,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension Ref Cr3</value>
+   <value>Ek boyut Ref Alacak3 </value>
   </title>
   <id>28</id>
   <valueType>
@@ -6247,7 +6247,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Dr1</value>
+   <value>Temel sınıf Borç1 </value>
   </title>
   <id>29</id>
   <valueType>
@@ -6273,7 +6273,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Dr2</value>
+   <value>Temel sınıf Borç2 </value>
   </title>
   <id>30</id>
   <valueType>
@@ -6299,7 +6299,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Dr3</value>
+   <value>Temel sınıf Borç3 </value>
   </title>
   <id>31</id>
   <valueType>
@@ -6325,7 +6325,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Cr1</value>
+   <value>Temel sınıf Alacak1 </value>
   </title>
   <id>32</id>
   <valueType>
@@ -6351,7 +6351,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Cr2</value>
+   <value>Temel sınıf Alacak2 </value>
   </title>
   <id>33</id>
   <valueType>
@@ -6377,7 +6377,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Base class Cr3</value>
+   <value>Temel sınıf Alacak3 </value>
   </title>
   <id>34</id>
   <valueType>
@@ -6403,7 +6403,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Dr1</value>
+   <value>Sınıf Borç1 </value>
   </title>
   <id>35</id>
   <valueType>
@@ -6429,7 +6429,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Dr2</value>
+   <value>Sınıf Borç2 </value>
   </title>
   <id>36</id>
   <valueType>
@@ -6455,7 +6455,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Dr3</value>
+   <value>Sınıf Borç3 </value>
   </title>
   <id>37</id>
   <valueType>
@@ -6481,7 +6481,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Cr1</value>
+   <value>Sınıf Alacak1 </value>
   </title>
   <id>38</id>
   <valueType>
@@ -6507,7 +6507,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Cr2</value>
+   <value>Sınıf Alacak2 </value>
   </title>
   <id>39</id>
   <valueType>
@@ -6533,7 +6533,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Class Cr3</value>
+   <value>Sınıf Alacak3 </value>
   </title>
   <id>40</id>
   <valueType>
@@ -6559,7 +6559,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Dr1</value>
+   <value>Ek boyut değeri Borç1 </value>
   </title>
   <id>41</id>
   <valueType>
@@ -6585,7 +6585,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Dr2</value>
+   <value>Ek boyut değeri Borç2 </value>
   </title>
   <id>42</id>
   <valueType>
@@ -6611,7 +6611,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Dr3</value>
+   <value>Ek boyut değeri Borç3 </value>
   </title>
   <id>43</id>
   <valueType>
@@ -6637,7 +6637,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Cr1</value>
+   <value>Ek boyut değeri Alacak1 </value>
   </title>
   <id>44</id>
   <valueType>
@@ -6663,7 +6663,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Cr2</value>
+   <value>Ek boyut değeri Alacak2 </value>
   </title>
   <id>45</id>
   <valueType>
@@ -6689,7 +6689,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Ext dimension value Cr3</value>
+   <value>Ek boyut değeri Alacak3 </value>
   </title>
   <id>46</id>
   <valueType>
@@ -6865,7 +6865,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Dr1</value>
+   <value>Dahili temel sınıf Borç1 </value>
   </title>
   <id>53</id>
   <valueType>
@@ -6891,7 +6891,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Dr2</value>
+   <value>Dahili temel sınıf Borç2 </value>
   </title>
   <id>54</id>
   <valueType>
@@ -6917,7 +6917,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Dr3</value>
+   <value>Dahili temel sınıf Borç3 </value>
   </title>
   <id>55</id>
   <valueType>
@@ -6943,7 +6943,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Cr1</value>
+   <value>Dahili temel sınıf Alacak1 </value>
   </title>
   <id>56</id>
   <valueType>
@@ -6969,7 +6969,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Cr2</value>
+   <value>Dahili temel sınıf Alacak2 </value>
   </title>
   <id>57</id>
   <valueType>
@@ -6995,7 +6995,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal base class Cr3</value>
+   <value>Dahili temel sınıf Alacak3 </value>
   </title>
   <id>58</id>
   <valueType>
@@ -7021,7 +7021,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Dr1</value>
+   <value>Dahili sınıf Borç1 </value>
   </title>
   <id>59</id>
   <valueType>
@@ -7047,7 +7047,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Dr2</value>
+   <value>Dahili sınıf Borç2 </value>
   </title>
   <id>60</id>
   <valueType>
@@ -7073,7 +7073,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Dr3</value>
+   <value>Dahili sınıf Borç3 </value>
   </title>
   <id>61</id>
   <valueType>
@@ -7099,7 +7099,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Cr1</value>
+   <value>Dahili sınıf Alacak1 </value>
   </title>
   <id>62</id>
   <valueType>
@@ -7125,7 +7125,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Cr2</value>
+   <value>Dahili sınıf Alacak2 </value>
   </title>
   <id>63</id>
   <valueType>
@@ -7151,7 +7151,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal class Cr3</value>
+   <value>Dahili sınıf Alacak3 </value>
   </title>
   <id>64</id>
   <valueType>
@@ -7177,7 +7177,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Dr1</value>
+   <value>Dahili ek boyut değeri Borç1 </value>
   </title>
   <id>65</id>
   <valueType>
@@ -7202,7 +7202,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Dr2</value>
+   <value>Dahili ek boyut değeri Borç2 </value>
   </title>
   <id>66</id>
   <valueType>
@@ -7227,7 +7227,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Dr3</value>
+   <value>Dahili ek boyut değeri Borç3 </value>
   </title>
   <id>67</id>
   <valueType>
@@ -7252,7 +7252,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Cr1</value>
+   <value>Dahili ek boyut değeri Alacak1 </value>
   </title>
   <id>68</id>
   <valueType>
@@ -7277,7 +7277,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Cr2</value>
+   <value>Dahili ek boyut değeri Alacak2 </value>
   </title>
   <id>69</id>
   <valueType>
@@ -7302,7 +7302,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Internal ext dimension value Cr3</value>
+   <value>Dahili ek boyut değeri Alacak3 </value>
   </title>
   <id>70</id>
   <valueType>
@@ -7327,7 +7327,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>1</id>
   <use>
@@ -7356,7 +7356,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>2</id>
   <use>
@@ -7385,7 +7385,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>3</id>
   <use>
@@ -7414,7 +7414,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>4</id>
   <use>
@@ -7443,7 +7443,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>5</id>
   <use>
@@ -7472,7 +7472,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>6</id>
   <use>
@@ -7501,7 +7501,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>7</id>
   <use>
@@ -7530,7 +7530,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>8</id>
   <use>
@@ -7559,7 +7559,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>9</id>
   <use>
@@ -7588,7 +7588,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show UUID</value>
+   <value>UUID göster </value>
   </title>
   <id>10</id>
   <use>

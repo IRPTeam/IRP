@@ -394,7 +394,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>43</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -402,10 +402,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>45</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -420,7 +420,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>44</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -728,7 +728,7 @@
 	PlannedReceiptReservation.Requester,
 	PlannedReceiptReservation.Store,
 	PlannedReceiptReservation.Author,
-	PlannedReceiptReservation.Description,
+	PlannedReceiptReservation.Comment,
 	CASE WHEN COUNT(DISTINCT PlannedReceiptReservationItemList.Store) = 1 THEN
 		MAX(PlannedReceiptReservationItemList.Store)
 	ELSE UNDEFINED END AS StoreOutgoing
@@ -746,7 +746,7 @@ GROUP BY
 	PlannedReceiptReservation.Requester,
 	PlannedReceiptReservation.Store,
 	PlannedReceiptReservation.Author,
-	PlannedReceiptReservation.Description</queryText>
+	PlannedReceiptReservation.Comment</queryText>
    <mainTable>Document.PlannedReceiptReservation</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>

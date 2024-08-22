@@ -52,7 +52,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Loading...</value>
+     <value>Yükleme...</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -109,7 +109,7 @@
     </title>
     <title>
      <key>tr</key>
-     <value>Loading...</value>
+     <value>Yükleme...</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -163,7 +163,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Group loading</value>
+    <value>Grup yükleme</value>
    </title>
    <groupVerticalAlign>Center</groupVerticalAlign>
    <extendedTooltip>
@@ -210,7 +210,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Command bar main</value>
+    <value>Ana araç çubuğu</value>
    </title>
    <extendedTooltip>
     <name>CommandBarMainExtendedTooltip</name>
@@ -701,7 +701,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Country list</value>
+   <value>Ülkeler listesi</value>
   </title>
   <id>1</id>
   <valueType>
@@ -725,7 +725,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Exists</value>
+    <value>Mevcut</value>
    </title>
    <id>2</id>
    <valueType>
@@ -827,7 +827,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>User lang description</value>
+    <value>Kullanıcı dil açıklaması</value>
    </title>
    <id>8</id>
    <valueType>
@@ -854,7 +854,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Create selected</value>
+   <value>Seçileni oluştur</value>
   </title>
   <id>1</id>
   <use>

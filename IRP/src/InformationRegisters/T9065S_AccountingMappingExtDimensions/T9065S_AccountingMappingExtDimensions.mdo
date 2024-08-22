@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9065 Accounting mapping (ext dimensions)</value>
+  <value>T9065 Muhasebe mapping (dış kırılımlar)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal ref</value>
+   <value>İç sınıf</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -62,7 +62,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal base class</value>
+   <value>İç kaynak sınıfı</value>
   </synonym>
   <type>
    <types>String</types>
@@ -88,7 +88,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal class</value>
+   <value>İç sınıf</value>
   </synonym>
   <type>
    <types>String</types>
@@ -139,7 +139,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External ref</value>
+   <value>Dış ref</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -164,7 +164,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External base class</value>
+   <value>Dış kaynak sınıfı</value>
   </synonym>
   <type>
    <types>String</types>
@@ -192,7 +192,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External class</value>
+   <value>Dış sınıf</value>
   </synonym>
   <type>
    <types>String</types>

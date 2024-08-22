@@ -415,7 +415,7 @@ Function GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments, AddInf
 	|	R3025B_PurchaseOrdersToBePaid.Branch,
 	|	R3025B_PurchaseOrdersToBePaid.Currency,
 	|	R3025B_PurchaseOrdersToBePaid.Partner,
-	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3025B_PurchaseOrdersToBePaid.Order.Agreement AS Agreement,
 	|	R3025B_PurchaseOrdersToBePaid.LegalName AS Payee,
 	|	R3025B_PurchaseOrdersToBePaid.Order,
 	|	R3025B_PurchaseOrdersToBePaid.AmountBalance AS Amount
@@ -438,7 +438,7 @@ Function GetDocumentTable_SalesOrder_ToBePaid(ArrayOfBasisDocuments) Export
 	|	R3024B_SalesOrdersToBePaid.Branch,
 	|	R3024B_SalesOrdersToBePaid.Currency,
 	|	R3024B_SalesOrdersToBePaid.Partner,
-	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3024B_SalesOrdersToBePaid.Order.Agreement AS Agreement,
 	|	R3024B_SalesOrdersToBePaid.LegalName AS Payer,
 	|	R3024B_SalesOrdersToBePaid.Order,
 	|	R3024B_SalesOrdersToBePaid.AmountBalance AS Amount
@@ -804,52 +804,5 @@ Function CreateDocumentAmountTable() Export
 	
 	Return AmountsTable;
 EndFunction
-
-Procedure FillDocumentAmountTable(DocumentAmountTable, ArrayOfocuments, Order_ColumnName = "") Export
-	For Each DocRef In ArrayOfocuments Do
-		DocHeader = New Structure();
-		DocHeader.Insert("Company"   , DocRef.Company);
-		DocHeader.Insert("Branch"    , DocRef.Branch);
-		DocHeader.Insert("Currency"  , DocRef.Agreement.CurrencyMovementType.Currency);
-		DocHeader.Insert("Partner"   , DocRef.Partner);
-		DocHeader.Insert("LegalName" , DocRef.LegalName);
-		DocHeader.Insert("Agreement" , DocRef.Agreement);
-		
-		For Each Row In DocRef.ItemList Do
-			NewRow = DocumentAmountTable.Add();
-			FillPropertyValues(NewRow, DocHeader);
-			If ValueIsFilled(Order_ColumnName) Then
-				_Order = Row[Order_ColumnName];
-				If ValueIsFilled(_Order) Then
-					NewRow.Order = _Order;
-				EndIf;
-			EndIf;
-			NewRow.Project = Row.Project;
-			NewRow.Amount = Row.TotalAmount;
-		EndDo;
-	EndDo;
-EndProcedure
-
-Function CalculateDocumentAmount(DocumentAmountTable, Filter, NetAmount, TotalAmount) Export
-	
-	Result = New Structure("NetAmount, TotalAmount, Skip", NetAmount, TotalAmount, False);
-		
-	DocumentAmount = Undefined;
-			
-	DocumentAmountRows = DocumentAmountTable.Copy(Filter);
-	If DocumentAmountRows.Count() Then
-		DocumentAmount = DocumentAmountRows.Total("Amount");
-		Result.TotalAmount = Min(DocumentAmount, Result.TotalAmount);
-		Result.NetAmount = Min(DocumentAmount, Result.NetAmount);		
-		Return Result;
-	Else
-		If DocumentAmountTable.Count() Then
-			Result.Skip = True;
-			Return Result;
-		EndIf;
-	EndIf;
-	
-	Return Result;
-EndFunction		
 
 #EndRegion

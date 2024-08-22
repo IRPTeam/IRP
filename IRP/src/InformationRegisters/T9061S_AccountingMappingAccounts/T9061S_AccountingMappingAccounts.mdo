@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9061 Accounting mapping (accounts)</value>
+  <value>T9061 Muhasebe mappingi (hesaplar)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Internal ref</value>
+   <value>İç sınıf</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -87,7 +87,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External chart name</value>
+   <value>Dış hesap plan ismi</value>
   </synonym>
   <type>
    <types>String</types>
@@ -115,7 +115,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>External ref</value>
+   <value>Dış ref</value>
   </synonym>
   <type>
    <types>UUID</types>

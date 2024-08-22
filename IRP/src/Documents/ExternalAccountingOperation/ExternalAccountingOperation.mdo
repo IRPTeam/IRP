@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>External accounting operation</value>
+  <value>Dış muhasebe kaydı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ExternalAccountingOperation.StandardAttribute.Number</inputByString>
@@ -74,7 +74,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Recorder ref</value>
+   <value>Kaydedici ref </value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -98,7 +98,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Recorder presentation</value>
+   <value>Kaydedici sunumu </value>
   </synonym>
   <type>
    <types>String</types>
@@ -177,7 +177,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Recorder name</value>
+   <value>Kaydedici adı </value>
   </synonym>
   <type>
    <types>String</types>
@@ -203,7 +203,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Is opening entry</value>
+   <value>Açılış kaydı mı </value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -357,7 +357,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Activity</value>
+    <value>Aktivite </value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -379,7 +379,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Company ref</value>
+    <value>Şirket ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -401,7 +401,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Company presentation</value>
+    <value>Şirket sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -448,7 +448,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency ref</value>
+    <value>Para birimi ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -470,7 +470,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency presentation</value>
+    <value>Para birimi sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -517,7 +517,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Dr ref</value>
+    <value>Hesap Borç ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -539,7 +539,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Dr presentation</value>
+    <value>Hesap Borç sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -564,7 +564,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Dr</value>
+    <value>Hesap Borç </value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -586,7 +586,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Dr ref</value>
+    <value>Para birimi Borç ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -608,7 +608,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Dr presentation</value>
+    <value>Para birimi Borç sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -633,7 +633,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Dr</value>
+    <value>Para birimi Borç </value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -655,7 +655,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Amount currency Dr</value>
+    <value>Para birimi Borç Tutarı </value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -677,7 +677,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity Dr</value>
+    <value>Miktar Borç </value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -699,7 +699,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Cr ref</value>
+    <value>Hesap Alacak ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -721,7 +721,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Cr presentation</value>
+    <value>Hesap Alacak sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -746,7 +746,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Account Cr</value>
+    <value>Hesap Alacak </value>
    </synonym>
    <type>
     <types>ChartOfAccountsRef.Basic</types>
@@ -768,7 +768,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Cr ref</value>
+    <value>Para birimi Alacak ref </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -790,7 +790,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Cr presentation</value>
+    <value>Para birimi Alacak sunumu </value>
    </synonym>
    <type>
     <types>String</types>
@@ -815,7 +815,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Currency Cr</value>
+    <value>Para birimi Alacak </value>
    </synonym>
    <type>
     <types>CatalogRef.Currencies</types>
@@ -837,7 +837,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Amount currency Cr</value>
+    <value>Para birimi Alacak Tutarı </value>
    </synonym>
    <type>
     <types>DefinedType.typeAmount</types>
@@ -859,7 +859,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Quantity Cr</value>
+    <value>Miktar Alacak </value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -903,7 +903,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Operation title</value>
+    <value>Operasyon başlığı </value>
    </synonym>
    <type>
     <types>String</types>
@@ -928,7 +928,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Chart name Dr</value>
+    <value>Grafik adı Borç </value>
    </synonym>
    <type>
     <types>String</types>
@@ -953,7 +953,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Chart name Cr</value>
+    <value>Grafik adı Alacak </value>
    </synonym>
    <type>
     <types>String</types>
@@ -978,7 +978,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref dr1</value>
+    <value>Ek boyut ref borç1 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -999,7 +999,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class dr1</value>
+    <value>Temel sınıf borç1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1024,7 +1024,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class dr1</value>
+    <value>Sınıf borç1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1049,7 +1049,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value dr1</value>
+    <value>Ek boyut değeri borç1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1074,7 +1074,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type dr1</value>
+    <value>Ek boyut türü borç1 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1096,7 +1096,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class dr1</value>
+    <value>Dahili temel sınıf borç1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1121,7 +1121,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class dr1</value>
+    <value>Dahili sınıf borç1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1146,7 +1146,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Dr1</value>
+    <value>ek. boyut değeri Borç1 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1168,7 +1168,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref dr2</value>
+    <value>Ek boyut ref borç2 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1189,7 +1189,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class dr2</value>
+    <value>Temel sınıf borç2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1214,7 +1214,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class dr2</value>
+    <value>Sınıf borç2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1239,7 +1239,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value dr2</value>
+    <value>Ek boyut değeri borç2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1264,7 +1264,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type dr2</value>
+    <value>Ek boyut türü borç2 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1286,7 +1286,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class dr2</value>
+    <value>Dahili temel sınıf borç2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1311,7 +1311,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class dr2</value>
+    <value>Dahili sınıf borç2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1336,7 +1336,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Dr2</value>
+    <value>ek. boyut değeri Borç2 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1358,7 +1358,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref dr3</value>
+    <value>Ek boyut ref borç3 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1379,7 +1379,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class dr3</value>
+    <value>Temel sınıf borç3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1404,7 +1404,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class dr3</value>
+    <value>Sınıf borç3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1429,7 +1429,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value dr3</value>
+    <value>Ek boyut değeri borç3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1454,7 +1454,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type dr3</value>
+    <value>Ek boyut türü borç3 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1476,7 +1476,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class dr3</value>
+    <value>Dahili temel sınıf borç3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1501,7 +1501,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class dr3</value>
+    <value>Dahili sınıf borç3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1526,7 +1526,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Dr3</value>
+    <value>ek. boyut değeri Borç3 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1548,7 +1548,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref cr1</value>
+    <value>Ek boyut ref alacak1 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1569,7 +1569,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class cr1</value>
+    <value>Temel sınıf alacak1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1594,7 +1594,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class cr1</value>
+    <value>Sınıf alacak1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1619,7 +1619,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value cr1</value>
+    <value>Ek boyut değeri alacak1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1644,7 +1644,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type cr1</value>
+    <value>Ek boyut türü alacak1 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1666,7 +1666,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class cr1</value>
+    <value>Dahili temel sınıf alacak1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1691,7 +1691,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class cr1</value>
+    <value>Dahili sınıf alacak1 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1716,7 +1716,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Cr1</value>
+    <value>ek. boyut değeri Alacak1 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1738,7 +1738,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref cr2</value>
+    <value>Ek boyut ref alacak2 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1759,7 +1759,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class cr2</value>
+    <value>Temel sınıf alacak2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1784,7 +1784,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class cr2</value>
+    <value>Sınıf alacak2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1809,7 +1809,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value cr2</value>
+    <value>Ek boyut değeri alacak2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1834,7 +1834,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type cr2</value>
+    <value>Ek boyut türü alacak2 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -1856,7 +1856,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class cr2</value>
+    <value>Dahili temel sınıf alacak2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1881,7 +1881,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class cr2</value>
+    <value>Dahili sınıf alacak2 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1906,7 +1906,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Cr2</value>
+    <value>ek. boyut değeri Alacak2 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -1928,7 +1928,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension ref cr3</value>
+    <value>Ek boyut ref alacak3 </value>
    </synonym>
    <type>
     <types>UUID</types>
@@ -1949,7 +1949,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Base class cr3</value>
+    <value>Temel sınıf alacak3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1974,7 +1974,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Class cr3</value>
+    <value>Sınıf alacak3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -1999,7 +1999,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension value cr3</value>
+    <value>Ek boyut değeri alacak3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -2024,7 +2024,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Ext dimension type cr3</value>
+    <value>Ek boyut türü alacak3 </value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AccountingExtraDimensionTypes</types>
@@ -2046,7 +2046,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal base class cr3</value>
+    <value>Dahili temel sınıf alacak3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -2071,7 +2071,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Internal class cr3</value>
+    <value>Dahili sınıf alacak3 </value>
    </synonym>
    <type>
     <types>String</types>
@@ -2096,7 +2096,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>ext. dimension value Cr3</value>
+    <value>ek. boyut değeri Alacak3 </value>
    </synonym>
    <type>
     <types>Characteristic.AccountingExtraDimensionTypes</types>

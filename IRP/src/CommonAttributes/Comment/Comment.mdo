@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="1148941f-4dbe-4ef0-a934-561dd175bf90">
- <name>Description</name>
+ <name>Comment</name>
  <synonym>
   <key>en</key>
-  <value>Description</value>
+  <value>Comment</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Tanım</value>
+  <value>Açıklama</value>
  </synonym>
  <type>
   <types>String</types>

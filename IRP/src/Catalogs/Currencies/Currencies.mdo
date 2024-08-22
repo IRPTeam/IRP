@@ -369,7 +369,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Load currencies</value>
+   <value>Dövizleri yükle</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -386,7 +386,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Currency list</value>
+   <value>Dövizler listesi</value>
   </synonym>
   <comment>https://github.com/wiredmax/world-currencies</comment>
   <templateType>BinaryData</templateType>

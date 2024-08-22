@@ -20,7 +20,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>T9068 Accounting mapping (accounts matching)</value>
+  <value>T9068 Muhasebe mappingi (hesap mapping)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -39,7 +39,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Target account</value>
+   <value>Hedef hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -157,7 +157,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Source ledger type</value>
+   <value>Kaynak defter tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -183,7 +183,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Target ledger type</value>
+   <value>Hedef defter tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -208,7 +208,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Source account</value>
+   <value>Kaynak hesap</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -259,7 +259,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension value1</value>
+   <value>Kırılım değer 1</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -316,7 +316,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension value2</value>
+   <value>Kırılım değer 2</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>
@@ -373,7 +373,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ext dimension value3</value>
+   <value>Kırılım değer 3</value>
   </synonym>
   <type>
    <types>Characteristic.AccountingExtraDimensionTypes</types>

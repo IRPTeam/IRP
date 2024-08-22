@@ -506,7 +506,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>46</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -514,10 +514,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>48</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -532,7 +532,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>47</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -844,7 +844,7 @@
 	CashPayment.TransactionType,
 	CashPayment.Company,
 	CashPayment.Author,
-	CashPayment.Description,
+	CashPayment.Comment,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
 		WHEN NOT JE.Ref IS NULL
@@ -866,7 +866,7 @@ GROUP BY
 	CashPayment.TransactionType,
 	CashPayment.Company,
 	CashPayment.Author,
-	CashPayment.Description</queryText>
+	CashPayment.Comment</queryText>
    <mainTable>Document.CashPayment</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -311,7 +311,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal

@@ -553,7 +553,7 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>55</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -561,10 +561,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>57</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -579,7 +579,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>56</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -897,7 +897,7 @@
 	SalesReportToConsignor.PriceIncludeTax,
 	SalesReportToConsignor.Author,
 	SalesReportToConsignor.Branch,
-	SalesReportToConsignor.Description,
+	SalesReportToConsignor.Comment,
 	SalesReportToConsignor.DocumentAmount
 FROM
 	Document.SalesReportToConsignor AS SalesReportToConsignor
@@ -915,7 +915,7 @@ GROUP BY
 	SalesReportToConsignor.PriceIncludeTax,
 	SalesReportToConsignor.Author,
 	SalesReportToConsignor.Branch,
-	SalesReportToConsignor.Description,
+	SalesReportToConsignor.Comment,
 	SalesReportToConsignor.DocumentAmount
 </queryText>
    <mainTable>Document.SalesReportToConsignor</mainTable>

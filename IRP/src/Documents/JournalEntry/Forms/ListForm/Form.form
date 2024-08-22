@@ -387,7 +387,7 @@
    <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
   </items>
   <items xsi:type="form:FormField">
-   <name>Description</name>
+   <name>Comment</name>
    <id>36</id>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -395,10 +395,10 @@
     <common>true</common>
    </userVisible>
    <dataPath xsi:type="form:DataPath">
-    <segments>List.Description</segments>
+    <segments>List.Comment</segments>
    </dataPath>
    <extendedTooltip>
-    <name>DescriptionExtendedTooltip</name>
+    <name>CommentExtendedTooltip</name>
     <id>38</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -413,7 +413,7 @@
     </extInfo>
    </extendedTooltip>
    <contextMenu>
-    <name>DescriptionContextMenu</name>
+    <name>CommentContextMenu</name>
     <id>37</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -719,7 +719,7 @@
 	JournalEntry.LedgerType,
 	JournalEntry.Basis,
 	JournalEntry.UserDefined,
-	JournalEntry.Description,
+	JournalEntry.Comment,
 	Case
 		when SUM(JournalEntryErrors.LineNumber) &gt; 0
 			then True
@@ -737,7 +737,7 @@ GROUP BY
 	JournalEntry.LedgerType,
 	JournalEntry.Basis,
 	JournalEntry.UserDefined,
-	JournalEntry.Description</queryText>
+	JournalEntry.Comment</queryText>
    <mainTable>Document.JournalEntry</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>

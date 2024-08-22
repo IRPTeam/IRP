@@ -1957,68 +1957,68 @@ Function Strings(Lang) Export
 		|tr='Serviste dosya muhafaza yeri bulunamıyor'", Lang));
 	Strings.Insert("Error_152", NStr("en='Cannot convert to UUID [%1]';
 		|ru='Cannot convert to UUID [%1]';
-		|tr='Cannot convert to UUID [%1]'", Lang));
+		|tr='UUID''e dönüştürülemedi [%1]'", Lang));
 	Strings.Insert("Error_153", NStr("en='Debit is empty [%1] row-key[%2]';
 		|ru='Debit is empty [%1] row-key[%2]';
-		|tr='Debit is empty [%1] row-key[%2]'", Lang));
+		|tr='Borç boş [%1] satır-anahtar [%2]'", Lang));
 	Strings.Insert("Error_154", NStr("en='Credit is empty [%1] row-key[%2]';
 		|ru='Credit is empty [%1] row-key[%2]';
-		|tr='Credit is empty [%1] row-key[%2]'", Lang));
+		|tr='Alacak boş [%1] satır-anahtar [%2]'", Lang));
 	
 	Strings.Insert("Error_155", NStr("en='Company is empty row-key[%1]';
 		|ru='Company is empty row-key[%1]';
-		|tr='Company is empty row-key[%1]'", Lang));
+		|tr='Şirket boş satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_156", NStr("en='Currency is empty row-key[%1]';
 		|ru='Currency is empty row-key[%1]';
-		|tr='Currency is empty row-key[%1]'", Lang));
+		|tr='Döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_157", NStr("en='Account Dr is empty row-key[%1]';
 		|ru='Account Dr is empty row-key[%1]';
-		|tr='Account Dr is empty row-key[%1]'", Lang));
+		|tr='Borç hesap boş satır-anahtar[%1]'", Lang));
 	Strings.Insert("Error_158", NStr("en='Account Cr is empty row-key[%1]';
 		|ru='Account Cr is empty row-key[%1]';
-		|tr='Account Cr is empty row-key[%1]'", Lang));
+		|tr='Alacak hesap boş satır-anahtar[%1]'", Lang));
 	Strings.Insert("Error_159", NStr("en='Currency Dr is empty row-key[%1]';
 		|ru='Currency Dr is empty row-key[%1]';
-		|tr='Currency Dr is empty row-key[%1]'", Lang));
+		|tr='Borç döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_160", NStr("en='Currency Cr is empty row-key[%1]';
 		|ru='Currency Cr is empty row-key[%1]';
-		|tr='Currency Cr is empty row-key[%1]'", Lang));
+		|tr='Alacak döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_161", NStr("en='Ext. dimension 1 value Dr is empty row-key[%1]';
 		|ru='Ext. dimension 1 value Dr is empty row-key[%1]';
-		|tr='Ext. dimension 1 value Dr is empty row-key[%1]'", Lang));
+		|tr='Ext. boyut 1 değeri Dr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_162", NStr("en='Ext. dimension 1 type Dr is empty row-key[%1]';
 		|ru='Ext. dimension 1 type Dr is empty row-key[%1]';
-		|tr='Ext. dimension 1 type Dr is empty row-key[%1]'", Lang));
+		|tr='Ext. boyut 1 tipi Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_163", NStr("en='Ext. dimension 2 value Dr is empty row-key[%1]';
 		|ru='Ext. dimension 2 value Dr is empty row-key[%1]';
-		|tr='Ext. dimension 2 value Dr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 2 değeri Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_164", NStr("en='Ext. dimension 2 type Dr is empty row-key[%1]';
 		|ru='Ext. dimension 2 type Dr is empty row-key[%1]';
-		|tr='Ext. dimension 2 type Dr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 2 tipi Dr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_165", NStr("en='Ext. dimension 3 value Dr is empty row-key[%1]';
 		|ru='Ext. dimension 3 value Dr is empty row-key[%1]';
-		|tr='Ext. dimension 3 value Dr is empty row-key[%1]'", Lang));
+		|tr='Ext. boyut 3 değeri Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_166", NStr("en='Ext. dimension 3 type Dr is empty row-key[%1]';
 		|ru='Ext. dimension 3 type Dr is empty row-key[%1]';
-		|tr='Ext. dimension 3 type Dr is empty row-key[%1]'", Lang));
+		|tr='Ext. boyut 3 tipi Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_167", NStr("en='Ext. dimension 1 value Cr is empty row-key[%1]';
 		|ru='Ext. dimension 1 value Cr is empty row-key[%1]';
-		|tr='Ext. dimension 1 value Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 1 değeri Cr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_168", NStr("en='Ext. dimension 1 type Cr is empty row-key[%1]';
 		|ru='Ext. dimension 1 type Cr is empty row-key[%1]';
-		|tr='Ext. dimension 1 type Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 1 tipi Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_169", NStr("en='Ext. dimension 2 value Cr is empty row-key[%1]';
 		|ru='Ext. dimension 2 value Cr is empty row-key[%1]';
-		|tr='Ext. dimension 2 value Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 2 değeri Cr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_170", NStr("en='Ext. dimension 2 type Cr is empty row-key[%1]';
 		|ru='Ext. dimension 2 type Cr is empty row-key[%1]';
-		|tr='Ext. dimension 2 type Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 2 tipi Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_171", NStr("en='Ext. dimension 3 value Cr is empty row-key[%1]';
 		|ru='Ext. dimension 3 value Cr is empty row-key[%1]';
-		|tr='Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 3 değeri Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_172", NStr("en='Ext. dimension 3 type Cr is empty row-key[%1]';
 		|ru='Ext. dimension 3 type Cr is empty row-key[%1]';
-		|tr='Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
+		|tr='Ek boyut 3 tipi Cr boş satır-anahtarı[%1] '", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2407,7 +2407,7 @@ Function Strings(Lang) Export
 		|tr='Ayarları varsayınlara getirmek ister misiniz?'", Lang));
 	Strings.Insert("QuestionToUser_031", NStr("en='Do you want to change tax rates according to the company?';
 		|ru='Do you want to change tax rates according to the company?';
-		|tr='Do you want to change tax rates according to the company?'",
+		|tr='Şirket ayarlarına göre vergileri değiştirmek ister misiniz?'",
 		Lang));
 #EndRegion
 
@@ -2450,9 +2450,9 @@ Function Strings(Lang) Export
 	Strings.Insert("I_1", NStr("en='Enter description';
 		|ru='Введите Наименование';
 		|tr='Açıklama giriniz'", Lang));
-	Strings.Insert("I_2", NStr("en='Click to enter description';
-		|ru='Нажмите для заполнения';
-		|tr='Açıklama girmek için tıklayın'", Lang));
+	Strings.Insert("I_2", NStr("en='Click to enter comment';
+		|ru='Click to enter comment';
+		|tr='Açıklama girmek için tıklayınız'", Lang));
 	Strings.Insert("I_3", NStr("en='Fill out the document';
 		|ru='Заполните документ';
 		|tr='Belgeyi doldurunuz'", Lang));
@@ -2731,10 +2731,10 @@ Function Strings(Lang) Export
 		|tr='Evrek denetimi için eklenen dosyalar'", Lang));
 	Strings.Insert("Add_Settings_014", NStr("en='Enable - Change filters';
 		|ru='Включить - Изменить фильтры';
-		|tr='Enable - Change filters'", Lang));
+		|tr='Etkin - Değişim filtreler'", Lang));
 	Strings.Insert("Add_Settings_015", NStr("en='Enable - Check-mode';
 		|ru='Включить - Режим проверки';
-		|tr='Enable - Check-mode'", Lang));
+		|tr='Etkin - Denetim modu'", Lang));
 	Strings.Insert("Add_Settings_016", NStr("en='Company';
 		|ru='Организация';
 		|tr='Şirket'", Lang));
@@ -2775,7 +2775,7 @@ Function Strings(Lang) Export
 		|tr='%1 satır kopyalandı'", Lang));
 	Strings.Insert("CP_007", NStr("en='Paste values from clipboard';
 		|ru='Paste values from clipboard';
-		|tr='Paste values from clipboard'", Lang));
+		|tr='Bellekten değerleri yapıştır'", Lang));
 #EndRegion	
 	
 #Region LoadDataFromTable
@@ -3513,7 +3513,7 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 Strings.Insert("ExternalAccountingOperation",
 	NStr("en='External accounting operation';
 		|ru='External accounting operation';
-		|tr='External accounting operation'", Lang));
+		|tr='Dış muhasebe kaydı'", Lang));
 
 #EndRegion
 

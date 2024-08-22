@@ -11,6 +11,6 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Full access no admin functions</value>
+  <value>Tüm izinler (Tasarımcı hariç)</value>
  </synonym>
 </mdclass:Role>

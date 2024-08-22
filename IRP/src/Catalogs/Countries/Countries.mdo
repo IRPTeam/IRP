@@ -197,7 +197,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>CIOC Code</value>
+   <value>CIOC kodu</value>
   </synonym>
   <type>
    <types>String</types>
@@ -249,7 +249,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Flag</value>
+   <value>İşaret</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -395,7 +395,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Load countries</value>
+   <value>Ülkeleri yükle</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -412,7 +412,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Country list</value>
+   <value>Ülkeler listesi</value>
   </synonym>
   <comment>https://restcountries.com</comment>
   <templateType>BinaryData</templateType>

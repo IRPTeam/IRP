@@ -103,10 +103,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="7310d2fd-fce1-42cd-95c4-0edf90ba661f">
-    <name>DontWriteNegativeDebtAsAdvance</name>
+    <name>DELETE_DontWriteNegativeDebtAsAdvance</name>
     <synonym>
       <key>en</key>
-      <value>Dont write negative debt as advance</value>
+      <value>DELETE dont write negative debt as advance</value>
     </synonym>
     <type>
       <types>Boolean</types>

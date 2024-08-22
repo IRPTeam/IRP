@@ -310,7 +310,7 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 	QuerySelection = QueryResult.Select();
 
 	NeedWriteAdvances = False;
-	RepeatThisAdvance = False;
+
 	While QuerySelection.Next() Do
 		If QuerySelection.AdvanceAmount < 0 Then
 			
@@ -323,8 +323,7 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 		                             Records_AdvancesKey, 
 		                             Records_OffsetOfAdvances,
 		                             Records_OffsetAging, 
-		                             NeedWriteAdvances, 
-		                             RepeatThisAdvance);
+		                             NeedWriteAdvances);
 		Else
 		
 			DistributeAdvanceToTransaction(Parameters, 
@@ -336,22 +335,8 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 		                                   Records_AdvancesKey, 
 		                                   Records_OffsetOfAdvances,
 		                                   Records_OffsetAging, 
-		                                   NeedWriteAdvances, 
-		                                   RepeatThisAdvance);
+		                                   NeedWriteAdvances);
 		
-			// Advance balance is change
-			If RepeatThisAdvance Then
-				Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
-				OffsetAdvancesToTransactions(Parameters, 
-			                                 Records_AdvancesKey, 
-			                                 Records_TransactionsKey,
-			                                 Records_OffsetOfAdvances, 
-			                                 Records_OffsetAging, 
-			                                 //AdvanceKey, 
-			                                 AdvanceRecordData,
-			                                 PointInTime, 
-			                                 Document);
-			EndIf;
 		EndIf;
 	EndDo;
 	
@@ -371,8 +356,7 @@ Procedure ReturnMoneyByTransaction(Parameters,
 	                               Records_AdvancesKey, 
 	                               Records_OffsetOfAdvances, 
 	                               Records_OffsetAging, 
-	                               NeedWriteAdvances, 
-	                               RepeatThisAdvance)
+	                               NeedWriteAdvances)
 	
 	Query = New Query();
 	Query.Text = 
@@ -486,8 +470,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	                                     Records_AdvancesKey, 
 	                                     Records_OffsetOfAdvances, 
 	                                     Records_OffsetAging, 
-	                                     NeedWriteAdvances, 
-	                                     RepeatThisAdvance)
+	                                     NeedWriteAdvances)
 
 	Query = New Query;
 	Query.Text =
@@ -531,38 +514,6 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		
 		TransactionRecordData = CreateTransactionRecordData(Parameters, QuerySelection);
 		
-		If QuerySelection.TransactionAmount < 0 And Not Parameters.DontWriteNegativeDebtAsAdvance Then
-			// Return due to advance, change advance balance
-			
-			// Transactions
-			Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
-		                                Document.Date, 
-		                                TransactionRecordData, 
-		                                QuerySelection.TransactionAmount, 
-		                                Records_TransactionsKey);	
-		                                
-		    Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);	
-					
-			// Advances
-			Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
-		                            Document.Date, 
-		                            AdvanceRecordData, 
-		                            QuerySelection.TransactionAmount, 
-		                            Records_AdvancesKey);
-				
-			// OffsetOfAdvances
-			Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Enums.RecordType.Expense,
-		                                                          Document.Date, 
-		                                                          QuerySelection.TransactionAmount, 
-		                                                          Document, 
-		                                                          AdvanceRecordData, 
-		                                                          TransactionRecordData, 
-		                                                          Records_OffsetOfAdvances);
-			
-			RepeatThisAdvance = True;
-			Break;
-		EndIf;
-
 		If NeedWriteoff = 0 Then
 			Break;
 		EndIf;
@@ -672,49 +623,6 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 
 	NeedWriteTransactions = False;
 	While QuerySelection.Next() Do
-		If QuerySelection.TransactionAmount < 0 And Not Parameters.DontWriteNegativeDebtAsAdvance Then
-			// Return due to advance, change advance balance
-			
-			AdvanceRecordData = CreateAdvanceRecordData(Parameters, TransactionRecordData);
-			
-			// Transactions
-			Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
-		                                Document.Date, 
-		                                TransactionRecordData, 
-		                                QuerySelection.TransactionAmount, 
-		                                Records_TransactionsKey);
-		                                
-		    Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);		
-						
-			// Advances
-			Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
-		                            Document.Date, 
-		                            AdvanceRecordData, 
-		                            QuerySelection.TransactionAmount, 
-		                            Records_AdvancesKey);
-		                            
-		    Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
-						
-		   // OffsetOfAdvances
-		   Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Enums.RecordType.Expense,
-		                                                         Document.Date, 
-		                                                         QuerySelection.TransactionAmount, 
-		                                                         Document, 
-		                                                         AdvanceRecordData, 
-		                                                         TransactionRecordData, 
-		                                                         Records_OffsetOfAdvances, True);
-			
-			OffsetAdvancesToTransactions(Parameters, 
-			                             Records_AdvancesKey, 
-			                             Records_TransactionsKey,
-			                             Records_OffsetOfAdvances, 
-			                             Records_OffsetAging, 
-			                             AdvanceRecordData, 
-			                             PointInTime, 
-			                             Document);
-			Continue;
-		EndIf;
-
 		DistributeTransactionToAdvance(Parameters, 
 		                               PointInTime, 
 		                               Document, 

@@ -83,7 +83,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	
 	For Each Row In ThisObject.ItemList Do
 		_isSalesInvoice = ValueIsFilled(Row.SalesInvoice) And TypeOf(Row.SalesInvoice) = Type("DocumentRef.SalesInvoice");
-		If Not _isSalesInvoice And Not ValueIsFilled(Row.LandedCost) Then
+		If Not _isSalesInvoice And Not ValueIsFilled(Row.LandedCost) And Not Row.IsService Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_114,
 			"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].LandedCost", ThisObject);

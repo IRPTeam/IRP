@@ -105,8 +105,8 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	BatchKeysInfo = BatchRevenueAllocationInfoRecalculated.Copy();
 	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey", "Amount, AmountTax");
 	BatchKeysInfo.Columns.Document.Name  = "PurchaseInvoiceDocument";
-	BatchKeysInfo.Columns.Amount.Name    = "AllocatedCostAmount";
-	BatchKeysInfo.Columns.AmountTax.Name = "AllocatedCostTaxAmount";
+	BatchKeysInfo.Columns.Amount.Name    = "AllocatedRevenueAmount";
+	BatchKeysInfo.Columns.AmountTax.Name = "AllocatedRevenueTaxAmount";
 	BatchKeysInfo.Columns.Add("Direction");
 	BatchKeysInfo.FillValues(Enums.BatchDirection.Receipt, "Direction");
 	Tables.T6020S_BatchKeysInfo = BatchKeysInfo;

@@ -2912,23 +2912,23 @@ Scenario: _029228 SO - PO - GR - SC - PI - SI (selling from one store while purc
 			| 'Trousers'   | '38/Yellow'   | ''                     | 'No'                   | '122,03'       | 'pcs'    | ''                     | ''                    | '100,00'   | '18%'   | ''                | '800,00'         | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '677,97'       | 'Yes'                  |
 			| 'Shirt'      | '38/Black'    | ''                     | 'No'                   | '335,59'       | 'pcs'    | ''                     | ''                    | '200,00'   | '18%'   | ''                | '2 200,00'       | ''                      | ''                          | 'Store 02'   | '11,000'     | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '1 864,41'     | 'Yes'                  |
 			| 'Dress'      | 'M/White'     | ''                     | 'No'                   | '366,10'       | 'pcs'    | ''                     | ''                    | '300,00'   | '18%'   | ''                | '2 400,00'       | ''                      | ''                          | 'Store 02'   | '8,000'      | ''                            | ''               | '$$PurchaseOrder029228$$'   | ''         | '$$SalesOrder029228$$'   | '2 033,90'     | 'Yes'                  |
-		// And in the table "ItemList" I click "Link unlink basis documents" button
-		// And I change checkbox "Linked documents"
-		// And in the table "ResultsTree" I click "Unlink all" button
-		// And I click "Ok" button
-		// And "ItemList" table contains lines
-		// 	| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
-		// 	| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
-		// 	| 'Shirt'      | '38/Black'    | ''              | ''                  |
-		// 	| 'Dress'      | 'M/White'     | ''              | ''                  |
-		// And in the table "ItemList" I click "Link unlink basis documents" button
-		// And I click "Auto link" button
-		// And I click "Ok" button
-		// And "ItemList" table contains lines
-		// 	| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
-		// 	| 'Trousers' | '38/Yellow' | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
-		// 	| 'Shirt'    | '38/Black'  | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
-		// 	| 'Dress'    | 'M/White'   | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'    | 'Sales order'   | 'Purchase order'    |
+			| 'Trousers'   | '38/Yellow'   | ''              | ''                  |
+			| 'Shirt'      | '38/Black'    | ''              | ''                  |
+			| 'Dress'      | 'M/White'     | ''              | ''                  |
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Sales order'          | 'Purchase order'          | 'Store'    |
+			| 'Trousers' | '38/Yellow' | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Shirt'    | '38/Black'  | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
+			| 'Dress'    | 'M/White'   | '$$SalesOrder029228$$' | '$$PurchaseOrder029228$$' | 'Store 02' |
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key'     |
 			| 'Trousers'   | '38/Yellow'    |

@@ -4957,7 +4957,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available

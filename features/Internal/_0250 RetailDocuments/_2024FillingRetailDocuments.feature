@@ -1495,7 +1495,7 @@ Scenario:  _0154142 change comment in POS
 		And I finish line editing in "ItemList" table	
 	* Filling comment
 		And I move to "Additional" tab
-		And I input "test" text in the field named "Description"		
+		And I input "test" text in the field named "Comment"		
 	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
@@ -1509,7 +1509,7 @@ Scenario:  _0154142 change comment in POS
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "Description" became equal to "test"
+		Then the form attribute named "Comment" became equal to "test"
 		Then the form attribute named "UsePartnerTransactions" became equal to "No"
 		And I delete "$$NumberRetailSalesReceipt0154142$$" variable
 		And I delete "$$RetailSalesReceipt0154142$$" variable

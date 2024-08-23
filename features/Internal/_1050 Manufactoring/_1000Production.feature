@@ -1320,7 +1320,7 @@ Scenario: _1037 create document Production based on production planning
 		Then the form attribute named "DecorationGroupTitleUncollapsedLabel" became equal to "Company: Main Company   Business unit: Склад производства 05   Store production: Store 01   Posting status: New   "
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "BusinessUnit" became equal to "Склад производства 05"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "PlanningPeriod" became equal to "First month"
 		Then the form attribute named "Item" became equal to "Стремянка номер 6 ступенчатая"
 		Then the form attribute named "ItemKey" became equal to "Стремянка номер 6 ступенчатая"

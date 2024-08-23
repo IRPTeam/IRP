@@ -298,7 +298,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Description</name>
+      <name>Comment</name>
       <id>58</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -306,10 +306,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
-        <name>DescriptionExtendedTooltip</name>
+        <name>CommentExtendedTooltip</name>
         <id>60</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -324,7 +324,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>DescriptionContextMenu</name>
+        <name>CommentContextMenu</name>
         <id>59</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -628,7 +628,7 @@
 	Doc.Date,
 	Doc.Company,
 	Doc.Author,
-	Doc.Description,
+	Doc.Comment,
 	MAX(JE.LedgerType) AS LedgerType,
 	MAX(CASE
 		WHEN NOT JE.Ref IS NULL
@@ -646,7 +646,7 @@ GROUP BY
 	Doc.Date,
 	Doc.Company,
 	Doc.Author,
-	Doc.Description</queryText>
+	Doc.Comment</queryText>
       <mainTable>Document.ModernizationOfFixedAsset</mainTable>
       <autoFillAvailableFields>true</autoFillAvailableFields>
       <customQuery>true</customQuery>

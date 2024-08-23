@@ -473,7 +473,7 @@ Scenario: _052004 check the filter by bank accounts (the choice of Cash/Bank acc
 Scenario: _052005 check input Description in the document Bank Receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
-	When check filling in Description
+	When check filling in Comment
 
 Scenario: _052006 check the choice of transaction type in the document Bank Receipt
 	And I close all client application windows
@@ -534,7 +534,7 @@ Scenario: _052013 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -560,7 +560,7 @@ Scenario: _052014 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -584,7 +584,7 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -1025,7 +1025,7 @@ Scenario: _052021 check amount when create BR based on SI (partner term - by par
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
 			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
 	And I close all client application windows				
 
 Scenario: _052022 create Bank receipt with transaction type Other income

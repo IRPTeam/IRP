@@ -648,7 +648,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>Description</name>
+      <name>Comment</name>
       <id>52</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -656,10 +656,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.Description</segments>
+        <segments>List.Comment</segments>
       </dataPath>
       <extendedTooltip>
-        <name>DescriptionExtendedTooltip</name>
+        <name>CommentExtendedTooltip</name>
         <id>54</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -674,7 +674,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>DescriptionContextMenu</name>
+        <name>CommentContextMenu</name>
         <id>53</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1016,7 +1016,7 @@ INDEX BY
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
 	PurchaseReturn.Branch,
-	PurchaseReturn.Description,
+	PurchaseReturn.Comment,
 	PurchaseReturn.DocumentAmount,
 	CASE
 		WHEN ItemListTable.StoreCount = 1
@@ -1055,7 +1055,7 @@ GROUP BY
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
 	PurchaseReturn.Branch,
-	PurchaseReturn.Description,
+	PurchaseReturn.Comment,
 	PurchaseReturn.DocumentAmount,
 	CASE
 		WHEN ItemListTable.StoreCount = 1

@@ -514,7 +514,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
 		|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
 		|	ItemList.Quantity AS TotalQuantity,
-		|	ItemList.TotalAmount AS InvoiceAmount,
+		|	ItemList.NetAmount AS InvoiceAmount,
 		|	ItemList.TaxAmount AS InvoiceTaxAmount,
 		|	ItemList.Period,
 		|	VALUE(Enum.BatchDirection.Receipt) AS Direction

@@ -21,6 +21,9 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 		ChoiceData.Add(RetailCustomerAdvance);
 		ChoiceData.Add(EmployeeCashAdvance);
 		ChoiceData.Add(OtherPartner);
+		If FOServer.IsUseSalary() Then
+			ChoiceData.Add(SalaryReturn);
+		EndIf;
 	EndIf;
 		
 	If IsBankReceipt Then

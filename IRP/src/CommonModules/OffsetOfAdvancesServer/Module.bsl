@@ -241,7 +241,11 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 			                             Records_OffsetAging, 
 			                             TransactionRecordData,
 			                             QuerySelection.PointInTime, 
-			                             QuerySelection.Document);
+			                             QuerySelection.Document); 
+			                             
+			CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, 
+			                       Table_DocumentAndTransactionsKey, 
+			                       QuerySelection.Document);
 		EndIf;
 	EndDo;
 
@@ -1635,7 +1639,7 @@ Function CreateTransactionRecordData(Parameters, RecordData)
 	Return TransactionRecordData;
 EndFunction
 
-Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey)
+Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey, FilterRecorder = Undefined)
 	Query = New Query;
 	Query.Text =		
 	"SELECT
@@ -1666,7 +1670,8 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|WHERE
 	|	TrnInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND TrnInfo.Company = &Company
-	|	AND TrnInfo.Branch = &Branch
+	|	AND TrnInfo.Branch = &Branch 
+	|	AND CASE WHEN &Filter_Recorder THEN TrnInfo.Recorder = &Recorder ELSE TRUE END
 	|	AND TrnInfo.%1";
 	
 	Query.Text = StrTemplate(Query.Text, Parameters.TransactionType);
@@ -1676,50 +1681,76 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	Query.SetParameter("Company"       , Parameters.Object.Company);
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
 	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
-
+	
+	If FilterRecorder <> Undefined Then 
+		Query.SetParameter("Filter_Recorder", True);
+		Query.SetParameter("Recorder",FilterRecorder);
+	Else
+		Query.SetParameter("Filter_Recorder", False);
+		Query.SetParameter("Recorder", Undefined);
+	EndIf;
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-
-	While QuerySelection.Next() Do
+	
+	If FilterRecorder <> Undefined Then
+	   While QuerySelection.Next() Do
+		   If QuerySelection.IsDue And QuerySelection.Amount < 0 Then 
+			    RecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+					DistributeTransactionToAging(Parameters, 
+												 QuerySelection.Document.PointInTime(), 
+												 QuerySelection.Document,
+												 RecordData, 
+												 - QuerySelection.Amount, 
+												 Records_OffsetAging);
+				EndIf;                         
+	   EndDo;
+	   
+	Else
 		
-		RecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+			While QuerySelection.Next() Do
 				
-		Rows = Table_DocumentAndTransactionsKey.FindRows(RecordData); 
-		If Rows.Count() Then
-			TransactionKeyUUID = Rows[0].TransactionKeyUUID;
-		Else
-			TransactionKeyUUID = New UUID();
-		EndIf;
+				RecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+						
+				Rows = Table_DocumentAndTransactionsKey.FindRows(RecordData); 
+				If Rows.Count() Then
+					TransactionKeyUUID = Rows[0].TransactionKeyUUID;
+				Else
+					TransactionKeyUUID = New UUID();
+				EndIf;
+						
+				If QuerySelection.IsDue Then
+					RecordType = AccumulationRecordType.Receipt;
+				ElsIf QuerySelection.IsPaid Then
+					RecordType = AccumulationRecordType.Expense;
+				Else
+					Continue;
+				EndIf;
 				
-		If QuerySelection.IsDue Then
-			RecordType = AccumulationRecordType.Receipt;
-		ElsIf QuerySelection.IsPaid Then
-			RecordType = AccumulationRecordType.Expense;
-		Else
-			Continue;
-		EndIf;
+				Add_TM1030B_TransactionsKey(RecordType, 
+				                            QuerySelection.Date, 
+				                            RecordData, 
+				                            QuerySelection.Amount, 
+				                            Records_TransactionsKey);		
+					
+				New_DocKeys = Table_DocumentAndTransactionsKey.Add();
+				New_DocKeys.Document = QuerySelection.Document;
+				New_DocKeys.TransactionKeyUUID = TransactionKeyUUID;
+				FillPropertyValues(New_DocKeys, RecordData);
+				
+				// Paid from customer or to vendor 
+				If QuerySelection.IsPaid Then
+					DistributeTransactionToAging(Parameters, 
+												 QuerySelection.Document.PointInTime(), 
+												 QuerySelection.Document,
+												 RecordData, 
+												 QuerySelection.Amount, 
+												 Records_OffsetAging);
+				EndIf;  
 		
-		Add_TM1030B_TransactionsKey(RecordType, 
-		                            QuerySelection.Date, 
-		                            RecordData, 
-		                            QuerySelection.Amount, 
-		                            Records_TransactionsKey);		
-			
-		New_DocKeys = Table_DocumentAndTransactionsKey.Add();
-		New_DocKeys.Document = QuerySelection.Document;
-		New_DocKeys.TransactionKeyUUID = TransactionKeyUUID;
-		FillPropertyValues(New_DocKeys, RecordData);
-		
-		// Paid from customer or to vendor 
-		If QuerySelection.IsPaid Then
-			DistributeTransactionToAging(Parameters, 
-										 QuerySelection.Document.PointInTime(), 
-										 QuerySelection.Document,
-										 RecordData, 
-										 QuerySelection.Amount, 
-										 Records_OffsetAging);
-		EndIf;
-	EndDo;
+			EndDo;
+	
+	EndIf;
 EndProcedure
 
 Procedure ReturnMoneyByAging(Parameters, Document, TransactionData, TransactionAmount, Records_OffsetAging)

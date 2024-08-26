@@ -233,7 +233,7 @@ Scenario: _0960011 create Cash payment with transaction type Employee cash advan
 		And "PaymentList" table became equal
 			| '#' | 'Partner'         | 'Partner term'                      | 'Basis document' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis'                          |
 			| '1' | 'Olivia Williams' | 'Olivia Williams cash advance, TRY' | ''               | '1 000,00'     | 'Movement type 1'         | ''                 | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
-			| '2' | 'Emily Jones'     | 'Sofia Borisova cash advance, TRY'  | ''               | '1 000,00'     | 'Movement type 1'         | ''                 | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
+			| '2' | 'Emily Jones'     | 'Emily Jones cash advance, TRY'     | ''               | '1 000,00'     | 'Movement type 1'         | ''                 | 'Outgoing payment order 15 dated 12.01.2023 16:34:17' |
 		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "2 000,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 	* Check creation

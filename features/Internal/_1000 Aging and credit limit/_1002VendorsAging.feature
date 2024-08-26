@@ -448,6 +448,16 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And I select current line in "List" table
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		And I go to line in "" table
+			| ""                 |
+			| "Purchase invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Number"                         |
+			| "$$NumberPurchaseInvoiceAging$$" |
+		And I select current line in "List" table
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"

@@ -773,7 +773,8 @@
   <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
   <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
   <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
-  <commonModules>CommonModule.EmailMessageServer</commonModules>
+  <commonModules>CommonModule.EmailMessagesServer</commonModules>
+  <commonModules>CommonModule.MessagesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

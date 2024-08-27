@@ -102,6 +102,22 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="24688239-9a34-4f09-8b19-5acd58913ef2">
+    <name>LastWarning</name>
+    <synonym>
+      <key>en</key>
+      <value>Last warning</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="21da98f1-2bf6-416d-8aec-5555d7b109fb">
     <name>Message</name>
     <synonym>

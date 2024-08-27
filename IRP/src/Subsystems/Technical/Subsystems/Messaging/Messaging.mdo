@@ -17,7 +17,8 @@
   <content>InformationRegister.MessagesQueueToSend</content>
   <content>CommonPicture.SendMail</content>
   <content>FunctionalOption.UseMessaging</content>
-  <content>CommonModule.EmailMessageServer</content>
+  <content>CommonModule.EmailMessagesServer</content>
   <content>Enum.MessageTypes</content>
+  <content>CommonModule.MessagesServer</content>
   <parentSubsystem>Subsystem.Technical</parentSubsystem>
 </mdclass:Subsystem>

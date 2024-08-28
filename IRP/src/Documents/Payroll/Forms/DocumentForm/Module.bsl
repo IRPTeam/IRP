@@ -502,7 +502,22 @@ EndProcedure
 
 &AtClient
 Procedure EditCurrenciesCashAdvanceDeduction(Command)
-	EditCurrencies(Command, "CashAdvanceDeductionList");
+	CurrentData = ThisObject.Items.CashAdvanceDeductionList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;	
+	FormParameters = CurrenciesClientServer.GetParameters_V7(Object, 
+	                                                         CurrentData.Key, 
+	                                                         Object.Currency, 
+	                                                         CurrentData.Amount, 
+	                                                         CurrentData.Agreement);
+
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	
 EndProcedure
 
 &AtClient

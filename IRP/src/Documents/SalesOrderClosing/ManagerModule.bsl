@@ -184,10 +184,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrderClosing.ItemList", AddInfo);
 EndProcedure
 

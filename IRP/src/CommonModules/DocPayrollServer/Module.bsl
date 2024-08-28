@@ -63,6 +63,7 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	Query.Text = 
 	"SELECT
 	|	R3027B.Partner AS Employee,
+	|	R3027B.Agreement AS Agreement,
 	|	R3027B.AmountBalance AS Amount
 	|FROM
 	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(&Boundary, Company = &Company
@@ -81,7 +82,7 @@ Function GetCashAdvanceDeduction(Parameters) Export
 	
 	ResultTable = Query.Execute().Unload();
 	
-	GroupColumn = "Employee";
+	GroupColumn = "Employee, Agreement";
 	SumColumn = "Amount";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);

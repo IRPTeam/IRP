@@ -110,9 +110,9 @@ Function GetParameters_V10(Object, Row) Export
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Row.Currency);
 	If ValueIsFilled(Row.Invoice) Then
-		Parameters.Insert("Agreement"      , Row.Invoice.Agreement);
+		Parameters.Insert("Agreement" , Row.Invoice.Agreement);
 	Else
-		Parameters.Insert("Agreement"      , Undefined);
+		Parameters.Insert("Agreement" , Object.Agreement);
 	EndIf;
 	Parameters.Insert("RowKey"         , Row.Key);
 	Parameters.Insert("DocumentAmount" , Row.TotalAmount);

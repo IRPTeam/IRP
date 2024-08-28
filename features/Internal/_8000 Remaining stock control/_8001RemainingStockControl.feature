@@ -151,11 +151,6 @@ Scenario:_800000 preparation (remaining stock control)
 		When Create document PurchaseInvoice objects (for materials)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1114).GetObject().Write(DocumentWriteMode.Posting);"    |
-		When Create document PurchaseInvoice and GoodsReceipt objects (stock inventory control)
-		And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseInvoice.FindByNumber(1253).GetObject().Write(DocumentWriteMode.Posting);"    |
-		And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(1253).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When Create information register UserSettings records (Retail document)
 		When create SalesInvoice and StockAdjustmentAsSurplus (stock control)
 		When Create document Production objects (stock control)

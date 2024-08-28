@@ -114,6 +114,36 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="7f80af2b-4a94-4ebb-9cf1-e6713bc73d2c">
+    <name>NotPostIfRateNotSet</name>
+    <synonym>
+      <key>en</key>
+      <value>Not post if rate not set</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9b184c89-cc6f-463e-9950-1efb0fd90eb1">
+    <name>EverydayRates</name>
+    <synonym>
+      <key>en</key>
+      <value>Everyday rates</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="fc4a2c0c-74f9-47c7-a27a-f6df6c80b215">
     <name>ItemForm</name>
     <synonym>

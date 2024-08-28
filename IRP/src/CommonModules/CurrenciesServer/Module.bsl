@@ -790,7 +790,7 @@ Function GetEmptyCurrenciesTable(RefMetadata)
 	Return EmptyCurrenciesTable;
 EndFunction
 
-Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
+Procedure UpdateCurrencyTable(Parameters, CurrenciesTable, Cancel = Undefined) Export
 	EmptyCurrenciesTable = GetEmptyCurrenciesTable(Parameters.Ref.Metadata());
 	
 	RatePeriod    = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
@@ -798,22 +798,22 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	
 	// Agreement currency
 	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, AgreementInfo.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, AgreementInfo.CurrencyMovementType,, Cancel);
 	EndIf;
 	
 	// Legal currency
 	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	// Reporting currency
 	For Each ItemOfArray In Catalogs.Companies.GetReportingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	// Budgeting currency
 	For Each ItemOfArray In Catalogs.Companies.GetBudgetingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, Parameters.DocumentAmount);
@@ -891,7 +891,7 @@ Function GetNewCurrencyRowParameters() Export
 	Return Parameters;
 EndFunction							
 
-Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, CurrencyMovementType, FixedRates = Undefined) Export
+Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, CurrencyMovementType, FixedRates = Undefined, Cancel = Undefined) Export
 	If FixedRates <> Undefined Then
 		TableOfFixedRates = New ValueTable();
 		TableOfFixedRates.Columns.Add("Key");
@@ -955,10 +955,19 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 		
 		// rates from register	
 		If Not UseFixedRates And Not UseBasisDocumentRates Then
-			CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
-				Parameters.Currency, 
-				CurrencyMovementType.Currency,
-				CurrencyMovementType.Source);
+			If Cancel <> Undefined Then
+				CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
+					Parameters.Currency, 
+					CurrencyMovementType.Currency,
+					CurrencyMovementType.Source,
+					CurrencyMovementType, Cancel);
+			Else
+				CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
+					Parameters.Currency, 
+					CurrencyMovementType.Currency,
+					CurrencyMovementType.Source);
+			EndIf;
+			
 			If Not ValueIsFilled(CurrencyInfo.Rate) Then
 				NewRow.Rate = 0;
 				NewRow.ReverseRate = 0;
@@ -2101,3 +2110,7 @@ Procedure UpdateLocalTotalAmounts(Object, TotalAmounts, AmountsInfo) Export
 EndProcedure
 
 #EndRegion
+
+Procedure BeforeWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
+	CurrentObject.AdditionalProperties.Insert("UpdateCurrenciesTable", True);	
+EndProcedure

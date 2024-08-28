@@ -62,6 +62,7 @@ Scenario:_800300 preparation (stock inventory control)
 		When Create catalog BillOfMaterials objects
 		When Create information register Taxes records (VAT)	
 	* Load documents
+		When Remove stock control for store 05
 		When Create document PurchaseInvoice, GoodsReceipt and SalesInvoice objects (stock inventory control)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(1253).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -73,19 +74,20 @@ Scenario:_800300 preparation (stock inventory control)
 			| "Documents.GoodsReceipt.FindByNumber(1115).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2122).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When Set stock control for store 05
 	* Stock inventary settings
 		When Create information register UserSettings records (stock inventory control)
 	* Delete control for register R4014B_SerialLotNumber
 		Given I open hyperlink "e1cib/list/InformationRegister.UserSettings"
 		And I go to line in "List" table
-			| "Attribute name"                     | "Kind of attribute" | "Metadata object"             | "Value" |
-			| "CheckBalance_4014B_SerialLotNumber" | "Custom"            | "Document.RetailSalesReceipt" | "Yes"   |
+			| "Attribute name"                      | "Kind of attribute" | "Metadata object"             | "Value" |
+			| "CheckBalance_R4014B_SerialLotNumber" | "Custom"            | "Document.RetailSalesReceipt" | "Yes"   |
 		And in the table "List" I click "Delete" button
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And I go to line in "List" table
-			| "Attribute name"                     | "Kind of attribute" | "Metadata object"             | "Value" |
-			| "CheckBalance_4014B_SerialLotNumber" | "Custom"            | "Document.RetailSalesReceipt" | "Yes"   |
+			| "Attribute name"                      | "Kind of attribute" | "Metadata object"       | "Value" |
+			| "CheckBalance_R4014B_SerialLotNumber" | "Custom"            | "Document.SalesInvoice" | "Yes"   |
 		And in the table "List" I click "Delete" button
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				

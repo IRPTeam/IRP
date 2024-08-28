@@ -938,8 +938,8 @@ Scenario: _1000057 create BR based on SO (Prepaid)
 		Then "Sales orders" window is opened
 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
 		And "PaymentList" table became equal
-			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term' | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
-			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | ''             | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
+			| 'Partner' | '#' | 'Commission' | 'Payer'           | 'Partner term'                     | 'Legal name contract' | 'Basis document' | 'Order'                                       | 'Total amount' | 'Financial movement type' | 'Profit loss center' | 'Cash flow center' | 'Planning transaction basis' | 'Additional analytic' | 'Commission percent' | 'Expense type' |
+			| 'Kalipso' | '1' | ''           | 'Company Kalipso' | 'Basic Partner terms, without VAT' | ''                    | ''               | 'Sales order 1 115 dated 04.01.2024 11:43:06' | '864,41'       | ''                        | ''                   | ''                 | ''                           | ''                    | ''                   | ''             |
 		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"

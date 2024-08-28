@@ -194,7 +194,10 @@ Procedure RecalculateRowsFromValueArraySI(DocumentColumn, Object, Form, ValueArr
 			DocSalesInvoiceClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocSalesInvoiceClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocSalesInvoiceClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocSalesInvoiceClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);		
 		EndIf;	
 	EndDo;
 EndProcedure
@@ -226,7 +229,10 @@ Procedure RecalculateRowsFromValueArraySO(DocumentColumn, Object, Form, ValueArr
 			DocSalesOrderClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocSalesOrderClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocSalesOrderClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocSalesOrderClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);		
 		EndIf;	
 	EndDo;
 EndProcedure
@@ -258,7 +264,10 @@ Procedure RecalculateRowsFromValueArrayPO(DocumentColumn, Object, Form, ValueArr
 			DocPurchaseOrderClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocPurchaseOrderClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocPurchaseOrderClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocPurchaseOrderClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);		
 		EndIf;	
 	EndDo;
 EndProcedure		
@@ -290,7 +299,10 @@ Procedure RecalculateRowsFromValueArrayPI(DocumentColumn, Object, Form, ValueArr
 			DocPurchaseInvoiceClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocPurchaseInvoiceClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);		
 		EndIf;	
 	EndDo;
 EndProcedure
@@ -322,7 +334,10 @@ Procedure RecalculateRowsFromValueArraySR(DocumentColumn, Object, Form, ValueArr
 			DocSalesReturnClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocSalesReturnClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocSalesReturnClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocSalesReturnClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);		
 		EndIf;	
 	EndDo;
 EndProcedure
@@ -354,7 +369,10 @@ Procedure RecalculateRowsFromValueArrayPR(DocumentColumn, Object, Form, ValueArr
 			DocPurchaseReturnClient.ItemListPriceOnChange(Object, Form, Undefined, Row);
 		ElsIf CurrentColumnName = "ItemListQuantity" Then
 			Row.Quantity = NewValue;
-			DocPurchaseReturnClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);	
+			DocPurchaseReturnClient.ItemListQuantityOnChange(Object, Form, Undefined, Row);
+		ElsIf CurrentColumnName = "ItemListTotalAmount" Then
+			Row.TotalAmount = NewValue;
+			DocPurchaseReturnClient.ItemListTotalAmountOnChange(Object, Form, Undefined, Row);	
 		EndIf;	
 	EndDo;
 EndProcedure

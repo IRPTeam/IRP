@@ -59,6 +59,9 @@ Function GetOperationsDefinition()
 	// Transaction type - Other income
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
+	// Transaction type - salary return
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -100,7 +103,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));	
+	//  Transaction type - Salary return
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -557,7 +563,21 @@ Function __GetMatchingLedgerTypes(LedgerType) Export
 EndFunction
 
 Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTableName)
-	MetadataName = Object.Ref.Metadata().Name;
+	
+	DocTransactionType = Undefined;
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
+		DocTransactionType = Object.TransactionType;
+	EndIf;
+	
+	Return AccountingServerReuse.GetAccountingOperationsByLedgerType(Object.Ref, 
+	                                                                 Period,
+	                                                                 DocTransactionType,
+	                                                                 LedgerType,
+	                                                                 MainTableName);
+EndFunction
+
+Function __GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, LedgerType, MainTableName) Export
+	MetadataName = Ref.Metadata().Name;
 	AccountingOperationGroup = Catalogs.AccountingOperations["Document_" + MetadataName];
 	Query = New Query();
 	Query.Text =
@@ -577,11 +597,6 @@ Function GetAccountingOperationsByLedgerType(Object, Period, LedgerType, MainTab
 	ArrayOfAccountingOperations = New Array();
 	
 	OperationsDefinition = GetOperationsDefinition();
-	
-	DocTransactionType = Undefined;
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TransactionType") Then
-		DocTransactionType = Object.TransactionType;
-	EndIf;
 	
 	While QuerySelection.Next() Do
 		Def = OperationsDefinition.Get(QuerySelection.AccountingOperation);
@@ -2869,18 +2884,38 @@ Function CreateAccountingDataTable() Export
 	Return DataTable;
 EndFunction
 
-Procedure SortAccountingDataTable(DataTable)
-	ArrayOfColumns = New Array();
-	For Each Column In DataTable.Columns Do
-		If StrStartsWith(Column.Name, "Ext") Then
-			Continue;
+Function SortAccountingAnalyticRows(_AccountingRowAnalytics, BasisDoc) Export
+	If ValueIsFilled(BasisDoc) Then
+		MainTable = AccountingClientServer.GetDocumentMainTable(BasisDoc);	
+		If ValueIsFilled(MainTable) And BasisDoc[MainTable].Count()
+			And CommonFunctionsClientServer.ObjectHasProperty(BasisDoc[MainTable][0], "Key") Then
+		
+			_AccountingRowAnalytics.Columns.Add("_tmp_order_1");
+			_AccountingRowAnalytics.Columns.Add("_tmp_order_2");
+			
+			For Each AnalyticRow In _AccountingRowAnalytics Do
+				AnalyticRow._tmp_order_2 = AnalyticRow.Operation.Order;
+			EndDo;
+			
+			For Each BasisRow In BasisDoc[MainTable] Do
+				If Not ValueIsFilled(BasisRow.Key) Then
+					Continue;
+				EndIf;
+				
+				AnalyticRows = _AccountingRowAnalytics.FindRows(New Structure("Key", BasisRow.Key));
+				
+				For Each AnalyticRow In AnalyticRows Do
+					AnalyticRow._tmp_order_1 = BasisRow.LineNumber;
+				EndDo;
+				
+			EndDo;
+			
+			_AccountingRowAnalytics.Sort("_tmp_order_1, _tmp_order_2");
+				
 		EndIf;
-		ArrayOfColumns.Add(TrimAll(Column.Name));
-	EndDo;
+	EndIf;	
+EndFunction	
 	
-	DataTable.Sort(StrConcat(ArrayOfColumns, ","));
-EndProcedure
-
 Function GetCurrentAnalyticsRegisterRecords(Doc, RegisterName) Export
 	If Upper(RegisterName) = Upper(Metadata.InformationRegisters.T9050S_AccountingRowAnalytics.FullName()) Then
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
@@ -3009,7 +3044,7 @@ Function GetCurrentDataRegisterRecords(BasisDoc, RegisterName) Export
 			
 		EndDo;
 	EndDo;
-	SortAccountingDataTable(DataTable);
+
 	Return DataTable;
 EndFunction
 
@@ -3114,7 +3149,6 @@ Function GetNewDataRegisterRecords(BasisDoc, AccountingRowAnalytics, AccountingE
 			Record.Amount = DataByAnalytics.Amount;
 		EndDo;
 	EndDo;
-	SortAccountingDataTable(DataTable);
 	
 	Return New Structure("DataTable, Errors", DataTable, Errors);
 EndFunction
@@ -3124,6 +3158,8 @@ Function RegisterRecords_AccountingData(BasisDoc)
 	RecordSet.Filter.Document.Set(BasisDoc);
 	RecordSet.Read();
 	_AccountingRowAnalytics = RecordSet.Unload();
+	
+	SortAccountingAnalyticRows(_AccountingRowAnalytics, BasisDoc);
 	
 	RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 	RecordSet.Filter.Document.Set(BasisDoc);

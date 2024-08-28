@@ -142,7 +142,7 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonAttribute.Description</name>
+		<name>CommonAttribute.Comment</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

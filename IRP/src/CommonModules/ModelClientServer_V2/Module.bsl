@@ -3455,7 +3455,10 @@ Function ClearByTransactionTypeBankReceiptOptions() Export
 		|AdditionalAnalytic,
 		|CommissionPercent,
 		|Commission,
-		|CommissionFinancialMovementType");		
+		|CommissionFinancialMovementType,
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType");		
 EndFunction
 
 Function ClearByTransactionTypeBankReceiptExecute(Options) Export
@@ -3485,6 +3488,9 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Result.Insert("CommissionPercent"        , Options.CommissionPercent);
 	Result.Insert("Commission"               , Options.Commission);
 	Result.Insert("CommissionFinancialMovementType" , Options.CommissionFinancialMovementType);
+	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.Calculationtype);
 		
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3497,6 +3503,7 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
+	Incoming_SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order - clearing always
@@ -3595,6 +3602,11 @@ Function ClearByTransactionTypeBankReceiptExecute(Options) Export
 		|RevenueType,
 		|ProfitLossCenter,
 		|AdditionalAnalytic";
+	ElsIf Options.TransactionType = Incoming_SalaryReturn Then
+		StrByType = "
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();
@@ -3740,7 +3752,10 @@ Function ClearByTransactionTypeCashReceiptOptions() Export
 		|RetailCustomer,
 		|SendingAccount,
 		|SendingBranch,
-		|Project");		
+		|Project,
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType");		
 EndFunction
 
 Function ClearByTransactionTypeCashReceiptExecute(Options) Export
@@ -3759,6 +3774,9 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Result.Insert("SendingAccount"           , Options.SendingAccount);
 	Result.Insert("SendingBranch"            , Options.SendingBranch);
 	Result.Insert("Project"                  , Options.Project);
+	Result.Insert("Employee"                 , Options.Employee);
+	Result.Insert("PaymentPeriod"            , Options.PaymentPeriod);
+	Result.Insert("CalculationType"          , Options.CalculationType);
 	
 	Incoming_CashTransferOrder   = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder");
 	Incoming_CurrencyExchange    = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange");
@@ -3768,6 +3786,7 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	Incoming_RetailCustomerAdvance     = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	Incoming_EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	Incoming_OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
+	Incoming_SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 	
 	// list of properties which not needed clear
 	// PlanningTransactionBasis, BasisDocument, Order, MoneyTransfer - clearing always
@@ -3814,6 +3833,11 @@ Function ClearByTransactionTypeCashReceiptExecute(Options) Export
 	ElsIf Options.TransactionType = Incoming_EmployeeCashAdvance Then
 		StrByType = "
 		|Partner";
+	ElsIf Options.TransactionType = Incoming_SalaryReturn Then
+		StrByType = "
+		|Employee,
+		|PaymentPeriod,
+		|CalculationType";
 	EndIf;
 	
 	ArrayOfAttributes = New Array();

@@ -208,7 +208,7 @@ Scenario: _900007 create Opening entry
 	* Check creation
 		And In the command interface I select "Master data" "Opening entries"
 		Then the form attribute named "Company" became equal to "My Company"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		And "Inventory" table became equal
 			| '#'   | 'Item'        | 'Quantity'    |
 			| '1'   | 'Product 1'   | '100,000'     |
@@ -337,9 +337,9 @@ Scenario: _900010 create Cash receipt based on SI (Payment from customer)
 		Then the form attribute named "CurrencyExchange" became equal to ""
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '300,00'          |
+			| '1'   | 'Customer 1'   | '450,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "300,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "450,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 	* Change amount
 		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
@@ -639,7 +639,7 @@ Scenario: _900029 create Sales return
 		Then the form attribute named "Partner" became equal to "Customer 1"
 		Then the form attribute named "LegalName" became equal to "Customer 1"
 		Then the form attribute named "Agreement" became equal to "Customer standard term"
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
@@ -678,9 +678,9 @@ Scenario: _900031 return money to customer based on Sales return
 		Then the form attribute named "Currency" became equal to "USD"
 		And "PaymentList" table became equal
 			| '#'   | 'Partner'      | 'Total amount'    |
-			| '1'   | 'Customer 1'   | '100,00'          |
+			| '1'   | 'Customer 1'   | '150,00'          |
 		Then the form attribute named "Branch" became equal to ""
-		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "100,00"
+		And the editing text of form attribute named "PaymentListTotalTotalAmount" became equal to "150,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "USD"
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment03$$" variable

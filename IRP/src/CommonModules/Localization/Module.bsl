@@ -1563,7 +1563,7 @@ Function Strings(Lang) Export
 	
 	// Interface
 	Strings.Insert("I_1", NStr("en = 'Enter description'", Lang));
-	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
+	Strings.Insert("I_2", NStr("en = 'Click to enter comment'", Lang));
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
@@ -2035,11 +2035,17 @@ Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransact
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)'", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
 	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'", Lang));

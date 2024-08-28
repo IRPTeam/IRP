@@ -1147,10 +1147,10 @@ Scenario: check the filter by vendor partner terms in the purchase documents
 
 Scenario: check Description
 	And I click the button named "FormCreate"
-	And I click "Description" hyperlink
+	And I click "Comment" hyperlink
 	And I input "Test description" text in "Text" field
 	And I click "OK" button
-	Then the form attribute named "Description" became equal to "Test description"
+	Then the form attribute named "Comment" became equal to "Test description"
 	And I close all client application windows
 
 Scenario: check filter for Legal name contract (in BP, CP)

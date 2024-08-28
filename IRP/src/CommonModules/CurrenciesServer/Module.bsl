@@ -2114,3 +2114,24 @@ EndProcedure
 Procedure BeforeWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
 	CurrentObject.AdditionalProperties.Insert("UpdateCurrenciesTable", True);	
 EndProcedure
+
+Function NeedUpdateCurrenciesTable(Object) Export
+	If Object.AdditionalProperties.Property("UpdateCurrenciesTable") Then
+		If Object.AdditionalProperties.UpdateCurrenciesTable = True Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.Ref) Then
+		Return True;
+	EndIf;
+	
+	If Not Object.Ref.Posted Then
+		Return True;
+	EndIf;
+	
+	Return False;
+EndFunction
+	

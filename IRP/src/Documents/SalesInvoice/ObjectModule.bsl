@@ -3,17 +3,19 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies, Cancel);
 	
-	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
-	AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
-	AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
-	AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
-	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
-	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
-	
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ItemList.Total("TotalAmount");
+		AmountsInfo.NetAmount.Value   = ThisObject.ItemList.Total("NetAmount");
+		AmountsInfo.TaxAmount.Value   = ThisObject.ItemList.Total("TaxAmount");
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+	EndIf;
+		
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 	
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");

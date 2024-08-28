@@ -74,6 +74,7 @@ Scenario:_800300 preparation (stock inventory control)
 			| "Documents.GoodsReceipt.FindByNumber(1115).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesInvoice.FindByNumber(2122).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And Delay 5
 		When Set stock control for store 05
 	* Stock inventary settings
 		When Create information register UserSettings records (stock inventory control)
@@ -230,13 +231,15 @@ Scenario:_8003002 check stock inventory control for RetailSalesReceipt
 				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 0 . Required: 1 . Lacking: 1 .'|
 			And I close current window
 			Then "1C:Enterprise" window is opened
-			And I click "No" button		
+			And I click "No" button
+			And I close all client application windows		
 	* Cancel posting first RSR
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I go to line in "List" table
 			| "Number"                        |
 			| "$$NumberRetailSalesReceipt2$$" |
-		And I click the button named "FormUndoPosting"		
+		And I click the button named "FormUndoPosting"
+		And Delay 4		
 		Then user message window does not contain messages
 		And I close all client application windows
 						
@@ -632,9 +635,9 @@ Scenario:_8003006 check stock inventory control for IT
 			And I click the button named "FormUndoPosting"
 			Then "1C:Enterprise" window is opened
 			And I click the button named "OK"
-			Then in the TestClient message log contains lines by template:
-				|'* have negative stock balance'|
-				|'Store [Store 06] [Bag ODS] Lacking: 4 pcs.'|									
+			Then there are lines in TestClient message log
+				|'Line No. [1] [Bag ODS] R4050 Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|
+				|'Line No. [2] [Product 7 with SLN (new row) PZU] R4050 Stock inventory remaining: 4 . Required: 0 . Lacking: 4 .'|											
 		And I close all client application windows
 
 Scenario:_8003010 try unpost PI that make a plus on the store

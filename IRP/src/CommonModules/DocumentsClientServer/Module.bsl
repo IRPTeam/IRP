@@ -21,6 +21,9 @@ Function GetGroupItemsArray(Object, Form)
 		If Form.Items.Find(Attr.Value) <> Undefined And Not Form.Items[Attr.Value].Visible Then
 			Continue;
 		EndIf;
+		If Not CommonFunctionsServer.isOjectAttributeAvailableByCurrentFunctionalOptions(Object, Attr.Value) Then
+			Continue;
+		EndIf;
 		ItemStructure = New Structure();
 		ItemStructure.Insert("Title", Attr.Presentation);
 		ItemStructure.Insert("Value", ?(Not ValueIsFilled(Object[Attr.Value]), "", String(Object[Attr.Value])));

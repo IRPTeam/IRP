@@ -375,6 +375,33 @@ Function isMetadataAvailableByCurrentFunctionalOptions(ValidatedMetadata, hasTyp
     	
 EndFunction	
 
+
+// Is oject attribute available by current functional options.
+// 
+// Parameters:
+//  Object - DocumentObject - Object
+//  AttributeName - String - Attribute name
+// 
+// Returns:
+//  Boolean - Is oject attribute available by current functional options
+Function isOjectAttributeAvailableByCurrentFunctionalOptions(Object, AttributeName) Export
+	
+	MetaObject = Object.Metadata();
+	
+	AttributItem = Metadata.CommonAttributes.Find(AttributeName);
+	If AttributItem <> Undefined And isCommonAttributeUseForMetadata(AttributeName, MetaObject) Then
+		Return isMetadataAvailableByCurrentFunctionalOptions(AttributItem, True)
+	EndIf;
+	
+	AttributObjectItem = MetaObject.Attributes.Find(AttributeName);
+	If AttributObjectItem <> Undefined Then
+		Return isMetadataAvailableByCurrentFunctionalOptions(AttributObjectItem, True)
+	EndIf;
+	
+	Return True;
+    	
+EndFunction
+
 // Is common attribute use for metadata.
 // 
 // Parameters:

@@ -16,7 +16,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	
 	For Each Row In ThisObject.CashAdvanceDeductionList Do
-		Parameters = CurrenciesClientServer.GetParameters_V5(ThisObject, Row);
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, 
+	                                                         Row.Key, 
+	                                                         ThisObject.Currency, 
+	                                                         Row.Amount, 
+	                                                         Row.Agreement);
+		
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

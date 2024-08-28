@@ -764,6 +764,7 @@ Function EmployeeCashAdvance()
 		   |	EmployeeCashAdvance.Account,
 		   |	EmployeeCashAdvance.Currency,
 		   |	EmployeeCashAdvance.Employee AS Partner,
+		   |	EmployeeCashAdvance.Agreement AS Agreement,
 		   |	EmployeeCashAdvance.Amount AS Amount,
 		   |	EmployeeCashAdvance.Ref.Date AS Period,
 		   |	EmployeeCashAdvance.Key
@@ -1867,6 +1868,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	EmployeeCashAdvance.Branch,
 		   |	EmployeeCashAdvance.Currency,
 		   |	EmployeeCashAdvance.Partner,
+		   |	EmployeeCashAdvance.Agreement,
 		   |	EmployeeCashAdvance.Amount,
 		   |	EmployeeCashAdvance.Key
 		   |INTO R3027B_EmployeeCashAdvance

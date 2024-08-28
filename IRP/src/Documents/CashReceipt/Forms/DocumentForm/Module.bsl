@@ -121,12 +121,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = SalaryReturn Then
 		StrByType = "
 		|PaymentList.Employee,
 		|PaymentList.PaymentPeriod,
-		|PaymentList.CalculationType";		
+		|PaymentList.CalculationType";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();

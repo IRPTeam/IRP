@@ -112,6 +112,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = SalaryPayment Then
 		StrByType = "

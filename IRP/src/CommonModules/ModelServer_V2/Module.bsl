@@ -349,17 +349,19 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.ReturnToCustomerByPOS , "Customer");
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherPartner , "Other");
 	Map.Insert(Enums.OutgoingPaymentTransactionTypes.OtherExpense , "Other");
+	Map.Insert(Enums.OutgoingPaymentTransactionTypes.EmployeeCashAdvance , "Other");
 	
 	Map.Insert(Enums.IncomingPaymentTransactionType.ReturnFromVendor , "Vendor");
 	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomer , "Customer");
 	Map.Insert(Enums.IncomingPaymentTransactionType.PaymentFromCustomerByPOS , "Customer");
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherPartner , "Other");
 	Map.Insert(Enums.IncomingPaymentTransactionType.OtherIncome , "Other");
+	Map.Insert(Enums.IncomingPaymentTransactionType.EmployeeCashAdvance , "Other");
 	
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffset , "Other");
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxOffsetAndPayment , "Other");
 	Map.Insert(Enums.TaxesOperationTransactionType.TaxPayment , "Other");
-	
+		
 	Return Map.Get(TransactionType);
 EndFunction
 
@@ -377,6 +379,8 @@ Function GetAgreementTypeByTransactionType(TransactionType) Export
 		Return Enums.AgreementTypes.EmptyRef();
 	ElsIf PartnerType = "Other" Then
 		Return Enums.AgreementTypes.Other;
+	ElsIf PartnerType = "Employee" Then
+		Return Enums.AgreementTypes.Other;		
 	Else
 		Return Enums.AgreementTypes.EmptyRef();
 	EndIf;

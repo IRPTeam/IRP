@@ -30,6 +30,20 @@ EndProcedure
 
 #EndRegion
 
+#Region AGREEMENT
+
+Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	DocumentsClient.AgreementStartChoice_TransactionTypeFilter(Object, Form, Item, ChoiceData, StandardProcessing, TransactionType);
+EndProcedure
+
+Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.EmployeeCashAdvance");
+	DocumentsClient.AgreementTextChange_TransactionTypeFilter(Object, Form, Item, Text, StandardProcessing, TransactionType);
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST
 
 Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing) Export

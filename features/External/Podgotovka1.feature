@@ -1979,3 +1979,13 @@ Scenario: add different items in POS
 			And I select current line in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
+
+Scenario: Remove stock control for store 05
+			Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444"		
+			And I remove checkbox "Negative stock control"
+			And I click "Save and close" button
+
+Scenario: Set stock control for store 05
+			Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444"		
+			And I set checkbox "Negative stock control"
+			And I click "Save and close" button

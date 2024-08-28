@@ -153,6 +153,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	DocumentsServer.PurchasesBySerialLotNumbers(Parameters);
+	
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -518,17 +520,26 @@ EndFunction
 
 Function R1001T_Purchases()
 	Return "SELECT
-		   |	-ItemList.Quantity AS Quantity,
-		   |	-ItemList.Amount AS Amount,
-		   |	-ItemList.NetAmount AS NetAmount,
-		   |	-ItemList.OffersAmount AS OffersAmount,
-		   |	ItemList.PurchaseInvoice AS Invoice,
-		   |	*
-		   |INTO R1001T_Purchases
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsReturnToVendor";
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	PurchasesBySerialLotNumbers.SerialLotNumber,
+		|	-PurchasesBySerialLotNumbers.Quantity AS Quantity,
+		|	-PurchasesBySerialLotNumbers.Amount AS Amount,
+		|	-PurchasesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-PurchasesBySerialLotNumbers.OffersAmount AS OffersAmount,
+		|	ItemList.PurchaseInvoice AS Invoice,
+		|	*
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN PurchasesBySerialLotNumbers
+		|		ON ItemList.Key = PurchasesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsReturnToVendor";
 EndFunction
 
 Function R1002T_PurchaseReturns()

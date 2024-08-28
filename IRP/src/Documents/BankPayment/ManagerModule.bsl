@@ -233,7 +233,11 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherExpense) AS IsOtherExpense,
 		|	PaymentList.RetailCustomer AS RetailCustomer,
-		|	PaymentList.Ref.Branch AS Branch,
+		|	CASE
+		|		WHEN PaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+		|			THEN PaymentList.Ref.Branch
+		|		ELSE PaymentList.Branch
+		|	END AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Order AS Order,
 		|	CASE
@@ -337,7 +341,11 @@ Function CashInTransit()
 		|	BankPaymentPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankPaymentPaymentList.Ref.Branch AS Branch
+		|	CASE
+		|		WHEN BankPaymentPaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+		|			THEN BankPaymentPaymentList.Ref.Branch
+		|		ELSE BankPaymentPaymentList.Branch
+		|	END AS Branch
 		|INTO TablePaymentList
 		|FROM
 		|	Document.BankPayment.PaymentList AS BankPaymentPaymentList

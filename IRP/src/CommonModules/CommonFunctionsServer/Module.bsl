@@ -379,14 +379,19 @@ EndFunction
 // Is oject attribute available by current functional options.
 // 
 // Parameters:
-//  Object - DocumentObject - Object
+//  Object - DocumentObjectDocumentName, FormDataStructure - Object
 //  AttributeName - String - Attribute name
 // 
 // Returns:
 //  Boolean - Is oject attribute available by current functional options
 Function isOjectAttributeAvailableByCurrentFunctionalOptions(Object, AttributeName) Export
 	
-	MetaObject = Object.Metadata();
+	If TypeOf(Object) = Type("FormDataStructure") Then
+		//@skip-check dynamic-access-method-not-found, property-return-type
+		MetaObject = Object.Ref.Metadata(); // MetadataObject
+	Else
+		MetaObject = Object.Metadata();
+	EndIf;
 	
 	AttributItem = Metadata.CommonAttributes.Find(AttributeName);
 	If AttributItem <> Undefined And isCommonAttributeUseForMetadata(AttributeName, MetaObject) Then

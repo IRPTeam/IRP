@@ -210,6 +210,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
 	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentToVendor;
+	
+	Form.Items.PaymentListBranch.Visible = IsSalaryPayment;
 EndProcedure
 
 &AtClient

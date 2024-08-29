@@ -187,6 +187,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="20279581-f8a5-47d3-9c10-1224d01ccb93">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="1f291bd8-0fc6-4a10-98be-3bb772217fa2">
     <name>TransactionDocument</name>
     <synonym>
@@ -213,10 +229,10 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="04a290af-cfb5-45e1-8fd9-08be47d9cfe7">
-    <name>TransactionAgreement</name>
+    <name>DELETE_TransactionAgreement</name>
     <synonym>
       <key>en</key>
-      <value>Transaction agreement</value>
+      <value>DELETE transaction agreement</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>
@@ -229,29 +245,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="b53264a9-69c4-4a83-b2f7-7319e4ee9e45">
-    <name>AdvanceAgreement</name>
+    <name>DELETE_AdvanceAgreement</name>
     <synonym>
       <key>en</key>
-      <value>Advance agreement</value>
+      <value>DELETE advance agreement</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="7e2d9dbe-98ac-471d-b752-1c79271194f3">
-    <name>Key</name>
-    <synonym>
-      <key>en</key>
-      <value>Key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -295,13 +295,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="b06f054e-bcde-4dd4-b381-17d097f81fcf">
-    <name>FromAdvanceKey</name>
+    <name>DELETE_FromAdvanceKey</name>
     <synonym>
       <key>en</key>
-      <value>From advance key</value>
+      <value>DELETE from advance key</value>
     </synonym>
     <type>
-      <types>CatalogRef.AdvancesKeys</types>
+      <types>CatalogRef.DELETE_AdvancesKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -312,13 +312,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="7fb1c431-084c-4edc-997a-a07ce584ca1a">
-    <name>ToTransactionKey</name>
+    <name>DELETE_ToTransactionKey</name>
     <synonym>
       <key>en</key>
-      <value>To transaction key</value>
+      <value>DELETE to transaction key</value>
     </synonym>
     <type>
-      <types>CatalogRef.TransactionsKeys</types>
+      <types>CatalogRef.DELETE_TransactionsKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -328,13 +328,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="5e04fa1e-d021-467f-87a2-15ad74adb5cf">
-    <name>FromTransactionKey</name>
+    <name>DELETE_FromTransactionKey</name>
     <synonym>
       <key>en</key>
-      <value>From transaction key</value>
+      <value>DELETE from transaction key</value>
     </synonym>
     <type>
-      <types>CatalogRef.TransactionsKeys</types>
+      <types>CatalogRef.DELETE_TransactionsKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -344,13 +344,13 @@
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="ba5e9085-eed4-4658-b4e4-4244f1835fff">
-    <name>ToAdvanceKey</name>
+    <name>DELETE_ToAdvanceKey</name>
     <synonym>
       <key>en</key>
-      <value>To advance key</value>
+      <value>DELETE to advance key</value>
     </synonym>
     <type>
-      <types>CatalogRef.AdvancesKeys</types>
+      <types>CatalogRef.DELETE_AdvancesKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -383,6 +383,22 @@
     </synonym>
     <type>
       <types>CatalogRef.Projects</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="7e2d9dbe-98ac-471d-b752-1c79271194f3">
+    <name>Key</name>
+    <synonym>
+      <key>en</key>
+      <value>Key</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -1554,6 +1554,8 @@ Function SkipOnCheckPosting(Doc)
 	Array = New Array;
 	Array.Add(Metadata.Documents.CalculationMovementCosts);
 	Array.Add(Metadata.Documents.JournalEntry);
+	Array.Add(Metadata.Documents.CustomersAdvancesClosing);
+	Array.Add(Metadata.Documents.VendorsAdvancesClosing);
 	
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction

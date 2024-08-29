@@ -7,12 +7,12 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.AdvancesKeys</content>
+  <content>Catalog.DELETE_AdvancesKeys</content>
   <content>Catalog.Batches</content>
   <content>Catalog.BatchKeys</content>
   <content>Catalog.PriceKeys</content>
   <content>Catalog.RowIDs</content>
-  <content>Catalog.TransactionsKeys</content>
+  <content>Catalog.DELETE_TransactionsKeys</content>
   <content>Catalog.Files</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

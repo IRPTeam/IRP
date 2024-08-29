@@ -68,7 +68,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.AdditionalAnalytic,
 	|PaymentList.CommissionPercent,
 	|PaymentList.Commission,
-	|PaymentList.CommissionFinancialMovementType";
+	|PaymentList.CommissionFinancialMovementType,
+	|PaymentList.Employee,
+	|PaymentList.PaymentPeriod,
+	|PaymentList.CalculationType";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -86,7 +89,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
-	
+	SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
+		
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
@@ -177,12 +181,18 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = OtherIncome Then
 		StrByType = "
 		|PaymentList.RevenueType,
 		|PaymentList.ProfitLossCenter,
 		|PaymentList.AdditionalAnalytic";
+	ElsIf TransactionType = SalaryReturn Then
+		StrByType = "
+		|PaymentList.Employee,
+		|PaymentList.PaymentPeriod,
+		|PaymentList.CalculationType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();

@@ -1712,6 +1712,9 @@ Procedure MultiSetTransactionType_BankReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("CommissionPercent"        , BindPaymentListCommissionPercent(Parameters));
 	ResourceToBinding.Insert("Commission"               , BindPaymentListCommission(Parameters));
 	ResourceToBinding.Insert("CommissionFinancialMovementType" , BindPaymentListCommissionFinancialMovementType(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
 		
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
@@ -1753,6 +1756,9 @@ Procedure MultiSetTransactionType_CashReceipt(Parameters, Results) Export
 	ResourceToBinding.Insert("SendingAccount"           , BindPaymentListSendingAccount(Parameters));
 	ResourceToBinding.Insert("SendingBranch"            , BindPaymentListSendingBranch(Parameters));
 	ResourceToBinding.Insert("Project"                  , BindPaymentListProject(Parameters));
+	ResourceToBinding.Insert("Employee"                 , BindPaymentListEmployee(Parameters));
+	ResourceToBinding.Insert("PaymentPeriod"            , BindPaymentListPaymentPeriod(Parameters));
+	ResourceToBinding.Insert("CalculationType"          , BindPaymentListCalculationType(Parameters));
 	MultiSetterObject(Parameters, Results, ResourceToBinding);
 EndProcedure
 
@@ -1862,6 +1868,9 @@ Procedure StepClearByTransactionTypeBankReceipt(Parameters, Chain) Export
 		Options.CommissionPercent        = GetPaymentListCommissionPercent(Parameters, Row.Key);
 		Options.Commission               = GetPaymentListCommission(Parameters, Row.Key);
 		Options.CommissionFinancialMovementType = GetPaymentListCommissionFinancialMovementType(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
 				
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeBankReceipt";
@@ -1923,6 +1932,9 @@ Procedure StepClearByTransactionTypeCashReceipt(Parameters, Chain) Export
 		Options.SendingAccount           = GetPaymentListSendingAccount(Parameters, Row.Key);
 		Options.SendingBranch            = GetPaymentListSendingBranch(Parameters, Row.Key);
 		Options.Project                  = GetPaymentListProject(Parameters, Row.Key);
+		Options.Employee                 = GetPaymentListEmployee(Parameters, Row.Key);
+		Options.PaymentPeriod            = GetPaymentListPaymentPeriod(Parameters, Row.Key);
+		Options.CalculationType          = GetPaymentListCalculationType(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepClearByTransactionTypeCashReceipt";
 		Chain.ClearByTransactionTypeCashReceipt.Options.Add(Options);
@@ -3305,6 +3317,9 @@ Function BindPartner(Parameters)
 	Binding.Insert("TaxesOperation",
 		"StepChangeAgreementByPartner_AgreementTypeByTransactionType,
 		|StepChangeLegalNameByPartner");
+	
+	Binding.Insert("EmployeeCashAdvance",
+		"StepChangeAgreementByPartner_AgreementTypeIsOther");
 	
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindPartner");
 EndFunction

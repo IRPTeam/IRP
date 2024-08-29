@@ -59,6 +59,9 @@ Function GetOperationsDefinition()
 	// Transaction type - Other income
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
+	// Transaction type - salary return
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -100,7 +103,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));	
+	//  Transaction type - Salary return
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));

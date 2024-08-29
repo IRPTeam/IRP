@@ -103,6 +103,20 @@ EndProcedure
 
 #EndRegion
 
+#Region AGREEMENT
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocEmployeeCashAdvanceClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	DocEmployeeCashAdvanceClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region PAYMENT_LIST
 
 &AtClient
@@ -271,7 +285,7 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_V2(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V10(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

@@ -1170,7 +1170,7 @@ Procedure EditCurrenciesEmployeeCashAdvance(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

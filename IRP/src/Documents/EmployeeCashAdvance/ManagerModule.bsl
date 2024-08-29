@@ -118,6 +118,7 @@ Function PaymentList()
 		   |	PaymentList.Ref.Date AS Period,
 		   |	PaymentList.Ref.Company AS Company,
 		   |	PaymentList.Ref.Partner AS Partner,
+		   |	PaymentList.Ref.Agreement AS Agreement,
 		   |	PaymentList.Currency AS Currency,
 		   |	PaymentList.ExpenseType AS ExpenseType,
 		   |	PaymentList.NetAmount AS NetAmount,
@@ -159,6 +160,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
+		   |	PaymentList.Agreement,
 		   |	PaymentList.Currency,
 		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R3027B_EmployeeCashAdvance

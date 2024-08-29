@@ -560,11 +560,11 @@ Scenario: _0978028 revaluation of currency balance - USD to TRY falls, USD to EU
 		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Transaction currency' | 'Partner'         | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'EUR'      | 'USD'                  | 'Alexander Orlov' | 'Reporting currency Euro'      | '1'      | 'No'                   |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'USD'                  | 'Alexander Orlov' | 'Local currency'               | '7,12'   | 'No'                   |		
+			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'         | 'Agreement'                         | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'EUR'      | 'USD'                  | 'Reporting currency Euro'      | '1'      | 'No'                   |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '7,12'   | 'No'                   |		
 		And I close all client application windows
 
 # Transaction +10, Reporting +100 (Trans*Rate < Rep - Expense) только инвойс

@@ -93,7 +93,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	For Each Row In ThisObject.EmployeeCashAdvance Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;

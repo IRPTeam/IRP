@@ -153,6 +153,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 
+	DocumentsServer.PurchasesBySerialLotNumbers(Parameters);
+	
 	CurrenciesServer.ExcludePostingDataTable(Parameters, Metadata.InformationRegisters.T6020S_BatchKeysInfo);
 	
 	AccountingServer.CreateAccountingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -214,7 +216,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.PurchaseReturn.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
@@ -223,7 +225,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseReturn.ItemList", AddInfo);
 EndProcedure
@@ -257,6 +259,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -517,17 +520,26 @@ EndFunction
 
 Function R1001T_Purchases()
 	Return "SELECT
-		   |	-ItemList.Quantity AS Quantity,
-		   |	-ItemList.Amount AS Amount,
-		   |	-ItemList.NetAmount AS NetAmount,
-		   |	-ItemList.OffersAmount AS OffersAmount,
-		   |	ItemList.PurchaseInvoice AS Invoice,
-		   |	*
-		   |INTO R1001T_Purchases
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsReturnToVendor";
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	PurchasesBySerialLotNumbers.SerialLotNumber,
+		|	-PurchasesBySerialLotNumbers.Quantity AS Quantity,
+		|	-PurchasesBySerialLotNumbers.Amount AS Amount,
+		|	-PurchasesBySerialLotNumbers.NetAmount AS NetAmount,
+		|	-PurchasesBySerialLotNumbers.OffersAmount AS OffersAmount,
+		|	ItemList.PurchaseInvoice AS Invoice,
+		|	*
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN PurchasesBySerialLotNumbers
+		|		ON ItemList.Key = PurchasesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsReturnToVendor";
 EndFunction
 
 Function R1002T_PurchaseReturns()

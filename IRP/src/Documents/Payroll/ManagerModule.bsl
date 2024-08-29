@@ -178,6 +178,7 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref.PaymentPeriod AS PaymentPeriod,
 		   |	CashAdvanceDeductionList.Ref.CalculationType AS CalculationType,
 		   |	CashAdvanceDeductionList.Employee,
+		   |	CashAdvanceDeductionList.Agreement,
 		   |	CashAdvanceDeductionList.Amount
 		   |INTO CashAdvanceDeductionList
 		   |FROM
@@ -369,6 +370,7 @@ Function R3027B_EmployeeCashAdvance()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.Employee AS Partner,
+		|	CashAdvanceDeductionList.Agreement,
 		|	CashAdvanceDeductionList.Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM

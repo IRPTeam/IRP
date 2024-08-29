@@ -129,6 +129,10 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 			Then I select all lines of "List" table
 			And in the table "List" I click the button named "ListContextMenuPost"
 			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(1).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting DebitNote
 			Given I open hyperlink "e1cib/list/Document.DebitNote"
 			Then I select all lines of "List" table
@@ -471,9 +475,9 @@ Scenario: _0978024 revaluation of currency balance - USD to TRY falls, USD to EU
 			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
 			| 'Register  "R3010 Cash on hand"'                           | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
 			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, USD' | 'EUR'      | 'USD'                  | 'Reporting currency Euro'      | '6,26'   | 'No'                   |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'TRY'      | 'EUR'                  | 'Local currency'               | '53,09'  | 'No'                   |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Bank account, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '44,53'  | 'No'                   |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Bank account, USD' | 'EUR'      | 'USD'                  | 'Reporting currency Euro'      | '52,64'  | 'No'                   |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Bank account, EUR' | 'USD'      | 'EUR'                  | 'Reporting currency'           | '69,14'  | 'No'                   |		
 		And I close all client application windows
 
@@ -518,7 +522,6 @@ Scenario: _0978026 revaluation of currency balance - USD to TRY falls, USD to EU
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'USD'      | ''                    | 'Reporting currency'           | ''        | '8,99'   | ''                  |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '1'      | ''                  |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '6,26'   | ''                  |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Revenue'      | ''         | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20,65'  | ''                  |		
 		And I close all client application windows
@@ -545,7 +548,8 @@ Scenario: _0978027 revaluation of currency balance - USD to TRY falls, USD to EU
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '4,3'    | ''                  | ''            | ''                          |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'USD'      | ''                    | 'Reporting currency'           | ''        | '69,14'  | ''                  | ''            | ''                          |
 			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '20'     | ''                  | ''            | ''                          |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '34,45'  | ''                  | ''            | ''                          |		
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '25,46'  | ''                  | ''            | ''                          |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | ''         | ''            | ''            | 'EUR'      | ''                    | 'Reporting currency Euro'      | ''        | '52,64'  | ''                  | ''            | ''                          |		
 		And I close all client application windows
 
 Scenario: _0978028 revaluation of currency balance - USD to TRY falls, USD to EUR rise - (R3027 Employee cash advance) 

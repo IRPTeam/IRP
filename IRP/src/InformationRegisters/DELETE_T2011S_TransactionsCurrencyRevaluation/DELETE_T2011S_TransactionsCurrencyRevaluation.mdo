@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="70d309a5-ae3e-4d83-b1ac-21ba364205d9">
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e26c74fa-bfe8-4d47-b2bb-49475e6e96e6">
   <producedTypes>
-    <selectionType typeId="5e58bc6d-466a-4e5c-b6a1-67eeeec39dfe" valueTypeId="19b0f40e-8d68-471b-9d94-b3d00875f218"/>
-    <listType typeId="400551b4-b97c-40d2-b10a-880993b24282" valueTypeId="f13d3171-0d18-403a-99c1-89c8248ba457"/>
-    <managerType typeId="1b0aa635-46c6-4eb0-aa69-f1b9789f2b02" valueTypeId="27d9e456-4750-4fff-bf1f-d0e6190987be"/>
-    <recordSetType typeId="362bf1e2-3e77-4deb-925c-2dedbe03f69a" valueTypeId="b735c635-d043-402f-befa-5ca3d21377c5"/>
-    <recordKeyType typeId="f6aa6c7b-9c6c-45cf-b207-2acb19504f8b" valueTypeId="ecd80485-3cfe-44e0-870a-223e5bfd9b32"/>
-    <recordType typeId="1418bbb9-06b6-42f5-95ea-adcde03492a2" valueTypeId="49ec2af3-6f81-477c-b9a6-77e920b5cb61"/>
-    <recordManagerType typeId="58f4c5bf-13ab-4a86-9b2b-393b27183858" valueTypeId="ecd56940-eb14-4e57-8d5b-9db8bc692445"/>
+    <selectionType typeId="320c2f37-55ae-4806-9a7c-1ece56495cdd" valueTypeId="9e3b0b55-653f-4623-a8de-801a6cb5f089"/>
+    <listType typeId="f5424e26-e4bd-46b1-a4fa-9f04636503cb" valueTypeId="00e6b1bb-9bf2-4633-b27f-01e693ea5087"/>
+    <managerType typeId="1ebd624c-875c-4c17-b5ca-92418137acf8" valueTypeId="8a6a14b5-2997-4f82-ab60-6871dd5ec1d5"/>
+    <recordSetType typeId="fd72ed2a-d703-4d8a-91c1-7e391fcf1668" valueTypeId="61d0e0f1-2267-48e7-832d-4ea44e812eb1"/>
+    <recordKeyType typeId="aa5e14f6-a105-438d-b865-ea976d43aeff" valueTypeId="e7819647-d98e-46f1-a87a-4e8169b49c4c"/>
+    <recordType typeId="9d7f90c0-9e17-4220-b5aa-249146e5179e" valueTypeId="82f5d9b3-33aa-4726-948e-8f8b5a74533b"/>
+    <recordManagerType typeId="2cea56bc-3d53-4baf-ba7c-dee08078ef77" valueTypeId="ea6bee32-30d6-433c-b79b-d235ff35615d"/>
   </producedTypes>
-  <name>T2012S_AdvancesCurrencyRevaluation</name>
+  <name>DELETE_T2011S_TransactionsCurrencyRevaluation</name>
   <synonym>
     <key>en</key>
-    <value>T2012S Advances currency revaluation</value>
+    <value>T2011S Transactions currency revaluation</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="1b8d0270-7fb4-4d2a-bbfd-c39499c590c0">
+  <resources uuid="88ed0ebe-5b67-471e-bd13-9e661cca19cc">
     <name>Amount</name>
     <synonym>
       <key>en</key>
@@ -34,7 +34,7 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <dimensions uuid="f082a04d-61ae-4334-95ab-d9498ab580b9">
+  <dimensions uuid="2b5e9cd5-03ed-474f-bd3b-51d1b221e320">
     <name>Company</name>
     <synonym>
       <key>en</key>
@@ -50,7 +50,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="50719863-4524-417c-9f21-61a28d587604">
+  <dimensions uuid="8b82dd88-3e61-466f-9026-c7350581d298">
     <name>Branch</name>
     <synonym>
       <key>en</key>
@@ -66,7 +66,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="900a86bc-cd95-4441-b37a-1a4bdc80caeb">
+  <dimensions uuid="19dbe722-6ab0-4df6-8ff8-a09806de180f">
     <name>Document</name>
     <synonym>
       <key>en</key>
@@ -101,7 +101,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="013cad8e-6b7c-4f52-bdc2-86169fe7443e">
+  <dimensions uuid="19d4eaf6-37d1-4bce-8a57-458e96031edf">
     <name>CurrencyMovementType</name>
     <synonym>
       <key>en</key>
@@ -115,7 +115,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
-  <dimensions uuid="ef15aeea-dcda-4113-998e-9d4e58309040">
+  <dimensions uuid="09561e60-f4eb-45e3-a024-b60e2bf0f6e4">
     <name>Currency</name>
     <synonym>
       <key>en</key>
@@ -131,7 +131,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="89e148f7-2fbb-4722-8975-9c4e94dbcb8e">
+  <dimensions uuid="775fcf8a-e0ee-45d4-ab31-2516f3899df0">
     <name>TransactionCurrency</name>
     <synonym>
       <key>en</key>
@@ -145,7 +145,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
-  <dimensions uuid="2f4457ed-94b1-4752-b988-3e22b97d7d9b">
+  <dimensions uuid="02ed3933-0cee-4a7a-b83f-9d551c692e5f">
     <name>Partner</name>
     <synonym>
       <key>en</key>
@@ -161,7 +161,7 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="fc8723f5-5277-4762-a432-20d2c229663b">
+  <dimensions uuid="3dc6c4e2-0e6a-4c15-ab84-803e391279ea">
     <name>LegalName</name>
     <synonym>
       <key>en</key>
@@ -177,11 +177,52 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="a410cd46-4433-4cba-8990-1b8f4624a401">
-    <name>AdvanceOrder</name>
+  <dimensions uuid="5143bc7b-3f17-4810-9e55-6df416897354">
+    <name>TransactionDocument</name>
     <synonym>
       <key>en</key>
-      <value>Advance order</value>
+      <value>Transaction document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesReportFromTradeAgent</types>
+      <types>DocumentRef.CashTransferOrder</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesReportToConsignor</types>
+      <types>DocumentRef.SalesInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="937d78ae-59f4-4a9d-9194-e73f372c9938">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="701ca33e-c5ee-470b-ab4e-604a5cae4b7e">
+    <name>TransactionOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction order</value>
     </synonym>
     <type>
       <types>DocumentRef.PurchaseOrder</types>

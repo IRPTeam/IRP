@@ -239,7 +239,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.TransactionAgreement</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_TransactionAgreement</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -2114,7 +2114,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.TransactionsKeys</name>
+		<name>Catalog.DELETE_TransactionsKeys</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -2824,7 +2824,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys</name>
+		<name>Catalog.DELETE_AdvancesKeys</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5435,7 +5435,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.FromTransactionKey</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_FromTransactionKey</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -6692,7 +6692,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2012S_AdvancesCurrencyRevaluation</name>
+		<name>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -7769,7 +7769,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.ToTransactionKey</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_ToTransactionKey</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -11175,7 +11175,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.FromAdvanceKey</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_FromAdvanceKey</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -11702,7 +11702,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.ToAdvanceKey</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances.Dimension.DELETE_ToAdvanceKey</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -13899,17 +13899,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.R5012_OffsetOfAdvances</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.T9520S_TimeSheetInfo.Dimension.Position</name>
 		<right>
 			<name>Edit</name>
@@ -13951,7 +13940,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2011S_TransactionsCurrencyRevaluation</name>
+		<name>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

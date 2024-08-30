@@ -111,4 +111,27 @@ Function SendMessage(Message, ConnectionSetting = Undefined) Export
 	
 EndFunction
 
+// Send test message.
+// 
+// Parameters:
+//  ConnectionSetting - See IntegrationServer.ConnectionSettingTemplate
+Procedure SendTestMessage(ConnectionSetting) Export
+
+	MessageDescription = GetMessageDescription();
+	
+	MessageDescription.Subject = "Test";
+	MessageDescription.Texts.Add("<h1> Test </h1>");
+	//@skip-check property-return-type, invocation-parameter-type-intersect
+	MessageDescription.To.Add(ConnectionSetting.eMailForTest);
+	
+	Answer = SendMessage(MessageDescription, ConnectionSetting);
+	
+	If IsBlankString(Answer) Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
+	Else
+		CommonFunctionsClientServer.ShowUsersMessage(Answer);
+	EndIf;
+	
+EndProcedure
+
 #EndRegion

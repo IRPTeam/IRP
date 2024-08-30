@@ -2171,6 +2171,7 @@ Procedure SelectBasisDocumentClose(Result, AdditionalData) Export
 	EndIf;
 
 	FillOnSelectBasisDocument(Result);
+	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(ThisObject.Object);
 	ThisObject.Object.ControlCodeStrings.Clear();
 	ControlCodeStringsClient.UpdateState(ThisObject.Object);

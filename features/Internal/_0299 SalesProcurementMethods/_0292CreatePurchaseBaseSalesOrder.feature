@@ -2800,6 +2800,8 @@ Scenario: _029228 SO - PO - GR - SC - PI - SI (selling from one store while purc
 		And I click "Auto link" button
 		And I click "Ok" button
 		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button		
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029228$$'   | '$$SalesOrder029228$$'    |
@@ -2823,11 +2825,6 @@ Scenario: _029228 SO - PO - GR - SC - PI - SI (selling from one store while purc
 		And I select current line in "ItemList" table
 		And I input "300,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
 		And I click "Post" button
 		And I delete "$$NumberPurchaseOrder029228$$" variable
 		And I delete "$$PurchaseOrder029228$$" variable
@@ -3044,6 +3041,8 @@ Scenario: _029229 SO - PO - GR - PI - SC - SI (selling from one store while purc
 		And I click "Auto link" button
 		And I click "Ok" button
 		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029229$$'   | '$$SalesOrder029229$$'    |
@@ -3067,11 +3066,6 @@ Scenario: _029229 SO - PO - GR - PI - SC - SI (selling from one store while purc
 		And I select current line in "ItemList" table
 		And I input "300,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
 		And I click "Post" button
 		And I delete "$$NumberPurchaseOrder029229$$" variable
 		And I delete "$$PurchaseOrder029229$$" variable
@@ -3289,6 +3283,8 @@ Scenario: _029230 SO - PO - PI - SI (selling from one store while purchasing for
 		And I click "Auto link" button
 		And I click "Ok" button
 		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029230$$'   | '$$SalesOrder029230$$'    |
@@ -3312,11 +3308,6 @@ Scenario: _029230 SO - PO - PI - SI (selling from one store while purchasing for
 		And I select current line in "ItemList" table
 		And I input "300,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
 		And I click "Post" button
 		And I delete "$$NumberPurchaseOrder029230$$" variable
 		And I delete "$$PurchaseOrder029230$$" variable
@@ -3469,6 +3460,8 @@ Scenario: _029231 SO - PO - PI - SI - SC (selling from one store while purchasin
 		And I click "Auto link" button
 		And I click "Ok" button
 		And Delay 2
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029231$$'   | '$$SalesOrder029231$$'    |
@@ -3492,11 +3485,6 @@ Scenario: _029231 SO - PO - PI - SI - SC (selling from one store while purchasin
 		And I select current line in "ItemList" table
 		And I input "300,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
 		And I click "Post" button
 		And I delete "$$NumberPurchaseOrder029231$$" variable
 		And I delete "$$PurchaseOrder029231$$" variable
@@ -3684,11 +3672,8 @@ Scenario: _029232 SO - PO - PI - GR - SI (selling from one store while purchasin
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          | 'Store'    |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029232$$'   | '$$SalesOrder029232$$'    | 'Store 02' |
@@ -3896,11 +3881,8 @@ Scenario: _029233 SO - PO - PI - SC - SI (selling from one store while purchasin
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'  | 'Item'     | 'Sales order'          | 'Purchase basis'       | 'Store'    |
 			| '38/Yellow' | 'Trousers' | '$$SalesOrder029233$$' | '$$SalesOrder029233$$' | 'Store 02' |
@@ -4109,11 +4091,8 @@ Scenario: _029234 SO - PO - PI  - GR - SI - SC (selling from one store while pur
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'  | 'Item'     | 'Sales order'          | 'Purchase basis'       | 'Store'    |
 			| '38/Yellow' | 'Trousers' | '$$SalesOrder029234$$' | '$$SalesOrder029234$$' | 'Store 02' |
@@ -4359,11 +4338,8 @@ Scenario: _029235 SO - PO - PI  - GR - SC - SI (selling from one store while pur
 		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I click "Auto link" button
 		And I click "Ok" button
-		#temp
-		And I select from the drop-down list named "Store" by "Store 02" string
-		Then "Update item list info" window is opened
-		And I click "OK" button
-		#temp
+		And I remove checkbox "Do you want to replace filled stores with store Store 01?"
+		And I click "OK" button	
 		And "ItemList" table contains lines
 			| 'Item key'    | 'Item'       | 'Sales order'            | 'Purchase basis'          | 'Store'    |
 			| '38/Yellow'   | 'Trousers'   | '$$SalesOrder029235$$'   | '$$SalesOrder029235$$'    | 'Store 02' |

@@ -56,7 +56,7 @@
   <dataLockControlMode>Managed</dataLockControlMode>
   <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
   <modalityUseMode>DontUse</modalityUseMode>
-  <compatibilityMode>8.3.21</compatibilityMode>
+  <compatibilityMode>8.3.24</compatibilityMode>
   <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
     <name>English</name>
     <synonym>

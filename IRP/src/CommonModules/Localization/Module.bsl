@@ -1364,6 +1364,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_170", NStr("en = 'Ext. dimension 2 type Cr is empty row-key[%1]'", Lang));
 	Strings.Insert("Error_171", NStr("en = 'Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
 	Strings.Insert("Error_172", NStr("en = 'Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_173", NStr("en = 'Currency rate from [%1] to [%2] not set'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

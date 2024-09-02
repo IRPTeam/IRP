@@ -26,38 +26,42 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		TotalTable.Add().Key = ThisObject.TransitUUID;
 	EndIf;
 	
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
-	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, ThisObject.SendAmount);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	
-	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
-	AmountsInfo.TotalAmount.Value = ThisObject.SendAmount;
-	AmountsInfo.TotalAmount.Name  = "SendLocalTotalAmount";
-	AmountsInfo.LocalRate.Name    = "SendLocalRate";
-	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
-	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
-	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, ThisObject.ReceiveAmount);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	
-	AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
-	AmountsInfo.TotalAmount.Value = ThisObject.ReceiveAmount;
-	AmountsInfo.TotalAmount.Name  = "ReceiveLocalTotalAmount";
-	AmountsInfo.LocalRate.Name    = "ReceiveLocalRate";
-	TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
-	CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
-	
-	If IsMoneyExchange Then
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
 		
-		TransitCurrency = ThisObject.TransitAccount.Currency;
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
 		
-		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, TransitCurrency, ThisObject.SendAmount);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, ThisObject.SendAmount);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 		
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.SendAmount;
+		AmountsInfo.TotalAmount.Name  = "SendLocalTotalAmount";
+		AmountsInfo.LocalRate.Name    = "SendLocalRate";
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, ThisObject.ReceiveAmount);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ReceiveAmount;
+		AmountsInfo.TotalAmount.Name  = "ReceiveLocalTotalAmount";
+		AmountsInfo.LocalRate.Name    = "ReceiveLocalRate";
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+		
+		If IsMoneyExchange Then
+			
+			TransitCurrency = ThisObject.TransitAccount.Currency;
+			
+			Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, TransitCurrency, ThisObject.SendAmount);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+			
+		EndIf;
+	
 	EndIf;
 	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);

@@ -81,7 +81,9 @@ Scenario: _043200 preparation (DebitCreditNote)
 			And I execute 1C:Enterprise script at server
 				| "Documents.DebitCreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(2).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
 				| "Documents.DebitCreditNote.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
@@ -95,7 +97,9 @@ Scenario: _043200 preparation (DebitCreditNote)
 			And I execute 1C:Enterprise script at server
 				| "Documents.DebitCreditNote.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
-				| "Documents.DebitCreditNote.FindByNumber(9).GetObject().Write(DocumentWriteMode.Posting);"      |
+				| "DocObj = Documents.DebitCreditNote.FindByNumber(9).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 			And I execute 1C:Enterprise script at server
 				| "Documents.DebitCreditNote.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server

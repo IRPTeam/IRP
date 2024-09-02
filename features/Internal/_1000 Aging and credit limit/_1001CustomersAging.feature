@@ -225,6 +225,8 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And I move to "Aging" tab
 		And I select current line in "PaymentTerms" table
 		And I delete "$$DatePaymentTermsSalesInvoice0240161$$" variable
+		And I delete "$$NumberSalesInvoice0240161$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice0240161$$"
 		And I save the value of "PaymentTermsDate" field of "PaymentTerms" table as "$$DatePaymentTermsSalesInvoice0240161$$"
 		And I click the button named "FormPostAndClose"
 	* Check Aging movements
@@ -450,6 +452,16 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
+		And I select current line in "Transactions" table
+		And I click choice button of "Basis document" attribute in "Transactions" table
+		And I go to line in "" table
+			| ""              |
+			| "Sales invoice" |
+		And I select current line in "" table
+		And I go to line in "List" table
+			| "Number"                       |
+			| "$$NumberSalesInvoice0240161$$" |
+		And I select current line in "List" table
 		And I click the button named "FormPost"
 		And I delete "$$CreditNote1000020$$" variable
 		And I delete "$$CreditNoteDate1000020$$" variable
@@ -547,16 +559,15 @@ Scenario: _1000030 create Debit note and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 		And "List" table contains lines
-			| 'Period'                        | 'Recorder'                  | 'Currency'   | 'Company'        | 'Branch'   | 'Partner'   | 'Amount'   | 'Agreement'                          | 'Invoice'                   | 'Payment date'                              | 'Aging closing'                   |
-			| '$$DateSalesInvoice0240162$$'   | '$$SalesInvoice0240162$$'   | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice0240162$$'   | '19.11.2020'                                | ''                                |
-			| '$$DateSalesInvoice024016$$'    | '$$SalesInvoice024016$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | ''                                |
-			| '$$DateCashReceipt1000009$$'    | '$$CashReceipt1000009$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '550,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice0240162$$'   | '19.11.2020'                                | 'Customers advance closing 4*'    |
-			| '$$DateBankReceipt1000015$$'    | '$$BankReceipt1000015$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '250,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$DateBankReceipt1000015$$'    | '$$BankReceipt1000015$$'    | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '200,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$CreditNoteDate1000020$$'     | '$$CreditNote1000020$$'     | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '100,00'   | 'Basic Partner terms, without VAT'   | '$$SalesInvoice024016$$'    | '$$DatePaymentTermsSalesInvoice0240161$$'   | 'Customers advance closing 4*'    |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1000030$$'      | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '50,00'    | 'Basic Partner terms, without VAT'   | '$$DebitNote1000030$$'      | '*'                                         | ''                                |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1000030$$'      | 'TRY'        | 'Main Company'   | ''         | 'Kalipso'   | '50,00'    | 'Basic Partner terms, without VAT'   | '$$DebitNote1000030$$'      | '*'                                         | 'Customers advance closing 4*'    |
-		Then the number of "List" table lines is "равно" "8"
+			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                |
+			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                             |
+			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                             |
+			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '250,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advance closing 4*' |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$DebitNote1000030$$'    | '*'                                       | ''                             |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1000050 check the offset of Sales invoice advance (type of settlement by documents)
@@ -768,7 +779,6 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And "List" table contains lines:
 				| 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                |
 				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                             |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advance closing 4*' |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                             |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4*' |
 			And I close all client application windows	

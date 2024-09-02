@@ -167,6 +167,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="642c0830-2e94-4061-a3a1-11cab963a702">
+    <name>SerialLotNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot number</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.SerialLotNumbers</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="9215611c-64fe-40a6-948e-4759c066c5dd">
     <name>RowKey</name>
     <synonym>

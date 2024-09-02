@@ -1398,7 +1398,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I click the button named "FormCreate"
 	* Filling main details
 		And I select from the drop-down list named "Company" by "Main Company" string
-		And I select from the drop-down list named "Branch" by "Front office" string
+		And I select from the drop-down list named "Branch" by "Distribution department" string
 		And I select from the drop-down list named "Account" by "Bank account, TRY" string
 		And I select "Salary payment" exact value from "Transaction type" drop-down list
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -1417,6 +1417,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate "Employee" field in "PaymentList" table
 		And I select current line in "PaymentList" table
@@ -1433,6 +1434,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And I select current line in "List" table
 		And I activate "Cash flow center" field in "PaymentList" table
 		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
 		And I click "Post" button	
 		And I delete "$$NumberBankPayment$$" variable
 		And I save the value of "Number" field as "$$NumberBankPayment$$"
@@ -1441,6 +1443,7 @@ Scenario: _097750 Salary payment (Bank payment)
 		And "List" table contains lines
 			| 'Number'            |
 			| '$$NumberBankPayment$$' |	
+
 
 Scenario: _097751 Salary payment (Cash payment)
 	And I close all client application windows
@@ -1491,5 +1494,111 @@ Scenario: _097751 Salary payment (Cash payment)
 	* Check
 		And "List" table contains lines
 			| 'Number'            |
-			| '$$NumberCashPayment$$' |			
+			| '$$NumberCashPayment$$' |		
+
+Scenario: _097752 Salary return (Bank receipt)
+	And I close all client application windows
+	* Open BR
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Distribution department" string
+		And I select from the drop-down list named "Account" by "Bank account, TRY" string
+		And I select "Salary return" exact value from "Transaction type" drop-down list
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click "Post" button	
+		And I delete "$$NumberBankReceipt$$" variable
+		And I save the value of "Number" field as "$$NumberBankReceipt$$"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberBankReceipt$$' |	
+
+Scenario: _097753 Salary return (Cash receipt)
+	And I close all client application windows
+	* Open CR
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I click the button named "FormCreate"
+	* Filling main details
+		And I select from the drop-down list named "Company" by "Main Company" string
+		And I select from the drop-down list named "Branch" by "Front office" string
+		And I select from the drop-down list named "CashAccount" by "Cash desk №4" string
+		And I select "Salary return" exact value from "Transaction type" drop-down list
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Alexander Orlov" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		// And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Employee" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I select "Anna Petrova" from "Employee" drop-down list by string in "PaymentList" table
+		And I select "Fourth (only salary)" from "Payment period" drop-down list by string in "PaymentList" table
+		And I select "Salary" from "Calculation type" drop-down list by string in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I select current line in "List" table
+		And I activate "Cash flow center" field in "PaymentList" table
+		And I select "Front office" from "Cash flow center" drop-down list by string in "PaymentList" table
+		// And I select "Front office" from "Branch" drop-down list by string in "PaymentList" table
+		And I click "Post" button	
+		And I delete "$$NumberCashReceipt$$" variable
+		And I save the value of "Number" field as "$$NumberCashReceipt$$"
+		And I click "Post and close" button
+	* Check
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberCashReceipt$$' |		
 						

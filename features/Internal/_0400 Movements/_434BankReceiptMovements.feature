@@ -16,6 +16,7 @@ Background:
 
 Scenario: _043400 preparation (Bank receipt)
 	When set True value to the constant
+	When set True value to the constant Use salary
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -260,6 +261,11 @@ Scenario: _043400 preparation (Bank receipt)
 		When create BankReceipt (Customer advance)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankReceipt.FindByNumber(1526).GetObject().Write(DocumentWriteMode.Posting);"    |
+		When create BankReceipt (Salary return)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1529).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(1530).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I close all client application windows
 
 Scenario: _0434001 check preparation
@@ -1945,3 +1951,141 @@ Scenario: _0401056 check absence Bank receipt movements by the Register  "T2014 
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2014 Advances info"'    |
 		And I close all client application windows
+
+Scenario: _0434357 check Bank receipt movements by the Register  "R3010 Cash on hand" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434358 check Bank receipt movements by the Register  "R3011 Cash flow" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:20:24' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434359 check Bank receipt movements by the Register  "R9510 Salary payment" (Salary return,  Branch in lines)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 529' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report info" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 529 dated 02.09.2024 17:20:24' | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'             | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Accountants office'      | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:20:24' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |		
+	And I close all client application windows
+
+Scenario: _0434360 check Bank receipt movements by the Register  "R3010 Cash on hand" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''             | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434358 check Bank receipt movements by the Register  "R3011 Cash flow" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''             | ''             | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''             | ''                  | ''          | ''                        | ''                        | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch'       | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center'        | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 3'         | 'Accountants office'      | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'Local currency'               | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'TRY'      | 'en description is empty'      | '100'    | 'No'                   |
+			| ''                                             | '02.09.2024 17:23:53' | 'Main Company' | 'Front office' | 'Bank account, TRY' | 'Incoming'  | 'Movement type 2'         | 'Distribution department' | ''                | 'USD'      | 'Reporting currency'           | '17,12'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0434359 check Bank receipt movements by the Register  "R9510 Salary payment" (Salary return,  Branch in header)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 530' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report info" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 530 dated 02.09.2024 17:23:53' | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'             | ''                    | ''           | ''             | ''             | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
+			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |		
+	And I close all client application windows

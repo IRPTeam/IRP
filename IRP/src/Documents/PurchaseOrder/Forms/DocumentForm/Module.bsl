@@ -776,6 +776,68 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 		Return;
 	EndIf;
 	ThisObject.Modified = True;
+	
+	StoreIsChanged = False;
+	NewStoreValue = Undefined;
+	For Each FillingValue In Result.FillingValues Do
+		If StoreIsChanged Then
+			Break;
+		EndIf;
+		For Each Row In FillingValue.ItemList Do
+			If StoreIsChanged Then
+				Break;
+			EndIf;
+			ItemListRows = Object.ItemList.FindRows(New Structure("Key", Row.Key));
+			For Each ItemListRow In ItemListRows Do
+				If ValueIsFilled(Row.Store) And ItemListRow.Store <> Row.Store Then
+					StoreIsChanged = True;
+					NewStoreValue = Row.Store;
+					Break;
+				EndIf;
+			EndDo;	
+		EndDo;
+	EndDo;
+	
+	If StoreIsChanged Then
+		QuestionsParameters = New Array();
+		ChangedPoints = New Structure();
+		
+		ChangedPoints.Insert("IsChangedItemListStore");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"Stores", StrTemplate(R().QuestionToUser_009, String(NewStoreValue))));
+		
+		NotifyParameters = New Structure("Result, ChangedPoints", Result, ChangedPoints);
+		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+		OpenForm("CommonForm.UpdateItemListInfo",
+			New Structure("QuestionsParameters", QuestionsParameters), 
+			ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+			
+	Else
+		ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+		If ExtractedData <> Undefined Then
+			ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");
+		EndIf;
+		SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
+		SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
+	Result        = NotifyParameters.Result;
+	ChangedPoints = NotifyParameters.ChangedPoints;
+
+	If (Answer = Undefined) // Cancel pressed
+		Or (ChangedPoints.Property("IsChangedItemListStore") 
+				And Not Answer.Property("UpdateStores")) Then
+		
+		For Each FillingValue In Result.FillingValues Do
+			For Each Row In FillingValue.ItemList Do
+				Row.Delete("Store");
+			EndDo;
+		EndDo;
+	EndIf;
+	
 	ExtractedData = AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	If ExtractedData <> Undefined Then
 		ViewClient_V2.OnAddOrLinkUnlinkDocumentRows(ExtractedData, Object, ThisObject, "ItemList");

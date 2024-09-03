@@ -66,8 +66,17 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	Object.Extension = FileInfo.Extension;
 	Object.MD5 = FileInfo.MD5;
 	Object.PrintFormName = FileInfo.PrintFormName;
-	Object.Preview = FileInfo.Preview;
-	Object.isPreviewSet = (Object.Preview.Get() <> Undefined);
+	
+	If TypeOf(FileInfo.Preview) = Type("ValueStorage") Then
+		Object.Preview = FileInfo.Preview;
+		Object.isPreviewSet = (Object.Preview.Get() <> Undefined);
+	ElsIf TypeOf(FileInfo.Preview) = Type("BinaryData") Then
+		Object.Preview = New ValueStorage(FileInfo.Preview);
+		Object.isPreviewSet = True;
+	Else
+		Object.Preview = Undefined;
+		Object.isPreviewSet = False;
+	EndIf;
 EndProcedure
 
 #EndRegion

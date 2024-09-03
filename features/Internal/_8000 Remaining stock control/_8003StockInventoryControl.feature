@@ -331,6 +331,7 @@ Scenario:_8003003 check stock inventory control for SI
 						
 Scenario:_8003004 check stock inventory control for PR
 	And I close all client application windows
+	And Delay 15
 	* Create Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And I click "Create" button

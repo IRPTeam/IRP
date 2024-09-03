@@ -48,6 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 
+	If EventName = "CloseOrder" Then
+		ThisObject.ClosingOrder = DocOrderClosingServer.GetClosingBySalesOrder(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -94,9 +99,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
+	Else
+		Form.ReadOnly = False;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.Store.ReadOnly        = Form.ReadOnly;
+	Form.Items.DeliveryDate.ReadOnly = Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 	
 	_QuantityIsFixed = False;

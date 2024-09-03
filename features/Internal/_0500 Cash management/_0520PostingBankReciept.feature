@@ -473,7 +473,7 @@ Scenario: _052004 check the filter by bank accounts (the choice of Cash/Bank acc
 Scenario: _052005 check input Description in the document Bank Receipt
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
-	When check filling in Comment
+	When check filling in Description
 
 Scenario: _052006 check the choice of transaction type in the document Bank Receipt
 	And I close all client application windows
@@ -1103,3 +1103,52 @@ Scenario: _052023 create Bank receipt with transaction type Other partner
 			And "List" table contains lines
 				| 'Number'                        |
 				| '$NumberBankReceipt052023$'     |
+
+Scenario: _052026 checking display Branch column depending on the transactin type in the BR
+		And I close all client application windows
+		* Open BR
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I click the button named "FormCreate"	
+		* Payment from customer
+			And I select "Payment from customer" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |				
+		* Return from vendor
+			And I select "Return from vendor" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Retail customer advance
+			And I select "Retail customer advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Employee cash advance
+			And I select "Employee cash advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other partner
+			And I select "Other partner" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Currency exchange
+			And I select "Currency exchange" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Cash transfer order
+			And I select "Cash transfer order" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Payment from customer by POS
+			And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |
+		* Receipt by cheque
+			And I select "Receipt by cheque" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other income
+			And I select "Other income" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Salary return
+			And I select "Salary return" exact value from "Transaction type" drop-down list			
+			And I activate field named "PaymentListBranch" in "PaymentList" table	

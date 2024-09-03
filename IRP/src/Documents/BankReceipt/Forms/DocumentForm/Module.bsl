@@ -217,6 +217,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	IsPaymentFormCustomer = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
+	IsSalaryReturn		  = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 
 	ArrayTypes = New Array();
 	
@@ -257,6 +258,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LossCenter.Visible   = IsCurrencyExchange;
 	Form.Items.RevenueType.Visible  = IsCurrencyExchange;
 	Form.Items.ProfitCenter.Visible = IsCurrencyExchange;
+	
+	Form.Items.PaymentListBranch.Visible = IsSalaryReturn;
 EndProcedure
 
 &AtClient

@@ -258,7 +258,11 @@ Function PaymentList()
 		|	PaymentList.CalculationType AS CalculationType,
 		|	PaymentList.RetailCustomer AS RetailCustomer,
 		|	PaymentList.BankTerm AS BankTerm,
-		|	PaymentList.Ref.Branch AS Branch,
+		|	CASE
+		|		WHEN PaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+		|			THEN PaymentList.Ref.Branch
+		|		ELSE PaymentList.Branch
+		|	END AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Order AS Order,
 		|	CASE
@@ -367,7 +371,11 @@ Function CashInTransit()
 	|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
 	|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	BankReceiptPaymentList.Commission AS Commission,
-	|	BankReceiptPaymentList.Ref.Branch AS Branch
+	|	CASE
+	|		WHEN BankReceiptPaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+	|			THEN BankReceiptPaymentList.Ref.Branch
+	|		ELSE BankReceiptPaymentList.Branch
+	|	END AS Branch
 	|INTO TablePaymentList
 	|FROM
 	|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList

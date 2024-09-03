@@ -132,10 +132,10 @@ Scenario: check the filter by cash account (bank account selection is not availa
 Scenario: check filling in Description
 	And I click the button named "FormCreate"
 	* Filling in Description
-		And I click "Description" hyperlink
-		And I input "Test Description" text in "Text" field
+		And I click "Comment" hyperlink
+		And I input "Test Comment" text in "Text" field
 		And I click "OK" button
-		Then the form attribute named "Comment" became equal to "Test Description"
+		Then the form attribute named "Comment" became equal to "Test Comment"
 	And I close all client application windows
 
 Scenario: check the choice of type of operation in the payment documents

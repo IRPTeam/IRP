@@ -16,6 +16,7 @@ Background:
 
 Scenario: _043300 preparation (Bank payment)
 	When set True value to the constant
+	When set True value to the constant Use salary
 	* Load info
 		When Create information register Barcodes records
 		When Create catalog Companies objects (own Second company)
@@ -189,6 +190,8 @@ Scenario: _043300 preparation (Bank payment)
 		When Create document BankPayment objects (salary payment)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(329).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(1333).GetObject().Write(DocumentWriteMode.Posting);"    |
 		When create BankPayment (OtherPartnersTransactions)
 		And I execute 1C:Enterprise script at server
 			| "Documents.BankPayment.FindByNumber(1331).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -1196,6 +1199,76 @@ Scenario: _0433317 check Bank payment movements by the Register  "T2015 Transact
 			| 'Register  "T2015 Transactions info"'          | ''             | ''                        | ''      | ''                    | ''    | ''         | ''          | ''                  | ''                         | ''                      | ''                        | ''                                           | ''          | ''        | ''       | ''       | ''        |
 			| ''                                             | 'Company'      | 'Branch'                  | 'Order' | 'Date'                | 'Key' | 'Currency' | 'Partner'   | 'Legal name'        | 'Agreement'                | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          | 'Unique ID' | 'Project' | 'Amount' | 'Is due' | 'Is paid' |
 			| ''                                             | 'Main Company' | 'Distribution department' | ''      | '24.06.2022 18:06:56' | '*'   | 'TRY'      | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'No'                    | 'Yes'                     | 'Sales return 103 dated 12.03.2021 08:59:52' | '*'         | ''        | '-50'    | 'No'     | 'Yes'     |
+	And I close all client application windows
+
+Scenario: _0433319 check Bank payment movements by the Register  "R3010 Cash on hand" (Salary payment, Branch in lines)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 333' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report info" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 333 dated 02.09.2024 17:14:47' | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3010 Cash on hand"'               | ''                    | ''           | ''             | ''                        | ''                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '1 000'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '1 000'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '171,2'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | '1 500'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | '1 500'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'USD'      | 'TRY'                  | 'Reporting currency'           | '256,8'  | 'No'                   |		
+	And I close all client application windows
+
+
+Scenario: _0433320 check Bank payment movements by the Register  "R3011 Cash flow" (Salary payment, Branch in lines)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 333' |
+	* Check movements by the Register  "R3011 Cash flow" 
+		And I click "Registrations report info" button
+		And I select "R3011 Cash flow" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 333 dated 02.09.2024 17:14:47' | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| 'Register  "R3011 Cash flow"'                  | ''                    | ''             | ''                        | ''                  | ''          | ''                        | ''                 | ''                | ''         | ''                             | ''       | ''                     |
+			| ''                                             | 'Period'              | 'Company'      | 'Branch'                  | 'Account'           | 'Direction' | 'Financial movement type' | 'Cash flow center' | 'Planning period' | 'Currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'TRY'      | 'Local currency'               | '1 000'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'TRY'      | 'en description is empty'      | '1 000'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Accountants office'      | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'USD'      | 'Reporting currency'           | '171,2'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'TRY'      | 'Local currency'               | '1 500'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'TRY'      | 'en description is empty'      | '1 500'  | 'No'                   |
+			| ''                                             | '02.09.2024 17:14:47' | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'Outgoing'  | 'Movement type 1'         | ''                 | ''                | 'USD'      | 'Reporting currency'           | '256,8'  | 'No'                   |		
+	And I close all client application windows
+
+Scenario: _0433321 check Bank payment movements by the Register  "R9510 Salary payment" (Salary payment, Branch in lines)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'|
+			| '1 333' |
+	* Check movements by the Register  "R9510 Salary payment" 
+		And I click "Registrations report info" button
+		And I select "R9510 Salary payment" exact value from "Register" drop-down list
+		And I click "Generate report" button	
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 333 dated 02.09.2024 17:14:47' | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| 'Register  "R9510 Salary payment"'             | ''                    | ''           | ''             | ''                        | ''                | ''               | ''         | ''                     | ''                             | ''                 | ''       |
+			| ''                                             | 'Period'              | 'RecordType' | 'Company'      | 'Branch'                  | 'Employee'        | 'Payment period' | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Calculation type' | 'Amount' |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '1 000'  |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Alexander Orlov' | 'First'          | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '1 000'  |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Accountants office'      | 'Alexander Orlov' | 'First'          | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '171,2'  |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'Local currency'               | 'Salary'           | '1 500'  |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '1 500'  |
+			| ''                                             | '02.09.2024 17:14:47' | 'Expense'    | 'Main Company' | 'Distribution department' | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '256,8'  |		
 	And I close all client application windows
 
 Scenario: _0433318 check absence Bank payment movements by the Register  "T2014 Advances info" (Return to customer by POS, with basis)

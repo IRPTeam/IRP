@@ -294,7 +294,7 @@ Scenario: _080011 filter check by own companies in the document Incoming payment
 Scenario: _080012 check Description in Incoming payment order
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-	When check filling in Comment
+	When check filling in Description
 
 
 Scenario: _080013 filter check by own companies in the document Outgoing payment order
@@ -305,7 +305,7 @@ Scenario: _080013 filter check by own companies in the document Outgoing payment
 Scenario: _080014 check Description in Outgoing payment order
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-	When check filling in Comment
+	When check filling in Description
 
 # EndFilters
 

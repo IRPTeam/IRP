@@ -1310,25 +1310,16 @@ EndProcedure
 
 #Region PickUpItems
 
-Procedure OpenPickupItems(Object, Form, Command) Export
+Procedure OpenPickupItems(Object, Form) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);
-#If MobileClient Then
-
-#Else
-		If Command.AssociatedTable <> Undefined Then
-			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-			OpenFormParameters.Insert("Object", Object);
-		EndIf;
-
-		FormName = "CommonForm.PickUpItems";
-		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-#EndIf
-
+	OpenFormParameters.Insert("AssociatedTableName", "ItemList");
+	OpenFormParameters.Insert("Object", Object);
+	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
 
 Function PickupItemsParameters(Object, Form)

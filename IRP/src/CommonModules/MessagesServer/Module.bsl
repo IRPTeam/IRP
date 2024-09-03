@@ -138,7 +138,7 @@ Procedure SendEmailMessage(Message)
 	
 	For Each AttachmentItem In Message.Attachments Do
 		AttachmentDescription = EmailMessagesServer.GetMessageAttachmentDescription();
-		AttachmentDescription.BinaryData = PictureViewerServer.GetFileBinaryData(AttachmentItem.File);
+		AttachmentDescription.BinaryData = FilesServer.GetFileBinaryData(AttachmentItem.File);
 		AttachmentDescription.Description = AttachmentItem.PresentationInLetter;
 		MessageDescription.Attachments.Add(AttachmentDescription);
 	EndDo;

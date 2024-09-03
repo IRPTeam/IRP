@@ -775,6 +775,8 @@
   <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonModules>CommonModule.EmailMessagesServer</commonModules>
   <commonModules>CommonModule.MessagesServer</commonModules>
+  <commonModules>CommonModule.FilesClientServer</commonModules>
+  <commonModules>CommonModule.FilesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

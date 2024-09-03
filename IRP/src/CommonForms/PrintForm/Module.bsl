@@ -324,7 +324,11 @@ Function GetFileDocument(SpreadsheetDocument, NameTemplate, BasisDocument)
 	FileInfo.Insert("RequestBody", New BinaryData(TempName));
 	FileInfo.MD5 = CommonFunctionsServer.GetMD5(SpreadsheetDocument);
 	
-	FileRef = PictureViewerServer.GetFileRefByBinaryData(FileInfo, BasisDocument);
+	FileOwner = Undefined; // Undefined, DefinedType.typeFilesOwner
+	If Metadata.DefinedTypes.typeFilesOwner.Type.ContainsType(TypeOf(BasisDocument)) Then
+		FileOwner = BasisDocument;
+	EndIf;
+	FileRef = FilesServer.GetFileRefByBinaryData(FileInfo, FileOwner);
 	
 	DeleteFiles(TempName);
 	

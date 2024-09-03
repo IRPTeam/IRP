@@ -101,7 +101,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled    = Not Form.ReadOnly;
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.LinkUnlinkBasisDocuments  = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled  = Not Form.ReadOnly;
 	Form.Items.Store.ReadOnly        = Form.ReadOnly;
 	Form.Items.DeliveryDate.ReadOnly = Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);

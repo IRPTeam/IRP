@@ -60,10 +60,12 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		NewFilter.Value = True;
 	EndIf;
 	
-	NewFilter = QueryBuilder.Filter.Add("Ref.IsFolder");
-	NewFilter.Use = True;
-	NewFilter.ComparisonType = ComparisonType.Equal;
-	NewFilter.Value = False;
+	If CommonFunctionsClientServer.ObjectHasProperty(MetadataObject.StandardAttributes, "IsFolder") Then
+		NewFilter = QueryBuilder.Filter.Add("Ref.IsFolder");
+		NewFilter.Use = True;
+		NewFilter.ComparisonType = ComparisonType.Equal;
+		NewFilter.Value = False;
+	EndIf;
 	
 	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
 	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters, Source.EmptyRef().Metadata());

@@ -63,7 +63,7 @@ Scenario: _041158 preparation (Purchase order closing)
 		If "List" table does not contain lines Then
 				| "Number"     |
 				| "37"         |
-			When Create document PurchaseOrder objects (for check closing)
+			When Create document PO, GR, PI objects (for check closing)
 			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 		When Create document PurchaseInvoice objects (movements, purchase order closing)

@@ -52,6 +52,7 @@
     <key>en</key>
     <value>Price type</value>
   </objectPresentation>
+  <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -82,8 +83,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.PriceTypes.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.PriceTypes.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.PriceTypes.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PriceTypes.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.PriceTypes.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="2ce9af94-de63-49a1-b3c8-ec2cac9b4200">
     <name>Currency</name>
@@ -251,6 +254,24 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="cb9c5af5-1f75-4f3d-9eb0-f5a8a5548669">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6b60fc1d-8054-4337-92c6-1fadffcaab85">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

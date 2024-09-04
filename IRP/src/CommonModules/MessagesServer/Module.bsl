@@ -76,7 +76,7 @@ Procedure SendMessagesFromQueue() Export
 			RecordManager.Sent = True;
 			RecordManager.LastWarning = "";
 		Except
-			RecordManager.LastWarning = QuerySelection.Message;
+			RecordManager.LastWarning = ErrorDescription();
 			Log.Write("Send messages", ErrorDescription(), , , QuerySelection.Message);
 		EndTry;
 		
@@ -147,7 +147,8 @@ Procedure SendEmailMessage(Message)
 	If MailText = Undefined Then
 		MailText = Message.Subject;
 	EndIf;
-		
+
+	TempFiles = New Array; // Array of String
 	SavedAttachments = Message.LetterMultimedia.Get();
 	If TypeOf(SavedAttachments) = Type("Structure") Then
 		For Each SavedAttachmentKeyValue In SavedAttachments Do
@@ -155,16 +156,12 @@ Procedure SendEmailMessage(Message)
 			PictureData = SavedAttachmentKeyValue.Value; // Picture
 			TextID = """" + PictureID + """";
 			If StrFind(MailText, "src=" + TextID) Then
-				AttachmentDescription = EmailMessagesServer.GetMessageAttachmentDescription();
-				AttachmentDescription.CID = String(New UUID());
-				AttachmentDescription.Name = PictureID;
-				AttachmentDescription.Description = PictureID;
-				AttachmentDescription.MIMEType = "image/png";
-				
+				NewPictureName = GetTempFileName("png");
+				MailText = StrReplace(MailText, "src=" + TextID, "src=""file:///" + NewPictureName + """");
 				PictureData.Convert(PictureFormat.PNG);
-				AttachmentDescription.BinaryData = PictureData.GetBinaryData();
-				
-				MailText = StrReplace(MailText, "src=" + TextID, "src=""cid:" + AttachmentDescription.CID + """");
+				PictureBinaryData = PictureData.GetBinaryData();
+				PictureBinaryData.Write(NewPictureName);
+				TempFiles.Add(NewPictureName);
 			EndIf; 
 		EndDo;
 	EndIf;
@@ -175,6 +172,10 @@ Procedure SendEmailMessage(Message)
 	If Not IsBlankString(Answer) Then
 		Raise Answer;
 	EndIf;
+	
+	For Each TempFileName In TempFiles Do
+		DeleteFiles(TempFileName);
+	EndDo;
 			
 EndProcedure
 

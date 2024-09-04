@@ -312,28 +312,7 @@ EndProcedure
 
 &AtServerNoContext
 Function GetFileDocument(SpreadsheetDocument, NameTemplate, BasisDocument)
-	
-	TempName = GetTempFileName("pdf");
-	SpreadsheetDocument.Write(TempName, SpreadsheetDocumentFileType.PDF);
-	FileDescription = New File(TempName);
-	
-	FileInfo = PictureViewerClientServer.FileInfo();
-	FileInfo.FileID = String(New UUID());
-	FileInfo.Extension = StrReplace(FileDescription.Extension, ".", "");
-	FileInfo.FileName = NameTemplate + ".pdf";
-	FileInfo.Insert("RequestBody", New BinaryData(TempName));
-	FileInfo.MD5 = CommonFunctionsServer.GetMD5(SpreadsheetDocument);
-	
-	FileOwner = Undefined; // Undefined, DefinedType.typeFilesOwner
-	If Metadata.DefinedTypes.typeFilesOwner.Type.ContainsType(TypeOf(BasisDocument)) Then
-		FileOwner = BasisDocument;
-	EndIf;
-	FileRef = FilesServer.GetFileRefByBinaryData(FileInfo, FileOwner);
-	
-	DeleteFiles(TempName);
-	
-	Return FileRef;
-	
+	Return FilesServer.GetFileForPrintDocument(SpreadsheetDocument, NameTemplate, BasisDocument);
 EndFunction
 
 #EndRegion

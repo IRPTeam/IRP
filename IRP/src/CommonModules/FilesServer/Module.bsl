@@ -64,7 +64,7 @@ Function GetFileRefByMD5(MD5) Export
 	Query.Text =
 	"SELECT
 	|	Files.Ref,
-	|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
+	|	NOT Files.Volume = VALUE(Catalog.FileStorageVolumes.EmptyRef) AS isFilledVolume,
 	|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 	|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 	|		isLocalPictureURL,
@@ -72,7 +72,8 @@ Function GetFileRefByMD5(MD5) Export
 	|FROM
 	|	Catalog.Files AS Files
 	|WHERE
-	|	Files.MD5 = &MD5";
+	|	Files.MD5 = &MD5
+	|	AND NOT Files.DeletionMark";
 	Query.SetParameter("MD5", MD5);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -102,7 +103,7 @@ Function GetFileRefByFileID(FileID) Export
 	Query.Text =
 	"SELECT
 	|	Files.Ref,
-	|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
+	|	NOT Files.Volume = VALUE(Catalog.FileStorageVolumes.EmptyRef) AS isFilledVolume,
 	|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 	|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 	|		isLocalPictureURL,
@@ -165,12 +166,19 @@ Function GetFileRefByBinaryData(FileInfo, Owner = Undefined, isPicture = False) 
 	
 	If Not ValueIsFilled(FileRef) Then
 		
-		FileStorageVolume = Constants.DefaultFilesStorageVolume.Get();
+		FileStorageVolume = FileInfo.Volume;
+		If Not ValueIsFilled(FileStorageVolume) Then
+			FileStorageVolume = Constants.DefaultFilesStorageVolume.Get();
+			FileInfo.Volume = FileStorageVolume;
+		EndIf;
 		If Not ValueIsFilled(FileStorageVolume) Then
 			Raise R().Error_102;
 		EndIf;
 		
-		IntegrationSettings = FileStorageVolume.POSTIntegrationSettings;
+		IntegrationSettings = FileInfo.IntegrationSettings;
+		If Not ValueIsFilled(IntegrationSettings) Then
+			IntegrationSettings = FileStorageVolume.POSTIntegrationSettings;
+		EndIf;
 		ConnectionSettings = IntegrationClientServer.ConnectionSetting(IntegrationSettings.UniqueID);
 		
 		FileBinaryData = FileInfo.BinaryBody;
@@ -212,7 +220,7 @@ Function GetFileRefByBinaryData(FileInfo, Owner = Undefined, isPicture = False) 
 			FillPropertyValues(FileInfo, FilePreview, "Preview,Size,Height,Width");
 		EndIf;
 		
-		FileRef = CreateFile(FileStorageVolume, FileInfo);
+		FileRef = CreateFile(FileInfo);
 	
 	EndIf;
 	
@@ -247,22 +255,56 @@ Function GetFileBinaryData(FileRef) Export
 	
 EndFunction
 
+// Get file for print document.
+// 
+// Parameters:
+//  SpreadsheetDocument - SpreadsheetDocument - Spreadsheet document
+//  FileName - String - File name
+//  BasisDocument - AnyRef - Basis document
+// 
+// Returns:
+//  CatalogRef.Files - Get file for print document
+Function GetFileForPrintDocument(SpreadsheetDocument, FileName, BasisDocument) Export
+	
+	TempName = GetTempFileName("pdf");
+	SpreadsheetDocument.Write(TempName, SpreadsheetDocumentFileType.PDF);
+	FileDescription = New File(TempName);
+	
+	FileInfo = PictureViewerClientServer.FileInfo();
+	FileInfo.FileID = String(New UUID());
+	FileInfo.Extension = StrReplace(FileDescription.Extension, ".", "");
+	FileInfo.FileName = FileName + ".pdf";
+	FileInfo.BinaryBody = New BinaryData(TempName);
+	FileInfo.MD5 = CommonFunctionsServer.GetMD5(SpreadsheetDocument);
+	
+	FileInfo.Volume = Constants.DefaultFilesStorageVolume.Get();
+	
+	FileOwner = Undefined; // Undefined, DefinedType.typeFilesOwner
+	If Metadata.DefinedTypes.typeFilesOwner.Type.ContainsType(TypeOf(BasisDocument)) Then
+		FileOwner = BasisDocument;
+	EndIf;
+	FileRef = GetFileRefByBinaryData(FileInfo, FileOwner);
+	
+	DeleteFiles(TempName);
+	
+	Return FileRef;
+	
+EndFunction
+
 // Create file.
 // 
 // Parameters:
-//  Volume - CatalogRef.FileStorageVolumes - Volume
 //  FileInfo - See FilesClientServer.GetFileInfo 
 // 
 // Returns:
 //  CatalogRef.Files - Created file
-Function CreateFile(Volume, FileInfo) Export
+Function CreateFile(FileInfo) Export
 	
 	If ValueIsFilled(FileInfo.Ref) Then
 		Return FileInfo.Ref;
 	EndIf;
 	
 	FileObject = Catalogs.Files.CreateItem();
-	FileObject.Volume = Volume;
 	FilesClientServer.SetFileInfo(FileInfo, FileObject);
 
 	If ValueIsFilled(FileInfo.Preview) Then
@@ -320,11 +362,10 @@ EndProcedure
 // Create and link file to object.
 // 
 // Parameters:
-//  Volume - CatalogRef.FileStorageVolumes - Volume
 //  FileInfo - See FilesClientServer.GetFileInfo
 //  OwnerRef - DefinedType.typeFilesOwner
-Procedure CreateAndLinkFileToObject(Volume, FileInfo, OwnerRef) Export
-	NewFileRef = CreateFile(Volume, FileInfo);
+Procedure CreateAndLinkFileToObject(FileInfo, OwnerRef) Export
+	NewFileRef = CreateFile(FileInfo);
 	FileInfo.Ref = NewFileRef;
 	LinkFileToObject(NewFileRef, OwnerRef);
 EndProcedure

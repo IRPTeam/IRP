@@ -383,12 +383,14 @@ EndFunction
 
 // See FilesServer.CreateAndLinkFileToObject
 Procedure CreateAndLinkFileToObject(Volume, FileInfo, OwnerRef) Export
-	FilesServer.CreateAndLinkFileToObject(Volume, FileInfo, OwnerRef);
+	FileInfo.Volume = Volume;
+	FilesServer.CreateAndLinkFileToObject(FileInfo, OwnerRef);
 EndProcedure
 
 // See FilesServer.CreateFile
 Function CreateFile(Volume, FileInfo) Export
-	Return FilesServer.CreateFile(Volume, FileInfo);
+	FileInfo.Volume = Volume;
+	Return FilesServer.CreateFile(FileInfo);
 EndFunction
 
 // See FilesServer.LinkFileToObject

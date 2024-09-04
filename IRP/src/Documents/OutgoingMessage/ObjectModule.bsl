@@ -84,12 +84,14 @@ Procedure FillingByBasisDocument()
 	For Each MetaAttribute In ThisObject.BasisDocument.Metadata().Attributes Do
 		AttributeName = MetaAttribute.Name;
 		AttributeValue = ThisObject.BasisDocument[AttributeName]; // Arbitrary
-		If ValueIsFilled(AttributeValue) Then
+		If NOT ValueIsFilled(AttributeValue) Then
 			Continue;
 		EndIf;
 		
 		For Each EmailType In EmailTypes Do
-			If MetaAttribute.Type.ContainsType(EmailType) AND TypeOf(AttributeValue) = EmailType Then
+			If MetaAttribute.Type.ContainsType(EmailType) 
+						AND TypeOf(AttributeValue) = EmailType 
+						AND ValueIsFilled(AttributeValue.Email) Then
 				AddressRecord = ThisObject.LetterRecipients.Add();
 				AddressRecord.Addressee = AttributeValue.Email;
 				AddressRecord.Destination = AttributeValue;

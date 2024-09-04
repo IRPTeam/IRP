@@ -90,7 +90,7 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|SELECT DISTINCT
 		|	AttachedFiles.File AS Ref,
 		|	AttachedFiles.File.FileID AS FileID,
-		|	NOT AttachedFiles.File.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
+		|	NOT AttachedFiles.File.Volume = VALUE(Catalog.FileStorageVolumes.EmptyRef) AS isFilledVolume,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
@@ -116,7 +116,7 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		"SELECT
 		|	AttachedFiles.File AS Ref,
 		|	AttachedFiles.File.FileID AS FileID,
-		|	NOT AttachedFiles.File.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
+		|	NOT AttachedFiles.File.Volume = VALUE(Catalog.FileStorageVolumes.EmptyRef) AS isFilledVolume,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,

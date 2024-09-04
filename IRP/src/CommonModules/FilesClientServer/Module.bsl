@@ -19,7 +19,7 @@
 // * Size - Number - 
 // * Volume - CatalogRef.FileStorageVolumes - 
 // * IntegrationSettings - CatalogRef.IntegrationSettings - 
-// * Preview - ValueStorage - 
+// * Preview - Undefined, ValueStorage - 
 // * BinaryBody - Undefined, BinaryData - 
 Function GetFileInfo() Export
 	
@@ -43,7 +43,7 @@ Function GetFileInfo() Export
 	FileInfo.Insert("Volume", PredefinedValue("Catalog.FileStorageVolumes.EmptyRef"));
 	FileInfo.Insert("IntegrationSettings", PredefinedValue("Catalog.IntegrationSettings.EmptyRef"));	
 	
-	FileInfo.Insert("Preview", New ValueStorage(Undefined));
+	FileInfo.Insert("Preview", Undefined);
 	FileInfo.Insert("BinaryBody", Undefined);
 	
 	Return FileInfo;
@@ -67,6 +67,8 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	Object.MD5 = FileInfo.MD5;
 	Object.PrintFormName = FileInfo.PrintFormName;
 	
+	#IF NOT Client THEN
+	
 	If TypeOf(FileInfo.Preview) = Type("ValueStorage") Then
 		Object.Preview = FileInfo.Preview;
 		Object.isPreviewSet = (Object.Preview.Get() <> Undefined);
@@ -77,6 +79,9 @@ Procedure SetFileInfo(FileInfo, Object) Export
 		Object.Preview = Undefined;
 		Object.isPreviewSet = False;
 	EndIf;
+	
+	#ENDIF
+	
 EndProcedure
 
 #EndRegion

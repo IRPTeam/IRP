@@ -55,8 +55,6 @@ Scenario: _4001801 preparation (Outging messages)
 		When Create catalog Workstations objects
 		When Create chart of characteristic types AddAttributeAndProperty objects (Attach File Control)
 		When Create catalog BusinessUnits objects
-		When Create document PurchaseOrder objects (PO Attach File Control)
-		When Create document RetailReturnReceipt objects (RRR Attach File Control)
 		When Create document SalesInvoice objects
 		When Create catalog AccessGroups and AccessProfiles objects (audit lock)
 		When Create catalog IntegrationSettings objects (Email)
@@ -136,6 +134,7 @@ Scenario: _4001804 send email (SI)
 			And I click "Sales invoice" button		
 		* Send message
 			And I click "Send by message" button
+			And I select from "Mail account" drop-down list by "Email" string
 			And "Attachments" table became equal
 				| 'Presentation in letter' | 'File'                  |
 				| 'SalesInvoicePrint.pdf'  | 'SalesInvoicePrint.pdf' |
@@ -198,11 +197,11 @@ Scenario: _4001804 send email (SI)
 			| '15'        |
 		And I click "Related documents" button
 		And "DocumentsTree" table became equal
-			| 'Presentation'                               | 'Amount' |
-			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '800,00' |
-			| '$$OutgoingMessage4001804$$'                 | ''       |
-			| '$$OutgoingMessage40018041$$'                | ''       |
-			| '$$OutgoingMessage40018042$$'                | ''       |
+			| 'Presentation'                               | 'Amount'   |
+			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '1 199,99' |
+			| '$$OutgoingMessage4001804$$'                 | ''         |
+			| '$$OutgoingMessage40018041$$'                | ''         |
+			| '$$OutgoingMessage40018042$$'                | ''         |
 		And I close all client application windows
 	* Check attached files
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"

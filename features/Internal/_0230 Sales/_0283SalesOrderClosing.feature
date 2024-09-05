@@ -67,7 +67,7 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
+		Then the form attribute named "SalesOrder" became equal to "Sales order 132 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
 			| 'Item'      | 'Quantity'   | 'Unit'   | 'Store'      | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'   | 'Sales person'       |
 			| 'Dress'     | '1,000'      | 'pcs'    | 'Store 02'   | 'XS/Blue'    | 'Stock'                | 'Yes'      | '09.02.2021'      | ''                | 'Alexander Orlov'    |
@@ -146,7 +146,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
+		Then the form attribute named "SalesOrder" became equal to "Sales order 132 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
 			| 'Item'      | 'Quantity'   | 'Unit'   | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'    |
 			| 'Shirt'     | '1,000'      | 'pcs'    | '36/Red'     | 'No reserve'           | 'Yes'      | '09.02.2021'      | ''                 |

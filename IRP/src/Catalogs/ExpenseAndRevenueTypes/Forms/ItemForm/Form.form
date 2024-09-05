@@ -472,7 +472,6 @@
         <command>InformationRegister.T9014S_AccountsExpenseRevenue.StandardCommand.OpenByValue.ExpenseRevenue</command>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
-        <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>
     <commandBar/>

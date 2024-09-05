@@ -2730,7 +2730,6 @@
         <command>InformationRegister.T9010S_AccountsItemKey.StandardCommand.OpenByValue.Item</command>
         <group>FormNavigationPanelGoTo</group>
         <index>5</index>
-        <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>
     <commandBar/>

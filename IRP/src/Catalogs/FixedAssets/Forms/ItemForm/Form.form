@@ -682,7 +682,6 @@
         <command>InformationRegister.T9015S_AccountsFixedAsset.StandardCommand.OpenByValue.FixedAsset</command>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
-        <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>
     <commandBar/>

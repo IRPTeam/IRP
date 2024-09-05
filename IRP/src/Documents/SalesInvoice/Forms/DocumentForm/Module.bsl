@@ -48,7 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-
+	
+	If EventName = "CloseOrder" Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+	
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -99,6 +103,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	ArrayOfOrders = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.SalesOrder) Then
+			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.SalesOrder));
+		EndIf;
+	EndDo;
+	ClosedRowKeys = DocOrderClosingServer.GetIsClosedSalesOrderInItemList(ArrayOfOrders);
+	For Each Row In Form.Object.ItemList Do
+			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -777,6 +792,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	EndIf;
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

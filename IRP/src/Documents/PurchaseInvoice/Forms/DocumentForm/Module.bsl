@@ -105,6 +105,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListOtherPeriodExpenseType.Visible = FOServer.IsUseStores();
 	
 	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
+	
+	ArrayOfOrders = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.PurchaseOrder) Then
+			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.PurchaseOrder));
+		EndIf;
+	EndDo;
+	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
+	For Each Row In Form.Object.ItemList Do
+			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -766,6 +777,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	EndIf;
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

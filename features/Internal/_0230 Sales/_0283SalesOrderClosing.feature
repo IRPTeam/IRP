@@ -47,9 +47,9 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 	* Create test SO
-		When Create document SalesOrder objects (SI before SC for check closing)
+		When Create document SO, SI, SC objects (SI before SC for check closing)
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"     |
+				| "Documents.SalesOrder.FindByNumber(132).GetObject().Write(DocumentWriteMode.Posting);"     |
 		
 Scenario: _0230001 check preparation
 	When check preparation
@@ -60,14 +60,14 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '32'       | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021 19:53:45'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
+		Then the form attribute named "SalesOrder" became equal to "Sales order 132 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
 			| 'Item'      | 'Quantity'   | 'Unit'   | 'Store'      | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'   | 'Sales person'       |
 			| 'Dress'     | '1,000'      | 'pcs'    | 'Store 02'   | 'XS/Blue'    | 'Stock'                | 'Yes'      | '09.02.2021'      | ''                | 'Alexander Orlov'    |
@@ -128,11 +128,9 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 				| "$$NumberSalesOrderClosing0230001$$"     |
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrderClosing.FindByNumber($$NumberSalesOrderClosing0230001$$).GetObject().Write(DocumentWriteMode.UndoPosting);"     |
-	* Load SI and SC for SO 32
-		When Create document SalesInvoice objects (for check SO closing)
-		When Create document ShipmentConfirmation objects (check SO closing)
+	* Post SI and SC for SO 132
 		And I execute 1C:Enterprise script at server
-				| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);"     |
+				| "Documents.SalesInvoice.FindByNumber(132).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.ShipmentConfirmation.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"     |
 	* Create Sales order closing 
@@ -140,7 +138,7 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
 			| 'Number'   | 'Date'                   |
-			| '32'       | '09.02.2021 19:53:45'    |
+			| '132'      | '09.02.2021 19:53:45'    |
 		And I click the button named "FormDocumentSalesOrderClosingGenerate"	
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
@@ -148,44 +146,97 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "SalesOrder" became equal to "Sales order 32 dated 09.02.2021 19:53:45"
+		Then the form attribute named "SalesOrder" became equal to "Sales order 132 dated 09.02.2021 19:53:45"
 		And "ItemList" table contains lines
 			| 'Item'      | 'Quantity'   | 'Unit'   | 'Item key'   | 'Procurement method'   | 'Cancel'   | 'Delivery date'   | 'Cancel reason'    |
 			| 'Shirt'     | '1,000'      | 'pcs'    | '36/Red'     | 'No reserve'           | 'Yes'      | '09.02.2021'      | ''                 |
 			| 'Boots'     | '24,000'     | 'pcs'    | '37/18SD'    | 'Purchase'             | 'Yes'      | '09.02.2021'      | ''                 |
 			| 'Service'   | '1,000'      | 'pcs'    | 'Internet'   | ''                     | 'Yes'      | '09.02.2021'      | ''                 |
 		Then the number of "ItemList" table lines is "equal" "3"
-		And I go to line in "ItemList" table
-			| '#'    |
-			| '1'    |
-		And I select current line in "ItemList" table
-		And I click choice button of "Cancel reason" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#'    |
-			| '2'    |
-		And I select current line in "ItemList" table
-		And I click choice button of "Cancel reason" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| '#'    |
-			| '3'    |
-		And I select current line in "ItemList" table
-		And I click choice button of "Cancel reason" attribute in "ItemList" table
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
+		And for each line of "ItemList" table I do
+			And I click choice button of "Cancel reason" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 	* Check SO mark
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And "List" table contains lines
 			| 'Number'   | 'Closed'    |
-			| '32'       | 'Yes'       |
-	* Repost SO
+			| '132'      | 'Yes'       |
+	* Check SO lock
 		And I go to line in "List" table
-			| 'Number'    |
-			| '32'        |
+			| 'Number' | 'Closed' | 'Date'                |
+			| '132'    | 'Yes'    | '09.02.2021 19:53:45' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And in the table "ItemList" I click "Add" button'    |
+			| 'And I click "Post and close" button'                 |
+		And I close current window
+	* Check SI lock	
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '132'    | '10.02.2021 13:58:29' |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I select "Boots" exact value from "Item" drop-down list in "ItemList" table'    |
+		* Unlink and try change SI
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Item" field in "ItemList" table
+			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			Then user message window does not contain messages
+			And I finish line editing in "ItemList" table
+		* Close
+			And I close current window
+			Then "1C:Enterprise" window is opened
+			And I click "No" button	
+		* Repost SI	
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I go to line in "List" table
+				| 'Number' | 'Date'                |
+				| '132'    | '10.02.2021 13:58:29' |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			Then user message window does not contain messages				
+	* Check SC lock	
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '1'      | '15.02.2021 08:42:56' |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I select "Boots" exact value from "Item" drop-down list in "ItemList" table'    |		
+		* Unlink and try change SC
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Item" field in "ItemList" table
+			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			Then user message window does not contain messages
+			And I finish line editing in "ItemList" table
+		* Close SC
+			And I close current window
+			Then "1C:Enterprise" window is opened
+			And I click "No" button	
+		* Repost SC
+			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+			And I go to line in "List" table
+				| 'Number' | 'Date'                |
+				| '1'      | '15.02.2021 08:42:56' |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			Then user message window does not contain messages
+	* Repost SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' | 'Closed' | 'Date'                |
+			| '132'    | 'Yes'    | '09.02.2021 19:53:45' |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Then user message window does not contain messages
 		And I close all client application windows

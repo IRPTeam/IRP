@@ -46,6 +46,7 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	NotifyChanged(Object.SalesOrder);
+	Notify("CloseOrder");
 EndProcedure
 
 &AtClient

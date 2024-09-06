@@ -33,7 +33,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 	ElsIf IntegrationType = Enums.IntegrationType.Email Then
 		ConnectionSetting.Insert("SMTPServerAddress", "smtp.gmail.com");
 		ConnectionSetting.Insert("SMTPPort", 465);
-		ConnectionSetting.Insert("SMTPUser", "username");
+		ConnectionSetting.Insert("SMTPUser", "");
 		ConnectionSetting.Insert("SMTPPassword", "");
 		ConnectionSetting.Insert("SMTPUseSSL", True);
 		ConnectionSetting.Insert("POP3BeforeSMTP", False);

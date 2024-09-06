@@ -1,50 +1,4 @@
 
-// File info.
-// 
-// Returns:
-//  Structure - File info:
-// * Success - Boolean -
-// * FileID - String -
-// * FileName - String -
-// * Extension - String -
-// * Height - Number -
-// * Width - Number -
-// * Size - Number -
-// * URI - String -
-// * MD5 - String -
-// * Ref - CatalogRef.Files -
-// * Preview - Undefined, BinaryData -
-// * PrintFormName - String -
-Function FileInfo() Export
-	FileInfo = New Structure();
-	FileInfo.Insert("Success", False);
-	FileInfo.Insert("FileID", "");
-	FileInfo.Insert("FileName", "");
-	FileInfo.Insert("Extension", "");
-	FileInfo.Insert("Height", 0);
-	FileInfo.Insert("Width", 0);
-	FileInfo.Insert("Size", 0);
-	FileInfo.Insert("URI", "");
-	FileInfo.Insert("MD5", "");
-	FileInfo.Insert("Ref", PredefinedValue("Catalog.Files.EmptyRef"));
-	FileInfo.Insert("Preview", Undefined);
-	FileInfo.Insert("PrintFormName", "");
-	
-	Return FileInfo;
-EndFunction
-
-Procedure SetFileInfo(FileInfo, Object) Export
-	Object.Description = FileInfo.FileName;
-	Object.URI = FileInfo.URI;
-	Object.FileID = FileInfo.FileID;
-	Object.Height = FileInfo.Height;
-	Object.Width = FileInfo.Width;
-	Object.SizeBytes = FileInfo.Size;
-	Object.Extension = FileInfo.Extension;
-	Object.MD5 = FileInfo.MD5;
-	Object.PrintFormName = FileInfo.PrintFormName;
-EndProcedure
-
 Function AllPictureExtensions(AddInfo = Undefined) Export
 	Return StrSplit("jpeg,jpg,png,ico", ",");
 EndFunction
@@ -86,3 +40,13 @@ Function GetImageExtensions(Mode = 1) Export
 	EndIf;
 	Return Result;
 EndFunction
+
+// See FilesClientServer.GetFileInfo
+Function FileInfo() Export
+	Return FilesClientServer.GetFileInfo();
+EndFunction
+
+// See FilesClientServer.SetFileInfo
+Procedure SetFileInfo(FileInfo, Object) Export
+	FilesClientServer.SetFileInfo(FileInfo, Object);
+EndProcedure

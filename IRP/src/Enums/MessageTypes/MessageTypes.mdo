@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6f620ea6-3511-446e-a42e-0a48ce59005c">
+  <producedTypes>
+    <refType typeId="e0fb34bb-46b7-4b18-971a-7e0a90f5758a" valueTypeId="e95868fe-a45e-4218-b929-04fe6f1fbe18"/>
+    <listType typeId="b88539d5-fa73-482a-8602-52f6c9ec3b90" valueTypeId="8356ab4f-7902-4c6c-882a-1e766f5b52a4"/>
+    <managerType typeId="47cd5003-6aa4-4694-a11a-a233e43071b5" valueTypeId="d7ccc158-29f8-4fd4-b030-9ca9594b7a2d"/>
+  </producedTypes>
+  <name>MessageTypes</name>
+  <synonym>
+    <key>en</key>
+    <value>Message types</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="f27dd828-8dd4-485f-a800-98acdd709b20">
+    <name>Email</name>
+    <synonym>
+      <key>en</key>
+      <value>Email</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

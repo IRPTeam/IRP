@@ -12,4 +12,5 @@
   <subsystems>UniqueID</subsystems>
   <subsystems>CopyPaste</subsystems>
   <subsystems>InternalCommands</subsystems>
+  <subsystems>Messaging</subsystems>
 </mdclass:Subsystem>

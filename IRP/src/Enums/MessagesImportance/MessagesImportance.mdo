@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5e6dd429-6bd5-4f31-9112-5da24e55e0db">
+  <producedTypes>
+    <refType typeId="05b16b4c-04ad-4cef-9ce5-3b67102c06cb" valueTypeId="8c342877-64cf-48a3-a127-5da5b846b3ba"/>
+    <listType typeId="bdc50e24-00cb-4efa-a427-3d83655eda95" valueTypeId="8933fac5-afb1-4d5d-9136-9eff77b06f2c"/>
+    <managerType typeId="1b05d2b3-b809-4c6a-af19-92eef20c1876" valueTypeId="0ca2a0d9-05ac-4a50-80fd-760804e5adca"/>
+  </producedTypes>
+  <name>MessagesImportance</name>
+  <synonym>
+    <key>en</key>
+    <value>Messages importance</value>
+  </synonym>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Order</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Ref</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="88893af7-7deb-4a82-8334-8a2f6d941c41">
+    <name>High</name>
+    <synonym>
+      <key>en</key>
+      <value>High</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="87c73c26-757e-496f-9f6d-9cc92d917b95">
+    <name>Normal</name>
+    <synonym>
+      <key>en</key>
+      <value>Normal</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="a291bb2a-c894-4c56-a37f-70a786b5779b">
+    <name>Low</name>
+    <synonym>
+      <key>en</key>
+      <value>Low</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

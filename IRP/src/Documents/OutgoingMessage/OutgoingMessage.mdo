@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ae27ef4e-edf2-4ea7-8e04-0d01c764288e">
+  <producedTypes>
+    <objectType typeId="5e4416dd-47aa-4b7e-b5d1-c56ffab74acd" valueTypeId="572e878e-93b7-4ab0-99b0-70d12b701f3f"/>
+    <refType typeId="d3d103f1-25aa-440d-b918-45d5f2f16a5d" valueTypeId="9d7895e7-2b36-467b-a49c-de3a2b19be9e"/>
+    <selectionType typeId="ffdb9db9-9798-4466-95a7-197efbce7317" valueTypeId="796c6383-934b-4c98-a50e-c26fa8bbd6e1"/>
+    <listType typeId="b1c921fe-4ad8-4077-a249-ac353c1da681" valueTypeId="e712aae6-0cc1-4f3d-8e05-0e32dc34ae80"/>
+    <managerType typeId="c2288c4c-f38b-4b97-8143-a59c69c12d15" valueTypeId="09ddb5e9-bb71-4fe7-ad3a-d5c587001ec4"/>
+  </producedTypes>
+  <name>OutgoingMessage</name>
+  <synonym>
+    <key>en</key>
+    <value>Outgoing message</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.OutgoingMessage.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Posted</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Ref</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>DeletionMark</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Date</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Number</name>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </standardAttributes>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Outgoing message</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Outgoing messages</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.OutgoingMessage.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.OutgoingMessage.Form.ListForm</defaultListForm>
+  <posting>Deny</posting>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="8b53bf31-66da-4648-9060-37a013275d62">
+    <name>BasisDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="90c63087-b1ab-41d8-957e-b9928df3cc86">
+    <name>MessageType</name>
+    <synonym>
+      <key>en</key>
+      <value>Message type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.MessageTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.MessageTypes.EnumValue.Email</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6d219bd0-8567-4e9c-8591-f2e07d6fcf3d">
+    <name>MailAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Mail account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="90766874-4b86-45ef-a842-091ef1c3976e">
+    <name>Subject</name>
+    <synonym>
+      <key>en</key>
+      <value>Subject</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a5f47aad-a7a4-4182-ab8d-bfa13b09deec">
+    <name>LetterRecipientsString</name>
+    <synonym>
+      <key>en</key>
+      <value>Letter recipients string</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>1024</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b8518db6-24dc-4b74-a627-9e88d7596d4c">
+    <name>TextLetterHTML</name>
+    <synonym>
+      <key>en</key>
+      <value>Text letter HTML</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5b5a754c-7ec7-4a7d-8e4d-7593fb5996fc">
+    <name>LetterMultimedia</name>
+    <synonym>
+      <key>en</key>
+      <value>Letter multimedia</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9d0a1731-560c-4545-b5a5-c954561b9ab6">
+    <name>Importance</name>
+    <synonym>
+      <key>en</key>
+      <value>Importance</value>
+    </synonym>
+    <type>
+      <types>EnumRef.MessagesImportance</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.MessagesImportance.EnumValue.Normal</value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="a62d7d16-9a81-498e-bc04-07352e24e43c">
+    <name>LetterSize</name>
+    <synonym>
+      <key>en</key>
+      <value>Letter size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dad3acfe-49ac-48b1-9b07-0e28058441de">
+    <name>HasAttachments</name>
+    <synonym>
+      <key>en</key>
+      <value>Has attachments</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d71e744b-6206-4776-a9a0-b1377fc6a7cf">
+    <name>NotifyDelivery</name>
+    <synonym>
+      <key>en</key>
+      <value>Notify delivery</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4a4b3ae8-43cc-458d-95d7-c3787f8f0580">
+    <name>NotifyReading</name>
+    <synonym>
+      <key>en</key>
+      <value>Notify reading</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="6aba80e9-4dc6-434f-abcb-e6d4e9c88dce">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a71aa9ec-653d-42f1-872e-899296c2583f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="dc66b134-8e7b-4575-8926-088bffd8fda9">
+    <producedTypes>
+      <objectType typeId="9d7164d3-028e-44ac-9a6c-6435dd9d5206" valueTypeId="c4be8f3e-b998-4011-b014-080d0a46f604"/>
+      <rowType typeId="05250237-893a-4d5d-b5df-45895fc5cf98" valueTypeId="dae02330-2232-4f38-9294-ae33314f7d56"/>
+    </producedTypes>
+    <name>LetterRecipients</name>
+    <synonym>
+      <key>en</key>
+      <value>Letter recipients</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="f755fb64-6b72-44dc-9f4e-ce30d160b567">
+      <name>Addressee</name>
+      <synonym>
+        <key>en</key>
+        <value>Addressee</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e64b1c90-9f46-4308-9a2f-1210d1209c5b">
+      <name>Destination</name>
+      <synonym>
+        <key>en</key>
+        <value>Destination</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+        <types>CatalogRef.Companies</types>
+        <types>CatalogRef.RetailCustomers</types>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="0e4cdb73-d852-4471-92df-dadbabd3db2f">
+      <name>IsCopy</name>
+      <synonym>
+        <key>en</key>
+        <value>Is copy</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a6ae4d1d-d062-4254-b79b-afc8df0dcb18">
+      <name>IsBlind</name>
+      <synonym>
+        <key>en</key>
+        <value>Is blind</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="430131a4-a0df-4868-a848-9b5ab569ca4f">
+    <producedTypes>
+      <objectType typeId="0c6dcfd4-4693-4c45-bb8d-4c034c6daf6e" valueTypeId="5956bfb3-daa4-4852-aa41-5f92c63e56a0"/>
+      <rowType typeId="16ed5955-be37-43d3-b88a-6fe23aabb5ca" valueTypeId="2b4e31b0-6203-426a-948a-c7409adc3d8a"/>
+    </producedTypes>
+    <name>Attachments</name>
+    <synonym>
+      <key>en</key>
+      <value>Attachments</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="b73382a6-ce34-4b60-88fe-d4142d0726de">
+      <name>File</name>
+      <synonym>
+        <key>en</key>
+        <value>File</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Files</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9f4db908-7b50-4314-8101-b014b2b922a6">
+      <name>PresentationInLetter</name>
+      <synonym>
+        <key>en</key>
+        <value>Presentation in letter</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <commands uuid="3637be2f-4367-4b70-9f70-db7f87531eaa">
+    <name>Send</name>
+    <synonym>
+      <key>en</key>
+      <value>Send</value>
+    </synonym>
+    <group>FormCommandBarImportant</group>
+    <commandParameterType>
+      <types>DocumentRef.OutgoingMessage</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+    <picture xsi:type="core:PictureRef">
+      <picture>CommonPicture.SendMail</picture>
+    </picture>
+  </commands>
+</mdclass:Document>

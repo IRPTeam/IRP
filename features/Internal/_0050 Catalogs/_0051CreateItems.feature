@@ -240,7 +240,12 @@ Scenario: _005113 filling in the "Item types" catalog
 			And I input "Earrings" text in the field named "Description_en"
 			And I input "Earrings TR" text in the field named "Description_tr"
 			And I click "Ok" button
-			And I select from "Parent" drop-down list by "Accessories" string
+			And I click Choice button of the field named "Parent"
+			And I go to line in "List" table
+				| "Description" |
+				| "Accessories" |
+			And I click the button named "FormChoose"			
+//			And I select from "Parent" drop-down list by "Accessories" string
 			And I click "Save and close" button
 		* Create item type Earrings
 			And I go to line in "List" table

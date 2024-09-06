@@ -7027,8 +7027,8 @@ Scenario: 960191 check Stores catalog rights (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Catalog.Stores"
 	And "List" table became equal
 		| 'Description'                 |
-		| 'Store Read and Write Access' |
 		| 'Store Only read access'      |
+		| 'Store Read and Write Access' |
 	
 		
 Scenario: 960192 check PriceTypes catalog rights (LimitedAccess)	
@@ -7036,24 +7036,26 @@ Scenario: 960192 check PriceTypes catalog rights (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
 	And "List" table became equal
 		| 'Code' | 'Description'                     |
+		| '2'    | ''                                |
+		| '1'    | ''                                |
+		| ''     | ''                                |
 		| ''     | 'PriceType Read and Write Access' |
 		| ''     | 'PriceType Only read access'      |
-		| ''     | ''                                |
-		| '1'    | ''                                |
-		| '2'    | ''                                |
+			
 	
 Scenario: 960193 check CashAccounts catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 	And "List" table became equal
 		| 'Description'                       |
-		| 'CashAccount Read and Write Access' |
 		| 'CashAccount Only read access'      |
+		| 'CashAccount Read and Write Access' |
+		
 
 Scenario: 960194 check BusinessUnits catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
 	And "List" table became equal
 		| 'Description'                  |
-		| 'Branch Read and Write Access' |
 		| 'Branch Only read access'      |
+		| 'Branch Read and Write Access' |

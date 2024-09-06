@@ -60,7 +60,8 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		NewFilter.Value = True;
 	EndIf;
 	
-	If CommonFunctionsClientServer.ObjectHasProperty(MetadataObject.StandardAttributes, "IsFolder") Then
+	If CommonFunctionsClientServer.ObjectHasProperty(MetadataObject.StandardAttributes, "IsFolder") 
+		And Not Parameters.Filter.Property("IsFolder") Then
 		NewFilter = QueryBuilder.Filter.Add("Ref.IsFolder");
 		NewFilter.Use = True;
 		NewFilter.ComparisonType = ComparisonType.Equal;

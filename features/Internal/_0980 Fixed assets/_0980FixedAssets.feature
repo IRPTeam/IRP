@@ -89,6 +89,8 @@ Scenario: _980002 check preparation
 Scenario: _980003 create fixed asset
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.FixedAssets"
+	* Check hierarchical
+		When create Groups in the catalog
 	And I click "Create" button
 	* Filling description
 		And I input "Fixed asset" text in "ENG" field

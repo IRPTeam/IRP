@@ -77,13 +77,24 @@ Procedure DeleteUnusedFiles(ArrayOfFilesID, PostIntegrationSettings) Export
 	EndIf;
 EndProcedure
 
-Async Procedure Upload(Form, Object) Export
+Procedure Upload(Form, Object) Export
 	StrParam = New Structure("Ref, UUID", Object.Ref, Form.UUID);
-	OpenFileDialog = New FileDialog(FileDialogMode.Open);
-	OpenFileDialog.Multiselect = False;
+	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
+	OpenFileDialog.MultipleChoice = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	FileRef = Await PutFileToServerAsync(, , , , Form.UUID);
-	AddFile(FileRef, Undefined, StrParam);
+	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, StrParam), , , , OpenFileDialog, Form.UUID);
+EndProcedure
+
+// Upload END.
+// 
+// Parameters:
+//  FileRef - StoredFileDescription,Undefined - File ref
+//  AdditionalParameters - Structure - Additional parameters
+Procedure Upload_END(FileRef, AdditionalParameters) Export
+	If FileRef = Undefined Then
+		Return;
+	EndIf;
+	AddFile(FileRef, Undefined, AdditionalParameters);
 EndProcedure
 
 Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export

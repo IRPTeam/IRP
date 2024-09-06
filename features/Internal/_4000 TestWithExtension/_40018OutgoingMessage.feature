@@ -219,8 +219,8 @@ Scenario: _4001805 check message que to send
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.MessagesQueueToSend"
 	And "List" table became equal
-		| 'Message'                                      | 'Sent' | 'Date sent' | 'Number attempts' | 'Last warning' |
-		| 'Outgoing message 1 dated 05.09.2024 15:35:59' | 'Yes'  | '*'         | '1'               | ''             |
-		| 'Outgoing message 2 dated 05.09.2024 15:45:19' | 'Yes'  | '*'         | '1'               | ''             |
-		| 'Outgoing message 3 dated 05.09.2024 16:03:55' | 'Yes'  | '*'         | '1'               | ''             |
+		| 'Message'                     | 'Sent' | 'Date sent' | 'Number attempts' | 'Last warning' |
+		| '$$OutgoingMessage4001804$$'  | 'Yes'  | '*'         | '1'               | ''             |
+		| '$$OutgoingMessage40018041$$' | 'Yes'  | '*'         | '1'               | ''             |
+		| '$$OutgoingMessage40018042$$' | 'Yes'  | '*'         | '1'               | ''             |
 	And I close all client application windows

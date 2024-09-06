@@ -416,8 +416,8 @@ Scenario: Create catalog ObjectStatuses objects (cheque bond)
 Scenario: Create catalog Partners objects (Ferron BP)
 
 	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                               | 'DeletionMark'  | 'Parent'  | 'Customer'  | 'Vendor'  | 'Employee'  | 'Opponent'  | 'ManagerSegment'                                                           | 'ShipmentConfirmationsBeforeSalesInvoice'  | 'GoodsReceiptBeforePurchaseInvoice'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870'  | 'False'         | ''        | 'True'      | 'True'    | 'False'     | 'False'     | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099b'  | 'False'                                    | 'False'                              | 'Ferron BP'       | ''                  | ''                | 'Ferron BP TR'     |
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Email'                       |
+		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'False'        | ''       | 'True'     | 'True'   | 'False'    | 'False'    | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099b' | 'False'                                   | 'False'                             | 'Ferron BP'      | ''                 | ''               | 'Ferron BP TR'   | 'test.emailferron@il5778'     |
 
 Scenario: Create catalog Partners objects (Partner 01)
 
@@ -428,8 +428,8 @@ Scenario: Create catalog Partners objects (Partner 01)
 Scenario: Create catalog Partners objects (Kalipso)
 
 	And I check or create for catalog "Partners" objects with Data Exchange Load parameter set to true:
-		| 'Ref'                                                               | 'DeletionMark'  | 'Parent'  | 'Customer'  | 'Vendor'  | 'Employee'  | 'Opponent'  | 'ManagerSegment'                                                           | 'ShipmentConfirmationsBeforeSalesInvoice'  | 'GoodsReceiptBeforePurchaseInvoice'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   |
-		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871'  | 'False'         | ''        | 'True'      | 'False'   | 'False'     | 'False'     | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c'  | 'True'                                     | 'False'                              | 'Kalipso'         | ''                  | ''                | 'Kalipso TR'       |
+		| 'Ref'                                                               | 'DeletionMark'  | 'Parent'  | 'Customer'  | 'Vendor'  | 'Employee'  | 'Opponent'  | 'ManagerSegment'                                                           | 'ShipmentConfirmationsBeforeSalesInvoice'  | 'GoodsReceiptBeforePurchaseInvoice'  | 'Description_en'  | 'Description_hash'  | 'Description_ru'  | 'Description_tr'   | 'Email'                    |
+		| 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871'  | 'False'         | ''        | 'True'      | 'False'   | 'False'     | 'False'     | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c'  | 'True'                                     | 'False'                              | 'Kalipso'         | ''                  | ''                | 'Kalipso TR'       | 'irp.drive.demo@gmail.com' |
 
 Scenario: Create catalog Partners objects (Lomaniti)
 
@@ -3640,6 +3640,42 @@ Scenario: Create catalog IntegrationSettings objects (Attach File Control)
 		| 'Ref'                                                                         | 'Key'         | 'Value'                       | 'Hide'  |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=aa78120ed92fbced11eaf13dc8cb47e4' | 'AddressPath' | '#workingDir#/Picture/Source' | 'False' |
 		| 'e1cib/data/Catalog.IntegrationSettings?ref=b7bf8c16981f994a11ef0dffe1a30149' | 'AddressPath' | '#workingDir#/Picture/Source' | 'False' |
+
+
+Scenario: Create catalog IntegrationSettings objects (Email)
+
+	And I check or create catalog "IntegrationSettings" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'Description' | 'ExternalDataProc' | 'IntegrationType'            | 'ExternalDataProcSettings'              | 'Unit_SaveExchangeHistory' | 'Author'                                                        | 'UniqueID'                          | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'False'        | 15     | 'Email'       | ''                 | 'Enum.IntegrationType.Email' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | 'False'                    | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '_dafd4d7b776342eda4120874a90abae6' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '05.09.2024 11:59:01' | '05.09.2024 12:43:33' | 'False'     |
+
+	And I refill object tabular section "ConnectionSetting":
+		| 'Ref'                                                                         | 'Key'               | 'Value'                | 'Hide'  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPServerAddress' | 'smtp.gmail.com'       | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPPort'          | 465                    | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPUser'          | '#LoginEmailGmail#'    | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPPassword'      | '#PasswordEmailGmail#' | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPUseSSL'        | 'True'                 | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'POP3BeforeSMTP'    | 'False'                | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'TimeOut'           | 60                     | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'eMailForTest'      | 'email@test.com'       | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SenderName'        | 'IRP Team'             | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'FromAddress'       | 'noreply@irpteam.com'  | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'DisplayName'       | 'IRP NO REPLY'         | 'False' |
+
+	And I refill object tabular section "ConnectionSettingTest":
+		| 'Ref'                                                                         | 'Key'               | 'Value'                | 'Hide'  |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPServerAddress' | 'smtp.gmail.com'       | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPPort'          | 465                    | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPUser'          | '#LoginEmailGmail#'    | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPPassword'      | '#PasswordEmailGmail#' | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SMTPUseSSL'        | 'True'                 | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'POP3BeforeSMTP'    | 'False'                | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'TimeOut'           | 60                     | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'eMailForTest'      | 'email@test.com'       | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'SenderName'        | 'IRP Team'             | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'FromAddress'       | 'noreply@irpteam.com'  | 'False' |
+		| 'e1cib/data/Catalog.IntegrationSettings?ref=b84ff381a97d080311ef6b6517c66693' | 'DisplayName'       | 'IRP NO REPLY'         | 'False' |
+
 
 Scenario: Create catalog AttachedDocumentSettings objects
 

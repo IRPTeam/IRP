@@ -23,6 +23,8 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 	* Opening the form for filling in Accounts
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 		And Delay 2
+	* Check hierarchical
+		When create Groups in the catalog
 		And I click the button named "FormCreate"
 	* Check field visibility
 		And field "BankCountry" is not present on the form

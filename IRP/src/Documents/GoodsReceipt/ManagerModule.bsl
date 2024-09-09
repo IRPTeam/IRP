@@ -232,10 +232,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -248,6 +244,30 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
+	QueryArray.Add(R1031B_ReceiptInvoicing());
+	QueryArray.Add(R2013T_SalesOrdersProcurement());
+	QueryArray.Add(R2031B_ShipmentInvoicing());
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
+	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(T3010S_RowIDInfo());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -381,26 +401,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
-	QueryArray.Add(R1031B_ReceiptInvoicing());
-	QueryArray.Add(R2013T_SalesOrdersProcurement());
-	QueryArray.Add(R2031B_ShipmentInvoicing());
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4017B_InternalSupplyRequestProcurement());
-	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(R4033B_GoodsReceiptSchedule());
-	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(T3010S_RowIDInfo());
-	Return QueryArray;
-EndFunction
 
 Function R1011B_PurchaseOrdersReceipt()
 	Return "SELECT
@@ -565,7 +565,8 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
+	Return 
+				"SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	ItemList.Period AS Period,
 		   |	ItemList.Store AS Store,
@@ -588,7 +589,21 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	FreeStocks AS FreeStocks
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	(ItemList.SalesOrderExists AND ItemList.PurchaseOrderExists)
+		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -683,7 +698,8 @@ Function R4036B_IncomingStocksRequested()
 EndFunction
 
 Function R4012B_StockReservation()
-	Return "SELECT
+	Return 
+				"SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	IncomingStocksRequested.Period,
 		   |	IncomingStocksRequested.IncomingStore AS Store,
@@ -694,7 +710,22 @@ Function R4012B_StockReservation()
 		   |FROM
 		   |	IncomingStocksRequested
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.SalesOrder AS Order,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	(ItemList.SalesOrderExists AND ItemList.PurchaseOrderExists)
+		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)";
 EndFunction
 
 Function T3010S_RowIDInfo()

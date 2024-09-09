@@ -1127,7 +1127,23 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	FreeStocks AS FreeStocks
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 
 EndFunction
 
@@ -1143,7 +1159,24 @@ Function R4012B_StockReservation()
 		   |FROM
 		   |	IncomingStocksRequested
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.SalesOrder AS Order,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()

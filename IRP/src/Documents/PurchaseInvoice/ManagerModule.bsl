@@ -161,7 +161,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
+	DocumentsServer.PurchasesBySerialLotNumbers(Parameters);
 
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
@@ -479,7 +481,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.PurchaseInvoice.ItemList");
@@ -504,7 +506,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseInvoice.ItemList", AddInfo);
 EndProcedure
 
@@ -540,6 +542,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -664,6 +667,7 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Price AS Price,
 	       |	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
 	       |	PurchaseInvoiceItemList.TotalAmount AS Amount,
+	       |	PurchaseInvoiceItemList.OffersAmount AS OffersAmount,
 	       |	PurchaseInvoiceItemList.Ref.Partner AS Partner,
 	       |	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
 	       |	CASE
@@ -905,12 +909,25 @@ EndFunction
 
 Function R1001T_Purchases()
 	Return "SELECT
-		   |	*
-		   |INTO R1001T_Purchases
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase";
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	PurchasesBySerialLotNumbers.SerialLotNumber,
+		|	PurchasesBySerialLotNumbers.Quantity,
+		|	PurchasesBySerialLotNumbers.Amount,
+		|	PurchasesBySerialLotNumbers.NetAmount,
+		|	PurchasesBySerialLotNumbers.OffersAmount
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN PurchasesBySerialLotNumbers
+		|		ON ItemList.Key = PurchasesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsPurchase";
 EndFunction
 
 Function R1005T_PurchaseSpecialOffers()

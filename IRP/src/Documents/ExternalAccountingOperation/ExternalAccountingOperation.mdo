@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>External accounting operation</value>
+  <value>Внешние бух. операции</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -70,7 +70,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Recorder ref</value>
+   <value>Ссылка регистратора</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -94,7 +94,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Recorder presentation</value>
+   <value>Представление регистратора</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -173,7 +173,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Recorder name</value>
+   <value>Наименование регистратора</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -199,7 +199,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Is opening entry</value>
+   <value>Ввод начальных остатков</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -353,7 +353,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Activity</value>
+    <value>Активность</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -375,7 +375,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Company ref</value>
+    <value>Организация ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -444,7 +444,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency ref</value>
+    <value>Валюта ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -466,7 +466,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency presentation</value>
+    <value>Валта представление</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -513,7 +513,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Account Dr ref</value>
+    <value>Счет Дт Ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -535,7 +535,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Account Dr presentation</value>
+    <value>Счет Дт представление</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -582,7 +582,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency Dr ref</value>
+    <value>Валюта Дт ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -604,7 +604,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency Dr presentation</value>
+    <value>Валюта Дт представление</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -651,7 +651,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Amount currency Dr</value>
+    <value>Валютная сумма Дт</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -695,7 +695,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Account Cr ref</value>
+    <value>Счет Кт Ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -717,7 +717,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Account Cr presentation</value>
+    <value>Счет Кт представление</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -764,7 +764,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency Cr ref</value>
+    <value>Валюта Кт ссылка</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -786,7 +786,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Currency Cr presentation</value>
+    <value>Валюта Кт представление</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -833,7 +833,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Amount currency Cr</value>
+    <value>Валютная сумма Кт</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -855,7 +855,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Quantity Cr</value>
+    <value>Количество Кт</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -899,7 +899,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Operation title</value>
+    <value>Наименование операции</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -924,7 +924,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Chart name Dr</value>
+    <value>Наименование плана счетов Дт</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -949,7 +949,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Chart name Cr</value>
+    <value>Наименование плана счетов Кт</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -974,7 +974,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref dr1</value>
+    <value>Ссылка субконто Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -995,7 +995,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class dr1</value>
+    <value>Класс основания Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1020,7 +1020,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class dr1</value>
+    <value>Класс Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1045,7 +1045,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value dr1</value>
+    <value>Значение субконто Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1070,7 +1070,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type dr1</value>
+    <value>Вид субконто Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1092,7 +1092,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class dr1</value>
+    <value>Класс внутреннего основания Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1117,7 +1117,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class dr1</value>
+    <value>Внутренний класс Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1142,7 +1142,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Dr1</value>
+    <value>Значение субконто Дт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1164,7 +1164,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref dr2</value>
+    <value>Ссылка субконто Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1185,7 +1185,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class dr2</value>
+    <value>Класс основания Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1210,7 +1210,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class dr2</value>
+    <value>Класс Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1235,7 +1235,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value dr2</value>
+    <value>Значение субконто Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1260,7 +1260,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type dr2</value>
+    <value>Вид субконто Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1282,7 +1282,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class dr2</value>
+    <value>Класс внутреннего основания Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1307,7 +1307,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class dr2</value>
+    <value>Внутренний класс Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1332,7 +1332,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Dr2</value>
+    <value>Значение субконто Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1354,7 +1354,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref dr3</value>
+    <value>Ссылка субконто Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1375,7 +1375,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class dr3</value>
+    <value>Класс основания Дт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1400,7 +1400,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class dr3</value>
+    <value>Класс Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1425,7 +1425,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value dr3</value>
+    <value>Значение субконто Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1450,7 +1450,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type dr3</value>
+    <value>Вид субконто Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1472,7 +1472,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class dr3</value>
+    <value>Класс внутреннего основания Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1497,7 +1497,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class dr3</value>
+    <value>Внутренний класс Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1522,7 +1522,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Dr3</value>
+    <value>Значение субконто Дт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1544,7 +1544,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref cr1</value>
+    <value>Ссылка субконто Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1565,7 +1565,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class cr1</value>
+    <value>Класс основания Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1590,7 +1590,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class cr1</value>
+    <value>Класс Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1615,7 +1615,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value cr1</value>
+    <value>Значение субконто Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1640,7 +1640,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type cr1</value>
+    <value>Вид субконто Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1662,7 +1662,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class cr1</value>
+    <value>Класс внутреннего основания Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1687,7 +1687,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class cr1</value>
+    <value>Внутренний класс Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1712,7 +1712,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Cr1</value>
+    <value>Значение субконто Кт 1</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1734,7 +1734,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref cr2</value>
+    <value>Ссылка субконто Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1755,7 +1755,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class cr2</value>
+    <value>Класс основания Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1780,7 +1780,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class cr2</value>
+    <value>Класс Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1805,7 +1805,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value cr2</value>
+    <value>Значение субконто Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1830,7 +1830,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type cr2</value>
+    <value>Вид субконто Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1852,7 +1852,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class cr2</value>
+    <value>Класс внутреннего основания Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1877,7 +1877,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class cr2</value>
+    <value>Внутренний класс Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1902,7 +1902,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Cr2</value>
+    <value>Значение субконто Кт 2</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1924,7 +1924,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension ref cr3</value>
+    <value>Ссылка субконто Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1945,7 +1945,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Base class cr3</value>
+    <value>Класс основания Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1970,7 +1970,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Class cr3</value>
+    <value>Класс Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -1995,7 +1995,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension value cr3</value>
+    <value>Значение субконто Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -2020,7 +2020,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ext dimension type cr3</value>
+    <value>Вид субконто Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -2042,7 +2042,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal base class cr3</value>
+    <value>Класс внутреннего основания Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -2067,7 +2067,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Internal class cr3</value>
+    <value>Внутренний класс Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>
@@ -2092,7 +2092,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>ext. dimension value Cr3</value>
+    <value>Значение субконто Кт 3</value>
    </synonym>
    <synonym>
     <key>tr</key>

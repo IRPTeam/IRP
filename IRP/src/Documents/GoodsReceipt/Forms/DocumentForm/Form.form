@@ -1788,6 +1788,48 @@
      </extInfo>
     </items>
     <items xsi:type="form:FormField">
+     <name>ItemListIsClosedOrder</name>
+     <id>429</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.ItemList.IsClosedOrder</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>ItemListIsClosedOrderExtendedTooltip</name>
+      <id>431</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>ItemListIsClosedOrderContextMenu</name>
+      <id>430</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>CheckBoxField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
+    </items>
+    <items xsi:type="form:FormField">
      <name>ItemListPurchaseOrder</name>
      <id>291</id>
      <visible>true</visible>
@@ -4117,6 +4159,31 @@
      <common>true</common>
     </edit>
     <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
+   </columns>
+   <columns>
+    <name>IsClosedOrder</name>
+    <title>
+     <key>en</key>
+     <value>Is closed order</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Заказ закрыт</value>
+    </title>
+    <title>
+     <key>tr</key>
+     <value>Is closed order</value>
+    </title>
+    <id>25</id>
+    <valueType>
+     <types>Boolean</types>
+    </valueType>
+    <view>
+     <common>true</common>
+    </view>
+    <edit>
+     <common>true</common>
+    </edit>
    </columns>
   </additionalColumns>
  </attributes>

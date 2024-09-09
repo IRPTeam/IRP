@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="31d0e7c1-fc11-4574-a8a8-b50d57e7522d">
+ <producedTypes>
+  <objectType typeId="39102aa7-f655-42fa-855e-c2e4a92fa4f6" valueTypeId="70894d7b-a254-4b3d-97bc-49c4bbe76032"/>
+  <refType typeId="a5d6be98-f9cf-43e5-b886-f2a19f11aabd" valueTypeId="e8796331-e96b-4240-8518-b0e80b1f786b"/>
+  <selectionType typeId="2ba05ea8-f595-4cf2-a98d-627b8e893d1d" valueTypeId="b856e25f-b1b0-4b6c-9b0b-f57ee15de4e1"/>
+  <listType typeId="b8e8f1ec-71af-4817-a01e-fcf096a2562d" valueTypeId="49cfda89-dad6-45bd-8c60-f758e2469e05"/>
+  <managerType typeId="e147748e-bba9-4c34-bb24-653586b3994c" valueTypeId="c8998a06-0425-4381-8b4c-e2281e638561"/>
+ </producedTypes>
+ <name>DELETE_AdvancesKeys</name>
+ <synonym>
+  <key>en</key>
+  <value>DELETE advances keys</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>УДАЛИТЬ ключи авансов</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>DELETE advances keys</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.DELETE_AdvancesKeys.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.DELETE_AdvancesKeys.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>Advances key</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Ключ авансов партнеров</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Cari hesap avanslar anahtarı</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <descriptionLength>12</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.DELETE_AdvancesKeys.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="4c9e05b1-0ac3-4e6e-99b0-454721701ae2">
+  <name>Company</name>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b2fb7c3b-5464-42b7-b401-3a70cb9983cd">
+  <name>Branch</name>
+  <synonym>
+   <key>en</key>
+   <value>Branch</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Структурное подразделение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şube</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.BusinessUnits</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="913ac9ba-e05d-486a-ad82-4a90a18ec5c5">
+  <name>Currency</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="49bf3e20-c81e-4350-9693-375416da0bfd">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="21fbdff3-b36b-4fcb-a8b3-20923bf0f19d">
+  <name>LegalName</name>
+  <synonym>
+   <key>en</key>
+   <value>Legal name</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контрагент</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3dde9a80-d3a7-4244-93db-0627a564fd42">
+  <name>Order</name>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Порядок</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b4c57577-6aca-464b-9de7-407367ac8643">
+  <name>IsVendorAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>Is vendor advance</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Это аванс поставщика</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bu tedarikçi avansı</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="53cf98d1-c59d-4d51-bb1c-7dc4e4c4415f">
+  <name>IsCustomerAdvance</name>
+  <synonym>
+   <key>en</key>
+   <value>Is customer advance</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Это аванс покупателя</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bu müşteri avansı</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3b542a14-5bb6-4c08-a36a-4bbe1f238e11">
+  <name>AdvanceAgreement</name>
+  <synonym>
+   <key>en</key>
+   <value>Advance agreement</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение аванса</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Avans sözleşmesi</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="8baea242-546c-4b57-93c5-2c48da23dc11">
+  <name>Project</name>
+  <synonym>
+   <key>en</key>
+   <value>Project</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Проект</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Proje</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Projects</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="3a3a98d5-4e8c-4c4b-bfae-2cc9aa07242a">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Öğe formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+</mdclass:Catalog>

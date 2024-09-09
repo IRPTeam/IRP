@@ -109,7 +109,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group Period/Activity</value>
+   <value>Группа Период/Активность</value>
   </title>
   <title>
    <key>tr</key>
@@ -1285,7 +1285,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -1536,7 +1536,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -1580,7 +1580,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 1</value>
+       <value>Субконто 1</value>
       </title>
       <title>
        <key>tr</key>
@@ -1900,7 +1900,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -2151,7 +2151,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -2195,7 +2195,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 2</value>
+       <value>Субконто 2</value>
       </title>
       <title>
        <key>tr</key>
@@ -2515,7 +2515,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -2766,7 +2766,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -2810,7 +2810,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 3</value>
+       <value>Субконто 3</value>
       </title>
       <title>
        <key>tr</key>
@@ -2848,7 +2848,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Debit analytic pages</value>
+      <value>Страницы аналитики по дебету</value>
      </title>
      <title>
       <key>tr</key>
@@ -2886,7 +2886,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Analytic</value>
+     <value>Аналитика</value>
     </title>
     <title>
      <key>tr</key>
@@ -2924,7 +2924,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Debit pages</value>
+    <value>Страницы по дебету</value>
    </title>
    <title>
     <key>tr</key>
@@ -3795,7 +3795,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -4046,7 +4046,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -4090,7 +4090,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 1</value>
+       <value>Субконто 1</value>
       </title>
       <title>
        <key>tr</key>
@@ -4410,7 +4410,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -4661,7 +4661,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -4705,7 +4705,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 2</value>
+       <value>Субконто 2</value>
       </title>
       <title>
        <key>tr</key>
@@ -5025,7 +5025,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>External data</value>
+        <value>Внешние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -5276,7 +5276,7 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Internal data</value>
+        <value>Внутренние данные</value>
        </title>
        <title>
         <key>tr</key>
@@ -5320,7 +5320,7 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Ext. dimension 3</value>
+       <value>Субконто 3</value>
       </title>
       <title>
        <key>tr</key>
@@ -5358,7 +5358,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Credit analytic pages</value>
+      <value>Страницы аналитики по кредиту</value>
      </title>
      <title>
       <key>tr</key>
@@ -5396,7 +5396,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Analytic</value>
+     <value>Аналитика</value>
     </title>
     <title>
      <key>tr</key>
@@ -5434,7 +5434,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Credit pages</value>
+    <value>Страницы по кредиту</value>
    </title>
    <title>
     <key>tr</key>
@@ -5472,7 +5472,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group Debit\Credit</value>
+   <value>Группа Дебет/Кредит</value>
   </title>
   <title>
    <key>tr</key>
@@ -5558,7 +5558,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Activity</value>
+   <value>Активность</value>
   </title>
   <title>
    <key>tr</key>
@@ -5583,7 +5583,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Company Ref</value>
+   <value>Организация ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5634,7 +5634,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency Ref</value>
+   <value>Валюта ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5659,7 +5659,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency presentation</value>
+   <value>Валта представление</value>
   </title>
   <title>
    <key>tr</key>
@@ -5685,7 +5685,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account Dr Ref</value>
+   <value>Счет Дт Ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5710,7 +5710,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account Dr presentation</value>
+   <value>Счет Дт представление</value>
   </title>
   <title>
    <key>tr</key>
@@ -5736,7 +5736,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency Dr Ref</value>
+   <value>Валюта Дт Ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5761,7 +5761,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency Dr presentation</value>
+   <value>Валюта Дт представление</value>
   </title>
   <title>
    <key>tr</key>
@@ -5787,7 +5787,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account Cr Ref</value>
+   <value>Счет Кт Ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5812,7 +5812,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account Cr presentation</value>
+   <value>Счет Кт представление</value>
   </title>
   <title>
    <key>tr</key>
@@ -5838,7 +5838,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency Cr Ref</value>
+   <value>Валюта Кт Ссылка</value>
   </title>
   <title>
    <key>tr</key>
@@ -5863,7 +5863,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency Cr presentation</value>
+   <value>Валюта Кт представление</value>
   </title>
   <title>
    <key>tr</key>
@@ -5889,7 +5889,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Amount currency Dr</value>
+   <value>Валютная сумма Дт</value>
   </title>
   <title>
    <key>tr</key>
@@ -5914,7 +5914,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Amount currency Cr</value>
+   <value>Валютная сумма Кт</value>
   </title>
   <title>
    <key>tr</key>
@@ -5964,7 +5964,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Quantity Cr</value>
+   <value>Количество Кт</value>
   </title>
   <title>
    <key>tr</key>
@@ -5990,7 +5990,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Operation title</value>
+   <value>Наименование операции</value>
   </title>
   <title>
    <key>tr</key>
@@ -6041,7 +6041,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Chart name Dr</value>
+   <value>Наименование плана счетов Дт</value>
   </title>
   <title>
    <key>tr</key>
@@ -6067,7 +6067,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Chart name Cr</value>
+   <value>Наименование плана счетов Кт</value>
   </title>
   <title>
    <key>tr</key>
@@ -6093,7 +6093,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Dr1</value>
+   <value>Ссылка субконто Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6118,7 +6118,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Dr2</value>
+   <value>Ссылка субконто Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6143,7 +6143,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Dr3</value>
+   <value>Ссылка субконто Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6168,7 +6168,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Cr1</value>
+   <value>Ссылка субконто Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6193,7 +6193,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Cr2</value>
+   <value>Ссылка субконто Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6218,7 +6218,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension Ref Cr3</value>
+   <value>Ссылка субконто Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6243,7 +6243,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Dr1</value>
+   <value>Класс основания Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6269,7 +6269,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Dr2</value>
+   <value>Класс основания Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6295,7 +6295,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Dr3</value>
+   <value>Класс основания Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6321,7 +6321,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Cr1</value>
+   <value>Класс основания Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6347,7 +6347,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Cr2</value>
+   <value>Класс основания Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6373,7 +6373,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Base class Cr3</value>
+   <value>Класс основания Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6399,7 +6399,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Dr1</value>
+   <value>Класс Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6425,7 +6425,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Dr2</value>
+   <value>Класс Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6451,7 +6451,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Dr3</value>
+   <value>Класс Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6477,7 +6477,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Cr1</value>
+   <value>Класс Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6503,7 +6503,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Cr2</value>
+   <value>Класс Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6529,7 +6529,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Class Cr3</value>
+   <value>Класс Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6555,7 +6555,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Dr1</value>
+   <value>Значение субконто Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6581,7 +6581,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Dr2</value>
+   <value>Значение субконто Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6607,7 +6607,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Dr3</value>
+   <value>Значение субконто Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6633,7 +6633,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Cr1</value>
+   <value>Значение субконто Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6659,7 +6659,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Cr2</value>
+   <value>Значение субконто Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6685,7 +6685,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ext dimension value Cr3</value>
+   <value>Значение субконто Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6861,7 +6861,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Dr1</value>
+   <value>Класс внутреннего основания Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6887,7 +6887,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Dr2</value>
+   <value>Класс внутреннего основания Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6913,7 +6913,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Dr3</value>
+   <value>Класс внутреннего основания Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -6939,7 +6939,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Cr1</value>
+   <value>Класс внутреннего основания Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -6965,7 +6965,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Cr2</value>
+   <value>Класс внутреннего основания Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -6991,7 +6991,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal base class Cr3</value>
+   <value>Класс внутреннего основания Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -7017,7 +7017,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Dr1</value>
+   <value>Внутренний класс Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -7043,7 +7043,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Dr2</value>
+   <value>Внутренний класс Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -7069,7 +7069,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Dr3</value>
+   <value>Внутренний класс Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -7095,7 +7095,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Cr1</value>
+   <value>Внутренний класс Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -7121,7 +7121,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Cr2</value>
+   <value>Внутренний класс Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -7147,7 +7147,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal class Cr3</value>
+   <value>Внутренний класс Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -7173,7 +7173,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Dr1</value>
+   <value>Значение внешнего субконто Дт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -7198,7 +7198,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Dr2</value>
+   <value>Значение внешнего субконто Дт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -7223,7 +7223,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Dr3</value>
+   <value>Значение внешнего субконто Дт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -7248,7 +7248,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Cr1</value>
+   <value>Значение внешнего субконто Кт 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -7273,7 +7273,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Cr2</value>
+   <value>Значение внешнего субконто Кт 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -7298,7 +7298,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Internal ext dimension value Cr3</value>
+   <value>Значение внешнего субконто Кт 3</value>
   </title>
   <title>
    <key>tr</key>
@@ -7323,7 +7323,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7352,7 +7352,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7381,7 +7381,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7410,7 +7410,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7439,7 +7439,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7468,7 +7468,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7497,7 +7497,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7526,7 +7526,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7555,7 +7555,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>
@@ -7584,7 +7584,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>

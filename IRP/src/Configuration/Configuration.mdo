@@ -88,7 +88,7 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectAutonumerationMode>NotAutoFree</objectAutonumerationMode>
  <modalityUseMode>DontUse</modalityUseMode>
- <compatibilityMode>8.3.21</compatibilityMode>
+ <compatibilityMode>8.3.24</compatibilityMode>
  <languages uuid="f1c59d1c-aafe-420b-96cd-c5f1608cf9c1">
   <name>English</name>
   <synonym>
@@ -202,6 +202,7 @@
  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
  <commonPictures>CommonPicture.AddDataProc</commonPictures>
  <commonPictures>CommonPicture.AddProperties</commonPictures>
+ <commonPictures>CommonPicture.SendMail</commonPictures>
  <commonPictures>CommonPicture.AdminFunction</commonPictures>
  <commonPictures>CommonPicture.Attributes</commonPictures>
  <commonPictures>CommonPicture.AutoTest</commonPictures>
@@ -523,6 +524,7 @@
  <roles>Role.RelatedDocuments</roles>
  <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
  <roles>Role.Document_ExternalAccountingOperation</roles>
+ <roles>Role.Document_OpeningMessage</roles>
  <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
  <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -851,6 +853,10 @@
  <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
  <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
  <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
+ <commonModules>CommonModule.EmailMessagesServer</commonModules>
+ <commonModules>CommonModule.MessagesServer</commonModules>
+ <commonModules>CommonModule.FilesClientServer</commonModules>
+ <commonModules>CommonModule.FilesServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -962,6 +968,7 @@
  <functionalOptions>FunctionalOption.UseStores</functionalOptions>
  <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
+ <functionalOptions>FunctionalOption.UseMessaging</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
  <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
@@ -1073,6 +1080,7 @@
  <constants>Constant.UseLegalNameContract</constants>
  <constants>Constant.UseResponsiblePerson</constants>
  <constants>Constant.UseAccountingService</constants>
+ <constants>Constant.UseMessaging</constants>
  <constants>Constant.UseLegalName</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
@@ -1125,7 +1133,7 @@
  <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
  <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
  <catalogs>Catalog.Addresses</catalogs>
- <catalogs>Catalog.AdvancesKeys</catalogs>
+ <catalogs>Catalog.DELETE_AdvancesKeys</catalogs>
  <catalogs>Catalog.AgingPeriods</catalogs>
  <catalogs>Catalog.Agreements</catalogs>
  <catalogs>Catalog.AttachedDocumentSettings</catalogs>
@@ -1204,7 +1212,7 @@
  <catalogs>Catalog.TaxAnalytics</catalogs>
  <catalogs>Catalog.Taxes</catalogs>
  <catalogs>Catalog.TaxRates</catalogs>
- <catalogs>Catalog.TransactionsKeys</catalogs>
+ <catalogs>Catalog.DELETE_TransactionsKeys</catalogs>
  <catalogs>Catalog.Units</catalogs>
  <catalogs>Catalog.UnitsOfMeasurement</catalogs>
  <catalogs>Catalog.UserGroups</catalogs>
@@ -1303,6 +1311,7 @@
  <documents>Document.RevenueAccruals</documents>
  <documents>Document.TaxesOperation</documents>
  <documents>Document.ExternalAccountingOperation</documents>
+ <documents>Document.OutgoingMessage</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1403,6 +1412,8 @@
  <enums>Enum.OtherPeriodRevenueType</enums>
  <enums>Enum.TaxesOperationTransactionType</enums>
  <enums>Enum.InvoiceType</enums>
+ <enums>Enum.MessagesImportance</enums>
+ <enums>Enum.MessageTypes</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
@@ -1422,7 +1433,6 @@
  <reports>Report.R1200_VendorsAging</reports>
  <reports>Report.R2001_Sales</reports>
  <reports>Report.R3010_CashOnHand</reports>
- <reports>Report.R5012_OffsetOfAdvances</reports>
  <reports>Report.R5020_ProfitLosses</reports>
  <reports>Report.R6020_BatchBalance</reports>
  <reports>Report.R6021_BatchBalanceSimple</reports>
@@ -1496,8 +1506,8 @@
  <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
  <informationRegisters>InformationRegister.T1020S_Cache</informationRegisters>
  <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
- <informationRegisters>InformationRegister.T2011S_TransactionsCurrencyRevaluation</informationRegisters>
- <informationRegisters>InformationRegister.T2012S_AdvancesCurrencyRevaluation</informationRegisters>
+ <informationRegisters>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</informationRegisters>
+ <informationRegisters>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</informationRegisters>
  <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
  <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
  <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
@@ -1549,6 +1559,7 @@
  <informationRegisters>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</informationRegisters>
  <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
  <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
+ <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

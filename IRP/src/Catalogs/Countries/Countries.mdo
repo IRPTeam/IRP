@@ -193,7 +193,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>CIOC Code</value>
+   <value>Код CIOC</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -245,7 +245,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Flag</value>
+   <value>Индикатор</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -391,7 +391,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Load countries</value>
+   <value>Загрузить страны</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -408,7 +408,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Country list</value>
+   <value>Список стран</value>
   </synonym>
   <synonym>
    <key>tr</key>

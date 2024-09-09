@@ -417,7 +417,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Group Recorder Ref</value>
+      <value>Группа Регистратор Ссылка</value>
      </title>
      <title>
       <key>tr</key>
@@ -1342,7 +1342,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Records Info Dr</value>
+      <value>Данные проводок Дт</value>
      </title>
      <title>
       <key>tr</key>
@@ -1533,7 +1533,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Analytic Dr</value>
+      <value>Аналитика Дт</value>
      </title>
      <title>
       <key>tr</key>
@@ -1774,7 +1774,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Records Info Cr</value>
+      <value>Данные проводок Кт</value>
      </title>
      <title>
       <key>tr</key>
@@ -1965,7 +1965,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Analytic Cr</value>
+      <value>Аналитика Кт</value>
      </title>
      <title>
       <key>tr</key>
@@ -3302,7 +3302,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Show UUID</value>
+   <value>Показать UUID</value>
   </title>
   <title>
    <key>tr</key>

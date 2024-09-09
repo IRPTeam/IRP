@@ -18,6 +18,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -68,7 +69,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.AdditionalAnalytic,
 	|PaymentList.CommissionPercent,
 	|PaymentList.Commission,
-	|PaymentList.CommissionFinancialMovementType";
+	|PaymentList.CommissionFinancialMovementType,
+	|PaymentList.Employee,
+	|PaymentList.PaymentPeriod,
+	|PaymentList.CalculationType";
 	
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -86,7 +90,8 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherIncome         = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherIncome");
 	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
-	
+	SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
+		
 	If TransactionType = CashTransferOrder Then
 		StrByType = "
 		|PaymentList.PlaningTransactionBasis,
@@ -177,12 +182,18 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = OtherIncome Then
 		StrByType = "
 		|PaymentList.RevenueType,
 		|PaymentList.ProfitLossCenter,
 		|PaymentList.AdditionalAnalytic";
+	ElsIf TransactionType = SalaryReturn Then
+		StrByType = "
+		|PaymentList.Employee,
+		|PaymentList.PaymentPeriod,
+		|PaymentList.CalculationType";
 	EndIf;
 	
 	ArrayOfVisibleAttributes = New Array();
@@ -206,6 +217,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	IsTransferFromPOS     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS");
 	IsReceiptByCheque     = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReceiptByCheque");
 	IsPaymentFormCustomer = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.PaymentFromCustomer");
+	IsSalaryReturn		  = Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 
 	ArrayTypes = New Array();
 	
@@ -246,6 +258,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LossCenter.Visible   = IsCurrencyExchange;
 	Form.Items.RevenueType.Visible  = IsCurrencyExchange;
 	Form.Items.ProfitCenter.Visible = IsCurrencyExchange;
+	
+	Form.Items.PaymentListBranch.Visible = IsSalaryReturn;
 EndProcedure
 
 &AtClient

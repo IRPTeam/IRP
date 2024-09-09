@@ -223,7 +223,7 @@
   <mdObject>Document.ChequeBondTransaction</mdObject>
  </content>
  <content>
-  <mdObject>Catalog.TransactionsKeys</mdObject>
+  <mdObject>Catalog.DELETE_TransactionsKeys</mdObject>
  </content>
  <content>
   <mdObject>Constant.UseAdditionalTableControlDocument</mdObject>
@@ -274,7 +274,7 @@
   <mdObject>Constant.UseConsolidatedRetailSales</mdObject>
  </content>
  <content>
-  <mdObject>Catalog.AdvancesKeys</mdObject>
+  <mdObject>Catalog.DELETE_AdvancesKeys</mdObject>
  </content>
  <content>
   <mdObject>InformationRegister.T7010S_BillOfMaterials</mdObject>
@@ -544,7 +544,7 @@
   <mdObject>Constant.DefaultPictureStorageVolume</mdObject>
  </content>
  <content>
-  <mdObject>InformationRegister.T2012S_AdvancesCurrencyRevaluation</mdObject>
+  <mdObject>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</mdObject>
  </content>
  <content>
   <mdObject>Constant.UseCashTransaction</mdObject>
@@ -1081,7 +1081,7 @@
   <mdObject>Document.GoodsReceipt</mdObject>
  </content>
  <content>
-  <mdObject>InformationRegister.T2011S_TransactionsCurrencyRevaluation</mdObject>
+  <mdObject>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</mdObject>
  </content>
  <content>
   <mdObject>Document.PurchaseOrder</mdObject>

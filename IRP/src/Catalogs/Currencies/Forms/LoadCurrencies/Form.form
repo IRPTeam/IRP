@@ -48,7 +48,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Loading...</value>
+     <value>Загрузка..</value>
     </title>
     <title>
      <key>tr</key>
@@ -105,7 +105,7 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Loading...</value>
+     <value>Загрузка..</value>
     </title>
     <title>
      <key>tr</key>
@@ -159,7 +159,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Group loading</value>
+    <value>Группа загрузка</value>
    </title>
    <title>
     <key>tr</key>
@@ -206,7 +206,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Command bar main</value>
+    <value>Основная панель инструментов</value>
    </title>
    <title>
     <key>tr</key>
@@ -741,7 +741,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Currency list</value>
+   <value>Список валют</value>
   </title>
   <title>
    <key>tr</key>
@@ -871,7 +871,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Exists</value>
+    <value>Существует</value>
    </title>
    <title>
     <key>tr</key>
@@ -923,7 +923,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Create selected</value>
+   <value>Создать выбранные</value>
   </title>
   <title>
    <key>tr</key>

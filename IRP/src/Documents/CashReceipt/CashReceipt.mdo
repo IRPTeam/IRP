@@ -121,6 +121,7 @@
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
@@ -838,6 +839,84 @@
    </synonym>
    <type>
     <types>CatalogRef.Projects</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="380bb4df-3fc8-44b0-8c2e-7f504790b37b">
+   <name>Employee</name>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9feffeff-f392-4385-966c-495c94646bd3">
+   <name>PaymentPeriod</name>
+   <synonym>
+    <key>en</key>
+    <value>Payment period</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Период оплат</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ödeme periyodu</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PlanningPeriods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsSalary</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ed05550c-64c8-4a4e-9f77-1beb6712eb72">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

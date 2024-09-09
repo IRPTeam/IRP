@@ -1956,69 +1956,72 @@ Function Strings(Lang) Export
 		|ru='Не найден файл в службе хранения';
 		|tr='Serviste dosya muhafaza yeri bulunamıyor'", Lang));
 	Strings.Insert("Error_152", NStr("en='Cannot convert to UUID [%1]';
-		|ru='Cannot convert to UUID [%1]';
+		|ru='Не получилось преобразовать в UUID [%1]';
 		|tr='UUID''e dönüştürülemedi [%1]'", Lang));
 	Strings.Insert("Error_153", NStr("en='Debit is empty [%1] row-key[%2]';
-		|ru='Debit is empty [%1] row-key[%2]';
+		|ru='Дебет пуст [%1] строка/ключ [%2]';
 		|tr='Borç boş [%1] satır-anahtar [%2]'", Lang));
 	Strings.Insert("Error_154", NStr("en='Credit is empty [%1] row-key[%2]';
-		|ru='Credit is empty [%1] row-key[%2]';
+		|ru='Кредит пуст [%1] строка/ключ [%2]';
 		|tr='Alacak boş [%1] satır-anahtar [%2]'", Lang));
 	
 	Strings.Insert("Error_155", NStr("en='Company is empty row-key[%1]';
-		|ru='Company is empty row-key[%1]';
+		|ru='Организация пуста строка/ключ [%1]';
 		|tr='Şirket boş satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_156", NStr("en='Currency is empty row-key[%1]';
-		|ru='Currency is empty row-key[%1]';
+		|ru='Валюта пуста строка/ключ [%1]';
 		|tr='Döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_157", NStr("en='Account Dr is empty row-key[%1]';
-		|ru='Account Dr is empty row-key[%1]';
+		|ru='Счет Дт пуст строка/ключ [%1]';
 		|tr='Borç hesap boş satır-anahtar[%1]'", Lang));
 	Strings.Insert("Error_158", NStr("en='Account Cr is empty row-key[%1]';
-		|ru='Account Cr is empty row-key[%1]';
+		|ru='Счет Кт пуст строка/ключ [%1]';
 		|tr='Alacak hesap boş satır-anahtar[%1]'", Lang));
 	Strings.Insert("Error_159", NStr("en='Currency Dr is empty row-key[%1]';
-		|ru='Currency Dr is empty row-key[%1]';
+		|ru='Валюта Дт пуста строка/ключ [%1]';
 		|tr='Borç döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_160", NStr("en='Currency Cr is empty row-key[%1]';
-		|ru='Currency Cr is empty row-key[%1]';
+		|ru='Валюта Кт пуста строка/ключ [%1]';
 		|tr='Alacak döviz boş, satır-anahtar [%1]'", Lang));
 	Strings.Insert("Error_161", NStr("en='Ext. dimension 1 value Dr is empty row-key[%1]';
-		|ru='Ext. dimension 1 value Dr is empty row-key[%1]';
+		|ru='Субконто 1 значение Дт пусто строка/ключ [%1]';
 		|tr='Ext. boyut 1 değeri Dr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_162", NStr("en='Ext. dimension 1 type Dr is empty row-key[%1]';
-		|ru='Ext. dimension 1 type Dr is empty row-key[%1]';
+		|ru='Субконто 1 значение Дт пусто строка/ключ [%1]';
 		|tr='Ext. boyut 1 tipi Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_163", NStr("en='Ext. dimension 2 value Dr is empty row-key[%1]';
-		|ru='Ext. dimension 2 value Dr is empty row-key[%1]';
+		|ru='Субконто 2 значение Дт пусто строка/ключ [%1]';
 		|tr='Ek boyut 2 değeri Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_164", NStr("en='Ext. dimension 2 type Dr is empty row-key[%1]';
-		|ru='Ext. dimension 2 type Dr is empty row-key[%1]';
+		|ru='Субконто 2 значение Дт пусто строка/ключ [%1]';
 		|tr='Ek boyut 2 tipi Dr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_165", NStr("en='Ext. dimension 3 value Dr is empty row-key[%1]';
-		|ru='Ext. dimension 3 value Dr is empty row-key[%1]';
+		|ru='Субконто 3 значение Дт пусто строка/ключ [%1]';
 		|tr='Ext. boyut 3 değeri Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_166", NStr("en='Ext. dimension 3 type Dr is empty row-key[%1]';
-		|ru='Ext. dimension 3 type Dr is empty row-key[%1]';
+		|ru='Субконто 3 значение Дт пусто строка/ключ [%1]';
 		|tr='Ext. boyut 3 tipi Dr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_167", NStr("en='Ext. dimension 1 value Cr is empty row-key[%1]';
-		|ru='Ext. dimension 1 value Cr is empty row-key[%1]';
+		|ru='Субконто 1 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 1 değeri Cr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_168", NStr("en='Ext. dimension 1 type Cr is empty row-key[%1]';
-		|ru='Ext. dimension 1 type Cr is empty row-key[%1]';
+		|ru='Субконто 1 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 1 tipi Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_169", NStr("en='Ext. dimension 2 value Cr is empty row-key[%1]';
-		|ru='Ext. dimension 2 value Cr is empty row-key[%1]';
+		|ru='Субконто 2 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 2 değeri Cr boş satır-anahtarı[%1]'", Lang));
 	Strings.Insert("Error_170", NStr("en='Ext. dimension 2 type Cr is empty row-key[%1]';
-		|ru='Ext. dimension 2 type Cr is empty row-key[%1]';
+		|ru='Субконто 2 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 2 tipi Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_171", NStr("en='Ext. dimension 3 value Cr is empty row-key[%1]';
-		|ru='Ext. dimension 3 value Cr is empty row-key[%1]';
+		|ru='Субконто 3 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 3 değeri Cr boş satır-anahtarı[%1] '", Lang));
 	Strings.Insert("Error_172", NStr("en='Ext. dimension 3 type Cr is empty row-key[%1]';
-		|ru='Ext. dimension 3 type Cr is empty row-key[%1]';
+		|ru='Субконто 3 значение Кт пусто строка/ключ [%1]';
 		|tr='Ek boyut 3 tipi Cr boş satır-anahtarı[%1] '", Lang));
+	Strings.Insert("Error_173", NStr("en='Currency rate from [%1] to [%2] not set';
+		|ru='Курс валюты с [%1] по [%2] не установлен';
+		|tr='[%1]''den [%2]''ye döviz kuru ayarlanmamış'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2406,7 +2409,7 @@ Function Strings(Lang) Export
 		|ru='Вы хотите восстановить движения по умолчанию?';
 		|tr='Ayarları varsayınlara getirmek ister misiniz?'", Lang));
 	Strings.Insert("QuestionToUser_031", NStr("en='Do you want to change tax rates according to the company?';
-		|ru='Do you want to change tax rates according to the company?';
+		|ru='Вы хотите поменять налоги согласно организации?';
 		|tr='Şirket ayarlarına göre vergileri değiştirmek ister misiniz?'",
 		Lang));
 #EndRegion
@@ -2451,7 +2454,7 @@ Function Strings(Lang) Export
 		|ru='Введите Наименование';
 		|tr='Açıklama giriniz'", Lang));
 	Strings.Insert("I_2", NStr("en='Click to enter comment';
-		|ru='Click to enter comment';
+		|ru='Нажмите для редактирорвания комментария';
 		|tr='Açıklama girmek için tıklayınız'", Lang));
 	Strings.Insert("I_3", NStr("en='Fill out the document';
 		|ru='Заполните документ';
@@ -2774,7 +2777,7 @@ Function Strings(Lang) Export
 		|ru='Скопировано %1 строк';
 		|tr='%1 satır kopyalandı'", Lang));
 	Strings.Insert("CP_007", NStr("en='Paste values from clipboard';
-		|ru='Paste values from clipboard';
+		|ru='Вставить данные из буфера';
 		|tr='Bellekten değerleri yapıştır'", Lang));
 #EndRegion	
 	
@@ -3360,6 +3363,11 @@ Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 		|ru='BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)';
 		|tr='BankaTahsilatı DR (R3010B_EldenNakit) CR (R5021_Gelirler)'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en='BankReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
+		|ru='Банковское поступление DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
+		|tr='BankaTahsilatı DR (R3010B_ElindekiNakit) CR (R9510B_MaaşÖdemesi)'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)';
 		|ru='ПриходныйКассовыйОрдер Дт (R3010B_CashOnHand) Кт (R3021B_CashInTransitIncoming) (Перемещение ДС)';
@@ -3369,6 +3377,11 @@ Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransact
 	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
 		|ru='CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)';
 		|tr='NakitTahsilatı DR (R3010B_EldenNakit) CR (R5015B_DiğerOrtaklarİşlemleri)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en='CashReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)';
+		|ru='Поступление наличных DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment) ';
+		|tr='NakitTahsilat DR (R3010B_ElindekiNakit) CR (R9510B_MaaşÖdemesi) '", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
 	NStr("en='Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)';
@@ -3512,7 +3525,7 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 
 Strings.Insert("ExternalAccountingOperation",
 	NStr("en='External accounting operation';
-		|ru='External accounting operation';
+		|ru='Внешние бух. операции';
 		|tr='Dış muhasebe kaydı'", Lang));
 
 #EndRegion

@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9061 Accounting mapping (accounts)</value>
+  <value>T9061 Бухгалтерские соответствия (касса/банк)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -35,7 +35,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Internal ref</value>
+   <value>Внутренняя ссылка</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -83,7 +83,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External chart name</value>
+   <value>Имя внешнего плана счетов</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -111,7 +111,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External ref</value>
+   <value>Внешняя ссылка</value>
   </synonym>
   <synonym>
    <key>tr</key>

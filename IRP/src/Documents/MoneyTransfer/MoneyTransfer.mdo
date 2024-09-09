@@ -679,7 +679,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Send local total amount</value>
+   <value>Локальная сумма итого отправитель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -702,7 +702,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Send local rate</value>
+   <value>Локальный курс валюты отправитель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -725,7 +725,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Receive local total amount</value>
+   <value>Локальная сумма итого получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -748,7 +748,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Receive local rate</value>
+   <value>Локальный курс валюты получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>

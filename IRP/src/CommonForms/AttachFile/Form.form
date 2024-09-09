@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>GroupMain</name>
   <id>32</id>
@@ -150,6 +150,56 @@
     <contextMenu>
      <name>FileListFileExtensionContextMenu</name>
      <id>30</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>FileListVolume</name>
+    <id>54</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>FileList.File.Volume</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>FileListVolumeExtendedTooltip</name>
+     <id>56</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>FileListVolumeContextMenu</name>
+     <id>55</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -664,22 +714,60 @@
    <common>true</common>
   </edit>
   <extInfo xsi:type="form:DynamicListExtInfo">
-   <queryText>SELECT 
-       AttachedFiles.Owner, 
-       AttachedFiles.File, 
-       AttachedFiles.Priority, 
-       AttachedFiles.CreationDate
- FROM 
-       InformationRegister.AttachedFiles
- AS 
-       AttachedFiles
- WHERE AttachedFiles.Owner = &amp;Owner</queryText>
+   <queryText>SELECT
+	AttachedFiles.Owner,
+	AttachedFiles.File,
+	AttachedFiles.Priority,
+	AttachedFiles.CreationDate
+FROM
+	InformationRegister.AttachedFiles AS AttachedFiles
+WHERE
+	AttachedFiles.Owner = &amp;Owner</queryText>
    <mainTable>InformationRegister.AttachedFiles</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Owner</dataPath>
+    <field>Owner</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>File</dataPath>
+    <field>File</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Priority</dataPath>
+    <field>Priority</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreationDate</dataPath>
+    <field>CreationDate</field>
+   </fields>
+   <parameters>
+    <name>Owner</name>
+    <title>
+     <localValue>
+      <content>
+       <key>en</key>
+       <value>Owner</value>
+      </content>
+      <content>
+       <key>ru</key>
+       <value>Владелец</value>
+      </content>
+      <content>
+       <key>tr</key>
+       <value>Sahip</value>
+      </content>
+     </localValue>
+    </title>
+    <valueType>
+     <types>DefinedType.typeFilesOwner</types>
+    </valueType>
+    <useRestriction>true</useRestriction>
+   </parameters>
   </extInfo>
  </attributes>
  <attributes>

@@ -105,35 +105,103 @@ Scenario: _0978001 preparation (foreign currency revaluation)
 		When Create document ForeignCurrencyRevaluation objects (multicurrency revaluation)
 	* Post documents
 		* Posting OpeningEntry
-			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.OpeningEntry.FindByNumber(112).GetObject();"     |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting PurchaseInvoice
-			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(1).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(2).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(3).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(4).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(5).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(6).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.PurchaseInvoice.FindByNumber(7).GetObject();"    |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting SalesInvoice
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(1).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(2).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(3).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(4).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.SalesInvoice.FindByNumber(5).GetObject();"       |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting BankPayment
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(1).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(2).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(3).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(4).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankPayment.FindByNumber(5).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting BankReceipt
-			Given I open hyperlink "e1cib/list/Document.BankReceipt"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(1).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(2).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(3).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.BankReceipt.FindByNumber(4).GetObject();"        |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting DebitNote
-			Given I open hyperlink "e1cib/list/Document.DebitNote"
-			Then I select all lines of "List" table
-			And in the table "List" I click the button named "ListContextMenuPost"
-			And Delay "3"
+			And I execute 1C:Enterprise script at server
+				| "DocObj = Documents.DebitNote.FindByNumber(1).GetObject();"          |
+				| "DocObj.AdditionalProperties.Insert("UpdateCurrenciesTable", True);" |
+				| "DocObj.Write(DocumentWriteMode.Posting);"                           |
 		* Posting CustomersAdvancesClosing
 			Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 			Then I select all lines of "List" table
@@ -560,11 +628,11 @@ Scenario: _0978028 revaluation of currency balance - USD to TRY falls, USD to EU
 		And I select "R3027 Employee cash advance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''         | ''                     | ''                | ''                             | ''       | ''                     |
-			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Currency' | 'Transaction currency' | 'Partner'         | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'EUR'      | 'USD'                  | 'Alexander Orlov' | 'Reporting currency Euro'      | '1'      | 'No'                   |
-			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'USD'                  | 'Alexander Orlov' | 'Local currency'               | '7,12'   | 'No'                   |		
+			| 'Foreign currency revaluation 3 dated 03.02.2023 23:59:00' | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| 'Register  "R3027 Employee cash advance"'                  | ''                    | ''           | ''             | ''             | ''                | ''                                  | ''         | ''                     | ''                             | ''       | ''                     |
+			| ''                                                         | 'Period'              | 'RecordType' | 'Company'      | 'Branch'       | 'Partner'         | 'Agreement'                         | 'Currency' | 'Transaction currency' | 'Multi currency movement type' | 'Amount' | 'Deferred calculation' |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Receipt'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'EUR'      | 'USD'                  | 'Reporting currency Euro'      | '1'      | 'No'                   |
+			| ''                                                         | '03.02.2023 23:59:00' | 'Expense'    | 'Main Company' | 'Front office' | 'Alexander Orlov' | 'Alexander Orlov cash advance, USD' | 'TRY'      | 'USD'                  | 'Local currency'               | '7,12'   | 'No'                   |		
 		And I close all client application windows
 
 # Transaction +10, Reporting +100 (Trans*Rate < Rep - Expense) только инвойс

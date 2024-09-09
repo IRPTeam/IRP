@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9060 Accounting mapping (charts of accounts)</value>
+  <value>T9060 Бухгалтерские соответствия (план счетов)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Extra dimension types name</value>
+   <value>Наименование типа субконо</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -109,7 +109,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External name</value>
+   <value>Внешнее имя</value>
   </synonym>
   <synonym>
    <key>tr</key>

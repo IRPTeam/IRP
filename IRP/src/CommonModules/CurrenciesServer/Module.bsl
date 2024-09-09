@@ -145,6 +145,8 @@ Function IsUseAgreementMovementType(RegMetadata)
 	Registers.Add(Reg.R8014T_ConsignorSales);
 	Registers.Add(Reg.R8015T_ConsignorPrices);
 	
+	Registers.Add(Reg.R3027B_EmployeeCashAdvance);
+	
 	If Registers.Find(RegMetadata) = Undefined Then
 		Return False;
 	Else
@@ -790,7 +792,7 @@ Function GetEmptyCurrenciesTable(RefMetadata)
 	Return EmptyCurrenciesTable;
 EndFunction
 
-Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
+Procedure UpdateCurrencyTable(Parameters, CurrenciesTable, Cancel = Undefined) Export
 	EmptyCurrenciesTable = GetEmptyCurrenciesTable(Parameters.Ref.Metadata());
 	
 	RatePeriod    = CommonFunctionsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
@@ -798,22 +800,22 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	
 	// Agreement currency
 	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, AgreementInfo.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, AgreementInfo.CurrencyMovementType,, Cancel);
 	EndIf;
 	
 	// Legal currency
 	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	// Reporting currency
 	For Each ItemOfArray In Catalogs.Companies.GetReportingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	// Budgeting currency
 	For Each ItemOfArray In Catalogs.Companies.GetBudgetingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType);
+		AddRowToCurrencyTable(Parameters, RatePeriod, EmptyCurrenciesTable, ItemOfArray.CurrencyMovementType,, Cancel);
 	EndDo;
 	
 	CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, Parameters.DocumentAmount);
@@ -891,7 +893,7 @@ Function GetNewCurrencyRowParameters() Export
 	Return Parameters;
 EndFunction							
 
-Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, CurrencyMovementType, FixedRates = Undefined) Export
+Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, CurrencyMovementType, FixedRates = Undefined, Cancel = Undefined) Export
 	If FixedRates <> Undefined Then
 		TableOfFixedRates = New ValueTable();
 		TableOfFixedRates.Columns.Add("Key");
@@ -955,10 +957,19 @@ Function AddRowToCurrencyTable(Parameters, RatePeriod, CurrenciesTable, Currency
 		
 		// rates from register	
 		If Not UseFixedRates And Not UseBasisDocumentRates Then
-			CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
-				Parameters.Currency, 
-				CurrencyMovementType.Currency,
-				CurrencyMovementType.Source);
+			If Cancel <> Undefined Then
+				CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
+					Parameters.Currency, 
+					CurrencyMovementType.Currency,
+					CurrencyMovementType.Source,
+					CurrencyMovementType, Cancel);
+			Else
+				CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(RatePeriod, 
+					Parameters.Currency, 
+					CurrencyMovementType.Currency,
+					CurrencyMovementType.Source);
+			EndIf;
+			
 			If Not ValueIsFilled(CurrencyInfo.Rate) Then
 				NewRow.Rate = 0;
 				NewRow.ReverseRate = 0;
@@ -1452,7 +1463,7 @@ Procedure DebitCreditNoteDifference(Parameters)
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1021B_VendorsTransactions].PrepareTable;
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
-		BalanceType   = "active";
+		BalanceType   = "passive";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 		
@@ -1460,7 +1471,7 @@ Procedure DebitCreditNoteDifference(Parameters)
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R1020B_AdvancesToVendors].PrepareTable;
 		Result = GetAmountByRecordType(Table, "VendorsAdvancesClosing", AccumulationRecordType.Receipt);
-		BalanceType   = "passive";
+		BalanceType   = "active";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
 		
@@ -1909,123 +1920,6 @@ EndFunction
 
 #EndRegion
 
-#Region REAL_TIME_CURRENCY_REVALUATION
-
-Procedure RestoreRealTimeCurrencyRevaluation(Parameters, ItemOfPostingInfo)
-	// Advances
-	If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1020B_AdvancesToVendors
-		Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers Then
-					
-		AdvancesCurrencyRevaluation = GetAdvancesCurrencyRevaluation(Parameters.Object.Ref);
-		For Each Row In AdvancesCurrencyRevaluation Do
-			FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
-		EndDo;				
-	EndIf;
-			
-	// Transactions
-	If ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R1021B_VendorsTransactions
-		Or ItemOfPostingInfo.Metadata = Metadata.AccumulationRegisters.R2021B_CustomersTransactions Then
-					
-		TransactionsCurrencyRevaluation = GetTransactionsCurrencyRevaluation(Parameters.Object.Ref);
-		For Each Row In TransactionsCurrencyRevaluation Do
-			FillPropertyValues(ItemOfPostingInfo.PrepareTable.Add(), Row);
-		EndDo;	
-	EndIf;
-EndProcedure
-
-Function GetAdvancesCurrencyRevaluation(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Table.Period,
-	|	Table.Recorder AS VendorsAdvancesClosing,
-	|	Table.Recorder AS CustomersAdvancesClosing,
-	|	Table.AdvanceOrder AS Order,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.LegalName,
-	|	Table.Partner,
-	|	Table.Amount,
-	|	Table.CurrencyMovementType,
-	|	Table.TransactionCurrency
-	|FROM
-	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetTransactionsCurrencyRevaluation(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-	|	Table.Period,
-	|	Table.Recorder AS VendorsAdvancesClosing,
-	|	Table.Recorder AS CustomersAdvancesClosing,
-	|	Table.TransactionOrder AS Order,
-	|	Table.TransactionDocument AS Basis,
-	|	Table.Company,
-	|	Table.Branch,
-	|	Table.Currency,
-	|	Table.LegalName,
-	|	Table.Partner,
-	|	Table.Agreement,
-	|	Table.Amount,
-	|	Table.CurrencyMovementType,
-	|	Table.TransactionCurrency
-	|FROM
-	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-Function GetAccountingAmounts(DocRef)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	Table.Period,
-	|	Table.Currency,
-	|	Table.CurrencyMovementType,
-	|	Table.Amount,
-	|	Table.Recorder AS AdvancesClosing,
-	|	""Advance"" AS AmountType
-	|FROM
-	|	InformationRegister.T2012S_AdvancesCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	Table.Period,
-	|	Table.Currency,
-	|	Table.CurrencyMovementType,
-	|	Table.Amount,
-	|	Table.Recorder,
-	|	""Transaction""
-	|FROM
-	|	InformationRegister.T2011S_TransactionsCurrencyRevaluation AS Table
-	|WHERE
-	|	Table.Document = &DocRef";
-		
-	Query.SetParameter("DocRef", DocRef);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	Return QueryTable;
-EndFunction
-
-#EndRegion
-
 #Region LOCAL_TOTAL_AMOUNTS
 
 Function GetLocalTotalAmounts(Object, Parameters, AmountsInfo) Export
@@ -2101,3 +1995,28 @@ Procedure UpdateLocalTotalAmounts(Object, TotalAmounts, AmountsInfo) Export
 EndProcedure
 
 #EndRegion
+
+Procedure BeforeWriteAtServer(Object, Form, Cancel, CurrentObject, WriteParameters) Export
+	CurrentObject.AdditionalProperties.Insert("UpdateCurrenciesTable", True);	
+EndProcedure
+
+Function NeedUpdateCurrenciesTable(Object) Export
+	If Object.AdditionalProperties.Property("UpdateCurrenciesTable") Then
+		If Object.AdditionalProperties.UpdateCurrenciesTable = True Then
+			Return True;
+		Else
+			Return False;
+		EndIf;
+	EndIf;
+	
+	If Not ValueIsFilled(Object.Ref) Then
+		Return True;
+	EndIf;
+	
+	If Not Object.Ref.Posted Then
+		Return True;
+	EndIf;
+	
+	Return False;
+EndFunction
+	

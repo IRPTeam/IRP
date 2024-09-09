@@ -788,7 +788,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2012S_AdvancesCurrencyRevaluation</name>
+		<name>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -1398,6 +1398,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.MessagesQueueToSend</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T8515S_FixedAssetsLocation.Dimension.Branch</name>
 		<right>
 			<name>Edit</name>
@@ -1459,7 +1470,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2011S_TransactionsCurrencyRevaluation</name>
+		<name>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

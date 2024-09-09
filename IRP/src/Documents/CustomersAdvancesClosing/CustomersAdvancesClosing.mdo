@@ -62,8 +62,8 @@
  <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
  <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
  <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
- <registerRecords>InformationRegister.T2012S_AdvancesCurrencyRevaluation</registerRecords>
- <registerRecords>InformationRegister.T2011S_TransactionsCurrencyRevaluation</registerRecords>
+ <registerRecords>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</registerRecords>
+ <registerRecords>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="0c3fe97d-7a1f-4b9a-8063-5b8f338711fa">
@@ -151,18 +151,18 @@
   <dataHistory>Use</dataHistory>
  </attributes>
  <attributes uuid="552bc9dc-2bde-4c41-818c-3c4888d8c27a">
-  <name>DontWriteNegativeDebtAsAdvance</name>
+  <name>DELETE_DontWriteNegativeDebtAsAdvance</name>
   <synonym>
    <key>en</key>
-   <value>Dont write negative debt as advance</value>
+   <value>DELETE dont write negative debt as advance</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Не записывать отрицательный долг как аванс</value>
+   <value>УДАЛИТЬ не уводить в долг как аванс</value>
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Negatif Borç Avans Olarak Yazılmasın</value>
+   <value>SİLİNECEK negatif borç avan olarak yazma</value>
   </synonym>
   <type>
    <types>Boolean</types>

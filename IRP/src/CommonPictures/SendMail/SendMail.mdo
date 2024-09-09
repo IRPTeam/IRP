@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3c89d5f4-460e-4c87-93ae-17413e09f1e8">
+ <name>SendMail</name>
+ <synonym>
+  <key>en</key>
+  <value>Send mail</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Отправка маила</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Send mail</value>
+ </synonym>
+</mdclass:CommonPicture>

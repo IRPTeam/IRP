@@ -224,7 +224,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.LegalName</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.LegalName</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -246,7 +246,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.TransactionsKeys</name>
+		<name>Catalog.DELETE_TransactionsKeys</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -336,7 +336,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys</name>
+		<name>Catalog.DELETE_AdvancesKeys</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -351,63 +351,63 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.PredefinedDataName</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.PredefinedDataName</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Predefined</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Predefined</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Ref</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Ref</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.DeletionMark</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.DeletionMark</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.IsFolder</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.IsFolder</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Owner</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Owner</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Parent</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Parent</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Description</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Description</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.StandardAttribute.Code</name>
+		<name>Catalog.DELETE_AdvancesKeys.StandardAttribute.Code</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -444,7 +444,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Order</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Order</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -514,14 +514,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Partner</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Partner</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Company</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Company</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -573,7 +573,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.IsCustomerAdvance</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.IsCustomerAdvance</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -995,7 +995,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Currency</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Currency</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
@@ -1207,14 +1207,14 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.Branch</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.Branch</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
 		</right>
 	</object>
 	<object>
-		<name>Catalog.AdvancesKeys.Attribute.IsVendorAdvance</name>
+		<name>Catalog.DELETE_AdvancesKeys.Attribute.IsVendorAdvance</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>

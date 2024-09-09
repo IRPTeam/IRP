@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9064 Accounting mapping (registers)</value>
+  <value>T9064 Бухгалтерские соответствия (регистры)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -83,7 +83,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External name</value>
+   <value>Внешнее имя</value>
   </synonym>
   <synonym>
    <key>tr</key>

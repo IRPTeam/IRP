@@ -785,7 +785,52 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 			Cancel = True;
 		EndIf;
 	EndIf;
+	
+	// R4050B_StockInventory
+	If Parameters.Object.RegisterRecords.Find("R4050B_StockInventory") <> Undefined Then
+		Records_InDocument = Undefined;
+		If Unposting Then
+			Records_InDocument = Parameters.Object.RegisterRecords.R4050B_StockInventory.Unload();
+		Else
+			Records_InDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "R4050B_StockInventory");
+			If Records_InDocument = Undefined Then
+				Records_InDocument = GetQueryTableByName("R4050B_StockInventory", Parameters, True);
+			EndIf;
+		EndIf;
+
+		If Not Records_InDocument.Columns.Count() Then
+			Records_InDocument = CommonFunctionsServer.CreateTable(Metadata.AccumulationRegisters.R4050B_StockInventory);
+		EndIf;
+
+		Exists_R4050B_StockInventory = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4050B_StockInventory");
+		If Exists_R4050B_StockInventory = Undefined Then
+			Exists_R4050B_StockInventory = GetQueryTableByName("Exists_R4050B_StockInventory", Parameters, True);
+		EndIf;
+
+		If Not Cancel And Not AccReg.R4050B_StockInventory.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+			Records_InDocument, Exists_R4050B_StockInventory, RecordType, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
+	EndIf;
 EndProcedure
+
+Function CheckBalance_R4050B_StockInventory(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
+	Parameters = New Structure();
+	Parameters.Insert("Metadata"         	 , Metadata.AccumulationRegisters.R4050B_StockInventory);
+	Parameters.Insert("Operation"            , Metadata.AccumulationRegisters.R4050B_StockInventory.Synonym);
+	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
+	Parameters.Insert("BalancePeriod", Undefined);
+	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+EndFunction
+
+Function Exists_R4050B_StockInventory() Export
+	Return "SELECT *
+		   |INTO Exists_R4050B_StockInventory
+		   |FROM
+		   |	AccumulationRegister.R4050B_StockInventory AS R4050B_StockInventory
+		   |WHERE
+		   |	R4050B_StockInventory.Recorder = &Ref";
+EndFunction
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
@@ -827,10 +872,14 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 	
 	IsFreeStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4011B_FreeStocks;
 	IsActualStock = Parameters.Metadata = Metadata.AccumulationRegisters.R4010B_ActualStocks; 
+	IsStockInventory = Parameters.Metadata = Metadata.AccumulationRegisters.R4050B_StockInventory; 
 	
 	If RecordType = AccumulationRecordType.Expense Then
 		
 		If IsFreeStock Then
+			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+			Return CheckResult.IsOk;
+		ElsIf IsStockInventory Then
 			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 			Return CheckResult.IsOk;
 		ElsIf IsActualStock Then
@@ -1505,6 +1554,8 @@ Function SkipOnCheckPosting(Doc)
 	Array = New Array;
 	Array.Add(Metadata.Documents.CalculationMovementCosts);
 	Array.Add(Metadata.Documents.JournalEntry);
+	Array.Add(Metadata.Documents.CustomersAdvancesClosing);
+	Array.Add(Metadata.Documents.VendorsAdvancesClosing);
 	
 	Return Not Array.Find(Doc) = Undefined;
 EndFunction

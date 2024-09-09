@@ -19,7 +19,7 @@
  <content>AccumulationRegister.R2031B_ShipmentInvoicing.Dimension.Branch</content>
  <content>AccumulationRegister.R5010B_ReconciliationStatement.Dimension.Branch</content>
  <content>AccumulationRegister.R1020B_AdvancesToVendors.Dimension.Branch</content>
- <content>Catalog.TransactionsKeys.Attribute.Branch</content>
+ <content>Catalog.DELETE_TransactionsKeys.Attribute.Branch</content>
  <content>InformationRegister.BranchBankTerms.Dimension.Branch</content>
  <content>AccumulationRegister.R2050T_RetailSales.Dimension.Branch</content>
  <content>AccumulationRegister.R5022T_Expenses.Dimension.Branch</content>
@@ -43,7 +43,7 @@
  <content>AccumulationRegister.R1002T_PurchaseReturns.Dimension.Branch</content>
  <content>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing.Dimension.Branch</content>
  <content>AccumulationRegister.R3015B_CashAdvance.Dimension.Branch</content>
- <content>Catalog.AdvancesKeys.Attribute.Branch</content>
+ <content>Catalog.DELETE_AdvancesKeys.Attribute.Branch</content>
  <content>AccumulationRegister.R1022B_VendorsPaymentPlanning.Dimension.Branch</content>
  <content>AccumulationRegister.R5012B_VendorsAging.Dimension.Branch</content>
  <content>AccumulationRegister.R2014T_CanceledSalesOrders.Dimension.Branch</content>

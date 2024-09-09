@@ -110,6 +110,50 @@
   <fullTextSearch>Use</fullTextSearch>
   <useInTotals>true</useInTotals>
  </dimensions>
+ <dimensions uuid="3283efc8-7f76-4d75-8982-7006e6512cc9">
+  <name>Partner</name>
+  <synonym>
+   <key>en</key>
+   <value>Partner</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Партнер</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Cari hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="09e27bdc-0c7f-4cab-be4c-3ba1576b4262">
+  <name>Agreement</name>
+  <synonym>
+   <key>en</key>
+   <value>Agreement</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Соглашение</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sözleşme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Agreements</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
  <dimensions uuid="6f393e4c-ef01-42b1-bfac-78d6de246a72">
   <name>Currency</name>
   <synonym>
@@ -148,28 +192,6 @@
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <useInTotals>true</useInTotals>
- </dimensions>
- <dimensions uuid="3283efc8-7f76-4d75-8982-7006e6512cc9">
-  <name>Partner</name>
-  <synonym>
-   <key>en</key>
-   <value>Partner</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Партнер</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Partners</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

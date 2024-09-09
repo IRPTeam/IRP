@@ -1079,7 +1079,7 @@
       </title>
       <title>
        <key>tr</key>
-       <value>Şube (gönderme)</value>
+       <value>Şube (çıkan)</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -2183,7 +2183,7 @@
    </title>
    <title>
     <key>tr</key>
-    <value>Borç/Alacak Dekontu</value>
+    <value>Borç/alacak dekontu</value>
    </title>
    <extendedTooltip>
     <name>GroupDebitCreditNoteExtendedTooltip</name>

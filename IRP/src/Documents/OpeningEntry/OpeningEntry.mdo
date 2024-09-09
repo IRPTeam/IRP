@@ -3189,6 +3189,32 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="df0e6f1e-0d57-4456-a74b-f8a612091cc7">
+   <name>Agreement</name>
+   <synonym>
+    <key>en</key>
+    <value>Agreement</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Соглашение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sözleşme</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Partner</name>
+    <field>Document.OpeningEntry.TabularSection.EmployeeCashAdvance.Attribute.Employee</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="abd67773-e5dd-4088-8879-7d24e8fccfa9">
   <producedTypes>

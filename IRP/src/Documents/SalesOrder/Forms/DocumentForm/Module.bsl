@@ -19,6 +19,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -46,6 +47,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
+	If EventName = "CloseOrder" Then
+		ThisObject.ClosingOrder = DocOrderClosingServer.GetClosingBySalesOrder(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 
 	If Not Source = ThisObject Then
@@ -94,9 +100,13 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
+	Else
+		Form.ReadOnly = False;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.Store.ReadOnly        = Form.ReadOnly;
+	Form.Items.DeliveryDate.ReadOnly = Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 	
 	_QuantityIsFixed = False;
@@ -767,7 +777,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient

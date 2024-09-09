@@ -301,6 +301,13 @@
      <value>91</value>
     </code>
    </content>
+   <content id="06b28694-ad57-4a36-8de8-d1c903dc763e">
+    <name>BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>155</value>
+    </code>
+   </content>
   </items>
   <items id="5780092e-ac78-48e0-8f40-6a3fb575aeb2">
    <name>Document_PurchaseInvoice</name>
@@ -617,6 +624,13 @@
     <name>CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions</name>
     <code xsi:type="core:NumberValue">
      <value>88</value>
+    </code>
+   </content>
+   <content id="cd0f284f-337b-47aa-a6cd-72ab3c2a7449">
+    <name>CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>156</value>
     </code>
    </content>
   </items>

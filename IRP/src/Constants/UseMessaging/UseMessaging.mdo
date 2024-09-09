@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="bed4220a-0dee-4305-9417-7c80ea7c4d93">
+ <producedTypes>
+  <managerType typeId="6a57a512-8f98-43eb-b827-9c945d182447" valueTypeId="4c060212-e1b4-4a15-95b8-1370af743e28"/>
+  <valueManagerType typeId="2bf64260-dcee-4ee8-82e4-aab86603d897" valueTypeId="054cc074-65a1-432b-a3be-a3778d845c0c"/>
+  <valueKeyType typeId="0e80c972-4aa4-4b30-8881-2884e4b1bc76" valueTypeId="9f4ec5ab-e1da-45c3-ab3a-928b52382d9b"/>
+ </producedTypes>
+ <name>UseMessaging</name>
+ <synonym>
+  <key>en</key>
+  <value>Use messaging</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Использовать уведомления</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Use messaging</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

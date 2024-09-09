@@ -718,7 +718,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Charts of accounts</value>
+      <value>План счетов</value>
      </title>
      <title>
       <key>tr</key>
@@ -2745,7 +2745,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Step 1</value>
+    <value>Шаг 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -4535,7 +4535,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Step 2</value>
+    <value>Шаг 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -5632,7 +5632,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Step 3</value>
+    <value>Шаг 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -6232,7 +6232,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Source account</value>
+      <value>Счет учета источник</value>
      </title>
      <title>
       <key>tr</key>
@@ -6572,7 +6572,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Target account</value>
+      <value>Счета учета получатель</value>
      </title>
      <title>
       <key>tr</key>
@@ -7248,7 +7248,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Ext dimension 1</value>
+      <value>Субконто 1</value>
      </title>
      <title>
       <key>tr</key>
@@ -7924,7 +7924,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Ext dimension 2</value>
+      <value>Субконто 2</value>
      </title>
      <title>
       <key>tr</key>
@@ -8600,7 +8600,7 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Ext dimension 3</value>
+      <value>Субконто 3</value>
      </title>
      <title>
       <key>tr</key>
@@ -8927,7 +8927,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Step 4</value>
+    <value>Шаг 4</value>
    </title>
    <title>
     <key>tr</key>
@@ -9167,7 +9167,7 @@
       </presentation>
       <presentation>
        <key>ru</key>
-       <value>Типовой</value>
+       <value>Normal charts of accounts</value>
       </presentation>
       <presentation>
        <key>tr</key>
@@ -9184,7 +9184,7 @@
       </presentation>
       <presentation>
        <key>ru</key>
-       <value>Налоговый</value>
+       <value>Tax charts of account</value>
       </presentation>
       <presentation>
        <key>tr</key>
@@ -9201,7 +9201,7 @@
       </presentation>
       <presentation>
        <key>ru</key>
-       <value>&lt;all&gt;</value>
+       <value>&lt;все&gt;</value>
       </presentation>
       <presentation>
        <key>tr</key>
@@ -9421,7 +9421,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Steps</value>
+   <value>Шаги</value>
   </title>
   <title>
    <key>tr</key>
@@ -9520,7 +9520,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External charts of accounts</value>
+   <value>Внешний план счетов</value>
   </title>
   <title>
    <key>tr</key>
@@ -9570,7 +9570,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Code mask</value>
+    <value>Маска кода</value>
    </title>
    <title>
     <key>tr</key>
@@ -9724,7 +9724,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Extra dimension types name</value>
+    <value>Наименование типа субконо</value>
    </title>
    <title>
     <key>tr</key>
@@ -9751,7 +9751,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External accounts</value>
+   <value>Внешние счета учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -9801,7 +9801,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Parent ref</value>
+    <value>Ссылка владельца</value>
    </title>
    <title>
     <key>tr</key>
@@ -9853,7 +9853,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Parent code</value>
+    <value>Код владельца</value>
    </title>
    <title>
     <key>tr</key>
@@ -10009,7 +10009,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Off balance</value>
+    <value>Забалансовый</value>
    </title>
    <title>
     <key>tr</key>
@@ -10134,7 +10134,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ref</value>
+    <value>Внутренняя ссылка</value>
    </title>
    <title>
     <key>tr</key>
@@ -10159,7 +10159,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim ref1</value>
+    <value>Ссылка субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -10185,7 +10185,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim turnovers only1</value>
+    <value>Субконто 1 только обороты</value>
    </title>
    <title>
     <key>tr</key>
@@ -10210,7 +10210,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim currency1</value>
+    <value>Сумма субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -10235,7 +10235,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim quantity1</value>
+    <value>Количество субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -10260,7 +10260,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim amount1</value>
+    <value>Сумма субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -10285,7 +10285,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim amount2</value>
+    <value>Сумма субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -10310,7 +10310,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim currency2</value>
+    <value>Сумма субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -10335,7 +10335,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim quantity2</value>
+    <value>Количество субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -10360,7 +10360,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim ref2</value>
+    <value>Ссылка субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -10386,7 +10386,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim turnovers only2</value>
+    <value>Субконто 2 только обороты</value>
    </title>
    <title>
     <key>tr</key>
@@ -10411,7 +10411,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim amount3</value>
+    <value>Сумма субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -10436,7 +10436,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim currency3</value>
+    <value>Сумма субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -10461,7 +10461,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim quantity3</value>
+    <value>Количество субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -10486,7 +10486,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim ref3</value>
+    <value>Ссылка субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -10512,7 +10512,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim turnovers only3</value>
+    <value>Субконто 3 только обороты</value>
    </title>
    <title>
     <key>tr</key>
@@ -10589,7 +10589,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Ledger type variants mapping</value>
+   <value>Соответствия вариантов вида учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -10612,7 +10612,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test post response</value>
+   <value>Тест POST ответа</value>
   </title>
   <title>
    <key>tr</key>
@@ -10638,7 +10638,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test period</value>
+   <value>Тест период</value>
   </title>
   <title>
    <key>tr</key>
@@ -10663,7 +10663,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External companies</value>
+   <value>Внешние организации</value>
   </title>
   <title>
    <key>tr</key>
@@ -10817,7 +10817,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ref</value>
+    <value>Внутренняя ссылка</value>
    </title>
    <title>
     <key>tr</key>
@@ -10868,7 +10868,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External currencies</value>
+   <value>Внешние валюты</value>
   </title>
   <title>
    <key>tr</key>
@@ -11022,7 +11022,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ref</value>
+    <value>Внутренняя ссылка</value>
    </title>
    <title>
     <key>tr</key>
@@ -11073,7 +11073,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External registers</value>
+   <value>Внешние регистры</value>
   </title>
   <title>
    <key>tr</key>
@@ -11278,7 +11278,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>External ext dimensions</value>
+   <value>Внешние субконто</value>
   </title>
   <title>
    <key>tr</key>
@@ -11457,7 +11457,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Base class</value>
+    <value>Класс основания</value>
    </title>
    <title>
     <key>tr</key>
@@ -11483,7 +11483,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Class</value>
+    <value>Класс</value>
    </title>
    <title>
     <key>tr</key>
@@ -11509,7 +11509,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is ref</value>
+    <value>Это ссылка</value>
    </title>
    <title>
     <key>tr</key>
@@ -11534,7 +11534,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ref</value>
+    <value>Внутренняя ссылка</value>
    </title>
    <title>
     <key>tr</key>
@@ -11559,7 +11559,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal base class</value>
+    <value>Внутренний класс</value>
    </title>
    <title>
     <key>tr</key>
@@ -11585,7 +11585,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal class</value>
+    <value>Внутренний класс</value>
    </title>
    <title>
     <key>tr</key>
@@ -11664,7 +11664,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test register name</value>
+   <value>Тест наименование регистра</value>
   </title>
   <title>
    <key>tr</key>
@@ -11690,7 +11690,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test load all records</value>
+   <value>Тест загрузка всех записей</value>
   </title>
   <title>
    <key>tr</key>
@@ -11715,7 +11715,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test opening entry date</value>
+   <value>Тест дату ввода начальных остатков</value>
   </title>
   <title>
    <key>tr</key>
@@ -11743,7 +11743,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Account matching</value>
+   <value>Сопоставление счетов бух. учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -11767,7 +11767,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Source account ref</value>
+    <value>Ссылка счета учета источника</value>
    </title>
    <title>
     <key>tr</key>
@@ -11793,7 +11793,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Source account code</value>
+    <value>Код счета источника</value>
    </title>
    <title>
     <key>tr</key>
@@ -11819,7 +11819,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Source account description ru</value>
+    <value>Наименование ru счет учета источник</value>
    </title>
    <title>
     <key>tr</key>
@@ -11845,7 +11845,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Source account description en</value>
+    <value>Наименование en счет учета источник</value>
    </title>
    <title>
     <key>tr</key>
@@ -11871,7 +11871,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Source account description tr</value>
+    <value>Наименование tr счет учета источник</value>
    </title>
    <title>
     <key>tr</key>
@@ -11897,7 +11897,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>All ext dimension values1</value>
+    <value>Все значения субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -11922,7 +11922,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>All ext dimension values2</value>
+    <value>Все значения субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -11947,7 +11947,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>All ext dimension values3</value>
+    <value>Все значения субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -11972,7 +11972,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Target account code</value>
+    <value>Код счета учета получателя</value>
    </title>
    <title>
     <key>tr</key>
@@ -11998,7 +11998,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Target account description en</value>
+    <value>Счет учета получатель en</value>
    </title>
    <title>
     <key>tr</key>
@@ -12024,7 +12024,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Target account description ru</value>
+    <value>Счет учета получатель ru</value>
    </title>
    <title>
     <key>tr</key>
@@ -12050,7 +12050,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Target account description tr</value>
+    <value>Счет учета получатель tr</value>
    </title>
    <title>
     <key>tr</key>
@@ -12076,7 +12076,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Target account ref</value>
+    <value>Ссылка счета учета получателя</value>
    </title>
    <title>
     <key>tr</key>
@@ -12102,7 +12102,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Base class 1</value>
+    <value>Класс основания 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12128,7 +12128,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Base class 2</value>
+    <value>Класс основания 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12154,7 +12154,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Base class 3</value>
+    <value>Класс основания 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12180,7 +12180,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Class 1</value>
+    <value>Класс 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12206,7 +12206,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Class 2</value>
+    <value>Класс 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12232,7 +12232,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Class 3</value>
+    <value>Класс 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12258,7 +12258,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is ref 1</value>
+    <value>Это ссылка 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12283,7 +12283,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is ref 2</value>
+    <value>Это ссылка 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12308,7 +12308,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Is ref 3</value>
+    <value>Это ссылка 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12411,7 +12411,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description ru1</value>
+    <value>Значения 1 наименование ru</value>
    </title>
    <title>
     <key>tr</key>
@@ -12437,7 +12437,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description ru2</value>
+    <value>Значения 2 наименование ru</value>
    </title>
    <title>
     <key>tr</key>
@@ -12463,7 +12463,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description ru3</value>
+    <value>Значения 3 наименование ru</value>
    </title>
    <title>
     <key>tr</key>
@@ -12489,7 +12489,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description en1</value>
+    <value>Значения 1 наименование en</value>
    </title>
    <title>
     <key>tr</key>
@@ -12515,7 +12515,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description en2</value>
+    <value>Значения 2 наименование en</value>
    </title>
    <title>
     <key>tr</key>
@@ -12541,7 +12541,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description en3</value>
+    <value>Значения 3 наименование en</value>
    </title>
    <title>
     <key>tr</key>
@@ -12567,7 +12567,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description tr1</value>
+    <value>Значения 2 наименование tr</value>
    </title>
    <title>
     <key>tr</key>
@@ -12593,7 +12593,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description tr2</value>
+    <value>Значения 2 наименование tr</value>
    </title>
    <title>
     <key>tr</key>
@@ -12619,7 +12619,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Value description tr3</value>
+    <value>Значения 3 наименование tr</value>
    </title>
    <title>
     <key>tr</key>
@@ -12670,7 +12670,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dimension ref1</value>
+    <value>Ссылка субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12696,7 +12696,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dimension ref2</value>
+    <value>Ссылка субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12722,7 +12722,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dimension ref3</value>
+    <value>Ссылка субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12748,7 +12748,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal source account</value>
+    <value>Внутренний счет источник</value>
    </title>
    <title>
     <key>tr</key>
@@ -12773,7 +12773,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal target account</value>
+    <value>Внутренний счет получатель</value>
    </title>
    <title>
     <key>tr</key>
@@ -12798,7 +12798,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension1</value>
+    <value>Внутренний субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12823,7 +12823,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension2</value>
+    <value>Внутренний субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12848,7 +12848,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension3</value>
+    <value>Внутренний субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12873,7 +12873,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension value1</value>
+    <value>Значение внутреннего субконто 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12898,7 +12898,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension value2</value>
+    <value>Значение внутреннего субконто 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -12923,7 +12923,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal ext dimension value3</value>
+    <value>Значение внутреннего субконто 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -12948,7 +12948,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal base class1</value>
+    <value>Класс внутренней базы 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -12974,7 +12974,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal class1</value>
+    <value>Внутренний класс 1</value>
    </title>
    <title>
     <key>tr</key>
@@ -13000,7 +13000,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal base class2</value>
+    <value>Класс внутренней базы 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -13026,7 +13026,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal base class3</value>
+    <value>Класс внутренней базы 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -13052,7 +13052,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal class2</value>
+    <value>Внутренний класс 2</value>
    </title>
    <title>
     <key>tr</key>
@@ -13078,7 +13078,7 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Internal class3</value>
+    <value>Внутренний класс 3</value>
    </title>
    <title>
     <key>tr</key>
@@ -13105,7 +13105,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Target chart of account</value>
+   <value>План счетов получатель</value>
   </title>
   <title>
    <key>tr</key>
@@ -13131,7 +13131,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Source ledger type</value>
+   <value>Тип учета источник</value>
   </title>
   <title>
    <key>tr</key>
@@ -13156,7 +13156,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Target ledger type</value>
+   <value>Вид учета получатель</value>
   </title>
   <title>
    <key>tr</key>
@@ -13206,7 +13206,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13256,7 +13256,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13281,7 +13281,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Select all external accounts</value>
+   <value>Выбрать все внешние счета учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -13310,7 +13310,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unselect all external accounts</value>
+   <value>Снять выбор со всех внешних счетов учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -13339,7 +13339,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test post request</value>
+   <value>Тест POST запроса</value>
   </title>
   <title>
    <key>tr</key>
@@ -13414,7 +13414,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13439,7 +13439,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13464,7 +13464,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test load records</value>
+   <value>Тест загрузки записей</value>
   </title>
   <title>
    <key>tr</key>
@@ -13514,7 +13514,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13564,7 +13564,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13589,7 +13589,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Select all external ext dimensions</value>
+   <value>Выбрать все внешние субконто</value>
   </title>
   <title>
    <key>tr</key>
@@ -13617,7 +13617,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unselect all external ext dimensions</value>
+   <value>Снять выбор со всех внешних субконто</value>
   </title>
   <title>
    <key>tr</key>
@@ -13645,7 +13645,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test load opening entry</value>
+   <value>Тест загрузки ввода начальных остатков</value>
   </title>
   <title>
    <key>tr</key>
@@ -13670,7 +13670,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Test post request2</value>
+   <value>Тест POST запроса 2</value>
   </title>
   <title>
    <key>tr</key>
@@ -13720,7 +13720,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Set mapping</value>
+   <value>Установить соответствие</value>
   </title>
   <title>
    <key>tr</key>
@@ -13745,7 +13745,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Select all external accounts</value>
+   <value>Выбрать все внешние счета учета</value>
   </title>
   <title>
    <key>tr</key>
@@ -13774,7 +13774,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unselect all external accounts</value>
+   <value>Снять выбор со всех внешних счетов учета</value>
   </title>
   <title>
    <key>tr</key>

@@ -178,7 +178,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group source</value>
+   <value>Группа источник</value>
   </title>
   <title>
    <key>tr</key>
@@ -372,7 +372,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group ext dimension 1</value>
+   <value>Группа субконто 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -566,7 +566,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group ext dimension 1</value>
+   <value>Группа субконто 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -760,7 +760,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group ext dimension 1</value>
+   <value>Группа субконто 1</value>
   </title>
   <title>
    <key>tr</key>
@@ -915,7 +915,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Group target</value>
+   <value>Группа получатель</value>
   </title>
   <title>
    <key>tr</key>
@@ -990,7 +990,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Source ledger type variant</value>
+   <value>Вариант вида учета источника</value>
   </title>
   <title>
    <key>tr</key>
@@ -1015,7 +1015,7 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Target ledger type variant</value>
+   <value>Вариант вида учета получателя</value>
   </title>
   <title>
    <key>tr</key>

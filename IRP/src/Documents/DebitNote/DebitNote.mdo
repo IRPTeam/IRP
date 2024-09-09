@@ -148,6 +148,33 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="059ec230-5736-48db-937c-0bd1a6fe59ce">
+  <name>Account</name>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Банковский счет</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Hesap</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.DebitNote.Attribute.Company</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="617b1c3e-517d-4317-afb3-069eb8b20027">
   <name>DocumentForm</name>
   <synonym>

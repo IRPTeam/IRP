@@ -59,6 +59,9 @@ Function GetOperationsDefinition()
 	// Transaction type - Other income
 	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues,
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherIncome));
+	// Transaction type - salary return
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 
 	// Cash payment
 	//  Transaction type - Payment to vendor
@@ -100,7 +103,10 @@ Function GetOperationsDefinition()
 		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.CashTransferOrder));	
 	//  Transaction type - Other partner
 	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.OtherPartner));	
+	//  Transaction type - Salary return
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment,
+		New Structure("ByRow, TransactionType", True, Enums.IncomingPaymentTransactionType.SalaryReturn));
 	
 	// Cash expense
 	Map.Insert(AO.CashExpense_DR_R5022T_Expenses_CR_R3010B_CashOnHand , New Structure("ByRow", True));
@@ -3678,8 +3684,13 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 			
 		EndDo;
 		
-		If QueryTable[0].Posted Then
-			DocObject.Write(DocumentWriteMode.Posting);
+		
+		If QueryTable[0].Posted Or Not ValueIsFilled(DocObject.Ref) Then
+			If DocObject.DeletionMark Then
+				DocObject.Write(DocumentWriteMode.Write);
+			Else	
+				DocObject.Write(DocumentWriteMode.Posting);
+			EndIf;
 		Else
 			DocObject.Write(DocumentWriteMode.UndoPosting);
 		EndIf;
@@ -3784,7 +3795,7 @@ Procedure FillExtDimensionsRow(Row, ExtDimension, AnalyticType)
 	ArrayOfDescriptions = LocalizationReuse.AllDescription();
 	
 	For Each Description In ArrayOfDescriptions Do
-		PropertyName = Description + + AnalyticType + ExtDimension.Number;
+		PropertyName = Description + AnalyticType + ExtDimension.Number;
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) 
 			And CommonFunctionsClientServer.ObjectHasProperty(ExtDimension.Value, Description) Then
 			Row[PropertyName] = ExtDimension.Value[Description];

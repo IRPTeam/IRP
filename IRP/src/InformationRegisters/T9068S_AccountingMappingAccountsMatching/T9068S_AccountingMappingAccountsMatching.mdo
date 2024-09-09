@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9068 Accounting mapping (accounts matching)</value>
+  <value>T9068 Бухгалтерские соответствия (сопоставление счетов)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -35,7 +35,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Target account</value>
+   <value>Счета учета получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -153,7 +153,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Source ledger type</value>
+   <value>Тип учета источник</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -179,7 +179,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Target ledger type</value>
+   <value>Вид учета получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -204,7 +204,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Source account</value>
+   <value>Счет учета источник</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -255,7 +255,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Ext dimension value1</value>
+   <value>Значение субконто 1</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -312,7 +312,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Ext dimension value2</value>
+   <value>Значение субконто 2</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -369,7 +369,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Ext dimension value3</value>
+   <value>Значение субконто 3</value>
   </synonym>
   <synonym>
    <key>tr</key>

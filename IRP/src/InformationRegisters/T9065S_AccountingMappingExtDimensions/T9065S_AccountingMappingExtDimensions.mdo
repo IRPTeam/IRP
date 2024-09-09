@@ -16,7 +16,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9065 Accounting mapping (ext dimensions)</value>
+  <value>T9065 Бухгалтерские соответствия (субконто)</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -35,7 +35,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Internal ref</value>
+   <value>Внутренняя ссылка</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -58,7 +58,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Internal base class</value>
+   <value>Внутренний класс</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -84,7 +84,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Internal class</value>
+   <value>Внутренний класс</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -135,7 +135,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External ref</value>
+   <value>Внешняя ссылка</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -160,7 +160,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External base class</value>
+   <value>Класс внешнего основания</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -188,7 +188,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>External class</value>
+   <value>Внешний класс</value>
   </synonym>
   <synonym>
    <key>tr</key>

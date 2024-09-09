@@ -1106,6 +1106,66 @@
   <autoCommandBar>
    <name>AllAttributesValueTableCommandBar</name>
    <id>73</id>
+   <items xsi:type="form:Button">
+    <name>AllAttributesValueTableSelectAll</name>
+    <id>101</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>AllAttributesValueTableSelectAllExtendedTooltip</name>
+     <id>102</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.SelectAll</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
+   <items xsi:type="form:Button">
+    <name>AllAttributesValueTableDeselectAll</name>
+    <id>103</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>AllAttributesValueTableDeselectAllExtendedTooltip</name>
+     <id>104</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <commandName>Form.Command.DeselectAll</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -2090,6 +2150,62 @@
   <action xsi:type="form:FormCommandHandlerContainer">
    <handler>
     <name>ShowColumns</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>SelectAll</name>
+  <title>
+   <key>en</key>
+   <value>Select all</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Выбрать все</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
+  </title>
+  <id>8</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.CheckAll</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SelectAll</name>
+   </handler>
+  </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>DeselectAll</name>
+  <title>
+   <key>en</key>
+   <value>Deselect all</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Отменить выбор всех</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Tümü işaret kaldır</value>
+  </title>
+  <id>9</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.UncheckAll</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>DeselectAll</name>
    </handler>
   </action>
   <currentRowUse>Auto</currentRowUse>

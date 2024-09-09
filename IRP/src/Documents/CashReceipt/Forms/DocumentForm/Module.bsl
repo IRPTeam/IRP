@@ -18,6 +18,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -58,7 +59,10 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	|PaymentList.RetailCustomer,
 	|PaymentList.SendingAccount,
 	|PaymentList.SendingBranch,
-	|PaymentList.Project";
+	|PaymentList.Project,
+	|PaymentList.Employee,
+	|PaymentList.PaymentPeriod,
+	|PaymentList.CalculationType";
 
 	ArrayOfAllAttributes = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -73,6 +77,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 	RetailCustomerAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.RetailCustomerAdvance");
 	EmployeeCashAdvance = PredefinedValue("Enum.IncomingPaymentTransactionType.EmployeeCashAdvance");
 	OtherPartner        = PredefinedValue("Enum.IncomingPaymentTransactionType.OtherPartner");
+	SalaryReturn        = PredefinedValue("Enum.IncomingPaymentTransactionType.SalaryReturn");
 	
 	// visible columns
 	If TransactionType = CashTransferOrder Then
@@ -117,7 +122,13 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.BasisDocument";		
+		|PaymentList.Agreement,
+		|PaymentList.BasisDocument";
+	ElsIf TransactionType = SalaryReturn Then
+		StrByType = "
+		|PaymentList.Employee,
+		|PaymentList.PaymentPeriod,
+		|PaymentList.CalculationType";
 	EndIf;
 
 	ArrayOfVisibleAttributes = New Array();

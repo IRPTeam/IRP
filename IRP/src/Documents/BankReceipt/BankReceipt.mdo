@@ -123,6 +123,7 @@
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
@@ -1284,6 +1285,106 @@
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="d94db3c7-6016-47c0-a1fd-775c5c60749c">
+   <name>Employee</name>
+   <synonym>
+    <key>en</key>
+    <value>Employee</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сотрудник</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Personel</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.Employee</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="bb2a9d9b-f10a-4455-8667-a8ea3c47b46c">
+   <name>PaymentPeriod</name>
+   <synonym>
+    <key>en</key>
+    <value>Payment period</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Период оплат</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ödeme periyodu</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.PlanningPeriods</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameters>
+    <name>Filter.IsSalary</name>
+    <value xsi:type="core:BooleanValue">
+     <value>true</value>
+    </value>
+   </choiceParameters>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="578d8cb1-0850-48bc-8e0c-63ee3e1c4631">
+   <name>CalculationType</name>
+   <synonym>
+    <key>en</key>
+    <value>Calculation type</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Вариант оплаты</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hesaplama tipi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SalaryCalculationType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="006b26ce-41e5-4b16-919a-7a9328c6b409">
+   <name>Branch</name>
+   <synonym>
+    <key>en</key>
+    <value>Branch</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Структурное подразделение</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Şube</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>DontUse</createOnInput>
+   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
  </tabularSections>
  <tabularSections uuid="2434d324-00b7-4acc-847b-a51fc5c9af2e">

@@ -200,4 +200,19 @@
    <value>Diğer ortak</value>
   </synonym>
  </enumValues>
+ <enumValues uuid="18ac4528-833b-4bec-9320-8243b9adc2e9">
+  <name>SalaryReturn</name>
+  <synonym>
+   <key>en</key>
+   <value>Salary return</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Возврат зарплаты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Maaş iadesi</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

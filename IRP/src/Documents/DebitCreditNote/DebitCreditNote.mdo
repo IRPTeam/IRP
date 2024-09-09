@@ -18,7 +18,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Borç/Alacak Dekontu</value>
+  <value>Borç/alacak dekontu</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.DebitCreditNote.StandardAttribute.Number</inputByString>
@@ -68,7 +68,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
-  <value>Borç/Alacak Dekontu</value>
+  <value>Borç/alacak dekontu</value>
  </objectPresentation>
  <listPresentation>
   <key>en</key>
@@ -80,7 +80,7 @@
  </listPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Borç/Alacak Dekontlar</value>
+  <value>Borç/alacak dekontlar</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -143,7 +143,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Şube (alma)</value>
+   <value>Şube (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -166,7 +166,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ortak (gönderme)</value>
+   <value>Cari hesap (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -189,7 +189,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Yasal İsim (gönderme)</value>
+   <value>Fatura hesabı (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -212,7 +212,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ortak dönem (gönderme)</value>
+   <value>Sözleşme (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -236,7 +236,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sözleşme (gönderme)</value>
+   <value>Kontrakt (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>
@@ -267,7 +267,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Proje (gönderme)</value>
+   <value>Proje (çıkan)</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -290,7 +290,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Borç türü (gönderme)</value>
+   <value>Borç türü (çıkan)</value>
   </synonym>
   <type>
    <types>EnumRef.DebtTypes</types>
@@ -314,7 +314,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sipariş (gönderme)</value>
+   <value>Sipariş (çıkan)</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -338,7 +338,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Temel (gönderme)</value>
+   <value>Kaynak evrak (çıkan)</value>
   </synonym>
   <type>
    <types>DefinedType.typeApArTransactionBasises</types>
@@ -361,7 +361,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ortak (alma)</value>
+   <value>Cari hesap (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -384,7 +384,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Yasal İsim (alma)</value>
+   <value>Fatura hesabı (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -407,7 +407,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Ortak dönem (alma)</value>
+   <value>Sözleşme (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -431,7 +431,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sözleşme (alma)</value>
+   <value>Kontrakt (gelen)</value>
   </synonym>
   <type>
    <types>CatalogRef.LegalNameContracts</types>
@@ -462,7 +462,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Proje (alma)   </value>
+   <value>Proje (gelen)   </value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -485,7 +485,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Borç türü (alma)</value>
+   <value>Borç türü (gelen)</value>
   </synonym>
   <type>
    <types>EnumRef.DebtTypes</types>
@@ -509,7 +509,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Sipariş (alma)  </value>
+   <value>Sipariş (gelen)  </value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -533,7 +533,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Temel (alma)  </value>
+   <value>Kaynak evrak (gelen)  </value>
   </synonym>
   <type>
    <types>DefinedType.typeApArTransactionBasises</types>
@@ -696,7 +696,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Döviz (çıkan)</value>
+   <value>Döviz (gönderen)</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -869,7 +869,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Send local total amount</value>
+   <value>Локальная сумма итого отправитель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -892,7 +892,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Send local rate</value>
+   <value>Локальный курс валюты отправитель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -915,7 +915,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Receive local total amount</value>
+   <value>Локальная сумма итого получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>
@@ -938,7 +938,7 @@
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Receive local rate</value>
+   <value>Локальный курс валюты получатель</value>
   </synonym>
   <synonym>
    <key>tr</key>

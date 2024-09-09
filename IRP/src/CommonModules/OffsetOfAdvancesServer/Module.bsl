@@ -76,33 +76,50 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	// detail info by all aging
 	Records_OffsetAging = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
 	Records_OffsetAging.Columns.Delete(Records_OffsetAging.Columns.PointInTime);
-	
-	Records_AdvancesCurrencyRevaluation = InformationRegisters.T2012S_AdvancesCurrencyRevaluation.CreateRecordSet().UnloadColumns();
-	Records_AdvancesCurrencyRevaluation.Columns.Delete(Records_AdvancesCurrencyRevaluation.Columns.PointInTime);
-	
-	Records_TransactionsCurrencyRevaluation = InformationRegisters.T2011S_TransactionsCurrencyRevaluation.CreateRecordSet().UnloadColumns();
-	Records_TransactionsCurrencyRevaluation.Columns.Delete(Records_TransactionsCurrencyRevaluation.Columns.PointInTime);
-	
+		
 	// Clear register records
 	Clear_SelfRecords(Parameters);
 	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey); // write empty table
 	Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey); // write empty table
 	
 	// Create advances keys
-	Table_DocumentAndAdvancesKey = New ValueTable();;
-	Table_DocumentAndAdvancesKey.Columns.Add("Document"   , Metadata.AccumulationRegisters[Parameters.RegisterName_Advances].StandardAttributes.Recorder.Type);
-	Table_DocumentAndAdvancesKey.Columns.Add("AdvanceKey" , New TypeDescription("CatalogRef.AdvancesKeys"));
-	Table_DocumentAndAdvancesKey.Columns.Add("Amount"     , Metadata.DefinedTypes.typeAmount.Type);
+	RegMetadata = Metadata.AccumulationRegisters[Parameters.RegisterName_Advances];
+	Table_DocumentAndAdvancesKey = New ValueTable();
+	Table_DocumentAndAdvancesKey.Columns.Add("Document"       , RegMetadata.StandardAttributes.Recorder.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("AdvanceKeyUUID" , New TypeDescription("UUID"));
+	Table_DocumentAndAdvancesKey.Columns.Add("Company"        , RegMetadata.Dimensions.Company.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Branch"         , RegMetadata.Dimensions.Branch.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Currency"       , RegMetadata.Dimensions.Currency.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Partner"        , RegMetadata.Dimensions.Partner.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("LegalName"      , RegMetadata.Dimensions.LegalName.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Agreement"      , RegMetadata.Dimensions.Agreement.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Order"          , RegMetadata.Dimensions.Order.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Project"        , RegMetadata.Dimensions.Project.Type);
+	Table_DocumentAndAdvancesKey.Columns.Add("Amount"         , Metadata.DefinedTypes.typeAmount.Type);
+	// is vendor advance or is customer advance
+	Table_DocumentAndAdvancesKey.Columns.Add(Parameters.AdvanceType , New TypeDescription("Boolean"));
 
 	CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, Table_DocumentAndAdvancesKey);
 	// Write advances keys to TM1020B_AdvancesKey, Receipt
 	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
 		
 	// Create transactions keys
-	Table_DocumentAndTransactionsKey = New ValueTable();;
-	Table_DocumentAndTransactionsKey.Columns.Add("Document"       , Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions].StandardAttributes.Recorder.Type);
-	Table_DocumentAndTransactionsKey.Columns.Add("TransactionKey" , New TypeDescription("CatalogRef.TransactionsKeys"));
-
+	RegMetadata = Metadata.AccumulationRegisters[Parameters.RegisterName_Transactions];
+	Table_DocumentAndTransactionsKey = New ValueTable();
+	Table_DocumentAndTransactionsKey.Columns.Add("Document"           , RegMetadata.StandardAttributes.Recorder.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("TransactionKeyUUID" , New TypeDescription("UUID"));
+	Table_DocumentAndTransactionsKey.Columns.Add("Company"            , RegMetadata.Dimensions.Company.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Branch"             , RegMetadata.Dimensions.Branch.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Currency"           , RegMetadata.Dimensions.Currency.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Partner"            , RegMetadata.Dimensions.Partner.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("LegalName"          , RegMetadata.Dimensions.LegalName.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Agreement"          , RegMetadata.Dimensions.Agreement.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("TransactionBasis"   , RegMetadata.Dimensions.Basis.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Order"              , RegMetadata.Dimensions.Order.Type);
+	Table_DocumentAndTransactionsKey.Columns.Add("Project"            , RegMetadata.Dimensions.Project.Type);
+	// is vendor transaction or is customer transaction
+	Table_DocumentAndTransactionsKey.Columns.Add(Parameters.TransactionType , New TypeDescription("Boolean"));
+	
 	CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey);
 	// Write transactions keys to TM1030B_TransactionsKey
 	Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);
@@ -111,7 +128,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Query.Text =
 	"SELECT
 	|	DocAdv.Document,
-	|	DocAdv.AdvanceKey
+	|	DocAdv.AdvanceKeyUUID
 	|INTO tmp_DocAdv
 	|FROM
 	|	&DocAdv AS DocAdv
@@ -120,7 +137,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	DocTrn.Document,
-	|	DocTrn.TransactionKey
+	|	DocTrn.TransactionKeyUUID
 	|INTO tmp_DocTrn
 	|FROM
 	|	&DocTrn AS DocTrn
@@ -128,8 +145,8 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmp_DocAdv.AdvanceKey AS AdvanceKey,
-	|	NULL AS TransactionKey,
+	|	tmp_DocAdv.AdvanceKeyUUID AS AdvanceKeyUUID,
+	|	NULL AS TransactionKeyUUID,
 	|	tmp_DocAdv.Document.PointInTime AS PointInTime,
 	|	tmp_DocAdv.Document AS Document
 	|INTO tmp_AllKeys
@@ -140,7 +157,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|
 	|SELECT
 	|	NULL,
-	|	tmp_DocTrn.TransactionKey,
+	|	tmp_DocTrn.TransactionKeyUUID,
 	|	tmp_DocTrn.Document.PointInTime,
 	|	tmp_DocTrn.Document
 	|FROM
@@ -149,15 +166,15 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	tmpAllKeys.AdvanceKey,
-	|	tmpAllKeys.TransactionKey,
+	|	tmpAllKeys.AdvanceKeyUUID,
+	|	tmpAllKeys.TransactionKeyUUID,
 	|	tmpAllKeys.PointInTime,
 	|	tmpAllKeys.Document
 	|FROM
 	|	tmp_AllKeys AS tmpAllKeys
 	|GROUP BY
-	|	tmpAllKeys.AdvanceKey,
-	|	tmpAllKeys.TransactionKey,
+	|	tmpAllKeys.AdvanceKeyUUID,
+	|	tmpAllKeys.TransactionKeyUUID,
 	|	tmpAllKeys.PointInTime,
 	|	tmpAllKeys.Document
 	|
@@ -166,26 +183,28 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 			
 	Query.SetParameter("DocAdv", Table_DocumentAndAdvancesKey);
 	Query.SetParameter("DocTrn", Table_DocumentAndTransactionsKey);
-	Query.SetParameter("Records_AdvancesKey"     , Records_AdvancesKey);
-	Query.SetParameter("Records_TransactionsKey" , Records_TransactionsKey);
 
-	QueryResults = Query.ExecuteBatch();
-		
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	
 	While QuerySelection.Next() Do
 		// Offset advances to transactions
-		If ValueIsFilled(QuerySelection.AdvanceKey) Then
-
-			If TypeOf(QuerySelection.Document) = Parameters._OrderCloseType And ValueIsFilled(QuerySelection.AdvanceKey.Order) Then
+		If ValueIsFilled(QuerySelection.AdvanceKeyUUID) Then
+			
+			AdvanceRows = Table_DocumentAndAdvancesKey.FindRows(New Structure("AdvanceKeyUUID", QuerySelection.AdvanceKeyUUID));
+			If Not AdvanceRows.Count() Then
+				Raise StrTemplate("Not found rows in Table_DocumentAndAdvancesKey by uuid [%1]", QuerySelection.AdvanceKeyUUID);
+			ENdIf;
+			AdvanceRecordData = CreateAdvanceRecordData(Parameters, AdvanceRows[0]);
+			
+			If TypeOf(QuerySelection.Document) = Parameters._OrderCloseType And ValueIsFilled(AdvanceRecordData.Order) Then
 				
 				AdvanceKeyWithoutOrder = ReleaseAdvanceByOrder(Parameters, 
 															   Records_AdvancesKey, 
 															   Records_OffsetOfAdvances,
 															   QuerySelection.Document, 
 															   QuerySelection.PointInTime.Date, 
-															   QuerySelection.AdvanceKey);
+															   AdvanceRecordData);
 				OffsetAdvancesToTransactions(Parameters, 
 				                             Records_AdvancesKey, 
 				                             Records_TransactionsKey,
@@ -200,21 +219,33 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 								             Records_TransactionsKey,
 								             Records_OffsetOfAdvances, 
 								             Records_OffsetAging, 
-								             QuerySelection.AdvanceKey,
+								             AdvanceRecordData,
 								             QuerySelection.PointInTime, 
 								             QuerySelection.Document);
 			EndIf;
 		EndIf;
+		
 		// Offset transactions to advances
-		If ValueIsFilled(QuerySelection.TransactionKey) Then
+		If ValueIsFilled(QuerySelection.TransactionKeyUUID) Then
+			
+			TransactionRows = Table_DocumentAndTransactionsKey.FindRows(New Structure("TransactionKeyUUID", QuerySelection.TransactionKeyUUID));
+			If Not TransactionRows.Count() Then
+				Raise StrTemplate("Not found rows in Table_DocumentAndTransactionsKey by uuid [%1]", QuerySelection.TransactionKeyUUID);
+			ENdIf;
+			TransactionRecordData = CreateTransactionRecordData(Parameters, TransactionRows[0]);
+			
 			OffsetTransactionsToAdvances(Parameters,
 			                             Records_TransactionsKey, 
 			                             Records_AdvancesKey,
 			                             Records_OffsetOfAdvances, 
 			                             Records_OffsetAging, 
-			                             QuerySelection.TransactionKey,
+			                             TransactionRecordData,
 			                             QuerySelection.PointInTime, 
-			                             QuerySelection.Document);
+			                             QuerySelection.Document); 
+			                             
+			CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, 
+			                       Table_DocumentAndTransactionsKey, 
+			                       QuerySelection.Document);
 		EndIf;
 	EndDo;
 
@@ -222,16 +253,9 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 	Parameters.Object.RegisterRecords.TM1020B_AdvancesKey.Read();
 		
 	// Write OffsetInfo
-	Write_SelfRecords(Parameters, 
-	                  Records_OffsetOfAdvances, 
-	                  Records_AdvancesCurrencyRevaluation,
-	                  Records_TransactionsCurrencyRevaluation);
+	Write_SelfRecords(Parameters, Records_OffsetOfAdvances);
 	                  
-	WriteTablesToTempTables(Parameters, 
-	                        Records_OffsetOfAdvances, 
-	                        Records_OffsetAging, 
-	                        Records_AdvancesCurrencyRevaluation,
-	                        Records_TransactionsCurrencyRevaluation);
+	WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_OffsetAging);
 
 	AdvancesRelevanceServer.Clear(Parameters.Object.Ref, Parameters.Object.Company, Parameters.Object.EndOfPeriod);
 	AdvancesRelevanceServer.Restore(Parameters.Object.Ref, Parameters.Object.Company, Parameters.Object.EndOfPeriod);
@@ -244,17 +268,32 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 	                                   Records_TransactionsKey, 
 	                                   Records_OffsetOfAdvances, 
 	                                   Records_OffsetAging, 
-	                                   AdvanceKey, 
+	                                   AdvanceRecordData, 
 	                                   PointInTime, 
 	                                   Document)
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	AdvancesBalance.AdvanceKey,
+	|	AdvancesBalance.Company,
+	|	AdvancesBalance.Branch,
+	|	AdvancesBalance.Currency,
+	|	AdvancesBalance.Partner,
+	|	AdvancesBalance.LegalName,
+	|	AdvancesBalance.Agreement,
+	|	AdvancesBalance.Order,
+	|	AdvancesBalance.Project,
 	|	AdvancesBalance.AmountBalance AS AdvanceAmount
 	|FROM
-	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&AdvanceBoundary, AdvanceKey = &AdvanceKey
-	|	AND AdvanceKey.%1) AS AdvancesBalance";
+	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&AdvanceBoundary, 
+	|	    Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND Partner = &Partner
+	|	AND LegalName = &LegalName
+	|	AND Agreement = &Agreement
+	|	AND case when Order.Ref is null then Undefined else Order end = &Order
+	|	AND Project = &Project
+	|	AND %1) AS AdvancesBalance";
 
 	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
 	
@@ -262,53 +301,46 @@ Procedure OffsetAdvancesToTransactions(Parameters,
 	Boundary = New Boundary(Point, BoundaryType.Including);
 	Query.SetParameter("AdvanceBoundary", Boundary);
 
-	Query.SetParameter("AdvanceKey", AdvanceKey);
+	Query.SetParameter("Company"   , AdvanceRecordData.Company);
+	Query.SetParameter("Branch"    , AdvanceRecordData.Branch);
+	Query.SetParameter("Currency"  , AdvanceRecordData.Currency);
+	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
+	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
+	Query.SetParameter("Agreement" , AdvanceRecordData.Agreement);
+	Query.SetParameter("Order"     , ?(ValueIsFilled(AdvanceRecordData.Order), AdvanceRecordData.Order, Undefined));
+	Query.SetParameter("Project"   , AdvanceRecordData.Project);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
 	NeedWriteAdvances = False;
-	RepeatThisAdvance = False;
+
 	While QuerySelection.Next() Do
 		If QuerySelection.AdvanceAmount < 0 Then
 			
 			ReturnMoneyByTransaction(Parameters, 
 		                             PointInTime, 
 		                             Document, 
-		                             QuerySelection.AdvanceKey,
+		                             AdvanceRecordData,
 		                             QuerySelection.AdvanceAmount, 
 		                             Records_TransactionsKey, 
 		                             Records_AdvancesKey, 
 		                             Records_OffsetOfAdvances,
 		                             Records_OffsetAging, 
-		                             NeedWriteAdvances, 
-		                             RepeatThisAdvance);
+		                             NeedWriteAdvances);
 		Else
 		
 			DistributeAdvanceToTransaction(Parameters, 
 		                                   PointInTime, 
 		                                   Document, 
-		                                   QuerySelection.AdvanceKey,
+		                                   AdvanceRecordData,
 		                                   QuerySelection.AdvanceAmount, 
 		                                   Records_TransactionsKey, 
 		                                   Records_AdvancesKey, 
 		                                   Records_OffsetOfAdvances,
 		                                   Records_OffsetAging, 
-		                                   NeedWriteAdvances, 
-		                                   RepeatThisAdvance);
+		                                   NeedWriteAdvances);
 		
-			// Advance balance is change
-			If RepeatThisAdvance Then
-				Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
-				OffsetAdvancesToTransactions(Parameters, 
-			                                 Records_AdvancesKey, 
-			                                 Records_TransactionsKey,
-			                                 Records_OffsetOfAdvances, 
-			                                 Records_OffsetAging, 
-			                                 AdvanceKey, 
-			                                 PointInTime, 
-			                                 Document);
-			EndIf;
 		EndIf;
 	EndDo;
 	
@@ -322,29 +354,36 @@ EndProcedure
 Procedure ReturnMoneyByTransaction(Parameters,
 								   PointInTime,
 								   Document,
-								   AdvanceKey,
+								   AdvanceRecordData,
 								   AdvanceAmount,
 								   Records_TransactionsKey, 
 	                               Records_AdvancesKey, 
 	                               Records_OffsetOfAdvances, 
 	                               Records_OffsetAging, 
-	                               NeedWriteAdvances, 
-	                               RepeatThisAdvance)
+	                               NeedWriteAdvances)
 	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	Transactions.TransactionKey AS TransactionKey,
-	|	Transactions.Amount AS Amount
+	|	Transactions.Company,
+	|	Transactions.Branch,
+	|	Transactions.Currency,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Agreement,
+	|	Transactions.TransactionBasis,
+	|	Transactions.Order,
+	|	Transactions.Project,
+	|	Transactions.Amount
 	|FROM
 	|	AccumulationRegister.TM1030B_TransactionsKey AS Transactions
 	|WHERE
 	|	Transactions.Period <= &Period
-	|	AND Transactions.TransactionKey.Company = &Company
-	|	AND Transactions.TransactionKey.Branch = &Branch
-	|	AND Transactions.TransactionKey.Currency = &Currency
-	|	AND Transactions.TransactionKey.Partner = &Partner
-	|	AND Transactions.TransactionKey.LegalName = &LegalName
+	|	AND Transactions.Company = &Company
+	|	AND Transactions.Branch = &Branch
+	|	AND Transactions.Currency = &Currency
+	|	AND Transactions.Partner = &Partner
+	|	AND Transactions.LegalName = &LegalName
 	|	AND (Transactions.RecordType = VALUE(AccumulationRecordType.Receipt)
 	|	AND Transactions.Amount > 0
 	|	OR Transactions.RecordType = VALUE(AccumulationRecordType.Expense)
@@ -355,11 +394,11 @@ Procedure ReturnMoneyByTransaction(Parameters,
 	
 	Query.SetParameter("Period", PointInTime.Date);
 	
-	Query.SetParameter("Company"   , AdvanceKey.Company);
-	Query.SetParameter("Branch"    , AdvanceKey.Branch);
-	Query.SetParameter("Currency"  , AdvanceKey.Currency);
-	Query.SetParameter("Partner"   , AdvanceKey.Partner);
-	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
+	Query.SetParameter("Company"   , AdvanceRecordData.Company);
+	Query.SetParameter("Branch"    , AdvanceRecordData.Branch);
+	Query.SetParameter("Currency"  , AdvanceRecordData.Currency);
+	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
+	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -371,20 +410,22 @@ Procedure ReturnMoneyByTransaction(Parameters,
 			Break;
 		EndIf;
 		
-		If ValueIsFilled(AdvanceKey.Order) Then // advance by order
-			If QuerySelection.TransactionKey.Order <> AdvanceKey.Order Then
+		TransactionRecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+		
+		If ValueIsFilled(AdvanceRecordData.Order) Then // advance by order
+			If TransactionRecordData.Order <> AdvanceRecordData.Order Then
 				Continue;
 			EndIf;
 		EndIf;
-		
-		If ValueIsFilled(AdvanceKey.AdvanceAgreement) Then // advance by agreement
-			If QuerySelection.TransactionKey.Agreement <> AdvanceKey.AdvanceAgreement Then
+				
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
 				Continue;
 			EndIf;
 		EndIf;
-		
+				
 		// advance by Project
-		If ProjectsNotMatch(Parameters, AdvanceKey.Project, QuerySelection.TransactionKey.Project) Then
+		If ProjectsNotMatch(Parameters, AdvanceRecordData.Project, TransactionRecordData.Project) Then
 			Continue;
 		EndIf;
 		
@@ -394,7 +435,7 @@ Procedure ReturnMoneyByTransaction(Parameters,
 		// Transactions
 		Add_TM1030B_TransactionsKey(AccumulationRecordType.Receipt, 
 		                            Document.Date, 
-		                            QuerySelection.TransactionKey, 
+		                            TransactionRecordData, 
 		                            CanWriteOff, 
 		                            Records_TransactionsKey);		
 		NeedWriteTransactions = True;
@@ -402,20 +443,20 @@ Procedure ReturnMoneyByTransaction(Parameters,
 		// Advances
 		Add_TM1020B_AdvancesKey(AccumulationRecordType.Receipt, 
 		                        Document.Date, 
-		                        AdvanceKey, 
+		                        AdvanceRecordData, 
 		                        CanWriteoff, 
 		                        Records_AdvancesKey);
 		NeedWriteAdvances = True;
 			
 		// Aging
-		ReturnMoneyByAging(Parameters, Document, QuerySelection.TransactionKey, CanWriteoff, Records_OffsetAging);	
+		ReturnMoneyByAging(Parameters, Document, TransactionRecordData, CanWriteoff, Records_OffsetAging);	
 			
 		Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Enums.RecordType.Receipt,
 		                                                      Document.Date, 
 		                                                      CanWriteoff, 
 		                                                      Document, 
-		                                                      AdvanceKey, 
-		                                                      QuerySelection.TransactionKey, 
+		                                                      AdvanceRecordData, 
+		                                                      TransactionRecordData, 
 		                                                      Records_OffsetOfAdvances);		
 	EndDo;
 	
@@ -427,39 +468,46 @@ EndProcedure
 Procedure DistributeAdvanceToTransaction(Parameters, 
 	                                     PointInTime, 
 	                                     Document, 
-	                                     AdvanceKey, 
+	                                     AdvanceRecordData, 
 	                                     AdvanceAmount, 
 	                                     Records_TransactionsKey, 
 	                                     Records_AdvancesKey, 
 	                                     Records_OffsetOfAdvances, 
 	                                     Records_OffsetAging, 
-	                                     NeedWriteAdvances, 
-	                                     RepeatThisAdvance)
+	                                     NeedWriteAdvances)
 
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	TransactionsBalance.TransactionKey,
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Agreement,
+	|	TransactionsBalance.TransactionBasis,
+	|	TransactionsBalance.Order,
+	|	TransactionsBalance.Project,
 	|	TransactionsBalance.AmountBalance AS TransactionAmount
 	|FROM
 	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(&AdvanceBoundary, 
-	|		TransactionKey.Company = &Company
-	|	AND TransactionKey.Branch = &Branch
-	|	AND TransactionKey.Currency = &Currency
-	|	AND TransactionKey.Partner = &Partner
-	|	AND TransactionKey.Agreement = &Agreement
-	|	AND TransactionKey.LegalName = &LegalName) AS TransactionsBalance";
+	|		Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND Partner = &Partner
+	|	AND Agreement = &Agreement
+	|	AND LegalName = &LegalName) AS TransactionsBalance";
 
 	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
 	Boundary = New Boundary(Point, BoundaryType.Including);
 	Query.SetParameter("AdvanceBoundary", Boundary);
 
-	Query.SetParameter("Company"   , AdvanceKey.Company);
-	Query.SetParameter("Branch"    , AdvanceKey.Branch);
-	Query.SetParameter("Currency"  , AdvanceKey.Currency);
-	Query.SetParameter("Partner"   , AdvanceKey.Partner);
-	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
-	Query.SetParameter("Agreement" , AdvanceKey.AdvanceAgreement);
+	Query.SetParameter("Company"   , AdvanceRecordData.Company);
+	Query.SetParameter("Branch"    , AdvanceRecordData.Branch);
+	Query.SetParameter("Currency"  , AdvanceRecordData.Currency);
+	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
+	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
+	Query.SetParameter("Agreement" , AdvanceRecordData.Agreement);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -467,55 +515,26 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 	NeedWriteoff = AdvanceAmount;
 	NeedWriteTransactions = False;
 	While QuerySelection.Next() Do
-		If QuerySelection.TransactionAmount < 0 And Not Parameters.DontWriteNegativeDebtAsAdvance Then
-			// Return due to advance, change advance balance
-			
-			// Transactions
-			Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
-		                                Document.Date, 
-		                                QuerySelection.TransactionKey, 
-		                                QuerySelection.TransactionAmount, 
-		                                Records_TransactionsKey);	
-		                                
-		    Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);	
-					
-			// Advances
-			Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
-		                            Document.Date, 
-		                            AdvanceKey, 
-		                            QuerySelection.TransactionAmount, 
-		                            Records_AdvancesKey);
-				
-			// OffsetOfAdvances
-			Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Enums.RecordType.Expense,
-		                                                          Document.Date, 
-		                                                          QuerySelection.TransactionAmount, 
-		                                                          Document, 
-		                                                          AdvanceKey, 
-		                                                          QuerySelection.TransactionKey, 
-		                                                          Records_OffsetOfAdvances);
-			
-			RepeatThisAdvance = True;
-			Break;
-		EndIf;
-
+		
+		TransactionRecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+		
 		If NeedWriteoff = 0 Then
 			Break;
 		EndIf;
 		
-		If ValueIsFilled(AdvanceKey.Order) Then // advance by order
-			If QuerySelection.TransactionKey.Order <> AdvanceKey.Order Then
+		If ValueIsFilled(AdvanceRecordData.Order) Then // advance by order
+			If TransactionRecordData.Order <> AdvanceRecordData.Order Then
 				Continue;
 			EndIf;
 		EndIf;
 		
-		If ValueIsFilled(AdvanceKey.AdvanceAgreement) Then // advance by agreement
-			If QuerySelection.TransactionKey.Agreement <> AdvanceKey.AdvanceAgreement Then
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
 				Continue;
 			EndIf;
 		EndIf;
 		
-		If ProjectsNotMatch(Parameters, AdvanceKey.Project, QuerySelection.TransactionKey.Project) Then
+		If ProjectsNotMatch(Parameters, AdvanceRecordData.Project, TransactionRecordData.Project) Then
 			Continue;
 		EndIf;
 				
@@ -525,7 +544,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		// Transactions
 		Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
 		                            Document.Date, 
-		                            QuerySelection.TransactionKey, 
+		                            TransactionRecordData, 
 		                            CanWriteoff, 
 		                            Records_TransactionsKey);		
 		NeedWriteTransactions = True;
@@ -533,7 +552,7 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		// Advances
 		Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
 		                        Document.Date, 
-		                        AdvanceKey, 
+		                        AdvanceRecordData, 
 		                        CanWriteoff, 
 		                        Records_AdvancesKey);
 		NeedWriteAdvances = True;
@@ -543,14 +562,14 @@ Procedure DistributeAdvanceToTransaction(Parameters,
 		                                                      Document.Date, 
 		                                                      CanWriteoff, 
 		                                                      Document, 
-		                                                      AdvanceKey, 
-		                                                      QuerySelection.TransactionKey, 
+		                                                      AdvanceRecordData, 
+		                                                      TransactionRecordData, 
 		                                                      Records_OffsetOfAdvances);
 
 		DistributeTransactionToAging(Parameters, 
 		                             PointInTime, 
 		                             Document, 
-		                             QuerySelection.TransactionKey, 
+		                             TransactionRecordData, 
 		                             CanWriteoff,
 		                             Records_OffsetAging);
 	EndDo;
@@ -566,19 +585,25 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 	                                   Records_AdvancesKey, 
 	                                   Records_OffsetOfAdvances, 
 	                                   Records_OffsetAging, 
-	                                   TransactionKey, 
+	                                   TransactionRecordData, 
 	                                   PointInTime, 
 	                                   Document)
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	TransactionsBalance.TransactionKey,
 	|	TransactionsBalance.AmountBalance AS TransactionAmount
 	|FROM
-	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(
-	|  &TransactionBoundary
-	|, TransactionKey = &TransactionKey
-	|	AND TransactionKey.%1) AS TransactionsBalance";
+	|	AccumulationRegister.TM1030B_TransactionsKey.Balance(&TransactionBoundary,
+	|	    Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND Partner = &Partner
+	|	AND LegalName = &LegalName
+	|	AND Agreement = &Agreement
+	|	AND case when TransactionBasis.Ref is null then undefined else TransactionBasis end = &TransactionBasis
+	|	AND case when Order.Ref is null then undefined else Order end = &Order
+	|	AND Project = &Project
+	|	AND %1) AS TransactionsBalance";
 
 	Query.Text = StrTemplate(Query.Text, Parameters.TransactionType);
 
@@ -586,60 +611,27 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 	Boundary = New Boundary(Point, BoundaryType.Including);
 	
 	Query.SetParameter("TransactionBoundary" , Boundary);
-	Query.SetParameter("TransactionKey"      , TransactionKey);
+	
+	Query.SetParameter("Company"          , TransactionRecordData.Company);
+	Query.SetParameter("Branch"           , TransactionRecordData.Branch);
+	Query.SetParameter("Currency"         , TransactionRecordData.Currency);
+	Query.SetParameter("Partner"          , TransactionRecordData.Partner);
+	Query.SetParameter("LegalName"        , TransactionRecordData.LegalName);
+	Query.SetParameter("Agreement"        , TransactionRecordData.Agreement);
+	Query.SetParameter("Project"          , TransactionRecordData.Project);
+	Query.SetParameter("TransactionBasis" , ?(ValueIsFilled(TransactionRecordData.TransactionBasis), TransactionRecordData.TransactionBasis, Undefined));
+	Query.SetParameter("Order"            , ?(ValueIsFilled(TransactionRecordData.Order), TransactionRecordData.Order, Undefined));
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
 	NeedWriteTransactions = False;
 	While QuerySelection.Next() Do
-		If QuerySelection.TransactionAmount < 0 And Not Parameters.DontWriteNegativeDebtAsAdvance Then
-			// Return due to advance, change advance balance
-			
-			AdvanceKey = GetAdvanceKeyByTransactionKey(Parameters, TransactionKey);
-			
-			// Transactions
-			Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
-		                                Document.Date, 
-		                                TransactionKey, 
-		                                QuerySelection.TransactionAmount, 
-		                                Records_TransactionsKey);
-		                                
-		    Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);		
-						
-			// Advances
-			Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
-		                            Document.Date, 
-		                            AdvanceKey, 
-		                            QuerySelection.TransactionAmount, 
-		                            Records_AdvancesKey);
-		                            
-		    Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
-						
-		   // OffsetOfAdvances
-		   Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, Enums.RecordType.Expense,
-		                                                         Document.Date, 
-		                                                         QuerySelection.TransactionAmount, 
-		                                                         Document, 
-		                                                         AdvanceKey, 
-		                                                         TransactionKey, 
-		                                                         Records_OffsetOfAdvances, True);
-			
-			OffsetAdvancesToTransactions(Parameters, 
-			                             Records_AdvancesKey, 
-			                             Records_TransactionsKey,
-			                             Records_OffsetOfAdvances, 
-			                             Records_OffsetAging, 
-			                             AdvanceKey, 
-			                             PointInTime, 
-			                             Document);
-			Continue;
-		EndIf;
-
 		DistributeTransactionToAdvance(Parameters, 
 		                               PointInTime, 
 		                               Document, 
-		                               QuerySelection.TransactionKey,
+		                               //QuerySelection.TransactionKey,
+		                               TransactionRecordData,
 		                               QuerySelection.TransactionAmount, 
 		                               Records_AdvancesKey, 
 		                               Records_TransactionsKey, 
@@ -653,7 +645,7 @@ Procedure OffsetTransactionsToAdvances(Parameters,
 	EndIf;
 EndProcedure
 
-Function FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document)
+Function FindRowKeyByAdvanceKey(Parameters, AdvanceRecordData, Document)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -669,7 +661,7 @@ Function FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document)
 	|	AND T2014S_AdvancesInfo.LegalName = &LegalName
 	|	AND T2014S_AdvancesInfo.Partner = &Partner
 	|	AND T2014S_AdvancesInfo.Recorder = &Document
-	|	AND T2014S_AdvancesInfo.AdvanceAgreement = &AdvanceAgreement
+	|	AND T2014S_AdvancesInfo.AdvanceAgreement = &Agreement
 	|	and T2014S_AdvancesInfo.Project = &Project
 	|	AND CASE
 	|		WHEN T2014S_AdvancesInfo.Order.Ref IS NULL
@@ -679,17 +671,17 @@ Function FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document)
 	
 	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
 	
-	Query.SetParameter("Company"   , AdvanceKey.Company);
-	Query.SetParameter("Branch"    , AdvanceKey.Branch);
-	Query.SetParameter("Currency"  , AdvanceKey.Currency);
+	Query.SetParameter("Company"   , AdvanceRecordData.Company);
+	Query.SetParameter("Branch"    , AdvanceRecordData.Branch);
+	Query.SetParameter("Currency"  , AdvanceRecordData.Currency);
 	Query.SetParameter("Date"      , Document.Date);
-	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
-	Query.SetParameter("Partner"   , AdvanceKey.Partner);
+	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
+	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
 	Query.SetParameter("Document"  , Document);
-	Query.SetParameter("Order", ?(ValueIsFilled(AdvanceKey.Order), AdvanceKey.Order, Parameters.Order_EmptyRef));
-	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
-	Query.SetParameter("AdvanceAgreement", AdvanceKey.AdvanceAgreement);
-	Query.SetParameter("Project", AdvanceKey.Project);
+	Query.SetParameter("Order", ?(ValueIsFilled(AdvanceRecordData.Order), AdvanceRecordData.Order, Parameters.Order_EmptyRef));
+	Query.SetParameter("Order_EmptyRef"   , Parameters.Order_EmptyRef);
+	Query.SetParameter("Agreement"        , AdvanceRecordData.Agreement);
+	Query.SetParameter("Project"          , AdvanceRecordData.Project);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -699,7 +691,7 @@ Function FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document)
 	Return "";
 EndFunction
 
-Function FindRowKeyByTransactionKey(Parameters, TransactionKey, Document)
+Function FindRowKeyByTransactionKey(Parameters, TransactionRecordData, Document)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -725,16 +717,16 @@ Function FindRowKeyByTransactionKey(Parameters, TransactionKey, Document)
 	
 	Query.Text = StrTemplate(Query.Text, Parameters.TransactionType);
 	
-	Query.SetParameter("Company"          , TransactionKey.Company);
-	Query.SetParameter("Branch"           , TransactionKey.Branch);
-	Query.SetParameter("Currency"         , TransactionKey.Currency);
+	Query.SetParameter("Company"          , TransactionRecordData.Company);
+	Query.SetParameter("Branch"           , TransactionRecordData.Branch);
+	Query.SetParameter("Currency"         , TransactionRecordData.Currency);
 	Query.SetParameter("Date"             , Document.Date);
-	Query.SetParameter("LegalName"        , TransactionKey.LegalName);
-	Query.SetParameter("Partner"          , TransactionKey.Partner);
-	Query.SetParameter("Agreement"        , TransactionKey.Agreement);
-	Query.SetParameter("TransactionBasis" , TransactionKey.TransactionBasis);
+	Query.SetParameter("LegalName"        , TransactionRecordData.LegalName);
+	Query.SetParameter("Partner"          , TransactionRecordData.Partner);
+	Query.SetParameter("Agreement"        , TransactionRecordData.Agreement);
+	Query.SetParameter("TransactionBasis" , TransactionRecordData.TransactionBasis);
 	Query.SetParameter("Document", Document);
-	Query.SetParameter("Order", ?(ValueIsFilled(TransactionKey.Order), TransactionKey.Order, Parameters.Order_EmptyRef));
+	Query.SetParameter("Order", ?(ValueIsFilled(TransactionRecordData.Order), TransactionRecordData.Order, Parameters.Order_EmptyRef));
 	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -744,68 +736,10 @@ Function FindRowKeyByTransactionKey(Parameters, TransactionKey, Document)
 	Return "";
 EndFunction
 
-Function GetAdvanceKeyByTransactionKey(Parameters, TransactionKey)
-	Query = New Query;
-	Query.Text =
-	"SELECT TOP 1
-	|	AdvKeys.Ref AS AdvanceKey
-	|FROM
-	|	Catalog.AdvancesKeys AS AdvKeys
-	|WHERE
-	|	NOT AdvKeys.DeletionMark
-	|	AND &Company = AdvKeys.Company
-	|	AND &Branch = AdvKeys.Branch
-	|	AND &Currency = AdvKeys.Currency
-	|	AND &Partner = AdvKeys.Partner
-	|	AND &LegalName = AdvKeys.LegalName
-	|	AND &AdvanceAgreement = AdvKeys.AdvanceAgreement
-	|	AND &Project = AdvKeys.Project
-	|	AND &Order = CASE
-	|		WHEN AdvKeys.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE AdvKeys.Order
-	|	END
-	|	AND AdvKeys.%1";
-
-	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
-
-	Query.SetParameter("Company"   , TransactionKey.Company);
-	Query.SetParameter("Branch"    , TransactionKey.Branch);
-	Query.SetParameter("Currency"  , TransactionKey.Currency);
-	Query.SetParameter("Partner"   , TransactionKey.Partner);
-	Query.SetParameter("LegalName" , TransactionKey.LegalName);
-	Query.SetParameter("AdvanceAgreement" , TransactionKey.Agreement);
-	Query.SetParameter("Project" , TransactionKey.Project);
-	Query.SetParameter("Order"     , ?(ValueIsFilled(TransactionKey.Order), TransactionKey.Order, Undefined));
-
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	
-	// From transaction to advance when transaction amount < 0
-	If QuerySelection.Next() Then
-		KeyRef = QuerySelection.AdvanceKey;
-	Else // Create
-		KeyObject = Catalogs.AdvancesKeys.CreateItem();
-		KeyObject.Company   = TransactionKey.Company;
-		KeyObject.Branch    = TransactionKey.Branch;
-		KeyObject.Currency  = TransactionKey.Currency;
-		KeyObject.Partner   = TransactionKey.Partner;
-		KeyObject.LegalName = TransactionKey.LegalName;
-		KeyObject.AdvanceAgreement = TransactionKey.Agreement;
-		KeyObject.Project = TransactionKey.Project;
-		KeyObject.Order     = TransactionKey.Order;
-		KeyObject[Parameters.AdvanceType] = True;
-		KeyObject.Description = Left(String(New UUID), 8);
-		KeyObject.Write();
-		KeyRef = KeyObject.Ref;
-	EndIf;
-	Return KeyRef;
-EndFunction
-
 Procedure DistributeTransactionToAdvance(Parameters, 
 		                                 PointInTime, 
 		                                 Document, 
-		                                 TransactionKey, 
+		                                 TransactionRecordData, 
 		                                 TransactionAmount, 
 		                                 Records_AdvancesKey, 
 		                                 Records_TransactionsKey, 
@@ -816,25 +750,33 @@ Procedure DistributeTransactionToAdvance(Parameters,
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	AdvancesBalance.AdvanceKey,
+	|	AdvancesBalance.Company,
+	|	AdvancesBalance.Branch,
+	|	AdvancesBalance.Currency,
+	|	AdvancesBalance.Partner,
+	|	AdvancesBalance.LegalName,
+	|	AdvancesBalance.Agreement,
+	|	AdvancesBalance.Order,
+	|	AdvancesBalance.Project,
 	|	AdvancesBalance.AmountBalance AS AdvanceAmount
 	|FROM
 	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&TransactionBoundary, 
-	|		AdvanceKey.Company = &Company
-	|	AND AdvanceKey.Branch = &Branch
-	|	AND AdvanceKey.Currency = &Currency
-	|	AND AdvanceKey.Partner = &Partner
-	|	AND AdvanceKey.LegalName = &LegalName) AS AdvancesBalance";
+	|		Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND Partner = &Partner
+	|	AND LegalName = &LegalName) AS AdvancesBalance";
 
 	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
 	Boundary = New Boundary(Point, BoundaryType.Including);
 	
 	Query.SetParameter("TransactionBoundary", Boundary);
-	Query.SetParameter("Company"   , TransactionKey.Company);
-	Query.SetParameter("Branch"    , TransactionKey.Branch);
-	Query.SetParameter("Currency"  , TransactionKey.Currency);
-	Query.SetParameter("Partner"   , TransactionKey.Partner);
-	Query.SetParameter("LegalName" , TransactionKey.LegalName);
+	
+	Query.SetParameter("Company"   , TransactionRecordData.Company);
+	Query.SetParameter("Branch"    , TransactionRecordData.Branch);
+	Query.SetParameter("Currency"  , TransactionRecordData.Currency);
+	Query.SetParameter("Partner"   , TransactionRecordData.Partner);
+	Query.SetParameter("LegalName" , TransactionRecordData.LegalName);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -850,19 +792,21 @@ Procedure DistributeTransactionToAdvance(Parameters,
 			Break;
 		EndIf;
 		
-		If ValueIsFilled(QuerySelection.AdvanceKey.Order) Then // transaction by order
-			If QuerySelection.AdvanceKey.Order <> TransactionKey.Order Then
+		AdvanceRecordData = CreateAdvanceRecordData(Parameters, QuerySelection);
+		
+		If ValueIsFilled(AdvanceRecordData.Order) Then // transaction by order
+			If AdvanceRecordData.Order <> TransactionRecordData.Order Then
 				Continue;
 			EndIf;
 		EndIf;
 		
-		If ValueIsFilled(QuerySelection.AdvanceKey.AdvanceAgreement) Then // transaction by agreement
-			If QuerySelection.AdvanceKey.AdvanceAgreement <> TransactionKey.Agreement Then
+		If ValueIsFilled(AdvanceRecordData.Agreement) Then // advance by agreement
+			If TransactionRecordData.Agreement <> AdvanceRecordData.Agreement Then
 				Continue;
 			EndIf;
 		EndIf;
 		
-		If ProjectsNotMatch(Parameters, QuerySelection.AdvanceKey.Project, TransactionKey.Project) Then
+		If ProjectsNotMatch(Parameters, AdvanceRecordData.Project, TransactionRecordData.Project) Then
 			Continue;
 		EndIf;
 				
@@ -872,7 +816,7 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		// Transactions
 		Add_TM1030B_TransactionsKey(AccumulationRecordType.Expense, 
 		                            Document.Date, 
-		                            TransactionKey, 
+		                            TransactionRecordData, 
 		                            CanWriteoff, 
 		                            Records_TransactionsKey);			
 		NeedWriteTransactions = True;
@@ -880,7 +824,7 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		// Advances
 		Add_TM1020B_AdvancesKey(AccumulationRecordType.Expense, 
 		                        Document.Date, 
-		                        QuerySelection.AdvanceKey, 
+		                        AdvanceRecordData,
 		                        CanWriteoff, 
 		                        Records_AdvancesKey);		
 		NeedWriteAdvances = True;
@@ -890,14 +834,14 @@ Procedure DistributeTransactionToAdvance(Parameters,
 		                                                      Document.Date, 
 		                                                      CanWriteoff,
 		                                                      Document, 
-		                                                      QuerySelection.AdvanceKey, 
-		                                                      TransactionKey, 
+		                                                      AdvanceRecordData,
+		                                                      TransactionRecordData, 
 		                                                      Records_OffsetOfAdvances);
 		
 		DistributeTransactionToAging(Parameters, 
 		                             PointInTime, 
-		                             Document, 
-		                             TransactionKey, 
+		                             Document,
+		                             TransactionRecordData, 
 		                             CanWriteoff,
 		                             Records_OffsetAging);
 	EndDo;
@@ -908,10 +852,7 @@ Procedure DistributeTransactionToAdvance(Parameters,
 	EndIf;
 EndProcedure
 
-Procedure Write_SelfRecords(Parameters, 
-	                        Records_OffsetOfAdvances, 
-	                        Records_AdvancesCurrencyRevaluation,
-	                        Records_TransactionsCurrencyRevaluation)
+Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 	
 	Recorders = Records_OffsetOfAdvances.Copy();
 	Recorders.GroupBy("Document");
@@ -982,7 +923,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Advances[Parameters.DocumentName] = Parameters.Object.Ref;
 			NewRow_Advances.Order     = RowOffset.AdvanceOrder;
 			NewRow_Advances.Project   = RowOffset.AdvanceProject;
-			NewRow_Advances.Agreement = RowOffset.AdvanceAgreement;
+			NewRow_Advances.Agreement = RowOffset.Agreement;
 			
 			// Partner balance - advances
 			NewRow_PartnerBalance_Advances = TablePartnersBalance.Add();
@@ -1072,7 +1013,7 @@ Procedure Write_SelfRecords(Parameters,
 			NewRow_Transactions[Parameters.DocumentName] = Parameters.Object.Ref;
 			NewRow_Transactions.Order     = RowOffset.TransactionOrder;
 			NewRow_Transactions.Project   = RowOffset.TransactionProject;
-			NewRow_Transactions.Agreement = RowOffset.TransactionAgreement;
+			NewRow_Transactions.Agreement = RowOffset.Agreement;
 			
 			// Partners balance - transactions
 			NewRow_PartnersBalance_Transactions = TablePartnersBalance.Add();
@@ -1358,11 +1299,7 @@ Function ProjectsNotMatch(Parameters, AdvanceProject, TransactionProject)
 	Return False;
 EndFunction	
 
-Procedure WriteTablesToTempTables(Parameters, 
-	                              Records_OffsetOfAdvances, 
-	                              Records_OffsetAging,
-	                              Records_AdvancesCurrencyRevaluation,
-	                              Records_TransactionsCurrencyRevaluation)
+Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_OffsetAging)
 	                              
 	Query = New Query;
 	Query.TempTablesManager = Parameters.TempTablesManager;
@@ -1378,16 +1315,11 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	Records_OffsetOfAdvances.Partner,
 	|	Records_OffsetOfAdvances.LegalName,
 	|	Records_OffsetOfAdvances.TransactionDocument,
-	|	Records_OffsetOfAdvances.TransactionAgreement,
-	|	Records_OffsetOfAdvances.AdvanceAgreement,
+	|	Records_OffsetOfAdvances.Agreement,
 	|	Records_OffsetOfAdvances.AdvanceOrder,
 	|	Records_OffsetOfAdvances.TransactionOrder,
 	|	Records_OffsetOfAdvances.AdvanceProject,
 	|	Records_OffsetOfAdvances.TransactionProject,
-	|	Records_OffsetOfAdvances.FromAdvanceKey,
-	|	Records_OffsetOfAdvances.ToTransactionKey,
-	|	Records_OffsetOfAdvances.FromTransactionKey,
-	|	Records_OffsetOfAdvances.ToAdvanceKey,
 	|	Records_OffsetOfAdvances.Key,
 	|	Records_OffsetOfAdvances.Amount
 	|INTO tmpRecords_OffsetOfAdvances
@@ -1413,44 +1345,6 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	&Records_OffsetAging AS Records_OffsetAging
 	|;
 	|
-	|///////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records_AdvancesCurrencyRevaluation.Period,
-	|	Records_AdvancesCurrencyRevaluation.Document,
-	|	Records_AdvancesCurrencyRevaluation.Company,
-	|	Records_AdvancesCurrencyRevaluation.Branch,
-	|	Records_AdvancesCurrencyRevaluation.CurrencyMovementType,
-	|	Records_AdvancesCurrencyRevaluation.Currency,
-	|	Records_AdvancesCurrencyRevaluation.TransactionCurrency,
-	|	Records_AdvancesCurrencyRevaluation.Partner,
-	|	Records_AdvancesCurrencyRevaluation.LegalName,
-	|	Records_AdvancesCurrencyRevaluation.AdvanceOrder,
-	|	Records_AdvancesCurrencyRevaluation.Amount
-	|INTO tmpRecords_AdvancesCurrencyRevaluation
-	|FROM
-	|	&Records_AdvancesCurrencyRevaluation AS Records_AdvancesCurrencyRevaluation
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Records_TransactionsCurrencyRevaluation.Period,
-	|	Records_TransactionsCurrencyRevaluation.Document,
-	|	Records_TransactionsCurrencyRevaluation.Company,
-	|	Records_TransactionsCurrencyRevaluation.Branch,
-	|	Records_TransactionsCurrencyRevaluation.CurrencyMovementType,
-	|	Records_TransactionsCurrencyRevaluation.Currency,
-	|	Records_TransactionsCurrencyRevaluation.TransactionCurrency,
-	|	Records_TransactionsCurrencyRevaluation.Partner,
-	|	Records_TransactionsCurrencyRevaluation.LegalName,
-	|	Records_TransactionsCurrencyRevaluation.Agreement,
-	|	Records_TransactionsCurrencyRevaluation.TransactionOrder,
-	|	Records_TransactionsCurrencyRevaluation.TransactionDocument,
-	|	Records_TransactionsCurrencyRevaluation.Amount
-	|INTO tmpRecords_TransactionsCurrencyRevaluation
-	|FROM
-	|	&Records_TransactionsCurrencyRevaluation AS Records_TransactionsCurrencyRevaluation
-	|;
-	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpRecords_OffsetOfAdvances.Period,
@@ -1463,16 +1357,11 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.TransactionAgreement,
-	|	tmpRecords_OffsetOfAdvances.AdvanceAgreement,
+	|	tmpRecords_OffsetOfAdvances.Agreement,
 	|	tmpRecords_OffsetOfAdvances.AdvanceOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
 	|	tmpRecords_OffsetOfAdvances.AdvanceProject,
 	|	tmpRecords_OffsetOfAdvances.TransactionProject,
-	|	tmpRecords_OffsetOfAdvances.FromAdvanceKey,
-	|	tmpRecords_OffsetOfAdvances.ToTransactionKey,
-	|	tmpRecords_OffsetOfAdvances.FromTransactionKey,
-	|	tmpRecords_OffsetOfAdvances.ToAdvanceKey,
 	|	tmpRecords_OffsetOfAdvances.Key,
 	|	SUM(tmpRecords_OffsetOfAdvances.Amount) AS Amount
 	|INTO Records_OffsetOfAdvances
@@ -1489,16 +1378,11 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.TransactionAgreement,
-	|	tmpRecords_OffsetOfAdvances.AdvanceAgreement,
+	|	tmpRecords_OffsetOfAdvances.Agreement,
 	|	tmpRecords_OffsetOfAdvances.AdvanceOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
 	|	tmpRecords_OffsetOfAdvances.AdvanceProject,
 	|	tmpRecords_OffsetOfAdvances.TransactionProject,
-	|	tmpRecords_OffsetOfAdvances.FromAdvanceKey,
-	|	tmpRecords_OffsetOfAdvances.ToTransactionKey,
-	|	tmpRecords_OffsetOfAdvances.FromTransactionKey,
-	|	tmpRecords_OffsetOfAdvances.ToAdvanceKey,
 	|	tmpRecords_OffsetOfAdvances.Key
 	|;
 	|
@@ -1528,97 +1412,51 @@ Procedure WriteTablesToTempTables(Parameters,
 	|	tmpRecords_OffsetAging.Partner,
 	|	tmpRecords_OffsetAging.Agreement,
 	|	tmpRecords_OffsetAging.Invoice,
-	|	tmpRecords_OffsetAging.PaymentDate
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpRecords_AdvancesCurrencyRevaluation.Period,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Document,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Company,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Branch,
-	|	tmpRecords_AdvancesCurrencyRevaluation.CurrencyMovementType,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Currency,
-	|	tmpRecords_AdvancesCurrencyRevaluation.TransactionCurrency,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Partner,
-	|	tmpRecords_AdvancesCurrencyRevaluation.LegalName,
-	|	tmpRecords_AdvancesCurrencyRevaluation.AdvanceOrder,
-	|	SUM(tmpRecords_AdvancesCurrencyRevaluation.Amount) AS Amount
-	|INTO Records_AdvancesCurrencyRevaluation
-	|FROM
-	|	tmpRecords_AdvancesCurrencyRevaluation AS tmpRecords_AdvancesCurrencyRevaluation
-	|GROUP BY
-	|	tmpRecords_AdvancesCurrencyRevaluation.Period,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Document,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Company,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Branch,
-	|	tmpRecords_AdvancesCurrencyRevaluation.CurrencyMovementType,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Currency,
-	|	tmpRecords_AdvancesCurrencyRevaluation.TransactionCurrency,
-	|	tmpRecords_AdvancesCurrencyRevaluation.Partner,
-	|	tmpRecords_AdvancesCurrencyRevaluation.LegalName,
-	|	tmpRecords_AdvancesCurrencyRevaluation.AdvanceOrder
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpRecords_TransactionsCurrencyRevaluation.Period,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Document,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Company,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Branch,
-	|	tmpRecords_TransactionsCurrencyRevaluation.CurrencyMovementType,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Currency,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionCurrency,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Partner,
-	|	tmpRecords_TransactionsCurrencyRevaluation.LegalName,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Agreement,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionOrder,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionDocument,
-	|	SUM(tmpRecords_TransactionsCurrencyRevaluation.Amount) AS Amount
-	|INTO Records_TransactionsCurrencyRevaluation
-	|FROM
-	|	tmpRecords_TransactionsCurrencyRevaluation AS tmpRecords_TransactionsCurrencyRevaluation
-	|GROUP BY
-	|	tmpRecords_TransactionsCurrencyRevaluation.Period,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Document,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Company,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Branch,
-	|	tmpRecords_TransactionsCurrencyRevaluation.CurrencyMovementType,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Currency,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionCurrency,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Partner,
-	|	tmpRecords_TransactionsCurrencyRevaluation.LegalName,
-	|	tmpRecords_TransactionsCurrencyRevaluation.Agreement,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionOrder,
-	|	tmpRecords_TransactionsCurrencyRevaluation.TransactionDocument";
+	|	tmpRecords_OffsetAging.PaymentDate";
 
 	Query.SetParameter("Records_OffsetOfAdvances" , Records_OffsetOfAdvances);
 	Query.SetParameter("Records_OffsetAging"      , Records_OffsetAging);
-	Query.SetParameter("Records_AdvancesCurrencyRevaluation"     , Records_AdvancesCurrencyRevaluation);
-	Query.SetParameter("Records_TransactionsCurrencyRevaluation" , Records_TransactionsCurrencyRevaluation);
 	Query.Execute();
 EndProcedure
 
-Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, Document, Date, AdvanceKey)
+Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, Document, Date, AdvanceRecordData)
 	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	AdvancesBalance.AdvanceKey,
 	|	AdvancesBalance.AmountBalance AS AdvanceAmount
 	|FROM
-	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&AdvanceBoundary, AdvanceKey = &AdvanceKey AND AdvanceKey.%1) AS AdvancesBalance";
+	|	AccumulationRegister.TM1020B_AdvancesKey.Balance(&AdvanceBoundary, 
+	|	    Company = &Company
+	|	AND Branch = &Branch
+	|	AND Currency = &Currency
+	|	AND Partner = &Partner
+	|	AND LegalName = &LegalName
+	|	AND Agreement = &Agreement
+	|	AND case when Order.Ref is null then undefined else Order end = &Order
+	|	AND Project = &Project
+	|	AND %1) AS AdvancesBalance";
 
 	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
 	
 	Point = New PointInTime(Date, Parameters.Object.Ref);
 	Boundary = New Boundary(Point, BoundaryType.Including);
 	Query.SetParameter("AdvanceBoundary" , Boundary);
-	Query.SetParameter("AdvanceKey"      , AdvanceKey);
+	Query.SetParameter("Company"   , AdvanceRecordData.Company);
+	Query.SetParameter("Branch"    , AdvanceRecordData.Branch);
+	Query.SetParameter("Currency"  , AdvanceRecordData.Currency);
+	Query.SetParameter("Partner"   , AdvanceRecordData.Partner);
+	Query.SetParameter("LegalName" , AdvanceRecordData.LegalName);
+	Query.SetParameter("Agreement" , AdvanceRecordData.Agreement);
+	Query.SetParameter("Order"     , ?(ValueIsFilled(AdvanceRecordData.Order), AdvanceRecordData.Order, Undefined));
+	Query.SetParameter("Project"   , AdvanceRecordData.Project);
+
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	AdvanceKeyWithoutOrder = GetAdvanceKeyByAdvanceKeyWithoutOrder(Parameters, AdvanceKey);
+	AdvanceRecordDataWithoutOrder = CreateAdvanceRecordData(Parameters, AdvanceRecordData);
+	AdvanceRecordDataWithoutOrder.Order = Parameters.Order_EmptyRef;
+	
 	NeedWriteAdvances = False;
 	While QuerySelection.Next() Do
 		If QuerySelection.AdvanceAmount < 0 Then
@@ -1628,7 +1466,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		// Minus by advance with order
 		Add_TM1020B_AdvancesKey(AccumulationRecordType.Receipt, 
 		                        Date, 
-		                        AdvanceKey, // key with order
+		                        AdvanceRecordData, // key with order
 		                        -QuerySelection.AdvanceAmount, 
 		                        Records_AdvancesKey);		
 		NeedWriteAdvances = True;
@@ -1636,7 +1474,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		// Plus by advance without order
 		Add_TM1020B_AdvancesKey(AccumulationRecordType.Receipt, 
 		                        Date, 
-		                        AdvanceKeyWithoutOrder, // key without order
+		                        AdvanceRecordDataWithoutOrder, // key without order
 		                        QuerySelection.AdvanceAmount, 
 		                        Records_AdvancesKey);		
 				
@@ -1647,15 +1485,15 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		NewOffsetInfo.Amount        = QuerySelection.AdvanceAmount;
 		NewOffsetInfo.Document      = Document;
 		
-		NewOffsetInfo.Company       = AdvanceKey.Company;
-		NewOffsetInfo.Branch        = AdvanceKey.Branch;
-		NewOffsetInfo.Currency      = AdvanceKey.Currency;
-		NewOffsetInfo.Partner       = AdvanceKey.Partner;
-		NewOffsetInfo.LegalName     = AdvanceKey.LegalName;
+		NewOffsetInfo.Company       = AdvanceRecordData.Company;
+		NewOffsetInfo.Branch        = AdvanceRecordData.Branch;
+		NewOffsetInfo.Currency      = AdvanceRecordData.Currency;
+		NewOffsetInfo.Partner       = AdvanceRecordData.Partner;
+		NewOffsetInfo.LegalName     = AdvanceRecordData.LegalName;
 		
-		NewOffsetInfo.AdvanceOrder     = AdvanceKey.Order;
-		NewOffsetInfo.AdvanceAgreement = AdvanceKey.AdvanceAgreement;
-		NewOffsetInfo.AdvanceProject   = AdvanceKey.Project;
+		NewOffsetInfo.AdvanceOrder     = AdvanceRecordData.Order;
+		NewOffsetInfo.Agreement        = AdvanceRecordData.Agreement;
+		NewOffsetInfo.AdvanceProject   = AdvanceRecordData.Project;
 		
 		// OffsetOfAdvances - plus without order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
@@ -1664,175 +1502,36 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		NewOffsetInfo.Amount       = -QuerySelection.AdvanceAmount;
 		NewOffsetInfo.Document     = Document;
 		
-		NewOffsetInfo.Company      = AdvanceKey.Company;
-		NewOffsetInfo.Branch       = AdvanceKey.Branch;
-		NewOffsetInfo.Currency     = AdvanceKey.Currency;
-		NewOffsetInfo.Partner      = AdvanceKey.Partner;
-		NewOffsetInfo.LegalName    = AdvanceKey.LegalName;
+		NewOffsetInfo.Company      = AdvanceRecordData.Company;
+		NewOffsetInfo.Branch       = AdvanceRecordData.Branch;
+		NewOffsetInfo.Currency     = AdvanceRecordData.Currency;
+		NewOffsetInfo.Partner      = AdvanceRecordData.Partner;
+		NewOffsetInfo.LegalName    = AdvanceRecordData.LegalName;
 		
-		NewOffsetInfo.AdvanceAgreement = AdvanceKey.AdvanceAgreement;
-		NewOffsetInfo.AdvanceProject   = AdvanceKey.Project;
+		NewOffsetInfo.Agreement        = AdvanceRecordData.Agreement;
+		NewOffsetInfo.AdvanceProject   = AdvanceRecordData.Project;
 	EndDo;
 	If NeedWriteAdvances Then
 		Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
 	EndIf;
-	Return AdvanceKeyWithoutOrder;
+	Return AdvanceRecordDataWithoutOrder;
 EndFunction
 
-Function GetAdvanceKeyByAdvanceKeyWithoutOrder(Parameters, AdvanceKey)
-	Query = New Query;
-	Query.Text =
-	"SELECT TOP 1
-	|	AdvKeys.Ref AS AdvanceKey
-	|FROM
-	|	Catalog.AdvancesKeys AS AdvKeys
-	|WHERE
-	|	NOT AdvKeys.DeletionMark
-	|	AND &Company = AdvKeys.Company
-	|	AND &Branch = AdvKeys.Branch
-	|	AND &Currency = AdvKeys.Currency
-	|	AND &Partner = AdvKeys.Partner
-	|	AND &LegalName = AdvKeys.LegalName
-	|	AND &AdvanceAgreement = AdvKeys.AdvanceAgreement
-	|	AND &Project = AdvKeys.Project
-	|	AND AdvKeys.Order.Ref IS NULL
-	|	AND AdvKeys.%1";
-
-	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
-	
-	Query.SetParameter("Company"   , AdvanceKey.Company);
-	Query.SetParameter("Branch"    , AdvanceKey.Branch);
-	Query.SetParameter("Currency"  , AdvanceKey.Currency);
-	Query.SetParameter("Partner"   , AdvanceKey.Partner);
-	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
-	Query.SetParameter("AdvanceAgreement", AdvanceKey.AdvanceAgreement);
-	Query.SetParameter("Project", AdvanceKey.Project);
-
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-
-	If QuerySelection.Next() Then
-		KeyRef = QuerySelection.AdvanceKey;
-	Else // Create
-		KeyObject = Catalogs.AdvancesKeys.CreateItem();
-		KeyObject.Company   = AdvanceKey.Company;
-		KeyObject.Branch    = AdvanceKey.Branch;
-		KeyObject.Currency  = AdvanceKey.Currency;
-		KeyObject.Partner   = AdvanceKey.Partner;
-		KeyObject.LegalName = AdvanceKey.LegalName;
-		KeyObject.AdvanceAgreement = AdvanceKey.AdvanceAgreement;
-		KeyObject.Project = AdvanceKey.Project;
-		KeyObject.IsCustomerAdvance = AdvanceKey.IsCustomerAdvance;
-		KeyObject.IsVendorAdvance   = AdvanceKey.IsVendorAdvance;
-		KeyObject.Order = Undefined; // without Order
-		KeyObject.Description = Left(String(New UUID), 8);
-		KeyObject.Write();
-		KeyRef = KeyObject.Ref;
-	EndIf;
-	Return KeyRef;
+Function CreateAdvanceRecordData(Parameters, RecordData)
+	AdvanceRecordData = New Structure();
+	AdvanceRecordData.Insert("Company"   , RecordData.Company);
+	AdvanceRecordData.Insert("Branch"    , RecordData.Branch);
+	AdvanceRecordData.Insert("Currency"  , RecordData.Currency);
+	AdvanceRecordData.Insert("Partner"   , RecordData.Partner);
+	AdvanceRecordData.Insert("LegalName" , RecordData.LegalName);
+	AdvanceRecordData.Insert("Agreement" , RecordData.Agreement);
+	AdvanceRecordData.Insert("Order"     , RecordData.Order);
+	AdvanceRecordData.Insert("Project"   , RecordData.Project);
+	AdvanceRecordData.Insert(Parameters.AdvanceType , True);
+	Return AdvanceRecordData;
 EndFunction
 
 Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, Table_DocumentAndAdvancesKey)
-	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	AdvInfo.Company,
-	|	AdvInfo.Branch,
-	|	AdvInfo.Currency,
-	|	AdvInfo.Partner,
-	|	AdvInfo.LegalName,
-	|	AdvInfo.AdvanceAgreement,
-	|	AdvInfo.Project,
-	|	CASE
-	|		WHEN AdvInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE AdvInfo.Order
-	|	END AS Order
-	|INTO tmp_AdvInfo
-	|FROM
-	|	InformationRegister.T2014S_AdvancesInfo AS AdvInfo
-	|WHERE
-	|	AdvInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND AdvInfo.Company = &Company
-	|	AND AdvInfo.Branch = &Branch
-	|	AND AdvInfo.%1
-	|GROUP BY
-	|	AdvInfo.Company,
-	|	AdvInfo.Branch,
-	|	AdvInfo.Currency,
-	|	AdvInfo.Partner,
-	|	AdvInfo.LegalName,
-	|	AdvInfo.AdvanceAgreement,
-	|	AdvInfo.Project,
-	|	CASE
-	|		WHEN AdvInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE AdvInfo.Order
-	|	END
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	MAX(AdvKeys.Ref) AS AdvanceKey,
-	|	tmp_AdvInfo.Company,
-	|	tmp_AdvInfo.Branch,
-	|	tmp_AdvInfo.Currency,
-	|	tmp_AdvInfo.Partner,
-	|	tmp_AdvInfo.LegalName,
-	|	tmp_AdvInfo.Order,
-	|	tmp_AdvInfo.AdvanceAgreement,
-	|	tmp_AdvInfo.Project,
-	|	TRUE AS %1
-	|FROM
-	|	tmp_AdvInfo AS tmp_AdvInfo
-	|		LEFT JOIN Catalog.AdvancesKeys AS AdvKeys
-	|		ON NOT AdvKeys.DeletionMark
-	|		AND tmp_AdvInfo.Company = AdvKeys.Company
-	|		AND tmp_AdvInfo.Branch = AdvKeys.Branch
-	|		AND tmp_AdvInfo.Currency = AdvKeys.Currency
-	|		AND tmp_AdvInfo.Partner = AdvKeys.Partner
-	|		AND tmp_AdvInfo.LegalName = AdvKeys.LegalName
-	|		AND CASE
-	|			WHEN tmp_AdvInfo.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_AdvInfo.Order
-	|		END = CASE
-	|			WHEN AdvKeys.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE AdvKeys.Order
-	|		END
-	|		AND tmp_AdvInfo.AdvanceAgreement = AdvKeys.AdvanceAgreement
-	|		AND tmp_AdvInfo.Project = AdvKeys.Project
-	|		AND AdvKeys.%1
-	|GROUP BY
-	|	tmp_AdvInfo.Branch,
-	|	tmp_AdvInfo.Company,
-	|	tmp_AdvInfo.Currency,
-	|	tmp_AdvInfo.Partner,
-	|	tmp_AdvInfo.LegalName,
-	|	tmp_AdvInfo.AdvanceAgreement,
-	|	tmp_AdvInfo.Project,
-	|	tmp_AdvInfo.Order";
-
-	Query.Text = StrTemplate(Query.Text, Parameters.AdvanceType);
-	
-	Query.SetParameter("BeginOfPeriod" , Parameters.Object.BeginOfPeriod);
-	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
-	Query.SetParameter("Company"       , Parameters.Object.Company);
-	Query.SetParameter("Branch"        , Parameters.Object.Branch);
-
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-
-	While QuerySelection.Next() Do
-		If Not ValueIsFilled(QuerySelection.AdvanceKey) Then // Create
-			KeyObject = Catalogs.AdvancesKeys.CreateItem();
-			FillPropertyValues(KeyObject, QuerySelection);
-			KeyObject.Description = Left(String(New UUID), 8);
-			KeyObject.Write();
-		EndIf;
-	EndDo;
-
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -1845,16 +1544,15 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Currency,
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
-	|	AdvInfo.AdvanceAgreement,
+	|	AdvInfo.AdvanceAgreement AS Agreement,
 	|	AdvInfo.Project,
 	|	AdvInfo.RecordType,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
+	|			THEN &Order_EmptyRef
 	|		ELSE AdvInfo.Order
 	|	END AS Order,
 	|	AdvInfo.%1
-	|INTO tmp_AdvInfo
 	|FROM
 	|	InformationRegister.T2014S_AdvancesInfo AS AdvInfo
 	|WHERE
@@ -1876,43 +1574,11 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.RecordType,
 	|	CASE
 	|		WHEN AdvInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
+	|			THEN &Order_EmptyRef
 	|		ELSE AdvInfo.Order
 	|	END,
 	|	AdvInfo.Recorder,
-	|	AdvInfo.%1
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp_AdvInfo.Document,
-	|	tmp_AdvInfo.Date,
-	|	tmp_AdvInfo.Amount,
-	|	tmp_AdvInfo.RecordType,
-	|	tmp_AdvInfo.Key,
-	|	tmp_AdvInfo.%1,
-	|	AdvKeys.Ref AS AdvanceKey
-	|FROM
-	|	tmp_AdvInfo AS tmp_AdvInfo
-	|		LEFT JOIN Catalog.AdvancesKeys AS AdvKeys
-	|		ON NOT AdvKeys.DeletionMark
-	|		AND tmp_AdvInfo.Company = AdvKeys.Company
-	|		AND tmp_AdvInfo.Branch = AdvKeys.Branch
-	|		AND tmp_AdvInfo.Currency = AdvKeys.Currency
-	|		AND tmp_AdvInfo.Partner = AdvKeys.Partner
-	|		AND tmp_AdvInfo.LegalName = AdvKeys.LegalName
-	|		AND tmp_AdvInfo.AdvanceAgreement = AdvKeys.AdvanceAgreement
-	|		AND tmp_AdvInfo.Project = AdvKeys.Project
-	|		AND CASE
-	|			WHEN tmp_AdvInfo.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_AdvInfo.Order
-	|		END = CASE
-	|			WHEN AdvKeys.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE AdvKeys.Order
-	|		END
-	|		AND AdvKeys.%2";
+	|	AdvInfo.%1";
  
     Query.Text = StrTemplate(Query.Text, Parameters.OrderCloseType, Parameters.AdvanceType);
 	
@@ -1920,11 +1586,22 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
 	Query.SetParameter("Company"       , Parameters.Object.Company);
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
+	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
 	While QuerySelection.Next() Do
+		
+		RecordData = CreateAdvanceRecordData(Parameters, QuerySelection);
+		
+		Rows = Table_DocumentAndAdvancesKey.FindRows(RecordData); 
+		If Rows.Count() Then
+			AdvanceKeyUUID = Rows[0].AdvanceKeyUUID;
+		Else
+			AdvanceKeyUUID = New UUID();
+		EndIf;
+		
 		If Not QuerySelection[Parameters.OrderCloseType] Then
 			
 			RecordType = AccumulationRecordType.Receipt;
@@ -1933,142 +1610,38 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 			EndIf;
 			
 			Add_TM1020B_AdvancesKey(RecordType, 
-		                            QuerySelection.Date, 
-		                            QuerySelection.AdvanceKey,
+		                            QuerySelection.Date,
+		                            RecordData,
 		                            QuerySelection.Amount, 
 		                            Records_AdvancesKey);		
 		EndIf;
 
 		New_DocKeys = Table_DocumentAndAdvancesKey.Add();
-		New_DocKeys.Document   = QuerySelection.Document;
-		New_DocKeys.AdvanceKey = QuerySelection.AdvanceKey;
-		New_DocKeys.Amount     = QuerySelection.Amount;
+		New_DocKeys.Document       = QuerySelection.Document;
+		New_DocKeys.Amount         = QuerySelection.Amount;
+		New_DocKeys.AdvanceKeyUUID = AdvanceKeyUUID;
+		FillPropertyValues(New_DocKeys, RecordData);		
 	EndDo;
 EndProcedure
 
-Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey)
+Function CreateTransactionRecordData(Parameters, RecordData)
+	TransactionRecordData = New Structure();
+	TransactionRecordData.Insert("Company"          , RecordData.Company);
+	TransactionRecordData.Insert("Branch"           , RecordData.Branch);
+	TransactionRecordData.Insert("Currency"         , RecordData.Currency);
+	TransactionRecordData.Insert("Partner"          , RecordData.Partner);
+	TransactionRecordData.Insert("LegalName"        , RecordData.LegalName);
+	TransactionRecordData.Insert("Agreement"        , RecordData.Agreement);
+	TransactionRecordData.Insert("TransactionBasis" , RecordData.TransactionBasis);
+	TransactionRecordData.Insert("Order"            , RecordData.Order);
+	TransactionRecordData.Insert("Project"          , RecordData.Project);
+	TransactionRecordData.Insert(Parameters.TransactionType , True);
+	Return TransactionRecordData;
+EndFunction
+
+Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_OffsetAging, Table_DocumentAndTransactionsKey, FilterRecorder = Undefined)
 	Query = New Query;
-	Query.Text =
-	"SELECT
-	|	TrnInfo.Company,
-	|	TrnInfo.Branch,
-	|	TrnInfo.Currency,
-	|	TrnInfo.Partner,
-	|	TrnInfo.LegalName,
-	|	TrnInfo.Agreement,
-	|	TrnInfo.Project,
-	|	CASE
-	|		WHEN TrnInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.Order
-	|	END AS Order,
-	|	CASE
-	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.TransactionBasis
-	|	END AS TransactionBasis
-	|INTO tmp_TrnInfo
-	|FROM
-	|	InformationRegister.T2015S_TransactionsInfo AS TrnInfo
-	|WHERE
-	|	TrnInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND TrnInfo.Company = &Company
-	|	AND TrnInfo.Branch = &Branch
-	|	AND TrnInfo.%1
-	|GROUP BY
-	|	TrnInfo.Company,
-	|	TrnInfo.Branch,
-	|	TrnInfo.Currency,
-	|	TrnInfo.Partner,
-	|	TrnInfo.LegalName,
-	|	TrnInfo.Agreement,
-	|	TrnInfo.Project,
-	|	CASE
-	|		WHEN TrnInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.Order
-	|	END,
-	|	CASE
-	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
-	|			THEN UNDEFINED
-	|		ELSE TrnInfo.TransactionBasis
-	|	END
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	MAX(TrnKeys.Ref) AS TransactionKey,
-	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.Branch,
-	|	tmp_TrnInfo.Currency,
-	|	tmp_TrnInfo.Partner,
-	|	tmp_TrnInfo.LegalName,
-	|	tmp_TrnInfo.Agreement,
-	|	tmp_TrnInfo.Project,
-	|	tmp_TrnInfo.Order,
-	|	tmp_TrnInfo.TransactionBasis,
-	|	TRUE AS %1
-	|FROM
-	|	tmp_TrnInfo AS tmp_TrnInfo
-	|		LEFT JOIN Catalog.TransactionsKeys AS TrnKeys
-	|		ON NOT TrnKeys.DeletionMark
-	|		AND tmp_TrnInfo.Company = TrnKeys.Company
-	|		AND tmp_TrnInfo.Branch = TrnKeys.Branch
-	|		AND tmp_TrnInfo.Currency = TrnKeys.Currency
-	|		AND tmp_TrnInfo.Partner = TrnKeys.Partner
-	|		AND tmp_TrnInfo.LegalName = TrnKeys.LegalName
-	|		AND tmp_TrnInfo.Agreement = TrnKeys.Agreement
-	|		AND tmp_TrnInfo.Project = TrnKeys.Project
-	|		AND CASE
-	|			WHEN tmp_TrnInfo.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_TrnInfo.Order
-	|		END = CASE
-	|			WHEN TrnKeys.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE TrnKeys.Order
-	|		END
-	|		AND CASE
-	|			WHEN tmp_TrnInfo.TransactionBasis.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_TrnInfo.TransactionBasis
-	|		END = CASE
-	|			WHEN TrnKeys.TransactionBasis.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE TrnKeys.TransactionBasis
-	|		END
-	|		AND TrnKeys.%1
-	|GROUP BY
-	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.Branch,
-	|	tmp_TrnInfo.Currency,
-	|	tmp_TrnInfo.Partner,
-	|	tmp_TrnInfo.LegalName,
-	|	tmp_TrnInfo.Agreement,
-	|	tmp_TrnInfo.Project,
-	|	tmp_TrnInfo.Order,
-	|	tmp_TrnInfo.TransactionBasis";
-
-	Query.Text = StrTemplate(Query.Text, Parameters.TransactionType);
-	
-	Query.SetParameter("BeginOfPeriod" , Parameters.Object.BeginOfPeriod);
-	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
-	Query.SetParameter("Company"       , Parameters.Object.Company);
-	Query.SetParameter("Branch"        , Parameters.Object.Branch);
-
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-
-	While QuerySelection.Next() Do
-		If Not ValueIsFilled(QuerySelection.TransactionKey) Then // Create
-			KeyObject = Catalogs.TransactionsKeys.CreateItem();
-			FillPropertyValues(KeyObject, QuerySelection);
-			KeyObject.Description = Left(String(New UUID), 8);
-			KeyObject.Write();
-		EndIf;
-	EndDo;
-	Query = New Query;
-	Query.Text =
+	Query.Text =		
 	"SELECT
 	|	TrnInfo.Date,
 	|	TrnInfo.Recorder AS Document,
@@ -2084,7 +1657,7 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	TrnInfo.Project,
 	|	CASE
 	|		WHEN TrnInfo.Order.Ref IS NULL
-	|			THEN UNDEFINED
+	|			THEN &Order_EmptyRef
 	|		ELSE TrnInfo.Order
 	|	END AS Order,
 	|	CASE
@@ -2092,98 +1665,95 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|			THEN UNDEFINED
 	|		ELSE TrnInfo.TransactionBasis
 	|	END AS TransactionBasis
-	|INTO tmp_TrnInfo
 	|FROM
 	|	InformationRegister.T2015S_TransactionsInfo AS TrnInfo
 	|WHERE
 	|	TrnInfo.Date BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND TrnInfo.Company = &Company
-	|	AND TrnInfo.Branch = &Branch
-	|	AND TrnInfo.%1
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TrnKeys.Ref AS TransactionKey,
-	|	tmp_TrnInfo.Document,
-	|	tmp_TrnInfo.Date,
-	|	tmp_TrnInfo.Company,
-	|	tmp_TrnInfo.Amount AS Amount,
-	|	tmp_TrnInfo.IsDue,
-	|	tmp_TrnInfo.IsPaid
-	|FROM
-	|	tmp_TrnInfo AS tmp_TrnInfo
-	|		LEFT JOIN Catalog.TransactionsKeys AS TrnKeys
-	|		ON NOT TrnKeys.DeletionMark
-	|		AND tmp_TrnInfo.Company = TrnKeys.Company
-	|		AND tmp_TrnInfo.Branch = TrnKeys.Branch
-	|		AND tmp_TrnInfo.Currency = TrnKeys.Currency
-	|		AND tmp_TrnInfo.Partner = TrnKeys.Partner
-	|		AND tmp_TrnInfo.LegalName = TrnKeys.LegalName
-	|		AND tmp_TrnInfo.Agreement = TrnKeys.Agreement
-	|		AND tmp_TrnInfo.Project = TrnKeys.Project
-	|		AND CASE
-	|			WHEN tmp_TrnInfo.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_TrnInfo.Order
-	|		END = CASE
-	|			WHEN TrnKeys.Order.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE TrnKeys.Order
-	|		END
-	|		AND CASE
-	|			WHEN tmp_TrnInfo.TransactionBasis.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE tmp_TrnInfo.TransactionBasis
-	|		END = CASE
-	|			WHEN TrnKeys.TransactionBasis.Ref IS NULL
-	|				THEN UNDEFINED
-	|			ELSE TrnKeys.TransactionBasis
-	|		END
-	|		AND TrnKeys.%1";
-
+	|	AND TrnInfo.Branch = &Branch 
+	|	AND CASE WHEN &Filter_Recorder THEN TrnInfo.Recorder = &Recorder ELSE TRUE END
+	|	AND TrnInfo.%1";
+	
 	Query.Text = StrTemplate(Query.Text, Parameters.TransactionType);
 	
 	Query.SetParameter("BeginOfPeriod" , Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"   , Parameters.Object.EndOfPeriod);
 	Query.SetParameter("Company"       , Parameters.Object.Company);
 	Query.SetParameter("Branch"        , Parameters.Object.Branch);
-
+	Query.SetParameter("Order_EmptyRef", Parameters.Order_EmptyRef);
+	
+	If FilterRecorder <> Undefined Then 
+		Query.SetParameter("Filter_Recorder", True);
+		Query.SetParameter("Recorder",FilterRecorder);
+	Else
+		Query.SetParameter("Filter_Recorder", False);
+		Query.SetParameter("Recorder", Undefined);
+	EndIf;
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-
-	While QuerySelection.Next() Do
-		If QuerySelection.IsDue Then
-			RecordType = AccumulationRecordType.Receipt;
-		ElsIf QuerySelection.IsPaid Then
-			RecordType = AccumulationRecordType.Expense;
-		Else
-			Continue;
-		EndIf;
+	
+	If FilterRecorder <> Undefined Then
+	   While QuerySelection.Next() Do
+		   If QuerySelection.IsDue And QuerySelection.Amount < 0 Then 
+			    RecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+					DistributeTransactionToAging(Parameters, 
+												 QuerySelection.Document.PointInTime(), 
+												 QuerySelection.Document,
+												 RecordData, 
+												 - QuerySelection.Amount, 
+												 Records_OffsetAging);
+				EndIf;                         
+	   EndDo;
+	   
+	Else
 		
-		Add_TM1030B_TransactionsKey(RecordType, 
-		                            QuerySelection.Date, 
-		                            QuerySelection.TransactionKey, 
-		                            QuerySelection.Amount, 
-		                            Records_TransactionsKey);		
-			
-		New_DocKeys = Table_DocumentAndTransactionsKey.Add();
-		New_DocKeys.Document = QuerySelection.Document;
-		New_DocKeys.TransactionKey = QuerySelection.TransactionKey;
+			While QuerySelection.Next() Do
+				
+				RecordData = CreateTransactionRecordData(Parameters, QuerySelection);
+						
+				Rows = Table_DocumentAndTransactionsKey.FindRows(RecordData); 
+				If Rows.Count() Then
+					TransactionKeyUUID = Rows[0].TransactionKeyUUID;
+				Else
+					TransactionKeyUUID = New UUID();
+				EndIf;
+						
+				If QuerySelection.IsDue Then
+					RecordType = AccumulationRecordType.Receipt;
+				ElsIf QuerySelection.IsPaid Then
+					RecordType = AccumulationRecordType.Expense;
+				Else
+					Continue;
+				EndIf;
+				
+				Add_TM1030B_TransactionsKey(RecordType, 
+				                            QuerySelection.Date, 
+				                            RecordData, 
+				                            QuerySelection.Amount, 
+				                            Records_TransactionsKey);		
+					
+				New_DocKeys = Table_DocumentAndTransactionsKey.Add();
+				New_DocKeys.Document = QuerySelection.Document;
+				New_DocKeys.TransactionKeyUUID = TransactionKeyUUID;
+				FillPropertyValues(New_DocKeys, RecordData);
+				
+				// Paid from customer or to vendor 
+				If QuerySelection.IsPaid Then
+					DistributeTransactionToAging(Parameters, 
+												 QuerySelection.Document.PointInTime(), 
+												 QuerySelection.Document,
+												 RecordData, 
+												 QuerySelection.Amount, 
+												 Records_OffsetAging);
+				EndIf;  
 		
-		// Paid from customer or to vendor 
-		If QuerySelection.IsPaid Then
-			DistributeTransactionToAging(Parameters, 
-										 QuerySelection.Document.PointInTime(), 
-										 QuerySelection.Document,
-										 QuerySelection.TransactionKey, 
-										 QuerySelection.Amount, 
-										 Records_OffsetAging);
-		EndIf;
-	EndDo;
+			EndDo;
+	
+	EndIf;
 EndProcedure
 
-Procedure ReturnMoneyByAging(Parameters, Document, TransactionKey, TransactionAmount, Records_OffsetAging)
+Procedure ReturnMoneyByAging(Parameters, Document, TransactionData, TransactionAmount, Records_OffsetAging)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -2198,7 +1768,7 @@ Procedure ReturnMoneyByAging(Parameters, Document, TransactionKey, TransactionAm
 	|	RegAging.PaymentDate DESC";
 	
 	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName_Aging);	
-	Query.SetParameter("TransactionBasis", TransactionKey.TransactionBasis);
+	Query.SetParameter("TransactionBasis", TransactionData.TransactionBasis);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -2216,12 +1786,12 @@ Procedure ReturnMoneyByAging(Parameters, Document, TransactionKey, TransactionAm
 		NewRow.Period      = Document.Date;
 		NewRow.Document    = Document;
 		NewRow.RecordType  = Enums.RecordType.Receipt;
-		NewRow.Company     = TransactionKey.Company;
-		NewRow.Branch      = TransactionKey.Branch;
-		NewRow.Currency    = TransactionKey.Currency;
-		NewRow.Agreement   = TransactionKey.Agreement;
-		NewRow.Partner     = TransactionKey.Partner;
-		NewRow.Invoice     = TransactionKey.TransactionBasis;
+		NewRow.Company     = TransactionData.Company;
+		NewRow.Branch      = TransactionData.Branch;
+		NewRow.Currency    = TransactionData.Currency;
+		NewRow.Agreement   = TransactionData.Agreement;
+		NewRow.Partner     = TransactionData.Partner;
+		NewRow.Invoice     = TransactionData.TransactionBasis;
 		NewRow.PaymentDate = QuerySelection.PaymentDate;
 		NewRow.Amount      = CanWriteOff;
 		NeedWriteAging = True;
@@ -2231,7 +1801,7 @@ Procedure ReturnMoneyByAging(Parameters, Document, TransactionKey, TransactionAm
 	EndIf;
 EndProcedure
 
-Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, TransactionKey, TransactionAmount, Records_OffsetAging)
+Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, TransactionData, TransactionAmount, Records_OffsetAging)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -2250,12 +1820,12 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	Boundary = New Boundary(PointInTime, BoundaryType.Including);
 	Query.SetParameter("TransactionBoundary", Boundary);
 
-	Query.SetParameter("Company"         , TransactionKey.Company);
-	Query.SetParameter("Branch"          , TransactionKey.Branch);
-	Query.SetParameter("Currency"        , TransactionKey.Currency);
-	Query.SetParameter("Agreement"       , TransactionKey.Agreement);
-	Query.SetParameter("Partner"         , TransactionKey.Partner);
-	Query.SetParameter("TransactionBasis", TransactionKey.TransactionBasis);
+	Query.SetParameter("Company"         , TransactionData.Company);
+	Query.SetParameter("Branch"          , TransactionData.Branch);
+	Query.SetParameter("Currency"        , TransactionData.Currency);
+	Query.SetParameter("Agreement"       , TransactionData.Agreement);
+	Query.SetParameter("Partner"         , TransactionData.Partner);
+	Query.SetParameter("TransactionBasis", TransactionData.TransactionBasis);
 
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -2276,12 +1846,12 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 		NewRow.Period      = Document.Date;
 		NewRow.Document    = Document;
 		NewRow.RecordType  = Enums.RecordType.Expense;
-		NewRow.Company     = TransactionKey.Company;
-		NewRow.Branch      = TransactionKey.Branch;
-		NewRow.Currency    = TransactionKey.Currency;
-		NewRow.Agreement   = TransactionKey.Agreement;
-		NewRow.Partner     = TransactionKey.Partner;
-		NewRow.Invoice     = TransactionKey.TransactionBasis;
+		NewRow.Company     = TransactionData.Company;
+		NewRow.Branch      = TransactionData.Branch;
+		NewRow.Currency    = TransactionData.Currency;
+		NewRow.Agreement   = TransactionData.Agreement;
+		NewRow.Partner     = TransactionData.Partner;
+		NewRow.Invoice     = TransactionData.TransactionBasis;
 		NewRow.PaymentDate = QuerySelection.PaymentDate;
 		NewRow.Amount      = CanWriteOff;
 		NeedWriteAging = True;
@@ -2295,7 +1865,9 @@ Procedure Write_Aging(Parameters, Document, Records_OffsetAging)
 	RecordSet_Aging = AccumulationRegisters[Parameters.RegisterName_Aging].CreateRecordSet();
 	RecordSet_Aging.Filter.Recorder.Set(Document);
 	RecordSet_Aging.Read();
-	ArrayForDelete = New Array;
+	
+	ArrayForDelete = New Array();
+	
 	For Each Record In RecordSet_Aging Do
 		If Record.AgingClosing = Parameters.Object.Ref Then
 			ArrayForDelete.Add(Record);
@@ -2330,8 +1902,8 @@ Procedure Add_T2010S_OffsetOfAdvances_FromAdvance_ToTransaction(Parameters,
 	                                                            Period, 
 	                                                            Amount, 
 	                                                            Document, 
-	                                                            AdvanceKey, 
-	                                                            TransactionKey, 
+	                                                            AdvanceRecordData, 
+	                                                            TransactionRecordData, 
 	                                                            Records_OffsetOfAdvances)
 	NewRecord = Records_OffsetOfAdvances.Add();
 	NewRecord.RecordType  = RecordType;
@@ -2340,28 +1912,25 @@ Procedure Add_T2010S_OffsetOfAdvances_FromAdvance_ToTransaction(Parameters,
 	NewRecord.Amount   = Amount;
 	NewRecord.Document = Document;
 		
-	NewRecord.Company   = TransactionKey.Company;
-	NewRecord.Branch    = TransactionKey.Branch;
-	NewRecord.Currency  = TransactionKey.Currency;
-	NewRecord.Partner   = TransactionKey.Partner;
-	NewRecord.LegalName = TransactionKey.LegalName;
+	NewRecord.Company   = TransactionRecordData.Company;
+	NewRecord.Branch    = TransactionRecordData.Branch;
+	NewRecord.Currency  = TransactionRecordData.Currency;
+	NewRecord.Partner   = TransactionRecordData.Partner;
+	NewRecord.LegalName = TransactionRecordData.LegalName;
 		
-	NewRecord.TransactionDocument = TransactionKey.TransactionBasis;
+	NewRecord.TransactionDocument = TransactionRecordData.TransactionBasis;
 		
-	NewRecord.TransactionAgreement= TransactionKey.Agreement;
-	NewRecord.TransactionOrder    = TransactionKey.Order;
-	NewRecord.TransactionProject  = TransactionKey.Project;
-	NewRecord.TransactionsRowKey  = FindRowKeyByTransactionKey(Parameters, TransactionKey, Document);
+	NewRecord.Agreement           = TransactionRecordData.Agreement;
+	NewRecord.TransactionOrder    = TransactionRecordData.Order;
+	NewRecord.TransactionProject  = TransactionRecordData.Project;
+	NewRecord.TransactionsRowKey  = FindRowKeyByTransactionKey(Parameters, TransactionRecordData, Document);
 		
-	NewRecord.AdvanceAgreement    = AdvanceKey.AdvanceAgreement;
-	NewRecord.AdvanceProject      = AdvanceKey.Project;
-	NewRecord.AdvanceOrder        = AdvanceKey.Order;
-	NewRecord.AdvancesRowKey      = FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document);
+	NewRecord.Agreement           = AdvanceRecordData.Agreement;
+	NewRecord.AdvanceProject      = AdvanceRecordData.Project;
+	NewRecord.AdvanceOrder        = AdvanceRecordData.Order;
+	NewRecord.AdvancesRowKey      = FindRowKeyByAdvanceKey(Parameters, AdvanceRecordData, Document);
 		
-    NewRecord.FromAdvanceKey      = AdvanceKey;
-	NewRecord.ToTransactionKey    = TransactionKey;
-		
-	NewRecord.Key = NewRecord.TransactionsRowKey;
+ 	NewRecord.Key = NewRecord.TransactionsRowKey;
 EndProcedure
 
 Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters, 
@@ -2369,8 +1938,8 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 	                                                            Period, 
 	                                                            Amount, 
 	                                                            Document, 
-	                                                            AdvanceKey, 
-	                                                            TransactionKey, 
+	                                                            AdvanceRecordData, 
+	                                                            TransactionRecordData, 
 	                                                            Records_OffsetOfAdvances,
 	                                                            IsReturnToAdvance = False)
 	NewRecord = Records_OffsetOfAdvances.Add();
@@ -2380,27 +1949,24 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 	NewRecord.Amount   = Amount;
 	NewRecord.Document = Document;
 		
-	NewRecord.Company   = AdvanceKey.Company;
-	NewRecord.Branch    = AdvanceKey.Branch;
-	NewRecord.Currency  = AdvanceKey.Currency;
-	NewRecord.Partner   = AdvanceKey.Partner;
-	NewRecord.LegalName = AdvanceKey.LegalName;
+	NewRecord.Company   = AdvanceRecordData.Company;
+	NewRecord.Branch    = AdvanceRecordData.Branch;
+	NewRecord.Currency  = AdvanceRecordData.Currency;
+	NewRecord.Partner   = AdvanceRecordData.Partner;
+	NewRecord.LegalName = AdvanceRecordData.LegalName;
 		
-	NewRecord.TransactionDocument = TransactionKey.TransactionBasis;
+	NewRecord.TransactionDocument = TransactionRecordData.TransactionBasis;
 		
-	NewRecord.TransactionAgreement= TransactionKey.Agreement;
-	NewRecord.TransactionOrder    = TransactionKey.Order;
-	NewRecord.TransactionProject  = TransactionKey.Project;
-	NewRecord.TransactionsRowKey  = FindRowKeyByTransactionKey(Parameters, TransactionKey, Document);
+	NewRecord.Agreement           = TransactionRecordData.Agreement;
+	NewRecord.TransactionOrder    = TransactionRecordData.Order;
+	NewRecord.TransactionProject  = TransactionRecordData.Project;
+	NewRecord.TransactionsRowKey  = FindRowKeyByTransactionKey(Parameters, TransactionRecordData, Document);
 		
-    NewRecord.AdvanceAgreement    = AdvanceKey.AdvanceAgreement;
-    NewRecord.AdvanceOrder        = AdvanceKey.Order;
-    NewRecord.AdvanceProject      = AdvanceKey.Project;
-    NewRecord.AdvancesRowKey      = FindRowKeyByAdvanceKey(Parameters, AdvanceKey, Document);
+    NewRecord.Agreement           = AdvanceRecordData.Agreement;
+    NewRecord.AdvanceOrder        = AdvanceRecordData.Order;
+    NewRecord.AdvanceProject      = AdvanceRecordData.Project;
+    NewRecord.AdvancesRowKey      = FindRowKeyByAdvanceKey(Parameters, AdvanceRecordData, Document);
 		
-	NewRecord.FromTransactionKey  = TransactionKey;
-	NewRecord.ToAdvanceKey        = AdvanceKey;
-	
 	NewRecord.IsReturnToAdvance = IsReturnToAdvance; 
 	
 	If IsReturnToAdvance Then	
@@ -2410,11 +1976,11 @@ Procedure Add_T2010S_OffsetOfAdvances_FromTransaction_ToAdvance(Parameters,
 	EndIf;		
 EndProcedure
 
-Procedure Add_TM1020B_AdvancesKey(RecordType, Period, AdvanceKey, Amount, Records_AdvancesKey)
+Procedure Add_TM1020B_AdvancesKey(RecordType, Period, RecordData, Amount, Records_AdvancesKey)
 	NewRecord = Records_AdvancesKey.Add();
+	FillPropertyValues(NewRecord, RecordData);
 	NewRecord.RecordType = RecordType;
 	NewRecord.Period     = Period;
-	NewRecord.AdvanceKey = AdvanceKey;
 	NewRecord.Amount     = Amount;
 EndProcedure
 
@@ -2427,11 +1993,11 @@ Procedure Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey)
 	RecordSet.Write();
 EndProcedure
 
-Procedure Add_TM1030B_TransactionsKey(RecordType, Period, TransactionKey, Amount, Records_TransactionsKey)
+Procedure Add_TM1030B_TransactionsKey(RecordType, Period, RecordData, Amount, Records_TransactionsKey)
 	NewRecord = Records_TransactionsKey.Add();
+	FillPropertyValues(NewRecord, RecordData);
 	NewRecord.RecordType     = RecordType;
 	NewRecord.Period         = Period;
-	NewRecord.TransactionKey = TransactionKey;
 	NewRecord.Amount         = Amount;
 EndProcedure	
 

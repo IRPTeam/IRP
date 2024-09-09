@@ -3684,8 +3684,13 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 			
 		EndDo;
 		
-		If QueryTable[0].Posted Then
-			DocObject.Write(DocumentWriteMode.Posting);
+		
+		If QueryTable[0].Posted Or Not ValueIsFilled(DocObject.Ref) Then
+			If DocObject.DeletionMark Then
+				DocObject.Write(DocumentWriteMode.Write);
+			Else	
+				DocObject.Write(DocumentWriteMode.Posting);
+			EndIf;
 		Else
 			DocObject.Write(DocumentWriteMode.UndoPosting);
 		EndIf;
@@ -3790,7 +3795,7 @@ Procedure FillExtDimensionsRow(Row, ExtDimension, AnalyticType)
 	ArrayOfDescriptions = LocalizationReuse.AllDescription();
 	
 	For Each Description In ArrayOfDescriptions Do
-		PropertyName = Description + + AnalyticType + ExtDimension.Number;
+		PropertyName = Description + AnalyticType + ExtDimension.Number;
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, PropertyName) 
 			And CommonFunctionsClientServer.ObjectHasProperty(ExtDimension.Value, Description) Then
 			Row[PropertyName] = ExtDimension.Value[Description];

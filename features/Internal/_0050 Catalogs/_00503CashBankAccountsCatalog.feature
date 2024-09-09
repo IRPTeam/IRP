@@ -159,6 +159,7 @@ Scenario: _005018 filling in the "Cash/Bank accounts" catalog
 			| 'Bank account, TRY'    |
 		And I select current line in "List" table
 		And I click Select button of "Transit account" field
+		And I click "List" button		
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Transit Main'    |

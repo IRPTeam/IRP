@@ -1958,13 +1958,18 @@ Scenario: _005154 check hierarchical in the catalog Specification
 		And I click Select button of "Item type" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Bags'           |
+			| 'Coat'           |
 		And I select current line in "List" table
 		And in the table "FormTable*" I click "Add" button
-		And I click choice button of "Producer" attribute in "FormTable*" table
+		And I click choice button of "Size" attribute in "FormTable*" table
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'PZU'            |
+			| 'XS'            |
+		And I select current line in "List" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Red'           |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "FormTable*" table
 		And I input "1,000" text in "Quantity" field of "FormTable*" table
@@ -1980,36 +1985,40 @@ Scenario: _005155 check hierarchical in the catalog Source of origin
 	Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"	
 	* Create Group 01
 		And I click the button named "FormCreateFolder"
-		And I input "Group 01" text in "ENG" field
+		And I input "Group 01" text in "Source of origin" field
 		And I click "Save and close" button
 	* Create Group 02
 		And I click the button named "FormCreateFolder"
-		And I input "Group 02" text in "ENG" field
-		And I click Open button of "ENG" field
-		And I input "Group 02 tr" text in "TR" field
-		And I click "Ok" button
+		And I input "Group 02" text in "Source of origin" field
 		And I click Choice button of the field named "Parent"
 		And I go to line in "List" table
-			| "Description" |
-			| "Group 01"    |
+			| "Source of origin" |
+			| "Group 01"         |
 		And I select current line in "List" table
 		And I click "Save and close" button
 	* Check 
 		And "List" table became equal
-			| 'Description' |
-			| 'Group 01'    |
-			| 'Group 02'    |
+			| 'Source of origin' |
+			| 'Group 01'         |
+			| 'Group 02'         |
 	* Create element in Group
 		And I click "Create" button
-		And I input "Test element" text in "Source" field
+		And I input "Test element" text in "Source of origin" field
 		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 01"         |
 		And I expand current line in "List" table
 		And I go to line in "List" table
-			| "Description" |
-			| "Group 02"    |
+			| "Source of origin" |
+			| "Group 02"         |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 02"         |
+		And I move one level down in "List" table		
 		And "List" table contains lines
-			| 'Description'  |
-			| 'Group 01'     |
-			| 'Test element' |
+			| 'Source of origin' |
+			| 'Group 01'         |
+			| 'Test element'     |

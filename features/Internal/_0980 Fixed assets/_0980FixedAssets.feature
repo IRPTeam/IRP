@@ -90,7 +90,26 @@ Scenario: _980003 create fixed asset
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.FixedAssets"
 	* Check hierarchical
-		When create Groups in the catalog
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "ENG" field
+		And I click "Save and close" button
+		* Create Group 02
+			And I click the button named "FormCreateFolder"
+			And I input "Group 02" text in "ENG" field
+			And I click Open button of "ENG" field
+			And I input "Group 02 tr" text in "TR" field
+			And I click "Ok" button
+			And I click Choice button of the field named "Parent"
+			And I go to line in "List" table
+				| "Description" |
+				| "Group 01"    |
+			And I select current line in "List" table
+			And I click "Save and close" button
+		* Check 
+			And "List" table became equal
+				| 'Description' |
+				| 'Group 01'    |
+				| 'Group 02'    |
 	And I click "Create" button
 	* Filling description
 		And I input "Fixed asset" text in "ENG" field

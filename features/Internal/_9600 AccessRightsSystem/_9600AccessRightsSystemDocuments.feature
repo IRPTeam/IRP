@@ -7034,13 +7034,15 @@ Scenario: 960191 check Stores catalog rights (LimitedAccess)
 Scenario: 960192 check PriceTypes catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
-	And "List" table became equal
+	And "List" table contains lines
 		| 'Code' | 'Description'                     |
 		| '2'    | ''                                |
 		| '1'    | ''                                |
 		| ''     | ''                                |
 		| ''     | 'PriceType Read and Write Access' |
 		| ''     | 'PriceType Only read access'      |
+	Then the number of "List" table lines is "равно" "5"
+	
 			
 	
 Scenario: 960193 check CashAccounts catalog rights (LimitedAccess)	

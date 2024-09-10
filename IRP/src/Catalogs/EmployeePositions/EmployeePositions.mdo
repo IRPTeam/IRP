@@ -134,7 +134,6 @@
     <value>Employee positions</value>
   </objectPresentation>
   <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>

@@ -1002,6 +1002,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.OutgoingMessage.Attribute.MailAccount</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashStatement.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
 		<right>
 			<name>View</name>
@@ -1647,6 +1654,17 @@
 	</object>
 	<object>
 		<name>Document.DebitNote.TabularSection.Transactions.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.OutgoingMessage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

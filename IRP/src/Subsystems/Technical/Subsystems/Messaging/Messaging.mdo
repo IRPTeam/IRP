@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8f6513e1-0659-4fb4-80d9-e8bac3e26424">
+  <name>Messaging</name>
+  <synonym>
+    <key>en</key>
+    <value>Messaging</value>
+  </synonym>
+  <synonym>
+    <key>ru</key>
+    <value>Обмен сообщениями</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <content>Document.OutgoingMessage</content>
+  <content>Constant.UseMessaging</content>
+  <content>Role.Document_OpeningMessage</content>
+  <content>Enum.MessagesImportance</content>
+  <content>InformationRegister.MessagesQueueToSend</content>
+  <content>CommonPicture.SendMail</content>
+  <content>FunctionalOption.UseMessaging</content>
+  <content>CommonModule.EmailMessagesServer</content>
+  <content>Enum.MessageTypes</content>
+  <content>CommonModule.MessagesServer</content>
+  <parentSubsystem>Subsystem.Technical</parentSubsystem>
+</mdclass:Subsystem>

@@ -86,6 +86,49 @@ Function GetClosingBySalesOrder(SalesOrder) Export
 	Return SalesOrderClosing;
 EndFunction
 
+Function GetIsClosedSalesOrderInItemList(ArrayOfOrder) Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Table.Columns.Add("DocOrder", New TypeDescription(("DocumentRef.SalesOrder")));
+	
+	For Each Row In ArrayOfOrder Do
+		NewRow = Table.Add();
+		NewRow.Key = Row.Key;
+		NewRow.DocOrder = Row.DocOrder;
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Key AS Key,
+	|	Table.DocOrder AS DocOrder
+	|INTO Table
+	|FROM
+	|	&Table AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Key,
+	|	Table.DocOrder
+	|FROM
+	|	Table AS Table
+	|		INNER JOIN Document.SalesOrderClosing AS DocOrderClosing
+	|		ON DocOrderClosing.SalesOrder = Table.DocOrder
+	|		AND DocOrderClosing.Posted";
+	Query.SetParameter("Table", Table);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Array();
+	
+	While QuerySelection.Next() Do
+		Result.Add(QuerySelection.Key);
+	EndDo;
+	
+	Return Result;
+EndFunction
+
 Function GetDataFormSalesOrder(SalesOrder, Object = Undefined) Export
 	Query = New Query();
 	Query.Text =
@@ -214,6 +257,49 @@ Function GetClosingByPurchaseOrder(PurchaseOrder) Export
 	EndIf;
 
 	Return PurchaseOrderClosing;
+EndFunction
+
+Function GetIsClosedPurchaseOrderInItemList(ArrayOfOrder) Export
+	Table = New ValueTable();
+	Table.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Table.Columns.Add("DocOrder", New TypeDescription("DocumentRef.PurchaseOrder"));
+	
+	For Each Row In ArrayOfOrder Do
+		NewRow = Table.Add();
+		NewRow.Key = Row.Key;
+		NewRow.DocOrder = Row.DocOrder;
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Table.Key AS Key,
+	|	Table.DocOrder AS DocOrder
+	|INTO Table
+	|FROM
+	|	&Table AS Table
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Key,
+	|	Table.DocOrder
+	|FROM
+	|	Table AS Table
+	|		INNER JOIN Document.PurchaseOrderClosing AS DocOrderClosing
+	|		ON DocOrderClosing.PurchaseOrder = Table.DocOrder
+	|		AND DocOrderClosing.Posted";
+	Query.SetParameter("Table", Table);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	Result = New Array();
+	
+	While QuerySelection.Next() Do
+		Result.Add(QuerySelection.Key);
+	EndDo;
+	
+	Return Result;
 EndFunction
 
 Function GetDataFromPurchaseOrder(PurchaseOrder, Object = Undefined) Export

@@ -1097,7 +1097,7 @@ Function GetFormItemNames()
 				|EmployeeListKey, SalaryTaxListKey,
 				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey,
 				|CalculationsKey,
-				|RecordsKey";
+				|RecordsKey, ItemListIsClosedOrder";
 	Return ItemNames;
 EndFunction	
 

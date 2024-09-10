@@ -49,26 +49,15 @@ Procedure TestConnectionCall()
 		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then
+		SettingsSource = Object.ConnectionSetting;
+		If Not ServiceSystemServer.isProduction() Then
+			SettingsSource = Object.ConnectionSettingTest;
+		EndIf; 		  
 		ConnectionSetting = GetConnectionSetting();
-		For Each Str In Object.ConnectionSetting Do
+		For Each Str In SettingsSource Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
 		EndDo;
-#If Not WebClient Then
-		eMail = New InternetMailMessage();
-		eMail.Texts.Add("<h1> Test </h1>", InternetMailTextType.HTML);
-		eMail.Subject = "Test";
-		eMail.SenderName = ConnectionSetting.SenderName;
-		eMail.To.Add(ConnectionSetting.eMailForTest);
-		//@skip-warning
-		Answer = IntegrationClientServer.SendEmail(ConnectionSetting, eMail);
-		If Not Answer.Count() Then
-			CommonFunctionsClientServer.ShowUsersMessage(CommonFunctionsServer.SerializeJSON(Answer));
-		Else
-			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
-		EndIf;
-#Else
-			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
-#EndIf
+		EmailMessagesServer.SendTestMessage(ConnectionSetting);
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.SMSProvider") Then
 		Params = SMSServer.TestConnectionParams();
 		Result = SMSServer.SMS(Params, "TestConnection", Object.Ref); // See SMSServer.TestConnectionResult

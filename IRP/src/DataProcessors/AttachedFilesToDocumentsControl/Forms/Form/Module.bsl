@@ -116,30 +116,41 @@ Async Procedure DownloadFile(Command)
 EndProcedure
 
 &AtClient
-Async Procedure Upload(StructureParams)
+Procedure Upload(StructureParams)
 	
 	Structure = New Structure;
 	Structure.Insert("Ref", StructureParams.Ref);
 	Structure.Insert("UUID", StructureParams.UUID);
 	Structure.Insert("FilePrefix", StructureParams.FilePrefix);
 	Structure.Insert("PrintFormName", StructureParams.PrintFormName);
+	Structure.Insert("MaxSize", StructureParams.MaxSize);
+	Structure.Insert("Storage", StructureParams.Storage);
 	
-	OpenFileDialog = New FileDialog(FileDialogMode.Open);
-	OpenFileDialog.Multiselect = False;
+	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
+	OpenFileDialog.MultipleChoice = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	FileRef = Await PutFileToServerAsync(, , , , StructureParams.UUID); // PlacedFileDescription
 	
+	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
+	
+EndProcedure
+
+// Upload END.
+// @skip-check property-return-type
+// 
+// Parameters:
+//  FileRef - StoredFileDescription,Undefined - File ref
+//  StructureParams - Structure - Structure parameters
+&AtClient
+Procedure Upload_END(FileRef, StructureParams) Export
 	If FileRef = Undefined Then
 		Return;
 	EndIf;
 	
 	FileArray = New Array; // Array of FileRef
-	//@skip-check invocation-parameter-type-intersect, property-return-type
 	FileArray.Add(FileRef.FileRef);
 	CheckSizeResult = CheckFileMaxSize(FileArray, StructureParams.MaxSize);
 	If CheckSizeResult.Result Then
-		PictureViewerClient.AddFile(FileRef, StructureParams.Storage, Structure);
-		
+		PictureViewerClient.AddFile(FileRef, StructureParams.Storage, StructureParams);
 	Else
 		For Each Error In CheckSizeResult.Errors Do
 			CommonFunctionsClientServer.ShowUsersMessage(Error);

@@ -46,10 +46,10 @@ Scenario: _0224000 preparation (Purchase order closing)
 		When Create information register Taxes records (VAT)
 		When Create catalog Partners objects (Kalipso)
 	* Create test PO
-		When Create document PurchaseOrder objects (for check closing)
+		When Create document PO, GR, PI objects (for check closing)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Write);"     |
-			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
+			| "Documents.PurchaseOrder.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"   |
 
 Scenario: _02240001 check preparation
 	When check preparation
@@ -110,6 +110,7 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 	
 
 Scenario: _0230002 create and check filling Purchase order closing (PO partially shipped)
+		And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		If "List" table contains lines Then
@@ -117,9 +118,7 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 				| "$$NumberPurchaseOrderClosing0224001$$"     |
 			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrderClosing.FindByNumber($$NumberPurchaseOrderClosing0224001$$).GetObject().Write(DocumentWriteMode.UndoPosting);"     |
-	* Load PI and GR for PO 37
-		When Create document GoodsReceipt objects (for check closing)
-		When Create document PurchaseInvoice objects (for check closing)
+	* Post PI and GR for PO 37
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
@@ -143,4 +142,90 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 			| 'Dress'     | 'XS/Blue'    | '8,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
 			| 'Service'   | 'Rent'       | '1,000'      | 'pcs'    | 'Store 03'   | 'Yes'      | '11.03.2021'      | ''                 |
 		Then the number of "ItemList" table lines is "equal" "3"
+		And for each line of "ItemList" table I do
+			And I click choice button of "Cancel reason" attribute in "ItemList" table
+			And I select current line in "List" table
+			And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Check PO mark
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And "List" table contains lines
+			| 'Number'   | 'Closed'    |
+			| '37'       | 'Yes'       |
+	* Check PO lock
+		And I go to line in "List" table
+			| 'Number' | 'Closed' | 'Date'                |
+			| '37'     | 'Yes'    | '09.03.2021 14:29:00' |
+		And I select current line in "List" table
+		When I Check the steps for Exception
+			| 'And in the table "ItemList" I click "Add" button'    |
+			| 'And I click "Post and close" button'                 |
+		And I close current window
+	* Check PI lock	
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '37'     | '09.03.2021 15:17:48' |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I select "Boots" exact value from "Item" drop-down list in "ItemList" table'    |
+		* Unlink and try change PI
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Item" field in "ItemList" table
+			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			Then user message window does not contain messages
+			And I finish line editing in "ItemList" table
+		* Close
+			And I close current window
+			Then "1C:Enterprise" window is opened
+			And I click "No" button	
+		* Repost PI	
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I go to line in "List" table
+				| 'Number' | 'Date'                |
+				| '37'     | '09.03.2021 15:17:48' |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			Then user message window does not contain messages				
+	* Check GR lock	
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '37'     | '09.03.2021 15:16:42' |
+		And I select current line in "List" table
+		And I select current line in "ItemList" table
+		When I Check the steps for Exception
+			| 'And I select "Boots" exact value from "Item" drop-down list in "ItemList" table'    |		
+		* Unlink and try change GR
+			And in the table "ItemList" I click "Link unlink basis documents" button
+			And I change checkbox "Linked documents"
+			And in the table "ResultsTree" I click "Unlink all" button
+			And I click "Ok" button
+			And I select current line in "ItemList" table
+			And I activate "Item" field in "ItemList" table
+			And I select "Boots" exact value from "Item" drop-down list in "ItemList" table
+			Then user message window does not contain messages
+			And I finish line editing in "ItemList" table
+		* Close GR
+			And I close current window
+			Then "1C:Enterprise" window is opened
+			And I click "No" button	
+		* Repost GR
+			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+			And I go to line in "List" table
+				| 'Number' | 'Date'                |
+				| '37'     | '09.03.2021 15:16:42' |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			Then user message window does not contain messages
+	* Repost PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' | 'Closed' | 'Date'                |
+			| '37'     | 'Yes'    | '09.03.2021 14:29:00' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then user message window does not contain messages
 		And I close all client application windows

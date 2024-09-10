@@ -256,6 +256,28 @@ Procedure ChangeLang(Command)
 	Items.PrintFormConfigDataLang.Visible = isCheck;
 EndProcedure
 
+&AtClient
+Procedure SendByMessage(Command)
+	
+	PrintCurrentData = Undefined;
+	
+	If PrintFormConfig.Count() = 1 Then
+		PrintCurrentData = PrintFormConfig[0];
+	ElsIf Items.PrintFormConfig.CurrentData <> Undefined Then
+		PrintCurrentData = Items.PrintFormConfig.CurrentData;
+	Else
+		Return;
+	EndIf;
+	
+	MessageParameters = New Structure;
+	MessageParameters.Insert("BasisDocument", PrintCurrentData.Ref);
+	MessageParameters.Insert("Subject", PrintCurrentData.NameTemplate);
+	MessageParameters.Insert("FileRef", GetFileDocument(Result, PrintCurrentData.NameTemplate, PrintCurrentData.Ref));
+	
+	OpenForm("Document.OutgoingMessage.Form.DocumentForm", New Structure("FillingValues", MessageParameters), ThisObject, UUID);
+	
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -287,5 +309,10 @@ Procedure SetVisiblePrintSetting(Visible)
 	Items.FormHide.Visible = Visible;
 	Items.FormShow.Visible = Not Visible;
 EndProcedure
+
+&AtServerNoContext
+Function GetFileDocument(SpreadsheetDocument, NameTemplate, BasisDocument)
+	Return FilesServer.GetFileForPrintDocument(SpreadsheetDocument, NameTemplate, BasisDocument);
+EndFunction
 
 #EndRegion

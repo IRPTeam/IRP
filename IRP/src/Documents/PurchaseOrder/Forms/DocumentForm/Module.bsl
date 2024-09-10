@@ -49,6 +49,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 
+	If EventName = "CloseOrder" Then
+		ThisObject.ClosingOrder = DocOrderClosingServer.GetClosingByPurchaseOrder(Object.Ref);
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -91,9 +96,15 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
+	Else
+		Form.ReadOnly = False;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
-	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrencies.Enabled    = Not Form.ReadOnly;
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled  = Not Form.ReadOnly;
+	Form.Items.Store.ReadOnly        = Form.ReadOnly;
+	Form.Items.DeliveryDate.ReadOnly = Form.ReadOnly;
 	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 	
 	_QuantityIsFixed = False;
@@ -106,9 +117,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
-	
 	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
-	
 EndProcedure
 
 &AtClient

@@ -1912,6 +1912,7 @@ Scenario: _005153 check hierarchical in the catalog Items
 			| 'Description' |
 			| 'pcs'         |
 		And I select current line in "List" table	
+		And I select from "Brand" drop-down list by "York" string
 		And I click "Save and close" button
 		And "List" table contains lines
 			| 'Description'  |

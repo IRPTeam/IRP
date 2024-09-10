@@ -131,8 +131,8 @@ Scenario: _005013 filling in the "Companies" catalog
 Scenario: _005015 create Projects
 	* Open a creation form Projects
 		Given I open hyperlink "e1cib/list/Catalog.Projects"
-		# * Check hierarchical
-		# 	When create Groups in the catalog
+		* Check hierarchical
+			When create Groups in the catalog
 	* Create 
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"

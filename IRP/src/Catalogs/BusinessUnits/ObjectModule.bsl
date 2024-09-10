@@ -17,7 +17,9 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If FillingData = Undefined Then
-		ThisObject.Department = True;
+	If Not ThisObject.IsFolder Then
+		If FillingData = Undefined Then
+			ThisObject.Department = True;
+		EndIf;
 	EndIf;
 EndProcedure

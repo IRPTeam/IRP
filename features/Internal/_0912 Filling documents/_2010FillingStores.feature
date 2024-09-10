@@ -2400,15 +2400,17 @@ Scenario: _201032 сheck filling of the bundle of store and company in the Work 
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Add items and materials
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I activate field named "Description" in "List" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
@@ -2462,15 +2464,17 @@ Scenario: _201033 сheck filling of the bundle of store and company in the Work 
 	* Select company
 		And I click Choice button of the field named "Company"
 		And I go to line in "List" table
-			| 'Code'   | 'Description'     |
-			| '2'      | 'Main Company'    |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
 	* Add items and materials
 		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate field named "ItemListItem" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-		And I activate field named "Description" in "List" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'     |
 		And I select current line in "List" table
 		And I activate field named "ItemListItemKey" in "ItemList" table
 		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table

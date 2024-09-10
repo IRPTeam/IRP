@@ -23,6 +23,7 @@ Background:
 	
 Scenario:  _052001 preparation (Bank receipt)
 	When set True value to the constant
+	When set True value to the constant Use salary
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects

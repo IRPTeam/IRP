@@ -418,8 +418,10 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 Scenario: _008008 create employee positions
 	And I close all client application windows
 	When set True value to the constant Use salary
+	* Check hierarchical
+		Given I open hyperlink "e1cib/list/Catalog.EmployeePositions"	
+		When create Groups in the catalog
 	* Create first element
-		Given I open hyperlink "e1cib/list/Catalog.EmployeePositions"		
 		And I click the button named "FormCreate"
 		And I input "Manager" text in "ENG" field
 		And I click Open button of "ENG" field

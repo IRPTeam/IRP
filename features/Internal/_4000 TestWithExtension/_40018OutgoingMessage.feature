@@ -91,6 +91,10 @@ Scenario: _4001803 test connection (Email)
 
 Scenario: _4001804 send email (SI)
 	And I close all client application windows
+	Try
+		And the previous scenario executed successfully
+	Except
+		Then I stop the execution of scripts for this feature
 	* Select SI
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"

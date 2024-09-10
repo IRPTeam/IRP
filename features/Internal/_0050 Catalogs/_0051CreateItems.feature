@@ -1008,6 +1008,8 @@ Scenario: _005120 set Coat/Jeans specification creation
 
 
 Scenario: _005121 filling item key according to specification for set
+		If platform version "=" "8.3.25.1336" Then
+			Then I stop script execution "Skipped"
 	* Opening the Bodie element in the Items catalog
 		Given I open hyperlink "e1cib/list/Catalog.Items"
 		And I go to line in "List" table

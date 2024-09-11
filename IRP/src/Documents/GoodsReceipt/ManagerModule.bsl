@@ -603,7 +603,8 @@ Function R4011B_FreeStocks()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	(ItemList.SalesOrderExists AND ItemList.PurchaseOrderExists)
-		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)";
+		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)
+		   |	OR (ItemList.SalesOrderExists AND ItemList.PurchaseInvoiceExists)";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -725,7 +726,8 @@ Function R4012B_StockReservation()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	(ItemList.SalesOrderExists AND ItemList.PurchaseOrderExists)
-		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)";
+		   |	OR (ItemList.SalesOrderExists AND ItemList.InventoryTransferExists)
+		   |	OR (ItemList.SalesOrderExists AND ItemList.PurchaseInvoiceExists)";
 EndFunction
 
 Function T3010S_RowIDInfo()

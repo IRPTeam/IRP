@@ -240,7 +240,12 @@ Scenario: _005113 filling in the "Item types" catalog
 			And I input "Earrings" text in the field named "Description_en"
 			And I input "Earrings TR" text in the field named "Description_tr"
 			And I click "Ok" button
-			And I select from "Parent" drop-down list by "Accessories" string
+			And I click Choice button of the field named "Parent"
+			And I go to line in "List" table
+				| "Description" |
+				| "Accessories" |
+			And I click the button named "FormChoose"			
+//			And I select from "Parent" drop-down list by "Accessories" string
 			And I click "Save and close" button
 		* Create item type Earrings
 			And I go to line in "List" table
@@ -1861,4 +1866,162 @@ Scenario: _005152 check name auto-generation for items (Foreign full description
 		Then "1C:Enterprise" window is opened
 		And I click the button named "Button0"
 		Then the form attribute named "ForeignFullDescription" became equal to "Coat/1233/York"		
-	And I close all client application windows				
+	And I close all client application windows	
+
+Scenario: _005153 check hierarchical in the catalog Items	
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Items"	
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "ENG" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Group 02 tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test element tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I click Select button of "Item type" field	
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Coat'        |
+		And I select current line in "List" table
+		And I click Select button of "Unit" field	
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'         |
+		And I select current line in "List" table	
+		And I select from "Brand" drop-down list by "York" string
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |
+
+Scenario: _005154 check hierarchical in the catalog Specification
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.Specifications"	
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "ENG" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Group 02 tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test element tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I change "Type" radio button value to "Set"
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Coat'           |
+		And I select current line in "List" table
+		And in the table "FormTable*" I click "Add" button
+		And I click choice button of "Size" attribute in "FormTable*" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'XS'            |
+		And I select current line in "List" table
+		And I click choice button of "Color" attribute in "FormTable*" table
+		And I go to line in "List" table
+			| 'Description'   |
+			| 'Red'           |
+		And I select current line in "List" table
+		And I activate "Quantity" field in "FormTable*" table
+		And I input "1,000" text in "Quantity" field of "FormTable*" table
+		And I finish line editing in "FormTable*" table
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |
+
+Scenario: _005155 check hierarchical in the catalog Source of origin
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Catalog.SourceOfOrigins"	
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "Source of origin" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "Source of origin" field
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 01"         |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Source of origin' |
+			| 'Group 01'         |
+			| 'Group 02'         |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "Source of origin" field
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 01"         |
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 02"         |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And I go to line in "List" table
+			| "Source of origin" |
+			| "Group 02"         |
+		And I move one level down in "List" table		
+		And "List" table contains lines
+			| 'Source of origin' |
+			| 'Group 01'         |
+			| 'Test element'     |

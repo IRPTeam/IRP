@@ -131,6 +131,8 @@ Scenario: _005013 filling in the "Companies" catalog
 Scenario: _005015 create Projects
 	* Open a creation form Projects
 		Given I open hyperlink "e1cib/list/Catalog.Projects"
+		* Check hierarchical
+			When create Groups in the catalog
 	* Create 
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
@@ -197,3 +199,79 @@ Scenario: _0050161 create Incoterms
 		Then I check for the "Incoterms" catalog element with the "Description_en" "Cost and Freight"
 		Then I check for the "Incoterms" catalog element with the "Description_tr" "Cost and Freight TR"
 		Then I check for the "Incoterms" catalog element with the "Description_ru" "Cost and Freight RU"
+
+Scenario: _0050162 create Hardware
+		And I close all client application windows
+	* Open a creation form Hardware
+		Given I open hyperlink "e1cib/list/Catalog.Hardware"
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "Description" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "Description" field
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "Description" field
+		And I select "Fiscal printer" exact value from "Types of Equipment" drop-down list	
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |
+
+Scenario: _0050163 create PlanningPeriods
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Catalog.PlanningPeriods"
+		And Delay 2
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "Description" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "Description" field
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "Description" field
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |
+		And I close all client application windows

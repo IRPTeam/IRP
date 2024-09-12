@@ -161,12 +161,15 @@ Scenario: _029103 create a Purchase order for service
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Front office'   |
 		And I select current line in "List" table
 		And I activate "Expense type" field in "ItemList" table
 		And I click choice button of "Expense type" attribute in "ItemList" table
 		And I go to line in "List" table
-		| 'Description'                |
-		| 'Telephone communications'   |
+			| 'Description'                |
+			| 'Telephone communications'   |
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table

@@ -146,7 +146,7 @@ Scenario: _04096 preparation (Purchase invoice)
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
-			| "Documents.GoodsReceipt.FindByNumber(2115).GetObject().Write(DocumentWriteMode.Posting);"   |
+			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I close all client application windows
 	
 

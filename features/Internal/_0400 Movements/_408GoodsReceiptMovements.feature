@@ -481,21 +481,21 @@ Scenario: _0401225 check Goods receipt movements by the Register  "R4011 Free st
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '2 115'     |
+			| '2 116'     |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report info" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 2 115 dated 11.09.2024 16:34:00' | ''                    | ''           | ''         | ''         | ''         |
+			| 'Goods receipt 2 116 dated 11.09.2024 16:35:35' | ''                    | ''           | ''         | ''         | ''         |
 			| 'Register  "R4011 Free stocks"'                 | ''                    | ''           | ''         | ''         | ''         |
 			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Quantity' |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'ODS'      | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'ODS'      | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Expense'    | 'Store 01' | 'ODS'      | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Expense'    | 'Store 01' | 'ODS'      | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Expense'    | 'Store 01' | 'UNIQ'     | '5'        |		
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'UNIQ'     | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'ODS'      | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Expense'    | 'Store 01' | 'UNIQ'     | '3'        |		
 		And I close all client application windows
 
 Scenario: _0401226 check Goods receipt movements by the Register  "R4012 Stock Reservation" (InventoryTransferExists, SalesOrderExist)
@@ -503,18 +503,18 @@ Scenario: _0401226 check Goods receipt movements by the Register  "R4012 Stock R
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And I go to line in "List" table
 			| 'Number'    |
-			| '2 115'     |
+			| '2 116'     |
 	* Check movements by the Register  "R4012 Stock Reservation"
 		And I click "Registrations report info" button
 		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 2 115 dated 11.09.2024 16:34:00' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Goods receipt 2 116 dated 11.09.2024 16:35:35' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
 			| 'Register  "R4012 Stock Reservation"'           | ''                    | ''           | ''         | ''         | ''                                            | ''         |
 			| ''                                              | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
-			| ''                                              | '11.09.2024 16:34:00' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |		
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                              | '11.09.2024 16:35:35' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |		
 		And I close all client application windows
 
 Scenario: _0401219 Goods receipt clear posting/mark for deletion

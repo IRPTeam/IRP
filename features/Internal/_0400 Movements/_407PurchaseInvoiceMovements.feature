@@ -136,6 +136,8 @@ Scenario: _04096 preparation (Purchase invoice)
 		And I execute 1C:Enterprise script at server
 			| "Documents.InventoryTransfer.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I execute 1C:Enterprise script at server	
 			| "Documents.PurchaseInvoice.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"    |
@@ -143,7 +145,9 @@ Scenario: _04096 preparation (Purchase invoice)
 			| "Documents.PurchaseInvoice.FindByNumber(2504).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
-	And I close all client application windows
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2115).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I close all client application windows
 	
 
 

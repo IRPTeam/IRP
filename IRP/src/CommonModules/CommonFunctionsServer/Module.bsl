@@ -1943,3 +1943,35 @@ Procedure CreateFormTable(CreactionStructure) Export
 EndProcedure
 
 #EndRegion
+
+
+Procedure BeforeWrite_RegistersClearDataBeforeWrite(Source, Cancel, Replacing) Export
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	CompositeDataTypes = New Array();
+	
+	Dimensions = Source.Metadata().Dimensions;
+	For Each Dimension In Dimensions Do
+		If Dimension.Type.Types().Count() > 1 Then
+			CompositeDataTypes.Add(Dimension.Name);
+		EndIf;	
+	EndDo;
+	
+	Resources = Source.Metadata().Resources;
+	For Each Resource In Resources Do
+		If Resource.Type.Types().Count() > 1 Then
+			CompositeDataTypes.Add(Resource.Name);
+		EndIf;	
+	EndDo;
+	
+	For Each Row In Source Do
+		For Each CompositeDataType In CompositeDataTypes Do
+			If Not ValueIsFilled(Row[CompositeDataType]) Then
+				Row[CompositeDataType] = Undefined;
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+

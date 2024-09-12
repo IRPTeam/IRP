@@ -265,10 +265,6 @@ Function GetAdditionalQueryParameters(Ref)
 	Return StrParams;
 EndFunction
 
-#EndRegion
-
-#Region Posting_SourceTable
-
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
@@ -282,6 +278,28 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
+
+Function GetQueryTextsMasterTables()
+	QueryArray = New Array;
+	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4011B_FreeStocks());
+	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
+	QueryArray.Add(R4022B_StockTransferOrdersShipment());
+	QueryArray.Add(R4031B_GoodsInTransitIncoming());
+	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
+	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4050B_StockInventory());
+	QueryArray.Add(R9010B_SourceOfOriginStock());
+	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	Return QueryArray;
+EndFunction
+
+#EndRegion
+
+#Region Posting_SourceTable
 
 Function ItemList()
 	Return "SELECT
@@ -311,7 +329,9 @@ Function ItemList()
 		   |	NOT InventoryTransferItemList.ProductionPlanning.Ref IS NULL AS UseProductionPlanning,
 		   |	InventoryTransferItemList.Key AS Key,
 		   |	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
-		   |	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks
+		   |	InventoryTransferItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorStocks,
+		   |	InventoryTransferItemList.SalesOrder AS SalesOrder,
+		   |	NOT InventoryTransferItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists
 		   |INTO ItemList
 		   |FROM
 		   |	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
@@ -427,24 +447,6 @@ EndFunction
 #EndRegion
 
 #Region Posting_MainTables
-
-Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
-	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4014B_SerialLotNumber());
-	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
-	QueryArray.Add(R4022B_StockTransferOrdersShipment());
-	QueryArray.Add(R4031B_GoodsInTransitIncoming());
-	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
-	QueryArray.Add(R4036B_IncomingStocksRequested());
-	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R9010B_SourceOfOriginStock());
-	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T6020S_BatchKeysInfo());
-	Return QueryArray;
-EndFunction
 
 Function R9010B_SourceOfOriginStock()
 	Return "SELECT
@@ -571,7 +573,8 @@ Function R4010B_ActualStocks()
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return "SELECT
+	Return 
+				"SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	ItemList.Period,
 		   |	ItemList.StoreSender AS Store,
@@ -581,7 +584,8 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	NOT ItemList.InventoryTransferOrderExists
+		   |	NOT ItemList.InventoryTransferOrderExists 
+		   |	AND NOT ItemList.SalesOrderExists
 		   |	AND NOT ItemList.UseShipmentConfirmation
 		   |
 		   |UNION ALL
@@ -596,6 +600,7 @@ Function R4011B_FreeStocks()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.SalesOrderExists
 		   |
 		   |UNION ALL
 		   |
@@ -610,7 +615,8 @@ Function R4011B_FreeStocks()
 EndFunction
 
 Function R4012B_StockReservation()
-	Return "SELECT
+	Return 
+				"SELECT
 		   |	ItemList.Period AS Period,
 		   |	ItemList.StoreSender AS Store,
 		   |	ItemList.ItemKey AS ItemKey,
@@ -680,7 +686,37 @@ Function R4012B_StockReservation()
 		   |	IncomingStocksRequested.RequesterStore,
 		   |	IncomingStocksRequested.Quantity
 		   |FROM
-		   |	IncomingStocksRequested AS IncomingStocksRequested";
+		   |	IncomingStocksRequested AS IncomingStocksRequested
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	ItemList.Period,
+		   |	ItemList.SalesOrder,
+		   |	ItemList.ItemKey,
+		   |	ItemList.StoreSender,
+		   |	ItemLIst.Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.UseShipmentConfirmation
+		   |	AND ItemList.SalesOrderExists
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	ItemList.Period,
+		   |	ItemList.SalesOrder,
+		   |	ItemList.ItemKey,
+		   |	ItemList.StoreReceiver,
+		   |	ItemLIst.Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.UseGoodsReceipt
+		   |	AND ItemList.SalesOrderExists";	
 EndFunction
 
 Function R4036B_IncomingStocksRequested()

@@ -125,7 +125,29 @@ Scenario: _04096 preparation (Purchase invoice)
 	When Create document PurchaseInvoice and PurchaseReturn objects (comission trade)
 	And I execute 1C:Enterprise script at server	
 		| "Documents.PurchaseInvoice.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"   |
-	And I close all client application windows
+	* Load documents (purchase for sales)
+		When data preparation for stock reserve check for purchase for sales
+		And I execute 1C:Enterprise script at server	
+			| "Documents.SalesOrder.FindByNumber(2316).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseOrder.FindByNumber(2325).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2504).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I close all client application windows
 	
 
 
@@ -1078,7 +1100,69 @@ Scenario: _0401040 check Purchase invoice movements by the Register  "R1001 Purc
 			| ''                                                 | '25.07.2024 13:46:27' | '10'        | '1 000'  | '847,46'     | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27' | 'ODS'      | '9090098908'        | '29d1bdf0-143d-438a-9e1b-e5b25241d87e' | 'No'                   |		
 		And I close all client application windows
 
+Scenario: _0401041 check absence Purchase invoice movements by the Register  "R4012 Stock Reservation" (SalesOrder not exist)
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'    |
+		And I close all client application windows
 
+Scenario: _0401042 check Purchase invoice movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR not use)
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 502'     |
+	* Check movements by the Register  ""R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 2 502 dated 11.09.2024 13:51:30' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'              | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                 | '11.09.2024 13:51:30' | 'Receipt'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                 | '11.09.2024 13:51:30' | 'Receipt'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                 | '11.09.2024 13:51:30' | 'Receipt'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |		
+		And I close all client application windows
+
+Scenario: _0401043 check absence Purchase invoice movements by the Register "R4012 Stock Reservation" (SalesOrderExists, GR use, GR before PI)
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2 503'   |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'    |
+		And I close all client application windows
+
+Scenario: _0401044 check Purchase invoice movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR (1 line from 3), GR after PI)
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2 504'     |
+	* Check movements by the Register  ""R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 2 504 dated 11.09.2024 14:07:03' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'              | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                 | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                 | '11.09.2024 14:07:03' | 'Receipt'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                                 | '11.09.2024 14:07:03' | 'Receipt'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |	
+		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion
 	* Select Purchase invoice

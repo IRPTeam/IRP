@@ -4340,6 +4340,7 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	UNDEFINED AS Ref,
 	|	ItemList.Ref AS InventoryTransfer,
 	|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+	|	ItemList.SalesOrder AS SalesOrder,
 	|	ItemList.ProductionPlanning AS ProductionPlanning,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Ref.Branch AS Branch,
@@ -9338,7 +9339,7 @@ Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, StoreSender, StoreReceiver";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
 	EndIf;
@@ -9349,7 +9350,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, StoreSender, UseShipmentConfirmation";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9358,7 +9359,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey";
 	ElsIf ExternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, StoreReceiver, UseGoodsReceipt";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |StoreReceiver     , StoreReceiver,

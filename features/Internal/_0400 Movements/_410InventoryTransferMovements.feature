@@ -115,6 +115,28 @@ Scenario: _04022 preparation (Inventory transfer)
 			| "Documents.PurchaseReturn.FindByNumber(195).GetObject().Write(DocumentWriteMode.Posting);"    |
 		And I execute 1C:Enterprise script at server	
 			| "Documents.InventoryTransfer.FindByNumber(192).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Load documents (purchase for sales)
+		When data preparation for stock reserve check for purchase for sales
+		And I execute 1C:Enterprise script at server	
+			| "Documents.SalesOrder.FindByNumber(2316).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseOrder.FindByNumber(2325).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2502).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.InventoryTransfer.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2113).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2503).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server	
+			| "Documents.PurchaseInvoice.FindByNumber(2504).GetObject().Write(DocumentWriteMode.Posting);"    |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2114).GetObject().Write(DocumentWriteMode.Posting);"   |
+		And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(2116).GetObject().Write(DocumentWriteMode.Posting);"   |
 		And I close all client application windows
 
 
@@ -637,6 +659,62 @@ Scenario: _0402436 check Inventory transfer movements by the Register  "R4032 Go
 			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'ODS'      | '9090098908'        | '8'        |
 			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977889'    | '1'        |
 			| ''                                                   | '25.07.2024 14:36:20' | 'Expense'    | 'Store 02' | 'Purchase invoice 1 501 dated 25.07.2024 13:46:27'   | 'UNIQ'     | '09987897977890'    | '4'        |	
+		And I close all client application windows
+
+
+Scenario: _0402437 check absence Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrder not exist)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '192'     |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R4012 Stock Reservation"'    |
+		And I close all client application windows
+
+Scenario: _0402438 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR not use)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2 502'   |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 2 502 dated 11.09.2024 13:52:43' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Receipt'    | 'Store 01' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |
+			| ''                                                   | '11.09.2024 13:52:43' | 'Expense'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '5'        |		
+		And I close all client application windows
+
+Scenario: _0402440 check Inventory transfer movements by the Register  "R4012 Stock Reservation" (SalesOrderExists, GR use)
+	* Select IT
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2 503'   |
+	* Check movements by the Register  "R4012 Stock Reservation"
+		And I click "Registrations report info" button
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 2 503 dated 11.09.2024 16:35:28' | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| 'Register  "R4012 Stock Reservation"'                | ''                    | ''           | ''         | ''         | ''                                            | ''         |
+			| ''                                                   | 'Period'              | 'RecordType' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'ODS'      | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |
+			| ''                                                   | '11.09.2024 16:35:28' | 'Expense'    | 'Store 02' | 'UNIQ'     | 'Sales order 2 316 dated 11.09.2024 13:48:13' | '3'        |		
 		And I close all client application windows
 
 Scenario: _0402439 Inventory transfer clear posting/mark for deletion

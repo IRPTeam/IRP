@@ -4554,10 +4554,11 @@ Scenario: _092099 check scan unique serial in the RSR
 			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
 	And I close all client application windows	
 		
-Scenario: _092100 check scan unique serial in the PhysicalInventory (use sln)
+Scenario: _092100 check unique serial in the PhysicalInventory (use sln)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"	
 	And I click "Create" button
+	And I select from the drop-down list named "Store" by "Store 06" string
 	* Use sln
 		And I move to "Rules" tab
 		And I set checkbox "Use serial lot"
@@ -4573,7 +4574,16 @@ Scenario: _092100 check scan unique serial in the PhysicalInventory (use sln)
 			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
 			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
 		Then there are lines in TestClient message log
-			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|		
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|	
+	* Add the same unique sln and try post document
+		And I go to line in "ItemList" table
+			| 'Item key' | 'Phys. count' | 'Unit' | 'Item'               |
+			| 'PZU'      | '1,000'       | 'pcs'  | 'Product 1 with SLN' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+		Then there are lines in TestClient message log
+			|'Serial lot number [ 8908899881 ] has to be unique at the document\n'|
 	And I close all client application windows	
 
 Scenario: _092101 check scan unique serial in the PhysicalInventory (not use sln)

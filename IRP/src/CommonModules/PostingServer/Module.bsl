@@ -176,11 +176,10 @@ EndFunction
 //  Map - Register records
 Function RegisterRecords(Parameters)
 	
+	isManualRecordsHasDifference = False;
+	
 	RegisteredRecords = New Map();
 	For Each Row In Parameters.PostingDataTables Do
-		
-		isManualRecordsHasDifference = False;
-		
 		RecordSet = Row.Value.RecordSet_Document;
 		TableForLoad = Row.Value.PrepareTable.Copy();
 		

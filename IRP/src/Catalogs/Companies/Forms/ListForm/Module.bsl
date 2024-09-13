@@ -8,16 +8,12 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	CompanyCreationQuestion(ThisObject.FormOwner.Object.Ref);
+	If ThisObject.FormOwner <> Undefined Then
+		CompanyCreationQuestion(ThisObject.FormOwner.Object.Ref);
+	Endif;	
 EndProcedure
 
 #EndRegion
-
-&AtClient
-Procedure OurCompanyFilterOnChange(Item)
-	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "OurCompany", ?(OurCompanyFilter = 1, True, False),
-		DataCompositionComparisonType.Equal, ValueIsFilled(OurCompanyFilter));
-EndProcedure
 
 #Region COMMANDS
 
@@ -51,6 +47,12 @@ EndProcedure
 #EndRegion
 
 #Region Private
+
+&AtClient
+Procedure OurCompanyFilterOnChange(Item)
+	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "OurCompany", ?(OurCompanyFilter = 1, True, False),
+		DataCompositionComparisonType.Equal, ValueIsFilled(OurCompanyFilter));
+EndProcedure
 
 // Company creation question.
 // 

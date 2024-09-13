@@ -1760,19 +1760,14 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		DeleteColumn(Table2, Column);
 	EndDo;
 		
-	ArrayOfColumns = New Array; // Array Of String
-	For Each Column In Table1.Columns Do
-		ArrayOfColumns.Add(Column.Name);
-	EndDo;   
-		
-	SortString = StrConcat(ArrayOfColumns, ",");
-		
 	If Table1.Count() = 1 Then
-		Table1.Sort(SortString);
-		Table2.Sort(SortString);
 		MD5_1 = GetMD5(Table1);
 		MD5_2 = GetMD5(Table2);
 	Else
+		Array = New Array; // Array Of String
+		For Each Column In Table1.Columns Do
+			Array.Add(Column.Name);
+		EndDo;   
 		
 		Text = "SELECT
 		|	*
@@ -1794,7 +1789,7 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		|FROM
 		|	VTSort1
 		|ORDER BY
-		|" + SortString + "
+		|" + StrConcat(Array, ",") + "
 		|;
 		|
 		|////////////////////////////////////////////////////////////////////////////////
@@ -1803,7 +1798,7 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		|FROM
 		|	VTSort2
 		|ORDER BY
-		|" + SortString;
+		|" + StrConcat(Array, ",");
 	
 		Query = New Query();
 		Query.Text = Text;

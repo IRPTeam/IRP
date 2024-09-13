@@ -1950,28 +1950,95 @@ Procedure BeforeWrite_RegistersClearDataBeforeWrite(Source, Cancel, Replacing) E
 		Return;
 	EndIf;
 	
-	CompositeDataTypes = New Array();
+	RegMetadata = Source.Metadata();
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
 	
-	Dimensions = Source.Metadata().Dimensions;
-	For Each Dimension In Dimensions Do
-		If Dimension.Type.Types().Count() > 1 Then
-			CompositeDataTypes.Add(Dimension.Name);
-		EndIf;	
-	EndDo;
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
 	
-	Resources = Source.Metadata().Resources;
-	For Each Resource In Resources Do
-		If Resource.Type.Types().Count() > 1 Then
-			CompositeDataTypes.Add(Resource.Name);
-		EndIf;	
-	EndDo;
-	
-	For Each Row In Source Do
-		For Each CompositeDataType In CompositeDataTypes Do
-			If Not ValueIsFilled(Row[CompositeDataType]) Then
-				Row[CompositeDataType] = Undefined;
+	For Each Record In Source Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record[Dimension.Name] = Undefined;
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record[Resource.Name] = Undefined;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
+
+Procedure SetDataTypesForLoadRecords(RegMetadata, TableForLoad) Export
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
+	
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
+	
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		TableForLoad.Columns.Add("_tmp_" + Dimension.Name, Dimension.TypeDescription);
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		TableForLoad.Columns.Add("_tmp_" + Resource.Name, Resource.TypeDescription);
+	EndDo;
+	
+	For Each Record In TableForLoad Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record["_tmp_" + Dimension.Name] = Undefined;
+			Else
+				Record["_tmp_" + Dimension.Name] = Record[Dimension.Name];
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record["_tmp_" + Resource.Name] = Undefined;
+			Else
+				Record["_tmp_" + Resource.Name] = Record[Resource.Name];
+			EndIf;
+		EndDo;
+	EndDo;
+	
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		TableForLoad.Columns.Delete(Dimension.Name);
+		TableForLoad.Columns["_tmp_" + Dimension.Name].Name = Dimension.Name;
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		TableForLoad.Columns.Delete(Resource.Name);
+		TableForLoad.Columns["_tmp_" + Resource.Name].Name = Resource.Name;
+	EndDo;	
+EndProcedure
+
+Function GetCompositeDataTypes(RegMetadata) Export
+	CompositeDataTypes_Dimensions = New Array();
+	CompositeDataTypes_Resources = New Array();
+	
+	For Each Dimension In RegMetadata.Dimensions Do
+		If Dimension.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Dimensions.Add(New Structure("Name, TypeDescription", 
+				Dimension.Name, Dimension.Type));
+		EndIf;	
+	EndDo;
+	
+	For Each Resource In RegMetadata.Resources Do
+		If Resource.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Resources.Add(New Structure("Name, TypeDescription", 
+				Resource.Name, Resource.Type));
+		EndIf;	
+	EndDo;
+
+	Return New Structure("Dimensions, Resources", 
+		CompositeDataTypes_Dimensions,
+		CompositeDataTypes_Resources);
+EndFunction
+
 

@@ -1991,7 +1991,8 @@ Procedure SetDataTypesForLoadRecords(RegMetadata, TableForLoad) Export
 	
 	For Each Record In TableForLoad Do
 		For Each Dimension In CompositeDataTypes.Dimensions Do
-			If Not ValueIsFilled(Record[Dimension.Name]) Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Record, Dimension.Name) And 
+					Not ValueIsFilled(Record[Dimension.Name]) Then
 				Record["_tmp_" + Dimension.Name] = Undefined;
 			Else
 				Record["_tmp_" + Dimension.Name] = Record[Dimension.Name];
@@ -1999,21 +2000,26 @@ Procedure SetDataTypesForLoadRecords(RegMetadata, TableForLoad) Export
 		EndDo;
 		
 		For Each Resource In CompositeDataTypes.Resources Do
-			If Not ValueIsFilled(Record[Resource.Name]) Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Record, Resource.Name) And 
+					Not ValueIsFilled(Record[Resource.Name]) Then
 				Record["_tmp_" + Resource.Name] = Undefined;
 			Else
 				Record["_tmp_" + Resource.Name] = Record[Resource.Name];
 			EndIf;
 		EndDo;
 	EndDo;
-	
+
 	For Each Dimension In CompositeDataTypes.Dimensions Do
-		TableForLoad.Columns.Delete(Dimension.Name);
+		If TableForLoad.Columns.Find(Dimension.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Dimension.Name);
+		EndIf;
 		TableForLoad.Columns["_tmp_" + Dimension.Name].Name = Dimension.Name;
 	EndDo;
 	
 	For Each Resource In CompositeDataTypes.Resources Do
-		TableForLoad.Columns.Delete(Resource.Name);
+		If TableForLoad.Columns.Find(Resource.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Resource.Name);
+		EndIf;
 		TableForLoad.Columns["_tmp_" + Resource.Name].Name = Resource.Name;
 	EndDo;	
 EndProcedure

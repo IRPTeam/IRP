@@ -92,13 +92,8 @@ EndProcedure
 
 &AtServerNoContext
 Function GetDefaultMovementType(CompanyRef)
-	CurrencyMovementType = Undefined;
 	
-	LegalCurrenciesArray = Catalogs.Companies.GetLegalCurrencies(CompanyRef);
-	If LegalCurrenciesArray.Count() Then
-		CurrencyMovementType = LegalCurrenciesArray[0].CurrencyMovementType;
-	EndIf;
-	Return CurrencyMovementType;
+	Return Catalogs.Companies.GetLegalCurrencies(CompanyRef)[0].CurrencyMovementType;
 	
 EndFunction	
 

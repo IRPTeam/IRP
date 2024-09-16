@@ -78,11 +78,11 @@ EndProcedure
 &AtClient
 Procedure AgreementCreationQuestionAfter(QuestionResult, AdditionalParameters) Export
 	If QuestionResult = DialogReturnCode.Yes Then
-		CreateAgreementForPartner(AdditionalParameters.Partner);
+				
 		AgreementStructure = New Structure;
 		AgreementStructure.Insert("Company", GetDefaultCompany());
 		AgreementStructure.Insert("Partner", AdditionalParameters.Partner);
-		AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType());
+		AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType(AgreementStructure.Company));
 		
 		FormParameters = New Structure("FillingValues", AgreementStructure);
 		
@@ -91,35 +91,16 @@ Procedure AgreementCreationQuestionAfter(QuestionResult, AdditionalParameters) E
 EndProcedure
 
 &AtServerNoContext
-Function GetDefaultMovementType()
-	Query = New Query;
-	Query.Text = 
-	"SELECT
-	|	Companies.Ref.LegalCurrencyMovementType AS LegalCurrencyMovementType
-	|FROM
-	|	Catalog.Companies AS Companies
-	|WHERE
-	|	Companies.OurCompany
-	|GROUP BY
-	|	Companies.Ref.LegalCurrencyMovementType";
+Function GetDefaultMovementType(CompanyRef)
+	CurrencyMovementType = Undefined;
 	
-	MovementTypeRef = Undefined;
-	Selection = Query.Execute().Select();
-	If Selection.Next() Then
-		MovementTypeRef = Selection.LegalCurrencyMovementType;
+	LegalCurrenciesArray = Catalogs.Companies.GetLegalCurrencies(CompanyRef);
+	If LegalCurrenciesArray.Count() Then
+		CurrencyMovementType = LegalCurrenciesArray[0].CurrencyMovementType;
 	EndIf;
-	Return MovementTypeRef;
+	Return CurrencyMovementType;
 	
 EndFunction	
-
-// Create agreement for partner.
-// 
-// Parameters:
-//  PartnerRef - CatalogRef.Partners
-&AtServer
-Procedure CreateAgreementForPartner(PartnerRef)
-	
-EndProcedure
 
 &AtServer
 Function GetDefaultCompany()
@@ -131,7 +112,7 @@ Function GetDefaultCompany()
 		|FROM
 		|	Catalog.Companies AS Companies
 		|WHERE
-		|	Companies.OurCompany = FALSE";
+		|	Companies.OurCompany = TRUE";
 	
 	QueryResult = Query.Execute();
 	
@@ -154,19 +135,11 @@ EndFunction
 //  Boolean - Partner has agreements
 &AtServerNoContext
 Function PartnerHasAgreements(PartnerRef)
-		
-	Query = New Query;
-	Query.SetParameter("Partner", PartnerRef);
-	Query.Text =
-		"SELECT
-		|	Agreements.Ref
-		|FROM
-		|	Catalog.Agreements AS Agreements
-		|WHERE
-		|	Agreements.Partner = &Partner";
-	
-	ResultIsEmpty = Query.Execute().IsEmpty();
-	Return Not ResultIsEmpty;	
-	
+	PartnerHasAgreements = False;
+	ArrayOfAgreements = Catalogs.Agreements.GetRefsArrayByPartner(PartnerRef);
+	If ArrayOfAgreements.Count() Then 	
+		PartnerHasAgreements = True;
+	EndIf;		
+	Return PartnerHasAgreements;
 EndFunction
 #EndRegion

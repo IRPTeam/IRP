@@ -108,19 +108,12 @@ EndProcedure
 //  Boolean - Partner has companies
 &AtServerNoContext
 Function PartnerHasCompanies(PartnerRef)
-		
-	Query = New Query;
-	Query.SetParameter("Partner", PartnerRef);
-	Query.Text =
-		"SELECT
-		|	Companies.Ref
-		|FROM
-		|	Catalog.Companies AS Companies
-		|WHERE
-		|	Companies.Partner = &Partner";
-	
-	ResultIsEmpty = Query.Execute().IsEmpty();
-	Return Not ResultIsEmpty;	
+	CompaniesArray = Catalogs.Partners.GetCompaniesForPartner(PartnerRef);	
+	PartnerHasCompanies = False;
+	If CompaniesArray.Count() Then
+		PartnerHasCompanies = True;
+	EndIf;	 
+	Return PartnerHasCompanies;	
 	
 EndFunction	
 
@@ -133,6 +126,7 @@ EndFunction
 //  Boolean - Partner type must have company
 &AtServerNoContext
 Function PartnerTypeMustHaveCompany(PartnerRef)
+	
 	PartnerTypeMustHaveCompany = False;
 	AttributesStructure = CommonFunctionsServer.GetAttributesFromRef(PartnerRef, "Customer, Vendor, Consignor, Other");
 	If AttributesStructure.Customer Or

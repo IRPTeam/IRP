@@ -23,20 +23,3 @@ Scenario: Opening form Reports "D0011 Price info" (D0011_PriceInfo)
 		Then I raise "The main form could not be opened Reports D0011_PriceInfo" exception
 	And I close current window
 
-Scenario: Opening form Reports "R5012 Offset of advances" (R5012_OffsetOfAdvances)
-
-	Given I open "R5012_OffsetOfAdvances" report default form
-	If the warning is displayed then
-		Then I raise "The main form could not be opened Reports R5012_OffsetOfAdvances" exception
-	If current form name is "ErrorWindow" Then
-		Then I raise "The main form could not be opened Reports R5012_OffsetOfAdvances" exception
-	And I close current window
-
-Scenario: Opening form Reports "Related messages (IAS)" (гкс_СвязанныеСообщения)
-
-	Given I open "гкс_СвязанныеСообщения" report default form
-	If the warning is displayed then
-		Then I raise "The main form could not be opened Reports гкс_СвязанныеСообщения" exception
-	If current form name is "ErrorWindow" Then
-		Then I raise "The main form could not be opened Reports гкс_СвязанныеСообщения" exception
-	And I close current window

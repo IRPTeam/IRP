@@ -239,7 +239,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref,
 		LineNumberAndItemKeyFromItemList, PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests",
@@ -249,7 +249,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrder.ItemList", AddInfo);
 EndProcedure

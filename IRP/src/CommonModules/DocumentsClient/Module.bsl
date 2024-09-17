@@ -843,10 +843,10 @@ EndProcedure
 #Region TitleChanges
 
 Procedure SetTextOfDescriptionAtForm(Object, Form) Export
-	If ValueIsFilled(Object.Description) Then
-		Form.Description = Object.Description;
+	If ValueIsFilled(Object.Comment) Then
+		Form.Comment = Object.Comment;
 	Else
-		Form.Description = R().I_2;
+		Form.Comment = R().I_2;
 	EndIf;
 EndProcedure
 
@@ -1096,7 +1096,8 @@ Function GetFormItemNames()
 				|AccrualListTotalVacationDays, AccrualListPaidVacationDays, AccrualListTotalSickLeaveDays ,AccrualListPaidSickLeaveDays,
 				|EmployeeListKey, SalaryTaxListKey,
 				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey,
-				|CalculationsKey";
+				|CalculationsKey,
+				|RecordsKey, ItemListIsClosedOrder";
 	Return ItemNames;
 EndFunction	
 
@@ -1309,25 +1310,16 @@ EndProcedure
 
 #Region PickUpItems
 
-Procedure OpenPickupItems(Object, Form, Command) Export
+Procedure OpenPickupItems(Object, Form) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyParameters.Insert("Filter" , New Structure("DisableIfIsService", False));
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", ThisObject, NotifyParameters);
 	OpenFormParameters = PickupItemsParameters(Object, Form);
-#If MobileClient Then
-
-#Else
-		If Command.AssociatedTable <> Undefined Then
-			OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
-			OpenFormParameters.Insert("Object", Object);
-		EndIf;
-
-		FormName = "CommonForm.PickUpItems";
-		OpenForm(FormName, OpenFormParameters, Form, , , , NotifyDescription);
-#EndIf
-
+	OpenFormParameters.Insert("AssociatedTableName", "ItemList");
+	OpenFormParameters.Insert("Object", Object);
+	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
 
 Function PickupItemsParameters(Object, Form)

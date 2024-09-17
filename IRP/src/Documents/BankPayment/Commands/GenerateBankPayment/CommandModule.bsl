@@ -92,15 +92,11 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_SalesReportToConsignor(ArrayOf_SalesReportToConsignor));
 	ArrayOfTables.Add(GetDocumentTable_EmployeeCashAdvance(ArrayOf_EmployeeCashAdvance));
 	
-	DocumentAmountTable = DocumentsGenerationServer.CreateDocumentAmountTable();
-	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_PurchaseInvoice, "PurchaseOrder");
-	DocumentsGenerationServer.FillDocumentAmountTable(DocumentAmountTable, ArrayOf_SalesReturn);
-		
-	Return JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable);
+	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
 &AtServer
-Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
+Function JoinDocumentsStructure(ArrayOfTables)
 
 	ValueTable = New ValueTable();
 	ValueTable.Columns.Add("BasedOn"         , New TypeDescription("String"));
@@ -159,30 +155,13 @@ Function JoinDocumentsStructure(ArrayOfTables, DocumentAmountTable)
 		PaymentList = ValueTable.Copy(Filter);
 		
 		For Each RowPaymentList In PaymentList Do
-			
-			FilterAmount = New Structure();
-			FilterAmount.Insert("Company"  , Row.Company);
-			FilterAmount.Insert("Branch"   , Row.Branch);
-			FilterAmount.Insert("Currency" , Row.Currency);
-			FilterAmount.Insert("Partner"  , RowPaymentList.Partner);
-			FilterAmount.Insert("LegalName", RowPaymentList.Payee);
-			FilterAmount.Insert("Agreement", RowPaymentList.Agreement);
-			FilterAmount.Insert("Order"    , ?(ValueIsFilled(RowPaymentList.Order), RowPaymentList.Order, Undefined));
-			FilterAmount.Insert("Project"  , RowPaymentList.Project);
-			
-			Amounts = DocumentsGenerationServer.CalculateDocumentAmount(DocumentAmountTable, FilterAmount, RowPaymentList.NetAmount, RowPaymentList.Amount);
-			
-			If Amounts.Skip Then
-				Continue;
-			EndIf;
-							
 			NewRow = New Structure();
 			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
 			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
 			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
 			NewRow.Insert("Payee"                   , RowPaymentList.Payee);
-			NewRow.Insert("TotalAmount"             , Amounts.TotalAmount);
-			NewRow.Insert("NetAmount"               , Amounts.NetAmount);
+			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
+			NewRow.Insert("NetAmount"               , RowPaymentList.NetAmount);
 			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 			NewRow.Insert("Order"                   , RowPaymentList.Order);
@@ -253,7 +232,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	"SELECT
 	|	TableBasisDocument.Company,
 	|	TableBasisDocument.Branch,
-	|	TableBasisDocument.Currency,
+	|	TableBasisDocument.Agreement,
 	|	TableBasisDocument.Partner,
 	|	TableBasisDocument.BasisDocument
 	|INTO TableBasisDocument
@@ -269,14 +248,15 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	|	R3027B_EmployeeCashAdvanceBalance.Branch,
 	|	R3027B_EmployeeCashAdvanceBalance.Currency,
 	|	R3027B_EmployeeCashAdvanceBalance.Partner,
+	|	R3027B_EmployeeCashAdvanceBalance.Agreement,
 	|	-R3027B_EmployeeCashAdvanceBalance.AmountBalance AS Amount,
 	|	TableBasisDocument.BasisDocument
 	|FROM
-	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Currency, Partner) IN
+	|	AccumulationRegister.R3027B_EmployeeCashAdvance.Balance(, (Company, Branch, Agreement, Partner) IN
 	|		(SELECT
 	|			TableBasisDocument.Company,
 	|			TableBasisDocument.Branch,
-	|			TableBasisDocument.Currency,
+	|			TableBasisDocument.Agreement,
 	|			TableBasisDocument.Partner
 	|		FROM
 	|			TableBasisDocument AS TableBasisDocument)
@@ -285,7 +265,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	|		INNER JOIN TableBasisDocument AS TableBasisDocument
 	|		ON TableBasisDocument.Company = R3027B_EmployeeCashAdvanceBalance.Company
 	|		AND TableBasisDocument.Branch = R3027B_EmployeeCashAdvanceBalance.Branch
-	|		AND TableBasisDocument.Currency = R3027B_EmployeeCashAdvanceBalance.Currency
+	|		AND TableBasisDocument.Agreement = R3027B_EmployeeCashAdvanceBalance.Agreement
 	|		AND TableBasisDocument.Partner = R3027B_EmployeeCashAdvanceBalance.Partner
 	|WHERE
 	|	R3027B_EmployeeCashAdvanceBalance.AmountBalance < 0";
@@ -294,7 +274,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 	TableBasisDocument = New ValueTable();
 	TableBasisDocument.Columns.Add("Company"  , AccReg.Company.Type);
 	TableBasisDocument.Columns.Add("Branch"   , AccReg.Branch.Type);
-	TableBasisDocument.Columns.Add("Currency" , AccReg.Currency.Type);
+	TableBasisDocument.Columns.Add("Agreement" , AccReg.Agreement.Type);
 	TableBasisDocument.Columns.Add("Partner"  , AccReg.Partner.Type);
 	TableBasisDocument.Columns.Add("BasisDocument"          , New TypeDescription("DocumentRef.EmployeeCashAdvance"));
 		
@@ -303,7 +283,7 @@ Function GetDocumentTable_EmployeeCashAdvance(ArrayOfBasisDocuments)
 			NewRow = TableBasisDocument.Add();
 			NewRow.Company  = Basis.Company;
 			NewRow.Branch   = Basis.Branch;
-			NewRow.Currency = Row.Currency;
+			NewRow.Agreement = Basis.Agreement;
 			NewRow.Partner  = Basis.Partner;
 			NewRow.BasisDocument = Basis;
 		EndDo;

@@ -102,12 +102,15 @@ EndFunction
 // Check filling.
 // 
 // Parameters:
-//  Object - DocumentObject.SalesInvoice
+//  Object - DocumentObject
 // 
 // Returns:
 //  Boolean - Check filling
 Function CheckFilling(Object) Export
 	IsOk = True;
+	If TypeOf(Object) = Type("DocumentObject.PhysicalInventory") Then
+		Return CheckFillingPhysicalInventory(Object);
+	EndIf;	
 	For Each Row In Object.ItemList Do
 		If Not Row.UseSerialLotNumber Then
 			Continue;
@@ -151,6 +154,41 @@ Function CheckFilling(Object) Export
 					CommonFunctionsClientServer.ShowUsersMessage(
 						StrTemplate(R().Error_113, Serial.SerialLotNumber), "ItemList[" + Format(
 						(ItemRow.LineNumber - 1), "NZ=0; NG=0;") + "].SerialLotNumbersPresentation", Object);
+				EndDo;
+			EndDo;
+		EndIf;
+	EndDo;
+	
+	Return IsOk;
+EndFunction
+
+// Check filling PhysicalInventory.
+// 
+// Parameters:
+//  Object - DocumentObject.PhysicalInventory
+// 
+// Returns:
+//  Boolean - Check filling
+Function CheckFillingPhysicalInventory(Object)
+	IsOk = True;
+	
+	Serials = Object.ItemList.Unload();
+	Serials.GroupBy("SerialLotNumber", "PhysCount");
+	For Each Serial In Serials Do
+		
+		If Serial.PhysCount = 1 Then
+			Continue;
+		EndIf;
+		
+		If Serial.SerialLotNumber.EachSerialLotNumberIsUnique Then
+			IsOk = False;
+			SerialsID = Object.ItemList.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
+			
+			For Each Row In SerialsID Do
+				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
+					CommonFunctionsClientServer.ShowUsersMessage(
+						StrTemplate(R().Error_113, Serial.SerialLotNumber),
+						 "ItemList[" + Format((ItemRow.LineNumber - 1), "NZ=0; NG=0;") + "].SerialLotNumber", Object);
 				EndDo;
 			EndDo;
 		EndIf;

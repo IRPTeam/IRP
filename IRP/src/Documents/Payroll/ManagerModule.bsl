@@ -178,6 +178,7 @@ Function CashAdvanceDeductionList()
 		   |	CashAdvanceDeductionList.Ref.PaymentPeriod AS PaymentPeriod,
 		   |	CashAdvanceDeductionList.Ref.CalculationType AS CalculationType,
 		   |	CashAdvanceDeductionList.Employee,
+		   |	CashAdvanceDeductionList.Agreement,
 		   |	CashAdvanceDeductionList.Amount
 		   |INTO CashAdvanceDeductionList
 		   |FROM
@@ -369,6 +370,7 @@ Function R3027B_EmployeeCashAdvance()
 		|	CashAdvanceDeductionList.Branch,
 		|	CashAdvanceDeductionList.Currency,
 		|	CashAdvanceDeductionList.Employee AS Partner,
+		|	CashAdvanceDeductionList.Agreement,
 		|	CashAdvanceDeductionList.Amount
 		|INTO R3027B_EmployeeCashAdvance
 		|FROM
@@ -713,11 +715,11 @@ Function GetAnalytics_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Deduction_IsNot
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	Return Value;
 EndFunction
 

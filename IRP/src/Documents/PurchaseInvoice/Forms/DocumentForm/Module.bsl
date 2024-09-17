@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -104,6 +105,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListOtherPeriodExpenseType.Visible = FOServer.IsUseStores();
 	
 	Form.Items.VendorPrice.Visible = Form.Items.ShowVendorPrice.Check;
+	
+	ArrayOfOrders = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.PurchaseOrder) Then
+			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.PurchaseOrder));
+		EndIf;
+	EndDo;
+	ClosedRowKeys = DocOrderClosingServer.GetIsClosedPurchaseOrderInItemList(ArrayOfOrders);
+	For Each Row In Form.Object.ItemList Do
+			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -671,6 +683,13 @@ Function PasteFromClipboardServer(CopySettings)
 	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
+&AtClient
+Async Procedure PasteFromClipboardValues(Command)
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);		
+	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
+EndProcedure
+
 #EndRegion
 
 #Region COMMANDS
@@ -692,7 +711,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -758,6 +777,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	EndIf;
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

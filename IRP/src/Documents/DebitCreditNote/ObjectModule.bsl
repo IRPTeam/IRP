@@ -2,11 +2,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
-//	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, "", ThisObject.Currency, ThisObject.Amount);
-//	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
-//	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	
+		
 	If Not ValueIsFilled(ThisObject.SendUUID) Then
 		ThisObject.SendUUID = New UUID();
 	EndIf;
@@ -25,22 +21,40 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	TotalTable.Add().Key = ThisObject.ReceiveUUID;
 	TotalTable.Add().Key = ThisObject.TransitUUID;
 	
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
-	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, 
-		ThisObject.SendAmount, ThisObject.SendAgreement);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, 
-		ThisObject.ReceiveAmount, ThisObject.ReceiveAgreement);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-				
-	Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Currency, ThisObject.SendAmount);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.SendUUID, ThisObject.SendCurrency, 
+			ThisObject.SendAmount, ThisObject.SendAgreement);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.SendUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.SendAmount;
+		AmountsInfo.TotalAmount.Name  = "SendLocalTotalAmount";
+		AmountsInfo.LocalRate.Name    = "SendLocalRate";
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+		
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.ReceiveUUID, ThisObject.ReceiveCurrency, 
+			ThisObject.ReceiveAmount, ThisObject.ReceiveAgreement);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.ReceiveUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		
+		AmountsInfo = CurrenciesClientServer.GetLocalTotalAountsInfo();	
+		AmountsInfo.TotalAmount.Value = ThisObject.ReceiveAmount;
+		AmountsInfo.TotalAmount.Name  = "ReceiveLocalTotalAmount";
+		AmountsInfo.LocalRate.Name    = "ReceiveLocalRate";
+		TotalAmounts = CurrenciesServer.GetLocalTotalAmounts(ThisObject, Parameters, AmountsInfo);
+		CurrenciesServer.UpdateLocalTotalAmounts(ThisObject, TotalAmounts, AmountsInfo);
+					
+		Parameters = CurrenciesClientServer.GetParameters_V7(ThisObject, ThisObject.TransitUUID, ThisObject.Currency, ThisObject.SendAmount);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, ThisObject.TransitUUID);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 			
+	EndIf;
+	
 	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
 EndProcedure
 

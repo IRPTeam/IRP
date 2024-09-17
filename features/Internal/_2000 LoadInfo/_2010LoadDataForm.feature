@@ -217,7 +217,7 @@ Scenario: _020112 load data in the Physical inventory
 		When check load data form in the document
 	* Check document
 		And "ItemList" table became equal
-			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Description'    |
+			| '#'   | 'Exp. count'   | 'Item'                 | 'Item key'   | 'Serial lot number'   | 'Unit'   | 'Difference'   | 'Phys. count'   | 'Manual fixed count'   | 'Comment'        |
 			| '1'   | ''             | 'Dress'                | 'XS/Blue'    | ''                    | 'pcs'    | '6,000'        | '6,000'         | ''                     | ''               |
 			| '2'   | ''             | 'Product 1 with SLN'   | 'ODS'        | ''                    | 'pcs'    | '2,000'        | '2,000'         | ''                     | ''               |
 			| '3'   | ''             | 'Product 1 with SLN'   | 'PZU'        | '8908899877'          | 'pcs'    | '1,000'        | '1,000'         | ''                     | ''               |
@@ -232,7 +232,7 @@ Scenario: _020112 load data in the Physical inventory
 		Then the form attribute named "Field_PhysCount" became equal to "No"
 		Then the form attribute named "Field_ManualFixedCount" became equal to "Yes"
 		Then the form attribute named "Field_Difference" became equal to "No"
-		Then the form attribute named "Field_Description" became equal to "No"
+		Then the form attribute named "Field_Comment" became equal to "No"
 		And I close all client application windows	
 
 Scenario: _020113 load data in the Bundling

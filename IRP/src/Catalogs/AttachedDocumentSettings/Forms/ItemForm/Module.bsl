@@ -44,7 +44,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtClient
-Async Procedure AttachTemplateAtClient()
+Procedure AttachTemplateAtClient()
 	
 	If Object.Ref.IsEmpty() Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_WriteObject);
@@ -55,12 +55,20 @@ Async Procedure AttachTemplateAtClient()
 	Structure.Insert("Ref", Object.Ref);
 	Structure.Insert("UUID", ThisObject.UUID);
 	
-	OpenFileDialog = New FileDialog(FileDialogMode.Open);
-	OpenFileDialog.Multiselect = False;
+	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
+	OpenFileDialog.MultipleChoice = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	FileRef = Await PutFileToServerAsync(, , , , ThisObject.UUID);
-	Volume = PictureViewerServer.GetIntegrationSettingsFile().DefaultFilesStorageVolume;
-	PictureViewerClient.AddFile(FileRef, Volume, Structure);
+	
+	BeginPutFileToServer(New CallbackDescription("AttachTemplateAtClient_END", ThisObject, Structure), , , , OpenFileDialog, ThisObject.UUID);
 	
 EndProcedure
 
+&AtClient
+Procedure AttachTemplateAtClient_END(FileRef, AdditionalParameters) Export
+	If FileRef = Undefined Then
+		Return;
+	EndIf;
+	
+	Volume = PictureViewerServer.GetIntegrationSettingsFile().DefaultFilesStorageVolume;
+	PictureViewerClient.AddFile(FileRef, Volume, AdditionalParameters);
+EndProcedure

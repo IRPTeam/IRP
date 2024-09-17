@@ -2648,6 +2648,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	ItemList.Ref AS PurchaseBasis,
 	|	ItemList.Ref AS Requester,
 	|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+	|	ItemList.Ref.Account AS Account,
 	|	ItemList.Ref.Partner AS Partner,
 	|	ItemList.Ref.LegalName AS LegalName,
 	|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -4339,6 +4340,7 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	UNDEFINED AS Ref,
 	|	ItemList.Ref AS InventoryTransfer,
 	|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+	|	ItemList.SalesOrder AS SalesOrder,
 	|	ItemList.ProductionPlanning AS ProductionPlanning,
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Ref.Branch AS Branch,
@@ -8614,7 +8616,7 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
+	|					THEN RowRef.Store = &Store OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -9337,7 +9339,7 @@ Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.ITO Then
 		Result.Header   = "Company, Branch, StoreSender, StoreReceiver";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
 	EndIf;
@@ -9348,7 +9350,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, StoreSender, UseShipmentConfirmation";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |Branch            , Branch,
@@ -9357,7 +9359,7 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 							  |ItemKey           , ItemList.ItemKey";
 	ElsIf ExternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, StoreReceiver, UseGoodsReceipt";
-		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder, SalesOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company           , Company,
 							  |StoreReceiver     , StoreReceiver,
@@ -11254,7 +11256,7 @@ EndFunction
 
 Function GetSeparatorColumns(DocReceiverMetadata, NameAsAlias = False, Ref = Undefined) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName" 
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName, Account" 
 				+ ?(NameAsAlias, ", TransactionTypeSales", ", TransactionType");
 	
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailSalesReceipt Then
@@ -11597,6 +11599,7 @@ Function GetColumnNames_ItemList()
 		   |Key,
 		   |BasedOn,
 		   |Company,
+		   |Account,
 		   |Partner,
 		   |LegalName,
 		   |Agreement,

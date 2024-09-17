@@ -45,7 +45,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.AccessKey");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
-	ArrayOfExcluded.Add("Catalog.AdvancesKeys");
+	ArrayOfExcluded.Add("Catalog.DELETE_AdvancesKeys");
 	ArrayOfExcluded.Add("Catalog.Batches");
 	ArrayOfExcluded.Add("Catalog.BatchKeys");
 	ArrayOfExcluded.Add("Catalog.ConfigurationMetadata");
@@ -60,7 +60,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
-	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+	ArrayOfExcluded.Add("Catalog.DELETE_TransactionsKeys");
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	ArrayOfExcluded.Add("Catalog.Unit_MockServiceData");
 	ArrayOfExcluded.Add("Catalog.Unit_ServiceExchangeHistory");
@@ -82,6 +82,7 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
 	ArrayOfExcluded.Add("Document.DepreciationCalculation");
 	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
+	ArrayOfExcluded.Add("Document.OutgoingMessage");
 	Return ArrayOfExcluded;
 EndFunction
 
@@ -90,7 +91,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.AccessKey");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertySets");
 	ArrayOfExcluded.Add("Catalog.AddAttributeAndPropertyValues");
-	ArrayOfExcluded.Add("Catalog.AdvancesKeys");
+	ArrayOfExcluded.Add("Catalog.DELETE_AdvancesKeys");
 	ArrayOfExcluded.Add("Catalog.Batches");
 	ArrayOfExcluded.Add("Catalog.BatchKeys");
 	ArrayOfExcluded.Add("Catalog.ConfigurationMetadata");
@@ -105,7 +106,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.PrintTemplates");
 	ArrayOfExcluded.Add("Catalog.ReportOptions");
 	ArrayOfExcluded.Add("Catalog.RowIDs");
-	ArrayOfExcluded.Add("Catalog.TransactionsKeys");
+	ArrayOfExcluded.Add("Catalog.DELETE_TransactionsKeys");
 	ArrayOfExcluded.Add("Catalog.ExternalFunctions");
 	ArrayOfExcluded.Add("Catalog.Unit_MockServiceData");
 	ArrayOfExcluded.Add("Catalog.Unit_ServiceExchangeHistory");
@@ -127,6 +128,7 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
 	ArrayOfExcluded.Add("Document.DepreciationCalculation");
 	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
+	ArrayOfExcluded.Add("Document.OutgoingMessage");
 	Return ArrayOfExcluded;
 EndFunction
 

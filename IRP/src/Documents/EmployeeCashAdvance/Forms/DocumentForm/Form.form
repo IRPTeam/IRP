@@ -365,7 +365,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Description</name>
+          <name>Comment</name>
           <id>535</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -373,10 +373,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+            <segments>Comment</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DescriptionExtendedTooltip</name>
+            <name>CommentExtendedTooltip</name>
             <id>537</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -391,7 +391,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DescriptionContextMenu</name>
+            <name>CommentContextMenu</name>
             <id>536</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -493,6 +493,64 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>Agreement</name>
+          <id>685</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Agreement</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>AgreementExtendedTooltip</name>
+            <id>687</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>AgreementContextMenu</name>
+            <id>686</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartListChoice</event>
+              <name>AgreementStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>AgreementEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -2477,10 +2535,10 @@
     </extInfo>
   </attributes>
   <attributes>
-    <name>Description</name>
+    <name>Comment</name>
     <title>
       <key>en</key>
-      <value>Description</value>
+      <value>Comment</value>
     </title>
     <id>28</id>
     <valueType>

@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -47,7 +48,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-
+	
+	If EventName = "CloseOrder" Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+	
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -98,6 +103,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	ArrayOfOrders = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.SalesOrder) Then
+			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.SalesOrder));
+		EndIf;
+	EndDo;
+	ClosedRowKeys = DocOrderClosingServer.GetIsClosedSalesOrderInItemList(ArrayOfOrders);
+	For Each Row In Form.Object.ItemList Do
+			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -141,6 +157,25 @@ EndProcedure
 &AtClient
 Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 	DocSalesInvoiceClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT
+	
+&AtClient
+Procedure AccountOnChange(Item)
+	DocSalesInvoiceClient.AccountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure AccountStartChoice(Item, ChoiceData, ChoiceByAdding, StandardProcessing)
+	DocSalesInvoiceClient.AccountStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AccountEditTextChange(Item, Text, StandardProcessing)
+	DocSalesInvoiceClient.AccountEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -647,6 +682,13 @@ Procedure PasteFromClipboard(Command)
 	CopyPasteClient.PasteFromClipboard(Object, ThisObject);
 EndProcedure
 
+//@skip-check module-unused-method
+&AtClient
+Async Procedure PasteFromClipboardValues(Command)
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);		
+	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
+EndProcedure
+
 &AtClient
 Procedure PasteFromClipboardAfterSetSettings(PasteSettings, AddInfo) Export
 	If PasteSettings = Undefined Then
@@ -683,7 +725,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -750,6 +792,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, NotifyParameters) Export
 	EndIf;
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

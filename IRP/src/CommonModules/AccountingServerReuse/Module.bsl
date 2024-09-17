@@ -26,3 +26,11 @@ EndFunction
 Function GetT9016S_AccountsEmployee_Reuse(Period, Company, LedgerTypeVariant, Employee) Export
 	Return AccountingServer.__GetT9016S_AccountsEmployee(Period, Company, LedgerTypeVariant, Employee);
 EndFunction
+
+Function GetMatchingLedgerTypes(LedgerType) Export
+	Return AccountingServer.__GetMatchingLedgerTypes(LedgerType);
+EndFunction
+
+Function GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, LedgerType, MainTableName) Export
+	Return AccountingServer.__GetAccountingOperationsByLedgerType(Ref, Period, DocTransactionType, LedgerType, MainTableName);
+EndFunction

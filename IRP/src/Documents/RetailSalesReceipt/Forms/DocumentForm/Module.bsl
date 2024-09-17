@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -110,6 +111,17 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.ItemListQuantityIsFixed.Visible = _QuantityIsFixed;
 	Form.Items.ItemListQuantityInBaseUnit.Visible = _QuantityIsFixed;
 	Form.Items.EditQuantityInBaseUnit.Enabled = Not _QuantityIsFixed;
+	
+	ArrayOfOrders = New Array();
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.SalesOrder) Then
+			ArrayOfOrders.Add(New Structure("Key, DocOrder", Row.Key, Row.SalesOrder));
+		EndIf;
+	EndDo;
+	ClosedRowKeys = DocOrderClosingServer.GetIsClosedSalesOrderInItemList(ArrayOfOrders);
+	For Each Row In Form.Object.ItemList Do
+			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -728,7 +740,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -795,6 +807,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	EndIf;
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(Object);
 	SourceOfOriginClient.UpdateSourceOfOriginsPresentation(Object);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer

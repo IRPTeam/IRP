@@ -96,7 +96,7 @@ Scenario: 960002 check SO creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                 |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                 |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -175,7 +175,7 @@ Scenario: 960003 check AdditionalCostAllocation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                               |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                                                               |
 		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -253,7 +253,7 @@ Scenario: 960004 check AdditionalRevenueAllocation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                                  |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -332,7 +332,7 @@ Scenario: 960005 check BankPayment creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                                    |
+		| 'Number' | 'Company'                       | 'Account'                           | 'Comment'                                                                                                                                                                                    |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount access deny'           | 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
@@ -420,7 +420,7 @@ Scenario: 960006 check BankReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                                    |
+		| 'Number' | 'Company'                       | 'Account'                           | 'Comment'                                                                                                                                                                                    |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount access deny'           | 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
@@ -508,7 +508,7 @@ Scenario: 960007 check BatchReallocateIncoming creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                         |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                         |
 		| '1'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -539,7 +539,7 @@ Scenario: 960008 check BatchReallocateOutgoing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                         |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                         |
 		| '1'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -569,7 +569,7 @@ Scenario: 960009 check Bundling creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                       |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                       |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.Bundling Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -603,7 +603,7 @@ Scenario: 960010 check CalculationMovementCosts creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                               |
+		| 'Number' | 'Company'                       | 'Comment'                                                               |
 		| '1'      | 'Company Read and Write Access' | 'Document.CalculationMovementCosts Company: Company Read and Write Access;' |
 		| '2'      | 'Company Only read access'      | 'Document.CalculationMovementCosts Company: Company Only read access;'      |
 		| '3'      | 'Company access deny'           | 'Document.CalculationMovementCosts Company: Company access deny;'           |
@@ -612,7 +612,7 @@ Scenario: 960011 check CashExpense creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashExpense"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                                                              |
+		| 'Number' | 'Company'                       | 'Account'                           | 'Comment'                                                                                                                                                                              |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount access deny'           | 'Document.CashExpense Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'           |
@@ -699,7 +699,7 @@ Scenario: 960012 check CashPayment creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashPayment"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Cash account'                      | 'Description'                                                                                                                                      |
+		| 'Number' | 'Company'                       | 'Cash account'                      | 'Comment'                                                                                                                                      |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashPayment Branch: Branch access deny;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'           |
@@ -733,7 +733,7 @@ Scenario: 960013 check CashReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Cash account'                      | 'Description'                                                                                                                                      |
+		| 'Number' | 'Company'                       | 'Cash account'                      | 'Comment'                                                                                                                                      |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.CashReceipt Branch: Branch access deny;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'           |
@@ -767,7 +767,7 @@ Scenario: 960014 check CashRevenue creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                   |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                   |
 		| '1'      | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.CashRevenue Branch: Branch access deny;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'           |
@@ -800,7 +800,7 @@ Scenario: 960015 check CashStatement creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashStatement"	
 	And "List" table became equal
-		| 'Number' | 'Description'                                                                                                                                        |
+		| 'Number' | 'Comment'                                                                                                                                        |
 		| '1'      | 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Document.CashStatement Branch: Branch access deny;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'           |
@@ -833,7 +833,7 @@ Scenario: 960016 check CashTransferOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                               |
+		| 'Comment'                                                                                                                                                                                                                               |
 		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
 		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
 		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
@@ -1083,7 +1083,7 @@ Scenario: 960017 check ChequeBondTransaction creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                 |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                                 |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ChequeBondTransaction Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1099,7 +1099,7 @@ Scenario: 960018 check ChequeBondTransactionItem creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransactionItem"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                     |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.ChequeBondTransactionItem Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1114,7 +1114,7 @@ Scenario: 960019 check ConsolidatedRetailSales creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Cash account'                      | 'Description'                                                                                                                                                  |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Cash account'                      | 'Comment'                                                                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'CashAccount Read and Write Access' | 'Document.ConsolidatedRetailSales Branch: Branch access deny;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'           |
@@ -1147,7 +1147,7 @@ Scenario: 960020 check CreditNote creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CreditNote"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                      |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                      |
 		| '1'      | 'Company Read and Write Access' | 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.CreditNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.CreditNote Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1164,7 +1164,7 @@ Scenario: 960021 check CustomersAdvancesClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                    |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                                    |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.CustomersAdvancesClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1181,7 +1181,7 @@ Scenario: 960022 check DebitNote creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                     |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.DebitNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.DebitNote Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1197,7 +1197,7 @@ Scenario: 960023 check EmployeeCashAdvance creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                               |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                               |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.EmployeeCashAdvance Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1216,7 +1216,7 @@ Scenario: 960024 check ForeignCurrencyRevaluation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"	
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                 |
+		| 'Number' | 'Company'                       | 'Comment'                                                                 |
 		| '1'      | 'Company Read and Write Access' | 'Document.ForeignCurrencyRevaluation Company: Company Read and Write Access;' |
 		| '2'      | 'Company Only read access'      | 'Document.ForeignCurrencyRevaluation Company: Company Only read access;'      |
 		| '3'      | 'Company access deny'           | 'Document.ForeignCurrencyRevaluation Company: Company access deny;'           |
@@ -1228,7 +1228,7 @@ Scenario: 960025 check GoodsReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Status' | 'Description'                                                                                                                                                                   |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Status' | 'Comment'                                                                                                                                                                   |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Closed' | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Closed' | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Closed' | 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -1309,7 +1309,7 @@ Scenario: 960026 check IncomingPaymentOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                |
 		| '1'      | 'Company Read and Write Access' | 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.IncomingPaymentOrder Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1327,7 +1327,7 @@ Scenario: 960027 check InternalSupplyRequest creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                    |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                    |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.InternalSupplyRequest Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -1364,7 +1364,7 @@ Scenario: 960028 check InventoryTransfer creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store sender'                | 'Status outgoing' | 'Store receiver'              | 'Status incoming' | 'Store transit'               | 'Description'                                                                                                                                                                                                                           |
+		| 'Number' | 'Company'                       | 'Store sender'                | 'Status outgoing' | 'Store receiver'              | 'Status incoming' | 'Store transit'               | 'Comment'                                                                                                                                                                                                                           |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Closed'          | 'Store Read and Write Access' | 'Document.InventoryTransfer Branch: Branch access deny;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'           |
@@ -1617,7 +1617,7 @@ Scenario: 960029 check InventoryTransferOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store sender'                | 'Store receiver'              | 'Description'                                                                                                                                                                                      |
+		| 'Number' | 'Company'                       | 'Store sender'                | 'Store receiver'              | 'Comment'                                                                                                                                                                                      |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.InventoryTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'           |
@@ -1706,7 +1706,7 @@ Scenario: 960030 check ItemStockAdjustment creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                  |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.ItemStockAdjustment Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -1741,7 +1741,7 @@ Scenario: 960031 check JournalEntry creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.JournalEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                        |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                        |
 		| '1'      | 'Company Read and Write Access' | 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.JournalEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.JournalEntry Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -1758,7 +1758,7 @@ Scenario: 960032 check Labeling creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Labeling"
 	And "List" table became equal
-		| 'Number' | 'Description'                                             |
+		| 'Number' | 'Comment'                                             |
 		| '1'      | 'Document.Labeling Branch: Branch Read and Write Access;' |
 		| '2'      | 'Document.Labeling Branch: Branch Only read access;'      |
 		| '3'      | 'Document.Labeling Branch: Branch access deny;'           |
@@ -1770,7 +1770,7 @@ Scenario: 960033 check ManualRegisterEntry creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
 	And "List" table became equal
-		| 'Description'                                                          |
+		| 'Comment'                                                          |
 		| 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
 		| 'Document.ManualRegisterEntry Company: Company Only read access;'      |
 		| 'Document.ManualRegisterEntry Company: Company access deny;'           |
@@ -1781,7 +1781,7 @@ Scenario: 960034 check MoneyTransfer creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                                                                             |
+		| 'Comment'                                                                                                                                                                                                                                                                             |
 		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
 		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
 		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
@@ -2522,7 +2522,7 @@ Scenario: 960035 check OpeningEntry creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                        |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                        |
 		| '1'      | 'Company Read and Write Access' | 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.OpeningEntry Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2540,7 +2540,7 @@ Scenario: 960036 check OutgoingPaymentOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Account'                           | 'Description'                                                                                                                                           |
+		| 'Number' | 'Company'                       | 'Account'                           | 'Comment'                                                                                                                                           |
 		| '1'      | 'Company Read and Write Access' | 'CashAccount Read and Write Access' | 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'CashAccount Only read access'      | 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'CashAccount access deny'           | 'Document.OutgoingPaymentOrder Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -2576,7 +2576,7 @@ Scenario: 960037 check Payroll creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                   |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                   |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.Payroll Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2595,7 +2595,7 @@ Scenario: 960038 check PhysicalCountByLocation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And "List" table became equal
-		| 'Number' | 'Store'                       | 'Description'                                                                                               |
+		| 'Number' | 'Store'                       | 'Comment'                                                                                               |
 		| '1'      | 'Store Read and Write Access' | 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
 		| '2'      | 'Store Only read access'      | 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
 		| '3'      | 'Store access deny'           | 'Document.PhysicalCountByLocation Store: Store access deny;Branch: Branch Read and Write Access;'           |
@@ -2613,7 +2613,7 @@ Scenario: 960039 check PhysicalInventory creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And "List" table became equal
-		| 'Number' | 'Store'                       | 'Description'                                                                                         |
+		| 'Number' | 'Store'                       | 'Comment'                                                                                         |
 		| '1'      | 'Store Read and Write Access' | 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
 		| '2'      | 'Store Only read access'      | 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Read and Write Access;'      |
 		| '3'      | 'Store access deny'           | 'Document.PhysicalInventory Store: Store access deny;Branch: Branch Read and Write Access;'           |
@@ -2630,7 +2630,7 @@ Scenario: 960040 check PlannedReceiptReservation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store (incoming)'            | 'Store outgoing'              | 'Description'                                                                                                                                                                                                                   |
+		| 'Number' | 'Company'                       | 'Store (incoming)'            | 'Store outgoing'              | 'Comment'                                                                                                                                                                                                                   |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | ''                            | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Read and Write Access' | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Store Only read access'      | 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -2856,7 +2856,7 @@ Scenario: 960041 check PriceList creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PriceList"
 	And "List" table became equal
-		| 'Number' | 'Price type'                      | 'Description'                                                                                         |
+		| 'Number' | 'Price type'                      | 'Comment'                                                                                         |
 		| '1'      | 'PriceType Read and Write Access' | 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Read and Write Access;' |
 		| '2'      | 'PriceType Only read access'      | 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Read and Write Access;'      |
 		| '3'      | 'PriceType access deny'           | 'Document.PriceList PriceType: PriceType access deny;Branch: Branch Read and Write Access;'           |
@@ -2873,7 +2873,7 @@ Scenario: 960042 check Production creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Production"
 	And "List" table became equal
-		| 'Description'                                                                                                                                   |
+		| 'Comment'                                                                                                                                   |
 		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;' |
 		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'      |
 		| 'Document.Production Branch: Branch access deny;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'           |
@@ -2908,7 +2908,7 @@ Scenario: 960043 check ProductionCostsAllocation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionCostsAllocation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                     |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.ProductionCostsAllocation Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2924,7 +2924,7 @@ Scenario: 960044 check ProductionPlanning creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"
 	And "List" table became equal
-		| 'Description'                                                                                              |
+		| 'Comment'                                                                                              |
 		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanning Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2940,7 +2940,7 @@ Scenario: 960045 check ProductionPlanningClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And "List" table became equal
-		| 'Description'                                                                                                     |
+		| 'Comment'                                                                                                     |
 		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanningClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2956,7 +2956,7 @@ Scenario: 960046 check ProductionPlanningCorrection creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And "List" table became equal
-		| 'Description'                                                                                                        |
+		| 'Comment'                                                                                                        |
 		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanningCorrection Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -2972,7 +2972,7 @@ Scenario: 960047 check PurchaseInvoice creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Description'                                                                                                                                                                      |
+		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Comment'                                                                                                                                                                      |
 		| '1'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3053,7 +3053,7 @@ Scenario: 960048 check PurchaseOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                    |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                    |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3135,7 +3135,7 @@ Scenario: 960050 check PurchaseOrderClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                           |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                           |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3216,7 +3216,7 @@ Scenario: 960051 check PurchaseReturn creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Author'                        | 'Description'                                                                                                                                                                     |
+		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Author'                        | 'Comment'                                                                                                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'en description is empty'       | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'en description is empty'       | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'en description is empty'       | 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3297,7 +3297,7 @@ Scenario: 960052 check PurchaseReturnOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                          |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                                                          |
 		| '1'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3377,7 +3377,7 @@ Scenario: 960054 check ReconciliationStatement creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                   |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                   |
 		| '1'      | 'Company Read and Write Access' | 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.ReconciliationStatement Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -3394,7 +3394,7 @@ Scenario: 960055 check RetailGoodsReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                         |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                                                         |
 		| '1'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3474,7 +3474,7 @@ Scenario: 960056 check RetailReturnReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                          |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                          |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3555,7 +3555,7 @@ Scenario: 960057 check RetailSalesReceipt creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Branch'                       | 'Description'                                                                                                                                                                         |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Branch'                       | 'Comment'                                                                                                                                                                         |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Branch Read and Write Access' | 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3636,7 +3636,7 @@ Scenario: 960058 check RetailShipmentConfirmation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                                                                                                 |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                                                                                                 |
 		| '1'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3718,7 +3718,7 @@ Scenario: 960059 check SalesInvoice creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Description'                                                                                                                                                                   |
+		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Comment'                                                                                                                                                                   |
 		| '1'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3799,7 +3799,7 @@ Scenario: 960060 check SalesOrderClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                        |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                        |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3879,7 +3879,7 @@ Scenario: 960061 check SalesReportFromTradeAgent creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                     |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.SalesReportFromTradeAgent Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -3896,7 +3896,7 @@ Scenario: 960062 check SalesReportToConsignor creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Description'                                                                                                  |
+		| 'Number' | 'Company'                       | 'Comment'                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Document.SalesReportToConsignor Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -3915,7 +3915,7 @@ Scenario: 960063 check SalesReturn creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Description'                                                                                                                                                                  |
+		| 'Number' | 'Company'                       | 'Status' | 'Store'                       | 'Comment'                                                                                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Closed' | ''                            | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Closed' | 'Store Read and Write Access' | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Closed' | 'Store Only read access'      | 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -3995,7 +3995,7 @@ Scenario: 960064 check SalesReturnOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                       |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                       |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4074,7 +4074,7 @@ Scenario: 960065 check ShipmentConfirmation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                                                           |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                                                           |
 		| '1'      | 'Company Read and Write Access' | ''                            | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| '2'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| '3'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4155,7 +4155,7 @@ Scenario: 960066 check StockAdjustmentAsSurplus creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                       |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                       |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.StockAdjustmentAsSurplus Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -4190,7 +4190,7 @@ Scenario: 960067 check StockAdjustmentAsWriteOff creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                                        |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                                        |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.StockAdjustmentAsWriteOff Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -4225,7 +4225,7 @@ Scenario: 960068 check TimeSheet creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.TimeSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.TimeSheet Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4243,7 +4243,7 @@ Scenario: 960069 check Unbundling creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Unbundling"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Store'                       | 'Description'                                                                                                                         |
+		| 'Number' | 'Company'                       | 'Store'                       | 'Comment'                                                                                                                         |
 		| '1'      | 'Company Read and Write Access' | 'Store Read and Write Access' | 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Store Only read access'      | 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Store access deny'           | 'Document.Unbundling Store: Store access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'           |
@@ -4278,7 +4278,7 @@ Scenario: 960070 check VendorsAdvancesClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                                  |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                                  |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.VendorsAdvancesClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4294,7 +4294,7 @@ Scenario: 960071 check WorkOrder creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrder"
 	And "List" table became equal
-		| 'Number' | 'Company'                       | 'Branch'                       | 'Description'                                                                                     |
+		| 'Number' | 'Company'                       | 'Branch'                       | 'Comment'                                                                                     |
 		| '1'      | 'Company Read and Write Access' | 'Branch Read and Write Access' | 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| '2'      | 'Company Read and Write Access' | 'Branch Only read access'      | 'Document.WorkOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| '3'      | 'Company Read and Write Access' | 'Branch access deny'           | 'Document.WorkOrder Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4311,7 +4311,7 @@ Scenario: 960072 check WorkOrderClosing creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.WorkOrderClosing Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4328,7 +4328,7 @@ Scenario: 960073 check WorkSheet creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And "List" table became equal
-		| 'Description'                                                                                     |
+		| 'Comment'                                                                                     |
 		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.WorkSheet Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4343,7 +4343,7 @@ Scenario: 960074 check CommissioningOfFixedAsset creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                |
+		| 'Comment'                                                                                                                                                                                |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4422,7 +4422,7 @@ Scenario: 960075 check DecommissioningOfFixedAsset creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                  |
+		| 'Comment'                                                                                                                                                                                  |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4500,7 +4500,7 @@ Scenario: 960076 check FixedAssetTransfer creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
 	And "List" table became equal
-		| 'Description'                                                                                              |
+		| 'Comment'                                                                                              |
 		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.FixedAssetTransfer Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4516,7 +4516,7 @@ Scenario: 960077 check ModernizationOfFixedAsset creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                |
+		| 'Comment'                                                                                                                                                                                |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4594,7 +4594,7 @@ Scenario: 960078 check EmployeeFiring creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeFiring"
 	And "List" table became equal
-		| 'Description'                                                                                          |
+		| 'Comment'                                                                                          |
 		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeFiring Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4609,7 +4609,7 @@ Scenario: 960079 check EmployeeHiring creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeHiring"
 	And "List" table became equal
-		| 'Description'                                                                                          |
+		| 'Comment'                                                                                          |
 		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeHiring Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4624,7 +4624,7 @@ Scenario: 960080 check EmployeeSickLeave creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"
 	And "List" table became equal
-		| 'Description'                                                                                             |
+		| 'Comment'                                                                                             |
 		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeSickLeave Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4639,7 +4639,7 @@ Scenario: 960081 check EmployeeTransfer creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeTransfer Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4654,7 +4654,7 @@ Scenario: 960082 check EmployeeVacation creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeVacation"
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeVacation Branch: Branch access deny;Company: Company Read and Write Access;'           |
@@ -4703,7 +4703,7 @@ Scenario: 960089 check RetailReceiptCorrection creation
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReceiptCorrection"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                              |
+		| 'Comment'                                                                                                                                                                              |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4784,7 +4784,7 @@ Scenario: 960090 check sales order access rights (LimitedAccess)
 	And I connect "TestAdmin" TestClient using "LimitedAccess" login and "" password
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                 |
+		| 'Comment'                                                                                                                                                                 |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -4815,7 +4815,7 @@ Scenario: 960091 check AdditionalCostAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                               |
+		| 'Comment'                                                                                                                                                                               |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.AdditionalCostAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -4856,7 +4856,7 @@ Scenario: 960092 check AdditionalRevenueAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.AdditionalRevenueAllocation"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                  |
+		| 'Comment'                                                                                                                                                                                  |
 		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.AdditionalRevenueAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -4888,7 +4888,7 @@ Scenario: 960093 check BankPayment access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                    |
+		| 'Comment'                                                                                                                                                                                    |
 		| 'Document.BankPayment Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
 		| 'Document.BankPayment Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
 		| 'Document.BankPayment Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
@@ -4927,7 +4927,7 @@ Scenario: 960094 check BankReceipt access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                    |
+		| 'Comment'                                                                                                                                                                                    |
 		| 'Document.BankReceipt Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;' |
 		| 'Document.BankReceipt Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'      |
 		| 'Document.BankReceipt Account: CashAccount access deny;Branch: Branch Read and Write Access;Company: Company Read and Write Access;TransitAccount: CashAccount Read and Write Access;'           |
@@ -4967,7 +4967,7 @@ Scenario: 960095 check BatchReallocateIncoming access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateIncoming"
 	And "List" table became equal
-		| 'Description'                                                                                                                                         |
+		| 'Comment'                                                                                                                                         |
 		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.BatchReallocateIncoming Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -4986,7 +4986,7 @@ Scenario: 960096 check BatchReallocateOutgoing access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.BatchReallocateOutgoing"
 	And "List" table became equal
-		| 'Description'                                                                                                                                         |
+		| 'Comment'                                                                                                                                         |
 		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.BatchReallocateOutgoing Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -5005,7 +5005,7 @@ Scenario: 960097 check Bundling access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
 	And "List" table became equal
-		| 'Description'                                                                                                                       |
+		| 'Comment'                                                                                                                       |
 		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.Bundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.Bundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -5020,7 +5020,7 @@ Scenario: 960098 check CalculationMovementCosts access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"
 	And "List" table became equal
-		| 'Description'                                                               |
+		| 'Comment'                                                               |
 		| 'Document.CalculationMovementCosts Company: Company Read and Write Access;' |
 		| 'Document.CalculationMovementCosts Company: Company Only read access;'      |
 	
@@ -5029,7 +5029,7 @@ Scenario: 960099 check CashExpense access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashExpense"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                              |
+		| 'Comment'                                                                                                                                                                              |
 		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
 		| 'Document.CashExpense Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
 		| 'Document.CashExpense Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
@@ -5061,7 +5061,7 @@ Scenario: 960100 check CashPayment access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashPayment"
 	And "List" table became equal
-		| 'Description'                                                                                                                                      |
+		| 'Comment'                                                                                                                                      |
 		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| 'Document.CashPayment Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| 'Document.CashPayment Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
@@ -5076,7 +5076,7 @@ Scenario: 960101 check CashReceipt access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashReceipt"
 	And "List" table became equal
-		| 'Description'                                                                                                                                      |
+		| 'Comment'                                                                                                                                      |
 		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| 'Document.CashReceipt Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| 'Document.CashReceipt Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
@@ -5091,7 +5091,7 @@ Scenario: 960102 check CashRevenue access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashRevenue"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                   |
+		| 'Comment'                                                                                                                                   |
 		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;' |
 		| 'Document.CashRevenue Branch: Branch Only read access;Company: Company Read and Write Access;OtherCompany: Company Read and Write Access;'      |
 		| 'Document.CashRevenue Branch: Branch Read and Write Access;Company: Company Only read access;OtherCompany: Company Read and Write Access;'      |
@@ -5110,7 +5110,7 @@ Scenario: 960103 check CashStatement access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashStatement"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                        |
+		| 'Comment'                                                                                                                                        |
 		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| 'Document.CashStatement Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| 'Document.CashStatement Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
@@ -5124,7 +5124,7 @@ Scenario: 960104 check CashTransferOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                               |
+		| 'Comment'                                                                                                                                                                                                                               |
 		| 'Document.CashTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
 		| 'Document.CashTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
 		| 'Document.CashTransferOrder Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
@@ -5259,7 +5259,7 @@ Scenario: 960105 check ChequeBondTransaction access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"	
 	And "List" table became equal
-		| 'Description'                                                                                                 |
+		| 'Comment'                                                                                                 |
 		| 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ChequeBondTransaction Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ChequeBondTransaction Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5269,7 +5269,7 @@ Scenario: 960106 check ChequeBondTransactionItem access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ChequeBondTransactionItem"		
 	And "List" table became equal
-		| 'Description'                                                                                                     |
+		| 'Comment'                                                                                                     |
 		| 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ChequeBondTransactionItem Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ChequeBondTransactionItem Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5279,7 +5279,7 @@ Scenario: 960107 check ConsolidatedRetailSales access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ConsolidatedRetailSales"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                  |
+		| 'Comment'                                                                                                                                                  |
 		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;' |
 		| 'Document.ConsolidatedRetailSales Branch: Branch Only read access;Company: Company Read and Write Access;CashAccount: CashAccount Read and Write Access;'      |
 		| 'Document.ConsolidatedRetailSales Branch: Branch Read and Write Access;Company: Company Only read access;CashAccount: CashAccount Read and Write Access;'      |
@@ -5293,7 +5293,7 @@ Scenario: 960108 check CreditNote access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CreditNote"	
 	And "List" table became equal
-		| 'Description'                                                                                      |
+		| 'Comment'                                                                                      |
 		| 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.CreditNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.CreditNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5303,7 +5303,7 @@ Scenario: 960109 check CustomersAdvancesClosing access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
 	And "List" table became equal
-		| 'Description'                                                                                                    |
+		| 'Comment'                                                                                                    |
 		| 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.CustomersAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.CustomersAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5313,7 +5313,7 @@ Scenario: 960110 check DebitNote access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DebitNote"
 	And "List" table became equal
-		| 'Description'                                                                                     |
+		| 'Comment'                                                                                     |
 		| 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.DebitNote Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.DebitNote Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5323,7 +5323,7 @@ Scenario: 960111 check EmployeeCashAdvance access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
 	And "List" table became equal
-		| 'Description'                                                                                               |
+		| 'Comment'                                                                                               |
 		| 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeCashAdvance Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeCashAdvance Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5333,7 +5333,7 @@ Scenario: 960112 check ForeignCurrencyRevaluation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ForeignCurrencyRevaluation"	
 	And "List" table became equal
-		| 'Description'                                                                 |
+		| 'Comment'                                                                 |
 		| 'Document.ForeignCurrencyRevaluation Company: Company Read and Write Access;' |
 		| 'Document.ForeignCurrencyRevaluation Company: Company Only read access;'      |
 	
@@ -5341,7 +5341,7 @@ Scenario: 960113 check GoodsReceipt access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                   |
+		| 'Comment'                                                                                                                                                                   |
 		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.GoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -5372,7 +5372,7 @@ Scenario: 960114 check IncomingPaymentOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                |
+		| 'Comment'                                                                                                |
 		| 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.IncomingPaymentOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.IncomingPaymentOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5382,7 +5382,7 @@ Scenario: 960115 check InternalSupplyRequest access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                    |
+		| 'Comment'                                                                                                                                    |
 		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.InternalSupplyRequest Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.InternalSupplyRequest Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -5396,7 +5396,7 @@ Scenario: 960116 check InventoryTransfer access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                           |
+		| 'Comment'                                                                                                                                                                                                                           |
 		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;' |
 		| 'Document.InventoryTransfer Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
 		| 'Document.InventoryTransfer Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;StoreTransit: Store Read and Write Access;'      |
@@ -5507,7 +5507,7 @@ Scenario: 960117 check InventoryTransferOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                      |
+		| 'Comment'                                                                                                                                                                                      |
 		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;' |
 		| 'Document.InventoryTransferOrder Branch: Branch Only read access;Company: Company Read and Write Access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
 		| 'Document.InventoryTransferOrder Branch: Branch Read and Write Access;Company: Company Only read access;StoreReceiver: Store Read and Write Access;StoreSender: Store Read and Write Access;'      |
@@ -5546,7 +5546,7 @@ Scenario: 960118 check ItemStockAdjustment access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 	And "List" table became equal
-		| 'Description'                                                                                                                                  |
+		| 'Comment'                                                                                                                                  |
 		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ItemStockAdjustment Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.ItemStockAdjustment Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -5560,7 +5560,7 @@ Scenario: 960119 check JournalEntry access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.JournalEntry"
 	And "List" table became equal
-		| 'Description'                                                                                        |
+		| 'Comment'                                                                                        |
 		| 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.JournalEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.JournalEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5570,7 +5570,7 @@ Scenario: 960120 check Labeling access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Labeling"	
 	And "List" table became equal
-		| 'Description'                                             |
+		| 'Comment'                                             |
 		| 'Document.Labeling Branch: Branch Read and Write Access;' |
 		| 'Document.Labeling Branch: Branch Only read access;'      |
 	
@@ -5578,7 +5578,7 @@ Scenario: 960121 check ManualRegisterEntry access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ManualRegisterEntry"
 	And "List" table became equal
-		| 'Description'                                                          |
+		| 'Comment'                                                          |
 		| 'Document.ManualRegisterEntry Company: Company Read and Write Access;' |
 		| 'Document.ManualRegisterEntry Company: Company Only read access;'      |
 	
@@ -5587,7 +5587,7 @@ Scenario: 960122 check MoneyTransfer access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.MoneyTransfer"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                                                                             |
+		| 'Comment'                                                                                                                                                                                                                                                                             |
 		| 'Document.MoneyTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;' |
 		| 'Document.MoneyTransfer Branch: Branch Only read access;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'      |
 		| 'Document.MoneyTransfer Branch: Branch access deny;Company: Company Read and Write Access;ReceiveBranch: Branch Read and Write Access;TransitAccount: CashAccount Read and Write Access;Sender: CashAccount Read and Write Access;Receiver: CashAccount Read and Write Access;'           |
@@ -5979,7 +5979,7 @@ Scenario: 960123 check OpeningEntry access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 	And "List" table became equal
-		| 'Description'                                                                                        |
+		| 'Comment'                                                                                        |
 		| 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.OpeningEntry Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.OpeningEntry Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -5989,7 +5989,7 @@ Scenario: 960124 check OutgoingPaymentOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                           |
+		| 'Comment'                                                                                                                                           |
 		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.OutgoingPaymentOrder Account: CashAccount Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.OutgoingPaymentOrder Account: CashAccount Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -6003,7 +6003,7 @@ Scenario: 960125 check Payroll access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Payroll"
 	And "List" table became equal
-		| 'Description'                                                                                   |
+		| 'Comment'                                                                                   |
 		| 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.Payroll Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.Payroll Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6013,7 +6013,7 @@ Scenario: 960126 check PhysicalCountByLocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
 	And "List" table became equal
-		| 'Description'                                                                                               |
+		| 'Comment'                                                                                               |
 		| 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
 		| 'Document.PhysicalCountByLocation Store: Store Only read access;Branch: Branch Read and Write Access;'      |
 		| 'Document.PhysicalCountByLocation Store: Store Read and Write Access;Branch: Branch Only read access;'      |
@@ -6023,7 +6023,7 @@ Scenario: 960127 check PhysicalInventory access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"							
 	And "List" table became equal
-		| 'Description'                                                                                         |
+		| 'Comment'                                                                                         |
 		| 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Read and Write Access;' |
 		| 'Document.PhysicalInventory Store: Store Only read access;Branch: Branch Read and Write Access;'      |
 		| 'Document.PhysicalInventory Store: Store Read and Write Access;Branch: Branch Only read access;'      |
@@ -6033,7 +6033,7 @@ Scenario: 960128 check PlannedReceiptReservation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                                                   |
+		| 'Comment'                                                                                                                                                                                                                   |
 		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'                                                                            |
 		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PlannedReceiptReservation Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
@@ -6128,7 +6128,7 @@ Scenario: 960129 check PriceList access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PriceList"	
 	And "List" table became equal
-		| 'Description'                                                                                         |
+		| 'Comment'                                                                                         |
 		| 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Read and Write Access;' |
 		| 'Document.PriceList PriceType: PriceType Only read access;Branch: Branch Read and Write Access;'      |
 		| 'Document.PriceList PriceType: PriceType Read and Write Access;Branch: Branch Only read access;'      |
@@ -6138,7 +6138,7 @@ Scenario: 960130 check Production access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Production"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                   |
+		| 'Comment'                                                                                                                                   |
 		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;' |
 		| 'Document.Production Branch: Branch Only read access;Company: Company Read and Write Access;StoreProduction: Store Read and Write Access;'      |
 		| 'Document.Production Branch: Branch Read and Write Access;Company: Company Only read access;StoreProduction: Store Read and Write Access;'      |
@@ -6155,7 +6155,7 @@ Scenario: 960131 check ProductionCostsAllocation access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionCostsAllocation"
 	And "List" table became equal
-		| 'Description'                                                                                                     |
+		| 'Comment'                                                                                                     |
 		| 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionCostsAllocation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionCostsAllocation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6165,7 +6165,7 @@ Scenario: 960132 check ProductionPlanning access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanning"	
 	And "List" table became equal
-		| 'Description'                                                                                              |
+		| 'Comment'                                                                                              |
 		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanning Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanning Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6175,7 +6175,7 @@ Scenario: 960133 check ProductionPlanningClosing access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningClosing"
 	And "List" table became equal
-		| 'Description'                                                                                                     |
+		| 'Comment'                                                                                                     |
 		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanningClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanningClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6185,7 +6185,7 @@ Scenario: 960134 check ProductionPlanningCorrection access rights (LimitedAccess
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ProductionPlanningCorrection"
 	And "List" table became equal
-		| 'Description'                                                                                                        |
+		| 'Comment'                                                                                                        |
 		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ProductionPlanningCorrection Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ProductionPlanningCorrection Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6196,7 +6196,7 @@ Scenario: 960135 check PurchaseInvoice access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                      |
+		| 'Comment'                                                                                                                                                                      |
 		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.PurchaseInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6227,7 +6227,7 @@ Scenario: 960136 check PurchaseOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                    |
+		| 'Comment'                                                                                                                                                                    |
 		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.PurchaseOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6258,7 +6258,7 @@ Scenario: 960137 check PurchaseOrderClosing access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                           |
+		| 'Comment'                                                                                                                                                                           |
 		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.PurchaseOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6290,7 +6290,7 @@ Scenario: 960138 check PurchaseReturn access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                     |
+		| 'Comment'                                                                                                                                                                     |
 		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.PurchaseReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6322,7 +6322,7 @@ Scenario: 960139 check PurchaseReturnOrder access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                          |
+		| 'Comment'                                                                                                                                                                          |
 		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.PurchaseReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6353,7 +6353,7 @@ Scenario: 960140 check ReconciliationStatement access rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
 	And "List" table became equal
-		| 'Description'                                                                                                   |
+		| 'Comment'                                                                                                   |
 		| 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.ReconciliationStatement Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.ReconciliationStatement Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6363,7 +6363,7 @@ Scenario: 960141 check RetailGoodsReceipt rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailGoodsReceipt"		
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                         |
+		| 'Comment'                                                                                                                                                                         |
 		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.RetailGoodsReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6394,7 +6394,7 @@ Scenario: 960142 check RetailReturnReceipt rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                          |
+		| 'Comment'                                                                                                                                                                          |
 		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.RetailReturnReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6425,7 +6425,7 @@ Scenario: 960143 check RetailSalesReceipt rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                         |
+		| 'Comment'                                                                                                                                                                         |
 		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.RetailSalesReceipt Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6456,7 +6456,7 @@ Scenario: 960144 check RetailShipmentConfirmation rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                 |
+		| 'Comment'                                                                                                                                                                                 |
 		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.RetailShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6487,7 +6487,7 @@ Scenario: 960145 check SalesInvoice rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                   |
+		| 'Comment'                                                                                                                                                                   |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesInvoice Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6518,7 +6518,7 @@ Scenario: 960146 check SalesOrder rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrder"		
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                 |
+		| 'Comment'                                                                                                                                                                 |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6549,7 +6549,7 @@ Scenario: 960147 check SalesOrderClosing rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                        |
+		| 'Comment'                                                                                                                                                                        |
 		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6580,7 +6580,7 @@ Scenario: 960148 check SalesReportFromTradeAgent rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"	
 	And "List" table became equal
-		| 'Description'                                                                                                     |
+		| 'Comment'                                                                                                     |
 		| 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.SalesReportFromTradeAgent Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.SalesReportFromTradeAgent Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6590,7 +6590,7 @@ Scenario: 960149 check SalesReportToConsignor rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"	
 	And "List" table became equal
-		| 'Description'                                                                                                  |
+		| 'Comment'                                                                                                  |
 		| 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.SalesReportToConsignor Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.SalesReportToConsignor Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6600,7 +6600,7 @@ Scenario: 960150 check SalesReturn rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                  |
+		| 'Comment'                                                                                                                                                                  |
 		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesReturn Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6632,7 +6632,7 @@ Scenario: 960151 check SalesReturnOrder rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                       |
+		| 'Comment'                                                                                                                                                                       |
 		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.SalesReturnOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6663,7 +6663,7 @@ Scenario: 960152 check ShipmentConfirmation rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                           |
+		| 'Comment'                                                                                                                                                                           |
 		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.ShipmentConfirmation Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6694,7 +6694,7 @@ Scenario: 960153 check StockAdjustmentAsSurplus rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 	And "List" table became equal
-		| 'Description'                                                                                                                                       |
+		| 'Comment'                                                                                                                                       |
 		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.StockAdjustmentAsSurplus Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.StockAdjustmentAsSurplus Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -6708,7 +6708,7 @@ Scenario: 960154 check StockAdjustmentAsWriteOff rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And "List" table became equal
-		| 'Description'                                                                                                                                        |
+		| 'Comment'                                                                                                                                        |
 		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.StockAdjustmentAsWriteOff Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.StockAdjustmentAsWriteOff Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -6722,7 +6722,7 @@ Scenario: 960155 check TimeSheet rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.TimeSheet"
 	And "List" table became equal
-		| 'Description'                                                                                     |
+		| 'Comment'                                                                                     |
 		| 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.TimeSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.TimeSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6732,7 +6732,7 @@ Scenario: 960156 check Unbundling rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Unbundling"	
 	And "List" table became equal
-		| 'Description'                                                                                                                         |
+		| 'Comment'                                                                                                                         |
 		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.Unbundling Store: Store Only read access;Branch: Branch Read and Write Access;Company: Company Read and Write Access;'      |
 		| 'Document.Unbundling Store: Store Read and Write Access;Branch: Branch Only read access;Company: Company Read and Write Access;'      |
@@ -6746,7 +6746,7 @@ Scenario: 960157 check VendorsAdvancesClosing rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"	
 	And "List" table became equal
-		| 'Description'                                                                                                  |
+		| 'Comment'                                                                                                  |
 		| 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.VendorsAdvancesClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.VendorsAdvancesClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6756,7 +6756,7 @@ Scenario: 960158 check WorkOrder rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrder"
 	And "List" table became equal
-		| 'Description'                                                                                     |
+		| 'Comment'                                                                                     |
 		| 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.WorkOrder Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.WorkOrder Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6766,7 +6766,7 @@ Scenario: 960159 check WorkOrderClosing rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkOrderClosing"	
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.WorkOrderClosing Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.WorkOrderClosing Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6776,7 +6776,7 @@ Scenario: 960160 check WorkSheet rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.WorkSheet"
 	And "List" table became equal
-		| 'Description'                                                                                     |
+		| 'Comment'                                                                                     |
 		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.WorkSheet Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.WorkSheet Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6786,7 +6786,7 @@ Scenario: 960161 check CommissioningOfFixedAsset rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                |
+		| 'Comment'                                                                                                                                                                                |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.CommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6817,7 +6817,7 @@ Scenario: 960162 check DecommissioningOfFixedAsset rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                  |
+		| 'Comment'                                                                                                                                                                                  |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.DecommissioningOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6848,7 +6848,7 @@ Scenario: 960163 check DecommissioningOfFixedAsset rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
 	And "List" table became equal
-		| 'Description'                                                                                              |
+		| 'Comment'                                                                                              |
 		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.FixedAssetTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.FixedAssetTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6859,7 +6859,7 @@ Scenario: 960164 check DecommissioningOfFixedAsset rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                |
+		| 'Comment'                                                                                                                                                                                |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6889,7 +6889,7 @@ Scenario: 960165 check DecommissioningOfFixedAsset rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                                |
+		| 'Comment'                                                                                                                                                                                |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.ModernizationOfFixedAsset Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -6933,7 +6933,7 @@ Scenario: 960167 check EmployeeFiring rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeFiring"	
 	And "List" table became equal
-		| 'Description'                                                                                          |
+		| 'Comment'                                                                                          |
 		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeFiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeFiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6943,7 +6943,7 @@ Scenario: 960168 check EmployeeHiring rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeHiring"	
 	And "List" table became equal
-		| 'Description'                                                                                          |
+		| 'Comment'                                                                                          |
 		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeHiring Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeHiring Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6953,7 +6953,7 @@ Scenario: 960169 check EmployeeSickLeave rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeSickLeave"	
 	And "List" table became equal
-		| 'Description'                                                                                             |
+		| 'Comment'                                                                                             |
 		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeSickLeave Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeSickLeave Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6963,7 +6963,7 @@ Scenario: 960170 check EmployeeTransfer rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeTransfer"	
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeTransfer Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeTransfer Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6973,7 +6973,7 @@ Scenario: 960171 check EmployeeVacation rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.EmployeeVacation"	
 	And "List" table became equal
-		| 'Description'                                                                                            |
+		| 'Comment'                                                                                            |
 		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Read and Write Access;' |
 		| 'Document.EmployeeVacation Branch: Branch Only read access;Company: Company Read and Write Access;'      |
 		| 'Document.EmployeeVacation Branch: Branch Read and Write Access;Company: Company Only read access;'      |
@@ -6983,7 +6983,7 @@ Scenario: 960172 check RetailReceiptCorrection rights (LimitedAccess)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailReceiptCorrection"	
 	And "List" table became equal
-		| 'Description'                                                                                                                                                                              |
+		| 'Comment'                                                                                                                                                                              |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access'                                          |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Only read access'                                               |
 		| 'Document.RetailReceiptCorrection Branch: Branch Read and Write Access;Company: Company Read and Write Access;Store: Store Read and Write Access&Store Only read access'                   |
@@ -7027,33 +7027,37 @@ Scenario: 960191 check Stores catalog rights (LimitedAccess)
 	Given I open hyperlink "e1cib/list/Catalog.Stores"
 	And "List" table became equal
 		| 'Description'                 |
-		| 'Store Read and Write Access' |
 		| 'Store Only read access'      |
+		| 'Store Read and Write Access' |
 	
 		
 Scenario: 960192 check PriceTypes catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.PriceTypes"
-	And "List" table became equal
+	And "List" table contains lines
 		| 'Code' | 'Description'                     |
+		| '2'    | ''                                |
+		| '1'    | ''                                |
+		| ''     | ''                                |
 		| ''     | 'PriceType Read and Write Access' |
 		| ''     | 'PriceType Only read access'      |
-		| ''     | ''                                |
-		| '1'    | ''                                |
-		| '2'    | ''                                |
+	Then the number of "List" table lines is "равно" "5"
+	
+			
 	
 Scenario: 960193 check CashAccounts catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
 	And "List" table became equal
 		| 'Description'                       |
-		| 'CashAccount Read and Write Access' |
 		| 'CashAccount Only read access'      |
+		| 'CashAccount Read and Write Access' |
+		
 
 Scenario: 960194 check BusinessUnits catalog rights (LimitedAccess)	
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
 	And "List" table became equal
 		| 'Description'                  |
-		| 'Branch Read and Write Access' |
 		| 'Branch Only read access'      |
+		| 'Branch Read and Write Access' |

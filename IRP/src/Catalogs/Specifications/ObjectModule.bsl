@@ -3,6 +3,10 @@ Procedure BeforeWrite(Cancel)
 		Return;
 	EndIf;
 
+	If ThisObject.IsFolder Then
+		Return;
+	EndIf;
+
 	// Checking uniqueness
 	If Not Cancel And Not DeletionMark Then
 		Query = New Query();
@@ -75,7 +79,11 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
+	
+	If ThisObject.IsFolder Then
+		Return;
+	EndIf;
+	
 	If Not (ThisObject.AdditionalProperties.Property("SynchronizeAffectPricingMD5")
 		And Not ThisObject.AdditionalProperties.SynchronizeAffectPricingMD5) Then
 		Catalogs.ItemKeys.SynchronizeAffectPricingMD5BySpecification(ThisObject.Ref);
@@ -89,5 +97,9 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
+	If ThisObject.IsFolder Then
+		Return;
+	EndIf;
+	
 	UniqueMD5 = "";
 EndProcedure

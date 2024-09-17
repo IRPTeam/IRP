@@ -225,7 +225,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.RetailSalesReceipt.ItemList");
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), PostingServer.GetQueryTableByName(
@@ -234,7 +234,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.RetailSalesReceipt.ItemList", AddInfo);
 EndProcedure
@@ -274,6 +274,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -1168,7 +1169,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.TransactionAgreement,
+		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
 		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Amount,
@@ -1520,7 +1521,7 @@ Function GetAnalytics_DR_R5022T_CR_R4050B(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory Then
 
 		If ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
@@ -1536,7 +1537,7 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Items")) <> Undefined Then
 		Return Parameters.RowData.ItemKey.Item;

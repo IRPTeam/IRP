@@ -514,7 +514,7 @@ Scenario: _053013 check the display of details on the form Bank payment with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -543,7 +543,7 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 	* Check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -714,7 +714,7 @@ Scenario: _053021 check amount when create BP based on PI (partner term - by par
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
 			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '390,00'       | ''                        | ''                 | ''                           |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 	And I close all client application windows
 	* Select one PI				
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -726,7 +726,7 @@ Scenario: _053021 check amount when create BP based on PI (partner term - by par
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
 			| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
+			| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 	And I close all client application windows	
 
 Scenario: _053022 create Bank payment with transaction type Other expense
@@ -804,3 +804,52 @@ Scenario: _053023 create Bank payment with transaction type Other partner
 			And "List" table contains lines
 				| 'Number'                        |
 				| '$NumberBankPayment053023$'     |
+
+Scenario: _053025 checking display Branch column depending on the transactin type in the BP
+		And I close all client application windows
+		* Open BP
+			Given I open hyperlink "e1cib/list/Document.BankPayment"
+			And I click the button named "FormCreate"	
+		* Payment to the vendor
+			And I select "Payment to the vendor" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |				
+		* Return to customer
+			And I select "Return to customer" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Retail customer advance
+			And I select "Retail customer advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Employee cash advance
+			And I select "Employee cash advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other partner
+			And I select "Other partner" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Currency exchange
+			And I select "Currency exchange" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Cash transfer order
+			And I select "Cash transfer order" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Return to customer by POS
+			And I select "Return to customer by POS" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |
+		* Payment by cheque
+			And I select "Payment by cheque" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other expense
+			And I select "Other expense" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Salary payment
+			And I select "Salary payment" exact value from "Transaction type" drop-down list			
+			And I activate field named "PaymentListBranch" in "PaymentList" table	

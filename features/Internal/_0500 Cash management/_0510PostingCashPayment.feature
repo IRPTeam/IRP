@@ -634,7 +634,7 @@ And I select "Payment to the vendor" exact value from "Transaction type" drop-do
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
@@ -659,7 +659,7 @@ And I select "Currency exchange" exact value from "Transaction type" drop-down l
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Currency exchange"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
@@ -682,7 +682,7 @@ And I select "Cash transfer order" exact value from "Transaction type" drop-down
 * Then I check the display on the form of available fields
 	And form attribute named "Company" is available
 	And form attribute named "CashAccount" is available
-	And form attribute named "Description" is available
+	And form attribute named "Comment" is available
 	Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 	And form attribute named "Currency" is available
 	And form attribute named "Date" is available
@@ -828,7 +828,7 @@ And I close all client application windows
 * Check amount (documents amount )
 	And "PaymentList" table became equal
 		| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '390,00'       | ''                        | ''                 | ''                           |
+		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 And I close all client application windows
 * Select one PI				
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -840,7 +840,7 @@ And I close all client application windows
 * Check amount (documents amount )
 	And "PaymentList" table became equal
 		| '#' | 'Partner' | 'Payee' | 'Partner term'                | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '190,00'       | ''                        | ''                 | ''                           |
+		| '1' | 'DFC'     | 'DFC'   | 'DFC Vendor by Partner terms' | ''                    | ''               | ''        | ''      | '670,00'       | ''                        | ''                 | ''                           |
 And I close all client application windows		
 
 Scenario: _050023 create Cash payment with transaction type Other partner
@@ -988,3 +988,4 @@ Scenario: _050026 create Cash payment based on PI (Partner term - TRY, document 
 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
 	And I close all client application windows				
+			| '$NumberCashPayment053023$'     |	

@@ -14,7 +14,6 @@
     <value>TM1030 Transactions key</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <defaultListForm>AccumulationRegister.TM1030B_TransactionsKey.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="7f559dbe-251c-4cd0-a6d3-490ee14d1a51">
@@ -31,13 +30,13 @@
     <fullTextSearch>Use</fullTextSearch>
   </resources>
   <dimensions uuid="0d5042db-39ec-49b3-a55e-636a08833f10">
-    <name>TransactionKey</name>
+    <name>DELETE_TransactionKey</name>
     <synonym>
       <key>en</key>
-      <value>Transaction key</value>
+      <value>DELETE transaction key</value>
     </synonym>
     <type>
-      <types>CatalogRef.TransactionsKeys</types>
+      <types>CatalogRef.DELETE_TransactionsKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -45,13 +44,159 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <forms uuid="e26360fb-1ab0-458b-81e1-24522208200e">
-    <name>ListForm</name>
+  <dimensions uuid="0bebdc34-c888-482b-8622-d689c73c6215">
+    <name>Company</name>
     <synonym>
       <key>en</key>
-      <value>List form</value>
+      <value>Company</value>
     </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="c5509d61-81a7-4361-82d6-e61ec2e64fa1">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="e7782d8f-3233-4c75-b897-d9042f76503a">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="f5b0419e-8814-4256-9286-cac3d989a293">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="73d0e2f2-2dde-4101-b6cf-1a74be3164d3">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="6ccc6f2b-a792-4cbc-bfde-cc5a7e342f42">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="7688cb5f-a19a-404c-a485-4c311772a7fe">
+    <name>TransactionBasis</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction basis</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeApArTransactionBasises</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="003f175c-a41b-4735-bab9-9a05d928e93f">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.PurchaseOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="b4c80a28-939e-4635-be1d-4d9bc6280ad6">
+    <name>Project</name>
+    <synonym>
+      <key>en</key>
+      <value>Project</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Projects</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="c67cadc5-91ec-4aad-90c3-9017e5a81bb8">
+    <name>IsVendorTransaction</name>
+    <synonym>
+      <key>en</key>
+      <value>Is vendor transaction</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="5df007ec-4cc7-4287-9a4f-64b493a2fe93">
+    <name>IsCustomerTransaction</name>
+    <synonym>
+      <key>en</key>
+      <value>Is customer transaction</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

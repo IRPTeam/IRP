@@ -543,7 +543,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Description</name>
+          <name>Comment</name>
           <id>327</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -551,10 +551,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+            <segments>Comment</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DescriptionExtendedTooltip</name>
+            <name>CommentExtendedTooltip</name>
             <id>329</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -569,7 +569,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DescriptionContextMenu</name>
+            <name>CommentContextMenu</name>
             <id>328</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2510,6 +2510,48 @@
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
           </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListIsClosedOrder</name>
+          <id>1235</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.IsClosedOrder</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListIsClosedOrderExtendedTooltip</name>
+            <id>1237</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListIsClosedOrderContextMenu</name>
+            <id>1236</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListSalesOrder</name>
@@ -8541,6 +8583,23 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>IsClosedOrder</name>
+        <title>
+          <key>en</key>
+          <value>Is closed order</value>
+        </title>
+        <id>178</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -8579,10 +8638,10 @@
     <savedData>true</savedData>
   </attributes>
   <attributes>
-    <name>Description</name>
+    <name>Comment</name>
     <title>
       <key>en</key>
-      <value>Description</value>
+      <value>Comment</value>
     </title>
     <id>7</id>
     <valueType>

@@ -23,6 +23,7 @@ Background:
 	
 Scenario:  _052001 preparation (Bank receipt)
 	When set True value to the constant
+	When set True value to the constant Use Salary
 	* Load info
 		When Create catalog ObjectStatuses objects
 		When Create catalog ItemKeys objects
@@ -534,7 +535,7 @@ Scenario: _052013 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -560,7 +561,7 @@ Scenario: _052014 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -584,7 +585,7 @@ Scenario: _052015 check the display of details on the form Bank receipt with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Cash transfer order"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available
@@ -1025,7 +1026,7 @@ Scenario: _052021 check amount when create BR based on SI (partner term - by par
 	* Check amount (documents amount )
 		And "PaymentList" table became equal
 			| '#' | 'Partner'         | 'Payer'           | 'Partner term'             | 'Legal name contract' | 'Basis document' | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '1 000,00'     | ''                        | ''                 | ''                           |
+			| '1' | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | ''                    | ''               | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
 	And I close all client application windows				
 
 Scenario: _052022 create Bank receipt with transaction type Other income
@@ -1233,3 +1234,51 @@ Scenario: _052026 create Bank receipt based on SI (Partner term - USD, document 
 // 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
 // 	
 // And I close all client application windows			
+Scenario: _052026 checking display Branch column depending on the transactin type in the BR
+		And I close all client application windows
+		* Open BR
+			Given I open hyperlink "e1cib/list/Document.BankReceipt"
+			And I click the button named "FormCreate"	
+		* Payment from customer
+			And I select "Payment from customer" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |				
+		* Return from vendor
+			And I select "Return from vendor" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Retail customer advance
+			And I select "Retail customer advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Employee cash advance
+			And I select "Employee cash advance" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other partner
+			And I select "Other partner" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Currency exchange
+			And I select "Currency exchange" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Cash transfer order
+			And I select "Cash transfer order" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Payment from customer by POS
+			And I select "Payment from customer by POS" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |
+		* Receipt by cheque
+			And I select "Receipt by cheque" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Other income
+			And I select "Other income" exact value from "Transaction type" drop-down list			
+			When I Check the steps for Exception
+				| 'And I activate field named "PaymentListBranch" in "PaymentList" table'    |		
+		* Salary return
+			And I select "Salary return" exact value from "Transaction type" drop-down list			
+			And I activate field named "PaymentListBranch" in "PaymentList" table	

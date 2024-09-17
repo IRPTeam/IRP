@@ -1338,9 +1338,33 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_146", NStr("en = 'Document in not posted.'", Lang));
 	Strings.insert("Error_147", Nstr("en = 'The document has manual entries and cannot be canceled.'", Lang));
 	Strings.Insert("Error_148", NStr("en = 'Debit\Credit note is available only when amounts are equal.'", Lang));
+
 	Strings.Insert("Error_149", NStr("en = 'Fill field'", Lang));
 	Strings.Insert("Error_150", NStr("en = 'Can not find file at data base'", Lang));
 	Strings.Insert("Error_151", NStr("en = 'Can not find file at storage service'", Lang));
+	Strings.Insert("Error_152", NStr("en = 'Cannot convert to UUID [%1]'", Lang));
+	Strings.Insert("Error_153", NStr("en = 'Debit is empty [%1] row-key[%2]'", Lang));
+	Strings.Insert("Error_154", NStr("en = 'Credit is empty [%1] row-key[%2]'", Lang));
+	
+	Strings.Insert("Error_155", NStr("en = 'Company is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_156", NStr("en = 'Currency is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_157", NStr("en = 'Account Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_158", NStr("en = 'Account Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_159", NStr("en = 'Currency Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_160", NStr("en = 'Currency Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_161", NStr("en = 'Ext. dimension 1 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_162", NStr("en = 'Ext. dimension 1 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_163", NStr("en = 'Ext. dimension 2 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_164", NStr("en = 'Ext. dimension 2 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_165", NStr("en = 'Ext. dimension 3 value Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_166", NStr("en = 'Ext. dimension 3 type Dr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_167", NStr("en = 'Ext. dimension 1 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_168", NStr("en = 'Ext. dimension 1 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_169", NStr("en = 'Ext. dimension 2 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_170", NStr("en = 'Ext. dimension 2 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_171", NStr("en = 'Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_172", NStr("en = 'Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
+	Strings.Insert("Error_173", NStr("en = 'Currency rate from [%1] to [%2] not set'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1517,6 +1541,8 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_028", NStr("en = 'Do you want to refund the client?'", Lang));
 	Strings.Insert("QuestionToUser_029", NStr("en = 'New document movements match the manual corrections, making the ""Manual Movements Edit"" checkbox unnecessary. Would you like to remove this checkbox?'", Lang));
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
+	Strings.Insert("QuestionToUser_031", NStr("en = 'Do you want to change tax rates according to the company?'",
+		Lang));
 #EndRegion
 
 #Region SuggestionToUser
@@ -1538,7 +1564,7 @@ Function Strings(Lang) Export
 	
 	// Interface
 	Strings.Insert("I_1", NStr("en = 'Enter description'", Lang));
-	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
+	Strings.Insert("I_2", NStr("en = 'Click to enter comment'", Lang));
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
@@ -1677,6 +1703,7 @@ Function Strings(Lang) Export
 	Strings.Insert("CP_004", NStr("en = 'Copied'", Lang));
 	Strings.Insert("CP_005", NStr("en = 'NOT copied'", Lang));
 	Strings.Insert("CP_006", NStr("en = 'Copied %1 rows'", Lang));
+	Strings.Insert("CP_007", NStr("en = 'Paste values from clipboard'", Lang));
 #EndRegion	
 	
 #Region LoadDataFromTable
@@ -2009,11 +2036,17 @@ Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransact
 Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R5021_Revenues",
 	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R5021_Revenues)'", Lang));
 
+Strings.Insert("BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en = 'BankReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)'", Lang));
+
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R3021B_CashInTransitIncoming_CashTransferOrder",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R3021B_CashInTransitIncoming) (Cash transfer)'", Lang));
 
 Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R5015B_OtherPartnersTransactions",
 	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R5015B_OtherPartnersTransactions)'", Lang));
+
+Strings.Insert("CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment",
+	NStr("en = 'CashReceipt DR (R3010B_CashOnHand) CR (R9510B_SalaryPayment)'", Lang));
 
 Strings.Insert("Payroll_DR_R5022T_Expenses_CR_R9510B_SalaryPayment_Accrual",
 	NStr("en = 'Payroll DR (R5022T_Expenses) CR (R9510B_SalaryPayment) (Accrual)'", Lang));
@@ -2098,6 +2131,9 @@ Strings.Insert("TaxesOperation_DR_R2040B_TaxesIncoming_CR_R5015B_OtherPartnersTr
 
 Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_TaxesOutgoing",
 	NStr("en = 'TaxesOperation DR (R5015B_OtherPartnersTransactions) CR (R1040B_TaxesOutgoing)'", Lang));
+
+Strings.Insert("ExternalAccountingOperation",
+	NStr("en = 'External accounting operation'", Lang));
 
 #EndRegion
 

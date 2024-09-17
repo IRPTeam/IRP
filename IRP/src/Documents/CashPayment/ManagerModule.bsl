@@ -381,6 +381,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
+		   |	PaymentList.Agreement,
 		   |	PaymentList.Currency,
 		   |	PaymentList.Amount
 		   |INTO R3027B_EmployeeCashAdvance
@@ -1011,7 +1012,7 @@ Function GetAnalytics_EmployeeCashAdvance(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder
@@ -1023,12 +1024,13 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If (Parameters.Operation = AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand
 		Or Parameters.Operation = AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand
-		Or Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder)
+		Or Parameters.Operation = AO.CashPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder
+		Or Parameters.Operation = AO.CashPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand)
 		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;

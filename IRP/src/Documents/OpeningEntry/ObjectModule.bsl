@@ -30,93 +30,97 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		EndDo;
 	EndDo;
 		
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+	If CurrenciesServer.NeedUpdateCurrenciesTable(ThisObject) Then
+		
+		CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+		
+		For Each Row In ThisObject.AccountBalance Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.FixedAssets Do
+			Parameters = CurrenciesClientServer.GetParameters_V11(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.CashInTransit Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;	
+		For Each Row In ThisObject.AdvanceFromCustomers Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AdvanceToSuppliers Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AccountReceivableByAgreements Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AccountReceivableByDocuments Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AccountReceivableOther Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;	
+		For Each Row In ThisObject.AccountPayableByAgreements Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AccountPayableByDocuments Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AccountPayableOther Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;	
+		For Each Row In ThisObject.ReceiptFromConsignor Do
+			Parameters = CurrenciesClientServer.GetParameters_V9(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.EmployeeCashAdvance Do
+			Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.AdvanceFromRetailCustomers Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.SalaryPayment Do
+			Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.TaxesIncoming Do
+			Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
+		For Each Row In ThisObject.TaxesOutgoing Do
+			Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
+			CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+			CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+		EndDo;
 	
-	For Each Row In ThisObject.AccountBalance Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.FixedAssets Do
-		Parameters = CurrenciesClientServer.GetParameters_V11(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.CashInTransit Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;	
-	For Each Row In ThisObject.AdvanceFromCustomers Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AdvanceToSuppliers Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AccountReceivableByAgreements Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AccountReceivableByDocuments Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AccountReceivableOther Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;	
-	For Each Row In ThisObject.AccountPayableByAgreements Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AccountPayableByDocuments Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AccountPayableOther Do
-		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;	
-	For Each Row In ThisObject.ReceiptFromConsignor Do
-		Parameters = CurrenciesClientServer.GetParameters_V9(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.EmployeeCashAdvance Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.AdvanceFromRetailCustomers Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.SalaryPayment Do
-		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.TaxesIncoming Do
-		Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
-	For Each Row In ThisObject.TaxesOutgoing Do
-		Parameters = CurrenciesClientServer.GetParameters_V2(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
-	EndDo;
+	EndIf;
 	
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);

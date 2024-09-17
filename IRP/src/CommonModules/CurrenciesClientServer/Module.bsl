@@ -110,9 +110,9 @@ Function GetParameters_V10(Object, Row) Export
 	Parameters.Insert("Company"        , Object.Company);
 	Parameters.Insert("Currency"       , Row.Currency);
 	If ValueIsFilled(Row.Invoice) Then
-		Parameters.Insert("Agreement"      , Row.Invoice.Agreement);
+		Parameters.Insert("Agreement" , Row.Invoice.Agreement);
 	Else
-		Parameters.Insert("Agreement"      , Undefined);
+		Parameters.Insert("Agreement" , Object.Agreement);
 	EndIf;
 	Parameters.Insert("RowKey"         , Row.Key);
 	Parameters.Insert("DocumentAmount" , Row.TotalAmount);
@@ -241,3 +241,13 @@ Procedure CalculateAmountByRow(CurrenciesRow, DocumentAmount) Export
 		CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
 	EndIf;
 EndProcedure
+
+Function GetLocalTotalAountsInfo() Export
+	Info = New Structure();
+	Info.Insert("TotalAmount", New Structure("Value, Name", 0, "LocalTotalAmount"));
+	Info.Insert("NetAmount"  , New Structure("Value, Name", 0, "LocalNetAmount"));
+	Info.Insert("TaxAmount"  , New Structure("Value, Name", 0, "LocalTaxAmount"));	
+	Info.Insert("LocalRate"  , New Structure("Value, Name", 0, "LocalRate"));	
+	Return Info;
+EndFunction
+

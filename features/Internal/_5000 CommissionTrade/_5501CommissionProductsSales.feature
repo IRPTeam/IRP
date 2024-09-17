@@ -1050,7 +1050,7 @@ Scenario: _050028 check Sales invoice generate for trade agent fee (based on Sal
 		Then the form attribute named "LegalName" became equal to "Consignor 1"
 		Then the form attribute named "Agreement" became equal to "Consignor partner term 1"
 		Then the form attribute named "LegalNameContract" became equal to ""
-		Then the form attribute named "Description" became equal to "Click to enter description"
+		Then the form attribute named "Comment" became equal to "Click to enter comment"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "TransactionType" became equal to "Sales"
 		Then the form attribute named "Store" became equal to "Store 02"

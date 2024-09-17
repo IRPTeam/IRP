@@ -15,7 +15,7 @@
     <externalConnectionModule>Extended</externalConnectionModule>
     <defaultLanguage>Checked</defaultLanguage>
     <interfaceCompatibilityMode>Checked</interfaceCompatibilityMode>
-    <compatibilityMode>Checked</compatibilityMode>
+    
     <defaultStyle>Extended</defaultStyle>
     <defaultRoles>Extended</defaultRoles>
   </extension>
@@ -28,13 +28,13 @@
   <containedObjects classId="fb282519-d103-4dd3-bc12-cb271d631dfc" objectId="2005f4da-b92a-4a0b-b0fe-481c769d1ad8"/>
   <keepMappingToExtendedConfigurationObjectsByIDs>true</keepMappingToExtendedConfigurationObjectsByIDs>
   <namePrefix>Unit_</namePrefix>
-  <configurationExtensionCompatibilityMode>8.3.21</configurationExtensionCompatibilityMode>
+  <configurationExtensionCompatibilityMode>8.3.24</configurationExtensionCompatibilityMode>
   <configurationExtensionPurpose>Customization</configurationExtensionPurpose>
   <defaultRunMode>ManagedApplication</defaultRunMode>
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.Unit_MainRole</defaultRoles>
   <defaultLanguage>Language.English</defaultLanguage>
-  <compatibilityMode>8.3.21</compatibilityMode>
+  
   <languages uuid="a12cbfb0-6dc3-4d28-97a9-113587c1e0c5">
     <name>English</name>
     <objectBelonging>Adopted</objectBelonging>
@@ -72,7 +72,7 @@
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
-  <commonAttributes>CommonAttribute.Description</commonAttributes>
+  <commonAttributes>CommonAttribute.Comment</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
   <commonAttributes>CommonAttribute.Description_ru</commonAttributes>

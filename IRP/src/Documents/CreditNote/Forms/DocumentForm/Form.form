@@ -365,7 +365,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Description</name>
+          <name>Comment</name>
           <id>144</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -373,10 +373,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+            <segments>Comment</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DescriptionExtendedTooltip</name>
+            <name>CommentExtendedTooltip</name>
             <id>146</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -391,7 +391,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DescriptionContextMenu</name>
+            <name>CommentContextMenu</name>
             <id>145</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -438,6 +438,93 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <showLeftMargin>true</showLeftMargin>
+          <united>true</united>
+          <throughAlign>Auto</throughAlign>
+          <currentRowUse>Auto</currentRowUse>
+        </extInfo>
+      </items>
+      <items xsi:type="form:FormGroup">
+        <name>GroupTitleRight</name>
+        <id>365</id>
+        <items xsi:type="form:FormField">
+          <name>Account</name>
+          <id>367</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Account</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>AccountExtendedTooltip</name>
+            <id>369</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>AccountContextMenu</name>
+            <id>368</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <title>
+          <key>en</key>
+          <value>Group title right</value>
+        </title>
+        <extendedTooltip>
+          <name>GroupTitleRightExtendedTooltip</name>
+          <id>366</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualGroup</type>
+        <extInfo xsi:type="form:UsualGroupExtInfo">
+          <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -2093,10 +2180,10 @@
     </additionalColumns>
   </attributes>
   <attributes>
-    <name>Description</name>
+    <name>Comment</name>
     <title>
       <key>en</key>
-      <value>Description</value>
+      <value>Comment</value>
     </title>
     <id>3</id>
     <valueType>

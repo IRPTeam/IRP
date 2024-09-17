@@ -425,7 +425,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>Description</name>
+          <name>Comment</name>
           <id>154</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -433,10 +433,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Description</segments>
+            <segments>Comment</segments>
           </dataPath>
           <extendedTooltip>
-            <name>DescriptionExtendedTooltip</name>
+            <name>CommentExtendedTooltip</name>
             <id>156</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -451,7 +451,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>DescriptionContextMenu</name>
+            <name>CommentContextMenu</name>
             <id>155</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1705,6 +1705,56 @@
           <contextMenu>
             <name>ItemListPurchaseInvoiceContextMenu</name>
             <id>453</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListSalesOrder</name>
+          <id>455</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.SalesOrder</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListSalesOrderExtendedTooltip</name>
+            <id>457</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListSalesOrderContextMenu</name>
+            <id>456</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -5315,10 +5365,10 @@
     </additionalColumns>
   </attributes>
   <attributes>
-    <name>Description</name>
+    <name>Comment</name>
     <title>
       <key>en</key>
-      <value>Description</value>
+      <value>Comment</value>
     </title>
     <id>5</id>
     <valueType>

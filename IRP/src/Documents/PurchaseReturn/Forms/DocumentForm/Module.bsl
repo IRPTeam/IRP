@@ -19,6 +19,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -615,6 +616,13 @@ Function PasteFromClipboardServer(CopySettings)
 	Return CopyPasteServer.PasteFromClipboard(Object, ThisObject, CopySettings);
 EndFunction
 
+//@skip-check module-unused-method
+&AtClient
+Async Procedure PasteFromClipboardValues(Command)
+	ClipBoardText = Await CopyPasteClient.TextFromClipBoard(ClipboardDataStandardFormat.Text);		
+	CopyPasteClient.RecalculateRowsByNewValues(Object, ThisObject, ClipBoardText);	
+EndProcedure
+
 #EndRegion
 
 #Region COMMANDS
@@ -636,7 +644,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenPickupItems(Command)
-	DocumentsClient.OpenPickupItems(Object, ThisObject, Command);
+	DocumentsClient.OpenPickupItems(Object, ThisObject);
 EndProcedure
 
 &AtClient

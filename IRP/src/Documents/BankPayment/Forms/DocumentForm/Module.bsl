@@ -18,6 +18,7 @@ EndProcedure
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrenciesServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
@@ -141,6 +142,7 @@ Function GetVisibleAttributesByTransactionType(TransactionType)
 		StrByType = "
 		|PaymentList.Partner,
 		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Agreement,
 		|PaymentList.BasisDocument";
 	ElsIf TransactionType = SalaryPayment Then
 		StrByType = "
@@ -209,6 +211,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.PaymentListChoiceByAccrual.Visible = IsSalaryPayment;
 	Form.Items.PaymentListPaymentByDocuments.Visible = IsPaymentToVendor;
+	
+	Form.Items.PaymentListBranch.Visible = IsSalaryPayment;
 EndProcedure
 
 &AtClient

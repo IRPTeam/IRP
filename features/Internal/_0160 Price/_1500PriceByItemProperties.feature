@@ -71,7 +71,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 		And I click the button named "FormCreate"
 	* Filling in price list
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -156,7 +156,7 @@ Scenario: _150001 basic price entry by properties (including VAT)
 	* Check document saving
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And "List" table contains lines
-		| 'Number'                                           | 'Price list type'      | 'Price type'         | 'Description'   |
+		| 'Number'                                           | 'Price list type'      | 'Price type'         | 'Comment'   |
 		| '$$NumberPriceListBasicPriceByProperties150001$$'  | 'Price by properties'  | 'Basic Price Types'  | 'Basic price'   |
 		And I close all client application windows
 	* Create Price key for Dress
@@ -181,7 +181,7 @@ Scenario: _150002 basic price entry by items (including VAT)
 	And I click the button named "FormCreate"
 	* Filling in price list by item
 		And I move to "Other" tab
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -347,7 +347,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order
@@ -480,7 +480,7 @@ Scenario: _1500041 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
@@ -532,7 +532,7 @@ Scenario: _1500042 check price calculation in the documents (price by item, unit
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
@@ -571,7 +571,7 @@ Scenario: _1500043 check the price calculation for the bandle (based on the prop
 	* Unpost Basic Price list by item key
 		Given I open hyperlink "e1cib/list/Document.PriceList"
 		And I go to line in "List" table
-		| 'Description'  | 'Number'                                        | 'Price list type'      |
+		| 'Comment'      | 'Number'                                        | 'Price list type'      |
 		| 'Basic price'  | '$$NumberPriceListBasicPriceByItemKey016001$$'  | 'Price by item keys'   |
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 	* Price calculation in the Sales order
@@ -896,7 +896,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I click the button named "FormCreate"
 	* Filling in the details of the price list by item
 		And I change "Set price" radio button value to "By Items"
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field
@@ -976,7 +976,7 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I click the button named "FormCreate"
 	* Filling in the details of the price list by properties
 		And I change "Set price" radio button value to "By properties"
-		And I click the hyperlink named "Description"
+		And I click the hyperlink named "Comment"
 		And I input "Basic price" text in the field named "Text"
 		And I click "OK" button
 		And I click Select button of "Price type" field

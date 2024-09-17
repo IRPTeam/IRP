@@ -3789,15 +3789,19 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Description'       |
 			| 'Second Company'    |
 		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		Then the form attribute named "TaxRates" became equal to "Yes"
+		And I click "OK" button					
 		And I wait that "PaymentList" table will not contain lines for 20 seconds
-		| 'VAT'  | 'Tax amount'   |
-		| '18%'  | '38,00'        |
+			| 'VAT'  | 'Tax amount'   |
+			| '18%'  | '38,00'        |
 	* Change the company to the one with taxes and check the form by currency
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
+		And I click "OK" button	
 		* Exchange rate change in the form by currency
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table contains lines
@@ -4052,15 +4056,19 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'Description'       |
 			| 'Second Company'    |
 		And I select current line in "List" table
+		Then "Update item list info" window is opened
+		Then the form attribute named "TaxRates" became equal to "Yes"
+		And I click "OK" button		
 		And I wait that "PaymentList" table will not contain lines for 20 seconds
-		| 'VAT'  | 'Tax amount'   |
-		| '18%'  | '38,00'        |
+			| 'VAT'  | 'Tax amount'   |
+			| '18%'  | '38,00'        |
 	* Check the manually tax rate correction
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Main Company'    |
 		And I select current line in "List" table
+		And I click "OK" button
 		And I activate "VAT" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
@@ -4949,7 +4957,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 	* Then I check the display on the form of available fields
 		And form attribute named "Company" is available
 		And form attribute named "Account" is available
-		And form attribute named "Description" is available
+		And form attribute named "Comment" is available
 		Then the form attribute named "TransactionType" became equal to "Currency exchange"
 		And form attribute named "Currency" is available
 		And form attribute named "Date" is available

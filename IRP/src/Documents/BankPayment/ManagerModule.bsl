@@ -233,7 +233,11 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.SalaryPayment) AS IsSalaryPayment,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.OtherExpense) AS IsOtherExpense,
 		|	PaymentList.RetailCustomer AS RetailCustomer,
-		|	PaymentList.Ref.Branch AS Branch,
+		|	CASE
+		|		WHEN PaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+		|			THEN PaymentList.Ref.Branch
+		|		ELSE PaymentList.Branch
+		|	END AS Branch,
 		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Order AS Order,
 		|	CASE
@@ -337,7 +341,11 @@ Function CashInTransit()
 		|	BankPaymentPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankPaymentPaymentList.Ref.Branch AS Branch
+		|	CASE
+		|		WHEN BankPaymentPaymentList.Branch = Value(Catalog.BusinessUnits.EmptyRef)
+		|			THEN BankPaymentPaymentList.Ref.Branch
+		|		ELSE BankPaymentPaymentList.Branch
+		|	END AS Branch
 		|INTO TablePaymentList
 		|FROM
 		|	Document.BankPayment.PaymentList AS BankPaymentPaymentList
@@ -434,6 +442,7 @@ Function R3027B_EmployeeCashAdvance()
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
+		   |	PaymentList.Agreement,
 		   |	PaymentList.Currency,
 		   |	PaymentList.TotalAmount AS Amount
 		   |INTO R3027B_EmployeeCashAdvance
@@ -1191,7 +1200,7 @@ Function GetAnalytics_EmployeeCashAdvance(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If (Parameters.Operation = AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder
@@ -1203,13 +1212,14 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	AO = Catalogs.AccountingOperations;
 	
 	If (Parameters.Operation = AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand
 		Or Parameters.Operation = AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand
 		Or Parameters.Operation = AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CashTransferOrder
-		Or Parameters.Operation = AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange)
+		Or Parameters.Operation = AO.BankPayment_DR_R3021B_CashInTransitIncoming_CR_R3010B_CashOnHand_CurrencyExchange
+		Or Parameters.Operation = AO.BankPayment_DR_R9510B_SalaryPayment_CR_R3010B_CashOnHand)
 		
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.ExpenseAndRevenueTypes")) <> Undefined Then
 		Return Parameters.RowData.FinancialMovementType;

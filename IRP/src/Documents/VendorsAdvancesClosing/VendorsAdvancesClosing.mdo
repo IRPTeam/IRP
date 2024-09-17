@@ -38,8 +38,8 @@
   <registerRecords>InformationRegister.T2013S_OffsetOfAging</registerRecords>
   <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
-  <registerRecords>InformationRegister.T2012S_AdvancesCurrencyRevaluation</registerRecords>
-  <registerRecords>InformationRegister.T2011S_TransactionsCurrencyRevaluation</registerRecords>
+  <registerRecords>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</registerRecords>
+  <registerRecords>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="28dec7af-9c7e-4bf4-83da-966d9918dc52">
@@ -103,10 +103,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="7310d2fd-fce1-42cd-95c4-0edf90ba661f">
-    <name>DontWriteNegativeDebtAsAdvance</name>
+    <name>DELETE_DontWriteNegativeDebtAsAdvance</name>
     <synonym>
       <key>en</key>
-      <value>Dont write negative debt as advance</value>
+      <value>DELETE dont write negative debt as advance</value>
     </synonym>
     <type>
       <types>Boolean</types>

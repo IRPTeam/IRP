@@ -161,7 +161,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
+	DocumentsServer.PurchasesBySerialLotNumbers(Parameters);
 
 	Calculate_BatchKeysInfo(Ref, Parameters, AddInfo);
 
@@ -479,7 +481,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
 
-	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+	CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo);
 
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
 		"Document.PurchaseInvoice.ItemList");
@@ -504,7 +506,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	EndIf;
 EndProcedure
 
-Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+Procedure CheckAfterWrite_CheckStockBalance(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseInvoice.ItemList", AddInfo);
 EndProcedure
 
@@ -540,6 +542,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
+	QueryArray.Add(PostingServer.Exists_R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -664,6 +667,7 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Price AS Price,
 	       |	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
 	       |	PurchaseInvoiceItemList.TotalAmount AS Amount,
+	       |	PurchaseInvoiceItemList.OffersAmount AS OffersAmount,
 	       |	PurchaseInvoiceItemList.Ref.Partner AS Partner,
 	       |	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
 	       |	CASE
@@ -905,12 +909,25 @@ EndFunction
 
 Function R1001T_Purchases()
 	Return "SELECT
-		   |	*
-		   |INTO R1001T_Purchases
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.IsPurchase";
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Invoice,
+		|	ItemList.ItemKey,
+		|	ItemList.RowKey,
+		|	PurchasesBySerialLotNumbers.SerialLotNumber,
+		|	PurchasesBySerialLotNumbers.Quantity,
+		|	PurchasesBySerialLotNumbers.Amount,
+		|	PurchasesBySerialLotNumbers.NetAmount,
+		|	PurchasesBySerialLotNumbers.OffersAmount
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|		LEFT JOIN PurchasesBySerialLotNumbers
+		|		ON ItemList.Key = PurchasesBySerialLotNumbers.Key
+		|WHERE
+		|	ItemList.IsPurchase";
 EndFunction
 
 Function R1005T_PurchaseSpecialOffers()
@@ -1110,7 +1127,23 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	FreeStocks AS FreeStocks
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 
 EndFunction
 
@@ -1126,7 +1159,24 @@ Function R4012B_StockReservation()
 		   |FROM
 		   |	IncomingStocksRequested
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.SalesOrder AS Order,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -1681,7 +1731,7 @@ Function GetAnalytics_VATOutgoing(Parameters)
 	Return AccountingAnalytics;
 EndFunction
 
-Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
@@ -1689,7 +1739,7 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value) Export
 	Return Value;
 EndFunction
 
-Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
 	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
 		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)

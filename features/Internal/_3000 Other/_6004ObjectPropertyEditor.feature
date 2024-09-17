@@ -458,7 +458,7 @@ Scenario: _604718 change agreement in the PO (ObjectPropertyEditor), Update rela
 Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced writing
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);"    |
-	And Delay 2
+	And Delay 15
 	And I close all client application windows
 	* Open Object property editor
 		Given I open hyperlink "e1cib/app/DataProcessor.ObjectPropertyEditor"			
@@ -484,6 +484,7 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
 		And I click the button named "Save"
+		And Delay 15
 		And "PropertiesTable" table contains lines
 			| 'Marked' | 'Is modified' | 'Currency' | 'Object'                                       | 'Partner term'                               | 'Legal name'        | 'Partner bank account'          | 'Company'      | 'Partner' | 'Price includes tax' | 'Status'   | 'Use items receipt scheduling' |
 			| 'No'     | 'No'          | 'TRY'      | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Posting by Standard Partner term (Veritas)' | 'Company Veritas '  | 'Partner bank account (Ferron)' | 'Main Company' | 'Veritas' | 'Yes'                | 'Approved' | 'Yes'                          |
@@ -501,9 +502,9 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 			| 'GR'             |
 		And I select current line in "List" table
 		And I finish line editing in "PropertiesTable" table
-		And Delay 4
+		And Delay 10
 		And I click the button named "Save"
-		And Delay 4
+		And Delay 10
 		If "PropertiesTable" table does not contain lines Then
 			| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 			| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |
@@ -522,9 +523,9 @@ Scenario: _604719 change Row ID info and partner (ObjectPropertyEditor), forced 
 				| 'GR'             |
 			And I select current line in "List" table
 			And I finish line editing in "PropertiesTable" table
-			And Delay 4
+			And Delay 10
 			And I click the button named "Save"
-			And Delay 4
+			And Delay 10
 			And "PropertiesTable" table contains lines
 				| 'Marked'   | 'Is modified'   | 'Object'                                         | '#'   | 'Key'                                    | 'Basis'   | 'Row ID'                                 | 'Next step'   | 'Quantity'   | 'Current step'   | 'Row ref'                                | 'Basis key'                               |
 				| 'No'       | 'No'            | 'Purchase order 115 dated 12.02.2021 12:44:43'   | '1'   | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | ''        | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | 'GR'          | '10'         | ''               | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce'   | '                                    '    |

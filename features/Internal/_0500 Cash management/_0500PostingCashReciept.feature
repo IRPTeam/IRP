@@ -966,40 +966,40 @@ Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document 
 			And I click "Save" button
 	And I close all client application windows
 
-// Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document USD)
-// 	And I close all client application windows
-// 	* Select SI
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '235'    |
-// 	* Create CR
-// 		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
-// 		And I click Select button of "Cash account" field
-// 		And I go to line in "List" table
-// 			| "Currency" | "Description"  |
-// 			| "TRY"      | "Cash desk №4" |
-// 		And I select current line in "List" table
-// 	* Check filling	
-// 		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		Then the form attribute named "Currency" became equal to "TRY"
-// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-// 		And I click "Save" button	
-// 		And "PaymentList" table became equal
-// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
-// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
-// 	* Reselect SI
-// 		And I select current line in "PaymentList" table
-// 		And I delete a line in "PaymentList" table
-// 		And in the table "PaymentList" I click "Payment by documents" button
-// 		And I go to line in "Documents" table
-// 			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
-// 			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
-// 		And I set "Check" checkbox in "Documents" table
-// 		And I click "Ok" button
-// 		And I click "Save" button
-// 		And "PaymentList" table became equal
-// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
-// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
-// 	And I close all client application windows				
+Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document USD)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '235'    |
+	* Create CR
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| "Currency" | "Description"  |
+			| "TRY"      | "Cash desk №4" |
+		And I select current line in "List" table
+	* Check filling	
+		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click "Save" button	
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	* Reselect SI
+		And I select current line in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And in the table "PaymentList" I click "Payment by documents" button
+		And I go to line in "Documents" table
+			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
+			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
+		And I set "Check" checkbox in "Documents" table
+		And I click "Ok" button
+		And I click "Save" button
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	And I close all client application windows				

@@ -168,4 +168,32 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="c48d9d00-697c-47a1-9bf1-fc579975fd49">
+    <name>ExpenseType</name>
+    <synonym>
+      <key>en</key>
+      <value>Expense type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="d8e07832-c510-43b0-a798-9852ac396a57">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

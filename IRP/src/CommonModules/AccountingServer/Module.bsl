@@ -295,6 +295,12 @@ Function GetOperationsDefinition()
 	// External accounting operation
 	Map.Insert(AO.ExternalAccountingOperation, New Structure("ByRow", True));
 	
+	// Additional cost allocation
+	Map.Insert(AO.AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses, New Structure("ByRow", True));
+	
+	// Additional revenue allocation
+	Map.Insert(AO.AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory, New Structure("ByRow", True));
+	
 	Return Map;
 EndFunction
 

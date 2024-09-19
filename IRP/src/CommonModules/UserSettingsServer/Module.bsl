@@ -100,6 +100,16 @@ Function AttachedFilesToDocumentsControl_AdditionalSettings_BranchFilter(val Use
 	Return Catalogs.BusinessUnits.EmptyRef();
 EndFunction
 
+Function AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(val User) Export
+	Value = GetUserSettings(User, New Structure("MetadataObject",
+		"Catalogs.AllCatalogs.AdditionalSettings.DontHelpToCreatePartnerDetails"));
+	If Value.Count() Then
+		Return Value[0].Value;
+	Else
+		Return False;	
+	EndIf;	
+EndFunction
+
 #EndRegion
 
 Function GetPredefinedUserSettingNames() Export

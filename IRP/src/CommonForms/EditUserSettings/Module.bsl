@@ -663,7 +663,6 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	RowOwner.Rows.Add(NewRow_PointOfSales);
 	
-	/////////////////////////
 	// Additional settings for Attached files to documents control
 	FullName = "DataProcessor.AttachedFilesToDocumentsControl.AdditionalSettings";
 		
@@ -809,6 +808,30 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	
 	RowOwner.Rows.Add(NewRow_Documents);
 	
+	//All Catalogs
+	FullName = "Catalogs.AllCatalogs.AdditionalSettings";
+	
+	NewRow_Catalogs = New Structure();
+	NewRow_Catalogs.Insert("FullName"     , FullName);
+	NewRow_Catalogs.Insert("Name"         , "Catalogs");
+	NewRow_Catalogs.Insert("Synonym"      , R().Add_Settings_018);
+	NewRow_Catalogs.Insert("PictureIndex" , 1);
+	NewRow_Catalogs.Insert("Rows"         , New Array());
+	
+	// DontHelpToCreatePartnerDetails
+	NewSetting = New Structure();
+	NewSetting.Insert("Name", "DontHelpToCreatePartnerDetails");
+	NewSetting.Insert("FullName", FullName + ".DontHelpToCreatePartnerDetails");
+	NewSetting.Insert("Synonym" , R().Add_Settings_019);
+	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
+	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
+	NewSetting.Insert("SettingID"      , New UUID());
+	NewSetting.Insert("PictureIndex"   , 12);
+	NewRow_Catalogs.Rows.Add(NewSetting);
+	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
+	
+	RowOwner.Rows.Add(NewRow_Catalogs);
+
 	Return True;
 EndFunction
 

@@ -8,7 +8,8 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	If ThisObject.FormOwner <> Undefined Then
+	If ThisObject.FormOwner <> Undefined And 
+		Not DontHelpToCreatePartnerDetails() Then
 		CompanyCreationQuestion(ThisObject.FormOwner.Object.Ref);
 	Endif;	
 EndProcedure
@@ -137,6 +138,11 @@ Function PartnerTypeMustHaveCompany(PartnerRef)
 			
 	EndIf;
 	Return PartnerTypeMustHaveCompany;
+EndFunction
+
+&AtServer
+Function DontHelpToCreatePartnerDetails()
+	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(SessionParameters.CurrentUser);
 EndFunction			
 
 #EndRegion

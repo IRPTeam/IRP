@@ -9,7 +9,8 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	If ThisObject.FormOwner <> Undefined Then
+	If ThisObject.FormOwner <> Undefined And
+		Not DontHelpToCreatePartnerDetails() Then
 		AgreementCreationQuestion(ThisObject.FormOwner.Object.Ref);
 	EndIf;	
 EndProcedure
@@ -113,7 +114,7 @@ Function GetDefaultCompany()
 	
 	SelectionDetailRecords = QueryResult.Select();
 	
-	Company = Undefined;
+	Company = Catalogs.Companies.EmptyRef();
 	If SelectionDetailRecords.Next() Then
 		Company =  SelectionDetailRecords.CompanyRef;
 	EndIf;
@@ -137,4 +138,10 @@ Function PartnerHasAgreements(PartnerRef)
 	EndIf;		
 	Return PartnerHasAgreements;
 EndFunction
+
+&AtServer
+Function DontHelpToCreatePartnerDetails()
+	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(SessionParameters.CurrentUser);
+EndFunction	
+
 #EndRegion

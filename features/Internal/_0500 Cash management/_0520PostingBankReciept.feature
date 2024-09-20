@@ -930,7 +930,8 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | ""        | ""                    | ""        |
 				| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | ""        | ""                    | ""        |
 				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | ""        | ""                    | ""        |
-				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""        | ""                    | ""        |				
+				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""        | ""                    | ""        |
+				| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29"| "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | ""        | ""                    | ""        |								
 	* Allocation check	(one partner)
 		And I input "10 000,00" text in the field named "Amount"
 		And I click the button named "Calculate"
@@ -939,24 +940,27 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 			| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | "3 000,00" | ""                    | ""        |
 			| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | "2 944,00" | ""                    | ""        |
 			| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | "4 056,00" | ""                    | ""        |
-			| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""         | ""                    | ""        |		
+			| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""         | ""                    | ""        |	
+			| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29"| "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | ""         | ""                    | ""        |	
 		* Amount more then invoice sum
-			And I input "45 000,00" text in the field named "Amount"
+			And I input "75 000,00" text in the field named "Amount"
 			And I click the button named "Calculate"
 			And "Documents" table became equal
-				| "Check" | "Document"                                   | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment"   | "Legal name contract" | "Project" |
-				| "No"    | ""                                           | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | "3 000,00"  | ""                    | ""        |
-				| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | "2 944,00"  | ""                    | ""        |
-				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | "12 400,00" | ""                    | ""        |
-				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | "20 000,00" | ""                    | ""        |			
+				| "Check" | "Document"                                    | "Partner"         | "Partner term"                  | "Legal name"       | "Order" | "Amount"    | "Payment"   | "Legal name contract" | "Project" |
+				| "No"    | ""                                            | "Partner Kalipso" | "Partner Kalipso Customer"      | "Company Kalipso"  | ""      | "3 000,00"  | "3 000,00"  | ""                    | ""        |
+				| "No"    | ""                                            | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | "2 944,00"  | ""                    | ""        |
+				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54"  | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | "12 400,00" | ""                    | ""        |
+				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01"  | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | "20 000,00" | ""                    | ""        |
+				| "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "19 268,56" | "19 268,56" | ""                    | ""        |
 			And I click "Ok" button
 			And I finish line editing in "PaymentList" table
 			And "PaymentList" table became equal
-				| "#" | "Partner"         | "Payer"            | "Partner term"                  | "Legal name contract" | "Basis document"                             | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
-				| "1" | "Partner Kalipso" | "Company Kalipso"  | "Partner Kalipso Customer"      | ""                    | ""                                           | ""        | ""      | "3 000,00"     | ""                        | ""                 | ""                           |
-				| "2" | "DFC"             | "DFC"              | "DFC Customer by Partner terms" | ""                    | ""                                           | ""        | ""      | "2 944,00"     | ""                        | ""                 | ""                           |
-				| "3" | "Lomaniti"        | "Company Lomaniti" | "Basic Partner terms, TRY"      | ""                    | "Sales invoice 14 dated 16.02.2021 12:14:54" | ""        | ""      | "12 400,00"    | ""                        | ""                 | ""                           |
-				| "4" | "Lomaniti"        | "Company Lomaniti" | "Basic Partner terms, TRY"      | ""                    | "Sales invoice 15 dated 12.04.2021 12:00:01" | ""        | ""      | "20 000,00"    | ""                        | ""                 | ""                           |			
+				| '#' | 'Partner'         | 'Payer'            | 'Partner term'                  | 'Legal name contract' | 'Basis document'                              | 'Project' | 'Order' | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| '1' | 'Partner Kalipso' | 'Company Kalipso'  | 'Partner Kalipso Customer'      | ''                    | ''                                            | ''        | ''      | '3 000,00'     | ''                        | ''                 | ''                           |
+				| '2' | 'DFC'             | 'DFC'              | 'DFC Customer by Partner terms' | ''                    | ''                                            | ''        | ''      | '2 944,00'     | ''                        | ''                 | ''                           |
+				| '3' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54'  | ''        | ''      | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '4' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01'  | ''        | ''      | '20 000,00'    | ''                        | ''                 | ''                           |
+				| '5' | 'Lomaniti'        | 'Company Lomaniti' | 'Basic Partner terms, TRY'      | ''                    | 'Sales invoice 235 dated 08.08.2024 11:04:29' | ''        | ''      | '19 268,56'    | ''                        | ''                 | ''                           |			
 			And in the table "PaymentList" I click "Payment by documents" button
 			Then the number of "Documents" table lines is "равно" "0"
 	* Allocation check	(two partners)
@@ -990,13 +994,14 @@ Scenario: _052020 check selection form (Payment by documents) in BR
 				| '$$SalesInvoice024008$$' | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Company Ferron BP' | ''                    | '$$SalesOrder023005$$' | ''        | '11 099,93' | '1 975,50' |
 			And I click "Ok" button
 			And "PaymentList" table became equal
-				| '#' | 'Partner'         | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                             | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
-				| "1" | "Partner Kalipso" | "Company Kalipso"   | "Partner Kalipso Customer"         | ""                    | ""                                           | ""        | ""                     | "3 000,00"     | ""                        | ""                 | ""                           |
-				| "2" | "DFC"             | "DFC"               | "DFC Customer by Partner terms"    | ""                    | ""                                           | ""        | ""                     | "2 944,00"     | ""                        | ""                 | ""                           |
-				| '3' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54' | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
-				| '4' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01' | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
-				| '5' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                     | ''        | '$$SalesOrder023001$$' | '3 024,50'     | ''                        | ''                 | ''                           |
-				| '6' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                     | ''        | '$$SalesOrder023005$$' | '1 975,50'     | ''                        | ''                 | ''                           |
+				| '#' | 'Partner'         | 'Payer'             | 'Partner term'                     | 'Legal name contract' | 'Basis document'                              | 'Project' | 'Order'                | 'Total amount' | 'Financial movement type' | 'Cash flow center' | 'Planning transaction basis' |
+				| "1" | "Partner Kalipso" | "Company Kalipso"   | "Partner Kalipso Customer"         | ""                    | ""                                            | ""        | ""                     | "3 000,00"     | ""                        | ""                 | ""                           |
+				| "2" | "DFC"             | "DFC"               | "DFC Customer by Partner terms"    | ""                    | ""                                            | ""        | ""                     | "2 944,00"     | ""                        | ""                 | ""                           |
+				| '3' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 14 dated 16.02.2021 12:14:54'  | ''        | ''                     | '12 400,00'    | ''                        | ''                 | ''                           |
+				| '4' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 15 dated 12.04.2021 12:00:01'  | ''        | ''                     | '20 000,00'    | ''                        | ''                 | ''                           |
+				| '5' | 'Lomaniti'        | 'Company Lomaniti'  | 'Basic Partner terms, TRY'         | ''                    | 'Sales invoice 235 dated 08.08.2024 11:04:29' | ''        | ''                     | '19 268,56'    | ''                        | ''                 | ''                           |
+				| '6' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, TRY'         | ''                    | '$$SalesInvoice024001$$'                      | ''        | '$$SalesOrder023001$$' | '3 024,50'     | ''                        | ''                 | ''                           |
+				| '7' | 'Ferron BP'       | 'Company Ferron BP' | 'Basic Partner terms, without VAT' | ''                    | '$$SalesInvoice024008$$'                      | ''        | '$$SalesOrder023005$$' | '1 975,50'     | ''                        | ''                 | ''                           |
 		And I close all client application windows				
 				
 	
@@ -1196,45 +1201,46 @@ Scenario: _052026 create Bank receipt based on SI (Partner term - USD, document 
 			And I click "Post" button			
 	And I close all client application windows
 
-// Scenario: _050027 create Bank receipt based on SI (Partner term - TRY, document USD)
-// 	And I close all client application windows
-// 	* Select SI
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number' |
-// 			| '235'    |
-// 	* Create CR
-// 		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
-// 		And I click Select button of "Account" field
-// 		And I go to line in "List" table
-// 			| "Currency" | "Description"       |
-// 			| "TRY"      | "Bank account, TRY" |
-// 		And I select current line in "List" table
-// 	* Check filling	
-// 		Then the form attribute named "Account" became equal to "Cash desk №4"
-// 		Then the form attribute named "Company" became equal to "Main Company"
-// 		Then the form attribute named "Currency" became equal to "TRY"
-// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
-// 		And I click "Save" button	
-// 		And "PaymentList" table became equal
-// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
-// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
-// 	* Reselect SI
-// 		And I select current line in "PaymentList" table
-// 		And I delete a line in "PaymentList" table
-// 		And in the table "PaymentList" I click "Payment by documents" button
-// 		And I go to line in "Documents" table
-// 			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
-// 			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
-// 		And I set "Check" checkbox in "Documents" table
-// 		And I click "Ok" button
-// 		And I click "Save" button
-// 		And "PaymentList" table became equal
-// 			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
-// 			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
-// 	
-// And I close all client application windows			
-Scenario: _052026 checking display Branch column depending on the transactin type in the BR
+
+Scenario: _050027 create Bank receipt based on SI (Partner term - TRY, document USD)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '235'    |
+	* Create CR
+		And I click the button named "FormDocumentBankReceiptGenerateBankReceipt"
+		And I click Select button of "Account" field
+		And I go to line in "List" table
+			| "Currency" | "Description"       |
+			| "TRY"      | "Bank account, TRY" |
+		And I select current line in "List" table
+	* Check filling	
+		Then the form attribute named "Account" became equal to "Bank account, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click "Save" button	
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	* Reselect SI
+		And I select current line in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And in the table "PaymentList" I click "Payment by documents" button
+		And I go to line in "Documents" table
+			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
+			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
+		And I set "Check" checkbox in "Documents" table
+		And I click "Ok" button
+		And I click "Save" button
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	And I close all client application windows			
+
+Scenario: _052028 checking display Branch column depending on the transactin type in the BR
 		And I close all client application windows
 		* Open BR
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"

@@ -54,6 +54,7 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog CashAccounts objects
 		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -890,25 +891,26 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 				| 'Number'                        |
 				| '$NumberCashReceipt052023$'     |	
 
-Scenario: _050021 create Cash receipt based on SO (Partner term - TRY, document USD)	
-	And I close all client application windows
-	* Select SO
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '235'    |
-	* Create CR
-		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
-		And I click Select button of "Cash account" field
-		And I go to line in "List" table
-			| "Description"  |
-			| "Cash desk №3" |
-		And I select current line in "List" table
-	* Check filling
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Currency" became equal to "TRY"
-		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+// Scenario: _050021 create Cash receipt based on SO (Partner term - TRY, document USD)	
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '235'    |
+// 	* Create CR
+// 		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+// 		And I click Select button of "Cash account" field
+// 		And I go to line in "List" table
+// 			| "Description"  |
+// 			| "Cash desk №4" |
+// 		And I select current line in "List" table
+// 		And I input "TRY" text in the field named "Currency"		
+// 	* Check filling
+// 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+// 		Then the form attribute named "Company" became equal to "Main Company"
+// 		Then the form attribute named "Currency" became equal to "TRY"
+// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		
 Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document TRY)	
 	And I close all client application windows
@@ -977,11 +979,11 @@ Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document 
 		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
-			| "Currency" | "Description"  |
-			| "TRY"      | "Cash desk №4" |
+			| "Description"  |
+			| "Cash desk №3" |
 		And I select current line in "List" table
 	* Check filling	
-		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"

@@ -126,11 +126,17 @@ Procedure Upload(StructureParams)
 	Structure.Insert("MaxSize", StructureParams.MaxSize);
 	Structure.Insert("Storage", StructureParams.Storage);
 	
-	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
-	OpenFileDialog.MultipleChoice = False;
-	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	// OLD Version
+	// OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
+	// OpenFileDialog.MultipleChoice = False;
+	// OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	// 
+	// BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
 	
-	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
+	FilesClient.StartFileLoading(
+		PictureViewerClientServer.FilterForPicturesDialog(), 
+		New CallbackDescription("Upload_END", ThisObject, Structure), 
+		StructureParams.UUID);
 	
 EndProcedure
 

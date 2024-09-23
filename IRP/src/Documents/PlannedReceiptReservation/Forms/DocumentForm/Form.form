@@ -3166,6 +3166,10 @@
       <value>Add basis documents</value>
     </title>
     <id>4</id>
+    <toolTip>
+      <key>en</key>
+      <value>Add rows from linked documents</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

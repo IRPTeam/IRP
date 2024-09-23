@@ -7956,6 +7956,10 @@
       <value>Add basis documents</value>
     </title>
     <id>12</id>
+    <toolTip>
+      <key>en</key>
+      <value>Add rows from linked documents</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

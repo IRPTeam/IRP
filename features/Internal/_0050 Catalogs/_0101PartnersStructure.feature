@@ -288,10 +288,6 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 				Then "1C:Enterprise" window is opened
 				And I click "Yes" button
 		* Check partner term
-			And "List" table became equal
-				| 'Description'     |
-				| 'Test partner 11' |
-			And I click "Yes" button
 			And form attributes have values:
 				| 'Name'                            | 'Value'                   | 'HowToSearch' |
 				| 'ApArPostingDetail'               | "By agreements"           | ''            |
@@ -299,7 +295,6 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 				| 'LegalName'                       | "Test partner 11"         | ''            |
 				| 'Partner'                         | "Test partner 11"         | ''            |
 				| 'PriceType'                       | "en description is empty" | ''            |
-			And I close "Partner term (create) *" window
 			Then "1C:Enterprise" window is opened
 			And I click "No" button
 			And In this window I click command interface button "Company"

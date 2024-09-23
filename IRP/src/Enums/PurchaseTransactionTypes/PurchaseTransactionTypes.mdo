@@ -26,4 +26,18 @@
       <value>Receipt from consignor</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="00219312-ff8b-4ec4-b42b-02fdf2df92dd">
+    <name>CurrencyRevaluationCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation customer</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="5291daaa-90f6-4aaf-9fab-c929c1787749">
+    <name>CurrencyRevaluationVendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation vendor</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

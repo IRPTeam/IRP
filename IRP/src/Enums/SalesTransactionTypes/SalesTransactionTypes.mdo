@@ -33,4 +33,18 @@
       <value>Retail sales</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="9c13a8d0-a355-4fe0-9618-d7690dbe2760">
+    <name>CurrencyRevaluationCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation customer</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="dac34fb0-e697-40c8-a7ea-54d62d301f66">
+    <name>CurrencyRevaluationVendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation vendor</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

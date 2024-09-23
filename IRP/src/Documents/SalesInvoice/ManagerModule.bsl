@@ -181,6 +181,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+	
+	If Ref.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationCustomer 
+		Or Ref.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationVendor Then
+		CurrenciesServer.CurrencyRevaluationInvoice(Ref, Parameters, "R2021B_CustomersTransactions", AddInfo);
+	EndIf;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -409,7 +414,10 @@ Function ItemList()
 	       |	SalesInvoiceItemList.PriceType AS PriceType,
 	       |	SalesInvoiceItemList.Price AS Price,
 	       |	SalesInvoiceItemList.SalesPerson AS SalesPerson,
-	       |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales) AS IsSales,
+	       |(SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.Sales)
+	       |	OR SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationCustomer)
+	       |	OR SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.CurrencyRevaluationVendor)) AS IsSales,
+	       |
 	       |	SalesInvoiceItemList.Ref.TransactionType = VALUE(Enum.SalesTransactionTypes.ShipmentToTradeAgent) AS IsShipmentToTradeAgent,
 	       |	SalesInvoiceItemList.Ref.Company.TradeAgentStore AS TradeAgentStore,
 	       |	SalesInvoiceItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.OwnStocks) AS IsOwnStocks,
@@ -418,7 +426,12 @@ Function ItemList()
 	       |	SalesInvoiceItemList.VatRate AS VatRate,
 	       |	SalesInvoiceItemList.TaxAmount AS TaxAmount,
 	       |	SalesInvoiceItemList.Project AS Project,
-	       |	SalesInvoiceItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType
+	       |	SalesInvoiceItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
+	       |
+	       |	case when SalesInvoiceItemList.ItemKey = SalesInvoiceItemList.Ref.Company.CurrencyRevaluationItemKey 
+	       |				then true else false end AS IsCurrencyRevaluation,
+	       |	ISNULL(SalesInvoiceItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice
+	       |
 	       |INTO ItemList
 	       |FROM
 	       |	Document.SalesInvoice.ItemList AS SalesInvoiceItemList

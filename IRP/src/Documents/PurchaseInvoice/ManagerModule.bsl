@@ -186,8 +186,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	PostingServer.SetRegisters(Tables, Ref);
 
 	Tables.R8015T_ConsignorPrices.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+	
+	If Ref.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer 
+		Or Ref.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor Then
+		CurrenciesServer.CurrencyRevaluationInvoice(Ref, Parameters, "R1021B_VendorsTransactions", AddInfo);
+	EndIf;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -526,6 +530,11 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure;
 	StrParams.Insert("Ref", Ref);
 	StrParams.Insert("Vat", TaxesServer.GetVatRef());
+	If ValueIsFilled(Ref) Then
+		StrParams.Insert("BalancePeriod", New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Else
+		StrParams.Insert("BalancePeriod", Undefined);
+	EndIf;
 	Return StrParams;
 EndFunction
 
@@ -698,11 +707,18 @@ Function ItemList()
 	       |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 	       |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
 	       |	PurchaseInvoiceItemList.Ref.RecordPurchasePrices AS RecordPurchasePrices,
-	       |	PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.Purchase) AS IsPurchase,
+	       |
+	       |	(PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.Purchase) 
+	       |	OR PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer)
+	       |	OR PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor)) AS IsPurchase,
+	       |
 	       |	PurchaseInvoiceItemList.Ref.TransactionType = VALUE(Enum.PurchaseTransactionTypes.ReceiptFromConsignor) AS IsReceiptFromConsignor,
 	       |	PurchaseInvoiceItemList.VatRate AS VatRate,
 	       |	PurchaseInvoiceItemList.Project AS Project,
-	       |	PurchaseInvoiceItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType
+	       |	PurchaseInvoiceItemList.OtherPeriodExpenseType AS OtherPeriodExpenseType,
+	       |	case when PurchaseInvoiceItemList.ItemKey = PurchaseInvoiceItemList.Ref.Company.CurrencyRevaluationItemKey 
+	       |				then true else false end AS IsCurrencyRevaluation,
+	       |	ISNULL(PurchaseInvoiceItemList.Ref.CurrencyRevaluationInvoice.Ref, Undefined) AS CurrencyRevaluationInvoice
 	       |INTO ItemList
 	       |FROM
 	       |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

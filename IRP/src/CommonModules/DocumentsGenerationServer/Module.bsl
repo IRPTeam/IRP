@@ -806,3 +806,100 @@ Function CreateDocumentAmountTable() Export
 EndFunction
 
 #EndRegion
+
+#Region CurrencyRevaluationInvoce
+
+Function GetCurrencyRevaluationInvoiceInfo(InvoiceRef, TransactionRegisterName) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	Reg.Company,
+	|	Reg.Branch,
+	|	Reg.Currency,
+	|	Reg.LegalName,
+	|	Reg.Partner,
+	|	Reg.Agreement,
+	|	Reg.Basis AS CurrencyRevaluationInvoice,
+	|	Reg.AmountBalance
+	|FROM
+	|	AccumulationRegister.%1.Balance(Undefined,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Company = &Company
+	|	AND Branch = &Branch
+	|	AND Partner = &Partner
+	|	AND Agreement = &Agreement
+	|	AND LegalName = &LegalName
+	|	AND CASE
+	|		WHEN Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN Basis = &Invoice
+	|		ELSE TRUE
+	|	END) AS Reg";
+	
+	Query.Text = StrTemplate(Query.Text, TransactionRegisterName);
+	
+	Query.SetParameter("Invoice"   , InvoiceRef);
+	Query.SetParameter("Company"   , InvoiceRef.Company);
+	Query.SetParameter("Branch"    , InvoiceRef.Branch);
+	Query.SetParameter("Partner"   , InvoiceRef.Partner);
+	Query.SetParameter("Agreement" , InvoiceRef.Agreement);
+	Query.SetParameter("LegalName" , InvoiceRef.LegalName);
+	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	FillingValues = New Structure("BasedOn, TransactionType, CurrencyRevaluationInvoice, 
+		|Company, Branch, Currency, Partner, Agreement, LegalName");
+	
+	FillingValues.BasedOn = "CurrencyRevaluationInvoice";
+	
+	InvoiceInfo = New Structure("DocumentName, FillingValues");
+	InvoiceInfo.FillingValues = FillingValues;
+	
+	IsCustomer = (TypeOf(InvoiceRef) = Type("DocumentRef.SalesInvoice"));
+	IsVendor = (TypeOf(InvoiceRef) = Type("DocumentRef.PurchaseInvoice"));
+	
+	If QuerySelection.Next() Then
+		FillPropertyValues(FillingValues, QuerySelection);
+		
+		FillingValues.Insert("ItemList", New Array());
+		
+		ItemListRow = New Structure();
+		ItemListRow.Insert("Item"        , InvoiceRef.Company.CurrencyRevaluationItem);
+		ItemListRow.Insert("ItemKey"     , InvoiceRef.Company.CurrencyRevaluationItemKey);
+		ItemListRow.Insert("TotalAmount" , QuerySelection.AmountBalance);
+		ItemListRow.Insert("Quantity"    , 1);
+		
+		FillingValues.ItemList.Add(ItemListRow);
+		
+		If IsCustomer Then
+
+			If QuerySelection.AmountBalance > 0 Then
+				InvoiceInfo.DocumentName = Metadata.Documents.SalesInvoice.Name;
+				FillingValues.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationCustomer;		
+			ElsIf QuerySelection.AmountBalance < 0 Then
+				ItemListRow.TotalAmount = - ItemListRow.TotalAmount;
+				InvoiceInfo.DocumentName = Metadata.Documents.PurchaseInvoice.Name;
+				FillingValues.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer;
+			EndIf;
+		
+		ElsIf IsVendor Then
+
+			If QuerySelection.AmountBalance < 0 Then
+				ItemListRow.TotalAmount = - ItemListRow.TotalAmount;
+				InvoiceInfo.DocumentName = Metadata.Documents.SalesInvoice.Name;
+				FillingValues.TransactionType = Enums.SalesTransactionTypes.CurrencyRevaluationCustomer;		
+			ElsIf QuerySelection.AmountBalance > 0 Then
+				InvoiceInfo.DocumentName = Metadata.Documents.PurchaseInvoice.Name;
+				FillingValues.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer;
+			EndIf;
+			 
+		Else
+			Raise StrTemplate("Not suported invoice type [%1]", InvoiceRef);
+		EndIf;
+		
+	EndIf;
+	
+	Return InvoiceInfo;
+EndFunction
+
+#EndRegion

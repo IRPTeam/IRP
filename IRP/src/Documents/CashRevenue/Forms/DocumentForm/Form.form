@@ -2741,7 +2741,11 @@
       <value>Edit currencies</value>
     </title>
     <id>2</id>
-    <use>
+    <toolTip>
+      <key>en</key>
+      <value>Edit exchange rates for document</value>
+    </toolTip>
+    use>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">

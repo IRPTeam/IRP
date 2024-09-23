@@ -6778,6 +6778,10 @@
       <value>Edit currencies</value>
     </title>
     <id>8</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit exchange rates for document</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

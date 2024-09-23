@@ -6897,6 +6897,10 @@
       <value>Edit accounting</value>
     </title>
     <id>14</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit accounting entries</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

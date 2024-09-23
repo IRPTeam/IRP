@@ -3052,6 +3052,10 @@
       <value>Edit accounting</value>
     </title>
     <id>21</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit accounting entries</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

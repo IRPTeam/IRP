@@ -8417,6 +8417,10 @@
       <value>Edit accounting</value>
     </title>
     <id>15</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit accounting entries</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

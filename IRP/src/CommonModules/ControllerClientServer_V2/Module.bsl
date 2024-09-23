@@ -1096,7 +1096,7 @@ Function BindCommandRecalculateByTotalAmount(Parameters)
 	Binding.Insert("SalesInvoice", "StepItemListCalculations_IsTotalAmountChanged");
 	Binding.Insert("PurchaseInvoice", "StepItemListCalculations_IsTotalAmountChanged");
 	
-	Return BindSteps("StepChangeCurrentQuantityInProductions", "", Binding, Parameters, "BindCommandRecalculateByTotalAmount");
+	Return BindSteps("BindVoid", "", Binding, Parameters, "BindCommandRecalculateByTotalAmount");
 EndFunction
 
 #EndRegion

@@ -9153,6 +9153,10 @@
       <value>Link unlink basis documents</value>
     </title>
     <id>12</id>
+    <toolTip>
+      <key>en</key>
+      <value>Link/Unlink document rows</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

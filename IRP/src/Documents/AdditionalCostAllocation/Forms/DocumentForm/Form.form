@@ -3884,6 +3884,7 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
+        <readOnly>true</readOnly>
         <changeRowSet>true</changeRowSet>
         <changeRowOrder>true</changeRowOrder>
         <autoMaxWidth>true</autoMaxWidth>

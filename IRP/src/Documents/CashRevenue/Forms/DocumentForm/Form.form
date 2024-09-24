@@ -2745,7 +2745,7 @@
       <key>en</key>
       <value>Edit exchange rates for document</value>
     </toolTip>
-    use>
+    <use>
       <common>true</common>
     </use>
     <picture xsi:type="core:PictureRef">

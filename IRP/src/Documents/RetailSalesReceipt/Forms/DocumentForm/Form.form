@@ -9016,6 +9016,10 @@
       <value>Open scan form</value>
     </title>
     <id>6</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan form</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

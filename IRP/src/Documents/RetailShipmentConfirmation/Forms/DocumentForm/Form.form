@@ -5373,6 +5373,10 @@
       <value>Edit quantity in base unit</value>
     </title>
     <id>8</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit quantity in base unit</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

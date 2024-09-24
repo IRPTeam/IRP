@@ -2630,7 +2630,7 @@
       <value>Edit currencies</value>
     </title>
     <id>2</id>
-     toolTip>
+    <toolTip>
       <key>en</key>
       <value>Edit exchange rates for document</value>
     </toolTip>

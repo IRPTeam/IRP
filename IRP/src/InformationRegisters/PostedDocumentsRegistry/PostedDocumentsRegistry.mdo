@@ -130,24 +130,6 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="4e8979ff-bb3f-40cb-bf9f-a71fa5080bfd">
-    <name>DocumentName</name>
-    <synonym>
-      <key>en</key>
-      <value>Document name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>75</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
   <dimensions uuid="f0e583ea-06fe-4d86-9a19-03665c79d917">
     <name>Document</name>
     <synonym>

@@ -54,20 +54,3 @@ Procedure SetListParameters()
 	ThisObject.List.Parameters.SetParameterValue("Filter_EndDate"       , ValueIsFilled(ThisObject.Period.EndDate));
 	ThisObject.List.Parameters.SetParameterValue("EndDate"              , ThisObject.Period.EndDate);
 EndProcedure
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

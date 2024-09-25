@@ -8,6 +8,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|	R6070T_OtherPeriodsExpenses.RowID,
 	|	R6070T_OtherPeriodsExpenses.ItemKey,
 	|	R6070T_OtherPeriodsExpenses.Currency,
+	|	R6070T_OtherPeriodsExpenses.ExpenseType,
+	|	R6070T_OtherPeriodsExpenses.ProfitLossCenter,
 	|	R6070T_OtherPeriodsExpenses.AmountBalance AS Amount,
 	|	R6070T_OtherPeriodsExpenses.AmountTaxBalance AS TaxAmount
 	|FROM
@@ -82,6 +84,8 @@ Procedure Ok(Command)
 			SelectedRow.Insert("RowID"     , Row_SecondLevel.RowID);
 			SelectedRow.Insert("Basis"     , Row_TopLevel.Document);
 			SelectedRow.Insert("ItemKey"   , Row_SecondLevel.ItemKey);
+			SelectedRow.Insert("ExpenseType"      , Row_SecondLevel.ExpenseType);
+			SelectedRow.Insert("ProfitLossCenter" , Row_SecondLevel.ProfitLossCenter);
 			SelectedRow.Insert("Currency"  , Row_SecondLevel.Currency);
 			SelectedRow.Insert("Amount"    , Row_SecondLevel.Amount);
 			SelectedRow.Insert("TaxAmount" , Row_SecondLevel.TaxAmount);

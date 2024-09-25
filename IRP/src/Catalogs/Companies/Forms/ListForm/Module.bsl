@@ -58,19 +58,28 @@ EndProcedure
 // Company creation question.
 // 
 // Parameters:
-//  FormOwnerRef - CatalogRef.Partners
+//  PartnerRef - CatalogRef.Partners
 &AtClient
-Procedure CompanyCreationQuestion(FormOwnerRef)
-	If ValueIsFilled(FormOwnerRef) And
-	 TypeOf(FormOwnerRef) = Type("CatalogRef.Partners") And
-	 Not PartnerHasCompanies(FormOwnerRef) And
-	 PartnerTypeMustHaveCompany(FormOwnerRef) Then
-	  	TextQuestion = R().QuestionToUser_032;
-		AdditionalParameters = New Structure;
-		AdditionalParameters.Insert("Partner", FormOwnerRef);
-		CallbackDescription = New CallbackDescription("CompanyCreationQuestionAfter", ThisObject, AdditionalParameters);
-   		ShowQueryBox(CallbackDescription, TextQuestion, QuestionDialogMode.YesNo);
-	EndIf;		
+Procedure CompanyCreationQuestion(PartnerRef)
+	
+	AskQuestion = False;
+	If ValueIsFilled(PartnerRef) And
+	 TypeOf(PartnerRef) = Type("CatalogRef.Partners") And
+	 Not PartnerHasCompanies(PartnerRef) And
+	 PartnerTypeMustHaveCompany(PartnerRef) Then
+	 	AskQuestion = True;
+	EndIf; 	
+  	
+  	If Not AskQuestion Then
+  		Return;
+  	EndIf;	
+  	
+  	TextQuestion = R().QuestionToUser_032;
+	AdditionalParameters = New Structure;
+	AdditionalParameters.Insert("Partner", PartnerRef);
+	CallbackDescription = New CallbackDescription("CompanyCreationQuestionAfter", ThisObject, AdditionalParameters);
+	ShowQueryBox(CallbackDescription, TextQuestion, QuestionDialogMode.YesNo);
+			
 EndProcedure
 
 // Company creation question after.
@@ -80,10 +89,13 @@ EndProcedure
 //  AdditionalParameters - Structure
 &AtClient
 Procedure CompanyCreationQuestionAfter(QuestionResult, AdditionalParameters) Export
-	If QuestionResult = DialogReturnCode.Yes Then
-		CreateCompanyForPartner(AdditionalParameters.Partner);
-		Items.List.Refresh();			 
-	EndIf;		
+	If QuestionResult <> DialogReturnCode.Yes Then
+		Return;
+	EndIf;	
+		
+	CreateCompanyForPartner(AdditionalParameters.Partner);
+	Items.List.Refresh();			 
+		
 EndProcedure
 
 // Create company for partner.
@@ -95,7 +107,7 @@ Procedure CreateCompanyForPartner(PartnerRef)
 	AttributesStructure = CommonFunctionsServer.GetAttributesFromRef(PartnerRef, "Description_en, Description_ru, Description_tr, TaxID"); 
 	CompanyObject = Catalogs.Companies.CreateItem();
 	FillPropertyValues(CompanyObject, AttributesStructure);
-	CompanyObject.Type = PredefinedValue("Enum.CompanyLegalType.Company");
+	CompanyObject.Type = Enums.CompanyLegalType.Company;
 	CompanyObject.Partner = PartnerRef;
 	CompanyObject.Write();
 EndProcedure
@@ -111,7 +123,7 @@ EndProcedure
 Function PartnerHasCompanies(PartnerRef)
 	CompaniesArray = Catalogs.Partners.GetCompaniesForPartner(PartnerRef);	
 	PartnerHasCompanies = False;
-	If CompaniesArray.Count() Then
+	If CompaniesArray.Count() > 0 Then
 		PartnerHasCompanies = True;
 	EndIf;	 
 	Return PartnerHasCompanies;	

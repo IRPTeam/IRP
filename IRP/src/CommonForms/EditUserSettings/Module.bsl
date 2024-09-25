@@ -826,7 +826,7 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
 	NewSetting.Insert("SettingID"      , New UUID());
-	NewSetting.Insert("PictureIndex"   , 12);
+	NewSetting.Insert("PictureIndex"   , 1);
 	NewRow_Catalogs.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	

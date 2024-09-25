@@ -57,18 +57,23 @@ EndProcedure
 // Agreement creation question.
 // 
 // Parameters:
-//  FormOwnerRef - CatalogRef.Partners
+//  PartnerRef - CatalogRef.Partners
 &AtClient
-Procedure AgreementCreationQuestion(FormOwnerRef)
-	If ValueIsFilled(FormOwnerRef) And
-	 TypeOf(FormOwnerRef) = Type("CatalogRef.Partners") And
-	 Not PartnerHasAgreements(FormOwnerRef) Then
-	  	TextQuestion = R().QuestionToUser_033;
-		AdditionalParameters = New Structure;
-		AdditionalParameters.Insert("Partner", FormOwnerRef);
-		CallbackDescription = New CallbackDescription("AgreementCreationQuestionAfter", ThisObject, AdditionalParameters);
-   		ShowQueryBox(CallbackDescription, TextQuestion, QuestionDialogMode.YesNo);
+Procedure AgreementCreationQuestion(PartnerRef)
+	AskQuestion = False;
+	If 	ValueIsFilled(PartnerRef) And
+	 	TypeOf(PartnerRef) = Type("CatalogRef.Partners") And
+	 	Not PartnerHasAgreements(PartnerRef) Then
+	 		AskQuestion = True;
+	EndIf;
+	If Not AskQuestion Then
+		Return;
 	EndIf;		
+  	TextQuestion = R().QuestionToUser_033;
+	AdditionalParameters = New Structure;
+	AdditionalParameters.Insert("Partner", PartnerRef);
+	CallbackDescription = New CallbackDescription("AgreementCreationQuestionAfter", ThisObject, AdditionalParameters);
+	ShowQueryBox(CallbackDescription, TextQuestion, QuestionDialogMode.YesNo);			
 EndProcedure
 
 // Company creation question after.
@@ -78,17 +83,18 @@ EndProcedure
 //  AdditionalParameters - Structure
 &AtClient
 Procedure AgreementCreationQuestionAfter(QuestionResult, AdditionalParameters) Export
-	If QuestionResult = DialogReturnCode.Yes Then
+	If QuestionResult <> DialogReturnCode.Yes Then
+		Return;
+	EndIf;	
 				
-		AgreementStructure = New Structure;
-		AgreementStructure.Insert("Company", GetDefaultCompany());
-		AgreementStructure.Insert("Partner", AdditionalParameters.Partner);
-		AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType(AgreementStructure.Company));
-		
-		FormParameters = New Structure("FillingValues", AgreementStructure);
-		
-		OpenForm("Catalog.Agreements.Form.ItemForm", FormParameters);			 
-	EndIf;		
+	AgreementStructure = New Structure;
+	AgreementStructure.Insert("Company", GetDefaultCompany());
+	AgreementStructure.Insert("Partner", AdditionalParameters.Partner);
+	AgreementStructure.Insert("CurrencyMovementType", GetDefaultMovementType(AgreementStructure.Company));
+	
+	FormParameters = New Structure("FillingValues", AgreementStructure);
+	
+	OpenForm("Catalog.Agreements.Form.ItemForm", FormParameters);		
 EndProcedure
 
 &AtServerNoContext
@@ -98,6 +104,10 @@ Function GetDefaultMovementType(CompanyRef)
 	
 EndFunction	
 
+// Get default company.
+// 
+// Returns:
+//  CatalogRef.Companies - Get default company
 &AtServer
 Function GetDefaultCompany()
 	
@@ -108,7 +118,7 @@ Function GetDefaultCompany()
 		|FROM
 		|	Catalog.Companies AS Companies
 		|WHERE
-		|	Companies.OurCompany = TRUE";
+		|	Companies.OurCompany";
 	
 	QueryResult = Query.Execute();
 	

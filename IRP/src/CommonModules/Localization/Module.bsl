@@ -1543,7 +1543,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 	Strings.Insert("QuestionToUser_031", NStr("en = 'Do you want to change tax rates according to the company?'",
 		Lang));
-	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new Legal name?'", Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new legal name?'", Lang));
 	Strings.Insert("QuestionToUser_033", NStr("en = 'Do you want to create new partner term?'", Lang));
 		
 #EndRegion

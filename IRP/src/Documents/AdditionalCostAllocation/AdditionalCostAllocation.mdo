@@ -38,6 +38,7 @@
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="ecc5f2e2-ecd9-40bc-83ef-f8159c869e2f">

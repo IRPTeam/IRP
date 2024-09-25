@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="edab3c30-0749-4e0f-a874-e6fd8ab82b1b">
+  <name>Posting_DocumentsRegistry</name>
+  <synonym>
+    <key>en</key>
+    <value>Posting documents registry</value>
+  </synonym>
+  <source>
+    <types>DocumentObject</types>
+  </source>
+  <event>Posting</event>
+  <handler>CommonModule.DocumentsServer.Posting_DocumentsRegistryPosting</handler>
+</mdclass:EventSubscription>

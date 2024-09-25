@@ -66,6 +66,7 @@
   <defaultListForm>Document.VisitorCounter.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.VisitorCounter.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">

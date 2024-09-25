@@ -1160,3 +1160,12 @@ Procedure PurchasesBySerialLotNumbers(Parameters) Export
 	Query.Execute();
 		
 EndProcedure
+
+Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
+	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
+	RecordSet.Write = True;
+	Record = RecordSet.Add();
+	FillPropertyValues(Record, Source);
+	Record.Document = Source.Ref;
+	Record.DocumentName = Source.Metadata().Name;
+EndProcedure

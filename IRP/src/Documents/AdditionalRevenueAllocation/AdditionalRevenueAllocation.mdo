@@ -38,6 +38,7 @@
   <registerRecords>InformationRegister.T6070S_BatchRevenueAllocationInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="e137a321-c206-4579-bcf6-9c87e1f0a86e">

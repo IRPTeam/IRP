@@ -834,6 +834,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="43b33d3c-fcd0-41f5-bc78-f86034c466a8">
+      <name>TaxExemptionReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax exemption reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxExemptionReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="0d32dd7b-16e6-4c0b-a360-865e3d47dc78">
     <producedTypes>

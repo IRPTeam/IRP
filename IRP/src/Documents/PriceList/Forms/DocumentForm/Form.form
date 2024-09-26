@@ -2921,7 +2921,7 @@ barcode (F7)</value>
     <id>2</id>
     <toolTip>
       <key>en</key>
-      <value>Scan or enter the product's barcode.</value>
+      <value>Scan or enter the product's barcode</value>
     </toolTip>  
     <use>
       <common>true</common>

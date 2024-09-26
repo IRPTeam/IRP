@@ -16,6 +16,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 			
 		RecordSet = InformationRegisters.T9050S_AccountingRowAnalytics.CreateRecordSet();
 		RecordSet.Filter.Document.Set(ThisObject.Basis);
+		RecordSet.Filter.LedgerType.Set(ThisObject.LedgerType);
 		RecordSet.Read();
 		_AccountingRowAnalytics = RecordSet.Unload();
 		
@@ -23,6 +24,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 				
 		RecordSet = InformationRegisters.T9051S_AccountingExtDimensions.CreateRecordSet();
 		RecordSet.Filter.Document.Set(ThisObject.Basis);
+		RecordSet.Filter.LedgerType.Set(ThisObject.LedgerType);
 		RecordSet.Read();
 		_AccountingExtDimensions = RecordSet.Unload();
 			
@@ -57,6 +59,11 @@ Procedure OnWrite(Cancel)
 	
 	ThisObject.RegisterRecords.Basic.SetActive(Not ThisObject.DeletionMark);
 	ThisObject.RegisterRecords.Basic.Write();
+	
+	If ValueIsFilled(ThisObject.Basis) Then
+		Action = ?(ThisObject.DeletionMark Or Not ThisObject.Basis.Posted, "CancelProcessed", "Processed");
+		AccountingServer.UpdateAccountingRelevance(ThisObject.Basis, Action, ThisObject.LedgerType, ThisObject.Errors.Count());
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

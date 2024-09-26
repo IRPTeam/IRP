@@ -1168,6 +1168,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9052S_AccountingRelevance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9051S_AccountingExtDimensions</name>
 		<right>
 			<name>Read</name>

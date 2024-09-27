@@ -3,7 +3,7 @@
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
-	Return;
+	AccountingServer.BeforeWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -55,6 +55,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.GroupByRows.Visible = Object.AllocationMode = PredefinedValue("Enum.AllocationMode.ByRows");
 	Form.Items.GroupByDocuments.Visible = Object.AllocationMode = PredefinedValue("Enum.AllocationMode.ByDocuments");
+	Form.Items.EditAccounting.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -340,6 +341,11 @@ Procedure AllocationRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Para
 		ThisObject.URL,
 		Notify,
 		FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AllocationRowsOnActivateRow(Item)
+	Return;
 EndProcedure
 
 &AtClient
@@ -784,6 +790,27 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);	
+EndProcedure
+
+&AtClient
+Procedure EditAccounting(Command)
+	CurrentData = ThisObject.Items.AllocationResult.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	UpdateAccountingData();
+	AccountingClient.OpenFormEditAccounting(Object, ThisObject, CurrentData, "AllocationResult");
+EndProcedure
+
+&AtServer
+Procedure UpdateAccountingData()
+	_AccountingRowAnalytics = ThisObject.AccountingRowAnalytics.Unload();
+	_AccountingExtDimensions = ThisObject.AccountingExtDimensions.Unload();
+	AccountingClientServer.UpdateAccountingTables(Object, 
+			                                      _AccountingRowAnalytics, 
+		                                          _AccountingExtDimensions, "AllocationResult");
+	ThisObject.AccountingRowAnalytics.Load(_AccountingRowAnalytics);
+	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
 #Region ItemCompany

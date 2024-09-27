@@ -1483,6 +1483,7 @@
   <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
   <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
   <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
+  <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

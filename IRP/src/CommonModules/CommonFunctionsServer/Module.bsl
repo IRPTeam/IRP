@@ -1746,7 +1746,7 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Tables is equal
-Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
+Function TablesIsEqual(Table1, Table2, DeleteColumns = "", SerializeToXML = False) Export
 	If Table1.Count() <> Table2.Count() Then
 		Return False;
 	EndIf;
@@ -1761,8 +1761,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 	EndDo;
 		
 	If Table1.Count() = 1 Then
-		MD5_1 = GetMD5(Table1);
-		MD5_2 = GetMD5(Table2);
+		MD5_1 = GetMD5(Table1, , SerializeToXML);
+		MD5_2 = GetMD5(Table2, , SerializeToXML);
 	Else
 		Array = New Array; // Array Of String
 		For Each Column In Table1.Columns Do
@@ -1806,8 +1806,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		Query.SetParameter("VT2", Table2);
 		QueryResult = Query.ExecuteBatch();
 	
-		MD5_1 = GetMD5(QueryResult[2].Unload());
-		MD5_2 = GetMD5(QueryResult[3].Unload());
+		MD5_1 = GetMD5(QueryResult[2].Unload(), ,SerializeToXML);
+		MD5_2 = GetMD5(QueryResult[3].Unload(), ,SerializeToXML);
 	EndIf;
 	If MD5_1 = MD5_2 Then
 		Return True;

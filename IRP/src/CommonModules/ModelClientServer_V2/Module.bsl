@@ -4200,7 +4200,7 @@ EndFunction
 #Region CHANGE_ACCOUNT_BY_PAYMENT_TYPE
 
 Function ChangeAccountByPaymentTypeOptions() Export
-	Return GetChainLinkOptions("PaymentType, Workstation, CurrentAccount");
+	Return GetChainLinkOptions("PaymentType, Workstation, BankTerm, CurrentAccount");
 EndFunction
 
 Function ChangeAccountByPaymentTypeExecute(Options) Export
@@ -4214,6 +4214,8 @@ Function ChangeAccountByPaymentTypeExecute(Options) Export
 		If ValueIsFilled(Account) Then
 			Return Account;
 		EndIf; 
+	ElsIf _Type = PredefinedValue("Enum.PaymentTypes.Card") Then
+		Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Account;
 	EndIf;
 	
 	Return Options.CurrentAccount;

@@ -2135,6 +2135,12 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 Strings.Insert("ExternalAccountingOperation",
 	NStr("en = 'External accounting operation'", Lang));
 
+Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses",
+	NStr("en = 'AdditionalCostAllocation DR (R4050B_StockInventory) CR (R5022T_Expenses)'", Lang));
+
+Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
+	NStr("en = 'AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)'", Lang));
+
 #EndRegion
 
 #Region InternalCommands

@@ -2974,12 +2974,24 @@ Function RegisterRecords_AccountingAnalytics(Doc)
 	Old_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
 	New_AccountingExtDimensions.Sort(SortColumns_AccountingExtDimensions);
 	
+	For Each Row In Old_AccountingExtDimensions Do
+		If Not ValueIsFilled(Row.ExtDimension) Then
+			Row.ExtDimension = Undefined;
+		EndIf;
+	EndDo;
+	
+	For Each Row In New_AccountingExtDimensions Do
+		If Not ValueIsFilled(Row.ExtDimension) Then
+			Row.ExtDimension = Undefined;
+		EndIf;
+	EndDo;
+	
 	RegisterRecords = New Map();
-	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingRowAnalytics, New_AccountingRowAnalytics, IgnoredColumns) Then
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingRowAnalytics, New_AccountingRowAnalytics, IgnoredColumns, True) Then
 		RegisterRecords.Insert(RecordSet_T9050S.Metadata(), New_AccountingRowAnalytics);	
 	EndIf;
 	
-	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingExtDimensions, New_AccountingExtDimensions, IgnoredColumns) Then
+	If Not CommonFunctionsServer.TablesIsEqual(Old_AccountingExtDimensions, New_AccountingExtDimensions, IgnoredColumns, True) Then
 		RegisterRecords.Insert(RecordSet_T9051S.Metadata(), New_AccountingExtDimensions);	
 	EndIf;
 	
@@ -3176,10 +3188,16 @@ Function RegisterRecords_AccountingData(BasisDoc)
 	
 	OldRecords_DataTable = GetCurrentDataRegisterRecords(BasisDoc, "");
 	
+	RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+	RecordSet.Filter.Document.Set(BasisDoc);
+	RecordSet.Read();
+	IsRelevance = (RecordSet.Count() > 0);
+	
 	IgnoredColumns = "LineNumber,PointInTime";
 	
 	RegisterRecords = New Map();
-	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords.DataTable, IgnoredColumns) Then
+	If Not CommonFunctionsServer.TablesIsEqual(OldRecords_DataTable, NewRecords.DataTable, IgnoredColumns)
+		Or Not IsRelevance Then
 		RegisterRecords.Insert(AccountingRegisters.Basic.CreateRecordSet().Metadata(), NewRecords.DataTable);	
 	EndIf;
 	Return RegisterRecords;		
@@ -3307,13 +3325,250 @@ Function GetExcludeDocumentTypes_AccountingTranslation() Export
 	Return Array;
 EndFunction
 
+Procedure UpdateAccountingRelevance(DocRef, Action = "", LedgerType = Undefined, CountErrors = 0) Export
+	If Not ValueIsFilled(LedgerType) Then
+		LedgerTypes = GetLedgerTypesByCompany(DocRef, DocRef.Date, DocRef.Company);
+	Else
+		LedgerTypes = New Array();
+		LedgerTypes.Add(LedgerType);
+	EndIf;
+	
+	If LedgerTypes.Count() = 0 Then
+		Return;
+	EndIf;
+	
+	IsProcessed = (Action = "Processed");
+	IsCancelProcessed = (Action = "CancelProcessed");
+	
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	*
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	AccumulationRegister.T1050T_AccountingQuantities AS T1050T_AccountingQuantities
+	|WHERE
+	|	T1050T_AccountingQuantities.Recorder = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	InformationRegister.T9050S_AccountingRowAnalytics AS T9050S_AccountingRowAnalytics
+	|WHERE
+	|	T9050S_AccountingRowAnalytics.Document = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|FROM
+	|	InformationRegister.T9051S_AccountingExtDimensions AS T9051S_AccountingExtDimensions
+	|WHERE
+	|	T9051S_AccountingExtDimensions.Document = &DocRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T9052S_AccountingRelevance.LedgerType,
+	|	T9052S_AccountingRelevance.CurrentMD5,
+	|	T9052S_AccountingRelevance.ProcessedMD5
+	|FROM
+	|	InformationRegister.T9052S_AccountingRelevance AS T9052S_AccountingRelevance
+	|WHERE
+	|	T9052S_AccountingRelevance.Document = &DocRef
+	|	AND CASE
+	|		WHEN &Filter_LedgerType
+	|			THEN T9052S_AccountingRelevance.LedgerType = &LedgerType
+	|		ELSE TRUE
+	|	END";
+	
+	Query.SetParameter("DocRef"            , DocRef);
+	Query.SetParameter("Filter_LedgerType" , ValueIsFilled(LedgerType));
+	Query.SetParameter("LedgerType"        , LedgerType);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Tables = New Structure();
+	Tables.Insert("T1040T_AccountingAmounts"       , QueryResults[0].Unload());
+	Tables.Insert("T1050T_AccountingQuantities"    , QueryResults[1].Unload());
+	Tables.Insert("T9050S_AccountingRowAnalytics"  , QueryResults[2].Unload());
+	Tables.Insert("T9051S_AccountingExtDimensions" , QueryResults[3].Unload());
+	
+	For Each KeyValue In Tables Do
+		For Each Column In StrSplit("Recorder, LineNumber, PointInTime, UUID", ",") Do
+			CommonFunctionsServer.DeleteColumn(Tables[KeyValue.Key], TrimAll(Column));
+		EndDo;
+		
+		ArrayOfAllColumns = New Array();
+		For Each Column In Tables[KeyValue.Key].Columns Do
+			ArrayOfAllColumns.Add(Column.Name);
+		EndDo;
+		
+		Tables[KeyValue.Key].Sort(StrConcat(ArrayOfAllColumns, ","));
+	EndDo;
+	
+	NewMD5 = CommonFunctionsServer.GetMD5(Tables, , True);
+	
+	QuerySelection = QueryResults[4].Select();
+		
+	For Each LedgerType In LedgerTypes Do
+		CurrentMD5 = Undefined;
+		ProcessedMD5 = Undefined;
+		
+		QuerySelection.Reset();
+		If QuerySelection.FindNext(New Structure("LedgerType", LedgerType)) Then
+			CurrentMD5   = QuerySelection.CurrentMD5;
+			ProcessedMD5 = QuerySelection.ProcessedMD5;	
+		EndIf;
+		
+		If Not IsProcessed And Not IsCancelProcessed And CurrentMD5 = NewMD5 Then
+			Continue;
+		EndIf;
+		
+		RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+		RecordSet.Filter.Document.Set(DocRef);
+		RecordSet.Filter.LedgerType.Set(LedgerType);
+		
+		Record = RecordSet.Add();
+		Record.Document    = DocRef;
+		Record.LedgerType  = LedgerType;
+		Record.CountErrors = CountErrors;
+		
+		If DocRef.Posted Then
+			Record.CurrentMD5 = NewMD5;
+		Else
+			Record.CurrentMD5 = Undefined;
+		EndIf;
+		
+		If IsProcessed Then
+			Record.ProcessedMD5 = NewMD5;
+		ElsIf IsCancelProcessed Then
+			Record.ProcessedMD5 = Undefined;
+		Else
+			Record.ProcessedMD5 = ProcessedMD5;
+		EndIf;
+		
+		RecordSet.Write();
+	EndDo;	
+EndProcedure
+
+Procedure ClearAccountingRelevance(DocRef) Export
+	RecordSet = InformationRegisters.T9052S_AccountingRelevance.CreateRecordSet();
+	RecordSet.Filter.Document.Set(DocRef);
+	RecordSet.Read();		
+		
+	For Each Record In RecordSet Do
+		Record.CurrentMD5	= Undefined;
+	EndDo;
+		
+	RecordSet.Write();
+EndProcedure
+
+Function GetDocumentList(Settings) Export
+	QueryTemplate =
+		"SELECT DISTINCT
+		|	Doc.Ref AS Ref,
+		|	Doc.Date AS Date,
+		|	VALUETYPE(Doc.Ref) AS DocumentType
+		|%2
+		|FROM
+		|	Document.%1 AS Doc
+		|		LEFT JOIN InformationRegister.T9052S_AccountingRelevance AS Reg
+		|		ON (Doc.Ref = (CAST(Reg.Document AS Document.%1)))
+		|		LEFT JOIN Document.JournalEntry AS JE
+		|		ON (Doc.Ref = (CAST(JE.Basis AS Document.%1)) AND NOT JE.DeletionMark)
+		|WHERE
+		|
+		|case when Doc.Posted Then
+		|
+		|	ISNULL(Reg.CurrentMD5, """") = """"
+		|	OR ISNULL(Reg.CurrentMD5, """") <> ISNULL(Reg.ProcessedMD5, """") 
+		|	OR ISNULL(Reg.CountErrors, 0) <> 0
+		|	OR JE.Ref IS NULL
+		|
+		|else
+		|
+		|	ISNULL(Reg.CurrentMD5, """") <> """"
+		|	OR ISNULL(Reg.ProcessedMD5, """") <> """"
+		|	OR Reg.CurrentMD5 IS NULL
+		|	OR Reg.ProcessedMD5 IS NULL
+		|
+		|end
+		|";
+		
+	ArrayOfTemplates = New Array();
+	
+	
+	For Each DocMetadata In Metadata.Documents Do
+		DocType = Type("DocumentRef." + DocMetadata.Name);	
+				
+		If Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(DocType) = Undefined Then
+			Continue;
+		EndIf;
+		ArrayOfTemplates.Add(StrTemplate(QueryTemplate, DocMetadata.Name, 
+			?(ArrayOfTemplates.Count() = 0, "INTO AllDocuments", "")));
+	EndDo;
+	
+	Query = New Query();
+	Query.Text = StrConcat(ArrayOfTemplates, Chars.LF + "UNION ALL" + Chars.LF) +	"
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllDocuments.Date AS Date,
+	|	AllDocuments.Ref,
+	|	AllDocuments.DocumentType,
+	|	CASE
+	|		WHEN AllDocuments.Ref.Posted
+	|			THEN 0
+	|		WHEN AllDocuments.Ref.DeletionMark
+	|			THEN 1
+	|		ELSE 2
+	|	END AS Picture
+	|FROM
+	|	AllDocuments AS AllDocuments
+	|WHERE
+	|	
+	|	CASE WHEN &Filter_StartDate THEN AllDocuments.Ref.Date >= BEGINOFPERIOD(&StartDate, DAY) ELSE TRUE END
+	| AND 	CASE WHEN &Filter_EndDate THEN AllDocuments.Ref.Date <= ENDOFPERIOD(&EndDate, DAY) ELSE TRUE END
+	|	AND CASE WHEN &Filter_Company THEN AllDocuments.Ref.Company IN (&CompanyList) ELSE TRUE END
+	|ORDER BY
+	|	AllDocuments.Date";
+	
+	Query.SetParameter("Filter_StartDate", ValueIsFilled(Settings.StartDate));
+	Query.SetParameter("StartDate", Settings.StartDate);
+	Query.SetParameter("Filter_EndDate", ValueIsFilled(Settings.EndDate));
+	Query.SetParameter("EndDate", Settings.EndDate);
+	Query.SetParameter("Filter_Company", Settings.CompanyList.Count() > 0);
+	Query.SetParameter("CompanyList", Settings.CompanyList);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	Return QueryTable;
+EndFunction
+
 #EndRegion
 
 #Region BackgroundJob
 
 Procedure CheckAndFixAccounting(Settings) Export
 	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingAnalytics();
-	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+	If Settings.Accounting Then
+		DocList = GetDocumentList(Settings);     
+	Else
+		DocList = FixDocumentProblemsServer.GetDocumentList(Settings);
+	EndIf;
 	
 	// step 1. analytics
 	RegInfoArray = CheckAsJob_AccountingAnalytics(DocList);

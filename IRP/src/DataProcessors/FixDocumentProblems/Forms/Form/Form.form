@@ -538,17 +538,81 @@
             <representationInContextMenu>Auto</representationInContextMenu>
             <locationInCommandBar>InCommandBar</locationInCommandBar>
           </items>
-          <items xsi:type="form:Button">
-            <name>DocumentListFillDocuments</name>
-            <id>20</id>
+          <items xsi:type="form:FormGroup">
+            <name>DocumentListGroupFillDocuments</name>
+            <id>382</id>
+            <items xsi:type="form:Button">
+              <name>DocumentListFillDocuments</name>
+              <id>20</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>DocumentListFillDocumentsExtendedTooltip</name>
+                <id>21</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.FillDocuments</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
+              <name>DocumentListFillAccountingDocuments</name>
+              <id>384</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>DocumentListFillAccountingDocumentsExtendedTooltip</name>
+                <id>385</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.FillAccountingDocuments</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
+            <title>
+              <key>en</key>
+              <value>Fill documents</value>
+            </title>
             <extendedTooltip>
-              <name>DocumentListFillDocumentsExtendedTooltip</name>
-              <id>21</id>
+              <name>DocumentListGroupFillDocumentsExtendedTooltip</name>
+              <id>383</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -561,12 +625,10 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <commandName>Form.Command.FillDocuments</commandName>
-            <representation>Auto</representation>
-            <autoMaxWidth>true</autoMaxWidth>
-            <autoMaxHeight>true</autoMaxHeight>
-            <placementArea>UserCmds</placementArea>
-            <representationInContextMenu>Auto</representationInContextMenu>
+            <type>Popup</type>
+            <extInfo xsi:type="form:PopupGroupExtInfo">
+              <representation>Auto</representation>
+            </extInfo>
           </items>
           <items xsi:type="form:FormGroup">
             <name>DocumentListGroupChecks</name>
@@ -6071,6 +6133,23 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>FillQueryTemplate</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>FillAccountingDocuments</name>
+    <title>
+      <key>en</key>
+      <value>Fill accounting documents</value>
+    </title>
+    <id>35</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>FillAccountingDocuments</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

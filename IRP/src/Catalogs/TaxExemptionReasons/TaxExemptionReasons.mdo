@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79ad76ee-8ef3-4ce0-aa8c-e0ab8716a251">
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79ad76ee-8ef3-4ce0-aa8c-e0ab8716a251">
   <producedTypes>
     <objectType typeId="f1d37db3-9908-407c-af2f-bcd9f4c1266d" valueTypeId="60ab8354-d16a-4693-871b-97889ff8dacc"/>
     <refType typeId="36e4d781-c2b4-4948-a69a-544e19fd6117" valueTypeId="b1cd6ea3-dfb9-41c2-b582-d4dbee4c0a83"/>
@@ -32,4 +32,45 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <tabularSections uuid="6b0f342e-0ff8-492d-9841-149b772d9641">
+    <producedTypes>
+      <objectType typeId="e2102249-1a39-4866-82b7-9e53324cfc62" valueTypeId="9265ddbd-82f8-478d-98bd-fd8e0feb6f20"/>
+      <rowType typeId="06881664-cfb8-46fa-9cb1-bf5a0145a31b" valueTypeId="200e72df-ca61-4bf5-9ec0-5933cb4ef7d0"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="b7970092-8ea0-40a0-99a9-38d9598d8a1f">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="9d71e802-f2d2-4c48-a36e-188fdc7844cf">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.TaxExemptionReasons.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
 </mdclass:Catalog>

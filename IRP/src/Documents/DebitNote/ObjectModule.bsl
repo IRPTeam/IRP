@@ -43,5 +43,10 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	TransactionsCurrencyLimit = Transactions.Unload();
+	TransactionsCurrencyLimit.GroupBy("Currency");
+	If TransactionsCurrencyLimit.Count() > 1 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_174);
+		Cancel = True;
+	EndIf;
 EndProcedure

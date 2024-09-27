@@ -934,8 +934,12 @@ Scenario: _042539 check postponed Retail return receipt movements
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' |
-			| 'Document registrations records'                        |
+			| 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' | ''                                                      | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| 'Document registrations records'                        | ''                                                      | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                 | ''                                                      | ''                    | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| ''                                                      | 'Dimensions'                                            | 'Attributes'          | ''       | ''                    | ''                    | ''                        | ''                        | ''                      |
+			| ''                                                      | 'Document'                                              | 'Date'                | 'Number' | 'Create date'         | 'Modify date'         | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                      | 'Retail return receipt 1 314 dated 07.09.2023 17:35:13' | '07.09.2023 17:35:13' | '1 314'  | '27.09.2024 13:31:47' | '27.09.2024 13:31:47' | 'en description is empty' | 'en description is empty' | 'No'                    |		
 		And I close current window
 	* Change status (Postponed with reserve)
 		And I go to line in "List" table

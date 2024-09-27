@@ -289,8 +289,12 @@ Scenario: _0263103 create postponed RSR without a reservation (CRS used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '*'      | '*'           | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 		
@@ -353,8 +357,12 @@ Scenario: _0263104 create postponed RRR without a reservation and without bases 
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRRR1$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRRR1$$'                     | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRRR1$$' | '$$DatePostponedRRR1$$' | '*'      | '*'           | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 

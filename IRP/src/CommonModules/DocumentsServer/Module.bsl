@@ -1167,6 +1167,7 @@ Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
 	EndIf;
 	
 	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
+	RecordSet.Clear();
 	RecordSet.Write = True;
 	Record = RecordSet.Add();
 	FillPropertyValues(Record, Source);

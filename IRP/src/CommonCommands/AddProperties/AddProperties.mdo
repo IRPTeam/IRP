@@ -12,7 +12,7 @@
   <representation>Picture</representation>
   <toolTip>
     <key>en</key>
-    <value>Additional Properties</value>
+    <value>Additional properties</value>
   </toolTip>
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.AddProperties</picture>

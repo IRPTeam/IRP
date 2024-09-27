@@ -12,7 +12,7 @@
   <representation>Auto</representation>
   <toolTip>
     <key>en</key>
-    <value>Attached Files</value>
+    <value>Attached files</value>
   </toolTip>
   <picture xsi:type="core:PictureRef">
     <picture>StdPicture.Attach</picture>

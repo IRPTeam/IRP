@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="8bd7e10a-99bf-4e01-8e9d-7946bbab4f58">
+  <producedTypes>
+    <managerType typeId="a2c093e6-5be5-42af-8cb1-bd5f9e609748" valueTypeId="56792f41-a638-481f-b15d-c322a3bb4292"/>
+    <valueManagerType typeId="cfeed100-35b3-45f6-8647-ac46c59d2804" valueTypeId="981afa12-aa9c-4803-a8ba-0e5748492001"/>
+    <valueKeyType typeId="5b8f7cab-ea88-4da6-bbf3-e0e28a7d754d" valueTypeId="0eb1456f-6c32-41dc-b890-90e87a819658"/>
+  </producedTypes>
+  <name>MaxUploadFileSize</name>
+  <synonym>
+    <key>en</key>
+    <value>Max upload file size (in bytes)</value>
+  </synonym>
+  <type>
+    <types>Number</types>
+    <numberQualifiers>
+      <precision>10</precision>
+      <nonNegative>true</nonNegative>
+    </numberQualifiers>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

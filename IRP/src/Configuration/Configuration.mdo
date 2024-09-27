@@ -775,6 +775,7 @@
   <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonModules>CommonModule.EmailMessagesServer</commonModules>
   <commonModules>CommonModule.MessagesServer</commonModules>
+  <commonModules>CommonModule.FilesClient</commonModules>
   <commonModules>CommonModule.FilesClientServer</commonModules>
   <commonModules>CommonModule.FilesServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
@@ -1003,6 +1004,7 @@
   <constants>Constant.UseAccountingService</constants>
   <constants>Constant.UseMessaging</constants>
   <constants>Constant.UseLegalName</constants>
+  <constants>Constant.MaxUploadFileSize</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1388,6 +1390,7 @@
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
+  <dataProcessors>DataProcessor.LoadTest</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
@@ -1481,6 +1484,7 @@
   <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
   <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
   <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
+  <informationRegisters>InformationRegister.FilePartsForUpload</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -500,3 +500,193 @@ Procedure ChangePriorityFile(OwnerRef, FileRef, Rise = 0) Export
 EndProcedure
 
 #EndRegion
+
+#Region Private
+
+// Get load settings.
+// 
+// Returns:
+//  Structure - Get load settings:
+// * UseFileSpliting - Boolean - 
+// * MaxUploadFileSize - Number - 
+Function GetLoadSettings() Export
+	
+	LoadSettings = New Structure;
+	
+	LoadSettings.Insert("MaxUploadFileSize", Constants.MaxUploadFileSize.Get());
+	LoadSettings.Insert("UseFileSpliting", ValueIsFilled(LoadSettings.MaxUploadFileSize));
+	
+	Return LoadSettings;
+	
+EndFunction
+
+// Get next file part number.
+// 
+// Parameters:
+//  FileInfo - See FilesClientServer.GetStoredFileDescriptionWrapper
+//  PartsAmmount - Number - parts amount
+// 
+// Returns:
+//  Number - Get next file part number
+Function GetNextFilePartNumber(FileInfo, PartsAmmount) Export
+	
+	SetPrivilegedMode(True);
+	
+	MD5 = CommonFunctionsServer.GetMD5(FileInfo);
+	
+	Query = New Query(
+	"SELECT
+	|	FilePartsForUpload.MD5,
+	|	MAX(CASE
+	|		WHEN FilePartsForUpload.Loaded
+	|			THEN FilePartsForUpload.PartNumber
+	|		ELSE 0
+	|	END) AS PartNumber
+	|FROM
+	|	InformationRegister.FilePartsForUpload AS FilePartsForUpload
+	|WHERE
+	|	FilePartsForUpload.MD5 = &MD5
+	|GROUP BY
+	|	FilePartsForUpload.MD5");
+	Query.SetParameter("MD5", MD5);
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		//@skip-check property-return-type
+		Return QuerySelection.PartNumber + 1;
+	EndIf;
+	
+	For Counter = 1 To PartsAmmount Do
+		RegisterRecord = InformationRegisters.FilePartsForUpload.CreateRecordManager();
+		RegisterRecord.MD5 = MD5;
+		RegisterRecord.PartNumber = Counter;
+		RegisterRecord.CreateDate = CommonFunctionsServer.GetCurrentSessionDate();
+		RegisterRecord.Write();
+	EndDo;
+	
+	Return 1;
+	
+EndFunction
+
+// Save uploaded file part.
+// 
+// Parameters:
+//  StoredAddress - String - Stored address
+//  FileInfo - See FilesClientServer.GetStoredFileDescriptionWrapper
+//  PartNumber - Number - Part number
+Procedure SaveUploadedFilePart(StoredAddress, FileInfo, PartNumber) Export
+	
+	SetPrivilegedMode(True);
+	
+	MD5 = CommonFunctionsServer.GetMD5(FileInfo);
+	BinaryBody = GetFromTempStorage(StoredAddress);
+	
+	RegisterRecord = InformationRegisters.FilePartsForUpload.CreateRecordManager();
+	RegisterRecord.MD5 = MD5;
+	RegisterRecord.PartNumber = PartNumber;
+	RegisterRecord.CreateDate = CommonFunctionsServer.GetCurrentSessionDate();
+	
+	RegisterRecord.Loaded = True;
+	RegisterRecord.Content = New ValueStorage(BinaryBody);
+	
+	RegisterRecord.Write(True);
+	
+EndProcedure
+
+// Join file parts.
+// 
+// Parameters:
+//  FileInfo - See FilesClientServer.GetStoredFileDescriptionWrapper
+//  FormUUID - UUID - Form UUID
+// 
+// Returns:
+//  See FilesClientServer.GetStoredFileDescriptionWrapper
+Function JoinFileParts(FileInfo, FormUUID) Export
+	
+	MD5 = CommonFunctionsServer.GetMD5(FileInfo);
+
+	FileParts = New Array; // Array of String
+	
+	Query = New Query;
+	Query.SetParameter("MD5", MD5);
+	
+	Query.Text =
+	"SELECT
+	|	FilePartsForUpload.PartNumber AS PartNumber,
+	|	FilePartsForUpload.Content
+	|FROM
+	|	InformationRegister.FilePartsForUpload AS FilePartsForUpload
+	|WHERE
+	|	FilePartsForUpload.MD5 = &MD5
+	|
+	|ORDER BY
+	|	PartNumber";
+	
+	SelectionQuery = Query.Execute().Select();
+	While SelectionQuery.Next() Do
+		TmpFileName = GetTempFileName();
+		FileParts.Add(TmpFileName);
+		//@skip-check property-return-type, dynamic-access-method-not-found
+		TmpFileBody = SelectionQuery.Content.Get(); // BinaryData
+		TmpFileBody.Write(TmpFileName);
+	EndDo;
+	
+	TmpFileName = GetTempFileName();
+	MergeFiles(FileParts, TmpFileName);
+	
+	For Each OldFileName In FileParts Do
+		DeleteFiles(OldFileName);
+	EndDo;
+	
+	FileInfo.FileRef.FileID = New UUID();
+	FileInfo.Address = PutToTempStorage(New BinaryData(TmpFileName), FormUUID);
+	
+	DeleteFiles(TmpFileName);
+	DeleteOldFileParts(MD5);
+	
+	Return FileInfo;
+	
+EndFunction
+
+// Delete old file parts.
+// @skip-check statement-type-change, property-return-type
+// 
+// Parameters:
+//  MD5 - String - MD5
+Procedure DeleteOldFileParts(MD5 = Undefined) Export
+	
+	SetPrivilegedMode(True);
+	
+	If MD5 <> Undefined Then
+		RecordSet = InformationRegisters.FilePartsForUpload.CreateRecordSet();
+		RecordSet.Filter.MD5.Set(MD5, True);
+		RecordSet.Write(True);
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	FilePartsForUpload.MD5,
+	|	FilePartsForUpload.PartNumber
+	|FROM
+	|	InformationRegister.FilePartsForUpload AS FilePartsForUpload
+	|WHERE
+	|	FilePartsForUpload.CreateDate < &Date";
+	
+	OldDate = CommonFunctionsServer.GetCurrentSessionDate() - 86400;
+	Query.SetParameter("Date", OldDate);
+	
+	SelectionQuery = Query.Execute().Select();
+	While SelectionQuery.Next() Do
+		RegisterRecord = InformationRegisters.FilePartsForUpload.CreateRecordManager();
+		RegisterRecord.MD5 = SelectionQuery.MD5;
+		RegisterRecord.PartNumber = SelectionQuery.PartNumber;
+		RegisterRecord.Read();
+		If RegisterRecord.Selected() Then
+			RegisterRecord.Delete();
+		EndIf;
+	EndDo;
+	
+EndProcedure
+
+#EndRegion

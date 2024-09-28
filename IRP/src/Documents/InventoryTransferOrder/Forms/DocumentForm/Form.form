@@ -3336,6 +3336,10 @@
   <formCommands>
     <name>SearchByBarcode</name>
     <id>2</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan or enter the product's barcode</value>
+    </toolTip>    
     <use>
       <common>true</common>
     </use>
@@ -3378,6 +3382,10 @@
       <value>Link unlink basis documents</value>
     </title>
     <id>4</id>
+    <toolTip>
+      <key>en</key>
+      <value>Link/Unlink document rows</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -3399,6 +3407,10 @@
       <value>Add basis documents</value>
     </title>
     <id>5</id>
+    <toolTip>
+      <key>en</key>
+      <value>Add rows from linked documents</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -3420,6 +3432,10 @@
       <value>Open scan form</value>
     </title>
     <id>6</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan form</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -3482,6 +3498,10 @@
       <value>Edit quantity in base unit</value>
     </title>
     <id>9</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit quantity in base unit</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

@@ -100,9 +100,9 @@ Function AttachedFilesToDocumentsControl_AdditionalSettings_BranchFilter(val Use
 	Return Catalogs.BusinessUnits.EmptyRef();
 EndFunction
 
-Function AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(val User) Export
+Function AllCatalogs_AdditionalSettings_DisableAutomaticCreationOfCompanyAndAgreementForPartner(val User) Export
 	Value = GetUserSettings(User, New Structure("MetadataObject",
-		"Catalogs.AllCatalogs.AdditionalSettings.DontHelpToCreatePartnerDetails"));
+		"Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner"));
 	If Value.Count() Then
 		Return Value[0].Value;
 	Else

@@ -1691,7 +1691,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Settings_016", NStr("en = 'Company'", Lang));
 	Strings.Insert("Add_Settings_017", NStr("en = 'Branch'", Lang));
 	Strings.Insert("Add_Settings_018", NStr("en = 'Catalogs'", Lang));
-	Strings.Insert("Add_Settings_019", NStr("en = 'Do not help to create partner details'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en = 'Disable - Disable automatic creation of Company and Agreement for Partner'", Lang));
 #EndRegion
 
 #Region Mobile

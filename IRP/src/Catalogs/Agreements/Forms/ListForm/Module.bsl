@@ -10,7 +10,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	If ThisObject.FormOwner <> Undefined And
-		Not DontHelpToCreatePartnerDetails() Then
+		Not DisableAutomaticCreationOfCompanyAndAgreementForPartner() Then
 		AgreementCreationQuestion(ThisObject.FormOwner.Object.Ref);
 	EndIf;	
 EndProcedure
@@ -141,17 +141,13 @@ EndFunction
 //  Boolean - Partner has agreements
 &AtServerNoContext
 Function PartnerHasAgreements(PartnerRef)
-	PartnerHasAgreements = False;
 	ArrayOfAgreements = Catalogs.Agreements.GetRefsArrayByPartner(PartnerRef);
-	If ArrayOfAgreements.Count() Then 	
-		PartnerHasAgreements = True;
-	EndIf;		
-	Return PartnerHasAgreements;
+	Return ArrayOfAgreements.Count() > 0;
 EndFunction
 
 &AtServer
-Function DontHelpToCreatePartnerDetails()
-	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(SessionParameters.CurrentUser);
+Function DisableAutomaticCreationOfCompanyAndAgreementForPartner()
+	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DisableAutomaticCreationOfCompanyAndAgreementForPartner(SessionParameters.CurrentUser);
 EndFunction	
 
 #EndRegion

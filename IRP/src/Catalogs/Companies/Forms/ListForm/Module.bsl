@@ -9,7 +9,7 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	If ThisObject.FormOwner <> Undefined And 
-		Not DontHelpToCreatePartnerDetails() Then
+		Not DisableAutomaticCreationOfCompanyAndAgreementForPartner() Then
 		CompanyCreationQuestion(ThisObject.FormOwner.Object.Ref);
 	Endif;	
 EndProcedure
@@ -104,9 +104,8 @@ EndProcedure
 //  PartnerRef - CatalogRef.Partners
 &AtServer
 Procedure CreateCompanyForPartner(PartnerRef)
-	AttributesStructure = CommonFunctionsServer.GetAttributesFromRef(PartnerRef, "Description_en, Description_ru, Description_tr, TaxID"); 
 	CompanyObject = Catalogs.Companies.CreateItem();
-	FillPropertyValues(CompanyObject, AttributesStructure);
+	FillPropertyValues(CompanyObject, PartnerRef, "Description_en, Description_ru, Description_tr, TaxID");
 	CompanyObject.Type = Enums.CompanyLegalType.Company;
 	CompanyObject.Partner = PartnerRef;
 	CompanyObject.Write();
@@ -140,21 +139,17 @@ EndFunction
 &AtServerNoContext
 Function PartnerTypeMustHaveCompany(PartnerRef)
 	
-	PartnerTypeMustHaveCompany = False;
 	AttributesStructure = CommonFunctionsServer.GetAttributesFromRef(PartnerRef, "Customer, Vendor, Consignor, Other");
-	If AttributesStructure.Customer Or
-		AttributesStructure.Vendor Or
-		AttributesStructure.Consignor Or
-		AttributesStructure.Other Then
-			PartnerTypeMustHaveCompany = True;
-			
-	EndIf;
+	PartnerTypeMustHaveCompany = (AttributesStructure.Customer Or
+									AttributesStructure.Vendor Or
+									AttributesStructure.Consignor Or
+									AttributesStructure.Other);
 	Return PartnerTypeMustHaveCompany;
 EndFunction
 
 &AtServer
-Function DontHelpToCreatePartnerDetails()
-	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DontHelpToCreatePartnerDetails(SessionParameters.CurrentUser);
+Function DisableAutomaticCreationOfCompanyAndAgreementForPartner()
+	Return UserSettingsServer.AllCatalogs_AdditionalSettings_DisableAutomaticCreationOfCompanyAndAgreementForPartner(SessionParameters.CurrentUser);
 EndFunction			
 
 #EndRegion

@@ -815,18 +815,18 @@ Function GetAdditionalSettings(RowOwner, TableOfSettings)
 	NewRow_Catalogs.Insert("FullName"     , FullName);
 	NewRow_Catalogs.Insert("Name"         , "Catalogs");
 	NewRow_Catalogs.Insert("Synonym"      , R().Add_Settings_018);
-	NewRow_Catalogs.Insert("PictureIndex" , 1);
+	NewRow_Catalogs.Insert("PictureIndex" , 8);
 	NewRow_Catalogs.Insert("Rows"         , New Array());
 	
-	// DontHelpToCreatePartnerDetails
+	// DisableAutomaticCreationOfCompanyAndAgreementForPartner
 	NewSetting = New Structure();
-	NewSetting.Insert("Name", "DontHelpToCreatePartnerDetails");
-	NewSetting.Insert("FullName", FullName + ".DontHelpToCreatePartnerDetails");
+	NewSetting.Insert("Name", "DisableAutomaticCreationOfCompanyAndAgreementForPartner");
+	NewSetting.Insert("FullName", FullName + ".DisableAutomaticCreationOfCompanyAndAgreementForPartner");
 	NewSetting.Insert("Synonym" , R().Add_Settings_019);
 	NewSetting.Insert("KindOfAttribute", Enums.KindsOfAttributes.AdditionalSetting);
 	NewSetting.Insert("TypeRestriction", New TypeDescription("Boolean"));
 	NewSetting.Insert("SettingID"      , New UUID());
-	NewSetting.Insert("PictureIndex"   , 1);
+	NewSetting.Insert("PictureIndex"   , 12);
 	NewRow_Catalogs.Rows.Add(NewSetting);
 	AddRowToTableOfSettings(TableOfSettings, NewSetting.FullName, NewSetting.Name, NewSetting.SettingID);
 	

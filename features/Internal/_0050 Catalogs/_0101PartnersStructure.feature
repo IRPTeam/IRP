@@ -19,6 +19,7 @@ Background:
 
 Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 	When set True value to the constant
+	When Create information register UserSettings records (DontHelpToCreatePartnerDetails - True)
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -246,3 +247,91 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 		And I select current line in "List" table
 		Then the form attribute named "LegalName" became equal to "Company Kalipso1"
 		And I close all client application windows
+
+Scenario: _010010 check auto create Legal name and Company and Partner term
+	And I close all client application windows
+	* Preparation
+		When Create information register UserSettings records (DontHelpToCreatePartnerDetails - False)
+	* Create Partner (customer and vendor)
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "Test partner 11" text in "ENG" field
+		And I input "7899789980900" text in "Tax ID" field
+		And I set checkbox named "Vendor"
+		And I set checkbox named "Customer"
+	* Move to company
+		And In this window I click command interface button "Company"
+		* Question about saving data
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+		* Question about create New Legal name
+			* Yes
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+		* Check legal name
+			And "List" table became equal
+				| 'Description'     |
+				| 'Test partner 11' |
+			And I go to line in "List" table
+				| 'Description'        |
+				| 'Test partner 11'   |
+			And I select current line in "List" table
+			Then the form attribute named "Description_en" became equal to "Test partner 11"
+			Then the form attribute named "Partner" became equal to "Test partner 11"
+			Then the form attribute named "Type" became equal to "Company"
+			Then the form attribute named "TaxID" became equal to "7899789980900"
+			And I close current window
+	* Move to partner term
+		And In this window I click command interface button "Partner terms"
+		* Question about create New Partner term
+			* Yes
+				Then "1C:Enterprise" window is opened
+				And I click "Yes" button
+		* Check partner term
+			And form attributes have values:
+				| 'Name'                            | 'Value'                   | 'HowToSearch' |
+				| 'ApArPostingDetail'               | "By agreements"           | ''            |
+				| 'Kind'                            | "Regular"                 | ''            |
+				| 'LegalName'                       | "Test partner 11"         | ''            |
+				| 'Partner'                         | "Test partner 11"         | ''            |
+				| 'PriceType'                       | "en description is empty" | ''            |
+			Then "1C:Enterprise" window is opened
+			And I click "No" button
+			And In this window I click command interface button "Company"
+			And In this window I click command interface button "Partner terms"
+			When I Check the steps for Exception
+				| 'Then "1C:Enterprise" window is opened'     |
+		And I close all client application windows
+	
+
+Scenario: _010011 check auto create Legal name and Company and Partner term
+	And I close all client application windows
+	* Preparation
+		When Create information register UserSettings records (DontHelpToCreatePartnerDetails - False)
+	* Create Partner (customer and vendor)
+		Given I open hyperlink "e1cib/list/Catalog.Partners"
+		And I click the button named "FormCreate"
+		And I input "Test partner 12" text in "ENG" field
+		And I input "7899789980901" text in "Tax ID" field
+		And I set checkbox named "Vendor"
+		And I set checkbox named "Customer"
+	* Move to company
+		And In this window I click command interface button "Company"
+		* Question about saving data
+			Then "1C:Enterprise" window is opened
+			And I click "OK" button
+		* Question about create New Legal name
+			* No
+				Then "1C:Enterprise" window is opened
+				And I click "No" button
+		* Check
+			Then the number of "List" table lines is "равно" 0
+	* Move to Partner term
+		And In this window I click command interface button "Partner terms"
+		* Question about create New Partner terms
+			* No
+				Then "1C:Enterprise" window is opened
+				And I click "No" button
+		* Check
+			Then the number of "List" table lines is "равно" 0			
+	And I close all client application windows

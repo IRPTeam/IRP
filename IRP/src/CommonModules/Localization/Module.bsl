@@ -1543,6 +1543,9 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 	Strings.Insert("QuestionToUser_031", NStr("en = 'Do you want to change tax rates according to the company?'",
 		Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new legal name?'", Lang));
+	Strings.Insert("QuestionToUser_033", NStr("en = 'Do you want to create new partner term?'", Lang));
+		
 #EndRegion
 
 #Region SuggestionToUser
@@ -1687,6 +1690,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Settings_015", NStr("en = 'Enable - Check-mode'", Lang));
 	Strings.Insert("Add_Settings_016", NStr("en = 'Company'", Lang));
 	Strings.Insert("Add_Settings_017", NStr("en = 'Branch'", Lang));
+	Strings.Insert("Add_Settings_018", NStr("en = 'Catalogs'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en = 'Disable - Disable automatic creation of Company and Agreement for Partner'", Lang));
 #EndRegion
 
 #Region Mobile

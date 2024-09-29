@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79ad76ee-8ef3-4ce0-aa8c-e0ab8716a251">
+  <producedTypes>
+    <objectType typeId="f1d37db3-9908-407c-af2f-bcd9f4c1266d" valueTypeId="60ab8354-d16a-4693-871b-97889ff8dacc"/>
+    <refType typeId="36e4d781-c2b4-4948-a69a-544e19fd6117" valueTypeId="b1cd6ea3-dfb9-41c2-b582-d4dbee4c0a83"/>
+    <selectionType typeId="afaa0741-4edb-456f-aa85-a5702df813a9" valueTypeId="f4653557-b346-41d8-bb56-0ceaf4a27e18"/>
+    <listType typeId="4712251b-77cc-4d8b-918e-75d282fe8442" valueTypeId="6afbec89-c851-48e8-9266-8781fbe081fb"/>
+    <managerType typeId="044660ce-44b8-42a1-bbbd-addfb0da017d" valueTypeId="b15a54ce-bf2d-48ae-83e3-865328142203"/>
+  </producedTypes>
+  <name>TaxExemptionReasons</name>
+  <synonym>
+    <key>en</key>
+    <value>Tax exemption reasons</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.TaxExemptionReasons.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.TaxExemptionReasons.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Tax exemption reason</value>
+  </objectPresentation>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>4</codeLength>
+  <descriptionLength>150</descriptionLength>
+  <codeType>String</codeType>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <tabularSections uuid="6b0f342e-0ff8-492d-9841-149b772d9641">
+    <producedTypes>
+      <objectType typeId="e2102249-1a39-4866-82b7-9e53324cfc62" valueTypeId="9265ddbd-82f8-478d-98bd-fd8e0feb6f20"/>
+      <rowType typeId="06881664-cfb8-46fa-9cb1-bf5a0145a31b" valueTypeId="200e72df-ca61-4bf5-9ec0-5933cb4ef7d0"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="b7970092-8ea0-40a0-99a9-38d9598d8a1f">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="9d71e802-f2d2-4c48-a36e-188fdc7844cf">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.TaxExemptionReasons.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Catalog>

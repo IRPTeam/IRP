@@ -33,6 +33,7 @@
   <defaultObjectForm>Document.WorkOrderClosing.Form.DocumentForm</defaultObjectForm>
   <defaultListForm>Document.WorkOrderClosing.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.WorkOrderClosing.Form.ChoiceForm</defaultChoiceForm>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="3ec84411-56f2-440d-989a-4aed241db534">

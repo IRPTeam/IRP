@@ -4525,8 +4525,12 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number'                  | 'Create date'           | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '$$DatePostponedRSR2$$' | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 
@@ -4586,8 +4590,12 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number'                  | 'Create date'           | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '$$DatePostponedRSR2$$' | ''            | 'CI'     | ''       | 'No'                    |			
 		And I close current window
 
 Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS not used)

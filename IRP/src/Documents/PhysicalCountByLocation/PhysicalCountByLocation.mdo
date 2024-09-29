@@ -67,6 +67,7 @@
   <defaultChoiceForm>Document.PhysicalCountByLocation.Form.ChoiceForm</defaultChoiceForm>
   <posting>Deny</posting>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

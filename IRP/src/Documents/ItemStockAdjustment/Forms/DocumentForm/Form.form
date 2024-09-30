@@ -1983,6 +1983,10 @@
   <formCommands>
     <name>SearchByBarcode</name>
     <id>1</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan or enter the product's barcode</value>
+    </toolTip>    
     <use>
       <common>true</common>
     </use>
@@ -2025,6 +2029,10 @@
       <value>Open scan form</value>
     </title>
     <id>3</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan form</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -2067,6 +2075,10 @@
       <value>Edit quantity in base unit</value>
     </title>
     <id>5</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit quantity in base unit</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

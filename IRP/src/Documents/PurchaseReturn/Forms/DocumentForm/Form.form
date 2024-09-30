@@ -2695,6 +2695,56 @@
             <textEdit>true</textEdit>
           </extInfo>
         </items>
+        <items xsi:type="form:FormField">
+          <name>ItemListTaxExemptionReason</name>
+          <id>813</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.TaxExemptionReason</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListTaxExemptionReasonExtendedTooltip</name>
+            <id>815</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListTaxExemptionReasonContextMenu</name>
+            <id>814</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <autoCommandBar>
           <name>ItemListCommandBar</name>
           <id>15</id>
@@ -6425,6 +6475,10 @@
   <formCommands>
     <name>SearchByBarcode</name>
     <id>1</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan or enter the product's barcode</value>
+    </toolTip>  
     <use>
       <common>true</common>
     </use>
@@ -6468,6 +6522,10 @@
       <value>Link unlink basis documents</value>
     </title>
     <id>4</id>
+    <toolTip>
+      <key>en</key>
+      <value>Link/Unlink document rows</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -6489,6 +6547,10 @@
       <value>Add basis documents</value>
     </title>
     <id>5</id>
+    <toolTip>
+      <key>en</key>
+      <value>Add rows from linked documents</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -6530,6 +6592,10 @@
       <value>Open scan form</value>
     </title>
     <id>7</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan form</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -6572,6 +6638,10 @@
       <value>Edit currencies</value>
     </title>
     <id>9</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit exchange rates for document</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -6665,6 +6735,10 @@
       <value>Edit quantity in base unit</value>
     </title>
     <id>14</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit quantity in base unit</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -6686,6 +6760,10 @@
       <value>Edit accounting</value>
     </title>
     <id>15</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit accounting entries</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

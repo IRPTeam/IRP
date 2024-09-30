@@ -948,6 +948,13 @@
         <value>155</value>
       </code>
     </items>
+    <items id="b84f38fb-126c-4e3b-9fec-030c925a8372">
+      <name>Catalog_TaxExemptionReasons</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>156</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

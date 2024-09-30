@@ -4196,15 +4196,15 @@ Scenario: _0154196 check comission calculation in the Retail sales receipt
 		And I select current line in "List" table
 		And "Payments" table became equal
 			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'             | 'Percent'    |
-			| '1'   | '333,33'   | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '2,00'       |
+			| '1'   | '333,33'   | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Transit Second'      | '2,00'       |
 	* Change sum
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I select current line in "Payments" table
 		And I input "999,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'             | 'Percent'    |
-			| '1'   | '999,00'   | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '2,00'       |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'          | 'Percent'    |
+			| '1'   | '999,00'   | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Transit Second'   | '2,00'       |
 		And I close all client application windows
 		
 		
@@ -4276,16 +4276,16 @@ Scenario: _0154197 check comission calculation in the Retail return receipt
 			| 'Card 02'        |
 		And I select current line in "List" table
 		And "Payments" table became equal
-			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'             | 'Percent'    |
-			| '1'   | '333,33'   | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Bank account, TRY'   | '2,00'       |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Bank term'      | 'Account'          | 'Percent'    |
+			| '1'   | '333,33'   | '6,67'         | 'Card 02'        | 'Payment terminal 01'   | 'Bank term 01'   | 'Transit Second'   | '2,00'       |
 	* Change sum
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I select current line in "Payments" table
 		And I input "999,00" text in the field named "PaymentsAmount" of "Payments" table
 		And I finish line editing in "Payments" table
 		And "Payments" table became equal
-			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Postponed payment'   | 'Bank term'      | 'Account'             | 'Percent'    |
-			| '1'   | '999,00'   | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'No'                  | 'Bank term 01'   | 'Bank account, TRY'   | '2,00'       |
+			| '#'   | 'Amount'   | 'Commission'   | 'Payment type'   | 'Payment terminal'      | 'Postponed payment'   | 'Bank term'      | 'Account'          | 'Percent'    |
+			| '1'   | '999,00'   | '19,98'        | 'Card 02'        | 'Payment terminal 01'   | 'No'                  | 'Bank term 01'   | 'Transit Second'   | '2,00'       |
 		
 		And I close all client application windows				
 		
@@ -4525,8 +4525,12 @@ Scenario: _0154201 create postponed RSR without a reservation (CRS not used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number'                  | 'Create date'           | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '$$DatePostponedRSR2$$' | ''            | 'CI'     | ''       | 'No'                    |
 		And I close current window
 
 
@@ -4586,8 +4590,12 @@ Scenario: _0154202 create postponed RRR (CRS not used)
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$PostponedRSR2$$'              |
-			| 'Document registrations records' |
+			| '$$PostponedRSR2$$'                     | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Document registrations records'        | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"' | ''                  | ''                      | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Dimensions'        | 'Attributes'            | ''                        | ''                      | ''            | ''       | ''       | ''                      |
+			| ''                                      | 'Document'          | 'Date'                  | 'Number'                  | 'Create date'           | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                      | '$$PostponedRSR2$$' | '$$DatePostponedRSR2$$' | '$$NumberPostponedRSR2$$' | '$$DatePostponedRSR2$$' | ''            | 'CI'     | ''       | 'No'                    |			
 		And I close current window
 
 Scenario: _0154203 create postponed RRR without a reservation and without bases (CRS not used)

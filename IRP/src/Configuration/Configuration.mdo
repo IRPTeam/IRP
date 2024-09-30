@@ -834,6 +834,7 @@
   <eventSubscriptions>EventSubscription.Filling_CatalogsWithDefaultData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RegistersClearData</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.Posting_DocumentsRegistry</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -1142,6 +1143,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.ExtDimensions</catalogs>
+  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>
@@ -1481,6 +1483,8 @@
   <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
   <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
   <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
+  <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
+  <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -230,6 +230,8 @@ Function R6080T_OtherPeriodsRevenues()
 	|	CostList.Branch AS Branch,
 	|	CostList.Basis AS Basis,
 	|	CostList.Currency AS Currency,
+	|	CostList.ProfitLossCenter,
+	|	CostList.RevenueType,
 	|	CostList.Amount * CostList.Factor AS Amount
 	|INTO R6080T_OtherPeriodsRevenues
 	|FROM

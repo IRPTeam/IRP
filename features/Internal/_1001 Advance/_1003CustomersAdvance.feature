@@ -66,6 +66,7 @@ Scenario: _1003000 preparation (customers advances closing)
 			| "Documents.CashReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);"    |
 		* Load SO
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
+		When Create document SalesOrder objects (advance, movements)
 		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
 		When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
 		And I execute 1C:Enterprise script at server
@@ -74,6 +75,8 @@ Scenario: _1003000 preparation (customers advances closing)
 				| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);"     |
 		And I execute 1C:Enterprise script at server
 				| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);"     |
+		And I execute 1C:Enterprise script at server
+				| "Documents.SalesOrder.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);"     |
 		* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
 		And I execute 1C:Enterprise script at server

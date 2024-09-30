@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fbb5c4a9-9883-41da-98e1-28c518af857a">
+  <name>PresentationFieldsGetProcessing_GetDocumentPresentationFields</name>
+  <synonym>
+    <key>en</key>
+    <value>Presentation fields get processing get document presentation fields</value>
+  </synonym>
+  <source>
+    <types>DocumentManager.PurchaseOrder</types>
+    <types>DocumentManager.SalesOrder</types>
+  </source>
+  <event>PresentationFieldsGetProcessing</event>
+  <handler>CommonModule.DocumentsServer.GetDocumentPresentationFields</handler>
+</mdclass:EventSubscription>

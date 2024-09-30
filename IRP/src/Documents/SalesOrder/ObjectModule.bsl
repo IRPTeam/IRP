@@ -25,6 +25,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);

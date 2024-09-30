@@ -9,6 +9,8 @@
     <types>ChartOfCharacteristicTypesManager</types>
     <types>CatalogManager</types>
     <types>ChartOfAccountsManager.Basic</types>
+    <types>DocumentManager.SalesOrder</types>
+    <types>DocumentManager.PurchaseOrder</types>
   </source>
   <event>ChoiceDataGetProcessing</event>
   <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>

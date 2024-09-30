@@ -2229,5 +2229,12 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("DocStatus_Deleted", NStr("en = 'Deleted'", Lang));	
 #EndRegion
 	
+#Region DocPresentations
+	// %1 - Object presentation
+	// %2 - Document number
+	// %3 - Document date
+	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+#EndRegion
+
 	Return Strings;
 EndFunction

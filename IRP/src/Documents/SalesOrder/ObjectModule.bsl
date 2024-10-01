@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -162,4 +163,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		Number = Undefined;
 		Date = Undefined;
 	EndIf;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.DocumentNumber = "";
 EndProcedure

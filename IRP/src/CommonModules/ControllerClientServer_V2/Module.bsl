@@ -1118,6 +1118,9 @@ Function BindAccount(Parameters)
 	DataPath.Insert("CashRevenue"   , "Account");
 	DataPath.Insert("CashStatement" , "CashAccount");
 	DataPath.Insert("ConsolidatedRetailSales" , "CashAccount");
+	DataPath.Insert("DebitNote"  , "Account");
+	DataPath.Insert("CreditNote" , "Account");
+	
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCurrencyByAccount");

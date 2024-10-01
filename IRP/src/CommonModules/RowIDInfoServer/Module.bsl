@@ -2919,7 +2919,22 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey";
+	
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3136,7 +3151,21 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3324,7 +3353,21 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3803,7 +3846,21 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.PurchaseInvoice.SourceOfOrigins AS SourceOfOrigins
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
-	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key";
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -5074,6 +5131,20 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|
+	|	INNER JOIN
+	|	
+	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
+	|		(SELECT
+	|			BasisesTable.RowID,
+	|			BasisesTable.BasisKey,
+	|			BasisesTable.CurrentStep,
+	|			BasisesTable.Basis
+	|		FROM
+	|			BasisesTable AS BasisesTable)) AS Reg
+	|	
+	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
 	|		
 	|;
 	|

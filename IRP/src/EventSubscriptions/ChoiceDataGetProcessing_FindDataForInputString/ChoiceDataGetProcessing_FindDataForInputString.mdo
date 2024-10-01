@@ -11,6 +11,9 @@
     <types>ChartOfAccountsManager.Basic</types>
     <types>DocumentManager.SalesOrder</types>
     <types>DocumentManager.PurchaseOrder</types>
+    <types>DocumentManager.SalesInvoice</types>
+    <types>DocumentManager.DebitNote</types>
+    <types>DocumentManager.CreditNote</types>
   </source>
   <event>ChoiceDataGetProcessing</event>
   <handler>CommonModule.LocalizationEvents.FindDataForInputStringChoiceDataGetProcessing</handler>

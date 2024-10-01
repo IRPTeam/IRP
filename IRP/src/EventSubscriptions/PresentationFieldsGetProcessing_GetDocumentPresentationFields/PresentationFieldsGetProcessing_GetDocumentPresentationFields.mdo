@@ -8,6 +8,9 @@
   <source>
     <types>DocumentManager.PurchaseOrder</types>
     <types>DocumentManager.SalesOrder</types>
+    <types>DocumentManager.SalesInvoice</types>
+    <types>DocumentManager.CreditNote</types>
+    <types>DocumentManager.DebitNote</types>
   </source>
   <event>PresentationFieldsGetProcessing</event>
   <handler>CommonModule.DocumentsServer.GetDocumentPresentationFields</handler>

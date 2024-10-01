@@ -157,7 +157,7 @@
   <key>tr</key>
   <value>Çalışan pozisyonları</value>
  </objectPresentation>
- <hierarchyType>HierarchyOfItems</hierarchyType>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -168,8 +168,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.EmployeePositions.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.EmployeePositions.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.EmployeePositions.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.EmployeePositions.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.EmployeePositions.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <tabularSections uuid="1eb37768-60b9-4946-a879-6637d1cbd54e">
   <producedTypes>
@@ -285,6 +287,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="176ccdbe-cd91-4c01-8d01-d3f0800bc808">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="7c568430-565a-4463-9e3e-e0e918449334">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -138,6 +138,7 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1248,6 +1249,28 @@
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
    <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="43b33d3c-fcd0-41f5-bc78-f86034c466a8">
+   <name>TaxExemptionReason</name>
+   <synonym>
+    <key>en</key>
+    <value>Tax exemption reason</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Причина налогового исключения</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Vergi istisna sebebi</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.TaxExemptionReasons</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <createOnInput>Use</createOnInput>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>

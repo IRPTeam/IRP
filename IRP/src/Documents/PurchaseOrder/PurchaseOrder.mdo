@@ -119,6 +119,7 @@
  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

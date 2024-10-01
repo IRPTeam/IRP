@@ -1127,7 +1127,23 @@ Function R4011B_FreeStocks()
 		   |FROM
 		   |	FreeStocks AS FreeStocks
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 
 EndFunction
 
@@ -1143,7 +1159,24 @@ Function R4012B_StockReservation()
 		   |FROM
 		   |	IncomingStocksRequested
 		   |WHERE
-		   |	TRUE";
+		   |	TRUE
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.Period AS Period,
+		   |	ItemList.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	ItemList.SalesOrder AS Order,
+		   |	ItemList.Quantity AS Quantity
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.IsService
+		   |	AND NOT ItemList.UseGoodsReceipt
+		   |	AND NOT ItemList.GoodsReceiptExists
+		   |	AND ItemList.SalesOrderExists";
 EndFunction
 
 Function R4014B_SerialLotNumber()
@@ -1374,6 +1407,8 @@ Function R6070T_OtherPeriodsExpenses()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.Basis AS Basis,
+		|	ItemList.ExpenseType,
+		|	ItemList.ProfitLossCenter,
 		|	CASE
 		|		WHEN ItemList.IsItemsCost
 		|			THEN ItemList.RowID
@@ -1699,7 +1734,8 @@ Function GetAnalytics_VATOutgoing(Parameters)
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
+	AO = Catalogs.AccountingOperations;
+	If Parameters.Operation = AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;
@@ -1707,9 +1743,10 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, Additiona
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
+	AO = Catalogs.AccountingOperations;
+	If (Parameters.Operation = AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
+		Or Parameters.Operation = AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
+		Or Parameters.Operation = AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;

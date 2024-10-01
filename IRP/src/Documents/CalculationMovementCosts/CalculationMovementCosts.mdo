@@ -68,6 +68,7 @@
  <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
  <registerRecords>InformationRegister.T6095S_WriteOffBatchesInfo</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="500ee3cd-8578-42cf-b4c4-4ba12cc07a58">

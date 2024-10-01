@@ -68,6 +68,7 @@
   <key>tr</key>
   <value>Nakit / Banka hesabı</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -78,8 +79,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.CashAccounts.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.CashAccounts.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.CashAccounts.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.CashAccounts.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.CashAccounts.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="f853a165-64c1-427c-8e98-e23be321eafb">
   <name>Currency</name>
@@ -612,6 +615,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="5559095e-b820-4a1e-92d5-d1e9c7a32085">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f0ef90d1-4371-4ea1-969e-31ffa23a62d0">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -4138,6 +4138,18 @@
  <formCommands>
   <name>SearchByBarcode</name>
   <id>2</id>
+  <toolTip>
+   <key>en</key>
+   <value>Scan or enter the product's barcode</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Отсканировать или ввести штрихкод товара</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Ürün barkod okut veya gir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -4196,6 +4208,18 @@
    <value>Bağlı olmayan kaynak evrakı ile bağlantı kur</value>
   </title>
   <id>4</id>
+  <toolTip>
+   <key>en</key>
+   <value>Link/Unlink document rows</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Залинковать/разлинковать строки</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Satır bağlantısını kur/çöz</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -4225,6 +4249,18 @@
    <value>Kaynak evrak ekle</value>
   </title>
   <id>5</id>
+  <toolTip>
+   <key>en</key>
+   <value>Add rows from linked documents</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Добавить строки из залинкованных документов</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Bağlı evraktan satırları ekle</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -4254,6 +4290,18 @@
    <value>Okutma formu aç</value>
   </title>
   <id>6</id>
+  <toolTip>
+   <key>en</key>
+   <value>Scan form</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Форма сканирования</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Tarama formu</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -4340,6 +4388,18 @@
    <value>Dövizleri düzelt</value>
   </title>
   <id>9</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit exchange rates for document</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить курс валют для документа</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Evrak için döviz kurları değiştir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -4368,6 +4428,18 @@
    <value>Temel birimde miktarı düzenle</value>
   </title>
   <id>10</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit quantity in base unit</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить количество в осн. ед. изм.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Temel birimde miktarı düzenle</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>

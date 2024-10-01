@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="39e0f298-4b91-4732-9c86-6026c4a5b063">
+ <name>BeforeWrite_RegistersClearData</name>
+ <synonym>
+  <key>en</key>
+  <value>Before write registers clear data</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Очищать данные перед записью регистра</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kayıt tablolarına veri kaydetmeden önce temizle</value>
+ </synonym>
+ <source>
+  <types>AccumulationRegisterRecordSet</types>
+  <types>InformationRegisterRecordSet</types>
+ </source>
+ <event>BeforeWrite</event>
+ <handler>CommonModule.CommonFunctionsServer.BeforeWrite_RegistersClearDataBeforeWrite</handler>
+</mdclass:EventSubscription>

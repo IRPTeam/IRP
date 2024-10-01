@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.AdditionalAccrual.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R9560T_AdditionalAccrual</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

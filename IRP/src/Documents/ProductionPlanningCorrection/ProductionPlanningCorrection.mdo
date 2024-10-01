@@ -94,6 +94,7 @@
  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="521b5a02-cf80-464a-9e57-ba02d3176069">

@@ -1746,7 +1746,7 @@ EndFunction
 // 
 // Returns:
 //  Boolean - Tables is equal
-Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
+Function TablesIsEqual(Table1, Table2, DeleteColumns = "", SerializeToXML = False) Export
 	If Table1.Count() <> Table2.Count() Then
 		Return False;
 	EndIf;
@@ -1761,8 +1761,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 	EndDo;
 		
 	If Table1.Count() = 1 Then
-		MD5_1 = GetMD5(Table1);
-		MD5_2 = GetMD5(Table2);
+		MD5_1 = GetMD5(Table1, , SerializeToXML);
+		MD5_2 = GetMD5(Table2, , SerializeToXML);
 	Else
 		Array = New Array; // Array Of String
 		For Each Column In Table1.Columns Do
@@ -1806,8 +1806,8 @@ Function TablesIsEqual(Table1, Table2, DeleteColumns = "") Export
 		Query.SetParameter("VT2", Table2);
 		QueryResult = Query.ExecuteBatch();
 	
-		MD5_1 = GetMD5(QueryResult[2].Unload());
-		MD5_2 = GetMD5(QueryResult[3].Unload());
+		MD5_1 = GetMD5(QueryResult[2].Unload(), ,SerializeToXML);
+		MD5_2 = GetMD5(QueryResult[3].Unload(), ,SerializeToXML);
 	EndIf;
 	If MD5_1 = MD5_2 Then
 		Return True;
@@ -1943,3 +1943,116 @@ Procedure CreateFormTable(CreactionStructure) Export
 EndProcedure
 
 #EndRegion
+
+
+Procedure BeforeWrite_RegistersClearDataBeforeWrite(Source, Cancel, Replacing) Export
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	RegMetadata = Source.Metadata();
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
+	
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
+	
+	For Each Record In Source Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record[Dimension.Name] = Undefined;
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record[Resource.Name] = Undefined;
+			EndIf;
+		EndDo;
+	EndDo;
+EndProcedure
+
+Procedure SetDataTypesForLoadRecords(RegMetadata, TableForLoad) Export
+	CompositeDataTypes = GetCompositeDataTypes(RegMetadata);
+	
+	If CompositeDataTypes.Dimensions.Count() = 0 
+		And CompositeDataTypes.Resources.Count() = 0 Then
+			Return;
+	EndIf;
+	
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		TableForLoad.Columns.Add("_tmp_" + Dimension.Name, Dimension.TypeDescription);
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		TableForLoad.Columns.Add("_tmp_" + Resource.Name, Resource.TypeDescription);
+	EndDo;
+	
+	For Each Record In TableForLoad Do
+		For Each Dimension In CompositeDataTypes.Dimensions Do
+			
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Record, Dimension.Name) Then
+				Continue;
+			EndIf; 
+			
+			If Not ValueIsFilled(Record[Dimension.Name]) Then
+				Record["_tmp_" + Dimension.Name] = Undefined;
+			Else
+				Record["_tmp_" + Dimension.Name] = Record[Dimension.Name];
+			EndIf;
+		EndDo;
+		
+		For Each Resource In CompositeDataTypes.Resources Do
+			
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Record, Resource.Name) Then
+				Continue;
+			EndIf;
+			
+			If Not ValueIsFilled(Record[Resource.Name]) Then
+				Record["_tmp_" + Resource.Name] = Undefined;
+			Else
+				Record["_tmp_" + Resource.Name] = Record[Resource.Name];
+			EndIf;
+		EndDo;
+	EndDo;
+
+	For Each Dimension In CompositeDataTypes.Dimensions Do
+		If TableForLoad.Columns.Find(Dimension.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Dimension.Name);
+		EndIf;
+		TableForLoad.Columns["_tmp_" + Dimension.Name].Name = Dimension.Name;
+	EndDo;
+	
+	For Each Resource In CompositeDataTypes.Resources Do
+		If TableForLoad.Columns.Find(Resource.Name) <> Undefined Then
+			TableForLoad.Columns.Delete(Resource.Name);
+		EndIf;
+		TableForLoad.Columns["_tmp_" + Resource.Name].Name = Resource.Name;
+	EndDo;	
+EndProcedure
+
+Function GetCompositeDataTypes(RegMetadata) Export
+	CompositeDataTypes_Dimensions = New Array();
+	CompositeDataTypes_Resources = New Array();
+	
+	For Each Dimension In RegMetadata.Dimensions Do
+		If Dimension.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Dimensions.Add(New Structure("Name, TypeDescription", 
+				Dimension.Name, Dimension.Type));
+		EndIf;	
+	EndDo;
+	
+	For Each Resource In RegMetadata.Resources Do
+		If Resource.Type.Types().Count() > 1 Then
+			CompositeDataTypes_Resources.Add(New Structure("Name, TypeDescription", 
+				Resource.Name, Resource.Type));
+		EndIf;	
+	EndDo;
+
+	Return New Structure("Dimensions, Resources", 
+		CompositeDataTypes_Dimensions,
+		CompositeDataTypes_Resources);
+EndFunction
+
+

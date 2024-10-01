@@ -18,6 +18,18 @@
   <types>DefinedType.typeAddPropertyOwners</types>
  </commandParameterType>
  <representation>Picture</representation>
+ <toolTip>
+  <key>en</key>
+  <value>Additional properties</value>
+ </toolTip>
+ <toolTip>
+  <key>ru</key>
+  <value>Доп свойства</value>
+ </toolTip>
+ <toolTip>
+  <key>tr</key>
+  <value>Ek ayarlar</value>
+ </toolTip>
  <picture xsi:type="core:PictureRef">
   <picture>CommonPicture.AddProperties</picture>
  </picture>

@@ -92,6 +92,7 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
  <registerRecords>InformationRegister.T9540S_EmployeeVacations</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

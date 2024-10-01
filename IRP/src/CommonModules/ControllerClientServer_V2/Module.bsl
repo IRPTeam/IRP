@@ -13793,6 +13793,7 @@ Procedure StepChangeAccountByPaymentType(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.ChangeAccountByPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
 		Options.Workstation = GetWorkstation(Parameters);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
 		Options.CurrentAccount = GetPaymentsAccount(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeAccountByPaymentType";

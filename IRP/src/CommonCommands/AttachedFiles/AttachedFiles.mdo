@@ -18,6 +18,18 @@
   <types>DefinedType.typeFilesOwner</types>
  </commandParameterType>
  <representation>Auto</representation>
+ <toolTip>
+  <key>en</key>
+  <value>Attached files</value>
+ </toolTip>
+ <toolTip>
+  <key>ru</key>
+  <value>Прикрепленные файлы</value>
+ </toolTip>
+ <toolTip>
+  <key>tr</key>
+  <value>Dış dosyalar</value>
+ </toolTip>
  <picture xsi:type="core:PictureRef">
   <picture>StdPicture.Attach</picture>
  </picture>

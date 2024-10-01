@@ -103,6 +103,7 @@
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

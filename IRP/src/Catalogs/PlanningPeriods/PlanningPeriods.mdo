@@ -71,6 +71,7 @@
   <key>tr</key>
   <value>Planlama dönemi</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -82,6 +83,7 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.PlanningPeriods.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.PlanningPeriods.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.PlanningPeriods.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.PlanningPeriods.Form.ChoiceForm</defaultChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -365,6 +367,23 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="37dcdaea-68e1-48d1-9b4a-8ebc500ef5eb">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

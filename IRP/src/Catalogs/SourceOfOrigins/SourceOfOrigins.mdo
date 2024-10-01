@@ -156,6 +156,7 @@
   <key>tr</key>
   <value>Envanter menşei</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -167,8 +168,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.SourceOfOrigins.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.SourceOfOrigins.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.SourceOfOrigins.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.SourceOfOrigins.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.SourceOfOrigins.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="b99a35df-7e7e-475f-a3b0-419399797c9e">
   <name>CustomProductID</name>
@@ -481,6 +484,40 @@
   <synonym>
    <key>tr</key>
    <value>Envanter menşei değiştir</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="b1730add-db77-484e-98bc-e387781acd24">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="6c4fdc5c-7917-4a2b-9146-460d7869efdd">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

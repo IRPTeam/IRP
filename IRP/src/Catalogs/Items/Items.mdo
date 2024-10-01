@@ -69,6 +69,7 @@
   <key>tr</key>
   <value>Malzeme</value>
  </objectPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -79,8 +80,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.Items.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.Items.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.Items.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.Items.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.Items.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <attributes uuid="b07b2729-1f36-468a-bbac-ece3a3ebb4d4">
   <name>ItemType</name>
   <synonym>
@@ -516,6 +519,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="e16c0e6d-e41b-4719-acba-97e0c745d1ee">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="4641cf91-353a-4b44-a677-f396599531ab">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

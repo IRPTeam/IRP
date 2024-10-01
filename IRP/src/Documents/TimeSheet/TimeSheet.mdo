@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.TimeSheet.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9520S_TimeSheetInfo</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

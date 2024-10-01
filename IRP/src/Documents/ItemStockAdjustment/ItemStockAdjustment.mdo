@@ -100,6 +100,7 @@
  <registerRecords>AccumulationRegister.R4051T_StockAdjustmentAsWriteOff</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="4b045ff1-41d1-423f-819f-68a05835a3d5">

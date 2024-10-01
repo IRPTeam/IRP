@@ -90,6 +90,7 @@
  <defaultListForm>Document.ReconciliationStatement.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.ReconciliationStatement.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

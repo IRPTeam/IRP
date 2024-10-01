@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.EmployeeSickLeave.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9550S_EmployeeSickLeave</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

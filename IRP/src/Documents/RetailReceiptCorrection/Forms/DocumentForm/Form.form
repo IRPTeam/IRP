@@ -7667,6 +7667,18 @@
  <formCommands>
   <name>SearchByBarcode</name>
   <id>4</id>
+  <toolTip>
+   <key>en</key>
+   <value>Scan or enter the product's barcode</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Отсканировать или ввести штрихкод товара</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Ürün barkod okut veya gir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -7725,6 +7737,18 @@
    <value>Okutma formu aç</value>
   </title>
   <id>6</id>
+  <toolTip>
+   <key>en</key>
+   <value>Scan form</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Форма сканирования</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Tarama formu</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -7755,6 +7779,18 @@
    <value>Dövizleri düzelt</value>
   </title>
   <id>8</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit exchange rates for document</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить курс валют для документа</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Evrak için döviz kurları değiştir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -7811,6 +7847,18 @@
    <value>Temel birimde miktarı düzenle</value>
   </title>
   <id>14</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit quantity in base unit</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить количество в осн. ед. изм.</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Temel birimde miktarı düzenle</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>

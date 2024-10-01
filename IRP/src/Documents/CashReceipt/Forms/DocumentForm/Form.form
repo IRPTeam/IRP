@@ -3744,6 +3744,18 @@
    <value>Dövizleri düzelt</value>
   </title>
   <id>2</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit exchange rates for document</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить курс валют для документа</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Evrak için döviz kurları değiştir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -3800,6 +3812,18 @@
    <value>Muhasebe değiştir</value>
   </title>
   <id>4</id>
+  <toolTip>
+   <key>en</key>
+   <value>Edit accounting entries</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Изменить бухгалтерские проводки</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Muhasebe kayıtları değiştir</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>

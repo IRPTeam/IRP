@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Settings xmlns="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<filter>
+		<item xsi:type="FilterItemComparison">
+			<left xsi:type="dcscor:Field">IsFolder</left>
+			<comparisonType>Equal</comparisonType>
+			<right xsi:type="xs:boolean">true</right>
+		</item>
+		<viewMode>Normal</viewMode>
+		<userSettingID>276f7a2c-4246-4b29-ac7f-700c8c5bfd07</userSettingID>
+	</filter>
+	<order>
+		<viewMode>Normal</viewMode>
+		<userSettingID>6fd7fca4-3cc0-4ec8-83cf-96228740c5c6</userSettingID>
+	</order>
+	<conditionalAppearance>
+		<viewMode>Normal</viewMode>
+		<userSettingID>4a58e679-70e6-4615-a554-840b39198dc8</userSettingID>
+	</conditionalAppearance>
+	<itemsViewMode>Normal</itemsViewMode>
+	<itemsUserSettingID>2cf2a689-42c9-4097-a1be-76a6b75d5960</itemsUserSettingID>
+</Settings>

@@ -93,6 +93,7 @@
  <registerRecords>InformationRegister.PricesByItems</registerRecords>
  <registerRecords>InformationRegister.PricesByItemKeys</registerRecords>
  <registerRecords>InformationRegister.PricesByProperties</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

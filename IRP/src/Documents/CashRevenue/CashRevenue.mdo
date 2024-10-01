@@ -95,6 +95,7 @@
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

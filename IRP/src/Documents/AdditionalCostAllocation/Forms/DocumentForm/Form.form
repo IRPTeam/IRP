@@ -882,6 +882,106 @@
       </extInfo>
      </items>
      <items xsi:type="form:FormField">
+      <name>CostRowsExpenseType</name>
+      <id>714</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>CostRows.ExpenseType</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>CostRowsExpenseTypeExtendedTooltip</name>
+       <id>716</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>CostRowsExpenseTypeContextMenu</name>
+       <id>715</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
+      <name>CostRowsProfitLossCenter</name>
+      <id>717</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+       <segments>CostRows.ProfitLossCenter</segments>
+      </dataPath>
+      <extendedTooltip>
+       <name>CostRowsProfitLossCenterExtendedTooltip</name>
+       <id>719</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+       <name>CostRowsProfitLossCenterContextMenu</name>
+       <id>718</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <wrap>true</wrap>
+       <chooseType>true</chooseType>
+       <typeDomainEnabled>true</typeDomainEnabled>
+       <textEdit>true</textEdit>
+      </extInfo>
+     </items>
+     <items xsi:type="form:FormField">
       <name>CostRowsCurrency</name>
       <id>554</id>
       <visible>true</visible>
@@ -1779,6 +1879,10 @@
      <handlers>
       <event>BeforeDeleteRow</event>
       <name>AllocationRowsBeforeDeleteRow</name>
+     </handlers>
+     <handlers>
+      <event>OnActivateRow</event>
+      <name>AllocationRowsOnActivateRow</name>
      </handlers>
      <searchStringAddition>
       <visible>true</visible>
@@ -2848,6 +2952,1059 @@
    <extendedTooltip>
     <name>GroupCostAllocationExtendedTooltip</name>
     <id>200</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <type>Page</type>
+   <extInfo xsi:type="form:PageGroupExtInfo">
+    <group>Vertical</group>
+    <showTitle>true</showTitle>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormGroup">
+   <name>GroupResult</name>
+   <id>720</id>
+   <items xsi:type="form:Table">
+    <name>AllocationResult</name>
+    <id>722</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.AllocationResult</segments>
+    </dataPath>
+    <titleLocation>None</titleLocation>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultLineNumber</name>
+     <id>735</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.LineNumber</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultLineNumberExtendedTooltip</name>
+      <id>737</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultLineNumberContextMenu</name>
+      <id>736</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultKey</name>
+     <id>738</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.Key</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultKeyExtendedTooltip</name>
+      <id>740</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultKeyContextMenu</name>
+      <id>739</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultRowID</name>
+     <id>741</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.RowID</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultRowIDExtendedTooltip</name>
+      <id>743</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultRowIDContextMenu</name>
+      <id>742</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultBasisRowID</name>
+     <id>744</id>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.BasisRowID</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultBasisRowIDExtendedTooltip</name>
+      <id>746</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultBasisRowIDContextMenu</name>
+      <id>745</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultExpensePurchaseInvoice</name>
+     <id>747</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ExpensePurchaseInvoice</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultExpensePurchaseInvoiceExtendedTooltip</name>
+      <id>749</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultExpensePurchaseInvoiceContextMenu</name>
+      <id>748</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultExpenseItem</name>
+     <id>750</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ExpenseItem</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultExpenseItemExtendedTooltip</name>
+      <id>752</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultExpenseItemContextMenu</name>
+      <id>751</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultExpenseItemKey</name>
+     <id>753</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ExpenseItemKey</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultExpenseItemKeyExtendedTooltip</name>
+      <id>755</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultExpenseItemKeyContextMenu</name>
+      <id>754</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultPurchaseInvoice</name>
+     <id>756</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.PurchaseInvoice</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultPurchaseInvoiceExtendedTooltip</name>
+      <id>758</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultPurchaseInvoiceContextMenu</name>
+      <id>757</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultItem</name>
+     <id>759</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.Item</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultItemExtendedTooltip</name>
+      <id>761</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultItemContextMenu</name>
+      <id>760</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultItemKey</name>
+     <id>762</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ItemKey</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultItemKeyExtendedTooltip</name>
+      <id>764</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultItemKeyContextMenu</name>
+      <id>763</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultStore</name>
+     <id>765</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.Store</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultStoreExtendedTooltip</name>
+      <id>767</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultStoreContextMenu</name>
+      <id>766</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultCurrency</name>
+     <id>780</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.Currency</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultCurrencyExtendedTooltip</name>
+      <id>782</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultCurrencyContextMenu</name>
+      <id>781</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultAmount</name>
+     <id>768</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.Amount</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultAmountExtendedTooltip</name>
+      <id>770</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultAmountContextMenu</name>
+      <id>769</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultTaxAmount</name>
+     <id>771</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.TaxAmount</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultTaxAmountExtendedTooltip</name>
+      <id>773</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultTaxAmountContextMenu</name>
+      <id>772</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultExpenseType</name>
+     <id>774</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ExpenseType</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultExpenseTypeExtendedTooltip</name>
+      <id>776</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultExpenseTypeContextMenu</name>
+      <id>775</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+     <name>AllocationResultProfitLossCenter</name>
+     <id>777</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.AllocationResult.ProfitLossCenter</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>AllocationResultProfitLossCenterExtendedTooltip</name>
+      <id>779</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultProfitLossCenterContextMenu</name>
+      <id>778</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <autoCommandBar>
+     <name>AllocationResultCommandBar</name>
+     <id>723</id>
+     <items xsi:type="form:Button">
+      <name>EditAccounting</name>
+      <id>712</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>EditAccountingExtendedTooltip</name>
+       <id>713</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.EditAccounting</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <horizontalAlign>Left</horizontalAlign>
+     <autoFill>true</autoFill>
+    </autoCommandBar>
+    <searchStringAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>AllocationResultSearchString</name>
+     <id>726</id>
+     <extendedTooltip>
+      <name>AllocationResultSearchStringExtendedTooltip</name>
+      <id>728</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultSearchStringContextMenu</name>
+      <id>727</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <source>AllocationResultSearchString</source>
+     <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </searchStringAddition>
+    <viewStatusAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>AllocationResultViewStatus</name>
+     <id>732</id>
+     <extendedTooltip>
+      <name>AllocationResultViewStatusExtendedTooltip</name>
+      <id>734</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultViewStatusContextMenu</name>
+      <id>733</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>ViewStatusAddition</type>
+     <source>AllocationResultViewStatus</source>
+     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </viewStatusAddition>
+    <searchControlAddition>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <name>AllocationResultSearchControl</name>
+     <id>729</id>
+     <extendedTooltip>
+      <name>AllocationResultSearchControlExtendedTooltip</name>
+      <id>731</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>AllocationResultSearchControlContextMenu</name>
+      <id>730</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>SearchControlAddition</type>
+     <source>AllocationResultSearchControl</source>
+     <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+     </extInfo>
+    </searchControlAddition>
+    <extendedTooltip>
+     <name>AllocationResultExtendedTooltip</name>
+     <id>725</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>AllocationResultContextMenu</name>
+     <id>724</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <readOnly>true</readOnly>
+    <changeRowSet>true</changeRowSet>
+    <changeRowOrder>true</changeRowOrder>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <autoMaxRowsCount>true</autoMaxRowsCount>
+    <selectionMode>MultiRow</selectionMode>
+    <header>true</header>
+    <headerHeight>1</headerHeight>
+    <footerHeight>1</footerHeight>
+    <horizontalScrollBar>AutoUse</horizontalScrollBar>
+    <verticalScrollBar>AutoUse</verticalScrollBar>
+    <horizontalLines>true</horizontalLines>
+    <verticalLines>true</verticalLines>
+    <searchOnInput>Auto</searchOnInput>
+    <initialListView>Auto</initialListView>
+    <horizontalStretch>true</horizontalStretch>
+    <verticalStretch>true</verticalStretch>
+    <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
+   </items>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <title>
+    <key>en</key>
+    <value>Result</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Результат</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Sonuç</value>
+   </title>
+   <extendedTooltip>
+    <name>GroupResultExtendedTooltip</name>
+    <id>721</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -4860,6 +6017,56 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>ExpenseType</name>
+   <title>
+    <key>en</key>
+    <value>Expense type</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Статья затрат</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </title>
+   <id>39</id>
+   <valueType>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ProfitLossCenter</name>
+   <title>
+    <key>en</key>
+    <value>Profit loss center</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Центр прибылей/убытков</value>
+   </title>
+   <title>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
+   </title>
+   <id>40</id>
+   <valueType>
+    <types>CatalogRef.BusinessUnits</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>AllocationRows</name>
@@ -5168,6 +6375,56 @@
    </edit>
   </columns>
  </attributes>
+ <attributes>
+  <name>AccountingExtDimensions</name>
+  <title>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Бухгалтерские субконто</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
+  </title>
+  <id>37</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9051S_AccountingExtDimensions</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
+ <attributes>
+  <name>AccountingRowAnalytics</name>
+  <title>
+   <key>en</key>
+   <value>Accounting row analytics</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Аналитика строки бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
+  </title>
+  <id>38</id>
+  <valueType>
+   <types>InformationRegisterRecordSet.T9050S_AccountingRowAnalytics</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>ShowRowKey</name>
   <title>
@@ -5247,6 +6504,36 @@
     <name>ShowHiddenTables</name>
    </handler>
   </action>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>EditAccounting</name>
+  <title>
+   <key>en</key>
+   <value>Edit accounting</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Изменить бух. проводки</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Muhasebe değiştir</value>
+  </title>
+  <id>4</id>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.ChartOfAccounts</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>EditAccounting</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

@@ -491,6 +491,7 @@
    </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
+  <representation>HierarchicalList</representation>
   <changeRowSet>true</changeRowSet>
   <changeRowOrder>true</changeRowOrder>
   <autoMaxWidth>true</autoMaxWidth>

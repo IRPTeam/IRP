@@ -82,6 +82,56 @@
    <currentRowUse>Auto</currentRowUse>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>Parent</name>
+  <id>44</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.Parent</segments>
+  </dataPath>
+  <extendedTooltip>
+   <name>ParentExtendedTooltip</name>
+   <id>46</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>ParentContextMenu</name>
+   <id>45</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>InputField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:InputFieldExtInfo">
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <wrap>true</wrap>
+   <chooseType>true</chooseType>
+   <typeDomainEnabled>true</typeDomainEnabled>
+   <textEdit>true</textEdit>
+  </extInfo>
+ </items>
  <items xsi:type="form:FormGroup">
   <name>GroupBusinessUnitsTypes</name>
   <id>21</id>
@@ -564,7 +614,6 @@
     <command>InformationRegister.T9014S_AccountsExpenseRevenue.StandardCommand.OpenByValue.ProfitLossCenter</command>
     <group>FormNavigationPanelGoTo</group>
     <index>0</index>
-    <userVisible/>
    </cmiFragmentRecord>
   </navigationPanel>
   <commandBar/>

@@ -1112,6 +1112,36 @@
     </code>
    </content>
   </items>
+  <items id="2388eba2-8196-4714-9d87-b0edbbef1453">
+   <name>Document_AdditionalCostAllocation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>157</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="b442dcfa-c5b2-4bfe-8b3d-31a63ecedba6">
+    <name>AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>158</value>
+    </code>
+   </content>
+  </items>
+  <items id="0fe0012d-7c52-44e6-a7ca-8ef0d54d893d">
+   <name>Document_AdditionalRevenueAllocation</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>159</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="48036b48-6cc3-4bc4-81b2-36e02d74e95f">
+    <name>AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory</name>
+    <description/>
+    <code xsi:type="core:NumberValue">
+     <value>160</value>
+    </code>
+   </content>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

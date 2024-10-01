@@ -2022,6 +2022,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_173", NStr("en='Currency rate from [%1] to [%2] not set';
 		|ru='Курс валюты с [%1] по [%2] не установлен';
 		|tr='[%1]''den [%2]''ye döviz kuru ayarlanmamış'", Lang));
+	Strings.Insert("Error_174", NStr("en='There can be only one currency set in the document.';
+		|ru='В документе может быть указана только одна валюта.';
+		|tr='Evrakta sadece tek döviz seçilebilir.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -2412,6 +2415,13 @@ Function Strings(Lang) Export
 		|ru='Вы хотите поменять налоги согласно организации?';
 		|tr='Şirket ayarlarına göre vergileri değiştirmek ister misiniz?'",
 		Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en='Do you want to create new legal name?';
+		|ru='Создать нового контрагента?';
+		|tr='Yeni fatura hesabı oluşturulsun mu?'", Lang));
+	Strings.Insert("QuestionToUser_033", NStr("en='Do you want to create new partner term?';
+		|ru='Создать новое соглашение?';
+		|tr='Yeni sözleşme oluşturulsun mu?'", Lang));
+		
 #EndRegion
 
 #Region SuggestionToUser
@@ -2744,6 +2754,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Settings_017", NStr("en='Branch';
 		|ru='Структурное подразделение';
 		|tr='Şube'", Lang));
+	Strings.Insert("Add_Settings_018", NStr("en='Catalogs';
+		|ru='Справочники';
+		|tr='Kart listeleri'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en='Disable - Disable automatic creation of Company and Agreement for Partner';
+		|ru='Отключить - Автосоздание контрагента и соглашения при создании партнера';
+		|tr='Devre dışı - Cari hesap oluştururken fatura hesap ve sözleşmeyi otomatik oluştur'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -3527,6 +3543,16 @@ Strings.Insert("ExternalAccountingOperation",
 	NStr("en='External accounting operation';
 		|ru='Внешние бух. операции';
 		|tr='Dış muhasebe kaydı'", Lang));
+
+Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses",
+	NStr("en='AdditionalCostAllocation DR (R4050B_StockInventory) CR (R5022T_Expenses)';
+		|ru='Дополнительное распределение затрат DR (R4050B_StockInventory) CR (R5022T_Expenses) ';
+		|tr='Ek Maliyet Dağılımı DR (R4050B_StokEnvanteri) CR (R5022T_Giderler)  '", Lang));
+
+Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
+	NStr("en='AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)';
+		|ru='Дополнительное распределение доходов DR (R5021T_Revenues) CR (R4050B_StockInventory)';
+		|tr='Ek Gelir Dağılımı DR (R5021T_Gelirler) CR (R4050B_StokEnvanteri)'", Lang));
 
 #EndRegion
 

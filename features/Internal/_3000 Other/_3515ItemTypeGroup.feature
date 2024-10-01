@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @Other
@@ -29,7 +29,12 @@ Scenario: _351501 create a group of item types
         And I input "Lipstick" text in the field named "Description_en"
         And I input "Lipstick TR" text in the field named "Description_tr"
         And I click "Ok" button
-        And I select from "Parent" drop-down list by "Cosmetics" string
+//        And I select from "Parent" drop-down list by "Cosmetics" string
+        And I click Choice button of the field named "Parent"
+        And I go to line in "List" table
+        	| "Description" |
+        	| "Cosmetics"   |
+        And I click the button named "FormChoose"		
         And I click "Save and close" button
     * Create item type Lipstick
         And I go to line in "List" table

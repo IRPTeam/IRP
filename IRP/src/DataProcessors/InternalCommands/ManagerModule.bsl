@@ -675,7 +675,10 @@ Procedure AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, Add
 		
 		CommandPicture = PictureLib[CommandParameters.CommandDescription.Picture]; // Picture
 		NewColumn.HeaderPicture = CommandPicture; 
-		NewColumn.ValuesPicture = CommandPicture; 
+		NewColumn.ValuesPicture = CommandPicture;
+		NewColumn.ToolTip = NStr("en='Audit lock';
+			|ru='Аудиторский запрет изменения';
+			|tr='Audit kilidi'");
 		
 		Cancel = True;
 		

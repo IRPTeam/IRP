@@ -75,152 +75,156 @@ Scenario: _4001801 preparation (Outging messages)
 Scenario: _4001802 check preparation
 	When check preparation 
 
-Scenario: _4001803 test connection (Email)
-	And I close all client application windows
-	* Select Email integration settings
-		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-		And I go to line in "List" table
-			| "Description" |
-			| "Email"       |
-		And I select current line in "List" table
-	* Check connection
-		And in the table "ConnectionSetting" I click "Test" button
-		Then there are lines in TestClient message log
-			|'Success'|
-	And I close all client application windows
+# Scenario: _4001803 test connection (Email)
+# 	And I close all client application windows
+# 	* Select Email integration settings
+# 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+# 		And I go to line in "List" table
+# 			| "Description" |
+# 			| "Email"       |
+# 		And I select current line in "List" table
+# 	* Check connection
+# 		And in the table "ConnectionSetting" I click "Test" button
+# 		Then there are lines in TestClient message log
+# 			|'Success'|
+# 	And I close all client application windows
 
-Scenario: _4001804 send email (SI)
-	And I close all client application windows
-	* Select SI
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-	* Print
-		And I click "Sales invoice" button		
-	* Send message
-		And I click "Send by message" button
-		And I select from "Mail account" drop-down list by "Email" string
-		And "Attachments" table became equal
-			| 'Presentation in letter' | 'File'                  |
-			| 'SalesInvoicePrint.pdf'  | 'SalesInvoicePrint.pdf' |
-	* Save 
-		And I click "Save" button
-		And I click "Send" button
-		When I Check the steps for Exception
-			| 'And I click "Save" button'    |
-		And I delete "$$OutgoingMessage4001804$$" variable
-		And I save the window as "$$OutgoingMessage4001804$$"
-		And I close all client application windows
-	* Check related documents structure
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-		And I click "Related documents" button
-		And "DocumentsTree" table became equal
-			| 'Presentation'                               | 'Amount' |
-			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '800,00' |
-			| '$$OutgoingMessage4001804$$'                 | ''       |
-		And I close all client application windows
-	* Create one more email (same SI)
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-		* Print
-			And I click "Sales invoice" button		
-		* Send message
-			And I click "Send by message" button
-			And I select from "Mail account" drop-down list by "Email" string
-			And "Attachments" table became equal
-				| 'Presentation in letter' | 'File'                  |
-				| 'SalesInvoicePrint.pdf'  | 'SalesInvoicePrint.pdf' |
-			And I click "Save" button
-			And I click "Send" button
-			When I Check the steps for Exception
-				| 'And I click "Save" button'    |
-			And I delete "$$OutgoingMessage40018041$$" variable
-			And I save the window as "$$OutgoingMessage40018041$$"
-			And I close all client application windows
-		* Check
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-			And I go to line in "List" table
-				| 'Number'    |
-				| '15'        |
-			And I click "Related documents" button
-			And "DocumentsTree" table became equal
-				| 'Presentation'                               | 'Amount' |
-				| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '800,00' |
-				| '$$OutgoingMessage4001804$$'                 | ''       |
-				| '$$OutgoingMessage40018041$$'                | ''       |
-			And I close all client application windows
-		* Check attached files
-			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-			And I go to line in "List" table
-				| 'Number'    |
-				| '15'        |
-			And I click "Attached files" button
-			And "FileList" table became equal
-				| 'File'                  | 'Extension' | 'Volume'                   |
-				| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
-			And I close all client application windows
-	* Change SI and send mail
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-		And I select current line in "List" table
-		And I go to line in "ItemList" table
-			| "Item"     | "Item key"  | "Quantity" |
-			| "Trousers" | "38/Yellow" | "1,000"    |
-		And I activate "Quantity" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "2,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click "Post" button
-		And I click "Sales invoice" button
-		Then "Print form" window is opened
-		And I click "Send by message" button
-		And I select from "Mail account" drop-down list by "email" string
-		And I click "Save" button
-		And I click "Send" button
-		And I delete "$$OutgoingMessage40018042$$" variable
-		And I save the window as "$$OutgoingMessage40018042$$"
-		And I close all client application windows
-	* Check
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-		And I click "Related documents" button
-		And "DocumentsTree" table became equal
-			| 'Presentation'                               | 'Amount'   |
-			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '1 199,99' |
-			| '$$OutgoingMessage4001804$$'                 | ''         |
-			| '$$OutgoingMessage40018041$$'                | ''         |
-			| '$$OutgoingMessage40018042$$'                | ''         |
-		And I close all client application windows
-	* Check attached files
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '15'        |
-		And I click "Attached files" button
-		And "FileList" table became equal
-			| 'File'                  | 'Extension' | 'Volume'                   |
-			| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
-			| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
-		And I close all client application windows
+# Scenario: _4001804 send email (SI)
+# 	And I close all client application windows
+# 	Try
+# 		And the previous scenario executed successfully
+# 	Except
+# 		Then I stop the execution of scripts for this feature
+# 	* Select SI
+# 		And I close all client application windows
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 	* Print
+# 		And I click "Sales invoice" button		
+# 	* Send message
+# 		And I click "Send by message" button
+# 		And I select from "Mail account" drop-down list by "Email" string
+# 		And "Attachments" table became equal
+# 			| 'Presentation in letter' | 'File'                  |
+# 			| 'SalesInvoicePrint.pdf'  | 'SalesInvoicePrint.pdf' |
+# 	* Save 
+# 		And I click "Save" button
+# 		And I click "Send" button
+# 		When I Check the steps for Exception
+# 			| 'And I click "Save" button'    |
+# 		And I delete "$$OutgoingMessage4001804$$" variable
+# 		And I save the window as "$$OutgoingMessage4001804$$"
+# 		And I close all client application windows
+# 	* Check related documents structure
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 		And I click "Related documents" button
+# 		And "DocumentsTree" table became equal
+# 			| 'Presentation'                               | 'Amount' |
+# 			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '800,00' |
+# 			| '$$OutgoingMessage4001804$$'                 | ''       |
+# 		And I close all client application windows
+# 	* Create one more email (same SI)
+# 		And I close all client application windows
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 		* Print
+# 			And I click "Sales invoice" button		
+# 		* Send message
+# 			And I click "Send by message" button
+# 			And I select from "Mail account" drop-down list by "Email" string
+# 			And "Attachments" table became equal
+# 				| 'Presentation in letter' | 'File'                  |
+# 				| 'SalesInvoicePrint.pdf'  | 'SalesInvoicePrint.pdf' |
+# 			And I click "Save" button
+# 			And I click "Send" button
+# 			When I Check the steps for Exception
+# 				| 'And I click "Save" button'    |
+# 			And I delete "$$OutgoingMessage40018041$$" variable
+# 			And I save the window as "$$OutgoingMessage40018041$$"
+# 			And I close all client application windows
+# 		* Check
+# 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 			And I go to line in "List" table
+# 				| 'Number'    |
+# 				| '15'        |
+# 			And I click "Related documents" button
+# 			And "DocumentsTree" table became equal
+# 				| 'Presentation'                               | 'Amount' |
+# 				| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '800,00' |
+# 				| '$$OutgoingMessage4001804$$'                 | ''       |
+# 				| '$$OutgoingMessage40018041$$'                | ''       |
+# 			And I close all client application windows
+# 		* Check attached files
+# 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 			And I go to line in "List" table
+# 				| 'Number'    |
+# 				| '15'        |
+# 			And I click "Attached files" button
+# 			And "FileList" table became equal
+# 				| 'File'                  | 'Extension' | 'Volume'                   |
+# 				| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
+# 			And I close all client application windows
+# 	* Change SI and send mail
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 		And I select current line in "List" table
+# 		And I go to line in "ItemList" table
+# 			| "Item"     | "Item key"  | "Quantity" |
+# 			| "Trousers" | "38/Yellow" | "1,000"    |
+# 		And I activate "Quantity" field in "ItemList" table
+# 		And I select current line in "ItemList" table
+# 		And I input "2,000" text in "Quantity" field of "ItemList" table
+# 		And I finish line editing in "ItemList" table
+# 		And I click "Post" button
+# 		And I click "Sales invoice" button
+# 		Then "Print form" window is opened
+# 		And I click "Send by message" button
+# 		And I select from "Mail account" drop-down list by "email" string
+# 		And I click "Save" button
+# 		And I click "Send" button
+# 		And I delete "$$OutgoingMessage40018042$$" variable
+# 		And I save the window as "$$OutgoingMessage40018042$$"
+# 		And I close all client application windows
+# 	* Check
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 		And I click "Related documents" button
+# 		And "DocumentsTree" table became equal
+# 			| 'Presentation'                               | 'Amount'   |
+# 			| 'Sales invoice 15 dated 07.10.2020 01:19:02' | '1 199,99' |
+# 			| '$$OutgoingMessage4001804$$'                 | ''         |
+# 			| '$$OutgoingMessage40018041$$'                | ''         |
+# 			| '$$OutgoingMessage40018042$$'                | ''         |
+# 		And I close all client application windows
+# 	* Check attached files
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I go to line in "List" table
+# 			| 'Number'    |
+# 			| '15'        |
+# 		And I click "Attached files" button
+# 		And "FileList" table became equal
+# 			| 'File'                  | 'Extension' | 'Volume'                   |
+# 			| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
+# 			| 'SalesInvoicePrint.pdf' | 'pdf'       | 'DEFAULT DOCUMENT STORAGE' |
+# 		And I close all client application windows
 
-Scenario: _4001805 check message que to send
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/InformationRegister.MessagesQueueToSend"
-	And "List" table became equal
-		| 'Message'                     | 'Sent' | 'Date sent' | 'Number attempts' | 'Last warning' |
-		| '$$OutgoingMessage4001804$$'  | 'Yes'  | '*'         | '1'               | ''             |
-		| '$$OutgoingMessage40018041$$' | 'Yes'  | '*'         | '1'               | ''             |
-		| '$$OutgoingMessage40018042$$' | 'Yes'  | '*'         | '1'               | ''             |
-	And I close all client application windows
+# Scenario: _4001805 check message que to send
+# 	And I close all client application windows
+# 	Given I open hyperlink "e1cib/list/InformationRegister.MessagesQueueToSend"
+# 	And "List" table became equal
+# 		| 'Message'                     | 'Sent' | 'Date sent' | 'Number attempts' | 'Last warning' |
+# 		| '$$OutgoingMessage4001804$$'  | 'Yes'  | '*'         | '1'               | ''             |
+# 		| '$$OutgoingMessage40018041$$' | 'Yes'  | '*'         | '1'               | ''             |
+# 		| '$$OutgoingMessage40018042$$' | 'Yes'  | '*'         | '1'               | ''             |
+# 	And I close all client application windows

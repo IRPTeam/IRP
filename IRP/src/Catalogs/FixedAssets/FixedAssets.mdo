@@ -81,6 +81,7 @@
   <key>tr</key>
   <value>Sabit kıymetler</value>
  </listPresentation>
+ <hierarchical>true</hierarchical>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -91,8 +92,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.FixedAssets.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.FixedAssets.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.FixedAssets.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.FixedAssets.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.FixedAssets.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="93384d7d-d83c-4da2-bf57-5a5f7b7e78d9">
   <name>Type</name>
@@ -349,6 +352,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="78d3513c-52fe-4db3-8cfd-f3756c14ed85">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="60490c4b-c5d5-4b4f-bc4a-ee30968ae75b">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

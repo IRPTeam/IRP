@@ -1185,6 +1185,8 @@ Function R6080T_OtherPeriodsRevenues()
 		|			THEN ItemList.ItemKey
 		|	END AS ItemKey,
 		|	ItemList.Currency AS Currency,
+		|	ItemList.RevenueType,
+		|	ItemList.ProfitLossCenter,
 		|	ItemList.OtherPeriodRevenueType AS OtherPeriodRevenueType,
 		|	ItemList.NetAmount AS Amount,
 		|	CASE

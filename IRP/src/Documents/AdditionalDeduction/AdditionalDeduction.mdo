@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.AdditionalDeduction.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R9570T_AdditionalDeduction</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

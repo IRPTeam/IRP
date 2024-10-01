@@ -93,6 +93,7 @@
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="9b4a5276-b31a-45fe-95d4-e29919c9e790">

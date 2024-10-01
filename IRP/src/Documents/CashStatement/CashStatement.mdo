@@ -96,6 +96,7 @@
  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

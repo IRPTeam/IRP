@@ -60,6 +60,7 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
  <registerRecords>AccumulationRegister.R9541T_VacationUsage</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="cb53aaa1-8a04-47c3-b563-21d12a903f6e">

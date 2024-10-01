@@ -91,6 +91,7 @@
  <defaultChoiceForm>Document.EmployeeHiring.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T9510S_Staffing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

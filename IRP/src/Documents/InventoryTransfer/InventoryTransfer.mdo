@@ -109,6 +109,7 @@
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -795,6 +796,28 @@
    </type>
    <createOnInput>DontUse</createOnInput>
    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="605f7baa-5a36-4cc7-8b25-ee6dc3d89634">
+   <name>SalesOrder</name>
+   <synonym>
+    <key>en</key>
+    <value>Sales order</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Заказ покупателя</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Satış siparişi</value>
+   </synonym>
+   <type>
+    <types>DocumentRef.SalesOrder</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
  </tabularSections>

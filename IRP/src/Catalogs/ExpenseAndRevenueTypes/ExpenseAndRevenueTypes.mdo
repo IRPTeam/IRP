@@ -158,7 +158,6 @@
   <value>Gider ve gelir türü</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
- <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
  <codeLength>12</codeLength>
@@ -169,8 +168,10 @@
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.ExpenseAndRevenueTypes.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.ExpenseAndRevenueTypes.Form.GroupForm</defaultFolderForm>
  <defaultListForm>Catalog.ExpenseAndRevenueTypes.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Catalog.ExpenseAndRevenueTypes.Form.ChoiceForm</defaultChoiceForm>
+ <defaultFolderChoiceForm>Catalog.ExpenseAndRevenueTypes.Form.GroupChoiceForm</defaultFolderChoiceForm>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
  <attributes uuid="77e74b7d-9037-4fde-9b7e-1272cb503bc9">
   <name>IsExpense</name>
@@ -381,6 +382,40 @@
   <synonym>
    <key>tr</key>
    <value>Seçim formu</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ee94edd0-a019-4292-b1a9-c7e3b29c19b9">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма группы</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup from</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="29cd88ac-547d-4f9d-bf5c-0fed387eaca4">
+  <name>GroupChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>Group choice form</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Группа форм выбора</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Grup seçim formu</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

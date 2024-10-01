@@ -499,15 +499,15 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 				 |	""%1"",
 				 |	%2
 				 |FROM
-				 |	Catalog.%1 AS Cat
+				 |	Catalog.%1 AS Table
 				 |WHERE
 				 |	(%3)
-				 |	AND Cat.Ref <> &Ref
+				 |	AND Table.Ref <> &Ref %4
 				 |GROUP BY
 				 |	""%1""";
 	For Each Attribute In AllDescription Do
 		If ValueIsFilled(Source[Attribute]) Then
-			FieldLeftString = "Cat." + Attribute + " = &" + Attribute;
+			FieldLeftString = "Table." + Attribute + " = &" + Attribute;
 			FieldString = "IsNull(MAX(" + FieldLeftString + "), FALSE) AS " + Attribute;
 			QueryFieldsSection.Add(FieldString);
 			QueryConditionsSection.Add(FieldLeftString);
@@ -518,9 +518,19 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 	If Not DescriptionAttributes.Count() Then
 		Return;
 	EndIf;
+	
+	AdditionalConditions = "";
+	Params = Undefined;
+	If Source.AdditionalProperties.Property("CheckUniqueDescriptionsParameters", Params) Then
+		AdditionalConditions = Params.QueryText;
+		For Each KeyValue In Params.QueryParameters Do
+			Query.SetParameter(KeyValue.Key, KeyValue.Value);
+		EndDo;
+	EndIf;
+	
 	QueryFields = StrConcat(QueryFieldsSection, "," + Chars.LF + "	");
 	QueryConditions = StrConcat(QueryConditionsSection, Chars.LF + "	OR ");
-	Query.Text = StrTemplate(Query.Text, SourceMetadata.Name, QueryFields, QueryConditions);
+	Query.Text = StrTemplate(Query.Text, SourceMetadata.Name, QueryFields, QueryConditions, AdditionalConditions);
 	Query.SetParameter("Ref", Source.Ref);
 
 	QueryExecution = Query.Execute();

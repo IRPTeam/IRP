@@ -329,6 +329,10 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			DocTable.Load(LoadTable);
 		EndDo;
 		
+		For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+			Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+		EndDo;
+		
 		If Object = Undefined Then
 			
 			If CheckFilling Then
@@ -372,6 +376,10 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			CtlgTable.Load(LoadTable);
 		EndDo;
 		
+		For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+			Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+		EndDo;
+				
 		If Object = Undefined Then
 			If CheckFilling Then
 				If Not Ctlg.CheckFilling() Then
@@ -553,11 +561,13 @@ EndFunction
 // 	** Key - String - Table name
 // 	** Value - ValueTable - Table
 // * DefaultTable - Undefined, String - Default table name
+// * AdditionalProperties - Structure
 Function CreateWrapper(DefaultTable = Undefined) Export
 	Wrapper = New Structure("Object", New Structure());
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
 	Wrapper.Insert("DefaultTable" , DefaultTable);
+	Wrapper.Insert("AdditionalProperties" , New Structure);
 	Return Wrapper
 EndFunction
 

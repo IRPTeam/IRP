@@ -197,6 +197,7 @@ Scenario: _005019 name uniqueness control (Cash/Bank accounts)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.CashAccounts"
+		And I click "List" button
 		If "List" table does not contain lines Then
 			| 'Description' |
 			| 'Cash desk №1'       |

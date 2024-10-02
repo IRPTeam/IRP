@@ -214,3 +214,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndDo;
 	EndIf;
 EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.DocumentNumber = "";
+EndProcedure
+

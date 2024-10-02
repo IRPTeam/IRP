@@ -42,7 +42,7 @@
     <characteristicValues>Catalog.PaymentSchedules.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.PaymentSchedules.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Ref</valueField>
+    <valueField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.Value</valueField>
     <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Catalog.PaymentSchedules.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>

@@ -19,7 +19,7 @@ Background:
 
 Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 	When set True value to the constant
-	When Create information register UserSettings records (DontHelpToCreatePartnerDetails - True)
+	When Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - False)
 	* Preparation
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -66,7 +66,7 @@ Scenario: _010005 create company for Partners (Ferron, Kalipso, Lomaniti)
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description'    |
-			| 'Kalipso1'        |
+			| 'Kalipso1'       |
 		And I select current line in "List" table
 		And I select "Company" exact value from the drop-down list named "Type"
 		And I click "Save" button
@@ -197,6 +197,7 @@ Scenario: _010008 create of a partner structure (Partners), 1 main partner, unde
 
 Scenario: _010009 check filling legal name in the partner term (complex partner structure)
 		And I close all client application windows
+		When Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - True)
 	* Create one more legal name for MIO
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click "List" button
@@ -251,7 +252,7 @@ Scenario: _010009 check filling legal name in the partner term (complex partner 
 Scenario: _010010 check auto create Legal name and Company and Partner term
 	And I close all client application windows
 	* Preparation
-		When Create information register UserSettings records (DontHelpToCreatePartnerDetails - False)
+		When Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - False)
 	* Create Partner (customer and vendor)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"
@@ -295,8 +296,7 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 				| 'LegalName'                       | "Test partner 11"         | ''            |
 				| 'Partner'                         | "Test partner 11"         | ''            |
 				| 'PriceType'                       | "en description is empty" | ''            |
-			Then "1C:Enterprise" window is opened
-			And I click "No" button
+			And I close "Partner term (create)" window
 			And In this window I click command interface button "Company"
 			And In this window I click command interface button "Partner terms"
 			When I Check the steps for Exception
@@ -307,7 +307,7 @@ Scenario: _010010 check auto create Legal name and Company and Partner term
 Scenario: _010011 check auto create Legal name and Company and Partner term
 	And I close all client application windows
 	* Preparation
-		When Create information register UserSettings records (DontHelpToCreatePartnerDetails - False)
+		When Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - False)
 	* Create Partner (customer and vendor)
 		Given I open hyperlink "e1cib/list/Catalog.Partners"
 		And I click the button named "FormCreate"

@@ -1605,7 +1605,7 @@ Scenario: create a test partner with one vendor partner term and one customer pa
 		And I click "Save" button
 	* Add customer partner term
 		And In this window I click command interface button "Partner terms"
-		And I click the button named "FormCreate"
+		And I click "Yes" button
 		And I input "Partner Kalipso Customer" text in the field named "Description_en"
 		And I change "Type" radio button value to "Customer"
 		And I expand "Agreement info" group

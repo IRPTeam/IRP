@@ -2147,14 +2147,14 @@ Scenario: check filter by transaction type in CP/BP
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 			| 'NDB'     | 'Company NDB' | 'NDB, Other'   |
 
-Scenario: Create information register UserSettings records (DontHelpToCreatePartnerDetails - True)
+Scenario: Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - True)
 
 	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                                                         | 'AttributeName'                  | 'KindOfAttribute'                          | 'Value' |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DontHelpToCreatePartnerDetails' | 'DontHelpToCreatePartnerDetails' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
+		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'True'  |
 
-Scenario: Create information register UserSettings records (DontHelpToCreatePartnerDetails - False)
+Scenario: Create information register UserSettings records (DisableAutomaticCreationOfCompanyAndAgreementForPartner - False)
 
-	And I check or create information register "UserSettings" records:
-		| 'UserOrGroup'                                                   | 'MetadataObject'                                                         | 'AttributeName'                  | 'KindOfAttribute'                          | 'Value' |
-		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DontHelpToCreatePartnerDetails' | 'DontHelpToCreatePartnerDetails' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'False' |
+		And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'                                                   | 'MetadataObject'                                                                                  | 'AttributeName'                                           | 'KindOfAttribute'                          | 'Value' |
+		| 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Catalogs.AllCatalogs.AdditionalSettings.DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'DisableAutomaticCreationOfCompanyAndAgreementForPartner' | 'Enum.KindsOfAttributes.AdditionalSetting' | 'False' |

@@ -2909,6 +2909,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|///////////////////////////////////////////////////////////////////////////////
+	|
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
@@ -2920,7 +2921,22 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
 	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.SalesInvoice.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
 	|	INNER JOIN
 	|	
 	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
@@ -2933,7 +2949,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|			BasisesTable AS BasisesTable)) AS Reg
 	|	
 	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
-	|	AND SourceOfOrigins.Key = Reg.BasisKey";
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 
 	Query.SetParameter("BasisesTable", BasisesTable);
@@ -3141,6 +3158,7 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|///////////////////////////////////////////////////////////////////////////////
+	|
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
@@ -3152,7 +3170,22 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
 	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
 	|	INNER JOIN
 	|	
 	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
@@ -3165,8 +3198,9 @@ Function ExtractData_FromRSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|			BasisesTable AS BasisesTable)) AS Reg
 	|	
 	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
-	|	AND SourceOfOrigins.Key = Reg.BasisKey";
-	
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
+
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
@@ -3343,6 +3377,7 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|///////////////////////////////////////////////////////////////////////////////
+	|
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
@@ -3354,7 +3389,22 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
 	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.RetailShipmentConfirmation.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
 	|	INNER JOIN
 	|	
 	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
@@ -3367,7 +3417,8 @@ Function ExtractData_FromRSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Un
 	|			BasisesTable AS BasisesTable)) AS Reg
 	|	
 	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
-	|	AND SourceOfOrigins.Key = Reg.BasisKey";
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3836,6 +3887,22 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	SerialLotNumbers.SerialLotNumber
 	|;
 	|////////////////////////////////////////////////////////////////////////////////
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.PurchaseInvoice.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
+	|
+	|UNION ALL
+	|
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
@@ -3860,7 +3927,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|			BasisesTable AS BasisesTable)) AS Reg
 	|	
 	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
-	|	AND SourceOfOrigins.Key = Reg.BasisKey";
+	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -5120,6 +5188,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
+	|
 	|SELECT DISTINCT
 	|	UNDEFINED AS Ref,
 	|	BasisesTable.Key,
@@ -5131,7 +5200,22 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
 	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|		AND SourceOfOrigins.SerialLotNumber.Ref IS NULL
 	|
+	|UNION ALL
+	|
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	BasisesTable.Key,
+	|	SourceOfOrigins.SerialLotNumber,
+	|	SourceOfOrigins.SourceOfOrigin,
+	|	SourceOfOrigins.Quantity
+	|FROM
+	|	Document.RetailSalesReceipt.SourceOfOrigins AS SourceOfOrigins
+	|		INNER JOIN BasisesTable AS BasisesTable
+	|		ON BasisesTable.Basis = SourceOfOrigins.Ref
+	|		AND BasisesTable.BasisKey = SourceOfOrigins.Key
+	|	
 	|	INNER JOIN
 	|	
 	|	AccumulationRegister.T1040T_RowIDSerialLotNumbers.Turnovers(,,, (RowID, BasisKey, Step, Basis) IN
@@ -5145,6 +5229,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	
 	|	ON SourceOfOrigins.SerialLotNumber = Reg.SerialLotNumber
 	|	AND SourceOfOrigins.Key = Reg.BasisKey
+	|	AND NOT SourceOfOrigins.SerialLotNumber.Ref IS NULL
 	|		
 	|;
 	|

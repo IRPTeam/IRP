@@ -1016,8 +1016,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| 'Number' |
 			| '11'     |
 		And I select current line in "List" table
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I select from "Calculation type" drop-down list by "salary" string		
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"	
 		And in the table "AccrualList" I click "Calculate" button
 		And "AccrualList" table contains lines
 			| 'Amount'   | 'Employee'                                        | 'Position'   | 'Accrual type' | 'Expense type' | 'Profit loss center' |

@@ -20,11 +20,91 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		Return;
 	EndIf;
 	
+	StandardProcessing = False;
+	
 	CommonFormActionsServer.CutLastSymbolsIfCameFromExcel(Parameters);
 	
-	CatalogsServer.SetParametersForDataChoosing(Source, Parameters);
+	SourceMetadata = Source.EmptyRef().Metadata();
+	
+	If Metadata.Documents.Contains(SourceMetadata) Then
+		DocumentsFindDataForInputString(Source, ChoiceData, Parameters, StandardProcessing);
+	Else // Catalogs and other
+		CatalogsFindDataForInputString(Source, ChoiceData, Parameters, StandardProcessing);
+	EndIf;
+	
+EndProcedure
 
-	StandardProcessing = False;
+// Documents find data for input string choice data get processing.
+//
+// Parameters:
+//  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
+//  ChoiceData - ValueList Of AnyRef - Choice data
+//  Parameters - Structure - Parameters:
+//  * SearchString - String - Search string
+//  * Filter - Structure - Filter:
+//  	** CustomSearchFilter - String - Serialized array
+//  	** Key - String - Key
+//  	** Value - String - Value
+//  StandardProcessing - Boolean - Standard processing
+Procedure DocumentsFindDataForInputString(Source, ChoiceData, Parameters, StandardProcessing)
+		
+	MetadataObject = Source.EmptyRef().Metadata();
+	Settings = New Structure();
+	Settings.Insert("MetadataObject", MetadataObject);
+
+	QueryBuilderText =
+		"SELECT ALLOWED TOP 10
+		|	Table.Ref AS Ref,
+		|	Table.Presentation AS Presentation
+		|FROM
+		|	%1 AS Table
+		|WHERE
+		|	Table.Ref.Number = &SearchStringNumber 
+		|	OR Table.Ref.DocumentNumber LIKE ""%%"" + &SearchString + ""%%""";
+	QueryBuilderText = StrTemplate(QueryBuilderText, Settings.MetadataObject.FullName());
+	
+	QueryBuilder = New QueryBuilder(QueryBuilderText);
+	QueryBuilder.FillSettings();
+	
+	CommonFormActionsServer.SetCustomSearchFilter(QueryBuilder, Parameters);
+	CommonFormActionsServer.SetStandardSearchFilter(QueryBuilder, Parameters, Source.EmptyRef().Metadata());
+			
+	SearchStringNumber = CommonFunctionsClientServer.GetSearchStringNumber(Parameters.SearchString);
+
+	Query = QueryBuilder.GetQuery();
+	For Each Filter In Parameters.Filter Do
+		If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
+			Continue;
+		EndIf;
+		Query.SetParameter(Filter.Key, Filter.Value);
+	EndDo;
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
+	Query.SetParameter("SearchString", Parameters.SearchString);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+
+	ChoiceData = New ValueList();
+	
+	For Each Row In QueryTable Do
+		ChoiceData.Add(Row.Ref, Row.Presentation);
+	EndDo;	
+EndProcedure
+
+// Catalogs find data for input string choice data get processing.
+//
+// Parameters:
+//  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
+//  ChoiceData - ValueList Of AnyRef - Choice data
+//  Parameters - Structure - Parameters:
+//  * SearchString - String - Search string
+//  * Filter - Structure - Filter:
+//  	** CustomSearchFilter - String - Serialized array
+//  	** Key - String - Key
+//  	** Value - String - Value
+//  StandardProcessing - Boolean - Standard processing
+Procedure CatalogsFindDataForInputString(Source, ChoiceData, Parameters, StandardProcessing)
+		
+	CatalogsServer.SetParametersForDataChoosing(Source, Parameters);
 
 	MetadataObject = Source.EmptyRef().Metadata();
 	Settings = New Structure();
@@ -499,15 +579,15 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 				 |	""%1"",
 				 |	%2
 				 |FROM
-				 |	Catalog.%1 AS Cat
+				 |	Catalog.%1 AS Table
 				 |WHERE
 				 |	(%3)
-				 |	AND Cat.Ref <> &Ref
+				 |	AND Table.Ref <> &Ref %4
 				 |GROUP BY
 				 |	""%1""";
 	For Each Attribute In AllDescription Do
 		If ValueIsFilled(Source[Attribute]) Then
-			FieldLeftString = "Cat." + Attribute + " = &" + Attribute;
+			FieldLeftString = "Table." + Attribute + " = &" + Attribute;
 			FieldString = "IsNull(MAX(" + FieldLeftString + "), FALSE) AS " + Attribute;
 			QueryFieldsSection.Add(FieldString);
 			QueryConditionsSection.Add(FieldLeftString);
@@ -518,9 +598,19 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 	If Not DescriptionAttributes.Count() Then
 		Return;
 	EndIf;
+	
+	AdditionalConditions = "";
+	Params = Undefined;
+	If Source.AdditionalProperties.Property("CheckUniqueDescriptionsParameters", Params) Then
+		AdditionalConditions = Params.QueryText;
+		For Each KeyValue In Params.QueryParameters Do
+			Query.SetParameter(KeyValue.Key, KeyValue.Value);
+		EndDo;
+	EndIf;
+	
 	QueryFields = StrConcat(QueryFieldsSection, "," + Chars.LF + "	");
 	QueryConditions = StrConcat(QueryConditionsSection, Chars.LF + "	OR ");
-	Query.Text = StrTemplate(Query.Text, SourceMetadata.Name, QueryFields, QueryConditions);
+	Query.Text = StrTemplate(Query.Text, SourceMetadata.Name, QueryFields, QueryConditions, AdditionalConditions);
 	Query.SetParameter("Ref", Source.Ref);
 
 	QueryExecution = Query.Execute();

@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -49,4 +50,8 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_174);
 		Cancel = True;
 	EndIf;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.DocumentNumber = "";
 EndProcedure

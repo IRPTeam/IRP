@@ -1591,7 +1591,7 @@ Procedure CheckUniqueDescription(Cancel, Object) Export
         	|	%1 AS Table
         	|WHERE
         	|	Table.Ref <> &Ref
-        	|	AND (%2)";
+        	|	AND (%2) %3";
         	
         	Query.SetParameter("Ref", Object.Ref);
         	
@@ -1602,7 +1602,16 @@ Procedure CheckUniqueDescription(Cancel, Object) Export
         		Query.SetParameter(KeyValue.Key, KeyValue.Value);
         	EndDo;
         	
-        	Query.Text = StrTemplate(Query.Text, FullName, StrConcat(Array_where, " OR "));
+        	AdditionalConditions = "";
+        	Params = Undefined;
+        	If Object.AdditionalProperties.Property("CheckUniqueDescriptionsParameters", Params) Then
+        		AdditionalConditions = Params.QueryText;
+        		For Each KeyValue In Params.QueryParameters Do
+        			Query.SetParameter(KeyValue.Key, KeyValue.Value);
+        		EndDo;
+        	EndIf;
+        
+        	Query.Text = StrTemplate(Query.Text, FullName, StrConcat(Array_where, " OR "), AdditionalConditions);
         	QueryResult = Query.Execute();
         	QuerySelection = QueryResult.Select();
         	

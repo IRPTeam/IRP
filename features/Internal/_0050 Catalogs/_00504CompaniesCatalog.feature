@@ -13,7 +13,12 @@ Background:
 	Given I open new TestClient session or connect the existing one
 
 
-
+Scenario: _0050130 preparation (Companies)
+	Given I open hyperlink "e1cib/list/Catalog.Extensions"
+	If "List" table does not contain lines Then
+			| "Description"     |
+			| "VAExtension"     |
+		When add VAExtension
 
 Scenario: _005013 filling in the "Companies" catalog
 	When set True value to the constant
@@ -151,6 +156,7 @@ Scenario: _005016 name uniqueness control (Projects)
 	And I close all client application windows
 	* Preparation
 		Given I open hyperlink "e1cib/list/Catalog.Projects"
+		And I click "List" button
 		If "List" table does not contain lines Then
 			| 'Description' |
 			| 'Project 01'       |
@@ -274,4 +280,56 @@ Scenario: _0050163 create PlanningPeriods
 			| 'Description'  |
 			| 'Group 01'     |
 			| 'Test element' |
+		And I close all client application windows
+
+Scenario: _005064 name uniqueness control (Company)
+	And I close all client application windows
+	* Preparation
+		Given I open hyperlink "e1cib/list/Catalog.Companies"
+		If "List" table does not contain lines Then
+			| 'Description' |
+			| 'Our Company' |
+			Then I stop script execution "Skipped"
+	* Create company (legal name for Our company)
+		And I click the button named "FormCreate"
+		And Delay 2
+		And I click Open button of the field named "Description_en"
+		And I input "Our Company" text in the field named "Description_en"
+		And I input "Our Company TR" text in the field named "Description_tr"
+		And I input "Наша компания 01" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I click the button named "FormWrite"
+	* Check uniqueness control
+		Then user message window does not contain messages
+		And current window form does not have modification mark (extension)
+	* Check uniqueness control (two identical names for own companies)
+		And I set checkbox "Our Company"
+		And I click the button named "FormWrite"		
+		Then there are lines in TestClient message log
+			|'Description not unique [Our Company]'|	
+		And current window form has modification mark (extension)
+	* Check uniqueness control (two identical names for legal name)
+		And I click Open button of the field named "Description_en"
+		And I input "Our Company L" text in the field named "Description_en"
+		And I input "Our Company L TR" text in the field named "Description_tr"
+		And I input "Наша компания L 01" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I select "Company" exact value from the drop-down list named "Type"
+		And I remove checkbox "Our Company"
+		And I click the button named "FormWriteAndClose"
+		And I go to line in "List" table
+			| "Description" |
+			| "Our Company" |
+		And I select current line in "List" table
+		And I remove checkbox "Our Company"
+		And I click Open button of the field named "Description_en"
+		And I input "Our Company L" text in the field named "Description_en"
+		And I input "Our Company L TR" text in the field named "Description_tr"
+		And I input "Наша компания L 01" text in the field named "Description_ru"
+		And I click "Ok" button
+		And I click the button named "FormWrite"		
+		Then there are lines in TestClient message log
+			|'Description not unique [Our Company L]'|	
+		And current window form has modification mark (extension)
 		And I close all client application windows

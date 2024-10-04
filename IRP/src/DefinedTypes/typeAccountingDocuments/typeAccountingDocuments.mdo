@@ -37,5 +37,7 @@
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
     <types>DocumentRef.ExternalAccountingOperation</types>
+    <types>DocumentRef.AdditionalCostAllocation</types>
+    <types>DocumentRef.AdditionalRevenueAllocation</types>
   </type>
 </mdclass:DefinedType>

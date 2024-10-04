@@ -54,6 +54,7 @@ Scenario: _050000 preparation (Cash receipt)
 		When Create catalog BusinessUnits objects
 		When Create catalog Partners objects
 		When Create information register Taxes records (VAT)
+		When Create catalog CashAccounts objects
 		When Create catalog Partners, Companies, Agreements for Tax authority
 	* Check or create SalesOrder023001
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -97,6 +98,12 @@ Scenario: _050000 preparation (Cash receipt)
 		| "Documents.SalesInvoice.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);"    |
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesInvoice.FindByNumber(16).GetObject().Write(DocumentWriteMode.Posting);"    |
+	When Create document SalesOrder objects (Partner term - TRY, document USD and vice versa)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
+	When Create document SalesInvoice objects (Partner term - TRY, document USD and vice versa)
 	Given I open hyperlink "e1cib/app/DataProcessor.SystemSettings"
 	And I set checkbox "Number editing available"
 	And I close "System settings" window
@@ -730,7 +737,7 @@ Scenario: _050017 check selection form (Payment by documents) in CR
 				| "No"    | ""                                           | "DFC"             | "DFC Customer by Partner terms" | "DFC"              | ""      | "2 944,00"  | ""        | ""                    | ""        |
 				| "No"    | "Sales invoice 14 dated 16.02.2021 12:14:54" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "12 400,00" | ""        | ""                    | ""        |
 				| "No"    | "Sales invoice 15 dated 12.04.2021 12:00:01" | "Lomaniti"        | "Basic Partner terms, TRY"      | "Company Lomaniti" | ""      | "20 000,00" | ""        | ""                    | ""        |				
-	* Allocation check	(one partner)
+* Allocation check	(one partner)
 		And I input "10 000,00" text in the field named "Amount"
 		And I click the button named "Calculate"
 		And "Documents" table became equal
@@ -883,3 +890,118 @@ Scenario: _050020 create Cash receipt with transaction type Other partner
 			And "List" table contains lines
 				| 'Number'                        |
 				| '$NumberCashReceipt052023$'     |	
+
+// Scenario: _050021 create Cash receipt based on SO (Partner term - TRY, document USD)	
+// 	And I close all client application windows
+// 	* Select SO
+// 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+// 		And I go to line in "List" table
+// 			| 'Number' |
+// 			| '235'    |
+// 	* Create CR
+// 		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+// 		And I click Select button of "Cash account" field
+// 		And I go to line in "List" table
+// 			| "Description"  |
+// 			| "Cash desk №4" |
+// 		And I select current line in "List" table
+// 		And I input "TRY" text in the field named "Currency"		
+// 	* Check filling
+// 		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+// 		Then the form attribute named "Company" became equal to "Main Company"
+// 		Then the form attribute named "Currency" became equal to "TRY"
+// 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		
+Scenario: _050023 create Cash receipt based on SI (Partner term - USD, document TRY)	
+	And I close all client application windows
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(235).GetObject().Write(DocumentWriteMode.Posting);"    |
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(236).GetObject().Write(DocumentWriteMode.Posting);"    |
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '236'    |
+	* Create CR
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| "Description"  |
+			| "Cash desk №3" |
+		And I select current line in "List" table
+		And I select from the drop-down list named "Currency" by "American dollar" string
+	* Check filling
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "USD"
+		And I click "Save" button		
+		And "PaymentList" table became equal
+			| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+	* Reselect SI
+		* From form select
+			And I activate "Basis document" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Basis document" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| "Amount" | "Company"      | "Currency" | "Document"                                    | "Legal name"        | "Partner"   | "Partner term" |
+				| "171,20" | "Main Company" | "USD"      | "Sales invoice 236 dated 08.08.2024 11:20:30" | "Company Ferron BP" | "Ferron BP" | "Ferron, USD"  |
+			And I select current line in "List" table
+			And I click "Save" button		
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+		* From payment distribution
+			And I select current line in "PaymentList" table
+			And I delete a line in "PaymentList" table
+			And in the table "PaymentList" I click "Payment by documents" button
+			And I go to line in "Documents" table
+				| "Amount" | "Document"                                    |
+				| "171,20" | "Sales invoice 236 dated 08.08.2024 11:20:30" |
+			And I set "Check" checkbox in "Documents" table
+			And I finish line editing in "Documents" table
+			And I click "Ok" button
+			And "PaymentList" table became equal
+				| "#" | "Partner"   | "Payer"             | "Partner term" | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+				| "1" | "Ferron BP" | "Company Ferron BP" | "Ferron, USD"  | ""                    | "Sales invoice 236 dated 08.08.2024 11:20:30" | ""        | ""      | "171,20"       | ""                        | ""                 | ""                           |
+			And I click "Save" button
+	And I close all client application windows
+
+Scenario: _050024 create Cash receipt based on SI (Partner term - TRY, document USD)
+	And I close all client application windows
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '235'    |
+	* Create CR
+		And I click the button named "FormDocumentCashReceiptGenerateCashReceipt"
+		And I click Select button of "Cash account" field
+		And I go to line in "List" table
+			| "Description"  |
+			| "Cash desk №3" |
+		And I select current line in "List" table
+	* Check filling	
+		Then the form attribute named "CashAccount" became equal to "Cash desk №3"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click "Save" button	
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	* Reselect SI
+		And I select current line in "PaymentList" table
+		And I delete a line in "PaymentList" table
+		And in the table "PaymentList" I click "Payment by documents" button
+		And I go to line in "Documents" table
+			| "Amount"    | "Check" | "Document"                                    | "Legal name"       | "Partner"  | "Partner term"             |
+			| "19 268,56" | "No"    | "Sales invoice 235 dated 08.08.2024 11:04:29" | "Company Lomaniti" | "Lomaniti" | "Basic Partner terms, TRY" |
+		And I set "Check" checkbox in "Documents" table
+		And I click "Ok" button
+		And I click "Save" button
+		And "PaymentList" table became equal
+			| "#" | "Partner"  | "Payer"            | "Partner term"             | "Legal name contract" | "Basis document"                              | "Project" | "Order" | "Total amount" | "Financial movement type" | "Cash flow center" | "Planning transaction basis" |
+			| "1" | "Lomaniti" | "Company Lomaniti" | "Basic Partner terms, TRY" | ""                    | "Sales invoice 235 dated 08.08.2024 11:04:29" | ""        | ""      | "19 268,56"    | ""                        | ""                 | ""                           |
+	And I close all client application windows				

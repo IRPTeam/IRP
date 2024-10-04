@@ -1160,3 +1160,42 @@ Procedure PurchasesBySerialLotNumbers(Parameters) Export
 	Query.Execute();
 		
 EndProcedure
+
+Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
+	RecordSet.Clear();
+	RecordSet.Write = True;
+	Record = RecordSet.Add();
+	FillPropertyValues(Record, Source);
+	Record.Document = Source.Ref;
+EndProcedure
+
+Procedure GetDocumentPresentationFields(Source, Fields, StandardProcessing) Export
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
+	StandardProcessing = False;
+	Fields.Add("Number");
+	Fields.Add("DocumentNumber");
+	Fields.Add("Date");
+EndProcedure
+
+Procedure GetDocumentPresentation(Source, Data, Presentation, StandardProcessing) Export
+	If Not StandardProcessing Then
+		Return;
+	EndIf;
+	StandardProcessing = False;
+	
+	ObjectPresentation = Source.EmptyRef().Metadata().ObjectPresentation;
+	Number = ?(ValueIsFilled(Data.DocumentNumber), Data.DocumentNumber, Data.Number);
+	
+	Presentation = StrTemplate(R().DocPresentation, ObjectPresentation, Number, Data.Date);
+EndProcedure
+
+Function GenerateDocumentNumber(Object) Export
+	Return Object.DocumentNumber;
+EndFunction

@@ -5234,6 +5234,56 @@
           <currentRowUse>Auto</currentRowUse>
         </extInfo>
       </items>
+      <items xsi:type="form:FormField">
+        <name>DocumentNumber</name>
+        <id>965</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.DocumentNumber</segments>
+        </dataPath>
+        <extendedTooltip>
+          <name>DocumentNumberExtendedTooltip</name>
+          <id>967</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <contextMenu>
+          <name>DocumentNumberContextMenu</name>
+          <id>966</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <autoFill>true</autoFill>
+        </contextMenu>
+        <type>InputField</type>
+        <editMode>Enter</editMode>
+        <showInHeader>true</showInHeader>
+        <headerHorizontalAlign>Left</headerHorizontalAlign>
+        <showInFooter>true</showInFooter>
+        <extInfo xsi:type="form:InputFieldExtInfo">
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <wrap>true</wrap>
+          <chooseType>true</chooseType>
+          <typeDomainEnabled>true</typeDomainEnabled>
+          <textEdit>true</textEdit>
+        </extInfo>
+      </items>
       <items xsi:type="form:FormGroup">
         <name>GroupPrices</name>
         <id>958</id>
@@ -8222,6 +8272,10 @@
   <formCommands>
     <name>SearchByBarcode</name>
     <id>4</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan or enter the product's barcode</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -8282,6 +8336,10 @@
       <value>Open scan form</value>
     </title>
     <id>7</id>
+    <toolTip>
+      <key>en</key>
+      <value>Scan form</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -8324,6 +8382,10 @@
       <value>Edit currencies</value>
     </title>
     <id>9</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit exchange rates for document</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -8364,6 +8426,10 @@
       <value>Edit quantity in base unit</value>
     </title>
     <id>11</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit quantity in base unit</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

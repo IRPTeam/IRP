@@ -1623,6 +1623,10 @@
       <value>Edit currencies</value>
     </title>
     <id>17</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit exchange rates for document</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -1644,6 +1648,10 @@
       <value>Edit accounting</value>
     </title>
     <id>18</id>
+    <toolTip>
+      <key>en</key>
+      <value>Edit accounting entries</value>
+    </toolTip>
     <use>
       <common>true</common>
     </use>

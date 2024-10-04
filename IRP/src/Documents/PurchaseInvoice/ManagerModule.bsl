@@ -1423,6 +1423,8 @@ Function R6070T_OtherPeriodsExpenses()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.Basis AS Basis,
+		|	ItemList.ExpenseType,
+		|	ItemList.ProfitLossCenter,
 		|	CASE
 		|		WHEN ItemList.IsItemsCost
 		|			THEN ItemList.RowID
@@ -1748,7 +1750,8 @@ Function GetAnalytics_VATOutgoing(Parameters)
 EndFunction
 
 Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
-	If Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
+	AO = Catalogs.AccountingOperations;
+	If Parameters.Operation = AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;
@@ -1756,9 +1759,10 @@ Function GetHintDebitExtDimension(Parameters, ExtDimensionType, Value, Additiona
 EndFunction
 
 Function GetHintCreditExtDimension(Parameters, ExtDimensionType, Value, AdditionalAnalytics, Number) Export
-	If (Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
-		Or Parameters.Operation = Catalogs.AccountingOperations.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
+	AO = Catalogs.AccountingOperations;
+	If (Parameters.Operation = AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors
+		Or Parameters.Operation = AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions
+		Or Parameters.Operation = AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions)
 		And ExtDimensionType.ValueType.Types().Find(Type("CatalogRef.Companies")) <> Undefined Then
 		Return Parameters.ObjectData.LegalName;
 	EndIf;

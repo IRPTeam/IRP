@@ -1137,6 +1137,9 @@ Function BindAccount(Parameters)
 	DataPath.Insert("CashRevenue"   , "Account");
 	DataPath.Insert("CashStatement" , "CashAccount");
 	DataPath.Insert("ConsolidatedRetailSales" , "CashAccount");
+	DataPath.Insert("DebitNote"  , "Account");
+	DataPath.Insert("CreditNote" , "Account");
+	
 	
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "StepChangeCurrencyByAccount");
@@ -13864,6 +13867,7 @@ Procedure StepChangeAccountByPaymentType(Parameters, Chain) Export
 		Options     = ModelClientServer_V2.ChangeAccountByPaymentTypeOptions();
 		Options.PaymentType = GetPaymentsPaymentType(Parameters, Row.Key);
 		Options.Workstation = GetWorkstation(Parameters);
+		Options.BankTerm    = GetPaymentsBankTerm(Parameters, Row.Key);
 		Options.CurrentAccount = GetPaymentsAccount(Parameters, Row.Key);
 		Options.Key = Row.Key;
 		Options.StepName = "StepChangeAccountByPaymentType";

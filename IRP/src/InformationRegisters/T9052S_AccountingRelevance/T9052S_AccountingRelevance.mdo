@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a344a2e4-907a-4107-a95f-75d399df03eb">
+  <producedTypes>
+    <selectionType typeId="9156bac8-36e1-41ba-87bb-835316756974" valueTypeId="ef2651f1-7907-4153-8e47-1a5cd0e9b5ad"/>
+    <listType typeId="24f35048-de27-4de3-8ece-fdaafc10e2db" valueTypeId="62782781-0ead-4632-a495-a517e729d333"/>
+    <managerType typeId="e66b7168-0047-49d0-92ba-75107a7768a2" valueTypeId="9a26b67f-9515-4631-99e1-15f1b3c0cce9"/>
+    <recordSetType typeId="8458deb7-d5fd-4ca5-ad33-b1b13e840ac7" valueTypeId="22065003-dcb2-45fa-a5b1-7e9c2d498cef"/>
+    <recordKeyType typeId="62f70f23-8231-45e1-88ed-54f148a2cb4a" valueTypeId="ae868385-da53-4087-afb2-0fe4b829a6a7"/>
+    <recordType typeId="2b45e20f-82fd-40b0-a862-016234a7181a" valueTypeId="8fce3ce5-801b-4def-8fb9-b68f6b01bebe"/>
+    <recordManagerType typeId="ae0cc1b2-4eff-4b32-9ddd-f636b66dac1f" valueTypeId="96ce934a-3e18-433f-9257-bc283440dc01"/>
+  </producedTypes>
+  <name>T9052S_AccountingRelevance</name>
+  <synonym>
+    <key>en</key>
+    <value>T9052 Accounting relevance</value>
+  </synonym>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="5408bd43-ab58-4dce-bdca-8fc7aca6a516">
+    <name>CurrentMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Current MD5</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="4f1422e0-0e5a-4efd-9df9-0aa8f0c6736b">
+    <name>ProcessedMD5</name>
+    <synonym>
+      <key>en</key>
+      <value>Processed MD5</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="07583e9c-b70c-4c3b-9c09-a5e61be9d6d3">
+    <name>CountErrors</name>
+    <synonym>
+      <key>en</key>
+      <value>Count errors</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="825100c2-babd-474c-ae3c-20f7cc566441">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAccountingDocuments</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ce247e18-bb2c-44de-8b21-ac0afd34618e">
+    <name>LedgerType</name>
+    <synonym>
+      <key>en</key>
+      <value>Ledger type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LedgerTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

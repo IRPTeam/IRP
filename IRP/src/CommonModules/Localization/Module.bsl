@@ -1365,6 +1365,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_171", NStr("en = 'Ext. dimension 3 value Cr is empty row-key[%1]'", Lang));
 	Strings.Insert("Error_172", NStr("en = 'Ext. dimension 3 type Cr is empty row-key[%1]'", Lang));
 	Strings.Insert("Error_173", NStr("en = 'Currency rate from [%1] to [%2] not set'", Lang));
+	Strings.Insert("Error_174", NStr("en = 'There can be only one currency set in the document.'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	
@@ -1543,6 +1544,9 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_030", NStr("en = 'Do you want to restore movements to default?'", Lang));
 	Strings.Insert("QuestionToUser_031", NStr("en = 'Do you want to change tax rates according to the company?'",
 		Lang));
+	Strings.Insert("QuestionToUser_032", NStr("en = 'Do you want to create new legal name?'", Lang));
+	Strings.Insert("QuestionToUser_033", NStr("en = 'Do you want to create new partner term?'", Lang));
+		
 #EndRegion
 
 #Region SuggestionToUser
@@ -1687,6 +1691,8 @@ Function Strings(Lang) Export
 	Strings.Insert("Add_Settings_015", NStr("en = 'Enable - Check-mode'", Lang));
 	Strings.Insert("Add_Settings_016", NStr("en = 'Company'", Lang));
 	Strings.Insert("Add_Settings_017", NStr("en = 'Branch'", Lang));
+	Strings.Insert("Add_Settings_018", NStr("en = 'Catalogs'", Lang));
+	Strings.Insert("Add_Settings_019", NStr("en = 'Disable - Disable automatic creation of Company and Agreement for Partner'", Lang));
 #EndRegion
 
 #Region Mobile
@@ -2135,6 +2141,12 @@ Strings.Insert("TaxesOperation_DR_R5015B_OtherPartnersTransactions_CR_R1040B_Tax
 Strings.Insert("ExternalAccountingOperation",
 	NStr("en = 'External accounting operation'", Lang));
 
+Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses",
+	NStr("en = 'AdditionalCostAllocation DR (R4050B_StockInventory) CR (R5022T_Expenses)'", Lang));
+
+Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
+	NStr("en = 'AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)'", Lang));
+
 #EndRegion
 
 #Region InternalCommands
@@ -2217,5 +2229,12 @@ Strings.Insert("ExternalAccountingOperation",
 	Strings.Insert("DocStatus_Deleted", NStr("en = 'Deleted'", Lang));	
 #EndRegion
 	
+#Region DocPresentations
+	// %1 - Object presentation
+	// %2 - Document number
+	// %3 - Document date
+	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+#EndRegion
+
 	Return Strings;
 EndFunction

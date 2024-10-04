@@ -1072,6 +1072,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.PostedDocumentsRegistry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.DataMappingTable</name>
 		<right>
 			<name>Read</name>
@@ -1158,6 +1169,17 @@
 	</object>
 	<object>
 		<name>InformationRegister.T9061S_AccountingMappingAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9052S_AccountingRelevance</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

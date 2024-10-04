@@ -149,7 +149,14 @@ Function CheckFilling(Object) Export
 			IsOk = False;
 			SerialsID = Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
 			
+			ProcessedSerialLotNumbers = New Array();
 			For Each Row In SerialsID Do
+				
+				If ProcessedSerialLotNumbers.Find(Row.SerialLotNumber) <> Undefined Then
+					Continue;
+				EndIf;
+				ProcessedSerialLotNumbers.Add(Row.SerialLotNumber);
+			
 				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 					CommonFunctionsClientServer.ShowUsersMessage(
 						StrTemplate(R().Error_113, Serial.SerialLotNumber), "ItemList[" + Format(

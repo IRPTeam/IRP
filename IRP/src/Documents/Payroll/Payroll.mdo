@@ -181,10 +181,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="c325072d-dd2e-49e2-bf9f-c0176567cfe7">
-    <name>CalculationType</name>
+    <name>DELETE_CalculationType</name>
     <synonym>
       <key>en</key>
-      <value>Calculation type</value>
+      <value>DELETE calculation type</value>
     </synonym>
     <type>
       <types>CatalogRef.SalaryCalculationType</types>
@@ -472,6 +472,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="ceab11d7-5324-4c2e-a6c6-bdc914763444">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SalaryCalculationType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="98112b54-d37e-4a9c-ac1e-a4bff099ba4f">
     <producedTypes>
@@ -612,6 +626,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="a2fa8d16-b163-4a54-88f2-1c0d2bad0531">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SalaryCalculationType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="44b0b978-8ddc-40ae-98c2-60bdacb0be71">
     <producedTypes>
@@ -689,6 +717,20 @@
         <name>Filter.Partner</name>
         <field>Document.Payroll.TabularSection.CashAdvanceDeductionList.Attribute.Employee</field>
       </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="93c6446b-81fb-4131-b2f4-21d2e84af920">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SalaryCalculationType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -980,6 +1022,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="598f28d0-698d-40a4-b34f-b8a588aabcb3">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SalaryCalculationType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -805,6 +805,7 @@
   <commonAttributes>CommonAttribute.LocalTaxAmount</commonAttributes>
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
+  <commonAttributes>CommonAttribute.DocumentNumber</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -835,6 +836,8 @@
   <eventSubscriptions>EventSubscription.BeforeWrite_AuditLock</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_RegistersClearData</eventSubscriptions>
   <eventSubscriptions>EventSubscription.Posting_DocumentsRegistry</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetDocumentPresentationFields</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

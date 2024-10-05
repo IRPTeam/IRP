@@ -2,176 +2,21 @@
 &AtClient
 Var StopEventHandling;
 
-
-&AtServer
-Function GetReglamentDocument_CustomersAdvancesClosing(Company, StartDate, EndDate)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	Doc.Ref,
-	|	Doc.BeginOfPeriod AS StartDate,
-	|	Doc.EndOfPeriod AS EndDate
-	|FROM
-	|	Document.CustomersAdvancesClosing AS Doc
-	|WHERE
-	|	NOT Doc.DeletionMark
-	|	AND Doc.Company = &Company
-	|	AND Doc.BeginOfPeriod >= &StartDate
-	|	AND Doc.EndOfPeriod <= &EndDate
-	|
-	|ORDER BY
-	|	StartDate";
-	
-	Query.SetParameter("Company"   , Company);
-	Query.SetParameter("StartDate" , StartDate);
-	Query.SetParameter("EndDate"   , EndDate);
-	
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	
-	QueryTable.Columns.Add("Period_ErrorCode");
-	QueryTable.Columns.Add("Period_ErrorDescription");
-	
-	If QueryTable.Count() > 0 And QueryTable[0].StartDate <> StartDate Then
-		QueryTable[0].Period_ErrorCode = 1; // critical error
-		QueryTable[0].Period_ErrorDescription = """Start date"" of first document not equal ""Start date"" of closing period";
-	EndIf;
-	
-	Doc_EndDate = Undefined;
-	
-	For Each Row In QueryTable Do		
-		If Doc_EndDate = Undefined Then
-			Doc_EndDate = Row.EndDate;
-			Continue;
-		EndIf;
-		
-		If Row.StartDate - (60 * 60 * 24) <> Doc_EndDate Then
-			Row.Period_ErrorCode = 2; // not critical, document will be deleted
-			Row.Period_ErrorDescription = """Start date"" not equal ""End date"" of previous document";
-			Doc_EndDate = Row.EndDate;
-		EndIf;
-	EndDo;
-EndFunction
-
-&AtServer
-Function GetReglamentDocument_VendorsAdvancesClosing(Company, StartDate, EndDate)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	Doc.Ref,
-	|	Doc.BeginOfPeriod AS StartDate,
-	|	Doc.EndOfPeriod AS EndDate
-	|FROM
-	|	Document.VendorsAdvancesClosing AS Doc
-	|WHERE
-	|	NOT Doc.DeletionMark
-	|	AND Doc.Company = &Company
-	|	AND Doc.BeginOfPeriod >= &StartDate
-	|	AND Doc.EndOfPeriod <= &EndDate
-	|
-	|ORDER BY
-	|	StartDate";
-	
-	Query.SetParameter("Company"   , Company);
-	Query.SetParameter("StartDate" , StartDate);
-	Query.SetParameter("EndDate"   , EndDate);
-	
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	
-	QueryTable.Columns.Add("Period_ErrorCode");
-	QueryTable.Columns.Add("Period_ErrorDescription");
-	
-	If QueryTable.Count() > 0 And QueryTable[0].StartDate <> StartDate Then
-		QueryTable[0].Period_ErrorCode = 1; // critical error
-		QueryTable[0].Period_ErrorDescription = """Start date"" of first document not equal ""Start date"" of closing period";
-	EndIf;
-	
-	Doc_EndDate = Undefined;
-	
-	For Each Row In QueryTable Do		
-		If Doc_EndDate = Undefined Then
-			Doc_EndDate = Row.EndDate;
-			Continue;
-		EndIf;
-		
-		If Row.StartDate - (60 * 60 * 24) <> Doc_EndDate Then
-			Row.Period_ErrorCode = 2; // not critical, document will be deleted
-			Row.Period_ErrorDescription = """Start date"" not equal ""End date"" of previous document";
-			Doc_EndDate = Row.EndDate;
-		EndIf;
-	EndDo;
-EndFunction
-
-&AtServer
-Function GetReglamentDocument_ForeignCurrencyRevaluation(Company, StartDate, EndDate)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	Doc.Ref,
-//	|	Doc.BeginOfPeriod AS StartDate,
-//	|	Doc.EndOfPeriod AS EndDate
-//	|FROM
-//	|	Document.VendorsAdvancesClosing AS Doc
-//	|WHERE
-//	|	NOT Doc.DeletionMark
-//	|	AND Doc.Company = &Company
-//	|	AND Doc.BeginOfPeriod >= &StartDate
-//	|	AND Doc.EndOfPeriod <= &EndDate
-//	|
-//	|ORDER BY
-//	|	StartDate";
-//	
-//	Query.SetParameter("Company"   , Company);
-//	Query.SetParameter("StartDate" , StartDate);
-//	Query.SetParameter("EndDate"   , EndDate);
-//	
-//	QueryResult = Query.Execute();
-//	QueryTable = QueryResult.Unload();
-//	
-//	QueryTable.Columns.Add("Period_ErrorCode");
-//	QueryTable.Columns.Add("Period_ErrorDescription");
-//	
-//	If QueryTable.Count() > 0 And QueryTable[0].StartDate <> StartDate Then
-//		QueryTable[0].Period_ErrorCode = 1; // critical error
-//		QueryTable[0].Period_ErrorDescription = """Start date"" of first document not equal ""Start date"" of closing period";
-//	EndIf;
-//	
-//	Doc_EndDate = Undefined;
-//	
-//	For Each Row In QueryTable Do		
-//		If Doc_EndDate = Undefined Then
-//			Doc_EndDate = Row.EndDate;
-//			Continue;
-//		EndIf;
-//		
-//		If Row.StartDate - (60 * 60 * 24) <> Doc_EndDate Then
-//			Row.Period_ErrorCode = 2; // not critical, document will be deleted
-//			Row.Period_ErrorDescription = """Start date"" not equal ""End date"" of previous document";
-//			Doc_EndDate = Row.EndDate;
-//		EndIf;
-//	EndDo;
-EndFunction
-
-
-&AtServer
-Function GetDocumentIcon(Posted)
-	Return ?(Posted, 0, 2);
-EndFunction
-
-
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)	
-	CreateStep("Select Company and Period", 0, "Error", True);
-	CreateStep("Reposting documents", 1);
-	CreateStep("Calculation movement costs", 2);
-	CreateStep("Vendors advances closing", 3);
-	CreateStep("Customers advances closing", 4);
-	CreateStep("Foreign currency revaluation", 5);
-	CreateStep("Accounting translation", 6);
-
+	CreateStep("Select Company and Period"    , 0, , True);
+	CreateStep("Reposting documents"          , 1);
+	CreateStep("Calculation movement costs"   , 2);
+	CreateStep("Vendors advances closing"     , 3);
+	CreateStep("Customers advances closing"   , 4);
+	CreateStep("Foreign currency revaluation" , 5);
+	
+	If FOServer.IsUseAccounting() Then
+		CreateStep("Accounting translation" , 6);
+	EndIf;
+	
 	ThisObject.UpdatePause = 5;
 EndProcedure
 
@@ -180,25 +25,6 @@ Procedure OnOpen(Cancel)
 	UpdateLabels();
 	CheckJobStatus();
 	SetVisibilityAvailability(Object, ThisObject);	
-EndProcedure
-
-&AtClient
-Procedure PeriodOnChange(Item)
-	SetStepStatus_NotValid(Object, ThisObject);
-	SetVisibilityAvailability(Object, ThisObject);	
-EndProcedure
-
-&AtClient
-Procedure CompanyOnChange(Item)
-	SetStepStatus_NotValid(Object, ThisObject);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure ClosePeriod(Command)
-	If Not ThisObject.CheckFilling() Then
-		Return;
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -248,6 +74,12 @@ Procedure StepsInfoOnActivateRow(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure StepParameterOnChange(Item)
+	SetStepStatus_NotValid(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);	
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	CurrentStepInProgress = (Form.StepsInfo[Form.CurrentStep].Status = "InProgress");
@@ -264,7 +96,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.Company.ReadOnly = AnyStepInProgress Or Form.CurrentStep <> 0;
 	Form.Items.Period.ReadOnly = AnyStepInProgress Or Form.CurrentStep <> 0;
 			
-	ArrayOfWaitingSteps = Eval("GetWaitingSteps_" + String(Form.CurrentStep) + "(Object, Form)");
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Form.CurrentStep);
+	
 	VisibleFilter = New Structure("Visible", True);
 	Form.Items.StepsInfoWaiting.RowFilter = New FixedStructure(VisibleFilter);
 		
@@ -273,6 +106,9 @@ Procedure SetVisibilityAvailability(Object, Form)
 	StepNumberFilter = New Structure("StepNumber", Form.CurrentStep);
 	Form.Items.ValidationErrors.RowFilter = New FixedStructure(StepNumberFilter);
 	Form.ValidationErrors.Clear();
+	For Each Row In Form.PermanentValidationErrors Do
+		FillPropertyValues(Form.ValidationErrors.Add(), Row);
+	EndDo;
 	
 	For Each Step In Form.StepsInfo Do
 		Step.Status = Eval("ValidateStep_"+ String(Step.StepNumber) +"(Object, Form, Step)");
@@ -294,14 +130,8 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.Items.RunStep.Visible = True;
 		Form.Items.SkipStep.Visible = True;
-		
-		AllWaitingStepsIsValidOrSkipped = True;
-		For Each WaitingStep In ArrayOfWaitingSteps Do
-			If Not (Form.StepsInfo[WaitingStep].Status = "Valid" Or Form.StepsInfo[WaitingStep].Status = "Skip") Then
-				AllWaitingStepsIsValidOrSkipped = False;
-				Break;
-			EndIf;
-		EndDo;
+
+		AllWaitingStepsIsValidOrSkipped = GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps);		
 		
 		Form.Items.RunStep.Enabled = AllWaitingStepsIsValidOrSkipped And Not CurrentStepInProgress;
 		Form.Items.SkipStep.Enabled = Not CurrentStepValid And Not CurrentStepInProgress;
@@ -334,7 +164,6 @@ EndProcedure
 
 &AtServer
 Procedure RunStepAsBagroundJob(StepNumber, Title, ProcedurePath, JobParameters)
-	ClearJobList(StepNumber);
 	JobRow = JobList.Add();
 	JobRow.StepNumber = StepNumber;
 	JobRow.Title = Title;
@@ -400,13 +229,53 @@ Procedure SetNotValidForDependedSteps(Object, Form, StepNumber)
 	EndDo;
 EndProcedure
 
+&AtServer
+Procedure SetStepComplete(StepNumber, JobResult, JobListRows)
+	AllComplete = True;
+	For Each Row In JobListRows Do
+		If Row.Status <> Enums.JobStatus.Completed Then
+			AllComplete = False;
+			Break;
+		EndIf;
+	EndDo;
+
+	If AllComplete Then	
+		SetStepStatus_Valid(Object, ThisObject, StepNumber);
+	Else
+		SetStepStatus_Error(Object, ThisObject, StepNumber);
+	EndIf;
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure AddValidationError(Object, Form, Step, ErrorDescription)
-	NewRow = Form.ValidationErrors.Add();
-	NewRow.ErrorDescription = ErrorDescription;
+Procedure AddValidationError(Object, Form, Step, Msg, Ref=Undefined, Permanent=False)
+	If Permanent Then
+		NewRow = Form.PermanentValidationErrors.Add();
+	Else
+		NewRow = Form.ValidationErrors.Add();
+	EndIf;
+	NewRow.ErrorDescription = Msg;
+	NewRow.Ref = Ref;
 	NewRow.StepNumber = Step.StepNumber;
 EndProcedure
 
+&AtClientAtServerNoContext
+Function GetWaitingSteps(Object, Form, StepNumber)
+	Return Eval("GetWaitingSteps_" + String(StepNumber) + "(Object, Form)");
+EndFunction
+
+&AtClientAtServerNoContext
+Function GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps)
+	AllWaitingStepsIsValidOrSkipped = True;
+	For Each WaitingStep In ArrayOfWaitingSteps Do
+		If Not (Form.StepsInfo[WaitingStep].Status = "Valid" 
+			Or Form.StepsInfo[WaitingStep].Status = "Skip") Then
+			AllWaitingStepsIsValidOrSkipped = False;
+			Break;
+		EndIf;
+	EndDo;
+	Return AllWaitingStepsIsValidOrSkipped;
+EndFunction
+	
 #Region IconsAndColors
 
 &AtClientAtServerNoContext
@@ -476,6 +345,14 @@ EndFunction
 
 &AtClientAtServerNoContext
 Function ValidateStep_1(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
 	Return Step.Status;
 EndFunction
 
@@ -488,6 +365,7 @@ EndFunction
 
 &AtServer
 Procedure RunStep_1()
+	ClearJobList(1);
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
 	JobParameters.Add(ThisObject.Period.StartDate);
@@ -498,12 +376,8 @@ Procedure RunStep_1()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_1(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 1);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
-		SetStepStatus_Error(Object, ThisObject, 1);
-	EndIf;
+Procedure CompleteStep_1(JobResult, JobListRows)
+	SetStepComplete(1, JobResult, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -512,8 +386,23 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Function ValidateStep_2(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	HaveErrors = False;
+	
 	If Not ValueIsFilled(Form.Step_2_CalculationMode) Then
 		AddValidationError(Object, Form, Step, "Calculation mode is required field");
+		HaveErrors = True;
+	EndIf;
+	
+	If Not ValueIsFilled(Form.Step_2_Periodicity) Then
+		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		HaveErrors = True;		
+	EndIf;
+	
+	If HaveErrors Then
 		Return "Error";
 	EndIf;
 	
@@ -522,12 +411,17 @@ Function ValidateStep_2(Object, Form, Step)
 	
 	If ArrayOfErrors.Count() > 0 Then
 		For Each Error In ArrayOfErrors Do
-			AddValidationError(Object, Form, Step, Error);
+			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
 		Return "Error";
 	EndIf;
 	
-	Return "Valid";
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+	
+	Return Step.Status;
 EndFunction
 
 &AtClientAtServerNoContext
@@ -540,23 +434,21 @@ EndFunction
 
 &AtServer
 Procedure RunStep_2()
+	ClearJobList(2);
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
-	JobParameters.Add(ThisObject.Period.StartDate);
-	JobParameters.Add(ThisObject.Period.EndDate);
+	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
+	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
 	JobParameters.Add(ThisObject.Step_2_CalculationMode);
 	JobParameters.Add(ThisObject.Step_2_ForAllCompanies);
+	JobParameters.Add(ThisObject.Step_2_Periodicity);
 	
 	RunStepAsBagroundJob(2, ThisObject.StepsInfo[2].Text, "PeriodClosingServer.CalculationMovementCosts", JobParameters)
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_2(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 2);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
-		SetStepStatus_Error(Object, ThisObject, 2);
-	EndIf;
+Procedure CompleteStep_2(JobResult, JobListRows)
+	SetStepComplete(2, JobResult, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -565,17 +457,31 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Function ValidateStep_3(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	If Not ValueIsFilled(Form.Step_3_Periodicity) Then
+		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		Return "Error";		
+	EndIf;
+	
 	ArrayOfErrors = PeriodClosingServer.Validate_VendorsAdvancesClosing(Form.Company, 
 		Form.Period.StartDate, Form.Period.EndDate);
 	
 	If ArrayOfErrors.Count() > 0 Then
 		For Each Error In ArrayOfErrors Do
-			AddValidationError(Object, Form, Step, Error);
+			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
 		Return "Error";
 	EndIf;
 	
-	Return "Valid";
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+	
+	Return Step.Status;
 EndFunction
 
 &AtClientAtServerNoContext
@@ -588,22 +494,20 @@ EndFunction
 
 &AtServer
 Procedure RunStep_3()
+	ClearJobList(3);
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
-	JobParameters.Add(ThisObject.Period.StartDate);
-	JobParameters.Add(ThisObject.Period.EndDate);
+	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
+	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
 	JobParameters.Add(ThisObject.Step_3_DontOffsetEmptyProjects);
+	JobParameters.Add(ThisObject.Step_3_Periodicity);
 	
 	RunStepAsBagroundJob(3, ThisObject.StepsInfo[3].Text, "PeriodClosingServer.VendorsAdvancesClosing", JobParameters)
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_3(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 3);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
-		SetStepStatus_Error(Object, ThisObject, 3);
-	EndIf;
+Procedure CompleteStep_3(JobResult, JobListRows)
+	SetStepComplete(3, JobResult, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -612,17 +516,31 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Function ValidateStep_4(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	If Not ValueIsFilled(Form.Step_4_Periodicity) Then
+		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		Return "Error";		
+	EndIf;
+
 	ArrayOfErrors = PeriodClosingServer.Validate_CustomersAdvancesClosing(Form.Company, 
 		Form.Period.StartDate, Form.Period.EndDate);
 	
 	If ArrayOfErrors.Count() > 0 Then
 		For Each Error In ArrayOfErrors Do
-			AddValidationError(Object, Form, Step, Error);
+			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
 		Return "Error";
 	EndIf;
 	
-	Return "Valid";
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+
+	Return Step.Status;
 EndFunction
 
 &AtClientAtServerNoContext
@@ -635,22 +553,20 @@ EndFunction
 
 &AtServer
 Procedure RunStep_4()
+	ClearJobList(4);
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
-	JobParameters.Add(ThisObject.Period.StartDate);
-	JobParameters.Add(ThisObject.Period.EndDate);
+	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
+	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
 	JobParameters.Add(ThisObject.Step_4_DontOffsetEmptyProjects);
+	JobParameters.Add(ThisObject.Step_4_Periodicity);
 	
 	RunStepAsBagroundJob(4, ThisObject.StepsInfo[4].Text, "PeriodClosingServer.CustomersAdvancesClosing", JobParameters)
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_4(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 4);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
-		SetStepStatus_Error(Object, ThisObject, 4);
-	EndIf;
+Procedure CompleteStep_4(JobResult, JobListRows)
+	SetStepComplete(4, JobResult, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -659,6 +575,20 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Function ValidateStep_5(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	If Not ValueIsFilled(Form.Step_5_Periodicity) Then
+		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		Return "Error";		
+	EndIf;
+
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+	
 	Return Step.Status;
 EndFunction
 
@@ -675,29 +605,45 @@ EndFunction
 
 &AtServer
 Procedure RunStep_5()
+	ClearJobList(5);
+	Analytics = New Structure();
+	Analytics.Insert("RevenueType"               , ThisObject.Step_5_RevenueType);
+	Analytics.Insert("RevenueProfitLossCenter"   , ThisObject.Step_5_RevenueProfitLossCenter);
+	Analytics.Insert("RevenueAdditionalAnalytic" , ThisObject.Step_5_RevenueAdditionalAnalytic);
+	Analytics.Insert("ExpenseType"               , ThisObject.Step_5_ExpenseType);
+	Analytics.Insert("ExpenseProfitLossCenter"   , ThisObject.Step_5_ExpenseProfitLossCenter);
+	Analytics.Insert("ExpenseAdditionalAnalytic" , ThisObject.Step_5_ExpenseAdditionalAnalytic);
+	
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
-	JobParameters.Add(ThisObject.Period.StartDate);
-	JobParameters.Add(ThisObject.Period.EndDate);
+	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
+	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
+	JobParameters.Add(Analytics);
+	JobParameters.Add(ThisObject.Step_5_Periodicity);
 	
 	RunStepAsBagroundJob(5, ThisObject.StepsInfo[5].Text, "PeriodClosingServer.ForeignCurrencyRevaluation", JobParameters)
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_5(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 5);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
-		SetStepStatus_Error(Object, ThisObject, 5);
-	EndIf;
+Procedure CompleteStep_5(JobResult, JobListRows)
+	SetStepComplete(5, JobResult, JobListRows);
 EndProcedure
 
 #EndRegion
 
-#Region Step_6_AccountingTranslations
+#Region Step_6_AccountingTranslation
 
 &AtClientAtServerNoContext
 Function ValidateStep_6(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+	
 	Return Step.Status;
 EndFunction
 
@@ -715,19 +661,68 @@ EndFunction
 
 &AtServer
 Procedure RunStep_6()
-	JobParameters = New Array();
-	JobParameters.Add(ThisObject.Company);
-	JobParameters.Add(ThisObject.Period.StartDate);
-	JobParameters.Add(ThisObject.Period.EndDate);
+	ClearJobList(6);
 	
-	RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text, "PeriodClosingServer.AccountingTranslatons", JobParameters)
+	CompanyList = New Array();
+	CompanyList.Add(ThisObject.Company);
+	DocumentsTable = AccountingServer.GetDocumentList(New Structure("CompanyList, StartDate, EndDate", 
+		CompanyList, ThisObject.Period.StartDate, ThisObject.Period.EndDate));
+	
+	DocsInPack = 45;
+	StreamArray = New Array();		
+	For Each Row In DocumentsTable Do
+				
+		Pack = 1;
+		StreamArray.Add(Row.Ref);
+		
+		If StreamArray.Count() = DocsInPack Then
+			JobParameters = New Array();
+			JobParameters.Add(StreamArray);
+			
+			RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text + " " + Pack + " * (" + DocsInPack + ")", 
+				"PeriodClosingServer.AccountingTranslation", JobParameters);
+						
+			StreamArray = New Array;
+			Pack = Pack + 1;
+		EndIf;
+	EndDo;
+	
+	If StreamArray.Count() > 0 Then
+		JobParameters = New Array();
+		JobParameters.Add(StreamArray);
+		
+		RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text + " " + Pack + " * (" + StreamArray.Count() + ")", 
+			"PeriodClosingServer.AccountingTranslation", JobParameters);
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_6(Result, JobListRow)
-	If JobListRow.Status = Enums.JobStatus.Completed Then
-		SetStepStatus_Valid(Object, ThisObject, 6);
-	ElsIf JobListRow.Status = Enums.JobStatus.Failed Then
+Procedure CompleteStep_6(JobResult, JobListRows)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	JournalEntryErrors.Ref AS Ref,
+	|	JournalEntryErrors.Error AS Error
+	|FROM
+	|	InformationRegister.T9052S_AccountingRelevance AS T9052S_AccountingRelevance
+	|		INNER JOIN Document.JournalEntry.Errors AS JournalEntryErrors
+	|		ON T9052S_AccountingRelevance.Document = JournalEntryErrors.Ref.Basis
+	|		AND (JournalEntryErrors.Ref.Company = &Company)
+	|		AND (NOT JournalEntryErrors.Ref.DeletionMark)
+	|		AND (JournalEntryErrors.Ref.Date BETWEEN &StartDate AND &EndDate)";
+	
+	Query.SetParameter("Company"   , ThisObject.Company);
+	Query.SetParameter("StartDate" , ThisObject.Period.StartDate);
+	Query.SetParameter("EndDate"   , ThisObject.Period.EndDate);
+	
+	QueryResult = Query.Execute();
+	If QueryResult.IsEmpty() Then
+		SetStepComplete(6, JobResult, JobListRows);
+	Else
+		QuerySelection = QueryResult.Select();
+		While QuerySelection.Next() Do
+			AddValidationError(Object, ThisObject, ThisObject.StepsInfo[6], QuerySelection.Error, QuerySelection.Ref, True);
+		EndDo;
 		SetStepStatus_Error(Object, ThisObject, 6);
 	EndIf;
 EndProcedure
@@ -766,16 +761,19 @@ Procedure CheckJobStatus() Export
 			ArrayForDelete.Add(Step.StepNumber);
 		EndIf;
 		
-		JobListRow = Undefined;
+		If Not StepJobDone Then
+			Continue;
+		EndIf;
+		
+		JobListRows = New Array();
 		For Each Row In ThisObject.JobList Do
 			If ValueIsFilled(Row.UUID) And Row.StepNumber = Step.StepNumber Then
-				JobListRow = Row;
-				Break;
+				JobListRows.Add(Row);
 			EndIf;
 		EndDo;
 		
-		If JobListRow <> Undefined Then	
-			Execute ("CompleteStep_" + String(Step.StepNumber) + "(JobsResult, JobListRowToStructure(JobListRow))");
+		If JobListRows.Count() Then	
+			Execute ("CompleteStep_" + String(Step.StepNumber) + "(JobsResult, ConvertJobListRows(JobListRows))");
 		EndIf;
 	EndDo;		
 	
@@ -799,10 +797,14 @@ Procedure CheckJobStatus() Export
 EndProcedure
 
 &AtClient
-Function JobListRowToStructure(JobListRow)
-	Result = New Structure("Status");
-	FillPropertyValues(Result, JobListRow);
-	Return Result;
+Function ConvertJobListRows(JobListRows)
+	Array = New Array();
+	For Each Row In JobListRows Do
+		NewRow = New Structure("Status");
+		FillPropertyValues(NewRow, Row);
+		Array.Add(NewRow);
+	EndDo;
+	Return Array;
 EndFunction
 
 &AtClient
@@ -815,7 +817,7 @@ EndProcedure
 
 &AtServer
 Function GetJobsResult(StepNumber)
-	JobListFiltered = JobList.Unload().Copy(New Structure("StepNumber", StepNumber));
+	JobListFiltered = CopyJobList(StepNumber);
 	Result = BackgroundJobAPIServer.GetJobsResult(JobListFiltered);
 	UpdateJobList(JobListFiltered);
 	Return Result;
@@ -823,7 +825,7 @@ EndFunction
 
 &AtServer
 Function CheckJobStatusAtServer(StepNumber)
-	JobListFiltered = JobList.Unload().Copy(New Structure("StepNumber", StepNumber));
+	JobListFiltered = CopyJobList(StepNumber);
 	
 	BackgroundJobAPIServer.CheckJobs(JobListFiltered);
 	BackgroundJobAPIServer.RunJobs(JobListFiltered, MaxJobStream);
@@ -834,6 +836,23 @@ Function CheckJobStatusAtServer(StepNumber)
 		EndIf;
 	EndDo;
 	Return True;
+EndFunction
+
+&AtServer
+Function CopyJobList(StepNumber)
+	JobListFiltered = JobList.Unload().Copy(New Structure("StepNumber", StepNumber));
+	ArrayForDelete = New Array();
+	For Each Row In JobListFiltered Do
+		If Not ValueIsFilled(Row.UUID) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayForDelete Do
+		JobListFiltered.Delete(Row);
+	EndDo;
+	
+	Return JobListFiltered;
 EndFunction
 
 &AtServer

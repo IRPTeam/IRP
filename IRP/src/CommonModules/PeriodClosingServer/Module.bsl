@@ -82,7 +82,8 @@ Function RepostingDocuments(Company, StartDate, EndDate, UpdateCurrenciesTable) 
 			DocObject.AdditionalProperties.Insert("UpdateCurrenciesTable", UpdateCurrenciesTable);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
-			JobAddErrorMessage(Msg, Errors, QuerySelection.Ref);
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, QuerySelection.Ref, ErrorDescription);
 			HaveErrors = True;
 			Break;
 		EndTry;
@@ -109,7 +110,7 @@ Function Validate_CalculationMovementCost(Company, StartDate, EndDate, ForAllCom
 	Return GetOverlappingPeriods(_Company, StartDate, EndDate, "CalculationMovementCosts", "BeginDate", "EndDate");
 EndFunction
 
-Function CalculationMovementCost(Company, StartDate, EndDate, CalculationMode, ForAllCompanies, Periodicity) Export
+Function CalculationMovementCosts(Company, StartDate, EndDate, CalculationMode, ForAllCompanies, Periodicity) Export
 	_Company = ?(ForAllCompanies, Catalogs.Companies.EmptyRef(), Company);
 	PeriodsTable = GetPeriodsTable(StartDate, EndDate, Periodicity);
 	
@@ -125,7 +126,7 @@ Function CalculationMovementCost(Company, StartDate, EndDate, CalculationMode, F
 	
 	Errors = New Array();
 	
-	If TotalCount.Count() = 0 Then
+	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
 		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
@@ -155,12 +156,15 @@ Function CalculationMovementCost(Company, StartDate, EndDate, CalculationMode, F
 			DocObject.BeginDate = Period.StartDate;
 			DocObject.EndDate = Period.EndDate;
 			DocObject.CalculationMode = CalculationMode;
+			DocObject.Company = _Company;
 			DocObject.RaiseOnCalculationError = True;
 			DocObject.Write(DocumentWriteMode.Write);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref);
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
+			Break;
 		EndTry;
 				
 		Count = Count + 1;
@@ -200,7 +204,7 @@ Function VendorsAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyProj
 	
 	Errors = New Array();
 	
-	If TotalCount.Count() = 0 Then
+	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
 		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
@@ -229,12 +233,15 @@ Function VendorsAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyProj
 			DocObject.DeletionMark = False;
 			DocObject.BeginOfPeriod = Period.StartDate;
 			DocObject.EndOfPeriod = Period.EndDate;
+			DocObject.Company = Company;
 			DocObject.DontOffsetEmptyProjects = DontOffsetEmptyProjects;
 			DocObject.Write(DocumentWriteMode.Write);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref);
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
+			Break;
 		EndTry;
 				
 		Count = Count + 1;
@@ -274,7 +281,7 @@ Function CustomersAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyPr
 	
 	Errors = New Array();
 	
-	If TotalCount.Count() = 0 Then
+	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
 		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
@@ -303,12 +310,15 @@ Function CustomersAdvancesClosing(Company, StartDate, EndDate, DontOffsetEmptyPr
 			DocObject.DeletionMark = False;
 			DocObject.BeginOfPeriod = Period.StartDate;
 			DocObject.EndOfPeriod = Period.EndDate;
+			DocObject.Company = Company;
 			DocObject.DontOffsetEmptyProjects = DontOffsetEmptyProjects;
 			DocObject.Write(DocumentWriteMode.Write);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref);
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
+			Break;
 		EndTry;
 				
 		Count = Count + 1;
@@ -357,12 +367,12 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 		EndDo;
 	EndDo;
 	
-	UnusedDocuments = GetUnusedDocuments("CustomersAdvancesClosing");
+	UnusedDocuments = GetUnusedDocuments("ForeignCurrencyRevaluation");
 	TotalCount = PeriodsTable.Count();
 	
 	Errors = New Array();
 	
-	If TotalCount.Count() = 0 Then
+	If TotalCount = 0 Then
 		Msg = BackgroundJobAPIServer.NotifySettings();
 		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty periods table: 0");
 	EndIf;
@@ -389,6 +399,7 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 			
 			DocObject.Date = EndOfDay(Period.EndDate);
 			DocObject.DeletionMark = False;
+			DocObject.Company = Company;
 			
 			DocObject.RevenueType               = Analytics.RevenueType; 
 			DocObject.RevenueProfitLossCenter   = Analytics.RevenueProfitLossCenter; 
@@ -401,8 +412,10 @@ Function ForeignCurrencyRevaluation(Company, StartDate, EndDate, Analytics, Peri
 			DocObject.Write(DocumentWriteMode.Write);
 			DocObject.Write(DocumentWriteMode.Posting);
 		Except
-			JobAddErrorMessage(Msg, Errors, DocObject.Ref);
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, DocObject.Ref, ErrorDescription);
 			HaveErrors = True;
+			Break;
 		EndTry;
 				
 		Count = Count + 1;
@@ -421,11 +434,64 @@ EndFunction
 
 #EndRegion
 
+#Region AccountingTransalation
+
+Function AccountingTranslation(ArrayOfDocuments) Export
+	TotalCount = ArrayOfDocuments.Count();
+	
+	Errors = New Array();
+	
+	If TotalCount = 0 Then
+		Msg = BackgroundJobAPIServer.NotifySettings();
+		Return JobAddErrorEmptyCollection(Msg, Errors, "Empty documents array: 0");
+	EndIf;
+
+	Msg = BackgroundJobAPIServer.NotifySettings();
+	Msg.Log = "Start accounting translations: " + TotalCount;
+	BackgroundJobAPIServer.NotifyStream(Msg);
+	
+	Count = 0; 
+	LastPercentLogged = 0;
+	JobStartDate = CurrentUniversalDateInMilliseconds();
+			
+	For Each DocRef In ArrayOfDocuments Do
+		Try
+	
+			ArrayOfBasisDocuments = New Array();
+			ArrayOfBasisDocuments.Add(DocRef);
+
+			ArrayOfLedgerTypes = AccountingServer.GetLedgerTypesByCompany(DocRef, DocRef.Date, DocRef.Company);		
+			TableOfJEDocuments = AccountingServer.GetTableOfJEDocuments(ArrayOfBasisDocuments, ArrayOfLedgerTypes);
+					
+			For Each Row In TableOfJEDocuments Do
+				CommonFunctionsClientServer.PutToAddInfo(Row.JEDocument.AdditionalProperties, "WriteOnForm", True);
+				Row.JEDocument.DeletionMark = Row.BasisDocument.DeletionMark;
+				Row.JEDocument.Write(DocumentWriteMode.Write);
+			EndDo;							
+		Except
+			ErrorDescription = ErrorProcessing.DetailErrorDescription(ErrorInfo());
+			JobAddErrorMessage(Msg, Errors, DocRef, ErrorDescription);
+		EndTry;
+				
+		Count = Count + 1;
+		JobAddPercentMessage(Count, TotalCount, LastPercentLogged, JobStartDate);
+		
+	EndDo;
+	
+	JobAddEndMessage(Errors);
+		
+	Return Errors;
+EndFunction
+
+
+
+#EndRegion
+
 #Region BacjgroundJob
 
-Procedure JobAddErrorMessage(Msg, Errors, Doc)
+Procedure JobAddErrorMessage(Msg, Errors, Doc, ErrorDescription)
 	Msg = BackgroundJobAPIServer.NotifySettings();
-	Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorProcessing.DetailErrorDescription(ErrorInfo());
+	Msg.Log = "Error: " + Doc + ":" + Chars.LF + ErrorDescription;
 	BackgroundJobAPIServer.NotifyStream(Msg);
 			
 	Result = New Structure;
@@ -468,7 +534,7 @@ EndProcedure
 
 #EndRegion
 
-Function GetOverlappingPeriods(StartDate, EndDate, Company, DocumentName, StartDateFieldName, EndDateFieldName)
+Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartDateFieldName, EndDateFieldName)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -523,10 +589,10 @@ Function GetOverlappingPeriods(StartDate, EndDate, Company, DocumentName, StartD
 	ArrayOfErrors = New Array();
 	
 	While QuerySelection.Next() Do
-		ArrayOfErrors.Add(StrTemplate("Overlapping period [%1 - %2] %3", 
+		Msg = StrTemplate("Overlapping period [%1 - %2] %3", 
 			Format(QuerySelection.StartDate, "DF=dd.MM.yyyy;"),
-			Format(QuerySelection.EndDate, "DF=dd.MM.yyyy;"),
-			QuerySelection.Ref));
+			Format(QuerySelection.EndDate, "DF=dd.MM.yyyy;"));
+		ArrayOfErrors.Add(New Structure("Msg, Ref", Msg, QuerySelection.Ref));
 	EndDo;
 	
 	Return ArrayOfErrors;
@@ -594,19 +660,20 @@ Function GetPeriodsTable(StartDate, EndDate, Periodicity)
 	
 	_StartDate = StartDate;
 	
-	While _StartDate <> EndDate Do
+	While _StartDate <= EndDate Do
 		If Periodicity = "Everyday" Then
 			NewRow = PeriodsTable.Add();
 			NewRow.StartDate = _StartDate;
 			NewRow.EndDate = _StartDate;
 		ElsIf Periodicity = "Monthly" Then
-			If BegOfMonth(_StartDate) = _StartDate And EndOfMonth(_StartDate) <= EndDate Then
+			If BegOfMonth(_StartDate) = _StartDate 
+				And EndOfMonth(_StartDate) <= EndOfDay(EndDate) Then
 				NewRow = PeriodsTable.Add();
 				NewRow.StartDate = BegOfMonth(_StartDate);
 				NewRow.EndDate = BegOfDay(EndOfMonth(_StartDate));
 			EndIf;
 		EndIf;
-		_StartDate = EndOfDay(StartDate) + 1; // next day
+		_StartDate = EndOfDay(_StartDate) + 1; // next day
 	EndDo;
 	Return PeriodsTable;
 EndFunction

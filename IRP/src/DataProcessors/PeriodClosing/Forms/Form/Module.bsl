@@ -6,15 +6,15 @@ Var StopEventHandling;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)	
-	CreateStep("Select Company and Period"    , 0, , True);
-	CreateStep("Reposting documents"          , 1);
-	CreateStep("Calculation movement costs"   , 2);
-	CreateStep("Vendors advances closing"     , 3);
-	CreateStep("Customers advances closing"   , 4);
-	CreateStep("Foreign currency revaluation" , 5);
+	CreateStep(R().PeriodClosing_Step1 , 0, , True);
+	CreateStep(R().PeriodClosing_Step2 , 1);
+	CreateStep(R().PeriodClosing_Step3 , 2);
+	CreateStep(R().PeriodClosing_Step4 , 3);
+	CreateStep(R().PeriodClosing_Step5 , 4);
+	CreateStep(R().PeriodClosing_Step6 , 5);
 	
 	If FOServer.IsUseAccounting() Then
-		CreateStep("Accounting translation" , 6);
+		CreateStep(R().PeriodClosing_Step7 , 6);
 	EndIf;
 	
 	ThisObject.UpdatePause = 5;
@@ -28,6 +28,17 @@ Procedure OnOpen(Cancel)
 EndProcedure
 
 &AtClient
+Procedure RunAllSteps(Command)
+	For Each Step In ThisObject.StepsInfo Do
+		If Step.Status = "Skip" Or Step.StepNumber = 0 Then
+			Continue;
+		EndIf;
+		Step.Scheduled = True;
+	EndDo;
+	CheckJobStatus();
+EndProcedure
+
+&AtClient
 Procedure RunStep(Command)
 	SetStepStatus_InProgress(Object, ThisObject);
 	SetVisibilityAvailability(Object, ThisObject);
@@ -36,8 +47,82 @@ Procedure RunStep(Command)
 EndProcedure
 
 &AtClient
+Procedure UnskipAllStepsBefore(Command)
+	CurrentData = Items.StepsInfo.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	First = CurrentData.StepNumber - 1;
+	Last  = 1;
+	
+	While First >= Last Do
+		SetStepStatus_NotValid(Object, ThisObject, First);
+		First = First - 1;
+	EndDo;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SkipAllStepsBefore(Command)
+	CurrentData = Items.StepsInfo.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	First = CurrentData.StepNumber - 1;
+	Last  = 1;
+	
+	While First >= Last Do
+		SetStepStatus_Skip(Object, ThisObject, First);
+		First = First - 1;
+	EndDo;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SkipAllStepsAfter(Command)
+	CurrentData = Items.StepsInfo.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	First = CurrentData.StepNumber + 1;
+	Last  = ThisObject.StepsInfo.Count() - 1;
+	
+	While First <= Last Do
+		SetStepStatus_Skip(Object, ThisObject, First);
+		First = First + 1;
+	EndDo;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UnskipAllStepsAfter(Command)
+	CurrentData = Items.StepsInfo.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	First = CurrentData.StepNumber + 1;
+	Last  = ThisObject.StepsInfo.Count() - 1;
+	
+	While First <= Last Do
+		SetStepStatus_NotValid(Object, ThisObject, First);
+		First = First + 1;
+	EndDo;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
 Procedure SkipStep(Command)
 	SetStepStatus_Skip(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UnskipStep(Command)
+	SetStepStatus_NotValid(Object, ThisObject);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -80,10 +165,26 @@ Procedure StepParameterOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);	
 EndProcedure
 
+&AtClient
+Procedure ClearJobs(Command)
+	ArrayForDelete = New Array();
+	For Each Row In ThisObject.JobList Do
+		If Not ValueIsFilled(Row.UUID) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayForDelete Do
+		ThisObject.JobList.Delete(Row);
+	EndDo;
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	CurrentStepInProgress = (Form.StepsInfo[Form.CurrentStep].Status = "InProgress");
-	CurrentStepValid      = (Form.StepsInfo[Form.CurrentStep].Status = "Valid");
+	CurrentStepInProgress  = (Form.StepsInfo[Form.CurrentStep].Status = "InProgress");
+	CurrentStepValid       = (Form.StepsInfo[Form.CurrentStep].Status = "Valid");
+	CurrentStepSkipped     = (Form.StepsInfo[Form.CurrentStep].Status = "Skip");
+	CurrentStepIsScheduled = Form.StepsInfo[Form.CurrentStep].Scheduled;
 	
 	AnyStepInProgress = (Form.StepsInfo.FindRows(New Structure("Status", "InProgress")).Count() > 0);
 	
@@ -111,11 +212,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndDo;
 	
 	For Each Step In Form.StepsInfo Do
+		Step.ValidationError = False;
 		Step.Status = Eval("ValidateStep_"+ String(Step.StepNumber) +"(Object, Form, Step)");
 		
 		GroupStep = Form.Items["GroupStep" + String(Step.StepNumber)];
 		GroupStep.Visible = (GroupStep = Form.Items.GroupSteps.CurrentPage);
-		GroupStep.ReadOnly = CurrentStepInProgress;
+		GroupStep.ReadOnly = CurrentStepInProgress Or CurrentStepIsScheduled;
 		
 		Step.Visible = (ArrayOfWaitingSteps.Find(Step.StepNumber) <> Undefined);
 		Step.Current = False;
@@ -127,25 +229,69 @@ Procedure SetVisibilityAvailability(Object, Form)
 	If Form.CurrentStep = 0 Then
 		Form.Items.RunStep.Visible = False;
 		Form.Items.SkipStep.Visible = False;
+		Form.Items.RunAllSteps.Visible = True;
+		
+		AllStepsCanRun = True;
+		ContainWaitingSteps = False; // not skipped
+		ContainInProgressSteps = False;
+		ContainValidationErrorSteps = False;
+		
+		For Each Step In Form.StepsInfo Do
+			If Step.Status = "Skip" Then
+				Continue;
+			EndIf;
+			
+			If Step.Status = "InProgress" Then
+				ContainInProgressSteps = True;
+			EndIf;
+			
+			If Step.ValidationError Then
+				ContainValidationErrorSteps = True;
+			EndIf;
+			
+			If Step.StepNumber <> 0 Then
+				ContainWaitingSteps = True;
+			EndIf;
+			
+			ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+			For Each WaitingStep In ArrayOfWaitingSteps Do
+				If Form.StepsInfo[WaitingStep].Status = "Error" Then 
+					AllStepsCanRun = False;
+					Break;
+				EndIf;
+			EndDo;
+		EndDo;
+			
+		Form.Items.RunAllSteps.Enabled = AllStepsCanRun And ContainWaitingSteps 
+			And Not ContainInProgressSteps And Not ContainValidationErrorSteps;
+				
 	Else
 		Form.Items.RunStep.Visible = True;
 		Form.Items.SkipStep.Visible = True;
+		Form.Items.RunAllSteps.Visible = False;
 
 		AllWaitingStepsIsValidOrSkipped = GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps);		
 		
-		Form.Items.RunStep.Enabled = AllWaitingStepsIsValidOrSkipped And Not CurrentStepInProgress;
-		Form.Items.SkipStep.Enabled = Not CurrentStepValid And Not CurrentStepInProgress;
+		Form.Items.RunStep.Enabled = AllWaitingStepsIsValidOrSkipped 
+			And Not CurrentStepInProgress And Not CurrentStepIsScheduled
+			And Not Form.StepsInfo[Form.CurrentStep].ValidationError;
+			
+		Form.Items.SkipStep.Enabled = Not CurrentStepValid 
+			And Not CurrentStepInProgress And Not CurrentStepIsScheduled;
+			
+		Form.Items.UnskipStep.Enabled = CurrentStepSkipped And Not CurrentStepValid 
+			And Not CurrentStepInProgress And Not CurrentStepIsScheduled
 	EndIf;
 	
-	HaveValidationErrors = False;
+	ContainValidationErrors = False;
 	For Each Row In Form.ValidationErrors Do
 		If Row.StepNumber = Form.CurrentStep Then
-			HaveValidationErrors = True;
+			ContainValidationErrors = True;
 			Break;
 		EndIf;
 	EndDo;
 	
-	Form.Items.GroupValidationErrors.Visible = HaveValidationErrors;
+	Form.Items.GroupValidationErrors.Visible = ContainValidationErrors;
 EndProcedure
 
 #EndRegion
@@ -177,6 +323,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetStepStatus_Valid(Object, Form, StepNumber = Undefined)
 	_StepNumber = ?(StepNumber = Undefined, Form.CurrentStep, StepNumber);
+	RemovePermanentValidationError(Object, Form, Form.StepsInfo[_StepNumber]);
 	Step = Form.StepsInfo[_StepNumber];	
 	Step.Status = "Valid";
 	Step.Icon   = GetStepIcon(Step);
@@ -186,6 +333,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetStepStatus_NotValid(Object, Form, StepNumber = Undefined)
 	_StepNumber = ?(StepNumber = Undefined, Form.CurrentStep, StepNumber);
+	RemovePermanentValidationError(Object, Form, Form.StepsInfo[_StepNumber]);
 	Step = Form.StepsInfo[_StepNumber];
 	Step.Status = "NotValid";
 	Step.Icon   = GetStepIcon(Step);
@@ -195,6 +343,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetStepStatus_Skip(Object, Form, StepNumber = Undefined)
 	_StepNumber = ?(StepNumber = Undefined, Form.CurrentStep, StepNumber);
+	RemovePermanentValidationError(Object, Form, Form.StepsInfo[_StepNumber]);
 	Step = Form.StepsInfo[_StepNumber];
 	Step.Status = "Skip";
 	Step.Icon   = GetStepIcon(Step);
@@ -204,6 +353,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetStepStatus_InProgress(Object, Form, StepNumber = Undefined)
 	_StepNumber = ?(StepNumber = Undefined, Form.CurrentStep, StepNumber);
+	RemovePermanentValidationError(Object, Form, Form.StepsInfo[_StepNumber]);
 	Step = Form.StepsInfo[_StepNumber];
 	Step.Status = "InProgress";
 	Step.Icon   = GetStepIcon(Step);
@@ -222,9 +372,12 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetNotValidForDependedSteps(Object, Form, StepNumber)
 	For Each Step In Form.StepsInfo Do
+		If Step.Status = "Skip" Then
+			Continue;
+		EndIf;
+		
 		If Eval("GetWaitingSteps_" + String(Step.StepNumber) + "(Object, Form)").Find(StepNumber) <> Undefined Then
-			Step.Status = "NotValid";
-			Step.Icon   = GetStepIcon(Step);
+			SetStepStatus_NotValid(Object, Form, Step.StepNumber);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -256,6 +409,20 @@ Procedure AddValidationError(Object, Form, Step, Msg, Ref=Undefined, Permanent=F
 	NewRow.ErrorDescription = Msg;
 	NewRow.Ref = Ref;
 	NewRow.StepNumber = Step.StepNumber;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure RemovePermanentValidationError(Object, Form, Step)
+	ArrayForDelete = New Array();
+	For Each Row In Form.PermanentValidationErrors Do
+		If Row.StepNumber = Step.StepNumber Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayForDelete Do
+		Form.PermanentValidationErrors.Delete(Row);
+	EndDo;
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -316,19 +483,22 @@ EndFunction
 Function ValidateStep_0(Object, Form, Step)
 	Result = "Valid";
 	If Not ValueIsFilled(Form.Company) Then
-		AddValidationError(Object, Form, Step, "Company is required field");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error1);
 		Result = "Error";
+		Step.ValidationError = True;
 	EndIf;
 		
 	If Not ValueIsFilled(Form.Period.StartDate) Or Not ValueIsFilled(Form.Period.EndDate) Then
-		AddValidationError(Object, Form, Step, "Perid is required field");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error2);
 		Result = "Error";
+		Step.ValidationError = True;
 	EndIf;
 	
 	If ValueIsFilled(Form.Period.StartDate) And ValueIsFilled(Form.Period.EndDate) 
 		And Form.Period.StartDate > Form.Period.EndDate Then
-		AddValidationError(Object, Form, Step, "Start date more than End date");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error3);
 		Result = "Error";
+		Step.ValidationError = True;
 	EndIf;
 	
 	Return Result;
@@ -393,16 +563,17 @@ Function ValidateStep_2(Object, Form, Step)
 	HaveErrors = False;
 	
 	If Not ValueIsFilled(Form.Step_2_CalculationMode) Then
-		AddValidationError(Object, Form, Step, "Calculation mode is required field");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error4);
 		HaveErrors = True;
 	EndIf;
 	
 	If Not ValueIsFilled(Form.Step_2_Periodicity) Then
-		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error5);
 		HaveErrors = True;		
 	EndIf;
 	
 	If HaveErrors Then
+		Step.ValidationError = True;
 		Return "Error";
 	EndIf;
 	
@@ -413,6 +584,7 @@ Function ValidateStep_2(Object, Form, Step)
 		For Each Error In ArrayOfErrors Do
 			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
+		Step.ValidationError = True;
 		Return "Error";
 	EndIf;
 	
@@ -462,7 +634,8 @@ Function ValidateStep_3(Object, Form, Step)
 	EndIf;
 	
 	If Not ValueIsFilled(Form.Step_3_Periodicity) Then
-		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error5);
+		Step.ValidationError = True;
 		Return "Error";		
 	EndIf;
 	
@@ -473,6 +646,7 @@ Function ValidateStep_3(Object, Form, Step)
 		For Each Error In ArrayOfErrors Do
 			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
+		Step.ValidationError = True;
 		Return "Error";
 	EndIf;
 	
@@ -521,7 +695,8 @@ Function ValidateStep_4(Object, Form, Step)
 	EndIf;
 	
 	If Not ValueIsFilled(Form.Step_4_Periodicity) Then
-		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error5);
+		Step.ValidationError = True;
 		Return "Error";		
 	EndIf;
 
@@ -532,6 +707,7 @@ Function ValidateStep_4(Object, Form, Step)
 		For Each Error In ArrayOfErrors Do
 			AddValidationError(Object, Form, Step, Error.Msg, Error.Ref);
 		EndDo;
+		Step.ValidationError = True;
 		Return "Error";
 	EndIf;
 	
@@ -580,7 +756,8 @@ Function ValidateStep_5(Object, Form, Step)
 	EndIf;
 	
 	If Not ValueIsFilled(Form.Step_5_Periodicity) Then
-		AddValidationError(Object, Form, Step, "Periodicity not selected");
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error5);
+		Step.ValidationError = True;
 		Return "Error";		
 	EndIf;
 
@@ -668,7 +845,7 @@ Procedure RunStep_6()
 	DocumentsTable = AccountingServer.GetDocumentList(New Structure("CompanyList, StartDate, EndDate", 
 		CompanyList, ThisObject.Period.StartDate, ThisObject.Period.EndDate));
 	
-	DocsInPack = 45;
+	DocsInPack = 8;
 	StreamArray = New Array();		
 	For Each Row In DocumentsTable Do
 				
@@ -716,6 +893,9 @@ Procedure CompleteStep_6(JobResult, JobListRows)
 	Query.SetParameter("EndDate"   , ThisObject.Period.EndDate);
 	
 	QueryResult = Query.Execute();
+	
+	RemovePermanentValidationError(Object, ThisObject, ThisObject.StepsInfo[6]);
+	
 	If QueryResult.IsEmpty() Then
 		SetStepComplete(6, JobResult, JobListRows);
 	Else
@@ -743,23 +923,18 @@ Procedure CheckJobStatus() Export
 	Items.FormUpdateStatuses.Enabled = False;
 	
 	AllJobDone = True;
-	ArrayForDelete = New Array();
-	
+		
 	For Each Step In ThisObject.StepsInfo Do
 		StepJobDone = CheckJobStatusAtServer(Step.StepNumber);
 		If Not StepJobDone Then
 			AllJobDone = False;
 		EndIf;
 		
-		JobsResult = GetJobsResult(Step.StepNumber);
+		JobsResult = Undefined;//GetJobsResult(Step.StepNumber);
 		
-		If JobsResult.Count() = 0 Then
-			Continue;
-		EndIf;
-			
-		If ThisObject.ClearCompletedJobs Then
-			ArrayForDelete.Add(Step.StepNumber);
-		EndIf;
+//		If JobsResult.Count() = 0 Or Not StepJobDone Then
+//			Continue;
+//		EndIf;
 		
 		If Not StepJobDone Then
 			Continue;
@@ -768,11 +943,12 @@ Procedure CheckJobStatus() Export
 		JobListRows = New Array();
 		For Each Row In ThisObject.JobList Do
 			If ValueIsFilled(Row.UUID) And Row.StepNumber = Step.StepNumber Then
+				Row.UUID = Undefined;
 				JobListRows.Add(Row);
 			EndIf;
 		EndDo;
 		
-		If JobListRows.Count() Then	
+		If JobListRows.Count() > 0 Then	
 			Execute ("CompleteStep_" + String(Step.StepNumber) + "(JobsResult, ConvertJobListRows(JobListRows))");
 		EndIf;
 	EndDo;		
@@ -780,18 +956,55 @@ Procedure CheckJobStatus() Export
 	UpdateLabels();
 	
 	If AllJobDone Then
-		DetachIdleHandler("CheckJobStatus");
+		ScheduledStepIsRun = False;
+		
+		For Each Step In ThisObject.StepsInfo Do
+			If Not Step.Scheduled Or Step.StepNumber = 0 Then
+				Continue;
+			EndIf;
+			
+			ArrayOfWaitingSteps = GetWaitingSteps(Object, ThisObject, Step.StepNumber);
+			
+			Waiting_IsScheduled = False;
+			Waiting_IsError = False;
+			For Each WaitingStepNumber In ArrayOfWaitingSteps Do
+				If ThisObject.StepsInfo[WaitingStepNumber].Scheduled Then
+					Waiting_IsScheduled = True;
+				EndIf;
+				If ThisObject.StepsInfo[WaitingStepNumber].Status = "Error" Then
+					Waiting_IsError = True;
+				EndIf;
+			EndDo;
+			
+			If Waiting_IsError Then
+				Step.Scheduled = False;
+				SetStepStatus_NotValid(Object, ThisObject, Step.StepNumber);
+				Continue;
+			EndIf;
+			
+			If Waiting_IsScheduled Then
+				Continue;
+			EndIf;
+			
+			AllWaitingStepsIsValidOrSkipped = GetAllWaitingStepsIsValidOrSkipped(Object, ThisObject, ArrayOfWaitingSteps);
+			If AllWaitingStepsIsValidOrSkipped Then
+				ScheduledStepIsRun = True;
+				Step.Scheduled = False;
+				SetStepStatus_InProgress(Object, ThisObject, Step.StepNumber);
+				Execute("RunStep_" + String(Step.StepNumber) + "()");	
+			EndIf;
+		EndDo;
+		
+		If ScheduledStepIsRun Then
+			AttachIdleHandler("CheckJobStatus", ThisObject.UpdatePause, True);
+		Else
+			DetachIdleHandler("CheckJobStatus");
+		EndIf;
+		
 	Else
 		AttachIdleHandler("CheckJobStatus", ThisObject.UpdatePause, True);
 	EndIf;
-	
-	For Each StepNumber In ArrayForDelete Do
-		CompletedJobs = ThisObject.JobList.FindRows(New Structure("StepNumber", StepNumber));
-		For Each CompleteJob In CompletedJobs Do
-			ThisObject.JobList.Delete(CompleteJob);
-		EndDo;
-	EndDo;
-	
+		
 	Items.FormUpdateStatuses.Enabled = True;
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
@@ -815,13 +1028,13 @@ Procedure UpdateLabels()
 	ThisObject.WaitJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Wait"))).Count());
 EndProcedure
 
-&AtServer
-Function GetJobsResult(StepNumber)
-	JobListFiltered = CopyJobList(StepNumber);
-	Result = BackgroundJobAPIServer.GetJobsResult(JobListFiltered);
-	UpdateJobList(JobListFiltered);
-	Return Result;
-EndFunction
+//&AtServer
+//Function GetJobsResult(StepNumber)
+//	JobListFiltered = CopyJobList(StepNumber);
+//	Result = BackgroundJobAPIServer.GetJobsResult(JobListFiltered);
+//	UpdateJobList(JobListFiltered);
+//	Return Result;
+//EndFunction
 
 &AtServer
 Function CheckJobStatusAtServer(StepNumber)
@@ -830,7 +1043,7 @@ Function CheckJobStatusAtServer(StepNumber)
 	BackgroundJobAPIServer.CheckJobs(JobListFiltered);
 	BackgroundJobAPIServer.RunJobs(JobListFiltered, MaxJobStream);
 	UpdateJobList(JobListFiltered);
-	For Each Row In JobList Do
+	For Each Row In JobListFiltered Do
 		If Row.Status = Enums.JobStatus.Active OR Row.Status = Enums.JobStatus.Wait Then
 			Return False;
 		EndIf;

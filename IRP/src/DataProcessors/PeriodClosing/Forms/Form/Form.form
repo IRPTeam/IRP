@@ -209,6 +209,59 @@
               <showTitle>true</showTitle>
             </extInfo>
           </items>
+          <items xsi:type="form:FormField">
+            <name>StepsInfoScheduled</name>
+            <id>1246</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>StepsInfo.Scheduled</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>StepsInfoScheduledExtendedTooltip</name>
+              <id>1248</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>StepsInfoScheduledContextMenu</name>
+              <id>1247</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PictureField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:ImageFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+              <valuesPicture xsi:type="core:PictureRef">
+                <picture>StdPicture.History</picture>
+              </valuesPicture>
+              <fileDragMode>AsFileRef</fileDragMode>
+            </extInfo>
+          </items>
           <autoCommandBar>
             <name>StepsInfoCommandBar</name>
             <id>73</id>
@@ -419,12 +472,131 @@
           <contextMenu>
             <name>StepsInfoContextMenu</name>
             <id>74</id>
+            <items xsi:type="form:Button">
+              <name>StepsInfoContextMenuSkipAllStepsBefore</name>
+              <id>1238</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>StepsInfoContextMenuSkipAllStepsBeforeExtendedTooltip</name>
+                <id>1239</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.SkipAllStepsBefore</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
+              <name>StepsInfoContextMenuUnskipAllStepsBefore</name>
+              <id>1242</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>StepsInfoContextMenuUnskipAllStepsBeforeExtendedTooltip</name>
+                <id>1243</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.UnskipAllStepsBefore</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
+              <name>StepsInfoContextMenuSkipAllStepsAfter</name>
+              <id>1236</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>StepsInfoContextMenuSkipAllStepsAfterExtendedTooltip</name>
+                <id>1237</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.SkipAllStepsAfter</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
+            <items xsi:type="form:Button">
+              <name>StepsInfoContextMenuUnskipAllStepsAfter</name>
+              <id>1240</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <extendedTooltip>
+                <name>StepsInfoContextMenuUnskipAllStepsAfterExtendedTooltip</name>
+                <id>1241</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <commandName>Form.Command.UnskipAllStepsAfter</commandName>
+              <representation>Auto</representation>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <placementArea>UserCmds</placementArea>
+              <representationInContextMenu>Auto</representationInContextMenu>
+            </items>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
-            <autoFill>true</autoFill>
           </contextMenu>
           <readOnly>true</readOnly>
           <changeRowSet>true</changeRowSet>
@@ -744,7 +916,6 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <autoFill>true</autoFill>
             </contextMenu>
             <readOnly>true</readOnly>
             <changeRowSet>true</changeRowSet>
@@ -874,6 +1045,38 @@
         <name>GroupHead</name>
         <id>1132</id>
         <items xsi:type="form:Button">
+          <name>RunAllSteps</name>
+          <id>1244</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>RunAllStepsExtendedTooltip</name>
+            <id>1245</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>UsualButton</type>
+          <commandName>Form.Command.RunAllSteps</commandName>
+          <representation>Auto</representation>
+          <defaultButton>true</defaultButton>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
+        <items xsi:type="form:Button">
           <name>RunStep</name>
           <id>1137</id>
           <visible>true</visible>
@@ -929,6 +1132,37 @@
           </extendedTooltip>
           <type>Hyperlink</type>
           <commandName>Form.Command.SkipStep</commandName>
+          <representation>Auto</representation>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <placementArea>UserCmds</placementArea>
+          <representationInContextMenu>Auto</representationInContextMenu>
+        </items>
+        <items xsi:type="form:Button">
+          <name>UnskipStep</name>
+          <id>1249</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <extendedTooltip>
+            <name>UnskipStepExtendedTooltip</name>
+            <id>1250</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <type>Hyperlink</type>
+          <commandName>Form.Command.UnskipStep</commandName>
           <representation>Auto</representation>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -1767,21 +2001,17 @@
                   </borderColor>
                 </extInfo>
               </items>
-              <items xsi:type="form:FormField">
-                <name>ClearCompletedJobs</name>
-                <id>1150</id>
+              <items xsi:type="form:Button">
+                <name>ClearJobs</name>
+                <id>1251</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
                   <common>true</common>
                 </userVisible>
-                <dataPath xsi:type="form:DataPath">
-                  <segments>ClearCompletedJobs</segments>
-                </dataPath>
-                <titleLocation>Right</titleLocation>
                 <extendedTooltip>
-                  <name>ClearCompletedJobsExtendedTooltip</name>
-                  <id>1152</id>
+                  <name>ClearJobsExtendedTooltip</name>
+                  <id>1252</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
@@ -1794,24 +2024,13 @@
                     <horizontalAlign>Left</horizontalAlign>
                   </extInfo>
                 </extendedTooltip>
-                <contextMenu>
-                  <name>ClearCompletedJobsContextMenu</name>
-                  <id>1151</id>
-                  <visible>true</visible>
-                  <enabled>true</enabled>
-                  <userVisible>
-                    <common>true</common>
-                  </userVisible>
-                  <autoFill>true</autoFill>
-                </contextMenu>
-                <type>CheckBoxField</type>
-                <editMode>Enter</editMode>
-                <showInHeader>true</showInHeader>
-                <headerHorizontalAlign>Left</headerHorizontalAlign>
-                <showInFooter>true</showInFooter>
-                <extInfo xsi:type="form:CheckBoxFieldExtInfo">
-                  <checkBoxType>Switcher</checkBoxType>
-                </extInfo>
+                <type>UsualButton</type>
+                <commandName>Form.Command.ClearJobs</commandName>
+                <representation>Auto</representation>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <placementArea>UserCmds</placementArea>
+                <representationInContextMenu>Auto</representationInContextMenu>
               </items>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -4850,6 +5069,7 @@
             <name>ValidationErrorsRef</name>
             <id>1233</id>
             <visible>true</visible>
+            <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
@@ -5049,15 +5269,16 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <autoFill>true</autoFill>
           </contextMenu>
           <changeRowSet>true</changeRowSet>
           <changeRowOrder>true</changeRowOrder>
           <autoMaxWidth>true</autoMaxWidth>
+          <height>6</height>
           <autoMaxHeight>true</autoMaxHeight>
-          <heightControlVariant>ByContent</heightControlVariant>
+          <heightControlVariant>InFormRows</heightControlVariant>
           <autoMaxRowsCount>true</autoMaxRowsCount>
           <selectionMode>MultiRow</selectionMode>
+          <header>true</header>
           <headerHeight>1</headerHeight>
           <footerHeight>1</footerHeight>
           <horizontalScrollBar>AutoUse</horizontalScrollBar>
@@ -5257,213 +5478,6 @@
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>CalculationMovementCost</name>
-    <title>
-      <key>en</key>
-      <value>Calculation movement cost</value>
-    </title>
-    <id>4</id>
-    <valueType>
-      <types>ValueTable</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-    <columns>
-      <name>Document</name>
-      <title>
-        <key>en</key>
-        <value>Document</value>
-      </title>
-      <id>5</id>
-      <valueType>
-        <types>DocumentRef.CalculationMovementCosts</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>StartDate</name>
-      <title>
-        <key>en</key>
-        <value>Start date</value>
-      </title>
-      <id>6</id>
-      <valueType>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>EndDate</name>
-      <title>
-        <key>en</key>
-        <value>End date</value>
-      </title>
-      <id>7</id>
-      <valueType>
-        <types>Date</types>
-        <dateQualifiers>
-          <dateFractions>Date</dateFractions>
-        </dateQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>CalculationMode</name>
-      <title>
-        <key>en</key>
-        <value>Calculation mode</value>
-      </title>
-      <id>8</id>
-      <valueType>
-        <types>EnumRef.CalculationMode</types>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Period_ErrorCode</name>
-      <title>
-        <key>en</key>
-        <value>Period error code</value>
-      </title>
-      <id>9</id>
-      <valueType>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>Period_ErrorDescription</name>
-      <title>
-        <key>en</key>
-        <value>Period error description</value>
-      </title>
-      <id>10</id>
-      <valueType>
-        <types>String</types>
-        <stringQualifiers/>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>CalculationMode_ErrorCode</name>
-      <title>
-        <key>en</key>
-        <value>Calculation mode error code</value>
-      </title>
-      <id>11</id>
-      <valueType>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>CalculationMode_ErrorDescription</name>
-      <title>
-        <key>en</key>
-        <value>Calculation mode error description</value>
-      </title>
-      <id>12</id>
-      <valueType>
-        <types>String</types>
-        <stringQualifiers/>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>DocumentIcon</name>
-      <title>
-        <key>en</key>
-        <value>Document icon</value>
-      </title>
-      <id>13</id>
-      <valueType>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-    <columns>
-      <name>StatusIcon</name>
-      <title>
-        <key>en</key>
-        <value>Status icon</value>
-      </title>
-      <id>14</id>
-      <valueType>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </valueType>
-      <view>
-        <common>true</common>
-      </view>
-      <edit>
-        <common>true</common>
-      </edit>
-    </columns>
-  </attributes>
-  <attributes>
     <name>LandedCostCalculationMode</name>
     <title>
       <key>en</key>
@@ -5616,6 +5630,40 @@
         <value>Visible</value>
       </title>
       <id>23</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Scheduled</name>
+      <title>
+        <key>en</key>
+        <value>Scheduled</value>
+      </title>
+      <id>62</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>ValidationError</name>
+      <title>
+        <key>en</key>
+        <value>Validation error</value>
+      </title>
+      <id>63</id>
       <valueType>
         <types>Boolean</types>
       </valueType>
@@ -6166,23 +6214,6 @@
     <settingsSavedData xsi:type="form:DataPath">
       <segments>Step1_UpdateCurrenciesTable</segments>
     </settingsSavedData>
-  </attributes>
-  <attributes>
-    <name>ClearCompletedJobs</name>
-    <title>
-      <key>en</key>
-      <value>Clear completed jobs</value>
-    </title>
-    <id>40</id>
-    <valueType>
-      <types>Boolean</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
   </attributes>
   <attributes>
     <name>Step_2_CalculationMode</name>
@@ -6751,6 +6782,145 @@
       </handler>
     </action>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SkipAllStepsBefore</name>
+    <title>
+      <key>en</key>
+      <value>Skip all steps before</value>
+    </title>
+    <id>8</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleBlack</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SkipAllStepsBefore</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SkipAllStepsAfter</name>
+    <title>
+      <key>en</key>
+      <value>Skip all steps after</value>
+    </title>
+    <id>9</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleBlack</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SkipAllStepsAfter</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnskipAllStepsBefore</name>
+    <title>
+      <key>en</key>
+      <value>Unskip all steps before</value>
+    </title>
+    <id>10</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleYellow</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnskipAllStepsBefore</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnskipAllStepsAfter</name>
+    <title>
+      <key>en</key>
+      <value>Unskip all steps after</value>
+    </title>
+    <id>11</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.AppearanceCircleYellow</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnskipAllStepsAfter</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>RunAllSteps</name>
+    <title>
+      <key>en</key>
+      <value>Run all steps</value>
+    </title>
+    <id>12</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GenerateReport</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>RunAllSteps</name>
+      </handler>
+    </action>
+    <representation>TextPicture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ClearJobs</name>
+    <title>
+      <key>en</key>
+      <value>Clear</value>
+    </title>
+    <id>13</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ClearJobs</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>UnskipStep</name>
+    <title>
+      <key>en</key>
+      <value>Unskip</value>
+    </title>
+    <id>14</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>UnskipStep</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

@@ -589,7 +589,7 @@ Function GetOverlappingPeriods(Company, StartDate, EndDate, DocumentName, StartD
 	ArrayOfErrors = New Array();
 	
 	While QuerySelection.Next() Do
-		Msg = StrTemplate("Overlapping period [%1 - %2] %3", 
+		Msg = StrTemplate(R().PeriodClosing_Error6, 
 			Format(QuerySelection.StartDate, "DF=dd.MM.yyyy;"),
 			Format(QuerySelection.EndDate, "DF=dd.MM.yyyy;"));
 		ArrayOfErrors.Add(New Structure("Msg, Ref", Msg, QuerySelection.Ref));

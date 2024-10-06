@@ -177,6 +177,7 @@ Procedure ClearJobs(Command)
 	For Each Row In ArrayForDelete Do
 		ThisObject.JobList.Delete(Row);
 	EndDo;
+	UpdateLabels();
 EndProcedure
 
 &AtClientAtServerNoContext
@@ -276,7 +277,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 			And Not CurrentStepInProgress And Not CurrentStepIsScheduled
 			And Not Form.StepsInfo[Form.CurrentStep].ValidationError;
 			
-		Form.Items.SkipStep.Enabled = Not CurrentStepValid 
+		Form.Items.SkipStep.Enabled = Not CurrentStepSkipped And Not CurrentStepValid 
 			And Not CurrentStepInProgress And Not CurrentStepIsScheduled;
 			
 		Form.Items.UnskipStep.Enabled = CurrentStepSkipped And Not CurrentStepValid 

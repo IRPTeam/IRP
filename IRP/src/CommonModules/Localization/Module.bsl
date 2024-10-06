@@ -979,6 +979,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
 	Strings.Insert("Form_038", NStr("en = 'Employee'", Lang));
 	Strings.Insert("Form_039", NStr("en = 'Add attribute in additional attribute set in extension tab for current object type: %1'", Lang));
+	Strings.Insert("Form_040", NStr("en = 'Select any row to split'", Lang));
+	Strings.Insert("Form_041", NStr("en = 'It cannot split the row where the quantity is 0'", Lang));
+	Strings.Insert("Form_042", NStr("en = 'Set the quantity for the new row'", Lang));
+	Strings.Insert("Form_043", NStr("en = 'Quantity can only be greater than 0 and less than %1'", Lang));
 #EndRegion
 
 #Region ErrorMessages

@@ -384,7 +384,7 @@ Procedure SetNotValidForDependedSteps(Object, Form, StepNumber)
 EndProcedure
 
 &AtServer
-Procedure SetStepComplete(StepNumber, JobResult, JobListRows)
+Procedure SetStepComplete(StepNumber, JobListRows)
 	AllComplete = True;
 	For Each Row In JobListRows Do
 		If Row.Status <> Enums.JobStatus.Completed Then
@@ -547,8 +547,8 @@ Procedure RunStep_1()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_1(JobResult, JobListRows)
-	SetStepComplete(1, JobResult, JobListRows);
+Procedure CompleteStep_1(JobListRows)
+	SetStepComplete(1, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -620,8 +620,8 @@ Procedure RunStep_2()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_2(JobResult, JobListRows)
-	SetStepComplete(2, JobResult, JobListRows);
+Procedure CompleteStep_2(JobListRows)
+	SetStepComplete(2, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -681,8 +681,8 @@ Procedure RunStep_3()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_3(JobResult, JobListRows)
-	SetStepComplete(3, JobResult, JobListRows);
+Procedure CompleteStep_3(JobListRows)
+	SetStepComplete(3, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -743,7 +743,7 @@ EndProcedure
 
 &AtServer
 Procedure CompleteStep_4(JobResult, JobListRows)
-	SetStepComplete(4, JobResult, JobListRows);
+	SetStepComplete(4, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -803,8 +803,8 @@ Procedure RunStep_5()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_5(JobResult, JobListRows)
-	SetStepComplete(5, JobResult, JobListRows);
+Procedure CompleteStep_5(JobListRows)
+	SetStepComplete(5, JobListRows);
 EndProcedure
 
 #EndRegion
@@ -875,7 +875,7 @@ Procedure RunStep_6()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_6(JobResult, JobListRows)
+Procedure CompleteStep_6(JobListRows)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -898,7 +898,7 @@ Procedure CompleteStep_6(JobResult, JobListRows)
 	RemovePermanentValidationError(Object, ThisObject, ThisObject.StepsInfo[6]);
 	
 	If QueryResult.IsEmpty() Then
-		SetStepComplete(6, JobResult, JobListRows);
+		SetStepComplete(6, JobListRows);
 	Else
 		QuerySelection = QueryResult.Select();
 		While QuerySelection.Next() Do
@@ -930,13 +930,7 @@ Procedure CheckJobStatus() Export
 		If Not StepJobDone Then
 			AllJobDone = False;
 		EndIf;
-		
-		JobsResult = Undefined;//GetJobsResult(Step.StepNumber);
-		
-//		If JobsResult.Count() = 0 Or Not StepJobDone Then
-//			Continue;
-//		EndIf;
-		
+				
 		If Not StepJobDone Then
 			Continue;
 		EndIf;
@@ -950,7 +944,7 @@ Procedure CheckJobStatus() Export
 		EndDo;
 		
 		If JobListRows.Count() > 0 Then	
-			Execute ("CompleteStep_" + String(Step.StepNumber) + "(JobsResult, ConvertJobListRows(JobListRows))");
+			Execute ("CompleteStep_" + String(Step.StepNumber) + "(ConvertJobListRows(JobListRows))");
 		EndIf;
 	EndDo;		
 	
@@ -1028,14 +1022,6 @@ Procedure UpdateLabels()
 	ThisObject.ComplitedJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Completed"))).Count());
 	ThisObject.WaitJob = String(JobList.FindRows(New Structure("Status", PredefinedValue("Enum.JobStatus.Wait"))).Count());
 EndProcedure
-
-//&AtServer
-//Function GetJobsResult(StepNumber)
-//	JobListFiltered = CopyJobList(StepNumber);
-//	Result = BackgroundJobAPIServer.GetJobsResult(JobListFiltered);
-//	UpdateJobList(JobListFiltered);
-//	Return Result;
-//EndFunction
 
 &AtServer
 Function CheckJobStatusAtServer(StepNumber)

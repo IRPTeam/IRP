@@ -742,7 +742,7 @@ Procedure RunStep_4()
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_4(JobResult, JobListRows)
+Procedure CompleteStep_4(JobListRows)
 	SetStepComplete(4, JobListRows);
 EndProcedure
 

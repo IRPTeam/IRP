@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7b1ed50c-6029-4629-9a1f-f5196f050bfb">
+  <producedTypes>
+    <objectType typeId="a6864736-0835-4be1-b0be-d56ea53b20e5" valueTypeId="089df1c9-04c0-4fe9-b1e9-0398fddbeddc"/>
+    <managerType typeId="8c8fdaf9-38cb-40cc-bb7c-eb7066df1356" valueTypeId="e40df5bc-ad26-469e-84bd-38491b7a79d6"/>
+  </producedTypes>
+  <name>PeriodClosing</name>
+  <synonym>
+    <key>en</key>
+    <value>Period closing</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.PeriodClosing.Form.Form</defaultForm>
+  <forms uuid="28822e9e-55a8-4d86-a469-f6ce2a5ea76b">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

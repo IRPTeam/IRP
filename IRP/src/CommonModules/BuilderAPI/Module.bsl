@@ -328,10 +328,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			LoadTable = Wrapper.Object[Table.Name]; // ValueTable
 			DocTable.Load(LoadTable);
 		EndDo;
-		
-		For Each KeyValue In Wrapper.Object.AdditionalProperties Do
-			Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
-		EndDo;
+		If Wrapper.Object.Property("AdditionalProperties") Then
+			For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+				Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+			EndDo;
+		EndIf;
 		
 		If Object = Undefined Then
 			
@@ -376,9 +377,11 @@ Function Write(Wrapper, WriteMode = Undefined, PostingMode = Undefined, Object =
 			CtlgTable.Load(LoadTable);
 		EndDo;
 		
-		For Each KeyValue In Wrapper.Object.AdditionalProperties Do
-			Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
-		EndDo;
+		If Wrapper.Object.Property("AdditionalProperties") Then
+			For Each KeyValue In Wrapper.Object.AdditionalProperties Do
+				Doc.AdditionalProperties.Insert(KeyValue.Key, KeyValue.Value);
+			EndDo;
+		EndIf;
 				
 		If Object = Undefined Then
 			If CheckFilling Then
@@ -554,6 +557,7 @@ EndFunction
 //  Structure - Create wrapper:
 // * Object - Structure:
 // 	** Ref - DocumentRefDocumentName -
+//  ** AdditionalProperties - Structure
 // * Attr - Structure:
 // 	** Key - String - Attribute name
 // 	** Value - Arbitrary - Attribute value
@@ -561,13 +565,12 @@ EndFunction
 // 	** Key - String - Table name
 // 	** Value - ValueTable - Table
 // * DefaultTable - Undefined, String - Default table name
-// * AdditionalProperties - Structure
 Function CreateWrapper(DefaultTable = Undefined) Export
 	Wrapper = New Structure("Object", New Structure());
 	Wrapper.Insert("Attr"    , New Structure());
 	Wrapper.Insert("Tables" , New Structure());
 	Wrapper.Insert("DefaultTable" , DefaultTable);
-	Wrapper.Insert("AdditionalProperties" , New Structure);
+	Wrapper.Object.Insert("AdditionalProperties" , New Structure);
 	Return Wrapper
 EndFunction
 

@@ -441,11 +441,13 @@ Function GetEventHandlerMap(Parameters, DataPath, IsBuilder)
 	EventHandlerMap.Insert("Inventory.ItemKey"  , "SetInventoryItemKey");
 	
 	// Payroll
-	EventHandlerMap.Insert("AccrualList.Amount"              , "SetPayrollListsAmount");
-	EventHandlerMap.Insert("AccrualList.AccrualType"         , "SetPayrollListsAccrualDeductionType");
-	EventHandlerMap.Insert("DeductionList.Amount"            , "SetPayrollListsAmount");
-	EventHandlerMap.Insert("DeductionList.DeductionType"     , "SetPayrollListsAccrualDeductionType");
-	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount" , "SetPayrollListsAmount");
+	EventHandlerMap.Insert("AccrualList.Amount"					, "SetPayrollListsAmount");
+	EventHandlerMap.Insert("AccrualList.AccrualType"			, "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("AccrualList.Employee"				, "SetPayrollListsEmployee");
+	EventHandlerMap.Insert("DeductionList.Amount"				, "SetPayrollListsAmount");
+	EventHandlerMap.Insert("DeductionList.DeductionType"		, "SetPayrollListsAccrualDeductionType");
+	EventHandlerMap.Insert("DeductionList.Employee"				, "SetPayrollListsEmployee");
+	EventHandlerMap.Insert("CashAdvanceDeductionList.Amount"	, "SetPayrollListsAmount");	
 
 	// CostList
 	EventHandlerMap.Insert("CostList.Amount", "SetCostListAmount");

@@ -11,11 +11,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Period closing</value>
+  <value>Закрытие периода</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Period closing</value>
+  <value>Dönem kapanışı</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.PeriodClosing.Form.Form</defaultForm>

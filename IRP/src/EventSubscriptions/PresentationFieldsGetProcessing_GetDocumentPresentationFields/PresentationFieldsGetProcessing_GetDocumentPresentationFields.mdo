@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Presentation fields get processing get document presentation fields</value>
+  <value>Sunum alanları işleme belge sunumu alanlarını alır</value>
  </synonym>
  <source>
   <types>DocumentManager.PurchaseOrder</types>

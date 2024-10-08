@@ -3750,16 +3750,16 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	// %3 - Document date
 	Strings.Insert("DocPresentation", NStr("en='%1 %2 dated %3';
 		|ru='%1 %2 создано %3';
-		|tr='%1 %2 dated %3'", Lang));	
+		|tr='%1 %2 tarih %3'", Lang));	
 #EndRegion
 
 #Region PeriodClosing
 	Strings.Insert("PeriodClosing_Step1", NStr("en='Select Company and Period';
-		|ru='Select Company and Period';
-		|tr='Select Company and Period'", Lang));
+		|ru='Выбрать организацию и период';
+		|tr='Şirket ve dönemi seçin'", Lang));
 	Strings.Insert("PeriodClosing_Step2", NStr("en='Reposting documents';
-		|ru='Reposting documents';
-		|tr='Reposting documents'", Lang));
+		|ru='Перепроведение документов';
+		|tr='Evrakları tekrar kaydetme'", Lang));
 	Strings.Insert("PeriodClosing_Step3", NStr("en='Calculation movement costs';
 		|ru='Расчет себестоимости товаров';
 		|tr='Maliyet hesaplama fişi'", Lang));
@@ -3773,27 +3773,27 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 		|ru='Переоценка валютных остатков';
 		|tr='Yabancı para birimi değerlemesi'", Lang));
 	Strings.Insert("PeriodClosing_Step7", NStr("en='Accounting translation';
-		|ru='Accounting translation';
-		|tr='Accounting translation'", Lang));
+		|ru='Перевод бухгалтерии';
+		|tr='Muhasebe hareket yansıması'", Lang));
 	
 	Strings.Insert("PeriodClosing_Error1", NStr("en='Company is required field';
-		|ru='Company is required field';
-		|tr='Company is required field'", Lang));
+		|ru='Организация это обязательное к заполнению поле';
+		|tr='Şirket zorunlu alan'", Lang));
 	Strings.Insert("PeriodClosing_Error2", NStr("en='Perid is required field';
-		|ru='Perid is required field';
-		|tr='Perid is required field'", Lang));
+		|ru='Период это обязательное к заполнению поле';
+		|tr='Dönem zorunlu alan'", Lang));
 	Strings.Insert("PeriodClosing_Error3", NStr("en='Start date more than End date';
-		|ru='Start date more than End date';
-		|tr='Start date more than End date'", Lang));
+		|ru='Дата начала больше, чем дата окончания';
+		|tr='İlk tarih ve son tarihinden büyükyür'", Lang));
 	Strings.Insert("PeriodClosing_Error4", NStr("en='Calculation mode is required field';
-		|ru='Calculation mode is required field';
-		|tr='Calculation mode is required field'", Lang));
+		|ru='Режим расчета это обязательное к заполнению поле';
+		|tr='Hesaplama modu zorunlu alan'", Lang));
 	Strings.Insert("PeriodClosing_Error5", NStr("en='Periodicity not selected';
-		|ru='Periodicity not selected';
-		|tr='Periodicity not selected'", Lang));
+		|ru='Периодичность не указана';
+		|tr='Dönemsellik seçilmedi'", Lang));
 	Strings.Insert("PeriodClosing_Error6", NStr("en='Overlapping period [%1 - %2]';
-		|ru='Overlapping period [%1 - %2]';
-		|tr='Overlapping period [%1 - %2]'", Lang));
+		|ru='Параллельный период [%1 - %2]';
+		|tr='Paralel dönem [%1 - %2]'", Lang));
 #EndRegion
 
 	Return Strings;

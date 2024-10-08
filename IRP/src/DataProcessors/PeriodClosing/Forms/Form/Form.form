@@ -190,11 +190,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>Steps info group column</value>
+       <value>Инфо шагов группа колонка</value>
       </title>
       <title>
        <key>tr</key>
-       <value>Steps info group column</value>
+       <value>Adımlar bilgisi grup sütun</value>
       </title>
       <extendedTooltip>
        <name>StepsInfoGroupColumnExtendedTooltip</name>
@@ -757,11 +757,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Steps info waiting group</value>
+        <value>Инфо шагов группа ожидания</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Steps info waiting group</value>
+        <value>Adımlar bilgisi grup bekleme</value>
        </title>
        <extendedTooltip>
         <name>StepsInfoWaitingGroupExtendedTooltip</name>
@@ -961,11 +961,11 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Waiting steps</value>
+      <value>Шаги в очереди</value>
      </title>
      <title>
       <key>tr</key>
-      <value>Waiting steps</value>
+      <value>Bekleyen adımlar</value>
      </title>
      <extendedTooltip>
       <name>GroupWaitingStepsExtendedTooltip</name>
@@ -1005,11 +1005,11 @@
     </title>
     <title>
      <key>ru</key>
-     <value>Step info</value>
+     <value>Инфо шага</value>
     </title>
     <title>
      <key>tr</key>
-     <value>Step info</value>
+     <value>Adım bilgisi</value>
     </title>
     <extendedTooltip>
      <name>GroupStepInfoExtendedTooltip</name>
@@ -3699,11 +3699,11 @@
       </title>
       <title>
        <key>ru</key>
-       <value>MultiJob</value>
+       <value>Многопоточно</value>
       </title>
       <title>
        <key>tr</key>
-       <value>MultiJob</value>
+       <value>Çoklu görevler</value>
       </title>
       <extendedTooltip>
        <name>GroupMultiJobExtendedTooltip</name>
@@ -3741,11 +3741,11 @@
      </title>
      <title>
       <key>ru</key>
-      <value>Background jobs</value>
+      <value>Регламентные задания</value>
      </title>
      <title>
       <key>tr</key>
-      <value>Background jobs</value>
+      <value>Arka plan görevleri</value>
      </title>
      <extendedTooltip>
       <name>GroupBackgroundJobsExtendedTooltip</name>
@@ -3788,11 +3788,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step0</value>
+        <value>Шаг0</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step0</value>
+        <value>Adım0</value>
        </title>
        <extendedTooltip>
         <name>GroupStep0ExtendedTooltip</name>
@@ -3879,11 +3879,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step1</value>
+        <value>Шаг1</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step1</value>
+        <value>Adım1</value>
        </title>
        <extendedTooltip>
         <name>GroupStep1ExtendedTooltip</name>
@@ -3964,11 +3964,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Everyday</value>
+           <value>Ежедневно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Everyday</value>
+           <value>Günlük</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Everyday</value>
@@ -3981,11 +3981,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Monthly</value>
+           <value>Ежемесячно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Monthly</value>
+           <value>Aylık</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Monthly</value>
@@ -4126,11 +4126,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step3</value>
+        <value>Шаг3</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step3</value>
+        <value>Adım3</value>
        </title>
        <extendedTooltip>
         <name>GroupStep2ExtendedTooltip</name>
@@ -4211,11 +4211,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Everyday</value>
+           <value>Ежедневно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Everyday</value>
+           <value>Günlük</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Everyday</value>
@@ -4228,11 +4228,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Monthly</value>
+           <value>Ежемесячно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Monthly</value>
+           <value>Aylık</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Monthly</value>
@@ -4318,11 +4318,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step3</value>
+        <value>Шаг3</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step3</value>
+        <value>Adım3</value>
        </title>
        <extendedTooltip>
         <name>GroupStep3ExtendedTooltip</name>
@@ -4403,11 +4403,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Everyday</value>
+           <value>Ежедневно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Everyday</value>
+           <value>Günlük</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Everyday</value>
@@ -4420,11 +4420,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Monthly</value>
+           <value>Ежемесячно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Monthly</value>
+           <value>Aylık</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Monthly</value>
@@ -4510,11 +4510,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step4</value>
+        <value>Шаг4</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step4</value>
+        <value>Adım4</value>
        </title>
        <extendedTooltip>
         <name>GroupStep4ExtendedTooltip</name>
@@ -4595,11 +4595,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Everyday</value>
+           <value>Ежедневно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Everyday</value>
+           <value>Günlük</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Everyday</value>
@@ -4612,11 +4612,11 @@
           </presentation>
           <presentation>
            <key>ru</key>
-           <value>Monthly</value>
+           <value>Ежемесячно</value>
           </presentation>
           <presentation>
            <key>tr</key>
-           <value>Monthly</value>
+           <value>Aylık</value>
           </presentation>
           <value xsi:type="core:StringValue">
            <value>Monthly</value>
@@ -4828,11 +4828,11 @@
          </title>
          <title>
           <key>ru</key>
-          <value>Revenue analytic</value>
+          <value>Аналитика прибылей</value>
          </title>
          <title>
           <key>tr</key>
-          <value>Revenue analytic</value>
+          <value>Gelirler detaylar</value>
          </title>
          <extendedTooltip>
           <name>GroupRevenueAnalyticExtendedTooltip</name>
@@ -5045,11 +5045,11 @@
          </title>
          <title>
           <key>ru</key>
-          <value>Expense analytic</value>
+          <value>Аналитика затрат</value>
          </title>
          <title>
           <key>tr</key>
-          <value>Expense analytic</value>
+          <value>Giderler detaylar</value>
          </title>
          <extendedTooltip>
           <name>GroupExpenseAnalyticExtendedTooltip</name>
@@ -5131,11 +5131,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step5</value>
+        <value>Шаг5</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step5</value>
+        <value>Adım5</value>
        </title>
        <extendedTooltip>
         <name>GroupStep5ExtendedTooltip</name>
@@ -5172,11 +5172,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step6</value>
+        <value>Шаг6</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step6</value>
+        <value>Adım6</value>
        </title>
        <extendedTooltip>
         <name>GroupStep6ExtendedTooltip</name>
@@ -5213,11 +5213,11 @@
        </title>
        <title>
         <key>ru</key>
-        <value>Step6</value>
+        <value>Шаг6</value>
        </title>
        <title>
         <key>tr</key>
-        <value>Step6</value>
+        <value>Adım6</value>
        </title>
        <extendedTooltip>
         <name>GroupStep7ExtendedTooltip</name>
@@ -5986,11 +5986,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Steps info</value>
+   <value>Инфомация шагов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Steps info</value>
+   <value>Adımlar bilgisi</value>
   </title>
   <id>17</id>
   <valueType>
@@ -6168,11 +6168,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Scheduled</value>
+    <value>Запланировано</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Scheduled</value>
+    <value>Zamanlanmış</value>
    </title>
    <id>62</id>
    <valueType>
@@ -6193,11 +6193,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Validation error</value>
+    <value>Ошибка проверки</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Validation error</value>
+    <value>Doğrulama hatası</value>
    </title>
    <id>63</id>
    <valueType>
@@ -6963,11 +6963,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Update currencies table</value>
+   <value>Обновить таблицу валют</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Update currencies table</value>
+   <value>Dövizler tablosunu güncelle</value>
   </title>
   <id>37</id>
   <valueType>
@@ -7190,11 +7190,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Validation errors</value>
+   <value>Ошибки проверок</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Validation errors</value>
+   <value>Doğrulama hataları</value>
   </title>
   <id>48</id>
   <valueType>
@@ -7519,11 +7519,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Permanent validation errors</value>
+   <value>Постоянные ошибки проверки</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Permanent validation errors</value>
+   <value>Kalıcı doğrulama hataları</value>
   </title>
   <id>60</id>
   <valueType>
@@ -7709,11 +7709,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Skip</value>
+   <value>Пропустить</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Skip</value>
+   <value>Atlat</value>
   </title>
   <id>4</id>
   <use>
@@ -7734,11 +7734,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Run step</value>
+   <value>Запустить шаг</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Run step</value>
+   <value>Adımı çalıştır</value>
   </title>
   <id>5</id>
   <use>
@@ -7792,11 +7792,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Skip all steps before</value>
+   <value>До пропуска всех шагов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Skip all steps before</value>
+   <value>Tüm adınmları atlat önce</value>
   </title>
   <id>8</id>
   <use>
@@ -7821,11 +7821,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Skip all steps after</value>
+   <value>После пропуска всех шагов</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Skip all steps after</value>
+   <value>Tüm adımları atlat sonra</value>
   </title>
   <id>9</id>
   <use>
@@ -7850,11 +7850,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unskip all steps before</value>
+   <value>Не пропускать все шаги до</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Unskip all steps before</value>
+   <value>Tüm aşamaların atlatma iptali önce</value>
   </title>
   <id>10</id>
   <use>
@@ -7879,11 +7879,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unskip all steps after</value>
+   <value>Не пропускать все шаги после</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Unskip all steps after</value>
+   <value>Tüm aşamaların atlatma iptali sonra</value>
   </title>
   <id>11</id>
   <use>
@@ -7908,11 +7908,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Run all steps</value>
+   <value>Запустить все шаги</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Run all steps</value>
+   <value>Tüm adımları çalıştır</value>
   </title>
   <id>12</id>
   <use>
@@ -7962,11 +7962,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Unskip</value>
+   <value>Не пропустить</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Unskip</value>
+   <value>Atlatma</value>
   </title>
   <id>14</id>
   <use>

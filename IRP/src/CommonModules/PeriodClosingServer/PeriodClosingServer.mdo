@@ -7,11 +7,11 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Period closing server</value>
+  <value>Закрытие периода сервер</value>
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Period closing server</value>
+  <value>Dönem kapanışı server</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

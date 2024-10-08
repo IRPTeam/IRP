@@ -11,7 +11,7 @@
  </synonym>
  <synonym>
   <key>tr</key>
-  <value>Presentation get processing get document presentation</value>
+  <value>Sunum işleme belge sunumu alır</value>
  </synonym>
  <source>
   <types>DocumentManager.SalesOrder</types>

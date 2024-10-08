@@ -256,7 +256,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>DELETE calculation type</value>
+   <value>SİLİNECEK hesaplama tipi</value>
   </synonym>
   <type>
    <types>CatalogRef.SalaryCalculationType</types>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e7e76aba-7435-4ec0-bb76-3b785a339bd8">
+ <name>PeriodClosingServer</name>
+ <synonym>
+  <key>en</key>
+  <value>Period closing server</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Period closing server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Period closing server</value>
+ </synonym>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <serverCall>true</serverCall>
+</mdclass:CommonModule>

@@ -3753,5 +3753,48 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 		|tr='%1 %2 dated %3'", Lang));	
 #EndRegion
 
+#Region PeriodClosing
+	Strings.Insert("PeriodClosing_Step1", NStr("en='Select Company and Period';
+		|ru='Select Company and Period';
+		|tr='Select Company and Period'", Lang));
+	Strings.Insert("PeriodClosing_Step2", NStr("en='Reposting documents';
+		|ru='Reposting documents';
+		|tr='Reposting documents'", Lang));
+	Strings.Insert("PeriodClosing_Step3", NStr("en='Calculation movement costs';
+		|ru='Расчет себестоимости товаров';
+		|tr='Maliyet hesaplama fişi'", Lang));
+	Strings.Insert("PeriodClosing_Step4", NStr("en='Vendors advances closing';
+		|ru='Закрытие авансов поставщиков';
+		|tr='Tedarikçi avans kapatma'", Lang));
+	Strings.Insert("PeriodClosing_Step5", NStr("en='Customers advances closing';
+		|ru='Закрытие авансов покупателей.';
+		|tr='Müşteri avans kapatma'", Lang));
+	Strings.Insert("PeriodClosing_Step6", NStr("en='Foreign currency revaluation';
+		|ru='Переоценка валютных остатков';
+		|tr='Yabancı para birimi değerlemesi'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en='Accounting translation';
+		|ru='Accounting translation';
+		|tr='Accounting translation'", Lang));
+	
+	Strings.Insert("PeriodClosing_Error1", NStr("en='Company is required field';
+		|ru='Company is required field';
+		|tr='Company is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error2", NStr("en='Perid is required field';
+		|ru='Perid is required field';
+		|tr='Perid is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error3", NStr("en='Start date more than End date';
+		|ru='Start date more than End date';
+		|tr='Start date more than End date'", Lang));
+	Strings.Insert("PeriodClosing_Error4", NStr("en='Calculation mode is required field';
+		|ru='Calculation mode is required field';
+		|tr='Calculation mode is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error5", NStr("en='Periodicity not selected';
+		|ru='Periodicity not selected';
+		|tr='Periodicity not selected'", Lang));
+	Strings.Insert("PeriodClosing_Error6", NStr("en='Overlapping period [%1 - %2]';
+		|ru='Overlapping period [%1 - %2]';
+		|tr='Overlapping period [%1 - %2]'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

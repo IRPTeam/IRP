@@ -198,6 +198,7 @@
   <commonPictures>CommonPicture.Expand</commonPictures>
   <commonPictures>CommonPicture.PasteValuesFromClipboard</commonPictures>
   <commonPictures>CommonPicture.Split</commonPictures>
+  <commonPictures>CommonPicture.IconCollection9</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -778,6 +779,7 @@
   <commonModules>CommonModule.MessagesServer</commonModules>
   <commonModules>CommonModule.FilesClientServer</commonModules>
   <commonModules>CommonModule.FilesServer</commonModules>
+  <commonModules>CommonModule.PeriodClosingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1394,6 +1396,7 @@
   <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
+  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

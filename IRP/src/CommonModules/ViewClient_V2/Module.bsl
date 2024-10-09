@@ -2212,6 +2212,100 @@ Procedure ItemListAfterDeleteRowFormNotify(Parameters) Export
 	Parameters.Form.FormSetVisibilityAvailability();
 EndProcedure
 
+// Item list split row.
+// 
+// Parameters:
+//  Object - DocumentObject.SalesInvoice - Object
+//  Form - ClientApplicationFormExtensionForDocuments - Form
+Async Procedure ItemListSplitRow(Object, Form) Export
+	TableName = "ItemList";
+	Table = Form.Items[TableName]; // See Document.SalesInvoice.Form.DocumentForm.Items.ItemList
+	CurrentData = Table.CurrentData; 
+	If CurrentData = Undefined Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Form_040);
+		Return;
+	EndIf;
+	
+	CurrentQuantity = CurrentData.Quantity;
+	If CurrentQuantity = 0 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Form_041);
+		Return;
+	EndIf;
+	
+	NewRowQuantity = Await InputNumberAsync(0, R().Form_042);
+	If NewRowQuantity = Undefined Then
+		Return;
+	EndIf;
+	
+	If NewRowQuantity = 0 Then
+		Return;
+	EndIf;
+	
+	If NewRowQuantity < 0 OR NewRowQuantity >= CurrentQuantity Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Form_043, CurrentQuantity));
+		Return;		
+	EndIf;
+	
+	CurrentData.Quantity = CurrentQuantity - NewRowQuantity;
+	
+	Cancel = False;
+	Clone = True;
+	NewRow = ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData);
+	NewRow.Quantity = NewRowQuantity;
+	
+	SpecialOffers = Object.SpecialOffers.FindRows(New Structure("Key", CurrentData.Key));
+	If SpecialOffers.Count() > 0 Then
+		CurrentTotalOffer = 0;
+		NewTotalOffer = 0;
+		For Each Row In SpecialOffers Do
+			Amount = Row.Amount * (NewRowQuantity / CurrentQuantity);
+			Bonus = Row.Bonus * (NewRowQuantity / CurrentQuantity);
+			NewSpecialOffers = Object.SpecialOffers.Add();
+			FillPropertyValues(NewSpecialOffers, Row);
+			NewSpecialOffers.Amount = Amount;
+			NewSpecialOffers.Bonus = Bonus;
+			NewSpecialOffers.Key = NewRow.Key;
+			
+			Row.Bonus = Row.Bonus - Bonus;
+			Row.Amount = Row.Amount - Amount;
+			
+			CurrentTotalOffer = CurrentTotalOffer + Row.Amount;
+			NewTotalOffer = NewTotalOffer + NewSpecialOffers.Amount;
+		EndDo;
+		
+		CurrentData.OffersAmount = CurrentTotalOffer;
+		NewRow.OffersAmount = NewTotalOffer;
+	EndIf;
+
+	SerialTable = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+	If SerialTable.Count() > 0 Then
+		CurrentDataQuantity = CurrentData.Quantity;
+		For Each Row In SerialTable Do
+			If Row.Quantity <= CurrentDataQuantity Then
+				CurrentDataQuantity = CurrentDataQuantity - Row.Quantity;
+			ElsIf Row.Quantity > CurrentDataQuantity AND CurrentDataQuantity > 0 Then
+				CurrentRowQuantity = Row.Quantity;
+				Row.Quantity = CurrentDataQuantity;
+				
+				NewSerial = Object.SerialLotNumbers.Add();
+				FillPropertyValues(NewSerial, Row);
+				NewSerial.Quantity = CurrentRowQuantity - Row.Quantity;
+				NewSerial.Key = NewRow.Key;
+				CurrentDataQuantity = 0;
+			Else
+				Row.Key = NewRow.Key;
+			EndIf;
+		EndDo;
+	EndIf;
+	
+	ItemListQuantityOnChange(Object, Form, CurrentData);
+	ItemListQuantityOnChange(Object, Form, NewRow);
+	
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
+	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
+EndProcedure
+
 Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Cancel      = False;
 	Clone       = False;

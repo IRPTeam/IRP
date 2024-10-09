@@ -2257,5 +2257,14 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("PeriodClosing_Error6", NStr("en = 'Overlapping period [%1 - %2]'", Lang));
 #EndRegion
 
+#Region CopyUserSettings
+	Strings.Insert("SettingsStorage1", NStr("en = 'System settings storage'", Lang));
+	Strings.Insert("SettingsStorage2", NStr("en = 'Form data settings storage'", Lang));
+	Strings.Insert("SettingsStorage3", NStr("en = 'Reports variants storage'", Lang));
+	Strings.Insert("SettingsStorage4", NStr("en = 'Common settings storage'", Lang));
+	Strings.Insert("SettingsStorage5", NStr("en = 'Dynamic lists user settings storage'", Lang));
+	Strings.Insert("SettingsStorage6", NStr("en = 'Reports user settings storage'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

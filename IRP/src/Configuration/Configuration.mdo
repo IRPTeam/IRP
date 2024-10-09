@@ -1397,6 +1397,7 @@
   <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
   <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
+  <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

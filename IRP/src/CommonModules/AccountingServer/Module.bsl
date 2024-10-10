@@ -3590,7 +3590,12 @@ Procedure CheckAndFixAccounting(Settings) Export
 	EndIf;
 	
 	Settings.ExcludeDocumentTypes = GetExcludeDocumentTypes_AccountingTranslation();
-	DocList = FixDocumentProblemsServer.GetDocumentList(Settings);     
+	
+	If Settings.Accounting Then
+		DocList = GetDocumentList(Settings);     
+	Else
+		DocList = FixDocumentProblemsServer.GetDocumentList(Settings);
+	EndIf;
 		
 	// step 2. translations
 	RegInfoArray = CheckAsJob_AccountingTranslation(DocList);

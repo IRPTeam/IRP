@@ -763,6 +763,11 @@ Procedure OpenSerialLotNumbersTree(Command)
 	SerialLotNumberClient.OpenSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure SplitRow(Command)
+	DocSalesInvoiceClient.ItemListSplitRow(Object, ThisObject);
+EndProcedure
+
 #EndRegion
 
 #Region LINKED_DOCUMENTS

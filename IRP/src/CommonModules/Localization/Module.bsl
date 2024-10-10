@@ -979,6 +979,10 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_037", NStr("en = 'Unset as default'", Lang));
 	Strings.Insert("Form_038", NStr("en = 'Employee'", Lang));
 	Strings.Insert("Form_039", NStr("en = 'Add attribute in additional attribute set in extension tab for current object type: %1'", Lang));
+	Strings.Insert("Form_040", NStr("en = 'Select any row to split'", Lang));
+	Strings.Insert("Form_041", NStr("en = 'It cannot split the row where the quantity is 0'", Lang));
+	Strings.Insert("Form_042", NStr("en = 'Set the quantity for the new row'", Lang));
+	Strings.Insert("Form_043", NStr("en = 'Quantity can only be greater than 0 and less than %1'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -2234,6 +2238,23 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	// %2 - Document number
 	// %3 - Document date
 	Strings.Insert("DocPresentation", NStr("en = '%1 %2 dated %3'", Lang));	
+#EndRegion
+
+#Region PeriodClosing
+	Strings.Insert("PeriodClosing_Step1", NStr("en = 'Select Company and Period'", Lang));
+	Strings.Insert("PeriodClosing_Step2", NStr("en = 'Reposting documents'", Lang));
+	Strings.Insert("PeriodClosing_Step3", NStr("en = 'Calculation movement costs'", Lang));
+	Strings.Insert("PeriodClosing_Step4", NStr("en = 'Vendors advances closing'", Lang));
+	Strings.Insert("PeriodClosing_Step5", NStr("en = 'Customers advances closing'", Lang));
+	Strings.Insert("PeriodClosing_Step6", NStr("en = 'Foreign currency revaluation'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en = 'Accounting translation'", Lang));
+	
+	Strings.Insert("PeriodClosing_Error1", NStr("en = 'Company is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error2", NStr("en = 'Perid is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error3", NStr("en = 'Start date more than End date'", Lang));
+	Strings.Insert("PeriodClosing_Error4", NStr("en = 'Calculation mode is required field'", Lang));
+	Strings.Insert("PeriodClosing_Error5", NStr("en = 'Periodicity not selected'", Lang));
+	Strings.Insert("PeriodClosing_Error6", NStr("en = 'Overlapping period [%1 - %2]'", Lang));
 #EndRegion
 
 	Return Strings;

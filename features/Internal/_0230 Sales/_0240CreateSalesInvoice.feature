@@ -34,6 +34,7 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog CashAccounts objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -523,7 +524,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| '1'   | 'Front office'              | 'en description is empty'   | 'Service'   | 'Internet'   | 'No'                   | ''                     | '1,000'      | 'pcs'    | '14,49'        | '100,00'   | '18%'   | '5,00'            | '80,51'        | '95,00'          | ''                      | ''           | '27.01.2021'      | 'No'                          | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
 			| '2'   | 'Distribution department'   | 'Basic Price Types'         | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '1,000'      | 'pcs'    | '75,36'        | '520,00'   | '18%'   | '26,00'           | '418,64'       | '494,00'         | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Anna Petrova'       |
 			| '3'   | 'Distribution department'   | 'Basic Price Types'         | 'Shirt'     | '36/Red'     | 'No'                   | ''                     | '10,000'     | 'pcs'    | '507,20'       | '350,00'   | '18%'   | '175,00'          | '2 817,80'     | '3 325,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
-			| '4'   | 'Distribution department'   | 'en description is empty'   | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '2,000'      | 'pcs'    | '152,54'       | '500,00'   | '18%'   | ''                | '847,46'       | '1 000,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |
+			| '4'   | 'Distribution department'   | 'en description is empty'   | 'Dress'     | 'XS/Blue'    | 'No'                   | ''                     | '2,000'      | 'pcs'    | '152,54'       | '500,00'   | '18%'   | ''                | '847,46'       | '1 000,00'       | ''                      | 'Store 02'   | '27.01.2021'      | 'Yes'                         | ''         | 'Sales order 15 dated 01.02.2021 19:50:45'   | 'Revenue'        | 'Alexander Orlov'    |		
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close current window
 	* Create SI for all items from SO

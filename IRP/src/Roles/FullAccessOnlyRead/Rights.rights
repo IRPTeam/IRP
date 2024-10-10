@@ -90,6 +90,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ExternalAccountingOperation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Agreements</name>
 		<right>
 			<name>Read</name>
@@ -135,6 +162,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -308,6 +343,10 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -520,6 +559,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.LocalNetAmount</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6060S_BatchCostAllocationInfo</name>
 		<right>
 			<name>Read</name>
@@ -568,6 +614,25 @@
 	</object>
 	<object>
 		<name>Constant.UseSimpleMode</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseAccountingService</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -941,6 +1006,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6050S_ManualBundleAmountValues.Dimension.ItemKey</name>
@@ -1255,6 +1328,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9064S_AccountingMappingRegisters</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.TaxSettings.Dimension.Tax</name>
 		<right>
 			<name>Edit</name>
@@ -1425,6 +1517,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.AttachedDocumentSettings</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T1020S_Cache.Dimension.User</name>
 		<right>
 			<name>Edit</name>
@@ -1436,6 +1555,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9545S_VacationDaysLimits</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -1702,6 +1840,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9062S_AccountingMappingCompanies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T7010S_BillOfMaterials.Dimension.IsMaterial</name>
 		<right>
 			<name>Edit</name>
@@ -1727,6 +1884,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Technical.Subsystem.InternalCommands</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -1975,6 +2139,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.AttachedFilesToDocumentsControl</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.PricesByItems</name>
 		<right>
 			<name>Read</name>
@@ -2069,6 +2244,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -2307,6 +2490,33 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CalculationDeservedVacations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -2824,6 +3034,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.InternalCommands</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.DELETE_AdvancesKeys</name>
 		<right>
 			<name>Read</name>
@@ -3037,6 +3258,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R9541T_VacationUsage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -3401,10 +3633,56 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9068S_AccountingMappingAccountsMatching</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6040S_BundleAmountValues.Resource.AllocatedCostTaxAmount</name>
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.ExpenseAccruals</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -3600,6 +3878,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4183,6 +4469,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.T6020S_BatchKeysInfo.Resource.InvoiceAmount</name>
@@ -4313,6 +4607,13 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.LocalTaxAmount</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5375,6 +5676,24 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.AccountingService</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.SourceNode</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.LocalFullDescription</name>
 		<right>
 			<name>View</name>
@@ -5593,6 +5912,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.TaxesOperation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.JobQueue.Resource.Parameters</name>
 		<right>
 			<name>Edit</name>
@@ -5745,9 +6091,24 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Subsystem.Reports.Subsystem.Treasury</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.EditUUID</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -5768,6 +6129,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5972,6 +6341,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.LocalTotalAmount</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -6336,6 +6712,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9065S_AccountingMappingExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.HardwareLog.Resource.Data</name>
 		<right>
 			<name>Edit</name>
@@ -6434,6 +6829,13 @@
 	</object>
 	<object>
 		<name>CommonCommand.OpenPartnersCustomer</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.FormulaEditor</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -6659,6 +7061,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.DownloadAttachedFiles</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.DefaultPictureStorageVolume</name>
 		<right>
 			<name>Read</name>
@@ -6699,6 +7112,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -7513,6 +7934,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.TaxExemptionReasons</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T7010S_BillOfMaterials.Dimension.IsProduct</name>
 		<right>
 			<name>Edit</name>
@@ -7915,6 +8363,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.ExtDimensions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R7030T_ProductionPlanning</name>
 		<right>
 			<name>Read</name>
@@ -8255,6 +8730,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6040S_BundleAmountValues.Resource.IndirectCostTaxAmount</name>
 		<right>
 			<name>Edit</name>
@@ -8443,6 +8937,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9060S_AccountingMappingChartsOfAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -8865,6 +9378,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.Technical.Subsystem.Messaging</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.CodeStringCheck</name>
 		<right>
 			<name>View</name>
@@ -8875,6 +9395,25 @@
 		<name>InformationRegister.T9540S_EmployeeVacations</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.MobileCreateDocument</name>
+		<right>
+			<name>Use</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -8910,6 +9449,17 @@
 	</object>
 	<object>
 		<name>CommonCommand.IDInfo</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.S1001L_VendorsPrices</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -9211,6 +9761,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.PostedDocumentsRegistry</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonAttribute.Author</name>
 		<right>
 			<name>View</name>
@@ -9383,6 +9952,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Treasury.Subsystem.Accruals</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -9603,6 +10179,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.InternalCommands</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10090,6 +10677,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.NotActive</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9500S_AccrualAndDeductionValues.Dimension.AccualOrDeductionType</name>
 		<right>
 			<name>Edit</name>
@@ -10127,6 +10721,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9061S_AccountingMappingAccounts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -10213,6 +10826,25 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9052S_AccountingRelevance</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10413,6 +11045,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.T0001_FilesAnalyser</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.CurrencyRates.Resource.Multiplicity</name>
 		<right>
 			<name>Edit</name>
@@ -10547,6 +11190,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>CommonCommand.OpenCompanies</name>
@@ -10625,6 +11276,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.ManualMovementsEdit</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.JobQueue.Resource.JobID</name>
 		<right>
 			<name>Edit</name>
@@ -10655,6 +11313,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonAttribute.LocalRate</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -10958,6 +11623,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.OutgoingMessage</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.EmployeePositions</name>
 		<right>
 			<name>Read</name>
@@ -11186,6 +11878,33 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RevenueAccruals</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -11606,6 +12325,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Document.DebitCreditNote</name>
@@ -11615,6 +12342,18 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -11724,6 +12463,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.NumberEditingAvailable</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -12019,6 +12769,44 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.AttachedFilesControl</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseMessaging</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -12526,6 +13314,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.MessagesQueueToSend</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.RetailWorkers.Dimension.Worker</name>
 		<right>
 			<name>Edit</name>
@@ -12669,6 +13476,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.EditDocumentsMovements</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6020S_BatchKeysInfo.Dimension.WorkSheet</name>
 		<right>
 			<name>Edit</name>
@@ -12701,6 +13519,17 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>SessionParameter.NotActiveCatalogsShowing</name>
+		<right>
+			<name>Get</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Set</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -12776,6 +13605,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -13371,6 +14208,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.PaymentDistribution</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Settings.Subsystem.Saas</name>
 		<right>
 			<name>View</name>
@@ -13949,6 +14793,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Subsystem.MasterData.Subsystem.Production</name>
@@ -14050,6 +14902,25 @@
 		</right>
 		<right>
 			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseLegalName</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -14184,6 +15055,25 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9063S_AccountingMappingCurrencies</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9101A_ObjectAccessRegisters.Resource.Value5</name>
 		<right>
 			<name>Edit</name>
@@ -14314,6 +15204,14 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -14865,6 +15763,22 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistoryOfMissingData</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Subsystem.Manufacturing.Subsystem.ManufacturingPurchase</name>
@@ -14941,6 +15855,14 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>InformationRegister.ExternalCommands.Dimension.FormType</name>
@@ -14995,6 +15917,25 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T9066S_AccountingMappingExtDimensionRefValues</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -15306,6 +16247,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Accounting.Subsystem.AccountingService</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

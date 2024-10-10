@@ -32,6 +32,7 @@ Scenario: _4001701 preparation (Attach Files Control)
 		When Create catalog Companies objects (own Second company)
 		When Create catalog BusinessUnits objects
 		When Create catalog Stores objects
+		When Create catalog Users objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -341,6 +342,7 @@ Scenario: _4001715 check Date, Company and Branch filters
 
 Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data proc
 	And I close all client application windows
+	And I connect "Test" TestClient using "ABrown" login and "" password
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 		And I click Clear button of the field named "Branch"
@@ -378,14 +380,15 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 
 Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data proc
 	And I close all client application windows
+	And I connect "Этот клиент" TestClient using "CI" login and "CI" password
 	* Preparation
-		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7"
+		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638"
 		And in the table "Profiles" I click "Add" button
 		And I select "Audit unlock" from "Profile" drop-down list by string in "Profiles" table
 		And I finish line editing in "Profiles" table
 		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		And I close "Test" TestClient
+		And I connect "Test" TestClient using "ABrown" login and "" password
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	* Check mode
@@ -404,3 +407,4 @@ Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data 
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
 			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 	And I close all client application windows
+	And I close "Test" TestClient

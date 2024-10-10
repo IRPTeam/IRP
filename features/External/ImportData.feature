@@ -3545,32 +3545,32 @@ Scenario: Create catalog Projects objects
 
 Scenario: Create catalog AccessGroups and AccessProfiles objects (audit lock)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'False'        | 12     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock'                     | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:35:40' | '10.10.2024 10:35:40' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'False'        | 13     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit unlock'                   | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:35:40' | '10.10.2024 10:35:40' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'False'        | 14     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Full access no admin functions' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:39:19' | '10.10.2024 10:38:34' | 'False'     |
+
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'                       | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'FullAccessNoAdminFunctions' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'RunThickClient'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'RunThinClient'              | 'IRP'           |
 	And I check or create catalog "AccessGroups" objects:
-		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'False'        | 10     | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock control' | ''                 | ''               | ''               | ''             | ''       | '27.02.2024 10:35:56' | '01.01.0001 00:00:00' | 'False'     |
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'False'        | 11     | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock control' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:43:25' | '10.10.2024 10:55:56' | 'False'     |
 
 	And I refill object tabular section "Profiles":
 		| 'Ref'                                                                  | 'Profile'                                                                |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' |
 
 	And I refill object tabular section "Users":
-		| 'Ref'                                                                  | 'User'     |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | '$$IdCI$$' |
+		| 'Ref'                                                                  | 'User'                                                          |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a' |
 
-	And I check or create catalog "AccessProfiles" objects:
-		| 'Ref'                                                                    | 'DeletionMark' | 'Code'  | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'False'        | 11      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Full access'    | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'False'        | 12      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock'     | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'False'        | 13      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit unlock'   | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:36:16' | '27.02.2024 10:35:07' | 'False'     |
-
-	And I refill object tabular section "Roles":
-		| 'Ref'                                                                    | 'Role'           | 'Configuration' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'FullAccess'     | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThickClient' | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThinClient'  | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'   | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset' | 'IRP'           |
 
 Scenario: Create catalog Files and information register "AttachedFiles" records
 

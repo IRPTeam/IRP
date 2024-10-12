@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bc470f90-cee2-430c-be46-5753ed3518c5">
+  <producedTypes>
+    <objectType typeId="dd10c3c4-55f9-4116-9981-d00c1f4dec26" valueTypeId="d9d3abac-e6de-4307-aefc-87bf9abde2c8"/>
+    <refType typeId="d76bb9d6-8ac7-434b-a6f8-29eaefc3f7bd" valueTypeId="2c530e49-1d53-4e77-82fa-04011b7ec9de"/>
+    <selectionType typeId="2998a1d8-f68a-4763-8dda-be91d6c2315b" valueTypeId="7bbe0add-083f-49b1-80b9-927891199229"/>
+    <listType typeId="905e17eb-d6ed-4d35-8579-ba934db1097d" valueTypeId="1074e95d-7353-4535-834e-7299d88ef35c"/>
+    <managerType typeId="141eb4f3-8d8a-4ac6-936f-aa96223128f7" valueTypeId="94128835-db89-463b-a64b-4f058407d78d"/>
+  </producedTypes>
+  <name>Issue</name>
+  <synonym>
+    <key>en</key>
+    <value>Issue</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Document.Issue.StandardAttribute.Number</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_Issue</value>
+    </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+    <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+    <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+  </characteristics>
+  <characteristics>
+    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+    <typesFilterValue xsi:type="core:ReferenceValue">
+      <value>Catalog.AddAttributeAndPropertySets.Document_Issue</value>
+    </typesFilterValue>
+    <dataPathField>-1</dataPathField>
+    <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+    <characteristicValues>Document.Issue.TabularSection.AddAttributes</characteristicValues>
+    <objectField>Document.Issue.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+    <typeField>Document.Issue.TabularSection.AddAttributes.Attribute.Property</typeField>
+    <valueField>Document.Issue.TabularSection.AddAttributes.Attribute.Value</valueField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
+    <multipleValuesOrderField>Document.Issue.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+  </characteristics>
+  <createOnInput>DontUse</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Issue</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Issues</value>
+  </listPresentation>
+  <numberLength>12</numberLength>
+  <numberAllowedLength>Variable</numberAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultObjectForm>Document.Issue.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.Issue.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.Issue.Form.ChoiceForm</defaultChoiceForm>
+  <realTimePosting>Deny</realTimePosting>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <postInPrivilegedMode>true</postInPrivilegedMode>
+  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+  <attributes uuid="e7b07be4-1a83-4983-9cf3-c14f385f9e86">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="47b0f03b-88eb-442f-b984-f6136613d551">
+    <name>City</name>
+    <synonym>
+      <key>en</key>
+      <value>City</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Cities</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>Document.Issue.Attribute.Country</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b858048d-769f-48bd-a9dc-a2ba073492bc">
+    <name>Location</name>
+    <synonym>
+      <key>en</key>
+      <value>Location</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Locations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.City</name>
+      <field>Document.Issue.Attribute.City</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5628952d-0ab4-4da8-98cc-c683bbe3205b">
+    <name>IssueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IssueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
+    <name>DocumentForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Document form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="99fff842-911a-4190-85ef-84542bfed5e0">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="444d2754-2b38-481a-8b1b-82b78340d88f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="d4b5f11d-e741-401c-ad88-506f78469698">
+    <producedTypes>
+      <objectType typeId="6d31a3c5-3cd9-434b-8334-a257527c7281" valueTypeId="219d82fc-79d5-4bfe-a8a6-bc5b10fa56a7"/>
+      <rowType typeId="7307fd82-bf8f-4bad-be1a-3745a7bfa25d" valueTypeId="a1f7b90d-664e-42c6-ab2a-d35e174cf499"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="07fe8645-46e8-4ae4-a864-04f5ca330f09">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e7f7c93e-531e-429b-9bda-62771f6e5ad7">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.Issue.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+</mdclass:Document>

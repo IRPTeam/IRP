@@ -164,5 +164,6 @@
     <types>DocumentRef.ExternalAccountingOperation</types>
     <types>CatalogRef.TaxExemptionReasons</types>
     <types>CatalogRef.Cities</types>
+    <types>DocumentRef.Issue</types>
   </type>
 </mdclass:DefinedType>

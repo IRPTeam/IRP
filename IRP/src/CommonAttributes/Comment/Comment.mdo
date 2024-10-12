@@ -286,6 +286,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.Issue</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.EmployeeVacation</metadata>
     <use>Use</use>
   </content>

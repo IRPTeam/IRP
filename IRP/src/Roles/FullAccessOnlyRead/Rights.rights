@@ -9503,6 +9503,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseIncidents</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.DataMappingItems</name>
 		<right>
 			<name>Read</name>
@@ -12677,6 +12688,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Issue</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.LockDataModificationRules.Dimension.LockDataModificationReasons</name>
 		<right>
 			<name>Edit</name>
@@ -13412,6 +13438,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.DocumentNumber</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Report.D2001_Sales</name>
 		<right>
 			<name>Use</name>
@@ -14041,6 +14074,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Incidents</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

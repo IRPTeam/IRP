@@ -10,4 +10,5 @@
   <content>Subsystem.Incidents</content>
   <content>Catalog.IssueTypes</content>
   <content>Enum.IssueLevel</content>
+  <content>Document.Issue</content>
 </mdclass:FunctionalOption>

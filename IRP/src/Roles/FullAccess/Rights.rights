@@ -2320,6 +2320,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Issue</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Incoterms</name>
 		<right>
 			<name>InteractiveDelete</name>

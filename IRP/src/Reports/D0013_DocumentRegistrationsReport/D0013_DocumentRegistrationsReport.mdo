@@ -119,6 +119,11 @@
       <types>DocumentRef.RetailGoodsReceipt</types>
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.ExternalAccountingOperation</types>
+      <types>DocumentRef.WorkOrderClosing</types>
+      <types>DocumentRef.VisitorCounter</types>
+      <types>DocumentRef.RetailReceiptCorrection</types>
+      <types>DocumentRef.OutgoingMessage</types>
+      <types>DocumentRef.Issue</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

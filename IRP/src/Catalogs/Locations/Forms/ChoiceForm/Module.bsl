@@ -1,3 +1,14 @@
+
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Filter.Property("City") Then
+		City = Parameters.Filter.City;
+		List.Parameters.SetParameterValue("City", City);
+		List.Parameters.SetParameterValue("CityIsSet", True);
+		Parameters.Filter.Delete("City");
+	EndIf;
+EndProcedure
+
 #Region COMMANDS
 
 &AtClient

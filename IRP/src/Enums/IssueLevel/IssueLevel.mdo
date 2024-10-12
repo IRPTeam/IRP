@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f56501a3-d1f4-45c5-b10c-0d9143effc43">
+  <producedTypes>
+    <refType typeId="f84f2019-935d-4b1d-8ecb-87f85d6b01a7" valueTypeId="664b585f-9eab-4e4b-bd5a-7a7d2673264f"/>
+    <listType typeId="1ddf4b72-5e6a-47f2-9921-5fcd7a997c1e" valueTypeId="037d39f5-97d7-4401-b8c7-085dab24aad7"/>
+    <managerType typeId="a2e7de68-4f27-4867-9f54-edfdc0c5da8e" valueTypeId="240b45c7-b8ab-42fb-9bad-05151af07336"/>
+  </producedTypes>
+  <name>IssueLevel</name>
+  <synonym>
+    <key>en</key>
+    <value>Issue level</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="29724469-40fe-4151-ba9b-8e092a16314c">
+    <name>Low</name>
+    <synonym>
+      <key>en</key>
+      <value>Low</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="fca1b9ef-1903-46b5-8cc1-5e7bf909d538">
+    <name>Normal</name>
+    <synonym>
+      <key>en</key>
+      <value>Normal</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="e2dfcc2c-dd30-4ecb-96ef-8e5537d7ff95">
+    <name>High</name>
+    <synonym>
+      <key>en</key>
+      <value>High</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

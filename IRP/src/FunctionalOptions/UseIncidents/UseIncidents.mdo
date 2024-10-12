@@ -8,4 +8,6 @@
   <location>Constant.UseIncidents</location>
   <privilegedGetMode>true</privilegedGetMode>
   <content>Subsystem.Incidents</content>
+  <content>Catalog.IssueTypes</content>
+  <content>Enum.IssueLevel</content>
 </mdclass:FunctionalOption>

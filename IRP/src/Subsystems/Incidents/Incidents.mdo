@@ -14,4 +14,6 @@
   <content>Constant.UseIncidents</content>
   <content>FunctionalOption.UseIncidents</content>
   <content>Role.Subsystem_Incidents</content>
+  <content>Catalog.IssueTypes</content>
+  <content>Enum.IssueLevel</content>
 </mdclass:Subsystem>

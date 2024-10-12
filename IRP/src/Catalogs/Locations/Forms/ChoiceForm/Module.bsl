@@ -1,10 +1,3 @@
-
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
-	CatalogsServer.OnCreateAtServerListForm(ThisObject, List, Cancel, StandardProcessing);
-EndProcedure
-
 #Region COMMANDS
 
 &AtClient

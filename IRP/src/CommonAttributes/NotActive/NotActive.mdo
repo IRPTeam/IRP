@@ -173,6 +173,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Locations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.FixedAssets</metadata>
     <use>Use</use>
   </content>

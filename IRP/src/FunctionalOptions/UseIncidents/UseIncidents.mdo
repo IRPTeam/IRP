@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4502cf71-952b-4302-a268-18e534898387">
+  <name>UseIncidents</name>
+  <synonym>
+    <key>en</key>
+    <value>Use Incidents</value>
+  </synonym>
+  <location>Constant.UseIncidents</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>Subsystem.Incidents</content>
+</mdclass:FunctionalOption>

@@ -273,6 +273,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Locations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PhysicalCountByLocation</metadata>
     <use>Use</use>
   </content>

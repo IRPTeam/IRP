@@ -715,6 +715,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.Locations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Incoterms.TabularSection.AddAttributes</name>
 		<right>
 			<name>Edit</name>

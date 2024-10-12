@@ -870,6 +870,7 @@
   <functionalOptions>FunctionalOption.UseEquipments</functionalOptions>
   <functionalOptions>FunctionalOption.UseExpenseAndRevenueTypes</functionalOptions>
   <functionalOptions>FunctionalOption.UseFixedAssets</functionalOptions>
+  <functionalOptions>FunctionalOption.UseIncidents</functionalOptions>
   <functionalOptions>FunctionalOption.UseIntegrations</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseJobQueueForExternalFunctions</functionalOptions>
@@ -879,6 +880,7 @@
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
   <functionalOptions>FunctionalOption.UseManagersAndSalesPersons</functionalOptions>
   <functionalOptions>FunctionalOption.UseManufacturing</functionalOptions>
+  <functionalOptions>FunctionalOption.UseMessaging</functionalOptions>
   <functionalOptions>FunctionalOption.UseMobile</functionalOptions>
   <functionalOptions>FunctionalOption.UseObjectAccess</functionalOptions>
   <functionalOptions>FunctionalOption.UseOrders</functionalOptions>
@@ -899,7 +901,6 @@
   <functionalOptions>FunctionalOption.UseStores</functionalOptions>
   <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
-  <functionalOptions>FunctionalOption.UseMessaging</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
   <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -956,12 +957,15 @@
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <commandGroups>CommandGroup.Fiscalization</commandGroups>
+  <constants>Constant.AdditionalTableControlExceptions</constants>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.DefaultSMSProvider</constants>
+  <constants>Constant.DisableLinkedRowsIntegrity</constants>
   <constants>Constant.MaximumServerDifficultLevel</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.UseAccounting</constants>
+  <constants>Constant.UseAccountingService</constants>
   <constants>Constant.UseAddAttributesAndProperties</constants>
   <constants>Constant.UseAdditionalSettings</constants>
   <constants>Constant.UseAdditionalTableControlDocument</constants>
@@ -979,13 +983,18 @@
   <constants>Constant.UseDeliveryDate</constants>
   <constants>Constant.UseEquipments</constants>
   <constants>Constant.UseExpenseAndRevenueTypes</constants>
+  <constants>Constant.UseFixedAssets</constants>
+  <constants>Constant.UseIncidents</constants>
   <constants>Constant.UseIntegrations</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseJobQueueForExternalFunctions</constants>
   <constants>Constant.UseLandedCost</constants>
+  <constants>Constant.UseLegalName</constants>
+  <constants>Constant.UseLegalNameContract</constants>
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.UseManagersAndSalesPersons</constants>
   <constants>Constant.UseManufacturing</constants>
+  <constants>Constant.UseMessaging</constants>
   <constants>Constant.UseMobile</constants>
   <constants>Constant.UseObjectAccess</constants>
   <constants>Constant.UseOrders</constants>
@@ -994,25 +1003,18 @@
   <constants>Constant.UsePartnerTerms</constants>
   <constants>Constant.UsePlannedReceiptReservation</constants>
   <constants>Constant.UsePriceByProperties</constants>
+  <constants>Constant.UseResponsiblePerson</constants>
   <constants>Constant.UseRetail</constants>
   <constants>Constant.UseRetailOrders</constants>
   <constants>Constant.UseSalary</constants>
   <constants>Constant.UseSerialLotNumbers</constants>
   <constants>Constant.UseShipmentConfirmationAndGoodsReceipts</constants>
   <constants>Constant.UseSimpleMode</constants>
+  <constants>Constant.UseSourceOfOrigin</constants>
   <constants>Constant.UseSpecialOffers</constants>
   <constants>Constant.UseStores</constants>
   <constants>Constant.UseUnitsAndDimensions</constants>
   <constants>Constant.UseWorkOrders</constants>
-  <constants>Constant.DisableLinkedRowsIntegrity</constants>
-  <constants>Constant.UseSourceOfOrigin</constants>
-  <constants>Constant.AdditionalTableControlExceptions</constants>
-  <constants>Constant.UseFixedAssets</constants>
-  <constants>Constant.UseLegalNameContract</constants>
-  <constants>Constant.UseResponsiblePerson</constants>
-  <constants>Constant.UseAccountingService</constants>
-  <constants>Constant.UseMessaging</constants>
-  <constants>Constant.UseLegalName</constants>
   <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
@@ -1154,6 +1156,7 @@
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.Cities</catalogs>
+  <catalogs>Catalog.Locations</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

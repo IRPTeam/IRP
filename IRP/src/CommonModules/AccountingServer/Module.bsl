@@ -133,28 +133,36 @@ Function GetOperationsDefinition()
 	Map.Insert(AO.CreditNote_DR_R1040B_TaxesOutgoing_CR_R2021B_CustomersTransactions , New Structure("ByRow", True));
 				
 	// Purchase invoice
+	ArrayOfPurchaseInvoiceTransactionTypes = New Array();
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.Purchase);
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer);
+	ArrayOfPurchaseInvoiceTransactionTypes.Add(Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor);
 	// receipt inventory
 	Map.Insert(AO.PurchaseInvoice_DR_R4050B_StockInventory_R5022T_Expenses_CR_R1021B_VendorsTransactions, 
-		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", True, ArrayOfPurchaseInvoiceTransactionTypes));
 	// offset of advabces
 	Map.Insert(AO.PurchaseInvoice_DR_R1021B_VendorsTransactions_CR_R1020B_AdvancesToVendors,
-		New Structure("ByRow, TransactionType", False, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", False, ArrayOfPurchaseInvoiceTransactionTypes));
 	
 	Map.Insert(AO.PurchaseInvoice_DR_R1040B_TaxesOutgoing_CR_R1021B_VendorsTransactions,
-		New Structure("ByRow, TransactionType", True, Enums.PurchaseTransactionTypes.Purchase));
+		New Structure("ByRow, TransactionType", True, ArrayOfPurchaseInvoiceTransactionTypes));
 	
 	// Sales invoice
+	ArrayOfSalesInvoiceTransactionTypes = New Array();
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.Sales);
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.CurrencyRevaluationCustomer);
+	ArrayOfSalesInvoiceTransactionTypes.Add(Enums.SalesTransactionTypes.CurrencyRevaluationVendor);
 	// sales inventory
 	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R5021T_Revenues,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	// offset of advances
 	Map.Insert(AO.SalesInvoice_DR_R2020B_AdvancesFromCustomers_CR_R2021B_CustomersTransactions,
-		New Structure("ByRow, TransactionType", False, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", False, ArrayOfSalesInvoiceTransactionTypes));
 	
 	Map.Insert(AO.SalesInvoice_DR_R2021B_CustomersTransactions_CR_R2040B_TaxesIncoming,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	Map.Insert(AO.SalesInvoice_DR_R5022T_Expenses_CR_R4050B_StockInventory,
-		New Structure("ByRow, TransactionType", True, Enums.SalesTransactionTypes.Sales));
+		New Structure("ByRow, TransactionType", True, ArrayOfSalesInvoiceTransactionTypes));
 	
 	// Retail sales receipt
 	Map.Insert(AO.RetailSalesReceipt_DR_R5022T_Expenses_CR_R4050B_StockInventory , New Structure("ByRow", True));

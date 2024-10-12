@@ -115,7 +115,9 @@ Procedure FillingDocumentsWithDefaultData(Source, FillingData, FillingText, Stan
 		
 		For Each TableName In ArrayOfMainTables Do
 			ProcessProperties(Info, Source, IsBasedOn, TableName, ArrayOfBasisDocumentProperties);
-			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, "Command_RecalculationWhenBasedOn");
+			RecalculationCommand = CommonFunctionsClientServer.GetFromAddInfo(Source.AdditionalProperties, 
+				"RecalculationCommand", "Command_RecalculationWhenBasedOn");
+			ViewServer_V2.ExecuteCommandAtServer(Source, TableName, RecalculationCommand);
 		EndDo;
 		
 		For Each TableName In ArrayOfSubordinateTables Do

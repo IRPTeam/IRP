@@ -86,6 +86,7 @@
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
@@ -341,6 +342,10 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <choiceParameterLinks>
+      <name>Filter.Ref</name>
+      <field>Document.SalesInvoice.StandardAttribute.Ref</field>
+    </choiceParameterLinks>
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
@@ -463,6 +468,37 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="7a41cb3f-4b00-48c9-b011-8198e63760b4">
+    <name>CurrencyRevaluationInvoice</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation invoice</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.SalesInvoice.Attribute.Company</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Partner</name>
+      <field>Document.SalesInvoice.Attribute.Partner</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.Agreement</name>
+      <field>Document.SalesInvoice.Attribute.Agreement</field>
+    </choiceParameterLinks>
+    <choiceParameterLinks>
+      <name>Filter.LegalName</name>
+      <field>Document.SalesInvoice.Attribute.LegalName</field>
+    </choiceParameterLinks>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -2017,6 +2053,18 @@
       <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
+    <representation>Auto</representation>
+  </commands>
+  <commands uuid="efeafaed-17a1-4fe3-9f0d-204062ccfdaf">
+    <name>CurrencyRevaluationInvoce</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency revaluation invoce</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>DocumentRef.SalesInvoice</types>
+    </commandParameterType>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

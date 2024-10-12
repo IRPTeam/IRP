@@ -1,6 +1,14 @@
 
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)	
 	StandardProcessing = False;
+	
+	IsSalesInvoice = False;
+	
+	If Parameters.Filter.Property("Ref") Then
+		DocType = TypeOf(Parameters.Filter.Ref);
+		IsSalesInvoice = (DocType = Type("DocumentRef.SalesInvoice"));
+	EndIf;
+	
 	ChoiceData = New ValueList();
 	ChoiceData.Add(Sales);
 	
@@ -9,12 +17,11 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	EndIf;
 	
 	If FOServer.IsUseRetailOrders() Then
-		If Parameters.Filter.Property("Ref") And 
-			(TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.SalesOrder") 
-			Or TypeOf(Parameters.Filter.Ref) = Type("DocumentRef.SalesOrderClosing"))Then
 			ChoiceData.Add(RetailSales);
-		Else
-			ChoiceData.Add(RetailSales);
-		EndIf;
+	EndIf;
+	
+	If IsSalesInvoice Then
+		ChoiceData.Add(CurrencyRevaluationCustomer);
+		ChoiceData.Add(CurrencyRevaluationVendor);
 	EndIf;
 EndProcedure

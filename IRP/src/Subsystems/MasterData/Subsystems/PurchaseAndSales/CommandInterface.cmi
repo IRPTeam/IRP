@@ -17,7 +17,6 @@
       <commands>Catalog.SpecialOfferRules.StandardCommand.OpenList</commands>
       <commands>Catalog.SpecialOfferTypes.StandardCommand.OpenList</commands>
       <commands>Catalog.PartnerSegments.StandardCommand.OpenList</commands>
-      <commands>Catalog.Countries.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

@@ -163,5 +163,6 @@
     <types>CatalogRef.ExtDimensions</types>
     <types>DocumentRef.ExternalAccountingOperation</types>
     <types>CatalogRef.TaxExemptionReasons</types>
+    <types>CatalogRef.Cities</types>
   </type>
 </mdclass:DefinedType>

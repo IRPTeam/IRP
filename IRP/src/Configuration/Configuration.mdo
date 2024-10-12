@@ -118,6 +118,7 @@
   <subsystems>Subsystem.Reports</subsystems>
   <subsystems>Subsystem.Settings</subsystems>
   <subsystems>Subsystem.Technical</subsystems>
+  <subsystems>Subsystem.Incidents</subsystems>
   <styles>Style.TestDataBase</styles>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
@@ -199,6 +200,7 @@
   <commonPictures>CommonPicture.PasteValuesFromClipboard</commonPictures>
   <commonPictures>CommonPicture.Split</commonPictures>
   <commonPictures>CommonPicture.IconCollection9</commonPictures>
+  <commonPictures>CommonPicture.Issue</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -447,6 +449,7 @@
   <roles>Role.AccumulationRegisters_T1040T_RowIDSerialLotNumbers</roles>
   <roles>Role.Document_ExternalAccountingOperation</roles>
   <roles>Role.Document_OpeningMessage</roles>
+  <roles>Role.Subsystem_Incidents</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -898,9 +901,11 @@
   <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
   <functionalOptions>FunctionalOption.UseMessaging</functionalOptions>
   <definedTypes>DefinedType.typeAccessDocument</definedTypes>
+  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
+  <definedTypes>DefinedType.typeApArTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeApTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeArTransactionBasises</definedTypes>
   <definedTypes>DefinedType.typeBarcode</definedTypes>
@@ -935,8 +940,6 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
-  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
-  <definedTypes>DefinedType.typeApArTransactionBasises</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commonCommands>CommonCommand.EditConstants</commonCommands>
@@ -1061,7 +1064,6 @@
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertyValues</catalogs>
   <catalogs>Catalog.Addresses</catalogs>
-  <catalogs>Catalog.DELETE_AdvancesKeys</catalogs>
   <catalogs>Catalog.AgingPeriods</catalogs>
   <catalogs>Catalog.Agreements</catalogs>
   <catalogs>Catalog.AttachedDocumentSettings</catalogs>
@@ -1082,11 +1084,14 @@
   <catalogs>Catalog.DataAreas</catalogs>
   <catalogs>Catalog.DataBaseStatus</catalogs>
   <catalogs>Catalog.DataMappingItems</catalogs>
+  <catalogs>Catalog.DELETE_AdvancesKeys</catalogs>
+  <catalogs>Catalog.DELETE_TransactionsKeys</catalogs>
   <catalogs>Catalog.DepreciationSchedules</catalogs>
   <catalogs>Catalog.EmployeePositions</catalogs>
   <catalogs>Catalog.EmployeeSchedule</catalogs>
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
+  <catalogs>Catalog.ExtDimensions</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.ExternalFunctions</catalogs>
@@ -1139,8 +1144,8 @@
   <catalogs>Catalog.Stores</catalogs>
   <catalogs>Catalog.TaxAnalytics</catalogs>
   <catalogs>Catalog.Taxes</catalogs>
+  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
-  <catalogs>Catalog.DELETE_TransactionsKeys</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
   <catalogs>Catalog.UserGroups</catalogs>
@@ -1148,8 +1153,7 @@
   <catalogs>Catalog.Vehicles</catalogs>
   <catalogs>Catalog.VehicleTypes</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.ExtDimensions</catalogs>
-  <catalogs>Catalog.TaxExemptionReasons</catalogs>
+  <catalogs>Catalog.Cities</catalogs>
   <documents>Document.AdditionalAccrual</documents>
   <documents>Document.AdditionalCostAllocation</documents>
   <documents>Document.AdditionalDeduction</documents>

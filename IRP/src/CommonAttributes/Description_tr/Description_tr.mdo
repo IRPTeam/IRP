@@ -197,6 +197,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Cities</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.Currencies</metadata>
     <use>Use</use>
   </content>

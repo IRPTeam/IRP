@@ -955,6 +955,13 @@
         <value>156</value>
       </code>
     </items>
+    <items id="2c5d4705-4f63-4a66-9071-1dc861a04401">
+      <name>Catalog_Cities</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>157</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

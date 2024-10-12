@@ -352,6 +352,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Cities</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailShipmentConfirmation</metadata>
     <use>Use</use>
   </content>

@@ -9,7 +9,6 @@
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.Partners</content>
   <content>Catalog.PartnerSegments</content>
-  <content>Catalog.Countries</content>
   <content>Catalog.SpecialOffers</content>
   <content>Catalog.SpecialOfferTypes</content>
   <content>Catalog.Agreements</content>

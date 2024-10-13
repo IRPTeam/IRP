@@ -1411,6 +1411,7 @@
   <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
   <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
   <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
+  <dataProcessors>DataProcessor.CreateNewIssue</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

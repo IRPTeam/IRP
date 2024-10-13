@@ -11,4 +11,5 @@
   <content>Catalog.IssueTypes</content>
   <content>Enum.IssueLevel</content>
   <content>Document.Issue</content>
+  <content>DataProcessor.CreateNewIssue</content>
 </mdclass:FunctionalOption>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dd0cbb24-f880-4d3e-ba46-07d15962bbba">
+  <producedTypes>
+    <objectType typeId="9dc28395-3671-4bc4-89cd-e3f10f6e7467" valueTypeId="b1cd4231-ee1b-4511-9242-1d05d023f9f7"/>
+    <managerType typeId="098f1c87-1b9a-45f8-a1bd-d39ccf63700c" valueTypeId="a217abd0-0d82-4a1e-b72f-58cfccdea4b4"/>
+  </producedTypes>
+  <name>CreateNewIssue</name>
+  <synonym>
+    <key>en</key>
+    <value>Create new issue</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.CreateNewIssue.Form.Form</defaultForm>
+  <attributes uuid="d2638087-21dc-447e-8893-bfc9157840ee">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
+    <name>City</name>
+    <synonym>
+      <key>en</key>
+      <value>City</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Cities</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Owner</name>
+      <field>DataProcessor.CreateNewIssue.Attribute.Country</field>
+    </choiceParameterLinks>
+  </attributes>
+  <attributes uuid="4d64ce96-cefb-458a-905b-97964bf1de72">
+    <name>Location</name>
+    <synonym>
+      <key>en</key>
+      <value>Location</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Locations</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.City</name>
+      <field>DataProcessor.CreateNewIssue.Attribute.City</field>
+    </choiceParameterLinks>
+  </attributes>
+  <attributes uuid="803b4c17-2822-474b-8a6a-cab04c984795">
+    <name>IssueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IssueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
+    <name>Comment</name>
+    <synonym>
+      <key>en</key>
+      <value>Comment</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <multiLine>true</multiLine>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
+    <name>DueDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Due date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="5046415d-f384-434b-b04c-bead7536e2ec">
+    <name>Author</name>
+    <synonym>
+      <key>en</key>
+      <value>Author</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <forms uuid="ae6e9f5c-9341-486a-a069-3d219e0a4786">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

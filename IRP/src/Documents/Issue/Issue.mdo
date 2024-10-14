@@ -137,6 +137,54 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="1f2236c4-cd5d-470b-a87e-29db5431f6df">
+    <name>IssueDetails</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue details</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b5784ed3-752c-49bf-8bfa-d95958e1505f">
+    <name>Latitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Latitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="9c56c75d-9a9e-4547-bfd8-ae52cbe99cf8">
+    <name>Longitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Longitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
     <name>DocumentForm</name>
     <synonym>

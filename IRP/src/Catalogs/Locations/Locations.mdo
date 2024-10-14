@@ -133,6 +133,38 @@
     <use>ForFolder</use>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="b4a86a27-1779-45bd-87f7-c7af6c3425e2">
+    <name>Latitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Latitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="5aa6d242-3be2-4200-b119-dff45c01fc19">
+    <name>Longitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Longitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <forms uuid="22697d99-27da-42f9-9564-f562be4287a8">
     <name>ItemForm</name>
     <synonym>

@@ -38,6 +38,26 @@
       <functionality>BackgroundAudioPlaybackAndVibration</functionality>
       <use>true</use>
     </functionality>
+    <functionality>
+      <functionality>PictureAndVideoLibraries</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>DocumentScanning</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>SpeechToText</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>BackgroundLocation</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>Location</functionality>
+      <use>true</use>
+    </functionality>
   </usedMobileApplicationFunctionalities>
   <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>
@@ -201,6 +221,10 @@
   <commonPictures>CommonPicture.Split</commonPictures>
   <commonPictures>CommonPicture.IconCollection9</commonPictures>
   <commonPictures>CommonPicture.Issue</commonPictures>
+  <commonPictures>CommonPicture.Microphone</commonPictures>
+  <commonPictures>CommonPicture.AddPhoto</commonPictures>
+  <commonPictures>CommonPicture.AddVideo</commonPictures>
+  <commonPictures>CommonPicture.Attachments</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -1383,12 +1407,18 @@
   <reports>Report.R5020_PartnersBalance</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
+  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
+  <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
+  <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
+  <dataProcessors>DataProcessor.CreateNewIssue</dataProcessors>
   <dataProcessors>DataProcessor.CreateRegExp</dataProcessors>
   <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
+  <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
+  <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
   <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
   <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
@@ -1398,6 +1428,7 @@
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
+  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
@@ -1405,13 +1436,6 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
-  <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
-  <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
-  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
-  <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
-  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
-  <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
-  <dataProcessors>DataProcessor.CreateNewIssue</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

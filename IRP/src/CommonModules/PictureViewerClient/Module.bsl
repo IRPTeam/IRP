@@ -77,31 +77,51 @@ Procedure DeleteUnusedFiles(ArrayOfFilesID, PostIntegrationSettings) Export
 	EndIf;
 EndProcedure
 
+// Ref info.
+// 
+// Returns:
+//  Structure - Ref info:
+// * Ref - See typeFilesOwner 
+// * UUID - UUID - Form UUID 
+Function RefInfo() Export
+	StrParam = New Structure();
+	StrParam.Insert("Ref", Undefined);
+	StrParam.Insert("UUID", Undefined);
+	Return StrParam
+EndFunction
+
+// Upload.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  Object - CatalogObjectCatalogName, DocumentObjectDocumentName - Object
 Procedure Upload(Form, Object) Export
-	StrParam = New Structure("Ref, UUID", Object.Ref, Form.UUID);
+	RefInfo = RefInfo();
+	RefInfo.Ref = Object.Ref;
+	RefInfo.UUID = Form.UUID;
 	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
 	OpenFileDialog.MultipleChoice = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, StrParam), , , , OpenFileDialog, Form.UUID);
+	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, RefInfo), , , , OpenFileDialog, Form.UUID);
 EndProcedure
 
 // Upload END.
 // 
 // Parameters:
 //  FileRef - StoredFileDescription,Undefined - File ref
-//  AdditionalParameters - Structure - Additional parameters
-Procedure Upload_END(FileRef, AdditionalParameters) Export
+//  RefInfo - See RefInfo
+Procedure Upload_END(FileRef, RefInfo) Export
 	If FileRef = Undefined Then
 		Return;
 	EndIf;
-	AddFile(FileRef, Undefined, AdditionalParameters);
+	AddFile(FileRef, Undefined, RefInfo);
 EndProcedure
 
 Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
 	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
-	If ValueIsFilled(FileRef) Then
+	If Not FileRef.IsEmpty() Then
 		Return PictureViewerServer.GetFileInfo(FileRef);
 	EndIf;
 	RequestBody = GetFromTempStorage(File.Address);
@@ -366,12 +386,18 @@ Async Procedure UpdateHTMLPicture(Item, Form) Export
 	HTMLWindow.fillSlider(JSON);
 EndProcedure
 
-Procedure AddFile(File, Val Volume, AdditionalParameters) Export
+// Add file.
+// 
+// Parameters:
+//  File - StoredFileDescription, Undefined - File
+//  Volume - Undefined - Volume
+//  RefInfo - See RefInfo
+Procedure AddFile(File, Val Volume = Undefined, RefInfo) Export
 	If File = Undefined Then
 		Return;
 	EndIf;
 
-	Ref = AdditionalParameters.Ref;
+	Ref = RefInfo.Ref;
 
 	If Volume = Undefined Then
 		If PictureViewerServer.isImage(File.FileRef.Extension) Then
@@ -381,10 +407,10 @@ Procedure AddFile(File, Val Volume, AdditionalParameters) Export
 		EndIf;
 	EndIf;
 
-	FileInfo = UploadPicture(File, Volume, AdditionalParameters);
+	FileInfo = UploadPicture(File, Volume, RefInfo);
 	If FileInfo.Success Then
 		PictureViewerServer.CreateAndLinkFileToObject(Volume, FileInfo, Ref);
-		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);
+		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, RefInfo.UUID);
 	EndIf;
 EndProcedure
 

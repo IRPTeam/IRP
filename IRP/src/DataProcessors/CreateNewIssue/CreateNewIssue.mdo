@@ -22,6 +22,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
   </attributes>
   <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
     <name>City</name>
@@ -34,6 +35,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.Owner</name>
       <field>DataProcessor.CreateNewIssue.Attribute.Country</field>
@@ -50,6 +52,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <choiceParameterLinks>
       <name>Filter.City</name>
       <field>DataProcessor.CreateNewIssue.Attribute.City</field>
@@ -66,6 +69,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
   </attributes>
   <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
     <name>Comment</name>
@@ -80,6 +84,7 @@
     <multiLine>true</multiLine>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
   </attributes>
   <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
     <name>DueDate</name>
@@ -102,6 +107,38 @@
     </synonym>
     <type>
       <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="7f976e55-a567-4f32-88d1-35299f663c8e">
+    <name>Latitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Latitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="45d1792d-1adb-4a62-b597-4e838d20222f">
+    <name>Longitude</name>
+    <synonym>
+      <key>en</key>
+      <value>Longitude</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>8</precision>
+        <scale>5</scale>
+      </numberQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

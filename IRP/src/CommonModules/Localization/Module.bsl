@@ -2266,5 +2266,13 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("SettingsStorage6", NStr("en = 'Reports user settings storage'", Lang));
 #EndRegion
 
+#Region Mobile
+	Strings.Insert("Mobile_1", NStr("en = 'Photo is not supported. Check app`s access to camera'", Lang));
+	Strings.Insert("Mobile_2", NStr("en = 'Video is not supported. Check app`s access to camera'", Lang));
+	Strings.Insert("Mobile_3", NStr("en = 'Issue was created: %1'", Lang));
+	Strings.Insert("Mobile_4", NStr("en = 'GPS on device is disabled. Enable GPS to continue.'", Lang));
+	Strings.Insert("Mobile_5", NStr("en = 'Can not update coordinate. Check if app has access to GPS'", Lang));
+#EndRegion
+
 	Return Strings;
 EndFunction

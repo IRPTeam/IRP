@@ -229,6 +229,26 @@ Function isBase64Value(Value) Export
 	Return True;
 EndFunction
 
+Function CalculateDistance(Lat1, Lon1, Lat2, Lon2) Export
+    // Radius of the Earth in kilometers
+    RadiusOfEarth = 6371;
+    pi = 3.14159265358979;
+    
+    // Convert degrees to radians
+    Phi1 = Lat1 * pi / 180;
+    Phi2 = Lat2 * pi / 180;
+    DeltaPhi = (Lat2 - Lat1) * pi / 180;
+    DeltaLambda = (Lon2 - Lon1) * pi / 180;
+    
+    // Haversine formula
+    A = Pow(Sin(DeltaPhi / 2), 2) + Cos(Phi1) * Cos(Phi2) * Pow(Sin(DeltaLambda / 2), 2);
+    C = 2 * ASin(Sqrt(A));
+    // Distance in kilometers
+    Distance = RadiusOfEarth * C;
+    
+    Return Distance;
+EndFunction
+
 Procedure LoadFormItemChoiceList(Form, ItemName, ChoiceList) Export
 	If ObjectHasProperty(Form.Items, ItemName) Then
 		Form.Items[ItemName].ChoiceList.Clear();

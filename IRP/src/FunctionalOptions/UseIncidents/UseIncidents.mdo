@@ -12,4 +12,5 @@
   <content>Enum.IssueLevel</content>
   <content>Document.Issue</content>
   <content>DataProcessor.CreateNewIssue</content>
+  <content>DataProcessor.IssueTracker</content>
 </mdclass:FunctionalOption>

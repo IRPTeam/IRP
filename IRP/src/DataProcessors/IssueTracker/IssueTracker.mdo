@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cf895945-a177-4fc4-9fc4-6367dea154a1">
+  <producedTypes>
+    <objectType typeId="f424d394-9e53-4131-929c-5d8139a54d5d" valueTypeId="5b2e6119-25aa-4659-ba63-6e58e78bb4f8"/>
+    <managerType typeId="76dc2e8a-c208-41dc-b6b4-e82fcbb22832" valueTypeId="863a8ca9-b126-4f17-941f-e2cd0ba6cf75"/>
+  </producedTypes>
+  <name>IssueTracker</name>
+  <synonym>
+    <key>en</key>
+    <value>Issue tracker</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.IssueTracker.Form.Form</defaultForm>
+  <forms uuid="f0d4103e-00fc-4db7-bb14-d8b49ae4deae">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e178412b-e1f7-4eb5-b25a-a9e002d35575">
+    <name>CheckInForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Check in form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

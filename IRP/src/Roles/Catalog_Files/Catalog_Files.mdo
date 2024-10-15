@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cb017e1b-a3d1-4297-8ea3-dfbfa2b12f43">
+  <name>Catalog_Files</name>
+  <synonym>
+    <key>en</key>
+    <value>Catalog files</value>
+  </synonym>
+</mdclass:Role>

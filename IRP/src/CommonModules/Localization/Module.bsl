@@ -2272,6 +2272,7 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("Mobile_3", NStr("en = 'Issue was created: %1'", Lang));
 	Strings.Insert("Mobile_4", NStr("en = 'GPS on device is disabled. Enable GPS to continue.'", Lang));
 	Strings.Insert("Mobile_5", NStr("en = 'Can not update coordinate. Check if app has access to GPS'", Lang));
+	Strings.Insert("Mobile_6", NStr("en = 'Can not open file'", Lang));
 #EndRegion
 
 	Return Strings;

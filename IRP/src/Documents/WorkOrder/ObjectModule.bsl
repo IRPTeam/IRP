@@ -112,11 +112,17 @@ Procedure UndoPosting(Cancel)
 	RowIDInfoPrivileged.UndoPosting_RowIDUndoPosting(ThisObject, Cancel);
 EndProcedure
 
-Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+Procedure Filling(FillingData, FillingText, StandardProcessing)      
+	
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOnType") And FillingData.BasedOnType = Documents.Issue.EmptyRef() Then
+		For Each Issue In FillingData.BasedOn Do
+			IssueList.Add().Issue = Issue;
+		EndDo;
+	
+	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
 	EndIf;
-EndProcedure
+EndProcedure       

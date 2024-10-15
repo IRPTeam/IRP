@@ -86,8 +86,8 @@
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="00efd9a7-ea17-470d-af39-54b18a153791">
@@ -1319,6 +1319,55 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="58a2b273-7d1d-4aac-80da-3773b1d36f88">
+    <producedTypes>
+      <objectType typeId="ec3f3a2c-ca9a-451d-b09c-cc854788a1f3" valueTypeId="e983e964-330d-4e74-aa53-89c57a9bc1ad"/>
+      <rowType typeId="0b53bcdf-6187-4e76-8bc9-a0b67f659ca2" valueTypeId="93900533-5f12-4c6d-a10c-5603c5d2a463"/>
+    </producedTypes>
+    <name>IssueList</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue list</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="b7a9284a-4e7f-4cb7-851d-983c8757a6aa">
+      <name>Issue</name>
+      <synonym>
+        <key>en</key>
+        <value>Issue</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.Issue</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="c642b8e6-b583-4d0e-b3db-7af96d96fb55">
+      <name>Comment</name>
+      <synonym>
+        <key>en</key>
+        <value>Comment</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <multiLine>true</multiLine>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <templates uuid="16a21ab6-15e3-4873-adbf-b4b75e727c41">
     <name>WorkOrderPrint</name>
     <synonym>
@@ -1335,6 +1384,7 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.Issue</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

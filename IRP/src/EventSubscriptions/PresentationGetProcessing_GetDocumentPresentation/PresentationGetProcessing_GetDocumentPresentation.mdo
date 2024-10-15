@@ -6,11 +6,11 @@
     <value>Presentation get processing get document presentation</value>
   </synonym>
   <source>
-    <types>DocumentManager.SalesOrder</types>
     <types>DocumentManager.PurchaseOrder</types>
-    <types>DocumentManager.CreditNote</types>
     <types>DocumentManager.DebitNote</types>
     <types>DocumentManager.SalesInvoice</types>
+    <types>DocumentManager.SalesOrder</types>
+    <types>DocumentManager.CreditNote</types>
   </source>
   <event>PresentationGetProcessing</event>
   <handler>CommonModule.DocumentsServer.GetDocumentPresentation</handler>

@@ -103,10 +103,10 @@ EndFunction
 // 
 // Returns:
 //  Undefined, Structure - Create video:
-// * Address - String - 
+// * BD - BinaryData - 
 // * Extension - String - 
 // * Name - String -
-Function CreateVideo(UUID = Undefined) Export
+Function CreateVideo() Export
 #If MobileAppClient Or MobileClient Then
 	If MultimediaTools.VideoRecordingSupported() Then	
 		Video = MultimediaTools.MakeVideoRecording();
@@ -116,7 +116,7 @@ Function CreateVideo(UUID = Undefined) Export
 		EndIf;
 		
 		VideoData = New Structure;
-		VideoData.Insert("Address", PutToTempStorage(Video.GetBinaryData(), UUID));
+		VideoData.Insert("BD", Video.GetBinaryData());
 		VideoData.Insert("Extension", Video.FileExtention);
 		VideoData.Insert("Name", "Video");
 		
@@ -136,41 +136,61 @@ EndFunction
 // Returns:
 //  Array Of Structure:
 //  * Extension - String - 
-//  * Address - String -
+//  * BD - BinaryData -
 //  * Name - String -
-Async Function AddAttachment(UUID = Undefined) Export
-	Files = Await PutFilesToServerAsync( , , , UUID);
-	Array = New Array;
+Async Function AddAttachment() Export
+	FileDialog = New FileDialog(FileDialogMode.Open); 
+	FileDialog.Multiselect = True;
+	FileDialog.MIMETypes.Add("image");
 	
-	For Each File In Files Do // StoredFileDescription
+	Array = New Array;
+	Files = Await FileDialog.ChooseAsync();
+	If Files = Undefined  Then
+		Return Array;
+	EndIf;
+	
+	For Each FilePath In Files Do // StoredFileDescription
+		File = New File(FilePath);                         
+		#If MobileAppClient Or MobileClient Then
+			Name = File.GetMobileDeviceLibraryFilePresentation();
+		#Else
+			Name = File.Name;
+		#EndIf                     
+		NameParts = StrSplit(Name, ".");
 		Str = New Structure;
-		Str.Insert("Extension", File.FileRef.Extension);
-		Str.Insert("Address", File.Address);
-		Str.Insert("Name", File.FileRef.File.BaseName);
+		Str.Insert("Extension", NameParts[NameParts.UBound()]);
+		NameParts.Delete(NameParts.UBound());
+		Str.Insert("BD", New BinaryData(FilePath));
+		Str.Insert("Name", StrConcat(NameParts, "."));
 		Array.Add(Str);
 	EndDo; 
 	
 	Return Array;
 EndFunction
 
-// Create photo.
+// Create photo.    
+// Parameters:
+//	Stamp - String -
 // 
 // Returns:
 //  Undefined, Structure - Create photo:
-// * Address - String - 
+// * BD - BinaryData - 
 // * Extension - String - 
 // * Name - String - 
-Function CreatePhoto(UUID = Undefined) Export
+Function CreatePhoto(Stamp = "") Export
 #If MobileAppClient Or MobileClient Then
-	If MultimediaTools.PhotoSupported() Then	
-		Photo = MultimediaTools.MakePhoto();
+	If MultimediaTools.PhotoSupported() Then
+		
+		Resolution = New DeviceCameraResolution(1280,720);
+		
+		Photo = MultimediaTools.MakePhoto(, Resolution, 50, , , New PhotoStamp(True, , Stamp));
 		
 		If Photo = Undefined Then
 			Return Undefined;
 		EndIf;
 		
 		PhotoData = New Structure;
-		PhotoData.Insert("Address", PutToTempStorage(Photo.GetBinaryData(), UUID));
+		PhotoData.Insert("BD", Photo.GetBinaryData());
 		PhotoData.Insert("Extension", Photo.FileExtention);
 		PhotoData.Insert("Name", "Photo");
 		Return PhotoData;

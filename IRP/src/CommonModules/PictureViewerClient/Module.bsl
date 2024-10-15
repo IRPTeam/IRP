@@ -123,8 +123,12 @@ Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
 	If Not FileRef.IsEmpty() Then
 		Return PictureViewerServer.GetFileInfo(FileRef);
+	EndIf;     
+	If TypeOf(File.Address) = Type("BinaryData") Then
+		RequestBody = File.Address;
+	Else
+		RequestBody = GetFromTempStorage(File.Address);
 	EndIf;
-	RequestBody = GetFromTempStorage(File.Address);
 
 	If PictureViewerServer.isImage(File.FileRef.Extension) Then
 		PictureScaleSize = 200;

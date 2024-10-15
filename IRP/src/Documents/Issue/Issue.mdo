@@ -168,6 +168,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="9c56c75d-9a9e-4547-bfd8-ae52cbe99cf8">
     <name>Longitude</name>
@@ -184,6 +185,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
     <name>DocumentForm</name>

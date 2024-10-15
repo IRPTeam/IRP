@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="31f3b957-d7f8-41ac-bef9-00de9fa10613">
-  <name>AddPhoto</name>
+  <name>Iconoir_AddPhoto</name>
   <synonym>
     <key>en</key>
-    <value>Add photo</value>
+    <value>Iconoir add photo</value>
   </synonym>
 </mdclass:CommonPicture>

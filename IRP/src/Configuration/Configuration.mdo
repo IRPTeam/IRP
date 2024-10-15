@@ -27,7 +27,19 @@
       <use>true</use>
     </functionality>
     <functionality>
+      <functionality>Location</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>BackgroundLocation</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
       <functionality>Camera</functionality>
+      <use>true</use>
+    </functionality>
+    <functionality>
+      <functionality>PictureAndVideoLibraries</functionality>
       <use>true</use>
     </functionality>
     <functionality>
@@ -39,10 +51,6 @@
       <use>true</use>
     </functionality>
     <functionality>
-      <functionality>PictureAndVideoLibraries</functionality>
-      <use>true</use>
-    </functionality>
-    <functionality>
       <functionality>DocumentScanning</functionality>
       <use>true</use>
     </functionality>
@@ -51,11 +59,7 @@
       <use>true</use>
     </functionality>
     <functionality>
-      <functionality>BackgroundLocation</functionality>
-      <use>true</use>
-    </functionality>
-    <functionality>
-      <functionality>Location</functionality>
+      <functionality>Geofences</functionality>
       <use>true</use>
     </functionality>
   </usedMobileApplicationFunctionalities>
@@ -222,9 +226,15 @@
   <commonPictures>CommonPicture.IconCollection9</commonPictures>
   <commonPictures>CommonPicture.Issue</commonPictures>
   <commonPictures>CommonPicture.Microphone</commonPictures>
-  <commonPictures>CommonPicture.AddPhoto</commonPictures>
-  <commonPictures>CommonPicture.AddVideo</commonPictures>
-  <commonPictures>CommonPicture.Attachments</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_AddPhoto</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_AddVideo</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Attachments</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Info</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Play</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Update</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Check</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Add</commonPictures>
+  <commonPictures>CommonPicture.Iconoir_Finish</commonPictures>
   <sessionParameters>SessionParameter.Buffer</sessionParameters>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
@@ -351,6 +361,7 @@
   <roles>Role.AuditLockSet</roles>
   <roles>Role.AuditLockUnset</roles>
   <roles>Role.BasicRole</roles>
+  <roles>Role.Catalog_Files</roles>
   <roles>Role.CreateOrModifyUsers</roles>
   <roles>Role.Document_AdditionalAccrual</roles>
   <roles>Role.Document_AdditionalCostAllocation</roles>
@@ -376,7 +387,6 @@
   <roles>Role.Document_CustomersAdvancesClosing</roles>
   <roles>Role.Document_DebitCreditNote</roles>
   <roles>Role.Document_DebitNote</roles>
-  <roles>Role.Document_Issue</roles>
   <roles>Role.Document_DecommissioningOfFixedAsset</roles>
   <roles>Role.Document_DepreciationCalculation</roles>
   <roles>Role.Document_EmployeeCashAdvance</roles>
@@ -393,6 +403,7 @@
   <roles>Role.Document_InternalSupplyRequest</roles>
   <roles>Role.Document_InventoryTransfer</roles>
   <roles>Role.Document_InventoryTransferOrder</roles>
+  <roles>Role.Document_Issue</roles>
   <roles>Role.Document_ItemStockAdjustment</roles>
   <roles>Role.Document_JournalEntry</roles>
   <roles>Role.Document_Labeling</roles>
@@ -1423,6 +1434,7 @@
   <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
   <dataProcessors>DataProcessor.InternalCommands</dataProcessors>
+  <dataProcessors>DataProcessor.IssueTracker</dataProcessors>
   <dataProcessors>DataProcessor.LoadAndUnloadData</dataProcessors>
   <dataProcessors>DataProcessor.MobileCreateDocument</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

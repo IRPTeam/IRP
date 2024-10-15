@@ -75,9 +75,9 @@
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="ba2fd651-850a-44fb-9d74-faedcb601490">
@@ -1078,6 +1078,149 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="fe84203c-f242-4604-b9d7-b6e810d1c931">
+    <producedTypes>
+      <objectType typeId="e99939c8-eae6-49e0-aeec-9b9019595616" valueTypeId="806840fc-24f9-45ab-a31f-6af22a08d0d3"/>
+      <rowType typeId="fe42d4b5-98d7-4b1e-ac41-054aa61406b8" valueTypeId="bb1d92f9-412a-4c34-8744-84d605ac6d0b"/>
+    </producedTypes>
+    <name>IssueList</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue list</value>
+    </synonym>
+    <standardAttributes>
+      <dataHistory>Use</dataHistory>
+      <name>LineNumber</name>
+      <fillValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </standardAttributes>
+    <attributes uuid="16294d38-3ff8-4054-9e8f-c4331d1d4300">
+      <name>Issue</name>
+      <synonym>
+        <key>en</key>
+        <value>Issue</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.Issue</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5b06a338-fe80-4ecc-804e-427bbc16013e">
+      <name>Comment</name>
+      <synonym>
+        <key>en</key>
+        <value>Comment</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
+      </type>
+      <multiLine>true</multiLine>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="8494cc98-d92b-4629-ae9f-14c53460d7fa">
+      <name>StartJob</name>
+      <synonym>
+        <key>en</key>
+        <value>Start job</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="661cf1fb-646d-4f80-9692-24ff3b174488">
+      <name>EndJob</name>
+      <synonym>
+        <key>en</key>
+        <value>End job</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers/>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ca0412d2-067a-41fc-8d26-8c4831de2046">
+      <name>StartJobLatitude</name>
+      <synonym>
+        <key>en</key>
+        <value>Start job latitude</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>8</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="2fe9e374-fa63-46b2-873a-c292f7d4ec57">
+      <name>StartJobLongitude</name>
+      <synonym>
+        <key>en</key>
+        <value>Start job longitude</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>8</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="a26d001e-5078-4f5d-94ed-4dd4a23ff16c">
+      <name>EndJobLatitude</name>
+      <synonym>
+        <key>en</key>
+        <value>End job latitude</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>8</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+    </attributes>
+    <attributes uuid="bf5f2857-2406-4408-a7ba-898df7e9e4b9">
+      <name>EndJobLongitude</name>
+      <synonym>
+        <key>en</key>
+        <value>End job longitude</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>8</precision>
+          <scale>5</scale>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <templates uuid="d8115267-310a-46de-980a-94cba30c1bb4">

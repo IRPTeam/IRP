@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="50e4fcf6-3b6e-406a-8662-6cfa83595b76">
-  <name>Attachments</name>
+  <name>Iconoir_Attachments</name>
   <synonym>
     <key>en</key>
-    <value>Attachments</value>
+    <value>Iconoir attachments</value>
   </synonym>
 </mdclass:CommonPicture>

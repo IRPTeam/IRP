@@ -31,6 +31,36 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultChoiceForm>Catalog.TaxExemptionReasons.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="f4887185-70c9-4501-b364-fb0d10342e7c">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c5db01dd-718a-416b-a5d1-38b34e60cd55">
+    <name>TaxRate</name>
+    <synonym>
+      <key>en</key>
+      <value>Tax rate</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.TaxRates</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="6b0f342e-0ff8-492d-9841-149b772d9641">
     <producedTypes>
       <objectType typeId="e2102249-1a39-4866-82b7-9e53324cfc62" valueTypeId="9265ddbd-82f8-478d-98bd-fd8e0feb6f20"/>
@@ -72,4 +102,13 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <forms uuid="bd4f16bf-3a63-499c-a4b7-233d98fdcf7c">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

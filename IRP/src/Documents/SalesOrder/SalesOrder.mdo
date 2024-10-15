@@ -605,7 +605,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="c87d970d-4184-431d-b049-19270ff83a74">

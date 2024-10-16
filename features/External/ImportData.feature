@@ -1602,26 +1602,27 @@ Scenario: Create catalog Taxes objects (with transaction type)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011'   |
 
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'                |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrder'                  |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesInvoice'                |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrder'               |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseInvoice'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashExpense'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturn'              |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturnOrder'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturnOrder'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturn'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailSalesReceipt'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReturnReceipt'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportFromTradeAgent'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'BankPayment'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'BankReceipt'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashPayment'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashReceipt'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'EmployeeCashAdvance'         |
+		| 'Ref'                                                           | 'DocumentName'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportToConsignor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportFromTradeAgent' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'EmployeeCashAdvance'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
 
 	And I refill object tabular section "TransactionTypes":
 		| 'Ref'                                                            | 'DocumentName'         | 'TransactionType'                                           |
@@ -3780,3 +3781,12 @@ Scenario: Create catalog LegalNameContracts objects (Ferron, filters)
 		| 'Ref'                                                                        | 'DeletionMark' | 'Code'  | 'Description'               | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount' | 'ContractNumber' | 'Currency'                                                           | 'LegalName'                                                         | 'Author'                                                        | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f1207' | 'False'        | 11      | 'Contract (Second Company)' | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:03:29' | '01.01.0001 00:00:00' | 'False'     |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f120b' | 'False'        | 12      | 'Contract (Empty Company)'  | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | ''                                                                  | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:04:28' | '01.01.0001 00:00:00' | 'False'     |
+
+Scenario: Create catalog TaxExemptionReasons objects
+
+	And I check or create catalog "TaxExemptionReasons" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'Description'                               | 'Country'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8ba5e1cb24cf' | 'False'        | 2      | 'Tax exeption reason 3 (8%, Turkey)'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef00f' |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8b9a67d20625' | 'False'        | 1      | 'Tax exeption reason 1 (0%, All countries)' | ''                                                                  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8b9a67d20627' | 'False'        | 3      | 'Tax exeption reason 2 (0%, Turkey)'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+

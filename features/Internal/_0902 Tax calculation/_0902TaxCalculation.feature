@@ -44,12 +44,14 @@ Scenario: _0902000 preparation
 		When Create catalog Agreements objects
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
-		When Create catalog Taxes objects (with transaction type)	
+		When Create catalog Taxes objects (with transaction type)
+		When Create catalog Taxes objects (for debit and credit note)	
 		When Create information register TaxSettings records with transaction type
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create information register Taxes records (VAT)
+		When Create catalog TaxExemptionReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Countries objects
 		When Create catalog BusinessUnits objects 
@@ -1138,6 +1140,263 @@ Scenario: _090222 check tax in the RSR(without transaction type)
 			| 'M/White'    | '1,000'      | 'pcs'    | '79,32'        | '520,00'   | '18%'   | '440,68'       | '520,00'         | 'Basic Price Types'   | 'Dress'   | ''                |
 		And I close all client application windows
 
+Scenario: _090226 fill tax exemption reason in the RSR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Dress'          |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'L/Green'     |
+		And I select current line in "List" table
+	* Fill tax exemtion reason
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Tax exemption reason" field in "ItemList" table
+		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
+		And "List" table became equal
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+			| 'Tax exeption reason 2 (0%, Turkey)'        |
+		And I go to line in "List" table
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I move to "Payments" tab
+		And in the table "Payments" I click the button named "PaymentsAdd"
+		And I activate field named "PaymentsAmount" in "Payments" table
+		And I select current line in "Payments" table
+		And I input "550,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I finish line editing in "Payments" table
+		And I click "Post" button
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'VAT' | 'Tax exemption reason'                      |
+			| 'Dress' | 'L/Green'  | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |
+		And I close all client application windows
+
+Scenario: _090227 fill tax exemption reason in the PR
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Dress'          |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'L/Green'     |
+		And I select current line in "List" table
+	* Fill tax exemtion reason
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Tax exemption reason" field in "ItemList" table
+		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
+		And "List" table became equal
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+			| 'Tax exeption reason 2 (0%, Turkey)'        |
+		And I go to line in "List" table
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'VAT' | 'Tax exemption reason'                      |
+			| 'Dress' | 'L/Green'  | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |
+		And I close all client application windows
+		
+Scenario: _090228 fill tax exemption reason in the Sales invoice
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Kalipso'        |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'                 |
+			| 'Basic Partner terms, TRY'    |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Add items
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Dress'          |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'    | 'Item key'    |
+			| 'Dress'   | 'L/Green'     |
+		And I select current line in "List" table
+	* Fill tax exemtion reason
+		And I activate "VAT" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Tax exemption reason" field in "ItemList" table
+		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
+		And "List" table became equal
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+			| 'Tax exeption reason 2 (0%, Turkey)'        |
+		And I go to line in "List" table
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button
+	* Check filling
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'VAT' | 'Tax exemption reason'                      |
+			| 'Dress' | 'L/Green'  | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |
+		And I close all client application windows
+
+Scenario: _090229 fill tax exemption reason in the Debit note
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitNote"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Add partner
+		And in the table "Transactions" I click "Add" button
+		And I activate "Partner" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "Kalipso" from "Partner" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "Transactions" table
+		And I activate "Amount" field in "Transactions" table
+		And I input "100,00" text in "Amount" field of "Transactions" table
+		And I activate "VAT" field in "Transactions" table
+		And I select "0%" exact value from "VAT" drop-down list in "Transactions" table	
+		And I finish line editing in "Transactions" table
+	* Fill tax exemtion reason
+		And I select current line in "Transactions" table
+		And I activate "Tax exemption reason" field in "Transactions" table
+		And I click choice button of "Tax exemption reason" attribute in "Transactions" table
+		And "List" table became equal
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+			| 'Tax exeption reason 2 (0%, Turkey)'        |
+		And I go to line in "List" table
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I click "Post" button
+	* Check filling
+		And "Transactions" table became equal
+			| 'Partner' | 'Legal name'      | 'Partner term'             | 'VAT' | 'Tax exemption reason'                      |
+			| 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, TRY' | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |	
+		And I close all client application windows
+
+Scenario: _090230 fill tax exemption reason in the Credit note
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CreditNote"
+	And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'     |
+			| 'Main Company'    |
+		And I select current line in "List" table
+	* Add partner
+		And in the table "Transactions" I click "Add" button
+		And I activate "Partner" field in "Transactions" table
+		And I select current line in "Transactions" table
+		And I select "Kalipso" from "Partner" drop-down list by string in "Transactions" table
+		And I activate "Partner term" field in "Transactions" table
+		And I select "Basic Partner terms, TRY" from "Partner term" drop-down list by string in "Transactions" table
+		And I activate "Amount" field in "Transactions" table
+		And I input "100,00" text in "Amount" field of "Transactions" table
+		And I activate "VAT" field in "Transactions" table
+		And I select "0%" exact value from "VAT" drop-down list in "Transactions" table	
+		And I finish line editing in "Transactions" table
+	* Fill tax exemtion reason
+		And I select current line in "Transactions" table
+		And I activate "Tax exemption reason" field in "Transactions" table
+		And I click choice button of "Tax exemption reason" attribute in "Transactions" table
+		And "List" table became equal
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+			| 'Tax exeption reason 2 (0%, Turkey)'        |
+		And I go to line in "List" table
+			| 'Description'                               |
+			| 'Tax exeption reason 1 (0%, All countries)' |
+		And I select current line in "List" table
+		And I finish line editing in "Transactions" table
+		And I click "Post" button
+	* Check filling
+		And "Transactions" table became equal
+			| 'Partner' | 'Legal name'      | 'Partner term'             | 'VAT' | 'Tax exemption reason'                      |
+			| 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, TRY' | '0%'  | 'Tax exeption reason 1 (0%, All countries)' |	
+		And I close all client application windows
 
 Scenario: _090225 check tax deactivation
 	And I close all client application windows

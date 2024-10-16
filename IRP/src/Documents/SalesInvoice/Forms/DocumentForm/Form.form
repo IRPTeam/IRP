@@ -3047,7 +3047,7 @@
         </items>
         <items xsi:type="form:FormField">
           <name>ItemListTaxExemptionReason</name>
-          <id>1505</id>
+          <id>1513</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -3058,7 +3058,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListTaxExemptionReasonExtendedTooltip</name>
-            <id>1507</id>
+            <id>1515</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -3073,7 +3073,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListTaxExemptionReasonContextMenu</name>
-            <id>1506</id>
+            <id>1514</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>

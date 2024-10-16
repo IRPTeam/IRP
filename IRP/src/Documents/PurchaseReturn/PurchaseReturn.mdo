@@ -101,7 +101,7 @@
     <objectField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.PurchaseReturn.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PurchaseReturn.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -143,6 +143,7 @@
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
@@ -152,7 +153,6 @@
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

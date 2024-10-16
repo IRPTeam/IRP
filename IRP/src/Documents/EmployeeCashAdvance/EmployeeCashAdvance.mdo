@@ -44,7 +44,7 @@
     <objectField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.EmployeeCashAdvance.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -73,10 +73,10 @@
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

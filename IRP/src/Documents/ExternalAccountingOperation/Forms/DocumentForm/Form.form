@@ -3177,12 +3177,12 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <saveWindowSettings>true</saveWindowSettings>
   <autoTitle>true</autoTitle>
@@ -3489,12 +3489,12 @@
   </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
-    </handlers>
-    <handlers>
       <event>AfterWriteAtServer</event>
       <name>AfterWriteAtServer</name>
+    </handlers>
+    <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
     </handlers>
     <handlers>
       <event>BeforeWriteAtServer</event>

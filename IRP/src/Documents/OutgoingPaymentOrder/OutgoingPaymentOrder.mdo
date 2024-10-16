@@ -60,7 +60,7 @@
     <objectField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.OutgoingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -83,8 +83,8 @@
   <defaultChoiceForm>Document.OutgoingPaymentOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

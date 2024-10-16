@@ -10,7 +10,6 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">UsersList.User</left>
 				<comparisonType>NotFilled</comparisonType>
-				<right xsi:nil="true"/>
 			</item>
 		</filter>
 		<appearance>

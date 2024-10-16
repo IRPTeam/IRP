@@ -60,7 +60,7 @@
     <objectField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.MoneyTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.MoneyTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -86,10 +86,10 @@
   <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
   <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

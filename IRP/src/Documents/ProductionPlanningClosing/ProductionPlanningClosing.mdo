@@ -28,7 +28,7 @@
     <objectField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>
@@ -66,9 +66,9 @@
   <defaultChoiceForm>Document.ProductionPlanningClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

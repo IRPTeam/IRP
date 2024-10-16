@@ -4268,7 +4268,7 @@
     <toolTip>
       <key>en</key>
       <value>Scan or enter the product's barcode</value>
-    </toolTip>  
+    </toolTip>
     <use>
       <common>true</common>
     </use>

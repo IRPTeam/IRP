@@ -22,14 +22,10 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ExternalAccountingOperation</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>Document.ExternalAccountingOperation.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ExternalAccountingOperation.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
@@ -38,14 +34,10 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_ExternalAccountingOperation</value>
     </typesFilterValue>
-    <dataPathField>0</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

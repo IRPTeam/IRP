@@ -9,7 +9,10 @@
     <value>Type accounting documents</value>
   </synonym>
   <type>
+    <types>DocumentRef.AdditionalRevenueAllocation</types>
+    <types>DocumentRef.ExternalAccountingOperation</types>
     <types>DocumentRef.CashPayment</types>
+    <types>DocumentRef.AdditionalCostAllocation</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>
@@ -36,8 +39,5 @@
     <types>DocumentRef.DepreciationCalculation</types>
     <types>DocumentRef.SalesInvoice</types>
     <types>DocumentRef.CashExpense</types>
-    <types>DocumentRef.ExternalAccountingOperation</types>
-    <types>DocumentRef.AdditionalCostAllocation</types>
-    <types>DocumentRef.AdditionalRevenueAllocation</types>
   </type>
 </mdclass:DefinedType>

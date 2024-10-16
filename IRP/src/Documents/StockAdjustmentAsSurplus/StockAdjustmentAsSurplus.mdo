@@ -44,7 +44,7 @@
     <objectField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -75,13 +75,13 @@
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -44,7 +44,7 @@
     <objectField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.GoodsReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.GoodsReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -73,6 +73,7 @@
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
@@ -83,7 +84,6 @@
   <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

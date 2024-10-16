@@ -60,7 +60,7 @@
     <objectField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -91,13 +91,13 @@
   <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

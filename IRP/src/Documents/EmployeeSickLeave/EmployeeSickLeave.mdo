@@ -44,7 +44,7 @@
     <objectField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.EmployeeSickLeave.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.EmployeeSickLeave.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -66,8 +66,8 @@
   <defaultListForm>Document.EmployeeSickLeave.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.EmployeeSickLeave.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>InformationRegister.T9550S_EmployeeSickLeave</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>InformationRegister.T9550S_EmployeeSickLeave</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

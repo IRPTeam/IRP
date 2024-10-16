@@ -655,7 +655,7 @@ FROM
 					<dcsset:filter/>
 					<dcsset:appearance>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
 						</dcscor:item>
 					</dcsset:appearance>

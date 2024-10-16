@@ -5145,12 +5145,12 @@
         <showInFooter>true</showInFooter>
         <extInfo xsi:type="form:InputFieldExtInfo">
           <handlers>
-            <event>StartChoice</event>
-            <name>AccountStartChoice</name>
-          </handlers>
-          <handlers>
             <event>EditTextChange</event>
             <name>AccountEditTextChange</name>
+          </handlers>
+          <handlers>
+            <event>StartChoice</event>
+            <name>AccountStartChoice</name>
           </handlers>
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
@@ -9129,10 +9129,6 @@
       <key>en</key>
       <value>Link/Unlink document rows</value>
     </toolTip>
-    <toolTip>
-      <key>en</key>
-      <value>Link/Unlink document rows</value>
-    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -9154,10 +9150,6 @@
       <value>Add basis documents</value>
     </title>
     <id>11</id>
-    <toolTip>
-      <key>en</key>
-      <value>Add rows from linked documents</value>
-    </toolTip>
     <toolTip>
       <key>en</key>
       <value>Add rows from linked documents</value>

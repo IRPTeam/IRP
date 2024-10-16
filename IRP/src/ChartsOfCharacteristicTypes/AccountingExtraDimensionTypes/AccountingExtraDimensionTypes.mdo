@@ -34,8 +34,8 @@
     <types>CatalogRef.Taxes</types>
     <types>CatalogRef.Stores</types>
     <types>CatalogRef.ItemKeys</types>
-    <types>CatalogRef.BusinessUnits</types>
     <types>CatalogRef.ExtDimensions</types>
+    <types>CatalogRef.BusinessUnits</types>
   </type>
   <foldersOnTop>true</foldersOnTop>
   <codeAllowedLength>Variable</codeAllowedLength>

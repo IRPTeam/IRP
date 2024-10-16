@@ -478,8 +478,8 @@
       <value>Currency revaluation invoice</value>
     </synonym>
     <type>
-      <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -499,6 +499,7 @@
       <name>Filter.LegalName</name>
       <field>Document.SalesInvoice.Attribute.LegalName</field>
     </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

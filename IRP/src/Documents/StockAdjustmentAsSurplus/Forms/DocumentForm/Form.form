@@ -4247,7 +4247,7 @@
     <toolTip>
       <key>en</key>
       <value>Scan or enter the product's barcode</value>
-    </toolTip>  
+    </toolTip>
     <use>
       <common>true</common>
     </use>
@@ -4406,7 +4406,7 @@
       <value>Edit currencies</value>
     </title>
     <id>9</id>
-     <toolTip>
+    <toolTip>
       <key>en</key>
       <value>Edit exchange rates for document</value>
     </toolTip>

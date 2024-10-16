@@ -23,13 +23,10 @@
       <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
     </typesFilterValue>
     <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -39,13 +36,10 @@
       <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
     </typesFilterValue>
     <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>Document.ExpenseAccruals.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.ExpenseAccruals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ExpenseAccruals.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ExpenseAccruals.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

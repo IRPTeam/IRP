@@ -3741,6 +3741,7 @@ Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName)
 				RecorderInfo = New Structure();
 				RecorderInfo.Insert("RecorderRef", Data.RecorderRef);
 				RecorderInfo.Insert("RecorderName", Data.RecorderName);
+				RecorderInfo.Insert("RecorderURL", Data.RecorderURL);
 				ArrayOfRecorders.Add(RecorderInfo);
 				
 				If Data.Records.Count() Then
@@ -3981,6 +3982,7 @@ Function GetEmptyTableForResponseData()
 	EmptyTable.Columns.Add("RecorderRef"          , Type_UUID);
 	EmptyTable.Columns.Add("RecorderPresentation" , Type_Desc);
 	EmptyTable.Columns.Add("RecorderName"         , Type_Desc);
+	EmptyTable.Columns.Add("RecorderURL"	      , Type_Desc);
 	EmptyTable.Columns.Add("LedgerType"           , Type_LedgerType);
 	EmptyTable.Columns.Add("RecorderDate"         , Doc_StandardAttr.Date.Type);
 	EmptyTable.Columns.Add("IsOpeningEntry"       , Type_Boolean);

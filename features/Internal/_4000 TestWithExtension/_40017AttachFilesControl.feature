@@ -75,31 +75,58 @@ Scenario: _4001701 preparation (Attach Files Control)
 		And Delay 3
 	* User settings
 		Given I open hyperlink "e1cib/list/Catalog.Users"
-		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'    |
-		And I click "Settings" button
-		And I go to line in "MetadataTree" table
-			| "Group name"              | "Use" |
-			| "Enable - Change filters" | "No"  |
-		And I activate "Value" field in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| "Group name"          | "Use" |
-			| "Enable - Check-mode" | "No"  |
-		And I select current line in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| "Group name" | "Use" |
-			| "Company"    | "No"  |
-		And I select current line in "MetadataTree" table
-		And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I click "Ok" button
+		* CI
+			And I go to line in "List" table
+				| 'Login' |
+				| 'CI'    |
+			And I click "Settings" button
+			And I go to line in "MetadataTree" table
+				| "Group name"              | "Use" |
+				| "Enable - Change filters" | "No"  |
+			And I activate "Value" field in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name"          | "Use" |
+				| "Enable - Check-mode" | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name" | "Use" |
+				| "Company"    | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I click "Ok" button
+		*ABrown
+			And I go to line in "List" table
+				| 'Login'                     |
+				| 'Arina Brown (Financier 3)' |
+			And I click "Settings" button
+			And I go to line in "MetadataTree" table
+				| "Group name"              | "Use" |
+				| "Enable - Change filters" | "No"  |
+			And I activate "Value" field in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name"          | "Use" |
+				| "Enable - Check-mode" | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name" | "Use" |
+				| "Company"    | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I click "Ok" button
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one	
 		
@@ -358,15 +385,15 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 			| "Retail return receipt" | "08.05.2024" | "223"        | ""                        |
 		And in the table "DocumentList" I click "Lock selected" button
 		And I go to line in "DocumentList" table
-			| "Doc type"       | "Doc date"   | "Doc number" | "Branch"       |
-			| "Purchase order" | "09.05.2023" | "221"        | "Front office" |
+			| "Doc type"       | "Doc date"   | "Doc number" | "Branch"          |
+			| "Purchase order" | "09.05.2023" | "221"        | "Front office TR" |
 		And in the table "DocumentList" I click "Lock selected" button
 	* Check
 		And in the table "DocumentList" I click "Only unlocked" button
 		And "DocumentList" table does not contain lines
-			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
-			| "Purchase order"        | "09.05.2023" | "221"        | "Front office" |
+			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"          |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""                |
+			| "Purchase order"        | "09.05.2023" | "221"        | "Front office TR" |
 		And in the table "DocumentList" I click "Only unlocked" button
 	* Try unlock without permission
 		And I go to line in "DocumentList" table

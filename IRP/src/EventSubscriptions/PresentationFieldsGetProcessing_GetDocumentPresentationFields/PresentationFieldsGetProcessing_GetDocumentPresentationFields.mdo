@@ -11,6 +11,11 @@
     <types>DocumentManager.SalesInvoice</types>
     <types>DocumentManager.CreditNote</types>
     <types>DocumentManager.DebitNote</types>
+    <types>DocumentManager.PurchaseInvoice</types>
+    <types>DocumentManager.PurchaseReturn</types>
+    <types>DocumentManager.SalesReturn</types>
+    <types>DocumentManager.RetailSalesReceipt</types>
+    <types>DocumentManager.RetailReturnReceipt</types>
   </source>
   <event>PresentationFieldsGetProcessing</event>
   <handler>CommonModule.DocumentsServer.GetDocumentPresentationFields</handler>

@@ -72,8 +72,8 @@
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

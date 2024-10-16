@@ -86,8 +86,8 @@
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="00efd9a7-ea17-470d-af39-54b18a153791">

@@ -70,9 +70,9 @@
   <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R3050T_PosCashBalances</registerRecords>
   <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

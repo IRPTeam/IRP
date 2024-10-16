@@ -3122,6 +3122,7 @@
               <horizontalStretch>true</horizontalStretch>
               <verticalStretch>true</verticalStretch>
               <fileDragMode>AsFileRef</fileDragMode>
+              <rowFilter xsi:type="core:UndefinedValue"/>
             </items>
             <items xsi:type="form:FormGroup">
               <name>GroupBottom</name>

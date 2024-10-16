@@ -674,7 +674,7 @@
       </items>
       <items xsi:type="form:FormField">
         <name>CurrencyRevaluationItem</name>
-        <id>193</id>
+        <id>199</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -685,7 +685,7 @@
         </dataPath>
         <extendedTooltip>
           <name>CurrencyRevaluationItemExtendedTooltip</name>
-          <id>195</id>
+          <id>201</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -700,7 +700,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>CurrencyRevaluationItemContextMenu</name>
-          <id>194</id>
+          <id>200</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>

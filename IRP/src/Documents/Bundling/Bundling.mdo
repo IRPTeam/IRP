@@ -71,9 +71,9 @@
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>InformationRegister.BundleContents</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

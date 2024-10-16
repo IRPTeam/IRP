@@ -68,8 +68,8 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
-  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -44,7 +44,7 @@
     <objectField>Document.DebitNote.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.DebitNote.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.DebitNote.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.DebitNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.DebitNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

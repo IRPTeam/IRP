@@ -60,7 +60,7 @@
     <objectField>Document.BankReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.BankReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.BankReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.BankReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.BankReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

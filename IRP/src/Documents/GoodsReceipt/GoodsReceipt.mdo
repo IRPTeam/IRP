@@ -44,7 +44,7 @@
     <objectField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.GoodsReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.GoodsReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.GoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

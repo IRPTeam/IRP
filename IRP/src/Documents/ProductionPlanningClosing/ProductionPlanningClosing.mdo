@@ -28,7 +28,7 @@
     <objectField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.ProductionPlanningClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

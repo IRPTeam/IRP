@@ -60,7 +60,7 @@
     <objectField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.RetailSalesReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.RetailSalesReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

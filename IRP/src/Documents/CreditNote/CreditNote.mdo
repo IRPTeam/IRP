@@ -44,7 +44,7 @@
     <objectField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.CreditNote.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.CreditNote.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.CreditNote.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

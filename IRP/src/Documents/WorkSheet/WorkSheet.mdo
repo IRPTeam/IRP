@@ -44,7 +44,7 @@
     <objectField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>

@@ -44,7 +44,7 @@
     <objectField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

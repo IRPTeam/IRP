@@ -44,7 +44,7 @@
     <objectField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.Payroll.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.Payroll.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.Payroll.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

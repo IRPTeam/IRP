@@ -44,7 +44,7 @@
     <objectField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.PhysicalInventory.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PhysicalInventory.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.PhysicalInventory.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

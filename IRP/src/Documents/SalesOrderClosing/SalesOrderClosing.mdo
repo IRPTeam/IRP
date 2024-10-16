@@ -44,7 +44,7 @@
     <objectField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.SalesOrderClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.SalesOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

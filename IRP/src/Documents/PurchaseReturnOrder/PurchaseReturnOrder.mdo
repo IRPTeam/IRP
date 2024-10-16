@@ -101,7 +101,7 @@
     <objectField>Document.PurchaseReturnOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.PurchaseReturnOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PurchaseReturnOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.PurchaseReturnOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.PurchaseReturnOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

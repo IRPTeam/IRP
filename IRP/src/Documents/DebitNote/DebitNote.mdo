@@ -428,6 +428,24 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="09158652-fa40-43b6-bebe-c70d3273bfd0">
+      <name>TaxExemptionReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax exemption reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxExemptionReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.TaxRate</name>
+        <field>Document.DebitNote.TabularSection.Transactions.Attribute.VatRate</field>
+      </choiceParameterLinks>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="99ce6887-1dcc-4596-895a-65fa4b7ca4cc">
     <producedTypes>

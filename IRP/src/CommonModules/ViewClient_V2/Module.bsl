@@ -233,6 +233,9 @@ Procedure OnChainComplete(Parameters) Export
 			TaxesClientServer.LoadChoiceList(Parameters.Form, Parameters.TaxChoiceList);
 		EndIf;
 	EndIf;
+	If Parameters.TaxExemptionReasonVisible <> Undefined Then
+		TaxesClientServer.ChangeTaxExemptionReasonVisible(Parameters.Form, Parameters.TaxExemptionReasonVisible);
+	EndIf;
 	
 	If Parameters.PartnerChoiceList <> Undefined Then
 		CommonFunctionsClientServer.LoadFormItemChoiceList(Parameters.Form, "Partner", Parameters.PartnerChoiceList);

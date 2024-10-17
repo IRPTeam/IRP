@@ -102,7 +102,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>№</v8:content>
+							<v8:content>No</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -178,7 +178,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Dr 1</v8:content>
+							<v8:content>Ek özellik Değeri Bç 1</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -235,7 +235,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Cr 1</v8:content>
+							<v8:content>Ek özellik Değeri Ak 1</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -284,7 +284,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ammount Currency Dr</v8:content>
+							<v8:content>Tutar dövizi Bç</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -303,7 +303,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Dr 2</v8:content>
+							<v8:content>Ek özellik Değeri Bç 2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -327,7 +327,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ammount Currency Cr</v8:content>
+							<v8:content>Tutar dövizi Ak</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -346,7 +346,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Cr 2</v8:content>
+							<v8:content>Ek özellik Değeri Ak 2</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -414,7 +414,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Dr 3</v8:content>
+							<v8:content>Ek özellik Değeri Bç 3</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -457,7 +457,7 @@
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Ext. Demension Value Cr 3</v8:content>
+							<v8:content>Ek özellik Değeri Ak 3</v8:content>
 						</v8:item>
 					</tl>
 				</c>

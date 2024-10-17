@@ -125,7 +125,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Recorder URL</value>
+   <value>Kayıt evrağın URL'i</value>
   </synonym>
   <type>
    <types>String</types>
@@ -2477,7 +2477,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Entry template</value>
+   <value>Şablon</value>
   </synonym>
  </templates>
 </mdclass:Document>

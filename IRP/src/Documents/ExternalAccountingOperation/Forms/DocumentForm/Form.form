@@ -3464,7 +3464,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Source records</value>
+   <value>Kaynak kayıtlar</value>
   </title>
   <id>2</id>
   <valueType>
@@ -3657,7 +3657,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Copy recorder URLTo clipboard</value>
+   <value>Kayıt evrağın URL'i kopyala</value>
   </title>
   <id>6</id>
   <toolTip>
@@ -3670,7 +3670,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Copy recorder URL to clipboard</value>
+   <value>Kayıt evrağın URL'i kopyala</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3694,7 +3694,7 @@
   </title>
   <title>
    <key>tr</key>
-   <value>Show accounting entries from source</value>
+   <value>Kaynaktan muhasebe girişlerini göster</value>
   </title>
   <id>7</id>
   <toolTip>
@@ -3707,7 +3707,7 @@
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Show accounting entries from source</value>
+   <value>Kaynaktan muhasebe girişlerini göster</value>
   </toolTip>
   <use>
    <common>true</common>

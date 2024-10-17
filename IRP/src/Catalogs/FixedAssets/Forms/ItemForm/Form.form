@@ -444,7 +444,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>DepreciationInfoSearchString</source>
+          <source>DepreciationInfo</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -483,7 +483,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>DepreciationInfoViewStatus</source>
+          <source>DepreciationInfo</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -522,7 +522,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>DepreciationInfoSearchControl</source>
+          <source>DepreciationInfo</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

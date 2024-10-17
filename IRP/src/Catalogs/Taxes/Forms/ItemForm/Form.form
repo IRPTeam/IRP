@@ -428,7 +428,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>TaxRatesSearchString</source>
+          <source>TaxRates</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -467,7 +467,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>TaxRatesViewStatus</source>
+          <source>TaxRates</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -507,7 +507,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>TaxRatesSearchControl</source>
+          <source>TaxRates</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -831,7 +831,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>UseDocumentsSearchString</source>
+          <source>UseDocuments</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -870,7 +870,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>UseDocumentsViewStatus</source>
+          <source>UseDocuments</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -910,7 +910,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>UseDocumentsSearchControl</source>
+          <source>UseDocuments</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

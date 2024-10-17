@@ -782,7 +782,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>CurrentCodesSearchString</source>
+      <source>CurrentCodes</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -821,7 +821,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>CurrentCodesViewStatus</source>
+      <source>CurrentCodes</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -860,7 +860,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>CurrentCodesSearchControl</source>
+      <source>CurrentCodes</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

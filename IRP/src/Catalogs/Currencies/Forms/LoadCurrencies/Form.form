@@ -541,7 +541,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>CurrencyListSearchString</source>
+      <source>CurrencyList</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -580,7 +580,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>CurrencyListViewStatus</source>
+      <source>CurrencyList</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -619,7 +619,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>CurrencyListSearchControl</source>
+      <source>CurrencyList</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

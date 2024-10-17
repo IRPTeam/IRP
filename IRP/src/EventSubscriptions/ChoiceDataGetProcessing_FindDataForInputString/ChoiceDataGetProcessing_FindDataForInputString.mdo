@@ -14,13 +14,13 @@
   <value>Veri seç veri işleme satır başı girişi için veri bulma</value>
  </synonym>
  <source>
+  <types>DocumentManager.PurchaseOrder</types>
+  <types>DocumentManager.DebitNote</types>
+  <types>DocumentManager.SalesInvoice</types>
+  <types>DocumentManager.SalesOrder</types>
   <types>ChartOfCharacteristicTypesManager</types>
   <types>CatalogManager</types>
   <types>ChartOfAccountsManager.Basic</types>
-  <types>DocumentManager.SalesOrder</types>
-  <types>DocumentManager.PurchaseOrder</types>
-  <types>DocumentManager.SalesInvoice</types>
-  <types>DocumentManager.DebitNote</types>
   <types>DocumentManager.CreditNote</types>
  </source>
  <event>ChoiceDataGetProcessing</event>

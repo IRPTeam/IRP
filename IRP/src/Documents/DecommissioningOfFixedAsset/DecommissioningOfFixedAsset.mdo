@@ -30,7 +30,6 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
@@ -46,13 +45,12 @@
   <typesFilterValue xsi:type="core:ReferenceValue">
    <value>Catalog.AddAttributeAndPropertySets.Document_DecommissioningOfFixedAsset</value>
   </typesFilterValue>
-  <dataPathField>0</dataPathField>
   <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
   <characteristicValues>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.DecommissioningOfFixedAsset.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -99,11 +97,11 @@
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

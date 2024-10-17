@@ -638,6 +638,56 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="59a47681-d50a-416a-916a-190a0fcd9fea">
+  <name>CurrencyRevaluationItem</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency revaluation item</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номенклатура переоценки валюты </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Para birimi yeniden değerleme Malzeme</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Items</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e030789e-8d21-4051-a425-c0c916d77ba7">
+  <name>CurrencyRevaluationItemKey</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency revaluation item key</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика переоценки валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Para birimi yeniden değerleme Varyant</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Item</name>
+   <field>Catalog.Companies.Attribute.CurrencyRevaluationItem</field>
+  </choiceParameterLinks>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
   <producedTypes>
    <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>

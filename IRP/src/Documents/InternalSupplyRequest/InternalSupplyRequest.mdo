@@ -52,7 +52,7 @@
   <objectField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.InternalSupplyRequest.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

@@ -244,11 +244,11 @@
 							<dcscor:value xsi:type="v8ui:Font" faceName="Arial" height="10" bold="true" italic="false" underline="false" strikeout="false" kind="Absolute" scale="100"/>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -260,11 +260,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -372,11 +372,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -388,11 +388,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -468,11 +468,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -546,11 +546,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -626,11 +626,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -686,11 +686,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -744,11 +744,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -779,11 +779,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -845,11 +845,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22.125</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22.125</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -876,11 +876,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">39.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">39.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -955,11 +955,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1007,11 +1007,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1029,11 +1029,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">22</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1045,11 +1045,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">40.625</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1162,11 +1162,11 @@
 							<dcscor:value xsi:type="dcscor:DataCompositionTextPlacementType">Wrap</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1178,11 +1178,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1196,11 +1196,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">9.75</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
@@ -1212,11 +1212,11 @@
 				<dcsat:tableCell>
 					<dcsat:appearance>
 						<dcscor:item>
-							<dcscor:parameter>MinimumWidth</dcscor:parameter>
+							<dcscor:parameter>MinWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">30</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>

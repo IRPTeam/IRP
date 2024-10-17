@@ -60,8 +60,8 @@
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
- <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ce41a778-b8a7-476d-a4bf-bffe83857a7d">

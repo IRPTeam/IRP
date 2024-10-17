@@ -47,7 +47,7 @@ Function DocumentIsLocked(DocRef) Export
 EndFunction	
 
 Procedure SetLock(DocRef) Export
-	If Not IsInRole(Metadata.Roles.AuditLockSet) Then
+	If Not (IsInRole(Metadata.Roles.AuditLockSet) OR IsInRole(Metadata.Roles.FullAccess)) Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_003);
 		Return;
 	EndIf;
@@ -62,7 +62,7 @@ Procedure SetLock(DocRef) Export
 EndProcedure
 
 Procedure UnsetLock(DocRef) Export
-	If Not IsInRole(Metadata.Roles.AuditLockUnset) Then
+	If Not (IsInRole(Metadata.Roles.AuditLockUnset) OR IsInRole(Metadata.Roles.FullAccess)) Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_003);
 		Return;
 	EndIf;

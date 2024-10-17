@@ -36,7 +36,7 @@
   <objectField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.ProductionPlanningCorrection.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>
@@ -91,10 +91,10 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>InformationRegister.T7010S_BillOfMaterials</registerRecords>
  <registerRecords>AccumulationRegister.R7030T_ProductionPlanning</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R7020T_MaterialPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R7010T_DetailingSupplies</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="521b5a02-cf80-464a-9e57-ba02d3176069">

@@ -31,13 +31,10 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_TaxesOperation</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -47,13 +44,10 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_TaxesOperation</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>Document.TaxesOperation.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.TaxesOperation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.TaxesOperation.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.TaxesOperation.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -92,11 +86,11 @@
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
  <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="2106790f-b240-4188-b1d4-e141f71b6744">

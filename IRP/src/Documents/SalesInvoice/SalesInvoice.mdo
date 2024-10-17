@@ -68,7 +68,7 @@
   <objectField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.SalesInvoice.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.SalesInvoice.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.SalesInvoice.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -110,6 +110,7 @@
  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
@@ -124,6 +125,7 @@
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R8014T_ConsignorSales</registerRecords>
@@ -140,7 +142,6 @@
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -477,6 +478,10 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillChecking>ShowError</fillChecking>
+  <choiceParameterLinks>
+   <name>Filter.Ref</name>
+   <field>Document.SalesInvoice.StandardAttribute.Ref</field>
+  </choiceParameterLinks>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
@@ -662,6 +667,46 @@
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7a41cb3f-4b00-48c9-b011-8198e63760b4">
+  <name>CurrencyRevaluationInvoice</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency revaluation invoice</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Инвойс переоценки валюты</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz yeniden değerleme Fatura</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <choiceParameterLinks>
+   <name>Filter.Company</name>
+   <field>Document.SalesInvoice.Attribute.Company</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Partner</name>
+   <field>Document.SalesInvoice.Attribute.Partner</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.Agreement</name>
+   <field>Document.SalesInvoice.Attribute.Agreement</field>
+  </choiceParameterLinks>
+  <choiceParameterLinks>
+   <name>Filter.LegalName</name>
+   <field>Document.SalesInvoice.Attribute.LegalName</field>
+  </choiceParameterLinks>
   <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
@@ -3121,6 +3166,26 @@
    <types>DocumentRef.SalesInvoice</types>
   </commandParameterType>
   <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+ </commands>
+ <commands uuid="efeafaed-17a1-4fe3-9f0d-204062ccfdaf">
+  <name>CurrencyRevaluationInvoce</name>
+  <synonym>
+   <key>en</key>
+   <value>Currency revaluation invoce</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Инвойс переоценки валюты </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz yeniden değerleme Fatura</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.SalesInvoice</types>
+  </commandParameterType>
   <representation>Auto</representation>
  </commands>
 </mdclass:Document>

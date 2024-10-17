@@ -277,6 +277,7 @@
  <commonPictures>CommonPicture.Lock</commonPictures>
  <commonPictures>CommonPicture.Expand</commonPictures>
  <commonPictures>CommonPicture.PasteValuesFromClipboard</commonPictures>
+ <commonPictures>CommonPicture.Split</commonPictures>
  <commonPictures>CommonPicture.IconCollection9</commonPictures>
  <sessionParameters>SessionParameter.Buffer</sessionParameters>
  <sessionParameters>SessionParameter.ClientType</sessionParameters>
@@ -1252,6 +1253,7 @@
  <documents>Document.ConsolidatedRetailSales</documents>
  <documents>Document.CreditNote</documents>
  <documents>Document.CustomersAdvancesClosing</documents>
+ <documents>Document.DebitCreditNote</documents>
  <documents>Document.DebitNote</documents>
  <documents>Document.DecommissioningOfFixedAsset</documents>
  <documents>Document.DepreciationCalculation</documents>
@@ -1261,6 +1263,8 @@
  <documents>Document.EmployeeSickLeave</documents>
  <documents>Document.EmployeeTransfer</documents>
  <documents>Document.EmployeeVacation</documents>
+ <documents>Document.ExpenseAccruals</documents>
+ <documents>Document.ExternalAccountingOperation</documents>
  <documents>Document.FixedAssetTransfer</documents>
  <documents>Document.ForeignCurrencyRevaluation</documents>
  <documents>Document.GoodsReceipt</documents>
@@ -1275,6 +1279,7 @@
  <documents>Document.ModernizationOfFixedAsset</documents>
  <documents>Document.MoneyTransfer</documents>
  <documents>Document.OpeningEntry</documents>
+ <documents>Document.OutgoingMessage</documents>
  <documents>Document.OutgoingPaymentOrder</documents>
  <documents>Document.Payroll</documents>
  <documents>Document.PhysicalCountByLocation</documents>
@@ -1297,6 +1302,7 @@
  <documents>Document.RetailReturnReceipt</documents>
  <documents>Document.RetailSalesReceipt</documents>
  <documents>Document.RetailShipmentConfirmation</documents>
+ <documents>Document.RevenueAccruals</documents>
  <documents>Document.SalesInvoice</documents>
  <documents>Document.SalesOrder</documents>
  <documents>Document.SalesOrderClosing</documents>
@@ -1307,6 +1313,7 @@
  <documents>Document.ShipmentConfirmation</documents>
  <documents>Document.StockAdjustmentAsSurplus</documents>
  <documents>Document.StockAdjustmentAsWriteOff</documents>
+ <documents>Document.TaxesOperation</documents>
  <documents>Document.TimeSheet</documents>
  <documents>Document.Unbundling</documents>
  <documents>Document.VendorsAdvancesClosing</documents>
@@ -1314,12 +1321,6 @@
  <documents>Document.WorkOrder</documents>
  <documents>Document.WorkOrderClosing</documents>
  <documents>Document.WorkSheet</documents>
- <documents>Document.DebitCreditNote</documents>
- <documents>Document.ExpenseAccruals</documents>
- <documents>Document.RevenueAccruals</documents>
- <documents>Document.TaxesOperation</documents>
- <documents>Document.ExternalAccountingOperation</documents>
- <documents>Document.OutgoingMessage</documents>
  <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
  <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
  <enums>Enum.AccountingAnalyticTypes</enums>
@@ -1476,6 +1477,7 @@
  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
  <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
+ <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
  <informationRegisters>InformationRegister.AddProperties</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
  <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>

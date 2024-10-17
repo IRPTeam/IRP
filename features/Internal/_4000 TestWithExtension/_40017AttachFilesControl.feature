@@ -32,6 +32,7 @@ Scenario: _4001701 preparation (Attach Files Control)
 		When Create catalog Companies objects (own Second company)
 		When Create catalog BusinessUnits objects
 		When Create catalog Stores objects
+		When Create catalog Users objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
 		When Create catalog Companies objects (partners company)
@@ -74,31 +75,58 @@ Scenario: _4001701 preparation (Attach Files Control)
 		And Delay 3
 	* User settings
 		Given I open hyperlink "e1cib/list/Catalog.Users"
-		And I go to line in "List" table
-			| 'Login' |
-			| 'CI'    |
-		And I click "Settings" button
-		And I go to line in "MetadataTree" table
-			| "Group name"              | "Use" |
-			| "Enable - Change filters" | "No"  |
-		And I activate "Value" field in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| "Group name"          | "Use" |
-			| "Enable - Check-mode" | "No"  |
-		And I select current line in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| "Group name" | "Use" |
-			| "Company"    | "No"  |
-		And I select current line in "MetadataTree" table
-		And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
-		And I finish line editing in "MetadataTree" table
-		And I click "Ok" button
+		* CI
+			And I go to line in "List" table
+				| 'Login' |
+				| 'CI'    |
+			And I click "Settings" button
+			And I go to line in "MetadataTree" table
+				| "Group name"              | "Use" |
+				| "Enable - Change filters" | "No"  |
+			And I activate "Value" field in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name"          | "Use" |
+				| "Enable - Check-mode" | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name" | "Use" |
+				| "Company"    | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I click "Ok" button
+		*ABrown
+			And I go to line in "List" table
+				| 'Login'                     |
+				| 'Arina Brown (Financier 3)' |
+			And I click "Settings" button
+			And I go to line in "MetadataTree" table
+				| "Group name"              | "Use" |
+				| "Enable - Change filters" | "No"  |
+			And I activate "Value" field in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name"          | "Use" |
+				| "Enable - Check-mode" | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select current line in "MetadataTree" table
+			And I select "Yes" exact value from "Value" drop-down list in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I go to line in "MetadataTree" table
+				| "Group name" | "Use" |
+				| "Company"    | "No"  |
+			And I select current line in "MetadataTree" table
+			And I select "Main Company" from "Value" drop-down list by string in "MetadataTree" table
+			And I finish line editing in "MetadataTree" table
+			And I click "Ok" button
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one	
 		
@@ -341,6 +369,7 @@ Scenario: _4001715 check Date, Company and Branch filters
 
 Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data proc
 	And I close all client application windows
+	And I connect "Test" TestClient using "ABrown" login and "" password
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 		And I click Clear button of the field named "Branch"
@@ -356,15 +385,15 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 			| "Retail return receipt" | "08.05.2024" | "223"        | ""                        |
 		And in the table "DocumentList" I click "Lock selected" button
 		And I go to line in "DocumentList" table
-			| "Doc type"       | "Doc date"   | "Doc number" | "Branch"       |
-			| "Purchase order" | "09.05.2023" | "221"        | "Front office" |
+			| "Doc type"       | "Doc date"   | "Doc number" | "Branch"          |
+			| "Purchase order" | "09.05.2023" | "221"        | "Front office TR" |
 		And in the table "DocumentList" I click "Lock selected" button
 	* Check
 		And in the table "DocumentList" I click "Only unlocked" button
 		And "DocumentList" table does not contain lines
-			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
-			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
-			| "Purchase order"        | "09.05.2023" | "221"        | "Front office" |
+			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"          |
+			| "Retail return receipt" | "08.05.2024" | "223"        | ""                |
+			| "Purchase order"        | "09.05.2023" | "221"        | "Front office TR" |
 		And in the table "DocumentList" I click "Only unlocked" button
 	* Try unlock without permission
 		And I go to line in "DocumentList" table
@@ -378,14 +407,15 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 
 Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data proc
 	And I close all client application windows
+	And I connect "Этот клиент" TestClient using "CI" login and "CI" password
 	* Preparation
-		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7"
+		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638"
 		And in the table "Profiles" I click "Add" button
 		And I select "Audit unlock" from "Profile" drop-down list by string in "Profiles" table
 		And I finish line editing in "Profiles" table
 		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		And I close "Test" TestClient
+		And I connect "Test" TestClient using "ABrown" login and "" password
 	* Open AttachedFilesToDocumentsControl
 		And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	* Check mode
@@ -404,3 +434,4 @@ Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data 
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"       |
 			| "Retail return receipt" | "08.05.2024" | "223"        | ""             |
 	And I close all client application windows
+	And I close "Test" TestClient

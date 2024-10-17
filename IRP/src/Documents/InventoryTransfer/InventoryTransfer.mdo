@@ -52,7 +52,7 @@
   <objectField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.InventoryTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.InventoryTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -101,6 +101,7 @@
  <registerRecords>AccumulationRegister.R9010B_SourceOfOriginStock</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
@@ -109,7 +110,6 @@
  <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
  <registerRecords>AccumulationRegister.R4021B_StockTransferOrdersReceipt</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -794,6 +794,8 @@
    <type>
     <types>DocumentRef.PurchaseInvoice</types>
    </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
    <createOnInput>DontUse</createOnInput>
    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
    <fullTextSearch>Use</fullTextSearch>

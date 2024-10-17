@@ -14,7 +14,7 @@
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Расчет себестоимости товаров</value>
+  <value>Расчеты себестоимости товаров</value>
  </synonym>
  <synonym>
   <key>tr</key>
@@ -32,7 +32,7 @@
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Расчет себестоимости товаров</value>
+  <value>Расчеты себестоимости товаров</value>
  </objectPresentation>
  <objectPresentation>
   <key>tr</key>
@@ -44,7 +44,7 @@
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>Расчеты затрат перемещения</value>
+  <value>Расчеты себестоимости товаров</value>
  </listPresentation>
  <listPresentation>
   <key>tr</key>
@@ -62,13 +62,13 @@
  <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
  <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
  <registerRecords>InformationRegister.T6080S_ReallocatedBatchesAmountValues</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>InformationRegister.T8510S_FixedAssetsInfo</registerRecords>
  <registerRecords>InformationRegister.T6090S_CompositeBatchesAmountValues</registerRecords>
  <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>
  <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>
  <registerRecords>AccumulationRegister.R6040T_BatchShortageIncoming</registerRecords>
  <registerRecords>InformationRegister.T6095S_WriteOffBatchesInfo</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="500ee3cd-8578-42cf-b4c4-4ba12cc07a58">

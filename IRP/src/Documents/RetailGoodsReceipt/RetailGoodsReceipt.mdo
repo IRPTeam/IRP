@@ -36,7 +36,7 @@
   <objectField>Document.RetailGoodsReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.RetailGoodsReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.RetailGoodsReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.RetailGoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.RetailGoodsReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>
@@ -96,9 +96,9 @@
  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
  <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

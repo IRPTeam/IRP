@@ -68,7 +68,7 @@
   <objectField>Document.IncomingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.IncomingPaymentOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.IncomingPaymentOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.IncomingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.IncomingPaymentOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

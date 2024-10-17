@@ -52,7 +52,7 @@
   <objectField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PhysicalCountByLocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

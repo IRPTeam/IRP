@@ -68,7 +68,7 @@
   <objectField>Document.SalesOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.SalesOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.SalesOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.SalesOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.SalesOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -116,12 +116,12 @@
  <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
  <registerRecords>AccumulationRegister.R3026B_SalesOrdersCustomerAdvance</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
  <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R3024B_SalesOrdersToBePaid</registerRecords>
  <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -901,7 +901,6 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
-   <fillChecking>ShowError</fillChecking>
    <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="c87d970d-4184-431d-b049-19270ff83a74">

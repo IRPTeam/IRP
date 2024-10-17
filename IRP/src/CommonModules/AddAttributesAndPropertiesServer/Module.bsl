@@ -1268,16 +1268,21 @@ EndFunction
 
 Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
 	TableName = StrReplace(PredefinedDataName, "_", ".");
-	ObjectName = StrSplit(PredefinedDataName, "_");
+	ArrayOfObjectNames = StrSplit(PredefinedDataName, "_");
+	If ArrayOfObjectNames.Count() = 3 Then
+		ObjectName = ArrayOfObjectNames[1] + "_" + ArrayOfObjectNames[2];
+	Else
+		ObjectName = ArrayOfObjectNames[1];
+	EndIf;
 	If StrStartsWith(PredefinedDataName, "Catalog") Then
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
 		Template.DataSets[0].Items[0].Query = StrReplace(Template.DataSets[0].Items[0].Query, "&TableName", TableName);
 		//@skip-check property-return-type, dynamic-access-method-not-found
-		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName[1]);
+		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName);
 	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
 		Template.DataSets[0].Query = StrReplace(Template.DataSets[0].Query, "&TableName", TableName);
-		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName[1]);
+		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName);
 	Else
 		Raise R().Error_004;
 	EndIf;

@@ -952,21 +952,18 @@
   </items>
   <items id="66b2ad99-620b-487d-a8bc-60cb6b6b9519">
    <name>Catalog_ExtDimensions</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>154</value>
    </code>
   </items>
   <items id="c9a0f2b6-d7c8-495c-bbc6-d95ccbe7f001">
    <name>Document_ExternalAccountingOperation</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>155</value>
    </code>
   </items>
   <items id="b84f38fb-126c-4e3b-9fec-030c925a8372">
    <name>Catalog_TaxExemptionReasons</name>
-   <description/>
    <code xsi:type="core:NumberValue">
     <value>156</value>
    </code>

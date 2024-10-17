@@ -1335,6 +1335,18 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_039", NStr("en='Add attribute in additional attribute set in extension tab for current object type: %1';
 		|ru='Добавить атрибут в дополнительный набор атрибутов на вкладке расширения для текущего типа объекта: %1';
 		|tr='Mevcut nesne türü için uzantı sekmesinde ek özellik setine özellik ekle: %1'", Lang));
+	Strings.Insert("Form_040", NStr("en='Select any row to split';
+		|ru='Выберите любую строку для разделения';
+		|tr='Dağıtmak için herhangi bir satırı seçin'", Lang));
+	Strings.Insert("Form_041", NStr("en='It cannot split the row where the quantity is 0';
+		|ru='Нельзя разделить строку с количеством 0';
+		|tr='Miktarı 0 olan satırı dağıtılamaz'", Lang));
+	Strings.Insert("Form_042", NStr("en='Set the quantity for the new row';
+		|ru='Укажите количество для новой строки';
+		|tr='Yeni satır için miktarı giriniz'", Lang));
+	Strings.Insert("Form_043", NStr("en='Quantity can only be greater than 0 and less than %1';
+		|ru='Количество должно быть > 0 и < %1';
+		|tr='Miktar yalnızca 0''dan büyük ve %1''den küçük olabilir'", Lang));
 #EndRegion
 
 #Region ErrorMessages
@@ -2025,6 +2037,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_174", NStr("en='There can be only one currency set in the document.';
 		|ru='В документе может быть указана только одна валюта.';
 		|tr='Evrakta sadece tek döviz seçilebilir.'", Lang));
+	Strings.Insert("Error_175", NStr("en='Recorder URL is Empty';
+		|ru='URL регистратора пуст';
+		|tr='Recorder URL is Empty'", Lang));
+	Strings.Insert("Error_176", NStr("en='Fill Integration Settings in ""Ledger Type""';
+		|ru='Заполните настройки интеграции в ""Типе журнала""';
+		|tr='Fill Integration Settings in ""Ledger Type""'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -3761,7 +3779,7 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 		|ru='Перепроведение документов';
 		|tr='Evrakları tekrar kaydetme'", Lang));
 	Strings.Insert("PeriodClosing_Step3", NStr("en='Calculation movement costs';
-		|ru='Расчет себестоимости товаров';
+		|ru='Расчеты себестоимости товаров';
 		|tr='Maliyet hesaplama fişi'", Lang));
 	Strings.Insert("PeriodClosing_Step4", NStr("en='Vendors advances closing';
 		|ru='Закрытие авансов поставщиков';
@@ -3773,7 +3791,7 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 		|ru='Переоценка валютных остатков';
 		|tr='Yabancı para birimi değerlemesi'", Lang));
 	Strings.Insert("PeriodClosing_Step7", NStr("en='Accounting translation';
-		|ru='Перевод бухгалтерии';
+		|ru='Отражение в бухгалтерском учете';
 		|tr='Muhasebe hareket yansıması'", Lang));
 	
 	Strings.Insert("PeriodClosing_Error1", NStr("en='Company is required field';
@@ -3794,6 +3812,27 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("PeriodClosing_Error6", NStr("en='Overlapping period [%1 - %2]';
 		|ru='Параллельный период [%1 - %2]';
 		|tr='Paralel dönem [%1 - %2]'", Lang));
+#EndRegion
+
+#Region CopyUserSettings
+	Strings.Insert("SettingsStorage1", NStr("en='System settings storage';
+		|ru='Хранение системных настроек      ';
+		|tr='Sistem ayarları depolama'", Lang));
+	Strings.Insert("SettingsStorage2", NStr("en='Form data settings storage';
+		|ru='Хранение настроек формы данных ';
+		|tr='Form veri ayarları depolaması'", Lang));
+	Strings.Insert("SettingsStorage3", NStr("en='Reports variants storage';
+		|ru='Хранение вариантов отчетов     ';
+		|tr='Raporlar seçeneği depolama'", Lang));
+	Strings.Insert("SettingsStorage4", NStr("en='Common settings storage';
+		|ru='Хранение общих настроек         ';
+		|tr='Ortak ayarlar depolama'", Lang));
+	Strings.Insert("SettingsStorage5", NStr("en='Dynamic lists user settings storage';
+		|ru='Хранение настроек динамич. списков';
+		|tr='Dinamik listeler kullanıcı ayarları depolama'", Lang));
+	Strings.Insert("SettingsStorage6", NStr("en='Reports user settings storage';
+		|ru='Хранение настроек пользователя отчетов';
+		|tr='Raporlar kullanıcı ayarları depolama'", Lang));
 #EndRegion
 
 	Return Strings;

@@ -4523,6 +4523,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <rowFilter xsi:type="core:UndefinedValue"/>
    </items>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -9207,6 +9208,7 @@
        <key>tr</key>
        <value>&lt;tüm&gt;</value>
       </presentation>
+      <value xsi:type="core:UndefinedValue"/>
      </choiceList>
     </extInfo>
    </items>

@@ -692,12 +692,12 @@ end</expression>
 		<appearance>
 			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>MinimumHeight</dcscor:parameter>
+				<dcscor:parameter>MinHeight</dcscor:parameter>
 				<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
 			</dcscor:item>
 			<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>MaximumHeight</dcscor:parameter>
+				<dcscor:parameter>MaxHeight</dcscor:parameter>
 				<dcscor:value xsi:type="xs:decimal">15</dcscor:value>
 			</dcscor:item>
 		</appearance>

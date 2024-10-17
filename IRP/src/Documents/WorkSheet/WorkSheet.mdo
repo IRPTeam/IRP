@@ -52,7 +52,7 @@
   <objectField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.WorkSheet.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.WorkSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
@@ -99,9 +99,9 @@
  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="ba2fd651-850a-44fb-9d74-faedcb601490">

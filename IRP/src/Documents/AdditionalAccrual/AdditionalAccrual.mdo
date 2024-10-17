@@ -52,7 +52,7 @@
   <objectField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.AdditionalAccrual.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.AdditionalAccrual.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -90,8 +90,8 @@
  <defaultListForm>Document.AdditionalAccrual.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.AdditionalAccrual.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
- <registerRecords>AccumulationRegister.R9560T_AdditionalAccrual</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.R9560T_AdditionalAccrual</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

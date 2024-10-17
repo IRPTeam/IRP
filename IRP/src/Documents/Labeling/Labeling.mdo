@@ -52,7 +52,7 @@
   <objectField>Document.Labeling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.Labeling.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.Labeling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.Labeling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

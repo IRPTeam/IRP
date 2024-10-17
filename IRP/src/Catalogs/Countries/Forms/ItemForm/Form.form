@@ -364,10 +364,19 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
+   <type>InputField</type>
    <editMode>Enter</editMode>
    <showInHeader>true</showInHeader>
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
   </items>
   <items xsi:type="form:FormField">
    <name>PassportCode</name>
@@ -402,10 +411,19 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
+   <type>InputField</type>
    <editMode>Enter</editMode>
    <showInHeader>true</showInHeader>
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
   </items>
   <items xsi:type="form:FormField">
    <name>PhonePrefix</name>
@@ -576,12 +594,12 @@
  </commandInterface>
  <extInfo xsi:type="form:CatalogFormExtInfo">
   <handlers>
-   <event>BeforeWriteAtServer</event>
-   <name>BeforeWriteAtServer</name>
-  </handlers>
-  <handlers>
    <event>OnReadAtServer</event>
    <name>OnReadAtServer</name>
+  </handlers>
+  <handlers>
+   <event>BeforeWriteAtServer</event>
+   <name>BeforeWriteAtServer</name>
   </handlers>
  </extInfo>
 </form:Form>

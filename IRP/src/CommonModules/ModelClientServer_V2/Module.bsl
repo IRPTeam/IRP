@@ -441,6 +441,8 @@ Function GetChain()
 
 	Chain.Insert("ChangePartnerChoiceList", GetChainLink("ChangePartnerChoiceListExecute"));
 	
+	Chain.Insert("ChangeCurrencyRevaluationInvoiceByBasis", GetChainLink("ChangeCurrencyRevaluationInvoiceByBasisExecute"));
+	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
 	Chain.Insert("ExtractDataCurrencyFromAccount"          , GetChainLink("ExtractDataCurrencyFromAccountExecute"));
@@ -1208,6 +1210,50 @@ Function DefaultCurrencyInListExecute(Options) Export
 	EndIf;
 	Return Options.CurrentCurrency;
 EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENCY_REVALUATION_INVOICE_BY_BASIS
+ 
+Function ChangeCurrencyRevaluationInvoiceByBasisOptions() Export
+ Return GetChainLinkOptions("CurrentCurrencyRevaluationInvoice, Company, TransactionType, Partner, Agreement, LegalName");
+EndFunction	
+
+Function ChangeCurrencyRevaluationInvoiceByBasisExecute(Options) Export
+	If Not ValueIsFilled(Options.CurrentCurrencyRevaluationInvoice) Then
+		Return Undefined;
+	EndIf;
+	
+	IsCustomer = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationCustomer")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer"));
+	
+	IsVendor = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationVendor")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor"));
+	
+	If Not IsCustomer And Not IsVendor Then
+		Return Undefined;
+	EndIf;
+	
+	If IsCustomer And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.SalesInvoice") Then
+	   	Return Undefined;
+	EndIf;
+
+	If IsVendor And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.PurchaseInvoice") Then
+		Return Undefined;
+	EndIf;
+	
+	InvoiceData = CommonFunctionsServer.GetAttributesFromRef(Options.CurrentCurrencyRevaluationInvoice, 
+		"Company, Partner, Agreement, LegalName");
+
+	If InvoiceData.Company <> Options.Company
+		Or InvoiceData.Partner <> Options.Partner
+		Or InvoiceData.Agreement <> Options.Agreement
+		Or InvoiceData.LegalName <> Options.LegalName Then
+			Return Undefined;
+	EndIf; 
+
+	Return Options.CurrentCurrencyRevaluationInvoice;
+EndFunction	
 
 #EndRegion
 

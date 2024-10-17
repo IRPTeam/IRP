@@ -52,7 +52,7 @@
   <objectField>Document.ChequeBondTransaction.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ChequeBondTransaction.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.ChequeBondTransaction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.ChequeBondTransaction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
@@ -90,8 +90,8 @@
  <defaultListForm>Document.ChequeBondTransaction.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.ChequeBondTransaction.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
- <registerRecords>InformationRegister.ChequeBondStatuses</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>InformationRegister.ChequeBondStatuses</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="67f3921b-3542-43c2-989b-5b701b0db8cf">

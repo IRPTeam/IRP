@@ -920,6 +920,7 @@ WHERE
     <valueType>
      <types>Boolean</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -943,6 +944,7 @@ WHERE
     <valueType>
      <types>Boolean</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -967,6 +969,7 @@ WHERE
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -987,7 +990,6 @@ WHERE
       </content>
      </localValue>
     </title>
-    <valueType/>
     <useRestriction>true</useRestriction>
     <valueListAllowed>true</valueListAllowed>
    </parameters>
@@ -1013,6 +1015,7 @@ WHERE
      <types>Date</types>
      <dateQualifiers/>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
    <parameters>
@@ -1036,6 +1039,7 @@ WHERE
     <valueType>
      <types>Boolean</types>
     </valueType>
+    <values xsi:type="core:UndefinedValue"/>
     <useRestriction>true</useRestriction>
    </parameters>
   </extInfo>

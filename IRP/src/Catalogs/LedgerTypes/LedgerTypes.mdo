@@ -154,6 +154,29 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="a5894c6a-c5c4-4993-9e62-8c110e8236ea">
+  <name>IntegrationSettings</name>
+  <synonym>
+   <key>en</key>
+   <value>Integration settings</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Интеграционные настройки</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.IntegrationSettings</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="fa18f0c6-27fa-4ba6-811d-503fac6d71ca">
   <producedTypes>
    <objectType typeId="63f39028-ae9c-447a-a56c-275894c0a2d2" valueTypeId="adff4ad1-b7f5-4ef7-9727-828d12d7ec03"/>

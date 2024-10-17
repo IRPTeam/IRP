@@ -3282,6 +3282,7 @@
        <horizontalStretch>true</horizontalStretch>
        <verticalStretch>true</verticalStretch>
        <fileDragMode>AsFileRef</fileDragMode>
+       <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <items xsi:type="form:FormGroup">
        <name>GroupBottom</name>
@@ -5515,10 +5516,6 @@
       <headerHorizontalAlign>Left</headerHorizontalAlign>
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
-       <handlers>
-        <event>Click</event>
-        <name>ValidationErrorsRefClick</name>
-       </handlers>
        <autoMaxWidth>true</autoMaxWidth>
        <autoMaxHeight>true</autoMaxHeight>
        <wrap>true</wrap>
@@ -5838,12 +5835,12 @@
   </userVisible>
  </autoCommandBar>
  <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <handlers>
   <event>OnOpen</event>
   <name>OnOpen</name>
+ </handlers>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
  </handlers>
  <autoSaveDataInSettings>Use</autoSaveDataInSettings>
  <saveWindowSettings>true</saveWindowSettings>

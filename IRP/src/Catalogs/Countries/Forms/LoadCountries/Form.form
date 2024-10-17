@@ -287,18 +287,18 @@
    <segments>CountryList</segments>
   </dataPath>
   <titleLocation>None</titleLocation>
-  <excludedCommands>EndEdit</excludedCommands>
-  <excludedCommands>ShowMultipleSelection</excludedCommands>
+  <excludedCommands>Add</excludedCommands>
   <excludedCommands>Change</excludedCommands>
+  <excludedCommands>Copy</excludedCommands>
   <excludedCommands>CopyToClipboard</excludedCommands>
+  <excludedCommands>Delete</excludedCommands>
+  <excludedCommands>EndEdit</excludedCommands>
   <excludedCommands>FindByCurrentValue</excludedCommands>
   <excludedCommands>SearchEverywhere</excludedCommands>
-  <excludedCommands>ShowRowRearrangement</excludedCommands>
-  <excludedCommands>Add</excludedCommands>
-  <excludedCommands>Copy</excludedCommands>
-  <excludedCommands>SelectAll</excludedCommands>
   <excludedCommands>SearchHistory</excludedCommands>
-  <excludedCommands>Delete</excludedCommands>
+  <excludedCommands>SelectAll</excludedCommands>
+  <excludedCommands>ShowMultipleSelection</excludedCommands>
+  <excludedCommands>ShowRowRearrangement</excludedCommands>
   <items xsi:type="form:FormField">
    <name>CountryListExists</name>
    <id>14</id>

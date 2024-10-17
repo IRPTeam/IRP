@@ -59,8 +59,8 @@
  <defaultChoiceForm>Document.ExternalAccountingOperation.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
- <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
+ <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="c1376c16-89e2-44bc-bab5-a93a2041351a">
@@ -110,6 +110,34 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
   <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1aebbf5f-fed3-48ae-935b-4bfd27821dbc">
+  <name>RecorderURL</name>
+  <synonym>
+   <key>en</key>
+   <value>Recorder URL</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>URL регистратора </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Recorder URL</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
@@ -2437,4 +2465,19 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
+ <templates uuid="545b6b97-400a-44c4-a5fe-d9099f8192e6">
+  <name>EntryTemplate</name>
+  <synonym>
+   <key>en</key>
+   <value>Entry template</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон записи </value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Entry template</value>
+  </synonym>
+ </templates>
 </mdclass:Document>

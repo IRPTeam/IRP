@@ -34,6 +34,7 @@
   <types>CatalogRef.CancelReturnReasons</types>
   <types>DocumentRef.SalesReturnOrder</types>
   <types>DocumentRef.AdditionalRevenueAllocation</types>
+  <types>DocumentRef.ExternalAccountingOperation</types>
   <types>DocumentRef.CashPayment</types>
   <types>DocumentRef.AdditionalDeduction</types>
   <types>CatalogRef.SpecialOfferRules</types>
@@ -51,6 +52,7 @@
   <types>DocumentRef.BankReceipt</types>
   <types>CatalogRef.UserGroups</types>
   <types>DocumentRef.PurchaseReturn</types>
+  <types>CatalogRef.TaxExemptionReasons</types>
   <types>DocumentRef.DebitCreditNote</types>
   <types>DocumentRef.CommissioningOfFixedAsset</types>
   <types>DocumentRef.RetailShipmentConfirmation</types>
@@ -156,6 +158,7 @@
   <types>CatalogRef.ItemKeys</types>
   <types>CatalogRef.ItemTypes</types>
   <types>DocumentRef.ReconciliationStatement</types>
+  <types>CatalogRef.ExtDimensions</types>
   <types>DocumentRef.VisitorCounter</types>
   <types>DocumentRef.EmployeeFiring</types>
   <types>DocumentRef.GoodsReceipt</types>
@@ -168,8 +171,5 @@
   <types>DocumentRef.RetailGoodsReceipt</types>
   <types>DocumentRef.CashExpense</types>
   <types>CatalogRef.FixedAssetsLedgerTypes</types>
-  <types>CatalogRef.ExtDimensions</types>
-  <types>DocumentRef.ExternalAccountingOperation</types>
-  <types>CatalogRef.TaxExemptionReasons</types>
  </type>
 </mdclass:DefinedType>

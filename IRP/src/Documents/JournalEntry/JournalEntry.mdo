@@ -52,7 +52,7 @@
   <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>

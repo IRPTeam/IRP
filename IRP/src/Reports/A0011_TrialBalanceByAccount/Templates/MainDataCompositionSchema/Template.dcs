@@ -2104,7 +2104,7 @@ FROM
 					<dcsset:filter/>
 					<dcsset:appearance>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
+							<dcscor:parameter>MaxWidth</dcscor:parameter>
 							<dcscor:value xsi:type="xs:decimal">20</dcscor:value>
 						</dcscor:item>
 					</dcsset:appearance>

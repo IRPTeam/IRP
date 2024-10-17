@@ -31,13 +31,10 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>InformationRegister.AddProperties</characteristicValues>
   <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
   <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
   <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <characteristics>
   <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -47,13 +44,10 @@
    <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
   </typesFilterValue>
   <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-  <multipleValuesUseField>0</multipleValuesUseField>
   <characteristicValues>Document.RevenueAccruals.TabularSection.AddAttributes</characteristicValues>
   <objectField>Document.RevenueAccruals.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.RevenueAccruals.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.RevenueAccruals.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>0</multipleValuesKeyField>
-  <multipleValuesOrderField>0</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -90,10 +84,10 @@
  <defaultListForm>Document.RevenueAccruals.Form.ListForm</defaultListForm>
  <defaultChoiceForm>Document.RevenueAccruals.Form.ChoiceForm</defaultChoiceForm>
  <realTimePosting>Deny</realTimePosting>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <attributes uuid="9b4a5276-b31a-45fe-95d4-e29919c9e790">

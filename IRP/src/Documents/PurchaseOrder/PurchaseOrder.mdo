@@ -68,7 +68,7 @@
   <objectField>Document.PurchaseOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.PurchaseOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.PurchaseOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.PurchaseOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PurchaseOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -110,6 +110,7 @@
  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
  <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
  <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
  <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
@@ -119,7 +120,6 @@
  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
  <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

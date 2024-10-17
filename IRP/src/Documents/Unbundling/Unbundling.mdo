@@ -52,7 +52,7 @@
   <objectField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -95,9 +95,9 @@
  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
  <registerRecords>InformationRegister.T6050S_ManualBundleAmountValues</registerRecords>
  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

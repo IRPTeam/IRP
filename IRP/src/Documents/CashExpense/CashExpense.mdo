@@ -68,7 +68,7 @@
   <objectField>Document.CashExpense.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.CashExpense.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.CashExpense.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.CashExpense.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.CashExpense.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -109,10 +109,10 @@
  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
  <registerRecords>AccumulationRegister.R3011T_CashFlow</registerRecords>
  <registerRecords>AccumulationRegister.R3027B_EmployeeCashAdvance</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

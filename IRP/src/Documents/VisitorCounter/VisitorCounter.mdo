@@ -36,7 +36,7 @@
   <objectField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>

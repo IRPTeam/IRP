@@ -3071,7 +3071,7 @@
     </items>
     <items xsi:type="form:FormField">
      <name>ItemListTaxExemptionReason</name>
-     <id>1505</id>
+     <id>1513</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -3082,7 +3082,7 @@
      </dataPath>
      <extendedTooltip>
       <name>ItemListTaxExemptionReasonExtendedTooltip</name>
-      <id>1507</id>
+      <id>1515</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -3097,7 +3097,7 @@
      </extendedTooltip>
      <contextMenu>
       <name>ItemListTaxExemptionReasonContextMenu</name>
-      <id>1506</id>
+      <id>1514</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -3387,6 +3387,36 @@
        </extInfo>
       </extendedTooltip>
       <commandName>Form.Command.EditQuantityInBaseUnit</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+     </items>
+     <items xsi:type="form:Button">
+      <name>ItemListSplitRow</name>
+      <id>1511</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+       <name>ItemListSplitRowExtendedTooltip</name>
+       <id>1512</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <type>Label</type>
+       <autoMaxWidth>true</autoMaxWidth>
+       <autoMaxHeight>true</autoMaxHeight>
+       <extInfo xsi:type="form:LabelDecorationExtInfo">
+        <horizontalAlign>Left</horizontalAlign>
+       </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.SplitRow</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -5195,12 +5225,12 @@
     <showInFooter>true</showInFooter>
     <extInfo xsi:type="form:InputFieldExtInfo">
      <handlers>
-      <event>StartChoice</event>
-      <name>AccountStartChoice</name>
-     </handlers>
-     <handlers>
       <event>EditTextChange</event>
       <name>AccountEditTextChange</name>
+     </handlers>
+     <handlers>
+      <event>StartChoice</event>
+      <name>AccountStartChoice</name>
      </handlers>
      <autoMaxWidth>true</autoMaxWidth>
      <autoMaxHeight>true</autoMaxHeight>
@@ -5339,6 +5369,56 @@
     <contextMenu>
      <name>ManagerSegmentContextMenu</name>
      <id>238</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
+    <name>CurrencyRevaluationInvoice</name>
+    <id>1505</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.CurrencyRevaluationInvoice</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>CurrencyRevaluationInvoiceExtendedTooltip</name>
+     <id>1507</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>CurrencyRevaluationInvoiceContextMenu</name>
+     <id>1506</id>
      <visible>true</visible>
      <enabled>true</enabled>
      <userVisible>
@@ -9521,18 +9601,6 @@
    <key>tr</key>
    <value>Satır bağlantısını kur/çöz</value>
   </toolTip>
-  <toolTip>
-   <key>en</key>
-   <value>Link/Unlink document rows</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Залинковать/разлинковать строки</value>
-  </toolTip>
-  <toolTip>
-   <key>tr</key>
-   <value>Satır bağlantısını kur/çöz</value>
-  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -9562,18 +9630,6 @@
    <value>Kaynak evrak ekle</value>
   </title>
   <id>11</id>
-  <toolTip>
-   <key>en</key>
-   <value>Add rows from linked documents</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Добавить строки из залинкованных документов</value>
-  </toolTip>
-  <toolTip>
-   <key>tr</key>
-   <value>Bağlı evraktan satırları ekle</value>
-  </toolTip>
   <toolTip>
    <key>en</key>
    <value>Add rows from linked documents</value>
@@ -9868,6 +9924,47 @@
    </handler>
   </action>
   <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>SplitRow</name>
+  <title>
+   <key>en</key>
+   <value>Split row</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Разделить строку</value>
+  </title>
+  <title>
+   <key>tr</key>
+   <value>Satırı dağıt</value>
+  </title>
+  <id>21</id>
+  <toolTip>
+   <key>en</key>
+   <value>Split current row by quantity</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Разделить текущую строку по количеству</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Mevcut satırı miktara göre dağıt</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>CommonPicture.Split</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SplitRow</name>
+   </handler>
+  </action>
   <representation>Picture</representation>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>

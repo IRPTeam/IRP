@@ -215,8 +215,8 @@
    <value>Sipariş</value>
   </synonym>
   <type>
-   <types>DocumentRef.SalesOrder</types>
    <types>DocumentRef.PurchaseOrder</types>
+   <types>DocumentRef.SalesOrder</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>

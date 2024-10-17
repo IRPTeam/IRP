@@ -59,8 +59,8 @@
   </dataPath>
   <defaultItem>true</defaultItem>
   <titleLocation>None</titleLocation>
-  <excludedCommands>Create</excludedCommands>
   <excludedCommands>Copy</excludedCommands>
+  <excludedCommands>Create</excludedCommands>
   <items xsi:type="form:FormField">
    <name>Code</name>
    <id>25</id>
@@ -557,8 +557,8 @@
   <event>OnCreateAtServer</event>
   <name>OnCreateAtServer</name>
  </handlers>
- <excludedCommands>Create</excludedCommands>
  <excludedCommands>Copy</excludedCommands>
+ <excludedCommands>Create</excludedCommands>
  <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>

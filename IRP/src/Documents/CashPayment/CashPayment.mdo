@@ -68,7 +68,7 @@
   <objectField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.CashPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.CashPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
@@ -117,6 +117,7 @@
  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
@@ -128,7 +129,6 @@
  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
  <registerRecords>AccumulationRegister.R2023B_AdvancesFromRetailCustomers</registerRecords>
  <registerRecords>AccumulationRegister.R5015B_OtherPartnersTransactions</registerRecords>
- <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
  <postInPrivilegedMode>true</postInPrivilegedMode>
  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -14,11 +14,16 @@
   <value>Sunum alanları işleme belge sunumu alanlarını alır</value>
  </synonym>
  <source>
+  <types>DocumentManager.SalesReturn</types>
   <types>DocumentManager.PurchaseOrder</types>
-  <types>DocumentManager.SalesOrder</types>
-  <types>DocumentManager.SalesInvoice</types>
-  <types>DocumentManager.CreditNote</types>
+  <types>DocumentManager.RetailReturnReceipt</types>
   <types>DocumentManager.DebitNote</types>
+  <types>DocumentManager.SalesInvoice</types>
+  <types>DocumentManager.SalesOrder</types>
+  <types>DocumentManager.PurchaseReturn</types>
+  <types>DocumentManager.PurchaseInvoice</types>
+  <types>DocumentManager.RetailSalesReceipt</types>
+  <types>DocumentManager.CreditNote</types>
  </source>
  <event>PresentationFieldsGetProcessing</event>
  <handler>CommonModule.DocumentsServer.GetDocumentPresentationFields</handler>

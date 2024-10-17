@@ -489,8 +489,8 @@
     <value>Destination</value>
    </synonym>
    <type>
-    <types>CatalogRef.Partners</types>
     <types>CatalogRef.Companies</types>
+    <types>CatalogRef.Partners</types>
     <types>CatalogRef.RetailCustomers</types>
     <types>CatalogRef.Users</types>
    </type>

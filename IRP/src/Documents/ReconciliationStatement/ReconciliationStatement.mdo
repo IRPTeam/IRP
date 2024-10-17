@@ -52,7 +52,7 @@
   <objectField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ReconciliationStatement.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.ReconciliationStatement.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

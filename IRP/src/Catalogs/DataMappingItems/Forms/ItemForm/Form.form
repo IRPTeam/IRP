@@ -635,7 +635,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ParametersTableSearchString</source>
+      <source>ParametersTable</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -674,7 +674,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ParametersTableViewStatus</source>
+      <source>ParametersTable</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -713,7 +713,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>ParametersTableSearchControl</source>
+      <source>ParametersTable</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

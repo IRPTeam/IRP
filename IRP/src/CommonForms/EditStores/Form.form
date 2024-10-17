@@ -1026,7 +1026,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ProductionTreeSearchString</source>
+      <source>ProductionTree</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1065,7 +1065,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ProductionTreeViewStatus</source>
+      <source>ProductionTree</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1104,7 +1104,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>ProductionTreeSearchControl</source>
+      <source>ProductionTree</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

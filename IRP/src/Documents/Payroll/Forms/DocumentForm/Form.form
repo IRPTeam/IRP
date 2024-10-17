@@ -1824,7 +1824,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>AccrualListSearchString</source>
+          <source>AccrualList</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1863,7 +1863,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>AccrualListViewStatus</source>
+          <source>AccrualList</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1902,7 +1902,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>AccrualListSearchControl</source>
+          <source>AccrualList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2651,7 +2651,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>DeductionListSearchString</source>
+          <source>DeductionList</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2690,7 +2690,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>DeductionListViewStatus</source>
+          <source>DeductionList</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2729,7 +2729,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>DeductionListSearchControl</source>
+          <source>DeductionList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3277,7 +3277,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>CashAdvanceDeductionListSearchString</source>
+          <source>CashAdvanceDeductionList</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3316,7 +3316,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>CashAdvanceDeductionListViewStatus</source>
+          <source>CashAdvanceDeductionList</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3355,7 +3355,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>CashAdvanceDeductionListSearchControl</source>
+          <source>CashAdvanceDeductionList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4019,7 +4019,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>SalaryTaxListSearchString</source>
+          <source>SalaryTaxList</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4058,7 +4058,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>SalaryTaxListViewStatus</source>
+          <source>SalaryTaxList</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4097,7 +4097,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>SalaryTaxListSearchControl</source>
+          <source>SalaryTaxList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

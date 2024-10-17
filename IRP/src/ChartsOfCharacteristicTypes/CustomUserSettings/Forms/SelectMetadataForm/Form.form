@@ -245,7 +245,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>MetadataObjectsTableSearchString</source>
+      <source>MetadataObjectsTable</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -284,7 +284,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>MetadataObjectsTableViewStatus</source>
+      <source>MetadataObjectsTable</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <horizontalLocation>Left</horizontalLocation>
@@ -324,7 +324,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>MetadataObjectsTableSearchControl</source>
+      <source>MetadataObjectsTable</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

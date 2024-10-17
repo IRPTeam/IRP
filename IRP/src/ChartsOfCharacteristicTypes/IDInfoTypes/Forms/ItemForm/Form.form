@@ -560,7 +560,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ExternalDataProcessSearchString</source>
+          <source>ExternalDataProcess</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -599,7 +599,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ExternalDataProcessViewStatus</source>
+          <source>ExternalDataProcess</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -639,7 +639,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ExternalDataProcessSearchControl</source>
+          <source>ExternalDataProcess</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -877,7 +877,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>RelatedValuesSearchString</source>
+          <source>RelatedValues</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -916,7 +916,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>RelatedValuesViewStatus</source>
+          <source>RelatedValues</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -956,7 +956,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>RelatedValuesSearchControl</source>
+          <source>RelatedValues</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

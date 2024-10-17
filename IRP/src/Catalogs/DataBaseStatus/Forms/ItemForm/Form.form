@@ -331,7 +331,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ConnectionSettingsSearchString</source>
+      <source>ConnectionSettings</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -370,7 +370,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ConnectionSettingsViewStatus</source>
+      <source>ConnectionSettings</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -409,7 +409,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>ConnectionSettingsSearchControl</source>
+      <source>ConnectionSettings</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

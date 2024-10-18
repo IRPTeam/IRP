@@ -2,6 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SetSourceLedgerTypeVariant();
+	SetTargetLedgerTypeVariant();
 EndProcedure
 
 &AtServer
@@ -62,6 +63,15 @@ Procedure SetSourceLedgerTypeVariant()
 		ThisObject.SourceLedgerTypeVariant = Record.SourceLedgerType.LedgerTypeVariant;
 	Else
 		ThisObject.SourceLedgerTypeVariant = Undefined;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure SetTargetLedgerTypeVariant()
+	If ValueIsFilled(Record.TargetLedgerType) Then
+		ThisObject.TargetLedgerTypeVariant = Record.TargetLedgerType.LedgerTypeVariant;		
+	Else
+		ThisObject.TargetLedgerTypeVariant = Undefined;		
 	EndIf;
 EndProcedure	
 

@@ -160,8 +160,8 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <excludedCommands>Add</excludedCommands>
-        <excludedCommands>Copy</excludedCommands>
         <excludedCommands>Change</excludedCommands>
+        <excludedCommands>Copy</excludedCommands>
         <excludedCommands>Delete</excludedCommands>
         <items xsi:type="form:FormField">
           <name>FileTablePath</name>
@@ -972,20 +972,20 @@
     <autoFill>true</autoFill>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
+    <event>OnSaveDataInSettingsAtServer</event>
+    <name>OnSaveDataInSettingsAtServer</name>
   </handlers>
   <handlers>
     <event>OnLoadDataFromSettingsAtServer</event>
     <name>OnLoadDataFromSettingsAtServer</name>
   </handlers>
   <handlers>
-    <event>BeforeLoadDataFromSettingsAtServer</event>
-    <name>BeforeLoadDataFromSettingsAtServer</name>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <handlers>
-    <event>OnSaveDataInSettingsAtServer</event>
-    <name>OnSaveDataInSettingsAtServer</name>
+    <event>BeforeLoadDataFromSettingsAtServer</event>
+    <name>BeforeLoadDataFromSettingsAtServer</name>
   </handlers>
   <autoSaveDataInSettings>Use</autoSaveDataInSettings>
   <saveDataInSettings>UseList</saveDataInSettings>

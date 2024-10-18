@@ -544,12 +544,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartListChoice</event>
-              <name>AgreementStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>AgreementEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartListChoice</event>
+              <name>AgreementStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>

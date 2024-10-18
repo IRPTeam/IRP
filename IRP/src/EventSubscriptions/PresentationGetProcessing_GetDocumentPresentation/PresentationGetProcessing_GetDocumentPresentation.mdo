@@ -6,15 +6,15 @@
     <value>Presentation get processing get document presentation</value>
   </synonym>
   <source>
-    <types>DocumentManager.SalesOrder</types>
+    <types>DocumentManager.SalesReturn</types>
     <types>DocumentManager.PurchaseOrder</types>
-    <types>DocumentManager.CreditNote</types>
     <types>DocumentManager.DebitNote</types>
     <types>DocumentManager.SalesInvoice</types>
-    <types>DocumentManager.PurchaseInvoice</types>
+    <types>DocumentManager.SalesOrder</types>
     <types>DocumentManager.PurchaseReturn</types>
-    <types>DocumentManager.SalesReturn</types>
+    <types>DocumentManager.PurchaseInvoice</types>
     <types>DocumentManager.RetailSalesReceipt</types>
+    <types>DocumentManager.CreditNote</types>
   </source>
   <event>PresentationGetProcessing</event>
   <handler>CommonModule.DocumentsServer.GetDocumentPresentation</handler>

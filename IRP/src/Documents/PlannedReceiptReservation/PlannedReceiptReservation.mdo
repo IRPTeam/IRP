@@ -44,7 +44,7 @@
     <objectField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.PlannedReceiptReservation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -70,9 +70,9 @@
   <registerRecords>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_RowIDSerialLotNumbers</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
-  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="556915ac-9e34-4e26-b038-191cf09a89a6">

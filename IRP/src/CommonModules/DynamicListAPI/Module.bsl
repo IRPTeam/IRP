@@ -113,6 +113,16 @@ Procedure AddFilter(QuerySchemaAPI, Filter) Export
 	Operator.Filter.Add(Filter);
 EndProcedure
 
+// Clear filter.
+// 
+// Parameters:
+//  QuerySchemaAPI - See Get
+Procedure ClearFilter(QuerySchemaAPI) Export
+	QueryBatch = QuerySchemaAPI.QuerySchema.QueryBatch[QuerySchemaAPI.QuerySchema.QueryBatch.Count() - 1];
+	Operator = QueryBatch.Operators[QueryBatch.Operators.Count() - 1];
+	Operator.Filter.Clear();
+EndProcedure
+
 // Add appearance.
 // 
 // Parameters:

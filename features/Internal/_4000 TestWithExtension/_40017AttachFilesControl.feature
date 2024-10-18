@@ -103,7 +103,7 @@ Scenario: _4001701 preparation (Attach Files Control)
 			And I click "Ok" button
 		*ABrown
 			And I go to line in "List" table
-				| 'Login'                     |
+				| 'Description'               |
 				| 'Arina Brown (Financier 3)' |
 			And I click "Settings" button
 			And I go to line in "MetadataTree" table

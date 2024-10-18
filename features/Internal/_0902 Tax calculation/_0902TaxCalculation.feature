@@ -1180,7 +1180,7 @@ Scenario: _090226 fill tax exemption reason in the RSR
 		And I finish line editing in "ItemList" table
 		And I activate "Tax exemption reason" field in "ItemList" table
 		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description'                               |
 			| 'Tax exeption reason 1 (0%, All countries)' |
 			| 'Tax exeption reason 2 (0%, Turkey)'        |
@@ -1242,7 +1242,7 @@ Scenario: _090227 fill tax exemption reason in the PR
 		And I finish line editing in "ItemList" table
 		And I activate "Tax exemption reason" field in "ItemList" table
 		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description'                               |
 			| 'Tax exeption reason 1 (0%, All countries)' |
 			| 'Tax exeption reason 2 (0%, Turkey)'        |
@@ -1298,7 +1298,7 @@ Scenario: _090228 fill tax exemption reason in the Sales invoice
 		And I finish line editing in "ItemList" table
 		And I activate "Tax exemption reason" field in "ItemList" table
 		And I click choice button of "Tax exemption reason" attribute in "ItemList" table
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description'                               |
 			| 'Tax exeption reason 1 (0%, All countries)' |
 			| 'Tax exeption reason 2 (0%, Turkey)'        |

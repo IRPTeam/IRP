@@ -2323,7 +2323,7 @@ EndProcedure
 Procedure PostponeCurrentReceiptAtServer(WithReserve)
 	
 	If Not ThisObject.isReturn Then
-		ObjectValue = FormAttributeToValue("Object");
+		ObjectValue = FormAttributeToValue("Object"); // DocumentObject.RetailSalesReceipt
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Workstation = Workstation;
 		
@@ -2332,6 +2332,7 @@ Procedure PostponeCurrentReceiptAtServer(WithReserve)
 		Else
 			ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Postponed;
 		EndIf;
+		
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
 		ObjectValue.Write(DocumentWriteMode.Posting);

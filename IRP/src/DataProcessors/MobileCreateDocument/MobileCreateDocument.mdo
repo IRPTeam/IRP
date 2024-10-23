@@ -108,11 +108,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Ед. изм.</value>
+    <value>Unit</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Birim</value>
+    <value>Unit</value>
    </synonym>
    <type>
     <types>CatalogRef.Units</types>
@@ -129,7 +129,7 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество</value>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>tr</key>

@@ -2502,7 +2502,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>RegisterRecordsSearchString</source>
+     <source>RegisterRecords</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2541,7 +2541,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>RegisterRecordsViewStatus</source>
+     <source>RegisterRecords</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2580,7 +2580,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>RegisterRecordsSearchControl</source>
+     <source>RegisterRecords</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2838,7 +2838,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>ErrorsSearchString</source>
+     <source>Errors</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2877,7 +2877,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>ErrorsViewStatus</source>
+     <source>Errors</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2916,7 +2916,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>ErrorsSearchControl</source>
+     <source>Errors</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

@@ -1578,7 +1578,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>ProductionsSearchString</source>
+     <source>Productions</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1617,7 +1617,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>ProductionsViewStatus</source>
+     <source>Productions</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1656,7 +1656,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>ProductionsSearchControl</source>
+     <source>Productions</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3023,7 +3023,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>BillOfMaterialsSearchString</source>
+     <source>BillOfMaterials</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3062,7 +3062,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>BillOfMaterialsViewStatus</source>
+     <source>BillOfMaterials</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3101,7 +3101,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>BillOfMaterialsSearchControl</source>
+     <source>BillOfMaterials</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

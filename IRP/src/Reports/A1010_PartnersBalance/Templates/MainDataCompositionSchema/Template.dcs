@@ -1170,11 +1170,11 @@
 				</v8:item>
 				<v8:item>
 					<v8:lang>ru</v8:lang>
-					<v8:content>Итого</v8:content>
+					<v8:content>Total</v8:content>
 				</v8:item>
 				<v8:item>
 					<v8:lang>tr</v8:lang>
-					<v8:content>Toplam</v8:content>
+					<v8:content>Total</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -1604,11 +1604,11 @@ FROM
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Итого</v8:content>
+							<v8:content>Total</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam</v8:content>
+							<v8:content>Total</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">
@@ -1984,11 +1984,11 @@ FROM
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Итого</v8:content>
+							<v8:content>Total</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam</v8:content>
+							<v8:content>Total</v8:content>
 						</v8:item>
 					</dcsset:lwsTitle>
 					<dcsset:item xsi:type="dcsset:SelectedItemField">

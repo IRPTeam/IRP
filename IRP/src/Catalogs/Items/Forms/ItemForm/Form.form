@@ -516,7 +516,7 @@
      </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
-    <source>DetailsTreeSearchString</source>
+    <source>DetailsTree</source>
     <extInfo xsi:type="form:SearchStringAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -555,7 +555,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
-    <source>DetailsTreeViewStatus</source>
+    <source>DetailsTree</source>
     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -594,7 +594,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>SearchControlAddition</type>
-    <source>DetailsTreeSearchControl</source>
+    <source>DetailsTree</source>
     <extInfo xsi:type="form:SearchControlAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -1905,7 +1905,7 @@
          </userVisible>
          <autoFill>true</autoFill>
         </contextMenu>
-        <source>ConsignorsInfoSearchString</source>
+        <source>ConsignorsInfo</source>
         <extInfo xsi:type="form:SearchStringAdditionExtInfo">
          <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -1944,7 +1944,7 @@
          <autoFill>true</autoFill>
         </contextMenu>
         <type>ViewStatusAddition</type>
-        <source>ConsignorsInfoViewStatus</source>
+        <source>ConsignorsInfo</source>
         <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
          <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -1983,7 +1983,7 @@
          <autoFill>true</autoFill>
         </contextMenu>
         <type>SearchControlAddition</type>
-        <source>ConsignorsInfoSearchControl</source>
+        <source>ConsignorsInfo</source>
         <extInfo xsi:type="form:SearchControlAdditionExtInfo">
          <autoMaxWidth>true</autoMaxWidth>
         </extInfo>
@@ -2749,11 +2749,11 @@
    </title>
    <title>
     <key>ru</key>
-    <value>Описание</value>
+    <value>Description</value>
    </title>
    <title>
     <key>tr</key>
-    <value>Tanım</value>
+    <value>Description</value>
    </title>
    <id>7</id>
    <valueType/>

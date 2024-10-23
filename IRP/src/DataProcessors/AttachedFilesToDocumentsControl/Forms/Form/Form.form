@@ -1403,7 +1403,7 @@
        </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
-      <source>DocumentListSearchString</source>
+      <source>DocumentList</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
        <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1456,7 +1456,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>DocumentListSearchString</source>
+     <source>DocumentList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1495,7 +1495,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>DocumentListViewStatus</source>
+     <source>DocumentList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1534,7 +1534,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>DocumentListSearchControl</source>
+     <source>DocumentList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1801,7 +1801,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>DocumentsAttachedFilesSearchString</source>
+     <source>DocumentsAttachedFiles</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1840,7 +1840,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>DocumentsAttachedFilesViewStatus</source>
+     <source>DocumentsAttachedFiles</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1879,7 +1879,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>DocumentsAttachedFilesSearchControl</source>
+     <source>DocumentsAttachedFiles</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2338,7 +2338,7 @@
        </userVisible>
        <autoFill>true</autoFill>
       </contextMenu>
-      <source>CurrentFilesTableSearchString</source>
+      <source>CurrentFilesTable</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
        <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -2377,7 +2377,7 @@
        <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>CurrentFilesTableViewStatus</source>
+      <source>CurrentFilesTable</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
        <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -2416,7 +2416,7 @@
        <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>CurrentFilesTableSearchControl</source>
+      <source>CurrentFilesTable</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
        <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -2703,7 +2703,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>ViewStatusAddition</type>
-       <source>PDFViewerViewStatus</source>
+       <source>PDFViewer</source>
        <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>

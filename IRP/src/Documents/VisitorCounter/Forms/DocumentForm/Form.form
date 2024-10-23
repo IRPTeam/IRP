@@ -922,7 +922,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>CounterDataSearchString</source>
+     <source>CounterData</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -961,7 +961,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>CounterDataViewStatus</source>
+     <source>CounterData</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1000,7 +1000,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>CounterDataSearchControl</source>
+     <source>CounterData</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

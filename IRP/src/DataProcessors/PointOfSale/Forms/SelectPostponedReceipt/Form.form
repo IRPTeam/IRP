@@ -771,7 +771,7 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <source>ReceiptsSearchString</source>
+   <source>Receipts</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -810,7 +810,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
-   <source>ReceiptsViewStatus</source>
+   <source>Receipts</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -849,7 +849,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
-   <source>ReceiptsSearchControl</source>
+   <source>Receipts</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1395,7 +1395,7 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <source>ItemListSearchString</source>
+   <source>ItemList</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1434,7 +1434,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
-   <source>ItemListViewStatus</source>
+   <source>ItemList</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1473,7 +1473,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
-   <source>ItemListSearchControl</source>
+   <source>ItemList</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -1849,7 +1849,7 @@ WHERE
    </title>
    <title>
     <key>tr</key>
-    <value>Birim</value>
+    <value>Unit</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1874,7 +1874,7 @@ WHERE
    </title>
    <title>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </title>
    <id>6</id>
    <valueType>

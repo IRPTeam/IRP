@@ -3323,7 +3323,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>ItemListSearchString</source>
+     <source>ItemList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3362,7 +3362,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>ItemListViewStatus</source>
+     <source>ItemList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
       <horizontalLocation>Left</horizontalLocation>
@@ -3402,7 +3402,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>ItemListSearchControl</source>
+     <source>ItemList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3775,7 +3775,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>SpecialOffersSearchString</source>
+     <source>SpecialOffers</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3814,7 +3814,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>SpecialOffersViewStatus</source>
+     <source>SpecialOffers</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -3853,7 +3853,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>SpecialOffersSearchControl</source>
+     <source>SpecialOffers</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -4645,7 +4645,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>SourceOfOriginsSearchString</source>
+     <source>SourceOfOrigins</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -4684,7 +4684,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>SourceOfOriginsViewStatus</source>
+     <source>SourceOfOrigins</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -4723,7 +4723,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>SourceOfOriginsSearchControl</source>
+     <source>SourceOfOrigins</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -5417,7 +5417,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>RowIDInfoSearchString</source>
+     <source>RowIDInfo</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -5456,7 +5456,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>RowIDInfoViewStatus</source>
+     <source>RowIDInfo</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -5495,7 +5495,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>RowIDInfoSearchControl</source>
+     <source>RowIDInfo</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

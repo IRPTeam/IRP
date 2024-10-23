@@ -644,7 +644,7 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <source>BusinessUnitsSearchString</source>
+   <source>BusinessUnits</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -683,7 +683,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
-   <source>BusinessUnitsViewStatus</source>
+   <source>BusinessUnits</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -722,7 +722,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
-   <source>BusinessUnitsSearchControl</source>
+   <source>BusinessUnits</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>

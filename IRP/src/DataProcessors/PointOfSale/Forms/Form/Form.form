@@ -1669,7 +1669,7 @@
             </userVisible>
             <autoFill>true</autoFill>
            </contextMenu>
-           <source>ItemListSearchString</source>
+           <source>ItemList</source>
            <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
            </extInfo>
@@ -1708,7 +1708,7 @@
             <autoFill>true</autoFill>
            </contextMenu>
            <type>ViewStatusAddition</type>
-           <source>ItemListViewStatus</source>
+           <source>ItemList</source>
            <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1748,7 +1748,7 @@
             <autoFill>true</autoFill>
            </contextMenu>
            <type>SearchControlAddition</type>
-           <source>ItemListSearchControl</source>
+           <source>ItemList</source>
            <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
            </extInfo>
@@ -3813,7 +3813,7 @@
           </userVisible>
           <autoFill>true</autoFill>
          </contextMenu>
-         <source>BasisPaymentsSearchString</source>
+         <source>BasisPayments</source>
          <extInfo xsi:type="form:SearchStringAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -3852,7 +3852,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>ViewStatusAddition</type>
-         <source>BasisPaymentsViewStatus</source>
+         <source>BasisPayments</source>
          <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -3891,7 +3891,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>SearchControlAddition</type>
-         <source>BasisPaymentsSearchControl</source>
+         <source>BasisPayments</source>
          <extInfo xsi:type="form:SearchControlAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -4204,7 +4204,7 @@
           </userVisible>
           <autoFill>true</autoFill>
          </contextMenu>
-         <source>ItemsPickupSearchString</source>
+         <source>ItemsPickup</source>
          <extInfo xsi:type="form:SearchStringAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <horizontalStretch>true</horizontalStretch>
@@ -4250,7 +4250,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>ViewStatusAddition</type>
-         <source>ItemsPickupViewStatus</source>
+         <source>ItemsPickup</source>
          <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
           <horizontalLocation>Left</horizontalLocation>
@@ -4290,7 +4290,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>SearchControlAddition</type>
-         <source>ItemsPickupSearchControl</source>
+         <source>ItemsPickup</source>
          <extInfo xsi:type="form:SearchControlAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -5309,7 +5309,7 @@
           </userVisible>
           <autoFill>true</autoFill>
          </contextMenu>
-         <source>SpecialOffersSearchString</source>
+         <source>SpecialOffers</source>
          <extInfo xsi:type="form:SearchStringAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -5348,7 +5348,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>ViewStatusAddition</type>
-         <source>SpecialOffersViewStatus</source>
+         <source>SpecialOffers</source>
          <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -5387,7 +5387,7 @@
           <autoFill>true</autoFill>
          </contextMenu>
          <type>SearchControlAddition</type>
-         <source>SpecialOffersSearchControl</source>
+         <source>SpecialOffers</source>
          <extInfo xsi:type="form:SearchControlAdditionExtInfo">
           <autoMaxWidth>true</autoMaxWidth>
          </extInfo>
@@ -6691,7 +6691,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>CashInListSearchString</source>
+     <source>CashInList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -6730,7 +6730,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>CashInListViewStatus</source>
+     <source>CashInList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -6769,7 +6769,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>CashInListSearchControl</source>
+     <source>CashInList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

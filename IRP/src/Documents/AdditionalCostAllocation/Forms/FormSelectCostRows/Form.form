@@ -556,7 +556,7 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <source>CostRowsTreeSearchString</source>
+   <source>CostRowsTree</source>
    <extInfo xsi:type="form:SearchStringAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -595,7 +595,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>ViewStatusAddition</type>
-   <source>CostRowsTreeViewStatus</source>
+   <source>CostRowsTree</source>
    <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>
@@ -634,7 +634,7 @@
     <autoFill>true</autoFill>
    </contextMenu>
    <type>SearchControlAddition</type>
-   <source>CostRowsTreeSearchControl</source>
+   <source>CostRowsTree</source>
    <extInfo xsi:type="form:SearchControlAdditionExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
    </extInfo>

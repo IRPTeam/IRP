@@ -1297,7 +1297,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>CalculationsSearchString</source>
+     <source>Calculations</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1336,7 +1336,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>CalculationsViewStatus</source>
+     <source>Calculations</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1375,7 +1375,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>CalculationsSearchControl</source>
+     <source>Calculations</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

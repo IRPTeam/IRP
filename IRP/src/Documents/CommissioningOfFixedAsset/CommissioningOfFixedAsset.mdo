@@ -378,7 +378,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Birim</value>
+    <value>Unit</value>
    </synonym>
    <type>
     <types>CatalogRef.Units</types>
@@ -400,11 +400,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество</value>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -614,11 +614,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество</value>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -725,7 +725,7 @@
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>

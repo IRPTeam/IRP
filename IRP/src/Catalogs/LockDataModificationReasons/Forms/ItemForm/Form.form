@@ -1154,7 +1154,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>RuleListSearchString</source>
+     <source>RuleList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1193,7 +1193,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>RuleListViewStatus</source>
+     <source>RuleList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1232,7 +1232,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>RuleListSearchControl</source>
+     <source>RuleList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1379,7 +1379,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>SettingsFilterSearchString</source>
+     <source>SettingsFilter</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1418,7 +1418,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>SettingsFilterViewStatus</source>
+     <source>SettingsFilter</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1457,7 +1457,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>SettingsFilterSearchControl</source>
+     <source>SettingsFilter</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1754,7 +1754,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>UserListSearchString</source>
+     <source>UserList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1793,7 +1793,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>UserListViewStatus</source>
+     <source>UserList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1832,7 +1832,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>UserListSearchControl</source>
+     <source>UserList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2079,7 +2079,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>AccessGroupListSearchString</source>
+     <source>AccessGroupList</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2118,7 +2118,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>AccessGroupListViewStatus</source>
+     <source>AccessGroupList</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2157,7 +2157,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>AccessGroupListSearchControl</source>
+     <source>AccessGroupList</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2434,7 +2434,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>ResponsibleUsersSearchString</source>
+     <source>ResponsibleUsers</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2473,7 +2473,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>ResponsibleUsersViewStatus</source>
+     <source>ResponsibleUsers</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2512,7 +2512,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>ResponsibleUsersSearchControl</source>
+     <source>ResponsibleUsers</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

@@ -471,7 +471,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>RefersToObjectsSearchString</source>
+     <source>RefersToObjects</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -510,7 +510,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>RefersToObjectsViewStatus</source>
+     <source>RefersToObjects</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
       <horizontalLocation>Left</horizontalLocation>
@@ -550,7 +550,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>RefersToObjectsSearchControl</source>
+     <source>RefersToObjects</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

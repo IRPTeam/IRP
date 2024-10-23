@@ -1268,7 +1268,7 @@
         </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
-       <source>TaxesIncomingSearchString</source>
+       <source>TaxesIncoming</source>
        <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -1307,7 +1307,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>ViewStatusAddition</type>
-       <source>TaxesIncomingViewStatus</source>
+       <source>TaxesIncoming</source>
        <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -1346,7 +1346,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>SearchControlAddition</type>
-       <source>TaxesIncomingSearchControl</source>
+       <source>TaxesIncoming</source>
        <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -1795,7 +1795,7 @@
         </userVisible>
         <autoFill>true</autoFill>
        </contextMenu>
-       <source>TaxesOutgoingSearchString</source>
+       <source>TaxesOutgoing</source>
        <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -1834,7 +1834,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>ViewStatusAddition</type>
-       <source>TaxesOutgoingViewStatus</source>
+       <source>TaxesOutgoing</source>
        <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -1873,7 +1873,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>SearchControlAddition</type>
-       <source>TaxesOutgoingSearchControl</source>
+       <source>TaxesOutgoing</source>
        <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -2481,7 +2481,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>TaxesDifferenceSearchString</source>
+     <source>TaxesDifference</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2520,7 +2520,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>TaxesDifferenceViewStatus</source>
+     <source>TaxesDifference</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -2559,7 +2559,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>TaxesDifferenceSearchControl</source>
+     <source>TaxesDifference</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

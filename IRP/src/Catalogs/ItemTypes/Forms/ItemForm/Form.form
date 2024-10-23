@@ -848,7 +848,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>AvailableAttributesSearchString</source>
+     <source>AvailableAttributes</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -887,7 +887,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>AvailableAttributesViewStatus</source>
+     <source>AvailableAttributes</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
       <horizontalLocation>Left</horizontalLocation>
@@ -927,7 +927,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>AvailableAttributesSearchControl</source>
+     <source>AvailableAttributes</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1343,7 +1343,7 @@
       </userVisible>
       <autoFill>true</autoFill>
      </contextMenu>
-     <source>RegExpSerialLotNumbersRulesSearchString</source>
+     <source>RegExpSerialLotNumbersRules</source>
      <extInfo xsi:type="form:SearchStringAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1382,7 +1382,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>RegExpSerialLotNumbersRulesViewStatus</source>
+     <source>RegExpSerialLotNumbersRules</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1421,7 +1421,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>SearchControlAddition</type>
-     <source>RegExpSerialLotNumbersRulesSearchControl</source>
+     <source>RegExpSerialLotNumbersRules</source>
      <extInfo xsi:type="form:SearchControlAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>

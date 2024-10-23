@@ -1194,11 +1194,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество</value>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -1301,11 +1301,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Количество</value>
+    <value>Quantity</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Miktar</value>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>

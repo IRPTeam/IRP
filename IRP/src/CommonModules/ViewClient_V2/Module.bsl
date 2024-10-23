@@ -233,6 +233,9 @@ Procedure OnChainComplete(Parameters) Export
 			TaxesClientServer.LoadChoiceList(Parameters.Form, Parameters.TaxChoiceList);
 		EndIf;
 	EndIf;
+	If Parameters.TaxExemptionReasonVisible <> Undefined Then
+		TaxesClientServer.ChangeTaxExemptionReasonVisible(Parameters.Form, Parameters.TaxExemptionReasonVisible);
+	EndIf;
 	
 	If Parameters.PartnerChoiceList <> Undefined Then
 		CommonFunctionsClientServer.LoadFormItemChoiceList(Parameters.Form, "Partner", Parameters.PartnerChoiceList);
@@ -2226,6 +2229,7 @@ Async Procedure ItemListSplitRow(Object, Form) Export
 		Return;
 	EndIf;
 	
+	CurrentAmount = CurrentData.TotalAmount;
 	CurrentQuantity = CurrentData.Quantity;
 	If CurrentQuantity = 0 Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().Form_041);
@@ -2300,6 +2304,11 @@ Async Procedure ItemListSplitRow(Object, Form) Export
 	
 	ItemListQuantityOnChange(Object, Form, CurrentData);
 	ItemListQuantityOnChange(Object, Form, NewRow);
+	
+	If Not NewRow.TotalAmount + CurrentData.TotalAmount = CurrentAmount Then
+		NewRow.TotalAmount = CurrentAmount - CurrentData.TotalAmount;
+		ItemListTotalAmountOnChange(Object, Form, NewRow);
+	EndIf;
 	
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);

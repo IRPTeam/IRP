@@ -49,7 +49,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Miktar</value>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>Number</types>

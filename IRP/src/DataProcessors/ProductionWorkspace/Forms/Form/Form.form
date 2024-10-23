@@ -588,7 +588,7 @@
      </userVisible>
      <autoFill>true</autoFill>
     </contextMenu>
-    <source>PlanningPresentationSearchString</source>
+    <source>PlanningPresentation</source>
     <extInfo xsi:type="form:SearchStringAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -627,7 +627,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
-    <source>PlanningPresentationViewStatus</source>
+    <source>PlanningPresentation</source>
     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -666,7 +666,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>SearchControlAddition</type>
-    <source>PlanningPresentationSearchControl</source>
+    <source>PlanningPresentation</source>
     <extInfo xsi:type="form:SearchControlAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>

@@ -199,7 +199,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Birim</value>
+   <value>Unit</value>
   </synonym>
   <type>
    <types>CatalogRef.Units</types>

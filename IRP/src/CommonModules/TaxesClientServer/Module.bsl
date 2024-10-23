@@ -28,6 +28,18 @@ Procedure ChangeVsible(Form, Visible) Export
 	EndDo;
 EndProcedure
 
+Procedure ChangeTaxExemptionReasonVisible(Form, Visible) Export
+	_arrayOfFormItems = New Array();
+	
+	_arrayOfFormItems.Add("TransactionsTaxExemptionReason");
+	
+	For Each _item In _arrayOfFormItems Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Form.Items, _item) Then
+			Form.Items[_item].Visible = Visible;
+		EndIf;
+	EndDo;
+EndProcedure
+
 Procedure LoadChoiceList(Form, ChoiceList) Export
 	LoadChoiceList_VatRate(Form, ChoiceList, "ItemListVATRate");
 	LoadChoiceList_VatRate(Form, ChoiceList, "PaymentListVATRate");

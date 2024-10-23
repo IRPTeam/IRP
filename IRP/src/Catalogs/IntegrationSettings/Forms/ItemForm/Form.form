@@ -700,7 +700,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ConnectionSettingSearchString</source>
+          <source>ConnectionSetting</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -739,7 +739,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ConnectionSettingViewStatus</source>
+          <source>ConnectionSetting</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -779,7 +779,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ConnectionSettingSearchControl</source>
+          <source>ConnectionSetting</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1205,7 +1205,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ConnectionSettingTestSearchString</source>
+          <source>ConnectionSettingTest</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1244,7 +1244,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ConnectionSettingTestViewStatus</source>
+          <source>ConnectionSettingTest</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1283,7 +1283,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ConnectionSettingTestSearchControl</source>
+          <source>ConnectionSettingTest</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

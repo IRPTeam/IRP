@@ -1201,7 +1201,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>CostRowsSearchString</source>
+            <source>CostRows</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1240,7 +1240,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>CostRowsViewStatus</source>
+            <source>CostRows</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1279,7 +1279,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>CostRowsSearchControl</source>
+            <source>CostRows</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1861,7 +1861,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>AllocationRowsSearchString</source>
+            <source>AllocationRows</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1900,7 +1900,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>AllocationRowsViewStatus</source>
+            <source>AllocationRows</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1939,7 +1939,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>AllocationRowsSearchControl</source>
+            <source>AllocationRows</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2406,7 +2406,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>CostDocumentsSearchString</source>
+            <source>CostDocuments</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2445,7 +2445,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>CostDocumentsViewStatus</source>
+            <source>CostDocuments</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2484,7 +2484,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>CostDocumentsSearchControl</source>
+            <source>CostDocuments</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2697,7 +2697,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>AllocationDocumentsSearchString</source>
+            <source>AllocationDocuments</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2736,7 +2736,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>AllocationDocumentsViewStatus</source>
+            <source>AllocationDocuments</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2775,7 +2775,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>AllocationDocumentsSearchControl</source>
+            <source>AllocationDocuments</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -3776,7 +3776,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>AllocationResultSearchString</source>
+          <source>AllocationResult</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3815,7 +3815,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>AllocationResultViewStatus</source>
+          <source>AllocationResult</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -3854,7 +3854,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>AllocationResultSearchControl</source>
+          <source>AllocationResult</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -4584,7 +4584,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>CostListSearchString</source>
+            <source>CostList</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -4623,7 +4623,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>CostListViewStatus</source>
+            <source>CostList</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -4662,7 +4662,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>CostListSearchControl</source>
+            <source>CostList</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -5212,7 +5212,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>AllocationListSearchString</source>
+            <source>AllocationList</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -5251,7 +5251,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>AllocationListViewStatus</source>
+            <source>AllocationList</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -5290,7 +5290,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>AllocationListSearchControl</source>
+            <source>AllocationList</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>

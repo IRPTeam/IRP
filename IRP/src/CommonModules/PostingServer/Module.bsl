@@ -102,10 +102,10 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("PostingDataTables", New Map);
 	Parameters.Insert("Messages", New Array);
 	
-	If DocObject.Metadata().Attributes.Find("ManualMovementsEdit") = Undefined Then
-		Parameters.Insert("ManualMovementsEdit", False);		
-	Else
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ManualMovementsEdit", DocObject.Metadata()) Then
 		Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Else
+		Parameters.Insert("ManualMovementsEdit", False);		
 	EndIf;
 	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName

@@ -9,7 +9,7 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	
-	If DocObject.ManualMovementsEdit Then
+	If DocObject.Metadata().Attributes.Find("ManualMovementsEdit") <> Undefined And DocObject.ManualMovementsEdit Then
 		Cancel = True;
 		TextMessage = R().Error_147;
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);

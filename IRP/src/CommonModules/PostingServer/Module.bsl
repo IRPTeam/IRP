@@ -100,8 +100,13 @@ Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
 	Parameters.Insert("DocumentDataTables", New Structure);
 	Parameters.Insert("LockDataSources", New Map);
 	Parameters.Insert("PostingDataTables", New Map);
-	Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
 	Parameters.Insert("Messages", New Array);
+	
+	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ManualMovementsEdit", DocObject.Metadata()) Then
+		Parameters.Insert("ManualMovementsEdit", DocObject.ManualMovementsEdit);
+	Else
+		Parameters.Insert("ManualMovementsEdit", False);		
+	EndIf;
 	
 	Module = Documents[Parameters.Metadata.Name]; // DocumentManager.SalesOrder, DocumentManagerDocumentName
 	Parameters.Insert("Module", Module);

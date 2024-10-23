@@ -8,7 +8,7 @@
   <type>
     <types>String</types>
     <stringQualifiers>
-      <length>20</length>
+      <length>150</length>
     </stringQualifiers>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>

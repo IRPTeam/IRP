@@ -48,9 +48,11 @@ Scenario: _900103 check transaction types in the SO and SI (FO Use retail orders
 		And I click "Create" button
 		And I click Select button of "Transaction type" field
 		And drop-down list named "TransactionType" is equal to:
-			| Sales                      |
-			| Shipment to trade agent    |
-			| Retail sales               |
+			| Sales                         |
+			| Shipment to trade agent       |
+			| Retail sales                  |
+			| Currency revaluation customer |
+			| Currency revaluation vendor   |
 		And I close all client application windows
 
 Scenario: _900104 check transaction types in the SO and SI (FO Use commission trading)
@@ -70,8 +72,10 @@ Scenario: _900104 check transaction types in the SO and SI (FO Use commission tr
 		And I click "Create" button
 		And I click Select button of "Transaction type" field
 		And drop-down list named "TransactionType" is equal to:
-			| Sales                      |
-			| Shipment to trade agent    |
+			| Sales                         |
+			| Shipment to trade agent       |
+			| Currency revaluation customer |
+			| Currency revaluation vendor   |
 		And I close all client application windows
 
 Scenario: _900105 check transaction types in the SO and SI (without FO Use commission trading and Use retail orders)

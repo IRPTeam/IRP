@@ -93,6 +93,7 @@ EndFunction
 
 Function GetPayrolls_Deduction(Parameters) Export
 	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("CalculationType");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
 	ResultTable.Columns.Add("ProfitLossCenter");
@@ -106,29 +107,31 @@ Function GetPayrolls_Deduction(Parameters) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R9570T_AdditionalDeductionTurnovers.Employee,
-	|	R9570T_AdditionalDeductionTurnovers.Position,
-	|	R9570T_AdditionalDeductionTurnovers.DeductionType,
-	|	R9570T_AdditionalDeductionTurnovers.ExpenseType,
-	|	R9570T_AdditionalDeductionTurnovers.ProfitLossCenter,
-	|	R9570T_AdditionalDeductionTurnovers.AmountTurnover AS Amount
+	|	R9570T_AdditionalDeductionTurnovers.Employee AS Employee,
+	|	R9570T_AdditionalDeductionTurnovers.Position AS Position,
+	|	R9570T_AdditionalDeductionTurnovers.DeductionType AS DeductionType,
+	|	R9570T_AdditionalDeductionTurnovers.ExpenseType AS ExpenseType,
+	|	R9570T_AdditionalDeductionTurnovers.ProfitLossCenter AS ProfitLossCenter,
+	|	R9570T_AdditionalDeductionTurnovers.AmountTurnover AS Amount,
+	|	R9570T_AdditionalDeductionTurnovers.DeductionType.CalculationType AS CalculationType
 	|FROM
-	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate,
-	|		DAY),, Company = &Company
-	|	AND Branch = &Branch
-	|	AND DeductionType.CalculationType = &CalculationType) AS R9570T_AdditionalDeductionTurnovers";
+	|	AccumulationRegister.R9570T_AdditionalDeduction.Turnovers(
+	|			BEGINOFPERIOD(&BeginDate, DAY),
+	|			ENDOFPERIOD(&EndDate, DAY),
+	|			,
+	|			Company = &Company
+	|				AND Branch = &Branch) AS R9570T_AdditionalDeductionTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
 		FillPropertyValues(ResultTable.Add(), QuerySelection);
 	EndDo;
 	
-	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	GroupColumn = "Employee, CalculationType, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
 	SumColumn = "Amount, TotalVacationDays, PaidVacationDays, TotalSickLeaveDays, PaidSickLeaveDays";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -139,6 +142,7 @@ EndFunction
 
 Function GetPayrolls_Accrual(Parameters) Export
 	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("CalculationType");
 	ResultTable.Columns.Add("Employee");
 	ResultTable.Columns.Add("Position");
 	ResultTable.Columns.Add("ProfitLossCenter");
@@ -275,13 +279,14 @@ Function GetPayrolls_Accrual(Parameters) Export
 		NewRow = ResultTable.Add();
 		FillPropertyValues(NewRow, Row);
 		NewRow[Parameters.TypeColumnName] = Row.Accrual;
-				
+		NewRow.CalculationType = Row.Accrual.CalculationType;
+		
 		If Not ValueIsFilled(NewRow.Amount) Then
 			NewRow.Amount = 0;
 		EndIf;
 	EndDo;
 		
-	GroupColumn = "Employee, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
+	GroupColumn = "Employee, CalculationType, Position, ProfitLossCenter, " + Parameters.TypeColumnName;
 	SumColumn = "Amount, TotalVacationDays, PaidVacationDays, TotalSickLeaveDays, PaidSickLeaveDays";
 	
 	ResultTable.GroupBy(GroupColumn, SumColumn);
@@ -303,22 +308,24 @@ Function GetPayrolls_Accrual(Parameters) Export
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R9560T_AdditionalAccrualTurnovers.Employee,
-	|	R9560T_AdditionalAccrualTurnovers.Position,
-	|	R9560T_AdditionalAccrualTurnovers.AccrualType,
-	|	R9560T_AdditionalAccrualTurnovers.ExpenseType,
-	|	R9560T_AdditionalAccrualTurnovers.ProfitLossCenter,
-	|	R9560T_AdditionalAccrualTurnovers.AmountTurnover AS Amount
+	|	R9560T_AdditionalAccrualTurnovers.Employee AS Employee,
+	|	R9560T_AdditionalAccrualTurnovers.Position AS Position,
+	|	R9560T_AdditionalAccrualTurnovers.AccrualType AS AccrualType,
+	|	R9560T_AdditionalAccrualTurnovers.ExpenseType AS ExpenseType,
+	|	R9560T_AdditionalAccrualTurnovers.ProfitLossCenter AS ProfitLossCenter,
+	|	R9560T_AdditionalAccrualTurnovers.AmountTurnover AS Amount,
+	|	R9560T_AdditionalAccrualTurnovers.AccrualType.CalculationType AS CalculationType
 	|FROM
-	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(BEGINOFPERIOD(&BeginDate, DAY), ENDOFPERIOD(&EndDate, DAY),,
-	|		Company = &Company
-	|	AND Branch = &Branch
-	|	AND AccrualType.CalculationType = &CalculationType) AS R9560T_AdditionalAccrualTurnovers";
+	|	AccumulationRegister.R9560T_AdditionalAccrual.Turnovers(
+	|			BEGINOFPERIOD(&BeginDate, DAY),
+	|			ENDOFPERIOD(&EndDate, DAY),
+	|			,
+	|			Company = &Company
+	|				AND Branch = &Branch) AS R9560T_AdditionalAccrualTurnovers";
 	Query.SetParameter("BeginDate", Parameters.BeginDate);
 	Query.SetParameter("EndDate", Parameters.EndDate);
 	Query.SetParameter("Company", Parameters.Company);
 	Query.SetParameter("Branch", Parameters.Branch);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -515,13 +522,11 @@ Function GetAccrualValue(Parameters, EmployeeOrPosition, Date)
 	|	AccrualValues.Period
 	|FROM
 	|	InformationRegister.T9500S_AccrualAndDeductionValues.SliceLast(ENDOFPERIOD(&Date, DAY),
-	|		EmployeeOrPosition = &EmployeeOrPosition
-	|	AND AccualOrDeductionType.CalculationType = &CalculationType) AS AccrualValues
+	|		EmployeeOrPosition = &EmployeeOrPosition) AS AccrualValues
 	|WHERE
 	|	NOT AccrualValues.NotActual";
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("EmployeeOrPosition", EmployeeOrPosition);
-	Query.SetParameter("CalculationType", Parameters.CalculationType);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	

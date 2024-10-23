@@ -109,6 +109,7 @@ EndFunction
 // * OnlyPosted - Boolean - 
 // * CompanyList - Array Of CatalogRef.Companies - 
 // * QueryText - String - 
+// * Accounting - Boolean - 
 Function GetDocumentListSettings() Export
 	Settings = New Structure;
 	Settings.Insert("StartDate", BegOfMonth(CommonFunctionsServer.GetCurrentSessionDate()));
@@ -117,6 +118,7 @@ Function GetDocumentListSettings() Export
 	Settings.Insert("CompanyList", New Array);
 	Settings.Insert("ExcludeDocumentTypes", New Array());
 	Settings.Insert("QueryText", "");
+	Settings.Insert("Accounting", True);
 	Return Settings;
 EndFunction
 

@@ -1625,6 +1625,43 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 		And "ItemList" table contains lines
 			| 'Item'       | 'Item key'    | 'Serial lot numbers'   | 'Quantity'   | 'Unit'   | 'Dont calculate row'   | 'Tax amount'   | 'Price'    | 'VAT'   | 'Offers amount'   | 'Net amount'   | 'Purchase invoice'                                | 'Purchase return order'   | 'Total amount'   | 'Store'       |
 			| 'Trousers'   | '38/Yellow'   | '0512; 0514'           | '3,000'      | 'pcs'    | 'No'                   | '183,05'       | '400,00'   | '18%'   | ''                | '1 016,95'     | 'Purchase invoice 29 dated 25.01.2021 12:37:04'   | ''                        | '1 200,00'       | 'Store 01'    |
+		And I click "Show row key" button
+		And I move to "Source of origin" tab
+		And "SourceOfOrigins" table became equal
+			| '#' | 'Key' | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+			| '1' | '*'   | '0512'              | ''                 | '1,000'    |
+			| '2' | '*'   | '0514'              | ''                 | '2,000'    |
+			| '3' | '*'   | ''                  | ''                 | '1,000'    |
+		* Change PR
+			And I move to "Item list" tab
+			And I go to line in "ItemList" table
+				| "Item"     | "Item key"  | "Quantity" |
+				| "Trousers" | "38/Yellow" | "3,000"    |
+			And I select current line in "ItemList" table
+			And I click choice button of "Serial lot numbers" attribute in "ItemList" table
+			And I go to line in "SerialLotNumbers" table
+				| "Code is approved" | "Quantity" | "Serial lot number" |
+				| "No"               | "2,000"    | "0514"              |
+			And I delete a line in "SerialLotNumbers" table
+			And I click "Ok" button
+			And I finish line editing in "ItemList" table
+			And I click "Post and close" button
+		* Create second PR
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I go to line in "List" table
+				| 'Number'    |
+				| '29'        |
+			And in the table "List" I click the button named "ListContextMenuPost"
+			And I click the button named "FormDocumentPurchaseReturnGenerate"
+			And I click "Ok" button
+			And I click "Show row key" button
+			And "ItemList" table became equal
+				| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Quantity' | 'Tax amount' | 'Net amount' | 'Total amount' |
+				| 'Trousers' | '38/Yellow' | '0514'               | '2,000'    | '122,03'     | '677,97'     | '800,00'       |
+			And "SourceOfOrigins" table became equal
+				| '#' | 'Key' | 'Serial lot number' | 'Source of origin' | 'Quantity' |
+				| '1' | '*'   | '0514'              | ''                 | '2,000'    |
+			And I click "Post and close" button
 		And I close all client application windows
 		
 					

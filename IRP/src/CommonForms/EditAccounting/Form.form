@@ -255,6 +255,7 @@
         <textEdit>true</textEdit>
         <choiceParameterLinks>
           <name>Filter.LedgerType</name>
+          <changeMode>DontChange</changeMode>
           <datapath xsi:type="form:DataPath">
             <segments>LedgerType</segments>
           </datapath>
@@ -532,6 +533,7 @@
         <textEdit>true</textEdit>
         <choiceParameterLinks>
           <name>Filter.LedgerType</name>
+          <changeMode>DontChange</changeMode>
           <datapath xsi:type="form:DataPath">
             <segments>LedgerType</segments>
           </datapath>

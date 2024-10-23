@@ -2,6 +2,9 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);
+	
 	If Not Cancel And WriteMode = DocumentWriteMode.Posting Then
 		If ThisObject.AllocationMode = Enums.AllocationMode.ByDocuments Then
 			// See #2206
@@ -13,6 +16,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 			UpdateAmounts();
 			FillTables_ByDocuments();
 		EndIf;
+		UpdateAllocationResult();
 	EndIf;
 EndProcedure
 
@@ -23,6 +27,8 @@ Procedure UpdateAmounts()
 	|	R6070T_OtherPeriodsExpenses.Basis AS Document,
 	|	R6070T_OtherPeriodsExpenses.Company,
 	|	R6070T_OtherPeriodsExpenses.Currency,
+	|	R6070T_OtherPeriodsExpenses.ExpenseType,
+	|	R6070T_OtherPeriodsExpenses.ProfitLossCenter,
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountBalance) AS Amount,
 	|	SUM(R6070T_OtherPeriodsExpenses.AmountTaxBalance) AS TaxAmount
 	|FROM
@@ -31,6 +37,8 @@ Procedure UpdateAmounts()
 	|GROUP BY
 	|	R6070T_OtherPeriodsExpenses.Basis,
 	|	R6070T_OtherPeriodsExpenses.Company,
+	|	R6070T_OtherPeriodsExpenses.ExpenseType,
+	|	R6070T_OtherPeriodsExpenses.ProfitLossCenter,
 	|	R6070T_OtherPeriodsExpenses.Currency";	
 	Query.SetParameter("CurrencyMovementType", ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency);
 	BalancePeriod = New Boundary(ThisObject.PointInTime(), BoundaryType.Excluding);
@@ -85,6 +93,8 @@ Procedure FillTables_ByDocuments()
 	|	R6070T_OtherPeriodsExpensesBalance.RowID,
 	|	CostDocuments.Document AS Basis,
 	|	CostDocuments.Currency,
+	|	R6070T_OtherPeriodsExpensesBalance.ExpenseType,
+	|	R6070T_OtherPeriodsExpensesBalance.ProfitLossCenter,
 	|	R6070T_OtherPeriodsExpensesBalance.ItemKey,
 	|	R6070T_OtherPeriodsExpensesBalance.AmountBalance AS Amount,
 	|	R6070T_OtherPeriodsExpensesBalance.AmountTaxBalance AS TaxAmount
@@ -225,10 +235,96 @@ Procedure FillTables_ByDocuments()
 	
 EndProcedure
 
+Procedure UpdateAllocationResult()
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	CostList.RowID,
+	|	CostList.Basis,
+	|	CostList.ItemKey,
+	|	CostList.Currency,
+	|	CostList.ExpenseType,
+	|	CostList.ProfitLossCenter
+	|INTO CostList
+	|FROM
+	|	&CostList AS CostList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllocationList.BasisRowID,
+	|	AllocationList.RowID,
+	|	AllocationList.Document,
+	|	AllocationList.Store,
+	|	AllocationList.ItemKey,
+	|	AllocationList.Amount,
+	|	AllocationList.TaxAmount
+	|INTO AllocationList
+	|FROM
+	|	&AllocationList AS AllocationList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	CostList.RowID,
+	|	AllocationList.BasisRowID,
+	|	CostList.Basis AS ExpensePurchaseInvoice,
+	|	CostList.ItemKey.Item AS ExpenseItem,
+	|	CostList.ItemKey AS ExpenseItemKey,
+	|	CostList.Currency,
+	|	AllocationList.Document AS PurchaseInvoice,
+	|	AllocationList.ItemKey.Item AS Item,
+	|	AllocationList.ItemKey AS ItemKey,
+	|	AllocationList.Store,
+	|	AllocationList.Amount,
+	|	AllocationList.TaxAmount,
+	|	CostList.ExpenseType,
+	|	CostList.ProfitLossCenter
+	|FROM
+	|	CostList AS CostList
+	|		INNER JOIN AllocationList AS AllocationList
+	|		ON CostList.RowID = AllocationList.BasisRowID";
+	
+	Query.SetParameter("CostList", ThisObject.CostList.Unload());
+	Query.SetParameter("AllocationList", ThisObject.AllocationList.Unload());
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	ArrayForDelete = New Array();
+	For Each Row In ThisObject.AllocationResult Do
+		Filter = New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID);
+		If QueryTable.FindRows(Filter).Count() = 0 Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	
+	For Each Row In ArrayForDelete Do
+		ThisObject.AllocationResult.Delete(Row);
+	EndDo;
+	
+	For Each Row In QueryTable Do
+		Filter = New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID);
+		Rows = ThisObject.AllocationResult.FindRows(Filter); 
+		If Rows.Count() Then
+			NewRow = Rows[0];
+		Else
+			NewRow = ThisObject.AllocationResult.Add();
+			NewRow.Key = New UUID();
+		EndIf;
+		FillPropertyValues(NewRow, Row);
+	EndDo;
+EndProcedure
+
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;	
+	
+	WriteMode = CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "WriteMode");
+	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
+		AccountingServer.OnWrite(ThisObject, Cancel, "AllocationResult");
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

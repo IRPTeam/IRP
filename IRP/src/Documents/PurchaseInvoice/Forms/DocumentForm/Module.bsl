@@ -81,7 +81,15 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
-	IsTransactionType_Purchase = Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.Purchase");
+	IsTransactionType_Purchase = 
+		Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.Purchase");
+		
+	IsTransactionType_CurrencyRevaluationCustomer = 
+		Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer");
+		
+	IsTransactionType_CurrencyRevaluationVendor = 
+		Object.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor");
+	
 	Form.Items.GroupAging.Visible = IsTransactionType_Purchase;
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
@@ -116,6 +124,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	For Each Row In Form.Object.ItemList Do
 			Row.IsClosedOrder = ClosedRowKeys.Find(Row.Key) <> Undefined;
 	EndDo;
+	
+	If IsTransactionType_CurrencyRevaluationCustomer Then
+		Form.Items.CurrencyRevaluationInvoice.TypeRestriction = New TypeDescription("DocumentRef.SalesInvoice");
+	ElsIf IsTransactionType_CurrencyRevaluationVendor Then
+		Form.Items.CurrencyRevaluationInvoice.TypeRestriction = New TypeDescription("DocumentRef.PurchaseInvoice");
+	EndIf;
 EndProcedure
 
 &AtClient

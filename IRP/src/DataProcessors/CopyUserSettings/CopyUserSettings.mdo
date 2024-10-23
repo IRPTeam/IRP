@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="414a2817-3ce6-4415-9c08-76e8f13c1525">
+  <producedTypes>
+    <objectType typeId="d9a109b8-7309-427f-8236-2b70ceb19284" valueTypeId="4b234eab-c917-4a0f-9d39-5747b541bd1f"/>
+    <managerType typeId="1a61cb18-08ee-4a78-a2e9-21ceb8b8768d" valueTypeId="1319ae8a-4d2c-4f4a-baef-ce611374255b"/>
+  </producedTypes>
+  <name>CopyUserSettings</name>
+  <synonym>
+    <key>en</key>
+    <value>Copy user settings</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.CopyUserSettings.Form.Form</defaultForm>
+  <forms uuid="2c294ee3-7a50-4fd3-9914-55e9fbdaab22">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

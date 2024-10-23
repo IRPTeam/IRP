@@ -149,7 +149,14 @@ Function CheckFilling(Object) Export
 			IsOk = False;
 			SerialsID = Object.SerialLotNumbers.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
 			
+			ProcessedSerialLotNumbers = New Array();
 			For Each Row In SerialsID Do
+				
+				If ProcessedSerialLotNumbers.Find(Row.SerialLotNumber) <> Undefined Then
+					Continue;
+				EndIf;
+				ProcessedSerialLotNumbers.Add(Row.SerialLotNumber);
+			
 				For Each ItemRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 					CommonFunctionsClientServer.ShowUsersMessage(
 						StrTemplate(R().Error_113, Serial.SerialLotNumber), "ItemList[" + Format(
@@ -172,14 +179,16 @@ EndFunction
 Function CheckFillingPhysicalInventory(Object)
 	IsOk = True;
 	
-	Serials = Object.ItemList.Unload();
-	Serials.GroupBy("SerialLotNumber", "PhysCount");
-	For Each Serial In Serials Do
+	ItemListTable = Object.ItemList.Unload();
+	ItemListTable.GroupBy("SerialLotNumber", "ExpCount, PhysCount");
+	
+	For Each Serial In ItemListTable Do
 		
-		If Serial.PhysCount = 1 Then
+		QuantityMoreThan1 = Serial.PhysCount > 1 Or Serial.ExpCount > 1;
+		If Not QuantityMoreThan1 Then
 			Continue;
-		EndIf;
-		
+		EndIf;	
+			
 		If Serial.SerialLotNumber.EachSerialLotNumberIsUnique Then
 			IsOk = False;
 			SerialsID = Object.ItemList.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
@@ -192,8 +201,8 @@ Function CheckFillingPhysicalInventory(Object)
 				EndDo;
 			EndDo;
 		EndIf;
-	EndDo;
-	
+	EndDo;	
+			
 	Return IsOk;
 EndFunction
 

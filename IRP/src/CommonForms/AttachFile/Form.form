@@ -732,8 +732,9 @@ WHERE
           </localValue>
         </title>
         <valueType>
-          <types>DefinedType.typeFilesOwner</types>
+          <types>77130677-9357-48c4-ab94-ed3263e22199</types>
         </valueType>
+        <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>
       </parameters>
     </extInfo>

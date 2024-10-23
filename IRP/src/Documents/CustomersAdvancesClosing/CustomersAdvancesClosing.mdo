@@ -39,6 +39,7 @@
   <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
   <registerRecords>InformationRegister.DELETE_T2012S_AdvancesCurrencyRevaluation</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>InformationRegister.DELETE_T2011S_TransactionsCurrencyRevaluation</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

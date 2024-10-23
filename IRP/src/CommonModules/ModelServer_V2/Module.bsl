@@ -320,10 +320,14 @@ Function GetPartnerTypeByTransactionType(TransactionType) Export
 	Map = New Map();
 	Map.Insert(Enums.PurchaseTransactionTypes.Purchase             , "Vendor");
 	Map.Insert(Enums.PurchaseTransactionTypes.ReceiptFromConsignor , "Consignor");
+	Map.Insert(Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer , "Customer");
+	Map.Insert(Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor   , "Vendor");
 	
 	Map.Insert(Enums.SalesTransactionTypes.Sales                , "Customer");
 	Map.Insert(Enums.SalesTransactionTypes.ShipmentToTradeAgent , "TradeAgent");
 	Map.Insert(Enums.SalesTransactionTypes.RetailSales          , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.CurrencyRevaluationCustomer , "Customer");
+	Map.Insert(Enums.SalesTransactionTypes.CurrencyRevaluationVendor   , "Vendor");
 	
 	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromCustomer   , "Customer");
 	Map.Insert(Enums.SalesReturnTransactionTypes.ReturnFromTradeAgent , "TradeAgent");

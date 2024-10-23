@@ -1602,26 +1602,27 @@ Scenario: Create catalog Taxes objects (with transaction type)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef011'   |
 
 	And I refill object tabular section "UseDocuments":
-		| 'Ref'                                                            | 'DocumentName'                |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesOrder'                  |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesInvoice'                |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseOrder'               |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseInvoice'             |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashExpense'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashRevenue'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturn'              |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'PurchaseReturnOrder'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturnOrder'            |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReturn'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailSalesReceipt'          |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'RetailReturnReceipt'         |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportToConsignor'      |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'SalesReportFromTradeAgent'   |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'BankPayment'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'BankReceipt'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashPayment'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'CashReceipt'                 |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4'  | 'EmployeeCashAdvance'         |
+		| 'Ref'                                                           | 'DocumentName'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportToConsignor'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReportFromTradeAgent' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'EmployeeCashAdvance'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
 
 	And I refill object tabular section "TransactionTypes":
 		| 'Ref'                                                            | 'DocumentName'         | 'TransactionType'                                           |
@@ -1691,6 +1692,35 @@ Scenario: Create catalog Taxes objects (for debit and credit note)
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'WorkOrder'                |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CreditNote'               |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'DebitNote'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'BankReceipt'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashPayment'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashReceipt'               |
+
+Scenario: Create catalog Taxes objects (for debit and credit note without bank/cash documents)
+
+	And I refill object tabular section "UseDocuments":
+		| 'Ref'                                                           | 'DocumentName'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrder'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesInvoice'             |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrder'            |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseInvoice'          |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashExpense'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CashRevenue'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturn'           |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseReturnOrder'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturnOrder'         |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'              |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'       |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt'      |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'        |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing'     |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'StockAdjustmentAsSurplus' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'WorkOrder'                |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'CreditNote'               |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'DebitNote'                |
+		
 
 Scenario: Create catalog Taxes objects (for commission trade)
 
@@ -3545,32 +3575,32 @@ Scenario: Create catalog Projects objects
 
 Scenario: Create catalog AccessGroups and AccessProfiles objects (audit lock)
 	And I execute code and put to varible "GetURL(Catalogs.Users.FindByDescription(\"CI\"))" "$$$$IdCI$$$$"
+	And I check or create catalog "AccessProfiles" objects:
+		| 'Ref'                                                                    | 'DeletionMark' | 'Code' | 'Author'                                                        | 'Description_en'                 | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'False'        | 12     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock'                     | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:35:40' | '10.10.2024 10:35:40' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'False'        | 13     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit unlock'                   | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:35:40' | '10.10.2024 10:35:40' | 'False'     |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'False'        | 14     | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Full access no admin functions' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:39:19' | '10.10.2024 10:38:34' | 'False'     |
+
+	And I refill object tabular section "Roles":
+		| 'Ref'                                                                    | 'Role'                       | 'Configuration' |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'               | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'FullAccessNoAdminFunctions' | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'RunThickClient'             | 'IRP'           |
+		| 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' | 'RunThinClient'              | 'IRP'           |
 	And I check or create catalog "AccessGroups" objects:
-		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'False'        | 10     | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock control' | ''                 | ''               | ''               | ''             | ''       | '27.02.2024 10:35:56' | '01.01.0001 00:00:00' | 'False'     |
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'OnlyRegisters' | 'Author'                                                        | 'Description_en'     | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'False'        | 11     | 'False'         | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock control' | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '10.10.2024 10:43:25' | '10.10.2024 10:55:56' | 'False'     |
 
 	And I refill object tabular section "Profiles":
 		| 'Ref'                                                                  | 'Profile'                                                                |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.AccessProfiles?ref=b8538749ae346f3011ef86dac21b0637' |
 
 	And I refill object tabular section "Users":
-		| 'Ref'                                                                  | 'User'     |
-		| 'e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7' | '$$IdCI$$' |
+		| 'Ref'                                                                  | 'User'                                                          |
+		| 'e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638' | 'e1cib/data/Catalog.Users?ref=aa78120ed92fbced11eaf116b327099a' |
 
-	And I check or create catalog "AccessProfiles" objects:
-		| 'Ref'                                                                    | 'DeletionMark' | 'Code'  | 'Author'                                                        | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'SourceNodeID' | 'Editor'                                                        | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'False'        | 11      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Full access'    | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'False'        | 12      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit lock'     | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:34:44' | '27.02.2024 10:35:07' | 'False'     |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'False'        | 13      | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | 'Audit unlock'   | ''                 | ''               | ''               | ''             | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | '27.02.2024 10:36:16' | '27.02.2024 10:35:07' | 'False'     |
-
-	And I refill object tabular section "Roles":
-		| 'Ref'                                                                    | 'Role'           | 'Configuration' |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'FullAccess'     | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThickClient' | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b5' | 'RunThinClient'  | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b6' | 'AuditLockSet'   | 'IRP'           |
-		| 'e1cib/data/Catalog.AccessProfiles?ref=b7b6cb8aa66608cf11eed54b0e7af6b8' | 'AuditLockUnset' | 'IRP'           |
 
 Scenario: Create catalog Files and information register "AttachedFiles" records
 
@@ -3780,3 +3810,12 @@ Scenario: Create catalog LegalNameContracts objects (Ferron, filters)
 		| 'Ref'                                                                        | 'DeletionMark' | 'Code'  | 'Description'               | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount' | 'ContractNumber' | 'Currency'                                                           | 'LegalName'                                                         | 'Author'                                                        | 'SourceNodeID' | 'Editor' | 'CreateDate'          | 'ModifyDate'          | 'NotActive' |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f1207' | 'False'        | 11      | 'Contract (Second Company)' | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf128cde918b4' | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:03:29' | '01.01.0001 00:00:00' | 'False'     |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b7bf8c16981f994a11ef1299f93f120b' | 'False'        | 12      | 'Contract (Empty Company)'  | '01.01.2024 00:00:00' | '01.01.0001 00:00:00' | ''                                                                  | ''                   | ''               | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''       | '15.05.2024 12:04:28' | '01.01.0001 00:00:00' | 'False'     |
+
+Scenario: Create catalog TaxExemptionReasons objects
+
+	And I check or create catalog "TaxExemptionReasons" objects:
+		| 'Ref'                                                                         | 'DeletionMark' | 'Code' | 'Description'                               | 'Country'                                                           | 'TaxRate'                                                          |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8ba5e1cb24cf' | 'False'        | 2      | 'Tax exeption reason 3 (8%, Turkey)'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef00f' |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8b9a67d20625' | 'False'        | 1      | 'Tax exeption reason 1 (0%, All countries)' | ''                                                                  | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+		| 'e1cib/data/Catalog.TaxExemptionReasons?ref=b85495740888175a11ef8b9a67d20627' | 'False'        | 3      | 'Tax exeption reason 2 (0%, Turkey)'        | 'e1cib/data/Catalog.Countries?ref=aa78120ed92fbced11eaf113ba6c1852' | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef012' |
+

@@ -122,6 +122,8 @@
   <content>Document.RevenueAccruals.Attribute.Basis</content>
   <content>Document.InventoryTransfer.Attribute.DistributedPurchaseInvoice</content>
   <content>Document.OutgoingMessage.Attribute.BasisDocument</content>
+  <content>Document.PurchaseInvoice.Attribute.CurrencyRevaluationInvoice</content>
+  <content>Document.SalesInvoice.Attribute.CurrencyRevaluationInvoice</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

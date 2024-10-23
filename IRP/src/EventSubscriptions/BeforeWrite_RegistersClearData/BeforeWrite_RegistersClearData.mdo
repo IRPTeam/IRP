@@ -6,8 +6,8 @@
     <value>Before write registers clear data</value>
   </synonym>
   <source>
-    <types>AccumulationRegisterRecordSet</types>
     <types>InformationRegisterRecordSet</types>
+    <types>AccumulationRegisterRecordSet</types>
   </source>
   <event>BeforeWrite</event>
   <handler>CommonModule.CommonFunctionsServer.BeforeWrite_RegistersClearDataBeforeWrite</handler>

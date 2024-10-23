@@ -38,6 +38,7 @@
   <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
   <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
   <registerRecords>InformationRegister.T6080S_ReallocatedBatchesAmountValues</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>InformationRegister.T8510S_FixedAssetsInfo</registerRecords>
   <registerRecords>InformationRegister.T6090S_CompositeBatchesAmountValues</registerRecords>
   <registerRecords>AccumulationRegister.R6050T_SalesBatches</registerRecords>

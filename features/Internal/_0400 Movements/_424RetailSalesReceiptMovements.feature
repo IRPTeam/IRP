@@ -750,8 +750,12 @@ Scenario: _0424285 check postponed Retail sales receipt movements
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' |
-			| 'Document registrations records'                       |
+			| 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Document registrations records'                       | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                     | 'Dimensions'                                           | 'Attributes'          | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                     | 'Document'                                             | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                     | 'Retail sales receipt 1 314 dated 07.09.2023 16:01:50' | '07.09.2023 16:01:50' | '1 314'  | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 		And I close current window
 	* Change status (Postponed with reserve)
 		And I go to line in "List" table

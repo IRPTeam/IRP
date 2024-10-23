@@ -37,6 +37,22 @@ Procedure FillDocumentsAtServer()
 	DocumentList.Load(Result);
 EndProcedure
 
+&AtClient
+Procedure FillAccountingDocuments(Command)
+	FillAccountingDocumentsAtServer();
+EndProcedure
+
+&AtServer
+Procedure FillAccountingDocumentsAtServer()
+	Settings = FixDocumentProblemsServer.GetDocumentListSettings();
+	Settings.StartDate = Period.StartDate;
+	Settings.EndDate = Period.EndDate;
+	Settings.CompanyList = Company.UnloadValues();
+	Settings.Accounting = True;
+	Result = AccountingServer.GetDocumentList(Settings);	
+	DocumentList.Load(Result);
+EndProcedure
+
 #EndRegion
 
 #Region CheckDocuments

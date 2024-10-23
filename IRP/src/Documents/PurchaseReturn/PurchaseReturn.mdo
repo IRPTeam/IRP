@@ -101,7 +101,7 @@
     <objectField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.PurchaseReturn.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.PurchaseReturn.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.PurchaseReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -143,6 +143,7 @@
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>AccumulationRegister.R5020B_PartnersBalance</registerRecords>
@@ -770,6 +771,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="38976357-6415-460a-b4fa-6b3a32503c84">
+      <name>TaxExemptionReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Tax exemption reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.TaxExemptionReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <createOnInput>Use</createOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>

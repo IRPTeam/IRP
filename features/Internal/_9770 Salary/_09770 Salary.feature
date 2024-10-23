@@ -861,7 +861,6 @@ Scenario: _097716 create payroll
 		And I select from the drop-down list named "Branch" by "shop 01" string
 		And I select from the drop-down list named "Currency" by "Turkish lira" string
 		And I select from "Payment period" drop-down list by "fourth" string
-		And I select from "Calculation type" drop-down list by "Salary" string
 		And I input "01.11.2023" text in "Begin date" field
 		And I input "30.11.2023" text in "End date" field
 		And in the table "AccrualList" I click the button named "FillAccrual"
@@ -876,6 +875,7 @@ Scenario: _097716 create payroll
 			| '2' | '7 000,00' | 'Anna Petrova'    | 'Sales person' | 'Salary'       | 'Expense'      | 'Shop 01'            |
 			| '3' | '471,70'   | 'Arina Brown'     | 'Sales person' | 'Salary'       | 'Expense'      | 'Shop 01'            |
 			| '4' | '9 545,45' | 'David Romanov'   | 'Manager'      | 'Salary'       | 'Expense'      | 'Shop 01'            |
+		
 	* Fill taxes
 		And I move to "Taxes" tab
 		* First Employee
@@ -1016,8 +1016,7 @@ Scenario: _097721 check of payroll calculation (position and salary change in th
 			| 'Number' |
 			| '11'     |
 		And I select current line in "List" table
-		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-		And I select from "Calculation type" drop-down list by "salary" string		
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"	
 		And in the table "AccrualList" I click "Calculate" button
 		And "AccrualList" table contains lines
 			| 'Amount'   | 'Employee'                                        | 'Position'   | 'Accrual type' | 'Expense type' | 'Profit loss center' |

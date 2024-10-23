@@ -337,7 +337,8 @@ Function GetChain()
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
-	Chain.Insert("ChangeTaxVisible", GetChainLink("ChangeTaxVisibleExecute"));
+	Chain.Insert("ChangeTaxVisible"				 , GetChainLink("ChangeTaxVisibleExecute"));
+	Chain.Insert("ChangeTaxExemptionReasonVisible", GetChainLink("ChangeTaxExemptionReasonVisibleExecute"));
 	
 	Chain.Insert("ChangeVatRate", GetChainLink("ChangeVatRateExecute"));
 		
@@ -440,6 +441,8 @@ Function GetChain()
 	Chain.Insert("ChangeSalaryBySalaryType", GetChainLink("ChangeSalaryBySalaryTypeExecute"));
 
 	Chain.Insert("ChangePartnerChoiceList", GetChainLink("ChangePartnerChoiceListExecute"));
+	
+	Chain.Insert("ChangeCurrencyRevaluationInvoiceByBasis", GetChainLink("ChangeCurrencyRevaluationInvoiceByBasisExecute"));
 	
 	// Extractors
 	Chain.Insert("ExtractDataAgreementApArPostingDetail"   , GetChainLink("ExtractDataAgreementApArPostingDetailExecute"));
@@ -1208,6 +1211,50 @@ Function DefaultCurrencyInListExecute(Options) Export
 	EndIf;
 	Return Options.CurrentCurrency;
 EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENCY_REVALUATION_INVOICE_BY_BASIS
+ 
+Function ChangeCurrencyRevaluationInvoiceByBasisOptions() Export
+ Return GetChainLinkOptions("CurrentCurrencyRevaluationInvoice, Company, TransactionType, Partner, Agreement, LegalName");
+EndFunction	
+
+Function ChangeCurrencyRevaluationInvoiceByBasisExecute(Options) Export
+	If Not ValueIsFilled(Options.CurrentCurrencyRevaluationInvoice) Then
+		Return Undefined;
+	EndIf;
+	
+	IsCustomer = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationCustomer")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationCustomer"));
+	
+	IsVendor = (Options.TransactionType = PredefinedValue("Enum.SalesTransactionTypes.CurrencyRevaluationVendor")
+		Or Options.TransactionType = PredefinedValue("Enum.PurchaseTransactionTypes.CurrencyRevaluationVendor"));
+	
+	If Not IsCustomer And Not IsVendor Then
+		Return Undefined;
+	EndIf;
+	
+	If IsCustomer And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.SalesInvoice") Then
+	   	Return Undefined;
+	EndIf;
+
+	If IsVendor And TypeOf(Options.CurrentCurrencyRevaluationInvoice) <> Type("DocumentRef.PurchaseInvoice") Then
+		Return Undefined;
+	EndIf;
+	
+	InvoiceData = CommonFunctionsServer.GetAttributesFromRef(Options.CurrentCurrencyRevaluationInvoice, 
+		"Company, Partner, Agreement, LegalName");
+
+	If InvoiceData.Company <> Options.Company
+		Or InvoiceData.Partner <> Options.Partner
+		Or InvoiceData.Agreement <> Options.Agreement
+		Or InvoiceData.LegalName <> Options.LegalName Then
+			Return Undefined;
+	EndIf; 
+
+	Return Options.CurrentCurrencyRevaluationInvoice;
+EndFunction	
 
 #EndRegion
 
@@ -2320,6 +2367,16 @@ Function ChangeTaxVisibleExecute(Options) Export
 	EndIf;
 	
 	Return New Structure("TaxVisible, TaxChoiceList", _visible, _choiceList);
+EndFunction
+
+Function ChangeTaxExemptionReasonVisibleExecute(Options) Export
+	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
+		Options.Date, 
+		Options.Company, 
+		Options.DocumentName, 
+		Options.TransactionType, 
+		PredefinedValue("Enum.TaxKind.VAT"));
+	Return (_arrayOfTaxes.Count() <> 0);
 EndFunction
 
 Function ChangeVatRateOptions() Export
@@ -4200,7 +4257,7 @@ EndFunction
 #Region CHANGE_ACCOUNT_BY_PAYMENT_TYPE
 
 Function ChangeAccountByPaymentTypeOptions() Export
-	Return GetChainLinkOptions("PaymentType, Workstation, CurrentAccount");
+	Return GetChainLinkOptions("PaymentType, Workstation, BankTerm, CurrentAccount");
 EndFunction
 
 Function ChangeAccountByPaymentTypeExecute(Options) Export
@@ -4214,6 +4271,8 @@ Function ChangeAccountByPaymentTypeExecute(Options) Export
 		If ValueIsFilled(Account) Then
 			Return Account;
 		EndIf; 
+	ElsIf _Type = PredefinedValue("Enum.PaymentTypes.Card") Then
+		Return ModelServer_V2.GetBankTermInfo(Options.PaymentType, Options.BankTerm).Account;
 	EndIf;
 	
 	Return Options.CurrentAccount;

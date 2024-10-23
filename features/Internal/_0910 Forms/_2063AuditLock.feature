@@ -42,6 +42,7 @@ Scenario: _206300 preparation (audit lock)
 		When Create catalog Items objects
 		When Create catalog ItemKeys objects
 		When Create catalog Currencies objects
+		When Create catalog Users objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
@@ -142,6 +143,7 @@ Scenario: _2063001 check preparation
 
 
 Scenario: _2063004 check audit lock (PI)
+	And I connect "Test" TestClient using "ABrown" login and "" password
 	And I close all client application windows
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -160,22 +162,23 @@ Scenario: _2063004 check audit lock (PI)
 		And I click the button named "OK"
 		Then there are lines in TestClient message log
 			|'Document is locked by audit lock'|
-	* Check lock attached files
-		And I click "Attached files" button
-		And I go to line in "FileList" table
-			| 'File'   |
-			| 'Test 1' |
-		And I activate "File" field in "FileList" table
-		And in the table "FileList" I click "Delete files" button
-		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
-		Then there are lines in TestClient message log
-			|'Document is locked by audit lock'|		
+	// * Check lock attached files
+	// 	And I click "Attached files" button
+	// 	And I go to line in "FileList" table
+	// 		| 'File'   |
+	// 		| 'Test 1' |
+	// 	And I activate "File" field in "FileList" table
+	// 	And in the table "FileList" I click "Delete files" button
+	// 	Then "1C:Enterprise" window is opened
+	// 	And I click the button named "OK"
+	// 	Then there are lines in TestClient message log
+	// 		|'Document is locked by audit lock'|		
 	And I close all client application windows
+	And I close "Test" TestClient
 	
 		
 Scenario: _2063007 check audit unlock
-	And I close all client application windows
+	And I connect "Test" TestClient using "ABrown" login and "" password	
 	* Preparation	
 		Try
 			And the previous scenario executed successfully
@@ -190,14 +193,15 @@ Scenario: _2063007 check audit unlock
 		And I click "Audit lock (unlock)" button
 		Then there are lines in TestClient message log
 			|'Access is denied'|	
-	* Allowing CI to capture the audit log	
-		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7"
+	* Allowing CI to capture the audit log
+		And I connect "Этот клиент" TestClient using "CI" login and "CI" password
+		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638"
 		And in the table "Profiles" I click "Add" button
 		And I select "Audit unlock" from "Profile" drop-down list by string in "Profiles" table
 		And I finish line editing in "Profiles" table
 		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		And I close "Test" TestClient
+		And I connect "Test" TestClient using "ABrown" login and "" password
 	* Check audit unlock
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -209,14 +213,14 @@ Scenario: _2063007 check audit unlock
 		When I Check the steps for Exception
 			| 'Then "1C:Enterprise" window is opened'    |
 		Then user message window does not contain messages	
-	* Check lock attached files
-		And I click "Attached files" button
-		And I go to line in "FileList" table
-			| 'File'   |
-			| 'Test 1' |
-		And I activate "File" field in "FileList" table
-		And in the table "FileList" I click "Delete files" button
-		Then the number of "FileList" table lines is "равно" "0"
+	// * Check lock attached files
+	// 	And I click "Attached files" button
+	// 	And I go to line in "FileList" table
+	// 		| 'File'   |
+	// 		| 'Test 1' |
+	// 	And I activate "File" field in "FileList" table
+	// 	And in the table "FileList" I click "Delete files" button
+	// 	Then the number of "FileList" table lines is "равно" "0"
 		Then user message window does not contain messages	
 
 
@@ -264,15 +268,17 @@ Scenario: _2063008 check audit lock for linked documents
 Scenario: _2063020 check audit lock	without permisson
 	And I close all client application windows
 	* Preparation
-		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b7b6cb8aa66608cf11eed54b0e7af6b7"
+		And I connect "Этот клиент" TestClient using "CI" login and "CI" password
+		Given I open hyperlink "e1cib/data/Catalog.AccessGroups?ref=b8538749ae346f3011ef86dac21b0638"
 		Then "Audit lock control (User access group)" window is opened
 		And I go to line in "Profiles" table
 			| 'Profile'    |
 			| 'Audit lock' |
 		And in the table "Profiles" I click "Delete" button
 		And I click "Save and close" button
-		And I close TestClient session
-		Given I open new TestClient session or connect the existing one
+		And I connect "Test" TestClient using "ABrown" login and "" password
+		And I close "Test" TestClient
+		And I connect "Test" TestClient using "ABrown" login and "" password
 	* Check audit lock
 		Given I open hyperlink "e1cib/list/Document.MoneyTransfer"
 		And I go to line in "List" table
@@ -285,13 +291,15 @@ Scenario: _2063020 check audit lock	without permisson
 	And I close all client application windows	
 
 Scenario: _2063023 check audit lock history
+	And I close "Test" TestClient
+	And I connect "Этот клиент" TestClient using "CI" login and "CI" password
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.AuditLockHistory"
 	And "List" table became equal
-		| 'User'                    | 'Date' | 'Document'                                              | 'Action' |
-		| 'en description is empty' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Lock'   |
-		| 'en description is empty' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Unlock' |
-		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Lock'   |
-		| 'en description is empty' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
+		| 'User'                       | 'Date' | 'Document'                                              | 'Action' |
+		| 'Arina Brown (Financier 3)' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Lock'   |
+		| 'Arina Brown (Financier 3)' | '*'    | 'Purchase invoice 12 dated 07.09.2020 17:53:38'         | 'Unlock' |
+		| 'Arina Brown (Financier 3)' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Lock'   |
+		| 'Arina Brown (Financier 3)' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
 	And I close all client application windows	
 

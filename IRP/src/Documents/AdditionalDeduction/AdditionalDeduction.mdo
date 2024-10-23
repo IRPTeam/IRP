@@ -44,7 +44,7 @@
     <objectField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.AdditionalDeduction.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.AdditionalDeduction.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -67,6 +67,7 @@
   <defaultChoiceForm>Document.AdditionalDeduction.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R9570T_AdditionalDeduction</registerRecords>
+  <registerRecords>InformationRegister.PostedDocumentsRegistry</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

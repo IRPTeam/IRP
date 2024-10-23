@@ -228,6 +228,8 @@ Function R6070T_OtherPeriodsExpenses()
 	|	CostList.Company AS Company,
 	|	CostList.Branch AS Branch,
 	|	CostList.Basis AS Basis,
+	|	CostList.ExpenseType,
+	|	CostList.ProfitLossCenter,
 	|	CostList.Currency AS Currency,
 	|	CostList.Amount * CostList.Factor AS Amount
 	|INTO R6070T_OtherPeriodsExpenses

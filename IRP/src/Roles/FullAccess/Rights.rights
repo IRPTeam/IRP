@@ -34,6 +34,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.ExternalAccountingOperation</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Agreements</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -463,6 +470,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CalculationDeservedVacations</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Users</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -641,10 +655,6 @@
 		<name>Document.ExpenseAccruals</name>
 		<right>
 			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-		<right>
-			<name>InteractiveDeleteMarked</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -1028,6 +1038,13 @@
 		</right>
 		<right>
 			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.TaxesOperation</name>
+		<right>
+			<name>InteractiveDelete</name>
 			<value>false</value>
 		</right>
 	</object>
@@ -1470,7 +1487,53 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.TaxExemptionReasons</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.AccessProfiles</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeletePredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMarkPredefinedData</name>
+			<value>false</value>
+		</right>
+		<right>
+			<name>InteractiveDeleteMarkedPredefinedData</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.ExtDimensions</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>
@@ -2056,6 +2119,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.OutgoingMessage</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.EmployeePositions</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -2117,6 +2187,13 @@
 	</object>
 	<object>
 		<name>Document.SalesOrderClosing</name>
+		<right>
+			<name>InteractiveDelete</name>
+			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.RevenueAccruals</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

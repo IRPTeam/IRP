@@ -19,6 +19,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
 EndProcedure
 
@@ -80,6 +81,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+	Else
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
 	EndIf;
 EndProcedure
 
@@ -88,6 +94,7 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
+	ThisObject.DocumentNumber = "";
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

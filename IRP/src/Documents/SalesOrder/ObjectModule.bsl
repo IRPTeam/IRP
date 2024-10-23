@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -25,6 +26,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 	
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	ThisObject.DocumentNumber = DocumentsServer.GenerateDocumentNumber(ThisObject);
 	ThisObject.AdditionalProperties.Insert("OriginalDocumentDate", PostingServer.GetOriginalDocumentDate(ThisObject));
 	ThisObject.AdditionalProperties.Insert("IsPostingNewDocument" , WriteMode = DocumentWriteMode.Posting And Not Ref.Posted);
 	RowIDInfoPrivileged.BeforeWrite_RowID(ThisObject, Cancel, WriteMode, PostingMode);
@@ -161,4 +163,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		Number = Undefined;
 		Date = Undefined;
 	EndIf;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.DocumentNumber = "";
 EndProcedure

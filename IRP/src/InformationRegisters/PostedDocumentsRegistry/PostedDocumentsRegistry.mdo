@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="95d9cba5-2945-4d03-a426-d3fc8e6ec092">
+  <producedTypes>
+    <selectionType typeId="67cbb200-dfeb-4d50-a52c-6394321c3e70" valueTypeId="ac2e9949-4a9c-43a1-88a6-42516b453edf"/>
+    <listType typeId="ad4360f6-8415-4884-879c-67bcb0e318f3" valueTypeId="3672445f-433d-43f2-a3f4-d67e2591fc7e"/>
+    <managerType typeId="724d7192-d771-481d-98dc-a38a42056472" valueTypeId="a588f9e8-9d49-475f-bbbe-e2d1ce7aff32"/>
+    <recordSetType typeId="114da077-1df6-4ced-96b1-e89cda0b384a" valueTypeId="55fd2b4f-1964-411e-8951-630221f40282"/>
+    <recordKeyType typeId="982db035-b5a8-479c-be5c-f6779ea2f8e3" valueTypeId="c26a386d-9278-4a80-b1ec-489c5edc4bb6"/>
+    <recordType typeId="45eeefe8-c106-4871-b674-e325c6bc50f1" valueTypeId="e7013075-85ef-464f-bd44-ea0f62a642a9"/>
+    <recordManagerType typeId="2126cf8c-22cc-4b82-ba9d-890c84c41074" valueTypeId="5ecb0dc4-9e62-4310-8eea-1daaf094de58"/>
+  </producedTypes>
+  <name>PostedDocumentsRegistry</name>
+  <synonym>
+    <key>en</key>
+    <value>Posted documents registry</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultListForm>InformationRegister.PostedDocumentsRegistry.Form.ListForm</defaultListForm>
+  <writeMode>RecorderSubordinate</writeMode>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <attributes uuid="39c077ed-c0b2-40d8-8f37-8234d10edf27">
+    <name>Date</name>
+    <synonym>
+      <key>en</key>
+      <value>Date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="86151c23-cadb-4c21-9904-e0dbed6882a7">
+    <name>Number</name>
+    <synonym>
+      <key>en</key>
+      <value>Number</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>12</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="e4d8b6a2-2394-4310-89e9-bc5b48940a17">
+    <name>CreateDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Create date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="3dbd6a08-77a6-40fd-a759-ee399725e5b3">
+    <name>ModifyDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Modify date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="83d81de5-6a39-4ef0-be13-6f4c45dcbd49">
+    <name>Author</name>
+    <synonym>
+      <key>en</key>
+      <value>Author</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="2323784d-a747-4dfb-b614-b6d10593c859">
+    <name>Editor</name>
+    <synonym>
+      <key>en</key>
+      <value>Editor</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="08719ebb-baf5-4bd7-ba3e-337f2210a7e0">
+    <name>ManualMovementsEdit</name>
+    <synonym>
+      <key>en</key>
+      <value>Manual movements edit</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <dimensions uuid="f0e583ea-06fe-4d86-9a19-03665c79d917">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="a0f52905-bd9d-4eeb-9dcc-f58c11172215">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9969142d-25c9-4877-b84b-9d50201a2fc9">
+    <name>ChoiceDocumentType</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice document type</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

@@ -23,13 +23,10 @@
       <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
     </typesFilterValue>
     <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
     <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <characteristics>
     <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
@@ -39,13 +36,10 @@
       <value>Catalog.AddAttributeAndPropertySets.Catalog_AgingPeriods</value>
     </typesFilterValue>
     <dataPathField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</dataPathField>
-    <multipleValuesUseField>0</multipleValuesUseField>
     <characteristicValues>Catalog.AgingPeriods.TabularSection.AddAttributes</characteristicValues>
     <objectField>Catalog.AgingPeriods.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Catalog.AgingPeriods.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>0</multipleValuesKeyField>
-    <multipleValuesOrderField>0</multipleValuesOrderField>
   </characteristics>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>

@@ -62,13 +62,24 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 	ElsIf TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		If FillingData.BasedOn = "SalesReportFromTradeAgent" Then
+			
 			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
 			Filling_BasedOn(FillingData);
+		
+		ElsIf FillingData.BasedOn = "CurrencyRevaluationInvoice" Then
+			
+			ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+			Filling_BasedOn(FillingData);
+			CommonFunctionsClientServer.PutToAddInfo(ThisObject.AdditionalProperties, 
+				"RecalculationCommand", "Command_RecalculateByTotalAmount");			
+		
 		Else
+			
 			PropertiesHeader = RowIDInfoServer.GetSeparatorColumns(ThisObject.Metadata());
 			FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 			LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 			ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+		
 		EndIf;
 	EndIf;
 EndProcedure
@@ -92,6 +103,15 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
 	EndIf;
+	
+	If (ThisObject.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationCustomer 
+			Or ThisObject.TransactionType = Enums.PurchaseTransactionTypes.CurrencyRevaluationVendor)
+	 	And ValueIsFilled(ThisObject.Agreement) 
+		And Agreement.Type = Enums.ApArPostingDetail.ByDocuments
+		And Not ValueIsFilled(ThisObject.CurrencyRevaluationInvoice) Then 
+			CheckedAttributes.Add("CurrencyRevaluationInvoice");
+	EndIf;
+	
 	For Each Row In ThisObject.ItemList Do
 		ItemKeyRow = New Structure();
 		ItemKeyRow.Insert("LineNumber", Row.LineNumber);

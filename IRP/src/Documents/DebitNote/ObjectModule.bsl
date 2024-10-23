@@ -1,3 +1,4 @@
+
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
@@ -43,5 +44,14 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	Return;
+	TransactionsCurrencyLimit = Transactions.Unload();
+	TransactionsCurrencyLimit.GroupBy("Currency");
+	If TransactionsCurrencyLimit.Count() > 1 Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_174);
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+Procedure OnCopy(CopiedObject)
+	ThisObject.DocumentNumber = "";
 EndProcedure

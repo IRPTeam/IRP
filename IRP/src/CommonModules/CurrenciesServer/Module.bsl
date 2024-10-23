@@ -2020,3 +2020,163 @@ Function NeedUpdateCurrenciesTable(Object) Export
 	Return False;
 EndFunction
 	
+Procedure CurrencyRevaluationInvoice(Ref, Parameters, TransactionRegisterName, AddInfo = Undefined) Export
+	Tables = Parameters.DocumentDataTables;
+	
+	TransactionsRecalculated = Tables[TransactionRegisterName].CopyColumns();
+	PartnerBalanceRecalculated = Tables.R5020B_PartnersBalance.CopyColumns();
+	
+	CurrencyTable = Ref.Currencies.Unload();
+
+	TransactionsMetadata = Metadata.AccumulationRegisters[TransactionRegisterName];
+	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, TransactionsMetadata.Name, Tables[TransactionRegisterName]);
+	Parameters.PostingDataTables[TransactionsMetadata].WriteInTransaction = Parameters.IsReposting;
+
+	PartnerBalanceMetadata = Metadata.AccumulationRegisters.R5020B_PartnersBalance;
+	PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, PartnerBalanceMetadata.Name, Tables.R5020B_PartnersBalance);
+	Parameters.PostingDataTables[PartnerBalanceMetadata].WriteInTransaction = Parameters.IsReposting;
+
+	PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+
+	For Each RowRecordSet In Parameters.PostingDataTables[TransactionsMetadata].PrepareTable Do
+		FillPropertyValues(TransactionsRecalculated.Add(), RowRecordSet);
+	EndDo;
+	Parameters.PostingDataTables.Delete(TransactionsMetadata);
+	Tables[TransactionRegisterName] = TransactionsRecalculated;
+	
+	For Each RowRecordSet In Parameters.PostingDataTables[PartnerBalanceMetadata].PrepareTable Do
+		FillPropertyValues(PartnerBalanceRecalculated.Add(), RowRecordSet);
+	EndDo;
+	Parameters.PostingDataTables.Delete(PartnerBalanceMetadata);
+	Tables.R5020B_PartnersBalance = PartnerBalanceRecalculated;
+	
+	ExcludePostingDataTable(Parameters, TransactionsMetadata);
+	ExcludePostingDataTable(Parameters, PartnerBalanceMetadata);
+		
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.SetParameter("BalancePeriod", Parameters.QueryParameters.BalancePeriod);
+	Query.Text = 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period AS Period,
+	|	Reg.Company AS Company,
+	|	Reg.Branch AS Branch,
+	|	Reg.CurrencyMovementType AS CurrencyMovementType,
+	|	Reg.Currency AS Currency,
+	|	Reg.TransactionCurrency AS TransactionCurrency,
+	|	Reg.LegalName AS LegalName,
+	|	Reg.Partner AS Partner,
+	|	Reg.Agreement AS Agreement,
+	|	Reg.Basis AS Basis,
+	|	Reg.Order AS Order,
+	|	Reg.Project AS Project,
+	|	Reg.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.%1.Balance(
+	|			&BalancePeriod,
+	|			(Company, Branch, Partner, LegalName, Agreement, Project, Basis) IN
+	|				(SELECT
+	|					ItemList.Company AS Company,
+	|					ItemList.Branch AS Branch,
+	|					ItemList.Partner AS Partner,
+	|					ItemList.LegalName AS LegalName,
+	|					ItemList.Agreement AS Agreement,
+	|					ItemList.Project AS Project,
+	|					ItemList.CurrencyRevaluationInvoice
+	|				FROM
+	|					ItemList AS ItemList
+	|				WHERE
+	|					ItemList.IsCurrencyRevaluation)) AS Reg
+	|		INNER JOIN ItemList AS ItemList
+	|		ON Reg.Company = ItemList.Company
+	|			AND Reg.Branch = ItemList.Branch
+	|			AND Reg.Partner = ItemList.Partner
+	|			AND Reg.LegalName = ItemList.LegalName
+	|			AND Reg.Agreement = ItemList.Agreement
+	|			AND Reg.Project = ItemList.Project
+	|			AND (ItemList.IsCurrencyRevaluation)
+	|			AND Reg.Basis = ItemList.CurrencyRevaluationInvoice;
+	|
+	|///////////////////////////////////////////////////////////////////////////////////////////////////
+	|	
+	|	SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	ItemList.Period AS Period,
+	|	Reg.Company AS Company,
+	|	Reg.Branch AS Branch,
+	|	Reg.CurrencyMovementType AS CurrencyMovementType,
+	|	Reg.Currency AS Currency,
+	|	Reg.TransactionCurrency AS TransactionCurrency,
+	|	Reg.LegalName AS LegalName,
+	|	Reg.Partner AS Partner,
+	|	Reg.Agreement AS Agreement,
+	|	Reg.Document AS Document,
+	|	Reg.%2Balance AS BalanceAmount
+	|FROM
+	|	AccumulationRegister.R5020B_PartnersBalance.Balance(
+	|			&BalancePeriod,
+	|			(Company, Branch, Partner, LegalName, Agreement, Document) IN
+	|				(SELECT
+	|					ItemList.Company AS Company,
+	|					ItemList.Branch AS Branch,
+	|					ItemList.Partner AS Partner,
+	|					ItemList.LegalName AS LegalName,
+	|					ItemList.Agreement AS Agreement,
+	|					ItemList.CurrencyRevaluationInvoice
+	|				FROM
+	|					ItemList AS ItemList
+	|				WHERE
+	|					ItemList.IsCurrencyRevaluation)) AS Reg
+	|		INNER JOIN ItemList AS ItemList
+	|		ON Reg.Company = ItemList.Company
+	|			AND Reg.Branch = ItemList.Branch
+	|			AND Reg.Partner = ItemList.Partner
+	|			AND Reg.LegalName = ItemList.LegalName
+	|			AND Reg.Agreement = ItemList.Agreement
+	|			AND (ItemList.IsCurrencyRevaluation)
+	|			AND Reg.Document = ItemList.CurrencyRevaluationInvoice";
+	
+	CurrencyRevaluationInvoiceType = TypeOf(Ref.CurrencyRevaluationInvoice);
+	If CurrencyRevaluationInvoiceType = Type("DocumentRef.SalesInvoice") Then // Currency revaluation (customer)
+	
+		ResourceName = "CustomerTransaction";
+		Query.Text = StrTemplate(Query.Text, "R2021B_CustomersTransactions", ResourceName);
+		TransactionTable = Tables.R2021B_CustomersTransactions;		
+		ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R2021B_CustomersTransactions);
+		
+	ElsIf CurrencyRevaluationInvoiceType = Type("DocumentRef.PurchaseInvoice") Then // Currency revaluation (vendor)
+	
+		ResourceName = "VendorTransaction";
+		Query.Text = StrTemplate(Query.Text, "R1021B_VendorsTransactions", ResourceName);
+		TransactionTable = Tables.R1021B_VendorsTransactions;
+		ExcludePostingDataTable(Parameters, Metadata.AccumulationRegisters.R1021B_VendorsTransactions);
+		
+	Else
+		Raise StrTemplate("Unsupported Currency revaluation invoice type [%1]", CurrencyRevaluationInvoiceType);
+	EndIf;
+	
+	If TransactionTable.Columns.Find("RecordType") = Undefined Then
+		TransactionTable.Columns.Add("RecordType");
+	EndIf;
+		
+	If Tables.R5020B_PartnersBalance.Columns.Find("RecordType") = Undefined Then
+		Tables.R5020B_PartnersBalance.Columns.Add("RecordType");
+	EndIf;
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	TransactionQuerySelection = QueryResults[0].Select();
+	While TransactionQuerySelection.Next() Do
+		FillPropertyValues(TransactionTable.Add(), TransactionQuerySelection);
+	EndDo;
+	
+	PartnerBalanceQuerySelection = QueryResults[1].Select();
+	While PartnerBalanceQuerySelection.Next() Do
+		NewRow_PartnerBalance = Tables.R5020B_PartnersBalance.Add();
+		FillPropertyValues(NewRow_PartnerBalance, PartnerBalanceQuerySelection);
+		NewRow_PartnerBalance[ResourceName] = PartnerBalanceQuerySelection.BalanceAmount;
+	EndDo;
+EndProcedure
+	
+	

@@ -533,6 +533,20 @@
       <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="605f7baa-5a36-4cc7-8b25-ee6dc3d89634">
+      <name>SalesOrder</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="c99d67d6-126b-41c7-a695-e2b052fbb9e1">
     <producedTypes>

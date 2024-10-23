@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="4cfa6eeb-fa12-4ad7-9bbd-3c8b50490c25">
+  <producedTypes>
+    <selectionType typeId="36af4571-68a8-4d0b-bcdd-be5280e2e919" valueTypeId="964aa3bd-6c12-43e2-ae0b-8d18fc02e094"/>
+    <listType typeId="2337b0d1-b57b-4629-a921-75dbc77d3aa1" valueTypeId="fe34ba3f-d1db-4209-9985-ec80257a52ba"/>
+    <managerType typeId="12d2d000-0602-478c-b5b4-f52355f43a76" valueTypeId="d40a2f39-e757-4031-a44b-e425d3c60208"/>
+    <recordSetType typeId="83fd49ef-a4a8-4e80-86a3-242107cb2036" valueTypeId="76475b52-982b-4efd-bdf0-0e6a06ab50ed"/>
+    <recordKeyType typeId="f0c5020a-ab35-4fed-a148-42037f869696" valueTypeId="386e2b9b-e01f-4746-92f1-e276f3946918"/>
+    <recordType typeId="26d78a61-31a8-422a-abb8-2ed3f91dae01" valueTypeId="523d60ac-3973-4566-93f4-f3d40d22b122"/>
+    <recordManagerType typeId="830ce1dd-697d-4778-98cd-fbc0a0534a27" valueTypeId="e7cc23f6-ea4b-48e1-86dd-b5ce653b127e"/>
+  </producedTypes>
+  <name>FilePartsForUpload</name>
+  <synonym>
+    <key>en</key>
+    <value>File parts for upload</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="84db1fc4-f55e-4671-a9e4-21772852bbb8">
+    <name>Loaded</name>
+    <synonym>
+      <key>en</key>
+      <value>Loaded</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="7efb94f0-59f9-4344-91f1-7e647980f498">
+    <name>Content</name>
+    <synonym>
+      <key>en</key>
+      <value>Content</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <attributes uuid="68f66e27-6c36-4437-98c4-f65b99afb9ea">
+    <name>CreateDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Create date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <dimensions uuid="45ed711b-4709-4638-a057-eb71b4a87155">
+    <name>MD5</name>
+    <synonym>
+      <key>en</key>
+      <value>M d5</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="4267113d-0dff-44e1-9131-f648d1a71972">
+    <name>PartNumber</name>
+    <synonym>
+      <key>en</key>
+      <value>Part number</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <nonNegative>true</nonNegative>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
+</mdclass:InformationRegister>

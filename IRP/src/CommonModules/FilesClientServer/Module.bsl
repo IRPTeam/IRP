@@ -84,6 +84,56 @@ Procedure SetFileInfo(FileInfo, Object) Export
 	
 EndProcedure
 
+// Get StoredFileDescription wrapper
+// 
+// Parameters:
+//  PathToFile - String - Path to file
+// 
+// Returns:
+//  Structure - Get stored file description wrapper:
+// * PathToFile - String - 
+// * Size - Number - 
+// * Address - String - 
+// * PutFileCanceled - Boolean - 
+// * FileRef - Structure - :
+// ** FileID - UUID - 
+// ** Name - String - 
+// ** Extension - String - 
+// ** File  - Structure - :
+// *** Name - String -
+// *** BaseName - String -
+// *** Extension - String -
+// *** FullName - String -
+// *** Path - String -
+Function GetStoredFileDescriptionWrapper(PathToFile) Export
+	
+	FileInfo = New File(PathToFile);
+	
+	FileDescription = New Structure;
+	FileDescription.Insert("Name", FileInfo.Name);
+	FileDescription.Insert("BaseName", FileInfo.BaseName);
+	FileDescription.Insert("Extension", FileInfo.Extension);
+	FileDescription.Insert("FullName", FileInfo.FullName);
+	FileDescription.Insert("Path", FileInfo.Path);
+	
+	FileRef = New Structure();
+	FileRef.Insert("FileID", New UUID("00000000-0000-0000-0000-000000000000"));
+	FileRef.Insert("Name", FileInfo.Name);
+	FileRef.Insert("Extension", FileInfo.Extension);
+	FileRef.Insert("File", FileDescription);
+	
+	Result = New Structure();
+	Result.Insert("Address", "");
+	Result.Insert("PutFileCanceled", False);
+	Result.Insert("FileRef", FileRef);
+	
+	Result.Insert("PathToFile", PathToFile);
+	Result.Insert("Size", FileInfo.Size());
+	
+	Return Result;
+	
+EndFunction
+
 #EndRegion
 
 #Region WorkWithFileInWEB

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0667767b-f985-45b8-a7bd-e29228ac528c">
+  <producedTypes>
+    <objectType typeId="d63cdadd-0f11-4b1c-a557-bdf3baae1ebd" valueTypeId="3f5dbb78-41ea-4137-a2b0-b584fb4c04a9"/>
+    <managerType typeId="01c8a8c8-0228-47af-89a4-6f832ca99cf4" valueTypeId="93a1611f-eb7d-42da-855a-b02a9852b8ee"/>
+  </producedTypes>
+  <name>LoadTest</name>
+  <synonym>
+    <key>en</key>
+    <value>Load test</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <defaultForm>DataProcessor.LoadTest.Form.Form</defaultForm>
+  <forms uuid="502ae136-0f2d-4848-8cb4-f07ed4753f8f">
+    <name>Form</name>
+    <synonym>
+      <key>en</key>
+      <value>Form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:DataProcessor>

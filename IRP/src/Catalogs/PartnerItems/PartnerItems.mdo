@@ -54,6 +54,7 @@
     <key>en</key>
     <value>Partner item</value>
   </objectPresentation>
+  <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -64,8 +65,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.PartnerItems.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.PartnerItems.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.PartnerItems.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PartnerItems.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.PartnerItems.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
     <name>Partner</name>
     <synonym>
@@ -200,6 +203,24 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="db8611a1-be5c-472f-b0ad-a61a8a6b2b76">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="496c3d82-11c9-4c40-8646-9678c0147c09">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

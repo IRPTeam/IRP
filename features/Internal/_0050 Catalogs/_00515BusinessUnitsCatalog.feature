@@ -21,6 +21,8 @@ Scenario: _005046 filling in Business units
 	When set True value to the constant
 	* Open a creation form Business units
 		Given I open hyperlink "e1cib/list/Catalog.BusinessUnits"
+	* Check hierarchical
+		When create Groups in the catalog				
 	* Create business unit 'Front office 01'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"

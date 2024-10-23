@@ -1035,6 +1035,7 @@ Scenario: _01541969 check copy lines from PurchaseInvoice
 		And I close all client application windows
 
 Scenario: _01541970 check copy lines from StockAdjustmentAsWriteOff
+	And Delay 10
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 	And I click the button named "FormCreate"
@@ -1057,6 +1058,7 @@ Scenario: _01541970 check copy lines from StockAdjustmentAsWriteOff
 		And I close all client application windows
 
 Scenario: _01541971 check copy lines from Inventory transfer
+	And Delay 80
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"

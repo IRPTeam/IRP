@@ -74,10 +74,11 @@ Scenario: _900003 create items
 		And I click "Save and close" button
 		And I wait "Item (create) *" window closing in 20 seconds
 	* Check
-		And "List" table became equal
+		And "List" table contains lines
 			| 'Description'   | 'Item type'    |
-			| 'Product 1'     | 'Product'      |
 			| 'Service 1'     | 'Service'      |
+			| 'Product 1'     | 'Product'      |
+		Then the number of "List" table lines is "равно" "2"
 		And I close all client application windows
 
 Scenario: _900004 create partners (vendor and customer)

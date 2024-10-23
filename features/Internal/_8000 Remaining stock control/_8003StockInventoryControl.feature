@@ -777,6 +777,7 @@ Scenario:_8003011 try unpost RetailReturnReceipt that make a plus on the store
 
 Scenario:_8003012 try unpost SalesReturn that make a plus on the store
 	And I close all client application windows
+	And Delay 80
 	* Preparation
 		* Remove control (store 05)
 			When Remove stock control for store 05
@@ -850,6 +851,7 @@ Scenario:_8003012 try unpost SalesReturn that make a plus on the store
 
 Scenario:_8003013 try unpost StockAdjustmentAsSurplus that make a plus on the store
 	And I close all client application windows
+	And Delay 80
 	* Preparation
 		* Remove control (store 05)
 			When Remove stock control for store 05

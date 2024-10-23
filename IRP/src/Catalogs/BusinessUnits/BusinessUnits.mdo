@@ -53,6 +53,7 @@
     <key>en</key>
     <value>Business unit</value>
   </objectPresentation>
+  <hierarchical>true</hierarchical>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -63,8 +64,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.BusinessUnits.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.BusinessUnits.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.BusinessUnits.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BusinessUnits.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.BusinessUnits.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <attributes uuid="f9a37c70-5521-431b-bfc5-fc177e0f9d33">
     <name>Department</name>
     <synonym>
@@ -254,6 +257,24 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f02fdc23-d7f2-424e-997f-9b142460ebaa">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2f3e6377-4d2c-48a6-84ac-10113c7891eb">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

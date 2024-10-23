@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -20,6 +20,8 @@ Scenario: _005032 filling in the "Stores" catalog
 	When set True value to the constant
 	* Opening a form for creating Stores
 		Given I open hyperlink "e1cib/list/Catalog.Stores"
+		* Check hierarchical
+			When create Groups in the catalog
 	* Create Store 01
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"
@@ -89,8 +91,3 @@ Scenario: _005032 filling in the "Stores" catalog
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 02"  
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 03"
 		Then I check for the "Stores" catalog element with the "Description_en" "Store 04"
-	# * Clean catalog
-	# 	And I delete "Stores" catalog element with the Description_en "Store 01"
-	# 	And I delete "Stores" catalog element with the Description_en "Store 02"
-	# 	And I delete "Stores" catalog element with the Description_en "Store 03"
-	# 	And I delete "Stores" catalog element with the Description_en "Store 04"

@@ -58,7 +58,6 @@
     <value>Projects</value>
   </listPresentation>
   <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
@@ -69,8 +68,10 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Projects.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.Projects.Form.GroupForm</defaultFolderForm>
   <defaultListForm>Catalog.Projects.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Projects.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.Projects.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <tabularSections uuid="fffef6e6-8f8f-402f-99aa-dd9395079161">
     <producedTypes>
@@ -155,6 +156,24 @@
     <synonym>
       <key>en</key>
       <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2998a37f-6f46-4319-a705-26e4c4de78e3">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="eeb4177e-de89-43e1-b298-453c5bc67f91">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

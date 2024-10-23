@@ -71,6 +71,9 @@ Scenario: check the filter for bank accounts (cash account selection is not avai
 			| Bank account, USD      |
 			| Bank account, EUR      |
 			| Bank account 2, EUR    |
+		And I go to line in "List" table
+			| Description       |
+			| Bank account, TRY |
 		And I select current line in "List" table
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	* Check the filling in currency
@@ -114,6 +117,9 @@ Scenario: check the filter by cash account (bank account selection is not availa
 			| Cash desk №2    |
 			| Cash desk №3    |
 			| Cash desk №4    |
+		And I go to line in "List" table
+			| Description     |
+			| Cash desk №1    |
 		And I select current line in "List" table
 		Then the form attribute named "CashAccount" became equal to "Cash desk №1"
 	* Check the filter by string input

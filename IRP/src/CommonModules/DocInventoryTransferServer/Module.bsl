@@ -109,6 +109,7 @@ Function GetDataFromPI(BasisArray) Export
 	|	PurchaseInvoiceItemList.Item AS Item,
 	|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
 	|	PurchaseInvoiceItemList.Unit AS Unit,
+	|	PurchaseInvoiceItemList.SalesOrder,
 	|	ISNULL(PurchaseInvoiceSerialLotNumbers.Quantity, PurchaseInvoiceItemList.Quantity) AS Quantity,
 	|	ISNULL(PurchaseInvoiceSerialLotNumbers.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)) AS SerialLotNumber,
 	|	PurchaseInvoiceItemList.Key AS Key
@@ -122,6 +123,7 @@ Function GetDataFromPI(BasisArray) Export
 	|TOTALS
 	|	MAX(Item) AS Item,
 	|	MAX(Unit) AS Unit,
+	|	MAX(SalesOrder) AS SalesOrder,
 	|	MAX(ItemKey) AS ItemKey
 	|BY
 	|	Key
@@ -186,7 +188,7 @@ Function GetDataFromPI(BasisArray) Export
 		If CreateRow Then
 			NewRowItemList = New Structure(ColumnForItemList);
 			NewRowItemList.Key = New UUID();
-			FillPropertyValues(NewRowItemList, SelectionKey, "Item, ItemKey, Unit, Key");
+			FillPropertyValues(NewRowItemList, SelectionKey, "Item, ItemKey, Unit, Key, SalesOrder");
 			NewRowItemList.PurchaseInvoice = SelectionHeader.DistributedPurchaseInvoice;
 			If ArrayOfSerialLotNumbers.Count() > 0 Then
 				TotalQuantity = 0;

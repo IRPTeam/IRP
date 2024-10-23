@@ -1944,7 +1944,6 @@
         <command>InformationRegister.T9010S_AccountsItemKey.StandardCommand.OpenByValue.ItemType</command>
         <group>FormNavigationPanelGoTo</group>
         <index>0</index>
-        <userVisible/>
       </cmiFragmentRecord>
     </navigationPanel>
     <commandBar/>

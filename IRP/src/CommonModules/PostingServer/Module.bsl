@@ -218,6 +218,10 @@ Function RegisterRecords(Parameters)
 			UpdateCosts(Parameters.Object, TableForLoad, RegisteredRecords);
 		EndIf;
 		
+		If TableForLoad.Count() Then
+			CommonFunctionsServer.SetDataTypesForLoadRecords(Row.Value.Metadata, TableForLoad);
+		EndIf;		
+		
 		// MD5
 		If RecordSetIsEqual(RecordSet, TableForLoad) Then
 			Continue;

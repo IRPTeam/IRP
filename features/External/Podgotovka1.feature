@@ -1989,3 +1989,43 @@ Scenario: Set stock control for store 05
 			Given I open hyperlink "e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf13c5c2df444"		
 			And I set checkbox "Negative stock control"
 			And I click "Save and close" button
+
+Scenario: create Groups in the catalog
+	* Create Group 01
+		And I click the button named "FormCreateFolder"
+		And I input "Group 01" text in "ENG" field
+		And I click "Save and close" button
+	* Create Group 02
+		And I click the button named "FormCreateFolder"
+		And I input "Group 02" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Group 02 tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 01"    |
+		And I select current line in "List" table
+		And I click "Save and close" button
+	* Check 
+		And "List" table became equal
+			| 'Description' |
+			| 'Group 01'    |
+			| 'Group 02'    |
+	* Create element in Group
+		And I click "Create" button
+		And I input "Test element" text in "ENG" field
+		And I click Open button of "ENG" field
+		And I input "Test element tr" text in "TR" field
+		And I click "Ok" button
+		And I click Choice button of the field named "Parent"
+		And I expand current line in "List" table
+		And I go to line in "List" table
+			| "Description" |
+			| "Group 02"    |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+		And "List" table contains lines
+			| 'Description'  |
+			| 'Group 01'     |
+			| 'Test element' |

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -19,6 +19,8 @@ Scenario: _005047 filling in Expense type
 	When set True value to the constant
 	* Open a creation form Expense type
 		Given I open hyperlink "e1cib/list/Catalog.ExpenseAndRevenueTypes"
+		* Check hierarchical
+			When create Groups in the catalog
 	* Create expense type 'Rent'
 		And I click the button named "FormCreate"
 		And I click Open button of the field named "Description_en"

@@ -99,80 +99,26 @@ EndProcedure
 
 Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
-	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
-	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
-	If ValueIsFilled(FileRef) Then
-		Return PictureViewerServer.GetFileInfo(FileRef);
-	EndIf;
-	RequestBody = GetFromTempStorage(File.Address);
-
-	If PictureViewerServer.isImage(File.FileRef.Extension) Then
-		PictureScaleSize = 200;
-		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
+	isFileImage = PictureViewerClientServer.isImage(File.FileRef.Extension);
+	If isFileImage Then
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	Else
-		FileInfo = PictureViewerClientServer.FileInfo();
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile(Volume);
 	EndIf;
-
-	FileID = String(New UUID());
-	FileInfo.FileID = FileID;
-	FileInfo.FileName = File.FileRef.Name;
-	FileInfo.MD5 = md5;
-	FileInfo.Extension = StrReplace(File.FileRef.Extension, ".", "");
-
+	
 	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
 			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.POSTIntegrationSettings, "UniqueID"));
-
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	If TypeOf(AdditionalParameters) = Type("Structure") Then
-		
-		If AdditionalParameters.Property("FilePrefix") Then
-			FilePrefix = AdditionalParameters.FilePrefix;
-			FileID = StrTemplate("%1__%2", FilePrefix, FileID);
-			//
-			FileInfo.FileName = FilePrefix;
-			//
-		EndIf;
-		
-		If AdditionalParameters.Property("PrintFormName") Then
-			FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
-		EndIf;
+	If ConnectionSettings.Value.Property("ServerSideConnection") 
+			And ConnectionSettings.Value.ServerSideConnection = True Then
+		Return PictureViewerServer.UploadPicture(File, Volume, AdditionalParameters);
 	EndIf;
 	
-	Parameters = New Structure();
-	Parameters.Insert("ConnectionSettings", ConnectionSettings);
-	Parameters.Insert("RequestBody", RequestBody);
-	Parameters.Insert("FileID", FileID);
-	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
-		FileName = FileID;
-		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName + "."
-			+ FileInfo.Extension, RequestBody);
-		FileInfo.Success = True;
-		FileInfo.URI = FileID + "." + FileInfo.Extension;
+	Return PictureViewerClientServer.UploadPicture(File, ConnectionSettings, AdditionalParameters);
 
-	ElsIf Not ExtensionCall_UploadPicture(FileInfo, Parameters) Then
-		ConnectionSettings.Value.QueryType = "POST";
-		ResourceParameters = New Structure();
-		ResourceParameters.Insert("filename", FileID + "." + FileInfo.Extension);
-
-		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters, , RequestBody);
-		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-			DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
-			FileInfo.URI = DeserializeResponse.Data.URI;
-			FileInfo.Success = True;
-		Else
-			FileInfo.Success = False;
-		EndIf;
-	EndIf;
-	Return FileInfo;
-EndFunction
-
-Function ExtensionCall_UploadPicture(FileInfo, Parameters) Export
-	Return False
 EndFunction
 
 Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export

@@ -3059,6 +3059,30 @@ Procedure TransactionsBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Un
 	EndIf;
 EndProcedure
 
+Function TransactionsCopyRow(Object, Form, CurrentData) Export
+	Cancel = False;
+	Clone = True; 
+	NewRow = AddOrCopyRow(Object, Form, "Transactions", Cancel, Clone, CurrentData,
+		"TransactionsOnAddRowFormNotify", "TransactionsOnCopyRowFormNotify");
+	Form.Items.Transactions.CurrentRow = NewRow.GetID();
+	If Form.Items.Transactions.CurrentRow <> Undefined Then
+		Form.Items.Transactions.ChangeRow();
+	EndIf;
+	Return NewRow;
+EndFunction
+
+Procedure TransactionsFillExistsRow(Object, Form,  FillingValues, CurrentData=Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "Transactions", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "Transactions", Rows);
+	
+	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+	ModelClientServer_V2.TransferFormToStructure(Transfer, Parameters);
+	ViewServer_V2.AddNewRowAtServer("Transactions", Parameters, 
+		"TransactionsOnAddRowFormNotify", FillingValues);
+	ModelClientServer_V2.TransferStructureToForm(Transfer, Parameters);
+	ControllerClientServer_V2.CommitChainChanges(Parameters);
+EndProcedure
+
 Procedure TransactionsOnAddRowFormNotify(Parameters) Export
 	Parameters.Form.Modified = True;
 EndProcedure

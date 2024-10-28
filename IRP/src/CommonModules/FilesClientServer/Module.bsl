@@ -88,6 +88,7 @@ EndProcedure
 // 
 // Parameters:
 //  PathToFile - String - Path to file
+//  OriginStoredFile - StoredFileDescription - Origin stored file description
 // 
 // Returns:
 //  Structure - Get stored file description wrapper:
@@ -105,32 +106,49 @@ EndProcedure
 // *** Extension - String -
 // *** FullName - String -
 // *** Path - String -
-Function GetStoredFileDescriptionWrapper(PathToFile) Export
+Function GetStoredFileDescriptionWrapper(PathToFile = "", OriginStoredFile = Undefined) Export
 	
-	FileInfo = New File(PathToFile);
+	Wrapper = New Structure();
+	Wrapper.Insert("Address", "");
+	Wrapper.Insert("PutFileCanceled", False);
+	Wrapper.Insert("PathToFile", PathToFile);
+	Wrapper.Insert("Size", 0);
+	Wrapper.Insert("FileRef", New Structure);
 	
-	FileDescription = New Structure;
-	FileDescription.Insert("Name", FileInfo.Name);
-	FileDescription.Insert("BaseName", FileInfo.BaseName);
-	FileDescription.Insert("Extension", FileInfo.Extension);
-	FileDescription.Insert("FullName", FileInfo.FullName);
-	FileDescription.Insert("Path", FileInfo.Path);
+	Wrapper.FileRef.Insert("FileID", New UUID("00000000-0000-0000-0000-000000000000"));
+	Wrapper.FileRef.Insert("Name", "");
+	Wrapper.FileRef.Insert("Extension", "");
 	
-	FileRef = New Structure();
-	FileRef.Insert("FileID", New UUID("00000000-0000-0000-0000-000000000000"));
-	FileRef.Insert("Name", FileInfo.Name);
-	FileRef.Insert("Extension", FileInfo.Extension);
-	FileRef.Insert("File", FileDescription);
+	FileWrapper = New Structure;
+	FileWrapper.Insert("Name", "");
+	FileWrapper.Insert("BaseName", "");
+	FileWrapper.Insert("Extension", "");
+	FileWrapper.Insert("FullName", "");
+	FileWrapper.Insert("Path", "");
+	Wrapper.FileRef.Insert("File", FileWrapper);
 	
-	Result = New Structure();
-	Result.Insert("Address", "");
-	Result.Insert("PutFileCanceled", False);
-	Result.Insert("FileRef", FileRef);
+	If OriginStoredFile <> Undefined Then
+		FillPropertyValues(Wrapper, OriginStoredFile, "Address,PutFileCanceled");
+		FillPropertyValues(Wrapper.FileRef, OriginStoredFile.FileRef, "FileID,Name,Extension");
+		FillPropertyValues(FileWrapper, OriginStoredFile.FileRef.File, "BaseName,Name,Extension,FullName,Path");
+		
+	ElsIf Not IsBlankString(PathToFile) Then
+		FileInfo = New File(PathToFile);
+		
+		Wrapper.PathToFile = PathToFile;
+		Wrapper.Size = FileInfo.Size();
+		Wrapper.FileRef.Insert("Name", FileInfo.Name);
+		Wrapper.FileRef.Insert("Extension", FileInfo.Extension);
+		
+		FileWrapper.Name = FileInfo.Name;
+		FileWrapper.BaseName = FileInfo.BaseName;
+		FileWrapper.Extension = FileInfo.Extension;
+		FileWrapper.FullName = FileInfo.FullName;
+		FileWrapper.Path = FileInfo.Path;
+		
+	EndIf;
 	
-	Result.Insert("PathToFile", PathToFile);
-	Result.Insert("Size", FileInfo.Size());
-	
-	Return Result;
+	Return Wrapper;
 	
 EndFunction
 

@@ -114,7 +114,8 @@ Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
 	If ConnectionSettings.Value.Property("ServerSideConnection") 
 			And ConnectionSettings.Value.ServerSideConnection = True Then
-		Return PictureViewerServer.UploadPicture(File, Volume, AdditionalParameters);
+		Return PictureViewerServer.UploadPicture(
+			FilesClientServer.GetStoredFileDescriptionWrapper(, File), Volume, AdditionalParameters);
 	EndIf;
 	
 	Return PictureViewerClientServer.UploadPicture(File, ConnectionSettings, AdditionalParameters);

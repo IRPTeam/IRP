@@ -344,7 +344,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>OverduePeriodsSearchString</source>
+          <source>OverduePeriods</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -383,7 +383,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>OverduePeriodsViewStatus</source>
+          <source>OverduePeriods</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -422,7 +422,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>OverduePeriodsSearchControl</source>
+          <source>OverduePeriods</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -761,7 +761,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>FuturePeriodsSearchString</source>
+          <source>FuturePeriods</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -800,7 +800,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>FuturePeriodsViewStatus</source>
+          <source>FuturePeriods</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -839,7 +839,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>FuturePeriodsSearchControl</source>
+          <source>FuturePeriods</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

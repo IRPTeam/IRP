@@ -6851,6 +6851,12 @@ Function GetTransactionsAmount(Parameters, _Key)
 	Return GetPropertyObject(Parameters, BindTransactionsAmount(Parameters).DataPath, _Key);
 EndFunction
 
+// Transactions.Amount.Set
+Procedure SetTransactionsAmount(Parameters, Results) Export
+	Binding = BindTransactionsAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
 // Transactions.Amount.Bind
 Function BindTransactionsAmount(Parameters)
 	DataPath = "Transactions.Amount";
@@ -13030,6 +13036,12 @@ EndFunction
 Procedure ItemListTotalAmountOnChange(Parameters) Export
 	Binding = BindItemListTotalAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TotalAmount.Set
+Procedure SetItemListTotalAmount(Parameters, Results) Export
+	Binding = BindItemListTotalAmount(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
 // ItemList.TotalAmount.Get

@@ -26,8 +26,12 @@ Procedure FillDefaultDescriptionsAtServer()
 		Obj = SelectionDetailRecords.Ref.GetObject(); // CatalogObject.AddAttributeAndPropertySets
 		CurrentUserLang = ?(IsBlankString(SessionParameters.LocalizationCode), "en", SessionParameters.LocalizationCode);
 		
-		DataType = Metadata.FindByFullName(StrReplace(Obj.PredefinedDataName, "_", "."));
-		
+		Segments = StrSplit(Obj.PredefinedDataName, "_");
+		If Segments.Count() = 2 Then
+			DataType = Metadata.FindByFullName(StrReplace(Obj.PredefinedDataName, "_", "."));
+		Else
+			DataType = Metadata.FindByFullName(Segments[0]+"."+Segments[1]+"_"+Segments[2]);
+		EndIf;
 		If DataType = Undefined Then
 			Continue;
 		EndIf;

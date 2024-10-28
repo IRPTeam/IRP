@@ -1086,7 +1086,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>CurrenciesSearchString</source>
+          <source>Currencies</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1125,7 +1125,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>CurrenciesViewStatus</source>
+          <source>Currencies</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1165,7 +1165,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>CurrenciesSearchControl</source>
+          <source>Currencies</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1581,7 +1581,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>CompanyTaxesSearchString</source>
+          <source>CompanyTaxes</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1620,7 +1620,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>CompanyTaxesViewStatus</source>
+          <source>CompanyTaxes</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1660,7 +1660,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>CompanyTaxesSearchControl</source>
+          <source>CompanyTaxes</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1950,7 +1950,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>CompanyLedgerTypesSearchString</source>
+          <source>CompanyLedgerTypes</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1989,7 +1989,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>CompanyLedgerTypesViewStatus</source>
+          <source>CompanyLedgerTypes</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2028,7 +2028,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>CompanyLedgerTypesSearchControl</source>
+          <source>CompanyLedgerTypes</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

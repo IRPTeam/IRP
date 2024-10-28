@@ -1420,7 +1420,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ConnectParametersSearchString</source>
+          <source>ConnectParameters</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1459,7 +1459,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ConnectParametersViewStatus</source>
+          <source>ConnectParameters</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1499,7 +1499,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ConnectParametersSearchControl</source>
+          <source>ConnectParameters</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2027,7 +2027,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>DriverParameterSearchString</source>
+          <source>DriverParameter</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2066,7 +2066,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>DriverParameterViewStatus</source>
+          <source>DriverParameter</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -2105,7 +2105,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>DriverParameterSearchControl</source>
+          <source>DriverParameter</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

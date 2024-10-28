@@ -69,6 +69,8 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, Object = Undefin
 		ConnectionSetting.Insert("TimeOut", 60);
 		ConnectionSetting.Insert("SecureConnection", True);
 		ConnectionSetting.Insert("UseOSAuthentication", False);
+		ConnectionSetting.Insert("TimeOut", 60);
+		ConnectionSetting.Insert("ServerSideConnection", False);
 	EndIf;
 	Return ConnectionSetting;
 EndFunction

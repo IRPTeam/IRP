@@ -84,9 +84,9 @@ SalesReceiptXML51 =
 <CheckPackage>
 <Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute=""/>
 <Positions>
-<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+<FiscalString AmountWithDiscount="129.8" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="129.8" VATRate="18" VATAmount="19.8"/>
 </Positions>
-<Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="98" Barter="0"/>
+<Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="109.8" Barter="0"/>
 </CheckPackage>
 """
 
@@ -1343,7 +1343,7 @@ Scenario: _08500171 payment by payment agent from POS (partial credit)
 		And I move to the next attribute
 		And I activate "Price" field in "ItemList" table
 		And I select current line in "ItemList" table
-		And I input "100,00" text in "Price" field of "ItemList" table
+		And I input "110,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Bank credit
 		And I click "Payment (+)" button
@@ -1352,9 +1352,9 @@ Scenario: _08500171 payment by payment agent from POS (partial credit)
 		And I click "0" button	
 		And I click "P\A" button
 		And "Payments" table became equal
-			| 'Payment type' | 'Amount' |
-			| 'Cash'         | '20,00'  |
-			| 'Bank credit'  | '98,00'  |
+			| 'Payment type' | 'Amount'  |
+			| 'Cash'         | '20,00'   |
+			| 'Bank credit'  | '109,80'  |
 		And I click the button named "Enter"
 		And Delay 5
 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
@@ -2014,12 +2014,12 @@ Scenario: _0850025 print receipt from sales return (cash)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML6"
 				
-Scenario: _08500251 sales return (bank credit)
+Scenario: _08500251 sales return (full bank credit)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
 	* Select Retail sales receipt
 		And I go to line in "List" table
-			| 'Amount'         |
+			| 'Amount'    |
 			| '118,00'    |
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
@@ -2032,6 +2032,25 @@ Scenario: _08500251 sales return (bank credit)
 		And Delay 5
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML7"
+
+// Scenario: _08500252 sales return (partial bank credit)
+// 	And I close all client application windows
+// 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+// 	* Select Retail sales receipt
+// 		And I go to line in "List" table
+// 			| 'Amount'    |
+// 			| '129,80'    |
+// 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
+// 		And I expand current line in "BasisesTree" table
+// 		And I click "Ok" button
+// 		And I click "Post" button
+// 		And I click "Print receipt" button
+// 	* Check fiscal log
+// 		And Delay 5
+// 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+// 		And Delay 5
+// 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+// 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML71"
 						
 Scenario: _0850026 sales return (card)
 	And I close all client application windows

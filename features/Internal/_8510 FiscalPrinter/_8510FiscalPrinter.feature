@@ -115,6 +115,18 @@ SalesReceiptXML7 =
 </CheckPackage>
 """
 
+SalesReceiptXML71 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+     <Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute=""/>
+     <Positions>
+        <FiscalString AmountWithDiscount="129.8" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="129.8" VATRate="18" VATAmount="19.8"/>
+     </Positions>
+     <Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="109.8" Barter="0"/>
+</CheckPackage>
+"""
+
 SalesReceiptXML8 =
 """xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2033,24 +2045,24 @@ Scenario: _08500251 sales return (full bank credit)
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML7"
 
-// Scenario: _08500252 sales return (partial bank credit)
-// 	And I close all client application windows
-// 	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
-// 	* Select Retail sales receipt
-// 		And I go to line in "List" table
-// 			| 'Amount'    |
-// 			| '129,80'    |
-// 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
-// 		And I expand current line in "BasisesTree" table
-// 		And I click "Ok" button
-// 		And I click "Post" button
-// 		And I click "Print receipt" button
-// 	* Check fiscal log
-// 		And Delay 5
-// 		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
-// 		And Delay 5
-// 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
-// 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML71"
+Scenario: _08500252 sales return (partial bank credit)
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"	
+	* Select Retail sales receipt
+		And I go to line in "List" table
+			| 'Amount'    |
+			| '129,80'    |
+		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
+		And I expand current line in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Post" button
+		And I click "Print receipt" button
+	* Check fiscal log
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And Delay 5
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML71"
 						
 Scenario: _0850026 sales return (card)
 	And I close all client application windows

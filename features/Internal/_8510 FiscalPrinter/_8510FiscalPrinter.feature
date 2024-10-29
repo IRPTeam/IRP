@@ -72,11 +72,24 @@ SalesReceiptXML5 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute=""/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="6" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
 """
+
+SalesReceiptXML51 =
+"""xml
+<?xml version="1.0" encoding="UTF-8"?>
+<CheckPackage>
+<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="1" TaxationSystem="0" AdditionalAttribute=""/>
+<Positions>
+<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="5" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+</Positions>
+<Payments Cash="20" ElectronicPayment="0" PrePayment="0" PostPayment="98" Barter="0"/>
+</CheckPackage>
+"""
+
 
 SalesReceiptXML6 =
 """xml
@@ -1280,7 +1293,7 @@ Scenario: _0850016 create retail sales receipt from POS (own stock, cash and car
 
 	
 				
-Scenario: _0850017 payment by payment agent from POS
+Scenario: _0850017 payment by payment agent from POS (full credit)
 	And I close all client application windows
 	And In the command interface I select "Retail" "Point of sale"
 	* Select retail customer
@@ -1312,7 +1325,41 @@ Scenario: _0850017 payment by payment agent from POS
 		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
 		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML5"
 
-
+Scenario: _08500171 payment by payment agent from POS (partial credit)
+	And I close all client application windows
+	And In the command interface I select "Retail" "Point of sale"
+	* Select retail customer
+		And I click "Search customer" button
+		And I input "002" text in "ID" field
+		And I move to the next attribute
+		And I click "OK" button
+	* Select first item (scan by barcode, with serial lot number)
+		And I click "Search by barcode (F7)" button
+		And I input "57897909799" text in the field named "Barcode"
+		And I move to the next attribute
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Bank credit
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "2" button
+		And I click "0" button	
+		And I click "P\A" button
+		And "Payments" table became equal
+			| 'Payment type' | 'Amount' |
+			| 'Cash'         | '20,00'  |
+			| 'Bank credit'  | '98,00'  |
+		And I click the button named "Enter"
+		And Delay 5
+		And I parsed the log of the fiscal emulator by the path '$$LogPath$$' into the variable "ParsingResult"
+		And I check "$ParsingResult$" with "0" and method is "ProcessCheck"
+		And I check "$ParsingResult$" with "0" and data in "In.Parameter3" the same as "SalesReceiptXML51"
 	
 Scenario: _0850018 advance payment (cash)
 	And I close all client application windows

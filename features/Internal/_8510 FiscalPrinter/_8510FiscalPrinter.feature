@@ -109,7 +109,7 @@ SalesReceiptXML7 =
 <CheckPackage>
 	<Parameters CashierName="Арина Браун" CashierINN="1111111111" SaleAddress="Sale address" SaleLocation="Sale location" OperationType="2" TaxationSystem="0" AdditionalAttribute=""/>
 	<Positions>
-		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="4" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
+		<FiscalString AmountWithDiscount="118" DiscountAmount="0" MarkingCode="Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" MeasureOfQuantity="255" CalculationSubject="1" Name="Product 6 with SLN PZU [57897909799]" Quantity="1" PaymentMethod="6" PriceWithDiscount="118" VATRate="18" VATAmount="18"/>
 	</Positions>
 	<Payments Cash="0" ElectronicPayment="0" PrePayment="0" PostPayment="118" Barter="0"/>
 </CheckPackage>
@@ -4375,7 +4375,7 @@ Scenario: _0260160 check Get Last Error button
 Scenario: _0260180 check fiscal logs
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/InformationRegister.HardwareLog"
-	Then the number of "List" table lines is "равно" "928"	
+	Then the number of "List" table lines is "равно" "960"	
 	* Check log records form
 		And I go to the first line in "List" table
 		And I select current line in "List" table
@@ -4930,7 +4930,7 @@ Scenario: _0260210 on double click in CRS
 			| 'Cash payment 1*'          | 'Main Company' | '-200'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '200'  |
 			| 'Retail return receipt 4*' | 'Main Company' | '-210'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '210'  |
 			| 'Retail return receipt 5*' | 'Main Company' | '-118'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '118'  |
-			| 'Retail return receipt 6*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
+			| 'Retail return receipt 7*' | 'Main Company' | '-520'   | 'Shop 02' | 'TRY'      | 'CI'     | ''        | '520'  |
 			| 'Money transfer 13*'       | 'Main Company' | '1 000'  | ''        | 'TRY'      | 'CI'     | '1 000'   | ''     |
 		And "Documents" table contains lines
 			| 'Document'                                          |

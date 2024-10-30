@@ -5,16 +5,11 @@ Procedure AfterPostingDocument(Ref, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure BeforePostingDocument(Object, AddInfo = Undefined) Export
-	For Each Payment In Object.Payments Do
-		If Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-			If Object.Payments.Count() = 1 Then
-				Object.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit;
-			Else
-				Object.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit;
-			EndIf;
-			Break;
-		EndIf;
-	EndDo;
+	If TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
+		DocRetailSalesReceiptServer.SetPaymentMethod(Object);
+	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
+		DocRetailReturnReceiptServer.SetPaymentMethod(Object);
+	EndIf;
 EndProcedure
 
 #EndRegion

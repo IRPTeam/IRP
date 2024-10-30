@@ -119,6 +119,12 @@ Procedure SaveSettingsInInfoReg(SettingsTab) Export
 
 EndProcedure
 
+Procedure ClearSettingsInInfoReg(IntegrationSettings) Export
+
+	IntegrationServerPrivileged.ClearSettingsInInfoReg(IntegrationSettings);
+
+EndProcedure
+
 Function GetArrayOfUnusedFiles(PathForSave) Export
 	TableOfFilesURI = New ValueTable();
 	TableOfFilesURI.Columns.Add("FileURI", Metadata.Catalogs.Files.Attributes.URI.Type);

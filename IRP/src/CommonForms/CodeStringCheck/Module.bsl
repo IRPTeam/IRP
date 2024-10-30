@@ -99,13 +99,28 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
 		If AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.MarkingCode") Then
-			If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
+			
+			If ControlCodeStringServerCall.CheckViaService(ThisObject.Item) Then
+				ServiceResult = ControlCodeStringClient.CheckMarkingCodeAtService(StringCode, Hardware, isReturn);
 				NewRow = CurrentCodes.Add();
-				NewRow.StringCode = StringCode;
-				NewRow.CodeIsApproved = True;
+				NewRow.StringCode = ServiceResult.StringCode;
+				NewRow.CodeIsApproved = ServiceResult.CodeIsApproved;
 				NewRow.ControlCodeStringType = ControlCodeStringType;
+				NewRow.ServerAnswer = ServiceResult.ServerAnswer;
+				NewRow.IndustryAttribute = ServiceResult.IndustryAttribute;
+				
+				If Not ServiceResult.CodeIsApproved Then
+					AllBarcodesIsOk = False;
+				EndIf;
 			Else
-				AllBarcodesIsOk = False;
+				If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
+					NewRow = CurrentCodes.Add();
+					NewRow.StringCode = StringCode;
+					NewRow.CodeIsApproved = True;
+					NewRow.ControlCodeStringType = ControlCodeStringType;
+				Else
+					AllBarcodesIsOk = False;
+				EndIf;
 			EndIf;
 		ElsIf AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.GoodCodeData") Then
 			If ControlCodeStringClient.CheckGoodCodeData(StringCode, Hardware, isReturn) Then
@@ -162,6 +177,7 @@ Procedure Done(Command = Undefined)
 		Str.Insert("NotCheck", Row.NotCheck);
 		Str.Insert("ControlCodeStringType", Row.ControlCodeStringType);
 		Str.Insert("Prefix", Row.Prefix);
+		Str.Insert("IndustryAttribute", Row.IndustryAttribute);
 		Array.Add(Str);
 	EndDo;
 	Result.Insert("Scaned", Array);

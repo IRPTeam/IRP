@@ -468,6 +468,7 @@
   <commonModules>CommonModule.AdditionalDocumentTableControlReuse</commonModules>
   <commonModules>CommonModule.AdminFunctionsPrivileged</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
+  <commonModules>CommonModule.AuditLockPrivileged</commonModules>
   <commonModules>CommonModule.BackgroundJobAPIClient</commonModules>
   <commonModules>CommonModule.BackgroundJobAPIServer</commonModules>
   <commonModules>CommonModule.BarcodeClient</commonModules>
@@ -477,6 +478,7 @@
   <commonModules>CommonModule.BuilderServer_V2</commonModules>
   <commonModules>CommonModule.CalculationServer</commonModules>
   <commonModules>CommonModule.CatAgreementsServer</commonModules>
+  <commonModules>CommonModule.CatalogsServer</commonModules>
   <commonModules>CommonModule.CatCashAccountsClient</commonModules>
   <commonModules>CommonModule.CatCashAccountsServer</commonModules>
   <commonModules>CommonModule.CatCompaniesClient</commonModules>
@@ -488,6 +490,7 @@
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonModules>CommonModule.CertificateServer</commonModules>
+  <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
   <commonModules>CommonModule.CheckDataPrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradePrivileged</commonModules>
   <commonModules>CommonModule.CommissionTradeServer</commonModules>
@@ -499,6 +502,7 @@
   <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServerCall</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
@@ -534,6 +538,8 @@
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemClient</commonModules>
+  <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
   <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCommissioningOfFixedAssetClient</commonModules>
   <commonModules>CommonModule.DocCommissioningOfFixedAssetServer</commonModules>
@@ -541,8 +547,12 @@
   <commonModules>CommonModule.DocConsolidatedRetailSalesServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
+  <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetClient</commonModules>
   <commonModules>CommonModule.DocDecommissioningOfFixedAssetServer</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
+  <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceClient</commonModules>
   <commonModules>CommonModule.DocEmployeeCashAdvanceServer</commonModules>
   <commonModules>CommonModule.DocEmployeeFiringClient</commonModules>
@@ -555,6 +565,9 @@
   <commonModules>CommonModule.DocEmployeeTransferServer</commonModules>
   <commonModules>CommonModule.DocEmployeeVacationClient</commonModules>
   <commonModules>CommonModule.DocEmployeeVacationServer</commonModules>
+  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
+  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
+  <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferClient</commonModules>
   <commonModules>CommonModule.DocFixedAssetTransferServer</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
@@ -642,6 +655,8 @@
   <commonModules>CommonModule.DocStockAdjustmentAsSurplusServer</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffClient</commonModules>
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
+  <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
+  <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
   <commonModules>CommonModule.DocTimeSheetClient</commonModules>
   <commonModules>CommonModule.DocTimeSheetServer</commonModules>
   <commonModules>CommonModule.DocumentsClient</commonModules>
@@ -653,14 +668,16 @@
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.DocVisitorCounterClient</commonModules>
   <commonModules>CommonModule.DocVisitorCounterServer</commonModules>
+  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderClosingServer</commonModules>
-  <commonModules>CommonModule.DocWorkOrderClient</commonModules>
   <commonModules>CommonModule.DocWorkOrderServer</commonModules>
   <commonModules>CommonModule.DocWorkSheetClient</commonModules>
   <commonModules>CommonModule.DocWorkSheetServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
   <commonModules>CommonModule.DPPointOfSaleServer</commonModules>
+  <commonModules>CommonModule.DynamicListAPI</commonModules>
+  <commonModules>CommonModule.EmailMessagesServer</commonModules>
   <commonModules>CommonModule.EquipmentAcquiring_CommonAPI</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringAPIClient</commonModules>
   <commonModules>CommonModule.EquipmentAcquiringServer</commonModules>
@@ -671,8 +688,12 @@
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
+  <commonModules>CommonModule.FilesClient</commonModules>
+  <commonModules>CommonModule.FilesClientServer</commonModules>
+  <commonModules>CommonModule.FilesServer</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
+  <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
   <commonModules>CommonModule.FormItemsSizeReuse</commonModules>
   <commonModules>CommonModule.FOServer</commonModules>
@@ -686,6 +707,8 @@
   <commonModules>CommonModule.IntegrationServer</commonModules>
   <commonModules>CommonModule.IntegrationServerPrivileged</commonModules>
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
+  <commonModules>CommonModule.InternalCommandsClient</commonModules>
+  <commonModules>CommonModule.InternalCommandsServer</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsClientServer</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
@@ -701,6 +724,7 @@
   <commonModules>CommonModule.Log</commonModules>
   <commonModules>CommonModule.ManufacturingClient</commonModules>
   <commonModules>CommonModule.ManufacturingServer</commonModules>
+  <commonModules>CommonModule.MessagesServer</commonModules>
   <commonModules>CommonModule.MetadataInfo</commonModules>
   <commonModules>CommonModule.MobileEvents</commonModules>
   <commonModules>CommonModule.MobileSubsystem</commonModules>
@@ -714,6 +738,7 @@
   <commonModules>CommonModule.OffersClientServer</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
   <commonModules>CommonModule.OffsetOfAdvancesServer</commonModules>
+  <commonModules>CommonModule.PeriodClosingServer</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
@@ -757,30 +782,6 @@
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.CatalogsServer</commonModules>
-  <commonModules>CommonModule.InternalCommandsClient</commonModules>
-  <commonModules>CommonModule.InternalCommandsServer</commonModules>
-  <commonModules>CommonModule.DocDebitCreditNoteClient</commonModules>
-  <commonModules>CommonModule.DocDebitCreditNoteServer</commonModules>
-  <commonModules>CommonModule.ChartsOfCharacteristicTypesServer</commonModules>
-  <commonModules>CommonModule.AuditLockPrivileged</commonModules>
-  <commonModules>CommonModule.DynamicListAPI</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionItemClient</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionItemServer</commonModules>
-  <commonModules>CommonModule.DocDepreciationCalculationClient</commonModules>
-  <commonModules>CommonModule.DocDepreciationCalculationServer</commonModules>
-  <commonModules>CommonModule.DocExpenseRevenueAccrualsClient</commonModules>
-  <commonModules>CommonModule.DocExpenseRevenueAccrualsServer</commonModules>
-  <commonModules>CommonModule.FixDocumentProblemsServer</commonModules>
-  <commonModules>CommonModule.DocTaxesOperationClient</commonModules>
-  <commonModules>CommonModule.DocTaxesOperationServer</commonModules>
-  <commonModules>CommonModule.DocExternalAccountingOperationServer</commonModules>
-  <commonModules>CommonModule.EmailMessagesServer</commonModules>
-  <commonModules>CommonModule.MessagesServer</commonModules>
-  <commonModules>CommonModule.FilesClient</commonModules>
-  <commonModules>CommonModule.FilesClientServer</commonModules>
-  <commonModules>CommonModule.FilesServer</commonModules>
-  <commonModules>CommonModule.PeriodClosingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

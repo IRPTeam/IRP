@@ -2005,8 +2005,11 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		NewDoc.StatusType = StatusType;
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
+		
+		DPPointOfSaleServer.BeforePostingDocument(NewDoc);
 		NewDoc.Write(DocumentWriteMode.Posting);
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
 	
@@ -2048,12 +2051,12 @@ Function CreateReturnWithoutBase(PaymentData, StatusType)
 	NewDoc.StatusType = StatusType;
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
+	
+	DPPointOfSaleServer.BeforePostingDocument(NewDoc);	
 	NewDoc.Write(DocumentWriteMode.Posting);
+	DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 
-	DocRef = NewDoc.Ref;
-	DPPointOfSaleServer.AfterPostingDocument(DocRef);
-
-	Return DocRef;
+	Return NewDoc.Ref;
 
 EndFunction
 

@@ -1,4 +1,4 @@
-#language: en
+﻿#language: en
 @tree
 @Positive
 @SettingsCatalogs
@@ -130,6 +130,7 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| '8'    | 'TimeOut'               | '60'                  |
 			| '9'    | 'SecureConnection'      | 'Yes'                 |
 			| '10'   | 'UseOSAuthentication'   | 'No'                  |
+			| '11'   | 'ServerSideConnection'  | 'No'                  |
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)

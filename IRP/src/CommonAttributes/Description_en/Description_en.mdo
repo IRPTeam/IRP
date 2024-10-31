@@ -177,6 +177,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.TaxExemptionReasons</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.AccessProfiles</metadata>
   <use>Use</use>
  </content>

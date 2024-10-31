@@ -1165,6 +1165,9 @@ Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
 	If Cancel Then
 		Return;
 	EndIf;
+	If Source.RegisterRecords.Find("PostedDocumentsRegistry") = Undefined Then
+		Return;
+	EndIf;
 	
 	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
 	RecordSet.Clear();

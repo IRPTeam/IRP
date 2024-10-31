@@ -1629,9 +1629,16 @@ Scenario: _0850023 check return payment by card and cash (sales by card)
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
 		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "11111111111111111111" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table		
 		And "CurrentCodes" table became equal
 			| 'Type'         | 'Prefix' | 'Scanned codes'        | 'Approved' | 'Not check' |
-			| 'Marking code' | ''       | '11111111111111111111' | 'No'       | 'No'        |
+			| 'Marking code' | ''       | '11111111111111111111' | 'Yes'      | 'No'        |
 		And I close current window						
 		And I click "Payment Return" button		
 		Then "Payment" window is opened
@@ -1965,7 +1972,14 @@ Scenario: _0850025 print receipt from sales return (cash)
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
-		Then the form attribute named "StatusType" became equal to "Completed"		
+		Then the form attribute named "StatusType" became equal to "Completed"	
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute						
 		And I click the button named "FormWrite"
 	* Try print receipt (RRR unpost)
 		And I click "Print receipt" button
@@ -2036,6 +2050,13 @@ Scenario: _08500251 sales return (full bank credit)
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
@@ -2055,6 +2076,13 @@ Scenario: _08500252 sales return (partial bank credit)
 		And I click the button named "FormDocumentRetailReturnReceiptGenerate"
 		And I expand current line in "BasisesTree" table
 		And I click "Ok" button
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
@@ -2083,7 +2111,6 @@ Scenario: _0850026 sales return (card)
 		And I activate field named "PaymentsAmount" in "Payments" table
 		And I select current line in "Payments" table
 		And I input "520,00" text in the field named "PaymentsAmount" of "Payments" table
-		And I finish line editing in "Payments" table
 		And I click "Post" button
 		And I click "Print receipt" button
 	* Check fiscal log
@@ -2571,11 +2598,19 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 	* Create RRR
 		And I click "Sales return" button
 		And I click "Ok" button
+		And Delay 3
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Code string check" window is opened
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+		And I move to the next attribute	
 		And I click "Show hidden tables" button
 		And I move to "ControlCodeStrings (1)" tab
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
-			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 		And I close current window
 	* Add one more item in RRR and check code
 		And in the table "ItemList" I click the button named "SearchByBarcode"	
@@ -2591,7 +2626,7 @@ Scenario: _0260156 check marking code in the Retail sales receipt and Retail ret
 		And I move to "ControlCodeStrings (2)" tab	
 		And "ControlCodeStrings" table became equal
 			| 'Key'   | 'Code string'                                    | 'Code is approved'    |
-			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'No'                  |
+			| '*'     | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0'   | 'Yes'                 |
 			| '*'     | '11111111111111111111113'                        | 'Yes'                 |
 		And I close all client application windows
 		
@@ -2999,9 +3034,16 @@ Scenario: _0260165 Return of a product paid for with a certificate
 			| 'Product 1 with SLN' |
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'         | 'Prefix' | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Marking code' | ''       | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'No'       | 'No'        |
+			| 'Marking code' | ''       | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0' | 'Yes'      | 'No'        |
 		And I close current window		
 		And I click "Payment Return" button
 		Then "Payment" window is opened
@@ -3142,10 +3184,16 @@ Scenario: _02601691 check Good code data from RSR in the RRR (POS)
 		And I activate "Control code string state" field in "ItemList" table
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
-		Then the form attribute named "isReturn" became equal to "Yes"	
+		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'      | 'No'        |
 		And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
@@ -3154,9 +3202,15 @@ Scenario: _02601691 check Good code data from RSR in the RRR (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+			And I select current line in "ItemList" table
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'Yes'      | 'No'        |
 		And I close current window
 	* Payment
 		And I click "Payment Return" button
@@ -3231,9 +3285,16 @@ Scenario: _0260170 Good code data control return (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"	
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1' | 'Yes'      | 'No'        |
 		And I close current window
 		And I go to line in "ItemList" table
 			| 'Item'                                                                | 'Item key' | 'Price'  | 'Quantity' | 'Serials'          | 'Total'  |
@@ -3242,9 +3303,16 @@ Scenario: _0260170 Good code data control return (POS)
 		And I select current line in "ItemList" table
 		Then the form attribute named "ControlCodeStringType" became equal to "Good code data"
 		Then the form attribute named "isReturn" became equal to "Yes"	
+		* Temp
+			And I click "Search by barcode" button
+			Then "Barcode" window is opened
+			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2" text in the field named "Barcode"
+			And I move to the next attribute
+			And I activate "Control code string state" field in "ItemList" table
+			And I select current line in "ItemList" table	
 		And "CurrentCodes" table became equal
 			| 'Type'           | 'Prefix'        | 'Scanned codes'                                | 'Approved' | 'Not check' |
-			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'No'       | 'No'        |
+			| 'Good code data' | 'NotIdentified' | 'Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY2' | 'Yes'      | 'No'        |
 		And I close current window
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
@@ -3303,6 +3371,23 @@ Scenario: _0260173 RSR and RRR for item with good code, scan marking code
 			| 'Amount' |
 			| '601,11' |
 		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY3" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to line in "ItemList" table
+			| "Item"                                                                | "Serials"          |
+			| "Product 16 with SLN and Good code data (Main Company - Consignor 1)" | "9099009909999999" |			
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table	
+		And I change "Control code string type" radio button value to "Marking code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY4" text in the field named "Barcode"
+		And I move to the next attribute		
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button
@@ -3361,6 +3446,21 @@ Scenario: _0260174 RSR and RRR for item with marking code, scan good code
 			| 'Amount' |
 			| '701,11' |
 		And I select current line in "List" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY8" text in the field named "Barcode"
+		And I move to the next attribute
+		And I go to the last line in "ItemList" table
+		And I activate "Control code string state" field in "ItemList" table
+		And I select current line in "ItemList" table	
+		And I change "Control code string type" radio button value to "Good code"
+		And I click "Search by barcode" button
+		Then "Barcode" window is opened
+		And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY9" text in the field named "Barcode"
+		And I move to the next attribute
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button

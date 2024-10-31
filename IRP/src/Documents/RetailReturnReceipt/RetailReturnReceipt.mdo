@@ -2945,11 +2945,11 @@
    </synonym>
    <synonym>
     <key>ru</key>
-    <value>Атрибут отрасли</value>
+    <value>Атрибут производства</value>
    </synonym>
    <synonym>
     <key>tr</key>
-    <value>Sektör özelliği </value>
+    <value>Üretim özelliği </value>
    </synonym>
    <type>
     <types>String</types>

@@ -5245,7 +5245,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	|	Document.RetailSalesReceipt.ControlCodeStrings AS ControlCodeStrings
 	|		INNER JOIN BasisesTable AS BasisesTable
 	|		ON BasisesTable.Basis = ControlCodeStrings.Ref
-	|		AND BasisesTable.BasisKey = ControlCodeStrings.Key";
+	|		AND BasisesTable.BasisKey = ControlCodeStrings.Key
+	|WHERE FALSE";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();

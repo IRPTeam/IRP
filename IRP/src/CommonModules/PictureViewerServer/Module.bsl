@@ -308,6 +308,24 @@ Function ScalePicture(BinaryData, SizePx = Undefined) Export
 	Return NewPicture.GetBinaryData();
 EndFunction
 
+Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
+	
+	If isImage(File.FileRef.Extension) Then
+		IntegrationSettings = GetIntegrationSettingsPicture(Volume);
+	Else
+		IntegrationSettings = GetIntegrationSettingsFile(Volume);
+	EndIf;
+	
+	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
+			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.POSTIntegrationSettings, "UniqueID"));
+	If Not ConnectionSettings.Success Then
+		Raise ConnectionSettings.Message;
+	EndIf;
+
+	Return PictureViewerClientServer.UploadPicture(File, ConnectionSettings, AdditionalParameters);
+	
+EndFunction
+
 Function UpdatePictureInfoAndGetPreview(BinaryData, SizePx = Undefined) Export
 	FileInfo = PictureViewerClientServer.FileInfo();
 	Picture = New Picture(BinaryData);

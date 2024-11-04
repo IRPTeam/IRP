@@ -11199,6 +11199,25 @@ EndFunction
 
 #EndRegion
 
+#Region ITEM_LIST_ORDER
+
+// ItemList.Order.Get
+Function GetItemListOrder(Parameters, _Key)
+	Binding = BindItemListOrder(Parameters);
+	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
+EndFunction
+
+// ItemList.Order.Bind
+Function BindItemListOrder(Parameters)
+	DataPath = New Map();
+	DataPath.Insert("SalesInvoice"     , "ItemList.SalesOrder");
+	DataPath.Insert("PurchaseInvoice"  , "ItemList.PurchaseOrder");
+	Binding = New Structure();	
+	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListOrder");
+EndFunction
+
+#EndRegion
+
 #Region ITEM_LIST_LANDEDCOST
 
 // ItemList.LandedCost.OnChange

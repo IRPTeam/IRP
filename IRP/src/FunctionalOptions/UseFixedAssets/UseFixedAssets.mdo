@@ -18,4 +18,5 @@
   <content>Catalog.DepreciationSchedules</content>
   <content>Document.ModernizationOfFixedAsset</content>
   <content>Document.CalculationMovementCosts</content>
+  <content>Report.F0010_FixedAssetsTransferCost</content>
 </mdclass:FunctionalOption>

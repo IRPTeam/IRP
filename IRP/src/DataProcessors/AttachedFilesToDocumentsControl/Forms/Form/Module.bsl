@@ -309,7 +309,8 @@ Function GetDocPrefix(DocRef, NamingFormat)
 	EndIf;
 	
 	Structure = New Structure;
-	Structure.Insert("Store", "Branch.Code");
+	Structure.Insert("Branch", "Branch");
+	Structure.Insert("BranchCode", "Branch.Code");
 	Structure.Insert("DocDate", "Date");
 	Structure.Insert("DocNumber", "Number");
 	
@@ -339,8 +340,11 @@ Function GetDocPrefix(DocRef, NamingFormat)
 		If IsTypeOf(Value, "Date") Then
 			//@skip-check invocation-parameter-type-intersect
 			ReplaceSubsting = Format(Value, "DF=yyyyMMdd");
+		ElsIf IsTypeOf(Value, "Number") Then
+			//@skip-check invocation-parameter-type-intersect
+			ReplaceSubsting = Format(Value, "NZ=0; NG=;");
 		Else
-			ReplaceSubsting = Value;
+			ReplaceSubsting = String(Value);
 		EndIf;
 		
 		NewNamingFormat = StrReplace(NewNamingFormat, SearchSubstring, ReplaceSubsting);

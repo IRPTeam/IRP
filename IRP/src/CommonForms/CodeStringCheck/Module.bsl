@@ -1,4 +1,3 @@
-
 // @strict-types
 
 &AtServer
@@ -6,12 +5,14 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Hardware = Parameters.Hardware;
 	Item = Parameters.Item;
 	ItemKey = Parameters.ItemKey;
+	SerialLotNumber = Parameters.SerialLotNumber;
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
 	isReturn = Parameters.isReturn;
 	ControlCodeStringType = Item.ControlCodeStringType;
 	//@skip-check property-return-type, statement-type-change
 	AdditionalCheckIsOn = Parameters.Item.CheckCodeString;
+	IsCheckNeeded = ControlCodeStringServerCall.IsCheckNeeded(GetCheckedData(ThisObject));
 
 	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
 EndProcedure
@@ -19,6 +20,9 @@ EndProcedure
 //@skip-check property-return-type, dynamic-access-method-not-found, statement-type-change
 &AtClient
 Procedure OnOpen(Cancel)
+	If Not IsCheckNeeded Then
+		 AttachIdleHandler("CloseWithoutScan", 0.1, True);
+	EndIf;
 	For Each Row In FormOwner.Object.ControlCodeStrings.FindRows(New Structure("Key", RowKey)) Do // ValueTableRow
 		NewRow = CurrentCodes.Add();
 		NewRow.StringCode = Row.CodeString;
@@ -101,7 +105,7 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
 		If AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.MarkingCode") Then
 			
-			If ControlCodeStringServerCall.CheckViaService(ThisObject.Item) Then
+			If ControlCodeStringServerCall.CheckViaService(GetCheckedData(ThisObject)) Then
 				ServiceResult = ControlCodeStringClient.CheckMarkingCodeAtService(StringCode, Hardware, isReturn);
 				NewRow = CurrentCodes.Add();
 				NewRow.StringCode = ServiceResult.StringCode;
@@ -162,6 +166,11 @@ EndFunction
 
 &AtClient
 Procedure ApproveWithoutScan(Command)
+	CloseWithoutScan();
+EndProcedure
+
+&AtClient
+Procedure CloseWithoutScan()
 	Close(New Structure("WithoutScan", True));
 EndProcedure
 
@@ -195,3 +204,14 @@ EndProcedure
 Procedure ControlCodeStringTypeOnChange(Item)
 	CurrentCodes.Clear();
 EndProcedure
+
+&AtClientAtServerNoContext
+Function GetCheckedData(Form)
+	CheckedData = New Structure();
+	CheckedData.Insert("Item", Form.Item);
+	CheckedData.Insert("ItemKey", Form.ItemKey);
+	CheckedData.Insert("SerialLotNumber", Form.SerialLotNumber);
+	CheckedData.Insert("Hardware", Form.Hardware);
+	CheckedData.Insert("isReturn", Form.isReturn);
+	Return CheckedData;
+EndFunction

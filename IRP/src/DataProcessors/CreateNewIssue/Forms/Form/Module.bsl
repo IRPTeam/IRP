@@ -4,6 +4,9 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Author = SessionParameters.CurrentUser;
+	Object.Country = SessionParameters.CurrentUser.Partner.Country;
+	
+	Items.Country.Visible = Object.Country.IsEmpty();
 EndProcedure
 
 #EndRegion
@@ -145,6 +148,7 @@ Function CreateIssueAtServer()
 	Issue.IssueDetails = Object.Comment;
 	Issue.Latitude = Object.Latitude;
 	Issue.Longitude = Object.Longitude;
+	Issue.DueDate = Object.DueDate;
 	
 	Try
 		Issue.Write(DocumentWriteMode.Posting);

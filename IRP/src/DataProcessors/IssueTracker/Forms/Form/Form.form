@@ -25,7 +25,6 @@
     <excludedCommands>LoadDynamicListSettings</excludedCommands>
     <excludedCommands>OutputList</excludedCommands>
     <excludedCommands>Post</excludedCommands>
-    <excludedCommands>Refresh</excludedCommands>
     <excludedCommands>SaveDynamicListSettings</excludedCommands>
     <excludedCommands>SearchEverywhere</excludedCommands>
     <excludedCommands>SearchHistory</excludedCommands>
@@ -62,6 +61,52 @@
       <contextMenu>
         <name>IssueListRefContextMenu</name>
         <id>24</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>LabelField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:LabelFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>DueDate</name>
+      <id>26</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>IssueList.DueDate</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>DueDateExtendedTooltip</name>
+        <id>28</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>DueDateContextMenu</name>
+        <id>27</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -326,7 +371,7 @@ INTO WO
 FROM
 	Document.WorkOrder.Workers AS WorkOrderWorkers
 WHERE
-	WorkOrderWorkers.Employee = &amp;Employee 
+	WorkOrderWorkers.Employee = &amp;Employee
 	AND WorkOrderWorkers.Ref.Posted
 ;
 
@@ -335,14 +380,15 @@ SELECT ALLOWED DISTINCT
 	IssueRef.Ref AS Ref,
 	WorkOrderIssueList.Ref AS WorkOrder,
 	WorkSheetIssueList.StartJob AS StartJob,
-	WorkSheetIssueList.EndJob AS EndJob
+	WorkSheetIssueList.EndJob AS EndJob,
+	IssueRef.DueDate AS DueDate
 FROM
 	Document.Issue AS IssueRef
 		INNER JOIN Document.WorkOrder.IssueList AS WorkOrderIssueList
 		ON IssueRef.Ref = WorkOrderIssueList.Issue
 		LEFT JOIN Document.WorkSheet.IssueList AS WorkSheetIssueList
-		ON IssueRef.Ref = WorkSheetIssueList.Issue 
-		AND WorkSheetIssueList.Ref.Posted
+		ON IssueRef.Ref = WorkSheetIssueList.Issue
+			AND (WorkSheetIssueList.Ref.Posted)
 WHERE
 	WorkOrderIssueList.Ref IN
 			(SELECT
@@ -458,6 +504,10 @@ WHERE
       <fields xsi:type="schema:DataCompositionSchemaDataSetField">
         <dataPath>StartJob</dataPath>
         <field>StartJob</field>
+      </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>DueDate</dataPath>
+        <field>DueDate</field>
       </fields>
       <parameters>
         <name>Employee</name>

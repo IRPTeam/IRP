@@ -3787,10 +3787,13 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("PeriodClosing_Step5", NStr("en='Customers advances closing';
 		|ru='Закрытие авансов покупателей.';
 		|tr='Müşteri avans kapatma'", Lang));
-	Strings.Insert("PeriodClosing_Step6", NStr("en='Foreign currency revaluation';
+	Strings.Insert("PeriodClosing_Step6", NStr("en='Depreciation calculation';
+		|ru='Амортизация и износ основных средств';
+		|tr='Amortisman hesaplaması'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en='Foreign currency revaluation';
 		|ru='Переоценка валютных остатков';
 		|tr='Yabancı para birimi değerlemesi'", Lang));
-	Strings.Insert("PeriodClosing_Step7", NStr("en='Accounting translation';
+	Strings.Insert("PeriodClosing_Step8", NStr("en='Accounting translation';
 		|ru='Отражение в бухгалтерском учете';
 		|tr='Muhasebe hareket yansıması'", Lang));
 	

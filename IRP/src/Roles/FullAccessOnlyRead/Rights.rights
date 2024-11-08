@@ -8010,6 +8010,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.F0010_FixedAssetsTransferCost</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.TaxSettings.Dimension.Company</name>
 		<right>
 			<name>Edit</name>
@@ -10850,6 +10861,17 @@
 	</object>
 	<object>
 		<name>CommonAttribute.SourceNodeID</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.F0011_InventoryBook</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

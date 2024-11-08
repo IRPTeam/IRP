@@ -1210,7 +1210,7 @@ Procedure LoadEAOWithReport(Command)
 		Return;
 	EndIf;
 	SpreadSheetDoc = ResultStructure.SpreadSheetDoc;
-	SpreadSheetDoc.Show(NStr("en = 'EAO Echange report'"));
+	SpreadSheetDoc.Show(R().ExternalAccountingOperationExchangeReport);
 EndProcedure
 
 &AtServer

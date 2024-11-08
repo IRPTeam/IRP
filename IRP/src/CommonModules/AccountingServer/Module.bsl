@@ -3847,15 +3847,16 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		NewRow.RecorderDate = ReadJSONDate(Data.RecorderDate, JSONDateFormat.ISO);
 		NewRow.RecorderRef  = ?(ValueIsFilled(Data.RecorderRef)     , New UUID(Data.RecorderRef)   , Undefined);
 		
-		NewRow.Period				= ReadJSONDate(Record.Period, JSONDateFormat.ISO);
-		NewRow.CompanyRef			= ?(ValueIsFilled(Record.CompanyRef)    , New UUID(Record.CompanyRef)    , Undefined);
-		NewRow.CurrencyRef			= ?(ValueIsFilled(Record.CurrencyRef)   , New UUID(Record.CurrencyRef)   , Undefined);
-		NewRow.CurrencyDrRef		= ?(ValueIsFilled(Record.CurrencyDrRef) , New UUID(Record.CurrencyDrRef) , Undefined);
-		NewRow.CurrencyCrRef		= ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
-		NewRow.AccountDrRef			= ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
-		NewRow.AccountCrRef			= ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
-		NewRow.AccountingCurrency	= ?(ValueIsFilled(Data.AccountingCurrency)  , New UUID(Data.AccountingCurrency)  , Undefined);
-		NewRow.LedgerType			= LedgerType;
+		NewRow.Period         = ReadJSONDate(Record.Period, JSONDateFormat.ISO);
+		NewRow.CompanyRef     = ?(ValueIsFilled(Record.CompanyRef)    , New UUID(Record.CompanyRef)    , Undefined);
+		NewRow.CurrencyRef    = ?(ValueIsFilled(Record.CurrencyRef)   , New UUID(Record.CurrencyRef)   , Undefined);
+		NewRow.CurrencyDrRef  = ?(ValueIsFilled(Record.CurrencyDrRef) , New UUID(Record.CurrencyDrRef) , Undefined);
+		NewRow.CurrencyCrRef  = ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
+		NewRow.AccountDrRef   = ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
+		NewRow.AccountCrRef   = ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
+		NewRow.AccountingCurrency = ?(ValueIsFilled(Data.AccountingCurrency) , New UUID(Data.AccountingCurrency) , Undefined);
+		NewRow.DocumentCurrency	= ?(ValueIsFilled(Data.DocumentCurrency) , New UUID(Data.DocumentCurrency) , Undefined);
+		NewRow.LedgerType	= LedgerType;
 		
 		For Each ExtDimension In Record.ExtDimensionValueDr Do
 			FillExtDimensionsRow(NewRow, ExtDimension, "Dr");	

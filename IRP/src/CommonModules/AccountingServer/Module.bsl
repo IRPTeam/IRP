@@ -3854,7 +3854,7 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		NewRow.CurrencyCrRef  = ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
 		NewRow.AccountDrRef   = ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
 		NewRow.AccountCrRef   = ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
-		NewRow.AccountingCurrency = ?(ValueIsFilled(Data.AccountingCurrency) , New UUID(Data.AccountingCurrency) , Undefined);
+		NewRow.AccountingCurrency	= ?(ValueIsFilled(Data.AccountingCurrency) , New UUID(Data.AccountingCurrency) , Undefined);
 		NewRow.DocumentCurrency	= ?(ValueIsFilled(Data.DocumentCurrency) , New UUID(Data.DocumentCurrency) , Undefined);
 		NewRow.LedgerType	= LedgerType;
 		
@@ -3971,10 +3971,7 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 				DocObject.Errors.Add().Error = StrTemplate(R().Error_172, NewRow.Key);
 			EndIf;
 		EndDo;
-		If DocObject.AccountingCurrency = LedgerType.CurrencyMovementType.Currency Then
-			For Each Row In DocObject.Records Do
-			EndDo;
-		EndIf;
+		SetRates(DocObject, LedgerType, Data, IntegrationSettings);
 		
 		If QueryTable[0].Posted Then
 			DocObject.Write(DocumentWriteMode.Posting);
@@ -3988,6 +3985,87 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 	
 	Return ResultStructure;
 EndFunction
+
+Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)
+	LedgerTypeCurrency = LedgerType.CurrencyMovementType.Currency;
+	If Not(DocObject.AccountingCurrency = LedgerTypeCurrency And
+		DocObject.DocumentCurrency <> LedgerTypeCurrency) Then
+		Return;
+	EndIf;
+	RatesTable = New ValueTable;
+	RatesTable.Columns.Add("Currency", New TypeDescription("UUID"));
+	RatesTable.Columns.Add("Rate", New TypeDescription("Number"));
+	RatesTable.Columns.Add("ReverseRate", New TypeDescription("Number"));
+	RatesTable.Columns.Add("Multiplicity", New TypeDescription("Number"));
+	
+	For Each ValueInArray In Data.Rates Do
+		NewRow = RatesTable.Add();
+		FillPropertyValues(NewRow, ValueInArray);
+		NewRow.Currency = New UUID(ValueInArray.Currency);
+	EndDo;
+	
+	Query = New Query;
+	Query.SetParameter("TableCurrencyRates", RatesTable);
+	Query.SetParameter("IntegrationSettingsRef", IntegrationSettings);
+	Query.Text = 
+	"SELECT
+	|	TableCurrencyRates.Currency AS Currency,
+	|	TableCurrencyRates.Rate AS Rate,
+	|	TableCurrencyRates.ReverseRate AS ReverseRate,
+	|	TableCurrencyRates.Multiplicity AS Multiplicity
+	|INTO TT_CurrencyRates
+	|FROM
+	|	&TableCurrencyRates AS TableCurrencyRates
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T9063S_AccountingMappingCurrencies.InternalRef AS Currency,
+	|	TT_CurrencyRates.Rate AS Rate,
+	|	TT_CurrencyRates.ReverseRate AS ReverseRate,
+	|	TT_CurrencyRates.Multiplicity AS Multiplicity
+	|FROM
+	|	TT_CurrencyRates AS TT_CurrencyRates
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS T9063S_AccountingMappingCurrencies
+	|		ON (TT_CurrencyRates.Currency = T9063S_AccountingMappingCurrencies.ExternalRef
+	|				AND T9063S_AccountingMappingCurrencies.IntegrationSettings = &IntegrationSettingsRef)";
+	
+	RatesTableResult = Query.Execute().Unload();
+	
+	DocObject.Currencies.Clear();
+	For Each Record In DocObject.Records Do
+		If ValueIsFilled(Record.CurrencyDr) And LedgerTypeCurrency <> Record.CurrencyDr Then
+			SearchRow = RatesTableResult.Find(Record.CurrencyDr, "Currency");
+			If SearchRow <> Undefined Then
+				RateRow = DocObject.Currencies.Add();
+				RateRow.Key = Record.Key;
+				RateRow.MovementType = LedgerType.CurrencyMovementType;
+				RateRow.CurrencyFrom = Record.CurrencyDr;
+				RateRow.Rate = SearchRow.Rate;
+				RateRow.ReverseRate = SearchRow.ReverseRate;
+				RateRow.Multiplicity = SearchRow.Multiplicity;
+				RateRow.Amount = Record.Amount;
+				RateRow.IsFixed = True;
+			EndIf;
+		EndIf;
+		If ValueIsFilled(Record.CurrencyCr) And 
+			LedgerTypeCurrency <> Record.CurrencyCr And
+			Record.CurrencyCr <> Record.CurrencyDr Then
+			SearchRow = RatesTableResult.Find(Record.CurrencyCr, "Currency");
+			If SearchRow <> Undefined Then
+				RateRow = DocObject.Currencies.Add();
+				RateRow.Key = Record.Key;
+				RateRow.MovementType = LedgerType.CurrencyMovementType;
+				RateRow.CurrencyFrom = Record.CurrencyCr;
+				RateRow.Rate = SearchRow.Rate;
+				RateRow.ReverseRate = SearchRow.ReverseRate;
+				RateRow.Multiplicity = SearchRow.Multiplicity;
+				RateRow.Amount = Record.Amount;
+				RateRow.IsFixed = True;
+			EndIf;
+		EndIf;
+	EndDo;	
+EndProcedure
 
 Function GetEmptyTableForResponseData()
 	Doc_StandardAttr = Metadata.Documents.ExternalAccountingOperation.StandardAttributes;
@@ -4010,6 +4088,7 @@ Function GetEmptyTableForResponseData()
 	EmptyTable.Columns.Add("RecorderDate"			, Doc_StandardAttr.Date.Type);
 	EmptyTable.Columns.Add("IsOpeningEntry"			, Type_Boolean);
 	EmptyTable.Columns.Add("AccountingCurrency"		, Type_UUID);
+	EmptyTable.Columns.Add("DocumentCurrency"		, Type_UUID);
 	
 	EmptyTable.Columns.Add("Posted"					, Type_Boolean);
 	EmptyTable.Columns.Add("DeletionMark"			, Type_Boolean);
@@ -4296,6 +4375,7 @@ Function GetDataTableQueryText()
 	|	RegCurrenciesCr.InternalRef AS CurrencyCr,
 	|	RegCurrencies.InternalRef AS Currency,
 	|	RegCurrenciesACC_Currency.InternalRef AS AccountingCurrency,
+	|	RegCurrenciesDoc_Currency.InternalRef AS DocumentCurrency,
 	|	AccountsDr.InternalRef AS AccountDr,
 	|	AccountsCr.InternalRef AS AccountCr,
 	|	ExtDimensionsDr1.InternalRef AS ExtDimensionTypeDr1,
@@ -4338,6 +4418,9 @@ Function GetDataTableQueryText()
 	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesACC_Currency
 	|		ON RegCurrenciesACC_Currency.ExternalRef = DataTable.AccountingCurrency
 	|		AND RegCurrenciesACC_Currency.IntegrationSettings = &IntegrationSettings
+	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesDoc_Currency
+	|		ON RegCurrenciesDoc_Currency.ExternalRef = DataTable.DocumentCurrency
+	|		AND RegCurrenciesDoc_Currency.IntegrationSettings = &IntegrationSettings
 	|		LEFT JOIN InformationRegister.T9062S_AccountingMappingCompanies AS RegCompanies
 	|		ON RegCompanies.ExternalRef = DataTable.CompanyRef
 	|		AND RegCompanies.IntegrationSettings = &IntegrationSettings

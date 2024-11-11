@@ -157,7 +157,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Depreciation rate</value>
+   <value>Amortisman oranı</value>
   </synonym>
   <type>
    <types>Number</types>

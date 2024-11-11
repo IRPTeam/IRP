@@ -255,7 +255,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Accounting currency</value>
+   <value>Muhasebe dövizi</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

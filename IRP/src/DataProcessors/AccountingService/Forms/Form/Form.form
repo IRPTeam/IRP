@@ -13836,11 +13836,11 @@
   </title>
   <title>
    <key>ru</key>
-   <value>Load all EAO with report</value>
+   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
   </title>
   <title>
    <key>tr</key>
-   <value>Load all EAO with report</value>
+   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
   </title>
   <id>1</id>
   <toolTip>
@@ -13849,11 +13849,11 @@
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Load all EAO with report</value>
+   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
   </toolTip>
   <toolTip>
    <key>tr</key>
-   <value>Load all EAO with report</value>
+   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
   </toolTip>
   <use>
    <common>true</common>

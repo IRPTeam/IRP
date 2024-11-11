@@ -1200,11 +1200,20 @@ Procedure TestLoadOpeningEntryAtServer()
 	AccountingServer.LoadAccountingOpeningEntry(ThisObject.IntegrationSettings, ThisObject.TestOpeningEntryDate, ThisObject.TestRegisterName);
 EndProcedure
 
+&AtClient
+Procedure LoadEAOWithReport(Command)
+	ResultStructure = LoadEAOWithReportAtServer();
+	If Not IsBlankString(ResultStructure.Error) Then
+		CommonFunctionsClientServer.ShowUsersMessage(ResultStructure.Error);
+	EndIf;
+	If ResultStructure.SpreadSheetDoc = Undefined Then
+		Return;
+	EndIf;
+	SpreadSheetDoc = ResultStructure.SpreadSheetDoc;
+	SpreadSheetDoc.Show(R().ExternalAccountingOperationExchangeReport);
+EndProcedure
 
-
-
-
-
-
-
-		
+&AtServer
+Function LoadEAOWithReportAtServer()
+	Return DataProcessors.AccountingService.RunEAOExchangeAtServer(IntegrationSettings);
+EndFunction

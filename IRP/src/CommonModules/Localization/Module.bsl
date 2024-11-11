@@ -3571,6 +3571,10 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	NStr("en='AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|ru='Дополнительное распределение доходов DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|tr='Ek Gelir Dağılımı DR (R5021T_Gelirler) CR (R4050B_StokEnvanteri)'", Lang));
+	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
+	|ru='External accounting operation exchange report';
+	|tr='External accounting operation exchange report'", Lang));	
 
 #EndRegion
 

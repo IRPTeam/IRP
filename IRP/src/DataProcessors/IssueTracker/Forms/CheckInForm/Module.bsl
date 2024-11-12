@@ -4,6 +4,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Issue = Parameters.Issue;
 	WorkOrder = Parameters.WorkOrder;
 	AttachedFiles.Parameters.SetParameterValue("Issue", Issue);
+	AttachedFiles.Parameters.SetParameterValue("Project", Issue.Project);
 	FillWorkSheetInfo();
 	SetVisible();
 EndProcedure

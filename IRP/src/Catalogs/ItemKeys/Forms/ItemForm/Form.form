@@ -1557,7 +1557,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>SpecificationAffectPricingMD5SearchString</source>
+            <source>SpecificationAffectPricingMD5</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1596,7 +1596,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>SpecificationAffectPricingMD5ViewStatus</source>
+            <source>SpecificationAffectPricingMD5</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
               <horizontalLocation>Left</horizontalLocation>
@@ -1636,7 +1636,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>SpecificationAffectPricingMD5SearchControl</source>
+            <source>SpecificationAffectPricingMD5</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1951,7 +1951,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>InheritConsignorsInfoSearchString</source>
+            <source>InheritConsignorsInfo</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -1990,7 +1990,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>InheritConsignorsInfoViewStatus</source>
+            <source>InheritConsignorsInfo</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2029,7 +2029,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>InheritConsignorsInfoSearchControl</source>
+            <source>InheritConsignorsInfo</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2284,7 +2284,7 @@
               </userVisible>
               <autoFill>true</autoFill>
             </contextMenu>
-            <source>ConsignorsInfoSearchString</source>
+            <source>ConsignorsInfo</source>
             <extInfo xsi:type="form:SearchStringAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2323,7 +2323,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>ViewStatusAddition</type>
-            <source>ConsignorsInfoViewStatus</source>
+            <source>ConsignorsInfo</source>
             <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>
@@ -2362,7 +2362,7 @@
               <autoFill>true</autoFill>
             </contextMenu>
             <type>SearchControlAddition</type>
-            <source>ConsignorsInfoSearchControl</source>
+            <source>ConsignorsInfo</source>
             <extInfo xsi:type="form:SearchControlAdditionExtInfo">
               <autoMaxWidth>true</autoMaxWidth>
             </extInfo>

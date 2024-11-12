@@ -466,7 +466,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>SalesReportListSearchString</source>
+      <source>SalesReportList</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -505,7 +505,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>SalesReportListViewStatus</source>
+      <source>SalesReportList</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -544,7 +544,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>SalesReportListSearchControl</source>
+      <source>SalesReportList</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

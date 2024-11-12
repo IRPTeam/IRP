@@ -509,6 +509,10 @@ WHERE
         <dataPath>DueDate</dataPath>
         <field>DueDate</field>
       </fields>
+      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+        <dataPath>Project</dataPath>
+        <field>Project</field>
+      </fields>
       <parameters>
         <name>Employee</name>
         <title>

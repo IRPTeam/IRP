@@ -125,6 +125,9 @@
     <type>
       <types>EnumRef.IssueLevel</types>
     </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <forms uuid="4c5afdb1-4d8a-4b45-b1f8-089914260307">
     <name>ItemForm</name>

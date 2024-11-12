@@ -2540,7 +2540,8 @@ FROM
 		INNER JOIN InformationRegister.AttachedFiles AS AttachedFiles
 		ON Files.Ref = AttachedFiles.File
 WHERE
-	AttachedFiles.Owner = &amp;Issue</queryText>
+	AttachedFiles.Owner = &amp;Issue 
+	OR AttachedFiles.Owner = &amp;Project</queryText>
       <mainTable>Catalog.Files</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
@@ -2679,7 +2680,23 @@ WHERE
           </localValue>
         </title>
         <valueType>
-          <types>77130677-9357-48c4-ab94-ed3263e22199</types>
+          <types>DocumentRef.Issue</types>
+        </valueType>
+        <values xsi:type="core:UndefinedValue"/>
+        <useRestriction>true</useRestriction>
+      </parameters>
+      <parameters>
+        <name>Project</name>
+        <title>
+          <localValue>
+            <content>
+              <key>en</key>
+              <value>Project</value>
+            </content>
+          </localValue>
+        </title>
+        <valueType>
+          <types>CatalogRef.Projects</types>
         </valueType>
         <values xsi:type="core:UndefinedValue"/>
         <useRestriction>true</useRestriction>

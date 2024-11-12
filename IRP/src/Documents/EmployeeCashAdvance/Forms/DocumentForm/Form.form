@@ -544,12 +544,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartListChoice</event>
-              <name>AgreementStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>AgreementEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartListChoice</event>
+              <name>AgreementStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -1535,7 +1535,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>PaymentListSearchString</source>
+          <source>PaymentList</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1574,7 +1574,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>PaymentListViewStatus</source>
+          <source>PaymentList</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
             <horizontalLocation>Left</horizontalLocation>
@@ -1614,7 +1614,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>PaymentListSearchControl</source>
+          <source>PaymentList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

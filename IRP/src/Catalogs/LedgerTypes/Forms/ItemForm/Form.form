@@ -636,7 +636,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>OperationsTreeSearchString</source>
+          <source>OperationsTree</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -675,7 +675,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>OperationsTreeViewStatus</source>
+          <source>OperationsTree</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -714,7 +714,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>OperationsTreeSearchControl</source>
+          <source>OperationsTree</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1098,7 +1098,7 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>PLOffsetSearchString</source>
+          <source>PLOffset</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1137,7 +1137,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>PLOffsetViewStatus</source>
+          <source>PLOffset</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -1176,7 +1176,7 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>PLOffsetSearchControl</source>
+          <source>PLOffset</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>

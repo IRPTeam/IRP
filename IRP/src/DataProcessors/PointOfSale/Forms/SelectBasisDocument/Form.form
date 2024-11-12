@@ -493,7 +493,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>SalesOrdersSearchString</source>
+      <source>SalesOrders</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -532,7 +532,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>SalesOrdersViewStatus</source>
+      <source>SalesOrders</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -571,7 +571,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>SalesOrdersSearchControl</source>
+      <source>SalesOrders</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1092,7 +1092,7 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>RetailShipmentConfirmationSearchString</source>
+      <source>RetailShipmentConfirmation</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1131,7 +1131,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>RetailShipmentConfirmationViewStatus</source>
+      <source>RetailShipmentConfirmation</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -1170,7 +1170,7 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>RetailShipmentConfirmationSearchControl</source>
+      <source>RetailShipmentConfirmation</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>

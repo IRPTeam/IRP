@@ -19,4 +19,8 @@
   <content>Document.Issue</content>
   <content>DataProcessor.CreateNewIssue</content>
   <content>DataProcessor.IssueTracker</content>
+  <content>Catalog.Projects</content>
+  <content>Document.WorkSheet</content>
+  <content>Document.WorkOrder</content>
+  <content>Document.WorkOrderClosing</content>
 </mdclass:Subsystem>

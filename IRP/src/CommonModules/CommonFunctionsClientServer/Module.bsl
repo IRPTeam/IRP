@@ -1,4 +1,4 @@
-Procedure ShowUsersMessage(Text, Field = Undefined, Data = Undefined, AddInfo = Undefined) Export
+Procedure ShowUsersMessage(Text, Field = Undefined, Data = Undefined, AddInfo = Undefined, DataKey = Undefined) Export
 	
 	If IsBlankString(Text) Then
 		Return;
@@ -8,6 +8,7 @@ Procedure ShowUsersMessage(Text, Field = Undefined, Data = Undefined, AddInfo = 
 	Message.Text = Text;
 	Message.Field = Field;
 	Message.SetData(Data);
+	Message.DataKey = DataKey; 
 	Message.Message();
 EndProcedure
 

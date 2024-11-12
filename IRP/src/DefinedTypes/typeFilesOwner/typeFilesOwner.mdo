@@ -59,6 +59,7 @@
     <types>DocumentRef.WorkSheet</types>
     <types>CatalogRef.BankTerms</types>
     <types>CatalogRef.Agreements</types>
+    <types>CatalogRef.Projects</types>
     <types>DocumentRef.ItemStockAdjustment</types>
     <types>CatalogRef.RetailCustomers</types>
     <types>DocumentRef.InventoryTransferOrder</types>

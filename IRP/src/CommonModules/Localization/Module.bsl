@@ -2275,5 +2275,9 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("Mobile_6", NStr("en = 'Can not open file'", Lang));
 #EndRegion
 
+#Region Issue
+    Strings.Insert("Issue_1", NStr("en = 'Issues were already created for all locations.'", Lang));
+	Strings.Insert("Issue_2", NStr("en = 'Create issue for locations: %1?'", Lang));
+#EndRegion
 	Return Strings;
 EndFunction

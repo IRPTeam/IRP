@@ -203,6 +203,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ef24b95a-68af-411f-b6b1-eb69e3a43fb7">
+    <name>Project</name>
+    <synonym>
+      <key>en</key>
+      <value>Project</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Projects</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
     <name>DocumentForm</name>
     <synonym>
@@ -271,4 +286,16 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <commands uuid="5f1da082-8971-4d6b-9b6c-804c929a000d">
+    <name>CreateIssues</name>
+    <synonym>
+      <key>en</key>
+      <value>Create Issues</value>
+    </synonym>
+    <group>FormCommandBarCreateBasedOn</group>
+    <commandParameterType>
+      <types>CatalogRef.Projects</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

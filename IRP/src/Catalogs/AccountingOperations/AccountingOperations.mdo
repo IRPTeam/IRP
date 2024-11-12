@@ -279,7 +279,6 @@
       </content>
       <content id="06b28694-ad57-4a36-8de8-d1c903dc763e">
         <name>BankReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>155</value>
         </code>
@@ -604,7 +603,6 @@
       </content>
       <content id="cd0f284f-337b-47aa-a6cd-72ab3c2a7449">
         <name>CashReceipt_DR_R3010B_CashOnHand_CR_R9510B_SalaryPayment</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>156</value>
         </code>
@@ -1075,14 +1073,12 @@
     </items>
     <items id="4b4821d4-9477-4a7b-8135-c4d42f54f3e7">
       <name>Document_ExternalAccountingOperation</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>153</value>
       </code>
       <isFolder>true</isFolder>
       <content id="7aef00ff-c0a1-4de6-8a7c-8ea4888fb372">
         <name>ExternalAccountingOperation</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>154</value>
         </code>
@@ -1090,14 +1086,12 @@
     </items>
     <items id="2388eba2-8196-4714-9d87-b0edbbef1453">
       <name>Document_AdditionalCostAllocation</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>157</value>
       </code>
       <isFolder>true</isFolder>
       <content id="b442dcfa-c5b2-4bfe-8b3d-31a63ecedba6">
         <name>AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expenses</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>158</value>
         </code>
@@ -1105,14 +1099,12 @@
     </items>
     <items id="0fe0012d-7c52-44e6-a7ca-8ef0d54d893d">
       <name>Document_AdditionalRevenueAllocation</name>
-      <description></description>
       <code xsi:type="core:NumberValue">
         <value>159</value>
       </code>
       <isFolder>true</isFolder>
       <content id="48036b48-6cc3-4bc4-81b2-36e02d74e95f">
         <name>AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory</name>
-        <description></description>
         <code xsi:type="core:NumberValue">
           <value>160</value>
         </code>

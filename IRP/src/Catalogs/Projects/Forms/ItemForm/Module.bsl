@@ -10,7 +10,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);	
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupAddAttributes);	
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 EndProcedure
 

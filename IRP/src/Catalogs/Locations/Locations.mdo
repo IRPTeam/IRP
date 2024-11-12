@@ -148,6 +148,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="5aa6d242-3be2-4200-b119-dff45c01fc19">
     <name>Longitude</name>
@@ -164,6 +165,22 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="96ff9cf3-1d67-48bf-8db0-fd9b3c2b4d83">
+    <name>DefaultPartner</name>
+    <synonym>
+      <key>en</key>
+      <value>Default partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
   </attributes>
   <forms uuid="22697d99-27da-42f9-9564-f562be4287a8">
     <name>ItemForm</name>

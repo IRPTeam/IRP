@@ -196,13 +196,13 @@
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:use>false</dcscor:use>
 				<dcscor:parameter>Show</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>ReadOnly</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>

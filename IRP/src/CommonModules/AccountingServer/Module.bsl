@@ -3976,7 +3976,9 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		If QueryTable[0].Posted Then
 			DocObject.Write(DocumentWriteMode.Posting);
 		Else
-			DocObject.Write(DocumentWriteMode.UndoPosting);
+			If ValueIsFilled(DocObject.Ref) Then
+				DocObject.Write(DocumentWriteMode.UndoPosting);
+			EndIf;
 		EndIf;
 	EndIf;
 	

@@ -52,7 +52,7 @@
   <objectField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.AdditionalDeduction.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.AdditionalDeduction.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.AdditionalDeduction.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

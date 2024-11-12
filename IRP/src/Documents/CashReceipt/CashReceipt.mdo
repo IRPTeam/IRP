@@ -68,7 +68,7 @@
   <objectField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.CashReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.CashReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.CashReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

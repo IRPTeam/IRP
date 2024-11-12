@@ -191,11 +191,7 @@ Procedure WriteLog(Hardware, Val Method, Val isRequest, Val Data, Val Result = F
 	Reg.User = SessionParameters.CurrentUser;
 	Reg.Method = Method;
 	Reg.Request = isRequest;
-	If TypeOf(Data) = Type("String") Then
-		Reg.Data = Data;
-	Else
-		Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
-	EndIf;
+	Reg.Data = CommonFunctionsServer.SerializeJSON(Data);
 	Reg.Result = Result;
 	Reg.Write(); 
 EndProcedure

@@ -968,6 +968,18 @@
     <value>156</value>
    </code>
   </items>
+  <items id="2c5d4705-4f63-4a66-9071-1dc861a04401">
+   <name>Catalog_Cities</name>
+   <code xsi:type="core:NumberValue">
+    <value>157</value>
+   </code>
+  </items>
+  <items id="c20cdb3b-a94c-45a0-a79d-edb84c2a5465">
+   <name>Document_Issue</name>
+   <code xsi:type="core:NumberValue">
+    <value>158</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

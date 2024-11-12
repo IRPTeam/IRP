@@ -36,7 +36,7 @@
   <objectField>Document.Production.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.Production.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.Production.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.Production.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>

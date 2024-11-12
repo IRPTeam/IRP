@@ -6508,6 +6508,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.Locations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T6080S_ReallocatedBatchesAmountValues.Resource.AllocatedRevenueTaxAmount</name>
 		<right>
 			<name>Edit</name>
@@ -7702,6 +7717,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.IssueTypes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9520S_TimeSheetInfo.Dimension.Employee</name>
 		<right>
 			<name>Edit</name>
@@ -8007,17 +8037,6 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.F0010_FixedAssetsTransferCost</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -9484,6 +9503,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseIncidents</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.DataMappingItems</name>
 		<right>
 			<name>Read</name>
@@ -9692,6 +9722,21 @@
 		<name>CommonAttribute.ModifyDate</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Cities</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10861,17 +10906,6 @@
 	</object>
 	<object>
 		<name>CommonAttribute.SourceNodeID</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.F0011_InventoryBook</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -12654,6 +12688,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.Issue</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.LockDataModificationRules.Dimension.LockDataModificationReasons</name>
 		<right>
 			<name>Edit</name>
@@ -13389,6 +13438,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonAttribute.DocumentNumber</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Report.D2001_Sales</name>
 		<right>
 			<name>Use</name>
@@ -14018,6 +14074,13 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Incidents</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>

@@ -1444,18 +1444,13 @@ Procedure DebitCreditNoteDifference(Parameters)
 				
 	// Receive (receipt)
 	If Parameters.Object.ReceiveDebtType = Enums.DebtTypes.TransactionCustomer Then
-		RecordType  = AccumulationRecordType.Receipt;    		
-		BalanceType = "active";
-		If Parameters.Object.SendDebtType = Enums.DebtTypes.AdvanceCustomer
-			Or Parameters.Object.SendDebtType = Enums.DebtTypes.TransactionVendor Then
-			 RecordType  = AccumulationRecordType.Expense;
-			 BalanceType = "passive"; 
-		EndIf;
-		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
-		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", RecordType);
 		
+		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2021B_CustomersTransactions].PrepareTable;
+		Result = GetAmountByRecordType(Table, "CustomersAdvancesClosing", AccumulationRecordType.Receipt);
+		BalanceType   = "active";
 		TotalReceipt  = Result.TotalAmount;
 		LegalCurrency = Result.LegalCurrency;
+		
 	ElsIf Parameters.Object.ReceiveDebtType = Enums.DebtTypes.AdvanceCustomer Then
 		
 		Table = Parameters.PostingDataTables[Metadata.AccumulationRegisters.R2020B_AdvancesFromCustomers].PrepareTable;

@@ -76,25 +76,3 @@ Async Function CheckMarkingCode(StringCode, Hardware, isReturn) Export
 	Return Result.Info.Approved
 EndFunction
 
-
-// Check marking code at service.
-// 
-// Parameters:
-//  StringCode - String - String code
-//  Hardware - CatalogRef.Hardware - Hardware
-//  isReturn - Boolean - Is return
-// 
-// Returns:
-//  Structure - Check marking code at service:
-// * CodeIsApproved - Boolean - 
-// * ServerAnswer - String - 
-// * IndustryAttribute - String - 
-// * StringCode - String - 
-Function CheckMarkingCodeAtService(StringCode, Hardware, isReturn) Export
-	Str = New Structure;
-	Str.Insert("CodeIsApproved", False);
-	Str.Insert("ServerAnswer", "Service not connected");
-	Str.Insert("IndustryAttribute", "");
-	Str.Insert("StringCode", "");
-	Return Str;
-EndFunction

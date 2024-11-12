@@ -1069,11 +1069,9 @@ Procedure SetTableSettings(Form)
 		NewFormItem.Type = FormFieldType.InputField;
 		NewFormItem.DataPath = PT_String + "." + ColumnKey;
 		NewFormItem.ChooseType = False;
-		If TypeOf(ColumnDescription.Ref) <> Type("String") Then
-			ParametersArray = New Array; // Array of ChoiceParameter
-			ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
-			NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
-		EndIf;
+		ParametersArray = New Array; // Array of ChoiceParameter
+		ParametersArray.Add(New ChoiceParameter("Filter.Owner", ColumnDescription.Ref));
+		NewFormItem.ChoiceParameters = New FixedArray(ParametersArray);
 		NewFormItem.SetAction("OnChange", "PropertiesTableValueOnChange");
 		NewFormItem.SetAction("StartChoice", "PropertiesTableValueStartChoice");
 		

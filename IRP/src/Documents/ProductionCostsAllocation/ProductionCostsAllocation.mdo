@@ -52,7 +52,7 @@
   <objectField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.ProductionCostsAllocation.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

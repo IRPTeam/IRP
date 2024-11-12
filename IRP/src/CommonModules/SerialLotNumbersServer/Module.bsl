@@ -179,16 +179,14 @@ EndFunction
 Function CheckFillingPhysicalInventory(Object)
 	IsOk = True;
 	
-	ItemListTable = Object.ItemList.Unload();
-	ItemListTable.GroupBy("SerialLotNumber", "ExpCount, PhysCount");
-	
-	For Each Serial In ItemListTable Do
+	Serials = Object.ItemList.Unload();
+	Serials.GroupBy("SerialLotNumber", "PhysCount");
+	For Each Serial In Serials Do
 		
-		QuantityMoreThan1 = Serial.PhysCount > 1 Or Serial.ExpCount > 1;
-		If Not QuantityMoreThan1 Then
+		If Serial.PhysCount = 1 Then
 			Continue;
-		EndIf;	
-			
+		EndIf;
+		
 		If Serial.SerialLotNumber.EachSerialLotNumberIsUnique Then
 			IsOk = False;
 			SerialsID = Object.ItemList.FindRows(New Structure("SerialLotNumber", Serial.SerialLotNumber));
@@ -201,8 +199,8 @@ Function CheckFillingPhysicalInventory(Object)
 				EndDo;
 			EndDo;
 		EndIf;
-	EndDo;	
-			
+	EndDo;
+	
 	Return IsOk;
 EndFunction
 

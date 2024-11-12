@@ -715,6 +715,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.Locations</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Incoterms.TabularSection.AddAttributes</name>
 		<right>
 			<name>Edit</name>
@@ -827,6 +842,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.IssueTypes</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Extensions</name>
 		<right>
 			<name>Read</name>
@@ -849,21 +879,6 @@
 			<restrictionByCondition>
 				<condition>Table WHERE #Access("Store", "Table.Ref", "")</condition>
 			</restrictionByCondition>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.TaxExemptionReasons</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
 		</right>
 		<right>
 			<name>View</name>
@@ -1033,6 +1048,21 @@
 	</object>
 	<object>
 		<name>Catalog.PrintInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.Cities</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

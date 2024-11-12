@@ -50,7 +50,7 @@
   <objectField>Document.FixedAssetTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.FixedAssetTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.FixedAssetTransfer.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.FixedAssetTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.FixedAssetTransfer.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

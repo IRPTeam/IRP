@@ -3669,11 +3669,7 @@ Procedure LoadAccountingRecordsByPeriod(IntegrationSettings, StartDate, EndDate,
 	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName);
 EndProcedure
 
-Procedure LoadAccountingRecordsAll(IntegrationSettings, RegisterName = "", EAOResultArray = Undefined) Export
-	If EAOResultArray = Undefined Then
-		EAOResultArray = New Array;
-	EndIf;
-	
+Procedure LoadAccountingRecordsAll(IntegrationSettings, RegisterName = "") Export
 	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
 	
 	TotalArrayOfDates = New Array();
@@ -3696,7 +3692,7 @@ Procedure LoadAccountingRecordsAll(IntegrationSettings, RegisterName = "", EAORe
 		EndDo;
 	EndDo;
 		
-	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName, EAOResultArray);
+	LoadAccountingRecords(IntegrationSettings, TotalArrayOfDates, RegisterName);
 EndProcedure
 
 Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "") Export
@@ -3724,10 +3720,7 @@ Procedure LoadAccountingOpeningEntry(IntegrationSettings, Date, RegisterName = "
 	EndDo;
 EndProcedure
 
-Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName, EAOResultArray = Undefined)
-	If EAOResultArray = Undefined Then
-		EAOResultArray = New Array;
-	EndIf;
+Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName)
 	
 	ExternalRegisters = GetExternalRegisters(IntegrationSettings);	
 	
@@ -3756,14 +3749,12 @@ Procedure LoadAccountingRecords(IntegrationSettings, ArrayOfDates, RegisterName,
 				RecorderInfo = New Structure();
 				RecorderInfo.Insert("RecorderRef", Data.RecorderRef);
 				RecorderInfo.Insert("RecorderName", Data.RecorderName);
-				RecorderInfo.Insert("RecorderURL", Data.RecorderURL);
 				ArrayOfRecorders.Add(RecorderInfo);
 				
 				If Data.Records.Count() Then
-					CreationResultStructure = CreateExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType);
-					
-					HaveError = CreationResultStructure.IsError;
-					EAOResultArray.Add(CreationResultStructure.EAORef);
+					If Not CreateExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType) Then
+						HaveError = True;
+					EndIf;
 				Else
 					If Not DeleteExternalAccountingOperation(IntegrationSettings, Data, ExternalRegister.LedgerType) Then
 						HaveError = True;
@@ -3835,10 +3826,6 @@ Function DeleteExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 EndFunction
 
 Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType)
-	ResultStructure = New Structure;
-	ResultStructure.Insert("IsError", False);
-	ResultStructure.Insert("EAORef", Documents.ExternalAccountingOperation.EmptyRef());
-	
 	DataTable = GetEmptyTableForResponseData();
 	For Each Record In Data.Records Do
 		NewRow = DataTable.Add();
@@ -3854,9 +3841,7 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		NewRow.CurrencyCrRef  = ?(ValueIsFilled(Record.CurrencyCrRef) , New UUID(Record.CurrencyCrRef) , Undefined);
 		NewRow.AccountDrRef   = ?(ValueIsFilled(Record.AccountDrRef)  , New UUID(Record.AccountDrRef)  , Undefined);
 		NewRow.AccountCrRef   = ?(ValueIsFilled(Record.AccountCrRef)  , New UUID(Record.AccountCrRef)  , Undefined);
-		NewRow.AccountingCurrency	= ?(ValueIsFilled(Data.AccountingCurrency) , New UUID(Data.AccountingCurrency) , Undefined);
-		NewRow.DocumentCurrency	= ?(ValueIsFilled(Data.DocumentCurrency) , New UUID(Data.DocumentCurrency) , Undefined);
-		NewRow.LedgerType	= LedgerType;
+		NewRow.LedgerType = LedgerType;
 		
 		For Each ExtDimension In Record.ExtDimensionValueDr Do
 			FillExtDimensionsRow(NewRow, ExtDimension, "Dr");	
@@ -3970,102 +3955,23 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 			If Not ValueIsFilled(NewRow.ExtDimensionTypeCr3) And ValueIsFilled(NewRow.ExtDimensionRefCr3) Then
 				DocObject.Errors.Add().Error = StrTemplate(R().Error_172, NewRow.Key);
 			EndIf;
+			
 		EndDo;
-		SetRates(DocObject, LedgerType, Data, IntegrationSettings);
 		
-		If QueryTable[0].Posted Then
-			DocObject.Write(DocumentWriteMode.Posting);
+		
+		If QueryTable[0].Posted Or Not ValueIsFilled(DocObject.Ref) Then
+			If DocObject.DeletionMark Then
+				DocObject.Write(DocumentWriteMode.Write);
+			Else	
+				DocObject.Write(DocumentWriteMode.Posting);
+			EndIf;
 		Else
 			DocObject.Write(DocumentWriteMode.UndoPosting);
 		EndIf;
 	EndIf;
 	
-	ResultStructure.IsError = DocObject.Errors.Count() > 0;
-	ResultStructure.EAORef = DocObject.Ref;
-	
-	Return ResultStructure;
+	Return DocObject.Errors.Count() = 0;
 EndFunction
-
-Procedure SetRates(DocObject, LedgerType, Data, IntegrationSettings)
-	LedgerTypeCurrency = LedgerType.CurrencyMovementType.Currency;
-	If Not(DocObject.AccountingCurrency = LedgerTypeCurrency And
-		DocObject.DocumentCurrency <> LedgerTypeCurrency) Then
-		Return;
-	EndIf;
-	RatesTable = New ValueTable;
-	RatesTable.Columns.Add("Currency", New TypeDescription("UUID"));
-	RatesTable.Columns.Add("Rate", New TypeDescription("Number"));
-	RatesTable.Columns.Add("ReverseRate", New TypeDescription("Number"));
-	RatesTable.Columns.Add("Multiplicity", New TypeDescription("Number"));
-	
-	For Each ValueInArray In Data.Rates Do
-		NewRow = RatesTable.Add();
-		FillPropertyValues(NewRow, ValueInArray);
-		NewRow.Currency = New UUID(ValueInArray.Currency);
-	EndDo;
-	
-	Query = New Query;
-	Query.SetParameter("TableCurrencyRates", RatesTable);
-	Query.SetParameter("IntegrationSettingsRef", IntegrationSettings);
-	Query.Text = 
-	"SELECT
-	|	TableCurrencyRates.Currency AS Currency,
-	|	TableCurrencyRates.Rate AS Rate,
-	|	TableCurrencyRates.ReverseRate AS ReverseRate,
-	|	TableCurrencyRates.Multiplicity AS Multiplicity
-	|INTO TT_CurrencyRates
-	|FROM
-	|	&TableCurrencyRates AS TableCurrencyRates
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	T9063S_AccountingMappingCurrencies.InternalRef AS Currency,
-	|	TT_CurrencyRates.Rate AS Rate,
-	|	TT_CurrencyRates.ReverseRate AS ReverseRate,
-	|	TT_CurrencyRates.Multiplicity AS Multiplicity
-	|FROM
-	|	TT_CurrencyRates AS TT_CurrencyRates
-	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS T9063S_AccountingMappingCurrencies
-	|		ON (TT_CurrencyRates.Currency = T9063S_AccountingMappingCurrencies.ExternalRef
-	|				AND T9063S_AccountingMappingCurrencies.IntegrationSettings = &IntegrationSettingsRef)";
-	
-	RatesTableResult = Query.Execute().Unload();
-	
-	DocObject.Currencies.Clear();
-	For Each Record In DocObject.Records Do
-		If ValueIsFilled(Record.CurrencyDr) And LedgerTypeCurrency <> Record.CurrencyDr Then
-			SearchRow = RatesTableResult.Find(Record.CurrencyDr, "Currency");
-			If SearchRow <> Undefined Then
-				RateRow = DocObject.Currencies.Add();
-				RateRow.Key = Record.Key;
-				RateRow.MovementType = LedgerType.CurrencyMovementType;
-				RateRow.CurrencyFrom = Record.CurrencyDr;
-				RateRow.Rate = SearchRow.Rate;
-				RateRow.ReverseRate = SearchRow.ReverseRate;
-				RateRow.Multiplicity = SearchRow.Multiplicity;
-				RateRow.Amount = Record.Amount;
-				RateRow.IsFixed = True;
-			EndIf;
-		EndIf;
-		If ValueIsFilled(Record.CurrencyCr) And 
-			LedgerTypeCurrency <> Record.CurrencyCr And
-			Record.CurrencyCr <> Record.CurrencyDr Then
-			SearchRow = RatesTableResult.Find(Record.CurrencyCr, "Currency");
-			If SearchRow <> Undefined Then
-				RateRow = DocObject.Currencies.Add();
-				RateRow.Key = Record.Key;
-				RateRow.MovementType = LedgerType.CurrencyMovementType;
-				RateRow.CurrencyFrom = Record.CurrencyCr;
-				RateRow.Rate = SearchRow.Rate;
-				RateRow.ReverseRate = SearchRow.ReverseRate;
-				RateRow.Multiplicity = SearchRow.Multiplicity;
-				RateRow.Amount = Record.Amount;
-				RateRow.IsFixed = True;
-			EndIf;
-		EndIf;
-	EndDo;	
-EndProcedure
 
 Function GetEmptyTableForResponseData()
 	Doc_StandardAttr = Metadata.Documents.ExternalAccountingOperation.StandardAttributes;
@@ -4080,49 +3986,46 @@ Function GetEmptyTableForResponseData()
 	
 	EmptyTable = New ValueTable();
 	
-	EmptyTable.Columns.Add("RecorderRef"			, Type_UUID);
-	EmptyTable.Columns.Add("RecorderPresentation"	, Type_Desc);
-	EmptyTable.Columns.Add("RecorderName"			, Type_Desc);
-	EmptyTable.Columns.Add("RecorderURL"			, Type_Desc);
-	EmptyTable.Columns.Add("LedgerType"				, Type_LedgerType);
-	EmptyTable.Columns.Add("RecorderDate"			, Doc_StandardAttr.Date.Type);
-	EmptyTable.Columns.Add("IsOpeningEntry"			, Type_Boolean);
-	EmptyTable.Columns.Add("AccountingCurrency"		, Type_UUID);
-	EmptyTable.Columns.Add("DocumentCurrency"		, Type_UUID);
+	EmptyTable.Columns.Add("RecorderRef"          , Type_UUID);
+	EmptyTable.Columns.Add("RecorderPresentation" , Type_Desc);
+	EmptyTable.Columns.Add("RecorderName"         , Type_Desc);
+	EmptyTable.Columns.Add("LedgerType"           , Type_LedgerType);
+	EmptyTable.Columns.Add("RecorderDate"         , Doc_StandardAttr.Date.Type);
+	EmptyTable.Columns.Add("IsOpeningEntry"       , Type_Boolean);
 	
-	EmptyTable.Columns.Add("Posted"					, Type_Boolean);
-	EmptyTable.Columns.Add("DeletionMark"			, Type_Boolean);
+	EmptyTable.Columns.Add("Posted"               , Type_Boolean);
+	EmptyTable.Columns.Add("DeletionMark"         , Type_Boolean);
 	
-	EmptyTable.Columns.Add("Period"					, Doc_StandardAttr.Date.Type);	
-	EmptyTable.Columns.Add("Activity"				, Type_Boolean);
-	EmptyTable.Columns.Add("OperationTitle"			, Type_Desc);
+	EmptyTable.Columns.Add("Period"                , Doc_StandardAttr.Date.Type);	
+	EmptyTable.Columns.Add("Activity"              , Type_Boolean);
+	EmptyTable.Columns.Add("OperationTitle"        , Type_Desc);
 	
-	EmptyTable.Columns.Add("CompanyRef"				, Type_UUID);
-	EmptyTable.Columns.Add("CompanyPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("CompanyRef"            , Type_UUID);
+	EmptyTable.Columns.Add("CompanyPresentation"   , Type_Desc);
 	
-	EmptyTable.Columns.Add("CurrencyRef"			, Type_UUID);
-	EmptyTable.Columns.Add("CurrencyPresentation"	, Type_Desc);
-	EmptyTable.Columns.Add("Amount"					, Type_Amount);
+	EmptyTable.Columns.Add("CurrencyRef"           , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyPresentation"  , Type_Desc);
+	EmptyTable.Columns.Add("Amount"                , Type_Amount);
 	
 	// debit
-	EmptyTable.Columns.Add("ChartNameDr"			, Type_Desc);
-	EmptyTable.Columns.Add("AccountDrRef"			, Type_UUID);
-	EmptyTable.Columns.Add("AccountDrPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("ChartNameDr"           , Type_Desc);
+	EmptyTable.Columns.Add("AccountDrRef"          , Type_UUID);
+	EmptyTable.Columns.Add("AccountDrPresentation" , Type_Desc);
 	
-	EmptyTable.Columns.Add("CurrencyDrRef"			, Type_UUID);
-	EmptyTable.Columns.Add("CurrencyDrPresentation"	, Type_Desc);
-	EmptyTable.Columns.Add("AmountCurrencyDr"		, Type_Amount);
-	EmptyTable.Columns.Add("QuantityDr"				, Type_Quantity);
+	EmptyTable.Columns.Add("CurrencyDrRef"         , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyDrPresentation", Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyDr"      , Type_Amount);
+	EmptyTable.Columns.Add("QuantityDr"            , Type_Quantity);
 	
 	// credit
-	EmptyTable.Columns.Add("ChartNameCr"			, Type_Desc);
-	EmptyTable.Columns.Add("AccountCrRef"			, Type_UUID);
-	EmptyTable.Columns.Add("AccountCrPresentation"	, Type_Desc);
+	EmptyTable.Columns.Add("ChartNameCr"           , Type_Desc);
+	EmptyTable.Columns.Add("AccountCrRef"          , Type_UUID);
+	EmptyTable.Columns.Add("AccountCrPresentation" , Type_Desc);
 	
-	EmptyTable.Columns.Add("CurrencyCrRef"			, Type_UUID);
-	EmptyTable.Columns.Add("CurrencyCrPresentation"	, Type_Desc);
-	EmptyTable.Columns.Add("AmountCurrencyCr"		, Type_Amount);
-	EmptyTable.Columns.Add("QuantityCr"				, Type_Quantity);
+	EmptyTable.Columns.Add("CurrencyCrRef"         , Type_UUID);
+	EmptyTable.Columns.Add("CurrencyCrPresentation", Type_Desc);
+	EmptyTable.Columns.Add("AmountCurrencyCr"      , Type_Amount);
+	EmptyTable.Columns.Add("QuantityCr"            , Type_Quantity);
 	
 	CreateExtDimensionsColumns(EmptyTable, "Dr");
 	CreateExtDimensionsColumns(EmptyTable, "Cr");
@@ -4374,8 +4277,6 @@ Function GetDataTableQueryText()
 	|	RegCurrenciesDr.InternalRef AS CurrencyDr,
 	|	RegCurrenciesCr.InternalRef AS CurrencyCr,
 	|	RegCurrencies.InternalRef AS Currency,
-	|	RegCurrenciesACC_Currency.InternalRef AS AccountingCurrency,
-	|	RegCurrenciesDoc_Currency.InternalRef AS DocumentCurrency,
 	|	AccountsDr.InternalRef AS AccountDr,
 	|	AccountsCr.InternalRef AS AccountCr,
 	|	ExtDimensionsDr1.InternalRef AS ExtDimensionTypeDr1,
@@ -4415,12 +4316,6 @@ Function GetDataTableQueryText()
 	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrencies
 	|		ON RegCurrencies.ExternalRef = DataTable.CurrencyRef
 	|		AND RegCurrencies.IntegrationSettings = &IntegrationSettings
-	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesACC_Currency
-	|		ON RegCurrenciesACC_Currency.ExternalRef = DataTable.AccountingCurrency
-	|		AND RegCurrenciesACC_Currency.IntegrationSettings = &IntegrationSettings
-	|		LEFT JOIN InformationRegister.T9063S_AccountingMappingCurrencies AS RegCurrenciesDoc_Currency
-	|		ON RegCurrenciesDoc_Currency.ExternalRef = DataTable.DocumentCurrency
-	|		AND RegCurrenciesDoc_Currency.IntegrationSettings = &IntegrationSettings
 	|		LEFT JOIN InformationRegister.T9062S_AccountingMappingCompanies AS RegCompanies
 	|		ON RegCompanies.ExternalRef = DataTable.CompanyRef
 	|		AND RegCompanies.IntegrationSettings = &IntegrationSettings

@@ -9601,6 +9601,18 @@
    <key>tr</key>
    <value>Satır bağlantısını kur/çöz</value>
   </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Link/Unlink document rows</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Залинковать/разлинковать строки</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Satır bağlantısını kur/çöz</value>
+  </toolTip>
   <use>
    <common>true</common>
   </use>
@@ -9630,6 +9642,18 @@
    <value>Kaynak evrak ekle</value>
   </title>
   <id>11</id>
+  <toolTip>
+   <key>en</key>
+   <value>Add rows from linked documents</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Добавить строки из залинкованных документов</value>
+  </toolTip>
+  <toolTip>
+   <key>tr</key>
+   <value>Bağlı evraktan satırları ekle</value>
+  </toolTip>
   <toolTip>
    <key>en</key>
    <value>Add rows from linked documents</value>

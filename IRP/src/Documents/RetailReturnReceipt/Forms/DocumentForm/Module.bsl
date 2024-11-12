@@ -878,7 +878,7 @@ EndProcedure
 #Region CONTROL_STRINGS
 
 &AtClient
-Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefined) Export
+Procedure ItemListControlCodeStringStateClick() Export
 	
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -889,21 +889,11 @@ Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefine
 		Return;
 	EndIf;
 	
-	// for checking we take the latest series
-	If SerialLotNumberForCheck = Undefined Then
-		SerialLotNumberForCheck = PredefinedValue("Catalog.SerialLotNumbers.EmptyRef");
-		SerialNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
-		If SerialNumbers.Count() Then
-			SerialLotNumberForCheck = SerialNumbers[SerialNumbers.UBound()].SerialLotNumber; 
-		EndIf;
-	EndIf;
-
 	Params = New Structure;
 	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(Object.ConsolidatedRetailSales, "FiscalPrinter"));
 	Params.Insert("RowKey", CurrentData.Key);
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
-	Params.Insert("SerialLotNumber", SerialLotNumberForCheck);
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", True);
@@ -926,8 +916,7 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
 	If Result.WithoutScan Then
 		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
-		ControlCodeStringsRows = Object.ControlCodeStrings.FindRows(New Structure("Key", CurrentRow.Key));
-		CurrentRow.isControlCodeString = (ControlCodeStringsRows.Count() > 0);
+		CurrentRow.isControlCodeString = False;
 	Else
 		For Each Row In Result.Scaned Do
 			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);

@@ -1165,9 +1165,6 @@ Procedure Posting_DocumentsRegistryPosting(Source, Cancel, PostingMode) Export
 	If Cancel Then
 		Return;
 	EndIf;
-	If Source.RegisterRecords.Find("PostedDocumentsRegistry") = Undefined Then
-		Return;
-	EndIf;
 	
 	RecordSet = Source.RegisterRecords.PostedDocumentsRegistry;
 	RecordSet.Clear();
@@ -1194,10 +1191,9 @@ Procedure GetDocumentPresentation(Source, Data, Presentation, StandardProcessing
 	StandardProcessing = False;
 	
 	ObjectPresentation = Source.EmptyRef().Metadata().ObjectPresentation;
-	DocumentNumber = ?(ValueIsFilled(Data.DocumentNumber),StrTemplate(" (%1)", Data.DocumentNumber), "");
-	NewNumber = StrTemplate("%1%2", Data.Number, DocumentNumber);
+	Number = ?(ValueIsFilled(Data.DocumentNumber), Data.DocumentNumber, Data.Number);
 	
-	Presentation = StrTemplate(R().DocPresentation, ObjectPresentation, NewNumber, Data.Date);
+	Presentation = StrTemplate(R().DocPresentation, ObjectPresentation, Number, Data.Date);
 EndProcedure
 
 Function GenerateDocumentNumber(Object) Export

@@ -52,7 +52,7 @@
   <objectField>Document.PurchaseOrderClosing.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.PurchaseOrderClosing.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.PurchaseOrderClosing.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.PurchaseOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PurchaseOrderClosing.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

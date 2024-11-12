@@ -113,34 +113,6 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
- <attributes uuid="1aebbf5f-fed3-48ae-935b-4bfd27821dbc">
-  <name>RecorderURL</name>
-  <synonym>
-   <key>en</key>
-   <value>Recorder URL</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>URL регистратора </value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Kayıt evrağın URL'i</value>
-  </synonym>
-  <type>
-   <types>String</types>
-   <stringQualifiers>
-    <length>200</length>
-   </stringQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:StringValue">
-   <value/>
-  </fillValue>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
  <attributes uuid="1b015963-2d3b-4bc4-aeb5-cf15ad263fe3">
   <name>LedgerType</name>
   <synonym>
@@ -236,52 +208,6 @@
   </synonym>
   <type>
    <types>Boolean</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="81fd9c61-7239-4451-b87c-e80c7d7b4d8b">
-  <name>AccountingCurrency</name>
-  <synonym>
-   <key>en</key>
-   <value>Accounting currency</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Регламентная валюта</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Muhasebe dövizi</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Currencies</types>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <fullTextSearch>Use</fullTextSearch>
-  <dataHistory>Use</dataHistory>
- </attributes>
- <attributes uuid="52181fb8-e1f7-49ae-a560-7bd1235b9bf9">
-  <name>DocumentCurrency</name>
-  <synonym>
-   <key>en</key>
-   <value>Document currency</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Валюта документа</value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Evrak dövizi</value>
-  </synonym>
-  <type>
-   <types>CatalogRef.Currencies</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -2511,19 +2437,4 @@
    <dataHistory>Use</dataHistory>
   </attributes>
  </tabularSections>
- <templates uuid="545b6b97-400a-44c4-a5fe-d9099f8192e6">
-  <name>EntryTemplate</name>
-  <synonym>
-   <key>en</key>
-   <value>Entry template</value>
-  </synonym>
-  <synonym>
-   <key>ru</key>
-   <value>Шаблон записи </value>
-  </synonym>
-  <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
-  </synonym>
- </templates>
 </mdclass:Document>

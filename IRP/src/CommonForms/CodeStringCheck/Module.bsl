@@ -1,3 +1,4 @@
+
 // @strict-types
 
 &AtServer
@@ -5,14 +6,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Hardware = Parameters.Hardware;
 	Item = Parameters.Item;
 	ItemKey = Parameters.ItemKey;
-	SerialLotNumber = Parameters.SerialLotNumber;
 	LineNumber = Parameters.LineNumber;
 	RowKey = Parameters.RowKey;
 	isReturn = Parameters.isReturn;
 	ControlCodeStringType = Item.ControlCodeStringType;
 	//@skip-check property-return-type, statement-type-change
 	AdditionalCheckIsOn = Parameters.Item.CheckCodeString;
-	IsCheckNeeded = ControlCodeStringServerCall.IsCheckNeeded(GetCheckedData(ThisObject));
 
 	Items.DecorationCheckIsOff.Visible = Not AdditionalCheckIsOn;
 EndProcedure
@@ -20,9 +19,6 @@ EndProcedure
 //@skip-check property-return-type, dynamic-access-method-not-found, statement-type-change
 &AtClient
 Procedure OnOpen(Cancel)
-	If Not IsCheckNeeded Then
-		 AttachIdleHandler("CloseWithoutScan", 0.1, True);
-	EndIf;
 	For Each Row In FormOwner.Object.ControlCodeStrings.FindRows(New Structure("Key", RowKey)) Do // ValueTableRow
 		NewRow = CurrentCodes.Add();
 		NewRow.StringCode = Row.CodeString;
@@ -30,7 +26,6 @@ Procedure OnOpen(Cancel)
 		NewRow.NotCheck = Row.NotCheck;
 		NewRow.ControlCodeStringType = Row.ControlCodeStringType;
 		NewRow.Prefix = Row.Prefix;
-		NewRow.IndustryAttribute = Row.IndustryAttribute;
 		
 		ControlCodeStringType = Row.ControlCodeStringType; // Get from last row
 	EndDo;
@@ -104,28 +99,13 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters = Undefined) Exp
 	AllBarcodesIsOk = True;
 	For Each StringCode In ArrayOfApprovedCodeStrings Do // String
 		If AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.MarkingCode") Then
-			
-			If ControlCodeStringServerCall.CheckViaService(GetCheckedData(ThisObject)) Then
-				ServiceResult = ControlCodeStringClient.CheckMarkingCodeAtService(StringCode, Hardware, isReturn);
+			If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
 				NewRow = CurrentCodes.Add();
-				NewRow.StringCode = ServiceResult.StringCode;
-				NewRow.CodeIsApproved = ServiceResult.CodeIsApproved;
+				NewRow.StringCode = StringCode;
+				NewRow.CodeIsApproved = True;
 				NewRow.ControlCodeStringType = ControlCodeStringType;
-				NewRow.ServerAnswer = ServiceResult.ServerAnswer;
-				NewRow.IndustryAttribute = ServiceResult.IndustryAttribute;
-				
-				If Not ServiceResult.CodeIsApproved Then
-					AllBarcodesIsOk = False;
-				EndIf;
 			Else
-				If Await ControlCodeStringClient.CheckMarkingCode(StringCode, Hardware, isReturn) Then
-					NewRow = CurrentCodes.Add();
-					NewRow.StringCode = StringCode;
-					NewRow.CodeIsApproved = True;
-					NewRow.ControlCodeStringType = ControlCodeStringType;
-				Else
-					AllBarcodesIsOk = False;
-				EndIf;
+				AllBarcodesIsOk = False;
 			EndIf;
 		ElsIf AdditionalCheckIsOn AND ControlCodeStringType = PredefinedValue("Enum.ControlCodeStringType.GoodCodeData") Then
 			If ControlCodeStringClient.CheckGoodCodeData(StringCode, Hardware, isReturn) Then
@@ -166,11 +146,6 @@ EndFunction
 
 &AtClient
 Procedure ApproveWithoutScan(Command)
-	CloseWithoutScan();
-EndProcedure
-
-&AtClient
-Procedure CloseWithoutScan()
 	Close(New Structure("WithoutScan", True));
 EndProcedure
 
@@ -187,7 +162,6 @@ Procedure Done(Command = Undefined)
 		Str.Insert("NotCheck", Row.NotCheck);
 		Str.Insert("ControlCodeStringType", Row.ControlCodeStringType);
 		Str.Insert("Prefix", Row.Prefix);
-		Str.Insert("IndustryAttribute", Row.IndustryAttribute);
 		Array.Add(Str);
 	EndDo;
 	Result.Insert("Scaned", Array);
@@ -204,14 +178,3 @@ EndProcedure
 Procedure ControlCodeStringTypeOnChange(Item)
 	CurrentCodes.Clear();
 EndProcedure
-
-&AtClientAtServerNoContext
-Function GetCheckedData(Form)
-	CheckedData = New Structure();
-	CheckedData.Insert("Item", Form.Item);
-	CheckedData.Insert("ItemKey", Form.ItemKey);
-	CheckedData.Insert("SerialLotNumber", Form.SerialLotNumber);
-	CheckedData.Insert("Hardware", Form.Hardware);
-	CheckedData.Insert("isReturn", Form.isReturn);
-	Return CheckedData;
-EndFunction

@@ -77,49 +77,126 @@ Procedure DeleteUnusedFiles(ArrayOfFilesID, PostIntegrationSettings) Export
 	EndIf;
 EndProcedure
 
+// Ref info.
+// 
+// Returns:
+//  Structure - Ref info:
+// * Ref - See typeFilesOwner 
+// * UUID - UUID - Form UUID 
+Function RefInfo() Export
+	StrParam = New Structure();
+	StrParam.Insert("Ref", Undefined);
+	StrParam.Insert("UUID", Undefined);
+	Return StrParam
+EndFunction
+
+// Upload.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  Object - CatalogObjectCatalogName, DocumentObjectDocumentName - Object
 Procedure Upload(Form, Object) Export
-	StrParam = New Structure("Ref, UUID", Object.Ref, Form.UUID);
+	RefInfo = RefInfo();
+	RefInfo.Ref = Object.Ref;
+	RefInfo.UUID = Form.UUID;
 	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
 	OpenFileDialog.MultipleChoice = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, StrParam), , , , OpenFileDialog, Form.UUID);
+	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, RefInfo), , , , OpenFileDialog, Form.UUID);
 EndProcedure
 
 // Upload END.
 // 
 // Parameters:
 //  FileRef - StoredFileDescription,Undefined - File ref
-//  AdditionalParameters - Structure - Additional parameters
-Procedure Upload_END(FileRef, AdditionalParameters) Export
+//  RefInfo - See RefInfo
+Procedure Upload_END(FileRef, RefInfo) Export
 	If FileRef = Undefined Then
 		Return;
 	EndIf;
-	AddFile(FileRef, Undefined, AdditionalParameters);
+	AddFile(FileRef, Undefined, RefInfo);
 EndProcedure
 
 Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
-	isFileImage = PictureViewerClientServer.isImage(File.FileRef.Extension);
-	If isFileImage Then
+	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
+	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
+	If Not FileRef.IsEmpty() Then
+		Return PictureViewerServer.GetFileInfo(FileRef);
+	EndIf;     
+	If TypeOf(File.Address) = Type("BinaryData") Then
+		RequestBody = File.Address;
+	Else
+		RequestBody = GetFromTempStorage(File.Address);
+	EndIf;
+
+	If PictureViewerServer.isImage(File.FileRef.Extension) Then
+		PictureScaleSize = 200;
+		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	Else
+		FileInfo = PictureViewerClientServer.FileInfo();
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile(Volume);
 	EndIf;
-	
+
+	FileID = String(New UUID());
+	FileInfo.FileID = FileID;
+	FileInfo.FileName = File.FileRef.Name;
+	FileInfo.MD5 = md5;
+	FileInfo.Extension = StrReplace(File.FileRef.Extension, ".", "");
+
 	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
 			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.POSTIntegrationSettings, "UniqueID"));
+
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
 	
-	If ConnectionSettings.Value.Property("ServerSideConnection") 
-			And ConnectionSettings.Value.ServerSideConnection = True Then
-		Return PictureViewerServer.UploadPicture(
-			FilesClientServer.GetStoredFileDescriptionWrapper(, File), Volume, AdditionalParameters);
+	If TypeOf(AdditionalParameters) = Type("Structure") Then
+		
+		If AdditionalParameters.Property("FilePrefix") Then
+			FilePrefix = AdditionalParameters.FilePrefix;
+			FileID = StrTemplate("%1__%2", FilePrefix, FileID);
+			//
+			FileInfo.FileName = FilePrefix;
+			//
+		EndIf;
+		
+		If AdditionalParameters.Property("PrintFormName") Then
+			FileInfo.PrintFormName = AdditionalParameters.PrintFormName;
+		EndIf;
 	EndIf;
 	
-	Return PictureViewerClientServer.UploadPicture(File, ConnectionSettings, AdditionalParameters);
+	Parameters = New Structure();
+	Parameters.Insert("ConnectionSettings", ConnectionSettings);
+	Parameters.Insert("RequestBody", RequestBody);
+	Parameters.Insert("FileID", FileID);
+	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
+		FileName = FileID;
+		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileName + "."
+			+ FileInfo.Extension, RequestBody);
+		FileInfo.Success = True;
+		FileInfo.URI = FileID + "." + FileInfo.Extension;
 
+	ElsIf Not ExtensionCall_UploadPicture(FileInfo, Parameters) Then
+		ConnectionSettings.Value.QueryType = "POST";
+		ResourceParameters = New Structure();
+		ResourceParameters.Insert("filename", FileID + "." + FileInfo.Extension);
+
+		RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters, , RequestBody);
+		If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+			DeserializeResponse = CommonFunctionsServer.DeserializeJSON(RequestResult.ResponseBody);
+			FileInfo.URI = DeserializeResponse.Data.URI;
+			FileInfo.Success = True;
+		Else
+			FileInfo.Success = False;
+		EndIf;
+	EndIf;
+	Return FileInfo;
+EndFunction
+
+Function ExtensionCall_UploadPicture(FileInfo, Parameters) Export
+	Return False
 EndFunction
 
 Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export
@@ -313,12 +390,18 @@ Async Procedure UpdateHTMLPicture(Item, Form) Export
 	HTMLWindow.fillSlider(JSON);
 EndProcedure
 
-Procedure AddFile(File, Val Volume, AdditionalParameters) Export
+// Add file.
+// 
+// Parameters:
+//  File - StoredFileDescription, Undefined - File
+//  Volume - Undefined - Volume
+//  RefInfo - See RefInfo
+Procedure AddFile(File, Val Volume = Undefined, RefInfo) Export
 	If File = Undefined Then
 		Return;
 	EndIf;
 
-	Ref = AdditionalParameters.Ref;
+	Ref = RefInfo.Ref;
 
 	If Volume = Undefined Then
 		If PictureViewerServer.isImage(File.FileRef.Extension) Then
@@ -328,10 +411,10 @@ Procedure AddFile(File, Val Volume, AdditionalParameters) Export
 		EndIf;
 	EndIf;
 
-	FileInfo = UploadPicture(File, Volume, AdditionalParameters);
+	FileInfo = UploadPicture(File, Volume, RefInfo);
 	If FileInfo.Success Then
 		PictureViewerServer.CreateAndLinkFileToObject(Volume, FileInfo, Ref);
-		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);
+		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, RefInfo.UUID);
 	EndIf;
 EndProcedure
 

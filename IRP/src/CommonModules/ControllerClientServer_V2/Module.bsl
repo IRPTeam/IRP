@@ -30,8 +30,6 @@ Function GetFormParameters(Form) Export
 	Result.Insert("TaxVisible", Undefined); // Undefined - do not change visible, True or False - change visible
 	Result.Insert("TaxChoiceList", New Array());
 	
-	Result.Insert("TaxExemptionReasonVisible", Undefined);
-	
 	Result.Insert("PartnerChoiceList", Undefined);
 	
 	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
@@ -78,8 +76,6 @@ Function CreateParameters(ServerParameters, FormParameters, LoadParameters)
 	
 	Parameters.Insert("TaxVisible"   , FormParameters.TaxVisible);
 	Parameters.Insert("TaxChoiceList", FormParameters.TaxChoiceList);
-	
-	Parameters.Insert("TaxExemptionReasonVisible"   , FormParameters.TaxExemptionReasonVisible);
 
 	Parameters.Insert("PartnerChoiceList", FormParameters.PartnerChoiceList);
 	
@@ -698,31 +694,6 @@ Procedure StepChangeTaxVisible(Parameters, Chain) Export
 	Chain.ChangeTaxVisible.Options.Add(Options);	
 EndProcedure
 
-// TaxExemptionReason.Set
-Procedure SetTaxExemptionReasonVisible(Parameters, Results) Export
-	For Each _result In Results Do
-		Parameters.TaxExemptionReasonVisible = _result.Value;
-	EndDo;
-EndProcedure
-
-// Form.StepChangeTaxExemptionReasonVisible.Step
-Procedure StepChangeTaxExemptionReasonVisible(Parameters, Chain) Export
-	Chain.ChangeTaxExemptionReasonVisible.Enable = True;
-	If Chain.Idle Then
-		Return;
-	EndIf;
-	Chain.ChangeTaxExemptionReasonVisible.Setter = "SetTaxExemptionReasonVisible";
-	Options = ModelClientServer_V2.ChangeTaxVisibleOptions();
-	Options.Date           = GetDate(Parameters);
-	Options.Company        = GetCompany(Parameters);
-	Options.DocumentName   = Parameters.ObjectMetadataInfo.MetadataName;
-	If CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, "TransactionType") Then
-		Options.TransactionType = GetTransactionType(Parameters);
-	EndIf;
-	Options.StepName = "StepChangeTaxExemptionReasonVisible";
-	Chain.ChangeTaxExemptionReasonVisible.Options.Add(Options);	
-EndProcedure
-
 // PartnerChoiceList.Set
 Procedure SetPartnerChoiceList(Parameters, Results) Export
 	If Results.Count() > 0 Then
@@ -787,8 +758,8 @@ Function BindFormOnOpen(Parameters)
 	Binding.Insert("SalesReportToConsignor"    , "StepChangeTaxVisible");
 	Binding.Insert("WorkOrder"                 , "StepChangeTaxVisible");
 	
-	Binding.Insert("DebitNote"  , "StepChangeTaxVisible, StepChangeTaxExemptionReasonVisible");
-	Binding.Insert("CreditNote" , "StepChangeTaxVisible, StepChangeTaxExemptionReasonVisible");
+	Binding.Insert("DebitNote"  , "StepChangeTaxVisible");
+	Binding.Insert("CreditNote" , "StepChangeTaxVisible");
 	
 	Binding.Insert("StockAdjustmentAsSurplus" , "StepChangeTaxVisible");
 	
@@ -2793,12 +2764,10 @@ Function BindDate(Parameters)
 	
 	Binding.Insert("DebitNote", 
 		"StepChangeTaxVisible,
-		|StepChangeTaxExemptionReasonVisible, 
 		|StepTransactionsChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CreditNote",
 		"StepChangeTaxVisible,
-		|StepChangeTaxExemptionReasonVisible,
 		|StepTransactionsChangeVatRate_AgreementInList");
 	
 	Binding.Insert("StockAdjustmentAsSurplus",
@@ -3014,12 +2983,10 @@ Function BindCompany(Parameters)
 	
 	Binding.Insert("DebitNote",
 		"StepChangeTaxVisible,
-		|StepChangeTaxExemptionReasonVisible,
 		|StepTransactionsChangeVatRate_AgreementInList");
 		
 	Binding.Insert("CreditNote",
 		"StepChangeTaxVisible,
-		|StepChangeTaxExemptionReasonVisible,
 		|StepTransactionsChangeVatRate_AgreementInList");
 		
 	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindCompany");
@@ -6850,12 +6817,6 @@ EndProcedure
 Function GetTransactionsAmount(Parameters, _Key)
 	Return GetPropertyObject(Parameters, BindTransactionsAmount(Parameters).DataPath, _Key);
 EndFunction
-
-// Transactions.Amount.Set
-Procedure SetTransactionsAmount(Parameters, Results) Export
-	Binding = BindTransactionsAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
-EndProcedure
 
 // Transactions.Amount.Bind
 Function BindTransactionsAmount(Parameters)
@@ -11199,25 +11160,6 @@ EndFunction
 
 #EndRegion
 
-#Region ITEM_LIST_ORDER
-
-// ItemList.Order.Get
-Function GetItemListOrder(Parameters, _Key)
-	Binding = BindItemListOrder(Parameters);
-	Return GetPropertyObject(Parameters, Binding.DataPath, _Key);
-EndFunction
-
-// ItemList.Order.Bind
-Function BindItemListOrder(Parameters)
-	DataPath = New Map();
-	DataPath.Insert("SalesInvoice"     , "ItemList.SalesOrder");
-	DataPath.Insert("PurchaseInvoice"  , "ItemList.PurchaseOrder");
-	Binding = New Structure();	
-	Return BindSteps("BindVoid", DataPath, Binding, Parameters, "BindItemListOrder");
-EndFunction
-
-#EndRegion
-
 #Region ITEM_LIST_LANDEDCOST
 
 // ItemList.LandedCost.OnChange
@@ -13055,12 +12997,6 @@ EndFunction
 Procedure ItemListTotalAmountOnChange(Parameters) Export
 	Binding = BindItemListTotalAmount(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
-EndProcedure
-
-// ItemList.TotalAmount.Set
-Procedure SetItemListTotalAmount(Parameters, Results) Export
-	Binding = BindItemListTotalAmount(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
 // ItemList.TotalAmount.Get

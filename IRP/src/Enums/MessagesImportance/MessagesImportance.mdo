@@ -48,7 +48,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>High</value>
+   <value>Yüksek</value>
   </synonym>
  </enumValues>
  <enumValues uuid="87c73c26-757e-496f-9f6d-9cc92d917b95">
@@ -78,7 +78,7 @@
   </synonym>
   <synonym>
    <key>tr</key>
-   <value>Low</value>
+   <value>Düşük</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

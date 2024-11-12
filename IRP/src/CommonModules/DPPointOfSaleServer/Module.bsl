@@ -5,11 +5,7 @@ Procedure AfterPostingDocument(Ref, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure BeforePostingDocument(Object, AddInfo = Undefined) Export
-	If TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		DocRetailSalesReceiptServer.SetPaymentMethod(Object);
-	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.RetailReturnReceipt") Then
-		DocRetailReturnReceiptServer.SetPaymentMethod(Object);
-	EndIf;
+	Return;
 EndProcedure
 
 #EndRegion

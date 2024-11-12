@@ -16,7 +16,7 @@
  <type>
   <types>String</types>
   <stringQualifiers>
-   <length>150</length>
+   <length>20</length>
   </stringQualifiers>
  </type>
  <minValue xsi:type="core:UndefinedValue"/>
@@ -28,31 +28,11 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Document.SalesReturn</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.RetailReturnReceipt</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.PurchaseReturn</metadata>
-  <use>Use</use>
- </content>
- <content>
   <metadata>Document.SalesInvoice</metadata>
   <use>Use</use>
  </content>
  <content>
-  <metadata>Document.RetailSalesReceipt</metadata>
-  <use>Use</use>
- </content>
- <content>
   <metadata>Document.DebitNote</metadata>
-  <use>Use</use>
- </content>
- <content>
-  <metadata>Document.PurchaseInvoice</metadata>
   <use>Use</use>
  </content>
  <content>

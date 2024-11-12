@@ -654,26 +654,6 @@ Scenario: _0263111 create postponed return with basis document
 			| 'Amount' |'Retail customer' |
 			| '920,00' |''                |
 		And I select current line in "Receipts" table
-		And I go to line in "ItemList" table
-			| "Item"                                                    | "Serials"   |
-			| "Product 9 with SLN (control code string, without check)" | "999999999" |
-		And I activate "Control code string state" field in "ItemList" table
-		And I select current line in "ItemList" table
-		* Temp
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY1" text in the field named "Barcode"
-			And I move to the next attribute
-		And I go to line in "ItemList" table
-			| "Item"               | "Serials"     |
-			| "Product 6 with SLN" | "57897909799" |
-		And I activate "Control code string state" field in "ItemList" table
-		And I select current line in "ItemList" table
-		* Temp
-			And I click "Search by barcode" button
-			Then "Barcode" window is opened
-			And I input "Q3VycmVudCByb3cgd2lsbCBkZWNvZGUgdG8gYmFzZTY0" text in the field named "Barcode"
-			And I move to the next attribute		
 		And I click "Payment Return" button
 		And I click "Cash (/)" button
 		And I click "OK" button

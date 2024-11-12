@@ -109,7 +109,7 @@
   <objectField>Document.SalesReturn.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.SalesReturn.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.SalesReturn.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.SalesReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.SalesReturn.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

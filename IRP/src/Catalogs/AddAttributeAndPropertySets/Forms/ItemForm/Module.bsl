@@ -501,12 +501,7 @@ EndProcedure
 
 &AtServer
 Procedure FillExtensionAttributesListAtServer()
-	Segments = StrSplit(Object.PredefinedDataName, "_");
-	If Segments.Count() = 2 Then
-		MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
-	Else
-		MetadataName = Segments[0]+"."+Segments[1]+"_"+Segments[2];
-	EndIf;
+	MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
 	ObjectMetadata = Metadata.FindByFullName(MetadataName);
 	For Each Attribute In ObjectMetadata.Attributes Do
 		If Not StrFind(Attribute.Name, "_") Then

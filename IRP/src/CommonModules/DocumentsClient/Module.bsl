@@ -1540,13 +1540,9 @@ Procedure PickupItemsEnd(ScanData, AddInfo) Export
 	EndIf;	
 
 	If Result.ChoiceForms.ControlStringStartChoice_Counter = 1 And Not FormAlreadyOpened Then
-		SerialLotNumberForCheck = Undefined;
-		If ScanData.Count() Then
-			SerialLotNumberForCheck = ScanData[ScanData.UBound()].SerialLotNumber;
-		EndIf;
 		Form.Items.ItemList.CurrentRow = Object.ItemList.FindRows(
 			New Structure("Key", Result.ChoiceForms.ControlStringStartChoice_Key))[0].GetID();
-		Form.ItemListControlCodeStringStateClick(SerialLotNumberForCheck);
+		Form.ItemListControlCodeStringStateClick();
 	EndIf;
 	
 	For Each Message In Result.UserMessages Do

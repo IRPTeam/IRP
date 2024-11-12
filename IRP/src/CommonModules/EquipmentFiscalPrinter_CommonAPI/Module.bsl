@@ -937,19 +937,9 @@ Function CheckPackage_ToXML(CheckPackage)
 		EndIf;
 		For Each GoodCodeData In Item.GoodCodeData Do
 			XMLWriter.WriteStartElement("GoodCodeData");
-			//@skip-check invocation-parameter-type-intersect
 			XMLWriter.WriteAttribute(GoodCodeData.Key, ToXMLString(GoodCodeData.Value));
 			XMLWriter.WriteEndElement();
 		EndDo;
-		
-		If Not IsBlankString(Item.IndustryAttribute.AttributeValue) Then
-			XMLWriter.WriteStartElement("IndustryAttribute");
-			XMLWriter.WriteAttribute("AttributeValue", ToXMLString(Item.IndustryAttribute.AttributeValue));
-			XMLWriter.WriteAttribute("DocumentDate", ToXMLString(Item.IndustryAttribute.DocumentDate));
-			XMLWriter.WriteAttribute("DocumentNumber", ToXMLString(Item.IndustryAttribute.DocumentNumber));
-			XMLWriter.WriteAttribute("IdentifierFOIV", ToXMLString(Item.IndustryAttribute.IdentifierFOIV));
-			XMLWriter.WriteEndElement();			
-		EndIf;
 		XMLWriter.WriteEndElement();
 	EndDo;
 	For Each Text In CheckPackage.Positions.TextStrings Do

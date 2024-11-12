@@ -52,7 +52,7 @@
   <objectField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.EmployeeSickLeave.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.EmployeeSickLeave.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.EmployeeSickLeave.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

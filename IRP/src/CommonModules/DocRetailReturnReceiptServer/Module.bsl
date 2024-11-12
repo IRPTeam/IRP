@@ -6,7 +6,6 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 		DocumentsServer.FillSpecialOffersCache(Object, Form, "RetailSalesReceipt");
-		SetPaymentMethod(Object);
 	EndIf;
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
@@ -64,23 +63,6 @@ EndProcedure
 
 Procedure OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServerChoiceForm(Form, Cancel, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region CHOICE_FORM
-
-Procedure SetPaymentMethod(Object) Export
-	For Each Payment In Object.Payments Do
-		If Payment.PaymentType.Type = Enums.PaymentTypes.PaymentAgent Then
-			If Object.Payments.Count() = 1 Then
-				Object.PaymentMethod = Enums.ReceiptPaymentMethods.TransferOnCredit;
-			Else
-				Object.PaymentMethod = Enums.ReceiptPaymentMethods.PartialSettlementAndCredit;
-			EndIf;
-			Break;
-		EndIf;
-	EndDo;
 EndProcedure
 
 #EndRegion

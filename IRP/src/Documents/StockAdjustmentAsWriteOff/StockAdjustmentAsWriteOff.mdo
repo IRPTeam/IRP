@@ -52,7 +52,7 @@
   <objectField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.StockAdjustmentAsWriteOff.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

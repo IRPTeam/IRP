@@ -1045,13 +1045,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.MaxUploadFileSize</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>FilterCriterion.RelatedDocuments</name>
 		<right>
 			<name>View</name>
@@ -1106,6 +1099,13 @@
 	</object>
 	<object>
 		<name>Constant.MaximumServerDifficultLevel</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.UseIncidents</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

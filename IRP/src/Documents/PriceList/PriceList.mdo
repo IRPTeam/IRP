@@ -52,7 +52,7 @@
   <objectField>Document.PriceList.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.PriceList.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.PriceList.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.PriceList.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.PriceList.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

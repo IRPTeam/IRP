@@ -532,13 +532,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.FilePartsForUpload</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>InformationRegister.PartnerSegments</name>
 		<right>
 			<name>Read</name>

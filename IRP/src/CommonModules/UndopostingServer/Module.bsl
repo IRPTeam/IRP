@@ -9,8 +9,7 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	
-	If CommonFunctionsServer.isCommonAttributeUseForMetadata("ManualMovementsEdit", DocObject.Metadata()) 
-			And DocObject.ManualMovementsEdit Then
+	If DocObject.ManualMovementsEdit Then
 		Cancel = True;
 		TextMessage = R().Error_147;
 		CommonFunctionsClientServer.ShowUsersMessage(TextMessage);

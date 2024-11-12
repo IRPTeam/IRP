@@ -68,7 +68,7 @@
   <objectField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

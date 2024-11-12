@@ -337,8 +337,7 @@ Function GetChain()
 	
 	Chain.Insert("ChangePriceByPriceType"        , GetChainLink("ChangePriceByPriceTypeExecute"));
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
-	Chain.Insert("ChangeTaxVisible"				 , GetChainLink("ChangeTaxVisibleExecute"));
-	Chain.Insert("ChangeTaxExemptionReasonVisible", GetChainLink("ChangeTaxExemptionReasonVisibleExecute"));
+	Chain.Insert("ChangeTaxVisible", GetChainLink("ChangeTaxVisibleExecute"));
 	
 	Chain.Insert("ChangeVatRate", GetChainLink("ChangeVatRateExecute"));
 		
@@ -2367,16 +2366,6 @@ Function ChangeTaxVisibleExecute(Options) Export
 	EndIf;
 	
 	Return New Structure("TaxVisible, TaxChoiceList", _visible, _choiceList);
-EndFunction
-
-Function ChangeTaxExemptionReasonVisibleExecute(Options) Export
-	_arrayOfTaxes = TaxesServer.GetTaxesInfo(
-		Options.Date, 
-		Options.Company, 
-		Options.DocumentName, 
-		Options.TransactionType, 
-		PredefinedValue("Enum.TaxKind.VAT"));
-	Return (_arrayOfTaxes.Count() <> 0);
 EndFunction
 
 Function ChangeVatRateOptions() Export

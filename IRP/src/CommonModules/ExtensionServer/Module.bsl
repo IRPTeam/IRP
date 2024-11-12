@@ -77,8 +77,6 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 		EndIf;
 	EndDo;
 
-	ArrayOfExcluding = GetArrayOfExcludingExternalAttributes(ObjectMetadata);
-
 	For Each TabularSection In ObjectMetadata.TabularSections Do
 		For Each Column In TabularSection.Attributes Do
 			If Not StrFind(Column.Name, "_") Then
@@ -92,24 +90,14 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 				Continue;
 			EndIf;
 
-			FullColumnName = TabularSection.Name + "." + Column.Name;
-			If ArrayOfExcluding.Find(FullColumnName) <> Undefined Then
-				Continue;
-			EndIf;
-			
 			NewColumn = Form.Items.Add(Column.Name, Type("FormField"), Parent);
 			NewColumn.Type = FormFieldType.InputField;
-			NewColumn.DataPath = "Object." + FullColumnName;
+			NewColumn.DataPath = "Object." + TabularSection.Name + "." + Column.Name;
 			If Column.Type = BooleanTypeDescription Then
 				NewColumn.Type = FormFieldType.CheckBoxField;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
-
-Function GetArrayOfExcludingExternalAttributes(ObjectMetadata)
-	ArrayOfExcluding = New Array();
-	Return ArrayOfExcluding;
-EndFunction
 
 #EndRegion

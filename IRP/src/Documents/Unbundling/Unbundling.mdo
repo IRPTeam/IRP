@@ -52,7 +52,7 @@
   <objectField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.Unbundling.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.Unbundling.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

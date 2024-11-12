@@ -72,7 +72,8 @@ Function CheckDocument() Export
 			ArrayOfErrors.Add("--------------------------");
 			ArrayOfErrors.Add();
 		EndTry;
-	EndDo;			
+	EndDo;
+			
 	
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
@@ -448,6 +449,8 @@ Function InformationRegisters() Export
 	ArrayOfErrors = New Array();
 	
 	For Each MetaObj In Metadata.InformationRegisters Do
+			
+		
 		Try
 			InformationRegisters[MetaObj.Name].GetAccessKey();
 		Except
@@ -457,20 +460,16 @@ Function InformationRegisters() Export
 			ArrayOfErrors.Add();
 		EndTry;
 		
-		HasDimensions = MetaObj.Dimensions.Count() > 0;
+		ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+		If Not ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
+		EndIf;
 		
-		If HasDimensions Then
-			ReadResult = AccessParameters("Read", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
-			If Not ReadResult.Accessibility Then
-				ArrayOfErrors.Add("Set Read access to Role TemplateInformationRegisters:" + MetaObj.FullName());
-				ArrayOfErrors.Add("--------------------------");
-			EndIf;
-			
-			ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
-			If ReadResult.Accessibility Then
-				ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
-				ArrayOfErrors.Add("--------------------------");
-			EndIf;
+		ReadResult = AccessParameters("Update", MetaObj, MetaObj.Dimensions[0].Name, Metadata.Roles.TemplateInformationRegisters);
+		If ReadResult.Accessibility Then
+			ArrayOfErrors.Add("Remove Update access from Role TemplateInformationRegisters:" + MetaObj.FullName());
+			ArrayOfErrors.Add("--------------------------");
 		EndIf; 
 
 		Query = New Query("Select ALLOWED TOP 1 * FROM " + MetaObj.FullName());
@@ -484,7 +483,8 @@ Function InformationRegisters() Export
 			ArrayOfErrors.Add();
 		EndTry;
 	EndDo;
-		
+			
+	
 	If ArrayOfErrors.Count() Then
 		Unit_Service.assertFalse(StrConcat(ArrayOfErrors, Chars.LF));
 	EndIf;

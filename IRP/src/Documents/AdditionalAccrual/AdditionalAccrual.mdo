@@ -52,7 +52,7 @@
   <objectField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.AdditionalAccrual.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.AdditionalAccrual.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesKeyField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
   <multipleValuesOrderField>Document.AdditionalAccrual.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>

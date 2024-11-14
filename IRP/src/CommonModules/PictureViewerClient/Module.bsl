@@ -119,20 +119,8 @@ EndProcedure
 
 Function UploadPicture(File, Volume, AdditionalParameters = Undefined) Export
 	
-	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
-	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
-	If Not FileRef.IsEmpty() Then
-		Return PictureViewerServer.GetFileInfo(FileRef);
-	EndIf;     
-	If TypeOf(File.Address) = Type("BinaryData") Then
-		RequestBody = File.Address;
-	Else
-		RequestBody = GetFromTempStorage(File.Address);
-	EndIf;
-
-	If PictureViewerServer.isImage(File.FileRef.Extension) Then
-		PictureScaleSize = 200;
-		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
+	isFileImage = PictureViewerClientServer.isImage(File.FileRef.Extension);
+	If isFileImage Then
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	Else
 		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile(Volume);

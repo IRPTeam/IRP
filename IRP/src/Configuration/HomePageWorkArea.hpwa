@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hpwa:HomePageWorkArea xmlns:hpwa="http://g5.1c.ru/v8/dt/hpwa">
   <workingAreaTemplate>TwoColumnsEqualWidth</workingAreaTemplate>
-  <columns>
-    <items>
-      <form>DataProcessor.IssueTracker.Form.Form</form>
-      <height>10</height>
-      <visibility>
-        <common>true</common>
-      </visibility>
-    </items>
-  </columns>
-  <columns>
-    <items>
-      <form>Catalog.Projects.Form.ListForm</form>
-      <height>10</height>
-      <visibility>
-        <common>true</common>
-      </visibility>
-    </items>
-    <items>
-      <form>Document.WorkOrder.Form.ListForm</form>
-      <height>10</height>
-      <visibility>
-        <common>true</common>
-      </visibility>
-    </items>
-  </columns>
+  <columns/>
+  <columns/>
 </hpwa:HomePageWorkArea>

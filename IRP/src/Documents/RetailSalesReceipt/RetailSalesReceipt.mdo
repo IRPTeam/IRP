@@ -60,7 +60,7 @@
     <objectField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.RetailSalesReceipt.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.RetailSalesReceipt.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.RetailSalesReceipt.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>
@@ -1978,6 +1978,21 @@
         <stringQualifiers>
           <length>50</length>
         </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="eb0383f4-e4a4-4170-a208-56c7e819935a">
+      <name>IndustryAttribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Industry attribute</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers/>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

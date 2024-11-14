@@ -44,7 +44,7 @@
     <objectField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

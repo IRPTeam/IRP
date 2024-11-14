@@ -11,10 +11,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CreateStep(R().PeriodClosing_Step3 , 2);
 	CreateStep(R().PeriodClosing_Step4 , 3);
 	CreateStep(R().PeriodClosing_Step5 , 4);
-	CreateStep(R().PeriodClosing_Step6 , 5);
+	
+	If FOServer.IsUseFixedAssets() Then
+		CreateStep(R().PeriodClosing_Step6 , 5);
+	EndIf;
+	
+	CreateStep(R().PeriodClosing_Step7 , 6);
 	
 	If FOServer.IsUseAccounting() Then
-		CreateStep(R().PeriodClosing_Step7 , 6);
+		CreateStep(R().PeriodClosing_Step8 , 7);
 	EndIf;
 	
 	ThisObject.UpdatePause = 5;
@@ -230,6 +235,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	If Form.CurrentStep = 0 Then
 		Form.Items.RunStep.Visible = False;
 		Form.Items.SkipStep.Visible = False;
+		Form.Items.UnskipStep.Visible = False;
 		Form.Items.RunAllSteps.Visible = True;
 		
 		AllStepsCanRun = True;
@@ -269,6 +275,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.Items.RunStep.Visible = True;
 		Form.Items.SkipStep.Visible = True;
+		Form.Items.UnskipStep.Visible = True;
 		Form.Items.RunAllSteps.Visible = False;
 
 		AllWaitingStepsIsValidOrSkipped = GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps);		
@@ -748,7 +755,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Step_5_ForeignCurrencyRevaluation
+#Region Step_5_FixedAssets
 
 &AtClientAtServerNoContext
 Function ValidateStep_5(Object, Form, Step)
@@ -784,22 +791,20 @@ EndFunction
 &AtServer
 Procedure RunStep_5()
 	ClearJobList(5);
-	Analytics = New Structure();
-	Analytics.Insert("RevenueType"               , ThisObject.Step_5_RevenueType);
-	Analytics.Insert("RevenueProfitLossCenter"   , ThisObject.Step_5_RevenueProfitLossCenter);
-	Analytics.Insert("RevenueAdditionalAnalytic" , ThisObject.Step_5_RevenueAdditionalAnalytic);
-	Analytics.Insert("ExpenseType"               , ThisObject.Step_5_ExpenseType);
-	Analytics.Insert("ExpenseProfitLossCenter"   , ThisObject.Step_5_ExpenseProfitLossCenter);
-	Analytics.Insert("ExpenseAdditionalAnalytic" , ThisObject.Step_5_ExpenseAdditionalAnalytic);
+	
+	ArrayOfBranches = New Array();
+	For Each Row In ThisObject.Step_5_Branches Do
+		ArrayOfBranches.Add(Row.Branch);
+	EndDo;
 	
 	JobParameters = New Array();
 	JobParameters.Add(ThisObject.Company);
 	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
 	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
-	JobParameters.Add(Analytics);
+	JobParameters.Add(ArrayOfBranches);
 	JobParameters.Add(ThisObject.Step_5_Periodicity);
 	
-	RunStepAsBagroundJob(5, ThisObject.StepsInfo[5].Text, "PeriodClosingServer.ForeignCurrencyRevaluation", JobParameters)
+	RunStepAsBagroundJob(5, ThisObject.StepsInfo[5].Text, "PeriodClosingServer.DepreciationCalculation", JobParameters)
 EndProcedure
 
 &AtServer
@@ -809,7 +814,7 @@ EndProcedure
 
 #EndRegion
 
-#Region Step_6_AccountingTranslation
+#Region Step_6_ForeignCurrencyRevaluation
 
 &AtClientAtServerNoContext
 Function ValidateStep_6(Object, Form, Step)
@@ -817,6 +822,12 @@ Function ValidateStep_6(Object, Form, Step)
 		Return Step.Status;
 	EndIf;
 	
+	If Not ValueIsFilled(Form.Step_6_Periodicity) Then
+		AddValidationError(Object, Form, Step, R().PeriodClosing_Error5);
+		Step.ValidationError = True;
+		Return "Error";		
+	EndIf;
+
 	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
 	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
 		Return "NotValid";
@@ -840,6 +851,63 @@ EndFunction
 &AtServer
 Procedure RunStep_6()
 	ClearJobList(6);
+	Analytics = New Structure();
+	Analytics.Insert("RevenueType"               , ThisObject.Step_6_RevenueType);
+	Analytics.Insert("RevenueProfitLossCenter"   , ThisObject.Step_6_RevenueProfitLossCenter);
+	Analytics.Insert("RevenueAdditionalAnalytic" , ThisObject.Step_6_RevenueAdditionalAnalytic);
+	Analytics.Insert("ExpenseType"               , ThisObject.Step_6_ExpenseType);
+	Analytics.Insert("ExpenseProfitLossCenter"   , ThisObject.Step_6_ExpenseProfitLossCenter);
+	Analytics.Insert("ExpenseAdditionalAnalytic" , ThisObject.Step_6_ExpenseAdditionalAnalytic);
+	
+	JobParameters = New Array();
+	JobParameters.Add(ThisObject.Company);
+	JobParameters.Add(BegOfDay(ThisObject.Period.StartDate));
+	JobParameters.Add(BegOfDay(ThisObject.Period.EndDate));
+	JobParameters.Add(Analytics);
+	JobParameters.Add(ThisObject.Step_6_Periodicity);
+	
+	RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text, "PeriodClosingServer.ForeignCurrencyRevaluation", JobParameters)
+EndProcedure
+
+&AtServer
+Procedure CompleteStep_6(JobListRows)
+	SetStepComplete(6, JobListRows);
+EndProcedure
+
+#EndRegion
+
+#Region Step_7_AccountingTranslation
+
+&AtClientAtServerNoContext
+Function ValidateStep_7(Object, Form, Step)
+	If Step.Status = "Skip" Then
+		Return Step.Status;
+	EndIf;
+	
+	ArrayOfWaitingSteps = GetWaitingSteps(Object, Form, Step.StepNumber);
+	If Not GetAllWaitingStepsIsValidOrSkipped(Object, Form, ArrayOfWaitingSteps) Then
+		Return "NotValid";
+	EndIf;
+	
+	Return Step.Status;
+EndFunction
+
+&AtClientAtServerNoContext
+Function GetWaitingSteps_7(Object, Form)
+	Array = New Array();
+	Array.Add(0);
+	Array.Add(1);
+	Array.Add(2);
+	Array.Add(3);
+	Array.Add(4);
+	Array.Add(5);
+	Array.Add(6);
+	Return Array;
+EndFunction
+
+&AtServer
+Procedure RunStep_7()
+	ClearJobList(7);
 	
 	CompanyList = New Array();
 	CompanyList.Add(ThisObject.Company);
@@ -857,7 +925,7 @@ Procedure RunStep_6()
 			JobParameters = New Array();
 			JobParameters.Add(StreamArray);
 			
-			RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text + " " + Pack + " * (" + DocsInPack + ")", 
+			RunStepAsBagroundJob(7, ThisObject.StepsInfo[7].Text + " " + Pack + " * (" + DocsInPack + ")", 
 				"PeriodClosingServer.AccountingTranslation", JobParameters);
 						
 			StreamArray = New Array;
@@ -869,13 +937,13 @@ Procedure RunStep_6()
 		JobParameters = New Array();
 		JobParameters.Add(StreamArray);
 		
-		RunStepAsBagroundJob(6, ThisObject.StepsInfo[6].Text + " " + Pack + " * (" + StreamArray.Count() + ")", 
+		RunStepAsBagroundJob(7, ThisObject.StepsInfo[7].Text + " " + Pack + " * (" + StreamArray.Count() + ")", 
 			"PeriodClosingServer.AccountingTranslation", JobParameters);
 	EndIf;
 EndProcedure
 
 &AtServer
-Procedure CompleteStep_6(JobListRows)
+Procedure CompleteStep_7(JobListRows)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -895,16 +963,16 @@ Procedure CompleteStep_6(JobListRows)
 	
 	QueryResult = Query.Execute();
 	
-	RemovePermanentValidationError(Object, ThisObject, ThisObject.StepsInfo[6]);
+	RemovePermanentValidationError(Object, ThisObject, ThisObject.StepsInfo[7]);
 	
 	If QueryResult.IsEmpty() Then
-		SetStepComplete(6, JobListRows);
+		SetStepComplete(7, JobListRows);
 	Else
 		QuerySelection = QueryResult.Select();
 		While QuerySelection.Next() Do
-			AddValidationError(Object, ThisObject, ThisObject.StepsInfo[6], QuerySelection.Error, QuerySelection.Ref, True);
+			AddValidationError(Object, ThisObject, ThisObject.StepsInfo[7], QuerySelection.Error, QuerySelection.Ref, True);
 		EndDo;
-		SetStepStatus_Error(Object, ThisObject, 6);
+		SetStepStatus_Error(Object, ThisObject, 7);
 	EndIf;
 EndProcedure
 

@@ -81,6 +81,11 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		FillPropertyValues(ThisObject, FillingData, PropertiesHeader);
 		LinkedResult = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		ControllerClientServer_V2.SetReadOnlyProperties_RowID(ThisObject, PropertiesHeader, LinkedResult.UpdatedProperties);
+	Else
+		FillPropertyValues(ThisObject, FillingData);
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Number = Undefined;
+		Date = Undefined;
 	EndIf;
 EndProcedure
 

@@ -126,11 +126,17 @@ Procedure Upload(StructureParams)
 	Structure.Insert("MaxSize", StructureParams.MaxSize);
 	Structure.Insert("Storage", StructureParams.Storage);
 	
-	OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
-	OpenFileDialog.MultipleChoice = False;
-	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	// OLD Version
+	// OpenFileDialog = New PutFilesDialogParameters(FileDialogMode.Open);
+	// OpenFileDialog.MultipleChoice = False;
+	// OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
+	// 
+	// BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
 	
-	BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
+	FilesClient.StartFileLoading(
+		PictureViewerClientServer.FilterForPicturesDialog(), 
+		New CallbackDescription("Upload_END", ThisObject, Structure), 
+		StructureParams.UUID);
 	
 EndProcedure
 
@@ -303,7 +309,8 @@ Function GetDocPrefix(DocRef, NamingFormat)
 	EndIf;
 	
 	Structure = New Structure;
-	Structure.Insert("Store", "Branch.Code");
+	Structure.Insert("Branch", "Branch");
+	Structure.Insert("BranchCode", "Branch.Code");
 	Structure.Insert("DocDate", "Date");
 	Structure.Insert("DocNumber", "Number");
 	
@@ -333,8 +340,11 @@ Function GetDocPrefix(DocRef, NamingFormat)
 		If IsTypeOf(Value, "Date") Then
 			//@skip-check invocation-parameter-type-intersect
 			ReplaceSubsting = Format(Value, "DF=yyyyMMdd");
+		ElsIf IsTypeOf(Value, "Number") Then
+			//@skip-check invocation-parameter-type-intersect
+			ReplaceSubsting = Format(Value, "NZ=0; NG=;");
 		Else
-			ReplaceSubsting = Value;
+			ReplaceSubsting = String(Value);
 		EndIf;
 		
 		NewNamingFormat = StrReplace(NewNamingFormat, SearchSubstring, ReplaceSubsting);

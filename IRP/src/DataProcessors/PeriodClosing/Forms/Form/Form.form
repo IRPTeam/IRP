@@ -4228,10 +4228,10 @@
             </items>
             <items xsi:type="form:FormGroup">
               <name>GroupStep5</name>
-              <id>135</id>
+              <id>1253</id>
               <items xsi:type="form:FormField">
                 <name>Step_5_Periodicity</name>
-                <id>1204</id>
+                <id>1255</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
                 <userVisible>
@@ -4247,7 +4247,7 @@
                 </handlers>
                 <extendedTooltip>
                   <name>Step_5_PeriodicityExtendedTooltip</name>
-                  <id>1206</id>
+                  <id>1257</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
                   <userVisible>
@@ -4262,6 +4262,350 @@
                 </extendedTooltip>
                 <contextMenu>
                   <name>Step_5_PeriodicityContextMenu</name>
+                  <id>1256</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <type>RadioButtonField</type>
+                <editMode>Enter</editMode>
+                <showInHeader>true</showInHeader>
+                <headerHorizontalAlign>Left</headerHorizontalAlign>
+                <showInFooter>true</showInFooter>
+                <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+                  <radioButtonsType>Tumbler</radioButtonsType>
+                  <choiceList>
+                    <presentation>
+                      <key>en</key>
+                      <value>Everyday</value>
+                    </presentation>
+                    <value xsi:type="core:StringValue">
+                      <value>Everyday</value>
+                    </value>
+                  </choiceList>
+                  <choiceList>
+                    <presentation>
+                      <key>en</key>
+                      <value>Monthly</value>
+                    </presentation>
+                    <value xsi:type="core:StringValue">
+                      <value>Monthly</value>
+                    </value>
+                  </choiceList>
+                  <choiceList>
+                    <presentation>
+                      <key>en</key>
+                      <value>By period</value>
+                    </presentation>
+                    <value xsi:type="core:StringValue">
+                      <value>ByPeriod</value>
+                    </value>
+                  </choiceList>
+                </extInfo>
+              </items>
+              <items xsi:type="form:Table">
+                <name>Step_5_Branches</name>
+                <id>1264</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Step_5_Branches</segments>
+                </dataPath>
+                <titleLocation>None</titleLocation>
+                <items xsi:type="form:FormField">
+                  <name>Step_5_BranchesBranch</name>
+                  <id>1277</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <dataPath xsi:type="form:DataPath">
+                    <segments>Step_5_Branches.Branch</segments>
+                  </dataPath>
+                  <extendedTooltip>
+                    <name>Step_5_BranchesBranchExtendedTooltip</name>
+                    <id>1279</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <contextMenu>
+                    <name>Step_5_BranchesBranchContextMenu</name>
+                    <id>1278</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <autoFill>true</autoFill>
+                  </contextMenu>
+                  <type>InputField</type>
+                  <editMode>Enter</editMode>
+                  <showInHeader>true</showInHeader>
+                  <headerHorizontalAlign>Left</headerHorizontalAlign>
+                  <showInFooter>true</showInFooter>
+                  <extInfo xsi:type="form:InputFieldExtInfo">
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <wrap>true</wrap>
+                    <chooseType>true</chooseType>
+                    <typeDomainEnabled>true</typeDomainEnabled>
+                    <textEdit>true</textEdit>
+                  </extInfo>
+                </items>
+                <autoCommandBar>
+                  <name>Step_5_BranchesCommandBar</name>
+                  <id>1265</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <horizontalAlign>Left</horizontalAlign>
+                  <autoFill>true</autoFill>
+                </autoCommandBar>
+                <searchStringAddition>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <name>Step_5_BranchesSearchString</name>
+                  <id>1268</id>
+                  <extendedTooltip>
+                    <name>Step_5_BranchesSearchStringExtendedTooltip</name>
+                    <id>1270</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <contextMenu>
+                    <name>Step_5_BranchesSearchStringContextMenu</name>
+                    <id>1269</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <autoFill>true</autoFill>
+                  </contextMenu>
+                  <source>Step_5_Branches</source>
+                  <extInfo xsi:type="form:SearchStringAdditionExtInfo">
+                    <autoMaxWidth>true</autoMaxWidth>
+                  </extInfo>
+                </searchStringAddition>
+                <viewStatusAddition>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <name>Step_5_BranchesViewStatus</name>
+                  <id>1274</id>
+                  <extendedTooltip>
+                    <name>Step_5_BranchesViewStatusExtendedTooltip</name>
+                    <id>1276</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <contextMenu>
+                    <name>Step_5_BranchesViewStatusContextMenu</name>
+                    <id>1275</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <autoFill>true</autoFill>
+                  </contextMenu>
+                  <type>ViewStatusAddition</type>
+                  <source>Step_5_Branches</source>
+                  <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
+                    <autoMaxWidth>true</autoMaxWidth>
+                  </extInfo>
+                </viewStatusAddition>
+                <searchControlAddition>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <name>Step_5_BranchesSearchControl</name>
+                  <id>1271</id>
+                  <extendedTooltip>
+                    <name>Step_5_BranchesSearchControlExtendedTooltip</name>
+                    <id>1273</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <type>Label</type>
+                    <autoMaxWidth>true</autoMaxWidth>
+                    <autoMaxHeight>true</autoMaxHeight>
+                    <extInfo xsi:type="form:LabelDecorationExtInfo">
+                      <horizontalAlign>Left</horizontalAlign>
+                    </extInfo>
+                  </extendedTooltip>
+                  <contextMenu>
+                    <name>Step_5_BranchesSearchControlContextMenu</name>
+                    <id>1272</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <autoFill>true</autoFill>
+                  </contextMenu>
+                  <type>SearchControlAddition</type>
+                  <source>Step_5_Branches</source>
+                  <extInfo xsi:type="form:SearchControlAdditionExtInfo">
+                    <autoMaxWidth>true</autoMaxWidth>
+                  </extInfo>
+                </searchControlAddition>
+                <extendedTooltip>
+                  <name>Step_5_BranchesExtendedTooltip</name>
+                  <id>1267</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>Step_5_BranchesContextMenu</name>
+                  <id>1266</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <autoFill>true</autoFill>
+                </contextMenu>
+                <changeRowSet>true</changeRowSet>
+                <changeRowOrder>true</changeRowOrder>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <autoMaxRowsCount>true</autoMaxRowsCount>
+                <selectionMode>MultiRow</selectionMode>
+                <header>true</header>
+                <headerHeight>1</headerHeight>
+                <footerHeight>1</footerHeight>
+                <horizontalScrollBar>AutoUse</horizontalScrollBar>
+                <verticalScrollBar>AutoUse</verticalScrollBar>
+                <horizontalLines>true</horizontalLines>
+                <verticalLines>true</verticalLines>
+                <searchOnInput>Auto</searchOnInput>
+                <initialListView>Auto</initialListView>
+                <horizontalStretch>true</horizontalStretch>
+                <verticalStretch>true</verticalStretch>
+                <fileDragMode>AsFileRef</fileDragMode>
+                <rowFilter xsi:type="core:UndefinedValue"/>
+              </items>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <title>
+                <key>en</key>
+                <value>Step4</value>
+              </title>
+              <extendedTooltip>
+                <name>GroupStep5ExtendedTooltip</name>
+                <id>1254</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <type>Page</type>
+              <extInfo xsi:type="form:PageGroupExtInfo">
+                <group>Vertical</group>
+                <showTitle>true</showTitle>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormGroup">
+              <name>GroupStep6</name>
+              <id>135</id>
+              <items xsi:type="form:FormField">
+                <name>Step_6_Periodicity</name>
+                <id>1204</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <dataPath xsi:type="form:DataPath">
+                  <segments>Step_6_Periodicity</segments>
+                </dataPath>
+                <titleLocation>None</titleLocation>
+                <handlers>
+                  <event>OnChange</event>
+                  <name>StepParameterOnChange</name>
+                </handlers>
+                <extendedTooltip>
+                  <name>Step_6_PeriodicityExtendedTooltip</name>
+                  <id>1206</id>
+                  <visible>true</visible>
+                  <enabled>true</enabled>
+                  <userVisible>
+                    <common>true</common>
+                  </userVisible>
+                  <type>Label</type>
+                  <autoMaxWidth>true</autoMaxWidth>
+                  <autoMaxHeight>true</autoMaxHeight>
+                  <extInfo xsi:type="form:LabelDecorationExtInfo">
+                    <horizontalAlign>Left</horizontalAlign>
+                  </extInfo>
+                </extendedTooltip>
+                <contextMenu>
+                  <name>Step_6_PeriodicityContextMenu</name>
                   <id>1205</id>
                   <visible>true</visible>
                   <enabled>true</enabled>
@@ -4313,7 +4657,7 @@
                   <name>GroupRevenueAnalytic</name>
                   <id>1209</id>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_RevenueType</name>
+                    <name>Step_6_RevenueType</name>
                     <id>1228</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4321,14 +4665,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_RevenueType</segments>
+                      <segments>Step_6_RevenueType</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_RevenueTypeExtendedTooltip</name>
+                      <name>Step_6_RevenueTypeExtendedTooltip</name>
                       <id>1230</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4343,7 +4687,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_RevenueTypeContextMenu</name>
+                      <name>Step_6_RevenueTypeContextMenu</name>
                       <id>1229</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4375,7 +4719,7 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_RevenueProfitLossCenter</name>
+                    <name>Step_6_RevenueProfitLossCenter</name>
                     <id>1225</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4383,14 +4727,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_RevenueProfitLossCenter</segments>
+                      <segments>Step_6_RevenueProfitLossCenter</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_RevenueProfitLossCenterExtendedTooltip</name>
+                      <name>Step_6_RevenueProfitLossCenterExtendedTooltip</name>
                       <id>1227</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4405,7 +4749,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_RevenueProfitLossCenterContextMenu</name>
+                      <name>Step_6_RevenueProfitLossCenterContextMenu</name>
                       <id>1226</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4429,7 +4773,7 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_RevenueAdditionalAnalytic</name>
+                    <name>Step_6_RevenueAdditionalAnalytic</name>
                     <id>1222</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4437,14 +4781,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_RevenueAdditionalAnalytic</segments>
+                      <segments>Step_6_RevenueAdditionalAnalytic</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_RevenueAdditionalAnalyticExtendedTooltip</name>
+                      <name>Step_6_RevenueAdditionalAnalyticExtendedTooltip</name>
                       <id>1224</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4459,7 +4803,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_RevenueAdditionalAnalyticContextMenu</name>
+                      <name>Step_6_RevenueAdditionalAnalyticContextMenu</name>
                       <id>1223</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4522,7 +4866,7 @@
                   <name>GroupExpenseAnalytic</name>
                   <id>1211</id>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_ExpenseType</name>
+                    <name>Step_6_ExpenseType</name>
                     <id>1219</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4530,14 +4874,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_ExpenseType</segments>
+                      <segments>Step_6_ExpenseType</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_ExpenseTypeExtendedTooltip</name>
+                      <name>Step_6_ExpenseTypeExtendedTooltip</name>
                       <id>1221</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4552,7 +4896,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_ExpenseTypeContextMenu</name>
+                      <name>Step_6_ExpenseTypeContextMenu</name>
                       <id>1220</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4584,7 +4928,7 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_ExpenseProfitLossCenter</name>
+                    <name>Step_6_ExpenseProfitLossCenter</name>
                     <id>1216</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4592,14 +4936,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_ExpenseProfitLossCenter</segments>
+                      <segments>Step_6_ExpenseProfitLossCenter</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_ExpenseProfitLossCenterExtendedTooltip</name>
+                      <name>Step_6_ExpenseProfitLossCenterExtendedTooltip</name>
                       <id>1218</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4614,7 +4958,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_ExpenseProfitLossCenterContextMenu</name>
+                      <name>Step_6_ExpenseProfitLossCenterContextMenu</name>
                       <id>1217</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4638,7 +4982,7 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
-                    <name>Step_5_ExpenseAdditionalAnalytic</name>
+                    <name>Step_6_ExpenseAdditionalAnalytic</name>
                     <id>1213</id>
                     <visible>true</visible>
                     <enabled>true</enabled>
@@ -4646,14 +4990,14 @@
                       <common>true</common>
                     </userVisible>
                     <dataPath xsi:type="form:DataPath">
-                      <segments>Step_5_ExpenseAdditionalAnalytic</segments>
+                      <segments>Step_6_ExpenseAdditionalAnalytic</segments>
                     </dataPath>
                     <handlers>
                       <event>OnChange</event>
                       <name>StepParameterOnChange</name>
                     </handlers>
                     <extendedTooltip>
-                      <name>Step_5_ExpenseAdditionalAnalyticExtendedTooltip</name>
+                      <name>Step_6_ExpenseAdditionalAnalyticExtendedTooltip</name>
                       <id>1215</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4668,7 +5012,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>Step_5_ExpenseAdditionalAnalyticContextMenu</name>
+                      <name>Step_6_ExpenseAdditionalAnalyticContextMenu</name>
                       <id>1214</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -4768,10 +5112,10 @@
               </userVisible>
               <title>
                 <key>en</key>
-                <value>Step5</value>
+                <value>Step6</value>
               </title>
               <extendedTooltip>
-                <name>GroupStep5ExtendedTooltip</name>
+                <name>GroupStep6ExtendedTooltip</name>
                 <id>136</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -4792,7 +5136,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormGroup">
-              <name>GroupStep6</name>
+              <name>GroupStep7</name>
               <id>142</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -4804,7 +5148,7 @@
                 <value>Step6</value>
               </title>
               <extendedTooltip>
-                <name>GroupStep6ExtendedTooltip</name>
+                <name>GroupStep7ExtendedTooltip</name>
                 <id>143</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -4825,7 +5169,7 @@
               </extInfo>
             </items>
             <items xsi:type="form:FormGroup">
-              <name>GroupStep7</name>
+              <name>GroupStep8</name>
               <id>1231</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -4837,7 +5181,7 @@
                 <value>Step6</value>
               </title>
               <extendedTooltip>
-                <name>GroupStep7ExtendedTooltip</name>
+                <name>GroupStep8ExtendedTooltip</name>
                 <id>1232</id>
                 <visible>true</visible>
                 <enabled>true</enabled>
@@ -6448,7 +6792,7 @@
     </columns>
   </attributes>
   <attributes>
-    <name>Step_5_Periodicity</name>
+    <name>Step_6_Periodicity</name>
     <title>
       <key>en</key>
       <value>Periodicity</value>
@@ -6465,11 +6809,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_Periodicity</segments>
+      <segments>Step_6_Periodicity</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_RevenueType</name>
+    <name>Step_6_RevenueType</name>
     <title>
       <key>en</key>
       <value>Revenue type</value>
@@ -6485,11 +6829,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_RevenueType</segments>
+      <segments>Step_6_RevenueType</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_ExpenseType</name>
+    <name>Step_6_ExpenseType</name>
     <title>
       <key>en</key>
       <value>Expense type</value>
@@ -6505,11 +6849,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_ExpenseType</segments>
+      <segments>Step_6_ExpenseType</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_RevenueProfitLossCenter</name>
+    <name>Step_6_RevenueProfitLossCenter</name>
     <title>
       <key>en</key>
       <value>Profit loss center</value>
@@ -6525,11 +6869,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_RevenueProfitLossCenter</segments>
+      <segments>Step_6_RevenueProfitLossCenter</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_ExpenseProfitLossCenter</name>
+    <name>Step_6_ExpenseProfitLossCenter</name>
     <title>
       <key>en</key>
       <value>Profit loss center</value>
@@ -6545,11 +6889,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_ExpenseProfitLossCenter</segments>
+      <segments>Step_6_ExpenseProfitLossCenter</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_RevenueAdditionalAnalytic</name>
+    <name>Step_6_RevenueAdditionalAnalytic</name>
     <title>
       <key>en</key>
       <value>Additional analytic</value>
@@ -6565,11 +6909,11 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_RevenueAdditionalAnalytic</segments>
+      <segments>Step_6_RevenueAdditionalAnalytic</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
-    <name>Step_5_ExpenseAdditionalAnalytic</name>
+    <name>Step_6_ExpenseAdditionalAnalytic</name>
     <title>
       <key>en</key>
       <value>Additional analytic</value>
@@ -6585,7 +6929,7 @@
       <common>true</common>
     </edit>
     <settingsSavedData xsi:type="form:DataPath">
-      <segments>Step_5_ExpenseAdditionalAnalytic</segments>
+      <segments>Step_6_ExpenseAdditionalAnalytic</segments>
     </settingsSavedData>
   </attributes>
   <attributes>
@@ -6671,6 +7015,64 @@
       <id>59</id>
       <valueType>
         <types>AnyRef</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+  </attributes>
+  <attributes>
+    <name>Step_5_Periodicity</name>
+    <title>
+      <key>en</key>
+      <value>Periodicity</value>
+    </title>
+    <id>64</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <settingsSavedData xsi:type="form:DataPath">
+      <segments>Step_5_Periodicity</segments>
+    </settingsSavedData>
+  </attributes>
+  <attributes>
+    <name>Step_5_Branches</name>
+    <title>
+      <key>en</key>
+      <value>Branches</value>
+    </title>
+    <id>65</id>
+    <valueType>
+      <types>ValueTable</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <settingsSavedData xsi:type="form:DataPath">
+      <segments>Step_5_Branches</segments>
+    </settingsSavedData>
+    <columns>
+      <name>Branch</name>
+      <title>
+        <key>en</key>
+        <value>Branch</value>
+      </title>
+      <id>66</id>
+      <valueType>
+        <types>CatalogRef.BusinessUnits</types>
       </valueType>
       <view>
         <common>true</common>

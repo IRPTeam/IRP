@@ -102,6 +102,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="5dc17671-ee4b-43aa-81ff-e2025cc94bd9">
+    <name>Country</name>
+    <synonym>
+      <key>en</key>
+      <value>Country</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Countries</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="fec8feec-e1c0-40ec-b055-b09978516835">
     <producedTypes>
       <objectType typeId="fae1dbb6-b80c-4d4c-be98-a276d2ceb94a" valueTypeId="450ac43f-14ef-44fd-bb90-ce709e3b22f6"/>

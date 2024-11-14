@@ -60,7 +60,7 @@
     <objectField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.SalesReportFromTradeAgent.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

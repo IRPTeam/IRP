@@ -44,7 +44,7 @@
     <objectField>Document.TimeSheet.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.TimeSheet.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.TimeSheet.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.TimeSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.TimeSheet.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

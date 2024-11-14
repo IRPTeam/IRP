@@ -541,6 +541,7 @@
   <commonModules>CommonModule.ControlCodeStringClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringsClient</commonModules>
   <commonModules>CommonModule.ControlCodeStringServer</commonModules>
+  <commonModules>CommonModule.ControlCodeStringServerCall</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
   <commonModules>CommonModule.ControllerServer_V2</commonModules>
   <commonModules>CommonModule.ConvertXDTO</commonModules>
@@ -728,6 +729,7 @@
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
+  <commonModules>CommonModule.FilesClient</commonModules>
   <commonModules>CommonModule.FilesClientServer</commonModules>
   <commonModules>CommonModule.FilesServer</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
@@ -1028,6 +1030,7 @@
   <constants>Constant.UseJobQueueForExternalFunctions</constants>
   <constants>Constant.UseLandedCost</constants>
   <constants>Constant.UseLegalName</constants>
+  <constants>Constant.MaxUploadFileSize</constants>
   <constants>Constant.UseLegalNameContract</constants>
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.UseManagersAndSalesPersons</constants>
@@ -1133,6 +1136,7 @@
   <catalogs>Catalog.EquipmentDrivers</catalogs>
   <catalogs>Catalog.ExpenseAndRevenueTypes</catalogs>
   <catalogs>Catalog.ExtDimensions</catalogs>
+  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <catalogs>Catalog.Extensions</catalogs>
   <catalogs>Catalog.ExternalDataProc</catalogs>
   <catalogs>Catalog.ExternalFunctions</catalogs>
@@ -1187,7 +1191,6 @@
   <catalogs>Catalog.Stores</catalogs>
   <catalogs>Catalog.TaxAnalytics</catalogs>
   <catalogs>Catalog.Taxes</catalogs>
-  <catalogs>Catalog.TaxExemptionReasons</catalogs>
   <catalogs>Catalog.TaxRates</catalogs>
   <catalogs>Catalog.Units</catalogs>
   <catalogs>Catalog.UnitsOfMeasurement</catalogs>
@@ -1418,10 +1421,10 @@
   <reports>Report.R5020_PartnersBalance</reports>
   <reports>Report.S1001L_VendorsPrices</reports>
   <reports>Report.T0001_FilesAnalyser</reports>
-  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
+  <reports>Report.F0010_FixedAssetsTransferCost</reports>
+  <reports>Report.F0011_InventoryBook</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.AnalyseXDTO</dataProcessors>
-  <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
   <dataProcessors>DataProcessor.BuilderExample</dataProcessors>
   <dataProcessors>DataProcessor.CopyUserSettings</dataProcessors>
   <dataProcessors>DataProcessor.CreateNewIssue</dataProcessors>
@@ -1429,7 +1432,10 @@
   <dataProcessors>DataProcessor.CreateSerialLotNumbers</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.DownloadAttachedFiles</dataProcessors>
+  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
   <dataProcessors>DataProcessor.EditDocumentsMovements</dataProcessors>
+  <dataProcessors>DataProcessor.AttachedFilesToDocumentsControl</dataProcessors>
+  <dataProcessors>DataProcessor.AccountingService</dataProcessors>
   <dataProcessors>DataProcessor.FixDocumentProblems</dataProcessors>
   <dataProcessors>DataProcessor.FunctionalOptionSettings</dataProcessors>
   <dataProcessors>DataProcessor.GroupPhotoUploading</dataProcessors>
@@ -1440,7 +1446,6 @@
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
   <dataProcessors>DataProcessor.MobileInvent</dataProcessors>
   <dataProcessors>DataProcessor.ObjectPropertyEditor</dataProcessors>
-  <dataProcessors>DataProcessor.PeriodClosing</dataProcessors>
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.ProductionWorkspace</dataProcessors>
@@ -1541,6 +1546,7 @@
   <informationRegisters>InformationRegister.T9067S_AccountingMappingExtDimensionEnumValues</informationRegisters>
   <informationRegisters>InformationRegister.T9068S_AccountingMappingAccountsMatching</informationRegisters>
   <informationRegisters>InformationRegister.MessagesQueueToSend</informationRegisters>
+  <informationRegisters>InformationRegister.FilePartsForUpload</informationRegisters>
   <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
   <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>

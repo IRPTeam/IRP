@@ -60,7 +60,7 @@
     <objectField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.CashPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.CashPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.CashPayment.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <createOnInput>DontUse</createOnInput>

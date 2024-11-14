@@ -44,7 +44,7 @@
     <objectField>Document.WorkOrder.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.WorkOrder.TabularSection.AddAttributes.Attribute.Property</typeField>
     <valueField>Document.WorkOrder.TabularSection.AddAttributes.Attribute.Value</valueField>
-    <multipleValuesKeyField>Document.WorkOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+    <multipleValuesKeyField>-1</multipleValuesKeyField>
     <multipleValuesOrderField>Document.WorkOrder.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
   </characteristics>
   <characteristics>

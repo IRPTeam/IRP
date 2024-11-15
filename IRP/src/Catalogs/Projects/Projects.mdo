@@ -210,7 +210,7 @@
         <value>Location</value>
       </synonym>
       <type>
-        <types>CatalogRef.Locations</types>
+        <types>CatalogRef.ObjectLocations</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -7,14 +7,14 @@
     <listType typeId="9d74bbbc-406e-4f3a-8c96-5f8c2dfecf6f" valueTypeId="3a887e7a-613a-430e-a5d2-48ffae536a5b"/>
     <managerType typeId="fac3cf02-9049-4263-af90-ea600303c862" valueTypeId="ab78bd51-67a5-4eae-a2f7-1124483f3d61"/>
   </producedTypes>
-  <name>Locations</name>
+  <name>ObjectLocations</name>
   <synonym>
     <key>en</key>
-    <value>Locations</value>
+    <value>Object locations</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.Locations.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.Locations.StandardAttribute.Description</inputByString>
+  <inputByString>Catalog.ObjectLocations.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.ObjectLocations.StandardAttribute.Description</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <standardAttributes>
     <dataHistory>Use</dataHistory>
@@ -111,11 +111,11 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.Locations.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>Catalog.Locations.Form.GroupForm</defaultFolderForm>
-  <defaultListForm>Catalog.Locations.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.Locations.Form.ChoiceForm</defaultChoiceForm>
-  <defaultFolderChoiceForm>Catalog.Locations.Form.GroupChoiceForm</defaultFolderChoiceForm>
+  <defaultObjectForm>Catalog.ObjectLocations.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.ObjectLocations.Form.GroupForm</defaultFolderForm>
+  <defaultListForm>Catalog.ObjectLocations.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.ObjectLocations.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.ObjectLocations.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <attributes uuid="89b4ed5b-313a-4696-b620-b36523058caf">
     <name>City</name>
     <synonym>

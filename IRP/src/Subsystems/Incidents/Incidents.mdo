@@ -10,7 +10,7 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.Issue</picture>
   </picture>
-  <content>Catalog.Locations</content>
+  <content>Catalog.ObjectLocations</content>
   <content>Constant.UseIncidents</content>
   <content>FunctionalOption.UseIncidents</content>
   <content>Role.Subsystem_Incidents</content>

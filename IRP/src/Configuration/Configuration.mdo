@@ -1160,7 +1160,7 @@
   <catalogs>Catalog.LedgerTypes</catalogs>
   <catalogs>Catalog.LedgerTypeVariants</catalogs>
   <catalogs>Catalog.LegalNameContracts</catalogs>
-  <catalogs>Catalog.Locations</catalogs>
+  <catalogs>Catalog.ObjectLocations</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
   <catalogs>Catalog.ObjectAccessKeys</catalogs>

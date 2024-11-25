@@ -90,10 +90,11 @@ EndProcedure
 // 
 // Parameters:
 //  Message - DocumentRef.OutgoingMessage - Message
-Procedure SendOutgoingMessage(Message) Export
+//  AdditionalProperties - See EmailMessagesServer.GetMessageAdditionalProperties
+Procedure SendOutgoingMessage(Message, AdditionalProperties = Undefined) Export
 	
 	If Message.MessageType = Enums.MessageTypes.Email Then
-		SendEmailMessage(Message);
+		SendEmailMessage(Message, AdditionalProperties);
 	Else
 		Raise R().ATC_001;
 	EndIf;
@@ -108,7 +109,8 @@ EndProcedure
 // 
 // Parameters:
 //  Message - DocumentRef.OutgoingMessage - Message
-Procedure SendEmailMessage(Message)
+//  AdditionalProperties - See EmailMessagesServer.GetMessageAdditionalProperties
+Procedure SendEmailMessage(Message, AdditionalProperties = Undefined)
 	
 	MessageDescription = EmailMessagesServer.GetMessageDescription();
 	
@@ -142,6 +144,15 @@ Procedure SendEmailMessage(Message)
 		AttachmentDescription.Description = AttachmentItem.PresentationInLetter;
 		MessageDescription.Attachments.Add(AttachmentDescription);
 	EndDo;
+	
+	If TypeOf(AdditionalProperties) = Type("Structure") Then
+		For Each AttachmentStructure In AdditionalProperties.Attachments Do
+			AttachmentDescription = EmailMessagesServer.GetMessageAttachmentDescription();
+			AttachmentDescription.BinaryData = AttachmentStructure.BinaryData;
+			AttachmentDescription.Description = AttachmentStructure.Description;
+			MessageDescription.Attachments.Add(AttachmentDescription);
+		EndDo;	 
+	EndIf;	
 	
 	MailText = Message.TextLetterHTML.Get();
 	If MailText = Undefined Then

@@ -255,6 +255,25 @@ Function GetFileBinaryData(FileRef) Export
 	
 EndFunction
 
+// Create binary data by filename.
+// 
+// Parameters:
+//  FileName - String
+// 
+// Returns:
+//  Undefined, BinaryData - Create binary data by filename
+Function CreateBinaryDataByFilename(FileName) Export
+	File = New File(FileName);
+	
+	If Not File.Exists() Then
+		Return Undefined;
+	EndIf;
+	
+	BinaryData = New BinaryData(FileName);
+	
+	Return BinaryData;
+EndFunction
+
 // Get file for print document.
 // 
 // Parameters:

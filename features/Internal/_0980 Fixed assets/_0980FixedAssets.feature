@@ -424,8 +424,262 @@ Scenario: _9800022 manual filling Depreciation calculation
 			| "1" | "500,00" | "Computer Servers" | "Logistics department" | "Computer Hardware (with deprecation)" | "Straight line (36 months)" | "Expense"      | "Straight line"      | "TRY"      | "4 583,33"       |
 	And I close all client application windows
 	
-				
-				
-				
-				
-				
+Scenario: _9800030 create Fixed Assets Transfer
+	And I close all client application windows
+* Create Fixed Asset Transfer
+	Given I open hyperlink "e1cib/list/Document.FixedAssetTransfer"
+	And I click the button named "FormCreate"
+* Filling main details
+	And I click Choice button of the field named "Company"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "FixedAsset"
+	And I go to line in "List" table
+		| 'Description'      |
+		| 'Computer Servers' |
+	And I click the button named "FormChoose"
+* Transfer Sender details
+	Then the form attribute named "ResponsiblePersonSender" became equal to "Arina Brown"
+	Then the form attribute named "BranchSender" became equal to "Front office"
+	Then the form attribute named "ProfitLossCenterSender" became equal to "Logistics department"
+* Filling Transfer Reciever details
+	And I click Choice button of the field named "ResponsiblePersonReceiver"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Anna Petrova' |
+	Then "Partners" window is opened
+	And I activate field named "Description" in "List" table
+	And I go to line in "List" table
+		| "Code" | "Description" |
+		| "57"   | "Arina Brown" |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "BranchReceiver"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Front office' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "ProfitLossCenterReceiver"
+	And I go to line in "List" table
+		| 'Description'        |
+		| 'Accountants office' |
+	And I click the button named "FormChoose"
+* Enter date and Save 
+	And I move to the tab named "GroupOther"
+	And I move to the tab named "GroupMore"
+	And I input "20.02.2024  0:00:00" text in the field named "Date"
+	And I click the button named "FormWrite"
+* Check 
+	And I delete "$$NumberFixedAssetTransfer1$$" variable
+	And I delete "$$FixedAssetTransfer1$$" variable
+	And I save the value of "Number" field as "$$NumberFixedAssetTransfer1$$"
+	And I save the window as "$$FixedAssetTransfer1$$"
+	And I click the button named "FormPostAndClose"
+	And "List" table contains lines
+		| 'Number'                        |
+		| '$$NumberFixedAssetTransfer1$$' |
+	And I close all client application windows	
+
+Scenario: _9800031 create Modernization Of Fixed Asset
+	When Create document PI and CommissioningOfFixedAsset (fixed assets)
+	And I close all client application windows
+* Cretae Modernization Of Fixed Asset
+	Given I open hyperlink "e1cib/list/Document.ModernizationOfFixedAsset"
+	And I click the button named "FormCreate"
+* Filling main details
+	And I click Choice button of the field named "Company"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "FixedAsset"
+	And I go to line in "List" table
+		| 'Description'       |
+		| 'Software Licenses' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "ProfitLossCenter"
+	And I go to line in "List" table
+		| 'Description'        |
+		| 'Accountants office' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "Store"
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Store 02'    |
+	And I click the button named "FormChoose"	
+* Add an Item
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I activate field named "ItemListModernizationType" in "ItemList" table	
+	And I select current line in "ItemList" table
+	And I select "Mount" exact value from the drop-down list named "ItemListModernizationType" in "ItemList" table
+	And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+	And I go to line in "List" table
+		| 'Description'     |
+		| 'Software update' |
+	And I select current line in "List" table	
+	And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+	And I input "150,00" text in the field named "ItemListAmount" of "ItemList" table
+	And I input "27,00" text in the field named "ItemListAmountTax" of "ItemList" table
+	And I finish line editing in "ItemList" table
+* Enter date and Save
+	And I move to the tab named "GroupOther"
+	And I move to the tab named "GroupMore"
+	And I input "28.02.2024  0:00:00" text in the field named "Date"
+	And I click Choice button of the field named "Branch"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Front office' |
+	And I click the button named "FormChoose"
+	And I click the button named "FormWrite"
+* Check 
+	And I delete "$$NumberModernizationOfFixedAsset1$$" variable
+	And I delete "$$ModernizationOfFixedAsset1$$" variable
+	And I save the value of "Number" field as "$$NumberModernizationOfFixedAsset1$$"
+	And I save the window as "$$ModernizationOfFixedAsset1$$"
+	And I click the button named "FormPostAndClose"
+	And "List" table contains lines
+		| 'Number'                               |
+		| '$$NumberModernizationOfFixedAsset1$$' |
+	And I close all client application windows		
+						
+Scenario: _9800032 create Decommissioning Of Fixed Asset
+* Create document
+	Given I open hyperlink "e1cib/list/Document.DecommissioningOfFixedAsset"
+	And I click the button named "FormCreate"
+* Filling main details
+	And I click Choice button of the field named "Company"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "FixedAsset"
+	And I go to line in "List" table
+		| 'Description'      |
+		| 'Computer Servers' |
+	And I click the button named "FormChoose"
+	And I click Choice button of the field named "Store"
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Store 02'    |
+	And I click the button named "FormChoose"
+* Add an Item	
+	And in the table "ItemList" I click the button named "ItemListAdd"
+	And I select current line in "ItemList" table
+	And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+	And I go to line in "List" table
+		| 'Code' | 'Description'   |
+		| '25'   | 'Fixed asset 1' |
+	And I click the button named "FormChoose"
+	And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+	And I input "100,00" text in the field named "ItemListAmount" of "ItemList" table
+	And I input "18,00" text in the field named "ItemListAmountTax" of "ItemList" table
+	And I finish line editing in "ItemList" table
+* Enter date and Save
+	And I move to the tab named "GroupOther"
+	And I move to the tab named "GroupMore"
+	And I input "08.02.2024  0:00:00" text in the field named "Date"
+	And I click Choice button of the field named "Branch"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Front office' |
+	And I click the button named "FormChoose"
+	And I click the button named "FormWrite"		
+* Check 
+	And I delete "$$NumberDecommissioningOfFixedAsset1$$" variable
+	And I delete "$$DecommissioningOfFixedAsset1$$" variable
+	And I save the value of "Number" field as "$$NumberDecommissioningOfFixedAsset1$$"
+	And I save the window as "$$DecommissioningOfFixedAsset1$$"
+	And I click the button named "FormPostAndClose"
+	And "List" table contains lines
+		| 'Number'                                 |
+		| '$$NumberDecommissioningOfFixedAsset1$$' |
+	And I close all client application windows								
+
+Scenario: _9800033 Inventory Look Report	
+	And I close all client application windows	
+* Re-post documents
+	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
+		And I click the button named "FormPostAndClose"
+	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"	
+	Then I select all lines of "List" table
+	And I click the button named "FormPost"	
+* Open a report
+	Given I open hyperlink "e1cib/app/Report.F0011_InventoryBook"
+	And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
+	And I input "02.03.2024  0:00:00" text in the field named "SettingsComposerUserSettingsItem0Value"
+	And I click Choice button of the field named "SettingsComposerUserSettingsItem1Value"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I click the button named "FormChoose"
+	And I click the button named "FormGenerate"
+	And delay 1
+	Then "Result" spreadsheet document is equal
+		| 'Data parameters:'        | 'Date: 02.03.2024 0:00:00' | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| ''                        | 'Company: Main Company'    | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| ''                        | ''                         | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| 'Fixed asset'             | 'Inventory number'         | 'Receipt'          | ''                   | ''             | ''                   | 'Depreciation rate' | 'Initial cost' |
+		| ''                        | ''                         | 'Doc date, number' | 'Commissioning date' | 'Branch'       | 'Responsible person' | ''                  | ''             |
+		| ''                        | ''                         | ' ,  '             | ''                   | ''             | ''                   | ''                  | ''             |
+		| 'Manufacturing Equipment' | '957'                      | '4, 13.02.2024'    | '13.02.2024'         | 'Front office' | 'Arina Brown'        | '25'                | '2 500,00'     |
+		| 'Computer Servers'        | '985'                      | '1, 12.01.2024'    | '12.01.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '5 000,00'     |
+		| 'Software Licenses'       | '989'                      | '3, 06.02.2024'    | '06.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '2 000,00'     |
+		| 'Office Furniture'        | '947'                      | '2, 03.02.2024'    | '03.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '7 000,00'     |
+	
+		
+Scenario: _9800034 Fixed Assets Transfer Cost report
+* Re-post documents
+	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
+		And I click the button named "FormPostAndClose"
+	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
+	And I go to line in "List" table
+		| 'Number' | 'Date'                | 'Company'      | 'Branch'       |
+		| '1'      | '29.02.2024 12:00:00' | 'Main Company' | 'Front office' |
+	And I select current line in "List" table
+	And in the table "Calculations" I click the button named "CalculationsFillCalculations"
+	And I click the button named "FormPostAndClose"
+	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"	
+	Then I select all lines of "List" table
+	And I click the button named "FormPost"
+* Open the report	
+	Given I open hyperlink "e1cib/app/Report.F0010_FixedAssetsTransferCost"
+	And I click the button named "FormChangeVariant"
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I click choice button of the attribute named "SettingsComposerSettingsDataParametersValue" in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Main Company' |
+	And I click the button named "FormChoose"
+	And I finish line editing in "SettingsComposerSettingsDataParameters" table
+	And I go to line in "SettingsComposerSettingsDataParameters" table
+		| "Parameter" | "Use" |
+		| "Period"    | "Нет" |
+	And I select current line in "SettingsComposerSettingsDataParameters" table
+	And I click choice button of the attribute named "SettingsComposerSettingsDataParametersValue" in "SettingsComposerSettingsDataParameters" table
+	And I input "01.02.2024" text in the field named "DateBegin"
+	And I input "30.04.2024" text in the field named "DateEnd"
+	And I click the button named "Select"
+	And I click the button named "FormEndEdit"
+	And I click the button named "FormGenerate"
+	Then "Result" spreadsheet document is equal
+		| 'Data parameters:'        | 'Company: Main Company'           | ''             | ''                  | ''                   | ''                    | ''              | ''                       | ''             | ''             |
+		| ''                        | 'Period: 01.02.2024 - 30.04.2024' | ''             | ''                  | ''                   | ''                    | ''              | ''                       | ''             | ''             |
+		| ''                        | ''                                | ''             | ''                  | ''                   | ''                    | ''              | ''                       | ''             | ''             |
+		| 'Fixed asset'             | 'Depreciation rate'               | 'Opening cost' | 'Commisioning cost' | 'Modernization cost' | 'Decomissioning cost' | 'Transfer cost' | 'Before adjustment cost' | 'Depreciation' | 'Closing cost' |
+		| 'Office Furniture'        | ''                                | '5 000,00'     | '7 000,00'          | ''                   | ''                    | ''              | '12 000,00'              | ''             | '12 000,00'    |
+		| 'Computer Servers'        | ''                                | '15 000,00'    | ''                  | ''                   | '-5 000,00'           | ''              | '20 000,00'              | ''             | '20 000,00'    |
+		| 'Software Licenses'       | ''                                | '10 000,00'    | '2 000,00'          | '300,00'             | ''                    | ''              | '12 300,00'              | ''             | '12 300,00'    |
+		| 'RATED'                   | '25'                              | '5 000,00'     | '2 500,00'          | ''                   | ''                    | ''              | '7 500,00'               | '187 500,00'   | '-180 000,00'  |
+		| 'Manufacturing Equipment' | '25'                              | '5 000,00'     | '2 500,00'          | ''                   | ''                    | ''              | '7 500,00'               | '187 500,00'   | '-180 000,00'  |
+		| 'Total'                   | '25'                              | '35 000,00'    | '11 500,00'         | '300,00'             | '-5 000,00'           | ''              | '51 800,00'              | '187 500,00'   | '-135 700,00'  |
+	
+		

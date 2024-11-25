@@ -228,6 +228,7 @@ Function R5022T_Expenses()
 		|	AccrualList.Currency,
 		|	AccrualList.ExpenseType,
 		|	AccrualList.ProfitLossCenter,
+		|	AccrualList.Amount AS AmountWithTaxes,
 		|	AccrualList.Amount AS Amount
 		|INTO R5022T_Expenses
 		|FROM
@@ -245,6 +246,7 @@ Function R5022T_Expenses()
 		|	DeductionList.Currency,
 		|	DeductionList.ExpenseType,
 		|	DeductionList.ProfitLossCenter,
+		|	-DeductionList.Amount AS AmountWithTaxes,
 		|	-DeductionList.Amount AS Amount
 		|FROM
 		|	DeductionList
@@ -261,7 +263,8 @@ Function R5022T_Expenses()
 		|	SalaryTaxList.Currency,
 		|	SalaryTaxList.ExpenseType,
 		|	SalaryTaxList.ProfitLossCenter,
-		|	SalaryTaxList.Amount
+		|	SalaryTaxList.Amount AS AmountWithTaxes,
+		|	SalaryTaxList.Amount AS Amount
 		|FROM
 		|	SalaryTaxList
 		|WHERE

@@ -2152,6 +2152,8 @@ Strings.Insert("AdditionalCostAllocation_DR_R4050B_StockInventory_CR_R5022T_Expe
 
 Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockInventory",
 	NStr("en = 'AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)'", Lang));
+	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External accounting operation exchange report'", Lang));	
 
 #EndRegion
 
@@ -2248,8 +2250,9 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("PeriodClosing_Step3", NStr("en = 'Calculation movement costs'", Lang));
 	Strings.Insert("PeriodClosing_Step4", NStr("en = 'Vendors advances closing'", Lang));
 	Strings.Insert("PeriodClosing_Step5", NStr("en = 'Customers advances closing'", Lang));
-	Strings.Insert("PeriodClosing_Step6", NStr("en = 'Foreign currency revaluation'", Lang));
-	Strings.Insert("PeriodClosing_Step7", NStr("en = 'Accounting translation'", Lang));
+	Strings.Insert("PeriodClosing_Step6", NStr("en = 'Depreciation calculation'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en = 'Foreign currency revaluation'", Lang));
+	Strings.Insert("PeriodClosing_Step8", NStr("en = 'Accounting translation'", Lang));
 	
 	Strings.Insert("PeriodClosing_Error1", NStr("en = 'Company is required field'", Lang));
 	Strings.Insert("PeriodClosing_Error2", NStr("en = 'Perid is required field'", Lang));

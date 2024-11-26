@@ -8839,6 +8839,37 @@
       <name>GroupTest</name>
       <id>162</id>
       <items xsi:type="form:Button">
+        <name>LoadEAOWithReport</name>
+        <id>643</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>LoadEAOWithReportExtendedTooltip</name>
+          <id>644</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <type>UsualButton</type>
+        <commandName>Form.Command.LoadEAOWithReport</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
+      <items xsi:type="form:Button">
         <name>TestPostRequest</name>
         <id>164</id>
         <visible>true</visible>
@@ -9046,6 +9077,14 @@
               <key>en</key>
               <value>Типовой</value>
             </presentation>
+            <presentation>
+              <key>tr</key>
+              <value>Tipik          </value>
+            </presentation>
+            <presentation>
+              <key>ru</key>
+              <value>Normal charts of accounts</value>
+            </presentation>
             <value xsi:type="core:StringValue">
               <value>Типовой</value>
             </value>
@@ -9055,6 +9094,14 @@
               <key>en</key>
               <value>Налоговый</value>
             </presentation>
+            <presentation>
+              <key>tr</key>
+              <value>Vergisel       </value>
+            </presentation>
+            <presentation>
+              <key>ru</key>
+              <value>Tax charts of account</value>
+            </presentation>
             <value xsi:type="core:StringValue">
               <value>Налоговый</value>
             </value>
@@ -9063,6 +9110,14 @@
             <presentation>
               <key>en</key>
               <value>&lt;all></value>
+            </presentation>
+            <presentation>
+              <key>tr</key>
+              <value>&lt;tüm></value>
+            </presentation>
+            <presentation>
+              <key>ru</key>
+              <value>&lt;все></value>
             </presentation>
             <value xsi:type="core:UndefinedValue"/>
           </choiceList>
@@ -12291,6 +12346,27 @@
       </handler>
     </action>
     <representation>Picture</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>LoadEAOWithReport</name>
+    <title>
+      <key>en</key>
+      <value>Load all EAO with report</value>
+    </title>
+    <id>1</id>
+    <toolTip>
+      <key>en</key>
+      <value>Load all EAO with report</value>
+    </toolTip>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>LoadEAOWithReport</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

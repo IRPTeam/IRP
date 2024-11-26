@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9063S_AccountingMappingCurrencies</name>
  <synonym>
-  <key>en</key>
-  <value>T9063 Accounting mapping (currencies)</value>
+  <key>tr</key>
+  <value>T9063 Muhasebe mappingi (dövizler)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9063 Бухгалтерские соответствия (валюты)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9063 Muhasebe mappingi (dövizler)</value>
+  <key>en</key>
+  <value>T9063 Accounting mapping (currencies)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="c6a0fdf8-262d-41c2-a832-088aa5b4a30d">
   <name>InternalRef</name>
   <synonym>
-   <key>en</key>
-   <value>Internal ref</value>
+   <key>tr</key>
+   <value>İç sınıf</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внутренняя ссылка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İç sınıf</value>
+   <key>en</key>
+   <value>Internal ref</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -53,16 +53,16 @@
  <dimensions uuid="efe153b2-725d-4f30-ae32-ae6d53eac7db">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>en</key>
-   <value>Integration settings</value>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Интеграционные настройки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>Integration settings</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -78,16 +78,16 @@
  <dimensions uuid="6d8f26b4-8f59-432b-918d-ec3d8fa8f990">
   <name>ExternalRef</name>
   <synonym>
-   <key>en</key>
-   <value>External ref</value>
+   <key>tr</key>
+   <value>Dış ref</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешняя ссылка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dış ref</value>
+   <key>en</key>
+   <value>External ref</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -103,16 +103,16 @@
  <forms uuid="d6587b6c-3ea2-40cd-9687-da0e43a73f55">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -120,16 +120,16 @@
  <forms uuid="152a6c4a-31d5-4afa-a436-5f5456355b4b">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

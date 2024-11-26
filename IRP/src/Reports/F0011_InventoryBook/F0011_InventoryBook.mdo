@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Report xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a3f5d068-3e67-4cde-adcb-96f643d7b646">
+ <producedTypes>
+  <objectType typeId="c3d24261-16a2-4c6c-8f0f-90e770871400" valueTypeId="bec09c4c-e3d1-43c5-a83f-3f5b808f4c68"/>
+  <managerType typeId="689a797a-5eab-4263-9055-feb4059d97f6" valueTypeId="0a85eb9f-7c42-4384-8bdc-a2710b3980c3"/>
+ </producedTypes>
+ <name>F0011_InventoryBook</name>
+ <synonym>
+  <key>tr</key>
+  <value>Inventory book</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Инвентарная книга</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Inventory book</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <mainDataCompositionSchema>Report.F0011_InventoryBook.Template.MainDataCompositionSchema</mainDataCompositionSchema>
+ <templates uuid="137d2f62-1f7e-406d-904e-d9095c522193">
+  <name>MainDataCompositionSchema</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Основная схема компоновки данных</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Main data composition schema</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+</mdclass:Report>

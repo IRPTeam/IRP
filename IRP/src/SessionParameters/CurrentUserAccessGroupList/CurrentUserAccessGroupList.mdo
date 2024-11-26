@@ -2,16 +2,16 @@
 <mdclass:SessionParameter xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="cc94b48c-4ae9-4dc1-b3d1-2d4ece797cac">
  <name>CurrentUserAccessGroupList</name>
  <synonym>
-  <key>en</key>
-  <value>Current user access group list</value>
+  <key>tr</key>
+  <value>Mevcut kullanıcı erişim grup listesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Список групп доступа текущего пользователя</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Mevcut kullanıcı erişim grup listesi</value>
+  <key>en</key>
+  <value>Current user access group list</value>
  </synonym>
  <type>
   <types>FixedArray</types>

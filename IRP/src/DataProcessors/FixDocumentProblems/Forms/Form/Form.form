@@ -242,16 +242,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Query settings</value>
+      <key>tr</key>
+      <value>Sorgu ayarları</value>
      </title>
      <title>
       <key>ru</key>
       <value>Настройки запроса     </value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Sorgu ayarları</value>
+      <key>en</key>
+      <value>Query settings</value>
      </title>
      <extendedTooltip>
       <name>GroupQueryFilterExtendedTooltip</name>
@@ -286,16 +286,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group filter documents</value>
+     <key>tr</key>
+     <value>Belgeler için grup filtresi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа отбор документов</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Belgeler için grup filtresi</value>
+     <key>en</key>
+     <value>Group filter documents</value>
     </title>
     <extendedTooltip>
      <name>GroupFilterDocumentsExtendedTooltip</name>
@@ -623,16 +623,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Fill documents</value>
+       <key>tr</key>
+       <value>Belgeleri doldur</value>
       </title>
       <title>
        <key>ru</key>
        <value>Заполнить документы</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Belgeleri doldur</value>
+       <key>en</key>
+       <value>Fill documents</value>
       </title>
       <extendedTooltip>
        <name>DocumentListGroupFillDocumentsExtendedTooltip</name>
@@ -825,7 +825,7 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
+       <key>tr</key>
        <value>Checks</value>
       </title>
       <title>
@@ -833,7 +833,7 @@
        <value>Проверки</value>
       </title>
       <title>
-       <key>tr</key>
+       <key>en</key>
        <value>Checks</value>
       </title>
       <extendedTooltip>
@@ -1037,16 +1037,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Filter</value>
+    <key>tr</key>
+    <value>Filtre</value>
    </title>
    <title>
     <key>ru</key>
     <value>Отбор</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Filtre</value>
+    <key>en</key>
+    <value>Filter</value>
    </title>
    <extendedTooltip>
     <name>PageFilterExtendedTooltip</name>
@@ -2294,16 +2294,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Check</value>
+    <key>tr</key>
+    <value>Kontrol</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проверка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kontrol</value>
+    <key>en</key>
+    <value>Check</value>
    </title>
    <extendedTooltip>
     <name>PageCheckExtendedTooltip</name>
@@ -3065,16 +3065,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Records</value>
+       <key>tr</key>
+       <value>Kayıtlar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Проводки</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Kayıtlar</value>
+       <key>en</key>
+       <value>Records</value>
       </title>
       <extendedTooltip>
        <name>PostingInfoGroupRecordsExtendedTooltip</name>
@@ -3168,16 +3168,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Import/Export</value>
+       <key>tr</key>
+       <value>İçe/Dışa Aktar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Импорт/Экспорт</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>İçe/Dışa Aktar</value>
+       <key>en</key>
+       <value>Import/Export</value>
       </title>
       <extendedTooltip>
        <name>PostingInfoGroupImportExportExtendedTooltip</name>
@@ -3489,16 +3489,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>en</key>
-          <value>Command bar left</value>
+          <key>tr</key>
+          <value>Araç çubuk sol</value>
          </title>
          <title>
           <key>ru</key>
           <value>Панель команд лево</value>
          </title>
          <title>
-          <key>tr</key>
-          <value>Araç çubuk sol</value>
+          <key>en</key>
+          <value>Command bar left</value>
          </title>
          <extendedTooltip>
           <name>CommandBarLeftExtendedTooltip</name>
@@ -3591,7 +3591,7 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
+         <key>tr</key>
          <value>Current movements</value>
         </title>
         <title>
@@ -3599,7 +3599,7 @@
          <value>Текущие проводки</value>
         </title>
         <title>
-         <key>tr</key>
+         <key>en</key>
          <value>Current movements</value>
         </title>
         <extendedTooltip>
@@ -3703,16 +3703,16 @@
           <common>true</common>
          </userVisible>
          <title>
-          <key>en</key>
-          <value>Command bar right</value>
+          <key>tr</key>
+          <value>Araç çubuk sağ</value>
          </title>
          <title>
           <key>ru</key>
           <value>Панель команд право</value>
          </title>
          <title>
-          <key>tr</key>
-          <value>Araç çubuk sağ</value>
+          <key>en</key>
+          <value>Command bar right</value>
          </title>
          <extendedTooltip>
           <name>CommandBarRightExtendedTooltip</name>
@@ -3805,7 +3805,7 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
+         <key>tr</key>
          <value>New movements</value>
         </title>
         <title>
@@ -3813,7 +3813,7 @@
          <value>Новые проводки</value>
         </title>
         <title>
-         <key>tr</key>
+         <key>en</key>
          <value>New movements</value>
         </title>
         <extendedTooltip>
@@ -3851,7 +3851,7 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
+        <key>tr</key>
         <value>Diff docs</value>
        </title>
        <title>
@@ -3859,7 +3859,7 @@
         <value>Разн доки</value>
        </title>
        <title>
-        <key>tr</key>
+        <key>en</key>
         <value>Diff docs</value>
        </title>
        <extendedTooltip>
@@ -3893,16 +3893,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Difference</value>
+       <key>tr</key>
+       <value>Fark</value>
       </title>
       <title>
        <key>ru</key>
        <value>Разница</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Fark</value>
+       <key>en</key>
+       <value>Difference</value>
       </title>
       <extendedTooltip>
        <name>PageDiffExtendedTooltip</name>
@@ -4119,16 +4119,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Current movement</value>
+       <key>tr</key>
+       <value>Mevcut Hareket</value>
       </title>
       <title>
        <key>ru</key>
        <value>ТекущееДвижение</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Mevcut Hareket</value>
+       <key>en</key>
+       <value>Current movement</value>
       </title>
       <extendedTooltip>
        <name>PageCurrentMovementExtendedTooltip</name>
@@ -4345,16 +4345,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>New movement</value>
+       <key>tr</key>
+       <value>Yeni hareket</value>
       </title>
       <title>
        <key>ru</key>
        <value>Новое движение</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Yeni hareket</value>
+       <key>en</key>
+       <value>New movement</value>
       </title>
       <extendedTooltip>
        <name>PageNewMovementExtendedTooltip</name>
@@ -4383,7 +4383,7 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
+      <key>tr</key>
       <value>Pages diff</value>
      </title>
      <title>
@@ -4391,7 +4391,7 @@
       <value>Разница страниц</value>
      </title>
      <title>
-      <key>tr</key>
+      <key>en</key>
       <value>Pages diff</value>
      </title>
      <extendedTooltip>
@@ -4420,16 +4420,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Posting diff</value>
+     <key>tr</key>
+     <value>Kayıt farkı</value>
     </title>
     <title>
      <key>ru</key>
      <value>РазницаПроводок</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Kayıt farkı</value>
+     <key>en</key>
+     <value>Posting diff</value>
     </title>
     <extendedTooltip>
      <name>GroupDiffExtendedTooltip</name>
@@ -4463,16 +4463,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Posting</value>
+    <key>tr</key>
+    <value>Kayıt</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проведение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kayıt</value>
+    <key>en</key>
+    <value>Posting</value>
    </title>
    <extendedTooltip>
     <name>PagePostingExtendedTooltip</name>
@@ -4504,16 +4504,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Documents</value>
+   <key>tr</key>
+   <value>Evraklar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
+   <key>en</key>
+   <value>Documents</value>
   </title>
   <extendedTooltip>
    <name>PagesDocumentsExtendedTooltip</name>
@@ -4581,16 +4581,16 @@
  <attributes>
   <name>DocumentList</name>
   <title>
-   <key>en</key>
-   <value>Document list</value>
+   <key>tr</key>
+   <value>Belge listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список документов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belge listesi</value>
+   <key>en</key>
+   <value>Document list</value>
   </title>
   <id>3</id>
   <valueType>
@@ -4605,7 +4605,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -4613,7 +4613,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <id>4</id>
@@ -4630,16 +4630,16 @@
   <columns>
    <name>DocumentType</name>
    <title>
-    <key>en</key>
-    <value>Document type</value>
+    <key>tr</key>
+    <value>Evrak tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
+    <key>en</key>
+    <value>Document type</value>
    </title>
    <id>6</id>
    <valueType>
@@ -4656,16 +4656,16 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <id>17</id>
    <valueType>
@@ -4682,16 +4682,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <id>18</id>
    <valueType>
@@ -4712,16 +4712,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>5</id>
   <valueType>
@@ -4740,16 +4740,16 @@
  <attributes>
   <name>CheckList</name>
   <title>
-   <key>en</key>
-   <value>Check list</value>
+   <key>tr</key>
+   <value>Kontrol listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список проверки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol listesi</value>
+   <key>en</key>
+   <value>Check list</value>
   </title>
   <id>7</id>
   <valueType>
@@ -4764,7 +4764,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -4772,7 +4772,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <id>10</id>
@@ -4789,16 +4789,16 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>en</key>
-    <value>Error ID</value>
+    <key>tr</key>
+    <value>Hata ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Ошибки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
+    <key>en</key>
+    <value>Error ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -4815,16 +4815,16 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>en</key>
-    <value>Row key</value>
+    <key>tr</key>
+    <value>Satır anahtarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
+    <key>en</key>
+    <value>Row key</value>
    </title>
    <id>12</id>
    <valueType>
@@ -4840,16 +4840,16 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>en</key>
-    <value>Line number</value>
+    <key>tr</key>
+    <value>Satır numarası</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номер строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır numarası</value>
+    <key>en</key>
+    <value>Line number</value>
    </title>
    <id>13</id>
    <valueType>
@@ -4868,16 +4868,16 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>en</key>
-    <value>Fixed</value>
+    <key>tr</key>
+    <value>Düzeltildi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированная</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
+    <key>en</key>
+    <value>Fixed</value>
    </title>
    <id>14</id>
    <valueType>
@@ -4893,16 +4893,16 @@
   <columns>
    <name>ProblemWhileQuickFix</name>
    <title>
-    <key>en</key>
-    <value>Problem while quick fix</value>
+    <key>tr</key>
+    <value>Hızlı düzeltme sırasında sorun</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проблемы при быстром исправлении</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hızlı düzeltme sırasında sorun</value>
+    <key>en</key>
+    <value>Problem while quick fix</value>
    </title>
    <id>15</id>
    <valueType>
@@ -4919,16 +4919,16 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <id>16</id>
    <valueType>
@@ -4945,16 +4945,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <id>19</id>
    <valueType>
@@ -4975,16 +4975,16 @@
  <attributes>
   <name>ErrorsGroups</name>
   <title>
-   <key>en</key>
-   <value>Errors groups</value>
+   <key>tr</key>
+   <value>Hatalar grupları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группы ошибок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hatalar grupları</value>
+   <key>en</key>
+   <value>Errors groups</value>
   </title>
   <id>20</id>
   <valueType>
@@ -4999,16 +4999,16 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>en</key>
-    <value>Error ID</value>
+    <key>tr</key>
+    <value>Hata ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Ошибки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
+    <key>en</key>
+    <value>Error ID</value>
    </title>
    <id>21</id>
    <valueType>
@@ -5025,16 +5025,16 @@
   <columns>
    <name>Documents</name>
    <title>
-    <key>en</key>
-    <value>Documents</value>
+    <key>tr</key>
+    <value>Evraklar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evraklar</value>
+    <key>en</key>
+    <value>Documents</value>
    </title>
    <id>22</id>
    <valueType>
@@ -5054,16 +5054,16 @@
   <columns>
    <name>Cases</name>
    <title>
-    <key>en</key>
-    <value>Cases</value>
+    <key>tr</key>
+    <value>Vakalar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Варианты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vakalar</value>
+    <key>en</key>
+    <value>Cases</value>
    </title>
    <id>23</id>
    <valueType>
@@ -5082,16 +5082,16 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>en</key>
-    <value>Fixed</value>
+    <key>tr</key>
+    <value>Düzeltildi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированная</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
+    <key>en</key>
+    <value>Fixed</value>
    </title>
    <id>24</id>
    <valueType>
@@ -5107,7 +5107,7 @@
   <columns>
    <name>ErrorDescription</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Description</value>
    </title>
    <title>
@@ -5115,7 +5115,7 @@
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Description</value>
    </title>
    <id>25</id>
@@ -5133,16 +5133,16 @@
   <columns>
    <name>FixDescription</name>
    <title>
-    <key>en</key>
-    <value>Fix description</value>
+    <key>tr</key>
+    <value>Tanımı düzelt</value>
    </title>
    <title>
     <key>ru</key>
     <value>Исправить наименования</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanımı düzelt</value>
+    <key>en</key>
+    <value>Fix description</value>
    </title>
    <id>26</id>
    <valueType>
@@ -5160,16 +5160,16 @@
  <attributes>
   <name>ErrorFilter</name>
   <title>
-   <key>en</key>
-   <value>Error filter</value>
+   <key>tr</key>
+   <value>Hata filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр ошибок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hata filtresi</value>
+   <key>en</key>
+   <value>Error filter</value>
   </title>
   <id>27</id>
   <valueType>
@@ -5186,16 +5186,16 @@
  <attributes>
   <name>FullCheckList</name>
   <title>
-   <key>en</key>
-   <value>Full check list</value>
+   <key>tr</key>
+   <value>Tam kontrol listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить список проверок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tam kontrol listesi</value>
+   <key>en</key>
+   <value>Full check list</value>
   </title>
   <id>28</id>
   <valueType>
@@ -5213,16 +5213,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>10</id>
    <valueType>
@@ -5238,16 +5238,16 @@
   <columns>
    <name>ErrorID</name>
    <title>
-    <key>en</key>
-    <value>Error ID</value>
+    <key>tr</key>
+    <value>Hata ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID Ошибки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hata ID</value>
+    <key>en</key>
+    <value>Error ID</value>
    </title>
    <id>11</id>
    <valueType>
@@ -5264,16 +5264,16 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>en</key>
-    <value>Row key</value>
+    <key>tr</key>
+    <value>Satır anahtarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
+    <key>en</key>
+    <value>Row key</value>
    </title>
    <id>12</id>
    <valueType>
@@ -5289,16 +5289,16 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>en</key>
-    <value>Line number</value>
+    <key>tr</key>
+    <value>Satır numarası</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номер строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır numarası</value>
+    <key>en</key>
+    <value>Line number</value>
    </title>
    <id>13</id>
    <valueType>
@@ -5317,16 +5317,16 @@
   <columns>
    <name>Fixed</name>
    <title>
-    <key>en</key>
-    <value>Fixed</value>
+    <key>tr</key>
+    <value>Düzeltildi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированная</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Düzeltildi</value>
+    <key>en</key>
+    <value>Fixed</value>
    </title>
    <id>14</id>
    <valueType>
@@ -5342,16 +5342,16 @@
   <columns>
    <name>ProblemWhileQuickFix</name>
    <title>
-    <key>en</key>
-    <value>Problem while quick fix</value>
+    <key>tr</key>
+    <value>Hızlı düzeltme sırasında sorun</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проблемы при быстром исправлении</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hızlı düzeltme sırasında sorun</value>
+    <key>en</key>
+    <value>Problem while quick fix</value>
    </title>
    <id>15</id>
    <valueType>
@@ -5368,16 +5368,16 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <id>16</id>
    <valueType>
@@ -5394,16 +5394,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <id>19</id>
    <valueType>
@@ -5424,16 +5424,16 @@
  <attributes>
   <name>JobList</name>
   <title>
-   <key>en</key>
-   <value>Job list</value>
+   <key>tr</key>
+   <value>İş listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список заданий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş listesi</value>
+   <key>en</key>
+   <value>Job list</value>
   </title>
   <id>29</id>
   <valueType>
@@ -5448,16 +5448,16 @@
   <columns>
    <name>JobID</name>
    <title>
-    <key>en</key>
-    <value>Job ID</value>
+    <key>tr</key>
+    <value>Görev ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID задания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görev ID</value>
+    <key>en</key>
+    <value>Job ID</value>
    </title>
    <id>30</id>
    <valueType>
@@ -5474,7 +5474,7 @@
   <columns>
    <name>Log</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Log</value>
    </title>
    <title>
@@ -5482,7 +5482,7 @@
     <value>Логи</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Log</value>
    </title>
    <id>32</id>
@@ -5500,16 +5500,16 @@
   <columns>
    <name>Status</name>
    <title>
-    <key>en</key>
-    <value>Status</value>
+    <key>tr</key>
+    <value>Statü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
+    <key>en</key>
+    <value>Status</value>
    </title>
    <id>33</id>
    <valueType>
@@ -5526,16 +5526,16 @@
   <columns>
    <name>Done</name>
    <title>
-    <key>en</key>
-    <value>Done</value>
+    <key>tr</key>
+    <value>Tamamlandı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Завершено</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tamamlandı</value>
+    <key>en</key>
+    <value>Done</value>
    </title>
    <id>34</id>
    <valueType>
@@ -5553,16 +5553,16 @@
  <attributes>
   <name>OnlyPosted</name>
   <title>
-   <key>en</key>
-   <value>Only posted</value>
+   <key>tr</key>
+   <value>Sadece gönderilen</value>
   </title>
   <title>
    <key>ru</key>
    <value>Только проведенные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sadece gönderilen</value>
+   <key>en</key>
+   <value>Only posted</value>
   </title>
   <id>31</id>
   <valueType>
@@ -5581,16 +5581,16 @@
  <attributes>
   <name>PostingInfo</name>
   <title>
-   <key>en</key>
-   <value>Posting info</value>
+   <key>tr</key>
+   <value>Gönderim bilgisi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Информация о проведении</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderim bilgisi</value>
+   <key>en</key>
+   <value>Posting info</value>
   </title>
   <id>35</id>
   <valueType>
@@ -5605,16 +5605,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>36</id>
    <valueType>
@@ -5630,16 +5630,16 @@
   <columns>
    <name>RegName</name>
    <title>
-    <key>en</key>
-    <value>Reg name</value>
+    <key>tr</key>
+    <value>Kayıt adı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование регистра</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kayıt adı</value>
+    <key>en</key>
+    <value>Reg name</value>
    </title>
    <id>37</id>
    <valueType>
@@ -5656,16 +5656,16 @@
   <columns>
    <name>Date</name>
    <title>
-    <key>en</key>
-    <value>Date</value>
+    <key>tr</key>
+    <value>Tarih</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tarih</value>
+    <key>en</key>
+    <value>Date</value>
    </title>
    <id>38</id>
    <valueType>
@@ -5684,16 +5684,16 @@
   <columns>
    <name>NewMovement</name>
    <title>
-    <key>en</key>
-    <value>New movement</value>
+    <key>tr</key>
+    <value>Yeni hareket</value>
    </title>
    <title>
     <key>ru</key>
     <value>Новое движение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yeni hareket</value>
+    <key>en</key>
+    <value>New movement</value>
    </title>
    <id>39</id>
    <valueType/>
@@ -5707,16 +5707,16 @@
   <columns>
    <name>Select</name>
    <title>
-    <key>en</key>
-    <value>Select</value>
+    <key>tr</key>
+    <value>Seç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбрать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seç</value>
+    <key>en</key>
+    <value>Select</value>
    </title>
    <id>45</id>
    <valueType>
@@ -5732,16 +5732,16 @@
   <columns>
    <name>DocumentType</name>
    <title>
-    <key>en</key>
-    <value>Document type</value>
+    <key>tr</key>
+    <value>Evrak tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
+    <key>en</key>
+    <value>Document type</value>
    </title>
    <id>46</id>
    <valueType>
@@ -5758,16 +5758,16 @@
   <columns>
    <name>Errors</name>
    <title>
-    <key>en</key>
-    <value>Errors</value>
+    <key>tr</key>
+    <value>Hatalar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ошибки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hatalar</value>
+    <key>en</key>
+    <value>Errors</value>
    </title>
    <id>47</id>
    <valueType>
@@ -5784,16 +5784,16 @@
   <columns>
    <name>Processed</name>
    <title>
-    <key>en</key>
-    <value>Processed</value>
+    <key>tr</key>
+    <value>İşlenmiş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обработано</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşlenmiş</value>
+    <key>en</key>
+    <value>Processed</value>
    </title>
    <id>48</id>
    <valueType>
@@ -5810,16 +5810,16 @@
  <attributes>
   <name>CurrentMovement</name>
   <title>
-   <key>en</key>
-   <value>Current movement</value>
+   <key>tr</key>
+   <value>Mevcut Hareket</value>
   </title>
   <title>
    <key>ru</key>
    <value>ТекущееДвижение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut Hareket</value>
+   <key>en</key>
+   <value>Current movement</value>
   </title>
   <id>40</id>
   <valueType>
@@ -5835,16 +5835,16 @@
  <attributes>
   <name>NewMovement</name>
   <title>
-   <key>en</key>
-   <value>New movement</value>
+   <key>tr</key>
+   <value>Yeni hareket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Новое движение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yeni hareket</value>
+   <key>en</key>
+   <value>New movement</value>
   </title>
   <id>42</id>
   <valueType>
@@ -5860,16 +5860,16 @@
  <attributes>
   <name>CurrentRegName</name>
   <title>
-   <key>en</key>
-   <value>Current reg name</value>
+   <key>tr</key>
+   <value>Mevcut kayıt adı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущее имя рег</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut kayıt adı</value>
+   <key>en</key>
+   <value>Current reg name</value>
   </title>
   <id>44</id>
   <valueType>
@@ -5886,16 +5886,16 @@
  <attributes>
   <name>SkipCheckRegisters</name>
   <title>
-   <key>en</key>
-   <value>Skip check registers</value>
+   <key>tr</key>
+   <value>Kayıt kontrollerini atla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пропустить проверку регистров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt kontrollerini atla</value>
+   <key>en</key>
+   <value>Skip check registers</value>
   </title>
   <id>49</id>
   <valueType>
@@ -5922,16 +5922,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>50</id>
   <valueType>
@@ -5952,7 +5952,7 @@
  <attributes>
   <name>DiffDocLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Diff doc left</value>
   </title>
   <title>
@@ -5960,7 +5960,7 @@
    <value>Разн док лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Diff doc left</value>
   </title>
   <id>55</id>
@@ -5978,7 +5978,7 @@
  <attributes>
   <name>DiffDocRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Diff doc right</value>
   </title>
   <title>
@@ -5986,7 +5986,7 @@
    <value>Разн док право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Diff doc right</value>
   </title>
   <id>56</id>
@@ -6004,7 +6004,7 @@
  <attributes>
   <name>DiffCellsLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Diff cells left</value>
   </title>
   <title>
@@ -6012,7 +6012,7 @@
    <value>Разн клетка лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Diff cells left</value>
   </title>
   <id>57</id>
@@ -6028,7 +6028,7 @@
   <columns>
    <name>NumberRow</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Number row</value>
    </title>
    <title>
@@ -6036,7 +6036,7 @@
     <value>Номер строки</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Number row</value>
    </title>
    <id>59</id>
@@ -6056,7 +6056,7 @@
   <columns>
    <name>NumberColumn</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Number column</value>
    </title>
    <title>
@@ -6064,7 +6064,7 @@
     <value>Номер колонки</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Number column</value>
    </title>
    <id>60</id>
@@ -6085,7 +6085,7 @@
  <attributes>
   <name>DiffCellsRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Diff cells right</value>
   </title>
   <title>
@@ -6093,7 +6093,7 @@
    <value>Разн клетка право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Diff cells right</value>
   </title>
   <id>58</id>
@@ -6109,7 +6109,7 @@
   <columns>
    <name>NumberRow</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Number row</value>
    </title>
    <title>
@@ -6117,7 +6117,7 @@
     <value>Номер строки</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Number row</value>
    </title>
    <id>61</id>
@@ -6137,7 +6137,7 @@
   <columns>
    <name>NumberColumn</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Number column</value>
    </title>
    <title>
@@ -6145,7 +6145,7 @@
     <value>Колонка номера</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Number column</value>
    </title>
    <id>62</id>
@@ -6166,7 +6166,7 @@
  <attributes>
   <name>BlockDiffDocActivate</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Block diff doc activate</value>
   </title>
   <title>
@@ -6174,7 +6174,7 @@
    <value>Блокировать активацию разниц по документам</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Block diff doc activate</value>
   </title>
   <id>63</id>
@@ -6191,7 +6191,7 @@
  <attributes>
   <name>MapRowsLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Map rows left</value>
   </title>
   <title>
@@ -6199,7 +6199,7 @@
    <value>Соответствие строки лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Map rows left</value>
   </title>
   <id>64</id>
@@ -6214,7 +6214,7 @@
  <attributes>
   <name>MapRowsRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Map rows right</value>
   </title>
   <title>
@@ -6222,7 +6222,7 @@
    <value>Соответствие строки право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Map rows right</value>
   </title>
   <id>65</id>
@@ -6237,7 +6237,7 @@
  <attributes>
   <name>MapColumnsLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Map columns left</value>
   </title>
   <title>
@@ -6245,7 +6245,7 @@
    <value>Соответствие колонок лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Map columns left</value>
   </title>
   <id>66</id>
@@ -6260,7 +6260,7 @@
  <attributes>
   <name>MapColumnsRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Map columns right</value>
   </title>
   <title>
@@ -6268,7 +6268,7 @@
    <value>Соответствие колонок право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Map columns right</value>
   </title>
   <id>67</id>
@@ -6283,16 +6283,16 @@
  <attributes>
   <name>PackSize</name>
   <title>
-   <key>en</key>
-   <value>Pack size</value>
+   <key>tr</key>
+   <value>Paket boyutu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Размер пакета      </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Paket boyutu</value>
+   <key>en</key>
+   <value>Pack size</value>
   </title>
   <id>68</id>
   <valueType>
@@ -6314,16 +6314,16 @@
  <attributes>
   <name>QueryText</name>
   <title>
-   <key>en</key>
-   <value>Query text</value>
+   <key>tr</key>
+   <value>Sorgu metni</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текст запроса         </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sorgu metni</value>
+   <key>en</key>
+   <value>Query text</value>
   </title>
   <id>69</id>
   <valueType>
@@ -6340,16 +6340,16 @@
  <formCommands>
   <name>FillDocuments</name>
   <title>
-   <key>en</key>
-   <value>Fill documents</value>
+   <key>tr</key>
+   <value>Belgeleri doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belgeleri doldur</value>
+   <key>en</key>
+   <value>Fill documents</value>
   </title>
   <id>1</id>
   <use>
@@ -6365,16 +6365,16 @@
  <formCommands>
   <name>CheckDocuments</name>
   <title>
-   <key>en</key>
-   <value>Check documents</value>
+   <key>tr</key>
+   <value>Belgeleri kontrol et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверить документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belgeleri kontrol et</value>
+   <key>en</key>
+   <value>Check documents</value>
   </title>
   <id>4</id>
   <use>
@@ -6390,16 +6390,16 @@
  <formCommands>
   <name>QuickFix</name>
   <title>
-   <key>en</key>
-   <value>Quick fix (selected rows)</value>
+   <key>tr</key>
+   <value>Hızlı düzeltme (seçili satırlar)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Исправить (выбранные строки)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hızlı düzeltme (seçili satırlar)</value>
+   <key>en</key>
+   <value>Quick fix (selected rows)</value>
   </title>
   <id>5</id>
   <use>
@@ -6415,16 +6415,16 @@
  <formCommands>
   <name>QuickFixError</name>
   <title>
-   <key>en</key>
-   <value>Quick fix (error)</value>
+   <key>tr</key>
+   <value>Hızlı düzeltme (hata)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Быстрое исправление (ошибка)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hızlı düzeltme (hata)</value>
+   <key>en</key>
+   <value>Quick fix (error)</value>
   </title>
   <id>6</id>
   <use>
@@ -6444,16 +6444,16 @@
  <formCommands>
   <name>SetFilterByError</name>
   <title>
-   <key>en</key>
-   <value>Set filter by error</value>
+   <key>tr</key>
+   <value>Hata ile filtreyi ayarla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить отбор по ошибке</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hata ile filtreyi ayarla</value>
+   <key>en</key>
+   <value>Set filter by error</value>
   </title>
   <id>7</id>
   <use>
@@ -6473,16 +6473,16 @@
  <formCommands>
   <name>CheckPosting</name>
   <title>
-   <key>en</key>
-   <value>Check posting</value>
+   <key>tr</key>
+   <value>Gönderimi kontrol et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверка проведения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderimi kontrol et</value>
+   <key>en</key>
+   <value>Check posting</value>
   </title>
   <id>9</id>
   <use>
@@ -6498,16 +6498,16 @@
  <formCommands>
   <name>ShowPostingDiff</name>
   <title>
-   <key>en</key>
-   <value>Show posting diff</value>
+   <key>tr</key>
+   <value>Fark gönderimini göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать разницу проводок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Fark gönderimini göster</value>
+   <key>en</key>
+   <value>Show posting diff</value>
   </title>
   <id>10</id>
   <use>
@@ -6527,16 +6527,16 @@
  <formCommands>
   <name>CheckAllPostInfo</name>
   <title>
-   <key>en</key>
-   <value>Check selected</value>
+   <key>tr</key>
+   <value>Seçileni kontrol et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверить выбранное</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçileni kontrol et</value>
+   <key>en</key>
+   <value>Check selected</value>
   </title>
   <id>11</id>
   <use>
@@ -6555,16 +6555,16 @@
  <formCommands>
   <name>UncheckAllPostInfo</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all post info</value>
+   <key>tr</key>
+   <value>Tüm kayıt bilgilerini işaretleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>СнятьОтметкиСоВсехСообщений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm kayıt bilgilerini işaretleme</value>
+   <key>en</key>
+   <value>Uncheck all post info</value>
   </title>
   <id>12</id>
   <use>
@@ -6583,16 +6583,16 @@
  <formCommands>
   <name>PostingInfoPostSelectedDocument</name>
   <title>
-   <key>en</key>
-   <value>Post selected document</value>
+   <key>tr</key>
+   <value>Seçili dokümanı gönder</value>
   </title>
   <title>
    <key>ru</key>
    <value>Опубликовать выбранный документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçili dokümanı gönder</value>
+   <key>en</key>
+   <value>Post selected document</value>
   </title>
   <id>13</id>
   <use>
@@ -6612,16 +6612,16 @@
  <formCommands>
   <name>PostingInfoWriteRecordSet</name>
   <title>
-   <key>en</key>
-   <value>Write selected records</value>
+   <key>tr</key>
+   <value>Seçilen Kayıtları Yaz</value>
   </title>
   <title>
    <key>ru</key>
    <value>ЗаписатьВыбранныеЗаписи</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçilen Kayıtları Yaz</value>
+   <key>en</key>
+   <value>Write selected records</value>
   </title>
   <id>14</id>
   <use>
@@ -6641,16 +6641,16 @@
  <formCommands>
   <name>PostingInfoExportData</name>
   <title>
-   <key>en</key>
-   <value>Export data</value>
+   <key>tr</key>
+   <value>Veri dışarı aktarma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Экспорт данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri dışarı aktarma</value>
+   <key>en</key>
+   <value>Export data</value>
   </title>
   <id>15</id>
   <use>
@@ -6669,16 +6669,16 @@
  <formCommands>
   <name>PostingInfoImportData</name>
   <title>
-   <key>en</key>
-   <value>Import data</value>
+   <key>tr</key>
+   <value>Veri aktarımı</value>
   </title>
   <title>
    <key>ru</key>
    <value>ИмпортДанных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri aktarımı</value>
+   <key>en</key>
+   <value>Import data</value>
   </title>
   <id>16</id>
   <use>
@@ -6697,16 +6697,16 @@
  <formCommands>
   <name>PostingInfoClearSkipRows</name>
   <title>
-   <key>en</key>
-   <value>Clear rows</value>
+   <key>tr</key>
+   <value>Satırları Temizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОчиститьСтроки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırları Temizle</value>
+   <key>en</key>
+   <value>Clear rows</value>
   </title>
   <id>17</id>
   <use>
@@ -6725,29 +6725,29 @@
  <formCommands>
   <name>UpdateCheckSelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Update check (selected rows)</value>
+   <key>tr</key>
+   <value>Güncelleme Kontrolü (seçili satırlar)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновление проверки (выбранные строки)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Güncelleme Kontrolü (seçili satırlar)</value>
+   <key>en</key>
+   <value>Update check (selected rows)</value>
   </title>
   <id>18</id>
   <toolTip>
-   <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <key>tr</key>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Обновить проводки (выбранные строки)</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6765,29 +6765,29 @@
  <formCommands>
   <name>UpdatePostingSelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <key>tr</key>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить проводки (выбранные строки)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
   </title>
   <id>19</id>
   <toolTip>
-   <key>en</key>
-   <value>Update posting (selected rows)</value>
+   <key>tr</key>
+   <value>Güncelleme Fişi (seçili satırlar)</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Обновить проводки (выбранные строки)</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Güncelleme Fişi (seçili satırlar)</value>
+   <key>en</key>
+   <value>Update posting (selected rows)</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -6805,7 +6805,7 @@
  <formCommands>
   <name>CheckAccountingAnalytics</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Check accounting analytics</value>
   </title>
   <title>
@@ -6813,7 +6813,7 @@
    <value>Проверить бухгалтерскую аналитику</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Check accounting analytics</value>
   </title>
   <id>20</id>
@@ -6830,7 +6830,7 @@
  <formCommands>
   <name>PrevChangesLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Prev changes left</value>
   </title>
   <title>
@@ -6838,7 +6838,7 @@
    <value>Предыдущая разница лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Prev changes left</value>
   </title>
   <id>25</id>
@@ -6859,7 +6859,7 @@
  <formCommands>
   <name>NextChangeLeft</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Next change left</value>
   </title>
   <title>
@@ -6867,7 +6867,7 @@
    <value>Следующие изменени лево</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Next change left</value>
   </title>
   <id>26</id>
@@ -6887,7 +6887,7 @@
  <formCommands>
   <name>NextChangeRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Next change right</value>
   </title>
   <title>
@@ -6895,7 +6895,7 @@
    <value>Следующие изменени право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Next change right</value>
   </title>
   <id>27</id>
@@ -6915,7 +6915,7 @@
  <formCommands>
   <name>PrevChangesRight</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Prev changes right</value>
   </title>
   <title>
@@ -6923,7 +6923,7 @@
    <value>Предыдущая разница право</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Prev changes right</value>
   </title>
   <id>28</id>
@@ -6944,7 +6944,7 @@
  <formCommands>
   <name>ExpandDiff</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Expand diff</value>
   </title>
   <title>
@@ -6952,7 +6952,7 @@
    <value>Разширить разницы</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Expand diff</value>
   </title>
   <id>30</id>
@@ -6973,7 +6973,7 @@
  <formCommands>
   <name>CheckAccountingTranslations</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Check accounting translations</value>
   </title>
   <title>
@@ -6981,7 +6981,7 @@
    <value>Проверить бухгалтерские операции</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Check accounting translations</value>
   </title>
   <id>31</id>
@@ -6998,16 +6998,16 @@
  <formCommands>
   <name>MoveWithoutCheck</name>
   <title>
-   <key>en</key>
-   <value>Skeep check (for reposting)</value>
+   <key>tr</key>
+   <value>Kontol atla (tekrar kaydetme için)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Пропустить проверку (для перепроведения)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontol atla (tekrar kaydetme için)</value>
+   <key>en</key>
+   <value>Skeep check (for reposting)</value>
   </title>
   <id>33</id>
   <use>
@@ -7027,16 +7027,16 @@
  <formCommands>
   <name>FillQueryTemplate</name>
   <title>
-   <key>en</key>
-   <value>Fill query template</value>
+   <key>tr</key>
+   <value>Sorgu şablonu doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполните шаблон запроса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sorgu şablonu doldur</value>
+   <key>en</key>
+   <value>Fill query template</value>
   </title>
   <id>34</id>
   <use>
@@ -7052,16 +7052,16 @@
  <formCommands>
   <name>FillAccountingDocuments</name>
   <title>
-   <key>en</key>
-   <value>Fill accounting documents</value>
+   <key>tr</key>
+   <value>Muhasebe evrakları doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить бухгалтерские документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Muhasebe evrakları doldur</value>
+   <key>en</key>
+   <value>Fill accounting documents</value>
   </title>
   <id>35</id>
   <use>

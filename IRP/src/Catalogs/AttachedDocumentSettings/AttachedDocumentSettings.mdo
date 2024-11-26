@@ -9,16 +9,16 @@
  </producedTypes>
  <name>AttachedDocumentSettings</name>
  <synonym>
-  <key>en</key>
-  <value>Attached document settings</value>
+  <key>tr</key>
+  <value>Eklenen dosyalar ayarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки прикрепленного документа</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Eklenen dosyalar ayarları</value>
+  <key>en</key>
+  <value>Attached document settings</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.AttachedDocumentSettings.StandardAttribute.Description</inputByString>
@@ -143,16 +143,16 @@
  <attributes uuid="ff7f5a46-0439-4ea6-8a68-4ffde7f0d7f3">
   <name>FileStorageVolume</name>
   <synonym>
-   <key>en</key>
-   <value>File storage volume</value>
+   <key>tr</key>
+   <value>Dosya depolama hacmi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Том хранения файлов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dosya depolama hacmi</value>
+   <key>en</key>
+   <value>File storage volume</value>
   </synonym>
   <type>
    <types>CatalogRef.FileStorageVolumes</types>
@@ -171,16 +171,16 @@
   </producedTypes>
   <name>FileSettings</name>
   <synonym>
-   <key>en</key>
-   <value>File settings</value>
+   <key>tr</key>
+   <value>Dosya ayarları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Настройки файла</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dosya ayarları</value>
+   <key>en</key>
+   <value>File settings</value>
   </synonym>
   <standardAttributes>
    <dataHistory>Use</dataHistory>
@@ -193,16 +193,16 @@
   <attributes uuid="9d2df0b6-f3fe-46fd-aef3-5a4c89a0eaf8">
    <name>FilePresentation</name>
    <synonym>
-    <key>en</key>
-    <value>File presentation</value>
+    <key>tr</key>
+    <value>Dosya görünüm</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Представление файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya görünüm</value>
+    <key>en</key>
+    <value>File presentation</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -215,16 +215,16 @@
   <attributes uuid="ce7e14c8-e338-4720-b4f4-af9f75a4527e">
    <name>FileTemplate</name>
    <synonym>
-    <key>en</key>
-    <value>File template</value>
+    <key>tr</key>
+    <value>Dosya şablonu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Шаблон файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya şablonu</value>
+    <key>en</key>
+    <value>File template</value>
    </synonym>
    <type>
     <types>CatalogRef.Files</types>
@@ -237,16 +237,16 @@
   <attributes uuid="fea981f5-eccc-4555-a040-8701068a02ea">
    <name>NamingFormat</name>
    <synonym>
-    <key>en</key>
-    <value>Naming format</value>
+    <key>tr</key>
+    <value>İsimlendirme formatı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Формат наименования</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>İsimlendirme formatı</value>
+    <key>en</key>
+    <value>Naming format</value>
    </synonym>
    <type>
     <types>String</types>
@@ -262,16 +262,16 @@
   <attributes uuid="3ec9f63c-ad99-4451-ba74-1eef5c7a57ab">
    <name>Required</name>
    <synonym>
-    <key>en</key>
-    <value>Required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обязательный</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Required</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -284,16 +284,16 @@
   <attributes uuid="5da80426-2123-415c-8aac-c1b533c6496d">
    <name>MaximumFileSize</name>
    <synonym>
-    <key>en</key>
-    <value>Maximum file size (Mb)</value>
+    <key>tr</key>
+    <value>Azami dosya boyutu (Mb)</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Максимальный размер файла (Мб)</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Azami dosya boyutu (Mb)</value>
+    <key>en</key>
+    <value>Maximum file size (Mb)</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -310,16 +310,16 @@
   <attributes uuid="ac6c056d-8551-407f-ae1a-eabf40a1d23c">
    <name>FileExtension</name>
    <synonym>
-    <key>en</key>
-    <value>File extension</value>
+    <key>tr</key>
+    <value>Dosya uzantısı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Расширение файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya uzantısı</value>
+    <key>en</key>
+    <value>File extension</value>
    </synonym>
    <type>
     <types>String</types>
@@ -340,30 +340,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="cf6aa47a-1627-4da5-a3f6-39dc58f82874">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -376,16 +376,16 @@
   <attributes uuid="fea612d8-c2e8-4831-b607-946d3548e363">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -402,16 +402,16 @@
   <attributes uuid="307f90f3-e2e8-4a20-9c0a-67e5c319d5f4">
    <name>SearchLiteral</name>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Текстовая строка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <type>
     <types>String</types>
@@ -428,16 +428,16 @@
  <forms uuid="a6281673-b2a7-4320-8dae-ade0473d1a3b">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -445,16 +445,16 @@
  <forms uuid="84af6ea1-d3da-4746-8004-da3182d92b9c">
   <name>FormChoiseDocsName</name>
   <synonym>
-   <key>en</key>
-   <value>Form choise docs name</value>
+   <key>tr</key>
+   <value>Form seç evraklar ismi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора наименования документов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Form seç evraklar ismi</value>
+   <key>en</key>
+   <value>Form choise docs name</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

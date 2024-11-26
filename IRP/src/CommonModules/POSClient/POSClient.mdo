@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c73a8178-ce1d-48f8-988e-4cd50cc16d8f">
  <name>POSClient</name>
  <synonym>
-  <key>en</key>
-  <value>POSClient</value>
+  <key>tr</key>
+  <value>Satış ekranı client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>РМК клиент</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Satış ekranı client</value>
+  <key>en</key>
+  <value>POSClient</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

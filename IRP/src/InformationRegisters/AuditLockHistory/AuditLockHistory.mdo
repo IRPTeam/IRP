@@ -11,57 +11,57 @@
  </producedTypes>
  <name>AuditLockHistory</name>
  <synonym>
-  <key>en</key>
-  <value>Audit lock history</value>
+  <key>tr</key>
+  <value>Audit kilit tarihçesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>История аудиторского запрета изменения данных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Audit kilit tarihçesi</value>
+  <key>en</key>
+  <value>Audit lock history</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Audit lock history</value>
+  <key>tr</key>
+  <value>Audit kilit tarihçesi</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>История аудиторского запрета изменения данных</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Audit kilit tarihçesi</value>
+  <key>en</key>
+  <value>Audit lock history</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Audit locks history</value>
+  <key>tr</key>
+  <value>Audit kilit tarihçesi</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>История блокировок аудита</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Audit kilit tarihçesi</value>
+  <key>en</key>
+  <value>Audit locks history</value>
  </listPresentation>
  <resources uuid="bf9da530-0f85-4810-9e08-1dbe90722ddf">
   <name>Action</name>
   <synonym>
-   <key>en</key>
-   <value>Action</value>
+   <key>tr</key>
+   <value>İşlem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Действие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlem</value>
+   <key>en</key>
+   <value>Action</value>
   </synonym>
   <type>
    <types>EnumRef.AuditLockActions</types>
@@ -75,16 +75,16 @@
  <dimensions uuid="fe63a90a-7742-46cf-8d4c-09f5b3cc2086">
   <name>User</name>
   <synonym>
-   <key>en</key>
-   <value>User</value>
+   <key>tr</key>
+   <value>Kullanıcı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользователь</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
+   <key>en</key>
+   <value>User</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -99,16 +99,16 @@
  <dimensions uuid="e12f9f25-0138-4f2d-b521-16f390399517">
   <name>Date</name>
   <synonym>
-   <key>en</key>
-   <value>Date</value>
+   <key>tr</key>
+   <value>Tarih</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -124,16 +124,16 @@
  <dimensions uuid="1cde977f-2a5c-4386-bf3c-9a1629a6be02">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef</types>

@@ -297,16 +297,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -343,16 +343,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -447,16 +447,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -834,16 +834,16 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>en</key>
-   <value>Filling data</value>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполненные данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
+   <key>en</key>
+   <value>Filling data</value>
   </title>
   <id>2</id>
   <valueType>
@@ -860,16 +860,16 @@ WHERE
  <attributes>
   <name>FilterCustomer</name>
   <title>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Клиент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </title>
   <id>3</id>
   <valueType>
@@ -885,16 +885,16 @@ WHERE
  <attributes>
   <name>FilterEmployee</name>
   <title>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сотрудник</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </title>
   <id>4</id>
   <valueType>
@@ -910,16 +910,16 @@ WHERE
  <attributes>
   <name>FilterVendor</name>
   <title>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поставщик</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </title>
   <id>6</id>
   <valueType>
@@ -935,16 +935,16 @@ WHERE
  <attributes>
   <name>FilterConsignor</name>
   <title>
-   <key>en</key>
-   <value>Consignor</value>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комитент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
+   <key>en</key>
+   <value>Consignor</value>
   </title>
   <id>7</id>
   <valueType>
@@ -960,16 +960,16 @@ WHERE
  <attributes>
   <name>FilterTradeAgent</name>
   <title>
-   <key>en</key>
-   <value>Trade agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комиссионер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Trade agent</value>
   </title>
   <id>8</id>
   <valueType>
@@ -985,16 +985,16 @@ WHERE
  <attributes>
   <name>FilterOther</name>
   <title>
-   <key>en</key>
-   <value>Other</value>
+   <key>tr</key>
+   <value>Diğer</value>
   </title>
   <title>
    <key>ru</key>
    <value>Прочий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Diğer</value>
+   <key>en</key>
+   <value>Other</value>
   </title>
   <id>9</id>
   <valueType>

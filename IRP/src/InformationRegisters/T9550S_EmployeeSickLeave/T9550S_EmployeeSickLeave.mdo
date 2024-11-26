@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9550S_EmployeeSickLeave</name>
  <synonym>
-  <key>en</key>
-  <value>T9550 Employee sick leave</value>
+  <key>tr</key>
+  <value>T9550 Çalışan hasta izni</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9550 Больничные сотрудников</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9550 Çalışan hasta izni</value>
+  <key>en</key>
+  <value>T9550 Employee sick leave</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -29,16 +29,16 @@
  <dimensions uuid="32f53c60-e19f-4e34-b6d7-2b5882f43e8c">
   <name>Date</name>
   <synonym>
-   <key>en</key>
-   <value>Date</value>
+   <key>tr</key>
+   <value>Tarih</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -56,16 +56,16 @@
  <dimensions uuid="599bf306-e828-4a0f-a920-5972f41c0d0f">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -80,16 +80,16 @@
  <dimensions uuid="a98027cd-465b-44b5-b3d8-c87a827e2449">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -104,16 +104,16 @@
  <dimensions uuid="ab4c88e2-6772-4734-8e43-00449ee42353">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

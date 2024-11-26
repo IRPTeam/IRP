@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T8510S_FixedAssetsInfo</name>
  <synonym>
-  <key>en</key>
-  <value>T8510 Fixed assets info</value>
+  <key>tr</key>
+  <value>T8510 Sabit kıymetler bilgisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T8510 Сведения об основных средствах</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T8510 Sabit kıymetler bilgisi</value>
+  <key>en</key>
+  <value>T8510 Fixed assets info</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="8fca9e15-1ca9-4e47-a8b4-6ee600f9e023">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -52,16 +52,16 @@
  <dimensions uuid="758ae1f9-f92c-43f3-89c2-59b7c03295b4">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -74,16 +74,16 @@
  <dimensions uuid="8d27b879-a508-4e0c-a046-0d6d0d23f1b7">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -96,16 +96,16 @@
  <dimensions uuid="616c2387-795b-4c41-bfff-978a9c6f5c02">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -120,16 +120,16 @@
  <dimensions uuid="1aaa5688-ab8e-4f1b-8757-47d5b2bd0b08">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef.CommissioningOfFixedAsset</types>
@@ -145,16 +145,16 @@
  <dimensions uuid="80e9bd31-fd0a-4892-8df6-c2fa1aaae9ef">
   <name>FixedAsset</name>
   <synonym>
-   <key>en</key>
-   <value>Fixed asset</value>
+   <key>tr</key>
+   <value>Sabit kıymet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основное средство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
+   <key>en</key>
+   <value>Fixed asset</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -167,16 +167,16 @@
  <dimensions uuid="6858164d-a9d8-4b2e-a041-2d9bd1fc5cf5">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssetsLedgerTypes</types>
@@ -189,16 +189,16 @@
  <dimensions uuid="2f5e49f0-0772-4c40-a642-345f4ae2c1a8">
   <name>Schedule</name>
   <synonym>
-   <key>en</key>
-   <value>Schedule</value>
+   <key>tr</key>
+   <value>Program</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Program</value>
+   <key>en</key>
+   <value>Schedule</value>
   </synonym>
   <type>
    <types>CatalogRef.DepreciationSchedules</types>
@@ -211,16 +211,16 @@
  <dimensions uuid="5a2eb75d-386a-423d-ac90-aede08f6e59f">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

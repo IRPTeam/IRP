@@ -103,6 +103,57 @@
   </extInfo>
  </items>
  <items xsi:type="form:FormField">
+  <name>SerialLotNumber</name>
+  <id>77</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>SerialLotNumber</segments>
+  </dataPath>
+  <extendedTooltip>
+   <name>SerialLotNumberExtendedTooltip</name>
+   <id>79</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>SerialLotNumberContextMenu</name>
+   <id>78</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>InputField</type>
+  <readOnly>true</readOnly>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:InputFieldExtInfo">
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <wrap>true</wrap>
+   <chooseType>true</chooseType>
+   <typeDomainEnabled>true</typeDomainEnabled>
+   <textEdit>true</textEdit>
+  </extInfo>
+ </items>
+ <items xsi:type="form:FormField">
   <name>ControlCodeStringType</name>
   <id>60</id>
   <visible>true</visible>
@@ -151,16 +202,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>None</value>
+     <key>tr</key>
+     <value>Yok</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Нет</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Yok</value>
+     <key>en</key>
+     <value>None</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.None</value>
@@ -168,16 +219,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Marking code</value>
+     <key>tr</key>
+     <value>Etiketleme kodu</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Честный знак</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Etiketleme kodu</value>
+     <key>en</key>
+     <value>Marking code</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.MarkingCode</value>
@@ -185,16 +236,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Good code</value>
+     <key>tr</key>
+     <value>Честный знак</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>КиЗ</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Честный знак</value>
+     <key>en</key>
+     <value>Good code</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.ControlCodeStringType.EnumValue.GoodCodeData</value>
@@ -308,16 +359,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group top</value>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа верхние уровень</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
+   <key>en</key>
+   <value>Group top</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -392,16 +443,16 @@
   <name>DecorationInfo</name>
   <id>12</id>
   <title>
-   <key>en</key>
-   <value>Scan control code</value>
+   <key>tr</key>
+   <value>Kontrol kodu tara</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просканируйте контрольные коды</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol kodu tara</value>
+   <key>en</key>
+   <value>Scan control code</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -450,16 +501,16 @@
   <name>DecorationCheckIsOff</name>
   <id>44</id>
   <title>
-   <key>en</key>
-   <value>Additional check not using</value>
+   <key>tr</key>
+   <value>Ek kontrol kullanılmıyor</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительная проверка не используется</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek kontrol kullanılmıyor</value>
+   <key>en</key>
+   <value>Additional check not using</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -537,16 +588,16 @@
    <name>CurrentCodesControlCodeStringType</name>
    <id>63</id>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -651,16 +702,16 @@
    <name>CurrentCodesStringCode</name>
    <id>28</id>
    <title>
-    <key>en</key>
-    <value>Scanned codes</value>
+    <key>tr</key>
+    <value>Taranan kodlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Просканированые коды</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Taranan kodlar</value>
+    <key>en</key>
+    <value>Scanned codes</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -714,7 +765,7 @@
    <name>CurrentCodesCodeIsApproved</name>
    <id>31</id>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Approved</value>
    </title>
    <title>
@@ -722,7 +773,7 @@
     <value>Одобрено</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Approved</value>
    </title>
    <visible>true</visible>
@@ -984,6 +1035,156 @@
   <searchStringLocation>None</searchStringLocation>
   <rowFilter xsi:type="core:UndefinedValue"/>
  </items>
+ <items xsi:type="form:FormGroup">
+  <name>GroupAdditionalInfo</name>
+  <id>72</id>
+  <items xsi:type="form:FormField">
+   <name>CurrentCodesIndustryAttribute</name>
+   <id>69</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Items.CurrentCodes.CurrentData.IndustryAttribute</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CurrentCodesIndustryAttributeExtendedTooltip</name>
+    <id>71</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CurrentCodesIndustryAttributeContextMenu</name>
+    <id>70</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <multiLine>true</multiLine>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
+   <name>CurrentCodesServerAnswer</name>
+   <id>74</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>Items.CurrentCodes.CurrentData.ServerAnswer</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CurrentCodesServerAnswerExtendedTooltip</name>
+    <id>76</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CurrentCodesServerAnswerContextMenu</name>
+    <id>75</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <multiLine>true</multiLine>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <title>
+   <key>tr</key>
+   <value>Ek bilgi göster </value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Показать дополнительную информацию</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Show additional info</value>
+  </title>
+  <extendedTooltip>
+   <name>GroupAdditionalInfoExtendedTooltip</name>
+   <id>73</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <type>UsualGroup</type>
+  <extInfo xsi:type="form:UsualGroupExtInfo">
+   <group>AlwaysHorizontal</group>
+   <behavior>Collapsible</behavior>
+   <collapsed>true</collapsed>
+   <representation>WeakSeparation</representation>
+   <showLeftMargin>true</showLeftMargin>
+   <united>true</united>
+   <showTitle>true</showTitle>
+   <throughAlign>Auto</throughAlign>
+   <currentRowUse>Auto</currentRowUse>
+  </extInfo>
+ </items>
  <autoCommandBar>
   <name>FormCommandBar</name>
   <id>-1</id>
@@ -1145,16 +1346,16 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>en</key>
-   <value>Hardware</value>
+   <key>tr</key>
+   <value>Donanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Оборудование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
+   <key>en</key>
+   <value>Hardware</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1170,16 +1371,16 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1195,16 +1396,16 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1220,16 +1421,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1241,20 +1442,21 @@
   <edit>
    <common>true</common>
   </edit>
+  <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
  </attributes>
  <attributes>
   <name>LineNumber</name>
   <title>
-   <key>en</key>
-   <value>Line in document</value>
+   <key>tr</key>
+   <value>Belgedeki satır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номер строки в документе</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belgedeki satır</value>
+   <key>en</key>
+   <value>Line in document</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1273,16 +1475,16 @@
  <attributes>
   <name>CurrentCodes</name>
   <title>
-   <key>en</key>
-   <value>Current codes</value>
+   <key>tr</key>
+   <value>Mevcut kodlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущие коды</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut kodlar</value>
+   <key>en</key>
+   <value>Current codes</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1297,16 +1499,16 @@
   <columns>
    <name>StringCode</name>
    <title>
-    <key>en</key>
-    <value>Scanned codes</value>
+    <key>tr</key>
+    <value>Taranan kodlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Просканированые коды</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Taranan kodlar</value>
+    <key>en</key>
+    <value>Scanned codes</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1323,16 +1525,16 @@
   <columns>
    <name>CodeIsApproved</name>
    <title>
-    <key>en</key>
-    <value>Code is approved</value>
+    <key>tr</key>
+    <value>Kod onaylandı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код подтвержден</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod onaylandı</value>
+    <key>en</key>
+    <value>Code is approved</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1348,16 +1550,16 @@
   <columns>
    <name>NotCheck</name>
    <title>
-    <key>en</key>
-    <value>Not check</value>
+    <key>tr</key>
+    <value>Kontrol etme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Не проверять</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kontrol etme</value>
+    <key>en</key>
+    <value>Not check</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1373,16 +1575,16 @@
   <columns>
    <name>ControlCodeStringType</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1398,16 +1600,16 @@
   <columns>
    <name>Prefix</name>
    <title>
-    <key>en</key>
-    <value>Prefix</value>
+    <key>tr</key>
+    <value>Önek</value>
    </title>
    <title>
     <key>ru</key>
     <value>Префикс</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Önek</value>
+    <key>en</key>
+    <value>Prefix</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1423,20 +1625,72 @@
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>IndustryAttribute</name>
+   <title>
+    <key>tr</key>
+    <value>Üretim özelliği </value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Атрибут производства</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Industry attribute</value>
+   </title>
+   <id>18</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>ServerAnswer</name>
+   <title>
+    <key>tr</key>
+    <value>Sunucu yanıtı</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Ответ сервера          </value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Server answer</value>
+   </title>
+   <id>19</id>
+   <valueType>
+    <types>String</types>
+    <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>isReturn</name>
   <title>
-   <key>en</key>
-   <value>Is return</value>
+   <key>tr</key>
+   <value>Bu iade</value>
   </title>
   <title>
    <key>ru</key>
    <value>Это возврат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bu iade</value>
+   <key>en</key>
+   <value>Is return</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1452,16 +1706,16 @@
  <attributes>
   <name>AdditionalCheckIsOn</name>
   <title>
-   <key>en</key>
-   <value>Additional check is on</value>
+   <key>tr</key>
+   <value>Ek kontrol açık</value>
   </title>
   <title>
    <key>ru</key>
    <value>Включить дополнительную проверку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek kontrol açık</value>
+   <key>en</key>
+   <value>Additional check is on</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1477,16 +1731,16 @@
  <attributes>
   <name>GetCodeStringFromSerialLotNumber</name>
   <title>
-   <key>en</key>
-   <value>Get code string from serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numarasından kod dizesi al</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать маркировку из серийника</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasından kod dizesi al</value>
+   <key>en</key>
+   <value>Get code string from serial lot number</value>
   </title>
   <id>14</id>
   <valueType>
@@ -1502,16 +1756,16 @@
  <attributes>
   <name>ControlCodeStringType</name>
   <title>
-   <key>en</key>
-   <value>Control code string type</value>
+   <key>tr</key>
+   <value>Kontrol kodu satır tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип маркировки товаров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol kodu satır tipi</value>
+   <key>en</key>
+   <value>Control code string type</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1524,19 +1778,70 @@
    <common>true</common>
   </edit>
  </attributes>
+ <attributes>
+  <name>SerialLotNumber</name>
+  <title>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Serial lot number</value>
+  </title>
+  <id>20</id>
+  <valueType>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+  <functionalOptions>FunctionalOption.UseSerialLotNumbers</functionalOptions>
+ </attributes>
+ <attributes>
+  <name>IsCheckNeeded</name>
+  <title>
+   <key>tr</key>
+   <value>Is check needed</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Нужна ли проверка</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Is check needed</value>
+  </title>
+  <id>21</id>
+  <valueType>
+   <types>Boolean</types>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>SearchByBarcode</name>
   <title>
-   <key>en</key>
-   <value>Search by barcode</value>
+   <key>tr</key>
+   <value>Barkoda göre ara</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поиск по штрихкоду</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkoda göre ara</value>
+   <key>en</key>
+   <value>Search by barcode</value>
   </title>
   <id>2</id>
   <use>
@@ -1557,16 +1862,16 @@
  <formCommands>
   <name>Done</name>
   <title>
-   <key>en</key>
-   <value>Done</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Завершено</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Done</value>
   </title>
   <id>4</id>
   <use>
@@ -1582,16 +1887,16 @@
  <formCommands>
   <name>ApproveWithoutScan</name>
   <title>
-   <key>en</key>
-   <value>Code string is missing</value>
+   <key>tr</key>
+   <value>Kod dizesi eksik</value>
   </title>
   <title>
    <key>ru</key>
    <value>Маркировка утеряна</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kod dizesi eksik</value>
+   <key>en</key>
+   <value>Code string is missing</value>
   </title>
   <id>5</id>
   <use>
@@ -1611,16 +1916,16 @@
  <formCommands>
   <name>GetCodeStringFromSerialLotNumber</name>
   <title>
-   <key>en</key>
-   <value>Get code string from serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numarasından kod dizesi al</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать маркировку из серийника</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarasından kod dizesi al</value>
+   <key>en</key>
+   <value>Get code string from serial lot number</value>
   </title>
   <id>6</id>
   <use>
@@ -1675,6 +1980,12 @@
   <name>isReturn</name>
   <valueType>
    <types>Boolean</types>
+  </valueType>
+ </parameters>
+ <parameters>
+  <name>SerialLotNumber</name>
+  <valueType>
+   <types>CatalogRef.SerialLotNumbers</types>
   </valueType>
  </parameters>
  <commandInterface>

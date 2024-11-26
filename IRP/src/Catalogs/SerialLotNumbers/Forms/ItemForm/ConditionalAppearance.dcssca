@@ -21,16 +21,16 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
+						<v8:lang>tr</v8:lang>
+						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
 						<v8:content>&lt;Для этой компании собственные остатки&gt;</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
+						<v8:lang>en</v8:lang>
+						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>
@@ -57,16 +57,16 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
+						<v8:lang>tr</v8:lang>
+						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
 						<v8:content>&lt;Для этой компании собственные остатки&gt;</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>&lt;Bu şirket için kendi stokları&gt;</v8:content>
+						<v8:lang>en</v8:lang>
+						<v8:content>&lt;For this company is own stocks&gt;</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

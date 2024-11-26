@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="aa1783ba-016a-47d3-ad7c-b2da54300b19">
  <name>LocalRate</name>
  <synonym>
-  <key>en</key>
-  <value>Local rate</value>
+  <key>tr</key>
+  <value>Yerel döviz kuru</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Локальный курс валюты</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yerel döviz kuru</value>
+  <key>en</key>
+  <value>Local rate</value>
  </synonym>
  <type>
   <types>DefinedType.typeCurrencyRate</types>

@@ -2,7 +2,7 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="06b592a2-ec77-4a3c-8a99-c0cb4cf00724">
  <name>Document_OpeningMessage</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Document "Opening message"</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>Документ "Исходящее сообщение"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Document "Opening message"</value>
  </synonym>
 </mdclass:Role>

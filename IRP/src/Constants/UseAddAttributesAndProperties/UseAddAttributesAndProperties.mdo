@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseAddAttributesAndProperties</name>
  <synonym>
-  <key>en</key>
-  <value>Use add attributes and properties</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Ek alan ve özellikler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать дополнительные реквизиты и свойства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ek alan ve özellikler</value>
+  <key>en</key>
+  <value>Use add attributes and properties</value>
  </synonym>
  <type>
   <types>Boolean</types>

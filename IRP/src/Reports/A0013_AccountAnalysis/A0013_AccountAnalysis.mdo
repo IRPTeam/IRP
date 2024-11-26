@@ -6,32 +6,32 @@
  </producedTypes>
  <name>A0013_AccountAnalysis</name>
  <synonym>
-  <key>en</key>
-  <value>A0013 Account analysis</value>
+  <key>tr</key>
+  <value>A0013 Hesap analizi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>A0013 Анализ счета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>A0013 Hesap analizi</value>
+  <key>en</key>
+  <value>A0013 Account analysis</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.A0013_AccountAnalysis.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="6a448db8-b9ca-40f9-8652-3d0bc16b9ab2">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

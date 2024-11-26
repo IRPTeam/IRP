@@ -9,16 +9,16 @@
  </producedTypes>
  <name>ForeignCurrencyRevaluation</name>
  <synonym>
-  <key>en</key>
-  <value>Foreign currency revaluation</value>
+  <key>tr</key>
+  <value>Yabancı para birimi değerlemesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Переоценка валютных остатков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yabancı para birimi değerlemesi</value>
+  <key>en</key>
+  <value>Foreign currency revaluation</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.ForeignCurrencyRevaluation.StandardAttribute.Number</inputByString>
@@ -27,28 +27,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Foreign currency revaluation</value>
- </objectPresentation>
- <objectPresentation>
-  <key>ru</key>
-  <value>Переоценка валютных остатков</value>
- </objectPresentation>
- <objectPresentation>
   <key>tr</key>
   <value>Yabancı para birimi değerlemesi</value>
  </objectPresentation>
- <listPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Переоценка валютных остатков</value>
+ </objectPresentation>
+ <objectPresentation>
   <key>en</key>
-  <value>Foreign currency revaluations</value>
+  <value>Foreign currency revaluation</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Yabancı para değerlemeleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Переоценка валютных остатков</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Yabancı para değerlemeleri</value>
+  <key>en</key>
+  <value>Foreign currency revaluations</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -86,16 +86,16 @@
  <attributes uuid="14d7bac9-3932-46e7-8838-06e4db8f8928">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -116,16 +116,16 @@
  <attributes uuid="3f27a449-d3ce-4f2b-b76d-70bfd167b625">
   <name>RevenueType</name>
   <synonym>
-   <key>en</key>
-   <value>(Revenue) Type</value>
+   <key>tr</key>
+   <value>(Gelir) Türü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>(Доход) Статья доходов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gelir) Türü</value>
+   <key>en</key>
+   <value>(Revenue) Type</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -145,16 +145,16 @@
  <attributes uuid="bcbd0799-08bb-4e5d-a941-e1104a2b6b0d">
   <name>RevenueProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>(Revenue) Profit loss center</value>
+   <key>tr</key>
+   <value>(Gelir) Kar zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>(Доход) Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gelir) Kar zarar merkezi</value>
+   <key>en</key>
+   <value>(Revenue) Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -168,16 +168,16 @@
  <attributes uuid="aef581e5-65d9-4fb9-8fc2-e3263471e059">
   <name>RevenueAdditionalAnalytic</name>
   <synonym>
-   <key>en</key>
-   <value>(Revenue) Additional analytic</value>
+   <key>tr</key>
+   <value>(Gelir) Ek analitik</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>(Доход) Дополнительная аналитика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gelir) Ek analitik</value>
+   <key>en</key>
+   <value>(Revenue) Additional analytic</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -191,16 +191,16 @@
  <attributes uuid="905ac33b-627a-4a0d-a55d-2f7213d16e05">
   <name>ExpenseType</name>
   <synonym>
-   <key>en</key>
-   <value>(Expense) Type</value>
+   <key>tr</key>
+   <value>(Gider) Türü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>(Убыток) Статья затрат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gider) Türü</value>
+   <key>en</key>
+   <value>(Expense) Type</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -220,16 +220,16 @@
  <attributes uuid="ab431c03-23ff-43f3-a399-d4cc241108a7">
   <name>ExpenseProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>(Expense) Profit loss center</value>
+   <key>tr</key>
+   <value>(Gider) Kar zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков (затрата)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gider) Kar zarar merkezi</value>
+   <key>en</key>
+   <value>(Expense) Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -243,16 +243,16 @@
  <attributes uuid="34c0a6fe-bd6d-4a62-a658-372f83ae6198">
   <name>ExpenseAdditionalAnalytic</name>
   <synonym>
-   <key>en</key>
-   <value>(Expense) Additional analytic</value>
+   <key>tr</key>
+   <value>(Gider) Ek analitik</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>(Убыток) Дополнительная аналитика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>(Gider) Ek analitik</value>
+   <key>en</key>
+   <value>(Expense) Additional analytic</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -266,16 +266,16 @@
  <forms uuid="dea48846-5c50-4d81-a583-712dcc9e7e49">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -283,16 +283,16 @@
  <forms uuid="cc9f4411-3732-4264-8824-13e0b80f9d2f">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -300,16 +300,16 @@
  <forms uuid="84877ca5-d9ec-4508-bdc2-a4327abd0d7c">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

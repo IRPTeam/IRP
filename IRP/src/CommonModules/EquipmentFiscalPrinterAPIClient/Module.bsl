@@ -975,7 +975,11 @@ EndFunction
 // * CustomsDeclaration - String - Customs declaration registration number
 // * AdditionalAttribute - String - Additional attribute of the item
 // * ExciseAmount - Number - Excise amount included in the item's price
-// * IndustryAttribute - Structure - Industry attribute of the item
+// * IndustryAttribute - Structure - Industry attribute of the item:
+// ** IdentifierFOIV - String - Identifier FOIV
+// ** DocumentDate - String - Document date "DD.MM.YYYY"
+// ** DocumentNumber - String - Document number
+// ** AttributeValue - String - Attribute value
 Function CheckPackage_FiscalString() Export
     Str = New Structure;
 
@@ -1017,6 +1021,10 @@ Function CheckPackage_FiscalString() Export
     Str.Insert("AdditionalAttribute", "");
     Str.Insert("ExciseAmount", 0);
     Str.Insert("IndustryAttribute", New Structure);
+    Str.IndustryAttribute.Insert("IdentifierFOIV", "");
+    Str.IndustryAttribute.Insert("DocumentDate", "");
+    Str.IndustryAttribute.Insert("DocumentNumber", "");
+    Str.IndustryAttribute.Insert("AttributeValue", "");
 
     Return Str;
 EndFunction

@@ -7,16 +7,16 @@
  </producedTypes>
  <name>SaasMode</name>
  <synonym>
-  <key>en</key>
-  <value>Saas mode</value>
+  <key>tr</key>
+  <value>Saas biçimi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>SaaS режим</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Saas biçimi</value>
+  <key>en</key>
+  <value>Saas mode</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ccf37b27-e42b-4682-9007-8c3a0fecc837">
  <name>Cash</name>
  <synonym>
-  <key>en</key>
-  <value>Cash</value>
+  <key>tr</key>
+  <value>Kasa</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Касса</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kasa</value>
+  <key>en</key>
+  <value>Cash</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

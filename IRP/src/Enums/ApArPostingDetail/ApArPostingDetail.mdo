@@ -7,62 +7,62 @@
  </producedTypes>
  <name>ApArPostingDetail</name>
  <synonym>
-  <key>en</key>
-  <value>AP/AR posting detail</value>
+  <key>tr</key>
+  <value>Alacak Hesapları / Borç Hesapları kayıt detayları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид взаиморасчетов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Alacak Hesapları / Borç Hesapları kayıt detayları</value>
+  <key>en</key>
+  <value>AP/AR posting detail</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="185bfb92-d4c5-4bcc-9fee-c3ac0accc2ac">
   <name>ByDocuments</name>
   <synonym>
-   <key>en</key>
-   <value>By documents</value>
+   <key>tr</key>
+   <value>Evrak detaylı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По документам</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak detaylı</value>
+   <key>en</key>
+   <value>By documents</value>
   </synonym>
  </enumValues>
  <enumValues uuid="b87a63cd-2533-4482-a410-51172f300398">
   <name>ByAgreements</name>
   <synonym>
-   <key>en</key>
-   <value>By agreements</value>
+   <key>tr</key>
+   <value>Sözleşme detaylı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По соглашениям</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme detaylı</value>
+   <key>en</key>
+   <value>By agreements</value>
   </synonym>
  </enumValues>
  <enumValues uuid="00f7900f-7042-46d4-bf2d-5203c676461a">
   <name>ByStandardAgreement</name>
   <synonym>
-   <key>en</key>
-   <value>By standard agreement</value>
+   <key>tr</key>
+   <value>Standart sözleşmeye göre</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>По стандартным соглашениям</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Standart sözleşmeye göre</value>
+   <key>en</key>
+   <value>By standard agreement</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

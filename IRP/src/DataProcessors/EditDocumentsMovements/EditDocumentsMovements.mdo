@@ -6,32 +6,32 @@
  </producedTypes>
  <name>EditDocumentsMovements</name>
  <synonym>
-  <key>en</key>
-  <value>Edit documents movements</value>
+  <key>tr</key>
+  <value>Evrak hareketlerini değiştir</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Редактирование движения документов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak hareketlerini değiştir</value>
+  <key>en</key>
+  <value>Edit documents movements</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.EditDocumentsMovements.Form.Form</defaultForm>
  <attributes uuid="8b6ee7bc-eff0-40d7-b4a9-3a22ab906372">
   <name>DocumentRef</name>
   <synonym>
-   <key>en</key>
-   <value>Document ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ссылка документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Document ref</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -46,30 +46,30 @@
   </producedTypes>
   <name>Movements</name>
   <synonym>
-   <key>en</key>
-   <value>Movements</value>
+   <key>tr</key>
+   <value>Hareketler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Движения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hareketler</value>
+   <key>en</key>
+   <value>Movements</value>
   </synonym>
   <attributes uuid="c527158a-5525-40c6-b0c3-8e76da291e24">
    <name>RegisterName</name>
    <synonym>
-    <key>en</key>
-    <value>Register name</value>
+    <key>tr</key>
+    <value>Kayıt tablo tanımı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Наименование регистра</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kayıt tablo tanımı</value>
+    <key>en</key>
+    <value>Register name</value>
    </synonym>
    <type>
     <types>String</types>
@@ -84,16 +84,16 @@
   <attributes uuid="76244813-8a18-4c1a-8c9f-4a1f8cce9fc0">
    <name>MovementsCount</name>
    <synonym>
-    <key>en</key>
-    <value>Movements count</value>
+    <key>tr</key>
+    <value>Hareket sayısı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Количество движений</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Hareket sayısı</value>
+    <key>en</key>
+    <value>Movements count</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -109,7 +109,7 @@
  <forms uuid="df3ea8da-a78a-45dd-abfe-6c1e37c14b64">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -117,7 +117,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

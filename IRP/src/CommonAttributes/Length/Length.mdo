@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="deff738c-1148-497e-a330-71ce9448bc23">
  <name>Length</name>
  <synonym>
-  <key>en</key>
-  <value>Length</value>
+  <key>tr</key>
+  <value>Uzunluk</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Длина</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Uzunluk</value>
+  <key>en</key>
+  <value>Length</value>
  </synonym>
  <type>
   <types>Number</types>

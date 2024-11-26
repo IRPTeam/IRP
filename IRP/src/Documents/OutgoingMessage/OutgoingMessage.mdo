@@ -9,7 +9,7 @@
  </producedTypes>
  <name>OutgoingMessage</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Outgoing message</value>
  </synonym>
  <synonym>
@@ -17,7 +17,7 @@
   <value>Исходящее сообщение</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Outgoing message</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
@@ -68,7 +68,7 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
+  <key>tr</key>
   <value>Outgoing message</value>
  </objectPresentation>
  <objectPresentation>
@@ -76,11 +76,11 @@
   <value>Исходящее сообщение</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
+  <key>en</key>
   <value>Outgoing message</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
+  <key>tr</key>
   <value>Outgoing messages</value>
  </listPresentation>
  <listPresentation>
@@ -88,7 +88,7 @@
   <value>Исходящие сообщения</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
+  <key>en</key>
   <value>Outgoing messages</value>
  </listPresentation>
  <numberLength>12</numberLength>
@@ -102,16 +102,16 @@
  <attributes uuid="8b53bf31-66da-4648-9060-37a013275d62">
   <name>BasisDocument</name>
   <synonym>
-   <key>en</key>
-   <value>Basis document</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основания</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis document</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -125,7 +125,7 @@
  <attributes uuid="90c63087-b1ab-41d8-957e-b9928df3cc86">
   <name>MessageType</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Message type</value>
   </synonym>
   <synonym>
@@ -133,7 +133,7 @@
    <value>Вид сообщения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Message type</value>
   </synonym>
   <type>
@@ -151,7 +151,7 @@
  <attributes uuid="6d219bd0-8567-4e9c-8591-f2e07d6fcf3d">
   <name>MailAccount</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Mail account</value>
   </synonym>
   <synonym>
@@ -159,7 +159,7 @@
    <value>Почтовая учетная запись</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Mail account</value>
   </synonym>
   <type>
@@ -174,7 +174,7 @@
  <attributes uuid="90766874-4b86-45ef-a842-091ef1c3976e">
   <name>Subject</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Subject</value>
   </synonym>
   <synonym>
@@ -182,7 +182,7 @@
    <value>Тема</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Subject</value>
   </synonym>
   <type>
@@ -200,7 +200,7 @@
  <attributes uuid="a5f47aad-a7a4-4182-ab8d-bfa13b09deec">
   <name>LetterRecipientsString</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Letter recipients string</value>
   </synonym>
   <synonym>
@@ -208,7 +208,7 @@
    <value>Буква получатели строка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Letter recipients string</value>
   </synonym>
   <type>
@@ -226,7 +226,7 @@
  <attributes uuid="b8518db6-24dc-4b74-a627-9e88d7596d4c">
   <name>TextLetterHTML</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Text letter HTML</value>
   </synonym>
   <synonym>
@@ -234,7 +234,7 @@
    <value>Текст буква HTML</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Text letter HTML</value>
   </synonym>
   <type>
@@ -249,7 +249,7 @@
  <attributes uuid="5b5a754c-7ec7-4a7d-8e4d-7593fb5996fc">
   <name>LetterMultimedia</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Letter multimedia</value>
   </synonym>
   <synonym>
@@ -257,7 +257,7 @@
    <value>Мультимедийное письмо</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Letter multimedia</value>
   </synonym>
   <type>
@@ -272,7 +272,7 @@
  <attributes uuid="9d0a1731-560c-4545-b5a5-c954561b9ab6">
   <name>Importance</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Importance</value>
   </synonym>
   <synonym>
@@ -280,7 +280,7 @@
    <value>Важность</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Importance</value>
   </synonym>
   <type>
@@ -297,7 +297,7 @@
  <attributes uuid="a62d7d16-9a81-498e-bc04-07352e24e43c">
   <name>LetterSize</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Letter size</value>
   </synonym>
   <synonym>
@@ -305,7 +305,7 @@
    <value>Размер шрифта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Letter size</value>
   </synonym>
   <type>
@@ -323,7 +323,7 @@
  <attributes uuid="dad3acfe-49ac-48b1-9b07-0e28058441de">
   <name>HasAttachments</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Has attachments</value>
   </synonym>
   <synonym>
@@ -331,7 +331,7 @@
    <value>Есть прикрепленный файл</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Has attachments</value>
   </synonym>
   <type>
@@ -346,7 +346,7 @@
  <attributes uuid="d71e744b-6206-4776-a9a0-b1377fc6a7cf">
   <name>NotifyDelivery</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Notify delivery</value>
   </synonym>
   <synonym>
@@ -354,7 +354,7 @@
    <value>Уведомить о доставке</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Notify delivery</value>
   </synonym>
   <type>
@@ -369,7 +369,7 @@
  <attributes uuid="4a4b3ae8-43cc-458d-95d7-c3787f8f0580">
   <name>NotifyReading</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Notify reading</value>
   </synonym>
   <synonym>
@@ -377,7 +377,7 @@
    <value>Уведомить о прочтении</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Notify reading</value>
   </synonym>
   <type>
@@ -392,16 +392,16 @@
  <forms uuid="6aba80e9-4dc6-434f-abcb-e6d4e9c88dce">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -409,16 +409,16 @@
  <forms uuid="a71aa9ec-653d-42f1-872e-899296c2583f">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -430,7 +430,7 @@
   </producedTypes>
   <name>LetterRecipients</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Letter recipients</value>
   </synonym>
   <synonym>
@@ -438,7 +438,7 @@
    <value>Буква получатели</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Letter recipients</value>
   </synonym>
   <standardAttributes>
@@ -452,7 +452,7 @@
   <attributes uuid="f755fb64-6b72-44dc-9f4e-ce30d160b567">
    <name>Addressee</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Addressee</value>
    </synonym>
    <synonym>
@@ -460,7 +460,7 @@
     <value>Адреса</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Addressee</value>
    </synonym>
    <type>
@@ -477,7 +477,7 @@
   <attributes uuid="e64b1c90-9f46-4308-9a2f-1210d1209c5b">
    <name>Destination</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Destination</value>
    </synonym>
    <synonym>
@@ -485,7 +485,7 @@
     <value>Назначение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Destination</value>
    </synonym>
    <type>
@@ -502,7 +502,7 @@
   <attributes uuid="0e4cdb73-d852-4471-92df-dadbabd3db2f">
    <name>IsCopy</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Is copy</value>
    </synonym>
    <synonym>
@@ -510,7 +510,7 @@
     <value>Копия</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Is copy</value>
    </synonym>
    <type>
@@ -524,7 +524,7 @@
   <attributes uuid="a6ae4d1d-d062-4254-b79b-afc8df0dcb18">
    <name>IsBlind</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Is blind</value>
    </synonym>
    <synonym>
@@ -532,7 +532,7 @@
     <value>Скрытый</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Is blind</value>
    </synonym>
    <type>
@@ -551,7 +551,7 @@
   </producedTypes>
   <name>Attachments</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Attachments</value>
   </synonym>
   <synonym>
@@ -559,7 +559,7 @@
    <value>Прикрепленные файлы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Attachments</value>
   </synonym>
   <standardAttributes>
@@ -573,16 +573,16 @@
   <attributes uuid="b73382a6-ce34-4b60-88fe-d4142d0726de">
    <name>File</name>
    <synonym>
-    <key>en</key>
-    <value>File</value>
+    <key>tr</key>
+    <value>Dosya</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Файл</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya</value>
+    <key>en</key>
+    <value>File</value>
    </synonym>
    <type>
     <types>CatalogRef.Files</types>
@@ -595,7 +595,7 @@
   <attributes uuid="9f4db908-7b50-4314-8101-b014b2b922a6">
    <name>PresentationInLetter</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Presentation in letter</value>
    </synonym>
    <synonym>
@@ -603,7 +603,7 @@
     <value>Буквенное представление</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Presentation in letter</value>
    </synonym>
    <type>
@@ -621,16 +621,16 @@
  <commands uuid="3637be2f-4367-4b70-9f70-db7f87531eaa">
   <name>Send</name>
   <synonym>
-   <key>en</key>
-   <value>Send</value>
+   <key>tr</key>
+   <value>Gönder</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отправить</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gönder</value>
+   <key>en</key>
+   <value>Send</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType>

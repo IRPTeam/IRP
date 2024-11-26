@@ -6,32 +6,32 @@
  </producedTypes>
  <name>R6020_BatchBalance</name>
  <synonym>
-  <key>en</key>
-  <value>R6020 Batch balance</value>
+  <key>tr</key>
+  <value>R6020 Party envanter bakiyeleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R6020 Остатки партий товаров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R6020 Party envanter bakiyeleri</value>
+  <key>en</key>
+  <value>R6020 Batch balance</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R6020_BatchBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="5b663984-045d-4a65-bd98-972c21763d84">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

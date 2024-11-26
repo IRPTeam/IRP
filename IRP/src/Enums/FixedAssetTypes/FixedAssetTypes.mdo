@@ -7,47 +7,47 @@
  </producedTypes>
  <name>FixedAssetTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Fixed asset types</value>
+  <key>tr</key>
+  <value>Sabit kıymet türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды основных средств</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymet türleri</value>
+  <key>en</key>
+  <value>Fixed asset types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="9906aa3e-798a-467c-98fb-3dcd337347d2">
   <name>TangibleAssets</name>
   <synonym>
-   <key>en</key>
-   <value>Tangible assets</value>
+   <key>tr</key>
+   <value>Maddi varlıklar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Материальные активы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maddi varlıklar</value>
+   <key>en</key>
+   <value>Tangible assets</value>
   </synonym>
  </enumValues>
  <enumValues uuid="d70c8771-2a8a-4d57-9c17-f612da115951">
   <name>IntangibleAssets</name>
   <synonym>
-   <key>en</key>
-   <value>Intangible assets</value>
+   <key>tr</key>
+   <value>Maddi olmayan varlıklar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Нематериальные активы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maddi olmayan varlıklar</value>
+   <key>en</key>
+   <value>Intangible assets</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

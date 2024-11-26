@@ -7,77 +7,77 @@
  </producedTypes>
  <name>RetailReceiptStatusTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Retail receipt status types</value>
+  <key>tr</key>
+  <value>Perakende fiş durum türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы статусов розничных чеков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Perakende fiş durum türleri</value>
+  <key>en</key>
+  <value>Retail receipt status types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="fb121f4b-f6a7-4c35-91d7-fb78e03564d1">
   <name>Completed</name>
   <synonym>
-   <key>en</key>
-   <value>Completed</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Завершен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Completed</value>
   </synonym>
  </enumValues>
  <enumValues uuid="720f01c6-7145-42a0-88df-0dc8627873d5">
   <name>Canceled</name>
   <synonym>
-   <key>en</key>
-   <value>Canceled</value>
+   <key>tr</key>
+   <value>İptal edildi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отменен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İptal edildi</value>
+   <key>en</key>
+   <value>Canceled</value>
   </synonym>
  </enumValues>
  <enumValues uuid="058dc9ae-28ba-4b59-81a4-e26e27225be4">
   <name>Postponed</name>
   <synonym>
-   <key>en</key>
-   <value>Postponed</value>
+   <key>tr</key>
+   <value>Ertelendi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отложен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ertelendi</value>
+   <key>en</key>
+   <value>Postponed</value>
   </synonym>
  </enumValues>
  <enumValues uuid="214e36d1-e51a-4c74-a790-2bb6c47aafcb">
   <name>PostponedWithReserve</name>
   <synonym>
-   <key>en</key>
-   <value>Postponed with reserve</value>
+   <key>tr</key>
+   <value>Rezervli olarak ertelendi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Отложен с резервированием</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Rezervli olarak ertelendi</value>
+   <key>en</key>
+   <value>Postponed with reserve</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

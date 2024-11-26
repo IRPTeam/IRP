@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9013S_AccountsTax</name>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Tax)</value>
+  <key>tr</key>
+  <value>Muh. hesap (Vergi)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (Налоги)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesap (Vergi)</value>
+  <key>en</key>
+  <value>Accounts (Tax)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Accounts (Tax)</value>
+  <key>tr</key>
+  <value>Muh. hesap (Vergi)</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Бух. счета (Налоги)</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Muh. hesap (Vergi)</value>
+  <key>en</key>
+  <value>Accounts (Tax)</value>
  </recordPresentation>
  <resources uuid="79e4eb7b-a808-4175-9b3a-699bac85e512">
   <name>IncomingAccount</name>
   <synonym>
-   <key>en</key>
-   <value>Incoming account</value>
+   <key>tr</key>
+   <value>Gelen hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Входящий счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gelen hesap</value>
+   <key>en</key>
+   <value>Incoming account</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -69,16 +69,16 @@
  <resources uuid="276c5b42-2ab6-4ec2-87a4-ab4abfaacfd1">
   <name>OutgoingAccount</name>
   <synonym>
-   <key>en</key>
-   <value>Outgoing account</value>
+   <key>tr</key>
+   <value>Giden hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Исходящий счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Giden hesap</value>
+   <key>en</key>
+   <value>Outgoing account</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -96,16 +96,16 @@
  <resources uuid="b9a7488a-a5f7-468c-a7d3-cf5f99f3ab9a">
   <name>IncomingAccountReturn</name>
   <synonym>
-   <key>en</key>
-   <value>Incoming account (return)</value>
+   <key>tr</key>
+   <value>İndirilen hesap (iade)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Входящий счет (возврат)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İndirilen hesap (iade)</value>
+   <key>en</key>
+   <value>Incoming account (return)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -123,16 +123,16 @@
  <resources uuid="062c8d52-fd6f-4e42-96ee-d257eb97dbad">
   <name>OutgoingAccountReturn</name>
   <synonym>
-   <key>en</key>
-   <value>Outgoing account (return)</value>
+   <key>tr</key>
+   <value>Hesaplanan hesap (iade)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Исходящий счет (возврат)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplanan hesap (iade)</value>
+   <key>en</key>
+   <value>Outgoing account (return)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -150,16 +150,16 @@
  <dimensions uuid="055d2b93-7a3a-4f88-a0f8-1309a66b26ef">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -176,16 +176,16 @@
  <dimensions uuid="d9250323-9eba-48f9-9110-1e2690728d65">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -202,16 +202,16 @@
  <dimensions uuid="1fc84d18-ad29-4a35-b55f-ed8196a21e9f">
   <name>Tax</name>
   <synonym>
-   <key>en</key>
-   <value>Tax</value>
+   <key>tr</key>
+   <value>Vergi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Налог</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vergi</value>
+   <key>en</key>
+   <value>Tax</value>
   </synonym>
   <type>
    <types>CatalogRef.Taxes</types>
@@ -228,16 +228,16 @@
  <dimensions uuid="5f027ab6-56a6-4d00-aaae-0e27a2699b7c">
   <name>VatRate</name>
   <synonym>
-   <key>en</key>
-   <value>Vat rate</value>
+   <key>tr</key>
+   <value>Kdv oranı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ставка НДС</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kdv oranı</value>
+   <key>en</key>
+   <value>Vat rate</value>
   </synonym>
   <type>
    <types>CatalogRef.TaxRates</types>
@@ -252,16 +252,16 @@
  <forms uuid="58556965-0cbb-4b51-ac27-78ad96f4a6a4">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

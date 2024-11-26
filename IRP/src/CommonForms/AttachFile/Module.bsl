@@ -107,10 +107,12 @@ Procedure FileListOnActivateRow(Item)
 		Return;
 	EndIf;
 	
-	If Not StrCompare(Item.CurrentData.FileExtension, "pdf") Then
+	Extension = CommonFunctionsServer.GetRefAttribute(Item.CurrentData.File, "Extension");
+	
+	If Not StrCompare(Extension, "pdf") Then
 		Items.PDFPreview.Visible = True;
 		PictureViewerClient.SetPDFForView(Item.CurrentData.File, PDFPreview);
-	ElsIf PictureViewerServer.isImage(Item.CurrentData.FileExtension) Then
+	ElsIf PictureViewerServer.isImage(Extension) Then
 		Items.ImagePreview.Visible = True;
 		PictureParameters = PictureViewerServer.CreatePictureParameters(Item.CurrentData.File);
 		

@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseObjectAccess</name>
  <synonym>
-  <key>en</key>
-  <value>Use object access</value>
+  <key>tr</key>
+  <value>Nesne erişimini kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать - Права доступа к объектам</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Nesne erişimini kullan</value>
+  <key>en</key>
+  <value>Use object access</value>
  </synonym>
  <type>
   <types>Boolean</types>

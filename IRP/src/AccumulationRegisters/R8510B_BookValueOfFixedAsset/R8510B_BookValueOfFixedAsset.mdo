@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R8510B_BookValueOfFixedAsset</name>
  <synonym>
-  <key>en</key>
-  <value>R8510 Book value of fixed asset</value>
+  <key>tr</key>
+  <value>R8510 Sabit kıymetin defter değeri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R8510 Первоначальные сведения основных средств</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R8510 Sabit kıymetin defter değeri</value>
+  <key>en</key>
+  <value>R8510 Book value of fixed asset</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="87162c08-ec36-4b18-9207-ba06301723f1">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +48,16 @@
  <attributes uuid="02faaf17-d13b-46e7-ba94-67d08955e29b">
   <name>CalculationMovementCost</name>
   <synonym>
-   <key>en</key>
-   <value>Calculation movement cost</value>
+   <key>tr</key>
+   <value>Maliyet hesaplama fişi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расчет себестоимости товаров</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet hesaplama fişi</value>
+   <key>en</key>
+   <value>Calculation movement cost</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="a51ddeb5-61ac-4a79-a2f9-10df6c314b49">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="98a325b9-d73d-4d00-8ddb-6e8219d66e3c">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -114,16 +114,16 @@
  <dimensions uuid="4d6f5b93-5f39-404b-8649-ff58b6169755">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -136,16 +136,16 @@
  <dimensions uuid="968b6d74-47c3-4960-a1b8-3ca141088718">
   <name>FixedAsset</name>
   <synonym>
-   <key>en</key>
-   <value>Fixed asset</value>
+   <key>tr</key>
+   <value>Sabit kıymet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основное средство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
+   <key>en</key>
+   <value>Fixed asset</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -158,16 +158,16 @@
  <dimensions uuid="d2dd43b8-ec12-4d85-a249-30689caf445a">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssetsLedgerTypes</types>
@@ -180,16 +180,16 @@
  <dimensions uuid="f3fad97e-2095-4132-9b49-45e09c85f140">
   <name>Schedule</name>
   <synonym>
-   <key>en</key>
-   <value>Schedule</value>
+   <key>tr</key>
+   <value>Program</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Program</value>
+   <key>en</key>
+   <value>Schedule</value>
   </synonym>
   <type>
    <types>CatalogRef.DepreciationSchedules</types>
@@ -202,16 +202,16 @@
  <dimensions uuid="e6ab0a92-4404-49bb-9e80-8e231ca43acf">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -224,16 +224,16 @@
  <dimensions uuid="9dd394d7-a244-497e-8bc3-7044f408c739">
   <name>CurrencyMovementType</name>
   <synonym>
-   <key>en</key>
-   <value>Currency movement type</value>
+   <key>tr</key>
+   <value>Çoklu döviz hareket tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид мультивалютной аналитики</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu döviz hareket tipi</value>
+   <key>en</key>
+   <value>Currency movement type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
@@ -246,16 +246,16 @@
  <dimensions uuid="c3cf772e-0aaf-40ff-b56f-7c76dcc8cda3">
   <name>TransactionCurrency</name>
   <synonym>
-   <key>en</key>
-   <value>Transaction currency</value>
+   <key>tr</key>
+   <value>İşlem para birimi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта транзакции</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlem para birimi</value>
+   <key>en</key>
+   <value>Transaction currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>

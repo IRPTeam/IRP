@@ -94,16 +94,16 @@
    <segments>Object.OnlyRegisters</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>Current setting using only by registers. Document skip current profile.</value>
+   <key>tr</key>
+   <value>Bu ayarlar sadece kayıt tablolar içindir. Evrak mevcut profili atlar.</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Текущие настройки используются только регистрами. Документ пропускает текущий профиль.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Bu ayarlar sadece kayıt tablolar içindir. Evrak mevcut profili atlar.</value>
+   <key>en</key>
+   <value>Current setting using only by registers. Document skip current profile.</value>
   </toolTip>
   <toolTipRepresentation>Button</toolTipRepresentation>
   <extendedTooltip>
@@ -433,16 +433,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Profiles</value>
+    <key>tr</key>
+    <value>Profiller</value>
    </title>
    <title>
     <key>ru</key>
     <value>Профили</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Profiller</value>
+    <key>en</key>
+    <value>Profiles</value>
    </title>
    <extendedTooltip>
     <name>GroupProfilesExtendedTooltip</name>
@@ -757,16 +757,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Users</value>
+    <key>tr</key>
+    <value>Kullanıcılar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
+    <key>en</key>
+    <value>Users</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -1356,16 +1356,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Access</value>
+    <key>tr</key>
+    <value>Erişim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доступ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Erişim</value>
+    <key>en</key>
+    <value>Access</value>
    </title>
    <extendedTooltip>
     <name>GroupAccessExtendedTooltip</name>
@@ -1394,28 +1394,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
-  </title>
-  <toolTip>
    <key>en</key>
    <value>Group main pages</value>
+  </title>
+  <toolTip>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1485,29 +1485,29 @@
  <formCommands>
   <name>CopySettings</name>
   <title>
-   <key>en</key>
-   <value>Copy settings</value>
+   <key>tr</key>
+   <value>Ayarları kopyala</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопировать настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları kopyala</value>
+   <key>en</key>
+   <value>Copy settings</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Copy settings from another access group</value>
+   <key>tr</key>
+   <value>Başka bir erişim grubundan ayarları kopyala</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Скопировать настройки из другой группы доступа</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Başka bir erişim grubundan ayarları kopyala</value>
+   <key>en</key>
+   <value>Copy settings from another access group</value>
   </toolTip>
   <use>
    <common>true</common>

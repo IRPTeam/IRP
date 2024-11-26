@@ -7,16 +7,16 @@
    <name>Decoration</name>
    <id>52</id>
    <title>
-    <key>en</key>
-    <value>Decoration1</value>
+    <key>tr</key>
+    <value>Dekorasyon1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Рисунок1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dekorasyon1</value>
+    <key>en</key>
+    <value>Decoration1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -181,16 +181,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group Top</value>
+     <key>tr</key>
+     <value>Grup Üst</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа Верх</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup Üst</value>
+     <key>en</key>
+     <value>Group Top</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -330,16 +330,16 @@
      <name>EndDate</name>
      <id>12</id>
      <title>
-      <key>en</key>
-      <value>Finish</value>
+      <key>tr</key>
+      <value>Bitiş</value>
      </title>
      <title>
       <key>ru</key>
       <value>Завершено</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Bitiş</value>
+      <key>en</key>
+      <value>Finish</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -404,16 +404,16 @@
      </dataPath>
      <titleLocation>None</titleLocation>
      <toolTip>
-      <key>en</key>
-      <value>Do not close this form on finish</value>
+      <key>tr</key>
+      <value>Bitirildiğinde bu formu kapatmayın</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Не закрывать эту форму при окончании</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Bitirildiğinde bu formu kapatmayın</value>
+      <key>en</key>
+      <value>Do not close this form on finish</value>
      </toolTip>
      <toolTipRepresentation>Button</toolTipRepresentation>
      <extendedTooltip>
@@ -456,16 +456,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group bottom</value>
+     <key>tr</key>
+     <value>Grup footer</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа подвал</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup footer</value>
+     <key>en</key>
+     <value>Group bottom</value>
     </title>
     <extendedTooltip>
      <name>GroupBottomExtendedTooltip</name>
@@ -735,16 +735,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Messages</value>
+     <key>tr</key>
+     <value>Mesajlar</value>
     </title>
     <title>
      <key>ru</key>
      <value>Уведомления</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Mesajlar</value>
+     <key>en</key>
+     <value>Messages</value>
     </title>
     <extendedTooltip>
      <name>GroupMessagesExtendedTooltip</name>
@@ -779,16 +779,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group Info</value>
+    <key>tr</key>
+    <value>Grup Bilgisi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа Инфо</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup Bilgisi</value>
+    <key>en</key>
+    <value>Group Info</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -821,16 +821,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group picture and info</value>
+   <key>tr</key>
+   <value>Grup resmi ve bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа картинка и информация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup resmi ve bilgi</value>
+   <key>en</key>
+   <value>Group picture and info</value>
   </title>
   <extendedTooltip>
    <name>GroupPictureAndInfoExtendedTooltip</name>
@@ -947,16 +947,16 @@
  <attributes>
   <name>JobTitle</name>
   <title>
-   <key>en</key>
-   <value>Job title</value>
+   <key>tr</key>
+   <value>İş unvanı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заголовок задания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş unvanı</value>
+   <key>en</key>
+   <value>Job title</value>
   </title>
   <id>1</id>
   <valueType>
@@ -973,16 +973,16 @@
  <attributes>
   <name>Percent</name>
   <title>
-   <key>en</key>
-   <value>Percent</value>
+   <key>tr</key>
+   <value>Yüzde124</value>
   </title>
   <title>
    <key>ru</key>
    <value>Процент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yüzde124</value>
+   <key>en</key>
+   <value>Percent</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1001,16 +1001,16 @@
  <attributes>
   <name>StartDate</name>
   <title>
-   <key>en</key>
-   <value>Start date</value>
+   <key>tr</key>
+   <value>Başlangıç tarihi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Начало периода</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Başlangıç tarihi</value>
+   <key>en</key>
+   <value>Start date</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1027,16 +1027,16 @@
  <attributes>
   <name>EndDate</name>
   <title>
-   <key>en</key>
-   <value>End date</value>
+   <key>tr</key>
+   <value>Bitiş tarihi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дата окончания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bitiş tarihi</value>
+   <key>en</key>
+   <value>End date</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1055,16 +1055,16 @@
  <attributes>
   <name>EndIn</name>
   <title>
-   <key>en</key>
-   <value>End in ~</value>
+   <key>tr</key>
+   <value>Bitiş yaklaşık ~</value>
   </title>
   <title>
    <key>ru</key>
    <value>Окончение через ~</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bitiş yaklaşık ~</value>
+   <key>en</key>
+   <value>End in ~</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1083,16 +1083,16 @@
  <attributes>
   <name>SystemMessages</name>
   <title>
-   <key>en</key>
-   <value>System messages</value>
+   <key>tr</key>
+   <value>Sistem mesajları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Системные сообщения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sistem mesajları</value>
+   <key>en</key>
+   <value>System messages</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1107,16 +1107,16 @@
   <columns>
    <name>Message</name>
    <title>
-    <key>en</key>
-    <value>Message</value>
+    <key>tr</key>
+    <value>Mesaj</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сообщение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Mesaj</value>
+    <key>en</key>
+    <value>Message</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1134,16 +1134,16 @@
  <attributes>
   <name>DoNotCloseOnFinish</name>
   <title>
-   <key>en</key>
-   <value>Do not close on finish</value>
+   <key>tr</key>
+   <value>Bitince kapatma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Не закрывать при окончании</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bitince kapatma</value>
+   <key>en</key>
+   <value>Do not close on finish</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1162,16 +1162,16 @@
  <attributes>
   <name>FormCanBeClose</name>
   <title>
-   <key>en</key>
-   <value>Form can be close</value>
+   <key>tr</key>
+   <value>Form kapatılabilir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Форма может быть закрыта</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Form kapatılabilir</value>
+   <key>en</key>
+   <value>Form can be close</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1187,16 +1187,16 @@
  <attributes>
   <name>StartTime</name>
   <title>
-   <key>en</key>
-   <value>Start</value>
+   <key>tr</key>
+   <value>Başlat</value>
   </title>
   <title>
    <key>ru</key>
    <value>Старт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Başlat</value>
+   <key>en</key>
+   <value>Start</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1215,16 +1215,16 @@
  <attributes>
   <name>JobUUID</name>
   <title>
-   <key>en</key>
-   <value>Job UUID</value>
+   <key>tr</key>
+   <value>İş UUID</value>
   </title>
   <title>
    <key>ru</key>
    <value>UUID регламентного задания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş UUID</value>
+   <key>en</key>
+   <value>Job UUID</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1241,16 +1241,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <id>1</id>
   <use>
@@ -1266,16 +1266,16 @@
  <formCommands>
   <name>CancelJob</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>3</id>
   <use>

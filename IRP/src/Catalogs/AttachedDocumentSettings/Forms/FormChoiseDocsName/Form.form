@@ -16,16 +16,16 @@
    <name>DocumentsNamesDocumentName</name>
    <id>14</id>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -78,16 +78,16 @@
    <name>DocumentsNamesDocumentSynonym</name>
    <id>17</id>
    <title>
-    <key>en</key>
-    <value>Synonym</value>
+    <key>tr</key>
+    <value>Eşanlamlı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Синоним</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Eşanlamlı</value>
+    <key>en</key>
+    <value>Synonym</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -341,16 +341,16 @@
  <attributes>
   <name>DocumentsNames</name>
   <title>
-   <key>en</key>
-   <value>Documents names</value>
+   <key>tr</key>
+   <value>Evraklar isimleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименования документов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evraklar isimleri</value>
+   <key>en</key>
+   <value>Documents names</value>
   </title>
   <id>1</id>
   <valueType>
@@ -365,16 +365,16 @@
   <columns>
    <name>DocumentName</name>
    <title>
-    <key>en</key>
-    <value>Document name</value>
+    <key>tr</key>
+    <value>Evrak ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak ismi</value>
+    <key>en</key>
+    <value>Document name</value>
    </title>
    <id>1</id>
    <valueType>
@@ -391,16 +391,16 @@
   <columns>
    <name>DocumentSynonym</name>
    <title>
-    <key>en</key>
-    <value>Document synonym</value>
+    <key>tr</key>
+    <value>Evrak eşanlamlı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Синоним документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak eşanlamlı</value>
+    <key>en</key>
+    <value>Document synonym</value>
    </title>
    <id>2</id>
    <valueType>

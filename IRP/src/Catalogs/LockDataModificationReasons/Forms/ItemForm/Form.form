@@ -311,16 +311,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group disable rule</value>
+    <key>tr</key>
+    <value>Grup kuralı devre dışı bırak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа отключить правило</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup kuralı devre dışı bırak</value>
+    <key>en</key>
+    <value>Group disable rule</value>
    </title>
    <extendedTooltip>
     <name>GroupDisableRuleExtendedTooltip</name>
@@ -355,16 +355,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group top</value>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа верхние уровень</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
+   <key>en</key>
+   <value>Group top</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -605,16 +605,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Rule settings</value>
+   <key>tr</key>
+   <value>Kural ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки правила</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kural ayarları</value>
+   <key>en</key>
+   <value>Rule settings</value>
   </title>
   <extendedTooltip>
    <name>GroupRuleSettingsExtendedTooltip</name>
@@ -707,16 +707,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Type filter</value>
+     <key>tr</key>
+     <value>Tip filtresi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Тип фильтра</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Tip filtresi</value>
+     <key>en</key>
+     <value>Type filter</value>
     </title>
     <extendedTooltip>
      <name>GroupTypeFilterExtendedTooltip</name>
@@ -1288,16 +1288,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Rules</value>
+    <key>tr</key>
+    <value>Kurallar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Правила</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kurallar</value>
+    <key>en</key>
+    <value>Rules</value>
    </title>
    <extendedTooltip>
     <name>GroupRulesExtendedTooltip</name>
@@ -1563,16 +1563,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Advanced rules</value>
+    <key>tr</key>
+    <value>Karmaşık kurallar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Расширенные правила</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Karmaşık kurallar</value>
+    <key>en</key>
+    <value>Advanced rules</value>
    </title>
    <extendedTooltip>
     <name>GroupAdvancedRulesExtendedTooltip</name>
@@ -1888,16 +1888,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Users</value>
+    <key>tr</key>
+    <value>Kullanıcılar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcılar</value>
+    <key>en</key>
+    <value>Users</value>
    </title>
    <extendedTooltip>
     <name>GroupUsersExtendedTooltip</name>
@@ -2213,16 +2213,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Access groups</value>
+    <key>tr</key>
+    <value>Erişim grupları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группы доступа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Erişim grupları</value>
+    <key>en</key>
+    <value>Access groups</value>
    </title>
    <extendedTooltip>
     <name>GroupAccessGroupsExtendedTooltip</name>
@@ -2568,16 +2568,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Responsible users</value>
+    <key>tr</key>
+    <value>Sorumlu kullanıcılar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ответственные пользователи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sorumlu kullanıcılar</value>
+    <key>en</key>
+    <value>Responsible users</value>
    </title>
    <extendedTooltip>
     <name>GroupResponsibleUsersExtendedTooltip</name>
@@ -2660,16 +2660,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Filter query</value>
+    <key>tr</key>
+    <value>Filtre sorgusu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Запрос отбора</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Filtre sorgusu</value>
+    <key>en</key>
+    <value>Filter query</value>
    </title>
    <extendedTooltip>
     <name>GroupFilterQueryExtendedTooltip</name>
@@ -2698,16 +2698,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages main</value>
+   <key>tr</key>
+   <value>Sayfalar genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы основные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar genel</value>
+   <key>en</key>
+   <value>Pages main</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -2785,16 +2785,16 @@
  <attributes>
   <name>SettingsComposer</name>
   <title>
-   <key>en</key>
-   <value>Settings composer</value>
+   <key>tr</key>
+   <value>Ayarlar sihirbazı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Набор настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar sihirbazı</value>
+   <key>en</key>
+   <value>Settings composer</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2810,16 +2810,16 @@
  <attributes>
   <name>TypeFilter</name>
   <title>
-   <key>en</key>
-   <value>Type filter</value>
+   <key>tr</key>
+   <value>Tip filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип фильтра</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tip filtresi</value>
+   <key>en</key>
+   <value>Type filter</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2836,16 +2836,16 @@
  <attributes>
   <name>FormAddData</name>
   <title>
-   <key>en</key>
-   <value>Form add data</value>
+   <key>tr</key>
+   <value>Forma veri ekle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Форма добавить данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Forma veri ekle</value>
+   <key>en</key>
+   <value>Form add data</value>
   </title>
   <id>4</id>
   <valueType/>
@@ -2859,16 +2859,16 @@
  <formCommands>
   <name>SetCurrentUser</name>
   <title>
-   <key>en</key>
-   <value>Set current user</value>
+   <key>tr</key>
+   <value>Geçerli kullanıcı belirt</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить текущего пользователя</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli kullanıcı belirt</value>
+   <key>en</key>
+   <value>Set current user</value>
   </title>
   <id>1</id>
   <use>

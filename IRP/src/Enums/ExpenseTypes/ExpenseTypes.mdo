@@ -7,47 +7,47 @@
  </producedTypes>
  <name>ExpenseTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Expense types</value>
+  <key>tr</key>
+  <value>Gider türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Статьи затрат</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Gider türleri</value>
+  <key>en</key>
+  <value>Expense types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="82328a39-43fb-4cca-a102-baebcadbd26c">
   <name>GeneralExpenses</name>
   <synonym>
-   <key>en</key>
-   <value>General expenses</value>
+   <key>tr</key>
+   <value>Genel giderler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основные расходы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Genel giderler</value>
+   <key>en</key>
+   <value>General expenses</value>
   </synonym>
  </enumValues>
  <enumValues uuid="c3aa5289-b0c8-4584-b739-9f53f360d4d3">
   <name>ProductionCosts</name>
   <synonym>
-   <key>en</key>
-   <value>Production costs</value>
+   <key>tr</key>
+   <value>Üretim maliyetleri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Производственная себестоимость</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üretim maliyetleri</value>
+   <key>en</key>
+   <value>Production costs</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

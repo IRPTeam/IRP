@@ -101,6 +101,7 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		// TODO: Get from ItemType (or Item) CalculationSubject
 		If ItemRow.isControlCodeString And Not isCorrection Then
 			FillControlString(CCSRows, ItemRow, FiscalStringData);
+			FillIndustryAttribute(CCSRows, FiscalStringData);
 		Else
 			If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
 				FiscalStringData.CalculationSubject = 10;
@@ -124,7 +125,7 @@ Procedure FillCheckPackageByRetailReceipt(Val SourceData, CheckPackage) Export
 		FillVatRate(ItemRow, FiscalStringData);
 		
 		FillConsignor(FiscalStringData, ItemRow);
-
+		
 		CheckPackage.Positions.FiscalStrings.Add(FiscalStringData);
 	EndDo;
 
@@ -406,6 +407,17 @@ Procedure FillPaymentType(SourceData, FiscalStringData, ItemRow)
 	
 	If ItemRow.Item.ItemType.Type = Enums.ItemTypes.Certificate Then
 		FiscalStringData.PaymentMethod = 3;
+	EndIf;
+EndProcedure
+
+// @skip-check statement-type-change, property-return-type
+Procedure FillIndustryAttribute(CCSRows, FiscalStringData)
+	If Not IsBlankString(CCSRows[0].IndustryAttribute) Then
+		IndustryAttribute = CommonFunctionsServer.DeserializeJSON(CCSRows[0].IndustryAttribute); // Structure
+		FiscalStringData.IndustryAttribute.AttributeValue = IndustryAttribute.AttributeValue;
+		FiscalStringData.IndustryAttribute.DocumentDate = IndustryAttribute.DocumentDate;
+		FiscalStringData.IndustryAttribute.DocumentNumber = IndustryAttribute.DocumentNumber;
+		FiscalStringData.IndustryAttribute.IdentifierFOIV = IndustryAttribute.IdentifierFOIV;
 	EndIf;
 EndProcedure
 

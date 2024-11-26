@@ -120,16 +120,16 @@
 					<f>8</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Sales report from trade agent [Number] [Date]</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Konsiyeye alandan satış raporu [Number] [Date]</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Отчеты комиссионера о продажах [Number] [Date]</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Konsiyeye alandan satış raporu [Number] [Date]</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Sales report from trade agent [Number] [Date]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -166,16 +166,16 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Company:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Şirket:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Организация:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Şirket:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Company:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -198,16 +198,16 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Partner:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Cari hesap:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Партнер:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Cari hesap:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Partner:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -237,7 +237,7 @@
 					<f>12</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
 						<v8:item>
@@ -245,7 +245,7 @@
 							<v8:content>#</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>#</v8:content>
 						</v8:item>
 					</tl>
@@ -256,16 +256,16 @@
 					<f>13</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Item</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Malzeme</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Номенклатура</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Malzeme</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Item</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -275,16 +275,16 @@
 					<f>14</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Item key</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Varyant</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Характеристика</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Varyant</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Item key</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -293,18 +293,18 @@
 				<c>
 					<f>15</f>
 					<tl>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Quantity</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Quantity</v8:content>
-						</v8:item>
 						<v8:item>
 							<v8:lang>tr</v8:lang>
 							<v8:content>Miktar</v8:content>
 						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Quantity</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Quantity</v8:content>
+						</v8:item>
 					</tl>
 				</c>
 			</c>
@@ -313,16 +313,16 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Unit</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Birim</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Unit</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Birim</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Unit</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -332,16 +332,16 @@
 					<f>15</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Price</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Fiyat</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Цена</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Fiyat</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Price</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -351,16 +351,16 @@
 					<f>16</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Total amount</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Toplam tutar</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Итого</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam tutar</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Total amount</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -431,16 +431,16 @@
 					<f>21</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Net amount:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Vergi hariç tutar:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Сумма без налогов:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Vergi hariç tutar:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Net amount:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -487,16 +487,16 @@
 					<f>21</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Total amount:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Toplam tutar:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Итого:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Toplam tutar:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Total amount:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -518,16 +518,16 @@
 					<f>21</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Currency:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Döviz:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Валюты:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Döviz:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Currency:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -555,16 +555,16 @@
 					<f>24</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Manager:</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Sorumlu:</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Ответственный:</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Sorumlu:</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Manager:</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -857,7 +857,7 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>en</v8:lang>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
@@ -865,7 +865,7 @@
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
+				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 		</format>
@@ -882,7 +882,7 @@
 		<fillType>Parameter</fillType>
 		<format>
 			<v8:item>
-				<v8:lang>en</v8:lang>
+				<v8:lang>tr</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
@@ -890,7 +890,7 @@
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
+				<v8:lang>en</v8:lang>
 				<v8:content>NFD=2</v8:content>
 			</v8:item>
 		</format>

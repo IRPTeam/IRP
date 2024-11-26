@@ -6,32 +6,32 @@
  </producedTypes>
  <name>A0010_TrialBalance</name>
  <synonym>
-  <key>en</key>
-  <value>A0010 Trial balance</value>
+  <key>tr</key>
+  <value>A0010 Oborotno saldova vedomost</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>A0010 Оборотно сальдовая ведомость</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>A0010 Oborotno saldova vedomost</value>
+  <key>en</key>
+  <value>A0010 Trial balance</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.A0010_TrialBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="67b86bac-06c8-4145-93a5-1055995fa27e">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

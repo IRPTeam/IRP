@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Print</value>
+  <key>tr</key>
+  <value>Yazdır</value>
  </title>
  <title>
   <key>ru</key>
   <value>Печать</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>Yazdır</value>
+  <key>en</key>
+  <value>Print</value>
  </title>
  <items xsi:type="form:FormField">
   <name>HTML</name>
@@ -101,7 +101,7 @@
  <attributes>
   <name>HTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>HTML</value>
   </title>
   <title>
@@ -109,7 +109,7 @@
    <value>HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>HTML</value>
   </title>
   <id>1</id>
@@ -127,16 +127,16 @@
  <attributes>
   <name>TemplateName</name>
   <title>
-   <key>en</key>
-   <value>Template name</value>
+   <key>tr</key>
+   <value>Şablon adı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Имя шаблона</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon adı</value>
+   <key>en</key>
+   <value>Template name</value>
   </title>
   <id>2</id>
   <valueType>
@@ -153,16 +153,16 @@
  <attributes>
   <name>Data</name>
   <title>
-   <key>en</key>
-   <value>Data</value>
+   <key>tr</key>
+   <value>Veri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri</value>
+   <key>en</key>
+   <value>Data</value>
   </title>
   <id>3</id>
   <valueType>

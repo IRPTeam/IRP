@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f7586a65-288f-4bea-8372-c647be21945d">
  <name>UseAdditionalSettings</name>
  <synonym>
-  <key>en</key>
-  <value>Use additional settings</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Ek ayarlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать дополнительные настройки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Ek ayarlar</value>
+  <key>en</key>
+  <value>Use additional settings</value>
  </synonym>
  <location>Constant.UseAdditionalSettings</location>
  <privilegedGetMode>true</privilegedGetMode>

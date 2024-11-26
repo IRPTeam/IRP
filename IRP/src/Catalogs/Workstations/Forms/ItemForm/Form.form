@@ -59,16 +59,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of code</value>
+   <key>tr</key>
+   <value>Kod grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа кодов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kod grubu</value>
+   <key>en</key>
+   <value>Group of code</value>
   </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
@@ -346,16 +346,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>System settings</value>
+   <key>tr</key>
+   <value>Sistem ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки системы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sistem ayarları</value>
+   <key>en</key>
+   <value>System settings</value>
   </title>
   <extendedTooltip>
    <name>GroupSystemSettingsExtendedTooltip</name>
@@ -663,16 +663,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>POS settings</value>
+   <key>tr</key>
+   <value>POS ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки РМК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>POS ayarları</value>
+   <key>en</key>
+   <value>POS settings</value>
   </title>
   <extendedTooltip>
    <name>GroupPOSSettingsExtendedTooltip</name>
@@ -1138,16 +1138,16 @@
  <formCommands>
   <name>SetCurrent</name>
   <title>
-   <key>en</key>
-   <value>Set current</value>
+   <key>tr</key>
+   <value>Geçerli olarak işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить текущее</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli olarak işaretle</value>
+   <key>en</key>
+   <value>Set current</value>
   </title>
   <id>1</id>
   <use>

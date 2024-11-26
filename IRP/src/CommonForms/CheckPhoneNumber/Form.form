@@ -128,16 +128,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group code</value>
+   <key>tr</key>
+   <value>Grup kodu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа код</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup kodu</value>
+   <key>en</key>
+   <value>Group code</value>
   </title>
   <extendedTooltip>
    <name>GroupCodeExtendedTooltip</name>
@@ -257,16 +257,16 @@
  <attributes>
   <name>PhoneNumber</name>
   <title>
-   <key>en</key>
-   <value>Phone number</value>
+   <key>tr</key>
+   <value>Telefon numarası</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номер телефона</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Telefon numarası</value>
+   <key>en</key>
+   <value>Phone number</value>
   </title>
   <id>1</id>
   <valueType>
@@ -285,16 +285,16 @@
  <attributes>
   <name>SendedSMSCode</name>
   <title>
-   <key>en</key>
-   <value>Sended code</value>
+   <key>tr</key>
+   <value>Gönderilen kod</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отправленный код</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderilen kod</value>
+   <key>en</key>
+   <value>Sended code</value>
   </title>
   <id>2</id>
   <valueType>
@@ -313,16 +313,16 @@
  <attributes>
   <name>SendedDate</name>
   <title>
-   <key>en</key>
-   <value>Sended date</value>
+   <key>tr</key>
+   <value>Gönderim tarihi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дата отправки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gönderim tarihi</value>
+   <key>en</key>
+   <value>Sended date</value>
   </title>
   <id>4</id>
   <valueType>
@@ -339,16 +339,16 @@
  <attributes>
   <name>Code</name>
   <title>
-   <key>en</key>
-   <value>Code</value>
+   <key>tr</key>
+   <value>Kod</value>
   </title>
   <title>
    <key>ru</key>
    <value>Код</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kod</value>
+   <key>en</key>
+   <value>Code</value>
   </title>
   <id>5</id>
   <valueType>
@@ -367,16 +367,16 @@
  <attributes>
   <name>IntegrationSettings</name>
   <title>
-   <key>en</key>
-   <value>Integration settings</value>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Интеграционные настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>Integration settings</value>
   </title>
   <id>6</id>
   <valueType>
@@ -392,16 +392,16 @@
  <attributes>
   <name>PredefinedText</name>
   <title>
-   <key>en</key>
-   <value>Predefined text</value>
+   <key>tr</key>
+   <value>Önceden tanımlanmış metin</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предопределенный текст</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Önceden tanımlanmış metin</value>
+   <key>en</key>
+   <value>Predefined text</value>
   </title>
   <id>7</id>
   <valueType>
@@ -418,16 +418,16 @@
  <formCommands>
   <name>RetryToSend</name>
   <title>
-   <key>en</key>
-   <value>Retry</value>
+   <key>tr</key>
+   <value>Yeniden dene</value>
   </title>
   <title>
    <key>ru</key>
    <value>Повторить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yeniden dene</value>
+   <key>en</key>
+   <value>Retry</value>
   </title>
   <id>1</id>
   <use>
@@ -447,16 +447,16 @@
  <formCommands>
   <name>ShowCode</name>
   <title>
-   <key>en</key>
-   <value>Show code</value>
+   <key>tr</key>
+   <value>Kodu göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать код</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kodu göster</value>
+   <key>en</key>
+   <value>Show code</value>
   </title>
   <id>2</id>
   <use>

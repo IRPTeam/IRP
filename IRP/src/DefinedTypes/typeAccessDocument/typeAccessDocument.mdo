@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeAccessDocument</name>
  <synonym>
-  <key>en</key>
-  <value>Type access document</value>
+  <key>tr</key>
+  <value>Erişim belgesi türü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип доступа документ</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Erişim belgesi türü</value>
+  <key>en</key>
+  <value>Type access document</value>
  </synonym>
  <type>
   <types>DocumentObject.RetailSalesReceipt</types>

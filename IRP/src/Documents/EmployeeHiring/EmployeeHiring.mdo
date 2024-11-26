@@ -9,16 +9,16 @@
  </producedTypes>
  <name>EmployeeHiring</name>
  <synonym>
-  <key>en</key>
-  <value>Employee hiring</value>
+  <key>tr</key>
+  <value>Çalışan işe alım</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Найм сотрудника</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Çalışan işe alım</value>
+  <key>en</key>
+  <value>Employee hiring</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.EmployeeHiring.StandardAttribute.Number</inputByString>
@@ -52,35 +52,35 @@
   <objectField>Document.EmployeeHiring.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.EmployeeHiring.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.EmployeeHiring.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.EmployeeHiring.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.EmployeeHiring.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Employee hiring</value>
+  <key>tr</key>
+  <value>Çalışan işe alım</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Найм сотрудника</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Çalışan işe alım</value>
+  <key>en</key>
+  <value>Employee hiring</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Employee hirings</value>
+  <key>tr</key>
+  <value>Çalışan işe alımları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Найм сотрудников</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Çalışan işe alımları</value>
+  <key>en</key>
+  <value>Employee hirings</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -98,16 +98,16 @@
  <attributes uuid="f1817bf5-ad46-455f-9137-06b53f642f4b">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -132,16 +132,16 @@
  <attributes uuid="f491153f-6d8e-4144-8697-228d6390f5e4">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -162,16 +162,16 @@
  <attributes uuid="fb40eb14-f927-48aa-b4b9-fe28db7cf256">
   <name>Position</name>
   <synonym>
-   <key>en</key>
-   <value>Position</value>
+   <key>tr</key>
+   <value>Pozisyon</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Должность</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
+   <key>en</key>
+   <value>Position</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -186,16 +186,16 @@
  <attributes uuid="dc25c96f-d152-4d4c-a124-5ba3cb98a686">
   <name>EmployeeSchedule</name>
   <synonym>
-   <key>en</key>
-   <value>Employee schedule</value>
+   <key>tr</key>
+   <value>Çalışan programı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Штатное расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan programı</value>
+   <key>en</key>
+   <value>Employee schedule</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -210,16 +210,16 @@
  <attributes uuid="9aa847d7-09ce-42b7-a009-5ad964aed7d0">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -233,16 +233,16 @@
  <attributes uuid="98be9595-4a63-4729-8f13-c96f332fc44c">
   <name>Salary</name>
   <synonym>
-   <key>en</key>
-   <value>Salary</value>
+   <key>tr</key>
+   <value>Maaş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Зарплата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maaş</value>
+   <key>en</key>
+   <value>Salary</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -256,16 +256,16 @@
  <attributes uuid="151f7eeb-6ee3-4974-826c-968b3bd88009">
   <name>PersonalSalary</name>
   <synonym>
-   <key>en</key>
-   <value>Personal salary</value>
+   <key>tr</key>
+   <value>Kişisel maaş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Личная зарплата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kişisel maaş</value>
+   <key>en</key>
+   <value>Personal salary</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -279,16 +279,16 @@
  <attributes uuid="2eb346c8-955e-4332-849f-26733df38f69">
   <name>AccrualType</name>
   <synonym>
-   <key>en</key>
-   <value>Accrual type</value>
+   <key>tr</key>
+   <value>Tahakkuk türü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип начисления</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tahakkuk türü</value>
+   <key>en</key>
+   <value>Accrual type</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -308,16 +308,16 @@
  <attributes uuid="b40373fa-a73d-452a-9d76-34a9e0bd5153">
   <name>VacationDayLimit</name>
   <synonym>
-   <key>en</key>
-   <value>Vacation day limit</value>
+   <key>tr</key>
+   <value>İzin gün limiti</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Лимит дней отпуска</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İzin gün limiti</value>
+   <key>en</key>
+   <value>Vacation day limit</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -335,16 +335,16 @@
  <forms uuid="71582d48-71d7-4f95-823b-18b6b9da6767">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -352,16 +352,16 @@
  <forms uuid="c5966628-4517-4a47-916e-0901759be6f8">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -369,16 +369,16 @@
  <forms uuid="7798d33f-fd7e-4a35-8577-b2402f35f4c6">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -390,30 +390,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="81a2aaaa-1ede-48ea-a973-da761c45bfc0">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -425,16 +425,16 @@
   <attributes uuid="3dc83ffa-bfc2-456e-a18c-b95f35edf9b2">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

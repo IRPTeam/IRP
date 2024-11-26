@@ -370,16 +370,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Connection type</value>
+     <key>tr</key>
+     <value>Bağlantı tipi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Тип подключения</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Bağlantı tipi</value>
+     <key>en</key>
+     <value>Connection type</value>
     </title>
     <extendedTooltip>
      <name>GroupConnectionTypeExtendedTooltip</name>
@@ -423,16 +423,16 @@
       <segments>Object.Log</segments>
      </dataPath>
      <toolTip>
-      <key>en</key>
-      <value>Write log to Hardware log registr</value>
+      <key>tr</key>
+      <value>Günlüğü Donanım günlük kaydına yaz</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Записывать лог в регистр логов оборудования</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Günlüğü Donanım günlük kaydına yaz</value>
+      <key>en</key>
+      <value>Write log to Hardware log registr</value>
      </toolTip>
      <extendedTooltip>
       <name>LogExtendedTooltip</name>
@@ -505,16 +505,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group Log</value>
+     <key>tr</key>
+     <value>Grup Günlüğü</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа Логирование</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup Günlüğü</value>
+     <key>en</key>
+     <value>Group Log</value>
     </title>
     <extendedTooltip>
      <name>GroupLogExtendedTooltip</name>
@@ -547,16 +547,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group top left</value>
+    <key>tr</key>
+    <value>Grup üst sol</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа верх лево</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup üst sol</value>
+    <key>en</key>
+    <value>Group top left</value>
    </title>
    <extendedTooltip>
     <name>GroupTopLeftExtendedTooltip</name>
@@ -772,16 +772,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group device command</value>
+     <key>tr</key>
+     <value>Grup cihaz komutu</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа команда оборудований</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup cihaz komutu</value>
+     <key>en</key>
+     <value>Group device command</value>
     </title>
     <extendedTooltip>
      <name>GroupDeviceCommandExtendedTooltip</name>
@@ -814,16 +814,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group top right</value>
+    <key>tr</key>
+    <value>Grup üst sağ</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа верх право</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup üst sağ</value>
+    <key>en</key>
+    <value>Group top right</value>
    </title>
    <extendedTooltip>
     <name>GroupTopRightExtendedTooltip</name>
@@ -859,16 +859,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group top</value>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа верхние уровень</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
+   <key>en</key>
+   <value>Group top</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -1007,16 +1007,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Fiscal printer</value>
+    <key>tr</key>
+    <value>Yazar kasa</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фискальный принтер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yazar kasa</value>
+    <key>en</key>
+    <value>Fiscal printer</value>
    </title>
    <extendedTooltip>
     <name>GroupFiscalPrinterSettingsExtendedTooltip</name>
@@ -1149,16 +1149,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Acquiring</value>
+    <key>tr</key>
+    <value>Edinme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Эквайринг</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Edinme</value>
+    <key>en</key>
+    <value>Acquiring</value>
    </title>
    <extendedTooltip>
     <name>GroupAcquiringSettingsExtendedTooltip</name>
@@ -1193,16 +1193,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Additional info</value>
+   <key>tr</key>
+   <value>Ek bilgi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительные данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek bilgi</value>
+   <key>en</key>
+   <value>Additional info</value>
   </title>
   <extendedTooltip>
    <name>GroupAdditionalInfoExtendedTooltip</name>
@@ -1638,16 +1638,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Predefined settings</value>
+    <key>tr</key>
+    <value>Önceden tanımlı ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Предопределенные настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Önceden tanımlı ayarlar</value>
+    <key>en</key>
+    <value>Predefined settings</value>
    </title>
    <extendedTooltip>
     <name>PagePredefinedSettingsExtendedTooltip</name>
@@ -2249,16 +2249,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Driver settings</value>
+    <key>tr</key>
+    <value>Sürücü ayarları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки драйвера</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sürücü ayarları</value>
+    <key>en</key>
+    <value>Driver settings</value>
    </title>
    <extendedTooltip>
     <name>PageDriverSettingsExtendedTooltip</name>
@@ -2290,16 +2290,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Additional attributes</value>
+    <key>tr</key>
+    <value>Ek özellikler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительные реквизиты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
+    <key>en</key>
+    <value>Additional attributes</value>
    </title>
    <extendedTooltip>
     <name>PageExtensionsAttributesExtendedTooltip</name>
@@ -2328,16 +2328,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main</value>
+   <key>tr</key>
+   <value>Ana</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основное</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
+   <key>en</key>
+   <value>Main</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -2411,16 +2411,16 @@
  <attributes>
   <name>DriverParameter</name>
   <title>
-   <key>en</key>
-   <value>Driver parameter</value>
+   <key>tr</key>
+   <value>Sürücü parametresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Параметры драйвера</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sürücü parametresi</value>
+   <key>en</key>
+   <value>Driver parameter</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2435,16 +2435,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>4</id>
    <valueType>
@@ -2461,16 +2461,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <id>5</id>
    <valueType>
@@ -2496,16 +2496,16 @@
   <columns>
    <name>ReadOnly</name>
    <title>
-    <key>en</key>
-    <value>Read only</value>
+    <key>tr</key>
+    <value>Salt okunur</value>
    </title>
    <title>
     <key>ru</key>
     <value>Только чтение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur</value>
+    <key>en</key>
+    <value>Read only</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2521,16 +2521,16 @@
   <columns>
    <name>Caption</name>
    <title>
-    <key>en</key>
-    <value>Caption</value>
+    <key>tr</key>
+    <value>Başlık</value>
    </title>
    <title>
     <key>ru</key>
     <value>Заголовок</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Başlık</value>
+    <key>en</key>
+    <value>Caption</value>
    </title>
    <id>7</id>
    <valueType>
@@ -2547,16 +2547,16 @@
   <columns>
    <name>DefaultValue</name>
    <title>
-    <key>en</key>
-    <value>Default value</value>
+    <key>tr</key>
+    <value>Varsayılan değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение по умолчанию</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varsayılan değer</value>
+    <key>en</key>
+    <value>Default value</value>
    </title>
    <id>8</id>
    <valueType>
@@ -2584,16 +2584,16 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <id>10</id>
    <valueType>
@@ -2610,16 +2610,16 @@
   <columns>
    <name>FieldFormat</name>
    <title>
-    <key>en</key>
-    <value>Field format</value>
+    <key>tr</key>
+    <value>Alan formatı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Формат поля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan formatı</value>
+    <key>en</key>
+    <value>Field format</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2636,16 +2636,16 @@
   <columns>
    <name>ValueListData</name>
    <title>
-    <key>en</key>
-    <value>Value list data</value>
+    <key>tr</key>
+    <value>Değer liste verisi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Данные списка значений</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer liste verisi</value>
+    <key>en</key>
+    <value>Value list data</value>
    </title>
    <id>12</id>
    <valueType>
@@ -2662,16 +2662,16 @@
  <attributes>
   <name>CommandResult</name>
   <title>
-   <key>en</key>
-   <value>Command result</value>
+   <key>tr</key>
+   <value>Komut sonucu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат команды</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Komut sonucu</value>
+   <key>en</key>
+   <value>Command result</value>
   </title>
   <id>13</id>
   <valueType>
@@ -2688,16 +2688,16 @@
  <formCommands>
   <name>LoadSettings</name>
   <title>
-   <key>en</key>
-   <value>Load settings</value>
+   <key>tr</key>
+   <value>Ayarları yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları yükle</value>
+   <key>en</key>
+   <value>Load settings</value>
   </title>
   <id>1</id>
   <use>
@@ -2713,7 +2713,7 @@
  <formCommands>
   <name>Test</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Test</value>
   </title>
   <title>
@@ -2721,7 +2721,7 @@
    <value>Тест</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Test</value>
   </title>
   <id>2</id>
@@ -2742,16 +2742,16 @@
  <formCommands>
   <name>ReloadSettings</name>
   <title>
-   <key>en</key>
-   <value>Reload settings</value>
+   <key>tr</key>
+   <value>Ayarları tekrar yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перезаполнить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları tekrar yükle</value>
+   <key>en</key>
+   <value>Reload settings</value>
   </title>
   <id>3</id>
   <use>
@@ -2767,16 +2767,16 @@
  <formCommands>
   <name>WriteSettings</name>
   <title>
-   <key>en</key>
-   <value>Write settings</value>
+   <key>tr</key>
+   <value>Ayarları kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları kaydet</value>
+   <key>en</key>
+   <value>Write settings</value>
   </title>
   <id>4</id>
   <use>
@@ -2792,16 +2792,16 @@
  <formCommands>
   <name>Connect</name>
   <title>
-   <key>en</key>
-   <value>Connect</value>
+   <key>tr</key>
+   <value>Bağlan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подключить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bağlan</value>
+   <key>en</key>
+   <value>Connect</value>
   </title>
   <id>5</id>
   <use>
@@ -2821,16 +2821,16 @@
  <formCommands>
   <name>Disconnect</name>
   <title>
-   <key>en</key>
-   <value>Disconnect</value>
+   <key>tr</key>
+   <value>Bağlantıyı kes</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отключить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bağlantıyı kes</value>
+   <key>en</key>
+   <value>Disconnect</value>
   </title>
   <id>6</id>
   <use>
@@ -2850,16 +2850,16 @@
  <formCommands>
   <name>UpdateStatus</name>
   <title>
-   <key>en</key>
-   <value>Update status</value>
+   <key>tr</key>
+   <value>Statü güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить статус</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Statü güncelle</value>
+   <key>en</key>
+   <value>Update status</value>
   </title>
   <id>7</id>
   <use>
@@ -2879,16 +2879,16 @@
  <formCommands>
   <name>GetLastError</name>
   <title>
-   <key>en</key>
-   <value>Get last error</value>
+   <key>tr</key>
+   <value>Son hatayı al</value>
   </title>
   <title>
    <key>ru</key>
    <value>Получить последнюю ошибку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Son hatayı al</value>
+   <key>en</key>
+   <value>Get last error</value>
   </title>
   <id>8</id>
   <use>

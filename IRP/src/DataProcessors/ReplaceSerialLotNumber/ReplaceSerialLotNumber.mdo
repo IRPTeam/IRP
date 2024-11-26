@@ -6,23 +6,23 @@
  </producedTypes>
  <name>ReplaceSerialLotNumber</name>
  <synonym>
-  <key>en</key>
-  <value>Replace serial lot number</value>
+  <key>tr</key>
+  <value>Seri lot numarasını değiştir</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Заменить серийный номер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Seri lot numarasını değiştir</value>
+  <key>en</key>
+  <value>Replace serial lot number</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ReplaceSerialLotNumber.Form.Form</defaultForm>
  <forms uuid="d016ff4c-c04d-4767-b212-296e3df2ee78">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="a1564522-d7fd-41c7-889d-393493fe4ef5">
   <name>LoadSerialLotNumbers</name>
   <synonym>
-   <key>en</key>
-   <value>Load serial lot numbers</value>
+   <key>tr</key>
+   <value>Seri lot numaralarını yükle</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Загрузить серийные номера партий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaralarını yükle</value>
+   <key>en</key>
+   <value>Load serial lot numbers</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

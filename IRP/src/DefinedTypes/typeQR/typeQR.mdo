@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeQR</name>
  <synonym>
-  <key>en</key>
-  <value>Type QR</value>
+  <key>tr</key>
+  <value>QR tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип QR</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>QR tipi</value>
+  <key>en</key>
+  <value>Type QR</value>
  </synonym>
  <type>
   <types>String</types>

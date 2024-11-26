@@ -169,7 +169,7 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Group of Recipients</value>
   </title>
   <title>
@@ -177,7 +177,7 @@
    <value>Групп получатели</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Group of Recipients</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
@@ -496,16 +496,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Header</value>
+   <key>tr</key>
+   <value>Başlık</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заголовок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Başlık</value>
+   <key>en</key>
+   <value>Header</value>
   </title>
   <extendedTooltip>
    <name>HeaderExtendedTooltip</name>
@@ -587,7 +587,7 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
+        <key>tr</key>
         <value>Group edit HTML</value>
        </title>
        <title>
@@ -595,7 +595,7 @@
         <value>Группа изменить HTML</value>
        </title>
        <title>
-        <key>tr</key>
+        <key>en</key>
         <value>Group edit HTML</value>
        </title>
        <extendedTooltip>
@@ -621,7 +621,7 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
+       <key>tr</key>
        <value>Commands of letter text</value>
       </title>
       <title>
@@ -629,7 +629,7 @@
        <value>Команды или буквенный текст</value>
       </title>
       <title>
-       <key>tr</key>
+       <key>en</key>
        <value>Commands of letter text</value>
       </title>
       <extendedTooltip>
@@ -710,7 +710,7 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
+      <key>tr</key>
       <value>Page doc HTML</value>
      </title>
      <title>
@@ -718,7 +718,7 @@
       <value>Страница HTML документа</value>
      </title>
      <title>
-      <key>tr</key>
+      <key>en</key>
       <value>Page doc HTML</value>
      </title>
      <extendedTooltip>
@@ -833,7 +833,7 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
+      <key>tr</key>
       <value>Page text HTML</value>
      </title>
      <title>
@@ -841,7 +841,7 @@
       <value>Страница HTML текства</value>
      </title>
      <title>
-      <key>tr</key>
+      <key>en</key>
       <value>Page text HTML</value>
      </title>
      <extendedTooltip>
@@ -871,7 +871,7 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Group of mail pages</value>
     </title>
     <title>
@@ -879,7 +879,7 @@
      <value>Группа страницы почты</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Group of mail pages</value>
     </title>
     <extendedTooltip>
@@ -908,7 +908,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Mail</value>
    </title>
    <title>
@@ -916,7 +916,7 @@
     <value>Почта</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Mail</value>
    </title>
    <extendedTooltip>
@@ -1311,7 +1311,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Attachments</value>
    </title>
    <title>
@@ -1319,7 +1319,7 @@
     <value>Прикрепленные файлы</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Attachments</value>
    </title>
    <extendedTooltip>
@@ -1461,7 +1461,7 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Group of number and date</value>
     </title>
     <title>
@@ -1469,7 +1469,7 @@
      <value>Группа номер и дата</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Group of number and date</value>
     </title>
     <extendedTooltip>
@@ -1601,7 +1601,7 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Group of author</value>
     </title>
     <title>
@@ -1609,7 +1609,7 @@
      <value>Группа автор</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Group of author</value>
     </title>
     <extendedTooltip>
@@ -1741,7 +1741,7 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>Group of editor</value>
     </title>
     <title>
@@ -1749,7 +1749,7 @@
      <value>Группа редактор</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>Group of editor</value>
     </title>
     <extendedTooltip>
@@ -1786,16 +1786,16 @@
     </for>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Прочее</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>PageOtherExtendedTooltip</name>
@@ -1824,7 +1824,7 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Group of pages</value>
   </title>
   <title>
@@ -1832,7 +1832,7 @@
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Group of pages</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
@@ -1954,7 +1954,7 @@
  <attributes>
   <name>TextLetter</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Text letter</value>
   </title>
   <title>
@@ -1962,7 +1962,7 @@
    <value>Текст письма</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Text letter</value>
   </title>
   <id>2</id>
@@ -1979,7 +1979,7 @@
  <attributes>
   <name>Recipients</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Send to</value>
   </title>
   <title>
@@ -1987,7 +1987,7 @@
    <value>Получатель</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Send to</value>
   </title>
   <id>3</id>
@@ -2012,7 +2012,7 @@
  <attributes>
   <name>CopyRecipients</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>CC</value>
   </title>
   <title>
@@ -2020,7 +2020,7 @@
    <value>Копия</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>CC</value>
   </title>
   <id>4</id>
@@ -2045,7 +2045,7 @@
  <attributes>
   <name>BlindCopyRecipients</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>BCC</value>
   </title>
   <title>
@@ -2053,7 +2053,7 @@
    <value>Скрытая копия</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>BCC</value>
   </title>
   <id>5</id>
@@ -2078,7 +2078,7 @@
  <attributes>
   <name>AttachmentsHTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Attachments HTML</value>
   </title>
   <title>
@@ -2086,7 +2086,7 @@
    <value>Прикрепленный HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Attachments HTML</value>
   </title>
   <id>6</id>
@@ -2101,7 +2101,7 @@
  <attributes>
   <name>TextHTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Text HTML</value>
   </title>
   <title>
@@ -2109,7 +2109,7 @@
    <value>Текст HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Text HTML</value>
   </title>
   <id>7</id>
@@ -2127,7 +2127,7 @@
  <formCommands>
   <name>AddCopyRecipients</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>CC</value>
   </title>
   <title>
@@ -2135,7 +2135,7 @@
    <value>Копия</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>CC</value>
   </title>
   <id>1</id>
@@ -2156,7 +2156,7 @@
  <formCommands>
   <name>AddBlindCopyRecipients</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>BCC</value>
   </title>
   <title>
@@ -2164,7 +2164,7 @@
    <value>Скрытая копия</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>BCC</value>
   </title>
   <id>2</id>
@@ -2185,7 +2185,7 @@
  <formCommands>
   <name>OpenFile</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Open file</value>
   </title>
   <title>
@@ -2193,7 +2193,7 @@
    <value>Открыть файл</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Open file</value>
   </title>
   <id>3</id>
@@ -2213,7 +2213,7 @@
  <formCommands>
   <name>EditHTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Edit HTML</value>
   </title>
   <title>
@@ -2221,7 +2221,7 @@
    <value>Изменить HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Edit HTML</value>
   </title>
   <id>4</id>
@@ -2242,7 +2242,7 @@
  <formCommands>
   <name>SaveHTML</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Save HTML</value>
   </title>
   <title>
@@ -2250,7 +2250,7 @@
    <value>Сохранить HTML</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Save HTML</value>
   </title>
   <id>5</id>

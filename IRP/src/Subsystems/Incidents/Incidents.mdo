@@ -2,23 +2,23 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="d6c711ff-d985-4e9b-b37d-1679b64bfca2">
  <name>Incidents</name>
  <synonym>
-  <key>en</key>
-  <value>Incidents</value>
+  <key>tr</key>
+  <value>Talepler</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Incidents</value>
+  <value>Инциденты </value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Talepler</value>
+  <key>en</key>
+  <value>Incidents</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
  <picture xsi:type="core:PictureRef">
   <picture>CommonPicture.Issue</picture>
  </picture>
- <content>Catalog.Locations</content>
+ <content>Catalog.ObjectLocations</content>
  <content>Constant.UseIncidents</content>
  <content>FunctionalOption.UseIncidents</content>
  <content>Role.Subsystem_Incidents</content>

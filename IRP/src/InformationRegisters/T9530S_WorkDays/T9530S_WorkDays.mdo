@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9530S_WorkDays</name>
  <synonym>
-  <key>en</key>
-  <value>T9530 Work days</value>
+  <key>tr</key>
+  <value>T9530 İş günleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9530 Рабочие дни</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9530 İş günleri</value>
+  <key>en</key>
+  <value>T9530 Work days</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <defaultListForm>InformationRegister.T9530S_WorkDays.Form.ListForm</defaultListForm>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>T9530 Work days</value>
+  <key>tr</key>
+  <value>T9530 İş günleri</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>T9530 Рабочие дни</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9530 İş günleri</value>
+  <key>en</key>
+  <value>T9530 Work days</value>
  </recordPresentation>
  <resources uuid="0495093c-858e-4535-bb67-2d11c590f85e">
   <name>CountDaysHours</name>
   <synonym>
-   <key>en</key>
-   <value>Count days/hours</value>
+   <key>tr</key>
+   <value>Gün/saat say</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Подсчитать дни/часы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gün/saat say</value>
+   <key>en</key>
+   <value>Count days/hours</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -68,16 +68,16 @@
  <dimensions uuid="11f03012-45c6-44ec-922f-db0b1f3fb7f0">
   <name>Date</name>
   <synonym>
-   <key>en</key>
-   <value>Date</value>
+   <key>tr</key>
+   <value>Tarih</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tarih</value>
+   <key>en</key>
+   <value>Date</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -97,16 +97,16 @@
  <dimensions uuid="97ec6927-6c70-467a-9c93-2983b9d156e8">
   <name>EmployeeSchedule</name>
   <synonym>
-   <key>en</key>
-   <value>Employee schedule</value>
+   <key>tr</key>
+   <value>Çalışan programı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Штатное расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan programı</value>
+   <key>en</key>
+   <value>Employee schedule</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -122,16 +122,16 @@
  <forms uuid="feae0cb6-9c07-42dc-9861-2fb71e3cbad1">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -139,16 +139,16 @@
  <forms uuid="f922bf70-c09b-4bfd-87b6-da3345fa4028">
   <name>CreateSchedule</name>
   <synonym>
-   <key>en</key>
-   <value>Create schedule</value>
+   <key>tr</key>
+   <value>Program oluştur</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Создать расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Program oluştur</value>
+   <key>en</key>
+   <value>Create schedule</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -156,16 +156,16 @@
  <forms uuid="886c43ac-2715-4903-8a88-0e4f9e358cff">
   <name>CopySchedule</name>
   <synonym>
-   <key>en</key>
-   <value>Copy schedule</value>
+   <key>tr</key>
+   <value>Programı kopyala</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Копировать расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Programı kopyala</value>
+   <key>en</key>
+   <value>Copy schedule</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -173,16 +173,16 @@
  <forms uuid="4d64914a-8302-4a79-83b3-a0a1338f79df">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -11,46 +11,46 @@
  </producedTypes>
  <name>LedgerTypeOperations</name>
  <synonym>
-  <key>en</key>
-  <value>Ledger type operations</value>
+  <key>tr</key>
+  <value>Defter tipi işlemleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Операции типа учета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Defter tipi işlemleri</value>
+  <key>en</key>
+  <value>Ledger type operations</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Ledger type operation</value>
+  <key>tr</key>
+  <value>Defter tip işlemi</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Операция типа учета</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Defter tip işlemi</value>
+  <key>en</key>
+  <value>Ledger type operation</value>
  </recordPresentation>
  <resources uuid="49e792be-7405-4eab-88ed-f90b600fa138">
   <name>Use</name>
   <synonym>
-   <key>en</key>
-   <value>Use</value>
+   <key>tr</key>
+   <value>Kullan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Использовать</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullan</value>
+   <key>en</key>
+   <value>Use</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -64,16 +64,16 @@
  <dimensions uuid="788df50a-6c4e-40c6-ab42-74b029ce5acc">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -88,16 +88,16 @@
  <dimensions uuid="6e3a13aa-d7e1-4178-96be-8a62ad004b63">
   <name>AccountingOperation</name>
   <synonym>
-   <key>en</key>
-   <value>Accounting operation</value>
+   <key>tr</key>
+   <value>Muhasebe işlemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Бухгалтерская операция</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Muhasebe işlemi</value>
+   <key>en</key>
+   <value>Accounting operation</value>
   </synonym>
   <type>
    <types>CatalogRef.AccountingOperations</types>

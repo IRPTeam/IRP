@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f4a2b6aa-7697-4178-9ded-9f0ff2e504e1">
  <name>PaymentByAcquiring</name>
  <synonym>
-  <key>en</key>
-  <value>Payment by acquiring</value>
+  <key>tr</key>
+  <value>Edinme ile ödeme</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Оплата пос терминалом</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Edinme ile ödeme</value>
+  <key>en</key>
+  <value>Payment by acquiring</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

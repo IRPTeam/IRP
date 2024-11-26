@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeAccountingDocuments</name>
  <synonym>
-  <key>en</key>
-  <value>Type accounting documents</value>
+  <key>tr</key>
+  <value>Muhasebe doküman türü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы учетных документов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe doküman türü</value>
+  <key>en</key>
+  <value>Type accounting documents</value>
  </synonym>
  <type>
   <types>DocumentRef.AdditionalRevenueAllocation</types>

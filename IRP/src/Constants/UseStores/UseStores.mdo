@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseStores</name>
  <synonym>
-  <key>en</key>
-  <value>Use stores</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Çoklu depolar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать больше одного склада</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Çoklu depolar</value>
+  <key>en</key>
+  <value>Use stores</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1cf36d19-459d-4ea8-a7e7-06b154579937">
  <name>Microphone</name>
  <synonym>
-  <key>en</key>
-  <value>Microphone</value>
+  <key>tr</key>
+  <value>Mirkofon</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Microphone</value>
+  <value>Микрофон       </value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Mirkofon</value>
+  <key>en</key>
+  <value>Microphone</value>
  </synonym>
 </mdclass:CommonPicture>

@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e6b4492c-7a6e-4b2d-b795-81d6395825cd">
  <name>AccumulationRegisters_R4051T_StockAdjustmentAsWriteOff</name>
  <synonym>
-  <key>en</key>
-  <value>AccumulationRegisters R4051T StockAdjustmentAsWriteOff</value>
+  <key>tr</key>
+  <value>BirikimKayıtları R4051T YazımDüzeltmeStok</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>РегистрыНакопления R4051T КорректировкаКакСписание</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>BirikimKayıtları R4051T YazımDüzeltmeStok</value>
+  <key>en</key>
+  <value>AccumulationRegisters R4051T StockAdjustmentAsWriteOff</value>
  </synonym>
 </mdclass:Role>

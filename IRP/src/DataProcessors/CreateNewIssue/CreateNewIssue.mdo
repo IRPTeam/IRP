@@ -6,32 +6,32 @@
  </producedTypes>
  <name>CreateNewIssue</name>
  <synonym>
-  <key>en</key>
-  <value>Create new issue</value>
+  <key>tr</key>
+  <value>Yeni talep oluştur</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Create new issue</value>
+  <value>Описать новую проблему  </value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yeni talep oluştur</value>
+  <key>en</key>
+  <value>Create new issue</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.CreateNewIssue.Form.Form</defaultForm>
  <attributes uuid="d2638087-21dc-447e-8893-bfc9157840ee">
   <name>Country</name>
   <synonym>
-   <key>en</key>
-   <value>Country</value>
+   <key>tr</key>
+   <value>Ülke</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Страна</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
+   <key>en</key>
+   <value>Country</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -43,16 +43,16 @@
  <attributes uuid="0b3f0ee9-000b-4bd4-a9d2-bd6e914251d8">
   <name>City</name>
   <synonym>
-   <key>en</key>
-   <value>City</value>
+   <key>tr</key>
+   <value>İl</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Город</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İl</value>
+   <key>en</key>
+   <value>City</value>
   </synonym>
   <type>
    <types>CatalogRef.Cities</types>
@@ -68,19 +68,19 @@
  <attributes uuid="4d64ce96-cefb-458a-905b-97964bf1de72">
   <name>Location</name>
   <synonym>
-   <key>en</key>
-   <value>Location</value>
+   <key>tr</key>
+   <value>Konum</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Местоположение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konum</value>
+   <key>en</key>
+   <value>Location</value>
   </synonym>
   <type>
-   <types>CatalogRef.Locations</types>
+   <types>CatalogRef.ObjectLocations</types>
   </type>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -93,16 +93,16 @@
  <attributes uuid="803b4c17-2822-474b-8a6a-cab04c984795">
   <name>IssueType</name>
   <synonym>
-   <key>en</key>
-   <value>Issue type</value>
+   <key>tr</key>
+   <value>Talep tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Issue type</value>
+   <value>Тип проблемы       </value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Talep tipi</value>
+   <key>en</key>
+   <value>Issue type</value>
   </synonym>
   <type>
    <types>CatalogRef.IssueTypes</types>
@@ -114,16 +114,16 @@
  <attributes uuid="ec1e7177-96c3-4a03-abca-e3be5471a58c">
   <name>Comment</name>
   <synonym>
-   <key>en</key>
-   <value>Comment</value>
+   <key>tr</key>
+   <value>Açıklama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комментарий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Açıklama</value>
+   <key>en</key>
+   <value>Comment</value>
   </synonym>
   <type>
    <types>String</types>
@@ -137,16 +137,16 @@
  <attributes uuid="0f5d1358-4694-41ec-9417-512da620afa4">
   <name>DueDate</name>
   <synonym>
-   <key>en</key>
-   <value>Due date</value>
+   <key>tr</key>
+   <value>Vade tarihi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Срок исполнения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Vade tarihi</value>
+   <key>en</key>
+   <value>Due date</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -158,16 +158,16 @@
  <attributes uuid="5046415d-f384-434b-b04c-bead7536e2ec">
   <name>Author</name>
   <synonym>
-   <key>en</key>
-   <value>Author</value>
+   <key>tr</key>
+   <value>Kayıt oluşturan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Автор</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt oluşturan</value>
+   <key>en</key>
+   <value>Author</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -178,16 +178,16 @@
  <attributes uuid="7f976e55-a567-4f32-88d1-35299f663c8e">
   <name>Latitude</name>
   <synonym>
-   <key>en</key>
-   <value>Latitude</value>
+   <key>tr</key>
+   <value>Enlem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Широта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Enlem</value>
+   <key>en</key>
+   <value>Latitude</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -202,16 +202,16 @@
  <attributes uuid="45d1792d-1adb-4a62-b597-4e838d20222f">
   <name>Longitude</name>
   <synonym>
-   <key>en</key>
-   <value>Longitude</value>
+   <key>tr</key>
+   <value>Boylam</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Долгота</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Boylam</value>
+   <key>en</key>
+   <value>Longitude</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -226,7 +226,7 @@
  <forms uuid="ae6e9f5c-9341-486a-a069-3d219e0a4786">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -234,7 +234,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

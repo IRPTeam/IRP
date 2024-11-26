@@ -452,16 +452,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of content</value>
+   <key>tr</key>
+   <value>İçerik grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа контента</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İçerik grubu</value>
+   <key>en</key>
+   <value>Group of content</value>
   </title>
   <extendedTooltip>
    <name>GroupContentExtendedTooltip</name>
@@ -535,16 +535,16 @@
  <attributes>
   <name>ContentSegment</name>
   <title>
-   <key>en</key>
-   <value>Content segment</value>
+   <key>tr</key>
+   <value>İçerik segmenti</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сегмент контента</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İçerik segmenti</value>
+   <key>en</key>
+   <value>Content segment</value>
   </title>
   <id>2</id>
   <valueType>
@@ -588,7 +588,7 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>Segment</value>
       </content>
       <content>
@@ -596,7 +596,7 @@ WHERE
        <value>Сегмент</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>Segment</value>
       </content>
      </localValue>
@@ -616,16 +616,16 @@ WHERE
  <formCommands>
   <name>Check</name>
   <title>
-   <key>en</key>
-   <value>Check</value>
+   <key>tr</key>
+   <value>Kontrol</value>
   </title>
   <title>
    <key>ru</key>
    <value>Проверка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
+   <key>en</key>
+   <value>Check</value>
   </title>
   <id>1</id>
   <use>
@@ -645,16 +645,16 @@ WHERE
  <formCommands>
   <name>LoadDataFromTable</name>
   <title>
-   <key>en</key>
-   <value>Load data from table</value>
+   <key>tr</key>
+   <value>Tablodan veriyi yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить данные из таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tablodan veriyi yükle</value>
+   <key>en</key>
+   <value>Load data from table</value>
   </title>
   <id>2</id>
   <use>

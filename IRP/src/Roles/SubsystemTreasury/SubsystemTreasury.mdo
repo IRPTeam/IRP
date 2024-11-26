@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="392a7ad5-b62e-47b0-b86e-d683312defc6">
  <name>SubsystemTreasury</name>
  <synonym>
-  <key>en</key>
-  <value>Subsystem Treasury</value>
+  <key>tr</key>
+  <value>Hazine alt sistemi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Подсистема Казначейства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Hazine alt sistemi</value>
+  <key>en</key>
+  <value>Subsystem Treasury</value>
  </synonym>
 </mdclass:Role>

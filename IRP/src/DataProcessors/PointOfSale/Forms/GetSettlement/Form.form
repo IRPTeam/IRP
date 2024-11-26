@@ -444,16 +444,16 @@
  <attributes>
   <name>HardwareList</name>
   <title>
-   <key>en</key>
-   <value>Hardware list</value>
+   <key>tr</key>
+   <value>Donanım listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список оборудования</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Donanım listesi</value>
+   <key>en</key>
+   <value>Hardware list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -468,16 +468,16 @@
   <columns>
    <name>Hardware</name>
    <title>
-    <key>en</key>
-    <value>Hardware</value>
+    <key>tr</key>
+    <value>Donanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Оборудование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Donanım</value>
+    <key>en</key>
+    <value>Hardware</value>
    </title>
    <id>3</id>
    <valueType>
@@ -494,16 +494,16 @@
  <attributes>
   <name>Workstation</name>
   <title>
-   <key>en</key>
-   <value>Workstation</value>
+   <key>tr</key>
+   <value>Çalışma yeri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Рабочее место</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışma yeri</value>
+   <key>en</key>
+   <value>Workstation</value>
   </title>
   <id>4</id>
   <valueType>
@@ -519,16 +519,16 @@
  <attributes>
   <name>FiscalPrinter</name>
   <title>
-   <key>en</key>
-   <value>Fiscal printer</value>
+   <key>tr</key>
+   <value>Yazar kasa</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фискальный принтер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazar kasa</value>
+   <key>en</key>
+   <value>Fiscal printer</value>
   </title>
   <id>5</id>
   <valueType>
@@ -544,16 +544,16 @@
  <formCommands>
   <name>GetSettlement</name>
   <title>
-   <key>en</key>
-   <value>Get settlement</value>
+   <key>tr</key>
+   <value>Hesaplamayı al</value>
   </title>
   <title>
    <key>ru</key>
    <value>Получить расчет</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesaplamayı al</value>
+   <key>en</key>
+   <value>Get settlement</value>
   </title>
   <id>1</id>
   <use>
@@ -569,16 +569,16 @@
  <formCommands>
   <name>PrintLastSettlement</name>
   <title>
-   <key>en</key>
-   <value>Print last settlement</value>
+   <key>tr</key>
+   <value>Son hesaplamayı yazdır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Распечатать последнюю сверку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Son hesaplamayı yazdır</value>
+   <key>en</key>
+   <value>Print last settlement</value>
   </title>
   <id>2</id>
   <use>

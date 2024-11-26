@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f440eb6a-9aed-4f1b-8680-17d5fd8102c7">
  <name>UniversalPrintServer</name>
  <synonym>
-  <key>en</key>
-  <value>Universal print server</value>
+  <key>tr</key>
+  <value>Evrensel çıktı server</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Универсальная печать сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrensel çıktı server</value>
+  <key>en</key>
+  <value>Universal print server</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

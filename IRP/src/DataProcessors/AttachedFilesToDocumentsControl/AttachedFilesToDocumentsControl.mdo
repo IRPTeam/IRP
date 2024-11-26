@@ -6,32 +6,32 @@
  </producedTypes>
  <name>AttachedFilesToDocumentsControl</name>
  <synonym>
-  <key>en</key>
-  <value>Attached files to documents control</value>
+  <key>tr</key>
+  <value>Evrek denetimi için eklenen dosyalar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Прикрепленные файлы для контроля документов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrek denetimi için eklenen dosyalar</value>
+  <key>en</key>
+  <value>Attached files to documents control</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.AttachedFilesToDocumentsControl.Form.Form</defaultForm>
  <attributes uuid="f3102003-a4fb-494a-bbe5-7569f482c9d3">
   <name>Period</name>
   <synonym>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Период</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </synonym>
   <type>
    <types>StandardPeriod</types>
@@ -46,30 +46,30 @@
   </producedTypes>
   <name>Documents</name>
   <synonym>
-   <key>en</key>
-   <value>Documents</value>
+   <key>tr</key>
+   <value>Evraklar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evraklar</value>
+   <key>en</key>
+   <value>Documents</value>
   </synonym>
   <attributes uuid="51e9aeee-a269-4f0d-956f-c07135d0d94a">
    <name>DocRef</name>
    <synonym>
-    <key>en</key>
-    <value>Doc ref</value>
+    <key>tr</key>
+    <value>Evrak ref</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ссылка документа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Evrak ref</value>
+    <key>en</key>
+    <value>Doc ref</value>
    </synonym>
    <type>
     <types>DocumentRef</types>
@@ -81,16 +81,16 @@
   <attributes uuid="41b27bf0-0792-498f-9276-0ffe0a0b270a">
    <name>Author</name>
    <synonym>
-    <key>en</key>
-    <value>Author</value>
+    <key>tr</key>
+    <value>Kayıt oluşturan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Автор</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kayıt oluşturan</value>
+    <key>en</key>
+    <value>Author</value>
    </synonym>
    <type>
     <types>CatalogRef.Users</types>
@@ -102,16 +102,16 @@
   <attributes uuid="e94255f6-6099-4404-b8c1-c9953800e2fa">
    <name>Branch</name>
    <synonym>
-    <key>en</key>
-    <value>Branch</value>
+    <key>tr</key>
+    <value>Şube</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Структурное подразделение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Şube</value>
+    <key>en</key>
+    <value>Branch</value>
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -125,16 +125,16 @@
   <attributes uuid="dc9eee78-c0db-40f9-844c-e928ab26302f">
    <name>DocDate</name>
    <synonym>
-    <key>en</key>
-    <value>Doc date</value>
+    <key>tr</key>
+    <value>Belge tarihi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Дата документа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Belge tarihi</value>
+    <key>en</key>
+    <value>Doc date</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -149,16 +149,16 @@
   <attributes uuid="df81b1ea-d841-44ce-b2e3-329da163721f">
    <name>DocNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Doc number</value>
+    <key>tr</key>
+    <value>Belge numarası</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Номер документа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Belge numarası</value>
+    <key>en</key>
+    <value>Doc number</value>
    </synonym>
    <type>
     <types>String</types>
@@ -175,7 +175,7 @@
   <attributes uuid="8768ad77-aa18-45de-a590-378e8abf8472">
    <name>ID</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>ID</value>
    </synonym>
    <synonym>
@@ -183,7 +183,7 @@
     <value>ID</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>ID</value>
    </synonym>
    <type>
@@ -196,16 +196,16 @@
   <attributes uuid="cbe9e7fa-0575-449a-a02a-2d497c0ab46d">
    <name>DocMetaName</name>
    <synonym>
-    <key>en</key>
-    <value>Doc meta name</value>
+    <key>tr</key>
+    <value>Evrak metadata tanımı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Наименование метаданных документа</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Evrak metadata tanımı</value>
+    <key>en</key>
+    <value>Doc meta name</value>
    </synonym>
    <type>
     <types>String</types>
@@ -222,16 +222,16 @@
   <attributes uuid="19edf0d7-efb2-4262-a9c6-3373e10ba124">
    <name>FileStorageVolume</name>
    <synonym>
-    <key>en</key>
-    <value>File storage volume</value>
+    <key>tr</key>
+    <value>Dosya depolama hacmi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Том хранения файлов</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya depolama hacmi</value>
+    <key>en</key>
+    <value>File storage volume</value>
    </synonym>
    <type>
     <types>CatalogRef.FileStorageVolumes</types>
@@ -243,16 +243,16 @@
   <attributes uuid="d8836df0-8db6-4207-83fa-a528b61b9c7d">
    <name>FillChecking</name>
    <synonym>
-    <key>en</key>
-    <value>Fill checking</value>
+    <key>tr</key>
+    <value>Kontrolü doldur</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Проверка заполнения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kontrolü doldur</value>
+    <key>en</key>
+    <value>Fill checking</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -267,16 +267,16 @@
   <attributes uuid="eac13bf4-d794-4eaa-872a-9e10142a9fe3">
    <name>FillCheckingStatus</name>
    <synonym>
-    <key>en</key>
-    <value>Fill checking status</value>
+    <key>tr</key>
+    <value>Kontrol statü doldur</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Статус проверки заполнения</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Kontrol statü doldur</value>
+    <key>en</key>
+    <value>Fill checking status</value>
    </synonym>
    <type>
     <types>EnumRef.DocAttachmentStatus</types>
@@ -288,16 +288,16 @@
   <attributes uuid="437c81c9-11b1-42d7-8f7b-f9f210e5edd2">
    <name>IsAuditLock</name>
    <synonym>
-    <key>en</key>
-    <value>Is audit lock</value>
+    <key>tr</key>
+    <value>Bu audit kilidi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Блокировка аудита</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Bu audit kilidi</value>
+    <key>en</key>
+    <value>Is audit lock</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -312,16 +312,16 @@
   <attributes uuid="2dc8aaa3-52e0-42cf-b7b7-1d185402e2c9">
    <name>Company</name>
    <synonym>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Организация</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </synonym>
    <type>
     <types>CatalogRef.Companies</types>
@@ -333,16 +333,16 @@
   <attributes uuid="7aa15aa2-70ac-4e3a-b44a-e96bf65158b7">
    <name>DocType</name>
    <synonym>
-    <key>en</key>
-    <value>Doc type</value>
+    <key>tr</key>
+    <value>Evrak tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Тип документа         </value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Evrak tipi</value>
+    <key>en</key>
+    <value>Doc type</value>
    </synonym>
    <type>
     <types>String</types>
@@ -364,30 +364,30 @@
   </producedTypes>
   <name>DocumentsAttachedFiles</name>
   <synonym>
-   <key>en</key>
-   <value>Documents attached files</value>
+   <key>tr</key>
+   <value>Evraklara eklenen dosyalar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Прикрепленные файлы документов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evraklara eklenen dosyalar</value>
+   <key>en</key>
+   <value>Documents attached files</value>
   </synonym>
   <attributes uuid="2f654665-5ac5-4ca8-bd31-d1250ff5d7dd">
    <name>FileTooltips</name>
    <synonym>
-    <key>en</key>
-    <value>File tooltips</value>
+    <key>tr</key>
+    <value>Dosya ipuçları</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Всплывающие подсказки файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya ipuçları</value>
+    <key>en</key>
+    <value>File tooltips</value>
    </synonym>
    <type>
     <types>String</types>
@@ -402,16 +402,16 @@
   <attributes uuid="f030a9f7-788b-49e7-bf04-4be4b2e51a91">
    <name>Required</name>
    <synonym>
-    <key>en</key>
-    <value>Required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обязательный</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Required</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -423,16 +423,16 @@
   <attributes uuid="dbab9b35-50e1-409d-b642-f9c185d02f8a">
    <name>FilePresentation</name>
    <synonym>
-    <key>en</key>
-    <value>File type</value>
+    <key>tr</key>
+    <value>Dosya tipi</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Тип файла             </value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya tipi</value>
+    <key>en</key>
+    <value>File type</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -444,16 +444,16 @@
   <attributes uuid="1f29a840-64a7-4259-87be-037affa8ee0d">
    <name>FileTooltip</name>
    <synonym>
-    <key>en</key>
-    <value>File tooltip</value>
+    <key>tr</key>
+    <value>Dosya ipucu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Всплывающая подсказка файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya ipucu</value>
+    <key>en</key>
+    <value>File tooltip</value>
    </synonym>
    <type>
     <types>String</types>
@@ -468,16 +468,16 @@
   <attributes uuid="830900d5-894c-4738-91aa-d63affefd826">
    <name>IsRequired</name>
    <synonym>
-    <key>en</key>
-    <value>Required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Обязательный</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Required</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -489,16 +489,16 @@
   <attributes uuid="f7474e6a-4463-4ffa-a723-673cba88ddab">
    <name>FileExtension</name>
    <synonym>
-    <key>en</key>
-    <value>File extension</value>
+    <key>tr</key>
+    <value>Dosya uzantısı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Расширение файла</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Dosya uzantısı</value>
+    <key>en</key>
+    <value>File extension</value>
    </synonym>
    <type>
     <types>String</types>
@@ -515,7 +515,7 @@
   <attributes uuid="2f02ef4a-c195-4360-a1a0-0c31de089553">
    <name>ID</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>ID</value>
    </synonym>
    <synonym>
@@ -523,7 +523,7 @@
     <value>ID</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>ID</value>
    </synonym>
    <type>
@@ -536,16 +536,16 @@
   <attributes uuid="5a72a22e-374b-437c-ab7f-8977c7318294">
    <name>NamingFormat</name>
    <synonym>
-    <key>en</key>
-    <value>Naming format</value>
+    <key>tr</key>
+    <value>İsimlendirme formatı</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Формат наименования</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>İsimlendirme formatı</value>
+    <key>en</key>
+    <value>Naming format</value>
    </synonym>
    <type>
     <types>String</types>
@@ -562,16 +562,16 @@
   <attributes uuid="1f34019f-9b4e-4815-80e8-aa76f5391030">
    <name>MaximumFileSize</name>
    <synonym>
-    <key>en</key>
-    <value>Maximum file size (Mb)</value>
+    <key>tr</key>
+    <value>Azami dosya boyutu (Mb)</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Максимальный размер файла (Мб)</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Azami dosya boyutu (Mb)</value>
+    <key>en</key>
+    <value>Maximum file size (Mb)</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -588,7 +588,7 @@
  <forms uuid="98be86aa-baca-4362-aad8-e72462019d68">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -596,7 +596,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -605,16 +605,16 @@
  <forms uuid="1b073fb3-07df-43c2-ba31-86ac78649a3a">
   <name>PictureViewer</name>
   <synonym>
-   <key>en</key>
-   <value>Picture viewer</value>
+   <key>tr</key>
+   <value>Resim önüzleme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Просмотрщик изображений</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Resim önüzleme</value>
+   <key>en</key>
+   <value>Picture viewer</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

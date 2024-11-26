@@ -11,47 +11,47 @@
  </producedTypes>
  <name>PartnerSegments</name>
  <synonym>
-  <key>en</key>
-  <value>Partner segments content</value>
+  <key>tr</key>
+  <value>Cari hesap segment içerikleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Сегменты партнеров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Cari hesap segment içerikleri</value>
+  <key>en</key>
+  <value>Partner segments content</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Partner segment content</value>
+  <key>tr</key>
+  <value>Cari hesap segment içeriği</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Сегмент партнеров</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Cari hesap segment içeriği</value>
+  <key>en</key>
+  <value>Partner segment content</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Partner segments content</value>
+  <key>tr</key>
+  <value>Cari hesap segment içerikleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Сегменты партнеров</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Cari hesap segment içerikleri</value>
+  <key>en</key>
+  <value>Partner segments content</value>
  </listPresentation>
  <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
   <name>Segment</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Segment</value>
   </synonym>
   <synonym>
@@ -59,7 +59,7 @@
    <value>Сегмент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Segment</value>
   </synonym>
   <type>
@@ -76,16 +76,16 @@
  <dimensions uuid="7cde4128-1ef8-44a7-81d1-de50e58abb58">
   <name>Partner</name>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

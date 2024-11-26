@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="96412010-985a-413e-a010-697461c2c54f">
  <name>Payment_CancelPaymentByPaymentCard</name>
  <synonym>
-  <key>en</key>
-  <value>Payment cancel payment by payment card</value>
+  <key>tr</key>
+  <value>Ödeme kartıyla ödeme iptali</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Оптала отменить оплату по платежной карте</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme kartıyla ödeme iptali</value>
+  <key>en</key>
+  <value>Payment cancel payment by payment card</value>
  </synonym>
 </mdclass:CommonPicture>

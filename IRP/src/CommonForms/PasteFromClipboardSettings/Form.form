@@ -45,16 +45,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Exp. count</value>
+     <key>tr</key>
+     <value>Stok adedi</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>По учету</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Stok adedi</value>
+     <key>en</key>
+     <value>Exp. count</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ExpCount</value>
@@ -62,16 +62,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Phys. count</value>
+     <key>tr</key>
+     <value>Sayım adedi</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Фактическое количество</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Sayım adedi</value>
+     <key>en</key>
+     <value>Phys. count</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>PhysCount</value>
@@ -145,16 +145,16 @@
  <attributes>
   <name>PasteQuantityAs</name>
   <title>
-   <key>en</key>
-   <value>Paste quantity as</value>
+   <key>tr</key>
+   <value>Miktarı şu şekilde yapıştır:</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вставить количество как...</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktarı şu şekilde yapıştır:</value>
+   <key>en</key>
+   <value>Paste quantity as</value>
   </title>
   <id>1</id>
   <valueType>
@@ -171,16 +171,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <id>1</id>
   <use>
@@ -196,16 +196,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>

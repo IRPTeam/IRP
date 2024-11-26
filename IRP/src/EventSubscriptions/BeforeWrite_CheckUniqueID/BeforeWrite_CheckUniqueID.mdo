@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1c8c7037-737a-491e-9234-ff2c854da18e">
  <name>BeforeWrite_CheckUniqueID</name>
  <synonym>
-  <key>en</key>
-  <value>Before write check unique ID</value>
+  <key>tr</key>
+  <value>Kaydetmeden önce Unique ID kontrolü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Перез записью проверить уникальный ID</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kaydetmeden önce Unique ID kontrolü</value>
+  <key>en</key>
+  <value>Before write check unique ID</value>
  </synonym>
  <source>
   <types>DefinedType.UseUniqueID</types>

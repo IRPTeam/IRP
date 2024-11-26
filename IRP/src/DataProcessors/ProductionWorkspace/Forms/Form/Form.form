@@ -56,16 +56,16 @@
     <typeDomainEnabled>true</typeDomainEnabled>
     <textEdit>true</textEdit>
     <inputHint>
-     <key>en</key>
-     <value>Item</value>
+     <key>tr</key>
+     <value>Malzeme</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Номенклатура</value>
     </inputHint>
     <inputHint>
-     <key>tr</key>
-     <value>Malzeme</value>
+     <key>en</key>
+     <value>Item</value>
     </inputHint>
    </extInfo>
   </items>
@@ -130,16 +130,16 @@
      </datapath>
     </choiceParameterLinks>
     <inputHint>
-     <key>en</key>
-     <value>Item key</value>
+     <key>tr</key>
+     <value>Varyant</value>
     </inputHint>
     <inputHint>
      <key>ru</key>
      <value>Характеристика</value>
     </inputHint>
     <inputHint>
-     <key>tr</key>
-     <value>Varyant</value>
+     <key>en</key>
+     <value>Item key</value>
     </inputHint>
    </extInfo>
   </items>
@@ -267,16 +267,16 @@
       </datapath>
      </choiceParameterLinks>
      <inputHint>
-      <key>en</key>
-      <value>Unit</value>
+      <key>tr</key>
+      <value>Birim</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Ед. изм.</value>
      </inputHint>
      <inputHint>
-      <key>tr</key>
-      <value>Birim</value>
+      <key>en</key>
+      <value>Unit</value>
      </inputHint>
     </extInfo>
    </items>
@@ -434,16 +434,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Planning group1</value>
+      <key>tr</key>
+      <value>Planlama grubu 1</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа планирования 1</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Planlama grubu 1</value>
+      <key>en</key>
+      <value>Planning group1</value>
      </title>
      <extendedTooltip>
       <name>PlanningGroupExtendedTooltip</name>
@@ -768,16 +768,16 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>en</key>
-      <value>Group production plus inventory transfer</value>
+      <key>tr</key>
+      <value>Grup üretim ve depo transfer fişi</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группа производство плюс перемещение товаров</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Grup üretim ve depo transfer fişi</value>
+      <key>en</key>
+      <value>Group production plus inventory transfer</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupProductionPlusInventoryTransferExtendedTooltip</name>
@@ -845,16 +845,16 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>en</key>
-      <value>Group inventory transfer</value>
+      <key>tr</key>
+      <value>Grup depo transfer fişi</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группа перемещение товаров</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Grup depo transfer fişi</value>
+      <key>en</key>
+      <value>Group inventory transfer</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupInventoryTransferExtendedTooltip</name>
@@ -922,16 +922,16 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>en</key>
-      <value>Group productions</value>
+      <key>tr</key>
+      <value>Grup üretim</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группа производство</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Grup üretim</value>
+      <key>en</key>
+      <value>Group productions</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupProductionsExtendedTooltip</name>
@@ -963,16 +963,16 @@
       <common>true</common>
      </userVisible>
      <toolTip>
-      <key>en</key>
-      <value>Group documents</value>
+      <key>tr</key>
+      <value>Grup evraklar</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Группа документы</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Grup evraklar</value>
+      <key>en</key>
+      <value>Group documents</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupDocumentsExtendedTooltip</name>
@@ -1001,28 +1001,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Button pages</value>
+     <key>tr</key>
+     <value>Butonlar sayfası</value>
     </title>
     <title>
      <key>ru</key>
      <value>Страницы кнопок</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Butonlar sayfası</value>
-    </title>
-    <toolTip>
      <key>en</key>
      <value>Button pages</value>
+    </title>
+    <toolTip>
+     <key>tr</key>
+     <value>Butonlar sayfası</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Страницы кнопок</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
-     <value>Butonlar sayfası</value>
+     <key>en</key>
+     <value>Button pages</value>
     </toolTip>
     <extendedTooltip>
      <name>ButtonPagesExtendedTooltip</name>
@@ -1206,16 +1206,16 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1231,16 +1231,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1256,16 +1256,16 @@
  <attributes>
   <name>Quantity</name>
   <title>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1281,16 +1281,16 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>en</key>
-   <value>Unit</value>
+   <key>tr</key>
+   <value>Birim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ед. изм.</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
+   <key>en</key>
+   <value>Unit</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1306,16 +1306,16 @@
  <attributes>
   <name>Planning</name>
   <title>
-   <key>en</key>
-   <value>Planning</value>
+   <key>tr</key>
+   <value>Planlama</value>
   </title>
   <title>
    <key>ru</key>
    <value>Планирование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Planlama</value>
+   <key>en</key>
+   <value>Planning</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1330,16 +1330,16 @@
   <columns>
    <name>PlanningPeriod</name>
    <title>
-    <key>en</key>
-    <value>Planning period</value>
+    <key>tr</key>
+    <value>Planlama dönemi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период планирования</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi</value>
+    <key>en</key>
+    <value>Planning period</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1355,16 +1355,16 @@
   <columns>
    <name>LeftToProduce</name>
    <title>
-    <key>en</key>
-    <value>Left to produce</value>
+    <key>tr</key>
+    <value>Üretilecek</value>
    </title>
    <title>
     <key>ru</key>
     <value>Осталось произвести</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretilecek</value>
+    <key>en</key>
+    <value>Left to produce</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1380,16 +1380,16 @@
   <columns>
    <name>ProductionPlanning</name>
    <title>
-    <key>en</key>
-    <value>Production planning</value>
+    <key>tr</key>
+    <value>Üretim planlama fişi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Планирование производства</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretim planlama fişi</value>
+    <key>en</key>
+    <value>Production planning</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1405,16 +1405,16 @@
   <columns>
    <name>BusinessUnit</name>
    <title>
-    <key>en</key>
-    <value>Business unit</value>
+    <key>tr</key>
+    <value>Departman</value>
    </title>
    <title>
     <key>ru</key>
     <value>Подразделение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Departman</value>
+    <key>en</key>
+    <value>Business unit</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1430,16 +1430,16 @@
   <columns>
    <name>Company</name>
    <title>
-    <key>en</key>
-    <value>Company</value>
+    <key>tr</key>
+    <value>Şirket</value>
    </title>
    <title>
     <key>ru</key>
     <value>Организация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şirket</value>
+    <key>en</key>
+    <value>Company</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1455,16 +1455,16 @@
   <columns>
    <name>ProductionType</name>
    <title>
-    <key>en</key>
-    <value>Production type</value>
+    <key>tr</key>
+    <value>Üretim tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид производства</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretim tipi</value>
+    <key>en</key>
+    <value>Production type</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1480,16 +1480,16 @@
   <columns>
    <name>StoreProduction</name>
    <title>
-    <key>en</key>
-    <value>Store production</value>
+    <key>tr</key>
+    <value>Hazır ürün deposu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Склад готовой продукции</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hazır ürün deposu</value>
+    <key>en</key>
+    <value>Store production</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1505,16 +1505,16 @@
   <columns>
    <name>BillOfMaterials</name>
    <title>
-    <key>en</key>
-    <value>Bill of materials</value>
+    <key>tr</key>
+    <value>Üretim reçetesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Спецификация (Производство)</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretim reçetesi</value>
+    <key>en</key>
+    <value>Bill of materials</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1530,16 +1530,16 @@
   <columns>
    <name>OutputID</name>
    <title>
-    <key>en</key>
-    <value>Output ID</value>
+    <key>tr</key>
+    <value>Çıkış ID</value>
    </title>
    <title>
     <key>ru</key>
     <value>ID вывода</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Çıkış ID</value>
+    <key>en</key>
+    <value>Output ID</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1558,7 +1558,7 @@
   <columns>
    <name>UniqueID</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Unique ID</value>
    </title>
    <title>
@@ -1566,7 +1566,7 @@
     <value>Уникальный ID</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Unique ID</value>
    </title>
    <id>17</id>
@@ -1586,16 +1586,16 @@
   <columns>
    <name>TotalQuantity</name>
    <title>
-    <key>en</key>
-    <value>Total quantity</value>
+    <key>tr</key>
+    <value>Toplam miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Итоговое количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Toplam miktar</value>
+    <key>en</key>
+    <value>Total quantity</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1611,16 +1611,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>20</id>
    <valueType>
@@ -1637,16 +1637,16 @@
  <attributes>
   <name>PlanningPresentation</name>
   <title>
-   <key>en</key>
-   <value>Planning presentation</value>
+   <key>tr</key>
+   <value>Planlama sunumu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Представление планирования</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Planlama sunumu</value>
+   <key>en</key>
+   <value>Planning presentation</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1661,16 +1661,16 @@
   <columns>
    <name>PlanningPeriod</name>
    <title>
-    <key>en</key>
-    <value>Planning period</value>
+    <key>tr</key>
+    <value>Planlama dönemi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период планирования</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Planlama dönemi</value>
+    <key>en</key>
+    <value>Planning period</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1686,16 +1686,16 @@
   <columns>
    <name>LeftToProduce</name>
    <title>
-    <key>en</key>
-    <value>Left to produce</value>
+    <key>tr</key>
+    <value>Üretilecek</value>
    </title>
    <title>
     <key>ru</key>
     <value>Осталось произвести</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretilecek</value>
+    <key>en</key>
+    <value>Left to produce</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1711,16 +1711,16 @@
   <columns>
    <name>ProductionPlanning</name>
    <title>
-    <key>en</key>
-    <value>Production planning</value>
+    <key>tr</key>
+    <value>Üretim planlama fişi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Планирование производства</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üretim planlama fişi</value>
+    <key>en</key>
+    <value>Production planning</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1736,16 +1736,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1762,16 +1762,16 @@
  <attributes>
   <name>CreatedAttributes</name>
   <title>
-   <key>en</key>
-   <value>Created attributes</value>
+   <key>tr</key>
+   <value>Oluşturulan öznitelikler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Созданные реквизиты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Oluşturulan öznitelikler</value>
+   <key>en</key>
+   <value>Created attributes</value>
   </title>
   <id>25</id>
   <valueType>
@@ -1807,16 +1807,16 @@
  <formCommands>
   <name>InputBarcode</name>
   <title>
-   <key>en</key>
-   <value>Input barcode</value>
+   <key>tr</key>
+   <value>Barkod giriniz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ввести штрихкод</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Barkod giriniz</value>
+   <key>en</key>
+   <value>Input barcode</value>
   </title>
   <id>2</id>
   <use>
@@ -1835,16 +1835,16 @@
  <formCommands>
   <name>Productions</name>
   <title>
-   <key>en</key>
-   <value>PR</value>
+   <key>tr</key>
+   <value>Alım irsaliyesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Производство</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alım irsaliyesi</value>
+   <key>en</key>
+   <value>PR</value>
   </title>
   <id>4</id>
   <use>
@@ -1860,16 +1860,16 @@
  <formCommands>
   <name>InventoryTransfer</name>
   <title>
-   <key>en</key>
-   <value>IT</value>
+   <key>tr</key>
+   <value>Depo transfer fişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перемещение товаров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Depo transfer fişi</value>
+   <key>en</key>
+   <value>IT</value>
   </title>
   <id>5</id>
   <use>
@@ -1885,29 +1885,29 @@
  <formCommands>
   <name>ProductionPlusInventoryTransfer</name>
   <title>
-   <key>en</key>
-   <value>PR+IT</value>
+   <key>tr</key>
+   <value>Üretim ve depo transfer fişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Производство + Перемещение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Üretim ve depo transfer fişi</value>
+   <key>en</key>
+   <value>PR+IT</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>en</key>
-   <value>Production plus inventory transfer</value>
+   <key>tr</key>
+   <value>Üretim ve depo transfer fişi</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Производство плюс перемещение</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Üretim ve depo transfer fişi</value>
+   <key>en</key>
+   <value>Production plus inventory transfer</value>
   </toolTip>
   <use>
    <common>true</common>

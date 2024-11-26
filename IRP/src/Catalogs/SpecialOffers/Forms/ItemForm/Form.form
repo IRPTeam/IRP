@@ -190,16 +190,16 @@
    <name>StartOf</name>
    <id>31</id>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -305,16 +305,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main settings</value>
+   <key>tr</key>
+   <value>Genel ayarlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Genel ayarlar</value>
+   <key>en</key>
+   <value>Main settings</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -402,16 +402,16 @@
    <name>DocumentType</name>
    <id>50</id>
    <title>
-    <key>en</key>
-    <value>Document type</value>
+    <key>tr</key>
+    <value>Evrak tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak tipi</value>
+    <key>en</key>
+    <value>Document type</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -516,16 +516,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Additional data</value>
+   <key>tr</key>
+   <value>Ek veri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительный данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek veri</value>
+   <key>en</key>
+   <value>Additional data</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -655,7 +655,7 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Manual</value>
   </title>
   <title>
@@ -663,7 +663,7 @@
    <value>Вручную</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Manual</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
@@ -1037,16 +1037,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Service</value>
+   <key>tr</key>
+   <value>Hizmet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отчеты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hizmet</value>
+   <key>en</key>
+   <value>Service</value>
   </title>
   <extendedTooltip>
    <name>GroupServiceExtendedTooltip</name>

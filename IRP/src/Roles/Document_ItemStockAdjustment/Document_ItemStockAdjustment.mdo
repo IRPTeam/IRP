@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2582b0e6-20c3-4b61-8605-6f0a4a68daa8">
  <name>Document_ItemStockAdjustment</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Item stock adjustment"</value>
+  <key>tr</key>
+  <value>Belge "Ürün stok düzenlemesi"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Корректировка запасов товара"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Ürün stok düzenlemesi"</value>
+  <key>en</key>
+  <value>Document "Item stock adjustment"</value>
  </synonym>
 </mdclass:Role>

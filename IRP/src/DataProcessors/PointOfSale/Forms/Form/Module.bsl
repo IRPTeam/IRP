@@ -775,7 +775,7 @@ Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
 EndProcedure
 
 &AtClient
-Procedure ItemListControlCodeStringStateClick() Export
+Procedure ItemListControlCodeStringStateClick(SerialLotNumberForCheck = Undefined) Export
 
 	CurrentData = Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
@@ -786,11 +786,21 @@ Procedure ItemListControlCodeStringStateClick() Export
 		Return;
 	EndIf;
 
+	// for checking we take the latest series
+	If SerialLotNumberForCheck = Undefined Then
+		SerialLotNumberForCheck = PredefinedValue("Catalog.SerialLotNumbers.EmptyRef");
+		SerialNumbers = Object.SerialLotNumbers.FindRows(New Structure("Key", CurrentData.Key));
+		If SerialNumbers.Count() Then
+			SerialLotNumberForCheck = SerialNumbers[SerialNumbers.UBound()].SerialLotNumber; 
+		EndIf;
+	EndIf;
+
 	Params = New Structure;
 	Params.Insert("Hardware", CommonFunctionsServer.GetRefAttribute(ConsolidatedRetailSales, "FiscalPrinter"));
 	Params.Insert("RowKey", CurrentData.Key);
 	Params.Insert("Item", CurrentData.Item);
 	Params.Insert("ItemKey", CurrentData.ItemKey);
+	Params.Insert("SerialLotNumber", SerialLotNumberForCheck);
 	//@skip-check unknown-method-property
 	Params.Insert("LineNumber", CurrentData.LineNumber);
 	Params.Insert("isReturn", isReturn);
@@ -813,7 +823,8 @@ Procedure ItemListControlCodeStringStateOpeningEnd(Result, AddInfo) Export
 	ControlCodeStringsClient.ClearAllByRow(Object, Array);
 	If Result.WithoutScan Then
 		CurrentRow = Object.ItemList.FindByID(Items.ItemList.CurrentRow);
-		CurrentRow.isControlCodeString = False;
+		ControlCodeStringsRows = Object.ControlCodeStrings.FindRows(New Structure("Key", CurrentRow.Key));
+		CurrentRow.isControlCodeString = (ControlCodeStringsRows.Count() > 0);
 	Else
 		For Each Row In Result.Scaned Do
 			FillPropertyValues(Object.ControlCodeStrings.Add(), Row);
@@ -2005,8 +2016,11 @@ Function CreateReturnOnBase(PaymentData, StatusType)
 		NewDoc.StatusType = StatusType;
 		NewDoc.Fill(FillingValues);
 		NewDoc.ConsolidatedRetailSales = ThisObject.Object.ConsolidatedRetailSales;
+		
+		DPPointOfSaleServer.BeforePostingDocument(NewDoc);
 		NewDoc.Write(DocumentWriteMode.Posting);
 		DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
+		
 		DocRefs.Add(NewDoc.Ref);
 	EndDo;
 	
@@ -2048,12 +2062,12 @@ Function CreateReturnWithoutBase(PaymentData, StatusType)
 	NewDoc.StatusType = StatusType;
 	NewDoc.Fill(FillingData);
 	SourceOfOriginClientServer.UpdateSourceOfOriginsQuantity(NewDoc);
+	
+	DPPointOfSaleServer.BeforePostingDocument(NewDoc);	
 	NewDoc.Write(DocumentWriteMode.Posting);
+	DPPointOfSaleServer.AfterPostingDocument(NewDoc.Ref);
 
-	DocRef = NewDoc.Ref;
-	DPPointOfSaleServer.AfterPostingDocument(DocRef);
-
-	Return DocRef;
+	Return NewDoc.Ref;
 
 EndFunction
 
@@ -2323,7 +2337,7 @@ EndProcedure
 Procedure PostponeCurrentReceiptAtServer(WithReserve)
 	
 	If Not ThisObject.isReturn Then
-		ObjectValue = FormAttributeToValue("Object");
+		ObjectValue = FormAttributeToValue("Object"); // DocumentObject.RetailSalesReceipt
 		ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 		ObjectValue.Workstation = Workstation;
 		
@@ -2332,6 +2346,7 @@ Procedure PostponeCurrentReceiptAtServer(WithReserve)
 		Else
 			ObjectValue.StatusType = Enums.RetailReceiptStatusTypes.Postponed;
 		EndIf;
+		
 		DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 	
 		ObjectValue.Write(DocumentWriteMode.Posting);

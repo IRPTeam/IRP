@@ -7,77 +7,77 @@
  </producedTypes>
  <name>InterfaceGroupChildFormItemsGroups</name>
  <synonym>
-  <key>en</key>
-  <value>Interface group child form items groups</value>
+  <key>tr</key>
+  <value>Arayüz grubu alt form malzeme grupları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Дочерняя группа групп элементов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Arayüz grubu alt form malzeme grupları</value>
+  <key>en</key>
+  <value>Interface group child form items groups</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="0569148f-c7a2-43fd-a156-4acf8c1bf8fc">
   <name>Vertical</name>
   <synonym>
-   <key>en</key>
-   <value>Vertical</value>
+   <key>tr</key>
+   <value>Dikey</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вертикально</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dikey</value>
+   <key>en</key>
+   <value>Vertical</value>
   </synonym>
  </enumValues>
  <enumValues uuid="6afa1611-a6c8-4578-895c-d982c1e9aa3e">
   <name>Horizontal</name>
   <synonym>
-   <key>en</key>
-   <value>Horizontal</value>
+   <key>tr</key>
+   <value>Yatay</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Горизонтально</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yatay</value>
+   <key>en</key>
+   <value>Horizontal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="ee23d582-4b36-4c9c-947e-849b897c5397">
   <name>AlwaysHorizontal</name>
   <synonym>
-   <key>en</key>
-   <value>Always horizontal</value>
+   <key>tr</key>
+   <value>Her zaman yatay</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Всегда горизонтальная</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Her zaman yatay</value>
+   <key>en</key>
+   <value>Always horizontal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="69d2b6a6-9601-4ff9-9b2e-109ded4f41ff">
   <name>HorizontalIfPossible</name>
   <synonym>
-   <key>en</key>
-   <value>Horizontal if possible</value>
+   <key>tr</key>
+   <value>Mümkünse yatay</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Горизонтальная если возможно</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Mümkünse yatay</value>
+   <key>en</key>
+   <value>Horizontal if possible</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

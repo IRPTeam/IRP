@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
   <id>1</id>
@@ -9,16 +9,8 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
-  </title>
-  <title>
    <key>ru</key>
-   <value>Группа пользовательских настроек</value>
-  </title>
-  <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -61,8 +53,58 @@
   <defaultItem>true</defaultItem>
   <titleLocation>None</titleLocation>
   <items xsi:type="form:FormField">
+   <name>Code</name>
+   <id>25</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <dataPath xsi:type="form:DataPath">
+    <segments>List.Code</segments>
+   </dataPath>
+   <extendedTooltip>
+    <name>CodeExtendedTooltip</name>
+    <id>27</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <type>Label</type>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <extInfo xsi:type="form:LabelDecorationExtInfo">
+     <horizontalAlign>Left</horizontalAlign>
+    </extInfo>
+   </extendedTooltip>
+   <contextMenu>
+    <name>CodeContextMenu</name>
+    <id>26</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <autoFill>true</autoFill>
+   </contextMenu>
+   <type>InputField</type>
+   <editMode>Enter</editMode>
+   <showInHeader>true</showInHeader>
+   <headerHorizontalAlign>Left</headerHorizontalAlign>
+   <showInFooter>true</showInFooter>
+   <extInfo xsi:type="form:InputFieldExtInfo">
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
+   </extInfo>
+  </items>
+  <items xsi:type="form:FormField">
    <name>Description</name>
-   <id>19</id>
+   <id>28</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible>
@@ -73,7 +115,7 @@
    </dataPath>
    <extendedTooltip>
     <name>DescriptionExtendedTooltip</name>
-    <id>21</id>
+    <id>30</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -88,53 +130,7 @@
    </extendedTooltip>
    <contextMenu>
     <name>DescriptionContextMenu</name>
-    <id>20</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>LabelField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:LabelFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
-   <name>City</name>
-   <id>22</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.City</segments>
-   </dataPath>
-   <extendedTooltip>
-    <name>CityExtendedTooltip</name>
-    <id>24</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>CityContextMenu</name>
-    <id>23</id>
+    <id>29</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -158,17 +154,16 @@
   </items>
   <items xsi:type="form:FormField">
    <name>Ref</name>
-   <id>16</id>
+   <id>31</id>
    <visible>true</visible>
    <enabled>true</enabled>
    <userVisible/>
    <dataPath xsi:type="form:DataPath">
     <segments>List.Ref</segments>
    </dataPath>
-   <defaultItem>true</defaultItem>
    <extendedTooltip>
     <name>RefExtendedTooltip</name>
-    <id>18</id>
+    <id>33</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -183,7 +178,7 @@
    </extendedTooltip>
    <contextMenu>
     <name>RefContextMenu</name>
-    <id>17</id>
+    <id>32</id>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -191,14 +186,18 @@
     </userVisible>
     <autoFill>true</autoFill>
    </contextMenu>
-   <type>LabelField</type>
+   <type>InputField</type>
    <editMode>Enter</editMode>
    <showInHeader>true</showInHeader>
    <headerHorizontalAlign>Left</headerHorizontalAlign>
    <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:LabelFieldExtInfo">
+   <extInfo xsi:type="form:InputFieldExtInfo">
     <autoMaxWidth>true</autoMaxWidth>
     <autoMaxHeight>true</autoMaxHeight>
+    <wrap>true</wrap>
+    <chooseType>true</chooseType>
+    <typeDomainEnabled>true</typeDomainEnabled>
+    <textEdit>true</textEdit>
    </extInfo>
   </items>
   <commandBarLocation>None</commandBarLocation>
@@ -353,13 +352,11 @@
    </userVisible>
    <autoFill>true</autoFill>
   </contextMenu>
-  <representation>HierarchicalList</representation>
   <changeRowSet>true</changeRowSet>
   <changeRowOrder>true</changeRowOrder>
   <autoMaxWidth>true</autoMaxWidth>
   <autoMaxHeight>true</autoMaxHeight>
   <autoMaxRowsCount>true</autoMaxRowsCount>
-  <choiceMode>true</choiceMode>
   <selectionMode>MultiRow</selectionMode>
   <header>true</header>
   <headerHeight>1</headerHeight>
@@ -403,11 +400,6 @@
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>
- <handlers>
-  <event>OnCreateAtServer</event>
-  <name>OnCreateAtServer</name>
- </handlers>
- <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
@@ -429,35 +421,16 @@
   <edit>
    <common>true</common>
   </edit>
-  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
-   <segments>List.Ref</segments>
-  </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
-   <queryText>SELECT 
-       Table.Ref, 
-       Table.DeletionMark, 
-       Table.Parent, 
-       Table.IsFolder, 
-       Table.Code, 
-       Table.Description, 
-       Table.City, 
-       Table.Predefined, 
-       Table.PredefinedDataName
- FROM 
-       Catalog.Locations
- AS 
-       Table
-       
-WHERE 
-CASE WHEN &amp;CityIsSet AND Table.IsFolder THEN 
-	Table.City = &amp;City
-ELSE
-	TRUE
-END
-</queryText>
-   <mainTable>Catalog.Locations</mainTable>
-   <dynamicDataRead>true</dynamicDataRead>
+   <queryText>SELECT
+	Table.Ref,
+	Table.DeletionMark,
+	Table.Code,
+	Table.Description_en AS Description
+FROM
+	Catalog.TaxExemptionReasons AS Table</queryText>
+   <mainTable>Catalog.TaxExemptionReasons</mainTable>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
@@ -471,14 +444,6 @@ END
     <field>DeletionMark</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Parent</dataPath>
-    <field>Parent</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>IsFolder</dataPath>
-    <field>IsFolder</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Code</dataPath>
     <field>Code</field>
    </fields>
@@ -487,8 +452,16 @@ END
     <field>Description</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>City</dataPath>
-    <field>City</field>
+    <dataPath>Country</dataPath>
+    <field>Country</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxRate</dataPath>
+    <field>TaxRate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Predefined</dataPath>
@@ -498,58 +471,26 @@ END
     <dataPath>PredefinedDataName</dataPath>
     <field>PredefinedDataName</field>
    </fields>
-   <parameters>
-    <name>CityIsSet</name>
-    <title>
-     <localValue>
-      <content>
-       <key>en</key>
-       <value>City is set</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>City is set</value>
-      </content>
-      <content>
-       <key>tr</key>
-       <value>Şehir belirlendi</value>
-      </content>
-     </localValue>
-    </title>
-    <valueType>
-     <types>Boolean</types>
-    </valueType>
-    <values xsi:type="core:BooleanValue"/>
-    <useRestriction>true</useRestriction>
-   </parameters>
-   <parameters>
-    <name>City</name>
-    <title>
-     <localValue>
-      <content>
-       <key>en</key>
-       <value>City</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Город</value>
-      </content>
-      <content>
-       <key>tr</key>
-       <value>İl</value>
-      </content>
-     </localValue>
-    </title>
-    <valueType>
-     <types>CatalogRef.Cities</types>
-    </valueType>
-    <values xsi:type="core_1:DesignTimeValueValue">
-     <value>
-      <value>Catalog.Cities.EmptyRef</value>
-     </value>
-    </values>
-    <useRestriction>true</useRestriction>
-   </parameters>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_en</dataPath>
+    <field>Description_en</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_hash</dataPath>
+    <field>Description_hash</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_ru</dataPath>
+    <field>Description_ru</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_tr</dataPath>
+    <field>Description_tr</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description1</dataPath>
+    <field>Description1</field>
+   </fields>
   </extInfo>
  </attributes>
  <commandInterface>

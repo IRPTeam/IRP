@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83321f1b-59a6-4733-aae3-a115c50c3946">
  <name>UsersEventClient</name>
  <synonym>
-  <key>en</key>
-  <value>Users event client</value>
+  <key>tr</key>
+  <value>Kullanıcı olayları client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Пользовательские события клиент</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı olayları client</value>
+  <key>en</key>
+  <value>Users event client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

@@ -7,47 +7,47 @@
  </producedTypes>
  <name>PriceAssignment</name>
  <synonym>
-  <key>en</key>
-  <value>Price assignment</value>
+  <key>tr</key>
+  <value>Uygulama tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Назначение цен</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Uygulama tipi</value>
+  <key>en</key>
+  <value>Price assignment</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="084abe0b-9b8a-4dbb-a3e7-f98caf29a9c0">
   <name>Customer</name>
   <synonym>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Клиент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </synonym>
  </enumValues>
  <enumValues uuid="512ebf93-30eb-4023-b6b5-59287b019725">
   <name>Vendor</name>
   <synonym>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поставщик</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

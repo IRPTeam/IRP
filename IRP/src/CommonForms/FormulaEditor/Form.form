@@ -543,16 +543,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -718,16 +718,16 @@
  <attributes>
   <name>Formula</name>
   <title>
-   <key>en</key>
-   <value>Formula</value>
+   <key>tr</key>
+   <value>Formül        </value>
   </title>
   <title>
    <key>ru</key>
    <value>Формула</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Formül        </value>
+   <key>en</key>
+   <value>Formula</value>
   </title>
   <id>1</id>
   <valueType>
@@ -744,16 +744,16 @@
  <attributes>
   <name>PropertySet</name>
   <title>
-   <key>en</key>
-   <value>Property set</value>
+   <key>tr</key>
+   <value>Özellik seti  </value>
   </title>
   <title>
    <key>ru</key>
    <value>Набор свойств</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Özellik seti  </value>
+   <key>en</key>
+   <value>Property set</value>
   </title>
   <id>3</id>
   <valueType>
@@ -769,16 +769,16 @@
  <attributes>
   <name>SettingsComposer</name>
   <title>
-   <key>en</key>
-   <value>Settings composer</value>
+   <key>tr</key>
+   <value>Ayarlar sihirbazı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Компоновщик настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar sihirbazı</value>
+   <key>en</key>
+   <value>Settings composer</value>
   </title>
   <id>4</id>
   <valueType>
@@ -794,16 +794,16 @@
  <attributes>
   <name>Operators</name>
   <title>
-   <key>en</key>
-   <value>Operators</value>
+   <key>tr</key>
+   <value>Operatörler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Операторы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Operatörler</value>
+   <key>en</key>
+   <value>Operators</value>
   </title>
   <id>5</id>
   <valueType>
@@ -818,16 +818,16 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Description</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <id>6</id>
    <valueType>
@@ -844,16 +844,16 @@
   <columns>
    <name>Operator</name>
    <title>
-    <key>en</key>
-    <value>Operator</value>
+    <key>tr</key>
+    <value>Operatör      </value>
    </title>
    <title>
     <key>ru</key>
     <value>Оператор  </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Operatör      </value>
+    <key>en</key>
+    <value>Operator</value>
    </title>
    <id>7</id>
    <valueType>
@@ -870,16 +870,16 @@
   <columns>
    <name>Shift</name>
    <title>
-    <key>en</key>
-    <value>Shift</value>
+    <key>tr</key>
+    <value>Vardiya       </value>
    </title>
    <title>
     <key>ru</key>
     <value>Смена     </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vardiya       </value>
+    <key>en</key>
+    <value>Shift</value>
    </title>
    <id>8</id>
    <valueType>
@@ -899,16 +899,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -924,16 +924,16 @@
  <formCommands>
   <name>Check</name>
   <title>
-   <key>en</key>
-   <value>Check</value>
+   <key>tr</key>
+   <value>Kontrol</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol</value>
+   <key>en</key>
+   <value>Check</value>
   </title>
   <id>2</id>
   <use>

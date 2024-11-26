@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="97aa4faa-3220-41fa-90b9-fe16ac55a668">
  <name>Accruals</name>
  <synonym>
-  <key>en</key>
-  <value>Accruals</value>
+  <key>tr</key>
+  <value>Tahakkuklar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Начисления</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tahakkuklar</value>
+  <key>en</key>
+  <value>Accruals</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

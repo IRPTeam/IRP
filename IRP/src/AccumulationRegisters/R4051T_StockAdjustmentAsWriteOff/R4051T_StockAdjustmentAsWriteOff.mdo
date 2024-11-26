@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R4051T_StockAdjustmentAsWriteOff</name>
  <synonym>
-  <key>en</key>
-  <value>R4051 Stock adjustment (Write off)</value>
+  <key>tr</key>
+  <value>R4051 Stok sayım çıkışları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R4051 Корректировки товаров организации (списание)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R4051 Stok sayım çıkışları</value>
+  <key>en</key>
+  <value>R4051 Stock adjustment (Write off)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="b5a24fe9-0cc0-493b-9cd4-5b0cb90c9223">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="7d8509ff-d284-4d9b-a881-f5885baed35c">
   <name>Store</name>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -71,16 +71,16 @@
  <dimensions uuid="bf75fb81-a69b-4cc5-9537-a6c8c2964087">
   <name>Basis</name>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <type>
    <types>DefinedType.typeStockAdjustmentAsWriteOffBasises</types>
@@ -93,16 +93,16 @@
  <dimensions uuid="c1bc4bce-7c68-4371-842d-859cc5ea085c">
   <name>ItemKey</name>
   <synonym>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Характеристика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </synonym>
   <type>
    <types>CatalogRef.ItemKeys</types>

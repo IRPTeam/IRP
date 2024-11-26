@@ -58,16 +58,16 @@
       <radioButtonsType>RadioButtons</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>Barcode</value>
+        <key>tr</key>
+        <value>Barkod</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>Штрихкод</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Barkod</value>
+        <key>en</key>
+        <value>Barcode</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Barcode</value>
@@ -75,16 +75,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>Serial lot number</value>
+        <key>tr</key>
+        <value>Seri lot numaraları</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>Серия номенклатуры</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Seri lot numaraları</value>
+        <key>en</key>
+        <value>Serial lot number</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>SerialLotNumber</value>
@@ -92,16 +92,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>Item / Item key</value>
+        <key>tr</key>
+        <value>Malzeme / varyant</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>Номенклатура / характеристика</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Malzeme / varyant</value>
+        <key>en</key>
+        <value>Item / Item key</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>ItemKey</value>
@@ -118,16 +118,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Additional fields</value>
+      <key>tr</key>
+      <value>Ek alanlar</value>
      </title>
      <title>
       <key>ru</key>
       <value>Дополнительные поля</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Ek alanlar</value>
+      <key>en</key>
+      <value>Additional fields</value>
      </title>
      <extendedTooltip>
       <name>GroupAdditionalFieldsExtendedTooltip</name>
@@ -206,16 +206,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Settings</value>
+     <key>tr</key>
+     <value>Ayarlar</value>
     </title>
     <title>
      <key>ru</key>
      <value>Настройки</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ayarlar</value>
+     <key>en</key>
+     <value>Settings</value>
     </title>
     <extendedTooltip>
      <name>GroupSettingsExtendedTooltip</name>
@@ -314,16 +314,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Template</value>
+    <key>tr</key>
+    <value>Şablon</value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаблон</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Şablon</value>
+    <key>en</key>
+    <value>Template</value>
    </title>
    <extendedTooltip>
     <name>PageTemplateExtendedTooltip</name>
@@ -424,16 +424,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Result</value>
+    <key>tr</key>
+    <value>Sonuç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Результат</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
+    <key>en</key>
+    <value>Result</value>
    </title>
    <extendedTooltip>
     <name>PageResultExtendedTooltip</name>
@@ -462,16 +462,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages main</value>
+   <key>tr</key>
+   <value>Sayfalar genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы основные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar genel</value>
+   <key>en</key>
+   <value>Pages main</value>
   </title>
   <extendedTooltip>
    <name>PagesMainExtendedTooltip</name>
@@ -840,16 +840,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Errors (click to hide)</value>
+   <key>tr</key>
+   <value>Hatalar (gizlemek için tıkla)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ошибки (скрыть при нажатии)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hatalar (gizlemek için tıkla)</value>
+   <key>en</key>
+   <value>Errors (click to hide)</value>
   </title>
   <extendedTooltip>
    <name>GroupErrorsExtendedTooltip</name>
@@ -983,16 +983,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Clear</value>
+    <key>tr</key>
+    <value>Temizle</value>
    </title>
    <title>
     <key>ru</key>
     <value>Очистить</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Temizle</value>
+    <key>en</key>
+    <value>Clear</value>
    </title>
    <extendedTooltip>
     <name>SubMenuDeleteExtendedTooltip</name>
@@ -1041,16 +1041,16 @@
  <attributes>
   <name>TemplateSpreadsheet</name>
   <title>
-   <key>en</key>
-   <value>Template spreadsheet</value>
+   <key>tr</key>
+   <value>Şablon tablo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаблон</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon tablo</value>
+   <key>en</key>
+   <value>Template spreadsheet</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1067,16 +1067,16 @@
  <attributes>
   <name>ResultSpreadsheet</name>
   <title>
-   <key>en</key>
-   <value>Result spreadsheet</value>
+   <key>tr</key>
+   <value>Sonuç hesap tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Итоговый табличный документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç hesap tablosu</value>
+   <key>en</key>
+   <value>Result spreadsheet</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1093,16 +1093,16 @@
  <attributes>
   <name>isTemplateChanged</name>
   <title>
-   <key>en</key>
-   <value>Is template changed</value>
+   <key>tr</key>
+   <value>Şablon değiştirilmişti</value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаблон изменен</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon değiştirilmişti</value>
+   <key>en</key>
+   <value>Is template changed</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1118,16 +1118,16 @@
  <attributes>
   <name>HeadersRows</name>
   <title>
-   <key>en</key>
-   <value>Headers rows</value>
+   <key>tr</key>
+   <value>Başlıklar satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Строки шапок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Başlıklar satırlar</value>
+   <key>en</key>
+   <value>Headers rows</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1147,16 +1147,16 @@
  <attributes>
   <name>ShowImage</name>
   <title>
-   <key>en</key>
-   <value>Show image</value>
+   <key>tr</key>
+   <value>Resmi göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать картинки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resmi göster</value>
+   <key>en</key>
+   <value>Show image</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1172,16 +1172,16 @@
  <attributes>
   <name>ErrorList</name>
   <title>
-   <key>en</key>
-   <value>Error list</value>
+   <key>tr</key>
+   <value>Hata listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список ошибок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hata listesi</value>
+   <key>en</key>
+   <value>Error list</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1196,16 +1196,16 @@
   <columns>
    <name>Row</name>
    <title>
-    <key>en</key>
-    <value>Row</value>
+    <key>tr</key>
+    <value>Satır</value>
    </title>
    <title>
     <key>ru</key>
     <value>Строка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır</value>
+    <key>en</key>
+    <value>Row</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1224,16 +1224,16 @@
   <columns>
    <name>Column</name>
    <title>
-    <key>en</key>
-    <value>Column</value>
+    <key>tr</key>
+    <value>Sütün</value>
    </title>
    <title>
     <key>ru</key>
     <value>Колонка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sütün</value>
+    <key>en</key>
+    <value>Column</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1252,16 +1252,16 @@
   <columns>
    <name>ErrorText</name>
    <title>
-    <key>en</key>
-    <value>Error text</value>
+    <key>tr</key>
+    <value>Hata metni</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текст ошибки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hata metni</value>
+    <key>en</key>
+    <value>Error text</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1278,16 +1278,16 @@
   <columns>
    <name>CurrentCheck</name>
    <title>
-    <key>en</key>
-    <value>Current check</value>
+    <key>tr</key>
+    <value>Geçerli işaret</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущая галочка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Geçerli işaret</value>
+    <key>en</key>
+    <value>Current check</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1304,16 +1304,16 @@
  <attributes>
   <name>LoadType</name>
   <title>
-   <key>en</key>
-   <value>Load type</value>
+   <key>tr</key>
+   <value>Yükleme tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип загрузки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yükleme tipi</value>
+   <key>en</key>
+   <value>Load type</value>
   </title>
   <id>17</id>
   <valueType>
@@ -1330,16 +1330,16 @@
  <attributes>
   <name>ResultStore</name>
   <title>
-   <key>en</key>
-   <value>Result store</value>
+   <key>tr</key>
+   <value>Sonuç depo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Итоговый склад</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç depo</value>
+   <key>en</key>
+   <value>Result store</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1356,16 +1356,16 @@
  <attributes>
   <name>OwnerUUID</name>
   <title>
-   <key>en</key>
-   <value>Owner UUID</value>
+   <key>tr</key>
+   <value>Sahip UUID</value>
   </title>
   <title>
    <key>ru</key>
    <value>UUID владельца</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sahip UUID</value>
+   <key>en</key>
+   <value>Owner UUID</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1381,16 +1381,16 @@
  <attributes>
   <name>AdditionalFields</name>
   <title>
-   <key>en</key>
-   <value>Additional fields</value>
+   <key>tr</key>
+   <value>Ek alanlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительные поля</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek alanlar</value>
+   <key>en</key>
+   <value>Additional fields</value>
   </title>
   <id>21</id>
   <valueType/>
@@ -1404,16 +1404,16 @@
  <attributes>
   <name>TargetField</name>
   <title>
-   <key>en</key>
-   <value>Target field</value>
+   <key>tr</key>
+   <value>Hedef alan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поле результата</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hedef alan</value>
+   <key>en</key>
+   <value>Target field</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1430,16 +1430,16 @@
  <attributes>
   <name>NoItemKey</name>
   <title>
-   <key>en</key>
-   <value>No item key</value>
+   <key>tr</key>
+   <value>Ürün anahtarı yok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Нет характеристики номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ürün anahtarı yok</value>
+   <key>en</key>
+   <value>No item key</value>
   </title>
   <id>23</id>
   <valueType>
@@ -1455,16 +1455,16 @@
  <formCommands>
   <name>Next</name>
   <title>
-   <key>en</key>
-   <value>Next</value>
+   <key>tr</key>
+   <value>Sonraki</value>
   </title>
   <title>
    <key>ru</key>
    <value>Следующий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonraki</value>
+   <key>en</key>
+   <value>Next</value>
   </title>
   <id>3</id>
   <use>
@@ -1484,16 +1484,16 @@
  <formCommands>
   <name>Back</name>
   <title>
-   <key>en</key>
-   <value>Back</value>
+   <key>tr</key>
+   <value>Geri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Назад</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geri</value>
+   <key>en</key>
+   <value>Back</value>
   </title>
   <id>4</id>
   <use>
@@ -1513,16 +1513,16 @@
  <formCommands>
   <name>ClearTemplate</name>
   <title>
-   <key>en</key>
-   <value>Clear template</value>
+   <key>tr</key>
+   <value>Şablon temizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Очистить шаблон</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon temizle</value>
+   <key>en</key>
+   <value>Clear template</value>
   </title>
   <id>5</id>
   <use>

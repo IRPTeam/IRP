@@ -7,47 +7,47 @@
  </producedTypes>
  <name>InvoiceType</name>
  <synonym>
-  <key>en</key>
-  <value>Invoice type</value>
+  <key>tr</key>
+  <value>Fatura tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип инвойса</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fatura tipi</value>
+  <key>en</key>
+  <value>Invoice type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="1ac212f6-f7da-4f05-bea5-02bf0dfefe0e">
   <name>Invoice</name>
   <synonym>
-   <key>en</key>
-   <value>Invoice</value>
+   <key>tr</key>
+   <value>Fatura</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Инвойс</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura</value>
+   <key>en</key>
+   <value>Invoice</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7a95fe96-7059-4946-9f21-d5526145a772">
   <name>Return</name>
   <synonym>
-   <key>en</key>
-   <value>Return</value>
+   <key>tr</key>
+   <value>İade</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Возврат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İade</value>
+   <key>en</key>
+   <value>Return</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -432,16 +432,16 @@
   </items>
   <items xsi:type="form:Addition">
    <title>
-    <key>en</key>
-    <value>Search string</value>
+    <key>tr</key>
+    <value>Arama satırı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Строка поиска</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Arama satırı</value>
+    <key>en</key>
+    <value>Search string</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -482,16 +482,16 @@
   </items>
   <items xsi:type="form:Addition">
    <title>
-    <key>en</key>
-    <value>Search control</value>
+    <key>tr</key>
+    <value>Arama kontrolü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Поиск управления</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Arama kontrolü</value>
+    <key>en</key>
+    <value>Search control</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -555,16 +555,16 @@
  <attributes>
   <name>EmployeeTable</name>
   <title>
-   <key>en</key>
-   <value>Employee table</value>
+   <key>tr</key>
+   <value>Çalışan tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица сотрудников</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışan tablosu</value>
+   <key>en</key>
+   <value>Employee table</value>
   </title>
   <id>2</id>
   <valueType>
@@ -579,16 +579,16 @@
   <columns>
    <name>Employee</name>
    <title>
-    <key>en</key>
-    <value>Employee</value>
+    <key>tr</key>
+    <value>Personel</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сотрудник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Personel</value>
+    <key>en</key>
+    <value>Employee</value>
    </title>
    <id>4</id>
    <valueType>
@@ -604,16 +604,16 @@
   <columns>
    <name>Selected</name>
    <title>
-    <key>en</key>
-    <value>Selected</value>
+    <key>tr</key>
+    <value>Seçilmiş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выбранные</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seçilmiş</value>
+    <key>en</key>
+    <value>Selected</value>
    </title>
    <id>5</id>
    <valueType>
@@ -630,16 +630,16 @@
  <formCommands>
   <name>Select</name>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <id>1</id>
   <use>
@@ -655,16 +655,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <id>2</id>
   <use>
@@ -683,16 +683,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <id>3</id>
   <use>

@@ -6,23 +6,23 @@
  </producedTypes>
  <name>DataHistory</name>
  <synonym>
-  <key>en</key>
-  <value>Data history</value>
+  <key>tr</key>
+  <value>Veri tarihçesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>История данных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Veri tarihçesi</value>
+  <key>en</key>
+  <value>Data history</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.DataHistory.Form.Form</defaultForm>
  <forms uuid="eecf5f59-6879-4439-9878-1437c32eafc0">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

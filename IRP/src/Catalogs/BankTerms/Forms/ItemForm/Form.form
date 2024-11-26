@@ -131,16 +131,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Payment terminal</value>
+     <key>tr</key>
+     <value>Ödeme terminali</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Платежный терминал</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Ödeme terminali</value>
+     <key>en</key>
+     <value>Payment terminal</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.BankTermTypes.EnumValue.PaymentTerminal</value>
@@ -148,16 +148,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Payment agent</value>
+     <key>tr</key>
+     <value>Ödeme aracı kurum</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Платежный агент</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Ödeme aracı kurum</value>
+     <key>en</key>
+     <value>Payment agent</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.BankTermTypes.EnumValue.PaymentAgent</value>

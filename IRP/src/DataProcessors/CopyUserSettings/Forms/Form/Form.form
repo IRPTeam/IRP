@@ -687,16 +687,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group left</value>
+    <key>tr</key>
+    <value>Grup sol</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по левому краю</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup sol</value>
+    <key>en</key>
+    <value>Group left</value>
    </title>
    <extendedTooltip>
     <name>GroupLeftExtendedTooltip</name>
@@ -895,16 +895,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>User name table group</value>
+      <key>tr</key>
+      <value>Kullanıcı adı tablo grubu</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа таблицы имен пользователей</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kullanıcı adı tablo grubu</value>
+      <key>en</key>
+      <value>User name table group</value>
      </title>
      <extendedTooltip>
       <name>UserNameTableGroupExtendedTooltip</name>
@@ -1172,16 +1172,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group right</value>
+    <key>tr</key>
+    <value>Grup (sağ)</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группировка по правому краю</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup (sağ)</value>
+    <key>en</key>
+    <value>Group right</value>
    </title>
    <extendedTooltip>
     <name>GroupRightExtendedTooltip</name>
@@ -1214,16 +1214,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main</value>
+   <key>tr</key>
+   <value>Ana</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ana</value>
+   <key>en</key>
+   <value>Main</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -1321,16 +1321,16 @@
  <attributes>
   <name>SettingsStorageName</name>
   <title>
-   <key>en</key>
-   <value>Settings storage name</value>
+   <key>tr</key>
+   <value>Ayarlar depolama adı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Имя хранилища настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar depolama adı</value>
+   <key>en</key>
+   <value>Settings storage name</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1348,16 +1348,16 @@
  <attributes>
   <name>UserName</name>
   <title>
-   <key>en</key>
-   <value>User name (from)</value>
+   <key>tr</key>
+   <value>Kullanıcı adı (form)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Имя пользователя (от)</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı adı (form)</value>
+   <key>en</key>
+   <value>User name (from)</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1375,16 +1375,16 @@
  <attributes>
   <name>Settings</name>
   <title>
-   <key>en</key>
-   <value>Settings (from)</value>
+   <key>tr</key>
+   <value>Ayarlar (form)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки (от)  </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar (form)</value>
+   <key>en</key>
+   <value>Settings (from)</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1399,16 +1399,16 @@
   <columns>
    <name>Object</name>
    <title>
-    <key>en</key>
-    <value>Object</value>
+    <key>tr</key>
+    <value>Obje</value>
    </title>
    <title>
     <key>ru</key>
     <value>Объект</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Obje</value>
+    <key>en</key>
+    <value>Object</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1425,16 +1425,16 @@
   <columns>
    <name>SettingsKey</name>
    <title>
-    <key>en</key>
-    <value>Settings key</value>
+    <key>tr</key>
+    <value>Ayarlar anahtarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ настроек</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar anahtarı</value>
+    <key>en</key>
+    <value>Settings key</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1451,16 +1451,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1477,16 +1477,16 @@
   <columns>
    <name>User</name>
    <title>
-    <key>en</key>
-    <value>User</value>
+    <key>tr</key>
+    <value>Kullanıcı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователь</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
+    <key>en</key>
+    <value>User</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1503,16 +1503,16 @@
   <columns>
    <name>Settings</name>
    <title>
-    <key>en</key>
-    <value>Settings</value>
+    <key>tr</key>
+    <value>Ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar</value>
+    <key>en</key>
+    <value>Settings</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1529,16 +1529,16 @@
   <columns>
    <name>SettingsType</name>
    <title>
-    <key>en</key>
-    <value>Settings type</value>
+    <key>tr</key>
+    <value>Ayarlar tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип настроек   </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ayarlar tipi</value>
+    <key>en</key>
+    <value>Settings type</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1555,16 +1555,16 @@
   <columns>
    <name>ObjectKey</name>
    <title>
-    <key>en</key>
-    <value>Object key</value>
+    <key>tr</key>
+    <value>Nesne anahtarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ объекта</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Nesne anahtarı</value>
+    <key>en</key>
+    <value>Object key</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1582,16 +1582,16 @@
  <attributes>
   <name>UserNameTable</name>
   <title>
-   <key>en</key>
-   <value>User name table</value>
+   <key>tr</key>
+   <value>Kullanıcı adı tablo</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица имен пользователей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı adı tablo</value>
+   <key>en</key>
+   <value>User name table</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1606,16 +1606,16 @@
   <columns>
    <name>User</name>
    <title>
-    <key>en</key>
-    <value>User</value>
+    <key>tr</key>
+    <value>Kullanıcı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Пользователь</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullanıcı</value>
+    <key>en</key>
+    <value>User</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1632,16 +1632,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>15</id>
    <valueType>
@@ -1657,16 +1657,16 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>en</key>
-    <value>Icon</value>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <title>
     <key>ru</key>
     <value>Иконка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
+    <key>en</key>
+    <value>Icon</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1686,16 +1686,16 @@
  <formCommands>
   <name>UpdateSettings</name>
   <title>
-   <key>en</key>
-   <value>Update settings</value>
+   <key>tr</key>
+   <value>Ayarları güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları güncelle</value>
+   <key>en</key>
+   <value>Update settings</value>
   </title>
   <id>1</id>
   <use>
@@ -1715,16 +1715,16 @@
  <formCommands>
   <name>CheckAllUsers</name>
   <title>
-   <key>en</key>
-   <value>Check all users</value>
+   <key>tr</key>
+   <value>Tüm kullanıcıları kontrol edin</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать всех пользователей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıları kontrol edin</value>
+   <key>en</key>
+   <value>Check all users</value>
   </title>
   <id>3</id>
   <use>
@@ -1744,16 +1744,16 @@
  <formCommands>
   <name>UncheckAllUsers</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all users</value>
+   <key>tr</key>
+   <value>Tüm kullanıcıların işaretini kaldırın</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить для всех выбранных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm kullanıcıların işaretini kaldırın</value>
+   <key>en</key>
+   <value>Uncheck all users</value>
   </title>
   <id>4</id>
   <use>
@@ -1773,16 +1773,16 @@
  <formCommands>
   <name>CopySettings</name>
   <title>
-   <key>en</key>
-   <value>Copy settings</value>
+   <key>tr</key>
+   <value>Ayarları kopyala</value>
   </title>
   <title>
    <key>ru</key>
    <value>Копировать настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları kopyala</value>
+   <key>en</key>
+   <value>Copy settings</value>
   </title>
   <id>5</id>
   <use>

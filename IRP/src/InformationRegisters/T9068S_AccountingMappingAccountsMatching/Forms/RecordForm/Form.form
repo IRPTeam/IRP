@@ -173,16 +173,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group source</value>
+   <key>tr</key>
+   <value>Grup kaynak</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа источник</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup kaynak</value>
+   <key>en</key>
+   <value>Group source</value>
   </title>
   <extendedTooltip>
    <name>GroupSourceExtendedTooltip</name>
@@ -367,16 +367,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group ext dimension 1</value>
+   <key>tr</key>
+   <value>Grup Kırılım 1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа субконто 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Kırılım 1</value>
+   <key>en</key>
+   <value>Group ext dimension 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension1ExtendedTooltip</name>
@@ -561,16 +561,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group ext dimension 1</value>
+   <key>tr</key>
+   <value>Grup Kırılım 1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа субконто 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Kırılım 1</value>
+   <key>en</key>
+   <value>Group ext dimension 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension2ExtendedTooltip</name>
@@ -755,16 +755,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group ext dimension 1</value>
+   <key>tr</key>
+   <value>Grup Kırılım 1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа субконто 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Kırılım 1</value>
+   <key>en</key>
+   <value>Group ext dimension 1</value>
   </title>
   <extendedTooltip>
    <name>GroupExtDimension3ExtendedTooltip</name>
@@ -910,16 +910,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group target</value>
+   <key>tr</key>
+   <value>Grup hedef</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа получатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup hedef</value>
+   <key>en</key>
+   <value>Group target</value>
   </title>
   <extendedTooltip>
    <name>GroupTargetExtendedTooltip</name>
@@ -957,6 +957,10 @@
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
+ </handlers>
  <windowOpeningMode>LockOwnerWindow</windowOpeningMode>
  <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
@@ -985,16 +989,16 @@
  <attributes>
   <name>SourceLedgerTypeVariant</name>
   <title>
-   <key>en</key>
-   <value>Source ledger type variant</value>
+   <key>tr</key>
+   <value>Kaynak defter tip varyantı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вариант вида учета источника</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaynak defter tip varyantı</value>
+   <key>en</key>
+   <value>Source ledger type variant</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1010,16 +1014,16 @@
  <attributes>
   <name>TargetLedgerTypeVariant</name>
   <title>
-   <key>en</key>
-   <value>Target ledger type variant</value>
+   <key>tr</key>
+   <value>Hedef defter tip varyantı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вариант вида учета получателя</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hedef defter tip varyantı</value>
+   <key>en</key>
+   <value>Target ledger type variant</value>
   </title>
   <id>3</id>
   <valueType>

@@ -9,28 +9,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
-  </title>
-  <toolTip>
    <key>en</key>
    <value>Pages</value>
+  </title>
+  <toolTip>
+   <key>tr</key>
+   <value>Satırlar</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Страницы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </toolTip>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -145,16 +145,16 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>en</key>
-   <value>Document ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Document ref</value>
   </title>
   <id>11</id>
   <valueType>
@@ -170,16 +170,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Sakla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сохранить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sakla</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <id>1</id>
   <use>
@@ -195,16 +195,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>3</id>
   <use>

@@ -180,16 +180,16 @@
  <attributes>
   <name>TableDoc</name>
   <title>
-   <key>en</key>
-   <value>Table doc</value>
+   <key>tr</key>
+   <value>Tablo dokümanı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица документов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tablo dokümanı</value>
+   <key>en</key>
+   <value>Table doc</value>
   </title>
   <id>1</id>
   <valueType>
@@ -206,16 +206,16 @@
  <attributes>
   <name>SerialLotNumbers</name>
   <title>
-   <key>en</key>
-   <value>Serial lot numbers</value>
+   <key>tr</key>
+   <value>Seri lot numaralar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Серии номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaralar</value>
+   <key>en</key>
+   <value>Serial lot numbers</value>
   </title>
   <id>2</id>
   <valueType>
@@ -234,16 +234,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -259,16 +259,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>
@@ -284,16 +284,16 @@
  <formCommands>
   <name>FindSerialLotNumbers</name>
   <title>
-   <key>en</key>
-   <value>Find serial lot numbers</value>
+   <key>tr</key>
+   <value>Seri lot numaralarını bul</value>
   </title>
   <title>
    <key>ru</key>
    <value>Найти серийные номера</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaralarını bul</value>
+   <key>en</key>
+   <value>Find serial lot numbers</value>
   </title>
   <id>3</id>
   <use>

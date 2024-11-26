@@ -7,7 +7,7 @@
  </producedTypes>
  <name>MessagesImportance</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Messages importance</value>
  </synonym>
  <synonym>
@@ -15,7 +15,7 @@
   <value>Важность сообщения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Messages importance</value>
  </synonym>
  <standardAttributes>
@@ -39,22 +39,22 @@
  <enumValues uuid="88893af7-7deb-4a82-8334-8a2f6d941c41">
   <name>High</name>
   <synonym>
-   <key>en</key>
-   <value>High</value>
+   <key>tr</key>
+   <value>Yüksek</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Высокий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yüksek</value>
+   <key>en</key>
+   <value>High</value>
   </synonym>
  </enumValues>
  <enumValues uuid="87c73c26-757e-496f-9f6d-9cc92d917b95">
   <name>Normal</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Normal</value>
   </synonym>
   <synonym>
@@ -62,23 +62,23 @@
    <value>Нормальный</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Normal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a291bb2a-c894-4c56-a37f-70a786b5779b">
   <name>Low</name>
   <synonym>
-   <key>en</key>
-   <value>Low</value>
+   <key>tr</key>
+   <value>Düşük</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Низкий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Düşük</value>
+   <key>en</key>
+   <value>Low</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

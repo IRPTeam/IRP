@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c4c83c66-5252-4bc1-98e3-b4593f708061">
  <name>UseUnitsAndDimensions</name>
  <synonym>
-  <key>en</key>
-  <value>Use units and dimensions</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Malzeme ek birimleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использование ед. изм. товаров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Malzeme ek birimleri</value>
+  <key>en</key>
+  <value>Use units and dimensions</value>
  </synonym>
  <location>Constant.UseUnitsAndDimensions</location>
  <privilegedGetMode>true</privilegedGetMode>

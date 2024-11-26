@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ea35fd4-eb4e-4c4f-beab-8a23f6fd98fe">
  <name>Bookkeeping</name>
  <synonym>
-  <key>en</key>
-  <value>Bookkeeping</value>
+  <key>tr</key>
+  <value>Hesap tutma</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Учет</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Hesap tutma</value>
+  <key>en</key>
+  <value>Bookkeeping</value>
  </synonym>
 </mdclass:CommonPicture>

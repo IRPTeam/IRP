@@ -11,16 +11,16 @@
  </producedTypes>
  <name>AttachedFilesControl</name>
  <synonym>
-  <key>en</key>
-  <value>Attached files control</value>
+  <key>tr</key>
+  <value>Eklenen dosya kontrolü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Контроль прикрепленных файлов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Eklenen dosya kontrolü</value>
+  <key>en</key>
+  <value>Attached files control</value>
  </synonym>
  <editType>InDialog</editType>
  <standardAttributes>
@@ -60,16 +60,16 @@
  <resources uuid="606085ed-a1c7-47c9-a354-9c4c83ec752d">
   <name>Comment</name>
   <synonym>
-   <key>en</key>
-   <value>Comment</value>
+   <key>tr</key>
+   <value>Açıklama</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комментарий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Açıklama</value>
+   <key>en</key>
+   <value>Comment</value>
   </synonym>
   <type>
    <types>String</types>
@@ -84,16 +84,16 @@
  <dimensions uuid="79d28eeb-d70c-47d4-bc80-d136b9111f7c">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -108,16 +108,16 @@
  <dimensions uuid="62b6f915-1710-4cd4-a8ac-a5e0c45f659c">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -132,16 +132,16 @@
  <dimensions uuid="f2041c77-df5f-485c-88f8-0c128321c141">
   <name>DocumentType</name>
   <synonym>
-   <key>en</key>
-   <value>Document type</value>
+   <key>tr</key>
+   <value>Evrak tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak tipi</value>
+   <key>en</key>
+   <value>Document type</value>
   </synonym>
   <type>
    <types>String</types>
@@ -161,16 +161,16 @@
  <dimensions uuid="43d053ec-e528-4f52-aa74-a675f7c6d532">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -187,16 +187,16 @@
  <dimensions uuid="0a7a340e-1375-4d9e-a447-5edfad8e7847">
   <name>RecordID</name>
   <synonym>
-   <key>en</key>
-   <value>Record ID</value>
+   <key>tr</key>
+   <value>Kayıt ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt ID</value>
+   <key>en</key>
+   <value>Record ID</value>
   </synonym>
   <type>
    <types>UUID</types>
@@ -210,16 +210,16 @@
  <dimensions uuid="2c71d082-5c30-4e78-8010-5a33269efb94">
   <name>FileType</name>
   <synonym>
-   <key>en</key>
-   <value>File type</value>
+   <key>tr</key>
+   <value>Dosya tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип файла</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dosya tipi</value>
+   <key>en</key>
+   <value>File type</value>
   </synonym>
   <type>
    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>

@@ -9,16 +9,16 @@
  </producedTypes>
  <name>VendorsAdvancesClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Vendors advances closing</value>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Закрытие авансов поставщиков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tedarikçi avans kapatma</value>
+  <key>en</key>
+  <value>Vendors advances closing</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.VendorsAdvancesClosing.StandardAttribute.Number</inputByString>
@@ -27,28 +27,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Vendors advances closing</value>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Закрытие авансов поставщиков</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Tedarikçi avans kapatma</value>
- </objectPresentation>
- <listPresentation>
   <key>en</key>
   <value>Vendors advances closing</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Tedarikçi avans kapatma</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Закрытие авансов поставщиков</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Tedarikçi avans kapatma</value>
+  <key>en</key>
+  <value>Vendors advances closing</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -70,16 +70,16 @@
  <attributes uuid="28dec7af-9c7e-4bf4-83da-966d9918dc52">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -100,16 +100,16 @@
  <attributes uuid="aaefeeac-2426-482b-a5e9-0f92b855e6d9">
   <name>BeginOfPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>Begin of period</value>
+   <key>tr</key>
+   <value>Dönem başı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начало периода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dönem başı</value>
+   <key>en</key>
+   <value>Begin of period</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -127,16 +127,16 @@
  <attributes uuid="2a82e5c1-de73-4c99-bc11-2ba2a3eb558d">
   <name>EndOfPeriod</name>
   <synonym>
-   <key>en</key>
-   <value>End of period</value>
+   <key>tr</key>
+   <value>Dönem sonu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Конец периода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dönem sonu</value>
+   <key>en</key>
+   <value>End of period</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -154,31 +154,31 @@
  <attributes uuid="7310d2fd-fce1-42cd-95c4-0edf90ba661f">
   <name>DELETE_DontWriteNegativeDebtAsAdvance</name>
   <synonym>
-   <key>en</key>
-   <value>DELETE dont write negative debt as advance</value>
+   <key>tr</key>
+   <value>SİLİNECEK negatif borç avan olarak yazma</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>УДАЛИТЬ не уводить в долг как аванс</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>SİLİNECEK negatif borç avan olarak yazma</value>
+   <key>en</key>
+   <value>DELETE dont write negative debt as advance</value>
   </synonym>
   <type>
    <types>Boolean</types>
   </type>
   <toolTip>
-   <key>en</key>
-   <value>if debt is negative dont write as positive advance</value>
+   <key>tr</key>
+   <value>Borç negatifse pozitif avans olarak yazılmasın</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Если долг отрицательный не записывать как положительный аванс</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Borç negatifse pozitif avans olarak yazılmasın</value>
+   <key>en</key>
+   <value>if debt is negative dont write as positive advance</value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -189,31 +189,31 @@
  <attributes uuid="5325afaa-a6a1-48b0-a2c2-7bcfcc55b950">
   <name>DontOffsetEmptyProjects</name>
   <synonym>
-   <key>en</key>
-   <value>Dont offset empty projects</value>
+   <key>tr</key>
+   <value>Boş Projeleri Karşılamaz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Не учитывать пустые проекты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Boş Projeleri Karşılamaz</value>
+   <key>en</key>
+   <value>Dont offset empty projects</value>
   </synonym>
   <type>
    <types>Boolean</types>
   </type>
   <toolTip>
-   <key>en</key>
-   <value>If project is empty dont offset advance</value>
+   <key>tr</key>
+   <value>Proje boşsa avansı karşılamaz</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Если проект пустой не учитывать аванс</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Proje boşsa avansı karşılamaz</value>
+   <key>en</key>
+   <value>If project is empty dont offset advance</value>
   </toolTip>
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
@@ -224,16 +224,16 @@
  <forms uuid="154d828d-cbee-4ea5-9426-5763fd4e48d4">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -241,16 +241,16 @@
  <forms uuid="bdd49bda-5fd9-4870-929c-8c075cd48b32">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -258,16 +258,16 @@
  <forms uuid="5ce8f41c-dadb-4a28-ba93-6a8042092dba">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

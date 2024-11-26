@@ -6,23 +6,23 @@
  </producedTypes>
  <name>IssueTracker</name>
  <synonym>
-  <key>en</key>
-  <value>Issue tracker</value>
+  <key>tr</key>
+  <value>Talep takip</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Issue tracker</value>
+  <value>Трекер проблем</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Talep takip</value>
+  <key>en</key>
+  <value>Issue tracker</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.IssueTracker.Form.Form</defaultForm>
  <forms uuid="f0d4103e-00fc-4db7-bb14-d8b49ae4deae">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="e178412b-e1f7-4eb5-b25a-a9e002d35575">
   <name>CheckInForm</name>
   <synonym>
-   <key>en</key>
-   <value>Check in form</value>
+   <key>tr</key>
+   <value>Konum bildirim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Check in form</value>
+   <value>Форма регистрации</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konum bildirim formu</value>
+   <key>en</key>
+   <value>Check in form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeQuantity</name>
  <synonym>
-  <key>en</key>
-  <value>Type quantity</value>
+  <key>tr</key>
+  <value>Tip miktar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип количество</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip miktar</value>
+  <key>en</key>
+  <value>Type quantity</value>
  </synonym>
  <type>
   <types>Number</types>

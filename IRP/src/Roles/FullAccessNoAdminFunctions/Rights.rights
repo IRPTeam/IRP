@@ -1211,7 +1211,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.Locations</name>
+		<name>Catalog.ObjectLocations</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

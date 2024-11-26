@@ -25,7 +25,7 @@
 					<dcscor:parameter>Format</dcscor:parameter>
 					<dcscor:value xsi:type="v8:LocalStringType">
 						<v8:item>
-							<v8:lang>en</v8:lang>
+							<v8:lang>tr</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
@@ -33,7 +33,7 @@
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
+							<v8:lang>en</v8:lang>
 							<v8:content>DF=dd.MM.yyyy</v8:content>
 						</v8:item>
 					</dcscor:value>
@@ -115,7 +115,7 @@ ORDER BY
 		<dcsset:name>VendorPrices</dcsset:name>
 		<dcsset:presentation xsi:type="v8:LocalStringType">
 			<v8:item>
-				<v8:lang>en</v8:lang>
+				<v8:lang>tr</v8:lang>
 				<v8:content>Vendor prices</v8:content>
 			</v8:item>
 			<v8:item>
@@ -123,7 +123,7 @@ ORDER BY
 				<v8:content>Цены поставщиков</v8:content>
 			</v8:item>
 			<v8:item>
-				<v8:lang>tr</v8:lang>
+				<v8:lang>en</v8:lang>
 				<v8:content>Vendor prices</v8:content>
 			</v8:item>
 		</dcsset:presentation>

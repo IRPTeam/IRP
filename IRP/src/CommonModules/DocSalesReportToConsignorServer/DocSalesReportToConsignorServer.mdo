@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a4ff5d92-ec4d-4260-93f7-c6e54005d340">
  <name>DocSalesReportToConsignorServer</name>
  <synonym>
-  <key>en</key>
-  <value>Doc sales report to consignor server</value>
+  <key>tr</key>
+  <value>Evrak konsiyeye verene satış raporu sunucu</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ отчет комитентам о продажах сервер</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak konsiyeye verene satış raporu sunucu</value>
+  <key>en</key>
+  <value>Doc sales report to consignor server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

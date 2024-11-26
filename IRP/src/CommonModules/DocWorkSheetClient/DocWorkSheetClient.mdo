@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f24f0123-f6bc-4fcc-920f-99b9c8a49d5b">
  <name>DocWorkSheetClient</name>
  <synonym>
-  <key>en</key>
-  <value>Doc work sheet client</value>
+  <key>tr</key>
+  <value>Evrak çalışma tutanağı client</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ заказ наряд клиент</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Evrak çalışma tutanağı client</value>
+  <key>en</key>
+  <value>Doc work sheet client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

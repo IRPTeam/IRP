@@ -6,32 +6,32 @@
  </producedTypes>
  <name>MobileCreateDocument</name>
  <synonym>
-  <key>en</key>
-  <value>Mobile create document</value>
+  <key>tr</key>
+  <value>Mobil belge oluştur</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Создание документа с мобильного</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Mobil belge oluştur</value>
+  <key>en</key>
+  <value>Mobile create document</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.MobileCreateDocument.Form.Form</defaultForm>
  <attributes uuid="5a900abb-f7cf-44fd-981d-25fda62663d5">
   <name>StoreReceiver</name>
   <synonym>
-   <key>en</key>
-   <value>Store receiver</value>
+   <key>tr</key>
+   <value>Giriş depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад-получатель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Giriş depo</value>
+   <key>en</key>
+   <value>Store receiver</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -46,30 +46,30 @@
   </producedTypes>
   <name>ItemList</name>
   <synonym>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Товары</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </synonym>
   <attributes uuid="6cfa6e73-ee14-452f-87d3-5832f6e58b81">
    <name>Item</name>
    <synonym>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Номенклатура</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </synonym>
    <type>
     <types>CatalogRef.Items</types>
@@ -81,16 +81,16 @@
   <attributes uuid="3a1959ba-d48b-4d25-9132-318bd7f4a5d0">
    <name>ItemKey</name>
    <synonym>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </synonym>
    <type>
     <types>CatalogRef.ItemKeys</types>
@@ -103,7 +103,7 @@
   <attributes uuid="c642f680-0ee9-430c-8b0f-943027a581aa">
    <name>Unit</name>
    <synonym>
-    <key>en</key>
+    <key>tr</key>
     <value>Unit</value>
    </synonym>
    <synonym>
@@ -111,7 +111,7 @@
     <value>Unit</value>
    </synonym>
    <synonym>
-    <key>tr</key>
+    <key>en</key>
     <value>Unit</value>
    </synonym>
    <type>
@@ -124,16 +124,16 @@
   <attributes uuid="ef628a41-56a2-4f7c-8bc0-f03278563846">
    <name>Quantity</name>
    <synonym>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Quantity</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </synonym>
    <type>
     <types>DefinedType.typeQuantity</types>
@@ -145,16 +145,16 @@
   <attributes uuid="c36e4a9e-1f32-4dee-bebd-a9febb2744da">
    <name>UseSerialLotNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Use serial lot number</value>
+    <key>tr</key>
+    <value>Seri/lot numaraları kullan</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ведется учет по сериям номенклатуры</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Seri/lot numaraları kullan</value>
+    <key>en</key>
+    <value>Use serial lot number</value>
    </synonym>
    <type>
     <types>Boolean</types>
@@ -166,16 +166,16 @@
   <attributes uuid="d065aec7-6eff-438e-8aca-c874ffdd14b6">
    <name>SerialLotNumber</name>
    <synonym>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </synonym>
    <type>
     <types>CatalogRef.SerialLotNumbers</types>
@@ -188,7 +188,7 @@
  <forms uuid="802cb1dc-c428-48fa-8391-2675bc29e7a0">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -196,7 +196,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -205,16 +205,16 @@
  <forms uuid="258ede99-d917-4531-bde4-8459b2101734">
   <name>RowForm</name>
   <synonym>
-   <key>en</key>
-   <value>Row form</value>
+   <key>tr</key>
+   <value>Satır formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма строка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır formu</value>
+   <key>en</key>
+   <value>Row form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

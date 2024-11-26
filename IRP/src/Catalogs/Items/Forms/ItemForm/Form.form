@@ -126,16 +126,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>View settings panel</value>
+     <key>tr</key>
+     <value>Ayarlar paneli göster</value>
     </title>
     <title>
      <key>ru</key>
      <value>Показать панель настроек</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ayarlar paneli göster</value>
+     <key>en</key>
+     <value>View settings panel</value>
     </title>
     <extendedTooltip>
      <name>ViewSettingsPanelExtendedTooltip</name>
@@ -167,16 +167,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group HTML</value>
+    <key>tr</key>
+    <value>Grup HTML</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа HTML</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup HTML</value>
+    <key>en</key>
+    <value>Group HTML</value>
    </title>
    <extendedTooltip>
     <name>GroupHTMLExtendedTooltip</name>
@@ -1059,16 +1059,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group main left (first part)</value>
+      <key>tr</key>
+      <value>Grup ana sol (ilk kısım)</value>
      </title>
      <title>
       <key>ru</key>
       <value>Главная группа слева (первая часть)</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup ana sol (ilk kısım)</value>
+      <key>en</key>
+      <value>Group main left (first part)</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftFirstPartExtendedTooltip</name>
@@ -1319,16 +1319,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Dimensions</value>
+       <key>tr</key>
+       <value>Boyutlar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Измерения</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Boyutlar</value>
+       <key>en</key>
+       <value>Dimensions</value>
       </title>
       <extendedTooltip>
        <name>GroupDimensionsExtendedTooltip</name>
@@ -1350,16 +1350,16 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>en</key>
-        <value>Dimensions</value>
+        <key>tr</key>
+        <value>Boyutlar</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>ru</key>
         <value>Измерения</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Boyutlar</value>
+        <key>en</key>
+        <value>Dimensions</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1429,16 +1429,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Weight information</value>
+       <key>tr</key>
+       <value>Ağırlık bilgisi</value>
       </title>
       <title>
        <key>ru</key>
        <value>Информация о весе</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ağırlık bilgisi</value>
+       <key>en</key>
+       <value>Weight information</value>
       </title>
       <extendedTooltip>
        <name>GroupWeightInformationExtendedTooltip</name>
@@ -1460,16 +1460,16 @@
        <group>HorizontalIfPossible</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>en</key>
-        <value>Weight information</value>
+        <key>tr</key>
+        <value>Ağırlık bilgisi</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>ru</key>
         <value>Информация о весе</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Ağırlık bilgisi</value>
+        <key>en</key>
+        <value>Weight information</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -1495,16 +1495,16 @@
         <segments>Object.ControlCodeString</segments>
        </dataPath>
        <toolTip>
-        <key>en</key>
-        <value>Do additional check by control string in POS</value>
+        <key>tr</key>
+        <value>POS'da kontrol dizesi ile ek kontrol yap</value>
        </toolTip>
        <toolTip>
         <key>ru</key>
         <value>Выполнять дополнительный контроль кодов в РМК</value>
        </toolTip>
        <toolTip>
-        <key>tr</key>
-        <value>POS'da kontrol dizesi ile ek kontrol yap</value>
+        <key>en</key>
+        <value>Do additional check by control string in POS</value>
        </toolTip>
        <toolTipRepresentation>Button</toolTipRepresentation>
        <handlers>
@@ -1645,16 +1645,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Accounting settings</value>
+       <key>tr</key>
+       <value>Muhasebe ayarları</value>
       </title>
       <title>
        <key>ru</key>
        <value>Настройки учета</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Muhasebe ayarları</value>
+       <key>en</key>
+       <value>Accounting settings</value>
       </title>
       <extendedTooltip>
        <name>GroupAccountingSettingsExtendedTooltip</name>
@@ -1676,16 +1676,16 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>en</key>
-        <value>Accounting settings</value>
+        <key>tr</key>
+        <value>Muhasebe ayarları</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>ru</key>
         <value>Настройки учета</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Muhasebe ayarları</value>
+        <key>en</key>
+        <value>Accounting settings</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -2039,16 +2039,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Consignors info</value>
+       <key>tr</key>
+       <value>Gönderenler bilgisi</value>
       </title>
       <title>
        <key>ru</key>
        <value>Информация о кометенте</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Gönderenler bilgisi</value>
+       <key>en</key>
+       <value>Consignors info</value>
       </title>
       <extendedTooltip>
        <name>GroupConsignorsInfoExtendedTooltip</name>
@@ -2070,16 +2070,16 @@
        <group>Vertical</group>
        <behavior>Collapsible</behavior>
        <collapsedRepresentationTitle>
-        <key>en</key>
-        <value>Consignors info</value>
+        <key>tr</key>
+        <value>Gönderenler bilgisi</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
         <key>ru</key>
         <value>Информация о кометенте</value>
        </collapsedRepresentationTitle>
        <collapsedRepresentationTitle>
-        <key>tr</key>
-        <value>Gönderenler bilgisi</value>
+        <key>en</key>
+        <value>Consignors info</value>
        </collapsedRepresentationTitle>
        <collapsed>true</collapsed>
        <representation>WeakSeparation</representation>
@@ -2096,16 +2096,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group main left (second part)</value>
+      <key>tr</key>
+      <value>Grup ana sol (ikinci kısım)</value>
      </title>
      <title>
       <key>ru</key>
       <value>Главная группа слева (вторая часть)</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup ana sol (ikinci kısım)</value>
+      <key>en</key>
+      <value>Group main left (second part)</value>
      </title>
      <extendedTooltip>
       <name>GroupMainLeftSecondPartExtendedTooltip</name>
@@ -2239,16 +2239,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Main</value>
+    <key>tr</key>
+    <value>Ana</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основное</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ana</value>
+    <key>en</key>
+    <value>Main</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -2320,16 +2320,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group left</value>
+     <key>tr</key>
+     <value>Grup (sol)</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группировка по левому краю</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup (sol)</value>
+     <key>en</key>
+     <value>Group left</value>
     </title>
     <extendedTooltip>
      <name>GroupLeftExtendedTooltip</name>
@@ -2403,16 +2403,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group right</value>
+     <key>tr</key>
+     <value>Grup (sağ)</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группировка по правому краю</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup (sağ)</value>
+     <key>en</key>
+     <value>Group right</value>
     </title>
     <extendedTooltip>
      <name>GroupRightExtendedTooltip</name>
@@ -2443,16 +2443,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Additional</value>
+    <key>tr</key>
+    <value>Ek detaylar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek detaylar</value>
+    <key>en</key>
+    <value>Additional</value>
    </title>
    <horizontalStretch>true</horizontalStretch>
    <extendedTooltip>
@@ -2617,16 +2617,16 @@
  <attributes>
   <name>Description</name>
   <title>
-   <key>en</key>
-   <value>Description</value>
+   <key>tr</key>
+   <value>Tanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tanım</value>
+   <key>en</key>
+   <value>Description</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2643,16 +2643,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2669,16 +2669,16 @@
  <attributes>
   <name>AddAttributeViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Additional attribute view HTML</value>
+   <key>tr</key>
+   <value>Ek özellik görünümü HTML</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображение дополнительного реквизита в HTML поле</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek özellik görünümü HTML</value>
+   <key>en</key>
+   <value>Additional attribute view HTML</value>
   </title>
   <id>4</id>
   <valueType>
@@ -2695,16 +2695,16 @@
  <attributes>
   <name>DetailsTree</name>
   <title>
-   <key>en</key>
-   <value>Details tree</value>
+   <key>tr</key>
+   <value>Detaylar Ağacı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Детали дерева</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Detaylar Ağacı</value>
+   <key>en</key>
+   <value>Details tree</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2719,16 +2719,16 @@
   <columns>
    <name>RefValue</name>
    <title>
-    <key>en</key>
-    <value>Ref value</value>
+    <key>tr</key>
+    <value>Ref değeri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылочное значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ref değeri</value>
+    <key>en</key>
+    <value>Ref value</value>
    </title>
    <id>6</id>
    <valueType>
@@ -2744,7 +2744,7 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Description</value>
    </title>
    <title>
@@ -2752,7 +2752,7 @@
     <value>Description</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Description</value>
    </title>
    <id>7</id>
@@ -2768,16 +2768,16 @@
  <formCommands>
   <name>ViewAdditionalAttribute</name>
   <title>
-   <key>en</key>
-   <value>View additional attribute</value>
+   <key>tr</key>
+   <value>Ek alanları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать внешний реквизит</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek alanları göster</value>
+   <key>en</key>
+   <value>View additional attribute</value>
   </title>
   <id>1</id>
   <use>
@@ -2797,16 +2797,16 @@
  <formCommands>
   <name>ViewPictures</name>
   <title>
-   <key>en</key>
-   <value>View pictures</value>
+   <key>tr</key>
+   <value>Resimleri göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать картинки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resimleri göster</value>
+   <key>en</key>
+   <value>View pictures</value>
   </title>
   <id>2</id>
   <use>
@@ -2826,16 +2826,16 @@
  <formCommands>
   <name>ViewDetailsTree</name>
   <title>
-   <key>en</key>
-   <value>View details tree</value>
+   <key>tr</key>
+   <value>Detaylar Ağacını Görüntüle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр деталей дерева</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Detaylar Ağacını Görüntüle</value>
+   <key>en</key>
+   <value>View details tree</value>
   </title>
   <id>3</id>
   <use>
@@ -2855,16 +2855,16 @@
  <formCommands>
   <name>Tree_RefreshData</name>
   <title>
-   <key>en</key>
-   <value>Refresh data</value>
+   <key>tr</key>
+   <value>Verileri Yenile</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Verileri Yenile</value>
+   <key>en</key>
+   <value>Refresh data</value>
   </title>
   <id>4</id>
   <use>
@@ -2884,16 +2884,16 @@
  <formCommands>
   <name>Tree_ExpandAll</name>
   <title>
-   <key>en</key>
-   <value>Tree expand all</value>
+   <key>tr</key>
+   <value>Tümünü Genişlet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Развернуть дерево</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümünü Genişlet</value>
+   <key>en</key>
+   <value>Tree expand all</value>
   </title>
   <id>5</id>
   <use>
@@ -2913,16 +2913,16 @@
  <formCommands>
   <name>Tree_CollapseAll</name>
   <title>
-   <key>en</key>
-   <value>Tree collapse all</value>
+   <key>tr</key>
+   <value>Tümünü Daralt</value>
   </title>
   <title>
    <key>ru</key>
    <value>Свернуть дерево</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümünü Daralt</value>
+   <key>en</key>
+   <value>Tree collapse all</value>
   </title>
   <id>6</id>
   <use>

@@ -11,32 +11,32 @@
  </producedTypes>
  <name>T9052S_AccountingRelevance</name>
  <synonym>
-  <key>en</key>
-  <value>T9052 Accounting relevance</value>
+  <key>tr</key>
+  <value>T9052 Muhasebe kayıt geçerliği</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9052 Актуальность бух. учета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9052 Muhasebe kayıt geçerliği</value>
+  <key>en</key>
+  <value>T9052 Accounting relevance</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <resources uuid="5408bd43-ab58-4dce-bdca-8fc7aca6a516">
   <name>CurrentMD5</name>
   <synonym>
-   <key>en</key>
-   <value>Current MD5</value>
+   <key>tr</key>
+   <value>Geçerli MD5</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Текущий MD5</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Geçerli MD5</value>
+   <key>en</key>
+   <value>Current MD5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -53,16 +53,16 @@
  <resources uuid="4f1422e0-0e5a-4efd-9df9-0aa8f0c6736b">
   <name>ProcessedMD5</name>
   <synonym>
-   <key>en</key>
-   <value>Processed MD5</value>
+   <key>tr</key>
+   <value>İşlenmiş MD5</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Обработанный MD5</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşlenmiş MD5</value>
+   <key>en</key>
+   <value>Processed MD5</value>
   </synonym>
   <type>
    <types>String</types>
@@ -79,16 +79,16 @@
  <resources uuid="07583e9c-b70c-4c3b-9c09-a5e61be9d6d3">
   <name>CountErrors</name>
   <synonym>
-   <key>en</key>
-   <value>Count errors</value>
+   <key>tr</key>
+   <value>Hata adedi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество ошибок</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hata adedi</value>
+   <key>en</key>
+   <value>Count errors</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -105,16 +105,16 @@
  <dimensions uuid="825100c2-babd-474c-ae3c-20f7cc566441">
   <name>Document</name>
   <synonym>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </synonym>
   <type>
    <types>DefinedType.typeAccountingDocuments</types>
@@ -131,16 +131,16 @@
  <dimensions uuid="ce247e18-bb2c-44de-8b21-ac0afd34618e">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>

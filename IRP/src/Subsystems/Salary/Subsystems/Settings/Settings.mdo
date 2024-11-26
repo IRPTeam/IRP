@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="acf9a018-d7b5-430f-b36e-cb01bdf2f1b8">
  <name>Settings</name>
  <synonym>
-  <key>en</key>
-  <value>Settings</value>
+  <key>tr</key>
+  <value>Ayarlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ayarlar</value>
+  <key>en</key>
+  <value>Settings</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

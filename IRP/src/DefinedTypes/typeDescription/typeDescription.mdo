@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeDescription</name>
  <synonym>
-  <key>en</key>
-  <value>Type description</value>
+  <key>tr</key>
+  <value>Tip tanım</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип комментарий</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip tanım</value>
+  <key>en</key>
+  <value>Type description</value>
  </synonym>
  <type>
   <types>String</types>

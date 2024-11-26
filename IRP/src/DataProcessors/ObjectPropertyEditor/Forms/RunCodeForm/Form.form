@@ -4,16 +4,16 @@
   <name>AvailableVariables</name>
   <id>10</id>
   <title>
-   <key>en</key>
-   <value>ObjectRef - the name of the variable to work with the current data ref. </value>
+   <key>tr</key>
+   <value>ObjectRef - geçerli veri ref ile çalışmak için değişkenin adı.</value>
   </title>
   <title>
    <key>ru</key>
    <value>ObjectRef - переменная для работы с ссылкой текущих данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>ObjectRef - geçerli veri ref ile çalışmak için değişkenin adı.</value>
+   <key>en</key>
+   <value>ObjectRef - the name of the variable to work with the current data ref. </value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -190,16 +190,16 @@
  <attributes>
   <name>CodeText</name>
   <title>
-   <key>en</key>
-   <value>Code text</value>
+   <key>tr</key>
+   <value>Kod metni</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текст кода</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kod metni</value>
+   <key>en</key>
+   <value>Code text</value>
   </title>
   <id>1</id>
   <valueType>
@@ -216,16 +216,16 @@
  <attributes>
   <name>ObjectTable</name>
   <title>
-   <key>en</key>
-   <value>Object table</value>
+   <key>tr</key>
+   <value>Nesne tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица объекта</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Nesne tablosu</value>
+   <key>en</key>
+   <value>Object table</value>
   </title>
   <id>2</id>
   <valueType>
@@ -240,7 +240,7 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Ref</value>
    </title>
    <title>
@@ -248,7 +248,7 @@
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Ref</value>
    </title>
    <id>3</id>
@@ -266,16 +266,16 @@
  <formCommands>
   <name>RunCode</name>
   <title>
-   <key>en</key>
-   <value>Run code</value>
+   <key>tr</key>
+   <value>Kod çalıştır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Запустить код</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kod çalıştır</value>
+   <key>en</key>
+   <value>Run code</value>
   </title>
   <id>1</id>
   <use>

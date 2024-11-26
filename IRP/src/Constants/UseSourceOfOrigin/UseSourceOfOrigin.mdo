@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseSourceOfOrigin</name>
  <synonym>
-  <key>en</key>
-  <value>Use source of origin</value>
+  <key>tr</key>
+  <value>Kaynak kökeni kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать источники происхождения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak kökeni kullan</value>
+  <key>en</key>
+  <value>Use source of origin</value>
  </synonym>
  <type>
   <types>Boolean</types>

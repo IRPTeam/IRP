@@ -7,47 +7,47 @@
  </producedTypes>
  <name>ProductionTransactionTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Production transaction types</value>
+  <key>tr</key>
+  <value>Üretim işlem türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Типы транзакций производства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Üretim işlem türleri</value>
+  <key>en</key>
+  <value>Production transaction types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="7fa684b5-c180-48e9-9a36-8d0480e50a71">
   <name>Produce</name>
   <synonym>
-   <key>en</key>
-   <value>Produce</value>
+   <key>tr</key>
+   <value>Üret</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Производить</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Üret</value>
+   <key>en</key>
+   <value>Produce</value>
   </synonym>
  </enumValues>
  <enumValues uuid="38a73a47-f6e1-47ee-bd17-2758e5245bfd">
   <name>Repacking</name>
   <synonym>
-   <key>en</key>
-   <value>Repacking</value>
+   <key>tr</key>
+   <value>Yeniden paketleme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Перепроизводство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yeniden paketleme</value>
+   <key>en</key>
+   <value>Repacking</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

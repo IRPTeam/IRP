@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -205,16 +205,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Calendar</value>
+     <key>tr</key>
+     <value>Takvim</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Календарь</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Takvim</value>
+     <key>en</key>
+     <value>Calendar</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Calendar</value>
@@ -222,16 +222,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Table</value>
+     <key>tr</key>
+     <value>Tablo</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Таблица</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Tablo</value>
+     <key>en</key>
+     <value>Table</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>Table</value>
@@ -592,16 +592,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Page List</value>
+    <key>tr</key>
+    <value>Sayfa Listesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Список страниц</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sayfa Listesi</value>
+    <key>en</key>
+    <value>Page List</value>
    </title>
    <extendedTooltip>
     <name>GroupListExtendedTooltip</name>
@@ -696,16 +696,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Page Calendar</value>
+    <key>tr</key>
+    <value>Sayfa Takvimi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Календарь страницы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sayfa Takvimi</value>
+    <key>en</key>
+    <value>Page Calendar</value>
    </title>
    <extendedTooltip>
     <name>GroupCalendarExtendedTooltip</name>
@@ -734,16 +734,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>GroupPages</value>
+   <key>tr</key>
+   <value>GrupSayfaları</value>
   </title>
   <title>
    <key>ru</key>
    <value>GroupPages</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>GrupSayfaları</value>
+   <key>en</key>
+   <value>GroupPages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -895,16 +895,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Employee schedule</value>
+       <key>tr</key>
+       <value>Çalışan programı</value>
       </content>
       <content>
        <key>ru</key>
        <value>Штатное расписание</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Çalışan programı</value>
+       <key>en</key>
+       <value>Employee schedule</value>
       </content>
      </localValue>
     </title>
@@ -919,16 +919,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Begin period</value>
+       <key>tr</key>
+       <value>Başlangıç tarihi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Начало периода</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Başlangıç tarihi</value>
+       <key>en</key>
+       <value>Begin period</value>
       </content>
      </localValue>
     </title>
@@ -944,16 +944,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>End period</value>
+       <key>tr</key>
+       <value>Son tarih</value>
       </content>
       <content>
        <key>ru</key>
        <value>Конец периода</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Son tarih</value>
+       <key>en</key>
+       <value>End period</value>
       </content>
      </localValue>
     </title>
@@ -969,16 +969,16 @@ WHERE
  <attributes>
   <name>EmployeeScheduleFilter</name>
   <title>
-   <key>en</key>
-   <value>Employee schedule</value>
+   <key>tr</key>
+   <value>Çalışan programı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штатное расписание</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışan programı</value>
+   <key>en</key>
+   <value>Employee schedule</value>
   </title>
   <id>2</id>
   <valueType>
@@ -994,16 +994,16 @@ WHERE
  <attributes>
   <name>ListMode</name>
   <title>
-   <key>en</key>
-   <value>List mode</value>
+   <key>tr</key>
+   <value>Liste modu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Режим списка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Liste modu</value>
+   <key>en</key>
+   <value>List mode</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1020,16 +1020,16 @@ WHERE
  <attributes>
   <name>Calendar</name>
   <title>
-   <key>en</key>
-   <value>Calendar</value>
+   <key>tr</key>
+   <value>Takvim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Календарь</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Takvim</value>
+   <key>en</key>
+   <value>Calendar</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1048,16 +1048,16 @@ WHERE
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1073,16 +1073,16 @@ WHERE
  <formCommands>
   <name>CreateSchedule</name>
   <title>
-   <key>en</key>
-   <value>Create schedule</value>
+   <key>tr</key>
+   <value>Program oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать график</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Program oluştur</value>
+   <key>en</key>
+   <value>Create schedule</value>
   </title>
   <id>1</id>
   <use>
@@ -1102,16 +1102,16 @@ WHERE
  <formCommands>
   <name>CopySchedule</name>
   <title>
-   <key>en</key>
-   <value>Copy schedule</value>
+   <key>tr</key>
+   <value>Programı kopyala</value>
   </title>
   <title>
    <key>ru</key>
    <value>Копировать расписание</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Programı kopyala</value>
+   <key>en</key>
+   <value>Copy schedule</value>
   </title>
   <id>2</id>
   <use>

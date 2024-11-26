@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="65b553bd-ace3-4402-9926-3d4213773a24">
  <name>LocalTotalAmount</name>
  <synonym>
-  <key>en</key>
-  <value>Local total amount</value>
+  <key>tr</key>
+  <value>Yerel toplam tutar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Локальная сумма итого</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yerel toplam tutar</value>
+  <key>en</key>
+  <value>Local total amount</value>
  </synonym>
  <type>
   <types>DefinedType.typeAmount</types>

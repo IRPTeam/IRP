@@ -183,16 +183,16 @@
     <name>DecorationAttachMode</name>
     <id>217</id>
     <title>
-     <key>en</key>
-     <value>Attach mode</value>
+     <key>tr</key>
+     <value>Ekleme modu</value>
     </title>
     <title>
      <key>ru</key>
      <value>Режим прикрепления</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ekleme modu</value>
+     <key>en</key>
+     <value>Attach mode</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -324,16 +324,16 @@
     <name>ShowSettings</name>
     <id>181</id>
     <title>
-     <key>en</key>
-     <value>Settings</value>
+     <key>tr</key>
+     <value>Ayarlar</value>
     </title>
     <title>
      <key>ru</key>
      <value>Настройки</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ayarlar</value>
+     <key>en</key>
+     <value>Settings</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -398,16 +398,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group top</value>
+   <key>tr</key>
+   <value>Grup üst</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Верх</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup üst</value>
+   <key>en</key>
+   <value>Group top</value>
   </title>
   <extendedTooltip>
    <name>GroupTopExtendedTooltip</name>
@@ -456,16 +456,16 @@
      <name>DocumentsIsAuditLock</name>
      <id>169</id>
      <title>
-      <key>en</key>
-      <value>Audit lock</value>
+      <key>tr</key>
+      <value>Audit kilidi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Аудиторский запрет изменения</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Audit kilidi</value>
+      <key>en</key>
+      <value>Audit lock</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -573,16 +573,16 @@
      <name>DocumentsFillCheckingStatus</name>
      <id>193</id>
      <title>
-      <key>en</key>
-      <value>Status</value>
+      <key>tr</key>
+      <value>Statü</value>
      </title>
      <title>
       <key>ru</key>
       <value>Статус</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Statü</value>
+      <key>en</key>
+      <value>Status</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -788,28 +788,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Documents date number</value>
+      <key>tr</key>
+      <value>Evraklar tarih numara</value>
      </title>
      <title>
       <key>ru</key>
       <value>Дата и номер документов</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Evraklar tarih numara</value>
-     </title>
-     <toolTip>
       <key>en</key>
       <value>Documents date number</value>
+     </title>
+     <toolTip>
+      <key>tr</key>
+      <value>Evraklar tarih numara</value>
      </toolTip>
      <toolTip>
       <key>ru</key>
       <value>Дата и номер документов</value>
      </toolTip>
      <toolTip>
-      <key>tr</key>
-      <value>Evraklar tarih numara</value>
+      <key>en</key>
+      <value>Documents date number</value>
      </toolTip>
      <extendedTooltip>
       <name>DocumentsDateNumberExtendedTooltip</name>
@@ -835,16 +835,16 @@
      <name>DocumentsDocRef</name>
      <id>20</id>
      <title>
-      <key>en</key>
-      <value>Document</value>
+      <key>tr</key>
+      <value>Evrak</value>
      </title>
      <title>
       <key>ru</key>
       <value>Документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Evrak</value>
+      <key>en</key>
+      <value>Document</value>
      </title>
      <enabled>true</enabled>
      <userVisible>
@@ -1178,16 +1178,16 @@
        <name>DocumentsLockDocuments</name>
        <id>174</id>
        <title>
-        <key>en</key>
-        <value>Lock selected</value>
+        <key>tr</key>
+        <value>Seçileni kilitle</value>
        </title>
        <title>
         <key>ru</key>
         <value>Блокировать выбранные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Seçileni kilitle</value>
+        <key>en</key>
+        <value>Lock selected</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -1223,16 +1223,16 @@
        <name>DocumentsUnlockDocuments</name>
        <id>176</id>
        <title>
-        <key>en</key>
-        <value>Unlock selected</value>
+        <key>tr</key>
+        <value>Seçilenin kilidini aç</value>
        </title>
        <title>
         <key>ru</key>
         <value>Разблокировать выбранные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Seçilenin kilidini aç</value>
+        <key>en</key>
+        <value>Unlock selected</value>
        </title>
        <visible>true</visible>
        <enabled>true</enabled>
@@ -1270,28 +1270,28 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Lock/Unlock</value>
+       <key>tr</key>
+       <value>Kilitle/Kilit aç</value>
       </title>
       <title>
        <key>ru</key>
        <value>Блокировать/Разблокировать</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Kilitle/Kilit aç</value>
+       <key>en</key>
+       <value>Lock/Unlock</value>
       </title>
       <toolTip>
-       <key>en</key>
-       <value>Documents group lock unlock</value>
+       <key>tr</key>
+       <value>Evraklar grup kilitle kilit aç</value>
       </toolTip>
       <toolTip>
        <key>ru</key>
        <value>Блокировка/разблокировка группы документов</value>
       </toolTip>
       <toolTip>
-       <key>tr</key>
-       <value>Evraklar grup kilitle kilit aç</value>
+       <key>en</key>
+       <value>Documents group lock unlock</value>
       </toolTip>
       <extendedTooltip>
        <name>DocumentsGroupLockUnlockExtendedTooltip</name>
@@ -1320,16 +1320,16 @@
       <name>DocumentsShowOnlyUnlocked</name>
       <id>215</id>
       <title>
-       <key>en</key>
-       <value>Only unlocked</value>
+       <key>tr</key>
+       <value>Sadece kilitli olmayanlar</value>
       </title>
       <title>
        <key>ru</key>
        <value>Только разблокированные</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Sadece kilitli olmayanlar</value>
+       <key>en</key>
+       <value>Only unlocked</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1360,16 +1360,16 @@
      </items>
      <items xsi:type="form:Addition">
       <title>
-       <key>en</key>
-       <value>Search</value>
+       <key>tr</key>
+       <value>Ara</value>
       </title>
       <title>
        <key>ru</key>
        <value>Поиск</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ara</value>
+       <key>en</key>
+       <value>Search</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1980,16 +1980,16 @@
     <common>true</common>
    </userVisible>
    <toolTip>
-    <key>en</key>
-    <value>Group tables left</value>
+    <key>tr</key>
+    <value>Grup tablolar sol</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа таблиц слева</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Grup tablolar sol</value>
+    <key>en</key>
+    <value>Group tables left</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTablesLeftExtendedTooltip</name>
@@ -2521,16 +2521,16 @@
      <common>true</common>
     </userVisible>
     <toolTip>
-     <key>en</key>
-     <value>Group docs to attach</value>
+     <key>tr</key>
+     <value>Grup eklenecek evraklar</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Группа документов для прикрепления</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
-     <value>Grup eklenecek evraklar</value>
+     <key>en</key>
+     <value>Group docs to attach</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupDocsToAttachExtendedTooltip</name>
@@ -2607,16 +2607,16 @@
       <verticalStretch>true</verticalStretch>
       <pictureSize>Proportionally</pictureSize>
       <nonselectedPictureText>
-       <key>en</key>
-       <value>No image preview</value>
+       <key>tr</key>
+       <value>Önzilenecek resim yok</value>
       </nonselectedPictureText>
       <nonselectedPictureText>
        <key>ru</key>
        <value>Нет изображения для предпросмотра</value>
       </nonselectedPictureText>
       <nonselectedPictureText>
-       <key>tr</key>
-       <value>Önzilenecek resim yok</value>
+       <key>en</key>
+       <value>No image preview</value>
       </nonselectedPictureText>
       <border xsi:type="core:BorderDef">
        <width>1</width>
@@ -2703,7 +2703,7 @@
         <autoFill>true</autoFill>
        </contextMenu>
        <type>ViewStatusAddition</type>
-       <source>PDFViewerViewStatus</source>
+       <source>PDFViewer</source>
        <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
        </extInfo>
@@ -2752,28 +2752,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group tables right</value>
+    <key>tr</key>
+    <value>Grup tablolar sağ</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа таблиц справа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Grup tablolar sağ</value>
-   </title>
-   <toolTip>
     <key>en</key>
     <value>Group tables right</value>
+   </title>
+   <toolTip>
+    <key>tr</key>
+    <value>Grup tablolar sağ</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Группа таблиц справа</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Grup tablolar sağ</value>
+    <key>en</key>
+    <value>Group tables right</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupTablesRightExtendedTooltip</name>
@@ -2806,28 +2806,28 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group tables</value>
+   <key>tr</key>
+   <value>Grup tablolar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа таблиц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup tablolar</value>
-  </title>
-  <toolTip>
    <key>en</key>
    <value>Group tables</value>
+  </title>
+  <toolTip>
+   <key>tr</key>
+   <value>Grup tablolar</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа таблиц</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Grup tablolar</value>
+   <key>en</key>
+   <value>Group tables</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupTablesExtendedTooltip</name>
@@ -2902,16 +2902,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2927,16 +2927,16 @@
  <attributes>
   <name>CurrentFiles</name>
   <title>
-   <key>en</key>
-   <value>Current files</value>
+   <key>tr</key>
+   <value>Geçerli dosyalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущие файлы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli dosyalar</value>
+   <key>en</key>
+   <value>Current files</value>
   </title>
   <id>5</id>
   <valueType>
@@ -2955,16 +2955,16 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>en</key>
-   <value>Preview</value>
+   <key>tr</key>
+   <value>Ön izleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предварительный просмотр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ön izleme</value>
+   <key>en</key>
+   <value>Preview</value>
   </title>
   <id>6</id>
   <valueType>
@@ -2981,16 +2981,16 @@
  <attributes>
   <name>CurrentFilesTable</name>
   <title>
-   <key>en</key>
-   <value>Current files table</value>
+   <key>tr</key>
+   <value>Geçerli dosyalar tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица текущих файлов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli dosyalar tablosu</value>
+   <key>en</key>
+   <value>Current files table</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3005,16 +3005,16 @@
   <columns>
    <name>File</name>
    <title>
-    <key>en</key>
-    <value>File</value>
+    <key>tr</key>
+    <value>Dosya</value>
    </title>
    <title>
     <key>ru</key>
     <value>Файл</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya</value>
+    <key>en</key>
+    <value>File</value>
    </title>
    <id>1</id>
    <valueType>
@@ -3030,16 +3030,16 @@
   <columns>
    <name>Comment</name>
    <title>
-    <key>en</key>
-    <value>Comment</value>
+    <key>tr</key>
+    <value>Açıklama</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комментарий</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Açıklama</value>
+    <key>en</key>
+    <value>Comment</value>
    </title>
    <id>2</id>
    <valueType>
@@ -3056,16 +3056,16 @@
   <columns>
    <name>FilePresentation</name>
    <title>
-    <key>en</key>
-    <value>File presentation</value>
+    <key>tr</key>
+    <value>Dosya görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Представление файла   </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya görünüm</value>
+    <key>en</key>
+    <value>File presentation</value>
    </title>
    <id>11</id>
    <valueType>
@@ -3081,16 +3081,16 @@
   <columns>
    <name>IsRequired</name>
    <title>
-    <key>en</key>
-    <value>Is required</value>
+    <key>tr</key>
+    <value>Zorunlu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Обязательно           </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Zorunlu</value>
+    <key>en</key>
+    <value>Is required</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3106,16 +3106,16 @@
   <columns>
    <name>NamingFormat</name>
    <title>
-    <key>en</key>
-    <value>Naming format</value>
+    <key>tr</key>
+    <value>İsimlendirme formatı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Формат наименования   </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İsimlendirme formatı</value>
+    <key>en</key>
+    <value>Naming format</value>
    </title>
    <id>13</id>
    <valueType>
@@ -3135,16 +3135,16 @@
  <attributes>
   <name>PDFViewer</name>
   <title>
-   <key>en</key>
-   <value>PDFViewer</value>
+   <key>tr</key>
+   <value>PDF önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>PDF Просмотрщик</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>PDF önizleme</value>
+   <key>en</key>
+   <value>PDFViewer</value>
   </title>
   <id>3</id>
   <valueType>
@@ -3160,16 +3160,16 @@
  <attributes>
   <name>CheckMode</name>
   <title>
-   <key>en</key>
-   <value>Check mode</value>
+   <key>tr</key>
+   <value>Kontrol modu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Режим проверки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kontrol modu</value>
+   <key>en</key>
+   <value>Check mode</value>
   </title>
   <id>8</id>
   <valueType>
@@ -3185,16 +3185,16 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </title>
   <id>9</id>
   <valueType>
@@ -3215,16 +3215,16 @@
  <attributes>
   <name>LastDocumentRef</name>
   <title>
-   <key>en</key>
-   <value>Last document ref</value>
+   <key>tr</key>
+   <value>Son evrak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка последнего документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Son evrak ref</value>
+   <key>en</key>
+   <value>Last document ref</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3240,29 +3240,29 @@
  <formCommands>
   <name>FillDocuments</name>
   <title>
-   <key>en</key>
-   <value>Fill documents</value>
+   <key>tr</key>
+   <value>Belgeleri doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belgeleri doldur</value>
+   <key>en</key>
+   <value>Fill documents</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Fill documents</value>
+   <key>tr</key>
+   <value>Belgeleri doldur</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Заполнить документы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Belgeleri doldur</value>
+   <key>en</key>
+   <value>Fill documents</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3277,29 +3277,29 @@
  <formCommands>
   <name>LockDocuments</name>
   <title>
-   <key>en</key>
-   <value>Lock documents</value>
+   <key>tr</key>
+   <value>Evrakları kilitle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Блокировать документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrakları kilitle</value>
+   <key>en</key>
+   <value>Lock documents</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>en</key>
-   <value>Lock documents</value>
+   <key>tr</key>
+   <value>Evrakları kilitle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Блокировать документы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Evrakları kilitle</value>
+   <key>en</key>
+   <value>Lock documents</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3314,29 +3314,29 @@
  <formCommands>
   <name>UnlockDocuments</name>
   <title>
-   <key>en</key>
-   <value>Unlock documents</value>
+   <key>tr</key>
+   <value>Evrakları kilidi aç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Разблокировать документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrakları kilidi aç</value>
+   <key>en</key>
+   <value>Unlock documents</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>en</key>
-   <value>Unlock documents</value>
+   <key>tr</key>
+   <value>Evrakları kilidi aç</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Разблокировать документы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Evrakları kilidi aç</value>
+   <key>en</key>
+   <value>Unlock documents</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3351,29 +3351,29 @@
  <formCommands>
   <name>ShowSettings</name>
   <title>
-   <key>en</key>
-   <value>Show settings</value>
+   <key>tr</key>
+   <value>Ayarları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları göster</value>
+   <key>en</key>
+   <value>Show settings</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>en</key>
-   <value>Show settings</value>
+   <key>tr</key>
+   <value>Ayarları göster</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Показать настройки</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Ayarları göster</value>
+   <key>en</key>
+   <value>Show settings</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3388,29 +3388,29 @@
  <formCommands>
   <name>AttachOther</name>
   <title>
-   <key>en</key>
-   <value>I have no current document</value>
+   <key>tr</key>
+   <value>Geçerli bir evrak yoktur</value>
   </title>
   <title>
    <key>ru</key>
    <value>У меня не текущий документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli bir evrak yoktur</value>
+   <key>en</key>
+   <value>I have no current document</value>
   </title>
   <id>5</id>
   <toolTip>
-   <key>en</key>
-   <value>Attach other</value>
+   <key>tr</key>
+   <value>Diğer ekle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Прикрепить другой</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Diğer ekle</value>
+   <key>en</key>
+   <value>Attach other</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3425,29 +3425,29 @@
  <formCommands>
   <name>ShowOnlyUnlocked</name>
   <title>
-   <key>en</key>
-   <value>Show only unlocked</value>
+   <key>tr</key>
+   <value>Sadece kilitli olmayanları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показывать только разблокированные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sadece kilitli olmayanları göster</value>
+   <key>en</key>
+   <value>Show only unlocked</value>
   </title>
   <id>6</id>
   <toolTip>
-   <key>en</key>
-   <value>Show only unlocked</value>
+   <key>tr</key>
+   <value>Sadece kilitli olmayanları göster</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Показывать только разблокированные</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Sadece kilitli olmayanları göster</value>
+   <key>en</key>
+   <value>Show only unlocked</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3462,16 +3462,16 @@
  <formCommands>
   <name>AddNewDocument</name>
   <title>
-   <key>en</key>
-   <value>Attach document</value>
+   <key>tr</key>
+   <value>Dış evrak ekle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Прикрепить документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış evrak ekle</value>
+   <key>en</key>
+   <value>Attach document</value>
   </title>
   <id>7</id>
   <use>
@@ -3491,16 +3491,16 @@
  <formCommands>
   <name>DownloadFile</name>
   <title>
-   <key>en</key>
-   <value>Download file</value>
+   <key>tr</key>
+   <value>Dosya indir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скачать файл</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya indir</value>
+   <key>en</key>
+   <value>Download file</value>
   </title>
   <id>8</id>
   <use>

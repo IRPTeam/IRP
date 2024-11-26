@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54e688f2-a9eb-4646-90eb-5b83bb62cc4b">
  <name>CashTransactions</name>
  <synonym>
-  <key>en</key>
-  <value>Cash transactions</value>
+  <key>tr</key>
+  <value>Kasa/banka işlemleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Контроль взаиморасчетов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kasa/banka işlemleri</value>
+  <key>en</key>
+  <value>Cash transactions</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>

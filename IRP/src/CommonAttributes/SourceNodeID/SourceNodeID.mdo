@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a3699ccd-697e-4bb0-a8d5-76a0331ccb14">
  <name>SourceNodeID</name>
  <synonym>
-  <key>en</key>
-  <value>Source node ID</value>
+  <key>tr</key>
+  <value>Kaynak düğüm ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>ID узла источника</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kaynak düğüm ID</value>
+  <key>en</key>
+  <value>Source node ID</value>
  </synonym>
  <type>
   <types>String</types>
@@ -248,7 +248,7 @@
   <use>Use</use>
  </content>
  <content>
-  <metadata>Catalog.Locations</metadata>
+  <metadata>Catalog.ObjectLocations</metadata>
   <use>Use</use>
  </content>
  <content>

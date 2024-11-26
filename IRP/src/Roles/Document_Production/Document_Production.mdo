@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0a40a05-5a85-4692-9dbe-43e680f3d57e">
  <name>Document_Production</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Production"</value>
+  <key>tr</key>
+  <value>Belge "Üretim"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Производство"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Üretim"</value>
+  <key>en</key>
+  <value>Document "Production"</value>
  </synonym>
 </mdclass:Role>

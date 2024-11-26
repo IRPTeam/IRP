@@ -103,16 +103,16 @@
 					<f>6</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Project "[Project]"</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Proje "[Project]"</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Project "[Project]"</v8:content>
+							<v8:content>Проект "[Project]"  </v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Proje "[Project]"</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Project "[Project]"</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -146,16 +146,16 @@
 					<f>9</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Issue type</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Talep tipi</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Issue type</v8:content>
+							<v8:content>Тип проблемы       </v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Talep tipi</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Issue type</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -183,16 +183,16 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Start date</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Başlangıç tarihi</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Начало периода</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Başlangıç tarihi</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Start date</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -215,16 +215,16 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Due date</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>Vade tarihi</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
 							<v8:content>Срок исполнения</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>Vade tarihi</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Due date</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -247,16 +247,16 @@
 					<f>7</f>
 					<tl>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Job description</v8:content>
+							<v8:lang>tr</v8:lang>
+							<v8:content>İş açıklaması</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Job description</v8:content>
+							<v8:content>Наименование работы</v8:content>
 						</v8:item>
 						<v8:item>
-							<v8:lang>tr</v8:lang>
-							<v8:content>İş açıklaması</v8:content>
+							<v8:lang>en</v8:lang>
+							<v8:content>Job description</v8:content>
 						</v8:item>
 					</tl>
 				</c>

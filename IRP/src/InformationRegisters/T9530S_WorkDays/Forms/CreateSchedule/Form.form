@@ -209,16 +209,16 @@
    <textEdit>true</textEdit>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Week with days off</value>
+     <key>tr</key>
+     <value>İzinli günlerle hafta</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Неделя с выходными</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>İzinli günlerle hafta</value>
+     <key>en</key>
+     <value>Week with days off</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>WeekWithDaysOff</value>
@@ -226,16 +226,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>In two days</value>
+     <key>tr</key>
+     <value>İki gün içinde</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Через два дня</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>İki gün içinde</value>
+     <key>en</key>
+     <value>In two days</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>InTwoDays</value>
@@ -243,16 +243,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Two in two days</value>
+     <key>tr</key>
+     <value>İki günde bir</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Два через два дня</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>İki günde bir</value>
+     <key>en</key>
+     <value>Two in two days</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>TwoInTwoDays</value>
@@ -260,16 +260,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Three in Three days</value>
+     <key>tr</key>
+     <value>Üç günde Üç gün</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Три через три дня</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Üç günde Üç gün</value>
+     <key>en</key>
+     <value>Three in Three days</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ThreeInThreeDays</value>
@@ -618,16 +618,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Weekends</value>
+   <key>tr</key>
+   <value>Hafta sonları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выходные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hafta sonları</value>
+   <key>en</key>
+   <value>Weekends</value>
   </title>
   <extendedTooltip>
    <name>GroupWeekendsExtendedTooltip</name>
@@ -748,16 +748,16 @@
  <attributes>
   <name>EmployeeSchedule</name>
   <title>
-   <key>en</key>
-   <value>Employee schedule</value>
+   <key>tr</key>
+   <value>Çalışan programı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Штатное расписание</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışan programı</value>
+   <key>en</key>
+   <value>Employee schedule</value>
   </title>
   <id>1</id>
   <valueType>
@@ -774,16 +774,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>4</id>
   <valueType>
@@ -800,16 +800,16 @@
  <attributes>
   <name>Weekends</name>
   <title>
-   <key>en</key>
-   <value>Weekends</value>
+   <key>tr</key>
+   <value>Hafta sonları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выходные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hafta sonları</value>
+   <key>en</key>
+   <value>Weekends</value>
   </title>
   <id>5</id>
   <valueType>
@@ -833,16 +833,16 @@
  <attributes>
   <name>ScheduleVariant</name>
   <title>
-   <key>en</key>
-   <value>Schedule variant</value>
+   <key>tr</key>
+   <value>Program çeşidi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вариант расписания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Program çeşidi</value>
+   <key>en</key>
+   <value>Schedule variant</value>
   </title>
   <id>6</id>
   <valueType>
@@ -862,16 +862,16 @@
  <attributes>
   <name>StartWorkingDay</name>
   <title>
-   <key>en</key>
-   <value>Start working day</value>
+   <key>tr</key>
+   <value>İşe başlama günü</value>
   </title>
   <title>
    <key>ru</key>
    <value>Начало рабочего дня</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşe başlama günü</value>
+   <key>en</key>
+   <value>Start working day</value>
   </title>
   <id>7</id>
   <valueType>
@@ -891,16 +891,16 @@
  <attributes>
   <name>CountHours</name>
   <title>
-   <key>en</key>
-   <value>Count hours</value>
+   <key>tr</key>
+   <value>Saat say</value>
   </title>
   <title>
    <key>ru</key>
    <value>Подсчитать часы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Saat say</value>
+   <key>en</key>
+   <value>Count hours</value>
   </title>
   <id>8</id>
   <valueType>
@@ -920,16 +920,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -945,16 +945,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>

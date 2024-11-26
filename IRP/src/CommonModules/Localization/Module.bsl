@@ -2037,6 +2037,12 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_174", NStr("en='There can be only one currency set in the document.';
 		|ru='В документе может быть указана только одна валюта.';
 		|tr='Evrakta sadece tek döviz seçilebilir.'", Lang));
+	Strings.Insert("Error_175", NStr("en='Recorder URL is Empty';
+		|ru='URL регистратора пуст';
+		|tr='Kayıt evrağın URL boştur'", Lang));
+	Strings.Insert("Error_176", NStr("en='Fill Integration Settings in ""Ledger Type""';
+		|ru='Заполните настройки интеграции в ""Типе журнала""';
+		|tr='""Defter tipinde"" Entegrasyon ayaraları seçiniz'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';
@@ -3565,6 +3571,10 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	NStr("en='AdditionalRevenueAllocation DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|ru='Дополнительное распределение доходов DR (R5021T_Revenues) CR (R4050B_StockInventory)';
 		|tr='Ek Gelir Dağılımı DR (R5021T_Gelirler) CR (R4050B_StokEnvanteri)'", Lang));
+	
+Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External accounting operation exchange report';
+	|ru='Отчет по обменам внешних бухгалтерских операци';
+	|tr='Dış muhaseb evrakları veri alış veriş raporu'", Lang));	
 
 #EndRegion
 
@@ -3781,10 +3791,13 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 	Strings.Insert("PeriodClosing_Step5", NStr("en='Customers advances closing';
 		|ru='Закрытие авансов покупателей.';
 		|tr='Müşteri avans kapatma'", Lang));
-	Strings.Insert("PeriodClosing_Step6", NStr("en='Foreign currency revaluation';
+	Strings.Insert("PeriodClosing_Step6", NStr("en='Depreciation calculation';
+		|ru='Амортизация и износ основных средств';
+		|tr='Amortisman hesaplaması'", Lang));
+	Strings.Insert("PeriodClosing_Step7", NStr("en='Foreign currency revaluation';
 		|ru='Переоценка валютных остатков';
 		|tr='Yabancı para birimi değerlemesi'", Lang));
-	Strings.Insert("PeriodClosing_Step7", NStr("en='Accounting translation';
+	Strings.Insert("PeriodClosing_Step8", NStr("en='Accounting translation';
 		|ru='Отражение в бухгалтерском учете';
 		|tr='Muhasebe hareket yansıması'", Lang));
 	
@@ -3831,31 +3844,31 @@ Strings.Insert("AdditionalRevenueAllocation_DR_R5021T_Revenues_CR_R4050B_StockIn
 
 #Region Mobile
 	Strings.Insert("Mobile_1", NStr("en='Photo is not supported. Check app`s access to camera';
-		|ru='Photo is not supported. Check app`s access to camera';
+		|ru='Фото не поддерживается. Проверьте доступ приложения к камере';
 		|tr='Fotograf çekilemiyor. Kameraya erişimi kontrol etmek gerekir.'", Lang));
 	Strings.Insert("Mobile_2", NStr("en='Video is not supported. Check app`s access to camera';
-		|ru='Video is not supported. Check app`s access to camera';
+		|ru='Видео не поддерживается. Проверьте доступ приложения к камере';
 		|tr='Video çekilemiyor. Kameraya erişimi kontrol etmek gerekir.'", Lang));
 	Strings.Insert("Mobile_3", NStr("en='Issue was created: %1';
-		|ru='Issue was created: %1';
+		|ru='Заявка была создана: %1';
 		|tr='Talep oluşturuldu: %1'", Lang));
 	Strings.Insert("Mobile_4", NStr("en='GPS on device is disabled. Enable GPS to continue.';
-		|ru='GPS on device is disabled. Enable GPS to continue.';
+		|ru='GPS на устройстве отключен. Включите GPS для продолжения.';
 		|tr='Cihazın GPS''i devre dışıdır. Devam etmek için GPS''i açmak gerekir.'", Lang));
 	Strings.Insert("Mobile_5", NStr("en='Can not update coordinate. Check if app has access to GPS';
-		|ru='Can not update coordinate. Check if app has access to GPS';
+		|ru='Не удаётся обновить координаты. Проверьте доступ приложения к GPS';
 		|tr='Koordinatlar güncellenemedi. Uygulama GPS''e erişme sahip olduğundan emin olunuz.'", Lang));
 	Strings.Insert("Mobile_6", NStr("en='Can not open file';
-		|ru='Can not open file';
+		|ru='Не удаётся открыть файл';
 		|tr='Dosya açılamıyor'", Lang));
 #EndRegion
 
 #Region Issue
     Strings.Insert("Issue_1", NStr("en='Issues were already created for all locations.';
-    	|ru='Issues were already created for all locations.';
+    	|ru='Заявки уже были созданы для всех местоположений.';
     	|tr='Tüm lokasyonlar için talepler daha önce oluşturuldu.'", Lang));
 	Strings.Insert("Issue_2", NStr("en='Create issue for locations: %1?';
-		|ru='Create issue for locations: %1?';
+		|ru='Создать заявку для местоположений: %1?';
 		|tr='%1 lokasyon için talep oluşturulsun mu?'", Lang));
 #EndRegion
 	Return Strings;

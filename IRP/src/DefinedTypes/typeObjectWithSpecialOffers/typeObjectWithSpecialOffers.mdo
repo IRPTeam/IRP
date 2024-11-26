@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeObjectWithSpecialOffers</name>
  <synonym>
-  <key>en</key>
-  <value>Type object with special offers</value>
+  <key>tr</key>
+  <value>Özel tekliflerle tip nesne</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип объектов со скидками</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Özel tekliflerle tip nesne</value>
+  <key>en</key>
+  <value>Type object with special offers</value>
  </synonym>
  <type>
   <types>DocumentObject.RetailSalesReceipt</types>

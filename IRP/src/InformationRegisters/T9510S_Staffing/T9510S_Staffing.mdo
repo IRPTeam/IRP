@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9510S_Staffing</name>
  <synonym>
-  <key>en</key>
-  <value>T9510 Staffing</value>
+  <key>tr</key>
+  <value>T9510 Personel</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9510 Штатное расписание</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9510 Personel</value>
+  <key>en</key>
+  <value>T9510 Staffing</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <writeMode>RecorderSubordinate</writeMode>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>T9510 Staffing</value>
+  <key>tr</key>
+  <value>T9510 Personel</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>T9510 Штатное расписание</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>T9510 Personel</value>
+  <key>en</key>
+  <value>T9510 Staffing</value>
  </recordPresentation>
  <resources uuid="9cb6e57a-70d6-4fc2-9027-a2450ac5952d">
   <name>Fired</name>
   <synonym>
-   <key>en</key>
-   <value>Fired</value>
+   <key>tr</key>
+   <value>İşten çıkarıldı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Уволен</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İşten çıkarıldı</value>
+   <key>en</key>
+   <value>Fired</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -65,16 +65,16 @@
  <resources uuid="95ea41d9-90e9-4cb1-944b-92fab3f71fdd">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -89,16 +89,16 @@
  <resources uuid="08cf0f3d-9c8f-4400-b832-1ed4370c50e5">
   <name>Position</name>
   <synonym>
-   <key>en</key>
-   <value>Position</value>
+   <key>tr</key>
+   <value>Pozisyon</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Должность</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
+   <key>en</key>
+   <value>Position</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -113,16 +113,16 @@
  <resources uuid="7932025f-cf57-4902-a0d9-4970756e669a">
   <name>EmployeeSchedule</name>
   <synonym>
-   <key>en</key>
-   <value>Employee schedule</value>
+   <key>tr</key>
+   <value>Çalışan programı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Штатное расписание</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çalışan programı</value>
+   <key>en</key>
+   <value>Employee schedule</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeeSchedule</types>
@@ -136,16 +136,16 @@
  <resources uuid="d602b2d2-0f89-4119-a8b3-dd93f977d11a">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -159,16 +159,16 @@
  <dimensions uuid="2e192fcd-665c-480f-b747-f730bbad1bff">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -191,16 +191,16 @@
  <dimensions uuid="2e48b39e-efcf-4d15-b911-2f4ccc60e020">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>

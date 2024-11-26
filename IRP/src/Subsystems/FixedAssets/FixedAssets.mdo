@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c4ca3050-cafc-4966-9748-e78e29226153">
  <name>FixedAssets</name>
  <synonym>
-  <key>en</key>
-  <value>Fixed assets</value>
+  <key>tr</key>
+  <value>Sabit kıymetler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Основные средства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetler</value>
+  <key>en</key>
+  <value>Fixed assets</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <includeInCommandInterface>true</includeInCommandInterface>
@@ -27,4 +27,6 @@
  <content>Document.FixedAssetTransfer</content>
  <content>InformationRegister.T8515S_FixedAssetsLocation</content>
  <content>Document.ModernizationOfFixedAsset</content>
+ <content>Report.F0010_FixedAssetsTransferCost</content>
+ <content>Report.F0011_InventoryBook</content>
 </mdclass:Subsystem>

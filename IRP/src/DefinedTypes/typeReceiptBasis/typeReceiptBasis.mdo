@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeReceiptBasis</name>
  <synonym>
-  <key>en</key>
-  <value>Type receipt basis</value>
+  <key>tr</key>
+  <value>Tip irsaliye kaynak evrakı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание приемки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip irsaliye kaynak evrakı</value>
+  <key>en</key>
+  <value>Type receipt basis</value>
  </synonym>
  <type>
   <types>DocumentRef.PurchaseInvoice</types>

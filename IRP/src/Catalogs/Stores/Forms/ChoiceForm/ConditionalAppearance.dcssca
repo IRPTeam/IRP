@@ -22,16 +22,16 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>Shared for all companies</v8:content>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Tüm şirketler için geçerli</v8:content>
 					</v8:item>
 					<v8:item>
 						<v8:lang>ru</v8:lang>
 						<v8:content>Доступно для всех организаций</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
-						<v8:content>Tüm şirketler için geçerli</v8:content>
+						<v8:lang>en</v8:lang>
+						<v8:content>Shared for all companies</v8:content>
 					</v8:item>
 				</dcscor:value>
 			</dcscor:item>

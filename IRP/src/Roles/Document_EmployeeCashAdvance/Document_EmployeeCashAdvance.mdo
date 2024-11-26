@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa1da632-5d19-4ef1-bf96-2eaec361039c">
  <name>Document_EmployeeCashAdvance</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Employee cash advance"</value>
+  <key>tr</key>
+  <value>Belge "Avans Ödemesi"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Аванс сотрудника"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Avans Ödemesi"</value>
+  <key>en</key>
+  <value>Document "Employee cash advance"</value>
  </synonym>
 </mdclass:Role>

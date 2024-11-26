@@ -143,16 +143,16 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Customer</value>
+         <key>tr</key>
+         <value>Müşteri</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Клиент</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Müşteri</value>
+         <key>en</key>
+         <value>Customer</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementTypes.EnumValue.Customer</value>
@@ -160,16 +160,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Vendor</value>
+         <key>tr</key>
+         <value>Terarikçi</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Поставщик</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Terarikçi</value>
+         <key>en</key>
+         <value>Vendor</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementTypes.EnumValue.Vendor</value>
@@ -177,16 +177,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Consignor</value>
+         <key>tr</key>
+         <value>Konsiyeye veren</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Комитент</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Konsiyeye veren</value>
+         <key>en</key>
+         <value>Consignor</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementTypes.EnumValue.Consignor</value>
@@ -194,16 +194,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Trade agent</value>
+         <key>tr</key>
+         <value>Ödeme aracı kurum</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Комиссионер</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Ödeme aracı kurum</value>
+         <key>en</key>
+         <value>Trade agent</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementTypes.EnumValue.TradeAgent</value>
@@ -211,16 +211,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Other</value>
+         <key>tr</key>
+         <value>Diğer</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Прочий</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Diğer</value>
+         <key>en</key>
+         <value>Other</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementTypes.EnumValue.Other</value>
@@ -277,16 +277,16 @@
        <radioButtonsType>Tumbler</radioButtonsType>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Regular</value>
+         <key>tr</key>
+         <value>Normal</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Обычное</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Normal</value>
+         <key>en</key>
+         <value>Regular</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementKinds.EnumValue.Regular</value>
@@ -294,16 +294,16 @@
        </choiceList>
        <choiceList>
         <presentation>
-         <key>en</key>
-         <value>Standard</value>
+         <key>tr</key>
+         <value>Standart</value>
         </presentation>
         <presentation>
          <key>ru</key>
          <value>Стандартное</value>
         </presentation>
         <presentation>
-         <key>tr</key>
-         <value>Standart</value>
+         <key>en</key>
+         <value>Standard</value>
         </presentation>
         <value xsi:type="core:ReferenceValue">
          <value>Enum.AgreementKinds.EnumValue.Standard</value>
@@ -389,16 +389,16 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>By documents</value>
+        <key>tr</key>
+        <value>Evrak detaylı</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>По документам</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Evrak detaylı</value>
+        <key>en</key>
+        <value>By documents</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ApArPostingDetail.EnumValue.ByDocuments</value>
@@ -406,16 +406,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>By partner terms</value>
+        <key>tr</key>
+        <value>Sözleşmeye göre</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>По соглашениям</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Sözleşmeye göre</value>
+        <key>en</key>
+        <value>By partner terms</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ApArPostingDetail.EnumValue.ByAgreements</value>
@@ -423,16 +423,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>By standard partner term</value>
+        <key>tr</key>
+        <value>Standart sözleşmeye göre</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>По стандартным соглашениям</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Standart sözleşmeye göre</value>
+        <key>en</key>
+        <value>By standard partner term</value>
        </presentation>
        <value xsi:type="core:ReferenceValue">
         <value>Enum.ApArPostingDetail.EnumValue.ByStandardAgreement</value>
@@ -751,16 +751,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Main info</value>
+     <key>tr</key>
+     <value>Ana bilgi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Основная информация</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ana bilgi</value>
+     <key>en</key>
+     <value>Main info</value>
     </title>
     <extendedTooltip>
      <name>GroupMainInfoExtendedTooltip</name>
@@ -1126,16 +1126,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Additional info</value>
+     <key>tr</key>
+     <value>Ek bilgi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Дополнительные данные</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ek bilgi</value>
+     <key>en</key>
+     <value>Additional info</value>
     </title>
     <extendedTooltip>
      <name>GroupAdditionalInfoExtendedTooltip</name>
@@ -1316,16 +1316,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Price flags</value>
+      <key>tr</key>
+      <value>Fiyat bayrakları</value>
      </title>
      <title>
       <key>ru</key>
       <value>Переключателя цен</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Fiyat bayrakları</value>
+      <key>en</key>
+      <value>Price flags</value>
      </title>
      <extendedTooltip>
       <name>GroupPriceFlagsExtendedTooltip</name>
@@ -1358,16 +1358,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Price settings</value>
+     <key>tr</key>
+     <value>Fiyat ayarları</value>
     </title>
     <title>
      <key>ru</key>
      <value>Настройка цен</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Fiyat ayarları</value>
+     <key>en</key>
+     <value>Price settings</value>
     </title>
     <extendedTooltip>
      <name>GroupPriceSettingsExtendedTooltip</name>
@@ -1506,16 +1506,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Agreement info</value>
+     <key>tr</key>
+     <value>Anlaşma bilgisi</value>
     </title>
     <title>
      <key>ru</key>
      <value>Информация по соглашению</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Anlaşma bilgisi</value>
+     <key>en</key>
+     <value>Agreement info</value>
     </title>
     <extendedTooltip>
      <name>GroupAgreementInfoExtendedTooltip</name>
@@ -1654,16 +1654,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Store and delivery</value>
+     <key>tr</key>
+     <value>Mağaza ve teslimat</value>
     </title>
     <title>
      <key>ru</key>
      <value>Склад и доставка</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Mağaza ve teslimat</value>
+     <key>en</key>
+     <value>Store and delivery</value>
     </title>
     <extendedTooltip>
      <name>GroupStoreAndDeliverySettingsExtendedTooltip</name>
@@ -1699,16 +1699,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основной</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -1966,16 +1966,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Credit limit &amp; Aging</value>
+    <key>tr</key>
+    <value>Borç limiti &amp; Yaşlandırma</value>
    </title>
    <title>
     <key>ru</key>
     <value>Лимиты и отсрочки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç limiti &amp; Yaşlandırma</value>
+    <key>en</key>
+    <value>Credit limit &amp; Aging</value>
    </title>
    <extendedTooltip>
     <name>GroupCreditlimitAndAgingExtendedTooltip</name>
@@ -2321,16 +2321,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Commission trade</value>
+    <key>tr</key>
+    <value>Konsinye satış</value>
    </title>
    <title>
     <key>ru</key>
     <value>Комиссионная торговля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Konsinye satış</value>
+    <key>en</key>
+    <value>Commission trade</value>
    </title>
    <extendedTooltip>
     <name>GroupCommissionTradeExtendedTooltip</name>
@@ -2362,16 +2362,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Прочее</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -2400,16 +2400,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>

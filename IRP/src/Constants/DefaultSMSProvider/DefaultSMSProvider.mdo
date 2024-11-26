@@ -7,16 +7,16 @@
  </producedTypes>
  <name>DefaultSMSProvider</name>
  <synonym>
-  <key>en</key>
-  <value>Default SMSProvider</value>
+  <key>tr</key>
+  <value>Varsayılan SMSProvider</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>SMS провайдер по умолчанию</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Varsayılan SMSProvider</value>
+  <key>en</key>
+  <value>Default SMSProvider</value>
  </synonym>
  <type>
   <types>CatalogRef.IntegrationSettings</types>

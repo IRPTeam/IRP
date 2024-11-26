@@ -2,22 +2,26 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d46bd784-7040-4ad7-bd09-916fd13f6bf0">
  <name>PresentationGetProcessing_GetDocumentPresentation</name>
  <synonym>
-  <key>en</key>
-  <value>Presentation get processing get document presentation</value>
+  <key>tr</key>
+  <value>Sunum işleme belge sunumu alır</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Получение обработки получения документа презентации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sunum işleme belge sunumu alır</value>
+  <key>en</key>
+  <value>Presentation get processing get document presentation</value>
  </synonym>
  <source>
+  <types>DocumentManager.SalesReturn</types>
   <types>DocumentManager.PurchaseOrder</types>
   <types>DocumentManager.DebitNote</types>
   <types>DocumentManager.SalesInvoice</types>
   <types>DocumentManager.SalesOrder</types>
+  <types>DocumentManager.PurchaseReturn</types>
+  <types>DocumentManager.PurchaseInvoice</types>
+  <types>DocumentManager.RetailSalesReceipt</types>
   <types>DocumentManager.CreditNote</types>
  </source>
  <event>PresentationGetProcessing</event>

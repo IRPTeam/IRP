@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="4839b956-7db9-4ec1-9fde-a6561684fcfa">
  <name>LocalTaxAmount</name>
  <synonym>
-  <key>en</key>
-  <value>Local tax amount</value>
+  <key>tr</key>
+  <value>Yerel vergi tutarı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Локальная сумма налогов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yerel vergi tutarı</value>
+  <key>en</key>
+  <value>Local tax amount</value>
  </synonym>
  <type>
   <types>DefinedType.typeAmount</types>

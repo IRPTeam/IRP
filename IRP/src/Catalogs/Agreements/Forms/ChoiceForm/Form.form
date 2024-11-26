@@ -111,16 +111,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Filter company</value>
+   <key>tr</key>
+   <value>Firma filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр компании</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Firma filtresi</value>
+   <key>en</key>
+   <value>Filter company</value>
   </title>
   <extendedTooltip>
    <name>GroupFilterCompanyExtendedTooltip</name>
@@ -156,16 +156,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -260,16 +260,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -322,16 +322,16 @@
    <name>Kind</name>
    <id>28</id>
    <title>
-    <key>en</key>
-    <value>Kind</value>
+    <key>tr</key>
+    <value>Tür</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tür</value>
+    <key>en</key>
+    <value>Kind</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -434,16 +434,16 @@
    <name>ApArPostingDetail</name>
    <id>31</id>
    <title>
-    <key>en</key>
-    <value>AP/AR posting detail</value>
+    <key>tr</key>
+    <value>Alacak Hesapları / Borç Hesapları kayıt detayları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид взаиморасчетов</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak Hesapları / Borç Hesapları kayıt detayları</value>
+    <key>en</key>
+    <value>AP/AR posting detail</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -840,16 +840,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Description</value>
+       <key>tr</key>
+       <value>Tanım</value>
       </content>
       <content>
        <key>ru</key>
        <value>Наименование</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
+       <key>en</key>
+       <value>Description</value>
       </content>
      </localValue>
     </title>
@@ -1023,16 +1023,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>End of use date</value>
+       <key>tr</key>
+       <value>Kullanım sonu tarihi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Дата окончания использования</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Kullanım sonu tarihi</value>
+       <key>en</key>
+       <value>End of use date</value>
       </content>
      </localValue>
     </title>
@@ -1050,16 +1050,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Include filter by partner</value>
+       <key>tr</key>
+       <value>Ortaklık filtresini dahil et</value>
       </content>
       <content>
        <key>ru</key>
        <value>Включить фильтр по партнеру</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ortaklık filtresini dahil et</value>
+       <key>en</key>
+       <value>Include filter by partner</value>
       </content>
      </localValue>
     </title>
@@ -1071,16 +1071,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Partner</value>
+       <key>tr</key>
+       <value>Cari hesap</value>
       </content>
       <content>
        <key>ru</key>
        <value>Партнер</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Cari hesap</value>
+       <key>en</key>
+       <value>Partner</value>
       </content>
      </localValue>
     </title>
@@ -1095,16 +1095,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Include partner segments</value>
+       <key>tr</key>
+       <value>Ortak segmentlerini dahil et</value>
       </content>
       <content>
        <key>ru</key>
        <value>Включить сегменты партнеров</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ortak segmentlerini dahil et</value>
+       <key>en</key>
+       <value>Include partner segments</value>
       </content>
      </localValue>
     </title>
@@ -1119,16 +1119,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Include filter by end of use date</value>
+       <key>tr</key>
+       <value>Kullanım sonu tarihi filtresini dahil et</value>
       </content>
       <content>
        <key>ru</key>
        <value>Включить фильтр по дате окончания использования</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Kullanım sonu tarihi filtresini dahil et</value>
+       <key>en</key>
+       <value>Include filter by end of use date</value>
       </content>
      </localValue>
     </title>
@@ -1140,16 +1140,16 @@ WHERE
  <attributes>
   <name>FillingData</name>
   <title>
-   <key>en</key>
-   <value>Filling data</value>
+   <key>tr</key>
+   <value>Veri doldurma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполненные данные</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri doldurma</value>
+   <key>en</key>
+   <value>Filling data</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1166,16 +1166,16 @@ WHERE
  <attributes>
   <name>FilterCompany</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1191,16 +1191,16 @@ WHERE
  <attributes>
   <name>FilterCompanyUse</name>
   <title>
-   <key>en</key>
-   <value>Filter company use</value>
+   <key>tr</key>
+   <value>Firma kullanım filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использование фильтра компании</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Firma kullanım filtresi</value>
+   <key>en</key>
+   <value>Filter company use</value>
   </title>
   <id>4</id>
   <valueType>

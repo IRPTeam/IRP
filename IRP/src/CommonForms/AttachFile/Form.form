@@ -583,16 +583,16 @@
       <width>15</width>
       <height>6</height>
       <nonselectedPictureText>
-       <key>en</key>
-       <value>Drag &amp;&amp; drop here</value>
+       <key>tr</key>
+       <value>Buraya sürükle bırak</value>
       </nonselectedPictureText>
       <nonselectedPictureText>
        <key>ru</key>
        <value>Перетащить сюда</value>
       </nonselectedPictureText>
       <nonselectedPictureText>
-       <key>tr</key>
-       <value>Buraya sürükle bırak</value>
+       <key>en</key>
+       <value>Drag &amp;&amp; drop here</value>
       </nonselectedPictureText>
       <enableStartDrag>true</enableStartDrag>
       <enableDrag>true</enableDrag>
@@ -605,16 +605,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Upload</value>
+     <key>tr</key>
+     <value>Yükle</value>
     </title>
     <title>
      <key>ru</key>
      <value>Загрузить</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Yükle</value>
+     <key>en</key>
+     <value>Upload</value>
     </title>
     <extendedTooltip>
      <name>GroupFilesExtendedTooltip</name>
@@ -788,28 +788,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Preview</value>
+     <key>tr</key>
+     <value>Ön izleme</value>
     </title>
     <title>
      <key>ru</key>
      <value>Предварительный просмотр</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ön izleme</value>
-    </title>
-    <toolTip>
      <key>en</key>
-     <value>Page preview</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Page preview</value>
-    </toolTip>
+     <value>Preview</value>
+    </title>
     <toolTip>
      <key>tr</key>
      <value>Sayfa önizle</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Предпросмотр страницы</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>Page preview</value>
     </toolTip>
     <extendedTooltip>
      <name>PagePreviewExtendedTooltip</name>
@@ -838,28 +838,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Pages top</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Pages top</value>
-   </title>
-   <title>
     <key>tr</key>
     <value>Sayfalar üst</value>
    </title>
-   <toolTip>
+   <title>
+    <key>ru</key>
+    <value>Верх страницы     </value>
+   </title>
+   <title>
     <key>en</key>
     <value>Pages top</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Pages top</value>
-   </toolTip>
+   </title>
    <toolTip>
     <key>tr</key>
     <value>Sayfalar üst</value>
+   </toolTip>
+   <toolTip>
+    <key>ru</key>
+    <value>Верх страницы     </value>
+   </toolTip>
+   <toolTip>
+    <key>en</key>
+    <value>Pages top</value>
    </toolTip>
    <extendedTooltip>
     <name>PagesTopExtendedTooltip</name>
@@ -888,16 +888,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main</value>
+   <key>tr</key>
+   <value>Group genel</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа основная</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Group genel</value>
+   <key>en</key>
+   <value>Group main</value>
   </title>
   <extendedTooltip>
    <name>GroupMainExtendedTooltip</name>
@@ -949,16 +949,16 @@
  <attributes>
   <name>FileList</name>
   <title>
-   <key>en</key>
-   <value>File list</value>
+   <key>tr</key>
+   <value>Dosya listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список файлов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya listesi</value>
+   <key>en</key>
+   <value>File list</value>
   </title>
   <id>1</id>
   <valueType>
@@ -970,6 +970,12 @@
   <edit>
    <common>true</common>
   </edit>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>FileList.FileExtension</segments>
+  </notDefaultUseAlwaysAttributes>
+  <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+   <segments>FileList.File</segments>
+  </notDefaultUseAlwaysAttributes>
   <extInfo xsi:type="form:DynamicListExtInfo">
    <queryText>SELECT
 	AttachedFiles.Owner AS Owner,
@@ -1012,16 +1018,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Owner</value>
+       <key>tr</key>
+       <value>Sahip</value>
       </content>
       <content>
        <key>ru</key>
        <value>Владелец</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Sahip</value>
+       <key>en</key>
+       <value>Owner</value>
       </content>
      </localValue>
     </title>
@@ -1036,16 +1042,16 @@ WHERE
  <attributes>
   <name>Owner</name>
   <title>
-   <key>en</key>
-   <value>Owner</value>
+   <key>tr</key>
+   <value>Sahip</value>
   </title>
   <title>
    <key>ru</key>
    <value>Владелец</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sahip</value>
+   <key>en</key>
+   <value>Owner</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1061,16 +1067,16 @@ WHERE
  <attributes>
   <name>Download</name>
   <title>
-   <key>en</key>
-   <value>Download</value>
+   <key>tr</key>
+   <value>İndir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скачать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İndir</value>
+   <key>en</key>
+   <value>Download</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1087,16 +1093,16 @@ WHERE
  <attributes>
   <name>Upload</name>
   <title>
-   <key>en</key>
-   <value>Upload</value>
+   <key>tr</key>
+   <value>Yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
+   <key>en</key>
+   <value>Upload</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1113,16 +1119,16 @@ WHERE
  <attributes>
   <name>DefaultFilesStorageVolume</name>
   <title>
-   <key>en</key>
-   <value>Default files storage volume</value>
+   <key>tr</key>
+   <value>Varsayılan dosya depolama yeri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Том хранения файлов по умолчанию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varsayılan dosya depolama yeri</value>
+   <key>en</key>
+   <value>Default files storage volume</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1138,16 +1144,16 @@ WHERE
  <attributes>
   <name>ImagePreview</name>
   <title>
-   <key>en</key>
-   <value>Image preview</value>
+   <key>tr</key>
+   <value>Resim önizle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Image preview</value>
+   <value>Предпросмотр изображения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim önizle</value>
+   <key>en</key>
+   <value>Image preview</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1164,16 +1170,16 @@ WHERE
  <attributes>
   <name>PDFPreview</name>
   <title>
-   <key>en</key>
-   <value>PDF Preview</value>
+   <key>tr</key>
+   <value>PDF önizle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>PDF Preview</value>
+   <value>Предпросмотр PDF</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>PDF önizle</value>
+   <key>en</key>
+   <value>PDF Preview</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1189,16 +1195,16 @@ WHERE
  <formCommands>
   <name>DownloadFile</name>
   <title>
-   <key>en</key>
-   <value>Download file</value>
+   <key>tr</key>
+   <value>Dosya indir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скачать файл</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya indir</value>
+   <key>en</key>
+   <value>Download file</value>
   </title>
   <id>1</id>
   <use>
@@ -1214,16 +1220,16 @@ WHERE
  <formCommands>
   <name>DeleteFiles</name>
   <title>
-   <key>en</key>
-   <value>Delete files</value>
+   <key>tr</key>
+   <value>Dosyaları sil</value>
   </title>
   <title>
    <key>ru</key>
    <value>Удаление файлов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosyaları sil</value>
+   <key>en</key>
+   <value>Delete files</value>
   </title>
   <id>2</id>
   <use>

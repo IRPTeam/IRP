@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="3d577f46-09dc-4f4d-9e12-d184b8926910">
  <name>DocumentAmount</name>
  <synonym>
-  <key>en</key>
-  <value>Amount</value>
+  <key>tr</key>
+  <value>Tutar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Сумма</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tutar</value>
+  <key>en</key>
+  <value>Amount</value>
  </synonym>
  <type>
   <types>DefinedType.typeAmount</types>

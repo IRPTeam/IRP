@@ -123,7 +123,7 @@
      <autoFill>true</autoFill>
     </contextMenu>
     <type>ViewStatusAddition</type>
-    <source>PDFViewerViewStatus</source>
+    <source>PDFViewer</source>
     <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
      <autoMaxWidth>true</autoMaxWidth>
     </extInfo>
@@ -193,16 +193,16 @@
   <name>DecorationNoTemplate</name>
   <id>7</id>
   <title>
-   <key>en</key>
-   <value>No template exist</value>
+   <key>tr</key>
+   <value>Şablon yok</value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаблон не существует</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şablon yok</value>
+   <key>en</key>
+   <value>No template exist</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -294,16 +294,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <id>2</id>
   <valueType>
@@ -320,16 +320,16 @@
  <attributes>
   <name>FileRef</name>
   <title>
-   <key>en</key>
-   <value>File ref</value>
+   <key>tr</key>
+   <value>Dosya ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка файла</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya ref</value>
+   <key>en</key>
+   <value>File ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -345,16 +345,16 @@
  <attributes>
   <name>PDFViewer</name>
   <title>
-   <key>en</key>
-   <value>PDFViewer</value>
+   <key>tr</key>
+   <value>PDF önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>PDF Просмотрщик</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>PDF önizleme</value>
+   <key>en</key>
+   <value>PDFViewer</value>
   </title>
   <id>4</id>
   <valueType>
@@ -370,16 +370,16 @@
  <attributes>
   <name>IsPDF</name>
   <title>
-   <key>en</key>
-   <value>Is PDF</value>
+   <key>tr</key>
+   <value>bu PDF</value>
   </title>
   <title>
    <key>ru</key>
    <value>Это PDF</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>bu PDF</value>
+   <key>en</key>
+   <value>Is PDF</value>
   </title>
   <id>5</id>
   <valueType>

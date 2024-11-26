@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="daeb6ec7-41e4-4980-bd89-da490a86b054">
  <name>PaymentDistribution</name>
  <synonym>
-  <key>en</key>
-  <value>Payment distribution</value>
+  <key>tr</key>
+  <value>Ödemeler dağıtımı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Распределение платежей</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ödemeler dağıtımı</value>
+  <key>en</key>
+  <value>Payment distribution</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

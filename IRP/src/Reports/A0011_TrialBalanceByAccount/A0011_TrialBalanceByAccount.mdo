@@ -6,32 +6,32 @@
  </producedTypes>
  <name>A0011_TrialBalanceByAccount</name>
  <synonym>
-  <key>en</key>
-  <value>A0011 Trial balance (by account)</value>
+  <key>tr</key>
+  <value>A0011 Hesap bazında deneme dengesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>A0011 Оборотно сальдовая ведомость (по счетам)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>A0011 Hesap bazında deneme dengesi</value>
+  <key>en</key>
+  <value>A0011 Trial balance (by account)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.A0011_TrialBalanceByAccount.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="b0e03291-b83f-4613-b9d0-9d58b32a0b8d">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

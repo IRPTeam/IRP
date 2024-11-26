@@ -6,23 +6,23 @@
  </producedTypes>
  <name>ObjectPropertyEditor</name>
  <synonym>
-  <key>en</key>
-  <value>Object property editor</value>
+  <key>tr</key>
+  <value>Toplu öznitellik değiştirme</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Групповое изменение реквизитов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Toplu öznitellik değiştirme</value>
+  <key>en</key>
+  <value>Object property editor</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.ObjectPropertyEditor.Form.Form</defaultForm>
  <forms uuid="10223689-ce1e-4f26-a649-6812834b1b9d">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="3d32ba2a-6daf-461d-8b97-5ae43b439838">
   <name>EditMultilineText</name>
   <synonym>
-   <key>en</key>
-   <value>Edit multiline text</value>
+   <key>tr</key>
+   <value>Çoklu satır metni değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Редактировать многострочный текст</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çoklu satır metni değiştir</value>
+   <key>en</key>
+   <value>Edit multiline text</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,16 +56,16 @@
  <forms uuid="3a8545c6-abee-442b-b6cc-f4653659d1e7">
   <name>EditValueList</name>
   <synonym>
-   <key>en</key>
-   <value>Edit value list</value>
+   <key>tr</key>
+   <value>Değer listesini değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Изменить список значений</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Değer listesini değiştir</value>
+   <key>en</key>
+   <value>Edit value list</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -73,16 +73,16 @@
  <forms uuid="c26ffce1-9a8d-4ed1-8b5f-b2779d553898">
   <name>PropertyPackEditor</name>
   <synonym>
-   <key>en</key>
-   <value>Property pack editor</value>
+   <key>tr</key>
+   <value>Ayarlar takımı sihirbazı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Конструктор пакета настроек</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ayarlar takımı sihirbazı</value>
+   <key>en</key>
+   <value>Property pack editor</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -90,16 +90,16 @@
  <forms uuid="45342813-29ea-423e-a1a6-14db9e160002">
   <name>FieldSettings</name>
   <synonym>
-   <key>en</key>
-   <value>Field settings</value>
+   <key>tr</key>
+   <value>Alan ayarları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Настройки поля</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Alan ayarları</value>
+   <key>en</key>
+   <value>Field settings</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -107,16 +107,16 @@
  <forms uuid="c37d6fdd-3a9d-4301-8a7c-50ca000d36b6">
   <name>RunCodeForm</name>
   <synonym>
-   <key>en</key>
-   <value>Run code form</value>
+   <key>tr</key>
+   <value>Kod formunu çalıştır</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма исполнения кода</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kod formunu çalıştır</value>
+   <key>en</key>
+   <value>Run code form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -124,16 +124,16 @@
  <commands uuid="5aa0f109-bc0b-438a-8a02-796a931feed9">
   <name>GroupEditingProperties</name>
   <synonym>
-   <key>en</key>
-   <value>Group editing of properties</value>
+   <key>tr</key>
+   <value>Özelliklerin grup düzenlemesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Группа редактирования свойств</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Özelliklerin grup düzenlemesi</value>
+   <key>en</key>
+   <value>Group editing of properties</value>
   </synonym>
   <group>FormCommandBarImportant</group>
   <commandParameterType/>

@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Vehicles</name>
  <synonym>
-  <key>en</key>
-  <value>Vehicles</value>
+  <key>tr</key>
+  <value>Araçlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Транспортные средства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Araçlar</value>
+  <key>en</key>
+  <value>Vehicles</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.Vehicles.StandardAttribute.Code</inputByString>
@@ -58,28 +58,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Vehicle</value>
+  <key>tr</key>
+  <value>Araç</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Транспорт</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Araç</value>
+  <key>en</key>
+  <value>Vehicle</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Vehicles</value>
+  <key>tr</key>
+  <value>Araçlar</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Транспортные средства</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Araçlar</value>
+  <key>en</key>
+  <value>Vehicles</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -95,16 +95,16 @@
  <attributes uuid="186f7922-0ffe-432f-8479-6c6ca57a21cb">
   <name>VehicleID</name>
   <synonym>
-   <key>en</key>
-   <value>ID (plate)</value>
+   <key>tr</key>
+   <value>ID (plaka)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID (номер машины)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>ID (plaka)</value>
+   <key>en</key>
+   <value>ID (plate)</value>
   </synonym>
   <type>
    <types>String</types>
@@ -121,16 +121,16 @@
  <attributes uuid="1f36c670-6cbe-4742-ba38-67f1cc0aa6f6">
   <name>Type</name>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <type>
    <types>CatalogRef.VehicleTypes</types>
@@ -144,16 +144,16 @@
  <attributes uuid="b0c4c37f-d992-4b68-b285-aa82ad783a40">
   <name>DefaultDriver</name>
   <synonym>
-   <key>en</key>
-   <value>Default driver</value>
+   <key>tr</key>
+   <value>Varsayılan şoför</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Водитель по умолчанию</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan şoför</value>
+   <key>en</key>
+   <value>Default driver</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -171,30 +171,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="c0c632a1-4758-4056-beb8-480bef6e3ce5">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -207,16 +207,16 @@
   <attributes uuid="49707d7b-05b8-4748-b2f6-6df7ffee0ae0">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -233,16 +233,16 @@
   <attributes uuid="4bdf1f8c-7440-47b2-8387-1600f8a6a94c">
    <name>SearchLiteral</name>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Текстовая строка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <type>
     <types>String</types>
@@ -259,16 +259,16 @@
  <forms uuid="5962627b-c251-47ac-9393-7969bc127ba4">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

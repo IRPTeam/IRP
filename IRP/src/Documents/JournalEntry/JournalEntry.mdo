@@ -9,16 +9,16 @@
  </producedTypes>
  <name>JournalEntry</name>
  <synonym>
-  <key>en</key>
-  <value>Journal entry</value>
+  <key>tr</key>
+  <value>Mahsup fişi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бухгалтерская операция</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Mahsup fişi</value>
+  <key>en</key>
+  <value>Journal entry</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.JournalEntry.StandardAttribute.Number</inputByString>
@@ -52,35 +52,35 @@
   <objectField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.JournalEntry.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.JournalEntry.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Journal entry</value>
+  <key>tr</key>
+  <value>Mahsup fişi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Бухгалтерская операция</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Mahsup fişi</value>
+  <key>en</key>
+  <value>Journal entry</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Journal entries</value>
+  <key>tr</key>
+  <value>Mahsup fişleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Бухгалтерские операции</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Mahsup fişleri</value>
+  <key>en</key>
+  <value>Journal entries</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -96,16 +96,16 @@
  <attributes uuid="6be09410-c60e-4f67-9a7a-796dffddd541">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -120,16 +120,16 @@
  <attributes uuid="7c7a88b5-e014-4533-a568-be5246c62a8c">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -144,16 +144,16 @@
  <attributes uuid="394ef6d8-5b4b-46b0-b464-409486bf29a0">
   <name>Basis</name>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основания</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <type>
    <types>DefinedType.typeAccountingDocuments</types>
@@ -168,16 +168,16 @@
  <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
   <name>UserDefined</name>
   <synonym>
-   <key>en</key>
-   <value>User defined</value>
+   <key>tr</key>
+   <value>Kullanıcı tanımlı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Произвольный</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı tanımlı</value>
+   <key>en</key>
+   <value>User defined</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -191,16 +191,16 @@
  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -208,16 +208,16 @@
  <forms uuid="f6fb5536-eb71-4fec-ae16-cf171fca6762">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -225,16 +225,16 @@
  <forms uuid="57195246-c6a2-46b0-bc5a-cbc57208d5b4">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -242,16 +242,16 @@
  <forms uuid="f0b17e7e-fd9c-49f0-9f1f-5ee97e40078c">
   <name>SelectLedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Select ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi seç</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Выбрать тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi seç</value>
+   <key>en</key>
+   <value>Select ledger type</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -263,30 +263,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="afae46d8-9248-44f5-a78f-9431a4bf0192">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -298,16 +298,16 @@
   <attributes uuid="63c74c89-8858-4b78-8b26-797f8a5242a5">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -328,30 +328,30 @@
   </producedTypes>
   <name>Errors</name>
   <synonym>
-   <key>en</key>
-   <value>Errors</value>
+   <key>tr</key>
+   <value>Hatalar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ошибки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hatalar</value>
+   <key>en</key>
+   <value>Errors</value>
   </synonym>
   <attributes uuid="40aa1101-080a-412f-bc13-a5bf5d005d7d">
    <name>Error</name>
    <synonym>
-    <key>en</key>
-    <value>Error</value>
+    <key>tr</key>
+    <value>Hata</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Ошибка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Hata</value>
+    <key>en</key>
+    <value>Error</value>
    </synonym>
    <type>
     <types>String</types>
@@ -368,16 +368,16 @@
  <commands uuid="3ff17cfd-55b1-44f3-afc7-73b16bb66d4a">
   <name>JournalEntry</name>
   <synonym>
-   <key>en</key>
-   <value>Journal entry</value>
+   <key>tr</key>
+   <value>Mahsup fişi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Бухгалтерская операция</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Mahsup fişi</value>
+   <key>en</key>
+   <value>Journal entry</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>
@@ -391,16 +391,16 @@
  <commands uuid="796873d7-7d25-4821-8d80-2ec5c1d8ee2b">
   <name>JournalEntryMultipleDocuments</name>
   <synonym>
-   <key>en</key>
-   <value>Journal entry (multiple documents)</value>
+   <key>tr</key>
+   <value>Mahsup fişler (çoklu oluşturma)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Бухгалтерская операция (несколько документов)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Mahsup fişler (çoklu oluşturma)</value>
+   <key>en</key>
+   <value>Journal entry (multiple documents)</value>
   </synonym>
   <group>CommandGroup.Service</group>
   <commandParameterType>

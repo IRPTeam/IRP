@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3f395b03-2b91-41b6-b8c8-ed222be846a9">
  <name>Document_PurchaseOrderClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Purchase order closing"</value>
+  <key>tr</key>
+  <value>Belge "Satınalma siparişi kapatma"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Закрытие заказа на покупку"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Satınalma siparişi kapatma"</value>
+  <key>en</key>
+  <value>Document "Purchase order closing"</value>
  </synonym>
 </mdclass:Role>

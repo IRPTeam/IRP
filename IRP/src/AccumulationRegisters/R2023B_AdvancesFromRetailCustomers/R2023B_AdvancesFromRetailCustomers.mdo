@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R2023B_AdvancesFromRetailCustomers</name>
  <synonym>
-  <key>en</key>
-  <value>R2023 Advances from retail customers</value>
+  <key>tr</key>
+  <value>R2023 Perakende müşteri avansları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R2023 Авансы полученные (от розничных покупателей)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R2023 Perakende müşteri avansları</value>
+  <key>en</key>
+  <value>R2023 Advances from retail customers</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="75de67cc-9e82-4564-bde6-e75339938afa">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма оплаты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,16 +48,16 @@
  <dimensions uuid="74405dee-a5d1-4c86-af11-98982be29464">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -70,16 +70,16 @@
  <dimensions uuid="c7da50fe-fa67-4c30-9201-27c6c81aa9b4">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -92,16 +92,16 @@
  <dimensions uuid="58e33a3b-739d-4aa8-a515-f18cfa2b05ba">
   <name>RetailCustomer</name>
   <synonym>
-   <key>en</key>
-   <value>Retail customer</value>
+   <key>tr</key>
+   <value>Perakende müşteri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Розничный покупатель</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Perakende müşteri</value>
+   <key>en</key>
+   <value>Retail customer</value>
   </synonym>
   <type>
    <types>CatalogRef.RetailCustomers</types>

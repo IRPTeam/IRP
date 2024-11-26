@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -383,7 +383,7 @@
   </notDefaultUseAlwaysAttributes>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
-   <mainTable>Catalog.Locations</mainTable>
+   <mainTable>Catalog.ObjectLocations</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
    <autoSaveUserSettings>true</autoSaveUserSettings>

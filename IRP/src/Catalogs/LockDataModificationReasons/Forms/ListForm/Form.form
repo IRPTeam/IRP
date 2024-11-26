@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -199,16 +199,16 @@
    <name>SetOneRuleForAllObjects</name>
    <id>25</id>
    <title>
-    <key>en</key>
-    <value>One rule</value>
+    <key>tr</key>
+    <value>Tek kural</value>
    </title>
    <title>
     <key>ru</key>
     <value>Одно правило</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tek kural</value>
+    <key>en</key>
+    <value>One rule</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -254,16 +254,16 @@
    <name>DisableRule</name>
    <id>28</id>
    <title>
-    <key>en</key>
-    <value>Disable</value>
+    <key>tr</key>
+    <value>Devre dışı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Не активен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Devre dışı</value>
+    <key>en</key>
+    <value>Disable</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -736,7 +736,7 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>Description</value>
       </content>
       <content>
@@ -744,7 +744,7 @@ FROM
        <value>Наименование</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>Description</value>
       </content>
      </localValue>

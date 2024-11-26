@@ -606,28 +606,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Page attach issue</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Page attach issue</value>
-     </title>
-     <title>
       <key>tr</key>
       <value>Sayfa talep bağla</value>
      </title>
-     <toolTip>
+     <title>
+      <key>ru</key>
+      <value>Страница прикрепления проблемы</value>
+     </title>
+     <title>
       <key>en</key>
       <value>Page attach issue</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Page attach issue</value>
-     </toolTip>
+     </title>
      <toolTip>
       <key>tr</key>
       <value>Sayfa talep bağla</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Страница прикрепления проблемы</value>
+     </toolTip>
+     <toolTip>
+      <key>en</key>
+      <value>Page attach issue</value>
      </toolTip>
      <extendedTooltip>
       <name>PageAttachIssueExtendedTooltip</name>
@@ -656,28 +656,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Pages attach issue</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Pages attach issue</value>
-    </title>
-    <title>
      <key>tr</key>
      <value>Sayfalar talep bağla</value>
     </title>
-    <toolTip>
+    <title>
+     <key>ru</key>
+     <value>Прикрепить проблему к страницам</value>
+    </title>
+    <title>
      <key>en</key>
      <value>Pages attach issue</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Pages attach issue</value>
-    </toolTip>
+    </title>
     <toolTip>
      <key>tr</key>
      <value>Sayfalar talep bağla</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Прикрепить проблему к страницам</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>Pages attach issue</value>
     </toolTip>
     <extendedTooltip>
      <name>PagesAttachIssueExtendedTooltip</name>
@@ -705,28 +705,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Issue</value>
+    <key>tr</key>
+    <value>Global Blue Fişi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выпуск</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Global Blue Fişi</value>
-   </title>
-   <toolTip>
     <key>en</key>
-    <value>Page info</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Page info</value>
-   </toolTip>
+    <value>Issue</value>
+   </title>
    <toolTip>
     <key>tr</key>
     <value>Sayfa bilgi</value>
+   </toolTip>
+   <toolTip>
+    <key>ru</key>
+    <value>Страница информации</value>
+   </toolTip>
+   <toolTip>
+    <key>en</key>
+    <value>Page info</value>
    </toolTip>
    <extendedTooltip>
     <name>PageInfoExtendedTooltip</name>
@@ -810,16 +810,16 @@
       <bold>true</bold>
      </font>
      <inputHint>
-      <key>en</key>
-      <value>Work order</value>
+      <key>tr</key>
+      <value>İş emri</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Заказ наряд</value>
      </inputHint>
      <inputHint>
-      <key>tr</key>
-      <value>İş emri</value>
+      <key>en</key>
+      <value>Work order</value>
      </inputHint>
     </extInfo>
    </items>
@@ -875,16 +875,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>en</key>
-      <value>Work sheet</value>
+      <key>tr</key>
+      <value>Çalışma tutanağı</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Лист учета рабочего времени</value>
      </inputHint>
      <inputHint>
-      <key>tr</key>
-      <value>Çalışma tutanağı</value>
+      <key>en</key>
+      <value>Work sheet</value>
      </inputHint>
     </extInfo>
    </items>
@@ -1046,16 +1046,16 @@
       <typeDomainEnabled>true</typeDomainEnabled>
       <textEdit>true</textEdit>
       <inputHint>
-       <key>en</key>
-       <value>Enter detail description</value>
+       <key>tr</key>
+       <value>Detaylı açıklamayı giriniz</value>
       </inputHint>
       <inputHint>
        <key>ru</key>
-       <value>Enter detail description</value>
+       <value>Введите подробное наименование</value>
       </inputHint>
       <inputHint>
-       <key>tr</key>
-       <value>Detaylı açıklamayı giriniz</value>
+       <key>en</key>
+       <value>Enter detail description</value>
       </inputHint>
      </extInfo>
     </items>
@@ -1397,28 +1397,28 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Page attach WorkSheet</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Page attach WorkSheet</value>
-      </title>
-      <title>
        <key>tr</key>
        <value>Sayfa bağla İş takip formu</value>
       </title>
-      <toolTip>
-       <key>en</key>
-       <value>Page attach issue</value>
-      </toolTip>
-      <toolTip>
+      <title>
        <key>ru</key>
-       <value>Page attach issue</value>
-      </toolTip>
+       <value>Страница прикрепления Рабочего листа</value>
+      </title>
+      <title>
+       <key>en</key>
+       <value>Page attach WorkSheet</value>
+      </title>
       <toolTip>
        <key>tr</key>
        <value>Sayfa talep bağla</value>
+      </toolTip>
+      <toolTip>
+       <key>ru</key>
+       <value>Страница прикрепления проблемы</value>
+      </toolTip>
+      <toolTip>
+       <key>en</key>
+       <value>Page attach issue</value>
       </toolTip>
       <extendedTooltip>
        <name>PageAttachWorkSheetExtendedTooltip</name>
@@ -1447,28 +1447,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Pages attach WorkSheet</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Pages attach WorkSheet</value>
-     </title>
-     <title>
       <key>tr</key>
       <value>Sayfalar bağla İş takip formu</value>
      </title>
-     <toolTip>
-      <key>en</key>
-      <value>Pages attach issue</value>
-     </toolTip>
-     <toolTip>
+     <title>
       <key>ru</key>
-      <value>Pages attach issue</value>
-     </toolTip>
+      <value>Страницы прикрепления листа</value>
+     </title>
+     <title>
+      <key>en</key>
+      <value>Pages attach WorkSheet</value>
+     </title>
      <toolTip>
       <key>tr</key>
       <value>Sayfalar talep bağla</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Прикрепить проблему к страницам</value>
+     </toolTip>
+     <toolTip>
+      <key>en</key>
+      <value>Pages attach issue</value>
      </toolTip>
      <extendedTooltip>
       <name>PagesAttachWorkSheetExtendedTooltip</name>
@@ -1681,28 +1681,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group button attachment</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Group button attachment</value>
-     </title>
-     <title>
       <key>tr</key>
       <value>Grup buton ek dosyalar</value>
      </title>
-     <toolTip>
+     <title>
+      <key>ru</key>
+      <value>Группа кнопок вложения</value>
+     </title>
+     <title>
       <key>en</key>
       <value>Group button attachment</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Group button attachment</value>
-     </toolTip>
+     </title>
      <toolTip>
       <key>tr</key>
       <value>Grup buton ek dosyalar</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Группа кнопок вложения</value>
+     </toolTip>
+     <toolTip>
+      <key>en</key>
+      <value>Group button attachment</value>
      </toolTip>
      <extendedTooltip>
       <name>GroupButtonAttachmentExtendedTooltip</name>
@@ -2163,28 +2163,28 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Page attachment list</value>
-      </title>
-      <title>
-       <key>ru</key>
-       <value>Page attachment list</value>
-      </title>
-      <title>
        <key>tr</key>
        <value>Sayfa ek dosya listesi</value>
       </title>
-      <toolTip>
+      <title>
+       <key>ru</key>
+       <value>Страница списка вложений</value>
+      </title>
+      <title>
        <key>en</key>
        <value>Page attachment list</value>
-      </toolTip>
-      <toolTip>
-       <key>ru</key>
-       <value>Page attachment list</value>
-      </toolTip>
+      </title>
       <toolTip>
        <key>tr</key>
        <value>Sayfa ek dosya listesi</value>
+      </toolTip>
+      <toolTip>
+       <key>ru</key>
+       <value>Страница списка вложений</value>
+      </toolTip>
+      <toolTip>
+       <key>en</key>
+       <value>Page attachment list</value>
       </toolTip>
       <verticalStretch>true</verticalStretch>
       <extendedTooltip>
@@ -2214,28 +2214,28 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Pages attachment list</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Pages attachment list</value>
-     </title>
-     <title>
       <key>tr</key>
       <value>Sayfalar ek dosya listesi</value>
      </title>
-     <toolTip>
+     <title>
+      <key>ru</key>
+      <value>Список вложений страниц</value>
+     </title>
+     <title>
       <key>en</key>
       <value>Pages attachment list</value>
-     </toolTip>
-     <toolTip>
-      <key>ru</key>
-      <value>Pages attachment list</value>
-     </toolTip>
+     </title>
      <toolTip>
       <key>tr</key>
       <value>Sayfalar ek dosya listesi</value>
+     </toolTip>
+     <toolTip>
+      <key>ru</key>
+      <value>Список вложений страниц</value>
+     </toolTip>
+     <toolTip>
+      <key>en</key>
+      <value>Pages attachment list</value>
      </toolTip>
      <extendedTooltip>
       <name>PagesAttachmentListExtendedTooltip</name>
@@ -2307,28 +2307,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group job started</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Group job started</value>
-    </title>
-    <title>
      <key>tr</key>
      <value>Grup iş başlatıldı</value>
     </title>
-    <toolTip>
+    <title>
+     <key>ru</key>
+     <value>Группа начала работы</value>
+    </title>
+    <title>
      <key>en</key>
      <value>Group job started</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Group job started</value>
-    </toolTip>
+    </title>
     <toolTip>
      <key>tr</key>
      <value>Grup iş başlatıldı</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Группа начала работы</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>Group job started</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupJobStartedExtendedTooltip</name>
@@ -2409,28 +2409,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group job not started</value>
-    </title>
-    <title>
-     <key>ru</key>
-     <value>Group job not started</value>
-    </title>
-    <title>
      <key>tr</key>
      <value>Grup iş başlatılmadı</value>
     </title>
-    <toolTip>
+    <title>
+     <key>ru</key>
+     <value>Группа не начала работу</value>
+    </title>
+    <title>
      <key>en</key>
      <value>Group job not started</value>
-    </toolTip>
-    <toolTip>
-     <key>ru</key>
-     <value>Group job not started</value>
-    </toolTip>
+    </title>
     <toolTip>
      <key>tr</key>
      <value>Grup iş başlatılmadı</value>
+    </toolTip>
+    <toolTip>
+     <key>ru</key>
+     <value>Группа не начала работу</value>
+    </toolTip>
+    <toolTip>
+     <key>en</key>
+     <value>Group job not started</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupJobNotStartedExtendedTooltip</name>
@@ -2464,19 +2464,19 @@
      <name>DecorationErrorUpdateGPS</name>
      <id>118</id>
      <title>
-      <key>en</key>
-      <value>Cannot retrieve current GPS coordinates
-Update coordinates for continue</value>
-     </title>
-     <title>
-      <key>ru</key>
-      <value>Cannot retrieve current GPS coordinates
-Update coordinates for continue</value>
-     </title>
-     <title>
       <key>tr</key>
       <value>Mevcut GPS koordinatları alınamadı
 Devam etmek için koordintları güncelleyin</value>
+     </title>
+     <title>
+      <key>ru</key>
+      <value>Не могу получить текущие GPS координаты
+Обновите координаты для продолжения</value>
+     </title>
+     <title>
+      <key>en</key>
+      <value>Cannot retrieve current GPS coordinates
+Update coordinates for continue</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -2553,16 +2553,16 @@ Devam etmek için koordintları güncelleyin</value>
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group error coordinates</value>
+     <key>tr</key>
+     <value>Grup koordinat hataları</value>
     </title>
     <title>
      <key>ru</key>
-     <value>Group error coordinates</value>
+     <value>Группа ошибок координат</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup koordinat hataları</value>
+     <key>en</key>
+     <value>Group error coordinates</value>
     </title>
     <groupVerticalAlign>Center</groupVerticalAlign>
     <extendedTooltip>
@@ -2597,28 +2597,28 @@ Devam etmek için koordintları güncelleyin</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Job</value>
+    <key>tr</key>
+    <value>Görev</value>
    </title>
    <title>
     <key>ru</key>
     <value>Задание</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görev</value>
-   </title>
-   <toolTip>
     <key>en</key>
-    <value>Page check in</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Page check in</value>
-   </toolTip>
+    <value>Job</value>
+   </title>
    <toolTip>
     <key>tr</key>
     <value>Sayfa konum bildir</value>
+   </toolTip>
+   <toolTip>
+    <key>ru</key>
+    <value>Страница регистрации</value>
+   </toolTip>
+   <toolTip>
+    <key>en</key>
+    <value>Page check in</value>
    </toolTip>
    <extendedTooltip>
     <name>PageCheckInExtendedTooltip</name>
@@ -2650,28 +2650,28 @@ Devam etmek için koordintları güncelleyin</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
-  </title>
-  <toolTip>
    <key>en</key>
    <value>Group pages</value>
+  </title>
+  <toolTip>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Группа страницы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
+   <key>en</key>
+   <value>Group pages</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -2736,16 +2736,16 @@ Devam etmek için koordintları güncelleyin</value>
  <attributes>
   <name>Issue</name>
   <title>
-   <key>en</key>
-   <value>Issue</value>
+   <key>tr</key>
+   <value>Global Blue Fişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выпуск</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Global Blue Fişi</value>
+   <key>en</key>
+   <value>Issue</value>
   </title>
   <id>2</id>
   <valueType>
@@ -2761,16 +2761,16 @@ Devam etmek için koordintları güncelleyin</value>
  <attributes>
   <name>AttachedFiles</name>
   <title>
-   <key>en</key>
-   <value>Attached files</value>
+   <key>tr</key>
+   <value>Dış dosyalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Прикрепленные файлы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış dosyalar</value>
+   <key>en</key>
+   <value>Attached files</value>
   </title>
   <id>3</id>
   <valueType>
@@ -2904,16 +2904,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Preview picture</value>
+       <key>tr</key>
+       <value>Resim önizle</value>
       </content>
       <content>
        <key>ru</key>
-       <value>Preview picture</value>
+       <value>Предпросмотр изображения</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Resim önizle</value>
+       <key>en</key>
+       <value>Preview picture</value>
       </content>
      </localValue>
     </title>
@@ -2932,16 +2932,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Issue</value>
+       <key>tr</key>
+       <value>Global Blue Fişi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Выпуск</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Global Blue Fişi</value>
+       <key>en</key>
+       <value>Issue</value>
       </content>
      </localValue>
     </title>
@@ -2956,16 +2956,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Project</value>
+       <key>tr</key>
+       <value>Proje</value>
       </content>
       <content>
        <key>ru</key>
        <value>Проект</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Proje</value>
+       <key>en</key>
+       <value>Project</value>
       </content>
      </localValue>
     </title>
@@ -2980,16 +2980,16 @@ WHERE
  <attributes>
   <name>WorkOrder</name>
   <title>
-   <key>en</key>
-   <value>Work order</value>
+   <key>tr</key>
+   <value>İş emri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заказ наряд</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş emri</value>
+   <key>en</key>
+   <value>Work order</value>
   </title>
   <id>4</id>
   <valueType>
@@ -3005,16 +3005,16 @@ WHERE
  <attributes>
   <name>WorkSheet</name>
   <title>
-   <key>en</key>
-   <value>Work sheet</value>
+   <key>tr</key>
+   <value>Çalışma tutanağı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Лист учета рабочего времени</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışma tutanağı</value>
+   <key>en</key>
+   <value>Work sheet</value>
   </title>
   <id>5</id>
   <valueType>
@@ -3030,16 +3030,16 @@ WHERE
  <attributes>
   <name>JobStarted</name>
   <title>
-   <key>en</key>
-   <value>Job started</value>
+   <key>tr</key>
+   <value>İş başlatıldı</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Job started</value>
+   <value>Работа начата</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş başlatıldı</value>
+   <key>en</key>
+   <value>Job started</value>
   </title>
   <id>6</id>
   <valueType>
@@ -3056,16 +3056,16 @@ WHERE
  <attributes>
   <name>JobFinished</name>
   <title>
-   <key>en</key>
-   <value>Job finished</value>
+   <key>tr</key>
+   <value>İş tamamlandı</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Job finished</value>
+   <value>Работа завершена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş tamamlandı</value>
+   <key>en</key>
+   <value>Job finished</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3082,16 +3082,16 @@ WHERE
  <attributes>
   <name>JobDescription</name>
   <title>
-   <key>en</key>
-   <value>Job description</value>
+   <key>tr</key>
+   <value>İş açıklaması</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Job description</value>
+   <value>Наименование работы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İş açıklaması</value>
+   <key>en</key>
+   <value>Job description</value>
   </title>
   <id>8</id>
   <valueType>
@@ -3108,16 +3108,16 @@ WHERE
  <attributes>
   <name>AttachedList</name>
   <title>
-   <key>en</key>
-   <value>Attached list</value>
+   <key>tr</key>
+   <value>Ek dosyalar listesi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Attached list</value>
+   <value>Список вложений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek dosyalar listesi</value>
+   <key>en</key>
+   <value>Attached list</value>
   </title>
   <id>9</id>
   <valueType>
@@ -3132,16 +3132,16 @@ WHERE
   <columns>
    <name>Image</name>
    <title>
-    <key>en</key>
-    <value>Image</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Image</value>
+    <value>Изображение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Image</value>
    </title>
    <id>3</id>
    <valueType>
@@ -3157,16 +3157,16 @@ WHERE
   <columns>
    <name>Extension</name>
    <title>
-    <key>en</key>
-    <value> Extension</value>
+    <key>tr</key>
+    <value>Uzantı</value>
    </title>
    <title>
     <key>ru</key>
-    <value> Extension</value>
+    <value> Расширение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Uzantı</value>
+    <key>en</key>
+    <value> Extension</value>
    </title>
    <id>4</id>
    <valueType>
@@ -3183,15 +3183,15 @@ WHERE
   <columns>
    <name>BD</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>BD</value>
    </title>
    <title>
     <key>ru</key>
-    <value>BD</value>
+    <value>BD          </value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>BD</value>
    </title>
    <id>8</id>
@@ -3206,16 +3206,16 @@ WHERE
   <columns>
    <name>IsImage</name>
    <title>
-    <key>en</key>
-    <value>Is image</value>
+    <key>tr</key>
+    <value>Bu resim</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Is image</value>
+    <value>Это изображение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu resim</value>
+    <key>en</key>
+    <value>Is image</value>
    </title>
    <id>9</id>
    <valueType>
@@ -3231,16 +3231,16 @@ WHERE
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>10</id>
    <valueType>
@@ -3257,16 +3257,16 @@ WHERE
   <columns>
    <name>Uploaded</name>
    <title>
-    <key>en</key>
-    <value>Uploaded</value>
+    <key>tr</key>
+    <value>Yüklendi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выгружен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yüklendi</value>
+    <key>en</key>
+    <value>Uploaded</value>
    </title>
    <id>1</id>
    <valueType>
@@ -3282,16 +3282,16 @@ WHERE
   <columns>
    <name>UploadStatus</name>
    <title>
-    <key>en</key>
-    <value>Upload status</value>
+    <key>tr</key>
+    <value>Yükleme statüsü</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Upload status</value>
+    <value>Статус загрузки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yükleme statüsü</value>
+    <key>en</key>
+    <value>Upload status</value>
    </title>
    <id>2</id>
    <valueType>
@@ -3308,16 +3308,16 @@ WHERE
  <attributes>
   <name>Latitude</name>
   <title>
-   <key>en</key>
-   <value>Latitude</value>
+   <key>tr</key>
+   <value>Enlem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Широта</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Enlem</value>
+   <key>en</key>
+   <value>Latitude</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3337,16 +3337,16 @@ WHERE
  <attributes>
   <name>Longitude</name>
   <title>
-   <key>en</key>
-   <value>Longitude</value>
+   <key>tr</key>
+   <value>Boylam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Долгота</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Boylam</value>
+   <key>en</key>
+   <value>Longitude</value>
   </title>
   <id>11</id>
   <valueType>
@@ -3366,16 +3366,16 @@ WHERE
  <attributes>
   <name>AttachedFilesWorkSheet</name>
   <title>
-   <key>en</key>
-   <value>Attached files</value>
+   <key>tr</key>
+   <value>Dış dosyalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Прикрепленные файлы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış dosyalar</value>
+   <key>en</key>
+   <value>Attached files</value>
   </title>
   <id>12</id>
   <valueType>
@@ -3511,16 +3511,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Preview picture</value>
+       <key>tr</key>
+       <value>Resim önizle</value>
       </content>
       <content>
        <key>ru</key>
-       <value>Preview picture</value>
+       <value>Предпросмотр изображения</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Resim önizle</value>
+       <key>en</key>
+       <value>Preview picture</value>
       </content>
      </localValue>
     </title>
@@ -3539,16 +3539,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Work sheet</value>
+       <key>tr</key>
+       <value>Çalışma tutanağı</value>
       </content>
       <content>
        <key>ru</key>
        <value>Лист учета рабочего времени</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Çalışma tutanağı</value>
+       <key>en</key>
+       <value>Work sheet</value>
       </content>
      </localValue>
     </title>
@@ -3567,29 +3567,29 @@ WHERE
  <formCommands>
   <name>StartJob</name>
   <title>
-   <key>en</key>
-   <value>Start job</value>
+   <key>tr</key>
+   <value>İşi başlat</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Start job</value>
+   <value>Начало работы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşi başlat</value>
+   <key>en</key>
+   <value>Start job</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Start job</value>
+   <key>tr</key>
+   <value>İşi başlat</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
-   <value>Start job</value>
+   <value>Начало работы</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>İşi başlat</value>
+   <key>en</key>
+   <value>Start job</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -3608,16 +3608,16 @@ WHERE
  <formCommands>
   <name>UpdateCoordinates</name>
   <title>
-   <key>en</key>
-   <value>Update coordinates</value>
+   <key>tr</key>
+   <value>Koordinatları güncelle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Update coordinates</value>
+   <value>Обновить координаты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koordinatları güncelle</value>
+   <key>en</key>
+   <value>Update coordinates</value>
   </title>
   <id>2</id>
   <use>
@@ -3637,16 +3637,16 @@ WHERE
  <formCommands>
   <name>AddVideo</name>
   <title>
-   <key>en</key>
-   <value>Add video</value>
+   <key>tr</key>
+   <value>Video ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add video</value>
+   <value>Добавить видео</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Video ekle</value>
+   <key>en</key>
+   <value>Add video</value>
   </title>
   <id>3</id>
   <use>
@@ -3666,16 +3666,16 @@ WHERE
  <formCommands>
   <name>AddPhoto</name>
   <title>
-   <key>en</key>
-   <value>Add photo</value>
+   <key>tr</key>
+   <value>Foto ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add photo</value>
+   <value>Добавить фото </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Foto ekle</value>
+   <key>en</key>
+   <value>Add photo</value>
   </title>
   <id>4</id>
   <use>
@@ -3695,16 +3695,16 @@ WHERE
  <formCommands>
   <name>AddAttachments</name>
   <title>
-   <key>en</key>
-   <value>Add attachments</value>
+   <key>tr</key>
+   <value>Ek dosya ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add attachments</value>
+   <value>Добавить вложения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek dosya ekle</value>
+   <key>en</key>
+   <value>Add attachments</value>
   </title>
   <id>5</id>
   <use>
@@ -3724,29 +3724,29 @@ WHERE
  <formCommands>
   <name>FinishJob</name>
   <title>
-   <key>en</key>
-   <value>Finish job</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Finish job</value>
-  </title>
-  <title>
    <key>tr</key>
    <value>İşi sonlandır</value>
   </title>
-  <id>6</id>
-  <toolTip>
+  <title>
+   <key>ru</key>
+   <value>Завершить работу</value>
+  </title>
+  <title>
    <key>en</key>
    <value>Finish job</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Finish job</value>
-  </toolTip>
+  </title>
+  <id>6</id>
   <toolTip>
    <key>tr</key>
    <value>İşi bitir</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Завершить работу</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Finish job</value>
   </toolTip>
   <use>
    <common>true</common>

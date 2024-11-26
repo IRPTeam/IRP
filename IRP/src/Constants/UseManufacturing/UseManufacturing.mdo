@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseManufacturing</name>
  <synonym>
-  <key>en</key>
-  <value>Use manufacturing</value>
+  <key>tr</key>
+  <value>Kullanmak - Üretim</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать производство</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - Üretim</value>
+  <key>en</key>
+  <value>Use manufacturing</value>
  </synonym>
  <type>
   <types>Boolean</types>

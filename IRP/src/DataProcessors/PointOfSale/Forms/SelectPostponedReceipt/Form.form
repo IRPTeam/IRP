@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:core_1="http://g5.1c.ru/v8/dt/data-composition-system/core" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Select postponed receipt</value>
+  <key>tr</key>
+  <value>Erteleme fişini seçin</value>
  </title>
  <title>
   <key>ru</key>
   <value>Выбор отложенного чека</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>Erteleme fişini seçin</value>
+  <key>en</key>
+  <value>Select postponed receipt</value>
  </title>
  <items xsi:type="form:Table">
   <name>Receipts</name>
@@ -1550,16 +1550,16 @@
  <attributes>
   <name>Receipts</name>
   <title>
-   <key>en</key>
-   <value>Receipts</value>
+   <key>tr</key>
+   <value>Makbuzlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Чеки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Makbuzlar</value>
+   <key>en</key>
+   <value>Receipts</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1638,16 +1638,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Receipt</value>
+       <key>tr</key>
+       <value>Giriş</value>
       </content>
       <content>
        <key>ru</key>
        <value>Приход</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Giriş</value>
+       <key>en</key>
+       <value>Receipt</value>
       </content>
      </localValue>
     </title>
@@ -1714,16 +1714,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Type</value>
+       <key>tr</key>
+       <value>Tip</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вид</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tip</value>
+       <key>en</key>
+       <value>Type</value>
       </content>
      </localValue>
     </title>
@@ -1737,16 +1737,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Branch</value>
+       <key>tr</key>
+       <value>Şube</value>
       </content>
       <content>
        <key>ru</key>
        <value>Структурное подразделение</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Şube</value>
+       <key>en</key>
+       <value>Branch</value>
       </content>
      </localValue>
     </title>
@@ -1766,16 +1766,16 @@ WHERE
  <attributes>
   <name>ItemList</name>
   <title>
-   <key>en</key>
-   <value>Item list</value>
+   <key>tr</key>
+   <value>Malzeme listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Товары</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme listesi</value>
+   <key>en</key>
+   <value>Item list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1790,16 +1790,16 @@ WHERE
   <columns>
    <name>Item</name>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1815,16 +1815,16 @@ WHERE
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1840,7 +1840,7 @@ WHERE
   <columns>
    <name>Unit</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Unit</value>
    </title>
    <title>
@@ -1848,7 +1848,7 @@ WHERE
     <value>Единица измерения</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Unit</value>
    </title>
    <id>5</id>
@@ -1865,7 +1865,7 @@ WHERE
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Quantity</value>
    </title>
    <title>
@@ -1873,7 +1873,7 @@ WHERE
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Quantity</value>
    </title>
    <id>6</id>
@@ -1890,16 +1890,16 @@ WHERE
   <columns>
    <name>Price</name>
    <title>
-    <key>en</key>
-    <value>Price</value>
+    <key>tr</key>
+    <value>Fiyat</value>
    </title>
    <title>
     <key>ru</key>
     <value>Цена</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fiyat</value>
+    <key>en</key>
+    <value>Price</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1915,16 +1915,16 @@ WHERE
   <columns>
    <name>TaxAmount</name>
    <title>
-    <key>en</key>
-    <value>Tax amount</value>
+    <key>tr</key>
+    <value>Vergi tutarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма налогов</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vergi tutarı</value>
+    <key>en</key>
+    <value>Tax amount</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1940,16 +1940,16 @@ WHERE
   <columns>
    <name>OffersAmount</name>
    <title>
-    <key>en</key>
-    <value>Offers amount</value>
+    <key>tr</key>
+    <value>Iskonto tutarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма скидки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Iskonto tutarı</value>
+    <key>en</key>
+    <value>Offers amount</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1965,16 +1965,16 @@ WHERE
   <columns>
    <name>NetAmount</name>
    <title>
-    <key>en</key>
-    <value>Net amount</value>
+    <key>tr</key>
+    <value>Net tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма без налогов</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Net tutar</value>
+    <key>en</key>
+    <value>Net amount</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1990,16 +1990,16 @@ WHERE
   <columns>
    <name>TotalAmount</name>
    <title>
-    <key>en</key>
-    <value>Total amount</value>
+    <key>tr</key>
+    <value>Toplam tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Общая сумма</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Toplam tutar</value>
+    <key>en</key>
+    <value>Total amount</value>
    </title>
    <id>11</id>
    <valueType>
@@ -2016,16 +2016,16 @@ WHERE
  <attributes>
   <name>CurrentBranch</name>
   <title>
-   <key>en</key>
-   <value>Current branch</value>
+   <key>tr</key>
+   <value>Mevcut şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущее структурное подразделение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut şube</value>
+   <key>en</key>
+   <value>Current branch</value>
   </title>
   <id>12</id>
   <valueType>
@@ -2041,16 +2041,16 @@ WHERE
  <formCommands>
   <name>CancelReceipts</name>
   <title>
-   <key>en</key>
-   <value>Cancel receipts</value>
+   <key>tr</key>
+   <value>Makbuzları iptal et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить чеки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Makbuzları iptal et</value>
+   <key>en</key>
+   <value>Cancel receipts</value>
   </title>
   <id>1</id>
   <use>

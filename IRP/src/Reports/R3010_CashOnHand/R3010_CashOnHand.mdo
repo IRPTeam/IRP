@@ -6,32 +6,32 @@
  </producedTypes>
  <name>R3010_CashOnHand</name>
  <synonym>
-  <key>en</key>
-  <value>R3010 Cash on hand</value>
+  <key>tr</key>
+  <value>R3010 Finansal bakiye</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R3010 Остатки денежных средств</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R3010 Finansal bakiye</value>
+  <key>en</key>
+  <value>R3010 Cash on hand</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R3010_CashOnHand.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="c1d5c34c-17b7-4de6-97ee-756cdf0984ff">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

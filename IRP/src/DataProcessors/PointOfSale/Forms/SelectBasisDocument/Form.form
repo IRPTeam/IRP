@@ -1257,16 +1257,16 @@
  <attributes>
   <name>SalesOrders</name>
   <title>
-   <key>en</key>
-   <value>Sales orders</value>
+   <key>tr</key>
+   <value>Satış siparişleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заказы покупателей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satış siparişleri</value>
+   <key>en</key>
+   <value>Sales orders</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1487,16 +1487,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Period</value>
+       <key>tr</key>
+       <value>Dönem</value>
       </content>
       <content>
        <key>ru</key>
        <value>Период</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
+       <key>en</key>
+       <value>Period</value>
       </content>
      </localValue>
     </title>
@@ -1511,16 +1511,16 @@ WHERE
  <attributes>
   <name>RetailShipmentConfirmation</name>
   <title>
-   <key>en</key>
-   <value>Retail shipment confirmation</value>
+   <key>tr</key>
+   <value>Perakende sevk irsaliyesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отгрузка розничной продажи</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Perakende sevk irsaliyesi</value>
+   <key>en</key>
+   <value>Retail shipment confirmation</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1707,16 +1707,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Begin of period</value>
+       <key>tr</key>
+       <value>Dönem başı</value>
       </content>
       <content>
        <key>ru</key>
        <value>Начало периода</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem başı</value>
+       <key>en</key>
+       <value>Begin of period</value>
       </content>
      </localValue>
     </title>
@@ -1731,16 +1731,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>End of period</value>
+       <key>tr</key>
+       <value>Dönem sonu</value>
       </content>
       <content>
        <key>ru</key>
        <value>Конец периода</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem sonu</value>
+       <key>en</key>
+       <value>End of period</value>
       </content>
      </localValue>
     </title>
@@ -1755,16 +1755,16 @@ WHERE
  <formCommands>
   <name>Select</name>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <id>1</id>
   <use>

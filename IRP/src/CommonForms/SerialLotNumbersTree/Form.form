@@ -563,16 +563,16 @@
  <attributes>
   <name>SerialLotNumbersTree</name>
   <title>
-   <key>en</key>
-   <value>Serial lot numbers tree</value>
+   <key>tr</key>
+   <value>Seri lot numara ağacı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево серий номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numara ağacı</value>
+   <key>en</key>
+   <value>Serial lot numbers tree</value>
   </title>
   <id>2</id>
   <valueType>
@@ -588,16 +588,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>157</id>
    <valueType>
@@ -613,16 +613,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <id>158</id>
    <valueType>
@@ -638,16 +638,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <id>159</id>
    <valueType>
@@ -663,16 +663,16 @@
   <columns>
    <name>SerialLotNumber</name>
    <title>
-    <key>en</key>
-    <value>Serial lot number</value>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Серия номенклатуры</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seri lot numaraları</value>
+    <key>en</key>
+    <value>Serial lot number</value>
    </title>
    <id>160</id>
    <valueType>
@@ -688,16 +688,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <id>161</id>
    <valueType>
@@ -713,16 +713,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <id>162</id>
    <valueType>
@@ -741,16 +741,16 @@
   <columns>
    <name>ItemKeyQuantity</name>
    <title>
-    <key>en</key>
-    <value>Item key quantity</value>
+    <key>tr</key>
+    <value>Varyant adet</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество характеристики</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant adet</value>
+    <key>en</key>
+    <value>Item key quantity</value>
    </title>
    <id>165</id>
    <valueType>

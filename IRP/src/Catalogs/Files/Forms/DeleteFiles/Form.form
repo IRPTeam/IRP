@@ -487,16 +487,16 @@
  <attributes>
   <name>Volume</name>
   <title>
-   <key>en</key>
-   <value>Volume</value>
+   <key>tr</key>
+   <value>Hacim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Объем</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hacim</value>
+   <key>en</key>
+   <value>Volume</value>
   </title>
   <id>1</id>
   <valueType>
@@ -512,16 +512,16 @@
  <attributes>
   <name>Files</name>
   <title>
-   <key>en</key>
-   <value>Files</value>
+   <key>tr</key>
+   <value>Dosyalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Файлы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosyalar</value>
+   <key>en</key>
+   <value>Files</value>
   </title>
   <id>2</id>
   <valueType>
@@ -536,16 +536,16 @@
   <columns>
    <name>FileURI</name>
    <title>
-    <key>en</key>
-    <value>File URI</value>
+    <key>tr</key>
+    <value>URI dosya</value>
    </title>
    <title>
     <key>ru</key>
     <value>Файл URI</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>URI dosya</value>
+    <key>en</key>
+    <value>File URI</value>
    </title>
    <id>3</id>
    <valueType>
@@ -562,16 +562,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>4</id>
    <valueType>
@@ -587,16 +587,16 @@
   <columns>
    <name>POSTSettingName</name>
    <title>
-    <key>en</key>
-    <value>POST setting name</value>
+    <key>tr</key>
+    <value>POST ayar adı</value>
    </title>
    <title>
     <key>ru</key>
     <value>POST настройка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>POST ayar adı</value>
+    <key>en</key>
+    <value>POST setting name</value>
    </title>
    <id>5</id>
    <valueType>
@@ -613,16 +613,16 @@
   <columns>
    <name>GETSettingName</name>
    <title>
-    <key>en</key>
-    <value>GET setting name</value>
+    <key>tr</key>
+    <value>GET ayar adını</value>
    </title>
    <title>
     <key>ru</key>
     <value>GET настройка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>GET ayar adını</value>
+    <key>en</key>
+    <value>GET setting name</value>
    </title>
    <id>6</id>
    <valueType>
@@ -640,16 +640,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <id>1</id>
   <use>
@@ -668,16 +668,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <id>2</id>
   <use>
@@ -696,16 +696,16 @@
  <formCommands>
   <name>FindUnusedFiles</name>
   <title>
-   <key>en</key>
-   <value>Find unused files</value>
+   <key>tr</key>
+   <value>Kullanılmayan dosyaları sil</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поиск неиспользуемых файлов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanılmayan dosyaları sil</value>
+   <key>en</key>
+   <value>Find unused files</value>
   </title>
   <id>3</id>
   <use>
@@ -725,16 +725,16 @@
  <formCommands>
   <name>DeleteUnusedFiles</name>
   <title>
-   <key>en</key>
-   <value>Delete unused files</value>
+   <key>tr</key>
+   <value>Kullanılmaya dosyaları sil</value>
   </title>
   <title>
    <key>ru</key>
    <value>Удалить неиспользуемые файлы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanılmaya dosyaları sil</value>
+   <key>en</key>
+   <value>Delete unused files</value>
   </title>
   <id>4</id>
   <use>

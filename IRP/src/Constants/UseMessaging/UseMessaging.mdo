@@ -7,7 +7,7 @@
  </producedTypes>
  <name>UseMessaging</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Use messaging</value>
  </synonym>
  <synonym>
@@ -15,7 +15,7 @@
   <value>Использовать уведомления</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Use messaging</value>
  </synonym>
  <type>

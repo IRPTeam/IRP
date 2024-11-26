@@ -344,16 +344,16 @@
  <attributes>
   <name>IssueList</name>
   <title>
-   <key>en</key>
-   <value>Issue list</value>
+   <key>tr</key>
+   <value>Talep listesi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Issue list</value>
+   <value>Список проблем</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Talep listesi</value>
+   <key>en</key>
+   <value>Issue list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -499,16 +499,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Work order</value>
+       <key>tr</key>
+       <value>İş emri</value>
       </content>
       <content>
        <key>ru</key>
        <value>Заказ наряд</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>İş emri</value>
+       <key>en</key>
+       <value>Work order</value>
       </content>
      </localValue>
     </title>
@@ -534,16 +534,16 @@ WHERE
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Employee</value>
+       <key>tr</key>
+       <value>Personel</value>
       </content>
       <content>
        <key>ru</key>
        <value>Сотрудник</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Personel</value>
+       <key>en</key>
+       <value>Employee</value>
       </content>
      </localValue>
     </title>

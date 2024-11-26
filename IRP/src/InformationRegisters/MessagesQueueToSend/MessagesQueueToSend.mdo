@@ -11,7 +11,7 @@
  </producedTypes>
  <name>MessagesQueueToSend</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Messages queue to send</value>
  </synonym>
  <synonym>
@@ -19,7 +19,7 @@
   <value>Очередь сообщений к отправке</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Messages queue to send</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
@@ -63,7 +63,7 @@
  <resources uuid="45c795ba-4cd4-43c8-b83e-686f52eb1427">
   <name>Sent</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Sent</value>
   </synonym>
   <synonym>
@@ -71,7 +71,7 @@
    <value>Отправлено</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Sent</value>
   </synonym>
   <type>
@@ -86,7 +86,7 @@
  <resources uuid="914fa114-cc40-470f-8020-7637357fbdd6">
   <name>DateSent</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Date sent</value>
   </synonym>
   <synonym>
@@ -94,7 +94,7 @@
    <value>Дата отправки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Date sent</value>
   </synonym>
   <type>
@@ -110,7 +110,7 @@
  <resources uuid="45f9757e-0819-47e2-bb94-23879116ba86">
   <name>NumberAttempts</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Number attempts</value>
   </synonym>
   <synonym>
@@ -118,7 +118,7 @@
    <value>Количество попыток</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Number attempts</value>
   </synonym>
   <type>
@@ -137,7 +137,7 @@
  <resources uuid="24688239-9a34-4f09-8b19-5acd58913ef2">
   <name>LastWarning</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Last warning</value>
   </synonym>
   <synonym>
@@ -145,7 +145,7 @@
    <value>Последнее предупреждение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Last warning</value>
   </synonym>
   <type>
@@ -161,16 +161,16 @@
  <dimensions uuid="21da98f1-2bf6-416d-8aec-5555d7b109fb">
   <name>Message</name>
   <synonym>
-   <key>en</key>
-   <value>Message</value>
+   <key>tr</key>
+   <value>Mesaj</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сообщение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Mesaj</value>
+   <key>en</key>
+   <value>Message</value>
   </synonym>
   <type>
    <types>DocumentRef.OutgoingMessage</types>

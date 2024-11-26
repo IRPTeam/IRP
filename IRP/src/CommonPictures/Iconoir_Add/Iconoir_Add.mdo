@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b677bf67-1076-4296-a957-6c1fc838e950">
  <name>Iconoir_Add</name>
  <synonym>
-  <key>en</key>
-  <value>Iconoir add</value>
+  <key>tr</key>
+  <value>Ekle</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Iconoir add</value>
+  <value>Iconoir добавить</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ekle</value>
+  <key>en</key>
+  <value>Iconoir add</value>
  </synonym>
 </mdclass:CommonPicture>

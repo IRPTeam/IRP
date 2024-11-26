@@ -207,16 +207,16 @@
     <pictureSize>Proportionally</pictureSize>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Click to add logo</value>
+     <key>tr</key>
+     <value>Logo Eklemek İçin Tıkla</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Нажмите, чтобы добавить логотип</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Logo Eklemek İçin Tıkla</value>
+     <key>en</key>
+     <value>Click to add logo</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -274,16 +274,16 @@
     <pictureSize>Proportionally</pictureSize>
     <hyperlink>true</hyperlink>
     <nonselectedPictureText>
-     <key>en</key>
-     <value>Click to add seal</value>
+     <key>tr</key>
+     <value>Mühür Eklemek İçin Tıkla</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
      <key>ru</key>
      <value>Добавить печать</value>
     </nonselectedPictureText>
     <nonselectedPictureText>
-     <key>tr</key>
-     <value>Mühür Eklemek İçin Tıkla</value>
+     <key>en</key>
+     <value>Click to add seal</value>
     </nonselectedPictureText>
     <fileDragMode>AsFileRef</fileDragMode>
    </extInfo>
@@ -294,16 +294,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pictures</value>
+   <key>tr</key>
+   <value>Grup Resimleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа изображений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Resimleri</value>
+   <key>en</key>
+   <value>Group pictures</value>
   </title>
   <extendedTooltip>
    <name>GroupPicturesExtendedTooltip</name>
@@ -423,7 +423,7 @@
  <attributes>
   <name>Logo</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Logo</value>
   </title>
   <title>
@@ -431,7 +431,7 @@
    <value>Логотип</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Logo</value>
   </title>
   <id>2</id>
@@ -449,16 +449,16 @@
  <attributes>
   <name>Seal</name>
   <title>
-   <key>en</key>
-   <value>Seal</value>
+   <key>tr</key>
+   <value>Mühür</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mühür</value>
+   <key>en</key>
+   <value>Seal</value>
   </title>
   <id>3</id>
   <valueType>
@@ -475,16 +475,16 @@
  <attributes>
   <name>DefaultColor</name>
   <title>
-   <key>en</key>
-   <value>Default color</value>
+   <key>tr</key>
+   <value>Varsayılan Renk</value>
   </title>
   <title>
    <key>ru</key>
    <value>Цвет по умолчанию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varsayılan Renk</value>
+   <key>en</key>
+   <value>Default color</value>
   </title>
   <id>4</id>
   <valueType>

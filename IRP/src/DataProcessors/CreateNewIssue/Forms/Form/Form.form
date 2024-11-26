@@ -50,16 +50,16 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Country</value>
+    <key>tr</key>
+    <value>Ülke</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Страна</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Ülke</value>
+    <key>en</key>
+    <value>Country</value>
    </inputHint>
   </extInfo>
  </items>
@@ -113,16 +113,16 @@
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>City</value>
+    <key>tr</key>
+    <value>İl</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Город</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>İl</value>
+    <key>en</key>
+    <value>City</value>
    </inputHint>
   </extInfo>
  </items>
@@ -133,19 +133,19 @@
    <name>DecorationErrorMaxDistance</name>
    <id>87</id>
    <title>
-    <key>en</key>
-    <value>Device coordinates show a large distance between the location and the current position.
-Move closer and update the coordinates</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Device coordinates show a large distance between the location and the current position.
-Move closer and update the coordinates</value>
-   </title>
-   <title>
     <key>tr</key>
     <value>Cihaz koordinatları mevcut lokasyon ve hedef lokasyon arasında büyük fark gösteriyor.
 Hedefe yaklaşınız ve tekrar koordinaları güncelleyiniz</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Координаты устройства показывают большое расстояние между местоположением и текущей позицией.
+Подойдите ближе и обновите координаты</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Device coordinates show a large distance between the location and the current position.
+Move closer and update the coordinates</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -188,19 +188,19 @@ Hedefe yaklaşınız ve tekrar koordinaları güncelleyiniz</value>
    <name>DecorationErrorUpdateGPS</name>
    <id>80</id>
    <title>
-    <key>en</key>
-    <value>Cannot retrieve current GPS coordinates
-Update coordinates for continue</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Cannot retrieve current GPS coordinates
-Update coordinates for continue</value>
-   </title>
-   <title>
     <key>tr</key>
     <value>Mevcut GPS koordinatları alınamadı
 Devam etmek için koordintları güncelleyin</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Не могу получить текущие GPS координаты
+Обновите координаты для продолжения</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Cannot retrieve current GPS coordinates
+Update coordinates for continue</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -277,16 +277,16 @@ Devam etmek için koordintları güncelleyin</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group error coordinates</value>
+   <key>tr</key>
+   <value>Grup koordinat hataları</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Group error coordinates</value>
+   <value>Группа ошибок координат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup koordinat hataları</value>
+   <key>en</key>
+   <value>Group error coordinates</value>
   </title>
   <groupVerticalAlign>Center</groupVerticalAlign>
   <extendedTooltip>
@@ -369,16 +369,16 @@ Devam etmek için koordintları güncelleyin</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Location</value>
+    <key>tr</key>
+    <value>Lokasyon</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Местоположение</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Lokasyon</value>
+    <key>en</key>
+    <value>Location</value>
    </inputHint>
   </extInfo>
  </items>
@@ -432,16 +432,16 @@ Devam etmek için koordintları güncelleyin</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Issue type</value>
+    <key>tr</key>
+    <value>Talep tipi</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
-    <value>Issue type</value>
+    <value>Тип проблемы       </value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Talep tipi</value>
+    <key>en</key>
+    <value>Issue type</value>
    </inputHint>
   </extInfo>
  </items>
@@ -545,16 +545,16 @@ Devam etmek için koordintları güncelleyin</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Detail description</value>
+    <key>tr</key>
+    <value>Detay açıklama</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
-    <value>Detail description</value>
+    <value>Подробное наименование</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Detay açıklama</value>
+    <key>en</key>
+    <value>Detail description</value>
    </inputHint>
   </extInfo>
  </items>
@@ -608,16 +608,16 @@ Devam etmek için koordintları güncelleyin</value>
    <typeDomainEnabled>true</typeDomainEnabled>
    <textEdit>true</textEdit>
    <inputHint>
-    <key>en</key>
-    <value>Author</value>
+    <key>tr</key>
+    <value>Kayıt oluşturan</value>
    </inputHint>
    <inputHint>
     <key>ru</key>
     <value>Автор</value>
    </inputHint>
    <inputHint>
-    <key>tr</key>
-    <value>Kayıt oluşturan</value>
+    <key>en</key>
+    <value>Author</value>
    </inputHint>
   </extInfo>
  </items>
@@ -812,28 +812,28 @@ Devam etmek için koordintları güncelleyin</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group button attachment</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Group button attachment</value>
-  </title>
-  <title>
    <key>tr</key>
    <value>Grup buton ek dosyalar</value>
   </title>
-  <toolTip>
+  <title>
+   <key>ru</key>
+   <value>Группа кнопок вложения</value>
+  </title>
+  <title>
    <key>en</key>
    <value>Group button attachment</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Group button attachment</value>
-  </toolTip>
+  </title>
   <toolTip>
    <key>tr</key>
    <value>Grup buton ek dosyalar</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Группа кнопок вложения</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Group button attachment</value>
   </toolTip>
   <extendedTooltip>
    <name>GroupButtonAttachmentExtendedTooltip</name>
@@ -1291,28 +1291,28 @@ Devam etmek için koordintları güncelleyin</value>
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Page attachment list</value>
-   </title>
-   <title>
-    <key>ru</key>
-    <value>Page attachment list</value>
-   </title>
-   <title>
     <key>tr</key>
     <value>Sayfa ek dosya listesi</value>
    </title>
-   <toolTip>
+   <title>
+    <key>ru</key>
+    <value>Страница списка вложений</value>
+   </title>
+   <title>
     <key>en</key>
     <value>Page attachment list</value>
-   </toolTip>
-   <toolTip>
-    <key>ru</key>
-    <value>Page attachment list</value>
-   </toolTip>
+   </title>
    <toolTip>
     <key>tr</key>
     <value>Sayfa ek dosya listesi</value>
+   </toolTip>
+   <toolTip>
+    <key>ru</key>
+    <value>Страница списка вложений</value>
+   </toolTip>
+   <toolTip>
+    <key>en</key>
+    <value>Page attachment list</value>
    </toolTip>
    <verticalStretch>true</verticalStretch>
    <extendedTooltip>
@@ -1342,28 +1342,28 @@ Devam etmek için koordintları güncelleyin</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages attachment list</value>
-  </title>
-  <title>
-   <key>ru</key>
-   <value>Pages attachment list</value>
-  </title>
-  <title>
    <key>tr</key>
    <value>Sayfalar ek dosya listesi</value>
   </title>
-  <toolTip>
+  <title>
+   <key>ru</key>
+   <value>Список вложений страниц</value>
+  </title>
+  <title>
    <key>en</key>
    <value>Pages attachment list</value>
-  </toolTip>
-  <toolTip>
-   <key>ru</key>
-   <value>Pages attachment list</value>
-  </toolTip>
+  </title>
   <toolTip>
    <key>tr</key>
    <value>Sayfalar ek dosya listesi</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Список вложений страниц</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Pages attachment list</value>
   </toolTip>
   <extendedTooltip>
    <name>PagesAttachmentListExtendedTooltip</name>
@@ -1487,16 +1487,16 @@ Devam etmek için koordintları güncelleyin</value>
  <attributes>
   <name>AttachedList</name>
   <title>
-   <key>en</key>
-   <value>Attached list</value>
+   <key>tr</key>
+   <value>Ek dosyalar listesi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Attached list</value>
+   <value>Список вложений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek dosyalar listesi</value>
+   <key>en</key>
+   <value>Attached list</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1511,16 +1511,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>Image</name>
    <title>
-    <key>en</key>
-    <value>Image</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Image</value>
+    <value>Изображение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Image</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1536,16 +1536,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>Extension</name>
    <title>
-    <key>en</key>
-    <value> Extension</value>
+    <key>tr</key>
+    <value>Uzantı</value>
    </title>
    <title>
     <key>ru</key>
-    <value> Extension</value>
+    <value> Расширение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Uzantı</value>
+    <key>en</key>
+    <value> Extension</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1562,15 +1562,15 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>BD</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>BD</value>
    </title>
    <title>
     <key>ru</key>
-    <value>BD</value>
+    <value>BD          </value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>BD</value>
    </title>
    <id>8</id>
@@ -1585,16 +1585,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>IsImage</name>
    <title>
-    <key>en</key>
-    <value>Is image</value>
+    <key>tr</key>
+    <value>Bu resim</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Is image</value>
+    <value>Это изображение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu resim</value>
+    <key>en</key>
+    <value>Is image</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1610,16 +1610,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1636,16 +1636,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>Uploaded</name>
    <title>
-    <key>en</key>
-    <value>Uploaded</value>
+    <key>tr</key>
+    <value>Yüklendi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Выгружен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yüklendi</value>
+    <key>en</key>
+    <value>Uploaded</value>
    </title>
    <id>1</id>
    <valueType>
@@ -1661,16 +1661,16 @@ Devam etmek için koordintları güncelleyin</value>
   <columns>
    <name>UploadStatus</name>
    <title>
-    <key>en</key>
-    <value>Upload status</value>
+    <key>tr</key>
+    <value>Yükleme statüsü</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Upload status</value>
+    <value>Статус загрузки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yükleme statüsü</value>
+    <key>en</key>
+    <value>Upload status</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1687,16 +1687,16 @@ Devam etmek için koordintları güncelleyin</value>
  <attributes>
   <name>IssueRef</name>
   <title>
-   <key>en</key>
-   <value>Issue ref</value>
+   <key>tr</key>
+   <value>Talep ref</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Issue ref</value>
+   <value>Ссылка на проблему</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Talep ref</value>
+   <key>en</key>
+   <value>Issue ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1712,16 +1712,16 @@ Devam etmek için koordintları güncelleyin</value>
  <formCommands>
   <name>AddAttachments</name>
   <title>
-   <key>en</key>
-   <value>Add attachments</value>
+   <key>tr</key>
+   <value>Ek dosya ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add attachments</value>
+   <value>Добавить вложения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek dosya ekle</value>
+   <key>en</key>
+   <value>Add attachments</value>
   </title>
   <id>1</id>
   <use>
@@ -1741,16 +1741,16 @@ Devam etmek için koordintları güncelleyin</value>
  <formCommands>
   <name>AddPhoto</name>
   <title>
-   <key>en</key>
-   <value>Add photo</value>
+   <key>tr</key>
+   <value>Foto ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add photo</value>
+   <value>Добавить фото </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Foto ekle</value>
+   <key>en</key>
+   <value>Add photo</value>
   </title>
   <id>3</id>
   <use>
@@ -1770,16 +1770,16 @@ Devam etmek için koordintları güncelleyin</value>
  <formCommands>
   <name>AddVideo</name>
   <title>
-   <key>en</key>
-   <value>Add video</value>
+   <key>tr</key>
+   <value>Video ekle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Add video</value>
+   <value>Добавить видео</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Video ekle</value>
+   <key>en</key>
+   <value>Add video</value>
   </title>
   <id>4</id>
   <use>
@@ -1799,16 +1799,16 @@ Devam etmek için koordintları güncelleyin</value>
  <formCommands>
   <name>CreateIssue</name>
   <title>
-   <key>en</key>
-   <value>Create issue</value>
+   <key>tr</key>
+   <value>Global Blue fişi oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Создать проблему</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Global Blue fişi oluştur</value>
+   <key>en</key>
+   <value>Create issue</value>
   </title>
   <id>5</id>
   <use>
@@ -1828,16 +1828,16 @@ Devam etmek için koordintları güncelleyin</value>
  <formCommands>
   <name>UpdateCoordinates</name>
   <title>
-   <key>en</key>
-   <value>Update coordinates</value>
+   <key>tr</key>
+   <value>Koordinatları güncelle</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Update coordinates</value>
+   <value>Обновить координаты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Koordinatları güncelle</value>
+   <key>en</key>
+   <value>Update coordinates</value>
   </title>
   <id>6</id>
   <use>

@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseOrders</name>
  <synonym>
-  <key>en</key>
-  <value>Use orders</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Siparişler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать заказы</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Siparişler</value>
+  <key>en</key>
+  <value>Use orders</value>
  </synonym>
  <type>
   <types>Boolean</types>

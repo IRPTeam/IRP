@@ -559,16 +559,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>en</key>
-   <value>List</value>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
+   <key>en</key>
+   <value>List</value>
   </title>
   <id>1</id>
   <valueType>
@@ -607,16 +607,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Amount</value>
+       <key>tr</key>
+       <value>Tutar</value>
       </content>
       <content>
        <key>ru</key>
        <value>Сумма оплаты</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tutar</value>
+       <key>en</key>
+       <value>Amount</value>
       </content>
      </localValue>
     </title>
@@ -659,16 +659,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Icon</value>
+       <key>tr</key>
+       <value>Simge</value>
       </content>
       <content>
        <key>ru</key>
        <value>Иконка</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Simge</value>
+       <key>en</key>
+       <value>Icon</value>
       </content>
      </localValue>
     </title>
@@ -679,16 +679,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Tax amount</value>
+       <key>tr</key>
+       <value>Vergi tutarı</value>
       </content>
       <content>
        <key>ru</key>
        <value>Сумма налогов</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Vergi tutarı</value>
+       <key>en</key>
+       <value>Tax amount</value>
       </content>
      </localValue>
     </title>
@@ -702,16 +702,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Balance period</value>
+       <key>tr</key>
+       <value>Bakiye dönemi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Период остатка</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Bakiye dönemi</value>
+       <key>en</key>
+       <value>Balance period</value>
       </content>
      </localValue>
     </title>
@@ -727,16 +727,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Period</value>
+       <key>tr</key>
+       <value>Dönem</value>
       </content>
       <content>
        <key>ru</key>
        <value>Период</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
+       <key>en</key>
+       <value>Period</value>
       </content>
      </localValue>
     </title>
@@ -751,16 +751,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Selected documents</value>
+       <key>tr</key>
+       <value>Seçilen evraklar</value>
       </content>
       <content>
        <key>ru</key>
        <value>Выбранные документы</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Seçilen evraklar</value>
+       <key>en</key>
+       <value>Selected documents</value>
       </content>
      </localValue>
     </title>
@@ -772,16 +772,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Company</value>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
       <content>
        <key>ru</key>
        <value>Организация</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
+       <key>en</key>
+       <value>Company</value>
       </content>
      </localValue>
     </title>
@@ -796,16 +796,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Currency movement type</value>
+       <key>tr</key>
+       <value>Çoklu döviz hareket tipi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вид мультивалютной аналитики</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Çoklu döviz hareket tipi</value>
+       <key>en</key>
+       <value>Currency movement type</value>
       </content>
      </localValue>
     </title>
@@ -820,16 +820,16 @@ GROUP BY
  <formCommands>
   <name>Select</name>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <id>1</id>
   <use>

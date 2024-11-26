@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Cancellation confirmation</value>
+  <key>tr</key>
+  <value>İptal etme onayı</value>
  </title>
  <title>
   <key>ru</key>
   <value>Подтверждение отмены</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>İptal etme onayı</value>
+  <key>en</key>
+  <value>Cancellation confirmation</value>
  </title>
  <items xsi:type="form:Decoration">
   <name>WarningMessage</name>
   <id>13</id>
   <title>
-   <key>en</key>
-   <value>Now you are canceling Sales/Return transaction on pos terminal!
-Are you sure you want to process transaction?</value>
+   <key>tr</key>
+   <value>POS cihazında işlemi İPTAL ediyorsunuz.
+Devam etmek istediğinizden emin misiniz?</value>
   </title>
   <title>
    <key>ru</key>
@@ -26,9 +26,9 @@ Are you sure you want to process transaction?</value>
 Вы уверены, что хотите обработать транзакцию?</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>POS cihazında işlemi İPTAL ediyorsunuz.
-Devam etmek istediğinizden emin misiniz?</value>
+   <key>en</key>
+   <value>Now you are canceling Sales/Return transaction on pos terminal!
+Are you sure you want to process transaction?</value>
   </title>
   <visible>true</visible>
   <enabled>true</enabled>
@@ -130,16 +130,16 @@ Devam etmek istediğinizden emin misiniz?</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of confirm</value>
+   <key>tr</key>
+   <value>İzin verme grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа подтверждения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İzin verme grubu</value>
+   <key>en</key>
+   <value>Group of confirm</value>
   </title>
   <height>3</height>
   <extendedTooltip>
@@ -237,16 +237,16 @@ Devam etmek istediğinizden emin misiniz?</value>
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of commands</value>
+   <key>tr</key>
+   <value>Komutlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа команд  </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Komutlar grubu</value>
+   <key>en</key>
+   <value>Group of commands</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -295,16 +295,16 @@ Devam etmek istediğinizden emin misiniz?</value>
  <attributes>
   <name>WarningMessage</name>
   <title>
-   <key>en</key>
-   <value>Warning message</value>
+   <key>tr</key>
+   <value>Uyarı mesası</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сообщение предупреждения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Uyarı mesası</value>
+   <key>en</key>
+   <value>Warning message</value>
   </title>
   <id>1</id>
   <valueType>
@@ -321,16 +321,16 @@ Devam etmek istediğinizden emin misiniz?</value>
  <attributes>
   <name>Confirm</name>
   <title>
-   <key>en</key>
-   <value>Yes, I do know what am I doing</value>
+   <key>tr</key>
+   <value>Evet, ne yatığımı biliyorum</value>
   </title>
   <title>
    <key>ru</key>
    <value>Да, я знаю, что делаю</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evet, ne yatığımı biliyorum</value>
+   <key>en</key>
+   <value>Yes, I do know what am I doing</value>
   </title>
   <id>2</id>
   <valueType>
@@ -346,16 +346,16 @@ Devam etmek istediğinizden emin misiniz?</value>
  <formCommands>
   <name>OK</name>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <id>1</id>
   <use>
@@ -371,16 +371,16 @@ Devam etmek istediğinizden emin misiniz?</value>
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>

@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseCashTransaction</name>
  <synonym>
-  <key>en</key>
-  <value>Use cash transaction</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Para hareketleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать денежные операции</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Para hareketleri</value>
+  <key>en</key>
+  <value>Use cash transaction</value>
  </synonym>
  <type>
   <types>Boolean</types>

@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="75060e5d-21b5-4e82-af61-b5cb86158a18">
  <name>UserSettingsServerReuse</name>
  <synonym>
-  <key>en</key>
-  <value>User settings server reuse</value>
+  <key>tr</key>
+  <value>Kullanıcı ayarları server reuse</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Настройки пользователей сервер переиспользование</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanıcı ayarları server reuse</value>
+  <key>en</key>
+  <value>User settings server reuse</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

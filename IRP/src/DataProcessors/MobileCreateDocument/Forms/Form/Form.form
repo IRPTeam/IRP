@@ -15,16 +15,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Top Group</value>
+     <key>tr</key>
+     <value>En Üst Grup</value>
     </title>
     <title>
      <key>ru</key>
      <value>Шапка группа</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>En Üst Grup</value>
+     <key>en</key>
+     <value>Top Group</value>
     </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
@@ -204,16 +204,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Item list group top</value>
+       <key>tr</key>
+       <value>Üst öğe listesi grubu</value>
       </title>
       <title>
        <key>ru</key>
        <value>Верхняя группа списка товаров</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Üst öğe listesi grubu</value>
+       <key>en</key>
+       <value>Item list group top</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupTopExtendedTooltip</name>
@@ -431,16 +431,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>The third line of the ItemList group</value>
+       <key>tr</key>
+       <value>ItemList grubunun üçüncü satırı</value>
       </title>
       <title>
        <key>ru</key>
        <value>Третяя линия группа Товаров</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>ItemList grubunun üçüncü satırı</value>
+       <key>en</key>
+       <value>The third line of the ItemList group</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -468,16 +468,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group Item</value>
+      <key>tr</key>
+      <value>Grup malzeme</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа номенклатура</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup malzeme</value>
+      <key>en</key>
+      <value>Group Item</value>
      </title>
      <extendedTooltip>
       <name>ItemListGroupItemExtendedTooltip</name>
@@ -690,16 +690,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Item list</value>
+    <key>tr</key>
+    <value>Malzeme listesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Товары</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
+    <key>en</key>
+    <value>Item list</value>
    </title>
    <extendedTooltip>
     <name>PageItemListExtendedTooltip</name>
@@ -797,28 +797,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Additional</value>
+     <key>tr</key>
+     <value>Ek detaylar</value>
     </title>
     <title>
      <key>ru</key>
      <value>Дополнительно</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ek detaylar</value>
+     <key>en</key>
+     <value>Additional</value>
     </title>
     <toolTip>
-     <key>en</key>
-     <value>Group additional</value>
+     <key>tr</key>
+     <value>Grup ekstra       </value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Дополнительная группа</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
-     <value>Grup ekstra       </value>
+     <key>en</key>
+     <value>Group additional</value>
     </toolTip>
     <extendedTooltip>
      <name>GroupAdditionalExtendedTooltip</name>
@@ -840,16 +840,16 @@
      <group>HorizontalIfPossible</group>
      <behavior>Collapsible</behavior>
      <collapsedRepresentationTitle>
-      <key>en</key>
-      <value>Additional</value>
+      <key>tr</key>
+      <value>Ek detaylar</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
       <key>ru</key>
       <value>Дополнительно</value>
      </collapsedRepresentationTitle>
      <collapsedRepresentationTitle>
-      <key>tr</key>
-      <value>Ek detaylar</value>
+      <key>en</key>
+      <value>Additional</value>
      </collapsedRepresentationTitle>
      <collapsed>true</collapsed>
      <representation>WeakSeparation</representation>
@@ -1166,16 +1166,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Create documents</value>
+    <key>tr</key>
+    <value>Evrakları oluştur</value>
    </title>
    <title>
     <key>ru</key>
     <value>Создать документы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrakları oluştur</value>
+    <key>en</key>
+    <value>Create documents</value>
    </title>
    <extendedTooltip>
     <name>PageCreateDocumentsExtendedTooltip</name>
@@ -1204,16 +1204,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main Pages</value>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
+   <key>en</key>
+   <value>Main Pages</value>
   </title>
   <extendedTooltip>
    <name>MainPagesExtendedTooltip</name>
@@ -1288,16 +1288,16 @@
  <attributes>
   <name>ByOneScan</name>
   <title>
-   <key>en</key>
-   <value>By one scan</value>
+   <key>tr</key>
+   <value>Tek tek okutma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сканирование по одному</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tek tek okutma</value>
+   <key>en</key>
+   <value>By one scan</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1313,16 +1313,16 @@
  <attributes>
   <name>HideDecoration</name>
   <title>
-   <key>en</key>
-   <value>Hide decoration</value>
+   <key>tr</key>
+   <value>Dekorasyonu gizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Спрятать картинку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dekorasyonu gizle</value>
+   <key>en</key>
+   <value>Hide decoration</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1352,16 +1352,16 @@
  <formCommands>
   <name>CreateSC</name>
   <title>
-   <key>en</key>
-   <value>Shipment Confirmation</value>
+   <key>tr</key>
+   <value>Sevkiyat Onayı   </value>
   </title>
   <title>
    <key>ru</key>
    <value>Расходный ордер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sevkiyat Onayı   </value>
+   <key>en</key>
+   <value>Shipment Confirmation</value>
   </title>
   <id>5</id>
   <use>
@@ -1377,16 +1377,16 @@
  <formCommands>
   <name>CreateGR</name>
   <title>
-   <key>en</key>
-   <value>Goods Receipt</value>
+   <key>tr</key>
+   <value>Mal Kabulü       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Приходный ордер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mal Kabulü       </value>
+   <key>en</key>
+   <value>Goods Receipt</value>
   </title>
   <id>6</id>
   <use>
@@ -1402,16 +1402,16 @@
  <formCommands>
   <name>CreateIT</name>
   <title>
-   <key>en</key>
-   <value>Inventory Transfer</value>
+   <key>tr</key>
+   <value>Envanter Transferi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перемещение товаров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Envanter Transferi</value>
+   <key>en</key>
+   <value>Inventory Transfer</value>
   </title>
   <id>7</id>
   <use>
@@ -1427,29 +1427,29 @@
  <formCommands>
   <name>ClearItemList</name>
   <title>
-   <key>en</key>
-   <value>Clear item list</value>
+   <key>tr</key>
+   <value>Öğe listesini temizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Очистить список товаров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Öğe listesini temizle</value>
+   <key>en</key>
+   <value>Clear item list</value>
   </title>
   <id>2</id>
   <toolTip>
-   <key>en</key>
-   <value>Clear item list</value>
+   <key>tr</key>
+   <value>Öğe listesini temizle</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Очистить список товаров</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Öğe listesini temizle</value>
+   <key>en</key>
+   <value>Clear item list</value>
   </toolTip>
   <use>
    <common>true</common>

@@ -2,16 +2,16 @@
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="967df0dd-d13d-40cf-b26b-d7c01c25b7f2">
  <name>OpenFixedAssets</name>
  <synonym>
-  <key>en</key>
-  <value>Fixed assets</value>
+  <key>tr</key>
+  <value>Sabit kıymetler</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Основные средства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetler</value>
+  <key>en</key>
+  <value>Fixed assets</value>
  </synonym>
  <group>NavigationPanelImportant</group>
  <commandParameterType/>

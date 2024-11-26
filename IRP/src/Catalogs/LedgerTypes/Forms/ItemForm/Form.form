@@ -332,6 +332,56 @@
    <textEdit>true</textEdit>
   </extInfo>
  </items>
+ <items xsi:type="form:FormField">
+  <name>IntegrationSettings</name>
+  <id>94</id>
+  <visible>true</visible>
+  <enabled>true</enabled>
+  <userVisible>
+   <common>true</common>
+  </userVisible>
+  <dataPath xsi:type="form:DataPath">
+   <segments>Object.IntegrationSettings</segments>
+  </dataPath>
+  <extendedTooltip>
+   <name>IntegrationSettingsExtendedTooltip</name>
+   <id>96</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <type>Label</type>
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <extInfo xsi:type="form:LabelDecorationExtInfo">
+    <horizontalAlign>Left</horizontalAlign>
+   </extInfo>
+  </extendedTooltip>
+  <contextMenu>
+   <name>IntegrationSettingsContextMenu</name>
+   <id>95</id>
+   <visible>true</visible>
+   <enabled>true</enabled>
+   <userVisible>
+    <common>true</common>
+   </userVisible>
+   <autoFill>true</autoFill>
+  </contextMenu>
+  <type>InputField</type>
+  <editMode>Enter</editMode>
+  <showInHeader>true</showInHeader>
+  <headerHorizontalAlign>Left</headerHorizontalAlign>
+  <showInFooter>true</showInFooter>
+  <extInfo xsi:type="form:InputFieldExtInfo">
+   <autoMaxWidth>true</autoMaxWidth>
+   <autoMaxHeight>true</autoMaxHeight>
+   <wrap>true</wrap>
+   <chooseType>true</chooseType>
+   <typeDomainEnabled>true</typeDomainEnabled>
+   <textEdit>true</textEdit>
+  </extInfo>
+ </items>
  <items xsi:type="form:FormGroup">
   <name>GroupPages</name>
   <id>54</id>
@@ -464,16 +514,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group presentation</value>
+      <key>tr</key>
+      <value>Grup görünüm</value>
      </title>
      <title>
       <key>ru</key>
       <value>Представление группы</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup görünüm</value>
+      <key>en</key>
+      <value>Group presentation</value>
      </title>
      <extendedTooltip>
       <name>GroupPresentationExtendedTooltip</name>
@@ -780,7 +830,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Operations</value>
    </title>
    <title>
@@ -788,7 +838,7 @@
     <value>Операции</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Operations</value>
    </title>
    <extendedTooltip>
@@ -1248,7 +1298,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>P&amp;L offset</value>
    </title>
    <title>
@@ -1256,7 +1306,7 @@
     <value>Закрытие счетов прибылей/убытков</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>P&amp;L offset</value>
    </title>
    <extendedTooltip>
@@ -1286,16 +1336,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1373,16 +1423,16 @@
  <attributes>
   <name>OperationsTree</name>
   <title>
-   <key>en</key>
-   <value>Operations tree</value>
+   <key>tr</key>
+   <value>Hareketler ağacı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево операций</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hareketler ağacı</value>
+   <key>en</key>
+   <value>Operations tree</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1397,16 +1447,16 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1422,16 +1472,16 @@
   <columns>
    <name>AccountingOperation</name>
    <title>
-    <key>en</key>
-    <value>Accounting operation</value>
+    <key>tr</key>
+    <value>Muhasebe işlemi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Бухгалтерская операция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Muhasebe işlemi</value>
+    <key>en</key>
+    <value>Accounting operation</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1447,16 +1497,16 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1475,16 +1525,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использовать</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1500,16 +1550,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1528,16 +1578,16 @@
   <columns>
    <name>Picture</name>
    <title>
-    <key>en</key>
-    <value>Picture</value>
+    <key>tr</key>
+    <value>Resim</value>
    </title>
    <title>
     <key>ru</key>
     <value>Картинка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim</value>
+    <key>en</key>
+    <value>Picture</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1556,16 +1606,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>9</id>
    <valueType>

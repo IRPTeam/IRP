@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R9560T_AdditionalAccrual</name>
  <synonym>
-  <key>en</key>
-  <value>R9560 Additional accrual</value>
+  <key>tr</key>
+  <value>R9560 Ek tahakkuk</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R9560 Дополнительные начисления</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R9560 Ek tahakkuk</value>
+  <key>en</key>
+  <value>R9560 Additional accrual</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="7c750d58-4672-45e4-9bb2-30304370dd6a">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="28f610c8-5de7-4ae6-8180-079fb568f6ae">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -71,16 +71,16 @@
  <dimensions uuid="e5ca719a-cc6b-4065-98bd-a220848db59c">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -93,16 +93,16 @@
  <dimensions uuid="f395a69a-e1aa-4607-aa87-d513b15169e5">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -115,16 +115,16 @@
  <dimensions uuid="dcb31435-3dbb-45b4-a12f-fb9faaf0cf17">
   <name>Position</name>
   <synonym>
-   <key>en</key>
-   <value>Position</value>
+   <key>tr</key>
+   <value>Pozisyon</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Должность</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Pozisyon</value>
+   <key>en</key>
+   <value>Position</value>
   </synonym>
   <type>
    <types>CatalogRef.EmployeePositions</types>
@@ -137,16 +137,16 @@
  <dimensions uuid="d310318d-e3fb-4021-bb4e-ed8d7699c232">
   <name>AccrualType</name>
   <synonym>
-   <key>en</key>
-   <value>Accrual type</value>
+   <key>tr</key>
+   <value>Tahakkuk türü</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип начислений</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tahakkuk türü</value>
+   <key>en</key>
+   <value>Accrual type</value>
   </synonym>
   <type>
    <types>CatalogRef.AccrualAndDeductionTypes</types>
@@ -159,16 +159,16 @@
  <dimensions uuid="11fdde24-bb5b-4925-bd98-3a09720371f8">
   <name>ExpenseType</name>
   <synonym>
-   <key>en</key>
-   <value>Expense type</value>
+   <key>tr</key>
+   <value>Gider tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Статья затрат</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gider tipi</value>
+   <key>en</key>
+   <value>Expense type</value>
   </synonym>
   <type>
    <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -181,16 +181,16 @@
  <dimensions uuid="b08f81ea-7d3e-48a4-87b7-26edad8010ea">
   <name>ProfitLossCenter</name>
   <synonym>
-   <key>en</key>
-   <value>Profit loss center</value>
+   <key>tr</key>
+   <value>Kar/Zarar merkezi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Центр прибылей/убытков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kar/Zarar merkezi</value>
+   <key>en</key>
+   <value>Profit loss center</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>

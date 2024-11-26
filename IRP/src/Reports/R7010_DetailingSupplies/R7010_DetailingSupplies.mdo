@@ -6,32 +6,32 @@
  </producedTypes>
  <name>R7010_DetailingSupplies</name>
  <synonym>
-  <key>en</key>
-  <value>R7010 Detailing supplies</value>
+  <key>tr</key>
+  <value>R7010 Tedarik detaylama</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R7010 Детализация обеспечения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R7010 Tedarik detaylama</value>
+  <key>en</key>
+  <value>R7010 Detailing supplies</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.R7010_DetailingSupplies.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="89cce7b1-8ca0-4326-9b33-200d7e381e1f">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

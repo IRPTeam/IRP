@@ -269,16 +269,16 @@
     <name>FileSettingsFileTooltips</name>
     <id>29</id>
     <title>
-     <key>en</key>
-     <value>Tooltip</value>
+     <key>tr</key>
+     <value>İpucu</value>
     </title>
     <title>
      <key>ru</key>
      <value>Всплывающая подсказка</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>İpucu</value>
+     <key>en</key>
+     <value>Tooltip</value>
     </title>
     <visible>true</visible>
     <enabled>true</enabled>

@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0a66a358-9b45-4218-abc6-13e8158ee962">
  <name>DocEmployeeHiringServer</name>
  <synonym>
-  <key>en</key>
-  <value>Doc employee hiring server</value>
+  <key>tr</key>
+  <value>Çalışan işe alma sunucusu</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Сервер найма сотрудника</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Çalışan işe alma sunucusu</value>
+  <key>en</key>
+  <value>Doc employee hiring server</value>
  </synonym>
  <server>true</server>
  <serverCall>true</serverCall>

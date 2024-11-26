@@ -7,47 +7,47 @@
  </producedTypes>
  <name>BankTermTypes</name>
  <synonym>
-  <key>en</key>
-  <value>Bank term types</value>
+  <key>tr</key>
+  <value>Banka vade türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Виды банковских договоров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Banka vade türleri</value>
+  <key>en</key>
+  <value>Bank term types</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="258182db-8308-426d-8a2f-8359d8287335">
   <name>PaymentTerminal</name>
   <synonym>
-   <key>en</key>
-   <value>Payment terminal</value>
+   <key>tr</key>
+   <value>Ödeme terminali</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Платежный терминал</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme terminali</value>
+   <key>en</key>
+   <value>Payment terminal</value>
   </synonym>
  </enumValues>
  <enumValues uuid="d1187abb-7983-49e4-87da-8861dc5fc24f">
   <name>PaymentAgent</name>
   <synonym>
-   <key>en</key>
-   <value>Payment agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Платежный агент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Payment agent</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

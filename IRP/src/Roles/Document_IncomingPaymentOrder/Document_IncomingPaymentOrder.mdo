@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5d7750a6-b383-4988-beaa-2c32b65d776f">
  <name>Document_IncomingPaymentOrder</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Incoming payment order"</value>
+  <key>tr</key>
+  <value>Belge "Gelen ödeme talimatı"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Платежное поручение входящее"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Gelen ödeme talimatı"</value>
+  <key>en</key>
+  <value>Document "Incoming payment order"</value>
  </synonym>
 </mdclass:Role>

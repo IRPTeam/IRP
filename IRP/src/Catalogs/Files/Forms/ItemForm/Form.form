@@ -109,16 +109,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Header Group </value>
+     <key>tr</key>
+     <value>Üst Grup </value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа заголовков </value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Üst Grup </value>
+     <key>en</key>
+     <value>Header Group </value>
     </title>
     <extendedTooltip>
      <name>HeaderGroupExtendedTooltip</name>
@@ -676,7 +676,7 @@
       <autoFill>true</autoFill>
      </contextMenu>
      <type>ViewStatusAddition</type>
-     <source>PDFViewStatus</source>
+     <source>PDF</source>
      <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
       <autoMaxWidth>true</autoMaxWidth>
      </extInfo>
@@ -1117,16 +1117,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1143,16 +1143,16 @@
  <attributes>
   <name>PictureViewRegular</name>
   <title>
-   <key>en</key>
-   <value>Picture view regular</value>
+   <key>tr</key>
+   <value>Resim normal önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обычный просмотр картинки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim normal önizleme</value>
+   <key>en</key>
+   <value>Picture view regular</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1169,16 +1169,16 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>en</key>
-   <value>Preview</value>
+   <key>tr</key>
+   <value>Önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предварительный просмотр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Önizleme</value>
+   <key>en</key>
+   <value>Preview</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1195,7 +1195,7 @@
  <attributes>
   <name>PDF</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>PDF</value>
   </title>
   <title>
@@ -1203,7 +1203,7 @@
    <value>PDF</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>PDF</value>
   </title>
   <id>5</id>
@@ -1220,16 +1220,16 @@
  <formCommands>
   <name>Upload</name>
   <title>
-   <key>en</key>
-   <value>Upload</value>
+   <key>tr</key>
+   <value>Yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
+   <key>en</key>
+   <value>Upload</value>
   </title>
   <id>1</id>
   <use>
@@ -1249,16 +1249,16 @@
  <formCommands>
   <name>Download</name>
   <title>
-   <key>en</key>
-   <value>Download</value>
+   <key>tr</key>
+   <value>İndir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скачать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İndir</value>
+   <key>en</key>
+   <value>Download</value>
   </title>
   <id>2</id>
   <use>

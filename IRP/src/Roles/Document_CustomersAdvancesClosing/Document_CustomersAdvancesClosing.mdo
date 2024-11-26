@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9bc413ca-1a6f-481c-9429-e50f1ad52e93">
  <name>Document_CustomersAdvancesClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Customers advances closing"</value>
+  <key>tr</key>
+  <value>Belge "Müşteri avanslarının kapatılması"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Закрытие авансов клиентов"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Müşteri avanslarının kapatılması"</value>
+  <key>en</key>
+  <value>Document "Customers advances closing"</value>
  </synonym>
 </mdclass:Role>

@@ -93,16 +93,16 @@
   <name>DecorationProblem</name>
   <id>24</id>
   <title>
-   <key>en</key>
-   <value>Transaction was canceled</value>
+   <key>tr</key>
+   <value>İşlem iptal edildi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Транзакция отменена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşlem iptal edildi</value>
+   <key>en</key>
+   <value>Transaction was canceled</value>
   </title>
   <enabled>true</enabled>
   <userVisible>
@@ -412,16 +412,16 @@
  <attributes>
   <name>Amount</name>
   <title>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма оплаты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </title>
   <id>1</id>
   <valueType>
@@ -437,7 +437,7 @@
  <attributes>
   <name>RRNCode</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>RRNCode</value>
   </title>
   <title>
@@ -445,7 +445,7 @@
    <value>RNN Код</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>RRNCode</value>
   </title>
   <id>2</id>
@@ -463,16 +463,16 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>en</key>
-   <value>Hardware</value>
+   <key>tr</key>
+   <value>Donanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Оборудование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
+   <key>en</key>
+   <value>Hardware</value>
   </title>
   <id>3</id>
   <valueType>
@@ -488,16 +488,16 @@
  <attributes>
   <name>isReturn</name>
   <title>
-   <key>en</key>
-   <value>Is return</value>
+   <key>tr</key>
+   <value>Bu iade</value>
   </title>
   <title>
    <key>ru</key>
    <value>Это возврат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bu iade</value>
+   <key>en</key>
+   <value>Is return</value>
   </title>
   <id>4</id>
   <valueType>
@@ -513,16 +513,16 @@
  <attributes>
   <name>Result</name>
   <title>
-   <key>en</key>
-   <value>Result</value>
+   <key>tr</key>
+   <value>Sonuç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Результат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç</value>
+   <key>en</key>
+   <value>Result</value>
   </title>
   <id>5</id>
   <valueType>
@@ -538,16 +538,16 @@
  <attributes>
   <name>Interactive</name>
   <title>
-   <key>en</key>
-   <value>Interactive</value>
+   <key>tr</key>
+   <value>Etkileşimli</value>
   </title>
   <title>
    <key>ru</key>
    <value>Интерактивно</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Etkileşimli</value>
+   <key>en</key>
+   <value>Interactive</value>
   </title>
   <id>6</id>
   <valueType>
@@ -563,16 +563,16 @@
  <formCommands>
   <name>Payment_CancelPaymentByPaymentCard</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>1</id>
   <use>
@@ -592,16 +592,16 @@
  <formCommands>
   <name>Payment_EmergencyReversal</name>
   <title>
-   <key>en</key>
-   <value>Revers</value>
+   <key>tr</key>
+   <value>Ters</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сторно</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ters</value>
+   <key>en</key>
+   <value>Revers</value>
   </title>
   <id>2</id>
   <use>
@@ -621,16 +621,16 @@
  <formCommands>
   <name>Payment_PayByPaymentCard</name>
   <title>
-   <key>en</key>
-   <value>Pay</value>
+   <key>tr</key>
+   <value>Öde</value>
   </title>
   <title>
    <key>ru</key>
    <value>Оплатить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Öde</value>
+   <key>en</key>
+   <value>Pay</value>
   </title>
   <id>3</id>
   <use>
@@ -650,16 +650,16 @@
  <formCommands>
   <name>Payment_ReturnPaymentByPaymentCard</name>
   <title>
-   <key>en</key>
-   <value>Return</value>
+   <key>tr</key>
+   <value>İade</value>
   </title>
   <title>
    <key>ru</key>
    <value>Возврат</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İade</value>
+   <key>en</key>
+   <value>Return</value>
   </title>
   <id>4</id>
   <use>

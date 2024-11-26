@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9011S_AccountsCashAccount</name>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Cash account)</value>
+  <key>tr</key>
+  <value>Muh. hesap (kasa/banka)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (Кассы/банк. счета)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesap (kasa/banka)</value>
+  <key>en</key>
+  <value>Accounts (Cash account)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Accounts (Cash account)</value>
+  <key>tr</key>
+  <value>Muh. hesap (kasa/banka)</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Бух. счета (Кассы/банк. счета)</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Muh. hesap (kasa/banka)</value>
+  <key>en</key>
+  <value>Accounts (Cash account)</value>
  </recordPresentation>
  <resources uuid="65c87eb8-f642-4c30-b73d-1f3b08aff762">
   <name>Account</name>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса/банк</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -70,16 +70,16 @@
  <resources uuid="12117764-c8ec-4028-87af-2ae972083b6f">
   <name>AccountTransit</name>
   <synonym>
-   <key>en</key>
-   <value>Account transit</value>
+   <key>tr</key>
+   <value>Transit hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Транзитный счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Transit hesap</value>
+   <key>en</key>
+   <value>Account transit</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -98,16 +98,16 @@
  <dimensions uuid="1fc33369-7b9e-4cbb-8312-ffebc2bd32cd">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -124,16 +124,16 @@
  <dimensions uuid="7d863e08-0d7c-4734-8eb1-28aa2fcbdb93">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -150,16 +150,16 @@
  <dimensions uuid="5d7fdb3c-b1c8-4fa2-8b77-fad4e8235d04">
   <name>CashAccount</name>
   <synonym>
-   <key>en</key>
-   <value>Cash/Bank account</value>
+   <key>tr</key>
+   <value>Nakit / Banka hesabı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Касса\банковский счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Nakit / Banka hesabı</value>
+   <key>en</key>
+   <value>Cash/Bank account</value>
   </synonym>
   <type>
    <types>CatalogRef.CashAccounts</types>
@@ -180,16 +180,16 @@
  <dimensions uuid="f6d9996a-c1a8-4964-95ea-89b185c219e7">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -204,16 +204,16 @@
  <forms uuid="cb91ffb9-301e-497b-9c22-eeb0fcd48ff6">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

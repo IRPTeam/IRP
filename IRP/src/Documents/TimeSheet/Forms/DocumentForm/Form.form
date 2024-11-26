@@ -13,16 +13,16 @@
      <name>DecorationGroupTitleCollapsedPicture</name>
      <id>310</id>
      <title>
-      <key>en</key>
-      <value>Decoration group title collapsed picture</value>
+      <key>tr</key>
+      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа декораций рисунок свернутой шапки</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dekorasyon grubu başlık daraltılmış resmi</value>
+      <key>en</key>
+      <value>Decoration group title collapsed picture</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -72,16 +72,16 @@
      <name>DecorationGroupTitleCollapsedLabel</name>
      <id>313</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -208,16 +208,16 @@
      <name>DecorationGroupTitleUncollapsedLabel</name>
      <id>321</id>
      <title>
-      <key>en</key>
-      <value>Please, fill the document</value>
+      <key>tr</key>
+      <value>Lütfen, evrakı doldurunuz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Пожалуйста, заполните документ</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Lütfen, evrakı doldurunuz</value>
+      <key>en</key>
+      <value>Please, fill the document</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -1133,16 +1133,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Fill time sheet</value>
+        <key>tr</key>
+        <value>Zaman çizelgesini doldur</value>
        </title>
        <title>
         <key>ru</key>
         <value>Заполнить табель</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Zaman çizelgesini doldur</value>
+        <key>en</key>
+        <value>Fill time sheet</value>
        </title>
        <extendedTooltip>
         <name>WorkersGroupFillExtendedTooltip</name>
@@ -1356,16 +1356,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Time sheet left</value>
+     <key>tr</key>
+     <value>Zaman çizelgesi sol</value>
     </title>
     <title>
      <key>ru</key>
      <value>Зарплатный табель лево</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Zaman çizelgesi sol</value>
+     <key>en</key>
+     <value>Time sheet left</value>
     </title>
     <extendedTooltip>
      <name>GroupTimeSheetLeftExtendedTooltip</name>
@@ -1445,16 +1445,16 @@
       <radioButtonsType>Tumbler</radioButtonsType>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>Calendar</value>
+        <key>tr</key>
+        <value>Takvim</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>Календарь</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Takvim</value>
+        <key>en</key>
+        <value>Calendar</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Calendar</value>
@@ -1462,16 +1462,16 @@
       </choiceList>
       <choiceList>
        <presentation>
-        <key>en</key>
-        <value>Table</value>
+        <key>tr</key>
+        <value>Tablo</value>
        </presentation>
        <presentation>
         <key>ru</key>
         <value>Таблица</value>
        </presentation>
        <presentation>
-        <key>tr</key>
-        <value>Tablo</value>
+        <key>en</key>
+        <value>Table</value>
        </presentation>
        <value xsi:type="core:StringValue">
         <value>Table</value>
@@ -2270,16 +2270,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Time sheet page table</value>
+       <key>tr</key>
+       <value>Zaman çizelgesi sayfa tablosu</value>
       </title>
       <title>
        <key>ru</key>
        <value>Таблица табеля учета рабочего времени</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Zaman çizelgesi sayfa tablosu</value>
+       <key>en</key>
+       <value>Time sheet page table</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageTableExtendedTooltip</name>
@@ -2374,16 +2374,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Time sheet page calendar</value>
+       <key>tr</key>
+       <value>Zaman çizelgesi sayfa takvimi</value>
       </title>
       <title>
        <key>ru</key>
        <value>Календарь табеля учета рабочего времени</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Zaman çizelgesi sayfa takvimi</value>
+       <key>en</key>
+       <value>Time sheet page calendar</value>
       </title>
       <extendedTooltip>
        <name>GroupTimeSheetPageCalendarExtendedTooltip</name>
@@ -2412,16 +2412,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Time sheet pages</value>
+      <key>tr</key>
+      <value>Zaman çizelgesi sayfaları</value>
      </title>
      <title>
       <key>ru</key>
       <value>Страницы табеля учета рабочего времени</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Zaman çizelgesi sayfaları</value>
+      <key>en</key>
+      <value>Time sheet pages</value>
      </title>
      <extendedTooltip>
       <name>GroupTimeSheetPagesExtendedTooltip</name>
@@ -2509,16 +2509,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group8</value>
+        <key>tr</key>
+        <value>Grup8</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа8</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup8</value>
+        <key>en</key>
+        <value>Group8</value>
        </title>
        <extendedTooltip>
         <name>Group8ExtendedTooltip</name>
@@ -2608,16 +2608,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group4</value>
+        <key>tr</key>
+        <value>Grup4</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа 4</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup4</value>
+        <key>en</key>
+        <value>Group4</value>
        </title>
        <extendedTooltip>
         <name>Group4ExtendedTooltip</name>
@@ -2707,16 +2707,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group2</value>
+        <key>tr</key>
+        <value>Grup 2</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа 2</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup 2</value>
+        <key>en</key>
+        <value>Group2</value>
        </title>
        <extendedTooltip>
         <name>Group2ExtendedTooltip</name>
@@ -2752,16 +2752,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Group6</value>
+       <key>tr</key>
+       <value>Grup6</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа6</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Grup6</value>
+       <key>en</key>
+       <value>Group6</value>
       </title>
       <extendedTooltip>
        <name>Group6ExtendedTooltip</name>
@@ -2851,16 +2851,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group3</value>
+        <key>tr</key>
+        <value>Grup3</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа3</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup3</value>
+        <key>en</key>
+        <value>Group3</value>
        </title>
        <extendedTooltip>
         <name>Group3ExtendedTooltip</name>
@@ -2950,16 +2950,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group1</value>
+        <key>tr</key>
+        <value>Grup 1</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа 1</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup 1</value>
+        <key>en</key>
+        <value>Group1</value>
        </title>
        <extendedTooltip>
         <name>Group1ExtendedTooltip</name>
@@ -3049,16 +3049,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group5</value>
+        <key>tr</key>
+        <value>Grup5</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа5</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup5</value>
+        <key>en</key>
+        <value>Group5</value>
        </title>
        <extendedTooltip>
         <name>Group5ExtendedTooltip</name>
@@ -3094,16 +3094,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Group7</value>
+       <key>tr</key>
+       <value>Grup7</value>
       </title>
       <title>
        <key>ru</key>
        <value>Группа7</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Grup7</value>
+       <key>en</key>
+       <value>Group7</value>
       </title>
       <extendedTooltip>
        <name>Group7ExtendedTooltip</name>
@@ -3136,16 +3136,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>GroupTotals</value>
+      <key>tr</key>
+      <value>GrupToplamları</value>
      </title>
      <title>
       <key>ru</key>
       <value>Итоги по группам</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>GrupToplamları</value>
+      <key>en</key>
+      <value>GroupTotals</value>
      </title>
      <extendedTooltip>
       <name>GroupTotalsExtendedTooltip</name>
@@ -3178,16 +3178,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Time sheet right</value>
+     <key>tr</key>
+     <value>Zaman çizelgesi hakkı</value>
     </title>
     <title>
      <key>ru</key>
      <value>Зарплатный табель право</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Zaman çizelgesi hakkı</value>
+     <key>en</key>
+     <value>Time sheet right</value>
     </title>
     <extendedTooltip>
      <name>GroupTimeSheetRightExtendedTooltip</name>
@@ -3220,16 +3220,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Time sheet</value>
+    <key>tr</key>
+    <value>Zaman çizelgesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Зарплатный табель</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Zaman çizelgesi</value>
+    <key>en</key>
+    <value>Time sheet</value>
    </title>
    <extendedTooltip>
     <name>GroupTimeSheetExtendedTooltip</name>
@@ -3261,16 +3261,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Additional attributes</value>
+    <key>tr</key>
+    <value>Ek özellikler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительные реквизиты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ek özellikler</value>
+    <key>en</key>
+    <value>Additional attributes</value>
    </title>
    <extendedTooltip>
     <name>GroupAddAttributesExtendedTooltip</name>
@@ -3409,16 +3409,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>More</value>
+     <key>tr</key>
+     <value>Ek olarak</value>
     </title>
     <title>
      <key>ru</key>
      <value>Дополнительно</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Ek olarak</value>
+     <key>en</key>
+     <value>More</value>
     </title>
     <extendedTooltip>
      <name>GroupMoreExtendedTooltip</name>
@@ -3553,16 +3553,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Other</value>
+    <key>tr</key>
+    <value>Diğer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дополнительно</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Diğer</value>
+    <key>en</key>
+    <value>Other</value>
    </title>
    <extendedTooltip>
     <name>GroupOtherExtendedTooltip</name>
@@ -3591,16 +3591,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <extendedTooltip>
    <name>PagesExtendedTooltip</name>
@@ -3807,16 +3807,16 @@
    <columns>
     <name>Visible</name>
     <title>
-     <key>en</key>
-     <value>Visible</value>
+     <key>tr</key>
+     <value>Görünür</value>
     </title>
     <title>
      <key>ru</key>
      <value>Видимость</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Görünür</value>
+     <key>en</key>
+     <value>Visible</value>
     </title>
     <id>16</id>
     <valueType>
@@ -3832,16 +3832,16 @@
    <columns>
     <name>Icon</name>
     <title>
-     <key>en</key>
-     <value>Icon</value>
+     <key>tr</key>
+     <value>Simge</value>
     </title>
     <title>
      <key>ru</key>
      <value>Иконка</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Simge</value>
+     <key>en</key>
+     <value>Icon</value>
     </title>
     <id>19</id>
     <valueType>
@@ -3862,16 +3862,16 @@
  <attributes>
   <name>Comment</name>
   <title>
-   <key>en</key>
-   <value>Comment</value>
+   <key>tr</key>
+   <value>Açıklama</value>
   </title>
   <title>
    <key>ru</key>
    <value>Комментарий</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Açıklama</value>
+   <key>en</key>
+   <value>Comment</value>
   </title>
   <id>7</id>
   <valueType>
@@ -3888,16 +3888,16 @@
  <attributes>
   <name>GroupItems</name>
   <title>
-   <key>en</key>
-   <value>Group items</value>
+   <key>tr</key>
+   <value>Grup nesneler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа элементов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup nesneler</value>
+   <key>en</key>
+   <value>Group items</value>
   </title>
   <id>10</id>
   <valueType>
@@ -3916,16 +3916,16 @@
  <attributes>
   <name>Workers</name>
   <title>
-   <key>en</key>
-   <value>Workers</value>
+   <key>tr</key>
+   <value>Çalışanlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Работники</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Çalışanlar</value>
+   <key>en</key>
+   <value>Workers</value>
   </title>
   <id>11</id>
   <valueType>
@@ -3940,16 +3940,16 @@
   <columns>
    <name>Employee</name>
    <title>
-    <key>en</key>
-    <value>Employee</value>
+    <key>tr</key>
+    <value>Personel</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сотрудник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Personel</value>
+    <key>en</key>
+    <value>Employee</value>
    </title>
    <id>12</id>
    <valueType>
@@ -3965,16 +3965,16 @@
   <columns>
    <name>BeginDate</name>
    <title>
-    <key>en</key>
-    <value>Begin date</value>
+    <key>tr</key>
+    <value>Başlangıç tarihi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата начала</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Başlangıç tarihi</value>
+    <key>en</key>
+    <value>Begin date</value>
    </title>
    <id>13</id>
    <valueType>
@@ -3993,16 +3993,16 @@
   <columns>
    <name>EndDate</name>
    <title>
-    <key>en</key>
-    <value>End date</value>
+    <key>tr</key>
+    <value>Bitiş tarihi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата окончания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bitiş tarihi</value>
+    <key>en</key>
+    <value>End date</value>
    </title>
    <id>14</id>
    <valueType>
@@ -4021,16 +4021,16 @@
   <columns>
    <name>Position</name>
    <title>
-    <key>en</key>
-    <value>Position</value>
+    <key>tr</key>
+    <value>Pozisyon</value>
    </title>
    <title>
     <key>ru</key>
     <value>Должность</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Pozisyon</value>
+    <key>en</key>
+    <value>Position</value>
    </title>
    <id>15</id>
    <valueType>
@@ -4046,16 +4046,16 @@
   <columns>
    <name>ProfitLossCenter</name>
    <title>
-    <key>en</key>
-    <value>Profit loss center</value>
+    <key>tr</key>
+    <value>Kar/Zarar merkezi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Центр прибылей/убытков</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kar/Zarar merkezi</value>
+    <key>en</key>
+    <value>Profit loss center</value>
    </title>
    <id>17</id>
    <valueType>
@@ -4071,16 +4071,16 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>en</key>
-    <value>Icon</value>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <title>
     <key>ru</key>
     <value>Иконка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
+    <key>en</key>
+    <value>Icon</value>
    </title>
    <id>18</id>
    <valueType>
@@ -4099,16 +4099,16 @@
   <columns>
    <name>EmployeeSchedule</name>
    <title>
-    <key>en</key>
-    <value>Schedule</value>
+    <key>tr</key>
+    <value>Program</value>
    </title>
    <title>
     <key>ru</key>
     <value>Расписание</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Program</value>
+    <key>en</key>
+    <value>Schedule</value>
    </title>
    <id>20</id>
    <valueType>
@@ -4125,16 +4125,16 @@
  <attributes>
   <name>ListMode</name>
   <title>
-   <key>en</key>
-   <value>List mode</value>
+   <key>tr</key>
+   <value>Liste modu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Режим списка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Liste modu</value>
+   <key>en</key>
+   <value>List mode</value>
   </title>
   <id>21</id>
   <valueType>
@@ -4151,16 +4151,16 @@
  <attributes>
   <name>Calendar</name>
   <title>
-   <key>en</key>
-   <value>Calendar</value>
+   <key>tr</key>
+   <value>Takvim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Календарь</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Takvim</value>
+   <key>en</key>
+   <value>Calendar</value>
   </title>
   <id>22</id>
   <valueType>
@@ -4179,16 +4179,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>23</id>
   <valueType>
@@ -4204,16 +4204,16 @@
  <attributes>
   <name>TotalDays</name>
   <title>
-   <key>en</key>
-   <value>Total days</value>
+   <key>tr</key>
+   <value>Toplam günler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего дней</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam günler</value>
+   <key>en</key>
+   <value>Total days</value>
   </title>
   <id>24</id>
   <valueType>
@@ -4232,16 +4232,16 @@
  <attributes>
   <name>TotalWeekend</name>
   <title>
-   <key>en</key>
-   <value>Total weekend</value>
+   <key>tr</key>
+   <value>Toplam hafta sonu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего выходных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam hafta sonu</value>
+   <key>en</key>
+   <value>Total weekend</value>
   </title>
   <id>25</id>
   <valueType>
@@ -4260,16 +4260,16 @@
  <attributes>
   <name>TotalVacation</name>
   <title>
-   <key>en</key>
-   <value>Total vacation</value>
+   <key>tr</key>
+   <value>Toplam tatil</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего отпусков</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam tatil</value>
+   <key>en</key>
+   <value>Total vacation</value>
   </title>
   <id>26</id>
   <valueType>
@@ -4288,16 +4288,16 @@
  <attributes>
   <name>TotalSickLeave</name>
   <title>
-   <key>en</key>
-   <value>Total sick leave</value>
+   <key>tr</key>
+   <value>Toplam hasta izni</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего больничных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam hasta izni</value>
+   <key>en</key>
+   <value>Total sick leave</value>
   </title>
   <id>27</id>
   <valueType>
@@ -4316,16 +4316,16 @@
  <attributes>
   <name>TotalNotWorkingDays</name>
   <title>
-   <key>en</key>
-   <value>Total not working days</value>
+   <key>tr</key>
+   <value>Toplam çalışılmayan günler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего нерабочих дней</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam çalışılmayan günler</value>
+   <key>en</key>
+   <value>Total not working days</value>
   </title>
   <id>28</id>
   <valueType>
@@ -4344,16 +4344,16 @@
  <attributes>
   <name>TotalWorkingDays</name>
   <title>
-   <key>en</key>
-   <value>Total working days</value>
+   <key>tr</key>
+   <value>Toplam çalışma günleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Всего рабочих дней</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Toplam çalışma günleri</value>
+   <key>en</key>
+   <value>Total working days</value>
   </title>
   <id>29</id>
   <valueType>
@@ -4372,16 +4372,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <id>9</id>
   <use>
@@ -4400,16 +4400,16 @@
  <formCommands>
   <name>ShowHiddenTables</name>
   <title>
-   <key>en</key>
-   <value>Show hidden tables</value>
+   <key>tr</key>
+   <value>Gizli tabloları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать скрытые таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Gizli tabloları göster</value>
+   <key>en</key>
+   <value>Show hidden tables</value>
   </title>
   <id>15</id>
   <use>
@@ -4428,16 +4428,16 @@
  <formCommands>
   <name>FillAll</name>
   <title>
-   <key>en</key>
-   <value>Fill all</value>
+   <key>tr</key>
+   <value>Hepsini doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hepsini doldur</value>
+   <key>en</key>
+   <value>Fill all</value>
   </title>
   <id>16</id>
   <use>
@@ -4454,16 +4454,16 @@
  <formCommands>
   <name>RefillByCurrentEmployee</name>
   <title>
-   <key>en</key>
-   <value>Refill by current employee</value>
+   <key>tr</key>
+   <value>Mevcut çalışan tarafından doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить по текущему сотруднику</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut çalışan tarafından doldur</value>
+   <key>en</key>
+   <value>Refill by current employee</value>
   </title>
   <id>17</id>
   <use>

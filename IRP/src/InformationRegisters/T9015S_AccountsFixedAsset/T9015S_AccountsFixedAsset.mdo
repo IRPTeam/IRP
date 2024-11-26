@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9015S_AccountsFixedAsset</name>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Fixed asset)</value>
+  <key>tr</key>
+  <value>Muh. hesap (sabit kıymet)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (Основные средства)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesap (sabit kıymet)</value>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Accounts (Fixed asset)</value>
+  <key>tr</key>
+  <value>Muh. hesap (sabit kıymet)</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Бух. счета (Основные средства)</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Muh. hesap (sabit kıymet)</value>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
  </recordPresentation>
  <resources uuid="817b5145-cf25-4dd9-a426-e0c2f48af7b9">
   <name>Account</name>
   <synonym>
-   <key>en</key>
-   <value>Account</value>
+   <key>tr</key>
+   <value>Hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hesap</value>
+   <key>en</key>
+   <value>Account</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -70,16 +70,16 @@
  <resources uuid="a0d30041-365e-43dc-8c99-27c05bf108f8">
   <name>AccountDepreciation</name>
   <synonym>
-   <key>en</key>
-   <value>Account (depreciation)</value>
+   <key>tr</key>
+   <value>Muh. hesap (amortisman)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет (амортизация)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Muh. hesap (amortisman)</value>
+   <key>en</key>
+   <value>Account (depreciation)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -98,16 +98,16 @@
  <dimensions uuid="863f5cd4-9923-4aeb-a12f-682ca9a40690">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -124,16 +124,16 @@
  <dimensions uuid="3edccb6e-f859-456b-915e-9a604def5a17">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -150,16 +150,16 @@
  <dimensions uuid="e6026510-8b33-44b9-b96e-31c13edb4a57">
   <name>FixedAsset</name>
   <synonym>
-   <key>en</key>
-   <value>Fixed asset</value>
+   <key>tr</key>
+   <value>Sabit kıymet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основное средство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
+   <key>en</key>
+   <value>Fixed asset</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -176,16 +176,16 @@
  <dimensions uuid="f0f33f86-6301-46c2-b702-109a6fdab303">
   <name>Type</name>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <type>
    <types>EnumRef.FixedAssetTypes</types>
@@ -200,16 +200,16 @@
  <forms uuid="8dfe1166-1a7a-4913-81d5-e10693aacf16">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

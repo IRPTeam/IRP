@@ -7,47 +7,47 @@
  </producedTypes>
  <name>OtherPeriodExpenseType</name>
  <synonym>
-  <key>en</key>
-  <value>Other period expense type</value>
+  <key>tr</key>
+  <value>Diğer dönemler giderler tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип расхода другого периода</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Diğer dönemler giderler tipi</value>
+  <key>en</key>
+  <value>Other period expense type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="df5268b5-3491-4ad5-a63a-c9f5f0fc571c">
   <name>ItemsCost</name>
   <synonym>
-   <key>en</key>
-   <value>Items cost</value>
+   <key>tr</key>
+   <value>Malzeme ek gideri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Доп. расход на товары</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme ek gideri</value>
+   <key>en</key>
+   <value>Items cost</value>
   </synonym>
  </enumValues>
  <enumValues uuid="a9cc6f28-3189-4bec-8b1b-aec5920ae5c1">
   <name>ExpenseAccruals</name>
   <synonym>
-   <key>en</key>
-   <value>Expense accruals</value>
+   <key>tr</key>
+   <value>Gider tahakkuklar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начисление расходов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gider tahakkuklar</value>
+   <key>en</key>
+   <value>Expense accruals</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

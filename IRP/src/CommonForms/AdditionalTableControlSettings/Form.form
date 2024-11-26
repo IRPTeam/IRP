@@ -382,16 +382,16 @@
  <attributes>
   <name>ErrorsTable</name>
   <title>
-   <key>en</key>
-   <value>Errors table</value>
+   <key>tr</key>
+   <value>Hata tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица ошибок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hata tablosu</value>
+   <key>en</key>
+   <value>Errors table</value>
   </title>
   <id>1</id>
   <valueType>
@@ -406,16 +406,16 @@
   <columns>
    <name>Error</name>
    <title>
-    <key>en</key>
-    <value>Error</value>
+    <key>tr</key>
+    <value>Hata</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ошибка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hata</value>
+    <key>en</key>
+    <value>Error</value>
    </title>
    <id>2</id>
    <valueType>
@@ -432,7 +432,7 @@
   <columns>
    <name>Description</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Description</value>
    </title>
    <title>
@@ -440,7 +440,7 @@
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Description</value>
    </title>
    <id>3</id>
@@ -458,16 +458,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>4</id>
    <valueType>
@@ -484,16 +484,16 @@
  <formCommands>
   <name>Save</name>
   <title>
-   <key>en</key>
-   <value>Save</value>
+   <key>tr</key>
+   <value>Kaydet</value>
   </title>
   <title>
    <key>ru</key>
    <value>Записать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaydet</value>
+   <key>en</key>
+   <value>Save</value>
   </title>
   <id>1</id>
   <use>

@@ -45,16 +45,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Exp. count</value>
+     <key>tr</key>
+     <value>Stok adedi</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>По учету</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Stok adedi</value>
+     <key>en</key>
+     <value>Exp. count</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>ExpCount</value>
@@ -62,16 +62,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Phys. count</value>
+     <key>tr</key>
+     <value>Sayım adedi</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Фактическое количество</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Sayım adedi</value>
+     <key>en</key>
+     <value>Phys. count</value>
     </presentation>
     <value xsi:type="core:StringValue">
      <value>PhysCount</value>
@@ -190,16 +190,16 @@
  <attributes>
   <name>CopyQuantityAs</name>
   <title>
-   <key>en</key>
-   <value>Copy quantity as</value>
+   <key>tr</key>
+   <value>Miktarı şu şekilde kopyala</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопировать количество как...</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktarı şu şekilde kopyala</value>
+   <key>en</key>
+   <value>Copy quantity as</value>
   </title>
   <id>1</id>
   <valueType>
@@ -216,16 +216,16 @@
  <attributes>
   <name>CopySelectedRows</name>
   <title>
-   <key>en</key>
-   <value>Copy selected rows</value>
+   <key>tr</key>
+   <value>Seçili satırları kopyala</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопировать выбранные строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçili satırları kopyala</value>
+   <key>en</key>
+   <value>Copy selected rows</value>
   </title>
   <id>2</id>
   <valueType>
@@ -241,16 +241,16 @@
  <attributes>
   <name>SourceRef</name>
   <title>
-   <key>en</key>
-   <value>Source ref</value>
+   <key>tr</key>
+   <value>Kaynak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка источника</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaynak ref</value>
+   <key>en</key>
+   <value>Source ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -266,16 +266,16 @@
  <formCommands>
   <name>OK</name>
   <title>
-   <key>en</key>
-   <value>OK</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>ОК</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>OK</value>
   </title>
   <id>1</id>
   <use>
@@ -291,16 +291,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>

@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="794f1ecd-eb5f-46f0-9a1a-55e4c0ce7d13">
  <name>ForeignFullDescription</name>
  <synonym>
-  <key>en</key>
-  <value>Foreign full description</value>
+  <key>tr</key>
+  <value>Yabancı tam tanım</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Полное иностранное наименование</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yabancı tam tanım</value>
+  <key>en</key>
+  <value>Foreign full description</value>
  </synonym>
  <type>
   <types>String</types>

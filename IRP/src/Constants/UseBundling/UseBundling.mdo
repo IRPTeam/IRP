@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseBundling</name>
  <synonym>
-  <key>en</key>
-  <value>Use bundling</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Malzeme takım/setleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать наборы товаров (бандлы)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Malzeme takım/setleri</value>
+  <key>en</key>
+  <value>Use bundling</value>
  </synonym>
  <type>
   <types>Boolean</types>

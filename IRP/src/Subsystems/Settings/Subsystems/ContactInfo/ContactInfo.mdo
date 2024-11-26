@@ -2,16 +2,16 @@
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c51c2387-2523-4dc4-a290-061b34771c4b">
  <name>ContactInfo</name>
  <synonym>
-  <key>en</key>
-  <value>Contact info</value>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Контактная информация</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İletişim bilgi</value>
+  <key>en</key>
+  <value>Contact info</value>
  </synonym>
  <includeHelpInContents>true</includeHelpInContents>
  <help>

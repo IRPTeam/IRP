@@ -9,16 +9,16 @@
  </producedTypes>
  <name>AccessKey</name>
  <synonym>
-  <key>en</key>
-  <value>Access key</value>
+  <key>tr</key>
+  <value>Erişim anahtarı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Ключ доступа</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Erişim anahtarı</value>
+  <key>en</key>
+  <value>Access key</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Catalog.AccessKey.StandardAttribute.Description</inputByString>
@@ -27,28 +27,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Access key</value>
+  <key>tr</key>
+  <value>Erişim anahtarı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Ключ доступа</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Erişim anahtarı</value>
- </objectPresentation>
- <listPresentation>
   <key>en</key>
   <value>Access key</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Erişim anahtarı</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Ключ доступа</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Erişim anahtarı</value>
+  <key>en</key>
+  <value>Access key</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -99,16 +99,16 @@
  <attributes uuid="b70e4deb-fb56-479e-a1d8-957445bc774d">
   <name>Info</name>
   <synonym>
-   <key>en</key>
-   <value>Info</value>
+   <key>tr</key>
+   <value>Bilgi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основной</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bilgi</value>
+   <key>en</key>
+   <value>Info</value>
   </synonym>
   <type>
    <types>String</types>
@@ -123,16 +123,16 @@
  <attributes uuid="1f436b20-7c4c-4e7c-877d-59e4ef005d55">
   <name>Type</name>
   <synonym>
-   <key>en</key>
-   <value>Type</value>
+   <key>tr</key>
+   <value>Tip</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вид</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tip</value>
+   <key>en</key>
+   <value>Type</value>
   </synonym>
   <type>
    <types>String</types>
@@ -149,16 +149,16 @@
  <forms uuid="51d01da3-f3d3-41f8-81ca-8736ba4eabc8">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

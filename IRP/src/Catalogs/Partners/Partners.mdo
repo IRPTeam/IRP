@@ -9,16 +9,16 @@
  </producedTypes>
  <name>Partners</name>
  <synonym>
-  <key>en</key>
-  <value>Partners</value>
+  <key>tr</key>
+  <value>Cari hesaplar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Партнеры</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Cari hesaplar</value>
+  <key>en</key>
+  <value>Partners</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -76,16 +76,16 @@
   <dataHistory>Use</dataHistory>
   <name>Parent</name>
   <synonym>
-   <key>en</key>
-   <value>Main partner</value>
+   <key>tr</key>
+   <value>Ana cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Главный партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana cari hesap</value>
+   <key>en</key>
+   <value>Main partner</value>
   </synonym>
   <fillFromFillingValue>true</fillFromFillingValue>
   <fillValue xsi:type="core:UndefinedValue"/>
@@ -161,16 +161,16 @@
  <createOnInput>DontUse</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <objectPresentation>
-  <key>en</key>
-  <value>Partner</value>
+  <key>tr</key>
+  <value>Cari hesap</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Партнер</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Cari hesap</value>
+  <key>en</key>
+  <value>Partner</value>
  </objectPresentation>
  <hierarchical>true</hierarchical>
  <hierarchyType>HierarchyOfItems</hierarchyType>
@@ -189,16 +189,16 @@
  <attributes uuid="1c3b57f9-ea57-4188-851d-7c785df051de">
   <name>Customer</name>
   <synonym>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Клиент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -213,16 +213,16 @@
  <attributes uuid="28858c1f-bc50-4dbc-8439-ff14249a7a90">
   <name>Vendor</name>
   <synonym>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Поставщик</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -237,16 +237,16 @@
  <attributes uuid="5362b3b7-2ef8-41ff-9caf-f2a1c7787ae6">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -261,16 +261,16 @@
  <attributes uuid="edb11836-096d-4bfd-b732-15817295493d">
   <name>Consignor</name>
   <synonym>
-   <key>en</key>
-   <value>Consignor</value>
+   <key>tr</key>
+   <value>Konsiyeye veren</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комитент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Konsiyeye veren</value>
+   <key>en</key>
+   <value>Consignor</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -284,16 +284,16 @@
  <attributes uuid="cc1e2a36-cf82-4a86-8ff0-722e4193cf0d">
   <name>TradeAgent</name>
   <synonym>
-   <key>en</key>
-   <value>Trade agent</value>
+   <key>tr</key>
+   <value>Ödeme aracı kurum</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Комиссионер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödeme aracı kurum</value>
+   <key>en</key>
+   <value>Trade agent</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -307,16 +307,16 @@
  <attributes uuid="e0f45607-522c-48fa-90e4-6e1f296e57c7">
   <name>Other</name>
   <synonym>
-   <key>en</key>
-   <value>Other</value>
+   <key>tr</key>
+   <value>Diğer</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Прочий</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Diğer</value>
+   <key>en</key>
+   <value>Other</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -330,16 +330,16 @@
  <attributes uuid="f8cf4d21-0e13-49e9-bd80-0146820323e2">
   <name>ManagerSegment</name>
   <synonym>
-   <key>en</key>
-   <value>Manager segment</value>
+   <key>tr</key>
+   <value>Plasiyer grubu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сегмент менеджеров</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Plasiyer grubu</value>
+   <key>en</key>
+   <value>Manager segment</value>
   </synonym>
   <type>
    <types>CatalogRef.PartnerSegments</types>
@@ -359,16 +359,16 @@
  <attributes uuid="a6b4e6ef-d2f8-4e78-89a6-4ef9531fe738">
   <name>TaxID</name>
   <synonym>
-   <key>en</key>
-   <value>Tax ID</value>
+   <key>tr</key>
+   <value>VKN/TCKN</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ИНН</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>VKN/TCKN</value>
+   <key>en</key>
+   <value>Tax ID</value>
   </synonym>
   <type>
    <types>String</types>
@@ -385,16 +385,16 @@
  <attributes uuid="1ec8b08e-d585-4f38-9b4a-9f8decc3a3e4">
   <name>DefaultCarrier</name>
   <synonym>
-   <key>en</key>
-   <value>Default carrier</value>
+   <key>tr</key>
+   <value>Varsayılan taşıyıcı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Перевозчик по умолчанию</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Varsayılan taşıyıcı</value>
+   <key>en</key>
+   <value>Default carrier</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -408,16 +408,16 @@
  <attributes uuid="84405db7-95f6-479d-9166-3e00599b03fe">
   <name>Email</name>
   <synonym>
-   <key>en</key>
-   <value>Email</value>
+   <key>tr</key>
+   <value>E-posta</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Email</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>E-posta</value>
+   <key>en</key>
+   <value>Email</value>
   </synonym>
   <type>
    <types>String</types>
@@ -434,16 +434,16 @@
  <attributes uuid="a09c8c62-8328-4ba2-8260-1d85d75e84b6">
   <name>Country</name>
   <synonym>
-   <key>en</key>
-   <value>Country</value>
+   <key>tr</key>
+   <value>Ülke</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Страна</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ülke</value>
+   <key>en</key>
+   <value>Country</value>
   </synonym>
   <type>
    <types>CatalogRef.Countries</types>
@@ -457,16 +457,16 @@
  <attributes uuid="2a59dc7d-d2e6-4d46-8f99-a1575cf8e4ca">
   <name>MainPhoneNumber</name>
   <synonym>
-   <key>en</key>
-   <value>Main phone number</value>
+   <key>tr</key>
+   <value>Ana telefon numarası</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основной номер телефона</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana telefon numarası</value>
+   <key>en</key>
+   <value>Main phone number</value>
   </synonym>
   <type>
    <types>String</types>
@@ -483,16 +483,16 @@
  <attributes uuid="4bfd6297-cfcc-4e63-a51a-d7ddf9ed2609">
   <name>MainAddress</name>
   <synonym>
-   <key>en</key>
-   <value>Main address</value>
+   <key>tr</key>
+   <value>Ana adres</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основной адрес</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana adres</value>
+   <key>en</key>
+   <value>Main address</value>
   </synonym>
   <type>
    <types>String</types>
@@ -513,30 +513,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="a262c54d-3773-461e-91a8-f1eb54bfe680">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Характеристика</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -549,16 +549,16 @@
   <attributes uuid="73ec8b05-e30a-49aa-ae86-565344f9a387">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -576,16 +576,16 @@
  <forms uuid="7c03c0a0-d862-4f5a-a944-fea55800acc1">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -593,16 +593,16 @@
  <forms uuid="864b016a-0d74-4f0d-90c3-3a4c3af94dd4">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -610,16 +610,16 @@
  <forms uuid="d0a66e36-ff07-4018-8dcb-0f5669a2afb3">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

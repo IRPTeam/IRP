@@ -9,16 +9,16 @@
  </producedTypes>
  <name>VisitorCounter</name>
  <synonym>
-  <key>en</key>
-  <value>Visitor counter</value>
+  <key>tr</key>
+  <value>Ziyaretçi sayacı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Счетчик посетителей</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ziyaretçi sayacı</value>
+  <key>en</key>
+  <value>Visitor counter</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <inputByString>Document.VisitorCounter.StandardAttribute.Number</inputByString>
@@ -36,7 +36,7 @@
   <objectField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
   <typeField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Property</typeField>
   <valueField>Document.VisitorCounter.TabularSection.AddAttributes.Attribute.Value</valueField>
-  <multipleValuesKeyField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesKeyField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
   <multipleValuesOrderField>Document.VisitorCounter.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
  </characteristics>
  <characteristics>
@@ -59,28 +59,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Visitor counter</value>
+  <key>tr</key>
+  <value>Ziyaretçi sayacı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>Счетчик посетителей</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Ziyaretçi sayacı</value>
+  <key>en</key>
+  <value>Visitor counter</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Visitor counters</value>
+  <key>tr</key>
+  <value>Ziyaretçi sayaçları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Счетчики посетителей</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Ziyaretçi sayaçları</value>
+  <key>en</key>
+  <value>Visitor counters</value>
  </listPresentation>
  <numberLength>12</numberLength>
  <numberAllowedLength>Variable</numberAllowedLength>
@@ -96,16 +96,16 @@
  <attributes uuid="bd51bc41-d5c4-4b69-84a8-8482f2279f30">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -119,16 +119,16 @@
  <attributes uuid="440cf36e-853d-418a-9925-8419c15844ad">
   <name>Store</name>
   <synonym>
-   <key>en</key>
-   <value>Store</value>
+   <key>tr</key>
+   <value>Depo</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Склад</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Depo</value>
+   <key>en</key>
+   <value>Store</value>
   </synonym>
   <type>
    <types>CatalogRef.Stores</types>
@@ -142,16 +142,16 @@
  <attributes uuid="e7a47292-71d4-4917-aef6-96954b0133ad">
   <name>VisitorCounter</name>
   <synonym>
-   <key>en</key>
-   <value>Visitor counter</value>
+   <key>tr</key>
+   <value>Ziyaretçi sayacı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счетчик посетителей</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ziyaretçi sayacı</value>
+   <key>en</key>
+   <value>Visitor counter</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -171,16 +171,16 @@
  <forms uuid="441fafca-f4d9-4a0a-9c65-0a23f79c46d6">
   <name>DocumentForm</name>
   <synonym>
-   <key>en</key>
-   <value>Document form</value>
+   <key>tr</key>
+   <value>Evrak formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма документа</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Evrak formu</value>
+   <key>en</key>
+   <value>Document form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -188,16 +188,16 @@
  <forms uuid="9f5607c9-ffb2-4463-9536-f2d4bdafcc95">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -205,16 +205,16 @@
  <forms uuid="c914a723-7231-49fe-8826-9b297e951822">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -226,30 +226,30 @@
   </producedTypes>
   <name>CounterData</name>
   <synonym>
-   <key>en</key>
-   <value>Counter data</value>
+   <key>tr</key>
+   <value>Sayaç verileri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Данные счетчика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sayaç verileri</value>
+   <key>en</key>
+   <value>Counter data</value>
   </synonym>
   <attributes uuid="e61fe969-6c63-4c1b-bc1a-8cc6934a58fe">
    <name>Time</name>
    <synonym>
-    <key>en</key>
-    <value>Time</value>
+    <key>tr</key>
+    <value>Zaman</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Время</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Zaman</value>
+    <key>en</key>
+    <value>Time</value>
    </synonym>
    <type>
     <types>Date</types>
@@ -265,16 +265,16 @@
   <attributes uuid="11136aca-0601-42b1-93a8-78513a409ae1">
    <name>In</name>
    <synonym>
-    <key>en</key>
-    <value>In</value>
+    <key>tr</key>
+    <value>Giriş</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Вход</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Giriş</value>
+    <key>en</key>
+    <value>In</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -290,16 +290,16 @@
   <attributes uuid="39788a8b-beed-4bdc-90c5-c2e6f2bc2f72">
    <name>Out</name>
    <synonym>
-    <key>en</key>
-    <value>Out</value>
+    <key>tr</key>
+    <value>Çıkış</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Выход</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Çıkış</value>
+    <key>en</key>
+    <value>Out</value>
    </synonym>
    <type>
     <types>Number</types>
@@ -320,30 +320,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="7ebbcf9b-2f69-4cb5-9474-9c1977582f93">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -355,16 +355,16 @@
   <attributes uuid="b270cdf2-8a4a-4efb-9ef5-760a1e024660">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>

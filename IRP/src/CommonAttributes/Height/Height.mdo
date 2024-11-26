@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="36995b25-456d-4cfd-9003-dbb1a34e64b0">
  <name>Height</name>
  <synonym>
-  <key>en</key>
-  <value>Height</value>
+  <key>tr</key>
+  <value>Yükseklik</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Высота</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yükseklik</value>
+  <key>en</key>
+  <value>Height</value>
  </synonym>
  <type>
   <types>Number</types>

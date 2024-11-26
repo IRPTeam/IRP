@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <title>
-  <key>en</key>
-  <value>Settings</value>
+  <key>tr</key>
+  <value>Ayarlar</value>
  </title>
  <title>
   <key>ru</key>
   <value>Настройки</value>
  </title>
  <title>
-  <key>tr</key>
-  <value>Ayarlar</value>
+  <key>en</key>
+  <value>Settings</value>
  </title>
  <items xsi:type="form:FormGroup">
   <name>AdditionalSettings</name>
@@ -62,16 +62,16 @@
     <columnsCount>1</columnsCount>
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Normal writing</value>
+      <key>tr</key>
+      <value>Normal yazı</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Обычная запись</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>Normal yazı</value>
+      <key>en</key>
+      <value>Normal writing</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>0</value>
@@ -79,16 +79,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Update related fields</value>
+      <key>tr</key>
+      <value>İlgili alanları güncelle</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Обновить связанные поля</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>İlgili alanları güncelle</value>
+      <key>en</key>
+      <value>Update related fields</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>1</value>
@@ -96,16 +96,16 @@
     </choiceList>
     <choiceList>
      <presentation>
-      <key>en</key>
-      <value>Forced writing (dangerous)</value>
+      <key>tr</key>
+      <value>Zorunlu yazma (tehlikeli)</value>
      </presentation>
      <presentation>
       <key>ru</key>
       <value>Непосредственная запись (опасно)</value>
      </presentation>
      <presentation>
-      <key>tr</key>
-      <value>Zorunlu yazma (tehlikeli)</value>
+      <key>en</key>
+      <value>Forced writing (dangerous)</value>
      </presentation>
      <value xsi:type="core:NumberValue">
       <value>2</value>
@@ -210,16 +210,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Group of showing service data</value>
+    <key>tr</key>
+    <value>Servis verilerinin gösterildiği grup</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа показа технических данных</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Servis verilerinin gösterildiği grup</value>
+    <key>en</key>
+    <value>Group of showing service data</value>
    </title>
    <extendedTooltip>
     <name>ShowServiceDataExtendedTooltip</name>
@@ -252,16 +252,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of additional settings</value>
+   <key>tr</key>
+   <value>Ek ayarların grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа дополнительных настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek ayarların grubu</value>
+   <key>en</key>
+   <value>Group of additional settings</value>
   </title>
   <extendedTooltip>
    <name>AdditionalSettingsExtendedTooltip</name>
@@ -792,16 +792,16 @@
  <attributes>
   <name>FieldsTable</name>
   <title>
-   <key>en</key>
-   <value>Fields table</value>
+   <key>tr</key>
+   <value>Alanlar tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица полей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alanlar tablosu</value>
+   <key>en</key>
+   <value>Fields table</value>
   </title>
   <id>1</id>
   <valueType>
@@ -816,16 +816,16 @@
   <columns>
    <name>isVisible</name>
    <title>
-    <key>en</key>
-    <value>Is visible</value>
+    <key>tr</key>
+    <value>Görünür</value>
    </title>
    <title>
     <key>ru</key>
     <value>Видимый</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünür</value>
+    <key>en</key>
+    <value>Is visible</value>
    </title>
    <id>2</id>
    <valueType>
@@ -841,16 +841,16 @@
   <columns>
    <name>Field</name>
    <title>
-    <key>en</key>
-    <value>Field</value>
+    <key>tr</key>
+    <value>Alan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Поле</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan</value>
+    <key>en</key>
+    <value>Field</value>
    </title>
    <id>3</id>
    <valueType>
@@ -867,16 +867,16 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вид</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>4</id>
    <valueType>
@@ -893,16 +893,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Field name</value>
+    <key>tr</key>
+    <value>Alan ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование поля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan ismi</value>
+    <key>en</key>
+    <value>Field name</value>
    </title>
    <id>5</id>
    <valueType>
@@ -919,16 +919,16 @@
   <columns>
    <name>isServiceAttribute</name>
    <title>
-    <key>en</key>
-    <value>Is service attribute</value>
+    <key>tr</key>
+    <value>Servis özelliği mi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это технический реквизит</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Servis özelliği mi</value>
+    <key>en</key>
+    <value>Is service attribute</value>
    </title>
    <id>7</id>
    <valueType>
@@ -945,16 +945,16 @@
  <attributes>
   <name>ShowServiceAttributes</name>
   <title>
-   <key>en</key>
-   <value>Show service attributes</value>
+   <key>tr</key>
+   <value>Hizmet özelliklerini göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать технические реквизиты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hizmet özelliklerini göster</value>
+   <key>en</key>
+   <value>Show service attributes</value>
   </title>
   <id>6</id>
   <valueType>
@@ -970,16 +970,16 @@
  <attributes>
   <name>ShowServiceTables</name>
   <title>
-   <key>en</key>
-   <value>Show service tables</value>
+   <key>tr</key>
+   <value>Servis tablolarını göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать технические таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Servis tablolarını göster</value>
+   <key>en</key>
+   <value>Show service tables</value>
   </title>
   <id>10</id>
   <valueType>
@@ -995,16 +995,16 @@
  <attributes>
   <name>WritingMode</name>
   <title>
-   <key>en</key>
-   <value>Writing mode</value>
+   <key>tr</key>
+   <value>Yazma modu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Режим записи объекта = Истина</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazma modu</value>
+   <key>en</key>
+   <value>Writing mode</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1024,16 +1024,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <id>1</id>
   <use>
@@ -1052,16 +1052,16 @@
  <formCommands>
   <name>UncheckAll</name>
   <title>
-   <key>en</key>
-   <value>Uncheck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Uncheck all</value>
   </title>
   <id>2</id>
   <use>
@@ -1080,16 +1080,16 @@
  <formCommands>
   <name>ApplySetting</name>
   <title>
-   <key>en</key>
-   <value>Apply setting</value>
+   <key>tr</key>
+   <value>Ayarları uygula</value>
   </title>
   <title>
    <key>ru</key>
    <value>Применить настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarları uygula</value>
+   <key>en</key>
+   <value>Apply setting</value>
   </title>
   <id>3</id>
   <use>

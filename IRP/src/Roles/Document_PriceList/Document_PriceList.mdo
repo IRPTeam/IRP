@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="06e88b0c-8697-4b9e-be13-d16243e86164">
  <name>Document_PriceList</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Price list"</value>
+  <key>tr</key>
+  <value>Belge "Fiyat listesi"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Прайс-лист"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Fiyat listesi"</value>
+  <key>en</key>
+  <value>Document "Price list"</value>
  </synonym>
 </mdclass:Role>

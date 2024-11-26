@@ -10,16 +10,16 @@
  </producedTypes>
  <name>T1040T_RowIDSerialLotNumbers</name>
  <synonym>
-  <key>en</key>
-  <value>T 1040 Row ID Serial lot numbers</value>
+  <key>tr</key>
+  <value>T1040 Seri lot numaralar Satır ID</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T 1040 Row ID Серийные номера</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T1040 Seri lot numaralar Satır ID</value>
+  <key>en</key>
+  <value>T 1040 Row ID Serial lot numbers</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="06988083-5d72-47bf-b20f-e3697da731f4">
   <name>Quantity</name>
   <synonym>
-   <key>en</key>
-   <value>Quantity</value>
+   <key>tr</key>
+   <value>Miktar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Количество</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Miktar</value>
+   <key>en</key>
+   <value>Quantity</value>
   </synonym>
   <type>
    <types>DefinedType.typeQuantity</types>
@@ -49,16 +49,16 @@
  <dimensions uuid="8358c1c2-4b22-4bf4-afa6-1e1171387a9e">
   <name>RowID</name>
   <synonym>
-   <key>en</key>
-   <value>Row ID</value>
+   <key>tr</key>
+   <value>Satır ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID Строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Satır ID</value>
+   <key>en</key>
+   <value>Row ID</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -71,16 +71,16 @@
  <dimensions uuid="8f5175b1-98a5-451d-92c0-d5aa266a4219">
   <name>BasisKey</name>
   <synonym>
-   <key>en</key>
-   <value>Basis key</value>
+   <key>tr</key>
+   <value>Kaynak anahtar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ключ документа основания</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak anahtar</value>
+   <key>en</key>
+   <value>Basis key</value>
   </synonym>
   <type>
    <types>DefinedType.typeRowID</types>
@@ -93,16 +93,16 @@
  <dimensions uuid="fc1b16c6-303e-4f6c-a06d-527dd6d928b5">
   <name>Step</name>
   <synonym>
-   <key>en</key>
-   <value>Step</value>
+   <key>tr</key>
+   <value>Adım</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаг</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Adım</value>
+   <key>en</key>
+   <value>Step</value>
   </synonym>
   <type>
    <types>CatalogRef.MovementRules</types>
@@ -115,16 +115,16 @@
  <dimensions uuid="1ccb68c3-0ceb-46ce-8ffd-ec98d5f0a3b1">
   <name>Basis</name>
   <synonym>
-   <key>en</key>
-   <value>Basis</value>
+   <key>tr</key>
+   <value>Kaynak evrak</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Документ основания</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kaynak evrak</value>
+   <key>en</key>
+   <value>Basis</value>
   </synonym>
   <type>
    <types>DocumentRef</types>
@@ -137,16 +137,16 @@
  <dimensions uuid="ce6b6940-61d6-4e7c-a783-c1db330c5716">
   <name>SerialLotNumber</name>
   <synonym>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </synonym>
   <type>
    <types>CatalogRef.SerialLotNumbers</types>

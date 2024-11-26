@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2095f355-0505-41af-ae33-c8288ac2bcaf">
  <name>ConvertXDTO</name>
  <synonym>
-  <key>en</key>
-  <value>Convert XDTO</value>
+  <key>tr</key>
+  <value>XDTO dönüştür</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Конвертировать XDTO</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>XDTO dönüştür</value>
+  <key>en</key>
+  <value>Convert XDTO</value>
  </synonym>
  <server>true</server>
  <externalConnection>true</externalConnection>

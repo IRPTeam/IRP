@@ -145,16 +145,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Amount (group)</value>
+   <key>tr</key>
+   <value>Tutar (grup)</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма (группа) </value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tutar (grup)</value>
+   <key>en</key>
+   <value>Amount (group)</value>
   </title>
   <extendedTooltip>
    <name>GroupAmountExtendedTooltip</name>
@@ -1025,16 +1025,16 @@
  <attributes>
   <name>Documents</name>
   <title>
-   <key>en</key>
-   <value>Documents</value>
+   <key>tr</key>
+   <value>Evraklar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evraklar</value>
+   <key>en</key>
+   <value>Documents</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1049,16 +1049,16 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1074,16 +1074,16 @@
   <columns>
    <name>Partner</name>
    <title>
-    <key>en</key>
-    <value>Partner</value>
+    <key>tr</key>
+    <value>Cari hesap</value>
    </title>
    <title>
     <key>ru</key>
     <value>Партнер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
+    <key>en</key>
+    <value>Partner</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1099,16 +1099,16 @@
   <columns>
    <name>Agreement</name>
    <title>
-    <key>en</key>
-    <value>Partner term</value>
+    <key>tr</key>
+    <value>Sözleşme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Соглашение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
+    <key>en</key>
+    <value>Partner term</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1124,16 +1124,16 @@
   <columns>
    <name>Amount</name>
    <title>
-    <key>en</key>
-    <value>Amount</value>
+    <key>tr</key>
+    <value>Tutar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tutar</value>
+    <key>en</key>
+    <value>Amount</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1149,16 +1149,16 @@
   <columns>
    <name>Payment</name>
    <title>
-    <key>en</key>
-    <value>Payment</value>
+    <key>tr</key>
+    <value>Ödeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Оплата</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ödeme</value>
+    <key>en</key>
+    <value>Payment</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1174,16 +1174,16 @@
   <columns>
    <name>Order</name>
    <title>
-    <key>en</key>
-    <value>Order</value>
+    <key>tr</key>
+    <value>Sipariş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Порядок</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sipariş</value>
+    <key>en</key>
+    <value>Order</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1200,16 +1200,16 @@
   <columns>
    <name>Project</name>
    <title>
-    <key>en</key>
-    <value>Project</value>
+    <key>tr</key>
+    <value>Proje</value>
    </title>
    <title>
     <key>ru</key>
     <value>Проект</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Proje</value>
+    <key>en</key>
+    <value>Project</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1225,16 +1225,16 @@
   <columns>
    <name>LegalName</name>
    <title>
-    <key>en</key>
-    <value>Legal name</value>
+    <key>tr</key>
+    <value>Fatura hesabı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контрагент</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fatura hesabı</value>
+    <key>en</key>
+    <value>Legal name</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1250,16 +1250,16 @@
   <columns>
    <name>LegalNameContract</name>
    <title>
-    <key>en</key>
-    <value>Legal name contract</value>
+    <key>tr</key>
+    <value>Fatura hesap kontratı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Договор контрагента</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fatura hesap kontratı</value>
+    <key>en</key>
+    <value>Legal name contract</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1275,16 +1275,16 @@
   <columns>
    <name>DocDate</name>
    <title>
-    <key>en</key>
-    <value>Doc date</value>
+    <key>tr</key>
+    <value>Belge tarihi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дата документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Belge tarihi</value>
+    <key>en</key>
+    <value>Doc date</value>
    </title>
    <id>24</id>
    <valueType>
@@ -1301,16 +1301,16 @@
   <columns>
    <name>RowKey</name>
    <title>
-    <key>en</key>
-    <value>Row key</value>
+    <key>tr</key>
+    <value>Satır anahtarı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ строки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır anahtarı</value>
+    <key>en</key>
+    <value>Row key</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1326,16 +1326,16 @@
   <columns>
    <name>Check</name>
    <title>
-    <key>en</key>
-    <value>Check</value>
+    <key>tr</key>
+    <value>Kontrol</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тест</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kontrol</value>
+    <key>en</key>
+    <value>Check</value>
    </title>
    <id>26</id>
    <valueType>
@@ -1352,16 +1352,16 @@
  <attributes>
   <name>Amount</name>
   <title>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1378,16 +1378,16 @@
  <attributes>
   <name>FilterPartner</name>
   <title>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </title>
   <title>
    <key>ru</key>
    <value>Партнер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1403,16 +1403,16 @@
  <attributes>
   <name>Company</name>
   <title>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </title>
   <id>15</id>
   <valueType>
@@ -1428,16 +1428,16 @@
  <attributes>
   <name>Branch</name>
   <title>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </title>
   <id>16</id>
   <valueType>
@@ -1453,16 +1453,16 @@
  <attributes>
   <name>RegisterName</name>
   <title>
-   <key>en</key>
-   <value>Register name</value>
+   <key>tr</key>
+   <value>Kayıt tablo tanımı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование регистра</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablo tanımı</value>
+   <key>en</key>
+   <value>Register name</value>
   </title>
   <id>17</id>
   <valueType>
@@ -1479,16 +1479,16 @@
  <attributes>
   <name>DocRef</name>
   <title>
-   <key>en</key>
-   <value>Doc ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Doc ref</value>
   </title>
   <id>18</id>
   <valueType>
@@ -1504,16 +1504,16 @@
  <attributes>
   <name>AllowedTypes</name>
   <title>
-   <key>en</key>
-   <value>Allowed types</value>
+   <key>tr</key>
+   <value>İzin verilen tipler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Разрешенные типы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İzin verilen tipler</value>
+   <key>en</key>
+   <value>Allowed types</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1528,16 +1528,16 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>23</id>
    <valueType/>
@@ -1552,16 +1552,16 @@
  <attributes>
   <name>SelectedDocuments</name>
   <title>
-   <key>en</key>
-   <value>Selected documents</value>
+   <key>tr</key>
+   <value>Seçilen evraklar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбранные документы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seçilen evraklar</value>
+   <key>en</key>
+   <value>Selected documents</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1576,16 +1576,16 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1601,16 +1601,16 @@
   <columns>
    <name>Partner</name>
    <title>
-    <key>en</key>
-    <value>Partner</value>
+    <key>tr</key>
+    <value>Cari hesap</value>
    </title>
    <title>
     <key>ru</key>
     <value>Партнер</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Cari hesap</value>
+    <key>en</key>
+    <value>Partner</value>
    </title>
    <id>27</id>
    <valueType>
@@ -1626,16 +1626,16 @@
   <columns>
    <name>Agreement</name>
    <title>
-    <key>en</key>
-    <value>Agreement</value>
+    <key>tr</key>
+    <value>Sözleşme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Соглашение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sözleşme</value>
+    <key>en</key>
+    <value>Agreement</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1652,16 +1652,16 @@
  <attributes>
   <name>Currency</name>
   <title>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </title>
   <id>21</id>
   <valueType>
@@ -1677,16 +1677,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -1702,16 +1702,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>
@@ -1727,16 +1727,16 @@
  <formCommands>
   <name>Calculate</name>
   <title>
-   <key>en</key>
-   <value>Calculate</value>
+   <key>tr</key>
+   <value>Hesapla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Рассчитать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesapla</value>
+   <key>en</key>
+   <value>Calculate</value>
   </title>
   <id>3</id>
   <use>
@@ -1756,16 +1756,16 @@
  <formCommands>
   <name>CheckAll</name>
   <title>
-   <key>en</key>
-   <value>Check all</value>
+   <key>tr</key>
+   <value>Tümü işaretle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü işaretle</value>
+   <key>en</key>
+   <value>Check all</value>
   </title>
   <id>4</id>
   <use>
@@ -1784,16 +1784,16 @@
  <formCommands>
   <name>UnckeckAll</name>
   <title>
-   <key>en</key>
-   <value>Unckeck all</value>
+   <key>tr</key>
+   <value>Tümü kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отменить все</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tümü kaldır</value>
+   <key>en</key>
+   <value>Unckeck all</value>
   </title>
   <id>5</id>
   <use>

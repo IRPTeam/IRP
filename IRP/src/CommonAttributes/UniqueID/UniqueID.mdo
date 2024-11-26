@@ -2,7 +2,7 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ce79f278-358a-4562-8392-ca85ee472e6d">
  <name>UniqueID</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Unique ID</value>
  </synonym>
  <synonym>
@@ -10,7 +10,7 @@
   <value>Уникальный ID</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Unique ID</value>
  </synonym>
  <type>

@@ -18,7 +18,7 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
+						<v8:lang>tr</v8:lang>
 						<v8:content>***</v8:content>
 					</v8:item>
 					<v8:item>
@@ -26,7 +26,7 @@
 						<v8:content>***</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
+						<v8:lang>en</v8:lang>
 						<v8:content>***</v8:content>
 					</v8:item>
 				</dcscor:value>
@@ -55,7 +55,7 @@
 				<dcscor:parameter>Text</dcscor:parameter>
 				<dcscor:value xsi:type="v8:LocalStringType">
 					<v8:item>
-						<v8:lang>en</v8:lang>
+						<v8:lang>tr</v8:lang>
 						<v8:content>***</v8:content>
 					</v8:item>
 					<v8:item>
@@ -63,7 +63,7 @@
 						<v8:content>***</v8:content>
 					</v8:item>
 					<v8:item>
-						<v8:lang>tr</v8:lang>
+						<v8:lang>en</v8:lang>
 						<v8:content>***</v8:content>
 					</v8:item>
 				</dcscor:value>

@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="94b0f378-15ee-482d-86da-919b2b41c2e6">
  <name>UseResponsiblePerson</name>
  <synonym>
-  <key>en</key>
-  <value>Use responsible person</value>
+  <key>tr</key>
+  <value>Sorumlu kişi kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать ответственное лицо</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sorumlu kişi kullan</value>
+  <key>en</key>
+  <value>Use responsible person</value>
  </synonym>
  <location>Constant.UseResponsiblePerson</location>
  <privilegedGetMode>true</privilegedGetMode>

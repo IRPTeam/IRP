@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeSpecialOfferAddInfo</name>
  <synonym>
-  <key>en</key>
-  <value>Type special offer add info</value>
+  <key>tr</key>
+  <value>Özel teklif türü ek bilgi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип специальные предложения доп инфо</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Özel teklif türü ek bilgi</value>
+  <key>en</key>
+  <value>Type special offer add info</value>
  </synonym>
  <type>
   <types>Boolean</types>

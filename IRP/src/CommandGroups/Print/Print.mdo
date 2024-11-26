@@ -2,16 +2,16 @@
 <mdclass:CommandGroup xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="27f56d04-71cc-443f-8966-c02df7533864">
  <name>Print</name>
  <synonym>
-  <key>en</key>
-  <value>Print</value>
+  <key>tr</key>
+  <value>Yazdır</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Печать</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yazdır</value>
+  <key>en</key>
+  <value>Print</value>
  </synonym>
  <representation>Auto</representation>
  <picture xsi:type="core:PictureRef">

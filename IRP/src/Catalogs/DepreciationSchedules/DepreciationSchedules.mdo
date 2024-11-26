@@ -9,16 +9,16 @@
  </producedTypes>
  <name>DepreciationSchedules</name>
  <synonym>
-  <key>en</key>
-  <value>Depreciation schedules</value>
+  <key>tr</key>
+  <value>Amortisman programları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Графики расчета амортизации</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Amortisman programları</value>
+  <key>en</key>
+  <value>Depreciation schedules</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
@@ -56,28 +56,28 @@
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
-  <key>en</key>
-  <value>Depreciation schedule</value>
+  <key>tr</key>
+  <value>Amortisman çizelgesi</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
   <value>График расчета амортизации</value>
  </objectPresentation>
  <objectPresentation>
-  <key>tr</key>
-  <value>Amortisman çizelgesi</value>
+  <key>en</key>
+  <value>Depreciation schedule</value>
  </objectPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Depreciation schedules</value>
+  <key>tr</key>
+  <value>Amortisman programları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Графики расчета амортизации</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Amortisman programları</value>
+  <key>en</key>
+  <value>Depreciation schedules</value>
  </listPresentation>
  <levelCount>2</levelCount>
  <foldersOnTop>true</foldersOnTop>
@@ -95,16 +95,16 @@
  <attributes uuid="ce799226-50ed-45cd-8a7a-7a2780a2c1e6">
   <name>CalculationMethod</name>
   <synonym>
-   <key>en</key>
-   <value>Calculation method</value>
+   <key>tr</key>
+   <value>Hesaplama yöntemi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Способ начисления амортизации</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Hesaplama yöntemi</value>
+   <key>en</key>
+   <value>Calculation method</value>
   </synonym>
   <type>
    <types>EnumRef.DepreciationMethods</types>
@@ -119,16 +119,16 @@
  <attributes uuid="6f623c8a-78e8-4fc9-a344-f20151a0c364">
   <name>UsefulLife</name>
   <synonym>
-   <key>en</key>
-   <value>Useful life (Months)</value>
+   <key>tr</key>
+   <value>Yararlı ömür (Ay)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Срок полезного использования (в месяцах)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Yararlı ömür (Ay)</value>
+   <key>en</key>
+   <value>Useful life (Months)</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -146,16 +146,16 @@
  <attributes uuid="317dffe6-f016-4571-ae46-56cbce1f3b44">
   <name>Rate</name>
   <synonym>
-   <key>en</key>
-   <value>Rate</value>
+   <key>tr</key>
+   <value>Oran</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Ставка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Oran</value>
+   <key>en</key>
+   <value>Rate</value>
   </synonym>
   <type>
    <types>DefinedType.typePercent</types>
@@ -174,30 +174,30 @@
   </producedTypes>
   <name>AddAttributes</name>
   <synonym>
-   <key>en</key>
-   <value>Additional attributes</value>
+   <key>tr</key>
+   <value>Ek özellikler</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Дополнительные реквизиты</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ek özellikler</value>
+   <key>en</key>
+   <value>Additional attributes</value>
   </synonym>
   <attributes uuid="9c32d4b7-fa5a-481f-899d-c6406852774c">
    <name>Property</name>
    <synonym>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Свойство</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </synonym>
    <type>
     <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
@@ -210,16 +210,16 @@
   <attributes uuid="6d43f73e-00fa-4cce-b3b9-40321aa34fcd">
    <name>Value</name>
    <synonym>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Значение</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </synonym>
    <type>
     <types>Characteristic.AddAttributeAndProperty</types>
@@ -236,16 +236,16 @@
   <attributes uuid="2df24dd8-31e1-4ee0-8bd1-c506060776f2">
    <name>SearchLiteral</name>
    <synonym>
-    <key>en</key>
-    <value>Search literal</value>
+    <key>tr</key>
+    <value>Arama metni</value>
    </synonym>
    <synonym>
     <key>ru</key>
     <value>Текстовая строка</value>
    </synonym>
    <synonym>
-    <key>tr</key>
-    <value>Arama metni</value>
+    <key>en</key>
+    <value>Search literal</value>
    </synonym>
    <type>
     <types>String</types>
@@ -262,16 +262,16 @@
  <forms uuid="62fbc1d2-fa74-405b-804d-def5362182e4">
   <name>ItemForm</name>
   <synonym>
-   <key>en</key>
-   <value>Item form</value>
+   <key>tr</key>
+   <value>Öğe formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма элемента</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Öğe formu</value>
+   <key>en</key>
+   <value>Item form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -279,16 +279,16 @@
  <forms uuid="cafb7a4b-2171-41e5-bc52-a627ddee8b02">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -296,16 +296,16 @@
  <forms uuid="4ed6dba0-3a60-4b4c-86e9-7c872395a22a">
   <name>ChoiceForm</name>
   <synonym>
-   <key>en</key>
-   <value>Choice form</value>
+   <key>tr</key>
+   <value>Seçim formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма выбора</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seçim formu</value>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -176,16 +176,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Accounting analytics group icons</value>
+    <key>tr</key>
+    <value>Muhasebe detaylandırma grup resimler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Бухгалтерская аналитика группа картинки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Muhasebe detaylandırma grup resimler</value>
+    <key>en</key>
+    <value>Accounting analytics group icons</value>
    </title>
    <extendedTooltip>
     <name>AccountingAnalyticsGroupIconsExtendedTooltip</name>
@@ -462,16 +462,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Debit ext dimensions</value>
+    <key>tr</key>
+    <value>Borç kırılımlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто дебит</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç kırılımlar</value>
+    <key>en</key>
+    <value>Debit ext dimensions</value>
    </title>
    <extendedTooltip>
     <name>GroupDebitExtDimensionsExtendedTooltip</name>
@@ -748,16 +748,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Credit ext dimensions</value>
+    <key>tr</key>
+    <value>Alacak kırılımlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто кредит</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak kırılımlar</value>
+    <key>en</key>
+    <value>Credit ext dimensions</value>
    </title>
    <extendedTooltip>
     <name>GroupCreditExtDimensionsExtendedTooltip</name>
@@ -1143,16 +1143,16 @@
  <attributes>
   <name>AccountingAnalytics</name>
   <title>
-   <key>en</key>
-   <value>Accounting analytics</value>
+   <key>tr</key>
+   <value>Muhasebe analitikleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Бухгалтерская аналитика</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Muhasebe analitikleri</value>
+   <key>en</key>
+   <value>Accounting analytics</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1167,16 +1167,16 @@
   <columns>
    <name>AccountDebit</name>
    <title>
-    <key>en</key>
-    <value>Debit</value>
+    <key>tr</key>
+    <value>Borç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Дебет</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç</value>
+    <key>en</key>
+    <value>Debit</value>
    </title>
    <id>2</id>
    <valueType>
@@ -1192,16 +1192,16 @@
   <columns>
    <name>ExtDimensionTypeDr1</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Dr1</value>
+    <key>tr</key>
+    <value>Borç 1 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Дт субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç 1 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Dr1</value>
    </title>
    <id>3</id>
    <valueType>
@@ -1217,16 +1217,16 @@
   <columns>
    <name>ExtDimensionTypeDr2</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Dr2</value>
+    <key>tr</key>
+    <value>Borç 2 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Дт субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç 2 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Dr2</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1242,16 +1242,16 @@
   <columns>
    <name>ExtDimensionTypeDr3</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Dr3</value>
+    <key>tr</key>
+    <value>Borç 3 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Дт субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç 3 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Dr3</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1306,16 +1306,16 @@
   <columns>
    <name>AccountCredit</name>
    <title>
-    <key>en</key>
-    <value>Credit</value>
+    <key>tr</key>
+    <value>Alacak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Кредит</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak</value>
+    <key>en</key>
+    <value>Credit</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1331,16 +1331,16 @@
   <columns>
    <name>ExtDimensionTypeCr1</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Cr1</value>
+    <key>tr</key>
+    <value>Alacak 1 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Кт субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak 1 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Cr1</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1356,16 +1356,16 @@
   <columns>
    <name>ExtDimensionTypeCr2</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Cr2</value>
+    <key>tr</key>
+    <value>Alacak 2 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Кт субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak 2 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Cr2</value>
    </title>
    <id>11</id>
    <valueType>
@@ -1381,16 +1381,16 @@
   <columns>
    <name>ExtDimensionTypeCr3</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension type Cr3</value>
+    <key>tr</key>
+    <value>Alacak 3 kırılım tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип Кт субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak 3 kırılım tipi</value>
+    <key>en</key>
+    <value>Ext dimension type Cr3</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1445,16 +1445,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>16</id>
    <valueType>
@@ -1470,16 +1470,16 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>en</key>
-    <value>Ledger type</value>
+    <key>tr</key>
+    <value>Defter tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
+    <key>en</key>
+    <value>Ledger type</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1495,16 +1495,16 @@
   <columns>
    <name>Operation</name>
    <title>
-    <key>en</key>
-    <value>Operation</value>
+    <key>tr</key>
+    <value>İşlem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Операция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşlem</value>
+    <key>en</key>
+    <value>Operation</value>
    </title>
    <id>22</id>
    <valueType>
@@ -1520,16 +1520,16 @@
   <columns>
    <name>IsVisible</name>
    <title>
-    <key>en</key>
-    <value>Is visible</value>
+    <key>tr</key>
+    <value>Görünür</value>
    </title>
    <title>
     <key>ru</key>
     <value>Видимый</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünür</value>
+    <key>en</key>
+    <value>Is visible</value>
    </title>
    <id>23</id>
    <valueType>
@@ -1545,16 +1545,16 @@
   <columns>
    <name>IsFixed</name>
    <title>
-    <key>en</key>
-    <value>Is fixed</value>
+    <key>tr</key>
+    <value>Sabittir</value>
    </title>
    <title>
     <key>ru</key>
     <value>Фиксированный</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sabittir</value>
+    <key>en</key>
+    <value>Is fixed</value>
    </title>
    <id>27</id>
    <valueType>
@@ -1570,16 +1570,16 @@
   <columns>
    <name>ExtDimensionReadOnlyCr1</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only cr1</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Cr 1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Кт 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Cr 1</value>
+    <key>en</key>
+    <value>Ext dimension read only cr1</value>
    </title>
    <id>28</id>
    <valueType>
@@ -1595,16 +1595,16 @@
   <columns>
    <name>ExtDimensionReadOnlyCr2</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only cr2</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Cr 2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Кт 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Cr 2</value>
+    <key>en</key>
+    <value>Ext dimension read only cr2</value>
    </title>
    <id>29</id>
    <valueType>
@@ -1620,16 +1620,16 @@
   <columns>
    <name>ExtDimensionReadOnlyCr3</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only cr3</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Cr 3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Кт 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Cr 3</value>
+    <key>en</key>
+    <value>Ext dimension read only cr3</value>
    </title>
    <id>30</id>
    <valueType>
@@ -1645,16 +1645,16 @@
   <columns>
    <name>ExtDimensionReadOnlyDr1</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only dr1</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Dr 1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Дт 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Dr 1</value>
+    <key>en</key>
+    <value>Ext dimension read only dr1</value>
    </title>
    <id>31</id>
    <valueType>
@@ -1670,16 +1670,16 @@
   <columns>
    <name>ExtDimensionReadOnlyDr2</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only dr2</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Dr 2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Дт 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Dr 2</value>
+    <key>en</key>
+    <value>Ext dimension read only dr2</value>
    </title>
    <id>32</id>
    <valueType>
@@ -1695,16 +1695,16 @@
   <columns>
    <name>ExtDimensionReadOnlyDr3</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension read only dr3</value>
+    <key>tr</key>
+    <value>Salt okunur Ek kırılım Dr 3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Доп. субконто только чтение Дт 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Salt okunur Ek kırılım Dr 3</value>
+    <key>en</key>
+    <value>Ext dimension read only dr3</value>
    </title>
    <id>33</id>
    <valueType>
@@ -1720,16 +1720,16 @@
   <columns>
    <name>IsByRow</name>
    <title>
-    <key>en</key>
-    <value>Is by row</value>
+    <key>tr</key>
+    <value>Satır bazlı</value>
    </title>
    <title>
     <key>ru</key>
     <value>По строкам</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Satır bazlı</value>
+    <key>en</key>
+    <value>Is by row</value>
    </title>
    <id>34</id>
    <valueType>
@@ -1745,16 +1745,16 @@
   <columns>
    <name>Order</name>
    <title>
-    <key>en</key>
-    <value>Order</value>
+    <key>tr</key>
+    <value>Sipariş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Заказ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sipariş</value>
+    <key>en</key>
+    <value>Order</value>
    </title>
    <id>35</id>
    <valueType>
@@ -1774,16 +1774,16 @@
  <attributes>
   <name>LedgerType</name>
   <title>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </title>
   <id>19</id>
   <valueType>
@@ -1799,16 +1799,16 @@
  <attributes>
   <name>DocumentRef</name>
   <title>
-   <key>en</key>
-   <value>Document ref</value>
+   <key>tr</key>
+   <value>Evrak ref</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak ref</value>
+   <key>en</key>
+   <value>Document ref</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1824,16 +1824,16 @@
  <attributes>
   <name>MainTableName</name>
   <title>
-   <key>en</key>
-   <value>Main table name</value>
+   <key>tr</key>
+   <value>Ana tablo ismi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Имя основной таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ana tablo ismi</value>
+   <key>en</key>
+   <value>Main table name</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1850,16 +1850,16 @@
  <attributes>
   <name>RowKey</name>
   <title>
-   <key>en</key>
-   <value>Row key</value>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ строки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır anahtarı</value>
+   <key>en</key>
+   <value>Row key</value>
   </title>
   <id>26</id>
   <valueType>
@@ -1876,16 +1876,16 @@
  <attributes>
   <name>AccountingRowAnalytics</name>
   <title>
-   <key>en</key>
-   <value>Accounting row analytics</value>
+   <key>tr</key>
+   <value>Muhasebe satır analitikleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Аналитика строки бух. проводки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Muhasebe satır analitikleri</value>
+   <key>en</key>
+   <value>Accounting row analytics</value>
   </title>
   <id>36</id>
   <valueType>
@@ -1901,16 +1901,16 @@
  <attributes>
   <name>AccountingExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>Accounting ext dimensions</value>
+   <key>tr</key>
+   <value>Muhasebe kırılımları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Бухгалтерские субконто</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Muhasebe kırılımları</value>
+   <key>en</key>
+   <value>Accounting ext dimensions</value>
   </title>
   <id>37</id>
   <valueType>
@@ -1926,16 +1926,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>1</id>
   <use>
@@ -1951,16 +1951,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>2</id>
   <use>
@@ -1976,16 +1976,16 @@
  <formCommands>
   <name>Refresh</name>
   <title>
-   <key>en</key>
-   <value>Refresh</value>
+   <key>tr</key>
+   <value>Yenile</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yenile</value>
+   <key>en</key>
+   <value>Refresh</value>
   </title>
   <id>3</id>
   <use>

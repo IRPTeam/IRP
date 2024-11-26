@@ -225,16 +225,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of SerialLot Number</value>
+   <key>tr</key>
+   <value>SeriLot Numarası grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Серии номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>SeriLot Numarası grubu</value>
+   <key>en</key>
+   <value>Group of SerialLot Number</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -402,16 +402,16 @@
    <id>10</id>
    <displayImportance>VeryHigh</displayImportance>
    <title>
-    <key>en</key>
-    <value>Current</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Текущее</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Current</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -575,16 +575,16 @@
    <id>16</id>
    <displayImportance>VeryHigh</displayImportance>
    <title>
-    <key>en</key>
-    <value>You scan</value>
+    <key>tr</key>
+    <value>Sen okut</value>
    </title>
    <title>
     <key>ru</key>
     <value>Отсканировано</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sen okut</value>
+    <key>en</key>
+    <value>You scan</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -714,16 +714,16 @@
  <attributes>
   <name>Item</name>
   <title>
-   <key>en</key>
-   <value>Item</value>
+   <key>tr</key>
+   <value>Malzeme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Номенклатура</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Malzeme</value>
+   <key>en</key>
+   <value>Item</value>
   </title>
   <id>1</id>
   <valueType>
@@ -739,16 +739,16 @@
  <attributes>
   <name>ItemKey</name>
   <title>
-   <key>en</key>
-   <value>Item key</value>
+   <key>tr</key>
+   <value>Varyant</value>
   </title>
   <title>
    <key>ru</key>
    <value>Характеристика</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varyant</value>
+   <key>en</key>
+   <value>Item key</value>
   </title>
   <id>2</id>
   <valueType>
@@ -764,16 +764,16 @@
  <attributes>
   <name>QuantityAtDocument</name>
   <title>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </title>
   <id>3</id>
   <valueType>
@@ -789,16 +789,16 @@
  <attributes>
   <name>ScannedQuantity</name>
   <title>
-   <key>en</key>
-   <value>Scanned quantity</value>
+   <key>tr</key>
+   <value>Okutulan miktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отсканированное количество</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Okutulan miktar</value>
+   <key>en</key>
+   <value>Scanned quantity</value>
   </title>
   <id>4</id>
   <valueType>
@@ -814,16 +814,16 @@
  <attributes>
   <name>CurrentQuantity</name>
   <title>
-   <key>en</key>
-   <value>Current quantity</value>
+   <key>tr</key>
+   <value>Geçerli miktar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Текущее количество</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli miktar</value>
+   <key>en</key>
+   <value>Current quantity</value>
   </title>
   <id>5</id>
   <valueType>
@@ -839,16 +839,16 @@
  <attributes>
   <name>Diff</name>
   <title>
-   <key>en</key>
-   <value>Diff</value>
+   <key>tr</key>
+   <value>Fark</value>
   </title>
   <title>
    <key>ru</key>
    <value>Разница</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Fark</value>
+   <key>en</key>
+   <value>Diff</value>
   </title>
   <id>6</id>
   <valueType>
@@ -864,16 +864,16 @@
  <attributes>
   <name>Unit</name>
   <title>
-   <key>en</key>
-   <value>Unit</value>
+   <key>tr</key>
+   <value>Birim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ед. изм.</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Birim</value>
+   <key>en</key>
+   <value>Unit</value>
   </title>
   <id>7</id>
   <valueType>
@@ -889,16 +889,16 @@
  <attributes>
   <name>ParamsData</name>
   <title>
-   <key>en</key>
-   <value>Params data</value>
+   <key>tr</key>
+   <value>Parametreler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Параметры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Parametreler</value>
+   <key>en</key>
+   <value>Params data</value>
   </title>
   <id>9</id>
   <valueType/>
@@ -912,16 +912,16 @@
  <attributes>
   <name>SerialLotNumber</name>
   <title>
-   <key>en</key>
-   <value>Serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Серия номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numaraları</value>
+   <key>en</key>
+   <value>Serial lot number</value>
   </title>
   <id>10</id>
   <valueType>
@@ -937,16 +937,16 @@
  <attributes>
   <name>NeedSerialLotNumber</name>
   <title>
-   <key>en</key>
-   <value>Need serial lot number</value>
+   <key>tr</key>
+   <value>Seri lot numarası gerekiyor</value>
   </title>
   <title>
    <key>ru</key>
    <value>Необходима серия номенклатуры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot numarası gerekiyor</value>
+   <key>en</key>
+   <value>Need serial lot number</value>
   </title>
   <id>11</id>
   <valueType>

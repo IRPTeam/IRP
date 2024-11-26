@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseResponsiblePerson</name>
  <synonym>
-  <key>en</key>
-  <value>Use responsible person</value>
+  <key>tr</key>
+  <value>Sorumlu kişi kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать ответственное лицо</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sorumlu kişi kullan</value>
+  <key>en</key>
+  <value>Use responsible person</value>
  </synonym>
  <type>
   <types>Boolean</types>

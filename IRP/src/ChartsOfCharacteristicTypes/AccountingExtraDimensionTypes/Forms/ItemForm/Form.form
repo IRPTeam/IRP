@@ -207,16 +207,16 @@
  <formCommands>
   <name>EditUniqueID</name>
   <title>
-   <key>en</key>
-   <value>Edit unique ID</value>
+   <key>tr</key>
+   <value>Benzersiz ID düzenle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактировать уникальный ID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Benzersiz ID düzenle</value>
+   <key>en</key>
+   <value>Edit unique ID</value>
   </title>
   <id>1</id>
   <use>

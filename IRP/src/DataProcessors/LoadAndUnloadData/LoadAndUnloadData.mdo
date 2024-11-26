@@ -6,32 +6,32 @@
  </producedTypes>
  <name>LoadAndUnloadData</name>
  <synonym>
-  <key>en</key>
-  <value>Load and unload data</value>
+  <key>tr</key>
+  <value>Veri yükle ve boşalt</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Загрузка и выгрузка данных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Veri yükle ve boşalt</value>
+  <key>en</key>
+  <value>Load and unload data</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.LoadAndUnloadData.Form.Form</defaultForm>
  <attributes uuid="9886e7f4-2eb0-4e75-a0f5-fd103bbcf3e0">
   <name>SerializedInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Serialized info</value>
+   <key>tr</key>
+   <value>Seri numaralandırılmış bilgi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сериализовано инфо</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Seri numaralandırılmış bilgi</value>
+   <key>en</key>
+   <value>Serialized info</value>
   </synonym>
   <type>
    <types>String</types>
@@ -43,16 +43,16 @@
  <attributes uuid="42468120-8bf6-44ca-adca-2ff30482cd9e">
   <name>ArchivedInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Archived info</value>
+   <key>tr</key>
+   <value>Arşivlenmiş bilgi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Информация об архиве</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Arşivlenmiş bilgi</value>
+   <key>en</key>
+   <value>Archived info</value>
   </synonym>
   <type>
    <types>String</types>
@@ -64,16 +64,16 @@
  <attributes uuid="a8ca6afc-2113-4ac1-a8f3-3bdba459d2c9">
   <name>DeserializedInfo</name>
   <synonym>
-   <key>en</key>
-   <value>Deserialized info</value>
+   <key>tr</key>
+   <value>Serileştirilmiş bilgi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сериализован</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Serileştirilmiş bilgi</value>
+   <key>en</key>
+   <value>Deserialized info</value>
   </synonym>
   <type>
    <types>String</types>
@@ -85,7 +85,7 @@
  <forms uuid="6bde5a39-4bcf-4d36-8a66-dd3460b583cb">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -93,7 +93,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

@@ -713,16 +713,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Charts of accounts</value>
+      <key>tr</key>
+      <value>Hesap planları         </value>
      </title>
      <title>
       <key>ru</key>
       <value>План счетов</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Hesap planları         </value>
+      <key>en</key>
+      <value>Charts of accounts</value>
      </title>
      <extendedTooltip>
       <name>GroupChartsOfAccountExtendedTooltip</name>
@@ -1345,16 +1345,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Registers</value>
+      <key>tr</key>
+      <value>Kayıtlar</value>
      </title>
      <title>
       <key>ru</key>
       <value>Регистры</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kayıtlar</value>
+      <key>en</key>
+      <value>Registers</value>
      </title>
      <extendedTooltip>
       <name>GroupRegistersExtendedTooltip</name>
@@ -1389,16 +1389,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Left</value>
+     <key>tr</key>
+     <value>Sol</value>
     </title>
     <title>
      <key>ru</key>
      <value>Слева</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Sol</value>
+     <key>en</key>
+     <value>Left</value>
     </title>
     <extendedTooltip>
      <name>GroupLeft1ExtendedTooltip</name>
@@ -2022,16 +2022,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Companies</value>
+      <key>tr</key>
+      <value>Şirketler</value>
      </title>
      <title>
       <key>ru</key>
       <value>Организации</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Şirketler</value>
+      <key>en</key>
+      <value>Companies</value>
      </title>
      <extendedTooltip>
       <name>GroupCompaniesExtendedTooltip</name>
@@ -2654,16 +2654,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Currencies</value>
+      <key>tr</key>
+      <value>Dövizler</value>
      </title>
      <title>
       <key>ru</key>
       <value>Валюты</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dövizler</value>
+      <key>en</key>
+      <value>Currencies</value>
      </title>
      <extendedTooltip>
       <name>GroupCurrenciesExtendedTooltip</name>
@@ -2698,16 +2698,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Right</value>
+     <key>tr</key>
+     <value>Sağ</value>
     </title>
     <title>
      <key>ru</key>
      <value>Справа</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Sağ</value>
+     <key>en</key>
+     <value>Right</value>
     </title>
     <extendedTooltip>
      <name>GroupRight1ExtendedTooltip</name>
@@ -2740,16 +2740,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Step 1</value>
+    <key>tr</key>
+    <value>Adım 1        </value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаг 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Adım 1        </value>
+    <key>en</key>
+    <value>Step 1</value>
    </title>
    <extendedTooltip>
     <name>GroupStep1ExtendedTooltip</name>
@@ -4531,16 +4531,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Step 2</value>
+    <key>tr</key>
+    <value>Adım 2        </value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаг 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Adım 2        </value>
+    <key>en</key>
+    <value>Step 2</value>
    </title>
    <extendedTooltip>
     <name>GroupStep2ExtendedTooltip</name>
@@ -5628,16 +5628,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Step 3</value>
+    <key>tr</key>
+    <value>Adım 3        </value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаг 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Adım 3        </value>
+    <key>en</key>
+    <value>Step 3</value>
    </title>
    <extendedTooltip>
     <name>GroupStep3ExtendedTooltip</name>
@@ -6228,16 +6228,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Source account</value>
+      <key>tr</key>
+      <value>Kaynak hesap</value>
      </title>
      <title>
       <key>ru</key>
       <value>Счет учета источник</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Kaynak hesap</value>
+      <key>en</key>
+      <value>Source account</value>
      </title>
      <extendedTooltip>
       <name>GroupSourceAccounExtendedTooltip</name>
@@ -6568,16 +6568,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Target account</value>
+      <key>tr</key>
+      <value>Hedef hesap</value>
      </title>
      <title>
       <key>ru</key>
       <value>Счета учета получатель</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Hedef hesap</value>
+      <key>en</key>
+      <value>Target account</value>
      </title>
      <extendedTooltip>
       <name>GroupTargetAccountExtendedTooltip</name>
@@ -7244,16 +7244,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Ext dimension 1</value>
+      <key>tr</key>
+      <value>Dış boyut 1</value>
      </title>
      <title>
       <key>ru</key>
       <value>Субконто 1</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 1</value>
+      <key>en</key>
+      <value>Ext dimension 1</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension1ExtendedTooltip</name>
@@ -7920,16 +7920,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Ext dimension 2</value>
+      <key>tr</key>
+      <value>Dış boyut 2</value>
      </title>
      <title>
       <key>ru</key>
       <value>Субконто 2</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 2</value>
+      <key>en</key>
+      <value>Ext dimension 2</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension2ExtendedTooltip</name>
@@ -8596,16 +8596,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Ext dimension 3</value>
+      <key>tr</key>
+      <value>Dış boyut 3</value>
      </title>
      <title>
       <key>ru</key>
       <value>Субконто 3</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Dış boyut 3</value>
+      <key>en</key>
+      <value>Ext dimension 3</value>
      </title>
      <extendedTooltip>
       <name>GroupExtDimension3ExtendedTooltip</name>
@@ -8923,16 +8923,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Step 4</value>
+    <key>tr</key>
+    <value>Adım 4        </value>
    </title>
    <title>
     <key>ru</key>
     <value>Шаг 4</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Adım 4        </value>
+    <key>en</key>
+    <value>Step 4</value>
    </title>
    <extendedTooltip>
     <name>GroupStep4ExtendedTooltip</name>
@@ -8958,6 +8958,37 @@
   <items xsi:type="form:FormGroup">
    <name>GroupTest</name>
    <id>162</id>
+   <items xsi:type="form:Button">
+    <name>LoadEAOWithReport</name>
+    <id>643</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <extendedTooltip>
+     <name>LoadEAOWithReportExtendedTooltip</name>
+     <id>644</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>UsualButton</type>
+    <commandName>Form.Command.LoadEAOWithReport</commandName>
+    <representation>Auto</representation>
+    <autoMaxWidth>true</autoMaxWidth>
+    <autoMaxHeight>true</autoMaxHeight>
+    <placementArea>UserCmds</placementArea>
+    <representationInContextMenu>Auto</representationInContextMenu>
+   </items>
    <items xsi:type="form:Button">
     <name>TestPostRequest</name>
     <id>164</id>
@@ -9163,16 +9194,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Типовой</value>
+       <key>tr</key>
+       <value>Tipik          </value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Normal charts of accounts</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Tipik          </value>
+       <key>en</key>
+       <value>Типовой</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Типовой</value>
@@ -9180,16 +9211,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>Налоговый</value>
+       <key>tr</key>
+       <value>Vergisel       </value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>Tax charts of account</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>Vergisel       </value>
+       <key>en</key>
+       <value>Налоговый</value>
       </presentation>
       <value xsi:type="core:StringValue">
        <value>Налоговый</value>
@@ -9197,16 +9228,16 @@
      </choiceList>
      <choiceList>
       <presentation>
-       <key>en</key>
-       <value>&lt;all&gt;</value>
+       <key>tr</key>
+       <value>&lt;tüm&gt;</value>
       </presentation>
       <presentation>
        <key>ru</key>
        <value>&lt;все&gt;</value>
       </presentation>
       <presentation>
-       <key>tr</key>
-       <value>&lt;tüm&gt;</value>
+       <key>en</key>
+       <value>&lt;all&gt;</value>
       </presentation>
       <value xsi:type="core:UndefinedValue"/>
      </choiceList>
@@ -9380,7 +9411,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Test</value>
    </title>
    <title>
@@ -9388,7 +9419,7 @@
     <value>Тест</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Test</value>
    </title>
    <extendedTooltip>
@@ -9418,16 +9449,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Steps</value>
+   <key>tr</key>
+   <value>Adımlar       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Шаги</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Adımlar       </value>
+   <key>en</key>
+   <value>Steps</value>
   </title>
   <extendedTooltip>
    <name>GroupStepsExtendedTooltip</name>
@@ -9491,16 +9522,16 @@
  <attributes>
   <name>IntegrationSettings</name>
   <title>
-   <key>en</key>
-   <value>Integration settings</value>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Интеграционные настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>Integration settings</value>
   </title>
   <id>2</id>
   <valueType>
@@ -9517,16 +9548,16 @@
  <attributes>
   <name>ExternalChartsOfAccounts</name>
   <title>
-   <key>en</key>
-   <value>External charts of accounts</value>
+   <key>tr</key>
+   <value>Dış muhasebe planları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешний план счетов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış muhasebe planları</value>
+   <key>en</key>
+   <value>External charts of accounts</value>
   </title>
   <id>3</id>
   <valueType>
@@ -9541,16 +9572,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>4</id>
    <valueType>
@@ -9567,16 +9598,16 @@
   <columns>
    <name>CodeMask</name>
    <title>
-    <key>en</key>
-    <value>Code mask</value>
+    <key>tr</key>
+    <value>Kod maskesi     </value>
    </title>
    <title>
     <key>ru</key>
     <value>Маска кода</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod maskesi     </value>
+    <key>en</key>
+    <value>Code mask</value>
    </title>
    <id>6</id>
    <valueType>
@@ -9593,16 +9624,16 @@
   <columns>
    <name>LedgerTypeVariant</name>
    <title>
-    <key>en</key>
-    <value>Ledger type variant</value>
+    <key>tr</key>
+    <value>Defter tip seçeneği</value>
    </title>
    <title>
     <key>ru</key>
     <value>Вариант типа учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tip seçeneği</value>
+    <key>en</key>
+    <value>Ledger type variant</value>
    </title>
    <id>7</id>
    <valueType>
@@ -9618,16 +9649,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>8</id>
    <valueType>
@@ -9643,16 +9674,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>9</id>
    <valueType>
@@ -9669,16 +9700,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>10</id>
    <valueType>
@@ -9695,16 +9726,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>11</id>
    <valueType>
@@ -9721,16 +9752,16 @@
   <columns>
    <name>ExtraDimensionTypesName</name>
    <title>
-    <key>en</key>
-    <value>Extra dimension types name</value>
+    <key>tr</key>
+    <value>Kırılım tip ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование типа субконо</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kırılım tip ismi</value>
+    <key>en</key>
+    <value>Extra dimension types name</value>
    </title>
    <id>62</id>
    <valueType>
@@ -9748,16 +9779,16 @@
  <attributes>
   <name>ExternalAccounts</name>
   <title>
-   <key>en</key>
-   <value>External accounts</value>
+   <key>tr</key>
+   <value>Dış hesaplar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешние счета учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış hesaplar</value>
+   <key>en</key>
+   <value>External accounts</value>
   </title>
   <id>12</id>
   <valueType>
@@ -9772,16 +9803,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>13</id>
    <valueType>
@@ -9798,16 +9829,16 @@
   <columns>
    <name>ParentRef</name>
    <title>
-    <key>en</key>
-    <value>Parent ref</value>
+    <key>tr</key>
+    <value>Üst ref                   </value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка владельца</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üst ref                   </value>
+    <key>en</key>
+    <value>Parent ref</value>
    </title>
    <id>14</id>
    <valueType>
@@ -9824,16 +9855,16 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>en</key>
-    <value>Code</value>
+    <key>tr</key>
+    <value>Kod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
+    <key>en</key>
+    <value>Code</value>
    </title>
    <id>15</id>
    <valueType>
@@ -9850,16 +9881,16 @@
   <columns>
    <name>ParentCode</name>
    <title>
-    <key>en</key>
-    <value>Parent code</value>
+    <key>tr</key>
+    <value>Üst kod                   </value>
    </title>
    <title>
     <key>ru</key>
     <value>Код владельца</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Üst kod                   </value>
+    <key>en</key>
+    <value>Parent code</value>
    </title>
    <id>16</id>
    <valueType>
@@ -9876,16 +9907,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>17</id>
    <valueType>
@@ -9902,16 +9933,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>18</id>
    <valueType>
@@ -9928,16 +9959,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>19</id>
    <valueType>
@@ -9954,16 +9985,16 @@
   <columns>
    <name>Order</name>
    <title>
-    <key>en</key>
-    <value>Order</value>
+    <key>tr</key>
+    <value>Sipariş</value>
    </title>
    <title>
     <key>ru</key>
     <value>Порядок</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sipariş</value>
+    <key>en</key>
+    <value>Order</value>
    </title>
    <id>20</id>
    <valueType>
@@ -9980,16 +10011,16 @@
   <columns>
    <name>Type</name>
    <title>
-    <key>en</key>
-    <value>Type</value>
+    <key>tr</key>
+    <value>Tip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip</value>
+    <key>en</key>
+    <value>Type</value>
    </title>
    <id>21</id>
    <valueType>
@@ -10006,16 +10037,16 @@
   <columns>
    <name>OffBalance</name>
    <title>
-    <key>en</key>
-    <value>Off balance</value>
+    <key>tr</key>
+    <value>Bilanço dışı              </value>
    </title>
    <title>
     <key>ru</key>
     <value>Забалансовый</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilanço dışı              </value>
+    <key>en</key>
+    <value>Off balance</value>
    </title>
    <id>22</id>
    <valueType>
@@ -10031,16 +10062,16 @@
   <columns>
    <name>NotUsedForRecords</name>
    <title>
-    <key>en</key>
-    <value>Not used for records</value>
+    <key>tr</key>
+    <value>Kayıtlar için kullanılmaz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Не используется для записей</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kayıtlar için kullanılmaz</value>
+    <key>en</key>
+    <value>Not used for records</value>
    </title>
    <id>23</id>
    <valueType>
@@ -10056,16 +10087,16 @@
   <columns>
    <name>Currency</name>
    <title>
-    <key>en</key>
-    <value>Currency</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валюта</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>Currency</value>
    </title>
    <id>24</id>
    <valueType>
@@ -10081,16 +10112,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <id>25</id>
    <valueType>
@@ -10106,16 +10137,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>26</id>
    <valueType>
@@ -10131,16 +10162,16 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>en</key>
-    <value>Internal ref</value>
+    <key>tr</key>
+    <value>İç sınıf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренняя ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
+    <key>en</key>
+    <value>Internal ref</value>
    </title>
    <id>29</id>
    <valueType>
@@ -10156,16 +10187,16 @@
   <columns>
    <name>ExtDimRef1</name>
    <title>
-    <key>en</key>
-    <value>Ext dim ref1</value>
+    <key>tr</key>
+    <value>Dış boyut ref1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref1</value>
+    <key>en</key>
+    <value>Ext dim ref1</value>
    </title>
    <id>70</id>
    <valueType>
@@ -10182,16 +10213,16 @@
   <columns>
    <name>ExtDimTurnoversOnly1</name>
    <title>
-    <key>en</key>
-    <value>Ext dim turnovers only1</value>
+    <key>tr</key>
+    <value>Yalnızca dış boyut ciroları1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 1 только обороты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları1</value>
+    <key>en</key>
+    <value>Ext dim turnovers only1</value>
    </title>
    <id>71</id>
    <valueType>
@@ -10207,16 +10238,16 @@
   <columns>
    <name>ExtDimCurrency1</name>
    <title>
-    <key>en</key>
-    <value>Ext dim currency1</value>
+    <key>tr</key>
+    <value>Ext dim para birimi1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi1</value>
+    <key>en</key>
+    <value>Ext dim currency1</value>
    </title>
    <id>72</id>
    <valueType>
@@ -10232,16 +10263,16 @@
   <columns>
    <name>ExtDimQuantity1</name>
    <title>
-    <key>en</key>
-    <value>Ext dim quantity1</value>
+    <key>tr</key>
+    <value>Ext dim miktar1    </value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar1    </value>
+    <key>en</key>
+    <value>Ext dim quantity1</value>
    </title>
    <id>73</id>
    <valueType>
@@ -10257,16 +10288,16 @@
   <columns>
    <name>ExtDimAmount1</name>
    <title>
-    <key>en</key>
-    <value>Ext dim amount1</value>
+    <key>tr</key>
+    <value>Ext dim miktarı1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktarı1</value>
+    <key>en</key>
+    <value>Ext dim amount1</value>
    </title>
    <id>74</id>
    <valueType>
@@ -10282,16 +10313,16 @@
   <columns>
    <name>ExtDimAmount2</name>
    <title>
-    <key>en</key>
-    <value>Ext dim amount2</value>
+    <key>tr</key>
+    <value>Ext dim miktarı2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktarı2</value>
+    <key>en</key>
+    <value>Ext dim amount2</value>
    </title>
    <id>75</id>
    <valueType>
@@ -10307,16 +10338,16 @@
   <columns>
    <name>ExtDimCurrency2</name>
    <title>
-    <key>en</key>
-    <value>Ext dim currency2</value>
+    <key>tr</key>
+    <value>Ext dim para birimi2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi2</value>
+    <key>en</key>
+    <value>Ext dim currency2</value>
    </title>
    <id>76</id>
    <valueType>
@@ -10332,16 +10363,16 @@
   <columns>
    <name>ExtDimQuantity2</name>
    <title>
-    <key>en</key>
-    <value>Ext dim quantity2</value>
+    <key>tr</key>
+    <value>Ext dim miktar2    </value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar2    </value>
+    <key>en</key>
+    <value>Ext dim quantity2</value>
    </title>
    <id>77</id>
    <valueType>
@@ -10357,16 +10388,16 @@
   <columns>
    <name>ExtDimRef2</name>
    <title>
-    <key>en</key>
-    <value>Ext dim ref2</value>
+    <key>tr</key>
+    <value>Dış boyut ref2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref2</value>
+    <key>en</key>
+    <value>Ext dim ref2</value>
    </title>
    <id>78</id>
    <valueType>
@@ -10383,16 +10414,16 @@
   <columns>
    <name>ExtDimTurnoversOnly2</name>
    <title>
-    <key>en</key>
-    <value>Ext dim turnovers only2</value>
+    <key>tr</key>
+    <value>Yalnızca dış boyut ciroları2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 2 только обороты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları2</value>
+    <key>en</key>
+    <value>Ext dim turnovers only2</value>
    </title>
    <id>79</id>
    <valueType>
@@ -10408,16 +10439,16 @@
   <columns>
    <name>ExtDimAmount3</name>
    <title>
-    <key>en</key>
-    <value>Ext dim amount3</value>
+    <key>tr</key>
+    <value>Ext dim tutar3     </value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim tutar3     </value>
+    <key>en</key>
+    <value>Ext dim amount3</value>
    </title>
    <id>80</id>
    <valueType>
@@ -10433,16 +10464,16 @@
   <columns>
    <name>ExtDimCurrency3</name>
    <title>
-    <key>en</key>
-    <value>Ext dim currency3</value>
+    <key>tr</key>
+    <value>Ext dim para birimi3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сумма субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim para birimi3</value>
+    <key>en</key>
+    <value>Ext dim currency3</value>
    </title>
    <id>81</id>
    <valueType>
@@ -10458,16 +10489,16 @@
   <columns>
    <name>ExtDimQuantity3</name>
    <title>
-    <key>en</key>
-    <value>Ext dim quantity3</value>
+    <key>tr</key>
+    <value>Ext dim miktar3    </value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ext dim miktar3    </value>
+    <key>en</key>
+    <value>Ext dim quantity3</value>
    </title>
    <id>82</id>
    <valueType>
@@ -10483,16 +10514,16 @@
   <columns>
    <name>ExtDimRef3</name>
    <title>
-    <key>en</key>
-    <value>Ext dim ref3</value>
+    <key>tr</key>
+    <value>Dış boyut ref3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref3</value>
+    <key>en</key>
+    <value>Ext dim ref3</value>
    </title>
    <id>83</id>
    <valueType>
@@ -10509,16 +10540,16 @@
   <columns>
    <name>ExtDimTurnoversOnly3</name>
    <title>
-    <key>en</key>
-    <value>Ext dim turnovers only3</value>
+    <key>tr</key>
+    <value>Yalnızca dış boyut ciroları3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 3 только обороты</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yalnızca dış boyut ciroları3</value>
+    <key>en</key>
+    <value>Ext dim turnovers only3</value>
    </title>
    <id>84</id>
    <valueType>
@@ -10535,16 +10566,16 @@
  <attributes>
   <name>ChartOfAccount</name>
   <title>
-   <key>en</key>
-   <value>Chart of account</value>
+   <key>tr</key>
+   <value>Hesap planı</value>
   </title>
   <title>
    <key>ru</key>
    <value>План счетов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap planı</value>
+   <key>en</key>
+   <value>Chart of account</value>
   </title>
   <id>28</id>
   <valueType>
@@ -10561,16 +10592,16 @@
  <attributes>
   <name>LedgerTypeVariant</name>
   <title>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </title>
   <id>30</id>
   <valueType>
@@ -10586,16 +10617,16 @@
  <attributes>
   <name>LedgerTypeVariantsMapping</name>
   <title>
-   <key>en</key>
-   <value>Ledger type variants mapping</value>
+   <key>tr</key>
+   <value>Defter türü varyant eşleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Соответствия вариантов вида учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter türü varyant eşleme</value>
+   <key>en</key>
+   <value>Ledger type variants mapping</value>
   </title>
   <id>31</id>
   <valueType/>
@@ -10609,16 +10640,16 @@
  <attributes>
   <name>TestPostResponse</name>
   <title>
-   <key>en</key>
-   <value>Test post response</value>
+   <key>tr</key>
+   <value>Test post yanıtı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест POST ответа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test post yanıtı</value>
+   <key>en</key>
+   <value>Test post response</value>
   </title>
   <id>32</id>
   <valueType>
@@ -10635,16 +10666,16 @@
  <attributes>
   <name>TestPeriod</name>
   <title>
-   <key>en</key>
-   <value>Test period</value>
+   <key>tr</key>
+   <value>Test dönemi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test dönemi</value>
+   <key>en</key>
+   <value>Test period</value>
   </title>
   <id>33</id>
   <valueType>
@@ -10660,16 +10691,16 @@
  <attributes>
   <name>ExternalCompanies</name>
   <title>
-   <key>en</key>
-   <value>External companies</value>
+   <key>tr</key>
+   <value>Dış şirketler</value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешние организации</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış şirketler</value>
+   <key>en</key>
+   <value>External companies</value>
   </title>
   <id>34</id>
   <valueType>
@@ -10684,16 +10715,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>36</id>
    <valueType>
@@ -10710,16 +10741,16 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>en</key>
-    <value>Code</value>
+    <key>tr</key>
+    <value>Kod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
+    <key>en</key>
+    <value>Code</value>
    </title>
    <id>38</id>
    <valueType>
@@ -10736,16 +10767,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>40</id>
    <valueType>
@@ -10762,16 +10793,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>42</id>
    <valueType>
@@ -10788,16 +10819,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>44</id>
    <valueType>
@@ -10814,16 +10845,16 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>en</key>
-    <value>Internal ref</value>
+    <key>tr</key>
+    <value>İç sınıf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренняя ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
+    <key>en</key>
+    <value>Internal ref</value>
    </title>
    <id>46</id>
    <valueType>
@@ -10839,16 +10870,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>48</id>
    <valueType>
@@ -10865,16 +10896,16 @@
  <attributes>
   <name>ExternalCurrencies</name>
   <title>
-   <key>en</key>
-   <value>External currencies</value>
+   <key>tr</key>
+   <value>Dış para birimleri   </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешние валюты</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış para birimleri   </value>
+   <key>en</key>
+   <value>External currencies</value>
   </title>
   <id>35</id>
   <valueType>
@@ -10889,16 +10920,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>37</id>
    <valueType>
@@ -10915,16 +10946,16 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>en</key>
-    <value>Code</value>
+    <key>tr</key>
+    <value>Kod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
+    <key>en</key>
+    <value>Code</value>
    </title>
    <id>39</id>
    <valueType>
@@ -10941,16 +10972,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>41</id>
    <valueType>
@@ -10967,16 +10998,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>43</id>
    <valueType>
@@ -10993,16 +11024,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>45</id>
    <valueType>
@@ -11019,16 +11050,16 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>en</key>
-    <value>Internal ref</value>
+    <key>tr</key>
+    <value>İç sınıf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренняя ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
+    <key>en</key>
+    <value>Internal ref</value>
    </title>
    <id>47</id>
    <valueType>
@@ -11044,16 +11075,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>49</id>
    <valueType>
@@ -11070,16 +11101,16 @@
  <attributes>
   <name>ExternalRegisters</name>
   <title>
-   <key>en</key>
-   <value>External registers</value>
+   <key>tr</key>
+   <value>Dış kayıtlar         </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешние регистры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış kayıtlar         </value>
+   <key>en</key>
+   <value>External registers</value>
   </title>
   <id>50</id>
   <valueType>
@@ -11094,16 +11125,16 @@
   <columns>
    <name>Name</name>
    <title>
-    <key>en</key>
-    <value>Name</value>
+    <key>tr</key>
+    <value>Ad</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ad</value>
+    <key>en</key>
+    <value>Name</value>
    </title>
    <id>39</id>
    <valueType>
@@ -11120,16 +11151,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>41</id>
    <valueType>
@@ -11146,16 +11177,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>43</id>
    <valueType>
@@ -11172,16 +11203,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>45</id>
    <valueType>
@@ -11198,16 +11229,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>49</id>
    <valueType>
@@ -11223,16 +11254,16 @@
   <columns>
    <name>ChartOfAccountsName</name>
    <title>
-    <key>en</key>
-    <value>Chart of accounts</value>
+    <key>tr</key>
+    <value>Hesap planı</value>
    </title>
    <title>
     <key>ru</key>
     <value>План счетов</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hesap planı</value>
+    <key>en</key>
+    <value>Chart of accounts</value>
    </title>
    <id>51</id>
    <valueType>
@@ -11249,16 +11280,16 @@
   <columns>
    <name>LedgerType</name>
    <title>
-    <key>en</key>
-    <value>Ledger type</value>
+    <key>tr</key>
+    <value>Defter tipi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип учета</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Defter tipi</value>
+    <key>en</key>
+    <value>Ledger type</value>
    </title>
    <id>52</id>
    <valueType>
@@ -11275,16 +11306,16 @@
  <attributes>
   <name>ExternalExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>External ext dimensions</value>
+   <key>tr</key>
+   <value>Dış ek boyutlar     </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внешние субконто</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dış ek boyutlar     </value>
+   <key>en</key>
+   <value>External ext dimensions</value>
   </title>
   <id>53</id>
   <valueType>
@@ -11299,16 +11330,16 @@
   <columns>
    <name>Ref</name>
    <title>
-    <key>en</key>
-    <value>Ref</value>
+    <key>tr</key>
+    <value>REf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>REf</value>
+    <key>en</key>
+    <value>Ref</value>
    </title>
    <id>54</id>
    <valueType>
@@ -11325,16 +11356,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>55</id>
    <valueType>
@@ -11350,16 +11381,16 @@
   <columns>
    <name>Description_en</name>
    <title>
-    <key>en</key>
-    <value>Description en</value>
+    <key>tr</key>
+    <value>Tanım en         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование EN</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım en         </value>
+    <key>en</key>
+    <value>Description en</value>
    </title>
    <id>56</id>
    <valueType>
@@ -11376,16 +11407,16 @@
   <columns>
    <name>Description_ru</name>
    <title>
-    <key>en</key>
-    <value>Description ru</value>
+    <key>tr</key>
+    <value>Tanım ru         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование RU</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım ru         </value>
+    <key>en</key>
+    <value>Description ru</value>
    </title>
    <id>57</id>
    <valueType>
@@ -11402,16 +11433,16 @@
   <columns>
    <name>Description_tr</name>
    <title>
-    <key>en</key>
-    <value>Description tr</value>
+    <key>tr</key>
+    <value>Tanım tr         </value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование TR</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım tr         </value>
+    <key>en</key>
+    <value>Description tr</value>
    </title>
    <id>58</id>
    <valueType>
@@ -11428,16 +11459,16 @@
   <columns>
    <name>Code</name>
    <title>
-    <key>en</key>
-    <value>Code</value>
+    <key>tr</key>
+    <value>Kod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kod</value>
+    <key>en</key>
+    <value>Code</value>
    </title>
    <id>59</id>
    <valueType>
@@ -11454,16 +11485,16 @@
   <columns>
    <name>BaseClass</name>
    <title>
-    <key>en</key>
-    <value>Base class</value>
+    <key>tr</key>
+    <value>Temel sınıf            </value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс основания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf            </value>
+    <key>en</key>
+    <value>Base class</value>
    </title>
    <id>64</id>
    <valueType>
@@ -11480,16 +11511,16 @@
   <columns>
    <name>Class</name>
    <title>
-    <key>en</key>
-    <value>Class</value>
+    <key>tr</key>
+    <value>Sınıf                  </value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sınıf                  </value>
+    <key>en</key>
+    <value>Class</value>
    </title>
    <id>65</id>
    <valueType>
@@ -11506,16 +11537,16 @@
   <columns>
    <name>IsRef</name>
    <title>
-    <key>en</key>
-    <value>Is ref</value>
+    <key>tr</key>
+    <value>Ref mi                    </value>
    </title>
    <title>
     <key>ru</key>
     <value>Это ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ref mi                    </value>
+    <key>en</key>
+    <value>Is ref</value>
    </title>
    <id>66</id>
    <valueType>
@@ -11531,16 +11562,16 @@
   <columns>
    <name>InternalRef</name>
    <title>
-    <key>en</key>
-    <value>Internal ref</value>
+    <key>tr</key>
+    <value>İç sınıf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренняя ссылка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
+    <key>en</key>
+    <value>Internal ref</value>
    </title>
    <id>67</id>
    <valueType>
@@ -11556,16 +11587,16 @@
   <columns>
    <name>InternalBaseClass</name>
    <title>
-    <key>en</key>
-    <value>Internal base class</value>
+    <key>tr</key>
+    <value>İç kaynak sınıfı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний класс</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç kaynak sınıfı</value>
+    <key>en</key>
+    <value>Internal base class</value>
    </title>
    <id>68</id>
    <valueType>
@@ -11582,16 +11613,16 @@
   <columns>
    <name>InternalClass</name>
    <title>
-    <key>en</key>
-    <value>Internal class</value>
+    <key>tr</key>
+    <value>İç sınıf</value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний класс</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İç sınıf</value>
+    <key>en</key>
+    <value>Internal class</value>
    </title>
    <id>69</id>
    <valueType>
@@ -11608,16 +11639,16 @@
   <columns>
    <name>TypePresentation</name>
    <title>
-    <key>en</key>
-    <value>Type presentation</value>
+    <key>tr</key>
+    <value>Tip görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тип представление</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tip görünüm</value>
+    <key>en</key>
+    <value>Type presentation</value>
    </title>
    <id>85</id>
    <valueType>
@@ -11635,16 +11666,16 @@
  <attributes>
   <name>ExtraDimensionTypes</name>
   <title>
-   <key>en</key>
-   <value>Extra dimension types</value>
+   <key>tr</key>
+   <value>Ek boyut türleri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дополнительные типы измерений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut türleri</value>
+   <key>en</key>
+   <value>Extra dimension types</value>
   </title>
   <id>63</id>
   <valueType>
@@ -11661,16 +11692,16 @@
  <attributes>
   <name>TestRegisterName</name>
   <title>
-   <key>en</key>
-   <value>Test register name</value>
+   <key>tr</key>
+   <value>Test kayıt adı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест наименование регистра</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test kayıt adı</value>
+   <key>en</key>
+   <value>Test register name</value>
   </title>
   <id>86</id>
   <valueType>
@@ -11687,16 +11718,16 @@
  <attributes>
   <name>TestLoadAllRecords</name>
   <title>
-   <key>en</key>
-   <value>Test load all records</value>
+   <key>tr</key>
+   <value>Tüm kayıtları test et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест загрузка всех записей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm kayıtları test et</value>
+   <key>en</key>
+   <value>Test load all records</value>
   </title>
   <id>87</id>
   <valueType>
@@ -11712,16 +11743,16 @@
  <attributes>
   <name>TestOpeningEntryDate</name>
   <title>
-   <key>en</key>
-   <value>Test opening entry date</value>
+   <key>tr</key>
+   <value>Test açılış kaydı tarihi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест дату ввода начальных остатков</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test açılış kaydı tarihi</value>
+   <key>en</key>
+   <value>Test opening entry date</value>
   </title>
   <id>88</id>
   <valueType>
@@ -11740,16 +11771,16 @@
  <attributes>
   <name>AccountMatching</name>
   <title>
-   <key>en</key>
-   <value>Account matching</value>
+   <key>tr</key>
+   <value>Hesap eşleştirme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сопоставление счетов бух. учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap eşleştirme</value>
+   <key>en</key>
+   <value>Account matching</value>
   </title>
   <id>89</id>
   <valueType>
@@ -11764,16 +11795,16 @@
   <columns>
    <name>SourceAccountRef</name>
    <title>
-    <key>en</key>
-    <value>Source account ref</value>
+    <key>tr</key>
+    <value>Kaynak hesap ref      </value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка счета учета источника</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap ref      </value>
+    <key>en</key>
+    <value>Source account ref</value>
    </title>
    <id>90</id>
    <valueType>
@@ -11790,16 +11821,16 @@
   <columns>
    <name>SourceAccountCode</name>
    <title>
-    <key>en</key>
-    <value>Source account code</value>
+    <key>tr</key>
+    <value>Kaynak hesap kodu     </value>
    </title>
    <title>
     <key>ru</key>
     <value>Код счета источника</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap kodu     </value>
+    <key>en</key>
+    <value>Source account code</value>
    </title>
    <id>91</id>
    <valueType>
@@ -11816,16 +11847,16 @@
   <columns>
    <name>SourceAccountDescription_ru</name>
    <title>
-    <key>en</key>
-    <value>Source account description ru</value>
+    <key>tr</key>
+    <value>Kaynak hesap tanımı ru</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование ru счет учета источник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı ru</value>
+    <key>en</key>
+    <value>Source account description ru</value>
    </title>
    <id>92</id>
    <valueType>
@@ -11842,16 +11873,16 @@
   <columns>
    <name>SourceAccountDescription_en</name>
    <title>
-    <key>en</key>
-    <value>Source account description en</value>
+    <key>tr</key>
+    <value>Kaynak hesap tanımı en</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование en счет учета источник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı en</value>
+    <key>en</key>
+    <value>Source account description en</value>
    </title>
    <id>93</id>
    <valueType>
@@ -11868,16 +11899,16 @@
   <columns>
    <name>SourceAccountDescription_tr</name>
    <title>
-    <key>en</key>
-    <value>Source account description tr</value>
+    <key>tr</key>
+    <value>Kaynak hesap tanımı tr</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование tr счет учета источник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak hesap tanımı tr</value>
+    <key>en</key>
+    <value>Source account description tr</value>
    </title>
    <id>94</id>
    <valueType>
@@ -11894,16 +11925,16 @@
   <columns>
    <name>AllExtDimensionValues1</name>
    <title>
-    <key>en</key>
-    <value>All ext dimension values1</value>
+    <key>tr</key>
+    <value>Tüm dış boyut değerleri1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Все значения субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri1</value>
+    <key>en</key>
+    <value>All ext dimension values1</value>
    </title>
    <id>95</id>
    <valueType>
@@ -11919,16 +11950,16 @@
   <columns>
    <name>AllExtDimensionValues2</name>
    <title>
-    <key>en</key>
-    <value>All ext dimension values2</value>
+    <key>tr</key>
+    <value>Tüm dış boyut değerleri2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Все значения субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri2</value>
+    <key>en</key>
+    <value>All ext dimension values2</value>
    </title>
    <id>96</id>
    <valueType>
@@ -11944,16 +11975,16 @@
   <columns>
    <name>AllExtDimensionValues3</name>
    <title>
-    <key>en</key>
-    <value>All ext dimension values3</value>
+    <key>tr</key>
+    <value>Tüm dış boyut değerleri3 </value>
    </title>
    <title>
     <key>ru</key>
     <value>Все значения субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tüm dış boyut değerleri3 </value>
+    <key>en</key>
+    <value>All ext dimension values3</value>
    </title>
    <id>97</id>
    <valueType>
@@ -11969,16 +12000,16 @@
   <columns>
    <name>TargetAccountCode</name>
    <title>
-    <key>en</key>
-    <value>Target account code</value>
+    <key>tr</key>
+    <value>Hedef hesap kodu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Код счета учета получателя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap kodu</value>
+    <key>en</key>
+    <value>Target account code</value>
    </title>
    <id>98</id>
    <valueType>
@@ -11995,16 +12026,16 @@
   <columns>
    <name>TargetAccountDescription_en</name>
    <title>
-    <key>en</key>
-    <value>Target account description en</value>
+    <key>tr</key>
+    <value>Hedef hesap tanımı en</value>
    </title>
    <title>
     <key>ru</key>
     <value>Счет учета получатель en</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı en</value>
+    <key>en</key>
+    <value>Target account description en</value>
    </title>
    <id>100</id>
    <valueType>
@@ -12021,16 +12052,16 @@
   <columns>
    <name>TargetAccountDescription_ru</name>
    <title>
-    <key>en</key>
-    <value>Target account description ru</value>
+    <key>tr</key>
+    <value>Hedef hesap tanımı ru</value>
    </title>
    <title>
     <key>ru</key>
     <value>Счет учета получатель ru</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı ru</value>
+    <key>en</key>
+    <value>Target account description ru</value>
    </title>
    <id>101</id>
    <valueType>
@@ -12047,16 +12078,16 @@
   <columns>
    <name>TargetAccountDescription_tr</name>
    <title>
-    <key>en</key>
-    <value>Target account description tr</value>
+    <key>tr</key>
+    <value>Hedef hesap tanımı tr</value>
    </title>
    <title>
     <key>ru</key>
     <value>Счет учета получатель tr</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap tanımı tr</value>
+    <key>en</key>
+    <value>Target account description tr</value>
    </title>
    <id>102</id>
    <valueType>
@@ -12073,16 +12104,16 @@
   <columns>
    <name>TargetAccountRef</name>
    <title>
-    <key>en</key>
-    <value>Target account ref</value>
+    <key>tr</key>
+    <value>Hedef hesap ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка счета учета получателя</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hedef hesap ref</value>
+    <key>en</key>
+    <value>Target account ref</value>
    </title>
    <id>103</id>
    <valueType>
@@ -12099,16 +12130,16 @@
   <columns>
    <name>BaseClass1</name>
    <title>
-    <key>en</key>
-    <value>Base class 1</value>
+    <key>tr</key>
+    <value>Temel sınıf 1          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс основания 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 1          </value>
+    <key>en</key>
+    <value>Base class 1</value>
    </title>
    <id>105</id>
    <valueType>
@@ -12125,16 +12156,16 @@
   <columns>
    <name>BaseClass2</name>
    <title>
-    <key>en</key>
-    <value>Base class 2</value>
+    <key>tr</key>
+    <value>Temel sınıf 2          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс основания 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 2          </value>
+    <key>en</key>
+    <value>Base class 2</value>
    </title>
    <id>106</id>
    <valueType>
@@ -12151,16 +12182,16 @@
   <columns>
    <name>BaseClass3</name>
    <title>
-    <key>en</key>
-    <value>Base class 3</value>
+    <key>tr</key>
+    <value>Temel sınıf 3          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс основания 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Temel sınıf 3          </value>
+    <key>en</key>
+    <value>Base class 3</value>
    </title>
    <id>107</id>
    <valueType>
@@ -12177,16 +12208,16 @@
   <columns>
    <name>Class1</name>
    <title>
-    <key>en</key>
-    <value>Class 1</value>
+    <key>tr</key>
+    <value>Sınıf 1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sınıf 1</value>
+    <key>en</key>
+    <value>Class 1</value>
    </title>
    <id>109</id>
    <valueType>
@@ -12203,16 +12234,16 @@
   <columns>
    <name>Class2</name>
    <title>
-    <key>en</key>
-    <value>Class 2</value>
+    <key>tr</key>
+    <value>Sınıf 2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sınıf 2</value>
+    <key>en</key>
+    <value>Class 2</value>
    </title>
    <id>110</id>
    <valueType>
@@ -12229,16 +12260,16 @@
   <columns>
    <name>Class3</name>
    <title>
-    <key>en</key>
-    <value>Class 3</value>
+    <key>tr</key>
+    <value>Sınıf 3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sınıf 3</value>
+    <key>en</key>
+    <value>Class 3</value>
    </title>
    <id>111</id>
    <valueType>
@@ -12255,16 +12286,16 @@
   <columns>
    <name>IsRef1</name>
    <title>
-    <key>en</key>
-    <value>Is ref 1</value>
+    <key>tr</key>
+    <value>Ref 1 mi                  </value>
    </title>
    <title>
     <key>ru</key>
     <value>Это ссылка 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ref 1 mi                  </value>
+    <key>en</key>
+    <value>Is ref 1</value>
    </title>
    <id>113</id>
    <valueType>
@@ -12280,16 +12311,16 @@
   <columns>
    <name>IsRef2</name>
    <title>
-    <key>en</key>
-    <value>Is ref 2</value>
+    <key>tr</key>
+    <value>Ref 2 mi                  </value>
    </title>
    <title>
     <key>ru</key>
     <value>Это ссылка 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ref 2 mi                  </value>
+    <key>en</key>
+    <value>Is ref 2</value>
    </title>
    <id>114</id>
    <valueType>
@@ -12305,16 +12336,16 @@
   <columns>
    <name>IsRef3</name>
    <title>
-    <key>en</key>
-    <value>Is ref 3</value>
+    <key>tr</key>
+    <value>Ref 3 mi                  </value>
    </title>
    <title>
     <key>ru</key>
     <value>Это ссылка 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Ref 3 mi                  </value>
+    <key>en</key>
+    <value>Is ref 3</value>
    </title>
    <id>115</id>
    <valueType>
@@ -12330,16 +12361,16 @@
   <columns>
    <name>ValueRef1</name>
    <title>
-    <key>en</key>
-    <value>Value ref1</value>
+    <key>tr</key>
+    <value>Değer ref1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение Ссылка1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer ref1</value>
+    <key>en</key>
+    <value>Value ref1</value>
    </title>
    <id>116</id>
    <valueType>
@@ -12356,16 +12387,16 @@
   <columns>
    <name>ValueRef2</name>
    <title>
-    <key>en</key>
-    <value>Value ref2</value>
+    <key>tr</key>
+    <value>Değer ref2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение Ссылка2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer ref2</value>
+    <key>en</key>
+    <value>Value ref2</value>
    </title>
    <id>117</id>
    <valueType>
@@ -12382,16 +12413,16 @@
   <columns>
    <name>ValueRef3</name>
    <title>
-    <key>en</key>
-    <value>Value ref3</value>
+    <key>tr</key>
+    <value>Değer ref3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение Ссылка3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer ref3</value>
+    <key>en</key>
+    <value>Value ref3</value>
    </title>
    <id>118</id>
    <valueType>
@@ -12408,16 +12439,16 @@
   <columns>
    <name>ValueDescription_ru1</name>
    <title>
-    <key>en</key>
-    <value>Value description ru1</value>
+    <key>tr</key>
+    <value>Değer tanımı ru1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 1 наименование ru</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru1</value>
+    <key>en</key>
+    <value>Value description ru1</value>
    </title>
    <id>119</id>
    <valueType>
@@ -12434,16 +12465,16 @@
   <columns>
    <name>ValueDescription_ru2</name>
    <title>
-    <key>en</key>
-    <value>Value description ru2</value>
+    <key>tr</key>
+    <value>Değer tanımı ru2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 2 наименование ru</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru2</value>
+    <key>en</key>
+    <value>Value description ru2</value>
    </title>
    <id>120</id>
    <valueType>
@@ -12460,16 +12491,16 @@
   <columns>
    <name>ValueDescription_ru3</name>
    <title>
-    <key>en</key>
-    <value>Value description ru3</value>
+    <key>tr</key>
+    <value>Değer tanımı ru3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 3 наименование ru</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı ru3</value>
+    <key>en</key>
+    <value>Value description ru3</value>
    </title>
    <id>121</id>
    <valueType>
@@ -12486,16 +12517,16 @@
   <columns>
    <name>ValueDescription_en1</name>
    <title>
-    <key>en</key>
-    <value>Value description en1</value>
+    <key>tr</key>
+    <value>Değer tanımı en1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 1 наименование en</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en1</value>
+    <key>en</key>
+    <value>Value description en1</value>
    </title>
    <id>122</id>
    <valueType>
@@ -12512,16 +12543,16 @@
   <columns>
    <name>ValueDescription_en2</name>
    <title>
-    <key>en</key>
-    <value>Value description en2</value>
+    <key>tr</key>
+    <value>Değer tanımı en2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 2 наименование en</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en2</value>
+    <key>en</key>
+    <value>Value description en2</value>
    </title>
    <id>123</id>
    <valueType>
@@ -12538,16 +12569,16 @@
   <columns>
    <name>ValueDescription_en3</name>
    <title>
-    <key>en</key>
-    <value>Value description en3</value>
+    <key>tr</key>
+    <value>Değer tanımı en3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 3 наименование en</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı en3</value>
+    <key>en</key>
+    <value>Value description en3</value>
    </title>
    <id>124</id>
    <valueType>
@@ -12564,16 +12595,16 @@
   <columns>
    <name>ValueDescription_tr1</name>
    <title>
-    <key>en</key>
-    <value>Value description tr1</value>
+    <key>tr</key>
+    <value>Değer tanımı tr1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 2 наименование tr</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr1</value>
+    <key>en</key>
+    <value>Value description tr1</value>
    </title>
    <id>125</id>
    <valueType>
@@ -12590,16 +12621,16 @@
   <columns>
    <name>ValueDescription_tr2</name>
    <title>
-    <key>en</key>
-    <value>Value description tr2</value>
+    <key>tr</key>
+    <value>Değer tanımı tr2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 2 наименование tr</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr2</value>
+    <key>en</key>
+    <value>Value description tr2</value>
    </title>
    <id>126</id>
    <valueType>
@@ -12616,16 +12647,16 @@
   <columns>
    <name>ValueDescription_tr3</name>
    <title>
-    <key>en</key>
-    <value>Value description tr3</value>
+    <key>tr</key>
+    <value>Değer tanımı tr3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значения 3 наименование tr</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer tanımı tr3</value>
+    <key>en</key>
+    <value>Value description tr3</value>
    </title>
    <id>127</id>
    <valueType>
@@ -12642,16 +12673,16 @@
   <columns>
    <name>Use</name>
    <title>
-    <key>en</key>
-    <value>Use</value>
+    <key>tr</key>
+    <value>Kullan</value>
    </title>
    <title>
     <key>ru</key>
     <value>Использование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kullan</value>
+    <key>en</key>
+    <value>Use</value>
    </title>
    <id>128</id>
    <valueType>
@@ -12667,16 +12698,16 @@
   <columns>
    <name>ExtDimensionRef1</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension ref1</value>
+    <key>tr</key>
+    <value>Dış boyut referans1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut referans1</value>
+    <key>en</key>
+    <value>Ext dimension ref1</value>
    </title>
    <id>129</id>
    <valueType>
@@ -12693,16 +12724,16 @@
   <columns>
    <name>ExtDimensionRef2</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension ref2</value>
+    <key>tr</key>
+    <value>Dış boyut referans2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut referans2</value>
+    <key>en</key>
+    <value>Ext dimension ref2</value>
    </title>
    <id>130</id>
    <valueType>
@@ -12719,16 +12750,16 @@
   <columns>
    <name>ExtDimensionRef3</name>
    <title>
-    <key>en</key>
-    <value>Ext dimension ref3</value>
+    <key>tr</key>
+    <value>Dış boyut ref3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dış boyut ref3</value>
+    <key>en</key>
+    <value>Ext dimension ref3</value>
    </title>
    <id>131</id>
    <valueType>
@@ -12745,16 +12776,16 @@
   <columns>
    <name>InternalSourceAccount</name>
    <title>
-    <key>en</key>
-    <value>Internal source account</value>
+    <key>tr</key>
+    <value>Dahili kaynak hesap       </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний счет источник</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili kaynak hesap       </value>
+    <key>en</key>
+    <value>Internal source account</value>
    </title>
    <id>133</id>
    <valueType>
@@ -12770,16 +12801,16 @@
   <columns>
    <name>InternalTargetAccount</name>
    <title>
-    <key>en</key>
-    <value>Internal target account</value>
+    <key>tr</key>
+    <value>Dahili hedef hesap        </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний счет получатель</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili hedef hesap        </value>
+    <key>en</key>
+    <value>Internal target account</value>
    </title>
    <id>134</id>
    <valueType>
@@ -12795,16 +12826,16 @@
   <columns>
    <name>InternalExtDimension1</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension1</value>
+    <key>tr</key>
+    <value>Dahili ek boyut1          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut1          </value>
+    <key>en</key>
+    <value>Internal ext dimension1</value>
    </title>
    <id>135</id>
    <valueType>
@@ -12820,16 +12851,16 @@
   <columns>
    <name>InternalExtDimension2</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension2</value>
+    <key>tr</key>
+    <value>Dahili ek boyut2          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut2          </value>
+    <key>en</key>
+    <value>Internal ext dimension2</value>
    </title>
    <id>136</id>
    <valueType>
@@ -12845,16 +12876,16 @@
   <columns>
    <name>InternalExtDimension3</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension3</value>
+    <key>tr</key>
+    <value>Dahili ek boyut3          </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut3          </value>
+    <key>en</key>
+    <value>Internal ext dimension3</value>
    </title>
    <id>137</id>
    <valueType>
@@ -12870,16 +12901,16 @@
   <columns>
    <name>InternalExtDimensionValue1</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension value1</value>
+    <key>tr</key>
+    <value>Dahili ek boyut değeri1   </value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение внутреннего субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri1   </value>
+    <key>en</key>
+    <value>Internal ext dimension value1</value>
    </title>
    <id>138</id>
    <valueType>
@@ -12895,16 +12926,16 @@
   <columns>
    <name>InternalExtDimensionValue2</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension value2</value>
+    <key>tr</key>
+    <value>Dahili ek boyut değeri2   </value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение внутреннего субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri2   </value>
+    <key>en</key>
+    <value>Internal ext dimension value2</value>
    </title>
    <id>139</id>
    <valueType>
@@ -12920,16 +12951,16 @@
   <columns>
    <name>InternalExtDimensionValue3</name>
    <title>
-    <key>en</key>
-    <value>Internal ext dimension value3</value>
+    <key>tr</key>
+    <value>Dahili ek boyut değeri3   </value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение внутреннего субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili ek boyut değeri3   </value>
+    <key>en</key>
+    <value>Internal ext dimension value3</value>
    </title>
    <id>140</id>
    <valueType>
@@ -12945,16 +12976,16 @@
   <columns>
    <name>InternalBaseClass1</name>
    <title>
-    <key>en</key>
-    <value>Internal base class1</value>
+    <key>tr</key>
+    <value>Dahili temel sınıf1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс внутренней базы 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf1</value>
+    <key>en</key>
+    <value>Internal base class1</value>
    </title>
    <id>143</id>
    <valueType>
@@ -12971,16 +13002,16 @@
   <columns>
    <name>InternalClass1</name>
    <title>
-    <key>en</key>
-    <value>Internal class1</value>
+    <key>tr</key>
+    <value>Dahili sınıf1       </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний класс 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf1       </value>
+    <key>en</key>
+    <value>Internal class1</value>
    </title>
    <id>144</id>
    <valueType>
@@ -12997,16 +13028,16 @@
   <columns>
    <name>InternalBaseClass2</name>
    <title>
-    <key>en</key>
-    <value>Internal base class2</value>
+    <key>tr</key>
+    <value>Dahili temel sınıf2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс внутренней базы 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf2</value>
+    <key>en</key>
+    <value>Internal base class2</value>
    </title>
    <id>145</id>
    <valueType>
@@ -13023,16 +13054,16 @@
   <columns>
    <name>InternalBaseClass3</name>
    <title>
-    <key>en</key>
-    <value>Internal base class3</value>
+    <key>tr</key>
+    <value>Dahili temel sınıf3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Класс внутренней базы 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili temel sınıf3</value>
+    <key>en</key>
+    <value>Internal base class3</value>
    </title>
    <id>146</id>
    <valueType>
@@ -13049,16 +13080,16 @@
   <columns>
    <name>InternalClass2</name>
    <title>
-    <key>en</key>
-    <value>Internal class2</value>
+    <key>tr</key>
+    <value>Dahili sınıf2       </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний класс 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf2       </value>
+    <key>en</key>
+    <value>Internal class2</value>
    </title>
    <id>147</id>
    <valueType>
@@ -13075,16 +13106,16 @@
   <columns>
    <name>InternalClass3</name>
    <title>
-    <key>en</key>
-    <value>Internal class3</value>
+    <key>tr</key>
+    <value>Dahili sınıf3       </value>
    </title>
    <title>
     <key>ru</key>
     <value>Внутренний класс 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dahili sınıf3       </value>
+    <key>en</key>
+    <value>Internal class3</value>
    </title>
    <id>148</id>
    <valueType>
@@ -13102,16 +13133,16 @@
  <attributes>
   <name>TargetChartOfAccount</name>
   <title>
-   <key>en</key>
-   <value>Target chart of account</value>
+   <key>tr</key>
+   <value>Hedef hesap planı</value>
   </title>
   <title>
    <key>ru</key>
    <value>План счетов получатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hedef hesap planı</value>
+   <key>en</key>
+   <value>Target chart of account</value>
   </title>
   <id>132</id>
   <valueType>
@@ -13128,16 +13159,16 @@
  <attributes>
   <name>SourceLedgerType</name>
   <title>
-   <key>en</key>
-   <value>Source ledger type</value>
+   <key>tr</key>
+   <value>Kaynak defter tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип учета источник</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaynak defter tipi</value>
+   <key>en</key>
+   <value>Source ledger type</value>
   </title>
   <id>141</id>
   <valueType>
@@ -13153,16 +13184,16 @@
  <attributes>
   <name>TargetLedgerType</name>
   <title>
-   <key>en</key>
-   <value>Target ledger type</value>
+   <key>tr</key>
+   <value>Hedef defter tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вид учета получатель</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hedef defter tipi</value>
+   <key>en</key>
+   <value>Target ledger type</value>
   </title>
   <id>142</id>
   <valueType>
@@ -13178,16 +13209,16 @@
  <formCommands>
   <name>FillExternalChartOfAccounts</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>2</id>
   <use>
@@ -13203,16 +13234,16 @@
  <formCommands>
   <name>SetMappingExternalChartsOfAccounts</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>3</id>
   <use>
@@ -13228,16 +13259,16 @@
  <formCommands>
   <name>FillExternalAccounts</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>4</id>
   <use>
@@ -13253,16 +13284,16 @@
  <formCommands>
   <name>SetMappingExternalAccounts</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>5</id>
   <use>
@@ -13278,16 +13309,16 @@
  <formCommands>
   <name>SelectAllExternalAccounts</name>
   <title>
-   <key>en</key>
-   <value>Select all external accounts</value>
+   <key>tr</key>
+   <value>Tüm dış hesapları seç  </value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все внешние счета учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm dış hesapları seç  </value>
+   <key>en</key>
+   <value>Select all external accounts</value>
   </title>
   <id>6</id>
   <use>
@@ -13307,16 +13338,16 @@
  <formCommands>
   <name>UnselectAllExternalAccounts</name>
   <title>
-   <key>en</key>
-   <value>Unselect all external accounts</value>
+   <key>tr</key>
+   <value>Tüm harici hesapları seçme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Снять выбор со всех внешних счетов учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm harici hesapları seçme</value>
+   <key>en</key>
+   <value>Unselect all external accounts</value>
   </title>
   <id>7</id>
   <use>
@@ -13336,16 +13367,16 @@
  <formCommands>
   <name>TestPostRequest</name>
   <title>
-   <key>en</key>
-   <value>Test post request</value>
+   <key>tr</key>
+   <value>Test post isteği</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест POST запроса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test post isteği</value>
+   <key>en</key>
+   <value>Test post request</value>
   </title>
   <id>8</id>
   <use>
@@ -13361,16 +13392,16 @@
  <formCommands>
   <name>FillExtarnalCompanies</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>9</id>
   <use>
@@ -13386,16 +13417,16 @@
  <formCommands>
   <name>FillExternalCurrencies</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>10</id>
   <use>
@@ -13411,16 +13442,16 @@
  <formCommands>
   <name>SetMappingExternalCompanies</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>11</id>
   <use>
@@ -13436,16 +13467,16 @@
  <formCommands>
   <name>SetMappingExternalCurrencies</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>12</id>
   <use>
@@ -13461,16 +13492,16 @@
  <formCommands>
   <name>TestLoadRecords</name>
   <title>
-   <key>en</key>
-   <value>Test load records</value>
+   <key>tr</key>
+   <value>Test kayıtları yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест загрузки записей</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test kayıtları yükle</value>
+   <key>en</key>
+   <value>Test load records</value>
   </title>
   <id>13</id>
   <use>
@@ -13486,16 +13517,16 @@
  <formCommands>
   <name>FillExternalRegisters</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>14</id>
   <use>
@@ -13511,16 +13542,16 @@
  <formCommands>
   <name>SetMappingExternalRegisters</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>15</id>
   <use>
@@ -13536,16 +13567,16 @@
  <formCommands>
   <name>FillExternalExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>16</id>
   <use>
@@ -13561,16 +13592,16 @@
  <formCommands>
   <name>SetMappingExternalExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>17</id>
   <use>
@@ -13586,16 +13617,16 @@
  <formCommands>
   <name>SelectAllExternalExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>Select all external ext dimensions</value>
+   <key>tr</key>
+   <value>Tüm dış ek boyutları seç  </value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все внешние субконто</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm dış ek boyutları seç  </value>
+   <key>en</key>
+   <value>Select all external ext dimensions</value>
   </title>
   <id>18</id>
   <use>
@@ -13614,16 +13645,16 @@
  <formCommands>
   <name>UnselectAllExternalExtDimensions</name>
   <title>
-   <key>en</key>
-   <value>Unselect all external ext dimensions</value>
+   <key>tr</key>
+   <value>Tüm harici boyutları seçme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Снять выбор со всех внешних субконто</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm harici boyutları seçme</value>
+   <key>en</key>
+   <value>Unselect all external ext dimensions</value>
   </title>
   <id>20</id>
   <use>
@@ -13642,16 +13673,16 @@
  <formCommands>
   <name>TestLoadOpeningEntry</name>
   <title>
-   <key>en</key>
-   <value>Test load opening entry</value>
+   <key>tr</key>
+   <value>Test açılış kaydını yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест загрузки ввода начальных остатков</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test açılış kaydını yükle</value>
+   <key>en</key>
+   <value>Test load opening entry</value>
   </title>
   <id>21</id>
   <use>
@@ -13667,16 +13698,16 @@
  <formCommands>
   <name>TestPostRequest2</name>
   <title>
-   <key>en</key>
-   <value>Test post request2</value>
+   <key>tr</key>
+   <value>Test post isteği2</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест POST запроса 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Test post isteği2</value>
+   <key>en</key>
+   <value>Test post request2</value>
   </title>
   <id>22</id>
   <use>
@@ -13692,16 +13723,16 @@
  <formCommands>
   <name>FillAccountMatching</name>
   <title>
-   <key>en</key>
-   <value>Fill</value>
+   <key>tr</key>
+   <value>Doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Doldur</value>
+   <key>en</key>
+   <value>Fill</value>
   </title>
   <id>23</id>
   <use>
@@ -13717,16 +13748,16 @@
  <formCommands>
   <name>SetMappingAccountMatching</name>
   <title>
-   <key>en</key>
-   <value>Set mapping</value>
+   <key>tr</key>
+   <value>Eşlemeyi ayarla       </value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить соответствие</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Eşlemeyi ayarla       </value>
+   <key>en</key>
+   <value>Set mapping</value>
   </title>
   <id>24</id>
   <use>
@@ -13742,16 +13773,16 @@
  <formCommands>
   <name>SelectAllAccountMatching</name>
   <title>
-   <key>en</key>
-   <value>Select all external accounts</value>
+   <key>tr</key>
+   <value>Tüm dış hesapları seç  </value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать все внешние счета учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm dış hesapları seç  </value>
+   <key>en</key>
+   <value>Select all external accounts</value>
   </title>
   <id>25</id>
   <use>
@@ -13771,16 +13802,16 @@
  <formCommands>
   <name>UnselectAllAccountMatching</name>
   <title>
-   <key>en</key>
-   <value>Unselect all external accounts</value>
+   <key>tr</key>
+   <value>Tüm harici hesapları seçme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Снять выбор со всех внешних счетов учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tüm harici hesapları seçme</value>
+   <key>en</key>
+   <value>Unselect all external accounts</value>
   </title>
   <id>26</id>
   <use>
@@ -13795,6 +13826,43 @@
    </handler>
   </action>
   <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
+ <formCommands>
+  <name>LoadEAOWithReport</name>
+  <title>
+   <key>tr</key>
+   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Load all EAO with report</value>
+  </title>
+  <id>1</id>
+  <toolTip>
+   <key>tr</key>
+   <value>Tüm dış muhasebe evraklarını rapor ile beraber aktar</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Загрузить все внешние бухгалтерсие операции с отчетом</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Load all EAO with report</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>LoadEAOWithReport</name>
+   </handler>
+  </action>
   <currentRowUse>Auto</currentRowUse>
  </formCommands>
  <commandInterface>

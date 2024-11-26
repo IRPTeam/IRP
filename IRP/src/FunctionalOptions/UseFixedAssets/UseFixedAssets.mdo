@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="bba64df0-feb9-459e-8164-8babbbce55e8">
  <name>UseFixedAssets</name>
  <synonym>
-  <key>en</key>
-  <value>Use fixed assets</value>
+  <key>tr</key>
+  <value>Sabit kıymetleri kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать Основеые средства</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Sabit kıymetleri kullan</value>
+  <key>en</key>
+  <value>Use fixed assets</value>
  </synonym>
  <location>Constant.UseFixedAssets</location>
  <privilegedGetMode>true</privilegedGetMode>
@@ -26,4 +26,6 @@
  <content>Catalog.DepreciationSchedules</content>
  <content>Document.ModernizationOfFixedAsset</content>
  <content>Document.CalculationMovementCosts</content>
+ <content>Report.F0010_FixedAssetsTransferCost</content>
+ <content>Report.F0011_InventoryBook</content>
 </mdclass:FunctionalOption>

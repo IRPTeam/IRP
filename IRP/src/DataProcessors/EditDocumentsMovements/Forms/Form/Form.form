@@ -13,16 +13,16 @@
      <name>FormWriteMovements</name>
      <id>33</id>
      <title>
-      <key>en</key>
-      <value>Write movements</value>
+      <key>tr</key>
+      <value>Hareketleri yaz</value>
      </title>
      <title>
       <key>ru</key>
       <value>Запись движений</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Hareketleri yaz</value>
+      <key>en</key>
+      <value>Write movements</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -56,16 +56,16 @@
      <name>FormWriteMovementsWithRegisterSelfControl</name>
      <id>56</id>
      <title>
-      <key>en</key>
-      <value>Write movements (register self-control)</value>
+      <key>tr</key>
+      <value>Hareketleri sakla (kayıt tablosu kendi kontrolü)</value>
      </title>
      <title>
       <key>ru</key>
       <value>Запись движений (самоконтроль регистра)</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Hareketleri sakla (kayıt tablosu kendi kontrolü)</value>
+      <key>en</key>
+      <value>Write movements (register self-control)</value>
      </title>
      <visible>true</visible>
      <enabled>true</enabled>
@@ -100,28 +100,28 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Write movements</value>
+     <key>tr</key>
+     <value>Hareketleri yaz</value>
     </title>
     <title>
      <key>ru</key>
      <value>Запись движений</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Hareketleri yaz</value>
+     <key>en</key>
+     <value>Write movements</value>
     </title>
     <toolTip>
-     <key>en</key>
-     <value>Group write movemements menu</value>
+     <key>tr</key>
+     <value>Grup hareketleri yazma menüsü</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Меню групповой записи движений</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
-     <value>Grup hareketleri yazma menüsü</value>
+     <key>en</key>
+     <value>Group write movemements menu</value>
     </toolTip>
     <toolTipRepresentation>ShowLeft</toolTipRepresentation>
     <extendedTooltip>
@@ -150,28 +150,28 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Write movements</value>
+    <key>tr</key>
+    <value>Hareketleri yaz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Запись движений</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Hareketleri yaz</value>
+    <key>en</key>
+    <value>Write movements</value>
    </title>
    <toolTip>
-    <key>en</key>
-    <value>Group write movements control panel</value>
+    <key>tr</key>
+    <value>Grup hareketleri yazma araç çubuğu</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Панель управления групповой записью движений</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Grup hareketleri yazma araç çubuğu</value>
+    <key>en</key>
+    <value>Group write movements control panel</value>
    </toolTip>
    <extendedTooltip>
     <name>GroupWriteMovementsControlPanelExtendedTooltip</name>
@@ -197,16 +197,16 @@
    <name>ManualMovementsEdit</name>
    <id>30</id>
    <title>
-    <key>en</key>
-    <value>Manual edit</value>
+    <key>tr</key>
+    <value>El ile değiştir</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ручное редактирование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>El ile değiştir</value>
+    <key>en</key>
+    <value>Manual edit</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -375,16 +375,16 @@
    <name>DoNotControlWriteRules</name>
    <id>41</id>
    <title>
-    <key>en</key>
-    <value>No control write rules</value>
+    <key>tr</key>
+    <value>Yazma kurallar devre dışı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Нет правил контроля записи</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Yazma kurallar devre dışı</value>
+    <key>en</key>
+    <value>No control write rules</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -499,7 +499,7 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>Test2</value>
    </title>
    <title>
@@ -507,11 +507,11 @@
     <value>Тест2</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>Test2</value>
    </title>
    <toolTip>
-    <key>en</key>
+    <key>tr</key>
     <value>Test2</value>
    </toolTip>
    <toolTip>
@@ -519,7 +519,7 @@
     <value>Тест2</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
+    <key>en</key>
     <value>Test2</value>
    </toolTip>
    <extendedTooltip>
@@ -581,16 +581,16 @@
  <attributes>
   <name>ManualMovementsEdit</name>
   <title>
-   <key>en</key>
-   <value>Manual movements edit</value>
+   <key>tr</key>
+   <value>Manuel harketleri değişitirme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ручное редактирование движений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Manuel harketleri değişitirme</value>
+   <key>en</key>
+   <value>Manual movements edit</value>
   </title>
   <id>2</id>
   <valueType>
@@ -606,16 +606,16 @@
  <attributes>
   <name>DoNotControlWriteRules</name>
   <title>
-   <key>en</key>
-   <value>Do not control write rules</value>
+   <key>tr</key>
+   <value>Yazma kurallarını kontrol etme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Не контролировать правила записи</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazma kurallarını kontrol etme</value>
+   <key>en</key>
+   <value>Do not control write rules</value>
   </title>
   <id>3</id>
   <valueType>
@@ -631,29 +631,29 @@
  <formCommands>
   <name>WriteMovements</name>
   <title>
-   <key>en</key>
-   <value>Write movements</value>
+   <key>tr</key>
+   <value>Hareketleri yaz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Запись движений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hareketleri yaz</value>
+   <key>en</key>
+   <value>Write movements</value>
   </title>
   <id>1</id>
   <toolTip>
-   <key>en</key>
-   <value>Write movements</value>
+   <key>tr</key>
+   <value>Hareketleri yaz</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Запись движений</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Hareketleri yaz</value>
+   <key>en</key>
+   <value>Write movements</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -668,16 +668,16 @@
  <formCommands>
   <name>RereadPostingData</name>
   <title>
-   <key>en</key>
-   <value>Reread posting data</value>
+   <key>tr</key>
+   <value>Kaydetme verisini tekrar oku</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перечитать данные проведения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kaydetme verisini tekrar oku</value>
+   <key>en</key>
+   <value>Reread posting data</value>
   </title>
   <id>2</id>
   <use>
@@ -693,29 +693,29 @@
  <formCommands>
   <name>MovementAnalysis</name>
   <title>
-   <key>en</key>
-   <value>Movement analysis</value>
+   <key>tr</key>
+   <value>Hareket analizi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Анализ движений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hareket analizi</value>
+   <key>en</key>
+   <value>Movement analysis</value>
   </title>
   <id>3</id>
   <toolTip>
-   <key>en</key>
-   <value>Movement analysis</value>
+   <key>tr</key>
+   <value>Hareket analizi</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Анализ движений</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Hareket analizi</value>
+   <key>en</key>
+   <value>Movement analysis</value>
   </toolTip>
   <use>
    <common>true</common>
@@ -730,29 +730,29 @@
  <formCommands>
   <name>WriteMovementsWithRegisterSelfControl</name>
   <title>
-   <key>en</key>
-   <value>Write movements with register self control</value>
+   <key>tr</key>
+   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
   </title>
   <title>
    <key>ru</key>
    <value>Запись движений с самоконтролем регистра</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
+   <key>en</key>
+   <value>Write movements with register self control</value>
   </title>
   <id>4</id>
   <toolTip>
-   <key>en</key>
-   <value>Write movements with register self control</value>
+   <key>tr</key>
+   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Запись движений с самоконтролем регистра</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Kayıt tablo kendi kontrolü ile hareketleri yaz</value>
+   <key>en</key>
+   <value>Write movements with register self control</value>
   </toolTip>
   <use>
    <common>true</common>

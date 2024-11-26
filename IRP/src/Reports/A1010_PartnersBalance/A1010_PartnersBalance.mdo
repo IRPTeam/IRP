@@ -6,32 +6,32 @@
  </producedTypes>
  <name>A1010_PartnersBalance</name>
  <synonym>
-  <key>en</key>
-  <value>A1010 Partners balance</value>
+  <key>tr</key>
+  <value>A1010 Ortaklar bakiyesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>A1010 Баланс партнеров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>A1010 Ortaklar bakiyesi</value>
+  <key>en</key>
+  <value>A1010 Partners balance</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.A1010_PartnersBalance.Template.MainDataCompositionSchema</mainDataCompositionSchema>
  <templates uuid="4f53aeaf-ab62-456d-a135-929c966c6678">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

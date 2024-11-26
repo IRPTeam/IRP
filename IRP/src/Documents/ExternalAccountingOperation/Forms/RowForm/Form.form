@@ -104,16 +104,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group Period/Activity</value>
+   <key>tr</key>
+   <value>Grup Dönem/Aktivite </value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Период/Активность</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Dönem/Aktivite </value>
+   <key>en</key>
+   <value>Group Period/Activity</value>
   </title>
   <extendedTooltip>
    <name>GroupPeriodActivityExtendedTooltip</name>
@@ -534,16 +534,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group UUID</value>
+      <key>tr</key>
+      <value>Grup UUID </value>
      </title>
      <title>
       <key>ru</key>
       <value>UUID раздела</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup UUID </value>
+      <key>en</key>
+      <value>Group UUID</value>
      </title>
      <extendedTooltip>
       <name>GroupAccountDrRefExtendedTooltip</name>
@@ -759,16 +759,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group UUID</value>
+      <key>tr</key>
+      <value>Grup UUID </value>
      </title>
      <title>
       <key>ru</key>
       <value>UUID раздела</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup UUID </value>
+      <key>en</key>
+      <value>Group UUID</value>
      </title>
      <extendedTooltip>
       <name>GroupCurrencyDrRefExtendedTooltip</name>
@@ -954,16 +954,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Debit</value>
+     <key>tr</key>
+     <value>Borç</value>
     </title>
     <title>
      <key>ru</key>
      <value>Дебет</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Borç</value>
+     <key>en</key>
+     <value>Debit</value>
     </title>
     <extendedTooltip>
      <name>DebitPageExtendedTooltip</name>
@@ -1085,16 +1085,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr1ExtendedTooltip</name>
@@ -1280,16 +1280,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr1ExtendedTooltip</name>
@@ -1531,16 +1531,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr1ExtendedTooltip</name>
@@ -1575,16 +1575,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 1</value>
+       <key>tr</key>
+       <value>Ek. boyut 1 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 1</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 1 </value>
+       <key>en</key>
+       <value>Ext. dimension 1</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr1PageExtendedTooltip</name>
@@ -1700,16 +1700,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr2ExtendedTooltip</name>
@@ -1895,16 +1895,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr2ExtendedTooltip</name>
@@ -2146,16 +2146,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr2ExtendedTooltip</name>
@@ -2190,16 +2190,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 2</value>
+       <key>tr</key>
+       <value>Ek. boyut 2 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 2</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 2 </value>
+       <key>en</key>
+       <value>Ext. dimension 2</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr2PageExtendedTooltip</name>
@@ -2315,16 +2315,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefDr3ExtendedTooltip</name>
@@ -2510,16 +2510,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataDr3ExtendedTooltip</name>
@@ -2761,16 +2761,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataDr3ExtendedTooltip</name>
@@ -2805,16 +2805,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 3</value>
+       <key>tr</key>
+       <value>Ek. boyut 3 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 3</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 3 </value>
+       <key>en</key>
+       <value>Ext. dimension 3</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionDr3PageExtendedTooltip</name>
@@ -2843,16 +2843,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Debit analytic pages</value>
+      <key>tr</key>
+      <value>Borç analitik sayfaları </value>
      </title>
      <title>
       <key>ru</key>
       <value>Страницы аналитики по дебету</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Borç analitik sayfaları </value>
+      <key>en</key>
+      <value>Debit analytic pages</value>
      </title>
      <extendedTooltip>
       <name>DebitAnalyticPagesExtendedTooltip</name>
@@ -2881,16 +2881,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Analytic</value>
+     <key>tr</key>
+     <value>Analitik </value>
     </title>
     <title>
      <key>ru</key>
      <value>Аналитика</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Analitik </value>
+     <key>en</key>
+     <value>Analytic</value>
     </title>
     <extendedTooltip>
      <name>DebitAnalyticPageExtendedTooltip</name>
@@ -2919,16 +2919,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Debit pages</value>
+    <key>tr</key>
+    <value>Borç sayfaları </value>
    </title>
    <title>
     <key>ru</key>
     <value>Страницы по дебету</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Borç sayfaları </value>
+    <key>en</key>
+    <value>Debit pages</value>
    </title>
    <extendedTooltip>
     <name>GroupDebitPagesExtendedTooltip</name>
@@ -3044,16 +3044,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group UUID</value>
+      <key>tr</key>
+      <value>Grup UUID </value>
      </title>
      <title>
       <key>ru</key>
       <value>UUID раздела</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup UUID </value>
+      <key>en</key>
+      <value>Group UUID</value>
      </title>
      <extendedTooltip>
       <name>GroupAccountCrRefExtendedTooltip</name>
@@ -3269,16 +3269,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group UUID</value>
+      <key>tr</key>
+      <value>Grup UUID </value>
      </title>
      <title>
       <key>ru</key>
       <value>UUID раздела</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup UUID </value>
+      <key>en</key>
+      <value>Group UUID</value>
      </title>
      <extendedTooltip>
       <name>GroupCurrencyCrRefExtendedTooltip</name>
@@ -3464,16 +3464,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Credit</value>
+     <key>tr</key>
+     <value>Alacak</value>
     </title>
     <title>
      <key>ru</key>
      <value>Кредит</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Alacak</value>
+     <key>en</key>
+     <value>Credit</value>
     </title>
     <extendedTooltip>
      <name>CreditPageExtendedTooltip</name>
@@ -3595,16 +3595,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr1ExtendedTooltip</name>
@@ -3790,16 +3790,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr1ExtendedTooltip</name>
@@ -4041,16 +4041,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr1ExtendedTooltip</name>
@@ -4085,16 +4085,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 1</value>
+       <key>tr</key>
+       <value>Ek. boyut 1 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 1</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 1 </value>
+       <key>en</key>
+       <value>Ext. dimension 1</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr1PageExtendedTooltip</name>
@@ -4210,16 +4210,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr2ExtendedTooltip</name>
@@ -4405,16 +4405,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr2ExtendedTooltip</name>
@@ -4656,16 +4656,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr2ExtendedTooltip</name>
@@ -4700,16 +4700,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 2</value>
+       <key>tr</key>
+       <value>Ek. boyut 2 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 2</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 2 </value>
+       <key>en</key>
+       <value>Ext. dimension 2</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr2PageExtendedTooltip</name>
@@ -4825,16 +4825,16 @@
          <common>true</common>
         </userVisible>
         <title>
-         <key>en</key>
-         <value>Group UUID</value>
+         <key>tr</key>
+         <value>Grup UUID </value>
         </title>
         <title>
          <key>ru</key>
          <value>UUID раздела</value>
         </title>
         <title>
-         <key>tr</key>
-         <value>Grup UUID </value>
+         <key>en</key>
+         <value>Group UUID</value>
         </title>
         <extendedTooltip>
          <name>GroupExtDimensionRefCr3ExtendedTooltip</name>
@@ -5020,16 +5020,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>External data</value>
+        <key>tr</key>
+        <value>Dış veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внешние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dış veri </value>
+        <key>en</key>
+        <value>External data</value>
        </title>
        <extendedTooltip>
         <name>GroupExternalDataCr3ExtendedTooltip</name>
@@ -5271,16 +5271,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Internal data</value>
+        <key>tr</key>
+        <value>Dahili veri </value>
        </title>
        <title>
         <key>ru</key>
         <value>Внутренние данные</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Dahili veri </value>
+        <key>en</key>
+        <value>Internal data</value>
        </title>
        <extendedTooltip>
         <name>GroupInernalDataCr3ExtendedTooltip</name>
@@ -5315,16 +5315,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>Ext. dimension 3</value>
+       <key>tr</key>
+       <value>Ek. boyut 3 </value>
       </title>
       <title>
        <key>ru</key>
        <value>Субконто 3</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Ek. boyut 3 </value>
+       <key>en</key>
+       <value>Ext. dimension 3</value>
       </title>
       <extendedTooltip>
        <name>ExtDimensionCr3PageExtendedTooltip</name>
@@ -5353,16 +5353,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Credit analytic pages</value>
+      <key>tr</key>
+      <value>Alacak analitik sayfaları </value>
      </title>
      <title>
       <key>ru</key>
       <value>Страницы аналитики по кредиту</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Alacak analitik sayfaları </value>
+      <key>en</key>
+      <value>Credit analytic pages</value>
      </title>
      <extendedTooltip>
       <name>CreditAnalyticPagesExtendedTooltip</name>
@@ -5391,16 +5391,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Analytic</value>
+     <key>tr</key>
+     <value>Analitik </value>
     </title>
     <title>
      <key>ru</key>
      <value>Аналитика</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Analitik </value>
+     <key>en</key>
+     <value>Analytic</value>
     </title>
     <extendedTooltip>
      <name>CreditAnalyticPageExtendedTooltip</name>
@@ -5429,16 +5429,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Credit pages</value>
+    <key>tr</key>
+    <value>Alacak sayfaları </value>
    </title>
    <title>
     <key>ru</key>
     <value>Страницы по кредиту</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alacak sayfaları </value>
+    <key>en</key>
+    <value>Credit pages</value>
    </title>
    <extendedTooltip>
     <name>GroupCreditPagesExtendedTooltip</name>
@@ -5467,16 +5467,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group Debit\Credit</value>
+   <key>tr</key>
+   <value>Grup Borç\Alacak </value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Дебет/Кредит</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup Borç\Alacak </value>
+   <key>en</key>
+   <value>Group Debit\Credit</value>
   </title>
   <extendedTooltip>
    <name>GroupDebitCreditExtendedTooltip</name>
@@ -5527,16 +5527,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>1</id>
   <valueType>
@@ -5553,16 +5553,16 @@
  <attributes>
   <name>Activity</name>
   <title>
-   <key>en</key>
-   <value>Activity</value>
+   <key>tr</key>
+   <value>Aktivite </value>
   </title>
   <title>
    <key>ru</key>
    <value>Активность</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Aktivite </value>
+   <key>en</key>
+   <value>Activity</value>
   </title>
   <id>2</id>
   <valueType>
@@ -5578,16 +5578,16 @@
  <attributes>
   <name>CompanyRef</name>
   <title>
-   <key>en</key>
-   <value>Company Ref</value>
+   <key>tr</key>
+   <value>Şirket Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket Ref </value>
+   <key>en</key>
+   <value>Company Ref</value>
   </title>
   <id>3</id>
   <valueType>
@@ -5603,16 +5603,16 @@
  <attributes>
   <name>CompanyPresentation</name>
   <title>
-   <key>en</key>
-   <value>Company presentation</value>
+   <key>tr</key>
+   <value>Şirket sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Организация представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Şirket sunumu </value>
+   <key>en</key>
+   <value>Company presentation</value>
   </title>
   <id>4</id>
   <valueType>
@@ -5629,16 +5629,16 @@
  <attributes>
   <name>CurrencyRef</name>
   <title>
-   <key>en</key>
-   <value>Currency Ref</value>
+   <key>tr</key>
+   <value>Para birimi Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Ref </value>
+   <key>en</key>
+   <value>Currency Ref</value>
   </title>
   <id>5</id>
   <valueType>
@@ -5654,16 +5654,16 @@
  <attributes>
   <name>CurrencyPresentation</name>
   <title>
-   <key>en</key>
-   <value>Currency presentation</value>
+   <key>tr</key>
+   <value>Para birimi sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валта представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi sunumu </value>
+   <key>en</key>
+   <value>Currency presentation</value>
   </title>
   <id>6</id>
   <valueType>
@@ -5680,16 +5680,16 @@
  <attributes>
   <name>AccountDrRef</name>
   <title>
-   <key>en</key>
-   <value>Account Dr Ref</value>
+   <key>tr</key>
+   <value>Hesap Borç Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Счет Дт Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap Borç Ref </value>
+   <key>en</key>
+   <value>Account Dr Ref</value>
   </title>
   <id>7</id>
   <valueType>
@@ -5705,16 +5705,16 @@
  <attributes>
   <name>AccountDrPresentation</name>
   <title>
-   <key>en</key>
-   <value>Account Dr presentation</value>
+   <key>tr</key>
+   <value>Hesap Borç sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Счет Дт представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap Borç sunumu </value>
+   <key>en</key>
+   <value>Account Dr presentation</value>
   </title>
   <id>8</id>
   <valueType>
@@ -5731,16 +5731,16 @@
  <attributes>
   <name>CurrencyDrRef</name>
   <title>
-   <key>en</key>
-   <value>Currency Dr Ref</value>
+   <key>tr</key>
+   <value>Para birimi Borç Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта Дт Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Borç Ref </value>
+   <key>en</key>
+   <value>Currency Dr Ref</value>
   </title>
   <id>9</id>
   <valueType>
@@ -5756,16 +5756,16 @@
  <attributes>
   <name>CurrencyDrPresentation</name>
   <title>
-   <key>en</key>
-   <value>Currency Dr presentation</value>
+   <key>tr</key>
+   <value>Para birimi Borç sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта Дт представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Borç sunumu </value>
+   <key>en</key>
+   <value>Currency Dr presentation</value>
   </title>
   <id>10</id>
   <valueType>
@@ -5782,16 +5782,16 @@
  <attributes>
   <name>AccountCrRef</name>
   <title>
-   <key>en</key>
-   <value>Account Cr Ref</value>
+   <key>tr</key>
+   <value>Hesap Alacak Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Счет Кт Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap Alacak Ref </value>
+   <key>en</key>
+   <value>Account Cr Ref</value>
   </title>
   <id>11</id>
   <valueType>
@@ -5807,16 +5807,16 @@
  <attributes>
   <name>AccountCrPresentation</name>
   <title>
-   <key>en</key>
-   <value>Account Cr presentation</value>
+   <key>tr</key>
+   <value>Hesap Alacak sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Счет Кт представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap Alacak sunumu </value>
+   <key>en</key>
+   <value>Account Cr presentation</value>
   </title>
   <id>12</id>
   <valueType>
@@ -5833,16 +5833,16 @@
  <attributes>
   <name>CurrencyCrRef</name>
   <title>
-   <key>en</key>
-   <value>Currency Cr Ref</value>
+   <key>tr</key>
+   <value>Para birimi Alacak Ref </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта Кт Ссылка</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Alacak Ref </value>
+   <key>en</key>
+   <value>Currency Cr Ref</value>
   </title>
   <id>13</id>
   <valueType>
@@ -5858,16 +5858,16 @@
  <attributes>
   <name>CurrencyCrPresentation</name>
   <title>
-   <key>en</key>
-   <value>Currency Cr presentation</value>
+   <key>tr</key>
+   <value>Para birimi Alacak sunumu </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валюта Кт представление</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Alacak sunumu </value>
+   <key>en</key>
+   <value>Currency Cr presentation</value>
   </title>
   <id>14</id>
   <valueType>
@@ -5884,16 +5884,16 @@
  <attributes>
   <name>AmountCurrencyDr</name>
   <title>
-   <key>en</key>
-   <value>Amount currency Dr</value>
+   <key>tr</key>
+   <value>Para birimi Borç Tutarı </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валютная сумма Дт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Borç Tutarı </value>
+   <key>en</key>
+   <value>Amount currency Dr</value>
   </title>
   <id>15</id>
   <valueType>
@@ -5909,16 +5909,16 @@
  <attributes>
   <name>AmountCurrencyCr</name>
   <title>
-   <key>en</key>
-   <value>Amount currency Cr</value>
+   <key>tr</key>
+   <value>Para birimi Alacak Tutarı </value>
   </title>
   <title>
    <key>ru</key>
    <value>Валютная сумма Кт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Para birimi Alacak Tutarı </value>
+   <key>en</key>
+   <value>Amount currency Cr</value>
   </title>
   <id>16</id>
   <valueType>
@@ -5934,16 +5934,16 @@
  <attributes>
   <name>QuantityDr</name>
   <title>
-   <key>en</key>
-   <value>Quantity Dr</value>
+   <key>tr</key>
+   <value>Miktar Borç </value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество Дт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar Borç </value>
+   <key>en</key>
+   <value>Quantity Dr</value>
   </title>
   <id>17</id>
   <valueType>
@@ -5959,16 +5959,16 @@
  <attributes>
   <name>QuantityCr</name>
   <title>
-   <key>en</key>
-   <value>Quantity Cr</value>
+   <key>tr</key>
+   <value>Miktar Alacak </value>
   </title>
   <title>
    <key>ru</key>
    <value>Количество Кт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar Alacak </value>
+   <key>en</key>
+   <value>Quantity Cr</value>
   </title>
   <id>18</id>
   <valueType>
@@ -5985,16 +5985,16 @@
  <attributes>
   <name>OperationTitle</name>
   <title>
-   <key>en</key>
-   <value>Operation title</value>
+   <key>tr</key>
+   <value>Operasyon başlığı </value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование операции</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Operasyon başlığı </value>
+   <key>en</key>
+   <value>Operation title</value>
   </title>
   <id>19</id>
   <valueType>
@@ -6011,16 +6011,16 @@
  <attributes>
   <name>Amount</name>
   <title>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сумма</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </title>
   <id>20</id>
   <valueType>
@@ -6036,16 +6036,16 @@
  <attributes>
   <name>ChartNameDr</name>
   <title>
-   <key>en</key>
-   <value>Chart name Dr</value>
+   <key>tr</key>
+   <value>Grafik adı Borç </value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование плана счетов Дт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grafik adı Borç </value>
+   <key>en</key>
+   <value>Chart name Dr</value>
   </title>
   <id>21</id>
   <valueType>
@@ -6062,16 +6062,16 @@
  <attributes>
   <name>ChartNameCr</name>
   <title>
-   <key>en</key>
-   <value>Chart name Cr</value>
+   <key>tr</key>
+   <value>Grafik adı Alacak </value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование плана счетов Кт</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grafik adı Alacak </value>
+   <key>en</key>
+   <value>Chart name Cr</value>
   </title>
   <id>22</id>
   <valueType>
@@ -6088,16 +6088,16 @@
  <attributes>
   <name>ExtDimensionRefDr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Dr1</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Borç1 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Dr1</value>
   </title>
   <id>23</id>
   <valueType>
@@ -6113,16 +6113,16 @@
  <attributes>
   <name>ExtDimensionRefDr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Dr2</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Borç2 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Dr2</value>
   </title>
   <id>24</id>
   <valueType>
@@ -6138,16 +6138,16 @@
  <attributes>
   <name>ExtDimensionRefDr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Dr3</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Borç3 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Dr3</value>
   </title>
   <id>25</id>
   <valueType>
@@ -6163,16 +6163,16 @@
  <attributes>
   <name>ExtDimensionRefCr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Cr1</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Alacak1 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Cr1</value>
   </title>
   <id>26</id>
   <valueType>
@@ -6188,16 +6188,16 @@
  <attributes>
   <name>ExtDimensionRefCr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Cr2</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Alacak2 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Cr2</value>
   </title>
   <id>27</id>
   <valueType>
@@ -6213,16 +6213,16 @@
  <attributes>
   <name>ExtDimensionRefCr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension Ref Cr3</value>
+   <key>tr</key>
+   <value>Ek boyut Ref Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Ссылка субконто Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut Ref Alacak3 </value>
+   <key>en</key>
+   <value>Ext dimension Ref Cr3</value>
   </title>
   <id>28</id>
   <valueType>
@@ -6238,16 +6238,16 @@
  <attributes>
   <name>BaseClassDr1</name>
   <title>
-   <key>en</key>
-   <value>Base class Dr1</value>
+   <key>tr</key>
+   <value>Temel sınıf Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Borç1 </value>
+   <key>en</key>
+   <value>Base class Dr1</value>
   </title>
   <id>29</id>
   <valueType>
@@ -6264,16 +6264,16 @@
  <attributes>
   <name>BaseClassDr2</name>
   <title>
-   <key>en</key>
-   <value>Base class Dr2</value>
+   <key>tr</key>
+   <value>Temel sınıf Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Borç2 </value>
+   <key>en</key>
+   <value>Base class Dr2</value>
   </title>
   <id>30</id>
   <valueType>
@@ -6290,16 +6290,16 @@
  <attributes>
   <name>BaseClassDr3</name>
   <title>
-   <key>en</key>
-   <value>Base class Dr3</value>
+   <key>tr</key>
+   <value>Temel sınıf Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Borç3 </value>
+   <key>en</key>
+   <value>Base class Dr3</value>
   </title>
   <id>31</id>
   <valueType>
@@ -6316,16 +6316,16 @@
  <attributes>
   <name>BaseClassCr1</name>
   <title>
-   <key>en</key>
-   <value>Base class Cr1</value>
+   <key>tr</key>
+   <value>Temel sınıf Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Alacak1 </value>
+   <key>en</key>
+   <value>Base class Cr1</value>
   </title>
   <id>32</id>
   <valueType>
@@ -6342,16 +6342,16 @@
  <attributes>
   <name>BaseClassCr2</name>
   <title>
-   <key>en</key>
-   <value>Base class Cr2</value>
+   <key>tr</key>
+   <value>Temel sınıf Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Alacak2 </value>
+   <key>en</key>
+   <value>Base class Cr2</value>
   </title>
   <id>33</id>
   <valueType>
@@ -6368,16 +6368,16 @@
  <attributes>
   <name>BaseClassCr3</name>
   <title>
-   <key>en</key>
-   <value>Base class Cr3</value>
+   <key>tr</key>
+   <value>Temel sınıf Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс основания Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel sınıf Alacak3 </value>
+   <key>en</key>
+   <value>Base class Cr3</value>
   </title>
   <id>34</id>
   <valueType>
@@ -6394,16 +6394,16 @@
  <attributes>
   <name>ClassDr1</name>
   <title>
-   <key>en</key>
-   <value>Class Dr1</value>
+   <key>tr</key>
+   <value>Sınıf Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Borç1 </value>
+   <key>en</key>
+   <value>Class Dr1</value>
   </title>
   <id>35</id>
   <valueType>
@@ -6420,16 +6420,16 @@
  <attributes>
   <name>ClassDr2</name>
   <title>
-   <key>en</key>
-   <value>Class Dr2</value>
+   <key>tr</key>
+   <value>Sınıf Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Borç2 </value>
+   <key>en</key>
+   <value>Class Dr2</value>
   </title>
   <id>36</id>
   <valueType>
@@ -6446,16 +6446,16 @@
  <attributes>
   <name>ClassDr3</name>
   <title>
-   <key>en</key>
-   <value>Class Dr3</value>
+   <key>tr</key>
+   <value>Sınıf Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Borç3 </value>
+   <key>en</key>
+   <value>Class Dr3</value>
   </title>
   <id>37</id>
   <valueType>
@@ -6472,16 +6472,16 @@
  <attributes>
   <name>ClassCr1</name>
   <title>
-   <key>en</key>
-   <value>Class Cr1</value>
+   <key>tr</key>
+   <value>Sınıf Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Alacak1 </value>
+   <key>en</key>
+   <value>Class Cr1</value>
   </title>
   <id>38</id>
   <valueType>
@@ -6498,16 +6498,16 @@
  <attributes>
   <name>ClassCr2</name>
   <title>
-   <key>en</key>
-   <value>Class Cr2</value>
+   <key>tr</key>
+   <value>Sınıf Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Alacak2 </value>
+   <key>en</key>
+   <value>Class Cr2</value>
   </title>
   <id>39</id>
   <valueType>
@@ -6524,16 +6524,16 @@
  <attributes>
   <name>ClassCr3</name>
   <title>
-   <key>en</key>
-   <value>Class Cr3</value>
+   <key>tr</key>
+   <value>Sınıf Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sınıf Alacak3 </value>
+   <key>en</key>
+   <value>Class Cr3</value>
   </title>
   <id>40</id>
   <valueType>
@@ -6550,16 +6550,16 @@
  <attributes>
   <name>ExtDimensionValueDr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Dr1</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Borç1 </value>
+   <key>en</key>
+   <value>Ext dimension value Dr1</value>
   </title>
   <id>41</id>
   <valueType>
@@ -6576,16 +6576,16 @@
  <attributes>
   <name>ExtDimensionValueDr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Dr2</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Borç2 </value>
+   <key>en</key>
+   <value>Ext dimension value Dr2</value>
   </title>
   <id>42</id>
   <valueType>
@@ -6602,16 +6602,16 @@
  <attributes>
   <name>ExtDimensionValueDr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Dr3</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Borç3 </value>
+   <key>en</key>
+   <value>Ext dimension value Dr3</value>
   </title>
   <id>43</id>
   <valueType>
@@ -6628,16 +6628,16 @@
  <attributes>
   <name>ExtDimensionValueCr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Cr1</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Alacak1 </value>
+   <key>en</key>
+   <value>Ext dimension value Cr1</value>
   </title>
   <id>44</id>
   <valueType>
@@ -6654,16 +6654,16 @@
  <attributes>
   <name>ExtDimensionValueCr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Cr2</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Alacak2 </value>
+   <key>en</key>
+   <value>Ext dimension value Cr2</value>
   </title>
   <id>45</id>
   <valueType>
@@ -6680,16 +6680,16 @@
  <attributes>
   <name>ExtDimensionValueCr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension value Cr3</value>
+   <key>tr</key>
+   <value>Ek boyut değeri Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение субконто Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ek boyut değeri Alacak3 </value>
+   <key>en</key>
+   <value>Ext dimension value Cr3</value>
   </title>
   <id>46</id>
   <valueType>
@@ -6706,16 +6706,16 @@
  <attributes>
   <name>ExtDimensionTypeDr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Dr1</value>
+   <key>tr</key>
+   <value>Borç 1 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Дт субконто 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Borç 1 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Dr1</value>
   </title>
   <id>47</id>
   <valueType>
@@ -6731,16 +6731,16 @@
  <attributes>
   <name>ExtDimensionTypeDr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Dr2</value>
+   <key>tr</key>
+   <value>Borç 2 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Дт субконто 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Borç 2 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Dr2</value>
   </title>
   <id>48</id>
   <valueType>
@@ -6756,16 +6756,16 @@
  <attributes>
   <name>ExtDimensionTypeDr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Dr3</value>
+   <key>tr</key>
+   <value>Borç 3 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Дт субконто 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Borç 3 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Dr3</value>
   </title>
   <id>49</id>
   <valueType>
@@ -6781,16 +6781,16 @@
  <attributes>
   <name>ExtDimensionTypeCr1</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Cr1</value>
+   <key>tr</key>
+   <value>Alacak 1 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Кт субконто 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alacak 1 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Cr1</value>
   </title>
   <id>50</id>
   <valueType>
@@ -6806,16 +6806,16 @@
  <attributes>
   <name>ExtDimensionTypeCr2</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Cr2</value>
+   <key>tr</key>
+   <value>Alacak 2 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Кт субконто 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alacak 2 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Cr2</value>
   </title>
   <id>51</id>
   <valueType>
@@ -6831,16 +6831,16 @@
  <attributes>
   <name>ExtDimensionTypeCr3</name>
   <title>
-   <key>en</key>
-   <value>Ext dimension type Cr3</value>
+   <key>tr</key>
+   <value>Alacak 3 kırılım tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип Кт субконто 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Alacak 3 kırılım tipi</value>
+   <key>en</key>
+   <value>Ext dimension type Cr3</value>
   </title>
   <id>52</id>
   <valueType>
@@ -6856,16 +6856,16 @@
  <attributes>
   <name>InternalBaseClassDr1</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Dr1</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Borç1 </value>
+   <key>en</key>
+   <value>Internal base class Dr1</value>
   </title>
   <id>53</id>
   <valueType>
@@ -6882,16 +6882,16 @@
  <attributes>
   <name>InternalBaseClassDr2</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Dr2</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Borç2 </value>
+   <key>en</key>
+   <value>Internal base class Dr2</value>
   </title>
   <id>54</id>
   <valueType>
@@ -6908,16 +6908,16 @@
  <attributes>
   <name>InternalBaseClassDr3</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Dr3</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Borç3 </value>
+   <key>en</key>
+   <value>Internal base class Dr3</value>
   </title>
   <id>55</id>
   <valueType>
@@ -6934,16 +6934,16 @@
  <attributes>
   <name>InternalBaseClassCr1</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Cr1</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Alacak1 </value>
+   <key>en</key>
+   <value>Internal base class Cr1</value>
   </title>
   <id>56</id>
   <valueType>
@@ -6960,16 +6960,16 @@
  <attributes>
   <name>InternalBaseClassCr2</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Cr2</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Alacak2 </value>
+   <key>en</key>
+   <value>Internal base class Cr2</value>
   </title>
   <id>57</id>
   <valueType>
@@ -6986,16 +6986,16 @@
  <attributes>
   <name>InternalBaseClassCr3</name>
   <title>
-   <key>en</key>
-   <value>Internal base class Cr3</value>
+   <key>tr</key>
+   <value>Dahili temel sınıf Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Класс внутреннего основания Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili temel sınıf Alacak3 </value>
+   <key>en</key>
+   <value>Internal base class Cr3</value>
   </title>
   <id>58</id>
   <valueType>
@@ -7012,16 +7012,16 @@
  <attributes>
   <name>InternalClassDr1</name>
   <title>
-   <key>en</key>
-   <value>Internal class Dr1</value>
+   <key>tr</key>
+   <value>Dahili sınıf Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Borç1 </value>
+   <key>en</key>
+   <value>Internal class Dr1</value>
   </title>
   <id>59</id>
   <valueType>
@@ -7038,16 +7038,16 @@
  <attributes>
   <name>InternalClassDr2</name>
   <title>
-   <key>en</key>
-   <value>Internal class Dr2</value>
+   <key>tr</key>
+   <value>Dahili sınıf Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Borç2 </value>
+   <key>en</key>
+   <value>Internal class Dr2</value>
   </title>
   <id>60</id>
   <valueType>
@@ -7064,16 +7064,16 @@
  <attributes>
   <name>InternalClassDr3</name>
   <title>
-   <key>en</key>
-   <value>Internal class Dr3</value>
+   <key>tr</key>
+   <value>Dahili sınıf Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Borç3 </value>
+   <key>en</key>
+   <value>Internal class Dr3</value>
   </title>
   <id>61</id>
   <valueType>
@@ -7090,16 +7090,16 @@
  <attributes>
   <name>InternalClassCr1</name>
   <title>
-   <key>en</key>
-   <value>Internal class Cr1</value>
+   <key>tr</key>
+   <value>Dahili sınıf Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Alacak1 </value>
+   <key>en</key>
+   <value>Internal class Cr1</value>
   </title>
   <id>62</id>
   <valueType>
@@ -7116,16 +7116,16 @@
  <attributes>
   <name>InternalClassCr2</name>
   <title>
-   <key>en</key>
-   <value>Internal class Cr2</value>
+   <key>tr</key>
+   <value>Dahili sınıf Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Alacak2 </value>
+   <key>en</key>
+   <value>Internal class Cr2</value>
   </title>
   <id>63</id>
   <valueType>
@@ -7142,16 +7142,16 @@
  <attributes>
   <name>InternalClassCr3</name>
   <title>
-   <key>en</key>
-   <value>Internal class Cr3</value>
+   <key>tr</key>
+   <value>Dahili sınıf Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Внутренний класс Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili sınıf Alacak3 </value>
+   <key>en</key>
+   <value>Internal class Cr3</value>
   </title>
   <id>64</id>
   <valueType>
@@ -7168,16 +7168,16 @@
  <attributes>
   <name>InternalExtDimensionValueDr1</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Dr1</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Borç1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Дт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Borç1 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Dr1</value>
   </title>
   <id>65</id>
   <valueType>
@@ -7193,16 +7193,16 @@
  <attributes>
   <name>InternalExtDimensionValueDr2</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Dr2</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Borç2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Дт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Borç2 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Dr2</value>
   </title>
   <id>66</id>
   <valueType>
@@ -7218,16 +7218,16 @@
  <attributes>
   <name>InternalExtDimensionValueDr3</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Dr3</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Borç3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Дт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Borç3 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Dr3</value>
   </title>
   <id>67</id>
   <valueType>
@@ -7243,16 +7243,16 @@
  <attributes>
   <name>InternalExtDimensionValueCr1</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Cr1</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Alacak1 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Кт 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Alacak1 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Cr1</value>
   </title>
   <id>68</id>
   <valueType>
@@ -7268,16 +7268,16 @@
  <attributes>
   <name>InternalExtDimensionValueCr2</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Cr2</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Alacak2 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Кт 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Alacak2 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Cr2</value>
   </title>
   <id>69</id>
   <valueType>
@@ -7293,16 +7293,16 @@
  <attributes>
   <name>InternalExtDimensionValueCr3</name>
   <title>
-   <key>en</key>
-   <value>Internal ext dimension value Cr3</value>
+   <key>tr</key>
+   <value>Dahili ek boyut değeri Alacak3 </value>
   </title>
   <title>
    <key>ru</key>
    <value>Значение внешнего субконто Кт 3</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dahili ek boyut değeri Alacak3 </value>
+   <key>en</key>
+   <value>Internal ext dimension value Cr3</value>
   </title>
   <id>70</id>
   <valueType>
@@ -7318,16 +7318,16 @@
  <formCommands>
   <name>ShowUUIDAccountCrRef</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>1</id>
   <use>
@@ -7347,16 +7347,16 @@
  <formCommands>
   <name>ShowUUIDAccountDrRef</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>2</id>
   <use>
@@ -7376,16 +7376,16 @@
  <formCommands>
   <name>ShowUUIDCurrencyDrRef</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>3</id>
   <use>
@@ -7405,16 +7405,16 @@
  <formCommands>
   <name>ShowUUIDCurrencyCrRef</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>4</id>
   <use>
@@ -7434,16 +7434,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefCr1</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>5</id>
   <use>
@@ -7463,16 +7463,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefCr2</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>6</id>
   <use>
@@ -7492,16 +7492,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefCr3</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>7</id>
   <use>
@@ -7521,16 +7521,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefDr1</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>8</id>
   <use>
@@ -7550,16 +7550,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefDr2</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>9</id>
   <use>
@@ -7579,16 +7579,16 @@
  <formCommands>
   <name>ShowUUIDExtDimensionRefDr3</name>
   <title>
-   <key>en</key>
-   <value>Show UUID</value>
+   <key>tr</key>
+   <value>UUID göster </value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать UUID</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>UUID göster </value>
+   <key>en</key>
+   <value>Show UUID</value>
   </title>
   <id>10</id>
   <use>

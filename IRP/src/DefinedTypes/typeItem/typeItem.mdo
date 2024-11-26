@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeItem</name>
  <synonym>
-  <key>en</key>
-  <value>Type item</value>
+  <key>tr</key>
+  <value>Tip malzeme</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип номенклатура</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip malzeme</value>
+  <key>en</key>
+  <value>Type item</value>
  </synonym>
  <type>
   <types>CatalogRef.Items</types>

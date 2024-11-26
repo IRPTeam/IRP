@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R9555T_PaidSickLeaves</name>
  <synonym>
-  <key>en</key>
-  <value>R9555 Paid sick leaves</value>
+  <key>tr</key>
+  <value>R9555 Ücretli hastalık izni</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R9555 Оплачиваемый больничный</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R9555 Ücretli hastalık izni</value>
+  <key>en</key>
+  <value>R9555 Paid sick leaves</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="79138303-6f91-40e7-b8dd-6f93c4fd1d26">
   <name>Paid</name>
   <synonym>
-   <key>en</key>
-   <value>Paid</value>
+   <key>tr</key>
+   <value>Ödendi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Оплата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ödendi</value>
+   <key>en</key>
+   <value>Paid</value>
   </synonym>
   <type>
    <types>Number</types>
@@ -52,16 +52,16 @@
  <dimensions uuid="08f73d3b-e0ae-4ccc-8d7f-801f7d3667c9">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -74,16 +74,16 @@
  <dimensions uuid="4da671fc-b404-463a-a670-f1b5c632d29e">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>

@@ -515,16 +515,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Partner type</value>
+   <key>tr</key>
+   <value>Ortak tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип партнера</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ortak tipi</value>
+   <key>en</key>
+   <value>Partner type</value>
   </title>
   <extendedTooltip>
    <name>GroupPartnerTypeExtendedTooltip</name>
@@ -662,16 +662,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Vendor</value>
+   <key>tr</key>
+   <value>Terarikçi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Поставщик</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Terarikçi</value>
+   <key>en</key>
+   <value>Vendor</value>
   </title>
   <extendedTooltip>
    <name>GroupVendorExtendedTooltip</name>
@@ -811,16 +811,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Customer</value>
+   <key>tr</key>
+   <value>Müşteri</value>
   </title>
   <title>
    <key>ru</key>
    <value>Клиент</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Müşteri</value>
+   <key>en</key>
+   <value>Customer</value>
   </title>
   <extendedTooltip>
    <name>GroupCustomerExtendedTooltip</name>
@@ -909,16 +909,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Other</value>
+   <key>tr</key>
+   <value>Diğer</value>
   </title>
   <title>
    <key>ru</key>
    <value>Прочее</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Diğer</value>
+   <key>en</key>
+   <value>Other</value>
   </title>
   <extendedTooltip>
    <name>GroupOtherExtendedTooltip</name>
@@ -990,16 +990,16 @@
  <attributes>
   <name>RecordType</name>
   <title>
-   <key>en</key>
-   <value>Record type</value>
+   <key>tr</key>
+   <value>Kayıt tipi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тип записи</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt tipi</value>
+   <key>en</key>
+   <value>Record type</value>
   </title>
   <id>2</id>
   <valueType>

@@ -407,16 +407,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Time zone</value>
+   <key>tr</key>
+   <value>Zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Zaman dilimi</value>
+   <key>en</key>
+   <value>Time zone</value>
   </title>
   <extendedTooltip>
    <name>GroupTimeZoneExtendedTooltip</name>
@@ -457,9 +457,9 @@
    <segments>RunBackgroundJobInDebugMode</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>For debug bacground jobs set this flag.
-After that - all jobs in CURRENT session will be start as common code, not like job.</value>
+   <key>tr</key>
+   <value>Arka plan görevlerini hata ayıklaması için bu işareti işaretleyiniz.
+ Ondan sonra GEÇERLİ seansın tüm görevler arka plan olarak değil, normal kod olarak çalıştırılacak</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
@@ -467,9 +467,9 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  После этого все задания в ТЕКУЩЕМ сеансе будут запускаться как обычный код, а не как фоновое задание.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Arka plan görevlerini hata ayıklaması için bu işareti işaretleyiniz.
- Ondan sonra GEÇERLİ seansın tüm görevler arka plan olarak değil, normal kod olarak çalıştırılacak</value>
+   <key>en</key>
+   <value>For debug bacground jobs set this flag.
+After that - all jobs in CURRENT session will be start as common code, not like job.</value>
   </toolTip>
   <toolTipRepresentation>ShowBottom</toolTipRepresentation>
   <handlers>
@@ -522,16 +522,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <segments>IgnoreLockModificationData</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>If this option is ON - all lock data reason will be disabled for current session</value>
+   <key>tr</key>
+   <value>Bu seçenek AÇIK ise - bu seans için tüm veri düzeltme kurallar devre dışı bırakılacak</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Если данный переключатель ВКЛЮЧЕН - все ограничения изменения данных для данного сеанса будут отключены.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Bu seçenek AÇIK ise - bu seans için tüm veri düzeltme kurallar devre dışı bırakılacak</value>
+   <key>en</key>
+   <value>If this option is ON - all lock data reason will be disabled for current session</value>
   </toolTip>
   <toolTipRepresentation>ShowBottom</toolTipRepresentation>
   <handlers>
@@ -584,16 +584,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
    <segments>NumberEditingAvailable</segments>
   </dataPath>
   <toolTip>
-   <key>en</key>
-   <value>For enable the ability to manually set numbers and codes for catalogs, documents and characteristics.</value>
+   <key>tr</key>
+   <value>Kataloglar, belgeler ve özellikler için numaraları ve kodları manuel olarak ayarlayabilme yeteneğini etkinleştirmek için.</value>
   </toolTip>
   <toolTip>
    <key>ru</key>
    <value>Для включения возможности вручную устанавливать номера и коды для каталогов, документов и характеристик.</value>
   </toolTip>
   <toolTip>
-   <key>tr</key>
-   <value>Kataloglar, belgeler ve özellikler için numaraları ve kodları manuel olarak ayarlayabilme yeteneğini etkinleştirmek için.</value>
+   <key>en</key>
+   <value>For enable the ability to manually set numbers and codes for catalogs, documents and characteristics.</value>
   </toolTip>
   <toolTipRepresentation>ShowBottom</toolTipRepresentation>
   <handlers>
@@ -679,16 +679,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>RunBackgroundJobInDebugMode</name>
   <title>
-   <key>en</key>
-   <value>Run background job in debug mode</value>
+   <key>tr</key>
+   <value>Arka plan görevleri debut modunda çalıştır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Запускать фоновые задания в режиме отладки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Arka plan görevleri debut modunda çalıştır</value>
+   <key>en</key>
+   <value>Run background job in debug mode</value>
   </title>
   <id>2</id>
   <valueType>
@@ -704,16 +704,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>IgnoreLockModificationData</name>
   <title>
-   <key>en</key>
-   <value>Ignore lock modification data</value>
+   <key>tr</key>
+   <value>Veri düzeltme kuralları dikkate alma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Игнорировать запрет изменения данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Veri düzeltme kuralları dikkate alma</value>
+   <key>en</key>
+   <value>Ignore lock modification data</value>
   </title>
   <id>3</id>
   <valueType>
@@ -729,16 +729,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>InfoBaseTimeZone</name>
   <title>
-   <key>en</key>
-   <value>Info base time zone</value>
+   <key>tr</key>
+   <value>Bilgi tabanı zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс базы данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bilgi tabanı zaman dilimi</value>
+   <key>en</key>
+   <value>Info base time zone</value>
   </title>
   <id>4</id>
   <valueType>
@@ -755,16 +755,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>CurrentDatabaseTimeZone</name>
   <title>
-   <key>en</key>
-   <value>Current database time zone</value>
+   <key>tr</key>
+   <value>Mevcut veritabanı zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс текущей базы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut veritabanı zaman dilimi</value>
+   <key>en</key>
+   <value>Current database time zone</value>
   </title>
   <id>5</id>
   <valueType>
@@ -781,16 +781,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>CurrentSessionTimeZone</name>
   <title>
-   <key>en</key>
-   <value>Current session time zone</value>
+   <key>tr</key>
+   <value>Mevcut oturumun zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс текущего сеанса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut oturumun zaman dilimi</value>
+   <key>en</key>
+   <value>Current session time zone</value>
   </title>
   <id>6</id>
   <valueType>
@@ -807,16 +807,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>CurrentDatabaseTime</name>
   <title>
-   <key>en</key>
-   <value>Current database time</value>
+   <key>tr</key>
+   <value>Mevcut veritabanı zamanı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Время текущей базы данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut veritabanı zamanı</value>
+   <key>en</key>
+   <value>Current database time</value>
   </title>
   <id>7</id>
   <valueType>
@@ -833,16 +833,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>CurrentSessionTime</name>
   <title>
-   <key>en</key>
-   <value>Current session time</value>
+   <key>tr</key>
+   <value>Geçerli oturum zamanı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Время текущего сеанса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Geçerli oturum zamanı</value>
+   <key>en</key>
+   <value>Current session time</value>
   </title>
   <id>8</id>
   <valueType>
@@ -859,16 +859,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>CurrentUserPCTime</name>
   <title>
-   <key>en</key>
-   <value>Current user PC time</value>
+   <key>tr</key>
+   <value>Mevcut kullanıcı PC zamanı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Время компьютера текущего пользователя</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Mevcut kullanıcı PC zamanı</value>
+   <key>en</key>
+   <value>Current user PC time</value>
   </title>
   <id>9</id>
   <valueType>
@@ -885,16 +885,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>SessionTimeZone</name>
   <title>
-   <key>en</key>
-   <value>Session time zone</value>
+   <key>tr</key>
+   <value>Oturum zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс сеанса</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Oturum zaman dilimi</value>
+   <key>en</key>
+   <value>Session time zone</value>
   </title>
   <id>10</id>
   <valueType>
@@ -911,16 +911,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <attributes>
   <name>NumberEditingAvailable</name>
   <title>
-   <key>en</key>
-   <value>Number editing available</value>
+   <key>tr</key>
+   <value>Numara Düzenleme Mümkün</value>
   </title>
   <title>
    <key>ru</key>
    <value>Доступно редактирование номеров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Numara Düzenleme Mümkün</value>
+   <key>en</key>
+   <value>Number editing available</value>
   </title>
   <id>11</id>
   <valueType>
@@ -936,16 +936,16 @@ After that - all jobs in CURRENT session will be start as common code, not like 
  <formCommands>
   <name>UpdateTimeInfo</name>
   <title>
-   <key>en</key>
-   <value>Update time info</value>
+   <key>tr</key>
+   <value>Zaman bilgisini güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить данные по времени</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Zaman bilgisini güncelle</value>
+   <key>en</key>
+   <value>Update time info</value>
   </title>
   <id>1</id>
   <use>

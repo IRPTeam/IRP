@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeAccountStatementBasises</name>
  <synonym>
-  <key>en</key>
-  <value>Type account statement basises</value>
+  <key>tr</key>
+  <value>Tip cari hesap hareket ana evrak</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип основание взаиморасчета</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip cari hesap hareket ana evrak</value>
+  <key>en</key>
+  <value>Type account statement basises</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

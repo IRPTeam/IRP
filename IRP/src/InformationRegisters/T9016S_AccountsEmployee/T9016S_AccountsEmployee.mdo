@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9016S_AccountsEmployee</name>
  <synonym>
-  <key>en</key>
-  <value>Accounts (Employee)</value>
+  <key>tr</key>
+  <value>Muh. hesap (çalışanlar)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Бух. счета (Сотрудники)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muh. hesap (çalışanlar)</value>
+  <key>en</key>
+  <value>Accounts (Employee)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -28,30 +28,30 @@
  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Accounts (Fixed asset)</value>
+  <key>tr</key>
+  <value>Muh. hesap (sabit kıymet)</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Бух. счета (Основные средства)</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Muh. hesap (sabit kıymet)</value>
+  <key>en</key>
+  <value>Accounts (Fixed asset)</value>
  </recordPresentation>
  <resources uuid="d23b2e0d-2f28-4e6f-a2e7-cd80615814c6">
   <name>AccountSalaryPayment</name>
   <synonym>
-   <key>en</key>
-   <value>Account (salary payment)</value>
+   <key>tr</key>
+   <value>Muh. hesap (maaş)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет (выплата зарплаты)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Muh. hesap (maaş)</value>
+   <key>en</key>
+   <value>Account (salary payment)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -70,16 +70,16 @@
  <resources uuid="79064c5c-6e04-45bc-9a66-232fc0712b4c">
   <name>AccountCashAdvance</name>
   <synonym>
-   <key>en</key>
-   <value>Account (cash advance)</value>
+   <key>tr</key>
+   <value>Muh. hesap (iş avansı)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Счет (аванс)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Muh. hesap (iş avansı)</value>
+   <key>en</key>
+   <value>Account (cash advance)</value>
   </synonym>
   <type>
    <types>ChartOfAccountsRef.Basic</types>
@@ -98,16 +98,16 @@
  <dimensions uuid="1b18f668-6bf2-4d29-81bc-8eb78a2de966">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -124,16 +124,16 @@
  <dimensions uuid="b38164e7-2265-4b93-bf1c-2c4425b3b982">
   <name>LedgerTypeVariant</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypeVariants</types>
@@ -150,16 +150,16 @@
  <dimensions uuid="fcf0363d-6948-4337-921f-c1a2160c828e">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -182,16 +182,16 @@
  <forms uuid="2134264f-8efa-494d-b2e5-ac8f13f0772a">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

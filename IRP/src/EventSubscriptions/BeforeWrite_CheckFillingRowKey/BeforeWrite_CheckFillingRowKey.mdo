@@ -2,16 +2,16 @@
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7418fcce-affe-4756-8727-f5251ae5dd62">
  <name>BeforeWrite_CheckFillingRowKey</name>
  <synonym>
-  <key>en</key>
-  <value>Before write check filling row key</value>
+  <key>tr</key>
+  <value>Yazmadan önce satır anahtarını doldurmayı kontrol edin</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Перед записью проверьте заполнение ключа строки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Yazmadan önce satır anahtarını doldurmayı kontrol edin</value>
+  <key>en</key>
+  <value>Before write check filling row key</value>
  </synonym>
  <source>
   <types>DocumentObject</types>

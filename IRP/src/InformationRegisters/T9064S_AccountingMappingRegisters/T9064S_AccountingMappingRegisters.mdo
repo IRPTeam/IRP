@@ -11,16 +11,16 @@
  </producedTypes>
  <name>T9064S_AccountingMappingRegisters</name>
  <synonym>
-  <key>en</key>
-  <value>T9064 Accounting mapping (registers)</value>
+  <key>tr</key>
+  <value>T9064 Muhasebe mappingi (kayıt tabloları)</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>T9064 Бухгалтерские соответствия (регистры)</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>T9064 Muhasebe mappingi (kayıt tabloları)</value>
+  <key>en</key>
+  <value>T9064 Accounting mapping (registers)</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <editType>InDialog</editType>
@@ -30,16 +30,16 @@
  <resources uuid="dd60a2b3-abed-4f82-934e-aa17b2a210b0">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.LedgerTypes</types>
@@ -53,16 +53,16 @@
  <dimensions uuid="6b61788c-9975-4acf-90b0-668ca6fb3bfc">
   <name>IntegrationSettings</name>
   <synonym>
-   <key>en</key>
-   <value>Integration settings</value>
+   <key>tr</key>
+   <value>Entegrasyon ayarları</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Интеграционные настройки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Entegrasyon ayarları</value>
+   <key>en</key>
+   <value>Integration settings</value>
   </synonym>
   <type>
    <types>CatalogRef.IntegrationSettings</types>
@@ -78,16 +78,16 @@
  <dimensions uuid="9181630d-040a-4787-9d1d-fb4a55f219ee">
   <name>ExternalName</name>
   <synonym>
-   <key>en</key>
-   <value>External name</value>
+   <key>tr</key>
+   <value>Dış isim</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Внешнее имя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Dış isim</value>
+   <key>en</key>
+   <value>External name</value>
   </synonym>
   <type>
    <types>String</types>
@@ -106,16 +106,16 @@
  <forms uuid="501c915c-9262-490a-9d8d-5faa2567a05c">
   <name>RecordForm</name>
   <synonym>
-   <key>en</key>
-   <value>Record form</value>
+   <key>tr</key>
+   <value>Kayıt formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма записи</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt formu</value>
+   <key>en</key>
+   <value>Record form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -123,16 +123,16 @@
  <forms uuid="2545c0d2-5ed1-41a3-bb49-205ef51b4ff8">
   <name>ListForm</name>
   <synonym>
-   <key>en</key>
-   <value>List form</value>
+   <key>tr</key>
+   <value>Liste formu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Форма списка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Liste formu</value>
+   <key>en</key>
+   <value>List form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

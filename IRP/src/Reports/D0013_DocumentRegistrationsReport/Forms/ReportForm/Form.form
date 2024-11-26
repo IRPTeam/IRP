@@ -285,16 +285,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Filters</value>
+    <key>tr</key>
+    <value>Filtreler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Отборы</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Filtreler</value>
+    <key>en</key>
+    <value>Filters</value>
    </title>
    <extendedTooltip>
     <name>GroupFiltersExtendedTooltip</name>
@@ -317,16 +317,16 @@
     <verticalSpacing>Half</verticalSpacing>
     <behavior>Collapsible</behavior>
     <collapsedRepresentationTitle>
-     <key>en</key>
-     <value>Filters</value>
+     <key>tr</key>
+     <value>Filtreler</value>
     </collapsedRepresentationTitle>
     <collapsedRepresentationTitle>
      <key>ru</key>
      <value>Отборы</value>
     </collapsedRepresentationTitle>
     <collapsedRepresentationTitle>
-     <key>tr</key>
-     <value>Filtreler</value>
+     <key>en</key>
+     <value>Filters</value>
     </collapsedRepresentationTitle>
     <collapsed>true</collapsed>
     <controlRepresentation>Picture</controlRepresentation>
@@ -342,16 +342,16 @@
    <name>EditMovements</name>
    <id>43</id>
    <title>
-    <key>en</key>
-    <value>Edit</value>
+    <key>tr</key>
+    <value>Değiştir</value>
    </title>
    <title>
     <key>ru</key>
     <value>Редактирование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değiştir</value>
+    <key>en</key>
+    <value>Edit</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1185,16 +1185,16 @@
  <attributes>
   <name>Document</name>
   <title>
-   <key>en</key>
-   <value>Document</value>
+   <key>tr</key>
+   <value>Evrak</value>
   </title>
   <title>
    <key>ru</key>
    <value>Документ</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak</value>
+   <key>en</key>
+   <value>Document</value>
   </title>
   <id>3</id>
   <valueType/>
@@ -1208,16 +1208,16 @@
  <attributes>
   <name>ResultTable</name>
   <title>
-   <key>en</key>
-   <value>Result table</value>
+   <key>tr</key>
+   <value>Sonuç tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица результатов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sonuç tablosu</value>
+   <key>en</key>
+   <value>Result table</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1234,16 +1234,16 @@
  <attributes>
   <name>FilterRegister</name>
   <title>
-   <key>en</key>
-   <value>Register</value>
+   <key>tr</key>
+   <value>Kayıt tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Регистр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kayıt tablosu</value>
+   <key>en</key>
+   <value>Register</value>
   </title>
   <id>7</id>
   <valueType>
@@ -1260,16 +1260,16 @@
  <attributes>
   <name>ShowItemInItemKey</name>
   <title>
-   <key>en</key>
-   <value>Show item in item key</value>
+   <key>tr</key>
+   <value>Satırlarda malzemeleri göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отображать номенклатуру</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlarda malzemeleri göster</value>
+   <key>en</key>
+   <value>Show item in item key</value>
   </title>
   <id>8</id>
   <valueType>
@@ -1288,16 +1288,16 @@
  <attributes>
   <name>OnlyTransactionCurrency</name>
   <title>
-   <key>en</key>
-   <value>Only transaction currency</value>
+   <key>tr</key>
+   <value>Sadece işlem para birimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Только валюта транзакции</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sadece işlem para birimi</value>
+   <key>en</key>
+   <value>Only transaction currency</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1316,16 +1316,16 @@
  <attributes>
   <name>HideTechnicalRegisters</name>
   <title>
-   <key>en</key>
-   <value>Hide technical registers</value>
+   <key>tr</key>
+   <value>Teknik kayıtları gizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скрыть технические регистры</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Teknik kayıtları gizle</value>
+   <key>en</key>
+   <value>Hide technical registers</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1344,16 +1344,16 @@
  <attributes>
   <name>GenerateOnOpen</name>
   <title>
-   <key>en</key>
-   <value>Generate on open</value>
+   <key>tr</key>
+   <value>Açılışta oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Генерировать при открытии</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Açılışta oluştur</value>
+   <key>en</key>
+   <value>Generate on open</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1369,16 +1369,16 @@
  <attributes>
   <name>ShowTechnicalColumns</name>
   <title>
-   <key>en</key>
-   <value>Show technical columns</value>
+   <key>tr</key>
+   <value>Teknik sütunları göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать технические колонки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Teknik sütunları göster</value>
+   <key>en</key>
+   <value>Show technical columns</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1397,16 +1397,16 @@
  <formCommands>
   <name>GenerateReport</name>
   <title>
-   <key>en</key>
-   <value>Generate report</value>
+   <key>tr</key>
+   <value>Rapor oluştur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сформировать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Rapor oluştur</value>
+   <key>en</key>
+   <value>Generate report</value>
   </title>
   <id>1</id>
   <use>
@@ -1422,16 +1422,16 @@
  <formCommands>
   <name>EditMovements</name>
   <title>
-   <key>en</key>
-   <value>Edit movements</value>
+   <key>tr</key>
+   <value>Hareketleri değiştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Редактировать движения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hareketleri değiştir</value>
+   <key>en</key>
+   <value>Edit movements</value>
   </title>
   <id>2</id>
   <use>

@@ -2,15 +2,15 @@
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="57a0e308-4e56-4150-ac46-2e98eb6db036">
  <name>Payment_ReturnPaymentByPaymentCard</name>
  <synonym>
-  <key>en</key>
-  <value>Payment return payment by payment card</value>
+  <key>tr</key>
+  <value>Ödeme kartıyla ödeme iadesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Оплата вернуть оплату по платежной карте</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Ödeme kartıyla ödeme iadesi</value>
+  <key>en</key>
+  <value>Payment return payment by payment card</value>
  </synonym>
 </mdclass:CommonPicture>

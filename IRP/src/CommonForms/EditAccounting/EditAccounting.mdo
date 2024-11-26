@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3ce639f5-04a5-4c35-a419-542e84b51722">
  <name>EditAccounting</name>
  <synonym>
-  <key>en</key>
-  <value>Edit accounting</value>
+  <key>tr</key>
+  <value>Muhasebe değiştir</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Изменить бух. проводки</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Muhasebe değiştir</value>
+  <key>en</key>
+  <value>Edit accounting</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

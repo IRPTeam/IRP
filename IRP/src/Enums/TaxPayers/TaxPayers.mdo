@@ -7,47 +7,47 @@
  </producedTypes>
  <name>TaxPayers</name>
  <synonym>
-  <key>en</key>
-  <value>Tax payers</value>
+  <key>tr</key>
+  <value>Vergi ödeyenleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Налогоплательщики</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Vergi ödeyenleri</value>
+  <key>en</key>
+  <value>Tax payers</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="6e9e743e-a7a5-4e61-9370-7ba7f8ceb6c0">
   <name>Employee</name>
   <synonym>
-   <key>en</key>
-   <value>Employee</value>
+   <key>tr</key>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сотрудник</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Personel</value>
+   <key>en</key>
+   <value>Employee</value>
   </synonym>
  </enumValues>
  <enumValues uuid="7c5a5bab-0690-4df7-80d5-b74fdb8f9243">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

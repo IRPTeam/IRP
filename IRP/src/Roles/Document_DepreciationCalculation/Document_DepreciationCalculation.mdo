@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d141f56c-ef38-4323-a1e3-63733623f6d6">
  <name>Document_DepreciationCalculation</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Depreciation calculation"</value>
+  <key>tr</key>
+  <value>"Amortisman hesaplama" belgesi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Амортизация и износ основных средств"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>"Amortisman hesaplama" belgesi</value>
+  <key>en</key>
+  <value>Document "Depreciation calculation"</value>
  </synonym>
 </mdclass:Role>

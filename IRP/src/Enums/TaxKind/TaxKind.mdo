@@ -7,47 +7,47 @@
  </producedTypes>
  <name>TaxKind</name>
  <synonym>
-  <key>en</key>
-  <value>Tax kind</value>
+  <key>tr</key>
+  <value>Vergi türü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид налога</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Vergi türü</value>
+  <key>en</key>
+  <value>Tax kind</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="835d8115-280b-4e3b-b7ac-aa22a9e8ba77">
   <name>VAT</name>
   <synonym>
-   <key>en</key>
-   <value>VAT</value>
+   <key>tr</key>
+   <value>KDV</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>НДС</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>KDV</value>
+   <key>en</key>
+   <value>VAT</value>
   </synonym>
  </enumValues>
  <enumValues uuid="856964ff-a841-4648-84bc-65f5dcd0a756">
   <name>Salary</name>
   <synonym>
-   <key>en</key>
-   <value>Salary</value>
+   <key>tr</key>
+   <value>Maaş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Зарплата</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maaş</value>
+   <key>en</key>
+   <value>Salary</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -478,16 +478,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Overdue periods</value>
+    <key>tr</key>
+    <value>Gecikmiş Dönemler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Просроченные периоды</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Gecikmiş Dönemler</value>
+    <key>en</key>
+    <value>Overdue periods</value>
    </title>
    <extendedTooltip>
     <name>GroupOverduePeriodsExtendedTooltip</name>
@@ -903,16 +903,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Future periods</value>
+    <key>tr</key>
+    <value>Gelecek Dönemler</value>
    </title>
    <title>
     <key>ru</key>
     <value>Будущие периоды</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Gelecek Dönemler</value>
+    <key>en</key>
+    <value>Future periods</value>
    </title>
    <extendedTooltip>
     <name>GroupFuturePeriodsExtendedTooltip</name>
@@ -941,16 +941,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Pages</value>
+   <key>tr</key>
+   <value>Satırlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satırlar</value>
+   <key>en</key>
+   <value>Pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>

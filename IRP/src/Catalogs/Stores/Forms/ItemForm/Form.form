@@ -187,16 +187,16 @@
      <typeDomainEnabled>true</typeDomainEnabled>
      <textEdit>true</textEdit>
      <inputHint>
-      <key>en</key>
-      <value>Shared for all companies</value>
+      <key>tr</key>
+      <value>Tüm şirketler için geçerli</value>
      </inputHint>
      <inputHint>
       <key>ru</key>
       <value>Доступно для всех организаций</value>
      </inputHint>
      <inputHint>
-      <key>tr</key>
-      <value>Tüm şirketler için geçerli</value>
+      <key>en</key>
+      <value>Shared for all companies</value>
      </inputHint>
     </extInfo>
    </items>
@@ -486,16 +486,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Info</value>
+    <key>tr</key>
+    <value>Bilgi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основной</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi</value>
+    <key>en</key>
+    <value>Info</value>
    </title>
    <extendedTooltip>
     <name>GroupInfoExtendedTooltip</name>
@@ -527,16 +527,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Contact information</value>
+    <key>tr</key>
+    <value>İletişim bilgileri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Контактная информация</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İletişim bilgileri</value>
+    <key>en</key>
+    <value>Contact information</value>
    </title>
    <extendedTooltip>
     <name>GroupContactInformationExtendedTooltip</name>
@@ -565,16 +565,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>

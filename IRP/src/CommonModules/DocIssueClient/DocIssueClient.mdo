@@ -2,16 +2,16 @@
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1ca0c4d8-ce75-4033-85a7-fed90fec65ea">
  <name>DocIssueClient</name>
  <synonym>
-  <key>en</key>
-  <value>Doc Issue client</value>
+  <key>tr</key>
+  <value>Doc Talep client</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Doc Issue client</value>
+  <value>Клиент проблемы документов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Doc Talep client</value>
+  <key>en</key>
+  <value>Doc Issue client</value>
  </synonym>
  <clientManagedApplication>true</clientManagedApplication>
  <clientOrdinaryApplication>true</clientOrdinaryApplication>

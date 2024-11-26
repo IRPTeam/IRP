@@ -6,7 +6,7 @@
  </producedTypes>
  <name>S1001L_VendorsPrices</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>S1001L Vendors prices</value>
  </synonym>
  <synonym>
@@ -14,7 +14,7 @@
   <value>S1001L Цены поставщиков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>S1001L Vendors prices</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
@@ -22,16 +22,16 @@
  <templates uuid="147b81cf-6271-4ab4-a383-35af10a4de59">
   <name>MainDataCompositionSchema</name>
   <synonym>
-   <key>en</key>
-   <value>Main data composition schema</value>
+   <key>tr</key>
+   <value>Ana veri inşa edilme şeması</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основная схема компоновки данных</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ana veri inşa edilme şeması</value>
+   <key>en</key>
+   <value>Main data composition schema</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

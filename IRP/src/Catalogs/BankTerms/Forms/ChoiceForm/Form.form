@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -113,16 +113,16 @@
    <name>Description</name>
    <id>19</id>
    <title>
-    <key>en</key>
-    <value>Description</value>
+    <key>tr</key>
+    <value>Tanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Tanım</value>
+    <key>en</key>
+    <value>Description</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -472,16 +472,16 @@ FROM
  <attributes>
   <name>FilterPaymentType</name>
   <title>
-   <key>en</key>
-   <value>Filter payment type</value>
+   <key>tr</key>
+   <value>Ödeme türü filtresi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр типа платежа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ödeme türü filtresi</value>
+   <key>en</key>
+   <value>Filter payment type</value>
   </title>
   <id>2</id>
   <valueType>
@@ -497,16 +497,16 @@ FROM
  <attributes>
   <name>FilterBranch</name>
   <title>
-   <key>en</key>
-   <value>Filter branch</value>
+   <key>tr</key>
+   <value>Filtre şube</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фильтр подразделения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Filtre şube</value>
+   <key>en</key>
+   <value>Filter branch</value>
   </title>
   <id>3</id>
   <valueType>

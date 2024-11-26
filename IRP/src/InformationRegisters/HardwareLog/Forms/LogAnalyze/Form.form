@@ -69,16 +69,16 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <toolTip>
-     <key>en</key>
-     <value>Time zone</value>
+     <key>tr</key>
+     <value>Zaman dilimi</value>
     </toolTip>
     <toolTip>
      <key>ru</key>
      <value>Часовой пояс</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
-     <value>Zaman dilimi</value>
+     <key>en</key>
+     <value>Time zone</value>
     </toolTip>
     <extendedTooltip>
      <name>TimeZoneExtendedTooltip</name>
@@ -225,16 +225,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Log settings</value>
+    <key>tr</key>
+    <value>Günlük ayarları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Настройки журнала</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Günlük ayarları</value>
+    <key>en</key>
+    <value>Log settings</value>
    </title>
    <extendedTooltip>
     <name>GroupLogSettingsExtendedTooltip</name>
@@ -267,16 +267,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <extendedTooltip>
    <name>GroupPeriodExtendedTooltip</name>
@@ -938,16 +938,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Data Info</value>
+    <key>tr</key>
+    <value>Veri Bilgisi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Информация о данных</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Veri Bilgisi</value>
+    <key>en</key>
+    <value>Data Info</value>
    </title>
    <extendedTooltip>
     <name>GroupDataInfoExtendedTooltip</name>
@@ -1062,16 +1062,16 @@
  <attributes>
   <name>Period</name>
   <title>
-   <key>en</key>
-   <value>Period</value>
+   <key>tr</key>
+   <value>Dönem</value>
   </title>
   <title>
    <key>ru</key>
    <value>Период</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dönem</value>
+   <key>en</key>
+   <value>Period</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1087,16 +1087,16 @@
  <attributes>
   <name>Hardware</name>
   <title>
-   <key>en</key>
-   <value>Hardware</value>
+   <key>tr</key>
+   <value>Donanım</value>
   </title>
   <title>
    <key>ru</key>
    <value>Оборудование</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Donanım</value>
+   <key>en</key>
+   <value>Hardware</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1117,16 +1117,16 @@
  <attributes>
   <name>TimeZone</name>
   <title>
-   <key>en</key>
-   <value>Time zone</value>
+   <key>tr</key>
+   <value>Zaman dilimi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Часовой пояс</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Zaman dilimi</value>
+   <key>en</key>
+   <value>Time zone</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1145,16 +1145,16 @@
  <attributes>
   <name>TransactionList</name>
   <title>
-   <key>en</key>
-   <value>Transaction list</value>
+   <key>tr</key>
+   <value>İşlem listesi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список транзакций</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşlem listesi</value>
+   <key>en</key>
+   <value>Transaction list</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1169,16 +1169,16 @@
   <columns>
    <name>Period</name>
    <title>
-    <key>en</key>
-    <value>Period</value>
+    <key>tr</key>
+    <value>Dönem</value>
    </title>
    <title>
     <key>ru</key>
     <value>Период</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dönem</value>
+    <key>en</key>
+    <value>Period</value>
    </title>
    <id>6</id>
    <valueType>
@@ -1195,16 +1195,16 @@
   <columns>
    <name>Hardware</name>
    <title>
-    <key>en</key>
-    <value>Hardware</value>
+    <key>tr</key>
+    <value>Donanım</value>
    </title>
    <title>
     <key>ru</key>
     <value>Оборудование</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Donanım</value>
+    <key>en</key>
+    <value>Hardware</value>
    </title>
    <id>7</id>
    <valueType>
@@ -1220,16 +1220,16 @@
   <columns>
    <name>Method</name>
    <title>
-    <key>en</key>
-    <value>Method</value>
+    <key>tr</key>
+    <value>Metod</value>
    </title>
    <title>
     <key>ru</key>
     <value>Метод</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Metod</value>
+    <key>en</key>
+    <value>Method</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1246,16 +1246,16 @@
   <columns>
    <name>Data</name>
    <title>
-    <key>en</key>
-    <value>Data</value>
+    <key>tr</key>
+    <value>Veri</value>
    </title>
    <title>
     <key>ru</key>
     <value>Данные</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Veri</value>
+    <key>en</key>
+    <value>Data</value>
    </title>
    <id>9</id>
    <valueType>
@@ -1272,16 +1272,16 @@
   <columns>
    <name>Result</name>
    <title>
-    <key>en</key>
-    <value>Result</value>
+    <key>tr</key>
+    <value>Sonuç</value>
    </title>
    <title>
     <key>ru</key>
     <value>Результат</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sonuç</value>
+    <key>en</key>
+    <value>Result</value>
    </title>
    <id>10</id>
    <valueType>
@@ -1297,16 +1297,16 @@
   <columns>
    <name>PrintInfo</name>
    <title>
-    <key>en</key>
-    <value>Print info</value>
+    <key>tr</key>
+    <value>Bilgi yazdır</value>
    </title>
    <title>
     <key>ru</key>
     <value>Информация для печати</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bilgi yazdır</value>
+    <key>en</key>
+    <value>Print info</value>
    </title>
    <id>12</id>
    <valueType>
@@ -1323,7 +1323,7 @@
   <columns>
    <name>URL</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>URL</value>
    </title>
    <title>
@@ -1331,7 +1331,7 @@
     <value>URL</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>URL</value>
    </title>
    <id>14</id>
@@ -1350,16 +1350,16 @@
  <attributes>
   <name>FiscalPrinter</name>
   <title>
-   <key>en</key>
-   <value>Fiscal printer</value>
+   <key>tr</key>
+   <value>Yazar kasa</value>
   </title>
   <title>
    <key>ru</key>
    <value>Фискальный принтер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yazar kasa</value>
+   <key>en</key>
+   <value>Fiscal printer</value>
   </title>
   <id>13</id>
   <valueType>
@@ -1375,16 +1375,16 @@
  <formCommands>
   <name>Update</name>
   <title>
-   <key>en</key>
-   <value>Update</value>
+   <key>tr</key>
+   <value>Güncelle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Обновить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Güncelle</value>
+   <key>en</key>
+   <value>Update</value>
   </title>
   <id>1</id>
   <use>
@@ -1404,16 +1404,16 @@
  <formCommands>
   <name>PrintData</name>
   <title>
-   <key>en</key>
-   <value>Print data</value>
+   <key>tr</key>
+   <value>Verileri yazdır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Печать данных</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Verileri yazdır</value>
+   <key>en</key>
+   <value>Print data</value>
   </title>
   <id>2</id>
   <use>

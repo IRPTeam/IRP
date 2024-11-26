@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="7102ddcd-6263-4d8f-8366-3bb991900740">
  <name>UseBankDocuments</name>
  <synonym>
-  <key>en</key>
-  <value>Use bank documents</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Banka evrakları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать банковские документы</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Banka evrakları</value>
+  <key>en</key>
+  <value>Use bank documents</value>
  </synonym>
  <location>Constant.UseBankDocuments</location>
  <privilegedGetMode>true</privilegedGetMode>

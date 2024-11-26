@@ -627,16 +627,16 @@
       <name>ConnectionSettingContextMenuTestConnection</name>
       <id>40</id>
       <title>
-       <key>en</key>
-       <value>Test</value>
+       <key>tr</key>
+       <value>Test ortam ayarları</value>
       </title>
       <title>
        <key>ru</key>
        <value>Тест</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Test ortam ayarları</value>
+       <key>en</key>
+       <value>Test</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -904,16 +904,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Main settings</value>
+    <key>tr</key>
+    <value>Genel ayarlar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Основные настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Genel ayarlar</value>
+    <key>en</key>
+    <value>Main settings</value>
    </title>
    <extendedTooltip>
     <name>GroupProductionExtendedTooltip</name>
@@ -1355,16 +1355,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Test settings</value>
+    <key>tr</key>
+    <value>Test ayarları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Тестовые настройки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Test ayarları</value>
+    <key>en</key>
+    <value>Test settings</value>
    </title>
    <extendedTooltip>
     <name>GroupTestExtendedTooltip</name>
@@ -1393,16 +1393,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group pages</value>
+   <key>tr</key>
+   <value>Sayfalar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sayfalar grubu</value>
+   <key>en</key>
+   <value>Group pages</value>
   </title>
   <extendedTooltip>
    <name>GroupPagesExtendedTooltip</name>
@@ -1472,16 +1472,16 @@
  <attributes>
   <name>AddressResult</name>
   <title>
-   <key>en</key>
-   <value>Address result</value>
+   <key>tr</key>
+   <value>Adres sonucu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Адрес результата</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Adres sonucu</value>
+   <key>en</key>
+   <value>Address result</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1498,16 +1498,16 @@
  <formCommands>
   <name>FillByDefault</name>
   <title>
-   <key>en</key>
-   <value>Fill by default</value>
+   <key>tr</key>
+   <value>Varsayılan olarak doldur</value>
   </title>
   <title>
    <key>ru</key>
    <value>Заполнить по умолчанию</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Varsayılan olarak doldur</value>
+   <key>en</key>
+   <value>Fill by default</value>
   </title>
   <id>1</id>
   <use>
@@ -1523,16 +1523,16 @@
  <formCommands>
   <name>TestConnection</name>
   <title>
-   <key>en</key>
-   <value>Test connection</value>
+   <key>tr</key>
+   <value>Bağlantı kontrol et</value>
   </title>
   <title>
    <key>ru</key>
    <value>Тест соединения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bağlantı kontrol et</value>
+   <key>en</key>
+   <value>Test connection</value>
   </title>
   <id>2</id>
   <use>
@@ -1548,16 +1548,16 @@
  <formCommands>
   <name>ExternalDataProcSettings</name>
   <title>
-   <key>en</key>
-   <value>Settings</value>
+   <key>tr</key>
+   <value>Ayarlar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayarlar</value>
+   <key>en</key>
+   <value>Settings</value>
   </title>
   <id>3</id>
   <use>
@@ -1573,7 +1573,7 @@
  <formCommands>
   <name>Login</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Login</value>
   </title>
   <title>
@@ -1581,7 +1581,7 @@
    <value>Авторизация</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Login</value>
   </title>
   <id>4</id>
@@ -1598,16 +1598,16 @@
  <formCommands>
   <name>CopyFromProd</name>
   <title>
-   <key>en</key>
-   <value>Copy from prod</value>
+   <key>tr</key>
+   <value>Canlı ortam kopyası</value>
   </title>
   <title>
    <key>ru</key>
    <value>Скопировать основные настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Canlı ortam kopyası</value>
+   <key>en</key>
+   <value>Copy from prod</value>
   </title>
   <id>5</id>
   <use>

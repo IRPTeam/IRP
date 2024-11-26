@@ -2,16 +2,16 @@
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="409cbb90-70ab-4ef3-ab5f-f549aeab4f57">
  <name>SerialLotNumbersTree</name>
  <synonym>
-  <key>en</key>
-  <value>Serial lot numbers tree</value>
+  <key>tr</key>
+  <value>Seri lot numara ağacı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Дерево серий номенклатуры</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Seri lot numara ağacı</value>
+  <key>en</key>
+  <value>Serial lot numbers tree</value>
  </synonym>
  <usePurposes>PersonalComputer</usePurposes>
  <usePurposes>MobileDevice</usePurposes>

@@ -6,32 +6,32 @@
  </producedTypes>
  <name>D0012_AdditionalDocumentTablesCheck</name>
  <synonym>
-  <key>en</key>
-  <value>D0012 Additional document tables check</value>
+  <key>tr</key>
+  <value>D0012 Ek belge tabloları kontrolü</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>D0012 Дополнительная проверка таблиц документов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>D0012 Ek belge tabloları kontrolü</value>
+  <key>en</key>
+  <value>D0012 Additional document tables check</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <mainDataCompositionSchema>Report.D0012_AdditionalDocumentTablesCheck.Template.Template</mainDataCompositionSchema>
  <templates uuid="09f46506-854c-46ed-b3d7-131fa4456e11">
   <name>Template</name>
   <synonym>
-   <key>en</key>
-   <value>Template</value>
+   <key>tr</key>
+   <value>Şablon</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şablon</value>
+   <key>en</key>
+   <value>Template</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

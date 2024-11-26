@@ -7,62 +7,62 @@
  </producedTypes>
  <name>AccrualsTransactionType</name>
  <synonym>
-  <key>en</key>
-  <value>Accruals transaction type</value>
+  <key>tr</key>
+  <value>Tahakkuk işlem tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Вид операции начисления</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tahakkuk işlem tipi</value>
+  <key>en</key>
+  <value>Accruals transaction type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="b47a78cc-d57c-41fc-a8d2-5c237217e7e7">
   <name>Accrual</name>
   <synonym>
-   <key>en</key>
-   <value>Accrual</value>
+   <key>tr</key>
+   <value>Tahakkuk</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начисление</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tahakkuk</value>
+   <key>en</key>
+   <value>Accrual</value>
   </synonym>
  </enumValues>
  <enumValues uuid="1306a88d-dede-4be5-96a8-da7ec0b08858">
   <name>Void</name>
   <synonym>
-   <key>en</key>
-   <value>Void</value>
+   <key>tr</key>
+   <value>İptal</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сторнирование</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Void</value>
   </synonym>
  </enumValues>
  <enumValues uuid="64c4c398-9da5-4761-bee6-1d3d101bd532">
   <name>Reverse</name>
   <synonym>
-   <key>en</key>
-   <value>Reverse</value>
+   <key>tr</key>
+   <value>Ters kayıt</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Обратноая проводка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Ters kayıt</value>
+   <key>en</key>
+   <value>Reverse</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

@@ -454,16 +454,16 @@
  <attributes>
   <name>PropertiesTable</name>
   <title>
-   <key>en</key>
-   <value>Properties table</value>
+   <key>tr</key>
+   <value>Özellikler tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица свойств</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Özellikler tablosu</value>
+   <key>en</key>
+   <value>Properties table</value>
   </title>
   <id>1</id>
   <valueType>
@@ -478,16 +478,16 @@
   <columns>
    <name>isMarked</name>
    <title>
-    <key>en</key>
-    <value>Is marked</value>
+    <key>tr</key>
+    <value>İşeretlendi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Помечен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>İşeretlendi</value>
+    <key>en</key>
+    <value>Is marked</value>
    </title>
    <id>2</id>
    <valueType>
@@ -503,16 +503,16 @@
   <columns>
    <name>Property</name>
    <title>
-    <key>en</key>
-    <value>Property</value>
+    <key>tr</key>
+    <value>Özellik</value>
    </title>
    <title>
     <key>ru</key>
     <value>Свойство</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Özellik</value>
+    <key>en</key>
+    <value>Property</value>
    </title>
    <id>3</id>
    <valueType>
@@ -529,16 +529,16 @@
   <columns>
    <name>isCollection</name>
    <title>
-    <key>en</key>
-    <value>Is collection</value>
+    <key>tr</key>
+    <value>Bu koleksiyondur</value>
    </title>
    <title>
     <key>ru</key>
     <value>Это коллекция</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bu koleksiyondur</value>
+    <key>en</key>
+    <value>Is collection</value>
    </title>
    <id>4</id>
    <valueType>
@@ -554,16 +554,16 @@
   <columns>
    <name>Value</name>
    <title>
-    <key>en</key>
-    <value>Value</value>
+    <key>tr</key>
+    <value>Değer</value>
    </title>
    <title>
     <key>ru</key>
     <value>Значение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Değer</value>
+    <key>en</key>
+    <value>Value</value>
    </title>
    <id>5</id>
    <valueType/>
@@ -577,16 +577,16 @@
   <columns>
    <name>FieldName</name>
    <title>
-    <key>en</key>
-    <value>Field name</value>
+    <key>tr</key>
+    <value>Alan ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование поля</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Alan ismi</value>
+    <key>en</key>
+    <value>Field name</value>
    </title>
    <id>6</id>
    <valueType>
@@ -604,16 +604,16 @@
  <formCommands>
   <name>SetValues</name>
   <title>
-   <key>en</key>
-   <value>Set values</value>
+   <key>tr</key>
+   <value>Değerleri belirle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить значения</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Değerleri belirle</value>
+   <key>en</key>
+   <value>Set values</value>
   </title>
   <id>1</id>
   <use>
@@ -633,16 +633,16 @@
  <formCommands>
   <name>Uncheck</name>
   <title>
-   <key>en</key>
-   <value>Uncheck</value>
+   <key>tr</key>
+   <value>İşareti kaldır</value>
   </title>
   <title>
    <key>ru</key>
    <value>Убрать пометку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşareti kaldır</value>
+   <key>en</key>
+   <value>Uncheck</value>
   </title>
   <id>2</id>
   <use>

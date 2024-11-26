@@ -178,8 +178,11 @@ Procedure SetStandardSearchFilter(QueryBuilder, Parameters, SourceMetadata) Expo
 			EndIf;
 			
 			// When current search into add attribute field
-			If Filter.Key = "Owner" And Not SourceMetadata.Owners.Contains(Filter.Value.Metadata()) Then
-				Continue;
+ 			If Filter.Key = "Owner" Then
+				If Metadata.FindByType(TypeOf(Filter.Value)) = Undefined OR  
+						NOT SourceMetadata.Owners.Contains(Filter.Value.Metadata()) Then
+					Continue;
+				EndIf;
 			EndIf;
 			
 			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);

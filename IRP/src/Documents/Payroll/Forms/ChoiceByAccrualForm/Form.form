@@ -453,16 +453,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>en</key>
-   <value>List</value>
+   <key>tr</key>
+   <value>Liste</value>
   </title>
   <title>
    <key>ru</key>
    <value>Список</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Liste</value>
+   <key>en</key>
+   <value>List</value>
   </title>
   <id>1</id>
   <valueType>
@@ -568,16 +568,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Amount</value>
+       <key>tr</key>
+       <value>Tutar</value>
       </content>
       <content>
        <key>ru</key>
        <value>Сумма оплаты</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tutar</value>
+       <key>en</key>
+       <value>Amount</value>
       </content>
      </localValue>
     </title>
@@ -601,16 +601,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Boundary</value>
+       <key>tr</key>
+       <value>Sınır</value>
       </content>
       <content>
        <key>ru</key>
        <value>Граница</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Sınır</value>
+       <key>en</key>
+       <value>Boundary</value>
       </content>
      </localValue>
     </title>
@@ -627,16 +627,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Period</value>
+       <key>tr</key>
+       <value>Dönem</value>
       </content>
       <content>
        <key>ru</key>
        <value>Период</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
+       <key>en</key>
+       <value>Period</value>
       </content>
      </localValue>
     </title>
@@ -652,16 +652,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Company</value>
+       <key>tr</key>
+       <value>Şirket</value>
       </content>
       <content>
        <key>ru</key>
        <value>Организация</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Şirket</value>
+       <key>en</key>
+       <value>Company</value>
       </content>
      </localValue>
     </title>
@@ -677,16 +677,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Currency</value>
+       <key>tr</key>
+       <value>Döviz</value>
       </content>
       <content>
        <key>ru</key>
        <value>Валюты</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Döviz</value>
+       <key>en</key>
+       <value>Currency</value>
       </content>
      </localValue>
     </title>
@@ -702,16 +702,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Branch</value>
+       <key>tr</key>
+       <value>Şube</value>
       </content>
       <content>
        <key>ru</key>
        <value>Структурное подразделение</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Şube</value>
+       <key>en</key>
+       <value>Branch</value>
       </content>
      </localValue>
     </title>
@@ -727,16 +727,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Array of employee</value>
+       <key>tr</key>
+       <value>Çalışan dizisi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Массив сотрудников</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Çalışan dizisi</value>
+       <key>en</key>
+       <value>Array of employee</value>
       </content>
      </localValue>
     </title>
@@ -749,16 +749,16 @@ FROM
  <formCommands>
   <name>Select</name>
   <title>
-   <key>en</key>
-   <value>Select</value>
+   <key>tr</key>
+   <value>Seç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seç</value>
+   <key>en</key>
+   <value>Select</value>
   </title>
   <id>1</id>
   <use>

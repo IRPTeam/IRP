@@ -6,23 +6,23 @@
  </producedTypes>
  <name>PeriodClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Period closing</value>
+  <key>tr</key>
+  <value>Dönem kapanışı</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Закрытие периода</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Dönem kapanışı</value>
+  <key>en</key>
+  <value>Period closing</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.PeriodClosing.Form.Form</defaultForm>
  <forms uuid="28822e9e-55a8-4d86-a469-f6ce2a5ea76b">
   <name>Form</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Form</value>
   </synonym>
   <synonym>
@@ -30,7 +30,7 @@
    <value>Форма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

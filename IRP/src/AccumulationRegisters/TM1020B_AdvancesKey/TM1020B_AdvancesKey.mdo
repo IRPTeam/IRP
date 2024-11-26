@@ -10,16 +10,16 @@
  </producedTypes>
  <name>TM1020B_AdvancesKey</name>
  <synonym>
-  <key>en</key>
-  <value>TM1020 Advances key</value>
+  <key>tr</key>
+  <value>TM1020 Cari hesap avans anahtarları</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>TM1050 Ключи авансов партнеров</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>TM1020 Cari hesap avans anahtarları</value>
+  <key>en</key>
+  <value>TM1020 Advances key</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
@@ -27,16 +27,16 @@
  <resources uuid="ffc15173-69ce-480f-8f6c-01f2b116fd87">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -48,7 +48,7 @@
  <dimensions uuid="2056ac88-0767-4242-ba6b-5f59482fa52e">
   <name>DELETE_AdvanceKey</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>DELETE advance key</value>
   </synonym>
   <synonym>
@@ -56,7 +56,7 @@
    <value>УДАЛИТЬ ключ аванса</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>DELETE advance key</value>
   </synonym>
   <type>
@@ -71,16 +71,16 @@
  <dimensions uuid="b6255ae1-3f3b-4e9f-9357-615c714b12c3">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -93,16 +93,16 @@
  <dimensions uuid="d4e113a5-e4b1-4aa2-a875-ec2a1dc0d826">
   <name>Branch</name>
   <synonym>
-   <key>en</key>
-   <value>Branch</value>
+   <key>tr</key>
+   <value>Şube</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Структурное подразделение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şube</value>
+   <key>en</key>
+   <value>Branch</value>
   </synonym>
   <type>
    <types>CatalogRef.BusinessUnits</types>
@@ -115,16 +115,16 @@
  <dimensions uuid="cfba74ea-dae7-4084-81a0-8cd1d4922a32">
   <name>Currency</name>
   <synonym>
-   <key>en</key>
-   <value>Currency</value>
+   <key>tr</key>
+   <value>Döviz</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Валюта</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Döviz</value>
+   <key>en</key>
+   <value>Currency</value>
   </synonym>
   <type>
    <types>CatalogRef.Currencies</types>
@@ -137,16 +137,16 @@
  <dimensions uuid="d0b05212-02fb-4492-b7f8-e22610c78491">
   <name>Partner</name>
   <synonym>
-   <key>en</key>
-   <value>Partner</value>
+   <key>tr</key>
+   <value>Cari hesap</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Партнер</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Cari hesap</value>
+   <key>en</key>
+   <value>Partner</value>
   </synonym>
   <type>
    <types>CatalogRef.Partners</types>
@@ -159,16 +159,16 @@
  <dimensions uuid="9c59ce8f-410b-4592-a93a-5a7d9014e021">
   <name>LegalName</name>
   <synonym>
-   <key>en</key>
-   <value>Legal name</value>
+   <key>tr</key>
+   <value>Fatura hesabı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Контрагент</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Fatura hesabı</value>
+   <key>en</key>
+   <value>Legal name</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -181,16 +181,16 @@
  <dimensions uuid="eefb0e9e-4705-4955-ad75-efb78ace546a">
   <name>Agreement</name>
   <synonym>
-   <key>en</key>
-   <value>Agreement</value>
+   <key>tr</key>
+   <value>Sözleşme</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Соглашение</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sözleşme</value>
+   <key>en</key>
+   <value>Agreement</value>
   </synonym>
   <type>
    <types>CatalogRef.Agreements</types>
@@ -203,16 +203,16 @@
  <dimensions uuid="0cda236b-5ced-4f73-9783-b58fbe4ebe76">
   <name>Order</name>
   <synonym>
-   <key>en</key>
-   <value>Order</value>
+   <key>tr</key>
+   <value>Sipariş</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Порядок</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sipariş</value>
+   <key>en</key>
+   <value>Order</value>
   </synonym>
   <type>
    <types>DocumentRef.PurchaseOrder</types>
@@ -226,16 +226,16 @@
  <dimensions uuid="94d8b0eb-f226-4744-8e08-eb4cb4faba04">
   <name>Project</name>
   <synonym>
-   <key>en</key>
-   <value>Project</value>
+   <key>tr</key>
+   <value>Proje</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Проект</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Proje</value>
+   <key>en</key>
+   <value>Project</value>
   </synonym>
   <type>
    <types>CatalogRef.Projects</types>
@@ -248,16 +248,16 @@
  <dimensions uuid="4d5f5a5b-f3b4-43d7-9864-453e7a9d254b">
   <name>IsVendorAdvance</name>
   <synonym>
-   <key>en</key>
-   <value>Is vendor advance</value>
+   <key>tr</key>
+   <value>Bu tedarikçi avansı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это аванс поставщика</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bu tedarikçi avansı</value>
+   <key>en</key>
+   <value>Is vendor advance</value>
   </synonym>
   <type>
    <types>Boolean</types>
@@ -270,16 +270,16 @@
  <dimensions uuid="b01122a2-8f32-428a-a4a0-9ce4562fa0dc">
   <name>IsCustomerAdvance</name>
   <synonym>
-   <key>en</key>
-   <value>Is customer advance</value>
+   <key>tr</key>
+   <value>Bu müşteri avansı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Это аванс покупателя</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Bu müşteri avansı</value>
+   <key>en</key>
+   <value>Is customer advance</value>
   </synonym>
   <type>
    <types>Boolean</types>

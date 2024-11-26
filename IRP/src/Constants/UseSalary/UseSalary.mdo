@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseSalary</name>
  <synonym>
-  <key>en</key>
-  <value>Use salary</value>
+  <key>tr</key>
+  <value>Maaşı kullan</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать - Расчет зарплаты</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Maaşı kullan</value>
+  <key>en</key>
+  <value>Use salary</value>
  </synonym>
  <type>
   <types>Boolean</types>

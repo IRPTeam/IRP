@@ -6,32 +6,32 @@
  </producedTypes>
  <name>InternalCommands</name>
  <synonym>
-  <key>en</key>
-  <value>Internal commands</value>
+  <key>tr</key>
+  <value>Dahili Komutlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Внутренние команды</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Dahili Komutlar</value>
+  <key>en</key>
+  <value>Internal commands</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <defaultForm>DataProcessor.InternalCommands.Form.CommandTemplate</defaultForm>
  <forms uuid="b24ce069-1bb0-40fb-bcf1-1f748b9a4dae">
   <name>CommandTemplate</name>
   <synonym>
-   <key>en</key>
-   <value>Command template</value>
+   <key>tr</key>
+   <value>Komut Şablonu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Шаблон команды</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Komut Şablonu</value>
+   <key>en</key>
+   <value>Command template</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -39,16 +39,16 @@
  <forms uuid="27a931da-792e-4779-851a-8e7bf241219d">
   <name>SetNotActive</name>
   <synonym>
-   <key>en</key>
-   <value>Set not active</value>
+   <key>tr</key>
+   <value>Aktif Olmayanı Ayarla</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Установить неактивным</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Aktif Olmayanı Ayarla</value>
+   <key>en</key>
+   <value>Set not active</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -56,16 +56,16 @@
  <forms uuid="11eb96fe-8fc0-4f37-b3ac-5600e7e15bc5">
   <name>ShowNotActive</name>
   <synonym>
-   <key>en</key>
-   <value>Show not active</value>
+   <key>tr</key>
+   <value>Aktif Olmayanı Göster</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Показать неактивные</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Aktif Olmayanı Göster</value>
+   <key>en</key>
+   <value>Show not active</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -73,16 +73,16 @@
  <forms uuid="c47bff1b-3b89-4768-9752-fa9c0fbe5fa7">
   <name>GroupEditingProperties</name>
   <synonym>
-   <key>en</key>
-   <value>Group editing of properties</value>
+   <key>tr</key>
+   <value>Özelliklerin grup düzenlemesi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Групповое изменение реквизитов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Özelliklerin grup düzenlemesi</value>
+   <key>en</key>
+   <value>Group editing of properties</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -90,16 +90,16 @@
  <forms uuid="6aae06fd-3034-4f77-a1c3-c3757c418c29">
   <name>CloneValueFromFirstRow</name>
   <synonym>
-   <key>en</key>
-   <value>Clone value from first row</value>
+   <key>tr</key>
+   <value>İlk satırdan değeri klonla</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Клонировать значение из первой строки</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>İlk satırdan değeri klonla</value>
+   <key>en</key>
+   <value>Clone value from first row</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -107,16 +107,16 @@
  <forms uuid="dd969621-5cb5-474e-8c22-54876a64f044">
   <name>LoadDataFromTable</name>
   <synonym>
-   <key>en</key>
-   <value>Load data from table</value>
+   <key>tr</key>
+   <value>Tablodan veriyi yükle</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Загрузить данные из таблицы</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tablodan veriyi yükle</value>
+   <key>en</key>
+   <value>Load data from table</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -124,16 +124,16 @@
  <forms uuid="25dc0fd4-7989-4078-8958-27c13b6dcace">
   <name>LoadDataFromTable_Form</name>
   <synonym>
-   <key>en</key>
-   <value>Load data from table (form)</value>
+   <key>tr</key>
+   <value>Tablodan veri yükle (form)</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Загрузить данные из таблицы (форма)</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tablodan veri yükle (form)</value>
+   <key>en</key>
+   <value>Load data from table (form)</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -141,16 +141,16 @@
  <forms uuid="0bd55598-3f42-4f1b-838d-c989a189fd48">
   <name>AuditLock</name>
   <synonym>
-   <key>en</key>
-   <value>Audit lock</value>
+   <key>tr</key>
+   <value>Audit kilidi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Аудиторский запрет изменения</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Audit kilidi</value>
+   <key>en</key>
+   <value>Audit lock</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
@@ -158,7 +158,7 @@
  <forms uuid="7ccf662b-7384-4cfe-97d9-6cfb8e88b57b">
   <name>OpenVendorPrices</name>
   <synonym>
-   <key>en</key>
+   <key>tr</key>
    <value>Open vendor prices</value>
   </synonym>
   <synonym>
@@ -166,7 +166,7 @@
    <value>Открыть цены поставщиков</value>
   </synonym>
   <synonym>
-   <key>tr</key>
+   <key>en</key>
    <value>Open vendor prices</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>

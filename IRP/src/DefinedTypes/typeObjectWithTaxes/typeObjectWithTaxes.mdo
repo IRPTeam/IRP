@@ -5,16 +5,16 @@
  </producedTypes>
  <name>typeObjectWithTaxes</name>
  <synonym>
-  <key>en</key>
-  <value>Type object with taxes</value>
+  <key>tr</key>
+  <value>Tip vergi içeren nesne</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип объект с налогами</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Tip vergi içeren nesne</value>
+  <key>en</key>
+  <value>Type object with taxes</value>
  </synonym>
  <type>
   <types>DocumentRef.SalesReportFromTradeAgent</types>

@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -305,16 +305,16 @@
    <name>Quantity</name>
    <id>34</id>
    <title>
-    <key>en</key>
-    <value>Q.</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Q.</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -360,16 +360,16 @@
    <name>Currency</name>
    <id>37</id>
    <title>
-    <key>en</key>
-    <value>C.</value>
+    <key>tr</key>
+    <value>Döviz</value>
    </title>
    <title>
     <key>ru</key>
     <value>Валютный</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Döviz</value>
+    <key>en</key>
+    <value>C.</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -508,16 +508,16 @@
    <name>ExtraDimension1</name>
    <id>60</id>
    <title>
-    <key>en</key>
-    <value>Ext. Dim 1</value>
+    <key>tr</key>
+    <value>Kırılım 1</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 1</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kırılım 1</value>
+    <key>en</key>
+    <value>Ext. Dim 1</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -570,16 +570,16 @@
    <name>ExtraDimension2</name>
    <id>63</id>
    <title>
-    <key>en</key>
-    <value>Ext. Dim 2</value>
+    <key>tr</key>
+    <value>Kırılım 2</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 2</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kırılım 2</value>
+    <key>en</key>
+    <value>Ext. Dim 2</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -632,16 +632,16 @@
    <name>ExtraDimension3</name>
    <id>66</id>
    <title>
-    <key>en</key>
-    <value>Ext. Dim 3</value>
+    <key>tr</key>
+    <value>Kırılım 3</value>
    </title>
    <title>
     <key>ru</key>
     <value>Субконто 3</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kırılım 3</value>
+    <key>en</key>
+    <value>Ext. Dim 3</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -985,16 +985,16 @@
  <attributes>
   <name>List</name>
   <title>
-   <key>en</key>
-   <value>Ext. Dim 1</value>
+   <key>tr</key>
+   <value>Kırılım 1</value>
   </title>
   <title>
    <key>ru</key>
    <value>Субконто 1</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kırılım 1</value>
+   <key>en</key>
+   <value>Ext. Dim 1</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1084,16 +1084,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Type</value>
+       <key>tr</key>
+       <value>Tip</value>
       </content>
       <content>
        <key>ru</key>
        <value>Вид</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tip</value>
+       <key>en</key>
+       <value>Type</value>
       </content>
      </localValue>
     </title>
@@ -1104,16 +1104,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Description</value>
+       <key>tr</key>
+       <value>Tanım</value>
       </content>
       <content>
        <key>ru</key>
        <value>Наименование</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Tanım</value>
+       <key>en</key>
+       <value>Description</value>
       </content>
      </localValue>
     </title>
@@ -1196,16 +1196,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Extra dimension1</value>
+       <key>tr</key>
+       <value>Ekstra boyut1</value>
       </content>
       <content>
        <key>ru</key>
        <value>Дополнительное измерение1</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ekstra boyut1</value>
+       <key>en</key>
+       <value>Extra dimension1</value>
       </content>
      </localValue>
     </title>
@@ -1216,16 +1216,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Extra dimension2</value>
+       <key>tr</key>
+       <value>Ek boyut2</value>
       </content>
       <content>
        <key>ru</key>
        <value>Дополнительный размер2</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ek boyut2</value>
+       <key>en</key>
+       <value>Extra dimension2</value>
       </content>
      </localValue>
     </title>
@@ -1236,16 +1236,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Extra dimension3</value>
+       <key>tr</key>
+       <value>Ek boyut3</value>
       </content>
       <content>
        <key>ru</key>
        <value>Дополнительный размер3</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ek boyut3</value>
+       <key>en</key>
+       <value>Extra dimension3</value>
       </content>
      </localValue>
     </title>
@@ -1256,16 +1256,16 @@ FROM
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Extra dimension</value>
+       <key>tr</key>
+       <value>Ekstra boyut</value>
       </content>
       <content>
        <key>ru</key>
        <value>Доп. измерение</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ekstra boyut</value>
+       <key>en</key>
+       <value>Extra dimension</value>
       </content>
      </localValue>
     </title>
@@ -1275,16 +1275,16 @@ FROM
  <attributes>
   <name>LedgerTypeVariant</name>
   <title>
-   <key>en</key>
-   <value>Ledger type variant</value>
+   <key>tr</key>
+   <value>Defter tip seçeneği</value>
   </title>
   <title>
    <key>ru</key>
    <value>Вариант типа учета</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Defter tip seçeneği</value>
+   <key>en</key>
+   <value>Ledger type variant</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1300,16 +1300,16 @@ FROM
  <formCommands>
   <name>LoadChartsOfAccounts</name>
   <title>
-   <key>en</key>
-   <value>Load charts of accounts</value>
+   <key>tr</key>
+   <value>Hesap planlarını yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузка планов счетов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Hesap planlarını yükle</value>
+   <key>en</key>
+   <value>Load charts of accounts</value>
   </title>
   <id>1</id>
   <use>

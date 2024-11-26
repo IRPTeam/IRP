@@ -169,16 +169,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Top Group</value>
+     <key>tr</key>
+     <value>En Üst Grup</value>
     </title>
     <title>
      <key>ru</key>
      <value>Шапка группа</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>En Üst Grup</value>
+     <key>en</key>
+     <value>Top Group</value>
     </title>
     <extendedTooltip>
      <name>TopGroupExtendedTooltip</name>
@@ -457,16 +457,16 @@
         <common>true</common>
        </userVisible>
        <title>
-        <key>en</key>
-        <value>Group Item Key</value>
+        <key>tr</key>
+        <value>Grup varyant</value>
        </title>
        <title>
         <key>ru</key>
         <value>Группа характеристика</value>
        </title>
        <title>
-        <key>tr</key>
-        <value>Grup varyant</value>
+        <key>en</key>
+        <value>Group Item Key</value>
        </title>
        <extendedTooltip>
         <name>ItemListGroupItemKeyExtendedTooltip</name>
@@ -574,16 +574,16 @@
        <common>true</common>
       </userVisible>
       <title>
-       <key>en</key>
-       <value>The third line of the ItemList group</value>
+       <key>tr</key>
+       <value>ItemList grubunun üçüncü satırı</value>
       </title>
       <title>
        <key>ru</key>
        <value>Третяя линия группа Товаров</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>ItemList grubunun üçüncü satırı</value>
+       <key>en</key>
+       <value>The third line of the ItemList group</value>
       </title>
       <extendedTooltip>
        <name>ItemListGroupThirdRowExtendedTooltip</name>
@@ -758,16 +758,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Group Item</value>
+      <key>tr</key>
+      <value>Grup malzeme</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа номенклатура</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup malzeme</value>
+      <key>en</key>
+      <value>Group Item</value>
      </title>
      <extendedTooltip>
       <name>ItemListGroupItemExtendedTooltip</name>
@@ -984,16 +984,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Item list</value>
+    <key>tr</key>
+    <value>Malzeme listesi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Товары</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme listesi</value>
+    <key>en</key>
+    <value>Item list</value>
    </title>
    <extendedTooltip>
     <name>PageItemListExtendedTooltip</name>
@@ -1029,16 +1029,16 @@
       <name>SetFilterOnlyMy</name>
       <id>115</id>
       <title>
-       <key>en</key>
-       <value>Only my</value>
+       <key>tr</key>
+       <value>Sadece benim</value>
       </title>
       <title>
        <key>ru</key>
        <value>Только мое</value>
       </title>
       <title>
-       <key>tr</key>
-       <value>Sadece benim</value>
+       <key>en</key>
+       <value>Only my</value>
       </title>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1143,16 +1143,16 @@
      <common>true</common>
     </userVisible>
     <title>
-     <key>en</key>
-     <value>Group top</value>
+     <key>tr</key>
+     <value>Grup üst</value>
     </title>
     <title>
      <key>ru</key>
      <value>Группа верхние уровень</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>Grup üst</value>
+     <key>en</key>
+     <value>Group top</value>
     </title>
     <extendedTooltip>
      <name>GroupTopExtendedTooltip</name>
@@ -1307,16 +1307,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Scan history group1</value>
+      <key>tr</key>
+      <value>Grup okutma geçmişi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа сканирования истории</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup okutma geçmişi</value>
+      <key>en</key>
+      <value>Scan history group1</value>
      </title>
      <extendedTooltip>
       <name>ScanHistoryGroupBarcodeExtendedTooltip</name>
@@ -1447,16 +1447,16 @@
       <common>true</common>
      </userVisible>
      <title>
-      <key>en</key>
-      <value>Scan history group1</value>
+      <key>tr</key>
+      <value>Grup okutma geçmişi</value>
      </title>
      <title>
       <key>ru</key>
       <value>Группа сканирования истории</value>
      </title>
      <title>
-      <key>tr</key>
-      <value>Grup okutma geçmişi</value>
+      <key>en</key>
+      <value>Scan history group1</value>
      </title>
      <extendedTooltip>
       <name>ScanHistoryGroupSecondRowExtendedTooltip</name>
@@ -1677,16 +1677,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Page History</value>
+    <key>tr</key>
+    <value>Sayfa tarihçe</value>
    </title>
    <title>
     <key>ru</key>
     <value>Страница история</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sayfa tarihçe</value>
+    <key>en</key>
+    <value>Page History</value>
    </title>
    <extendedTooltip>
     <name>PageHistoryExtendedTooltip</name>
@@ -1715,16 +1715,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Main Pages</value>
+   <key>tr</key>
+   <value>Grup sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Основные страницы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup sayfalar</value>
+   <key>en</key>
+   <value>Main Pages</value>
   </title>
   <extendedTooltip>
    <name>MainPagesExtendedTooltip</name>
@@ -1829,16 +1829,16 @@
  <attributes>
   <name>ScanHistory</name>
   <title>
-   <key>en</key>
-   <value>Scan history</value>
+   <key>tr</key>
+   <value>Okutma geçmişi</value>
   </title>
   <title>
    <key>ru</key>
    <value>История сканирования</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Okutma geçmişi</value>
+   <key>en</key>
+   <value>Scan history</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1878,16 +1878,16 @@ WHERE
  <attributes>
   <name>OnlyMy</name>
   <title>
-   <key>en</key>
-   <value>Only my</value>
+   <key>tr</key>
+   <value>Sadece benim</value>
   </title>
   <title>
    <key>ru</key>
    <value>Только мое</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sadece benim</value>
+   <key>en</key>
+   <value>Only my</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1903,16 +1903,16 @@ WHERE
  <attributes>
   <name>ByOneScan</name>
   <title>
-   <key>en</key>
-   <value>By one scan</value>
+   <key>tr</key>
+   <value>Tek tek okutma</value>
   </title>
   <title>
    <key>ru</key>
    <value>Сканирование по одному</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tek tek okutma</value>
+   <key>en</key>
+   <value>By one scan</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1928,16 +1928,16 @@ WHERE
  <attributes>
   <name>HideDecoration</name>
   <title>
-   <key>en</key>
-   <value>Hide decoration</value>
+   <key>tr</key>
+   <value>Dekorasyonu gizle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Спрятать картинку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dekorasyonu gizle</value>
+   <key>en</key>
+   <value>Hide decoration</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1953,16 +1953,16 @@ WHERE
  <attributes>
   <name>UseSerialLot</name>
   <title>
-   <key>en</key>
-   <value>Use serial lot</value>
+   <key>tr</key>
+   <value>Seri lot kullan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Использовать серийный номер</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Seri lot kullan</value>
+   <key>en</key>
+   <value>Use serial lot</value>
   </title>
   <id>6</id>
   <valueType>
@@ -1995,16 +1995,16 @@ WHERE
  <formCommands>
   <name>SetFilterOnlyMy</name>
   <title>
-   <key>en</key>
-   <value>Set filter only my</value>
+   <key>tr</key>
+   <value>Sadece benim filtreyi uygula</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить отбор только мое</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sadece benim filtreyi uygula</value>
+   <key>en</key>
+   <value>Set filter only my</value>
   </title>
   <id>2</id>
   <use>
@@ -2020,16 +2020,16 @@ WHERE
  <formCommands>
   <name>Done</name>
   <title>
-   <key>en</key>
-   <value>Done</value>
+   <key>tr</key>
+   <value>Tamamlandı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Завершено</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamamlandı</value>
+   <key>en</key>
+   <value>Done</value>
   </title>
   <id>3</id>
   <use>
@@ -2045,7 +2045,7 @@ WHERE
  <formCommands>
   <name>EnterCountOnScan</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value> +1 </value>
   </title>
   <title>
@@ -2053,7 +2053,7 @@ WHERE
    <value> +1 </value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value> +1 </value>
   </title>
   <id>4</id>

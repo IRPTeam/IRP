@@ -10,16 +10,16 @@
  </producedTypes>
  <name>R8515T_CostOfFixedAsset</name>
  <synonym>
-  <key>en</key>
-  <value>R8515 Cost of fixed asset</value>
+  <key>tr</key>
+  <value>R8515 Sabit kıymet maliyeti</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>R8515 Стоимость основных средств</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>R8515 Sabit kıymet maliyeti</value>
+  <key>en</key>
+  <value>R8515 Cost of fixed asset</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <registerType>Turnovers</registerType>
@@ -28,16 +28,16 @@
  <resources uuid="6be16e83-354e-471c-ad11-c57d5fdcb98a">
   <name>Amount</name>
   <synonym>
-   <key>en</key>
-   <value>Amount</value>
+   <key>tr</key>
+   <value>Tutar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Сумма</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Tutar</value>
+   <key>en</key>
+   <value>Amount</value>
   </synonym>
   <type>
    <types>DefinedType.typeAmount</types>
@@ -49,16 +49,16 @@
  <attributes uuid="2b473920-9257-460e-aa93-3e0c17f97c25">
   <name>CalculationMovementCost</name>
   <synonym>
-   <key>en</key>
-   <value>Calculation movement cost</value>
+   <key>tr</key>
+   <value>Maliyet hesaplama fişi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Расчет себестоимости товаров</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Maliyet hesaplama fişi</value>
+   <key>en</key>
+   <value>Calculation movement cost</value>
   </synonym>
   <type>
    <types>DocumentRef.CalculationMovementCosts</types>
@@ -71,16 +71,16 @@
  <dimensions uuid="49bc164b-851c-451a-87e2-3862f2d762b0">
   <name>Company</name>
   <synonym>
-   <key>en</key>
-   <value>Company</value>
+   <key>tr</key>
+   <value>Şirket</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Организация</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Şirket</value>
+   <key>en</key>
+   <value>Company</value>
   </synonym>
   <type>
    <types>CatalogRef.Companies</types>
@@ -93,16 +93,16 @@
  <dimensions uuid="a87c22dd-d08a-4e24-8848-686b4b7e0cde">
   <name>FixedAsset</name>
   <synonym>
-   <key>en</key>
-   <value>Fixed asset</value>
+   <key>tr</key>
+   <value>Sabit kıymet</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Основное средство</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Sabit kıymet</value>
+   <key>en</key>
+   <value>Fixed asset</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssets</types>
@@ -115,16 +115,16 @@
  <dimensions uuid="d60ea697-398d-4d5a-ade6-7ac7411c3690">
   <name>LedgerType</name>
   <synonym>
-   <key>en</key>
-   <value>Ledger type</value>
+   <key>tr</key>
+   <value>Defter tipi</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Тип учета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Defter tipi</value>
+   <key>en</key>
+   <value>Ledger type</value>
   </synonym>
   <type>
    <types>CatalogRef.FixedAssetsLedgerTypes</types>

@@ -7,47 +7,47 @@
  </producedTypes>
  <name>CashFlowDirections</name>
  <synonym>
-  <key>en</key>
-  <value>Cash flow directions</value>
+  <key>tr</key>
+  <value>Nakit akış yönleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Направления денежных потоков</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Nakit akış yönleri</value>
+  <key>en</key>
+  <value>Cash flow directions</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="d18225e2-12cd-4b19-9b11-2ff5623725df">
   <name>Incoming</name>
   <synonym>
-   <key>en</key>
-   <value>Incoming</value>
+   <key>tr</key>
+   <value>Gelen</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Входящие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gelen</value>
+   <key>en</key>
+   <value>Incoming</value>
   </synonym>
  </enumValues>
  <enumValues uuid="4cf4b67f-aa4a-466a-8026-986b2e6d1b10">
   <name>Outgoing</name>
   <synonym>
-   <key>en</key>
-   <value>Outgoing</value>
+   <key>tr</key>
+   <value>Çıkan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Исходящие</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Çıkan</value>
+   <key>en</key>
+   <value>Outgoing</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

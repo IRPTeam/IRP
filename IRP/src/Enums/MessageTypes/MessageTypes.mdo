@@ -7,7 +7,7 @@
  </producedTypes>
  <name>MessageTypes</name>
  <synonym>
-  <key>en</key>
+  <key>tr</key>
   <value>Message types</value>
  </synonym>
  <synonym>
@@ -15,7 +15,7 @@
   <value>Тип сообщения</value>
  </synonym>
  <synonym>
-  <key>tr</key>
+  <key>en</key>
   <value>Message types</value>
  </synonym>
  <quickChoice>true</quickChoice>
@@ -23,16 +23,16 @@
  <enumValues uuid="f27dd828-8dd4-485f-a800-98acdd709b20">
   <name>Email</name>
   <synonym>
-   <key>en</key>
-   <value>Email</value>
+   <key>tr</key>
+   <value>E-posta</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Email</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>E-posta</value>
+   <key>en</key>
+   <value>Email</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

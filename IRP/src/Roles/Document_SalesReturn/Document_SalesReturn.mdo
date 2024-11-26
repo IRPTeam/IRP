@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b12a4d11-6a39-41da-8d9a-6ee48b395918">
  <name>Document_SalesReturn</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Sales return"</value>
+  <key>tr</key>
+  <value>Belge "Satış iadesi"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Возврат продажи"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Satış iadesi"</value>
+  <key>en</key>
+  <value>Document "Sales return"</value>
  </synonym>
 </mdclass:Role>

@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -968,7 +968,7 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>Sent</value>
       </content>
       <content>
@@ -976,7 +976,7 @@ GROUP BY
        <value>Отправлено</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>Sent</value>
       </content>
      </localValue>
@@ -988,7 +988,7 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>Date sent</value>
       </content>
       <content>
@@ -996,7 +996,7 @@ GROUP BY
        <value>Дата отправки</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>Date sent</value>
       </content>
      </localValue>
@@ -1008,7 +1008,7 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>Recipients</value>
       </content>
       <content>
@@ -1016,7 +1016,7 @@ GROUP BY
        <value>Получатели</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>Recipients</value>
       </content>
      </localValue>
@@ -1032,7 +1032,7 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
+       <key>tr</key>
        <value>To send</value>
       </content>
       <content>
@@ -1040,7 +1040,7 @@ GROUP BY
        <value>Отправить</value>
       </content>
       <content>
-       <key>tr</key>
+       <key>en</key>
        <value>To send</value>
       </content>
      </localValue>

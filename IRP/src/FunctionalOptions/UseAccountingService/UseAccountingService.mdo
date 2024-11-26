@@ -2,16 +2,16 @@
 <mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac642ca5-714e-4010-aaf3-d904f27cf354">
  <name>UseAccountingService</name>
  <synonym>
-  <key>en</key>
-  <value>Use accounting service</value>
+  <key>tr</key>
+  <value>Kullanmak - muhasebe servisi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать сервисы бухгалтерии</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Kullanmak - muhasebe servisi</value>
+  <key>en</key>
+  <value>Use accounting service</value>
  </synonym>
  <location>Constant.UseAccountingService</location>
  <privilegedGetMode>true</privilegedGetMode>
@@ -27,4 +27,5 @@
  <content>InformationRegister.T9064S_AccountingMappingRegisters</content>
  <content>InformationRegister.T9068S_AccountingMappingAccountsMatching</content>
  <content>Catalog.LedgerTypes.Attribute.SourceLedgerType</content>
+ <content>Catalog.LedgerTypes.Attribute.IntegrationSettings</content>
 </mdclass:FunctionalOption>

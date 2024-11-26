@@ -9,16 +9,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>User settings group</value>
+   <key>tr</key>
+   <value>Kullanıcı ayarlar grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа пользовательских настроек</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Kullanıcı ayarlar grubu</value>
+   <key>en</key>
+   <value>User settings group</value>
   </title>
   <verticalStretch>false</verticalStretch>
   <extendedTooltip>
@@ -125,16 +125,16 @@
    </dataPath>
    <titleLocation>None</titleLocation>
    <toolTip>
-    <key>en</key>
-    <value>Payment status</value>
+    <key>tr</key>
+    <value>Ödeme durumu</value>
    </toolTip>
    <toolTip>
     <key>ru</key>
     <value>Статус оплаты</value>
    </toolTip>
    <toolTip>
-    <key>tr</key>
-    <value>Ödeme durumu</value>
+    <key>en</key>
+    <value>Payment status</value>
    </toolTip>
    <extendedTooltip>
     <name>PaymentStatusIconExtendedTooltip</name>
@@ -428,16 +428,16 @@
    <name>Status</name>
    <id>52</id>
    <title>
-    <key>en</key>
-    <value>Status</value>
+    <key>tr</key>
+    <value>Statü</value>
    </title>
    <title>
     <key>ru</key>
     <value>Статус</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Statü</value>
+    <key>en</key>
+    <value>Status</value>
    </title>
    <visible>true</visible>
    <enabled>true</enabled>
@@ -1337,16 +1337,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Store</value>
+       <key>tr</key>
+       <value>Depo</value>
       </content>
       <content>
        <key>ru</key>
        <value>Склад</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Depo</value>
+       <key>en</key>
+       <value>Store</value>
       </content>
      </localValue>
     </title>
@@ -1361,16 +1361,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Status</value>
+       <key>tr</key>
+       <value>Statü</value>
       </content>
       <content>
        <key>ru</key>
        <value>Статус</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Statü</value>
+       <key>en</key>
+       <value>Status</value>
       </content>
      </localValue>
     </title>
@@ -1461,16 +1461,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Is have JE</value>
+       <key>tr</key>
+       <value>MF mevcut</value>
       </content>
       <content>
        <key>ru</key>
        <value>Есть БО</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>MF mevcut</value>
+       <key>en</key>
+       <value>Is have JE</value>
       </content>
      </localValue>
     </title>
@@ -1481,16 +1481,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Payment status</value>
+       <key>tr</key>
+       <value>Ödeme durumu</value>
       </content>
       <content>
        <key>ru</key>
        <value>Статус оплаты</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu</value>
+       <key>en</key>
+       <value>Payment status</value>
       </content>
      </localValue>
     </title>
@@ -1517,16 +1517,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Payment status icon</value>
+       <key>tr</key>
+       <value>Ödeme durumu ikonu</value>
       </content>
       <content>
        <key>ru</key>
        <value>Иконка статуса оплаты</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Ödeme durumu ikonu</value>
+       <key>en</key>
+       <value>Payment status icon</value>
       </content>
      </localValue>
     </title>
@@ -1537,16 +1537,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Audit lock icon</value>
+       <key>tr</key>
+       <value>Audit kilit resmi</value>
       </content>
       <content>
        <key>ru</key>
        <value>Иконка блокировки аудита           </value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Audit kilit resmi</value>
+       <key>en</key>
+       <value>Audit lock icon</value>
       </content>
      </localValue>
     </title>
@@ -1557,16 +1557,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Audit lock status</value>
+       <key>tr</key>
+       <value>Audit kilit statüsü</value>
       </content>
       <content>
        <key>ru</key>
        <value>Статус блокировки аудита           </value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Audit kilit statüsü</value>
+       <key>en</key>
+       <value>Audit lock status</value>
       </content>
      </localValue>
     </title>
@@ -1644,16 +1644,16 @@ GROUP BY
     <title>
      <localValue>
       <content>
-       <key>en</key>
-       <value>Period</value>
+       <key>tr</key>
+       <value>Dönem</value>
       </content>
       <content>
        <key>ru</key>
        <value>Период</value>
       </content>
       <content>
-       <key>tr</key>
-       <value>Dönem</value>
+       <key>en</key>
+       <value>Period</value>
       </content>
      </localValue>
     </title>

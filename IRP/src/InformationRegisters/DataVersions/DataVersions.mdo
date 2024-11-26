@@ -11,44 +11,44 @@
  </producedTypes>
  <name>DataVersions</name>
  <synonym>
-  <key>en</key>
-  <value>Data versions</value>
+  <key>tr</key>
+  <value>Veri sürümleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Версии данных</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Veri sürümleri</value>
+  <key>en</key>
+  <value>Data versions</value>
  </synonym>
  <editType>InDialog</editType>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Data versions</value>
+  <key>tr</key>
+  <value>Veri sürümleri</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Версии данных</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Veri sürümleri</value>
+  <key>en</key>
+  <value>Data versions</value>
  </recordPresentation>
  <resources uuid="3adc17c1-98f0-461e-9ec1-73a971f17a60">
   <name>Data</name>
   <synonym>
-   <key>en</key>
-   <value>Data</value>
+   <key>tr</key>
+   <value>Veri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Данные</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veri</value>
+   <key>en</key>
+   <value>Data</value>
   </synonym>
   <type>
    <types>ValueStorage</types>
@@ -62,16 +62,16 @@
  <attributes uuid="7e614bc8-9285-4627-8ddd-096c222bc6e7">
   <name>Author</name>
   <synonym>
-   <key>en</key>
-   <value>Author</value>
+   <key>tr</key>
+   <value>Kayıt oluşturan</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Автор</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kayıt oluşturan</value>
+   <key>en</key>
+   <value>Author</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -85,16 +85,16 @@
  <attributes uuid="7bf9f87c-be16-46ae-adc3-25b21dafca8f">
   <name>Created</name>
   <synonym>
-   <key>en</key>
-   <value>Created</value>
+   <key>tr</key>
+   <value>Oluşturuldu</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Создан</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Oluşturuldu</value>
+   <key>en</key>
+   <value>Created</value>
   </synonym>
   <type>
    <types>Date</types>
@@ -109,16 +109,16 @@
  <dimensions uuid="523d96d8-d5d7-44d1-9317-2062179b044e">
   <name>DataRef</name>
   <synonym>
-   <key>en</key>
-   <value>Data ref</value>
+   <key>tr</key>
+   <value>Veri ref</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Данные ссылка</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Veri ref</value>
+   <key>en</key>
+   <value>Data ref</value>
   </synonym>
   <type>
    <types>AnyRef</types>
@@ -135,16 +135,16 @@
  <dimensions uuid="aecdf0d4-ad89-4c93-986a-a0306eb438b7">
   <name>PackageID</name>
   <synonym>
-   <key>en</key>
-   <value>Package ID</value>
+   <key>tr</key>
+   <value>Paket ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>ID Короба</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Paket ID</value>
+   <key>en</key>
+   <value>Package ID</value>
   </synonym>
   <type>
    <types>UUID</types>

@@ -7,47 +7,47 @@
  </producedTypes>
  <name>OtherPeriodRevenueType</name>
  <synonym>
-  <key>en</key>
-  <value>Other period revenue type</value>
+  <key>tr</key>
+  <value>Diğer dönemler gelirler tipi</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Тип дохода другого периода</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Diğer dönemler gelirler tipi</value>
+  <key>en</key>
+  <value>Other period revenue type</value>
  </synonym>
  <quickChoice>true</quickChoice>
  <choiceMode>BothWays</choiceMode>
  <enumValues uuid="8cfc545f-6d63-4cb6-813d-80ea2b2ba39f">
   <name>ItemsRevenue</name>
   <synonym>
-   <key>en</key>
-   <value>Items revenue</value>
+   <key>tr</key>
+   <value>Malzeme ek geliri</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Доп. доход на товары</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Malzeme ek geliri</value>
+   <key>en</key>
+   <value>Items revenue</value>
   </synonym>
  </enumValues>
  <enumValues uuid="41eb6187-96e6-4269-bf79-2b26e2b4d02f">
   <name>RevenueAccruals</name>
   <synonym>
-   <key>en</key>
-   <value>Revenue accruals</value>
+   <key>tr</key>
+   <value>Gelir tahakkuklar</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Начисление доходов</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Gelir tahakkuklar</value>
+   <key>en</key>
+   <value>Revenue accruals</value>
   </synonym>
  </enumValues>
 </mdclass:Enum>

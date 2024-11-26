@@ -11,56 +11,56 @@
  </producedTypes>
  <name>SharedReportOptions</name>
  <synonym>
-  <key>en</key>
-  <value>Shared report options</value>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçenekleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Параметры общих вариантов отчетов</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Paylaşılan rapor seçenekleri</value>
+  <key>en</key>
+  <value>Shared report options</value>
  </synonym>
  <useStandardCommands>true</useStandardCommands>
  <dataLockControlMode>Managed</dataLockControlMode>
  <recordPresentation>
-  <key>en</key>
-  <value>Shared report option</value>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçeneği</value>
  </recordPresentation>
  <recordPresentation>
   <key>ru</key>
   <value>Параметры общего варианта отчета</value>
  </recordPresentation>
  <recordPresentation>
-  <key>tr</key>
-  <value>Paylaşılan rapor seçeneği</value>
+  <key>en</key>
+  <value>Shared report option</value>
  </recordPresentation>
  <listPresentation>
-  <key>en</key>
-  <value>Shared report options</value>
+  <key>tr</key>
+  <value>Paylaşılan rapor seçenekleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
   <value>Параметры общих вариантов отчетов</value>
  </listPresentation>
  <listPresentation>
-  <key>tr</key>
-  <value>Paylaşılan rapor seçenekleri</value>
+  <key>en</key>
+  <value>Shared report options</value>
  </listPresentation>
  <dimensions uuid="d2a85367-f829-4205-8703-2be39bef8ba2">
   <name>User</name>
   <synonym>
-   <key>en</key>
-   <value>User</value>
+   <key>tr</key>
+   <value>Kullanıcı</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Пользователь</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Kullanıcı</value>
+   <key>en</key>
+   <value>User</value>
   </synonym>
   <type>
    <types>CatalogRef.Users</types>
@@ -76,16 +76,16 @@
  <dimensions uuid="ca82cfe6-22db-48ab-bda9-5cfe58735697">
   <name>ReportOption</name>
   <synonym>
-   <key>en</key>
-   <value>Report option</value>
+   <key>tr</key>
+   <value>Rapor seçeneği</value>
   </synonym>
   <synonym>
    <key>ru</key>
    <value>Вариант отчета</value>
   </synonym>
   <synonym>
-   <key>tr</key>
-   <value>Rapor seçeneği</value>
+   <key>en</key>
+   <value>Report option</value>
   </synonym>
   <type>
    <types>CatalogRef.ReportOptions</types>

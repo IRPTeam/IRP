@@ -290,16 +290,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of path</value>
+   <key>tr</key>
+   <value>Yol grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Путь</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yol grubu</value>
+   <key>en</key>
+   <value>Group of path</value>
   </title>
   <horizontalStretch>true</horizontalStretch>
   <extendedTooltip>
@@ -449,7 +449,7 @@
     <name>FilesTableIsSaved</name>
     <id>61</id>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>S</value>
     </title>
     <title>
@@ -457,7 +457,7 @@
      <value>С</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>S</value>
     </title>
     <visible>true</visible>
@@ -469,7 +469,7 @@
      <segments>FilesTable.IsSaved</segments>
     </dataPath>
     <toolTip>
-     <key>en</key>
+     <key>tr</key>
      <value>File is saved</value>
     </toolTip>
     <toolTip>
@@ -477,7 +477,7 @@
      <value>Файл сохранён</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
+     <key>en</key>
      <value>File is saved</value>
     </toolTip>
     <extendedTooltip>
@@ -579,7 +579,7 @@
     <name>FilesTableIsLinked</name>
     <id>88</id>
     <title>
-     <key>en</key>
+     <key>tr</key>
      <value>L</value>
     </title>
     <title>
@@ -587,7 +587,7 @@
      <value>П</value>
     </title>
     <title>
-     <key>tr</key>
+     <key>en</key>
      <value>L</value>
     </title>
     <visible>true</visible>
@@ -599,7 +599,7 @@
      <segments>FilesTable.IsLinked</segments>
     </dataPath>
     <toolTip>
-     <key>en</key>
+     <key>tr</key>
      <value>File is linked</value>
     </toolTip>
     <toolTip>
@@ -607,7 +607,7 @@
      <value>Файл привязан</value>
     </toolTip>
     <toolTip>
-     <key>tr</key>
+     <key>en</key>
      <value>File is linked</value>
     </toolTip>
     <extendedTooltip>
@@ -1028,16 +1028,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group of File Area</value>
+   <key>tr</key>
+   <value>Dosya Alanı Grubu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа Файл область</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosya Alanı Grubu</value>
+   <key>en</key>
+   <value>Group of File Area</value>
   </title>
   <extendedTooltip>
    <name>GroupFileAreaExtendedTooltip</name>
@@ -1108,16 +1108,16 @@
  <attributes>
   <name>FolderPath</name>
   <title>
-   <key>en</key>
-   <value>Folder path</value>
+   <key>tr</key>
+   <value>Klasör yolu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Путь к каталогу</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Klasör yolu</value>
+   <key>en</key>
+   <value>Folder path</value>
   </title>
   <id>2</id>
   <valueType>
@@ -1134,16 +1134,16 @@
  <attributes>
   <name>FilesTable</name>
   <title>
-   <key>en</key>
-   <value>Files table</value>
+   <key>tr</key>
+   <value>Dosyalar tablosu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Таблица файлов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Dosyalar tablosu</value>
+   <key>en</key>
+   <value>Files table</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1158,16 +1158,16 @@
   <columns>
    <name>FilePath</name>
    <title>
-    <key>en</key>
-    <value>File path</value>
+    <key>tr</key>
+    <value>Dosya yolu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Путь к файлу</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya yolu</value>
+    <key>en</key>
+    <value>File path</value>
    </title>
    <id>4</id>
    <valueType>
@@ -1184,16 +1184,16 @@
   <columns>
    <name>Owner</name>
    <title>
-    <key>en</key>
-    <value>Owner</value>
+    <key>tr</key>
+    <value>Sahip</value>
    </title>
    <title>
     <key>ru</key>
     <value>Владелец</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Sahip</value>
+    <key>en</key>
+    <value>Owner</value>
    </title>
    <id>5</id>
    <valueType>
@@ -1209,7 +1209,7 @@
   <columns>
    <name>MD5</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>MD5</value>
    </title>
    <title>
@@ -1217,7 +1217,7 @@
     <value>MD5</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>MD5</value>
    </title>
    <id>6</id>
@@ -1237,16 +1237,16 @@
   <columns>
    <name>Size</name>
    <title>
-    <key>en</key>
-    <value>Size (Mb)</value>
+    <key>tr</key>
+    <value>Boyut (Mb)</value>
    </title>
    <title>
     <key>ru</key>
     <value>Размер (Мб)</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Boyut (Mb)</value>
+    <key>en</key>
+    <value>Size (Mb)</value>
    </title>
    <id>8</id>
    <valueType>
@@ -1266,7 +1266,7 @@
   <columns>
    <name>UUID</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>UUID</value>
    </title>
    <title>
@@ -1274,7 +1274,7 @@
     <value>UUID</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>UUID</value>
    </title>
    <id>12</id>
@@ -1294,16 +1294,16 @@
   <columns>
    <name>FileRef</name>
    <title>
-    <key>en</key>
-    <value>File ref</value>
+    <key>tr</key>
+    <value>Dosya ref</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ссылка файла</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya ref</value>
+    <key>en</key>
+    <value>File ref</value>
    </title>
    <id>13</id>
    <valueType>
@@ -1319,16 +1319,16 @@
   <columns>
    <name>Extension</name>
    <title>
-    <key>en</key>
-    <value>Extension</value>
+    <key>tr</key>
+    <value>Uzantı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Расширение</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Uzantı</value>
+    <key>en</key>
+    <value>Extension</value>
    </title>
    <id>14</id>
    <valueType>
@@ -1347,7 +1347,7 @@
   <columns>
    <name>URI</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>URI</value>
    </title>
    <title>
@@ -1355,7 +1355,7 @@
     <value>URI</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>URI</value>
    </title>
    <id>16</id>
@@ -1373,16 +1373,16 @@
   <columns>
    <name>IsSaved</name>
    <title>
-    <key>en</key>
-    <value>Is saved</value>
+    <key>tr</key>
+    <value>Kaydedildi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Сохранен</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaydedildi</value>
+    <key>en</key>
+    <value>Is saved</value>
    </title>
    <id>17</id>
    <valueType>
@@ -1398,16 +1398,16 @@
   <columns>
    <name>IsFileCreate</name>
    <title>
-    <key>en</key>
-    <value>Is file create</value>
+    <key>tr</key>
+    <value>Dosya oluşturuldu mu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Файл создан</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya oluşturuldu mu</value>
+    <key>en</key>
+    <value>Is file create</value>
    </title>
    <id>18</id>
    <valueType>
@@ -1423,16 +1423,16 @@
   <columns>
    <name>FileName</name>
    <title>
-    <key>en</key>
-    <value>File name</value>
+    <key>tr</key>
+    <value>Dosya ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Имя файла</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Dosya ismi</value>
+    <key>en</key>
+    <value>File name</value>
    </title>
    <id>21</id>
    <valueType>
@@ -1449,16 +1449,16 @@
   <columns>
    <name>IsLinked</name>
    <title>
-    <key>en</key>
-    <value>Is linked</value>
+    <key>tr</key>
+    <value>Bağlantılı</value>
    </title>
    <title>
     <key>ru</key>
     <value>Привязано  </value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Bağlantılı</value>
+    <key>en</key>
+    <value>Is linked</value>
    </title>
    <id>25</id>
    <valueType>
@@ -1475,16 +1475,16 @@
  <attributes>
   <name>PictureIntegrationSettings</name>
   <title>
-   <key>en</key>
-   <value>Picture integration settings</value>
+   <key>tr</key>
+   <value>Resim entegrasyon ayarları</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки интеграции изображений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim entegrasyon ayarları</value>
+   <key>en</key>
+   <value>Picture integration settings</value>
   </title>
   <id>7</id>
   <valueType/>
@@ -1498,16 +1498,16 @@
  <attributes>
   <name>Preview</name>
   <title>
-   <key>en</key>
-   <value>Preview</value>
+   <key>tr</key>
+   <value>Ön izleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Предварительный просмотр</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ön izleme</value>
+   <key>en</key>
+   <value>Preview</value>
   </title>
   <id>9</id>
   <valueType>
@@ -1523,16 +1523,16 @@
  <attributes>
   <name>PictureViewHTML</name>
   <title>
-   <key>en</key>
-   <value>Picture view HTML</value>
+   <key>tr</key>
+   <value>Resim HTML önizleme</value>
   </title>
   <title>
    <key>ru</key>
    <value>Просмотр изображений HTML</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim HTML önizleme</value>
+   <key>en</key>
+   <value>Picture view HTML</value>
   </title>
   <id>10</id>
   <valueType>
@@ -1549,16 +1549,16 @@
  <attributes>
   <name>EnableToLoad</name>
   <title>
-   <key>en</key>
-   <value>Enable to load</value>
+   <key>tr</key>
+   <value>Yüklemeye etkinleştir</value>
   </title>
   <title>
    <key>ru</key>
    <value>Включить загрузку</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yüklemeye etkinleştir</value>
+   <key>en</key>
+   <value>Enable to load</value>
   </title>
   <id>11</id>
   <valueType>
@@ -1574,16 +1574,16 @@
  <attributes>
   <name>PictureConnectionSetting</name>
   <title>
-   <key>en</key>
-   <value>Picture connection setting</value>
+   <key>tr</key>
+   <value>Resim bağlantı ayarı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Настройки подключения изображений</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Resim bağlantı ayarı</value>
+   <key>en</key>
+   <value>Picture connection setting</value>
   </title>
   <id>15</id>
   <valueType/>
@@ -1597,7 +1597,7 @@
  <attributes>
   <name>Start</name>
   <title>
-   <key>en</key>
+   <key>tr</key>
    <value>Start</value>
   </title>
   <title>
@@ -1605,7 +1605,7 @@
    <value>Старт</value>
   </title>
   <title>
-   <key>tr</key>
+   <key>en</key>
    <value>Start</value>
   </title>
   <id>19</id>
@@ -1623,16 +1623,16 @@
  <attributes>
   <name>Finish</name>
   <title>
-   <key>en</key>
-   <value>Finish</value>
+   <key>tr</key>
+   <value>Bitiş</value>
   </title>
   <title>
    <key>ru</key>
    <value>Закончить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Bitiş</value>
+   <key>en</key>
+   <value>Finish</value>
   </title>
   <id>20</id>
   <valueType>
@@ -1649,16 +1649,16 @@
  <attributes>
   <name>PreviewScaleSize</name>
   <title>
-   <key>en</key>
-   <value>Preview scale size</value>
+   <key>tr</key>
+   <value>Önizleme ölçek boyutu</value>
   </title>
   <title>
    <key>ru</key>
    <value>Размер превью</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Önizleme ölçek boyutu</value>
+   <key>en</key>
+   <value>Preview scale size</value>
   </title>
   <id>22</id>
   <valueType>
@@ -1678,16 +1678,16 @@
  <attributes>
   <name>BackgroundJobUUID</name>
   <title>
-   <key>en</key>
-   <value>Background job UUID</value>
+   <key>tr</key>
+   <value>Arka plan işi UUID</value>
   </title>
   <title>
    <key>ru</key>
    <value>UUID фонового задания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Arka plan işi UUID</value>
+   <key>en</key>
+   <value>Background job UUID</value>
   </title>
   <id>24</id>
   <valueType>
@@ -1703,16 +1703,16 @@
  <formCommands>
   <name>SelectPath</name>
   <title>
-   <key>en</key>
-   <value>Select path</value>
+   <key>tr</key>
+   <value>Yol seç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Выбрать путь</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yol seç</value>
+   <key>en</key>
+   <value>Select path</value>
   </title>
   <id>1</id>
   <use>
@@ -1732,16 +1732,16 @@
  <formCommands>
   <name>AnalizeFolder</name>
   <title>
-   <key>en</key>
-   <value>Analize folder</value>
+   <key>tr</key>
+   <value>Analiz klasörü</value>
   </title>
   <title>
    <key>ru</key>
    <value>Анализировать каталог</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Analiz klasörü</value>
+   <key>en</key>
+   <value>Analize folder</value>
   </title>
   <id>2</id>
   <use>
@@ -1761,16 +1761,16 @@
  <formCommands>
   <name>FindOwner</name>
   <title>
-   <key>en</key>
-   <value>Find owner</value>
+   <key>tr</key>
+   <value>Sahibi bul</value>
   </title>
   <title>
    <key>ru</key>
    <value>Найти владельца</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Sahibi bul</value>
+   <key>en</key>
+   <value>Find owner</value>
   </title>
   <id>3</id>
   <use>
@@ -1790,16 +1790,16 @@
  <formCommands>
   <name>Load</name>
   <title>
-   <key>en</key>
-   <value>Load</value>
+   <key>tr</key>
+   <value>Yükle</value>
   </title>
   <title>
    <key>ru</key>
    <value>Загрузить</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Yükle</value>
+   <key>en</key>
+   <value>Load</value>
   </title>
   <id>4</id>
   <use>

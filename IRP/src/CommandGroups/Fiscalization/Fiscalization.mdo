@@ -2,16 +2,16 @@
 <mdclass:CommandGroup xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="99fc0377-5422-4af7-8583-c05f0d0fde61">
  <name>Fiscalization</name>
  <synonym>
-  <key>en</key>
-  <value>Fiscalization</value>
+  <key>tr</key>
+  <value>Fiskalizasyon</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Фискализация</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Fiskalizasyon</value>
+  <key>en</key>
+  <value>Fiscalization</value>
  </synonym>
  <representation>Auto</representation>
  <picture xsi:type="core:PictureRef">

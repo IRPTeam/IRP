@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseIncidents</name>
  <synonym>
-  <key>en</key>
-  <value>Use "Incidents" Subsystem</value>
+  <key>tr</key>
+  <value>"Talpeler" alt sistemi kullanmak</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>Use "Incidents" Subsystem</value>
+  <value>Используйте подсистему "Инциденты"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>"Talpeler" alt sistemi kullanmak</value>
+  <key>en</key>
+  <value>Use "Incidents" Subsystem</value>
  </synonym>
  <type>
   <types>Boolean</types>

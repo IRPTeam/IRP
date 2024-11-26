@@ -2,15 +2,15 @@
 <mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e86c41ee-bc10-4352-8f45-6be291e12bac">
  <name>Document_SalesOrderClosing</name>
  <synonym>
-  <key>en</key>
-  <value>Document "Sales order closing"</value>
+  <key>tr</key>
+  <value>Belge "Satış siparişi kapatma"</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Документ "Закрытие заказа на продажу"</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Belge "Satış siparişi kapatma"</value>
+  <key>en</key>
+  <value>Document "Sales order closing"</value>
  </synonym>
 </mdclass:Role>

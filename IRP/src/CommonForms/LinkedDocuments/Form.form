@@ -134,16 +134,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Form command bar</value>
+    <key>tr</key>
+    <value>Form komut çubuğu</value>
    </title>
    <title>
     <key>ru</key>
     <value>Форма панель инструментов</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Form komut çubuğu</value>
+    <key>en</key>
+    <value>Form command bar</value>
    </title>
    <extendedTooltip>
     <name>GroupFormCommandBarExtendedTooltip</name>
@@ -221,16 +221,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group2</value>
+   <key>tr</key>
+   <value>Grup 2</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа 2</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup 2</value>
+   <key>en</key>
+   <value>Group2</value>
   </title>
   <extendedTooltip>
    <name>Group2ExtendedTooltip</name>
@@ -583,16 +583,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Documents tree group main</value>
+    <key>tr</key>
+    <value>Evrak ağacı ana grup</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа дерева документов основной</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak ağacı ana grup</value>
+    <key>en</key>
+    <value>Documents tree group main</value>
    </title>
    <extendedTooltip>
     <name>DocumentsTreeGroupMainExtendedTooltip</name>
@@ -834,16 +834,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Documents tree group quantity</value>
+    <key>tr</key>
+    <value>Evrak ağacı grup miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Группа дерева документов количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak ağacı grup miktar</value>
+    <key>en</key>
+    <value>Documents tree group quantity</value>
    </title>
    <extendedTooltip>
     <name>DocumentsTreeGroupQuantityExtendedTooltip</name>
@@ -1084,16 +1084,16 @@
  <attributes>
   <name>DocumentsTree</name>
   <title>
-   <key>en</key>
-   <value>Documents tree</value>
+   <key>tr</key>
+   <value>Evrak ağacı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Дерево документов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak ağacı</value>
+   <key>en</key>
+   <value>Documents tree</value>
   </title>
   <id>1</id>
   <valueType>
@@ -1109,16 +1109,16 @@
   <columns>
    <name>Item</name>
    <title>
-    <key>en</key>
-    <value>Item</value>
+    <key>tr</key>
+    <value>Malzeme</value>
    </title>
    <title>
     <key>ru</key>
     <value>Номенклатура</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Malzeme</value>
+    <key>en</key>
+    <value>Item</value>
    </title>
    <id>116</id>
    <valueType>
@@ -1134,16 +1134,16 @@
   <columns>
    <name>ItemKey</name>
    <title>
-    <key>en</key>
-    <value>Item key</value>
+    <key>tr</key>
+    <value>Varyant</value>
    </title>
    <title>
     <key>ru</key>
     <value>Характеристика</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Varyant</value>
+    <key>en</key>
+    <value>Item key</value>
    </title>
    <id>117</id>
    <valueType>
@@ -1159,16 +1159,16 @@
   <columns>
    <name>Document</name>
    <title>
-    <key>en</key>
-    <value>Document</value>
+    <key>tr</key>
+    <value>Evrak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak</value>
+    <key>en</key>
+    <value>Document</value>
    </title>
    <id>118</id>
    <valueType>
@@ -1188,16 +1188,16 @@
   <columns>
    <name>QuantityInInvoice</name>
    <title>
-    <key>en</key>
-    <value>Invoice</value>
+    <key>tr</key>
+    <value>Fatura</value>
    </title>
    <title>
     <key>ru</key>
     <value>Инвойс</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Fatura</value>
+    <key>en</key>
+    <value>Invoice</value>
    </title>
    <id>119</id>
    <valueType>
@@ -1226,16 +1226,16 @@
   <columns>
    <name>Quantity</name>
    <title>
-    <key>en</key>
-    <value>Quantity</value>
+    <key>tr</key>
+    <value>Miktar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Количество</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Miktar</value>
+    <key>en</key>
+    <value>Quantity</value>
    </title>
    <id>121</id>
    <valueType>
@@ -1251,16 +1251,16 @@
   <columns>
    <name>Level</name>
    <title>
-    <key>en</key>
-    <value>Level</value>
+    <key>tr</key>
+    <value>Seviye</value>
    </title>
    <title>
     <key>ru</key>
     <value>Уровень</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Seviye</value>
+    <key>en</key>
+    <value>Level</value>
    </title>
    <id>122</id>
    <valueType>
@@ -1279,16 +1279,16 @@
   <columns>
    <name>Key</name>
    <title>
-    <key>en</key>
-    <value>Key</value>
+    <key>tr</key>
+    <value>Anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Anahtar</value>
+    <key>en</key>
+    <value>Key</value>
    </title>
    <id>123</id>
    <valueType>
@@ -1304,16 +1304,16 @@
   <columns>
    <name>PictureEdit</name>
    <title>
-    <key>en</key>
-    <value>Picture edit</value>
+    <key>tr</key>
+    <value>Resim düzelt</value>
    </title>
    <title>
     <key>ru</key>
     <value>Редактирование картинки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Resim düzelt</value>
+    <key>en</key>
+    <value>Picture edit</value>
    </title>
    <id>125</id>
    <valueType>
@@ -1329,16 +1329,16 @@
   <columns>
    <name>BasisKey</name>
    <title>
-    <key>en</key>
-    <value>Basis key</value>
+    <key>tr</key>
+    <value>Kaynak anahtar</value>
    </title>
    <title>
     <key>ru</key>
     <value>Ключ документа основания</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Kaynak anahtar</value>
+    <key>en</key>
+    <value>Basis key</value>
    </title>
    <id>168</id>
    <valueType>
@@ -1354,16 +1354,16 @@
   <columns>
    <name>Icon</name>
    <title>
-    <key>en</key>
-    <value>Icon</value>
+    <key>tr</key>
+    <value>Simge</value>
    </title>
    <title>
     <key>ru</key>
     <value>Иконка</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Simge</value>
+    <key>en</key>
+    <value>Icon</value>
    </title>
    <id>169</id>
    <valueType>
@@ -1382,16 +1382,16 @@
   <columns>
    <name>Presentation</name>
    <title>
-    <key>en</key>
-    <value>Presentation</value>
+    <key>tr</key>
+    <value>Görünüm</value>
    </title>
    <title>
     <key>ru</key>
     <value>Специальные предложения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Görünüm</value>
+    <key>en</key>
+    <value>Presentation</value>
    </title>
    <id>171</id>
    <valueType>
@@ -1408,7 +1408,7 @@
   <columns>
    <name>LineNumber</name>
    <title>
-    <key>en</key>
+    <key>tr</key>
     <value>#</value>
    </title>
    <title>
@@ -1416,7 +1416,7 @@
     <value>#</value>
    </title>
    <title>
-    <key>tr</key>
+    <key>en</key>
     <value>#</value>
    </title>
    <id>178</id>
@@ -1436,16 +1436,16 @@
   <columns>
    <name>DocumentName</name>
    <title>
-    <key>en</key>
-    <value>Document name</value>
+    <key>tr</key>
+    <value>Evrak ismi</value>
    </title>
    <title>
     <key>ru</key>
     <value>Наименование документа</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak ismi</value>
+    <key>en</key>
+    <value>Document name</value>
    </title>
    <id>179</id>
    <valueType>
@@ -1463,16 +1463,16 @@
  <attributes>
   <name>TableName</name>
   <title>
-   <key>en</key>
-   <value>Table name</value>
+   <key>tr</key>
+   <value>Tablo ismi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Наименование таблицы</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tablo ismi</value>
+   <key>en</key>
+   <value>Table name</value>
   </title>
   <id>3</id>
   <valueType>
@@ -1489,16 +1489,16 @@
  <attributes>
   <name>DocumentColumnName</name>
   <title>
-   <key>en</key>
-   <value>Document column name</value>
+   <key>tr</key>
+   <value>Evrak konon ismi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Название колонки документа</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Evrak konon ismi</value>
+   <key>en</key>
+   <value>Document column name</value>
   </title>
   <id>4</id>
   <valueType>
@@ -1515,16 +1515,16 @@
  <attributes>
   <name>QuantityColumnName</name>
   <title>
-   <key>en</key>
-   <value>Quantity column name</value>
+   <key>tr</key>
+   <value>Miktar kolon ismi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Название колонки количества</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Miktar kolon ismi</value>
+   <key>en</key>
+   <value>Quantity column name</value>
   </title>
   <id>5</id>
   <valueType>
@@ -1541,16 +1541,16 @@
  <attributes>
   <name>ArrayOfRows_ItemList</name>
   <title>
-   <key>en</key>
-   <value>Array of rows item list</value>
+   <key>tr</key>
+   <value>Satır öğeleri listesi dizisi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Массив строк товаров</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır öğeleri listesi dizisi</value>
+   <key>en</key>
+   <value>Array of rows item list</value>
   </title>
   <id>174</id>
   <valueType>
@@ -1569,16 +1569,16 @@
  <attributes>
   <name>ArrayOfRows_Documents</name>
   <title>
-   <key>en</key>
-   <value>Array of rows documents</value>
+   <key>tr</key>
+   <value>Belge satırlarının dizisi</value>
   </title>
   <title>
    <key>ru</key>
    <value>Массив строк документов</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Belge satırlarının dizisi</value>
+   <key>en</key>
+   <value>Array of rows documents</value>
   </title>
   <id>175</id>
   <valueType>
@@ -1597,16 +1597,16 @@
  <attributes>
   <name>UseReverseTree</name>
   <title>
-   <key>en</key>
-   <value>Use reverse tree</value>
+   <key>tr</key>
+   <value>Ters ağacı kullan</value>
   </title>
   <title>
    <key>ru</key>
    <value>Перевернуть дерево</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ters ağacı kullan</value>
+   <key>en</key>
+   <value>Use reverse tree</value>
   </title>
   <id>176</id>
   <valueType>
@@ -1622,16 +1622,16 @@
  <attributes>
   <name>SettingKey</name>
   <title>
-   <key>en</key>
-   <value>Setting key</value>
+   <key>tr</key>
+   <value>Ayar anahtarı</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ключ настройки</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Ayar anahtarı</value>
+   <key>en</key>
+   <value>Setting key</value>
   </title>
   <id>177</id>
   <valueType>
@@ -1648,16 +1648,16 @@
  <formCommands>
   <name>ShowRowKey</name>
   <title>
-   <key>en</key>
-   <value>Show row key</value>
+   <key>tr</key>
+   <value>Satır antahtarı göster</value>
   </title>
   <title>
    <key>ru</key>
    <value>Показать row key</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Satır antahtarı göster</value>
+   <key>en</key>
+   <value>Show row key</value>
   </title>
   <id>1</id>
   <use>
@@ -1676,16 +1676,16 @@
  <formCommands>
   <name>Ok</name>
   <title>
-   <key>en</key>
-   <value>Ok</value>
+   <key>tr</key>
+   <value>Tamam</value>
   </title>
   <title>
    <key>ru</key>
    <value>Ок</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Tamam</value>
+   <key>en</key>
+   <value>Ok</value>
   </title>
   <id>2</id>
   <use>
@@ -1701,16 +1701,16 @@
  <formCommands>
   <name>Cancel</name>
   <title>
-   <key>en</key>
-   <value>Cancel</value>
+   <key>tr</key>
+   <value>İptal</value>
   </title>
   <title>
    <key>ru</key>
    <value>Отмена</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İptal</value>
+   <key>en</key>
+   <value>Cancel</value>
   </title>
   <id>3</id>
   <use>
@@ -1726,16 +1726,16 @@
  <formCommands>
   <name>OpenBasisDocument</name>
   <title>
-   <key>en</key>
-   <value>Open basis document</value>
+   <key>tr</key>
+   <value>Temel belgeyi aç</value>
   </title>
   <title>
    <key>ru</key>
    <value>Открыть документ основания</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Temel belgeyi aç</value>
+   <key>en</key>
+   <value>Open basis document</value>
   </title>
   <id>4</id>
   <use>

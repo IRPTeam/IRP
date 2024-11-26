@@ -180,16 +180,16 @@
   <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Employee</value>
+     <key>tr</key>
+     <value>Personel</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Сотрудник</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Personel</value>
+     <key>en</key>
+     <value>Employee</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxPayers.EnumValue.Employee</value>
@@ -197,16 +197,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Company</value>
+     <key>tr</key>
+     <value>Şirket</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Организация</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Şirket</value>
+     <key>en</key>
+     <value>Company</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxPayers.EnumValue.Company</value>
@@ -264,16 +264,16 @@
    <radioButtonsType>Tumbler</radioButtonsType>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Rate</value>
+     <key>tr</key>
+     <value>Oran</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Ставка</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Oran</value>
+     <key>en</key>
+     <value>Rate</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Rate</value>
@@ -281,16 +281,16 @@
    </choiceList>
    <choiceList>
     <presentation>
-     <key>en</key>
-     <value>Amount</value>
+     <key>tr</key>
+     <value>Tutar</value>
     </presentation>
     <presentation>
      <key>ru</key>
      <value>Сумма</value>
     </presentation>
     <presentation>
-     <key>tr</key>
-     <value>Tutar</value>
+     <key>en</key>
+     <value>Amount</value>
     </presentation>
     <value xsi:type="core:ReferenceValue">
      <value>Enum.TaxType.EnumValue.Amount</value>
@@ -595,16 +595,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Tax rates</value>
+    <key>tr</key>
+    <value>Vergi oranları</value>
    </title>
    <title>
     <key>ru</key>
     <value>Налоговые ставки</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Vergi oranları</value>
+    <key>en</key>
+    <value>Tax rates</value>
    </title>
    <extendedTooltip>
     <name>GroupTaxRatesExtendedTooltip</name>
@@ -1006,16 +1006,16 @@
     <common>true</common>
    </userVisible>
    <title>
-    <key>en</key>
-    <value>Use documents</value>
+    <key>tr</key>
+    <value>Evrak kullanmak</value>
    </title>
    <title>
     <key>ru</key>
     <value>Документы применения</value>
    </title>
    <title>
-    <key>tr</key>
-    <value>Evrak kullanmak</value>
+    <key>en</key>
+    <value>Use documents</value>
    </title>
    <extendedTooltip>
     <name>GroupUseDocumentsExtendedTooltip</name>
@@ -1044,16 +1044,16 @@
    <common>true</common>
   </userVisible>
   <title>
-   <key>en</key>
-   <value>Group main pages</value>
+   <key>tr</key>
+   <value>Grup ana sayfalar</value>
   </title>
   <title>
    <key>ru</key>
    <value>Группа главных страниц</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>Grup ana sayfalar</value>
+   <key>en</key>
+   <value>Group main pages</value>
   </title>
   <extendedTooltip>
    <name>GroupMainPagesExtendedTooltip</name>
@@ -1126,16 +1126,16 @@
    <columns>
     <name>TransactionTypes</name>
     <title>
-     <key>en</key>
-     <value>Transaction types</value>
+     <key>tr</key>
+     <value>İşlem türleri</value>
     </title>
     <title>
      <key>ru</key>
      <value>Тип транзакции</value>
     </title>
     <title>
-     <key>tr</key>
-     <value>İşlem türleri</value>
+     <key>en</key>
+     <value>Transaction types</value>
     </title>
     <id>3</id>
     <valueType>
@@ -1154,16 +1154,16 @@
  <formCommands>
   <name>SetTransactionTypes</name>
   <title>
-   <key>en</key>
-   <value>Set transaction types</value>
+   <key>tr</key>
+   <value>İşlem türlerini ayarla</value>
   </title>
   <title>
    <key>ru</key>
    <value>Установить тип транзакции</value>
   </title>
   <title>
-   <key>tr</key>
-   <value>İşlem türlerini ayarla</value>
+   <key>en</key>
+   <value>Set transaction types</value>
   </title>
   <id>2</id>
   <use>

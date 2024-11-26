@@ -7,16 +7,16 @@
  </producedTypes>
  <name>UseLandedCost</name>
  <synonym>
-  <key>en</key>
-  <value>Use landed cost</value>
+  <key>tr</key>
+  <value>İşlevsel seçenek - Maliyet hesaplama</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Использовать расчет себестоимости</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>İşlevsel seçenek - Maliyet hesaplama</value>
+  <key>en</key>
+  <value>Use landed cost</value>
  </synonym>
  <type>
   <types>Boolean</types>

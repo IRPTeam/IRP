@@ -2,16 +2,16 @@
 <mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a9239306-ad39-4ab4-a0ad-173d663a8098">
  <name>ManualMovementsEdit</name>
  <synonym>
-  <key>en</key>
-  <value>Manual movements edit</value>
+  <key>tr</key>
+  <value>Manuel harketleri değişitirme</value>
  </synonym>
  <synonym>
   <key>ru</key>
   <value>Ручное редактирование движений</value>
  </synonym>
  <synonym>
-  <key>tr</key>
-  <value>Manuel harketleri değişitirme</value>
+  <key>en</key>
+  <value>Manual movements edit</value>
  </synonym>
  <type>
   <types>Boolean</types>

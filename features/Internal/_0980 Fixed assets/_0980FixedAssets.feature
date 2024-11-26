@@ -606,8 +606,10 @@ Scenario: _9800033 Inventory Look Report
 		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
 		And I click the button named "FormPostAndClose"
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"	
-	Then I select all lines of "List" table
-	And I click the button named "FormPost"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"
 * Open a report
 	Given I open hyperlink "e1cib/app/Report.F0011_InventoryBook"
 	And I click Choice button of the field named "SettingsComposerUserSettingsItem0Value"
@@ -640,16 +642,11 @@ Scenario: _9800034 Fixed Assets Transfer Cost report
 		Then I select current line in "List" table
 		And in the table "Calculations" I click the button named "CalculationsFillCalculations"
 		And I click the button named "FormPostAndClose"
-	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
-	And I go to line in "List" table
-		| 'Number' | 'Date'                | 'Company'      | 'Branch'       |
-		| '1'      | '29.02.2024 12:00:00' | 'Main Company' | 'Front office' |
-	And I select current line in "List" table
-	And in the table "Calculations" I click the button named "CalculationsFillCalculations"
-	And I click the button named "FormPostAndClose"
 	Given I open hyperlink "e1cib/list/Document.CalculationMovementCosts"	
-	Then I select all lines of "List" table
-	And I click the button named "FormPost"
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"
 * Open the report	
 	Given I open hyperlink "e1cib/app/Report.F0010_FixedAssetsTransferCost"
 	And I click the button named "FormChangeVariant"

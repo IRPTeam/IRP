@@ -632,16 +632,16 @@ Scenario: _9800033 Inventory Look Report
 	And I click the button named "FormGenerate"
 	And delay 1
 	Then "Result" spreadsheet document is equal
-		| 'Data parameters:'        | 'Date: 02.03.2024 0:00:00' | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
-		| ''                        | 'Company: Main Company'    | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
-		| ''                        | ''                         | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
-		| 'Fixed asset'             | 'Inventory number'         | 'Receipt'          | ''                   | ''             | ''                   | 'Depreciation rate' | 'Initial cost' |
-		| ''                        | ''                         | 'Doc date, number' | 'Commissioning date' | 'Branch'       | 'Responsible person' | ''                  | ''             |
-		| ''                        | ''                         | ' ,  '             | ''                   | ''             | ''                   | ''                  | ''             |
-		| 'Manufacturing Equipment' | '957'                      | '4, 13.02.2024'    | '13.02.2024'         | 'Front office' | 'Arina Brown'        | '25'                | '2 500,00'     |
-		| 'Computer Servers'        | '985'                      | '1, 12.01.2024'    | '12.01.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '5 000,00'     |
-		| 'Software Licenses'       | '989'                      | '3, 06.02.2024'    | '06.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '2 000,00'     |
-		| 'Office Furniture'        | '947'                      | '2, 03.02.2024'    | '03.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '7 000,00'     |
+		| 'Data parameters:'        | 'Date: 02.03.2024 00:00:00' | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| ''                        | 'Company: Main Company'     | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| ''                        | ''                          | ''                 | ''                   | ''             | ''                   | ''                  | ''             |
+		| 'Fixed asset'             | 'Inventory number'          | 'Receipt'          | ''                   | ''             | ''                   | 'Depreciation rate' | 'Initial cost' |
+		| ''                        | ''                          | 'Doc date, number' | 'Commissioning date' | 'Branch'       | 'Responsible person' | ''                  | ''             |
+		| ''                        | ''                          | ' ,  '             | ''                   | ''             | ''                   | ''                  | ''             |
+		| 'Manufacturing Equipment' | '957'                       | '4, 13.02.2024'    | '13.02.2024'         | 'Front office' | 'Arina Brown'        | '25'                | '2 500,00'     |
+		| 'Computer Servers'        | '985'                       | '1, 12.01.2024'    | '12.01.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '5 000,00'     |
+		| 'Software Licenses'       | '989'                       | '3, 06.02.2024'    | '06.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '2 000,00'     |
+		| 'Office Furniture'        | '947'                       | '2, 03.02.2024'    | '03.02.2024'         | 'Front office' | 'Arina Brown'        | ''                  | '7 000,00'     |
 	
 		
 Scenario: _9800034 Fixed Assets Transfer Cost report
@@ -679,7 +679,7 @@ Scenario: _9800034 Fixed Assets Transfer Cost report
 	And I finish line editing in "SettingsComposerSettingsDataParameters" table
 	And I go to line in "SettingsComposerSettingsDataParameters" table
 		| "Parameter" | "Use" |
-		| "Period"    | "Нет" |
+		| "Period"    | "No"  |
 	And I select current line in "SettingsComposerSettingsDataParameters" table
 	And I click choice button of the attribute named "SettingsComposerSettingsDataParametersValue" in "SettingsComposerSettingsDataParameters" table
 	And I input "01.02.2024" text in the field named "DateBegin"

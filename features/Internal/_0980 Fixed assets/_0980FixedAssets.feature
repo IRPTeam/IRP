@@ -599,6 +599,16 @@ Scenario: _9800032 create Decommissioning Of Fixed Asset
 Scenario: _9800033 Inventory Look Report	
 	And I close all client application windows	
 * Re-post documents
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"		
 	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
 	And I go to the first line in "List" table
 	And for each line of "List" table I do
@@ -636,6 +646,16 @@ Scenario: _9800033 Inventory Look Report
 		
 Scenario: _9800034 Fixed Assets Transfer Cost report
 * Re-post documents
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"	
+	And I go to the first line in "List" table
+	And for each line of "List" table I do
+		Then I select current line in "List" table
+		And I click the button named "FormPostAndClose"		
 	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"	
 	And I go to the first line in "List" table
 	And for each line of "List" table I do

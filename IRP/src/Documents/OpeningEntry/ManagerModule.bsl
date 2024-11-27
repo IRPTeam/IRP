@@ -832,8 +832,8 @@ Function FixedAssets()
 	Return
 		"SELECT
 		|	OpeningEntryFixedAssets.Ref.Date AS Period,
-		|   OpeningEntryFixedAssets.Ref AS Ref, 
-		|   OpeningEntryFixedAssets.Schedule,
+		|	OpeningEntryFixedAssets.Ref AS Ref,
+		|	OpeningEntryFixedAssets.Schedule,
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,

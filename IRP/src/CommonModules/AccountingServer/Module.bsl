@@ -3975,11 +3975,19 @@ Function CreateExternalAccountingOperation(IntegrationSettings, Data, LedgerType
 		
 		If QueryTable[0].Posted Then
 			DocObject.Write(DocumentWriteMode.Posting);
-		Else
-			If ValueIsFilled(DocObject.Ref) Then
+		ElsIf QueryTable[0].DeletionMark Then
+			If DocObject.Posted Then
 				DocObject.Write(DocumentWriteMode.UndoPosting);
 			EndIf;
-		EndIf;
+			DocObject.DeletionMark = True;
+			DocObject.Write(DocumentWriteMode.Write);
+		Else
+			If IsBlankString(DocObject.DataVersion) Then
+				DocObject.Write(DocumentWriteMode.Write);
+			Else
+				DocObject.Write(DocumentWriteMode.UndoPosting);		
+			EndIf;
+		EndIf;		
 	EndIf;
 	
 	ResultStructure.IsError = DocObject.Errors.Count() > 0;

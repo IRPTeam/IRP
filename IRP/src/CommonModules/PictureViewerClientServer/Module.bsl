@@ -132,3 +132,17 @@ Function ExtensionCall_UploadPicture(FileInfo, Parameters) Export
 	Return False;
 EndFunction
 
+Function GetPictureAndPutToTempStorage(UUID, URI, ConnectionSettings) Export
+
+	ConnectionSettings.Value.QueryType = "GET";
+	ResourceParameters = New Structure();
+	ResourceParameters.Insert("filename", URI);
+	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
+
+	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
+		Return PutToTempStorage(New Picture(RequestResult.ResponseBody), UUID);
+	Else
+		Return "";
+	EndIf;
+	
+EndFunction

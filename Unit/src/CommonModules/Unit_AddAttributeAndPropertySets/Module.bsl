@@ -69,6 +69,8 @@ Function GetExclude_AddAttributes()
 	ArrayOfExcluded.Add("Catalog.PrintInfo");
 	ArrayOfExcluded.Add("Catalog.Unit_ErrorTypes");
 	ArrayOfExcluded.Add("Catalog.AttachedDocumentSettings");
+	ArrayOfExcluded.Add("Catalog.IssueTypes");
+	ArrayOfExcluded.Add("Catalog.ObjectLocations");
 
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");
@@ -115,6 +117,8 @@ Function GetExclude_Properties()
 	ArrayOfExcluded.Add("Catalog.PrintInfo");
 	ArrayOfExcluded.Add("Catalog.Unit_ErrorTypes");
 	ArrayOfExcluded.Add("Catalog.AttachedDocumentSettings");
+	ArrayOfExcluded.Add("Catalog.IssueTypes");
+	ArrayOfExcluded.Add("Catalog.ObjectLocations");
 	
 	ArrayOfExcluded.Add("Document.AdditionalCostAllocation");
 	ArrayOfExcluded.Add("Document.AdditionalRevenueAllocation");

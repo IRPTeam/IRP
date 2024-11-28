@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="91ae5461-a18c-45ca-8040-e7c1822501d6">
+  <producedTypes>
+    <managerType typeId="0aa61d8b-2574-4925-9114-795c6f9e09aa" valueTypeId="5b49b727-abc3-4728-b9da-ecb034ccd8e1"/>
+    <valueManagerType typeId="257d1cfb-53de-4aba-bfd9-af0783ca0ec8" valueTypeId="d1534488-95b0-4cc1-82f0-d1a73de49342"/>
+    <valueKeyType typeId="85f375af-b6b0-48a8-a302-4c524a2e1980" valueTypeId="e5945f02-501d-4089-996e-80d879cb487e"/>
+  </producedTypes>
+  <name>UseIncidents</name>
+  <synonym>
+    <key>en</key>
+    <value>Use &quot;Incidents&quot; Subsystem</value>
+  </synonym>
+  <type>
+    <types>Boolean</types>
+  </type>
+  <useStandardCommands>true</useStandardCommands>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <dataLockControlMode>Managed</dataLockControlMode>
+</mdclass:Constant>

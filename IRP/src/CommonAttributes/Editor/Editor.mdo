@@ -273,6 +273,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ObjectLocations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.PhysicalCountByLocation</metadata>
     <use>Use</use>
   </content>
@@ -401,6 +405,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Cities</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailShipmentConfirmation</metadata>
     <use>Use</use>
   </content>
@@ -510,6 +518,10 @@
   </content>
   <content>
     <metadata>Document.WorkOrderClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.Issue</metadata>
     <use>Use</use>
   </content>
   <content>

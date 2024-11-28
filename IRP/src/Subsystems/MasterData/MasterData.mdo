@@ -17,6 +17,8 @@
   <content>Catalog.PrintInfo</content>
   <content>Report.T0001_FilesAnalyser</content>
   <content>DataProcessor.DownloadAttachedFiles</content>
+  <content>Catalog.Countries</content>
+  <content>Catalog.Cities</content>
   <subsystems>PurchaseAndSales</subsystems>
   <subsystems>Finance</subsystems>
   <subsystems>OpeningEntry</subsystems>

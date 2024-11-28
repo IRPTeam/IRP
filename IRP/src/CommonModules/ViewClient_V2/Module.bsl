@@ -2220,34 +2220,34 @@ EndProcedure
 // Parameters:
 //  Object - DocumentObject.SalesInvoice - Object
 //  Form - ClientApplicationFormExtensionForDocuments - Form
-Async Procedure ItemListSplitRow(Object, Form) Export
+Async Function ItemListSplitRow(Object, Form) Export
 	TableName = "ItemList";
 	Table = Form.Items[TableName]; // See Document.SalesInvoice.Form.DocumentForm.Items.ItemList
 	CurrentData = Table.CurrentData; 
 	If CurrentData = Undefined Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().Form_040);
-		Return;
+		Return Undefined;
 	EndIf;
 	
 	CurrentAmount = CurrentData.TotalAmount;
 	CurrentQuantity = CurrentData.Quantity;
 	If CurrentQuantity = 0 Then
 		CommonFunctionsClientServer.ShowUsersMessage(R().Form_041);
-		Return;
+		Return Undefined;
 	EndIf;
 	
 	NewRowQuantity = Await InputNumberAsync(0, R().Form_042);
 	If NewRowQuantity = Undefined Then
-		Return;
+		Return Undefined;
 	EndIf;
 	
 	If NewRowQuantity = 0 Then
-		Return;
+		Return Undefined;
 	EndIf;
 	
 	If NewRowQuantity < 0 OR NewRowQuantity >= CurrentQuantity Then
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Form_043, CurrentQuantity));
-		Return;		
+		Return Undefined;		
 	EndIf;
 	
 	CurrentData.Quantity = CurrentQuantity - NewRowQuantity;
@@ -2302,6 +2302,15 @@ Async Procedure ItemListSplitRow(Object, Form) Export
 		EndDo;
 	EndIf;
 	
+	RowIDInfoTable = Object.RowIDInfo.FindRows(New Structure("Key", CurrentData.Key));
+	If RowIDInfoTable.Count() > 0 Then
+		For Each Row In RowIDInfoTable Do
+			NewRowIDInfo = Object.RowIDInfo.Add();
+			FillPropertyValues(NewRowIDInfo, Row);
+			NewRowIDInfo.Key = NewRow.Key;
+		EndDo;
+	EndIf;
+	
 	ItemListQuantityOnChange(Object, Form, CurrentData);
 	ItemListQuantityOnChange(Object, Form, NewRow);
 	
@@ -2313,7 +2322,8 @@ Async Procedure ItemListSplitRow(Object, Form) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 	SourceOfOriginClient.UpdateSourceOfOriginsQuantity(Object, Form);	
-EndProcedure
+	Return NewRow;
+EndFunction
 
 Function ItemListAddFilledRow(Object, Form,  FillingValues) Export
 	Cancel      = False;

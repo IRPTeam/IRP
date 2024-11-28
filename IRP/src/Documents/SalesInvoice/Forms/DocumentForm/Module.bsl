@@ -764,8 +764,16 @@ Procedure OpenSerialLotNumbersTree(Command)
 EndProcedure
 
 &AtClient
-Procedure SplitRow(Command)
-	DocSalesInvoiceClient.ItemListSplitRow(Object, ThisObject);
+Async Procedure SplitRow(Command)
+	NewRow = Await DocSalesInvoiceClient.ItemListSplitRow(Object, ThisObject);
+	If NewRow <> Undefined Then
+		SplitRowAtServer();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure SplitRowAtServer()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
 EndProcedure
 
 #EndRegion

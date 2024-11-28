@@ -99,6 +99,7 @@
   <registerRecords>AccumulationRegister.R9510B_SalaryPayment</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+  <registerRecords>InformationRegister.T8510S_FixedAssetsInfo</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
@@ -2797,6 +2798,20 @@
       </synonym>
       <type>
         <types>CatalogRef.Currencies</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7f56f087-5f5f-49e4-a9c0-8f2b12de891d">
+      <name>Schedule</name>
+      <synonym>
+        <key>en</key>
+        <value>Schedule</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.DepreciationSchedules</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

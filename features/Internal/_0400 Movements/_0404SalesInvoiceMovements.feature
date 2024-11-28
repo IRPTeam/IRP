@@ -1427,3 +1427,20 @@ Scenario: _0401429 Sales invoice clear posting/mark for deletion
 			| 'R2001 Sales'                    |
 			| 'R2021 Customer transactions'    |
 		And I close all client application windows
+
+Scenario: _0401351 check Sales invoice movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'     | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                          | 'Document'                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                          | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '28.01.2021 18:48:53' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -238,3 +238,20 @@ Scenario: _045012 Outgoing payment order clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3035 Cash planning'    |
 		And I close all client application windows		
+
+Scenario: _045003 check Outgoing payment order movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '323'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                     | 'Document'                                             | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                     | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | '07.09.2020 19:23:44' | '323'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

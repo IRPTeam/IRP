@@ -775,3 +775,20 @@ Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R4050 Stock inventory'    |
 		And I close all client application windows
+
+Scenario: _0402441 check Inventory transfer movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And I go to line in "List" table
+		| 'Number' |
+		| '201'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 201 dated 01.03.2021 9:55:16' | ''                                                | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'           | ''                                                | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                | 'Document'                                        | 'Date'               | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                | 'Inventory transfer 201 dated 01.03.2021 9:55:16' | '01.03.2021 9:55:16' | '201'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -422,3 +422,37 @@ Scenario: _045521 Work order clear posting/mark for deletion
 			| 'TM1010B Row ID movements'    |
 			| 'T3010S Row ID info'          |
 		And I close all client application windows
+
+Scenario: _045514 check WorkSheet movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkSheet"
+	And I go to line in "List" table
+		| 'Number' |
+		| '4'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work sheet 4 dated 29.09.2022 19:07:21'             | ''                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                   | 'Document'                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                   | 'Work sheet 4 dated 29.09.2022 19:07:21' | '29.09.2022 19:07:21' | '4'      | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows		
+
+Scenario: _045515 check WorkOrder movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.WorkOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '32'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Work order 32 dated 28.09.2022 19:53:33'            | ''                                        | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                        | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                   | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                   | 'Work order 32 dated 28.09.2022 19:53:33' | '28.09.2022 19:53:33' | '32'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows		

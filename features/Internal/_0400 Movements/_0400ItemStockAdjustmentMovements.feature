@@ -284,8 +284,25 @@ Scenario: _040012 item stock adjustment clear posting/mark for deletion
 			| 'R4010 Actual stocks'                 |
 		And I close all client application windows
 
-		
-				
+Scenario: _040008 check item stock adjustment movements by the Register "Posted documents registry"
+		And I close all client application windows	
+	* Select item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1'         |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'             | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                  | 'Document'                                          | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                  | 'Item stock adjustment 1 dated 27.01.2021 19:04:15' | '27.01.2021 19:04:15' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+		And I close all client application windows	
+	
+			
 
 
 		

@@ -243,3 +243,20 @@ Scenario: _051509 check Commissioning of fixed asset movements by the Register "
 			| ''                                                          | 'Period'              | 'Company'      | 'Branch'       | 'Profit loss center'   | 'Fixed asset'      | 'Responsible person' | 'Is active' |
 			| ''                                                          | '12.01.2024 12:00:00' | 'Main Company' | 'Front office' | 'Logistics department' | 'Computer Servers' | 'Arina Brown'        | 'Yes'       |		
 	And I close all client application windows
+
+Scenario: _051510 check Commissioning of fixed asset movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CommissioningOfFixedAsset"
+	And I go to line in "List" table
+		| 'Number' |
+		| '11'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'                     | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                          | 'Document'                                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                          | 'Commissioning of fixed asset 11 dated 12.01.2024 12:00:00' | '12.01.2024 12:00:00' | '11'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows	

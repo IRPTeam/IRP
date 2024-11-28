@@ -1201,3 +1201,19 @@ Scenario: _043655 check Cash receipt movements by the Register  "R9510 Salary pa
 			| ''                                           | '02.09.2024 17:37:07' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'First'                | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '34,24'  |		
 	And I close all client application windows
 
+Scenario: _043656 check Cash receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '517'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 517 dated 08.02.2022 13:18:32' | ''                                           | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'      | ''                                           | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                           | 'Document'                                   | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                           | 'Cash receipt 517 dated 08.02.2022 13:18:32' | '08.02.2022 13:18:32' | '517'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+And I close all client application windows		

@@ -192,3 +192,20 @@ Scenario: _045112 Incoming payment order clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3035 Cash planning'    |
 		And I close all client application windows		
+
+Scenario: _045104 check Physical inventory movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '113'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                | ''                                                     | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                     | 'Document'                                             | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                     | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | '01.06.2021 10:53:53' | '113'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

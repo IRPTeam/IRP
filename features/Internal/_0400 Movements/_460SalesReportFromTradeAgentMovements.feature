@@ -343,3 +343,20 @@ Scenario: _046010 check Sales report from trade agent movements by the Register 
 			| ''                                                              | '15.12.2023 11:10:35' | '2'         | '1 040'  | '881,36'     | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales report from trade agent 1 115 dated 15.12.2023 11:10:35' | 'XS/Blue'  | ''                  | '13086eac-e1c7-4213-845b-73ffa79b17f8' | ''             |
 			| ''                                                              | '15.12.2023 11:10:35' | '2'         | '1 040'  | '881,36'     | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales report from trade agent 1 115 dated 15.12.2023 11:10:35' | 'XS/Blue'  | ''                  | '13086eac-e1c7-4213-845b-73ffa79b17f8' | ''             |	
 		And I close all client application windows
+
+Scenario: _046011 check Sales report from trade agent movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReportFromTradeAgent"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'                     | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                          | 'Document'                                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                          | 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | '03.11.2022 10:53:35' | '1'      | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows		

@@ -115,3 +115,38 @@ Scenario: _900108 check FO use item key
 			When I Check the steps for Exception
 				| 'And In the command interface I select "MasterData" "Item key"'     |
 	And I close all client application windows
+
+
+Scenario: _900109 check FO use Legal Name (check in SI,PI)
+	And I close all client application windows
+	* Switch-off FO use Legal Name
+		Given I open hyperlink "e1cib/app/DataProcessor.FunctionalOptionSettings"
+		And I go to line in "FunctionalOptions" table
+			| 'Option'         | 'Use' |
+			| 'Use legal name' | 'Yes' |
+		And I remove "Use" checkbox in "FunctionalOptions" table
+		And I click "Save" button
+		And I close "Functional option settings" window	
+	* Check
+		* MasterData
+			When I Check the steps for Exception
+				| 'And In the command interface I select "MasterData" "Legal name"'     |
+		* Check in SI 
+			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+			And I click the button named "FormCreate"
+			And I click Choice button of the field named "Partner"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Customer 1'  |
+			And I click the button named "FormChoose"
+			Then the field named "DecorationGroupTitleCollapsedLabel" value does not contain "Legal name" text
+		* Check in PI 
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I click the button named "FormCreate"
+			And I click Choice button of the field named "Partner"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Vendor and customer' |
+			And I click the button named "FormChoose"
+			Then the field named "DecorationGroupTitleCollapsedLabel" value does not contain "Legal name" text
+	And I close all client application windows						

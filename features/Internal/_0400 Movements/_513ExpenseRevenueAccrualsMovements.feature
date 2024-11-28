@@ -415,3 +415,37 @@ Scenario: _0513017 check Revenue accruals movements by the Register "R6080 Other
 			| ''                                              | '02.05.2024 18:10:47' | 'Expense'    | 'Main Company' | 'Front office' | '                                    ' | 'Sales invoice 171 dated 30.04.2024 13:36:19' | ''         | 'TRY'      | 'TRY'                  | 'en description is empty' | 'Revenue accruals'          | 'Revenue'      | 'Front office'       | '500'    | ''           |
 			| ''                                              | '02.05.2024 18:10:47' | 'Expense'    | 'Main Company' | 'Front office' | '                                    ' | 'Sales invoice 171 dated 30.04.2024 13:36:19' | ''         | 'USD'      | 'TRY'                  | 'Reporting currency'      | 'Revenue accruals'          | 'Revenue'      | 'Front office'       | '156,05' | ''           |		
 	And I close all client application windows
+
+Scenario:  _0513018 check Expense accruals movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.ExpenseAccruals"
+	And I go to line in "List" table
+		| 'Number' |
+		| '170'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Expense accrual 170 dated 30.04.2024 12:30:37' | ''                                              | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'         | ''                                              | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                              | 'Document'                                      | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                              | 'Expense accrual 170 dated 30.04.2024 12:30:37' | '30.04.2024 12:30:37' | '170'    | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows	
+
+Scenario:  _0513019 check Revenue accruals movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RevenueAccruals"
+	And I go to line in "List" table
+		| 'Number' |
+		| '171'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Revenue accrual 171 dated 01.05.2024 18:35:11' | ''                                              | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'         | ''                                              | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                              | 'Document'                                      | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                              | 'Revenue accrual 171 dated 01.05.2024 18:35:11' | '01.05.2024 18:35:11' | '171'    | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows	

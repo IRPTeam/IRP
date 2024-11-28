@@ -675,3 +675,22 @@ Scenario: _040199 Shipment confirmation clear posting/mark for deletion
 			| 'R4010 Actual stocks'               |
 			| 'R4012 Stock Reservation'           |
 		And I close all client application windows
+
+Scenario: _040195 check Shipment confirmation movements by the Register "Posted documents registry"
+		And I close all client application windows
+	* Select Shipment confirmation
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '2'         |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'             | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                  | 'Document'                                          | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                  | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '28.01.2021 18:43:36' | '2'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+		And I close all client application windows

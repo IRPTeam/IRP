@@ -1065,3 +1065,20 @@ Scenario: _041340 check Sales return movements by the Register  "R4050 Stock inv
 			| ''                                           | 'Period'              | 'RecordType' | 'Company'      | 'Store'    | 'Item key' | 'Quantity' |
 			| ''                                           | '05.11.2022 00:00:01' | 'Receipt'    | 'Main Company' | 'Store 01' | 'XS/Blue'  | '1'        |		
 		And I close all client application windows	
+
+Scenario: _041341 check Sales return movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturn"
+	And I go to line in "List" table
+		| 'Number' |
+		| '102'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 102 dated 12.03.2021 8:50:27' | ''                                          | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'     | ''                                          | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                          | 'Document'                                  | 'Date'               | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                          | 'Sales return 102 dated 12.03.2021 8:50:27' | '12.03.2021 8:50:27' | '102'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

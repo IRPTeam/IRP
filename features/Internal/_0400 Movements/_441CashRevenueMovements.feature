@@ -329,3 +329,20 @@ Scenario: _044130 Cash revenue clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3010 Cash on hand'    |
 		And I close all client application windows		
+
+Scenario: _044110 check Cash revenue movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashRevenue"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'    | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                         | 'Document'                                 | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                         | 'Cash revenue 1 dated 07.09.2020 19:24:49' | '07.09.2020 19:24:49' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

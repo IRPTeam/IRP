@@ -384,6 +384,24 @@ Scenario: _040169 Sales order closing clear posting/mark for deletion
 			| 'R2012 Invoice closing of sales orders'    |
 		And I close all client application windows
 
+Scenario: _040170 check Sales order closing movements by the Register "Posted documents registry"
+	And I close all client application windows
+	* Select Sales order closing
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '1'         |
+		And I click the button named "FormPost"
+	* Check movements by the Register "Posted documents registry" 
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' | ''                                                | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'           | ''                                                | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                | 'Document'                                        | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                | 'Sales order closing 1 dated 28.01.2021 14:46:50' | '28.01.2021 14:46:50' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+		And I close all client application windows
 
 		
 						

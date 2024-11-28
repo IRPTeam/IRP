@@ -268,3 +268,20 @@ Scenario: _040996 check Payroll movements by the Register  "R5020 Partners balan
 			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'Tax authority' | 'Tax authority' | 'Tax'       | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '11,98'  | ''                     | ''                 | ''                   | ''               | '11,98'             | ''                 |
 			| ''                                    | '27.04.2023 12:39:37' | 'Expense'    | 'Main Company' | 'Front office' | 'Tax authority' | 'Tax authority' | 'Tax'       | ''         | 'USD'      | 'Reporting currency'           | 'TRY'                  | '17,12'  | ''                     | ''                 | ''                   | ''               | '17,12'             | ''                 |
 		And I close all client application windows
+
+Scenario: _040997 check Payroll movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Payroll"
+	And I go to line in "List" table
+		| 'Number' |
+		| '4'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Payroll 4 dated 27.04.2023 12:39:37'   | ''                                    | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"' | ''                                    | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                      | 'Document'                            | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                      | 'Payroll 4 dated 27.04.2023 12:39:37' | '27.04.2023 12:39:37' | '4'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows	

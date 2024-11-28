@@ -150,3 +150,20 @@ Scenario: _045212 Cash transfer order  clear posting/mark for deletion
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3035 Cash planning'    |
 		And I close all client application windows				
+
+Scenario: _045204 check Cash transfer order movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '2'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash transfer order 2 dated 05.04.2021 12:09:54' | ''                                                | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'           | ''                                                | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                | 'Document'                                        | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | '05.04.2021 12:09:54' | '2'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

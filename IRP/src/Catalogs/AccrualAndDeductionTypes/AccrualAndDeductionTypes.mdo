@@ -131,7 +131,7 @@
   <fullTextSearch>Use</fullTextSearch>
   <objectPresentation>
     <key>en</key>
-    <value>Expense and revenue type</value>
+    <value>Accrual and deduction types</value>
   </objectPresentation>
   <hierarchyType>HierarchyOfItems</hierarchyType>
   <levelCount>2</levelCount>

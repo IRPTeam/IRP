@@ -320,8 +320,8 @@ Scenario: _045406 check CashStatement movements by the Register  "Posted documen
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                                            | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
-			| ''                                            | 'Cash statement 11 dated 23.06.2022 22:53:32' | '23.06.2022 22:53:32' | '11'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+		| 'Cash statement 11 dated 23.06.2022 22:53:32' | ''                                            | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+		| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+		| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+		| ''                                            | 'Cash statement 11 dated 23.06.2022 22:53:32' | '23.06.2022 22:53:32' | '11'     | '27.11.2024 9:41:07' | '27.11.2024 9:41:29' | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

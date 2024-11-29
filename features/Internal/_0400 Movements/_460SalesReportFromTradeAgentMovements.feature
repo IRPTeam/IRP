@@ -355,8 +355,8 @@ Scenario: _046011 check Sales report from trade agent movements by the Register 
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| 'Register  "Posted documents registry"'                     | ''                                                          | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| ''                                                          | 'Document'                                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
-			| ''                                                          | 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | '03.11.2022 10:53:35' | '1'      | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+			| 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | ''                                                          | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                     | ''                                                          | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| ''                                                          | 'Document'                                                  | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                          | 'Sales report from trade agent 1 dated 03.11.2022 10:53:35' | '03.11.2022 10:53:35' | '1'      | '27.11.2024 9:43:01' | '27.11.2024 9:43:05' | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

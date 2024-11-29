@@ -604,8 +604,8 @@ Scenario: _043020 check Credit note movements by the Register  "Posted documents
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 1 dated 05.04.2021 9:30:47' | ''                                       | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
-			| 'Register  "Posted documents registry"'  | ''                                       | ''                   | ''       | ''            | ''            | ''                        | ''                        | ''                      |
-			| ''                                       | 'Document'                               | 'Date'               | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
-			| ''                                       | 'Credit note 1 dated 05.04.2021 9:30:47' | '05.04.2021 9:30:47' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'   | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                        | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                        | 'Credit note 1 dated 05.04.2021 09:30:47' | '05.04.2021 09:30:47' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

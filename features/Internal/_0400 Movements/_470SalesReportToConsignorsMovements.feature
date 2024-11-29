@@ -162,7 +162,7 @@ Scenario: _047005 check Sales report to consignor movements by the Register  "R1
 			| ''                                                       | '31.12.2022 10:00:00' | 'Receipt'    | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | 'Invoice'      | 'en description is empty'      | 'TRY'      | 'TRY'                  | '-442,37' |		
 		And I close all client application windows
 
-Scenario: _045515 check WorkOrder movements by the Register  "Posted documents registry"
+Scenario: _047006 check Sales report to consignor movements by the Register  "Posted documents registry"
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.SalesReportToConsignor"
 	And I go to line in "List" table
@@ -173,8 +173,8 @@ Scenario: _045515 check WorkOrder movements by the Register  "Posted documents r
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| 'Register  "Posted documents registry"'                  | ''                                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| ''                                                       | 'Document'                                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
-			| ''                                                       | 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | '31.12.2022 10:00:00' | '15'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                  | ''                                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| ''                                                       | 'Document'                                               | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                       | 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | '31.12.2022 10:00:00' | '15'     | '27.11.2024 9:43:54' | '27.11.2024 9:43:56' | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

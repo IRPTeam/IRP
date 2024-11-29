@@ -434,10 +434,10 @@ Scenario: _045514 check WorkSheet movements by the Register  "Posted documents r
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work sheet 4 dated 29.09.2022 19:07:21'             | ''                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| 'Register  "Posted documents registry !Manual edit"' | ''                                       | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| ''                                                   | 'Document'                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
-			| ''                                                   | 'Work sheet 4 dated 29.09.2022 19:07:21' | '29.09.2022 19:07:21' | '4'      | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+			| 'Work sheet 4 dated 29.09.2022 19:07:21'             | ''                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| ''                                                   | 'Document'                               | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                   | 'Work sheet 4 dated 29.09.2022 19:07:21' | '29.09.2022 19:07:21' | '4'      | '27.11.2024 9:41:56' | '27.11.2024 9:41:57' | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		
 
 Scenario: _045515 check WorkOrder movements by the Register  "Posted documents registry"
@@ -451,8 +451,8 @@ Scenario: _045515 check WorkOrder movements by the Register  "Posted documents r
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Work order 32 dated 28.09.2022 19:53:33'            | ''                                        | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| 'Register  "Posted documents registry !Manual edit"' | ''                                        | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
-			| ''                                                   | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
-			| ''                                                   | 'Work order 32 dated 28.09.2022 19:53:33' | '28.09.2022 19:53:33' | '32'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+			| 'Work order 32 dated 28.09.2022 19:53:33'            | ''                                        | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                        | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
+			| ''                                                   | 'Document'                                | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                   | 'Work order 32 dated 28.09.2022 19:53:33' | '28.09.2022 19:53:33' | '32'     | '27.11.2024 9:41:56' | '27.11.2024 9:41:57' | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

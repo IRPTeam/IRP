@@ -4822,6 +4822,11 @@
     <picture xsi:type="core:PictureRef">
       <picture>CommonPicture.Split</picture>
     </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SplitRow</name>
+      </handler>
+    </action>
     <representation>Picture</representation>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>

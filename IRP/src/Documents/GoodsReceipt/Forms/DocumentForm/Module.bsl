@@ -570,3 +570,20 @@ Procedure ShowHiddenTables(Command)
 EndProcedure
 
 #EndRegion
+
+#Region SplitRow
+
+&AtClient
+Async Procedure SplitRow(Command)
+	NewRow = Await DocSalesInvoiceClient.ItemListSplitRow(Object, ThisObject);
+	If NewRow <> Undefined Then
+		SplitRowAtServer();
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure SplitRowAtServer()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+EndProcedure
+
+#EndRegion

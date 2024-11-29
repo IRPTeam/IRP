@@ -173,8 +173,8 @@ Scenario: _047006 check Sales report to consignor movements by the Register  "Po
 		And I select "Posted documents registry" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
-			| 'Register  "Posted documents registry"'                  | ''                                                       | ''                    | ''       | ''                   | ''                   | ''                        | ''                        | ''                      |
-			| ''                                                       | 'Document'                                               | 'Date'                | 'Number' | 'Create date'        | 'Modify date'        | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
-			| ''                                                       | 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | '31.12.2022 10:00:00' | '15'     | '27.11.2024 9:43:54' | '27.11.2024 9:43:56' | 'en description is empty' | 'en description is empty' | 'No'                    |
+			| 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | ''                                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'                  | ''                                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                       | 'Document'                                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                       | 'Sales report to consignor 15 dated 31.12.2022 10:00:00' | '31.12.2022 10:00:00' | '15'     | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
 	And I close all client application windows		

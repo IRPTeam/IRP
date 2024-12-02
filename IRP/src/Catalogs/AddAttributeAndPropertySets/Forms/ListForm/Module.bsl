@@ -16,7 +16,9 @@ Procedure FillDefaultDescriptionsAtServer()
 		"SELECT
 		|	AddAttributeAndPropertySets.Ref
 		|FROM
-		|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets";
+		|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
+		|WHERE
+		|	NOT AddAttributeAndPropertySets.DeletionMark";
 	
 	QueryResult = Query.Execute();
 	

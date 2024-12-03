@@ -147,15 +147,15 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Gider ve gelir türü</value>
+  <value>Birikim ve kesinti türleri</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>Вид начисления и удержания</value>
+  <value>Виды начислений и удержаний</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
-  <value>Expense and revenue type</value>
+  <value>Accrual and deduction types</value>
  </objectPresentation>
  <hierarchyType>HierarchyOfItems</hierarchyType>
  <levelCount>2</levelCount>

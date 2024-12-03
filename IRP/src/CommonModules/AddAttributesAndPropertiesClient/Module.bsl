@@ -4,7 +4,7 @@ Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Unde
 		StandardProcessing = False;
 		PropertyOwner = Form[Item.Name + "_owner"]; // ChartOfCharacteristicTypesRef.AddAttributeAndProperty 
 		Filter = New Structure("Owner", PropertyOwner);
-		OpenArgs = New Structure("Filter", Filter);
+		OpenArgs = New Structure("Filter, CurrentRow", Filter, Form[Item.Name]);
 		OpenForm("Catalog.AddAttributeAndPropertyValues.ChoiceForm", OpenArgs, Item);
 	EndIf;
 EndProcedure

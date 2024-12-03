@@ -102,7 +102,6 @@ Function TableErrorsInEAO(EAOArray)
 	Return Table;
 EndFunction
 
-&AtServer
 Function GetArrayOfLedgerTypes()
 	Query = New Query();
 	Query.Text = 
@@ -120,8 +119,3 @@ Function GetArrayOfLedgerTypes()
 	
 	Return ArrayOfLedgerTypes;
 EndFunction
-
-&AtClient
-Procedure RunEAOExchange(Command)
-	RunEAOExchangeAtServer();
-EndProcedure

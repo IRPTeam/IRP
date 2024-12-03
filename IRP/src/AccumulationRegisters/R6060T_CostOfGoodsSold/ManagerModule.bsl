@@ -505,6 +505,24 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 			NewRecord.Period   = QuerySelectionDetails.Period;
 			NewRecord.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;
 		EndDo;
+		
+		Parameters = New Structure();
+		Parameters.Insert("Object", QuerySelection.Document);
+		Parameters.Insert("PostingByRef", True);
+		Parameters.Insert("Metadata", QuerySelection.Document.Metadata());
+		Parameters.Insert("PostingDataTables", New Map());
+		
+		RecordsTable = RecordSet.Unload();
+		RecordsTable.Columns.Delete("PointIntime");
+		
+		RegMetadata = Metadata.AccumulationRegisters.R6060T_CostOfGoodsSold;
+		PostingServer.SetPostingDataTable(Parameters.PostingDataTables, Parameters, RegMetadata.Name, RecordsTable);
+		Parameters.PostingDataTables[RegMetadata].WriteInTransaction = False;
+	
+		CurrenciesServer.PreparePostingDataTables(Parameters, Undefined);
+		CurrenciesServer.ExcludePostingDataTable(Parameters, RegMetadata);
+		
+		RecordSet.Load(Parameters.PostingDataTables[RegMetadata].PrepareTable);
 		RecordSet.Write();
 	EndDo;
 EndProcedure

@@ -336,6 +336,12 @@ Function UpdatePictureInfoAndGetPreview(BinaryData, SizePx = Undefined) Export
 	Return FileInfo;
 EndFunction
 
+Function GetPictureAndPutToTempStorage(UUID, URI, ConnectionSettings) Export
+
+	Return PictureViewerClientServer.GetPictureAndPutToTempStorage(UUID, URI, ConnectionSettings);
+	
+EndFunction
+
 // Create picture parameters.
 // 
 // Parameters:

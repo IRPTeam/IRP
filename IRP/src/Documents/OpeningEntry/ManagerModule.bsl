@@ -417,6 +417,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R9545T_PaidVacations());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R1040B_TaxesOutgoing());
+	QueryArray.Add(T8510S_FixedAssetsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -831,6 +832,8 @@ Function FixedAssets()
 	Return
 		"SELECT
 		|	OpeningEntryFixedAssets.Ref.Date AS Period,
+		|	OpeningEntryFixedAssets.Ref AS Ref,
+		|	OpeningEntryFixedAssets.Schedule,
 		|	OpeningEntryFixedAssets.Ref.Company,
 		|	OpeningEntryFixedAssets.FixedAsset,
 		|	OpeningEntryFixedAssets.ResponsiblePerson,
@@ -2103,6 +2106,26 @@ Function R1040B_TaxesOutgoing()
 		|	TaxesOutgoing.TaxRate,
 		|	TaxesOutgoing.InvoiceType,
 		|	TaxesOutgoing.Tax";
+EndFunction
+
+Function T8510S_FixedAssetsInfo()
+	Return
+		"SELECT
+		|	FixedAssets.CommissioningDate AS Period,
+		|	FixedAssets.Company AS Company,
+		|	FixedAssets.FixedAsset AS FixedAsset,
+		|	FixedAssets.Branch AS Branch,
+		|	FixedAssets.ProfitLossCenter AS ProfitLossCenter,
+		|	FixedAssets.Ref AS Document,
+		|	FixedAssets.LedgerType AS LedgerType,
+		|	FixedAssets.Schedule AS Schedule,
+		|	FixedAssets.OriginalAmount AS Amount,
+		|	FixedAssets.Currency AS Currency
+		|INTO T8510S_FixedAssetsInfo
+		|FROM
+		|	FixedAssets AS FixedAssets
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

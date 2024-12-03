@@ -157,16 +157,14 @@ Function GetPictureAndPutToTempStorage(UUID, URI, GETIntegrationSettings) Export
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
-	ConnectionSettings.Value.QueryType = "GET";
-	ResourceParameters = New Structure();
-	ResourceParameters.Insert("filename", URI);
-	RequestResult = IntegrationClientServer.SendRequest(ConnectionSettings.Value, ResourceParameters);
-
-	If IntegrationClientServer.RequestResultIsOk(RequestResult) Then
-		Return PutToTempStorage(New Picture(RequestResult.ResponseBody), UUID);
-	Else
-		Return "";
+	
+	If ConnectionSettings.Value.Property("ServerSideConnection") 
+			And ConnectionSettings.Value.ServerSideConnection = True Then
+		Return PictureViewerServer.GetPictureAndPutToTempStorage(UUID, URI, ConnectionSettings);
 	EndIf;
+	
+	Return PictureViewerClientServer.GetPictureAndPutToTempStorage(UUID, URI, ConnectionSettings);
+
 EndFunction
 
 Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePhoto = False) Export

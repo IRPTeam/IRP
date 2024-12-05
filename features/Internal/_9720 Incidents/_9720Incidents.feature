@@ -525,7 +525,7 @@ Scenario: _972010 check Issue tracker within Project
 		| 'pdftext.pdf'  |
 		| 'picture1.png' |
 		| 'picture2.jpg' |
-		| 'picture2.jpg' |
+		| 'picture3.jpg' |
 	Then the form attribute named "Issue" became equal to "$$Issue1$$"
 	Then the form attribute named "IssueIssueDetails" became equal to "Upgrade CashPoints"
 	Then the form attribute named "IssueIssueType" became equal to "Upgrade"

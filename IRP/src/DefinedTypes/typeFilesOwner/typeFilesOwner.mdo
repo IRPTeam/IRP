@@ -56,8 +56,10 @@
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>CatalogRef.Items</types>
     <types>DocumentRef.PlannedReceiptReservation</types>
+    <types>DocumentRef.WorkSheet</types>
     <types>CatalogRef.BankTerms</types>
     <types>CatalogRef.Agreements</types>
+    <types>CatalogRef.Projects</types>
     <types>DocumentRef.ItemStockAdjustment</types>
     <types>CatalogRef.RetailCustomers</types>
     <types>DocumentRef.InventoryTransferOrder</types>
@@ -67,6 +69,7 @@
     <types>CatalogRef.Specifications</types>
     <types>CatalogRef.Stores</types>
     <types>DocumentRef.InventoryTransfer</types>
+    <types>DocumentRef.Issue</types>
     <types>CatalogRef.ItemKeys</types>
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.GoodsReceipt</types>

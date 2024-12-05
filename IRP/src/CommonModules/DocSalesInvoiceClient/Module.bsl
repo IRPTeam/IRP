@@ -181,9 +181,10 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	ViewClient_V2.ItemListAfterDeleteRow(Object, Form);
 EndProcedure
 
-Procedure ItemListSplitRow(Object, Form) Export
-	ViewClient_V2.ItemListSplitRow(Object, Form);
-EndProcedure
+Async Function ItemListSplitRow(Object, Form) Export
+	NewRow = Await ViewClient_V2.ItemListSplitRow(Object, Form);
+	Return NewRow;
+EndFunction
 
 #Region ITEM_LIST_COLUMNS
 

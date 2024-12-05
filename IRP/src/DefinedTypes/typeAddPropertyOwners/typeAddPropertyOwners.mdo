@@ -51,6 +51,7 @@
     <types>DocumentRef.ChequeBondTransaction</types>
     <types>CatalogRef.VehicleTypes</types>
     <types>CatalogRef.PartnerSegments</types>
+    <types>CatalogRef.Cities</types>
     <types>DocumentRef.FixedAssetTransfer</types>
     <types>CatalogRef.IntegrationSettings</types>
     <types>CatalogRef.PlanningPeriods</types>
@@ -147,6 +148,7 @@
     <types>CatalogRef.Stores</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>CatalogRef.InterfaceGroups</types>
+    <types>DocumentRef.Issue</types>
     <types>CatalogRef.ItemKeys</types>
     <types>CatalogRef.ItemTypes</types>
     <types>DocumentRef.ReconciliationStatement</types>

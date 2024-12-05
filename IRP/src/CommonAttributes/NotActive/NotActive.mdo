@@ -173,6 +173,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.ObjectLocations</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.FixedAssets</metadata>
     <use>Use</use>
   </content>
@@ -254,6 +258,10 @@
   </content>
   <content>
     <metadata>Catalog.PrintInfo</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.Cities</metadata>
     <use>Use</use>
   </content>
   <content>

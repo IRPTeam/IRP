@@ -203,7 +203,7 @@ FROM
 		T8515S_FixedAssetsLocationSliceLast
 		LEFT JOIN InformationRegister.T8510S_FixedAssetsInfo AS T8510S_FixedAssetsInfo
 		ON T8515S_FixedAssetsLocationSliceLast.FixedAsset = T8510S_FixedAssetsInfo.FixedAsset
-		AND T8510S_FixedAssetsInfo.Document REFS Document.CommissioningOfFixedAsset
+		AND (T8510S_FixedAssetsInfo.Document REFS Document.CommissioningOfFixedAsset OR T8510S_FixedAssetsInfo.Document REFS Document.OpeningEntry)
 WHERE
 	T8515S_FixedAssetsLocationSliceLast.IsActive</query>
 	</dataSet>

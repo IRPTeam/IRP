@@ -71,6 +71,68 @@
   <defaultChoiceForm>Catalog.Projects.Form.ChoiceForm</defaultChoiceForm>
   <defaultFolderChoiceForm>Catalog.Projects.Form.GroupChoiceForm</defaultFolderChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="c25fb299-f019-4fad-be5b-1745af175f1e">
+    <name>StartDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Start date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4f1b1d88-5b3c-4aea-8109-9893cf5f3d30">
+    <name>DueDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Due date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9b1bc019-5667-4371-bed5-104ff9e91ff5">
+    <name>JobDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>Job description</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <multiLine>true</multiLine>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dae32cde-abfa-4e1f-bac0-c79f71f49ae9">
+    <name>IssueType</name>
+    <synonym>
+      <key>en</key>
+      <value>Issue type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IssueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
   <tabularSections uuid="fffef6e6-8f8f-402f-99aa-dd9395079161">
     <producedTypes>
       <objectType typeId="a83fbf75-5573-47b1-b6d3-b0c0b480d735" valueTypeId="ea2a41f7-423e-4753-98e0-ef56cb4a9bd3"/>
@@ -131,6 +193,31 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="c8a1fcaf-6dc8-4963-bd4c-221ce9f7c0fe">
+    <producedTypes>
+      <objectType typeId="c72797b4-3675-4a5a-b32d-3928133101fe" valueTypeId="6144973b-10c4-43fb-9f5a-f8100a4dbc48"/>
+      <rowType typeId="a6658c23-57c0-40b5-b6a8-314e6517fccd" valueTypeId="bfc64140-0c5b-4974-a46c-f41d0867ba5d"/>
+    </producedTypes>
+    <name>LocationList</name>
+    <synonym>
+      <key>en</key>
+      <value>Location list</value>
+    </synonym>
+    <attributes uuid="9260aee8-f8a5-408d-9c2a-6e3c2e54f7d4">
+      <name>Location</name>
+      <synonym>
+        <key>en</key>
+        <value>Location</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ObjectLocations</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="01ecd162-f79a-4dba-b217-6d61645fb4c0">
     <name>ItemForm</name>
     <synonym>
@@ -176,4 +263,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <templates uuid="6d74feb6-e8ec-4717-8dfb-dcc16c5c8b57">
+    <name>Print</name>
+  </templates>
+  <commands uuid="086ee95a-5ea7-40b9-b0a2-d7c62ebbedfa">
+    <name>Print</name>
+    <group>CommandGroup.Print</group>
+    <commandParameterType>
+      <types>CatalogRef.Projects</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Catalog>

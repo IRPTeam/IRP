@@ -97,3 +97,25 @@ Procedure DeleteFilesAtServer(FileKeys)
 	EndDo;
 	
 EndProcedure
+
+&AtClient
+Procedure FileListOnActivateRow(Item)
+	Items.PDFPreview.Visible = False;
+	Items.ImagePreview.Visible = False;
+
+	If Item.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	Extension = CommonFunctionsServer.GetRefAttribute(Item.CurrentData.File, "Extension");
+	
+	If Not StrCompare(Extension, "pdf") Then
+		Items.PDFPreview.Visible = True;
+		PictureViewerClient.SetPDFForView(Item.CurrentData.File, PDFPreview);
+	ElsIf PictureViewerServer.isImage(Extension) Then
+		Items.ImagePreview.Visible = True;
+		PictureParameters = PictureViewerServer.CreatePictureParameters(Item.CurrentData.File);
+		
+		ImagePreview = PictureViewerClient.GetPictureURL(PictureParameters); //String 
+	EndIf;
+EndProcedure

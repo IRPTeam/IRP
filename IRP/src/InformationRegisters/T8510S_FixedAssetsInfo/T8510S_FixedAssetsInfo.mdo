@@ -86,6 +86,7 @@
     <type>
       <types>DocumentRef.CommissioningOfFixedAsset</types>
       <types>DocumentRef.ModernizationOfFixedAsset</types>
+      <types>DocumentRef.OpeningEntry</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

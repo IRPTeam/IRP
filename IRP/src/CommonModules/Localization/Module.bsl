@@ -2271,5 +2271,18 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("SettingsStorage6", NStr("en = 'Reports user settings storage'", Lang));
 #EndRegion
 
+#Region Mobile
+	Strings.Insert("Mobile_1", NStr("en = 'Photo is not supported. Check app`s access to camera'", Lang));
+	Strings.Insert("Mobile_2", NStr("en = 'Video is not supported. Check app`s access to camera'", Lang));
+	Strings.Insert("Mobile_3", NStr("en = 'Issue was created: %1'", Lang));
+	Strings.Insert("Mobile_4", NStr("en = 'GPS on device is disabled. Enable GPS to continue.'", Lang));
+	Strings.Insert("Mobile_5", NStr("en = 'Can not update coordinate. Check if app has access to GPS'", Lang));
+	Strings.Insert("Mobile_6", NStr("en = 'Can not open file'", Lang));
+#EndRegion
+
+#Region Issue
+    Strings.Insert("Issue_1", NStr("en = 'Issues were already created for all locations.'", Lang));
+	Strings.Insert("Issue_2", NStr("en = 'Create issue for locations: %1?'", Lang));
+#EndRegion
 	Return Strings;
 EndFunction

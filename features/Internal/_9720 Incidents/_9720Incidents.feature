@@ -522,9 +522,9 @@ Scenario: _972010 check Issue tracker within Project
 * Check Issue
 	And "AttachedFiles" table became equal
 		| 'Reference'    |
-		| '1C.png'       |
 		| 'pdftext.pdf'  |
 		| 'picture1.png' |
+		| 'picture2.jpg' |
 		| 'picture2.jpg' |
 	Then the form attribute named "Issue" became equal to "$$Issue1$$"
 	Then the form attribute named "IssueIssueDetails" became equal to "Upgrade CashPoints"

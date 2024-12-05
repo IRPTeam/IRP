@@ -1,7 +1,6 @@
 ﻿#language: en
 @tree
 @Positive
-@TestDataBase
 @Incidents
 
 Functionality: check an Incidents process
@@ -376,7 +375,7 @@ Scenario: _972007 create an Issue within Project
 * Add attachment
 	And I click the button named "FormCommonCommandAttachedFiles"
 	And I select "Pictures" exact value from the drop-down list named "DefaultFilesStorageVolume"
-	And I input "$Path$/features/Internal/_0060 SDR Documents/1C.png" text in the field named "dragFile"
+	And I input "$Path$/features/Internal/_0060 SDR Documents/picture3.jpg" text in the field named "dragFile"
 	And I click the button named "dragFileBtn"
 	Then "1C:Enterprise" window is opened
 	And I click the button named "Button0"	

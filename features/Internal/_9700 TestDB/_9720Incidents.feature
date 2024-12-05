@@ -86,7 +86,6 @@ Scenario: _972001 preparetion
 	When Create catalog ItemSegments objects (test data base)
 	When Create catalog EmployeeSchedule objects (test data base)
 	When Create catalog LegalNameContracts objects (test data base)
-	When Create catalog ObjectLocations objects (test data base)
 	When Create catalog Projects objects (test data base)
 	When Create catalog IssueTypes objects (test data base)
 	When Create catalog ObjectLocations objects (test data base)

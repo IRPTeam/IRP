@@ -312,7 +312,6 @@ Scenario: _972006 check Issue tracker
 	And I close all client application windows
 * Open an Issue tracker
 	And In the command interface I select "Incidents" "Issue tracker"
-//	Given I open hyperlink "e1cib/data/Document.Issue?ref=b855e587bf603fbd11efb22b1667a023"
 	And I go to line in "IssueList" table
 		| 'Reference' |
 		| '$$Issue$$' |
@@ -371,11 +370,12 @@ Scenario: _972007 create an Issue within Project
 		| 'Description' |
 		| 'Project 3'   |
 	And I click the button named "FormChoose"
-	And I click the button named "FormWrite"	
+	And I click the button named "FormWrite"
+	And I click the button named "FormPost"	
 * Add attachment
 	And I click the button named "FormCommonCommandAttachedFiles"
 	And I select "Pictures" exact value from the drop-down list named "DefaultFilesStorageVolume"
-	And I input "$Path$/features/Internal/_0060 SDR Documents/picture3.jpg" text in the field named "dragFile"
+	And I input "$Path$/features/Internal/_9720 Incidents/picture3.jpg" text in the field named "dragFile"
 	And I click the button named "dragFileBtn"
 	Then "1C:Enterprise" window is opened
 	And I click the button named "Button0"	
@@ -463,16 +463,16 @@ Scenario: _972009 add attachments to Project
 * Add attachments
 	And I click the button named "FormCommonCommandAttachedFiles"
 	And I select "Pictures" exact value from the drop-down list named "DefaultFilesStorageVolume"
-	And I input "$Path$/features/Internal/_0060 SDR Documents/picture1.png" text in the field named "dragFile"
+	And I input "$Path$/features/Internal/_9720 Incidents/picture1.png" text in the field named "dragFile"
 	And I click the button named "dragFileBtn"
 	Then "1C:Enterprise" window is opened
 	And I click the button named "Button0"
-	And I input "$Path$/features/Internal/_0060 SDR Documents/picture2.jpg" text in the field named "dragFile"
+	And I input "$Path$/features/Internal/_9720 Incidents/picture2.jpg" text in the field named "dragFile"
 	And I click the button named "dragFileBtn"
 	Then "1C:Enterprise" window is opened
 	And I click the button named "Button0"
 	And I select "Documents" exact value from the drop-down list named "DefaultFilesStorageVolume"
-	And I input "$Path$/features/Internal/_0060 SDR Documents/pdftext.pdf" text in the field named "dragFile"
+	And I input "$Path$/features/Internal/_9720 Incidents/pdftext.pdf" text in the field named "dragFile"
 	And I click the button named "dragFileBtn"
 	Then "1C:Enterprise" window is opened
 	And I click the button named "Button0"	
@@ -515,7 +515,6 @@ Scenario: _972010 check Issue tracker within Project
 	And I close all client application windows
 * Open an Issue tracker
 	And In the command interface I select "Incidents" "Issue tracker"
-//	Given I open hyperlink "e1cib/data/Document.Issue?ref=b855e587bf603fbd11efb22b1667a023"
 	And I go to line in "IssueList" table
 		| 'Reference'  |
 		| '$$Issue1$$' |
@@ -572,7 +571,7 @@ Scenario: _972011 create an Issue from Tools
 	And I input "09.12.2024  0:00:00" text in the field named "DueDate"
 	And I input "Installation" text in the field named "Comment"
 //	And I click the button named "AddAttachments"
-//	And I select "$Path$/features/Internal/_0060 SDR Documents/picture2.jpg" file
+//	And I select "$Path$/features/Internal/_9720 Incidents/picture2.jpg" file
 	And I click the button named "FormCreateIssue"
 	And I close all client application windows				
 

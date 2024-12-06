@@ -240,11 +240,16 @@ Procedure CurrentFilesTableOnActivateRow(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If IsPDF(CurrentData.File) Then 
+	
+	Extension = CommonFunctionsServer.GetRefAttribute(CurrentData.File, "Extension"); // String
+	
+	If Not StrCompare(Extension, "pdf") Then
 		ShowPreviewPDF(CurrentData.File);
-	Else
+	ElsIf PictureViewerServer.isImage(Extension) Then
 		ShowPreview(CurrentData.File);
 		GetFullPicture(CurrentData);
+	Else
+		ShowNoPreview();
 	EndIf;
 EndProcedure
 
@@ -276,6 +281,12 @@ Procedure UpdateDocsDataInTables(DocsArray)
 	QueryStructure = PrepareQueryStructure(DocsArray);
 	FillDocumentsTables(QueryStructure, True);
 	
+EndProcedure
+
+&AtServer
+Procedure ShowNoPreview()
+	Items.PDFViewer.Visible = False;
+	Items.Preview.Visible = False;
 EndProcedure
 
 &AtServer
@@ -661,7 +672,6 @@ Async Procedure OpenDocByRef(DocRef)
 	OpenValueAsync(DocRef);
 EndProcedure	
 
-
 &AtServer
 Procedure FillDocumentsToControl()
 	
@@ -999,9 +1009,8 @@ EndProcedure
 &AtClient
 Function IsPDF(FileRef)
 	
-	FileAsString = String(FileRef);
-	
-	Return ?(StrFind(FileAsString, ".pdf")> 0, True, False)
+	Extension = CommonFunctionsServer.GetRefAttribute(FileRef, "Extension"); // String
+	Return Not StrCompare(Extension, "pdf");
 	
 EndFunction
 

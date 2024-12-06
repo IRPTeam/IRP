@@ -310,6 +310,7 @@ Scenario: _972005 create WorkSheet
 
 Scenario: _972006 check Issue tracker
 	And I close all client application windows
+	And delay 5
 * Open an Issue tracker
 	And In the command interface I select "Incidents" "Issue tracker"
 	And I go to line in "IssueList" table

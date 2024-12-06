@@ -466,7 +466,7 @@ FROM
       </content>
       <content>
        <key>ru</key>
-       <value>Description</value>
+       <value>Наименование</value>
       </content>
       <content>
        <key>en</key>

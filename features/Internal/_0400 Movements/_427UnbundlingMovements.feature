@@ -163,3 +163,20 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 			| 'R4011 Free stocks'      |
 			| 'R4010 Actual stocks'    |
 		And I close all client application windows
+
+Scenario: _042702 check Unbundling movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.Unbundling"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Unbundling 1 dated 07.09.2020 18:23:12'             | ''                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry !Manual edit"' | ''                                       | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                   | 'Document'                               | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                   | 'Unbundling 1 dated 07.09.2020 18:23:12' | '07.09.2020 18:23:12' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -586,3 +586,22 @@ Scenario: _0401576 check new registration report
 			| 'Register  "T3010S Row ID info"'       |
 			| 'Register  "TM1010B Row ID movements"' |
 		And I close all client application windows
+
+Scenario: _0401577 check sales order movements by the Register "Posted documents registry"
+	And I close all client application windows
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'      |
+	* Check movements by the Register "Posted documents registry" 
+		Then "Sales orders" window is opened
+		And I click "Registrations report info" button	
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 1 dated 27.01.2021 19:50:45' | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'   | ''                                        | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                        | 'Document'                                | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                        | 'Sales order 1 dated 27.01.2021 19:50:45' | '27.01.2021 19:50:45' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows

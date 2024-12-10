@@ -579,3 +579,20 @@ Scenario: _0401219 Goods receipt clear posting/mark for deletion
 			| 'R4010 Actual stocks'    |
 			| 'R4011 Free stocks'      |
 		And I close all client application windows
+
+Scenario: _0401227 check Goods receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '115'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'       | ''                                            | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                            | 'Document'                                    | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                            | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '12.02.2021 15:10:35' | '115'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

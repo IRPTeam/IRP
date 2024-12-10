@@ -162,3 +162,20 @@ Scenario: _051604 check Depreciation calculation movements by the Register "T104
 			| ''                                                      | '29.02.2024 12:00:00' | '*'       | 'en description is empty' | 'Reporting currency'           | 'USD'      | ''                    | ''            | ''            | '47,56'  | ''                   | ''                   | 'No'                   | ''                 |
 			| ''                                                      | '29.02.2024 12:00:00' | '*'       | 'en description is empty' | 'en description is empty'      | 'TRY'      | ''                    | ''            | ''            | '277,78' | ''                   | ''                   | 'No'                   | ''                 |
 	And I close all client application windows
+
+Scenario: _051605 check Depreciation calculation movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DepreciationCalculation"
+	And I go to line in "List" table
+		| 'Number' |
+		| '11'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Depreciation calculation 11 dated 29.02.2024 12:00:00' | ''                                                      | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'                 | ''                                                      | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                      | 'Document'                                              | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                      | 'Depreciation calculation 11 dated 29.02.2024 12:00:00' | '29.02.2024 12:00:00' | '11'     | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows	

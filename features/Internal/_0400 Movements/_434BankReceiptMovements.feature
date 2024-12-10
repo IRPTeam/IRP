@@ -2089,3 +2089,20 @@ Scenario: _0434359 check Bank receipt movements by the Register  "R9510 Salary p
 			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'Salary'           | '100'    |
 			| ''                                             | '02.09.2024 17:23:53' | 'Receipt'    | 'Main Company' | 'Front office' | 'Anna Petrova'    | 'Second'         | 'USD'      | 'TRY'                  | 'Reporting currency'           | 'Salary'           | '17,12'  |		
 	And I close all client application windows
+
+Scenario: _0434360 check Bank receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 dated 07.09.2020 19:14:59' | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'    | ''                                         | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                         | 'Document'                                 | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                         | 'Bank receipt 1 dated 07.09.2020 19:14:59' | '07.09.2020 19:14:59' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -51,6 +51,14 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
 	Form.Items.RegularOperations.Visible = Object.UserDefined;
 	Form.Items.Errors.Visible = Object.Errors.Count() > 0;
+	
+	If ValueIsFilled(Object.Basis) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Object.Basis, "Comment") Then
+			Form.BasisComment = CommonFunctionsServer.GetRefAttribute(Object.Basis, "Comment");
+		EndIf;
+	Else
+		Form.BasisComment = "";
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -137,6 +145,7 @@ EndProcedure
 &AtClient
 Procedure BasisOnChange(Item)
 	DocJournalEntryClient.BasisOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

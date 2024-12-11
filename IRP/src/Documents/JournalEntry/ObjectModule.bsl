@@ -39,6 +39,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 					
 		AccountingServer.SetDataRegisterRecords(DataTable, ThisObject.LedgerType, ThisObject.RegisterRecords.Basic);
 	EndIf;
+	
+	ThisObject.DocumentAmount = ThisObject.RegisterRecords.Basic.Unload().Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)

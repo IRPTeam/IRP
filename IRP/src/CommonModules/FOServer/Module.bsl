@@ -97,6 +97,10 @@ Function IsUseAccountingService() Export
 	Return GetFunctionalOption("UseAccountingService");
 EndFunction
 
+Function IsUseELedger() Export
+	Return GetFunctionalOption("UseELedger");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

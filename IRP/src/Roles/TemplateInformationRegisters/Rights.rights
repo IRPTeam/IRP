@@ -164,6 +164,20 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T9070S_ELedgerDetailComments</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>#AccessRegisters("Company", "", "", "", "", "")</condition>
+			</restrictionByCondition>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9014S_AccountsExpenseRevenue</name>
 		<right>
 			<name>Read</name>

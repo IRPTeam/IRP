@@ -124,3 +124,81 @@ Function GetAccessKey(Obj) Export
 EndFunction
 
 #EndRegion
+
+Function SetNumbers(Ref) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	JournalEntry.Ref
+	|FROM
+	|	Document.JournalEntry AS JournalEntry
+	|WHERE
+	|	JournalEntry.ELedgerRegistry = &ELedgerRegistry
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	JournalEntry.Ref
+	|FROM
+	|	Document.JournalEntry AS JournalEntry
+	|WHERE
+	|	NOT JournalEntry.DeletionMark
+	|	AND JournalEntry.Company = &Company
+	|	AND JournalEntry.LedgerType = &LedgerType
+	|	AND JournalEntry.Date BETWEEN BEGINOFPERIOD(&BeginDate, DAY) AND ENDOFPERIOD(&EndDate, DAY)
+	|
+	|ORDER BY
+	|	JournalEntry.PointInTime
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MAX(JournalEntry.SequentalNumber) AS SequentalNumber
+	|FROM
+	|	Document.JournalEntry AS JournalEntry
+	|WHERE
+	|	JournalEntry.Company = &Company
+	|	AND JournalEntry.LedgerType = &LedgerType
+	|	AND JournalEntry.Date < BEGINOFPERIOD(&BeginDate, DAY)";
+	Query.SetParameter("Company"         , Ref.Company);	
+	Query.SetParameter("LedgerType"      , Ref.LedgerType);	
+	Query.SetParameter("BeginDate"       , Ref.BeginDate);	
+	Query.SetParameter("EndDate"         , Ref.EndDate);	
+	Query.SetParameter("ELedgerRegistry" , Ref);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	QuerySelection = QueryResults[0].Select();
+	While QuerySelection.Next() Do
+		DocObject = QuerySelection.Ref.GetObject();
+		DocObject.ELedgerRegistry = Undefined;
+		DocObject.SequentalNumber = 0;
+		CommonFunctionsClientServer.PutToAddInfo(DocObject.AdditionalProperties, "SetELedger", True);
+		DocObject.Write();
+	EndDo;
+	
+	SequentalNumber = 0;
+	QuerySelection = QueryResults[2].Select();
+	If QuerySelection.Next() And ValueIsFilled(QuerySelection.SequentalNumber) Then
+		SequentalNumber = QuerySelection.SequentalNumber;
+	EndIf;
+	
+	QuerySelection = QueryResults[1].Select();
+	While QuerySelection.Next() Do
+		DocObject = QuerySelection.Ref.GetObject();
+		DocObject.ELedgerRegistry = Ref;
+		SequentalNumber = SequentalNumber + 1;
+		DocObject.SequentalNumber = SequentalNumber;
+		CommonFunctionsClientServer.PutToAddInfo(DocObject.AdditionalProperties, "SetELedger", True);
+		DocObject.Write();
+	EndDo;
+EndFunction
+
+
+
+
+
+
+
+
+

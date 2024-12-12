@@ -4,6 +4,10 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
+	If CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "SetELedger", False) Then
+		Return;
+	EndIf;
+	
 	If ValueIsFilled(ThisObject.Basis) Then
 		ThisObject.Date = ThisObject.Basis.Date;
 		If CommonFunctionsClientServer.ObjectHasProperty(ThisObject.Basis, "Branch") Then
@@ -45,6 +49,10 @@ EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
+		Return;
+	EndIf;
+	
+	If CommonFunctionsClientServer.GetFromAddInfo(ThisObject.AdditionalProperties, "SetELedger", False) Then
 		Return;
 	EndIf;
 	

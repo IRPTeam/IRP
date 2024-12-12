@@ -31,7 +31,8 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	If ValueIsFilled(Object.Basis) Then
 		NotifyChanged(Object.Basis);
-	EndIf;	
+	EndIf;
+	Notify("AfterWriteJournalEntry");
 EndProcedure
 
 &AtClient
@@ -59,6 +60,11 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Else
 		Form.BasisComment = "";
 	EndIf;
+	
+	IsUseELedger = FOServer.IsUseELedger();
+	
+	Form.Items.ELedgerRegistry.Visible = IsUseELedger;
+	Form.Items.SequentalNumber.Visible = IsUseELedger;
 EndProcedure
 
 &AtClient

@@ -12,7 +12,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocELedgerRegistryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
-	EndIf;	
+	EndIf;
+	UpdateournalEntryList();
 EndProcedure
 
 &AtServer
@@ -37,6 +38,10 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		AddAttributesCreateFormControl();
 	EndIf;
 	
+	If EventName = "AfterWriteJournalEntry" Then
+		UpdateournalEntryList();
+	EndIf;
+	
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;	
@@ -49,7 +54,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
-	Return;
+	UpdateournalEntryList();
 EndProcedure
 
 &AtClient
@@ -71,6 +76,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Period.StartDate = Object.BeginDate;
 	Form.Period.EndDate = Object.EndDate;
+	Form.Items.SetNumbers.Enabled = Object.Posted;
 EndProcedure
 
 &AtClient
@@ -104,6 +110,7 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item)
 	DocELedgerRegistryClient.CompanyOnChange(Object, ThisObject, Item);
+	UpdateournalEntryList();
 EndProcedure
 
 &AtClient
@@ -124,6 +131,31 @@ EndProcedure
 Procedure PeriodOnChange(Item)
 	Object.BeginDate = ThisObject.Period.StartDate;
 	Object.EndDate = ThisObject.Period.EndDate;
+	UpdateournalEntryList();
+EndProcedure
+
+#EndRegion
+
+#Region JOURNAL_ENTRY_LIST
+
+&AtServer
+Procedure UpdateournalEntryList()
+	ThisObject.JournalEntryList.Parameters.SetParameterValue("Company"         , Object.Company);
+	ThisObject.JournalEntryList.Parameters.SetParameterValue("LedgerType"      , Object.LedgerType);
+	ThisObject.JournalEntryList.Parameters.SetParameterValue("BeginDate"       , Object.BeginDate);
+	ThisObject.JournalEntryList.Parameters.SetParameterValue("EndDate"         , Object.EndDate);
+	ThisObject.JournalEntryList.Parameters.SetParameterValue("ELedgerRegistry" , Object.Ref);
+	Items.JournalEntryList.Refresh();
+EndProcedure
+
+&AtClient
+Procedure JournalEntryListSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.JournalEntryList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	OpenForm("Document.JournalEntry.ObjectForm", New Structure("Key", CurrentData.Ref));
 EndProcedure
 
 #EndRegion
@@ -232,6 +264,21 @@ EndProcedure
 &AtClient
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure SetNumbers(Command)
+	If Not CheckFilling() Then
+		Return;
+	EndIf;
+	Write();
+	SetNumbersAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNumbersAtServer()
+	Documents.ELedgerRegistry.SetNumbers(Object.Ref);
+	UpdateournalEntryList();
 EndProcedure
 
 #EndRegion

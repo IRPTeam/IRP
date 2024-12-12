@@ -65,6 +65,28 @@ Procedure SetVisibilityAvailability(Object, Form)
 	
 	Form.Items.ELedgerRegistry.Visible = IsUseELedger;
 	Form.Items.SequentalNumber.Visible = IsUseELedger;
+	
+	Form.AccountingEntries.Clear();
+	For Each Row In Object.RegisterRecords.Basic Do
+		DrRow = Form.AccountingEntries.Add();
+		DrRow.Account = Row.AccountDr;
+		Index = 1;
+		For Each ExtRow In Row.ExtDimensionsDr Do
+			DrRow["ExtDimension"+Index] = ExtRow.Value;
+			Index = Index + 1;
+		EndDo;
+		
+		CrRow = Form.AccountingEntries.Add();
+		CrRow.Account = Row.AccountCr;
+		Index = 1;
+		For Each ExtRow In Row.ExtDimensionsCr Do
+			CrRow["ExtDimension"+Index] = ExtRow.Value;
+			Index = Index + 1;
+		EndDo;
+		
+		CrRow.AmountCr = Row.Amount;		
+		DrRow.AmountDr = Row.Amount;		
+	EndDo;
 EndProcedure
 
 &AtClient

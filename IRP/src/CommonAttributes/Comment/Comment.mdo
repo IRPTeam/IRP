@@ -142,6 +142,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ELedgerRegistry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.EmployeeTransfer</metadata>
     <use>Use</use>
   </content>

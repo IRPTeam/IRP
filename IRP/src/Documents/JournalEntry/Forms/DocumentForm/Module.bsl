@@ -31,7 +31,8 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	If ValueIsFilled(Object.Basis) Then
 		NotifyChanged(Object.Basis);
-	EndIf;	
+	EndIf;
+	Notify("AfterWriteJournalEntry");
 EndProcedure
 
 &AtClient
@@ -51,6 +52,41 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.DecorationSaveDocument.Visible = Not ValueIsFilled(Object.Ref);
 	Form.Items.RegularOperations.Visible = Object.UserDefined;
 	Form.Items.Errors.Visible = Object.Errors.Count() > 0;
+	
+	If ValueIsFilled(Object.Basis) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Object.Basis, "Comment") Then
+			Form.BasisComment = CommonFunctionsServer.GetRefAttribute(Object.Basis, "Comment");
+		EndIf;
+	Else
+		Form.BasisComment = "";
+	EndIf;
+	
+	IsUseELedger = FOServer.IsUseELedger();
+	
+	Form.Items.ELedgerRegistry.Visible = IsUseELedger;
+	Form.Items.SequentalNumber.Visible = IsUseELedger;
+	
+	Form.AccountingEntries.Clear();
+	For Each Row In Object.RegisterRecords.Basic Do
+		DrRow = Form.AccountingEntries.Add();
+		DrRow.Account = Row.AccountDr;
+		Index = 1;
+		For Each ExtRow In Row.ExtDimensionsDr Do
+			DrRow["ExtDimension"+Index] = ExtRow.Value;
+			Index = Index + 1;
+		EndDo;
+		
+		CrRow = Form.AccountingEntries.Add();
+		CrRow.Account = Row.AccountCr;
+		Index = 1;
+		For Each ExtRow In Row.ExtDimensionsCr Do
+			CrRow["ExtDimension"+Index] = ExtRow.Value;
+			Index = Index + 1;
+		EndDo;
+		
+		CrRow.AmountCr = Row.Amount;		
+		DrRow.AmountDr = Row.Amount;		
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -137,6 +173,7 @@ EndProcedure
 &AtClient
 Procedure BasisOnChange(Item)
 	DocJournalEntryClient.BasisOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

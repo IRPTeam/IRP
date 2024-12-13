@@ -280,6 +280,20 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </extDimensionAccountingFlags>
+  <extDimensionAccountingFlags uuid="f9a2048c-7d77-457b-b418-3151dbc89e98">
+    <name>ELedgerDetailed</name>
+    <synonym>
+      <key>en</key>
+      <value>eLedger detailed</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </extDimensionAccountingFlags>
   <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
     <name>ListForm</name>
     <synonym>

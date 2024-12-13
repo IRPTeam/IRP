@@ -97,6 +97,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.JournalEntry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.RetailReceiptCorrection</metadata>
     <use>Use</use>
   </content>

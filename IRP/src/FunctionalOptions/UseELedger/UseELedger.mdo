@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:FunctionalOption xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88af146c-11f1-4c33-a2d6-a64fc2e67f1a">
+  <name>UseELedger</name>
+  <synonym>
+    <key>en</key>
+    <value>Use eLedger</value>
+  </synonym>
+  <location>Constant.UseELedger</location>
+  <privilegedGetMode>true</privilegedGetMode>
+  <content>InformationRegister.T9070S_ELedgerDetailComments</content>
+  <content>Subsystem.Accounting.Subsystem.ELedger</content>
+  <content>Document.ELedgerRegistry</content>
+</mdclass:FunctionalOption>

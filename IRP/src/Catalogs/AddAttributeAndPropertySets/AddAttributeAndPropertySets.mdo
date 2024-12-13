@@ -964,6 +964,13 @@
         <value>158</value>
       </code>
     </items>
+    <items id="d3e25e41-f858-41b4-b0d6-667872d57dbf">
+      <name>Document_ELedgerRegistry</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>159</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -253,6 +253,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.ELedgerRegistry</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.ItemKeys</metadata>
     <use>Use</use>
   </content>

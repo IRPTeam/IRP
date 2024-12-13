@@ -133,8 +133,13 @@ Procedure Upload(StructureParams)
 	// 
 	// BeginPutFileToServer(New CallbackDescription("Upload_END", ThisObject, Structure), , , , OpenFileDialog, StructureParams.UUID);
 	
+	FileExtension = StructureParams.FileExtension;
+	If Not ValueIsFilled(FileExtension) Then
+		FileExtension = PictureViewerClientServer.FilterForPicturesDialog();
+	EndIf;
+	
 	FilesClient.StartFileLoading(
-		PictureViewerClientServer.FilterForPicturesDialog(), 
+		FileExtension, 
 		New CallbackDescription("Upload_END", ThisObject, Structure), 
 		StructureParams.UUID);
 	
@@ -409,7 +414,8 @@ Function GetCurrentDocInTable()
 		CurrentDataCurrentAttachments = CurrentDataAttachedDocs;
 	EndIf;
 	PrintFormName = CurrentDataCurrentAttachments.FilePresentation;
-	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);		
+	FilePrefix = GetDocPrefix(CurrentData.DocRef, CurrentDataCurrentAttachments.NamingFormat);
+	FileExtension = CurrentDataCurrentAttachments.FileExtension; 		
 	
 	Structure.Object.Insert("Ref", CurrentData.DocRef); 
 	Structure.Insert("ID", CurrentData.ID);
@@ -420,6 +426,7 @@ Function GetCurrentDocInTable()
 	Structure.Insert("Storage", CurrentData.FileStorageVolume);
 	Structure.Insert("FilePrefix", FilePrefix);
 	Structure.Insert("PrintFormName", PrintFormName);
+	Structure.Insert("FileExtension", FileExtension);
 	Structure.Insert("MaxSize", CurrentDataAttachedDocs.MaximumFileSize);
 	
 	Return Structure;

@@ -1590,3 +1590,20 @@ Scenario: _0432073 check DebitCreditNote movements by the register "R5010 Reconc
 			| ''                                               | '29.04.2024 12:14:25' | 'Receipt'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by partner term)' | ''                    | '54'     |
 			| ''                                               | '29.04.2024 12:14:25' | 'Expense'    | 'Main Company' | 'Front office' | 'TRY'      | 'Vendor (Transactions, by documents)'    | ''                    | '54'     |		
 	And I close all client application windows
+
+Scenario: _0432074 check DebitCreditNote movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.DebitCreditNote"
+	And I go to line in "List" table
+		| 'Number' |
+		| '2'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | ''                                              | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'         | ''                                              | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                              | 'Document'                                      | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                              | 'Debit/Credit note 2 dated 20.02.2024 13:27:56' | '20.02.2024 13:27:56' | '2'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

@@ -1051,3 +1051,20 @@ Scenario: _042530 Retail return receipt clear posting/mark for deletion
 			| 'R4011 Free stocks'      |
 			| 'R4010 Actual stocks'    |
 		And I close all client application windows
+
+Scenario: _042542 check Retail return receipt movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	And I go to line in "List" table
+		| 'Number' |
+		| '201'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''                                                    | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'               | ''                                                    | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                    | 'Document'                                            | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                    | 'Retail return receipt 201 dated 15.03.2021 16:01:25' | '15.03.2021 16:01:25' | '201'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

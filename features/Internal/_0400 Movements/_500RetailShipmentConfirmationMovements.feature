@@ -263,3 +263,20 @@ Scenario: _050009 check Retail shipment confirmation (without SO) movements  by 
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R4012 Stock Reservation"'    |
 		And I close all client application windows
+
+Scenario: _050010 check Retail shipment confirmation movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.RetailShipmentConfirmation"
+	And I go to line in "List" table
+		| 'Number' |
+		| '314'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | ''                                                           | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| 'Register  "Posted documents registry"'                      | ''                                                           | ''                    | ''       | ''            | ''            | ''       | ''       | ''                      |
+			| ''                                                           | 'Document'                                                   | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author' | 'Editor' | 'Manual movements edit' |
+			| ''                                                           | 'Retail shipment confirmation 314 dated 24.05.2023 14:43:31' | '24.05.2023 14:43:31' | '314'    | '*'           | '*'           | 'CI'     | 'CI'     | 'No'                    |
+	And I close all client application windows		

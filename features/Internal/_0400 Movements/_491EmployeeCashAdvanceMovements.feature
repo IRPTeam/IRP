@@ -258,3 +258,20 @@ Scenario: _040917 check EmployeeCashAdvance movements by the Register  "R3027 Em
 			| ''                                                  | 'Expense'     | '26.08.2024 13:54:54' | '80'        | 'Main Company' | 'Distribution department' | 'Arina Brown' | 'Arina Brown cash advance, TRY' | 'TRY'      | 'TRY'                  | 'Local currency'               | 'No'                   |
 			| ''                                                  | 'Expense'     | '26.08.2024 13:54:54' | '80'        | 'Main Company' | 'Distribution department' | 'Arina Brown' | 'Arina Brown cash advance, TRY' | 'TRY'      | 'TRY'                  | 'en description is empty'      | 'No'                   |		
 		And I close all client application windows
+
+Scenario: _040918 check WorkOrder movements by the Register "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.EmployeeCashAdvance"
+	And I go to line in "List" table
+		| 'Number' |
+		| '1'      |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Employee cash advance 1 dated 02.05.2024 10:12:05' | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'             | ''                                                  | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                  | 'Document'                                          | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                  | 'Employee cash advance 1 dated 02.05.2024 10:12:05' | '02.05.2024 10:12:05' | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows	

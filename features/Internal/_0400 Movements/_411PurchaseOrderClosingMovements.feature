@@ -315,3 +315,19 @@ Scenario: _041169 Purchase order closing clear posting/mark for deletion
 			| 'R1012 Invoice closing of purchase orders'    |
 		And I close all client application windows
 
+Scenario: _041168 check Purchase order closing movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+	And I go to line in "List" table
+		| 'Number'                           |
+		| '$$NumberPurchaseOrderClosing37$$' |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PurchaseOrderClosing37$$'            | ''                           | ''     | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"' | ''                           | ''     | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                      | 'Document'                   | 'Date' | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                      | '$$PurchaseOrderClosing37$$' | '*'    | '1'      | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

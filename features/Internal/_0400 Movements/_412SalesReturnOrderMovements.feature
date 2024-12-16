@@ -238,3 +238,20 @@ Scenario: _041220 Sales return order clear posting/mark for deletion
 			| 'R2012 Invoice closing of sales orders'    |
 			| 'R2010 Sales orders'                       |
 		And I close all client application windows
+
+Scenario: _041202 check Sales return order movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+	And I go to line in "List" table
+		| 'Number' |
+		| '102'    |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return order 102 dated 12.03.2021 09:19:54' | ''                                                 | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'            | ''                                                 | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                                 | 'Document'                                         | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                                 | 'Sales return order 102 dated 12.03.2021 09:19:54' | '12.03.2021 09:19:54' | '102'    | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+		And I close all client application windows		

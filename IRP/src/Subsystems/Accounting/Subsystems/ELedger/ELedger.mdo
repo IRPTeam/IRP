@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0b759d23-1ff2-4d4d-b873-4408e983f0d7">
+ <name>ELedger</name>
+ <synonym>
+  <key>tr</key>
+  <value>eLedger</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>eLedger</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>eLedger</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Document.ELedgerRegistry</content>
+ <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+</mdclass:Subsystem>

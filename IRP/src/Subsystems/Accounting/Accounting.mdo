@@ -35,4 +35,5 @@
  <subsystems>LedgerTypes</subsystems>
  <subsystems>Other</subsystems>
  <subsystems>AccountingService</subsystems>
+ <subsystems>ELedger</subsystems>
 </mdclass:Subsystem>

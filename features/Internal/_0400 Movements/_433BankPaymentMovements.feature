@@ -1284,3 +1284,20 @@ Scenario: _0433318 check absence Bank payment movements by the Register  "T2014 
 		And "ResultTable" spreadsheet document does not contain values
 			| 'Register  "T2014 Advances info"'    |
 		And I close all client application windows
+
+Scenario: _0433322 check Bank payment movements by the Register  "Posted documents registry"
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.BankPayment"
+	And I go to line in "List" table
+		| 'Number' |
+		| '10'     |
+	* Check movements by the Register "Posted documents registry"
+		And I click "Registrations report info" button
+		And I select "Posted documents registry" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 10 dated 12.02.2021 11:24:13' | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| 'Register  "Posted documents registry"'     | ''                                          | ''                    | ''       | ''            | ''            | ''                        | ''                        | ''                      |
+			| ''                                          | 'Document'                                  | 'Date'                | 'Number' | 'Create date' | 'Modify date' | 'Author'                  | 'Editor'                  | 'Manual movements edit' |
+			| ''                                          | 'Bank payment 10 dated 12.02.2021 11:24:13' | '12.02.2021 11:24:13' | '10'     | '*'           | '*'           | 'en description is empty' | 'en description is empty' | 'No'                    |
+	And I close all client application windows		

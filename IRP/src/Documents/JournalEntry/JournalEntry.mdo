@@ -188,6 +188,55 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="16d4f230-101a-4b44-961e-4232dc36ac0f">
+  <name>ELedgerRegistry</name>
+  <synonym>
+   <key>tr</key>
+   <value>eLedger registry</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>eLedger registry</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>eLedger registry</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ELedgerRegistry</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="868732cf-c360-4d4a-9970-141c91f0ee40">
+  <name>SequentalNumber</name>
+  <synonym>
+   <key>tr</key>
+   <value>Sequental number</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Sequental number</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Sequental number</value>
+  </synonym>
+  <type>
+   <types>Number</types>
+   <numberQualifiers>
+    <precision>12</precision>
+   </numberQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
   <name>DocumentForm</name>
   <synonym>

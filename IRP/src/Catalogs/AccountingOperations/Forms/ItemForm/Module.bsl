@@ -47,6 +47,14 @@ EndProcedure
 #Region COMMANDS
 
 &AtClient
+Procedure ELedgerDetailComment(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("AccountingOperation", Object.Ref);
+	OpenForm("InformationRegister.T9070S_ELedgerDetailComments.Form.EditForm", 
+		FormParameters, ThisObject,,,,,FormWindowOpeningMode.LockOwnerWindow);	
+EndProcedure
+
+&AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
 	GeneratedFormCommandActionByNameServer(Command.Name);

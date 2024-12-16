@@ -173,5 +173,6 @@
   <types>DocumentRef.RetailGoodsReceipt</types>
   <types>DocumentRef.CashExpense</types>
   <types>CatalogRef.FixedAssetsLedgerTypes</types>
+  <types>DocumentRef.ELedgerRegistry</types>
  </type>
 </mdclass:DefinedType>

@@ -20,7 +20,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_RevenueAccruals</value>
     </typesFilterValue>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
@@ -35,7 +35,7 @@
     <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
     <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
     <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_ExpenseAccruals</value>
+      <value>Catalog.AddAttributeAndPropertySets.Document_RevenueAccruals</value>
     </typesFilterValue>
     <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
     <characteristicValues>Document.RevenueAccruals.TabularSection.AddAttributes</characteristicValues>

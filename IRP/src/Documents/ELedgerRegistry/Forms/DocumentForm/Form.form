@@ -1676,11 +1676,11 @@
   <name>JournalEntryList</name>
   <title>
    <key>tr</key>
-   <value>Journal entry list</value>
+   <value>Muhasebe kayıt listesi</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Journal entry list</value>
+   <value>Список проводок</value>
   </title>
   <title>
    <key>en</key>
@@ -1736,11 +1736,11 @@ WHERE
      <localValue>
       <content>
        <key>tr</key>
-       <value>E ledger registry</value>
+       <value>e-Defter kayıt defteri</value>
       </content>
       <content>
        <key>ru</key>
-       <value>E ledger registry</value>
+       <value>Реестр E ledger</value>
       </content>
       <content>
        <key>en</key>
@@ -1909,11 +1909,11 @@ WHERE
   <name>SetNumbers</name>
   <title>
    <key>tr</key>
-   <value>Set numbers</value>
+   <value>Yevmiye numaralandırması</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Set numbers</value>
+   <value>Набор чисел</value>
   </title>
   <title>
    <key>en</key>

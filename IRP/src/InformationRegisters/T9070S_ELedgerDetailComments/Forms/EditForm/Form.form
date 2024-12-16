@@ -187,11 +187,11 @@
    <id>23</id>
    <title>
     <key>tr</key>
-    <value>LC</value>
+    <value>LK</value>
    </title>
    <title>
     <key>ru</key>
-    <value>LC</value>
+    <value>КЛ</value>
    </title>
    <title>
     <key>en</key>
@@ -642,11 +642,11 @@
   <name>DetailComments</name>
   <title>
    <key>tr</key>
-   <value>Detail comments</value>
+   <value>Detaylı açıklamalar</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Detail comments</value>
+   <value>Подробные комментарии</value>
   </title>
   <title>
    <key>en</key>
@@ -692,11 +692,11 @@
    <name>DetailComment</name>
    <title>
     <key>tr</key>
-    <value>Detail comment</value>
+    <value>Detaylı açıklama</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Detail comment</value>
+    <value>Подробный комментарий</value>
    </title>
    <title>
     <key>en</key>

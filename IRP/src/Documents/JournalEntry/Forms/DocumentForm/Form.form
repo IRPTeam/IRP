@@ -3732,11 +3732,11 @@
    </userVisible>
    <title>
     <key>tr</key>
-    <value>Accounting entries</value>
+    <value>Muhasebe kayıtları</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Accounting entries</value>
+    <value>Бухгалтерские проводки</value>
    </title>
    <title>
     <key>en</key>
@@ -4287,11 +4287,11 @@
   <name>BasisComment</name>
   <title>
    <key>tr</key>
-   <value>Basis comment</value>
+   <value>Temel açıklama</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Basis comment</value>
+   <value>Комментарий осн.</value>
   </title>
   <title>
    <key>en</key>
@@ -4313,11 +4313,11 @@
   <name>AccountingEntries</name>
   <title>
    <key>tr</key>
-   <value>Accounting entries</value>
+   <value>Muhasebe kayıtları</value>
   </title>
   <title>
    <key>ru</key>
-   <value>Accounting entries</value>
+   <value>Бухгалтерские проводки</value>
   </title>
   <title>
    <key>en</key>
@@ -4362,11 +4362,11 @@
    <name>ExtDimension1</name>
    <title>
     <key>tr</key>
-    <value>Ext dim. 1</value>
+    <value>Ek boyut 1</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim. 1</value>
+    <value>Доп. изм. 1</value>
    </title>
    <title>
     <key>en</key>
@@ -4387,11 +4387,11 @@
    <name>ExtDimension2</name>
    <title>
     <key>tr</key>
-    <value>Ext dim. 2</value>
+    <value>Ek boyut 2</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim. 2</value>
+    <value>Доп. изм. 2</value>
    </title>
    <title>
     <key>en</key>
@@ -4412,11 +4412,11 @@
    <name>ExtDimension3</name>
    <title>
     <key>tr</key>
-    <value>Ext dim. 3</value>
+    <value>Ek boyut 3</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Ext dim. 3</value>
+    <value>Доп. изм. 3</value>
    </title>
    <title>
     <key>en</key>
@@ -4437,11 +4437,11 @@
    <name>AmountDr</name>
    <title>
     <key>tr</key>
-    <value>Amount Dr</value>
+    <value>Tutar Dt</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Amount Dr</value>
+    <value>Сумма Дт</value>
    </title>
    <title>
     <key>en</key>
@@ -4462,11 +4462,11 @@
    <name>AmountCr</name>
    <title>
     <key>tr</key>
-    <value>Amount Cr</value>
+    <value>Tutar Kr</value>
    </title>
    <title>
     <key>ru</key>
-    <value>Amount Cr</value>
+    <value>Сумма Кр</value>
    </title>
    <title>
     <key>en</key>

@@ -192,11 +192,11 @@
   <name>ELedgerRegistry</name>
   <synonym>
    <key>tr</key>
-   <value>eLedger registry</value>
+   <value>eDefter kayıt defteri</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>eLedger registry</value>
+   <value>Реестр eLedger</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -215,11 +215,11 @@
   <name>SequentalNumber</name>
   <synonym>
    <key>tr</key>
-   <value>Sequental number</value>
+   <value>Sıra numarası</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Sequental number</value>
+   <value>Порядковый номер</value>
   </synonym>
   <synonym>
    <key>en</key>

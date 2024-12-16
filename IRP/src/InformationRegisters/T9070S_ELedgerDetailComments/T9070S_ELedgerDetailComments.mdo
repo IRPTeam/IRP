@@ -12,11 +12,11 @@
  <name>T9070S_ELedgerDetailComments</name>
  <synonym>
   <key>tr</key>
-  <value>T9070 eLedger detail comments</value>
+  <value>T9070 e-Defter detaylı açıklamalar</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>T9070 eLedger detail comments</value>
+  <value>T9070 eLedger подробные комментарии</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -29,11 +29,11 @@
   <name>DetailComment</name>
   <synonym>
    <key>tr</key>
-   <value>Detail comment</value>
+   <value>Detaylı açıklama</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Detail comment</value>
+   <value>Подробный комментарий</value>
   </synonym>
   <synonym>
    <key>en</key>
@@ -154,11 +154,11 @@
   <name>EditForm</name>
   <synonym>
    <key>tr</key>
-   <value>Edit form</value>
+   <value>Formu değiştir</value>
   </synonym>
   <synonym>
    <key>ru</key>
-   <value>Edit form</value>
+   <value>Редактировать форму</value>
   </synonym>
   <synonym>
    <key>en</key>

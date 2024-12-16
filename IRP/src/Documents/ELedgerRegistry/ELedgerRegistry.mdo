@@ -10,11 +10,11 @@
  <name>ELedgerRegistry</name>
  <synonym>
   <key>tr</key>
-  <value>eLedger registry</value>
+  <value>eDefter kayıt defteri</value>
  </synonym>
  <synonym>
   <key>ru</key>
-  <value>eLedger registry</value>
+  <value>Реестр eLedger</value>
  </synonym>
  <synonym>
   <key>en</key>
@@ -57,11 +57,11 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>eLedger registry</value>
+  <value>eDefter kayıt defteri</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
-  <value>eLedger registry</value>
+  <value>Реестр eLedger</value>
  </objectPresentation>
  <objectPresentation>
   <key>en</key>
@@ -69,11 +69,11 @@
  </objectPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>eLedger registries</value>
+  <value>e-Defter kayıt defterleri</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
-  <value>eLedger registries</value>
+  <value>Реестры eLedger</value>
  </listPresentation>
  <listPresentation>
   <key>en</key>

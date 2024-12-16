@@ -10,7 +10,7 @@
  <name>AccrualAndDeductionTypes</name>
  <synonym>
   <key>tr</key>
-  <value>Birikim ve kesinti türleri</value>
+  <value>Tahakkuk ve kesinti türleri</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -147,7 +147,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Birikim ve kesinti türleri</value>
+  <value>Tahakkuk ve kesinti türleri</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>

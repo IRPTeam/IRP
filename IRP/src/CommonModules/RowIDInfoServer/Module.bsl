@@ -11036,6 +11036,17 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 				NewRow = Object[TableName].Add();
 				FillPropertyValues(NewRow, Row);
 				
+				// filling default values from user settings
+				WrappedRow = New Structure;
+				AllowedAttributes = Object.Metadata().TabularSections[TableName].Attributes;
+				For Each AllowedAttribut In AllowedAttributes Do
+					WrappedRow.Insert(AllowedAttribut.Name, AllowedAttribut.Type.AdjustValue());
+				EndDo;
+				FillPropertyValues(WrappedRow, NewRow);
+				UserSettingsClientServer.FillingRowFromSettings(
+						Object, StrTemplate("Object.%1", TableName), WrappedRow, True);
+				FillPropertyValues(NewRow, WrappedRow);
+				
 				If Upper(TableName) = Upper("ItemList") Then
 					ArrayOfNewRows.Add(NewRow);
 					For Each KeyValue In Row Do

@@ -159,6 +159,7 @@ Function R9010B_SourceOfOriginStock()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SourceOfOriginFrom AS SourceOfOrigin,
+		|	Undefined AS SerialLotNumber,
 		|	ItemList.Quantity AS Quantity
 		|INTO R9010B_SourceOfOriginStock
 		|FROM
@@ -176,6 +177,7 @@ Function R9010B_SourceOfOriginStock()
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	ItemList.SourceOfOriginTo AS SourceOfOrigin,
+		|	Undefined,
 		|	ItemList.Quantity AS Quantity
 		|FROM
 		|	ItemList AS ItemList

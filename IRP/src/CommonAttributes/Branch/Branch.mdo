@@ -14,6 +14,10 @@
   <fillValue xsi:type="core:UndefinedValue"/>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <content>
+    <metadata>Document.StockCorrection</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.VisitorCounter</metadata>
     <use>Use</use>
   </content>

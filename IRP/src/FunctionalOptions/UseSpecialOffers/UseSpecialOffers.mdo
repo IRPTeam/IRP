@@ -28,4 +28,18 @@
   <content>Document.SalesReturnOrder.TabularSection.SpecialOffers</content>
   <content>AccumulationRegister.R1005T_PurchaseSpecialOffers.Dimension.SpecialOffer</content>
   <content>Document.PurchaseReturn.TabularSection.SpecialOffers</content>
+  <content>Document.PurchaseInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.SalesInvoice.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.PurchaseOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.WorkOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.PurchaseReturnOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.RetailReceiptCorrection.TabularSection.SpecialOffers</content>
+  <content>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.SalesReturnOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.PurchaseReturn.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.SalesOrder.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.RetailReceiptCorrection.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.SalesReturn.TabularSection.ItemList.Attribute.OffersAmount</content>
+  <content>Document.WorkOrder.TabularSection.SpecialOffers</content>
 </mdclass:FunctionalOption>

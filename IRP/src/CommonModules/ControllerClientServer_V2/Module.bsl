@@ -10776,6 +10776,7 @@ Function GetBindingStructure_ItemListItem(Parameters)
 	
 	Result.Binding.Insert("SalesReportFromTradeAgent" , "StepItemListChangeItemKeyByItem");
 	Result.Binding.Insert("SalesReportToConsignor"    , "StepItemListChangeItemKeyByItem");
+	Result.Binding.Insert("StockCorrection"           , "StepItemListChangeItemKeyByItem");
 	
 	Return Result;
 EndFunction
@@ -11043,7 +11044,11 @@ Function GetBindingStructure_ItemListItemKey(Parameters)
 	Result.Binding.Insert("ItemStockAdjustment" , "StepItemListChangeUnitByItemKey");
 	Result.Binding.Insert("Bundling"            , "StepItemListChangeUnitByItemKey");
 	Result.Binding.Insert("Unbundling"          , "StepItemListChangeUnitByItemKey");
-
+	
+	Result.Binding.Insert("StockCorrection",
+		"StepChangeUseSerialLotNumberByItemKey,
+		|StepItemListChangeUnitByItemKey");
+	
 	Return Result;
 EndFunction
 

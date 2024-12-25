@@ -18,6 +18,10 @@
     <value></value>
   </fillValue>
   <content>
+    <metadata>Document.StockCorrection</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.BatchReallocateOutgoing</metadata>
     <use>Use</use>
   </content>

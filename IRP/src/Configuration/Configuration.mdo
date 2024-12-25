@@ -487,6 +487,7 @@
   <roles>Role.UseGroupEditingProperties</roles>
   <roles>Role.UseOutput</roles>
   <roles>Role.Document_ELedgerRegistry</roles>
+  <roles>Role.Document_StockCorrection</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -826,6 +827,8 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.DocELedgerRegistryClient</commonModules>
   <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
+  <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
+  <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -1297,6 +1300,7 @@
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
   <documents>Document.ELedgerRegistry</documents>
+  <documents>Document.StockCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

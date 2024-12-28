@@ -28,7 +28,21 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	Return;
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+		ControllerClientServer_V2.SetReadOnlyProperties(ThisObject, FillingData);
+		Filling_BasedOn(FillingData);
+	EndIf;
+EndProcedure
+
+Procedure Filling_BasedOn(FillingData)
+	FillPropertyValues(ThisObject, FillingData);
+	For Each Row In FillingData.ItemList Do
+		NewRow = ThisObject.ItemList.Add();
+		FillPropertyValues(NewRow, Row);
+		If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

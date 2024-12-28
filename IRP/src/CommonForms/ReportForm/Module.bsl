@@ -4,6 +4,8 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.IsDetailProcessing = Parameters.IsDetailProcessing;
+	ThisObject.IsUserFilter = Parameters.IsUserFilter;
+	ThisObject.UserFilters = CommonFunctionsServer.SerializeXMLUseXDTO(Parameters.UserFilters);
 	ReportFullName = ReportName(ThisObject);
 	ExternalCommandsServer.CreateCommands(ThisObject, ReportFullName, Enums.FormTypes.ObjectForm);
 EndProcedure
@@ -14,7 +16,18 @@ Procedure OnOpen(Cancel)
 		ThisObject.VariantModified = False;
 		ComposeResult();
 	EndIf;
-
+	
+	If ThisObject.IsUserFilter Then
+		Filters = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.UserFilters);
+		For Each Filter In Filters Do
+			SetSettingsComposerFilter(Report.SettingsComposer, Filter.Name, Filter.Value, Filter.ComparisonType);
+		EndDo;
+		
+		ThisObject.VariantModified = False;
+	
+		ComposeResult();
+	EndIf;
+	
 	CustomParametersSwitch();
 	EditReportSwitch();
 EndProcedure

@@ -64,4 +64,5 @@
  <content>Document.SalesReportToConsignor.Attribute.LegalName</content>
  <content>Document.PurchaseReturn.Attribute.LegalName</content>
  <content>Document.RetailReturnReceipt.Attribute.LegalName</content>
+ <content>Document.PurchaseOrder.Attribute.LegalName</content>
 </mdclass:FunctionalOption>

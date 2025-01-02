@@ -987,6 +987,13 @@
     <value>159</value>
    </code>
   </items>
+  <items id="03c8d558-442e-41e3-b96b-f38ac9ac6545">
+   <name>Document_StockCorrection</name>
+   <description/>
+   <code xsi:type="core:NumberValue">
+    <value>160</value>
+   </code>
+  </items>
  </predefined>
  <editType>InDialog</editType>
  <choiceMode>BothWays</choiceMode>

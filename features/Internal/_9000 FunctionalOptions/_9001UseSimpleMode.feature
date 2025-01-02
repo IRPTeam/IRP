@@ -303,9 +303,9 @@ Scenario: _900009 create SI
 		And I select "ser" from "Item" drop-down list by string in "ItemList" table
 	* Check filling
 		And "ItemList" table became equal
-			| '#'   | 'Item'        | 'Price type'            | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'    |
-			| '1'   | 'Product 1'   | 'Customer price type'   | '1,000'      | 'No'                   | '200,00'   | ''                | '200,00'          |
-			| '2'   | 'Service 1'   | 'Customer price type'   | '1,000'      | 'No'                   | '100,00'   | ''                | '100,00'          |
+			| '#' | 'Item'      | 'Price type'          | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Total amount' |
+			| '1' | 'Product 1' | 'Customer price type' | '1,000'    | 'No'                 | '200,00' | '200,00'       |
+			| '2' | 'Service 1' | 'Customer price type' | '1,000'    | 'No'                 | '100,00' | '100,00'       |
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesInvoice01$$" variable
 		And I delete "$$SalesInvoice01$$" variable
@@ -488,8 +488,8 @@ Scenario: _900020 create Purchase return based on PI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Purchase invoice'        | 'Total amount'   | 'Detail'   | 'Additional analytic'   | 'Return reason'    |
-			| '1'   | 'Product 1'   | '5,000'      | 'No'                   | '100,00'   | ''                | '$$PurchaseInvoice01$$'   | '500,00'         | ''         | ''                      | ''                 |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Additional analytic' | 'Return reason' |
+			| '1' | 'Product 1' | '5,000'    | 'No'                 | '100,00' | '$$PurchaseInvoice01$$' | '500,00'       | ''       | ''                    | ''              |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Author" became equal to "en description is empty"
@@ -544,8 +544,8 @@ Scenario: _900021 create Purchase return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Purchase invoice'        | 'Total amount'   | 'Detail'   | 'Return reason'    |
-			| '1'   | 'Product 1'   | '1,000'      | 'No'                   | '100,00'   | ''                | '$$PurchaseInvoice01$$'   | '100,00'         | ''         | ''                 |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Purchase invoice'      | 'Total amount' | 'Detail' | 'Return reason' |
+			| '1' | 'Product 1' | '1,000'    | 'No'                 | '100,00' | '$$PurchaseInvoice01$$' | '100,00'       | ''       | ''              |
 		Then the form attribute named "Currency" became equal to "USD"
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
@@ -593,8 +593,8 @@ Scenario: _900028 create Sales return based on SI
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'   | 'Sales invoice'        | 'Return reason'    |
-			| '1'   | 'Service 1'   | '1,000'      | 'No'                   | '100,00'   | ''                | '100,00'         | '$$SalesInvoice01$$'   | ''                 |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Total amount' | 'Sales invoice'      | 'Return reason' |
+			| '1' | 'Service 1' | '1,000'    | 'No'                 | '100,00' | '100,00'       | '$$SalesInvoice01$$' | ''              |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Currency" became equal to "USD"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "100,00"
@@ -644,8 +644,8 @@ Scenario: _900029 create Sales return
 		Then the form attribute named "Company" became equal to "My Company"
 		Then the form attribute named "Store" became equal to "My Store"
 		And "ItemList" table became equal
-			| '#'   | 'Item'        | 'Quantity'   | 'Dont calculate row'   | 'Price'    | 'Offers amount'   | 'Total amount'   | 'Sales invoice'        | 'Return reason'   | 'Additional analytic'    |
-			| '1'   | 'Product 1'   | '1,000'      | 'No'                   | '200,00'   | ''                | '200,00'         | '$$SalesInvoice01$$'   | ''                | ''                       |
+			| '#' | 'Item'      | 'Quantity' | 'Dont calculate row' | 'Price'  | 'Total amount' | 'Sales invoice'      | 'Return reason' | 'Additional analytic' |
+			| '1' | 'Product 1' | '1,000'    | 'No'                 | '200,00' | '200,00'       | '$$SalesInvoice01$$' | ''              | ''                    |
 		Then the form attribute named "PriceIncludeTax" became equal to "No"
 		Then the form attribute named "Branch" became equal to ""
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "200,00"

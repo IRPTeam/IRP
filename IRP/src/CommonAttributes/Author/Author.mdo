@@ -21,6 +21,10 @@
  <dataHistory>Use</dataHistory>
  <fillValue xsi:type="core:UndefinedValue"/>
  <content>
+  <metadata>Document.StockCorrection</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Document.BatchReallocateOutgoing</metadata>
   <use>Use</use>
  </content>

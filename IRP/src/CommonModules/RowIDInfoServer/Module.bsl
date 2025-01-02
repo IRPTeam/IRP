@@ -11038,7 +11038,7 @@ Function AddLinkedDocumentRows(Object, FillingValues) Export
 				
 				// filling default values from user settings
 				WrappedRow = New Structure;
-				AllowedAttributes = Object.Metadata().TabularSections[TableName].Attributes;
+				AllowedAttributes = Object.Ref.Metadata().TabularSections[TableName].Attributes;
 				For Each AllowedAttribut In AllowedAttributes Do
 					WrappedRow.Insert(AllowedAttribut.Name, AllowedAttribut.Type.AdjustValue());
 				EndDo;

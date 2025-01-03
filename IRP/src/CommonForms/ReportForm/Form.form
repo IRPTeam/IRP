@@ -1435,6 +1435,41 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>IsUserFilter</name>
+    <title>
+      <key>en</key>
+      <value>Is user filter</value>
+    </title>
+    <id>6</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>UserFilters</name>
+    <title>
+      <key>en</key>
+      <value>User filters</value>
+    </title>
+    <id>7</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>CustomParameters</name>
     <title>
@@ -1474,6 +1509,16 @@
     <valueType>
       <types>Boolean</types>
     </valueType>
+  </parameters>
+  <parameters>
+    <name>IsUserFilter</name>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>UserFilters</name>
+    <valueType/>
   </parameters>
   <commandInterface>
     <navigationPanel/>

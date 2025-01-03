@@ -355,7 +355,8 @@ Function UsedNewFunctionality(Source)
 	Or TypeOf(Source) = Type("DocumentObject.Payroll")
 	Or TypeOf(Source) = Type("DocumentObject.ForeignCurrencyRevaluation")
 	Or TypeOf(Source) = Type("DocumentObject.RetailShipmentConfirmation")
-	Or TypeOf(Source) = Type("DocumentObject.RetailGoodsReceipt");
+	Or TypeOf(Source) = Type("DocumentObject.RetailGoodsReceipt")
+	Or TypeOf(Source) = Type("DocumentObject.StockCorrection");
 	
 	Return IsUsedNewFunctionality;
 EndFunction

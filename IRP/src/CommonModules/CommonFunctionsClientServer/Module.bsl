@@ -194,6 +194,28 @@ Procedure AddValueToArray(Array, Value) Export
 	EndIf;
 EndProcedure
 
+Function CreateArray(Value1 = Undefined, Value2 = Undefined, Value3 = Undefined, Value4 = Undefined) Export
+	Array = New Array();
+	
+	If Value1 <> Undefined Then
+		Array.Add(Value1);
+	EndIf;
+	
+	If Value2 <> Undefined Then
+		Array.Add(Value2);
+	EndIf;
+	
+	If Value3 <> Undefined Then
+		Array.Add(Value3);
+	EndIf;
+	
+	If Value4 <> Undefined Then
+		Array.Add(Value4);
+	EndIf;
+	
+	Return Array;
+EndFunction
+
 // Is base64 value.
 // 
 // Parameters:

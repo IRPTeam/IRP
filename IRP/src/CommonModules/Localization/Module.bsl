@@ -2227,6 +2227,8 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("AuditLock_002", NStr("en = 'Audit lock (unlock)'", Lang));
 	Strings.Insert("AuditLock_003", NStr("en = 'Access is denied'", Lang));
 	Strings.Insert("AuditLock_004", NStr("en = 'Document is locked by audit lock'", Lang));	
+	Strings.Insert("AuditLock_005", NStr("en = 'Not posted document cannot be locked'", Lang));	
+	Strings.Insert("AuditLock_006", NStr("en = 'Document marked for deletion cannot be locked'", Lang));	
 #EndRegion
 	
 #Region DocStatuses

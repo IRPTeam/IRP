@@ -52,6 +52,17 @@ Procedure SetLock(DocRef) Export
 		Return;
 	EndIf;
 	
+	If DocRef.Metadata().Posting = Metadata.ObjectProperties.Posting.Allow
+		And Not DocRef.Posted Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_005);
+		Return;			
+	EndIf;
+	
+	If DocRef.DeletionMark Then
+		CommonFunctionsClientServer.ShowUsersMessage(R().AuditLock_006);
+		Return;
+	EndIf;
+	
 	RecordSet = InformationRegisters.AuditLock.CreateRecordSet();
 	RecordSet.Filter.Document.Set(DocRef);
 	NewRecord = RecordSet.Add();

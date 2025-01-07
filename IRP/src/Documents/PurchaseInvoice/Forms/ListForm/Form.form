@@ -179,59 +179,6 @@
    </extInfo>
   </items>
   <items xsi:type="form:FormField">
-   <name>AuditLockIcon</name>
-   <id>73</id>
-   <visible>true</visible>
-   <enabled>true</enabled>
-   <userVisible>
-    <common>true</common>
-   </userVisible>
-   <dataPath xsi:type="form:DataPath">
-    <segments>List.AuditLockIcon</segments>
-   </dataPath>
-   <titleLocation>None</titleLocation>
-   <extendedTooltip>
-    <name>AuditLockIconExtendedTooltip</name>
-    <id>75</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-     <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-   </extendedTooltip>
-   <contextMenu>
-    <name>AuditLockIconContextMenu</name>
-    <id>74</id>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-     <common>true</common>
-    </userVisible>
-    <autoFill>true</autoFill>
-   </contextMenu>
-   <type>PictureField</type>
-   <editMode>Enter</editMode>
-   <showInHeader>true</showInHeader>
-   <headerHorizontalAlign>Left</headerHorizontalAlign>
-   <showInFooter>true</showInFooter>
-   <extInfo xsi:type="form:ImageFieldExtInfo">
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <horizontalStretch>true</horizontalStretch>
-    <verticalStretch>true</verticalStretch>
-    <valuesPicture xsi:type="core:PictureRef">
-     <picture>StdPicture.UserWithAuthentication</picture>
-    </valuesPicture>
-    <fileDragMode>AsFileRef</fileDragMode>
-   </extInfo>
-  </items>
-  <items xsi:type="form:FormField">
    <name>Number</name>
    <id>16</id>
    <visible>true</visible>
@@ -1184,7 +1131,7 @@ INDEX BY
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
- SELECT
+SELECT
 	R1021B_VendorsTransactions.Recorder AS Basis,
 	R1021B_VendorsTransactions.Amount,
 	ISNULL(R1021B_VendorsTransactionsBalance.AmountBalance, 0) AS AmountBalance,
@@ -1213,7 +1160,7 @@ WHERE
 ;
 
 ////////////////////////////////////////////////////////////////////////////////
- SELECT
+SELECT
 	PurchaseInvoice.Ref,
 	CASE
 		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
@@ -1262,17 +1209,7 @@ WHERE
 		WHEN ISNULL(Payments.Status, -1) = 2
 			THEN VALUE(Enum.PaymentStatuses.NotPaid)
 		ELSE VALUE(Enum.PaymentStatuses.NotTracked)
-	END) AS PaymentStatus,
-	MAX(CASE
-		WHEN AuditLock.Document IS NULL
-			THEN -1
-		ELSE 0
-	END) AS AuditLockIcon,
-	MAX(CASE
-		WHEN AuditLock.Document IS NULL
-			THEN Value(Enum.AuditLockActions.Unlock)
-		ELSE Value(Enum.AuditLockActions.Lock)
-	END) AS AuditLockStatus
+	END) AS PaymentStatus
 {SELECT
 	Store,
 	LedgerType,
@@ -1290,8 +1227,6 @@ FROM
 		LEFT JOIN Document.JournalEntry AS JE
 		ON PurchaseInvoice.Ref = CAST(JE.Basis AS Document.PurchaseInvoice)
 		AND NOT JE.DeletionMark
-		LEFT JOIN InformationRegister.AuditLock AS AuditLock
-		ON Cast(AuditLock.Document AS Document.PurchaseInvoice) = PurchaseInvoice.Ref
 GROUP BY
 	PurchaseInvoice.Ref,
 	PurchaseInvoice.DeletionMark,
@@ -1436,10 +1371,6 @@ GROUP BY
     <field>Branch</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description</dataPath>
-    <field>Description</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>DocumentAmount</dataPath>
     <field>DocumentAmount</field>
    </fields>
@@ -1532,44 +1463,8 @@ GROUP BY
     </title>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>AuditLockIcon</dataPath>
-    <field>AuditLockIcon</field>
-    <title>
-     <localValue>
-      <content>
-       <key>tr</key>
-       <value>Audit kilit resmi</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Иконка блокировки аудита           </value>
-      </content>
-      <content>
-       <key>en</key>
-       <value>Audit lock icon</value>
-      </content>
-     </localValue>
-    </title>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>AuditLockStatus</dataPath>
-    <field>AuditLockStatus</field>
-    <title>
-     <localValue>
-      <content>
-       <key>tr</key>
-       <value>Audit kilit statüsü</value>
-      </content>
-      <content>
-       <key>ru</key>
-       <value>Статус блокировки аудита           </value>
-      </content>
-      <content>
-       <key>en</key>
-       <value>Audit lock status</value>
-      </content>
-     </localValue>
-    </title>
+    <dataPath>Comment</dataPath>
+    <field>Comment</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>LegalNameContract</dataPath>
@@ -1578,6 +1473,14 @@ GROUP BY
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>RecordPurchasePrices</dataPath>
     <field>RecordPurchasePrices</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>StoreDistributedPurchase</dataPath>
+    <field>StoreDistributedPurchase</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CurrencyRevaluationInvoice</dataPath>
+    <field>CurrencyRevaluationInvoice</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ItemList</dataPath>
@@ -1624,20 +1527,48 @@ GROUP BY
     <field>PointInTime</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalRate</dataPath>
+    <field>LocalRate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>SourceNodeID</dataPath>
     <field>SourceNodeID</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Editor</dataPath>
-    <field>Editor</field>
+    <dataPath>LocalTotalAmount</dataPath>
+    <field>LocalTotalAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DocumentNumber</dataPath>
+    <field>DocumentNumber</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>CreateDate</dataPath>
+    <field>CreateDate</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>ModifyDate</dataPath>
     <field>ModifyDate</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>CreateDate</dataPath>
-    <field>CreateDate</field>
+    <dataPath>UniqueID</dataPath>
+    <field>UniqueID</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>ManualMovementsEdit</dataPath>
+    <field>ManualMovementsEdit</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Editor</dataPath>
+    <field>Editor</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalTaxAmount</dataPath>
+    <field>LocalTaxAmount</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>LocalNetAmount</dataPath>
+    <field>LocalNetAmount</field>
    </fields>
    <parameters>
     <name>Period</name>

@@ -425,7 +425,7 @@
    <fillChecking>ShowError</fillChecking>
    <choiceParameterLinks>
     <name>Filter.SourceOfOriginOwner</name>
-    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
@@ -452,7 +452,7 @@
    <fillChecking>ShowError</fillChecking>
    <choiceParameterLinks>
     <name>Filter.SourceOfOriginOwner</name>
-    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.Item</field>
+    <field>Document.StockCorrection.TabularSection.ItemList.Attribute.ItemKey</field>
    </choiceParameterLinks>
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>

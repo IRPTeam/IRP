@@ -312,6 +312,54 @@ Function GetOperationsDefinition()
 	Return Map;
 EndFunction
 
+Function GetMappingOperationsToPartnerBalance() Export
+	AO = Catalogs.AccountingOperations;
+	
+	Map = New Map();
+	
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
+		
+	Map.Insert(AO.BankReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+
+	Map.Insert(AO.BankPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
+			
+	Map.Insert(AO.BankPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "DR")));
+
+	Map.Insert(AO.CashPayment_DR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions_CR_R3010B_CashOnHand,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "DR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "DR")));
+	
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R2020B_AdvancesFromCustomers_R2021B_CustomersTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "CustomerTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "CustomerAdvance", "CR")));
+	
+	Map.Insert(AO.CashReceipt_DR_R3010B_CashOnHand_CR_R1020B_AdvancesToVendors_R1021B_VendorsTransactions,
+		CommonFunctionsClientServer.CreateArray(
+			New Structure("ResourceName, AccountType", "VendorTransaction", "CR"), 
+			New Structure("ResourceName, AccountType", "VendorAdvance", "CR")));
+	
+	Return Map;
+EndFunction
+
 Function GetSupportedDocuments() Export
 	ArrayOfDocuments = New Array();
 	For Each type In Metadata.DefinedTypes.typeAccountingDocuments.Type.Types() Do

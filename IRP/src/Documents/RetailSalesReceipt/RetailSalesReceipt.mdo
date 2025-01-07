@@ -1270,6 +1270,10 @@
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.TaxRate</name>
+    <field>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.VatRate</field>
+   </choiceParameterLinks>
    <createOnInput>Use</createOnInput>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>

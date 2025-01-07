@@ -235,6 +235,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	SalesReturnItemList.ItemKey AS ItemKey,
 	|	SalesReturnItemList.Store AS Store,
+	|	SalesReturnItemList.Ref.Branch AS Branch,
 	|	SalesReturnItemList.Ref.Company AS Company,
 	|	SUM(SalesReturnItemList.QuantityInBaseUnit) AS Quantity,
 	|	SalesReturnItemList.Ref.Date AS Period,
@@ -272,6 +273,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	SalesReturnItemList.ItemKey,
 	|	SalesReturnItemList.Store,
+	|	SalesReturnItemList.Ref.Branch,
 	|	SalesReturnItemList.Ref.Company,
 	|	SalesReturnItemList.Ref.Date,
 	|	SalesReturnItemList.Key,
@@ -293,6 +295,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
+	|	tmpItemList.Branch,
 	|	tmpItemList.Company,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period,
@@ -1172,6 +1175,7 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.SalesInvoice,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
+		   |	BatchKeysInfo.Branch,
 		   |	SUM(BatchKeysInfo.Quantity) AS Quantity,
 		   |	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 		   |	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount,
@@ -1191,6 +1195,7 @@ Function T6020S_BatchKeysInfo()
 		   |	BatchKeysInfo.SalesInvoice,
 		   |	BatchKeysInfo.ItemKey,
 		   |	BatchKeysInfo.Store,
+		   |	BatchKeysInfo.Branch,
 		   |	BatchKeysInfo.SerialLotNumber,
 		   |	BatchKeysInfo.SourceOfOrigin
 		   |
@@ -1205,6 +1210,7 @@ Function T6020S_BatchKeysInfo()
 		   |	UNDEFINED,
 		   |	ItemList.ItemKey,
 		   |	ItemList.TradeAgentStore,
+		   |	ItemList.Branch,
 		   |	SUM(CASE
 		   |		WHEN ISNULL(SourceOfOrigins.Quantity, 0) <> 0
 		   |			THEN ISNULL(SourceOfOrigins.Quantity, 0)
@@ -1227,6 +1233,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.ItemKey,
 		   |	ItemList.TradeAgentStore,
+		   |	ItemList.Branch,
 		   |	ISNULL(SourceOfOrigins.SerialLotNumber, VALUE(Catalog.SerialLotNumbers.EmptyRef)),
 		   |	ISNULL(SourceOfOrigins.SourceOfOrigin, VALUE(Catalog.SourceOfOrigins.EmptyRef))";
 EndFunction

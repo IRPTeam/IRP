@@ -1319,6 +1319,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key AS Key,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.Store AS Store,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.Company AS Company,
 		|	ItemList.InventoryOrigin = VALUE(Enum.InventoryOriginTypes.ConsignorStocks) AS IsConsignorBatches,
 		|	ItemList.Quantity AS Quantity,
@@ -1336,6 +1337,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo_1.ItemKey AS ItemKey,
 		|	BatchKeysInfo_1.Store AS Store,
+		|	BatchKeysInfo_1.Branch AS Branch,
 		|	BatchKeysInfo_1.Company AS Company,
 		|	BatchKeysInfo_1.Period AS Period,
 		|	BatchKeysInfo_1.Direction AS Direction,
@@ -1357,6 +1359,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.ItemKey AS ItemKey,
 		|	BatchKeysInfo.Store AS Store,
+		|	BatchKeysInfo.Branch AS Branch,
 		|	BatchKeysInfo.Company AS Company,
 		|	BatchKeysInfo.Period AS Period,
 		|	BatchKeysInfo.Direction AS Direction,
@@ -1371,6 +1374,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Company,
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Direction,

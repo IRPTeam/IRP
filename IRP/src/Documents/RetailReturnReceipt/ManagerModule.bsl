@@ -243,6 +243,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 	|	RetailReturnReceiptItemList.Store AS Store,
+	|	RetailReturnReceiptItemList.Ref.Branch AS Branch,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
 	|	RetailReturnReceiptItemList.Ref.Date AS Period,
@@ -278,6 +279,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.Ref.Branch,
 	|	RetailReturnReceiptItemList.Ref.Company,
 	|	RetailReturnReceiptItemList.Ref.Date,
 	|	RetailReturnReceiptItemList.Key,
@@ -298,6 +300,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	tmpItemList.ItemKey,
 	|	tmpItemList.Store,
+	|	tmpItemList.Branch,
 	|	tmpItemList.Company,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period,
@@ -411,7 +414,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice, SourceOfOrigin, SerialLotNumber, SourceOfOriginStock, SerialLotNumberStock, InventoryOrigin, Consignor";
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -1356,6 +1359,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SerialLotNumber AS SerialLotNumber,
 		|	BatchKeysInfo.SourceOfOrigin AS SourceOfOrigin,
 		|	BatchKeysInfo.Store AS Store,
+		|	BatchKeysInfo.Branch AS Branch,
 		|	SUM(BatchKeysInfo.InvoiceAmount) AS InvoiceAmount,
 		|	SUM(BatchKeysInfo.InvoiceTaxAmount) AS InvoiceTaxAmount
 		|INTO T6020S_BatchKeysInfo
@@ -1374,7 +1378,8 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo.SalesInvoice,
 		|	BatchKeysInfo.SerialLotNumber,
 		|	BatchKeysInfo.SourceOfOrigin,
-		|	BatchKeysInfo.Store";
+		|	BatchKeysInfo.Store,
+		|	BatchKeysInfo.Branch";
 EndFunction
 
 Function R3022B_CashInTransitOutgoing()

@@ -55,7 +55,7 @@ Function OffsetOfAdvancesAndAging(Parameters) Export
 		Return AdvancesClosingQueryText(Parameters);
 	EndIf;
 	If Parameters.Property("Unposting") And Parameters.Unposting Then
-		Clear_SelfRecords(Parameters);
+		Clear_SelfRecords(Parameters, True);
 		Return AdvancesClosingQueryText(Parameters);
 	EndIf;
 
@@ -1173,6 +1173,11 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		RecordSet_AccountingAmounts.SetActive(True);
 		RecordSet_AccountingAmounts.Write();
 				
+		// Accounting MD5
+		RecorderRef = RecordSet_AccountingAmounts.Filter.Recorder.Value;
+		If Metadata.DefinedTypes.typeAccountingDocuments.Type.Types().Find(TypeOf(RecorderRef)) <> Undefined Then
+			AccountingServer.UpdateAccountingRelevance(RecorderRef);	
+		EndIf;		
 	EndDo;
 EndProcedure
 
@@ -2010,7 +2015,7 @@ Procedure Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey)
 	RecordSet.Write();
 EndProcedure
 
-Procedure Clear_SelfRecords(Parameters)
+Procedure Clear_SelfRecords(Parameters, IsUnposting = False)
 	Query = New Query;
 	Query.Text =
 	"SELECT
@@ -2074,12 +2079,24 @@ Procedure Clear_SelfRecords(Parameters)
 	Ref = Parameters.Object.Ref;
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
-
-	ClearRegisterRecords(Ref, QueryResults[0].Unload(), Parameters.RegisterName_Advances     , Parameters.DocumentName);
-	ClearRegisterRecords(Ref, QueryResults[1].Unload(), Parameters.RegisterName_Transactions , Parameters.DocumentName);
-	ClearRegisterRecords(Ref, QueryResults[2].Unload(), Parameters.RegisterName_Aging        , "AgingClosing");
-	ClearRegisterRecords(Ref, QueryResults[3].Unload(), "T1040T_AccountingAmounts"           , "AdvancesClosing");
-	ClearRegisterRecords(Ref, QueryResults[4].Unload(), "R5020B_PartnersBalance"             , "AdvancesClosing");
+	
+	TableOfRecorders_Advances        = QueryResults[0].Unload();
+	TableOfRecorders_Transactions    = QueryResults[1].Unload();
+	TableOfRecorders_Aging           = QueryResults[2].Unload();
+	TableOfRecorders_Accounting      = QueryResults[3].Unload();
+	TableOfRecorders_PartnersBalance = QueryResults[4].Unload();
+	
+	ClearRegisterRecords(Ref, TableOfRecorders_Advances       , Parameters.RegisterName_Advances     , Parameters.DocumentName);
+	ClearRegisterRecords(Ref, TableOfRecorders_Transactions   , Parameters.RegisterName_Transactions , Parameters.DocumentName);
+	ClearRegisterRecords(Ref, TableOfRecorders_Aging          , Parameters.RegisterName_Aging        , "AgingClosing");
+	ClearRegisterRecords(Ref, TableOfRecorders_Accounting     , "T1040T_AccountingAmounts"           , "AdvancesClosing");
+	ClearRegisterRecords(Ref, TableOfRecorders_PartnersBalance, "R5020B_PartnersBalance"             , "AdvancesClosing");
+	
+	If IsUnposting Then
+		For Each Row In TableOfRecorders_Accounting Do
+			AccountingServer.UpdateAccountingRelevance(Row.Recorder);
+		EndDo;
+	EndIf;
 EndProcedure
 
 Procedure ClearRegisterRecords(DocRef, TableOfRecorders, RegisterName, AttrName)

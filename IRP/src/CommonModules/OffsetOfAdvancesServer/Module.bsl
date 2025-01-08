@@ -2126,3 +2126,213 @@ Function AdvancesClosingQueryText(Parameters)
 		   |WHERE
 		   |	FALSE", Parameters.DocumentName);
 EndFunction
+
+Procedure CheckAdvanceBalance(Ref, Cancel, Parameters, RegisterName) Export		
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	If Unposting Then
+		Return;
+	EndIf;
+	
+	Advances = Parameters.PostingDataTables.Get(Metadata.AccumulationRegisters[RegisterName]).PrepareTable;
+	If Advances.Columns.Find("RecordType") = Undefined Then
+		Return;
+	EndIf;
+	
+	Exists_Advances =  PostingServer.GetQueryTableByName("Exists_" + RegisterName, Parameters, True);
+	
+	Filter = New Structure("CurrencyMovementType, RecordType");
+	Filter.CurrencyMovementType = ChartsOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency;
+	Filter.RecordType = AccumulationRecordType.Expense;
+	
+	Expense_Advances = Advances.Copy(Filter);
+	Expense_Exists_Advances = Exists_Advances.Copy(Filter);
+	
+	If Expense_Advances.Count() > 0 Or Expense_Exists_Advances.Count() > 0 Then
+		Error = _CheckAdvanceBalance(Ref, Expense_Advances, Expense_Exists_Advances, Unposting, RegisterName);
+		If Error Then
+			Cancel = True;
+		EndIf;
+	EndIf;
+EndProcedure
+
+Function _CheckAdvanceBalance(Ref, Records_InDocument, Records_Exists, Unposting, RegisterName)
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text =
+	"SELECT
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project,
+	|	Records.Amount
+	|INTO Records_InDocument
+	|FROM
+	|	&Records_InDocument AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project,
+	|	Records.Amount
+	|INTO Records_Exists
+	|FROM
+	|	&Records_Exists AS Records
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project,
+	|	Records.Amount
+	|INTO Advances_All
+	|FROM
+	|	Records_InDocument AS Records
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project,
+	|	Records.Amount
+	|FROM
+	|	Records_Exists AS Records
+	|		LEFT JOIN Records_InDocument AS Records_InDocument
+	|		ON Records.Company = Records_InDocument.Company
+	|		AND Records.Branch = Records_InDocument.Branch
+	|		AND Records.CurrencyMovementType = Records_InDocument.CurrencyMovementType
+	|		AND Records.Currency = Records_InDocument.Currency
+	|		AND Records.TransactionCurrency = Records_InDocument.TransactionCurrency
+	|		AND Records.LegalName = Records_InDocument.LegalName
+	|		AND Records.Partner = Records_InDocument.Partner
+	|		AND Records.Order = Records_InDocument.Order
+	|		AND Records.Agreement = Records_InDocument.Agreement
+	|		AND Records.Project = Records_InDocument.Project
+	|WHERE
+	|	Records_InDocument.CurrencyMovementType IS NULL
+	|	AND NOT &Unposting
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project,
+	|	SUM(Records.Amount) AS Amount
+	|INTO Advances
+	|FROM
+	|	Advances_All AS Records
+	|GROUP BY
+	|	Records.Company,
+	|	Records.Branch,
+	|	Records.CurrencyMovementType,
+	|	Records.Currency,
+	|	Records.TransactionCurrency,
+	|	Records.LegalName,
+	|	Records.Partner,
+	|	Records.Order,
+	|	Records.Agreement,
+	|	Records.Project
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RegisterBalance.Company,
+	|	RegisterBalance.Branch,
+	|	RegisterBalance.CurrencyMovementType,
+	|	RegisterBalance.Currency,
+	|	RegisterBalance.TransactionCurrency,
+	|	RegisterBalance.LegalName,
+	|	RegisterBalance.Partner,
+	|	RegisterBalance.Order,
+	|	RegisterBalance.Agreement,
+	|	RegisterBalance.Project,
+	|	-RegisterBalance.AmountBalance AS LackOfBalance,
+	|	&Unposting AS Unposting
+	|FROM
+	|	Advances AS Advances
+	|		INNER JOIN AccumulationRegister.R1020B_AdvancesToVendors.Balance(, (Company, Branch, CurrencyMovementType, Currency,
+	|			TransactionCurrency, LegalName, Partner, Order, Agreement, Project) IN
+	|			(SELECT
+	|				Advances.Company,
+	|				Advances.Branch,
+	|				Advances.CurrencyMovementType,
+	|				Advances.Currency,
+	|				Advances.TransactionCurrency,
+	|				Advances.LegalName,
+	|				Advances.Partner,
+	|				Advances.Order,
+	|				Advances.Agreement,
+	|				Advances.Project
+	|			FROM
+	|				Advances AS Advances)) AS RegisterBalance
+	|		ON RegisterBalance.Company = Advances.Company
+	|		AND RegisterBalance.Branch = Advances.Branch
+	|		AND RegisterBalance.CurrencyMovementType = Advances.CurrencyMovementType
+	|		AND RegisterBalance.Currency = Advances.Currency
+	|		AND RegisterBalance.TransactionCurrency = Advances.TransactionCurrency
+	|		AND RegisterBalance.LegalName = Advances.LegalName
+	|		AND RegisterBalance.Partner = Advances.Partner
+	|		AND RegisterBalance.Order = Advances.Order
+	|		AND RegisterBalance.Agreement = Advances.Agreement
+	|		AND RegisterBalance.Project = Advances.Project
+	|WHERE
+	|	RegisterBalance.AmountBalance < 0";
+
+	Query.Text = StrReplace(Query.Text, "R1020B_AdvancesToVendors", RegisterName);
+
+	Query.SetParameter("Records_InDocument", Records_InDocument);
+	Query.SetParameter("Records_Exists", Records_Exists);
+	Query.SetParameter("Unposting", Unposting);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+
+	Error = False;
+	If QueryTable.Count() Then
+		Error = True;
+		For Each Row In QueryTable Do
+			Message = StrTemplate(R().Error_177, Row.Partner, Row.Agreement, Row.LackOfBalance);			
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndDo;
+	EndIf;
+	Return Error;
+EndFunction
+
+

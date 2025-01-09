@@ -255,6 +255,7 @@ Function ItemList()
 		   |	UnbundlingItemList.Ref.Date AS Period,
 		   |	UnbundlingItemList.Ref.Company AS Company,
 		   |	UnbundlingItemList.Ref.Store AS Store,
+		   |	UnbundlingItemList.Ref.Branch AS Branch,
 		   |	UnbundlingItemList.ItemKey AS ItemKey,
 		   |	UnbundlingItemList.Ref.ItemKeyBundle AS Bundle,
 		   |	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
@@ -272,6 +273,7 @@ Function Header()
 		   |	Unbundling.Date AS Period,
 		   |	Unbundling.Company,
 		   |	Unbundling.Store,
+		   |	Unbundling.Branch,
 		   |	Unbundling.ItemKeyBundle AS ItemKey,
 		   |	Unbundling.QuantityInBaseUnit AS Quantity,
 		   |	Unbundling.Ref
@@ -368,6 +370,7 @@ Function T6020S_BatchKeysInfo()
 		   |	Header.Period,
 		   |	Header.Company,
 		   |	Header.Store,
+		   |	Header.Branch,
 		   |	Header.ItemKey,
 		   |	Header.Quantity
 		   |INTO T6020S_BatchKeysInfo
@@ -383,6 +386,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.Period,
 		   |	ItemList.Company,
 		   |	ItemList.Store,
+		   |	ItemList.Branch,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Quantity
 		   |FROM

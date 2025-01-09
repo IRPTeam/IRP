@@ -257,6 +257,7 @@ Function ItemList()
 	Return "SELECT
 		   |	BundlingItemList.Ref.Date AS Period,
 		   |	BundlingItemList.Ref.Company AS Company,
+		   |	BundlingItemList.Ref.Branch AS Branch,
 		   |	BundlingItemList.Ref.Store AS Store,
 		   |	BundlingItemList.ItemKey AS ItemKey,
 		   |	BundlingItemList.QuantityInBaseUnit * BundlingItemList.Ref.QuantityInBaseUnit AS Quantity
@@ -271,6 +272,7 @@ Function Header()
 	Return "SELECT
 		   |	Bundling.Date AS Period,
 		   |	Bundling.Company,
+		   |	Bundling.Branch,
 		   |	Bundling.Store,
 		   |	&ItemKey,
 		   |	Bundling.QuantityInBaseUnit AS Quantity,
@@ -386,6 +388,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	Header.Period,
 		   |	Header.Company,
+		   |	Header.Branch,
 		   |	Header.Store,
 		   |	Header.ItemKey,
 		   |	SUM(Header.Quantity) AS Quantity
@@ -398,6 +401,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt),
 		   |	Header.Period,
 		   |	Header.Company,
+		   |	Header.Branch,
 		   |	Header.Store,
 		   |	Header.ItemKey
 		   |
@@ -407,6 +411,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.Period,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	SUM(ItemList.Quantity) AS Quantity
@@ -418,6 +423,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Expense),
 		   |	ItemList.Period,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey";
 EndFunction

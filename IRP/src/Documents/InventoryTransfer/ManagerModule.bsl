@@ -897,6 +897,7 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Key AS Key,
 		|	ItemList.Period AS Period,
 		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.StoreSender AS StoreSender,
 		|	ItemList.StoreReceiver AS StoreReceiver,
 		|	ItemList.ItemKey AS ItemKey,
@@ -912,6 +913,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.Period AS Period,
 		|	BatchKeysInfo.Company AS Company,
+		|	BatchKeysInfo.Branch AS Branch,
 		|	BatchKeysInfo.StoreSender AS StoreSender,
 		|	BatchKeysInfo.StoreReceiver AS StoreReceiver,
 		|	BatchKeysInfo.ItemKey AS ItemKey,
@@ -934,6 +936,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Period AS Period,
 		|	VALUE(Enum.BatchDirection.Expense) AS Direction,
 		|	BatchKeysInfo_1.Company AS Company,
+		|	BatchKeysInfo_1.Branch AS Branch,
 		|	BatchKeysInfo_1.StoreSender AS Store,
 		|	BatchKeysInfo_1.ItemKey AS ItemKey,
 		|	SUM(BatchKeysInfo_1.Quantity) AS Quantity,
@@ -947,6 +950,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo_1.Period,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.StoreSender,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.SourceOfOrigin,
@@ -959,6 +963,7 @@ Function T6020S_BatchKeysInfo()
 		|	BatchKeysInfo_1.Period,
 		|	VALUE(Enum.BatchDirection.Receipt),
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.StoreReceiver,
 		|	BatchKeysInfo_1.ItemKey,
 		|	SUM(BatchKeysInfo_1.Quantity),
@@ -971,6 +976,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo_1.Period,
 		|	BatchKeysInfo_1.Company,
+		|	BatchKeysInfo_1.Branch,
 		|	BatchKeysInfo_1.StoreReceiver,
 		|	BatchKeysInfo_1.ItemKey,
 		|	BatchKeysInfo_1.SourceOfOrigin,

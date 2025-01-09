@@ -282,6 +282,7 @@ Function AllocationList()
 	Return "SELECT
 		   |	AllocationList.Ref.Date AS Period,
 		   |	AllocationList.Ref.Company AS Company,
+		   |	AllocationList.Ref.Branch AS Branch,
 		   |	AllocationList.Document AS Document,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
@@ -306,6 +307,7 @@ Function AllocationList()
 		   |	RevenueList.Basis,
 		   |	AllocationList.ItemKey,
 		   |	AllocationList.Document,
+		   |	AllocationList.Ref.Branch,
 		   |	AllocationList.Ref.Company,
 		   |	AllocationList.Ref.Company.LandedCostCurrencyMovementType,
 		   |	AllocationList.Ref.Date,
@@ -371,6 +373,7 @@ Function T6020S_BatchKeysInfo()
 	Return "SELECT
 		   |	AllocationList.Period,
 		   |	AllocationList.Company,
+		   |	AllocationList.Branch,
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
@@ -385,6 +388,7 @@ Function T6020S_BatchKeysInfo()
 		   |GROUP BY
 		   |	AllocationList.Period,
 		   |	AllocationList.Company,
+		   |	AllocationList.Branch,
 		   |	VALUE(Enum.BatchDirection.Receipt),
 		   |	AllocationList.Store,
 		   |	AllocationList.ItemKey,

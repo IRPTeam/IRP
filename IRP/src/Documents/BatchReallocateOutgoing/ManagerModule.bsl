@@ -92,6 +92,7 @@ Function ItemList()
 		   |	ItemList.Ref.Company,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
+		   |	ItemList.Branch,
 		   |	SUM(ItemList.Quantity) AS Quantity
 		   |INTO ItemList
 		   |FROM
@@ -103,6 +104,7 @@ Function ItemList()
 		   |	ItemList.Ref.Company,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
+		   |	ItemList.Branch,
 		   |	ItemList.Ref";
 EndFunction
 
@@ -122,6 +124,7 @@ Function R4050B_StockInventory()
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	ItemList.Period,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	SUM(ItemList.Quantity) AS Quantity
@@ -134,6 +137,7 @@ Function R4050B_StockInventory()
 		   |	VALUE(AccumulationRecordType.Receipt),
 		   |	ItemList.Period,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Store,
 		   |	ItemList.ItemKey,
 		   |	VALUE(AccumulationRecordType.Expense)";

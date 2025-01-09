@@ -207,6 +207,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ReceiptFromConsignor.ItemKey,
 	|	ReceiptFromConsignor.Store,
 	|	ReceiptFromConsignor.Ref.Company AS Company,
+	|	ReceiptFromConsignor.Ref.Branch AS Branch,
 	|	SUM(ReceiptFromConsignor.Quantity) AS Quantity,
 	|	ReceiptFromConsignor.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
@@ -233,6 +234,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|	ReceiptFromConsignor.ItemKey,
 	|	ReceiptFromConsignor.Store,
 	|	ReceiptFromConsignor.Ref.Company,
+	|	ReceiptFromConsignor.Ref.Branch,
 	|	ReceiptFromConsignor.Ref.Date,
 	|	VALUE(Enum.BatchDirection.Receipt),
 	|	ReceiptFromConsignor.Key,
@@ -273,7 +275,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
+	BatchKeysInfoSettings.Dimensions = "Period, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SerialLotNumber, SourceOfOrigin";
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	
@@ -1528,6 +1530,7 @@ Function T6020S_BatchKeysInfo()
 	Return "SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
@@ -1553,6 +1556,7 @@ Function T6020S_BatchKeysInfo()
 		|	TRUE
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.CurrencyMovementType,
 		|	ItemList.ItemKey,
@@ -1575,6 +1579,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.Store,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Expense),
@@ -1600,6 +1605,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.Store,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Expense),
@@ -1621,6 +1627,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.StoreTradeAgent,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt),
@@ -1646,6 +1653,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	ShipmentToTradeAgent.Period,
 		|	ShipmentToTradeAgent.Company,
+		|	ShipmentToTradeAgent.Branch,
 		|	ShipmentToTradeAgent.StoreTradeAgent,
 		|	ShipmentToTradeAgent.ItemKey,
 		|	VALUE(Enum.BatchDirection.Receipt),
@@ -1667,6 +1675,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Direction,
@@ -1684,6 +1693,7 @@ Function T6020S_BatchKeysInfo()
 		|GROUP BY
 		|	BatchKeysInfo.Period,
 		|	BatchKeysInfo.Company,
+		|	BatchKeysInfo.Branch,
 		|	BatchKeysInfo.Store,
 		|	BatchKeysInfo.ItemKey,
 		|	BatchKeysInfo.Direction,
@@ -1697,6 +1707,7 @@ Function T6020S_BatchKeysInfo()
 		|SELECT
 		|	Table.Period,
 		|	Table.Company,
+		|	Table.Branch,
 		|	Table.Store,
 		|	Table.ItemKey,
 		|	Table.Direction,

@@ -94,7 +94,6 @@ Procedure CreateIssueHandler()
 		IssueRef = Issue;
 	EndIf;          
 	
-	
 	IsError = False;
 	Str = PictureViewerClient.RefInfo();
 	Str.Ref = IssueRef;
@@ -149,7 +148,7 @@ Function CreateIssueAtServer()
 	Issue.Latitude = Object.Latitude;
 	Issue.Longitude = Object.Longitude;
 	Issue.DueDate = Object.DueDate;
-	
+	Issue.Status = ObjectStatusesServer.GetStatusByDefault(Issue.Ref);
 	Try
 		Issue.Write(DocumentWriteMode.Posting);
 	Except

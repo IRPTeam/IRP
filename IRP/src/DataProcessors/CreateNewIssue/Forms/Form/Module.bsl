@@ -110,7 +110,14 @@ Procedure CreateIssueHandler()
 		If File.Uploaded Then
 			Continue;
 		EndIf;
-		FileStr = New Structure("Address, FileRef", File.BD, New Structure("Extension, Name", File.Extension, File.Name));
+		FileStr = New Structure("Address, FileRef, PutFileCanceled", PutToTempStorage(File.BD, UUID), New Structure("FileID, Extension, Name", New UUID, File.Extension, File.Name, False));
+		FileWrapper = New Structure;
+		FileWrapper.Insert("Name", File.Name + "." + File.Extension);
+		FileWrapper.Insert("BaseName", File.Name);
+		FileWrapper.Insert("Extension", File.Extension);
+		FileWrapper.Insert("FullName", File.Name + "." + File.Extension);
+		FileWrapper.Insert("Path", "");
+		FileStr.FileRef.Insert("File", FileWrapper);
 		Try
 			PictureViewerClient.AddFile(FileStr, , Str); 
 			File.UploadStatus = PictureLib.AppearanceCheckBox; 

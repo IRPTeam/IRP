@@ -14,7 +14,6 @@
     <key>en</key>
     <value>Logger notification</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="b3f29712-fdf4-47e6-a37d-57dbdc85b1ee">
@@ -127,6 +126,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -143,6 +143,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <denyIncompleteValues>true</denyIncompleteValues>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillFromFillingValue>true</fillFromFillingValue>

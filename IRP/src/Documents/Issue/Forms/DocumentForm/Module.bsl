@@ -5,6 +5,7 @@
 Procedure OnReadAtServer(CurrentObject)
 	DocIssueServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
+	AssigneeList.LoadValues(CurrentObject.AssigneeList.Unload().UnloadColumn("Assignee"));
 EndProcedure
 
 &AtServer
@@ -17,6 +18,12 @@ EndProcedure
 
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	
+	CurrentObject.AssigneeList.Clear();
+	For Each Assignee In AssigneeList Do
+		CurrentObject.AssigneeList.Add().Assignee = Assignee.Value;
+	EndDo;
+	
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
@@ -78,6 +85,11 @@ EndProcedure
 &AtClient 
 Procedure _DetachIdleHandler() Export
 	DetachIdleHandler("_IdeHandler");
+EndProcedure
+
+&AtClient
+Procedure AssigneeListOnChange(Item)
+	Modified = True;
 EndProcedure
 
 #EndRegion

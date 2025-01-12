@@ -218,21 +218,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c6b51515-17ea-49e2-82d6-60daaec438e5">
-    <name>Assignee</name>
-    <synonym>
-      <key>en</key>
-      <value>Assignee</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Users</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="0d9e814f-888b-4bc2-bddc-ab7cff3c119e">
     <name>Status</name>
     <synonym>
@@ -321,6 +306,31 @@
         <field>Document.Issue.TabularSection.AddAttributes.Attribute.Property</field>
       </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="814388cf-c546-4f88-9942-764a07bb6825">
+    <producedTypes>
+      <objectType typeId="b2dab8c7-fd94-4ab6-97a6-04d7c50b5042" valueTypeId="b4fa9bd2-e744-44ec-ba79-fd4f275cccca"/>
+      <rowType typeId="2c22f441-eca8-4f16-97f9-5b00b8ce588d" valueTypeId="453f38d5-b3db-409a-934f-797ebbd21337"/>
+    </producedTypes>
+    <name>AssigneeList</name>
+    <synonym>
+      <key>en</key>
+      <value>Assignee list</value>
+    </synonym>
+    <attributes uuid="bc7ba0bf-6e3f-4dc7-9241-03997b7bb1f6">
+      <name>Assignee</name>
+      <synonym>
+        <key>en</key>
+        <value>Assignee</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Users</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="5f1da082-8971-4d6b-9b6c-804c929a000d">

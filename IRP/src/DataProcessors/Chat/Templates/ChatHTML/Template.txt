@@ -1,42 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Telegram-Style Chat</title>
   <style>
-    /* 
-      Basic page setup:
-      - Use a neutral background color
-      - Make the chat container wider
-      - Center the container
-    */
     body {
       margin: 0;
       padding: 0;
       font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
-      background-color: #e5ddd5; /* Telegram-like background */
+      background-color: #e5ddd5;
     }
-
-    /* 
-      Main chat container:
-      - Wider width (e.g., 80% of the screen or max 900px)
-      - Vertical scrolling area
-    */
     .chat-container {
       display: flex;
       flex-direction: column;
-      margin: 0 auto;
       box-sizing: border-box;
-      overflow-y: auto; /* Allow vertical scroll */
+      overflow-y: auto;
       height: 95vh;
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 6px;
+      width: 100%;
     }
-
     .date-divider {
       position: relative;
       text-align: center;
-      margin: 15px 0;
+      margin: 10px 0;
       font-size: 12px;
       color: #999;
     }
@@ -55,17 +42,11 @@
     .date-divider::after {
       right: 0;
     }
-
-    /* 
-      Common style for message bubbles
-      - Increased padding
-      - Subtle box-shadow
-    */
     .message-bubble {
       display: inline-block;
       clear: both;
-      margin: 8px 0;
-      padding: 8px 12px;
+      margin: 4px 8px;
+      padding: 6px 8px;
       font-size: 14px;
       border-radius: 8px;
       max-width: 70%;
@@ -74,35 +55,18 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       position: relative;
     }
-
-    /* 
-      Outgoing messages (current user)
-      - Right aligned
-      - Light-green background
-    */
     .outgoing {
       float: right;
       background-color: #dcf8c6;
       color: #000;
       text-align: left;
     }
-
-    /*
-      Incoming messages (other users)
-      - Left aligned
-      - White background
-    */
     .incoming {
       float: left;
       background-color: #fff;
       color: #000;
       text-align: left;
     }
-
-    /* 
-      For user label and time label 
-      (small header inside the message bubble)
-    */
     .message-header {
       display: flex;
       justify-content: space-between;
@@ -116,31 +80,46 @@
     .time-label {
       font-style: italic;
     }
-
-    /* 
-      System message style 
-      (ManualComment = false)
-    */
     .system-message {
-      text-align: center;
+      text-align: left;
       color: #666;
       font-size: 13px;
       font-style: normal;
       background-color: #f1f1f1;
-      margin: 8px auto;
+      margin: 4px auto;
       width: auto;
+      padding: 4px 8px;
     }
-    .system-message .system-info {
+    .system-info {
       font-weight: bold;
       margin-bottom: 4px;
-      display: block;
     }
-    .system-message .system-text {
-      display: block;
-      white-space: pre-wrap; /* preserve line breaks if needed */
+    .system-text {
+      white-space: pre-wrap;
     }
-
-    /* Clear floats */
+    .system-meta {
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+    .notify-table {
+      border-collapse: collapse;
+    }
+    .notify-table td {
+      padding: 2px 6px;
+      vertical-align: middle;
+    }
+    .notify-user-name {
+      font-weight: bold;
+    }
+    .notify-icons {
+      width: 90px;
+      text-align: center;
+    }
+    .icon {
+      margin-right: 4px;
+      cursor: default;
+    }
     .clearfix::after {
       content: "";
       display: block;
@@ -149,89 +128,88 @@
   </style>
 </head>
 <body>
-  <div class="chat-container" id="chat-container">
-    <!-- Messages will be rendered here -->
-  </div>
-
+  <div class="chat-container" id="chat-container"></div>
   <script>
-    // === messages array (example JSON) ===
     const messages = #MessageArray#;
-
-    // Helper function for date formatting (dd.mm.yyyy)
     function formatDate(date) {
-      return date.toLocaleDateString("ru-RU");
+      return date.toLocaleDateString("en-EN");
     }
-
-    // Helper function for time formatting (HH:MM)
     function formatTime(date) {
-      return date.toLocaleTimeString("ru-RU", { hour: '2-digit', minute: '2-digit' });
+      return date.toLocaleTimeString("en-EN", { hour: '2-digit', minute: '2-digit' });
     }
-
-    // Rendering messages
+    function renderNotifyUsers(notifies) {
+      if (!notifies || !notifies.length) return "";
+      let result = `<div class="system-meta"><table class="notify-table">`;
+      notifies.forEach(n => {
+        const allFalse = !n.SendEmail && !n.WaitForOpenRef && !n.RefOpened;
+        if (allFalse) return;
+        let iconsHtml = "";
+        if (n.SendEmail) {
+          if (n.Sended) {
+            iconsHtml += `<span class="icon" title="Email sent">&#10004;</span>`;
+          } else {
+            iconsHtml += `<span class="icon" title="Email not sent">&#10008;</span>`;
+          }
+        }
+        if (n.WaitForOpenRef) {
+          if (n.RefOpened) {
+            iconsHtml += `<span class="icon" title="Document viewed">&#9673;</span>`;
+          } else {
+            iconsHtml += `<span class="icon" title="Waiting to be viewed">&#9203;</span>`;
+          }
+        }
+        if (iconsHtml) {
+          result += `
+            <tr>
+              <td class="notify-user-name">${n.User}</td>
+              <td class="notify-icons">${iconsHtml}</td>
+            </tr>`;
+        }
+      });
+      result += `</table></div>`;
+      return result;
+    }
     function renderMessages() {
       const chatContainer = document.getElementById("chat-container");
       let previousDate = null;
-
       messages.forEach(msg => {
         const dateObj = new Date(msg.Period);
         const msgDate = formatDate(dateObj);
-
-        // Show a date divider if the date changes
         if (msgDate !== previousDate) {
-          const divider = document.createElement('div');
-          divider.className = 'date-divider';
+          const divider = document.createElement("div");
+          divider.className = "date-divider";
           divider.textContent = msgDate;
           chatContainer.appendChild(divider);
           previousDate = msgDate;
         }
-
-        // If the message is system (ManualComment = false)
         if (!msg.ManualComment) {
-          const systemBubble = document.createElement('div');
-          systemBubble.classList.add('message-bubble', 'system-message', 'clearfix');
-          
-          // System message includes user and datetime
+          const systemBubble = document.createElement("div");
+          systemBubble.classList.add("message-bubble", "system-message", "clearfix");
+          const notifyBlock = renderNotifyUsers(msg.Notify);
           systemBubble.innerHTML = `
-            <span class="system-info">
-              System message from ${msg.User} at ${msgDate} ${formatTime(dateObj)}
-            </span>
-            <span class="system-text">
-              ${msg.Message}
-            </span>
+            <div class="system-info">System message from ${msg.User} at ${msgDate} ${formatTime(dateObj)}</div>
+            <div class="system-text">${msg.Message}</div>
+            ${notifyBlock}
           `;
           chatContainer.appendChild(systemBubble);
-        } 
-        else {
-          // Normal user message
+        } else {
           const bubble = document.createElement("div");
           bubble.classList.add("message-bubble", "clearfix");
-          
-          // Decide if it's outgoing or incoming
-          if (msg.CurrentUser) {
-            bubble.classList.add("outgoing");
-          } else {
-            bubble.classList.add("incoming");
-          }
-
-          // Add user label and time
+          if (msg.CurrentUser) bubble.classList.add("outgoing");
+          else bubble.classList.add("incoming");
           bubble.innerHTML = `
             <div class="message-header">
               <span class="user-label">${msg.User}</span>
               <span class="time-label">${formatTime(dateObj)}</span>
             </div>
-            <div class="message-content">${msg.Message.replace(/\n/g, '<br>')}</div>
+            <div class="message-content">${msg.Message}</div>
           `;
           chatContainer.appendChild(bubble);
         }
       });
-
-      // Auto-scroll to the bottom after all messages are rendered
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-
-    // When DOM is loaded, render messages
     window.addEventListener("DOMContentLoaded", renderMessages);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
   </script>
 </body>
 </html>

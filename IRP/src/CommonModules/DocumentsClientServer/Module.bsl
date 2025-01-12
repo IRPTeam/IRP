@@ -59,6 +59,10 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 		Return;
 	EndIf;
 
+	If Form.Items.Find("DecorationGroupTitleCollapsedLabel") = Undefined Then
+		Return;
+	EndIf;
+	
 	ItemsArray = GetGroupItemsArray(Object, Form);
 
 	If Not ItemsArray.Count() Then

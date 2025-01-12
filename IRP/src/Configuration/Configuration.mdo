@@ -1237,6 +1237,7 @@
   <documents>Document.DebitNote</documents>
   <documents>Document.DecommissioningOfFixedAsset</documents>
   <documents>Document.DepreciationCalculation</documents>
+  <documents>Document.ELedgerRegistry</documents>
   <documents>Document.EmployeeCashAdvance</documents>
   <documents>Document.EmployeeFiring</documents>
   <documents>Document.EmployeeHiring</documents>
@@ -1294,6 +1295,7 @@
   <documents>Document.ShipmentConfirmation</documents>
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
+  <documents>Document.StockCorrection</documents>
   <documents>Document.TaxesOperation</documents>
   <documents>Document.TimeSheet</documents>
   <documents>Document.Unbundling</documents>
@@ -1302,8 +1304,6 @@
   <documents>Document.WorkOrder</documents>
   <documents>Document.WorkOrderClosing</documents>
   <documents>Document.WorkSheet</documents>
-  <documents>Document.ELedgerRegistry</documents>
-  <documents>Document.StockCorrection</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <enums>Enum.AccountingAnalyticTypes</enums>

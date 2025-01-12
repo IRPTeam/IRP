@@ -17,3 +17,13 @@ Procedure DateOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
+
+#Region STATUS
+
+Procedure StatusOnChange(Object, Form, Item) Export
+#If Not MobileClient Then
+	ViewClient_V2.StatusOnChange(Object, Form);
+#EndIf
+EndProcedure
+
+#EndRegion

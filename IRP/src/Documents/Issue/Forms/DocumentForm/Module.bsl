@@ -79,6 +79,20 @@ EndProcedure
 
 #EndRegion
 
+#Region STATUS
+
+&AtClient
+Procedure StatusOnChange(Item)
+	DocIssueClient.StatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure DecorationStatusHistoryClick(Item)
+	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
+EndProcedure
+
+#EndRegion
+
 #Region _DATE
 
 &AtClient

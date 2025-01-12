@@ -21,5 +21,6 @@
     <types>DocumentRef.ProductionPlanningCorrection</types>
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
+    <types>DocumentRef.Issue</types>
   </type>
 </mdclass:DefinedType>

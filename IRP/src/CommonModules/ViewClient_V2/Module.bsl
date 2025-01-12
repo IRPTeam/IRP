@@ -4172,7 +4172,7 @@ EndProcedure
 
 #Region STATUS
 
-Procedure StatusOnChange(Object, Form, TableNames) Export
+Procedure StatusOnChange(Object, Form, TableNames = "") Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TableName);
 		ControllerClientServer_V2.StatusOnChange(Parameters);

@@ -29,6 +29,9 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocIssueClient.OnOpen(Object, ThisObject, Cancel);
+	If Not Cancel Then
+		LoggerServerCall.CheckIfNeedSetOnOpen(Object.Ref);
+	EndIf;
 EndProcedure
 
 &AtClient

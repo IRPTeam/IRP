@@ -6,6 +6,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	AdditionalProperties.Insert("Posted", Ref.Posted);
 	AdditionalProperties.Insert("WriteMode", WriteMode);
+	AdditionalProperties.Insert("Assignee", Ref.Assignee);
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -30,6 +31,15 @@ Procedure OnWrite(Cancel)
 			Settings = LoggerServerCall.GetNotifySettings();
 			Settings.SendEmail = True;
 			LoggerServerCall.AddLog(Ref, R().Issue_4, False, NotifyUsers, Settings);
+	EndIf;
+	
+	If Posted And Not AdditionalProperties.Assignee = Assignee Then
+		NotifyUsers = New Array;
+		NotifyUsers.Add(Assignee);
+		Settings = LoggerServerCall.GetNotifySettings();
+		Settings.SendEmail = True;
+		Settings.WaitForOpenRef = True;
+		LoggerServerCall.AddLog(Ref, R().Issue_5, False, NotifyUsers, Settings);		
 	EndIf;
 		 
 EndProcedure

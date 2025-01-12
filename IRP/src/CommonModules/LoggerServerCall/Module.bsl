@@ -27,6 +27,7 @@ Procedure AddLog(Basis, Comment, Manual = False, NotifyUsers = Undefined, Notify
 		For Each User In NotifyUsers Do
 			NewNotify = InformationRegisters.LoggerNotification.CreateRecordManager();
 			NewNotify.NotifyID = NotifyID;
+			NewNotify.Basis = Basis;
 			NewNotify.User = User;
 			For Each Setting In NotifySettings Do
 				NewNotify[Setting.Key] = Setting.Value;
@@ -100,6 +101,28 @@ Procedure SendNotifications(IntegrationSettings) Export
 		ChangeNotifyStatus(NotifyData.NotifyID, NotifyData.User, "Sended", True);
 	EndDo;
 	
+EndProcedure
+
+Procedure CheckIfNeedSetOnOpen(Ref) Export
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	LoggerNotification.NotifyID
+		|FROM
+		|	InformationRegister.LoggerNotification AS LoggerNotification
+		|WHERE
+		|	LoggerNotification.WaitForOpenRef
+		|	AND NOT LoggerNotification.RefOpened
+		|	AND LoggerNotification.User = &User
+		|	AND LoggerNotification.Basis = &Basis";
+	Query.Parameters.Insert("Basis", Ref);
+	Query.Parameters.Insert("User", SessionParameters.CurrentUser);
+	QueryResult = Query.Execute();
+	
+	If Not QueryResult.IsEmpty() Then
+		NotifyID = QueryResult.Unload().UnloadColumn("NotifyID")[0];
+		ChangeNotifyStatus(NotifyID, SessionParameters.CurrentUser, "RefOpened", True);
+	EndIf;
 EndProcedure
 
 // Get message info.

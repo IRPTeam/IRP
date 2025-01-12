@@ -488,6 +488,7 @@
   <roles>Role.UseOutput</roles>
   <roles>Role.Document_ELedgerRegistry</roles>
   <roles>Role.Document_StockCorrection</roles>
+  <roles>Role.Logger</roles>
   <commonTemplates>CommonTemplate.HTMLPictureSlider</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLAddAttributes</commonTemplates>
   <commonTemplates>CommonTemplate.HTMLGallery</commonTemplates>
@@ -829,6 +830,7 @@
   <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
   <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
   <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
+  <commonModules>CommonModule.LoggerServerCall</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -960,6 +962,7 @@
   <definedTypes>DefinedType.typeBasisDocumentSalesInvoice</definedTypes>
   <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <definedTypes>DefinedType.typeCashAdvanceBasises</definedTypes>
+  <definedTypes>DefinedType.typeChatObject</definedTypes>
   <definedTypes>DefinedType.typeCurrencyRate</definedTypes>
   <definedTypes>DefinedType.typeDescription</definedTypes>
   <definedTypes>DefinedType.typeDescriptionsFillCheck</definedTypes>
@@ -1463,6 +1466,7 @@
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <dataProcessors>DataProcessor.SystemSettings</dataProcessors>
+  <dataProcessors>DataProcessor.Chat</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFilesControl</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
@@ -1560,6 +1564,8 @@
   <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
   <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
+  <informationRegisters>InformationRegister.Logger</informationRegisters>
+  <informationRegisters>InformationRegister.LoggerNotification</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

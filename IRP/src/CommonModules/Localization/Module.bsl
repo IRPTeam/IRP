@@ -2285,6 +2285,8 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 #Region Issue
     Strings.Insert("Issue_1", NStr("en = 'Issues were already created for all locations.'", Lang));
 	Strings.Insert("Issue_2", NStr("en = 'Create issue for locations: %1?'", Lang));
+	Strings.Insert("Issue_3", NStr("en = 'Issue was created'", Lang));
+	Strings.Insert("Issue_4", NStr("en = 'Issue was canceled'", Lang));
 #EndRegion
 	Return Strings;
 EndFunction

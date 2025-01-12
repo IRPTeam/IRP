@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Telegram-Style Chat</title>
+  <style>
+    /* 
+      Basic page setup:
+      - Use a neutral background color
+      - Make the chat container wider
+      - Center the container
+    */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+      background-color: #e5ddd5; /* Telegram-like background */
+    }
+
+    /* 
+      Main chat container:
+      - Wider width (e.g., 80% of the screen or max 900px)
+      - Vertical scrolling area
+    */
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      box-sizing: border-box;
+      overflow-y: auto; /* Allow vertical scroll */
+      height: 95vh;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
+
+    .date-divider {
+      position: relative;
+      text-align: center;
+      margin: 15px 0;
+      font-size: 12px;
+      color: #999;
+    }
+    .date-divider::before,
+    .date-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background-color: #ccc;
+    }
+    .date-divider::before {
+      left: 0;
+    }
+    .date-divider::after {
+      right: 0;
+    }
+
+    /* 
+      Common style for message bubbles
+      - Increased padding
+      - Subtle box-shadow
+    */
+    .message-bubble {
+      display: inline-block;
+      clear: both;
+      margin: 8px 0;
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 8px;
+      max-width: 70%;
+      word-wrap: break-word;
+      line-height: 1.4;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* 
+      Outgoing messages (current user)
+      - Right aligned
+      - Light-green background
+    */
+    .outgoing {
+      float: right;
+      background-color: #dcf8c6;
+      color: #000;
+      text-align: left;
+    }
+
+    /*
+      Incoming messages (other users)
+      - Left aligned
+      - White background
+    */
+    .incoming {
+      float: left;
+      background-color: #fff;
+      color: #000;
+      text-align: left;
+    }
+
+    /* 
+      For user label and time label 
+      (small header inside the message bubble)
+    */
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: #555;
+    }
+    .user-label {
+      font-weight: bold;
+    }
+    .time-label {
+      font-style: italic;
+    }
+
+    /* 
+      System message style 
+      (ManualComment = false)
+    */
+    .system-message {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      font-style: normal;
+      background-color: #f1f1f1;
+      margin: 8px auto;
+      width: auto;
+    }
+    .system-message .system-info {
+      font-weight: bold;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .system-message .system-text {
+      display: block;
+      white-space: pre-wrap; /* preserve line breaks if needed */
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container" id="chat-container">
+    <!-- Messages will be rendered here -->
+  </div>
+
+  <script>
+    // === messages array (example JSON) ===
+    const messages = #MessageArray#;
+
+    // Helper function for date formatting (dd.mm.yyyy)
+    function formatDate(date) {
+      return date.toLocaleDateString("ru-RU");
+    }
+
+    // Helper function for time formatting (HH:MM)
+    function formatTime(date) {
+      return date.toLocaleTimeString("ru-RU", { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // Rendering messages
+    function renderMessages() {
+      const chatContainer = document.getElementById("chat-container");
+      let previousDate = null;
+
+      messages.forEach(msg => {
+        const dateObj = new Date(msg.Period);
+        const msgDate = formatDate(dateObj);
+
+        // Show a date divider if the date changes
+        if (msgDate !== previousDate) {
+          const divider = document.createElement('div');
+          divider.className = 'date-divider';
+          divider.textContent = msgDate;
+          chatContainer.appendChild(divider);
+          previousDate = msgDate;
+        }
+
+        // If the message is system (ManualComment = false)
+        if (!msg.ManualComment) {
+          const systemBubble = document.createElement('div');
+          systemBubble.classList.add('message-bubble', 'system-message', 'clearfix');
+          
+          // System message includes user and datetime
+          systemBubble.innerHTML = `
+            <span class="system-info">
+              System message from ${msg.User} at ${msgDate} ${formatTime(dateObj)}
+            </span>
+            <span class="system-text">
+              ${msg.Message}
+            </span>
+          `;
+          chatContainer.appendChild(systemBubble);
+        } 
+        else {
+          // Normal user message
+          const bubble = document.createElement("div");
+          bubble.classList.add("message-bubble", "clearfix");
+          
+          // Decide if it's outgoing or incoming
+          if (msg.CurrentUser) {
+            bubble.classList.add("outgoing");
+          } else {
+            bubble.classList.add("incoming");
+          }
+
+          // Add user label and time
+          bubble.innerHTML = `
+            <div class="message-header">
+              <span class="user-label">${msg.User}</span>
+              <span class="time-label">${formatTime(dateObj)}</span>
+            </div>
+            <div class="message-content">${msg.Message.replace(/\n/g, '<br>')}</div>
+          `;
+          chatContainer.appendChild(bubble);
+        }
+      });
+
+      // Auto-scroll to the bottom after all messages are rendered
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // When DOM is loaded, render messages
+    window.addEventListener("DOMContentLoaded", renderMessages);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  </script>
+</body>
+</html>

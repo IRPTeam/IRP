@@ -218,6 +218,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="c6b51515-17ea-49e2-82d6-60daaec438e5">
+    <name>Assignee</name>
+    <synonym>
+      <key>en</key>
+      <value>Assignee</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Users</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="fe05c159-bafa-4ca5-886c-0577fec5da68">
     <name>DocumentForm</name>
     <synonym>

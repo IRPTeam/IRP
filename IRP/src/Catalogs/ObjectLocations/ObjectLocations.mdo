@@ -162,7 +162,7 @@
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <use>ForFolder</use>
+    <use>ForFolderAndItem</use>
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="b4a86a27-1779-45bd-87f7-c7af6c3425e2">

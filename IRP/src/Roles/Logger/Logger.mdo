@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Role xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fee49cfe-0bb2-497d-a8a5-beb664f9b472">
+  <name>Logger</name>
+  <synonym>
+    <key>en</key>
+    <value>Logger</value>
+  </synonym>
+</mdclass:Role>

@@ -141,11 +141,13 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 
 	BatchCostAllocationInfoRecalculated = BatchCostAllocationInfoRecalculated.Copy(
 		New Structure("CurrencyMovementType", CurrencyMovementType));
-	BatchCostAllocationInfoRecalculated.GroupBy("Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", "Amount, AmountTax");
+	BatchCostAllocationInfoRecalculated.GroupBy(
+		"Period, Company, Document, Store, ItemKey, SerialLotNumber, Currency, CurrencyMovementType", 
+			"Amount, AmountTax");
 	Tables.T6060S_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
 
 	BatchKeysInfo = BatchCostAllocationInfoRecalculated.Copy();
-	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey", "Amount, AmountTax");
+	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey, SerialLotNumber", "Amount, AmountTax");
 	BatchKeysInfo.Columns.Document.Name  = "PurchaseInvoiceDocument";
 	BatchKeysInfo.Columns.Amount.Name    = "AllocatedCostAmount";
 	BatchKeysInfo.Columns.AmountTax.Name = "AllocatedCostTaxAmount";
@@ -284,6 +286,7 @@ Function AllocationList()
 		   |	AllocationList.Document AS Document,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
+		   |	AllocationList.SerialLotNumber AS SerialLotNumber,
 		   |	SUM(AllocationList.Amount) AS Amount,
 		   |	SUM(AllocationList.TaxAmount) AS AmountTax,
 		   |	CostList.Currency AS Currency,
@@ -304,6 +307,7 @@ Function AllocationList()
 		   |	CostList.Currency,
 		   |	CostList.Basis,
 		   |	AllocationList.ItemKey,
+		   |	AllocationList.SerialLotNumber,
 		   |	AllocationList.Document,
 		   |	AllocationList.Ref.Company,
 		   |	AllocationList.Ref.Branch,
@@ -375,6 +379,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
+		   |	AllocationList.SerialLotNumber AS SerialLotNumber,
 		   |	AllocationList.Document AS PurchaseInvoiceDocument,
 		   |	SUM(AllocationList.Amount) AS AllocatedCostAmount,
 		   |	SUM(AllocationList.AmountTax) AS AllocatedCostTaxAmount
@@ -390,6 +395,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt),
 		   |	AllocationList.Store,
 		   |	AllocationList.ItemKey,
+		   |	AllocationList.SerialLotNumber,
 		   |	AllocationList.Document";
 EndFunction
 

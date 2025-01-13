@@ -1974,18 +1974,23 @@ Procedure SetAccountingCurrenciesAndAmounts(Parameters)
 			Filter.Insert("Key", Row.Key);
 		EndIf;
 			
-		PartnerBalanceRows = RegPartnerBalance.PrepareTable.FindRows(Filter);
-		If PartnerBalanceRows.Count() <> 1 Then
-			Raise "Partner balance rows not found for update accounting currencies";
-		EndIf;
-		
+		PartnerBalanceRows = RegPartnerBalance.PrepareTable.Copy(Filter); 
+				
 		For Each OperationInfo In ArrayOfOperationInfo Do
-			_Amount = PartnerBalanceRows[0][OperationInfo.ResourceName];
-			If Not ValueIsFilled(_Amount) Then
+			FoundedRow = Undefined;
+			For Each PartnerBalanceRow In PartnerBalanceRows Do
+				If ValueIsFilled(PartnerBalanceRow[OperationInfo.ResourceName]) Then
+					FoundedRow = PartnerBalanceRow;
+					Break;
+				EndIf;
+			EndDo;
+			
+			If FoundedRow = Undefined Then
 				Continue;
 			EndIf;
-			Row[OperationInfo.AccountType + "Currency"] = PartnerBalanceRows[0].Currency;
-			Row[OperationInfo.AccountType + "CurrencyAmount"] = _Amount;			
+			
+			Row[OperationInfo.AccountType + "Currency"] = FoundedRow.Currency;
+			Row[OperationInfo.AccountType + "CurrencyAmount"] = FoundedRow[OperationInfo.ResourceName];			
 		EndDo;
 	EndDo;
 EndProcedure

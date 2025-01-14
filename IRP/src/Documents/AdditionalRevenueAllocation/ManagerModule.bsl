@@ -118,7 +118,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrencyTable = Row.Basis.Currencies.Unload();
 
 		BatchRevenueAllocationInfoByBasis = Tables.T6070S_BatchRevenueAllocationInfo.Copy(
-			New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID));
+			New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
+			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber));
+		
 		If TypeOf(Row.Basis) = Type("DocumentRef.SalesInvoice") Then
 			If CurrencyTable.Count() Then
 				BatchRevenueAllocationInfoByBasis.FillValues(CurrencyTable[0].Key, "Key");

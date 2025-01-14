@@ -117,7 +117,11 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	For Each Row In Tables.T6060S_BatchCostAllocationInfo Do
 		CurrencyTable = Row.Basis.Currencies.Unload();
 
-		BatchCostAllocationInfoByBasis = Tables.T6060S_BatchCostAllocationInfo.Copy(New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID));
+		BatchCostAllocationInfoByBasis = Tables.T6060S_BatchCostAllocationInfo.Copy(
+			New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
+			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber));
+		
+		
 		If TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
 			If CurrencyTable.Count() Then
 				BatchCostAllocationInfoByBasis.FillValues(CurrencyTable[0].Key, "Key");

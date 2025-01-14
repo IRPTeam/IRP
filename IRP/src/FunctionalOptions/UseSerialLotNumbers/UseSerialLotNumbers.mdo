@@ -18,4 +18,8 @@
   <content>Catalog.ItemTypes.TabularSection.RegExpSerialLotNumbersRules</content>
   <content>Catalog.ItemTypes.Attribute.StockBalanceDetail</content>
   <content>DataProcessor.CreateSerialLotNumbers</content>
+  <content>InformationRegister.T6060S_BatchCostAllocationInfo.Dimension.SerialLotNumber</content>
+  <content>Document.AdditionalRevenueAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
+  <content>Document.AdditionalCostAllocation.TabularSection.AllocationResult.Attribute.SerialLotNumber</content>
+  <content>InformationRegister.T6070S_BatchRevenueAllocationInfo.Dimension.SerialLotNumber</content>
 </mdclass:FunctionalOption>

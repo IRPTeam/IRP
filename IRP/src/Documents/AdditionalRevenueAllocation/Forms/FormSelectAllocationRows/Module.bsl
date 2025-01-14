@@ -12,6 +12,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		SelectedRowsTable.Columns.Add("Document");
 		SelectedRowsTable.Columns.Add("Store");
 		SelectedRowsTable.Columns.Add("ItemKey");
+		SelectedRowsTable.Columns.Add("SerialLotNumber");
+		
 		For Each Row In Parameters.SelectedRows Do
 			FillPropertyValues(SelectedRowsTable.Add(), Row);
 		EndDo;
@@ -23,7 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 		ClearDocumentsWithOutRows();
 	EndIf;
-	
+	Items.DocumentRowsSerialLotNumber.Visible = FOServer.IsUseUseSerialLotNumbers();
 	Items.GroupRowEditor.CurrentPage = Items.GroupDocuments;
 EndProcedure
 

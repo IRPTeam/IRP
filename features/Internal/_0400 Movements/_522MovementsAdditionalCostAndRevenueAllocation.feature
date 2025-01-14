@@ -110,29 +110,6 @@ Scenario: _052202 check Additional cost allocation movements by the Register  "R
 			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '600'       | '108'        | 'Main Company' | 'Front office' | 'b98ff319-037a-4b57-9619-451216e3dc09' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Rent'     | 'TRY'      | 'TRY'                  | 'en description is empty' | 'Items cost'                | ''             | ''                   |		
 		And I close all client application windows
 
-Scenario: _052203 check Additional cost allocation movements by the Register  "R6070 Other periods expenses"
-	* Select Additional cost allocation
-		Given I open hyperlink "e1cib/list/Document.AdditionalCostAllocation"
-		And I go to line in "List" table
-			| 'Number'    |
-			| '2 203'     |
-	* Check movements by the Register  "R6070 Other periods expenses"
-		And I click "Registrations report" button
-		And I select "R6070 Other periods expenses" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Additional cost allocation 2 203 dated 14.01.2025 09:50:56' | ''            | ''                    | ''          | ''           | ''             | ''             | ''                                     | ''                                                 | ''         | ''         | ''                     | ''                        | ''                          | ''             | ''                   |
-			| 'Document registrations records'                             | ''            | ''                    | ''          | ''           | ''             | ''             | ''                                     | ''                                                 | ''         | ''         | ''                     | ''                        | ''                          | ''             | ''                   |
-			| 'Register  "R6070 Other periods expenses"'                   | ''            | ''                    | ''          | ''           | ''             | ''             | ''                                     | ''                                                 | ''         | ''         | ''                     | ''                        | ''                          | ''             | ''                   |
-			| ''                                                           | 'Record type' | 'Period'              | 'Resources' | ''           | 'Dimensions'   | ''             | ''                                     | ''                                                 | ''         | ''         | ''                     | ''                        | ''                          | ''             | ''                   |
-			| ''                                                           | ''            | ''                    | 'Amount'    | 'Amount tax' | 'Company'      | 'Branch'       | 'Row ID'                               | 'Basis'                                            | 'Item key' | 'Currency' | 'Transaction currency' | 'Currency movement type'  | 'Other period expense type' | 'Expense type' | 'Profit loss center' |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '17,12'     | '3,08'       | 'Main Company' | 'Front office' | '437f6354-7e91-4515-b576-87ac4eb85596' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Internet' | 'USD'      | 'TRY'                  | 'Reporting currency'      | 'Items cost'                | ''             | ''                   |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '100'       | '18'         | 'Main Company' | 'Front office' | '437f6354-7e91-4515-b576-87ac4eb85596' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Internet' | 'TRY'      | 'TRY'                  | 'Local currency'          | 'Items cost'                | ''             | ''                   |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '100'       | '18'         | 'Main Company' | 'Front office' | '437f6354-7e91-4515-b576-87ac4eb85596' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Internet' | 'TRY'      | 'TRY'                  | 'en description is empty' | 'Items cost'                | ''             | ''                   |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '102,72'    | '18,49'      | 'Main Company' | 'Front office' | 'b98ff319-037a-4b57-9619-451216e3dc09' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Rent'     | 'USD'      | 'TRY'                  | 'Reporting currency'      | 'Items cost'                | ''             | ''                   |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '600'       | '108'        | 'Main Company' | 'Front office' | 'b98ff319-037a-4b57-9619-451216e3dc09' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Rent'     | 'TRY'      | 'TRY'                  | 'Local currency'          | 'Items cost'                | ''             | ''                   |
-			| ''                                                           | 'Expense'     | '14.01.2025 09:50:56' | '600'       | '108'        | 'Main Company' | 'Front office' | 'b98ff319-037a-4b57-9619-451216e3dc09' | 'Purchase invoice 2 204 dated 14.01.2025 09:49:27' | 'Rent'     | 'TRY'      | 'TRY'                  | 'en description is empty' | 'Items cost'                | ''             | ''                   |		
-		And I close all client application windows
 
 Scenario: _052204 check Additional cost allocation movements by the Register  "T1040 Accounting amounts"
 	* Select Additional cost allocation

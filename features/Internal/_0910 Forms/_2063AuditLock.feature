@@ -303,3 +303,15 @@ Scenario: _2063023 check audit lock history
 		| 'Arina Brown (Financier 3)' | '*'    | 'Consolidated retail sales 2 dated 21.08.2022 08:14:58' | 'Unlock' |
 	And I close all client application windows	
 
+
+Scenario: _2063024 try set audit lock for unpost document
+	And I close all client application windows
+	* Preparation (create document)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click "Create" button
+		And I click "Save" button
+	* Set audit lock
+		And I click "Audit lock (set lock)" button
+		Then there are lines in TestClient message log
+			|'Not posted document cannot be locked'|
+	And I close all client application windows				

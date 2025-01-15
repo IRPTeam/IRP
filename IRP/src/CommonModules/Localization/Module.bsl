@@ -1372,6 +1372,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_174", NStr("en = 'There can be only one currency set in the document.'", Lang));
 	Strings.Insert("Error_175", NStr("en = 'Recorder URL is Empty'", Lang));
 	Strings.Insert("Error_176", NStr("en = 'Fill Integration Settings in ""Ledger Type""'", Lang));
+	Strings.Insert("Error_177", NStr("en = 'Lack of advances [%1] [%2] [%3]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en = 'Fill total amount. Row: [%1]'", Lang));
 	

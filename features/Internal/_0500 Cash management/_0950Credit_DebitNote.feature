@@ -798,6 +798,10 @@ Scenario: _095011 check possible and impossible operations for DebitCreditNote (
 			And I input "50,00" text in "Amount (receive)" field
 			And I click "Post" button
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|				
 		* (CT) - (CA)
 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
@@ -808,6 +812,10 @@ Scenario: _095011 check possible and impossible operations for DebitCreditNote (
 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
 		* (CT) - (CT)
 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
@@ -875,10 +883,18 @@ Scenario: _095011 check possible and impossible operations for DebitCreditNote (
 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button	
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
 		* (VA) - (VT)				
 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
 			And I click "Post" button	
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
 						
 	
 Scenario: _095012 check possible and impossible operations for DebitCreditNote (Parter/LegalNameSend not equal Parter/LegalNameReceive)
@@ -917,6 +933,10 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			And I input "50,00" text in "Amount (receive)" field
 			And I click "Post" button
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
 		* (CT) - (CA)
 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
 			And I select "Advance (Customer)" exact value from "Debt type (receive)" drop-down list
@@ -927,6 +947,10 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|
 		* (CT) - (CT)
 			And I select "Transaction (Customer)" exact value from "Debt type (send)" drop-down list
 			And I select "Transaction (Customer)" exact value from "Debt type (receive)" drop-down list	
@@ -940,7 +964,11 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 		* (CA) - (VA)
 			And I select "Advance (Customer)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button
-			Then user message window does not contain messages	
+			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Basic Partner terms, TRY] [50]'|	
 		* (CA) - (VT)	
 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
 			And I click "Post" button
@@ -987,7 +1015,15 @@ Scenario: _095012 check possible and impossible operations for DebitCreditNote (
 			And I select "Advance (Vendor)" exact value from "Debt type (send)" drop-down list
 			And I click "Post" button	
 			Then user message window does not contain messages
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|
 		* (VA) - (VT)				
 			And I select "Transaction (Vendor)" exact value from "Debt type (receive)" drop-down list
 			And I click "Post" button	
 			Then user message window does not contain messages				
+			* Check lock of advances
+				And I click "OK" button
+				Then there are lines in TestClient message log
+					|'Lack of advances [Ferron BP] [Vendor Ferron, TRY] [50]'|

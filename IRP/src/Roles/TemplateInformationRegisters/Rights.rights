@@ -1488,6 +1488,16 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.LoggerNotification</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE False</condition>
+			</restrictionByCondition>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.BundleContents.Dimension.ItemKey</name>
 		<right>
 			<name>Edit</name>
@@ -1510,6 +1520,16 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.Logger</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+			<restrictionByCondition>
+				<condition>WHERE False</condition>
+			</restrictionByCondition>
 		</right>
 	</object>
 	<object>

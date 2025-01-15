@@ -101,6 +101,10 @@ Function IsUseELedger() Export
 	Return GetFunctionalOption("UseELedger");
 EndFunction
 
+Function IsUseUseSerialLotNumbers() Export
+	Return GetFunctionalOption("UseSerialLotNumbers");
+EndFunction
+
 #EndRegion
 
 Procedure UpdateDefaults() Export

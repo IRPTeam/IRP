@@ -12,6 +12,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		SelectedRowsTable.Columns.Add("Document");
 		SelectedRowsTable.Columns.Add("Store");
 		SelectedRowsTable.Columns.Add("ItemKey");
+		SelectedRowsTable.Columns.Add("SerialLotNumber");
+		
 		For Each Row In Parameters.SelectedRows Do
 			FillPropertyValues(SelectedRowsTable.Add(), Row);
 		EndDo;
@@ -23,7 +25,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndDo;
 		ClearDocumentsWithOutRows();
 	EndIf;
-	
+	Items.DocumentRowsSerialLotNumber.Visible = FOServer.IsUseUseSerialLotNumbers();
 	Items.GroupRowEditor.CurrentPage = Items.GroupDocuments;
 EndProcedure
 
@@ -38,6 +40,7 @@ Procedure Ok(Command)
 			SelectedRow.Insert("Document"  , Row_Second_Level.Document);
 			SelectedRow.Insert("Store"     , Row_Second_Level.Store);
 			SelectedRow.Insert("ItemKey"   , Row_Second_Level.ItemKey);
+			SelectedRow.Insert("SerialLotNumber"   , Row_Second_Level.SerialLotNumber);
 			ArrayOfSelectedRows.Add(SelectedRow);
 		EndDo;
 	EndDo;
@@ -78,6 +81,7 @@ Procedure FillDocumentRows(Document, BasisRowID)
 	|	T6020S_BatchKeysInfo.RowID,
 	|	T6020S_BatchKeysInfo.Recorder AS Document,
 	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	T6020S_BatchKeysInfo.ItemKey
 	|FROM
 	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
@@ -126,7 +130,7 @@ Procedure EditorOk(Command)
 		Document = ThisObject.DocumentRows[0].Document;
 		ArrayOfRows = New Array();
 		For Each Row In ThisObject.DocumentRows Do
-			NewRow = New Structure("Use, BasisRowID, RowID, Document, Store, ItemKey");
+			NewRow = New Structure("Use, BasisRowID, RowID, Document, Store, ItemKey, SerialLotNumber");
 			FillPropertyValues(NewRow, Row);
 			ArrayOfRows.Add(NewRow);
 		EndDo;
@@ -163,7 +167,14 @@ Procedure SaveRowsToResultTree(Document, RowsForSave)
 		NewRow_SecondLevel.Level = 2;
 		NewRow_SecondLevel.Icon = 0;
 		FillPropertyValues(NewRow_SecondLevel, Row);
-		NewRow_SecondLevel.Presentation = String(NewRow_SecondLevel.ItemKey.Item) + " ," + String(NewRow_SecondLevel.ItemKey);
+		NewRow_SecondLevel.Presentation = 
+			String(NewRow_SecondLevel.ItemKey.Item) 
+			+ " ," + String(NewRow_SecondLevel.ItemKey);
+			
+		If ValueIsFilled(NewRow_SecondLevel.SerialLotNumber) Then
+			NewRow_SecondLevel.Presentation = NewRow_SecondLevel.Presentation 
+			+ " ," + String(NewRow_SecondLevel.SerialLotNumber);
+		EndIf;
 	EndDo;
 EndProcedure
 

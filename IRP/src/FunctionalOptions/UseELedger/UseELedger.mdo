@@ -10,4 +10,6 @@
   <content>InformationRegister.T9070S_ELedgerDetailComments</content>
   <content>Subsystem.Accounting.Subsystem.ELedger</content>
   <content>Document.ELedgerRegistry</content>
+  <content>Catalog.Companies.Attribute.BatchID</content>
+  <content>Catalog.Companies.Attribute.EntityID</content>
 </mdclass:FunctionalOption>

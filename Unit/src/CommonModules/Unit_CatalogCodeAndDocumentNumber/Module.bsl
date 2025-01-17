@@ -70,6 +70,23 @@ EndFunction
 
 Function GetExclude_Documents_Numerator()
 	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
+	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
+	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
+	ArrayOfExcluded.Add("Document.CalculationMovementCosts");
+	ArrayOfExcluded.Add("Document.ChequeBondTransaction");
+	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
+	ArrayOfExcluded.Add("Document.CustomersAdvancesClosing");
+	ArrayOfExcluded.Add("Document.EmployeeFiring");
+	ArrayOfExcluded.Add("Document.EmployeeHiring");
+	ArrayOfExcluded.Add("Document.EmployeeSickLeave");
+	ArrayOfExcluded.Add("Document.EmployeeTransfer");
+	ArrayOfExcluded.Add("Document.EmployeeVacation");
+	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
+	ArrayOfExcluded.Add("Document.InternalSupplyRequest");
+	ArrayOfExcluded.Add("Document.Labeling");
+	ArrayOfExcluded.Add("Document.ManualRegisterEntry");
+	ArrayOfExcluded.Add("Document.VisitorCounter");
 	Return ArrayOfExcluded;
 EndFunction
 

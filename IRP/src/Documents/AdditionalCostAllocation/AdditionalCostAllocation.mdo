@@ -625,6 +625,28 @@
    <dataHistory>Use</dataHistory>
    <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="a0dd3de9-6275-4dd2-a71b-200b6ad333a8">
+   <name>SerialLotNumber</name>
+   <synonym>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Serial lot number</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
  </tabularSections>
  <tabularSections uuid="c5d3d66a-559b-40fe-baf5-0ba8ff1b6431">
   <producedTypes>
@@ -1162,6 +1184,28 @@
    </synonym>
    <type>
     <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="90000c3f-6c38-42cd-886e-2b2b17e34d84">
+   <name>SerialLotNumber</name>
+   <synonym>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Serial lot number</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.SerialLotNumbers</types>
    </type>
    <minValue xsi:type="core:UndefinedValue"/>
    <maxValue xsi:type="core:UndefinedValue"/>

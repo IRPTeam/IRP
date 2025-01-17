@@ -10,7 +10,7 @@
  <name>ObjectLocations</name>
  <synonym>
   <key>tr</key>
-  <value>Nesne konumları</value>
+  <value>Lokasyonlar</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -109,6 +109,38 @@
   <minValue xsi:type="core:UndefinedValue"/>
   <maxValue xsi:type="core:UndefinedValue"/>
  </standardAttributes>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ObjectLocations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+  <multipleValuesKeyField>InformationRegister.AddProperties.Dimension.Key</multipleValuesKeyField>
+  <multipleValuesOrderField>InformationRegister.AddProperties.Dimension.Key</multipleValuesOrderField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ObjectLocations</value>
+  </typesFilterValue>
+  <dataPathField>-1</dataPathField>
+  <multipleValuesUseField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Collection</multipleValuesUseField>
+  <characteristicValues>Catalog.ObjectLocations.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.ObjectLocations.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.ObjectLocations.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.ObjectLocations.TabularSection.AddAttributes.Attribute.Value</valueField>
+  <multipleValuesKeyField>-1</multipleValuesKeyField>
+  <multipleValuesOrderField>Catalog.ObjectLocations.TabularSection.AddAttributes.StandardAttribute.LineNumber</multipleValuesOrderField>
+ </characteristics>
  <createOnInput>Use</createOnInput>
  <dataLockControlMode>Managed</dataLockControlMode>
  <fullTextSearch>Use</fullTextSearch>
@@ -238,6 +270,71 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <tabularSections uuid="ed6043b8-649c-41b2-a845-1cc3f2a77cbc">
+  <producedTypes>
+   <objectType typeId="22560df3-7f11-42fc-b071-98f565bd8d04" valueTypeId="89236f95-d00f-4072-b0eb-fd2914c58427"/>
+   <rowType typeId="0d6d0599-7968-4791-9f5d-d6bf531515d1" valueTypeId="3a1ed27c-a192-43da-835b-d3d8ceffb6b4"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <attributes uuid="c5ca4f4b-8698-4d77-9034-0499709a83d3">
+   <name>Property</name>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Свойство</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9b3934d8-9087-41df-bf29-6e960616dc34">
+   <name>Value</name>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <choiceParameterLinks>
+    <name>Filter.Owner</name>
+    <field>Catalog.ObjectLocations.TabularSection.AddAttributes.Attribute.Property</field>
+   </choiceParameterLinks>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
  <forms uuid="22697d99-27da-42f9-9564-f562be4287a8">
   <name>ItemForm</name>
   <synonym>

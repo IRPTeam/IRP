@@ -400,6 +400,10 @@
   <horizontalAlign>Left</horizontalAlign>
   <autoFill>true</autoFill>
  </autoCommandBar>
+ <handlers>
+  <event>OnCreateAtServer</event>
+  <name>OnCreateAtServer</name>
+ </handlers>
  <saveWindowSettings>true</saveWindowSettings>
  <autoTitle>true</autoTitle>
  <autoUrl>true</autoUrl>
@@ -427,6 +431,9 @@
 	Table.Ref,
 	Table.DeletionMark,
 	Table.Code,
+	Table.Description,
+	Table.Country,
+	Table.TaxRate,
 	Table.Description_en AS Description
 FROM
 	Catalog.TaxExemptionReasons AS Table</queryText>
@@ -460,6 +467,10 @@ FROM
     <field>TaxRate</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description1</dataPath>
+    <field>Description1</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>AddAttributes</dataPath>
     <field>AddAttributes</field>
    </fields>
@@ -470,10 +481,6 @@ FROM
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>PredefinedDataName</dataPath>
     <field>PredefinedDataName</field>
-   </fields>
-   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description_en</dataPath>
-    <field>Description_en</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
     <dataPath>Description_hash</dataPath>
@@ -488,8 +495,8 @@ FROM
     <field>Description_tr</field>
    </fields>
    <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-    <dataPath>Description1</dataPath>
-    <field>Description1</field>
+    <dataPath>Description_en</dataPath>
+    <field>Description_en</field>
    </fields>
   </extInfo>
  </attributes>

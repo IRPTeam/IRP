@@ -10,7 +10,7 @@
  <name>Issue</name>
  <synonym>
   <key>tr</key>
-  <value>Global Blue Fişi</value>
+  <value>Talep</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -60,7 +60,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Global Blue Fişi</value>
+  <value>Talep</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -147,7 +147,7 @@
   <name>Location</name>
   <synonym>
    <key>tr</key>
-   <value>Konum</value>
+   <value>Lokasyon</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -271,7 +271,7 @@
   <name>DueDate</name>
   <synonym>
    <key>tr</key>
-   <value>Vade tarihi</value>
+   <value>Bitiş tarihi</value>
   </synonym>
   <synonym>
    <key>ru</key>

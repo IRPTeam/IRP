@@ -10,7 +10,7 @@
  <name>WorkSheet</name>
  <synonym>
   <key>tr</key>
-  <value>Çalışma tutanağı</value>
+  <value>İş tutanağı</value>
  </synonym>
  <synonym>
   <key>ru</key>
@@ -60,7 +60,7 @@
  <fullTextSearch>Use</fullTextSearch>
  <objectPresentation>
   <key>tr</key>
-  <value>Çalışma tutanağı</value>
+  <value>İş tutanağı</value>
  </objectPresentation>
  <objectPresentation>
   <key>ru</key>
@@ -72,7 +72,7 @@
  </objectPresentation>
  <listPresentation>
   <key>tr</key>
-  <value>Çalışma tutanakları</value>
+  <value>İş tutanakları</value>
  </listPresentation>
  <listPresentation>
   <key>ru</key>
@@ -1035,7 +1035,7 @@
   <name>Workers</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışanlar</value>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -1678,7 +1678,7 @@
    <name>Issue</name>
    <synonym>
     <key>tr</key>
-    <value>Global Blue Fişi</value>
+    <value>Talep</value>
    </synonym>
    <synonym>
     <key>ru</key>
@@ -1867,7 +1867,7 @@
   <name>WorkSheetPrint</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışma tutanağı</value>
+   <value>İş tutanağı</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -1882,7 +1882,7 @@
   <name>Generate</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışma tutanağı</value>
+   <value>İş tutanağı</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -1905,7 +1905,7 @@
   <name>WorkSheetPrint</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışma tutanağı</value>
+   <value>İş tutanağı</value>
   </synonym>
   <synonym>
    <key>ru</key>

@@ -2043,6 +2043,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_176", NStr("en='Fill Integration Settings in ""Ledger Type""';
 		|ru='Заполните настройки интеграции в ""Типе журнала""';
 		|tr='""Defter tipinde"" Entegrasyon ayaraları seçiniz'", Lang));
+	Strings.Insert("Error_177", NStr("en='Lack of advances [%1] [%2] [%3]';
+		|ru='Не достаточно суммы аванса  [%1] [%2] [%3]';
+		|tr='Avans eksikliği [%1] [%2] [%3]'", Lang));
 	
 	Strings.Insert("Error_FillTotalAmount", NStr("en='Fill total amount. Row: [%1]';
 		|ru='Необходимо заполнить сумму итого. Строка: [%1]';

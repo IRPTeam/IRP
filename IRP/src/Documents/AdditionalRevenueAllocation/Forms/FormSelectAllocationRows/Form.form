@@ -681,6 +681,57 @@
        </extInfo>
       </items>
       <items xsi:type="form:FormField">
+       <name>DocumentRowsSerialLotNumber</name>
+       <id>140</id>
+       <visible>true</visible>
+       <enabled>true</enabled>
+       <userVisible>
+        <common>true</common>
+       </userVisible>
+       <dataPath xsi:type="form:DataPath">
+        <segments>DocumentRows.SerialLotNumber</segments>
+       </dataPath>
+       <extendedTooltip>
+        <name>DocumentRowsSerialLotNumberExtendedTooltip</name>
+        <id>142</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+         <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+       </extendedTooltip>
+       <contextMenu>
+        <name>DocumentRowsSerialLotNumberContextMenu</name>
+        <id>141</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+         <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+       </contextMenu>
+       <type>InputField</type>
+       <readOnly>true</readOnly>
+       <editMode>Enter</editMode>
+       <showInHeader>true</showInHeader>
+       <headerHorizontalAlign>Left</headerHorizontalAlign>
+       <showInFooter>true</showInFooter>
+       <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+       </extInfo>
+      </items>
+      <items xsi:type="form:FormField">
        <name>DocumentRowsStore</name>
        <id>53</id>
        <visible>true</visible>
@@ -1992,6 +2043,31 @@ WHERE
     <common>true</common>
    </edit>
   </columns>
+  <columns>
+   <name>SerialLotNumber</name>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Serial lot number</value>
+   </title>
+   <id>19</id>
+   <valueType>
+    <types>CatalogRef.SerialLotNumbers</types>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
  </attributes>
  <attributes>
   <name>BasisRowID</name>
@@ -2241,6 +2317,31 @@ WHERE
    <valueType>
     <types>String</types>
     <stringQualifiers/>
+   </valueType>
+   <view>
+    <common>true</common>
+   </view>
+   <edit>
+    <common>true</common>
+   </edit>
+  </columns>
+  <columns>
+   <name>SerialLotNumber</name>
+   <title>
+    <key>tr</key>
+    <value>Seri lot numaraları</value>
+   </title>
+   <title>
+    <key>ru</key>
+    <value>Серия номенклатуры</value>
+   </title>
+   <title>
+    <key>en</key>
+    <value>Serial lot number</value>
+   </title>
+   <id>20</id>
+   <valueType>
+    <types>CatalogRef.SerialLotNumbers</types>
    </valueType>
    <view>
     <common>true</common>

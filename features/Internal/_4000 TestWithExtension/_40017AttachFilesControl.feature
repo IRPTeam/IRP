@@ -129,6 +129,9 @@ Scenario: _4001701 preparation (Attach Files Control)
 			And I click "Ok" button
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one	
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseOrder.FindByNumber(221).GetObject().Write(DocumentWriteMode.Posting);"    |
+
 		
 Scenario: _4001702 check preparation
 	When check preparation 
@@ -190,7 +193,7 @@ Scenario: _4001705 setting for Attached document settings
 		And I click "Save and close" button
 		
 						
-Scenario: _4001705 check the display of the document template in the AttachedFilesToDocumentsControl
+Scenario: _4001706 check the display of the document template in the AttachedFilesToDocumentsControl
 	And I close all client application windows			
 	And I open hyperlink "e1cib/app/DataProcessor.AttachedFilesToDocumentsControl"
 	And I click Choice button of the field named "Branch"
@@ -203,6 +206,9 @@ Scenario: _4001705 check the display of the document template in the AttachedFil
 	And I select current line in "List" table
 	And I finish line editing in "ValueList" table
 	And I click the button named "OK"
+	And I click Choice button of the field named "Period"
+	And I input "01.01.2024" text in the field named "DateBegin"
+	And I click the button named "Select"	
 	* Check documents display
 		And I go to line in "DocumentList" table
 			| "Doc type"              | "Doc date"   | "Doc number" | "Branch"  |
@@ -416,7 +422,7 @@ Scenario: _4001720 check audit lock from AttachedFilesToDocumentsControl data pr
 	And I close all client application windows
 	
 
-Scenario: _4001720 check audit unlock from AttachedFilesToDocumentsControl data proc
+Scenario: _4001721 check audit unlock from AttachedFilesToDocumentsControl data proc
 	And I close all client application windows
 	And I connect "Этот клиент" TestClient using "CI" login and "CI" password
 	* Preparation

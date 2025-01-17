@@ -258,6 +258,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	ItemList.ItemKey AS ItemKey,
 	|	ItemList.Store AS Store,
+	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.Company AS Company,
 	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
 	|	ItemList.Ref.Date AS Period,
@@ -281,6 +282,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
+	|	ItemList.Ref.Branch,
 	|	ItemList.Ref.Company,
 	|	ItemList.Ref.Date,
 	|	ItemList.Key,
@@ -294,6 +296,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	|SELECT
 	|	tmpItemList.ItemKey AS ItemKey,
 	|	tmpItemList.Store AS Store,
+	|	tmpItemList.Branch AS Branch,
 	|	tmpItemList.Company AS Company,
 	|	tmpItemList.Quantity AS TotalQuantity,
 	|	tmpItemList.Period AS Period,
@@ -414,8 +417,13 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 			ArrayOfFixedRates.Add(FixedRates);
 		EndIf;
 	EndDo;
-
+	
+	AddedKeys = New Array();
 	For Each Row In BatchKeysInfo Do
+		If AddedKeys.Find(Row.Key) <> Undefined Then
+			Continue;
+		EndIf;
+		AddedKeys.Add(Row.Key);
 		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
 		CurrencyParameters.RowKey   = Row.Key;
 		CurrencyParameters.Currency = Row.Currency;
@@ -434,7 +442,7 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 	
 	BatchKeysInfoSettings = PostingServer.GetBatchKeysInfoSettings();
 	BatchKeysInfoSettings.DataTable = BatchKeysInfo_DataTable;
-	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
+	BatchKeysInfoSettings.Dimensions = "Period, RowID, Direction, Company, Branch, Store, ItemKey, Currency, CurrencyMovementType, SourceOfOrigin, SerialLotNumber";
 	BatchKeysInfoSettings.Totals = "Quantity, InvoiceAmount, InvoiceTaxAmount";
 	BatchKeysInfoSettings.CurrencyMovementType = CurrencyMovementType;
 	

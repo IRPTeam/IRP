@@ -92,6 +92,7 @@ Function ItemList()
 		   |	ItemList.Ref.Company,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
+		   |	ItemList.Branch,
 		   |	SUM(ItemList.Quantity) AS Quantity
 		   |INTO ItemList
 		   |FROM
@@ -103,6 +104,7 @@ Function ItemList()
 		   |	ItemList.Ref.Company,
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
+		   |	ItemList.Branch,
 		   |	ItemList.Ref";
 EndFunction
 
@@ -160,6 +162,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	SUM(ItemList.Quantity) AS Quantity,
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction
@@ -172,6 +175,7 @@ Function T6020S_BatchKeysInfo()
 		   |	ItemList.ItemKey,
 		   |	ItemList.Store,
 		   |	ItemList.Company,
+		   |	ItemList.Branch,
 		   |	ItemList.Period,
 		   |	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction

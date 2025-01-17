@@ -2711,7 +2711,7 @@
   <name>WorkSheets</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışma tutanakları</value>
+   <value>İş tutanakları</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -2747,7 +2747,7 @@
    <name>WorkSheet</name>
    <synonym>
     <key>tr</key>
-    <value>Çalışma tutanağı</value>
+    <value>İş tutanağı</value>
    </synonym>
    <synonym>
     <key>ru</key>

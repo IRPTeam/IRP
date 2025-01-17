@@ -4341,7 +4341,7 @@ Scenario: _0154122 check filling in and refilling Reconcilation statement
 		And I select current line in "List" table
 		And I click Select button of "Begin period" field
 		And I input "01.01.2020" text in "Begin period" field
-		And I input "01.01.2025" text in "End period" field
+		And I input "01.01.2029" text in "End period" field
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'     |

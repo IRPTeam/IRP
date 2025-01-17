@@ -3,7 +3,7 @@
  <name>DocDebitCreditNoteClient</name>
  <synonym>
   <key>tr</key>
-  <value>Müşteri Borç Alacak Fişi</value>
+  <value>Evrak borç alacak fişi client</value>
  </synonym>
  <synonym>
   <key>ru</key>

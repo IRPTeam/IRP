@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<form:Form xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
  <items xsi:type="form:FormGroup">
   <name>ListSettingsComposerUserSettings</name>
   <id>1</id>
@@ -627,11 +627,78 @@
   </edit>
   <main>true</main>
   <extInfo xsi:type="form:DynamicListExtInfo">
+   <queryText>SELECT
+	Table.Ref,
+	Table.DeletionMark,
+	Table.Code,
+	Table.Description,
+	Table.Country,
+	Table.TaxRate,
+	Table.Description_en AS Description
+FROM
+	Catalog.TaxExemptionReasons AS Table</queryText>
    <mainTable>Catalog.TaxExemptionReasons</mainTable>
    <dynamicDataRead>true</dynamicDataRead>
    <autoFillAvailableFields>true</autoFillAvailableFields>
+   <customQuery>true</customQuery>
    <autoSaveUserSettings>true</autoSaveUserSettings>
    <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Ref</dataPath>
+    <field>Ref</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>DeletionMark</dataPath>
+    <field>DeletionMark</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Code</dataPath>
+    <field>Code</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description</dataPath>
+    <field>Description</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Country</dataPath>
+    <field>Country</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>TaxRate</dataPath>
+    <field>TaxRate</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description1</dataPath>
+    <field>Description1</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>AddAttributes</dataPath>
+    <field>AddAttributes</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Predefined</dataPath>
+    <field>Predefined</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>PredefinedDataName</dataPath>
+    <field>PredefinedDataName</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_hash</dataPath>
+    <field>Description_hash</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_ru</dataPath>
+    <field>Description_ru</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_tr</dataPath>
+    <field>Description_tr</field>
+   </fields>
+   <fields xsi:type="schema:DataCompositionSchemaDataSetField">
+    <dataPath>Description_en</dataPath>
+    <field>Description_en</field>
+   </fields>
   </extInfo>
  </attributes>
  <attributes>

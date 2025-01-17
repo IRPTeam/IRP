@@ -1099,7 +1099,7 @@
   <name>Workers</name>
   <synonym>
    <key>tr</key>
-   <value>Çalışanlar</value>
+   <value>Personel</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -2053,7 +2053,7 @@
    <name>Issue</name>
    <synonym>
     <key>tr</key>
-    <value>Global Blue Fişi</value>
+    <value>Talep</value>
    </synonym>
    <synonym>
     <key>ru</key>

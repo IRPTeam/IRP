@@ -3,7 +3,7 @@
  <name>DocVisitorCounterClient</name>
  <synonym>
   <key>tr</key>
-  <value>Doküman ziyaretçi sayacı istemcisi</value>
+  <value>Evrak ziyaretçi sayaç client</value>
  </synonym>
  <synonym>
   <key>ru</key>

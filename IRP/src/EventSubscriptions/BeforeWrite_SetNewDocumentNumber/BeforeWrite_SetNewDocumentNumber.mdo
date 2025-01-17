@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b47cd8ec-2c41-4815-ac84-72a1a67af18b">
+  <name>BeforeWrite_SetNewDocumentNumber</name>
+  <synonym>
+    <key>en</key>
+    <value>Before write set new document number</value>
+  </synonym>
+  <source>
+    <types>DocumentObject</types>
+  </source>
+  <event>BeforeWrite</event>
+  <handler>CommonModule.DocumentNumberingServer.SetNewDocumentNumberBeforeWrite</handler>
+</mdclass:EventSubscription>

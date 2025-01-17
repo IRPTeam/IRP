@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="61348a08-a74d-4725-8901-bccdae3d3b3b">
+  <name>DocumentNumberingServer</name>
+  <synonym>
+    <key>en</key>
+    <value>Document numbering server</value>
+  </synonym>
+  <server>true</server>
+  <serverCall>true</serverCall>
+</mdclass:CommonModule>

@@ -1377,6 +1377,26 @@ Function Exists_R2001T_Sales() Export
 		|	R2001T_Sales.Recorder = &Ref";
 EndFunction
 
+Function Exists_R2020B_AdvancesFromCustomers() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R2020B_AdvancesFromCustomers
+		|FROM
+		|	AccumulationRegister.R2020B_AdvancesFromCustomers AS R2020B_AdvancesFromCustomers
+		|WHERE
+		|	R2020B_AdvancesFromCustomers.Recorder = &Ref";
+EndFunction
+
+Function Exists_R1020B_AdvancesToVendors() Export
+	Return 
+		"SELECT *
+		|	INTO Exists_R1020B_AdvancesToVendors
+		|FROM
+		|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
+		|WHERE
+		|	R1020B_AdvancesToVendors.Recorder = &Ref";
+EndFunction
+
 Function RegistersWithAdditionalDataFilling()
 	ArrayOfRegisters = New Array();
 	ArrayOfRegisters.Add(Metadata.AccumulationRegisters.R5020B_PartnersBalance);

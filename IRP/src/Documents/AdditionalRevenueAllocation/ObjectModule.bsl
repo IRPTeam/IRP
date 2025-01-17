@@ -119,6 +119,7 @@ Procedure FillTables_ByDocuments()
 	|	T6020S_BatchKeysInfo.Currency,
 	|	T6020S_BatchKeysInfo.Store,
 	|	T6020S_BatchKeysInfo.ItemKey,
+	|	T6020S_BatchKeysInfo.SerialLotNumber,
 	|	CASE
 	|		WHEN T6020S_BatchKeysInfo.ItemKey.Weight <> 0
 	|			THEN T6020S_BatchKeysInfo.ItemKey.Weight
@@ -257,6 +258,7 @@ Procedure UpdateAllocationResult()
 	|	AllocationList.Document,
 	|	AllocationList.Store,
 	|	AllocationList.ItemKey,
+	|	AllocationList.SerialLotNumber,
 	|	AllocationList.Amount,
 	|	AllocationList.TaxAmount
 	|INTO AllocationList
@@ -275,6 +277,7 @@ Procedure UpdateAllocationResult()
 	|	AllocationList.Document AS SalesInvoice,
 	|	AllocationList.ItemKey.Item AS Item,
 	|	AllocationList.ItemKey AS ItemKey,
+	|	AllocationList.SerialLotNumber AS SerialLotNumber,
 	|	AllocationList.Store,
 	|	AllocationList.Amount,
 	|	AllocationList.TaxAmount,
@@ -293,7 +296,8 @@ Procedure UpdateAllocationResult()
 	
 	ArrayForDelete = New Array();
 	For Each Row In ThisObject.AllocationResult Do
-		Filter = New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID);
+		Filter = New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
+			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber);
 		If QueryTable.FindRows(Filter).Count() = 0 Then
 			ArrayForDelete.Add(Row);
 		EndIf;
@@ -304,7 +308,8 @@ Procedure UpdateAllocationResult()
 	EndDo;
 	
 	For Each Row In QueryTable Do
-		Filter = New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID);
+		Filter = New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
+			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber);
 		Rows = ThisObject.AllocationResult.FindRows(Filter); 
 		If Rows.Count() Then
 			NewRow = Rows[0];

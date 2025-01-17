@@ -978,6 +978,13 @@
         <value>160</value>
       </code>
     </items>
+    <items id="99821afb-0d05-4790-9b9e-3788d18bfcdd">
+      <name>Catalog_ObjectLocations</name>
+      <description></description>
+      <code xsi:type="core:NumberValue">
+        <value>161</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

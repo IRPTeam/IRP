@@ -417,8 +417,13 @@ Procedure Calculate_BatchKeysInfo(Ref, Parameters, AddInfo)
 			ArrayOfFixedRates.Add(FixedRates);
 		EndIf;
 	EndDo;
-
+	
+	AddedKeys = New Array();
 	For Each Row In BatchKeysInfo Do
+		If AddedKeys.Find(Row.Key) <> Undefined Then
+			Continue;
+		EndIf;
+		AddedKeys.Add(Row.Key);
 		CurrencyParameters = CurrenciesServer.GetNewCurrencyRowParameters();
 		CurrencyParameters.RowKey   = Row.Key;
 		CurrencyParameters.Currency = Row.Currency;

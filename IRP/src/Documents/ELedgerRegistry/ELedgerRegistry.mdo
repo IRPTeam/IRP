@@ -205,4 +205,16 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <commands uuid="18dcd3e4-9a7f-44f4-8d8e-5d779c19eeee">
+    <name>ExportToCSV</name>
+    <synonym>
+      <key>en</key>
+      <value>Export to CSV</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>DocumentRef.ELedgerRegistry</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Document>

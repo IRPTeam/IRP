@@ -79,6 +79,8 @@ Scenario: _043200 preparation (DebitCreditNote)
 			And I execute 1C:Enterprise script at server
 				| "Documents.BankPayment.FindByNumber(526).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
+				| "Documents.BankPayment.FindByNumber(1334).GetObject().Write(DocumentWriteMode.Posting);"      |
+			And I execute 1C:Enterprise script at server
 				| "Documents.DebitCreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);"      |
 			And I execute 1C:Enterprise script at server
 				| "DocObj = Documents.DebitCreditNote.FindByNumber(2).GetObject();"    |

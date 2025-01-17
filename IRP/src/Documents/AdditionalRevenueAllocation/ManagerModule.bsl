@@ -118,7 +118,9 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrencyTable = Row.Basis.Currencies.Unload();
 
 		BatchRevenueAllocationInfoByBasis = Tables.T6070S_BatchRevenueAllocationInfo.Copy(
-			New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID));
+			New Structure("RowID, BasisRowID, ItemKey, SerialLotNumber", 
+			Row.RowID, Row.BasisRowID, Row.ItemKey, Row.SerialLotNumber));
+		
 		If TypeOf(Row.Basis) = Type("DocumentRef.SalesInvoice") Then
 			If CurrencyTable.Count() Then
 				BatchRevenueAllocationInfoByBasis.FillValues(CurrencyTable[0].Key, "Key");
@@ -143,11 +145,12 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	BatchRevenueAllocationInfoRecalculated = BatchRevenueAllocationInfoRecalculated.Copy(
 		New Structure("CurrencyMovementType", CurrencyMovementType));
 	BatchRevenueAllocationInfoRecalculated.GroupBy(
-		"Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", "Amount, AmountTax");
+		"Period, Company, Document, Store, ItemKey, SerialLotNumber, Currency, CurrencyMovementType", 
+			"Amount, AmountTax");
 	Tables.T6070S_BatchRevenueAllocationInfo = BatchRevenueAllocationInfoRecalculated;
 
 	BatchKeysInfo = BatchRevenueAllocationInfoRecalculated.Copy();
-	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey", "Amount, AmountTax");
+	BatchKeysInfo.GroupBy("Period, Company, Document, Store, ItemKey, SerialLotNumber", "Amount, AmountTax");
 	BatchKeysInfo.Columns.Document.Name  = "PurchaseInvoiceDocument";
 	BatchKeysInfo.Columns.Amount.Name    = "AllocatedRevenueAmount";
 	BatchKeysInfo.Columns.AmountTax.Name = "AllocatedRevenueTaxAmount";
@@ -286,6 +289,7 @@ Function AllocationList()
 		   |	AllocationList.Document AS Document,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
+		   |	AllocationList.SerialLotNumber AS SerialLotNumber,
 		   |	SUM(AllocationList.Amount) AS Amount,
 		   |	SUM(AllocationList.TaxAmount) AS AmountTax,
 		   |	RevenueList.Currency AS Currency,
@@ -306,6 +310,7 @@ Function AllocationList()
 		   |	RevenueList.Currency,
 		   |	RevenueList.Basis,
 		   |	AllocationList.ItemKey,
+		   |	AllocationList.SerialLotNumber,
 		   |	AllocationList.Document,
 		   |	AllocationList.Ref.Branch,
 		   |	AllocationList.Ref.Company,
@@ -377,6 +382,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt) AS Direction,
 		   |	AllocationList.Store AS Store,
 		   |	AllocationList.ItemKey AS ItemKey,
+		   |	AllocationList.SerialLotNumber AS SerialLotNumber,
 		   |	AllocationList.Document AS PurchaseInvoiceDocument,
 		   |	SUM(AllocationList.Amount) AS AllocatedRevenueAmount,
 		   |	SUM(AllocationList.AmountTax) AS AllocatedRevenueTaxAmount
@@ -392,6 +398,7 @@ Function T6020S_BatchKeysInfo()
 		   |	VALUE(Enum.BatchDirection.Receipt),
 		   |	AllocationList.Store,
 		   |	AllocationList.ItemKey,
+		   |	AllocationList.SerialLotNumber,
 		   |	AllocationList.Document";
 EndFunction
 

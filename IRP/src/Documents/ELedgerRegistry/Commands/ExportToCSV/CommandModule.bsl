@@ -7,7 +7,11 @@ EndProcedure
 
 &AtServer
 Function CreateCSV(DocRef)
-	LocalizationCode = SessionParameters.InterfaceLocalizationCode;
+	LocalizationCode = DocRef.LedgerType.ELedgerLocalizationCode;
+	If Not ValueIsFilled(LocalizationCode) Then
+		Raise StrTemplate("Not filled localization code for ledger type [%1]", DocRef.LedgerType);
+	EndIf;
+	
 	csv = New TextDocument();
 	
 	Identifier = CreateIdentifier(DocRef.Company, DocRef.BeginDate, DocRef.EndDate);
@@ -32,10 +36,22 @@ Function CreateCSV(DocRef)
 	LineNumber = 1;
 	
 	While QuerySelection.Next() Do
-		Header = CreateHeader(QuerySelection.Ref, LocalizationCode);
+		
+		BasisLongDescription = "";
+		BasisShortDescription = "";
+		
+		If ValueIsFilled(QuerySelection.Ref.Basis) Then
+			MetadataRef = GetConfigurationMetadataRef(QuerySelection.Ref.Basis);
+			If ValueIsFilled(MetadataRef) Then
+				BasisLongDescription = MetadataRef.ELedgerLongDescription;	
+				BasisShortDescription = MetadataRef.ELedgerShortDescription;	
+			EndIf;
+		EndIf;
+		
+		Header = CreateHeader(QuerySelection.Ref, BasisShortDescription, LocalizationCode);
 		csv.AddLine(StrConcat(ClearStrings(Header), Chars.Tab));
 		
-		Records = CreateRecords(LineNumber, QuerySelection.Ref, LocalizationCode);		
+		Records = CreateRecords(LineNumber, QuerySelection.Ref, BasisLongDescription, LocalizationCode);		
 		For Each Record In Records Do
 			csv.AddLine(StrConcat(ClearStrings(Record), Chars.Tab));
 		EndDo;	
@@ -47,7 +63,12 @@ EndFunction
 &AtServer
 Function ClearStrings(Strings)
 	For i=0 To Strings.Count() -1 Do
-		Strings[i] = StrReplace(TrimAll(String(Strings[i])), Chars.Tab, " ");
+		_String = TrimAll(String(Strings[i]));
+		_String = StrReplace(_String, Chars.Tab, " ");
+		_String = StrReplace(_String, "¶", "");
+		_String = StrReplace(_String, Chars.LF, "");
+		
+		Strings[i] = _String;
 	EndDo;
 	Return Strings;
 EndFunction
@@ -72,7 +93,7 @@ Function CreateIdentifier(Company, BeginDate, EndDate)
 EndFunction
 
 &AtServer
-Function CreateHeader(JERef, LocalizationCode)
+Function CreateHeader(JERef, BasisShortDescription, LocalizationCode)
 	Values = New Array();
 	
 	Values.Add("H");
@@ -100,14 +121,16 @@ Function CreateHeader(JERef, LocalizationCode)
 	Values.Add(String(JERef.Number));
 	
 	// Comment
-	Comment = Undefined;
+	Comment = "";
 	If ValueIsFilled(JEBasis) And ValueIsFilled(JEBasis.Comment) Then
 		Comment = JEBasis.Comment;
 	Else
 		Comment = JERef.Comment;
 	EndIf;
 	
-	If ValueIsFilled(Comment) Then
+	Comment = Comment + " " + BasisShortDescription;
+	
+	If Not IsBlankString(Comment) Then
 		Values.Add(Comment);
 	Else
 		Values.Add("");
@@ -126,7 +149,7 @@ Function CreateHeader(JERef, LocalizationCode)
 EndFunction
 
 &AtServer
-Function CreateRecords(LineNumber, JERef, LocalizationCode)
+Function CreateRecords(LineNumber, JERef, BasisLongDescription, LocalizationCode)
 	Result = New Array();
 	
 	// Document type, number, ref, date, payment method
@@ -141,16 +164,15 @@ Function CreateRecords(LineNumber, JERef, LocalizationCode)
 		
 		DocumentRef = String(JERef.Number);
 		DocumentDate = Format(JERef.Basis.Date,"DF=yyyy-MM-dd");
+		DocumentTypeDescription = BasisLongDescription;
 			
 		If TypeOf(JERef.Basis) = Type("DocumentRef.SalesInvoice") Then
 			DocumentType = "invoice";
-			DocumentNumber = JERef.Basis.DocumentNumber;
 		ElsIf TypeOf(JERef.Basis) = Type("DocumentRef.PurchaseInvoice") Then
 			DocumentType = "invoice";
-			DocumentNumber = JERef.Basis.DocumentNumber;
+			DocumentNumber = JERef.Basis.DocNumber;
 		Else
 			DocumentType = "other";
-			DocumentTypeDescription = JERef.Basis.Metadata().Synonym;
 		EndIf;
 		
 		If TypeOf(JERef.Basis) = Type("DocumentRef.BankPayment")
@@ -187,14 +209,14 @@ Function CreateRecords(LineNumber, JERef, LocalizationCode)
 			ValuesDr.Add(String(AccountMainDr.Code));
 			ValuesDr.Add(AccountMainDr["Description_" + LocalizationCode]);
 		Else
-			Raise StrTemplate("Not defined Account main Dr [%1] [%2]", JERef, Record.AccountDr);
+			Raise StrTemplate("Not defined Account main Dr [%1] [%2]", JERef, Record.AccountDr.Code);
 		EndIf;
 		
 		If ValueIsFilled(AccountSubDr) Then
 			ValuesDr.Add(String(AccountSubDr.Code));
 			ValuesDr.Add(AccountSubDr["Description_" + LocalizationCode]);
 		Else
-			Raise StrTemplate("Not defined Account sub Dr [%1] [%2]", JERef, Record.AccountDr);
+			Raise StrTemplate("Not defined Account sub Dr [%1] [%2]", JERef, Record.AccountDr.Code);
 		EndIf;
 		
 		ValuesDr.Add(Format(Record.Amount, "NFD=2; NDS=.; NG=;"));
@@ -227,18 +249,18 @@ Function CreateRecords(LineNumber, JERef, LocalizationCode)
 			ValuesCr.Add(String(AccountMainCr.Code));
 			ValuesCr.Add(AccountMainCr["Description_" + LocalizationCode]);
 		Else
-			Raise StrTemplate("Not defined Account main Cr [%1] [%2]", JERef, Record.AccountCr);
+			Raise StrTemplate("Not defined Account main Cr [%1] [%2]", JERef, Record.AccountCr.Code);
 		EndIf;
 		
 		If ValueIsFilled(AccountSubCr) Then
 			ValuesCr.Add(String(AccountSubCr.Code));
 			ValuesCr.Add(AccountSubCr["Description_" + LocalizationCode]);
 		Else
-			Raise StrTemplate("Not defined Account sub Cr [%1] [%2]", JERef, Record.AccountCr);
+			Raise StrTemplate("Not defined Account sub Cr [%1] [%2]", JERef, Record.AccountCr.Code);
 		EndIf;
 		
 		ValuesCr.Add(Format(Record.Amount, "NFD=2; NDS=.; NG=;"));
-		ValuesCr.Add("D");
+		ValuesCr.Add("C");
 		ValuesCr.Add(Format(JERef.Date,"DF=yyyy-MM-dd"));
 		
 		ValuesCr.Add(DocumentType);
@@ -274,15 +296,19 @@ Function GetSubAccount(Record, AccountType)
 	Else
 		ExtDimensionType = Undefined;
 		
-		For Each Row In Record[AccountType].ExtDimensionTypes Do
-			If Row.ELedgerDetailed Then
-				ExtDimensionType = Row.ExtDimensionType;
-				Break;
-			EndIf;		
-		EndDo;
+		If Record[AccountType].ExtDimensionTypes.Count() = 1 Then
+			ExtDimensionType = Record[AccountType].ExtDimensionTypes[0].ExtDimensionType;
+		Else
+			For Each Row In Record[AccountType].ExtDimensionTypes Do
+				If Row.ELedgerDetailed Then
+					ExtDimensionType = Row.ExtDimensionType;
+					Break;
+				EndIf;		
+			EndDo;
+		EndIf;
 		
 		If ExtDimensionType <> Undefined Then
-			For Each Row In Record.ExtDimensionsDr Do
+			For Each Row In ?(AccountType = "AccountDr", Record.ExtDimensionsDr, Record.ExtDimensionsCr) Do
 				If Row.Key = ExtDimensionType Then
 					Return Row.Value;
 				EndIf;
@@ -332,4 +358,26 @@ Function GetOperationDecription(Record, LocalizationCode)
 	EndIf;
 	
 	Return OperationDescription;
+EndFunction
+
+&AtServer
+Function GetConfigurationMetadataRef(BasisRef)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ConfigurationMetadata.Ref
+	|FROM
+	|	Catalog.ConfigurationMetadata AS ConfigurationMetadata
+	|WHERE
+	|	ConfigurationMetadata.Parent = VALUE(Catalog.ConfigurationMetadata.Documents)
+	|	AND ConfigurationMetadata.ObjectName = &ObjectName";
+	
+	Query.SetParameter("ObjectName", BasisRef.Metadata().Name);	
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	EndIf;
+	
+	Return Catalogs.ConfigurationMetadata.EmptyRef();
 EndFunction

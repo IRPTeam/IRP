@@ -129,6 +129,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ef9dacfc-f7ab-4157-8be3-f8be5d6fdd6a">
+    <name>ELedgerLocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>eLedger localization code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <tabularSections uuid="fa18f0c6-27fa-4ba6-811d-503fac6d71ca">
     <producedTypes>
       <objectType typeId="63f39028-ae9c-447a-a56c-275894c0a2d2" valueTypeId="adff4ad1-b7f5-4ef7-9727-828d12d7ec03"/>

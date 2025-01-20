@@ -1,7 +1,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	If Parameters.Property("TypeFilter") <> Undefined Then
+	If Parameters.Property("TypeFilter") Then
 		NewFilter = List.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		NewFilter.LeftValue = New DataCompositionField("Parent");
 		NewFilter.RightValue = Parameters.TypeFilter;

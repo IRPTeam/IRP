@@ -320,7 +320,7 @@
   <name>ELedgerShortDescription</name>
   <synonym>
    <key>tr</key>
-   <value>eLedger short description</value>
+   <value>eDefter kısa açıklaması</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -346,7 +346,7 @@
   <name>ELedgerLongDescription</name>
   <synonym>
    <key>tr</key>
-   <value>eLedger long description</value>
+   <value>eDefter tam açıklaması</value>
   </synonym>
   <synonym>
    <key>ru</key>

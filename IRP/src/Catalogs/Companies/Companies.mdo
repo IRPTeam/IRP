@@ -692,7 +692,7 @@
   <name>BatchID</name>
   <synonym>
    <key>tr</key>
-   <value>Parti Kimliği</value>
+   <value>Parti ID</value>
   </synonym>
   <synonym>
    <key>ru</key>
@@ -718,7 +718,7 @@
   <name>EntityID</name>
   <synonym>
    <key>tr</key>
-   <value>Varlık Kimliği</value>
+   <value>Kayıt ID</value>
   </synonym>
   <synonym>
    <key>ru</key>

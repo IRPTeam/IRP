@@ -893,6 +893,20 @@ Procedure UpdateAccountingData()
 	ThisObject.AccountingExtDimensions.Load(_AccountingExtDimensions);
 EndProcedure
 
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorGroup.IsEmpty() Then
+		Object.NumeratorGroup = 
+			DocumentNumberingServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	Object.DocumentNumber = DocumentNumberingServer.GetNewNumber(Object);
+EndProcedure
+
 #EndRegion
 
 #Region CONTROL_STRINGS

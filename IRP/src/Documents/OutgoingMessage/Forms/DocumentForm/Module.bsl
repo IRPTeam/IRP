@@ -102,6 +102,11 @@ Procedure SaveHTML(Command)
 
 EndProcedure
 
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
 #EndRegion
 
 #Region Private
@@ -241,5 +246,14 @@ EndProcedure
 Function GetFileParameters(FileRef)
 	Return PictureViewerServer.CreatePictureParameters(FileRef);
 EndFunction
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorGroup.IsEmpty() Then
+		Object.NumeratorGroup = 
+			DocumentNumberingServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+	EndIf;
+	Object.DocumentNumber = DocumentNumberingServer.GetNewNumber(Object);
+EndProcedure
 
 #EndRegion

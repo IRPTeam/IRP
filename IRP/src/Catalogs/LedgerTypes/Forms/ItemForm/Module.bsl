@@ -6,6 +6,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
+	
+	For Each Lang In Metadata.Languages Do
+		Items.ELedgerLocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
+	EndDo;
+	
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;

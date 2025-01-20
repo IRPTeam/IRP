@@ -20,4 +20,7 @@
  <content>Document.ELedgerRegistry</content>
  <content>Catalog.Companies.Attribute.BatchID</content>
  <content>Catalog.Companies.Attribute.EntityID</content>
+ <content>Catalog.LedgerTypes.Attribute.ELedgerLocalizationCode</content>
+ <content>Catalog.ConfigurationMetadata.Attribute.ELedgerShortDescription</content>
+ <content>Catalog.ConfigurationMetadata.Attribute.ELedgerLongDescription</content>
 </mdclass:FunctionalOption>

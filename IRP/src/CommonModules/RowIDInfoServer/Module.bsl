@@ -6872,21 +6872,19 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
 	|				ELSE FALSE
 	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_ItemKey
-//	|					THEN RowRef.ItemKey = &ItemKey
-//	|				ELSE TRUE
-//	|			END
-	|
-	|			and case when &Filter_ItemKey then 
-	|				case when RowRef.IsVariableItemKey
-	|				then RowRef.Item = &Item
-	|				else RowRef.ItemKey = &ItemKey end
-	|			else true end 
-	|
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6931,14 +6929,19 @@ Procedure ApplyFilterSet_SO_ForPRR(Query)
 	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -6988,21 +6991,19 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|					THEN RowRef.TransactionTypeSC = &TransactionType
 	|				ELSE FALSE
 	|			END
-//	|			AND CASE
-//	|				WHEN &Filter_ItemKey
-//	|					THEN RowRef.ItemKey = &ItemKey
-//	|				ELSE TRUE
-//	|			END
-	|
-	|			and case when &Filter_ItemKey then 
-	|				case when RowRef.IsVariableItemKey
-	|				then RowRef.Item = &Item
-	|				else RowRef.ItemKey = &ItemKey end
-	|			else true end 
-	|
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7042,14 +7043,19 @@ Procedure ApplyFilterSet_SO_ForRSC(Query)
 	|					THEN RowRef.TransactionTypeRSC = &TransactionType
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7089,12 +7095,15 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|))) AS RowIDMovements";
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -7157,14 +7166,19 @@ Procedure ApplyFilterSet_SO_ForWO(Query)
 	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -7214,11 +7228,15 @@ Procedure ApplyFilterSet_SO_ForWS(Query)
 	|					THEN RowRef.TransactionTypeSales = &TransactionTypeSales
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -7266,14 +7284,19 @@ Procedure ApplyFilterSet_SO_ForRSR(Query)
 	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StoreSales = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8518,14 +8541,19 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|					THEN RowRef.PriceIncludeTaxPurchases = &PriceIncludeTaxPurchases
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store OR RowRef.StorePurchases = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();
@@ -8575,14 +8603,19 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|					THEN RowRef.TransactionTypeGR = &TransactionType
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+	|			and case
+	|				when &Filter_ItemKey
+	|					then case
+	|						when RowRef.IsVariableItemKey
+	|							then RowRef.Item = &Item
+	|						else RowRef.ItemKey = &ItemKey
+	|					end
+	|				else true
+	|			end
 	|			AND CASE
 	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store  OR RowRef.StorePurchases = &Store
+	|					THEN RowRef.Store = &Store
+	|					OR RowRef.StorePurchases = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
 	Query.Execute();

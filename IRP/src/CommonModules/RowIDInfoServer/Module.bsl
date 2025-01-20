@@ -2085,6 +2085,17 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 		EndIf;
 	EndIf;
 	
+	If Is.SO Or Is.PO Then
+		RowRefObject.Item = Catalogs.Items.EmptyRef();
+		RowRefObject.ItemKey = Catalogs.ItemKeys.EmptyRef();
+		
+		If RowRefObject.IsVariableItemKey Then
+			RowRefObject.Item = RowItemList.ItemKey.Item;
+		Else
+			RowRefObject.ItemKey = RowItemList.ItemKey;
+		EndIf;
+	EndIf;
+	
 	ArrayOfDifferenceFields = New Array();
 	If LinkedRowsIntegrityIsEnable() Then
 		If ValueIsFilled(Source.Ref) Then
@@ -6861,11 +6872,18 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|					THEN RowRef.PriceIncludeTaxSales = &PriceIncludeTaxSales
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+//	|			AND CASE
+//	|				WHEN &Filter_ItemKey
+//	|					THEN RowRef.ItemKey = &ItemKey
+//	|				ELSE TRUE
+//	|			END
+	|
+	|			and case when &Filter_ItemKey then 
+	|				case when RowRef.IsVariableItemKey
+	|				then RowRef.Item = &Item
+	|				else RowRef.ItemKey = &ItemKey end
+	|			else true end 
+	|
 	|			AND CASE
 	|				WHEN &Filter_Store
 	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
@@ -6970,11 +6988,18 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|					THEN RowRef.TransactionTypeSC = &TransactionType
 	|				ELSE FALSE
 	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
+//	|			AND CASE
+//	|				WHEN &Filter_ItemKey
+//	|					THEN RowRef.ItemKey = &ItemKey
+//	|				ELSE TRUE
+//	|			END
+	|
+	|			and case when &Filter_ItemKey then 
+	|				case when RowRef.IsVariableItemKey
+	|				then RowRef.Item = &Item
+	|				else RowRef.ItemKey = &ItemKey end
+	|			else true end 
+	|
 	|			AND CASE
 	|				WHEN &Filter_Store
 	|					THEN RowRef.Store = &Store OR RowRef.StoreSales = &Store
@@ -12573,6 +12598,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|	BasisesTable.BasisKey,
 	|	BasisesTable.CurrentStep,
 	|	BasisesTable.ItemKey,
+	|	BasisesTable.Item,
 	|	BasisesTable.Store
 	|INTO BasisesTable
 	|FROM
@@ -12597,6 +12623,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|	ItemList.Key,
 	|	ItemList.LineNumber,
 	|	ItemList.ItemKey,
+	|	ItemList.Item,
 	|	ItemList.Store
 	|INTO ItemList
 	|FROM
@@ -12633,6 +12660,7 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|	RowIDInfoGrouped.BasisKey,
 	|	RowIDInfoGrouped.CurrentStep,
 	|	ItemList.ItemKey,
+	|	ItemList.Item,
 	|	ItemList.Store
 	|INTO RowIDInfoFull
 	|FROM
@@ -12653,7 +12681,13 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 	|		AND RowIDInfoFull.Basis = BasisesTable.Basis
 	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
 	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
-	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+	|
+//	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+	|
+	|		and case when RowIDInfoFull.RowRef.IsVariableItemKey 
+	|		then RowIDInfoFull.Item = BasisesTable.Item
+	|		else RowIDInfoFull.ItemKey = BasisesTable.ItemKey end
+	|
 	|		AND CASE
 	|			WHEN &Filter_Store then
 	|				case 
@@ -12733,15 +12767,22 @@ Procedure LockInternalLinkedRows(Object, Form)
 	
 	InternalLinkedData = GetInternalLinkedKeys(RowIDInfoTable, Object.Ref);
 	Form.InternalLinkedDocs.LoadValues(InternalLinkedData.InternalLinkedDocs);
-	
+		
 	For Each Row In Object.ItemList Do
 		Data = InternalLinkedData.Keys.FindRows(New Structure("Key", Row.Key));
-		If Data.Count() Then
+		If Data.Count() > 0 Then
 			Row.IsInternalLinked = True;
 			Row.InternalLinks = Data[0].InternalLinks;
 		Else
 			Row.IsInternalLinked = False;
 			Row.InternalLinks = "";			
+		EndIf;
+		
+		DataVariableItemKey = InternalLinkedData.KeysVariableItemKey.FindRows(New Structure("Key", Row.Key));
+		If DataVariableItemKey.Count() > 0 Then
+			Row.IsUnlockItemKey = True;
+		Else
+			Row.IsUnlockItemKey = False;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -12816,7 +12857,25 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 		EndDo;
 	EndDo;
 	InternalLinkedDocsTable.GroupBy("Doc");
-	Return New Structure("Keys, InternalLinkedDocs", KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"));
+	
+	KeysVariableItemKeyTable = New ValueTable();
+	KeysVariableItemKeyTable.Columns.Add("Key");
+	
+	If InternalLinkedDocsTable.Count() = 1 Then
+		If TrimAll(Upper(InternalLinkedDocsTable[0].Doc)) = Upper("SalesOrder")
+			Or TrimAll(Upper(InternalLinkedDocsTable[0].Doc)) = Upper("PurchaseOrder") Then
+			
+			For Each Row In RowIDInfoTable Do
+				If Row.RowRef.IsVariableItemKey Then
+					KeysVariableItemKeyTable.Add().Key = Row.Key;
+				EndIf;
+			EndDo;
+			
+		EndIf;
+	EndIf;
+	
+	Return New Structure("Keys, InternalLinkedDocs, KeysVariableItemKey", 
+		KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"), KeysVariableItemKeyTable);
 EndFunction
 
 Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
@@ -12906,7 +12965,7 @@ EndProcedure
 
 Procedure ClearAppearance_Header(Object, Form) Export
 	// Reset ReadOnly
-For Each FieldName In Form.LockedFields Do
+	For Each FieldName In Form.LockedFields Do
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement <> Undefined Then
 			If TypeOf(FormElement) = Type("FormButton") Then
@@ -12952,6 +13011,7 @@ EndProcedure
 Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 	// Item list
 	For Each Row In FieldsToLock.ItemList Do
+		
 		FieldName = "ItemList" + Row.FieldName;
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement = Undefined Then
@@ -12961,12 +13021,28 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 		Element = Form.ConditionalAppearance.Items.Add();
 		Element.Presentation = "FieldsToLock";
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
-	
-		Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-		Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
-		Filter.ComparisonType = DataCompositionComparisonType.Contains;
-		Filter.RightValue = Row.LinkedDoc;
-	
+		
+		If TrimAll(Upper(Row.FieldName)) = Upper("ItemKey") And Condition = "InternalLinks" Then
+			FilterGroup = Element.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
+			FilterGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
+			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+			Filter.ComparisonType = DataCompositionComparisonType.Contains;
+			Filter.RightValue = Row.LinkedDoc;
+			
+			Filter = FilterGroup.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList.IsUnlockItemKey");
+			Filter.ComparisonType = DataCompositionComparisonType.Equal;
+			Filter.RightValue = False;
+			
+		Else
+			Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
+			Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+			Filter.ComparisonType = DataCompositionComparisonType.Contains;
+			Filter.RightValue = Row.LinkedDoc;
+		EndIf;
+		
 		Element.Appearance.SetParameterValue("BackColor", WebColors.AliceBlue);
 		Element.Appearance.SetParameterValue("ReadOnly", True);
 	EndDo;

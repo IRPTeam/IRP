@@ -1098,7 +1098,8 @@ Function GetFormItemNames()
 				|TaxesIncomingKey, TaxesOutgoingKey, TaxesDifferenceKey,
 				|CalculationsKey,
 				|RecordsKey, ItemListIsClosedOrder,
-				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID";
+				|AllocationResultKey, AllocationResultRowID, AllocationResultBasisRowID,
+				|ItemListIsUnlockItemKey";
 	Return ItemNames;
 EndFunction	
 

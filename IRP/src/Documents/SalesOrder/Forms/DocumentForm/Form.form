@@ -2835,6 +2835,7 @@
         <items xsi:type="form:FormField">
           <name>ItemListIsVariableItemKey</name>
           <id>968</id>
+          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>

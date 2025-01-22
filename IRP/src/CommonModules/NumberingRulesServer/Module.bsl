@@ -96,10 +96,10 @@ EndFunction
 //  NumeratorRules - CatalogRef.NumeratorGroups - Numerator group
 // 
 // Returns:
-//  See DocumentNumberingClientServer.GetNumeratorDescription 
+//  See NumberingRulesClientServer.GetNumeratorDescription 
 Function FillNumeratorDescription(NumeratorRules) Export
 	
-	NumeratorDescription = DocumentNumberingClientServer.GetNumeratorDescription();
+	NumeratorDescription = NumberingRulesClientServer.GetNumeratorDescription();
 	
 	NumeratorDescription.NumeratorRules = NumeratorRules.Ref;
 	NumeratorDescription.NumberTemplate = NumeratorRules.NumberTemplate;
@@ -154,7 +154,7 @@ EndFunction
 // 
 // Parameters:
 //  SourceObject - DocumentObject, DocumentRef - Document/catalog source
-//  NumeratorDescription - See DocumentNumberingClientServer.GetNumeratorDescription
+//  NumeratorDescription - See NumberingRulesClientServer.GetNumeratorDescription
 // 
 // Returns:
 //  See SourceDescriptionForNumerator
@@ -193,15 +193,14 @@ Function GetSourceDescriptionForNumerator(SourceObject, NumeratorDescription) Ex
 	
 EndFunction
 
-// Get basis prefix.
+// Set basis prefix.
 // 
 // Parameters:
-//  NumeratorDescription - See DocumentNumberingClientServer.GetNumeratorDescription
+//	PrefixTemplate - String - Template  
+//  NumeratorDescription - See NumberingRulesClientServer.GetNumeratorDescription
 //  DocumentDescription - See SourceDescriptionForNumerator
 // 
-// Returns:
-//  String - Get basis prefix
-Function GetBasisPrefix(NumeratorDescription, DocumentDescription) Export
+Procedure SetBasisPrefix(PrefixTemplate, NumeratorDescription, DocumentDescription) Export
 	
 	CompanyPrefix = "";
 	If NumeratorDescription.BasicRule.UseCompanyPrefix Then
@@ -261,21 +260,18 @@ Function GetBasisPrefix(NumeratorDescription, DocumentDescription) Export
 		EndIf;
 	EndIf;
 	
-	NumberPrifixType = DocumentNumberingClientServer.GetNumberPrifixType();
+	NumberParts = NumberingRulesClientServer.GetNumberParts();
+	PrefixTemplate = StrReplace(PrefixTemplate, NumberParts.BasicCompany, CompanyPrefix);
+	PrefixTemplate = StrReplace(PrefixTemplate, NumberParts.BasicBranch, BranchPrefix);
+	PrefixTemplate = StrReplace(PrefixTemplate, NumberParts.BasicCatalog, CatalogPrefix);
+	PrefixTemplate = StrReplace(PrefixTemplate, NumberParts.BasicDocument, DocumentPrefix);
 	
-	Result = NumeratorDescription.BasicRule.PrefixTemplate;
-	Result = StrReplace(Result, NumberPrifixType.CompanyPrefix, CompanyPrefix);
-	Result = StrReplace(Result, NumberPrifixType.BranchPrefix, BranchPrefix);
-	Result = StrReplace(Result, NumberPrifixType.CatalogPrefix, CatalogPrefix);
-	Result = StrReplace(Result, NumberPrifixType.DocumentPrefix, DocumentPrefix);
-	
-	Return Result;
-EndFunction
+EndProcedure
 
 // Make number.
 // 
 // Parameters:
-//  NumeratorDescription - See DocumentNumberingClientServer.GetNumeratorDescription 
+//  NumeratorDescription - See NumberingRulesClientServer.GetNumeratorDescription 
 //  DocumentDescription - See SourceDescriptionForNumerator 
 //  NumberValue - Number - Number value
 // 
@@ -284,10 +280,9 @@ EndFunction
 Function MakeNumber(NumeratorDescription, DocumentDescription, NumberValue) Export
 	
 	Result = NumeratorDescription.NumberTemplate;
-	NumberParts = DocumentNumberingClientServer.GetNumberParts();
+	SetBasisPrefix(Result, NumeratorDescription, DocumentDescription);
 	
-	BasisPrefix = GetBasisPrefix(NumeratorDescription, DocumentDescription);
-	Result = StrReplace(Result, NumberParts.Basic, BasisPrefix);
+	NumberParts = NumberingRulesClientServer.GetNumberParts();
 	
 	YearValue2 = Format(DocumentDescription.Date, "DF=yy;");
 	Result = StrReplace(Result, NumberParts.Year2, YearValue2);
@@ -331,7 +326,7 @@ EndFunction
 // Create new number.
 // 
 // Parameters:
-//  NumeratorDescription - See DocumentNumberingClientServer.GetNumeratorDescription 
+//  NumeratorDescription - See NumberingRulesClientServer.GetNumeratorDescription 
 //  TemplateNumber - String - Template number
 //  NumberDate - Date - Number date
 // 

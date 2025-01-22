@@ -1,30 +1,13 @@
 
-// Get number prifix type.
-// 
-// Returns:
-//  Structure - Get number prifix type:
-// * CompanyPrefix - String - 
-// * BranchPrefix - String - 
-// * DocumentPrefix - String - 
-Function GetNumberPrifixType() Export
-	
-	Result = New Structure;
-	
-	Result.Insert("CompanyPrefix", "[company]");
-	Result.Insert("BranchPrefix", "[branch]");
-	Result.Insert("DocumentPrefix", "[document]");
-	Result.Insert("CatalogPrefix", "[catalog]");
-	
-	Return Result;
-	
-EndFunction
-
 // Get number parts.
 // 
 // Returns:
 //  Structure - Get number parts:
 // * Number - String - 
-// * Basic - String - 
+// * BasicCompany - String - 
+// * BasicBranch - String - 
+// * BasicCatalog - String - 
+// * BasicDocument - String - 
 // * Year2 - String - 
 // * Year4 - String - 
 // * Quarter - String - 
@@ -37,12 +20,20 @@ Function GetNumberParts() Export
 	Result = New Structure;
 	
 	Result.Insert("Number", "[number]");
-	Result.Insert("Basic", "[basic]");
+	
+	Result.Insert("BasicCompany", "[basic.company]");
+	Result.Insert("BasicBranch", "[basic.branch]");
+	Result.Insert("BasicCatalog", "[basic.catalog]");
+	Result.Insert("BasicDocument", "[basic.document]");
+	
 	Result.Insert("Year2", "[year2]");
 	Result.Insert("Year4", "[year4]");
+	
 	Result.Insert("Quarter", "[quarter]");
+	
 	Result.Insert("Month1", "[month1]");
 	Result.Insert("Month2", "[month2]");
+	
 	Result.Insert("Week1", "[week1]");
 	Result.Insert("Week2", "[week2]");
 	

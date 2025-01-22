@@ -9,9 +9,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	CatalogsServer.OnCreateAtServerObject(ThisObject, Object, Cancel, StandardProcessing);
 	
-	NumberParts = DocumentNumberingClientServer.GetNumberParts();
+	NumberParts = NumberingRulesClientServer.GetNumberParts();
 	Items.LabelNumber.Title = NumberParts.Number;
-	Items.LabelBasic.Title = NumberParts.Basic;
 	Items.LabelYear2.Title = NumberParts.Year2;
 	Items.LabelYear4.Title = NumberParts.Year4;
 	Items.LabelQuarter.Title = NumberParts.Quarter;
@@ -19,6 +18,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.LabelMonth2.Title = NumberParts.Month2;
 	Items.LabelWeek1.Title = NumberParts.Week1;
 	Items.LabelWeek2.Title = NumberParts.Week2;
+	Items.LabelBasicCompany.Title = NumberParts.BasicCompany;
+	Items.LabelBasicBranch.Title = NumberParts.BasicBranch;
+	Items.LabelBasicCatalog.Title = NumberParts.BasicCatalog;
+	Items.LabelBasicDocument.Title = NumberParts.BasicDocument;
 	
 	LoadConfigurationAttributes();
 EndProcedure
@@ -136,10 +139,10 @@ Procedure Check(Command)
 		For Each CatalogRow In Object.Catalogs Do
 			NumeratorWrapper.Catalogs.Add(New Structure("Catalog,DateName", CatalogRow.Catalog, CatalogRow.DateName));
 		EndDo;
-		NumeratorDescription = DocumentNumberingServer.FillNumeratorDescription(NumeratorWrapper);
-		DocumentDescription = DocumentNumberingServer.GetSourceDescriptionForNumerator(Example, NumeratorDescription);
+		NumeratorDescription = NumberingRulesServer.FillNumeratorDescription(NumeratorWrapper);
+		DocumentDescription = NumberingRulesServer.GetSourceDescriptionForNumerator(Example, NumeratorDescription);
 		Items.ResultLabel.Title = 
-			DocumentNumberingServer.MakeNumber(NumeratorDescription, DocumentDescription, Object.StartNumber);
+			NumberingRulesServer.MakeNumber(NumeratorDescription, DocumentDescription, Object.StartNumber);
 	EndIf;
 	
 	If IsBlankString(Items.ResultLabel.Title) Then

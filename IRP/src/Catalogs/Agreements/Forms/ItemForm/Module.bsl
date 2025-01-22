@@ -321,9 +321,9 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorRules.IsEmpty() Then
 		Object.NumeratorRules = 
-			DocumentNumberingServer.GetNumeratorGroupForCatalog(Object.Ref.Metadata().FullName(), Object);
+			NumberingRulesServer.GetNumeratorGroupForCatalog(Object.Ref.Metadata().FullName(), Object);
 	EndIf;
-	DocumentNumberingServer.SetSourceNewNumber(Object);
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #Region AddAttributes

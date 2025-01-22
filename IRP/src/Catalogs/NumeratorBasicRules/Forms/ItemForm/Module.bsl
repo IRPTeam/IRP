@@ -3,6 +3,7 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	LocalizationEvents.FillDescription(Parameters.FillingText, Object);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
@@ -10,13 +11,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	SetItemsVisible(ThisObject);
 	
-	PrifixType = DocumentNumberingClientServer.GetNumberPrifixType();
-	Items.CompanyPrefixLabel.Title = PrifixType.CompanyPrefix;
-	Items.BranchPrefixLabel.Title = PrifixType.BranchPrefix;
-	Items.DocumentPrefixLabel.Title = PrifixType.DocumentPrefix;
-	Items.CatalogPrefixLabel.Title = PrifixType.CatalogPrefix;
-	
-	LoadDocumentTransactionTypes(); 
+	LoadDocumentTransactionTypes();
+	 
 EndProcedure
 
 &AtServer
@@ -33,58 +29,6 @@ EndProcedure
 
 #EndRegion
 
-#Region FormCommands
-
-&AtClient
-Procedure Check(Command)
-	
-	Items.ResultLabel.Title = "";
-	
-	If ValueIsFilled(Example) Then
-		NumeratorDescription = DocumentNumberingClientServer.GetNumeratorDescription();
-		NumeratorDescription.BasicRule.UseCompanyPrefix = Object.UseCompanyPrefix;
-		NumeratorDescription.BasicRule.UseBranchPrefix = Object.UseBranchPrefix;
-		NumeratorDescription.BasicRule.UseCatalogPrefix = Object.UseCatalogPrefix;
-		NumeratorDescription.BasicRule.UseDocumentPrefix = Object.UseDocumentPrefix;
-		NumeratorDescription.BasicRule.UseTransactionTypePrefix = Object.UseTransactionTypePrefix;
-		NumeratorDescription.BasicRule.PrefixTemplate = Object.PrefixTemplate;
-		For Each PrefixRow In Object.CompanyPrefixes Do
-			NumeratorDescription.BasicRule.CompanyPrefixes.Insert(PrefixRow.Company, PrefixRow.Prefix);
-		EndDo;
-		For Each PrefixRow In Object.BranchPrefixes Do
-			NumeratorDescription.BasicRule.BranchPrefixes.Insert(PrefixRow.Branch, PrefixRow.Prefix);
-		EndDo;
-		For Each PrefixRow In Object.CatalogPrefixes Do
-			NumeratorDescription.BasicRule.CatalogPrefixes.Insert(PrefixRow.Catalog, PrefixRow.Prefix);
-		EndDo;
-		For Each PrefixRow In Object.DocumentPrefixes Do
-			If NumeratorDescription.BasicRule.DocumentPrefixes.Get(PrefixRow.Document) = Undefined Then
-				NumeratorDescription.BasicRule.DocumentPrefixes.Insert(PrefixRow.Document, New Map);
-			EndIf;
-			If Object.UseTransactionTypePrefix Then
-				NumeratorDescription.BasicRule.DocumentPrefixes[PrefixRow.Document].Insert(
-					PrefixRow.TransactionType, PrefixRow.Prefix);
-			Else
-				NumeratorDescription.BasicRule.DocumentPrefixes[PrefixRow.Document].Insert(
-					Undefined, PrefixRow.Prefix);
-			EndIf;
-		EndDo;
-		DocumentDescription = DocumentNumberingServer.GetSourceDescriptionForNumerator(Example, NumeratorDescription);
-		Items.ResultLabel.Title = DocumentNumberingServer.GetBasisPrefix(NumeratorDescription, DocumentDescription);
-	EndIf;
-	
-	If Not ValueIsFilled(Example) Then
-		Items.ResultLabel.BackColor = Items.GroupTesting.BackColor;
-	ElsIf IsBlankString(Items.ResultLabel.Title) Then
-		Items.ResultLabel.BackColor = WebColors.MistyRose;
-	Else
-		Items.ResultLabel.BackColor = WebColors.PaleGreen;
-	EndIf;
-
-EndProcedure
-
-#EndRegion
-
 #Region FormItemsEvent
 
 &AtClient
@@ -93,42 +37,8 @@ Procedure DescriptionOpening(Item, StandardProcessing) Export
 EndProcedure
 
 &AtClient
-Procedure UseCompanyPrefixOnChange(Item)
+Procedure UseValuePrefixOnChange(Item)
 	SetItemsVisible(ThisObject);
-	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().CompanyPrefix);
-EndProcedure
-
-&AtClient
-Procedure UseBranchPrefixOnChange(Item)
-	SetItemsVisible(ThisObject);
-	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().BranchPrefix);
-EndProcedure
-
-&AtClient
-Procedure UseDocumentPrefixOnChange(Item)
-	SetItemsVisible(ThisObject);
-	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().DocumentPrefix);
-EndProcedure
-
-&AtClient
-Procedure UseCatalogPrefixOnChange(Item)
-	SetItemsVisible(ThisObject);
-	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().CatalogPrefix);
-EndProcedure
-
-&AtClient
-Procedure UseTransactionTypePrefixOnChange(Item)
-	SetItemsVisible(ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PrefixLabelClick(Item)
-	AddToPrefixTemplate(Item.Title);
-EndProcedure
-
-&AtClient
-Procedure ExampleOnChange(Item)
-	Check(Item);
 EndProcedure
 
 &AtClient
@@ -200,13 +110,6 @@ Procedure LoadDocumentTransactionTypes()
 	
 	FormData.Insert("DocumentTransactionTypes", DocumentTransactionTypes);
 	
-EndProcedure
-
-&AtClient
-Procedure AddToPrefixTemplate(PrefixPart)
-	If StrFind(Object.PrefixTemplate, PrefixPart) = 0 Then
-		Object.PrefixTemplate = Object.PrefixTemplate + PrefixPart; 
-	EndIf;
 EndProcedure
 
 #Region AddAttributes

@@ -9,5 +9,5 @@
     <types>DocumentObject</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.DocumentNumberingServer.SetNewDocumentNumberBeforeWrite</handler>
+  <handler>CommonModule.NumberingRulesServer.SetNewDocumentNumberBeforeWrite</handler>
 </mdclass:EventSubscription>

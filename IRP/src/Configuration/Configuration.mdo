@@ -829,8 +829,8 @@
   <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
   <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
   <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
-  <commonModules>CommonModule.DocumentNumberingServer</commonModules>
-  <commonModules>CommonModule.DocumentNumberingClientServer</commonModules>
+  <commonModules>CommonModule.NumberingRulesServer</commonModules>
+  <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Comment</commonAttributes>

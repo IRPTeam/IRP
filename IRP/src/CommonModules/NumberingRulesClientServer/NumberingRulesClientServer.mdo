@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="5f9cbbc1-2cc3-40c9-b605-0e93aaabd9b3">
-  <name>DocumentNumberingClientServer</name>
+  <name>NumberingRulesClientServer</name>
   <synonym>
     <key>en</key>
-    <value>Document numbering client server</value>
+    <value>Numbering rules client server</value>
   </synonym>
   <clientManagedApplication>true</clientManagedApplication>
   <server>true</server>

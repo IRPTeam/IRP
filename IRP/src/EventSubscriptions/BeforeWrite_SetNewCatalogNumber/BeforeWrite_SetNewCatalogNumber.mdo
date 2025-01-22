@@ -9,5 +9,5 @@
     <types>CatalogObject</types>
   </source>
   <event>BeforeWrite</event>
-  <handler>CommonModule.DocumentNumberingServer.SetNewCatalogNumberBeforeWrite</handler>
+  <handler>CommonModule.NumberingRulesServer.SetNewCatalogNumberBeforeWrite</handler>
 </mdclass:EventSubscription>

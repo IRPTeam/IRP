@@ -395,9 +395,9 @@ EndProcedure
 Procedure SetNewNumberAtServer()
 	If Object.NumeratorGroup.IsEmpty() Then
 		Object.NumeratorGroup = 
-			DocumentNumberingServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
+			NumberingRulesServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
 	EndIf;
-	DocumentNumberingServer.SetSourceNewNumber(Object);
+	NumberingRulesServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

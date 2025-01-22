@@ -24,7 +24,6 @@ Procedure OnWrite(Cancel)
 		AccountingServer.OnWrite(ThisObject, Cancel, "Records");
 	EndIf;
 	
-	SetDeletionMarkForJournalEntry(WriteMode);
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -44,38 +43,3 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
-
-// Set deletion mark for journal entry.
-// 
-// Parameters:
-//  WriteMode - DocumentWriteMode - Write mode
-Procedure SetDeletionMarkForJournalEntry(WriteMode)
-	If WriteMode = DocumentWriteMode.Posting Then
-		Return;
-	EndIf;	
-	UndoPostJournalEntry = False; 
-	If DeletionMark Or Not Posted Then
-		UndoPostJournalEntry = True;			
-	EndIf;
-	If Not UndoPostJournalEntry Then
-		Return;
-	EndIf;		
-		
-	Query = New Query;
-	Query.SetParameter("Basis", Ref);
-	Query.Text = "SELECT
-	|	JournalEntry.DeletionMark,
-	|	JournalEntry.Posted,
-	|	JournalEntry.Ref
-	|FROM
-	|	Document.JournalEntry AS JournalEntry
-	|WHERE
-	|	JournalEntry.Basis = &Basis";
-	Selection = Query.Execute().Select(); 
-	While Selection.Next() Do
-		If Not  Selection.DeletionMark Then
-			JournalEntryObject = Selection.Ref.GetObject(); //DocumentObject.JournalEntry			
-			JournalEntryObject.SetDeletionMark(True);							
-		EndIf;	 		 
-	EndDo;	
-EndProcedure	

@@ -36,10 +36,10 @@
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="6846097c-5a32-4fbd-9c7a-3a04d3d7ed5f">
-    <name>NumeratorGroup</name>
+    <name>NumeratorRules</name>
     <synonym>
       <key>en</key>
-      <value>Numerator group</value>
+      <value>Numerator rules</value>
     </synonym>
     <type>
       <types>CatalogRef.NumeratorGroups</types>

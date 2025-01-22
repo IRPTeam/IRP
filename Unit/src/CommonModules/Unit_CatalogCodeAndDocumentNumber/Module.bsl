@@ -54,7 +54,7 @@ Function DocumentNumeratorUsing() Export
 			Continue;
 		EndIf;
 
-		ContentItem = Metadata.CommonAttributes.NumeratorGroup.Content.Find(Doc);
+		ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(Doc);
 		If ContentItem = Undefined Or ContentItem.Use <> Metadata.ObjectProperties.CommonAttributeUse.Use Then
 			ArrayOfErrors.Add(Chars.Tab + Doc.FullName());
 			Continue;

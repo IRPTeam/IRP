@@ -14,6 +14,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Items.CompanyPrefixLabel.Title = PrifixType.CompanyPrefix;
 	Items.BranchPrefixLabel.Title = PrifixType.BranchPrefix;
 	Items.DocumentPrefixLabel.Title = PrifixType.DocumentPrefix;
+	Items.CatalogPrefixLabel.Title = PrifixType.CatalogPrefix;
 	
 	LoadDocumentTransactionTypes(); 
 EndProcedure
@@ -43,6 +44,7 @@ Procedure Check(Command)
 		NumeratorDescription = DocumentNumberingClientServer.GetNumeratorDescription();
 		NumeratorDescription.BasicRule.UseCompanyPrefix = Object.UseCompanyPrefix;
 		NumeratorDescription.BasicRule.UseBranchPrefix = Object.UseBranchPrefix;
+		NumeratorDescription.BasicRule.UseCatalogPrefix = Object.UseCatalogPrefix;
 		NumeratorDescription.BasicRule.UseDocumentPrefix = Object.UseDocumentPrefix;
 		NumeratorDescription.BasicRule.UseTransactionTypePrefix = Object.UseTransactionTypePrefix;
 		NumeratorDescription.BasicRule.PrefixTemplate = Object.PrefixTemplate;
@@ -51,6 +53,9 @@ Procedure Check(Command)
 		EndDo;
 		For Each PrefixRow In Object.BranchPrefixes Do
 			NumeratorDescription.BasicRule.BranchPrefixes.Insert(PrefixRow.Branch, PrefixRow.Prefix);
+		EndDo;
+		For Each PrefixRow In Object.CatalogPrefixes Do
+			NumeratorDescription.BasicRule.CatalogPrefixes.Insert(PrefixRow.Catalog, PrefixRow.Prefix);
 		EndDo;
 		For Each PrefixRow In Object.DocumentPrefixes Do
 			If NumeratorDescription.BasicRule.DocumentPrefixes.Get(PrefixRow.Document) = Undefined Then
@@ -64,11 +69,13 @@ Procedure Check(Command)
 					Undefined, PrefixRow.Prefix);
 			EndIf;
 		EndDo;
-		DocumentDescription = DocumentNumberingServer.GetDocumentDescriptionForNumerator(Example);
+		DocumentDescription = DocumentNumberingServer.GetSourceDescriptionForNumerator(Example, NumeratorDescription);
 		Items.ResultLabel.Title = DocumentNumberingServer.GetBasisPrefix(NumeratorDescription, DocumentDescription);
 	EndIf;
 	
-	If IsBlankString(Items.ResultLabel.Title) Then
+	If Not ValueIsFilled(Example) Then
+		Items.ResultLabel.BackColor = Items.GroupTesting.BackColor;
+	ElsIf IsBlankString(Items.ResultLabel.Title) Then
 		Items.ResultLabel.BackColor = WebColors.MistyRose;
 	Else
 		Items.ResultLabel.BackColor = WebColors.PaleGreen;
@@ -101,6 +108,12 @@ EndProcedure
 Procedure UseDocumentPrefixOnChange(Item)
 	SetItemsVisible(ThisObject);
 	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().DocumentPrefix);
+EndProcedure
+
+&AtClient
+Procedure UseCatalogPrefixOnChange(Item)
+	SetItemsVisible(ThisObject);
+	AddToPrefixTemplate(DocumentNumberingClientServer.GetNumberPrifixType().CatalogPrefix);
 EndProcedure
 
 &AtClient
@@ -162,6 +175,7 @@ Procedure SetItemsVisible(Form)
 	Form.Items.GroupCompanyPrefixes.Visible 	= Form.Object.UseCompanyPrefix; 
 	Form.Items.GroupBranchPrefixes.Visible 		= Form.Object.UseBranchPrefix; 
 	Form.Items.GroupDocumentPrefixes.Visible 	= Form.Object.UseDocumentPrefix;
+	Form.Items.GroupCatalogPrefixes.Visible 	= Form.Object.UseCatalogPrefix;
 	
 	Form.Items.DocumentPrefixesTransactionType.Visible 	= Form.Object.UseTransactionTypePrefix;
 	

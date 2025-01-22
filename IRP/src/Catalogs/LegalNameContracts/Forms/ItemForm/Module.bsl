@@ -65,3 +65,17 @@ Procedure InternalCommandActionWithServerContextAtServer(CommandName)
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure SetNewNumber(Command)
+	SetNewNumberAtServer();
+EndProcedure
+
+&AtServer
+Procedure SetNewNumberAtServer()
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
+			DocumentNumberingServer.GetNumeratorGroupForCatalog(Object.Ref.Metadata().FullName(), Object);
+	EndIf;
+	DocumentNumberingServer.SetSourceNewNumber(Object);
+EndProcedure

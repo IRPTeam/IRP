@@ -13,6 +13,7 @@ Function GetNumberPrifixType() Export
 	Result.Insert("CompanyPrefix", "[company]");
 	Result.Insert("BranchPrefix", "[branch]");
 	Result.Insert("DocumentPrefix", "[document]");
+	Result.Insert("CatalogPrefix", "[catalog]");
 	
 	Return Result;
 	
@@ -58,12 +59,14 @@ EndFunction
 // ** UseCompanyPrefix - Boolean - 
 // ** UseBranchPrefix - Boolean - 
 // ** UseDocumentPrefix - Boolean - 
+// ** UseCatalogPrefix - Boolean - 
 // ** UseTransactionTypePrefix - Boolean - 
 // ** PrefixTemplate - String - 
 // ** CompanyPrefixes - Map - 
 // ** BranchPrefixes - Map - 
 // ** DocumentPrefixes - Map - 
-// * NumeratorGroup - CatalogRef.NumeratorGroups - 
+// ** CatalogPrefixes - Map - 
+// * NumeratorRules - CatalogRef.NumeratorGroups - 
 // * NumberTemplate - String - 
 // * BeginDate - Date - 
 // * EndDate - Date - 
@@ -72,6 +75,7 @@ EndFunction
 // * StartNumber - Number - 
 // * TotalLength - Number - 
 // * WithoutLeadingZeros - Boolean - 
+// * CatalogDates - Map - 
 Function GetNumeratorDescription() Export
 	
 	Description = New Structure;
@@ -81,14 +85,16 @@ Function GetNumeratorDescription() Export
 	BasicRule.Insert("UseCompanyPrefix", False);
 	BasicRule.Insert("UseBranchPrefix", False);
 	BasicRule.Insert("UseDocumentPrefix", False);
+	BasicRule.Insert("UseCatalogPrefix", False);
 	BasicRule.Insert("UseTransactionTypePrefix", False);
 	BasicRule.Insert("PrefixTemplate", "");
 	BasicRule.Insert("CompanyPrefixes", New Map);
 	BasicRule.Insert("BranchPrefixes", New Map);
 	BasicRule.Insert("DocumentPrefixes", New Map);
+	BasicRule.Insert("CatalogPrefixes", New Map);
 	Description.Insert("BasicRule", BasicRule);
 	
-	Description.Insert("NumeratorGroup", PredefinedValue("Catalog.NumeratorGroups.EmptyRef"));
+	Description.Insert("NumeratorRules", PredefinedValue("Catalog.NumeratorGroups.EmptyRef"));
 	Description.Insert("NumberTemplate", "");
 	
 	Description.Insert("BeginDate", Date(1,1,1));
@@ -99,6 +105,8 @@ Function GetNumeratorDescription() Export
 	Description.Insert("StartNumber", 0);
 	Description.Insert("TotalLength", 0);
 	Description.Insert("WithoutLeadingZeros", False);
+
+	Description.Insert("CatalogDates", New Map);
 	
 	Return Description;
 	

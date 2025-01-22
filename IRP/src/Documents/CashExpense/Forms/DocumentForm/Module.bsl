@@ -397,7 +397,7 @@ Procedure SetNewNumberAtServer()
 		Object.NumeratorGroup = 
 			DocumentNumberingServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
 	EndIf;
-	Object.DocumentNumber = DocumentNumberingServer.GetNewNumber(Object);
+	DocumentNumberingServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #EndRegion

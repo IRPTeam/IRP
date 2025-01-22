@@ -21,6 +21,6 @@
   <content>Catalog.NumeratorGroups</content>
   <content>Catalog.NumeratorBasicRules</content>
   <content>FunctionalOption.UseNumberingRules</content>
-  <content>CommonAttribute.NumeratorGroup</content>
+  <content>CommonAttribute.NumeratorRules</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

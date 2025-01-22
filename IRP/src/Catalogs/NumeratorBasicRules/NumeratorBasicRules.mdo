@@ -74,6 +74,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="e7088b1e-c415-4b13-b797-33554d8eecc6">
+    <name>UseCatalogPrefix</name>
+    <synonym>
+      <key>en</key>
+      <value>Use catalog prefix</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="632e8b5c-008f-47b3-bf73-cccdd1590cad">
     <name>UseTransactionTypePrefix</name>
     <synonym>
@@ -236,6 +251,54 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="74ef9336-49e2-42a2-b5bd-d19a1db54773">
+      <name>Prefix</name>
+      <synonym>
+        <key>en</key>
+        <value>Prefix</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>10</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="bf678294-df34-4d2b-a217-28ff200cdec5">
+    <producedTypes>
+      <objectType typeId="28e0e365-68fd-4d41-b990-ee59a6f9324d" valueTypeId="a2da4704-fce6-4b93-bc93-d792edda38bb"/>
+      <rowType typeId="311c5068-229d-4940-9699-668d7e7cc13a" valueTypeId="be2aa8d5-f353-4a69-a536-413e709662a0"/>
+    </producedTypes>
+    <name>CatalogPrefixes</name>
+    <synonym>
+      <key>en</key>
+      <value>Catalog prefixes</value>
+    </synonym>
+    <attributes uuid="b342d6f7-ec98-45a6-80cd-6e5775ce16d9">
+      <name>Catalog</name>
+      <synonym>
+        <key>en</key>
+        <value>Catalog</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ConfigurationMetadata</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>TypeFilter</name>
+        <value xsi:type="core:ReferenceValue">
+          <value>Catalog.ConfigurationMetadata.Catalogs</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="af3d301a-6244-4eab-95c6-68cd18116bd4">
       <name>Prefix</name>
       <synonym>
         <key>en</key>

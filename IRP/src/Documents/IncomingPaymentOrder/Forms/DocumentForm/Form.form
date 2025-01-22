@@ -1568,7 +1568,7 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>Object.NumeratorGroup</segments>
+          <segments>Object.NumeratorRules</segments>
         </dataPath>
         <extendedTooltip>
           <name>NumeratorGroupExtendedTooltip</name>

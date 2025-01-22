@@ -860,11 +860,11 @@ EndProcedure
 
 &AtServer
 Procedure SetNewNumberAtServer()
-	If Object.NumeratorGroup.IsEmpty() Then
-		Object.NumeratorGroup = 
+	If Object.NumeratorRules.IsEmpty() Then
+		Object.NumeratorRules = 
 			DocumentNumberingServer.GetNumeratorGroupForDocument(Object.Ref.Metadata().FullName(), Object.Date);
 	EndIf;
-	Object.DocumentNumber = DocumentNumberingServer.GetNewNumber(Object);
+	DocumentNumberingServer.SetSourceNewNumber(Object);
 EndProcedure
 
 #Region ItemCompany

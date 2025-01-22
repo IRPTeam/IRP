@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f0ef77e7-e621-4ecc-b3ed-581ab2615f05">
-  <name>NumeratorGroup</name>
+  <name>NumeratorRules</name>
   <synonym>
     <key>en</key>
     <value>Numerator</value>
@@ -21,6 +21,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.Agreements</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.VendorsAdvancesClosing</metadata>
     <use>Use</use>
   </content>
@@ -38,6 +42,10 @@
   </content>
   <content>
     <metadata>Document.SalesOrder</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.LegalNameContracts</metadata>
     <use>Use</use>
   </content>
   <content>

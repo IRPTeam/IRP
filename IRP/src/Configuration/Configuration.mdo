@@ -860,7 +860,7 @@
   <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
   <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
   <commonAttributes>CommonAttribute.DocumentNumber</commonAttributes>
-  <commonAttributes>CommonAttribute.NumeratorGroup</commonAttributes>
+  <commonAttributes>CommonAttribute.NumeratorRules</commonAttributes>
   <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
   <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
   <httpServices>HTTPService.TestConnection</httpServices>
@@ -894,6 +894,7 @@
   <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetDocumentPresentationFields</eventSubscriptions>
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

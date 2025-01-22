@@ -3423,7 +3423,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>NumeratorGroup</name>
+        <name>NumeratorRules</name>
         <id>581</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3434,7 +3434,7 @@
           <segments>Object.NumeratorRules</segments>
         </dataPath>
         <extendedTooltip>
-          <name>NumeratorGroupExtendedTooltip</name>
+          <name>NumeratorRulesExtendedTooltip</name>
           <id>583</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3449,7 +3449,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>NumeratorGroupContextMenu</name>
+          <name>NumeratorRulesContextMenu</name>
           <id>582</id>
           <visible>true</visible>
           <enabled>true</enabled>

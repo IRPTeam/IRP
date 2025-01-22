@@ -2140,7 +2140,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>NumeratorGroup</name>
+        <name>NumeratorRules</name>
         <id>465</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -2151,7 +2151,7 @@
           <segments>Object.NumeratorRules</segments>
         </dataPath>
         <extendedTooltip>
-          <name>NumeratorGroupExtendedTooltip</name>
+          <name>NumeratorRulesExtendedTooltip</name>
           <id>467</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2166,7 +2166,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>NumeratorGroupContextMenu</name>
+          <name>NumeratorRulesContextMenu</name>
           <id>466</id>
           <visible>true</visible>
           <enabled>true</enabled>

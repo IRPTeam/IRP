@@ -245,6 +245,42 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="becf012c-3698-4ca1-9ef7-503faf0c8828">
+    <name>ELedgerShortDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>eLedger short description</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="290afce7-5a11-4082-b9e2-388abd787855">
+    <name>ELedgerLongDescription</name>
+    <synonym>
+      <key>en</key>
+      <value>eLedger long description</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
     <name>ItemForm</name>
     <synonym>

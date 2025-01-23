@@ -233,17 +233,21 @@ Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
 	EndDo;
 	
 	DescriptionTemplate = ItemKeyObject.Item.ItemType.ItemKeyLocalFullDescriptionTemplate;
-	NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
-	If Not IsBlankString(NewName) And ItemKeyObject.LocalFullDescription <> NewName Then
-		ItemKeyObject.LocalFullDescription = NewName;
-		DescriptionsUpdated = True;
+	If DescriptionTemplate <> "" Then
+		NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
+		If Not IsBlankString(NewName) And ItemKeyObject.LocalFullDescription <> NewName Then
+			ItemKeyObject.LocalFullDescription = NewName;
+			DescriptionsUpdated = True;
+		EndIf;
 	EndIf;
 	
 	DescriptionTemplate = ItemKeyObject.Item.ItemType.ItemKeyForeignFullDescriptionTemplate;
-	NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
-	If Not IsBlankString(NewName) And ItemKeyObject.ForeignFullDescription <> NewName Then
-		ItemKeyObject.ForeignFullDescription = NewName;
-		DescriptionsUpdated = True;
+	If DescriptionTemplate <> "" Then
+		NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
+		If Not IsBlankString(NewName) And ItemKeyObject.ForeignFullDescription <> NewName Then
+			ItemKeyObject.ForeignFullDescription = NewName;
+			DescriptionsUpdated = True;
+		EndIf;
 	EndIf;
 	
 EndProcedure

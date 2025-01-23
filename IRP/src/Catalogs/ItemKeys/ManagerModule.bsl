@@ -208,19 +208,44 @@ Function GetUniqueItemKeyByItem(Item) Export
 	Return EmptyRef();
 EndFunction
 
+// Update descriptions.
+// 
+// Parameters:
+//  ItemKeyObject - CatalogObject.ItemKeys - Item key object
+//  DescriptionsUpdated - Boolean - Descriptions updated
 Procedure UpdateDescriptions(ItemKeyObject, DescriptionsUpdated = False) Export
+	
 	For Each Lang In LocalizationReuse.AllDescription() Do
-		If ValueIsFilled(ItemKeyObject.Specification) Then
-			NewName = ItemKeyObject.Item[Lang] + "/" + ItemKeyObject.Specification[Lang];
+		DescriptionTemplate = ItemKeyObject.Item.ItemType.ItemKeyDescriptionTemplate;
+		If DescriptionTemplate = "" Then
+			If ValueIsFilled(ItemKeyObject.Specification) Then
+				NewName = ItemKeyObject.Item[Lang] + "/" + ItemKeyObject.Specification[Lang];
+			Else
+				NewName = LocalizationServer.CatalogDescriptionWithAddAttributes(ItemKeyObject, StrSplit(Lang, "_")[1]);
+			EndIf;
 		Else
-			NewName = LocalizationServer.CatalogDescriptionWithAddAttributes(ItemKeyObject, StrSplit(Lang, "_")[1]);
+			NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate, StrSplit(Lang, "_")[1]);
 		EndIf;
-
-		If Not ItemKeyObject[Lang] = NewName Then
-			DescriptionsUpdated = True;
+		If Not IsBlankString(NewName) And ItemKeyObject[Lang] <> NewName Then
 			ItemKeyObject[Lang] = NewName;
+			DescriptionsUpdated = True;
 		EndIf;
 	EndDo;
+	
+	DescriptionTemplate = ItemKeyObject.Item.ItemType.ItemKeyLocalFullDescriptionTemplate;
+	NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
+	If Not IsBlankString(NewName) And ItemKeyObject.LocalFullDescription <> NewName Then
+		ItemKeyObject.LocalFullDescription = NewName;
+		DescriptionsUpdated = True;
+	EndIf;
+	
+	DescriptionTemplate = ItemKeyObject.Item.ItemType.ItemKeyForeignFullDescriptionTemplate;
+	NewName = GetItemInfo.GetDescriptionByTemplate(ItemKeyObject, DescriptionTemplate);
+	If Not IsBlankString(NewName) And ItemKeyObject.ForeignFullDescription <> NewName Then
+		ItemKeyObject.ForeignFullDescription = NewName;
+		DescriptionsUpdated = True;
+	EndIf;
+	
 EndProcedure
 
 Function FindRefByUniqueMD5(Object, UniqueMD5) Export

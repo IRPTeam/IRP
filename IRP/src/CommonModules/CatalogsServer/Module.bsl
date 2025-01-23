@@ -1,5 +1,24 @@
 // @strict-types
 
+#Region Subscriptions
+
+Procedure OnCopy_CatalogProcessingOnCopy(Source, CopiedObject) Export
+	SourceMetadata = Source.Metadata();
+	
+	ContentItem = Metadata.CommonAttributes.DocumentNumber.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.DocumentNumber = "";
+	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.NumeratorRules = Catalogs.NumeratorGroups.EmptyRef();
+	EndIf;
+	
+EndProcedure
+
+#EndRegion
+
 #Region Public
 
 // Add not active filter for data choosing.

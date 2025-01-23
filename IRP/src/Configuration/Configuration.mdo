@@ -895,6 +895,7 @@
   <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
   <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
+  <eventSubscriptions>EventSubscription.OnCopy_CatalogProcessing</eventSubscriptions>
   <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
   <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
   <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>

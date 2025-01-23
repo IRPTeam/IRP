@@ -577,12 +577,25 @@ EndProcedure
 #Region Subscriptions
 
 Procedure OnCopyDocumentProcessingOnCopy(Source, CopiedObject, AddInfo = Undefined) Export
-	If Metadata.CommonAttributes.Author.Content.Contains(Source.Metadata()) Then
+	SourceMetadata = Source.Metadata();
+	
+	If Metadata.CommonAttributes.Author.Content.Contains(SourceMetadata) Then
 		FillingStructure = New Structure();
 		FillingStructure.Insert("Author", SessionParameters.CurrentUser);
 
 		FillPropertyValues(Source, FillingStructure);
 	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.DocumentNumber.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.DocumentNumber = "";
+	EndIf;
+	
+	ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(SourceMetadata);
+	If ContentItem <> Undefined And ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+		Source.NumeratorRules = Catalogs.NumeratorGroups.EmptyRef();
+	EndIf;
+	
 EndProcedure
 
 #EndRegion

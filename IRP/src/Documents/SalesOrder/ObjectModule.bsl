@@ -166,5 +166,4 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	ThisObject.DocumentNumber = "";
 EndProcedure

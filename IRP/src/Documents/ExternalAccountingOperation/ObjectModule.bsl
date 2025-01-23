@@ -11,7 +11,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;	
 	
-	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);		
+	ThisObject.AdditionalProperties.Insert("WriteMode", WriteMode);				
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -23,6 +23,7 @@ Procedure OnWrite(Cancel)
 	If FOServer.IsUseAccounting() And WriteMode = DocumentWriteMode.Posting Then
 		AccountingServer.OnWrite(ThisObject, Cancel, "Records");
 	EndIf;
+	
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

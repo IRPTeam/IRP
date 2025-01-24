@@ -86,7 +86,7 @@
     <name>Pages</name>
     <id>22</id>
     <items xsi:type="form:FormGroup">
-      <name>GroupTeplate</name>
+      <name>GroupMain</name>
       <id>99</id>
       <items xsi:type="form:FormGroup">
         <name>GroupOptions</name>
@@ -361,10 +361,10 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Teplate</value>
+        <value>Main</value>
       </title>
       <extendedTooltip>
-        <name>GroupTeplateExtendedTooltip</name>
+        <name>GroupMainExtendedTooltip</name>
         <id>100</id>
         <visible>true</visible>
         <enabled>true</enabled>

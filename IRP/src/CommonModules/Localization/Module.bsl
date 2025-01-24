@@ -660,6 +660,8 @@
 // * InternalCommands_SetNotActive_Check - String - 
 // * InternalCommands_ShowNotActive - String - 
 // * InternalCommands_ShowNotActive_Check - String - 
+// * InternalCommands_ShowNumerator - String - 
+// * InternalCommands_ShowNumerator_Check - String - 
 // * FormulaEditor_Delimiters - String - 
 // * FormulaEditor_Space - String - 
 // * FormulaEditor_Operators - String - 
@@ -2163,6 +2165,8 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en = 'External
 	Strings.Insert("InternalCommands_SetNotActive_Check", NStr("en = 'Set ""Active""'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive", NStr("en = 'Show all items'", Lang));
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en = 'Show only active items'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator", NStr("en = 'Show numerator'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en = 'Hide numerator'", Lang));
 #EndRegion
 	
 #Region FormulaEditor

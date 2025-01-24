@@ -628,6 +628,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseNumberingRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T9100A_ObjectAccessMap</name>
 		<right>
 			<name>Read</name>

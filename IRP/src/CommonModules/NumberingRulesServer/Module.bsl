@@ -483,9 +483,9 @@ Function GetNumeratorGroupForDocument(DocumentName, Date) Export
 	|WHERE
 	|	NumeratorGroupsDocuments.Document = &Document
 	|	AND NOT NumeratorGroupsDocuments.Ref.DeletionMark
-	|	AND (NumeratorGroupsDocuments.Ref.BeginDate >= &Date
+	|	AND (NumeratorGroupsDocuments.Ref.BeginDate <= &Date
 	|	OR NumeratorGroupsDocuments.Ref.BeginDate = DATETIME(1, 1, 1))
-	|	AND (NumeratorGroupsDocuments.Ref.EndDate <= &Date
+	|	AND (NumeratorGroupsDocuments.Ref.EndDate >= &Date
 	|	OR NumeratorGroupsDocuments.Ref.EndDate = DATETIME(1, 1, 1))
 	|
 	|ORDER BY

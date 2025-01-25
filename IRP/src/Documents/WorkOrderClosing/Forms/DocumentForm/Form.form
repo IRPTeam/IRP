@@ -764,6 +764,182 @@
     </extInfo>
    </items>
    <items xsi:type="form:FormField">
+    <name>NumeratorRules</name>
+    <id>67</id>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <dataPath xsi:type="form:DataPath">
+     <segments>Object.NumeratorRules</segments>
+    </dataPath>
+    <extendedTooltip>
+     <name>NumeratorRulesExtendedTooltip</name>
+     <id>69</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <contextMenu>
+     <name>NumeratorRulesContextMenu</name>
+     <id>68</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <autoFill>true</autoFill>
+    </contextMenu>
+    <type>InputField</type>
+    <editMode>Enter</editMode>
+    <showInHeader>true</showInHeader>
+    <headerHorizontalAlign>Left</headerHorizontalAlign>
+    <showInFooter>true</showInFooter>
+    <extInfo xsi:type="form:InputFieldExtInfo">
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <wrap>true</wrap>
+     <chooseType>true</chooseType>
+     <typeDomainEnabled>true</typeDomainEnabled>
+     <textEdit>true</textEdit>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormGroup">
+    <name>GroupNumerator</name>
+    <id>70</id>
+    <items xsi:type="form:FormField">
+     <name>DocumentNumber</name>
+     <id>72</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <dataPath xsi:type="form:DataPath">
+      <segments>Object.DocumentNumber</segments>
+     </dataPath>
+     <extendedTooltip>
+      <name>DocumentNumberExtendedTooltip</name>
+      <id>74</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <contextMenu>
+      <name>DocumentNumberContextMenu</name>
+      <id>73</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <autoFill>true</autoFill>
+     </contextMenu>
+     <type>InputField</type>
+     <editMode>Enter</editMode>
+     <showInHeader>true</showInHeader>
+     <headerHorizontalAlign>Left</headerHorizontalAlign>
+     <showInFooter>true</showInFooter>
+     <extInfo xsi:type="form:InputFieldExtInfo">
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <wrap>true</wrap>
+      <chooseType>true</chooseType>
+      <typeDomainEnabled>true</typeDomainEnabled>
+      <textEdit>true</textEdit>
+     </extInfo>
+    </items>
+    <items xsi:type="form:Button">
+     <name>SetNewNumber</name>
+     <id>75</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <extendedTooltip>
+      <name>SetNewNumberExtendedTooltip</name>
+      <id>76</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+       <common>true</common>
+      </userVisible>
+      <type>Label</type>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <extInfo xsi:type="form:LabelDecorationExtInfo">
+       <horizontalAlign>Left</horizontalAlign>
+      </extInfo>
+     </extendedTooltip>
+     <type>UsualButton</type>
+     <commandName>Form.Command.SetNewNumber</commandName>
+     <representation>Auto</representation>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <placementArea>UserCmds</placementArea>
+     <representationInContextMenu>Auto</representationInContextMenu>
+    </items>
+    <visible>true</visible>
+    <enabled>true</enabled>
+    <userVisible>
+     <common>true</common>
+    </userVisible>
+    <title>
+     <key>tr</key>
+     <value>Numaratör grubu</value>
+    </title>
+    <title>
+     <key>ru</key>
+     <value>Группа нумерации</value>
+    </title>
+    <title>
+     <key>en</key>
+     <value>Group of numerator</value>
+    </title>
+    <extendedTooltip>
+     <name>GroupNumeratorExtendedTooltip</name>
+     <id>71</id>
+     <visible>true</visible>
+     <enabled>true</enabled>
+     <userVisible>
+      <common>true</common>
+     </userVisible>
+     <type>Label</type>
+     <autoMaxWidth>true</autoMaxWidth>
+     <autoMaxHeight>true</autoMaxHeight>
+     <extInfo xsi:type="form:LabelDecorationExtInfo">
+      <horizontalAlign>Left</horizontalAlign>
+     </extInfo>
+    </extendedTooltip>
+    <type>UsualGroup</type>
+    <extInfo xsi:type="form:UsualGroupExtInfo">
+     <group>HorizontalIfPossible</group>
+     <behavior>Auto</behavior>
+     <showLeftMargin>true</showLeftMargin>
+     <united>true</united>
+     <throughAlign>Auto</throughAlign>
+     <currentRowUse>Auto</currentRowUse>
+    </extInfo>
+   </items>
+   <items xsi:type="form:FormField">
     <name>Branch</name>
     <id>54</id>
     <visible>true</visible>
@@ -1069,6 +1245,48 @@
    <common>true</common>
   </edit>
  </attributes>
+ <formCommands>
+  <name>SetNewNumber</name>
+  <title>
+   <key>tr</key>
+   <value>Yeni numara ata</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Установить новый номер</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Set new number</value>
+  </title>
+  <id>1</id>
+  <toolTip>
+   <key>tr</key>
+   <value>Yeni numara ata</value>
+  </toolTip>
+  <toolTip>
+   <key>ru</key>
+   <value>Установить новый номер</value>
+  </toolTip>
+  <toolTip>
+   <key>en</key>
+   <value>Set new number</value>
+  </toolTip>
+  <use>
+   <common>true</common>
+  </use>
+  <picture xsi:type="core:PictureRef">
+   <picture>StdPicture.DataCompositionSettingsWizard</picture>
+  </picture>
+  <action xsi:type="form:FormCommandHandlerContainer">
+   <handler>
+    <name>SetNewNumber</name>
+   </handler>
+  </action>
+  <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
+  <representation>Picture</representation>
+  <currentRowUse>Auto</currentRowUse>
+ </formCommands>
  <commandInterface>
   <navigationPanel/>
   <commandBar/>

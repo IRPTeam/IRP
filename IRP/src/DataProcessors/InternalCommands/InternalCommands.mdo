@@ -172,4 +172,21 @@
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>
  </forms>
+ <forms uuid="96ba903f-48e1-416e-b190-e10e2e09f416">
+  <name>ShowNumerator</name>
+  <synonym>
+   <key>tr</key>
+   <value>Numaratör göster</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Показать нумератор</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Show numerator</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

@@ -660,6 +660,8 @@
 // * InternalCommands_SetNotActive_Check - String - 
 // * InternalCommands_ShowNotActive - String - 
 // * InternalCommands_ShowNotActive_Check - String - 
+// * InternalCommands_ShowNumerator - String - 
+// * InternalCommands_ShowNumerator_Check - String - 
 // * FormulaEditor_Delimiters - String - 
 // * FormulaEditor_Space - String - 
 // * FormulaEditor_Operators - String - 
@@ -3594,6 +3596,12 @@ Strings.Insert("ExternalAccountingOperationExchangeReport", NStr("en='External a
 	Strings.Insert("InternalCommands_ShowNotActive_Check", NStr("en='Show only active items';
 		|ru='Показать только активные позиции';
 		|tr='Sadece Aktif Öğeleri Göster'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator", NStr("en='Show numerator';
+		|ru='Показать нумератор';
+		|tr='Numaratör göster'", Lang));
+	Strings.Insert("InternalCommands_ShowNumerator_Check", NStr("en='Hide numerator';
+		|ru='Скрыть нумератор';
+		|tr='Numaratör gizle'", Lang));
 #EndRegion
 	
 #Region FormulaEditor

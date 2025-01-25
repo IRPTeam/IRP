@@ -413,6 +413,84 @@
   <fullTextSearch>Use</fullTextSearch>
   <dataHistory>Use</dataHistory>
  </attributes>
+ <attributes uuid="c776b0cf-da9e-4edf-9e6f-a2fe5e9735b8">
+  <name>ItemKeyDescriptionTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant tanım şablonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон наименования характеристики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key description template</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="5bdde7cd-a895-46fe-920a-4df17b50dfab">
+  <name>ItemKeyLocalFullDescriptionTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant ful tanım şablonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон полного наименования характеристики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key local full description template</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="2dce2c51-9493-4df9-92c0-22615a58b9da">
+  <name>ItemKeyForeignFullDescriptionTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant yabancı tam tanım şablonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон полного иностранного наименования характеристики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key foreign full description template</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>1024</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
  <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
   <producedTypes>
    <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>
@@ -775,6 +853,22 @@
   <synonym>
    <key>en</key>
    <value>Item template</value>
+  </synonym>
+  <templateType>DataCompositionSchema</templateType>
+ </templates>
+ <templates uuid="a8a5ac3d-eb60-4f0e-946a-170827ea8f97">
+  <name>ItemKeyTemplate</name>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant şablonu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Шаблон характеристики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key template</value>
   </synonym>
   <templateType>DataCompositionSchema</templateType>
  </templates>

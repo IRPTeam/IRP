@@ -909,6 +909,8 @@
  <commonModules>CommonModule.DocELedgerRegistryServer</commonModules>
  <commonModules>CommonModule.DocStockCorrectionClient</commonModules>
  <commonModules>CommonModule.DocStockCorrectionServer</commonModules>
+ <commonModules>CommonModule.NumberingRulesServer</commonModules>
+ <commonModules>CommonModule.NumberingRulesClientServer</commonModules>
  <commonAttributes>CommonAttribute.Author</commonAttributes>
  <commonAttributes>CommonAttribute.Branch</commonAttributes>
  <commonAttributes>CommonAttribute.Comment</commonAttributes>
@@ -938,6 +940,7 @@
  <commonAttributes>CommonAttribute.LocalRate</commonAttributes>
  <commonAttributes>CommonAttribute.SourceNode</commonAttributes>
  <commonAttributes>CommonAttribute.DocumentNumber</commonAttributes>
+ <commonAttributes>CommonAttribute.NumeratorRules</commonAttributes>
  <exchangePlans>ExchangePlan.ED_ExchangePlan</exchangePlans>
  <exchangePlans>ExchangePlan.FullExchange</exchangePlans>
  <httpServices>HTTPService.TestConnection</httpServices>
@@ -970,6 +973,9 @@
  <eventSubscriptions>EventSubscription.Posting_DocumentsRegistry</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationFieldsGetProcessing_GetDocumentPresentationFields</eventSubscriptions>
  <eventSubscriptions>EventSubscription.PresentationGetProcessing_GetDocumentPresentation</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.BeforeWrite_SetNewDocumentNumber</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.BeforeWrite_SetNewCatalogNumber</eventSubscriptions>
+ <eventSubscriptions>EventSubscription.OnCopy_CatalogProcessing</eventSubscriptions>
  <scheduledJobs>ScheduledJob.AddExternalFunctionsToJobQueue</scheduledJobs>
  <scheduledJobs>ScheduledJob.AreaUpdate</scheduledJobs>
  <scheduledJobs>ScheduledJob.ExportData</scheduledJobs>
@@ -1028,6 +1034,7 @@
  <functionalOptions>FunctionalOption.UseUnitsAndDimensions</functionalOptions>
  <functionalOptions>FunctionalOption.UseWorkOrders</functionalOptions>
  <functionalOptions>FunctionalOption.UseELedger</functionalOptions>
+ <functionalOptions>FunctionalOption.UseNumberingRules</functionalOptions>
  <definedTypes>DefinedType.typeAccessDocument</definedTypes>
  <definedTypes>DefinedType.typeAccountingDocuments</definedTypes>
  <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
@@ -1144,6 +1151,7 @@
  <constants>Constant.UseUnitsAndDimensions</constants>
  <constants>Constant.UseWorkOrders</constants>
  <constants>Constant.UseELedger</constants>
+ <constants>Constant.UseNumberingRules</constants>
  <commonForms>CommonForm.AdditionalTableControlSettings</commonForms>
  <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
  <commonForms>CommonForm.AttachFile</commonForms>
@@ -1287,9 +1295,11 @@
  <catalogs>Catalog.Vehicles</catalogs>
  <catalogs>Catalog.VehicleTypes</catalogs>
  <catalogs>Catalog.Workstations</catalogs>
+ <catalogs>Catalog.NumeratorBasicRules</catalogs>
+ <catalogs>Catalog.NumeratorGroups</catalogs>
  <documents>Document.AdditionalAccrual</documents>
- <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalDeduction</documents>
+ <documents>Document.AdditionalCostAllocation</documents>
  <documents>Document.AdditionalRevenueAllocation</documents>
  <documents>Document.BankPayment</documents>
  <documents>Document.BankReceipt</documents>
@@ -1484,6 +1494,7 @@
  <enums>Enum.MessagesImportance</enums>
  <enums>Enum.MessageTypes</enums>
  <enums>Enum.IssueLevel</enums>
+ <enums>Enum.NumberingPeriods</enums>
  <reports>Report.A0010_TrialBalance</reports>
  <reports>Report.A0011_TrialBalanceByAccount</reports>
  <reports>Report.A0012_AccountCard</reports>
@@ -1640,6 +1651,7 @@
  <informationRegisters>InformationRegister.PostedDocumentsRegistry</informationRegisters>
  <informationRegisters>InformationRegister.T9052S_AccountingRelevance</informationRegisters>
  <informationRegisters>InformationRegister.T9070S_ELedgerDetailComments</informationRegisters>
+ <informationRegisters>InformationRegister.NumeratorCounters</informationRegisters>
  <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
  <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

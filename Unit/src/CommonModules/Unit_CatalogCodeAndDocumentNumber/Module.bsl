@@ -5,6 +5,7 @@ Function Tests() Export
 	TestList = New Array;
 	TestList.Add("CatalogCodeIsNumber12");	
 	TestList.Add("DocumentCodeIsNumber12");	
+	TestList.Add("DocumentNumeratorUsing");	
 	Return TestList;
 EndFunction
 
@@ -15,7 +16,7 @@ EndFunction
 Function DocumentCodeIsNumber12() Export
 	ArrayOfErrors = New Array();
 	
-	ArrayOfExclude = GetExclude_Documents();
+	ArrayOfExclude = GetExclude_Documents_IsNumber12();
 	
 	For Each Doc In Metadata.Documents Do
 		If ArrayOfExclude.Find(Doc.FullName()) <> Undefined Then
@@ -38,8 +39,54 @@ Function DocumentCodeIsNumber12() Export
 	Return "";
 EndFunction
 
-Function GetExclude_Documents()
+Function GetExclude_Documents_IsNumber12()
 	ArrayOfExcluded = New Array();
+	Return ArrayOfExcluded;
+EndFunction
+
+Function DocumentNumeratorUsing() Export
+	ArrayOfErrors = New Array();
+	
+	ArrayOfExclude = GetExclude_Documents_Numerator();
+	
+	For Each Doc In Metadata.Documents Do
+		If ArrayOfExclude.Find(Doc.FullName()) <> Undefined Then
+			Continue;
+		EndIf;
+
+		ContentItem = Metadata.CommonAttributes.NumeratorRules.Content.Find(Doc);
+		If ContentItem = Undefined Or ContentItem.Use <> Metadata.ObjectProperties.CommonAttributeUse.Use Then
+			ArrayOfErrors.Add(Chars.Tab + Doc.FullName());
+			Continue;
+		EndIf;
+	EndDo;		
+		
+	If ArrayOfErrors.Count() Then
+		Unit_Service.assertFalse("Documents without numberator: " + Chars.LF +
+			StrConcat(ArrayOfErrors, Chars.LF));
+	EndIf;
+	Return "";
+EndFunction
+
+Function GetExclude_Documents_Numerator()
+	ArrayOfExcluded = New Array();
+	ArrayOfExcluded.Add("Document.BatchReallocateIncoming");
+	ArrayOfExcluded.Add("Document.BatchReallocateOutgoing");
+	ArrayOfExcluded.Add("Document.CalculationDeservedVacations");
+	ArrayOfExcluded.Add("Document.CalculationMovementCosts");
+	ArrayOfExcluded.Add("Document.ChequeBondTransaction");
+	ArrayOfExcluded.Add("Document.ChequeBondTransactionItem");
+	ArrayOfExcluded.Add("Document.CustomersAdvancesClosing");
+	ArrayOfExcluded.Add("Document.EmployeeFiring");
+	ArrayOfExcluded.Add("Document.EmployeeHiring");
+	ArrayOfExcluded.Add("Document.EmployeeSickLeave");
+	ArrayOfExcluded.Add("Document.EmployeeTransfer");
+	ArrayOfExcluded.Add("Document.EmployeeVacation");
+	ArrayOfExcluded.Add("Document.ForeignCurrencyRevaluation");
+	ArrayOfExcluded.Add("Document.InternalSupplyRequest");
+	ArrayOfExcluded.Add("Document.Labeling");
+	ArrayOfExcluded.Add("Document.ManualRegisterEntry");
+	ArrayOfExcluded.Add("Document.VisitorCounter");
 	Return ArrayOfExcluded;
 EndFunction
 

@@ -12,6 +12,7 @@ Function GetAllCommandDescriptions() Export
 	
 	Result.Add(GetCommandDescription("SetNotActive"));
 	Result.Add(GetCommandDescription("ShowNotActive"));
+	Result.Add(GetCommandDescription("ShowNumerator"));
 	Result.Add(GetCommandDescription("GroupEditingProperties"));
 	Result.Add(GetCommandDescription("CloneValueFromFirstRow"));
 	Result.Add(GetCommandDescription("LoadDataFromTable"));
@@ -36,6 +37,9 @@ Function GetCommandDescription(CommandName) Export
 		
 	ElsIf CommandName = "ShowNotActive" Then
 		Return ShowNotActive_GetCommandDescription();
+
+	ElsIf CommandName = "ShowNumerator" Then
+		Return ShowNumerator_GetCommandDescription();
 
 	ElsIf CommandName = "GroupEditingProperties" Then
 		Return GroupEditingProperties_GetCommandDescription();
@@ -86,7 +90,10 @@ Procedure OnInitialization(CommandName, CommandParameters, Cancel, AddInfo = Und
 	
 	If CommandName = "AuditLock" Then
 		AuditLock_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo);
-		
+	
+	ElsIf CommandName = "ShowNumerator" Then
+		ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo);
+	 	
 	EndIf;
 	
 EndProcedure
@@ -286,6 +293,60 @@ Procedure ShowNotActive_OnCommandCreate(CommandName, CommandParameters, AddInfo)
 	CommandParameters.MainAttribute.Parameters.SetParameterValue("ShowNotActive", NotActiveShowing); 
 	
 	DynamicListAPI.AddAppearance(QuerySchemaAPI, "NotActive", DataCompositionComparisonType.Equal, True, "Font", New Font( , , , , , True));
+EndProcedure
+
+#EndRegion
+
+#Region ShowNumerator
+
+// Show not active get command description.
+// 
+// Returns:
+//  See InternalCommandsServer.GetCommandDescription
+Function ShowNumerator_GetCommandDescription()
+	
+	CommandDescription = InternalCommandsServer.GetCommandDescription();
+	
+	CommandDescription.Name = "ShowNumerator";
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.Title = R().InternalCommands_ShowNumerator;
+	//@skip-check statement-type-change, property-return-type
+	CommandDescription.TitleCheck = R().InternalCommands_ShowNumerator_Check;
+	CommandDescription.ToolTip = CommandDescription.Title;
+	CommandDescription.Picture = "ShowPassword";
+	CommandDescription.PictureCheck = "HidePassword";
+	CommandDescription.EnableChecking = True;
+	
+	CommandDescription.LocationGroup = "CommandBar.Tools";
+	CommandDescription.LocationInCommandBar = "InAdditionalSubmenu"; //ButtonLocationInCommandBar.InAdditionalSubmenu
+	CommandDescription.ModifiesStoredData = False;
+	
+	CommandDescription.HasActionInitialization = True;
+	
+	CommandDescription.UsingObjectForm = True;
+	
+	Targets = CommandDescription.Targets;
+	For Each ContentItem In Metadata.CommonAttributes.NumeratorRules.Content Do
+		If ContentItem.Use = Metadata.ObjectProperties.CommonAttributeUse.Use  Then
+			Targets.Add(ContentItem.Metadata.FullName());
+		EndIf;
+	EndDo;
+	CommandDescription.Targets = New FixedArray(Targets);
+	
+	Return CommandDescription;
+	
+EndFunction
+
+// See InternalCommandsServer.OnInitialization
+Procedure ShowNumerator_OnInitialization(CommandName, CommandParameters, Cancel, AddInfo)
+
+	NumeratorItem = CommandParameters.Form.Items.Find("NumeratorRules");
+	If NumeratorItem = Undefined Then
+		Cancel = True;
+	Else
+		NumeratorItem.Visible = False;
+	EndIf;
+		 
 EndProcedure
 
 #EndRegion

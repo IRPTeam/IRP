@@ -94,7 +94,6 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-	ThisObject.DocumentNumber = "";
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

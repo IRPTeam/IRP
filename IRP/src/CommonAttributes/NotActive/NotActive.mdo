@@ -297,6 +297,10 @@
   <use>Use</use>
  </content>
  <content>
+  <metadata>Catalog.NumeratorBasicRules</metadata>
+  <use>Use</use>
+ </content>
+ <content>
   <metadata>Catalog.BusinessUnits</metadata>
   <use>Use</use>
  </content>
@@ -390,6 +394,10 @@
  </content>
  <content>
   <metadata>Catalog.UserGroups</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.NumeratorGroups</metadata>
   <use>Use</use>
  </content>
  <content>

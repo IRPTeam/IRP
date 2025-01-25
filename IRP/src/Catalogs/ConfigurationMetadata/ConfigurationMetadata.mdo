@@ -170,6 +170,7 @@
  <choiceMode>BothWays</choiceMode>
  <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
  <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ConfigurationMetadata.Form.ChoiceForm</defaultChoiceForm>
  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
   <name>Extension</name>
   <synonym>
@@ -398,6 +399,23 @@
   <synonym>
    <key>en</key>
    <value>List form</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="ad08c952-4184-444e-9914-1b358edb882e">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
   </synonym>
   <usePurposes>PersonalComputer</usePurposes>
   <usePurposes>MobileDevice</usePurposes>

@@ -4263,6 +4263,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.UseNumberingRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ReadDataHistory</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.T7010S_BillOfMaterials.Dimension.Company</name>
 		<right>
 			<name>Edit</name>

@@ -896,6 +896,32 @@
    </edit>
   </columns>
  </attributes>
+ <attributes>
+  <name>SourceName</name>
+  <title>
+   <key>tr</key>
+   <value>Kaynak ismi</value>
+  </title>
+  <title>
+   <key>ru</key>
+   <value>Наименование источника</value>
+  </title>
+  <title>
+   <key>en</key>
+   <value>Source name</value>
+  </title>
+  <id>9</id>
+  <valueType>
+   <types>String</types>
+   <stringQualifiers/>
+  </valueType>
+  <view>
+   <common>true</common>
+  </view>
+  <edit>
+   <common>true</common>
+  </edit>
+ </attributes>
  <formCommands>
   <name>Ok</name>
   <title>

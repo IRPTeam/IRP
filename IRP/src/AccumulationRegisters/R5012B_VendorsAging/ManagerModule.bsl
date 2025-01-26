@@ -124,36 +124,6 @@ EndFunction
 Function R5012B_VendorsAging_CreditNote() Export
 	Return 
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	Transactions.Period AS PaymentDate,
-		|	Transactions.Period AS Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.Partner,
-		|	Transactions.Agreement,
-		|	Transactions.BasisDocument AS Invoice,
-		|	SUM(Transactions.Amount) AS Amount,
-		|	UNDEFINED AS AgingClosing
-		|INTO R5012B_VendorsAging
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsVendor
-		|	AND Transactions.IsPostingDetail_ByDocuments
-		|GROUP BY
-		|	Transactions.Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.Partner,
-		|	Transactions.Agreement,
-		|	Transactions.BasisDocument,
-		|	VALUE(AccumulationRecordType.Receipt)
-		|
-		|UNION ALL
-		|
-		|SELECT
 		|	CASE
 		|		WHEN OffsetOfAging.RecordType = VALUE(Enum.RecordType.Receipt)
 		|			THEN VALUE(AccumulationRecordType.Receipt)
